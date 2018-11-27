@@ -3,7 +3,7 @@
 
 namespace JamTemplate {
 
-	GameObject::GameObject()
+	GameObject::GameObject() : m_age {0.0f}
 	{
 		std::cout << "I am alive!\n";
 	}

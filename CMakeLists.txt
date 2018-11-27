@@ -5,8 +5,15 @@ set (PROJECTNAME "MyAwesomeGame")
 set (JAMTEMPLATEFILES 
 	src/JamTemplate/GameObject.hpp
 	src/JamTemplate/GameObject.cpp
+	src/JamTemplate/GameState.hpp
+	src/JamTemplate/Game.hpp
 	)
 
+set (GAMEFILES 
+	src/main.cpp
+	src/StateMenu.hpp
+	src/StateGame.hpp
+	)	
 
 set (CMAKE_CXX_STANDARD 14)
 project (${PROJECTNAME})
@@ -14,7 +21,7 @@ project (${PROJECTNAME})
 link_directories(${CMAKE_SOURCE_DIR}/ext/SFML-2.5.1_win/lib)
 
 add_library(JamTemplate ${JAMTEMPLATEFILES})
-add_executable(${PROJECTNAME} src/main.cpp)
+add_executable(${PROJECTNAME}  ${GAMEFILES})
 
 target_include_directories(JamTemplate PRIVATE ext/SFML-2.5.1_win/include)
 target_link_libraries(JamTemplate sfml-system-d)
