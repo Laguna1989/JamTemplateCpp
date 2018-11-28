@@ -12,6 +12,8 @@ public:
 	Player()
 	{
 		std::cout << "Player ctor" << std::endl;
+		rect = sf::RectangleShape(sf::Vector2f(24, 24));
+		rect.setFillColor(sf::Color::Yellow);
 	}
 
 	~Player()
@@ -27,11 +29,10 @@ private:
 
 	void doDraw(sf::RenderTarget& rt) const override
 	{
-
+		rt.draw(rect);
 	}
 
-	sf::Texture m_texture;
-	sf::Sprite m_sprite;
+	sf::RectangleShape rect;
 };
 
 #endif
