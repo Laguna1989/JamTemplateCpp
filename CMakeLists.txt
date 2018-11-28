@@ -6,6 +6,7 @@ set (JAMTEMPLATEFILES
 	src/JamTemplate/GameObject.hpp
 	src/JamTemplate/GameObject.cpp
 	src/JamTemplate/GameState.hpp
+	src/JamTemplate/Timer.hpp
 	src/JamTemplate/Game.hpp
 	)
 
@@ -14,6 +15,7 @@ set (GAMEFILES
 	src/StateMenu.hpp
 	src/StateGame.hpp
 	src/Player.hpp
+	src/Balloon.hpp
 	)	
 
 set (CMAKE_CXX_STANDARD 14)

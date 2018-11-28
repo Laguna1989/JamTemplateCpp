@@ -7,6 +7,8 @@
 
 namespace JamTemplate {
 
+	class Game;
+
 	class GameObject
 	{
 	public:
@@ -19,13 +21,37 @@ namespace JamTemplate {
 			m_age += elapsed; 
 			doUpdate(elapsed);
 		};
-		void draw(sf::RenderTarget & rt) const { doDraw(rt); };
+		void draw() const { doDraw(); };
 		float getAge() const { return m_age; }
+		void setAge(float t) {m_age = t; }
+
+		void setGameInstance(std::weak_ptr<Game> g)
+		{
+			m_game = g;
+		}
+		std::shared_ptr<Game> getGame()
+		{
+			if (m_game.expired()) throw std::exception(/*"ERROR: Cannot GameObject::getGame():  m_game expired!"*/);
+			return m_game.lock();
+		}
+
+		std::shared_ptr<Game> getGame() const
+		{
+			if (m_game.expired()) throw std::exception(/*"ERROR: Cannot GameObject::getGame():  m_game expired!"*/);
+			return m_game.lock();
+		}
+
+		void kill() { m_alive = false; }
+		bool isAlive() const { return m_alive; }
 
 	private:
 		float m_age;
-		virtual void doUpdate(float const elapesed) = 0;
-		virtual void doDraw(sf::RenderTarget& rt) const {};
+		bool m_alive{ true };	// is used to sort out "dead" game objects;
+		std::weak_ptr<Game> m_game;
+
+		virtual void doUpdate(float const elapesed) {};
+		virtual void doDraw() const {};
+
 	};
 
 	using GameObjectPtr = std::shared_ptr<GameObject>;

@@ -5,6 +5,7 @@
 
 #include <SFML/Graphics.hpp>
 
+#include "JamTemplate/Game.hpp"
 #include "JamTemplate/GameState.hpp"
 
 class Player : public JamTemplate::GameObject {
@@ -27,9 +28,9 @@ private:
 		std::cout << "player update\n";
 	}
 
-	void doDraw(sf::RenderTarget& rt) const override
+	void doDraw() const override
 	{
-		rt.draw(rect);
+		getGame()->getRenderTarget()->draw(rect);
 	}
 
 	sf::RectangleShape rect;

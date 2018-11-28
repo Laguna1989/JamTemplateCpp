@@ -4,6 +4,8 @@
 #include <SFML/Graphics.hpp>
 #include <memory>
 #include <vector>
+#include <algorithm>
+#include <numeric>
 #include "GameObject.hpp"
 
 namespace JamTemplate {
@@ -19,41 +21,59 @@ namespace JamTemplate {
 		virtual  ~GameState() = default;
 	
 		void create() { doCreate(); initialize(); };
-		
-		
 
 		void add(GameObjectPtr go)
 		{
-			m_objects.push_back(go);
+			go->setGameInstance(getGame());
+			m_objectsToAdd.push_back(go);
 		}
 		
-		void setGameInstance(std::weak_ptr<Game> gm)
-		{
-			m_Game = gm;
-		}
-
 		bool hasBeenInitialized() const { return m_hasBeenInitialized; }
-		
-
 	protected:
-		std::weak_ptr<Game> m_Game;
-	private:
-		std::vector<GameObjectPtr> m_objects;
-		bool m_hasBeenInitialized{ false };
-		void initialize() { m_hasBeenInitialized = true; }
-		virtual void doUpdate(float const elapsed) override
+		void updateObjects(float elapsed)
 		{
+			cleanUpObjects();
+			addNewObjects();
+
 			for (auto& go : m_objects)
 			{
 				go->update(elapsed);
 			}
-		};
+		}
+		
 
-		virtual void doDraw(sf::RenderTarget& rt) const override
+
+	private:
+		std::vector<GameObjectPtr> m_objects;
+
+		// this is used as a level of indirection, because objects might add or remove m_objects while iterating over the m_objects vector, which invalidates pointers, which leads to crashes
+		std::vector<GameObjectPtr> m_objectsToAdd;	
+		bool m_hasBeenInitialized{ false };
+		void initialize() { m_hasBeenInitialized = true; }
+		virtual void doUpdate(float const elapsed) override
+		{
+			updateObjects(elapsed);
+		}
+
+		void addNewObjects()
+		{
+			while (!m_objectsToAdd.empty())
+			{
+				m_objects.push_back(std::move(m_objectsToAdd.back()));
+				m_objectsToAdd.pop_back();
+			}
+		}
+		void cleanUpObjects()
+		{
+			m_objects.erase(std::remove_if(m_objects.begin(), m_objects.end(), [](GameObjectPtr go) {return !(go->isAlive()); }), m_objects.end());
+		}
+		
+
+		virtual void doDraw() const override
 		{
 			for (auto& go : m_objects)
 			{
-				go->draw(rt);
+				go->draw();
 			}
 		};
 

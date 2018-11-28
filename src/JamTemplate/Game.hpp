@@ -14,19 +14,31 @@ public:
 	{
 	}
 	
-	
-
 	void switchState(GameStatePtr newState)
 	{
 		if (newState == nullptr)
+		{
 			std::cerr << "cannot switch to nullptr state!" << std::endl;
+			return;
+		}
 		m_state = newState;
 		m_state->setGameInstance(getptr());
 		m_state->create();
 	}
 
+	void setRenderTarget(std::shared_ptr<sf::RenderTarget> rt)
+	{
+		m_renderTarget = rt;
+	}
+	std::shared_ptr<sf::RenderTarget> getRenderTarget()
+	{
+		return m_renderTarget;
+	}
+
 private:
 	GameStatePtr m_state;
+	std::shared_ptr<sf::RenderTarget> m_renderTarget{nullptr};
+
 	std::weak_ptr<Game> getptr() {
 		return shared_from_this();
 	}
@@ -37,11 +49,11 @@ private:
 		m_state->update(elapsed);
 	};
 
-	virtual void doDraw(sf::RenderTarget& rt) const override
+	virtual void doDraw() const override
 	{
 		if (m_state == nullptr)
 			return;
-		m_state->draw(rt);
+		m_state->draw();
 	};
 
 };

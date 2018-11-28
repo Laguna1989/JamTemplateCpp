@@ -18,7 +18,7 @@ private:
 
 		if (getAge() >= 1.5)
 		{
-			m_Game.lock()->switchState(std::make_shared<StateGame>());
+			getGame()->switchState(std::make_shared<StateGame>());
 		}
 		
 	}

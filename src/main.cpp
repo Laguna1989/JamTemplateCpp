@@ -4,32 +4,29 @@
 
 int main()
 {
-	sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
-	sf::CircleShape shape(100.f);
-	shape.setFillColor(sf::Color::Green);
-
+	std::shared_ptr<sf::RenderWindow> window = std::make_shared<sf::RenderWindow>(sf::VideoMode(200, 200), "SFML works!");
 	JamTemplate::GamePtr game = std::make_shared<JamTemplate::Game>();
 	game->switchState(std::make_shared<StateMenu>());
-
+	game->setRenderTarget(window);
 
 	sf::Clock clock;
 
-	while (window.isOpen())
+	while (window->isOpen())
 	{
 		sf::Time elapsed = clock.restart();
 		sf::Event event;
-		while (window.pollEvent(event))
+		while (window->pollEvent(event))
 		{
 			if (event.type == sf::Event::Closed)
-				window.close();
+				window->close();
 		}
 
 		
 		game->update(elapsed.asSeconds());
 
-		window.clear();
-		game->draw(window);
-		window.display();
+		window->clear();
+		game->draw();
+		window->display();
 	}
 
 	return 0;
