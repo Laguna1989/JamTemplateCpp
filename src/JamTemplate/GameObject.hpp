@@ -1,6 +1,7 @@
 #ifndef JAMTEMPLATE_GAMEOBJECT_HPP_INCLUDEGUARD
 #define JAMTEMPLATE_GAMEOBJECT_HPP_INCLUDEGUARD
 
+#include <memory>
 #include <SFML/Graphics.hpp>
 
 
