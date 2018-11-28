@@ -10,9 +10,8 @@ namespace JamTemplate
 class Game final : public GameObject, public std::enable_shared_from_this<Game>{
 public:
 
-	Game(GameStatePtr gs = nullptr) : m_state{ nullptr }, m_sharedPtr(this)
+	Game() : m_state{ nullptr }
 	{
-		SwitchState(gs);
 	}
 
 	
@@ -23,7 +22,7 @@ public:
 		m_state->draw();
 	};
 
-	void SwitchState(GameStatePtr newState)
+	void switchState(GameStatePtr newState)
 	{
 		if (newState == nullptr)
 			std::cerr << "cannot switch to nullptr state!" << std::endl;
@@ -36,7 +35,6 @@ private:
 	std::weak_ptr<Game> getptr() {
 		return shared_from_this();
 	}
-	std::shared_ptr<Game> m_sharedPtr;
 	virtual void doUpdate(float const elapsed) override
 	{
 		if (m_state == nullptr)
@@ -44,5 +42,7 @@ private:
 		m_state->update(elapsed);
 	};
 };
+
+using GamePtr = std::shared_ptr<Game>;
 }
 #endif

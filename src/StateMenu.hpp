@@ -16,9 +16,9 @@ private:
 	{
 		std::cout << "menu update. T= "  << getAge()  << "\n";
 
-		if (getAge() >= 5)
+		if (getAge() >= 1.5)
 		{
-			m_Game.lock()->SwitchState(std::make_shared<StateGame>());
+			m_Game.lock()->switchState(std::make_shared<StateGame>());
 		}
 		
 	}

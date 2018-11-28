@@ -1,13 +1,16 @@
 #include <SFML/Graphics.hpp>
 #include "JamTemplate/Game.hpp"
 #include "StateMenu.hpp"
+
 int main()
 {
 	sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
 	sf::CircleShape shape(100.f);
 	shape.setFillColor(sf::Color::Green);
 
-	JamTemplate::Game game(std::make_shared<StateMenu>());
+	JamTemplate::GamePtr game = std::make_shared<JamTemplate::Game>();
+	game->switchState(std::make_shared<StateMenu>());
+
 
 	sf::Clock clock;
 
@@ -22,10 +25,10 @@ int main()
 		}
 
 		
-		game.update(elapsed.asSeconds());
+		game->update(elapsed.asSeconds());
 
 		window.clear();
-		game.draw();
+		game->draw();
 		window.display();
 	}
 
