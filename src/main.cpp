@@ -28,7 +28,7 @@ int main()
 		game->update(elapsed.asSeconds());
 
 		window.clear();
-		game->draw();
+		game->draw(window);
 		window.display();
 	}
 

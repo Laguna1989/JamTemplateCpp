@@ -13,14 +13,8 @@ public:
 	Game() : m_state{ nullptr }
 	{
 	}
-
 	
-	virtual void draw() const override 
-	{
-		if (m_state == nullptr)
-			return;
-		m_state->draw();
-	};
+	
 
 	void switchState(GameStatePtr newState)
 	{
@@ -28,6 +22,7 @@ public:
 			std::cerr << "cannot switch to nullptr state!" << std::endl;
 		m_state = newState;
 		m_state->setGameInstance(getptr());
+		m_state->create();
 	}
 
 private:
@@ -41,6 +36,14 @@ private:
 			return;
 		m_state->update(elapsed);
 	};
+
+	virtual void doDraw(sf::RenderTarget& rt) const override
+	{
+		if (m_state == nullptr)
+			return;
+		m_state->draw(rt);
+	};
+
 };
 
 using GamePtr = std::shared_ptr<Game>;

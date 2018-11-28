@@ -19,12 +19,13 @@ namespace JamTemplate {
 			m_age += elapsed; 
 			doUpdate(elapsed);
 		};
-		virtual void draw() const {};
+		void draw(sf::RenderTarget & rt) const { doDraw(rt); };
 		float getAge() const { return m_age; }
 
 	private:
 		float m_age;
 		virtual void doUpdate(float const elapesed) = 0;
+		virtual void doDraw(sf::RenderTarget& rt) const {};
 	};
 
 	using GameObjectPtr = std::shared_ptr<GameObject>;

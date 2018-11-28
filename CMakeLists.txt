@@ -13,6 +13,7 @@ set (GAMEFILES
 	src/main.cpp
 	src/StateMenu.hpp
 	src/StateGame.hpp
+	src/Player.hpp
 	)	
 
 set (CMAKE_CXX_STANDARD 14)

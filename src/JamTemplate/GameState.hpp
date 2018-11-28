@@ -18,14 +18,9 @@ namespace JamTemplate {
 
 		virtual  ~GameState() = default;
 	
+		void create() { doCreate(); initialize(); };
 		
-		virtual void draw() const override 
-		{
-			for (auto& go : m_objects)
-			{
-				go->draw();
-			}
-		};
+		
 
 		void add(GameObjectPtr go)
 		{
@@ -37,11 +32,15 @@ namespace JamTemplate {
 			m_Game = gm;
 		}
 
+		bool hasBeenInitialized() const { return m_hasBeenInitialized; }
+		
+
 	protected:
 		std::weak_ptr<Game> m_Game;
 	private:
 		std::vector<GameObjectPtr> m_objects;
-		
+		bool m_hasBeenInitialized{ false };
+		void initialize() { m_hasBeenInitialized = true; }
 		virtual void doUpdate(float const elapsed) override
 		{
 			for (auto& go : m_objects)
@@ -50,6 +49,15 @@ namespace JamTemplate {
 			}
 		};
 
+		virtual void doDraw(sf::RenderTarget& rt) const override
+		{
+			for (auto& go : m_objects)
+			{
+				go->draw(rt);
+			}
+		};
+
+		virtual void doCreate() {};
 	};
 
 	using GameStatePtr = std::shared_ptr<GameState>;
