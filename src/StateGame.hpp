@@ -8,6 +8,7 @@
 #include "JamTemplate/Timer.hpp"
 #include "Player.hpp"
 #include "Balloon.hpp"
+#include "Shot.hpp"
 
 class StateGame : public JamTemplate::GameState {
 public:
@@ -21,17 +22,23 @@ public:
 			add(std::make_shared<Balloon>());
 		}
 
+		void spawnArrow(sf::Vector2f p)
+		{
+			auto s = std::make_shared<Shot>(sf::Vector2f{20,180});
+			add(s);
+			m_shots.emplace_back(s);
+		}
+
 private:
 	void doUpdate(float const elapsed) override
 	{
 		//std::cout << "game update\n";
-		updateObjects(elapsed);
-		
+		updateObjects(elapsed);	
 	}
 
 	void doCreate() override
 	{
-		m_player = std::make_shared<Player>();
+		m_player = std::make_shared<Player>(*this);
 		add(m_player);
 
 		auto t = std::make_shared<JamTemplate::Timer>(1.5f, [this]() {this->spawnBalloon(); }, -1);
@@ -40,6 +47,7 @@ private:
 
 	std::shared_ptr<Player> m_player;
 	std::vector<BalloonPtr> m_balloons;
+	std::vector<std::weak_ptr<Shot>> m_shots;
 };
 
 #endif

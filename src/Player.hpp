@@ -6,15 +6,18 @@
 #include <SFML/Graphics.hpp>
 
 #include "JamTemplate/Game.hpp"
-#include "JamTemplate/GameState.hpp"
+#include "JamTemplate/Transform.hpp"
 
-class Player : public JamTemplate::GameObject {
+class StateGame;
+
+class Player : public JamTemplate::GameObject, public JamTemplate::Transform {
 public:
-	Player()
+	Player(StateGame& sg) : m_gameState(sg)
 	{
 		std::cout << "Player ctor" << std::endl;
 		rect = sf::RectangleShape(sf::Vector2f(24, 24));
 		rect.setFillColor(sf::Color::Yellow);
+		setPosition(sf::Vector2f{ 10, 20 });
 	}
 
 	~Player()
@@ -22,16 +25,22 @@ public:
 		std::cout << "player dtor" << std::endl;
 	}
 
+
+
 private:
 	void doUpdate(float const elapsed) override
 	{
-		std::cout << "player update\n";
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space))
+		{
+			shoorArrow();
+		}
 	}
 
-	void doDraw() const override
-	{
-		getGame()->getRenderTarget()->draw(rect);
-	}
+	void doDraw() const override;
+
+	void shoorArrow();
+
+	StateGame& m_gameState;
 
 	sf::RectangleShape rect;
 };
