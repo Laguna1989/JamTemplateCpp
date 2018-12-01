@@ -24,6 +24,7 @@ public:
 
 	~Balloon() = default;
 
+	const sf::Shape& getShape() const { return circ; }
 private:
 	void doUpdate(float const elapsed) override
 	{

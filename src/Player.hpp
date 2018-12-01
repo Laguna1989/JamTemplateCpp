@@ -65,7 +65,10 @@ private:
 		m_rect.setPosition(getPosition());
 	}
 
-	void doDraw() const override;
+	void Player::doDraw() const override
+	{
+		getGame()->getRenderTarget()->draw(m_rect);
+	}
 
 	void doCreate()
 	{

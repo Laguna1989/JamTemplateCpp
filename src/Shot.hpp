@@ -21,6 +21,7 @@ public:
 
 	~Shot() = default;
 
+	const sf::Shape& getShape() const { return m_rect; }
 private:
 	void doUpdate(float const elapsed) override
 	{

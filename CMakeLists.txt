@@ -4,13 +4,14 @@ set (PROJECTNAME "MyAwesomeGame")
 
 set (JAMTEMPLATEFILES 
 	src/JamTemplate/GameObject.hpp
-	src/JamTemplate/GameObject.cpp
 	src/JamTemplate/GameState.hpp
 	src/JamTemplate/Timer.hpp
 	src/JamTemplate/Transform.hpp
 	src/JamTemplate/Game.hpp
 	src/JamTemplate/Random.hpp
 	src/JamTemplate/Random.cpp
+	src/JamTemplate/Collision.hpp
+	src/JamTemplate/ObjectGroup.hpp
 	)
 
 set (GAMEFILES 

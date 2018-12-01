@@ -13,7 +13,7 @@ namespace JamTemplate {
 	class GameObject
 	{
 	public:
-		GameObject();
+		GameObject() = default;
 
 		virtual  ~GameObject() = default;
 
@@ -26,7 +26,7 @@ namespace JamTemplate {
 			}
 			catch (std::exception& e)
 			{
-				std::cerr << "ERROD: Game not set on create!\n" << e.what();
+				std::cerr << "ERROR: Game not set on create!\n" << e.what();
 			}
 			doCreate();
 		}
@@ -60,7 +60,7 @@ namespace JamTemplate {
 		bool isAlive() const { return m_alive; }
 
 	private:
-		float m_age;
+		float m_age {0.0f};
 		bool m_alive{ true };	// is used to sort out "dead" game objects;
 		std::weak_ptr<Game> m_game;
 
