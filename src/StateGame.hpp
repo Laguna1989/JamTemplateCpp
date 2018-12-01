@@ -12,7 +12,7 @@
 #include "Player.hpp"
 #include "Balloon.hpp"
 #include "Shot.hpp"
-
+#include "Hud.hpp"
 
 class StateGame : public JamTemplate::GameState {
 public:
@@ -41,13 +41,10 @@ private:
 			for (auto const& bp : *m_balloons)
 			{
 				auto b = bp.lock();
-				/*if (JamTemplate::Collision::CircleTest<>(b->getShape(), s->getShape()))
+				if (JamTemplate::Collision::CircleTest<>(b->getShape(), s->getShape()))
 				{
 					b->kill();
-				}*/
-				if (JamTemplate::Collision::BoundingBoxTest<>(b->getShape(), s->getShape()))
-				{
-					b->kill();
+					m_hud->increaseScore();
 				}
 			}
 		}
@@ -55,6 +52,9 @@ private:
 
 	void doCreate() override
 	{
+		m_hud = std::make_shared<Hud>();
+		add(m_hud);
+
 		m_player = std::make_shared<Player>(*this);
 		add(m_player);
 
@@ -66,6 +66,7 @@ private:
 		add(m_shots);
 	}
 
+	std::shared_ptr<Hud> m_hud;
 	std::shared_ptr<Player> m_player;
 	JamTemplate::ObjectGroupPtr<Balloon> m_balloons;
 	JamTemplate::ObjectGroupPtr<Shot> m_shots;

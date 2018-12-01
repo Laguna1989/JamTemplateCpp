@@ -11,7 +11,7 @@ public:
 private:
 	void doInternalUpdate (float const elapsed) override 
 	{
-		if (getAge() >= 1.5)
+		if (getAge() >= 0.25)
 		{
 			getGame()->switchState(std::make_shared<StateGame>());
 		}

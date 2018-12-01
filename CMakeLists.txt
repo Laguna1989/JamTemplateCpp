@@ -23,6 +23,7 @@ set (GAMEFILES
 	src/Balloon.hpp
 	src/Shot.hpp
 	src/GameProperties.hpp
+	src/Hud.hpp
 	)	
 
 set (CMAKE_CXX_STANDARD 14)

@@ -14,7 +14,6 @@ class Balloon : public JamTemplate::GameObject, public JamTemplate::Transform {
 public:
 	Balloon()
 	{
-		//std::cout << "Balloon ctor" << std::endl;
 		circ = sf::CircleShape(12);
 		circ.setFillColor(sf::Color::Red);
 		float x = JamTemplate::Random::getFloat(30, 200);

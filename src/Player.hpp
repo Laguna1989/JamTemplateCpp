@@ -15,7 +15,6 @@ class Player : public JamTemplate::GameObject, public JamTemplate::Transform {
 public:
 	Player(StateGame& sg) : m_gameState(sg)
 	{
-		std::cout << "Player ctor" << std::endl;
 		m_rect = sf::RectangleShape(sf::Vector2f(24, 24));
 		m_rect.setFillColor(sf::Color::Yellow);
 		setPosition(sf::Vector2f{ 10, 20 });
@@ -23,11 +22,7 @@ public:
 		
 	}
 
-	~Player()
-	{
-		std::cout << "player dtor" << std::endl;
-	}
-
+	~Player() = default;
 
 
 private:
@@ -65,7 +60,7 @@ private:
 		m_rect.setPosition(getPosition());
 	}
 
-	void Player::doDraw() const override
+	void doDraw() const override
 	{
 		getGame()->getRenderTarget()->draw(m_rect);
 	}
