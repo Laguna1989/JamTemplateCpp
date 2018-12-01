@@ -17,7 +17,6 @@ namespace JamTemplate {
 		using callbackType = std::function<void(void)>;
 		Timer(float t, callbackType cb, int r = -1) : m_timer{ t }, m_callback{ cb }, m_repeat{r}
 		{
-			std::cout << "timer ctor\n";
 		}
 
 		Timer(Timer const&) = delete;
@@ -36,7 +35,6 @@ namespace JamTemplate {
 			//std::cout << "timer age: " << getAge() << std::endl;
 			if (getAge() >= m_timer)
 			{
-				std::cout << "timer callback\n";
 				m_callback();
 				if (m_repeat < 0)
 				{

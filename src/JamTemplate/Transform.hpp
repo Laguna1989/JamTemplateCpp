@@ -20,7 +20,6 @@ namespace JamTemplate {
 		{
 			m_vel += m_acc * elapsed;
 			m_pos += m_vel * elapsed;
-			std::cout << m_pos.y << std::endl;
 			setToBounds();
 		}
 		void setToBounds()

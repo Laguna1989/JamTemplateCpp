@@ -8,6 +8,7 @@
 #include "JamTemplate/Game.hpp"
 #include "JamTemplate/Transform.hpp"
 
+#include "GameProperties.hpp"
 class StateGame;
 
 class Player : public JamTemplate::GameObject, public JamTemplate::Transform {
@@ -54,13 +55,11 @@ private:
 		setVelocity({ 0.f,0.f });
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W) || sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Up))
 		{
-			std::cout <<  "moving up" << std::endl;
-			setVelocity({0,-10.0f});
+			setVelocity({0,-GP::playerMovementSpeed()});
 		}
 		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S) || sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Down))
 		{
-			std::cout << "moving down" << std::endl;
-			setVelocity({ 0,10.0f });
+			setVelocity({ 0,GP::playerMovementSpeed()  });
 		}
 		updateTransform(elapsed);
 		m_rect.setPosition(getPosition());

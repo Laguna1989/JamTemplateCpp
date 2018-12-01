@@ -9,5 +9,5 @@ void Player::doDraw() const
 void Player::shoorArrow()
 {
 	Player::m_gameState.spawnArrow(getPosition());
-	m_shootTimer = 0.5;
+	m_shootTimer = GP::playerShotTimer();
 }

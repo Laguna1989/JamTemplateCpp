@@ -26,7 +26,7 @@ namespace JamTemplate {
 			}
 			catch (std::exception& e)
 			{
-				std::cerr << "ERROD: Game not set on create!\n";
+				std::cerr << "ERROD: Game not set on create!\n" << e.what();
 			}
 			doCreate();
 		}

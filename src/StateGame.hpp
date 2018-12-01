@@ -12,22 +12,19 @@
 
 class StateGame : public JamTemplate::GameState {
 public:
-		StateGame()
+	StateGame() = default;
+
+	void spawnBalloon()
 	{
-		std::cout << "game ctor" << std::endl;
+		add(std::make_shared<Balloon>());
 	}
 
-		void spawnBalloon()
-		{
-			add(std::make_shared<Balloon>());
-		}
-
-		void spawnArrow(sf::Vector2f p)
-		{
-			auto s = std::make_shared<Shot>(p);
-			add(s);
-			m_shots.emplace_back(s);
-		}
+	void spawnArrow(sf::Vector2f p)
+	{
+		auto s = std::make_shared<Shot>(p);
+		add(s);
+		m_shots.emplace_back(s);
+	}
 
 private:
 	void doInternalUpdate (float const elapsed) override
@@ -40,7 +37,7 @@ private:
 		m_player = std::make_shared<Player>(*this);
 		add(m_player);
 
-		auto t = std::make_shared<JamTemplate::Timer>(1.5f, [this]() {this->spawnBalloon(); }, -1);
+		auto t = std::make_shared<JamTemplate::Timer>(GP::balloonSpawnTime(), [this]() {this->spawnBalloon(); }, -1);
 		add(t);
 	}
 

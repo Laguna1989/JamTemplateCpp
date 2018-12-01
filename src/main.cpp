@@ -8,7 +8,7 @@ int main()
 	JamTemplate::GamePtr game = std::make_shared<JamTemplate::Game>();
 	game->switchState(std::make_shared<StateMenu>());
 	game->setRenderTarget(window);
-
+	window->setFramerateLimit(60);
 	sf::Clock clock;
 
 	while (window->isOpen())

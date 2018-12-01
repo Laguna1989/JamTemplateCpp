@@ -14,23 +14,22 @@ public:
 	Shot(sf::Vector2f p)
 	{
 		setPosition(p);
-		setVelocity(sf::Vector2f{ 50,0 });
-		std::cout << "Shot ctor" << std::endl;
+		setVelocity(sf::Vector2f{ GP::shotMovementSpeed(),0 });
 		m_rect = sf::RectangleShape(sf::Vector2f(24, 4));
 		m_rect.setFillColor(sf::Color::Blue);
 	}
 
-	~Shot()
-	{
-		std::cout << "Shot dtor" << std::endl;
-	}
+	~Shot() = default;
 
 private:
 	void doUpdate(float const elapsed) override
 	{
-		//std::cout << "Shot update\n";
 		updateTransform(elapsed);
 		m_rect.setPosition(getPosition());
+		if (getPosition().x > getGame()->getRenderTarget()->getSize().x + 50) 
+		{
+			kill();
+		}
 	}
 
 	void doDraw() const override

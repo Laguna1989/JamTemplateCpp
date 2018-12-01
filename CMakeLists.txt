@@ -9,6 +9,8 @@ set (JAMTEMPLATEFILES
 	src/JamTemplate/Timer.hpp
 	src/JamTemplate/Transform.hpp
 	src/JamTemplate/Game.hpp
+	src/JamTemplate/Random.hpp
+	src/JamTemplate/Random.cpp
 	)
 
 set (GAMEFILES 
@@ -19,6 +21,7 @@ set (GAMEFILES
 	src/Player.cpp
 	src/Balloon.hpp
 	src/Shot.hpp
+	src/GameProperties.hpp
 	)	
 
 set (CMAKE_CXX_STANDARD 14)

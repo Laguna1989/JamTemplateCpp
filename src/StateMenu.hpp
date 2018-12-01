@@ -7,15 +7,10 @@
 #include "StateGame.hpp"
 class StateMenu : public JamTemplate::GameState {
 public:
-	StateMenu()
-	{
-		std::cout << "menu ctor" << std::endl;
-	}
+	StateMenu() = default;
 private:
 	void doInternalUpdate (float const elapsed) override 
 	{
-		std::cout << "menu update. T= "  << getAge()  << "\n";
-
 		if (getAge() >= 1.5)
 		{
 			getGame()->switchState(std::make_shared<StateGame>());
