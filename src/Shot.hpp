@@ -16,8 +16,8 @@ public:
 		setPosition(p);
 		setVelocity(sf::Vector2f{ 50,0 });
 		std::cout << "Shot ctor" << std::endl;
-		rect = sf::RectangleShape(sf::Vector2f(24, 4));
-		rect.setFillColor(sf::Color::Blue);
+		m_rect = sf::RectangleShape(sf::Vector2f(24, 4));
+		m_rect.setFillColor(sf::Color::Blue);
 	}
 
 	~Shot()
@@ -28,18 +28,18 @@ public:
 private:
 	void doUpdate(float const elapsed) override
 	{
-		std::cout << "Shot update\n";
+		//std::cout << "Shot update\n";
 		updateTransform(elapsed);
-		rect.setPosition(getPosition());
+		m_rect.setPosition(getPosition());
 	}
 
 	void doDraw() const override
 	{
-		getGame()->getRenderTarget()->draw(rect);
+		getGame()->getRenderTarget()->draw(m_rect);
 	}
 
 
-	sf::RectangleShape rect;
+	sf::RectangleShape m_rect;
 };
 
 using ShotPtr = std::shared_ptr<Shot>;

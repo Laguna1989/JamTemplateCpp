@@ -26,7 +26,7 @@ public:
 private:
 	void doUpdate(float const elapsed) override
 	{
-		std::cout << "Balloon update\n";
+		//std::cout << "Balloon update\n";
 	}
 
 	void doDraw() const override

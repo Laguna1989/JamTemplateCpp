@@ -24,16 +24,15 @@ public:
 
 		void spawnArrow(sf::Vector2f p)
 		{
-			auto s = std::make_shared<Shot>(sf::Vector2f{20,180});
+			auto s = std::make_shared<Shot>(p);
 			add(s);
 			m_shots.emplace_back(s);
 		}
 
 private:
-	void doUpdate(float const elapsed) override
+	void doInternalUpdate (float const elapsed) override
 	{
-		//std::cout << "game update\n";
-		updateObjects(elapsed);	
+		
 	}
 
 	void doCreate() override

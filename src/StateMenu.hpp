@@ -12,7 +12,7 @@ public:
 		std::cout << "menu ctor" << std::endl;
 	}
 private:
-	void doUpdate(float const elapsed) override 
+	void doInternalUpdate (float const elapsed) override 
 	{
 		std::cout << "menu update. T= "  << getAge()  << "\n";
 

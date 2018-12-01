@@ -25,6 +25,7 @@ namespace JamTemplate {
 		void add(GameObjectPtr go)
 		{
 			go->setGameInstance(getGame());
+			go->create();
 			m_objectsToAdd.push_back(go);
 		}
 		
@@ -41,6 +42,10 @@ namespace JamTemplate {
 			}
 		}
 		
+		void internalUpdate(float elapsed)
+		{
+			doInternalUpdate(elapsed);
+		}
 
 
 	private:
@@ -50,9 +55,17 @@ namespace JamTemplate {
 		std::vector<GameObjectPtr> m_objectsToAdd;	
 		bool m_hasBeenInitialized{ false };
 		void initialize() { m_hasBeenInitialized = true; }
+
+		/// do not override this function in derived states, but override doInternalUpdate
 		virtual void doUpdate(float const elapsed) override
 		{
 			updateObjects(elapsed);
+			internalUpdate(elapsed);
+		}
+
+		virtual void doInternalUpdate(float elapsed)
+		{
+
 		}
 
 		void addNewObjects()

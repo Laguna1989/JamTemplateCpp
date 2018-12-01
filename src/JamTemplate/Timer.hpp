@@ -33,7 +33,7 @@ namespace JamTemplate {
 
 		virtual void doUpdate(float const elapsed) override
 		{
-			std::cout << "timer age: " << getAge() << std::endl;
+			//std::cout << "timer age: " << getAge() << std::endl;
 			if (getAge() >= m_timer)
 			{
 				std::cout << "timer callback\n";

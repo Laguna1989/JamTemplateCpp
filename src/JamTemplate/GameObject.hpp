@@ -5,6 +5,7 @@
 #include <SFML/Graphics.hpp>
 
 
+
 namespace JamTemplate {
 
 	class Game;
@@ -15,7 +16,21 @@ namespace JamTemplate {
 		GameObject();
 
 		virtual  ~GameObject() = default;
-	
+
+		void create()
+		{
+			std::shared_ptr<Game> g;
+			try
+			{
+				g = getGame();
+			}
+			catch (std::exception& e)
+			{
+				std::cerr << "ERROD: Game not set on create!\n";
+			}
+			doCreate();
+		}
+		
 		void update(float const elapsed) 
 		{ 
 			m_age += elapsed; 
@@ -51,7 +66,7 @@ namespace JamTemplate {
 
 		virtual void doUpdate(float const elapesed) {};
 		virtual void doDraw() const {};
-
+		virtual void doCreate() {};
 	};
 
 	using GameObjectPtr = std::shared_ptr<GameObject>;
