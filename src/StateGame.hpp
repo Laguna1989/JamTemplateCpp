@@ -33,6 +33,14 @@ public:
 	}
 
 private:
+
+	std::shared_ptr<Hud> m_hud;
+	std::shared_ptr<Player> m_player;
+	JamTemplate::ObjectGroupPtr<Balloon> m_balloons;
+	JamTemplate::ObjectGroupPtr<Shot> m_shots;
+
+	sf::RectangleShape m_sky;
+
 	void doInternalUpdate (float const elapsed) override
 	{
 		for (auto const& sp : *m_shots)
@@ -52,6 +60,12 @@ private:
 
 	void doCreate() override
 	{
+
+		float w = static_cast<float>(getGame()->getRenderTarget()->getSize().x);
+		float h = static_cast<float>(getGame()->getRenderTarget()->getSize().y);
+		m_sky = sf::RectangleShape(sf::Vector2f(w,h));
+		m_sky.setFillColor(sf::Color{ 178, 255,255});
+
 		m_hud = std::make_shared<Hud>();
 		add(m_hud);
 
@@ -66,10 +80,17 @@ private:
 		add(m_shots);
 	}
 
-	std::shared_ptr<Hud> m_hud;
-	std::shared_ptr<Player> m_player;
-	JamTemplate::ObjectGroupPtr<Balloon> m_balloons;
-	JamTemplate::ObjectGroupPtr<Shot> m_shots;
+	void drawSky() const
+	{
+		getGame()->getRenderTarget()->draw(m_sky);
+
+	}
+
+	void doDraw() const override
+	{
+		drawSky();
+		drawObjects();
+	}	
 };
 
 #endif

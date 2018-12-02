@@ -20,7 +20,11 @@ namespace JamTemplate {
 
 		virtual  ~GameState() = default;
 	
-		void create() { doCreate(); initialize(); };
+		void create() 
+		{ 
+			doCreate(); 
+			initialize(); 
+		};
 
 		void add(GameObjectPtr go)
 		{
@@ -28,6 +32,8 @@ namespace JamTemplate {
 			go->create();
 			m_objectsToAdd.push_back(go);
 		}
+
+		size_t getNumberOfObjects() const { return m_objects.size(); }
 		
 		bool hasBeenInitialized() const { return m_hasBeenInitialized; }
 	protected:
@@ -41,12 +47,24 @@ namespace JamTemplate {
 				go->update(elapsed);
 			}
 		}
+
+		void drawObjects() const
+		{
+			for (auto& go : m_objects)
+			{
+				go->draw();
+			}
+		}
 		
 		void internalUpdate(float elapsed)
 		{
 			doInternalUpdate(elapsed);
 		}
 
+		void internalDraw() const
+		{
+			doInternalDraw();
+		}
 
 	private:
 		/// all objects in the scene
@@ -72,8 +90,9 @@ namespace JamTemplate {
 
 		virtual void doInternalUpdate(float elapsed)
 		{
-
 		}
+
+		
 
 		void addNewObjects()
 		{
@@ -88,16 +107,19 @@ namespace JamTemplate {
 			m_objects.erase(std::remove_if(m_objects.begin(), m_objects.end(), [](GameObjectPtr go) {return !(go->isAlive()); }), m_objects.end());
 		}
 		
-
+		
 		virtual void doDraw() const override
 		{
-			for (auto& go : m_objects)
-			{
-				go->draw();
-			}
+			internalDraw();
 		};
 
+		virtual void doInternalDraw() const
+		{
+			drawObjects();
+		}
+
 		virtual void doCreate() {};
+		
 	};
 
 	using GameStatePtr = std::shared_ptr<GameState>;
