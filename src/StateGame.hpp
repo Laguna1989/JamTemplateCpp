@@ -8,6 +8,7 @@
 #include "JamTemplate/Timer.hpp"
 #include "JamTemplate/Collision.hpp"
 #include "JamTemplate/ObjectGroup.hpp"
+#include "JamTemplate/SmartSprite.hpp"
 
 #include "Player.hpp"
 #include "Balloon.hpp"

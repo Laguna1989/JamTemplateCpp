@@ -1,8 +1,9 @@
 #include <SFML/Graphics.hpp>
 #include "JamTemplate/Game.hpp"
+
 #include "StateMenu.hpp"
 
-#include "JamTemplate/Noise.hpp"
+
 
 int main()
 {
@@ -12,8 +13,6 @@ int main()
 	game->setRenderTarget(window);
 	window->setFramerateLimit(60);
 	sf::Clock clock;
-
-	
 
 	while (window->isOpen())
 	{

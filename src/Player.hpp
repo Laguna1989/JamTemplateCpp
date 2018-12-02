@@ -7,6 +7,7 @@
 
 #include "JamTemplate/Game.hpp"
 #include "JamTemplate/Transform.hpp"
+#include "JamTemplate/SmartSprite.hpp"
 
 #include "GameProperties.hpp"
 class StateGame;
@@ -57,12 +58,14 @@ private:
 			setVelocity({ 0,GP::playerMovementSpeed()  });
 		}
 		updateTransform(elapsed);
-		m_rect.setPosition(getPosition());
+		//m_rect.setPosition(getPosition());
+		m_sprite.setPosition(getPosition());
 	}
 
 	void doDraw() const override
 	{
-		getGame()->getRenderTarget()->draw(m_rect);
+		//getGame()->getRenderTarget()->draw(m_rect);
+		m_sprite.draw(getGame()->getRenderTarget());
 	}
 
 	void doCreate()
@@ -70,12 +73,15 @@ private:
 		float w = static_cast<float>(getGame()->getRenderTarget()->getSize().x);
 		float h = static_cast<float>(getGame()->getRenderTarget()->getSize().y);
 		setBoundsPosition(sf::FloatRect(0, 0, w, h-24));
+
+		m_sprite.loadSprite("assets/player.png");
 	}
 	void shoorArrow();
 
 	StateGame& m_gameState;
 
 	sf::RectangleShape m_rect;
+	JamTemplate::SmartSprite m_sprite;
 };
 
 #endif

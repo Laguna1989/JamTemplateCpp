@@ -15,6 +15,9 @@ set (JAMTEMPLATEFILES
 	src/JamTemplate/Tween.hpp
 	src/JamTemplate/Noise.hpp
 	src/JamTemplate/Lerp.hpp
+	src/JamTemplate/SmartSprite.hpp
+	src/JamTemplate/TextureManager.hpp
+	src/JamTemplate/TextureManager.cpp
 	)
 
 set (GAMEFILES 
