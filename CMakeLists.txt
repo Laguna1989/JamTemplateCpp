@@ -14,6 +14,7 @@ set (JAMTEMPLATEFILES
 	src/JamTemplate/ObjectGroup.hpp
 	src/JamTemplate/Tween.hpp
 	src/JamTemplate/Noise.hpp
+	src/JamTemplate/Lerp.hpp
 	)
 
 set (GAMEFILES 
