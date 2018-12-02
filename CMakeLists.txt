@@ -12,6 +12,8 @@ set (JAMTEMPLATEFILES
 	src/JamTemplate/Random.cpp
 	src/JamTemplate/Collision.hpp
 	src/JamTemplate/ObjectGroup.hpp
+	src/JamTemplate/Tween.hpp
+	src/JamTemplate/Noise.hpp
 	)
 
 set (GAMEFILES 

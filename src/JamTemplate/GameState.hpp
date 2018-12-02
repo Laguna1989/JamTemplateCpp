@@ -49,9 +49,16 @@ namespace JamTemplate {
 
 
 	private:
+		/// all objects in the scene
 		std::vector<GameObjectPtr> m_objects;
 
-		// this is used as a level of indirection, because objects might add or remove m_objects while iterating over the m_objects vector, which invalidates pointers, which leads to crashes
+		/// this is used as a level of indirection, 
+		/// because objects might add or remove m_objects while iterating over the m_objects vector, 
+		/// which invalidates pointers, which leads to crashes
+		///
+		/// the idea is to not modify m_objects directly when a GameObject is added,
+		/// but to place them in this vector first and add them to m_objects, 
+		/// once it is safe to do so.
 		std::vector<GameObjectPtr> m_objectsToAdd;	
 		bool m_hasBeenInitialized{ false };
 		void initialize() { m_hasBeenInitialized = true; }
@@ -72,7 +79,7 @@ namespace JamTemplate {
 		{
 			while (!m_objectsToAdd.empty())
 			{
-				m_objects.push_back(std::move(m_objectsToAdd.back()));
+				m_objects.emplace_back(std::move(m_objectsToAdd.back()));
 				m_objectsToAdd.pop_back();
 			}
 		}

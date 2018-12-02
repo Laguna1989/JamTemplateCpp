@@ -69,7 +69,7 @@ private:
 	{
 		float w = static_cast<float>(getGame()->getRenderTarget()->getSize().x);
 		float h = static_cast<float>(getGame()->getRenderTarget()->getSize().y);
-		setBounds(sf::FloatRect(0, 0, w, h));
+		setBoundsPosition(sf::FloatRect(0, 0, w, h-24));
 	}
 	void shoorArrow();
 

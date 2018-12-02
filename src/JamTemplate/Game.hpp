@@ -22,7 +22,7 @@ public:
 			return;
 		}
 		m_state = newState;
-		m_state->setGameInstance(getptr());
+		m_state->setGameInstance(getPtr());
 		m_state->create();
 	}
 
@@ -39,7 +39,7 @@ private:
 	GameStatePtr m_state;
 	std::shared_ptr<sf::RenderTarget> m_renderTarget{nullptr};
 
-	std::weak_ptr<Game> getptr() {
+	std::weak_ptr<Game> getPtr() {
 		return shared_from_this();
 	}
 	virtual void doUpdate(float const elapsed) override

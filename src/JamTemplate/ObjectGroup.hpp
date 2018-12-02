@@ -10,6 +10,8 @@ namespace JamTemplate {
 	/// templated Object group for the purpose of holding specific Objects in a separate list. 
 	/// Can be used as a GameObject.
 	/// For stored objects to be updated and drawn, you need to also add the object to the State itself
+	///
+	/// naming convention will differ here from the rest of the project as this is about to mimic the std::vector interface
 	template <typename T>
 	class ObjectGroup : public GameObject 
 	{
@@ -18,10 +20,19 @@ namespace JamTemplate {
 
 		auto begin() { return m_objects.begin(); }
 		auto end() { return m_objects.end(); }
+		
+		auto at(size_t idx) { return m_objects.at(idx); }
+
 		void push_back(std::weak_ptr<T> wptr)
 		{
 			m_objects.push_back(wptr);
 		}
+
+		void emplace_back(std::weak_ptr<T>&& wptr)
+		{
+			m_objects.emplace_back(wptr);
+		}
+
 		size_t size() { return m_objects.size(); }
 
 	private:

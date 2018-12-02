@@ -4,10 +4,8 @@
 #include <memory>
 #include <SFML/Graphics.hpp>
 
-
-
 namespace JamTemplate {
-
+	// forward declaration
 	class Game;
 
 	class GameObject
@@ -40,22 +38,20 @@ namespace JamTemplate {
 		float getAge() const { return m_age; }
 		void setAge(float t) {m_age = t; }
 
-		void setGameInstance(std::weak_ptr<Game> g)
-		{
-			m_game = g;
-		}
+		void setGameInstance(std::weak_ptr<Game> g) { m_game = g; }
 		std::shared_ptr<Game> getGame()
 		{
 			if (m_game.expired()) throw std::exception(/*"ERROR: Cannot GameObject::getGame():  m_game expired!"*/);
 			return m_game.lock();
 		}
-
+		// const version of getGame (required for draw functionality)
 		std::shared_ptr<Game> getGame() const
 		{
 			if (m_game.expired()) throw std::exception(/*"ERROR: Cannot GameObject::getGame():  m_game expired!"*/);
 			return m_game.lock();
 		}
 
+		// kill this game Object (killed/dead game objects will get thrown out of any GameState
 		void kill() { m_alive = false; }
 		bool isAlive() const { return m_alive; }
 

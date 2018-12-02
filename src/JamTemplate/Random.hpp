@@ -8,6 +8,7 @@ namespace JamTemplate {
 	class Random
 	{
 	public:
+		/// this class shall never be instantiated, but only used as a pure-static class 
 		Random() = delete;
 		
 		static int getInt(int min = 0, int max = 100);

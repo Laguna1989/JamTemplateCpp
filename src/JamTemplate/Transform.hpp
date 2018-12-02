@@ -12,64 +12,102 @@ namespace JamTemplate {
 		using rt = sf::FloatRect;
 		Transform() = default;
 
-		explicit Transform(vt p, vt v = vt{}, vt a = vt{}) : m_pos{ p }, m_vel{ v }, m_acc{ a }
+		explicit Transform(vt p, vt v = vt{}, vt a = vt{}) : m_position{ p }, m_velocity{ v }, m_acceleration{ a }
 		{
 		}
 
 		void updateTransform(float elapsed)
 		{
-			m_vel += m_acc * elapsed;
-			m_pos += m_vel * elapsed;
-			setToBounds();
+			setToBoundsVelocity();
+			m_velocity += m_acceleration * elapsed;
+			m_position += m_velocity * elapsed;
+			m_velocity.x = m_velocity.x * m_dragVelocity.x;
+			m_velocity.y = m_velocity.y * m_dragVelocity.y;
+			setToBoundsPosition();
 		}
-		void setToBounds()
-		{
-			if (!m_useBounds) return;
-			if (getPosition().x < getBounds().left)
-			{
-				setPosition({ getBounds().left, getPosition().y });
-			}
-			if (getPosition().x > getBounds().left + getBounds().width)
-			{
-				setPosition({ getBounds().left + getBounds().width, getPosition().y });
-			}
 
-			if (getPosition().y < getBounds().top)
-			{
-				setPosition({ getPosition().x, getBounds().top });
-			}
-			if (getPosition().y > getBounds().top + getBounds().height)
-			{
-				setPosition({ getPosition().x, getBounds().top + getBounds().height });
-			}
+		void setToBoundsPosition()
+		{
+			setToBounds(m_position, m_boundsPosition, m_useBoundsPosition);
 		}
+		void setToBoundsVelocity()
+		{
+			setToBounds(m_velocity, m_boundsVelocity, m_useBoundsVelocity);
+		}
+
 		void unsetBounds()
 		{
-			m_useBounds = false;
+			m_useBoundsPosition = false;
 		}
 
-		void setPosition(vt const& p) { m_pos = p; }
-		void setVelocity(vt const& v) { m_vel = v; }
-		void setAcceleration(vt const& a) { m_acc = a; }
+		void setPosition(vt const p) { m_position = p; }
+		void setVelocity(vt const v) { m_velocity = v; }
+		void setAcceleration(vt const a) { m_acceleration = a; }
 
-		vt getPosition() const { return m_pos; }
-		vt getVelocity() const { return m_vel; }
-		vt getAcceleration() const { return m_acc; }
+		vt getPosition() const { return m_position; }
+		vt getVelocity() const { return m_velocity; }
+		vt getAcceleration() const { return m_acceleration; }
 
-		rt getBounds() const { return m_bounds; }
-		void setBounds(rt const& r)
+		rt getBoundsPosition() const { return m_boundsPosition; }
+		void setBoundsPosition(rt const& r)
 		{
-			m_useBounds = true;
-			m_bounds = r;
+			m_useBoundsPosition = true;
+			m_boundsPosition = r;
 		}
+		void resetBoundsPosition() { m_useBoundsPosition = false; }
+
+		rt getBoundsVelocity() const { return m_boundsVelocity; }
+		void setBoundsVelocity(rt const& r)
+		{
+			m_useBoundsVelocity = true;
+			m_boundsVelocity = r;
+		}
+		void resetBoundsVelocity() { m_useBoundsVelocity = false; }
+
+		void setDragVelocity(vt const& drag)
+		{
+			m_dragVelocity = drag;
+		}
+		vt getDragVelocity() const { return m_dragVelocity; }
 
 	private:
-		vt m_pos{};
-		vt m_vel{};
-		vt m_acc{};
+		vt m_position{};
+		vt m_velocity{};
+		vt m_acceleration{};
+		
+		vt m_dragVelocity{ 1,1 };
 
-		rt m_bounds{};
-		bool m_useBounds = false;
+		rt m_boundsPosition{};
+		bool m_useBoundsPosition = false;
+
+		rt m_boundsVelocity{};
+		bool m_useBoundsVelocity = false;
+
+
+		void setToBounds(vt& value, rt const& r, bool const useBounds )
+		{
+			if (!useBounds) return;
+
+			if (value.x < r.left)
+			{
+				value = { r.left, value.y };
+			}
+			if (value.x > r.left + r.width)
+			{
+				value = { r.left + r.width, value.y };
+			}
+
+			if (value.y < r.top)
+			{
+				value = { value.x, r.top };
+			}
+			if (value.y > r.top + r.height)
+			{
+				value = { value.x, r.top + r.height };
+			}
+
+		}
+
 	};
 }
 #endif

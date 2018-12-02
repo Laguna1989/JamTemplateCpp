@@ -17,7 +17,6 @@ public:
 		m_text.setPosition(0, 0);
 	}
 
-
 	void increaseScore()
 	{
 		m_score++;
