@@ -39,10 +39,15 @@ if (WIN32)
     link_directories(${CMAKE_SOURCE_DIR}/ext/SFML-2.5.1_win/lib)
 endif (WIN32)
 
+if (APPLE)
+    link_directories(/usr/local/Cellar/sfml/2.4.2_1/lib/)
+endif (APPLE)
+
 add_library(JamTemplate ${JAMTEMPLATEFILES})
 add_executable(${PROJECTNAME}  ${GAMEFILES})
 
 target_include_directories(JamTemplate PRIVATE ext/SFML-2.5.1_win/include)
+target_include_directories(JamTemplate PRIVATE /usr/local/Cellar/sfml/2.4.2_1/include) 
 target_link_libraries(JamTemplate optimized sfml-system )
 target_link_libraries(JamTemplate optimized sfml-window )
 target_link_libraries(JamTemplate optimized sfml-graphics )
@@ -54,6 +59,7 @@ if (WIN32)
 endif (WIN32)
 
 target_include_directories(${PROJECTNAME} PRIVATE ext/SFML-2.5.1_win/include)
+target_include_directories(${PROJECTNAME} PRIVATE /usr/local/Cellar/sfml/2.4.2_1/include) 
 target_link_libraries(${PROJECTNAME} optimized sfml-system )
 target_link_libraries(${PROJECTNAME} optimized sfml-window )
 target_link_libraries(${PROJECTNAME} optimized sfml-graphics )
