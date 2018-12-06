@@ -8,7 +8,7 @@
 int main()
 {
 	std::shared_ptr<sf::RenderWindow> window = std::make_shared<sf::RenderWindow>(sf::VideoMode(200, 200), "SFML works!");
-	JamTemplate::GamePtr game = std::make_shared<JamTemplate::Game>();
+	JamTemplate::Game::Sptr game = std::make_shared<JamTemplate::Game>();
 	game->switchState(std::make_shared<StateMenu>());
 	game->setRenderTarget(window);
 	window->setFramerateLimit(60);
