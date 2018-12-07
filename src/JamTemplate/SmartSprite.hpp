@@ -5,7 +5,6 @@
 #include <memory>
 
 #include <SFML/Graphics.hpp>
-
 #include "TextureManager.hpp"
 
 namespace JamTemplate
@@ -13,6 +12,9 @@ namespace JamTemplate
 	class SmartSprite
 	{
 	public:
+
+		using Sptrs = std::shared_ptr<SmartSprite>;
+
 		void loadSprite(std::string fileName) 
 		{
 			m_sprite = sf::Sprite(TextureManager::get(fileName));

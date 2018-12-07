@@ -16,6 +16,9 @@ namespace JamTemplate {
 	class ObjectGroup : public GameObject 
 	{
 	public:
+
+		using Sptr = std::shared_ptr<ObjectGroup<T>>;
+
 		ObjectGroup() = default;
 
 		auto begin() { return m_objects.begin(); }
@@ -61,7 +64,5 @@ namespace JamTemplate {
 		return obj.end();
 	}
 
-	template <typename T>
-	using ObjectGroupPtr = std::shared_ptr<ObjectGroup<T>>;
 }
 #endif

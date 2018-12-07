@@ -9,12 +9,12 @@ namespace JamTemplate
 
 class Game final : public GameObject, public std::enable_shared_from_this<Game>{
 public:
-
+	using Sptr = std::shared_ptr<Game>;
 	Game() : m_state{ nullptr }
 	{
 	}
 	
-	void switchState(GameStatePtr newState)
+	void switchState(GameState::Sptr newState)
 	{
 		if (newState == nullptr)
 		{
@@ -36,7 +36,7 @@ public:
 	}
 
 private:
-	GameStatePtr m_state;
+	GameState::Sptr m_state;
 	std::shared_ptr<sf::RenderTarget> m_renderTarget{nullptr};
 
 	std::weak_ptr<Game> getPtr() {
@@ -58,6 +58,6 @@ private:
 
 };
 
-using GamePtr = std::shared_ptr<Game>;
+
 }
 #endif

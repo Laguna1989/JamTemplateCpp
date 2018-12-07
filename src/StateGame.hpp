@@ -37,8 +37,8 @@ private:
 
 	std::shared_ptr<Hud> m_hud;
 	std::shared_ptr<Player> m_player;
-	JamTemplate::ObjectGroupPtr<Balloon> m_balloons;
-	JamTemplate::ObjectGroupPtr<Shot> m_shots;
+	JamTemplate::ObjectGroup<Balloon>::Sptr m_balloons;
+	JamTemplate::ObjectGroup<Shot>::Sptr m_shots;
 
 	sf::RectangleShape m_sky;
 

@@ -16,6 +16,7 @@ namespace JamTemplate {
 	class GameState : public GameObject
 	{
 	public:
+		using Sptr = std::shared_ptr<GameState>;
 		GameState() = default;
 
 		virtual  ~GameState() = default;
@@ -26,7 +27,7 @@ namespace JamTemplate {
 			initialize(); 
 		};
 
-		void add(GameObjectPtr go)
+		void add(GameObject::Sptr go)
 		{
 			go->setGameInstance(getGame());
 			go->create();
@@ -68,7 +69,7 @@ namespace JamTemplate {
 
 	private:
 		/// all objects in the scene
-		std::vector<GameObjectPtr> m_objects;
+		std::vector<GameObject::Sptr> m_objects;
 
 		/// this is used as a level of indirection, 
 		/// because objects might add or remove m_objects while iterating over the m_objects vector, 
@@ -77,7 +78,7 @@ namespace JamTemplate {
 		/// the idea is to not modify m_objects directly when a GameObject is added,
 		/// but to place them in this vector first and add them to m_objects, 
 		/// once it is safe to do so.
-		std::vector<GameObjectPtr> m_objectsToAdd;	
+		std::vector<GameObject::Sptr> m_objectsToAdd;	
 		bool m_hasBeenInitialized{ false };
 		void initialize() { m_hasBeenInitialized = true; }
 
@@ -104,7 +105,7 @@ namespace JamTemplate {
 		}
 		void cleanUpObjects()
 		{
-			m_objects.erase(std::remove_if(m_objects.begin(), m_objects.end(), [](GameObjectPtr go) {return !(go->isAlive()); }), m_objects.end());
+			m_objects.erase(std::remove_if(m_objects.begin(), m_objects.end(), [](GameObject::Sptr go) {return !(go->isAlive()); }), m_objects.end());
 		}
 		
 		
@@ -122,6 +123,6 @@ namespace JamTemplate {
 		
 	};
 
-	using GameStatePtr = std::shared_ptr<GameState>;
+	
 }
 #endif
