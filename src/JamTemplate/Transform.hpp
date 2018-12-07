@@ -19,10 +19,13 @@ namespace JamTemplate {
 		void updateTransform(float elapsed)
 		{
 			setToBoundsVelocity();
+			
 			m_velocity += m_acceleration * elapsed;
 			m_position += m_velocity * elapsed;
+			
 			m_velocity.x = m_velocity.x * m_dragVelocity.x;
 			m_velocity.y = m_velocity.y * m_dragVelocity.y;
+			
 			setToBoundsPosition();
 		}
 
@@ -35,9 +38,14 @@ namespace JamTemplate {
 			setToBounds(m_velocity, m_boundsVelocity, m_useBoundsVelocity);
 		}
 
-		void unsetBounds()
+		void unsetBoundsPosition()
 		{
 			m_useBoundsPosition = false;
+		}
+		
+		void unsetBoundsVelocity()
+		{
+			m_useBoundsVelocity = false;
 		}
 
 		void setPosition(vt const p) { m_position = p; }
