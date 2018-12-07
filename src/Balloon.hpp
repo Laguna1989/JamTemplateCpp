@@ -19,8 +19,8 @@ public:
 		float x = JamTemplate::Random::getFloat(30, 200-24);
 		setPosition({ x, 200 });
 		//setVelocity({0, -GP::balloonMoveSpeed()});
-		setAcceleration({ 0, -GP::balloonMoveSpeed() / 2 });
-		setBoundsVelocity(sf::FloatRect(-GP::balloonMoveSpeed() , -GP::balloonMoveSpeed(), GP::balloonMoveSpeed()*2, GP::balloonMoveSpeed()*2));
+		//setAcceleration({ 0, -GP::balloonMoveSpeed() / 2 });
+		//setBoundsVelocity(sf::FloatRect(-GP::balloonMoveSpeed() , -GP::balloonMoveSpeed(), GP::balloonMoveSpeed()*2, GP::balloonMoveSpeed()*2));
 	}
 
 	~Balloon() = default;

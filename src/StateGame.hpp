@@ -9,11 +9,13 @@
 #include "JamTemplate/Collision.hpp"
 #include "JamTemplate/ObjectGroup.hpp"
 #include "JamTemplate/SmartSprite.hpp"
+#include "JamTemplate/Tween.hpp"
 
 #include "Player.hpp"
 #include "Balloon.hpp"
 #include "Shot.hpp"
 #include "Hud.hpp"
+
 
 class StateGame : public JamTemplate::GameState {
 public:
@@ -24,6 +26,8 @@ public:
 		auto b = std::make_shared<Balloon>();
 		add(b);
 		m_balloons->push_back(b);
+		auto t = std::make_shared< JamTemplate::Tween<Balloon>>(b, [](BalloonPtr b, auto age) { b->setVelocity({ 0, age }); return !(b->getPosition().y > -50); });
+		add(t);
 	}
 
 	void spawnArrow(sf::Vector2f p)

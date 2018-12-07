@@ -7,6 +7,7 @@
 #include <algorithm>
 #include <numeric>
 #include "GameObject.hpp"
+#include "Tween.hpp"
 
 namespace JamTemplate {
 
@@ -33,6 +34,10 @@ namespace JamTemplate {
 			go->create();
 			m_objectsToAdd.push_back(go);
 		}
+		void add(TweenBase::Sptr tb)
+		{
+			m_tweensToAdd.push_back(tb);
+		}
 
 		size_t getNumberOfObjects() const { return m_objects.size(); }
 		
@@ -46,6 +51,22 @@ namespace JamTemplate {
 			for (auto& go : m_objects)
 			{
 				go->update(elapsed);
+			}
+		}
+
+
+		void updateTweens(float elapsed)
+		{
+			while (!m_tweensToAdd.empty())
+			{
+				m_tweens.emplace_back(std::move(m_tweensToAdd.back()));
+				m_tweensToAdd.pop_back();
+			}
+			if (m_tweens.empty()) return;
+			m_tweens.erase(std::remove_if(m_tweens.begin(), m_tweens.end(), [](TweenBase::Sptr go) {return !(go->isAlive()); }), m_tweens.end());
+			for (auto& tw : m_tweens)
+			{
+				tw->update(elapsed);
 			}
 		}
 
@@ -79,6 +100,13 @@ namespace JamTemplate {
 		/// but to place them in this vector first and add them to m_objects, 
 		/// once it is safe to do so.
 		std::vector<GameObject::Sptr> m_objectsToAdd;	
+
+
+		/// all tweens running in this state
+		std::vector<TweenBase::Sptr> m_tweens;
+		std::vector<TweenBase::Sptr> m_tweensToAdd;
+
+
 		bool m_hasBeenInitialized{ false };
 		void initialize() { m_hasBeenInitialized = true; }
 
@@ -87,6 +115,7 @@ namespace JamTemplate {
 		{
 			updateObjects(elapsed);
 			internalUpdate(elapsed);
+			updateTweens(elapsed);
 		}
 
 		virtual void doInternalUpdate(float elapsed)

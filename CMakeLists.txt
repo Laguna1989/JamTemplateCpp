@@ -8,6 +8,13 @@ set (PROJECTNAME "MyAwesomeGame")
 set (GAMEFILES 
 	src/main.cpp
 	src/Player.cpp
+	src/Balloon.hpp
+	src/GameProperties.hpp
+	src/Hud.hpp
+	src/Player.hpp
+	src/Shot.hpp
+	src/StateGame.hpp
+	src/StateMenu.hpp
 	)	
 
 #####################################################
@@ -16,6 +23,19 @@ set (GAMEFILES
 set (JAMTEMPLATEFILES 
 	src/JamTemplate/Random.cpp
 	src/JamTemplate/TextureManager.cpp
+	src/JamTemplate/Collision.hpp
+	src/JamTemplate/Game.hpp
+	src/JamTemplate/GameObject.hpp
+	src/JamTemplate/GameState.hpp
+	src/JamTemplate/Lerp.hpp
+	src/JamTemplate/Noise.hpp
+	src/JamTemplate/ObjectGroup.hpp
+	src/JamTemplate/Random.hpp
+	src/JamTemplate/SmartSprite.hpp
+	src/JamTemplate/TextureManager.hpp
+	src/JamTemplate/Timer.hpp
+	src/JamTemplate/Transform.hpp
+	src/JamTemplate/Tween.hpp
 	)
 
 
