@@ -41,7 +41,7 @@ namespace JamTemplate {
 	private:
 		std::vector<std::weak_ptr<T> > m_objects;
 
-		void doUpdate(const float elapsed) override
+		void doUpdate(const float /*elapsed*/) override
 		{
 			m_objects.erase(std::remove_if(m_objects.begin(), m_objects.end(), 
 				[](std::weak_ptr<T> wptr) 

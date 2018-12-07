@@ -5,8 +5,6 @@
 #include <memory>
 
 namespace JamTemplate {
-
-
 	class TweenBase{
 	public:
 		using Sptr = std::shared_ptr<TweenBase>;
@@ -25,7 +23,7 @@ namespace JamTemplate {
 			m_alive = false;
 		}
 	protected:
-		float m_age;
+		float m_age{ 0.0f };
 		
 	private:
 		bool m_alive{true};
@@ -35,7 +33,6 @@ namespace JamTemplate {
 	template <class T>
 	class Tween :public TweenBase{
 	public:
-		// TODO: think about tween class
 		Tween(std::weak_ptr<T> obj, std::function<bool(std::shared_ptr<T>, float)> cb) : m_obj{ obj }, m_tweenCallback{cb}
 		{
 		}
@@ -43,7 +40,7 @@ namespace JamTemplate {
 	private:
 		std::weak_ptr<T> m_obj;
 		std::function<void(std::shared_ptr<T>, float)>  m_tweenCallback;
-		void doUpdate(float elapsed)  override
+		void doUpdate(float /*elapsed*/)  override
 		{
 			if (m_obj.expired()) {
 				cancel();

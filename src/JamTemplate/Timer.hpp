@@ -33,7 +33,7 @@ namespace JamTemplate {
 		CallbackType m_callback;
 		int m_repeat{ -1 };
 
-		virtual void doUpdate(float const elapsed) override
+		virtual void doUpdate(float const /*elapsed*/) override
 		{
 			if (getAge() >= m_timer)
 			{

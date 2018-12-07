@@ -26,7 +26,7 @@ public:
 	}
 
 private:
-	void doUpdate(float const elapsed) override
+	void doUpdate(float const /*elapsed*/) override
 	{
 	}
 

@@ -26,7 +26,7 @@ public:
 		auto b = std::make_shared<Balloon>();
 		add(b);
 		m_balloons->push_back(b);
-		auto t = std::make_shared< JamTemplate::Tween<Balloon>>(b, [](BalloonPtr b, auto age) { b->setVelocity({ 0, age }); return !(b->getPosition().y > -50); });
+		auto t = std::make_shared< JamTemplate::Tween<Balloon>>(b, [](BalloonPtr b, auto age) { b->setBalloonPos({ 0, age }); return !(b->getPosition().y > -50); });
 		add(t);
 	}
 
@@ -46,7 +46,7 @@ private:
 
 	sf::RectangleShape m_sky;
 
-	void doInternalUpdate (float const elapsed) override
+	void doInternalUpdate (float const /*elapsed*/) override
 	{
 		for (auto const& sp : *m_shots)
 		{

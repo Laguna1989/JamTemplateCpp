@@ -25,6 +25,8 @@ namespace JamTemplate {
 		void create() 
 		{ 
 			doCreate(); 
+			m_tweens.clear();
+			m_tweensToAdd.clear();
 			initialize(); 
 		};
 
@@ -36,6 +38,7 @@ namespace JamTemplate {
 		}
 		void add(TweenBase::Sptr tb)
 		{
+			std::cout << "adding tween" << std::endl;
 			m_tweensToAdd.push_back(tb);
 		}
 
@@ -57,6 +60,7 @@ namespace JamTemplate {
 
 		void updateTweens(float elapsed)
 		{
+			if (!m_hasBeenInitialized) return;
 			while (!m_tweensToAdd.empty())
 			{
 				m_tweens.emplace_back(std::move(m_tweensToAdd.back()));
@@ -118,7 +122,7 @@ namespace JamTemplate {
 			updateTweens(elapsed);
 		}
 
-		virtual void doInternalUpdate(float elapsed)
+		virtual void doInternalUpdate(float /*elapsed*/)
 		{
 		}
 

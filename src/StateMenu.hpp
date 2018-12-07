@@ -9,7 +9,7 @@ class StateMenu : public JamTemplate::GameState {
 public:
 	StateMenu() = default;
 private:
-	void doInternalUpdate (float const elapsed) override 
+	void doInternalUpdate (float const /*elapsed*/) override 
 	{
 		if (getAge() >= 0.25)
 		{

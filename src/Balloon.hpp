@@ -25,6 +25,12 @@ public:
 
 	~Balloon() = default;
 
+	void setBalloonPos(sf::Vector2f pos)
+	{
+		std::cout << pos.y << std::endl;
+		setPosition(pos);
+	}
+
 	const sf::Shape& getShape() const { return circ; }
 private:
 	void doUpdate(float const elapsed) override

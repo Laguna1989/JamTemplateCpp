@@ -63,7 +63,7 @@ namespace JamTemplate {
 		bool m_alive{ true };	// is used to sort out "dead" game objects;
 		std::weak_ptr<Game> m_game;
 
-		virtual void doUpdate(float const elapesed) {};
+		virtual void doUpdate(float const /*elapsed*/) {};
 		virtual void doDraw() const {};
 		virtual void doCreate() {};
 	};
