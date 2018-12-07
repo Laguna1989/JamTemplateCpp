@@ -1,38 +1,31 @@
 cmake_minimum_required (VERSION 2.6)
 
+#####################################################
+## Variables to be set depending on project
+#####################################################
 set (PROJECTNAME "MyAwesomeGame") 
-
-set (JAMTEMPLATEFILES 
-	src/JamTemplate/GameObject.hpp
-	src/JamTemplate/GameState.hpp
-	src/JamTemplate/Timer.hpp
-	src/JamTemplate/Transform.hpp
-	src/JamTemplate/Game.hpp
-	src/JamTemplate/Random.hpp
-	src/JamTemplate/Random.cpp
-	src/JamTemplate/Collision.hpp
-	src/JamTemplate/ObjectGroup.hpp
-	src/JamTemplate/Tween.hpp
-	src/JamTemplate/Noise.hpp
-	src/JamTemplate/Lerp.hpp
-	src/JamTemplate/SmartSprite.hpp
-	src/JamTemplate/TextureManager.hpp
-	src/JamTemplate/TextureManager.cpp
-	)
 
 set (GAMEFILES 
 	src/main.cpp
-	src/StateMenu.hpp
-	src/StateGame.hpp
-	src/Player.hpp
 	src/Player.cpp
-	src/Balloon.hpp
-	src/Shot.hpp
-	src/GameProperties.hpp
-	src/Hud.hpp
 	)	
 
+#####################################################
+## Other variables and compiler setup
+#####################################################
+set (JAMTEMPLATEFILES 
+	src/JamTemplate/Random.cpp
+	src/JamTemplate/TextureManager.cpp
+	)
+
+
 set (CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -pedantic -O3")
+
+
+#####################################################
+## Create projects and set them up accordingly
+#####################################################
 project (${PROJECTNAME})
 
 if (WIN32)
@@ -65,9 +58,11 @@ target_link_libraries(${PROJECTNAME} optimized sfml-window )
 target_link_libraries(${PROJECTNAME} optimized sfml-graphics )
 target_link_libraries(${PROJECTNAME} JamTemplate)
 
-add_dependencies(${PROJECTNAME} JamTemplate)
+target_link_libraries(${PROJECTNAME} JamTemplate)
 
+#####################################################
 ## copy sfml dlls around
+#####################################################
 if (WIN32)
     configure_file(${CMAKE_SOURCE_DIR}/ext/SFML-2.5.1_win/bin/sfml-system-2.dll ${BINARY_DIR}/ COPYONLY)
     configure_file(${CMAKE_SOURCE_DIR}/ext/SFML-2.5.1_win/bin/sfml-window-2.dll ${BINARY_DIR}/ COPYONLY)
