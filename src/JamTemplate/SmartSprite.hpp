@@ -69,6 +69,7 @@ namespace JamTemplate
 		void flash(float t, sf::Color col = sf::Color::White)
 		{
 			m_maxFlashTimer = m_flashTimer = t;
+			m_flashSprite.setColor(col);
 		}
 
 	private:

@@ -33,6 +33,16 @@ namespace JamTemplate
 			return m_shape->getFillColor();
 		}
 
+		void setPosition(sf::Vector2f const& pos)
+		{
+			m_shape->setPosition(pos);
+		}
+		const sf::Vector2f getPosition() const
+		{
+			return m_shape->getPosition();
+		}
+
+
 	private:
 		std::shared_ptr<sf::Shape> m_shape = nullptr;
 

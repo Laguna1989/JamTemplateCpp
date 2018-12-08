@@ -39,6 +39,14 @@ set (JAMTEMPLATEFILES
 	src/JamTemplate/Tween.hpp
 	)
 
+set (STRESSTESTFILES
+	src/StressTest/main.cpp
+	src/StressTest/State1.hpp
+	src/StressTest/State1.cpp
+	src/StressTest/State2.hpp
+	src/StressTest/State2.cpp
+	src/StressTest/Object.hpp
+	)
 
 set (CMAKE_CXX_STANDARD 14)
 if(WIN32)
@@ -63,6 +71,7 @@ endif (APPLE)
 
 add_library(JamTemplate ${JAMTEMPLATEFILES})
 add_executable(${PROJECTNAME}  ${GAMEFILES})
+add_executable(StressTest  ${STRESSTESTFILES})
 
 target_include_directories(JamTemplate PRIVATE ext/SFML-2.5.1_win/include)
 target_include_directories(JamTemplate PRIVATE /usr/local/Cellar/sfml/2.4.2_1/include) 
@@ -76,6 +85,7 @@ if (WIN32)
 	target_link_libraries(JamTemplate debug sfml-graphics-d )
 endif (WIN32)
 
+
 target_include_directories(${PROJECTNAME} PRIVATE ext/SFML-2.5.1_win/include)
 target_include_directories(${PROJECTNAME} PRIVATE /usr/local/Cellar/sfml/2.4.2_1/include) 
 target_link_libraries(${PROJECTNAME} optimized sfml-system )
@@ -83,7 +93,15 @@ target_link_libraries(${PROJECTNAME} optimized sfml-window )
 target_link_libraries(${PROJECTNAME} optimized sfml-graphics )
 target_link_libraries(${PROJECTNAME} JamTemplate)
 
-target_link_libraries(${PROJECTNAME} JamTemplate)
+
+
+target_include_directories(StressTest PRIVATE ext/SFML-2.5.1_win/include)
+target_include_directories(StressTest PRIVATE /usr/local/Cellar/sfml/2.4.2_1/include) 
+target_link_libraries(StressTest optimized sfml-system )
+target_link_libraries(StressTest optimized sfml-window )
+target_link_libraries(StressTest optimized sfml-graphics )
+target_link_libraries(StressTest JamTemplate)
+
 
 #####################################################
 ## copy sfml dlls around
