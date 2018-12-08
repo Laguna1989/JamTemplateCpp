@@ -24,9 +24,10 @@ namespace JamTemplate {
 	
 		void create() 
 		{ 
-			doCreate(); 
+
 			m_tweens.clear();
 			m_tweensToAdd.clear();
+			doCreate(); 
 			initialize(); 
 		};
 
@@ -38,8 +39,10 @@ namespace JamTemplate {
 		}
 		void add(TweenBase::Sptr tb)
 		{
-			std::cout << "adding tween" << std::endl;
+			//std::cout << "before: " << m_tweens.size() << " " << m_tweensToAdd.size() << "\n";
+			//std::cout << "adding tween" << std::endl;
 			m_tweensToAdd.push_back(tb);
+			//std::cout << "after: " << m_tweens.size() << " " << m_tweensToAdd.size() << "\n";
 		}
 
 		size_t getNumberOfObjects() const { return m_objects.size(); }
@@ -60,10 +63,13 @@ namespace JamTemplate {
 
 		void updateTweens(float elapsed)
 		{
+			//std::cout << m_tweens.size() << "\n";
 			if (!m_hasBeenInitialized) return;
-			while (!m_tweensToAdd.empty())
+			if (getAge() < 0.001f) return;
+			while (true)
 			{
-				m_tweens.emplace_back(std::move(m_tweensToAdd.back()));
+				if (m_tweensToAdd.size() == 0)break;
+				m_tweens.emplace_back(m_tweensToAdd.back());
 				m_tweensToAdd.pop_back();
 			}
 			if (m_tweens.empty()) return;

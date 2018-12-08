@@ -9,6 +9,7 @@
 #include "JamTemplate/Collision.hpp"
 #include "JamTemplate/ObjectGroup.hpp"
 #include "JamTemplate/SmartSprite.hpp"
+#include "JamTemplate/SmartShape.hpp"
 #include "JamTemplate/Tween.hpp"
 
 #include "Player.hpp"
@@ -26,8 +27,6 @@ public:
 		auto b = std::make_shared<Balloon>();
 		add(b);
 		m_balloons->push_back(b);
-		auto t = std::make_shared< JamTemplate::Tween<Balloon>>(b, [](BalloonPtr b, auto age) { b->setBalloonPos({ 0, age }); return !(b->getPosition().y > -50); });
-		add(t);
 	}
 
 	void spawnArrow(sf::Vector2f p)
@@ -45,6 +44,8 @@ private:
 	JamTemplate::ObjectGroup<Shot>::Sptr m_shots;
 
 	sf::RectangleShape m_sky;
+
+	JamTemplate::SmartShape::Sptr m_overlay;
 
 	void doInternalUpdate (float const /*elapsed*/) override
 	{
@@ -83,6 +84,16 @@ private:
 		add(m_balloons);
 		m_shots = std::make_shared<JamTemplate::ObjectGroup<Shot> >();
 		add(m_shots);
+		
+		using JamTemplate::TweenAlpha;
+		using JamTemplate::SmartShape;
+
+		m_overlay = std::make_shared<SmartShape>();
+		m_overlay->makeRect(sf::Vector2f{ w,h });
+		m_overlay->setColor(sf::Color{ 0,0,0 });
+		auto tw = TweenAlpha<SmartShape>::create(m_overlay, 0.5f, sf::Uint8{ 255 }, sf::Uint8{ 0 });
+		add(tw);
+
 	}
 
 	void drawSky() const
@@ -95,6 +106,7 @@ private:
 	{
 		drawSky();
 		drawObjects();
+		m_overlay->draw(getGame()->getRenderTarget());
 	}	
 };
 

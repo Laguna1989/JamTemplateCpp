@@ -32,6 +32,7 @@ set (JAMTEMPLATEFILES
 	src/JamTemplate/ObjectGroup.hpp
 	src/JamTemplate/Random.hpp
 	src/JamTemplate/SmartSprite.hpp
+	src/JamTemplate/SmartShape.hpp
 	src/JamTemplate/TextureManager.hpp
 	src/JamTemplate/Timer.hpp
 	src/JamTemplate/Transform.hpp

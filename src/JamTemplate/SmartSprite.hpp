@@ -13,12 +13,14 @@ namespace JamTemplate
 	{
 	public:
 
-		using Sptrs = std::shared_ptr<SmartSprite>;
+		using Sptr = std::shared_ptr<SmartSprite>;
 
 		void loadSprite(std::string fileName) 
 		{
 			m_sprite = sf::Sprite(TextureManager::get(fileName));
 		}
+
+		
 
 		void setPosition(sf::Vector2f pos)
 		{
@@ -30,12 +32,22 @@ namespace JamTemplate
 			return m_sprite.getPosition();
 		}
 
+		void setColor(const sf::Color& col)
+		{
+			m_sprite.setColor(col);
+		}
+		const sf::Color getColor() const
+		{
+			return m_sprite.getColor();
+		}
+
 		void draw(std::shared_ptr<sf::RenderTarget> sptr) const
 		{
 			sptr->draw(m_sprite);
 		}
 
-	//private:
+
+	private:
 		sf::Sprite m_sprite;
 
 	};
