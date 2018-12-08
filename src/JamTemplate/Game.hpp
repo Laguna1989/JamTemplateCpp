@@ -35,9 +35,21 @@ public:
 		return m_renderTarget;
 	}
 
+	void setView(std::shared_ptr<sf::View> view)
+	{
+		m_view = view;
+		if (m_renderTarget != nullptr)
+			m_renderTarget->setView(*m_view);
+	}
+	std::shared_ptr<sf::View> getView()
+	{
+		return m_view;
+	}
+
 private:
-	GameState::Sptr m_state;
+	GameState::Sptr m_state{ nullptr };
 	std::shared_ptr<sf::RenderTarget> m_renderTarget{nullptr};
+	std::shared_ptr<sf::View> m_view{ nullptr };
 
 	std::weak_ptr<Game> getPtr() {
 		return shared_from_this();

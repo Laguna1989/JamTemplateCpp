@@ -93,7 +93,6 @@ private:
 		m_overlay->setColor(sf::Color{ 0,0,0 });
 		auto tw = TweenAlpha<SmartShape>::create(m_overlay, 0.5f, sf::Uint8{ 255 }, sf::Uint8{ 0 });
 		add(tw);
-
 	}
 
 	void drawSky() const

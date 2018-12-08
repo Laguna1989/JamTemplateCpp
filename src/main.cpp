@@ -7,10 +7,17 @@
 
 int main()
 {
-	std::shared_ptr<sf::RenderWindow> window = std::make_shared<sf::RenderWindow>(sf::VideoMode(200, 200), "SFML works!");
+	auto window = std::make_shared<sf::RenderWindow>(sf::VideoMode(800, 600), "SFML works!");
+	auto renderTexture = std::make_shared<sf::RenderTexture>();
+	renderTexture->create(200, 150);
+	renderTexture->setSmooth(false);
+
+	auto view = std::make_shared<sf::View>(sf::FloatRect(0, 0, 200, 150));
+	view->setViewport(sf::FloatRect(0, 0, 1, 1));
 	JamTemplate::Game::Sptr game = std::make_shared<JamTemplate::Game>();
 	game->switchState(std::make_shared<StateMenu>());
-	game->setRenderTarget(window);
+	game->setRenderTarget(renderTexture);
+	game->setView(view);
 	window->setFramerateLimit(60);
 	sf::Clock clock;
 
@@ -29,6 +36,16 @@ int main()
 
 		window->clear();
 		game->draw();
+		// convert renderTexture to sprite and draw that. 
+	
+		const sf::Texture& texture = renderTexture->getTexture();
+		sf::Sprite spr(texture);
+		//Note: RenderTexture has a bug and is displayed upside down. 
+		//This is corrected by the following two lines
+		spr.setScale(sf::Vector2f(4, -4));
+		spr.setPosition(0, 600);
+
+		window->draw(spr);
 		window->display();
 	}
 
