@@ -16,11 +16,7 @@ class Player : public JamTemplate::GameObject, public JamTemplate::Transform {
 public:
 	Player(StateGame& sg) : m_gameState(sg)
 	{
-		m_rect = sf::RectangleShape(sf::Vector2f(24, 24));
-		m_rect.setFillColor(sf::Color::Yellow);
 		setPosition(sf::Vector2f{ 10, 20 });
-
-		
 	}
 
 	~Player() = default;
@@ -34,6 +30,7 @@ private:
 	{
 		updateShooting(elapsed);
 		updateMovement(elapsed);
+		m_sprite.update(elapsed);
 	}
 
 	void updateShooting(float elapsed)
@@ -58,13 +55,11 @@ private:
 			setVelocity({ 0,GP::playerMovementSpeed()  });
 		}
 		updateTransform(elapsed);
-		//m_rect.setPosition(getPosition());
 		m_sprite.setPosition(getPosition());
 	}
 
 	void doDraw() const override
 	{
-		//getGame()->getRenderTarget()->draw(m_rect);
 		m_sprite.draw(getGame()->getRenderTarget());
 	}
 
@@ -80,7 +75,6 @@ private:
 
 	StateGame& m_gameState;
 
-	sf::RectangleShape m_rect;
 	JamTemplate::SmartSprite m_sprite;
 };
 
