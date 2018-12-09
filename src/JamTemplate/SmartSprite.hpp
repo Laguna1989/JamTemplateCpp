@@ -6,12 +6,13 @@
 
 #include <SFML/Graphics.hpp>
 
+#include "SmartObject.hpp"
 #include "TextureManager.hpp"
-#include "Lerp.hpp"
+
 
 namespace JamTemplate
 {
-	class SmartSprite
+	class SmartSprite : public SmartObject
 	{
 	public:
 
@@ -24,60 +25,64 @@ namespace JamTemplate
 		}
 
 
-		void setPosition(sf::Vector2f pos)
+		void setPosition(sf::Vector2f const& pos) override
 		{
 			m_sprite.setPosition(pos);
 
 		}
 
-		sf::Vector2f getPosition() const
+		const sf::Vector2f getPosition() const override
 		{
 			return m_sprite.getPosition();
 		}
 
-		void setColor(const sf::Color& col)
+		void setColor(const sf::Color& col) override
 		{
 			m_sprite.setColor(col);
 		}
-		const sf::Color getColor() const
+		const sf::Color getColor() const override
 		{
 			return m_sprite.getColor();
 		}
 
-		void draw(std::shared_ptr<sf::RenderTarget> sptr) const
+		void setFlashColor(const sf::Color& col) override
 		{
-			sptr->draw(m_sprite);
-			if (m_flashTimer > 0)
-			{
-				sptr->draw(m_flashSprite);
-			}
-		}
-		
-		void update(float elapsed)
-		{
-			if (m_flashTimer > 0)
-			{
-				m_flashSprite.setPosition(getPosition());
-				m_flashTimer -= elapsed;
-				float a = Lerp::linear(255.0f, 0.0f, 1.0f - (m_flashTimer / m_maxFlashTimer));
-				
-				auto col = m_flashSprite.getColor();
-				col.a = static_cast<sf::Uint8>(a);
-				m_flashSprite.setColor(col);
-			}
-		}
-		void flash(float t, sf::Color col = sf::Color::White)
-		{
-			m_maxFlashTimer = m_flashTimer = t;
 			m_flashSprite.setColor(col);
 		}
+		const sf::Color getFlashColor() const override
+		{
+			return m_flashSprite.getColor();
+		}
+
+		sf::Transform const getTransform() const override
+		{
+			return m_sprite.getTransform();
+		}
+
+		sf::FloatRect getGlobalBounds() const override
+		{
+			return m_sprite.getGlobalBounds();
+		}
+		
 
 	private:
 		sf::Sprite m_sprite;
 		sf::Sprite m_flashSprite;
 
-		float m_flashTimer{ -1.0f };
-		float m_maxFlashTimer{ -1.0f };
+		void doUpdate(float /*elapsed*/) override
+		{
+			m_flashSprite.setPosition(getPosition());
+		}
+
+		void doDraw(std::shared_ptr<sf::RenderTarget> sptr) const override
+		{
+			sptr->draw(m_sprite);
+		}
+
+		void doDrawFlash(std::shared_ptr<sf::RenderTarget> sptr) const override
+		{
+			sptr->draw(m_flashSprite);
+		}
 	};
 }// namespace JamTemplate
 

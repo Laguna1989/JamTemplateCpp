@@ -55,7 +55,8 @@ private:
 			for (auto const& bp : *m_balloons)
 			{
 				auto b = bp.lock();
-				if (JamTemplate::Collision::CircleTest<>(b->getShape(), s->getShape()))
+				//if (JamTemplate::Collision::CircleTest<>(b->getShape(), s->getShape()))
+				if (JamTemplate::Collision::BoundingBoxTest<>(b->getShape(), s->getShape()))
 				{
 					b->kill();
 					m_hud->increaseScore();

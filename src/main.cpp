@@ -33,7 +33,7 @@ int main()
 
 		
 		game->update(elapsed.asSeconds());
-
+		renderTexture->clear();
 		window->clear();
 		game->draw();
 		// convert renderTexture to sprite and draw that. 

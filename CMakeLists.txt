@@ -31,6 +31,7 @@ set (JAMTEMPLATEFILES
 	src/JamTemplate/Noise.hpp
 	src/JamTemplate/ObjectGroup.hpp
 	src/JamTemplate/Random.hpp
+	src/JamTemplate/SmartObject.hpp
 	src/JamTemplate/SmartSprite.hpp
 	src/JamTemplate/SmartShape.hpp
 	src/JamTemplate/TextureManager.hpp

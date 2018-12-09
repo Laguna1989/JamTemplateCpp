@@ -6,9 +6,11 @@
 
 #include <SFML/Graphics.hpp>
 
+#include "SmartObject.hpp"
+
 namespace JamTemplate
 {
-	class SmartShape
+	class SmartShape : public SmartObject
 	{
 	public:
 
@@ -17,35 +19,77 @@ namespace JamTemplate
 		void makeRect(sf::Vector2f size)
 		{
 			m_shape = std::make_shared<sf::RectangleShape>(size);
+			m_flashShape = std::make_shared<sf::RectangleShape>(size);
+		}
+		void makeCircle(float radius, unsigned int points = 30U)
+		{
+			m_shape = std::make_shared<sf::CircleShape>(radius, points);
+			m_flashShape = std::make_shared<sf::CircleShape>(radius, points);
 		}
 		
-		void draw(std::shared_ptr<sf::RenderTarget> sptr) const
-		{
-			sptr->draw(*m_shape);
-		}
+		
 
-		void setColor(sf::Color const& col)
+		void setColor(sf::Color const& col) override
 		{
 			m_shape->setFillColor(col);
 		}
-		const sf::Color getColor() const
+		const sf::Color getColor() const override
 		{
 			return m_shape->getFillColor();
 		}
 
-		void setPosition(sf::Vector2f const& pos)
+		void setFlashColor(sf::Color const& col) override
+		{
+			m_flashShape->setFillColor(col);
+		}
+		const sf::Color getFlashColor() const override
+		{
+			return m_flashShape->getFillColor();
+		}
+
+
+		void setPosition(sf::Vector2f const& pos) override
 		{
 			m_shape->setPosition(pos);
 		}
-		const sf::Vector2f getPosition() const
+		const sf::Vector2f getPosition() const override
 		{
 			return m_shape->getPosition();
 		}
 
+		sf::Transform const getTransform() const override
+		{
+			return m_shape->getTransform();
+		}
+		sf::FloatRect getGlobalBounds() const override
+		{
+			return m_shape->getGlobalBounds();
+		}
+
+		std::shared_ptr<sf::Shape> getShape() 
+		{
+			return m_shape;
+		}
 
 	private:
 		std::shared_ptr<sf::Shape> m_shape = nullptr;
+		std::shared_ptr<sf::Shape> m_flashShape = nullptr;
 
+
+		void doDraw(std::shared_ptr<sf::RenderTarget> sptr) const override
+		{
+			sptr->draw(*m_shape);
+		}
+
+		void doDrawFlash(std::shared_ptr<sf::RenderTarget> sptr) const override
+		{
+			sptr->draw(*m_flashShape);
+		}
+
+		void doUpdate(float /*elapsed*/) override
+		{
+			m_flashShape->setPosition(getPosition());
+		}
 	};
 }// namespace JamTemplate
 

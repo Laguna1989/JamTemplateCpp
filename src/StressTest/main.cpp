@@ -52,7 +52,7 @@ int main()
 		out << averageFPS << "\n";
 		
 		
-		
+		renderTexture->clear();
 		window->clear();
 		game->draw();
 		// convert renderTexture to sprite and draw that. 

@@ -15,18 +15,21 @@ public:
 	{
 		setPosition(p);
 		setVelocity(sf::Vector2f{ GP::shotMovementSpeed(),0 });
-		m_rect = sf::RectangleShape(sf::Vector2f(24, 4));
-		m_rect.setFillColor(sf::Color::Blue);
+		
+		
+		m_rect = std::make_shared<JamTemplate::SmartShape>();
+		m_rect->makeRect(sf::Vector2f{ 24, 4 });
+		m_rect->setColor(sf::Color::Blue);
 	}
 
 	~Shot() = default;
 
-	const sf::Shape& getShape() const { return m_rect; }
+	const JamTemplate::SmartShape::Sptr getShape() const { return m_rect; }
 private:
 	void doUpdate(float const elapsed) override
 	{
 		updateTransform(elapsed);
-		m_rect.setPosition(getPosition());
+		m_rect->setPosition(getPosition());
 		if (getPosition().x > getGame()->getRenderTarget()->getSize().x + 50) 
 		{
 			kill();
@@ -35,11 +38,11 @@ private:
 
 	void doDraw() const override
 	{
-		getGame()->getRenderTarget()->draw(m_rect);
+		m_rect->draw(getGame()->getRenderTarget());
 	}
 
 
-	sf::RectangleShape m_rect;
+	JamTemplate::SmartShape::Sptr m_rect;
 };
 
 using ShotPtr = std::shared_ptr<Shot>;

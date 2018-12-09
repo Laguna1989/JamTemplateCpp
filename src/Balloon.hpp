@@ -10,12 +10,20 @@
 #include "JamTemplate/Game.hpp"
 #include "JamTemplate/Random.hpp"
 
+#include "JamTemplate/SmartShape.hpp"
+
+
 class Balloon : public JamTemplate::GameObject, public JamTemplate::Transform {
 public:
+	using Sptr = std::shared_ptr<Balloon>;
+
 	Balloon()
 	{
-		circ = sf::CircleShape(12);
-		circ.setFillColor(sf::Color::Red);
+		
+		m_shape = std::make_shared<JamTemplate::SmartShape>();
+		m_shape->makeCircle(12);
+		m_shape->setColor(sf::Color::Red);
+
 		float x = JamTemplate::Random::getFloat(30, 200-24);
 		setPosition({ x, 200 });
 		setVelocity({0, -GP::balloonMoveSpeed()});
@@ -25,18 +33,12 @@ public:
 
 	~Balloon() = default;
 
-	void setBalloonPos(sf::Vector2f pos)
-	{
-		std::cout << pos.y << std::endl;
-		setPosition(pos);
-	}
-
-	const sf::Shape& getShape() const { return circ; }
+	const std::shared_ptr<sf::Shape> getShape() const { return m_shape->getShape(); }
 private:
 	void doUpdate(float const elapsed) override
 	{
 		updateTransform(elapsed);
-		circ.setPosition(getPosition());
+		m_shape->setPosition(getPosition());
 
 		if (getPosition().y < -50)
 		{
@@ -46,12 +48,10 @@ private:
 
 	void doDraw() const override
 	{
-		getGame()->getRenderTarget()->draw(circ);
+		m_shape->draw(getGame()->getRenderTarget());
 	}
 
-	sf::CircleShape circ;
+	JamTemplate::SmartShape::Sptr m_shape;
 };
-
-using BalloonPtr = std::shared_ptr<Balloon>;
 
 #endif
