@@ -8,6 +8,8 @@
 #include "JamTemplate/Game.hpp"
 #include "JamTemplate/Transform.hpp"
 #include "JamTemplate/SmartSprite.hpp"
+#include "JamTemplate/Animation.hpp"
+#include "JamTemplate/MathHelper.hpp"
 
 #include "GameProperties.hpp"
 class StateGame;
@@ -69,13 +71,16 @@ private:
 		float h = static_cast<float>(getGame()->getRenderTarget()->getSize().y);
 		setBoundsPosition(sf::FloatRect(0, 0, w, h-24));
 
-		m_sprite.loadSprite("assets/player.png");
+		/*m_sprite.loadSprite("assets/player.png");*/
+		using JamTemplate::MathHelper;
+		m_sprite.add("assets/coin.png", "idle", sf::Vector2u{ 16,16 }, MathHelper::vectorBetween(0U,11U), 0.15f);
+		m_sprite.play("idle");
 	}
 	void shoorArrow();
 
 	StateGame& m_gameState;
 
-	JamTemplate::SmartSprite m_sprite;
+	JamTemplate::Animation m_sprite;
 };
 
 #endif

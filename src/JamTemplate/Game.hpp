@@ -109,7 +109,6 @@ private:
 		
 		auto v = getView();
 		v->move(m_shakeOffset.x, m_shakeOffset.y);
-		std::cout << v->getCenter().x << std::endl;
 		setView(v);
 
 	}

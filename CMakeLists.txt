@@ -38,6 +38,8 @@ set (JAMTEMPLATEFILES
 	src/JamTemplate/Timer.hpp
 	src/JamTemplate/Transform.hpp
 	src/JamTemplate/Tween.hpp
+	src/JamTemplate/Animation.hpp
+	src/JamTemplate/MathHelper.hpp
 	)
 
 set (STRESSTESTFILES

@@ -52,6 +52,12 @@ namespace JamTemplate
 		virtual void setPosition(sf::Vector2f const& pos) = 0;
 		virtual const sf::Vector2f getPosition() const = 0;
 
+		virtual sf::Transform const getTransform() const = 0;
+		virtual sf::FloatRect getGlobalBounds() const = 0;
+
+		virtual void setFlashColor(sf::Color const& col) = 0;
+		virtual const sf::Color getFlashColor() const = 0;
+
 	protected:
 		sf::Vector2f getShakeOffset() const
 		{
@@ -76,13 +82,6 @@ namespace JamTemplate
 		// things to take care of:
 		//   - make sure flash object and normal object are at the same position
 		virtual void doUpdate(float elapsed) = 0;
-
-		virtual sf::Transform const getTransform() const = 0;
-		virtual sf::FloatRect getGlobalBounds() const = 0;
-		
-
-		virtual void setFlashColor(sf::Color const& col) = 0;
-		virtual const sf::Color getFlashColor() const = 0;
 
 		void updateFlash(float elapsed)
 		{

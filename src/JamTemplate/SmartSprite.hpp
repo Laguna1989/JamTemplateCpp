@@ -24,6 +24,12 @@ namespace JamTemplate
 			m_flashSprite = sf::Sprite{ TextureManager::get(TextureManager::getFlashName(fileName)) };
 		}
 
+		void loadSprite(std::string fileName, sf::IntRect rect )
+		{
+			m_sprite = sf::Sprite{ TextureManager::get(fileName), rect};
+			m_flashSprite = sf::Sprite{ TextureManager::get(TextureManager::getFlashName(fileName)), rect };
+		}
+
 
 		void setPosition(sf::Vector2f const& pos) override
 		{
