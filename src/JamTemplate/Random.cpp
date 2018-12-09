@@ -21,3 +21,15 @@ float Random::getFloatGauss(float mu, float sigma )
 	std::normal_distribution<float> dist(mu,sigma);
 	return dist(m_engine);
 }
+bool Random::getChance(float c)
+{
+	return (getFloat(0.0f, 1.0f) <= c);
+}
+
+sf::Color const Random::getRandomColor()
+{
+	sf::Uint8 r = static_cast<sf::Uint8>(getInt(0, 255));
+	sf::Uint8 g = static_cast<sf::Uint8>(getInt(0, 255));
+	sf::Uint8 b = static_cast<sf::Uint8>(getInt(0, 255));
+	return sf::Color{ r,g,b };
+}

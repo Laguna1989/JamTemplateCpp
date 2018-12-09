@@ -47,13 +47,14 @@ namespace JamTemplate
 			return m_flashShape->getFillColor();
 		}
 
-
 		void setPosition(sf::Vector2f const& pos) override
 		{
-			m_shape->setPosition(pos);
+			m_position = pos;
+			
 		}
 		const sf::Vector2f getPosition() const override
 		{
+			return m_position;
 			return m_shape->getPosition();
 		}
 
@@ -75,6 +76,7 @@ namespace JamTemplate
 		std::shared_ptr<sf::Shape> m_shape = nullptr;
 		std::shared_ptr<sf::Shape> m_flashShape = nullptr;
 
+		sf::Vector2f m_position{0,0};
 
 		void doDraw(std::shared_ptr<sf::RenderTarget> sptr) const override
 		{
@@ -88,7 +90,8 @@ namespace JamTemplate
 
 		void doUpdate(float /*elapsed*/) override
 		{
-			m_flashShape->setPosition(getPosition());
+			m_shape->setPosition(getPosition() + getShakeOffset());
+			m_flashShape->setPosition(getPosition() + getShakeOffset());
 		}
 	};
 }// namespace JamTemplate

@@ -19,16 +19,16 @@ public:
 
 private:
 	JamTemplate::SmartShape::Sptr m_overlay;
-	sf::RectangleShape m_sky;
+	JamTemplate::SmartShape::Sptr m_sky;
 
 	void doInternalUpdate(float const /*elapsed*/) override;
 
 	void doCreate() override
 	{
 
-		m_sky = sf::RectangleShape(sf::Vector2f(200,150));
-		m_sky.setFillColor(sf::Color{ 178, 255,255 });
-
+		m_sky = std::make_shared< JamTemplate::SmartShape>();
+		m_sky->makeRect(sf::Vector2f(200, 150));
+		m_sky->setColor(sf::Color{ 178, 255,255 });
 
 		using JamTemplate::SmartShape;
 		using JamTemplate::TweenAlpha;
@@ -42,8 +42,7 @@ private:
 
 	void drawSky() const
 	{
-		getGame()->getRenderTarget()->draw(m_sky);
-
+		m_sky->draw(getGame()->getRenderTarget());
 	}
 
 	void doDraw() const override

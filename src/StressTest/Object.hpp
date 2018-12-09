@@ -19,26 +19,38 @@ public:
 	{
 		m_shape = std::make_shared<JamTemplate::SmartShape>();
 		m_shape->makeRect(sf::Vector2f(10, 10));
-		m_shape->setColor(sf::Color::Red);
+		m_shape->setColor(JamTemplate::Random::getRandomColor());
 
 		float x = JamTemplate::Random::getFloat(30, 200 - 24);
-		setPosition({ x, 200 });
-		setVelocity({ 0, -50 });
-		setAcceleration({ 0, -50 / 2 });
-		setBoundsVelocity(sf::FloatRect(-50, -50, 50 * 2, 50 * 2));
+		float y = JamTemplate::Random::getFloat(30, 150 - 24);
+		
+		float vx = JamTemplate::Random::getFloatGauss(0,50);
+		float vy = JamTemplate::Random::getFloatGauss(0, 50);
 
-
+		setPosition({ x, y });
+		setVelocity({ vx,vy });
+		//setAcceleration({ 0, -50 / 2 });
+		setBoundsPosition(sf::FloatRect{ 0,0,200-10,150-10 });
+		
 	}
 
 	~Object() = default;
 
+	void Flash()
+	{
+		m_shape->flash(0.1f);
+	}
+	void Shake()
+	{
+		m_shape->shake(0.5f, 2.0f,0.05f);
+	}
 	
 private:
 	void doUpdate(float const elapsed) override
 	{
 		updateTransform(elapsed);
 		m_shape->setPosition(getPosition());
-
+		m_shape->update(elapsed);
 		if (getPosition().y < -50)
 		{
 			kill();

@@ -17,12 +17,15 @@ private:
 
 	void doCreate()
 	{
-		for (unsigned int i = 0; i != 500; ++i)
+		unsigned int N = 1;
+		for (unsigned int i = 0; i != N; ++i)
 		{
 			Object::Sptr bp = std::make_shared<Object>();
 			add(bp);
 
-			//JamTemplate::Timer::Sptr t = std::make_shared<JamTemplate::Timer>(JamTemplate::Random::getFloat(0.25, 7), [bp]() {bp-})
+			JamTemplate::Timer::Sptr t = std::make_shared<JamTemplate::Timer>(JamTemplate::Random::getFloat(0.125, 3), [bp]() {bp->Flash(); bp->Shake(); });
+			add(t);
+
 		}
 	}
 };

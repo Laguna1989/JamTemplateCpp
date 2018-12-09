@@ -7,6 +7,7 @@
 #include <SFML/Graphics.hpp>
 
 #include "Lerp.hpp"
+#include "Random.hpp"
 
 namespace JamTemplate
 {
@@ -31,8 +32,16 @@ namespace JamTemplate
 			setFlashColor(col);
 		}
 
+		void shake(float t, float strength, float shakeInterval = 0.05f)
+		{
+			m_shakeTimer = m_maxShakeTimer = t;
+			m_shakeStrength = strength;
+			m_shakeInterval = m_shakeIntervalMax = shakeInterval;
+		}
+
 		void update(float elapsed)
 		{
+			updateShake(elapsed);
 			updateFlash(elapsed);
 			doUpdate(elapsed);
 		}
@@ -43,11 +52,23 @@ namespace JamTemplate
 		virtual void setPosition(sf::Vector2f const& pos) = 0;
 		virtual const sf::Vector2f getPosition() const = 0;
 
+	protected:
+		sf::Vector2f getShakeOffset() const
+		{
+			return m_shakeOffset;
+		}
 
 	private:
 
 		float m_flashTimer{ -1.0f };
 		float m_maxFlashTimer{ -1.0f };
+
+		float m_shakeTimer{ -1.0f };
+		float m_maxShakeTimer{ -1.0f };
+		float m_shakeStrength{ 0.0f };
+		float m_shakeInterval{ 0.0f };
+		float m_shakeIntervalMax{0.0f};
+		sf::Vector2f m_shakeOffset{ 0,0 };
 
 		virtual void doDraw(std::shared_ptr<sf::RenderTarget> sptr) const = 0;
 		virtual void doDrawFlash(std::shared_ptr<sf::RenderTarget> sptr) const = 0;
@@ -75,6 +96,26 @@ namespace JamTemplate
 				setFlashColor(col);
 			}
 		}
+
+		void updateShake(float elapsed)
+		{
+			if (m_shakeTimer > 0)
+			{
+				m_shakeTimer -= elapsed;
+				m_shakeInterval -= elapsed;
+				if (m_shakeInterval <= 0)
+				{
+					m_shakeInterval = m_shakeIntervalMax;
+					m_shakeOffset.x = Random::getFloat(-m_shakeStrength, m_shakeStrength);
+					m_shakeOffset.y = Random::getFloat(-m_shakeStrength, m_shakeStrength);
+				}
+			}
+			else
+			{
+				m_shakeOffset.x = m_shakeOffset.y = 0;
+			}
+		}
+
 	};
 }// namespace JamTemplate
 
