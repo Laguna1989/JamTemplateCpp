@@ -19,18 +19,9 @@ private:
 	void doCreate()
 	{
 		using JamTemplate::Timer;
-		unsigned int N = 5;
-		for (unsigned int i = 0; i != N; ++i)
-		{
-			Object::Sptr bp = std::make_shared<Object>();
-			add(bp);
-
-			Timer::Sptr t = std::make_shared<Timer>(JamTemplate::Random::getFloat(0.125, 3), [bp]() {bp->Flash();  });
-			add(t);
-
-		}
-
-		JamTemplate::Timer::Sptr  t = std::make_shared<Timer>(2.5f, [this]() {getGame()->Shake(0.5f,2.0f); });
+		
+		getGame()->shake(0.5f, 2.0f);
+		JamTemplate::Timer::Sptr  t = std::make_shared<Timer>(0.6f, [this]() {getGame()->shake(0.5f,2.0f); });
 		add(t);
 
 	}

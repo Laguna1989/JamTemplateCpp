@@ -25,6 +25,7 @@ public:
 		m_state = newState;
 		m_state->setGameInstance(getPtr());
 		m_state->create();
+		resetShake();
 	}
 
 	void setRenderTarget(std::shared_ptr<sf::RenderTarget> rt)
@@ -47,7 +48,7 @@ public:
 		return m_view;
 	}
 
-	void Shake(float t, float strength, float shakeInterval = 0.005f)
+	void shake(float t, float strength, float shakeInterval = 0.005f)
 	{
 		m_shakeTimer = t;
 		m_shakeStrength = strength;
@@ -111,6 +112,17 @@ private:
 		v->move(m_shakeOffset.x, m_shakeOffset.y);
 		setView(v);
 
+	}
+
+	void resetShake()
+	{
+		if (m_shakeOffset.x != 0 || m_shakeOffset.y != 0)
+		{
+			getView()->move(-m_shakeOffset.x, -m_shakeOffset.y);
+		}
+		m_shakeOffset.x = m_shakeOffset.y = 0;
+		m_shakeTimer = -1;
+		m_shakeStrength = 0;
 	}
 
 };
