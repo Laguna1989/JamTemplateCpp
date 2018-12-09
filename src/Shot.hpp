@@ -30,6 +30,7 @@ private:
 	{
 		updateTransform(elapsed);
 		m_rect->setPosition(getPosition());
+		m_rect->update(elapsed);
 		if (getPosition().x > getGame()->getRenderTarget()->getSize().x + 50) 
 		{
 			kill();

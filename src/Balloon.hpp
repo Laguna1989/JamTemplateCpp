@@ -38,7 +38,9 @@ private:
 	void doUpdate(float const elapsed) override
 	{
 		updateTransform(elapsed);
+		
 		m_shape->setPosition(getPosition());
+		m_shape->update(elapsed);
 
 		if (getPosition().y < -50)
 		{
