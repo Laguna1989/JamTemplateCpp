@@ -27,13 +27,12 @@ namespace JamTemplate
 
 		void setPosition(sf::Vector2f const& pos) override
 		{
-			m_sprite.setPosition(pos);
-
+			m_position = pos;
 		}
 
 		const sf::Vector2f getPosition() const override
 		{
-			return m_sprite.getPosition();
+			return m_position;
 		}
 
 		void setColor(const sf::Color& col) override
@@ -69,9 +68,12 @@ namespace JamTemplate
 		sf::Sprite m_sprite;
 		sf::Sprite m_flashSprite;
 
+		sf::Vector2f m_position{0,0};
+
 		void doUpdate(float /*elapsed*/) override
 		{
-			m_flashSprite.setPosition(getPosition());
+			m_sprite.setPosition(m_position + getShakeOffset());
+			m_flashSprite.setPosition(m_position + getShakeOffset());
 		}
 
 		void doDraw(std::shared_ptr<sf::RenderTarget> sptr) const override

@@ -3,6 +3,7 @@
 #include <iostream>
 #include "GameState.hpp"
 #include "GameObject.hpp"
+#include "Random.hpp"
 
 namespace JamTemplate
 {
@@ -46,10 +47,23 @@ public:
 		return m_view;
 	}
 
+	void Shake(float t, float strength, float shakeInterval = 0.005f)
+	{
+		m_shakeTimer = t;
+		m_shakeStrength = strength;
+		m_shakeInterval = m_shakeIntervalMax = shakeInterval;
+	}
+
 private:
 	GameState::Sptr m_state{ nullptr };
 	std::shared_ptr<sf::RenderTarget> m_renderTarget{nullptr};
 	std::shared_ptr<sf::View> m_view{ nullptr };
+
+	float m_shakeTimer{ -1.0f };
+	float m_shakeStrength{ 0.0f };
+	float m_shakeInterval{ 0.0f };
+	float m_shakeIntervalMax{ 0.0f };
+	sf::Vector2f m_shakeOffset{ 0,0 };
 
 	std::weak_ptr<Game> getPtr() {
 		return shared_from_this();
@@ -58,6 +72,7 @@ private:
 	{
 		if (m_state == nullptr)
 			return;
+		updateShake(elapsed);
 		m_state->update(elapsed);
 	};
 
@@ -67,6 +82,37 @@ private:
 			return;
 		m_state->draw();
 	};
+
+	void updateShake(float elapsed)
+	{
+		if (m_shakeOffset.x != 0 || m_shakeOffset.y != 0)
+		{
+			getView()->move(-m_shakeOffset.x, -m_shakeOffset.y);
+		}
+
+		if (m_shakeTimer > 0)
+		{
+			
+			m_shakeTimer -= elapsed;
+			m_shakeInterval -= elapsed;
+			if (m_shakeInterval < 0)
+			{
+				m_shakeInterval = m_shakeIntervalMax;
+				m_shakeOffset.x = JamTemplate::Random::getFloat(-m_shakeStrength, m_shakeStrength);
+				m_shakeOffset.y = JamTemplate::Random::getFloat(-m_shakeStrength, m_shakeStrength);
+			}
+		}
+		else
+		{
+			m_shakeOffset.x = m_shakeOffset.y = 0;
+		}
+		
+		auto v = getView();
+		v->move(m_shakeOffset.x, m_shakeOffset.y);
+		std::cout << v->getCenter().x << std::endl;
+		setView(v);
+
+	}
 
 };
 

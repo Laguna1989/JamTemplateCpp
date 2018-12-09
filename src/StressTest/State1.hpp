@@ -6,6 +6,7 @@
 #include "../JamTemplate/Game.hpp"
 #include "../JamTemplate/Timer.hpp"
 #include "../JamTemplate/SmartShape.hpp"
+#include "../JamTemplate/Random.hpp"
 
 #include "Object.hpp"
 
@@ -17,16 +18,21 @@ private:
 
 	void doCreate()
 	{
-		unsigned int N = 1;
+		using JamTemplate::Timer;
+		unsigned int N = 5;
 		for (unsigned int i = 0; i != N; ++i)
 		{
 			Object::Sptr bp = std::make_shared<Object>();
 			add(bp);
 
-			JamTemplate::Timer::Sptr t = std::make_shared<JamTemplate::Timer>(JamTemplate::Random::getFloat(0.125, 3), [bp]() {bp->Flash(); bp->Shake(); });
+			Timer::Sptr t = std::make_shared<Timer>(JamTemplate::Random::getFloat(0.125, 3), [bp]() {bp->Flash();  });
 			add(t);
 
 		}
+
+		JamTemplate::Timer::Sptr  t = std::make_shared<Timer>(2.5f, [this]() {getGame()->Shake(0.5f,2.0f); });
+		add(t);
+
 	}
 };
 

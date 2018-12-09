@@ -34,7 +34,7 @@ namespace JamTemplate
 
 		void shake(float t, float strength, float shakeInterval = 0.05f)
 		{
-			m_shakeTimer = m_maxShakeTimer = t;
+			m_shakeTimer = t;
 			m_shakeStrength = strength;
 			m_shakeInterval = m_shakeIntervalMax = shakeInterval;
 		}
@@ -64,7 +64,6 @@ namespace JamTemplate
 		float m_maxFlashTimer{ -1.0f };
 
 		float m_shakeTimer{ -1.0f };
-		float m_maxShakeTimer{ -1.0f };
 		float m_shakeStrength{ 0.0f };
 		float m_shakeInterval{ 0.0f };
 		float m_shakeIntervalMax{0.0f};
