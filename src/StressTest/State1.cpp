@@ -15,8 +15,11 @@ void State1::doInternalUpdate(float const /*elapsed*/)
 		Timer::Sptr t = std::make_shared<Timer>(JamTemplate::Random::getFloat(0.125, 3), [bp]() {bp->Flash();});
 		add(t);
 
-		auto tw = JamTemplate::TweenAlpha<JamTemplate::Animation>::create(bp->getAnimation(), 0.9, 255, 0);
-		add(tw);
+		auto tw = JamTemplate::TweenAlpha<JamTemplate::Animation>::create(bp->getAnimation(), 0.9f, 255, 0);
+		//add(tw);
+		
+		auto tw2 = JamTemplate::TweenColor<JamTemplate::Animation>::create(bp->getAnimation(), 0.4f, sf::Color::White, sf::Color::Red);
+		add(tw2);
 	}
 
 
