@@ -69,6 +69,15 @@ namespace JamTemplate
 			return m_sprite.getGlobalBounds();
 		}
 		
+		void setScale(sf::Vector2f const& scale)
+		{
+			m_sprite.setScale(scale);
+		}
+		const sf::Vector2f getScale()
+		{
+			return m_sprite.getScale();
+		}
+
 
 	private:
 		sf::Sprite m_sprite;
@@ -80,6 +89,7 @@ namespace JamTemplate
 		{
 			m_sprite.setPosition(m_position + getShakeOffset());
 			m_flashSprite.setPosition(m_position + getShakeOffset());
+			m_flashSprite.setScale(m_sprite.getScale());
 		}
 
 		void doDraw(std::shared_ptr<sf::RenderTarget> sptr) const override

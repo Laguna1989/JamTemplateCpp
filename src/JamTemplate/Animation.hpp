@@ -120,6 +120,28 @@ namespace JamTemplate {
 			return sf::Color{};
 		}
 
+		virtual void setScale(sf::Vector2f const& scale)
+		{
+			for (auto& kvp : m_frames)
+			{
+				for (auto& spr : kvp.second)
+				{
+					spr->setScale(scale);
+				}
+			}
+		}
+		virtual const sf::Vector2f getScale()
+		{
+			for (auto& kvp : m_frames)
+			{
+				for (auto const& sptr : kvp.second)
+				{
+					return sptr->getScale();
+				}
+			}
+			return sf::Vector2f{1,1};
+		}
+
 	private:
 		std::map<std::string, std::vector<SmartSprite::Sptr>> m_frames;
 		std::map<std::string, float> m_time;

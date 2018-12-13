@@ -72,6 +72,15 @@ namespace JamTemplate
 			return m_shape;
 		}
 
+		void setScale(sf::Vector2f const& scale)
+		{
+			m_shape->setScale(scale);
+		}
+		const sf::Vector2f getScale()
+		{
+			return m_shape->getScale();
+		}
+
 	private:
 		std::shared_ptr<sf::Shape> m_shape = nullptr;
 		std::shared_ptr<sf::Shape> m_flashShape = nullptr;
@@ -92,6 +101,7 @@ namespace JamTemplate
 		{
 			m_shape->setPosition(getPosition() + getShakeOffset());
 			m_flashShape->setPosition(getPosition() + getShakeOffset());
+			m_flashShape->setScale(m_shape->getScale());
 		}
 	};
 }// namespace JamTemplate

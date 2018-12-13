@@ -111,7 +111,6 @@ namespace JamTemplate {
 		
 	};
 
-
 	template <class T>
 	class TweenColor : public Tween<T> {
 	public:
@@ -125,13 +124,13 @@ namespace JamTemplate {
 		TweenColor(std::weak_ptr<T> obj, float time, sf::Color valueStart, sf::Color valueEnd) : Tween<T>{ obj, [this](auto sptr, auto age)
 		{
 			auto col = sptr->getColor();
-			
+
 			float val = age / m_totalTime;
 
 			float r = Lerp::linear(static_cast<float>(m_initialValue.r), static_cast<float>(m_finalValue.r), val);
 			float g = Lerp::linear(static_cast<float>(m_initialValue.g), static_cast<float>(m_finalValue.g), val);
 			float b = Lerp::linear(static_cast<float>(m_initialValue.b), static_cast<float>(m_finalValue.b), val);
-			
+
 			col.r = static_cast<sf::Uint8>(r);
 			col.g = static_cast<sf::Uint8>(g);
 			col.b = static_cast<sf::Uint8>(b);
@@ -148,8 +147,43 @@ namespace JamTemplate {
 	private:
 		float m_totalTime{ 1.0f };
 		sf::Color m_initialValue{ };
-		sf::Color m_finalValue  { };
+		sf::Color m_finalValue{ };
+	};
 
+
+	template <class T>
+	class TweenScale : public Tween<T> {
+	public:
+		// Tween scale from valueStart to valueEnd of obj withtin time
+		static Tween::Sptr create(std::weak_ptr<T> obj, float time, sf::Vector2f valueStart, sf::Vector2f valueEnd)
+		{
+			return std::make_shared<TweenScale>(obj, time, valueStart, valueEnd);
+		}
+
+		// Tween scale from valueStart to valueEnd of obj withtin time
+		TweenScale(std::weak_ptr<T> obj, float time, sf::Vector2f valueStart, sf::Vector2f valueEnd) : Tween<T>{ obj, [this](auto sptr, auto age)
+		{
+			auto scale = sptr->getScale();
+			
+			float val = age / m_totalTime;
+
+			scale.x = Lerp::linear(static_cast<float>(m_initialValue.x), static_cast<float>(m_finalValue.x), val);
+			scale.y = Lerp::linear(static_cast<float>(m_initialValue.y), static_cast<float>(m_finalValue.y), val);
+			
+			sptr->setScale(scale);
+			return (age < m_totalTime);
+		} }
+		{
+			std::shared_ptr<T> sptr = nullptr;
+			getObject(sptr);
+			m_totalTime = time;
+			m_initialValue = valueStart;
+			m_finalValue = valueEnd;
+		}
+	private:
+		float m_totalTime{ 1.0f };
+		sf::Vector2f m_initialValue{ };
+		sf::Vector2f m_finalValue  { };
 	};
 
 } // namespace JamTemplate

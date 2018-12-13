@@ -58,6 +58,9 @@ namespace JamTemplate
 		virtual void setFlashColor(sf::Color const& col) = 0;
 		virtual const sf::Color getFlashColor() const = 0;
 
+		virtual void setScale(sf::Vector2f const& scale) = 0;
+		virtual const sf::Vector2f getScale() = 0;
+
 	protected:
 		sf::Vector2f getShakeOffset() const
 		{
