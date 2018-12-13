@@ -20,7 +20,11 @@ namespace JamTemplate {
 		using Sptr = std::shared_ptr<GameState>;
 		GameState() = default;
 
-		virtual  ~GameState() = default;
+		virtual  ~GameState()
+		{
+			m_tweens.clear();
+			m_tweensToAdd.clear();
+		};
 	
 		void create() 
 		{ 

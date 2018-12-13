@@ -22,10 +22,8 @@ public:
 			std::cerr << "cannot switch to nullptr state!" << std::endl;
 			return;
 		}
-		m_state = newState;
-		m_state->setGameInstance(getPtr());
-		m_state->create();
-		resetShake();
+		//m_state = newState;
+		m_nextState = newState;
 	}
 
 	void setRenderTarget(std::shared_ptr<sf::RenderTarget> rt)
@@ -57,6 +55,7 @@ public:
 
 private:
 	GameState::Sptr m_state{ nullptr };
+	GameState::Sptr m_nextState{ nullptr };
 	std::shared_ptr<sf::RenderTarget> m_renderTarget{nullptr};
 	std::shared_ptr<sf::View> m_view{ nullptr };
 
@@ -71,8 +70,14 @@ private:
 	}
 	virtual void doUpdate(float const elapsed) override
 	{
+		if (m_nextState != nullptr)
+		{
+			doSwitchState();
+			return;
+		}
 		if (m_state == nullptr)
 			return;
+		
 		updateShake(elapsed);
 		m_state->update(elapsed);
 	};
@@ -123,6 +128,16 @@ private:
 		m_shakeOffset.x = m_shakeOffset.y = 0;
 		m_shakeTimer = -1;
 		m_shakeStrength = 0;
+	}
+
+	void doSwitchState()
+	{
+		m_state = m_nextState;
+		m_nextState = nullptr;
+
+		m_state->setGameInstance(getPtr());
+		m_state->create();
+		resetShake();
 	}
 
 };
