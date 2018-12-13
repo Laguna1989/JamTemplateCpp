@@ -61,7 +61,7 @@ private:
 		updateTransform(elapsed);
 		m_shape->setPosition(getPosition());
 		m_shape->update(elapsed);
-		if (getAge() > 0.75) kill();
+		if (getAge() > 0.9) kill();
 	}
 
 	void doDraw() const override

@@ -15,6 +15,7 @@ namespace JamTemplate {
 		void update(float elapsed)
 		{
 			m_age += elapsed;
+			if (m_age < m_startDelay) return;
 			doUpdate(elapsed);
 		}
 		bool isAlive()
@@ -25,11 +26,20 @@ namespace JamTemplate {
 		{
 			m_alive = false;
 		}
+		void setStartDelay(float delay)
+		{
+			m_startDelay = delay;
+		}
+		float getStartDelay() const
+		{
+			return m_startDelay;
+		}
 	protected:
 		
-		float getAge() const { return m_age; }
+		float getAge() const { return m_age - m_startDelay; }
 	private:
 		float m_age{ 0.0f };
+		float m_startDelay{};
 		bool m_alive{true};
 		virtual void doUpdate(float elapsed) = 0;
 	};

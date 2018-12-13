@@ -19,6 +19,7 @@ void State1::doInternalUpdate(float const /*elapsed*/)
 		//add(tw);
 		
 		auto tw2 = JamTemplate::TweenColor<JamTemplate::Animation>::create(bp->getAnimation(), 0.4f, sf::Color::White, sf::Color::Red);
+		tw2->setStartDelay(0.4f);
 		add(tw2);
 	}
 
