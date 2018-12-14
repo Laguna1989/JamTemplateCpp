@@ -43,10 +43,7 @@ namespace JamTemplate {
 		}
 		void add(TweenBase::Sptr tb)
 		{
-			//std::cout << "before: " << m_tweens.size() << " " << m_tweensToAdd.size() << "\n";
-			//std::cout << "adding tween" << std::endl;
 			m_tweensToAdd.push_back(tb);
-			//std::cout << "after: " << m_tweens.size() << " " << m_tweensToAdd.size() << "\n";
 		}
 
 		size_t getNumberOfObjects() const { return m_objects.size(); }

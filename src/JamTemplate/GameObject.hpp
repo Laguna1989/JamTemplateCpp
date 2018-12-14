@@ -18,6 +18,13 @@ namespace JamTemplate {
 
 		virtual  ~GameObject() = default;
 
+		/// GameObject should never be copied
+		GameObject(GameObject const&) = delete;
+		GameObject& operator= (GameObject const&) = delete;
+
+		GameObject(GameObject&&) = default;
+		GameObject& operator= (GameObject&&) = default;
+
 		void create()
 		{
 			std::shared_ptr<Game> g;

@@ -55,7 +55,6 @@ namespace JamTemplate
 		const sf::Vector2f getPosition() const override
 		{
 			return m_position;
-			return m_shape->getPosition();
 		}
 
 		sf::Transform const getTransform() const override

@@ -11,7 +11,19 @@ namespace JamTemplate {
 	class TweenBase{
 	public:
 		using Sptr = std::shared_ptr<TweenBase>;
+
+		TweenBase() = default;
+		virtual ~TweenBase() = default;
+		
+		/// TweenBase should never be copied!
+		TweenBase(TweenBase const&) = delete;
+		TweenBase& operator= (TweenBase const&) = delete;
+
+		TweenBase(TweenBase&&) = default;
+		TweenBase& operator= (TweenBase&&) = default;
+		
 		void cancel() { kill(); }
+
 		void update(float elapsed)
 		{
 			m_age += elapsed;
