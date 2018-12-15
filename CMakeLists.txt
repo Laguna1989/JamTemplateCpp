@@ -37,7 +37,10 @@ set (JAMTEMPLATEFILES
 	src/JamTemplate/TextureManager.hpp
 	src/JamTemplate/Timer.hpp
 	src/JamTemplate/Transform.hpp
-	src/JamTemplate/Tween.hpp
+	src/JamTemplate/TweenBase.hpp
+	src/JamTemplate/TweenColor.hpp
+	src/JamTemplate/TweenAlpha.hpp
+	src/JamTemplate/TweenScale.hpp
 	src/JamTemplate/Animation.hpp
 	src/JamTemplate/MathHelper.hpp
 	)

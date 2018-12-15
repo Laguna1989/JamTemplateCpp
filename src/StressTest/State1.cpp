@@ -2,7 +2,9 @@
 #include "State1.hpp"
 
 #include "../JamTemplate/Timer.hpp"
-#include "../JamTemplate/Tween.hpp"
+#include "../JamTemplate/TweenAlpha.hpp"
+#include "../JamTemplate/TweenColor.hpp"
+#include "../JamTemplate/TweenScale.hpp"
 
 void State1::doInternalUpdate(float const /*elapsed*/)
 {

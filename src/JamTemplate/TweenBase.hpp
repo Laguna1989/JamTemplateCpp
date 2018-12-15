@@ -1,0 +1,92 @@
+#ifndef JAMTEMPLATE_TWEENBASE_HPP_INCLUDEGUARD
+#define JAMTEMPLATE_TWEENBASE_HPP_INCLUDEGUARD
+
+#include <functional>
+#include <memory>
+#include <SFML/Graphics.hpp>
+
+namespace JamTemplate {
+	class TweenBase{
+	public:
+		using Sptr = std::shared_ptr<TweenBase>;
+
+		TweenBase() = default;
+		virtual ~TweenBase() = default;
+		
+		/// TweenBase should never be copied!
+		TweenBase(TweenBase const&) = delete;
+		TweenBase& operator= (TweenBase const&) = delete;
+
+		TweenBase(TweenBase&&) = default;
+		TweenBase& operator= (TweenBase&&) = default;
+		
+		void cancel() { kill(); }
+
+		void update(float elapsed)
+		{
+			m_age += elapsed;
+			if (m_age < m_startDelay) return;
+			doUpdate(elapsed);
+		}
+		bool isAlive()
+		{
+			return m_alive;
+		}
+		void kill()
+		{
+			m_alive = false;
+		}
+		void setStartDelay(float delay)
+		{
+			m_startDelay = delay;
+		}
+		float getStartDelay() const
+		{
+			return m_startDelay;
+		}
+	protected:
+		
+		float getAge() const { return m_age - m_startDelay; }
+	private:
+		float m_age{ 0.0f };
+		float m_startDelay{};
+		bool m_alive{true};
+		virtual void doUpdate(float elapsed) = 0;
+	};
+
+
+	template <class T>
+	class Tween :public TweenBase{
+	public:
+		Tween(std::weak_ptr<T> obj, std::function<bool(std::shared_ptr<T>, float)> cb) : m_obj{ obj }, m_tweenCallback{cb}
+		{
+		}
+		
+	protected:
+		void getObject(std::shared_ptr<T>& obj)
+		{
+			if (m_obj.expired()) {
+				cancel();
+				obj = nullptr;
+				return;
+			}
+			obj = m_obj.lock();
+		}
+	private:
+		std::weak_ptr<T> m_obj;
+
+		// callback function. If the callback returns false, the tween shall be finished.
+		std::function<bool(std::shared_ptr<T>, float)>  m_tweenCallback;
+		void doUpdate(float /*elapsed*/)  override
+		{
+			std::shared_ptr<T> sptr = nullptr;
+			getObject(sptr);
+			if (!m_tweenCallback(sptr, getAge()))
+			{
+				cancel();
+			}			
+		}
+	};
+} // namespace JamTemplate
+
+#endif

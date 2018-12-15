@@ -7,7 +7,7 @@
 #include <algorithm>
 #include <numeric>
 #include "GameObject.hpp"
-#include "Tween.hpp"
+#include "TweenBase.hpp"
 
 namespace JamTemplate {
 
@@ -64,7 +64,6 @@ namespace JamTemplate {
 
 		void updateTweens(float elapsed)
 		{
-			//std::cout << m_tweens.size() << "\n";
 			if (!m_hasBeenInitialized) return;
 			if (getAge() < 0.001f) return;
 			while (true)

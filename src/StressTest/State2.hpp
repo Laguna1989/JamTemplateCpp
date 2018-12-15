@@ -10,7 +10,7 @@
 #include "../JamTemplate/ObjectGroup.hpp"
 #include "../JamTemplate/SmartSprite.hpp"
 #include "../JamTemplate/SmartShape.hpp"
-#include "../JamTemplate/Tween.hpp"
+#include "../JamTemplate/TweenAlpha.hpp"
 #include "../JamTemplate/Game.hpp"
 
 class State2 : public JamTemplate::GameState {
