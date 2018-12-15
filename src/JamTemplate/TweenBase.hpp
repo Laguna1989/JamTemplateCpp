@@ -58,7 +58,8 @@ namespace JamTemplate {
 	template <class T>
 	class Tween :public TweenBase{
 	public:
-		Tween(std::weak_ptr<T> obj, std::function<bool(std::shared_ptr<T>, float)> cb) : m_obj{ obj }, m_tweenCallback{cb}
+		using Callback_type = std::function<bool(std::shared_ptr<T>, float)>;
+		Tween(std::weak_ptr<T> obj, Callback_type cb) : m_obj{ obj }, m_tweenCallback{cb}
 		{
 		}
 		
@@ -76,11 +77,15 @@ namespace JamTemplate {
 		std::weak_ptr<T> m_obj;
 
 		// callback function. If the callback returns false, the tween shall be finished.
-		std::function<bool(std::shared_ptr<T>, float)>  m_tweenCallback;
+		Callback_type  m_tweenCallback;
 		void doUpdate(float /*elapsed*/)  override
 		{
 			std::shared_ptr<T> sptr = nullptr;
 			getObject(sptr);
+			if (sptr == nullptr)
+			{
+				return;
+			}
 			if (!m_tweenCallback(sptr, getAge()))
 			{
 				cancel();

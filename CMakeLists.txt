@@ -38,8 +38,9 @@ set (JAMTEMPLATEFILES
 	src/JamTemplate/Timer.hpp
 	src/JamTemplate/Transform.hpp
 	src/JamTemplate/TweenBase.hpp
-	src/JamTemplate/TweenColor.hpp
 	src/JamTemplate/TweenAlpha.hpp
+	src/JamTemplate/TweenColor.hpp
+	src/JamTemplate/TweenPosition.hpp
 	src/JamTemplate/TweenScale.hpp
 	src/JamTemplate/Animation.hpp
 	src/JamTemplate/MathHelper.hpp
