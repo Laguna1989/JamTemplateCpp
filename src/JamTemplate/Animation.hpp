@@ -35,9 +35,9 @@ namespace JamTemplate {
 			}
 		}
 
-		void play(std::string animName)
+		void play(std::string animName, size_t startFrame = 0)
 		{
-			m_currentIdx = 0;
+			m_currentIdx = startFrame;
 			m_currentAnimName = animName;
 			m_frameTime = 0;
 		}
@@ -174,7 +174,7 @@ namespace JamTemplate {
 			{
 				m_frameTime = 0;
 				m_currentIdx++;
-				if (m_currentIdx == m_frames.at(m_currentAnimName).size())
+				if (m_currentIdx >= m_frames.at(m_currentAnimName).size())
 				{
 					m_currentIdx = 0;
 				}

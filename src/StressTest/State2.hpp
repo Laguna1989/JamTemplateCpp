@@ -12,6 +12,8 @@
 #include "../JamTemplate/SmartShape.hpp"
 #include "../JamTemplate/TweenAlpha.hpp"
 #include "../JamTemplate/Game.hpp"
+#include "SwarmObject.hpp"
+
 
 class State2 : public JamTemplate::GameState {
 public:
@@ -20,6 +22,8 @@ public:
 private:
 	JamTemplate::SmartShape::Sptr m_overlay;
 	JamTemplate::SmartShape::Sptr m_sky;
+
+	JamTemplate::ObjectGroup<SwarmObject>::Sptr m_SwarmObjects;
 
 	void doInternalUpdate(float const /*elapsed*/) override;
 
@@ -38,6 +42,15 @@ private:
 		m_overlay->setColor(sf::Color{ 0,0,0 });
 		auto tw = TweenAlpha<SmartShape>::create(m_overlay, 0.5f, sf::Uint8{ 255 }, sf::Uint8{ 0 });
 		add(tw);
+
+		m_SwarmObjects = std::make_shared< JamTemplate::ObjectGroup<SwarmObject>>();
+		add(m_SwarmObjects);
+		for (int i = 0; i != 50; ++i)
+		{
+			SwarmObject::Sptr sptr = std::make_shared<SwarmObject>();
+			add(sptr);
+			m_SwarmObjects->push_back(sptr);
+		}
 	}
 
 	void drawSky() const

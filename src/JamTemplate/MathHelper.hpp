@@ -20,6 +20,11 @@ namespace JamTemplate {
 			}
 			return values;
 		}
+
+		static float length(sf::Vector2f v)
+		{
+			return std::sqrt(v.x*v.x + v.y*v.y);
+		}
 	};
 
 } // namespace JamTemplate

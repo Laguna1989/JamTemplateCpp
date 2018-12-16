@@ -64,16 +64,9 @@ namespace JamTemplate {
 		}
 		
 	protected:
-		void getObject(std::shared_ptr<T>& obj)
-		{
-			if (m_obj.expired()) {
-				cancel();
-				obj = nullptr;
-				return;
-			}
-			obj = m_obj.lock();
-		}
+		
 	private:
+		
 		std::weak_ptr<T> m_obj;
 
 		// callback function. If the callback returns false, the tween shall be finished.
@@ -90,6 +83,16 @@ namespace JamTemplate {
 			{
 				cancel();
 			}			
+		}
+
+		void getObject(std::shared_ptr<T>& obj)
+		{
+			if (m_obj.expired()) {
+				cancel();
+				obj = nullptr;
+				return;
+			}
+			obj = m_obj.lock();
 		}
 	};
 } // namespace JamTemplate

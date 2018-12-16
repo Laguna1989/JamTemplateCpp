@@ -29,8 +29,6 @@ namespace JamTemplate {
 			return true;
 		} }
 		{
-			std::shared_ptr<T> sptr = nullptr;
-			getObject(sptr);
 			m_initialValue = valueStart;
 			m_finalValue = valueEnd;
 		}

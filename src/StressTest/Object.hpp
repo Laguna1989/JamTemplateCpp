@@ -19,12 +19,12 @@ public:
 	using Sptr = std::shared_ptr<Object>;
 	Object()
 	{
-		m_shape = std::make_shared<JamTemplate::Animation>();
+		m_animation = std::make_shared<JamTemplate::Animation>();
 		//m_shape->makeRect(sf::Vector2f(10, 10));
-		m_shape->add("assets/coin.png", "idle", sf::Vector2u{ 16,16 }, JamTemplate::MathHelper::vectorBetween(0U, 11U), 0.15f);
-		m_shape->play("idle");
+		m_animation->add("assets/coin.png", "idle", sf::Vector2u{ 16,16 }, JamTemplate::MathHelper::vectorBetween(0U, 11U), 0.15f);
+		m_animation->play("idle");
 
-		m_shape->setColor(JamTemplate::Random::getRandomColor());
+		m_animation->setColor(JamTemplate::Random::getRandomColor());
 
 		float x = JamTemplate::Random::getFloat(80, 120) -8;
 		float y = JamTemplate::Random::getFloat(55, 95) -8;
@@ -43,34 +43,34 @@ public:
 
 	void Flash()
 	{
-		m_shape->flash(0.1f);
+		m_animation->flash(0.1f);
 	}
 	void Shake()
 	{
-		m_shape->shake(0.5f, 2.0f,0.05f);
+		m_animation->shake(0.5f, 2.0f,0.05f);
 	}
 	
 	std::shared_ptr<JamTemplate::Animation> getAnimation()
 	{
-		return m_shape;
+		return m_animation;
 	}
 
 private:
 	void doUpdate(float const elapsed) override
 	{
 		updateTransform(elapsed);
-		m_shape->setPosition(getPosition());
-		m_shape->update(elapsed);
+		m_animation->setPosition(getPosition());
+		m_animation->update(elapsed);
 		if (getAge() > 0.9) kill();
 	}
 
 	void doDraw() const override
 	{
-		m_shape->draw(getGame()->getRenderTarget());
+		m_animation->draw(getGame()->getRenderTarget());
 		
 	}
 
-	std::shared_ptr<JamTemplate::Animation> m_shape;
+	std::shared_ptr<JamTemplate::Animation> m_animation;
 };
 
 

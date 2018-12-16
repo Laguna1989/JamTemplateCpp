@@ -37,6 +37,8 @@ namespace JamTemplate
 			return m_textures[str];
 		}
 
+
+
 		static std::string getFlashName(std::string str)
 		{
 			return str + "___flash__";
@@ -44,6 +46,7 @@ namespace JamTemplate
 	private:
 		static std::map<std::string, sf::Texture> m_textures;
 
+		
 	};
 }// namespace JamTemplate
 

@@ -26,8 +26,6 @@ namespace JamTemplate {
 			return (age < m_totalTime);
 		} }
 		{
-			std::shared_ptr<T> sptr = nullptr;
-			getObject(sptr);
 			m_totalTime = time ;
 			m_initialValue = static_cast<float>(valueStart) / 255.0f;
 			m_finalValue = static_cast<float>(valueEnd) / 255.0f;

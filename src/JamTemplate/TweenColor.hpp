@@ -32,8 +32,6 @@ namespace JamTemplate {
 			return (age < m_totalTime);
 		} }
 		{
-			std::shared_ptr<T> sptr = nullptr;
-			getObject(sptr);
 			m_totalTime = time;
 			m_initialValue = valueStart;
 			m_finalValue = valueEnd;
