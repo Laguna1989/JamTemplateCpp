@@ -13,6 +13,7 @@ int main()
 	renderTexture->create(200, 150);
 	renderTexture->setSmooth(false);
 
+
 	auto view = std::make_shared<sf::View>(sf::FloatRect(0, 0, 200, 150));
 	view->setViewport(sf::FloatRect(0, 0, 1, 1));
 	JamTemplate::Game::Sptr game = std::make_shared<JamTemplate::Game>();
@@ -62,9 +63,6 @@ int main()
 		//This is corrected by the following two lines
 		spr.setScale(sf::Vector2f(4, -4));
 		spr.setPosition(0, 600);
-
-
-
 		window->draw(spr);
 		text.setString(std::to_string(averageFPS));
 		window->draw(text);

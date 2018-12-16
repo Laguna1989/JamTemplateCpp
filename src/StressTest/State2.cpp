@@ -22,7 +22,7 @@ void State2::doInternalUpdate(float const /*elapsed*/)  {
 		auto o1 = m_SwarmObjects->at(i).lock();
 		sf::Vector2f SummedUpDir{};
 		float lc = JamTemplate::MathHelper::length(centerPos - o1->getPosition());
-		SummedUpDir += (centerPos - o1->getPosition())/lc * 100.0f;
+		SummedUpDir += (centerPos - o1->getPosition())/lc * 1000.0f / static_cast<float>(m_SwarmObjects->size());
 		for (size_t j = 0; j != m_SwarmObjects->size(); ++j)
 		{
 			if (i == j) continue;
@@ -30,7 +30,7 @@ void State2::doInternalUpdate(float const /*elapsed*/)  {
 			auto o2 = m_SwarmObjects->at(j).lock();
 			sf::Vector2f d = o2->getPosition() - o1->getPosition();
 			float l = JamTemplate::MathHelper::length(d);
-			if (l > 3 * cutoffDistance) continue;
+			if (l > 2 * cutoffDistance) continue;
 				SummedUpDir += o2->getVelocity() * 0.09f * o2->getSwarmWeight()/o1->getSwarmWeight();
 
 			if (l > cutoffDistance) continue;
