@@ -10,9 +10,9 @@ int main()
 {
 	auto window = std::make_shared<sf::RenderWindow>(sf::VideoMode(800, 600), "JamTemplate Stresstest!");
 	auto renderTexture = std::make_shared<sf::RenderTexture>();
-	renderTexture->create(200, 150);
-	renderTexture->setSmooth(false);
 
+	renderTexture->create(200, 150,false);
+	renderTexture->setSmooth(false);
 
 	auto view = std::make_shared<sf::View>(sf::FloatRect(0, 0, 200, 150));
 	view->setViewport(sf::FloatRect(0, 0, 1, 1));

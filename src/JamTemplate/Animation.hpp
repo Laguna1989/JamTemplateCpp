@@ -161,7 +161,7 @@ namespace JamTemplate {
 			m_frames.at(m_currentAnimName).at(m_currentIdx)->draw(sptr);
 		}
 
-		void doDrawFlash(std::shared_ptr<sf::RenderTarget> sptr) const
+		void doDrawFlash(std::shared_ptr<sf::RenderTarget> /*sptr*/) const
 		{}
 
 		virtual void doUpdate(float elapsed)

@@ -45,7 +45,7 @@ private:
 
 		m_SwarmObjects = std::make_shared< JamTemplate::ObjectGroup<SwarmObject>>();
 		add(m_SwarmObjects);
-		for (int i = 0; i != 500; ++i)
+		for (int i = 0; i != 50; ++i)
 		{
 			SwarmObject::Sptr sptr = std::make_shared<SwarmObject>();
 			add(sptr);

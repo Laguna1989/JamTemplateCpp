@@ -35,7 +35,7 @@ void State2::doInternalUpdate(float const /*elapsed*/)  {
 
 			if (l > cutoffDistance) continue;
 			if (l < 1) l = 1;
-			SummedUpDir -= d / l / l * 50000.0f;
+			SummedUpDir -= d / l / l * 500.0f;
 		}
 		float l = JamTemplate::MathHelper::length(SummedUpDir);
 		if (l > 4)

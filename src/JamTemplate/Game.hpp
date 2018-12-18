@@ -1,6 +1,7 @@
 #ifndef JAMTEMPLATE_GAME_HPP_INCLUDEGUARD
 #define JAMTEMPLATE_GAME_HPP_INCLUDEGUARD
 #include <iostream>
+#include <string>
 #include "GameState.hpp"
 #include "GameObject.hpp"
 #include "Random.hpp"
@@ -12,6 +13,10 @@ class Game final : public GameObject, public std::enable_shared_from_this<Game>{
 public:
 	using Sptr = std::shared_ptr<Game>;
 	Game() : m_state{ nullptr }
+	{
+	}
+
+	void setUp(unsigned int w, unsigned int h, std::string title)
 	{
 	}
 	

@@ -9,7 +9,7 @@ int main()
 {
 	auto window = std::make_shared<sf::RenderWindow>(sf::VideoMode(800, 600), "SFML works!");
 	auto renderTexture = std::make_shared<sf::RenderTexture>();
-	renderTexture->create(200, 150);
+	renderTexture->create(200, 150, false);
 	renderTexture->setSmooth(false);
 
 	auto view = std::make_shared<sf::View>(sf::FloatRect(0, 0, 200, 150));

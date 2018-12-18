@@ -10,7 +10,7 @@ namespace JamTemplate {
 	class TweenScale : public Tween<T> {
 	public:
 		// Tween scale from valueStart to valueEnd of obj withtin time
-		static Tween::Sptr create(std::weak_ptr<T> obj, float time, sf::Vector2f valueStart, sf::Vector2f valueEnd)
+		static TweenBase::Sptr create(std::weak_ptr<T> obj, float time, sf::Vector2f valueStart, sf::Vector2f valueEnd)
 		{
 			return std::make_shared<TweenScale>(obj, time, valueStart, valueEnd);
 		}

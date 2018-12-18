@@ -10,7 +10,7 @@ namespace JamTemplate {
 	class TweenPosition : public Tween<T> {
 	public:
 		// Tween position from valueStart to valueEnd of obj withtin time
-		static Tween::Sptr create(std::weak_ptr<T> obj, float time, sf::Vector2f valueStart, sf::Vector2f valueEnd)
+		static TweenBase::Sptr create(std::weak_ptr<T> obj, float time, sf::Vector2f valueStart, sf::Vector2f valueEnd)
 		{
 			return std::make_shared<TweenPosition>(obj, time, valueStart, valueEnd);
 		}

@@ -9,7 +9,7 @@ namespace JamTemplate {
 	class TweenColor : public Tween<T> {
 	public:
 		// Tween color from valueStart to valueEnd of obj withtin time
-		static Tween::Sptr create(std::weak_ptr<T> obj, float time, sf::Color valueStart, sf::Color valueEnd)
+		static TweenBase::Sptr create(std::weak_ptr<T> obj, float time, sf::Color valueStart, sf::Color valueEnd)
 		{
 			return std::make_shared<TweenColor>(obj, time, valueStart, valueEnd);
 		}
