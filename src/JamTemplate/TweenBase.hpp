@@ -10,6 +10,8 @@ namespace JamTemplate {
 	public:
 		using Sptr = std::shared_ptr<TweenBase>;
 
+		using CallbackType = std::function<void(void)>;
+
 		TweenBase() = default;
 		virtual ~TweenBase() = default;
 		
@@ -20,7 +22,16 @@ namespace JamTemplate {
 		TweenBase(TweenBase&&) = default;
 		TweenBase& operator= (TweenBase&&) = default;
 		
-		void cancel() { kill(); }
+		void cancel()
+		{
+			kill();
+		}
+
+		void finish() 
+		{
+			handleCompleteCallbacks();
+			kill(); 
+		}
 
 		void update(float elapsed)
 		{
@@ -44,6 +55,10 @@ namespace JamTemplate {
 		{
 			return m_startDelay;
 		}
+		void addCompleteCallback(CallbackType cb)
+		{
+			m_completeCallbacks.push_back(cb);
+		}
 	protected:
 		
 		float getAge() const { return m_age - m_startDelay; }
@@ -51,7 +66,17 @@ namespace JamTemplate {
 		float m_age{ 0.0f };
 		float m_startDelay{};
 		bool m_alive{true};
+		
+		std::vector<CallbackType> m_completeCallbacks;
+
 		virtual void doUpdate(float elapsed) = 0;
+		void handleCompleteCallbacks()
+		{
+			for (auto & cb : m_completeCallbacks)
+			{
+				cb();
+			}
+		}
 	};
 
 
@@ -81,14 +106,14 @@ namespace JamTemplate {
 			}
 			if (!m_tweenCallback(sptr, getAge()))
 			{
-				cancel();
+				finish();
 			}			
 		}
 
 		void getObject(std::shared_ptr<T>& obj)
 		{
 			if (m_obj.expired()) {
-				cancel();
+				finish();
 				obj = nullptr;
 				return;
 			}

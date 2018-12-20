@@ -41,6 +41,7 @@ private:
 		m_overlay->makeRect(sf::Vector2f{ 200,200 });
 		m_overlay->setColor(sf::Color{ 0,0,0 });
 		auto tw = TweenAlpha<SmartShape>::create(m_overlay, 0.5f, sf::Uint8{ 255 }, sf::Uint8{ 0 });
+		tw->addCompleteCallback([this]() {std::cout << "overlay fade in finished" << std::endl; });
 		add(tw);
 
 		m_SwarmObjects = std::make_shared< JamTemplate::ObjectGroup<SwarmObject>>();
