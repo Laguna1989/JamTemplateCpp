@@ -52,6 +52,8 @@ set (STRESSTESTFILES
 	src/StressTest/State1.cpp
 	src/StressTest/State2.hpp
 	src/StressTest/State2.cpp
+	src/StressTest/StateTween.hpp
+	src/StressTest/StateTween.cpp
 	src/StressTest/SwarmObject.hpp
 	src/StressTest/Object.hpp
 	)

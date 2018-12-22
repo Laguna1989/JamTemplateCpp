@@ -4,7 +4,7 @@
 #include "../JamTemplate/Game.hpp"
 
 #include "State1.hpp"
-#include "State2.hpp"
+#include "StateTween.hpp"
 
 int main()
 {
@@ -17,7 +17,7 @@ int main()
 	auto view = std::make_shared<sf::View>(sf::FloatRect(0, 0, 200, 150));
 	view->setViewport(sf::FloatRect(0, 0, 1, 1));
 	JamTemplate::Game::Sptr game = std::make_shared<JamTemplate::Game>();
-	game->switchState(std::make_shared<State2>());
+	game->switchState(std::make_shared<StateTween>());
 	game->setRenderTarget(renderTexture);
 	game->setView(view);
 	//window->setFramerateLimit(60);
