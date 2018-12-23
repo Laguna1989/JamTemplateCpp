@@ -68,7 +68,6 @@ private:
 
 	void doCreate() override
 	{
-
 		float w = static_cast<float>(getGame()->getRenderTarget()->getSize().x);
 		float h = static_cast<float>(getGame()->getRenderTarget()->getSize().y);
 		m_sky = sf::RectangleShape(sf::Vector2f(w,h));
