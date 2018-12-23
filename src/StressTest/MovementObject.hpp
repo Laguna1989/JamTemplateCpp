@@ -29,6 +29,7 @@ public:
 
 		m_animation->add("assets/coin.png", "idle", sf::Vector2u{ 16,16 }, JamTemplate::MathHelper::vectorBetween(0U, 11U), JamTemplate::Random::getFloat(0.13f,0.17f));
 		m_animation->play("idle", JamTemplate::Random::getInt(0,6));
+		m_animation->setOffset(sf::Vector2f{-8,-8});
 		
 		b2PolygonShape dynamicBox;
 		dynamicBox.SetAsBox(8, 8);

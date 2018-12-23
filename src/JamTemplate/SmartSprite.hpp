@@ -87,8 +87,8 @@ namespace JamTemplate
 
 		void doUpdate(float /*elapsed*/) override
 		{
-			m_sprite.setPosition(m_position + getShakeOffset());
-			m_flashSprite.setPosition(m_position + getShakeOffset());
+			m_sprite.setPosition(m_position + getShakeOffset() + getOffset());
+			m_flashSprite.setPosition(m_position + getShakeOffset() + getOffset());
 			m_flashSprite.setScale(m_sprite.getScale());
 		}
 

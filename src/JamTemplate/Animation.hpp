@@ -166,9 +166,11 @@ namespace JamTemplate {
 
 		virtual void doUpdate(float elapsed)
 		{
+			// check if valid
 			if (m_frames.count(m_currentAnimName) == 0)
 				return;
 			
+			// proceed time
 			m_frameTime += elapsed;
 			if (m_frameTime >= m_time[m_currentAnimName])
 			{
@@ -179,11 +181,10 @@ namespace JamTemplate {
 					m_currentIdx = 0;
 				}
 			}
-			m_frames.at(m_currentAnimName).at(m_currentIdx)->setPosition(m_position + getShakeOffset());
+			// set position
+			m_frames.at(m_currentAnimName).at(m_currentIdx)->setPosition(m_position + getShakeOffset() + getOffset());
 			m_frames.at(m_currentAnimName).at(m_currentIdx)->update(elapsed);
 		}
-
-		
 	};
 
 } // namespace JamTemplate

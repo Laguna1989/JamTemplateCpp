@@ -67,11 +67,23 @@ namespace JamTemplate
 		virtual void setScale(sf::Vector2f const& scale) = 0;
 		virtual const sf::Vector2f getScale() = 0;
 
+		void setOffset(sf::Vector2f const offset)
+		{
+			m_offset = offset;
+		}
+
+		sf::Vector2f getOffset() const
+		{
+			return m_offset;
+		}
+
 	protected:
 		sf::Vector2f getShakeOffset() const
 		{
 			return m_shakeOffset;
 		}
+
+
 
 	private:
 
@@ -84,6 +96,8 @@ namespace JamTemplate
 		float m_shakeInterval{ 0.0f };
 		float m_shakeIntervalMax{0.0f};
 		sf::Vector2f m_shakeOffset{ 0,0 };
+
+		sf::Vector2f m_offset{0,0};
 
 		virtual void doDraw(std::shared_ptr<sf::RenderTarget> sptr) const = 0;
 		virtual void doDrawFlash(std::shared_ptr<sf::RenderTarget> sptr) const = 0;

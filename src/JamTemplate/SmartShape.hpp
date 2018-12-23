@@ -98,8 +98,8 @@ namespace JamTemplate
 
 		void doUpdate(float /*elapsed*/) override
 		{
-			m_shape->setPosition(getPosition() + getShakeOffset());
-			m_flashShape->setPosition(getPosition() + getShakeOffset());
+			m_shape->setPosition(getPosition() + getShakeOffset() + getOffset());
+			m_flashShape->setPosition(getPosition() + getShakeOffset() + getOffset());
 			m_flashShape->setScale(m_shape->getScale());
 		}
 	};
