@@ -70,6 +70,12 @@ private:
 				getB2Body()->ApplyForceToCenter(b2Vec2{ -1000,0 }, true);
 			}
 		}
+
+
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::B))
+		{
+			m_animation->flash(0.5f, sf::Color::Red);
+		}
 		
 	}
 

@@ -30,22 +30,32 @@ private:
 		b2BodyDef groundBodyDef;
 		groundBodyDef.fixedRotation = true;
 		{
+			groundBodyDef.position.Set(32, 100-16);
+			MovementObject::Sptr b2obj = std::make_shared<MovementObject>(m_world, &groundBodyDef);
+			add(b2obj);
+		}
+		{
 			groundBodyDef.position.Set(48, 100);
 			MovementObject::Sptr b2obj = std::make_shared<MovementObject>(m_world, &groundBodyDef);
 			add(b2obj);
 		}
 		{
-			groundBodyDef.position.Set(16, 100);
+			groundBodyDef.position.Set(64, 100);
 			MovementObject::Sptr b2obj = std::make_shared<MovementObject>(m_world, &groundBodyDef);
 			add(b2obj);
 		}
 		{
-			groundBodyDef.position.Set(32, 100);
+			groundBodyDef.position.Set(80, 100);
 			MovementObject::Sptr b2obj = std::make_shared<MovementObject>(m_world, &groundBodyDef);
 			add(b2obj);
 		}
 		{
-			groundBodyDef.position.Set(64, 100-16);
+			groundBodyDef.position.Set(96, 100);
+			MovementObject::Sptr b2obj = std::make_shared<MovementObject>(m_world, &groundBodyDef);
+			add(b2obj);
+		}
+		{
+			groundBodyDef.position.Set(112, 100-16);
 			MovementObject::Sptr b2obj = std::make_shared<MovementObject>(m_world, &groundBodyDef);
 			add(b2obj);
 		}
@@ -53,7 +63,7 @@ private:
 		b2BodyDef bodyDef;
 		bodyDef.fixedRotation = true;
 		bodyDef.type = b2_dynamicBody;
-		bodyDef.position.Set(0.0f, 0.0f);
+		bodyDef.position.Set(48, 0.0f);
 		MovementObject::Sptr myBody = std::make_shared<MovementObject>(m_world, &bodyDef);
 		
 		add(myBody);

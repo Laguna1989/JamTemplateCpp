@@ -164,6 +164,17 @@ namespace JamTemplate {
 		void doDrawFlash(std::shared_ptr<sf::RenderTarget> /*sptr*/) const
 		{}
 
+		void doFlash(float t, sf::Color col = sf::Color::White) override
+		{
+			for (auto& kvp : m_frames)
+			{
+				for (auto& spr : kvp.second)
+				{
+					spr->flash(t, col);
+				}
+			}
+		}
+
 		virtual void doUpdate(float elapsed)
 		{
 			// check if valid
@@ -183,7 +194,14 @@ namespace JamTemplate {
 			}
 			// set position
 			m_frames.at(m_currentAnimName).at(m_currentIdx)->setPosition(m_position + getShakeOffset() + getOffset());
-			m_frames.at(m_currentAnimName).at(m_currentIdx)->update(elapsed);
+			for (auto& kvp : m_frames)
+			{
+				for (auto& spr : kvp.second)
+				{
+					spr->update(elapsed);
+				}
+			}
+			
 		}
 	};
 

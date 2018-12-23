@@ -35,6 +35,7 @@ namespace JamTemplate
 		{
 			m_maxFlashTimer = m_flashTimer = t;
 			setFlashColor(col);
+			doFlash(t, col);
 		}
 
 		void shake(float t, float strength, float shakeInterval = 0.05f)
@@ -136,6 +137,11 @@ namespace JamTemplate
 			{
 				m_shakeOffset.x = m_shakeOffset.y = 0;
 			}
+		}
+
+		virtual void doFlash(float t, sf::Color col = sf::Color::White)
+		{
+			
 		}
 
 	};
