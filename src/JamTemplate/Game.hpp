@@ -2,6 +2,9 @@
 #define JAMTEMPLATE_GAME_HPP_INCLUDEGUARD
 #include <iostream>
 #include <string>
+
+#include <SFML/Graphics.hpp>
+
 #include "GameState.hpp"
 #include "GameObject.hpp"
 #include "Random.hpp"
@@ -12,12 +15,24 @@ namespace JamTemplate
 class Game final : public GameObject, public std::enable_shared_from_this<Game>{
 public:
 	using Sptr = std::shared_ptr<Game>;
-	Game() : m_state{ nullptr }
+	Game() : m_state{ nullptr }, m_backgroundColor{sf::Color::Black}
 	{
+		
 	}
 
-	void setUp(unsigned int w, unsigned int h, std::string title)
+	void setUp(unsigned int w, unsigned int h, float zoom, std::string title)
 	{
+		m_renderWindow = std::make_shared<sf::RenderWindow>(sf::VideoMode(w, h), title);
+		m_renderWindow->setFramerateLimit(60);
+
+		m_renderTarget = std::make_shared<sf::RenderTexture>();
+		m_renderTarget->create(static_cast<unsigned int> (w / zoom), static_cast<unsigned int> (h / zoom));
+		m_renderTarget->setSmooth(false);		
+		
+		m_view = std::make_shared<sf::View>(sf::FloatRect(0, 0, 200, 150));
+		m_view->setViewport(sf::FloatRect(0, 0, 1, 1));
+
+		m_zoom = zoom;
 	}
 	
 	void switchState(GameState::Sptr newState)
@@ -31,13 +46,22 @@ public:
 		m_nextState = newState;
 	}
 
-	void setRenderTarget(std::shared_ptr<sf::RenderTarget> rt)
+	void setRenderTarget(std::shared_ptr<sf::RenderTexture> rt)
 	{
 		m_renderTarget = rt;
 	}
-	std::shared_ptr<sf::RenderTarget> getRenderTarget()
+	std::shared_ptr<sf::RenderTexture> getRenderTarget()
 	{
 		return m_renderTarget;
+	}
+
+	void setRenderWindow(std::shared_ptr<sf::RenderWindow> w)
+	{
+		m_renderWindow = w;
+	}
+	std::shared_ptr<sf::RenderWindow> getRenderWindow()
+	{
+		return m_renderWindow;
 	}
 
 	void setView(std::shared_ptr<sf::View> view)
@@ -61,8 +85,11 @@ public:
 private:
 	GameState::Sptr m_state{ nullptr };
 	GameState::Sptr m_nextState{ nullptr };
-	std::shared_ptr<sf::RenderTarget> m_renderTarget{nullptr};
+	std::shared_ptr<sf::RenderTexture> m_renderTarget{nullptr};
 	std::shared_ptr<sf::View> m_view{ nullptr };
+	std::shared_ptr<sf::RenderWindow> m_renderWindow{ nullptr };
+
+	float m_zoom{1.0f};
 
 	float m_shakeTimer{ -1.0f };
 	float m_shakeStrength{ 0.0f };
@@ -70,9 +97,13 @@ private:
 	float m_shakeIntervalMax{ 0.0f };
 	sf::Vector2f m_shakeOffset{ 0,0 };
 
+	sf::Color m_backgroundColor{sf::Color::Black};
+
 	std::weak_ptr<Game> getPtr() {
 		return shared_from_this();
 	}
+
+
 	virtual void doUpdate(float const elapsed) override
 	{
 		if (m_nextState != nullptr)
@@ -89,9 +120,27 @@ private:
 
 	virtual void doDraw() const override
 	{
+		// clear the old image
+		m_renderTarget->clear(m_backgroundColor);
+		//m_renderWindow->clear(m_backgroundColor);
+		
 		if (m_state == nullptr)
 			return;
 		m_state->draw();
+
+		// convert renderTexture to sprite and draw that. 
+		const sf::Texture& texture = m_renderTarget->getTexture();
+		sf::Sprite spr(texture);
+		//Note: RenderTexture has a bug and is displayed upside down. 
+		//This is corrected by the following two lines
+		spr.setScale(sf::Vector2f(m_zoom, -m_zoom));
+		spr.setPosition(0, m_renderWindow->getSize().y);
+
+		// draw the sprite
+		m_renderWindow->draw(spr);
+
+		// blit it to the screen
+		m_renderWindow->display();
 	};
 
 	void updateShake(float elapsed)

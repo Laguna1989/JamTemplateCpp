@@ -11,7 +11,6 @@ namespace JamTemplate {
 	class GameObject
 	{
 	public:
-
 		using Sptr = std::shared_ptr<GameObject>;
 
 		GameObject() = default;

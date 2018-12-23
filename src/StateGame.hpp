@@ -47,8 +47,9 @@ private:
 
 	JamTemplate::SmartShape::Sptr m_overlay;
 
-	void doInternalUpdate (float const /*elapsed*/) override
+	void doInternalUpdate (float const elapsed) override
 	{
+		m_overlay->update(elapsed);
 		for (auto const& sp : *m_shots)
 		{
 			auto s = sp.lock();
@@ -92,6 +93,7 @@ private:
 		m_overlay = std::make_shared<SmartShape>();
 		m_overlay->makeRect(sf::Vector2f{ w,h });
 		m_overlay->setColor(sf::Color{ 0,0,0 });
+		m_overlay->update(0);
 		auto tw = TweenAlpha<SmartShape>::create(m_overlay, 0.5f, sf::Uint8{ 255 }, sf::Uint8{ 0 });
 		add(tw);
 	}
