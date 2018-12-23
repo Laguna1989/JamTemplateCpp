@@ -70,6 +70,10 @@ private:
 		});
 		add(twBIn);
 
+		m_background->update(0);
+		m_overlayR->update(0);
+		m_overlayG->update(0);
+		m_overlayB->update(0);
 	}
 
 
