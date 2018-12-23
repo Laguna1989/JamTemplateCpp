@@ -19,11 +19,16 @@ namespace JamTemplate
 		
 		void draw(std::shared_ptr<sf::RenderTarget> sptr) const
 		{
+			if (m_hasBeenUpdated == false)
+			{
+				std::cout << "WARNING: Calling SmartObject::draw() without previous call to SmartObject::update()!\n";
+			}
 			doDraw(sptr);
 			if (m_flashTimer > 0)
 			{
 				doDrawFlash(sptr);
 			}
+			//m_hasBeenUpdated = false;
 		}
 
 		void flash(float t, sf::Color col = sf::Color::White)
@@ -44,6 +49,7 @@ namespace JamTemplate
 			updateShake(elapsed);
 			updateFlash(elapsed);
 			doUpdate(elapsed);
+			m_hasBeenUpdated = true;
 		}
 
 		virtual void setColor(sf::Color const& col) = 0;
@@ -69,6 +75,7 @@ namespace JamTemplate
 
 	private:
 
+		bool m_hasBeenUpdated{false};
 		float m_flashTimer{ -1.0f };
 		float m_maxFlashTimer{ -1.0f };
 
