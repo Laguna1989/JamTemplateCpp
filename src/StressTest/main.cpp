@@ -4,13 +4,13 @@
 #include "../JamTemplate/Game.hpp"
 
 #include "State1.hpp"
-#include "State2.hpp"
+#include "StateTween.hpp"
 
 int main()
 {
 	JamTemplate::Game::Sptr game = std::make_shared<JamTemplate::Game>();
 	game->setUp(800, 600, 4, "Stresstest");
-	game->switchState(std::make_shared<State2>());
+	game->switchState(std::make_shared<StateTween>());
 	auto window = game->getRenderWindow();
 	sf::Clock clock;
 
