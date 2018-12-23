@@ -24,9 +24,6 @@ public:
 	{
 		m_animation = std::make_shared<JamTemplate::Animation>();
 		
-		float maxX = 200 - 12;
-		float maxY = 150 - 12;
-
 		m_animation->add("assets/coin.png", "idle", sf::Vector2u{ 16,16 }, JamTemplate::MathHelper::vectorBetween(0U, 11U), JamTemplate::Random::getFloat(0.13f,0.17f));
 		m_animation->play("idle", JamTemplate::Random::getInt(0,6));
 		m_animation->setOffset(sf::Vector2f{-8,-8});

@@ -78,11 +78,19 @@ namespace JamTemplate
 			return m_offset;
 		}
 
+		void setRotation(float rot)
+		{
+			m_rotationInDegree = rot;
+			doRotate(rot);
+		}
+
+
 	protected:
 		sf::Vector2f getShakeOffset() const
 		{
 			return m_shakeOffset;
 		}
+
 
 
 
@@ -99,6 +107,8 @@ namespace JamTemplate
 		sf::Vector2f m_shakeOffset{ 0,0 };
 
 		sf::Vector2f m_offset{0,0};
+		float m_rotationInDegree{ 0 };
+
 
 		virtual void doDraw(std::shared_ptr<sf::RenderTarget> sptr) const = 0;
 		virtual void doDrawFlash(std::shared_ptr<sf::RenderTarget> sptr) const = 0;
@@ -139,10 +149,10 @@ namespace JamTemplate
 			}
 		}
 
-		virtual void doFlash(float t, sf::Color col = sf::Color::White)
-		{
-			
-		}
+		virtual void doFlash(float /*t*/, sf::Color /*col = sf::Color::White*/)
+		{}
+
+		virtual void doRotate(float /*rot*/) {}
 
 	};
 }// namespace JamTemplate

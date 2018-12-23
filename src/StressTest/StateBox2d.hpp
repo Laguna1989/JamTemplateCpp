@@ -14,7 +14,7 @@
 
 class StateBox2d : public JamTemplate::GameState {
 public:
-	StateBox2d() : m_world{ std::make_shared<b2World>( b2Vec2{0,0.02}) }
+	StateBox2d() : m_world{ std::make_shared<b2World>( b2Vec2{0,0.02f}) }
 	{
 
 	}

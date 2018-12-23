@@ -134,7 +134,7 @@ private:
 		//Note: RenderTexture has a bug and is displayed upside down. 
 		//This is corrected by the following two lines
 		spr.setScale(sf::Vector2f(m_zoom, -m_zoom));
-		spr.setPosition(0, m_renderWindow->getSize().y);
+		spr.setPosition(0.0f, static_cast<float>(m_renderWindow->getSize().y));
 
 		// draw the sprite
 		m_renderWindow->draw(spr);

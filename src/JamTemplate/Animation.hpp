@@ -55,14 +55,16 @@ namespace JamTemplate {
 
 		const sf::Color getColor() const
 		{
+			sf::Color col;
 			for (auto const& kvp : m_frames)
 			{
 				for (auto const& sptr : kvp.second)
 				{
-					return sptr->getColor();
+					col = sptr->getColor();
+					break;
 				}
 			}
-			return sf::Color{};
+			return col;
 		}
 
 		void setPosition(sf::Vector2f const& pos)
@@ -77,25 +79,27 @@ namespace JamTemplate {
 
 		sf::Transform const getTransform() const
 		{
+			sf::Transform trans;
 			for (auto const& kvp : m_frames)
 			{
 				for (auto const& sptr : kvp.second)
 				{
-					return sptr->getTransform();
+					trans = sptr->getTransform();
 				}
 			}
-			return sf::Transform{};
+			return trans;
 		}
 		sf::FloatRect getGlobalBounds() const
 		{
+			sf::FloatRect rect;
 			for (auto const& kvp : m_frames)
 			{
 				for (auto const& sptr : kvp.second)
 				{
-					return sptr->getGlobalBounds();
+					rect = sptr->getGlobalBounds();
 				}
 			}
-			return sf::FloatRect{};
+			return rect;
 		}
 
 		void setFlashColor(sf::Color const& col)
@@ -110,14 +114,16 @@ namespace JamTemplate {
 		}
 		const sf::Color getFlashColor() const
 		{
+			sf::Color col;
 			for (auto const& kvp : m_frames)
 			{
 				for (auto const& sptr : kvp.second)
 				{
-					return sptr->getFlashColor();
+					col = sptr->getFlashColor();
+					break;
 				}
 			}
-			return sf::Color{};
+			return col;
 		}
 
 		virtual void setScale(sf::Vector2f const& scale)
@@ -132,14 +138,16 @@ namespace JamTemplate {
 		}
 		virtual const sf::Vector2f getScale()
 		{
+			sf::Vector2f vec;
 			for (auto& kvp : m_frames)
 			{
 				for (auto const& sptr : kvp.second)
 				{
-					return sptr->getScale();
+					vec = sptr->getScale();
+					break;
 				}
 			}
-			return sf::Vector2f{1,1};
+			return vec;
 		}
 
 	private:
