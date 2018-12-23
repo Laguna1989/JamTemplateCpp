@@ -28,6 +28,7 @@ private:
 	void doCreate() override
 	{
 		b2BodyDef groundBodyDef;
+		groundBodyDef.fixedRotation = true;
 		{
 			groundBodyDef.position.Set(0, 100);
 			MovementObject::Sptr b2obj = std::make_shared<MovementObject>(m_world, &groundBodyDef);
@@ -50,6 +51,7 @@ private:
 		}
 
 		b2BodyDef bodyDef;
+		bodyDef.fixedRotation = true;
 		bodyDef.type = b2_dynamicBody;
 		bodyDef.position.Set(0.0f, 0.0f);
 		MovementObject::Sptr myBody = std::make_shared<MovementObject>(m_world, &bodyDef);

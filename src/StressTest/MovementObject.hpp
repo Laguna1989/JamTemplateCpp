@@ -36,7 +36,7 @@ public:
 		b2FixtureDef fixtureDef;
 		fixtureDef.shape = &dynamicBox;
 		fixtureDef.density = 1.0f;
-		fixtureDef.friction = 0.3f;		getB2Body()->CreateFixture(&fixtureDef);
+		fixtureDef.friction = 0.9f;		getB2Body()->CreateFixture(&fixtureDef);
 	}
 
 	~MovementObject() = default;
