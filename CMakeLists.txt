@@ -45,6 +45,7 @@ set (JAMTEMPLATEFILES
 	src/JamTemplate/TweenScale.hpp
 	src/JamTemplate/Animation.hpp
 	src/JamTemplate/MathHelper.hpp
+	src/JamTemplate/Conversions.hpp
 	)
 
 set (STRESSTESTFILES
@@ -55,6 +56,9 @@ set (STRESSTESTFILES
 	src/StressTest/State2.cpp
 	src/StressTest/StateTween.hpp
 	src/StressTest/StateTween.cpp
+	src/StressTest/StateBox2d.hpp
+	src/StressTest/StateBox2d.cpp
+	src/Stresstest/MovementObject.hpp
 	src/StressTest/SwarmObject.hpp
 	src/StressTest/Object.hpp
 	)
@@ -81,6 +85,17 @@ if (APPLE)
     link_directories(/usr/local/Cellar/sfml/2.4.2_1/lib/)
 endif (APPLE)
 
+#####################################################
+## Setup Box2d
+#####################################################
+file(GLOB_RECURSE SRC_FILES ext/box2d/Box2D/*)
+add_library(Box2D ${SRC_FILES})
+target_include_directories(Box2D PRIVATE ext/box2d)
+
+#####################################################
+## setup other libs and executables
+#####################################################
+
 add_library(JamTemplate ${JAMTEMPLATEFILES})
 add_executable(${PROJECTNAME}  ${GAMEFILES})
 add_executable(StressTest  ${STRESSTESTFILES})
@@ -91,6 +106,7 @@ target_include_directories(JamTemplate PRIVATE /usr/local/Cellar/sfml/2.4.2_1/in
 target_link_libraries(JamTemplate optimized sfml-system )
 target_link_libraries(JamTemplate optimized sfml-window )
 target_link_libraries(JamTemplate optimized sfml-graphics )
+target_link_libraries(JamTemplate Box2D)
 
 if (WIN32)
 	target_link_libraries(JamTemplate debug sfml-system-d )
@@ -100,12 +116,12 @@ endif (WIN32)
 
 
 target_include_directories(${PROJECTNAME} PRIVATE ext/SFML-2.5.1_win/include)
-target_include_directories(${PROJECTNAME} PRIVATE ext/box2d)
 target_include_directories(${PROJECTNAME} PRIVATE /usr/local/Cellar/sfml/2.4.2_1/include) 
 target_link_libraries(${PROJECTNAME} optimized sfml-window )
 target_link_libraries(${PROJECTNAME} optimized sfml-system )
 target_link_libraries(${PROJECTNAME} optimized sfml-graphics )
 target_link_libraries(${PROJECTNAME} JamTemplate)
+target_link_libraries(${PROJECTNAME} Box2D)
 
 
 
@@ -116,6 +132,7 @@ target_link_libraries(StressTest optimized sfml-window )
 target_link_libraries(StressTest optimized sfml-system )
 target_link_libraries(StressTest optimized sfml-graphics )
 target_link_libraries(StressTest JamTemplate)
+target_link_libraries(Box2D JamTemplate)
 
 
 #####################################################

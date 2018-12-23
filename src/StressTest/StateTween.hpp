@@ -76,8 +76,7 @@ private:
 		m_overlayB->update(0);
 	}
 
-
-	void doDraw() const override
+	void doInternalDraw() const override
 	{
 		m_background->draw(getGame()->getRenderTarget());
 

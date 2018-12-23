@@ -4,15 +4,21 @@
 #include "../JamTemplate/Game.hpp"
 
 #include "State1.hpp"
-#include "StateBox2d.hpp"
+#include "StateTween.hpp"
 
 int main()
 {
 	JamTemplate::Game::Sptr game = std::make_shared<JamTemplate::Game>();
+<<<<<<< HEAD
 	game->setUp(800, 600, 4, "Stresstest");
-	game->switchState(std::make_shared<StateBox2d>());
+	game->switchState(std::make_shared<State2>());
 	auto window = game->getRenderWindow();
-	window->setFramerateLimit(60);
+=======
+	game->switchState(std::make_shared<StateTween>());
+	game->setRenderTarget(renderTexture);
+	game->setView(view);
+	//window->setFramerateLimit(60);
+>>>>>>> fb6e2e5763939ef454bf5dfa1c3c59dadf843667
 	sf::Clock clock;
 
 	sf::Font f = sf::Font{};
