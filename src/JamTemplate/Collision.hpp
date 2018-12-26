@@ -44,7 +44,13 @@ namespace JamTemplate {
 	public:
 		Collision() = delete;
 
-		template <typename T>
+		template <class T>
+		static bool Overlaps(T const& Object, sf::Vector2f const& point)
+		{
+			return (Object->getGlobalBounds().contains(point));
+		}
+
+		template <class T>
 		class OrientedBoundingBox // Used in the BoundingBoxTest
 		{
 		public:
@@ -88,7 +94,9 @@ namespace JamTemplate {
 		};
 
 
-		template <typename U, typename V>
+
+
+		template <class U, class V>
 		static bool BoundingBoxTest(U const& Object1, V const& Object2) {
 			OrientedBoundingBox<U> OBB1(Object1);
 			OrientedBoundingBox<V> OBB2(Object2);
@@ -121,7 +129,7 @@ namespace JamTemplate {
 			return true;
 		}
 
-		template <typename U, typename V>
+		template <class U, class V>
 		static bool BoundingBoxTest(std::shared_ptr<U> obj1, std::shared_ptr<V> obj2) {
 			OrientedBoundingBox<U> OBB1(obj1);
 			OrientedBoundingBox<V> OBB2(obj2);
@@ -181,7 +189,7 @@ namespace JamTemplate {
 		/// Radius is averaged from the dimensions of the sprite so
 		/// roughly circular objects will be much more accurate
 		//////
-		template <typename U, typename V>
+		template <class U, class V>
 		static bool CircleTest( U const& Object1, V const& Object2)
 		{
 			sf::Vector2f Obj1Size = GetSpriteSize(Object1);
@@ -194,7 +202,7 @@ namespace JamTemplate {
 			return (Distance.x * Distance.x + Distance.y * Distance.y <= (Radius1 + Radius2) * (Radius1 + Radius2));
 		}
 
-		template <typename U, typename V>
+		template <class U, class V>
 		static bool CircleTest(std::shared_ptr<U> obj1, std::shared_ptr<V> obj2)
 		{
 			sf::Vector2f Obj1Size = GetSpriteSize(obj1);
@@ -215,7 +223,7 @@ namespace JamTemplate {
 
 	private:
 
-		template<typename U>
+		template<class U>
 		static sf::Vector2f GetSpriteSize(U const& Object)
 		{
 			//sf::IntRect OriginalSize = Object.getTextureRect();
@@ -224,7 +232,7 @@ namespace JamTemplate {
 			return sf::Vector2f(Object.getGlobalBounds().width, Object.getGlobalBounds().height);
 		}
 
-		template<typename U>
+		template<class U>
 		static sf::Vector2f GetSpriteSize(std::shared_ptr<U> obj)
 		{
 			//sf::IntRect OriginalSize = Object.getTextureRect();
@@ -233,14 +241,7 @@ namespace JamTemplate {
 			return sf::Vector2f(obj->getGlobalBounds().width, obj->getGlobalBounds().height);
 		}
 
-		template <typename U>
-		static sf::Vector2f GetSpriteCenter(U const& Object)
-		{
-			sf::FloatRect AABB = Object.getGlobalBounds();
-			return sf::Vector2f(AABB.left + AABB.width / 2.f, AABB.top + AABB.height / 2.f);
-		}
-
-		template <typename U>
+		template <class U>
 		static sf::Vector2f GetSpriteCenter(std::shared_ptr<U> obj)
 		{
 			sf::FloatRect AABB = obj->getGlobalBounds();
