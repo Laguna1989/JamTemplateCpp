@@ -14,7 +14,7 @@ namespace JamTemplate
 	class SmartObject
 	{
 	public:
-
+		
 		using Sptr = std::shared_ptr<SmartObject>;
 		
 		void draw(std::shared_ptr<sf::RenderTarget> sptr) const
@@ -66,7 +66,11 @@ namespace JamTemplate
 		virtual const sf::Color getFlashColor() const = 0;
 
 		virtual void setScale(sf::Vector2f const& scale) = 0;
-		virtual const sf::Vector2f getScale() = 0;
+		virtual const sf::Vector2f getScale() const = 0;
+
+		virtual void setOrigin(sf::Vector2f const& origin) = 0;
+		virtual const sf::Vector2f getOrigin() const = 0;
+
 
 		void setOffset(sf::Vector2f const offset)
 		{
@@ -82,6 +86,11 @@ namespace JamTemplate
 		{
 			m_rotationInDegree = rot;
 			doRotate(rot);
+		}
+
+		float getRotation() const
+		{
+			return m_rotationInDegree;
 		}
 
 
@@ -152,7 +161,7 @@ namespace JamTemplate
 		virtual void doFlash(float /*t*/, sf::Color /*col = sf::Color::White*/)
 		{}
 
-		virtual void doRotate(float /*rot*/) {}
+		virtual void doRotate(float /*rot*/) = 0;
 
 	};
 }// namespace JamTemplate

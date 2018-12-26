@@ -75,9 +75,19 @@ namespace JamTemplate
 		{
 			m_shape->setScale(scale);
 		}
-		const sf::Vector2f getScale()
+		const sf::Vector2f getScale() const
 		{
 			return m_shape->getScale();
+		}
+
+		void setOrigin(sf::Vector2f const& origin)
+		{
+			m_shape->setOrigin(origin);
+			m_flashShape->setOrigin(origin);
+		}
+		const sf::Vector2f getOrigin() const
+		{
+			return m_shape->getOrigin();
 		}
 
 	private:
@@ -101,6 +111,12 @@ namespace JamTemplate
 			m_shape->setPosition(getPosition() + getShakeOffset() + getOffset());
 			m_flashShape->setPosition(getPosition() + getShakeOffset() + getOffset());
 			m_flashShape->setScale(m_shape->getScale());
+		}
+
+		void doRotate(float rot)
+		{
+			m_shape->setRotation(-rot);
+			m_flashShape->setRotation(-rot);
 		}
 	};
 }// namespace JamTemplate

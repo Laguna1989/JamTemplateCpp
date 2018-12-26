@@ -16,7 +16,7 @@ namespace JamTemplate {
 		}
 
 		// Tween position from valueStart to valueEnd of obj withtin time
-		TweenPosition(std::weak_ptr<T> obj, float time, sf::Vector2f valueStart, sf::Vector2f valueEnd) : Tween<T>{ obj, time, [this](auto sptr, auto age, auto totalTime)
+		TweenPosition(std::weak_ptr<T> obj, float time, sf::Vector2f valueStart, sf::Vector2f valueEnd) : Tween<T>{ obj, [this](auto sptr, auto age)
 		{
 			auto pos = sptr->getPosition();
 			
@@ -29,10 +29,12 @@ namespace JamTemplate {
 			return true;
 		} }
 		{
+			m_totalTime = time;
 			m_initialValue = valueStart;
 			m_finalValue = valueEnd;
 		}
 	private:
+		float m_totalTime{ 1.0f; };
 		sf::Vector2f m_initialValue{ };
 		sf::Vector2f m_finalValue  { };
 	};

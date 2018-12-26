@@ -10,6 +10,8 @@ namespace JamTemplate {
 		MathHelper() = delete;
 
 		// create a vector with numbers between a and b (both inclusive)
+		// when called with vectorBetween(4,9) the resulting vector will be
+		// [4, 5, 6, 7, 8, 9]
 		template<typename T>
 		static std::vector<T> vectorBetween(T const& a, T const& b)
 		{
@@ -24,6 +26,15 @@ namespace JamTemplate {
 		static float length(sf::Vector2f v)
 		{
 			return std::sqrt(v.x*v.x + v.y*v.y);
+		}
+
+		static float rad2deg(float a)
+		{
+			return a * 180.0f / 3.1415926f;
+		}
+		static float deg2rad (float a)
+		{
+			return a / 180.0f * 3.1415926f;
 		}
 	};
 

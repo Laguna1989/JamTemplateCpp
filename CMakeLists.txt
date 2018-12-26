@@ -42,6 +42,7 @@ set (JAMTEMPLATEFILES
 	src/JamTemplate/TweenAlpha.hpp
 	src/JamTemplate/TweenColor.hpp
 	src/JamTemplate/TweenPosition.hpp
+	src/JamTemplate/TweenRotation.hpp
 	src/JamTemplate/TweenScale.hpp
 	src/JamTemplate/Animation.hpp
 	src/JamTemplate/MathHelper.hpp

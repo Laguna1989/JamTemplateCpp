@@ -59,25 +59,37 @@ namespace JamTemplate
 			return m_flashSprite.getColor();
 		}
 
-		sf::Transform const getTransform() const override
+		virtual sf::Transform const getTransform() const override
 		{
 			return m_sprite.getTransform();
 		}
 
-		sf::FloatRect getGlobalBounds() const override
+		virtual sf::FloatRect getGlobalBounds() const override
 		{
 			return m_sprite.getGlobalBounds();
 		}
 		
-		void setScale(sf::Vector2f const& scale)
+		virtual void setScale(sf::Vector2f const& scale)
 		{
 			m_sprite.setScale(scale);
 		}
-		const sf::Vector2f getScale()
+
+		virtual const sf::Vector2f getScale() const
 		{
 			return m_sprite.getScale();
 		}
 
+
+		virtual void setOrigin(sf::Vector2f const& origin)
+		{
+			m_sprite.setOrigin(origin);
+			m_flashSprite.setOrigin(origin);
+		}
+		
+		virtual const sf::Vector2f getOrigin() const
+		{
+			return m_sprite.getOrigin();
+		}
 
 	private:
 		sf::Sprite m_sprite;
@@ -100,6 +112,12 @@ namespace JamTemplate
 		void doDrawFlash(std::shared_ptr<sf::RenderTarget> sptr) const override
 		{
 			sptr->draw(m_flashSprite);
+		}
+
+		void doRotate(float rot)
+		{
+			m_sprite.setRotation(-rot);
+			m_flashSprite.setRotation(-rot);
 		}
 	};
 }// namespace JamTemplate

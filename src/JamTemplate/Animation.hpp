@@ -136,7 +136,7 @@ namespace JamTemplate {
 				}
 			}
 		}
-		virtual const sf::Vector2f getScale()
+		virtual const sf::Vector2f getScale() const
 		{
 			sf::Vector2f vec;
 			for (auto& kvp : m_frames)
@@ -144,6 +144,30 @@ namespace JamTemplate {
 				for (auto const& sptr : kvp.second)
 				{
 					vec = sptr->getScale();
+					break;
+				}
+			}
+			return vec;
+		}
+
+		void setOrigin(sf::Vector2f const& origin)
+		{
+			for (auto& kvp : m_frames)
+			{
+				for (auto const& sptr : kvp.second)
+				{
+					sptr->setOrigin(origin);
+				}
+			}
+		}
+		const sf::Vector2f getOrigin() const
+		{
+			sf::Vector2f vec;
+			for (auto& kvp : m_frames)
+			{
+				for (auto const& sptr : kvp.second)
+				{
+					vec = sptr->getOrigin();
 					break;
 				}
 			}
@@ -210,6 +234,17 @@ namespace JamTemplate {
 				}
 			}
 			
+		}
+
+		void doRotate(float rot)
+		{
+			for (auto& kvp : m_frames)
+			{
+				for (auto& spr : kvp.second)
+				{
+					spr->setRotation(rot);
+				}
+			}
 		}
 	};
 

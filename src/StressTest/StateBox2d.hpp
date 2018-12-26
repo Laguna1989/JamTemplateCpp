@@ -8,9 +8,11 @@
 
 #include "../JamTemplate/GameState.hpp"
 #include "../JamTemplate/SmartShape.hpp"
-#include "../JamTemplate/TweenAlpha.hpp"
+#include "../JamTemplate/TweenRotation.hpp"
 #include "../JamTemplate/Game.hpp"
 #include "MovementObject.hpp"
+
+
 
 class StateBox2d : public JamTemplate::GameState {
 public:
@@ -33,6 +35,9 @@ private:
 			groundBodyDef.position.Set(32, 100-16);
 			MovementObject::Sptr b2obj = std::make_shared<MovementObject>(m_world, &groundBodyDef);
 			add(b2obj);
+			
+			auto tw = JamTemplate::TweenRotation<JamTemplate::Animation>::create(b2obj->getAnimation(), 2, 0, 360);
+			add(tw);
 		}
 		{
 			groundBodyDef.position.Set(48, 100);
@@ -67,6 +72,10 @@ private:
 		MovementObject::Sptr myBody = std::make_shared<MovementObject>(m_world, &bodyDef);
 		
 		add(myBody);
+		{
+			auto tw = JamTemplate::TweenRotation<JamTemplate::Animation>::create(myBody->getAnimation(), 2, 0, 360);
+			add(tw);
+		}
 	}
 };
 
