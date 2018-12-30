@@ -2,6 +2,7 @@
 #define JAMTEMPLATE_SMARTOBJECT_HPP_INCLUDEGUARD
 
 #include <string>
+#include <iostream>
 #include <memory>
 
 #include <SFML/Graphics.hpp>
@@ -51,6 +52,7 @@ namespace JamTemplate
 			updateFlash(elapsed);
 			doUpdate(elapsed);
 			m_hasBeenUpdated = true;
+			
 		}
 
 		virtual void setColor(sf::Color const& col) = 0;
@@ -61,6 +63,7 @@ namespace JamTemplate
 
 		virtual sf::Transform const getTransform() const = 0;
 		virtual sf::FloatRect getGlobalBounds() const = 0;
+		virtual sf::FloatRect getLocalBounds() const = 0;
 
 		virtual void setFlashColor(sf::Color const& col) = 0;
 		virtual const sf::Color getFlashColor() const = 0;
@@ -93,17 +96,40 @@ namespace JamTemplate
 			return m_rotationInDegree;
 		}
 
+		void setMoveWithCam(bool v) { m_moveWithCam = v; }
+
+		// do not call this from anywhere but Game::doUpdate
+		static void setCamOffset(sf::Vector2f ofs)
+		{
+			m_camOffset = ofs;
+		}
 
 	protected:
 		sf::Vector2f getShakeOffset() const
 		{
 			return m_shakeOffset;
 		}
+		
+		sf::Vector2f getCamOffset() const
+		{
+			if (m_moveWithCam)
+			{
+				return sf::Vector2f{ 0,0 };
+			}
+			else
+			{
+				return m_camOffset;
+			}
+		}
 
 
+		
 
 
 	private:
+
+		bool m_moveWithCam{ true };
+		static sf::Vector2f m_camOffset;
 
 		bool m_hasBeenUpdated{false};
 		float m_flashTimer{ -1.0f };

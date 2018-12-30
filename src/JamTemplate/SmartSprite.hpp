@@ -68,7 +68,11 @@ namespace JamTemplate
 		{
 			return m_sprite.getGlobalBounds();
 		}
-		
+		virtual sf::FloatRect getLocalBounds() const override
+		{
+			return m_sprite.getLocalBounds();
+		}
+
 		virtual void setScale(sf::Vector2f const& scale)
 		{
 			m_sprite.setScale(scale);
@@ -99,8 +103,8 @@ namespace JamTemplate
 
 		void doUpdate(float /*elapsed*/) override
 		{
-			m_sprite.setPosition(m_position + getShakeOffset() + getOffset());
-			m_flashSprite.setPosition(m_position + getShakeOffset() + getOffset());
+			m_sprite.setPosition(m_position + getShakeOffset() + getOffset() + getCamOffset());
+			m_flashSprite.setPosition(m_position + getShakeOffset() + getOffset() + getCamOffset());
 			m_flashSprite.setScale(m_sprite.getScale());
 		}
 

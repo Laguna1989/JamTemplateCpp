@@ -23,6 +23,11 @@ namespace JamTemplate {
 			return values;
 		}
 
+		static float lengthSquared(sf::Vector2f v)
+		{
+			return v.x*v.x + v.y*v.y;
+		}
+
 		static float length(sf::Vector2f v)
 		{
 			return std::sqrt(v.x*v.x + v.y*v.y);

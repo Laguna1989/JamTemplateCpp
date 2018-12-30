@@ -22,6 +22,9 @@ set (GAMEFILES
 #####################################################
 set (JAMTEMPLATEFILES 
 	src/JamTemplate/Random.cpp
+	src/JamTemplate/SpriteFunctions.hpp
+	src/JamTemplate/SplitString.hpp
+	src/JamTemplate/Button.hpp
 	src/JamTemplate/TextureManager.cpp
 	src/JamTemplate/Collision.hpp
 	src/JamTemplate/Game.hpp
@@ -30,11 +33,15 @@ set (JAMTEMPLATEFILES
 	src/JamTemplate/Lerp.hpp
 	src/JamTemplate/Box2DObject.hpp
 	src/JamTemplate/Noise.hpp
+	src/JamTemplate/InputManager.hpp
+	src/JamTemplate/InputManager.cpp
 	src/JamTemplate/ObjectGroup.hpp
 	src/JamTemplate/Random.hpp
 	src/JamTemplate/SmartObject.hpp
+	src/JamTemplate/SmartObject.cpp
 	src/JamTemplate/SmartSprite.hpp
 	src/JamTemplate/SmartShape.hpp
+	src/JamTemplate/SmartText.hpp
 	src/JamTemplate/TextureManager.hpp
 	src/JamTemplate/Timer.hpp
 	src/JamTemplate/Transform.hpp

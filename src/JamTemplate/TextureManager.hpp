@@ -7,6 +7,9 @@
 #include <string>
 #include <SFML/Graphics.hpp>
 
+#include "SplitString.hpp"
+#include "SpriteFunctions.hpp"
+
 namespace JamTemplate
 {
 	class TextureManager
@@ -15,12 +18,33 @@ namespace JamTemplate
 		TextureManager() = delete;
 		
 
+
 		static sf::Texture& get(std::string const& str)
 		{
 			if (m_textures.count(str) == 0)
 			{
-				m_textures[str].loadFromFile(str);
-
+				if (str.at(0) != '#')
+				{
+					m_textures[str].loadFromFile(str);
+				} 
+				else	// special type of images
+				{
+					SplitString ss{ str };
+					auto ssv = ss.split('#');
+					if (ssv.at(0) == "b")
+					{
+						unsigned int w = std::stoul(ssv.at(1));
+						unsigned int h = std::stoul(ssv.at(2));
+						sf::Image img{};
+						SpriteFunctions::makeButtonImage(img, w, h);
+						m_textures[str].loadFromImage(img);
+					}
+					else
+					{
+						throw std::invalid_argument("ERROR: cannot get texture with name " + str);
+					}
+				}
+				
 				sf::Image img{ m_textures[str].copyToImage() };
 				
 				for (unsigned int i = 0; i != img.getSize().x; ++i)
@@ -36,10 +60,12 @@ namespace JamTemplate
 				m_textures[getFlashName(str)].update(img);
 				//m_textures[getFlashName(str)].u
 			}
+			
 			return m_textures[str];
 		}
 
 
+		
 
 		static std::string getFlashName(std::string str)
 		{
@@ -74,6 +100,11 @@ namespace JamTemplate
 				}
 				kvp.second.loadFromImage(img);
 			}
+		}
+
+		static bool isTextureLoaded(std::string filename)
+		{
+			return m_textures.count(filename) != 0;
 		}
 
 	private:

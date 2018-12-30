@@ -15,9 +15,11 @@ namespace JamTemplate {
 	class Animation : public SmartObject
 	{
 	public:
+
+		using Sptr = std::shared_ptr<Animation>;
+
 		Animation()
 		{
-
 		}
 
 		void add(std::string fileName, std::string animName, sf::Vector2u size, std::vector<unsigned int> frameIndices, float frameTime)
@@ -35,11 +37,14 @@ namespace JamTemplate {
 			}
 		}
 
-		void play(std::string animName, size_t startFrame = 0)
+		void play(std::string animName, size_t startFrame = 0, bool restart = false)
 		{
-			m_currentIdx = startFrame;
-			m_currentAnimName = animName;
-			m_frameTime = 0;
+			if (m_currentAnimName != animName || restart)
+			{
+				m_currentIdx = startFrame;
+				m_currentAnimName = animName;
+				m_frameTime = 0;
+			}
 		}
 
 		void setColor(sf::Color const& col)
@@ -97,6 +102,20 @@ namespace JamTemplate {
 				for (auto const& sptr : kvp.second)
 				{
 					rect = sptr->getGlobalBounds();
+					break;
+				}
+			}
+			return rect;
+		}
+		virtual sf::FloatRect getLocalBounds() const
+		{
+			sf::FloatRect rect;
+			for (auto const& kvp : m_frames)
+			{
+				for (auto const& sptr : kvp.second)
+				{
+					rect = sptr->getLocalBounds();
+					break;
 				}
 			}
 			return rect;
@@ -225,11 +244,11 @@ namespace JamTemplate {
 				}
 			}
 			// set position
-			m_frames.at(m_currentAnimName).at(m_currentIdx)->setPosition(m_position + getShakeOffset() + getOffset());
 			for (auto& kvp : m_frames)
 			{
 				for (auto& spr : kvp.second)
 				{
+					spr->setPosition(m_position + getShakeOffset() + getOffset() + getCamOffset());
 					spr->update(elapsed);
 				}
 			}

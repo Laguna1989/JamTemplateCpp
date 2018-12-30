@@ -8,6 +8,8 @@
 #include "GameState.hpp"
 #include "GameObject.hpp"
 #include "Random.hpp"
+#include "InputManager.hpp"
+#include "SmartObject.hpp"
 
 namespace JamTemplate
 {
@@ -29,10 +31,15 @@ public:
 		m_renderTarget->create(static_cast<unsigned int> (w / zoom), static_cast<unsigned int> (h / zoom));
 		m_renderTarget->setSmooth(false);		
 		
-		m_view = std::make_shared<sf::View>(sf::FloatRect(0, 0, 200, 150));
+		m_view = std::make_shared<sf::View>(sf::FloatRect(0, 0, (float)static_cast<unsigned int> (w / zoom), (float)static_cast<unsigned int> (h / zoom)));
 		m_view->setViewport(sf::FloatRect(0, 0, 1, 1));
 
 		m_zoom = zoom;
+	}
+
+	float getZoom() const
+	{
+		return m_zoom;
 	}
 	
 	void switchState(GameState::Sptr newState)
@@ -75,6 +82,12 @@ public:
 		return m_view;
 	}
 
+	sf::Vector2f getCamOffset()
+	{
+		return sf::Vector2f{ getView()->getCenter().x - getView()->getSize().x/2, getView()->getCenter().y - getView()->getSize().y / 2 };
+	}
+
+
 	void shake(float t, float strength, float shakeInterval = 0.005f)
 	{
 		m_shakeTimer = t;
@@ -114,6 +127,11 @@ private:
 		if (m_state == nullptr)
 			return;
 		
+		SmartObject::setCamOffset(getCamOffset());
+		sf::Vector2f mpf = getRenderWindow()->mapPixelToCoords(sf::Mouse::getPosition(*getRenderWindow()), *getView());
+		sf::Vector2f mpfs = getRenderWindow()->mapPixelToCoords(sf::Mouse::getPosition(*getRenderWindow())) / m_zoom;
+		InputManager::update(mpf.x, mpf.y,  mpfs.x, mpfs.y );
+
 		updateShake(elapsed);
 		m_state->update(elapsed);
 	};

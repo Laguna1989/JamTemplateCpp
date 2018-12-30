@@ -65,6 +65,10 @@ namespace JamTemplate
 		{
 			return m_shape->getGlobalBounds();
 		}
+		virtual sf::FloatRect getLocalBounds() const override
+		{
+			return m_shape->getLocalBounds();
+		}
 
 		std::shared_ptr<sf::Shape> getShape() 
 		{
@@ -108,8 +112,8 @@ namespace JamTemplate
 
 		void doUpdate(float /*elapsed*/) override
 		{
-			m_shape->setPosition(getPosition() + getShakeOffset() + getOffset());
-			m_flashShape->setPosition(getPosition() + getShakeOffset() + getOffset());
+			m_shape->setPosition(getPosition() + getShakeOffset() + getOffset() + getCamOffset());
+			m_flashShape->setPosition(getPosition() + getShakeOffset() + getOffset() + getCamOffset());
 			m_flashShape->setScale(m_shape->getScale());
 		}
 
