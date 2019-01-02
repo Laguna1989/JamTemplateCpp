@@ -68,6 +68,7 @@ namespace JamTemplate {
 	private:
 		float m_age {0.0f};
 		bool m_alive{ true };	// is used to sort out "dead" game objects;
+
 		std::weak_ptr<Game> m_game;
 
 		virtual void doUpdate(float const /*elapsed*/) {};

@@ -52,6 +52,8 @@ private:
 			add(sptr);
 			m_SwarmObjects->push_back(sptr);
 		}
+
+		m_sky->update(0.0f);
 	}
 
 	void drawSky() const

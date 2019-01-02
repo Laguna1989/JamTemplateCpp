@@ -24,12 +24,27 @@ namespace JamTemplate
 		Button(sf::Vector2u s = sf::Vector2u{ 16,16 })
 		{
 			std::string buttonImageName = "#b#" + std::to_string(s.x) + "#" + std::to_string(s.y);
-			m_background.add(buttonImageName, "normal", s, { 0 }, 1);
-			m_background.add(buttonImageName, "over", s, { 1 }, 1);
-			m_background.add(buttonImageName, "down", s, { 2 }, 1);
-			m_background.play("normal");
-			m_background.setMoveWithCam(false);
+			m_background = std::make_shared<JamTemplate::Animation>();
+			m_background->add(buttonImageName, "normal", s, { 0 }, 1);
+			m_background->add(buttonImageName, "over", s, { 1 }, 1);
+			m_background->add(buttonImageName, "down", s, { 2 }, 1);
+			m_background->play("normal");
+			m_background->setMoveWithCam(false);
 		}
+		~Button()
+		{
+			//std::cout << "button destructor\n";
+			//std::cout << m_icon << "\n";
+			m_icon = nullptr;
+			//std::cout << "button destructor half 1\n";
+			m_background = nullptr;
+			//std::cout << "button destructor half 2\n";
+			m_callbacks.clear();
+			//std::cout << "button destructor end\n";
+		}
+
+		Button(const Button& b) = default;
+		Button(Button&& b) = default;
 
 		void setIcon(SmartObject::Sptr sprt)
 		{
@@ -58,9 +73,8 @@ namespace JamTemplate
 		}
 
 	private:
-		Animation m_background;
-
-		SmartObject::Sptr m_icon{ nullptr };
+		std::shared_ptr<Animation> m_background;
+		std::shared_ptr<SmartObject> m_icon{ nullptr };
 
 		std::vector < std::function<void(void)> > m_callbacks;
 
@@ -68,25 +82,25 @@ namespace JamTemplate
 
 		void doDraw() const override
 		{
-			m_background.draw(getGame()->getRenderTarget());
+			m_background->draw(getGame()->getRenderTarget());
 			if (m_icon)
 				m_icon->draw(getGame()->getRenderTarget());
 		}
 
 		bool isOver(float mx, float my)
 		{
-			float px = m_background.getPosition().x;
-			float py = m_background.getPosition().y;
+			float px = m_background->getPosition().x;
+			float py = m_background->getPosition().y;
 
-			float w = m_background.getGlobalBounds().width;
-			float h = m_background.getGlobalBounds().height;
+			float w = m_background->getGlobalBounds().width;
+			float h = m_background->getGlobalBounds().height;
 			return (mx > px && mx <= px + w && my > py && my <= py + h);
 		}
 
 		void doUpdate(float elapsed) override
 		{
-			m_background.update(elapsed);
-			m_background.setPosition(getPosition());
+			m_background->update(elapsed);
+			m_background->setPosition(getPosition());
 			if (m_icon)
 			{
 				m_icon->setPosition(getPosition());
@@ -99,11 +113,11 @@ namespace JamTemplate
 			{
 				if (InputManager::pressed(sf::Mouse::Button::Left))
 				{
-					m_background.play("down");
+					m_background->play("down");
 				}
 				else
 				{
-					m_background.play("over");
+					m_background->play("over");
 				}
 
 				if (InputManager::justReleased(sf::Mouse::Button::Left))
@@ -113,6 +127,7 @@ namespace JamTemplate
 						//std::cout << "released" << std::endl;
 						for (auto& cb : m_callbacks)
 						{
+							std::cout << "callback\n";
 							cb();
 						}
 					}
@@ -121,7 +136,7 @@ namespace JamTemplate
 			else
 			{
 				//std::cout << "not over" << std::endl;
-				m_background.play("normal");
+				m_background->play("normal");
 			}
 			
 			

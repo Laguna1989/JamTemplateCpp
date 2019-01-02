@@ -21,39 +21,39 @@ set (GAMEFILES
 ## Other variables and compiler setup
 #####################################################
 set (JAMTEMPLATEFILES 
-	src/JamTemplate/Random.cpp
-	src/JamTemplate/SpriteFunctions.hpp
-	src/JamTemplate/SplitString.hpp
+	src/JamTemplate/Animation.hpp
+	src/JamTemplate/Box2DObject.hpp
 	src/JamTemplate/Button.hpp
-	src/JamTemplate/TextureManager.cpp
 	src/JamTemplate/Collision.hpp
+	src/JamTemplate/Conversions.hpp
 	src/JamTemplate/Game.hpp
 	src/JamTemplate/GameObject.hpp
 	src/JamTemplate/GameState.hpp
-	src/JamTemplate/Lerp.hpp
-	src/JamTemplate/Box2DObject.hpp
-	src/JamTemplate/Noise.hpp
 	src/JamTemplate/InputManager.hpp
 	src/JamTemplate/InputManager.cpp
+	src/JamTemplate/Lerp.hpp
+	src/JamTemplate/MathHelper.hpp
+	src/JamTemplate/Noise.hpp
 	src/JamTemplate/ObjectGroup.hpp
 	src/JamTemplate/Random.hpp
+	src/JamTemplate/Random.cpp
 	src/JamTemplate/SmartObject.hpp
 	src/JamTemplate/SmartObject.cpp
-	src/JamTemplate/SmartSprite.hpp
 	src/JamTemplate/SmartShape.hpp
-	src/JamTemplate/SmartText.hpp
+	src/JamTemplate/SmartSprite.hpp
+	src/JamTemplate/SmartText.hpp	
+	src/JamTemplate/SplitString.hpp
+	src/JamTemplate/SpriteFunctions.hpp
+	src/JamTemplate/TextureManager.cpp
 	src/JamTemplate/TextureManager.hpp
 	src/JamTemplate/Timer.hpp
 	src/JamTemplate/Transform.hpp
-	src/JamTemplate/TweenBase.hpp
 	src/JamTemplate/TweenAlpha.hpp
+	src/JamTemplate/TweenBase.hpp
 	src/JamTemplate/TweenColor.hpp
 	src/JamTemplate/TweenPosition.hpp
 	src/JamTemplate/TweenRotation.hpp
 	src/JamTemplate/TweenScale.hpp
-	src/JamTemplate/Animation.hpp
-	src/JamTemplate/MathHelper.hpp
-	src/JamTemplate/Conversions.hpp
 	)
 
 set (STRESSTESTFILES

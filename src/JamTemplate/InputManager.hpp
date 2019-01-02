@@ -138,11 +138,11 @@ namespace JamTemplate {
 		static std::map<sf::Keyboard::Key, bool> m_justPressed;
 		static std::map<sf::Keyboard::Key, bool> m_justReleased;
 
-		static std::map<sf::Mouse::Button, bool> InputManager::m_mousePressed;
-		static std::map<sf::Mouse::Button, bool> InputManager::m_mouseJustPressed;
+		static std::map<sf::Mouse::Button, bool> m_mousePressed;
+		static std::map<sf::Mouse::Button, bool> m_mouseJustPressed;
 		
-		static std::map<sf::Mouse::Button, bool> InputManager::m_mouseReleased;
-		static std::map<sf::Mouse::Button, bool> InputManager::m_mouseJustReleased;
+		static std::map<sf::Mouse::Button, bool> m_mouseReleased;
+		static std::map<sf::Mouse::Button, bool> m_mouseJustReleased;
 
 		static float m_mouseX;
 		static float m_mouseY;

@@ -22,6 +22,8 @@ namespace JamTemplate {
 		{
 		}
 
+		virtual ~Animation() = default;
+
 		void add(std::string fileName, std::string animName, sf::Vector2u size, std::vector<unsigned int> frameIndices, float frameTime)
 		{
 			if (frameIndices.size() == 0) return;

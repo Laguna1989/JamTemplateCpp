@@ -17,7 +17,9 @@ namespace JamTemplate
 	public:
 		
 		using Sptr = std::shared_ptr<SmartObject>;
-		
+	
+		virtual ~SmartObject() = default;
+
 		void draw(std::shared_ptr<sf::RenderTarget> sptr) const
 		{
 			if (m_hasBeenUpdated == false)
