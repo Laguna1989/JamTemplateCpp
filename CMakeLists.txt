@@ -6,16 +6,16 @@ cmake_minimum_required (VERSION 2.6)
 set (PROJECTNAME "MyAwesomeGame") 
 
 set (GAMEFILES 
-	src/main.cpp
-	src/Player.cpp
-	src/Balloon.hpp
 	src/GameProperties.hpp
+	src/GameProperties.cpp
 	src/Hud.hpp
-	src/Player.hpp
-	src/Shot.hpp
+	src/Hud.cpp
+	src/main.cpp
 	src/StateGame.hpp
+	src/StateGame.cpp
 	src/StateMenu.hpp
-	)	
+	src/StateMenu.cpp
+	)
 
 #####################################################
 ## Other variables and compiler setup
@@ -56,21 +56,6 @@ set (JAMTEMPLATEFILES
 	src/JamTemplate/TweenScale.hpp
 	)
 
-set (STRESSTESTFILES
-	src/StressTest/main.cpp
-	src/StressTest/State1.hpp
-	src/StressTest/State1.cpp
-	src/StressTest/State2.hpp
-	src/StressTest/State2.cpp
-	src/StressTest/StateTween.hpp
-	src/StressTest/StateTween.cpp
-	src/StressTest/StateBox2d.hpp
-	src/StressTest/StateBox2d.cpp
-	src/Stresstest/MovementObject.hpp
-	src/StressTest/SwarmObject.hpp
-	src/StressTest/Object.hpp
-	)
-
 
 if(WIN32)
 	set (CMAKE_CXX_STANDARD 14)
@@ -106,7 +91,8 @@ target_include_directories(Box2D PRIVATE ext/box2d)
 
 add_library(JamTemplate ${JAMTEMPLATEFILES})
 add_executable(${PROJECTNAME}  ${GAMEFILES})
-add_executable(StressTest  ${STRESSTESTFILES})
+
+
 
 target_include_directories(JamTemplate PRIVATE ext/SFML-2.5.1_win/include)
 target_include_directories(JamTemplate PRIVATE ext/box2d)
@@ -130,17 +116,6 @@ target_link_libraries(${PROJECTNAME} optimized sfml-system )
 target_link_libraries(${PROJECTNAME} optimized sfml-graphics )
 target_link_libraries(${PROJECTNAME} JamTemplate)
 target_link_libraries(${PROJECTNAME} Box2D)
-
-
-
-target_include_directories(StressTest PRIVATE ext/SFML-2.5.1_win/include)
-target_include_directories(StressTest PRIVATE ext/box2d)
-target_include_directories(StressTest PRIVATE /usr/local/Cellar/sfml/2.4.2_1/include) 
-target_link_libraries(StressTest optimized sfml-window )
-target_link_libraries(StressTest optimized sfml-system )
-target_link_libraries(StressTest optimized sfml-graphics )
-target_link_libraries(StressTest JamTemplate)
-target_link_libraries(Box2D JamTemplate)
 
 
 #####################################################

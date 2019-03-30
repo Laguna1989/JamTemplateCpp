@@ -24,7 +24,7 @@ public:
 
 	void setUp(unsigned int w, unsigned int h, float zoom, std::string title)
 	{
-		m_renderWindow = std::make_shared<sf::RenderWindow>(sf::VideoMode(w, h), title);
+		m_renderWindow = std::make_shared<sf::RenderWindow>(sf::VideoMode(w, h), title, sf::Style::Close);
 		m_renderWindow->setFramerateLimit(60);
 
 		m_renderTarget = std::make_shared<sf::RenderTexture>();

@@ -107,6 +107,11 @@ namespace JamTemplate
 			return m_textures.count(filename) != 0;
 		}
 
+		static void addTexture(std::string name, sf::Texture& t)
+		{
+			m_textures[name] = (t);
+		}
+
 	private:
 		static std::map<std::string, sf::Texture> m_textures;
 

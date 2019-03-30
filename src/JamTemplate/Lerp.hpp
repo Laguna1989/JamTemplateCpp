@@ -26,6 +26,54 @@ namespace JamTemplate
 			return linear(a, b, tRemapCosine);
 		}
 
+
+		template <typename T>
+		static T cubic(T const& a, T const& b, T const& t)
+		{
+			assert(t >= 0 && t <= 1);
+			float cub = t * t *t;
+			return linear(a, b, cub);
+		}
+
+		template <typename T>
+		static T cubicInvers(T const& a, T const& b, T const& t)
+		{
+			assert(t >= 0 && t <= 1);
+			float cub = (1-t) * (1-t) *(1-t);
+			return linear(a, b, cub);
+		}
+
+		template <typename T>
+		static T bounce(T const& a, T const& b, T t)
+		{
+			assert(t >= 0 && t <= 1);
+			if ((t) < (1 / 2.75f)) 
+			{
+				return b * (7.5625f*t*t) + a;
+			}
+			else if (t < (2 / 2.75f)) 
+			{
+				float postFix = t -= (1.5f / 2.75f);
+				return b * (7.5625f*(postFix)*t + .75f) + a;
+			}
+			else if (t < (2.5 / 2.75)) 
+			{
+				float postFix = t -= (2.25f / 2.75f);
+				return b * (7.5625f*(postFix)*t + .9375f) + a;
+			}
+			else 
+			{
+				float postFix = t -= (2.625f / 2.75f);
+				return b * (7.5625f*(postFix)*t + .984375f) + a;
+			}
+		}
+
+		template <typename T>
+		static T bounceInvers(T const& a, T const& b, T & t)
+		{
+			return b - bounce(a, b, 1 - t) + a;
+		}
+
 	private:
 		template <typename T>
 		static T precheck(T const& ti)

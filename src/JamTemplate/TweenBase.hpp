@@ -35,8 +35,13 @@ namespace JamTemplate {
 
 		void update(float elapsed)
 		{
+			if (m_skipFrames > 0)
+			{
+				m_skipFrames--;
+				return;
+			}
 			m_age += elapsed;
-			if (m_age < m_startDelay) return;
+			//if (m_age < m_startDelay) return;
 			doUpdate(elapsed);
 		}
 		bool isAlive()
@@ -59,10 +64,20 @@ namespace JamTemplate {
 		{
 			m_completeCallbacks.push_back(cb);
 		}
+
+		void setSkipFrames(int skf = 1)
+		{
+			m_skipFrames = skf;
+		}
+		int getSkipFrames() const
+		{
+			return m_skipFrames;
+		}
 	protected:
 		
 		float getAge() const { return m_age - m_startDelay; }
 	private:
+		int m_skipFrames{ 0 };
 		float m_age{ 0.0f };
 		float m_startDelay{};
 		bool m_alive{true};

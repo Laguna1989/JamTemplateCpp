@@ -219,6 +219,17 @@ namespace JamTemplate {
 				m_released[sf::Keyboard::Key::Num8] = false;
 				m_released[sf::Keyboard::Key::Num9] = false;
 
+				m_released[sf::Keyboard::Key::Numpad0] = false;
+				m_released[sf::Keyboard::Key::Numpad1] = false;
+				m_released[sf::Keyboard::Key::Numpad2] = false;
+				m_released[sf::Keyboard::Key::Numpad3] = false;
+				m_released[sf::Keyboard::Key::Numpad4] = false;
+				m_released[sf::Keyboard::Key::Numpad5] = false;
+				m_released[sf::Keyboard::Key::Numpad6] = false;
+				m_released[sf::Keyboard::Key::Numpad7] = false;
+				m_released[sf::Keyboard::Key::Numpad8] = false;
+				m_released[sf::Keyboard::Key::Numpad9] = false;
+
 				m_mouseReleased[sf::Mouse::Button::Left] = false;
 				m_mouseReleased[sf::Mouse::Button::Middle] = false;
 				m_mouseReleased[sf::Mouse::Button::Right] = false;

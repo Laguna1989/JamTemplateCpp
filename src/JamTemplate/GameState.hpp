@@ -22,17 +22,11 @@ namespace JamTemplate {
 
 		virtual  ~GameState()
 		{
-			//std::cout << "gamestate dtor start \n";
 			m_tweens.clear();
 			m_tweensToAdd.clear();
 
-			//std::cout << "gamestate dtor start half\n";
-
 			m_objectsToAdd.clear();
-			//std::cout << "gamestate dtor start half 2\n";
 			m_objects.clear();
-			
-			//std::cout << "gamestate dtor end \n";
 		};
 	
 		void create() 
@@ -63,7 +57,7 @@ namespace JamTemplate {
 		{
 			cleanUpObjects();
 			addNewObjects();
-
+			
 			for (auto& go : m_objects)
 			{
 				go->update(elapsed);

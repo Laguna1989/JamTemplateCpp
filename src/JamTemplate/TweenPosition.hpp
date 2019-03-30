@@ -16,17 +16,18 @@ namespace JamTemplate {
 		}
 
 		// Tween position from valueStart to valueEnd of obj withtin time
-		TweenPosition(std::weak_ptr<T> obj, float time, sf::Vector2f valueStart, sf::Vector2f valueEnd) : Tween<T>{ obj, [this](auto sptr, auto age)
+		TweenPosition(std::weak_ptr<T> obj, float time, sf::Vector2f valueStart, sf::Vector2f valueEnd) : 
+			Tween<T>{ obj, [this](auto sptr, auto age)
 		{
 			auto pos = sptr->getPosition();
 			
-			float val = age / totalTime;
+			float val = age / m_totalTime;
 
 			pos.x = Lerp::linear(static_cast<float>(m_initialValue.x), static_cast<float>(m_finalValue.x), val);
 			pos.y = Lerp::linear(static_cast<float>(m_initialValue.y), static_cast<float>(m_finalValue.y), val);
 			
 			sptr->setPosition(pos);
-			return true;
+			return (age < m_totalTime);
 		} }
 		{
 			m_totalTime = time;
@@ -34,7 +35,7 @@ namespace JamTemplate {
 			m_finalValue = valueEnd;
 		}
 	private:
-		float m_totalTime{ 1.0f; };
+		float m_totalTime{ 1.0f };
 		sf::Vector2f m_initialValue{ };
 		sf::Vector2f m_finalValue  { };
 	};

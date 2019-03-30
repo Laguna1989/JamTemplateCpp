@@ -2,43 +2,33 @@
 #define GAME_HUD_HPP_INCLUDEGUARD
 
 #include <string>
-#include <SFML/Graphics.hpp>
-
+#include "JamTemplate/SmartText.hpp"
 #include "JamTemplate/GameObject.hpp"
-#include "JamTemplate/Game.hpp"
+
 
 class Hud : public JamTemplate::GameObject {
 public:
-	Hud() 
-	{
-		//m_font.loadFromFile("assets/ARCADECLASSIC.TTF");
-	
-		//m_text = sf::Text("Score   0", m_font, 24);
-	/*	m_text.setPosition(0, 0);
-		m_text.setOutlineColor(sf::Color::Black);
-		m_text.setOutlineThickness(2);*/
-	}
+	Hud();
 
-	void increaseScore()
-	{
-		m_score++;
-		//m_text.setString("Score   " + std::to_string(m_score));
-	}
+	void AddScoreP1(int i = 1);
+	void AddScoreP2(int i = 1);
 
 private:
-	void doUpdate(float const /*elapsed*/) override
-	{
-	}
 
-	void doDraw() const override
-	{
-		getGame()->getRenderTarget()->draw(m_text);
-	}
+	int m_scoreP1{ -1 };
+	int m_scoreP2{ -1 };
 
-	//sf::Font m_font;
-	sf::Text m_text;
+	JamTemplate::SmartText::Sptr m_scoreP1Text;
+	JamTemplate::SmartText::Sptr m_scoreP2Text;
 
-	int m_score{ 0 };
+	void doUpdate(float const elapsed) override;
+
+	void doDraw() const override;
+
+	void doCreate() override;
+
+	
+
 };
 
 #endif

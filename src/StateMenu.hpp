@@ -1,23 +1,33 @@
 #ifndef GAME_STATE_MENU_HPP_INCLUDEGUARD
 #define GAME_STATE_MENU_HPP_INCLUDEGUARD
 
-#include <iostream>
 #include "JamTemplate/GameState.hpp"
-#include "JamTemplate/Game.hpp"
-#include "StateGame.hpp"
-class StateMenu : public JamTemplate::GameState {
+
+namespace JamTemplate
+{
+	class SmartText;
+	class SmartShape;
+}
+
+class StateMenu : public JamTemplate::GameState 
+{
 public:
-	StateMenu() = default;
+	StateMenu();
+
 private:
-	void doInternalUpdate (float const /*elapsed*/) override 
-	{
-		//if (getAge() >= 0.25)
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
-		{
-			getGame()->switchState(std::make_shared<StateGame>());
-		}
-		
-	}
+	std::shared_ptr<JamTemplate::SmartShape> m_background;
+
+	mutable std::shared_ptr<JamTemplate::SmartText>  m_text_Title;
+	std::shared_ptr<JamTemplate::SmartText>  m_test_Explanation;
+	std::shared_ptr<JamTemplate::SmartText>  m_text_Credits;
+
+	std::shared_ptr<JamTemplate::SmartShape> m_overlay;
+
+	bool m_starting{ false };
+
+	void doInternalUpdate(float const /*elapsed*/) override;
+	void doCreate() override;
+	void doInternalDraw() const override;
 };
 
 #endif
