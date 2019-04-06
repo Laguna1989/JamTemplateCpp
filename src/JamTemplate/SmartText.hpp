@@ -58,10 +58,6 @@ namespace JamTemplate
 			m_text->setString(text);
 			m_flashText->setString(text);
 		}
-		std::string getText() const
-		{
-			return m_text->getString();
-		}
 
 		void setOutline(float thickness, sf::Color col)
 		{

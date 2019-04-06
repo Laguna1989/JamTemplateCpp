@@ -19,7 +19,6 @@ namespace JamTemplate {
 		static bool getChance(float c = 0.5f);
 
 		static sf::Color const getRandomColor();
-		static sf::Vector2f const getRandomPointin(sf::FloatRect rect);
 
 	private:
 		static std::default_random_engine m_engine;

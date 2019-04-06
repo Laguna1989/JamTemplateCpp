@@ -105,15 +105,6 @@ namespace JamTemplate
 		{
 			m_camOffset = ofs;
 		}
-		static void addCamOffset(sf::Vector2f ofs)
-		{
-			m_camOffset += ofs;
-		}
-		static sf::Vector2f getCamOffsetStatic()
-		{
-			return m_camOffset;
-		}
-
 
 	protected:
 		sf::Vector2f getShakeOffset() const

@@ -52,11 +52,8 @@ namespace JamTemplate {
 		void setPosition(vt const p) { m_position = p; }
 		void setVelocity(vt const v) { m_velocity = v; }
 		void setAcceleration(vt const a) { m_acceleration = a; }
-		void resetAcceleration() { m_acceleration = vt{}; }
-		void addAcceleration(vt const a) { m_acceleration += a; }
 
-		vt getPosition() const { return m_position - vt{m_camOffset.x * m_CamOffsetFactor.x, m_camOffset.y * m_CamOffsetFactor.y }; }
-		vt getPositionRaw() const { return m_position; }
+		vt getPosition() const { return m_position; }
 		vt getVelocity() const { return m_velocity; }
 		vt getAcceleration() const { return m_acceleration; }
 
@@ -95,8 +92,6 @@ namespace JamTemplate {
 		rt m_boundsVelocity{};
 		bool m_useBoundsVelocity = false;
 
-		static vt m_camOffset;
-		vt m_CamOffsetFactor{ 1.0f,1.0f };
 
 		void setToBounds(vt& value, rt const& r, bool const useBounds )
 		{

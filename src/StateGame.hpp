@@ -12,7 +12,7 @@ namespace JamTemplate
 {
 	class SmartShape;
 }
-class Tilemap;
+
 class Hud;
 
 class StateGame : public JamTemplate::GameState {
@@ -20,8 +20,9 @@ public:
 	StateGame() = default;
 protected:
 	std::shared_ptr<Hud> m_hud;
-	std::shared_ptr<Tilemap> m_tilemap;
 private:
+
+	
 
 	std::shared_ptr<JamTemplate::SmartShape> m_background;
 	std::shared_ptr<JamTemplate::SmartShape> m_overlay;
@@ -33,8 +34,6 @@ private:
 
 	virtual void doInternalUpdate(float const elapsed) override;
 	virtual void doInternalDraw() const override;
-
-	void moveCamera(float elapsed);
 };
 
 #endif

@@ -33,12 +33,3 @@ sf::Color const Random::getRandomColor()
 	sf::Uint8 b = static_cast<sf::Uint8>(getInt(0, 255));
 	return sf::Color{ r,g,b };
 }
-
-
-sf::Vector2f const Random::getRandomPointin(sf::FloatRect r)
-{
-	auto x = getFloat(r.left, r.left + r.width);
-	auto y = getFloat(r.top, r.top+ r.height);
-
-	return sf::Vector2f{ x,y };
-}
