@@ -6,17 +6,22 @@
 #include "JamTemplate/Game.hpp"
 #include "GameProperties.hpp"
 #include "Hud.hpp"
+#include "TileMap.hpp"
 
 void StateGame::doInternalUpdate (float const elapsed) 
 {
+	moveCamera(elapsed);
 	m_overlay->update(elapsed);	
+	m_tilemap->update(elapsed);
 }
 
 void StateGame::doInternalDraw() const 
 {
 	m_background->draw(getGame()->getRenderTarget());
 	drawObjects();
+	m_tilemap->draw();
 	m_overlay->draw(getGame()->getRenderTarget());
+	
 }
 
 void StateGame::doCreate()
@@ -48,4 +53,34 @@ void StateGame::doCreate()
 
 void StateGame::doCreateInternal()
 {
+	
+	m_tilemap = std::make_shared<Tilemap>();
+	m_tilemap->setGameInstance(getGame()); 
+	add(m_tilemap);
+}
+
+
+void StateGame::moveCamera(float elapsed)
+{
+	using im = JamTemplate::InputManager;
+	using k = sf::Keyboard::Key;
+	using vt = sf::Vector2f;
+	using so = JamTemplate::SmartObject;
+	if (im::pressed(k::A) || im::pressed(k::Left))
+	{
+		getGame()->getView()->move(vt{ -GP::Scrollspeed() * elapsed, 0 });
+	}
+	if (im::pressed(k::D) || im::pressed(k::Right))
+	{
+		getGame()->getView()->move(vt{ GP::Scrollspeed() * elapsed, 0 });
+	}
+	if (im::pressed(k::W) || im::pressed(k::Up))
+	{
+		getGame()->getView()->move(vt{ 0, -GP::Scrollspeed() * elapsed });
+	}
+	if (im::pressed(k::S) || im::pressed(k::Down))
+	{
+		getGame()->getView()->move(vt{ 0, GP::Scrollspeed() * elapsed });
+	}
+	//std::cout << so::getCamOffsetStatic().x << std::endl;
 }

@@ -2,6 +2,7 @@
 #define JAMTEMPLATE_MATHHELPER_HPP_INCLUDEGUARD
 
 #include <vector>
+#include <SFML/Graphics.hpp>
 
 namespace JamTemplate {
 
@@ -31,6 +32,15 @@ namespace JamTemplate {
 		static float length(sf::Vector2f v)
 		{
 			return std::sqrt(v.x*v.x + v.y*v.y);
+		}
+		static void normalizeMe(sf::Vector2f& v, float lowerbound = 0)
+		{
+			float l = length(v);
+			if (l >= lowerbound)
+			{
+				v.x /= l;
+				v.y /= l;
+			}
 		}
 
 		static float rad2deg(float a)
