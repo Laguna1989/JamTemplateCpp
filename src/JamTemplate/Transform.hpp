@@ -52,6 +52,8 @@ namespace JamTemplate {
 		void setPosition(vt const p) { m_position = p; }
 		void setVelocity(vt const v) { m_velocity = v; }
 		void setAcceleration(vt const a) { m_acceleration = a; }
+		void resetAcceleration() { m_acceleration = vt{}; }
+		void addAcceleration(vt const a) { m_acceleration += a; }
 
 		vt getPosition() const { return m_position; }
 		vt getVelocity() const { return m_velocity; }
