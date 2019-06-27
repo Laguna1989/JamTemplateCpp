@@ -2,38 +2,35 @@
 #define GAME_STATE_GAME_HPP_INCLUDEGUARD
 
 #include <iostream>
-#include <vector>
 #include <memory>
+#include <vector>
 
 #include "JamTemplate/GameState.hpp"
 
 // fwd decls
-namespace JamTemplate
-{
-	class SmartShape;
+namespace JamTemplate {
+class SmartShape;
 }
 
 class Hud;
 
 class StateGame : public JamTemplate::GameState {
 public:
-	StateGame() = default;
+    StateGame() = default;
+
 protected:
-	std::shared_ptr<Hud> m_hud;
+    std::shared_ptr<Hud> m_hud;
+
 private:
+    std::shared_ptr<JamTemplate::SmartShape> m_background;
+    std::shared_ptr<JamTemplate::SmartShape> m_overlay;
 
-	
+    void doCreate() override;
 
-	std::shared_ptr<JamTemplate::SmartShape> m_background;
-	std::shared_ptr<JamTemplate::SmartShape> m_overlay;
+    virtual void doCreateInternal();
 
-
-	void doCreate() override;
-
-	virtual void doCreateInternal();
-
-	virtual void doInternalUpdate(float const elapsed) override;
-	virtual void doInternalDraw() const override;
+    virtual void doInternalUpdate(float const elapsed) override;
+    virtual void doInternalDraw() const override;
 };
 
 #endif
