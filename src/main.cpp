@@ -20,8 +20,9 @@ int main()
         sf::Time elapsed = clock.restart();
         sf::Event event;
         while (window->pollEvent(event)) {
-            if (event.type == sf::Event::Closed)
+            if (event.type == sf::Event::Closed) {
                 window->close();
+            }
         }
         game->update(elapsed.asSeconds());
         game->draw();

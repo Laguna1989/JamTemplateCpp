@@ -2,21 +2,21 @@
 
 #include "JamTemplate/Game.hpp"
 
-Hud::Hud()
-{
-}
+Hud::Hud() = default;
 
 void Hud::AddScoreP1(int i)
 {
     m_scoreP1 += i;
-    if (m_scoreP1 < 0)
+    if (m_scoreP1 < 0) {
         m_scoreP1 = 0;
+    }
 }
 void Hud::AddScoreP2(int i)
 {
     m_scoreP2 += i;
-    if (m_scoreP2 < 0)
+    if (m_scoreP2 < 0) {
         m_scoreP2 = 0;
+    }
 }
 void Hud::doUpdate(float const elapsed)
 {

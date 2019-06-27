@@ -12,7 +12,7 @@
 StateMenu::StateMenu() = default;
 void StateMenu::doInternalUpdate(float const elapsed)
 {
-    if (m_starting == false) {
+    if (!m_starting) {
         using ip = JamTemplate::InputManager;
         if (ip::justPressed(sf::Keyboard::Key::Space) || ip::justPressed(sf::Keyboard::Key::Return)) {
 
@@ -108,7 +108,7 @@ void StateMenu::doInternalDraw() const
 
     m_text_Title->setPosition({ wC, 20 });
     m_text_Title->setColor(GP::PaletteFontFront());
-    m_text_Title->update(0.0f);
+    m_text_Title->update(0.0);
     m_text_Title->draw(getGame()->getRenderTarget());
 
     m_test_Explanation->draw(getGame()->getRenderTarget());
