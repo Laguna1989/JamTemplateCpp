@@ -5,7 +5,6 @@ namespace JamTemplate {
 std::map<sf::Keyboard::Key, bool> InputManager::m_pressed;
 std::map<sf::Keyboard::Key, bool> InputManager::m_released;
 
-
 std::map<sf::Keyboard::Key, bool> InputManager::m_justPressed;
 std::map<sf::Keyboard::Key, bool> InputManager::m_justReleased;
 
@@ -19,6 +18,5 @@ float InputManager::m_mouseY;
 
 float InputManager::m_mouseScreenX;
 float InputManager::m_mouseScreenY;
-
 
 } // namespace JamTemplate

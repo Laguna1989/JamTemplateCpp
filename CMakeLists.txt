@@ -88,7 +88,6 @@ target_include_directories(Box2D PRIVATE ext/box2d)
 #####################################################
 ## setup other libs and executables
 #####################################################
-
 add_library(JamTemplate ${JAMTEMPLATEFILES})
 add_executable(${PROJECTNAME}  ${GAMEFILES})
 
@@ -119,7 +118,7 @@ target_link_libraries(${PROJECTNAME} Box2D)
 
 
 #####################################################
-## copy sfml dlls around
+## copy sfml dlls and .clang-format around
 #####################################################
 if (WIN32)
     configure_file(${CMAKE_SOURCE_DIR}/ext/SFML-2.5.1_win/bin/sfml-system-2.dll ${CMAKE_BINARY_DIR}/ COPYONLY)
@@ -130,7 +129,7 @@ if (WIN32)
     configure_file(${CMAKE_SOURCE_DIR}/ext/SFML-2.5.1_win/bin/sfml-window-d-2.dll ${CMAKE_BINARY_DIR}/ COPYONLY)
     configure_file(${CMAKE_SOURCE_DIR}/ext/SFML-2.5.1_win/bin/sfml-graphics-d-2.dll ${CMAKE_BINARY_DIR}/ COPYONLY)
 endif (WIN32)
-
+configure_file(${CMAKE_SOURCE_DIR}/.clang-format ${CMAKE_BINARY_DIR}/ COPYONLY)
 
 #####################################################
 ## copy assets around

@@ -1,0 +1,10 @@
+﻿---
+BasedOnStyle: WebKit
+Language: Cpp
+PointerAlignment: Left
+SpaceBeforeParens: ControlStatements
+SpacesInParentheses: 'false'
+Standard: Cpp11
+UseTab: Never
+
+...
