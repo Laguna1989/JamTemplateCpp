@@ -109,6 +109,7 @@ endif (WIN32)
 
 
 target_include_directories(${PROJECTNAME} PRIVATE ext/SFML-2.5.1_win/include)
+target_include_directories(${PROJECTNAME} PRIVATE ext/box2d/)
 target_include_directories(${PROJECTNAME} PRIVATE /usr/local/Cellar/sfml/2.4.2_1/include) 
 target_link_libraries(${PROJECTNAME} optimized sfml-window )
 target_link_libraries(${PROJECTNAME} optimized sfml-system )
