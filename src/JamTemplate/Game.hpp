@@ -28,7 +28,7 @@ public:
         m_renderWindow->setFramerateLimit(60);
 
         m_renderTarget = std::make_shared<sf::RenderTexture>();
-        m_renderTarget->create(static_cast<unsigned int>(w / zoom), static_cast<unsigned int>(h / zoom), false);
+        m_renderTarget->create(static_cast<unsigned int>(w / zoom), static_cast<unsigned int>(h / zoom));
         m_renderTarget->setSmooth(false);
 
         m_view = std::make_shared<sf::View>(sf::FloatRect(0, 0, (float)static_cast<unsigned int>(w / zoom), (float)static_cast<unsigned int>(h / zoom)));
