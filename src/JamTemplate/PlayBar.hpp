@@ -2,6 +2,8 @@
 #define JAMTEMPLATE_PLAYBAR_HPP_INCLUDEGUARD
 
 #include "GameObject.hpp"
+#include "SFML/System/Vector2.hpp"
+#include <cassert>
 #include <memory>
 #include <vector>
 
@@ -15,30 +17,38 @@ public:
     virtual void doDraw() const override;
     virtual void doCreate() override;
 
-    PlayBar(std::int32_t duration, std::int32_t loop_start = 0, std::int32_t loop_end = 0, std::int32_t skip_to = 0);
+    PlayBar(float width, float height);
 
-    void setPosition(std::int32_t position)
+    void setPosition(sf::Vector2f const& pos);
+
+    void setFrontColor(sf::Color const& col);
+    void setBackColor(sf::Color const& col);
+
+    void setCurrentValue(float position)
     {
-        m_position = position;
+        m_current_value = position;
+        if (m_current_value < 0) {
+            m_current_value = 0;
+        } else if (m_current_value > m_max_value) {
+            m_current_value = m_max_value;
+        }
     }
-    void set_y_pos(float y);
+
+    void setMaxValue(float max)
+    {
+        assert(max >= 0);
+        m_max_value = max;
+    }
 
 private:
-    std::int32_t m_duration;
-    std::int32_t m_skip;
-    std::vector<std::int32_t> m_skip_from;
-    std::int32_t m_position;
-    std::int32_t m_loop_start;
-    std::int32_t m_loop_end;
+    float m_max_value;
+    float m_current_value;
 
     float const m_width;
+    float const m_height;
 
     sf::RectangleShape m_shape_full;
     sf::RectangleShape m_shape_progress;
-    sf::RectangleShape m_shape_loop_start;
-    sf::RectangleShape m_shape_loop_end;
-    sf::RectangleShape m_shape_skip;
-    mutable sf::RectangleShape m_shape_skip_from;
 };
 
 }

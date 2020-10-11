@@ -2,6 +2,7 @@
 #define JAMTEMPLATE_TWEENBASE_HPP_INCLUDEGUARD
 
 #include <SFML/Graphics.hpp>
+#include <cassert>
 #include <functional>
 #include <memory>
 
@@ -30,7 +31,11 @@ public:
     void finish()
     {
         handleCompleteCallbacks();
-        kill();
+        if (m_repeat) {
+            m_age = 0;
+        } else {
+            kill();
+        }
     }
 
     void update(float elapsed)
@@ -73,6 +78,15 @@ public:
         return m_skipFrames;
     }
 
+    void setRepeat(bool repeat)
+    {
+        m_repeat = repeat;
+    }
+    bool getRepeat() const
+    {
+        return m_repeat;
+    }
+
 protected:
     float getAge() const { return m_age - m_startDelay; }
 
@@ -81,6 +95,7 @@ private:
     float m_age { 0.0f };
     float m_startDelay {};
     bool m_alive { true };
+    bool m_repeat { false };
 
     std::vector<CallbackType> m_completeCallbacks;
 
@@ -88,6 +103,7 @@ private:
     void handleCompleteCallbacks()
     {
         for (auto& cb : m_completeCallbacks) {
+            assert(cb);
             cb();
         }
     }

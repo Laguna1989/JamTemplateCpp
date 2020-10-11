@@ -22,7 +22,7 @@ public:
                         float rot = Lerp::linear(static_cast<float>(m_initialValue), static_cast<float>(m_finalValue), val);
 
                         sptr->setRotation(rot);
-                        return true;
+                        return (age < m_totalTime);
                     } }
     {
         m_totalTime = time;

@@ -1,16 +1,15 @@
 #ifndef STRESSTEST_STATE_BOX2D_HPP_INCLUDEGUARD
 #define STRESSTEST_STATE_BOX2D_HPP_INCLUDEGUARD
 
-#include <iostream>
-#include <vector>
-
-#include <Box2D/Box2D.h>
-
 #include "../JamTemplate/Game.hpp"
 #include "../JamTemplate/GameState.hpp"
+#include "../JamTemplate/PlayBar.hpp"
 #include "../JamTemplate/SmartShape.hpp"
 #include "../JamTemplate/TweenRotation.hpp"
 #include "MovementObject.hpp"
+#include <Box2D/Box2D.h>
+#include <iostream>
+#include <vector>
 
 class StateBox2d : public JamTemplate::GameState {
 public:
@@ -21,8 +20,8 @@ public:
 
 private:
     std::shared_ptr<b2World> m_world { nullptr };
-
-    void doInternalUpdate(float const /*elapsed*/) override;
+    JamTemplate::PlayBar::Sptr m_bar1;
+    JamTemplate::PlayBar::Sptr m_bar2;
 
     void doCreate() override
     {
@@ -72,9 +71,21 @@ private:
         add(myBody);
         {
             auto tw = JamTemplate::TweenRotation<JamTemplate::Animation>::create(myBody->getAnimation(), 2, 0, 360);
+            tw->setRepeat(true);
             add(tw);
         }
+
+        m_bar1 = std::make_shared<JamTemplate::PlayBar>(100.0f, 10.0f);
+        m_bar1->setPosition(sf::Vector2f { 10, 10 });
+        add(m_bar1);
+
+        m_bar2 = std::make_shared<JamTemplate::PlayBar>(100.0f, 10.0f);
+        m_bar2->setPosition(sf::Vector2f { 10, 25 });
+        m_bar2->setMaxValue(2.0f);
+        add(m_bar2);
     }
+
+    void doInternalUpdate(float const /*elapsed*/) override;
 };
 
 #endif
