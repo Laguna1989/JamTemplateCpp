@@ -2,11 +2,11 @@
 
 ## Setup
  1. go to ext folder and extract zip (more will come for other versions/IDEs)
- 2. create build directory build/vsstudio
+ 2. create build directory build parallel to src
  3. open command line (win+r "cmd")
  4. navigate to the just created build folder
- 5. type cmake ../..
- 5.1 For visual studio getting stuck between x64 and x86, use cmake -A Win32 ../..
+ 5. type cmake ../
+ 5.1 For visual studio getting stuck between x64 and x86, use cmake -A Win32 -T host=x86 ../
  
 For mac os you have to install cmake and sfml via homebrew: `brew install cmake sfml`
 If you use another package manager or want to install the dependencies yourself, you have to modify the paths in `CMakeLists.txt`.
