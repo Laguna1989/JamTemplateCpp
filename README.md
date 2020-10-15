@@ -6,7 +6,7 @@
  3. open command line (win+r "cmd")
  4. navigate to the just created build folder
  5. type cmake ../
- 5.1 For visual studio getting stuck between x64 and x86, use cmake -A Win32 -T host=x86 ../
+ 5.1 For visual studio getting stuck between x64 and x86, use cmake ../
  
 For mac os you have to install cmake and sfml via homebrew: `brew install cmake sfml`
 If you use another package manager or want to install the dependencies yourself, you have to modify the paths in `CMakeLists.txt`.
