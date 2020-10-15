@@ -30,6 +30,33 @@ public:
                     sf::Image img {};
                     SpriteFunctions::makeButtonImage(img, w, h);
                     m_textures[str].loadFromImage(img);
+                } else if (ssv.at(0) == "r") {
+                    // "#r#assets/player.png#0"
+                    if (ssv.size() != 3) {
+                        std::cout << str << std::endl;
+                        //throw std::invalid_argument("not correct parameters for color replace");
+                    }
+                    std::string baseFileName = ssv.at(1);
+                    sf::Image i {};
+                    i.loadFromFile(baseFileName);
+
+                    if (!m_selectiveColorReplace.empty()) {
+
+                        auto idx = std::stoul(ssv.at(2));
+                        if (!m_selectiveColorReplace.at(idx).empty()) {
+                            for (unsigned int x = 0; x != i.getSize().x; ++x) {
+                                for (unsigned int y = 0; y != i.getSize().y; ++y) {
+                                    auto c = i.getPixel(x, y);
+                                    for (auto const kvp : m_selectiveColorReplace.at(idx)) {
+                                        if (c == kvp.first) {
+                                            i.setPixel(x, y, kvp.second);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    m_textures[str].loadFromImage(i);
                 } else {
                     throw std::invalid_argument("ERROR: cannot get texture with name " + str);
                 }
@@ -46,7 +73,6 @@ public:
 
             m_textures[getFlashName(str)].create(m_textures[str].getSize().x, m_textures[str].getSize().y);
             m_textures[getFlashName(str)].update(img);
-            //m_textures[getFlashName(str)].u
         }
 
         return m_textures[str];
@@ -93,8 +119,19 @@ public:
         m_textures[name] = (t);
     }
 
+    static void addselectiveColorReplacement(int idx, std::vector<std::pair<sf::Color, sf::Color>> replace)
+    {
+        if (m_selectiveColorReplace.size() <= idx) {
+            m_selectiveColorReplace.resize(idx + 1);
+        }
+
+        m_selectiveColorReplace.at(idx) = replace;
+    }
+
 private:
-    static std::map<std::string, sf::Texture> m_textures;
+    static std::map<std::string, sf::Texture>
+        m_textures;
+    static std::vector<std::vector<std::pair<sf::Color, sf::Color>>> m_selectiveColorReplace;
 };
 } // namespace JamTemplate
 

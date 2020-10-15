@@ -49,6 +49,19 @@ public:
     {
         return a / 180.0f * 3.1415926f;
     }
+
+    template <typename T>
+    static T clamp(T const& value, T const& min, T const& max)
+    {
+        assert(min < max);
+        if (value < min) {
+            return min;
+        }
+        if (value > max) {
+            return max;
+        }
+        return value;
+    }
 };
 
 } // namespace JamTemplate
