@@ -19,4 +19,6 @@ float InputManager::m_mouseY;
 float InputManager::m_mouseScreenX;
 float InputManager::m_mouseScreenY;
 
+float InputManager::m_age;
+
 } // namespace JamTemplate

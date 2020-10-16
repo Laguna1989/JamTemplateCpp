@@ -11,9 +11,15 @@ class InputManager {
 public:
     InputManager() = delete;
 
-    static void update(float mx, float my, float mxs, float mys)
+    static void update(float mx, float my, float mxs, float mys, float elapsed)
     {
         setup();
+
+        float const old_time = m_age;
+        m_age += elapsed;
+        if (old_time <= 0.1f) {
+            return;
+        }
 
         m_mouseX = mx;
         m_mouseY = my;
@@ -106,6 +112,7 @@ public:
 
     static void reset()
     {
+        m_age = 0.0f;
         for (auto& kvp : m_released) {
             m_pressed[kvp.first] = false;
             m_released[kvp.first] = false;
@@ -138,6 +145,8 @@ private:
 
     static float m_mouseScreenX;
     static float m_mouseScreenY;
+
+    static float m_age;
 
     static void setup()
     {

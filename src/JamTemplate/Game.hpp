@@ -129,7 +129,7 @@ private:
         SmartObject::setCamOffset(getCamOffset());
         sf::Vector2f mpf = getRenderWindow()->mapPixelToCoords(sf::Mouse::getPosition(*getRenderWindow()), *getView());
         sf::Vector2f mpfs = getRenderWindow()->mapPixelToCoords(sf::Mouse::getPosition(*getRenderWindow())) / m_zoom;
-        InputManager::update(mpf.x, mpf.y, mpfs.x, mpfs.y);
+        InputManager::update(mpf.x, mpf.y, mpfs.x, mpfs.y, elapsed);
 
         updateShake(elapsed);
         m_state->update(elapsed);
@@ -202,6 +202,7 @@ private:
         m_state->setGameInstance(getPtr());
         m_state->create();
 
+        JamTemplate::InputManager::reset();
         resetShake();
     }
 };
