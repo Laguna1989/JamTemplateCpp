@@ -1,13 +1,24 @@
-#ifndef JAMTEMPLATE_LERP_HPP_INCLUDEGUARD
+﻿#ifndef JAMTEMPLATE_LERP_HPP_INCLUDEGUARD
 #define JAMTEMPLATE_LERP_HPP_INCLUDEGUARD
 
 #include <assert.h>
 
 namespace JamTemplate {
-class Lerp {
-public:
-    Lerp() = delete;
 
+namespace {
+    template <typename T>
+    static T precheck(T const& ti)
+    {
+        T t = ti;
+        if (t < 0)
+            t = 0;
+        if (t > 1)
+            t = 1;
+        return t;
+    }
+}
+
+namespace Lerp {
     // linear interpolation between a and b with t between 0 and 1
     template <typename T>
     static T linear(T const& a, T const& b, T const& ti)
@@ -65,18 +76,7 @@ public:
         return b - bounce(a, b, 1 - t) + a;
     }
 
-private:
-    template <typename T>
-    static T precheck(T const& ti)
-    {
-        T t = ti;
-        if (t < 0)
-            t = 0;
-        if (t > 1)
-            t = 1;
-        return t;
-    }
-};
+}
 }
 
 #endif

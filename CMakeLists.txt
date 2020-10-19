@@ -5,6 +5,7 @@ cmake_minimum_required (VERSION 3.18)
 #####################################################
 set (PROJECTNAME "MyAwesomeGame") 
 
+set (ENABLE_UNITTESTS OFF CACHE BOOL "enable unittests")
 set (ENABLE_STRESSTEST OFF CACHE BOOL "enable stresstest")
 
 set (GAMEFILES 
@@ -74,7 +75,7 @@ set (STRESSTESTFILES
 	src/StressTest/StateTween.hpp
 	src/StressTest/SwarmObject.hpp
 	)
-
+	
 if(WIN32)
 	set (CMAKE_CXX_STANDARD 14)
 	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /W4 -Ox")
@@ -109,7 +110,6 @@ target_include_directories(Box2D PRIVATE ext/box2d)
 add_library(JamTemplate ${JAMTEMPLATEFILES})
 add_executable(${PROJECTNAME}  ${GAMEFILES})
 
-
 if (ENABLE_STRESSTEST)
 	add_executable(StressTest ${STRESSTESTFILES})
 	target_include_directories(StressTest PRIVATE ext/SFML-2.5.1_win/include)
@@ -128,6 +128,66 @@ if (ENABLE_STRESSTEST)
 	target_link_libraries(StressTest Box2D)
 endif()
 
+if (ENABLE_UNITTESTS)
+
+	set (UNITTESTFILES
+		src/UnitTests/ConversionsTest.cpp
+		src/UnitTests/MathHelperTest.cpp
+	)
+
+	# Download and unpack googletest at configure time
+	configure_file(ext/googletest/CMakeLists.txt.in googletest-download/CMakeLists.txt)
+	execute_process(COMMAND ${CMAKE_COMMAND} -G "${CMAKE_GENERATOR}" .
+	RESULT_VARIABLE result
+	WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/googletest-download )
+	if(result)
+	    message(FATAL_ERROR "CMake step for googletest failed: ${result}")
+	endif()
+	execute_process(COMMAND ${CMAKE_COMMAND} --build .
+	RESULT_VARIABLE result
+	WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/googletest-download )
+	if(result)
+	    message(FATAL_ERROR "Build step for googletest failed: ${result}")
+	endif()
+	
+	# Prevent overriding the parent project's compiler/linker
+	# settings on Windows
+	set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+	
+	# Add googletest directly to our build. This defines
+	# the gtest and gtest_main targets.
+	add_subdirectory(${CMAKE_CURRENT_BINARY_DIR}/googletest-src
+					${CMAKE_CURRENT_BINARY_DIR}/googletest-build
+					EXCLUDE_FROM_ALL)
+	
+	# The gtest/gtest_main targets carry header search path
+	# dependencies automatically when using CMake 2.8.11 or
+	# later. Otherwise we have to add them here ourselves.
+	if (CMAKE_VERSION VERSION_LESS 2.8.11)
+		include_directories("${gtest_SOURCE_DIR}/include")
+	endif()
+	
+	add_executable(UnitTests ${UNITTESTFILES})
+	target_include_directories(UnitTests PRIVATE ext/SFML-2.5.1_win/include)
+	target_include_directories(UnitTests PRIVATE ext/googletest/googletest/include)
+	target_include_directories(UnitTests PRIVATE ext/box2d)
+	target_include_directories(UnitTests PRIVATE /usr/local/Cellar/sfml/2.4.2_1/include) 
+	target_link_libraries(UnitTests optimized sfml-system )
+	target_link_libraries(UnitTests optimized sfml-window )
+	target_link_libraries(UnitTests optimized sfml-graphics )
+	target_link_libraries(UnitTests gtest_main)
+
+	
+	if (WIN32)
+		target_link_libraries(UnitTests debug sfml-system-d )
+		target_link_libraries(UnitTests debug sfml-window-d )
+		target_link_libraries(UnitTests debug sfml-graphics-d )
+	endif()
+	
+	target_link_libraries(UnitTests JamTemplate)
+	target_link_libraries(UnitTests Box2D)
+	
+endif()
 
 target_include_directories(JamTemplate PRIVATE ext/SFML-2.5.1_win/include)
 target_include_directories(JamTemplate PRIVATE ext/box2d)

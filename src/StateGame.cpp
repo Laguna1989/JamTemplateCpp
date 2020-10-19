@@ -1,5 +1,4 @@
 #include "StateGame.hpp"
-
 #include "GameProperties.hpp"
 #include "Hud.hpp"
 #include "JamTemplate/Game.hpp"

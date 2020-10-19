@@ -1,8 +1,7 @@
+﻿#include "GameProperties.hpp"
 #include "JamTemplate/Game.hpp"
-#include <SFML/Graphics.hpp>
-
-#include "GameProperties.hpp"
 #include "StateMenu.hpp"
+#include <SFML/Graphics.hpp>
 
 int main()
 {
