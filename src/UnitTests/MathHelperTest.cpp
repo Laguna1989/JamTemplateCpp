@@ -1,9 +1,6 @@
 ﻿
 #include "../JamTemplate/MathHelper.hpp"
 #include "gtest/gtest.h"
-#include <iostream>
-#include <limits>
-#include <utility>
 
 using namespace JamTemplate::MathHelper;
 using v = sf::Vector2f;

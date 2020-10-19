@@ -1,4 +1,4 @@
-#ifndef JAMTEMPLATE_TIMER_HPP_INCLUDEGUARD
+﻿#ifndef JAMTEMPLATE_TIMER_HPP_INCLUDEGUARD
 #define JAMTEMPLATE_TIMER_HPP_INCLUDEGUARD
 
 #include <functional>
@@ -36,6 +36,9 @@ private:
 
     virtual void doUpdate(float const /*elapsed*/) override
     {
+        if (!isAlive()) {
+            return;
+        }
         if (getAge() >= m_timer) {
             setAge(0);
             m_callback();
