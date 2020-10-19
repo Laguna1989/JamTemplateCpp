@@ -41,3 +41,10 @@ TEST(TimerTest, TimerIsCalledOnlyOnce)
     t.update(std::numeric_limits<float>::max());
     EXPECT_FALSE(callback_invoked);
 }
+
+TEST(TimerTest, InvalidCallback)
+{
+    auto const lambda = []() { Timer const t { 2.5f, nullptr }; };
+
+    EXPECT_THROW(lambda(), std::invalid_argument);
+}
