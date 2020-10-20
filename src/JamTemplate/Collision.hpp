@@ -1,4 +1,4 @@
-/*
+﻿/*
  * File:   collision.h
  * Authors: Nick Koirala (original version), ahnonay (SFML2 compatibility)
  *
@@ -210,28 +210,16 @@ public:
         return (Distance.x * Distance.x + Distance.y * Distance.y <= (Radius1 + Radius2) * (Radius1 + Radius2));
     }
 
-    ////////
-    ///// Test for bounding box collision using the Separating Axis Theorem
-    ///// Supports scaling and rotation
-    ////////
-    //bool BoundingBoxTest(const sf::Sprite& Object1, const sf::Sprite& Object2);
-
 private:
     template <class U>
     static sf::Vector2f GetSpriteSize(U const& Object)
     {
-        //sf::IntRect OriginalSize = Object.getTextureRect();
-        //sf::Vector2f Scale = Object.getScale();
-        //return sf::Vector2f(OriginalSize.width*Scale.x, OriginalSize.height*Scale.y);
         return sf::Vector2f(Object.getGlobalBounds().width, Object.getGlobalBounds().height);
     }
 
     template <class U>
     static sf::Vector2f GetSpriteSize(std::shared_ptr<U> obj)
     {
-        //sf::IntRect OriginalSize = Object.getTextureRect();
-        //sf::Vector2f Scale = Object.getScale();
-        //return sf::Vector2f(OriginalSize.width*Scale.x, OriginalSize.height*Scale.y);
         return sf::Vector2f(obj->getGlobalBounds().width, obj->getGlobalBounds().height);
     }
 

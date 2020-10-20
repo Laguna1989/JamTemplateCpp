@@ -30,6 +30,7 @@ set (JAMTEMPLATEFILES
 	src/JamTemplate/Collision.hpp
 	src/JamTemplate/Conversions.cpp
 	src/JamTemplate/Conversions.hpp
+	src/JamTemplate/Game.cpp
 	src/JamTemplate/Game.hpp
 	src/JamTemplate/GameObject.hpp
 	src/JamTemplate/GameState.hpp
@@ -134,8 +135,10 @@ if (ENABLE_UNITTESTS)
 
 	set (UNITTESTFILES
 		src/UnitTests/ConversionsTest.cpp
+		src/UnitTests/GameTest.cpp
 		src/UnitTests/MathHelperTest.cpp
 		src/UnitTests/TimerTest.cpp
+		
 	)
 
 	# Download and unpack googletest at configure time
