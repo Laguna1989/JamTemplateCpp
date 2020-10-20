@@ -5,6 +5,36 @@
 using namespace JamTemplate::MathHelper;
 using v = sf::Vector2f;
 
+TEST(VectorBetween, Single)
+{
+    int const lower { 4 };
+    int const upper { lower };
+    auto const result = vectorBetween(lower, upper);
+    EXPECT_EQ(result.size(), upper - lower + 1);
+    EXPECT_EQ(result.at(0), 4);
+}
+
+TEST(VectorBetween, Range)
+{
+    int const lower { -2 };
+    int const upper { 3 };
+    auto const result = vectorBetween(lower, upper);
+    EXPECT_EQ(result.size(), upper - lower + 1);
+    EXPECT_EQ(result.at(0), -2);
+    EXPECT_EQ(result.at(1), -1);
+    EXPECT_EQ(result.at(5), 3);
+}
+
+TEST(VectorBetween, Inverted)
+{
+    int const lower { 4 };
+    int const upper { 3 };
+    auto const result = vectorBetween(lower, upper);
+    EXPECT_EQ(result.size(), lower - upper + 1);
+    EXPECT_EQ(result.at(0), 3);
+    EXPECT_EQ(result.at(1), 4);
+}
+
 TEST(VectorLengthTest, LengthOfVectorZero)
 {
     sf::Vector2f const v0 { 0.0f, 0.0f };

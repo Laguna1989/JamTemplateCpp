@@ -13,8 +13,11 @@ namespace MathHelper {
     // when called with vectorBetween(4,9) the resulting vector will be
     // [4, 5, 6, 7, 8, 9]
     template <typename T>
-    inline std::vector<T> vectorBetween(T const& a, T const& b)
+    std::vector<T> vectorBetween(T a, T b)
     {
+        if (a > b) {
+            std::swap(a, b);
+        }
         std::vector<T> values;
         for (T i = a; i != b + 1; ++i) {
             values.push_back(i);
@@ -22,39 +25,17 @@ namespace MathHelper {
         return values;
     }
 
-    inline float lengthSquared(sf::Vector2f const& v)
-    {
-        return v.x * v.x + v.y * v.y;
-    }
+    float lengthSquared(sf::Vector2f const& v);
 
-    inline float length(sf::Vector2f const& v)
-    {
-        return std::sqrt(lengthSquared(v));
-    }
+    float length(sf::Vector2f const& v);
 
-    inline void normalizeMe(sf::Vector2f& v, float lowerbound = 0)
-    {
-        float l = length(v);
-        if (l == 1) {
-            return;
-        }
-        if (l > lowerbound) {
-            v.x /= l;
-            v.y /= l;
-        }
-    }
+    void normalizeMe(sf::Vector2f& v, float lowerbound = 0);
 
-    inline float rad2deg(float a)
-    {
-        return a * 180.0f / 3.1415926f;
-    }
-    inline float deg2rad(float a)
-    {
-        return a / 180.0f * 3.1415926f;
-    }
+    float rad2deg(float a);
+    float deg2rad(float a);
 
     template <typename T>
-    inline T clamp(T const& value, T const& min, T const& max)
+    T clamp(T const& value, T const& min, T const& max)
     {
         assert(min < max);
         if (value < min) {

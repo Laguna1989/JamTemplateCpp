@@ -28,6 +28,7 @@ set (JAMTEMPLATEFILES
 	src/JamTemplate/Box2DObject.hpp
 	src/JamTemplate/Button.hpp
 	src/JamTemplate/Collision.hpp
+	src/JamTemplate/Conversions.cpp
 	src/JamTemplate/Conversions.hpp
 	src/JamTemplate/Game.hpp
 	src/JamTemplate/GameObject.hpp
@@ -35,6 +36,7 @@ set (JAMTEMPLATEFILES
 	src/JamTemplate/InputManager.hpp
 	src/JamTemplate/InputManager.cpp
 	src/JamTemplate/Lerp.hpp
+	src/JamTemplate/MathHelper.cpp
 	src/JamTemplate/MathHelper.hpp
 	src/JamTemplate/Noise.hpp
 	src/JamTemplate/ObjectGroup.hpp
