@@ -9,7 +9,6 @@ namespace JamTemplate {
 
 Game::Game(unsigned int w, unsigned int h, float zoom, std::string const& title)
     : m_state { nullptr }
-    , m_backgroundColor { sf::Color::Black }
     , m_renderWindow { std::make_shared<sf::RenderWindow>(sf::VideoMode(w, h), title, sf::Style::Close) }
     , m_windowWidth { w }
     , m_windowHeight { h }

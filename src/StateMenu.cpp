@@ -1,6 +1,7 @@
-#include "StateMenu.hpp"
+﻿#include "StateMenu.hpp"
 #include "GameProperties.hpp"
 #include "JamTemplate/Game.hpp"
+#include "JamTemplate/InputManager.hpp"
 #include "JamTemplate/SmartShape.hpp"
 #include "JamTemplate/SmartText.hpp"
 #include "JamTemplate/TextureManager.hpp"

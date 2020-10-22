@@ -33,6 +33,7 @@ set (JAMTEMPLATEFILES
 	src/JamTemplate/Game.cpp
 	src/JamTemplate/Game.hpp
 	src/JamTemplate/GameObject.hpp
+	src/JamTemplate/GameState.cpp
 	src/JamTemplate/GameState.hpp
 	src/JamTemplate/InputManager.hpp
 	src/JamTemplate/InputManager.cpp
@@ -136,6 +137,7 @@ if (ENABLE_UNITTESTS)
 	set (UNITTESTFILES
 		src/UnitTests/ConversionsTest.cpp
 		src/UnitTests/GameTest.cpp
+		src/UnitTests/GameStateTest.cpp
 		src/UnitTests/MathHelperTest.cpp
 		src/UnitTests/TimerTest.cpp
 		
@@ -182,6 +184,7 @@ if (ENABLE_UNITTESTS)
 	target_link_libraries(UnitTests optimized sfml-window )
 	target_link_libraries(UnitTests optimized sfml-graphics )
 	target_link_libraries(UnitTests gtest_main)
+	target_link_libraries(UnitTests gmock)
 
 	
 	if (WIN32)

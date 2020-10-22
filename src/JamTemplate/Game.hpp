@@ -15,9 +15,7 @@ public:
     using Sptr = std::shared_ptr<Game>;
     Game(unsigned int w, unsigned int h, float zoom, std::string const& title);
 
-    float getZoom() const;
-
-    // this function will likely be called from within update().
+    // this function will likely be called by the user from within update().
     // To ensure consisten behavior within one frame, the actual switching will take place in
     // doSwitchState() which will happen at the beginning of the next update loop.
     void switchState(std::shared_ptr<GameState> newState);
@@ -33,11 +31,13 @@ public:
 
     sf::Vector2f getCamOffset();
 
+    float getZoom() const;
+
     void shake(float t, float strength, float shakeInterval = 0.005f);
 
 private:
-    GameState::Sptr m_state { nullptr };
-    GameState::Sptr m_nextState { nullptr };
+    std::shared_ptr<GameState> m_state { nullptr };
+    std::shared_ptr<GameState> m_nextState { nullptr };
     std::shared_ptr<sf::RenderTexture> m_renderTarget { nullptr };
     std::shared_ptr<sf::View> m_view { nullptr };
     std::shared_ptr<sf::RenderWindow> m_renderWindow { nullptr };
@@ -57,8 +57,8 @@ private:
 
     std::weak_ptr<Game> getPtr();
 
+    // overwritten functions from GameObject
     virtual void doUpdate(float const elapsed) override;
-
     virtual void doDraw() const override;
 
     void updateShake(float elapsed);
