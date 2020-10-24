@@ -56,10 +56,8 @@ public:
 TEST_F(GameTest, CallsToActiveState)
 {
     auto ms = std::make_shared<MockState>();
-    // call to doCreate will only trigger in the next update call and no update will happen.
     EXPECT_CALL(*ms, doInternalCreate());
     g->switchState(ms);
-    g->update(0.0f);
 
     float expected_update_time = 0.05f;
     EXPECT_CALL(*ms, doInternalUpdate(expected_update_time));

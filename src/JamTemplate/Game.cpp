@@ -39,8 +39,11 @@ void Game::switchState(std::shared_ptr<GameState> newState)
         std::cerr << "cannot switch to nullptr state!" << std::endl;
         return;
     }
-    //m_state = newState;
     m_nextState = newState;
+    // if no state has been assigned yet, we can directly switch state here.
+    if (m_state == nullptr) {
+        doSwitchState();
+    }
 }
 
 void Game::setRenderTarget(std::shared_ptr<sf::RenderTexture> rt)

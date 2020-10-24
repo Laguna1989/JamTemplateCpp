@@ -33,8 +33,13 @@ void GameState::add(GameObject::Sptr go)
 {
     go->setGameInstance(getGame());
     go->create();
-    m_objectsToAdd.push_back(go);
+    if (!m_objects.empty()) {
+        m_objectsToAdd.push_back(go);
+    } else {
+        m_objects.push_back(go);
+    }
 }
+
 void GameState::add(TweenBase::Sptr tb)
 {
     m_tweensToAdd.push_back(tb);
