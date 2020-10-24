@@ -164,9 +164,9 @@ if (ENABLE_UNITTESTS)
 	
 	# Add googletest directly to our build. This defines
 	# the gtest and gtest_main targets.
-	add_subdirectory(${CMAKE_CURRENT_BINARY_DIR}/googletest-src
-					${CMAKE_CURRENT_BINARY_DIR}/googletest-build
-					EXCLUDE_FROM_ALL)
+	add_subdirectory(${CMAKE_CURRENT_BINARY_DIR}/../ext/googletest/googletest-src
+					 ${CMAKE_CURRENT_BINARY_DIR}/../ext/googletest/googletest-build
+					 EXCLUDE_FROM_ALL)
 	
 	# The gtest/gtest_main targets carry header search path
 	# dependencies automatically when using CMake 2.8.11 or
