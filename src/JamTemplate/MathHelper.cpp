@@ -1,4 +1,5 @@
 ﻿#include "MathHelper.hpp"
+#include <cmath>
 
 namespace JamTemplate {
 namespace MathHelper {
