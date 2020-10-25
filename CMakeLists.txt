@@ -35,8 +35,8 @@ set (JAMTEMPLATEFILES
 	src/JamTemplate/GameObject.hpp
 	src/JamTemplate/GameState.cpp
 	src/JamTemplate/GameState.hpp
-	src/JamTemplate/InputManager.hpp
 	src/JamTemplate/InputManager.cpp
+	src/JamTemplate/InputManager.hpp
 	src/JamTemplate/Lerp.hpp
 	src/JamTemplate/MathHelper.cpp
 	src/JamTemplate/MathHelper.hpp
@@ -46,8 +46,8 @@ set (JAMTEMPLATEFILES
 	src/JamTemplate/PlayBar.cpp
 	src/JamTemplate/Random.hpp
 	src/JamTemplate/Random.cpp
-	src/JamTemplate/SmartObject.hpp
 	src/JamTemplate/SmartObject.cpp
+	src/JamTemplate/SmartObject.hpp
 	src/JamTemplate/SmartShape.hpp
 	src/JamTemplate/SmartSprite.hpp
 	src/JamTemplate/SmartText.hpp	
@@ -149,6 +149,8 @@ if (ENABLE_UNITTESTS)
 		src/UnitTests/GameStateTest.cpp
 		src/UnitTests/InputManagerTest.cpp
 		src/UnitTests/MathHelperTest.cpp
+		src/UnitTests/MockObject.hpp
+		src/UnitTests/ObjectGroupTest.cpp
 		src/UnitTests/TimerTest.cpp
 	)
 

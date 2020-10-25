@@ -9,11 +9,12 @@ using JamTemplate::Timer;
 TEST(TimerTest, TimerIsCalledRepeatedly)
 {
     bool callback_invoked { false };
-    Timer t { 0.5f, [&callback_invoked]() { callback_invoked = true; } };
+    float const alarmTime = 10.0f;
+    Timer t { alarmTime, [&callback_invoked]() { callback_invoked = true; } };
 
-    t.update(0.1f);
+    t.update(alarmTime / 2);
     EXPECT_FALSE(callback_invoked);
-    t.update(0.41f);
+    t.update(alarmTime / 2 + 0.1f);
     EXPECT_TRUE(callback_invoked);
 
     callback_invoked = false;
@@ -27,11 +28,12 @@ TEST(TimerTest, TimerIsCalledRepeatedly)
 TEST(TimerTest, TimerIsCalledOnlyOnce)
 {
     bool callback_invoked { false };
-    Timer t { 0.5f, [&callback_invoked]() { callback_invoked = true; }, 1 };
+    float const alarmTime = 10.0f;
+    Timer t { alarmTime, [&callback_invoked]() { callback_invoked = true; }, 1 };
 
-    t.update(0.1f);
+    t.update(alarmTime / 2);
     EXPECT_FALSE(callback_invoked);
-    t.update(0.41f);
+    t.update(alarmTime / 2 + 0.1f);
     EXPECT_TRUE(callback_invoked);
 
     callback_invoked = false;

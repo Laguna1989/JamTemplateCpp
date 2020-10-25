@@ -1,6 +1,7 @@
 ﻿#include "../JamTemplate/GameState.hpp"
 #include "../JamTemplate/Game.hpp"
 #include "../JamTemplate/GameObject.hpp"
+#include "MockObject.hpp"
 #include "gmock/gmock.h"
 #include "gtest/gtest.h"
 
@@ -18,13 +19,6 @@ TEST(GameStateInitTest, InitialValues)
     EXPECT_TRUE(s.isAlive());
 }
 
-class MockObject : public JamTemplate::GameObject {
-public:
-    MOCK_METHOD(void, doUpdate, (float const), (override));
-    MOCK_METHOD(void, doDraw, (), (const));
-    MOCK_METHOD(void, doCreate, (), (override));
-};
-
 class GameStateTest : public ::testing::Test {
 public:
     std::shared_ptr<Game> g;
@@ -34,6 +28,7 @@ public:
         g = std::make_shared<Game>(1, 1, 1.0f, "");
         EXPECT_THROW(s.getGame(), std::exception);
         s.setGameInstance(g);
+        EXPECT_NO_THROW(s.getGame());
     }
 };
 
