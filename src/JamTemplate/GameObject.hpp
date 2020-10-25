@@ -49,14 +49,14 @@ public:
     std::shared_ptr<Game> getGame()
     {
         if (m_game.expired())
-            throw std::exception("ERROR: Cannot GameObject::getGame():  m_game expired!");
+            throw std::exception(/*"ERROR: Cannot GameObject::getGame():  m_game expired!"*/);
         return m_game.lock();
     }
     // const version of getGame (required for draw functionality)
     std::shared_ptr<Game> getGame() const
     {
         if (m_game.expired())
-            throw std::exception("ERROR: Cannot GameObject::getGame():  m_game expired!");
+            throw std::exception(/*"ERROR: Cannot GameObject::getGame():  m_game expired!"*/);
         return m_game.lock();
     }
 
