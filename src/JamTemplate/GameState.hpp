@@ -42,7 +42,7 @@ protected:
     virtual void doCreate() override;
 
 private:
-    /// all objects in the scene
+    /// all objects in the state
     std::vector<GameObject::Sptr> m_objects;
 
     /// this is used as a level of indirection,

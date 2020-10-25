@@ -12,7 +12,7 @@ class ConversionsTestFixture : public ::testing::TestWithParam<tt> {
 
 using nl = std::numeric_limits<float>;
 
-INSTANTIATE_TEST_CASE_P(
+INSTANTIATE_TEST_SUITE_P(
     ConversionsTest,
     ConversionsTestFixture,
     ::testing::Values(

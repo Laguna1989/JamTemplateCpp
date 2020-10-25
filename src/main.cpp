@@ -5,7 +5,7 @@
 
 int main()
 {
-    JamTemplate::Game::Sptr game = std::make_shared<JamTemplate::Game>(800, 600, 2, GP::GameName());
+    JamTemplate::Game::Sptr game = std::make_shared<JamTemplate::Game>(800, 600, 2.0f, GP::GameName());
     auto window = game->getRenderWindow();
 
     game->switchState(std::make_shared<StateMenu>());

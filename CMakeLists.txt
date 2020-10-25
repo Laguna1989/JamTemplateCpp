@@ -64,32 +64,17 @@ set (JAMTEMPLATEFILES
 	src/JamTemplate/TweenRotation.hpp
 	src/JamTemplate/TweenScale.hpp
 	)
-	
-set (STRESSTESTFILES
-	src/StressTest/main.cpp
-	src/StressTest/MovementObject.hpp
-	src/StressTest/Object.hpp
-	src/StressTest/State1.cpp
-	src/StressTest/State1.hpp
-	src/StressTest/State2.cpp
-	src/StressTest/State2.hpp
-	src/StressTest/StateBox2d.cpp
-	src/StressTest/StateBox2d.hpp
-	src/StressTest/StateTween.cpp
-	src/StressTest/StateTween.hpp
-	src/StressTest/SwarmObject.hpp
-	)
-	
+
 if(WIN32)
 	set (CMAKE_CXX_STANDARD 14)
-	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /W4 -Ox")
+	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /W4 /EHsc -Ox")
 else()
 	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -O3 --std=c++1z")
 endif()
 
 
 #####################################################
-## Create projects and set them up accordingly
+## Create Project file and link directories
 #####################################################
 project (${PROJECTNAME})
 
@@ -109,51 +94,75 @@ add_library(Box2D ${SRC_FILES})
 target_include_directories(Box2D PRIVATE ext/box2d)
 
 #####################################################
-## setup other libs and executables
+## setup JamTemplate
 #####################################################
 add_library(JamTemplate ${JAMTEMPLATEFILES})
-add_executable(${PROJECTNAME}  ${GAMEFILES})
 
-if (ENABLE_STRESSTEST)
-	add_executable(StressTest ${STRESSTESTFILES})
-	target_include_directories(StressTest PRIVATE ext/SFML-2.5.1_win/include)
-	target_include_directories(StressTest PRIVATE ext/box2d)
-	target_include_directories(StressTest PRIVATE /usr/local/Cellar/sfml/2.4.2_1/include) 
-	target_link_libraries(StressTest optimized sfml-system )
-	target_link_libraries(StressTest optimized sfml-window )
-	target_link_libraries(StressTest optimized sfml-graphics )
-	if (WIN32)
-		target_link_libraries(StressTest debug sfml-system-d )
-		target_link_libraries(StressTest debug sfml-window-d )
-		target_link_libraries(StressTest debug sfml-graphics-d )
-	endif()
-	
-	target_link_libraries(StressTest JamTemplate)
-	target_link_libraries(StressTest Box2D)
+# add public includes, so they can be used by dependent targets
+target_include_directories(JamTemplate PUBLIC ext/SFML-2.5.1_win/include)
+target_include_directories(JamTemplate PUBLIC ext/box2d)
+target_include_directories(JamTemplate PUBLIC /usr/local/Cellar/sfml/2.4.2_1/include) 
+
+target_link_libraries(JamTemplate optimized sfml-system )
+target_link_libraries(JamTemplate optimized sfml-window )
+target_link_libraries(JamTemplate optimized sfml-graphics )
+
+if (WIN32)
+	target_link_libraries(JamTemplate debug sfml-system-d )
+	target_link_libraries(JamTemplate debug sfml-window-d )
+	target_link_libraries(JamTemplate debug sfml-graphics-d )
 endif()
 
+target_link_libraries(JamTemplate Box2D)
+
+#####################################################
+## setup StressTest
+#####################################################
+if (ENABLE_STRESSTEST)
+	set (STRESSTESTFILES
+		src/StressTest/main.cpp
+		src/StressTest/MovementObject.hpp
+		src/StressTest/Object.hpp
+		src/StressTest/State1.cpp
+		src/StressTest/State1.hpp
+		src/StressTest/State2.cpp
+		src/StressTest/State2.hpp
+		src/StressTest/StateBox2d.cpp
+		src/StressTest/StateBox2d.hpp
+		src/StressTest/StateTween.cpp
+		src/StressTest/StateTween.hpp
+		src/StressTest/SwarmObject.hpp
+	)
+
+	add_executable(StressTest ${STRESSTESTFILES})
+	target_link_libraries(StressTest JamTemplate)
+endif()
+
+#####################################################
+## setup UnitTests
+#####################################################
 if (ENABLE_UNITTESTS)
 
 	set (UNITTESTFILES
 		src/UnitTests/ConversionsTest.cpp
 		src/UnitTests/GameTest.cpp
 		src/UnitTests/GameStateTest.cpp
+		src/UnitTests/InputManagerTest.cpp
 		src/UnitTests/MathHelperTest.cpp
 		src/UnitTests/TimerTest.cpp
-		
 	)
 
 	# Download and unpack googletest at configure time
-	configure_file(ext/googletest/CMakeLists.txt.in googletest-download/CMakeLists.txt)
+	configure_file(ext/googletest/CMakeLists.txt.in ${CMAKE_CURRENT_SOURCE_DIR}/ext/googletest/googletest-download/CMakeLists.txt)
 	execute_process(COMMAND ${CMAKE_COMMAND} -G "${CMAKE_GENERATOR}" .
 	RESULT_VARIABLE result
-	WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/googletest-download )
+	WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/ext/googletest/googletest-download )
 	if(result)
 	    message(FATAL_ERROR "CMake step for googletest failed: ${result}")
 	endif()
 	execute_process(COMMAND ${CMAKE_COMMAND} --build .
 	RESULT_VARIABLE result
-	WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/googletest-download )
+	WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/ext/googletest/googletest-download )
 	if(result)
 	    message(FATAL_ERROR "Build step for googletest failed: ${result}")
 	endif()
@@ -164,8 +173,8 @@ if (ENABLE_UNITTESTS)
 	
 	# Add googletest directly to our build. This defines
 	# the gtest and gtest_main targets.
-	add_subdirectory(${CMAKE_CURRENT_BINARY_DIR}/../ext/googletest/googletest-src
-					 ${CMAKE_CURRENT_BINARY_DIR}/../ext/googletest/googletest-build
+	add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/ext/googletest/googletest-src
+					 ${CMAKE_CURRENT_SOURCE_DIR}/ext/googletest/googletest-build
 					 EXCLUDE_FROM_ALL)
 	
 	# The gtest/gtest_main targets carry header search path
@@ -176,51 +185,18 @@ if (ENABLE_UNITTESTS)
 	endif()
 	
 	add_executable(UnitTests ${UNITTESTFILES})
-	target_include_directories(UnitTests PRIVATE ext/SFML-2.5.1_win/include)
-	target_include_directories(UnitTests PRIVATE ext/googletest/googletest/include)
-	target_include_directories(UnitTests PRIVATE ext/box2d)
-	target_include_directories(UnitTests PRIVATE /usr/local/Cellar/sfml/2.4.2_1/include) 
-	target_link_libraries(UnitTests optimized sfml-system )
-	target_link_libraries(UnitTests optimized sfml-window )
-	target_link_libraries(UnitTests optimized sfml-graphics )
+	
 	target_link_libraries(UnitTests gtest_main)
 	target_link_libraries(UnitTests gmock)
-
-	
-	if (WIN32)
-		target_link_libraries(UnitTests debug sfml-system-d )
-		target_link_libraries(UnitTests debug sfml-window-d )
-		target_link_libraries(UnitTests debug sfml-graphics-d )
-	endif()
-	
 	target_link_libraries(UnitTests JamTemplate)
-	target_link_libraries(UnitTests Box2D)
 	
 endif()
 
-target_include_directories(JamTemplate PRIVATE ext/SFML-2.5.1_win/include)
-target_include_directories(JamTemplate PRIVATE ext/box2d)
-target_include_directories(JamTemplate PRIVATE /usr/local/Cellar/sfml/2.4.2_1/include) 
-target_link_libraries(JamTemplate optimized sfml-system )
-target_link_libraries(JamTemplate optimized sfml-window )
-target_link_libraries(JamTemplate optimized sfml-graphics )
-target_link_libraries(JamTemplate Box2D)
-
-if (WIN32)
-	target_link_libraries(JamTemplate debug sfml-system-d )
-	target_link_libraries(JamTemplate debug sfml-window-d )
-	target_link_libraries(JamTemplate debug sfml-graphics-d )
-endif()
-
-target_include_directories(${PROJECTNAME} PRIVATE ext/SFML-2.5.1_win/include)
-target_include_directories(${PROJECTNAME} PRIVATE ext/box2d/)
-target_include_directories(${PROJECTNAME} PRIVATE /usr/local/Cellar/sfml/2.4.2_1/include) 
-target_link_libraries(${PROJECTNAME} optimized sfml-window )
-target_link_libraries(${PROJECTNAME} optimized sfml-system )
-target_link_libraries(${PROJECTNAME} optimized sfml-graphics )
+#####################################################
+## setup Game executable
+#####################################################
+add_executable(${PROJECTNAME}  ${GAMEFILES})
 target_link_libraries(${PROJECTNAME} JamTemplate)
-target_link_libraries(${PROJECTNAME} Box2D)
-
 
 #####################################################
 ## copy sfml dlls and .clang-format around
