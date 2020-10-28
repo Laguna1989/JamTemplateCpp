@@ -1,4 +1,4 @@
-#ifndef JAMTEMPLATE_TEXTUREMANAGER_HPP_INCLUDEGUARD
+﻿#ifndef JAMTEMPLATE_TEXTUREMANAGER_HPP_INCLUDEGUARD
 #define JAMTEMPLATE_TEXTUREMANAGER_HPP_INCLUDEGUARD
 
 #include <SFML/Graphics.hpp>
@@ -19,7 +19,9 @@ public:
     {
         if (m_textures.count(str) == 0) {
             if (str.at(0) != '#') {
-                m_textures[str].loadFromFile(str);
+                if (!m_textures[str].loadFromFile(str)) {
+                    throw std::invalid_argument { "invalid filename, cannot load texture from '" + str + "'" };
+                }
             } else // special type of images
             {
                 SplitString ss { str };

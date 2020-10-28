@@ -151,6 +151,7 @@ if (ENABLE_UNITTESTS)
 		src/UnitTests/MathHelperTest.cpp
 		src/UnitTests/MockObject.hpp
 		src/UnitTests/ObjectGroupTest.cpp
+		src/UnitTests/RandomTest.cpp
 		src/UnitTests/TimerTest.cpp
 	)
 

@@ -1,4 +1,4 @@
-#include "Random.hpp"
+﻿#include "Random.hpp"
 
 using namespace JamTemplate;
 
@@ -21,6 +21,7 @@ float Random::getFloatGauss(float mu, float sigma)
     std::normal_distribution<float> dist(mu, sigma);
     return dist(m_engine);
 }
+
 bool Random::getChance(float c)
 {
     return (getFloat(0.0f, 1.0f) <= c);

@@ -44,9 +44,6 @@ private:
 
     float m_zoom;
 
-    unsigned int m_windowWidth { 800 };
-    unsigned int m_windowHeight { 600 };
-
     float m_shakeTimer { -1.0f };
     float m_shakeStrength { 0.0f };
     float m_shakeInterval { 0.0f };

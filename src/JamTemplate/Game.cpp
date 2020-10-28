@@ -10,15 +10,13 @@ namespace JamTemplate {
 Game::Game(unsigned int w, unsigned int h, float zoom, std::string const& title)
     : m_state { nullptr }
     , m_renderWindow { std::make_shared<sf::RenderWindow>(sf::VideoMode(w, h), title, sf::Style::Close) }
-    , m_windowWidth { w }
-    , m_windowHeight { h }
     , m_zoom { zoom }
     , m_renderTarget { std::make_shared<sf::RenderTexture>() }
 {
     m_renderWindow->setFramerateLimit(60);
 
-    unsigned int scaledWidth = static_cast<unsigned int>(m_windowWidth / m_zoom);
-    unsigned int scaledHeight = static_cast<unsigned int>(m_windowHeight / m_zoom);
+    unsigned int scaledWidth = static_cast<unsigned int>(w / m_zoom);
+    unsigned int scaledHeight = static_cast<unsigned int>(h / m_zoom);
 
     m_renderTarget->create(scaledWidth, scaledHeight);
     m_renderTarget->setSmooth(false);
