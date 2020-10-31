@@ -2,6 +2,7 @@
 #include "GameProperties.hpp"
 #include "JamTemplate/Game.hpp"
 #include "JamTemplate/InputManager.hpp"
+#include "JamTemplate/MathHelper.hpp"
 #include "JamTemplate/SmartShape.hpp"
 #include "JamTemplate/SmartText.hpp"
 #include "JamTemplate/TextureManager.hpp"
@@ -56,17 +57,20 @@ void StateMenu::doCreate()
     m_test_Explanation->loadFont("assets/font.ttf");
     m_test_Explanation->setCharacterSize(16U);
     m_test_Explanation->setText("Press Space to start the game");
-    m_test_Explanation->setPosition({ wC - 150, 150 });
+    m_test_Explanation->setPosition({ wC, 150 });
     m_test_Explanation->setColor(GP::PaletteColor4());
     m_test_Explanation->update(0.0f);
+    auto const textWidth = m_test_Explanation->getLocalBounds().width;
+    auto const textHeight = m_test_Explanation->getLocalBounds().height;
+    m_test_Explanation->setOrigin(sf::Vector2f { textWidth / 2, textHeight / 2 });
     m_test_Explanation->SetTextAlign(JamTemplate::SmartText::TextAlign::LEFT);
 
     m_text_Credits = std::make_shared<JamTemplate::SmartText>();
     m_text_Credits->loadFont("assets/font.ttf");
-    m_text_Credits->setCharacterSize(12U);
-    m_text_Credits->setText("Created by @Laguna_999 for #kajam\nJanuary 2019");
-    m_text_Credits->setPosition({ 10, 310 });
-    m_text_Credits->setColor(GP::PaletteFontFront());
+    m_text_Credits->setCharacterSize(10U);
+    m_text_Credits->setText("Created by @Laguna_999 for #1hgj288\nHalloween2020");
+    m_text_Credits->setPosition({ 10, 265 });
+    m_text_Credits->setColor(GP::PaletteColor5());
     m_text_Credits->SetTextAlign(JamTemplate::SmartText::TextAlign::LEFT);
     m_text_Credits->update(0.0f);
 
@@ -75,28 +79,51 @@ void StateMenu::doCreate()
     m_overlay->setColor(sf::Color { 0, 0, 0 });
     m_overlay->update(0);
 
+    using tp = JamTemplate::TweenPosition<JamTemplate::SmartText>;
+    using ta = JamTemplate::TweenAlpha<JamTemplate::SmartText>;
+    using ts = JamTemplate::TweenScale<JamTemplate::SmartText>;
     {
         auto tw = JamTemplate::TweenAlpha<JamTemplate::SmartShape>::create(
             m_overlay, 0.5f, sf::Uint8 { 255 }, sf::Uint8 { 0 });
         tw->setSkipFrames();
         add(tw);
     }
-    using tp = JamTemplate::TweenPosition<JamTemplate::SmartText>;
-    using ta = JamTemplate::TweenAlpha<JamTemplate::SmartText>;
+
     {
-        auto ta1 = ta::create(m_text_Title, 0.25f, 0, 255);
+        auto ta1 = ta::create(m_text_Title, 0.55f, 0, 255);
         ta1->setStartDelay(0.2f);
         ta1->setSkipFrames();
         add(ta1);
     }
     {
-        auto s2 = m_test_Explanation->getPosition() + sf::Vector2f { -300, 0 };
+        auto s2 = m_test_Explanation->getPosition() + sf::Vector2f { -500, 0 };
         auto e2 = m_test_Explanation->getPosition();
 
-        auto tw2 = tp::create(m_test_Explanation, 0.35f, s2, e2);
+        auto tw2 = tp::create(m_test_Explanation, 0.5f, s2, e2);
         tw2->setStartDelay(0.3f);
         tw2->setSkipFrames();
+
+        tw2->addCompleteCallback([this]() {
+            auto ts1 = ts::create(m_test_Explanation, 0.75f, sf::Vector2f { 1.0f, 1.0f },
+                sf::Vector2f { 1.05f, 1.05f });
+            ts1->setRepeat(true);
+            ts1->setAgePercentConversion([](float age) {
+                return JamTemplate::Lerp::cosine(
+                    0.0f, 1.0f, JamTemplate::MathHelper::clamp(age, 0.0f, 1.0f));
+            });
+            add(ts1);
+        });
         add(tw2);
+    }
+
+    {
+        auto s3 = m_text_Credits->getPosition() + sf::Vector2f { 0, 100 };
+        auto e3 = m_text_Credits->getPosition();
+
+        auto tw3 = tp::create(m_text_Credits, 0.35f, s3, e3);
+        tw3->setStartDelay(0.8f);
+        tw3->setSkipFrames();
+        add(tw3);
     }
 }
 void StateMenu::doInternalDraw() const
@@ -120,4 +147,6 @@ void StateMenu::doInternalDraw() const
     m_test_Explanation->setColor(GP::PaletteColor4());
     m_text_Credits->draw(getGame()->getRenderTarget());
     m_overlay->draw(getGame()->getRenderTarget());
+
+    m_text_Credits->update(0.0f);
 }

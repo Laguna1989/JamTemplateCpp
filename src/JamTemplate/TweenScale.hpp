@@ -18,18 +18,16 @@ public:
 
     // Tween scale from valueStart to valueEnd of obj withtin time
     TweenScale(std::weak_ptr<T> obj, float time, sf::Vector2f valueStart, sf::Vector2f valueEnd)
-        : Tween<T> { obj, [this](auto sptr, auto age) {
+        : Tween<T> { obj, [this](auto sptr, auto agePercent) {
                         auto scale = sptr->getScale();
 
-                        float val = age / m_totalTime;
-
                         scale.x = Lerp::linear(static_cast<float>(m_initialValue.x),
-                            static_cast<float>(m_finalValue.x), val);
+                            static_cast<float>(m_finalValue.x), agePercent);
                         scale.y = Lerp::linear(static_cast<float>(m_initialValue.y),
-                            static_cast<float>(m_finalValue.y), val);
+                            static_cast<float>(m_finalValue.y), agePercent);
 
                         sptr->setScale(scale);
-                        return (age < m_totalTime);
+                        return (agePercent < 1.0f);
                     } }
     {
         m_totalTime = time;
@@ -38,7 +36,6 @@ public:
     }
 
 private:
-    float m_totalTime { 1.0f };
     sf::Vector2f m_initialValue {};
     sf::Vector2f m_finalValue {};
 };

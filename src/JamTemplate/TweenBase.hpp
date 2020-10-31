@@ -58,8 +58,23 @@ public:
     void setRepeat(bool repeat) { m_repeat = repeat; }
     bool getRepeat() const { return m_repeat; }
 
-protected:
     float getAge() const { return m_age - m_startDelay; }
+    float getAgePercent() const { return getAge() / m_totalTime; }
+    float getConvertedAgePercent(float age) const
+    {
+        if (m_agePercentConversion == nullptr) {
+            return age;
+        }
+        return m_agePercentConversion(age);
+    }
+
+    void setAgePercentConversion(std::function<float(float)> func)
+    {
+        m_agePercentConversion = func;
+    }
+
+protected:
+    float m_totalTime { 0.0f };
 
 private:
     int m_skipFrames { 0 };
@@ -67,6 +82,8 @@ private:
     float m_startDelay {};
     bool m_alive { true };
     bool m_repeat { false };
+
+    std::function<float(float)> m_agePercentConversion { nullptr };
 
     std::vector<CallbackType> m_completeCallbacks;
 
@@ -103,7 +120,7 @@ private:
         if (sptr == nullptr) {
             return;
         }
-        if (!m_tweenCallback(sptr, getAge())) {
+        if (!m_tweenCallback(sptr, getConvertedAgePercent(getAgePercent()))) {
             finish();
         }
     }
