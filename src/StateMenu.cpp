@@ -40,7 +40,7 @@ void StateMenu::doCreate()
 
     m_background = std::make_shared<JamTemplate::SmartShape>();
     m_background->makeRect({ w, h });
-    m_background->setColor(GP::PaletteBackground());
+    m_background->setColor(GP::PaletteColor1());
     m_background->update(0.0f);
 
     m_text_Title = std::make_shared<JamTemplate::SmartText>();
@@ -48,7 +48,7 @@ void StateMenu::doCreate()
     m_text_Title->setCharacterSize(32U);
     m_text_Title->setText(GP::GameName());
     m_text_Title->setPosition({ wC, 20 });
-    m_text_Title->setColor(sf::Color { 248, 249, 254 });
+    m_text_Title->setColor(GP::PaletteColor3());
     m_text_Title->update(0.0f);
     m_text_Title->SetTextAlign(JamTemplate::SmartText::TextAlign::CENTER);
 
@@ -57,7 +57,7 @@ void StateMenu::doCreate()
     m_test_Explanation->setCharacterSize(16U);
     m_test_Explanation->setText("Press Space to start the game");
     m_test_Explanation->setPosition({ wC - 150, 150 });
-    m_test_Explanation->setColor(GP::PaletteFontFront());
+    m_test_Explanation->setColor(GP::PaletteColor4());
     m_test_Explanation->update(0.0f);
     m_test_Explanation->SetTextAlign(JamTemplate::SmartText::TextAlign::LEFT);
 
@@ -112,12 +112,12 @@ void StateMenu::doInternalDraw() const
     m_text_Title->draw(getGame()->getRenderTarget());
 
     m_text_Title->setPosition({ wC, 20 });
-    m_text_Title->setColor(GP::PaletteFontFront());
+    m_text_Title->setColor(GP::PaletteColor3());
     m_text_Title->update(0.0);
     m_text_Title->draw(getGame()->getRenderTarget());
 
     m_test_Explanation->draw(getGame()->getRenderTarget());
-    m_test_Explanation->setColor(GP::PaletteFontFront());
+    m_test_Explanation->setColor(GP::PaletteColor4());
     m_text_Credits->draw(getGame()->getRenderTarget());
     m_overlay->draw(getGame()->getRenderTarget());
 }
