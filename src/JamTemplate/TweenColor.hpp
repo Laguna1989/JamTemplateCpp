@@ -1,15 +1,17 @@
-#ifndef JAMTEMPLATE_TWEENCOLOR_HPP_INCLUDEGUARD
+﻿#ifndef JAMTEMPLATE_TWEENCOLOR_HPP_INCLUDEGUARD
 #define JAMTEMPLATE_TWEENCOLOR_HPP_INCLUDEGUARD
 
 #include "Lerp.hpp"
 #include "TweenBase.hpp"
 
 namespace JamTemplate {
+
 template <class T>
 class TweenColor : public Tween<T> {
 public:
     // Tween color from valueStart to valueEnd of obj withtin time
-    static TweenBase::Sptr create(std::weak_ptr<T> obj, float time, sf::Color valueStart, sf::Color valueEnd)
+    static TweenBase::Sptr create(
+        std::weak_ptr<T> obj, float time, sf::Color valueStart, sf::Color valueEnd)
     {
         return std::make_shared<TweenColor>(obj, time, valueStart, valueEnd);
     }
@@ -21,9 +23,12 @@ public:
 
                         float val = age / m_totalTime;
 
-                        float r = Lerp::linear(static_cast<float>(m_initialValue.r), static_cast<float>(m_finalValue.r), val);
-                        float g = Lerp::linear(static_cast<float>(m_initialValue.g), static_cast<float>(m_finalValue.g), val);
-                        float b = Lerp::linear(static_cast<float>(m_initialValue.b), static_cast<float>(m_finalValue.b), val);
+                        float r = Lerp::linear(static_cast<float>(m_initialValue.r),
+                            static_cast<float>(m_finalValue.r), val);
+                        float g = Lerp::linear(static_cast<float>(m_initialValue.g),
+                            static_cast<float>(m_finalValue.g), val);
+                        float b = Lerp::linear(static_cast<float>(m_initialValue.b),
+                            static_cast<float>(m_finalValue.b), val);
 
                         col.r = static_cast<sf::Uint8>(r);
                         col.g = static_cast<sf::Uint8>(g);
@@ -42,6 +47,7 @@ private:
     sf::Color m_initialValue {};
     sf::Color m_finalValue {};
 };
+
 } // namespace JamTemplate
 
 #endif

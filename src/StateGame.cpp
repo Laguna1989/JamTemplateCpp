@@ -1,4 +1,4 @@
-#include "StateGame.hpp"
+﻿#include "StateGame.hpp"
 #include "GameProperties.hpp"
 #include "Hud.hpp"
 #include "JamTemplate/Game.hpp"
@@ -6,10 +6,7 @@
 #include "JamTemplate/SmartSprite.hpp"
 #include "JamTemplate/TweenAlpha.hpp"
 
-void StateGame::doInternalUpdate(float const elapsed)
-{
-    m_overlay->update(elapsed);
-}
+void StateGame::doInternalUpdate(float const elapsed) { m_overlay->update(elapsed); }
 
 void StateGame::doInternalDraw() const
 {
@@ -44,6 +41,4 @@ void StateGame::doCreate()
     add(m_hud);
 }
 
-void StateGame::doCreateInternal()
-{
-}
+void StateGame::doCreateInternal() { }

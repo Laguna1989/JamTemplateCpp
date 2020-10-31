@@ -1,4 +1,4 @@
-#ifndef JAMTEMPLATE_ANIMATION_HPP_INCLUDEGUARD
+﻿#ifndef JAMTEMPLATE_ANIMATION_HPP_INCLUDEGUARD
 #define JAMTEMPLATE_ANIMATION_HPP_INCLUDEGUARD
 
 #include <iostream>
@@ -16,13 +16,12 @@ class Animation : public SmartObject {
 public:
     using Sptr = std::shared_ptr<Animation>;
 
-    Animation()
-    {
-    }
+    Animation() { }
 
     virtual ~Animation() = default;
 
-    void add(std::string fileName, std::string animName, sf::Vector2u size, std::vector<unsigned int> frameIndices, float frameTime)
+    void add(std::string fileName, std::string animName, sf::Vector2u size,
+        std::vector<unsigned int> frameIndices, float frameTime)
     {
         if (frameIndices.size() == 0)
             return;
@@ -30,7 +29,8 @@ public:
         m_time[animName] = frameTime;
 
         for (const auto idx : frameIndices) {
-            sf::IntRect rect { static_cast<int>(idx * size.x), 0, static_cast<int>(size.x), static_cast<int>(size.y) };
+            sf::IntRect rect { static_cast<int>(idx * size.x), 0, static_cast<int>(size.x),
+                static_cast<int>(size.y) };
             SmartSprite::Sptr sptr = std::make_shared<SmartSprite>();
             sptr->loadSprite(fileName, rect);
             m_frames[animName].push_back(sptr);
@@ -67,14 +67,8 @@ public:
         return col;
     }
 
-    void setPosition(sf::Vector2f const& pos)
-    {
-        m_position = pos;
-    }
-    const sf::Vector2f getPosition() const
-    {
-        return m_position;
-    }
+    void setPosition(sf::Vector2f const& pos) { m_position = pos; }
+    const sf::Vector2f getPosition() const { return m_position; }
 
     sf::Transform const getTransform() const
     {
@@ -188,9 +182,7 @@ private:
         m_frames.at(m_currentAnimName).at(m_currentIdx)->draw(sptr);
     }
 
-    void doDrawFlash(std::shared_ptr<sf::RenderTarget> /*sptr*/) const
-    {
-    }
+    void doDrawFlash(std::shared_ptr<sf::RenderTarget> /*sptr*/) const { }
 
     void doFlash(float t, sf::Color col = sf::Color::White) override
     {

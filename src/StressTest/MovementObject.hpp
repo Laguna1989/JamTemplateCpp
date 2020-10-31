@@ -1,11 +1,6 @@
 ﻿#ifndef STRESSTEST_MOVEMENTOBJECT_HPP_INCLUDEGUARD
 #define STRESSTEST_MOVEMENTOBJECT_HPP_INCLUDEGUARD
 
-#include <SFML/Graphics.hpp>
-#include <iostream>
-#include <memory>
-#include <random>
-
 #include "../JamTemplate/Animation.hpp"
 #include "../JamTemplate/Box2DObject.hpp"
 #include "../JamTemplate/Conversions.hpp"
@@ -16,6 +11,10 @@
 #include "../JamTemplate/Random.hpp"
 #include "../JamTemplate/SmartShape.hpp"
 #include "../JamTemplate/Transform.hpp"
+#include <SFML/Graphics.hpp>
+#include <iostream>
+#include <memory>
+#include <random>
 
 class MovementObject : public JamTemplate::Box2DObject {
 public:
@@ -25,7 +24,9 @@ public:
     {
         m_animation = std::make_shared<JamTemplate::Animation>();
 
-        m_animation->add("assets/coin.png", "idle", sf::Vector2u { 16, 16 }, JamTemplate::MathHelper::vectorBetween(0U, 11U), JamTemplate::Random::getFloat(0.13f, 0.17f));
+        m_animation->add("assets/coin.png", "idle", sf::Vector2u { 16, 16 },
+            JamTemplate::MathHelper::vectorBetween(0U, 11U),
+            JamTemplate::Random::getFloat(0.13f, 0.17f));
         m_animation->play("idle", JamTemplate::Random::getInt(0, 6));
         m_animation->setOffset(sf::Vector2f { -8, -8 });
         m_animation->setOrigin(sf::Vector2f { 8, 8 });
@@ -43,10 +44,7 @@ public:
 
     ~MovementObject() = default;
 
-    std::shared_ptr<JamTemplate::Animation> getAnimation()
-    {
-        return m_animation;
-    }
+    std::shared_ptr<JamTemplate::Animation> getAnimation() { return m_animation; }
 
 private:
     std::shared_ptr<JamTemplate::Animation> m_animation;
@@ -72,11 +70,7 @@ private:
         }
     }
 
-    void doDraw() const override
-    {
-
-        m_animation->draw(getGame()->getRenderTarget());
-    }
+    void doDraw() const override { m_animation->draw(getGame()->getRenderTarget()); }
 };
 
 #endif

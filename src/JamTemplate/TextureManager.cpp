@@ -6,105 +6,98 @@ namespace JamTemplate {
 
 namespace {
 
-    sf::Image createButtonImage(std::vector<std::string> const& ssv)
-    {
-        if (ssv.size() != 3) {
-            throw std::invalid_argument {
-                "create button image: vector does not contain 3 elements."
-            };
-        }
-        std::size_t count { 0 };
-        long w = std::stol(ssv.at(1), &count);
-        if (count != ssv.at(1).size()) {
-            throw std::invalid_argument { "invalid button size string" };
-        }
-        long h = std::stol(ssv.at(2), &count);
-        if (count != ssv.at(2).size()) {
-            throw std::invalid_argument { "invalid button size string" };
-        }
-        if (w <= 0 || h <= 0) {
-            throw std::invalid_argument { "invalid button size" };
-        }
-
-        return SpriteFunctions::makeButtonImage(
-            static_cast<unsigned int>(w), static_cast<unsigned int>(h));
+sf::Image createButtonImage(std::vector<std::string> const& ssv)
+{
+    if (ssv.size() != 3) {
+        throw std::invalid_argument { "create button image: vector does not contain 3 elements." };
+    }
+    std::size_t count { 0 };
+    long w = std::stol(ssv.at(1), &count);
+    if (count != ssv.at(1).size()) {
+        throw std::invalid_argument { "invalid button size string" };
+    }
+    long h = std::stol(ssv.at(2), &count);
+    if (count != ssv.at(2).size()) {
+        throw std::invalid_argument { "invalid button size string" };
+    }
+    if (w <= 0 || h <= 0) {
+        throw std::invalid_argument { "invalid button size" };
     }
 
-    void replaceOneColor(sf::Image& img, sf::Color const& from, sf::Color const& to)
-    {
-        for (unsigned int x = 0; x != img.getSize().x; ++x) {
-            for (unsigned int y = 0; y != img.getSize().y; ++y) {
-                auto c = img.getPixel(x, y);
-                if (c == from) {
-                    img.setPixel(x, y, to);
-                }
+    return SpriteFunctions::makeButtonImage(
+        static_cast<unsigned int>(w), static_cast<unsigned int>(h));
+}
+
+void replaceOneColor(sf::Image& img, sf::Color const& from, sf::Color const& to)
+{
+    for (unsigned int x = 0; x != img.getSize().x; ++x) {
+        for (unsigned int y = 0; y != img.getSize().y; ++y) {
+            auto c = img.getPixel(x, y);
+            if (c == from) {
+                img.setPixel(x, y, to);
             }
         }
     }
+}
 
-    sf::Image createReplacedImage(std::vector<std::string> const& ssv,
-        TextureManager::ColorReplaceLookupVectorType const& colorReplace)
-    {
-        // "#r#assets/player.png#0"
-        if (ssv.size() != 3) {
-            throw std::invalid_argument {
-                "create button image: vector does not contain 3 elements."
-            };
-        }
-        if (colorReplace.empty()) {
-            throw std::invalid_argument {
-                "Color replace not possible, no color replacements stored."
-            };
-        }
-        std::string baseFileName = ssv.at(1);
-        std::size_t counter { 0 };
-        auto idx = std::stoul(ssv.at(2), &counter);
-        if (counter != ssv.at(2).size()) {
-            throw std::invalid_argument { "invalid color replacement id" };
-        }
-        if (idx >= colorReplace.size()) {
-            throw std::invalid_argument { "No color replacement for given index i= "
-                + std::to_string(idx) };
-        }
+sf::Image createReplacedImage(std::vector<std::string> const& ssv,
+    TextureManager::ColorReplaceLookupVectorType const& colorReplace)
+{
+    // "#r#assets/player.png#0"
+    if (ssv.size() != 3) {
+        throw std::invalid_argument { "create button image: vector does not contain 3 elements." };
+    }
+    if (colorReplace.empty()) {
+        throw std::invalid_argument { "Color replace not possible, no color replacements stored." };
+    }
+    std::string baseFileName = ssv.at(1);
+    std::size_t counter { 0 };
+    auto idx = std::stoul(ssv.at(2), &counter);
+    if (counter != ssv.at(2).size()) {
+        throw std::invalid_argument { "invalid color replacement id" };
+    }
+    if (idx >= colorReplace.size()) {
+        throw std::invalid_argument { "No color replacement for given index i= "
+            + std::to_string(idx) };
+    }
 
-        sf::Image img {};
-        img.loadFromFile(baseFileName);
+    sf::Image img {};
+    img.loadFromFile(baseFileName);
 
-        TextureManager::ColorReplaceLookupType const& cr = colorReplace.at(idx);
-        if (cr.empty()) {
-            // no color replacement to be done.
-            return img;
-        }
-
-        for (auto const kvp : cr) {
-            replaceOneColor(img, kvp.first, kvp.second);
-        }
-
+    TextureManager::ColorReplaceLookupType const& cr = colorReplace.at(idx);
+    if (cr.empty()) {
+        // no color replacement to be done.
         return img;
     }
 
-    sf::Image createFlashImage(sf::Image const& in)
-    {
-        sf::Image img { in };
+    for (auto const kvp : cr) {
+        replaceOneColor(img, kvp.first, kvp.second);
+    }
 
-        for (unsigned int i = 0; i != img.getSize().x; ++i)
-            for (unsigned int j = 0; j != img.getSize().y; ++j) {
-                if (img.getPixel(i, j).a != 0) {
-                    img.setPixel(i, j, sf::Color(255, 255, 255));
-                }
+    return img;
+}
+
+sf::Image createFlashImage(sf::Image const& in)
+{
+    sf::Image img { in };
+
+    for (unsigned int i = 0; i != img.getSize().x; ++i)
+        for (unsigned int j = 0; j != img.getSize().y; ++j) {
+            if (img.getPixel(i, j).a != 0) {
+                img.setPixel(i, j, sf::Color(255, 255, 255));
             }
-        return img;
-    }
-
-    sf::Texture loadTextureFromDisk(std::string const& str)
-    {
-        sf::Texture t {};
-        if (!t.loadFromFile(str)) {
-            throw std::invalid_argument { "invalid filename, cannot load texture from '" + str
-                + "'" };
         }
-        return t;
+    return img;
+}
+
+sf::Texture loadTextureFromDisk(std::string const& str)
+{
+    sf::Texture t {};
+    if (!t.loadFromFile(str)) {
+        throw std::invalid_argument { "invalid filename, cannot load texture from '" + str + "'" };
     }
+    return t;
+}
 } // namespace
 
 TextureManager::TextureMapType TextureManager::m_textures;
@@ -150,4 +143,4 @@ void TextureManager::reset()
     m_selectiveColorReplace.clear();
 }
 
-}
+} // namespace JamTemplate

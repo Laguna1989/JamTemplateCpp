@@ -4,26 +4,26 @@ namespace JamTemplate {
 
 namespace InputHelper {
 
-    std::vector<sf::Keyboard::Key> getAllKeys()
-    {
-        auto const maxValue = static_cast<uint32_t>(sf::Keyboard::Key::KeyCount);
-        std::vector<sf::Keyboard::Key> values(maxValue, sf::Keyboard::A);
-        for (uint32_t i = 0U; i != maxValue; ++i) {
-            values.at(i) = static_cast<sf::Keyboard::Key>(i);
-        }
-        return values;
+std::vector<sf::Keyboard::Key> getAllKeys()
+{
+    auto const maxValue = static_cast<uint32_t>(sf::Keyboard::Key::KeyCount);
+    std::vector<sf::Keyboard::Key> values(maxValue, sf::Keyboard::A);
+    for (uint32_t i = 0U; i != maxValue; ++i) {
+        values.at(i) = static_cast<sf::Keyboard::Key>(i);
     }
-
-    std::vector<sf::Mouse::Button> getAllMouseButtons()
-    {
-        auto const maxValue = static_cast<uint32_t>(sf::Mouse::Button::ButtonCount);
-        std::vector<sf::Mouse::Button> values(maxValue, sf::Mouse::Button::Left);
-        for (uint32_t i = 0U; i != maxValue; ++i) {
-            values.at(i) = static_cast<sf::Mouse::Button>(i);
-        }
-        return values;
-    }
+    return values;
 }
+
+std::vector<sf::Mouse::Button> getAllMouseButtons()
+{
+    auto const maxValue = static_cast<uint32_t>(sf::Mouse::Button::ButtonCount);
+    std::vector<sf::Mouse::Button> values(maxValue, sf::Mouse::Button::Left);
+    for (uint32_t i = 0U; i != maxValue; ++i) {
+        values.at(i) = static_cast<sf::Mouse::Button>(i);
+    }
+    return values;
+}
+} // namespace InputHelper
 
 std::map<sf::Keyboard::Key, bool> InputManager::m_pressed;
 std::map<sf::Keyboard::Key, bool> InputManager::m_released;
@@ -76,7 +76,8 @@ void InputManager::update(float mx, float my, float mxs, float mys, float elapse
         m_released[kvp.first] = !sf::Keyboard::isKeyPressed(kvp.first);
     }
 
-    //std::cout << m_pressed[sf::Keyboard::Key::I] << " " << m_released[sf::Keyboard::Key::I] <<" " << m_justPressed[sf::Keyboard::Key::I]<< "\n";
+    // std::cout << m_pressed[sf::Keyboard::Key::I] << " " << m_released[sf::Keyboard::Key::I] <<" "
+    // << m_justPressed[sf::Keyboard::Key::I]<< "\n";
 
     for (auto& kvp : m_mousePressed) {
         if (sf::Mouse::isButtonPressed(kvp.first)) {
@@ -94,55 +95,29 @@ void InputManager::update(float mx, float my, float mxs, float mys, float elapse
         m_mousePressed[kvp.first] = sf::Mouse::isButtonPressed(kvp.first);
         m_mouseReleased[kvp.first] = !sf::Mouse::isButtonPressed(kvp.first);
     }
-    //std::cout << "a " << m_lmb_pressed << " " << m_lmb_released << " " << m_lmb_justPressed << " " << m_lmb_justReleased << std::endl;
+    // std::cout << "a " << m_lmb_pressed << " " << m_lmb_released << " " << m_lmb_justPressed << "
+    // " << m_lmb_justReleased << std::endl;
 }
 
-sf::Vector2f InputManager::getMousePositionWorld()
-{
-    return sf::Vector2f(m_mouseX, m_mouseY);
-}
+sf::Vector2f InputManager::getMousePositionWorld() { return sf::Vector2f(m_mouseX, m_mouseY); }
 
 sf::Vector2f InputManager::getMousePositionScreen()
 {
     return sf::Vector2f(m_mouseScreenX, m_mouseScreenY);
 }
 
-bool InputManager::pressed(sf::Keyboard::Key k)
-{
-    return m_pressed[k];
-}
-bool InputManager::pressed(sf::Mouse::Button b)
-{
-    return m_mousePressed[b];
-}
+bool InputManager::pressed(sf::Keyboard::Key k) { return m_pressed[k]; }
+bool InputManager::pressed(sf::Mouse::Button b) { return m_mousePressed[b]; }
 
-bool InputManager::released(sf::Keyboard::Key k)
-{
-    return m_released[k];
-}
-bool InputManager::released(sf::Mouse::Button b)
-{
-    return m_mouseReleased[b];
-}
+bool InputManager::released(sf::Keyboard::Key k) { return m_released[k]; }
+bool InputManager::released(sf::Mouse::Button b) { return m_mouseReleased[b]; }
 
-bool InputManager::justPressed(sf::Keyboard::Key k)
-{
-    return m_justPressed[k];
-}
-bool InputManager::justPressed(sf::Mouse::Button b)
-{
-    return m_mouseJustPressed[b];
-}
+bool InputManager::justPressed(sf::Keyboard::Key k) { return m_justPressed[k]; }
+bool InputManager::justPressed(sf::Mouse::Button b) { return m_mouseJustPressed[b]; }
 
-bool InputManager::justReleased(sf::Keyboard::Key k)
-{
-    return m_justReleased[k];
-}
+bool InputManager::justReleased(sf::Keyboard::Key k) { return m_justReleased[k]; }
 
-bool InputManager::justReleased(sf::Mouse::Button b)
-{
-    return m_mouseJustReleased[b];
-}
+bool InputManager::justReleased(sf::Mouse::Button b) { return m_mouseJustReleased[b]; }
 
 void InputManager::reset()
 {

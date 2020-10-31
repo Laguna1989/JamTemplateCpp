@@ -77,5 +77,5 @@ private:
     void cleanUpObjects();
 };
 
-}
+} // namespace JamTemplate
 #endif

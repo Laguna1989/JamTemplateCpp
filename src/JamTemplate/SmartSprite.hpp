@@ -1,4 +1,4 @@
-#ifndef JAMTEMPLATE_SMARTSPRITE_HPP_INCLUDEGUARD
+﻿#ifndef JAMTEMPLATE_SMARTSPRITE_HPP_INCLUDEGUARD
 #define JAMTEMPLATE_SMARTSPRITE_HPP_INCLUDEGUARD
 
 #include <memory>
@@ -10,6 +10,7 @@
 #include "TextureManager.hpp"
 
 namespace JamTemplate {
+
 class SmartSprite : public SmartObject {
 public:
     using Sptr = std::shared_ptr<SmartSprite>;
@@ -23,60 +24,28 @@ public:
     void loadSprite(std::string fileName, sf::IntRect rect)
     {
         m_sprite = sf::Sprite { TextureManager::get(fileName), rect };
-        m_flashSprite = sf::Sprite { TextureManager::get(TextureManager::getFlashName(fileName)), rect };
+        m_flashSprite
+            = sf::Sprite { TextureManager::get(TextureManager::getFlashName(fileName)), rect };
     }
 
-    void setPosition(sf::Vector2f const& pos) override
-    {
-        m_position = pos;
-    }
+    void setPosition(sf::Vector2f const& pos) override { m_position = pos; }
 
-    const sf::Vector2f getPosition() const override
-    {
-        return m_position;
-    }
+    const sf::Vector2f getPosition() const override { return m_position; }
 
-    void setColor(const sf::Color& col) override
-    {
-        m_sprite.setColor(col);
-    }
-    const sf::Color getColor() const override
-    {
-        return m_sprite.getColor();
-    }
+    void setColor(const sf::Color& col) override { m_sprite.setColor(col); }
+    const sf::Color getColor() const override { return m_sprite.getColor(); }
 
-    void setFlashColor(const sf::Color& col) override
-    {
-        m_flashSprite.setColor(col);
-    }
-    const sf::Color getFlashColor() const override
-    {
-        return m_flashSprite.getColor();
-    }
+    void setFlashColor(const sf::Color& col) override { m_flashSprite.setColor(col); }
+    const sf::Color getFlashColor() const override { return m_flashSprite.getColor(); }
 
-    virtual sf::Transform const getTransform() const override
-    {
-        return m_sprite.getTransform();
-    }
+    virtual sf::Transform const getTransform() const override { return m_sprite.getTransform(); }
 
-    virtual sf::FloatRect getGlobalBounds() const override
-    {
-        return m_sprite.getGlobalBounds();
-    }
-    virtual sf::FloatRect getLocalBounds() const override
-    {
-        return m_sprite.getLocalBounds();
-    }
+    virtual sf::FloatRect getGlobalBounds() const override { return m_sprite.getGlobalBounds(); }
+    virtual sf::FloatRect getLocalBounds() const override { return m_sprite.getLocalBounds(); }
 
-    virtual void setScale(sf::Vector2f const& scale)
-    {
-        m_sprite.setScale(scale);
-    }
+    virtual void setScale(sf::Vector2f const& scale) { m_sprite.setScale(scale); }
 
-    virtual const sf::Vector2f getScale() const
-    {
-        return m_sprite.getScale();
-    }
+    virtual const sf::Vector2f getScale() const { return m_sprite.getScale(); }
 
     virtual void setOrigin(sf::Vector2f const& origin)
     {
@@ -84,10 +53,7 @@ public:
         m_flashSprite.setOrigin(origin);
     }
 
-    virtual const sf::Vector2f getOrigin() const
-    {
-        return m_sprite.getOrigin();
-    }
+    virtual const sf::Vector2f getOrigin() const { return m_sprite.getOrigin(); }
 
 private:
     sf::Sprite m_sprite;
@@ -102,10 +68,7 @@ private:
         m_flashSprite.setScale(m_sprite.getScale());
     }
 
-    void doDraw(std::shared_ptr<sf::RenderTarget> sptr) const override
-    {
-        sptr->draw(m_sprite);
-    }
+    void doDraw(std::shared_ptr<sf::RenderTarget> sptr) const override { sptr->draw(m_sprite); }
 
     void doDrawFlash(std::shared_ptr<sf::RenderTarget> sptr) const override
     {

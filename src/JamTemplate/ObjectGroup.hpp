@@ -1,4 +1,4 @@
-#ifndef JAMTEMPLATE_OBJECTGROUP_HPP_INCLUDEGUARD
+﻿#ifndef JAMTEMPLATE_OBJECTGROUP_HPP_INCLUDEGUARD
 #define JAMTEMPLATE_OBJECTGROUP_HPP_INCLUDEGUARD
 
 #include <memory>
@@ -11,7 +11,8 @@ namespace JamTemplate {
 /// Can be used as a GameObject.
 /// For stored objects to be updated and drawn, you need to also add the object to the State itself
 ///
-/// naming convention will differ here from the rest of the project as this is about to mimic the std::vector interface
+/// naming convention will differ here from the rest of the project as this is about to mimic the
+/// std::vector interface
 template <typename T>
 class ObjectGroup : public GameObject {
 public:
@@ -24,15 +25,9 @@ public:
 
     auto at(size_t idx) { return m_objects.at(idx); }
 
-    void push_back(std::weak_ptr<T> wptr)
-    {
-        m_objects.push_back(wptr);
-    }
+    void push_back(std::weak_ptr<T> wptr) { m_objects.push_back(wptr); }
 
-    void emplace_back(std::weak_ptr<T>&& wptr)
-    {
-        m_objects.emplace_back(wptr);
-    }
+    void emplace_back(std::weak_ptr<T>&& wptr) { m_objects.emplace_back(wptr); }
 
     size_t size() { return m_objects.size(); }
 
@@ -42,9 +37,7 @@ private:
     void doUpdate(const float /*elapsed*/) override
     {
         m_objects.erase(std::remove_if(m_objects.begin(), m_objects.end(),
-                            [](std::weak_ptr<T> wptr) {
-                                return wptr.expired();
-                            }),
+                            [](std::weak_ptr<T> wptr) { return wptr.expired(); }),
             m_objects.end());
     }
 };
@@ -61,5 +54,5 @@ auto end(ObjectGroup<T>& obj)
     return obj.end();
 }
 
-}
+} // namespace JamTemplate
 #endif

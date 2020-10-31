@@ -23,5 +23,5 @@ public:
 private:
     static std::default_random_engine m_engine;
 };
-}
+} // namespace JamTemplate
 #endif

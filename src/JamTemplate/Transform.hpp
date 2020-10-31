@@ -1,4 +1,4 @@
-
+﻿
 #ifndef JAMTEMPLATE_TRANSFORM_HPP_INCLUDEGUARD
 #define JAMTEMPLATE_TRANSFORM_HPP_INCLUDEGUARD
 
@@ -32,24 +32,12 @@ public:
         setToBoundsPosition();
     }
 
-    void setToBoundsPosition()
-    {
-        setToBounds(m_position, m_boundsPosition, m_useBoundsPosition);
-    }
-    void setToBoundsVelocity()
-    {
-        setToBounds(m_velocity, m_boundsVelocity, m_useBoundsVelocity);
-    }
+    void setToBoundsPosition() { setToBounds(m_position, m_boundsPosition, m_useBoundsPosition); }
+    void setToBoundsVelocity() { setToBounds(m_velocity, m_boundsVelocity, m_useBoundsVelocity); }
 
-    void unsetBoundsPosition()
-    {
-        m_useBoundsPosition = false;
-    }
+    void unsetBoundsPosition() { m_useBoundsPosition = false; }
 
-    void unsetBoundsVelocity()
-    {
-        m_useBoundsVelocity = false;
-    }
+    void unsetBoundsVelocity() { m_useBoundsVelocity = false; }
 
     void setPosition(vt const p) { m_position = p; }
     void setVelocity(vt const v) { m_velocity = v; }
@@ -77,10 +65,7 @@ public:
     }
     void resetBoundsVelocity() { m_useBoundsVelocity = false; }
 
-    void setDragVelocity(vt const& drag)
-    {
-        m_dragVelocity = drag;
-    }
+    void setDragVelocity(vt const& drag) { m_dragVelocity = drag; }
     vt getDragVelocity() const { return m_dragVelocity; }
 
 private:
@@ -116,5 +101,5 @@ private:
         }
     }
 };
-}
+} // namespace JamTemplate
 #endif

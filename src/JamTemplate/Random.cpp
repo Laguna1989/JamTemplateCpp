@@ -22,10 +22,7 @@ float Random::getFloatGauss(float mu, float sigma)
     return dist(m_engine);
 }
 
-bool Random::getChance(float c)
-{
-    return (getFloat(0.0f, 1.0f) <= c);
-}
+bool Random::getChance(float c) { return (getFloat(0.0f, 1.0f) <= c); }
 
 sf::Color const Random::getRandomColor()
 {

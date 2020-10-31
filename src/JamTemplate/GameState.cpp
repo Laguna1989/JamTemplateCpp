@@ -35,10 +35,7 @@ void GameState::add(GameObject::Sptr go)
     }
 }
 
-void GameState::add(TweenBase::Sptr tb)
-{
-    m_tweensToAdd.push_back(tb);
-}
+void GameState::add(TweenBase::Sptr tb) { m_tweensToAdd.push_back(tb); }
 
 size_t GameState::getNumberOfObjects() const { return m_objects.size(); }
 
@@ -68,7 +65,9 @@ void GameState::updateTweens(float elapsed)
     }
     if (m_tweens.empty())
         return;
-    m_tweens.erase(std::remove_if(m_tweens.begin(), m_tweens.end(), [](TweenBase::Sptr go) { return !(go->isAlive()); }), m_tweens.end());
+    m_tweens.erase(std::remove_if(m_tweens.begin(), m_tweens.end(),
+                       [](TweenBase::Sptr go) { return !(go->isAlive()); }),
+        m_tweens.end());
     for (auto& tw : m_tweens) {
         tw->update(elapsed);
     }
@@ -81,15 +80,9 @@ void GameState::drawObjects() const
     }
 }
 
-void GameState::internalUpdate(float elapsed)
-{
-    doInternalUpdate(elapsed);
-}
+void GameState::internalUpdate(float elapsed) { doInternalUpdate(elapsed); }
 
-void GameState::internalDraw() const
-{
-    doInternalDraw();
-}
+void GameState::internalDraw() const { doInternalDraw(); }
 
 void GameState::initialize() { m_hasBeenInitialized = true; }
 
@@ -101,9 +94,7 @@ void GameState::doUpdate(float const elapsed)
     updateTweens(elapsed);
 }
 
-void GameState::doInternalUpdate(float /*elapsed*/)
-{
-}
+void GameState::doInternalUpdate(float /*elapsed*/) { }
 
 void GameState::addNewObjects()
 {
@@ -114,20 +105,16 @@ void GameState::addNewObjects()
 }
 void GameState::cleanUpObjects()
 {
-    m_objects.erase(std::remove_if(m_objects.begin(), m_objects.end(), [](GameObject::Sptr go) { return !(go->isAlive()); }), m_objects.end());
+    m_objects.erase(std::remove_if(m_objects.begin(), m_objects.end(),
+                        [](GameObject::Sptr go) { return !(go->isAlive()); }),
+        m_objects.end());
 }
 
-void GameState::doDraw() const
-{
-    internalDraw();
-};
+void GameState::doDraw() const { internalDraw(); };
 
-void GameState::doInternalDraw() const
-{
-    drawObjects();
-}
+void GameState::doInternalDraw() const { drawObjects(); }
 
 void GameState::doCreate() { doInternalCreate(); };
 
 void GameState::doInternalCreate() {};
-}
+} // namespace JamTemplate

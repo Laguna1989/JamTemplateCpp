@@ -1,8 +1,5 @@
-#ifndef GAME_STATE_GAME_HPP_INCLUDEGUARD
+﻿#ifndef GAME_STATE_GAME_HPP_INCLUDEGUARD
 #define GAME_STATE_GAME_HPP_INCLUDEGUARD
-
-#include <iostream>
-#include <vector>
 
 #include "../JamTemplate/Collision.hpp"
 #include "../JamTemplate/Game.hpp"
@@ -13,6 +10,8 @@
 #include "../JamTemplate/Timer.hpp"
 #include "../JamTemplate/TweenAlpha.hpp"
 #include "SwarmObject.hpp"
+#include <iostream>
+#include <vector>
 
 class State2 : public JamTemplate::GameState {
 public:
@@ -40,7 +39,8 @@ private:
         m_overlay->makeRect(sf::Vector2f { 200, 200 });
         m_overlay->setColor(sf::Color { 0, 0, 0 });
         m_overlay->update(0.0f);
-        auto tw = TweenAlpha<SmartShape>::create(m_overlay, 0.5f, sf::Uint8 { 255 }, sf::Uint8 { 0 });
+        auto tw
+            = TweenAlpha<SmartShape>::create(m_overlay, 0.5f, sf::Uint8 { 255 }, sf::Uint8 { 0 });
         tw->addCompleteCallback([this]() { std::cout << "overlay fade in finished" << std::endl; });
         add(tw);
 
@@ -55,10 +55,7 @@ private:
         m_sky->update(0.0f);
     }
 
-    void drawSky() const
-    {
-        m_sky->draw(getGame()->getRenderTarget());
-    }
+    void drawSky() const { m_sky->draw(getGame()->getRenderTarget()); }
 
     void doDraw() const override
     {

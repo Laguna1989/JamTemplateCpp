@@ -57,5 +57,5 @@ private:
         }
     }
 };
-}
+} // namespace JamTemplate
 #endif

@@ -1,4 +1,4 @@
-#ifndef JAMTEMPLATE_SMARTOBJECT_HPP_INCLUDEGUARD
+﻿#ifndef JAMTEMPLATE_SMARTOBJECT_HPP_INCLUDEGUARD
 #define JAMTEMPLATE_SMARTOBJECT_HPP_INCLUDEGUARD
 
 #include <iostream>
@@ -20,13 +20,14 @@ public:
     void draw(std::shared_ptr<sf::RenderTarget> sptr) const
     {
         if (m_hasBeenUpdated == false) {
-            std::cout << "WARNING: Calling SmartObject::draw() without previous call to SmartObject::update()!\n";
+            std::cout << "WARNING: Calling SmartObject::draw() without previous call to "
+                         "SmartObject::update()!\n";
         }
         doDraw(sptr);
         if (m_flashTimer > 0) {
             doDrawFlash(sptr);
         }
-        //m_hasBeenUpdated = false;
+        // m_hasBeenUpdated = false;
     }
 
     void flash(float t, sf::Color col = sf::Color::White)
@@ -70,15 +71,9 @@ public:
     virtual void setOrigin(sf::Vector2f const& origin) = 0;
     virtual const sf::Vector2f getOrigin() const = 0;
 
-    void setOffset(sf::Vector2f const offset)
-    {
-        m_offset = offset;
-    }
+    void setOffset(sf::Vector2f const offset) { m_offset = offset; }
 
-    sf::Vector2f getOffset() const
-    {
-        return m_offset;
-    }
+    sf::Vector2f getOffset() const { return m_offset; }
 
     void setRotation(float rot)
     {
@@ -86,24 +81,15 @@ public:
         doRotate(rot);
     }
 
-    float getRotation() const
-    {
-        return m_rotationInDegree;
-    }
+    float getRotation() const { return m_rotationInDegree; }
 
     void setMoveWithCam(bool v) { m_moveWithCam = v; }
 
     // do not call this from anywhere but Game::doUpdate
-    static void setCamOffset(sf::Vector2f ofs)
-    {
-        m_camOffset = ofs;
-    }
+    static void setCamOffset(sf::Vector2f ofs) { m_camOffset = ofs; }
 
 protected:
-    sf::Vector2f getShakeOffset() const
-    {
-        return m_shakeOffset;
-    }
+    sf::Vector2f getShakeOffset() const { return m_shakeOffset; }
 
     sf::Vector2f getCamOffset() const
     {
@@ -165,9 +151,7 @@ private:
         }
     }
 
-    virtual void doFlash(float /*t*/, sf::Color /*col = sf::Color::White*/)
-    {
-    }
+    virtual void doFlash(float /*t*/, sf::Color /*col = sf::Color::White*/) { }
 
     virtual void doRotate(float /*rot*/) = 0;
 };

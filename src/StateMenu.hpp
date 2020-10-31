@@ -1,12 +1,14 @@
-#ifndef GAME_STATE_MENU_HPP_INCLUDEGUARD
+﻿#ifndef GAME_STATE_MENU_HPP_INCLUDEGUARD
 #define GAME_STATE_MENU_HPP_INCLUDEGUARD
 
 #include "JamTemplate/GameState.hpp"
 
 namespace JamTemplate {
+
 class SmartText;
 class SmartShape;
-}
+
+} // namespace JamTemplate
 
 class StateMenu : public JamTemplate::GameState {
 public:

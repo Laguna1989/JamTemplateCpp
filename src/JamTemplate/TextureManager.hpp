@@ -11,6 +11,7 @@
 #include "SpriteFunctions.hpp"
 
 namespace JamTemplate {
+
 class TextureManager {
 public:
     using ColorReplaceLookupType = std::vector<std::pair<sf::Color, sf::Color>>;
@@ -31,10 +32,10 @@ public:
     static std::string TextureManager::getFlashName(std::string const& str);
 
     // This will chance all textures and might not be revertible.
-    // Warning: due to slow copy process from graphics memory to ram and back to graphics this should not be called frequently!
-    // Only works for textures obtained from this class (not for colors of shapes or whatever)
-    // \param in and out are used for lookups
-    // if a color is used which is not contained in in, the color will be unchanged
+    // Warning: due to slow copy process from graphics memory to ram and back to graphics this
+    // should not be called frequently! Only works for textures obtained from this class (not for
+    // colors of shapes or whatever) \param in and out are used for lookups if a color is used which
+    // is not contained in in, the color will be unchanged
     static void swapPalette(std::vector<sf::Color> in, std::vector<sf::Color> out)
     {
         assert(in.size() == out.size());
@@ -57,17 +58,12 @@ public:
         }
     }
 
-    static bool isTextureLoaded(std::string filename)
-    {
-        return m_textures.count(filename) != 0;
-    }
+    static bool isTextureLoaded(std::string filename) { return m_textures.count(filename) != 0; }
 
-    static void addTexture(std::string name, sf::Texture& t)
-    {
-        m_textures[name] = (t);
-    }
+    static void addTexture(std::string name, sf::Texture& t) { m_textures[name] = (t); }
 
-    static void addSelectiveColorReplacement(int idx, std::vector<std::pair<sf::Color, sf::Color>> replace)
+    static void addSelectiveColorReplacement(
+        int idx, std::vector<std::pair<sf::Color, sf::Color>> replace)
     {
         if (m_selectiveColorReplace.size() <= idx) {
             m_selectiveColorReplace.resize(idx + 1U);
@@ -80,11 +76,9 @@ private:
     static TextureMapType m_textures;
     static ColorReplaceLookupVectorType m_selectiveColorReplace;
 
-    static bool containsTexture(std::string const& str)
-    {
-        return (m_textures.count(str) != 0);
-    }
+    static bool containsTexture(std::string const& str) { return (m_textures.count(str) != 0); }
 };
+
 } // namespace JamTemplate
 
 #endif

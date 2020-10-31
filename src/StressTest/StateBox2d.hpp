@@ -1,4 +1,4 @@
-#ifndef STRESSTEST_STATE_BOX2D_HPP_INCLUDEGUARD
+﻿#ifndef STRESSTEST_STATE_BOX2D_HPP_INCLUDEGUARD
 #define STRESSTEST_STATE_BOX2D_HPP_INCLUDEGUARD
 
 #include "../JamTemplate/Game.hpp"
@@ -30,10 +30,12 @@ private:
         for (int i = 0; i != 20; ++i)
             for (int j = 0; j != 20; ++j) {
                 groundBodyDef.position.Set(32.0f + i * 16, 100.0f - 16 + j * 16);
-                MovementObject::Sptr b2obj = std::make_shared<MovementObject>(m_world, &groundBodyDef);
+                MovementObject::Sptr b2obj
+                    = std::make_shared<MovementObject>(m_world, &groundBodyDef);
                 add(b2obj);
 
-                auto tw = JamTemplate::TweenRotation<JamTemplate::Animation>::create(b2obj->getAnimation(), 2, 0, 360);
+                auto tw = JamTemplate::TweenRotation<JamTemplate::Animation>::create(
+                    b2obj->getAnimation(), 2, 0, 360);
                 add(tw);
             }
         {
@@ -70,7 +72,8 @@ private:
 
         add(myBody);
         {
-            auto tw = JamTemplate::TweenRotation<JamTemplate::Animation>::create(myBody->getAnimation(), 2, 0, 360);
+            auto tw = JamTemplate::TweenRotation<JamTemplate::Animation>::create(
+                myBody->getAnimation(), 2, 0, 360);
             tw->setRepeat(true);
             add(tw);
         }

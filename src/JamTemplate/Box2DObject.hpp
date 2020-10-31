@@ -1,4 +1,4 @@
-#ifndef JAMTEMPLATE_BOX2DOBJECT_HPP_INCLUDEGUARD
+﻿#ifndef JAMTEMPLATE_BOX2DOBJECT_HPP_INCLUDEGUARD
 #define JAMTEMPLATE_BOX2DOBJECT_HPP_INCLUDEGUARD
 
 #include <Box2D/Box2D.h>
@@ -21,25 +21,13 @@ public:
         setB2Body(world->CreateBody(def));
     }
 
-    sf::Vector2f getPosition() const
-    {
-        return C::vec(m_body->GetPosition());
-    }
+    sf::Vector2f getPosition() const { return C::vec(m_body->GetPosition()); }
 
-    void setPosition(sf::Vector2f p)
-    {
-        m_body->SetTransform(C::vec(p), m_body->GetAngle());
-    }
+    void setPosition(sf::Vector2f p) { m_body->SetTransform(C::vec(p), m_body->GetAngle()); }
 
-    float getRotation() const
-    {
-        return m_body->GetAngle();
-    }
+    float getRotation() const { return m_body->GetAngle(); }
 
-    b2Body* getB2Body()
-    {
-        return m_body;
-    }
+    b2Body* getB2Body() { return m_body; }
 
 private:
     // this pointer is NOT owning!
@@ -50,10 +38,7 @@ private:
     void doDraw() const override {};
     void doCreate() override {};
 
-    void setB2Body(b2Body* body)
-    {
-        m_body = body;
-    }
+    void setB2Body(b2Body* body) { m_body = body; }
 };
-}
+} // namespace JamTemplate
 #endif

@@ -53,7 +53,8 @@ public:
     class OrientedBoundingBox // Used in the BoundingBoxTest
     {
     public:
-        OrientedBoundingBox(T const& Object) // Calculate the four points of the OBB from a transformed (scaled, rotated...) sprite
+        OrientedBoundingBox(T const& Object) // Calculate the four points of the OBB from a
+                                             // transformed (scaled, rotated...) sprite
         {
             sf::Transform trans = Object.getTransform();
             auto local = Object.getGlobalBounds();
@@ -63,7 +64,8 @@ public:
             Points[3] = trans.transformPoint(0.f, local.height);
         }
 
-        OrientedBoundingBox(std::shared_ptr<T> obj) // Calculate the four points of the OBB from a transformed (scaled, rotated...) sprite
+        OrientedBoundingBox(std::shared_ptr<T> obj) // Calculate the four points of the OBB from a
+                                                    // transformed (scaled, rotated...) sprite
         {
             sf::Transform trans = obj->getTransform();
             auto local = obj->getGlobalBounds();
@@ -75,7 +77,9 @@ public:
 
         sf::Vector2f Points[4];
 
-        void ProjectOntoAxis(const sf::Vector2f& Axis, float& Min, float& Max) // Project all four points of the OBB onto the given axis and return the dotproducts of the two outermost points
+        void ProjectOntoAxis(const sf::Vector2f& Axis, float& Min,
+            float& Max) // Project all four points of the OBB onto the given axis and return the
+                        // dotproducts of the two outermost points
         {
             Min = (Points[0].x * Axis.x + Points[0].y * Axis.y);
             Max = Min;
@@ -98,14 +102,10 @@ public:
 
         // Create the four distinct axes that are perpendicular to the edges of the two rectangles
         sf::Vector2f Axes[4] = {
-            sf::Vector2f(OBB1.Points[1].x - OBB1.Points[0].x,
-                OBB1.Points[1].y - OBB1.Points[0].y),
-            sf::Vector2f(OBB1.Points[1].x - OBB1.Points[2].x,
-                OBB1.Points[1].y - OBB1.Points[2].y),
-            sf::Vector2f(OBB2.Points[0].x - OBB2.Points[3].x,
-                OBB2.Points[0].y - OBB2.Points[3].y),
-            sf::Vector2f(OBB2.Points[0].x - OBB2.Points[1].x,
-                OBB2.Points[0].y - OBB2.Points[1].y)
+            sf::Vector2f(OBB1.Points[1].x - OBB1.Points[0].x, OBB1.Points[1].y - OBB1.Points[0].y),
+            sf::Vector2f(OBB1.Points[1].x - OBB1.Points[2].x, OBB1.Points[1].y - OBB1.Points[2].y),
+            sf::Vector2f(OBB2.Points[0].x - OBB2.Points[3].x, OBB2.Points[0].y - OBB2.Points[3].y),
+            sf::Vector2f(OBB2.Points[0].x - OBB2.Points[1].x, OBB2.Points[0].y - OBB2.Points[1].y)
         };
 
         for (int i = 0; i < 4; i++) // For each axis...
@@ -117,7 +117,8 @@ public:
             OBB2.ProjectOntoAxis(Axes[i], MinOBB2, MaxOBB2);
 
             // ... and check whether the outermost projected points of both OBBs overlap.
-            // If this is not the case, the Separating Axis Theorem states that there can be no collision between the rectangles
+            // If this is not the case, the Separating Axis Theorem states that there can be no
+            // collision between the rectangles
             if (!((MinOBB2 <= MaxOBB1) && (MaxOBB2 >= MinOBB1)))
                 return false;
         }
@@ -132,14 +133,10 @@ public:
 
         // Create the four distinct axes that are perpendicular to the edges of the two rectangles
         sf::Vector2f Axes[4] = {
-            sf::Vector2f(OBB1.Points[1].x - OBB1.Points[0].x,
-                OBB1.Points[1].y - OBB1.Points[0].y),
-            sf::Vector2f(OBB1.Points[1].x - OBB1.Points[2].x,
-                OBB1.Points[1].y - OBB1.Points[2].y),
-            sf::Vector2f(OBB2.Points[0].x - OBB2.Points[3].x,
-                OBB2.Points[0].y - OBB2.Points[3].y),
-            sf::Vector2f(OBB2.Points[0].x - OBB2.Points[1].x,
-                OBB2.Points[0].y - OBB2.Points[1].y)
+            sf::Vector2f(OBB1.Points[1].x - OBB1.Points[0].x, OBB1.Points[1].y - OBB1.Points[0].y),
+            sf::Vector2f(OBB1.Points[1].x - OBB1.Points[2].x, OBB1.Points[1].y - OBB1.Points[2].y),
+            sf::Vector2f(OBB2.Points[0].x - OBB2.Points[3].x, OBB2.Points[0].y - OBB2.Points[3].y),
+            sf::Vector2f(OBB2.Points[0].x - OBB2.Points[1].x, OBB2.Points[0].y - OBB2.Points[1].y)
         };
 
         for (int i = 0; i < 4; i++) // For each axis...
@@ -151,7 +148,8 @@ public:
             OBB2.ProjectOntoAxis(Axes[i], MinOBB2, MaxOBB2);
 
             // ... and check whether the outermost projected points of both OBBs overlap.
-            // If this is not the case, the Separating Axis Theorem states that there can be no collision between the rectangles
+            // If this is not the case, the Separating Axis Theorem states that there can be no
+            // collision between the rectangles
             if (!((MinOBB2 <= MaxOBB1) && (MaxOBB2 >= MinOBB1)))
                 return false;
         }
@@ -159,25 +157,29 @@ public:
     }
 
     ////////
-    ///// Test for a collision between two sprites by comparing the alpha values of overlapping pixels
+    ///// Test for a collision between two sprites by comparing the alpha values of overlapping
+    /// pixels
     ///// Supports scaling and rotation
-    ///// AlphaLimit: The threshold at which a pixel becomes "solid". If AlphaLimit is 127, a pixel with
+    ///// AlphaLimit: The threshold at which a pixel becomes "solid". If AlphaLimit is 127, a pixel
+    /// with
     ///// alpha value 128 will cause a collision and a pixel with alpha value 126 will not.
     /////
     ///// This functions creates bitmasks of the textures of the two sprites by
     ///// downloading the textures from the graphics card to memory -> SLOW!
     ///// You can avoid this by using the "CreateTextureAndBitmask" function
     ////////
-    //bool PixelPerfectTest(const sf::Sprite& Object1, const sf::Sprite& Object2, sf::Uint8 AlphaLimit = 0);
+    // bool PixelPerfectTest(const sf::Sprite& Object1, const sf::Sprite& Object2, sf::Uint8
+    // AlphaLimit = 0);
 
     ////////
     ///// Replaces Texture::loadFromFile
     ///// Load an imagefile into the given texture and create a bitmask for it
-    ///// This is much faster than creating the bitmask for a texture on the first run of "PixelPerfectTest"
+    ///// This is much faster than creating the bitmask for a texture on the first run of
+    ///"PixelPerfectTest"
     /////
     ///// The function returns false if the file could not be opened for some reason
     ////////
-    //bool CreateTextureAndBitmask(sf::Texture &LoadInto, const std::string& Filename);
+    // bool CreateTextureAndBitmask(sf::Texture &LoadInto, const std::string& Filename);
 
     //////
     /// Test for collision using circle collision dection
@@ -194,7 +196,8 @@ public:
 
         sf::Vector2f Distance = GetSpriteCenter(Object1) - GetSpriteCenter(Object2);
 
-        return (Distance.x * Distance.x + Distance.y * Distance.y <= (Radius1 + Radius2) * (Radius1 + Radius2));
+        return (Distance.x * Distance.x + Distance.y * Distance.y
+            <= (Radius1 + Radius2) * (Radius1 + Radius2));
     }
 
     template <class U, class V>
@@ -207,7 +210,8 @@ public:
 
         sf::Vector2f Distance = GetSpriteCenter(obj1) - GetSpriteCenter(obj1);
 
-        return (Distance.x * Distance.x + Distance.y * Distance.y <= (Radius1 + Radius2) * (Radius1 + Radius2));
+        return (Distance.x * Distance.x + Distance.y * Distance.y
+            <= (Radius1 + Radius2) * (Radius1 + Radius2));
     }
 
 private:
@@ -230,6 +234,6 @@ private:
         return sf::Vector2f(AABB.left + AABB.width / 2.f, AABB.top + AABB.height / 2.f);
     }
 };
-}
+} // namespace JamTemplate
 
 #endif /* COLLISION_H */

@@ -12,14 +12,9 @@ class ConversionsTestFixture : public ::testing::TestWithParam<tt> {
 
 using nl = std::numeric_limits<float>;
 
-INSTANTIATE_TEST_SUITE_P(
-    ConversionsTest,
-    ConversionsTestFixture,
-    ::testing::Values(
-        std::make_pair(1.0f, 5.0f),
-        std::make_pair(-2.5f, -3.3333f),
-        std::make_pair(nl::min(), nl::max()),
-        std::make_pair(nl::epsilon(), nl::infinity())));
+INSTANTIATE_TEST_SUITE_P(ConversionsTest, ConversionsTestFixture,
+    ::testing::Values(std::make_pair(1.0f, 5.0f), std::make_pair(-2.5f, -3.3333f),
+        std::make_pair(nl::min(), nl::max()), std::make_pair(nl::epsilon(), nl::infinity())));
 
 TEST_P(ConversionsTestFixture, box2dVectorToSFMLVector)
 {

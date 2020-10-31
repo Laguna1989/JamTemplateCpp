@@ -74,7 +74,7 @@ TEST_F(GameStateTest, GameObjectList)
     s.update(0.0f);
     EXPECT_EQ(s.getNumberOfObjects(), N);
 
-    //kill half the objects
+    // kill half the objects
     for (auto i = 0U; i != N; ++i) {
         auto mo = objects.at(i);
 

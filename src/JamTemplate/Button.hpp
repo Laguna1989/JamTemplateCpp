@@ -1,4 +1,4 @@
-#ifndef JAMTEMPLATE_BUTTON_HPP_GUARD
+﻿#ifndef JAMTEMPLATE_BUTTON_HPP_GUARD
 #define JAMTEMPLATE_BUTTON_HPP_GUARD
 
 #include <functional>
@@ -31,44 +31,33 @@ public:
     }
     ~Button()
     {
-        //std::cout << "button destructor\n";
-        //std::cout << m_icon << "\n";
+        // std::cout << "button destructor\n";
+        // std::cout << m_icon << "\n";
         m_icon = nullptr;
-        //std::cout << "button destructor half 1\n";
+        // std::cout << "button destructor half 1\n";
         m_background = nullptr;
-        //std::cout << "button destructor half 2\n";
+        // std::cout << "button destructor half 2\n";
         m_callbacks.clear();
-        //std::cout << "button destructor end\n";
+        // std::cout << "button destructor end\n";
     }
 
     Button(const Button& b) = default;
     Button(Button&& b) = default;
 
-    void setIcon(SmartObject::Sptr sprt)
+    void setIcon(SmartObject::Sptr sprt) { m_icon = sprt; }
+
+    void addCallback(std::function<void(void)> cb) { m_callbacks.push_back(cb); }
+
+    void clearCallbacks() { m_callbacks.clear(); }
+    size_t getCallbackCount() const { return m_callbacks.size(); }
+
+    bool IsMouseOver()
     {
-        m_icon = sprt;
+        return isOver(
+            InputManager::getMousePositionScreen().x, InputManager::getMousePositionScreen().y);
     }
 
-    void addCallback(std::function<void(void)> cb)
-    {
-        m_callbacks.push_back(cb);
-    }
-
-    void clearCallbacks()
-    {
-        m_callbacks.clear();
-    }
-    size_t getCallbackCount() const
-    {
-        return m_callbacks.size();
-    }
-
-    bool IsMouseOver() { return isOver(InputManager::getMousePositionScreen().x, InputManager::getMousePositionScreen().y); }
-
-    void setVisible(bool v)
-    {
-        m_visible = v;
-    }
+    void setVisible(bool v) { m_visible = v; }
 
 private:
     std::shared_ptr<Animation> m_background;
@@ -104,8 +93,11 @@ private:
             m_icon->update(elapsed);
         }
 
-        //std::cout << InputManager::getMousePositionScreen().x << " " << InputManager::getMousePositionScreen().y << " " << m_background.getPosition().x << " " << m_background.getPosition().y << "\n";
-        if (isOver(InputManager::getMousePositionScreen().x, InputManager::getMousePositionScreen().y)) {
+        // std::cout << InputManager::getMousePositionScreen().x << " " <<
+        // InputManager::getMousePositionScreen().y << " " << m_background.getPosition().x << " " <<
+        // m_background.getPosition().y << "\n";
+        if (isOver(InputManager::getMousePositionScreen().x,
+                InputManager::getMousePositionScreen().y)) {
             if (InputManager::pressed(sf::Mouse::Button::Left)) {
                 m_background->play("down");
             } else {
@@ -114,7 +106,7 @@ private:
 
             if (InputManager::justReleased(sf::Mouse::Button::Left)) {
                 if (m_visible) {
-                    //std::cout << "released" << std::endl;
+                    // std::cout << "released" << std::endl;
                     for (auto& cb : m_callbacks) {
                         std::cout << "callback\n";
                         cb();
@@ -122,11 +114,11 @@ private:
                 }
             }
         } else {
-            //std::cout << "not over" << std::endl;
+            // std::cout << "not over" << std::endl;
             m_background->play("normal");
         }
     }
 };
-}
+} // namespace JamTemplate
 
 #endif // !JAMTEMPLATE_CONVERSIONS_HPP_GUARD

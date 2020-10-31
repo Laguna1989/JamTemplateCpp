@@ -7,7 +7,6 @@
 #include <string>
 
 namespace JamTemplate {
-
 class GameState;
 
 class Game final : public GameObject, public std::enable_shared_from_this<Game> {
@@ -64,5 +63,5 @@ private:
     void doSwitchState();
 };
 
-}
+} // namespace JamTemplate
 #endif

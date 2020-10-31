@@ -1,1 +1,1 @@
-#include "GameProperties.hpp"
+﻿#include "GameProperties.hpp"

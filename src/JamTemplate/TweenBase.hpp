@@ -1,4 +1,4 @@
-#ifndef JAMTEMPLATE_TWEENBASE_HPP_INCLUDEGUARD
+﻿#ifndef JAMTEMPLATE_TWEENBASE_HPP_INCLUDEGUARD
 #define JAMTEMPLATE_TWEENBASE_HPP_INCLUDEGUARD
 
 #include <SFML/Graphics.hpp>
@@ -7,6 +7,7 @@
 #include <memory>
 
 namespace JamTemplate {
+
 class TweenBase {
 public:
     using Sptr = std::shared_ptr<TweenBase>;
@@ -23,10 +24,7 @@ public:
     TweenBase(TweenBase&&) = default;
     TweenBase& operator=(TweenBase&&) = default;
 
-    void cancel()
-    {
-        kill();
-    }
+    void cancel() { kill(); }
 
     void finish()
     {
@@ -45,47 +43,20 @@ public:
             return;
         }
         m_age += elapsed;
-        //if (m_age < m_startDelay) return;
+        // if (m_age < m_startDelay) return;
         doUpdate(elapsed);
     }
-    bool isAlive()
-    {
-        return m_alive;
-    }
-    void kill()
-    {
-        m_alive = false;
-    }
-    void setStartDelay(float delay)
-    {
-        m_startDelay = delay;
-    }
-    float getStartDelay() const
-    {
-        return m_startDelay;
-    }
-    void addCompleteCallback(CallbackType cb)
-    {
-        m_completeCallbacks.push_back(cb);
-    }
+    bool isAlive() { return m_alive; }
+    void kill() { m_alive = false; }
+    void setStartDelay(float delay) { m_startDelay = delay; }
+    float getStartDelay() const { return m_startDelay; }
+    void addCompleteCallback(CallbackType cb) { m_completeCallbacks.push_back(cb); }
 
-    void setSkipFrames(int skf = 1)
-    {
-        m_skipFrames = skf;
-    }
-    int getSkipFrames() const
-    {
-        return m_skipFrames;
-    }
+    void setSkipFrames(int skf = 1) { m_skipFrames = skf; }
+    int getSkipFrames() const { return m_skipFrames; }
 
-    void setRepeat(bool repeat)
-    {
-        m_repeat = repeat;
-    }
-    bool getRepeat() const
-    {
-        return m_repeat;
-    }
+    void setRepeat(bool repeat) { m_repeat = repeat; }
+    bool getRepeat() const { return m_repeat; }
 
 protected:
     float getAge() const { return m_age - m_startDelay; }
@@ -147,6 +118,7 @@ private:
         obj = m_obj.lock();
     }
 };
+
 } // namespace JamTemplate
 
 #endif

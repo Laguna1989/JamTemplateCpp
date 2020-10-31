@@ -1,4 +1,4 @@
-#ifndef CSPLITSTRING_H_INCLUDED
+﻿#ifndef CSPLITSTRING_H_INCLUDED
 #define CSPLITSTRING_H_INCLUDED
 
 #include <iostream>
@@ -6,6 +6,7 @@
 #include <vector>
 
 namespace JamTemplate {
+
 class SplitString : public std::string {
     std::vector<std::string> flds;
 
@@ -39,5 +40,5 @@ public:
         return flds;
     }
 };
-}
+} // namespace JamTemplate
 #endif

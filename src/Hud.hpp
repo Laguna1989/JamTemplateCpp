@@ -1,4 +1,4 @@
-#ifndef GAME_HUD_HPP_INCLUDEGUARD
+﻿#ifndef GAME_HUD_HPP_INCLUDEGUARD
 #define GAME_HUD_HPP_INCLUDEGUARD
 
 #include "JamTemplate/GameObject.hpp"

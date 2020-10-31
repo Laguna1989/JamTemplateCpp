@@ -15,12 +15,15 @@ void StateMenu::doInternalUpdate(float const elapsed)
 {
     if (!m_starting) {
         using ip = JamTemplate::InputManager;
-        if (ip::justPressed(sf::Keyboard::Key::Space) || ip::justPressed(sf::Keyboard::Key::Return)) {
+        if (ip::justPressed(sf::Keyboard::Key::Space)
+            || ip::justPressed(sf::Keyboard::Key::Return)) {
 
             m_starting = true;
-            auto tw = JamTemplate::TweenAlpha<JamTemplate::SmartShape>::create(m_overlay, 0.5f, sf::Uint8 { 0 }, sf::Uint8 { 255 });
+            auto tw = JamTemplate::TweenAlpha<JamTemplate::SmartShape>::create(
+                m_overlay, 0.5f, sf::Uint8 { 0 }, sf::Uint8 { 255 });
             tw->setSkipFrames();
-            tw->addCompleteCallback([this]() { getGame()->switchState(std::make_shared<StateGame>()); });
+            tw->addCompleteCallback(
+                [this]() { getGame()->switchState(std::make_shared<StateGame>()); });
             add(tw);
         }
 
@@ -73,7 +76,8 @@ void StateMenu::doCreate()
     m_overlay->update(0);
 
     {
-        auto tw = JamTemplate::TweenAlpha<JamTemplate::SmartShape>::create(m_overlay, 0.5f, sf::Uint8 { 255 }, sf::Uint8 { 0 });
+        auto tw = JamTemplate::TweenAlpha<JamTemplate::SmartShape>::create(
+            m_overlay, 0.5f, sf::Uint8 { 255 }, sf::Uint8 { 0 });
         tw->setSkipFrames();
         add(tw);
     }

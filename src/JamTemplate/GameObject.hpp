@@ -30,8 +30,7 @@ public:
         try {
             g = getGame();
         } catch (std::exception& e) {
-            std::cerr << "ERROR: Game not set on create!\n"
-                      << e.what();
+            std::cerr << "ERROR: Game not set on create!\n" << e.what();
         }
         doCreate();
     }
@@ -75,5 +74,5 @@ private:
     virtual void doCreate() {};
 };
 
-}
+} // namespace JamTemplate
 #endif

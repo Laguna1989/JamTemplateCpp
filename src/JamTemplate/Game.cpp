@@ -9,7 +9,8 @@ namespace JamTemplate {
 
 Game::Game(unsigned int w, unsigned int h, float zoom, std::string const& title)
     : m_state { nullptr }
-    , m_renderWindow { std::make_shared<sf::RenderWindow>(sf::VideoMode(w, h), title, sf::Style::Close) }
+    , m_renderWindow { std::make_shared<sf::RenderWindow>(
+          sf::VideoMode(w, h), title, sf::Style::Close) }
     , m_zoom { zoom }
     , m_renderTarget { std::make_shared<sf::RenderTexture>() }
 {
@@ -21,18 +22,16 @@ Game::Game(unsigned int w, unsigned int h, float zoom, std::string const& title)
     m_renderTarget->create(scaledWidth, scaledHeight);
     m_renderTarget->setSmooth(false);
 
-    m_view = std::make_shared<sf::View>(sf::FloatRect(0, 0, (float)scaledWidth, (float)scaledHeight));
+    m_view
+        = std::make_shared<sf::View>(sf::FloatRect(0, 0, (float)scaledWidth, (float)scaledHeight));
     m_view->setViewport(sf::FloatRect(0, 0, 1, 1));
 }
 
-float Game::getZoom() const
-{
-    return m_zoom;
-}
+float Game::getZoom() const { return m_zoom; }
 
 void Game::switchState(std::shared_ptr<GameState> newState)
 {
-    //std::cout << "switchstate\n";
+    // std::cout << "switchstate\n";
     if (newState == nullptr) {
         std::cerr << "cannot switch to nullptr state!" << std::endl;
         return;
@@ -44,23 +43,11 @@ void Game::switchState(std::shared_ptr<GameState> newState)
     }
 }
 
-void Game::setRenderTarget(std::shared_ptr<sf::RenderTexture> rt)
-{
-    m_renderTarget = rt;
-}
-std::shared_ptr<sf::RenderTexture> Game::getRenderTarget()
-{
-    return m_renderTarget;
-}
+void Game::setRenderTarget(std::shared_ptr<sf::RenderTexture> rt) { m_renderTarget = rt; }
+std::shared_ptr<sf::RenderTexture> Game::getRenderTarget() { return m_renderTarget; }
 
-void Game::setRenderWindow(std::shared_ptr<sf::RenderWindow> w)
-{
-    m_renderWindow = w;
-}
-std::shared_ptr<sf::RenderWindow> Game::getRenderWindow()
-{
-    return m_renderWindow;
-}
+void Game::setRenderWindow(std::shared_ptr<sf::RenderWindow> w) { m_renderWindow = w; }
+std::shared_ptr<sf::RenderWindow> Game::getRenderWindow() { return m_renderWindow; }
 
 void Game::setView(std::shared_ptr<sf::View> view)
 {
@@ -68,14 +55,12 @@ void Game::setView(std::shared_ptr<sf::View> view)
     if (m_renderTarget != nullptr)
         m_renderTarget->setView(*m_view);
 }
-std::shared_ptr<sf::View> Game::getView()
-{
-    return m_view;
-}
+std::shared_ptr<sf::View> Game::getView() { return m_view; }
 
 sf::Vector2f Game::getCamOffset()
 {
-    return sf::Vector2f { getView()->getCenter().x - getView()->getSize().x / 2, getView()->getCenter().y - getView()->getSize().y / 2 };
+    return sf::Vector2f { getView()->getCenter().x - getView()->getSize().x / 2,
+        getView()->getCenter().y - getView()->getSize().y / 2 };
 }
 
 void Game::shake(float t, float strength, float shakeInterval)
@@ -85,14 +70,11 @@ void Game::shake(float t, float strength, float shakeInterval)
     m_shakeInterval = m_shakeIntervalMax = shakeInterval;
 }
 
-std::weak_ptr<Game> Game::getPtr()
-{
-    return shared_from_this();
-}
+std::weak_ptr<Game> Game::getPtr() { return shared_from_this(); }
 
 void Game::doUpdate(float const elapsed)
 {
-    //std::cout << "game::update\n";
+    // std::cout << "game::update\n";
     if (m_nextState != nullptr) {
         doSwitchState();
         return;
@@ -101,8 +83,10 @@ void Game::doUpdate(float const elapsed)
         return;
 
     SmartObject::setCamOffset(getCamOffset());
-    sf::Vector2f mpf = getRenderWindow()->mapPixelToCoords(sf::Mouse::getPosition(*getRenderWindow()), *getView());
-    sf::Vector2f mpfs = getRenderWindow()->mapPixelToCoords(sf::Mouse::getPosition(*getRenderWindow())) / m_zoom;
+    sf::Vector2f mpf = getRenderWindow()->mapPixelToCoords(
+        sf::Mouse::getPosition(*getRenderWindow()), *getView());
+    sf::Vector2f mpfs
+        = getRenderWindow()->mapPixelToCoords(sf::Mouse::getPosition(*getRenderWindow())) / m_zoom;
     InputManager::update(mpf.x, mpf.y, mpfs.x, mpfs.y, elapsed);
 
     updateShake(elapsed);
@@ -113,7 +97,7 @@ void Game::doDraw() const
 {
     // clear the old image
     m_renderTarget->clear(m_backgroundColor);
-    //m_renderWindow->clear(m_backgroundColor);
+    // m_renderWindow->clear(m_backgroundColor);
 
     if (m_state == nullptr)
         return;
@@ -122,8 +106,8 @@ void Game::doDraw() const
     // convert renderTexture to sprite and draw that.
     const sf::Texture& texture = m_renderTarget->getTexture();
     sf::Sprite spr(texture);
-    //Note: RenderTexture has a bug and is displayed upside down.
-    //This is corrected by the following two lines
+    // Note: RenderTexture has a bug and is displayed upside down.
+    // This is corrected by the following two lines
     spr.setScale(sf::Vector2f(m_zoom, -m_zoom));
     spr.setPosition(0.0f, static_cast<float>(m_renderWindow->getSize().y));
 
@@ -180,4 +164,4 @@ void Game::doSwitchState()
     resetShake();
 }
 
-}
+} // namespace JamTemplate

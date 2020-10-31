@@ -8,9 +8,11 @@
 
 namespace JamTemplate {
 namespace InputHelper {
-    std::vector<sf::Keyboard::Key> getAllKeys();
-    std::vector<sf::Mouse::Button> getAllMouseButtons();
-}
+
+std::vector<sf::Keyboard::Key> getAllKeys();
+std::vector<sf::Mouse::Button> getAllMouseButtons();
+
+} // namespace InputHelper
 
 class InputManager {
 public:

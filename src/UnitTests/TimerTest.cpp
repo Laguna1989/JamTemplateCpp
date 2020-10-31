@@ -20,7 +20,8 @@ TEST(TimerTest, TimerIsCalledRepeatedly)
     callback_invoked = false;
     ASSERT_FALSE(callback_invoked);
 
-    // timer is set to trigger multiple times, so another call will set callback_invoked to true again.
+    // timer is set to trigger multiple times, so another call will set callback_invoked to true
+    // again.
     t.update(std::numeric_limits<float>::max());
     EXPECT_TRUE(callback_invoked);
 }
@@ -39,7 +40,8 @@ TEST(TimerTest, TimerIsCalledOnlyOnce)
     callback_invoked = false;
     ASSERT_FALSE(callback_invoked);
 
-    // timer is set to trigger multiple times, so another call will set callback_invoked to true again.
+    // timer is set to trigger multiple times, so another call will set callback_invoked to true
+    // again.
     t.update(std::numeric_limits<float>::max());
     EXPECT_FALSE(callback_invoked);
 }

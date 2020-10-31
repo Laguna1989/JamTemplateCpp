@@ -1,9 +1,9 @@
-#include "State2.hpp"
+﻿#include "State2.hpp"
 #include "State1.hpp"
 
 void State2::doInternalUpdate(float const elapsed)
 {
-    //std::cout << "2\n";
+    // std::cout << "2\n";
     if (getAge() >= 35.0) {
         getGame()->switchState(std::make_shared<State1>());
     }
@@ -21,7 +21,8 @@ void State2::doInternalUpdate(float const elapsed)
         auto o1 = m_SwarmObjects->at(i).lock();
         sf::Vector2f SummedUpDir {};
         float lc = JamTemplate::MathHelper::length(centerPos - o1->getPosition());
-        SummedUpDir += (centerPos - o1->getPosition()) / lc * 1000.0f / static_cast<float>(m_SwarmObjects->size());
+        SummedUpDir += (centerPos - o1->getPosition()) / lc * 1000.0f
+            / static_cast<float>(m_SwarmObjects->size());
         for (size_t j = 0; j != m_SwarmObjects->size(); ++j) {
             if (i == j)
                 continue;
@@ -41,7 +42,7 @@ void State2::doInternalUpdate(float const elapsed)
         }
         float l = JamTemplate::MathHelper::length(SummedUpDir);
         if (l > 4) {
-            //std::cout << i << " " << l << std::endl;
+            // std::cout << i << " " << l << std::endl;
         }
 
         o1->setVelocity(SummedUpDir);

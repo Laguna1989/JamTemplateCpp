@@ -1,4 +1,4 @@
-#ifndef JAMTEMPLATE_PLAYBAR_HPP_INCLUDEGUARD
+﻿#ifndef JAMTEMPLATE_PLAYBAR_HPP_INCLUDEGUARD
 #define JAMTEMPLATE_PLAYBAR_HPP_INCLUDEGUARD
 
 #include "GameObject.hpp"
@@ -51,6 +51,6 @@ private:
     sf::RectangleShape m_shape_progress;
 };
 
-}
+} // namespace JamTemplate
 
 #endif

@@ -1,15 +1,17 @@
-#ifndef JAMTEMPLATE_TWEENPOSITION_HPP_INCLUDEGUARD
+﻿#ifndef JAMTEMPLATE_TWEENPOSITION_HPP_INCLUDEGUARD
 #define JAMTEMPLATE_TWEENPOSITION_HPP_INCLUDEGUARD
 
 #include "Lerp.hpp"
 #include "TweenBase.hpp"
 
 namespace JamTemplate {
+
 template <class T>
 class TweenPosition : public Tween<T> {
 public:
     // Tween position from valueStart to valueEnd of obj withtin time
-    static TweenBase::Sptr create(std::weak_ptr<T> obj, float time, sf::Vector2f valueStart, sf::Vector2f valueEnd)
+    static TweenBase::Sptr create(
+        std::weak_ptr<T> obj, float time, sf::Vector2f valueStart, sf::Vector2f valueEnd)
     {
         return std::make_shared<TweenPosition>(obj, time, valueStart, valueEnd);
     }
@@ -21,8 +23,10 @@ public:
 
                         float val = age / m_totalTime;
 
-                        pos.x = Lerp::linear(static_cast<float>(m_initialValue.x), static_cast<float>(m_finalValue.x), val);
-                        pos.y = Lerp::linear(static_cast<float>(m_initialValue.y), static_cast<float>(m_finalValue.y), val);
+                        pos.x = Lerp::linear(static_cast<float>(m_initialValue.x),
+                            static_cast<float>(m_finalValue.x), val);
+                        pos.y = Lerp::linear(static_cast<float>(m_initialValue.y),
+                            static_cast<float>(m_finalValue.y), val);
 
                         sptr->setPosition(pos);
                         return (age < m_totalTime);
@@ -38,6 +42,7 @@ private:
     sf::Vector2f m_initialValue {};
     sf::Vector2f m_finalValue {};
 };
+
 } // namespace JamTemplate
 
 #endif

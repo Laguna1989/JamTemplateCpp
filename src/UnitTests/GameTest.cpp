@@ -11,10 +11,7 @@ public:
     unsigned const windowSizeY { 200 };
     float const zoom { 5.0f };
     std::shared_ptr<Game> g;
-    void SetUp() override
-    {
-        g = std::make_shared<Game>(windowSizeX, windowSizeY, zoom, "test");
-    }
+    void SetUp() override { g = std::make_shared<Game>(windowSizeX, windowSizeY, zoom, "test"); }
 };
 
 TEST_F(GameTest, InitialValues)

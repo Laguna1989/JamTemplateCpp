@@ -8,11 +8,9 @@ using v = sf::Vector2f;
 class RandomIntTestFixture : public ::testing::TestWithParam<std::pair<int, int>> {
 };
 
-INSTANTIATE_TEST_SUITE_P(
-    RandomIntTest,
-    RandomIntTestFixture,
-    ::testing::Values(
-        std::make_pair(1, 6), std::make_pair(0, 100), std::make_pair(-20, 20), std::make_pair(3300, 3400), std::make_pair(0, 1)));
+INSTANTIATE_TEST_SUITE_P(RandomIntTest, RandomIntTestFixture,
+    ::testing::Values(std::make_pair(1, 6), std::make_pair(0, 100), std::make_pair(-20, 20),
+        std::make_pair(3300, 3400), std::make_pair(0, 1)));
 
 TEST_P(RandomIntTestFixture, RandomInt)
 {
@@ -28,9 +26,7 @@ TEST_P(RandomIntTestFixture, RandomInt)
 class RandomFloatTestFixture : public ::testing::TestWithParam<std::pair<float, float>> {
 };
 
-INSTANTIATE_TEST_SUITE_P(
-    RandomFloatTest,
-    RandomFloatTestFixture,
+INSTANTIATE_TEST_SUITE_P(RandomFloatTest, RandomFloatTestFixture,
     ::testing::Values(
         std::make_pair(0.0f, 1.0f), std::make_pair(-20.0f, 20.0f), std::make_pair(0.0f, 100.0f)));
 
