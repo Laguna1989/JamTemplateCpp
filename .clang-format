@@ -6,5 +6,7 @@ SpaceBeforeParens: ControlStatements
 SpacesInParentheses: 'false'
 Standard: Cpp11
 UseTab: Never
-
+ColumnLimit: 100
+FixNamespaceComments: 'true'
+NamespaceIndentation: 'None'
 ...

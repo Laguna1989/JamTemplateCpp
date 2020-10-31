@@ -52,6 +52,7 @@ set (JAMTEMPLATEFILES
 	src/JamTemplate/SmartSprite.hpp
 	src/JamTemplate/SmartText.hpp	
 	src/JamTemplate/SplitString.hpp
+	src/JamTemplate/SpriteFunctions.cpp
 	src/JamTemplate/SpriteFunctions.hpp
 	src/JamTemplate/TextureManager.cpp
 	src/JamTemplate/TextureManager.hpp
@@ -152,6 +153,7 @@ if (ENABLE_UNITTESTS)
 		src/UnitTests/MockObject.hpp
 		src/UnitTests/ObjectGroupTest.cpp
 		src/UnitTests/RandomTest.cpp
+		src/UnitTests/TextureManagerTest.cpp
 		src/UnitTests/TimerTest.cpp
 	)
 
