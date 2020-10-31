@@ -13,16 +13,26 @@ int main()
 
     sf::Clock clock;
 
-    while (window->isOpen()) {
-        sf::Time elapsed = clock.restart();
-        sf::Event event;
-        while (window->pollEvent(event)) {
-            if (event.type == sf::Event::Closed) {
-                window->close();
+    try {
+
+        while (window->isOpen()) {
+            sf::Time elapsed = clock.restart();
+            sf::Event event;
+            while (window->pollEvent(event)) {
+                if (event.type == sf::Event::Closed) {
+                    window->close();
+                }
             }
+            game->update(elapsed.asSeconds());
+            game->draw();
         }
-        game->update(elapsed.asSeconds());
-        game->draw();
+    } catch (std::exception const& e) {
+        std::cerr << "!! ERROR: Exception ocurred !!\n";
+        std::cerr << e.what() << std::endl;
+        throw;
+    } catch (...) {
+        std::cerr << "!! ERROR: Unhandled Exception ocurred !!\n";
+        std::terminate();
     }
 
     return 0;

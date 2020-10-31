@@ -24,6 +24,7 @@ set (GAMEFILES
 ## Other variables and compiler setup
 #####################################################
 set (JAMTEMPLATEFILES 
+	src/JamTemplate/Animation.cpp
 	src/JamTemplate/Animation.hpp
 	src/JamTemplate/Box2DObject.hpp
 	src/JamTemplate/Button.hpp
