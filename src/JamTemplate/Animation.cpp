@@ -51,7 +51,7 @@ void Animation::add(std::string const& fileName, std::string const& animName,
     }
 }
 
-void Animation::play(std::string animName, size_t startFrame, bool restart)
+void Animation::play(std::string const& animName, size_t startFrame, bool restart)
 {
     if (m_currentAnimName != animName || restart) {
         m_currentIdx = startFrame;
@@ -69,13 +69,13 @@ void Animation::setColor(sf::Color const& col)
     }
 }
 
-const sf::Color Animation::getColor() const
+sf::Color const Animation::getColor() const
 {
     return getCurrentSprite(m_frames, m_currentAnimName, m_currentIdx)->getColor();
 }
 
 void Animation::setPosition(sf::Vector2f const& pos) { m_position = pos; }
-const sf::Vector2f Animation::getPosition() const { return m_position; }
+sf::Vector2f const Animation::getPosition() const { return m_position; }
 
 sf::Transform const Animation::getTransform() const
 {
@@ -87,11 +87,11 @@ sf::Transform const Animation::getTransform() const
     }
     return trans;
 }
-sf::FloatRect Animation::getGlobalBounds() const
+sf::FloatRect const Animation::getGlobalBounds() const
 {
     return getCurrentSprite(m_frames, m_currentAnimName, m_currentIdx)->getGlobalBounds();
 }
-sf::FloatRect Animation::getLocalBounds() const
+sf::FloatRect const Animation::getLocalBounds() const
 {
     return getCurrentSprite(m_frames, m_currentAnimName, m_currentIdx)->getLocalBounds();
 }
@@ -135,7 +135,7 @@ sf::Vector2f const Animation::getOrigin() const
     return getCurrentSprite(m_frames, m_currentAnimName, m_currentIdx)->getOrigin();
 }
 
-void Animation::doDraw(std::shared_ptr<sf::RenderTarget> sptr) const
+void Animation::doDraw(std::shared_ptr<sf::RenderTarget> const sptr) const
 {
     if (m_frames.count(m_currentAnimName) == 0) {
         std::cout << "Warning: Drawing Animation with invalid animName: '" + m_currentAnimName
@@ -146,7 +146,7 @@ void Animation::doDraw(std::shared_ptr<sf::RenderTarget> sptr) const
     m_frames.at(m_currentAnimName).at(m_currentIdx)->draw(sptr);
 }
 
-void Animation::doDrawFlash(std::shared_ptr<sf::RenderTarget> /*sptr*/) const { }
+void Animation::doDrawFlash(std::shared_ptr<sf::RenderTarget> const /*sptr*/) const { }
 
 void Animation::doFlash(float t, sf::Color col)
 {

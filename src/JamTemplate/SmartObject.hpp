@@ -59,8 +59,8 @@ public:
     virtual const sf::Vector2f getPosition() const = 0;
 
     virtual sf::Transform const getTransform() const = 0;
-    virtual sf::FloatRect getGlobalBounds() const = 0;
-    virtual sf::FloatRect getLocalBounds() const = 0;
+    virtual sf::FloatRect const getGlobalBounds() const = 0;
+    virtual sf::FloatRect const getLocalBounds() const = 0;
 
     virtual void setFlashColor(sf::Color const& col) = 0;
     virtual const sf::Color getFlashColor() const = 0;
@@ -117,8 +117,8 @@ private:
     sf::Vector2f m_offset { 0, 0 };
     float m_rotationInDegree { 0 };
 
-    virtual void doDraw(std::shared_ptr<sf::RenderTarget> sptr) const = 0;
-    virtual void doDrawFlash(std::shared_ptr<sf::RenderTarget> sptr) const = 0;
+    virtual void doDraw(std::shared_ptr<sf::RenderTarget> const sptr) const = 0;
+    virtual void doDrawFlash(std::shared_ptr<sf::RenderTarget> const sptr) const = 0;
 
     // overwrite this method:
     // things to take care of:

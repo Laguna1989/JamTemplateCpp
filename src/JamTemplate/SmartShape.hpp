@@ -34,8 +34,8 @@ public:
     const sf::Vector2f getPosition() const override { return m_position; }
 
     sf::Transform const getTransform() const override { return m_shape->getTransform(); }
-    sf::FloatRect getGlobalBounds() const override { return m_shape->getGlobalBounds(); }
-    virtual sf::FloatRect getLocalBounds() const override { return m_shape->getLocalBounds(); }
+    sf::FloatRect const getGlobalBounds() const override { return m_shape->getGlobalBounds(); }
+    sf::FloatRect const getLocalBounds() const override { return m_shape->getLocalBounds(); }
 
     std::shared_ptr<sf::Shape> getShape() { return m_shape; }
 
@@ -55,9 +55,12 @@ private:
 
     sf::Vector2f m_position { 0, 0 };
 
-    void doDraw(std::shared_ptr<sf::RenderTarget> sptr) const override { sptr->draw(*m_shape); }
+    void doDraw(std::shared_ptr<sf::RenderTarget> const sptr) const override
+    {
+        sptr->draw(*m_shape);
+    }
 
-    void doDrawFlash(std::shared_ptr<sf::RenderTarget> sptr) const override
+    void doDrawFlash(std::shared_ptr<sf::RenderTarget> const sptr) const override
     {
         sptr->draw(*m_flashShape);
     }

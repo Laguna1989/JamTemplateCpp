@@ -15,13 +15,13 @@ class SmartSprite : public SmartObject {
 public:
     using Sptr = std::shared_ptr<SmartSprite>;
 
-    void loadSprite(std::string fileName)
+    void loadSprite(std::string const& fileName)
     {
         m_sprite = sf::Sprite { TextureManager::get(fileName) };
         m_flashSprite = sf::Sprite { TextureManager::get(TextureManager::getFlashName(fileName)) };
     }
 
-    void loadSprite(std::string fileName, sf::IntRect rect)
+    void loadSprite(std::string const& fileName, sf::IntRect const& rect)
     {
         m_sprite = sf::Sprite { TextureManager::get(fileName), rect };
         m_flashSprite
@@ -32,18 +32,28 @@ public:
 
     const sf::Vector2f getPosition() const override { return m_position; }
 
-    void setColor(const sf::Color& col) override { m_sprite.setColor(col); }
+    void setColor(sf::Color const& col) override { m_sprite.setColor(col); }
     const sf::Color getColor() const override { return m_sprite.getColor(); }
 
-    void setFlashColor(const sf::Color& col) override { m_flashSprite.setColor(col); }
+    void setFlashColor(sf::Color const& col) override { m_flashSprite.setColor(col); }
     const sf::Color getFlashColor() const override { return m_flashSprite.getColor(); }
 
     virtual sf::Transform const getTransform() const override { return m_sprite.getTransform(); }
 
-    virtual sf::FloatRect getGlobalBounds() const override { return m_sprite.getGlobalBounds(); }
-    virtual sf::FloatRect getLocalBounds() const override { return m_sprite.getLocalBounds(); }
+    virtual sf::FloatRect const getGlobalBounds() const override
+    {
+        return m_sprite.getGlobalBounds();
+    }
+    virtual sf::FloatRect const getLocalBounds() const override
+    {
+        return m_sprite.getLocalBounds();
+    }
 
-    virtual void setScale(sf::Vector2f const& scale) { m_sprite.setScale(scale); }
+    virtual void setScale(sf::Vector2f const& scale)
+    {
+        m_sprite.setScale(scale);
+        m_flashSprite.setScale(scale);
+    }
 
     virtual const sf::Vector2f getScale() const { return m_sprite.getScale(); }
 
@@ -53,7 +63,7 @@ public:
         m_flashSprite.setOrigin(origin);
     }
 
-    virtual const sf::Vector2f getOrigin() const { return m_sprite.getOrigin(); }
+    virtual sf::Vector2f const getOrigin() const { return m_sprite.getOrigin(); }
 
 private:
     sf::Sprite m_sprite;
@@ -63,14 +73,17 @@ private:
 
     void doUpdate(float /*elapsed*/) override
     {
-        m_sprite.setPosition(m_position + getShakeOffset() + getOffset() + getCamOffset());
-        m_flashSprite.setPosition(m_position + getShakeOffset() + getOffset() + getCamOffset());
-        m_flashSprite.setScale(m_sprite.getScale());
+        auto const pos = m_position + getShakeOffset() + getOffset() + getCamOffset();
+        m_sprite.setPosition(pos);
+        m_flashSprite.setPosition(pos);
     }
 
-    void doDraw(std::shared_ptr<sf::RenderTarget> sptr) const override { sptr->draw(m_sprite); }
+    void doDraw(std::shared_ptr<sf::RenderTarget> const sptr) const override
+    {
+        sptr->draw(m_sprite);
+    }
 
-    void doDrawFlash(std::shared_ptr<sf::RenderTarget> sptr) const override
+    void doDrawFlash(std::shared_ptr<sf::RenderTarget> const sptr) const override
     {
         sptr->draw(m_flashSprite);
     }
@@ -81,6 +94,7 @@ private:
         m_flashSprite.setRotation(-rot);
     }
 };
+
 } // namespace JamTemplate
 
 #endif

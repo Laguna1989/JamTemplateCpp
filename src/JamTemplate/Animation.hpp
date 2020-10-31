@@ -27,27 +27,27 @@ public:
         std::vector<unsigned int> const& frameIndices, float frameTime);
 
     // start playing an animation from the pool.
-    void play(std::string animName, size_t startFrame = 0, bool restart = false);
+    void play(std::string const& animName, size_t startFrame = 0, bool restart = false);
 
     void setColor(sf::Color const& col);
     const sf::Color getColor() const;
 
     void setPosition(sf::Vector2f const& pos);
-    const sf::Vector2f getPosition() const;
+    sf::Vector2f const getPosition() const;
 
     sf::Transform const getTransform() const;
 
-    sf::FloatRect getGlobalBounds() const;
-    virtual sf::FloatRect getLocalBounds() const;
+    sf::FloatRect const getGlobalBounds() const;
+    virtual sf::FloatRect const getLocalBounds() const;
 
     void setFlashColor(sf::Color const& col);
-    const sf::Color getFlashColor() const;
+    sf::Color const getFlashColor() const;
 
     virtual void setScale(sf::Vector2f const& scale);
     virtual sf::Vector2f const getScale() const;
 
     void setOrigin(sf::Vector2f const& origin);
-    const sf::Vector2f getOrigin() const;
+    sf::Vector2f const getOrigin() const;
 
 private:
     AnimationMapType m_frames;
@@ -62,9 +62,8 @@ private:
 
     float m_frameTime = 0;
 
-    void doDraw(std::shared_ptr<sf::RenderTarget> sptr) const;
-
-    void doDrawFlash(std::shared_ptr<sf::RenderTarget> /*sptr*/) const;
+    void doDraw(std::shared_ptr<sf::RenderTarget> const sptr) const;
+    void doDrawFlash(std::shared_ptr<sf::RenderTarget> const /*sptr*/) const;
 
     void doFlash(float t, sf::Color col = sf::Color::White) override;
 

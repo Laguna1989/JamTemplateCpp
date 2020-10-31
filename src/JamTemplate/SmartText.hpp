@@ -69,8 +69,8 @@ public:
 
     virtual sf::Transform const getTransform() const override { return m_text->getTransform(); }
 
-    virtual sf::FloatRect getGlobalBounds() const override { return m_text->getGlobalBounds(); }
-    virtual sf::FloatRect getLocalBounds() const override { return m_text->getLocalBounds(); }
+    sf::FloatRect const getGlobalBounds() const override { return m_text->getGlobalBounds(); }
+    sf::FloatRect const getLocalBounds() const override { return m_text->getLocalBounds(); }
 
     virtual void setScale(sf::Vector2f const& scale)
     {
@@ -118,7 +118,7 @@ private:
         m_flashText->setScale(m_text->getScale());
     }
 
-    void doDraw(std::shared_ptr<sf::RenderTarget> sptr) const override
+    void doDraw(std::shared_ptr<sf::RenderTarget> const sptr) const override
     {
         try {
             sptr->draw(*m_text);
@@ -129,7 +129,7 @@ private:
         }
     }
 
-    void doDrawFlash(std::shared_ptr<sf::RenderTarget> sptr) const override
+    void doDrawFlash(std::shared_ptr<sf::RenderTarget> const sptr) const override
     {
         sptr->draw(*m_flashText);
     }
