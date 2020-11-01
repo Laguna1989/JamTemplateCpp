@@ -66,7 +66,7 @@ public:
     virtual sf::Vector2f const getOrigin() const { return m_sprite.getOrigin(); }
 
 private:
-    sf::Sprite m_sprite;
+    mutable sf::Sprite m_sprite;
     sf::Sprite m_flashSprite;
 
     sf::Vector2f m_position { 0, 0 };
@@ -76,6 +76,19 @@ private:
         auto const pos = m_position + getShakeOffset() + getOffset() + getCamOffset();
         m_sprite.setPosition(pos);
         m_flashSprite.setPosition(pos);
+    }
+
+    void doDrawShadow(std::shared_ptr<sf::RenderTarget> const sptr) const override
+    {
+        sf::Vector2f const oldPos = m_sprite.getPosition();
+        sf::Color const oldCol = m_sprite.getColor();
+
+        m_sprite.setPosition(oldPos + getShadowOffset());
+        m_sprite.setColor(getShadowColor());
+        sptr->draw(m_sprite);
+
+        m_sprite.setPosition(oldPos);
+        m_sprite.setColor(oldCol);
     }
 
     void doDraw(std::shared_ptr<sf::RenderTarget> const sptr) const override

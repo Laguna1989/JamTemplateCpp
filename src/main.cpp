@@ -1,10 +1,13 @@
 ﻿#include "GameProperties.hpp"
 #include "JamTemplate/Game.hpp"
+#include "JamTemplate/Random.hpp"
 #include "StateMenu.hpp"
 #include <SFML/Graphics.hpp>
 
 int main()
 {
+    JamTemplate::Random::useTimeAsRandomSeed();
+
     JamTemplate::Game::Sptr game
         = std::make_shared<JamTemplate::Game>(800, 600, 2.0f, GP::GameName());
     auto window = game->getRenderWindow();
@@ -14,7 +17,6 @@ int main()
     sf::Clock clock;
 
     try {
-
         while (window->isOpen()) {
             sf::Time elapsed = clock.restart();
             sf::Event event;

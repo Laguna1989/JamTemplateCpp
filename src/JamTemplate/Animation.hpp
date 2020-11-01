@@ -40,17 +40,21 @@ public:
     sf::FloatRect const getGlobalBounds() const;
     virtual sf::FloatRect const getLocalBounds() const;
 
-    void setFlashColor(sf::Color const& col);
+    void setFlashColor(sf::Color const& col) override;
     sf::Color const getFlashColor() const;
 
-    virtual void setScale(sf::Vector2f const& scale);
+    virtual void setScale(sf::Vector2f const& scale) override;
     virtual sf::Vector2f const getScale() const;
 
     void setOrigin(sf::Vector2f const& origin);
     sf::Vector2f const getOrigin() const;
 
+    void setShadowActive(bool active) override;
+    void setShadowColor(sf::Color const& col) override;
+    void setShadowOffset(sf::Vector2f const& v) override;
+
 private:
-    AnimationMapType m_frames;
+    mutable AnimationMapType m_frames;
     std::map<std::string, float> m_time;
 
     // which animation is playing atm?

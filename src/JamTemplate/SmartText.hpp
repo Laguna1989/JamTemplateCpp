@@ -92,7 +92,7 @@ public:
     TextAlign getTextAlign() const { return m_textAlign; }
 
 private:
-    std::shared_ptr<sf::Text> m_text;
+    mutable std::shared_ptr<sf::Text> m_text;
     std::shared_ptr<sf::Text> m_flashText;
     std::shared_ptr<sf::Font> m_font;
 
@@ -116,6 +116,19 @@ private:
             sf::Vector2f { static_cast<float>(posi.x), static_cast<float>(posi.y) });
         m_flashText->setPosition(m_text->getPosition());
         m_flashText->setScale(m_text->getScale());
+    }
+
+    void doDrawShadow(std::shared_ptr<sf::RenderTarget> const sptr) const override
+    {
+        sf::Vector2f const oldPos = m_text->getPosition();
+        sf::Color const oldCol = m_text->getColor();
+
+        m_text->setPosition(oldPos + getShadowOffset());
+        m_text->setColor(getShadowColor());
+        sptr->draw(*m_text);
+
+        m_text->setPosition(oldPos);
+        m_text->setColor(oldCol);
     }
 
     void doDraw(std::shared_ptr<sf::RenderTarget> const sptr) const override

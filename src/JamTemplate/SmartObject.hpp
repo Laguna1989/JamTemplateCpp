@@ -23,11 +23,15 @@ public:
             std::cout << "WARNING: Calling SmartObject::draw() without previous call to "
                          "SmartObject::update()!\n";
         }
+
+        if (m_shadowActive) {
+            doDrawShadow(sptr);
+        }
+
         doDraw(sptr);
         if (m_flashTimer > 0) {
             doDrawFlash(sptr);
         }
-        // m_hasBeenUpdated = false;
     }
 
     void flash(float t, sf::Color col = sf::Color::White)
@@ -88,6 +92,20 @@ public:
     // do not call this from anywhere but Game::doUpdate
     static void setCamOffset(sf::Vector2f ofs) { m_camOffset = ofs; }
 
+    virtual void setShadowActive(bool active) { m_shadowActive = active; }
+    bool getShadowActive() const { return m_shadowActive; }
+    virtual void setShadowColor(sf::Color const& col) { m_shadowColor = col; }
+    sf::Color const getShadowColor() const { return m_shadowColor; }
+    virtual void setShadowOffset(sf::Vector2f const& v) { m_shadowOffset = v; }
+    sf::Vector2f const getShadowOffset() const { return m_shadowOffset; }
+
+    void setShadow(sf::Color const& col, sf::Vector2f const& offset)
+    {
+        setShadowActive(true);
+        setShadowColor(col);
+        setShadowOffset(offset);
+    }
+
 protected:
     sf::Vector2f getShakeOffset() const { return m_shakeOffset; }
 
@@ -117,8 +135,13 @@ private:
     sf::Vector2f m_offset { 0, 0 };
     float m_rotationInDegree { 0 };
 
+    bool m_shadowActive { false };
+    sf::Vector2f m_shadowOffset { 0.0f, 0.0f };
+    sf::Color m_shadowColor { sf::Color::Black };
+
     virtual void doDraw(std::shared_ptr<sf::RenderTarget> const sptr) const = 0;
     virtual void doDrawFlash(std::shared_ptr<sf::RenderTarget> const sptr) const = 0;
+    virtual void doDrawShadow(std::shared_ptr<sf::RenderTarget> const sptr) const = 0;
 
     // overwrite this method:
     // things to take care of:

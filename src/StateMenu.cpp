@@ -52,6 +52,7 @@ void StateMenu::doCreate()
     m_text_Title->setColor(GP::PaletteColor3());
     m_text_Title->update(0.0f);
     m_text_Title->SetTextAlign(JamTemplate::SmartText::TextAlign::CENTER);
+    m_text_Title->setShadow(GP::PaletteFontShadow(), sf::Vector2f { 3, 3 });
 
     m_test_Explanation = std::make_shared<JamTemplate::SmartText>();
     m_test_Explanation->loadFont("assets/font.ttf");
@@ -64,6 +65,7 @@ void StateMenu::doCreate()
     auto const textHeight = m_test_Explanation->getLocalBounds().height;
     m_test_Explanation->setOrigin(sf::Vector2f { textWidth / 2, textHeight / 2 });
     m_test_Explanation->SetTextAlign(JamTemplate::SmartText::TextAlign::LEFT);
+    m_test_Explanation->setShadow(GP::PaletteFontShadow(), sf::Vector2f { 3, 3 });
 
     m_text_Credits = std::make_shared<JamTemplate::SmartText>();
     m_text_Credits->loadFont("assets/font.ttf");
@@ -73,6 +75,7 @@ void StateMenu::doCreate()
     m_text_Credits->setColor(GP::PaletteColor5());
     m_text_Credits->SetTextAlign(JamTemplate::SmartText::TextAlign::LEFT);
     m_text_Credits->update(0.0f);
+    m_text_Credits->setShadow(GP::PaletteFontShadow(), sf::Vector2f { 1, 1 });
 
     m_overlay = std::make_shared<JamTemplate::SmartShape>();
     m_overlay->makeRect(sf::Vector2f { w, h });
@@ -133,14 +136,6 @@ void StateMenu::doInternalDraw() const
     float w = static_cast<float>(getGame()->getRenderTarget()->getSize().x);
     float wC = w / 2;
 
-    m_text_Title->setPosition({ wC + 2, 20 + 2 });
-    m_text_Title->setColor(GP::PaletteFontShadow());
-    m_text_Title->update(0.0f);
-    m_text_Title->draw(getGame()->getRenderTarget());
-
-    m_text_Title->setPosition({ wC, 20 });
-    m_text_Title->setColor(GP::PaletteColor3());
-    m_text_Title->update(0.0);
     m_text_Title->draw(getGame()->getRenderTarget());
 
     m_test_Explanation->draw(getGame()->getRenderTarget());

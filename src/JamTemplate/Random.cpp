@@ -1,4 +1,5 @@
 ﻿#include "Random.hpp"
+#include <time.h>
 
 using namespace JamTemplate;
 
@@ -39,3 +40,7 @@ sf::Vector2f const Random::getRandomPointin(sf::FloatRect r)
 
     return sf::Vector2f { x, y };
 }
+
+void Random::setSeed(unsigned int s) { m_engine.seed(s); }
+
+void Random::useTimeAsRandomSeed() { setSeed(time(NULL)); }

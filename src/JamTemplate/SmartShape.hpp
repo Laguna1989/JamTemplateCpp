@@ -50,7 +50,7 @@ public:
     const sf::Vector2f getOrigin() const { return m_shape->getOrigin(); }
 
 private:
-    std::shared_ptr<sf::Shape> m_shape = nullptr;
+    mutable std::shared_ptr<sf::Shape> m_shape = nullptr;
     std::shared_ptr<sf::Shape> m_flashShape = nullptr;
 
     sf::Vector2f m_position { 0, 0 };
@@ -63,6 +63,19 @@ private:
     void doDrawFlash(std::shared_ptr<sf::RenderTarget> const sptr) const override
     {
         sptr->draw(*m_flashShape);
+    }
+
+    void doDrawShadow(std::shared_ptr<sf::RenderTarget> const sptr) const override
+    {
+        sf::Vector2f const oldPos = m_shape->getPosition();
+        sf::Color const oldCol = m_shape->getFillColor();
+
+        m_shape->setPosition(oldPos + getShadowOffset());
+        m_shape->setFillColor(getShadowColor());
+        sptr->draw(*m_shape);
+
+        m_shape->setPosition(oldPos);
+        m_shape->setFillColor(oldCol);
     }
 
     void doUpdate(float /*elapsed*/) override

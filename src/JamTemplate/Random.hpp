@@ -20,6 +20,9 @@ public:
     static sf::Color const getRandomColor();
     static sf::Vector2f const getRandomPointin(sf::FloatRect rect);
 
+    static void setSeed(unsigned int s);
+    static void useTimeAsRandomSeed();
+
 private:
     static std::default_random_engine m_engine;
 };

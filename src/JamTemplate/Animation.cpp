@@ -135,6 +135,34 @@ sf::Vector2f const Animation::getOrigin() const
     return getCurrentSprite(m_frames, m_currentAnimName, m_currentIdx)->getOrigin();
 }
 
+void Animation::setShadowActive(bool active)
+{
+    SmartObject::setShadowActive(active);
+    for (auto& kvp : m_frames) {
+        for (auto const& sptr : kvp.second) {
+            sptr->setShadowActive(active);
+        }
+    }
+}
+void Animation::setShadowColor(sf::Color const& col)
+{
+    SmartObject::setShadowColor(col);
+    for (auto& kvp : m_frames) {
+        for (auto const& sptr : kvp.second) {
+            sptr->setShadowColor(col);
+        }
+    }
+}
+void Animation::setShadowOffset(sf::Vector2f const& v)
+{
+    SmartObject::setShadowOffset(v);
+    for (auto& kvp : m_frames) {
+        for (auto const& sptr : kvp.second) {
+            sptr->setShadowOffset(v);
+        }
+    }
+}
+
 void Animation::doDraw(std::shared_ptr<sf::RenderTarget> const sptr) const
 {
     if (m_frames.count(m_currentAnimName) == 0) {
