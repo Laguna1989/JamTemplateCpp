@@ -13,7 +13,7 @@ TEST(ObjectGroupTest, InitialGroupIsEmpty)
     Group g {};
 
     EXPECT_EQ(g.size(), 0);
-    EXPECT_ANY_THROW(g.at(0));
+    EXPECT_ANY_THROW((void)g.at(0));
     EXPECT_EQ(g.begin(), g.end());
     EXPECT_EQ(g.getAge(), 0.0f);
     EXPECT_TRUE(g.isAlive());
@@ -39,7 +39,7 @@ TEST_F(ObjectGroupTestWithGame, PushBackObject)
     g.push_back(mo);
 
     EXPECT_EQ(g.size(), 1);
-    EXPECT_NO_THROW(g.at(0));
+    EXPECT_NO_THROW((void)g.at(0));
 
     EXPECT_EQ(mo.use_count(), 1);
     auto const mo2 = g.at(0).lock();
@@ -53,7 +53,7 @@ TEST_F(ObjectGroupTestWithGame, EmplaceBackObject)
     g.emplace_back(mo);
 
     EXPECT_EQ(g.size(), 1);
-    EXPECT_NO_THROW(g.at(0));
+    EXPECT_NO_THROW((void)g.at(0));
 
     EXPECT_EQ(mo.use_count(), 1);
     auto const mo2 = g.at(0).lock();
@@ -68,7 +68,7 @@ TEST_F(ObjectGroupTestWithGame, EmplaceBackObjectWithoutOwningPointer)
     g.emplace_back(std::make_shared<MockObject>());
 
     EXPECT_EQ(g.size(), 1);
-    EXPECT_NO_THROW(g.at(0));
+    EXPECT_NO_THROW((void)g.at(0));
 
     auto const mo = g.at(0).lock();
     EXPECT_EQ(mo.use_count(), 0);

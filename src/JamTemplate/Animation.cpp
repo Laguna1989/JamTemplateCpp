@@ -163,6 +163,8 @@ void Animation::setShadowOffset(sf::Vector2f const& v)
     }
 }
 
+void Animation::doDrawShadow(std::shared_ptr<sf::RenderTarget> const sptr) const { }
+
 void Animation::doDraw(std::shared_ptr<sf::RenderTarget> const sptr) const
 {
     if (m_frames.count(m_currentAnimName) == 0) {

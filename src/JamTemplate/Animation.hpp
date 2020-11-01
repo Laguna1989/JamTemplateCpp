@@ -66,6 +66,7 @@ private:
 
     float m_frameTime = 0;
 
+    void doDrawShadow(std::shared_ptr<sf::RenderTarget> const sptr) const;
     void doDraw(std::shared_ptr<sf::RenderTarget> const sptr) const;
     void doDrawFlash(std::shared_ptr<sf::RenderTarget> const /*sptr*/) const;
 
