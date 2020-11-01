@@ -69,7 +69,7 @@ TEST_F(ObjectGroupTestWithGame, EmplaceBackObjectWithoutOwningPointer)
 
     EXPECT_EQ(g.size(), 1);
     EXPECT_NO_THROW((void)g.at(0));
-
+    EXPECT_TRUE(g.at(0).expired());
     auto const mo = g.at(0).lock();
     EXPECT_EQ(mo.use_count(), 0);
 

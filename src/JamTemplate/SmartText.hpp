@@ -121,14 +121,14 @@ private:
     void doDrawShadow(std::shared_ptr<sf::RenderTarget> const sptr) const override
     {
         sf::Vector2f const oldPos = m_text->getPosition();
-        sf::Color const oldCol = m_text->getColor();
+        sf::Color const oldCol = m_text->getFillColor();
 
         m_text->setPosition(oldPos + getShadowOffset());
-        m_text->setColor(getShadowColor());
+        m_text->setFillColor(getShadowColor());
         sptr->draw(*m_text);
 
         m_text->setPosition(oldPos);
-        m_text->setColor(oldCol);
+        m_text->setFillColor(oldCol);
     }
 
     void doDraw(std::shared_ptr<sf::RenderTarget> const sptr) const override

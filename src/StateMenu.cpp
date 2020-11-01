@@ -133,15 +133,9 @@ void StateMenu::doInternalDraw() const
 {
     m_background->draw(getGame()->getRenderTarget());
 
-    float w = static_cast<float>(getGame()->getRenderTarget()->getSize().x);
-    float wC = w / 2;
-
     m_text_Title->draw(getGame()->getRenderTarget());
-
     m_test_Explanation->draw(getGame()->getRenderTarget());
-    m_test_Explanation->setColor(GP::PaletteColor4());
     m_text_Credits->draw(getGame()->getRenderTarget());
-    m_overlay->draw(getGame()->getRenderTarget());
 
-    m_text_Credits->update(0.0f);
+    m_overlay->draw(getGame()->getRenderTarget());
 }
