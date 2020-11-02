@@ -1,4 +1,5 @@
-﻿#include "GameProperties.hpp"
+﻿#include "main.hpp"
+#include "GameProperties.hpp"
 #include "JamTemplate/Game.hpp"
 #include "JamTemplate/Random.hpp"
 #include "StateMenu.hpp"
@@ -6,6 +7,8 @@
 
 int main()
 {
+    hideConsoleInRelease();
+
     JamTemplate::Random::useTimeAsRandomSeed();
 
     JamTemplate::Game::Sptr game
