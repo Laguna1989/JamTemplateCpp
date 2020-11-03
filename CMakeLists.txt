@@ -69,7 +69,7 @@ set (JAMTEMPLATEFILES
 	)
 
 if(WIN32)
-	set (CMAKE_CXX_STANDARD 14)
+	set (CMAKE_CXX_STANDARD 17)
 	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /W4 /EHsc -Ox")
 else()
 	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -O3 --std=c++1z")
@@ -105,6 +105,7 @@ add_library(JamTemplate ${JAMTEMPLATEFILES})
 target_include_directories(JamTemplate PUBLIC ext/SFML-2.5.1_win/include)
 target_include_directories(JamTemplate PUBLIC ext/box2d)
 target_include_directories(JamTemplate PUBLIC /usr/local/Cellar/sfml/2.4.2_1/include) 
+target_include_directories(JamTemplate PUBLIC ext/tileson-master/include)
 
 target_link_libraries(JamTemplate optimized sfml-system )
 target_link_libraries(JamTemplate optimized sfml-window )
@@ -132,6 +133,8 @@ if (ENABLE_STRESSTEST)
 		src/StressTest/State2.hpp
 		src/StressTest/StateBox2d.cpp
 		src/StressTest/StateBox2d.hpp
+		src/StressTest/StateTileson.cpp
+		src/StressTest/StateTileson.hpp
 		src/StressTest/StateTween.cpp
 		src/StressTest/StateTween.hpp
 		src/StressTest/SwarmObject.hpp
@@ -198,12 +201,35 @@ if (ENABLE_UNITTESTS)
 	target_link_libraries(UnitTests JamTemplate)
 	
 endif()
+#####################################################
+## setup custom target to copy assets every time
+#####################################################
+
+# note: globbing is done only when cmake runs, so new files will be missing until cmake is run.
+file(GLOB COPY_FILES
+	RELATIVE ${CMAKE_CURRENT_SOURCE_DIR}
+	${CMAKE_CURRENT_SOURCE_DIR}/assets/*)
+	
+add_custom_target(CopyAssets ALL
+	# fake file that will never be present. This forces cmake to copy assets every time.
+	DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/assets/__always_copy.txt	
+	)
+	
+foreach(FILENAME ${COPY_FILES})
+	set(SRC "${CMAKE_CURRENT_SOURCE_DIR}/${FILENAME}")
+    set(DST "${CMAKE_CURRENT_BINARY_DIR}/${FILENAME}")
+	
+	add_custom_command (
+	TARGET CopyAssets
+	COMMAND ${CMAKE_COMMAND} -E copy ${SRC} ${DST})
+endforeach(FILENAME)
 
 #####################################################
 ## setup Game executable
 #####################################################
 add_executable(${PROJECTNAME}  ${GAMEFILES})
 target_link_libraries(${PROJECTNAME} JamTemplate)
+add_dependencies(${PROJECTNAME} CopyAssets)
 
 #####################################################
 ## copy sfml dlls and .clang-format around
@@ -222,4 +248,4 @@ configure_file(${CMAKE_SOURCE_DIR}/.clang-format ${CMAKE_BINARY_DIR}/ COPYONLY)
 #####################################################
 ## copy assets around
 #####################################################
-file(COPY ${CMAKE_SOURCE_DIR}/assets DESTINATION ${CMAKE_BINARY_DIR}/ )
+#file(COPY ${CMAKE_SOURCE_DIR}/assets DESTINATION ${CMAKE_BINARY_DIR}/ )
