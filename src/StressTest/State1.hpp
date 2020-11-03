@@ -1,12 +1,12 @@
-﻿#ifndef GAME_STATE_MENU_HPP_INCLUDEGUARD
-#define GAME_STATE_MENU_HPP_INCLUDEGUARD
+﻿#ifndef STRESSTEST_STATE_1_HPP_INCLUDEGUARD
+#define STRESSTEST_STATE_1_HPP_INCLUDEGUARD
 
-#include "../JamTemplate/Game.hpp"
-#include "../JamTemplate/GameState.hpp"
-#include "../JamTemplate/Random.hpp"
-#include "../JamTemplate/SmartShape.hpp"
-#include "../JamTemplate/Timer.hpp"
+#include "Game.hpp"
+#include "GameState.hpp"
 #include "Object.hpp"
+#include "Random.hpp"
+#include "SmartShape.hpp"
+#include "Timer.hpp"
 #include <iostream>
 
 class State1 : public JamTemplate::GameState {

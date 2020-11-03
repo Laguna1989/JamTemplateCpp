@@ -1,5 +1,5 @@
-﻿#include "../JamTemplate/Game.hpp"
-#include "../JamTemplate/GameState.hpp"
+﻿#include "Game.hpp"
+#include "GameState.hpp"
 #include "gmock/gmock.h"
 #include "gtest/gtest.h"
 
@@ -41,6 +41,17 @@ TEST_F(GameTest, UpdateLogic)
     EXPECT_TRUE(g->isAlive());
     g->kill();
     EXPECT_FALSE(g->isAlive());
+}
+
+TEST_F(GameTest, MoveCam)
+{
+    EXPECT_EQ(g->getCamOffset().x, 0);
+    EXPECT_EQ(g->getCamOffset().y, 0);
+
+    auto const value = 3.0f;
+    g->moveCam(sf::Vector2f { value, value });
+    EXPECT_NEAR(g->getCamOffset().x, value, 0.001);
+    EXPECT_NEAR(g->getCamOffset().y, value, 0.001);
 }
 
 class MockState : public JamTemplate::GameState {

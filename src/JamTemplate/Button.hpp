@@ -1,11 +1,6 @@
 ﻿#ifndef JAMTEMPLATE_BUTTON_HPP_GUARD
 #define JAMTEMPLATE_BUTTON_HPP_GUARD
 
-#include <functional>
-#include <memory>
-
-#include <SFML/Graphics.hpp>
-
 #include "Animation.hpp"
 #include "Game.hpp"
 #include "GameObject.hpp"
@@ -13,6 +8,9 @@
 #include "SmartObject.hpp"
 #include "TextureManager.hpp"
 #include "Transform.hpp"
+#include <SFML/Graphics.hpp>
+#include <functional>
+#include <memory>
 
 namespace JamTemplate {
 class Button : public GameObject, public Transform {
@@ -121,4 +119,4 @@ private:
 };
 } // namespace JamTemplate
 
-#endif // !JAMTEMPLATE_CONVERSIONS_HPP_GUARD
+#endif

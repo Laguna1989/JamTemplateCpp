@@ -8,65 +8,13 @@ set (PROJECTNAME "MyAwesomeGame")
 set (ENABLE_UNITTESTS OFF CACHE BOOL "enable unittests")
 set (ENABLE_STRESSTEST OFF CACHE BOOL "enable stresstest")
 
-set (GAMEFILES 
-	src/GameProperties.hpp
-	src/GameProperties.cpp
-	src/Hud.hpp
-	src/Hud.cpp
-	src/main.cpp
-	src/main.hpp
-	src/StateGame.hpp
-	src/StateGame.cpp
-	src/StateMenu.hpp
-	src/StateMenu.cpp
-	)
+
 
 #####################################################
 ## Other variables and compiler setup
 #####################################################
-set (JAMTEMPLATEFILES 
-	src/JamTemplate/Animation.cpp
-	src/JamTemplate/Animation.hpp
-	src/JamTemplate/Box2DObject.hpp
-	src/JamTemplate/Button.hpp
-	src/JamTemplate/Collision.hpp
-	src/JamTemplate/Conversions.cpp
-	src/JamTemplate/Conversions.hpp
-	src/JamTemplate/Game.cpp
-	src/JamTemplate/Game.hpp
-	src/JamTemplate/GameObject.hpp
-	src/JamTemplate/GameState.cpp
-	src/JamTemplate/GameState.hpp
-	src/JamTemplate/InputManager.cpp
-	src/JamTemplate/InputManager.hpp
-	src/JamTemplate/Lerp.hpp
-	src/JamTemplate/MathHelper.cpp
-	src/JamTemplate/MathHelper.hpp
-	src/JamTemplate/Noise.hpp
-	src/JamTemplate/ObjectGroup.hpp
-	src/JamTemplate/PlayBar.hpp
-	src/JamTemplate/PlayBar.cpp
-	src/JamTemplate/Random.hpp
-	src/JamTemplate/Random.cpp
-	src/JamTemplate/SmartObject.cpp
-	src/JamTemplate/SmartObject.hpp
-	src/JamTemplate/SmartShape.hpp
-	src/JamTemplate/SmartSprite.hpp
-	src/JamTemplate/SmartText.hpp	
-	src/JamTemplate/SplitString.hpp
-	src/JamTemplate/SpriteFunctions.cpp
-	src/JamTemplate/SpriteFunctions.hpp
-	src/JamTemplate/TextureManager.cpp
-	src/JamTemplate/TextureManager.hpp
-	src/JamTemplate/Timer.hpp
-	src/JamTemplate/Transform.hpp
-	src/JamTemplate/TweenAlpha.hpp
-	src/JamTemplate/TweenBase.hpp
-	src/JamTemplate/TweenColor.hpp
-	src/JamTemplate/TweenPosition.hpp
-	src/JamTemplate/TweenRotation.hpp
-	src/JamTemplate/TweenScale.hpp
-	)
+file(GLOB GAMEFILES src/*)
+file(GLOB_RECURSE JAMTEMPLATEFILES src/JamTemplate/*)
 
 if(WIN32)
 	set (CMAKE_CXX_STANDARD 17)
@@ -74,7 +22,6 @@ if(WIN32)
 else()
 	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -O3 --std=c++1z")
 endif()
-
 
 #####################################################
 ## Create Project file and link directories
@@ -102,10 +49,11 @@ target_include_directories(Box2D PRIVATE ext/box2d)
 add_library(JamTemplate ${JAMTEMPLATEFILES})
 
 # add public includes, so they can be used by dependent targets
-target_include_directories(JamTemplate PUBLIC ext/SFML-2.5.1_win/include)
-target_include_directories(JamTemplate PUBLIC ext/box2d)
-target_include_directories(JamTemplate PUBLIC /usr/local/Cellar/sfml/2.4.2_1/include) 
-target_include_directories(JamTemplate PUBLIC ext/tileson-master/include)
+target_include_directories(JamTemplate PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/src/JamTemplate)
+target_include_directories(JamTemplate PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/ext/SFML-2.5.1_win/include)
+target_include_directories(JamTemplate PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/ext/box2d)
+target_include_directories(JamTemplate PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/ext/tileson-master/include)
+target_include_directories(JamTemplate PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/usr/local/Cellar/sfml/2.4.2_1/include) 
 
 target_link_libraries(JamTemplate optimized sfml-system )
 target_link_libraries(JamTemplate optimized sfml-window )
@@ -123,45 +71,19 @@ target_link_libraries(JamTemplate Box2D)
 ## setup StressTest
 #####################################################
 if (ENABLE_STRESSTEST)
-	set (STRESSTESTFILES
-		src/StressTest/main.cpp
-		src/StressTest/MovementObject.hpp
-		src/StressTest/Object.hpp
-		src/StressTest/State1.cpp
-		src/StressTest/State1.hpp
-		src/StressTest/State2.cpp
-		src/StressTest/State2.hpp
-		src/StressTest/StateBox2d.cpp
-		src/StressTest/StateBox2d.hpp
-		src/StressTest/StateTileson.cpp
-		src/StressTest/StateTileson.hpp
-		src/StressTest/StateTween.cpp
-		src/StressTest/StateTween.hpp
-		src/StressTest/SwarmObject.hpp
-	)
-
+	file(GLOB_RECURSE STRESSTESTFILES src/StressTest/*)
+	
 	add_executable(StressTest ${STRESSTESTFILES})
 	target_link_libraries(StressTest JamTemplate)
+	add_dependencies(StressTest CopyAssets)
 endif()
 
 #####################################################
 ## setup UnitTests
 #####################################################
 if (ENABLE_UNITTESTS)
-
-	set (UNITTESTFILES
-		src/UnitTests/ConversionsTest.cpp
-		src/UnitTests/GameTest.cpp
-		src/UnitTests/GameStateTest.cpp
-		src/UnitTests/InputManagerTest.cpp
-		src/UnitTests/MathHelperTest.cpp
-		src/UnitTests/MockObject.hpp
-		src/UnitTests/ObjectGroupTest.cpp
-		src/UnitTests/RandomTest.cpp
-		src/UnitTests/TextureManagerTest.cpp
-		src/UnitTests/TimerTest.cpp
-	)
-
+	file(GLOB_RECURSE UNITTESTFILES src/UnitTests/*)
+	
 	# Download and unpack googletest at configure time
 	configure_file(ext/googletest/CMakeLists.txt.in ${CMAKE_CURRENT_SOURCE_DIR}/ext/googletest/googletest-download/CMakeLists.txt)
 	execute_process(COMMAND ${CMAKE_COMMAND} -G "${CMAKE_GENERATOR}" .

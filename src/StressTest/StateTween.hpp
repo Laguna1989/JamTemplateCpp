@@ -1,10 +1,10 @@
 ﻿#ifndef STRESSTEST_STATE_TWEEN_HPP_INCLUDEGUARD
 #define STRESSTEST_STATE_TWEEN_HPP_INCLUDEGUARD
 
-#include "../JamTemplate/Game.hpp"
-#include "../JamTemplate/GameState.hpp"
-#include "../JamTemplate/SmartShape.hpp"
-#include "../JamTemplate/TweenAlpha.hpp"
+#include "Game.hpp"
+#include "GameState.hpp"
+#include "SmartShape.hpp"
+#include "TweenAlpha.hpp"
 #include <iostream>
 #include <vector>
 

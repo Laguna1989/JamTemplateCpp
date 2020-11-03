@@ -388,3 +388,4 @@ build
 
 ext/SFML-2.5.1_win
 ext/googletest/googletest-*
+ext/tileson-master/

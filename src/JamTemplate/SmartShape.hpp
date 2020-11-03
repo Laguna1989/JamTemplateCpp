@@ -80,8 +80,8 @@ private:
 
     void doUpdate(float /*elapsed*/) override
     {
-        m_shape->setPosition(getPosition() + getShakeOffset() + getOffset() + getCamOffset());
-        m_flashShape->setPosition(getPosition() + getShakeOffset() + getOffset() + getCamOffset());
+        m_shape->setPosition(getPosition() + getShakeOffset() + getOffset());
+        m_flashShape->setPosition(getPosition() + getShakeOffset() + getOffset());
         m_flashShape->setScale(m_shape->getScale());
     }
 

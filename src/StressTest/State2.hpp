@@ -1,15 +1,15 @@
-﻿#ifndef GAME_STATE_GAME_HPP_INCLUDEGUARD
-#define GAME_STATE_GAME_HPP_INCLUDEGUARD
+﻿#ifndef STRESSTEST_STATE_2_HPP_INCLUDEGUARD
+#define STRESSTEST_STATE_2_HPP_INCLUDEGUARD
 
-#include "../JamTemplate/Collision.hpp"
-#include "../JamTemplate/Game.hpp"
-#include "../JamTemplate/GameState.hpp"
-#include "../JamTemplate/ObjectGroup.hpp"
-#include "../JamTemplate/SmartShape.hpp"
-#include "../JamTemplate/SmartSprite.hpp"
-#include "../JamTemplate/Timer.hpp"
-#include "../JamTemplate/TweenAlpha.hpp"
+#include "Collision.hpp"
+#include "Game.hpp"
+#include "GameState.hpp"
+#include "ObjectGroup.hpp"
+#include "SmartShape.hpp"
+#include "SmartSprite.hpp"
 #include "SwarmObject.hpp"
+#include "Timer.hpp"
+#include "TweenAlpha.hpp"
 #include <iostream>
 #include <vector>
 

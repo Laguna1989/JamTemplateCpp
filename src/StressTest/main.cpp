@@ -1,6 +1,7 @@
-﻿#include "../JamTemplate/Game.hpp"
+﻿#include "Game.hpp"
 #include "State1.hpp"
 #include "StateBox2d.hpp"
+#include "StateTileson.hpp"
 #include <SFML/Graphics.hpp>
 #include <fstream>
 #include <numeric>
@@ -8,7 +9,7 @@
 int main()
 {
     JamTemplate::Game::Sptr game = std::make_shared<JamTemplate::Game>(800, 600, 4, "Stresstest");
-    game->switchState(std::make_shared<StateBox2d>());
+    game->switchState(std::make_shared<StateTileson>());
     auto window = game->getRenderWindow();
     window->setFramerateLimit(60);
     sf::Clock clock;

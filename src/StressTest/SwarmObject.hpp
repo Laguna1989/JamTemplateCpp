@@ -1,14 +1,14 @@
 ﻿#ifndef STRESSTEST_SWARMOBJECT_HPP_INCLUDEGUARD
 #define STRESSTEST_SWARMOBJECT_HPP_INCLUDEGUARD
 
-#include "../JamTemplate/Animation.hpp"
-#include "../JamTemplate/Game.hpp"
-#include "../JamTemplate/GameState.hpp"
-#include "../JamTemplate/MathHelper.hpp"
-#include "../JamTemplate/ObjectGroup.hpp"
-#include "../JamTemplate/Random.hpp"
-#include "../JamTemplate/SmartShape.hpp"
-#include "../JamTemplate/Transform.hpp"
+#include "Animation.hpp"
+#include "Game.hpp"
+#include "GameState.hpp"
+#include "MathHelper.hpp"
+#include "ObjectGroup.hpp"
+#include "Random.hpp"
+#include "SmartShape.hpp"
+#include "Transform.hpp"
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <memory>

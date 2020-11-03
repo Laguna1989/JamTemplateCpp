@@ -63,6 +63,9 @@ sf::Vector2f Game::getCamOffset()
         getView()->getCenter().y - getView()->getSize().y / 2 };
 }
 
+void Game::setCamOffset(sf::Vector2f const& ofs) { getView()->setCenter(ofs); }
+void Game::moveCam(sf::Vector2f const& v) { getView()->move(v); }
+
 void Game::shake(float t, float strength, float shakeInterval)
 {
     m_shakeTimer = t;
@@ -82,7 +85,6 @@ void Game::doUpdate(float const elapsed)
     if (m_state == nullptr)
         return;
 
-    SmartObject::setCamOffset(getCamOffset());
     sf::Vector2f mpf = getRenderWindow()->mapPixelToCoords(
         sf::Mouse::getPosition(*getRenderWindow()), *getView());
     sf::Vector2f mpfs

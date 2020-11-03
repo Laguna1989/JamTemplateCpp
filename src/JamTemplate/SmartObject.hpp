@@ -87,11 +87,6 @@ public:
 
     float getRotation() const { return m_rotationInDegree; }
 
-    void setMoveWithCam(bool v) { m_moveWithCam = v; }
-
-    // do not call this from anywhere but Game::doUpdate
-    static void setCamOffset(sf::Vector2f ofs) { m_camOffset = ofs; }
-
     virtual void setShadowActive(bool active) { m_shadowActive = active; }
     bool getShadowActive() const { return m_shadowActive; }
     virtual void setShadowColor(sf::Color const& col) { m_shadowColor = col; }
@@ -109,18 +104,8 @@ public:
 protected:
     sf::Vector2f getShakeOffset() const { return m_shakeOffset; }
 
-    sf::Vector2f getCamOffset() const
-    {
-        if (m_moveWithCam) {
-            return sf::Vector2f { 0, 0 };
-        } else {
-            return m_camOffset;
-        }
-    }
-
 private:
     bool m_moveWithCam { true };
-    static sf::Vector2f m_camOffset;
 
     bool m_hasBeenUpdated { false };
     float m_flashTimer { -1.0f };

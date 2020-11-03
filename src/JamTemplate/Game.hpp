@@ -28,7 +28,10 @@ public:
     void setView(std::shared_ptr<sf::View> view);
     std::shared_ptr<sf::View> getView();
 
+    // cannot be const because getView is not const
     sf::Vector2f getCamOffset();
+    void setCamOffset(sf::Vector2f const& ofs);
+    void moveCam(sf::Vector2f const& v);
 
     float getZoom() const;
 

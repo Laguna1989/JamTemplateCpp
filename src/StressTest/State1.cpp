@@ -1,10 +1,10 @@
 ﻿#include "State1.hpp"
-#include "../JamTemplate/InputManager.hpp"
-#include "../JamTemplate/Timer.hpp"
-#include "../JamTemplate/TweenAlpha.hpp"
-#include "../JamTemplate/TweenColor.hpp"
-#include "../JamTemplate/TweenScale.hpp"
+#include "InputManager.hpp"
 #include "State2.hpp"
+#include "Timer.hpp"
+#include "TweenAlpha.hpp"
+#include "TweenColor.hpp"
+#include "TweenScale.hpp"
 
 void State1::doInternalUpdate(float const /*elapsed*/)
 {

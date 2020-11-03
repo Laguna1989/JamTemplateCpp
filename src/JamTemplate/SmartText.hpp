@@ -108,8 +108,7 @@ private:
         if (m_textAlign != TextAlign::LEFT)
             alignOffset.x = m_text->getGlobalBounds().width
                 / (m_textAlign == TextAlign::CENTER ? 2.0f : 1.0f);
-        sf::Vector2f pos
-            = m_position + getShakeOffset() + getOffset() + getCamOffset() - alignOffset;
+        sf::Vector2f pos = m_position + getShakeOffset() + getOffset() - alignOffset;
         sf::Vector2i posi { static_cast<int>(pos.x), static_cast<int>(pos.y) };
 
         m_text->setPosition(

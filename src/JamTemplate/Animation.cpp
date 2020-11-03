@@ -208,7 +208,7 @@ void Animation::doUpdate(float elapsed)
     // set position
     for (auto& kvp : m_frames) {
         for (auto& spr : kvp.second) {
-            spr->setPosition(m_position + getShakeOffset() + getOffset() + getCamOffset());
+            spr->setPosition(m_position + getShakeOffset() + getOffset());
             spr->update(elapsed);
         }
     }

@@ -1,12 +1,12 @@
 ﻿#ifndef STRESSTEST_STATE_BOX2D_HPP_INCLUDEGUARD
 #define STRESSTEST_STATE_BOX2D_HPP_INCLUDEGUARD
 
-#include "../JamTemplate/Game.hpp"
-#include "../JamTemplate/GameState.hpp"
-#include "../JamTemplate/PlayBar.hpp"
-#include "../JamTemplate/SmartShape.hpp"
-#include "../JamTemplate/TweenRotation.hpp"
+#include "Game.hpp"
+#include "GameState.hpp"
 #include "MovementObject.hpp"
+#include "PlayBar.hpp"
+#include "SmartShape.hpp"
+#include "TweenRotation.hpp"
 #include <Box2D/Box2D.h>
 #include <iostream>
 #include <vector>

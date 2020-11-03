@@ -1,5 +1,5 @@
 ﻿#include "StateBox2d.hpp"
-#include "../JamTemplate/InputManager.hpp"
+#include "InputManager.hpp"
 #include "State1.hpp"
 
 void StateBox2d::doInternalUpdate(float const elapsed)
