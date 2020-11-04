@@ -1,11 +1,11 @@
 ﻿#ifndef GAME_OBJECT_HPP_INCLUDEGUARD
 #define GAME_OBJECT_HPP_INCLUDEGUARD
 
-#include "Animation.hpp"
 #include "Game.hpp"
 #include "GameState.hpp"
 #include "MathHelper.hpp"
 #include "Random.hpp"
+#include "SmartAnimation.hpp"
 #include "SmartShape.hpp"
 #include "Transform.hpp"
 #include <SFML/Graphics.hpp>
@@ -18,7 +18,7 @@ public:
     using Sptr = std::shared_ptr<Object>;
     Object()
     {
-        m_animation = std::make_shared<JamTemplate::Animation>();
+        m_animation = std::make_shared<JamTemplate::SmartAnimation>();
         // m_shape->makeRect(sf::Vector2f(10, 10));
         m_animation->add("assets/coin.png", "idle", sf::Vector2u { 16, 16 },
             JamTemplate::MathHelper::vectorBetween(0U, 11U), 0.15f);
@@ -43,7 +43,7 @@ public:
     void Flash() { m_animation->flash(0.1f); }
     void Shake() { m_animation->shake(0.5f, 2.0f, 0.05f); }
 
-    std::shared_ptr<JamTemplate::Animation> getAnimation() { return m_animation; }
+    std::shared_ptr<JamTemplate::SmartAnimation> getAnimation() { return m_animation; }
 
 private:
     void doUpdate(float const elapsed) override
@@ -57,7 +57,7 @@ private:
 
     void doDraw() const override { m_animation->draw(getGame()->getRenderTarget()); }
 
-    std::shared_ptr<JamTemplate::Animation> m_animation;
+    std::shared_ptr<JamTemplate::SmartAnimation> m_animation;
 };
 
 #endif

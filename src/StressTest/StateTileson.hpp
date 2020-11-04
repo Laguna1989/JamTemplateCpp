@@ -5,18 +5,18 @@
 #include "GameState.hpp"
 #include "InputManager.hpp"
 #include "SmartObject.hpp"
-#include "Tilemap.hpp"
+#include "SmartTilemap.hpp"
 
 class StateTileson : public JamTemplate::GameState {
 public:
     StateTileson() = default;
 
 private:
-    JamTemplate::Tilemap::Sptr m_tilemap;
+    JamTemplate::SmartTilemap::Sptr m_tilemap;
 
     void doCreate() override
     {
-        m_tilemap = std::make_shared<JamTemplate::Tilemap>(
+        m_tilemap = std::make_shared<JamTemplate::SmartTilemap>(
             std::filesystem::path("assets/tileson_test.json"));
         m_tilemap->setScreenSizeHint(sf::Vector2f(400, 300), getGame());
     }
@@ -35,6 +35,13 @@ private:
             getGame()->moveCam(sf::Vector2f { 0.0f, -scrollspeed * elapsed });
         } else if (JamTemplate::InputManager::pressed(sf::Keyboard::S)) {
             getGame()->moveCam(sf::Vector2f { 0.0f, scrollspeed * elapsed });
+        }
+
+        if (JamTemplate::InputManager::justPressed(sf::Keyboard::I)) {
+            m_tilemap->setIgnoreCamMovement(true);
+        }
+        if (JamTemplate::InputManager::justPressed(sf::Keyboard::O)) {
+            m_tilemap->setIgnoreCamMovement(false);
         }
     }
 };

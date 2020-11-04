@@ -34,7 +34,7 @@ private:
                     = std::make_shared<MovementObject>(m_world, &groundBodyDef);
                 add(b2obj);
 
-                auto tw = JamTemplate::TweenRotation<JamTemplate::Animation>::create(
+                auto tw = JamTemplate::TweenRotation<JamTemplate::SmartAnimation>::create(
                     b2obj->getAnimation(), 2, 0, 360);
                 add(tw);
             }
@@ -72,7 +72,7 @@ private:
 
         add(myBody);
         {
-            auto tw = JamTemplate::TweenRotation<JamTemplate::Animation>::create(
+            auto tw = JamTemplate::TweenRotation<JamTemplate::SmartAnimation>::create(
                 myBody->getAnimation(), 2, 0, 360);
             tw->setRepeat(true);
             add(tw);

@@ -13,14 +13,14 @@ namespace JamTemplate {
 // forward declaration
 class SmartSprite;
 
-class Animation : public SmartObject {
+class SmartAnimation : public SmartObject {
 public:
-    using Sptr = std::shared_ptr<Animation>;
+    using Sptr = std::shared_ptr<SmartAnimation>;
     using AnimationMapType = std::map<std::string, std::vector<std::shared_ptr<SmartSprite>>>;
 
-    Animation() = default;
+    SmartAnimation() = default;
 
-    virtual ~Animation() = default;
+    virtual ~SmartAnimation() = default;
 
     // add a new animation to the pool of available animations
     void add(std::string const& fileName, std::string const& animName, sf::Vector2u const& size,

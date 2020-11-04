@@ -1,7 +1,7 @@
 ﻿#ifndef JAMTEMPLATE_BUTTON_HPP_GUARD
 #define JAMTEMPLATE_BUTTON_HPP_GUARD
 
-#include "Animation.hpp"
+#include "SmartAnimation.hpp"
 #include "Game.hpp"
 #include "GameObject.hpp"
 #include "InputManager.hpp"
@@ -20,7 +20,7 @@ public:
     Button(sf::Vector2u s = sf::Vector2u { 16, 16 })
     {
         std::string buttonImageName = "#b#" + std::to_string(s.x) + "#" + std::to_string(s.y);
-        m_background = std::make_shared<JamTemplate::Animation>();
+        m_background = std::make_shared<JamTemplate::SmartAnimation>();
         m_background->add(buttonImageName, "normal", s, { 0 }, 1);
         m_background->add(buttonImageName, "over", s, { 1 }, 1);
         m_background->add(buttonImageName, "down", s, { 2 }, 1);
@@ -58,7 +58,7 @@ public:
     void setVisible(bool v) { m_visible = v; }
 
 private:
-    std::shared_ptr<Animation> m_background;
+    std::shared_ptr<SmartAnimation> m_background;
     std::shared_ptr<SmartObject> m_icon { nullptr };
 
     std::vector<std::function<void(void)>> m_callbacks;

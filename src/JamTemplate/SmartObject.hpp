@@ -94,6 +94,11 @@ public:
     virtual void setShadowOffset(sf::Vector2f const& v) { m_shadowOffset = v; }
     sf::Vector2f const getShadowOffset() const { return m_shadowOffset; }
 
+    // do not call this manually. Only place to call is Game()->update();
+    static void setCamOffset(sf::Vector2f const& v) { m_CamOffset = v; }
+
+    void setIgnoreCamMovement(bool ignore) { m_ignoreCamMovement = ignore; }
+
     void setShadow(sf::Color const& col, sf::Vector2f const& offset)
     {
         setShadowActive(true);
@@ -104,7 +109,15 @@ public:
 protected:
     sf::Vector2f getShakeOffset() const { return m_shakeOffset; }
 
+    sf::Vector2f getCamOffset() const
+    {
+        return (m_ignoreCamMovement ? m_CamOffset : sf::Vector2f { 0.0f, 0.0f });
+    }
+    bool getIgnoreCamMovement() const { return m_ignoreCamMovement; }
+
 private:
+    static sf::Vector2f m_CamOffset;
+    bool m_ignoreCamMovement { false };
     bool m_moveWithCam { true };
 
     bool m_hasBeenUpdated { false };

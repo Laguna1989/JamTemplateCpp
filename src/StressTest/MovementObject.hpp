@@ -1,7 +1,6 @@
 ﻿#ifndef STRESSTEST_MOVEMENTOBJECT_HPP_INCLUDEGUARD
 #define STRESSTEST_MOVEMENTOBJECT_HPP_INCLUDEGUARD
 
-#include "Animation.hpp"
 #include "Box2DObject.hpp"
 #include "Conversions.hpp"
 #include "Game.hpp"
@@ -9,6 +8,7 @@
 #include "MathHelper.hpp"
 #include "ObjectGroup.hpp"
 #include "Random.hpp"
+#include "SmartAnimation.hpp"
 #include "SmartShape.hpp"
 #include "Transform.hpp"
 #include <SFML/Graphics.hpp>
@@ -22,7 +22,7 @@ public:
     MovementObject(std::shared_ptr<b2World> world, const b2BodyDef* def)
         : Box2DObject { world, def }
     {
-        m_animation = std::make_shared<JamTemplate::Animation>();
+        m_animation = std::make_shared<JamTemplate::SmartAnimation>();
 
         m_animation->add("assets/coin.png", "idle", sf::Vector2u { 16, 16 },
             JamTemplate::MathHelper::vectorBetween(0U, 11U),
@@ -44,10 +44,10 @@ public:
 
     ~MovementObject() = default;
 
-    std::shared_ptr<JamTemplate::Animation> getAnimation() { return m_animation; }
+    std::shared_ptr<JamTemplate::SmartAnimation> getAnimation() { return m_animation; }
 
 private:
-    std::shared_ptr<JamTemplate::Animation> m_animation;
+    std::shared_ptr<JamTemplate::SmartAnimation> m_animation;
 
     void doUpdate(float const elapsed) override
     {

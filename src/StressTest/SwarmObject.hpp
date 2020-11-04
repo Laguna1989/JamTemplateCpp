@@ -1,12 +1,12 @@
 ﻿#ifndef STRESSTEST_SWARMOBJECT_HPP_INCLUDEGUARD
 #define STRESSTEST_SWARMOBJECT_HPP_INCLUDEGUARD
 
-#include "Animation.hpp"
 #include "Game.hpp"
 #include "GameState.hpp"
 #include "MathHelper.hpp"
 #include "ObjectGroup.hpp"
 #include "Random.hpp"
+#include "SmartAnimation.hpp"
 #include "SmartShape.hpp"
 #include "Transform.hpp"
 #include <SFML/Graphics.hpp>
@@ -19,7 +19,7 @@ public:
     using Sptr = std::shared_ptr<SwarmObject>;
     SwarmObject()
     {
-        m_animation = std::make_shared<JamTemplate::Animation>();
+        m_animation = std::make_shared<JamTemplate::SmartAnimation>();
 
         m_swarmWeight = JamTemplate::Random::getFloat(0.5f, 1.5f);
 
@@ -41,12 +41,12 @@ public:
 
     ~SwarmObject() = default;
 
-    std::shared_ptr<JamTemplate::Animation> getAnimation() { return m_animation; }
+    std::shared_ptr<JamTemplate::SmartAnimation> getAnimation() { return m_animation; }
 
     float getSwarmWeight() const { return m_swarmWeight; }
 
 private:
-    std::shared_ptr<JamTemplate::Animation> m_animation;
+    std::shared_ptr<JamTemplate::SmartAnimation> m_animation;
     float m_swarmWeight = 0.0f;
 
     void doUpdate(float const elapsed) override

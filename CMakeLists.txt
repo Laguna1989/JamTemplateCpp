@@ -55,6 +55,10 @@ target_include_directories(JamTemplate PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/ext/bo
 target_include_directories(JamTemplate PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/ext/tileson-master/include)
 target_include_directories(JamTemplate PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/usr/local/Cellar/sfml/2.4.2_1/include) 
 
+source_group(GameLoop REGULAR_EXPRESSION src/JamTemplate/Game*)
+source_group(SmartDrawables REGULAR_EXPRESSION src/JamTemplate/Smart*)
+source_group(Tweens REGULAR_EXPRESSION src/JamTemplate/Tween*)
+
 target_link_libraries(JamTemplate optimized sfml-system )
 target_link_libraries(JamTemplate optimized sfml-window )
 target_link_libraries(JamTemplate optimized sfml-graphics )

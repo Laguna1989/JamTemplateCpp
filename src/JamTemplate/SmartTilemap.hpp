@@ -13,11 +13,11 @@ namespace JamTemplate {
 // forward declaration
 class Game;
 
-class Tilemap : public SmartObject {
+class SmartTilemap : public SmartObject {
 public:
-    using Sptr = std::shared_ptr<Tilemap>;
+    using Sptr = std::shared_ptr<SmartTilemap>;
 
-    Tilemap(std::filesystem::path const& path);
+    SmartTilemap(std::filesystem::path const& path);
 
     void doDraw(std::shared_ptr<sf::RenderTarget> const sptr) const;
 

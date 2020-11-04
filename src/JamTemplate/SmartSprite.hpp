@@ -73,7 +73,7 @@ private:
 
     void doUpdate(float /*elapsed*/) override
     {
-        auto const pos = m_position + getShakeOffset() + getOffset();
+        auto const pos = m_position + getShakeOffset() + getOffset() + getCamOffset();
         m_sprite.setPosition(pos);
         m_flashSprite.setPosition(pos);
     }
