@@ -60,12 +60,13 @@ std::shared_ptr<sf::View> Game::getView() { return m_view; }
 
 sf::Vector2f Game::getCamOffset()
 {
-    return sf::Vector2f { getView()->getCenter().x - getView()->getSize().x / 2,
-        getView()->getCenter().y - getView()->getSize().y / 2 };
+    return m_CamOffset;
+    /*return sf::Vector2f { getView()->getCenter().x - getView()->getSize().x / 2,
+        getView()->getCenter().y - getView()->getSize().y / 2 };*/
 }
 
-void Game::setCamOffset(sf::Vector2f const& ofs) { getView()->setCenter(ofs); }
-void Game::moveCam(sf::Vector2f const& v) { getView()->move(v); }
+void Game::setCamOffset(sf::Vector2f const& ofs) { m_CamOffset = ofs; }
+void Game::moveCam(sf::Vector2f const& v) { m_CamOffset += v; }
 
 void Game::shake(float t, float strength, float shakeInterval)
 {
@@ -79,6 +80,13 @@ std::weak_ptr<Game> Game::getPtr() { return shared_from_this(); }
 void Game::doUpdate(float const elapsed)
 {
     // std::cout << "game::update\n";
+
+    sf::Vector2i camOffsetInt { static_cast<int>(m_CamOffset.x + getView()->getSize().x / 2),
+        static_cast<int>(m_CamOffset.y + getView()->getSize().y / 2) };
+
+    getView()->setCenter(
+        sf::Vector2f { static_cast<float>(camOffsetInt.x), static_cast<float>(camOffsetInt.y) });
+
     if (m_nextState != nullptr) {
         doSwitchState();
         return;

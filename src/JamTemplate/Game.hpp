@@ -43,6 +43,7 @@ private:
     std::shared_ptr<sf::RenderTexture> m_renderTarget { nullptr };
     std::shared_ptr<sf::View> m_view { nullptr };
     std::shared_ptr<sf::RenderWindow> m_renderWindow { nullptr };
+    sf::Vector2f m_CamOffset { 0.0f, 0.0f };
 
     float m_zoom;
 

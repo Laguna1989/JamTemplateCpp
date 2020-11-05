@@ -79,7 +79,9 @@ if (ENABLE_STRESSTEST)
 	
 	add_executable(StressTest ${STRESSTESTFILES})
 	target_link_libraries(StressTest JamTemplate)
-	add_dependencies(StressTest CopyAssets)
+	add_custom_command(TARGET StressTest PRE_BUILD
+                   COMMAND ${CMAKE_COMMAND} -E copy_directory
+                       ${CMAKE_SOURCE_DIR}/assets/ ${CMAKE_CURRENT_BINARY_DIR}/assets)
 endif()
 
 #####################################################
@@ -127,35 +129,15 @@ if (ENABLE_UNITTESTS)
 	target_link_libraries(UnitTests JamTemplate)
 	
 endif()
-#####################################################
-## setup custom target to copy assets every time
-#####################################################
-
-# note: globbing is done only when cmake runs, so new files will be missing until cmake is run.
-file(GLOB COPY_FILES
-	RELATIVE ${CMAKE_CURRENT_SOURCE_DIR}
-	${CMAKE_CURRENT_SOURCE_DIR}/assets/*)
-	
-add_custom_target(CopyAssets ALL
-	# fake file that will never be present. This forces cmake to copy assets every time.
-	DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/assets/__always_copy.txt	
-	)
-	
-foreach(FILENAME ${COPY_FILES})
-	set(SRC "${CMAKE_CURRENT_SOURCE_DIR}/${FILENAME}")
-    set(DST "${CMAKE_CURRENT_BINARY_DIR}/${FILENAME}")
-	
-	add_custom_command (
-	TARGET CopyAssets
-	COMMAND ${CMAKE_COMMAND} -E copy ${SRC} ${DST})
-endforeach(FILENAME)
 
 #####################################################
 ## setup Game executable
 #####################################################
 add_executable(${PROJECTNAME}  ${GAMEFILES})
 target_link_libraries(${PROJECTNAME} JamTemplate)
-add_dependencies(${PROJECTNAME} CopyAssets)
+add_custom_command(TARGET ${PROJECTNAME} PRE_BUILD
+                   COMMAND ${CMAKE_COMMAND} -E copy_directory
+                       ${CMAKE_SOURCE_DIR}/assets ${CMAKE_CURRENT_BINARY_DIR}/assets)
 
 #####################################################
 ## copy sfml dlls and .clang-format around
