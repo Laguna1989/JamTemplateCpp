@@ -1,10 +1,10 @@
 ﻿#ifndef JAMTEMPLATE_BUTTON_HPP_GUARD
 #define JAMTEMPLATE_BUTTON_HPP_GUARD
 
-#include "SmartAnimation.hpp"
 #include "Game.hpp"
 #include "GameObject.hpp"
 #include "InputManager.hpp"
+#include "SmartAnimation.hpp"
 #include "SmartObject.hpp"
 #include "TextureManager.hpp"
 #include "Transform.hpp"
