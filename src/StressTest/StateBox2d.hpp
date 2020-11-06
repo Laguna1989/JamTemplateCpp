@@ -27,7 +27,7 @@ private:
     {
         b2BodyDef groundBodyDef;
         groundBodyDef.fixedRotation = true;
-        for (int i = 0; i != 20; ++i)
+        for (int i = 0; i != 20; ++i) {
             for (int j = 0; j != 20; ++j) {
                 groundBodyDef.position.Set(32.0f + i * 16, 100.0f - 16 + j * 16);
                 MovementObject::Sptr b2obj
@@ -38,6 +38,7 @@ private:
                     b2obj->getAnimation(), 2, 0, 360);
                 add(tw);
             }
+        }
         {
             groundBodyDef.position.Set(48, 100);
             MovementObject::Sptr b2obj = std::make_shared<MovementObject>(m_world, &groundBodyDef);
