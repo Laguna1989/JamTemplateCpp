@@ -23,7 +23,7 @@ SmartTilemap::SmartTilemap(std::filesystem::path const& path)
         throw std::invalid_argument { "empty tilesets" };
     }
     auto const tileset = m_map->getTilesets().at(0);
-    std::cout << "tileset image path: " << tileset.getImagePath() << std::endl;
+    // std::cout << "tileset image path: " << tileset.getImagePath() << std::endl;
 
     auto const columns = tileset.getColumns();
     auto const rows = tileset.getTileCount() / columns;
@@ -93,7 +93,7 @@ void SmartTilemap::doDraw(std::shared_ptr<sf::RenderTarget> const sptr) const
 void SmartTilemap::doDrawFlash(std::shared_ptr<sf::RenderTarget> const sptr) const { }
 void SmartTilemap::doDrawShadow(std::shared_ptr<sf::RenderTarget> const sptr) const { }
 
-void SmartTilemap::doUpdate(float elapsed) { }
+void SmartTilemap::doUpdate(float /*elapsed*/) { }
 
 void SmartTilemap::setColor(sf::Color const& col)
 {
@@ -110,13 +110,16 @@ sf::Transform const SmartTilemap::getTransform() const { return sf::Transform {}
 sf::FloatRect const SmartTilemap::getGlobalBounds() const { return sf::FloatRect {}; }
 sf::FloatRect const SmartTilemap::getLocalBounds() const { return sf::FloatRect {}; }
 
-void SmartTilemap::setFlashColor(sf::Color const& col) { }
+void SmartTilemap::setFlashColor(sf::Color const& /*col*/)
+{
+    throw std::logic_error { "flash not supported by SmartBar" };
+}
 const sf::Color SmartTilemap::getFlashColor() const { return sf::Color::Black; }
 
-void SmartTilemap::setScale(sf::Vector2f const& scale) { }
+void SmartTilemap::setScale(sf::Vector2f const& /*scale*/) { }
 const sf::Vector2f SmartTilemap::getScale() const { return sf::Vector2f {}; }
 
-void SmartTilemap::setOrigin(sf::Vector2f const& origin) { }
+void SmartTilemap::setOrigin(sf::Vector2f const& /*origin*/) { }
 const sf::Vector2f SmartTilemap::getOrigin() const { return sf::Vector2f {}; }
 
 void SmartTilemap::doRotate(float /*rot*/) { }

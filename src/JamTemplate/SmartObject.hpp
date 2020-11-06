@@ -75,9 +75,9 @@ public:
     virtual void setOrigin(sf::Vector2f const& origin) = 0;
     virtual const sf::Vector2f getOrigin() const = 0;
 
-    void setOffset(sf::Vector2f const offset) { m_offset = offset; }
-
     sf::Vector2f getOffset() const { return m_offset; }
+
+    void setOffset(sf::Vector2f const offset) { m_offset = offset; }
 
     void setRotation(float rot)
     {
@@ -145,6 +145,8 @@ private:
     // things to take care of:
     //   - make sure flash object and normal object are at the same position
     virtual void doUpdate(float elapsed) = 0;
+    virtual void doFlash(float /*t*/, sf::Color /*col = sf::Color::White*/) { }
+    virtual void doRotate(float /*rot*/) = 0;
 
     void updateFlash(float elapsed)
     {
@@ -171,10 +173,6 @@ private:
             m_shakeOffset.x = m_shakeOffset.y = 0;
         }
     }
-
-    virtual void doFlash(float /*t*/, sf::Color /*col = sf::Color::White*/) { }
-
-    virtual void doRotate(float /*rot*/) = 0;
 };
 } // namespace JamTemplate
 

@@ -4,7 +4,7 @@
 #include "Game.hpp"
 #include "GameState.hpp"
 #include "MovementObject.hpp"
-#include "PlayBar.hpp"
+#include "SmartBar.hpp"
 #include "SmartShape.hpp"
 #include "TweenRotation.hpp"
 #include <Box2D/Box2D.h>
@@ -20,8 +20,8 @@ public:
 
 private:
     std::shared_ptr<b2World> m_world { nullptr };
-    JamTemplate::PlayBar::Sptr m_bar1;
-    JamTemplate::PlayBar::Sptr m_bar2;
+    JamTemplate::SmartBar::Sptr m_bar1;
+    JamTemplate::SmartBar::Sptr m_bar2;
 
     void doCreate() override
     {
@@ -78,17 +78,16 @@ private:
             add(tw);
         }
 
-        m_bar1 = std::make_shared<JamTemplate::PlayBar>(100.0f, 10.0f);
+        m_bar1 = std::make_shared<JamTemplate::SmartBar>(100.0f, 10.0f);
         m_bar1->setPosition(sf::Vector2f { 10, 10 });
-        add(m_bar1);
 
-        m_bar2 = std::make_shared<JamTemplate::PlayBar>(100.0f, 10.0f);
+        m_bar2 = std::make_shared<JamTemplate::SmartBar>(100.0f, 10.0f);
         m_bar2->setPosition(sf::Vector2f { 10, 25 });
         m_bar2->setMaxValue(2.0f);
-        add(m_bar2);
     }
 
     void doInternalUpdate(float const /*elapsed*/) override;
+    void doInternalDraw() const override;
 };
 
 #endif

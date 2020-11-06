@@ -18,7 +18,9 @@ file(GLOB_RECURSE JAMTEMPLATEFILES src/JamTemplate/*)
 
 if(WIN32)
 	set (CMAKE_CXX_STANDARD 17)
-	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /W4 /EHsc -Ox")
+	## nasty warning 5205 from tileson should not show up,
+	## so the warning level of this one is set to 4 and the global warning level is set to three
+	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /w45205 /W3 /EHsc -Ox")
 else()
 	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -O3 --std=c++1z")
 endif()
@@ -50,11 +52,12 @@ add_library(JamTemplate ${JAMTEMPLATEFILES})
 
 # add public includes, so they can be used by dependent targets
 target_include_directories(JamTemplate PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/src/JamTemplate)
-target_include_directories(JamTemplate PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/ext/SFML-2.5.1_win/include)
-target_include_directories(JamTemplate PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/ext/box2d)
-target_include_directories(JamTemplate PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/ext/tileson-master/include)
-target_include_directories(JamTemplate PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/usr/local/Cellar/sfml/2.4.2_1/include) 
+target_include_directories(JamTemplate SYSTEM PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/ext/SFML-2.5.1_win/include)
+target_include_directories(JamTemplate SYSTEM PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/ext/box2d)
+target_include_directories(JamTemplate SYSTEM PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/ext/tileson-master/include)
+target_include_directories(JamTemplate SYSTEM PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/usr/local/Cellar/sfml/2.4.2_1/include) 
 
+# group together similar files for a cleaner JamTemplate Project in IDEs that support this feature
 source_group(GameLoop REGULAR_EXPRESSION src/JamTemplate/Game*)
 source_group(SmartDrawables REGULAR_EXPRESSION src/JamTemplate/Smart*)
 source_group(Tweens REGULAR_EXPRESSION src/JamTemplate/Tween*)

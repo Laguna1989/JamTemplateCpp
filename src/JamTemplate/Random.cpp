@@ -43,4 +43,4 @@ sf::Vector2f const Random::getRandomPointin(sf::FloatRect r)
 
 void Random::setSeed(unsigned int s) { m_engine.seed(s); }
 
-void Random::useTimeAsRandomSeed() { setSeed(time(NULL)); }
+void Random::useTimeAsRandomSeed() { setSeed(static_cast<unsigned int>(time(NULL))); }

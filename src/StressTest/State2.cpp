@@ -1,12 +1,14 @@
 ﻿#include "State2.hpp"
-#include "State1.hpp"
+#include "InputManager.hpp"
+#include "StateTileson.hpp"
 
 void State2::doInternalUpdate(float const elapsed)
 {
-    // std::cout << "2\n";
-    if (getAge() >= 35.0) {
-        getGame()->switchState(std::make_shared<State1>());
+
+    if (getAge() >= 5.0 || JamTemplate::InputManager::justPressed(sf::Keyboard::F1)) {
+        getGame()->switchState(std::make_shared<StateTileson>());
     }
+
     m_overlay->update(elapsed);
 
     float cutoffDistance = 10;

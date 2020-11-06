@@ -174,6 +174,7 @@ void Game::doSwitchState()
 
     JamTemplate::InputManager::reset();
     resetShake();
+    m_CamOffset = sf::Vector2f { 0.0f, 0.0f };
 }
 
 } // namespace JamTemplate

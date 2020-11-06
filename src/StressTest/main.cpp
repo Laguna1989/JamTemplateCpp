@@ -9,7 +9,7 @@
 int main()
 {
     JamTemplate::Game::Sptr game
-        = std::make_shared<JamTemplate::Game>(800, 600, 2.0f, "Stresstest");
+        = std::make_shared<JamTemplate::Game>(800, 600, 4.0f, "Stresstest");
     game->switchState(std::make_shared<StateTileson>());
     auto window = game->getRenderWindow();
     window->setFramerateLimit(60);
