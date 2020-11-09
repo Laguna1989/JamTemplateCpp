@@ -19,6 +19,9 @@ float Random::getFloat(float min, float max)
 
 float Random::getFloatGauss(float mu, float sigma)
 {
+    if (sigma <= 0) {
+        throw std::invalid_argument { "sigma must be than larger zero for gauss distribution" };
+    }
     std::normal_distribution<float> dist(mu, sigma);
     return dist(m_engine);
 }

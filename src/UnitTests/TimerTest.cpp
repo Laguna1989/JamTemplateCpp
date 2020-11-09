@@ -1,5 +1,5 @@
 ﻿
-#include "../JamTemplate/Timer.hpp"
+#include "Timer.hpp"
 #include "gtest/gtest.h"
 #include <limits>
 #include <utility>
@@ -44,6 +44,21 @@ TEST(TimerTest, TimerIsCalledOnlyOnce)
     // again.
     t.update(std::numeric_limits<float>::max());
     EXPECT_FALSE(callback_invoked);
+}
+
+TEST(TimerTest, TimerIsCalledExactlyTwice)
+{
+    float count { 0 };
+    float const alarmTime = 10.0f;
+    int const expectedCalls { 2 };
+    Timer t { alarmTime, [&count]() { count++; }, expectedCalls };
+
+    t.update(alarmTime + 0.1f);
+    t.update(alarmTime + 0.1f);
+    t.update(alarmTime + 0.1f);
+    t.update(alarmTime + 0.1f);
+    t.update(alarmTime + 0.1f);
+    ASSERT_EQ(count, expectedCalls);
 }
 
 TEST(TimerTest, InvalidCallback)

@@ -53,3 +53,59 @@ TEST(RandomChanceTest, ChanceZeroAlwaysTrue)
         EXPECT_TRUE(Random::getChance(1.0f));
     }
 }
+
+class RandomFloatGaussTestFixture : public ::testing::TestWithParam<std::pair<float, float>> {
+};
+
+INSTANTIATE_TEST_SUITE_P(RandomFloatGaussTest, RandomFloatGaussTestFixture,
+    ::testing::Values(std::make_pair(0.0f, 1.0f), std::make_pair(0.0f, 500),
+        std::make_pair(0.0f, 0.1f),
+        std::make_pair(
+            std::numeric_limits<float>::epsilon(), std::numeric_limits<float>::epsilon())));
+
+TEST_P(RandomFloatGaussTestFixture, RandomFloat)
+{
+    float const mu { GetParam().first };
+    float const sigma { GetParam().second };
+    for (auto i = 0U; i != 1000; ++i) {
+        auto const r = Random::getFloatGauss(mu, sigma);
+        EXPECT_GT(r, std::numeric_limits<float>::lowest());
+        EXPECT_LT(r, std::numeric_limits<float>::max());
+    }
+}
+
+TEST(RandomGaussTestException, ZeroSigma)
+{
+    EXPECT_THROW(Random::getFloatGauss(0.0f, 0), std::invalid_argument);
+}
+
+TEST(RandomGaussTestException, NegativeSigma)
+{
+    EXPECT_THROW(Random::getFloatGauss(0.0f, -2.0f), std::invalid_argument);
+}
+
+TEST(RandomColor, NoThrow) { EXPECT_NO_THROW(Random::getRandomColor()); }
+
+TEST(RandomInRect, Valid)
+{
+    auto const lower = 0.0f;
+    auto const upper = 10.0f;
+    for (auto i = 0U; i != 1000; ++i) {
+        auto const v = Random::getRandomPointin(sf::Rect { lower, lower, upper, upper });
+        EXPECT_GT(v.x, lower);
+        EXPECT_GT(v.y, lower);
+        EXPECT_LT(v.x, upper);
+        EXPECT_LT(v.y, upper);
+    }
+}
+
+class RandomSetSeedTestFixture : public ::testing::TestWithParam<unsigned int> {
+};
+
+INSTANTIATE_TEST_SUITE_P(RandomSetSeedTest, RandomSetSeedTestFixture,
+    ::testing::Values(0U, 1U, 10U, 100U, 1000U, std::numeric_limits<unsigned int>::epsilon(),
+        std::numeric_limits<unsigned int>::min(), std::numeric_limits<unsigned int>::max()));
+
+TEST_P(RandomSetSeedTestFixture, Values) { EXPECT_NO_THROW(Random::setSeed(GetParam())); }
+
+TEST(RandomSetTimeAsSeed, NoThrow) { EXPECT_NO_THROW(Random::useTimeAsRandomSeed()); }

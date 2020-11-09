@@ -112,3 +112,33 @@ TEST(ClampTest, upper)
     float const out = clamp(in, 0.0f, upper);
     EXPECT_EQ(upper, out);
 }
+
+TEST(FloatToString, ValidEntryZero)
+{
+    float const f { 0.0f };
+    EXPECT_EQ(floatToStringWithXDigits(f, 1), "0.0");
+    EXPECT_EQ(floatToStringWithXDigits(f, 2), "0.00");
+    EXPECT_EQ(floatToStringWithXDigits(f, 3), "0.000");
+    EXPECT_EQ(floatToStringWithXDigits(f, 4), "0.0000");
+}
+
+TEST(FloatToString, CorrectRounding)
+{
+    float const f { 1.8f };
+    EXPECT_EQ(floatToStringWithXDigits(f, 0), "2");
+}
+
+TEST(FloatToString, ValidEntry)
+{
+    float const f { 1.23456f };
+    EXPECT_EQ(floatToStringWithXDigits(f, 1), "1.2");
+    EXPECT_EQ(floatToStringWithXDigits(f, 2), "1.23");
+    EXPECT_EQ(floatToStringWithXDigits(f, 3), "1.235");
+    EXPECT_EQ(floatToStringWithXDigits(f, 4), "1.2346");
+}
+
+TEST(FloatToString, StringWithLengthZero)
+{
+    float const f { 1.23456f };
+    EXPECT_EQ(floatToStringWithXDigits(f, 0), "1");
+}

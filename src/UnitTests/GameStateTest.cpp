@@ -19,6 +19,12 @@ TEST(GameStateInitTest, InitialValues)
     EXPECT_TRUE(s.isAlive());
 }
 
+TEST(GameStateInitTest, Create)
+{
+    GameState s {};
+    EXPECT_NO_THROW(s.create());
+}
+
 class GameStateTest : public ::testing::Test {
 public:
     std::shared_ptr<Game> g;

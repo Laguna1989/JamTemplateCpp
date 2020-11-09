@@ -16,7 +16,7 @@ public:
     explicit SplitString(std::string s)
         : std::string(s) {};
 
-    std::vector<std::string>& split(char delim, int rep = 0)
+    std::vector<std::string>& split(char delim)
     {
         if (!flds.empty())
             flds.clear(); // empty vector if necessary
@@ -26,10 +26,7 @@ public:
         while (i < work.length()) {
             if (work[i] != delim)
                 buf += work[i];
-            else if (rep == 1) {
-                flds.push_back(buf);
-                buf = "";
-            } else if (buf.length() > 0) {
+            else if (buf.length() > 0) {
                 flds.push_back(buf);
                 buf = "";
             }
