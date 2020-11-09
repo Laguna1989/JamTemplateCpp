@@ -31,6 +31,10 @@ TEST_F(TextureManagerTest, InvalidSpecialOperation)
 
 TEST_F(TextureManagerTest, GetButton) { EXPECT_NO_THROW(TextureManager::get("#b#100#200")); }
 
+TEST_F(TextureManagerTest, GetGlow) { EXPECT_NO_THROW(TextureManager::get("#g#100#200")); }
+
+TEST_F(TextureManagerTest, GetVignette) { EXPECT_NO_THROW(TextureManager::get("#v#100#200")); }
+
 TEST_F(TextureManagerTest, GetButtonInvalid)
 {
     EXPECT_ANY_THROW(TextureManager::get("#b#10#20#30"));
