@@ -3,6 +3,9 @@
 
 #include <SFML/Graphics.hpp>
 #include <assert.h>
+#include <iomanip>
+#include <sstream>
+#include <string>
 #include <vector>
 
 namespace JamTemplate {
@@ -45,6 +48,8 @@ T clamp(T const& value, T const& min, T const& max)
     }
     return value;
 }
+
+std::string floatToStringWithXDigits(float const number, unsigned int digits);
 
 } // namespace MathHelper
 } // namespace JamTemplate

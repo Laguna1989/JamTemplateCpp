@@ -1,14 +1,12 @@
 ﻿#ifndef JAMTEMPLATE_SMARTOBJECT_HPP_INCLUDEGUARD
 #define JAMTEMPLATE_SMARTOBJECT_HPP_INCLUDEGUARD
 
+#include "Lerp.hpp"
+#include "Random.hpp"
+#include <SFML/Graphics.hpp>
 #include <iostream>
 #include <memory>
 #include <string>
-
-#include <SFML/Graphics.hpp>
-
-#include "Lerp.hpp"
-#include "Random.hpp"
 
 namespace JamTemplate {
 class SmartObject {
@@ -152,8 +150,8 @@ private:
     {
         if (m_flashTimer > 0) {
             m_flashTimer -= elapsed;
-            float a = Lerp::linear(255.0f, 0.0f, 1.0f - (m_flashTimer / m_maxFlashTimer));
             auto col = getFlashColor();
+            float a = Lerp::linear((float)col.a, 0.0f, 1.0f - (m_flashTimer / m_maxFlashTimer));
             col.a = static_cast<sf::Uint8>(a);
             setFlashColor(col);
         }

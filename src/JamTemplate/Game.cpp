@@ -58,12 +58,7 @@ void Game::setView(std::shared_ptr<sf::View> view)
 }
 std::shared_ptr<sf::View> Game::getView() { return m_view; }
 
-sf::Vector2f Game::getCamOffset()
-{
-    return m_CamOffset;
-    /*return sf::Vector2f { getView()->getCenter().x - getView()->getSize().x / 2,
-        getView()->getCenter().y - getView()->getSize().y / 2 };*/
-}
+sf::Vector2f Game::getCamOffset() { return m_CamOffset; }
 
 void Game::setCamOffset(sf::Vector2f const& ofs) { m_CamOffset = ofs; }
 void Game::moveCam(sf::Vector2f const& v) { m_CamOffset += v; }
@@ -81,12 +76,6 @@ void Game::doUpdate(float const elapsed)
 {
     // std::cout << "game::update\n";
 
-    sf::Vector2i camOffsetInt { static_cast<int>(m_CamOffset.x + getView()->getSize().x / 2),
-        static_cast<int>(m_CamOffset.y + getView()->getSize().y / 2) };
-
-    getView()->setCenter(
-        sf::Vector2f { static_cast<float>(camOffsetInt.x), static_cast<float>(camOffsetInt.y) });
-
     if (m_nextState != nullptr) {
         doSwitchState();
         return;
@@ -102,6 +91,12 @@ void Game::doUpdate(float const elapsed)
 
     updateShake(elapsed);
     m_state->update(elapsed);
+
+    sf::Vector2i camOffsetInt { static_cast<int>(m_CamOffset.x + getView()->getSize().x / 2),
+        static_cast<int>(m_CamOffset.y + getView()->getSize().y / 2) };
+
+    getView()->setCenter(
+        sf::Vector2f { static_cast<float>(camOffsetInt.x), static_cast<float>(camOffsetInt.y) });
     SmartObject::setCamOffset(getView()->getCenter() - getView()->getSize() * 0.5f);
 };
 
@@ -169,12 +164,12 @@ void Game::doSwitchState()
     m_state = m_nextState;
     m_nextState = nullptr;
 
+    m_CamOffset = sf::Vector2f { 0.0f, 0.0f };
     m_state->setGameInstance(getPtr());
     m_state->create();
 
     JamTemplate::InputManager::reset();
     resetShake();
-    m_CamOffset = sf::Vector2f { 0.0f, 0.0f };
 }
 
 } // namespace JamTemplate

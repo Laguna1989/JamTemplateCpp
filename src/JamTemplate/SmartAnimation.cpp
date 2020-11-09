@@ -163,7 +163,7 @@ void SmartAnimation::setShadowOffset(sf::Vector2f const& v)
     }
 }
 
-void SmartAnimation::doDrawShadow(std::shared_ptr<sf::RenderTarget> const sptr) const { }
+void SmartAnimation::doDrawShadow(std::shared_ptr<sf::RenderTarget> const /*sptr*/) const { }
 
 void SmartAnimation::doDraw(std::shared_ptr<sf::RenderTarget> const sptr) const
 {

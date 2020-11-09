@@ -1,4 +1,4 @@
-cmake_minimum_required (VERSION 3.16)
+cmake_minimum_required (VERSION 3.10)
 
 #####################################################
 ## Variables to be set depending on project
@@ -22,7 +22,7 @@ if(WIN32)
 	## so the warning level of this one is set to 4 and the global warning level is set to three
 	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /w45205 /W3 /EHsc -Ox")
 else()
-	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -O3 --std=c++1z")
+	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -O3 --std=c++17 -fpermissive")
 endif()
 
 #####################################################
@@ -31,7 +31,7 @@ endif()
 project (${PROJECTNAME})
 
 if (WIN32)
-    link_directories(${CMAKE_SOURCE_DIR}/ext/SFML-2.5.1_win/lib)
+    link_directories(${CMAKE_SOURCE_DIR}/ext/SFML-2.5.1/lib)
 endif()
 
 if (APPLE)
@@ -52,7 +52,7 @@ add_library(JamTemplate ${JAMTEMPLATEFILES})
 
 # add public includes, so they can be used by dependent targets
 target_include_directories(JamTemplate PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/src/JamTemplate)
-target_include_directories(JamTemplate SYSTEM PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/ext/SFML-2.5.1_win/include)
+target_include_directories(JamTemplate SYSTEM PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/ext/SFML-2.5.1/include)
 target_include_directories(JamTemplate SYSTEM PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/ext/box2d)
 target_include_directories(JamTemplate SYSTEM PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/ext/tileson-master/include)
 target_include_directories(JamTemplate SYSTEM PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/usr/local/Cellar/sfml/2.4.2_1/include) 
@@ -65,11 +65,13 @@ source_group(Tweens REGULAR_EXPRESSION src/JamTemplate/Tween*)
 target_link_libraries(JamTemplate optimized sfml-system )
 target_link_libraries(JamTemplate optimized sfml-window )
 target_link_libraries(JamTemplate optimized sfml-graphics )
+target_link_libraries(JamTemplate optimized sfml-audio )
 
 if (WIN32)
 	target_link_libraries(JamTemplate debug sfml-system-d )
 	target_link_libraries(JamTemplate debug sfml-window-d )
 	target_link_libraries(JamTemplate debug sfml-graphics-d )
+	target_link_libraries(JamTemplate debug sfml-audio-d )
 endif()
 
 target_link_libraries(JamTemplate Box2D)
@@ -131,6 +133,10 @@ if (ENABLE_UNITTESTS)
 	target_link_libraries(UnitTests gmock)
 	target_link_libraries(UnitTests JamTemplate)
 	
+	add_custom_command(TARGET UnitTests PRE_BUILD
+                   COMMAND ${CMAKE_COMMAND} -E copy_directory
+                       ${CMAKE_SOURCE_DIR}/assets/ ${CMAKE_CURRENT_BINARY_DIR}/assets)
+	add_test( UnitTests UnitTests )
 endif()
 
 #####################################################
@@ -146,13 +152,15 @@ add_custom_command(TARGET ${PROJECTNAME} PRE_BUILD
 ## copy sfml dlls and .clang-format around
 #####################################################
 if (WIN32)
-    configure_file(${CMAKE_SOURCE_DIR}/ext/SFML-2.5.1_win/bin/sfml-system-2.dll ${CMAKE_BINARY_DIR}/ COPYONLY)
-    configure_file(${CMAKE_SOURCE_DIR}/ext/SFML-2.5.1_win/bin/sfml-window-2.dll ${CMAKE_BINARY_DIR}/ COPYONLY)
-    configure_file(${CMAKE_SOURCE_DIR}/ext/SFML-2.5.1_win/bin/sfml-graphics-2.dll ${CMAKE_BINARY_DIR}/ COPYONLY)
+    configure_file(${CMAKE_SOURCE_DIR}/ext/SFML-2.5.1/bin/sfml-system-2.dll ${CMAKE_BINARY_DIR}/ COPYONLY)
+    configure_file(${CMAKE_SOURCE_DIR}/ext/SFML-2.5.1/bin/sfml-window-2.dll ${CMAKE_BINARY_DIR}/ COPYONLY)
+    configure_file(${CMAKE_SOURCE_DIR}/ext/SFML-2.5.1/bin/sfml-graphics-2.dll ${CMAKE_BINARY_DIR}/ COPYONLY)
+	configure_file(${CMAKE_SOURCE_DIR}/ext/SFML-2.5.1/bin/sfml-audio-2.dll ${CMAKE_BINARY_DIR}/ COPYONLY)
 	
-	configure_file(${CMAKE_SOURCE_DIR}/ext/SFML-2.5.1_win/bin/sfml-system-d-2.dll ${CMAKE_BINARY_DIR}/ COPYONLY)
-    configure_file(${CMAKE_SOURCE_DIR}/ext/SFML-2.5.1_win/bin/sfml-window-d-2.dll ${CMAKE_BINARY_DIR}/ COPYONLY)
-    configure_file(${CMAKE_SOURCE_DIR}/ext/SFML-2.5.1_win/bin/sfml-graphics-d-2.dll ${CMAKE_BINARY_DIR}/ COPYONLY)
+	configure_file(${CMAKE_SOURCE_DIR}/ext/SFML-2.5.1/bin/sfml-system-d-2.dll ${CMAKE_BINARY_DIR}/ COPYONLY)
+    configure_file(${CMAKE_SOURCE_DIR}/ext/SFML-2.5.1/bin/sfml-window-d-2.dll ${CMAKE_BINARY_DIR}/ COPYONLY)
+    configure_file(${CMAKE_SOURCE_DIR}/ext/SFML-2.5.1/bin/sfml-graphics-d-2.dll ${CMAKE_BINARY_DIR}/ COPYONLY)
+	configure_file(${CMAKE_SOURCE_DIR}/ext/SFML-2.5.1/bin/sfml-audio-d-2.dll ${CMAKE_BINARY_DIR}/ COPYONLY)
 endif()
 configure_file(${CMAKE_SOURCE_DIR}/.clang-format ${CMAKE_BINARY_DIR}/ COPYONLY)
 

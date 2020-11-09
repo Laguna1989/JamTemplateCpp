@@ -28,7 +28,7 @@ public:
                         return (agePercent < 1.0f);
                     } }
     {
-        m_totalTime = time;
+        Tween<T>::m_totalTime = time;
         m_initialValue = static_cast<float>(valueStart) / 255.0f;
         m_finalValue = static_cast<float>(valueEnd) / 255.0f;
     }

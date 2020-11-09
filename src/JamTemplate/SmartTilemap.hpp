@@ -1,6 +1,7 @@
 ﻿#ifndef JAMTEMPLATE_TILEMAP_HPP_GUARD
 #define JAMTEMPLATE_TILEMAP_HPP_GUARD
 
+#include "Rect.hpp"
 #include "SmartObject.hpp"
 #include "tileson.h"
 #include <SFML/Graphics.hpp>
@@ -42,6 +43,8 @@ public:
     void setScale(sf::Vector2f const& scale);
     const sf::Vector2f getScale() const;
 
+    const sf::Vector2i getMapSizeInTiles();
+
     void setOrigin(sf::Vector2f const& origin);
     const sf::Vector2f getOrigin() const;
 
@@ -49,8 +52,15 @@ public:
 
     void setScreenSizeHint(sf::Vector2f const& hint, std::shared_ptr<Game> ptr);
 
+    // FIXME: Not ideal because it only supports rectangles.
+    std::map<std::string, std::vector<Rect>> getObjectGroups() { return m_objectGroups; };
+    void toggleObjectGroupVisibility() { m_highlightObjectGroups = !m_highlightObjectGroups; };
+
 private:
     std::unique_ptr<tson::Map> m_map;
+    // Map from object layer name to vector of objects, all rectangular.
+    std::map<std::string, std::vector<Rect>> m_objectGroups;
+    bool m_highlightObjectGroups = false;
     mutable std::vector<std::unique_ptr<sf::Sprite>> m_tileSprites;
 
     sf::Vector2f m_position;

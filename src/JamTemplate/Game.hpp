@@ -2,6 +2,7 @@
 #define JAMTEMPLATE_GAME_HPP_INCLUDEGUARD
 
 #include "GameObject.hpp"
+#include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
 #include <memory>
 #include <string>
@@ -36,6 +37,8 @@ public:
     float getZoom() const;
 
     void shake(float t, float strength, float shakeInterval = 0.005f);
+
+    sf::Music m_music;
 
 private:
     std::shared_ptr<GameState> m_state { nullptr };

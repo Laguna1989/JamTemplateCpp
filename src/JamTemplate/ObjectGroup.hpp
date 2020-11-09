@@ -23,8 +23,11 @@ public:
 private:
     void doUpdate(const float /*elapsed*/) override
     {
-        erase(std::remove_if(begin(), end(), [](std::weak_ptr<T> wptr) { return wptr.expired(); }),
-            end());
+        std::vector<std::weak_ptr<T>>::erase(
+            std::remove_if(std::vector<std::weak_ptr<T>>::begin(),
+                std::vector<std::weak_ptr<T>>::end(),
+                [](std::weak_ptr<T> wptr) { return wptr.expired(); }),
+            std::vector<std::weak_ptr<T>>::end());
     }
 };
 

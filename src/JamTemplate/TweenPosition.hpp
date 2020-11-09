@@ -30,7 +30,7 @@ public:
                         return (agePercent < 1.0f);
                     } }
     {
-        m_totalTime = time;
+        Tween<T>::m_totalTime = time;
         m_initialValue = valueStart;
         m_finalValue = valueEnd;
     }

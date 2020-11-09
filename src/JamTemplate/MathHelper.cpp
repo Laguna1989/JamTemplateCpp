@@ -4,37 +4,32 @@
 namespace JamTemplate {
 namespace MathHelper {
 
-    float lengthSquared(sf::Vector2f const& v)
-    {
-        return v.x * v.x + v.y * v.y;
-    }
+float lengthSquared(sf::Vector2f const& v) { return v.x * v.x + v.y * v.y; }
 
-    float length(sf::Vector2f const& v)
-    {
-        return std::sqrt(lengthSquared(v));
-    }
+float length(sf::Vector2f const& v) { return std::sqrt(lengthSquared(v)); }
 
-    void normalizeMe(sf::Vector2f& v, float lowerbound)
-    {
-        float l = length(v);
-        if (l == 1) {
-            return;
-        }
-        if (l > lowerbound) {
-            v.x /= l;
-            v.y /= l;
-        }
+void normalizeMe(sf::Vector2f& v, float lowerbound)
+{
+    float l = length(v);
+    if (l == 1) {
+        return;
     }
-
-    float rad2deg(float a)
-    {
-        return a * 180.0f / 3.1415926f;
+    if (l > lowerbound) {
+        v.x /= l;
+        v.y /= l;
     }
-    float deg2rad(float a)
-    {
-        return a / 180.0f * 3.1415926f;
-    }
-
 }
+
+float rad2deg(float a) { return a * 180.0f / 3.1415926f; }
+float deg2rad(float a) { return a / 180.0f * 3.1415926f; }
+
+std::string floatToStringWithXDigits(float const number, unsigned int digits)
+{
+    std::stringstream stream;
+    stream << std::fixed << std::setprecision(digits) << number;
+    return stream.str();
+}
+
+} // namespace MathHelper
 
 } // namespace JamTemplate
