@@ -29,3 +29,19 @@ TEST_P(ConversionsTestFixture, SFMLVectorToB2Vec)
     ::sf::Vector2f const input { GetParam().first, GetParam().second };
     EXPECT_EQ(vec(input), expected);
 }
+
+TEST_P(ConversionsTestFixture, TsonVecfToSFMLVector)
+{
+    ::sf::Vector2f const expected { GetParam().first, GetParam().second };
+    tson::Vector2f const input { GetParam().first, GetParam().second };
+    EXPECT_EQ(vec(input), expected);
+}
+
+TEST_P(ConversionsTestFixture, TsonVeciToSFMLVector)
+{
+    ::sf::Vector2f const expected { static_cast<float>(static_cast<int>(GetParam().first)),
+        static_cast<float>(static_cast<int>(GetParam().second)) };
+    tson::Vector2i const input { static_cast<int>(GetParam().first),
+        static_cast<int>(GetParam().second) };
+    EXPECT_EQ(vec(input), expected);
+}
