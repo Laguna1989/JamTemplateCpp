@@ -1,5 +1,4 @@
-﻿
-#include "../JamTemplate/MathHelper.hpp"
+﻿#include "MathHelper.hpp"
 #include "gtest/gtest.h"
 
 using namespace JamTemplate::MathHelper;

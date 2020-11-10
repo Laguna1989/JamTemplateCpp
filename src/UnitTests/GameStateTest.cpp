@@ -1,7 +1,8 @@
-﻿#include "../JamTemplate/GameState.hpp"
-#include "../JamTemplate/Game.hpp"
-#include "../JamTemplate/GameObject.hpp"
+﻿#include "GameState.hpp"
+#include "Game.hpp"
+#include "GameObject.hpp"
 #include "MockObject.hpp"
+#include "MockTween.hpp"
 #include "gmock/gmock.h"
 #include "gtest/gtest.h"
 
@@ -94,4 +95,21 @@ TEST_F(GameStateTest, GameObjectList)
     // Update will clean up all killed gameobjects
     s.update(0.0f);
     EXPECT_EQ(s.getNumberOfObjects(), N / 2);
+}
+
+TEST_F(GameStateTest, CallsToTween)
+{
+    auto obj = std::make_shared<int>(5);
+    auto wp = std::weak_ptr<int> { obj };
+    auto tw
+        = std::make_shared<MockTween<int>>(wp, [](auto /*obj*/, auto /*elapsed*/) { return true; });
+    // state needs to be initialized to work
+    s.create();
+
+    // add tween
+    s.add(tw);
+
+    EXPECT_CALL(*tw, doUpdate(_));
+    // update state
+    s.update(0.1f);
 }

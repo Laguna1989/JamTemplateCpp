@@ -1,4 +1,4 @@
-﻿#include "../JamTemplate/Conversions.hpp"
+﻿#include "Conversions.hpp"
 #include "gtest/gtest.h"
 #include <limits>
 #include <utility>

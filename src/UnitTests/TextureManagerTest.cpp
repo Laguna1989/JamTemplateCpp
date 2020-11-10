@@ -1,4 +1,4 @@
-﻿#include "../JamTemplate/TextureManager.hpp"
+﻿#include "TextureManager.hpp"
 #include "gtest/gtest.h"
 #include <exception>
 

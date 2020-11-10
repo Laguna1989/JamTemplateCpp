@@ -1,5 +1,4 @@
-﻿
-#include "../JamTemplate/InputManager.hpp"
+﻿#include "InputManager.hpp"
 #include "gtest/gtest.h"
 
 using JamTemplate::InputManager;

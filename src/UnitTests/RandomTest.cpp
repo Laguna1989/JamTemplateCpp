@@ -1,4 +1,4 @@
-﻿#include "../JamTemplate/Random.hpp"
+﻿#include "Random.hpp"
 #include "gtest/gtest.h"
 #include <utility>
 

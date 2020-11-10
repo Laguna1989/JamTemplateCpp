@@ -1,5 +1,5 @@
-﻿#include "../JamTemplate/ObjectGroup.hpp"
-#include "../JamTemplate/Game.hpp"
+﻿#include "ObjectGroup.hpp"
+#include "Game.hpp"
 #include "MockObject.hpp"
 #include "gmock/gmock.h"
 #include "gtest/gtest.h"

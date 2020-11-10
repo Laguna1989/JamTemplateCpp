@@ -1,5 +1,4 @@
-﻿
-#include "Timer.hpp"
+﻿#include "Timer.hpp"
 #include "gtest/gtest.h"
 #include <limits>
 #include <utility>
