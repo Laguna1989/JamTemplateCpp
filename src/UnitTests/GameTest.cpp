@@ -43,16 +43,50 @@ TEST_F(GameTest, UpdateLogic)
     EXPECT_FALSE(g->isAlive());
 }
 
-TEST_F(GameTest, MoveCam)
+TEST_F(GameTest, SetCamPosition)
 {
     EXPECT_EQ(g->getCamOffset().x, 0);
     EXPECT_EQ(g->getCamOffset().y, 0);
 
     auto const value = 3.0f;
-    g->moveCam(sf::Vector2f { value, value });
+    sf::Vector2f const v = { value, value };
+    g->setCamOffset(v);
+    EXPECT_NEAR(g->getCamOffset().x, value, 0.001);
+    EXPECT_NEAR(g->getCamOffset().y, value, 0.001);
+
+    g->setCamOffset(sf::Vector2f { 0.0f, 0.0f });
+    EXPECT_NEAR(g->getCamOffset().x, 0.0f, 0.001);
+    EXPECT_NEAR(g->getCamOffset().y, 0.0f, 0.001);
+
+    g->setCamOffset(v);
     EXPECT_NEAR(g->getCamOffset().x, value, 0.001);
     EXPECT_NEAR(g->getCamOffset().y, value, 0.001);
 }
+
+TEST_F(GameTest, MoveCam)
+{
+    EXPECT_EQ(g->getCamOffset().x, 0);
+    EXPECT_EQ(g->getCamOffset().y, 0);
+
+    g->moveCam(sf::Vector2f { 0.0f, 0.0f });
+
+    auto const value = 3.0f;
+    sf::Vector2f const v = { value, value };
+    g->moveCam(v);
+    EXPECT_NEAR(g->getCamOffset().x, value, 0.001);
+    EXPECT_NEAR(g->getCamOffset().y, value, 0.001);
+
+    g->moveCam(v);
+    EXPECT_NEAR(g->getCamOffset().x, 2.0f * value, 0.001);
+    EXPECT_NEAR(g->getCamOffset().y, 2.0f * value, 0.001);
+
+    // move by zero does not move
+    g->moveCam(sf::Vector2f { 0.0f, 0.0f });
+    EXPECT_NEAR(g->getCamOffset().x, 2.0f * value, 0.001);
+    EXPECT_NEAR(g->getCamOffset().y, 2.0f * value, 0.001);
+}
+
+TEST_F(GameTest, DrawWithNoState) { EXPECT_NO_THROW(g->draw()); }
 
 class MockState : public JamTemplate::GameState {
 public:
@@ -73,4 +107,82 @@ TEST_F(GameTest, CallsToActiveState)
 
     EXPECT_CALL(*ms, doInternalDraw());
     g->draw();
+}
+
+TEST_F(GameTest, SwitchToNullptrStrate)
+{
+    EXPECT_THROW(g->switchState(nullptr), std::invalid_argument);
+}
+
+TEST_F(GameTest, SwitchStateTwice)
+{
+    auto ms1 = std::make_shared<MockState>();
+    auto ms2 = std::make_shared<MockState>();
+    EXPECT_CALL(*ms1, doInternalCreate());
+    g->switchState(ms1);
+
+    float expected_update_time = 0.05f;
+    EXPECT_CALL(*ms1, doInternalUpdate(expected_update_time));
+    g->update(expected_update_time);
+
+    EXPECT_CALL(*ms1, doInternalDraw());
+    g->draw();
+    EXPECT_CALL(*ms2, doInternalCreate());
+    g->switchState(ms2);
+
+    // first update is required to switch the state
+    g->update(0.0f);
+    EXPECT_CALL(*ms2, doInternalUpdate(expected_update_time));
+    // second update will actually call the new state update
+    g->update(expected_update_time);
+
+    EXPECT_CALL(*ms2, doInternalDraw());
+    g->draw();
+}
+
+TEST_F(GameTest, SetRenderTarget) { EXPECT_NO_THROW(g->setRenderTarget(g->getRenderTarget())); }
+
+TEST_F(GameTest, SetRenderTargetInvalid)
+{
+    EXPECT_THROW(g->setRenderTarget(nullptr), std::invalid_argument);
+}
+
+TEST_F(GameTest, SetRenderWindow) { EXPECT_NO_THROW(g->setRenderWindow(g->getRenderWindow())); }
+
+TEST_F(GameTest, SetRenderWindowInvalid)
+{
+    EXPECT_THROW(g->setRenderWindow(nullptr), std::invalid_argument);
+}
+
+TEST_F(GameTest, Shake)
+{
+    // mock state to avoid early return
+    auto ms = std::make_shared<MockState>();
+    EXPECT_CALL(*ms, doInternalCreate());
+    g->switchState(ms);
+
+    EXPECT_NO_THROW(g->shake(0.5f, 1.0f));
+    // update and stay inside shake
+    EXPECT_CALL(*ms, doInternalUpdate(0.3f));
+    EXPECT_NO_THROW(g->update(0.3f));
+    // update and leave shake
+    EXPECT_CALL(*ms, doInternalUpdate(0.6f));
+    EXPECT_NO_THROW(g->update(0.6f));
+}
+
+TEST_F(GameTest, SwitchStateWhileInShake)
+{
+    // mock state to avoid early return
+    auto ms1 = std::make_shared<MockState>();
+    auto ms2 = std::make_shared<MockState>();
+    EXPECT_CALL(*ms1, doInternalCreate());
+    g->switchState(ms1);
+
+    EXPECT_NO_THROW(g->shake(0.5f, 1.0f));
+    g->update(0.1f);
+    // update and stay inside shake
+
+    EXPECT_NO_THROW(g->switchState(ms2));
+    EXPECT_CALL(*ms2, doInternalCreate());
+    g->update(0.1f);
 }

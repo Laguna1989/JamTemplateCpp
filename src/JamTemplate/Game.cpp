@@ -34,8 +34,7 @@ void Game::switchState(std::shared_ptr<GameState> newState)
 {
     // std::cout << "switchstate\n";
     if (newState == nullptr) {
-        std::cerr << "cannot switch to nullptr state!" << std::endl;
-        return;
+        throw std::invalid_argument { "cannot switch to nullptr state!" };
     }
     m_nextState = newState;
     // if no state has been assigned yet, we can directly switch state here.
@@ -44,10 +43,22 @@ void Game::switchState(std::shared_ptr<GameState> newState)
     }
 }
 
-void Game::setRenderTarget(std::shared_ptr<sf::RenderTexture> rt) { m_renderTarget = rt; }
+void Game::setRenderTarget(std::shared_ptr<sf::RenderTexture> rt)
+{
+    if (rt == nullptr) {
+        throw std::invalid_argument { "cannot set nullptr rendertarget" };
+    }
+    m_renderTarget = rt;
+}
 std::shared_ptr<sf::RenderTexture> Game::getRenderTarget() { return m_renderTarget; }
 
-void Game::setRenderWindow(std::shared_ptr<sf::RenderWindow> w) { m_renderWindow = w; }
+void Game::setRenderWindow(std::shared_ptr<sf::RenderWindow> w)
+{
+    if (w == nullptr) {
+        throw std::invalid_argument { "cannot set nullptr renderwindow" };
+    }
+    m_renderWindow = w;
+}
 std::shared_ptr<sf::RenderWindow> Game::getRenderWindow() { return m_renderWindow; }
 
 void Game::setView(std::shared_ptr<sf::View> view)

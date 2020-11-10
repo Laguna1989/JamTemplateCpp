@@ -134,6 +134,10 @@ void InputManager::reset()
         m_mouseJustPressed[kvp.first] = false;
         m_mouseJustReleased[kvp.first] = false;
     }
+    m_mouseScreenX = 0.0f;
+    m_mouseScreenY = 0.0f;
+    m_mouseX = 0.0f;
+    m_mouseY = 0.0f;
 }
 
 void InputManager::setup()
