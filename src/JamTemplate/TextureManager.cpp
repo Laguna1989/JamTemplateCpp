@@ -34,12 +34,12 @@ sf::Image createGlowImage(std::vector<std::string> const& ssv)
         throw std::invalid_argument { "create glow image: vector does not contain 2 elements." };
     }
     std::size_t count { 0 };
-    long s = std::stoul(ssv.at(1), &count);
-    if (count != ssv.at(1).size()) {
+    auto const s = std::stol(ssv.at(1), &count);
+    if (count != ssv.at(1).size() || s <= 0) {
         throw std::invalid_argument { "invalid glow size" };
     }
-    long max = std::stoul(ssv.at(2), &count);
-    if (count != ssv.at(2).size()) {
+    auto const max = std::stol(ssv.at(2), &count);
+    if (count != ssv.at(2).size() || max <= 0 || max > 255) {
         throw std::invalid_argument { "invalid glowmax" };
     }
     return SpriteFunctions::makeGlowImage(static_cast<float>(s), static_cast<uint8_t>(max));
@@ -53,12 +53,12 @@ sf::Image createVignetteImage(std::vector<std::string> const& ssv)
         };
     }
     std::size_t count { 0 };
-    long w = std::stoul(ssv.at(1), &count);
-    if (count != ssv.at(1).size()) {
+    auto w = std::stol(ssv.at(1), &count);
+    if (count != ssv.at(1).size() || w <= 0) {
         throw std::invalid_argument { "invalid vignette w" };
     }
-    long h = std::stoul(ssv.at(2), &count);
-    if (count != ssv.at(2).size()) {
+    auto h = std::stol(ssv.at(2), &count);
+    if (count != ssv.at(2).size() || h <= 0) {
         throw std::invalid_argument { "invalid vignette h" };
     }
     return SpriteFunctions::makeVignetteImage(w, h);
