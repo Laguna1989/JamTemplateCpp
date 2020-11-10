@@ -386,6 +386,6 @@ ASALocalRun/
 
 build
 
-ext/SFML-2.5.1_win
+ext/SFML-2.5.1
 ext/googletest/googletest-*
 ext/tileson-master/
