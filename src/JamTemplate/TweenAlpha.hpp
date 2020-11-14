@@ -18,17 +18,18 @@ public:
 
     // Tween alpha value from valueStart to valueEnd of obj withtin time
     TweenAlpha(std::weak_ptr<T> obj, float time, sf::Uint8 valueStart, sf::Uint8 valueEnd)
-        : Tween<T> { obj, [this](auto sptr, auto agePercent) {
-                        auto col = sptr->getColor();
-                        float alpha = Lerp::linear(m_initialValue, m_finalValue, agePercent);
-                        sf::Uint8 a = static_cast<sf::Uint8>(alpha * 255.0f);
-                        col.a = a;
-                        sptr->setColor(col);
+        : Tween<T> { obj,
+            [this](auto sptr, auto agePercent) {
+                auto col = sptr->getColor();
+                float alpha = Lerp::linear(m_initialValue, m_finalValue, agePercent);
+                sf::Uint8 a = static_cast<sf::Uint8>(alpha * 255.0f);
+                col.a = a;
+                sptr->setColor(col);
 
-                        return (agePercent < 1.0f);
-                    } }
+                return (agePercent < 1.0f);
+            },
+            time }
     {
-        Tween<T>::m_totalTime = time;
         m_initialValue = static_cast<float>(valueStart) / 255.0f;
         m_finalValue = static_cast<float>(valueEnd) / 255.0f;
     }

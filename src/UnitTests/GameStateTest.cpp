@@ -101,8 +101,8 @@ TEST_F(GameStateTest, CallsToTween)
 {
     auto obj = std::make_shared<int>(5);
     auto wp = std::weak_ptr<int> { obj };
-    auto tw
-        = std::make_shared<MockTween<int>>(wp, [](auto /*obj*/, auto /*elapsed*/) { return true; });
+    auto tw = std::make_shared<MockTween<int>>(
+        wp, [](auto /*obj*/, auto /*elapsed*/) { return true; }, 1.0f);
     // state needs to be initialized to work
     s.create();
 

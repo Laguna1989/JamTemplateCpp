@@ -44,7 +44,8 @@ protected:
 
 TEST_F(TweenBaseTest, KillSetsAliveToFalse)
 {
-    tb t(m_obj, [](auto /*obj*/, auto /*agepercent*/) { return true; });
+    tb t(
+        m_obj, [](auto /*obj*/, auto /*agepercent*/) { return true; }, 1.0f);
 
     t.kill();
     EXPECT_FALSE(t.isAlive());
@@ -52,7 +53,8 @@ TEST_F(TweenBaseTest, KillSetsAliveToFalse)
 
 TEST_F(TweenBaseTest, CancelSetsAliveToFalse)
 {
-    tb t(m_obj, [](auto /*obj*/, auto /*agepercent*/) { return true; });
+    tb t(
+        m_obj, [](auto /*obj*/, auto /*agepercent*/) { return true; }, 1.0f);
 
     t.cancel();
     EXPECT_FALSE(t.isAlive());
@@ -61,7 +63,8 @@ TEST_F(TweenBaseTest, CancelSetsAliveToFalse)
 TEST_F(TweenBaseTest, FinishCallbackIsInvoked)
 {
     bool invoked { false };
-    tb t(m_obj, [](auto /*obj*/, auto /*agepercent*/) { return true; });
+    tb t(
+        m_obj, [](auto /*obj*/, auto /*agepercent*/) { return true; }, 1.0f);
     t.addCompleteCallback([&invoked]() { invoked = true; });
     t.finish();
     EXPECT_TRUE(invoked);
@@ -70,7 +73,8 @@ TEST_F(TweenBaseTest, FinishCallbackIsInvoked)
 TEST_F(TweenBaseTest, CalledRepeatedly)
 {
     int count { 0 };
-    tb t(m_obj, [](auto /*obj*/, auto /*agepercent*/) { return true; });
+    tb t(
+        m_obj, [](auto /*obj*/, auto /*agepercent*/) { return true; }, 1.0f);
     t.addCompleteCallback([&count]() { count++; });
     t.setRepeat(true);
     t.finish();
@@ -82,7 +86,8 @@ TEST_F(TweenBaseTest, CalledRepeatedly)
 
 TEST_F(TweenBaseTest, UpdateChangesAge)
 {
-    tb t(m_obj, [](auto /*obj*/, auto /*agepercent*/) { return true; });
+    tb t(
+        m_obj, [](auto /*obj*/, auto /*agepercent*/) { return true; }, 1.0f);
     float timeIncr = 0.5f;
     t.update(timeIncr);
     EXPECT_EQ(t.getAge(), timeIncr);
@@ -90,12 +95,74 @@ TEST_F(TweenBaseTest, UpdateChangesAge)
 
 TEST_F(TweenBaseTest, StartDelay)
 {
-    tb t(m_obj, [](auto /*obj*/, auto /*agepercent*/) { return true; });
-    float startDelay = 0.5f;
+    tb t(
+        m_obj, [](auto /*obj*/, auto /*agepercent*/) { return true; }, 1.0f);
+    float const startDelay = 0.5f;
     t.setStartDelay(startDelay);
     EXPECT_EQ(t.getStartDelay(), startDelay);
     t.update(startDelay);
     EXPECT_EQ(t.getAge(), 0.0f);
+}
+
+TEST_F(TweenBaseTest, SkipFrames)
+{
+    tb t(
+        m_obj, [](auto /*obj*/, auto /*agepercent*/) { return true; }, 1.0f);
+    int const skipFrames = 2;
+
+    t.setSkipFrames(skipFrames);
+    EXPECT_EQ(t.getSkipFrames(), skipFrames);
+
+    // expect first two calls to update to do nothing (regardless of update time)
+    t.update(100.0f);
+    EXPECT_EQ(t.getAge(), 0.0f);
+    t.update(1.0f);
+    EXPECT_EQ(t.getAge(), 0.0f);
+    t.update(1.0f);
+    EXPECT_EQ(t.getAge(), 1.0f);
+}
+
+TEST_F(TweenBaseTest, AgePercentConversion)
+{
+    float returnedAgePrecent { 0.0f };
+    tb t(
+        m_obj,
+        [&returnedAgePrecent](auto /*obj*/, auto agepercent) {
+            returnedAgePrecent = agepercent;
+            return true;
+        },
+        1.0f);
+
+    t.setAgePercentConversion([](float age) { return age / 2.0f; });
+    t.update(1.0f);
+    EXPECT_EQ(returnedAgePrecent, 1.0f / 2.0f);
+
+    t.setAgePercentConversion([](float /*unused*/) { return 1.2f; });
+    t.update(0.0f);
+    EXPECT_EQ(returnedAgePrecent, 1.2f);
+    t.update(9.0f);
+    EXPECT_EQ(returnedAgePrecent, 1.2f);
+    t.update(100.0f);
+    EXPECT_EQ(returnedAgePrecent, 1.2f);
+}
+
+TEST_F(TweenBaseTest, TweenCanHandleDestroyedObject)
+{
+    auto obj = std::make_shared<Object>();
+    float returnedAgePrecent { 0.0f };
+    tb t(
+        obj,
+        [&returnedAgePrecent](auto /*obj*/, auto agepercent) {
+            returnedAgePrecent = agepercent;
+            return true;
+        },
+        1.0f);
+
+    EXPECT_NO_THROW(t.update(0.25f));
+
+    // deliberately destroy object
+    obj = nullptr;
+    EXPECT_NO_THROW(t.update(0.25f));
 }
 
 TEST_F(TweenBaseTest, Alpha)

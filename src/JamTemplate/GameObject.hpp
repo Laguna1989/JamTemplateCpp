@@ -30,7 +30,10 @@ public:
         try {
             g = getGame();
         } catch (std::exception& e) {
-            std::cerr << "ERROR: Game not set on create!\n" << e.what();
+            std::cerr << e.what() << std::endl;
+            throw std::logic_error {
+                "Gameobject cannot be created without gameinstace being set."
+            };
         }
         doCreate();
     }

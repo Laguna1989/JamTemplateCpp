@@ -18,15 +18,16 @@ public:
 
     // Tween position from valueStart to valueEnd of obj withtin time
     TweenRotation(std::weak_ptr<T> obj, float time, float valueStart, float valueEnd)
-        : Tween<T> { obj, [this](auto sptr, auto agePercent) {
-                        float rot = Lerp::linear(static_cast<float>(m_initialValue),
-                            static_cast<float>(m_finalValue), agePercent);
+        : Tween<T> { obj,
+            [this](auto sptr, auto agePercent) {
+                float rot = Lerp::linear(static_cast<float>(m_initialValue),
+                    static_cast<float>(m_finalValue), agePercent);
 
-                        sptr->setRotation(rot);
-                        return (agePercent < 1.0f);
-                    } }
+                sptr->setRotation(rot);
+                return (agePercent < 1.0f);
+            },
+            time }
     {
-        Tween<T>::m_totalTime = time;
         m_initialValue = valueStart;
         m_finalValue = valueEnd;
     }

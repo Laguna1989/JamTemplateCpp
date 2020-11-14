@@ -101,10 +101,11 @@ template <class T>
 class Tween : public TweenBase {
 public:
     using Callback_type = std::function<bool(std::shared_ptr<T>, float)>;
-    Tween(std::weak_ptr<T> obj, Callback_type cb)
+    Tween(std::weak_ptr<T> obj, Callback_type cb, float totalTime)
         : m_obj { obj }
         , m_tweenCallback { cb }
     {
+        TweenBase::m_totalTime = totalTime;
     }
 
 protected:

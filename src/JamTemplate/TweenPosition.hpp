@@ -18,19 +18,20 @@ public:
 
     // Tween position from valueStart to valueEnd of obj withtin time
     TweenPosition(std::weak_ptr<T> obj, float time, sf::Vector2f valueStart, sf::Vector2f valueEnd)
-        : Tween<T> { obj, [this](auto sptr, auto agePercent) {
-                        auto pos = sptr->getPosition();
+        : Tween<T> { obj,
+            [this](auto sptr, auto agePercent) {
+                auto pos = sptr->getPosition();
 
-                        pos.x = Lerp::linear(static_cast<float>(m_initialValue.x),
-                            static_cast<float>(m_finalValue.x), agePercent);
-                        pos.y = Lerp::linear(static_cast<float>(m_initialValue.y),
-                            static_cast<float>(m_finalValue.y), agePercent);
+                pos.x = Lerp::linear(static_cast<float>(m_initialValue.x),
+                    static_cast<float>(m_finalValue.x), agePercent);
+                pos.y = Lerp::linear(static_cast<float>(m_initialValue.y),
+                    static_cast<float>(m_finalValue.y), agePercent);
 
-                        sptr->setPosition(pos);
-                        return (agePercent < 1.0f);
-                    } }
+                sptr->setPosition(pos);
+                return (agePercent < 1.0f);
+            },
+            time }
     {
-        Tween<T>::m_totalTime = time;
         m_initialValue = valueStart;
         m_finalValue = valueEnd;
     }

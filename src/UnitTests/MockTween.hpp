@@ -7,8 +7,8 @@
 template <class T>
 class MockTween : public JamTemplate::Tween<T> {
 public:
-    MockTween(std::weak_ptr<T> obj, Callback_type cb)
-        : Tween { obj, cb }
+    MockTween(std::weak_ptr<T> obj, Callback_type cb, float totalTime)
+        : Tween { obj, cb, totalTime }
     {
     }
 
