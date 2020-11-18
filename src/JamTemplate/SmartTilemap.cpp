@@ -27,7 +27,6 @@ SmartTilemap::SmartTilemap(std::filesystem::path const& path)
 
     auto const columns = tileset.getColumns();
     auto const rows = tileset.getTileCount() / columns;
-    auto const imageSize = tileset.getImageSize();
     auto const ts = tileset.getTileSize();
     auto const tilesetName = "assets/" + tileset.getImagePath().string();
     for (int j = 0; j != rows; ++j) {

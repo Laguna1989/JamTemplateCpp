@@ -30,7 +30,7 @@ public:
                 sptr->setScale(scale);
                 return (agePercent < 1.0f);
             },
-            1.0f }
+            time }
     {
         m_initialValue = valueStart;
         m_finalValue = valueEnd;
