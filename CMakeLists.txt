@@ -16,13 +16,14 @@ set (ENABLE_STRESSTEST OFF CACHE BOOL "enable stresstest")
 file(GLOB GAMEFILES src/*)
 file(GLOB_RECURSE JAMTEMPLATEFILES src/JamTemplate/*)
 
+set (CMAKE_CXX_STANDARD 17)
+
 if(WIN32)
-	set (CMAKE_CXX_STANDARD 17)
 	## nasty warning 5205 from tileson should not show up,
 	## so the warning level of this one is set to 4 and the global warning level is set to three
 	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /w45205 /W3 /EHsc -Ox")
 else()
-	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -O3 --std=c++17 -fpermissive")
+	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -O3 --std=c++17 -fpermissive -lstdc++fs")
 endif()
 
 #####################################################
