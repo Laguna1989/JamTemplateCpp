@@ -1,13 +1,11 @@
 ﻿#ifndef JAMTEMPLATE_SMARTTEXT_HPP_INCLUDEGUARD
 #define JAMTEMPLATE_SMARTTEXT_HPP_INCLUDEGUARD
 
+#include "SmartObject.hpp"
+#include <SFML/Graphics.hpp>
 #include <exception>
 #include <memory>
 #include <string>
-
-#include <SFML/Graphics.hpp>
-
-#include "SmartObject.hpp"
 
 namespace JamTemplate {
 
