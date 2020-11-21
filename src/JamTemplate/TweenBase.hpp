@@ -12,7 +12,7 @@ class TweenBase {
 public:
     using Sptr = std::shared_ptr<TweenBase>;
 
-    using CallbackType = std::function<void(void)>;
+    using OnCompleteCallbackType = std::function<void(void)>;
 
     TweenBase() = default;
     virtual ~TweenBase() = default;
@@ -50,7 +50,7 @@ public:
     void kill() { m_alive = false; }
     void setStartDelay(float delay) { m_startDelay = delay; }
     float getStartDelay() const { return m_startDelay; }
-    void addCompleteCallback(CallbackType cb) { m_completeCallbacks.push_back(cb); }
+    void addCompleteCallback(OnCompleteCallbackType cb) { m_completeCallbacks.push_back(cb); }
 
     void setSkipFrames(int skf = 1) { m_skipFrames = skf; }
     int getSkipFrames() const { return m_skipFrames; }
@@ -85,7 +85,7 @@ private:
 
     std::function<float(float)> m_agePercentConversion { nullptr };
 
-    std::vector<CallbackType> m_completeCallbacks;
+    std::vector<OnCompleteCallbackType> m_completeCallbacks;
 
     virtual void doUpdate(float elapsed) = 0;
     void handleCompleteCallbacks()
@@ -100,8 +100,8 @@ private:
 template <class T>
 class Tween : public TweenBase {
 public:
-    using Callback_type = std::function<bool(std::shared_ptr<T>, float)>;
-    Tween(std::weak_ptr<T> obj, Callback_type cb, float totalTime)
+    using OnUpdateCallbackType = std::function<bool(std::shared_ptr<T>, float)>;
+    Tween(std::weak_ptr<T> obj, OnUpdateCallbackType cb, float totalTime)
         : m_obj { obj }
         , m_tweenCallback { cb }
     {
@@ -112,8 +112,8 @@ protected:
 private:
     std::weak_ptr<T> m_obj;
 
-    // callback function. If the callback returns false, the tween shall be finished.
-    Callback_type m_tweenCallback;
+    // update callback function. If the callback returns false, the tween shall be finished.
+    OnUpdateCallbackType m_tweenCallback;
     void doUpdate(float /*elapsed*/) override
     {
         std::shared_ptr<T> sptr = nullptr;
