@@ -2,7 +2,6 @@
 #define JAMTEMPLATE_GAMESTATE_HPP_INCLUDEGUARD
 
 #include "GameObject.hpp"
-#include <SFML/Graphics.hpp>
 #include <memory>
 #include <vector>
 

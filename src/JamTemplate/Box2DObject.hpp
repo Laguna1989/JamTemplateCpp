@@ -1,13 +1,12 @@
 ﻿#ifndef JAMTEMPLATE_BOX2DOBJECT_HPP_INCLUDEGUARD
 #define JAMTEMPLATE_BOX2DOBJECT_HPP_INCLUDEGUARD
 
-#include <Box2D/Box2D.h>
-#include <SFML/Graphics.hpp>
-#include <memory>
-
 #include "Conversions.hpp"
 #include "GameObject.hpp"
 #include "SmartObject.hpp"
+#include <Box2D/Box2D.h>
+#include <SFML/Graphics.hpp>
+#include <memory>
 
 namespace JamTemplate {
 

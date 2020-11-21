@@ -1,11 +1,10 @@
 ﻿#ifndef JAMTEMPLATE_NOISE_HPP_INCLUDEGUARD
 #define JAMTEMPLATE_NOISE_HPP_INCLUDEGUARD
 
-#include <iostream>
-#include <vector>
-
 #include "Lerp.hpp"
 #include "Random.hpp"
+#include <iostream>
+#include <vector>
 
 namespace JamTemplate {
 namespace Noise {

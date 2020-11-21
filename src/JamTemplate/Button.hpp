@@ -25,7 +25,7 @@ public:
         m_background->add(buttonImageName, "over", s, { 1 }, 1);
         m_background->add(buttonImageName, "down", s, { 2 }, 1);
         m_background->play("normal");
-        m_background->setMoveWithCam(false);
+        m_background->setIgnoreCamMovement(true);
     }
     ~Button()
     {

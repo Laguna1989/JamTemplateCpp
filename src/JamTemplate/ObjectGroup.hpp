@@ -1,10 +1,10 @@
 ﻿#ifndef JAMTEMPLATE_OBJECTGROUP_HPP_INCLUDEGUARD
 #define JAMTEMPLATE_OBJECTGROUP_HPP_INCLUDEGUARD
 
+#include "GameObject.hpp"
 #include <memory>
 #include <vector>
 
-#include "GameObject.hpp"
 namespace JamTemplate {
 
 /// templated Object group for the purpose of holding specific Objects in a separate list.
