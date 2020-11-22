@@ -1,8 +1,8 @@
 ﻿#ifndef GAME_HUD_HPP_INCLUDEGUARD
 #define GAME_HUD_HPP_INCLUDEGUARD
 
-#include "JamTemplate/GameObject.hpp"
-#include "JamTemplate/SmartText.hpp"
+#include "GameObject.hpp"
+#include "SmartText.hpp"
 #include <string>
 
 class Hud : public JamTemplate::GameObject {

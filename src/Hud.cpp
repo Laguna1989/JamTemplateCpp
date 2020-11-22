@@ -1,5 +1,5 @@
 ﻿#include "Hud.hpp"
-#include "JamTemplate/Game.hpp"
+#include "Game.hpp"
 
 Hud::Hud() = default;
 

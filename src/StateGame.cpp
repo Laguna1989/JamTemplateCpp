@@ -1,10 +1,10 @@
 ﻿#include "StateGame.hpp"
+#include "Game.hpp"
 #include "GameProperties.hpp"
 #include "Hud.hpp"
-#include "JamTemplate/Game.hpp"
-#include "JamTemplate/SmartShape.hpp"
-#include "JamTemplate/SmartSprite.hpp"
-#include "JamTemplate/TweenAlpha.hpp"
+#include "SmartShape.hpp"
+#include "SmartSprite.hpp"
+#include "TweenAlpha.hpp"
 
 void StateGame::doInternalUpdate(float const elapsed) { m_overlay->update(elapsed); }
 

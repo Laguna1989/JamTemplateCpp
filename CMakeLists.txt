@@ -7,70 +7,87 @@ set (PROJECTNAME "MyAwesomeGame")
 
 set (ENABLE_UNITTESTS OFF CACHE BOOL "enable unittests")
 set (ENABLE_STRESSTEST OFF CACHE BOOL "enable stresstest")
+set (ENABLE_WEB OFF CACHE BOOL "enable web build using SDL and em++")
 
 #####################################################
 ## Other variables and compiler setup
 #####################################################
-file(GLOB GAMEFILES src/*)
-file(GLOB_RECURSE JAMTEMPLATEFILES src/JamTemplate/*)
-
 set (CMAKE_CXX_STANDARD 17)
 
-if(WIN32)
-	## nasty warning 5205 from tileson should not show up,
-	## so the warning level of this one is set to 4 and the global warning level is set to three
-	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /w45205 /W3 /EHsc -Ox")
+if(ENABLE_WEB)
+	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -O3 --std=c++17 -fpermissive -s USE_SDL=2")
 else()
-	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -O3 --std=c++17 -fpermissive -lstdc++fs")
+	if(WIN32)
+		## nasty warning 5205 from tileson should not show up,
+		## so the warning level of this one is set to 4 and the global warning level is set to three
+		set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /w45205 /W3 /EHsc -Ox")
+	else()
+		set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -O3 --std=c++17 -fpermissive -lstdc++fs")
+	endif()
 endif()
 
 #####################################################
 ## Create Project file and link directories
 #####################################################
 project (${PROJECTNAME})
+if(NOT ENABLE_WEB)
+	if (WIN32)
+		link_directories(${CMAKE_SOURCE_DIR}/ext/SFML-2.5.1/lib)
+	endif()
 
-if (WIN32)
-    link_directories(${CMAKE_SOURCE_DIR}/ext/SFML-2.5.1/lib)
-endif()
-
-if (APPLE)
-    link_directories(/usr/local/Cellar/sfml/2.4.2_1/lib/)
+	if (APPLE)
+		link_directories(/usr/local/Cellar/sfml/2.4.2_1/lib/)
+	endif()
 endif()
 
 #####################################################
 ## Setup Box2d
 #####################################################
-file(GLOB_RECURSE SRC_FILES ext/box2d/Box2D/*)
-add_library(Box2D ${SRC_FILES})
-target_include_directories(Box2D PRIVATE ext/box2d)
+file(GLOB_RECURSE BOX2DFILES ext/box2d/Box2D/*)
+add_library(Box2D ${BOX2DFILES})
+target_include_directories(Box2D SYSTEM PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/ext/box2d)
 
 #####################################################
 ## setup JamTemplate
 #####################################################
-add_library(JamTemplate ${JAMTEMPLATEFILES})
+
+file(GLOB_RECURSE JAMTEMPLATEBASEFILES ${CMAKE_CURRENT_SOURCE_DIR}/src/JamTemplate/common/*)
+if(ENABLE_WEB)
+	file(GLOB_RECURSE JAMTEMPLATEFILES ${CMAKE_CURRENT_SOURCE_DIR}/src/JamTemplate/sdl/*)
+else()
+	file(GLOB_RECURSE JAMTEMPLATEFILES ${CMAKE_CURRENT_SOURCE_DIR}/src/JamTemplate/sfml/*)
+endif()
+
+add_library(JamTemplate ${JAMTEMPLATEFILES} ${JAMTEMPLATEBASEFILES})
 
 # add public includes, so they can be used by dependent targets
-target_include_directories(JamTemplate PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/src/JamTemplate)
-target_include_directories(JamTemplate SYSTEM PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/ext/SFML-2.5.1/include)
-target_include_directories(JamTemplate SYSTEM PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/ext/box2d)
-target_include_directories(JamTemplate SYSTEM PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/ext/tileson-master/include)
-target_include_directories(JamTemplate SYSTEM PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/usr/local/Cellar/sfml/2.4.2_1/include) 
+target_include_directories(JamTemplate PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/src/JamTemplate/common)
+if(ENABLE_WEB)
+	target_include_directories(JamTemplate PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/src/JamTemplate/sdl)
+else()
+	target_include_directories(JamTemplate PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/src/JamTemplate/sfml)
+	target_include_directories(JamTemplate SYSTEM PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/ext/SFML-2.5.1/include)
+	target_include_directories(JamTemplate SYSTEM PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/ext/tileson-master/include)
+	target_include_directories(JamTemplate SYSTEM PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/usr/local/Cellar/sfml/2.4.2_1/include)
+endif()
 
-# group together similar files for a cleaner JamTemplate Project in IDEs that support this feature
-source_group(GameLoop REGULAR_EXPRESSION src/JamTemplate/Game*)
-source_group(SmartDrawables REGULAR_EXPRESSION src/JamTemplate/Smart*)
-source_group(Tweens REGULAR_EXPRESSION src/JamTemplate/Tween*)
+if(NOT ENABLE_WEB)
+	# group together similar files for a cleaner JamTemplate Project in IDEs that support this feature
+	source_group(GameLoop REGULAR_EXPRESSION src/JamTemplate/Game*)
+	source_group(SmartDrawables REGULAR_EXPRESSION src/JamTemplate/Smart*)
+	source_group(Tweens REGULAR_EXPRESSION src/JamTemplate/Tween*)
 
-target_link_libraries(JamTemplate optimized sfml-system )
-target_link_libraries(JamTemplate optimized sfml-window )
-target_link_libraries(JamTemplate optimized sfml-graphics )
-target_link_libraries(JamTemplate optimized sfml-audio )
+	target_link_libraries(JamTemplate optimized sfml-system )
+	target_link_libraries(JamTemplate optimized sfml-window )
+	target_link_libraries(JamTemplate optimized sfml-graphics )
+	target_link_libraries(JamTemplate optimized sfml-audio )
 
-if (WIN32)
-	target_link_libraries(JamTemplate debug sfml-system-d )
-	target_link_libraries(JamTemplate debug sfml-window-d )
-	target_link_libraries(JamTemplate debug sfml-graphics-d )
-	target_link_libraries(JamTemplate debug sfml-audio-d )
+	if (WIN32)
+		target_link_libraries(JamTemplate debug sfml-system-d )
+		target_link_libraries(JamTemplate debug sfml-window-d )
+		target_link_libraries(JamTemplate debug sfml-graphics-d )
+		target_link_libraries(JamTemplate debug sfml-audio-d )
+	endif()
 endif()
 
 target_link_libraries(JamTemplate Box2D)
@@ -78,7 +95,7 @@ target_link_libraries(JamTemplate Box2D)
 #####################################################
 ## setup StressTest
 #####################################################
-if (ENABLE_STRESSTEST)
+if (ENABLE_STRESSTEST AND NOT ENABLE_WEB)
 	file(GLOB_RECURSE STRESSTESTFILES src/StressTest/*)
 	
 	add_executable(StressTest ${STRESSTESTFILES})
@@ -91,7 +108,7 @@ endif()
 #####################################################
 ## setup UnitTests
 #####################################################
-if (ENABLE_UNITTESTS)
+if (ENABLE_UNITTESTS AND NOT ENABLE_WEB)
 	file(GLOB_RECURSE UNITTESTFILES src/UnitTests/*)
 	
 	# Download and unpack googletest at configure time
@@ -141,16 +158,18 @@ endif()
 #####################################################
 ## setup Game executable
 #####################################################
+file(GLOB GAMEFILES src/*)
 add_executable(${PROJECTNAME}  ${GAMEFILES})
 target_link_libraries(${PROJECTNAME} JamTemplate)
+
 add_custom_command(TARGET ${PROJECTNAME} PRE_BUILD
-                   COMMAND ${CMAKE_COMMAND} -E copy_directory
-                       ${CMAKE_SOURCE_DIR}/assets ${CMAKE_CURRENT_BINARY_DIR}/assets)
+	COMMAND ${CMAKE_COMMAND} -E copy_directory
+	${CMAKE_SOURCE_DIR}/assets ${CMAKE_CURRENT_BINARY_DIR}/assets)
 
 #####################################################
 ## copy sfml dlls and .clang-format around
 #####################################################
-if (WIN32)
+if (WIN32 AND NOT ENABLE_WEB)
     configure_file(${CMAKE_SOURCE_DIR}/ext/SFML-2.5.1/bin/sfml-system-2.dll ${CMAKE_BINARY_DIR}/ COPYONLY)
     configure_file(${CMAKE_SOURCE_DIR}/ext/SFML-2.5.1/bin/sfml-window-2.dll ${CMAKE_BINARY_DIR}/ COPYONLY)
     configure_file(${CMAKE_SOURCE_DIR}/ext/SFML-2.5.1/bin/sfml-graphics-2.dll ${CMAKE_BINARY_DIR}/ COPYONLY)
@@ -166,4 +185,3 @@ configure_file(${CMAKE_SOURCE_DIR}/.clang-format ${CMAKE_BINARY_DIR}/ COPYONLY)
 #####################################################
 ## copy assets around
 #####################################################
-#file(COPY ${CMAKE_SOURCE_DIR}/assets DESTINATION ${CMAKE_BINARY_DIR}/ )

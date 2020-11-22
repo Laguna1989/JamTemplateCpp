@@ -1,11 +1,10 @@
 ﻿#ifndef GAME_STATE_GAME_HPP_INCLUDEGUARD
 #define GAME_STATE_GAME_HPP_INCLUDEGUARD
 
+#include "GameState.hpp"
 #include <iostream>
 #include <memory>
 #include <vector>
-
-#include "JamTemplate/GameState.hpp"
 
 // fwd decls
 namespace JamTemplate {

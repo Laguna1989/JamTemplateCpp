@@ -1,7 +1,7 @@
 ﻿#ifndef GAME_STATE_MENU_HPP_INCLUDEGUARD
 #define GAME_STATE_MENU_HPP_INCLUDEGUARD
 
-#include "JamTemplate/GameState.hpp"
+#include "GameState.hpp"
 
 namespace JamTemplate {
 

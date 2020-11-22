@@ -1,7 +1,7 @@
 ﻿#include "main.hpp"
+#include "Game.hpp"
 #include "GameProperties.hpp"
-#include "JamTemplate/Game.hpp"
-#include "JamTemplate/Random.hpp"
+#include "Random.hpp"
 #include "StateMenu.hpp"
 #include <SFML/Graphics.hpp>
 
