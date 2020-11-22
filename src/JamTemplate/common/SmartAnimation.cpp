@@ -25,7 +25,7 @@ std::shared_ptr<JamTemplate::SmartSprite> getCurrentSprite(
 } // namespace
 
 void SmartAnimation::add(std::string const& fileName, std::string const& animName,
-    sf::Vector2u const& size, std::vector<unsigned int> const& frameIndices, float frameTime)
+    jt::vector2u const& size, std::vector<unsigned int> const& frameIndices, float frameTime)
 {
     if (frameIndices.empty())
         return;

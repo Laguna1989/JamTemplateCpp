@@ -25,7 +25,7 @@ public:
         float maxX = 200 - 12;
         float maxY = 150 - 12;
 
-        m_animation->add("assets/coin.png", "idle", sf::Vector2u { 16, 16 },
+        m_animation->add("assets/coin.png", "idle", jt::vector2u { 16, 16 },
             JamTemplate::MathHelper::vectorBetween(0U, 11U),
             JamTemplate::Random::getFloat(0.13f, 0.17f));
         m_animation->play("idle", JamTemplate::Random::getInt(0, 6));

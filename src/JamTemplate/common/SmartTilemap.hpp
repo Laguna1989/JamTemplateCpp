@@ -43,7 +43,7 @@ public:
     void setScale(jt::vector2 const& scale);
     const jt::vector2 getScale() const;
 
-    const sf::Vector2i getMapSizeInTiles();
+    const jt::vector2u getMapSizeInTiles();
 
     void setOrigin(jt::vector2 const& origin);
     const jt::vector2 getOrigin() const;

@@ -23,7 +23,7 @@ public:
     virtual ~SmartAnimation() = default;
 
     // add a new animation to the pool of available animations
-    void add(std::string const& fileName, std::string const& animName, sf::Vector2u const& size,
+    void add(std::string const& fileName, std::string const& animName, jt::vector2u const& size,
         std::vector<unsigned int> const& frameIndices, float frameTime);
 
     // start playing an animation from the pool.

@@ -19,7 +19,7 @@ public:
     {
         m_animation = std::make_shared<JamTemplate::SmartAnimation>();
         // m_shape->makeRect(jt::vector2(10, 10));
-        m_animation->add("assets/coin.png", "idle", sf::Vector2u { 16, 16 },
+        m_animation->add("assets/coin.png", "idle", jt::vector2u { 16, 16 },
             JamTemplate::MathHelper::vectorBetween(0U, 11U), 0.15f);
         m_animation->play("idle");
 

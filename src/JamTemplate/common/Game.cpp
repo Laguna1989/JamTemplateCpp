@@ -104,11 +104,11 @@ void Game::doUpdate(float const elapsed)
     updateShake(elapsed);
     m_state->update(elapsed);
 
-    sf::Vector2i camOffsetInt { static_cast<int>(m_CamOffset.x() + getView()->getSize().x / 2),
-        static_cast<int>(m_CamOffset.y() + getView()->getSize().y / 2) };
+    int const camOffsetix { static_cast<int>(m_CamOffset.x() + getView()->getSize().x / 2) };
+    int const camOffsetiy { static_cast<int>(m_CamOffset.y() + getView()->getSize().y / 2) };
 
     getView()->setCenter(
-        jt::vector2 { static_cast<float>(camOffsetInt.x), static_cast<float>(camOffsetInt.y) });
+        jt::vector2 { static_cast<float>(camOffsetix), static_cast<float>(camOffsetiy) });
     SmartObject::setCamOffset(getView()->getCenter() - getView()->getSize() * 0.5f);
 };
 

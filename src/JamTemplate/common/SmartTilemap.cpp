@@ -154,9 +154,10 @@ void SmartTilemap::setScreenSizeHint(jt::vector2 const& hint, std::shared_ptr<Ga
     m_gamePtr = ptr;
 }
 
-const sf::Vector2i SmartTilemap::getMapSizeInTiles()
+const jt::vector2u SmartTilemap::getMapSizeInTiles()
 {
-    return sf::Vector2i { m_map->getSize().x, m_map->getSize().y };
+    return jt::vector2u { static_cast<unsigned int>(m_map->getSize().x),
+        static_cast<unsigned int>(m_map->getSize().y) };
 }
 
 } // namespace JamTemplate

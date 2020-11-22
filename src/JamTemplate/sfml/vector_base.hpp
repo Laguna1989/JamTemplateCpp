@@ -39,6 +39,40 @@ public:
     float& y() { return m_vec.y; }
 };
 
+class vector2u final {
+public:
+    vector2u()
+        : m_vec { 0, 0 }
+    {
+    }
+    vector2u(float x, float y)
+        : m_vec { x, y }
+    {
+    }
+
+    vector2u(sf::Vector2u const& v)
+        : m_vec { v }
+    {
+    }
+
+    ~vector2u() = default;
+    vector2u(jt::vector2u const&) = default;
+    vector2u(jt::vector2u&&) = default;
+
+    jt::vector2u& operator=(jt::vector2u const&) = default;
+    jt::vector2u& operator=(jt::vector2u&&) = default;
+
+    operator sf::Vector2u() const { return m_vec; }
+
+    sf::Vector2u m_vec;
+
+    unsigned int x() const { return m_vec.x; };
+    unsigned int y() const { return m_vec.y; };
+
+    unsigned int& x() { return m_vec.x; }
+    unsigned int& y() { return m_vec.y; }
+};
+
 } // namespace jt
 
 #endif

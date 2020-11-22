@@ -108,9 +108,8 @@ private:
                 / (m_textAlign == TextAlign::CENTER ? 2.0f : 1.0f);
         jt::vector2 pos
             = m_position + getShakeOffset() + getOffset() - alignOffset + getCamOffset();
-        sf::Vector2i posi { static_cast<int>(pos.x()), static_cast<int>(pos.y()) };
 
-        m_text->setPosition(jt::vector2 { static_cast<float>(posi.x), static_cast<float>(posi.y) });
+        m_text->setPosition(jt::vector2 {pos.x, pos.y });
         m_flashText->setPosition(m_text->getPosition());
         m_flashText->setScale(m_text->getScale());
     }

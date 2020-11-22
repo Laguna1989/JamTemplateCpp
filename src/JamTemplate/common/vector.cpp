@@ -18,4 +18,19 @@ bool operator==(jt::vector2 const& a, jt::vector2 const& b)
 }
 
 bool operator!=(jt::vector2 const& a, jt::vector2 const& b) { return !(a == b); }
+
+jt::vector2u operator+(jt::vector2u const& a, jt::vector2u const& b)
+{
+    return jt::vector2u { a.x() + b.x(), a.y() + b.y() };
+}
+jt::vector2u operator-(jt::vector2u const& a, jt::vector2u const& b)
+{
+    return jt::vector2u { a.x() - b.x(), a.y() - b.y() };
+}
+bool operator==(jt::vector2u const& a, jt::vector2u const& b)
+{
+    return a.x() == b.x() && a.y() == b.y();
+}
+bool operator!=(jt::vector2u const& a, jt::vector2u const& b) { return !(a == b); }
+
 } // namespace jt

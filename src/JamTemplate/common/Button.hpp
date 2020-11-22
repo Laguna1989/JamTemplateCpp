@@ -7,19 +7,20 @@
 #include "SmartAnimation.hpp"
 #include "SmartObject.hpp"
 #include "TextureManager.hpp"
-#include "Transform.hpp"
+#include "vector.hpp"
 #include <SFML/Graphics.hpp>
 #include <functional>
 #include <memory>
+#include <string>
 
 namespace JamTemplate {
-class Button : public GameObject, public Transform {
+class Button : public GameObject {
 public:
     using Sptr = std::shared_ptr<Button>;
 
-    Button(sf::Vector2u s = sf::Vector2u { 16, 16 })
+    Button(jt::vector2u s = jt::vector2u { 16, 16 })
     {
-        std::string buttonImageName = "#b#" + std::to_string(s.x) + "#" + std::to_string(s.y);
+        std::string buttonImageName = "#b#" + std::to_string(s.x()) + "#" + std::to_string(s.y());
         m_background = std::make_shared<JamTemplate::SmartAnimation>();
         m_background->add(buttonImageName, "normal", s, { 0 }, 1);
         m_background->add(buttonImageName, "over", s, { 1 }, 1);
@@ -52,16 +53,18 @@ public:
     bool IsMouseOver()
     {
         return isOver(
-            InputManager::getMousePositionScreen().x, InputManager::getMousePositionScreen().y);
+            InputManager::getMousePositionScreen().x(), InputManager::getMousePositionScreen().y());
     }
 
     void setVisible(bool v) { m_visible = v; }
 
+    void setPosition(jt::vector2 const& v) { m_pos = v; }
+
 private:
     std::shared_ptr<SmartAnimation> m_background;
     std::shared_ptr<SmartObject> m_icon { nullptr };
-
     std::vector<std::function<void(void)>> m_callbacks;
+    jt::vector2 m_pos;
 
     bool m_visible { true };
 
@@ -74,8 +77,8 @@ private:
 
     bool isOver(float mx, float my)
     {
-        float px = m_background->getPosition().x;
-        float py = m_background->getPosition().y;
+        float px = m_background->getPosition().x();
+        float py = m_background->getPosition().y();
 
         float w = m_background->getGlobalBounds().width;
         float h = m_background->getGlobalBounds().height;
@@ -85,17 +88,17 @@ private:
     void doUpdate(float elapsed) override
     {
         m_background->update(elapsed);
-        m_background->setPosition(getPosition());
+        m_background->setPosition(m_pos);
         if (m_icon) {
-            m_icon->setPosition(getPosition());
+            m_icon->setPosition(m_pos);
             m_icon->update(elapsed);
         }
 
         // std::cout << InputManager::getMousePositionScreen().x << " " <<
         // InputManager::getMousePositionScreen().y << " " << m_background.getPosition().x << " " <<
         // m_background.getPosition().y << "\n";
-        if (isOver(InputManager::getMousePositionScreen().x,
-                InputManager::getMousePositionScreen().y)) {
+        if (isOver(InputManager::getMousePositionScreen().x(),
+                InputManager::getMousePositionScreen().y())) {
             if (InputManager::pressed(sf::Mouse::Button::Left)) {
                 m_background->play("down");
             } else {
