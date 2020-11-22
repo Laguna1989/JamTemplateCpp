@@ -1,20 +1,20 @@
 ﻿#ifndef JAMTEMPLATE_TEXTUREMANAGER_HPP_INCLUDEGUARD
 #define JAMTEMPLATE_TEXTUREMANAGER_HPP_INCLUDEGUARD
 
+#include "SplitString.hpp"
+#include "SpriteFunctions.hpp"
+#include "color.hpp"
 #include <SFML/Graphics.hpp>
 #include <assert.h>
 #include <map>
 #include <string>
 #include <vector>
 
-#include "SplitString.hpp"
-#include "SpriteFunctions.hpp"
-
 namespace JamTemplate {
 
 class TextureManager {
 public:
-    using ColorReplaceLookupType = std::vector<std::pair<sf::Color, sf::Color>>;
+    using ColorReplaceLookupType = std::vector<std::pair<jt::color, jt::color>>;
     using ColorReplaceLookupVectorType = std::vector<ColorReplaceLookupType>;
     using TextureMapType = std::map<std::string, sf::Texture>;
     TextureManager() = delete;
@@ -36,7 +36,7 @@ public:
     // should not be called frequently! Only works for textures obtained from this class (not for
     // colors of shapes or whatever) \param in and out are used for lookups if a color is used which
     // is not contained in in, the color will be unchanged
-    static void swapPalette(std::vector<sf::Color> in, std::vector<sf::Color> out)
+    static void swapPalette(std::vector<jt::color> in, std::vector<jt::color> out)
     {
         assert(in.size() == out.size());
         for (auto& kvp : m_textures) {
@@ -45,7 +45,7 @@ public:
 
             for (unsigned i = 0; i != img.getSize().x; ++i)
                 for (unsigned j = 0; j != img.getSize().x; ++j) {
-                    auto col = img.getPixel(i, j);
+                    jt::color const col = img.getPixel(i, j);
                     // for this pixel check for each color in lookup
                     for (size_t idx = 0; idx != in.size(); ++idx) {
                         if (in[idx] == col) {
@@ -63,7 +63,7 @@ public:
     static void addTexture(std::string name, sf::Texture& t) { m_textures[name] = (t); }
 
     static void addSelectiveColorReplacement(
-        int idx, std::vector<std::pair<sf::Color, sf::Color>> replace)
+        int idx, std::vector<std::pair<jt::color, jt::color>> replace)
     {
         if (m_selectiveColorReplace.size() <= idx) {
             m_selectiveColorReplace.resize(idx + 1U);

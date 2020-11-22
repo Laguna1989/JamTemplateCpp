@@ -5,6 +5,7 @@
 #include "GameState.hpp"
 #include "SmartShape.hpp"
 #include "TweenAlpha.hpp"
+#include <cstdint>
 #include <iostream>
 #include <vector>
 
@@ -25,50 +26,50 @@ private:
 
         m_background = std::make_shared<JamTemplate::SmartShape>();
         m_background->makeRect(jt::vector2(200, 150));
-        m_background->setColor(sf::Color { 255, 255, 255 });
+        m_background->setColor(jt::color { 255, 255, 255 });
 
         using JamTemplate::SmartShape;
         using JamTemplate::TweenAlpha;
 
         m_overlayR = std::make_shared<SmartShape>();
         m_overlayR->makeRect(jt::vector2 { 200, 200 });
-        m_overlayR->setColor(sf::Color { 255, 0, 0, 0 });
+        m_overlayR->setColor(jt::color { 255, 0, 0, 0 });
 
         m_overlayG = std::make_shared<SmartShape>();
         m_overlayG->makeRect(jt::vector2 { 200, 200 });
-        m_overlayG->setColor(sf::Color { 0, 255, 0, 0 });
+        m_overlayG->setColor(jt::color { 0, 255, 0, 0 });
 
         m_overlayB = std::make_shared<SmartShape>();
         m_overlayB->makeRect(jt::vector2 { 200, 200 });
-        m_overlayB->setColor(sf::Color { 0, 0, 255, 0 });
+        m_overlayB->setColor(jt::color { 0, 0, 255, 0 });
 
-        auto twRIn
-            = TweenAlpha<SmartShape>::create(m_overlayR, 1.0f, sf::Uint8 { 0 }, sf::Uint8 { 125 });
+        auto twRIn = TweenAlpha<SmartShape>::create(
+            m_overlayR, 1.0f, std::uint8_t { 0 }, std::uint8_t { 125 });
         twRIn->addCompleteCallback([this]() {
             auto twROut = TweenAlpha<SmartShape>::create(
-                m_overlayR, 1.0, sf::Uint8 { 125 }, sf::Uint8 { 0 });
+                m_overlayR, 1.0, std::uint8_t { 125 }, std::uint8_t { 0 });
             twROut->setStartDelay(1.5f);
             add(twROut);
         });
         add(twRIn);
 
-        auto twGIn
-            = TweenAlpha<SmartShape>::create(m_overlayG, 1.0f, sf::Uint8 { 0 }, sf::Uint8 { 125 });
+        auto twGIn = TweenAlpha<SmartShape>::create(
+            m_overlayG, 1.0f, std::uint8_t { 0 }, std::uint8_t { 125 });
         twGIn->setStartDelay(2.0f);
         twGIn->addCompleteCallback([this]() {
             auto twGOut = TweenAlpha<SmartShape>::create(
-                m_overlayG, 1.0, sf::Uint8 { 125 }, sf::Uint8 { 0 });
+                m_overlayG, 1.0, std::uint8_t { 125 }, std::uint8_t { 0 });
             twGOut->setStartDelay(1.5f);
             add(twGOut);
         });
         add(twGIn);
 
-        auto twBIn
-            = TweenAlpha<SmartShape>::create(m_overlayB, 1.0f, sf::Uint8 { 0 }, sf::Uint8 { 125 });
+        auto twBIn = TweenAlpha<SmartShape>::create(
+            m_overlayB, 1.0f, std::uint8_t { 0 }, std::uint8_t { 125 });
         twBIn->setStartDelay(4.0f);
         twBIn->addCompleteCallback([this]() {
             auto twBOut = TweenAlpha<SmartShape>::create(
-                m_overlayB, 1.0, sf::Uint8 { 125 }, sf::Uint8 { 0 });
+                m_overlayB, 1.0, std::uint8_t { 125 }, std::uint8_t { 0 });
             twBOut->setStartDelay(1.5f);
             add(twBOut);
         });

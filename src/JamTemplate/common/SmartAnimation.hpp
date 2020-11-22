@@ -29,8 +29,8 @@ public:
     // start playing an animation from the pool.
     void play(std::string const& animName, size_t startFrame = 0, bool restart = false);
 
-    void setColor(sf::Color const& col);
-    const sf::Color getColor() const;
+    void setColor(jt::color const& col);
+    const jt::color getColor() const;
 
     void setPosition(jt::vector2 const& pos);
     jt::vector2 const getPosition() const;
@@ -40,8 +40,8 @@ public:
     sf::FloatRect const getGlobalBounds() const;
     virtual sf::FloatRect const getLocalBounds() const;
 
-    void setFlashColor(sf::Color const& col) override;
-    sf::Color const getFlashColor() const;
+    void setFlashColor(jt::color const& col) override;
+    jt::color const getFlashColor() const;
 
     virtual void setScale(jt::vector2 const& scale) override;
     virtual jt::vector2 const getScale() const;
@@ -50,7 +50,7 @@ public:
     jt::vector2 const getOrigin() const;
 
     void setShadowActive(bool active) override;
-    void setShadowColor(sf::Color const& col) override;
+    void setShadowColor(jt::color const& col) override;
     void setShadowOffset(jt::vector2 const& v) override;
 
 private:
@@ -70,7 +70,7 @@ private:
     void doDraw(std::shared_ptr<sf::RenderTarget> const sptr) const;
     void doDrawFlash(std::shared_ptr<sf::RenderTarget> const /*sptr*/) const;
 
-    void doFlash(float t, sf::Color col = sf::Color::White) override;
+    void doFlash(float t, jt::color col = jt::colors::White) override;
 
     virtual void doUpdate(float elapsed);
 

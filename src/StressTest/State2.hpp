@@ -29,17 +29,17 @@ private:
     {
         m_sky = std::make_shared<JamTemplate::SmartShape>();
         m_sky->makeRect(jt::vector2(200, 150));
-        m_sky->setColor(sf::Color { 178, 255, 255 });
+        m_sky->setColor(jt::color { 178, 255, 255 });
 
         using JamTemplate::SmartShape;
         using JamTemplate::TweenAlpha;
 
         m_overlay = std::make_shared<SmartShape>();
         m_overlay->makeRect(jt::vector2 { 200, 200 });
-        m_overlay->setColor(sf::Color { 0, 0, 0 });
+        m_overlay->setColor(jt::color { 0, 0, 0 });
         m_overlay->update(0.0f);
-        auto tw
-            = TweenAlpha<SmartShape>::create(m_overlay, 0.5f, sf::Uint8 { 255 }, sf::Uint8 { 0 });
+        auto tw = TweenAlpha<SmartShape>::create(
+            m_overlay, 0.5f, std::uint8_t { 255 }, std::uint8_t { 0 });
         tw->addCompleteCallback([this]() { std::cout << "overlay fade in finished" << std::endl; });
         add(tw);
 

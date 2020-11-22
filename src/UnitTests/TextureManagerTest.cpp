@@ -1,4 +1,5 @@
 ﻿#include "TextureManager.hpp"
+#include "color.hpp"
 #include "gtest/gtest.h"
 #include <exception>
 
@@ -93,14 +94,14 @@ TEST_F(TextureManagerTest, ColorReplaceWithoutLookup)
 
 TEST_F(TextureManagerTest, ColorReplaceWithInvalidArgument)
 {
-    auto p = std::make_pair(sf::Color { 0, 0, 0 }, sf::Color { 255, 0, 255 });
+    auto p = std::make_pair(jt::color { 0, 0, 0 }, jt::color { 255, 0, 255 });
     TextureManager::addSelectiveColorReplacement(0, { p });
     EXPECT_THROW(TextureManager::get("#r#assets/coin.png#0#12"), std::invalid_argument);
 }
 
 TEST_F(TextureManagerTest, ColorReplaceWithInvalidIndex)
 {
-    auto p = std::make_pair(sf::Color { 0, 0, 0 }, sf::Color { 255, 0, 255 });
+    auto p = std::make_pair(jt::color { 0, 0, 0 }, jt::color { 255, 0, 255 });
     TextureManager::addSelectiveColorReplacement(0, { p });
     EXPECT_THROW(TextureManager::get("#r#assets/coin.png#4"), std::invalid_argument);
 }
@@ -113,7 +114,7 @@ TEST_F(TextureManagerTest, ColorReplaceWithEmptyChangeSet)
 
 TEST_F(TextureManagerTest, ColorReplaceWithInvalidNumber)
 {
-    auto p = std::make_pair(sf::Color { 0, 0, 0 }, sf::Color { 255, 0, 255 });
+    auto p = std::make_pair(jt::color { 0, 0, 0 }, jt::color { 255, 0, 255 });
     TextureManager::addSelectiveColorReplacement(0, { p });
     EXPECT_THROW(TextureManager::get("#r#assets/coin.png#0xFF"), std::invalid_argument);
 }
@@ -135,7 +136,7 @@ TEST_F(TextureManagerTest, ColorReplaceValid)
     ASSERT_EQ(old.a, 255);
 
     // actual check that corlor replacement is working.
-    auto p = std::make_pair(sf::Color { r, g, b }, sf::Color { 255, 0, 255 });
+    auto p = std::make_pair(jt::color { r, g, b }, jt::color { 255, 0, 255 });
     TextureManager::addSelectiveColorReplacement(0, { p });
     auto const& t = TextureManager::get("#r#assets/coin.png#0");
     auto c = t.copyToImage().getPixel(xpos, ypos);

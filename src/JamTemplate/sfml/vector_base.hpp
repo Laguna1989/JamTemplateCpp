@@ -1,7 +1,7 @@
 ﻿#ifndef VECTOR_BASE_GUARD_HPP
 #define VECTOR_BASE_GUARD_HPP
 
-#include <SFML/Graphics.hpp>
+#include <SFML/System/Vector2.hpp>
 
 namespace jt {
 

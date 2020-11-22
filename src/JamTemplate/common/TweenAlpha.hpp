@@ -3,6 +3,7 @@
 
 #include "Lerp.hpp"
 #include "TweenBase.hpp"
+#include <cstdint>
 
 namespace JamTemplate {
 
@@ -11,19 +12,19 @@ class TweenAlpha : public Tween<T> {
 public:
     // Tween alpha value from valueStart to valueEnd of obj withtin time
     static TweenBase::Sptr create(
-        std::weak_ptr<T> obj, float time, sf::Uint8 valueStart, sf::Uint8 valueEnd)
+        std::weak_ptr<T> obj, float time, std::uint8_t valueStart, std::uint8_t valueEnd)
     {
         return std::make_shared<TweenAlpha>(obj, time, valueStart, valueEnd);
     }
 
     // Tween alpha value from valueStart to valueEnd of obj withtin time
-    TweenAlpha(std::weak_ptr<T> obj, float time, sf::Uint8 valueStart, sf::Uint8 valueEnd)
+    TweenAlpha(std::weak_ptr<T> obj, float time, std::uint8_t valueStart, std::uint8_t valueEnd)
         : Tween<T> { obj,
             [this](auto sptr, auto agePercent) {
-                auto col = sptr->getColor();
+                jt::color col = sptr->getColor();
                 float alpha = Lerp::linear(m_initialValue, m_finalValue, agePercent);
-                sf::Uint8 a = static_cast<sf::Uint8>(alpha * 255.0f);
-                col.a = a;
+                std::uint8_t a = static_cast<std::uint8_t>(alpha * 255.0f);
+                col.a() = a;
                 sptr->setColor(col);
 
                 return (agePercent < 1.0f);

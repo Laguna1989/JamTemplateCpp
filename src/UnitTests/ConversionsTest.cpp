@@ -27,7 +27,7 @@ TEST_P(ConversionsTestFixture, box2dVectorToSFMLVector)
 TEST_P(ConversionsTestFixture, SFMLVectorToB2Vec)
 {
     b2Vec2 const expected { GetParam().first, GetParam().second };
-    ::sf::Vector2f const input { GetParam().first, GetParam().second };
+    jt::vector2 const input { GetParam().first, GetParam().second };
     EXPECT_TRUE(vec(input) == expected);
 }
 

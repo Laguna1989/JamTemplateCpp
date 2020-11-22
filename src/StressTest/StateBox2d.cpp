@@ -30,13 +30,13 @@ void StateBox2d::doInternalUpdate(float const elapsed)
     float v = JamTemplate::Lerp::cosine(0.0f, 1.0f, current);
     m_bar1->setCurrentValue(v);
     if (current < 0.25f) {
-        m_bar1->setFrontColor(sf::Color::Red);
+        m_bar1->setFrontColor(jt::colors::Red);
     } else {
-        m_bar1->setFrontColor(sf::Color::White);
+        m_bar1->setFrontColor(jt::colors::White);
     }
 
     m_bar2->setCurrentValue((1 - v));
-    m_bar2->setBackColor(sf::Color::Blue);
+    m_bar2->setBackColor(jt::colors::Blue);
 }
 
 void StateBox2d::doInternalDraw() const

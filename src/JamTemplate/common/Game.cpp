@@ -3,6 +3,7 @@
 #include "InputManager.hpp"
 #include "Random.hpp"
 #include "SmartObject.hpp"
+#include "color.hpp"
 #include <iostream>
 
 namespace JamTemplate {

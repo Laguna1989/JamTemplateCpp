@@ -15,8 +15,8 @@ public:
 
     SmartBar(float width, float height);
 
-    void setFrontColor(sf::Color const& col);
-    void setBackColor(sf::Color const& col);
+    void setFrontColor(jt::color const& col);
+    void setBackColor(jt::color const& col);
 
     void setCurrentValue(float position)
     {
@@ -34,8 +34,8 @@ public:
         m_valueMax = max;
     }
 
-    virtual void setColor(sf::Color const& col) override;
-    virtual const sf::Color getColor() const override;
+    virtual void setColor(jt::color const& col) override;
+    virtual const jt::color getColor() const override;
 
     virtual void setPosition(jt::vector2 const& pos) override;
     virtual const jt::vector2 getPosition() const override;
@@ -44,8 +44,8 @@ public:
     virtual sf::FloatRect const getGlobalBounds() const override;
     virtual sf::FloatRect const getLocalBounds() const override;
 
-    virtual void setFlashColor(sf::Color const& col) override;
-    virtual const sf::Color getFlashColor() const override;
+    virtual void setFlashColor(jt::color const& col) override;
+    virtual const jt::color getFlashColor() const override;
 
     virtual void setScale(jt::vector2 const& scale) override;
     virtual const jt::vector2 getScale() const override;
@@ -71,7 +71,7 @@ private:
     // things to take care of:
     //   - make sure flash object and normal object are at the same position
     virtual void doUpdate(float elapsed) override;
-    virtual void doFlash(float /*t*/, sf::Color /*col = sf::Color::White*/);
+    virtual void doFlash(float /*t*/, jt::color /*col = jt::colors::White*/);
     virtual void doRotate(float /*rot*/) override;
 };
 

@@ -30,11 +30,11 @@ public:
 
     const jt::vector2 getPosition() const override { return m_position; }
 
-    void setColor(sf::Color const& col) override { m_sprite.setColor(col); }
-    const sf::Color getColor() const override { return m_sprite.getColor(); }
+    void setColor(jt::color const& col) override { m_sprite.setColor(col); }
+    const jt::color getColor() const override { return m_sprite.getColor(); }
 
-    void setFlashColor(sf::Color const& col) override { m_flashSprite.setColor(col); }
-    const sf::Color getFlashColor() const override { return m_flashSprite.getColor(); }
+    void setFlashColor(jt::color const& col) override { m_flashSprite.setColor(col); }
+    const jt::color getFlashColor() const override { return m_flashSprite.getColor(); }
 
     virtual sf::Transform const getTransform() const override { return m_sprite.getTransform(); }
 
@@ -79,7 +79,7 @@ private:
     void doDrawShadow(std::shared_ptr<sf::RenderTarget> const sptr) const override
     {
         jt::vector2 const oldPos = m_sprite.getPosition();
-        sf::Color const oldCol = m_sprite.getColor();
+        jt::color const oldCol = m_sprite.getColor();
 
         m_sprite.setPosition(oldPos + getShadowOffset());
         m_sprite.setColor(getShadowColor());

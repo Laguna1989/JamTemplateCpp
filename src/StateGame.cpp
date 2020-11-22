@@ -5,6 +5,7 @@
 #include "SmartShape.hpp"
 #include "SmartSprite.hpp"
 #include "TweenAlpha.hpp"
+#include "color.hpp"
 
 void StateGame::doInternalUpdate(float const elapsed) { m_overlay->update(elapsed); }
 
@@ -30,10 +31,11 @@ void StateGame::doCreate()
     m_background->update(0.0f);
 
     m_overlay = std::make_shared<SmartShape>();
-    m_overlay->makeRect(sf::Vector2f { w, h });
-    m_overlay->setColor(sf::Color { 0, 0, 0 });
+    m_overlay->makeRect(jt::vector2 { w, h });
+    m_overlay->setColor(jt::color { 0, 0, 0 });
     m_overlay->update(0);
-    auto tw = TweenAlpha<SmartShape>::create(m_overlay, 0.5f, sf::Uint8 { 255 }, sf::Uint8 { 0 });
+    auto tw
+        = TweenAlpha<SmartShape>::create(m_overlay, 0.5f, std::uint8_t { 255 }, std::uint8_t { 0 });
     tw->setSkipFrames();
     add(tw);
 

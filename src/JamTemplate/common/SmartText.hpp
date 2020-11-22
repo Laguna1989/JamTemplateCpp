@@ -49,7 +49,7 @@ public:
     }
     std::string getText() const { return m_text->getString(); }
 
-    void setOutline(float thickness, sf::Color col)
+    void setOutline(float thickness, jt::color col)
     {
         m_text->setOutlineThickness(thickness);
         m_text->setOutlineColor(col);
@@ -59,11 +59,11 @@ public:
 
     const jt::vector2 getPosition() const override { return m_position; }
 
-    void setColor(const sf::Color& col) override { m_text->setFillColor(col); }
-    const sf::Color getColor() const override { return m_text->getFillColor(); }
+    void setColor(const jt::color& col) override { m_text->setFillColor(col); }
+    const jt::color getColor() const override { return m_text->getFillColor(); }
 
-    void setFlashColor(const sf::Color& col) override { m_flashText->setFillColor(col); }
-    const sf::Color getFlashColor() const override { return m_flashText->getFillColor(); }
+    void setFlashColor(const jt::color& col) override { m_flashText->setFillColor(col); }
+    const jt::color getFlashColor() const override { return m_flashText->getFillColor(); }
 
     virtual sf::Transform const getTransform() const override { return m_text->getTransform(); }
 
@@ -118,7 +118,7 @@ private:
     void doDrawShadow(std::shared_ptr<sf::RenderTarget> const sptr) const override
     {
         jt::vector2 const oldPos = m_text->getPosition();
-        sf::Color const oldCol = m_text->getFillColor();
+        jt::color const oldCol = m_text->getFillColor();
 
         m_text->setPosition(oldPos + getShadowOffset());
         m_text->setFillColor(getShadowColor());

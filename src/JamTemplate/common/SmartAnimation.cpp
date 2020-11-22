@@ -60,7 +60,7 @@ void SmartAnimation::play(std::string const& animName, size_t startFrame, bool r
     }
 }
 
-void SmartAnimation::setColor(sf::Color const& col)
+void SmartAnimation::setColor(jt::color const& col)
 {
     for (auto& kvp : m_frames) {
         for (auto& spr : kvp.second) {
@@ -69,7 +69,7 @@ void SmartAnimation::setColor(sf::Color const& col)
     }
 }
 
-sf::Color const SmartAnimation::getColor() const
+jt::color const SmartAnimation::getColor() const
 {
     return getCurrentSprite(m_frames, m_currentAnimName, m_currentIdx)->getColor();
 }
@@ -96,7 +96,7 @@ sf::FloatRect const SmartAnimation::getLocalBounds() const
     return getCurrentSprite(m_frames, m_currentAnimName, m_currentIdx)->getLocalBounds();
 }
 
-void SmartAnimation::setFlashColor(sf::Color const& col)
+void SmartAnimation::setFlashColor(jt::color const& col)
 {
     for (auto& kvp : m_frames) {
         for (auto& spr : kvp.second) {
@@ -104,7 +104,7 @@ void SmartAnimation::setFlashColor(sf::Color const& col)
         }
     }
 }
-const sf::Color SmartAnimation::getFlashColor() const
+const jt::color SmartAnimation::getFlashColor() const
 {
     return getCurrentSprite(m_frames, m_currentAnimName, m_currentIdx)->getFlashColor();
 }
@@ -144,7 +144,7 @@ void SmartAnimation::setShadowActive(bool active)
         }
     }
 }
-void SmartAnimation::setShadowColor(sf::Color const& col)
+void SmartAnimation::setShadowColor(jt::color const& col)
 {
     SmartObject::setShadowColor(col);
     for (auto& kvp : m_frames) {
@@ -178,7 +178,7 @@ void SmartAnimation::doDraw(std::shared_ptr<sf::RenderTarget> const sptr) const
 
 void SmartAnimation::doDrawFlash(std::shared_ptr<sf::RenderTarget> const /*sptr*/) const { }
 
-void SmartAnimation::doFlash(float t, sf::Color col)
+void SmartAnimation::doFlash(float t, jt::color col)
 {
     for (auto& kvp : m_frames) {
         for (auto& spr : kvp.second) {

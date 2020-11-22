@@ -1,4 +1,5 @@
 ﻿#include "Random.hpp"
+#include <stdexcept>
 #include <time.h>
 
 using namespace JamTemplate;
@@ -28,12 +29,12 @@ float Random::getFloatGauss(float mu, float sigma)
 
 bool Random::getChance(float c) { return (getFloat(0.0f, 1.0f) <= c); }
 
-sf::Color const Random::getRandomColor()
+jt::color const Random::getRandomColor()
 {
-    sf::Uint8 r = static_cast<sf::Uint8>(getInt(0, 255));
-    sf::Uint8 g = static_cast<sf::Uint8>(getInt(0, 255));
-    sf::Uint8 b = static_cast<sf::Uint8>(getInt(0, 255));
-    return sf::Color { r, g, b };
+    std::uint8_t r = static_cast<std::uint8_t>(getInt(0, 255));
+    std::uint8_t g = static_cast<std::uint8_t>(getInt(0, 255));
+    std::uint8_t b = static_cast<std::uint8_t>(getInt(0, 255));
+    return jt::color { r, g, b };
 }
 
 jt::vector2 const Random::getRandomPointin(sf::FloatRect r)

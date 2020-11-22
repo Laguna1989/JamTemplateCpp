@@ -45,7 +45,7 @@ public:
     Collision() = delete;
 
     template <class T>
-    static bool Overlaps(T const& Object, sf::Vector2f const& point)
+    static bool Overlaps(T const& Object, jt::vector2 const& point)
     {
         return (Object->getGlobalBounds().contains(point));
     }
@@ -167,7 +167,7 @@ public:
     ///// downloading the textures from the graphics card to memory -> SLOW!
     ///// You can avoid this by using the "CreateTextureAndBitmask" function
     ////////
-    // bool PixelPerfectTest(const sf::Sprite& Object1, const sf::Sprite& Object2, sf::Uint8
+    // bool PixelPerfectTest(const sf::Sprite& Object1, const sf::Sprite& Object2, std::uint8_t
     // AlphaLimit = 0);
 
     ////////

@@ -64,11 +64,11 @@ sf::Image createVignetteImage(std::vector<std::string> const& ssv)
     return SpriteFunctions::makeVignetteImage(w, h);
 }
 
-void replaceOneColor(sf::Image& img, sf::Color const& from, sf::Color const& to)
+void replaceOneColor(sf::Image& img, jt::color const& from, jt::color const& to)
 {
     for (unsigned int x = 0U; x != img.getSize().x; ++x) {
         for (unsigned int y = 0U; y != img.getSize().y; ++y) {
-            auto c = img.getPixel(x, y);
+            jt::color const c = img.getPixel(x, y);
             if (c == from) {
                 img.setPixel(x, y, to);
             }
@@ -120,7 +120,7 @@ sf::Image createFlashImage(sf::Image const& in)
     for (unsigned int i = 0; i != img.getSize().x; ++i)
         for (unsigned int j = 0; j != img.getSize().y; ++j) {
             if (img.getPixel(i, j).a != 0) {
-                img.setPixel(i, j, sf::Color(255, 255, 255));
+                img.setPixel(i, j, jt::color(255, 255, 255));
             }
         }
     return img;

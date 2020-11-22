@@ -104,9 +104,9 @@ void SmartTilemap::doDraw(std::shared_ptr<sf::RenderTarget> const sptr) const
                 if (m_highlightObjectGroups) {
                     shape.setOutlineColor(JamTemplate::Random::getRandomColor());
                 } else {
-                    shape.setOutlineColor(sf::Color::Transparent);
+                    shape.setOutlineColor(jt::colors::Transparent);
                 }
-                shape.setFillColor(sf::Color::Transparent);
+                shape.setFillColor(jt::colors::Transparent);
                 shape.setOutlineThickness(2.0f);
                 sptr->draw(shape);
             }
@@ -119,13 +119,13 @@ void SmartTilemap::doDrawShadow(std::shared_ptr<sf::RenderTarget> const sptr) co
 
 void SmartTilemap::doUpdate(float /*elapsed*/) { }
 
-void SmartTilemap::setColor(sf::Color const& col)
+void SmartTilemap::setColor(jt::color const& col)
 {
     for (auto& ts : m_tileSprites) {
         ts->setColor(col);
     }
 }
-const sf::Color SmartTilemap::getColor() const { return sf::Color::Black; }
+const jt::color SmartTilemap::getColor() const { return jt::colors::Black; }
 
 void SmartTilemap::setPosition(jt::vector2 const& pos) { m_position = pos; }
 const jt::vector2 SmartTilemap::getPosition() const { return m_position; }
@@ -134,11 +134,11 @@ sf::Transform const SmartTilemap::getTransform() const { return sf::Transform {}
 sf::FloatRect const SmartTilemap::getGlobalBounds() const { return sf::FloatRect {}; }
 sf::FloatRect const SmartTilemap::getLocalBounds() const { return sf::FloatRect {}; }
 
-void SmartTilemap::setFlashColor(sf::Color const& /*col*/)
+void SmartTilemap::setFlashColor(jt::color const& /*col*/)
 {
     throw std::logic_error { "flash not supported by SmartBar" };
 }
-const sf::Color SmartTilemap::getFlashColor() const { return sf::Color::Black; }
+const jt::color SmartTilemap::getFlashColor() const { return jt::colors::Black; }
 
 void SmartTilemap::setScale(jt::vector2 const& /*scale*/) { }
 const jt::vector2 SmartTilemap::getScale() const { return jt::vector2 {}; }

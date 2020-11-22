@@ -27,8 +27,8 @@ public:
 
     void doUpdate(float elapsed);
 
-    void setColor(sf::Color const& col);
-    const sf::Color getColor() const;
+    void setColor(jt::color const& col);
+    const jt::color getColor() const;
 
     void setPosition(jt::vector2 const& pos);
     const jt::vector2 getPosition() const;
@@ -37,8 +37,8 @@ public:
     sf::FloatRect const getGlobalBounds() const;
     sf::FloatRect const getLocalBounds() const;
 
-    void setFlashColor(sf::Color const& col);
-    const sf::Color getFlashColor() const;
+    void setFlashColor(jt::color const& col);
+    const jt::color getFlashColor() const;
 
     void setScale(jt::vector2 const& scale);
     const jt::vector2 getScale() const;

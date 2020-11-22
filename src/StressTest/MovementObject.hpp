@@ -65,7 +65,7 @@ private:
         }
 
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::B)) {
-            m_animation->flash(0.5f, sf::Color::Red);
+            m_animation->flash(0.5f, jt::colors::Red);
         }
     }
 

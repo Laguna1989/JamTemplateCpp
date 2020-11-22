@@ -2,19 +2,19 @@
 #include "TweenColor.hpp"
 #include "TweenPosition.hpp"
 #include "TweenScale.hpp"
+#include "color.hpp"
 #include "vector.hpp"
 #include "gmock/gmock.h"
 #include "gtest/gtest.h"
-#include <SFML/Graphics/Color.hpp>
 #include <limits>
 #include <utility>
 
 class Object {
 public:
-    sf::Color getColor() const { return m_col; };
-    void setColor(sf::Color const& c) { m_col = c; };
+    jt::color getColor() const { return m_col; };
+    void setColor(jt::color const& c) { m_col = c; };
 
-    std::uint8_t getAlpha() { return m_col.a; };
+    std::uint8_t getAlpha() { return m_col.a(); };
 
     jt::vector2 getPosition() const { return m_pos; };
     void setPosition(jt::vector2 const& p) { m_pos = p; };
@@ -23,7 +23,7 @@ public:
     void setScale(jt::vector2 const& p) { m_scale = p; };
 
 private:
-    sf::Color m_col { sf::Color::Black };
+    jt::color m_col { jt::colors::Black };
     jt::vector2 m_pos { 0.0f, 0.0f };
     jt::vector2 m_scale { 1.0f, 1.0f };
 };
@@ -185,10 +185,10 @@ TEST_F(TweenBaseTest, Color)
 {
     float const time { 5.0f };
 
-    ASSERT_EQ(m_obj->getColor(), sf::Color::Black);
+    ASSERT_EQ(m_obj->getColor(), jt::colors::Black);
 
-    sf::Color const start { 255, 255, 255, 255 };
-    sf::Color const end { 0, 0, 0, 255 };
+    jt::color const start { 255, 255, 255, 255 };
+    jt::color const end { 0, 0, 0, 255 };
 
     auto const twc = tc::create(m_obj, time, start, end);
     twc->update(0.0f);

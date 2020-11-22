@@ -2,8 +2,10 @@
 #define JAMTEMPLATE_GAME_HPP_INCLUDEGUARD
 
 #include "GameObject.hpp"
+#include "color.hpp"
 #include "vector.hpp"
 #include <SFML/Audio.hpp>
+#include <SFML/Graphics.hpp>
 #include <memory>
 #include <string>
 
@@ -56,7 +58,7 @@ private:
     float m_shakeIntervalMax { 0.0f };
     jt::vector2 m_shakeOffset { 0, 0 };
 
-    sf::Color m_backgroundColor { sf::Color::Black };
+    jt::color m_backgroundColor { jt::colors::Black };
 
     std::weak_ptr<Game> getPtr();
 

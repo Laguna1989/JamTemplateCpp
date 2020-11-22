@@ -24,11 +24,11 @@ public:
         m_flashShape = std::make_shared<sf::CircleShape>(radius, points);
     }
 
-    void setColor(sf::Color const& col) override { m_shape->setFillColor(col); }
-    const sf::Color getColor() const override { return m_shape->getFillColor(); }
+    void setColor(jt::color const& col) override { m_shape->setFillColor(col); }
+    const jt::color getColor() const override { return m_shape->getFillColor(); }
 
-    void setFlashColor(sf::Color const& col) override { m_flashShape->setFillColor(col); }
-    const sf::Color getFlashColor() const override { return m_flashShape->getFillColor(); }
+    void setFlashColor(jt::color const& col) override { m_flashShape->setFillColor(col); }
+    const jt::color getFlashColor() const override { return m_flashShape->getFillColor(); }
 
     void setPosition(jt::vector2 const& pos) override { m_position = pos; }
     const jt::vector2 getPosition() const override { return m_position; }
@@ -68,7 +68,7 @@ private:
     void doDrawShadow(std::shared_ptr<sf::RenderTarget> const sptr) const override
     {
         jt::vector2 const oldPos = m_shape->getPosition();
-        sf::Color const oldCol = m_shape->getFillColor();
+        jt::color const oldCol = m_shape->getFillColor();
 
         m_shape->setPosition(oldPos + getShadowOffset());
         m_shape->setFillColor(getShadowColor());
