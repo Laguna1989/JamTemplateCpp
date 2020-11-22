@@ -62,12 +62,12 @@ add_library(JamTemplate ${JAMTEMPLATEFILES} ${JAMTEMPLATEBASEFILES})
 
 # add public includes, so they can be used by dependent targets
 target_include_directories(JamTemplate PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/src/JamTemplate/common)
+target_include_directories(JamTemplate SYSTEM PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/ext/tileson-master/include)
 if(ENABLE_WEB)
 	target_include_directories(JamTemplate PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/src/JamTemplate/sdl)
 else()
 	target_include_directories(JamTemplate PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/src/JamTemplate/sfml)
 	target_include_directories(JamTemplate SYSTEM PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/ext/SFML-2.5.1/include)
-	target_include_directories(JamTemplate SYSTEM PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/ext/tileson-master/include)
 	target_include_directories(JamTemplate SYSTEM PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/usr/local/Cellar/sfml/2.4.2_1/include)
 endif()
 
@@ -108,7 +108,7 @@ endif()
 #####################################################
 ## setup UnitTests
 #####################################################
-if (ENABLE_UNITTESTS AND NOT ENABLE_WEB)
+if (ENABLE_UNITTESTS)
 	file(GLOB_RECURSE UNITTESTFILES src/UnitTests/*)
 	
 	# Download and unpack googletest at configure time
