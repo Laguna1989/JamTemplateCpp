@@ -54,7 +54,7 @@ public:
     {
     }
 
-    recti(sf::IntRect& v)
+    recti(sf::IntRect const& v)
         : m_rect { v }
     {
     }

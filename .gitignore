@@ -383,6 +383,7 @@ ASALocalRun/
 
 # End of https://www.gitignore.io/api/c++,cmake,visualstudio
 
+.vscode
 
 build
 

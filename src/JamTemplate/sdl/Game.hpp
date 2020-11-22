@@ -4,8 +4,6 @@
 #include "GameObject.hpp"
 #include "color.hpp"
 #include "vector.hpp"
-#include <SFML/Audio.hpp>
-#include <SFML/Graphics.hpp>
 #include <memory>
 #include <string>
 
@@ -22,14 +20,14 @@ public:
     // doSwitchState() which will happen at the beginning of the next update loop.
     void switchState(std::shared_ptr<GameState> newState);
 
-    void setRenderTarget(std::shared_ptr<sf::RenderTexture> rt);
-    std::shared_ptr<sf::RenderTexture> getRenderTarget();
+    // void setRenderTarget(std::shared_ptr<sf::RenderTexture> rt);
+    // std::shared_ptr<sf::RenderTexture> getRenderTarget();
 
-    void setRenderWindow(std::shared_ptr<sf::RenderWindow> w);
-    std::shared_ptr<sf::RenderWindow> getRenderWindow();
+    // void setRenderWindow(std::shared_ptr<sf::RenderWindow> w);
+    // std::shared_ptr<sf::RenderWindow> getRenderWindow();
 
-    void setView(std::shared_ptr<sf::View> view);
-    std::shared_ptr<sf::View> getView();
+    // void setView(std::shared_ptr<sf::View> view);
+    // std::shared_ptr<sf::View> getView();
 
     // cannot be const because getView is not const
     jt::vector2 getCamOffset();
@@ -40,14 +38,12 @@ public:
 
     void shake(float t, float strength, float shakeInterval = 0.005f);
 
-    sf::Music m_music;
-
 private:
     std::shared_ptr<GameState> m_state { nullptr };
     std::shared_ptr<GameState> m_nextState { nullptr };
-    std::shared_ptr<sf::RenderTexture> m_renderTarget { nullptr };
-    std::shared_ptr<sf::View> m_view { nullptr };
-    std::shared_ptr<sf::RenderWindow> m_renderWindow { nullptr };
+    // std::shared_ptr<sf::RenderTexture> m_renderTarget { nullptr };
+    // std::shared_ptr<sf::View> m_view { nullptr };
+    // std::shared_ptr<sf::RenderWindow> m_renderWindow { nullptr };
     jt::vector2 m_CamOffset { 0.0f, 0.0f };
 
     float m_zoom;

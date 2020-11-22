@@ -36,7 +36,7 @@ protected:
     void internalDraw() const;
 
     /// do not override the do* function in derived states, but override doInternal* functions
-    virtual void doUpdate(float const elapsed);
+    virtual void doUpdate(float const elapsed) override;
     virtual void doDraw() const override;
     virtual void doCreate() override;
 
