@@ -27,16 +27,15 @@ private:
 
     void doCreate() override
     {
-
         m_sky = std::make_shared<JamTemplate::SmartShape>();
-        m_sky->makeRect(sf::Vector2f(200, 150));
+        m_sky->makeRect(jt::vector2(200, 150));
         m_sky->setColor(sf::Color { 178, 255, 255 });
 
         using JamTemplate::SmartShape;
         using JamTemplate::TweenAlpha;
 
         m_overlay = std::make_shared<SmartShape>();
-        m_overlay->makeRect(sf::Vector2f { 200, 200 });
+        m_overlay->makeRect(jt::vector2 { 200, 200 });
         m_overlay->setColor(sf::Color { 0, 0, 0 });
         m_overlay->update(0.0f);
         auto tw

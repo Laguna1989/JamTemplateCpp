@@ -10,7 +10,6 @@
 #include "Random.hpp"
 #include "SmartAnimation.hpp"
 #include "SmartShape.hpp"
-#include "Transform.hpp"
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <memory>
@@ -28,8 +27,8 @@ public:
             JamTemplate::MathHelper::vectorBetween(0U, 11U),
             JamTemplate::Random::getFloat(0.13f, 0.17f));
         m_animation->play("idle", JamTemplate::Random::getInt(0, 6));
-        m_animation->setOffset(sf::Vector2f { -8, -8 });
-        m_animation->setOrigin(sf::Vector2f { 8, 8 });
+        m_animation->setOffset(jt::vector2 { -8, -8 });
+        m_animation->setOrigin(jt::vector2 { 8, 8 });
 
         b2PolygonShape dynamicBox;
         dynamicBox.SetAsBox(8, 8);

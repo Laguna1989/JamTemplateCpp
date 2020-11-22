@@ -39,17 +39,17 @@ TEST(InputManagerTest, UpdateStoresCorrectMousePosition)
     // first update will not trigger any changes, to have a small deadtime for input
     // after the game initializes or after a Gamestate switch.
     InputManager::update(mx, my, mxs, mys, 1.0f);
-    EXPECT_EQ(InputManager::getMousePositionScreen().x, 0.0f);
-    EXPECT_EQ(InputManager::getMousePositionScreen().y, 0.0f);
+    EXPECT_EQ(InputManager::getMousePositionScreen().x(), 0.0f);
+    EXPECT_EQ(InputManager::getMousePositionScreen().y(), 0.0f);
 
-    EXPECT_EQ(InputManager::getMousePositionWorld().x, 0.0f);
-    EXPECT_EQ(InputManager::getMousePositionWorld().y, 0.0f);
+    EXPECT_EQ(InputManager::getMousePositionWorld().x(), 0.0f);
+    EXPECT_EQ(InputManager::getMousePositionWorld().y(), 0.0f);
 
     // second update will actually set the values.
     InputManager::update(mx, my, mxs, mys, 1.0f);
-    EXPECT_EQ(InputManager::getMousePositionScreen().x, mxs);
-    EXPECT_EQ(InputManager::getMousePositionScreen().y, mys);
+    EXPECT_EQ(InputManager::getMousePositionScreen().x(), mxs);
+    EXPECT_EQ(InputManager::getMousePositionScreen().y(), mys);
 
-    EXPECT_EQ(InputManager::getMousePositionWorld().x, mx);
-    EXPECT_EQ(InputManager::getMousePositionWorld().y, my);
+    EXPECT_EQ(InputManager::getMousePositionWorld().x(), mx);
+    EXPECT_EQ(InputManager::getMousePositionWorld().y(), my);
 }

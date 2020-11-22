@@ -37,8 +37,8 @@ public:
     virtual void setColor(sf::Color const& col) override;
     virtual const sf::Color getColor() const override;
 
-    virtual void setPosition(sf::Vector2f const& pos) override;
-    virtual const sf::Vector2f getPosition() const override;
+    virtual void setPosition(jt::vector2 const& pos) override;
+    virtual const jt::vector2 getPosition() const override;
 
     virtual sf::Transform const getTransform() const override;
     virtual sf::FloatRect const getGlobalBounds() const override;
@@ -47,11 +47,11 @@ public:
     virtual void setFlashColor(sf::Color const& col) override;
     virtual const sf::Color getFlashColor() const override;
 
-    virtual void setScale(sf::Vector2f const& scale) override;
-    virtual const sf::Vector2f getScale() const override;
+    virtual void setScale(jt::vector2 const& scale) override;
+    virtual const jt::vector2 getScale() const override;
 
-    virtual void setOrigin(sf::Vector2f const& origin) override;
-    virtual const sf::Vector2f getOrigin() const override;
+    virtual void setOrigin(jt::vector2 const& origin) override;
+    virtual const jt::vector2 getOrigin() const override;
 
 private:
     float m_valueMax;

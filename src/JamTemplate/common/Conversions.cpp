@@ -3,15 +3,15 @@
 namespace JamTemplate {
 namespace C {
 
-sf::Vector2f vec(b2Vec2 const& v) { return sf::Vector2f { v.x, v.y }; }
+jt::vector2 vec(b2Vec2 const& v) { return jt::vector2 { v.x, v.y }; }
 
-b2Vec2 vec(sf::Vector2f const& v) { return b2Vec2 { v.x, v.y }; }
+b2Vec2 vec(jt::vector2 const& v) { return b2Vec2 { v.x(), v.y() }; }
 
-sf::Vector2f vec(tson::Vector2f const& v) { return sf::Vector2f { v.x, v.y }; }
+jt::vector2 vec(tson::Vector2f const& v) { return jt::vector2 { v.x, v.y }; }
 
-sf::Vector2f vec(tson::Vector2i const& v)
+jt::vector2 vec(tson::Vector2i const& v)
 {
-    return sf::Vector2f { static_cast<float>(v.x), static_cast<float>(v.y) };
+    return jt::vector2 { static_cast<float>(v.x), static_cast<float>(v.y) };
 }
 
 } // namespace C

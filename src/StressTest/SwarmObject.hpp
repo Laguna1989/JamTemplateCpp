@@ -8,13 +8,12 @@
 #include "Random.hpp"
 #include "SmartAnimation.hpp"
 #include "SmartShape.hpp"
-#include "Transform.hpp"
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <memory>
 #include <random>
 
-class SwarmObject : public JamTemplate::GameObject, public JamTemplate::Transform {
+class SwarmObject : public JamTemplate::GameObject {
 public:
     using Sptr = std::shared_ptr<SwarmObject>;
     SwarmObject()
@@ -30,13 +29,13 @@ public:
             JamTemplate::MathHelper::vectorBetween(0U, 11U),
             JamTemplate::Random::getFloat(0.13f, 0.17f));
         m_animation->play("idle", JamTemplate::Random::getInt(0, 6));
-        m_animation->setScale(sf::Vector2f { 0.5f, 0.5f });
+        m_animation->setScale(jt::vector2 { 0.5f, 0.5f });
 
-        setPosition(sf::Vector2f(JamTemplate::Random::getFloat(0, maxX / 2),
+        /*setPosition(jt::vector2(JamTemplate::Random::getFloat(0, maxX / 2),
             JamTemplate::Random::getFloat(0, maxY / 2)));
         float mv = 50;
         setBoundsVelocity(sf::FloatRect { -mv, -mv, 2 * mv, 2 * mv });
-        setBoundsPosition(sf::FloatRect { 0, 0, maxX, maxY });
+        setBoundsPosition(sf::FloatRect { 0, 0, maxX, maxY });*/
     }
 
     ~SwarmObject() = default;
@@ -51,8 +50,8 @@ private:
 
     void doUpdate(float const elapsed) override
     {
-        updateTransform(elapsed);
-        m_animation->setPosition(getPosition());
+        // updateTransform(elapsed);
+        // m_animation->setPosition(getPosition());
         m_animation->update(elapsed);
     }
 

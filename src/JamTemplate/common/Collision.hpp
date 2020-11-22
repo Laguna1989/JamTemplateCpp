@@ -36,6 +36,7 @@ it freely, subject to the following restrictions:
 #ifndef COLLISION_H
 #define COLLISION_H
 
+#include "vector.hpp"
 #include <SFML/Graphics.hpp>
 
 namespace JamTemplate {
@@ -75,9 +76,9 @@ public:
             Points[3] = trans.transformPoint(0.f, local.height);
         }
 
-        sf::Vector2f Points[4];
+        jt::vector2 Points[4];
 
-        void ProjectOntoAxis(const sf::Vector2f& Axis, float& Min,
+        void ProjectOntoAxis(const jt::vector2& Axis, float& Min,
             float& Max) // Project all four points of the OBB onto the given axis and return the
                         // dotproducts of the two outermost points
         {
@@ -101,12 +102,11 @@ public:
         OrientedBoundingBox<V> OBB2(Object2);
 
         // Create the four distinct axes that are perpendicular to the edges of the two rectangles
-        sf::Vector2f Axes[4] = {
-            sf::Vector2f(OBB1.Points[1].x - OBB1.Points[0].x, OBB1.Points[1].y - OBB1.Points[0].y),
-            sf::Vector2f(OBB1.Points[1].x - OBB1.Points[2].x, OBB1.Points[1].y - OBB1.Points[2].y),
-            sf::Vector2f(OBB2.Points[0].x - OBB2.Points[3].x, OBB2.Points[0].y - OBB2.Points[3].y),
-            sf::Vector2f(OBB2.Points[0].x - OBB2.Points[1].x, OBB2.Points[0].y - OBB2.Points[1].y)
-        };
+        jt::vector2 Axes[4] = { jt::vector2(OBB1.Points[1].x - OBB1.Points[0].x,
+                                    OBB1.Points[1].y - OBB1.Points[0].y),
+            jt::vector2(OBB1.Points[1].x - OBB1.Points[2].x, OBB1.Points[1].y - OBB1.Points[2].y),
+            jt::vector2(OBB2.Points[0].x - OBB2.Points[3].x, OBB2.Points[0].y - OBB2.Points[3].y),
+            jt::vector2(OBB2.Points[0].x - OBB2.Points[1].x, OBB2.Points[0].y - OBB2.Points[1].y) };
 
         for (int i = 0; i < 4; i++) // For each axis...
         {
@@ -132,12 +132,11 @@ public:
         OrientedBoundingBox<V> OBB2(obj2);
 
         // Create the four distinct axes that are perpendicular to the edges of the two rectangles
-        sf::Vector2f Axes[4] = {
-            sf::Vector2f(OBB1.Points[1].x - OBB1.Points[0].x, OBB1.Points[1].y - OBB1.Points[0].y),
-            sf::Vector2f(OBB1.Points[1].x - OBB1.Points[2].x, OBB1.Points[1].y - OBB1.Points[2].y),
-            sf::Vector2f(OBB2.Points[0].x - OBB2.Points[3].x, OBB2.Points[0].y - OBB2.Points[3].y),
-            sf::Vector2f(OBB2.Points[0].x - OBB2.Points[1].x, OBB2.Points[0].y - OBB2.Points[1].y)
-        };
+        jt::vector2 Axes[4] = { jt::vector2(OBB1.Points[1].x - OBB1.Points[0].x,
+                                    OBB1.Points[1].y - OBB1.Points[0].y),
+            jt::vector2(OBB1.Points[1].x - OBB1.Points[2].x, OBB1.Points[1].y - OBB1.Points[2].y),
+            jt::vector2(OBB2.Points[0].x - OBB2.Points[3].x, OBB2.Points[0].y - OBB2.Points[3].y),
+            jt::vector2(OBB2.Points[0].x - OBB2.Points[1].x, OBB2.Points[0].y - OBB2.Points[1].y) };
 
         for (int i = 0; i < 4; i++) // For each axis...
         {
@@ -189,12 +188,12 @@ public:
     template <class U, class V>
     static bool CircleTest(U const& Object1, V const& Object2)
     {
-        sf::Vector2f Obj1Size = GetSpriteSize(Object1);
-        sf::Vector2f Obj2Size = GetSpriteSize(Object2);
+        jt::vector2 Obj1Size = GetSpriteSize(Object1);
+        jt::vector2 Obj2Size = GetSpriteSize(Object2);
         float Radius1 = (Obj1Size.x + Obj1Size.y) / 4;
         float Radius2 = (Obj2Size.x + Obj2Size.y) / 4;
 
-        sf::Vector2f Distance = GetSpriteCenter(Object1) - GetSpriteCenter(Object2);
+        jt::vector2 Distance = GetSpriteCenter(Object1) - GetSpriteCenter(Object2);
 
         return (Distance.x * Distance.x + Distance.y * Distance.y
             <= (Radius1 + Radius2) * (Radius1 + Radius2));
@@ -203,12 +202,12 @@ public:
     template <class U, class V>
     static bool CircleTest(std::shared_ptr<U> obj1, std::shared_ptr<V> obj2)
     {
-        sf::Vector2f Obj1Size = GetSpriteSize(obj1);
-        sf::Vector2f Obj2Size = GetSpriteSize(obj2);
+        jt::vector2 Obj1Size = GetSpriteSize(obj1);
+        jt::vector2 Obj2Size = GetSpriteSize(obj2);
         float Radius1 = (Obj1Size.x + Obj1Size.y) / 4;
         float Radius2 = (Obj2Size.x + Obj2Size.y) / 4;
 
-        sf::Vector2f Distance = GetSpriteCenter(obj1) - GetSpriteCenter(obj1);
+        jt::vector2 Distance = GetSpriteCenter(obj1) - GetSpriteCenter(obj1);
 
         return (Distance.x * Distance.x + Distance.y * Distance.y
             <= (Radius1 + Radius2) * (Radius1 + Radius2));
@@ -216,22 +215,22 @@ public:
 
 private:
     template <class U>
-    static sf::Vector2f GetSpriteSize(U const& Object)
+    static jt::vector2 GetSpriteSize(U const& Object)
     {
-        return sf::Vector2f(Object.getGlobalBounds().width, Object.getGlobalBounds().height);
+        return jt::vector2(Object.getGlobalBounds().width, Object.getGlobalBounds().height);
     }
 
     template <class U>
-    static sf::Vector2f GetSpriteSize(std::shared_ptr<U> obj)
+    static jt::vector2 GetSpriteSize(std::shared_ptr<U> obj)
     {
-        return sf::Vector2f(obj->getGlobalBounds().width, obj->getGlobalBounds().height);
+        return jt::vector2(obj->getGlobalBounds().width, obj->getGlobalBounds().height);
     }
 
     template <class U>
-    static sf::Vector2f GetSpriteCenter(std::shared_ptr<U> obj)
+    static jt::vector2 GetSpriteCenter(std::shared_ptr<U> obj)
     {
         sf::FloatRect AABB = obj->getGlobalBounds();
-        return sf::Vector2f(AABB.left + AABB.width / 2.f, AABB.top + AABB.height / 2.f);
+        return jt::vector2(AABB.left + AABB.width / 2.f, AABB.top + AABB.height / 2.f);
     }
 };
 } // namespace JamTemplate

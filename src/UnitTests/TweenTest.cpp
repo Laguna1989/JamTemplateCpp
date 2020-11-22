@@ -2,10 +2,10 @@
 #include "TweenColor.hpp"
 #include "TweenPosition.hpp"
 #include "TweenScale.hpp"
+#include "vector.hpp"
 #include "gmock/gmock.h"
 #include "gtest/gtest.h"
 #include <SFML/Graphics/Color.hpp>
-#include <SFML/System/Vector2.hpp>
 #include <limits>
 #include <utility>
 
@@ -16,16 +16,16 @@ public:
 
     std::uint8_t getAlpha() { return m_col.a; };
 
-    sf::Vector2f getPosition() const { return m_pos; };
-    void setPosition(sf::Vector2f const& p) { m_pos = p; };
+    jt::vector2 getPosition() const { return m_pos; };
+    void setPosition(jt::vector2 const& p) { m_pos = p; };
 
-    sf::Vector2f getScale() const { return m_scale; };
-    void setScale(sf::Vector2f const& p) { m_scale = p; };
+    jt::vector2 getScale() const { return m_scale; };
+    void setScale(jt::vector2 const& p) { m_scale = p; };
 
 private:
     sf::Color m_col { sf::Color::Black };
-    sf::Vector2f m_pos { 0.0f, 0.0f };
-    sf::Vector2f m_scale { 1.0f, 1.0f };
+    jt::vector2 m_pos { 0.0f, 0.0f };
+    jt::vector2 m_scale { 1.0f, 1.0f };
 };
 
 using ta = JamTemplate::TweenAlpha<Object>;
@@ -201,8 +201,8 @@ TEST_F(TweenBaseTest, Position)
 {
     float const time { 5.0f };
 
-    sf::Vector2f const start { 10.0f, 10.0f };
-    sf::Vector2f const end { -15.0f, -15.0f };
+    jt::vector2 const start { 10.0f, 10.0f };
+    jt::vector2 const end { -15.0f, -15.0f };
 
     auto const twp = tp::create(m_obj, time, start, end);
     twp->update(0.0f);
@@ -215,8 +215,8 @@ TEST_F(TweenBaseTest, Scale)
 {
     float const time { 5.0f };
 
-    sf::Vector2f const start { -1.0f, -1.0f };
-    sf::Vector2f const end { 5.0f, 5.0f };
+    jt::vector2 const start { -1.0f, -1.0f };
+    jt::vector2 const end { 5.0f, 5.0f };
 
     auto const tws = ts::create(m_obj, time, start, end);
     tws->update(0.0f);

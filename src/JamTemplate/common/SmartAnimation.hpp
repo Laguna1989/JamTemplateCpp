@@ -32,8 +32,8 @@ public:
     void setColor(sf::Color const& col);
     const sf::Color getColor() const;
 
-    void setPosition(sf::Vector2f const& pos);
-    sf::Vector2f const getPosition() const;
+    void setPosition(jt::vector2 const& pos);
+    jt::vector2 const getPosition() const;
 
     sf::Transform const getTransform() const;
 
@@ -43,15 +43,15 @@ public:
     void setFlashColor(sf::Color const& col) override;
     sf::Color const getFlashColor() const;
 
-    virtual void setScale(sf::Vector2f const& scale) override;
-    virtual sf::Vector2f const getScale() const;
+    virtual void setScale(jt::vector2 const& scale) override;
+    virtual jt::vector2 const getScale() const;
 
-    void setOrigin(sf::Vector2f const& origin);
-    sf::Vector2f const getOrigin() const;
+    void setOrigin(jt::vector2 const& origin);
+    jt::vector2 const getOrigin() const;
 
     void setShadowActive(bool active) override;
     void setShadowColor(sf::Color const& col) override;
-    void setShadowOffset(sf::Vector2f const& v) override;
+    void setShadowOffset(jt::vector2 const& v) override;
 
 private:
     mutable AnimationMapType m_frames;
@@ -62,7 +62,7 @@ private:
     // which frame of the animation is currently displayed?
     size_t m_currentIdx = 0;
 
-    sf::Vector2f m_position;
+    jt::vector2 m_position;
 
     float m_frameTime = 0;
 

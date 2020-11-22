@@ -36,12 +36,12 @@ sf::Color const Random::getRandomColor()
     return sf::Color { r, g, b };
 }
 
-sf::Vector2f const Random::getRandomPointin(sf::FloatRect r)
+jt::vector2 const Random::getRandomPointin(sf::FloatRect r)
 {
     auto x = getFloat(r.left, r.left + r.width);
     auto y = getFloat(r.top, r.top + r.height);
 
-    return sf::Vector2f { x, y };
+    return jt::vector2 { x, y };
 }
 
 void Random::setSeed(unsigned int s) { m_engine.seed(s); }

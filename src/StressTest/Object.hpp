@@ -7,19 +7,18 @@
 #include "Random.hpp"
 #include "SmartAnimation.hpp"
 #include "SmartShape.hpp"
-#include "Transform.hpp"
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <memory>
 #include <random>
 
-class Object : public JamTemplate::GameObject, public JamTemplate::Transform {
+class Object : public JamTemplate::GameObject {
 public:
     using Sptr = std::shared_ptr<Object>;
     Object()
     {
         m_animation = std::make_shared<JamTemplate::SmartAnimation>();
-        // m_shape->makeRect(sf::Vector2f(10, 10));
+        // m_shape->makeRect(jt::vector2(10, 10));
         m_animation->add("assets/coin.png", "idle", sf::Vector2u { 16, 16 },
             JamTemplate::MathHelper::vectorBetween(0U, 11U), 0.15f);
         m_animation->play("idle");
@@ -32,10 +31,10 @@ public:
         float vx = JamTemplate::Random::getFloatGauss(0, 50);
         float vy = JamTemplate::Random::getFloatGauss(0, 50);
 
-        setPosition({ x, y });
-        setVelocity({ vx, vy });
-        // setAcceleration({ 0, -50 / 2 });
-        setBoundsPosition(sf::FloatRect { 0, 0, 200 - 10, 150 - 10 });
+        // setPosition({ x, y });
+        // setVelocity({ vx, vy });
+        //// setAcceleration({ 0, -50 / 2 });
+        // setBoundsPosition(sf::FloatRect { 0, 0, 200 - 10, 150 - 10 });
     }
 
     ~Object() = default;
@@ -48,8 +47,8 @@ public:
 private:
     void doUpdate(float const elapsed) override
     {
-        updateTransform(elapsed);
-        m_animation->setPosition(getPosition());
+        // updateTransform(elapsed);
+        // m_animation->setPosition(getPosition());
         m_animation->update(elapsed);
         if (getAge() > 0.9)
             kill();

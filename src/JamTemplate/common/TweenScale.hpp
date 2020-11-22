@@ -3,6 +3,7 @@
 
 #include "Lerp.hpp"
 #include "TweenBase.hpp"
+#include "vector.hpp"
 
 namespace JamTemplate {
 
@@ -11,21 +12,21 @@ class TweenScale : public Tween<T> {
 public:
     // Tween scale from valueStart to valueEnd of obj withtin time
     static TweenBase::Sptr create(
-        std::weak_ptr<T> obj, float time, sf::Vector2f valueStart, sf::Vector2f valueEnd)
+        std::weak_ptr<T> obj, float time, jt::vector2 valueStart, jt::vector2 valueEnd)
     {
         return std::make_shared<TweenScale>(obj, time, valueStart, valueEnd);
     }
 
     // Tween scale from valueStart to valueEnd of obj withtin time
-    TweenScale(std::weak_ptr<T> obj, float time, sf::Vector2f valueStart, sf::Vector2f valueEnd)
+    TweenScale(std::weak_ptr<T> obj, float time, jt::vector2 valueStart, jt::vector2 valueEnd)
         : Tween<T> { obj,
             [this](auto sptr, auto agePercent) {
                 auto scale = sptr->getScale();
 
-                scale.x = Lerp::linear(static_cast<float>(m_initialValue.x),
-                    static_cast<float>(m_finalValue.x), agePercent);
-                scale.y = Lerp::linear(static_cast<float>(m_initialValue.y),
-                    static_cast<float>(m_finalValue.y), agePercent);
+                scale.x() = Lerp::linear(static_cast<float>(m_initialValue.x()),
+                    static_cast<float>(m_finalValue.x()), agePercent);
+                scale.y() = Lerp::linear(static_cast<float>(m_initialValue.y()),
+                    static_cast<float>(m_finalValue.y()), agePercent);
 
                 sptr->setScale(scale);
                 return (agePercent < 1.0f);
@@ -37,8 +38,8 @@ public:
     }
 
 private:
-    sf::Vector2f m_initialValue {};
-    sf::Vector2f m_finalValue {};
+    jt::vector2 m_initialValue {};
+    jt::vector2 m_finalValue {};
 };
 
 } // namespace JamTemplate

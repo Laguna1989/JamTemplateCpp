@@ -4,19 +4,19 @@
 namespace JamTemplate {
 namespace MathHelper {
 
-float lengthSquared(sf::Vector2f const& v) { return v.x * v.x + v.y * v.y; }
+float lengthSquared(jt::vector2 const& v) { return v.x() * v.x() + v.y() * v.y(); }
 
-float length(sf::Vector2f const& v) { return std::sqrt(lengthSquared(v)); }
+float length(jt::vector2 const& v) { return std::sqrt(lengthSquared(v)); }
 
-void normalizeMe(sf::Vector2f& v, float lowerbound)
+void normalizeMe(jt::vector2& v, float lowerbound)
 {
     float l = length(v);
     if (l == 1) {
         return;
     }
     if (l > lowerbound) {
-        v.x /= l;
-        v.y /= l;
+        v.x() /= l;
+        v.y() /= l;
     }
 }
 

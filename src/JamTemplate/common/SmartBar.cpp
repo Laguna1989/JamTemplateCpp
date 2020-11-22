@@ -9,12 +9,12 @@ SmartBar::SmartBar(float width, float height)
     , m_width { width }
     , m_height { height }
 {
-    m_shapeFull = sf::RectangleShape(sf::Vector2f { m_width, m_height });
+    m_shapeFull = sf::RectangleShape(jt::vector2 { m_width, m_height });
     m_shapeFull.setFillColor(sf::Color { 150, 150, 150 });
 
-    m_shapeProgress = sf::RectangleShape(sf::Vector2f { m_width, m_height * 0.9f });
+    m_shapeProgress = sf::RectangleShape(jt::vector2 { m_width, m_height * 0.9f });
     m_shapeProgress.setFillColor(sf::Color { 255, 255, 255 });
-    m_shapeProgress.setPosition(sf::Vector2f { 0, m_height * 0.1f });
+    m_shapeProgress.setPosition(jt::vector2 { 0, m_height * 0.1f });
 }
 
 void SmartBar::setFrontColor(sf::Color const& col) { m_shapeProgress.setFillColor(col); }
@@ -29,7 +29,7 @@ void SmartBar::doDraw(std::shared_ptr<sf::RenderTarget> const sptr) const
 void SmartBar::doDrawFlash(std::shared_ptr<sf::RenderTarget> const sptr) const { }
 void SmartBar::doDrawShadow(std::shared_ptr<sf::RenderTarget> const sptr) const
 {
-    sf::Vector2f const oldPos = m_shapeFull.getPosition();
+    jt::vector2 const oldPos = m_shapeFull.getPosition();
     sf::Color const oldCol = m_shapeFull.getFillColor();
 
     m_shapeFull.setPosition(oldPos + getShadowOffset());
@@ -52,13 +52,13 @@ void SmartBar::doRotate(float /*rot*/) { }
 void SmartBar::setColor(sf::Color const& col) { setFrontColor(col); }
 const sf::Color SmartBar::getColor() const { return m_shapeProgress.getFillColor(); }
 
-void SmartBar::setPosition(sf::Vector2f const& pos)
+void SmartBar::setPosition(jt::vector2 const& pos)
 {
     m_shapeFull.setPosition(pos);
-    m_shapeProgress.setPosition(pos + sf::Vector2f { 0, m_height * 0.1f });
+    m_shapeProgress.setPosition(pos + jt::vector2 { 0, m_height * 0.1f });
 }
 
-const sf::Vector2f SmartBar::getPosition() const { return m_shapeFull.getPosition(); }
+const jt::vector2 SmartBar::getPosition() const { return m_shapeFull.getPosition(); }
 
 sf::Transform const SmartBar::getTransform() const { return m_shapeFull.getTransform(); }
 sf::FloatRect const SmartBar::getGlobalBounds() const { return m_shapeFull.getGlobalBounds(); }
@@ -70,14 +70,14 @@ void SmartBar::setFlashColor(sf::Color const& /*col*/)
 }
 const sf::Color SmartBar::getFlashColor() const { return sf::Color::White; }
 
-void SmartBar::setScale(sf::Vector2f const& scale)
+void SmartBar::setScale(jt::vector2 const& scale)
 {
     m_shapeFull.setScale(scale);
     m_shapeProgress.setScale(scale);
 }
-const sf::Vector2f SmartBar::getScale() const { return m_shapeFull.getScale(); }
+const jt::vector2 SmartBar::getScale() const { return m_shapeFull.getScale(); }
 
-void SmartBar::setOrigin(sf::Vector2f const& origin) { m_shapeFull.setOrigin(origin); }
-const sf::Vector2f SmartBar::getOrigin() const { return m_shapeFull.getOrigin(); }
+void SmartBar::setOrigin(jt::vector2 const& origin) { m_shapeFull.setOrigin(origin); }
+const jt::vector2 SmartBar::getOrigin() const { return m_shapeFull.getOrigin(); }
 
 } // namespace JamTemplate

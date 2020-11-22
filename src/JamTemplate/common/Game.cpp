@@ -69,10 +69,10 @@ void Game::setView(std::shared_ptr<sf::View> view)
 }
 std::shared_ptr<sf::View> Game::getView() { return m_view; }
 
-sf::Vector2f Game::getCamOffset() { return m_CamOffset; }
+jt::vector2 Game::getCamOffset() { return m_CamOffset; }
 
-void Game::setCamOffset(sf::Vector2f const& ofs) { m_CamOffset = ofs; }
-void Game::moveCam(sf::Vector2f const& v) { m_CamOffset += v; }
+void Game::setCamOffset(jt::vector2 const& ofs) { m_CamOffset = ofs; }
+void Game::moveCam(jt::vector2 const& v) { m_CamOffset = m_CamOffset + v; }
 
 void Game::shake(float t, float strength, float shakeInterval)
 {
@@ -94,20 +94,20 @@ void Game::doUpdate(float const elapsed)
     if (m_state == nullptr)
         return;
 
-    sf::Vector2f mpf = getRenderWindow()->mapPixelToCoords(
+    jt::vector2 mpf = getRenderWindow()->mapPixelToCoords(
         sf::Mouse::getPosition(*getRenderWindow()), *getView());
-    sf::Vector2f mpfs
+    jt::vector2 mpfs
         = getRenderWindow()->mapPixelToCoords(sf::Mouse::getPosition(*getRenderWindow())) / m_zoom;
-    InputManager::update(mpf.x, mpf.y, mpfs.x, mpfs.y, elapsed);
+    InputManager::update(mpf.x(), mpf.y(), mpfs.x(), mpfs.y(), elapsed);
 
     updateShake(elapsed);
     m_state->update(elapsed);
 
-    sf::Vector2i camOffsetInt { static_cast<int>(m_CamOffset.x + getView()->getSize().x / 2),
-        static_cast<int>(m_CamOffset.y + getView()->getSize().y / 2) };
+    sf::Vector2i camOffsetInt { static_cast<int>(m_CamOffset.x() + getView()->getSize().x / 2),
+        static_cast<int>(m_CamOffset.y() + getView()->getSize().y / 2) };
 
     getView()->setCenter(
-        sf::Vector2f { static_cast<float>(camOffsetInt.x), static_cast<float>(camOffsetInt.y) });
+        jt::vector2 { static_cast<float>(camOffsetInt.x), static_cast<float>(camOffsetInt.y) });
     SmartObject::setCamOffset(getView()->getCenter() - getView()->getSize() * 0.5f);
 };
 
@@ -126,7 +126,7 @@ void Game::doDraw() const
     sf::Sprite spr(texture);
     // Note: RenderTexture has a bug and is displayed upside down.
     // This is corrected by the following two lines
-    spr.setScale(sf::Vector2f(m_zoom, -m_zoom));
+    spr.setScale(jt::vector2(m_zoom, -m_zoom));
     spr.setPosition(0.0f, static_cast<float>(m_renderWindow->getSize().y));
 
     // draw the sprite
@@ -138,8 +138,8 @@ void Game::doDraw() const
 
 void Game::updateShake(float elapsed)
 {
-    if (m_shakeOffset.x != 0 || m_shakeOffset.y != 0) {
-        getView()->move(-m_shakeOffset.x, -m_shakeOffset.y);
+    if (m_shakeOffset.x() != 0 || m_shakeOffset.y() != 0) {
+        getView()->move(-m_shakeOffset.x(), -m_shakeOffset.y());
     }
 
     if (m_shakeTimer > 0) {
@@ -148,24 +148,24 @@ void Game::updateShake(float elapsed)
         m_shakeInterval -= elapsed;
         if (m_shakeInterval < 0) {
             m_shakeInterval = m_shakeIntervalMax;
-            m_shakeOffset.x = JamTemplate::Random::getFloat(-m_shakeStrength, m_shakeStrength);
-            m_shakeOffset.y = JamTemplate::Random::getFloat(-m_shakeStrength, m_shakeStrength);
+            m_shakeOffset.x() = JamTemplate::Random::getFloat(-m_shakeStrength, m_shakeStrength);
+            m_shakeOffset.y() = JamTemplate::Random::getFloat(-m_shakeStrength, m_shakeStrength);
         }
     } else {
-        m_shakeOffset.x = m_shakeOffset.y = 0;
+        m_shakeOffset.x() = m_shakeOffset.y() = 0;
     }
 
     auto v = getView();
-    v->move(m_shakeOffset.x, m_shakeOffset.y);
+    v->move(m_shakeOffset.x(), m_shakeOffset.y());
     setView(v);
 }
 
 void Game::resetShake()
 {
-    if (m_shakeOffset.x != 0 || m_shakeOffset.y != 0) {
-        getView()->move(-m_shakeOffset.x, -m_shakeOffset.y);
+    if (m_shakeOffset.x() != 0 || m_shakeOffset.y() != 0) {
+        getView()->move(-m_shakeOffset.x(), -m_shakeOffset.y());
     }
-    m_shakeOffset.x = m_shakeOffset.y = 0;
+    m_shakeOffset.x() = m_shakeOffset.y() = 0;
     m_shakeTimer = -1;
     m_shakeStrength = 0;
 }
@@ -175,7 +175,7 @@ void Game::doSwitchState()
     m_state = m_nextState;
     m_nextState = nullptr;
 
-    m_CamOffset = sf::Vector2f { 0.0f, 0.0f };
+    m_CamOffset = jt::vector2 { 0.0f, 0.0f };
     m_state->setGameInstance(getPtr());
     m_state->create();
 

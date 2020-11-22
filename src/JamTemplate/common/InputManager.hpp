@@ -1,6 +1,7 @@
 ﻿#ifndef JAMTEMPLATE_INPUTMANAGER_HPP_INCLUDEGUARD
 #define JAMTEMPLATE_INPUTMANAGER_HPP_INCLUDEGUARD
 
+#include "vector.hpp"
 #include <SFML/Window.hpp>
 #include <iostream>
 #include <map>
@@ -20,8 +21,8 @@ public:
 
     static void update(float mx, float my, float mxs, float mys, float elapsed);
 
-    static sf::Vector2f getMousePositionWorld();
-    static sf::Vector2f getMousePositionScreen();
+    static jt::vector2 getMousePositionWorld();
+    static jt::vector2 getMousePositionScreen();
 
     static bool pressed(sf::Keyboard::Key k);
     static bool pressed(sf::Mouse::Button b);

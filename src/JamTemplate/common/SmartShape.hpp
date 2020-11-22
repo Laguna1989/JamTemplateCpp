@@ -13,7 +13,7 @@ class SmartShape : public SmartObject {
 public:
     using Sptr = std::shared_ptr<SmartShape>;
 
-    void makeRect(sf::Vector2f size)
+    void makeRect(jt::vector2 size)
     {
         m_shape = std::make_shared<sf::RectangleShape>(size);
         m_flashShape = std::make_shared<sf::RectangleShape>(size);
@@ -30,8 +30,8 @@ public:
     void setFlashColor(sf::Color const& col) override { m_flashShape->setFillColor(col); }
     const sf::Color getFlashColor() const override { return m_flashShape->getFillColor(); }
 
-    void setPosition(sf::Vector2f const& pos) override { m_position = pos; }
-    const sf::Vector2f getPosition() const override { return m_position; }
+    void setPosition(jt::vector2 const& pos) override { m_position = pos; }
+    const jt::vector2 getPosition() const override { return m_position; }
 
     sf::Transform const getTransform() const override { return m_shape->getTransform(); }
     sf::FloatRect const getGlobalBounds() const override { return m_shape->getGlobalBounds(); }
@@ -39,21 +39,21 @@ public:
 
     std::shared_ptr<sf::Shape> getShape() { return m_shape; }
 
-    void setScale(sf::Vector2f const& scale) { m_shape->setScale(scale); }
-    const sf::Vector2f getScale() const { return m_shape->getScale(); }
+    void setScale(jt::vector2 const& scale) { m_shape->setScale(scale); }
+    const jt::vector2 getScale() const { return m_shape->getScale(); }
 
-    void setOrigin(sf::Vector2f const& origin)
+    void setOrigin(jt::vector2 const& origin)
     {
         m_shape->setOrigin(origin);
         m_flashShape->setOrigin(origin);
     }
-    const sf::Vector2f getOrigin() const { return m_shape->getOrigin(); }
+    const jt::vector2 getOrigin() const { return m_shape->getOrigin(); }
 
 private:
     mutable std::shared_ptr<sf::Shape> m_shape = nullptr;
     std::shared_ptr<sf::Shape> m_flashShape = nullptr;
 
-    sf::Vector2f m_position { 0, 0 };
+    jt::vector2 m_position { 0, 0 };
 
     void doDraw(std::shared_ptr<sf::RenderTarget> const sptr) const override
     {
@@ -67,7 +67,7 @@ private:
 
     void doDrawShadow(std::shared_ptr<sf::RenderTarget> const sptr) const override
     {
-        sf::Vector2f const oldPos = m_shape->getPosition();
+        jt::vector2 const oldPos = m_shape->getPosition();
         sf::Color const oldCol = m_shape->getFillColor();
 
         m_shape->setPosition(oldPos + getShadowOffset());

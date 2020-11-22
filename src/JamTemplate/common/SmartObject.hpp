@@ -3,6 +3,7 @@
 
 #include "Lerp.hpp"
 #include "Random.hpp"
+#include "vector.hpp"
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <memory>
@@ -57,8 +58,8 @@ public:
     virtual void setColor(sf::Color const& col) = 0;
     virtual const sf::Color getColor() const = 0;
 
-    virtual void setPosition(sf::Vector2f const& pos) = 0;
-    virtual const sf::Vector2f getPosition() const = 0;
+    virtual void setPosition(jt::vector2 const& pos) = 0;
+    virtual const jt::vector2 getPosition() const = 0;
 
     virtual sf::Transform const getTransform() const = 0;
     virtual sf::FloatRect const getGlobalBounds() const = 0;
@@ -67,15 +68,15 @@ public:
     virtual void setFlashColor(sf::Color const& col) = 0;
     virtual const sf::Color getFlashColor() const = 0;
 
-    virtual void setScale(sf::Vector2f const& scale) = 0;
-    virtual const sf::Vector2f getScale() const = 0;
+    virtual void setScale(jt::vector2 const& scale) = 0;
+    virtual const jt::vector2 getScale() const = 0;
 
-    virtual void setOrigin(sf::Vector2f const& origin) = 0;
-    virtual const sf::Vector2f getOrigin() const = 0;
+    virtual void setOrigin(jt::vector2 const& origin) = 0;
+    virtual const jt::vector2 getOrigin() const = 0;
 
-    sf::Vector2f getOffset() const { return m_offset; }
+    jt::vector2 getOffset() const { return m_offset; }
 
-    void setOffset(sf::Vector2f const offset) { m_offset = offset; }
+    void setOffset(jt::vector2 const offset) { m_offset = offset; }
 
     void setRotation(float rot)
     {
@@ -89,15 +90,15 @@ public:
     bool getShadowActive() const { return m_shadowActive; }
     virtual void setShadowColor(sf::Color const& col) { m_shadowColor = col; }
     sf::Color const getShadowColor() const { return m_shadowColor; }
-    virtual void setShadowOffset(sf::Vector2f const& v) { m_shadowOffset = v; }
-    sf::Vector2f const getShadowOffset() const { return m_shadowOffset; }
+    virtual void setShadowOffset(jt::vector2 const& v) { m_shadowOffset = v; }
+    jt::vector2 const getShadowOffset() const { return m_shadowOffset; }
 
     // do not call this manually. Only place to call is Game()->update();
-    static void setCamOffset(sf::Vector2f const& v) { m_CamOffset = v; }
+    static void setCamOffset(jt::vector2 const& v) { m_CamOffset = v; }
 
     void setIgnoreCamMovement(bool ignore) { m_ignoreCamMovement = ignore; }
 
-    void setShadow(sf::Color const& col, sf::Vector2f const& offset)
+    void setShadow(sf::Color const& col, jt::vector2 const& offset)
     {
         setShadowActive(true);
         setShadowColor(col);
@@ -105,16 +106,16 @@ public:
     }
 
 protected:
-    sf::Vector2f getShakeOffset() const { return m_shakeOffset; }
+    jt::vector2 getShakeOffset() const { return m_shakeOffset; }
 
-    sf::Vector2f getCamOffset() const
+    jt::vector2 getCamOffset() const
     {
-        return (m_ignoreCamMovement ? m_CamOffset : sf::Vector2f { 0.0f, 0.0f });
+        return (m_ignoreCamMovement ? m_CamOffset : jt::vector2 { 0.0f, 0.0f });
     }
     bool getIgnoreCamMovement() const { return m_ignoreCamMovement; }
 
 private:
-    static sf::Vector2f m_CamOffset;
+    static jt::vector2 m_CamOffset;
     bool m_ignoreCamMovement { false };
     bool m_moveWithCam { true };
 
@@ -126,13 +127,13 @@ private:
     float m_shakeStrength { 0.0f };
     float m_shakeInterval { 0.0f };
     float m_shakeIntervalMax { 0.0f };
-    sf::Vector2f m_shakeOffset { 0, 0 };
+    jt::vector2 m_shakeOffset { 0, 0 };
 
-    sf::Vector2f m_offset { 0, 0 };
+    jt::vector2 m_offset { 0, 0 };
     float m_rotationInDegree { 0 };
 
     bool m_shadowActive { false };
-    sf::Vector2f m_shadowOffset { 0.0f, 0.0f };
+    jt::vector2 m_shadowOffset { 0.0f, 0.0f };
     sf::Color m_shadowColor { sf::Color::Black };
 
     virtual void doDraw(std::shared_ptr<sf::RenderTarget> const sptr) const = 0;
@@ -164,11 +165,11 @@ private:
             m_shakeInterval -= elapsed;
             if (m_shakeInterval <= 0) {
                 m_shakeInterval = m_shakeIntervalMax;
-                m_shakeOffset.x = Random::getFloat(-m_shakeStrength, m_shakeStrength);
-                m_shakeOffset.y = Random::getFloat(-m_shakeStrength, m_shakeStrength);
+                m_shakeOffset.x() = Random::getFloat(-m_shakeStrength, m_shakeStrength);
+                m_shakeOffset.y() = Random::getFloat(-m_shakeStrength, m_shakeStrength);
             }
         } else {
-            m_shakeOffset.x = m_shakeOffset.y = 0;
+            m_shakeOffset.x() = m_shakeOffset.y() = 0;
         }
     }
 };

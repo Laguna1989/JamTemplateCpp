@@ -24,22 +24,22 @@ private:
     {
 
         m_background = std::make_shared<JamTemplate::SmartShape>();
-        m_background->makeRect(sf::Vector2f(200, 150));
+        m_background->makeRect(jt::vector2(200, 150));
         m_background->setColor(sf::Color { 255, 255, 255 });
 
         using JamTemplate::SmartShape;
         using JamTemplate::TweenAlpha;
 
         m_overlayR = std::make_shared<SmartShape>();
-        m_overlayR->makeRect(sf::Vector2f { 200, 200 });
+        m_overlayR->makeRect(jt::vector2 { 200, 200 });
         m_overlayR->setColor(sf::Color { 255, 0, 0, 0 });
 
         m_overlayG = std::make_shared<SmartShape>();
-        m_overlayG->makeRect(sf::Vector2f { 200, 200 });
+        m_overlayG->makeRect(jt::vector2 { 200, 200 });
         m_overlayG->setColor(sf::Color { 0, 255, 0, 0 });
 
         m_overlayB = std::make_shared<SmartShape>();
-        m_overlayB->makeRect(sf::Vector2f { 200, 200 });
+        m_overlayB->makeRect(jt::vector2 { 200, 200 });
         m_overlayB->setColor(sf::Color { 0, 0, 255, 0 });
 
         auto twRIn

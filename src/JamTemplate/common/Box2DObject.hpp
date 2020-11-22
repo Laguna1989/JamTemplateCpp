@@ -4,8 +4,8 @@
 #include "Conversions.hpp"
 #include "GameObject.hpp"
 #include "SmartObject.hpp"
+#include "vector.hpp"
 #include <Box2D/Box2D.h>
-#include <SFML/Graphics.hpp>
 #include <memory>
 
 namespace JamTemplate {
@@ -20,9 +20,9 @@ public:
         setB2Body(world->CreateBody(def));
     }
 
-    sf::Vector2f getPosition() const { return C::vec(m_body->GetPosition()); }
+    jt::vector2 getPosition() const { return C::vec(m_body->GetPosition()); }
 
-    void setPosition(sf::Vector2f p) { m_body->SetTransform(C::vec(p), m_body->GetAngle()); }
+    void setPosition(jt::vector2 p) { m_body->SetTransform(C::vec(p), m_body->GetAngle()); }
 
     float getRotation() const { return m_body->GetAngle(); }
 

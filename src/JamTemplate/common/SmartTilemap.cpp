@@ -8,8 +8,8 @@ namespace JamTemplate {
 
 SmartTilemap::SmartTilemap(std::filesystem::path const& path)
 {
-    m_position = sf::Vector2f { 0.0f, 0.0f };
-    m_screenSizeHint = sf::Vector2f { 0.0f, 0.0f };
+    m_position = jt::vector2 { 0.0f, 0.0f };
+    m_screenSizeHint = jt::vector2 { 0.0f, 0.0f };
 
     tson::Tileson parser;
 
@@ -69,24 +69,23 @@ void SmartTilemap::doDraw(std::shared_ptr<sf::RenderTarget> const sptr) const
                 auto const tilePos = C::vec(tile.getPosition());
                 // optimization: don't draw tiles outside the game window
                 if (g) {
-                    sf::Vector2f const camoffset
-                        = (getIgnoreCamMovement() ? sf::Vector2f { 0.0f, 0.0f }
-                                                  : g->getCamOffset());
+                    jt::vector2 const camoffset
+                        = (getIgnoreCamMovement() ? jt::vector2 { 0.0f, 0.0f } : g->getCamOffset());
 
-                    auto const px = tilePos.x;
-                    auto const py = tilePos.y;
+                    auto const px = tilePos.x();
+                    auto const py = tilePos.y();
                     auto const tsx = tile.getTile()->getTileSize().x;
                     auto const tsy = tile.getTile()->getTileSize().y;
-                    if (px - camoffset.x + tsx < 0) {
+                    if (px - camoffset.x() + tsx < 0) {
                         continue;
                     }
-                    if (py - camoffset.y + tsy < 0) {
+                    if (py - camoffset.y() + tsy < 0) {
                         continue;
                     }
-                    if (px - camoffset.x >= m_screenSizeHint.x + tsx) {
+                    if (px - camoffset.x() >= m_screenSizeHint.x() + tsx) {
                         continue;
                     }
-                    if (py - camoffset.y >= m_screenSizeHint.y + tsy) {
+                    if (py - camoffset.y() >= m_screenSizeHint.y() + tsy) {
                         continue;
                     }
                 }
@@ -96,7 +95,7 @@ void SmartTilemap::doDraw(std::shared_ptr<sf::RenderTarget> const sptr) const
             }
         }
 
-        sf::RectangleShape shape(sf::Vector2f(1.0f, 1.0f));
+        sf::RectangleShape shape(jt::vector2(1.0f, 1.0f));
         for (auto& objLayer : m_objectGroups) {
             for (auto& obj : objLayer.second) {
                 shape.setSize(obj.sizeDiagonal);
@@ -128,8 +127,8 @@ void SmartTilemap::setColor(sf::Color const& col)
 }
 const sf::Color SmartTilemap::getColor() const { return sf::Color::Black; }
 
-void SmartTilemap::setPosition(sf::Vector2f const& pos) { m_position = pos; }
-const sf::Vector2f SmartTilemap::getPosition() const { return m_position; }
+void SmartTilemap::setPosition(jt::vector2 const& pos) { m_position = pos; }
+const jt::vector2 SmartTilemap::getPosition() const { return m_position; }
 
 sf::Transform const SmartTilemap::getTransform() const { return sf::Transform {}; }
 sf::FloatRect const SmartTilemap::getGlobalBounds() const { return sf::FloatRect {}; }
@@ -141,15 +140,15 @@ void SmartTilemap::setFlashColor(sf::Color const& /*col*/)
 }
 const sf::Color SmartTilemap::getFlashColor() const { return sf::Color::Black; }
 
-void SmartTilemap::setScale(sf::Vector2f const& /*scale*/) { }
-const sf::Vector2f SmartTilemap::getScale() const { return sf::Vector2f {}; }
+void SmartTilemap::setScale(jt::vector2 const& /*scale*/) { }
+const jt::vector2 SmartTilemap::getScale() const { return jt::vector2 {}; }
 
-void SmartTilemap::setOrigin(sf::Vector2f const& /*origin*/) { }
-const sf::Vector2f SmartTilemap::getOrigin() const { return sf::Vector2f {}; }
+void SmartTilemap::setOrigin(jt::vector2 const& /*origin*/) { }
+const jt::vector2 SmartTilemap::getOrigin() const { return jt::vector2 {}; }
 
 void SmartTilemap::doRotate(float /*rot*/) { }
 
-void SmartTilemap::setScreenSizeHint(sf::Vector2f const& hint, std::shared_ptr<Game> ptr)
+void SmartTilemap::setScreenSizeHint(jt::vector2 const& hint, std::shared_ptr<Game> ptr)
 {
     m_screenSizeHint = hint;
     m_gamePtr = ptr;

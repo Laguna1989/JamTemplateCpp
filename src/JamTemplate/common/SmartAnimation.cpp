@@ -74,8 +74,8 @@ sf::Color const SmartAnimation::getColor() const
     return getCurrentSprite(m_frames, m_currentAnimName, m_currentIdx)->getColor();
 }
 
-void SmartAnimation::setPosition(sf::Vector2f const& pos) { m_position = pos; }
-sf::Vector2f const SmartAnimation::getPosition() const { return m_position; }
+void SmartAnimation::setPosition(jt::vector2 const& pos) { m_position = pos; }
+jt::vector2 const SmartAnimation::getPosition() const { return m_position; }
 
 sf::Transform const SmartAnimation::getTransform() const
 {
@@ -109,7 +109,7 @@ const sf::Color SmartAnimation::getFlashColor() const
     return getCurrentSprite(m_frames, m_currentAnimName, m_currentIdx)->getFlashColor();
 }
 
-void SmartAnimation::setScale(sf::Vector2f const& scale)
+void SmartAnimation::setScale(jt::vector2 const& scale)
 {
     for (auto& kvp : m_frames) {
         for (auto& spr : kvp.second) {
@@ -117,12 +117,12 @@ void SmartAnimation::setScale(sf::Vector2f const& scale)
         }
     }
 }
-const sf::Vector2f SmartAnimation::getScale() const
+const jt::vector2 SmartAnimation::getScale() const
 {
     return getCurrentSprite(m_frames, m_currentAnimName, m_currentIdx)->getScale();
 }
 
-void SmartAnimation::setOrigin(sf::Vector2f const& origin)
+void SmartAnimation::setOrigin(jt::vector2 const& origin)
 {
     for (auto& kvp : m_frames) {
         for (auto const& sptr : kvp.second) {
@@ -130,7 +130,7 @@ void SmartAnimation::setOrigin(sf::Vector2f const& origin)
         }
     }
 }
-sf::Vector2f const SmartAnimation::getOrigin() const
+jt::vector2 const SmartAnimation::getOrigin() const
 {
     return getCurrentSprite(m_frames, m_currentAnimName, m_currentIdx)->getOrigin();
 }
@@ -153,7 +153,7 @@ void SmartAnimation::setShadowColor(sf::Color const& col)
         }
     }
 }
-void SmartAnimation::setShadowOffset(sf::Vector2f const& v)
+void SmartAnimation::setShadowOffset(jt::vector2 const& v)
 {
     SmartObject::setShadowOffset(v);
     for (auto& kvp : m_frames) {

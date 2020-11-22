@@ -30,8 +30,8 @@ public:
     void setColor(sf::Color const& col);
     const sf::Color getColor() const;
 
-    void setPosition(sf::Vector2f const& pos);
-    const sf::Vector2f getPosition() const;
+    void setPosition(jt::vector2 const& pos);
+    const jt::vector2 getPosition() const;
 
     sf::Transform const getTransform() const;
     sf::FloatRect const getGlobalBounds() const;
@@ -40,17 +40,17 @@ public:
     void setFlashColor(sf::Color const& col);
     const sf::Color getFlashColor() const;
 
-    void setScale(sf::Vector2f const& scale);
-    const sf::Vector2f getScale() const;
+    void setScale(jt::vector2 const& scale);
+    const jt::vector2 getScale() const;
 
     const sf::Vector2i getMapSizeInTiles();
 
-    void setOrigin(sf::Vector2f const& origin);
-    const sf::Vector2f getOrigin() const;
+    void setOrigin(jt::vector2 const& origin);
+    const jt::vector2 getOrigin() const;
 
     void doRotate(float /*rot*/);
 
-    void setScreenSizeHint(sf::Vector2f const& hint, std::shared_ptr<Game> ptr);
+    void setScreenSizeHint(jt::vector2 const& hint, std::shared_ptr<Game> ptr);
 
     // FIXME: Not ideal because it only supports rectangles.
     std::map<std::string, std::vector<Rect>> getObjectGroups() { return m_objectGroups; };
@@ -63,9 +63,9 @@ private:
     bool m_highlightObjectGroups = false;
     mutable std::vector<std::unique_ptr<sf::Sprite>> m_tileSprites;
 
-    sf::Vector2f m_position;
+    jt::vector2 m_position;
 
-    sf::Vector2f m_screenSizeHint;
+    jt::vector2 m_screenSizeHint;
     std::weak_ptr<Game> m_gamePtr;
 };
 

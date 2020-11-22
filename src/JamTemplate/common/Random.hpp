@@ -1,6 +1,7 @@
 ﻿#ifndef JAMTEMPLATE_RANDOM_HPP_INCLUDEGUARD
 #define JAMTEMPLATE_RANDOM_HPP_INCLUDEGUARD
 
+#include "vector.hpp"
 #include <SFML/Graphics.hpp>
 #include <random>
 
@@ -18,7 +19,7 @@ public:
     static bool getChance(float c = 0.5f);
 
     static sf::Color const getRandomColor();
-    static sf::Vector2f const getRandomPointin(sf::FloatRect rect);
+    static const jt::vector2 getRandomPointin(sf::FloatRect rect);
 
     static void setSeed(unsigned int s);
     static void useTimeAsRandomSeed();

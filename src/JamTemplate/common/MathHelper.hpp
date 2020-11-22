@@ -1,7 +1,7 @@
 ﻿#ifndef JAMTEMPLATE_MATHHELPER_HPP_INCLUDEGUARD
 #define JAMTEMPLATE_MATHHELPER_HPP_INCLUDEGUARD
 
-#include <SFML/Graphics.hpp>
+#include "vector.hpp"
 #include <assert.h>
 #include <iomanip>
 #include <sstream>
@@ -27,11 +27,11 @@ std::vector<T> vectorBetween(T a, T b)
     return values;
 }
 
-float lengthSquared(sf::Vector2f const& v);
+float lengthSquared(jt::vector2 const& v);
 
-float length(sf::Vector2f const& v);
+float length(jt::vector2 const& v);
 
-void normalizeMe(sf::Vector2f& v, float lowerbound = 0);
+void normalizeMe(jt::vector2& v, float lowerbound = 0);
 
 float rad2deg(float a);
 float deg2rad(float a);

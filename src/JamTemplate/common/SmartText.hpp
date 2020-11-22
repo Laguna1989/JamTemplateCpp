@@ -55,9 +55,9 @@ public:
         m_text->setOutlineColor(col);
     }
 
-    void setPosition(sf::Vector2f const& pos) override { m_position = pos; }
+    void setPosition(jt::vector2 const& pos) override { m_position = pos; }
 
-    const sf::Vector2f getPosition() const override { return m_position; }
+    const jt::vector2 getPosition() const override { return m_position; }
 
     void setColor(const sf::Color& col) override { m_text->setFillColor(col); }
     const sf::Color getColor() const override { return m_text->getFillColor(); }
@@ -70,21 +70,21 @@ public:
     sf::FloatRect const getGlobalBounds() const override { return m_text->getGlobalBounds(); }
     sf::FloatRect const getLocalBounds() const override { return m_text->getLocalBounds(); }
 
-    virtual void setScale(sf::Vector2f const& scale)
+    virtual void setScale(jt::vector2 const& scale)
     {
         m_text->setScale(scale);
         m_flashText->setScale(scale);
     }
 
-    virtual const sf::Vector2f getScale() const { return m_text->getScale(); }
+    virtual const jt::vector2 getScale() const { return m_text->getScale(); }
 
-    virtual void setOrigin(sf::Vector2f const& origin)
+    virtual void setOrigin(jt::vector2 const& origin)
     {
         m_text->setOrigin(origin);
         m_flashText->setOrigin(origin);
     }
 
-    virtual const sf::Vector2f getOrigin() const { return m_text->getOrigin(); }
+    virtual const jt::vector2 getOrigin() const { return m_text->getOrigin(); }
 
     void SetTextAlign(TextAlign ta) { m_textAlign = ta; }
     TextAlign getTextAlign() const { return m_textAlign; }
@@ -96,29 +96,28 @@ private:
 
     TextAlign m_textAlign { TextAlign::CENTER };
 
-    sf::Vector2f m_position { 0, 0 };
+    jt::vector2 m_position { 0, 0 };
 
     void doUpdate(float /*elapsed*/) override
     {
         m_text->setFont(*m_font);
         m_flashText->setFont(*m_font);
-        sf::Vector2f alignOffset {};
+        jt::vector2 alignOffset {};
         if (m_textAlign != TextAlign::LEFT)
-            alignOffset.x = m_text->getGlobalBounds().width
+            alignOffset.x() = m_text->getGlobalBounds().width
                 / (m_textAlign == TextAlign::CENTER ? 2.0f : 1.0f);
-        sf::Vector2f pos
+        jt::vector2 pos
             = m_position + getShakeOffset() + getOffset() - alignOffset + getCamOffset();
-        sf::Vector2i posi { static_cast<int>(pos.x), static_cast<int>(pos.y) };
+        sf::Vector2i posi { static_cast<int>(pos.x()), static_cast<int>(pos.y()) };
 
-        m_text->setPosition(
-            sf::Vector2f { static_cast<float>(posi.x), static_cast<float>(posi.y) });
+        m_text->setPosition(jt::vector2 { static_cast<float>(posi.x), static_cast<float>(posi.y) });
         m_flashText->setPosition(m_text->getPosition());
         m_flashText->setScale(m_text->getScale());
     }
 
     void doDrawShadow(std::shared_ptr<sf::RenderTarget> const sptr) const override
     {
-        sf::Vector2f const oldPos = m_text->getPosition();
+        jt::vector2 const oldPos = m_text->getPosition();
         sf::Color const oldCol = m_text->getFillColor();
 
         m_text->setPosition(oldPos + getShadowOffset());

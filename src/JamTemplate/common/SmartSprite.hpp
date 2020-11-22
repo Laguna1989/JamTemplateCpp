@@ -26,9 +26,9 @@ public:
             = sf::Sprite { TextureManager::get(TextureManager::getFlashName(fileName)), rect };
     }
 
-    void setPosition(sf::Vector2f const& pos) override { m_position = pos; }
+    void setPosition(jt::vector2 const& pos) override { m_position = pos; }
 
-    const sf::Vector2f getPosition() const override { return m_position; }
+    const jt::vector2 getPosition() const override { return m_position; }
 
     void setColor(sf::Color const& col) override { m_sprite.setColor(col); }
     const sf::Color getColor() const override { return m_sprite.getColor(); }
@@ -47,27 +47,27 @@ public:
         return m_sprite.getLocalBounds();
     }
 
-    virtual void setScale(sf::Vector2f const& scale)
+    virtual void setScale(jt::vector2 const& scale)
     {
         m_sprite.setScale(scale);
         m_flashSprite.setScale(scale);
     }
 
-    virtual const sf::Vector2f getScale() const { return m_sprite.getScale(); }
+    virtual const jt::vector2 getScale() const { return m_sprite.getScale(); }
 
-    virtual void setOrigin(sf::Vector2f const& origin)
+    virtual void setOrigin(jt::vector2 const& origin)
     {
         m_sprite.setOrigin(origin);
         m_flashSprite.setOrigin(origin);
     }
 
-    virtual sf::Vector2f const getOrigin() const { return m_sprite.getOrigin(); }
+    virtual jt::vector2 const getOrigin() const { return m_sprite.getOrigin(); }
 
 private:
     mutable sf::Sprite m_sprite;
     sf::Sprite m_flashSprite;
 
-    sf::Vector2f m_position { 0, 0 };
+    jt::vector2 m_position { 0, 0 };
 
     void doUpdate(float /*elapsed*/) override
     {
@@ -78,7 +78,7 @@ private:
 
     void doDrawShadow(std::shared_ptr<sf::RenderTarget> const sptr) const override
     {
-        sf::Vector2f const oldPos = m_sprite.getPosition();
+        jt::vector2 const oldPos = m_sprite.getPosition();
         sf::Color const oldCol = m_sprite.getColor();
 
         m_sprite.setPosition(oldPos + getShadowOffset());

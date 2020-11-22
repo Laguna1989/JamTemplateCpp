@@ -1,4 +1,5 @@
 ﻿#include "Conversions.hpp"
+#include "vector.hpp"
 #include "gtest/gtest.h"
 #include <limits>
 #include <utility>
@@ -18,30 +19,30 @@ INSTANTIATE_TEST_SUITE_P(ConversionsTest, ConversionsTestFixture,
 
 TEST_P(ConversionsTestFixture, box2dVectorToSFMLVector)
 {
-    ::sf::Vector2f const expected { GetParam().first, GetParam().second };
+    ::jt::vector2 const expected { GetParam().first, GetParam().second };
     b2Vec2 const input { GetParam().first, GetParam().second };
-    EXPECT_EQ(vec(input), expected);
+    EXPECT_TRUE(vec(input) == expected);
 }
 
 TEST_P(ConversionsTestFixture, SFMLVectorToB2Vec)
 {
     b2Vec2 const expected { GetParam().first, GetParam().second };
     ::sf::Vector2f const input { GetParam().first, GetParam().second };
-    EXPECT_EQ(vec(input), expected);
+    EXPECT_TRUE(vec(input) == expected);
 }
 
 TEST_P(ConversionsTestFixture, TsonVecfToSFMLVector)
 {
-    ::sf::Vector2f const expected { GetParam().first, GetParam().second };
+    ::jt::vector2 const expected { GetParam().first, GetParam().second };
     tson::Vector2f const input { GetParam().first, GetParam().second };
-    EXPECT_EQ(vec(input), expected);
+    EXPECT_TRUE(vec(input) == expected);
 }
 
 TEST_P(ConversionsTestFixture, TsonVeciToSFMLVector)
 {
-    ::sf::Vector2f const expected { static_cast<float>(static_cast<int>(GetParam().first)),
+    ::jt::vector2 const expected { static_cast<float>(static_cast<int>(GetParam().first)),
         static_cast<float>(static_cast<int>(GetParam().second)) };
     tson::Vector2i const input { static_cast<int>(GetParam().first),
         static_cast<int>(GetParam().second) };
-    EXPECT_EQ(vec(input), expected);
+    EXPECT_TRUE(vec(input) == expected);
 }
