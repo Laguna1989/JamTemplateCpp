@@ -32,7 +32,7 @@ SmartTilemap::SmartTilemap(std::filesystem::path const& path)
     for (int j = 0; j != rows; ++j) {
         for (int i = 0; i != columns; ++i) {
             m_tileSprites.emplace_back(std::make_unique<sf::Sprite>(
-                TextureManager::get(tilesetName), sf::IntRect(i * ts.x, j * ts.y, ts.x, ts.y)));
+                TextureManager::get(tilesetName), jt::recti(i * ts.x, j * ts.y, ts.x, ts.y)));
         }
     }
     for (auto& layer : m_map->getLayers()) {

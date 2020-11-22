@@ -43,6 +43,44 @@ public:
     float& height() { return m_rect.height; };
 };
 
+class recti final {
+public:
+    recti()
+        : recti { 0, 0, 0, 0 }
+    {
+    }
+    recti(int left, int top, int width, int height)
+        : m_rect { left, top, width, height }
+    {
+    }
+
+    recti(sf::IntRect& v)
+        : m_rect { v }
+    {
+    }
+
+    ~recti() = default;
+    recti(jt::recti const&) = default;
+    recti(jt::recti&&) = default;
+
+    recti& operator=(jt::recti const&) = default;
+    recti& operator=(jt::recti&&) = default;
+
+    operator sf::IntRect() const { return m_rect; }
+
+    sf::IntRect m_rect;
+
+    int left() const { return m_rect.left; };
+    int top() const { return m_rect.top; };
+    int width() const { return m_rect.width; };
+    int height() const { return m_rect.height; };
+
+    int& left() { return m_rect.left; };
+    int& top() { return m_rect.top; };
+    int& width() { return m_rect.width; };
+    int& height() { return m_rect.height; };
+};
+
 } // namespace jt
 
 #endif

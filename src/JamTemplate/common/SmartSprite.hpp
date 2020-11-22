@@ -19,7 +19,7 @@ public:
         m_flashSprite = sf::Sprite { TextureManager::get(TextureManager::getFlashName(fileName)) };
     }
 
-    void loadSprite(std::string const& fileName, sf::IntRect const& rect)
+    void loadSprite(std::string const& fileName, jt::recti const& rect)
     {
         m_sprite = sf::Sprite { TextureManager::get(fileName), rect };
         m_flashSprite
