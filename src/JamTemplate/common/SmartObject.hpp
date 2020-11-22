@@ -3,6 +3,7 @@
 
 #include "Lerp.hpp"
 #include "Random.hpp"
+#include "rendertarget.hpp"
 #include "vector.hpp"
 #include <SFML/Graphics.hpp>
 #include <iostream>
@@ -16,7 +17,7 @@ public:
 
     virtual ~SmartObject() = default;
 
-    void draw(std::shared_ptr<sf::RenderTarget> sptr) const
+    void draw(std::shared_ptr<jt::renderTarget> sptr) const
     {
         if (m_hasBeenUpdated == false) {
             std::cout << "WARNING: Calling SmartObject::draw() without previous call to "
@@ -136,9 +137,9 @@ private:
     jt::vector2 m_shadowOffset { 0.0f, 0.0f };
     jt::color m_shadowColor { jt::colors::Black };
 
-    virtual void doDraw(std::shared_ptr<sf::RenderTarget> const sptr) const = 0;
-    virtual void doDrawFlash(std::shared_ptr<sf::RenderTarget> const sptr) const = 0;
-    virtual void doDrawShadow(std::shared_ptr<sf::RenderTarget> const sptr) const = 0;
+    virtual void doDraw(std::shared_ptr<jt::renderTarget> const sptr) const = 0;
+    virtual void doDrawFlash(std::shared_ptr<jt::renderTarget> const sptr) const = 0;
+    virtual void doDrawShadow(std::shared_ptr<jt::renderTarget> const sptr) const = 0;
 
     // overwrite this method:
     // things to take care of:

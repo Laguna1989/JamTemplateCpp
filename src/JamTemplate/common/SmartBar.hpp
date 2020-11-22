@@ -1,8 +1,9 @@
 ﻿#ifndef JAMTEMPLATE_SMARTBAR_HPP_INCLUDEGUARD
 #define JAMTEMPLATE_SMARTBAR_HPP_INCLUDEGUARD
 
-#include "SFML/System/Vector2.hpp"
 #include "SmartObject.hpp"
+#include "rendertarget.hpp"
+#include <SFML/System/Vector2.hpp>
 #include <cassert>
 #include <memory>
 #include <vector>
@@ -63,9 +64,9 @@ private:
     mutable sf::RectangleShape m_shapeFull;
     sf::RectangleShape m_shapeProgress;
 
-    virtual void doDraw(std::shared_ptr<sf::RenderTarget> const sptr) const override;
-    virtual void doDrawFlash(std::shared_ptr<sf::RenderTarget> const sptr) const override;
-    virtual void doDrawShadow(std::shared_ptr<sf::RenderTarget> const sptr) const override;
+    virtual void doDraw(std::shared_ptr<jt::renderTarget> const sptr) const override;
+    virtual void doDrawFlash(std::shared_ptr<jt::renderTarget> const sptr) const override;
+    virtual void doDrawShadow(std::shared_ptr<jt::renderTarget> const sptr) const override;
 
     // overwrite this method:
     // things to take care of:

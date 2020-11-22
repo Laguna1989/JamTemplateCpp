@@ -3,6 +3,7 @@
 
 #include "InfoRect.hpp"
 #include "SmartObject.hpp"
+#include "rendertarget.hpp"
 #include "tileson.h"
 #include <SFML/Graphics.hpp>
 #include <filesystem>
@@ -20,10 +21,10 @@ public:
 
     SmartTilemap(std::filesystem::path const& path);
 
-    void doDraw(std::shared_ptr<sf::RenderTarget> const sptr) const;
+    void doDraw(std::shared_ptr<jt::renderTarget> const sptr) const;
 
-    void doDrawFlash(std::shared_ptr<sf::RenderTarget> const sptr) const;
-    void doDrawShadow(std::shared_ptr<sf::RenderTarget> const sptr) const;
+    void doDrawFlash(std::shared_ptr<jt::renderTarget> const sptr) const;
+    void doDrawShadow(std::shared_ptr<jt::renderTarget> const sptr) const;
 
     void doUpdate(float elapsed);
 

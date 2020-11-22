@@ -1,12 +1,11 @@
 ﻿#ifndef JAMTEMPLATE_SMARTSHAPE_HPP_INCLUDEGUARD
 #define JAMTEMPLATE_SMARTSHAPE_HPP_INCLUDEGUARD
 
+#include "SmartObject.hpp"
+#include "rendertarget.hpp"
+#include <SFML/Graphics.hpp>
 #include <memory>
 #include <string>
-
-#include <SFML/Graphics.hpp>
-
-#include "SmartObject.hpp"
 
 namespace JamTemplate {
 class SmartShape : public SmartObject {
@@ -55,17 +54,17 @@ private:
 
     jt::vector2 m_position { 0, 0 };
 
-    void doDraw(std::shared_ptr<sf::RenderTarget> const sptr) const override
+    void doDraw(std::shared_ptr<jt::renderTarget> const sptr) const override
     {
         sptr->draw(*m_shape);
     }
 
-    void doDrawFlash(std::shared_ptr<sf::RenderTarget> const sptr) const override
+    void doDrawFlash(std::shared_ptr<jt::renderTarget> const sptr) const override
     {
         sptr->draw(*m_flashShape);
     }
 
-    void doDrawShadow(std::shared_ptr<sf::RenderTarget> const sptr) const override
+    void doDrawShadow(std::shared_ptr<jt::renderTarget> const sptr) const override
     {
         jt::vector2 const oldPos = m_shape->getPosition();
         jt::color const oldCol = m_shape->getFillColor();

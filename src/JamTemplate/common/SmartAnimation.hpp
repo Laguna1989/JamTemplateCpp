@@ -2,6 +2,7 @@
 #define JAMTEMPLATE_ANIMATION_HPP_INCLUDEGUARD
 
 #include "SmartObject.hpp"
+#include "rendertarget.hpp"
 #include <SFML/Graphics.hpp>
 #include <map>
 #include <memory>
@@ -66,9 +67,9 @@ private:
 
     float m_frameTime = 0;
 
-    void doDrawShadow(std::shared_ptr<sf::RenderTarget> const sptr) const;
-    void doDraw(std::shared_ptr<sf::RenderTarget> const sptr) const;
-    void doDrawFlash(std::shared_ptr<sf::RenderTarget> const /*sptr*/) const;
+    void doDrawShadow(std::shared_ptr<jt::renderTarget> const sptr) const;
+    void doDraw(std::shared_ptr<jt::renderTarget> const sptr) const;
+    void doDrawFlash(std::shared_ptr<jt::renderTarget> const /*sptr*/) const;
 
     void doFlash(float t, jt::color col = jt::colors::White) override;
 

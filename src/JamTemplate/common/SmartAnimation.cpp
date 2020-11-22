@@ -163,9 +163,9 @@ void SmartAnimation::setShadowOffset(jt::vector2 const& v)
     }
 }
 
-void SmartAnimation::doDrawShadow(std::shared_ptr<sf::RenderTarget> const /*sptr*/) const { }
+void SmartAnimation::doDrawShadow(std::shared_ptr<jt::renderTarget> const /*sptr*/) const { }
 
-void SmartAnimation::doDraw(std::shared_ptr<sf::RenderTarget> const sptr) const
+void SmartAnimation::doDraw(std::shared_ptr<jt::renderTarget> const sptr) const
 {
     if (m_frames.count(m_currentAnimName) == 0) {
         std::cout << "Warning: Drawing SmartAnimation with invalid animName: '" + m_currentAnimName
@@ -176,7 +176,7 @@ void SmartAnimation::doDraw(std::shared_ptr<sf::RenderTarget> const sptr) const
     m_frames.at(m_currentAnimName).at(m_currentIdx)->draw(sptr);
 }
 
-void SmartAnimation::doDrawFlash(std::shared_ptr<sf::RenderTarget> const /*sptr*/) const { }
+void SmartAnimation::doDrawFlash(std::shared_ptr<jt::renderTarget> const /*sptr*/) const { }
 
 void SmartAnimation::doFlash(float t, jt::color col)
 {

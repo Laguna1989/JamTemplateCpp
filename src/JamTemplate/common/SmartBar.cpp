@@ -20,14 +20,14 @@ SmartBar::SmartBar(float width, float height)
 void SmartBar::setFrontColor(jt::color const& col) { m_shapeProgress.setFillColor(col); }
 void SmartBar::setBackColor(jt::color const& col) { m_shapeFull.setFillColor(col); }
 
-void SmartBar::doDraw(std::shared_ptr<sf::RenderTarget> const sptr) const
+void SmartBar::doDraw(std::shared_ptr<jt::renderTarget> const sptr) const
 {
     sptr->draw(m_shapeFull);
     sptr->draw(m_shapeProgress);
 }
 
-void SmartBar::doDrawFlash(std::shared_ptr<sf::RenderTarget> const sptr) const { }
-void SmartBar::doDrawShadow(std::shared_ptr<sf::RenderTarget> const sptr) const
+void SmartBar::doDrawFlash(std::shared_ptr<jt::renderTarget> const sptr) const { }
+void SmartBar::doDrawShadow(std::shared_ptr<jt::renderTarget> const sptr) const
 {
     jt::vector2 const oldPos = m_shapeFull.getPosition();
     jt::color const oldCol = m_shapeFull.getFillColor();

@@ -2,6 +2,7 @@
 #define JAMTEMPLATE_SMARTTEXT_HPP_INCLUDEGUARD
 
 #include "SmartObject.hpp"
+#include "rendertarget.hpp"
 #include <SFML/Graphics.hpp>
 #include <exception>
 #include <memory>
@@ -114,7 +115,7 @@ private:
         m_flashText->setScale(m_text->getScale());
     }
 
-    void doDrawShadow(std::shared_ptr<sf::RenderTarget> const sptr) const override
+    void doDrawShadow(std::shared_ptr<jt::renderTarget> const sptr) const override
     {
         jt::vector2 const oldPos = m_text->getPosition();
         jt::color const oldCol = m_text->getFillColor();
@@ -127,7 +128,7 @@ private:
         m_text->setFillColor(oldCol);
     }
 
-    void doDraw(std::shared_ptr<sf::RenderTarget> const sptr) const override
+    void doDraw(std::shared_ptr<jt::renderTarget> const sptr) const override
     {
         try {
             sptr->draw(*m_text);
@@ -138,7 +139,7 @@ private:
         }
     }
 
-    void doDrawFlash(std::shared_ptr<sf::RenderTarget> const sptr) const override
+    void doDrawFlash(std::shared_ptr<jt::renderTarget> const sptr) const override
     {
         sptr->draw(*m_flashText);
     }

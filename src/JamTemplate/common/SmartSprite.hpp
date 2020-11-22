@@ -3,6 +3,7 @@
 
 #include "SmartObject.hpp"
 #include "TextureManager.hpp"
+#include "rendertarget.hpp"
 #include <SFML/Graphics.hpp>
 #include <memory>
 #include <string>
@@ -70,7 +71,7 @@ private:
         m_flashSprite.setPosition(pos);
     }
 
-    void doDrawShadow(std::shared_ptr<sf::RenderTarget> const sptr) const override
+    void doDrawShadow(std::shared_ptr<jt::renderTarget> const sptr) const override
     {
         jt::vector2 const oldPos = m_sprite.getPosition();
         jt::color const oldCol = m_sprite.getColor();
@@ -83,12 +84,12 @@ private:
         m_sprite.setColor(oldCol);
     }
 
-    void doDraw(std::shared_ptr<sf::RenderTarget> const sptr) const override
+    void doDraw(std::shared_ptr<jt::renderTarget> const sptr) const override
     {
         sptr->draw(m_sprite);
     }
 
-    void doDrawFlash(std::shared_ptr<sf::RenderTarget> const sptr) const override
+    void doDrawFlash(std::shared_ptr<jt::renderTarget> const sptr) const override
     {
         sptr->draw(m_flashSprite);
     }
