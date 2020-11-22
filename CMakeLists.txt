@@ -8,8 +8,6 @@ set (PROJECTNAME "MyAwesomeGame")
 set (ENABLE_UNITTESTS OFF CACHE BOOL "enable unittests")
 set (ENABLE_STRESSTEST OFF CACHE BOOL "enable stresstest")
 
-
-
 #####################################################
 ## Other variables and compiler setup
 #####################################################
