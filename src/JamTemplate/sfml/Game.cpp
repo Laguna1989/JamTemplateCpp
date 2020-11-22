@@ -29,7 +29,35 @@ Game::Game(unsigned int w, unsigned int h, float zoom, std::string const& title)
     m_view->setViewport(jt::rect(0, 0, 1, 1));
 }
 
-float Game::getZoom() const { return m_zoom; }
+void Game::runGame(std::shared_ptr<GameState> InitialState)
+{
+    try {
+        switchState(InitialState);
+        while (m_renderWindow->isOpen()) {
+            sf::Event event;
+            while (m_renderWindow->pollEvent(event)) {
+                if (event.type == sf::Event::Closed) {
+                    m_renderWindow->close();
+                }
+            }
+            auto const now = std::chrono::steady_clock::now();
+
+            float const elapsed
+                = std::chrono::duration_cast<std::chrono::microseconds>(now - timeLast).count()
+                / 1000.0f / 1000.0f;
+            timeLast = now;
+            update(elapsed);
+            draw();
+        }
+    } catch (std::exception const& e) {
+        std::cerr << "!! ERROR: Exception ocurred !!\n";
+        std::cerr << e.what() << std::endl;
+        throw;
+    } catch (...) {
+        std::cerr << "!! ERROR: Unhandled Exception ocurred !!\n";
+        std::terminate();
+    }
+}
 
 void Game::switchState(std::shared_ptr<GameState> newState)
 {

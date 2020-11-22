@@ -18,9 +18,6 @@ TEST_F(GameTest, InitialValues)
 {
     EXPECT_NE(g->getRenderTarget(), nullptr);
     EXPECT_NE(g->getRenderWindow(), nullptr);
-    EXPECT_NE(g->getView(), nullptr);
-
-    EXPECT_EQ(g->getZoom(), zoom);
 
     EXPECT_NEAR(g->getRenderTarget()->getSize().x, windowSizeX / zoom, 0.001);
     EXPECT_NEAR(g->getRenderTarget()->getSize().y, windowSizeY / zoom, 0.001);

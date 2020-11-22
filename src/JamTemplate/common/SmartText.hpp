@@ -109,7 +109,7 @@ private:
         jt::vector2 pos
             = m_position + getShakeOffset() + getOffset() - alignOffset + getCamOffset();
 
-        m_text->setPosition(jt::vector2 { pos.x, pos.y });
+        m_text->setPosition(jt::vector2 { pos.x(), pos.y() });
         m_flashText->setPosition(m_text->getPosition());
         m_flashText->setScale(m_text->getScale());
     }

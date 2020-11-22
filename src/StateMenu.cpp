@@ -62,8 +62,8 @@ void StateMenu::doCreate()
     m_test_Explanation->setPosition({ wC, 150 });
     m_test_Explanation->setColor(GP::PaletteColor4());
     m_test_Explanation->update(0.0f);
-    auto const textWidth = m_test_Explanation->getLocalBounds().width;
-    auto const textHeight = m_test_Explanation->getLocalBounds().height;
+    auto const textWidth = m_test_Explanation->getLocalBounds().width();
+    auto const textHeight = m_test_Explanation->getLocalBounds().height();
     m_test_Explanation->setOrigin(jt::vector2 { textWidth / 2, textHeight / 2 });
     m_test_Explanation->SetTextAlign(JamTemplate::SmartText::TextAlign::LEFT);
     m_test_Explanation->setShadow(GP::PaletteFontShadow(), jt::vector2 { 3, 3 });
