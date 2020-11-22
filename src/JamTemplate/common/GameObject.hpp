@@ -6,7 +6,7 @@
 
 namespace JamTemplate {
 // forward declaration
-class Game;
+class GameBase;
 
 class GameObject {
 public:
@@ -25,9 +25,8 @@ public:
 
     void create()
     {
-        std::shared_ptr<Game> g;
         try {
-            g = getGame();
+            auto const g = getGame();
         } catch (std::exception& e) {
             std::cerr << e.what() << std::endl;
             throw std::logic_error {
@@ -46,15 +45,15 @@ public:
     float getAge() const { return m_age; }
     void setAge(float t) { m_age = t; }
 
-    void setGameInstance(std::weak_ptr<Game> g) { m_game = g; }
-    std::shared_ptr<Game> getGame()
+    void setGameInstance(std::weak_ptr<GameBase> g) { m_game = g; }
+    std::shared_ptr<GameBase> getGame()
     {
         if (m_game.expired())
             throw std::exception(/*"ERROR: Cannot GameObject::getGame():  m_game expired!"*/);
         return m_game.lock();
     }
     // const version of getGame (required for draw functionality)
-    std::shared_ptr<Game> getGame() const
+    std::shared_ptr<GameBase> getGame() const
     {
         if (m_game.expired())
             throw std::exception(/*"ERROR: Cannot GameObject::getGame():  m_game expired!"*/);
@@ -69,7 +68,7 @@ private:
     float m_age { 0.0f };
     bool m_alive { true }; // is used to sort out "dead" game objects;
 
-    std::weak_ptr<Game> m_game;
+    std::weak_ptr<GameBase> m_game;
 
     virtual void doUpdate(float const /*elapsed*/) {};
     virtual void doDraw() const {};

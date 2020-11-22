@@ -5,16 +5,13 @@
 #include "StateMenu.hpp"
 #include <SFML/Graphics.hpp>
 
-std::shared_ptr<JamTemplate::GameInterface> game;
-
 int main()
 {
     hideConsoleInRelease();
 
     JamTemplate::Random::useTimeAsRandomSeed();
 
-    game = std::make_shared<JamTemplate::Game>(800, 600, 2.0f, GP::GameName());
-
+    auto game = std::make_shared<JamTemplate::Game>(800, 600, 2.0f, GP::GameName());
     game->runGame(std::make_shared<StateMenu>());
 
     return 0;

@@ -3,7 +3,6 @@
 #include "InputManager.hpp"
 #include "Random.hpp"
 #include "SmartObject.hpp"
-#include "color.hpp"
 #include "rect.hpp"
 #include "vector.hpp"
 #include <iostream>
@@ -11,11 +10,10 @@
 namespace JamTemplate {
 
 Game::Game(unsigned int w, unsigned int h, float zoom, std::string const& title)
-    : m_state { nullptr }
-    , m_renderWindow { std::make_shared<sf::RenderWindow>(
-          sf::VideoMode(w, h), title, sf::Style::Close) }
+    : m_renderWindow { std::make_shared<sf::RenderWindow>(
+        sf::VideoMode(w, h), title, sf::Style::Close) }
     , m_zoom { zoom }
-    , m_renderTarget { std::make_shared<sf::RenderTexture>() }
+    , m_renderTarget { std::make_shared<jt::renderTarget>() }
 {
     m_renderWindow->setVerticalSyncEnabled(true);
 
@@ -59,27 +57,14 @@ void Game::runGame(std::shared_ptr<GameState> InitialState)
     }
 }
 
-void Game::switchState(std::shared_ptr<GameState> newState)
-{
-    // std::cout << "switchstate\n";
-    if (newState == nullptr) {
-        throw std::invalid_argument { "cannot switch to nullptr state!" };
-    }
-    m_nextState = newState;
-    // if no state has been assigned yet, we can directly switch state here.
-    if (m_state == nullptr) {
-        doSwitchState();
-    }
-}
-
-void Game::setRenderTarget(std::shared_ptr<sf::RenderTexture> rt)
+void Game::setRenderTarget(std::shared_ptr<jt::renderTarget> rt)
 {
     if (rt == nullptr) {
         throw std::invalid_argument { "cannot set nullptr rendertarget" };
     }
     m_renderTarget = rt;
 }
-std::shared_ptr<sf::RenderTexture> Game::getRenderTarget() { return m_renderTarget; }
+std::shared_ptr<jt::renderTarget> Game::getRenderTarget() { return m_renderTarget; }
 
 void Game::setRenderWindow(std::shared_ptr<sf::RenderWindow> w)
 {
@@ -97,20 +82,6 @@ void Game::setView(std::shared_ptr<sf::View> view)
         m_renderTarget->setView(*m_view);
 }
 std::shared_ptr<sf::View> Game::getView() { return m_view; }
-
-jt::vector2 Game::getCamOffset() { return m_CamOffset; }
-
-void Game::setCamOffset(jt::vector2 const& ofs) { m_CamOffset = ofs; }
-void Game::moveCam(jt::vector2 const& v) { m_CamOffset = m_CamOffset + v; }
-
-void Game::shake(float t, float strength, float shakeInterval)
-{
-    m_shakeTimer = t;
-    m_shakeStrength = strength;
-    m_shakeInterval = m_shakeIntervalMax = shakeInterval;
-}
-
-std::weak_ptr<Game> Game::getPtr() { return shared_from_this(); }
 
 void Game::doUpdate(float const elapsed)
 {
@@ -144,7 +115,6 @@ void Game::doDraw() const
 {
     // clear the old image
     m_renderTarget->clear(m_backgroundColor);
-    // m_renderWindow->clear(m_backgroundColor);
 
     if (m_state == nullptr)
         return;
@@ -197,19 +167,6 @@ void Game::resetShake()
     m_shakeOffset.x() = m_shakeOffset.y() = 0;
     m_shakeTimer = -1;
     m_shakeStrength = 0;
-}
-
-void Game::doSwitchState()
-{
-    m_state = m_nextState;
-    m_nextState = nullptr;
-
-    m_CamOffset = jt::vector2 { 0.0f, 0.0f };
-    m_state->setGameInstance(getPtr());
-    m_state->create();
-
-    JamTemplate::InputManager::reset();
-    resetShake();
 }
 
 } // namespace JamTemplate

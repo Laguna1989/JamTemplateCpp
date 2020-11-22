@@ -11,7 +11,7 @@ void StateGame::doInternalUpdate(float const elapsed) { m_overlay->update(elapse
 
 void StateGame::doInternalDraw() const
 {
-    m_background->draw(getGame()->getRenderTarget());
+    // m_background->draw(getGame()->getRenderTarget());
     drawObjects();
     m_overlay->draw(getGame()->getRenderTarget());
 }

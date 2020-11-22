@@ -144,13 +144,6 @@ TEST_F(GameTest, SetRenderTargetInvalid)
     EXPECT_THROW(g->setRenderTarget(nullptr), std::invalid_argument);
 }
 
-TEST_F(GameTest, SetRenderWindow) { EXPECT_NO_THROW(g->setRenderWindow(g->getRenderWindow())); }
-
-TEST_F(GameTest, SetRenderWindowInvalid)
-{
-    EXPECT_THROW(g->setRenderWindow(nullptr), std::invalid_argument);
-}
-
 TEST_F(GameTest, Shake)
 {
     // mock state to avoid early return
