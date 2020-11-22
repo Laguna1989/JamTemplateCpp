@@ -1,8 +1,9 @@
 ﻿#include "SmartTilemap.hpp"
 #include "Conversions.hpp"
-#include "Game.hpp"
+#include "GameBase.hpp"
 #include "SmartObject.hpp"
 #include "TextureManager.hpp"
+#include <memory>
 
 namespace JamTemplate {
 
@@ -148,7 +149,7 @@ const jt::vector2 SmartTilemap::getOrigin() const { return jt::vector2 {}; }
 
 void SmartTilemap::doRotate(float /*rot*/) { }
 
-void SmartTilemap::setScreenSizeHint(jt::vector2 const& hint, std::shared_ptr<Game> ptr)
+void SmartTilemap::setScreenSizeHint(jt::vector2 const& hint, std::shared_ptr<GameBase> ptr)
 {
     m_screenSizeHint = hint;
     m_gamePtr = ptr;

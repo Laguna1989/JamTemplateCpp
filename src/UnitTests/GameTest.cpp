@@ -17,14 +17,9 @@ public:
 TEST_F(GameTest, InitialValues)
 {
     EXPECT_NE(g->getRenderTarget(), nullptr);
-    EXPECT_NE(g->getRenderWindow(), nullptr);
 
     EXPECT_NEAR(g->getRenderTarget()->getSize().x, windowSizeX / zoom, 0.001);
     EXPECT_NEAR(g->getRenderTarget()->getSize().y, windowSizeY / zoom, 0.001);
-
-    // windows returns the full size of the window, while game ctor takes only the drawable area
-    EXPECT_GE(g->getRenderWindow()->getSize().x, windowSizeX);
-    EXPECT_GE(g->getRenderWindow()->getSize().y, windowSizeY);
 
     EXPECT_EQ(g->getCamOffset().x(), 0);
     EXPECT_EQ(g->getCamOffset().y(), 0);
