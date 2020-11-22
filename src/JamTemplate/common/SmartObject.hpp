@@ -62,8 +62,8 @@ public:
     virtual const jt::vector2 getPosition() const = 0;
 
     virtual sf::Transform const getTransform() const = 0;
-    virtual sf::FloatRect const getGlobalBounds() const = 0;
-    virtual sf::FloatRect const getLocalBounds() const = 0;
+    virtual jt::rect const getGlobalBounds() const = 0;
+    virtual jt::rect const getLocalBounds() const = 0;
 
     virtual void setFlashColor(jt::color const& col) = 0;
     virtual const jt::color getFlashColor() const = 0;

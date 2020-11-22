@@ -36,6 +36,7 @@ it freely, subject to the following restrictions:
 #ifndef COLLISION_H
 #define COLLISION_H
 
+#include "rect.hpp"
 #include "vector.hpp"
 #include <SFML/Graphics.hpp>
 
@@ -229,7 +230,7 @@ private:
     template <class U>
     static jt::vector2 GetSpriteCenter(std::shared_ptr<U> obj)
     {
-        sf::FloatRect AABB = obj->getGlobalBounds();
+        jt::rect AABB = obj->getGlobalBounds();
         return jt::vector2(AABB.left + AABB.width / 2.f, AABB.top + AABB.height / 2.f);
     }
 };

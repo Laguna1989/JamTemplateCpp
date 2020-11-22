@@ -34,7 +34,7 @@ public:
         // setPosition({ x, y });
         // setVelocity({ vx, vy });
         //// setAcceleration({ 0, -50 / 2 });
-        // setBoundsPosition(sf::FloatRect { 0, 0, 200 - 10, 150 - 10 });
+        // setBoundsPosition(jt::rect { 0, 0, 200 - 10, 150 - 10 });
     }
 
     ~Object() = default;

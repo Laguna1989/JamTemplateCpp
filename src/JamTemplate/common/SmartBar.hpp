@@ -41,8 +41,8 @@ public:
     virtual const jt::vector2 getPosition() const override;
 
     virtual sf::Transform const getTransform() const override;
-    virtual sf::FloatRect const getGlobalBounds() const override;
-    virtual sf::FloatRect const getLocalBounds() const override;
+    virtual jt::rect const getGlobalBounds() const override;
+    virtual jt::rect const getLocalBounds() const override;
 
     virtual void setFlashColor(jt::color const& col) override;
     virtual const jt::color getFlashColor() const override;

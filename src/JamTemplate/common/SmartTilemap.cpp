@@ -39,7 +39,7 @@ SmartTilemap::SmartTilemap(std::filesystem::path const& path)
         const std::string currentGroupName = layer.getName();
         for (auto& obj : layer.getObjects()) {
 
-            Rect collider { C::vec(obj.getPosition()), C::vec(obj.getSize()), obj.getRotation(),
+            InfoRect collider { C::vec(obj.getPosition()), C::vec(obj.getSize()), obj.getRotation(),
                 obj.getType() };
             m_objectGroups[currentGroupName].push_back(collider);
         }
@@ -131,8 +131,8 @@ void SmartTilemap::setPosition(jt::vector2 const& pos) { m_position = pos; }
 const jt::vector2 SmartTilemap::getPosition() const { return m_position; }
 
 sf::Transform const SmartTilemap::getTransform() const { return sf::Transform {}; }
-sf::FloatRect const SmartTilemap::getGlobalBounds() const { return sf::FloatRect {}; }
-sf::FloatRect const SmartTilemap::getLocalBounds() const { return sf::FloatRect {}; }
+jt::rect const SmartTilemap::getGlobalBounds() const { return jt::rect {}; }
+jt::rect const SmartTilemap::getLocalBounds() const { return jt::rect {}; }
 
 void SmartTilemap::setFlashColor(jt::color const& /*col*/)
 {

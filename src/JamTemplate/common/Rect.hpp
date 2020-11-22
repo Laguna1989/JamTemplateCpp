@@ -1,14 +1,12 @@
-﻿#ifndef RECT_INCLUDEGUARD
-#define RECT_INCLUDEGUARD
+﻿#ifndef RECT_GUARD_HPP_12345
+#define RECT_GUARD_HPP_12345
 
-#include "vector.hpp"
-#include <string>
+#include "rect_base.hpp"
 
-struct Rect {
-    jt::vector2 position;
-    jt::vector2 sizeDiagonal;
-    float rotation;
-    std::string m_type;
-};
+namespace jt {
 
+bool operator==(jt::rect const& a, jt::rect const& b);
+bool operator!=(jt::rect const& a, jt::rect const& b);
+
+} // namespace jt
 #endif

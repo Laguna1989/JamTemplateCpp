@@ -34,8 +34,8 @@ public:
         /*setPosition(jt::vector2(JamTemplate::Random::getFloat(0, maxX / 2),
             JamTemplate::Random::getFloat(0, maxY / 2)));
         float mv = 50;
-        setBoundsVelocity(sf::FloatRect { -mv, -mv, 2 * mv, 2 * mv });
-        setBoundsPosition(sf::FloatRect { 0, 0, maxX, maxY });*/
+        setBoundsVelocity(jt::rect { -mv, -mv, 2 * mv, 2 * mv });
+        setBoundsPosition(jt::rect { 0, 0, maxX, maxY });*/
     }
 
     ~SwarmObject() = default;

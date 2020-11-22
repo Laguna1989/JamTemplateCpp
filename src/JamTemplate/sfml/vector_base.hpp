@@ -45,7 +45,7 @@ public:
         : m_vec { 0, 0 }
     {
     }
-    vector2u(float x, float y)
+    vector2u(unsigned int x, unsigned int y)
         : m_vec { x, y }
     {
     }

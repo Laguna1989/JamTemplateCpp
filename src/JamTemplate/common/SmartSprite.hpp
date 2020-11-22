@@ -38,14 +38,8 @@ public:
 
     virtual sf::Transform const getTransform() const override { return m_sprite.getTransform(); }
 
-    virtual sf::FloatRect const getGlobalBounds() const override
-    {
-        return m_sprite.getGlobalBounds();
-    }
-    virtual sf::FloatRect const getLocalBounds() const override
-    {
-        return m_sprite.getLocalBounds();
-    }
+    virtual jt::rect const getGlobalBounds() const override { return m_sprite.getGlobalBounds(); }
+    virtual jt::rect const getLocalBounds() const override { return m_sprite.getLocalBounds(); }
 
     virtual void setScale(jt::vector2 const& scale)
     {

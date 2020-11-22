@@ -34,8 +34,8 @@ public:
     const jt::vector2 getPosition() const override { return m_position; }
 
     sf::Transform const getTransform() const override { return m_shape->getTransform(); }
-    sf::FloatRect const getGlobalBounds() const override { return m_shape->getGlobalBounds(); }
-    sf::FloatRect const getLocalBounds() const override { return m_shape->getLocalBounds(); }
+    jt::rect const getGlobalBounds() const override { return m_shape->getGlobalBounds(); }
+    jt::rect const getLocalBounds() const override { return m_shape->getLocalBounds(); }
 
     std::shared_ptr<sf::Shape> getShape() { return m_shape; }
 

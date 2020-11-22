@@ -1,5 +1,6 @@
 ﻿#ifndef VECTOR_GUARD_HPP_12345
 #define VECTOR_GUARD_HPP_12345
+
 #include "vector_base.hpp"
 
 namespace jt {

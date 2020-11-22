@@ -8,7 +8,6 @@
 #include "SmartObject.hpp"
 #include "TextureManager.hpp"
 #include "vector.hpp"
-#include <SFML/Graphics.hpp>
 #include <functional>
 #include <memory>
 #include <string>
@@ -80,8 +79,8 @@ private:
         float px = m_background->getPosition().x();
         float py = m_background->getPosition().y();
 
-        float w = m_background->getGlobalBounds().width;
-        float h = m_background->getGlobalBounds().height;
+        float w = m_background->getGlobalBounds().width();
+        float h = m_background->getGlobalBounds().height();
         return (mx > px && mx <= px + w && my > py && my <= py + h);
     }
 

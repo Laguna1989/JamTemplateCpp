@@ -61,8 +61,8 @@ void SmartBar::setPosition(jt::vector2 const& pos)
 const jt::vector2 SmartBar::getPosition() const { return m_shapeFull.getPosition(); }
 
 sf::Transform const SmartBar::getTransform() const { return m_shapeFull.getTransform(); }
-sf::FloatRect const SmartBar::getGlobalBounds() const { return m_shapeFull.getGlobalBounds(); }
-sf::FloatRect const SmartBar::getLocalBounds() const { return m_shapeFull.getLocalBounds(); }
+jt::rect const SmartBar::getGlobalBounds() const { return m_shapeFull.getGlobalBounds(); }
+jt::rect const SmartBar::getLocalBounds() const { return m_shapeFull.getLocalBounds(); }
 
 void SmartBar::setFlashColor(jt::color const& /*col*/)
 {

@@ -1,7 +1,6 @@
 ﻿#ifndef JAMTEMPLATE_TWEENBASE_HPP_INCLUDEGUARD
 #define JAMTEMPLATE_TWEENBASE_HPP_INCLUDEGUARD
 
-#include <SFML/Graphics.hpp>
 #include <cassert>
 #include <functional>
 #include <memory>

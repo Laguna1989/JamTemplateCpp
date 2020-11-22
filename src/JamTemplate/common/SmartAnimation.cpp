@@ -43,8 +43,8 @@ void SmartAnimation::add(std::string const& fileName, std::string const& animNam
     m_time[animName] = frameTime;
 
     for (auto const idx : frameIndices) {
-        sf::IntRect const rect { static_cast<int>(idx * size.x), 0, static_cast<int>(size.x),
-            static_cast<int>(size.y) };
+        sf::IntRect const rect { static_cast<int>(idx * size.x()), 0, static_cast<int>(size.x()),
+            static_cast<int>(size.y()) };
         SmartSprite::Sptr sptr = std::make_shared<SmartSprite>();
         sptr->loadSprite(fileName, rect);
         m_frames[animName].push_back(sptr);
@@ -87,11 +87,11 @@ sf::Transform const SmartAnimation::getTransform() const
     }
     return trans;
 }
-sf::FloatRect const SmartAnimation::getGlobalBounds() const
+jt::rect const SmartAnimation::getGlobalBounds() const
 {
     return getCurrentSprite(m_frames, m_currentAnimName, m_currentIdx)->getGlobalBounds();
 }
-sf::FloatRect const SmartAnimation::getLocalBounds() const
+jt::rect const SmartAnimation::getLocalBounds() const
 {
     return getCurrentSprite(m_frames, m_currentAnimName, m_currentIdx)->getLocalBounds();
 }

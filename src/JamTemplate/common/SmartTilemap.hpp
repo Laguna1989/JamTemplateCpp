@@ -1,7 +1,7 @@
 ﻿#ifndef JAMTEMPLATE_TILEMAP_HPP_GUARD
 #define JAMTEMPLATE_TILEMAP_HPP_GUARD
 
-#include "Rect.hpp"
+#include "InfoRect.hpp"
 #include "SmartObject.hpp"
 #include "tileson.h"
 #include <SFML/Graphics.hpp>
@@ -34,8 +34,8 @@ public:
     const jt::vector2 getPosition() const;
 
     sf::Transform const getTransform() const;
-    sf::FloatRect const getGlobalBounds() const;
-    sf::FloatRect const getLocalBounds() const;
+    jt::rect const getGlobalBounds() const;
+    jt::rect const getLocalBounds() const;
 
     void setFlashColor(jt::color const& col);
     const jt::color getFlashColor() const;
@@ -53,13 +53,13 @@ public:
     void setScreenSizeHint(jt::vector2 const& hint, std::shared_ptr<Game> ptr);
 
     // FIXME: Not ideal because it only supports rectangles.
-    std::map<std::string, std::vector<Rect>> getObjectGroups() { return m_objectGroups; };
+    std::map<std::string, std::vector<InfoRect>> getObjectGroups() { return m_objectGroups; };
     void toggleObjectGroupVisibility() { m_highlightObjectGroups = !m_highlightObjectGroups; };
 
 private:
     std::unique_ptr<tson::Map> m_map;
     // Map from object layer name to vector of objects, all rectangular.
-    std::map<std::string, std::vector<Rect>> m_objectGroups;
+    std::map<std::string, std::vector<InfoRect>> m_objectGroups;
     bool m_highlightObjectGroups = false;
     mutable std::vector<std::unique_ptr<sf::Sprite>> m_tileSprites;
 

@@ -2,8 +2,8 @@
 #define JAMTEMPLATE_RANDOM_HPP_INCLUDEGUARD
 
 #include "color.hpp"
+#include "rect.hpp"
 #include "vector.hpp"
-#include <SFML/Graphics/Rect.hpp>
 #include <random>
 
 namespace JamTemplate {
@@ -20,7 +20,7 @@ public:
     static bool getChance(float c = 0.5f);
 
     static jt::color const getRandomColor();
-    static const jt::vector2 getRandomPointin(sf::FloatRect rect);
+    static const jt::vector2 getRandomPointin(jt::rect rect);
 
     static void setSeed(unsigned int s);
     static void useTimeAsRandomSeed();

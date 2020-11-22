@@ -67,8 +67,8 @@ public:
 
     virtual sf::Transform const getTransform() const override { return m_text->getTransform(); }
 
-    sf::FloatRect const getGlobalBounds() const override { return m_text->getGlobalBounds(); }
-    sf::FloatRect const getLocalBounds() const override { return m_text->getLocalBounds(); }
+    jt::rect const getGlobalBounds() const override { return m_text->getGlobalBounds(); }
+    jt::rect const getLocalBounds() const override { return m_text->getLocalBounds(); }
 
     virtual void setScale(jt::vector2 const& scale)
     {
@@ -109,7 +109,7 @@ private:
         jt::vector2 pos
             = m_position + getShakeOffset() + getOffset() - alignOffset + getCamOffset();
 
-        m_text->setPosition(jt::vector2 {pos.x, pos.y });
+        m_text->setPosition(jt::vector2 { pos.x, pos.y });
         m_flashText->setPosition(m_text->getPosition());
         m_flashText->setScale(m_text->getScale());
     }
