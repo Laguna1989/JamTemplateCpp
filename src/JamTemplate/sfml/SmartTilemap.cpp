@@ -131,7 +131,7 @@ const jt::color SmartTilemap::getColor() const { return jt::colors::Black; }
 void SmartTilemap::setPosition(jt::vector2 const& pos) { m_position = pos; }
 const jt::vector2 SmartTilemap::getPosition() const { return m_position; }
 
-sf::Transform const SmartTilemap::getTransform() const { return sf::Transform {}; }
+// sf::Transform const SmartTilemap::getTransform() const { return sf::Transform {}; }
 jt::rect const SmartTilemap::getGlobalBounds() const { return jt::rect {}; }
 jt::rect const SmartTilemap::getLocalBounds() const { return jt::rect {}; }
 

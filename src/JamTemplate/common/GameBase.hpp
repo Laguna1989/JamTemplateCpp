@@ -27,7 +27,10 @@ public:
     void shake(float t, float strength, float shakeInterval = 0.005f);
 
     virtual void setRenderTarget(std::shared_ptr<jt::renderTarget> rt) = 0;
-    virtual std::shared_ptr<jt::renderTarget> getRenderTarget() = 0;
+    virtual std::shared_ptr<jt::renderTarget> getRenderTarget() const = 0;
+
+    void run();
+    virtual void runGame(std::shared_ptr<GameState> InitialState) = 0;
 
 protected:
     std::shared_ptr<GameState> m_state { nullptr };

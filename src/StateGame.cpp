@@ -3,7 +3,6 @@
 #include "GameProperties.hpp"
 #include "Hud.hpp"
 #include "SmartShape.hpp"
-#include "SmartSprite.hpp"
 #include "TweenAlpha.hpp"
 #include "color.hpp"
 
@@ -18,8 +17,8 @@ void StateGame::doInternalDraw() const
 
 void StateGame::doCreate()
 {
-    float w = static_cast<float>(getGame()->getRenderTarget()->getSize().x);
-    float h = static_cast<float>(getGame()->getRenderTarget()->getSize().y);
+    float w = static_cast<float>(GP::GetTargetSize().x());
+    float h = static_cast<float>(GP::GetTargetSize().y());
     m_hud = std::make_shared<Hud>();
 
     using JamTemplate::SmartShape;

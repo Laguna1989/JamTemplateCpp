@@ -58,23 +58,23 @@ public:
         OrientedBoundingBox(T const& Object) // Calculate the four points of the OBB from a
                                              // transformed (scaled, rotated...) sprite
         {
-            sf::Transform trans = Object.getTransform();
+            /*sf::Transform trans = Object.getTransform();
             auto local = Object.getGlobalBounds();
             Points[0] = trans.transformPoint(0.f, 0.f);
             Points[1] = trans.transformPoint(local.width, 0.f);
             Points[2] = trans.transformPoint(local.width, local.height);
-            Points[3] = trans.transformPoint(0.f, local.height);
+            Points[3] = trans.transformPoint(0.f, local.height);*/
         }
 
         OrientedBoundingBox(std::shared_ptr<T> obj) // Calculate the four points of the OBB from a
                                                     // transformed (scaled, rotated...) sprite
         {
-            sf::Transform trans = obj->getTransform();
+            /*sf::Transform trans = obj->getTransform();
             auto local = obj->getGlobalBounds();
             Points[0] = trans.transformPoint(0.f, 0.f);
             Points[1] = trans.transformPoint(local.width, 0.f);
             Points[2] = trans.transformPoint(local.width, local.height);
-            Points[3] = trans.transformPoint(0.f, local.height);
+            Points[3] = trans.transformPoint(0.f, local.height);*/
         }
 
         jt::vector2 Points[4];

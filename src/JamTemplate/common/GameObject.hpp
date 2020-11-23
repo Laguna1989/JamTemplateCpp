@@ -64,8 +64,10 @@ public:
     void kill() { m_alive = false; }
     bool isAlive() const { return m_alive; }
 
-private:
+protected:
     float m_age { 0.0f };
+
+private:
     bool m_alive { true }; // is used to sort out "dead" game objects;
 
     std::weak_ptr<GameBase> m_game;

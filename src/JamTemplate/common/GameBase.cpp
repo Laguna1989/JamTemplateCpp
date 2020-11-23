@@ -1,6 +1,5 @@
 ﻿#include "GameBase.hpp"
 #include "GameState.hpp"
-#include "InputManager.hpp"
 #include <exception>
 #include <stdexcept>
 
@@ -25,6 +24,31 @@ void GameBase::switchState(std::shared_ptr<GameState> newState)
     }
 }
 
+void GameBase::run()
+{
+    if (m_nextState != nullptr) {
+        doSwitchState();
+        return;
+    }
+    if (m_state == nullptr) {
+        return;
+    }
+    auto const now = std::chrono::steady_clock::now();
+
+    float const elapsed
+        = std::chrono::duration_cast<std::chrono::microseconds>(now - timeLast).count() / 1000.0f
+        / 1000.0f;
+    timeLast = now;
+    if (m_age != 0) {
+        updateShake(elapsed);
+        m_state->update(elapsed);
+
+        update(elapsed);
+        draw();
+    }
+    m_age++;
+}
+
 jt::vector2 GameBase::getCamOffset() { return m_CamOffset; }
 
 void GameBase::setCamOffset(jt::vector2 const& ofs) { m_CamOffset = ofs; }
@@ -47,8 +71,8 @@ void GameBase::doSwitchState()
     m_CamOffset = jt::vector2 { 0.0f, 0.0f };
     m_state->setGameInstance(getPtr());
     m_state->create();
-
-    JamTemplate::InputManager::reset();
+    // TODO
+    // JamTemplate::InputManager::reset();
     resetShake();
 }
 

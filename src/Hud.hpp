@@ -2,7 +2,7 @@
 #define GAME_HUD_HPP_INCLUDEGUARD
 
 #include "GameObject.hpp"
-#include "SmartText.hpp"
+// #include "SmartText.hpp"
 #include <string>
 
 class Hud : public JamTemplate::GameObject {
@@ -16,8 +16,9 @@ private:
     int m_scoreP1 { -1 };
     int m_scoreP2 { -1 };
 
-    JamTemplate::SmartText::Sptr m_scoreP1Text;
-    JamTemplate::SmartText::Sptr m_scoreP2Text;
+    // TODO
+    // JamTemplate::SmartText::Sptr m_scoreP1Text;
+    // JamTemplate::SmartText::Sptr m_scoreP2Text;
 
     void doUpdate(float const elapsed) override;
 

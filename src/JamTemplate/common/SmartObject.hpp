@@ -5,7 +5,6 @@
 #include "Random.hpp"
 #include "rendertarget.hpp"
 #include "vector.hpp"
-#include <SFML/Graphics.hpp>
 #include <iostream>
 #include <memory>
 #include <string>
@@ -62,7 +61,7 @@ public:
     virtual void setPosition(jt::vector2 const& pos) = 0;
     virtual const jt::vector2 getPosition() const = 0;
 
-    virtual sf::Transform const getTransform() const = 0;
+    // virtual sf::Transform const getTransform() const = 0;
     virtual jt::rect const getGlobalBounds() const = 0;
     virtual jt::rect const getLocalBounds() const = 0;
 

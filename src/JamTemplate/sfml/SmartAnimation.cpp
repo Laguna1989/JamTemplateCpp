@@ -77,16 +77,16 @@ jt::color const SmartAnimation::getColor() const
 void SmartAnimation::setPosition(jt::vector2 const& pos) { m_position = pos; }
 jt::vector2 const SmartAnimation::getPosition() const { return m_position; }
 
-sf::Transform const SmartAnimation::getTransform() const
-{
-    sf::Transform trans;
-    for (auto const& kvp : m_frames) {
-        for (auto const& sptr : kvp.second) {
-            trans = sptr->getTransform();
-        }
-    }
-    return trans;
-}
+// sf::Transform const SmartAnimation::getTransform() const
+//{
+//    sf::Transform trans;
+//    for (auto const& kvp : m_frames) {
+//        for (auto const& sptr : kvp.second) {
+//            trans = sptr->getTransform();
+//        }
+//    }
+//    return trans;
+//}
 jt::rect const SmartAnimation::getGlobalBounds() const
 {
     return getCurrentSprite(m_frames, m_currentAnimName, m_currentIdx)->getGlobalBounds();

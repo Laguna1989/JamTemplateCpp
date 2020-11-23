@@ -37,7 +37,7 @@ public:
     void setFlashColor(jt::color const& col) override { m_flashSprite.setColor(col); }
     const jt::color getFlashColor() const override { return m_flashSprite.getColor(); }
 
-    virtual sf::Transform const getTransform() const override { return m_sprite.getTransform(); }
+    // virtual sf::Transform const getTransform() const override { return m_sprite.getTransform(); }
 
     virtual jt::rect const getGlobalBounds() const override { return m_sprite.getGlobalBounds(); }
     virtual jt::rect const getLocalBounds() const override { return m_sprite.getLocalBounds(); }

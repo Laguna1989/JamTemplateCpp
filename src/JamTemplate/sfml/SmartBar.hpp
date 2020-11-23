@@ -3,7 +3,7 @@
 
 #include "SmartObject.hpp"
 #include "rendertarget.hpp"
-#include <SFML/System/Vector2.hpp>
+#include <SFML/Graphics.hpp>
 #include <cassert>
 #include <memory>
 #include <vector>
@@ -41,7 +41,7 @@ public:
     virtual void setPosition(jt::vector2 const& pos) override;
     virtual const jt::vector2 getPosition() const override;
 
-    virtual sf::Transform const getTransform() const override;
+    // virtual sf::Transform const getTransform() const override;
     virtual jt::rect const getGlobalBounds() const override;
     virtual jt::rect const getLocalBounds() const override;
 

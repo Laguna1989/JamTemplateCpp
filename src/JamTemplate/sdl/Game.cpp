@@ -1,99 +1,54 @@
 ﻿#include "Game.hpp"
 #include "GameState.hpp"
-// #include "InputManager.hpp"
 #include "Random.hpp"
 #include "SmartObject.hpp"
-#include "color.hpp"
 #include "rect.hpp"
 #include "vector.hpp"
+#include <SDL.h>
 #include <iostream>
+// #include "InputManager.hpp"
 
 namespace JamTemplate {
 
-Game::Game(unsigned int w, unsigned int h, float zoom, std::string const& title)
-    : m_state { nullptr } // , m_renderWindow { std::make_shared<sf::RenderWindow>(
-                          //       sf::VideoMode(w, h), title, sf::Style::Close) }
-    , m_zoom { zoom }
-// , m_renderTarget { std::make_shared<sf::RenderTexture>() }
+Game::Game(unsigned int width, unsigned int height, float zoom, std::string const& title)
+    : m_zoom { zoom }
 {
-    // m_renderWindow->setVerticalSyncEnabled(true);
-
-    unsigned int scaledWidth = static_cast<unsigned int>(w / m_zoom);
-    unsigned int scaledHeight = static_cast<unsigned int>(h / m_zoom);
-
-    // m_renderTarget->create(scaledWidth, scaledHeight);
-    // m_renderTarget->setSmooth(false);
-
-    // m_view = std::make_shared<sf::View>(jt::rect(0, 0, (float)scaledWidth, (float)scaledHeight));
-    // m_view->setViewport(jt::rect(0, 0, 1, 1));
-}
-
-float Game::getZoom() const { return m_zoom; }
-
-void Game::switchState(std::shared_ptr<GameState> newState)
-{
-    // std::cout << "switchstate\n";
-    if (newState == nullptr) {
-        throw std::invalid_argument { "cannot switch to nullptr state!" };
+    m_window = std::shared_ptr<SDL_Window>(SDL_CreateWindow(title.c_str(), SDL_WINDOWPOS_CENTERED,
+                                               SDL_WINDOWPOS_CENTERED, width, height, 0),
+        [](SDL_Window* w) { SDL_DestroyWindow(w); });
+    if (!m_window) {
+        throw std::logic_error { "Failed to create window." };
     }
-    m_nextState = newState;
-    // if no state has been assigned yet, we can directly switch state here.
-    if (m_state == nullptr) {
-        doSwitchState();
+
+    m_renderTarget = std::shared_ptr<SDL_Renderer>(
+        SDL_CreateRenderer(m_window.get(), -1, SDL_RENDERER_PRESENTVSYNC),
+        [](SDL_Renderer* r) { SDL_DestroyRenderer(r); });
+    if (!m_renderTarget) {
+        throw std::logic_error { "failed to create renderer." };
+    }
+
+    m_surface = std::shared_ptr<SDL_Surface>(SDL_GetWindowSurface(m_window.get()));
+    if (!m_surface) {
+        throw std::logic_error { "failed to create surface." };
     }
 }
 
-// void Game::setRenderTarget(std::shared_ptr<sf::RenderTexture> rt)
-// {
-//     if (rt == nullptr) {
-//         throw std::invalid_argument { "cannot set nullptr rendertarget" };
-//     }
-//     m_renderTarget = rt;
-// }
-// std::shared_ptr<sf::RenderTexture> Game::getRenderTarget() { return m_renderTarget; }
+void Game::runGame(std::shared_ptr<GameState> InitialState) { switchState(InitialState); }
 
-// void Game::setRenderWindow(std::shared_ptr<sf::RenderWindow> w)
-// {
-//     if (w == nullptr) {
-//         throw std::invalid_argument { "cannot set nullptr renderwindow" };
-//     }
-//     m_renderWindow = w;
-// }
-// std::shared_ptr<sf::RenderWindow> Game::getRenderWindow() { return m_renderWindow; }
-
-// void Game::setView(std::shared_ptr<sf::View> view)
-// {
-//     m_view = view;
-//     if (m_renderTarget != nullptr)
-//         m_renderTarget->setView(*m_view);
-// }
-// std::shared_ptr<sf::View> Game::getView() { return m_view; }
-
-jt::vector2 Game::getCamOffset() { return m_CamOffset; }
-
-void Game::setCamOffset(jt::vector2 const& ofs) { m_CamOffset = ofs; }
-void Game::moveCam(jt::vector2 const& v) { m_CamOffset = m_CamOffset + v; }
-
-void Game::shake(float t, float strength, float shakeInterval)
+void Game::setRenderTarget(std::shared_ptr<jt::renderTarget> rt)
 {
-    m_shakeTimer = t;
-    m_shakeStrength = strength;
-    m_shakeInterval = m_shakeIntervalMax = shakeInterval;
+    if (rt == nullptr) {
+        throw std::invalid_argument { "cannot set nullptr rendertarget" };
+    }
+    m_renderTarget = rt;
 }
+std::shared_ptr<jt::renderTarget> Game::getRenderTarget() const { return m_renderTarget; }
 
-std::weak_ptr<Game> Game::getPtr() { return shared_from_this(); }
-
-void Game::doUpdate(float const elapsed)
+void Game::doUpdate(float const /*elapsed*/)
 {
+
     // std::cout << "game::update\n";
-
-    if (m_nextState != nullptr) {
-        doSwitchState();
-        return;
-    }
-    if (m_state == nullptr)
-        return;
-
+    m_state->update(elapsed);
     // jt::vector2 mpf = getRenderWindow()->mapPixelToCoords(
     //     sf::Mouse::getPosition(*getRenderWindow()), *getView());
     // jt::vector2 mpfs
@@ -101,11 +56,8 @@ void Game::doUpdate(float const elapsed)
     //     m_zoom;
     // InputManager::update(mpf.x(), mpf.y(), mpfs.x(), mpfs.y(), elapsed);
 
-    updateShake(elapsed);
-    m_state->update(elapsed);
-
-    int const camOffsetix { static_cast<int>(m_CamOffset.x() + getView()->getSize().x / 2) };
-    int const camOffsetiy { static_cast<int>(m_CamOffset.y() + getView()->getSize().y / 2) };
+    // int const camOffsetix { static_cast<int>(m_CamOffset.x() + getView()->getSize().x / 2) };
+    // int const camOffsetiy { static_cast<int>(m_CamOffset.y() + getView()->getSize().y / 2) };
 
     // getView()->setCenter(
     //     jt::vector2 { static_cast<float>(camOffsetix), static_cast<float>(camOffsetiy) });
@@ -114,33 +66,14 @@ void Game::doUpdate(float const elapsed)
 
 void Game::doDraw() const
 {
-    // clear the old image
-    // m_renderTarget->clear(m_backgroundColor);
-    // m_renderWindow->clear(m_backgroundColor);
-
-    if (m_state == nullptr)
-        return;
     m_state->draw();
-
-    // convert renderTexture to sprite and draw that.
-    // const sf::Texture& texture = m_renderTarget->getTexture();
-    // sf::Sprite spr(texture);
-    // Note: RenderTexture has a bug and is displayed upside down.
-    // This is corrected by the following two lines
-    spr.setScale(jt::vector2(m_zoom, -m_zoom));
-    spr.setPosition(0.0f, static_cast<float>(m_renderWindow->getSize().y));
-
-    // draw the sprite
-    // m_renderWindow->draw(spr);
-
-    // blit it to the screen
-    // m_renderWindow->display();
+    SDL_RenderPresent(getRenderTarget().get());
 };
 
 void Game::updateShake(float elapsed)
 {
     if (m_shakeOffset.x() != 0 || m_shakeOffset.y() != 0) {
-        getView()->move(-m_shakeOffset.x(), -m_shakeOffset.y());
+        // getView()->move(-m_shakeOffset.x(), -m_shakeOffset.y());
     }
 
     if (m_shakeTimer > 0) {
@@ -156,32 +89,19 @@ void Game::updateShake(float elapsed)
         m_shakeOffset.x() = m_shakeOffset.y() = 0;
     }
 
-    auto v = getView();
-    v->move(m_shakeOffset.x(), m_shakeOffset.y());
-    setView(v);
+    // auto v = getView();
+    // v->move(m_shakeOffset.x(), m_shakeOffset.y());
+    // setView(v);
 }
 
 void Game::resetShake()
 {
     if (m_shakeOffset.x() != 0 || m_shakeOffset.y() != 0) {
-        getView()->move(-m_shakeOffset.x(), -m_shakeOffset.y());
+        // getView()->move(-m_shakeOffset.x(), -m_shakeOffset.y());
     }
     m_shakeOffset.x() = m_shakeOffset.y() = 0;
     m_shakeTimer = -1;
     m_shakeStrength = 0;
-}
-
-void Game::doSwitchState()
-{
-    m_state = m_nextState;
-    m_nextState = nullptr;
-
-    m_CamOffset = jt::vector2 { 0.0f, 0.0f };
-    m_state->setGameInstance(getPtr());
-    m_state->create();
-
-    // JamTemplate::InputManager::reset();
-    resetShake();
 }
 
 } // namespace JamTemplate

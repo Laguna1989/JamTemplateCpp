@@ -17,11 +17,6 @@ public:
         m_shape = std::make_shared<sf::RectangleShape>(size);
         m_flashShape = std::make_shared<sf::RectangleShape>(size);
     }
-    void makeCircle(float radius, unsigned int points = 30U)
-    {
-        m_shape = std::make_shared<sf::CircleShape>(radius, points);
-        m_flashShape = std::make_shared<sf::CircleShape>(radius, points);
-    }
 
     void setColor(jt::color const& col) override { m_shape->setFillColor(col); }
     const jt::color getColor() const override { return m_shape->getFillColor(); }
@@ -32,21 +27,21 @@ public:
     void setPosition(jt::vector2 const& pos) override { m_position = pos; }
     const jt::vector2 getPosition() const override { return m_position; }
 
-    sf::Transform const getTransform() const override { return m_shape->getTransform(); }
+    // sf::Transform const getTransform() const override { return m_shape->getTransform(); }
     jt::rect const getGlobalBounds() const override { return m_shape->getGlobalBounds(); }
     jt::rect const getLocalBounds() const override { return m_shape->getLocalBounds(); }
 
     std::shared_ptr<sf::Shape> getShape() { return m_shape; }
 
-    void setScale(jt::vector2 const& scale) { m_shape->setScale(scale); }
-    const jt::vector2 getScale() const { return m_shape->getScale(); }
+    void setScale(jt::vector2 const& scale) override { m_shape->setScale(scale); }
+    const jt::vector2 getScale() const override { return m_shape->getScale(); }
 
-    void setOrigin(jt::vector2 const& origin)
+    void setOrigin(jt::vector2 const& origin) override
     {
         m_shape->setOrigin(origin);
         m_flashShape->setOrigin(origin);
     }
-    const jt::vector2 getOrigin() const { return m_shape->getOrigin(); }
+    const jt::vector2 getOrigin() const override { return m_shape->getOrigin(); }
 
 private:
     mutable std::shared_ptr<sf::Shape> m_shape = nullptr;

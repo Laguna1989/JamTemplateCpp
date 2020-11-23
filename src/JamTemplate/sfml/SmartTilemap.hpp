@@ -34,7 +34,7 @@ public:
     void setPosition(jt::vector2 const& pos);
     const jt::vector2 getPosition() const;
 
-    sf::Transform const getTransform() const;
+    // sf::Transform const getTransform() const;
     jt::rect const getGlobalBounds() const;
     jt::rect const getLocalBounds() const;
 

@@ -1,11 +1,11 @@
 ﻿#ifndef RENDERTARGET_BASE_GUARD_HPP
 #define RENDERTARGET_BASE_GUARD_HPP
 
-#include <SFML/Graphics.hpp>
+#include <SDL.h>
 
 namespace jt {
 
-using renderTarget = sf::RenderTexture;
+using renderTarget = SDL_Renderer;
 
 } // namespace jt
 

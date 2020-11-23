@@ -19,10 +19,10 @@ public:
 
     Game(unsigned int w, unsigned int h, float zoom, std::string const& title);
 
-    void runGame(std::shared_ptr<GameState> InitialState);
+    void runGame(std::shared_ptr<GameState> InitialState) override;
 
-    void setRenderTarget(std::shared_ptr<jt::renderTarget> rt);
-    std::shared_ptr<jt::renderTarget> getRenderTarget();
+    void setRenderTarget(std::shared_ptr<jt::renderTarget> rt) override;
+    std::shared_ptr<jt::renderTarget> getRenderTarget() const override;
 
 private:
     std::shared_ptr<jt::renderTarget> m_renderTarget { nullptr };
@@ -34,8 +34,8 @@ private:
     virtual void doUpdate(float const elapsed) override;
     virtual void doDraw() const override;
 
-    void updateShake(float elapsed);
-    void resetShake();
+    void updateShake(float elapsed) override;
+    void resetShake() override;
 
     void setView(std::shared_ptr<sf::View> view);
     std::shared_ptr<sf::View> getView();

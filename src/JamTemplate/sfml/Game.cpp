@@ -38,14 +38,7 @@ void Game::runGame(std::shared_ptr<GameState> InitialState)
                     m_renderWindow->close();
                 }
             }
-            auto const now = std::chrono::steady_clock::now();
-
-            float const elapsed
-                = std::chrono::duration_cast<std::chrono::microseconds>(now - timeLast).count()
-                / 1000.0f / 1000.0f;
-            timeLast = now;
-            update(elapsed);
-            draw();
+            run();
         }
     } catch (std::exception const& e) {
         std::cerr << "!! ERROR: Exception ocurred !!\n";
@@ -64,7 +57,7 @@ void Game::setRenderTarget(std::shared_ptr<jt::renderTarget> rt)
     }
     m_renderTarget = rt;
 }
-std::shared_ptr<jt::renderTarget> Game::getRenderTarget() { return m_renderTarget; }
+std::shared_ptr<jt::renderTarget> Game::getRenderTarget() const { return m_renderTarget; }
 
 void Game::setRenderWindow(std::shared_ptr<sf::RenderWindow> w)
 {
@@ -86,22 +79,13 @@ std::shared_ptr<sf::View> Game::getView() { return m_view; }
 void Game::doUpdate(float const elapsed)
 {
     // std::cout << "game::update\n";
-
-    if (m_nextState != nullptr) {
-        doSwitchState();
-        return;
-    }
-    if (m_state == nullptr)
-        return;
+    m_state->update(elapsed);
 
     jt::vector2 mpf = getRenderWindow()->mapPixelToCoords(
         sf::Mouse::getPosition(*getRenderWindow()), *getView());
     jt::vector2 mpfs
         = getRenderWindow()->mapPixelToCoords(sf::Mouse::getPosition(*getRenderWindow())) / m_zoom;
     InputManager::update(mpf.x(), mpf.y(), mpfs.x(), mpfs.y(), elapsed);
-
-    updateShake(elapsed);
-    m_state->update(elapsed);
 
     int const camOffsetix { static_cast<int>(m_CamOffset.x() + getView()->getSize().x / 2) };
     int const camOffsetiy { static_cast<int>(m_CamOffset.y() + getView()->getSize().y / 2) };
@@ -116,8 +100,6 @@ void Game::doDraw() const
     // clear the old image
     m_renderTarget->clear(m_backgroundColor);
 
-    if (m_state == nullptr)
-        return;
     m_state->draw();
 
     // convert renderTexture to sprite and draw that.

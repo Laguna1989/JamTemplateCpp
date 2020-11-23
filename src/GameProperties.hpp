@@ -2,6 +2,7 @@
 #define GAME_GAMEPROPERTIES_HPP_INCLUDEGUARD
 
 #include "color.hpp"
+#include "vector.hpp"
 #include <cstdint>
 #include <string>
 
@@ -28,6 +29,7 @@ public:
     static jt::color PaletteFlashRed() { return jt::color { 143, 33, 33 }; };
 
     static std::string GameName() { return "MyAwesomeGame"; };
+    static jt::vector2 GetTargetSize() { return jt::vector2 { 800, 600 }; }
 };
 
 #endif
