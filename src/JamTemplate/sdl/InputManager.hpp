@@ -1,7 +1,9 @@
 ﻿#ifndef JAMTEMPLATE_INPUTMANAGER_HPP_INCLUDEGUARD
 #define JAMTEMPLATE_INPUTMANAGER_HPP_INCLUDEGUARD
 
+#include "KeyCodes.hpp"
 #include "vector.hpp"
+#include <SDL.h>
 #include <iostream>
 #include <map>
 #include <vector>
@@ -9,7 +11,6 @@
 namespace JamTemplate {
 namespace InputHelper {
 
-// std::vector<sf::Keyboard::Key> getAllKeys();
 // std::vector<sf::Mouse::Button> getAllMouseButtons();
 
 } // namespace InputHelper
@@ -24,27 +25,27 @@ public:
     static jt::vector2 getMousePositionScreen();
 
     // TODO
-    // static bool pressed(sf::Keyboard::Key k);
-    // static bool pressed(sf::Mouse::Button b);
+    static bool pressed(jt::KeyCode k);
+    //  static bool pressed(sf::Mouse::Button b);
 
-    // static bool released(sf::Keyboard::Key k);
+    static bool released(jt::KeyCode k);
     // static bool released(sf::Mouse::Button b);
 
-    // static bool justPressed(sf::Keyboard::Key k);
+    static bool justPressed(jt::KeyCode k);
     // static bool justPressed(sf::Mouse::Button b);
 
-    // static bool justReleased(sf::Keyboard::Key k);
+    static bool justReleased(jt::KeyCode k);
     // static bool justReleased(sf::Mouse::Button b);
 
     static void reset();
 
 private:
     // TODO
-    // static std::map<sf::Keyboard::Key, bool> m_pressed;
-    // static std::map<sf::Keyboard::Key, bool> m_released;
+    static std::map<jt::KeyCode, bool> m_pressed;
+    static std::map<jt::KeyCode, bool> m_released;
 
-    // static std::map<sf::Keyboard::Key, bool> m_justPressed;
-    // static std::map<sf::Keyboard::Key, bool> m_justReleased;
+    static std::map<jt::KeyCode, bool> m_justPressed;
+    static std::map<jt::KeyCode, bool> m_justReleased;
 
     // static std::map<sf::Mouse::Button, bool> m_mousePressed;
     // static std::map<sf::Mouse::Button, bool> m_mouseJustPressed;

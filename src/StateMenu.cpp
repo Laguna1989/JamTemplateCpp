@@ -2,6 +2,7 @@
 #include "Game.hpp"
 #include "GameProperties.hpp"
 #include "InputManager.hpp"
+#include "KeyCodes.hpp"
 #include "MathHelper.hpp"
 #include "SmartShape.hpp"
 // #include "SmartText.hpp"
@@ -122,6 +123,13 @@ void StateMenu::doInternalUpdate(float const elapsed)
 {
     m_shape->update(elapsed);
     if (!m_starting) {
+
+        if (JamTemplate::InputManager::justPressed(jt::KeyCode::A)) {
+            std::cout << "A justpressed\n";
+        }
+        if (JamTemplate::InputManager::justReleased(jt::KeyCode::A)) {
+            std::cout << "A justreleased\n";
+        }
         // TODO
         // using ip = JamTemplate::InputManager;
         // if (ip::justPressed(sf::Keyboard::Key::Space)

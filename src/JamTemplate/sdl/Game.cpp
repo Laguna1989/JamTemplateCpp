@@ -1,12 +1,12 @@
 ﻿#include "Game.hpp"
 #include "GameState.hpp"
+#include "InputManager.hpp"
 #include "Random.hpp"
 #include "SmartObject.hpp"
 #include "rect.hpp"
 #include "vector.hpp"
 #include <SDL.h>
 #include <iostream>
-// #include "InputManager.hpp"
 
 namespace JamTemplate {
 
@@ -52,6 +52,7 @@ std::shared_ptr<jt::renderTarget> Game::getRenderTarget() const { return m_rende
 
 void Game::doUpdate(float const elapsed)
 {
+    JamTemplate::InputManager::update(0.0f, 0.0f, 0.0f, 0.0f, elapsed);
     m_state->update(elapsed);
     // jt::vector2 mpf = getRenderWindow()->mapPixelToCoords(
     //     sf::Mouse::getPosition(*getRenderWindow()), *getView());
