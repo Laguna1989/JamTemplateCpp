@@ -65,7 +65,7 @@ void StateMenu::doCreate()
     // m_text_Credits->setShadow(GP::PaletteFontShadow(), jt::vector2 { 1, 1 });
 
     m_overlay = std::make_shared<JamTemplate::SmartShape>();
-    m_overlay->makeRect(jt::vector2 { w, h });
+    m_overlay->makeRect(jt::vector2 { w * 0.5f, h * 0.5f });
     m_overlay->setColor(jt::color { 0, 0, 0 });
     m_overlay->update(0);
 
@@ -150,5 +150,5 @@ void StateMenu::doInternalDraw() const
     // m_test_Explanation->draw(getGame()->getRenderTarget());
     // m_text_Credits->draw(getGame()->getRenderTarget());
 
-    // m_overlay->draw(getGame()->getRenderTarget());
+    m_overlay->draw(getGame()->getRenderTarget());
 }

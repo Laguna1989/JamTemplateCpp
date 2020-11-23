@@ -2,6 +2,7 @@
 #define JAMTEMPLATE_GAME_HPP_INCLUDEGUARD
 
 #include "GameBase.hpp"
+#include "rect.hpp"
 #include "rendertarget.hpp"
 #include <chrono>
 #include <memory>
@@ -28,7 +29,9 @@ private:
     std::shared_ptr<jt::renderTarget> m_renderTarget { nullptr };
     std::shared_ptr<SDL_Window> m_window;
     std::shared_ptr<SDL_Surface> m_surface;
-    float m_zoom;
+
+    jt::recti m_srcRect;
+    jt::vector2 m_fullsize;
 
     // override functions from GameBase
     virtual void doUpdate(float const elapsed) override;

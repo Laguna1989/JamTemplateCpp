@@ -11,8 +11,13 @@
 namespace JamTemplate {
 
 Game::Game(unsigned int width, unsigned int height, float zoom, std::string const& title)
-    : m_zoom { zoom }
 {
+    m_fullsize = jt::vector2 { static_cast<float>(width), static_cast<float>(height) };
+
+    unsigned int scaledWidth = static_cast<unsigned int>(width / zoom);
+    unsigned int scaledHeight = static_cast<unsigned int>(height / zoom);
+    m_srcRect = jt::recti(0, 0, scaledWidth, scaledHeight);
+
     m_window = std::shared_ptr<SDL_Window>(SDL_CreateWindow(title.c_str(), SDL_WINDOWPOS_CENTERED,
                                                SDL_WINDOWPOS_CENTERED, width, height, 0),
         [](SDL_Window* w) { SDL_DestroyWindow(w); });
@@ -26,6 +31,7 @@ Game::Game(unsigned int width, unsigned int height, float zoom, std::string cons
     if (!m_renderTarget) {
         throw std::logic_error { "failed to create renderer." };
     }
+    SDL_SetRenderDrawBlendMode(m_renderTarget.get(), SDL_BLENDMODE_BLEND);
 
     m_surface = std::shared_ptr<SDL_Surface>(SDL_GetWindowSurface(m_window.get()));
     if (!m_surface) {
@@ -46,8 +52,6 @@ std::shared_ptr<jt::renderTarget> Game::getRenderTarget() const { return m_rende
 
 void Game::doUpdate(float const elapsed)
 {
-
-    // std::cout << "game::update\n";
     m_state->update(elapsed);
     // jt::vector2 mpf = getRenderWindow()->mapPixelToCoords(
     //     sf::Mouse::getPosition(*getRenderWindow()), *getView());
@@ -66,8 +70,26 @@ void Game::doUpdate(float const elapsed)
 
 void Game::doDraw() const
 {
+    // for reasons this can not be a member.
+    auto t = SDL_CreateTexture(getRenderTarget().get(), SDL_PIXELFORMAT_RGBA8888,
+        SDL_TEXTUREACCESS_TARGET, static_cast<int>(m_srcRect.width()),
+        static_cast<int>(m_srcRect.height()));
+
+    // render to the small texture first
+    SDL_SetRenderTarget(getRenderTarget().get(), t);
+    SDL_RenderClear(getRenderTarget().get());
     m_state->draw();
+
+    // Detach the texture
+    SDL_SetRenderTarget(getRenderTarget().get(), NULL);
+
+    // Now render the texture target to our screen
+    SDL_RenderClear(getRenderTarget().get());
+    SDL_Rect rect { m_srcRect.left(), m_srcRect.top(), m_srcRect.width(), m_srcRect.height() };
+    SDL_RenderCopyEx(getRenderTarget().get(), t, &rect, NULL, 0, NULL, SDL_FLIP_NONE);
     SDL_RenderPresent(getRenderTarget().get());
+
+    SDL_DestroyTexture(t);
 };
 
 void Game::updateShake(float elapsed)
