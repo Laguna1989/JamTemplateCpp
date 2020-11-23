@@ -127,8 +127,8 @@ void StateMenu::doInternalUpdate(float const elapsed)
         if (JamTemplate::InputManager::justPressed(jt::KeyCode::A)) {
             std::cout << "A justpressed\n";
         }
-        if (JamTemplate::InputManager::justReleased(jt::KeyCode::A)) {
-            std::cout << "A justreleased\n";
+        if (JamTemplate::InputManager::justReleased(jt::KeyCode::K)) {
+            std::cout << "K justreleased\n";
         }
         // TODO
         // using ip = JamTemplate::InputManager;
