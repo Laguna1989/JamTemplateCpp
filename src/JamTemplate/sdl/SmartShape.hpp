@@ -97,14 +97,9 @@ private:
 
     void doUpdate(float /*elapsed*/) override
     {
-
         auto const pos = getPosition() + getShakeOffset() + getOffset() + getCamOffset();
-        std::cout << "shape update " << m_shape->left() << " " << m_position.x() << " " << pos.x()
-                  << "\n";
         m_shape->left() = pos.x();
         m_shape->top() = pos.y();
-
-        // m_shape->setPosition(pos);
     }
 
     void doRotate(float rot) override

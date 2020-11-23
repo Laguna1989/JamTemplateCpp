@@ -44,7 +44,7 @@ void Game::setRenderTarget(std::shared_ptr<jt::renderTarget> rt)
 }
 std::shared_ptr<jt::renderTarget> Game::getRenderTarget() const { return m_renderTarget; }
 
-void Game::doUpdate(float const /*elapsed*/)
+void Game::doUpdate(float const elapsed)
 {
 
     // std::cout << "game::update\n";

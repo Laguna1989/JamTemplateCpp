@@ -117,7 +117,6 @@ protected:
 private:
     static jt::vector2 m_CamOffset;
     bool m_ignoreCamMovement { false };
-    bool m_moveWithCam { true };
 
     bool m_hasBeenUpdated { false };
     float m_flashTimer { -1.0f };
