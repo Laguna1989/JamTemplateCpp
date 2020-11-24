@@ -2,12 +2,13 @@
 #define JAMTEMPLATE_TEXTUREMANAGER_HPP_INCLUDEGUARD
 
 #include "SplitString.hpp"
-#include "SpriteFunctions.hpp"
 #include "color.hpp"
 #include "rendertarget.hpp"
-#include <SFML/Graphics.hpp>
+#include <SDL.h>
 #include <assert.h>
+#include <exception>
 #include <map>
+#include <memory>
 #include <string>
 #include <vector>
 
@@ -17,7 +18,7 @@ class TextureManager {
 public:
     using ColorReplaceLookupType = std::vector<std::pair<jt::color, jt::color>>;
     using ColorReplaceLookupVectorType = std::vector<ColorReplaceLookupType>;
-    using TextureMapType = std::map<std::string, sf::Texture>;
+    using TextureMapType = std::map<std::string, std::shared_ptr<SDL_Texture>>;
     TextureManager() = delete;
 
     // get texture from string
@@ -25,7 +26,7 @@ public:
     // str can be a special string, e.g.
     // - #b#100#200 will create a button with width 100 and height 200
     // - #r#assets/player.png#0 will load player.png and perform color replace number 0
-    static sf::Texture& get(std::string const& str);
+    static std::shared_ptr<SDL_Texture> get(std::string const& str);
 
     // reset all stored images
     static void reset();
@@ -37,44 +38,22 @@ public:
     // should not be called frequently! Only works for textures obtained from this class (not for
     // colors of shapes or whatever) \param in and out are used for lookups if a color is used which
     // is not contained in in, the color will be unchanged
-    static void swapPalette(std::vector<jt::color> in, std::vector<jt::color> out)
+    static void swapPalette(std::vector<jt::color> /*in*/, std::vector<jt::color> /*out*/)
     {
-        assert(in.size() == out.size());
-        for (auto& kvp : m_textures) {
-
-            sf::Image img = kvp.second.copyToImage();
-
-            for (unsigned i = 0; i != img.getSize().x; ++i)
-                for (unsigned j = 0; j != img.getSize().x; ++j) {
-                    jt::color const col = img.getPixel(i, j);
-                    // for this pixel check for each color in lookup
-                    for (size_t idx = 0; idx != in.size(); ++idx) {
-                        if (in[idx] == col) {
-                            img.setPixel(i, j, out[idx]);
-                            break;
-                        }
-                    }
-                }
-            kvp.second.loadFromImage(img);
-        }
+        throw std::logic_error { "swap palette not supported yet" };
     }
 
     static void addSelectiveColorReplacement(
-        int idx, std::vector<std::pair<jt::color, jt::color>> replace)
+        int /*idx*/, std::vector<std::pair<jt::color, jt::color>> /*replace*/)
     {
-        if (m_selectiveColorReplace.size() <= idx) {
-            m_selectiveColorReplace.resize(idx + 1U);
-        }
-
-        m_selectiveColorReplace.at(idx) = replace;
+        throw std::logic_error { "color replacement not supported yet" };
     }
-
-    static void setRenderer(std::weak_ptr<jt::renderTarget> /*unused*/) {};
+    static void setRenderer(std::weak_ptr<jt::renderTarget> renderer) { m_renderer = renderer; };
 
 private:
     static TextureMapType m_textures;
     static ColorReplaceLookupVectorType m_selectiveColorReplace;
-
+    static std::weak_ptr<jt::renderTarget> m_renderer;
     static bool containsTexture(std::string const& str) { return (m_textures.count(str) != 0); }
 };
 

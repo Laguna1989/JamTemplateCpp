@@ -26,26 +26,36 @@ void GameBase::switchState(std::shared_ptr<GameState> newState)
 
 void GameBase::run()
 {
-    if (m_nextState != nullptr) {
-        doSwitchState();
-        return;
-    }
-    if (m_state == nullptr) {
-        return;
-    }
-    auto const now = std::chrono::steady_clock::now();
+    try {
+        if (m_nextState != nullptr) {
+            doSwitchState();
+            return;
+        }
+        if (m_state == nullptr) {
+            return;
+        }
+        auto const now = std::chrono::steady_clock::now();
 
-    float const elapsed
-        = std::chrono::duration_cast<std::chrono::microseconds>(now - timeLast).count() / 1000.0f
-        / 1000.0f;
-    timeLast = now;
-    if (m_age != 0) {
-        updateShake(elapsed);
+        float const elapsed
+            = std::chrono::duration_cast<std::chrono::microseconds>(now - timeLast).count()
+            / 1000.0f / 1000.0f;
+        timeLast = now;
+        if (m_age != 0) {
+            updateShake(elapsed);
 
-        update(elapsed);
-        draw();
+            update(elapsed);
+            draw();
+        }
+        m_age++;
+
+    } catch (std::exception const& e) {
+        std::cerr << "!! ERROR: Exception ocurred !!\n";
+        std::cerr << e.what() << std::endl;
+        throw;
+    } catch (...) {
+        std::cerr << "!! ERROR: Unhandled Exception ocurred !!\n";
+        std::terminate();
     }
-    m_age++;
 }
 
 jt::vector2 GameBase::getCamOffset() { return m_CamOffset; }

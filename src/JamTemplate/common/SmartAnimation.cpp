@@ -1,6 +1,5 @@
 ﻿#include "SmartAnimation.hpp"
 #include "SmartSprite.hpp"
-#include <SFML/Graphics.hpp>
 #include <iostream>
 #include <map>
 #include <memory>
@@ -87,6 +86,7 @@ jt::vector2 const SmartAnimation::getPosition() const { return m_position; }
 //    }
 //    return trans;
 //}
+
 jt::rect const SmartAnimation::getGlobalBounds() const
 {
     return getCurrentSprite(m_frames, m_currentAnimName, m_currentIdx)->getGlobalBounds();

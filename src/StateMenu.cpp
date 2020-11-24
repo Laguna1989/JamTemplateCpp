@@ -4,8 +4,8 @@
 #include "InputManager.hpp"
 #include "KeyCodes.hpp"
 #include "MathHelper.hpp"
+#include "SmartAnimation.hpp"
 #include "SmartShape.hpp"
-// #include "SmartText.hpp"
 #include "StateGame.hpp"
 #include "TweenAlpha.hpp"
 #include "TweenPosition.hpp"
@@ -30,6 +30,14 @@ void StateMenu::doCreate()
     m_shape->setColor(GP::PaletteColor3());
     m_shape->setPosition({ 100, 100 });
     m_shape->update(0.0f);
+
+    m_sprite = std::make_shared<JamTemplate::SmartAnimation>();
+    // m_sprite->loadSprite("assets/coin.png");
+    m_sprite->setPosition({ 150, 150 });
+    m_sprite->add("assets/coin.png", "idle", jt::vector2u { 16, 16 },
+        JamTemplate::MathHelper::vectorBetween(0U, 11U), 0.13f);
+    m_sprite->update(0.0f);
+    m_sprite->play("idle");
 
     // TODO
     // m_text_Title = std::make_shared<JamTemplate::SmartText>();
@@ -146,6 +154,7 @@ void StateMenu::doInternalUpdate(float const elapsed)
 
         // m_text_Title->update(elapsed);
         // m_test_Explanation->update(elapsed);
+        m_sprite->update(elapsed);
     }
 }
 
@@ -153,6 +162,7 @@ void StateMenu::doInternalDraw() const
 {
     m_background->draw(getGame()->getRenderTarget());
     m_shape->draw(getGame()->getRenderTarget());
+    m_sprite->draw(getGame()->getRenderTarget());
 
     // m_text_Title->draw(getGame()->getRenderTarget());
     // m_test_Explanation->draw(getGame()->getRenderTarget());

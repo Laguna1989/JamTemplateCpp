@@ -2,6 +2,7 @@
 #define JAMTEMPLATE_SMARTSHAPE_HPP_INCLUDEGUARD
 
 #include "SmartObject.hpp"
+#include "TextureManager.hpp"
 #include "rect.hpp"
 #include "rendertarget.hpp"
 #include "vector.hpp"
@@ -67,6 +68,7 @@ private:
     jt::color m_flashColor;
 
     jt::vector2 m_position { 0, 0 };
+    float m_angle;
 
     void doDraw(std::shared_ptr<jt::renderTarget> const sptr) const override
     {
@@ -104,7 +106,8 @@ private:
 
     void doRotate(float rot) override
     {
-        // m_shape->setRotation(-rot);
+        throw std::logic_error { "rotate for shapesnot yet supported" };
+        m_angle = rot;
     }
 };
 } // namespace JamTemplate

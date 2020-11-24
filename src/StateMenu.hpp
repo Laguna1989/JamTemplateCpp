@@ -7,6 +7,7 @@ namespace JamTemplate {
 
 // class SmartText;
 class SmartShape;
+class SmartAnimation;
 
 } // namespace JamTemplate
 
@@ -23,6 +24,7 @@ private:
 
     std::shared_ptr<JamTemplate::SmartShape> m_overlay;
     std::shared_ptr<JamTemplate::SmartShape> m_shape;
+    std::shared_ptr<JamTemplate::SmartAnimation> m_sprite;
 
     bool m_starting { false };
 

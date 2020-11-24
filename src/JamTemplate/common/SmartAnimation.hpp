@@ -3,7 +3,6 @@
 
 #include "SmartObject.hpp"
 #include "rendertarget.hpp"
-#include <SFML/Graphics.hpp>
 #include <map>
 #include <memory>
 #include <string>

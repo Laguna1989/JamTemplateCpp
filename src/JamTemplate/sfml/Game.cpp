@@ -29,24 +29,15 @@ Game::Game(unsigned int w, unsigned int h, float zoom, std::string const& title)
 
 void Game::runGame(std::shared_ptr<GameState> InitialState)
 {
-    try {
-        switchState(InitialState);
-        while (m_renderWindow->isOpen()) {
-            sf::Event event;
-            while (m_renderWindow->pollEvent(event)) {
-                if (event.type == sf::Event::Closed) {
-                    m_renderWindow->close();
-                }
+    switchState(InitialState);
+    while (m_renderWindow->isOpen()) {
+        sf::Event event;
+        while (m_renderWindow->pollEvent(event)) {
+            if (event.type == sf::Event::Closed) {
+                m_renderWindow->close();
             }
-            run();
         }
-    } catch (std::exception const& e) {
-        std::cerr << "!! ERROR: Exception ocurred !!\n";
-        std::cerr << e.what() << std::endl;
-        throw;
-    } catch (...) {
-        std::cerr << "!! ERROR: Unhandled Exception ocurred !!\n";
-        std::terminate();
+        run();
     }
 }
 

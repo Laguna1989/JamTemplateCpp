@@ -3,6 +3,7 @@
 #include "InputManager.hpp"
 #include "Random.hpp"
 #include "SmartObject.hpp"
+#include "TextureManager.hpp"
 #include "rect.hpp"
 #include "vector.hpp"
 #include <SDL.h>
@@ -37,6 +38,7 @@ Game::Game(unsigned int width, unsigned int height, float zoom, std::string cons
     if (!m_surface) {
         throw std::logic_error { "failed to create surface." };
     }
+    TextureManager::setRenderer(m_renderTarget);
 }
 
 void Game::runGame(std::shared_ptr<GameState> InitialState) { switchState(InitialState); }
