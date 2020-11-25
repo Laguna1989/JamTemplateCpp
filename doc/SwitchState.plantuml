@@ -1,0 +1,74 @@
+@startuml
+actor "User" as u
+participant "game : Game" as g
+participant "StateMenu : GameState" as p
+participant "StateGame : GameState" as n
+
+activate u
+
+== First update : SwitchState ==
+u -> g : update(elapsed)
+activate g
+g -> g : doUpdate(elapsed)
+activate g #Gray
+g -> p : update(elapsed)
+activate p
+create n
+p -> n : create
+p -> g : switchState(new next)
+deactivate p
+g -> g : m_nextState = next;
+note right: next is stored and will be switched on next update.
+
+g --> u
+deactivate g
+deactivate g
+deactivate p
+
+
+== Second update: Actual State Switch happens ==
+u -> g : update(elapsed)
+activate g
+g-> g : doUpdate(elapsed)
+activate g #Gray
+g -> g : m_state = m_nextState;
+activate g #Black
+note right
+shared_ptr goes out of scope
+end note
+g --> p
+destroy p
+deactivate g
+g -> n : setGameInstance(game)
+activate n
+n --> g
+deactivate n
+g -> n : create()
+activate n
+n ->n : doCreate()
+activate n #Gray
+
+deactivate n
+n --> g
+deactivate n
+g --> u
+deactivate g
+deactivate g
+
+== Third update: next State is active ==
+u -> g : update (elapsed)
+activate g
+g -> g :doUpdate(elapsed)
+activate g #Gray
+
+g -> n : update(elapsed)
+activate n
+n -> n : doUpdate(elapsed)
+activate n #Gray
+
+deactivate n
+n --> g
+deactivate n
+g --> u
+deactivate g
+@enduml
