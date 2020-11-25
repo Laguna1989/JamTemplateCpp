@@ -72,9 +72,9 @@ private:
 
     void doFlash(float t, jt::color col = jt::colors::White) override;
 
-    virtual void doUpdate(float elapsed);
+    virtual void doUpdate(float elapsed) override;
 
-    void doRotate(float rot);
+    void doRotate(float rot) override;
 };
 
 } // namespace JamTemplate

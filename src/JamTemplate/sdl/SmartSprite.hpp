@@ -63,18 +63,9 @@ public:
 
     virtual const jt::vector2 getScale() const override { return m_scale; }
 
-    virtual void setOrigin(jt::vector2 const& origin) override
-    {
-        // TODO
-        // m_sprite.setOrigin(origin);
-        // m_flashSprite.setOrigin(origin);
-    }
+    virtual void setOrigin(jt::vector2 const& origin) override { m_origin = origin; }
 
-    virtual jt::vector2 const getOrigin() const override
-    {
-        // TODO
-        return jt::vector2 {};
-    }
+    virtual jt::vector2 const getOrigin() const override { return m_origin; }
 
 private:
     mutable std::shared_ptr<SDL_Texture> m_text;
@@ -83,25 +74,11 @@ private:
     jt::recti m_sourceRect { 0, 0, 0, 0 };
     jt::color m_color { jt::colors::White };
     jt::vector2 m_scale { 1.0f, 1.0f };
-
+    jt::vector2 m_origin { 0.0f, 0.0f };
     void doUpdate(float /*elapsed*/) override
     {
 
         // m_flashSprite.setPosition(pos);
-    }
-
-    void doDrawShadow(std::shared_ptr<jt::renderTarget> const sptr) const override
-    {
-        // TODO
-        // jt::vector2 const oldPos = m_sprite.getPosition();
-        // jt::color const oldCol = m_sprite.getColor();
-
-        // m_sprite.setPosition(oldPos + getShadowOffset());
-        // m_sprite.setColor(getShadowColor());
-        // sptr->draw(m_sprite);
-
-        // m_sprite.setPosition(oldPos);
-        // m_sprite.setColor(oldCol);
     }
 
     void doDraw(std::shared_ptr<jt::renderTarget> const sptr) const override
@@ -122,11 +99,38 @@ private:
         SDL_Rect destRect { static_cast<int>(pos.x()), static_cast<int>(pos.y()),
             static_cast<int>(m_sourceRect.width() * scalex),
             static_cast<int>(m_sourceRect.height() * scaley) };
+        SDL_Point p { static_cast<int>(m_origin.x()), static_cast<int>(m_origin.y()) };
         SDL_SetRenderDrawBlendMode(sptr.get(), SDL_BLENDMODE_BLEND);
         SDL_SetTextureColorMod(m_text.get(), m_color.r(), m_color.g(), m_color.b());
         SDL_SetTextureAlphaMod(m_text.get(), m_color.a());
-        SDL_RenderCopyEx(
-            sptr.get(), m_text.get(), &sourceRect, &destRect, getRotation(), nullptr, flip);
+        SDL_RenderCopyEx(sptr.get(), m_text.get(), &sourceRect, &destRect, getRotation(), &p, flip);
+    }
+
+    void doDrawShadow(std::shared_ptr<jt::renderTarget> const sptr) const override
+    {
+        auto const pos
+            = m_position + getShakeOffset() + getOffset() + getCamOffset() + getShadowOffset();
+        SDL_Rect sourceRect { m_sourceRect.left(), m_sourceRect.top(), m_sourceRect.width(),
+            m_sourceRect.height() };
+        float scalex = fabs(m_scale.x());
+        float scaley = fabs(m_scale.y());
+        auto flip = SDL_FLIP_NONE;
+        if (m_scale.x() < 0 && m_scale.y() < 0) {
+            flip = static_cast<SDL_RendererFlip>(SDL_FLIP_HORIZONTAL | SDL_FLIP_VERTICAL);
+        } else if (m_scale.x() < 0 && m_scale.y() >= 0) {
+            flip = SDL_FLIP_HORIZONTAL;
+        } else if (m_scale.x() >= 0 && m_scale.y() < 0) {
+            flip = SDL_FLIP_VERTICAL;
+        }
+        SDL_Rect destRect { static_cast<int>(pos.x()), static_cast<int>(pos.y()),
+            static_cast<int>(m_sourceRect.width() * scalex),
+            static_cast<int>(m_sourceRect.height() * scaley) };
+        SDL_Point p { static_cast<int>(m_origin.x()), static_cast<int>(m_origin.y()) };
+        SDL_SetRenderDrawBlendMode(sptr.get(), SDL_BLENDMODE_BLEND);
+        SDL_SetTextureColorMod(
+            m_text.get(), getShadowColor().r(), getShadowColor().g(), getShadowColor().b());
+        SDL_SetTextureAlphaMod(m_text.get(), getShadowColor().a());
+        SDL_RenderCopyEx(sptr.get(), m_text.get(), &sourceRect, &destRect, getRotation(), &p, flip);
     }
 
     void doDrawFlash(std::shared_ptr<jt::renderTarget> const sptr) const override
