@@ -51,6 +51,12 @@ T clamp(T const& value, T const& min, T const& max)
 
 std::string floatToStringWithXDigits(float const number, unsigned int digits);
 
+template <typename T>
+int sgn(T val)
+{
+    return (T(0) < val) - (val < T(0));
+}
+
 } // namespace MathHelper
 } // namespace JamTemplate
 

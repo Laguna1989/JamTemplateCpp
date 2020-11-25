@@ -1,6 +1,7 @@
 ﻿#ifndef JAMTEMPLATE_SMARTSPRITE_HPP_INCLUDEGUARD
 #define JAMTEMPLATE_SMARTSPRITE_HPP_INCLUDEGUARD
 
+#include "MathHelper.hpp"
 #include "SmartObject.hpp"
 #include "TextureManager.hpp"
 #include "rendertarget.hpp"
@@ -58,27 +59,18 @@ public:
     virtual jt::rect const getGlobalBounds() const override { return jt::rect {}; }
     virtual jt::rect const getLocalBounds() const override { return jt::rect {}; }
 
-    virtual void setScale(jt::vector2 const& scale)
-    {
-        // TODO
-        // m_sprite.setScale(scale);
-        // m_flashSprite.setScale(scale);
-    }
+    virtual void setScale(jt::vector2 const& scale) override { m_scale = scale; }
 
-    virtual const jt::vector2 getScale() const
-    {
-        // TODO
-        return jt::vector2 {};
-    }
+    virtual const jt::vector2 getScale() const override { return m_scale; }
 
-    virtual void setOrigin(jt::vector2 const& origin)
+    virtual void setOrigin(jt::vector2 const& origin) override
     {
         // TODO
         // m_sprite.setOrigin(origin);
         // m_flashSprite.setOrigin(origin);
     }
 
-    virtual jt::vector2 const getOrigin() const
+    virtual jt::vector2 const getOrigin() const override
     {
         // TODO
         return jt::vector2 {};
@@ -90,6 +82,8 @@ private:
     jt::vector2 m_position { 0, 0 };
     jt::recti m_sourceRect { 0, 0, 0, 0 };
     jt::color m_color;
+    jt::vector2 m_scale { 1.0f, 1.0f };
+    float m_angle { 0.0f };
 
     void doUpdate(float /*elapsed*/) override
     {
@@ -116,10 +110,21 @@ private:
         auto const pos = m_position + getShakeOffset() + getOffset() + getCamOffset();
         SDL_Rect sourceRect { m_sourceRect.left(), m_sourceRect.top(), m_sourceRect.width(),
             m_sourceRect.height() };
+        float scalex = fabs(m_scale.x());
+        float scaley = fabs(m_scale.y());
+        auto flip = SDL_FLIP_NONE;
+        if (m_scale.x() < 0 && m_scale.y() < 0) {
+            flip = static_cast<SDL_RendererFlip>(SDL_FLIP_HORIZONTAL | SDL_FLIP_VERTICAL);
+        } else if (m_scale.x() < 0 && m_scale.y() >= 0) {
+            flip = SDL_FLIP_HORIZONTAL;
+        } else if (m_scale.x() >= 0 && m_scale.y() < 0) {
+            flip = SDL_FLIP_VERTICAL;
+        }
         SDL_Rect destRect { static_cast<int>(pos.x()), static_cast<int>(pos.y()),
-            m_sourceRect.width(), m_sourceRect.height() };
+            static_cast<int>(m_sourceRect.width() * scalex),
+            static_cast<int>(m_sourceRect.height() * scaley) };
 
-        SDL_RenderCopy(sptr.get(), m_text.get(), &sourceRect, &destRect);
+        SDL_RenderCopyEx(sptr.get(), m_text.get(), &sourceRect, &destRect, m_angle, nullptr, flip);
     }
 
     void doDrawFlash(std::shared_ptr<jt::renderTarget> const sptr) const override
@@ -127,7 +132,7 @@ private:
         // sptr->draw(m_flashSprite);
     }
 
-    void doRotate(float rot)
+    void doRotate(float /*rot*/) override
     {
         // TODO
         // m_sprite.setRotation(-rot);

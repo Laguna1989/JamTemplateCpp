@@ -138,6 +138,18 @@ void StateMenu::doInternalUpdate(float const elapsed)
         if (JamTemplate::InputManager::justReleased(jt::KeyCode::K)) {
             std::cout << "K justreleased\n";
         }
+        if (JamTemplate::InputManager::justPressed(jt::KeyCode::Up)) {
+            m_sprite->setScale(jt::vector2 { 1.0f, 2.0f });
+        }
+        if (JamTemplate::InputManager::justPressed(jt::KeyCode::Down)) {
+            m_sprite->setScale(jt::vector2 { 1.0f, 1.0f });
+        }
+        if (JamTemplate::InputManager::justPressed(jt::KeyCode::Right)) {
+            m_sprite->setScale(jt::vector2 { 2.0f, 1.0f });
+        }
+        if (JamTemplate::InputManager::justPressed(jt::KeyCode::Left)) {
+            m_sprite->setScale(jt::vector2 { -1.5f, 1.0f });
+        }
         // TODO
         // using ip = JamTemplate::InputManager;
         // if (ip::justPressed(sf::Keyboard::Key::Space)

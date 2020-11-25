@@ -29,25 +29,25 @@ public:
     // start playing an animation from the pool.
     void play(std::string const& animName, size_t startFrame = 0, bool restart = false);
 
-    void setColor(jt::color const& col);
-    const jt::color getColor() const;
+    void setColor(jt::color const& col) override;
+    const jt::color getColor() const override;
 
-    void setPosition(jt::vector2 const& pos);
-    jt::vector2 const getPosition() const;
+    void setPosition(jt::vector2 const& pos) override;
+    jt::vector2 const getPosition() const override;
 
     // sf::Transform const getTransform() const;
 
-    jt::rect const getGlobalBounds() const;
-    virtual jt::rect const getLocalBounds() const;
+    jt::rect const getGlobalBounds() const override;
+    virtual jt::rect const getLocalBounds() const override;
 
     void setFlashColor(jt::color const& col) override;
-    jt::color const getFlashColor() const;
+    jt::color const getFlashColor() const override;
 
     virtual void setScale(jt::vector2 const& scale) override;
-    virtual jt::vector2 const getScale() const;
+    virtual jt::vector2 const getScale() const override;
 
-    void setOrigin(jt::vector2 const& origin);
-    jt::vector2 const getOrigin() const;
+    void setOrigin(jt::vector2 const& origin) override;
+    jt::vector2 const getOrigin() const override;
 
     void setShadowActive(bool active) override;
     void setShadowColor(jt::color const& col) override;
