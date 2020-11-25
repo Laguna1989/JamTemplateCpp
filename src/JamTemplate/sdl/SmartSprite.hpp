@@ -81,9 +81,8 @@ private:
 
     jt::vector2 m_position { 0, 0 };
     jt::recti m_sourceRect { 0, 0, 0, 0 };
-    jt::color m_color;
+    jt::color m_color { jt::colors::White };
     jt::vector2 m_scale { 1.0f, 1.0f };
-    float m_angle { 0.0f };
 
     void doUpdate(float /*elapsed*/) override
     {
@@ -123,8 +122,11 @@ private:
         SDL_Rect destRect { static_cast<int>(pos.x()), static_cast<int>(pos.y()),
             static_cast<int>(m_sourceRect.width() * scalex),
             static_cast<int>(m_sourceRect.height() * scaley) };
-
-        SDL_RenderCopyEx(sptr.get(), m_text.get(), &sourceRect, &destRect, m_angle, nullptr, flip);
+        SDL_SetRenderDrawBlendMode(sptr.get(), SDL_BLENDMODE_BLEND);
+        SDL_SetTextureColorMod(m_text.get(), m_color.r(), m_color.g(), m_color.b());
+        SDL_SetTextureAlphaMod(m_text.get(), m_color.a());
+        SDL_RenderCopyEx(
+            sptr.get(), m_text.get(), &sourceRect, &destRect, getRotation(), nullptr, flip);
     }
 
     void doDrawFlash(std::shared_ptr<jt::renderTarget> const sptr) const override
@@ -132,12 +134,7 @@ private:
         // sptr->draw(m_flashSprite);
     }
 
-    void doRotate(float /*rot*/) override
-    {
-        // TODO
-        // m_sprite.setRotation(-rot);
-        // m_flashSprite.setRotation(-rot);
-    }
+    void doRotate(float /*rot*/) override { }
 }; // namespace JamTemplate
 
 } // namespace JamTemplate
