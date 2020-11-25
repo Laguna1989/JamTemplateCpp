@@ -43,6 +43,7 @@ void StateMenu::doCreate()
     m_sprite = std::make_shared<JamTemplate::SmartSprite>();
     m_sprite->loadSprite("assets/bar.png");
     m_sprite->setPosition({ 250, 250 });
+    m_sprite->setShadow(jt::colors::Black, jt::vector2 { 3, 3 });
     m_sprite->update(0.0f);
 
     // TODO

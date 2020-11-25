@@ -66,9 +66,9 @@ private:
 
     float m_frameTime = 0;
 
-    void doDrawShadow(std::shared_ptr<jt::renderTarget> const sptr) const;
-    void doDraw(std::shared_ptr<jt::renderTarget> const sptr) const;
-    void doDrawFlash(std::shared_ptr<jt::renderTarget> const /*sptr*/) const;
+    void doDrawShadow(std::shared_ptr<jt::renderTarget> const sptr) const override;
+    void doDraw(std::shared_ptr<jt::renderTarget> const sptr) const override;
+    void doDrawFlash(std::shared_ptr<jt::renderTarget> const /*sptr*/) const override;
 
     void doFlash(float t, jt::color col = jt::colors::White) override;
 
