@@ -24,11 +24,12 @@ public:
 
     void runGame(std::shared_ptr<GameState> InitialState) override;
     void run();
+    virtual float getZoom() const override;
 
 private:
     std::shared_ptr<jt::renderTarget> m_renderTarget { nullptr };
     std::shared_ptr<SDL_Window> m_window;
-    std::shared_ptr<SDL_Surface> m_surface;
+    float m_zoom;
 
     jt::recti m_srcRect;
     jt::vector2 m_fullsize;

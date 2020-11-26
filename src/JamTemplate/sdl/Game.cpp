@@ -7,12 +7,14 @@
 #include "rect.hpp"
 #include "vector.hpp"
 #include <SDL.h>
+#include <SDL_ttf.h>
 #include <iostream>
 
 namespace JamTemplate {
 
 Game::Game(unsigned int width, unsigned int height, float zoom, std::string const& title)
 {
+    m_zoom = zoom;
     m_fullsize = jt::vector2 { static_cast<float>(width), static_cast<float>(height) };
 
     unsigned int scaledWidth = static_cast<unsigned int>(width / zoom);
@@ -33,11 +35,7 @@ Game::Game(unsigned int width, unsigned int height, float zoom, std::string cons
         throw std::logic_error { "failed to create renderer." };
     }
     SDL_SetRenderDrawBlendMode(m_renderTarget.get(), SDL_BLENDMODE_BLEND);
-
-    m_surface = std::shared_ptr<SDL_Surface>(SDL_GetWindowSurface(m_window.get()));
-    if (!m_surface) {
-        throw std::logic_error { "failed to create surface." };
-    }
+    TTF_Init();
     TextureManager::setRenderer(m_renderTarget);
 }
 
@@ -52,10 +50,13 @@ void Game::setRenderTarget(std::shared_ptr<jt::renderTarget> rt)
 }
 std::shared_ptr<jt::renderTarget> Game::getRenderTarget() const { return m_renderTarget; }
 
+float Game::getZoom() const { return m_zoom; }
+
 void Game::doUpdate(float const elapsed)
 {
     JamTemplate::InputManager::update(0.0f, 0.0f, 0.0f, 0.0f, elapsed);
     m_state->update(elapsed);
+    // TODO
     // jt::vector2 mpf = getRenderWindow()->mapPixelToCoords(
     //     sf::Mouse::getPosition(*getRenderWindow()), *getView());
     // jt::vector2 mpfs
@@ -98,6 +99,7 @@ void Game::doDraw() const
 void Game::updateShake(float elapsed)
 {
     if (m_shakeOffset.x() != 0 || m_shakeOffset.y() != 0) {
+        // TODO
         // getView()->move(-m_shakeOffset.x(), -m_shakeOffset.y());
     }
 
@@ -113,7 +115,7 @@ void Game::updateShake(float elapsed)
     } else {
         m_shakeOffset.x() = m_shakeOffset.y() = 0;
     }
-
+    // TODO
     // auto v = getView();
     // v->move(m_shakeOffset.x(), m_shakeOffset.y());
     // setView(v);
@@ -122,6 +124,7 @@ void Game::updateShake(float elapsed)
 void Game::resetShake()
 {
     if (m_shakeOffset.x() != 0 || m_shakeOffset.y() != 0) {
+        // TODO
         // getView()->move(-m_shakeOffset.x(), -m_shakeOffset.y());
     }
     m_shakeOffset.x() = m_shakeOffset.y() = 0;

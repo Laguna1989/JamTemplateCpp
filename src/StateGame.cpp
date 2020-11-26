@@ -17,8 +17,8 @@ void StateGame::doInternalDraw() const
 
 void StateGame::doCreate()
 {
-    float w = static_cast<float>(GP::GetTargetSize().x());
-    float h = static_cast<float>(GP::GetTargetSize().y());
+    float w = static_cast<float>(GP::GetWindowSize().x());
+    float h = static_cast<float>(GP::GetWindowSize().y());
     m_hud = std::make_shared<Hud>();
 
     using JamTemplate::SmartShape;

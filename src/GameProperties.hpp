@@ -29,7 +29,7 @@ public:
     static jt::color PaletteFlashRed() { return jt::color { 143, 33, 33 }; };
 
     static std::string GameName() { return "MyAwesomeGame"; };
-    static jt::vector2 GetTargetSize() { return jt::vector2 { 800, 600 }; }
+    static jt::vector2 GetWindowSize() { return jt::vector2 { 800, 600 }; }
 };
 
 #endif

@@ -24,6 +24,8 @@ public:
     void setRenderTarget(std::shared_ptr<jt::renderTarget> rt) override;
     std::shared_ptr<jt::renderTarget> getRenderTarget() const override;
 
+    virtual float getZoom() const override;
+
 private:
     std::shared_ptr<jt::renderTarget> m_renderTarget { nullptr };
     std::shared_ptr<sf::View> m_view { nullptr };

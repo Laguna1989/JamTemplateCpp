@@ -27,7 +27,7 @@ public:
         // std::cout << "SmartText dtor4\n";
     }
 
-    void loadFont(std::string fontFileName)
+    void loadFont(std::string const& fontFileName, unsigned int characterSize)
     {
         m_font = std::make_shared<sf::Font>();
         if (!m_font->loadFromFile(fontFileName)) {
@@ -35,12 +35,8 @@ public:
         }
         m_text = std::make_shared<sf::Text>("", *m_font, 8);
         m_flashText = std::make_shared<sf::Text>("", *m_font, 8);
-    }
-
-    void setCharacterSize(unsigned int cs)
-    {
-        m_text->setCharacterSize(cs);
-        m_flashText->setCharacterSize(cs);
+        m_text->setCharacterSize(characterSize);
+        m_flashText->setCharacterSize(characterSize);
     }
 
     void setText(std::string text)
@@ -144,7 +140,7 @@ private:
         sptr->draw(*m_flashText);
     }
 
-    void doRotate(float rot)
+    void doRotate(float rot) override
     {
         m_text->setRotation(-rot);
         m_flashText->setRotation(-rot);

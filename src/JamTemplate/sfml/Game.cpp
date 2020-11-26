@@ -27,6 +27,8 @@ Game::Game(unsigned int w, unsigned int h, float zoom, std::string const& title)
     m_view->setViewport(jt::rect(0, 0, 1, 1));
 }
 
+float Game::getZoom() const { return m_zoom; }
+
 void Game::runGame(std::shared_ptr<GameState> InitialState)
 {
     switchState(InitialState);

@@ -32,6 +32,8 @@ public:
     void run();
     virtual void runGame(std::shared_ptr<GameState> InitialState) = 0;
 
+    virtual float getZoom() const = 0;
+
 protected:
     std::shared_ptr<GameState> m_state { nullptr };
     std::shared_ptr<GameState> m_nextState { nullptr };
