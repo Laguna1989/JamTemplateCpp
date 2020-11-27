@@ -24,9 +24,6 @@ private:
     std::shared_ptr<JamTemplate::SmartText> m_text_Credits;
 
     std::shared_ptr<JamTemplate::SmartShape> m_overlay;
-    std::shared_ptr<JamTemplate::SmartShape> m_shape;
-    std::shared_ptr<JamTemplate::SmartAnimation> m_anim;
-    std::shared_ptr<JamTemplate::SmartSprite> m_sprite;
 
     bool m_starting { false };
 

@@ -27,26 +27,6 @@ void StateMenu::doCreate()
     m_background->setColor(GP::PaletteColor1());
     m_background->update(0.0f);
 
-    // m_shape = std::make_shared<JamTemplate::SmartShape>();
-    // m_shape->makeRect({ 100, 100 });
-    // m_shape->setColor(GP::PaletteColor3());
-    // m_shape->setPosition({ 100, 100 });
-    // m_shape->update(0.0f);
-
-    // m_anim = std::make_shared<JamTemplate::SmartAnimation>();
-    // // m_anim->loadSprite("assets/coin.png");
-    // m_anim->setPosition({ 150, 150 });
-    // m_anim->add("assets/coin.png", "idle", jt::vector2u { 16, 16 },
-    //     JamTemplate::MathHelper::vectorBetween(0U, 11U), 0.13f);
-    // m_anim->update(0.0f);
-    // m_anim->play("idle");
-
-    // m_sprite = std::make_shared<JamTemplate::SmartSprite>();
-    // m_sprite->loadSprite("assets/bar.png");
-    // m_sprite->setPosition({ 250, 250 });
-    // m_sprite->setShadow(jt::colors::Black, jt::vector2 { 3, 3 });
-    // m_sprite->update(0.0f);
-
     // TODO
     m_text_Title = std::make_shared<JamTemplate::SmartText>();
     m_text_Title->loadFont("assets/font.ttf", 32U);
@@ -79,8 +59,8 @@ void StateMenu::doCreate()
     m_text_Credits->setShadow(GP::PaletteFontShadow(), jt::vector2 { 1, 1 });
 
     m_overlay = std::make_shared<JamTemplate::SmartShape>();
-    m_overlay->makeRect(jt::vector2 { w * 0.5f, h * 0.5f });
-    m_overlay->setColor(jt::color { 0, 0, 0 });
+    m_overlay->makeRect(jt::vector2 { w, h });
+    m_overlay->setColor(jt::color { 0, 0, 0, 255 });
     m_overlay->update(0);
 
     using tp = JamTemplate::TweenPosition<JamTemplate::SmartText>;
@@ -133,7 +113,6 @@ void StateMenu::doCreate()
 
 void StateMenu::doInternalUpdate(float const elapsed)
 {
-    // m_shape->update(elapsed);
     if (!m_starting) {
 
         if (JamTemplate::InputManager::justPressed(jt::KeyCode::A)) {
@@ -142,26 +121,7 @@ void StateMenu::doInternalUpdate(float const elapsed)
         if (JamTemplate::InputManager::justReleased(jt::KeyCode::K)) {
             std::cout << "K justreleased\n";
         }
-        if (JamTemplate::InputManager::justPressed(jt::KeyCode::Up)) {
-            m_anim->setScale(jt::vector2 { 1.0f, 2.0f });
-        }
-        if (JamTemplate::InputManager::justPressed(jt::KeyCode::Down)) {
-            m_anim->setScale(jt::vector2 { 1.0f, 1.0f });
-        }
-        if (JamTemplate::InputManager::justPressed(jt::KeyCode::Right)) {
-            m_anim->setScale(jt::vector2 { 2.0f, 1.0f });
-        }
-        if (JamTemplate::InputManager::justPressed(jt::KeyCode::Left)) {
-            m_anim->setScale(jt::vector2 { -1.5f, 1.0f });
-        }
 
-        if (JamTemplate::InputManager::justPressed(jt::KeyCode::B)) {
-            m_sprite->setColor(jt::colors::Blue);
-        }
-        if (JamTemplate::InputManager::justPressed(jt::KeyCode::N)) {
-            m_sprite->setColor(jt::colors::White);
-        }
-        // TODO
         using ip = JamTemplate::InputManager;
         if (ip::justPressed(jt::KeyCode::Space) || ip::justPressed(jt::KeyCode::Enter)) {
 
@@ -176,21 +136,12 @@ void StateMenu::doInternalUpdate(float const elapsed)
 
         m_text_Title->update(elapsed);
         m_test_Explanation->update(elapsed);
-        // m_anim->update(elapsed);
-        // m_sprite->setRotation(m_age * 45);
-        // auto col = m_sprite->getColor();
-        // col.a() = static_cast<std::uint8_t>(255 * (1.0f - (sin(m_age) * sin(m_age))));
-        // m_sprite->setColor(col);
-        // m_sprite->update(elapsed);
     }
 }
 
 void StateMenu::doInternalDraw() const
 {
     m_background->draw(getGame()->getRenderTarget());
-    // m_shape->draw(getGame()->getRenderTarget());
-    // m_anim->draw(getGame()->getRenderTarget());
-    // m_sprite->draw(getGame()->getRenderTarget());
 
     m_text_Title->draw(getGame()->getRenderTarget());
     m_test_Explanation->draw(getGame()->getRenderTarget());
