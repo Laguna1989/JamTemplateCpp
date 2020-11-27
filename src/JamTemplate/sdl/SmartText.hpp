@@ -130,8 +130,9 @@ private:
         SDL_DestroyTexture(textTexture);
     }
 
-    void doDraw(std::shared_ptr<jt::renderTarget> const sptr) const override
+    void drawOneLine(std::shared_ptr<jt::renderTarget> const sptr) const
     {
+        // draw text line here
         SDL_Color col { m_color.r(), m_color.g(), m_color.b(), m_color.a() };
 
         SDL_Surface* textSurface = TTF_RenderText_Solid(m_font, m_text.c_str(), col);
@@ -167,9 +168,31 @@ private:
         }
 
         SDL_RenderCopyEx(sptr.get(), textTexture, nullptr, &Message_rect, getRotation(), &p, flip);
+        // std::cout << "error message: " << SDL_GetError() << std::endl;
 
         SDL_FreeSurface(textSurface);
         SDL_DestroyTexture(textTexture);
+    }
+
+    void doDraw(std::shared_ptr<jt::renderTarget> const sptr) const override
+    {
+        auto oldT = SDL_GetRenderTarget(sptr.get());
+        // // // std::cout << oldT << std::endl;
+        SDL_Texture* tempT = SDL_CreateTexture(
+            sptr.get(), SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_TARGET, 400, 300);
+
+        SDL_SetTextureBlendMode(tempT, SDL_BLENDMODE_BLEND);
+        SDL_SetRenderTarget(sptr.get(), tempT);
+        SDL_RenderClear(sptr.get());
+
+        // draw one line
+        drawOneLine(sptr);
+
+        // set the old texture
+        SDL_SetRenderTarget(sptr.get(), oldT);
+        // draw new texture on old texture
+        SDL_RenderCopyEx(sptr.get(), tempT, nullptr, nullptr, 0.0f, nullptr, SDL_FLIP_NONE);
+        SDL_DestroyTexture(tempT);
     }
 
     void doDrawFlash(std::shared_ptr<jt::renderTarget> const /*sptr*/) const override

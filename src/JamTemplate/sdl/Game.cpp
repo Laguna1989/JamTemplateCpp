@@ -28,9 +28,10 @@ Game::Game(unsigned int width, unsigned int height, float zoom, std::string cons
         throw std::logic_error { "Failed to create window." };
     }
 
-    m_renderTarget = std::shared_ptr<SDL_Renderer>(
-        SDL_CreateRenderer(m_window.get(), -1, SDL_RENDERER_PRESENTVSYNC),
-        [](SDL_Renderer* r) { SDL_DestroyRenderer(r); });
+    m_renderTarget
+        = std::shared_ptr<SDL_Renderer>(SDL_CreateRenderer(m_window.get(), -1,
+                                            SDL_RENDERER_ACCELERATED | SDL_RENDERER_TARGETTEXTURE),
+            [](SDL_Renderer* r) { SDL_DestroyRenderer(r); });
     if (!m_renderTarget) {
         throw std::logic_error { "failed to create renderer." };
     }
