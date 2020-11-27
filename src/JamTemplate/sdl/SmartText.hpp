@@ -2,6 +2,7 @@
 #define JAMTEMPLATE_SMARTTEXT_HPP_INCLUDEGUARD
 
 #include "SmartObject.hpp"
+#include "SplitString.hpp"
 #include "rendertarget.hpp"
 #include <SDL.h>
 #include <SDL_ttf.h>
@@ -130,12 +131,13 @@ private:
         SDL_DestroyTexture(textTexture);
     }
 
-    void drawOneLine(std::shared_ptr<jt::renderTarget> const sptr) const
+    void drawOneLine(
+        std::shared_ptr<jt::renderTarget> const sptr, std::string text, std::size_t i) const
     {
         // draw text line here
         SDL_Color col { m_color.r(), m_color.g(), m_color.b(), m_color.a() };
 
-        SDL_Surface* textSurface = TTF_RenderText_Solid(m_font, m_text.c_str(), col);
+        SDL_Surface* textSurface = TTF_RenderText_Solid(m_font, text.c_str(), col);
         SDL_Texture* textTexture = SDL_CreateTextureFromSurface(
             sptr.get(), textSurface); // now you can convert it into a texture
         int w { 0 };
@@ -147,8 +149,8 @@ private:
         if (m_textAlign != TextAlign::LEFT) {
             alignOffset.x() = w / (m_textAlign == TextAlign::CENTER ? 2.0f : 1.0f);
         }
-        jt::vector2 pos
-            = m_position + getShakeOffset() + getOffset() - alignOffset + getCamOffset();
+        jt::vector2 pos = m_position + getShakeOffset() + getOffset() - alignOffset + getCamOffset()
+            + jt::vector2 { 0, static_cast<float>(h * i) };
 
         SDL_Rect Message_rect; // create a rect
         Message_rect.x = pos.x(); // controls the rect's x coordinate
@@ -183,11 +185,16 @@ private:
 
         SDL_SetTextureBlendMode(tempT, SDL_BLENDMODE_BLEND);
         SDL_SetRenderTarget(sptr.get(), tempT);
-        SDL_RenderClear(sptr.get());
+        SDL_SetRenderDrawColor(sptr.get(), 0, 0, 0, 0);
+        SDL_RenderFillRect(sptr.get(), NULL);
 
-        // draw one line
-        drawOneLine(sptr);
-
+        JamTemplate::SplitString ss { m_text };
+        auto const ssv = ss.split('\n');
+        for (std::size_t i = 0; i != ssv.size(); ++i) {
+            auto const text = ssv.at(i);
+            // draw one line
+            drawOneLine(sptr, text, i);
+        }
         // set the old texture
         SDL_SetRenderTarget(sptr.get(), oldT);
         // draw new texture on old texture
