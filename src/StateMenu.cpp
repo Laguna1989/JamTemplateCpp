@@ -33,8 +33,9 @@ void StateMenu::doCreate()
     m_text_Title->setText("Hello\nThisIsMyAwesomeGame\nTest");
     m_text_Title->setPosition({ wC, 20 });
     m_text_Title->setColor(GP::PaletteColor2());
-    m_text_Title->update(0.0f);
     m_text_Title->SetTextAlign(JamTemplate::SmartText::TextAlign::CENTER);
+    m_text_Title->update(0.0f);
+
     m_text_Title->setShadow(GP::PaletteFontShadow(), jt::vector2 { 3, 3 });
 
     m_test_Explanation = std::make_shared<JamTemplate::SmartText>();
@@ -136,9 +137,9 @@ void StateMenu::doInternalUpdate(float const elapsed)
 
         m_text_Title->update(elapsed);
         m_test_Explanation->update(elapsed);
-        m_text_Credits->setRotation(m_age * 45);
         m_text_Credits->update(elapsed);
     }
+    m_text_Credits->setRotation(m_age * 45);
 }
 
 void StateMenu::doInternalDraw() const

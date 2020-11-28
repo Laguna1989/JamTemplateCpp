@@ -57,7 +57,6 @@ private:
     std::string m_text { "" };
 
     TextAlign m_textAlign { TextAlign::CENTER };
-    unsigned int m_characterSize { 0 };
 
     jt::vector2 m_position { 0, 0 };
     jt::color m_color { jt::colors::White };
@@ -65,8 +64,9 @@ private:
     jt::vector2 m_origin { 0.0f, 0.0f };
     jt::vector2 m_scale { 1.0f, 1.0f };
 
-    // optimization, so the complex rendering logic does not have to happen in every frame.
-    std::shared_ptr<SDL_Texture> m_textTexture { nullptr };
+    // optimization, so the text rendering logic does not have to happen in every frame, but only
+    // when the text changes.
+    mutable std::shared_ptr<SDL_Texture> m_textTexture { nullptr };
     int m_textTextureSizeX { 0 };
     int m_textTextureSizeY { 0 };
 
@@ -90,6 +90,10 @@ private:
 
     void recreateTextTexture(std::shared_ptr<jt::renderTarget> const sptr);
     std::shared_ptr<jt::renderTarget> getRenderTarget();
+    void setSDLColor(jt::color const& col) const;
+    SDL_Rect getDestRect(jt::vector2 const& positionOffset = jt::vector2 { 0.0f, 0.0f }) const;
+
+    int getUpscaleFactor() const { return 5; };
 };
 } // namespace JamTemplate
 
