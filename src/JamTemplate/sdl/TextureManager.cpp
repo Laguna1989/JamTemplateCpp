@@ -40,7 +40,7 @@ void setPixel(SDL_Surface* surface, int x, int y, Uint32 pixel)
 
 uint32_t getPixel(SDL_Surface* surface, int x, int y)
 {
-    int bpp = surface->format->BytesPerPixel;
+    int const bpp = surface->format->BytesPerPixel;
     /* Here p is the address to the pixel we want to retrieve */
     uint8_t* p = (uint8_t*)surface->pixels + y * surface->pitch + x * bpp;
 
