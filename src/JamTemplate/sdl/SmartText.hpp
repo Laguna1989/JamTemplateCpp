@@ -18,7 +18,8 @@ public:
 
     virtual ~SmartText();
 
-    void loadFont(std::string const& fontFileName, unsigned int characterSize);
+    void loadFont(std::string const& fontFileName, unsigned int characterSize,
+        std::weak_ptr<jt::renderTarget> wptr);
 
     void setText(std::string const& text);
     std::string getText() const;
@@ -52,24 +53,31 @@ public:
     TextAlign getTextAlign() const;
 
 private:
-    TTF_Font* m_font;
-    std::string m_text;
+    TTF_Font* m_font { nullptr };
+    std::string m_text { "" };
 
     TextAlign m_textAlign { TextAlign::CENTER };
     unsigned int m_characterSize { 0 };
 
     jt::vector2 m_position { 0, 0 };
     jt::color m_color { jt::colors::White };
-    jt::color m_flashColor;
+    jt::color m_flashColor { jt::colors::White };
     jt::vector2 m_origin { 0.0f, 0.0f };
     jt::vector2 m_scale { 1.0f, 1.0f };
+
+    // optimization, so the complex rendering logic does not have to happen in every frame.
+    std::shared_ptr<SDL_Texture> m_textTexture { nullptr };
+    int m_textTextureSizeX { 0 };
+    int m_textTextureSizeY { 0 };
+
+    std::weak_ptr<jt::renderTarget> m_rendertarget;
 
     void doUpdate(float /*elapsed*/) override;
 
     void doDrawShadow(std::shared_ptr<jt::renderTarget> const sptr) const override;
 
     void drawOneLine(std::shared_ptr<jt::renderTarget> const sptr, std::string text, std::size_t i,
-        unsigned int tempTSizeX, std::size_t lineCount) const;
+        std::size_t lineCount) const;
 
     jt::vector2u getSizeForLine(
         std::shared_ptr<jt::renderTarget> const sptr, std::string const& text) const;
@@ -79,6 +87,9 @@ private:
     void doDrawFlash(std::shared_ptr<jt::renderTarget> const /*sptr*/) const override;
 
     void doRotate(float /*rot*/) override;
+
+    void recreateTextTexture(std::shared_ptr<jt::renderTarget> const sptr);
+    std::shared_ptr<jt::renderTarget> getRenderTarget();
 };
 } // namespace JamTemplate
 

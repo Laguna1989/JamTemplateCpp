@@ -27,7 +27,8 @@ public:
         // std::cout << "SmartText dtor4\n";
     }
 
-    void loadFont(std::string const& fontFileName, unsigned int characterSize)
+    void loadFont(std::string const& fontFileName, unsigned int characterSize,
+        std::weak_ptr<jt::renderTarget> wptr /*unused*/)
     {
         m_font = std::make_shared<sf::Font>();
         if (!m_font->loadFromFile(fontFileName)) {

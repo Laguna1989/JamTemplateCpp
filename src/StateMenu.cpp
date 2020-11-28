@@ -29,7 +29,7 @@ void StateMenu::doCreate()
 
     // TODO
     m_text_Title = std::make_shared<JamTemplate::SmartText>();
-    m_text_Title->loadFont("assets/font.ttf", 32U);
+    m_text_Title->loadFont("assets/font.ttf", 32U, getGame()->getRenderTarget());
     m_text_Title->setText("Hello\nThisIsMyAwesomeGame\nTest");
     m_text_Title->setPosition({ wC, 20 });
     m_text_Title->setColor(GP::PaletteColor2());
@@ -38,7 +38,7 @@ void StateMenu::doCreate()
     m_text_Title->setShadow(GP::PaletteFontShadow(), jt::vector2 { 3, 3 });
 
     m_test_Explanation = std::make_shared<JamTemplate::SmartText>();
-    m_test_Explanation->loadFont("assets/font.ttf", 16U);
+    m_test_Explanation->loadFont("assets/font.ttf", 16U, getGame()->getRenderTarget());
     m_test_Explanation->setText("Press Space to start the game");
     m_test_Explanation->setPosition({ wC, 150 });
     m_test_Explanation->setColor(GP::PaletteColor4());
@@ -50,11 +50,11 @@ void StateMenu::doCreate()
     m_test_Explanation->setShadow(GP::PaletteFontShadow(), jt::vector2 { 3, 3 });
 
     m_text_Credits = std::make_shared<JamTemplate::SmartText>();
-    m_text_Credits->loadFont("assets/font.ttf", 10U);
+    m_text_Credits->loadFont("assets/font.ttf", 10U, getGame()->getRenderTarget());
+    m_text_Credits->SetTextAlign(JamTemplate::SmartText::TextAlign::LEFT);
     m_text_Credits->setText("Created by @Laguna_999 for #1hgj288\nHalloween2020");
     m_text_Credits->setPosition({ 10, 265 });
     m_text_Credits->setColor(GP::PaletteColor5());
-    m_text_Credits->SetTextAlign(JamTemplate::SmartText::TextAlign::LEFT);
     m_text_Credits->update(0.0f);
     m_text_Credits->setShadow(GP::PaletteFontShadow(), jt::vector2 { 1, 1 });
 

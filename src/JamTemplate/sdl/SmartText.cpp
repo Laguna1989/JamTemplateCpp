@@ -1,7 +1,5 @@
-﻿#ifndef JAMTEMPLATE_SMARTTEXT_HPP_INCLUDEGUARD
-#define JAMTEMPLATE_SMARTTEXT_HPP_INCLUDEGUARD
-
-#include "SmartObject.hpp"
+﻿
+#include "SmartText.hpp"
 #include "SplitString.hpp"
 #include "rendertarget.hpp"
 #include <SDL.h>
@@ -10,14 +8,15 @@
 
 namespace JamTemplate {
 
-virtual SmartText::~SmartText()
+SmartText::~SmartText()
 {
     if (m_font != nullptr) {
         TTF_CloseFont(m_font);
     }
 }
 
-void SmartText::loadFont(std::string const& fontFileName, unsigned int characterSize)
+void SmartText::loadFont(std::string const& fontFileName, unsigned int characterSize,
+    std::weak_ptr<jt::renderTarget> wptr)
 {
     m_font = TTF_OpenFont(fontFileName.c_str(), characterSize);
 
@@ -27,9 +26,14 @@ void SmartText::loadFont(std::string const& fontFileName, unsigned int character
         return;
     }
     m_characterSize = characterSize;
+    m_rendertarget = wptr;
 }
 
-void SmartText::setText(std::string const& text) { m_text = text; }
+void SmartText::setText(std::string const& text)
+{
+    m_text = text;
+    recreateTextTexture(getRenderTarget());
+}
 std::string SmartText::getText() const { return m_text; }
 
 void SmartText::setOutline(float /*thickness*/, jt::color /*col*/)
@@ -38,41 +42,47 @@ void SmartText::setOutline(float /*thickness*/, jt::color /*col*/)
     // m_text->setOutlineColor(col);
 }
 
-void SmartText::setPosition(jt::vector2 const& pos) override { m_position = pos; }
+void SmartText::setPosition(jt::vector2 const& pos) { m_position = pos; }
 
-const jt::vector2 SmartText::getPosition() const override { return m_position; }
+const jt::vector2 SmartText::getPosition() const { return m_position; }
 
-void SmartText::setColor(const jt::color& col) override { m_color = col; }
-const jt::color SmartText::getColor() const override { return m_color; }
+void SmartText::setColor(const jt::color& col) { m_color = col; }
+const jt::color SmartText::getColor() const { return m_color; }
 
-void SmartText::setFlashColor(const jt::color& col) override { m_flashColor = col; }
-const jt::color SmartText::getFlashColor() const override { return m_flashColor; }
+void SmartText::setFlashColor(const jt::color& col) { m_flashColor = col; }
+const jt::color SmartText::getFlashColor() const { return m_flashColor; }
 
-// virtual sf::Transform const getTransform() const override { return m_text->getTransform(); }
+// sf::Transform const getTransform() const  { return m_text->getTransform(); }
 
-jt::rect const SmartText::getGlobalBounds() const override
+jt::rect const SmartText::getGlobalBounds() const
 {
     // TODO
     return jt::rect {};
 }
-jt::rect const SmartText::getLocalBounds() const override
+jt::rect const SmartText::getLocalBounds() const
 {
     // TODO
     return jt::rect {};
 }
 
-virtual void SmartText::setScale(jt::vector2 const& scale) override { m_scale = scale; }
-virtual const jt::vector2 SmartText::getScale() const override { return m_scale; }
+void SmartText::setScale(jt::vector2 const& scale) { m_scale = scale; }
+const jt::vector2 SmartText::getScale() const { return m_scale; }
 
-virtual void SmartText::setOrigin(jt::vector2 const& origin) override { m_origin = origin; }
-virtual jt::vector2 const SmartText::getOrigin() const override { return m_origin; }
+void SmartText::setOrigin(jt::vector2 const& origin) { m_origin = origin; }
+jt::vector2 const SmartText::getOrigin() const { return m_origin; }
 
-void SmartText::SetTextAlign(TextAlign ta) { m_textAlign = ta; }
-TextAlign SmartText::getTextAlign() const { return m_textAlign; }
+void SmartText::SetTextAlign(SmartText::TextAlign ta)
+{
+    if (m_textAlign != ta) {
+        m_textAlign = ta;
+        recreateTextTexture(getRenderTarget());
+    }
+}
+SmartText::TextAlign SmartText::getTextAlign() const { return m_textAlign; }
 
-void SmartText::doUpdate(float /*elapsed*/) override { }
+void SmartText::doUpdate(float /*elapsed*/) { }
 
-void SmartText::doDrawShadow(std::shared_ptr<jt::renderTarget> const sptr) const override
+void SmartText::doDrawShadow(std::shared_ptr<jt::renderTarget> const sptr) const
 {
     SDL_Color col { getShadowColor().r(), getShadowColor().g(), getShadowColor().b(),
         getShadowColor().a() };
@@ -115,14 +125,13 @@ void SmartText::doDrawShadow(std::shared_ptr<jt::renderTarget> const sptr) const
 }
 
 void SmartText::drawOneLine(std::shared_ptr<jt::renderTarget> const sptr, std::string text,
-    std::size_t i, unsigned int tempTSizeX, std::size_t lineCount) const
+    std::size_t i, std::size_t lineCount) const
 {
-    // draw text line here
-    SDL_Color col { m_color.r(), m_color.g(), m_color.b(), m_color.a() };
-
+    SDL_Color col { 255U, 255U, 255U, 255U };
     SDL_Surface* textSurface = TTF_RenderText_Solid(m_font, text.c_str(), col);
     SDL_Texture* textTexture = SDL_CreateTextureFromSurface(
         sptr.get(), textSurface); // now you can convert it into a texture
+
     int w { 0 };
     int h { 0 };
     SDL_QueryTexture(textTexture, NULL, NULL, &w, &h); // get the width and height of the texture
@@ -131,9 +140,11 @@ void SmartText::drawOneLine(std::shared_ptr<jt::renderTarget> const sptr, std::s
     //           << std::endl;
     jt::vector2 alignOffset {};
     if (lineCount != 0 && m_textAlign == TextAlign::CENTER) {
-        alignOffset.x() = static_cast<float>(tempTSizeX) / 2.0f - static_cast<float>(w) / 2.0f;
+        alignOffset.x()
+            = static_cast<float>(m_textTextureSizeX) / 2.0f - static_cast<float>(w) / 2.0f;
     }
-    // std::cout << "drawOneLine alignOffsetX" << alignOffset.x() << " " << tempTSizeX / 2 << "
+    // std::cout << "drawOneLine alignOffsetX" << alignOffset.x() << " " << m_textTextureSizeX / 2
+    // << "
     // "
     // << w / 2 << std::endl;
     jt::vector2 pos = jt::vector2 { 0, static_cast<float>(h * i) } + alignOffset;
@@ -154,7 +165,7 @@ void SmartText::drawOneLine(std::shared_ptr<jt::renderTarget> const sptr, std::s
 jt::vector2u SmartText::getSizeForLine(
     std::shared_ptr<jt::renderTarget> const sptr, std::string const& text) const
 {
-    SDL_Color col { m_color.r(), m_color.g(), m_color.b(), m_color.a() };
+    SDL_Color col { 255U, 255U, 255U, 255U };
     SDL_Surface* textSurface = TTF_RenderText_Solid(m_font, text.c_str(), col);
     SDL_Texture* textTexture = SDL_CreateTextureFromSurface(
         sptr.get(), textSurface); // now you can convert it into a texture
@@ -166,43 +177,11 @@ jt::vector2u SmartText::getSizeForLine(
     return jt::vector2u { static_cast<unsigned int>(w), static_cast<unsigned int>(h) };
 }
 
-void SmartText::doDraw(std::shared_ptr<jt::renderTarget> const sptr) const override
+void SmartText::doDraw(std::shared_ptr<jt::renderTarget> const sptr) const
 {
-    JamTemplate::SplitString ss { m_text };
-    auto const ssv = ss.split('\n');
-    unsigned int maxLineLengthInPixel { 0U };
-    std::size_t maxLineLengthInChars { 0U };
-    for (auto const& l : ssv) {
-        if (l.size() > maxLineLengthInChars) {
-            maxLineLengthInPixel = getSizeForLine(sptr, l).x();
-            maxLineLengthInChars = l.size();
-        }
-    }
-    unsigned int tempTSizeX = maxLineLengthInPixel;
-    unsigned int tempTSizeY = (ssv.size()) * TTF_FontHeight(m_font);
-
-    auto oldT = SDL_GetRenderTarget(sptr.get());
-    // // // std::cout << oldT << std::endl;
-    SDL_Texture* tempT = SDL_CreateTexture(
-        sptr.get(), SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_TARGET, tempTSizeX, tempTSizeY);
-
-    SDL_SetTextureBlendMode(tempT, SDL_BLENDMODE_BLEND);
-    SDL_SetRenderTarget(sptr.get(), tempT);
-    SDL_SetRenderDrawColor(sptr.get(), 0, 0, 0, 0);
-    SDL_RenderFillRect(sptr.get(), NULL);
-
-    for (std::size_t i = 0; i != ssv.size(); ++i) {
-        auto const text = ssv.at(i);
-        // draw one line
-        drawOneLine(sptr, text, i, tempTSizeX, ssv.size());
-    }
-    // set the old texture
-    SDL_SetRenderTarget(sptr.get(), oldT);
-    // draw new texture on old texture
-
     jt::vector2 alignOffset { 0, 0 };
     if (m_textAlign == TextAlign::CENTER) {
-        alignOffset.x() = -static_cast<float>(tempTSizeX) / 2.0f;
+        alignOffset.x() = -static_cast<float>(m_textTextureSizeX) / 2.0f;
     }
 
     jt::vector2 pos = m_position + getShakeOffset() + getOffset() + getCamOffset() + alignOffset;
@@ -211,8 +190,10 @@ void SmartText::doDraw(std::shared_ptr<jt::renderTarget> const sptr) const overr
     SDL_Rect destRect; // create a rect
     destRect.x = pos.x(); // controls the rect's x coordinate
     destRect.y = pos.y(); // controls the rect's y coordinte
-    destRect.w = static_cast<int>(tempTSizeX * m_scale.x()); // controls the width of the rect
-    destRect.h = static_cast<int>(tempTSizeY * m_scale.y()); // controls the height of the rect
+    destRect.w
+        = static_cast<int>(m_textTextureSizeX * m_scale.x()); // controls the width of the rect
+    destRect.h
+        = static_cast<int>(m_textTextureSizeY * m_scale.y()); // controls the height of the rect
 
     SDL_Point p { static_cast<int>(m_origin.x()), static_cast<int>(m_origin.y()) };
 
@@ -225,17 +206,81 @@ void SmartText::doDraw(std::shared_ptr<jt::renderTarget> const sptr) const overr
         flip = SDL_FLIP_VERTICAL;
     }
 
-    SDL_RenderCopyEx(sptr.get(), tempT, nullptr, &destRect, -getRotation(), &p, flip);
-    SDL_DestroyTexture(tempT);
+    SDL_SetRenderDrawBlendMode(sptr.get(), SDL_BLENDMODE_BLEND);
+    SDL_SetTextureColorMod(m_textTexture.get(), m_color.r(), m_color.g(), m_color.b());
+    SDL_SetTextureAlphaMod(m_textTexture.get(), m_color.a());
+
+    SDL_RenderCopyEx(sptr.get(), m_textTexture.get(), nullptr, &destRect, -getRotation(), &p, flip);
+    // std::cout << "error message: " << SDL_GetError() << std::endl;
 }
 
-void SmartText::doDrawFlash(std::shared_ptr<jt::renderTarget> const /*sptr*/) const override
+void SmartText::doDrawFlash(std::shared_ptr<jt::renderTarget> const /*sptr*/) const
 {
     // TODO
 }
 
-void SmartText::doRotate(float /*rot*/) override { }
+void SmartText::doRotate(float /*rot*/) { }
+
+void SmartText::recreateTextTexture(std::shared_ptr<jt::renderTarget> const sptr)
+{
+    // std::cout << "recreate Texture" << std::endl;
+
+    if (!m_font) {
+        std::cout << "no font loaded\n";
+        return;
+    }
+    if (m_text.empty()) {
+        std::cout << "no text set loaded\n";
+        return;
+    }
+    if (!sptr) {
+        std::cout << "no valid render target in recreateTextTexture" << std::endl;
+        return;
+    }
+    JamTemplate::SplitString ss { m_text };
+    auto const ssv = ss.split('\n');
+    unsigned int maxLineLengthInPixel { 0U };
+    std::size_t maxLineLengthInChars { 0U };
+    for (auto const& l : ssv) {
+        if (l.size() > maxLineLengthInChars) {
+            maxLineLengthInPixel = getSizeForLine(sptr, l).x();
+            maxLineLengthInChars = l.size();
+        }
+    }
+    m_textTextureSizeX = maxLineLengthInPixel;
+    m_textTextureSizeY = (ssv.size()) * TTF_FontHeight(m_font);
+
+    auto oldT = SDL_GetRenderTarget(sptr.get());
+    // // // std::cout << oldT << std::endl;
+    m_textTexture = std::shared_ptr<SDL_Texture>(
+        SDL_CreateTexture(sptr.get(), SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_TARGET,
+            m_textTextureSizeX, m_textTextureSizeY),
+        [](SDL_Texture* t) { SDL_DestroyTexture(t); });
+
+    SDL_SetTextureBlendMode(m_textTexture.get(), SDL_BLENDMODE_BLEND);
+    SDL_SetRenderTarget(sptr.get(), m_textTexture.get());
+    SDL_SetRenderDrawColor(sptr.get(), 0, 0, 0, 0);
+    SDL_RenderFillRect(sptr.get(), NULL);
+
+    for (std::size_t i = 0; i != ssv.size(); ++i) {
+        auto const text = ssv.at(i);
+        // draw one line
+        drawOneLine(sptr, text, i, ssv.size());
+    }
+    // set the old texture
+    SDL_SetRenderTarget(sptr.get(), oldT);
+    // draw new texture on old texture
+
+    // std::cout << "text successfully created\n";
+}
+
+std::shared_ptr<jt::renderTarget> SmartText::getRenderTarget()
+{
+    if (m_rendertarget.expired()) {
+        std::cout << "Cannot use SmartText without valid renderTarget\n";
+        return nullptr;
+    }
+    return m_rendertarget.lock();
+}
 
 } // namespace JamTemplate
-
-#endif
