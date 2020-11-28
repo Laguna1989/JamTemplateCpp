@@ -124,9 +124,10 @@ void SmartText::doRotate(float /*rot*/)
     // Nothing to do here
 }
 
-void SmartText::drawOneLine(std::shared_ptr<jt::renderTarget> const sptr, std::string text,
+void SmartText::renderOneLineOfText(std::shared_ptr<jt::renderTarget> const sptr, std::string text,
     std::size_t i, std::size_t lineCount) const
 {
+    // render text on full white, so coloring can be done afterwards
     SDL_Color col { 255U, 255U, 255U, 255U };
     SDL_Surface* textSurface = TTF_RenderText_Solid(m_font, text.c_str(), col);
     SDL_Texture* textTexture = SDL_CreateTextureFromSurface(
@@ -136,14 +137,12 @@ void SmartText::drawOneLine(std::shared_ptr<jt::renderTarget> const sptr, std::s
     int h { 0 };
     SDL_QueryTexture(textTexture, NULL, NULL, &w, &h); // get the width and height of the texture
 
-    // std::cout << "FontHeight: " << TTF_FontHeight(m_font) << " TextureHeight: " << h
-    //           << std::endl;
     jt::vector2 alignOffset {};
     if (lineCount != 0 && m_textAlign == TextAlign::CENTER) {
         alignOffset.x()
             = static_cast<float>(m_textTextureSizeX) / 2.0f - static_cast<float>(w) / 2.0f;
     }
-    jt::vector2 pos = jt::vector2 { 0, static_cast<float>(h * i) } + alignOffset;
+    jt::vector2 const pos = jt::vector2 { 0, static_cast<float>(h * i) } + alignOffset;
 
     SDL_Rect destRect; // create a rect
     destRect.x = pos.x(); // controls the rect's x coordinate
@@ -151,7 +150,7 @@ void SmartText::drawOneLine(std::shared_ptr<jt::renderTarget> const sptr, std::s
     destRect.w = static_cast<int>(w); // controls the width of the rect
     destRect.h = static_cast<int>(h); // controls the height of the rect
 
-    SDL_RenderCopyEx(sptr.get(), textTexture, nullptr, &destRect, 0.0f, nullptr, SDL_FLIP_NONE);
+    SDL_RenderCopy(sptr.get(), textTexture, nullptr, &destRect);
     // std::cout << "error message: " << SDL_GetError() << std::endl;
 
     SDL_FreeSurface(textSurface);
@@ -191,16 +190,7 @@ void SmartText::recreateTextTexture(std::shared_ptr<jt::renderTarget> const sptr
     }
     JamTemplate::SplitString ss { m_text };
     auto const ssv = ss.split('\n');
-    unsigned int maxLineLengthInPixel { 0U };
-    std::size_t maxLineLengthInChars { 0U };
-    for (auto const& l : ssv) {
-        if (l.size() > maxLineLengthInChars) {
-            maxLineLengthInPixel = getSizeForLine(sptr, l).x();
-            maxLineLengthInChars = l.size();
-        }
-    }
-    m_textTextureSizeX = maxLineLengthInPixel;
-    m_textTextureSizeY = (ssv.size()) * TTF_FontHeight(m_font);
+    calculateTextTextureSize(sptr, ssv);
 
     auto oldT = SDL_GetRenderTarget(sptr.get());
     // // // std::cout << oldT << std::endl;
@@ -211,17 +201,16 @@ void SmartText::recreateTextTexture(std::shared_ptr<jt::renderTarget> const sptr
 
     SDL_SetTextureBlendMode(m_textTexture.get(), SDL_BLENDMODE_BLEND);
     SDL_SetRenderTarget(sptr.get(), m_textTexture.get());
+    // fill m_textTexture with transparent color, before rendering any text.
     SDL_SetRenderDrawColor(sptr.get(), 0, 0, 0, 0);
     SDL_RenderFillRect(sptr.get(), NULL);
 
+    // draw text line by line
     for (std::size_t i = 0; i != ssv.size(); ++i) {
-        auto const text = ssv.at(i);
-        // draw one line
-        drawOneLine(sptr, text, i, ssv.size());
+        renderOneLineOfText(sptr, ssv.at(i), i, ssv.size());
     }
-    // set the old texture
+    // reset the renderer to the old texture
     SDL_SetRenderTarget(sptr.get(), oldT);
-    // draw new texture on old texture
 
     // std::cout << "text successfully created\n";
 }
@@ -260,6 +249,22 @@ SDL_Rect SmartText::getDestRect(jt::vector2 const& positionOffset) const
         = static_cast<int>(m_textTextureSizeY * m_scale.y()); // controls the height of the rect
 
     return destRect;
+}
+
+void SmartText::calculateTextTextureSize(
+    std::shared_ptr<jt::renderTarget> const sptr, std::vector<std::string> const& ssv)
+{
+    unsigned int maxLineLengthInPixel { 0U };
+    std::size_t maxLineLengthInChars { 0U };
+    for (auto const& l : ssv) {
+        if (l.size() > maxLineLengthInChars) {
+            maxLineLengthInPixel = getSizeForLine(sptr, l).x();
+            maxLineLengthInChars = l.size();
+        }
+    }
+
+    m_textTextureSizeX = maxLineLengthInPixel;
+    m_textTextureSizeY = (ssv.size()) * TTF_FontHeight(m_font);
 }
 
 } // namespace JamTemplate

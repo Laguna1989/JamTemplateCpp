@@ -7,6 +7,7 @@
 #include <SDL_ttf.h>
 #include <memory>
 #include <string>
+#include <vector>
 
 namespace JamTemplate {
 
@@ -76,8 +77,8 @@ private:
 
     void doDrawShadow(std::shared_ptr<jt::renderTarget> const sptr) const override;
 
-    void drawOneLine(std::shared_ptr<jt::renderTarget> const sptr, std::string text, std::size_t i,
-        std::size_t lineCount) const;
+    void renderOneLineOfText(std::shared_ptr<jt::renderTarget> const sptr, std::string text,
+        std::size_t i, std::size_t lineCount) const;
 
     jt::vector2u getSizeForLine(
         std::shared_ptr<jt::renderTarget> const sptr, std::string const& text) const;
@@ -94,6 +95,8 @@ private:
     SDL_Rect getDestRect(jt::vector2 const& positionOffset = jt::vector2 { 0.0f, 0.0f }) const;
 
     int getUpscaleFactor() const { return 5; };
+    void calculateTextTextureSize(
+        std::shared_ptr<jt::renderTarget> const sptr, std::vector<std::string> const& ssv);
 };
 } // namespace JamTemplate
 
