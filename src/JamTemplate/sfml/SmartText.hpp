@@ -100,12 +100,13 @@ private:
     {
         m_text->setFont(*m_font);
         m_flashText->setFont(*m_font);
-        jt::vector2 alignOffset {};
-        if (m_textAlign != TextAlign::LEFT)
-            alignOffset.x() = m_text->getGlobalBounds().width
-                / (m_textAlign == TextAlign::CENTER ? 2.0f : 1.0f);
-        jt::vector2 pos
-            = m_position + getShakeOffset() + getOffset() - alignOffset + getCamOffset();
+
+        jt::vector2 alignOffset { 0, 0 };
+        if (m_textAlign == TextAlign::CENTER) {
+            alignOffset.x() = -m_text->getGlobalBounds().width / 2.0f;
+        }
+
+        jt::vector2 pos = m_position + getShakeOffset() + alignOffset + getCamOffset();
 
         m_text->setPosition(jt::vector2 { pos.x(), pos.y() });
         m_flashText->setPosition(m_text->getPosition());
