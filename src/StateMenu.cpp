@@ -27,10 +27,9 @@ void StateMenu::doCreate()
     m_background->setColor(GP::PaletteColor1());
     m_background->update(0.0f);
 
-    // TODO
     m_text_Title = std::make_shared<JamTemplate::SmartText>();
     m_text_Title->loadFont("assets/font.ttf", 32U, getGame()->getRenderTarget());
-    m_text_Title->setText("Hello\nThisIsMyAwesomeGame\nTest");
+    m_text_Title->setText("Hello\nTest");
     m_text_Title->setPosition({ wC, 20 });
     m_text_Title->setColor(GP::PaletteColor2());
     m_text_Title->SetTextAlign(JamTemplate::SmartText::TextAlign::CENTER);

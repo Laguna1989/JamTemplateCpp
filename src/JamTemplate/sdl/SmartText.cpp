@@ -234,7 +234,8 @@ SDL_Rect SmartText::getDestRect(jt::vector2 const& positionOffset) const
 {
     jt::vector2 alignOffset { 0, 0 };
     if (m_textAlign == TextAlign::CENTER) {
-        alignOffset.x() = -static_cast<float>(m_textTextureSizeX) / 2.0f / getUpscaleFactor();
+        alignOffset.x()
+            = -static_cast<float>(m_textTextureSizeX) / 2.0f / getUpscaleFactor() * m_scale.x();
     }
 
     jt::vector2 pos = m_position + getShakeOffset() + getOffset() + getCamOffset() + alignOffset
