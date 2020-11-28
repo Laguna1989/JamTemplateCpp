@@ -2,11 +2,9 @@
 #define JAMTEMPLATE_SMARTTEXT_HPP_INCLUDEGUARD
 
 #include "SmartObject.hpp"
-#include "SplitString.hpp"
 #include "rendertarget.hpp"
 #include <SDL.h>
 #include <SDL_ttf.h>
-#include <exception>
 #include <memory>
 #include <string>
 
@@ -18,67 +16,47 @@ public:
 
     using Sptr = std::shared_ptr<SmartText>;
 
-    virtual ~SmartText() { m_font = nullptr; }
+    virtual ~SmartText();
 
-    void loadFont(std::string const& fontFileName, unsigned int characterSize)
-    {
-        m_font = TTF_OpenFont(fontFileName.c_str(), characterSize);
+    void loadFont(std::string const& fontFileName, unsigned int characterSize);
 
-        if (!m_font) {
-            std::cerr << "cannot load font: " << fontFileName << std::endl
-                      << "error message: " << TTF_GetError() << std::endl;
-            return;
-        }
-    }
+    void setText(std::string const& text);
+    std::string getText() const;
 
-    void setText(std::string const& text) { m_text = text; }
-    std::string getText() const { return m_text; }
+    void setOutline(float /*thickness*/, jt::color /*col*/);
 
-    void setOutline(float /*thickness*/, jt::color /*col*/)
-    {
-        // m_text->setOutlineThickness(thickness);
-        // m_text->setOutlineColor(col);
-    }
+    void setPosition(jt::vector2 const& pos) override;
 
-    void setPosition(jt::vector2 const& pos) override { m_position = pos; }
+    const jt::vector2 getPosition() const override;
 
-    const jt::vector2 getPosition() const override { return m_position; }
+    void setColor(const jt::color& col) override;
+    const jt::color getColor() const override;
 
-    void setColor(const jt::color& col) override { m_color = col; }
-    const jt::color getColor() const override { return m_color; }
-
-    void setFlashColor(const jt::color& col) override { m_flashColor = col; }
-    const jt::color getFlashColor() const override { return m_flashColor; }
+    void setFlashColor(const jt::color& col) override;
+    const jt::color getFlashColor() const override;
 
     // virtual sf::Transform const getTransform() const override { return m_text->getTransform(); }
 
-    jt::rect const getGlobalBounds() const override
-    {
-        // TODO
-        return jt::rect {};
-    }
-    jt::rect const getLocalBounds() const override
-    {
-        // TODO
-        return jt::rect {};
-    }
+    jt::rect const getGlobalBounds() const override;
+    jt::rect const getLocalBounds() const override;
 
-    virtual void setScale(jt::vector2 const& scale) override { m_scale = scale; }
+    virtual void setScale(jt::vector2 const& scale) override;
 
-    virtual const jt::vector2 getScale() const override { return m_scale; }
+    virtual const jt::vector2 getScale() const override;
 
-    virtual void setOrigin(jt::vector2 const& origin) override { m_origin = origin; }
+    virtual void setOrigin(jt::vector2 const& origin) override;
 
-    virtual jt::vector2 const getOrigin() const override { return m_origin; }
+    virtual jt::vector2 const getOrigin() const override;
 
-    void SetTextAlign(TextAlign ta) { m_textAlign = ta; }
-    TextAlign getTextAlign() const { return m_textAlign; }
+    void SetTextAlign(TextAlign ta);
+    TextAlign getTextAlign() const;
 
 private:
     TTF_Font* m_font;
     std::string m_text;
 
     TextAlign m_textAlign { TextAlign::CENTER };
+    unsigned int m_characterSize { 0 };
 
     jt::vector2 m_position { 0, 0 };
     jt::color m_color { jt::colors::White };
@@ -86,128 +64,21 @@ private:
     jt::vector2 m_origin { 0.0f, 0.0f };
     jt::vector2 m_scale { 1.0f, 1.0f };
 
-    void doUpdate(float /*elapsed*/) override { }
+    void doUpdate(float /*elapsed*/) override;
 
-    void doDrawShadow(std::shared_ptr<jt::renderTarget> const sptr) const override
-    {
-        SDL_Color col { getShadowColor().r(), getShadowColor().g(), getShadowColor().b(),
-            getShadowColor().a() };
+    void doDrawShadow(std::shared_ptr<jt::renderTarget> const sptr) const override;
 
-        SDL_Surface* textSurface = TTF_RenderText_Solid(m_font, m_text.c_str(), col);
-        SDL_Texture* textTexture = SDL_CreateTextureFromSurface(
-            sptr.get(), textSurface); // now you can convert it into a texture
-        int w { 0 };
-        int h { 0 };
-        SDL_QueryTexture(
-            textTexture, NULL, NULL, &w, &h); // get the width and height of the texture
+    void drawOneLine(std::shared_ptr<jt::renderTarget> const sptr, std::string text, std::size_t i,
+        unsigned int tempTSizeX, std::size_t lineCount) const;
 
-        jt::vector2 alignOffset {};
-        if (m_textAlign != TextAlign::LEFT) {
-            alignOffset.x() = w / (m_textAlign == TextAlign::CENTER ? 2.0f : 1.0f);
-        }
-        jt::vector2 pos = m_position + getShakeOffset() + getOffset() - alignOffset + getCamOffset()
-            + getShadowOffset();
+    jt::vector2u getSizeForLine(
+        std::shared_ptr<jt::renderTarget> const sptr, std::string const& text) const;
 
-        SDL_Rect Message_rect; // create a rect
-        Message_rect.x = pos.x(); // controls the rect's x coordinate
-        Message_rect.y = pos.y(); // controls the rect's y coordinte
-        Message_rect.w = static_cast<int>(w * m_scale.x()); // controls the width of the rect
-        Message_rect.h = static_cast<int>(h * m_scale.y()); // controls the height of the rect
+    void doDraw(std::shared_ptr<jt::renderTarget> const sptr) const override;
 
-        SDL_Point p { static_cast<int>(m_origin.x()), static_cast<int>(m_origin.y()) };
+    void doDrawFlash(std::shared_ptr<jt::renderTarget> const /*sptr*/) const override;
 
-        auto flip = SDL_FLIP_NONE;
-        if (m_scale.x() < 0 && m_scale.y() < 0) {
-            flip = static_cast<SDL_RendererFlip>(SDL_FLIP_HORIZONTAL | SDL_FLIP_VERTICAL);
-        } else if (m_scale.x() < 0 && m_scale.y() >= 0) {
-            flip = SDL_FLIP_HORIZONTAL;
-        } else if (m_scale.x() >= 0 && m_scale.y() < 0) {
-            flip = SDL_FLIP_VERTICAL;
-        }
-
-        SDL_RenderCopyEx(sptr.get(), textTexture, nullptr, &Message_rect, getRotation(), &p, flip);
-
-        SDL_FreeSurface(textSurface);
-        SDL_DestroyTexture(textTexture);
-    }
-
-    void drawOneLine(
-        std::shared_ptr<jt::renderTarget> const sptr, std::string text, std::size_t i) const
-    {
-        // draw text line here
-        SDL_Color col { m_color.r(), m_color.g(), m_color.b(), m_color.a() };
-
-        SDL_Surface* textSurface = TTF_RenderText_Solid(m_font, text.c_str(), col);
-        SDL_Texture* textTexture = SDL_CreateTextureFromSurface(
-            sptr.get(), textSurface); // now you can convert it into a texture
-        int w { 0 };
-        int h { 0 };
-        SDL_QueryTexture(
-            textTexture, NULL, NULL, &w, &h); // get the width and height of the texture
-
-        jt::vector2 alignOffset {};
-        if (m_textAlign != TextAlign::LEFT) {
-            alignOffset.x() = w / (m_textAlign == TextAlign::CENTER ? 2.0f : 1.0f);
-        }
-        jt::vector2 pos = m_position + getShakeOffset() + getOffset() - alignOffset + getCamOffset()
-            + jt::vector2 { 0, static_cast<float>(h * i) };
-
-        SDL_Rect Message_rect; // create a rect
-        Message_rect.x = pos.x(); // controls the rect's x coordinate
-        Message_rect.y = pos.y(); // controls the rect's y coordinte
-        Message_rect.w = static_cast<int>(w * m_scale.x()); // controls the width of the rect
-        Message_rect.h = static_cast<int>(h * m_scale.y()); // controls the height of the rect
-
-        SDL_Point p { static_cast<int>(m_origin.x()), static_cast<int>(m_origin.y()) };
-
-        auto flip = SDL_FLIP_NONE;
-        if (m_scale.x() < 0 && m_scale.y() < 0) {
-            flip = static_cast<SDL_RendererFlip>(SDL_FLIP_HORIZONTAL | SDL_FLIP_VERTICAL);
-        } else if (m_scale.x() < 0 && m_scale.y() >= 0) {
-            flip = SDL_FLIP_HORIZONTAL;
-        } else if (m_scale.x() >= 0 && m_scale.y() < 0) {
-            flip = SDL_FLIP_VERTICAL;
-        }
-
-        SDL_RenderCopyEx(sptr.get(), textTexture, nullptr, &Message_rect, getRotation(), &p, flip);
-        // std::cout << "error message: " << SDL_GetError() << std::endl;
-
-        SDL_FreeSurface(textSurface);
-        SDL_DestroyTexture(textTexture);
-    }
-
-    void doDraw(std::shared_ptr<jt::renderTarget> const sptr) const override
-    {
-        auto oldT = SDL_GetRenderTarget(sptr.get());
-        // // // std::cout << oldT << std::endl;
-        SDL_Texture* tempT = SDL_CreateTexture(
-            sptr.get(), SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_TARGET, 400, 300);
-
-        SDL_SetTextureBlendMode(tempT, SDL_BLENDMODE_BLEND);
-        SDL_SetRenderTarget(sptr.get(), tempT);
-        SDL_SetRenderDrawColor(sptr.get(), 0, 0, 0, 0);
-        SDL_RenderFillRect(sptr.get(), NULL);
-
-        JamTemplate::SplitString ss { m_text };
-        auto const ssv = ss.split('\n');
-        for (std::size_t i = 0; i != ssv.size(); ++i) {
-            auto const text = ssv.at(i);
-            // draw one line
-            drawOneLine(sptr, text, i);
-        }
-        // set the old texture
-        SDL_SetRenderTarget(sptr.get(), oldT);
-        // draw new texture on old texture
-        SDL_RenderCopyEx(sptr.get(), tempT, nullptr, nullptr, 0.0f, nullptr, SDL_FLIP_NONE);
-        SDL_DestroyTexture(tempT);
-    }
-
-    void doDrawFlash(std::shared_ptr<jt::renderTarget> const /*sptr*/) const override
-    {
-        // TODO
-    }
-
-    void doRotate(float /*rot*/) override { }
+    void doRotate(float /*rot*/) override;
 };
 } // namespace JamTemplate
 
