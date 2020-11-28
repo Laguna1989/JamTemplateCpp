@@ -193,7 +193,7 @@ void SmartText::recreateTextTexture(std::shared_ptr<jt::renderTarget> const sptr
     calculateTextTextureSize(sptr, ssv);
 
     auto oldT = SDL_GetRenderTarget(sptr.get());
-    // // // std::cout << oldT << std::endl;
+    // std::cout << oldT << std::endl;
     m_textTexture = std::shared_ptr<SDL_Texture>(
         SDL_CreateTexture(sptr.get(), SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_TARGET,
             m_textTextureSizeX * getUpscaleFactor(), m_textTextureSizeY * getUpscaleFactor()),

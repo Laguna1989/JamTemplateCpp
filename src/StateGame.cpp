@@ -2,24 +2,16 @@
 #include "Game.hpp"
 #include "GameProperties.hpp"
 #include "Hud.hpp"
+#include "InputManager.hpp"
 #include "SmartShape.hpp"
+#include "SmartSprite.hpp"
 #include "TweenAlpha.hpp"
 #include "color.hpp"
-
-void StateGame::doInternalUpdate(float const elapsed) { m_overlay->update(elapsed); }
-
-void StateGame::doInternalDraw() const
-{
-    // m_background->draw(getGame()->getRenderTarget());
-    drawObjects();
-    m_overlay->draw(getGame()->getRenderTarget());
-}
 
 void StateGame::doCreate()
 {
     float w = static_cast<float>(GP::GetWindowSize().x());
     float h = static_cast<float>(GP::GetWindowSize().y());
-    m_hud = std::make_shared<Hud>();
 
     using JamTemplate::SmartShape;
     using JamTemplate::TweenAlpha;
@@ -28,6 +20,8 @@ void StateGame::doCreate()
     m_background->makeRect({ w, h });
     m_background->setColor(GP::PaletteBackground());
     m_background->update(0.0f);
+
+    doCreateInternal();
 
     m_overlay = std::make_shared<SmartShape>();
     m_overlay->makeRect(jt::vector2 { w, h });
@@ -38,8 +32,33 @@ void StateGame::doCreate()
     tw->setSkipFrames();
     add(tw);
 
-    doCreateInternal();
+    m_hud = std::make_shared<Hud>();
     add(m_hud);
 }
 
-void StateGame::doCreateInternal() { }
+void StateGame::doInternalUpdate(float const elapsed)
+{
+    m_background->update(elapsed);
+    m_sprite->update(elapsed);
+    m_overlay->update(elapsed);
+
+    if (JamTemplate::InputManager::justPressed(jt::KeyCode::T)) {
+        m_sprite->flash(0.25f);
+    }
+}
+
+void StateGame::doInternalDraw() const
+{
+    m_background->draw(getGame()->getRenderTarget());
+    drawObjects();
+    m_sprite->draw(getGame()->getRenderTarget());
+    m_overlay->draw(getGame()->getRenderTarget());
+}
+
+void StateGame::doCreateInternal()
+{
+
+    m_sprite = std::make_shared<JamTemplate::SmartSprite>();
+    m_sprite->loadSprite("assets/coin.png", jt::recti { 0, 0, 16, 16 });
+    m_sprite->setPosition(jt::vector2 { 100, 100 });
+}

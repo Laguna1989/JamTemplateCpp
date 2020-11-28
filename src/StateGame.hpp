@@ -9,7 +9,8 @@
 // fwd decls
 namespace JamTemplate {
 class SmartShape;
-}
+class SmartSprite;
+} // namespace JamTemplate
 
 class Hud;
 
@@ -23,6 +24,7 @@ protected:
 private:
     std::shared_ptr<JamTemplate::SmartShape> m_background;
     std::shared_ptr<JamTemplate::SmartShape> m_overlay;
+    std::shared_ptr<JamTemplate::SmartSprite> m_sprite;
 
     void doCreate() override;
 

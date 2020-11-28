@@ -32,10 +32,69 @@ namespace {
 //     // TODO
 // }
 
-// sf::Image createFlashImage(sf::Image const& in)
-// {
-//     // TODO
-// }
+void setPixel(SDL_Surface* surface, int x, int y, Uint32 pixel)
+{
+    uint8_t* target_pixel = (uint8_t*)surface->pixels + y * surface->pitch + x * 4;
+    *(uint32_t*)target_pixel = pixel;
+}
+
+uint32_t getPixel(SDL_Surface* surface, int x, int y)
+{
+    int bpp = surface->format->BytesPerPixel;
+    /* Here p is the address to the pixel we want to retrieve */
+    uint8_t* p = (uint8_t*)surface->pixels + y * surface->pitch + x * bpp;
+
+    switch (bpp) {
+    case 1:
+        return *p;
+        break;
+
+    case 2:
+        return *(uint16_t*)p;
+        break;
+
+    case 3:
+        if (SDL_BYTEORDER == SDL_BIG_ENDIAN)
+            return p[0] << 16 | p[1] << 8 | p[2];
+        else
+            return p[0] | p[1] << 8 | p[2] << 16;
+        break;
+
+    case 4:
+        return *(uint32_t*)p;
+        break;
+
+    default:
+        return 0; /* shouldn't happen, but avoids warnings */
+    }
+}
+
+std::shared_ptr<SDL_Texture> createFlashImage(
+    std::string const& str, std::shared_ptr<jt::renderTarget> rt)
+{
+    SDL_Surface* image = IMG_Load(str.c_str());
+    int const w = image->w;
+    int const h = image->h;
+
+    auto const white = SDL_MapRGBA(image->format, 255U, 255U, 255U, 255U);
+
+    for (int x = 0; x != w; ++x) {
+        for (int y = 0; y != h; ++y) {
+
+            uint8_t r;
+            uint8_t g;
+            uint8_t b;
+            uint8_t a;
+            SDL_GetRGBA(getPixel(image, x, y), image->format, &r, &g, &b, &a);
+            if (a != 0) {
+                setPixel(image, x, y, white);
+            }
+        }
+    }
+
+    return std::shared_ptr<SDL_Texture>(SDL_CreateTextureFromSurface(rt.get(), image),
+        [](SDL_Texture* t) { SDL_DestroyTexture(t); });
+}
 
 std::shared_ptr<SDL_Texture> loadTextureFromDisk(
     std::string const& str, std::shared_ptr<jt::renderTarget> rt)
@@ -89,8 +148,7 @@ std::shared_ptr<SDL_Texture> TextureManager::get(std::string const& str)
         }
 
         // create Flash Image
-        // m_textures[getFlashName(str)].loadFromImage(
-        //     createFlashImage(m_textures[str].copyToImage()));
+        m_textures[getFlashName(str)] = createFlashImage(str, m_renderer.lock());
     }
 
     return m_textures[str];

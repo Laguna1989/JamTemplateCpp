@@ -24,7 +24,7 @@ public:
             m_text.get(), NULL, NULL, &w, &h); // get the width and height of the texture
         m_sourceRect = jt::recti { 0, 0, w, h };
 
-        // TODO FlashSprite
+        m_textFlash = TextureManager::get(TextureManager::getFlashName(fileName));
     }
 
     void loadSprite(std::string const& fileName, jt::recti const& rect)
@@ -37,6 +37,7 @@ public:
         m_sourceRect = jt::recti { rect };
 
         // TODO FlashSprite
+        m_textFlash = TextureManager::get(TextureManager::getFlashName(fileName));
     }
 
     void setPosition(jt::vector2 const& pos) override { m_position = pos; }
@@ -46,13 +47,8 @@ public:
     void setColor(jt::color const& col) override { m_color = col; }
     const jt::color getColor() const override { return m_color; }
 
-    void setFlashColor(jt::color const& col) override
-    { /*m_flashSprite.setColor(col);*/
-    }
-    const jt::color getFlashColor() const override
-    {
-        return jt::colors::White; /*return m_flashSprite.getColor();*/
-    }
+    void setFlashColor(jt::color const& col) override { m_colorFlash = col; }
+    const jt::color getFlashColor() const override { return m_colorFlash; }
 
     // virtual sf::Transform const getTransform() const override { return m_sprite.getTransform(); }
 
@@ -75,6 +71,10 @@ private:
     jt::color m_color { jt::colors::White };
     jt::vector2 m_scale { 1.0f, 1.0f };
     jt::vector2 m_origin { 0.0f, 0.0f };
+
+    mutable std::shared_ptr<SDL_Texture> m_textFlash;
+    jt::color m_colorFlash { jt::colors::White };
+
     void doUpdate(float /*elapsed*/) override
     {
 
@@ -135,7 +135,29 @@ private:
 
     void doDrawFlash(std::shared_ptr<jt::renderTarget> const sptr) const override
     {
-        // sptr->draw(m_flashSprite);
+        auto const pos = m_position + getShakeOffset() + getOffset() + getCamOffset();
+        SDL_Rect sourceRect { m_sourceRect.left(), m_sourceRect.top(), m_sourceRect.width(),
+            m_sourceRect.height() };
+        float scalex = fabs(m_scale.x());
+        float scaley = fabs(m_scale.y());
+        auto flip = SDL_FLIP_NONE;
+        if (m_scale.x() < 0 && m_scale.y() < 0) {
+            flip = static_cast<SDL_RendererFlip>(SDL_FLIP_HORIZONTAL | SDL_FLIP_VERTICAL);
+        } else if (m_scale.x() < 0 && m_scale.y() >= 0) {
+            flip = SDL_FLIP_HORIZONTAL;
+        } else if (m_scale.x() >= 0 && m_scale.y() < 0) {
+            flip = SDL_FLIP_VERTICAL;
+        }
+        SDL_Rect destRect { static_cast<int>(pos.x()), static_cast<int>(pos.y()),
+            static_cast<int>(m_sourceRect.width() * scalex),
+            static_cast<int>(m_sourceRect.height() * scaley) };
+        SDL_Point p { static_cast<int>(m_origin.x()), static_cast<int>(m_origin.y()) };
+        SDL_SetRenderDrawBlendMode(sptr.get(), SDL_BLENDMODE_BLEND);
+        SDL_SetTextureColorMod(
+            m_textFlash.get(), getFlashColor().r(), getFlashColor().g(), getFlashColor().b());
+        SDL_SetTextureAlphaMod(m_textFlash.get(), getFlashColor().a());
+        SDL_RenderCopyEx(
+            sptr.get(), m_textFlash.get(), &sourceRect, &destRect, getRotation(), &p, flip);
     }
 
     void doRotate(float /*rot*/) override { }
