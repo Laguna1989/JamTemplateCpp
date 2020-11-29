@@ -8,6 +8,7 @@
 #include "vector.hpp"
 #include <SDL.h>
 #include <SDL_ttf.h>
+#include <emscripten.h>
 #include <iostream>
 
 namespace JamTemplate {
@@ -40,7 +41,11 @@ Game::Game(unsigned int width, unsigned int height, float zoom, std::string cons
     TextureManager::setRenderer(m_renderTarget);
 }
 
-void Game::runGame(std::shared_ptr<GameState> InitialState) { switchState(InitialState); }
+void Game::runGame(std::shared_ptr<GameState> InitialState, GameLoopFunctionPtr gameloop_function)
+{
+    switchState(InitialState);
+    emscripten_set_main_loop(gameloop_function, 0, 1);
+}
 
 void Game::setRenderTarget(std::shared_ptr<jt::renderTarget> rt)
 {

@@ -19,7 +19,8 @@ public:
 
     Game(unsigned int w, unsigned int h, float zoom, std::string const& title);
 
-    void runGame(std::shared_ptr<GameState> InitialState) override;
+    void runGame(
+        std::shared_ptr<GameState> InitialState, GameLoopFunctionPtr gameloop_function) override;
 
     void setRenderTarget(std::shared_ptr<jt::renderTarget> rt) override;
     std::shared_ptr<jt::renderTarget> getRenderTarget() const override;

@@ -29,7 +29,7 @@ Game::Game(unsigned int w, unsigned int h, float zoom, std::string const& title)
 
 float Game::getZoom() const { return m_zoom; }
 
-void Game::runGame(std::shared_ptr<GameState> InitialState)
+void Game::runGame(std::shared_ptr<GameState> InitialState, GameLoopFunctionPtr gameloop_function)
 {
     switchState(InitialState);
     while (m_renderWindow->isOpen()) {
@@ -39,7 +39,7 @@ void Game::runGame(std::shared_ptr<GameState> InitialState)
                 m_renderWindow->close();
             }
         }
-        run();
+        gameloop_function();
     }
 }
 

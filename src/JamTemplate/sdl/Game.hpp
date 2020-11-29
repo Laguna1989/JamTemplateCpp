@@ -22,8 +22,11 @@ public:
     void setRenderTarget(std::shared_ptr<jt::renderTarget> rt) override;
     std::shared_ptr<jt::renderTarget> getRenderTarget() const override;
 
-    void runGame(std::shared_ptr<GameState> InitialState) override;
+    void runGame(
+        std::shared_ptr<GameState> InitialState, GameLoopFunctionPtr gameloop_function) override;
+
     void run();
+
     virtual float getZoom() const override;
 
 private:

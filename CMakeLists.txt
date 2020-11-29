@@ -99,10 +99,13 @@ target_link_libraries(JamTemplate Box2D)
 #####################################################
 ## setup StressTest
 #####################################################
-if (ENABLE_STRESSTEST AND NOT ENABLE_WEB)
+if (ENABLE_STRESSTEST)
 	file(GLOB_RECURSE STRESSTESTFILES src/StressTest/*)
 	
 	add_executable(StressTest ${STRESSTESTFILES})
+	if(ENABLE_WEB)
+		set(CMAKE_EXECUTABLE_SUFFIX ".html")
+	endif()
 	target_link_libraries(StressTest JamTemplate)
 	add_custom_command(TARGET StressTest PRE_BUILD
                    COMMAND ${CMAKE_COMMAND} -E copy_directory

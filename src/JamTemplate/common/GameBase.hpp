@@ -6,6 +6,7 @@
 #include "rendertarget.hpp"
 #include "vector.hpp"
 #include <chrono>
+#include <functional>
 #include <memory>
 
 namespace JamTemplate {
@@ -13,6 +14,9 @@ class GameState;
 
 class GameBase : public GameObject, public std::enable_shared_from_this<GameBase> {
 public:
+    // Ugly c-style function Pointer required by emscripten. At least it is hidden in a using alias.
+    using GameLoopFunctionPtr = void (*)();
+
     GameBase();
     // this function will likely be called by the user from within update().
     // To ensure consisten behavior within one frame, the actual switching will take place in
@@ -30,7 +34,9 @@ public:
     virtual std::shared_ptr<jt::renderTarget> getRenderTarget() const = 0;
 
     void run();
-    virtual void runGame(std::shared_ptr<GameState> InitialState) = 0;
+    virtual void runGame(
+        std::shared_ptr<GameState> InitialState, GameLoopFunctionPtr gameloop_function)
+        = 0;
 
     virtual float getZoom() const = 0;
 
