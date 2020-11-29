@@ -2,7 +2,7 @@
 #include "gtest/gtest.h"
 #include <utility>
 
-using namespace JamTemplate::Lerp;
+using namespace jt::Lerp;
 
 TEST(LerpTest, LinearZeroToOne)
 {

@@ -12,7 +12,7 @@
 #include <string>
 #include <vector>
 
-namespace JamTemplate {
+namespace jt {
 
 class TextureManager {
 public:
@@ -57,6 +57,6 @@ private:
     static bool containsTexture(std::string const& str) { return (m_textures.count(str) != 0); }
 };
 
-} // namespace JamTemplate
+} // namespace jt
 
 #endif

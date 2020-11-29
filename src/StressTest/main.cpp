@@ -3,7 +3,7 @@
 #include "StateTileson.hpp"
 #include <memory>
 
-std::shared_ptr<JamTemplate::GameBase> game;
+std::shared_ptr<jt::GameBase> game;
 
 void gameloop()
 {
@@ -14,9 +14,9 @@ void gameloop()
 
 int main()
 {
-    JamTemplate::Random::useTimeAsRandomSeed();
+    jt::Random::useTimeAsRandomSeed();
 
-    game = std::make_shared<JamTemplate::Game>(800, 600, 4.0f, "Stresstest");
+    game = std::make_shared<jt::Game>(800, 600, 4.0f, "Stresstest");
 
     game->runGame(std::make_shared<StateTileson>(), gameloop);
 

@@ -3,7 +3,7 @@
 #include <algorithm>
 #include <numeric>
 
-namespace JamTemplate {
+namespace jt {
 
 GameState::GameState() = default;
 
@@ -117,4 +117,4 @@ void GameState::doInternalDraw() const { drawObjects(); }
 void GameState::doCreate() { doInternalCreate(); };
 
 void GameState::doInternalCreate() {};
-} // namespace JamTemplate
+} // namespace jt

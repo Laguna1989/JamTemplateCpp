@@ -3,7 +3,7 @@
 #include "color.hpp"
 #include <cmath>
 
-namespace JamTemplate {
+namespace jt {
 
 namespace SpriteFunctions {
 
@@ -74,4 +74,4 @@ sf::Image makeVignetteImage(unsigned int w, unsigned int h)
 }
 
 } // namespace SpriteFunctions
-} // namespace JamTemplate
+} // namespace jt

@@ -9,27 +9,27 @@
 #include <iostream>
 #include <vector>
 
-class StateTween : public JamTemplate::GameState {
+class StateTween : public jt::GameState {
 public:
     StateTween() = default;
 
 private:
-    JamTemplate::SmartShape::Sptr m_overlayR;
-    JamTemplate::SmartShape::Sptr m_overlayG;
-    JamTemplate::SmartShape::Sptr m_overlayB;
-    JamTemplate::SmartShape::Sptr m_background;
+    jt::SmartShape::Sptr m_overlayR;
+    jt::SmartShape::Sptr m_overlayG;
+    jt::SmartShape::Sptr m_overlayB;
+    jt::SmartShape::Sptr m_background;
 
     void doInternalUpdate(float const /*elapsed*/) override;
 
     void doCreate() override
     {
 
-        m_background = std::make_shared<JamTemplate::SmartShape>();
+        m_background = std::make_shared<jt::SmartShape>();
         m_background->makeRect(jt::vector2(200, 150));
         m_background->setColor(jt::color { 255, 255, 255 });
 
-        using JamTemplate::SmartShape;
-        using JamTemplate::TweenAlpha;
+        using jt::SmartShape;
+        using jt::TweenAlpha;
 
         m_overlayR = std::make_shared<SmartShape>();
         m_overlayR->makeRect(jt::vector2 { 200, 200 });

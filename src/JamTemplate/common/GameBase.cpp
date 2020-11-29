@@ -3,7 +3,7 @@
 #include <exception>
 #include <stdexcept>
 
-namespace JamTemplate {
+namespace jt {
 
 GameBase::GameBase()
     : m_state { nullptr }
@@ -81,8 +81,8 @@ void GameBase::doSwitchState()
     m_state->setGameInstance(getPtr());
     m_state->create();
     // TODO
-    // JamTemplate::InputManager::reset();
+    // jt::InputManager::reset();
     resetShake();
 }
 
-} // namespace JamTemplate
+} // namespace jt

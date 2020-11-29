@@ -11,7 +11,7 @@
 #include <iostream>
 #include <vector>
 
-class StateBox2d : public JamTemplate::GameState {
+class StateBox2d : public jt::GameState {
 public:
     StateBox2d()
         : m_world { std::make_shared<b2World>(b2Vec2 { 0, 0.02f }) }
@@ -21,8 +21,8 @@ public:
 private:
     std::shared_ptr<b2World> m_world { nullptr };
     // TODO
-    // JamTemplate::SmartBar::Sptr m_bar1;
-    // JamTemplate::SmartBar::Sptr m_bar2;
+    // jtr::Sptr m_bar1;
+    // jt::SmartBar::Sptr m_bar2;
 
     void doCreate() override
     {
@@ -35,7 +35,7 @@ private:
                     = std::make_shared<MovementObject>(m_world, &groundBodyDef);
                 add(b2obj);
 
-                auto tw = JamTemplate::TweenRotation<JamTemplate::SmartAnimation>::create(
+                auto tw = jt::TweenRotation<jt::SmartAnimation>::create(
                     b2obj->getAnimation(), 2, 0, 360);
                 add(tw);
             }
@@ -74,16 +74,16 @@ private:
 
         add(myBody);
         {
-            auto tw = JamTemplate::TweenRotation<JamTemplate::SmartAnimation>::create(
-                myBody->getAnimation(), 2, 0, 360);
+            auto tw
+                = jt::TweenRotation<jt::SmartAnimation>::create(myBody->getAnimation(), 2, 0, 360);
             tw->setRepeat(true);
             add(tw);
         }
 
-        // m_bar1 = std::make_shared<JamTemplate::SmartBar>(100.0f, 10.0f);
+        // m_bar1 = std::make_shared<jt::SmartBar>(100.0f, 10.0f);
         // m_bar1->setPosition(jt::vector2 { 10, 10 });
 
-        // m_bar2 = std::make_shared<JamTemplate::SmartBar>(100.0f, 10.0f);
+        // m_bar2 = std::make_shared<jt::SmartBar>(100.0f, 10.0f);
         // m_bar2->setPosition(jt::vector2 { 10, 25 });
         // m_bar2->setMaxValue(2.0f);
     }

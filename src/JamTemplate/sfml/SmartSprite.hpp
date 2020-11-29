@@ -8,7 +8,7 @@
 #include <memory>
 #include <string>
 
-namespace JamTemplate {
+namespace jt {
 
 class SmartSprite : public SmartObject {
 public:
@@ -101,6 +101,6 @@ private:
     }
 };
 
-} // namespace JamTemplate
+} // namespace jt
 
 #endif

@@ -11,24 +11,24 @@
 #include <memory>
 #include <random>
 
-class Object : public JamTemplate::GameObject {
+class Object : public jt::GameObject {
 public:
     using Sptr = std::shared_ptr<Object>;
     Object()
     {
-        m_animation = std::make_shared<JamTemplate::SmartAnimation>();
+        m_animation = std::make_shared<jt::SmartAnimation>();
         // m_shape->makeRect(jt::vector2(10, 10));
         m_animation->add("assets/coin.png", "idle", jt::vector2u { 16, 16 },
-            JamTemplate::MathHelper::vectorBetween(0U, 11U), 0.15f);
+            jt::MathHelper::vectorBetween(0U, 11U), 0.15f);
         m_animation->play("idle");
 
-        m_animation->setColor(JamTemplate::Random::getRandomColor());
+        m_animation->setColor(jt::Random::getRandomColor());
 
-        float x = JamTemplate::Random::getFloat(80, 120) - 8;
-        float y = JamTemplate::Random::getFloat(55, 95) - 8;
+        float x = jt::Random::getFloat(80, 120) - 8;
+        float y = jt::Random::getFloat(55, 95) - 8;
 
-        float vx = JamTemplate::Random::getFloatGauss(0, 50);
-        float vy = JamTemplate::Random::getFloatGauss(0, 50);
+        float vx = jt::Random::getFloatGauss(0, 50);
+        float vy = jt::Random::getFloatGauss(0, 50);
 
         m_position = jt::vector2 { x, y };
         m_velocity = jt::vector2 { vx, vy };
@@ -40,7 +40,7 @@ public:
     void Flash() { m_animation->flash(0.1f); }
     void Shake() { m_animation->shake(0.5f, 2.0f, 0.05f); }
 
-    std::shared_ptr<JamTemplate::SmartAnimation> getAnimation() { return m_animation; }
+    std::shared_ptr<jt::SmartAnimation> getAnimation() { return m_animation; }
 
 private:
     void doUpdate(float const elapsed) override
@@ -55,7 +55,7 @@ private:
 
     void doDraw() const override { m_animation->draw(getGame()->getRenderTarget()); }
 
-    std::shared_ptr<JamTemplate::SmartAnimation> m_animation;
+    std::shared_ptr<jt::SmartAnimation> m_animation;
     jt::vector2 m_position;
     jt::vector2 m_velocity;
     jt::vector2 m_acceleration;

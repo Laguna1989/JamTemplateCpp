@@ -12,26 +12,26 @@
 #include <iostream>
 #include <vector>
 
-class State2 : public JamTemplate::GameState {
+class State2 : public jt::GameState {
 public:
     State2() = default;
 
 private:
-    JamTemplate::SmartShape::Sptr m_overlay;
-    JamTemplate::SmartShape::Sptr m_sky;
+    jt::SmartShape::Sptr m_overlay;
+    jt::SmartShape::Sptr m_sky;
 
-    JamTemplate::ObjectGroup<SwarmObject>::Sptr m_SwarmObjects;
+    jt::ObjectGroup<SwarmObject>::Sptr m_SwarmObjects;
 
     void doInternalUpdate(float const /*elapsed*/) override;
 
     void doCreate() override
     {
-        m_sky = std::make_shared<JamTemplate::SmartShape>();
+        m_sky = std::make_shared<jt::SmartShape>();
         m_sky->makeRect(jt::vector2(200, 150));
         m_sky->setColor(jt::color { 178, 255, 255 });
 
-        using JamTemplate::SmartShape;
-        using JamTemplate::TweenAlpha;
+        using jt::SmartShape;
+        using jt::TweenAlpha;
 
         m_overlay = std::make_shared<SmartShape>();
         m_overlay->makeRect(jt::vector2 { 200, 200 });
@@ -42,7 +42,7 @@ private:
         tw->addCompleteCallback([this]() { std::cout << "overlay fade in finished" << std::endl; });
         add(tw);
 
-        m_SwarmObjects = std::make_shared<JamTemplate::ObjectGroup<SwarmObject>>();
+        m_SwarmObjects = std::make_shared<jt::ObjectGroup<SwarmObject>>();
         add(m_SwarmObjects);
         for (int i = 0; i != 50; ++i) {
             SwarmObject::Sptr sptr = std::make_shared<SwarmObject>();

@@ -7,7 +7,7 @@
 #include <memory>
 #include <string>
 
-namespace JamTemplate {
+namespace jt {
 class SmartShape : public SmartObject {
 public:
     using Sptr = std::shared_ptr<SmartShape>;
@@ -86,6 +86,6 @@ private:
         m_flashShape->setRotation(-rot);
     }
 };
-} // namespace JamTemplate
+} // namespace jt
 
 #endif

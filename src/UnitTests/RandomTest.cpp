@@ -3,7 +3,7 @@
 #include "gtest/gtest.h"
 #include <utility>
 
-using JamTemplate::Random;
+using jt::Random;
 using v = jt::vector2;
 
 class RandomIntTestFixture : public ::testing::TestWithParam<std::pair<int, int>> {

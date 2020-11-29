@@ -6,9 +6,9 @@
 #include "gmock/gmock.h"
 #include "gtest/gtest.h"
 
-using JamTemplate::Game;
-using JamTemplate::GameObject;
-using JamTemplate::GameState;
+using jt::Game;
+using jt::GameObject;
+using jt::GameState;
 using ::testing::_;
 
 TEST(GameStateInitTest, InitialValues)

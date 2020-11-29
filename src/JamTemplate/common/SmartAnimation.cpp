@@ -5,13 +5,12 @@
 #include <memory>
 #include <vector>
 
-namespace JamTemplate {
+namespace jt {
 
 namespace {
 
-std::shared_ptr<JamTemplate::SmartSprite> getCurrentSprite(
-    SmartAnimation::AnimationMapType const& frames, std::string const& animName,
-    size_t const animIndex)
+std::shared_ptr<jt::SmartSprite> getCurrentSprite(SmartAnimation::AnimationMapType const& frames,
+    std::string const& animName, size_t const animIndex)
 {
     auto const cit = frames.find(animName);
     if (cit == frames.cend()) {
@@ -38,7 +37,7 @@ void SmartAnimation::add(std::string const& fileName, std::string const& animNam
         throw std::invalid_argument { "animation frame time is negative or zero." };
     }
 
-    m_frames[animName] = std::vector<JamTemplate::SmartSprite::Sptr> {};
+    m_frames[animName] = std::vector<jt::SmartSprite::Sptr> {};
     m_time[animName] = frameTime;
 
     for (auto const idx : frameIndices) {
@@ -223,4 +222,4 @@ void SmartAnimation::doRotate(float rot)
     }
 }
 
-} // namespace JamTemplate
+} // namespace jt

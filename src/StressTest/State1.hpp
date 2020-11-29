@@ -9,19 +9,19 @@
 #include "Timer.hpp"
 #include <iostream>
 
-class State1 : public JamTemplate::GameState {
+class State1 : public jt::GameState {
 public:
     State1() = default;
 
 private:
     void doInternalUpdate(float const /*elapsed*/) override;
 
-    void doCreate()
+    void doCreate() override
     {
-        using JamTemplate::Timer;
+        using jt::Timer;
 
         getGame()->shake(0.5f, 2.0f);
-        JamTemplate::Timer::Sptr t
+        jt::Timer::Sptr t
             = std::make_shared<Timer>(0.6f, [this]() { getGame()->shake(0.5f, 2.0f); });
         add(t);
     }

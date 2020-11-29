@@ -4,8 +4,8 @@
 #include "gmock/gmock.h"
 #include "gtest/gtest.h"
 
-using Group = JamTemplate::ObjectGroup<MockObject>;
-using JamTemplate::Game;
+using Group = jt::ObjectGroup<MockObject>;
+using jt::Game;
 using ::testing::_;
 
 TEST(ObjectGroupTest, InitialGroupIsEmpty)

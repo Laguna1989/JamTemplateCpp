@@ -1,7 +1,7 @@
 ﻿#include "MathHelper.hpp"
 #include <cmath>
 
-namespace JamTemplate {
+namespace jt {
 namespace MathHelper {
 
 float lengthSquared(jt::vector2 const& v) { return v.x() * v.x() + v.y() * v.y(); }
@@ -32,4 +32,4 @@ std::string floatToStringWithXDigits(float const number, unsigned int digits)
 
 } // namespace MathHelper
 
-} // namespace JamTemplate
+} // namespace jt

@@ -4,7 +4,7 @@
 #include "Lerp.hpp"
 #include "TweenBase.hpp"
 
-namespace JamTemplate {
+namespace jt {
 
 template <class T>
 class TweenRotation : public Tween<T> {
@@ -36,6 +36,6 @@ private:
     float m_initialValue { 0.0f };
     float m_finalValue { 0.0f };
 };
-} // namespace JamTemplate
+} // namespace jt
 
 #endif

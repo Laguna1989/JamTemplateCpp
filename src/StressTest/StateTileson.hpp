@@ -4,20 +4,20 @@
 #include "GameState.hpp"
 #include <memory>
 
-namespace JamTemplate {
+namespace jt {
 class SmartTilemap;
 }
 
-class StateTileson : public JamTemplate::GameState {
+class StateTileson : public jt::GameState {
 public:
     StateTileson() = default;
 
 private:
     // TODO
-    // std::shared_ptr<JamTemplate::SmartTilemap> m_tilemap;
+    // std::shared_ptr<jt::SmartTilemap> m_tilemap;
 
     void doCreate() override;
     void doDraw() const override;
-    void doUpdate(float const elapsed);
+    void doUpdate(float const elapsed) override;
 };
 #endif

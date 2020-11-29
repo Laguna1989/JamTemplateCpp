@@ -6,7 +6,7 @@
 #include <array>
 #include <functional>
 
-namespace JamTemplate {
+namespace jt {
 
 template <class T, size_t N>
 class ParticleSystem : public GameObject {
@@ -57,6 +57,6 @@ private:
     std::size_t m_currentIndex;
 };
 
-} // namespace JamTemplate
+} // namespace jt
 
 #endif // !JAMTEMPLATE_CONVERSIONS_HPP_GUARD

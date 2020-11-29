@@ -28,11 +28,11 @@ private:
     jt::vector2 m_scale { 1.0f, 1.0f };
 };
 
-using ta = JamTemplate::TweenAlpha<Object>;
-using tc = JamTemplate::TweenColor<Object>;
-using tp = JamTemplate::TweenPosition<Object>;
-using ts = JamTemplate::TweenScale<Object>;
-using tb = JamTemplate::Tween<Object>;
+using ta = jt::TweenAlpha<Object>;
+using tc = jt::TweenColor<Object>;
+using tp = jt::TweenPosition<Object>;
+using ts = jt::TweenScale<Object>;
+using tb = jt::Tween<Object>;
 
 class TweenBaseTest : public ::testing::Test {
 public:

@@ -8,7 +8,7 @@
 #include <string>
 #include <vector>
 
-namespace JamTemplate {
+namespace jt {
 
 // forward declaration
 class SmartSprite;
@@ -77,6 +77,6 @@ private:
     void doRotate(float rot) override;
 };
 
-} // namespace JamTemplate
+} // namespace jt
 
 #endif

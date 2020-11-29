@@ -9,7 +9,7 @@
 #include <functional>
 #include <memory>
 
-namespace JamTemplate {
+namespace jt {
 class GameState;
 
 class GameBase : public GameObject, public std::enable_shared_from_this<GameBase> {
@@ -68,6 +68,6 @@ protected:
     void doSwitchState();
 };
 
-} // namespace JamTemplate
+} // namespace jt
 
 #endif

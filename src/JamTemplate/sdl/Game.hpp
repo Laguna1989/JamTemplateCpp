@@ -8,12 +8,12 @@
 #include <memory>
 #include <string>
 
-namespace JamTemplate {
+namespace jt {
 
 //
 // Game class to be implemented by sfml/sdl
 //
-class Game final : public JamTemplate::GameBase {
+class Game final : public jt::GameBase {
 public:
     using Sptr = std::shared_ptr<Game>;
 
@@ -45,5 +45,5 @@ private:
     void resetShake() override;
 };
 
-} // namespace JamTemplate
+} // namespace jt
 #endif

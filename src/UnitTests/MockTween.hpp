@@ -5,7 +5,7 @@
 #include "gmock/gmock.h"
 
 template <class T>
-class MockTween : public JamTemplate::Tween<T> {
+class MockTween : public jt::Tween<T> {
 public:
     MockTween(std::weak_ptr<T> obj, OnUpdateCallbackType cb, float totalTime)
         : Tween { obj, cb, totalTime }

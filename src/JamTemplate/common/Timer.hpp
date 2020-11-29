@@ -4,7 +4,7 @@
 #include "GameObject.hpp"
 #include <functional>
 
-namespace JamTemplate {
+namespace jt {
 
 // forward declaration
 class Game;
@@ -29,5 +29,5 @@ private:
 
     virtual void doUpdate(float const /*elapsed*/) override;
 };
-} // namespace JamTemplate
+} // namespace jt
 #endif

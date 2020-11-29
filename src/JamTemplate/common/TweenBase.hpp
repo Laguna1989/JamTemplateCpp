@@ -5,7 +5,7 @@
 #include <functional>
 #include <memory>
 
-namespace JamTemplate {
+namespace jt {
 
 class TweenBase {
 public:
@@ -136,6 +136,6 @@ private:
     }
 };
 
-} // namespace JamTemplate
+} // namespace jt
 
 #endif

@@ -7,7 +7,7 @@
 #include "vector.hpp"
 #include <iostream>
 
-namespace JamTemplate {
+namespace jt {
 
 Game::Game(unsigned int w, unsigned int h, float zoom, std::string const& title)
     : m_renderWindow { std::make_shared<sf::RenderWindow>(
@@ -122,8 +122,8 @@ void Game::updateShake(float elapsed)
         m_shakeInterval -= elapsed;
         if (m_shakeInterval < 0) {
             m_shakeInterval = m_shakeIntervalMax;
-            m_shakeOffset.x() = JamTemplate::Random::getFloat(-m_shakeStrength, m_shakeStrength);
-            m_shakeOffset.y() = JamTemplate::Random::getFloat(-m_shakeStrength, m_shakeStrength);
+            m_shakeOffset.x() = jt::Random::getFloat(-m_shakeStrength, m_shakeStrength);
+            m_shakeOffset.y() = jt::Random::getFloat(-m_shakeStrength, m_shakeStrength);
         }
     } else {
         m_shakeOffset.x() = m_shakeOffset.y() = 0;
@@ -144,4 +144,4 @@ void Game::resetShake()
     m_shakeStrength = 0;
 }
 
-} // namespace JamTemplate
+} // namespace jt

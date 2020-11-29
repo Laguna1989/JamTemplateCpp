@@ -5,7 +5,7 @@
 #include "StateMenu.hpp"
 #include <iostream>
 
-std::shared_ptr<JamTemplate::GameBase> game;
+std::shared_ptr<jt::GameBase> game;
 
 void gameloop()
 {
@@ -19,9 +19,9 @@ int main()
     std::cout << "main\n";
     hideConsoleInRelease();
 
-    JamTemplate::Random::useTimeAsRandomSeed();
+    jt::Random::useTimeAsRandomSeed();
 
-    game = std::make_shared<JamTemplate::Game>(800, 600, 2.0f, GP::GameName());
+    game = std::make_shared<jt::Game>(800, 600, 2.0f, GP::GameName());
 
     game->runGame(std::make_shared<StateMenu>(), gameloop);
 

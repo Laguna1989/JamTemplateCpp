@@ -4,7 +4,7 @@
 #include <limits>
 #include <utility>
 
-using namespace JamTemplate::C;
+using namespace jt::C;
 
 using tt = std::pair<float, float>;
 

@@ -5,7 +5,7 @@
 #include "TweenBase.hpp"
 #include "color.hpp"
 
-namespace JamTemplate {
+namespace jt {
 
 template <class T>
 class TweenColor : public Tween<T> {
@@ -47,6 +47,6 @@ private:
     jt::color m_finalValue {};
 };
 
-} // namespace JamTemplate
+} // namespace jt
 
 #endif

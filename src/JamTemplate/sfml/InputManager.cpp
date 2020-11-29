@@ -1,5 +1,5 @@
 ﻿#include "InputManager.hpp"
-namespace JamTemplate {
+namespace jt {
 
 namespace InputHelper {
 
@@ -148,4 +148,4 @@ void InputManager::setup()
     }
 }
 
-} // namespace JamTemplate
+} // namespace jt

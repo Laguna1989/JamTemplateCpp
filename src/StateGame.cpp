@@ -13,8 +13,8 @@ void StateGame::doCreate()
     float w = static_cast<float>(GP::GetWindowSize().x());
     float h = static_cast<float>(GP::GetWindowSize().y());
 
-    using JamTemplate::SmartShape;
-    using JamTemplate::TweenAlpha;
+    using jt::SmartShape;
+    using jt::TweenAlpha;
 
     m_background = std::make_shared<SmartShape>();
     m_background->makeRect({ w, h });
@@ -42,7 +42,7 @@ void StateGame::doInternalUpdate(float const elapsed)
     m_sprite->update(elapsed);
     m_overlay->update(elapsed);
 
-    if (JamTemplate::InputManager::justPressed(jt::KeyCode::T)) {
+    if (jt::InputManager::justPressed(jt::KeyCode::T)) {
         m_sprite->flash(0.25f);
     }
 }
@@ -58,7 +58,7 @@ void StateGame::doInternalDraw() const
 void StateGame::doCreateInternal()
 {
 
-    m_sprite = std::make_shared<JamTemplate::SmartSprite>();
+    m_sprite = std::make_shared<jt::SmartSprite>();
     m_sprite->loadSprite("assets/coin.png", jt::recti { 0, 0, 16, 16 });
     m_sprite->setPosition(jt::vector2 { 100, 100 });
 }

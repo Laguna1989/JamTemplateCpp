@@ -11,7 +11,7 @@
 #include <emscripten.h>
 #include <iostream>
 
-namespace JamTemplate {
+namespace jt {
 
 Game::Game(unsigned int width, unsigned int height, float zoom, std::string const& title)
 {
@@ -60,7 +60,7 @@ float Game::getZoom() const { return m_zoom; }
 
 void Game::doUpdate(float const elapsed)
 {
-    JamTemplate::InputManager::update(0.0f, 0.0f, 0.0f, 0.0f, elapsed);
+    jt::InputManager::update(0.0f, 0.0f, 0.0f, 0.0f, elapsed);
     m_state->update(elapsed);
     // TODO
     // jt::vector2 mpf = getRenderWindow()->mapPixelToCoords(
@@ -115,8 +115,8 @@ void Game::updateShake(float elapsed)
         m_shakeInterval -= elapsed;
         if (m_shakeInterval < 0) {
             m_shakeInterval = m_shakeIntervalMax;
-            m_shakeOffset.x() = JamTemplate::Random::getFloat(-m_shakeStrength, m_shakeStrength);
-            m_shakeOffset.y() = JamTemplate::Random::getFloat(-m_shakeStrength, m_shakeStrength);
+            m_shakeOffset.x() = jt::Random::getFloat(-m_shakeStrength, m_shakeStrength);
+            m_shakeOffset.y() = jt::Random::getFloat(-m_shakeStrength, m_shakeStrength);
         }
     } else {
         m_shakeOffset.x() = m_shakeOffset.y() = 0;
@@ -138,4 +138,4 @@ void Game::resetShake()
     m_shakeStrength = 0;
 }
 
-} // namespace JamTemplate
+} // namespace jt

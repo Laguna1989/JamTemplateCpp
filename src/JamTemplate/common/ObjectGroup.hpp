@@ -5,7 +5,7 @@
 #include <memory>
 #include <vector>
 
-namespace JamTemplate {
+namespace jt {
 
 /// templated Object group for the purpose of holding specific Objects in a separate list.
 /// Can be used as a GameObject.
@@ -43,5 +43,5 @@ auto end(ObjectGroup<T>& obj)
     return obj.end();
 }
 
-} // namespace JamTemplate
+} // namespace jt
 #endif

@@ -2,7 +2,7 @@
 #include <exception>
 #include <map>
 
-namespace JamTemplate {
+namespace jt {
 
 namespace {
 
@@ -183,4 +183,4 @@ void TextureManager::reset()
     m_selectiveColorReplace.clear();
 }
 
-} // namespace JamTemplate
+} // namespace jt

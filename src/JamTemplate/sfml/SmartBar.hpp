@@ -8,9 +8,9 @@
 #include <memory>
 #include <vector>
 
-namespace JamTemplate {
+namespace jt {
 
-class SmartBar : public JamTemplate::SmartObject {
+class SmartBar : public jt::SmartObject {
 public:
     using Sptr = std::shared_ptr<SmartBar>;
 
@@ -76,6 +76,6 @@ private:
     virtual void doRotate(float /*rot*/) override;
 };
 
-} // namespace JamTemplate
+} // namespace jt
 
 #endif

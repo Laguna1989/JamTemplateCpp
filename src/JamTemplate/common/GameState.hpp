@@ -5,7 +5,7 @@
 #include <memory>
 #include <vector>
 
-namespace JamTemplate {
+namespace jt {
 
 // forward declarations
 class Game;
@@ -76,5 +76,5 @@ private:
     void cleanUpObjects();
 };
 
-} // namespace JamTemplate
+} // namespace jt
 #endif

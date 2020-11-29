@@ -5,7 +5,7 @@
 #include "TweenBase.hpp"
 #include "vector.hpp"
 
-namespace JamTemplate {
+namespace jt {
 
 template <class T>
 class TweenPosition : public Tween<T> {
@@ -42,6 +42,6 @@ private:
     jt::vector2 m_finalValue;
 };
 
-} // namespace JamTemplate
+} // namespace jt
 
 #endif

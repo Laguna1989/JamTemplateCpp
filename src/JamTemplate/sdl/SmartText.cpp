@@ -7,7 +7,7 @@
 #include <SDL_ttf.h>
 #include <exception>
 
-namespace JamTemplate {
+namespace jt {
 
 SmartText::~SmartText()
 {
@@ -188,7 +188,7 @@ void SmartText::recreateTextTexture(std::shared_ptr<jt::renderTarget> const sptr
         std::cout << "no valid render target in recreateTextTexture" << std::endl;
         return;
     }
-    JamTemplate::SplitString ss { m_text };
+    jt::SplitString ss { m_text };
     auto const ssv = ss.split('\n');
     calculateTextTextureSize(sptr, ssv);
 
@@ -268,4 +268,4 @@ void SmartText::calculateTextTextureSize(
     m_textTextureSizeY = (ssv.size()) * TTF_FontHeight(m_font);
 }
 
-} // namespace JamTemplate
+} // namespace jt

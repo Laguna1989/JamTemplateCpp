@@ -3,7 +3,7 @@
 
 #include <assert.h>
 
-namespace JamTemplate {
+namespace jt {
 
 namespace {
 
@@ -82,6 +82,6 @@ static T bounceInvers(T const& a, T const& b, T& t)
 }
 
 } // namespace Lerp
-} // namespace JamTemplate
+} // namespace jt
 
 #endif

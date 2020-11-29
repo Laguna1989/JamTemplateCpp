@@ -9,7 +9,7 @@
 #include <string>
 #include <vector>
 
-namespace JamTemplate {
+namespace jt {
 
 class SmartText : public SmartObject {
 public:
@@ -98,6 +98,6 @@ private:
     void calculateTextTextureSize(
         std::shared_ptr<jt::renderTarget> const sptr, std::vector<std::string> const& ssv);
 };
-} // namespace JamTemplate
+} // namespace jt
 
 #endif

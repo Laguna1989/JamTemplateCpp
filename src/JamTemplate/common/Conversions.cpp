@@ -1,7 +1,7 @@
 ﻿#include "Conversions.hpp"
 
-namespace JamTemplate {
-namespace C {
+namespace jt {
+namespace Conversion {
 
 jt::vector2 vec(b2Vec2 const& v) { return jt::vector2 { v.x, v.y }; }
 
@@ -14,5 +14,5 @@ jt::vector2 vec(tson::Vector2i const& v)
     return jt::vector2 { static_cast<float>(v.x), static_cast<float>(v.y) };
 }
 
-} // namespace C
-} // namespace JamTemplate
+} // namespace Conversion
+} // namespace jt

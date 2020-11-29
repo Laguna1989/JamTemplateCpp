@@ -48,19 +48,19 @@ void Hud::doDraw() const
 void Hud::doCreate()
 {
     // TODO
-    // m_scoreP1Text = std::make_shared<JamTemplate::SmartText>();
+    // m_scoreP1Text = std::make_shared<jt::SmartText>();
     // m_scoreP1Text->loadFont("assets/font.ttf");
     // m_scoreP1Text->setCharacterSize(16U);
     // m_scoreP1Text->setColor(jt::color { 248, 249, 254 });
     // m_scoreP1Text->update(0.0f);
-    // m_scoreP1Text->SetTextAlign(JamTemplate::SmartText::TextAlign::LEFT);
+    // m_scoreP1Text->SetTextAlign(jt::SmartText::TextAlign::LEFT);
     // m_scoreP1Text->setPosition({ 20, 325 });
 
-    // m_scoreP2Text = std::make_shared<JamTemplate::SmartText>();
+    // m_scoreP2Text = std::make_shared<jt::SmartText>();
     // m_scoreP2Text->loadFont("assets/font.ttf");
     // m_scoreP2Text->setCharacterSize(16U);
     // m_scoreP2Text->setColor(jt::color { 248, 249, 254 });
     // m_scoreP2Text->update(0.0f);
-    // m_scoreP2Text->SetTextAlign(JamTemplate::SmartText::TextAlign::LEFT);
+    // m_scoreP2Text->SetTextAlign(jt::SmartText::TextAlign::LEFT);
     // m_scoreP2Text->setPosition({ 650 / 2 + 10, 325 });
 }

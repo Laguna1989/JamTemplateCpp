@@ -1,5 +1,5 @@
-﻿#ifndef JAMTEMPLATE_BOX2DOBJECT_HPP_INCLUDEGUARD
-#define JAMTEMPLATE_BOX2DOBJECT_HPP_INCLUDEGUARD
+﻿#ifndef jt_BOX2DOBJECT_HPP_INCLUDEGUARD
+#define jt_BOX2DOBJECT_HPP_INCLUDEGUARD
 
 #include "Conversions.hpp"
 #include "GameObject.hpp"
@@ -8,7 +8,7 @@
 #include <Box2D/Box2D.h>
 #include <memory>
 
-namespace JamTemplate {
+namespace jt {
 
 class Box2DObject : public GameObject {
 public:
@@ -20,9 +20,12 @@ public:
         setB2Body(world->CreateBody(def));
     }
 
-    jt::vector2 getPosition() const { return C::vec(m_body->GetPosition()); }
+    jt::vector2 getPosition() const { return Conversion::vec(m_body->GetPosition()); }
 
-    void setPosition(jt::vector2 p) { m_body->SetTransform(C::vec(p), m_body->GetAngle()); }
+    void setPosition(jt::vector2 p)
+    {
+        m_body->SetTransform(Conversion::vec(p), m_body->GetAngle());
+    }
 
     float getRotation() const { return m_body->GetAngle(); }
 
@@ -39,5 +42,5 @@ private:
 
     void setB2Body(b2Body* body) { m_body = body; }
 };
-} // namespace JamTemplate
+} // namespace jt
 #endif

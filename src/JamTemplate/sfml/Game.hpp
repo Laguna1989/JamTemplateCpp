@@ -8,12 +8,12 @@
 #include <memory>
 #include <string>
 
-namespace JamTemplate {
+namespace jt {
 
 //
 // Game class to be implemented by sfml/sdl
 //
-class Game final : public JamTemplate::GameBase {
+class Game final : public jt::GameBase {
 public:
     using Sptr = std::shared_ptr<Game>;
 
@@ -47,5 +47,5 @@ private:
     std::shared_ptr<sf::RenderWindow> getRenderWindow();
 };
 
-} // namespace JamTemplate
+} // namespace jt
 #endif

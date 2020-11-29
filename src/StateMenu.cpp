@@ -22,49 +22,49 @@ void StateMenu::doCreate()
     float h = static_cast<float>(GP::GetWindowSize().y() / getGame()->getZoom());
     float wC = w / 2;
 
-    m_background = std::make_shared<JamTemplate::SmartShape>();
+    m_background = std::make_shared<jt::SmartShape>();
     m_background->makeRect({ w, h });
     m_background->setColor(GP::PaletteColor1());
     m_background->update(0.0f);
 
-    m_text_Title = std::make_shared<JamTemplate::SmartText>();
+    m_text_Title = std::make_shared<jt::SmartText>();
     m_text_Title->loadFont("assets/font.ttf", 32U, getGame()->getRenderTarget());
     m_text_Title->setText("Hello\nTest");
     m_text_Title->setPosition({ wC, 20 });
     m_text_Title->setColor(GP::PaletteColor2());
-    m_text_Title->SetTextAlign(JamTemplate::SmartText::TextAlign::CENTER);
+    m_text_Title->SetTextAlign(jt::SmartText::TextAlign::CENTER);
     m_text_Title->update(0.0f);
 
     m_text_Title->setShadow(GP::PaletteFontShadow(), jt::vector2 { 3, 3 });
 
-    m_test_Explanation = std::make_shared<JamTemplate::SmartText>();
+    m_test_Explanation = std::make_shared<jt::SmartText>();
     m_test_Explanation->loadFont("assets/font.ttf", 16U, getGame()->getRenderTarget());
     m_test_Explanation->setText("Press Space to start the game");
     m_test_Explanation->setPosition({ wC, 150 });
     m_test_Explanation->setColor(GP::PaletteColor4());
     m_test_Explanation->update(0.0f);
-    m_test_Explanation->SetTextAlign(JamTemplate::SmartText::TextAlign::CENTER);
+    m_test_Explanation->SetTextAlign(jt::SmartText::TextAlign::CENTER);
     m_test_Explanation->setShadow(GP::PaletteFontShadow(), jt::vector2 { 3, 3 });
 
-    m_text_Credits = std::make_shared<JamTemplate::SmartText>();
+    m_text_Credits = std::make_shared<jt::SmartText>();
     m_text_Credits->loadFont("assets/font.ttf", 10U, getGame()->getRenderTarget());
-    m_text_Credits->SetTextAlign(JamTemplate::SmartText::TextAlign::LEFT);
+    m_text_Credits->SetTextAlign(jt::SmartText::TextAlign::LEFT);
     m_text_Credits->setText("Created by @Laguna_999 for #1hgj288\nHalloween2020");
     m_text_Credits->setPosition({ 10, 265 });
     m_text_Credits->setColor(GP::PaletteColor5());
     m_text_Credits->update(0.0f);
     m_text_Credits->setShadow(GP::PaletteFontShadow(), jt::vector2 { 1, 1 });
 
-    m_overlay = std::make_shared<JamTemplate::SmartShape>();
+    m_overlay = std::make_shared<jt::SmartShape>();
     m_overlay->makeRect(jt::vector2 { w, h });
     m_overlay->setColor(jt::color { 0, 0, 0, 255 });
     m_overlay->update(0);
 
-    using tp = JamTemplate::TweenPosition<JamTemplate::SmartText>;
-    using ta = JamTemplate::TweenAlpha<JamTemplate::SmartText>;
-    using ts = JamTemplate::TweenScale<JamTemplate::SmartText>;
+    using tp = jt::TweenPosition<jt::SmartText>;
+    using ta = jt::TweenAlpha<jt::SmartText>;
+    using ts = jt::TweenScale<jt::SmartText>;
     {
-        auto tw = JamTemplate::TweenAlpha<JamTemplate::SmartShape>::create(
+        auto tw = jt::TweenAlpha<jt::SmartShape>::create(
             m_overlay, 0.5f, std::uint8_t { 255 }, std::uint8_t { 0 });
         tw->setSkipFrames();
         add(tw);
@@ -89,8 +89,7 @@ void StateMenu::doCreate()
                 jt::vector2 { 1.05f, 1.05f });
             ts1->setRepeat(true);
             ts1->setAgePercentConversion([](float age) {
-                return JamTemplate::Lerp::cosine(
-                    0.0f, 1.0f, JamTemplate::MathHelper::clamp(age, 0.0f, 1.0f));
+                return jt::Lerp::cosine(0.0f, 1.0f, jt::MathHelper::clamp(age, 0.0f, 1.0f));
             });
             add(ts1);
         });
@@ -111,17 +110,12 @@ void StateMenu::doCreate()
 void StateMenu::doInternalUpdate(float const elapsed)
 {
     if (!m_starting) {
+        using ip = jt::InputManager;
 
-        if (JamTemplate::InputManager::justPressed(jt::KeyCode::A)) { }
-        if (JamTemplate::InputManager::justReleased(jt::KeyCode::K)) {
-            std::cout << "K justreleased\n";
-        }
-
-        using ip = JamTemplate::InputManager;
         if (ip::justPressed(jt::KeyCode::Space) || ip::justPressed(jt::KeyCode::Enter)) {
 
             m_starting = true;
-            auto tw = JamTemplate::TweenAlpha<JamTemplate::SmartShape>::create(
+            auto tw = jt::TweenAlpha<jt::SmartShape>::create(
                 m_overlay, 0.5f, std::uint8_t { 0 }, std::uint8_t { 255 });
             tw->setSkipFrames();
             tw->addCompleteCallback(

@@ -3,7 +3,7 @@
 #include "gtest/gtest.h"
 #include <exception>
 
-using JamTemplate::TextureManager;
+using jt::TextureManager;
 
 class TextureManagerTest : public ::testing::Test {
 public:

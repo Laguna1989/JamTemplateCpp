@@ -2,7 +2,7 @@
 #include "vector.hpp"
 #include "gtest/gtest.h"
 
-using namespace JamTemplate::MathHelper;
+using namespace jt::MathHelper;
 using v = jt::vector2;
 
 TEST(VectorBetween, Single)

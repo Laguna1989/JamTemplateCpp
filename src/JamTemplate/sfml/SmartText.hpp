@@ -8,7 +8,7 @@
 #include <memory>
 #include <string>
 
-namespace JamTemplate {
+namespace jt {
 
 class SmartText : public SmartObject {
 public:
@@ -148,6 +148,6 @@ private:
         m_flashText->setRotation(-rot);
     }
 };
-} // namespace JamTemplate
+} // namespace jt
 
 #endif

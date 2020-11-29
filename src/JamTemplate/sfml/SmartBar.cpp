@@ -1,7 +1,7 @@
 ﻿#include "SmartBar.hpp"
 #include "Game.hpp"
 
-namespace JamTemplate {
+namespace jt {
 
 SmartBar::SmartBar(float width, float height)
     : m_valueCurrent { 0.0f }
@@ -80,4 +80,4 @@ const jt::vector2 SmartBar::getScale() const { return m_shapeFull.getScale(); }
 void SmartBar::setOrigin(jt::vector2 const& origin) { m_shapeFull.setOrigin(origin); }
 const jt::vector2 SmartBar::getOrigin() const { return m_shapeFull.getOrigin(); }
 
-} // namespace JamTemplate
+} // namespace jt

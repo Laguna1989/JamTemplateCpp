@@ -1,5 +1,5 @@
-﻿#ifndef JAMTEMPLATE_BUTTON_HPP_GUARD
-#define JAMTEMPLATE_BUTTON_HPP_GUARD
+﻿#ifndef jt_BUTTON_HPP_GUARD
+#define jt_BUTTON_HPP_GUARD
 
 #include "Game.hpp"
 #include "GameObject.hpp"
@@ -12,7 +12,7 @@
 #include <memory>
 #include <string>
 
-namespace JamTemplate {
+namespace jt {
 class Button : public GameObject {
 public:
     using Sptr = std::shared_ptr<Button>;
@@ -20,7 +20,7 @@ public:
     Button(jt::vector2u s = jt::vector2u { 16, 16 })
     {
         std::string buttonImageName = "#b#" + std::to_string(s.x()) + "#" + std::to_string(s.y());
-        m_background = std::make_shared<JamTemplate::SmartAnimation>();
+        m_background = std::make_shared<jt::SmartAnimation>();
         m_background->add(buttonImageName, "normal", s, { 0 }, 1);
         m_background->add(buttonImageName, "over", s, { 1 }, 1);
         m_background->add(buttonImageName, "down", s, { 2 }, 1);
@@ -119,6 +119,6 @@ private:
         }
     }
 };
-} // namespace JamTemplate
+} // namespace jt
 
 #endif

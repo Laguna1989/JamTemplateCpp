@@ -40,7 +40,7 @@ it freely, subject to the following restrictions:
 #include "vector.hpp"
 #include <SFML/Graphics.hpp>
 
-namespace JamTemplate {
+namespace jt {
 class Collision {
 public:
     Collision() = delete;
@@ -234,6 +234,6 @@ private:
         return jt::vector2(AABB.left + AABB.width / 2.f, AABB.top + AABB.height / 2.f);
     }
 };
-} // namespace JamTemplate
+} // namespace jt
 
 #endif /* COLLISION_H */

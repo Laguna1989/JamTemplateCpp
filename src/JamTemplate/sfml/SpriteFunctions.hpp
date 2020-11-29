@@ -4,7 +4,7 @@
 #include "color.hpp"
 #include <SFML/Graphics.hpp>
 
-namespace JamTemplate {
+namespace jt {
 namespace SpriteFunctions {
 
 sf::Image makeButtonImage(unsigned int w, unsigned int h,
@@ -18,6 +18,6 @@ sf::Image makeVignetteImage(unsigned int w, unsigned int h);
 
 } // namespace SpriteFunctions
 
-} // namespace JamTemplate
+} // namespace jt
 
 #endif

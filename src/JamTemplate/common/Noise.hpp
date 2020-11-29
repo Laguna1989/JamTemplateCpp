@@ -6,7 +6,7 @@
 #include <iostream>
 #include <vector>
 
-namespace JamTemplate {
+namespace jt {
 namespace Noise {
 
 class ValueNoise1D {
@@ -74,5 +74,5 @@ private:
 };
 
 } // namespace Noise
-} // namespace JamTemplate
+} // namespace jt
 #endif

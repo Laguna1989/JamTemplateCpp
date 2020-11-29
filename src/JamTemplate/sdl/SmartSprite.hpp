@@ -9,7 +9,7 @@
 #include <memory>
 #include <string>
 
-namespace JamTemplate {
+namespace jt {
 
 class SmartSprite : public SmartObject {
 public:
@@ -161,8 +161,8 @@ private:
     }
 
     void doRotate(float /*rot*/) override { }
-}; // namespace JamTemplate
+}; // namespace jt
 
-} // namespace JamTemplate
+} // namespace jt
 
 #endif

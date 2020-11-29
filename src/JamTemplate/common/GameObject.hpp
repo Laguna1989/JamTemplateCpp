@@ -4,7 +4,7 @@
 #include <iostream>
 #include <memory>
 
-namespace JamTemplate {
+namespace jt {
 // forward declaration
 class GameBase;
 
@@ -77,5 +77,5 @@ private:
     virtual void doCreate() {};
 };
 
-} // namespace JamTemplate
+} // namespace jt
 #endif

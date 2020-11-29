@@ -10,7 +10,7 @@
 #include <memory>
 #include <string>
 
-namespace JamTemplate {
+namespace jt {
 class SmartShape : public SmartObject {
 public:
     using Sptr = std::shared_ptr<SmartShape>;
@@ -110,6 +110,6 @@ private:
         m_angle = rot;
     }
 };
-} // namespace JamTemplate
+} // namespace jt
 
 #endif

@@ -4,7 +4,7 @@
 #include <exception>
 #include <iostream>
 
-namespace JamTemplate {
+namespace jt {
 
 Timer::Timer(float t, Timer::CallbackType cb, int r)
     : m_timer { t }
@@ -34,4 +34,4 @@ void Timer::doUpdate(float const /*elapsed*/)
     }
 }
 
-} // namespace JamTemplate
+} // namespace jt

@@ -5,7 +5,7 @@
 #include "TweenBase.hpp"
 #include <cstdint>
 
-namespace JamTemplate {
+namespace jt {
 
 template <class T>
 class TweenAlpha : public Tween<T> {
@@ -40,6 +40,6 @@ private:
     float m_finalValue { 0.0f };
 };
 
-} // namespace JamTemplate
+} // namespace jt
 
 #endif

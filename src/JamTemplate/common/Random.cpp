@@ -2,7 +2,7 @@
 #include <stdexcept>
 #include <time.h>
 
-using namespace JamTemplate;
+using namespace jt;
 
 std::default_random_engine Random::m_engine;
 

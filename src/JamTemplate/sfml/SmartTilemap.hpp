@@ -10,7 +10,7 @@
 #include <memory>
 #include <vector>
 
-namespace JamTemplate {
+namespace jt {
 
 // forward declaration
 class GameBase;
@@ -70,6 +70,6 @@ private:
     std::weak_ptr<GameBase> m_gamePtr;
 };
 
-} // namespace JamTemplate
+} // namespace jt
 
 #endif // !JAMTEMPLATE_TILEMAP_HPP_GUARD

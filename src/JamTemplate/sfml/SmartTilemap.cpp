@@ -5,7 +5,7 @@
 #include "TextureManager.hpp"
 #include <memory>
 
-namespace JamTemplate {
+namespace jt {
 
 SmartTilemap::SmartTilemap(std::filesystem::path const& path)
 {
@@ -103,7 +103,7 @@ void SmartTilemap::doDraw(std::shared_ptr<jt::renderTarget> const sptr) const
                 shape.setPosition(obj.position);
                 shape.setRotation(obj.rotation);
                 if (m_highlightObjectGroups) {
-                    shape.setOutlineColor(JamTemplate::Random::getRandomColor());
+                    shape.setOutlineColor(jt::Random::getRandomColor());
                 } else {
                     shape.setOutlineColor(jt::colors::Transparent);
                 }
@@ -161,4 +161,4 @@ const jt::vector2u SmartTilemap::getMapSizeInTiles()
         static_cast<unsigned int>(m_map->getSize().y) };
 }
 
-} // namespace JamTemplate
+} // namespace jt

@@ -3,7 +3,7 @@
 #include "gmock/gmock.h"
 #include "gtest/gtest.h"
 
-using JamTemplate::Game;
+using jt::Game;
 
 class GameTest : public ::testing::Test {
 public:
@@ -80,7 +80,7 @@ TEST_F(GameTest, MoveCam)
 
 TEST_F(GameTest, DrawWithNoState) { EXPECT_NO_THROW(g->draw()); }
 
-class MockState : public JamTemplate::GameState {
+class MockState : public jt::GameState {
 public:
     MOCK_METHOD(void, doInternalDraw, (), (const));
     MOCK_METHOD(void, doInternalUpdate, (float));

@@ -5,7 +5,7 @@
 #include <string>
 #include <vector>
 
-namespace JamTemplate {
+namespace jt {
 
 class SplitString : public std::string {
     std::vector<std::string> flds;
@@ -37,5 +37,5 @@ public:
         return flds;
     }
 };
-} // namespace JamTemplate
+} // namespace jt
 #endif

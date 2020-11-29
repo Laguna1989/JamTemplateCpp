@@ -8,7 +8,7 @@
 #include <map>
 #include <vector>
 
-namespace JamTemplate {
+namespace jt {
 namespace InputHelper {
 
 // std::vector<sf::Mouse::Button> getAllMouseButtons();
@@ -64,6 +64,6 @@ private:
     static void setup();
 };
 
-} // namespace JamTemplate
+} // namespace jt
 
 #endif

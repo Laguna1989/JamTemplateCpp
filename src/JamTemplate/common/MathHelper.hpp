@@ -8,7 +8,7 @@
 #include <string>
 #include <vector>
 
-namespace JamTemplate {
+namespace jt {
 namespace MathHelper {
 
 // create a vector with numbers between a and b (both inclusive)
@@ -58,6 +58,6 @@ int sgn(T val)
 }
 
 } // namespace MathHelper
-} // namespace JamTemplate
+} // namespace jt
 
 #endif

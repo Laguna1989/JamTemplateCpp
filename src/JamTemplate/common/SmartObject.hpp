@@ -9,7 +9,7 @@
 #include <memory>
 #include <string>
 
-namespace JamTemplate {
+namespace jt {
 class SmartObject {
 public:
     using Sptr = std::shared_ptr<SmartObject>;
@@ -172,6 +172,6 @@ private:
         }
     }
 };
-} // namespace JamTemplate
+} // namespace jt
 
 #endif

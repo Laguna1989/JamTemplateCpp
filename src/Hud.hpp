@@ -5,7 +5,7 @@
 // #include "SmartText.hpp"
 #include <string>
 
-class Hud : public JamTemplate::GameObject {
+class Hud : public jt::GameObject {
 public:
     Hud();
 
@@ -17,8 +17,8 @@ private:
     int m_scoreP2 { -1 };
 
     // TODO
-    // JamTemplate::SmartText::Sptr m_scoreP1Text;
-    // JamTemplate::SmartText::Sptr m_scoreP2Text;
+    // jt::SmartText::Sptr m_scoreP1Text;
+    // jt::SmartText::Sptr m_scoreP2Text;
 
     void doUpdate(float const elapsed) override;
 
