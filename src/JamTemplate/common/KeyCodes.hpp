@@ -1,4 +1,4 @@
-#ifndef KEYCODES_HPP_GUARD
+﻿#ifndef KEYCODES_HPP_GUARD
 #define KEYCODES_HPP_GUARD
 
 #include <vector>
@@ -112,7 +112,15 @@ enum KeyCode {
     KeyCount ///< Keep last -- the total number of keyboard keys
 };
 
+enum MouseButtonCode {
+    MBLeft = 0,
+    MBMiddle,
+    MBRight,
+    ButtonCount ///< Keep last -- the total number of mouse button
+};
+
 std::vector<jt::KeyCode> getAllKeys();
+std::vector<jt::MouseButtonCode> getAllButtons();
 
 } // namespace jt
 #endif

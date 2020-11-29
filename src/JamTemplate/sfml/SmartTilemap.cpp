@@ -40,8 +40,8 @@ SmartTilemap::SmartTilemap(std::filesystem::path const& path)
         const std::string currentGroupName = layer.getName();
         for (auto& obj : layer.getObjects()) {
 
-            InfoRect collider { C::vec(obj.getPosition()), C::vec(obj.getSize()), obj.getRotation(),
-                obj.getType() };
+            InfoRect collider { Conversion::vec(obj.getPosition()), Conversion::vec(obj.getSize()),
+                obj.getRotation(), obj.getType() };
             m_objectGroups[currentGroupName].push_back(collider);
         }
     }
@@ -67,7 +67,7 @@ void SmartTilemap::doDraw(std::shared_ptr<jt::renderTarget> const sptr) const
                     throw std::invalid_argument { "Invalid tile id in map" };
                 }
 
-                auto const tilePos = C::vec(tile.getPosition());
+                auto const tilePos = Conversion::vec(tile.getPosition());
                 // optimization: don't draw tiles outside the game window
                 if (g) {
                     jt::vector2 const camoffset

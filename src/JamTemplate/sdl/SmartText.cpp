@@ -116,7 +116,6 @@ void SmartText::doDrawFlash(std::shared_ptr<jt::renderTarget> const sptr) const
     setSDLColor(getFlashColor());
     SDL_RenderCopyEx(sptr.get(), m_textTexture.get(), nullptr, &destRect, -getRotation(), &p, flip);
     // std::cout << "error message: " << SDL_GetError() << std::endl;
-    // TODO
 }
 
 void SmartText::doRotate(float /*rot*/)

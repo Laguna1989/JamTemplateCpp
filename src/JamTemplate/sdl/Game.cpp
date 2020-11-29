@@ -68,7 +68,6 @@ void Game::doUpdate(float const elapsed)
     // jt::vector2 mpfs
     //     = getRenderWindow()->mapPixelToCoords(sf::Mouse::getPosition(*getRenderWindow())) /
     //     m_zoom;
-    // InputManager::update(mpf.x(), mpf.y(), mpfs.x(), mpfs.y(), elapsed);
 
     // int const camOffsetix { static_cast<int>(m_CamOffset.x() + getView()->getSize().x / 2) };
     // int const camOffsetiy { static_cast<int>(m_CamOffset.y() + getView()->getSize().y / 2) };

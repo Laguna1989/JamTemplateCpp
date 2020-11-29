@@ -45,6 +45,9 @@ void StateGame::doInternalUpdate(float const elapsed)
     if (jt::InputManager::justPressed(jt::KeyCode::T)) {
         m_sprite->flash(0.25f);
     }
+    if (jt::InputManager::justPressed(jt::MouseButtonCode::MBLeft)) {
+        m_sprite->flash(0.25f, jt::colors::Red);
+    }
 }
 
 void StateGame::doInternalDraw() const
@@ -57,7 +60,6 @@ void StateGame::doInternalDraw() const
 
 void StateGame::doCreateInternal()
 {
-
     m_sprite = std::make_shared<jt::SmartSprite>();
     m_sprite->loadSprite("assets/coin.png", jt::recti { 0, 0, 16, 16 });
     m_sprite->setPosition(jt::vector2 { 100, 100 });

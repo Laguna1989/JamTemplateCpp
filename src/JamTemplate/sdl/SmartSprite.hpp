@@ -36,7 +36,6 @@ public:
             m_text.get(), NULL, NULL, &w, &h); // get the width and height of the texture
         m_sourceRect = jt::recti { rect };
 
-        // TODO FlashSprite
         m_textFlash = TextureManager::get(TextureManager::getFlashName(fileName));
     }
 

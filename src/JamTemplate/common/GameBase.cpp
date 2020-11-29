@@ -1,5 +1,6 @@
 ﻿#include "GameBase.hpp"
 #include "GameState.hpp"
+#include "InputManager.hpp"
 #include <exception>
 #include <stdexcept>
 
@@ -80,8 +81,7 @@ void GameBase::doSwitchState()
     m_CamOffset = jt::vector2 { 0.0f, 0.0f };
     m_state->setGameInstance(getPtr());
     m_state->create();
-    // TODO
-    // jt::InputManager::reset();
+    jt::InputManager::reset();
     resetShake();
 }
 
