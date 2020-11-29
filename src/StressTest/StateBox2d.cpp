@@ -9,13 +9,13 @@ void StateBox2d::doInternalUpdate(float const elapsed)
 
     updateObjects(elapsed);
 
-    m_bar1->update(elapsed);
-    m_bar2->update(elapsed);
+    // m_bar1->update(elapsed);
+    // m_bar2->update(elapsed);
     for (int32 i = 0; i < 60; ++i) {
         m_world->Step(elapsed, velocityIterations, positionIterations);
     }
 
-    if (getAge() >= 15.0f || JamTemplate::InputManager::justPressed(sf::Keyboard::Key::F1)) {
+    if (getAge() >= 15.0f || JamTemplate::InputManager::justPressed(jt::KeyCode::F1)) {
         getGame()->switchState(std::make_shared<State1>());
     }
 
@@ -28,20 +28,20 @@ void StateBox2d::doInternalUpdate(float const elapsed)
         current = 0;
     }
     float v = JamTemplate::Lerp::cosine(0.0f, 1.0f, current);
-    m_bar1->setCurrentValue(v);
-    if (current < 0.25f) {
-        m_bar1->setFrontColor(jt::colors::Red);
-    } else {
-        m_bar1->setFrontColor(jt::colors::White);
-    }
+    // m_bar1->setCurrentValue(v);
+    // if (current < 0.25f) {
+    //     m_bar1->setFrontColor(jt::colors::Red);
+    // } else {
+    //     m_bar1->setFrontColor(jt::colors::White);
+    // }
 
-    m_bar2->setCurrentValue((1 - v));
-    m_bar2->setBackColor(jt::colors::Blue);
+    // m_bar2->setCurrentValue((1 - v));
+    // m_bar2->setBackColor(jt::colors::Blue);
 }
 
 void StateBox2d::doInternalDraw() const
 {
     drawObjects();
-    m_bar1->draw(getGame()->getRenderTarget());
-    m_bar2->draw(getGame()->getRenderTarget());
+    // m_bar1->draw(getGame()->getRenderTarget());
+    // m_bar2->draw(getGame()->getRenderTarget());
 }

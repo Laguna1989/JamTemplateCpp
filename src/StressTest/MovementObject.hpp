@@ -5,12 +5,12 @@
 #include "Conversions.hpp"
 #include "Game.hpp"
 #include "GameState.hpp"
+#include "InputManager.hpp"
 #include "MathHelper.hpp"
 #include "ObjectGroup.hpp"
 #include "Random.hpp"
 #include "SmartAnimation.hpp"
 #include "SmartShape.hpp"
-#include <SFML/Graphics.hpp>
 #include <iostream>
 #include <memory>
 #include <random>
@@ -55,16 +55,16 @@ private:
 
         m_animation->update(elapsed);
         if (getB2Body()->GetType() == b2BodyType::b2_dynamicBody) {
-            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D)) {
+            if (JamTemplate::InputManager::pressed(jt::KeyCode::D)) {
                 getB2Body()->ApplyForceToCenter(b2Vec2 { 1000, 0 }, true);
             }
 
-            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A)) {
+            if (JamTemplate::InputManager::pressed(jt::KeyCode::A)) {
                 getB2Body()->ApplyForceToCenter(b2Vec2 { -1000, 0 }, true);
             }
         }
 
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::B)) {
+        if (JamTemplate::InputManager::pressed(jt::KeyCode::B)) {
             m_animation->flash(0.5f, jt::colors::Red);
         }
     }

@@ -13,7 +13,8 @@ public:
     StateTileson() = default;
 
 private:
-    std::shared_ptr<JamTemplate::SmartTilemap> m_tilemap;
+    // TODO
+    // std::shared_ptr<JamTemplate::SmartTilemap> m_tilemap;
 
     void doCreate() override;
     void doDraw() const override;

@@ -7,7 +7,6 @@
 #include "Random.hpp"
 #include "SmartAnimation.hpp"
 #include "SmartShape.hpp"
-#include <SFML/Graphics.hpp>
 #include <iostream>
 #include <memory>
 #include <random>
@@ -31,10 +30,9 @@ public:
         float vx = JamTemplate::Random::getFloatGauss(0, 50);
         float vy = JamTemplate::Random::getFloatGauss(0, 50);
 
-        // setPosition({ x, y });
-        // setVelocity({ vx, vy });
-        //// setAcceleration({ 0, -50 / 2 });
-        // setBoundsPosition(jt::rect { 0, 0, 200 - 10, 150 - 10 });
+        m_position = jt::vector2 { x, y };
+        m_velocity = jt::vector2 { vx, vy };
+        m_acceleration = jt::vector2 { 0.0f, -50.0f / 2.0f };
     }
 
     ~Object() = default;
@@ -47,8 +45,9 @@ public:
 private:
     void doUpdate(float const elapsed) override
     {
-        // updateTransform(elapsed);
-        // m_animation->setPosition(getPosition());
+        m_velocity = m_velocity + elapsed * m_acceleration;
+        m_position = m_position + elapsed * m_velocity;
+        m_animation->setPosition(m_position);
         m_animation->update(elapsed);
         if (getAge() > 0.9)
             kill();
@@ -57,6 +56,9 @@ private:
     void doDraw() const override { m_animation->draw(getGame()->getRenderTarget()); }
 
     std::shared_ptr<JamTemplate::SmartAnimation> m_animation;
+    jt::vector2 m_position;
+    jt::vector2 m_velocity;
+    jt::vector2 m_acceleration;
 };
 
 #endif

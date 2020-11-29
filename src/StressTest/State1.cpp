@@ -32,7 +32,7 @@ void State1::doInternalUpdate(float const /*elapsed*/)
         add(tw3);
     }
 
-    if (getAge() >= 5.0 || JamTemplate::InputManager::justPressed(sf::Keyboard::F1)) {
+    if (getAge() >= 5.0 || JamTemplate::InputManager::justPressed(jt::KeyCode::F1)) {
         getGame()->switchState(std::make_shared<State2>());
     }
 }

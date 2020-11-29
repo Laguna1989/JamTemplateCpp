@@ -8,7 +8,6 @@
 #include "Random.hpp"
 #include "SmartAnimation.hpp"
 #include "SmartShape.hpp"
-#include <SFML/Graphics.hpp>
 #include <iostream>
 #include <memory>
 #include <random>
