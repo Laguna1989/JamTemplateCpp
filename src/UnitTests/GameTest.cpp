@@ -122,6 +122,7 @@ TEST_F(GameTest, SwitchStateTwice)
     EXPECT_CALL(*ms2, doInternalCreate());
     g->switchState(ms2);
 
+    EXPECT_CALL(*ms2, doInternalUpdate(0.0f));
     // first update is required to switch the state
     g->update(0.0f);
     EXPECT_CALL(*ms2, doInternalUpdate(expected_update_time));

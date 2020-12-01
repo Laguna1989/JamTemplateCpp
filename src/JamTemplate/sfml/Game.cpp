@@ -71,7 +71,9 @@ std::shared_ptr<sf::View> Game::getView() { return m_view; }
 
 void Game::doUpdate(float const elapsed)
 {
-    // std::cout << "game::update\n";
+    if (m_state == nullptr) {
+        return;
+    }
     m_state->update(elapsed);
 
     jt::vector2 mpf = getRenderWindow()->mapPixelToCoords(
@@ -92,6 +94,10 @@ void Game::doDraw() const
 {
     // clear the old image
     m_renderTarget->clear(m_backgroundColor);
+
+    if (m_state == nullptr) {
+        return;
+    }
 
     m_state->draw();
 

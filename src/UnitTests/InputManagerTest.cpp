@@ -3,30 +3,6 @@
 
 using jt::InputManager;
 
-TEST(InputManagerTest, InitialKeyValuesAfterReset)
-{
-    InputManager::reset();
-    auto const allKeys = jt::InputHelper::getAllKeys();
-    for (auto const k : allKeys) {
-        EXPECT_EQ(InputManager::justPressed(k), false);
-        EXPECT_EQ(InputManager::justReleased(k), false);
-        EXPECT_EQ(InputManager::pressed(k), false);
-        EXPECT_EQ(InputManager::released(k), false);
-    }
-}
-
-TEST(InputManagerTest, InitialButtonValuesAfterReset)
-{
-    InputManager::reset();
-    auto const allButtons = jt::InputHelper::getAllMouseButtons();
-    for (auto const b : allButtons) {
-        EXPECT_EQ(InputManager::justPressed(b), false);
-        EXPECT_EQ(InputManager::justReleased(b), false);
-        EXPECT_EQ(InputManager::pressed(b), false);
-        EXPECT_EQ(InputManager::released(b), false);
-    }
-}
-
 TEST(InputManagerTest, UpdateStoresCorrectMousePosition)
 {
     float const mx = 10;

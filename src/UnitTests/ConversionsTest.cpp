@@ -4,7 +4,7 @@
 #include <limits>
 #include <utility>
 
-using namespace jt::C;
+using namespace jt::Conversion;
 
 using tt = std::pair<float, float>;
 
