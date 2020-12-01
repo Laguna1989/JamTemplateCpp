@@ -24,6 +24,7 @@ private:
     std::shared_ptr<jt::SmartText> m_text_Credits;
 
     std::shared_ptr<jt::SmartShape> m_overlay;
+    std::shared_ptr<jt::SmartSprite> m_vignette;
 
     bool m_starting { false };
 

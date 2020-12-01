@@ -15,4 +15,41 @@ SDL_RendererFlip getFlipFromScale(jt::vector2 const& scale)
     return flip;
 }
 
+void setPixel(SDL_Surface* surface, int x, int y, uint32_t pixel)
+{
+    uint8_t* target_pixel = (uint8_t*)surface->pixels + y * surface->pitch + x * 4;
+    *(uint32_t*)target_pixel = pixel;
+}
+
+uint32_t getPixel(SDL_Surface* surface, int x, int y)
+{
+    int const bpp = surface->format->BytesPerPixel;
+    /* Here p is the address to the pixel we want to retrieve */
+    uint8_t* p = (uint8_t*)surface->pixels + y * surface->pitch + x * bpp;
+
+    switch (bpp) {
+    case 1:
+        return *p;
+        break;
+
+    case 2:
+        return *(uint16_t*)p;
+        break;
+
+    case 3:
+        if (SDL_BYTEORDER == SDL_BIG_ENDIAN)
+            return p[0] << 16 | p[1] << 8 | p[2];
+        else
+            return p[0] | p[1] << 8 | p[2] << 16;
+        break;
+
+    case 4:
+        return *(uint32_t*)p;
+        break;
+
+    default:
+        return 0; /* shouldn't happen, but avoids warnings */
+    }
+}
+
 } // namespace jt

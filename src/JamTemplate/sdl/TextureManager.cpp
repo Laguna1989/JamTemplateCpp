@@ -1,4 +1,6 @@
 ﻿#include "TextureManager.hpp"
+#include "SDLHelper.hpp"
+#include "SpriteFunctions.hpp"
 #include <SDL_image.h>
 #include <map>
 
@@ -6,20 +8,70 @@ namespace jt {
 
 namespace {
 
-// sf::Image createButtonImage(std::vector<std::string> const& ssv)
-// {
-//     // TODO
-// }
+std::shared_ptr<SDL_Texture> createButtonImage(
+    std::vector<std::string> const& ssv, std::shared_ptr<jt::renderTarget> rt)
+{
+    if (ssv.size() != 3) {
+        throw std::invalid_argument { "create button image: vector does not contain 3 elements." };
+    }
+    std::size_t count { 0 };
+    long w = std::stol(ssv.at(1), &count);
+    if (count != ssv.at(1).size()) {
+        throw std::invalid_argument { "invalid button size string" };
+    }
+    long h = std::stol(ssv.at(2), &count);
+    if (count != ssv.at(2).size()) {
+        throw std::invalid_argument { "invalid button size string" };
+    }
+    if (w <= 0 || h <= 0) {
+        throw std::invalid_argument { "invalid button size" };
+    }
 
-// sf::Image createGlowImage(std::vector<std::string> const& ssv)
-// {
-//     // TODO
-// }
+    return jt::SpriteFunctions::makeButtonImage(rt, w, h);
+}
 
-// sf::Image createVignetteImage(std::vector<std::string> const& ssv)
-// {
-//     // TODO
-// }
+std::shared_ptr<SDL_Texture> createGlowImage(
+    std::vector<std::string> const& ssv, std::shared_ptr<jt::renderTarget> rt)
+{
+    if (ssv.size() != 3) {
+        throw std::invalid_argument { "create glow image: vector does not contain 2 elements." };
+    }
+    std::size_t count { 0 };
+    auto const s = std::stol(ssv.at(1), &count);
+    if (count != ssv.at(1).size() || s <= 0) {
+        throw std::invalid_argument { "invalid glow size" };
+    }
+    auto const max = std::stol(ssv.at(2), &count);
+    if (count != ssv.at(2).size() || max <= 0 || max > 255) {
+        throw std::invalid_argument { "invalid glowmax" };
+    }
+    return SpriteFunctions::makeGlowImage(rt, static_cast<float>(s), static_cast<uint8_t>(max));
+}
+
+std::shared_ptr<SDL_Texture> createVignetteImage(
+    std::vector<std::string> const& ssv, std::shared_ptr<jt::renderTarget> rt)
+{
+    std::cout << " Create Vignette0\n";
+    if (ssv.size() != 3) {
+        throw std::invalid_argument {
+            "create vignette image: vector does not contain 2 elements."
+        };
+    }
+    std::cout << " Create Vignette1\n";
+    std::size_t count { 0 };
+    auto w = std::stol(ssv.at(1), &count);
+    if (count != ssv.at(1).size() || w <= 0) {
+        throw std::invalid_argument { "invalid vignette w" };
+    }
+    std::cout << "Create Vignette2\n";
+    auto h = std::stol(ssv.at(2), &count);
+    if (count != ssv.at(2).size() || h <= 0) {
+        std::cout << "invalid vignette h\n";
+        throw std::invalid_argument { "invalid vignette h" };
+    }
+    std::cout << "TextureManager Create Vignette3\n";
+    return SpriteFunctions::makeVignetteImage(rt, w, h);
+}
 
 // void replaceOneColor(sf::Image& img, jt::color const& from, jt::color const& to)
 // {
@@ -32,47 +84,14 @@ namespace {
 //     // TODO
 // }
 
-void setPixel(SDL_Surface* surface, int x, int y, Uint32 pixel)
-{
-    uint8_t* target_pixel = (uint8_t*)surface->pixels + y * surface->pitch + x * 4;
-    *(uint32_t*)target_pixel = pixel;
-}
-
-uint32_t getPixel(SDL_Surface* surface, int x, int y)
-{
-    int const bpp = surface->format->BytesPerPixel;
-    /* Here p is the address to the pixel we want to retrieve */
-    uint8_t* p = (uint8_t*)surface->pixels + y * surface->pitch + x * bpp;
-
-    switch (bpp) {
-    case 1:
-        return *p;
-        break;
-
-    case 2:
-        return *(uint16_t*)p;
-        break;
-
-    case 3:
-        if (SDL_BYTEORDER == SDL_BIG_ENDIAN)
-            return p[0] << 16 | p[1] << 8 | p[2];
-        else
-            return p[0] | p[1] << 8 | p[2] << 16;
-        break;
-
-    case 4:
-        return *(uint32_t*)p;
-        break;
-
-    default:
-        return 0; /* shouldn't happen, but avoids warnings */
-    }
-}
-
 std::shared_ptr<SDL_Texture> createFlashImage(
     std::string const& str, std::shared_ptr<jt::renderTarget> rt)
 {
-    SDL_Surface* image = IMG_Load(str.c_str());
+    auto image = std::shared_ptr<SDL_Surface>(
+        IMG_Load(str.c_str()), [](SDL_Surface* s) { SDL_FreeSurface(s); });
+    if (!image) {
+        return nullptr;
+    }
     int const w = image->w;
     int const h = image->h;
 
@@ -85,14 +104,14 @@ std::shared_ptr<SDL_Texture> createFlashImage(
             uint8_t g;
             uint8_t b;
             uint8_t a;
-            SDL_GetRGBA(getPixel(image, x, y), image->format, &r, &g, &b, &a);
+            SDL_GetRGBA(jt::getPixel(image.get(), x, y), image->format, &r, &g, &b, &a);
             if (a != 0) {
-                setPixel(image, x, y, white);
+                jt::setPixel(image.get(), x, y, white);
             }
         }
     }
 
-    return std::shared_ptr<SDL_Texture>(SDL_CreateTextureFromSurface(rt.get(), image),
+    return std::shared_ptr<SDL_Texture>(SDL_CreateTextureFromSurface(rt.get(), image.get()),
         [](SDL_Texture* t) { SDL_DestroyTexture(t); });
 }
 
@@ -119,9 +138,11 @@ std::weak_ptr<jt::renderTarget> TextureManager::m_renderer {};
 std::shared_ptr<SDL_Texture> TextureManager::get(std::string const& str)
 {
     if (str.empty()) {
+        std::cout << "TextureManager get: string must not be empty" << std::endl;
         throw std::invalid_argument { "TextureManager get: string must not be empty" };
     }
     if (m_renderer.expired()) {
+        std::cout << "renderer not available for TextureManager::get()" << std::endl;
         throw std::logic_error { "renderer not available for TextureManager::get()" };
     }
 
@@ -130,25 +151,27 @@ std::shared_ptr<SDL_Texture> TextureManager::get(std::string const& str)
         // normal filenames do not start with a '#'
         if (str.at(0) != '#') {
             m_textures[str] = loadTextureFromDisk(str, m_renderer.lock());
+
+            // create Flash Image
+            m_textures[getFlashName(str)] = createFlashImage(str, m_renderer.lock());
         } else // special type of images
         {
             SplitString ss { str };
             auto ssv = ss.split('#');
             if (ssv.at(0) == "b") {
-                // m_textures[str].loadFromImage(createButtonImage(ssv));
+                m_textures[str] = createButtonImage(ssv, m_renderer.lock());
             } else if (ssv.at(0) == "r") {
                 // m_textures[str].loadFromImage(createReplacedImage(ssv, m_selectiveColorReplace));
             } else if (ssv.at(0) == "g") {
-                // m_textures[str].loadFromImage(createGlowImage(ssv));
+                m_textures[str] = createGlowImage(ssv, m_renderer.lock());
             } else if (ssv.at(0) == "v") {
-                // m_textures[str].loadFromImage(createVignetteImage(ssv));
+                m_textures[str] = createVignetteImage(ssv, m_renderer.lock());
+
             } else {
                 throw std::invalid_argument("ERROR: cannot get texture with name " + str);
             }
+            m_textures[getFlashName(str)] = m_textures[str];
         }
-
-        // create Flash Image
-        m_textures[getFlashName(str)] = createFlashImage(str, m_renderer.lock());
     }
 
     return m_textures[str];

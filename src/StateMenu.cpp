@@ -60,6 +60,11 @@ void StateMenu::doCreate()
     m_overlay->setColor(jt::color { 0, 0, 0, 255 });
     m_overlay->update(0);
 
+    m_vignette = std::make_shared<jt::SmartSprite>();
+    m_vignette->loadSprite("#v#400#300");
+    m_vignette->setColor(jt::color { 255, 255, 255, 100 });
+    m_vignette->update(0.0f);
+
     using tp = jt::TweenPosition<jt::SmartText>;
     using ta = jt::TweenAlpha<jt::SmartText>;
     using ts = jt::TweenScale<jt::SmartText>;
@@ -139,4 +144,5 @@ void StateMenu::doInternalDraw() const
     m_text_Credits->draw(getGame()->getRenderTarget());
 
     m_overlay->draw(getGame()->getRenderTarget());
+    m_vignette->draw(getGame()->getRenderTarget());
 }

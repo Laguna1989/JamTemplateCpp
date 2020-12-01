@@ -30,13 +30,15 @@ public:
 
     operator sf::Vector2f() const { return m_vec; }
 
-    sf::Vector2f m_vec;
-
     float x() const { return m_vec.x; };
     float y() const { return m_vec.y; };
 
     float& x() { return m_vec.x; }
     float& y() { return m_vec.y; }
+
+private:
+    sf::Vector2f m_vec;
+
 };
 
 class vector2u final {
