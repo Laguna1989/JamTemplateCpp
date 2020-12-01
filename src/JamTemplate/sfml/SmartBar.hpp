@@ -1,7 +1,7 @@
 ﻿#ifndef JAMTEMPLATE_SMARTBAR_HPP_INCLUDEGUARD
 #define JAMTEMPLATE_SMARTBAR_HPP_INCLUDEGUARD
 
-#include "SmartObject.hpp"
+#include "SmartDrawable.hpp"
 #include "rendertarget.hpp"
 #include <SFML/Graphics.hpp>
 #include <cassert>
@@ -10,7 +10,7 @@
 
 namespace jt {
 
-class SmartBar : public jt::SmartObject {
+class SmartBar : public jt::SmartDrawable {
 public:
     using Sptr = std::shared_ptr<SmartBar>;
 

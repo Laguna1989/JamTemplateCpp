@@ -1,7 +1,7 @@
 ﻿#ifndef JAMTEMPLATE_SMARTTEXT_HPP_INCLUDEGUARD
 #define JAMTEMPLATE_SMARTTEXT_HPP_INCLUDEGUARD
 
-#include "SmartObject.hpp"
+#include "SmartDrawable.hpp"
 #include "rendertarget.hpp"
 #include <SDL.h>
 #include <SDL_ttf.h>
@@ -11,7 +11,7 @@
 
 namespace jt {
 
-class SmartText : public SmartObject {
+class SmartText : public SmartDrawable {
 public:
     enum class TextAlign { CENTER, LEFT, RIGHT };
 

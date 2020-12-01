@@ -1,5 +1,5 @@
-﻿#ifndef JAMTEMPLATE_SMARTOBJECT_HPP_INCLUDEGUARD
-#define JAMTEMPLATE_SMARTOBJECT_HPP_INCLUDEGUARD
+﻿#ifndef JAMTEMPLATE_SMARTDRAWABLE_HPP_INCLUDEGUARD
+#define JAMTEMPLATE_SMARTDRAWABLE_HPP_INCLUDEGUARD
 
 #include "Lerp.hpp"
 #include "Random.hpp"
@@ -10,17 +10,17 @@
 #include <string>
 
 namespace jt {
-class SmartObject {
+class SmartDrawable {
 public:
-    using Sptr = std::shared_ptr<SmartObject>;
+    using Sptr = std::shared_ptr<SmartDrawable>;
 
-    virtual ~SmartObject() = default;
+    virtual ~SmartDrawable() = default;
 
     void draw(std::shared_ptr<jt::renderTarget> sptr) const
     {
         if (m_hasBeenUpdated == false) {
-            std::cout << "WARNING: Calling SmartObject::draw() without previous call to "
-                         "SmartObject::update()!\n";
+            std::cout << "WARNING: Calling SmartDrawable::draw() without previous call to "
+                         "SmartDrawable::update()!\n";
         }
 
         if (m_shadowActive) {

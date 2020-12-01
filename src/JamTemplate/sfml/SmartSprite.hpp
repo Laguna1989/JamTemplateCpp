@@ -1,7 +1,7 @@
 ﻿#ifndef JAMTEMPLATE_SMARTSPRITE_HPP_INCLUDEGUARD
 #define JAMTEMPLATE_SMARTSPRITE_HPP_INCLUDEGUARD
 
-#include "SmartObject.hpp"
+#include "SmartDrawable.hpp"
 #include "TextureManager.hpp"
 #include "rendertarget.hpp"
 #include <SFML/Graphics.hpp>
@@ -10,7 +10,7 @@
 
 namespace jt {
 
-class SmartSprite : public SmartObject {
+class SmartSprite : public SmartDrawable {
 public:
     using Sptr = std::shared_ptr<SmartSprite>;
 

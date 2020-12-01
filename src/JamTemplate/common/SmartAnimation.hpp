@@ -1,7 +1,7 @@
 ﻿#ifndef JAMTEMPLATE_ANIMATION_HPP_INCLUDEGUARD
 #define JAMTEMPLATE_ANIMATION_HPP_INCLUDEGUARD
 
-#include "SmartObject.hpp"
+#include "SmartDrawable.hpp"
 #include "rendertarget.hpp"
 #include <map>
 #include <memory>
@@ -13,7 +13,7 @@ namespace jt {
 // forward declaration
 class SmartSprite;
 
-class SmartAnimation : public SmartObject {
+class SmartAnimation : public SmartDrawable {
 public:
     using Sptr = std::shared_ptr<SmartAnimation>;
     using AnimationMapType = std::map<std::string, std::vector<std::shared_ptr<SmartSprite>>>;

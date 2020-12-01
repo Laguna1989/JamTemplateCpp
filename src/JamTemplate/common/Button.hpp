@@ -5,7 +5,7 @@
 #include "GameObject.hpp"
 #include "InputManager.hpp"
 #include "SmartAnimation.hpp"
-#include "SmartObject.hpp"
+#include "SmartDrawable.hpp"
 #include "TextureManager.hpp"
 #include "vector.hpp"
 #include <functional>
@@ -42,7 +42,7 @@ public:
     Button(const Button& b) = default;
     Button(Button&& b) = default;
 
-    void setIcon(SmartObject::Sptr sprt) { m_icon = sprt; }
+    void setIcon(SmartDrawable::Sptr sprt) { m_icon = sprt; }
 
     void addCallback(std::function<void(void)> cb) { m_callbacks.push_back(cb); }
 
@@ -61,7 +61,7 @@ public:
 
 private:
     std::shared_ptr<SmartAnimation> m_background;
-    std::shared_ptr<SmartObject> m_icon { nullptr };
+    std::shared_ptr<SmartDrawable> m_icon { nullptr };
     std::vector<std::function<void(void)>> m_callbacks;
     jt::vector2 m_pos;
 

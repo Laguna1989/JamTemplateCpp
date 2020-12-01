@@ -2,7 +2,7 @@
 #define JAMTEMPLATE_TILEMAP_HPP_GUARD
 
 #include "InfoRect.hpp"
-#include "SmartObject.hpp"
+#include "SmartDrawable.hpp"
 #include "rendertarget.hpp"
 #include "tileson.h"
 #include <SFML/Graphics.hpp>
@@ -15,7 +15,7 @@ namespace jt {
 // forward declaration
 class GameBase;
 
-class SmartTilemap : public SmartObject {
+class SmartTilemap : public SmartDrawable {
 public:
     using Sptr = std::shared_ptr<SmartTilemap>;
 

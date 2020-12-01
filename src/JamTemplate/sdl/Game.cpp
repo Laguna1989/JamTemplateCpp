@@ -2,7 +2,7 @@
 #include "GameState.hpp"
 #include "InputManager.hpp"
 #include "Random.hpp"
-#include "SmartObject.hpp"
+#include "SmartDrawable.hpp"
 #include "TextureManager.hpp"
 #include "rect.hpp"
 #include "vector.hpp"
@@ -74,7 +74,7 @@ void Game::doUpdate(float const elapsed)
 
     // getView()->setCenter(
     //     jt::vector2 { static_cast<float>(camOffsetix), static_cast<float>(camOffsetiy) });
-    // SmartObject::setCamOffset(getView()->getCenter() - getView()->getSize() * 0.5f);
+    // SmartDrawable::setCamOffset(getView()->getCenter() - getView()->getSize() * 0.5f);
 };
 
 void Game::doDraw() const

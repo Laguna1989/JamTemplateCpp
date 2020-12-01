@@ -1,14 +1,14 @@
 ﻿#ifndef JAMTEMPLATE_SMARTSHAPE_HPP_INCLUDEGUARD
 #define JAMTEMPLATE_SMARTSHAPE_HPP_INCLUDEGUARD
 
-#include "SmartObject.hpp"
+#include "SmartDrawable.hpp"
 #include "rendertarget.hpp"
 #include <SFML/Graphics.hpp>
 #include <memory>
 #include <string>
 
 namespace jt {
-class SmartShape : public SmartObject {
+class SmartShape : public SmartDrawable {
 public:
     using Sptr = std::shared_ptr<SmartShape>;
 

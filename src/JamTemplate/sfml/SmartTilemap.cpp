@@ -1,7 +1,6 @@
 ﻿#include "SmartTilemap.hpp"
 #include "Conversions.hpp"
 #include "GameBase.hpp"
-#include "SmartObject.hpp"
 #include "TextureManager.hpp"
 #include <memory>
 

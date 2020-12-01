@@ -136,7 +136,7 @@ jt::vector2 const SmartAnimation::getOrigin() const
 
 void SmartAnimation::setShadowActive(bool active)
 {
-    SmartObject::setShadowActive(active);
+    SmartDrawable::setShadowActive(active);
     for (auto& kvp : m_frames) {
         for (auto const& sptr : kvp.second) {
             sptr->setShadowActive(active);
@@ -145,7 +145,7 @@ void SmartAnimation::setShadowActive(bool active)
 }
 void SmartAnimation::setShadowColor(jt::color const& col)
 {
-    SmartObject::setShadowColor(col);
+    SmartDrawable::setShadowColor(col);
     for (auto& kvp : m_frames) {
         for (auto const& sptr : kvp.second) {
             sptr->setShadowColor(col);
@@ -154,7 +154,7 @@ void SmartAnimation::setShadowColor(jt::color const& col)
 }
 void SmartAnimation::setShadowOffset(jt::vector2 const& v)
 {
-    SmartObject::setShadowOffset(v);
+    SmartDrawable::setShadowOffset(v);
     for (auto& kvp : m_frames) {
         for (auto const& sptr : kvp.second) {
             sptr->setShadowOffset(v);
