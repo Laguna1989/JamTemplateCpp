@@ -4,7 +4,7 @@
 #include "Game.hpp"
 #include "GameState.hpp"
 #include "MovementObject.hpp"
-// #include "SmartBar.hpp"
+#include "SmartBar.hpp"
 #include "SmartShape.hpp"
 #include "TweenRotation.hpp"
 #include <Box2D/Box2D.h>
@@ -20,9 +20,9 @@ public:
 
 private:
     std::shared_ptr<b2World> m_world { nullptr };
-    // TODO
-    // jtr::Sptr m_bar1;
-    // jt::SmartBar::Sptr m_bar2;
+
+    jt::SmartBar::Sptr m_bar1;
+    jt::SmartBar::Sptr m_bar2;
 
     void doCreate() override
     {
@@ -80,12 +80,12 @@ private:
             add(tw);
         }
 
-        // m_bar1 = std::make_shared<jt::SmartBar>(100.0f, 10.0f);
-        // m_bar1->setPosition(jt::vector2 { 10, 10 });
+        m_bar1 = std::make_shared<jt::SmartBar>(100.0f, 10.0f);
+        m_bar1->setPosition(jt::vector2 { 10, 10 });
 
-        // m_bar2 = std::make_shared<jt::SmartBar>(100.0f, 10.0f);
-        // m_bar2->setPosition(jt::vector2 { 10, 25 });
-        // m_bar2->setMaxValue(2.0f);
+        m_bar2 = std::make_shared<jt::SmartBar>(100.0f, 10.0f);
+        m_bar2->setPosition(jt::vector2 { 10, 25 });
+        m_bar2->setMaxValue(2.0f);
     }
 
     void doInternalUpdate(float const /*elapsed*/) override;

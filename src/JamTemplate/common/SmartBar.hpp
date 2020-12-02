@@ -2,8 +2,8 @@
 #define JAMTEMPLATE_SMARTBAR_HPP_INCLUDEGUARD
 
 #include "SmartDrawable.hpp"
+#include "SmartShape.hpp"
 #include "rendertarget.hpp"
-#include <SFML/Graphics.hpp>
 #include <cassert>
 #include <memory>
 #include <vector>
@@ -61,8 +61,8 @@ private:
     float const m_width;
     float const m_height;
 
-    mutable sf::RectangleShape m_shapeFull;
-    sf::RectangleShape m_shapeProgress;
+    mutable std::shared_ptr<jt::SmartShape> m_shapeFull;
+    std::shared_ptr<jt::SmartShape> m_shapeProgress;
 
     virtual void doDraw(std::shared_ptr<jt::renderTarget> const sptr) const override;
     virtual void doDrawFlash(std::shared_ptr<jt::renderTarget> const sptr) const override;
@@ -72,7 +72,7 @@ private:
     // things to take care of:
     //   - make sure flash object and normal object are at the same position
     virtual void doUpdate(float elapsed) override;
-    virtual void doFlash(float /*t*/, jt::color /*col = jt::colors::White*/);
+    virtual void doFlash(float /*t*/, jt::color /*col = jt::colors::White*/) override;
     virtual void doRotate(float /*rot*/) override;
 };
 
