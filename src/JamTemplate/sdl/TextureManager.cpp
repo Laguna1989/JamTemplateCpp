@@ -51,26 +51,41 @@ std::shared_ptr<SDL_Texture> createGlowImage(
 std::shared_ptr<SDL_Texture> createVignetteImage(
     std::vector<std::string> const& ssv, std::shared_ptr<jt::renderTarget> rt)
 {
-    std::cout << " Create Vignette0\n";
     if (ssv.size() != 3) {
         throw std::invalid_argument {
             "create vignette image: vector does not contain 2 elements."
         };
     }
-    std::cout << " Create Vignette1\n";
     std::size_t count { 0 };
     auto w = std::stol(ssv.at(1), &count);
     if (count != ssv.at(1).size() || w <= 0) {
         throw std::invalid_argument { "invalid vignette w" };
     }
-    std::cout << "Create Vignette2\n";
     auto h = std::stol(ssv.at(2), &count);
     if (count != ssv.at(2).size() || h <= 0) {
         std::cout << "invalid vignette h\n";
         throw std::invalid_argument { "invalid vignette h" };
     }
-    std::cout << "TextureManager Create Vignette3\n";
     return SpriteFunctions::makeVignetteImage(rt, w, h);
+}
+
+std::shared_ptr<SDL_Texture> createRectImage(
+    std::vector<std::string> const& ssv, std::shared_ptr<jt::renderTarget> rt)
+{
+    if (ssv.size() != 3) {
+        throw std::invalid_argument { "create rect image: vector does not contain 2 elements." };
+    }
+    std::size_t count { 0 };
+    auto w = std::stol(ssv.at(1), &count);
+    if (count != ssv.at(1).size() || w <= 0) {
+        throw std::invalid_argument { "invalid rect w" };
+    }
+    auto h = std::stol(ssv.at(2), &count);
+    if (count != ssv.at(2).size() || h <= 0) {
+        std::cout << "invalid rect h\n";
+        throw std::invalid_argument { "invalid rect h" };
+    }
+    return SpriteFunctions::makeRect(rt, w, h);
 }
 
 // void replaceOneColor(sf::Image& img, jt::color const& from, jt::color const& to)
@@ -166,7 +181,8 @@ std::shared_ptr<SDL_Texture> TextureManager::get(std::string const& str)
                 m_textures[str] = createGlowImage(ssv, m_renderer.lock());
             } else if (ssv.at(0) == "v") {
                 m_textures[str] = createVignetteImage(ssv, m_renderer.lock());
-
+            } else if (ssv.at(0) == "x") {
+                return createRectImage(ssv, m_renderer.lock());
             } else {
                 throw std::invalid_argument("ERROR: cannot get texture with name " + str);
             }

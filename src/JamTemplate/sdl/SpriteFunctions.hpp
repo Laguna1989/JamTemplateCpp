@@ -20,6 +20,9 @@ std::shared_ptr<SDL_Texture> makeGlowImage(
 std::shared_ptr<SDL_Texture> makeVignetteImage(
     std::shared_ptr<jt::renderTarget> rt, unsigned int w, unsigned int h);
 
+std::shared_ptr<SDL_Texture> makeRect(
+    std::shared_ptr<jt::renderTarget> rt, unsigned int w, unsigned int h);
+
 } // namespace SpriteFunctions
 
 } // namespace jt

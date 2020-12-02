@@ -101,5 +101,21 @@ std::shared_ptr<SDL_Texture> makeVignetteImage(
     return t;
 }
 
+std::shared_ptr<SDL_Texture> makeRect(
+    std::shared_ptr<jt::renderTarget> rt, unsigned int w, unsigned int h)
+{
+    std::shared_ptr<SDL_Surface> image = std::shared_ptr<SDL_Surface>(
+        SDL_CreateRGBSurfaceWithFormat(0, w, h, 32, SDL_PIXELFORMAT_RGBA32),
+        [](SDL_Surface* s) { SDL_FreeSurface(s); });
+    // SDL_SetAlpha(image.get(), SDL_SRCALPHA, 255);
+    SDL_SetSurfaceBlendMode(image.get(), SDL_BLENDMODE_BLEND);
+    SDL_FillRect(image.get(), NULL, SDL_MapRGBA(image->format, 255, 255, 255, 255));
+
+    std::shared_ptr<SDL_Texture> t(SDL_CreateTextureFromSurface(rt.get(), image.get()),
+        [](SDL_Texture* t) { SDL_DestroyTexture(t); });
+    SDL_SetTextureBlendMode(t.get(), SDL_BLENDMODE_BLEND);
+    return t;
+}
+
 } // namespace SpriteFunctions
 } // namespace jt
