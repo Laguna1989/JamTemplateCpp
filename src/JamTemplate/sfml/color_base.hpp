@@ -1,5 +1,5 @@
-﻿#ifndef COLOR_BASE_GUARD_HPP
-#define COLOR_BASE_GUARD_HPP
+﻿#ifndef GUARD_JAMTEMPLATE_COLOR_BASE_GUARD_HPP
+#define GUARD_JAMTEMPLATE_COLOR_BASE_GUARD_HPP
 
 #include <SFML/Graphics/Color.hpp>
 #include <cstdint>

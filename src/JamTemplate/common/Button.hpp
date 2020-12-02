@@ -1,5 +1,5 @@
-﻿#ifndef jt_BUTTON_HPP_GUARD
-#define jt_BUTTON_HPP_GUARD
+﻿#ifndef GUARD_JAMTEMPLATE_BUTTON_HPP_GUARD
+#define GUARD_JAMTEMPLATE_BUTTON_HPP_GUARD
 
 #include "Game.hpp"
 #include "GameObject.hpp"

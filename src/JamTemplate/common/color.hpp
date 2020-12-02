@@ -1,5 +1,5 @@
-﻿#ifndef COLOR_GUARD_HPP_12345
-#define COLOR_GUARD_HPP_12345
+﻿#ifndef GUARD_JAMTEMPLATE_COLOR_GUARD_HPP_12345
+#define GUARD_JAMTEMPLATE_COLOR_GUARD_HPP_12345
 #include "color_base.hpp"
 
 namespace jt {

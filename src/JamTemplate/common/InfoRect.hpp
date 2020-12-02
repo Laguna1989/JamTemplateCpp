@@ -1,5 +1,5 @@
-﻿#ifndef RECT_INCLUDEGUARD
-#define RECT_INCLUDEGUARD
+﻿#ifndef GUARD_JAMTEMPLATE_RECT_HPP
+#define GUARD_JAMTEMPLATE_RECT_HPP
 
 #include "vector.hpp"
 #include <string>

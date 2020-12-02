@@ -1,5 +1,5 @@
-﻿#ifndef GAMEBASE_HPP_GUARD
-#define GAMEBASE_HPP_GUARD
+﻿#ifndef GUARD_JAMTEMPLATE_GAMEBASE_HPP_GUARD
+#define GUARD_JAMTEMPLATE_GAMEBASE_HPP_GUARD
 
 #include "GameObject.hpp"
 #include "color.hpp"

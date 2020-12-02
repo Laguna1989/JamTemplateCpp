@@ -1,5 +1,5 @@
-﻿#ifndef VECTOR_GUARD_HPP_12345
-#define VECTOR_GUARD_HPP_12345
+﻿#ifndef GUARD_JAMTEMPLATE_VECTOR_GUARD_HPP_12345
+#define GUARD_JAMTEMPLATE_VECTOR_GUARD_HPP_12345
 
 /*
 Note: vector_base.hpp should provide a class vector2
@@ -40,4 +40,5 @@ bool operator==(jt::vector2u const& a, jt::vector2u const& b);
 bool operator!=(jt::vector2u const& a, jt::vector2u const& b);
 
 } // namespace jt
+
 #endif
