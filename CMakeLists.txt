@@ -77,9 +77,9 @@ endif()
 
 if(NOT ENABLE_WEB)
 	# group together similar files for a cleaner JamTemplate Project in IDEs that support this feature
-	source_group(GameLoop REGULAR_EXPRESSION src/JamTemplate/Game*)
-	source_group(SmartDrawables REGULAR_EXPRESSION src/JamTemplate/Smart*)
-	source_group(Tweens REGULAR_EXPRESSION src/JamTemplate/Tween*)
+	source_group(GameLoop FILES src/JamTemplate/common/GameBase.cpp src/JamTemplate/common/GameBase.hpp src/JamTemplate/common/GameObject.hpp src/JamTemplate/common/GameState.cpp src/JamTemplate/common/GameState.hpp src/JamTemplate/sfml/Game.cpp src/JamTemplate/sfml/Game.hpp)
+	source_group(SmartDrawables FILES src/JamTemplate/common/SmartAnimation.cpp src/JamTemplate/common/SmartAnimation.hpp src/JamTemplate/common/SmartBar.cpp src/JamTemplate/common/SmartBar.hpp src/JamTemplate/common/SmartDrawable.cpp src/JamTemplate/common/SmartDrawable.hpp src/JamTemplate/sfml/SmartShape.hpp src/JamTemplate/sfml/SmartSprite.hpp src/JamTemplate/sfml/SmartText.hpp src/JamTemplate/sfml/SmartTilemap.hpp src/JamTemplate/sfml/SmartTilemap.cpp)
+	source_group(Tweens REGULAR_EXPRESSION src/JamTemplate/common/Tween*)
 
 	target_link_libraries(JamTemplate optimized sfml-system )
 	target_link_libraries(JamTemplate optimized sfml-window )
