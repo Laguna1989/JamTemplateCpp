@@ -1,11 +1,12 @@
-﻿#ifndef GUARD_JAMTEMPLATE_RECT_BASE_GUARD_HPP
-#define GUARD_JAMTEMPLATE_RECT_BASE_GUARD_HPP
+﻿#ifndef GUARD_JAMTEMPLATE_RECT_LIB_GUARD_HPP
+#define GUARD_JAMTEMPLATE_RECT_LIB_GUARD_HPP
 
+#include "rect_base.hpp"
 #include <SDL.h>
 
 namespace jt {
 
-class rect final {
+class rect final : public rectBase {
 public:
     rect()
         : m_left { 0.0f }
@@ -44,15 +45,14 @@ public:
             static_cast<int>(m_width), static_cast<int>(m_height) };
     }
 
-    float left() const { return m_left; };
-    float top() const { return m_top; };
-    float width() const { return m_width; };
-    float height() const { return m_height; };
-
-    float& left() { return m_left; };
-    float& top() { return m_top; };
-    float& width() { return m_width; };
-    float& height() { return m_height; };
+    float left() const override { return m_left; };
+    float top() const override { return m_top; };
+    float width() const override { return m_width; };
+    float height() const override { return m_height; };
+    float& left() override { return m_left; };
+    float& top() override { return m_top; };
+    float& width() override { return m_width; };
+    float& height() override { return m_height; };
 
 private:
     float m_left;
@@ -61,7 +61,7 @@ private:
     float m_height;
 }; // namespace jt
 
-class recti final {
+class recti final : public rectiBase {
 public:
     recti()
         : recti { 0, 0, 0, 0 }
@@ -88,15 +88,14 @@ public:
 
     SDL_Rect m_rect;
 
-    int left() const { return m_rect.x; };
-    int top() const { return m_rect.y; };
-    int width() const { return m_rect.w; };
-    int height() const { return m_rect.h; };
-
-    int& left() { return m_rect.x; };
-    int& top() { return m_rect.y; };
-    int& width() { return m_rect.w; };
-    int& height() { return m_rect.h; };
+    int left() const override { return m_rect.x; };
+    int top() const override { return m_rect.y; };
+    int width() const override { return m_rect.w; };
+    int height() const override { return m_rect.h; };
+    int& left() override { return m_rect.x; };
+    int& top() override { return m_rect.y; };
+    int& width() override { return m_rect.w; };
+    int& height() override { return m_rect.h; };
 };
 
 } // namespace jt

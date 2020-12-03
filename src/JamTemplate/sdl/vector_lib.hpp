@@ -1,11 +1,12 @@
-#ifndef GUARD_JAMTEMPLATE_VECTOR_BASE_GUARD_HPP
-#define GUARD_JAMTEMPLATE_VECTOR_BASE_GUARD_HPP
+#ifndef GUARD_JAMTEMPLATE_VECTOR_LIB_GUARD_HPP
+#define GUARD_JAMTEMPLATE_VECTOR_LIB_GUARD_HPP
 
+#include "vector_base.hpp"
 #include <SDL.h>
 
 namespace jt {
 
-class vector2 final {
+class vector2 final : public vector2Base {
 public:
     vector2()
         : m_x { 0 }
@@ -36,18 +37,18 @@ public:
         return SDL_Point { static_cast<int>(m_x), static_cast<int>(m_y) };
     }
 
-    float x() const { return m_x; };
-    float y() const { return m_y; };
+    float x() const override { return m_x; };
+    float y() const override { return m_y; };
 
-    float& y() { return m_y; }
-    float& x() { return m_x; }
+    float& y() override { return m_y; }
+    float& x() override { return m_x; }
 
 private:
     float m_x;
     float m_y;
 };
 
-class vector2u final {
+class vector2u final : public vector2uBase {
 public:
     vector2u()
         : m_x { 0U }
@@ -78,11 +79,11 @@ public:
         return SDL_Point { static_cast<int>(m_x), static_cast<int>(m_y) };
     }
 
-    unsigned int x() const { return m_x; };
-    unsigned int y() const { return m_y; };
+    unsigned int x() const override { return m_x; };
+    unsigned int y() const override { return m_y; };
 
-    unsigned int& x() { return m_x; }
-    unsigned int& y() { return m_y; }
+    unsigned int& x() override { return m_x; }
+    unsigned int& y() override { return m_y; }
 
 private:
     unsigned int m_x;

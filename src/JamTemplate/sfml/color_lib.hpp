@@ -1,12 +1,12 @@
-﻿#ifndef GUARD_JAMTEMPLATE_COLOR_BASE_GUARD_HPP
-#define GUARD_JAMTEMPLATE_COLOR_BASE_GUARD_HPP
+﻿#ifndef GUARD_JAMTEMPLATE_COLOR_LIB_GUARD_HPP
+#define GUARD_JAMTEMPLATE_COLOR_LIB_GUARD_HPP
 
+#include "color_base.hpp"
 #include <SFML/Graphics/Color.hpp>
-#include <cstdint>
 
 namespace jt {
 
-class color final {
+class color final : public jt::colorBase {
 public:
     color()
         : m_col { 0, 0, 0, 255 }
@@ -33,15 +33,15 @@ public:
 
     sf::Color m_col;
 
-    std::uint8_t r() const { return m_col.r; };
-    std::uint8_t g() const { return m_col.g; };
-    std::uint8_t b() const { return m_col.b; };
-    std::uint8_t a() const { return m_col.a; };
+    std::uint8_t r() const override { return m_col.r; };
+    std::uint8_t g() const override { return m_col.g; };
+    std::uint8_t b() const override { return m_col.b; };
+    std::uint8_t a() const override { return m_col.a; };
 
-    std::uint8_t& r() { return m_col.r; };
-    std::uint8_t& g() { return m_col.g; };
-    std::uint8_t& b() { return m_col.b; };
-    std::uint8_t& a() { return m_col.a; };
+    std::uint8_t& r() override { return m_col.r; };
+    std::uint8_t& g() override { return m_col.g; };
+    std::uint8_t& b() override { return m_col.b; };
+    std::uint8_t& a() override { return m_col.a; };
 };
 
 } // namespace jt

@@ -1,28 +1,7 @@
 ﻿#ifndef GUARD_JAMTEMPLATE_VECTOR_GUARD_HPP_12345
 #define GUARD_JAMTEMPLATE_VECTOR_GUARD_HPP_12345
 
-/*
-Note: vector_base.hpp should provide a class vector2
-It needs to provide functions with the following signatures:
-
-    float x() const
-    float y() const
-
-    float& x()
-    float& y()
-
-a class vector2u needs to provide functions with the following signatures:
-    unsigned int x() const
-    unsigned int y() const
-
-    unsigned int& x()
-    unsigned int& y()
-
-the functions in this file will only use the functions mentioned above.
-To avoid instantiation of vectors as pointer-like-objects, it was decided
-to not have a common base class.
-*/
-#include "vector_base.hpp"
+#include "vector_lib.hpp"
 
 namespace jt {
 
