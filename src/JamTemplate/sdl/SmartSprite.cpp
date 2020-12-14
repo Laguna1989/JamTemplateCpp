@@ -31,14 +31,14 @@ void SmartSprite::loadSprite(std::string const& fileName, jt::recti const& rect)
     m_textFlash = TextureManager::get(TextureManager::getFlashName(fileName));
 }
 
-void SmartSprite::setPosition(jt::vector2 const& pos) { m_position = pos; }
-const jt::vector2 SmartSprite::getPosition() const { return m_position; }
+void SmartSprite::setPosition(jt::Vector2 const& pos) { m_position = pos; }
+const jt::Vector2 SmartSprite::getPosition() const { return m_position; }
 
-void SmartSprite::setColor(jt::color const& col) { m_color = col; }
-const jt::color SmartSprite::getColor() const { return m_color; }
+void SmartSprite::setColor(jt::Color const& col) { m_color = col; }
+const jt::Color SmartSprite::getColor() const { return m_color; }
 
-void SmartSprite::setFlashColor(jt::color const& col) { m_colorFlash = col; }
-const jt::color SmartSprite::getFlashColor() const { return m_colorFlash; }
+void SmartSprite::setFlashColor(jt::Color const& col) { m_colorFlash = col; }
+const jt::Color SmartSprite::getFlashColor() const { return m_colorFlash; }
 
 //  sf::Transform const getTransform() const  { return m_sprite.getTransform(); }
 
@@ -53,20 +53,20 @@ jt::rect const SmartSprite::getLocalBounds() const
         static_cast<float>(m_sourceRect.height()) };
 }
 
-void SmartSprite::setScale(jt::vector2 const& scale) { m_scale = scale; }
-const jt::vector2 SmartSprite::getScale() const { return m_scale; }
+void SmartSprite::setScale(jt::Vector2 const& scale) { m_scale = scale; }
+const jt::Vector2 SmartSprite::getScale() const { return m_scale; }
 
-void SmartSprite::setOrigin(jt::vector2 const& origin) { m_origin = origin; }
-jt::vector2 const SmartSprite::getOrigin() const { return m_origin; }
+void SmartSprite::setOrigin(jt::Vector2 const& origin) { m_origin = origin; }
+jt::Vector2 const SmartSprite::getOrigin() const { return m_origin; }
 
-jt::color SmartSprite::getColorAtPixel(jt::vector2u pixelPos) const
+jt::Color SmartSprite::getColorAtPixel(jt::Vector2u pixelPos) const
 {
     if (!m_image) {
         m_image = std::shared_ptr<SDL_Surface>(
             IMG_Load(m_fileName.c_str()), [](SDL_Surface* s) { SDL_FreeSurface(s); });
         if (!m_image) {
             std::cout << "Warning: file could not be loaded for getpixels\n";
-            return jt::color { 0, 0, 0, 255 };
+            return jt::Color { 0, 0, 0, 255 };
         }
     }
     uint8_t r;
@@ -75,7 +75,7 @@ jt::color SmartSprite::getColorAtPixel(jt::vector2u pixelPos) const
     uint8_t a;
     SDL_GetRGBA(
         jt::getPixel(m_image.get(), pixelPos.x(), pixelPos.y()), m_image->format, &r, &g, &b, &a);
-    return jt::color { r, g, b, a };
+    return jt::Color { r, g, b, a };
 }
 
 void SmartSprite::cleanImage() { m_image = nullptr; }
@@ -120,7 +120,7 @@ void SmartSprite::doDrawFlash(std::shared_ptr<jt::renderTarget> const sptr) cons
 
 void SmartSprite::doRotate(float /*rot*/) { }
 
-SDL_Rect SmartSprite::getDestRect(jt::vector2 const& positionOffset) const
+SDL_Rect SmartSprite::getDestRect(jt::Vector2 const& positionOffset) const
 {
     auto const pos = m_position + getShakeOffset() + getOffset() + getCamOffset() + positionOffset;
     SDL_Rect destRect { static_cast<int>(pos.x()), static_cast<int>(pos.y()),
@@ -134,7 +134,7 @@ SDL_Rect SmartSprite::getSourceRect() const
         m_sourceRect.height() };
 }
 
-void SmartSprite::setSDLColor(jt::color const& col) const
+void SmartSprite::setSDLColor(jt::Color const& col) const
 {
     SDL_SetTextureColorMod(m_text.get(), col.r(), col.g(), col.b());
     SDL_SetTextureAlphaMod(m_text.get(), col.a());

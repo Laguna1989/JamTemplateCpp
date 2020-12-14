@@ -81,10 +81,10 @@ private:
         }
 
         m_bar1 = std::make_shared<jt::SmartBar>(100.0f, 10.0f);
-        m_bar1->setPosition(jt::vector2 { 10, 10 });
+        m_bar1->setPosition(jt::Vector2 { 10, 10 });
 
         m_bar2 = std::make_shared<jt::SmartBar>(100.0f, 10.0f);
-        m_bar2->setPosition(jt::vector2 { 10, 25 });
+        m_bar2->setPosition(jt::Vector2 { 10, 25 });
         m_bar2->setMaxValue(2.0f);
     }
 

@@ -29,20 +29,20 @@ float Random::getFloatGauss(float mu, float sigma)
 
 bool Random::getChance(float c) { return (getFloat(0.0f, 1.0f) <= c); }
 
-jt::color const Random::getRandomColor()
+jt::Color const Random::getRandomColor()
 {
     std::uint8_t r = static_cast<std::uint8_t>(getInt(0, 255));
     std::uint8_t g = static_cast<std::uint8_t>(getInt(0, 255));
     std::uint8_t b = static_cast<std::uint8_t>(getInt(0, 255));
-    return jt::color { r, g, b };
+    return jt::Color { r, g, b };
 }
 
-jt::vector2 const Random::getRandomPointin(jt::rect r)
+jt::Vector2 const Random::getRandomPointin(jt::rect r)
 {
     auto x = getFloat(r.left(), r.left() + r.width());
     auto y = getFloat(r.top(), r.top() + r.height());
 
-    return jt::vector2 { x, y };
+    return jt::Vector2 { x, y };
 }
 
 void Random::setSeed(unsigned int s) { m_engine.seed(s); }

@@ -13,7 +13,7 @@ void State2::doInternalUpdate(float const elapsed)
 
     float cutoffDistance = 10;
 
-    // jt::vector2 centerPos {};
+    // jt::Vector2 centerPos {};
     // for (auto const& o : *m_SwarmObjects) {
     //    //centerPos += o.lock()->getPosition();
     //}
@@ -21,7 +21,7 @@ void State2::doInternalUpdate(float const elapsed)
 
     // for (size_t i = 0; i != m_SwarmObjects->size(); ++i) {
     //    auto o1 = m_SwarmObjects->at(i).lock();
-    //    jt::vector2 SummedUpDir {};
+    //    jt::Vector2 SummedUpDir {};
     //    float lc = jt::MathHelper::length(centerPos - o1->getPosition());
     //    SummedUpDir += (centerPos - o1->getPosition()) / lc * 1000.0f
     //        / static_cast<float>(m_SwarmObjects->size());
@@ -30,7 +30,7 @@ void State2::doInternalUpdate(float const elapsed)
     //            continue;
 
     //        auto o2 = m_SwarmObjects->at(j).lock();
-    //        jt::vector2 d = o2->getPosition() - o1->getPosition();
+    //        jt::Vector2 d = o2->getPosition() - o1->getPosition();
     //        float l = jt::MathHelper::length(d);
     //        if (l > 2 * cutoffDistance)
     //            continue;

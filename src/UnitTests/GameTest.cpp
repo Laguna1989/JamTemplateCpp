@@ -41,12 +41,12 @@ TEST_F(GameTest, SetCamPosition)
     EXPECT_EQ(g->getCamOffset().y(), 0);
 
     auto const value = 3.0f;
-    jt::vector2 const v = { value, value };
+    jt::Vector2 const v = { value, value };
     g->setCamOffset(v);
     EXPECT_NEAR(g->getCamOffset().x(), value, 0.001);
     EXPECT_NEAR(g->getCamOffset().y(), value, 0.001);
 
-    g->setCamOffset(jt::vector2 { 0.0f, 0.0f });
+    g->setCamOffset(jt::Vector2 { 0.0f, 0.0f });
     EXPECT_NEAR(g->getCamOffset().x(), 0.0f, 0.001);
     EXPECT_NEAR(g->getCamOffset().y(), 0.0f, 0.001);
 
@@ -60,10 +60,10 @@ TEST_F(GameTest, MoveCam)
     EXPECT_EQ(g->getCamOffset().x(), 0);
     EXPECT_EQ(g->getCamOffset().y(), 0);
 
-    g->moveCam(jt::vector2 { 0.0f, 0.0f });
+    g->moveCam(jt::Vector2 { 0.0f, 0.0f });
 
     auto const value = 3.0f;
-    jt::vector2 const v = { value, value };
+    jt::Vector2 const v = { value, value };
     g->moveCam(v);
     EXPECT_NEAR(g->getCamOffset().x(), value, 0.001);
     EXPECT_NEAR(g->getCamOffset().y(), value, 0.001);
@@ -73,7 +73,7 @@ TEST_F(GameTest, MoveCam)
     EXPECT_NEAR(g->getCamOffset().y(), 2.0f * value, 0.001);
 
     // move by zero does not move
-    g->moveCam(jt::vector2 { 0.0f, 0.0f });
+    g->moveCam(jt::Vector2 { 0.0f, 0.0f });
     EXPECT_NEAR(g->getCamOffset().x(), 2.0f * value, 0.001);
     EXPECT_NEAR(g->getCamOffset().y(), 2.0f * value, 0.001);
 }

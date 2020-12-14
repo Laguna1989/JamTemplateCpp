@@ -4,7 +4,7 @@
 #include <utility>
 
 using jt::Random;
-using v = jt::vector2;
+using v = jt::Vector2;
 
 class RandomIntTestFixture : public ::testing::TestWithParam<std::pair<int, int>> {
 };

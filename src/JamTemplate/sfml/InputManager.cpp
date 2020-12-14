@@ -92,11 +92,11 @@ void InputManager::update(float mx, float my, float mxs, float mys, float elapse
     // " << m_lmb_justReleased << std::endl;
 }
 
-jt::vector2 InputManager::getMousePositionWorld() { return jt::vector2 { m_mouseX, m_mouseY }; }
+jt::Vector2 InputManager::getMousePositionWorld() { return jt::Vector2 { m_mouseX, m_mouseY }; }
 
-jt::vector2 InputManager::getMousePositionScreen()
+jt::Vector2 InputManager::getMousePositionScreen()
 {
-    return jt::vector2 { m_mouseScreenX, m_mouseScreenY };
+    return jt::Vector2 { m_mouseScreenX, m_mouseScreenY };
 }
 
 bool InputManager::pressed(jt::KeyCode k) { return m_pressed[k]; }

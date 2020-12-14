@@ -11,21 +11,21 @@
 #include <string>
 
 namespace jt {
-void SmartShape::makeRect(jt::vector2 size)
+void SmartShape::makeRect(jt::Vector2 size)
 {
     m_text = TextureManager::get("#x#" + std::to_string(static_cast<int>(size.x())) + "#"
         + std::to_string(static_cast<int>(size.y())));
     m_sourceRect = jt::recti { 0U, 0U, static_cast<int>(size.x()), static_cast<int>(size.y()) };
 }
 
-void SmartShape::setColor(jt::color const& col) { m_color = col; }
-const jt::color SmartShape::getColor() const { return m_color; }
+void SmartShape::setColor(jt::Color const& col) { m_color = col; }
+const jt::Color SmartShape::getColor() const { return m_color; }
 
-void SmartShape::setFlashColor(jt::color const& col) { m_colorFlash = col; }
-const jt::color SmartShape::getFlashColor() const { return m_colorFlash; }
+void SmartShape::setFlashColor(jt::Color const& col) { m_colorFlash = col; }
+const jt::Color SmartShape::getFlashColor() const { return m_colorFlash; }
 
-void SmartShape::setPosition(jt::vector2 const& pos) { m_position = pos; }
-const jt::vector2 SmartShape::getPosition() const { return m_position; }
+void SmartShape::setPosition(jt::Vector2 const& pos) { m_position = pos; }
+const jt::Vector2 SmartShape::getPosition() const { return m_position; }
 
 // sf::Transform const getTransform() const { return m_shape->getTransform(); }
 
@@ -40,11 +40,11 @@ jt::rect const SmartShape::getLocalBounds() const
         m_sourceRect.height() * m_scale.y() };
 }
 
-void SmartShape::setScale(jt::vector2 const& scale) { m_scale = scale; }
-const jt::vector2 SmartShape::getScale() const { return m_scale; }
+void SmartShape::setScale(jt::Vector2 const& scale) { m_scale = scale; }
+const jt::Vector2 SmartShape::getScale() const { return m_scale; }
 
-void SmartShape::setOrigin(jt::vector2 const& origin) { m_origin = origin; }
-const jt::vector2 SmartShape::getOrigin() const { return m_origin; }
+void SmartShape::setOrigin(jt::Vector2 const& origin) { m_origin = origin; }
+const jt::Vector2 SmartShape::getOrigin() const { return m_origin; }
 
 void SmartShape::doDraw(std::shared_ptr<jt::renderTarget> const sptr) const
 {
@@ -79,7 +79,7 @@ void SmartShape::doDrawShadow(std::shared_ptr<jt::renderTarget> const sptr) cons
 void SmartShape::doUpdate(float /*elapsed*/) { }
 void SmartShape::doRotate(float /*rot*/) { }
 
-SDL_Rect SmartShape::getDestRect(jt::vector2 const& positionOffset) const
+SDL_Rect SmartShape::getDestRect(jt::Vector2 const& positionOffset) const
 {
     auto const pos = m_position + getShakeOffset() + getOffset() + getCamOffset() + positionOffset;
     SDL_Rect destRect { static_cast<int>(pos.x()), static_cast<int>(pos.y()),
@@ -88,7 +88,7 @@ SDL_Rect SmartShape::getDestRect(jt::vector2 const& positionOffset) const
     return destRect;
 }
 
-void SmartShape::setSDLColor(jt::color const& col) const
+void SmartShape::setSDLColor(jt::Color const& col) const
 {
     SDL_SetTextureColorMod(m_text.get(), col.r(), col.g(), col.b());
     SDL_SetTextureAlphaMod(m_text.get(), col.a());

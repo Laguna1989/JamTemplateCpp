@@ -16,8 +16,8 @@ public:
 
     SmartBar(float width, float height);
 
-    void setFrontColor(jt::color const& col);
-    void setBackColor(jt::color const& col);
+    void setFrontColor(jt::Color const& col);
+    void setBackColor(jt::Color const& col);
 
     void setCurrentValue(float position)
     {
@@ -35,24 +35,24 @@ public:
         m_valueMax = max;
     }
 
-    virtual void setColor(jt::color const& col) override;
-    virtual const jt::color getColor() const override;
+    virtual void setColor(jt::Color const& col) override;
+    virtual const jt::Color getColor() const override;
 
-    virtual void setPosition(jt::vector2 const& pos) override;
-    virtual const jt::vector2 getPosition() const override;
+    virtual void setPosition(jt::Vector2 const& pos) override;
+    virtual const jt::Vector2 getPosition() const override;
 
     // virtual sf::Transform const getTransform() const override;
     virtual jt::rect const getGlobalBounds() const override;
     virtual jt::rect const getLocalBounds() const override;
 
-    virtual void setFlashColor(jt::color const& col) override;
-    virtual const jt::color getFlashColor() const override;
+    virtual void setFlashColor(jt::Color const& col) override;
+    virtual const jt::Color getFlashColor() const override;
 
-    virtual void setScale(jt::vector2 const& scale) override;
-    virtual const jt::vector2 getScale() const override;
+    virtual void setScale(jt::Vector2 const& scale) override;
+    virtual const jt::Vector2 getScale() const override;
 
-    virtual void setOrigin(jt::vector2 const& origin) override;
-    virtual const jt::vector2 getOrigin() const override;
+    virtual void setOrigin(jt::Vector2 const& origin) override;
+    virtual const jt::Vector2 getOrigin() const override;
 
 private:
     float m_valueMax;
@@ -72,7 +72,7 @@ private:
     // things to take care of:
     //   - make sure flash object and normal object are at the same position
     virtual void doUpdate(float elapsed) override;
-    virtual void doFlash(float /*t*/, jt::color /*col = jt::colors::White*/) override;
+    virtual void doFlash(float /*t*/, jt::Color /*col = jt::colors::White*/) override;
     virtual void doRotate(float /*rot*/) override;
 };
 

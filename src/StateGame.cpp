@@ -24,8 +24,8 @@ void StateGame::doCreate()
     doCreateInternal();
 
     m_overlay = std::make_shared<SmartShape>();
-    m_overlay->makeRect(jt::vector2 { w, h });
-    m_overlay->setColor(jt::color { 0, 0, 0 });
+    m_overlay->makeRect(jt::Vector2 { w, h });
+    m_overlay->setColor(jt::Color { 0, 0, 0 });
     m_overlay->update(0);
     auto tw
         = TweenAlpha<SmartShape>::create(m_overlay, 0.5f, std::uint8_t { 255 }, std::uint8_t { 0 });
@@ -62,5 +62,5 @@ void StateGame::doCreateInternal()
 {
     m_sprite = std::make_shared<jt::SmartSprite>();
     m_sprite->loadSprite("assets/coin.png", jt::recti { 0, 0, 16, 16 });
-    m_sprite->setPosition(jt::vector2 { 100, 100 });
+    m_sprite->setPosition(jt::Vector2 { 100, 100 });
 }

@@ -46,7 +46,7 @@ public:
     Collision() = delete;
 
     template <class T>
-    static bool Overlaps(T const& Object, jt::vector2 const& point)
+    static bool Overlaps(T const& Object, jt::Vector2 const& point)
     {
         return (Object->getGlobalBounds().contains(point));
     }
@@ -77,9 +77,9 @@ public:
             Points[3] = trans.transformPoint(0.f, local.height);*/
         }
 
-        jt::vector2 Points[4];
+        jt::Vector2 Points[4];
 
-        void ProjectOntoAxis(const jt::vector2& Axis, float& Min,
+        void ProjectOntoAxis(const jt::Vector2& Axis, float& Min,
             float& Max) // Project all four points of the OBB onto the given axis and return the
                         // dotproducts of the two outermost points
         {
@@ -103,11 +103,11 @@ public:
         OrientedBoundingBox<V> OBB2(Object2);
 
         // Create the four distinct axes that are perpendicular to the edges of the two rectangles
-        jt::vector2 Axes[4] = { jt::vector2(OBB1.Points[1].x - OBB1.Points[0].x,
+        jt::Vector2 Axes[4] = { jt::Vector2(OBB1.Points[1].x - OBB1.Points[0].x,
                                     OBB1.Points[1].y - OBB1.Points[0].y),
-            jt::vector2(OBB1.Points[1].x - OBB1.Points[2].x, OBB1.Points[1].y - OBB1.Points[2].y),
-            jt::vector2(OBB2.Points[0].x - OBB2.Points[3].x, OBB2.Points[0].y - OBB2.Points[3].y),
-            jt::vector2(OBB2.Points[0].x - OBB2.Points[1].x, OBB2.Points[0].y - OBB2.Points[1].y) };
+            jt::Vector2(OBB1.Points[1].x - OBB1.Points[2].x, OBB1.Points[1].y - OBB1.Points[2].y),
+            jt::Vector2(OBB2.Points[0].x - OBB2.Points[3].x, OBB2.Points[0].y - OBB2.Points[3].y),
+            jt::Vector2(OBB2.Points[0].x - OBB2.Points[1].x, OBB2.Points[0].y - OBB2.Points[1].y) };
 
         for (int i = 0; i < 4; i++) // For each axis...
         {
@@ -133,11 +133,11 @@ public:
         OrientedBoundingBox<V> OBB2(obj2);
 
         // Create the four distinct axes that are perpendicular to the edges of the two rectangles
-        jt::vector2 Axes[4] = { jt::vector2(OBB1.Points[1].x - OBB1.Points[0].x,
+        jt::Vector2 Axes[4] = { jt::Vector2(OBB1.Points[1].x - OBB1.Points[0].x,
                                     OBB1.Points[1].y - OBB1.Points[0].y),
-            jt::vector2(OBB1.Points[1].x - OBB1.Points[2].x, OBB1.Points[1].y - OBB1.Points[2].y),
-            jt::vector2(OBB2.Points[0].x - OBB2.Points[3].x, OBB2.Points[0].y - OBB2.Points[3].y),
-            jt::vector2(OBB2.Points[0].x - OBB2.Points[1].x, OBB2.Points[0].y - OBB2.Points[1].y) };
+            jt::Vector2(OBB1.Points[1].x - OBB1.Points[2].x, OBB1.Points[1].y - OBB1.Points[2].y),
+            jt::Vector2(OBB2.Points[0].x - OBB2.Points[3].x, OBB2.Points[0].y - OBB2.Points[3].y),
+            jt::Vector2(OBB2.Points[0].x - OBB2.Points[1].x, OBB2.Points[0].y - OBB2.Points[1].y) };
 
         for (int i = 0; i < 4; i++) // For each axis...
         {
@@ -189,12 +189,12 @@ public:
     template <class U, class V>
     static bool CircleTest(U const& Object1, V const& Object2)
     {
-        jt::vector2 Obj1Size = GetSpriteSize(Object1);
-        jt::vector2 Obj2Size = GetSpriteSize(Object2);
+        jt::Vector2 Obj1Size = GetSpriteSize(Object1);
+        jt::Vector2 Obj2Size = GetSpriteSize(Object2);
         float Radius1 = (Obj1Size.x + Obj1Size.y) / 4;
         float Radius2 = (Obj2Size.x + Obj2Size.y) / 4;
 
-        jt::vector2 Distance = GetSpriteCenter(Object1) - GetSpriteCenter(Object2);
+        jt::Vector2 Distance = GetSpriteCenter(Object1) - GetSpriteCenter(Object2);
 
         return (Distance.x * Distance.x + Distance.y * Distance.y
             <= (Radius1 + Radius2) * (Radius1 + Radius2));
@@ -203,12 +203,12 @@ public:
     template <class U, class V>
     static bool CircleTest(std::shared_ptr<U> obj1, std::shared_ptr<V> obj2)
     {
-        jt::vector2 Obj1Size = GetSpriteSize(obj1);
-        jt::vector2 Obj2Size = GetSpriteSize(obj2);
+        jt::Vector2 Obj1Size = GetSpriteSize(obj1);
+        jt::Vector2 Obj2Size = GetSpriteSize(obj2);
         float Radius1 = (Obj1Size.x + Obj1Size.y) / 4;
         float Radius2 = (Obj2Size.x + Obj2Size.y) / 4;
 
-        jt::vector2 Distance = GetSpriteCenter(obj1) - GetSpriteCenter(obj1);
+        jt::Vector2 Distance = GetSpriteCenter(obj1) - GetSpriteCenter(obj1);
 
         return (Distance.x * Distance.x + Distance.y * Distance.y
             <= (Radius1 + Radius2) * (Radius1 + Radius2));
@@ -216,22 +216,22 @@ public:
 
 private:
     template <class U>
-    static jt::vector2 GetSpriteSize(U const& Object)
+    static jt::Vector2 GetSpriteSize(U const& Object)
     {
-        return jt::vector2(Object.getGlobalBounds().width, Object.getGlobalBounds().height);
+        return jt::Vector2(Object.getGlobalBounds().width, Object.getGlobalBounds().height);
     }
 
     template <class U>
-    static jt::vector2 GetSpriteSize(std::shared_ptr<U> obj)
+    static jt::Vector2 GetSpriteSize(std::shared_ptr<U> obj)
     {
-        return jt::vector2(obj->getGlobalBounds().width, obj->getGlobalBounds().height);
+        return jt::Vector2(obj->getGlobalBounds().width, obj->getGlobalBounds().height);
     }
 
     template <class U>
-    static jt::vector2 GetSpriteCenter(std::shared_ptr<U> obj)
+    static jt::Vector2 GetSpriteCenter(std::shared_ptr<U> obj)
     {
         jt::rect AABB = obj->getGlobalBounds();
-        return jt::vector2(AABB.left + AABB.width / 2.f, AABB.top + AABB.height / 2.f);
+        return jt::Vector2(AABB.left + AABB.width / 2.f, AABB.top + AABB.height / 2.f);
     }
 };
 } // namespace jt

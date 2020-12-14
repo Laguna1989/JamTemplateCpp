@@ -17,7 +17,7 @@ class Button : public GameObject {
 public:
     using Sptr = std::shared_ptr<Button>;
 
-    Button(jt::vector2u s = jt::vector2u { 16, 16 })
+    Button(jt::Vector2u s = jt::Vector2u { 16, 16 })
     {
         std::string buttonImageName = "#b#" + std::to_string(s.x()) + "#" + std::to_string(s.y());
         m_background = std::make_shared<jt::SmartAnimation>();
@@ -57,13 +57,13 @@ public:
 
     void setVisible(bool v) { m_visible = v; }
 
-    void setPosition(jt::vector2 const& v) { m_pos = v; }
+    void setPosition(jt::Vector2 const& v) { m_pos = v; }
 
 private:
     std::shared_ptr<SmartAnimation> m_background;
     std::shared_ptr<SmartDrawable> m_icon { nullptr };
     std::vector<std::function<void(void)>> m_callbacks;
-    jt::vector2 m_pos;
+    jt::Vector2 m_pos;
 
     bool m_visible { true };
 

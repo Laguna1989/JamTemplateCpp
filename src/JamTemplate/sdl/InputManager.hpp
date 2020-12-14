@@ -16,8 +16,8 @@ public:
 
     static void update(float mx, float my, float mxs, float mys, float elapsed);
 
-    static jt::vector2 getMousePositionWorld();
-    static jt::vector2 getMousePositionScreen();
+    static jt::Vector2 getMousePositionWorld();
+    static jt::Vector2 getMousePositionScreen();
 
     static bool pressed(jt::KeyCode k);
     static bool pressed(jt::MouseButtonCode b);

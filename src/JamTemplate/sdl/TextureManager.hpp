@@ -16,7 +16,7 @@ namespace jt {
 
 class TextureManager {
 public:
-    using ColorReplaceLookupType = std::vector<std::pair<jt::color, jt::color>>;
+    using ColorReplaceLookupType = std::vector<std::pair<jt::Color, jt::Color>>;
     using ColorReplaceLookupVectorType = std::vector<ColorReplaceLookupType>;
     using TextureMapType = std::map<std::string, std::shared_ptr<SDL_Texture>>;
     TextureManager() = delete;
@@ -38,13 +38,13 @@ public:
     // should not be called frequently! Only works for textures obtained from this class (not for
     // colors of shapes or whatever) \param in and out are used for lookups if a color is used which
     // is not contained in in, the color will be unchanged
-    static void swapPalette(std::vector<jt::color> /*in*/, std::vector<jt::color> /*out*/)
+    static void swapPalette(std::vector<jt::Color> /*in*/, std::vector<jt::Color> /*out*/)
     {
         throw std::logic_error { "swap palette not supported yet" };
     }
 
     static void addSelectiveColorReplacement(
-        int /*idx*/, std::vector<std::pair<jt::color, jt::color>> /*replace*/)
+        int /*idx*/, std::vector<std::pair<jt::Color, jt::Color>> /*replace*/)
     {
         throw std::logic_error { "color replacement not supported yet" };
     }

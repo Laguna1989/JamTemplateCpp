@@ -28,47 +28,47 @@ public:
             = sf::Sprite { TextureManager::get(TextureManager::getFlashName(fileName)), rect };
     }
 
-    void setPosition(jt::vector2 const& pos) override { m_position = pos; }
+    void setPosition(jt::Vector2 const& pos) override { m_position = pos; }
 
-    const jt::vector2 getPosition() const override { return m_position; }
+    const jt::Vector2 getPosition() const override { return m_position; }
 
-    void setColor(jt::color const& col) override { m_sprite.setColor(col); }
-    const jt::color getColor() const override { return m_sprite.getColor(); }
+    void setColor(jt::Color const& col) override { m_sprite.setColor(col); }
+    const jt::Color getColor() const override { return m_sprite.getColor(); }
 
-    void setFlashColor(jt::color const& col) override { m_flashSprite.setColor(col); }
-    const jt::color getFlashColor() const override { return m_flashSprite.getColor(); }
+    void setFlashColor(jt::Color const& col) override { m_flashSprite.setColor(col); }
+    const jt::Color getFlashColor() const override { return m_flashSprite.getColor(); }
 
     // virtual sf::Transform const getTransform() const override { return m_sprite.getTransform(); }
 
     virtual jt::rect const getGlobalBounds() const override { return m_sprite.getGlobalBounds(); }
     virtual jt::rect const getLocalBounds() const override { return m_sprite.getLocalBounds(); }
 
-    virtual void setScale(jt::vector2 const& scale)
+    virtual void setScale(jt::Vector2 const& scale)
     {
         m_sprite.setScale(scale);
         m_flashSprite.setScale(scale);
     }
 
-    virtual const jt::vector2 getScale() const { return m_sprite.getScale(); }
+    virtual const jt::Vector2 getScale() const { return m_sprite.getScale(); }
 
-    virtual void setOrigin(jt::vector2 const& origin)
+    virtual void setOrigin(jt::Vector2 const& origin)
     {
         m_sprite.setOrigin(origin);
         m_flashSprite.setOrigin(origin);
     }
 
-    virtual jt::vector2 const getOrigin() const { return m_sprite.getOrigin(); }
+    virtual jt::Vector2 const getOrigin() const { return m_sprite.getOrigin(); }
 
     // WARNING: This function is slow, because it needs to copy
     // graphics memory to ram first.
-    jt::color getColorAtPixel(jt::vector2u pixelPos) const
+    jt::Color getColorAtPixel(jt::Vector2u pixelPos) const
     {
         // optimization to avoid unneccesary copies
         if (!m_imageStored) {
             m_imageStored = true;
             m_image = m_sprite.getTexture()->copyToImage();
         }
-        return jt::color { m_image.getPixel(pixelPos.x(), pixelPos.y()) };
+        return jt::Color { m_image.getPixel(pixelPos.x(), pixelPos.y()) };
     }
 
     void cleanImage()
@@ -84,7 +84,7 @@ private:
     mutable sf::Image m_image;
     mutable bool m_imageStored { false };
 
-    jt::vector2 m_position { 0, 0 };
+    jt::Vector2 m_position { 0, 0 };
 
     void doUpdate(float /*elapsed*/) override
     {
@@ -95,8 +95,8 @@ private:
 
     void doDrawShadow(std::shared_ptr<jt::renderTarget> const sptr) const override
     {
-        jt::vector2 const oldPos = m_sprite.getPosition();
-        jt::color const oldCol = m_sprite.getColor();
+        jt::Vector2 const oldPos = m_sprite.getPosition();
+        jt::Color const oldCol = m_sprite.getColor();
 
         m_sprite.setPosition(oldPos + getShadowOffset());
         m_sprite.setColor(getShadowColor());

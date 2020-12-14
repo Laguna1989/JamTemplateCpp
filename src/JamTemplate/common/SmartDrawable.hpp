@@ -33,7 +33,7 @@ public:
         }
     }
 
-    void flash(float t, jt::color col = jt::colors::White)
+    void flash(float t, jt::Color col = jt::colors::White)
     {
         m_maxFlashTimer = m_flashTimer = t;
         setFlashColor(col);
@@ -55,28 +55,28 @@ public:
         m_hasBeenUpdated = true;
     }
 
-    virtual void setColor(jt::color const& col) = 0;
-    virtual const jt::color getColor() const = 0;
+    virtual void setColor(jt::Color const& col) = 0;
+    virtual const jt::Color getColor() const = 0;
 
-    virtual void setPosition(jt::vector2 const& pos) = 0;
-    virtual const jt::vector2 getPosition() const = 0;
+    virtual void setPosition(jt::Vector2 const& pos) = 0;
+    virtual const jt::Vector2 getPosition() const = 0;
 
     // virtual sf::Transform const getTransform() const = 0;
     virtual jt::rect const getGlobalBounds() const = 0;
     virtual jt::rect const getLocalBounds() const = 0;
 
-    virtual void setFlashColor(jt::color const& col) = 0;
-    virtual const jt::color getFlashColor() const = 0;
+    virtual void setFlashColor(jt::Color const& col) = 0;
+    virtual const jt::Color getFlashColor() const = 0;
 
-    virtual void setScale(jt::vector2 const& scale) = 0;
-    virtual const jt::vector2 getScale() const = 0;
+    virtual void setScale(jt::Vector2 const& scale) = 0;
+    virtual const jt::Vector2 getScale() const = 0;
 
-    virtual void setOrigin(jt::vector2 const& origin) = 0;
-    virtual const jt::vector2 getOrigin() const = 0;
+    virtual void setOrigin(jt::Vector2 const& origin) = 0;
+    virtual const jt::Vector2 getOrigin() const = 0;
 
-    jt::vector2 getOffset() const { return m_offset; }
+    jt::Vector2 getOffset() const { return m_offset; }
 
-    void setOffset(jt::vector2 const offset) { m_offset = offset; }
+    void setOffset(jt::Vector2 const offset) { m_offset = offset; }
 
     void setRotation(float rot)
     {
@@ -88,17 +88,17 @@ public:
 
     virtual void setShadowActive(bool active) { m_shadowActive = active; }
     bool getShadowActive() const { return m_shadowActive; }
-    virtual void setShadowColor(jt::color const& col) { m_shadowColor = col; }
-    jt::color const getShadowColor() const { return m_shadowColor; }
-    virtual void setShadowOffset(jt::vector2 const& v) { m_shadowOffset = v; }
-    jt::vector2 const getShadowOffset() const { return m_shadowOffset; }
+    virtual void setShadowColor(jt::Color const& col) { m_shadowColor = col; }
+    jt::Color const getShadowColor() const { return m_shadowColor; }
+    virtual void setShadowOffset(jt::Vector2 const& v) { m_shadowOffset = v; }
+    jt::Vector2 const getShadowOffset() const { return m_shadowOffset; }
 
     // do not call this manually. Only place to call is Game()->update();
-    static void setCamOffset(jt::vector2 const& v) { m_CamOffset = v; }
+    static void setCamOffset(jt::Vector2 const& v) { m_CamOffset = v; }
 
     void setIgnoreCamMovement(bool ignore) { m_ignoreCamMovement = ignore; }
 
-    void setShadow(jt::color const& col, jt::vector2 const& offset)
+    void setShadow(jt::Color const& col, jt::Vector2 const& offset)
     {
         setShadowActive(true);
         setShadowColor(col);
@@ -109,16 +109,16 @@ public:
     void setZDist(float const v) { m_zdist = v; }
 
 protected:
-    jt::vector2 getShakeOffset() const { return m_shakeOffset; }
+    jt::Vector2 getShakeOffset() const { return m_shakeOffset; }
 
-    jt::vector2 getCamOffset() const
+    jt::Vector2 getCamOffset() const
     {
-        return (m_ignoreCamMovement ? m_CamOffset : jt::vector2 { 0.0f, 0.0f });
+        return (m_ignoreCamMovement ? m_CamOffset : jt::Vector2 { 0.0f, 0.0f });
     }
     bool getIgnoreCamMovement() const { return m_ignoreCamMovement; }
 
 private:
-    static jt::vector2 m_CamOffset;
+    static jt::Vector2 m_CamOffset;
     bool m_ignoreCamMovement { false };
 
     bool m_hasBeenUpdated { false };
@@ -129,14 +129,14 @@ private:
     float m_shakeStrength { 0.0f };
     float m_shakeInterval { 0.0f };
     float m_shakeIntervalMax { 0.0f };
-    jt::vector2 m_shakeOffset { 0, 0 };
+    jt::Vector2 m_shakeOffset { 0, 0 };
 
-    jt::vector2 m_offset { 0, 0 };
+    jt::Vector2 m_offset { 0, 0 };
     float m_rotationInDegree { 0 };
 
     bool m_shadowActive { false };
-    jt::vector2 m_shadowOffset { 0.0f, 0.0f };
-    jt::color m_shadowColor { jt::colors::Black };
+    jt::Vector2 m_shadowOffset { 0.0f, 0.0f };
+    jt::Color m_shadowColor { jt::colors::Black };
 
     float m_zdist { 0.0f };
 
@@ -148,7 +148,7 @@ private:
     // things to take care of:
     //   - make sure flash object and normal object are at the same position
     virtual void doUpdate(float elapsed) = 0;
-    virtual void doFlash(float /*t*/, jt::color /*col = jt::colors::White*/) { }
+    virtual void doFlash(float /*t*/, jt::Color /*col = jt::colors::White*/) { }
     virtual void doRotate(float /*rot*/) = 0;
 
     void updateFlash(float elapsed)

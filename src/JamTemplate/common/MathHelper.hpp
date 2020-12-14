@@ -27,16 +27,16 @@ std::vector<T> vectorBetween(T a, T b)
     return values;
 }
 
-float lengthSquared(jt::vector2 const& v);
+float lengthSquared(jt::Vector2 const& v);
 
-float length(jt::vector2 const& v);
+float length(jt::Vector2 const& v);
 
-void normalizeMe(jt::vector2& v, float lowerbound = 0);
+void normalizeMe(jt::Vector2& v, float lowerbound = 0);
 
 float rad2deg(float a);
 float deg2rad(float a);
 
-jt::vector2 rotateBy(jt::vector2 const& in, float aInDegree);
+jt::Vector2 rotateBy(jt::Vector2 const& in, float aInDegree);
 
 template <typename T>
 T clamp(T const& value, T const& min, T const& max)

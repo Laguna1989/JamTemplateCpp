@@ -12,13 +12,13 @@ class TweenPosition : public Tween<T> {
 public:
     // Tween position from valueStart to valueEnd of obj withtin time
     static TweenBase::Sptr create(
-        std::weak_ptr<T> obj, float time, jt::vector2 valueStart, jt::vector2 valueEnd)
+        std::weak_ptr<T> obj, float time, jt::Vector2 valueStart, jt::Vector2 valueEnd)
     {
         return std::make_shared<TweenPosition>(obj, time, valueStart, valueEnd);
     }
 
     // Tween position from valueStart to valueEnd of obj withtin time
-    TweenPosition(std::weak_ptr<T> obj, float time, jt::vector2 valueStart, jt::vector2 valueEnd)
+    TweenPosition(std::weak_ptr<T> obj, float time, jt::Vector2 valueStart, jt::Vector2 valueEnd)
         : Tween<T> { obj,
             [this](auto sptr, auto agePercent) {
                 auto pos = sptr->getPosition();
@@ -38,8 +38,8 @@ public:
     }
 
 private:
-    jt::vector2 m_initialValue;
-    jt::vector2 m_finalValue;
+    jt::Vector2 m_initialValue;
+    jt::Vector2 m_finalValue;
 };
 
 } // namespace jt

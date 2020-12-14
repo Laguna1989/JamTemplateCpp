@@ -21,7 +21,7 @@ public:
     TweenAlpha(std::weak_ptr<T> obj, float time, std::uint8_t valueStart, std::uint8_t valueEnd)
         : Tween<T> { obj,
             [this](auto sptr, auto agePercent) {
-                jt::color col = sptr->getColor();
+                jt::Color col = sptr->getColor();
                 float alpha = Lerp::linear(m_initialValue, m_finalValue, agePercent);
                 std::uint8_t a = static_cast<std::uint8_t>(alpha * 255.0f);
                 col.a() = a;

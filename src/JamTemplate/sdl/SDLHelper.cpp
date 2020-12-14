@@ -2,7 +2,7 @@
 
 namespace jt {
 
-SDL_RendererFlip getFlipFromScale(jt::vector2 const& scale)
+SDL_RendererFlip getFlipFromScale(jt::Vector2 const& scale)
 {
     auto flip = SDL_FLIP_NONE;
     if (scale.x() < 0 && scale.y() < 0) {

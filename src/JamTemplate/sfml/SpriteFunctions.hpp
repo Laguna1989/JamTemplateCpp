@@ -8,9 +8,9 @@ namespace jt {
 namespace SpriteFunctions {
 
 sf::Image makeButtonImage(unsigned int w, unsigned int h,
-    jt::color midColor = jt::color { 200, 200, 200 },
-    jt::color darkColor = jt::color { 100, 100, 100 },
-    jt::color brightColor = jt::color { 255, 255, 255 });
+    jt::Color midColor = jt::Color { 200, 200, 200 },
+    jt::Color darkColor = jt::Color { 100, 100, 100 },
+    jt::Color brightColor = jt::Color { 255, 255, 255 });
 
 sf::Image makeGlowImage(float r, std::uint8_t max = 255);
 

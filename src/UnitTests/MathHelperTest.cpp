@@ -3,7 +3,7 @@
 #include "gtest/gtest.h"
 
 using namespace jt::MathHelper;
-using v = jt::vector2;
+using v = jt::Vector2;
 
 TEST(VectorBetween, Single)
 {
@@ -37,7 +37,7 @@ TEST(VectorBetween, Inverted)
 
 TEST(VectorLengthTest, LengthOfVectorZero)
 {
-    jt::vector2 const v0 { 0.0f, 0.0f };
+    jt::Vector2 const v0 { 0.0f, 0.0f };
     float const l { 0.0f };
     EXPECT_EQ(length(v0), l);
     EXPECT_EQ(lengthSquared(v0), l);
@@ -45,7 +45,7 @@ TEST(VectorLengthTest, LengthOfVectorZero)
 
 TEST(VectorLengthTest, LengthOfVectorOneDimension)
 {
-    jt::vector2 const v0 { 0.0f, 10 };
+    jt::Vector2 const v0 { 0.0f, 10 };
     float const l { 10.0f };
     EXPECT_EQ(length(v0), l);
     EXPECT_EQ(lengthSquared(v0), l * l);
@@ -53,7 +53,7 @@ TEST(VectorLengthTest, LengthOfVectorOneDimension)
 
 TEST(VectorLengthTest, LengthOfVectorTwoDimensions)
 {
-    jt::vector2 const v0 { -10, 10 };
+    jt::Vector2 const v0 { -10, 10 };
     float const l { 14.14213562373095048802f };
     EXPECT_NEAR(length(v0), l, 0.005);
     EXPECT_NEAR(lengthSquared(v0), l * l, 0.005);
@@ -61,8 +61,8 @@ TEST(VectorLengthTest, LengthOfVectorTwoDimensions)
 
 TEST(VectorNoralize, NormalizeOfNormalizedVector)
 {
-    jt::vector2 v0 { 1, 0 };
-    jt::vector2 const cv0 { v0 };
+    jt::Vector2 v0 { 1, 0 };
+    jt::Vector2 const cv0 { v0 };
     normalizeMe(v0);
 
     EXPECT_EQ(v0, cv0);
@@ -70,7 +70,7 @@ TEST(VectorNoralize, NormalizeOfNormalizedVector)
 
 TEST(VectorNoralize, NormalizeOfVector)
 {
-    jt::vector2 v0 { 15.4f, -42.22f };
+    jt::Vector2 v0 { 15.4f, -42.22f };
     normalizeMe(v0);
 
     EXPECT_EQ(length(v0), 1.0f);
@@ -78,7 +78,7 @@ TEST(VectorNoralize, NormalizeOfVector)
 
 TEST(VectorNoralize, NormalizeOfZeroVector)
 {
-    jt::vector2 v0 { 0.0f, 0.0f };
+    jt::Vector2 v0 { 0.0f, 0.0f };
     EXPECT_NO_THROW(normalizeMe(v0));
     EXPECT_EQ(v0.x(), 0.0f);
     EXPECT_EQ(v0.y(), 0.0f);

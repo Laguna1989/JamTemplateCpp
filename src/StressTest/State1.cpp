@@ -27,7 +27,7 @@ void State1::doInternalUpdate(float const /*elapsed*/)
         add(tw2);
 
         auto tw3 = jt::TweenScale<jt::SmartAnimation>::create(
-            bp->getAnimation(), 0.9f, jt::vector2 { 1, 1 }, jt::vector2 { 3, 3 });
+            bp->getAnimation(), 0.9f, jt::Vector2 { 1, 1 }, jt::Vector2 { 3, 3 });
         add(tw3);
     }
 

@@ -26,11 +26,11 @@ public:
     }
 
     ~vector2() = default;
-    vector2(jt::vector2 const&) = default;
-    vector2(jt::vector2&&) = default;
+    vector2(jt::Vector2 const&) = default;
+    vector2(jt::Vector2&&) = default;
 
-    vector2& operator=(jt::vector2 const&) = default;
-    vector2& operator=(jt::vector2&&) = default;
+    vector2& operator=(jt::Vector2 const&) = default;
+    vector2& operator=(jt::Vector2&&) = default;
 
     operator SDL_Point() const
     {
@@ -68,11 +68,11 @@ public:
     }
 
     ~vector2u() = default;
-    vector2u(jt::vector2u const&) = default;
-    vector2u(jt::vector2u&&) = default;
+    vector2u(jt::Vector2u const&) = default;
+    vector2u(jt::Vector2u&&) = default;
 
-    jt::vector2u& operator=(jt::vector2u const&) = default;
-    jt::vector2u& operator=(jt::vector2u&&) = default;
+    jt::Vector2u& operator=(jt::Vector2u const&) = default;
+    jt::Vector2u& operator=(jt::Vector2u&&) = default;
 
     operator SDL_Point() const
     {

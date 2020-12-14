@@ -16,7 +16,7 @@ namespace jt {
 Game::Game(unsigned int width, unsigned int height, float zoom, std::string const& title)
 {
     m_zoom = zoom;
-    m_fullsize = jt::vector2 { static_cast<float>(width), static_cast<float>(height) };
+    m_fullsize = jt::Vector2 { static_cast<float>(width), static_cast<float>(height) };
 
     unsigned int scaledWidth = static_cast<unsigned int>(width / zoom);
     unsigned int scaledHeight = static_cast<unsigned int>(height / zoom);
@@ -66,9 +66,9 @@ void Game::doUpdate(float const elapsed)
     jt::InputManager::update(0.0f, 0.0f, 0.0f, 0.0f, elapsed);
     m_state->update(elapsed);
     // TODO
-    // jt::vector2 mpf = getRenderWindow()->mapPixelToCoords(
+    // jt::Vector2 mpf = getRenderWindow()->mapPixelToCoords(
     //     sf::Mouse::getPosition(*getRenderWindow()), *getView());
-    // jt::vector2 mpfs
+    // jt::Vector2 mpfs
     //     = getRenderWindow()->mapPixelToCoords(sf::Mouse::getPosition(*getRenderWindow())) /
     //     m_zoom;
 
@@ -76,7 +76,7 @@ void Game::doUpdate(float const elapsed)
     // int const camOffsetiy { static_cast<int>(m_CamOffset.y() + getView()->getSize().y / 2) };
 
     // getView()->setCenter(
-    //     jt::vector2 { static_cast<float>(camOffsetix), static_cast<float>(camOffsetiy) });
+    //     jt::Vector2 { static_cast<float>(camOffsetix), static_cast<float>(camOffsetiy) });
     // SmartDrawable::setCamOffset(getView()->getCenter() - getView()->getSize() * 0.5f);
 };
 

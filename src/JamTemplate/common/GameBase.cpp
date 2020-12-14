@@ -67,10 +67,10 @@ void GameBase::run()
     }
 }
 
-jt::vector2 GameBase::getCamOffset() { return m_CamOffset; }
+jt::Vector2 GameBase::getCamOffset() { return m_CamOffset; }
 
-void GameBase::setCamOffset(jt::vector2 const& ofs) { m_CamOffset = ofs; }
-void GameBase::moveCam(jt::vector2 const& v) { m_CamOffset = m_CamOffset + v; }
+void GameBase::setCamOffset(jt::Vector2 const& ofs) { m_CamOffset = ofs; }
+void GameBase::moveCam(jt::Vector2 const& v) { m_CamOffset = m_CamOffset + v; }
 
 void GameBase::shake(float t, float strength, float shakeInterval)
 {
@@ -86,7 +86,7 @@ void GameBase::doSwitchState()
     m_state = m_nextState;
     m_nextState = nullptr;
 
-    m_CamOffset = jt::vector2 { 0.0f, 0.0f };
+    m_CamOffset = jt::Vector2 { 0.0f, 0.0f };
     m_state->setGameInstance(getPtr());
     m_state->create();
     jt::InputManager::reset();

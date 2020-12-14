@@ -8,10 +8,10 @@
 namespace jt {
 namespace Conversion {
 
-jt::vector2 vec(b2Vec2 const& v);
-b2Vec2 vec(jt::vector2 const& v);
-jt::vector2 vec(tson::Vector2f const& v);
-jt::vector2 vec(tson::Vector2i const& v);
+jt::Vector2 vec(b2Vec2 const& v);
+b2Vec2 vec(jt::Vector2 const& v);
+jt::Vector2 vec(tson::Vector2f const& v);
+jt::Vector2 vec(tson::Vector2i const& v);
 
 } // namespace Conversion
 } // namespace jt

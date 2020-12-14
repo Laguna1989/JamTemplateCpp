@@ -15,7 +15,7 @@ namespace jt {
 
 class TextureManager {
 public:
-    using ColorReplaceLookupType = std::vector<std::pair<jt::color, jt::color>>;
+    using ColorReplaceLookupType = std::vector<std::pair<jt::Color, jt::Color>>;
     using ColorReplaceLookupVectorType = std::vector<ColorReplaceLookupType>;
     using TextureMapType = std::map<std::string, sf::Texture>;
     TextureManager() = delete;
@@ -37,7 +37,7 @@ public:
     // should not be called frequently! Only works for textures obtained from this class (not for
     // colors of shapes or whatever) \param in and out are used for lookups if a color is used which
     // is not contained in in, the color will be unchanged
-    static void swapPalette(std::vector<jt::color> in, std::vector<jt::color> out)
+    static void swapPalette(std::vector<jt::Color> in, std::vector<jt::Color> out)
     {
         assert(in.size() == out.size());
         for (auto& kvp : m_textures) {
@@ -46,7 +46,7 @@ public:
 
             for (unsigned i = 0; i != img.getSize().x; ++i)
                 for (unsigned j = 0; j != img.getSize().x; ++j) {
-                    jt::color const col = img.getPixel(i, j);
+                    jt::Color const col = img.getPixel(i, j);
                     // for this pixel check for each color in lookup
                     for (size_t idx = 0; idx != in.size(); ++idx) {
                         if (in[idx] == col) {
@@ -60,7 +60,7 @@ public:
     }
 
     static void addSelectiveColorReplacement(
-        int idx, std::vector<std::pair<jt::color, jt::color>> replace)
+        int idx, std::vector<std::pair<jt::Color, jt::Color>> replace)
     {
         if (m_selectiveColorReplace.size() <= idx) {
             m_selectiveColorReplace.resize(idx + 1U);

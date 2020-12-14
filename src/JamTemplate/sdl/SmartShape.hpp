@@ -13,37 +13,37 @@ class SmartShape : public SmartDrawable {
 public:
     using Sptr = std::shared_ptr<SmartShape>;
 
-    void makeRect(jt::vector2 size);
+    void makeRect(jt::Vector2 size);
 
-    void setColor(jt::color const& col) override;
-    const jt::color getColor() const override;
+    void setColor(jt::Color const& col) override;
+    const jt::Color getColor() const override;
 
-    void setFlashColor(jt::color const& col) override;
-    const jt::color getFlashColor() const override;
+    void setFlashColor(jt::Color const& col) override;
+    const jt::Color getFlashColor() const override;
 
-    void setPosition(jt::vector2 const& pos) override;
-    const jt::vector2 getPosition() const override;
+    void setPosition(jt::Vector2 const& pos) override;
+    const jt::Vector2 getPosition() const override;
 
     // sf::Transform const getTransform() const override { return m_shape->getTransform(); }
 
     jt::rect const getGlobalBounds() const override;
     jt::rect const getLocalBounds() const override;
 
-    void setScale(jt::vector2 const& scale) override;
-    const jt::vector2 getScale() const override;
+    void setScale(jt::Vector2 const& scale) override;
+    const jt::Vector2 getScale() const override;
 
-    void setOrigin(jt::vector2 const& origin) override;
-    const jt::vector2 getOrigin() const override;
+    void setOrigin(jt::Vector2 const& origin) override;
+    const jt::Vector2 getOrigin() const override;
 
 private:
     mutable std::shared_ptr<SDL_Texture> m_text;
 
-    jt::vector2 m_position { 0, 0 };
+    jt::Vector2 m_position { 0, 0 };
     jt::recti m_sourceRect { 0, 0, 0, 0 };
-    jt::color m_color { jt::colors::White };
-    jt::vector2 m_scale { 1.0f, 1.0f };
-    jt::vector2 m_origin { 0.0f, 0.0f };
-    jt::color m_colorFlash { jt::colors::White };
+    jt::Color m_color { jt::Colors::White };
+    jt::Vector2 m_scale { 1.0f, 1.0f };
+    jt::Vector2 m_origin { 0.0f, 0.0f };
+    jt::Color m_colorFlash { jt::Colors::White };
 
     void doDraw(std::shared_ptr<jt::renderTarget> const sptr) const override;
 
@@ -54,9 +54,9 @@ private:
     void doUpdate(float /*elapsed*/) override;
     void doRotate(float /*rot*/) override;
 
-    SDL_Rect getDestRect(jt::vector2 const& positionOffset = jt::vector2 { 0, 0 }) const;
+    SDL_Rect getDestRect(jt::Vector2 const& positionOffset = jt::Vector2 { 0, 0 }) const;
 
-    void setSDLColor(jt::color const& col) const;
+    void setSDLColor(jt::Color const& col) const;
 };
 } // namespace jt
 

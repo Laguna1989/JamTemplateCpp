@@ -6,28 +6,28 @@
 
 namespace jt {
 
-class color final : public jt::colorBase {
+class Color final : public jt::ColorBase {
 public:
-    color()
+    Color()
         : m_col { 0, 0, 0, 255 }
     {
     }
-    color(std::uint8_t r, std::uint8_t g, std::uint8_t b, std::uint8_t a = 255)
+    Color(std::uint8_t r, std::uint8_t g, std::uint8_t b, std::uint8_t a = 255)
         : m_col { r, g, b, a }
     {
     }
 
-    color(sf::Color const& v)
+    Color(sf::Color const& v)
         : m_col { v }
     {
     }
 
-    ~color() = default;
-    color(jt::color const&) = default;
-    color(jt::color&&) = default;
+    ~Color() = default;
+    Color(jt::Color const&) = default;
+    Color(jt::Color&&) = default;
 
-    color& operator=(jt::color const&) = default;
-    color& operator=(jt::color&&) = default;
+    Color& operator=(jt::Color const&) = default;
+    Color& operator=(jt::Color&&) = default;
 
     operator sf::Color() const { return m_col; }
 

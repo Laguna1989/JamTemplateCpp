@@ -19,8 +19,8 @@ public:
     // c has to be between 0 and 1
     static bool getChance(float c = 0.5f);
 
-    static jt::color const getRandomColor();
-    static const jt::vector2 getRandomPointin(jt::rect rect);
+    static jt::Color const getRandomColor();
+    static const jt::Vector2 getRandomPointin(jt::rect rect);
 
     static void setSeed(unsigned int s);
     static void useTimeAsRandomSeed();

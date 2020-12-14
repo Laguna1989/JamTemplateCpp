@@ -23,11 +23,11 @@ public:
     }
 
     ~color() = default;
-    color(jt::color const&) = default;
-    color(jt::color&&) = default;
+    color(jt::Color const&) = default;
+    color(jt::Color&&) = default;
 
-    color& operator=(jt::color const&) = default;
-    color& operator=(jt::color&&) = default;
+    color& operator=(jt::Color const&) = default;
+    color& operator=(jt::Color&&) = default;
 
     operator SDL_Color() const { return m_col; }
 

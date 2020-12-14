@@ -76,9 +76,9 @@ void Game::doUpdate(float const elapsed)
     }
     m_state->update(elapsed);
 
-    jt::vector2 mpf = getRenderWindow()->mapPixelToCoords(
+    jt::Vector2 mpf = getRenderWindow()->mapPixelToCoords(
         sf::Mouse::getPosition(*getRenderWindow()), *getView());
-    jt::vector2 mpfs
+    jt::Vector2 mpfs
         = getRenderWindow()->mapPixelToCoords(sf::Mouse::getPosition(*getRenderWindow())) / m_zoom;
     InputManager::update(mpf.x(), mpf.y(), mpfs.x(), mpfs.y(), elapsed);
 
@@ -86,7 +86,7 @@ void Game::doUpdate(float const elapsed)
     int const camOffsetiy { static_cast<int>(m_CamOffset.y() + getView()->getSize().y / 2) };
 
     getView()->setCenter(
-        jt::vector2 { static_cast<float>(camOffsetix), static_cast<float>(camOffsetiy) });
+        jt::Vector2 { static_cast<float>(camOffsetix), static_cast<float>(camOffsetiy) });
     SmartDrawable::setCamOffset(getView()->getCenter() - getView()->getSize() * 0.5f);
 };
 
@@ -106,7 +106,7 @@ void Game::doDraw() const
     sf::Sprite spr(texture);
     // Note: RenderTexture has a bug and is displayed upside down.
     // This is corrected by the following two lines
-    spr.setScale(jt::vector2(m_zoom, -m_zoom));
+    spr.setScale(jt::Vector2(m_zoom, -m_zoom));
     spr.setPosition(0.0f, static_cast<float>(m_renderWindow->getSize().y));
 
     // draw the sprite

@@ -10,7 +10,7 @@ by the different libs. The interface is conveyed through the
 
 namespace jt {
 
-class vector2Base {
+class Vector2Base {
 public:
     virtual float x() const = 0;
     virtual float y() const = 0;
@@ -19,7 +19,7 @@ public:
     virtual float& x() = 0;
 };
 
-class vector2uBase {
+class Vector2uBase {
 public:
     virtual unsigned int x() const = 0;
     virtual unsigned int y() const = 0;

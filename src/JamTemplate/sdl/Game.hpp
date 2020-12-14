@@ -36,7 +36,7 @@ private:
     float m_zoom;
 
     jt::recti m_srcRect;
-    jt::vector2 m_fullsize;
+    jt::Vector2 m_fullsize;
 
     // override functions from GameBase
     virtual void doUpdate(float const elapsed) override;

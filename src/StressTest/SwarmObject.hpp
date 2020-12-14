@@ -24,12 +24,12 @@ public:
         float maxX = 200 - 12;
         float maxY = 150 - 12;
 
-        m_animation->add("assets/coin.png", "idle", jt::vector2u { 16, 16 },
+        m_animation->add("assets/coin.png", "idle", jt::Vector2u { 16, 16 },
             jt::MathHelper::vectorBetween(0U, 11U), jt::Random::getFloat(0.13f, 0.17f));
         m_animation->play("idle", jt::Random::getInt(0, 6));
-        m_animation->setScale(jt::vector2 { 0.5f, 0.5f });
+        m_animation->setScale(jt::Vector2 { 0.5f, 0.5f });
 
-        /*setPosition(jt::vector2(jt::Random::getFloat(0, maxX / 2),
+        /*setPosition(jt::Vector2(jt::Random::getFloat(0, maxX / 2),
             jt::Random::getFloat(0, maxY / 2)));
         float mv = 50;
         setBoundsVelocity(jt::rect { -mv, -mv, 2 * mv, 2 * mv });

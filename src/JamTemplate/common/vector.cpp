@@ -2,41 +2,41 @@
 
 namespace jt {
 
-jt::vector2 operator+(jt::vector2 const& a, jt::vector2 const& b)
+jt::Vector2 operator+(jt::Vector2 const& a, jt::Vector2 const& b)
 {
-    return jt::vector2 { a.x() + b.x(), a.y() + b.y() };
+    return jt::Vector2 { a.x() + b.x(), a.y() + b.y() };
 }
 
-jt::vector2 operator-(jt::vector2 const& a, jt::vector2 const& b)
+jt::Vector2 operator-(jt::Vector2 const& a, jt::Vector2 const& b)
 {
-    return jt::vector2 { a.x() - b.x(), a.y() - b.y() };
+    return jt::Vector2 { a.x() - b.x(), a.y() - b.y() };
 }
 
-bool operator==(jt::vector2 const& a, jt::vector2 const& b)
+bool operator==(jt::Vector2 const& a, jt::Vector2 const& b)
 {
     return a.x() == b.x() && a.y() == b.y();
 }
 
-bool operator!=(jt::vector2 const& a, jt::vector2 const& b) { return !(a == b); }
+bool operator!=(jt::Vector2 const& a, jt::Vector2 const& b) { return !(a == b); }
 
-jt::vector2 operator*(float const f, jt::vector2 const& v)
+jt::Vector2 operator*(float const f, jt::Vector2 const& v)
 {
-    return jt::vector2 { f * v.x(), f * v.y() };
+    return jt::Vector2 { f * v.x(), f * v.y() };
 }
-jt::vector2 operator*(jt::vector2 const& v, float const f) { return f * v; }
+jt::Vector2 operator*(jt::Vector2 const& v, float const f) { return f * v; }
 
-jt::vector2u operator+(jt::vector2u const& a, jt::vector2u const& b)
+jt::Vector2u operator+(jt::Vector2u const& a, jt::Vector2u const& b)
 {
-    return jt::vector2u { a.x() + b.x(), a.y() + b.y() };
+    return jt::Vector2u { a.x() + b.x(), a.y() + b.y() };
 }
-jt::vector2u operator-(jt::vector2u const& a, jt::vector2u const& b)
+jt::Vector2u operator-(jt::Vector2u const& a, jt::Vector2u const& b)
 {
-    return jt::vector2u { a.x() - b.x(), a.y() - b.y() };
+    return jt::Vector2u { a.x() - b.x(), a.y() - b.y() };
 }
-bool operator==(jt::vector2u const& a, jt::vector2u const& b)
+bool operator==(jt::Vector2u const& a, jt::Vector2u const& b)
 {
     return a.x() == b.x() && a.y() == b.y();
 }
-bool operator!=(jt::vector2u const& a, jt::vector2u const& b) { return !(a == b); }
+bool operator!=(jt::Vector2u const& a, jt::Vector2u const& b) { return !(a == b); }
 
 } // namespace jt

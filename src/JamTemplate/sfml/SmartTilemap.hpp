@@ -28,30 +28,30 @@ public:
 
     void doUpdate(float elapsed);
 
-    void setColor(jt::color const& col);
-    const jt::color getColor() const;
+    void setColor(jt::Color const& col);
+    const jt::Color getColor() const;
 
-    void setPosition(jt::vector2 const& pos);
-    const jt::vector2 getPosition() const;
+    void setPosition(jt::Vector2 const& pos);
+    const jt::Vector2 getPosition() const;
 
     // sf::Transform const getTransform() const;
     jt::rect const getGlobalBounds() const;
     jt::rect const getLocalBounds() const;
 
-    void setFlashColor(jt::color const& col);
-    const jt::color getFlashColor() const;
+    void setFlashColor(jt::Color const& col);
+    const jt::Color getFlashColor() const;
 
-    void setScale(jt::vector2 const& scale);
-    const jt::vector2 getScale() const;
+    void setScale(jt::Vector2 const& scale);
+    const jt::Vector2 getScale() const;
 
-    const jt::vector2u getMapSizeInTiles();
+    const jt::Vector2u getMapSizeInTiles();
 
-    void setOrigin(jt::vector2 const& origin);
-    const jt::vector2 getOrigin() const;
+    void setOrigin(jt::Vector2 const& origin);
+    const jt::Vector2 getOrigin() const;
 
     void doRotate(float /*rot*/);
 
-    void setScreenSizeHint(jt::vector2 const& hint, std::shared_ptr<GameBase> ptr);
+    void setScreenSizeHint(jt::Vector2 const& hint, std::shared_ptr<GameBase> ptr);
 
     // FIXME: Not ideal because it only supports rectangles.
     std::map<std::string, std::vector<InfoRect>> getObjectGroups() { return m_objectGroups; };
@@ -64,9 +64,9 @@ private:
     bool m_highlightObjectGroups = false;
     mutable std::vector<std::unique_ptr<sf::Sprite>> m_tileSprites;
 
-    jt::vector2 m_position;
+    jt::Vector2 m_position;
 
-    jt::vector2 m_screenSizeHint;
+    jt::Vector2 m_screenSizeHint;
     std::weak_ptr<GameBase> m_gamePtr;
 };
 

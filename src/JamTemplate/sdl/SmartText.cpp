@@ -37,19 +37,19 @@ void SmartText::setText(std::string const& text)
 }
 std::string SmartText::getText() const { return m_text; }
 
-void SmartText::setOutline(float /*thickness*/, jt::color /*col*/)
+void SmartText::setOutline(float /*thickness*/, jt::Color /*col*/)
 {
     std::cerr << "Font outline not suppored by SDL TTF fonts" << std::endl;
 }
 
-void SmartText::setPosition(jt::vector2 const& pos) { m_position = pos; }
-const jt::vector2 SmartText::getPosition() const { return m_position; }
+void SmartText::setPosition(jt::Vector2 const& pos) { m_position = pos; }
+const jt::Vector2 SmartText::getPosition() const { return m_position; }
 
-void SmartText::setColor(const jt::color& col) { m_color = col; }
-const jt::color SmartText::getColor() const { return m_color; }
+void SmartText::setColor(const jt::Color& col) { m_color = col; }
+const jt::Color SmartText::getColor() const { return m_color; }
 
-void SmartText::setFlashColor(const jt::color& col) { m_flashColor = col; }
-const jt::color SmartText::getFlashColor() const { return m_flashColor; }
+void SmartText::setFlashColor(const jt::Color& col) { m_flashColor = col; }
+const jt::Color SmartText::getFlashColor() const { return m_flashColor; }
 
 // sf::Transform const getTransform() const  { return m_text->getTransform(); }
 
@@ -63,11 +63,11 @@ jt::rect const SmartText::getLocalBounds() const
     return jt::rect { 0, 0, m_textTextureSizeX * m_scale.x(), m_textTextureSizeY * m_scale.y() };
 }
 
-void SmartText::setScale(jt::vector2 const& scale) { m_scale = scale; }
-const jt::vector2 SmartText::getScale() const { return m_scale; }
+void SmartText::setScale(jt::Vector2 const& scale) { m_scale = scale; }
+const jt::Vector2 SmartText::getScale() const { return m_scale; }
 
-void SmartText::setOrigin(jt::vector2 const& origin) { m_origin = origin; }
-jt::vector2 const SmartText::getOrigin() const { return m_origin; }
+void SmartText::setOrigin(jt::Vector2 const& origin) { m_origin = origin; }
+jt::Vector2 const SmartText::getOrigin() const { return m_origin; }
 
 void SmartText::SetTextAlign(SmartText::TextAlign ta)
 {
@@ -136,12 +136,12 @@ void SmartText::renderOneLineOfText(std::shared_ptr<jt::renderTarget> const sptr
     int h { 0 };
     SDL_QueryTexture(textTexture, NULL, NULL, &w, &h); // get the width and height of the texture
 
-    jt::vector2 alignOffset {};
+    jt::Vector2 alignOffset {};
     if (lineCount != 0 && m_textAlign == TextAlign::CENTER) {
         alignOffset.x()
             = static_cast<float>(m_textTextureSizeX) / 2.0f - static_cast<float>(w) / 2.0f;
     }
-    jt::vector2 const pos = jt::vector2 { 0, static_cast<float>(h * i) } + alignOffset;
+    jt::Vector2 const pos = jt::Vector2 { 0, static_cast<float>(h * i) } + alignOffset;
 
     SDL_Rect destRect; // create a rect
     destRect.x = pos.x(); // controls the rect's x coordinate
@@ -156,7 +156,7 @@ void SmartText::renderOneLineOfText(std::shared_ptr<jt::renderTarget> const sptr
     SDL_DestroyTexture(textTexture);
 }
 
-jt::vector2u SmartText::getSizeForLine(
+jt::Vector2u SmartText::getSizeForLine(
     std::shared_ptr<jt::renderTarget> const sptr, std::string const& text) const
 {
     SDL_Color col { 255U, 255U, 255U, 255U };
@@ -168,7 +168,7 @@ jt::vector2u SmartText::getSizeForLine(
     SDL_QueryTexture(textTexture, NULL, NULL, &w, &h); // get the width and height of the texture
     SDL_FreeSurface(textSurface);
     SDL_DestroyTexture(textTexture);
-    return jt::vector2u { static_cast<unsigned int>(w), static_cast<unsigned int>(h) };
+    return jt::Vector2u { static_cast<unsigned int>(w), static_cast<unsigned int>(h) };
 }
 
 void SmartText::recreateTextTexture(std::shared_ptr<jt::renderTarget> const sptr)
@@ -223,21 +223,21 @@ std::shared_ptr<jt::renderTarget> SmartText::getRenderTarget()
     return m_rendertarget.lock();
 }
 
-void SmartText::setSDLColor(jt::color const& col) const
+void SmartText::setSDLColor(jt::Color const& col) const
 {
     SDL_SetTextureColorMod(m_textTexture.get(), col.r(), col.g(), col.b());
     SDL_SetTextureAlphaMod(m_textTexture.get(), col.a());
 }
 
-SDL_Rect SmartText::getDestRect(jt::vector2 const& positionOffset) const
+SDL_Rect SmartText::getDestRect(jt::Vector2 const& positionOffset) const
 {
-    jt::vector2 alignOffset { 0, 0 };
+    jt::Vector2 alignOffset { 0, 0 };
     if (m_textAlign == TextAlign::CENTER) {
         alignOffset.x()
             = -static_cast<float>(m_textTextureSizeX) / 2.0f / getUpscaleFactor() * m_scale.x();
     }
 
-    jt::vector2 pos = m_position + getShakeOffset() + getOffset() + getCamOffset() + alignOffset
+    jt::Vector2 pos = m_position + getShakeOffset() + getOffset() + getCamOffset() + alignOffset
         + positionOffset;
 
     SDL_Rect destRect; // create a rect

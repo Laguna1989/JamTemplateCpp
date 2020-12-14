@@ -12,13 +12,13 @@ class TweenColor : public Tween<T> {
 public:
     // Tween color from valueStart to valueEnd of obj withtin time
     static TweenBase::Sptr create(
-        std::weak_ptr<T> obj, float time, jt::color valueStart, jt::color valueEnd)
+        std::weak_ptr<T> obj, float time, jt::Color valueStart, jt::Color valueEnd)
     {
         return std::make_shared<TweenColor>(obj, time, valueStart, valueEnd);
     }
 
     // Tween color from valueStart to valueEnd of obj withtin time
-    TweenColor(std::weak_ptr<T> obj, float time, jt::color valueStart, jt::color valueEnd)
+    TweenColor(std::weak_ptr<T> obj, float time, jt::Color valueStart, jt::Color valueEnd)
         : Tween<T> { obj,
             [this](auto sptr, auto agePercent) {
                 auto col = sptr->getColor();
@@ -43,8 +43,8 @@ public:
     }
 
 private:
-    jt::color m_initialValue {};
-    jt::color m_finalValue {};
+    jt::Color m_initialValue {};
+    jt::Color m_finalValue {};
 };
 
 } // namespace jt

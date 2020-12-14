@@ -5,7 +5,7 @@
 
 namespace jt {
 
-class colorBase {
+class ColorBase {
     virtual std::uint8_t r() const = 0;
     virtual std::uint8_t g() const = 0;
     virtual std::uint8_t b() const = 0;

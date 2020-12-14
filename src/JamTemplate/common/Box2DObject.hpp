@@ -20,14 +20,14 @@ public:
         m_world = world;
     }
 
-    jt::vector2 getPosition() const { return Conversion::vec(m_body->GetPosition()); }
+    jt::Vector2 getPosition() const { return Conversion::vec(m_body->GetPosition()); }
 
-    void setPosition(jt::vector2 p)
+    void setPosition(jt::Vector2 p)
     {
         m_body->SetTransform(Conversion::vec(p), m_body->GetAngle());
     }
-    jt::vector2 getVelocity() const { return Conversion::vec(m_body->GetLinearVelocity()); }
-    void setVelocity(jt::vector2 const v) { m_body->SetLinearVelocity(Conversion::vec(v)); }
+    jt::Vector2 getVelocity() const { return Conversion::vec(m_body->GetLinearVelocity()); }
+    void setVelocity(jt::Vector2 const v) { m_body->SetLinearVelocity(Conversion::vec(v)); }
 
     float getRotation() const { return m_body->GetAngle(); }
 

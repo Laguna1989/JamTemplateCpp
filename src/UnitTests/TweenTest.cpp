@@ -11,21 +11,21 @@
 
 class Object {
 public:
-    jt::color getColor() const { return m_col; };
-    void setColor(jt::color const& c) { m_col = c; };
+    jt::Color getColor() const { return m_col; };
+    void setColor(jt::Color const& c) { m_col = c; };
 
     std::uint8_t getAlpha() { return m_col.a(); };
 
-    jt::vector2 getPosition() const { return m_pos; };
-    void setPosition(jt::vector2 const& p) { m_pos = p; };
+    jt::Vector2 getPosition() const { return m_pos; };
+    void setPosition(jt::Vector2 const& p) { m_pos = p; };
 
-    jt::vector2 getScale() const { return m_scale; };
-    void setScale(jt::vector2 const& p) { m_scale = p; };
+    jt::Vector2 getScale() const { return m_scale; };
+    void setScale(jt::Vector2 const& p) { m_scale = p; };
 
 private:
-    jt::color m_col { jt::colors::Black };
-    jt::vector2 m_pos { 0.0f, 0.0f };
-    jt::vector2 m_scale { 1.0f, 1.0f };
+    jt::Color m_col { jt::colors::Black };
+    jt::Vector2 m_pos { 0.0f, 0.0f };
+    jt::Vector2 m_scale { 1.0f, 1.0f };
 };
 
 using ta = jt::TweenAlpha<Object>;
@@ -187,8 +187,8 @@ TEST_F(TweenBaseTest, Color)
 
     ASSERT_EQ(m_obj->getColor(), jt::colors::Black);
 
-    jt::color const start { 255, 255, 255, 255 };
-    jt::color const end { 0, 0, 0, 255 };
+    jt::Color const start { 255, 255, 255, 255 };
+    jt::Color const end { 0, 0, 0, 255 };
 
     auto const twc = tc::create(m_obj, time, start, end);
     twc->update(0.0f);
@@ -201,8 +201,8 @@ TEST_F(TweenBaseTest, Position)
 {
     float const time { 5.0f };
 
-    jt::vector2 const start { 10.0f, 10.0f };
-    jt::vector2 const end { -15.0f, -15.0f };
+    jt::Vector2 const start { 10.0f, 10.0f };
+    jt::Vector2 const end { -15.0f, -15.0f };
 
     auto const twp = tp::create(m_obj, time, start, end);
     twp->update(0.0f);
@@ -215,8 +215,8 @@ TEST_F(TweenBaseTest, Scale)
 {
     float const time { 5.0f };
 
-    jt::vector2 const start { -1.0f, -1.0f };
-    jt::vector2 const end { 5.0f, 5.0f };
+    jt::Vector2 const start { -1.0f, -1.0f };
+    jt::Vector2 const end { 5.0f, 5.0f };
 
     auto const tws = ts::create(m_obj, time, start, end);
     tws->update(0.0f);

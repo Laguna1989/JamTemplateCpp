@@ -8,7 +8,7 @@ namespace jt {
 namespace SpriteFunctions {
 
 sf::Image makeButtonImage(
-    unsigned int w, unsigned int h, jt::color midColor, jt::color darkColor, jt::color brightColor)
+    unsigned int w, unsigned int h, jt::Color midColor, jt::Color darkColor, jt::Color brightColor)
 {
     sf::Image img {};
     img.create(3 * w, h, midColor);
@@ -48,7 +48,7 @@ sf::Image makeGlowImage(float r, std::uint8_t max)
             auto const sqr = std::sqrt(dx * dx + dy * dy);
             auto const sqrNorm = 1.0f - MathHelper::clamp(sqr / s * 2.0f, 0.0f, 1.0f);
             float const v = std::pow(sqrNorm, 2.0f) * max;
-            img.setPixel(i, j, jt::color { 255, 255, 255, static_cast<uint8_t>(v) });
+            img.setPixel(i, j, jt::Color { 255, 255, 255, static_cast<uint8_t>(v) });
         }
     }
     return img;
@@ -67,7 +67,7 @@ sf::Image makeVignetteImage(unsigned int w, unsigned int h)
             auto const sqr = std::sqrt(dx * dx + dy * dy);
             auto const sqrNorm = MathHelper::clamp(sqr / (cx + cy) / 1.5f * 2.0f, 0.0f, 1.0f);
             float const v = std::pow(sqrNorm, 2.0f) * 255;
-            img.setPixel(i, j, jt::color { 0, 0, 0, static_cast<uint8_t>(v) });
+            img.setPixel(i, j, jt::Color { 0, 0, 0, static_cast<uint8_t>(v) });
         }
     }
     return img;

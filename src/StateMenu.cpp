@@ -35,7 +35,7 @@ void StateMenu::doCreate()
     m_text_Title->SetTextAlign(jt::SmartText::TextAlign::CENTER);
     m_text_Title->update(0.0f);
 
-    m_text_Title->setShadow(GP::PaletteFontShadow(), jt::vector2 { 3, 3 });
+    m_text_Title->setShadow(GP::PaletteFontShadow(), jt::Vector2 { 3, 3 });
 
     m_test_Explanation = std::make_shared<jt::SmartText>();
     m_test_Explanation->loadFont("assets/font.ttf", 16U, getGame()->getRenderTarget());
@@ -44,7 +44,7 @@ void StateMenu::doCreate()
     m_test_Explanation->setColor(GP::PaletteColor4());
     m_test_Explanation->update(0.0f);
     m_test_Explanation->SetTextAlign(jt::SmartText::TextAlign::CENTER);
-    m_test_Explanation->setShadow(GP::PaletteFontShadow(), jt::vector2 { 3, 3 });
+    m_test_Explanation->setShadow(GP::PaletteFontShadow(), jt::Vector2 { 3, 3 });
 
     m_text_Credits = std::make_shared<jt::SmartText>();
     m_text_Credits->loadFont("assets/font.ttf", 10U, getGame()->getRenderTarget());
@@ -53,17 +53,17 @@ void StateMenu::doCreate()
     m_text_Credits->setPosition({ 10, GP::GetScreenSize().y() - 30 });
     m_text_Credits->setColor(GP::PaletteColor5());
     m_text_Credits->update(0.0f);
-    m_text_Credits->setShadow(GP::PaletteFontShadow(), jt::vector2 { 1, 1 });
+    m_text_Credits->setShadow(GP::PaletteFontShadow(), jt::Vector2 { 1, 1 });
 
     m_overlay = std::make_shared<jt::SmartShape>();
-    m_overlay->makeRect(jt::vector2 { w, h });
-    m_overlay->setColor(jt::color { 0, 0, 0, 255 });
+    m_overlay->makeRect(jt::Vector2 { w, h });
+    m_overlay->setColor(jt::Color { 0, 0, 0, 255 });
     m_overlay->update(0);
 
     m_vignette = std::make_shared<jt::SmartSprite>();
     m_vignette->loadSprite(
         "#v#" + std::to_string(static_cast<int>(w)) + "#" + std::to_string(static_cast<int>(h)));
-    m_vignette->setColor(jt::color { 255, 255, 255, 100 });
+    m_vignette->setColor(jt::Color { 255, 255, 255, 100 });
     m_vignette->update(0.0f);
 
     using tp = jt::TweenPosition<jt::SmartText>;
@@ -83,7 +83,7 @@ void StateMenu::doCreate()
         add(ta1);
     }
     {
-        auto s2 = m_test_Explanation->getPosition() + jt::vector2 { -500, 0 };
+        auto s2 = m_test_Explanation->getPosition() + jt::Vector2 { -500, 0 };
         auto e2 = m_test_Explanation->getPosition();
 
         auto tw2 = tp::create(m_test_Explanation, 0.5f, s2, e2);
@@ -91,8 +91,8 @@ void StateMenu::doCreate()
         tw2->setSkipFrames();
 
         tw2->addCompleteCallback([this]() {
-            auto ts1 = ts::create(m_test_Explanation, 0.75f, jt::vector2 { 1.0f, 1.0f },
-                jt::vector2 { 1.05f, 1.05f });
+            auto ts1 = ts::create(m_test_Explanation, 0.75f, jt::Vector2 { 1.0f, 1.0f },
+                jt::Vector2 { 1.05f, 1.05f });
             ts1->setRepeat(true);
             ts1->setAgePercentConversion([](float age) {
                 return jt::Lerp::cosine(0.0f, 1.0f, jt::MathHelper::clamp(age, 0.0f, 1.0f));
@@ -103,7 +103,7 @@ void StateMenu::doCreate()
     }
 
     {
-        auto s3 = m_text_Credits->getPosition() + jt::vector2 { 0, 100 };
+        auto s3 = m_text_Credits->getPosition() + jt::Vector2 { 0, 100 };
         auto e3 = m_text_Credits->getPosition();
 
         auto tw3 = tp::create(m_text_Credits, 0.35f, s3, e3);

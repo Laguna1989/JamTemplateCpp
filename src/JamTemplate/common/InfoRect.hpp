@@ -5,8 +5,8 @@
 #include <string>
 
 struct InfoRect {
-    jt::vector2 position;
-    jt::vector2 sizeDiagonal;
+    jt::Vector2 position;
+    jt::Vector2 sizeDiagonal;
     float rotation;
     std::string m_type;
 };

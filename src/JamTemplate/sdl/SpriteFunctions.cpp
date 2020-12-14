@@ -9,7 +9,7 @@ namespace jt {
 namespace SpriteFunctions {
 
 std::shared_ptr<SDL_Texture> makeButtonImage(std::shared_ptr<jt::renderTarget> rt, unsigned int w,
-    unsigned int h, jt::color midColor, jt::color darkColor, jt::color brightColor)
+    unsigned int h, jt::Color midColor, jt::Color darkColor, jt::Color brightColor)
 {
 
     std::shared_ptr<SDL_Surface> image

@@ -88,7 +88,7 @@ std::shared_ptr<SDL_Texture> createRectImage(
     return SpriteFunctions::makeRect(rt, w, h);
 }
 
-// void replaceOneColor(sf::Image& img, jt::color const& from, jt::color const& to)
+// void replaceOneColor(sf::Image& img, jt::Color const& from, jt::Color const& to)
 // {
 //     // TODO
 // }

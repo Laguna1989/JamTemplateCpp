@@ -18,43 +18,43 @@ public:
     void loadSprite(std::string const& fileName);
     void loadSprite(std::string const& fileName, jt::recti const& rect);
 
-    void setPosition(jt::vector2 const& pos) override;
-    const jt::vector2 getPosition() const override;
+    void setPosition(jt::Vector2 const& pos) override;
+    const jt::Vector2 getPosition() const override;
 
-    void setColor(jt::color const& col) override;
-    const jt::color getColor() const override;
+    void setColor(jt::Color const& col) override;
+    const jt::Color getColor() const override;
 
-    void setFlashColor(jt::color const& col) override;
-    const jt::color getFlashColor() const override;
+    void setFlashColor(jt::Color const& col) override;
+    const jt::Color getFlashColor() const override;
 
     // virtual sf::Transform const getTransform() const override { return m_sprite.getTransform(); }
 
     virtual jt::rect const getGlobalBounds() const override;
     virtual jt::rect const getLocalBounds() const override;
 
-    virtual void setScale(jt::vector2 const& scale) override;
-    virtual const jt::vector2 getScale() const override;
+    virtual void setScale(jt::Vector2 const& scale) override;
+    virtual const jt::Vector2 getScale() const override;
 
-    virtual void setOrigin(jt::vector2 const& origin) override;
-    virtual jt::vector2 const getOrigin() const override;
+    virtual void setOrigin(jt::Vector2 const& origin) override;
+    virtual jt::Vector2 const getOrigin() const override;
 
     // WARNING: This function is slow, because it needs to copy
     // graphics memory to ram first.
-    jt::color getColorAtPixel(jt::vector2u pixelPos) const;
+    jt::Color getColorAtPixel(jt::Vector2u pixelPos) const;
     // clean up stored image
     void cleanImage();
 
 private:
     mutable std::shared_ptr<SDL_Texture> m_text;
 
-    jt::vector2 m_position { 0, 0 };
+    jt::Vector2 m_position { 0, 0 };
     jt::recti m_sourceRect { 0, 0, 0, 0 };
-    jt::color m_color { jt::colors::White };
-    jt::vector2 m_scale { 1.0f, 1.0f };
-    jt::vector2 m_origin { 0.0f, 0.0f };
+    jt::Color m_color { jt::Colors::White };
+    jt::Vector2 m_scale { 1.0f, 1.0f };
+    jt::Vector2 m_origin { 0.0f, 0.0f };
 
     mutable std::shared_ptr<SDL_Texture> m_textFlash;
-    jt::color m_colorFlash { jt::colors::White };
+    jt::Color m_colorFlash { jt::Colors::White };
     std::string m_fileName { "" };
 
     mutable std::shared_ptr<SDL_Surface> m_image { nullptr };
@@ -68,9 +68,9 @@ private:
     void doDrawFlash(std::shared_ptr<jt::renderTarget> const sptr) const override;
     void doRotate(float /*rot*/) override;
 
-    SDL_Rect getDestRect(jt::vector2 const& positionOffset = jt::vector2 { 0.0f, 0.0f }) const;
+    SDL_Rect getDestRect(jt::Vector2 const& positionOffset = jt::Vector2 { 0.0f, 0.0f }) const;
     SDL_Rect getSourceRect() const;
-    void setSDLColor(jt::color const& col) const;
+    void setSDLColor(jt::Color const& col) const;
 };
 
 } // namespace jt
