@@ -60,9 +60,16 @@ public:
         return m_game.lock();
     }
 
-    // kill this game Object (killed/dead game objects will get thrown out of any GameState
-    void kill() { m_alive = false; }
+    // kill this game Object (killed/dead game objects will get thrown out of any GameState)
+    void kill()
+    {
+        m_alive = false;
+        doKill();
+    }
     bool isAlive() const { return m_alive; }
+
+    // will be called, before object is thrown out of the gamestate.
+    void destroy() { doDestroy(); }
 
 protected:
     float m_age { 0.0f };
@@ -75,6 +82,9 @@ private:
     virtual void doUpdate(float const /*elapsed*/) {};
     virtual void doDraw() const {};
     virtual void doCreate() {};
+    virtual void doKill() {};
+    // Do NOT modify the game or the gamestate in this
+    virtual void doDestroy() {};
 };
 
 } // namespace jt

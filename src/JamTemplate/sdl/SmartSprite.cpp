@@ -3,12 +3,14 @@
 #include "SDLHelper.hpp"
 #include "TextureManager.hpp"
 #include "rendertarget.hpp"
+#include <SDL_image.h>
 
 namespace jt {
 
 void SmartSprite::loadSprite(std::string const& fileName)
 {
     m_text = TextureManager::get(fileName);
+    m_fileName = fileName;
     int w { 0 };
     int h { 0 };
     SDL_QueryTexture(m_text.get(), NULL, NULL, &w, &h); // get the width and height of the texture
@@ -20,6 +22,7 @@ void SmartSprite::loadSprite(std::string const& fileName)
 void SmartSprite::loadSprite(std::string const& fileName, jt::recti const& rect)
 {
     m_text = TextureManager::get(fileName);
+    m_fileName = fileName;
     int w { 0 };
     int h { 0 };
     SDL_QueryTexture(m_text.get(), NULL, NULL, &w, &h); // get the width and height of the texture
@@ -39,14 +42,43 @@ const jt::color SmartSprite::getFlashColor() const { return m_colorFlash; }
 
 //  sf::Transform const getTransform() const  { return m_sprite.getTransform(); }
 
-jt::rect const SmartSprite::getGlobalBounds() const { return jt::rect {}; }
-jt::rect const SmartSprite::getLocalBounds() const { return jt::rect {}; }
+jt::rect const SmartSprite::getGlobalBounds() const
+{
+    return jt::rect { 0.0f, 0.0f, static_cast<float>(m_sourceRect.width()),
+        static_cast<float>(m_sourceRect.height()) };
+}
+jt::rect const SmartSprite::getLocalBounds() const
+{
+    return jt::rect { 0.0f, 0.0f, static_cast<float>(m_sourceRect.width()),
+        static_cast<float>(m_sourceRect.height()) };
+}
 
 void SmartSprite::setScale(jt::vector2 const& scale) { m_scale = scale; }
 const jt::vector2 SmartSprite::getScale() const { return m_scale; }
 
 void SmartSprite::setOrigin(jt::vector2 const& origin) { m_origin = origin; }
 jt::vector2 const SmartSprite::getOrigin() const { return m_origin; }
+
+jt::color SmartSprite::getColorAtPixel(jt::vector2u pixelPos) const
+{
+    if (!m_image) {
+        m_image = std::shared_ptr<SDL_Surface>(
+            IMG_Load(m_fileName.c_str()), [](SDL_Surface* s) { SDL_FreeSurface(s); });
+        if (!m_image) {
+            std::cout << "Warning: file could not be loaded for getpixels\n";
+            return jt::color { 0, 0, 0, 255 };
+        }
+    }
+    uint8_t r;
+    uint8_t g;
+    uint8_t b;
+    uint8_t a;
+    SDL_GetRGBA(
+        jt::getPixel(m_image.get(), pixelPos.x(), pixelPos.y()), m_image->format, &r, &g, &b, &a);
+    return jt::color { r, g, b, a };
+}
+
+void SmartSprite::cleanImage() { m_image = nullptr; }
 
 void SmartSprite::doUpdate(float /*elapsed*/) { }
 

@@ -5,6 +5,7 @@
 #include "GameObject.hpp"
 #include <array>
 #include <functional>
+#include <memory>
 
 namespace jt {
 
@@ -13,6 +14,12 @@ class ParticleSystem : public GameObject {
 public:
     using ResetCallbackType = std::function<void(std::shared_ptr<T> particle)>;
     using InitCallbackType = std::function<std::shared_ptr<T>(void)>;
+
+    static std::shared_ptr<ParticleSystem<T, N>> create(
+        InitCallbackType const init, ResetCallbackType const reset)
+    {
+        return std::make_shared<ParticleSystem<T, N>>(init, reset);
+    }
 
     ParticleSystem(InitCallbackType const init, ResetCallbackType const reset)
         : m_resetCallback { reset }

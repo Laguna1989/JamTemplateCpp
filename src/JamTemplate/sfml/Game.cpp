@@ -150,4 +150,24 @@ void Game::resetShake()
     m_shakeStrength = 0;
 }
 
+void Game::PlayMusic(std::string const& fileName)
+{
+    m_music = std::make_shared<sf::Music>();
+    m_music->openFromFile(fileName);
+    m_music->play();
+    m_music->setLoop(true);
+}
+void Game::StopMusic()
+{
+    if (m_music) {
+        m_music->stop();
+    }
+}
+void Game::SetMusicVolume(float v)
+{
+    if (m_music) {
+        m_music->setVolume(v);
+    }
+}
+
 } // namespace jt

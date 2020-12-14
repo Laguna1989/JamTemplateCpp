@@ -53,6 +53,10 @@ public:
     void setShadowColor(jt::color const& col) override;
     void setShadowOffset(jt::vector2 const& v) override;
 
+    float getCurrentAnimSingleFrameTime() const;
+    float getCurrentAnimTotalTime() const;
+    std::size_t getCurrentAnimFrames() const;
+
 private:
     mutable AnimationMapType m_frames;
     std::map<std::string, float> m_time;

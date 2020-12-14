@@ -136,7 +136,7 @@ void InputManager::reset()
 void InputManager::setup()
 {
     if (m_released.empty()) {
-        std::cout << "inputmanager setup\n";
+        // std::cout << "inputmanager setup\n";
         auto const allKeys = jt::getAllKeys();
         for (auto const k : allKeys) {
             m_released[k] = false;

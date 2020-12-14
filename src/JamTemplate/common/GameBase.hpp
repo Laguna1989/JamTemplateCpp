@@ -23,6 +23,8 @@ public:
     // doSwitchState() which will happen at the beginning of the next update loop.
     void switchState(std::shared_ptr<GameState> newState);
 
+    std::shared_ptr<GameState> getCurrentSate();
+
     // cannot be const because getView is not const
     jt::vector2 getCamOffset();
     void setCamOffset(jt::vector2 const& ofs);
@@ -39,6 +41,11 @@ public:
         = 0;
 
     virtual float getZoom() const = 0;
+
+    virtual void PlayMusic(std::string const& fileName) = 0;
+    virtual void StopMusic() = 0;
+    // range: 0.0f to 100.0f
+    virtual void SetMusicVolume(float v) = 0;
 
 protected:
     std::shared_ptr<GameState> m_state { nullptr };

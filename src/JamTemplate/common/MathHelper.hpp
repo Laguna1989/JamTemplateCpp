@@ -36,6 +36,8 @@ void normalizeMe(jt::vector2& v, float lowerbound = 0);
 float rad2deg(float a);
 float deg2rad(float a);
 
+jt::vector2 rotateBy(jt::vector2 const& in, float aInDegree);
+
 template <typename T>
 T clamp(T const& value, T const& min, T const& max)
 {

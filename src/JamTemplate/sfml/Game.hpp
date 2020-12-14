@@ -3,6 +3,7 @@
 
 #include "GameBase.hpp"
 #include "rendertarget.hpp"
+#include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
 #include <chrono>
 #include <memory>
@@ -45,6 +46,11 @@ private:
 
     void setRenderWindow(std::shared_ptr<sf::RenderWindow> w);
     std::shared_ptr<sf::RenderWindow> getRenderWindow();
+
+    std::shared_ptr<sf::Music> m_music;
+    void PlayMusic(std::string const& fileName);
+    void StopMusic();
+    void SetMusicVolume(float v);
 };
 
 } // namespace jt

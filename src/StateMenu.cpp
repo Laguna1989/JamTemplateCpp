@@ -18,8 +18,8 @@ StateMenu::StateMenu() = default;
 
 void StateMenu::doCreate()
 {
-    float w = static_cast<float>(GP::GetWindowSize().x() / getGame()->getZoom());
-    float h = static_cast<float>(GP::GetWindowSize().y() / getGame()->getZoom());
+    float w = static_cast<float>(GP::GetScreenSize().x());
+    float h = static_cast<float>(GP::GetScreenSize().y());
     float wC = w / 2;
 
     m_background = std::make_shared<jt::SmartShape>();
@@ -50,7 +50,7 @@ void StateMenu::doCreate()
     m_text_Credits->loadFont("assets/font.ttf", 10U, getGame()->getRenderTarget());
     m_text_Credits->SetTextAlign(jt::SmartText::TextAlign::LEFT);
     m_text_Credits->setText("Created by @Laguna_999 for #1hgj288\nHalloween2020");
-    m_text_Credits->setPosition({ 10, 265 });
+    m_text_Credits->setPosition({ 10, GP::GetScreenSize().y() - 30 });
     m_text_Credits->setColor(GP::PaletteColor5());
     m_text_Credits->update(0.0f);
     m_text_Credits->setShadow(GP::PaletteFontShadow(), jt::vector2 { 1, 1 });
@@ -61,7 +61,8 @@ void StateMenu::doCreate()
     m_overlay->update(0);
 
     m_vignette = std::make_shared<jt::SmartSprite>();
-    m_vignette->loadSprite("#v#400#300");
+    m_vignette->loadSprite(
+        "#v#" + std::to_string(static_cast<int>(w)) + "#" + std::to_string(static_cast<int>(h)));
     m_vignette->setColor(jt::color { 255, 255, 255, 100 });
     m_vignette->update(0.0f);
 
@@ -132,7 +133,6 @@ void StateMenu::doInternalUpdate(float const elapsed)
         m_test_Explanation->update(elapsed);
         m_text_Credits->update(elapsed);
     }
-    m_text_Credits->setRotation(m_age * 45);
 }
 
 void StateMenu::doInternalDraw() const

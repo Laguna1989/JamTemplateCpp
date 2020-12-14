@@ -105,6 +105,9 @@ public:
         setShadowOffset(offset);
     }
 
+    float getZDist() const { return m_zdist; }
+    void setZDist(float const v) { m_zdist = v; }
+
 protected:
     jt::vector2 getShakeOffset() const { return m_shakeOffset; }
 
@@ -134,6 +137,8 @@ private:
     bool m_shadowActive { false };
     jt::vector2 m_shadowOffset { 0.0f, 0.0f };
     jt::color m_shadowColor { jt::colors::Black };
+
+    float m_zdist { 0.0f };
 
     virtual void doDraw(std::shared_ptr<jt::renderTarget> const sptr) const = 0;
     virtual void doDrawFlash(std::shared_ptr<jt::renderTarget> const sptr) const = 0;

@@ -6,6 +6,7 @@
 #include "rendertarget.hpp"
 #include "vector.hpp"
 #include <SDL.h>
+#include <iostream>
 #include <memory>
 #include <string>
 

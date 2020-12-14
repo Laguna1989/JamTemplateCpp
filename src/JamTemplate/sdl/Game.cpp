@@ -38,6 +38,9 @@ Game::Game(unsigned int width, unsigned int height, float zoom, std::string cons
     }
     SDL_SetRenderDrawBlendMode(m_renderTarget.get(), SDL_BLENDMODE_BLEND);
     TTF_Init();
+    Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 1024);
+    Mix_Init(MIX_INIT_OGG);
+    std::cout << "mix init: " << Mix_GetError() << std::endl;
     TextureManager::setRenderer(m_renderTarget);
 }
 
@@ -95,7 +98,9 @@ void Game::doDraw() const
     // Now render the texture target to our screen
     SDL_RenderClear(getRenderTarget().get());
     SDL_Rect rect { m_srcRect.left(), m_srcRect.top(), m_srcRect.width(), m_srcRect.height() };
-    SDL_RenderCopyEx(getRenderTarget().get(), t, &rect, NULL, 0, NULL, SDL_FLIP_NONE);
+    SDL_Rect targetRect { static_cast<int>(m_shakeOffset.x()), static_cast<int>(m_shakeOffset.y()),
+        m_srcRect.width(), m_srcRect.height() };
+    SDL_RenderCopyEx(getRenderTarget().get(), t, &rect, &targetRect, 0, NULL, SDL_FLIP_NONE);
     SDL_RenderPresent(getRenderTarget().get());
 
     SDL_DestroyTexture(t);
@@ -136,5 +141,22 @@ void Game::resetShake()
     m_shakeTimer = -1;
     m_shakeStrength = 0;
 }
+
+void Game::PlayMusic(std::string const& fileName)
+{
+    m_music = std::shared_ptr<Mix_Music>(
+        Mix_LoadMUS(fileName.c_str()), [](Mix_Music* m) { Mix_FreeMusic(m); });
+    if (!m_music) {
+        std::cout << "load audio failed\n" << Mix_GetError();
+    }
+    auto const result = Mix_PlayMusic(m_music.get(), -1);
+    if (result == -1) {
+        std::cout << "play music failed\n" << Mix_GetError();
+    }
+}
+
+void Game::StopMusic() { m_music = nullptr; }
+
+void Game::SetMusicVolume(float v) { }
 
 } // namespace jt

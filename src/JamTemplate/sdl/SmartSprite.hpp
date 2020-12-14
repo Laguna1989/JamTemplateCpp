@@ -38,6 +38,12 @@ public:
     virtual void setOrigin(jt::vector2 const& origin) override;
     virtual jt::vector2 const getOrigin() const override;
 
+    // WARNING: This function is slow, because it needs to copy
+    // graphics memory to ram first.
+    jt::color getColorAtPixel(jt::vector2u pixelPos) const;
+    // clean up stored image
+    void cleanImage();
+
 private:
     mutable std::shared_ptr<SDL_Texture> m_text;
 
@@ -49,6 +55,9 @@ private:
 
     mutable std::shared_ptr<SDL_Texture> m_textFlash;
     jt::color m_colorFlash { jt::colors::White };
+    std::string m_fileName { "" };
+
+    mutable std::shared_ptr<SDL_Surface> m_image { nullptr };
 
     void doUpdate(float /*elapsed*/) override;
 

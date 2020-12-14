@@ -4,6 +4,7 @@
 #include "GameBase.hpp"
 #include "rect.hpp"
 #include "rendertarget.hpp"
+#include <SDL2/SDL_mixer.h>
 #include <chrono>
 #include <memory>
 #include <string>
@@ -43,6 +44,11 @@ private:
 
     void updateShake(float elapsed) override;
     void resetShake() override;
+
+    std::shared_ptr<Mix_Music> m_music;
+    void PlayMusic(std::string const& fileName) override;
+    void StopMusic() override;
+    void SetMusicVolume(float v) override;
 };
 
 } // namespace jt

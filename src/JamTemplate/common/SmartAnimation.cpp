@@ -221,5 +221,13 @@ void SmartAnimation::doRotate(float rot)
         }
     }
 }
-
+float SmartAnimation::getCurrentAnimSingleFrameTime() const { return m_time.at(m_currentAnimName); }
+float SmartAnimation::getCurrentAnimTotalTime() const
+{
+    return getCurrentAnimSingleFrameTime() * getCurrentAnimFrames();
+}
+std::size_t SmartAnimation::getCurrentAnimFrames() const
+{
+    return m_frames.at(m_currentAnimName).size();
+}
 } // namespace jt

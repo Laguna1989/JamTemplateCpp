@@ -3,6 +3,7 @@
 
 #include "SmartDrawable.hpp"
 #include "TextureManager.hpp"
+#include "color.hpp"
 #include "rendertarget.hpp"
 #include <SFML/Graphics.hpp>
 #include <memory>
@@ -58,9 +59,30 @@ public:
 
     virtual jt::vector2 const getOrigin() const { return m_sprite.getOrigin(); }
 
+    // WARNING: This function is slow, because it needs to copy
+    // graphics memory to ram first.
+    jt::color getColorAtPixel(jt::vector2u pixelPos) const
+    {
+        // optimization to avoid unneccesary copies
+        if (!m_imageStored) {
+            m_imageStored = true;
+            m_image = m_sprite.getTexture()->copyToImage();
+        }
+        return jt::color { m_image.getPixel(pixelPos.x(), pixelPos.y()) };
+    }
+
+    void cleanImage()
+    {
+        m_imageStored = false;
+        m_image = sf::Image {};
+    }
+
 private:
     mutable sf::Sprite m_sprite;
     sf::Sprite m_flashSprite;
+    // optimization for getColorAtPixel
+    mutable sf::Image m_image;
+    mutable bool m_imageStored { false };
 
     jt::vector2 m_position { 0, 0 };
 

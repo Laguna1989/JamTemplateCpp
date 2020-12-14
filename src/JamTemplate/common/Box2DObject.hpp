@@ -17,6 +17,7 @@ public:
     Box2DObject(std::shared_ptr<b2World> world, const b2BodyDef* def)
     {
         setB2Body(world->CreateBody(def));
+        m_world = world;
     }
 
     jt::vector2 getPosition() const { return Conversion::vec(m_body->GetPosition()); }
@@ -25,6 +26,8 @@ public:
     {
         m_body->SetTransform(Conversion::vec(p), m_body->GetAngle());
     }
+    jt::vector2 getVelocity() const { return Conversion::vec(m_body->GetLinearVelocity()); }
+    void setVelocity(jt::vector2 const v) { m_body->SetLinearVelocity(Conversion::vec(v)); }
 
     float getRotation() const { return m_body->GetAngle(); }
 
@@ -35,9 +38,20 @@ private:
     // do never call delete on this
     b2Body* m_body { nullptr };
 
+    std::weak_ptr<b2World> m_world;
+
     void doUpdate(float const /*elapsed*/) override {};
     void doDraw() const override {};
     void doCreate() override {};
+
+    void doDestroy() override
+    {
+        if (m_world.expired()) {
+            return;
+        }
+        auto w = m_world.lock();
+        w->DestroyBody(m_body);
+    }
 
     void setB2Body(b2Body* body) { m_body = body; }
 };
