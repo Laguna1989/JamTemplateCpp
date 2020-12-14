@@ -49,12 +49,12 @@ private:
 
     jt::Vector2 m_position { 0, 0 };
     jt::recti m_sourceRect { 0, 0, 0, 0 };
-    jt::Color m_color { jt::Colors::White };
+    jt::Color m_color { jt::colors::White };
     jt::Vector2 m_scale { 1.0f, 1.0f };
     jt::Vector2 m_origin { 0.0f, 0.0f };
 
     mutable std::shared_ptr<SDL_Texture> m_textFlash;
-    jt::Color m_colorFlash { jt::Colors::White };
+    jt::Color m_colorFlash { jt::colors::White };
     std::string m_fileName { "" };
 
     mutable std::shared_ptr<SDL_Surface> m_image { nullptr };

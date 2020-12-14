@@ -6,31 +6,31 @@
 
 namespace jt {
 
-class vector2 final : public vector2Base {
+class Vector2 final : public Vector2Base {
 public:
-    vector2()
+    Vector2()
         : m_x { 0 }
         , m_y { 0 }
     {
     }
-    vector2(float x, float y)
+    Vector2(float x, float y)
         : m_x { x }
         , m_y { y }
     {
     }
 
-    vector2(SDL_Point const& v)
+    Vector2(SDL_Point const& v)
         : m_x { static_cast<float>(v.x) }
         , m_y { static_cast<float>(v.y) }
     {
     }
 
-    ~vector2() = default;
-    vector2(jt::Vector2 const&) = default;
-    vector2(jt::Vector2&&) = default;
+    ~Vector2() = default;
+    Vector2(jt::Vector2 const&) = default;
+    Vector2(jt::Vector2&&) = default;
 
-    vector2& operator=(jt::Vector2 const&) = default;
-    vector2& operator=(jt::Vector2&&) = default;
+    Vector2& operator=(jt::Vector2 const&) = default;
+    Vector2& operator=(jt::Vector2&&) = default;
 
     operator SDL_Point() const
     {
@@ -48,28 +48,28 @@ private:
     float m_y;
 };
 
-class vector2u final : public vector2uBase {
+class Vector2u final : public Vector2uBase {
 public:
-    vector2u()
+    Vector2u()
         : m_x { 0U }
         , m_y { 0U }
     {
     }
-    vector2u(unsigned int x, unsigned int y)
+    Vector2u(unsigned int x, unsigned int y)
         : m_x { x }
         , m_y { y }
     {
     }
 
-    vector2u(SDL_Point const& v)
+    Vector2u(SDL_Point const& v)
         : m_x { static_cast<unsigned int>(v.x) }
         , m_y { static_cast<unsigned int>(v.y) }
     {
     }
 
-    ~vector2u() = default;
-    vector2u(jt::Vector2u const&) = default;
-    vector2u(jt::Vector2u&&) = default;
+    ~Vector2u() = default;
+    Vector2u(jt::Vector2u const&) = default;
+    Vector2u(jt::Vector2u&&) = default;
 
     jt::Vector2u& operator=(jt::Vector2u const&) = default;
     jt::Vector2u& operator=(jt::Vector2u&&) = default;

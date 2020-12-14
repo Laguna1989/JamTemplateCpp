@@ -60,8 +60,8 @@ private:
     TextAlign m_textAlign { TextAlign::CENTER };
 
     jt::Vector2 m_position { 0, 0 };
-    jt::Color m_color { jt::Colors::White };
-    jt::Color m_flashColor { jt::Colors::White };
+    jt::Color m_color { jt::colors::White };
+    jt::Color m_flashColor { jt::colors::White };
     jt::Vector2 m_origin { 0.0f, 0.0f };
     jt::Vector2 m_scale { 1.0f, 1.0f };
 

@@ -40,10 +40,10 @@ private:
 
     jt::Vector2 m_position { 0, 0 };
     jt::recti m_sourceRect { 0, 0, 0, 0 };
-    jt::Color m_color { jt::Colors::White };
+    jt::Color m_color { jt::colors::White };
     jt::Vector2 m_scale { 1.0f, 1.0f };
     jt::Vector2 m_origin { 0.0f, 0.0f };
-    jt::Color m_colorFlash { jt::Colors::White };
+    jt::Color m_colorFlash { jt::colors::White };
 
     void doDraw(std::shared_ptr<jt::renderTarget> const sptr) const override;
 
