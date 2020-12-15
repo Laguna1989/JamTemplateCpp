@@ -32,7 +32,7 @@ SmartTilemap::SmartTilemap(std::filesystem::path const& path)
     for (int j = 0; j != rows; ++j) {
         for (int i = 0; i != columns; ++i) {
             m_tileSprites.emplace_back(std::make_unique<sf::Sprite>(
-                TextureManager::get(tilesetName), jt::recti(i * ts.x, j * ts.y, ts.x, ts.y)));
+                TextureManager::get(tilesetName), jt::Recti(i * ts.x, j * ts.y, ts.x, ts.y)));
         }
     }
     for (auto& layer : m_map->getLayers()) {
@@ -131,8 +131,8 @@ void SmartTilemap::setPosition(jt::Vector2 const& pos) { m_position = pos; }
 const jt::Vector2 SmartTilemap::getPosition() const { return m_position; }
 
 // sf::Transform const SmartTilemap::getTransform() const { return sf::Transform {}; }
-jt::rect const SmartTilemap::getGlobalBounds() const { return jt::rect {}; }
-jt::rect const SmartTilemap::getLocalBounds() const { return jt::rect {}; }
+jt::Rect const SmartTilemap::getGlobalBounds() const { return jt::Rect {}; }
+jt::Rect const SmartTilemap::getLocalBounds() const { return jt::Rect {}; }
 
 void SmartTilemap::setFlashColor(jt::Color const& /*col*/)
 {

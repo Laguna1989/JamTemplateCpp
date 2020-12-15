@@ -21,7 +21,7 @@ public:
         m_flashSprite = sf::Sprite { TextureManager::get(TextureManager::getFlashName(fileName)) };
     }
 
-    void loadSprite(std::string const& fileName, jt::recti const& rect)
+    void loadSprite(std::string const& fileName, jt::Recti const& rect)
     {
         m_sprite = sf::Sprite { TextureManager::get(fileName), rect };
         m_flashSprite
@@ -40,8 +40,8 @@ public:
 
     // virtual sf::Transform const getTransform() const override { return m_sprite.getTransform(); }
 
-    virtual jt::rect const getGlobalBounds() const override { return m_sprite.getGlobalBounds(); }
-    virtual jt::rect const getLocalBounds() const override { return m_sprite.getLocalBounds(); }
+    virtual jt::Rect const getGlobalBounds() const override { return m_sprite.getGlobalBounds(); }
+    virtual jt::Rect const getLocalBounds() const override { return m_sprite.getLocalBounds(); }
 
     virtual void setScale(jt::Vector2 const& scale)
     {

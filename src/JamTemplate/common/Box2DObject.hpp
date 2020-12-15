@@ -40,9 +40,9 @@ private:
 
     std::weak_ptr<b2World> m_world;
 
-    void doUpdate(float const /*elapsed*/) override {};
-    void doDraw() const override {};
-    void doCreate() override {};
+    void doUpdate(float const /*elapsed*/) override { }
+    void doDraw() const override { }
+    void doCreate() override { }
 
     void doDestroy() override
     {

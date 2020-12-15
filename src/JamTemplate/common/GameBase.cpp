@@ -14,7 +14,6 @@ GameBase::GameBase()
 
 void GameBase::switchState(std::shared_ptr<GameState> newState)
 {
-    // std::cout << "switchstate\n";
     if (newState == nullptr) {
         throw std::invalid_argument { "cannot switch to nullptr state!" };
     }

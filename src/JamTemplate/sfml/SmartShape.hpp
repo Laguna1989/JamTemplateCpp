@@ -28,8 +28,8 @@ public:
     const jt::Vector2 getPosition() const override { return m_position; }
 
     // sf::Transform const getTransform() const override { return m_shape->getTransform(); }
-    jt::rect const getGlobalBounds() const override { return m_shape->getGlobalBounds(); }
-    jt::rect const getLocalBounds() const override { return m_shape->getLocalBounds(); }
+    jt::Rect const getGlobalBounds() const override { return m_shape->getGlobalBounds(); }
+    jt::Rect const getLocalBounds() const override { return m_shape->getLocalBounds(); }
 
     std::shared_ptr<sf::Shape> getShape() { return m_shape; }
 

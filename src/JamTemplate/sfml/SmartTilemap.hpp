@@ -35,8 +35,8 @@ public:
     const jt::Vector2 getPosition() const;
 
     // sf::Transform const getTransform() const;
-    jt::rect const getGlobalBounds() const;
-    jt::rect const getLocalBounds() const;
+    jt::Rect const getGlobalBounds() const;
+    jt::Rect const getLocalBounds() const;
 
     void setFlashColor(jt::Color const& col);
     const jt::Color getFlashColor() const;

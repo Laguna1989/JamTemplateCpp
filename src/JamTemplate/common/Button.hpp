@@ -93,20 +93,16 @@ private:
             m_icon->update(elapsed);
         }
 
-        // std::cout << InputManager::getMousePositionScreen().x << " " <<
-        // InputManager::getMousePositionScreen().y << " " << m_background.getPosition().x << " " <<
-        // m_background.getPosition().y << "\n";
-        if (isOver(InputManager::getMousePositionScreen().x(),
-                InputManager::getMousePositionScreen().y())) {
-            if (InputManager::pressed(sf::Mouse::Button::Left)) {
+        if (isOver(jt::InputManager::getMousePositionScreen().x(),
+                jt::InputManager::getMousePositionScreen().y())) {
+            if (jt::InputManager::pressed(jt::MouseButtonCode::MBLeft)) {
                 m_background->play("down");
             } else {
                 m_background->play("over");
             }
 
-            if (InputManager::justReleased(sf::Mouse::Button::Left)) {
+            if (jt::InputManager::justReleased(jt::MouseButtonCode::MBLeft)) {
                 if (m_visible) {
-                    // std::cout << "released" << std::endl;
                     for (auto& cb : m_callbacks) {
                         std::cout << "callback\n";
                         cb();

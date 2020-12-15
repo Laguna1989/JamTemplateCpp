@@ -37,8 +37,8 @@ public:
 
     // sf::Transform const getTransform() const;
 
-    jt::rect const getGlobalBounds() const override;
-    virtual jt::rect const getLocalBounds() const override;
+    jt::Rect const getGlobalBounds() const override;
+    virtual jt::Rect const getLocalBounds() const override;
 
     void setFlashColor(jt::Color const& col) override;
     jt::Color const getFlashColor() const override;

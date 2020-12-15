@@ -2,18 +2,18 @@
 
 namespace jt {
 
-bool operator==(jt::rect const& a, jt::rect const& b)
+bool operator==(jt::Rect const& a, jt::Rect const& b)
 {
     return (a.left() == b.left() && a.top() == b.top() && a.width() == b.width()
         && a.height() == b.height());
 }
-bool operator!=(jt::rect const& a, jt::rect const& b) { return !(a == b); }
+bool operator!=(jt::Rect const& a, jt::Rect const& b) { return !(a == b); }
 
-bool operator==(jt::recti const& a, jt::recti const& b)
+bool operator==(jt::Recti const& a, jt::Recti const& b)
 {
     return (a.left() == b.left() && a.top() == b.top() && a.width() == b.width()
         && a.height() == b.height());
 }
-bool operator!=(jt::recti const& a, jt::recti const& b) { return !(a == b); }
+bool operator!=(jt::Recti const& a, jt::Recti const& b) { return !(a == b); }
 
 } // namespace jt

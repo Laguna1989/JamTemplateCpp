@@ -14,19 +14,19 @@ void SmartSprite::loadSprite(std::string const& fileName)
     int w { 0 };
     int h { 0 };
     SDL_QueryTexture(m_text.get(), NULL, NULL, &w, &h); // get the width and height of the texture
-    m_sourceRect = jt::recti { 0, 0, w, h };
+    m_sourceRect = jt::Recti { 0, 0, w, h };
 
     m_textFlash = TextureManager::get(TextureManager::getFlashName(fileName));
 }
 
-void SmartSprite::loadSprite(std::string const& fileName, jt::recti const& rect)
+void SmartSprite::loadSprite(std::string const& fileName, jt::Recti const& rect)
 {
     m_text = TextureManager::get(fileName);
     m_fileName = fileName;
     int w { 0 };
     int h { 0 };
     SDL_QueryTexture(m_text.get(), NULL, NULL, &w, &h); // get the width and height of the texture
-    m_sourceRect = jt::recti { rect };
+    m_sourceRect = jt::Recti { rect };
 
     m_textFlash = TextureManager::get(TextureManager::getFlashName(fileName));
 }
@@ -42,14 +42,14 @@ const jt::Color SmartSprite::getFlashColor() const { return m_colorFlash; }
 
 //  sf::Transform const getTransform() const  { return m_sprite.getTransform(); }
 
-jt::rect const SmartSprite::getGlobalBounds() const
+jt::Rect const SmartSprite::getGlobalBounds() const
 {
-    return jt::rect { 0.0f, 0.0f, static_cast<float>(m_sourceRect.width()),
+    return jt::Rect { 0.0f, 0.0f, static_cast<float>(m_sourceRect.width()),
         static_cast<float>(m_sourceRect.height()) };
 }
-jt::rect const SmartSprite::getLocalBounds() const
+jt::Rect const SmartSprite::getLocalBounds() const
 {
-    return jt::rect { 0.0f, 0.0f, static_cast<float>(m_sourceRect.width()),
+    return jt::Rect { 0.0f, 0.0f, static_cast<float>(m_sourceRect.width()),
         static_cast<float>(m_sourceRect.height()) };
 }
 

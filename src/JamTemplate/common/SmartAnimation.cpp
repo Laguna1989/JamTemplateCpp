@@ -41,7 +41,7 @@ void SmartAnimation::add(std::string const& fileName, std::string const& animNam
     m_time[animName] = frameTime;
 
     for (auto const idx : frameIndices) {
-        jt::recti const rect { static_cast<int>(idx * size.x()), 0, static_cast<int>(size.x()),
+        jt::Recti const rect { static_cast<int>(idx * size.x()), 0, static_cast<int>(size.x()),
             static_cast<int>(size.y()) };
         SmartSprite::Sptr sptr = std::make_shared<SmartSprite>();
         sptr->loadSprite(fileName, rect);
@@ -86,11 +86,11 @@ jt::Vector2 const SmartAnimation::getPosition() const { return m_position; }
 //    return trans;
 //}
 
-jt::rect const SmartAnimation::getGlobalBounds() const
+jt::Rect const SmartAnimation::getGlobalBounds() const
 {
     return getCurrentSprite(m_frames, m_currentAnimName, m_currentIdx)->getGlobalBounds();
 }
-jt::rect const SmartAnimation::getLocalBounds() const
+jt::Rect const SmartAnimation::getLocalBounds() const
 {
     return getCurrentSprite(m_frames, m_currentAnimName, m_currentIdx)->getLocalBounds();
 }

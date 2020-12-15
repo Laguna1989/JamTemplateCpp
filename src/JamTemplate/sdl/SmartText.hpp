@@ -39,8 +39,8 @@ public:
 
     // virtual sf::Transform const getTransform() const override { return m_text->getTransform(); }
 
-    jt::rect const getGlobalBounds() const override;
-    jt::rect const getLocalBounds() const override;
+    jt::Rect const getGlobalBounds() const override;
+    jt::Rect const getLocalBounds() const override;
 
     virtual void setScale(jt::Vector2 const& scale) override;
 

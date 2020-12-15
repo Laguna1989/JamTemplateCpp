@@ -26,8 +26,8 @@ public:
 
     // sf::Transform const getTransform() const override { return m_shape->getTransform(); }
 
-    jt::rect const getGlobalBounds() const override;
-    jt::rect const getLocalBounds() const override;
+    jt::Rect const getGlobalBounds() const override;
+    jt::Rect const getLocalBounds() const override;
 
     void setScale(jt::Vector2 const& scale) override;
     const jt::Vector2 getScale() const override;
@@ -39,7 +39,7 @@ private:
     mutable std::shared_ptr<SDL_Texture> m_text;
 
     jt::Vector2 m_position { 0, 0 };
-    jt::recti m_sourceRect { 0, 0, 0, 0 };
+    jt::Recti m_sourceRect { 0, 0, 0, 0 };
     jt::Color m_color { jt::colors::White };
     jt::Vector2 m_scale { 1.0f, 1.0f };
     jt::Vector2 m_origin { 0.0f, 0.0f };

@@ -20,7 +20,7 @@ Game::Game(unsigned int width, unsigned int height, float zoom, std::string cons
 
     unsigned int scaledWidth = static_cast<unsigned int>(width / zoom);
     unsigned int scaledHeight = static_cast<unsigned int>(height / zoom);
-    m_srcRect = jt::recti(0, 0, scaledWidth, scaledHeight);
+    m_srcRect = jt::Recti(0, 0, scaledWidth, scaledHeight);
 
     m_window = std::shared_ptr<SDL_Window>(SDL_CreateWindow(title.c_str(), SDL_WINDOWPOS_CENTERED,
                                                SDL_WINDOWPOS_CENTERED, width, height, 0),
@@ -38,10 +38,12 @@ Game::Game(unsigned int width, unsigned int height, float zoom, std::string cons
     }
     SDL_SetRenderDrawBlendMode(m_renderTarget.get(), SDL_BLENDMODE_BLEND);
     TTF_Init();
+    TextureManager::setRenderer(m_renderTarget);
+
+    // important fix for SDL_Mixer: OpenAudio has to be called before Mix_Init,
+    // otherwise ogg is not supported.
     Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 1024);
     Mix_Init(MIX_INIT_OGG);
-    std::cout << "mix init: " << Mix_GetError() << std::endl;
-    TextureManager::setRenderer(m_renderTarget);
 }
 
 void Game::runGame(std::shared_ptr<GameState> InitialState, GameLoopFunctionPtr gameloop_function)
@@ -57,6 +59,7 @@ void Game::setRenderTarget(std::shared_ptr<jt::renderTarget> rt)
     }
     m_renderTarget = rt;
 }
+
 std::shared_ptr<jt::renderTarget> Game::getRenderTarget() const { return m_renderTarget; }
 
 float Game::getZoom() const { return m_zoom; }
@@ -65,19 +68,7 @@ void Game::doUpdate(float const elapsed)
 {
     jt::InputManager::update(0.0f, 0.0f, 0.0f, 0.0f, elapsed);
     m_state->update(elapsed);
-    // TODO
-    // jt::Vector2 mpf = getRenderWindow()->mapPixelToCoords(
-    //     sf::Mouse::getPosition(*getRenderWindow()), *getView());
-    // jt::Vector2 mpfs
-    //     = getRenderWindow()->mapPixelToCoords(sf::Mouse::getPosition(*getRenderWindow())) /
-    //     m_zoom;
-
-    // int const camOffsetix { static_cast<int>(m_CamOffset.x() + getView()->getSize().x / 2) };
-    // int const camOffsetiy { static_cast<int>(m_CamOffset.y() + getView()->getSize().y / 2) };
-
-    // getView()->setCenter(
-    //     jt::Vector2 { static_cast<float>(camOffsetix), static_cast<float>(camOffsetiy) });
-    // SmartDrawable::setCamOffset(getView()->getCenter() - getView()->getSize() * 0.5f);
+    // TODO move camera
 };
 
 void Game::doDraw() const
@@ -108,11 +99,6 @@ void Game::doDraw() const
 
 void Game::updateShake(float elapsed)
 {
-    if (m_shakeOffset.x() != 0 || m_shakeOffset.y() != 0) {
-        // TODO
-        // getView()->move(-m_shakeOffset.x(), -m_shakeOffset.y());
-    }
-
     if (m_shakeTimer > 0) {
 
         m_shakeTimer -= elapsed;
@@ -125,18 +111,10 @@ void Game::updateShake(float elapsed)
     } else {
         m_shakeOffset.x() = m_shakeOffset.y() = 0;
     }
-    // TODO
-    // auto v = getView();
-    // v->move(m_shakeOffset.x(), m_shakeOffset.y());
-    // setView(v);
 }
 
 void Game::resetShake()
 {
-    if (m_shakeOffset.x() != 0 || m_shakeOffset.y() != 0) {
-        // TODO
-        // getView()->move(-m_shakeOffset.x(), -m_shakeOffset.y());
-    }
     m_shakeOffset.x() = m_shakeOffset.y() = 0;
     m_shakeTimer = -1;
     m_shakeStrength = 0;

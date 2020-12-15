@@ -230,7 +230,7 @@ private:
     template <class U>
     static jt::Vector2 GetSpriteCenter(std::shared_ptr<U> obj)
     {
-        jt::rect AABB = obj->getGlobalBounds();
+        jt::Rect AABB = obj->getGlobalBounds();
         return jt::Vector2(AABB.left + AABB.width / 2.f, AABB.top + AABB.height / 2.f);
     }
 };

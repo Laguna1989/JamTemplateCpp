@@ -16,7 +16,7 @@ public:
     using Sptr = std::shared_ptr<SmartSprite>;
 
     void loadSprite(std::string const& fileName);
-    void loadSprite(std::string const& fileName, jt::recti const& rect);
+    void loadSprite(std::string const& fileName, jt::Recti const& rect);
 
     void setPosition(jt::Vector2 const& pos) override;
     const jt::Vector2 getPosition() const override;
@@ -29,8 +29,8 @@ public:
 
     // virtual sf::Transform const getTransform() const override { return m_sprite.getTransform(); }
 
-    virtual jt::rect const getGlobalBounds() const override;
-    virtual jt::rect const getLocalBounds() const override;
+    virtual jt::Rect const getGlobalBounds() const override;
+    virtual jt::Rect const getLocalBounds() const override;
 
     virtual void setScale(jt::Vector2 const& scale) override;
     virtual const jt::Vector2 getScale() const override;
@@ -48,7 +48,7 @@ private:
     mutable std::shared_ptr<SDL_Texture> m_text;
 
     jt::Vector2 m_position { 0, 0 };
-    jt::recti m_sourceRect { 0, 0, 0, 0 };
+    jt::Recti m_sourceRect { 0, 0, 0, 0 };
     jt::Color m_color { jt::colors::White };
     jt::Vector2 m_scale { 1.0f, 1.0f };
     jt::Vector2 m_origin { 0.0f, 0.0f };

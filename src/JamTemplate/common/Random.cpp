@@ -31,17 +31,16 @@ bool Random::getChance(float c) { return (getFloat(0.0f, 1.0f) <= c); }
 
 jt::Color const Random::getRandomColor()
 {
-    std::uint8_t r = static_cast<std::uint8_t>(getInt(0, 255));
-    std::uint8_t g = static_cast<std::uint8_t>(getInt(0, 255));
-    std::uint8_t b = static_cast<std::uint8_t>(getInt(0, 255));
+    std::uint8_t const r = static_cast<std::uint8_t>(getInt(0, 255));
+    std::uint8_t const g = static_cast<std::uint8_t>(getInt(0, 255));
+    std::uint8_t const b = static_cast<std::uint8_t>(getInt(0, 255));
     return jt::Color { r, g, b };
 }
 
-jt::Vector2 const Random::getRandomPointin(jt::rect r)
+jt::Vector2 const Random::getRandomPointin(jt::Rect r)
 {
-    auto x = getFloat(r.left(), r.left() + r.width());
-    auto y = getFloat(r.top(), r.top() + r.height());
-
+    auto const x = getFloat(r.left(), r.left() + r.width());
+    auto const y = getFloat(r.top(), r.top() + r.height());
     return jt::Vector2 { x, y };
 }
 

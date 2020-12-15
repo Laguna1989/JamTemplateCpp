@@ -23,8 +23,8 @@ Game::Game(unsigned int w, unsigned int h, float zoom, std::string const& title)
     m_renderTarget->create(scaledWidth, scaledHeight);
     m_renderTarget->setSmooth(false);
 
-    m_view = std::make_shared<sf::View>(jt::rect(0, 0, (float)scaledWidth, (float)scaledHeight));
-    m_view->setViewport(jt::rect(0, 0, 1, 1));
+    m_view = std::make_shared<sf::View>(jt::Rect(0, 0, (float)scaledWidth, (float)scaledHeight));
+    m_view->setViewport(jt::Rect(0, 0, 1, 1));
 }
 
 float Game::getZoom() const { return m_zoom; }

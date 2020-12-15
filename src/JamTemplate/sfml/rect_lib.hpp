@@ -6,28 +6,28 @@
 
 namespace jt {
 
-class rect final : public rectBase {
+class Rect final : public rectBase {
 public:
-    rect()
+    Rect()
         : m_rect { 0.0f, 0.0f, 0.0f, 0.0f }
     {
     }
-    rect(float left, float top, float width, float height)
+    Rect(float left, float top, float width, float height)
         : m_rect { left, top, width, height }
     {
     }
 
-    rect(sf::FloatRect const& v)
+    Rect(sf::FloatRect const& v)
         : m_rect { v }
     {
     }
 
-    ~rect() = default;
-    rect(jt::rect const&) = default;
-    rect(jt::rect&&) = default;
+    ~Rect() = default;
+    Rect(jt::Rect const&) = default;
+    Rect(jt::Rect&&) = default;
 
-    rect& operator=(jt::rect const&) = default;
-    rect& operator=(jt::rect&&) = default;
+    Rect& operator=(jt::Rect const&) = default;
+    Rect& operator=(jt::Rect&&) = default;
 
     operator sf::FloatRect() const { return m_rect; }
 
@@ -43,28 +43,28 @@ public:
     float& height() override { return m_rect.height; };
 };
 
-class recti final : public rectiBase {
+class Recti final : public rectiBase {
 public:
-    recti()
-        : recti { 0, 0, 0, 0 }
+    Recti()
+        : Recti { 0, 0, 0, 0 }
     {
     }
-    recti(int left, int top, int width, int height)
+    Recti(int left, int top, int width, int height)
         : m_rect { left, top, width, height }
     {
     }
 
-    recti(sf::IntRect const& v)
+    Recti(sf::IntRect const& v)
         : m_rect { v }
     {
     }
 
-    ~recti() = default;
-    recti(jt::recti const&) = default;
-    recti(jt::recti&&) = default;
+    ~Recti() = default;
+    Recti(jt::Recti const&) = default;
+    Recti(jt::Recti&&) = default;
 
-    recti& operator=(jt::recti const&) = default;
-    recti& operator=(jt::recti&&) = default;
+    Recti& operator=(jt::Recti const&) = default;
+    Recti& operator=(jt::Recti&&) = default;
 
     operator sf::IntRect() const { return m_rect; }
 

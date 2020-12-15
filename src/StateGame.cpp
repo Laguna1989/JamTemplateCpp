@@ -61,6 +61,6 @@ void StateGame::doInternalDraw() const
 void StateGame::doCreateInternal()
 {
     m_sprite = std::make_shared<jt::SmartSprite>();
-    m_sprite->loadSprite("assets/coin.png", jt::recti { 0, 0, 16, 16 });
+    m_sprite->loadSprite("assets/coin.png", jt::Recti { 0, 0, 16, 16 });
     m_sprite->setPosition(jt::Vector2 { 100, 100 });
 }

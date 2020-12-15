@@ -11,9 +11,6 @@
 
 namespace jt {
 
-//
-// Game class to be implemented by sfml/sdl
-//
 class Game final : public jt::GameBase {
 public:
     using Sptr = std::shared_ptr<Game>;
@@ -35,7 +32,7 @@ private:
     std::shared_ptr<SDL_Window> m_window;
     float m_zoom;
 
-    jt::recti m_srcRect;
+    jt::Recti m_srcRect;
     jt::Vector2 m_fullsize;
 
     // override functions from GameBase

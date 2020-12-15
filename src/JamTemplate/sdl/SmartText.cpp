@@ -53,14 +53,14 @@ const jt::Color SmartText::getFlashColor() const { return m_flashColor; }
 
 // sf::Transform const getTransform() const  { return m_text->getTransform(); }
 
-jt::rect const SmartText::getGlobalBounds() const
+jt::Rect const SmartText::getGlobalBounds() const
 {
-    return jt::rect { m_position.x(), m_position.y(), m_textTextureSizeX * m_scale.x(),
+    return jt::Rect { m_position.x(), m_position.y(), m_textTextureSizeX * m_scale.x(),
         m_textTextureSizeY * m_scale.y() };
 }
-jt::rect const SmartText::getLocalBounds() const
+jt::Rect const SmartText::getLocalBounds() const
 {
-    return jt::rect { 0, 0, m_textTextureSizeX * m_scale.x(), m_textTextureSizeY * m_scale.y() };
+    return jt::Rect { 0, 0, m_textTextureSizeX * m_scale.x(), m_textTextureSizeY * m_scale.y() };
 }
 
 void SmartText::setScale(jt::Vector2 const& scale) { m_scale = scale; }

@@ -20,7 +20,7 @@ public:
     static bool getChance(float c = 0.5f);
 
     static jt::Color const getRandomColor();
-    static const jt::Vector2 getRandomPointin(jt::rect rect);
+    static const jt::Vector2 getRandomPointin(jt::Rect rect);
 
     static void setSeed(unsigned int s);
     static void useTimeAsRandomSeed();
