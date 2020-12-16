@@ -86,11 +86,11 @@ void SmartText::doUpdate(float /*elapsed*/)
 void SmartText::doDrawShadow(std::shared_ptr<jt::renderTarget> const sptr) const
 {
     auto const destRect = getDestRect(getShadowOffset());
-    SDL_Point p { static_cast<int>(m_origin.x()), static_cast<int>(m_origin.y()) };
+    SDL_Point const p { static_cast<int>(m_origin.x()), static_cast<int>(m_origin.y()) };
 
     auto const flip = jt::getFlipFromScale(m_scale);
     auto col = getShadowColor();
-    col.a() = m_color.a();
+    col.a() = std::min(col.a(), m_color.a());
     setSDLColor(col);
     SDL_RenderCopyEx(sptr.get(), m_textTexture.get(), nullptr, &destRect, -getRotation(), &p, flip);
     // std::cout << "error message: " << SDL_GetError() << std::endl;
@@ -99,7 +99,7 @@ void SmartText::doDrawShadow(std::shared_ptr<jt::renderTarget> const sptr) const
 void SmartText::doDraw(std::shared_ptr<jt::renderTarget> const sptr) const
 {
     auto const destRect = getDestRect();
-    SDL_Point p { static_cast<int>(m_origin.x()), static_cast<int>(m_origin.y()) };
+    SDL_Point const p { static_cast<int>(m_origin.x()), static_cast<int>(m_origin.y()) };
 
     auto const flip = jt::getFlipFromScale(m_scale);
     setSDLColor(getColor());
@@ -110,7 +110,7 @@ void SmartText::doDraw(std::shared_ptr<jt::renderTarget> const sptr) const
 void SmartText::doDrawFlash(std::shared_ptr<jt::renderTarget> const sptr) const
 {
     auto const destRect = getDestRect();
-    SDL_Point p { static_cast<int>(m_origin.x()), static_cast<int>(m_origin.y()) };
+    SDL_Point const p { static_cast<int>(m_origin.x()), static_cast<int>(m_origin.y()) };
 
     auto const flip = jt::getFlipFromScale(m_scale);
     setSDLColor(getFlashColor());
@@ -127,7 +127,7 @@ void SmartText::renderOneLineOfText(std::shared_ptr<jt::renderTarget> const sptr
     std::size_t i, std::size_t lineCount) const
 {
     // render text on full white, so coloring can be done afterwards
-    SDL_Color col { 255U, 255U, 255U, 255U };
+    SDL_Color const col { 255U, 255U, 255U, 255U };
     SDL_Surface* textSurface = TTF_RenderText_Solid(m_font, text.c_str(), col);
     SDL_Texture* textTexture = SDL_CreateTextureFromSurface(
         sptr.get(), textSurface); // now you can convert it into a texture
@@ -159,7 +159,7 @@ void SmartText::renderOneLineOfText(std::shared_ptr<jt::renderTarget> const sptr
 jt::Vector2u SmartText::getSizeForLine(
     std::shared_ptr<jt::renderTarget> const sptr, std::string const& text) const
 {
-    SDL_Color col { 255U, 255U, 255U, 255U };
+    SDL_Color const col { 255U, 255U, 255U, 255U };
     SDL_Surface* textSurface = TTF_RenderText_Solid(m_font, text.c_str(), col);
     SDL_Texture* textTexture = SDL_CreateTextureFromSurface(
         sptr.get(), textSurface); // now you can convert it into a texture
@@ -173,8 +173,6 @@ jt::Vector2u SmartText::getSizeForLine(
 
 void SmartText::recreateTextTexture(std::shared_ptr<jt::renderTarget> const sptr)
 {
-    // std::cout << "recreate Texture" << std::endl;
-
     if (!m_font) {
         std::cout << "no font loaded\n";
         return;

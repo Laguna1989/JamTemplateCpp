@@ -11,7 +11,6 @@ namespace SpriteFunctions {
 std::shared_ptr<SDL_Texture> makeButtonImage(std::shared_ptr<jt::renderTarget> rt, unsigned int w,
     unsigned int h, jt::Color midColor, jt::Color darkColor, jt::Color brightColor)
 {
-
     std::shared_ptr<SDL_Surface> image
         = std::shared_ptr<SDL_Surface>(SDL_CreateRGBSurface(0, w * 3, h, 32, 0, 0, 0, 0),
             [](SDL_Surface* s) { SDL_FreeSurface(s); });
@@ -47,7 +46,7 @@ std::shared_ptr<SDL_Texture> makeButtonImage(std::shared_ptr<jt::renderTarget> r
 std::shared_ptr<SDL_Texture> makeGlowImage(
     std::shared_ptr<jt::renderTarget> rt, float r, std::uint8_t max)
 {
-    unsigned int s = static_cast<unsigned int>(r + 0.5f * 2);
+    unsigned int const s = static_cast<unsigned int>(r + 0.5f * 2);
     std::shared_ptr<SDL_Surface> image = std::shared_ptr<SDL_Surface>(
         SDL_CreateRGBSurfaceWithFormat(0, s, s, 32, SDL_PIXELFORMAT_RGBA32),
         [](SDL_Surface* s) { SDL_FreeSurface(s); });
@@ -67,7 +66,6 @@ std::shared_ptr<SDL_Texture> makeGlowImage(
                 SDL_MapRGBA(image->format, 255U, 255U, 255U, static_cast<uint8_t>(v)));
         }
     }
-    SDL_FillRect(image.get(), NULL, SDL_MapRGBA(image->format, 255, 0, 255, 0));
     return std::shared_ptr<SDL_Texture>(SDL_CreateTextureFromSurface(rt.get(), image.get()),
         [](SDL_Texture* t) { SDL_DestroyTexture(t); });
 }
@@ -93,7 +91,6 @@ std::shared_ptr<SDL_Texture> makeVignetteImage(
             jt::setPixel(image.get(), i, j, SDL_MapRGBA(image->format, 0U, 0U, 0U, v));
         }
     }
-    // SDL_FillRect(image.get(), NULL, SDL_MapRGBA(image->format, 255, 0, 255, 0));
 
     std::shared_ptr<SDL_Texture> t(SDL_CreateTextureFromSurface(rt.get(), image.get()),
         [](SDL_Texture* t) { SDL_DestroyTexture(t); });

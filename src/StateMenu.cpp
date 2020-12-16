@@ -29,7 +29,7 @@ void StateMenu::doCreate()
 
     m_text_Title = std::make_shared<jt::SmartText>();
     m_text_Title->loadFont("assets/font.ttf", 32U, getGame()->getRenderTarget());
-    m_text_Title->setText("Hello\nTest");
+    m_text_Title->setText(GP::GameName());
     m_text_Title->setPosition({ wC, 20 });
     m_text_Title->setColor(GP::PaletteColor2());
     m_text_Title->SetTextAlign(jt::SmartText::TextAlign::CENTER);

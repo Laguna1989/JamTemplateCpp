@@ -84,10 +84,10 @@ void SmartSprite::doUpdate(float /*elapsed*/) { }
 
 void SmartSprite::doDraw(std::shared_ptr<jt::renderTarget> const sptr) const
 {
-    SDL_Rect sourceRect = getSourceRect();
-    SDL_Rect destRect = getDestRect();
-    auto flip = jt::getFlipFromScale(m_scale);
-    SDL_Point p { static_cast<int>(m_origin.x()), static_cast<int>(m_origin.y()) };
+    SDL_Rect const sourceRect = getSourceRect();
+    SDL_Rect const destRect = getDestRect();
+    auto const flip = jt::getFlipFromScale(m_scale);
+    SDL_Point const p { static_cast<int>(m_origin.x()), static_cast<int>(m_origin.y()) };
     SDL_SetRenderDrawBlendMode(sptr.get(), SDL_BLENDMODE_BLEND);
     setSDLColor(m_color);
     SDL_RenderCopyEx(sptr.get(), m_text.get(), &sourceRect, &destRect, getRotation(), &p, flip);
@@ -95,10 +95,10 @@ void SmartSprite::doDraw(std::shared_ptr<jt::renderTarget> const sptr) const
 
 void SmartSprite::doDrawShadow(std::shared_ptr<jt::renderTarget> const sptr) const
 {
-    SDL_Rect sourceRect = getSourceRect();
-    SDL_Rect destRect = getDestRect(getShadowOffset());
-    auto flip = jt::getFlipFromScale(m_scale);
-    SDL_Point p { static_cast<int>(m_origin.x()), static_cast<int>(m_origin.y()) };
+    SDL_Rect const sourceRect = getSourceRect();
+    SDL_Rect const destRect = getDestRect(getShadowOffset());
+    auto const flip = jt::getFlipFromScale(m_scale);
+    SDL_Point const p { static_cast<int>(m_origin.x()), static_cast<int>(m_origin.y()) };
     SDL_SetRenderDrawBlendMode(sptr.get(), SDL_BLENDMODE_BLEND);
     setSDLColor(getShadowColor());
     SDL_RenderCopyEx(sptr.get(), m_text.get(), &sourceRect, &destRect, getRotation(), &p, flip);
@@ -106,10 +106,10 @@ void SmartSprite::doDrawShadow(std::shared_ptr<jt::renderTarget> const sptr) con
 
 void SmartSprite::doDrawFlash(std::shared_ptr<jt::renderTarget> const sptr) const
 {
-    SDL_Rect sourceRect = getSourceRect();
-    SDL_Rect destRect = getDestRect();
-    auto flip = jt::getFlipFromScale(m_scale);
-    SDL_Point p { static_cast<int>(m_origin.x()), static_cast<int>(m_origin.y()) };
+    SDL_Rect const sourceRect = getSourceRect();
+    SDL_Rect const destRect = getDestRect();
+    auto const flip = jt::getFlipFromScale(m_scale);
+    SDL_Point const p { static_cast<int>(m_origin.x()), static_cast<int>(m_origin.y()) };
     SDL_SetRenderDrawBlendMode(sptr.get(), SDL_BLENDMODE_BLEND);
     SDL_SetTextureColorMod(
         m_textFlash.get(), getFlashColor().r(), getFlashColor().g(), getFlashColor().b());
@@ -123,11 +123,12 @@ void SmartSprite::doRotate(float /*rot*/) { }
 SDL_Rect SmartSprite::getDestRect(jt::Vector2 const& positionOffset) const
 {
     auto const pos = m_position + getShakeOffset() + getOffset() + getCamOffset() + positionOffset;
-    SDL_Rect destRect { static_cast<int>(pos.x()), static_cast<int>(pos.y()),
+    SDL_Rect const destRect { static_cast<int>(pos.x()), static_cast<int>(pos.y()),
         static_cast<int>(m_sourceRect.width() * fabs(m_scale.x())),
         static_cast<int>(m_sourceRect.height() * fabs(m_scale.y())) };
     return destRect;
 }
+
 SDL_Rect SmartSprite::getSourceRect() const
 {
     return SDL_Rect { m_sourceRect.left(), m_sourceRect.top(), m_sourceRect.width(),

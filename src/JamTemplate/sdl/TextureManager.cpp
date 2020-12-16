@@ -15,11 +15,11 @@ std::shared_ptr<SDL_Texture> createButtonImage(
         throw std::invalid_argument { "create button image: vector does not contain 3 elements." };
     }
     std::size_t count { 0 };
-    long w = std::stol(ssv.at(1), &count);
+    long const w = std::stol(ssv.at(1), &count);
     if (count != ssv.at(1).size()) {
         throw std::invalid_argument { "invalid button size string" };
     }
-    long h = std::stol(ssv.at(2), &count);
+    long const h = std::stol(ssv.at(2), &count);
     if (count != ssv.at(2).size()) {
         throw std::invalid_argument { "invalid button size string" };
     }
@@ -57,11 +57,11 @@ std::shared_ptr<SDL_Texture> createVignetteImage(
         };
     }
     std::size_t count { 0 };
-    auto w = std::stol(ssv.at(1), &count);
+    auto const w = std::stol(ssv.at(1), &count);
     if (count != ssv.at(1).size() || w <= 0) {
         throw std::invalid_argument { "invalid vignette w" };
     }
-    auto h = std::stol(ssv.at(2), &count);
+    auto const h = std::stol(ssv.at(2), &count);
     if (count != ssv.at(2).size() || h <= 0) {
         std::cout << "invalid vignette h\n";
         throw std::invalid_argument { "invalid vignette h" };
@@ -76,11 +76,11 @@ std::shared_ptr<SDL_Texture> createRectImage(
         throw std::invalid_argument { "create rect image: vector does not contain 2 elements." };
     }
     std::size_t count { 0 };
-    auto w = std::stol(ssv.at(1), &count);
+    auto const w = std::stol(ssv.at(1), &count);
     if (count != ssv.at(1).size() || w <= 0) {
         throw std::invalid_argument { "invalid rect w" };
     }
-    auto h = std::stol(ssv.at(2), &count);
+    auto const h = std::stol(ssv.at(2), &count);
     if (count != ssv.at(2).size() || h <= 0) {
         std::cout << "invalid rect h\n";
         throw std::invalid_argument { "invalid rect h" };

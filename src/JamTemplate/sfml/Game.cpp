@@ -17,8 +17,8 @@ Game::Game(unsigned int w, unsigned int h, float zoom, std::string const& title)
 {
     m_renderWindow->setVerticalSyncEnabled(true);
 
-    unsigned int scaledWidth = static_cast<unsigned int>(w / m_zoom);
-    unsigned int scaledHeight = static_cast<unsigned int>(h / m_zoom);
+    unsigned int const scaledWidth = static_cast<unsigned int>(w / m_zoom);
+    unsigned int const scaledHeight = static_cast<unsigned int>(h / m_zoom);
 
     m_renderTarget->create(scaledWidth, scaledHeight);
     m_renderTarget->setSmooth(false);

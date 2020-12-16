@@ -10,8 +10,8 @@
 
 void StateGame::doCreate()
 {
-    float w = static_cast<float>(GP::GetWindowSize().x());
-    float h = static_cast<float>(GP::GetWindowSize().y());
+    float const w = static_cast<float>(GP::GetWindowSize().x());
+    float const h = static_cast<float>(GP::GetWindowSize().y());
 
     using jt::SmartShape;
     using jt::TweenAlpha;
