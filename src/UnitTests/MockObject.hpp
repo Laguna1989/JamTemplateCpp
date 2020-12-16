@@ -4,7 +4,7 @@
 #include "GameObject.hpp"
 #include "gmock/gmock.h"
 
-class MockObject : public JamTemplate::GameObject {
+class MockObject : public jt::GameObject {
 public:
     MOCK_METHOD(void, doUpdate, (float const), (override));
     MOCK_METHOD(void, doDraw, (), (const));

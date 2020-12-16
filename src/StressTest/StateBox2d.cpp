@@ -15,7 +15,7 @@ void StateBox2d::doInternalUpdate(float const elapsed)
         m_world->Step(elapsed, velocityIterations, positionIterations);
     }
 
-    if (getAge() >= 15.0f || JamTemplate::InputManager::justPressed(sf::Keyboard::Key::F1)) {
+    if (getAge() >= 15.0f || jt::InputManager::justPressed(jt::KeyCode::F1)) {
         getGame()->switchState(std::make_shared<State1>());
     }
 
@@ -27,16 +27,16 @@ void StateBox2d::doInternalUpdate(float const elapsed)
     if (current < 0) {
         current = 0;
     }
-    float v = JamTemplate::Lerp::cosine(0.0f, 1.0f, current);
+    float v = jt::Lerp::cosine(0.0f, 1.0f, current);
     m_bar1->setCurrentValue(v);
     if (current < 0.25f) {
-        m_bar1->setFrontColor(sf::Color::Red);
+        m_bar1->setFrontColor(jt::colors::Red);
     } else {
-        m_bar1->setFrontColor(sf::Color::White);
+        m_bar1->setFrontColor(jt::colors::White);
     }
 
     m_bar2->setCurrentValue((1 - v));
-    m_bar2->setBackColor(sf::Color::Blue);
+    m_bar2->setBackColor(jt::colors::Blue);
 }
 
 void StateBox2d::doInternalDraw() const

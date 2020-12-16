@@ -7,35 +7,32 @@
 #include "Random.hpp"
 #include "SmartAnimation.hpp"
 #include "SmartShape.hpp"
-#include "Transform.hpp"
-#include <SFML/Graphics.hpp>
 #include <iostream>
 #include <memory>
 #include <random>
 
-class Object : public JamTemplate::GameObject, public JamTemplate::Transform {
+class Object : public jt::GameObject {
 public:
     using Sptr = std::shared_ptr<Object>;
     Object()
     {
-        m_animation = std::make_shared<JamTemplate::SmartAnimation>();
-        // m_shape->makeRect(sf::Vector2f(10, 10));
-        m_animation->add("assets/coin.png", "idle", sf::Vector2u { 16, 16 },
-            JamTemplate::MathHelper::vectorBetween(0U, 11U), 0.15f);
+        m_animation = std::make_shared<jt::SmartAnimation>();
+        // m_shape->makeRect(jt::Vector2(10, 10));
+        m_animation->add("assets/coin.png", "idle", jt::Vector2u { 16, 16 },
+            jt::MathHelper::vectorBetween(0U, 11U), 0.15f);
         m_animation->play("idle");
 
-        m_animation->setColor(JamTemplate::Random::getRandomColor());
+        m_animation->setColor(jt::Random::getRandomColor());
 
-        float x = JamTemplate::Random::getFloat(80, 120) - 8;
-        float y = JamTemplate::Random::getFloat(55, 95) - 8;
+        float x = jt::Random::getFloat(80, 120) - 8;
+        float y = jt::Random::getFloat(55, 95) - 8;
 
-        float vx = JamTemplate::Random::getFloatGauss(0, 50);
-        float vy = JamTemplate::Random::getFloatGauss(0, 50);
+        float vx = jt::Random::getFloatGauss(0, 50);
+        float vy = jt::Random::getFloatGauss(0, 50);
 
-        setPosition({ x, y });
-        setVelocity({ vx, vy });
-        // setAcceleration({ 0, -50 / 2 });
-        setBoundsPosition(sf::FloatRect { 0, 0, 200 - 10, 150 - 10 });
+        m_position = jt::Vector2 { x, y };
+        m_velocity = jt::Vector2 { vx, vy };
+        m_acceleration = jt::Vector2 { 0.0f, -50.0f / 2.0f };
     }
 
     ~Object() = default;
@@ -43,13 +40,14 @@ public:
     void Flash() { m_animation->flash(0.1f); }
     void Shake() { m_animation->shake(0.5f, 2.0f, 0.05f); }
 
-    std::shared_ptr<JamTemplate::SmartAnimation> getAnimation() { return m_animation; }
+    std::shared_ptr<jt::SmartAnimation> getAnimation() { return m_animation; }
 
 private:
     void doUpdate(float const elapsed) override
     {
-        updateTransform(elapsed);
-        m_animation->setPosition(getPosition());
+        m_velocity = m_velocity + elapsed * m_acceleration;
+        m_position = m_position + elapsed * m_velocity;
+        m_animation->setPosition(m_position);
         m_animation->update(elapsed);
         if (getAge() > 0.9)
             kill();
@@ -57,7 +55,10 @@ private:
 
     void doDraw() const override { m_animation->draw(getGame()->getRenderTarget()); }
 
-    std::shared_ptr<JamTemplate::SmartAnimation> m_animation;
+    std::shared_ptr<jt::SmartAnimation> m_animation;
+    jt::Vector2 m_position;
+    jt::Vector2 m_velocity;
+    jt::Vector2 m_acceleration;
 };
 
 #endif

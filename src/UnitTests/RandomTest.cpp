@@ -1,9 +1,10 @@
 ﻿#include "Random.hpp"
+#include "vector.hpp"
 #include "gtest/gtest.h"
 #include <utility>
 
-using JamTemplate::Random;
-using v = sf::Vector2f;
+using jt::Random;
+using v = jt::Vector2;
 
 class RandomIntTestFixture : public ::testing::TestWithParam<std::pair<int, int>> {
 };
@@ -91,11 +92,11 @@ TEST(RandomInRect, Valid)
     auto const lower = 0.0f;
     auto const upper = 10.0f;
     for (auto i = 0U; i != 1000; ++i) {
-        auto const v = Random::getRandomPointin(sf::Rect { lower, lower, upper, upper });
-        EXPECT_GT(v.x, lower);
-        EXPECT_GT(v.y, lower);
-        EXPECT_LT(v.x, upper);
-        EXPECT_LT(v.y, upper);
+        auto const v = Random::getRandomPointin(jt::Rect { lower, lower, upper, upper });
+        EXPECT_GT(v.x(), lower);
+        EXPECT_GT(v.y(), lower);
+        EXPECT_LT(v.x(), upper);
+        EXPECT_LT(v.y(), upper);
     }
 }
 

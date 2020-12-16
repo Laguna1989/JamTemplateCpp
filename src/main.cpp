@@ -1,44 +1,30 @@
 ﻿#include "main.hpp"
+#include "Game.hpp"
 #include "GameProperties.hpp"
-#include "JamTemplate/Game.hpp"
-#include "JamTemplate/Random.hpp"
+#include "Random.hpp"
 #include "StateMenu.hpp"
-#include <SFML/Graphics.hpp>
+#include <iostream>
+
+std::shared_ptr<jt::GameBase> game;
+
+void gameloop()
+{
+    if (game) {
+        game->run();
+    }
+}
 
 int main()
 {
+    // std::cout << "main\n";
     hideConsoleInRelease();
 
-    JamTemplate::Random::useTimeAsRandomSeed();
+    jt::Random::useTimeAsRandomSeed();
 
-    JamTemplate::Game::Sptr game
-        = std::make_shared<JamTemplate::Game>(800, 600, 2.0f, GP::GameName());
-    auto window = game->getRenderWindow();
+    game = std::make_shared<jt::Game>(static_cast<unsigned int>(GP::GetWindowSize().x()),
+        static_cast<float>(GP::GetWindowSize().y()), GP::GetZoom(), GP::GameName());
 
-    game->switchState(std::make_shared<StateMenu>());
-
-    sf::Clock clock;
-
-    try {
-        while (window->isOpen()) {
-            sf::Time elapsed = clock.restart();
-            sf::Event event;
-            while (window->pollEvent(event)) {
-                if (event.type == sf::Event::Closed) {
-                    window->close();
-                }
-            }
-            game->update(elapsed.asSeconds());
-            game->draw();
-        }
-    } catch (std::exception const& e) {
-        std::cerr << "!! ERROR: Exception ocurred !!\n";
-        std::cerr << e.what() << std::endl;
-        throw;
-    } catch (...) {
-        std::cerr << "!! ERROR: Unhandled Exception ocurred !!\n";
-        std::terminate();
-    }
+    game->runGame(std::make_shared<StateMenu>(), gameloop);
 
     return 0;
 }

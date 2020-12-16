@@ -1,6 +1,6 @@
 ﻿#include "Hud.hpp"
-
-#include "JamTemplate/Game.hpp"
+#include "GameBase.hpp"
+#include "color.hpp"
 
 Hud::Hud() = default;
 
@@ -28,6 +28,7 @@ void Hud::doUpdate(float const elapsed)
     if (m_scoreP2 >= 0) {
         m_scoreP2Text->setText("P2 Score: " + std::to_string(m_scoreP2));
     }
+
     m_scoreP1Text->update(elapsed);
     m_scoreP2Text->update(elapsed);
 }
@@ -44,19 +45,17 @@ void Hud::doDraw() const
 
 void Hud::doCreate()
 {
-    m_scoreP1Text = std::make_shared<JamTemplate::SmartText>();
-    m_scoreP1Text->loadFont("assets/font.ttf");
-    m_scoreP1Text->setCharacterSize(16U);
-    m_scoreP1Text->setColor(sf::Color { 248, 249, 254 });
+    m_scoreP1Text = std::make_shared<jt::SmartText>();
+    m_scoreP1Text->loadFont("assets/font.ttf", 16, getGame()->getRenderTarget());
+    m_scoreP1Text->setColor(jt::Color { 248, 249, 254 });
     m_scoreP1Text->update(0.0f);
-    m_scoreP1Text->SetTextAlign(JamTemplate::SmartText::TextAlign::LEFT);
+    m_scoreP1Text->SetTextAlign(jt::SmartText::TextAlign::LEFT);
     m_scoreP1Text->setPosition({ 20, 325 });
 
-    m_scoreP2Text = std::make_shared<JamTemplate::SmartText>();
-    m_scoreP2Text->loadFont("assets/font.ttf");
-    m_scoreP2Text->setCharacterSize(16U);
-    m_scoreP2Text->setColor(sf::Color { 248, 249, 254 });
+    m_scoreP2Text = std::make_shared<jt::SmartText>();
+    m_scoreP2Text->loadFont("assets/font.ttf", 16, getGame()->getRenderTarget());
+    m_scoreP2Text->setColor(jt::Color { 248, 249, 254 });
     m_scoreP2Text->update(0.0f);
-    m_scoreP2Text->SetTextAlign(JamTemplate::SmartText::TextAlign::LEFT);
+    m_scoreP2Text->SetTextAlign(jt::SmartText::TextAlign::LEFT);
     m_scoreP2Text->setPosition({ 650 / 2 + 10, 325 });
 }

@@ -2,7 +2,7 @@
 #include "gtest/gtest.h"
 #include <string>
 
-using JamTemplate::SplitString;
+using jt::SplitString;
 
 TEST(SplitStringTest, TestValidSplit)
 {

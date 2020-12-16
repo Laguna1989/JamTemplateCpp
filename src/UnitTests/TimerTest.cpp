@@ -3,7 +3,7 @@
 #include <limits>
 #include <utility>
 
-using JamTemplate::Timer;
+using jt::Timer;
 
 TEST(TimerTest, TimerIsCalledRepeatedly)
 {

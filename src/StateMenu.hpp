@@ -1,27 +1,30 @@
 ﻿#ifndef GAME_STATE_MENU_HPP_INCLUDEGUARD
 #define GAME_STATE_MENU_HPP_INCLUDEGUARD
 
-#include "JamTemplate/GameState.hpp"
+#include "GameState.hpp"
 
-namespace JamTemplate {
+namespace jt {
 
 class SmartText;
 class SmartShape;
+class SmartAnimation;
+class SmartSprite;
 
-} // namespace JamTemplate
+} // namespace jt
 
-class StateMenu : public JamTemplate::GameState {
+class StateMenu : public jt::GameState {
 public:
     StateMenu();
 
 private:
-    std::shared_ptr<JamTemplate::SmartShape> m_background;
+    std::shared_ptr<jt::SmartShape> m_background;
 
-    std::shared_ptr<JamTemplate::SmartText> m_text_Title;
-    std::shared_ptr<JamTemplate::SmartText> m_test_Explanation;
-    std::shared_ptr<JamTemplate::SmartText> m_text_Credits;
+    std::shared_ptr<jt::SmartText> m_text_Title;
+    std::shared_ptr<jt::SmartText> m_test_Explanation;
+    std::shared_ptr<jt::SmartText> m_text_Credits;
 
-    std::shared_ptr<JamTemplate::SmartShape> m_overlay;
+    std::shared_ptr<jt::SmartShape> m_overlay;
+    std::shared_ptr<jt::SmartSprite> m_vignette;
 
     bool m_starting { false };
 

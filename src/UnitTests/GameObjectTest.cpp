@@ -2,8 +2,8 @@
 #include "Game.hpp"
 #include "gtest/gtest.h"
 
-using JamTemplate::Game;
-using JamTemplate::GameObject;
+using jt::Game;
+using jt::GameObject;
 
 TEST(GameObjectTest, CreateWithOutGameInstanceSet)
 {
