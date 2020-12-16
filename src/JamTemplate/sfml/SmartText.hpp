@@ -16,76 +16,41 @@ public:
 
     using Sptr = std::shared_ptr<SmartText>;
 
-    virtual ~SmartText()
-    {
-        // std::cout << "SmartText dtor\n";
-        m_text = nullptr;
-        // std::cout << "SmartText dtor2\n";
-        m_flashText = nullptr;
-        // std::cout << "SmartText dtor3\n";
-        m_font = nullptr;
-        // std::cout << "SmartText dtor4\n";
-    }
+    virtual ~SmartText();
 
+    // note: it is ok to pass a nullptr as rendertarget_wptr for sfml.
     void loadFont(std::string const& fontFileName, unsigned int characterSize,
-        std::weak_ptr<jt::renderTarget> wptr /*unused*/)
-    {
-        m_font = std::make_shared<sf::Font>();
-        if (!m_font->loadFromFile(fontFileName)) {
-            std::cerr << "cannot load font: " << fontFileName << std::endl;
-        }
-        m_text = std::make_shared<sf::Text>("", *m_font, 8);
-        m_flashText = std::make_shared<sf::Text>("", *m_font, 8);
-        m_text->setCharacterSize(characterSize);
-        m_flashText->setCharacterSize(characterSize);
-    }
+        std::weak_ptr<jt::renderTarget> rendertarget_wptr /*unused*/);
 
-    void setText(std::string text)
-    {
-        m_text->setString(text);
-        m_flashText->setString(text);
-    }
-    std::string getText() const { return m_text->getString(); }
+    void setText(std::string text);
+    std::string getText() const;
 
-    void setOutline(float thickness, jt::Color col)
-    {
-        m_text->setOutlineThickness(thickness);
-        m_text->setOutlineColor(col);
-    }
+    void setOutline(float thickness, jt::Color col);
+    void setPosition(jt::Vector2 const& pos) override;
 
-    void setPosition(jt::Vector2 const& pos) override { m_position = pos; }
+    const jt::Vector2 getPosition() const override;
 
-    const jt::Vector2 getPosition() const override { return m_position; }
+    void setColor(const jt::Color& col) override;
+    const jt::Color getColor() const override;
 
-    void setColor(const jt::Color& col) override { m_text->setFillColor(col); }
-    const jt::Color getColor() const override { return m_text->getFillColor(); }
-
-    void setFlashColor(const jt::Color& col) override { m_flashText->setFillColor(col); }
-    const jt::Color getFlashColor() const override { return m_flashText->getFillColor(); }
+    void setFlashColor(const jt::Color& col) override;
+    const jt::Color getFlashColor() const override;
 
     // virtual sf::Transform const getTransform() const override { return m_text->getTransform(); }
 
-    jt::Rect const getGlobalBounds() const override { return m_text->getGlobalBounds(); }
-    jt::Rect const getLocalBounds() const override { return m_text->getLocalBounds(); }
+    jt::Rect const getGlobalBounds() const override;
+    jt::Rect const getLocalBounds() const override;
 
-    virtual void setScale(jt::Vector2 const& scale)
-    {
-        m_text->setScale(scale);
-        m_flashText->setScale(scale);
-    }
+    virtual void setScale(jt::Vector2 const& scale);
 
-    virtual const jt::Vector2 getScale() const { return m_text->getScale(); }
+    virtual const jt::Vector2 getScale() const;
 
-    virtual void setOrigin(jt::Vector2 const& origin)
-    {
-        m_text->setOrigin(origin);
-        m_flashText->setOrigin(origin);
-    }
+    virtual void setOrigin(jt::Vector2 const& origin);
 
-    virtual const jt::Vector2 getOrigin() const { return m_text->getOrigin(); }
+    virtual const jt::Vector2 getOrigin() const;
 
-    void SetTextAlign(TextAlign ta) { m_textAlign = ta; }
-    TextAlign getTextAlign() const { return m_textAlign; }
+    void SetTextAlign(TextAlign ta);
+    TextAlign getTextAlign() const;
 
 private:
     mutable std::shared_ptr<sf::Text> m_text;
@@ -96,57 +61,13 @@ private:
 
     jt::Vector2 m_position { 0, 0 };
 
-    void doUpdate(float /*elapsed*/) override
-    {
-        m_text->setFont(*m_font);
-        m_flashText->setFont(*m_font);
+    void doUpdate(float /*elapsed*/) override;
 
-        jt::Vector2 alignOffset { 0, 0 };
-        if (m_textAlign == TextAlign::CENTER) {
-            alignOffset.x() = -m_text->getGlobalBounds().width / 2.0f;
-        }
+    void doDrawShadow(std::shared_ptr<jt::renderTarget> const sptr) const override;
+    void doDraw(std::shared_ptr<jt::renderTarget> const sptr) const override;
+    void doDrawFlash(std::shared_ptr<jt::renderTarget> const sptr) const override;
 
-        jt::Vector2 pos = m_position + getShakeOffset() + alignOffset + getCamOffset();
-
-        m_text->setPosition(jt::Vector2 { pos.x(), pos.y() });
-        m_flashText->setPosition(m_text->getPosition());
-        m_flashText->setScale(m_text->getScale());
-    }
-
-    void doDrawShadow(std::shared_ptr<jt::renderTarget> const sptr) const override
-    {
-        jt::Vector2 const oldPos = m_text->getPosition();
-        jt::Color const oldCol = m_text->getFillColor();
-
-        m_text->setPosition(oldPos + getShadowOffset());
-        m_text->setFillColor(getShadowColor());
-        sptr->draw(*m_text);
-
-        m_text->setPosition(oldPos);
-        m_text->setFillColor(oldCol);
-    }
-
-    void doDraw(std::shared_ptr<jt::renderTarget> const sptr) const override
-    {
-        try {
-            sptr->draw(*m_text);
-        } catch (std::exception& e) {
-            std::cout << e.what() << std::endl;
-        } catch (...) {
-            std::cerr << "error drawing text" << std::endl;
-        }
-    }
-
-    void doDrawFlash(std::shared_ptr<jt::renderTarget> const sptr) const override
-    {
-        sptr->draw(*m_flashText);
-    }
-
-    void doRotate(float rot) override
-    {
-        m_text->setRotation(-rot);
-        m_flashText->setRotation(-rot);
-    }
+    void doRotate(float rot) override;
 };
 } // namespace jt
 
