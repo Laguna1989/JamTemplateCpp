@@ -7,7 +7,7 @@
 #include "SmartAnimation.hpp"
 #include "SmartDrawable.hpp"
 #include "TextureManager.hpp"
-#include "vector.hpp"
+#include "Vector.hpp"
 #include <functional>
 #include <memory>
 #include <string>

@@ -1,7 +1,10 @@
 ﻿#ifndef GUARD_JAMTEMPLATE_RECT_BASE_GUARD_HPP_12345
 #define GUARD_JAMTEMPLATE_RECT_BASE_GUARD_HPP_12345
 
-#include "rect_base.hpp"
+/*
+This file only has the interface contract for the rect classes to be implemented
+by the different libs. The interface is conveyed through the
+*/
 
 namespace jt {
 class rectBase {

@@ -1,9 +1,9 @@
 ﻿#ifndef GUARD_JAMTEMPLATE_RANDOM_HPP_INCLUDEGUARD
 #define GUARD_JAMTEMPLATE_RANDOM_HPP_INCLUDEGUARD
 
-#include "color.hpp"
-#include "rect.hpp"
-#include "vector.hpp"
+#include "Color.hpp"
+#include "Rect.hpp"
+#include "Vector.hpp"
 #include <random>
 
 namespace jt {

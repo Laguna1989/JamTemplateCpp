@@ -1,8 +1,6 @@
 ﻿#ifndef GUARD_JAMTEMPLATE_VECTOR_BASE_GUARD_HPP_12345
 #define GUARD_JAMTEMPLATE_VECTOR_BASE_GUARD_HPP_12345
 
-#include "vector_base.hpp"
-
 /*
 This file only has the interface contract for the vector classes to be implemented
 by the different libs. The interface is conveyed through the

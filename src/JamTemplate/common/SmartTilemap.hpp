@@ -3,10 +3,9 @@
 
 #include "InfoRect.hpp"
 #include "SmartDrawable.hpp"
+#include "SmartSprite.hpp"
 #include "rendertarget.hpp"
 #include "tileson.h"
-#include <SFML/Graphics.hpp>
-#include <filesystem>
 #include <memory>
 #include <vector>
 
@@ -19,7 +18,7 @@ class SmartTilemap : public SmartDrawable {
 public:
     using Sptr = std::shared_ptr<SmartTilemap>;
 
-    SmartTilemap(std::filesystem::path const& path);
+    SmartTilemap(std::string const& path);
 
     void doDraw(std::shared_ptr<jt::renderTarget> const sptr) const;
 
@@ -62,7 +61,7 @@ private:
     // Map from object layer name to vector of objects, all rectangular.
     std::map<std::string, std::vector<InfoRect>> m_objectGroups;
     bool m_highlightObjectGroups = false;
-    mutable std::vector<std::unique_ptr<sf::Sprite>> m_tileSprites;
+    mutable std::vector<std::shared_ptr<jt::SmartSprite>> m_tileSprites;
 
     jt::Vector2 m_position;
 

@@ -1,4 +1,4 @@
-﻿#include "color.hpp"
+﻿#include "Color.hpp"
 
 namespace jt {
 

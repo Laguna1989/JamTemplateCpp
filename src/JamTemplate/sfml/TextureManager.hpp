@@ -1,9 +1,9 @@
 ﻿#ifndef GUARD_JAMTEMPLATE_TEXTUREMANAGER_HPP_INCLUDEGUARD
 #define GUARD_JAMTEMPLATE_TEXTUREMANAGER_HPP_INCLUDEGUARD
 
+#include "Color.hpp"
 #include "SplitString.hpp"
 #include "SpriteFunctions.hpp"
-#include "color.hpp"
 #include "rendertarget.hpp"
 #include <SFML/Graphics.hpp>
 #include <assert.h>

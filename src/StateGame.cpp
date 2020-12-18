@@ -1,4 +1,5 @@
 ﻿#include "StateGame.hpp"
+#include "Color.hpp"
 #include "Game.hpp"
 #include "GameProperties.hpp"
 #include "Hud.hpp"
@@ -6,7 +7,6 @@
 #include "SmartShape.hpp"
 #include "SmartSprite.hpp"
 #include "TweenAlpha.hpp"
-#include "color.hpp"
 
 void StateGame::doCreate()
 {

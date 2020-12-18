@@ -3,7 +3,7 @@
 
 #include "Conversions.hpp"
 #include "GameObject.hpp"
-#include "vector.hpp"
+#include "Vector.hpp"
 #include <Box2D/Box2D.h>
 #include <memory>
 

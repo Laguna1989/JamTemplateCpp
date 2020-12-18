@@ -2,10 +2,10 @@
 #include "GameState.hpp"
 #include "InputManager.hpp"
 #include "Random.hpp"
+#include "Rect.hpp"
 #include "SmartDrawable.hpp"
 #include "TextureManager.hpp"
-#include "rect.hpp"
-#include "vector.hpp"
+#include "Vector.hpp"
 #include <SDL.h>
 #include <SDL_ttf.h>
 #include <emscripten.h>

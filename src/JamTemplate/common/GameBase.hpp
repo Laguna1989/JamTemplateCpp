@@ -1,10 +1,10 @@
 ﻿#ifndef GUARD_JAMTEMPLATE_GAMEBASE_HPP_GUARD
 #define GUARD_JAMTEMPLATE_GAMEBASE_HPP_GUARD
 
+#include "Color.hpp"
 #include "GameObject.hpp"
-#include "color.hpp"
+#include "Vector.hpp"
 #include "rendertarget.hpp"
-#include "vector.hpp"
 #include <chrono>
 #include <functional>
 #include <memory>

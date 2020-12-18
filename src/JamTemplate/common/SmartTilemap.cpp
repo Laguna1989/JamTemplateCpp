@@ -6,7 +6,7 @@
 
 namespace jt {
 
-SmartTilemap::SmartTilemap(std::filesystem::path const& path)
+SmartTilemap::SmartTilemap(std::string const& path)
 {
     m_position = jt::Vector2 { 0.0f, 0.0f };
     m_screenSizeHint = jt::Vector2 { 0.0f, 0.0f };
@@ -28,11 +28,12 @@ SmartTilemap::SmartTilemap(std::filesystem::path const& path)
     auto const columns = tileset.getColumns();
     auto const rows = tileset.getTileCount() / columns;
     auto const ts = tileset.getTileSize();
-    auto const tilesetName = "assets/" + tileset.getImagePath().string();
+    auto const tilesetName = "assets/" + tileset.getImagePath();
     for (int j = 0; j != rows; ++j) {
         for (int i = 0; i != columns; ++i) {
-            m_tileSprites.emplace_back(std::make_unique<sf::Sprite>(
-                TextureManager::get(tilesetName), jt::Recti(i * ts.x, j * ts.y, ts.x, ts.y)));
+            auto const tile = std::make_shared<jt::SmartSprite>();
+            tile->loadSprite(tilesetName, jt::Recti(i * ts.x, j * ts.y, ts.x, ts.y));
+            m_tileSprites.emplace_back(tile);
         }
     }
     for (auto& layer : m_map->getLayers()) {
@@ -91,26 +92,28 @@ void SmartTilemap::doDraw(std::shared_ptr<jt::renderTarget> const sptr) const
                 }
                 auto const pixelPosForTile = tilePos + posOffset;
                 m_tileSprites.at(id)->setPosition(pixelPosForTile);
-                sptr->draw(*m_tileSprites.at(id));
+                m_tileSprites.at(id)->update(0.0f);
+                m_tileSprites.at(id)->draw(sptr);
             }
         }
 
-        sf::RectangleShape shape(jt::Vector2(1.0f, 1.0f));
-        for (auto& objLayer : m_objectGroups) {
-            for (auto& obj : objLayer.second) {
-                shape.setSize(obj.sizeDiagonal);
-                shape.setPosition(obj.position);
-                shape.setRotation(obj.rotation);
-                if (m_highlightObjectGroups) {
-                    shape.setOutlineColor(jt::Random::getRandomColor());
-                } else {
-                    shape.setOutlineColor(jt::colors::Transparent);
-                }
-                shape.setFillColor(jt::colors::Transparent);
-                shape.setOutlineThickness(2.0f);
-                sptr->draw(shape);
-            }
-        }
+        // TODO
+        // sf::RectangleShape shape(jt::Vector2(1.0f, 1.0f));
+        // for (auto& objLayer : m_objectGroups) {
+        //     for (auto& obj : objLayer.second) {
+        //         shape.setSize(obj.sizeDiagonal);
+        //         shape.setPosition(obj.position);
+        //         shape.setRotation(obj.rotation);
+        //         if (m_highlightObjectGroups) {
+        //             shape.setOutlineColor(jt::Random::getRandomColor());
+        //         } else {
+        //             shape.setOutlineColor(jt::colors::Transparent);
+        //         }
+        //         shape.setFillColor(jt::colors::Transparent);
+        //         shape.setOutlineThickness(2.0f);
+        //         sptr->draw(shape);
+        //     }
+        // }
     }
 }
 

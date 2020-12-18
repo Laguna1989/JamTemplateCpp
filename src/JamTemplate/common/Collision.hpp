@@ -36,8 +36,8 @@ it freely, subject to the following restrictions:
 #ifndef COLLISION_H
 #define COLLISION_H
 
-#include "rect.hpp"
-#include "vector.hpp"
+#include "Rect.hpp"
+#include "Vector.hpp"
 #include <SFML/Graphics.hpp>
 
 namespace jt {

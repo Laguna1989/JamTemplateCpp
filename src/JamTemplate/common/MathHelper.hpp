@@ -1,7 +1,7 @@
 ﻿#ifndef GUARD_JAMTEMPLATE_MATHHELPER_HPP_INCLUDEGUARD
 #define GUARD_JAMTEMPLATE_MATHHELPER_HPP_INCLUDEGUARD
 
-#include "vector.hpp"
+#include "Vector.hpp"
 #include <assert.h>
 #include <iomanip>
 #include <sstream>

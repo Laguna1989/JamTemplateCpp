@@ -1,5 +1,5 @@
 ﻿#include "TextureManager.hpp"
-#include "color.hpp"
+#include "Color.hpp"
 #include "gtest/gtest.h"
 #include <exception>
 

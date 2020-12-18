@@ -2,9 +2,9 @@
 #include "GameState.hpp"
 #include "InputManager.hpp"
 #include "Random.hpp"
+#include "Rect.hpp"
 #include "SmartDrawable.hpp"
-#include "rect.hpp"
-#include "vector.hpp"
+#include "Vector.hpp"
 #include <iostream>
 
 namespace jt {

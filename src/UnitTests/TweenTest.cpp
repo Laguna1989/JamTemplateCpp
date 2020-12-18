@@ -2,8 +2,8 @@
 #include "TweenColor.hpp"
 #include "TweenPosition.hpp"
 #include "TweenScale.hpp"
-#include "color.hpp"
-#include "vector.hpp"
+#include "Vector.hpp"
+#include "Color.hpp"
 #include "gmock/gmock.h"
 #include "gtest/gtest.h"
 #include <limits>

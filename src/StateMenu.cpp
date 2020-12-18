@@ -12,7 +12,7 @@
 #include "TweenAlpha.hpp"
 #include "TweenPosition.hpp"
 #include "TweenScale.hpp"
-#include "color.hpp"
+#include "Color.hpp"
 
 StateMenu::StateMenu() = default;
 

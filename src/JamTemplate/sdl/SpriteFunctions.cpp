@@ -1,7 +1,7 @@
 ﻿#include "SpriteFunctions.hpp"
+#include "Color.hpp"
 #include "MathHelper.hpp"
 #include "SDLHelper.hpp"
-#include "color.hpp"
 #include <cmath>
 
 namespace jt {

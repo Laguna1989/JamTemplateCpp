@@ -1,7 +1,7 @@
 ﻿#ifndef GUARD_JAMTEMPLATE_RECT_GUARD_HPP_12345
 #define GUARD_JAMTEMPLATE_RECT_GUARD_HPP_12345
 
-#include "rect_lib.hpp"
+#include "Rect_lib.hpp"
 
 namespace jt {
 

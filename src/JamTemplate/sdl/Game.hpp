@@ -2,7 +2,7 @@
 #define GUARD_JAMTEMPLATE_GAME_HPP_INCLUDEGUARD
 
 #include "GameBase.hpp"
-#include "rect.hpp"
+#include "Rect.hpp"
 #include "rendertarget.hpp"
 #include <SDL2/SDL_mixer.h>
 #include <chrono>

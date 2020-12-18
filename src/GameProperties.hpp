@@ -1,8 +1,8 @@
 ﻿#ifndef GAME_GAMEPROPERTIES_HPP_INCLUDEGUARD
 #define GAME_GAMEPROPERTIES_HPP_INCLUDEGUARD
 
-#include "color.hpp"
-#include "vector.hpp"
+#include "Color.hpp"
+#include "Vector.hpp"
 #include <cstdint>
 #include <string>
 

@@ -2,6 +2,7 @@
 #define STRESSTEST_STATE_TILESOM_HPP_INCLUDEGUARD
 
 #include "GameState.hpp"
+#include "SmartTilemap.hpp"
 #include <memory>
 
 namespace jt {
@@ -13,8 +14,7 @@ public:
     StateTileson() = default;
 
 private:
-    // TODO
-    // std::shared_ptr<jt::SmartTilemap> m_tilemap;
+    std::shared_ptr<jt::SmartTilemap> m_tilemap;
 
     void doCreate() override;
     void doDraw() const override;

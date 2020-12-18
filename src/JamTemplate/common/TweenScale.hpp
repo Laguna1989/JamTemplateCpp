@@ -3,7 +3,7 @@
 
 #include "Lerp.hpp"
 #include "TweenBase.hpp"
-#include "vector.hpp"
+#include "Vector.hpp"
 
 namespace jt {
 

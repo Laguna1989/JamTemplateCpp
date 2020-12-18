@@ -1,7 +1,7 @@
 ﻿#ifndef GUARD_JAMTEMPLATE_COLOR_GUARD_HPP_12345
 #define GUARD_JAMTEMPLATE_COLOR_GUARD_HPP_12345
 
-#include "color_lib.hpp"
+#include "Color_lib.hpp"
 
 namespace jt {
 

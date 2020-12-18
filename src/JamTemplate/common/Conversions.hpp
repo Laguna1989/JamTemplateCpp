@@ -1,7 +1,7 @@
 ﻿#ifndef GUARD_JAMTEMPLATE_CONVERSIONS_HPP_GUARD
 #define GUARD_JAMTEMPLATE_CONVERSIONS_HPP_GUARD
 
-#include "vector.hpp"
+#include "Vector.hpp"
 #include <Box2D/Box2D.h>
 #include <tileson.h>
 

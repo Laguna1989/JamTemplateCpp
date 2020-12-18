@@ -1,7 +1,7 @@
 ﻿#ifndef GUARD_JAMTEMPLATE_RECT_LIB_GUARD_HPP
 #define GUARD_JAMTEMPLATE_RECT_LIB_GUARD_HPP
 
-#include "rect_base.hpp"
+#include "Rect_base.hpp"
 #include <SFML/Graphics/Rect.hpp>
 
 namespace jt {
