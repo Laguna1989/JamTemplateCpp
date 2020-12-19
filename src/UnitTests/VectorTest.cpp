@@ -81,7 +81,7 @@ TEST(VectorDivide, Real)
     EXPECT_EQ(initial / v, expected);
 }
 
-TEST(Vector2U, ReadAccess)
+TEST(Vector2UAccess, ReadAccess)
 {
     unsigned int const x { 1 };
     unsigned int const y { 7 };
@@ -90,7 +90,7 @@ TEST(Vector2U, ReadAccess)
     EXPECT_EQ(v.y(), y);
 }
 
-TEST(Vector2U, WriteAccess)
+TEST(Vector2UAccess, WriteAccess)
 {
     jt::Vector2u v {};
     unsigned int const x { 5 };

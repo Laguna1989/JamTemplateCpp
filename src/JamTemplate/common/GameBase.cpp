@@ -50,7 +50,6 @@ void GameBase::run()
         timeLast = now;
         if (m_age != 0) {
             updateShake(elapsed);
-
             update(elapsed);
             draw();
         }

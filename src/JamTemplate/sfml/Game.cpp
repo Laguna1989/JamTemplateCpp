@@ -51,14 +51,6 @@ void Game::setRenderTarget(std::shared_ptr<jt::renderTarget> rt)
     m_renderTarget = rt;
 }
 std::shared_ptr<jt::renderTarget> Game::getRenderTarget() const { return m_renderTarget; }
-
-void Game::setRenderWindow(std::shared_ptr<sf::RenderWindow> w)
-{
-    if (w == nullptr) {
-        throw std::invalid_argument { "cannot set nullptr renderwindow" };
-    }
-    m_renderWindow = w;
-}
 std::shared_ptr<sf::RenderWindow> Game::getRenderWindow() { return m_renderWindow; }
 
 void Game::setView(std::shared_ptr<sf::View> view)
@@ -123,7 +115,6 @@ void Game::updateShake(float elapsed)
     }
 
     if (m_shakeTimer > 0) {
-
         m_shakeTimer -= elapsed;
         m_shakeInterval -= elapsed;
         if (m_shakeInterval < 0) {

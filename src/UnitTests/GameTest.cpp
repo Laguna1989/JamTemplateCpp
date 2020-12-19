@@ -23,6 +23,8 @@ TEST_F(GameTest, InitialValues)
 
     EXPECT_EQ(g->getCamOffset().x(), 0);
     EXPECT_EQ(g->getCamOffset().y(), 0);
+
+    EXPECT_EQ(g->getZoom(), zoom);
 }
 
 TEST_F(GameTest, UpdateLogic)
@@ -173,4 +175,46 @@ TEST_F(GameTest, SwitchStateWhileInShake)
     /*EXPECT_NO_THROW(g->switchState(ms2));
     EXPECT_CALL(*ms2, doInternalCreate());*/
     g->update(0.1f);
+}
+
+TEST_F(GameTest, GetCurrentStateNullptr) { EXPECT_EQ(g->getCurrentSate(), nullptr); }
+
+TEST_F(GameTest, GetCurrentStateNonNullptr)
+{
+    g->switchState(std::make_shared<NiceMock<MockState>>());
+    EXPECT_NE(g->getCurrentSate(), nullptr);
+}
+
+TEST_F(GameTest, GetCurrentStateAfterSwitch)
+{
+    g->switchState(std::make_shared<NiceMock<MockState>>());
+    EXPECT_NO_THROW(g->run());
+    EXPECT_NE(g->getCurrentSate(), nullptr);
+}
+
+TEST_F(GameTest, RunWithOutState) { EXPECT_NO_THROW(g->run()); }
+
+TEST_F(GameTest, RunWithState)
+{
+    g->switchState(std::make_shared<NiceMock<MockState>>());
+    EXPECT_NO_THROW(g->run());
+    EXPECT_NO_THROW(g->run());
+}
+
+TEST_F(GameTest, RunWithStateAndShake)
+{
+    g->switchState(std::make_shared<NiceMock<MockState>>());
+    EXPECT_NO_THROW(g->run());
+    g->shake(0.5f, 1.0f);
+    EXPECT_NO_THROW(g->run());
+}
+
+TEST_F(GameTest, RunWithTwoStates)
+{
+    g->switchState(std::make_shared<NiceMock<MockState>>());
+    EXPECT_NO_THROW(g->run());
+    EXPECT_NO_THROW(g->run());
+    g->switchState(std::make_shared<NiceMock<MockState>>());
+    EXPECT_NO_THROW(g->run());
+    EXPECT_NO_THROW(g->run());
 }

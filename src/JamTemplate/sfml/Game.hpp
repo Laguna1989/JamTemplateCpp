@@ -44,7 +44,6 @@ private:
     void setView(std::shared_ptr<sf::View> view);
     std::shared_ptr<sf::View> getView();
 
-    void setRenderWindow(std::shared_ptr<sf::RenderWindow> w);
     std::shared_ptr<sf::RenderWindow> getRenderWindow();
 
     std::shared_ptr<sf::Music> m_music;
