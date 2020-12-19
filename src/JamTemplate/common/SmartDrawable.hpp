@@ -95,7 +95,7 @@ public:
 
     // do not call this manually. Only place to call is Game()->update();
     static void setCamOffset(jt::Vector2 const& v) { m_CamOffset = v; }
-
+    static jt::Vector2 getStaticCamOffset() { return m_CamOffset; }
     void setIgnoreCamMovement(bool ignore) { m_ignoreCamMovement = ignore; }
 
     void setShadow(jt::Color const& col, jt::Vector2 const& offset)

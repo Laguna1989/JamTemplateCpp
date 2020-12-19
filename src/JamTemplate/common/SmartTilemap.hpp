@@ -61,7 +61,7 @@ private:
     // Map from object layer name to vector of objects, all rectangular.
     std::map<std::string, std::vector<InfoRect>> m_objectGroups;
     bool m_highlightObjectGroups = false;
-    mutable std::vector<std::shared_ptr<jt::SmartSprite>> m_tileSprites;
+    mutable std::vector<jt::SmartSprite> m_tileSprites;
 
     jt::Vector2 m_position;
 

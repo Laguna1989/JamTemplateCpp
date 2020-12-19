@@ -27,8 +27,8 @@ float deg2rad(float a) { return a / 180.0f * pi; }
 
 jt::Vector2 rotateBy(jt::Vector2 const& in, float aInDegree)
 {
-    float x = cos(deg2rad(aInDegree)) * in.x() + sin(deg2rad(aInDegree)) * in.y();
-    float y = -sin(deg2rad(aInDegree)) * in.x() + cos(deg2rad(aInDegree)) * in.y();
+    float x = cos(deg2rad(aInDegree)) * in.x() - sin(deg2rad(aInDegree)) * in.y();
+    float y = sin(deg2rad(aInDegree)) * in.x() + cos(deg2rad(aInDegree)) * in.y();
 
     return jt::Vector2 { x, y };
 }

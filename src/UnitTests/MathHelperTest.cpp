@@ -90,6 +90,84 @@ TEST(Rad2DegConversion, Inverse)
     EXPECT_NEAR(v, rad2deg(deg2rad(v)), 0.0001f);
 }
 
+class RotateByTestFixture : public ::testing::TestWithParam<jt::Vector2> {
+};
+
+INSTANTIATE_TEST_SUITE_P(RotateByTest, RotateByTestFixture,
+    ::testing::Values(jt::Vector2 { 1.0f, 0.0f }, jt::Vector2 { 0.0f, 1.0f },
+        jt::Vector2 { 1000.0f, 0.0f }, jt::Vector2 { 0.0f, 1000.0f },
+        jt::Vector2 { -3.0f, 5.22222f }));
+
+TEST_P(RotateByTestFixture, FullThreeHundretSixty)
+{
+    float const angle = 360.0f;
+    auto const initial { GetParam() };
+    auto const rotated = rotateBy(initial, angle);
+    EXPECT_NEAR(initial.x(), rotated.x(), 0.001f);
+    EXPECT_NEAR(initial.y(), rotated.y(), 0.001f);
+}
+
+TEST_P(RotateByTestFixture, MinusFullThreeHundretSixtyDegree)
+{
+    float const angle = -360.0f;
+    auto const initial { GetParam() };
+    auto const rotated = rotateBy(initial, angle);
+    EXPECT_NEAR(initial.x(), rotated.x(), 0.001f);
+    EXPECT_NEAR(initial.y(), rotated.y(), 0.001f);
+}
+
+TEST(RotateByTestFixture, NinetyDegree)
+{
+    float const angle { 90.0f };
+    jt::Vector2 const initial1 { 1.0, 0.0f };
+    jt::Vector2 const initial2 { 0.0, 1.0f };
+    jt::Vector2 const initial3 { -1.0, 0.0f };
+    jt::Vector2 const initial4 { 0.0, -1.0f };
+
+    auto const rotated1 = rotateBy(initial1, angle);
+    auto const rotated2 = rotateBy(initial2, angle);
+    auto const rotated3 = rotateBy(initial3, angle);
+    auto const rotated4 = rotateBy(initial4, angle);
+
+    EXPECT_NEAR(initial2.x(), rotated1.x(), 0.001f);
+    EXPECT_NEAR(initial2.y(), rotated1.y(), 0.001f);
+
+    EXPECT_NEAR(initial3.x(), rotated2.x(), 0.001f);
+    EXPECT_NEAR(initial3.y(), rotated2.y(), 0.001f);
+
+    EXPECT_NEAR(initial4.x(), rotated3.x(), 0.001f);
+    EXPECT_NEAR(initial4.y(), rotated3.y(), 0.001f);
+
+    EXPECT_NEAR(initial1.x(), rotated4.x(), 0.001f);
+    EXPECT_NEAR(initial1.y(), rotated4.y(), 0.001f);
+}
+
+TEST(RotateByTestFixture, MinusNinetyDegree)
+{
+    float const angle { -90.0f };
+    jt::Vector2 const initial1 { 1.0, 0.0f };
+    jt::Vector2 const initial2 { 0.0, 1.0f };
+    jt::Vector2 const initial3 { -1.0, 0.0f };
+    jt::Vector2 const initial4 { 0.0, -1.0f };
+
+    auto const rotated1 = rotateBy(initial1, angle);
+    auto const rotated2 = rotateBy(initial2, angle);
+    auto const rotated3 = rotateBy(initial3, angle);
+    auto const rotated4 = rotateBy(initial4, angle);
+
+    EXPECT_NEAR(initial4.x(), rotated1.x(), 0.001f);
+    EXPECT_NEAR(initial4.y(), rotated1.y(), 0.001f);
+
+    EXPECT_NEAR(initial1.x(), rotated2.x(), 0.001f);
+    EXPECT_NEAR(initial1.y(), rotated2.y(), 0.001f);
+
+    EXPECT_NEAR(initial2.x(), rotated3.x(), 0.001f);
+    EXPECT_NEAR(initial2.y(), rotated3.y(), 0.001f);
+
+    EXPECT_NEAR(initial3.x(), rotated4.x(), 0.001f);
+    EXPECT_NEAR(initial3.y(), rotated4.y(), 0.001f);
+}
+
 TEST(ClampTest, working)
 {
     float const in { 0.5f };

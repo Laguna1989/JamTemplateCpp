@@ -8,43 +8,52 @@ namespace jt {
 
 SmartTilemap::SmartTilemap(std::string const& path)
 {
+    std::cout << "SmartTileMap Ctor1\n";
     m_position = jt::Vector2 { 0.0f, 0.0f };
     m_screenSizeHint = jt::Vector2 { 0.0f, 0.0f };
 
     tson::Tileson parser;
 
+    std::cout << "SmartTileMap Ctor2\n";
     m_map = parser.parse(path);
-
+    std::cout << "SmartTileMap Ctor3\n";
     if (m_map->getStatus() != tson::ParseStatus::OK) {
+        std::cout << "tileson test could not be parsed.\n";
         throw std::logic_error { "tileson test could not be parsed." };
     }
 
     if (m_map->getTilesets().empty()) {
+        std::cout << "tileson test could not be parsed.\n";
         throw std::invalid_argument { "empty tilesets" };
     }
     auto const tileset = m_map->getTilesets().at(0);
-    // std::cout << "tileset image path: " << tileset.getImagePath() << std::endl;
-
+    // // std::cout << "tileset image path: " << tileset.getImagePath() << std::endl;
+    std::cout << "SmartTileMap Ctor4\n";
     auto const columns = tileset.getColumns();
     auto const rows = tileset.getTileCount() / columns;
     auto const ts = tileset.getTileSize();
     auto const tilesetName = "assets/" + tileset.getImagePath();
+    std::cout << "SmartTileMap Ctor4.1\n";
+    m_tileSprites.resize(rows * columns);
+    std::cout << "SmartTileMap Ctor4.2\n";
     for (int j = 0; j != rows; ++j) {
         for (int i = 0; i != columns; ++i) {
-            auto const tile = std::make_shared<jt::SmartSprite>();
-            tile->loadSprite(tilesetName, jt::Recti(i * ts.x, j * ts.y, ts.x, ts.y));
-            m_tileSprites.emplace_back(tile);
+            jt::SmartSprite tile {};
+            tile.loadSprite(tilesetName, jt::Recti(i * ts.x, j * ts.y, ts.x, ts.y));
+            m_tileSprites.at(i + j * columns) = tile;
         }
     }
-    for (auto& layer : m_map->getLayers()) {
-        const std::string currentGroupName = layer.getName();
-        for (auto& obj : layer.getObjects()) {
+    std::cout << "SmartTileMap Ctor5\n";
+    // for (auto& layer : m_map->getLayers()) {
+    //     const std::string currentGroupName = layer.getName();
+    //     for (auto& obj : layer.getObjects()) {
 
-            InfoRect collider { Conversion::vec(obj.getPosition()), Conversion::vec(obj.getSize()),
-                obj.getRotation(), obj.getType() };
-            m_objectGroups[currentGroupName].push_back(collider);
-        }
-    }
+    //         InfoRect collider { Conversion::vec(obj.getPosition()),
+    //         Conversion::vec(obj.getSize()),
+    //             obj.getRotation(), obj.getType() };
+    //         m_objectGroups[currentGroupName].push_back(collider);
+    //     }
+    // }
 }
 
 void SmartTilemap::doDraw(std::shared_ptr<jt::renderTarget> const sptr) const
@@ -91,41 +100,40 @@ void SmartTilemap::doDraw(std::shared_ptr<jt::renderTarget> const sptr) const
                     }
                 }
                 auto const pixelPosForTile = tilePos + posOffset;
-                m_tileSprites.at(id)->setPosition(pixelPosForTile);
-                m_tileSprites.at(id)->update(0.0f);
-                m_tileSprites.at(id)->draw(sptr);
+                m_tileSprites.at(id).setPosition(pixelPosForTile);
+                m_tileSprites.at(id).update(0.0f);
+                m_tileSprites.at(id).draw(sptr);
             }
         }
-
-        // TODO
-        // sf::RectangleShape shape(jt::Vector2(1.0f, 1.0f));
-        // for (auto& objLayer : m_objectGroups) {
-        //     for (auto& obj : objLayer.second) {
-        //         shape.setSize(obj.sizeDiagonal);
-        //         shape.setPosition(obj.position);
-        //         shape.setRotation(obj.rotation);
-        //         if (m_highlightObjectGroups) {
-        //             shape.setOutlineColor(jt::Random::getRandomColor());
-        //         } else {
-        //             shape.setOutlineColor(jt::colors::Transparent);
-        //         }
-        //         shape.setFillColor(jt::colors::Transparent);
-        //         shape.setOutlineThickness(2.0f);
-        //         sptr->draw(shape);
-        //     }
-        // }
     }
+    // TODO
+    // sf::RectangleShape shape(jt::Vector2(1.0f, 1.0f));
+    // for (auto& objLayer : m_objectGroups) {
+    //     for (auto& obj : objLayer.second) {
+    //         shape.setSize(obj.sizeDiagonal);
+    //         shape.setPosition(obj.position);
+    //         shape.setRotation(obj.rotation);
+    //         if (m_highlightObjectGroups) {
+    //             shape.setOutlineColor(jt::Random::getRandomColor());
+    //         } else {
+    //             shape.setOutlineColor(jt::colors::Transparent);
+    //         }
+    //         shape.setFillColor(jt::colors::Transparent);
+    //         shape.setOutlineThickness(2.0f);
+    //         sptr->draw(shape);
+    //     }
+    // }
 }
 
-void SmartTilemap::doDrawFlash(std::shared_ptr<jt::renderTarget> const sptr) const { }
-void SmartTilemap::doDrawShadow(std::shared_ptr<jt::renderTarget> const sptr) const { }
+void SmartTilemap::doDrawFlash(std::shared_ptr<jt::renderTarget> const /*sptr*/) const { }
+void SmartTilemap::doDrawShadow(std::shared_ptr<jt::renderTarget> const /*sptr*/) const { }
 
 void SmartTilemap::doUpdate(float /*elapsed*/) { }
 
 void SmartTilemap::setColor(jt::Color const& col)
 {
     for (auto& ts : m_tileSprites) {
-        ts->setColor(col);
+        ts.setColor(col);
     }
 }
 const jt::Color SmartTilemap::getColor() const { return jt::colors::Black; }

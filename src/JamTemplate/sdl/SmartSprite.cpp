@@ -122,6 +122,7 @@ void SmartSprite::doRotate(float /*rot*/) { }
 
 SDL_Rect SmartSprite::getDestRect(jt::Vector2 const& positionOffset) const
 {
+    // std::cout << getCamOffset().x() << " " << getStaticCamOffset().x() << std::endl;
     auto const pos = m_position + getShakeOffset() + getOffset() + getCamOffset() + positionOffset;
     SDL_Rect const destRect { static_cast<int>(pos.x()), static_cast<int>(pos.y()),
         static_cast<int>(m_sourceRect.width() * fabs(m_scale.x())),

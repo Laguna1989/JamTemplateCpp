@@ -33,6 +33,7 @@ private:
     float m_zoom;
 
     jt::Recti m_srcRect;
+    jt::Recti m_destRect;
     jt::Vector2 m_fullsize;
 
     // override functions from GameBase

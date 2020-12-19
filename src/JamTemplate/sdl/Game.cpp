@@ -20,7 +20,8 @@ Game::Game(unsigned int width, unsigned int height, float zoom, std::string cons
 
     unsigned int scaledWidth = static_cast<unsigned int>(width / zoom);
     unsigned int scaledHeight = static_cast<unsigned int>(height / zoom);
-    m_srcRect = jt::Recti(0, 0, scaledWidth, scaledHeight);
+    m_srcRect = jt::Recti { 0, 0, static_cast<int>(scaledWidth), static_cast<int>(scaledHeight) };
+    m_destRect = jt::Recti { 0, 0, static_cast<int>(width), static_cast<int>(height) };
 
     m_window = std::shared_ptr<SDL_Window>(SDL_CreateWindow(title.c_str(), SDL_WINDOWPOS_CENTERED,
                                                SDL_WINDOWPOS_CENTERED, width, height, 0),
@@ -68,13 +69,15 @@ void Game::doUpdate(float const elapsed)
 {
     jt::InputManager::update(0.0f, 0.0f, 0.0f, 0.0f, elapsed);
     m_state->update(elapsed);
-    // TODO move camera
+
+    SmartDrawable::setCamOffset(m_CamOffset);
+    // std::cout << m_CamOffset.x() << " " << SmartDrawable::getStaticCamOffset().x() << std::endl;
 };
 
 void Game::doDraw() const
 {
     // for reasons this can not be a member.
-    auto t = SDL_CreateTexture(getRenderTarget().get(), SDL_PIXELFORMAT_RGBA8888,
+    auto const t = SDL_CreateTexture(getRenderTarget().get(), SDL_PIXELFORMAT_RGBA8888,
         SDL_TEXTUREACCESS_TARGET, static_cast<int>(m_srcRect.width()),
         static_cast<int>(m_srcRect.height()));
 
@@ -88,10 +91,11 @@ void Game::doDraw() const
 
     // Now render the texture target to our screen
     SDL_RenderClear(getRenderTarget().get());
-    SDL_Rect rect { m_srcRect.left(), m_srcRect.top(), m_srcRect.width(), m_srcRect.height() };
-    SDL_Rect targetRect { static_cast<int>(m_shakeOffset.x()), static_cast<int>(m_shakeOffset.y()),
-        m_srcRect.width(), m_srcRect.height() };
-    SDL_RenderCopyEx(getRenderTarget().get(), t, &rect, &targetRect, 0, NULL, SDL_FLIP_NONE);
+    SDL_Rect sourceRect { m_srcRect.left(), m_srcRect.top(), m_srcRect.width(),
+        m_srcRect.height() };
+    SDL_Rect destRect { static_cast<int>(m_shakeOffset.x()), static_cast<int>(m_shakeOffset.y()),
+        m_destRect.width(), m_destRect.height() };
+    SDL_RenderCopyEx(getRenderTarget().get(), t, &sourceRect, &destRect, 0, NULL, SDL_FLIP_NONE);
     SDL_RenderPresent(getRenderTarget().get());
 
     SDL_DestroyTexture(t);
