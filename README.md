@@ -12,4 +12,4 @@ For mac os you have to install cmake and sfml via homebrew: `brew install cmake 
 If you use another package manager or want to install the dependencies yourself, you have to modify the paths in `CMakeLists.txt`.
 
 Code coverage helper command for future references:
-OpenCppCoverage.exe --sources C:\projects\JamTemplateCppSFML\* --excluded_sources C:\projects\JamTemplateCppSFML\src\UnitTests\* --excluded_sources C:\projects\JamTemplateCppSFML\src\StressTest\* --excluded_sources C:\projects\JamTemplateCppSFML\ext\*  -- build\Debug\UnitTests.exe
+OpenCppCoverage.exe --sources C:\projects\JamTemplateCpp\* --excluded_sources C:\projects\JamTemplateCpp\src\UnitTests\* --excluded_sources C:\projects\JamTemplateCpp\src\StressTest\* --excluded_sources C:\projects\JamTemplateCpp\ext\*  -- build\Debug\UnitTests.exe

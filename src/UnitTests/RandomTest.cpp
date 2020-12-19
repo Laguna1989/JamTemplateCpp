@@ -87,6 +87,13 @@ TEST(RandomGaussTestException, NegativeSigma)
 
 TEST(RandomColor, NoThrow) { EXPECT_NO_THROW(Random::getRandomColor()); }
 
+TEST(RandomColor, NotEqual)
+{
+    auto const c1 = Random::getRandomColor();
+    auto const c2 = Random::getRandomColor();
+    EXPECT_TRUE(c1 != c2);
+}
+
 TEST(RandomInRect, Valid)
 {
     auto const lower = 0.0f;

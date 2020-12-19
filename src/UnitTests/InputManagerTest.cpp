@@ -29,3 +29,15 @@ TEST(InputManagerTest, UpdateStoresCorrectMousePosition)
     EXPECT_EQ(InputManager::getMousePositionWorld().x(), mx);
     EXPECT_EQ(InputManager::getMousePositionWorld().y(), my);
 }
+
+TEST(GetAll, NoThrow)
+{
+    EXPECT_NO_THROW(jt::getAllButtons());
+    EXPECT_NO_THROW(jt::getAllKeys());
+}
+
+TEST(GetAll, NotEmpty)
+{
+    EXPECT_FALSE(jt::getAllButtons().empty());
+    EXPECT_FALSE(jt::getAllKeys().empty());
+}
