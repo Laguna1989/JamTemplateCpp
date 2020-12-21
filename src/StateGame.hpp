@@ -26,12 +26,9 @@ private:
     std::shared_ptr<jt::SmartShape> m_overlay;
     std::shared_ptr<jt::SmartSprite> m_sprite;
 
-    void doCreate() override;
-
-    virtual void doCreateInternal();
-
-    virtual void doInternalUpdate(float const elapsed) override;
-    virtual void doInternalDraw() const override;
+    void doInternalCreate() override;
+    void doInternalUpdate(float const elapsed) override;
+    void doInternalDraw() const override;
 };
 
 #endif

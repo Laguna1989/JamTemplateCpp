@@ -8,7 +8,7 @@
 #include "SmartSprite.hpp"
 #include "TweenAlpha.hpp"
 
-void StateGame::doCreate()
+void StateGame::doInternalCreate()
 {
     float const w = static_cast<float>(GP::GetWindowSize().x());
     float const h = static_cast<float>(GP::GetWindowSize().y());
@@ -21,8 +21,6 @@ void StateGame::doCreate()
     m_background->setColor(GP::PaletteBackground());
     m_background->update(0.0f);
 
-    doCreateInternal();
-
     m_overlay = std::make_shared<SmartShape>();
     m_overlay->makeRect(jt::Vector2 { w, h });
     m_overlay->setColor(jt::Color { 0, 0, 0 });
@@ -32,8 +30,15 @@ void StateGame::doCreate()
     tw->setSkipFrames();
     add(tw);
 
+    m_sprite = std::make_shared<jt::SmartSprite>();
+    m_sprite->loadSprite("assets/coin.png", jt::Recti { 0, 0, 16, 16 });
+    m_sprite->setPosition(jt::Vector2 { 100, 100 });
+
     m_hud = std::make_shared<Hud>();
     add(m_hud);
+
+    // StateGame will call drawObjects itself.
+    setAutoDraw(false);
 }
 
 void StateGame::doInternalUpdate(float const elapsed)
@@ -56,11 +61,4 @@ void StateGame::doInternalDraw() const
     drawObjects();
     m_sprite->draw(getGame()->getRenderTarget());
     m_overlay->draw(getGame()->getRenderTarget());
-}
-
-void StateGame::doCreateInternal()
-{
-    m_sprite = std::make_shared<jt::SmartSprite>();
-    m_sprite->loadSprite("assets/coin.png", jt::Recti { 0, 0, 16, 16 });
-    m_sprite->setPosition(jt::Vector2 { 100, 100 });
 }

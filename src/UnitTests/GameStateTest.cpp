@@ -11,25 +11,32 @@ using jt::GameObject;
 using jt::GameState;
 using ::testing::_;
 
+class GameStateImpl : public GameState {
+private:
+    virtual void doInternalDraw() const override { }
+    virtual void doInternalCreate() override { }
+    virtual void doInternalUpdate(float /*elapsed*/) override { }
+};
+
 TEST(GameStateInitTest, InitialValues)
 {
-    GameState s {};
+    GameStateImpl s {};
     EXPECT_NEAR(s.getAge(), 0.0f, 0.001f);
     EXPECT_EQ(s.getNumberOfObjects(), 0);
     EXPECT_FALSE(s.hasBeenInitialized());
     EXPECT_TRUE(s.isAlive());
 }
 
-TEST(GameStateInitTest, Create)
+TEST(GameStateInitTest, CreateWithoutGameInstance)
 {
-    GameState s {};
-    EXPECT_NO_THROW(s.create());
+    GameStateImpl s {};
+    EXPECT_ANY_THROW(s.create());
 }
 
 class GameStateTest : public ::testing::Test {
 public:
     std::shared_ptr<Game> g;
-    GameState s;
+    GameStateImpl s;
     void SetUp() override
     {
         g = std::make_shared<Game>(1, 1, 1.0f, "");
@@ -45,6 +52,8 @@ TEST_F(GameStateTest, SetGameInstance)
     EXPECT_NE(g2, nullptr);
     EXPECT_EQ(g, g2);
 }
+
+TEST_F(GameStateTest, CreateWithGameInstance) { EXPECT_NO_THROW(s.create()); }
 
 TEST_F(GameStateTest, CallsToGameObjects)
 {

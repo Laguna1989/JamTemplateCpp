@@ -18,8 +18,6 @@ public:
 
     virtual ~GameState();
 
-    void create();
-
     void add(GameObject::Sptr go);
     void add(std::shared_ptr<TweenBase> tb);
 
@@ -28,17 +26,20 @@ public:
     bool hasBeenInitialized() const;
 
 protected:
+    void internalCreate();
     void internalUpdate(float elapsed);
+    void internalDraw() const;
+
     void updateObjects(float elapsed);
     void updateTweens(float elapsed);
 
     void drawObjects() const;
-    void internalDraw() const;
 
-    /// do not override the do* function in derived states, but override doInternal* functions
-    virtual void doUpdate(float const elapsed) override;
-    virtual void doDraw() const override;
-    virtual void doCreate() override;
+    // note: if the user sets autoupdate/autodraw to false,
+    // he has to take care to do the respective calls himself
+    void setAutoUpdateObjects(bool performAutoUpdate);
+    void setAutoUpdateTweens(bool performAutoUpdate);
+    void setAutoDraw(bool performAudoDraw);
 
 private:
     /// all objects in the state
@@ -65,12 +66,21 @@ private:
     /// once it is safe to do so.
     std::vector<std::shared_ptr<TweenBase>> m_tweensToAdd;
 
+    bool m_doAutoUpdateObjects { true };
+    bool m_doAutoUpdateTweens { true };
+    bool m_doAutoDraw { true };
+
     bool m_hasBeenInitialized { false };
     void initialize();
 
-    virtual void doInternalDraw() const;
-    virtual void doInternalCreate();
-    virtual void doInternalUpdate(float /*elapsed*/);
+    /// do not override the do* function in derived states, but override doInternal* functions
+    virtual void doUpdate(float const elapsed) override;
+    virtual void doDraw() const override;
+    virtual void doCreate() override;
+
+    virtual void doInternalDraw() const = 0;
+    virtual void doInternalCreate() = 0;
+    virtual void doInternalUpdate(float /*elapsed*/) = 0;
 
     void addNewObjects();
     void cleanUpObjects();

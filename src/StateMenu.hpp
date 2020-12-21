@@ -28,8 +28,8 @@ private:
 
     bool m_starting { false };
 
+    void doInternalCreate() override;
     void doInternalUpdate(float const /*elapsed*/) override;
-    void doCreate() override;
     void doInternalDraw() const override;
 };
 

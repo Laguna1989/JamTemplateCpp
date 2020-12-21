@@ -1,4 +1,5 @@
 ﻿#include "StateMenu.hpp"
+#include "Color.hpp"
 #include "Game.hpp"
 #include "GameProperties.hpp"
 #include "InputManager.hpp"
@@ -12,11 +13,10 @@
 #include "TweenAlpha.hpp"
 #include "TweenPosition.hpp"
 #include "TweenScale.hpp"
-#include "Color.hpp"
 
 StateMenu::StateMenu() = default;
 
-void StateMenu::doCreate()
+void StateMenu::doInternalCreate()
 {
     float w = static_cast<float>(GP::GetScreenSize().x());
     float h = static_cast<float>(GP::GetScreenSize().y());
@@ -49,7 +49,8 @@ void StateMenu::doCreate()
     m_text_Credits = std::make_shared<jt::SmartText>();
     m_text_Credits->loadFont("assets/font.ttf", 10U, getGame()->getRenderTarget());
     m_text_Credits->SetTextAlign(jt::SmartText::TextAlign::LEFT);
-    m_text_Credits->setText("Created by @Laguna_999 for #1hgj288\nHalloween2020");
+    m_text_Credits->setText(
+        "Created by " + GP::AuthorName() + " for " + GP::JamName() + "\n" + GP::JamDate());
     m_text_Credits->setPosition({ 10, GP::GetScreenSize().y() - 30 });
     m_text_Credits->setColor(GP::PaletteColor5());
     m_text_Credits->update(0.0f);
@@ -83,7 +84,7 @@ void StateMenu::doCreate()
         add(ta1);
     }
     {
-        auto s2 = m_test_Explanation->getPosition() + jt::Vector2 { -500, 0 };
+        auto s2 = m_test_Explanation->getPosition() + jt::Vector2 { -1000, 0 };
         auto e2 = m_test_Explanation->getPosition();
 
         auto tw2 = tp::create(m_test_Explanation, 0.5f, s2, e2);

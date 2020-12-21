@@ -11,6 +11,9 @@ public:
     GP() = delete;
 
     static std::string GameName() { return "MyAwesomeGame"; }
+    static std::string AuthorName() { return "TODO"; }
+    static std::string JamName() { return "TODO"; }
+    static std::string JamDate() { return "TODO"; }
     static jt::Vector2 GetWindowSize() { return jt::Vector2 { 800, 600 }; }
     static float GetZoom() { return 1.0f; }
     static jt::Vector2 GetScreenSize() { return GetWindowSize() * (1.0f / GetZoom()); }
