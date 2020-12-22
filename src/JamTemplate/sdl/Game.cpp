@@ -70,7 +70,7 @@ void Game::doUpdate(float const elapsed)
     jt::InputManager::update(0.0f, 0.0f, 0.0f, 0.0f, elapsed);
     m_state->update(elapsed);
 
-    SmartDrawable::setCamOffset(m_CamOffset);
+    SmartDrawable::setCamOffset(-1.0f * m_CamOffset);
     // std::cout << m_CamOffset.x() << " " << SmartDrawable::getStaticCamOffset().x() << std::endl;
 };
 

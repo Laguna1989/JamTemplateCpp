@@ -54,6 +54,7 @@ SmartTilemap::SmartTilemap(std::string const& path)
     //         m_objectGroups[currentGroupName].push_back(collider);
     //     }
     // }
+    setIgnoreCamMovement(true);
 }
 
 void SmartTilemap::doDraw(std::shared_ptr<jt::renderTarget> const sptr) const
