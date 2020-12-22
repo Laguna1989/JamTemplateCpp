@@ -5,6 +5,7 @@
 using jt::Game;
 using jt::GameObject;
 
+#ifndef ENABLE_WEB
 TEST(GameObjectTest, CreateWithOutGameInstanceSet)
 {
     GameObject go {};
@@ -25,3 +26,5 @@ TEST(GameObjectTest, GameObjectCallsDoNotThrow)
     EXPECT_NO_THROW(go.kill());
     EXPECT_FALSE(go.isAlive());
 }
+
+#endif

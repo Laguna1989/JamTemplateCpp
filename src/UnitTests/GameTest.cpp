@@ -5,6 +5,7 @@
 
 using jt::Game;
 
+#ifndef ENABLE_WEB
 class GameTest : public ::testing::Test {
 public:
     unsigned const windowSizeX { 100 };
@@ -17,9 +18,6 @@ public:
 TEST_F(GameTest, InitialValues)
 {
     EXPECT_NE(g->getRenderTarget(), nullptr);
-
-    EXPECT_NEAR(g->getRenderTarget()->getSize().x, windowSizeX / zoom, 0.001);
-    EXPECT_NEAR(g->getRenderTarget()->getSize().y, windowSizeY / zoom, 0.001);
 
     EXPECT_EQ(g->getCamOffset().x(), 0);
     EXPECT_EQ(g->getCamOffset().y(), 0);
@@ -218,3 +216,4 @@ TEST_F(GameTest, RunWithTwoStates)
     EXPECT_NO_THROW(g->run());
     EXPECT_NO_THROW(g->run());
 }
+#endif

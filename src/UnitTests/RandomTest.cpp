@@ -75,6 +75,7 @@ TEST_P(RandomFloatGaussTestFixture, RandomFloat)
     }
 }
 
+#ifndef ENABLE_WEB
 TEST(RandomGaussTestException, ZeroSigma)
 {
     EXPECT_THROW(Random::getFloatGauss(0.0f, 0), std::invalid_argument);
@@ -84,6 +85,7 @@ TEST(RandomGaussTestException, NegativeSigma)
 {
     EXPECT_THROW(Random::getFloatGauss(0.0f, -2.0f), std::invalid_argument);
 }
+#endif
 
 TEST(RandomColor, NoThrow) { EXPECT_NO_THROW(Random::getRandomColor()); }
 

@@ -118,8 +118,12 @@ endif()
 ## setup UnitTests
 #####################################################
 if (ENABLE_UNITTESTS)
+	
 	file(GLOB_RECURSE UNITTESTFILES src/UnitTests/*)
 	
+	if(ENABLE_WEB)
+		set(CMAKE_EXECUTABLE_SUFFIX ".html")
+	endif()
 	# Download and unpack googletest at configure time
 	configure_file(ext/googletest/CMakeLists.txt.in ${CMAKE_CURRENT_SOURCE_DIR}/ext/googletest/googletest-download/CMakeLists.txt)
 	execute_process(COMMAND ${CMAKE_COMMAND} -G "${CMAKE_GENERATOR}" .

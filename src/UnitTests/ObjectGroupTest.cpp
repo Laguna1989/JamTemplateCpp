@@ -13,13 +13,15 @@ TEST(ObjectGroupTest, InitialGroupIsEmpty)
     Group g {};
 
     EXPECT_EQ(g.size(), 0);
-    EXPECT_ANY_THROW((void)g.at(0));
     EXPECT_EQ(g.begin(), g.end());
     EXPECT_EQ(g.getAge(), 0.0f);
     EXPECT_TRUE(g.isAlive());
+#ifndef ENABLE_WEB
     EXPECT_ANY_THROW(g.getGame());
+#endif
 }
 
+#ifndef ENABLE_WEB
 class ObjectGroupTestWithGame : public ::testing::Test {
 public:
     std::shared_ptr<Game> game;
@@ -123,3 +125,5 @@ TEST_F(ObjectGroupTestWithGame, RangedBaseForLoopIsPossibleForObjectGroup)
 
     EXPECT_EQ(count, 2);
 }
+
+#endif

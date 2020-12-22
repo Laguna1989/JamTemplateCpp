@@ -11,6 +11,7 @@ using jt::GameObject;
 using jt::GameState;
 using ::testing::_;
 
+#ifndef ENABLE_WEB
 class GameStateImpl : public GameState {
 private:
     virtual void doInternalDraw() const override { }
@@ -122,3 +123,5 @@ TEST_F(GameStateTest, CallsToTween)
     // update state
     s.update(0.1f);
 }
+
+#endif

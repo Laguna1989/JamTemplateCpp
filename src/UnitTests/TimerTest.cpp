@@ -60,9 +60,10 @@ TEST(TimerTest, TimerIsCalledExactlyTwice)
     ASSERT_EQ(count, expectedCalls);
 }
 
+#ifndef ENABLE_WEB
 TEST(TimerTest, InvalidCallback)
 {
     auto const lambda = []() { Timer const t { 2.5f, nullptr }; };
-
     EXPECT_THROW(lambda(), std::invalid_argument);
 }
+#endif

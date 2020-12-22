@@ -7,8 +7,8 @@
 template <class T>
 class MockTween : public jt::Tween<T> {
 public:
-    MockTween(std::weak_ptr<T> obj, OnUpdateCallbackType cb, float totalTime)
-        : Tween { obj, cb, totalTime }
+    MockTween(std::weak_ptr<T> obj, typename jt::Tween<T>::OnUpdateCallbackType cb, float totalTime)
+        : jt::Tween<T> { obj, cb, totalTime }
     {
     }
 

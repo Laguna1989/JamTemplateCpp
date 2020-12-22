@@ -23,8 +23,6 @@ public:
     void runGame(
         std::shared_ptr<GameState> InitialState, GameLoopFunctionPtr gameloop_function) override;
 
-    void run();
-
     virtual float getZoom() const override;
 
 private:

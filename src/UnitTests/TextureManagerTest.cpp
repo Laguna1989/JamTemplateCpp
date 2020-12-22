@@ -4,6 +4,7 @@
 #include <exception>
 
 using jt::TextureManager;
+#ifndef ENABLE_WEB
 
 class TextureManagerTest : public ::testing::Test {
 public:
@@ -12,22 +13,6 @@ public:
 TEST_F(TextureManagerTest, ValidFileCanBeLoaded)
 {
     EXPECT_NO_THROW(TextureManager::get("assets/coin.png"));
-}
-
-TEST_F(TextureManagerTest, InvalidFileNameThrowsException)
-{
-    EXPECT_THROW(
-        TextureManager::get("test12345_not_existing_file.txt.bla.invalid"), std::invalid_argument);
-}
-
-TEST_F(TextureManagerTest, GetTextureFromEmptyString)
-{
-    EXPECT_THROW(TextureManager::get(""), std::invalid_argument);
-}
-
-TEST_F(TextureManagerTest, InvalidSpecialOperation)
-{
-    EXPECT_THROW(TextureManager::get("#q#1#2#3"), std::invalid_argument);
 }
 
 TEST_F(TextureManagerTest, GetButton) { EXPECT_NO_THROW(TextureManager::get("#b#100#200")); }
@@ -87,6 +72,28 @@ TEST_F(TextureManagerTest, GetVignettteInvalid)
     EXPECT_ANY_THROW(TextureManager::get("#v#0x12#30"));
 }
 
+TEST_F(TextureManagerTest, ColorReplaceWithEmptyChangeSet)
+{
+    TextureManager::addSelectiveColorReplacement(0, {});
+    EXPECT_NO_THROW(TextureManager::get("#r#assets/coin.png#0"));
+}
+
+TEST_F(TextureManagerTest, InvalidFileNameThrowsException)
+{
+    EXPECT_THROW(
+        TextureManager::get("test12345_not_existing_file.txt.bla.invalid"), std::invalid_argument);
+}
+
+TEST_F(TextureManagerTest, GetTextureFromEmptyString)
+{
+    EXPECT_THROW(TextureManager::get(""), std::invalid_argument);
+}
+
+TEST_F(TextureManagerTest, InvalidSpecialOperation)
+{
+    EXPECT_THROW(TextureManager::get("#q#1#2#3"), std::invalid_argument);
+}
+
 TEST_F(TextureManagerTest, ColorReplaceWithoutLookup)
 {
     EXPECT_THROW(TextureManager::get("#r#assets/coin.png#0"), std::invalid_argument);
@@ -99,26 +106,22 @@ TEST_F(TextureManagerTest, ColorReplaceWithInvalidArgument)
     EXPECT_THROW(TextureManager::get("#r#assets/coin.png#0#12"), std::invalid_argument);
 }
 
-TEST_F(TextureManagerTest, ColorReplaceWithInvalidIndex)
-{
-    auto p = std::make_pair(jt::Color { 0, 0, 0 }, jt::Color { 255, 0, 255 });
-    TextureManager::addSelectiveColorReplacement(0, { p });
-    EXPECT_THROW(TextureManager::get("#r#assets/coin.png#4"), std::invalid_argument);
-}
-
-TEST_F(TextureManagerTest, ColorReplaceWithEmptyChangeSet)
-{
-    TextureManager::addSelectiveColorReplacement(0, {});
-    EXPECT_NO_THROW(TextureManager::get("#r#assets/coin.png#0"));
-}
-
 TEST_F(TextureManagerTest, ColorReplaceWithInvalidNumber)
 {
     auto p = std::make_pair(jt::Color { 0, 0, 0 }, jt::Color { 255, 0, 255 });
     TextureManager::addSelectiveColorReplacement(0, { p });
     EXPECT_THROW(TextureManager::get("#r#assets/coin.png#0xFF"), std::invalid_argument);
 }
+TEST_F(TextureManagerTest, ColorReplaceWithInvalidIndex)
+{
+    auto p = std::make_pair(jt::Color { 0, 0, 0 }, jt::Color { 255, 0, 255 });
+    TextureManager::addSelectiveColorReplacement(0, { p });
+    EXPECT_THROW(TextureManager::get("#r#assets/coin.png#4"), std::invalid_argument);
+}
+#endif
 
+// TODO test uses SFML specific functions
+#if 0
 TEST_F(TextureManagerTest, ColorReplaceValid)
 {
     // position of a pixel with a certain color
@@ -146,3 +149,4 @@ TEST_F(TextureManagerTest, ColorReplaceValid)
     EXPECT_EQ(c.b, 255);
     EXPECT_EQ(c.a, 255);
 }
+#endif

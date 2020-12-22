@@ -1,6 +1,7 @@
 ﻿#ifndef GUARD_JAMTEMPLATE_TWEENALPHA_HPP_INCLUDEGUARD
 #define GUARD_JAMTEMPLATE_TWEENALPHA_HPP_INCLUDEGUARD
 
+#include "Color.hpp"
 #include "Lerp.hpp"
 #include "TweenBase.hpp"
 #include <cstdint>
