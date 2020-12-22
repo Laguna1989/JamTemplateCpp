@@ -7,6 +7,8 @@ namespace jt {
 
 class SoundBase {
 public:
+    virtual ~SoundBase() = default;
+
     void load(std::string const& fileName)
     {
         doLoad(fileName);

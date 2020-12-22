@@ -10,7 +10,7 @@ namespace jt {
 
 class Sound : public SoundBase {
 private:
-    std::shared_ptr<Mix_Chunk> wave { nullptr };
+    std::shared_ptr<Mix_Chunk> m_wave { nullptr };
     bool m_playing { false };
     bool m_loop { false };
     int m_channel { -1 };

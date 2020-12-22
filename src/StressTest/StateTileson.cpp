@@ -3,17 +3,22 @@
 #include "InputManager.hpp"
 #include "SmartTilemap.hpp"
 #include "StateBox2d.hpp"
+#include "Timer.hpp"
 #include <filesystem>
 
-void StateTileson::doCreate()
+void StateTileson::doInternalCreate()
 {
     m_tilemap = std::make_shared<jt::SmartTilemap>("assets/tileson_test.json");
     m_tilemap->setScreenSizeHint(jt::Vector2(400, 300), getGame());
+
+    m_sound = std::make_shared<jt::Sound>();
+    m_sound->load("assets/test.ogg");
+
+    auto const t = std::make_shared<jt::Timer>(2.5f, [sound = m_sound]() { sound->play(); });
+    add(t);
 }
 
-void StateTileson::doDraw() const { m_tilemap->draw(getGame()->getRenderTarget()); }
-
-void StateTileson::doUpdate(float const elapsed)
+void StateTileson::doInternalUpdate(float const elapsed)
 {
     auto const scrollspeed = 50.0f;
     m_tilemap->update(elapsed);
@@ -39,3 +44,5 @@ void StateTileson::doUpdate(float const elapsed)
         getGame()->switchState(std::make_shared<StateBox2d>());
     }
 }
+
+void StateTileson::doInternalDraw() const { m_tilemap->draw(getGame()->getRenderTarget()); }

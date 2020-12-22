@@ -16,7 +16,7 @@ public:
 private:
     void doInternalUpdate(float const /*elapsed*/) override;
 
-    void doCreate() override
+    void doInternalCreate() override
     {
         using jt::Timer;
 
@@ -25,6 +25,8 @@ private:
             = std::make_shared<Timer>(0.6f, [this]() { getGame()->shake(0.5f, 2.0f); });
         add(t);
     }
+
+    void doInternalDraw() const override {};
 };
 
 #endif

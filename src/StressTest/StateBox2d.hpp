@@ -24,7 +24,7 @@ private:
     jt::SmartBar::Sptr m_bar1;
     jt::SmartBar::Sptr m_bar2;
 
-    void doCreate() override
+    void doInternalCreate() override
     {
         b2BodyDef groundBodyDef;
         groundBodyDef.fixedRotation = true;

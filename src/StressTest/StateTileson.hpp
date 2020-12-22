@@ -3,6 +3,7 @@
 
 #include "GameState.hpp"
 #include "SmartTilemap.hpp"
+#include "Sound.hpp"
 #include <memory>
 
 namespace jt {
@@ -16,8 +17,10 @@ public:
 private:
     std::shared_ptr<jt::SmartTilemap> m_tilemap;
 
-    void doCreate() override;
-    void doDraw() const override;
-    void doUpdate(float const elapsed) override;
+    std::shared_ptr<jt::Sound> m_sound;
+
+    void doInternalCreate() override;
+    void doInternalUpdate(float const elapsed) override;
+    void doInternalDraw() const override;
 };
 #endif
