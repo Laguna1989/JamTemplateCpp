@@ -49,8 +49,9 @@ SmartTilemap::SmartTilemap(std::string const& path)
     //     }
     // }
 #if ENABLE_WEB
-#else
     setIgnoreCamMovement(true);
+#else
+    setIgnoreCamMovement(false);
 #endif
 }
 
@@ -61,6 +62,7 @@ void SmartTilemap::doDraw(std::shared_ptr<jt::renderTarget> const sptr) const
     }
 
     auto const posOffset = m_position + getShakeOffset() + getOffset() + getCamOffset();
+    // std::cout << "SmartTilemap.posOffset.x " << posOffset.x() << std::endl;
 
     auto g = m_gamePtr.lock();
 
@@ -97,6 +99,8 @@ void SmartTilemap::doDraw(std::shared_ptr<jt::renderTarget> const sptr) const
                     }
                 }
                 auto const pixelPosForTile = tilePos + posOffset;
+                // std::cout << "SmartTilemap.pixelPosForTile.x " << pixelPosForTile.x() <<
+                // std::endl;
                 m_tileSprites.at(id).setPosition(pixelPosForTile);
                 m_tileSprites.at(id).update(0.0f);
                 m_tileSprites.at(id).draw(sptr);

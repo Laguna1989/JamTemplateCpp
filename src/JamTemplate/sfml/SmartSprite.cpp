@@ -64,8 +64,9 @@ void SmartSprite::cleanImage()
 
 void SmartSprite::doUpdate(float /*elapsed*/)
 {
-    // std::cout << getCamOffset().x() << std::endl;
+    // std::cout << "SmartSprite.CamOffset.x " << getCamOffset().x() << std::endl;
     auto const pos = m_position + getShakeOffset() + getOffset() + getCamOffset();
+    // std::cout << "SmartSprite.final position.x " << pos.x() << std::endl;
     m_sprite.setPosition(pos);
     m_flashSprite.setPosition(pos);
 }
