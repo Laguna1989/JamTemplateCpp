@@ -85,16 +85,16 @@ void SmartTilemap::doDraw(std::shared_ptr<jt::renderTarget> const sptr) const
                     auto const py = tilePos.y();
                     auto const tsx = tile.getTile()->getTileSize().x;
                     auto const tsy = tile.getTile()->getTileSize().y;
-                    if (px - camoffset.x() + tsx < 0) {
+                    if (px + camoffset.x() + tsx < 0) {
                         continue;
                     }
-                    if (py - camoffset.y() + tsy < 0) {
+                    if (py + camoffset.y() + tsy < 0) {
                         continue;
                     }
-                    if (px - camoffset.x() >= m_screenSizeHint.x() + tsx) {
+                    if (px + camoffset.x() >= m_screenSizeHint.x() + tsx) {
                         continue;
                     }
-                    if (py - camoffset.y() >= m_screenSizeHint.y() + tsy) {
+                    if (py + camoffset.y() >= m_screenSizeHint.y() + tsy) {
                         continue;
                     }
                 }
