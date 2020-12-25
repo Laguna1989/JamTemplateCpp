@@ -1,6 +1,7 @@
 ﻿#include "Game.hpp"
 #include "Random.hpp"
 #include "StateTileson.hpp"
+#include <iostream>
 #include <memory>
 
 std::shared_ptr<jt::GameBase> game;
@@ -14,6 +15,7 @@ void gameloop()
 
 int main()
 {
+
     jt::Random::useTimeAsRandomSeed();
 
     game = std::make_shared<jt::Game>(800, 600, 4.0f, "Stresstest");

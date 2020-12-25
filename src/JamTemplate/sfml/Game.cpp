@@ -79,7 +79,7 @@ void Game::doUpdate(float const elapsed)
 
     getView()->setCenter(
         jt::Vector2 { static_cast<float>(camOffsetix), static_cast<float>(camOffsetiy) });
-    SmartDrawable::setCamOffset(getView()->getCenter() - getView()->getSize() * 0.5f);
+    SmartDrawable::setCamOffset(-1.0f * (getView()->getCenter() - getView()->getSize() / 2.0f));
 };
 
 void Game::doDraw() const

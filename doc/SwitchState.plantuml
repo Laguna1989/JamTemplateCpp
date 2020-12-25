@@ -15,11 +15,16 @@ g -> p : update(elapsed)
 activate p
 create n
 p -> n : create
-p -> g : switchState(new next)
-deactivate p
-g -> g : m_nextState = next;
-note right: next is stored and will be switched on next update.
 
+p -> g : switchState(StateGame)
+activate g
+g -> g : m_nextState = StateGame;
+note right: StateGame is stored and\nwill be switched on next update.
+g --> p
+deactivate g
+p --> g
+
+deactivate p
 g --> u
 deactivate g
 deactivate g

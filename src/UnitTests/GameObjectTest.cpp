@@ -27,4 +27,12 @@ TEST(GameObjectTest, GameObjectCallsDoNotThrow)
     EXPECT_FALSE(go.isAlive());
 }
 
+TEST(GameObjectTest, GameObjectAddTwice)
+{
+    auto const g = std::make_shared<Game>(100, 100, 1.0f, "test");
+    GameObject go {};
+    go.setGameInstance(g);
+    EXPECT_THROW(go.setGameInstance(g), std::logic_error);
+}
+
 #endif

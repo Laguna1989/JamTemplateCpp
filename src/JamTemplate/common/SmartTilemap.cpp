@@ -8,15 +8,12 @@ namespace jt {
 
 SmartTilemap::SmartTilemap(std::string const& path)
 {
-    std::cout << "SmartTileMap Ctor1\n";
     m_position = jt::Vector2 { 0.0f, 0.0f };
     m_screenSizeHint = jt::Vector2 { 0.0f, 0.0f };
 
     tson::Tileson parser;
 
-    std::cout << "SmartTileMap Ctor2\n";
     m_map = parser.parse(path);
-    std::cout << "SmartTileMap Ctor3\n";
     if (m_map->getStatus() != tson::ParseStatus::OK) {
         std::cout << "tileson test could not be parsed.\n";
         throw std::logic_error { "tileson test could not be parsed." };
@@ -28,22 +25,19 @@ SmartTilemap::SmartTilemap(std::string const& path)
     }
     auto const tileset = m_map->getTilesets().at(0);
     // // std::cout << "tileset image path: " << tileset.getImagePath() << std::endl;
-    std::cout << "SmartTileMap Ctor4\n";
     auto const columns = tileset.getColumns();
     auto const rows = tileset.getTileCount() / columns;
     auto const ts = tileset.getTileSize();
     auto const tilesetName = "assets/" + tileset.getImagePath();
-    std::cout << "SmartTileMap Ctor4.1\n";
     m_tileSprites.resize(rows * columns);
-    std::cout << "SmartTileMap Ctor4.2\n";
     for (int j = 0; j != rows; ++j) {
         for (int i = 0; i != columns; ++i) {
             jt::SmartSprite tile {};
             tile.loadSprite(tilesetName, jt::Recti(i * ts.x, j * ts.y, ts.x, ts.y));
+            tile.setIgnoreCamMovement(true);
             m_tileSprites.at(i + j * columns) = tile;
         }
     }
-    std::cout << "SmartTileMap Ctor5\n";
     // for (auto& layer : m_map->getLayers()) {
     //     const std::string currentGroupName = layer.getName();
     //     for (auto& obj : layer.getObjects()) {
@@ -54,7 +48,10 @@ SmartTilemap::SmartTilemap(std::string const& path)
     //         m_objectGroups[currentGroupName].push_back(collider);
     //     }
     // }
+#if ENABLE_WEB
+#else
     setIgnoreCamMovement(true);
+#endif
 }
 
 void SmartTilemap::doDraw(std::shared_ptr<jt::renderTarget> const sptr) const
@@ -80,9 +77,8 @@ void SmartTilemap::doDraw(std::shared_ptr<jt::renderTarget> const sptr) const
                 auto const tilePos = Conversion::vec(tile.getPosition());
                 // optimization: don't draw tiles outside the game window
                 if (g) {
-                    jt::Vector2 const camoffset
-                        = (getIgnoreCamMovement() ? jt::Vector2 { 0.0f, 0.0f } : g->getCamOffset());
-
+                    jt::Vector2 const camoffset = getStaticCamOffset();
+                    // std::cout << camoffset.x() << std::endl;
                     auto const px = tilePos.x();
                     auto const py = tilePos.y();
                     auto const tsx = tile.getTile()->getTileSize().x;

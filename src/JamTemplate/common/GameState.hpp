@@ -26,10 +26,6 @@ public:
     bool hasBeenInitialized() const;
 
 protected:
-    void internalCreate();
-    void internalUpdate(float elapsed);
-    void internalDraw() const;
-
     void updateObjects(float elapsed);
     void updateTweens(float elapsed);
 
@@ -78,9 +74,13 @@ private:
     virtual void doDraw() const override;
     virtual void doCreate() override;
 
-    virtual void doInternalDraw() const = 0;
+    void internalCreate();
+    void internalUpdate(float elapsed);
+    void internalDraw() const;
+
     virtual void doInternalCreate() = 0;
-    virtual void doInternalUpdate(float /*elapsed*/) = 0;
+    virtual void doInternalUpdate(float elapsed) = 0;
+    virtual void doInternalDraw() const = 0;
 
     void addNewObjects();
     void cleanUpObjects();

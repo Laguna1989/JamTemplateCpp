@@ -6,6 +6,7 @@
 #include "InputManager.hpp"
 #include "SmartShape.hpp"
 #include "SmartSprite.hpp"
+#include "StateMenu.hpp"
 #include "TweenAlpha.hpp"
 
 void StateGame::doInternalCreate()

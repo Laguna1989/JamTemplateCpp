@@ -33,13 +33,6 @@ void StateTileson::doInternalUpdate(float const elapsed)
         getGame()->moveCam(jt::Vector2 { 0.0f, scrollspeed * elapsed });
     }
 
-    if (jt::InputManager::justPressed(jt::KeyCode::I)) {
-        m_tilemap->setIgnoreCamMovement(true);
-    }
-    if (jt::InputManager::justPressed(jt::KeyCode::O)) {
-        m_tilemap->setIgnoreCamMovement(false);
-    }
-
     if (jt::InputManager::justPressed(jt::KeyCode::F1)) {
         getGame()->switchState(std::make_shared<StateBox2d>());
     }

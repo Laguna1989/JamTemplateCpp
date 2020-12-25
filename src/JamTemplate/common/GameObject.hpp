@@ -1,6 +1,7 @@
 ﻿#ifndef GUARD_JAMTEMPLATE_GAMEOBJECT_HPP_INCLUDEGUARD
 #define GUARD_JAMTEMPLATE_GAMEOBJECT_HPP_INCLUDEGUARD
 
+#include "MathHelper.hpp"
 #include <iostream>
 #include <memory>
 
@@ -40,12 +41,21 @@ public:
     {
         m_age += elapsed;
         doUpdate(elapsed);
-    };
+    }
+
     void draw() const { doDraw(); };
     float getAge() const { return m_age; }
     void setAge(float t) { m_age = t; }
 
-    void setGameInstance(std::weak_ptr<GameBase> g) { m_game = g; }
+    void setGameInstance(std::weak_ptr<GameBase> g)
+    {
+        if (!jt::MathHelper::is_uninitialized_weak_ptr(m_game)) {
+            throw std::logic_error {
+                "It is not allowed to call setGameInstance twice on a GameObject."
+            };
+        }
+        m_game = g;
+    }
     std::shared_ptr<GameBase> getGame()
     {
         if (m_game.expired())

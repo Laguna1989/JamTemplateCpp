@@ -1,0 +1,30 @@
+@startuml
+
+participant "go:GameObject\n<<Jam Template>>" as go #Blue
+participant "go:GameState\n<<Jam Template>>" as gs #Blue
+participant "go:StateMenu\n<<Jam Space>>" as sm #Green
+
+
+-> go : update()
+note right: go is the same object on all lifelines,\nbut split up to emphasize the called\noperations' origin class.
+activate go
+go -> gs : doUpdate()
+activate gs
+gs -> gs : internalUpdate()
+activate gs
+gs -> sm : doInternalUpdate()
+activate sm
+
+sm --> gs
+deactivate sm
+
+deactivate gs
+
+gs --> go
+deactivate gs
+
+<-- go
+deactivate go
+
+
+@enduml

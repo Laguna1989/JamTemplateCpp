@@ -4,6 +4,7 @@
 #include "Vector.hpp"
 #include <assert.h>
 #include <iomanip>
+#include <memory>
 #include <sstream>
 #include <string>
 #include <vector>
@@ -57,6 +58,13 @@ template <typename T>
 int sgn(T val)
 {
     return (T(0) < val) - (val < T(0));
+}
+
+template <typename T>
+bool is_uninitialized_weak_ptr(std::weak_ptr<T> const& weak)
+{
+    using wt = std::weak_ptr<T>;
+    return !weak.owner_before(wt {}) && !wt {}.owner_before(weak);
 }
 
 } // namespace MathHelper

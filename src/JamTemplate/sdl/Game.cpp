@@ -67,11 +67,16 @@ float Game::getZoom() const { return m_zoom; }
 
 void Game::doUpdate(float const elapsed)
 {
-    jt::InputManager::update(0.0f, 0.0f, 0.0f, 0.0f, elapsed);
+    SDL_PumpEvents();
+    int mxi { 0 };
+    int myi { 0 };
+    auto const mouseState = SDL_GetMouseState(&mxi, &myi);
+    float const x = mxi / getZoom();
+    float const y = myi / getZoom();
+    jt::InputManager::update(y + getCamOffset().x(), +getCamOffset().y(), x, y, elapsed);
     m_state->update(elapsed);
 
     SmartDrawable::setCamOffset(-1.0f * m_CamOffset);
-    // std::cout << m_CamOffset.x() << " " << SmartDrawable::getStaticCamOffset().x() << std::endl;
 };
 
 void Game::doDraw() const

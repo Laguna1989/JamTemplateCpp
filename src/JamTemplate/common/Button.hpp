@@ -30,8 +30,8 @@ public:
     ~Button()
     {
         // std::cout << "button destructor\n";
-        // std::cout << m_icon << "\n";
-        m_icon = nullptr;
+        // std::cout << m_drawable << "\n";
+        m_drawable = nullptr;
         // std::cout << "button destructor half 1\n";
         m_background = nullptr;
         // std::cout << "button destructor half 2\n";
@@ -42,7 +42,7 @@ public:
     Button(const Button& b) = default;
     Button(Button&& b) = default;
 
-    void setIcon(SmartDrawable::Sptr sprt) { m_icon = sprt; }
+    void setDrawable(SmartDrawable::Sptr sprt) { m_drawable = sprt; }
 
     void addCallback(std::function<void(void)> cb) { m_callbacks.push_back(cb); }
 
@@ -61,7 +61,7 @@ public:
 
 private:
     std::shared_ptr<SmartAnimation> m_background;
-    std::shared_ptr<SmartDrawable> m_icon { nullptr };
+    std::shared_ptr<SmartDrawable> m_drawable { nullptr };
     std::vector<std::function<void(void)>> m_callbacks;
     jt::Vector2 m_pos;
 
@@ -70,8 +70,8 @@ private:
     void doDraw() const override
     {
         m_background->draw(getGame()->getRenderTarget());
-        if (m_icon)
-            m_icon->draw(getGame()->getRenderTarget());
+        if (m_drawable)
+            m_drawable->draw(getGame()->getRenderTarget());
     }
 
     bool isOver(float mx, float my)
@@ -88,9 +88,9 @@ private:
     {
         m_background->update(elapsed);
         m_background->setPosition(m_pos);
-        if (m_icon) {
-            m_icon->setPosition(m_pos);
-            m_icon->update(elapsed);
+        if (m_drawable) {
+            m_drawable->setPosition(m_pos);
+            m_drawable->update(elapsed);
         }
 
         if (isOver(jt::InputManager::getMousePositionScreen().x(),
