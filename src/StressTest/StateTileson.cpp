@@ -2,7 +2,7 @@
 #include "Game.hpp"
 #include "InputManager.hpp"
 #include "SmartTilemap.hpp"
-#include "StateBox2d.hpp"
+#include "StateSelect.hpp"
 #include "Timer.hpp"
 #include <filesystem>
 
@@ -33,8 +33,9 @@ void StateTileson::doInternalUpdate(float const elapsed)
         getGame()->moveCam(jt::Vector2 { 0.0f, scrollspeed * elapsed });
     }
 
-    if (jt::InputManager::justPressed(jt::KeyCode::F1)) {
-        getGame()->switchState(std::make_shared<StateBox2d>());
+    if (jt::InputManager::justPressed(jt::KeyCode::F1)
+        || jt::InputManager::justPressed(jt::KeyCode::Escape)) {
+        getGame()->switchState(std::make_shared<StateSelect>());
     }
 }
 

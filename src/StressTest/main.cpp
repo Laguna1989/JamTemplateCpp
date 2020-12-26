@@ -1,6 +1,6 @@
 ﻿#include "Game.hpp"
 #include "Random.hpp"
-#include "StateTileson.hpp"
+#include "StateSelect.hpp"
 #include <iostream>
 #include <memory>
 
@@ -20,7 +20,7 @@ int main()
 
     game = std::make_shared<jt::Game>(800, 600, 4.0f, "Stresstest");
 
-    game->runGame(std::make_shared<StateTileson>(), gameloop);
+    game->runGame(std::make_shared<StateSelect>(), gameloop);
 
     return 0;
 }

@@ -1,6 +1,22 @@
 ﻿#include "StateBox2d.hpp"
 #include "InputManager.hpp"
-#include "State1.hpp"
+#include "StateSelect.hpp"
+#include "TweenRotation.hpp"
+#include "TweenScale.hpp"
+
+void StateBox2d::doInternalCreate()
+{
+    CreateWalls();
+
+    CreatePlayer();
+
+    m_bar1 = std::make_shared<jt::SmartBar>(100.0f, 10.0f);
+    m_bar1->setPosition(jt::Vector2 { 10, 10 });
+
+    m_bar2 = std::make_shared<jt::SmartBar>(100.0f, 10.0f);
+    m_bar2->setPosition(jt::Vector2 { 10, 25 });
+    m_bar2->setMaxValue(2.0f);
+}
 
 void StateBox2d::doInternalUpdate(float const elapsed)
 {
@@ -15,8 +31,9 @@ void StateBox2d::doInternalUpdate(float const elapsed)
         m_world->Step(elapsed, velocityIterations, positionIterations);
     }
 
-    if (getAge() >= 15.0f || jt::InputManager::justPressed(jt::KeyCode::F1)) {
-        getGame()->switchState(std::make_shared<State1>());
+    if (jt::InputManager::justPressed(jt::KeyCode::F1)
+        || jt::InputManager::justPressed(jt::KeyCode::Escape)) {
+        getGame()->switchState(std::make_shared<StateSelect>());
     }
 
     float max_T = 5.5f;
@@ -44,4 +61,59 @@ void StateBox2d::doInternalDraw() const
     drawObjects();
     m_bar1->draw(getGame()->getRenderTarget());
     m_bar2->draw(getGame()->getRenderTarget());
+}
+
+void StateBox2d::CreateOneWall(jt::Vector2 const& pos)
+{
+    b2BodyDef groundBodyDef;
+    groundBodyDef.fixedRotation = true;
+    groundBodyDef.position = jt::Conversion::vec(pos);
+    MovementObject::Sptr b2obj = std::make_shared<MovementObject>(m_world, &groundBodyDef);
+    add(b2obj);
+
+    auto const tweenstartDelay = jt::Random::getFloatGauss(0.3f, 0.05f);
+
+    auto tw1 = jt::TweenRotation<jt::SmartAnimation>::create(
+        b2obj->getAnimation(), jt::Random::getFloatGauss(0.75f, 0.1f), 0, 360);
+    tw1->setStartDelay(tweenstartDelay);
+    add(tw1);
+
+    auto tw2 = jt::TweenScale<jt::SmartAnimation>::create(
+        b2obj->getAnimation(), 0.75f, jt::Vector2 { 0.0f, 0.0f }, jt::Vector2 { 1.0f, 1.0f });
+    tw2->setStartDelay(tweenstartDelay);
+    add(tw2);
+}
+
+void StateBox2d::CreateWalls()
+{
+    b2BodyDef groundBodyDef;
+    groundBodyDef.fixedRotation = true;
+    for (int i = 0; i != 20; ++i) {
+        // ceiling
+        CreateOneWall(jt::Vector2 { i * 16.0f, 0.0f });
+
+        // floor layers
+        CreateOneWall(jt::Vector2 { i * 16.0f, 144.0f });
+        CreateOneWall(jt::Vector2 { i * 16.0f, 144.0f - 16.0f });
+        CreateOneWall(jt::Vector2 { i * 16.0f, 144.0f - 32.0f });
+
+        // walls
+        CreateOneWall(jt::Vector2 { 0.0f, 16.0f * i });
+        CreateOneWall(jt::Vector2 { 200.0f - 16.0f, 16.0f * i });
+    }
+}
+void StateBox2d::CreatePlayer()
+{
+    b2BodyDef bodyDef;
+    bodyDef.fixedRotation = true;
+    bodyDef.type = b2_dynamicBody;
+    bodyDef.position.Set(48, 32.0f);
+    MovementObject::Sptr myBody = std::make_shared<MovementObject>(m_world, &bodyDef);
+
+    add(myBody);
+    {
+        auto tw = jt::TweenRotation<jt::SmartAnimation>::create(myBody->getAnimation(), 2, 0, 360);
+        tw->setRepeat(true);
+        add(tw);
+    }
 }

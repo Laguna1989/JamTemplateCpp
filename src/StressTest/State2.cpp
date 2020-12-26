@@ -1,6 +1,6 @@
 ﻿#include "State2.hpp"
 #include "InputManager.hpp"
-#include "StateTileson.hpp"
+#include "StateSelect.hpp"
 
 void State2::doInternalCreate()
 {
@@ -35,9 +35,9 @@ void State2::doInternalCreate()
 
 void State2::doInternalUpdate(float const elapsed)
 {
-
-    if (getAge() >= 5.0 || jt::InputManager::justPressed(jt::KeyCode::F1)) {
-        getGame()->switchState(std::make_shared<StateTileson>());
+    if (jt::InputManager::justPressed(jt::KeyCode::F1)
+        || jt::InputManager::justPressed(jt::KeyCode::Escape)) {
+        getGame()->switchState(std::make_shared<StateSelect>());
     }
 
     m_overlay->update(elapsed);
@@ -82,3 +82,12 @@ void State2::doInternalUpdate(float const elapsed)
     //    o1->setVelocity(SummedUpDir);
     //}
 }
+
+void State2::doInternalDraw() const
+{
+    drawSky();
+    drawObjects();
+    m_overlay->draw(getGame()->getRenderTarget());
+}
+
+void State2::drawSky() const { m_sky->draw(getGame()->getRenderTarget()); }

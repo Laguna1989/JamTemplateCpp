@@ -22,22 +22,33 @@ public:
         : Box2DObject { world, def }
     {
         m_animation = std::make_shared<jt::SmartAnimation>();
-
-        m_animation->add("assets/coin.png", "idle", jt::Vector2u { 16, 16 },
-            jt::MathHelper::vectorBetween(0U, 11U), jt::Random::getFloat(0.13f, 0.17f));
-        m_animation->play("idle", jt::Random::getInt(0, 6));
-        m_animation->setOffset(jt::Vector2 { -8, -8 });
-        m_animation->setOrigin(jt::Vector2 { 8, 8 });
-
-        b2PolygonShape dynamicBox;
-        dynamicBox.SetAsBox(8, 8);
-
         b2FixtureDef fixtureDef;
-        fixtureDef.shape = &dynamicBox;
         fixtureDef.density = 1.0f;
-        fixtureDef.friction = 0.9f;
+        fixtureDef.friction = 5.0f;
 
-        getB2Body()->CreateFixture(&fixtureDef);
+        if (def->type == b2BodyType::b2_dynamicBody) {
+            m_animation->add("assets/coin.png", "idle", jt::Vector2u { 16, 16 },
+                jt::MathHelper::vectorBetween(0U, 11U), 0.13f);
+            m_animation->play("idle");
+            m_animation->setOffset(jt::Vector2 { 8, 8 });
+            m_animation->setOrigin(jt::Vector2 { 8, 8 });
+
+            b2CircleShape circleCollider {};
+            circleCollider.m_radius = 8.0f;
+            fixtureDef.shape = &circleCollider;
+            getB2Body()->CreateFixture(&fixtureDef);
+
+        } else {
+            m_animation->add("assets/wall.png", "idle", jt::Vector2u { 16, 16 }, { 0 }, 100.0f);
+            m_animation->play("idle");
+            m_animation->setOffset(jt::Vector2 { 8, 8 });
+            m_animation->setOrigin(jt::Vector2 { 8, 8 });
+
+            b2PolygonShape boxCollider {};
+            boxCollider.SetAsBox(8, 8);
+            fixtureDef.shape = &boxCollider;
+            getB2Body()->CreateFixture(&fixtureDef);
+        }
     }
 
     ~MovementObject() = default;

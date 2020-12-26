@@ -1,10 +1,19 @@
 ﻿#include "State1.hpp"
 #include "InputManager.hpp"
-#include "State2.hpp"
+#include "StateSelect.hpp"
 #include "Timer.hpp"
 #include "TweenAlpha.hpp"
 #include "TweenColor.hpp"
 #include "TweenScale.hpp"
+
+void State1::doInternalCreate()
+{
+    using jt::Timer;
+
+    getGame()->shake(0.5f, 2.0f);
+    jt::Timer::Sptr t = std::make_shared<Timer>(0.6f, [this]() { getGame()->shake(0.5f, 2.0f); });
+    add(t);
+}
 
 void State1::doInternalUpdate(float const /*elapsed*/)
 {
@@ -31,7 +40,8 @@ void State1::doInternalUpdate(float const /*elapsed*/)
         add(tw3);
     }
 
-    if (getAge() >= 5.0 || jt::InputManager::justPressed(jt::KeyCode::F1)) {
-        getGame()->switchState(std::make_shared<State2>());
+    if (jt::InputManager::justPressed(jt::KeyCode::F1)
+        || jt::InputManager::justPressed(jt::KeyCode::Escape)) {
+        getGame()->switchState(std::make_shared<StateSelect>());
     }
 }

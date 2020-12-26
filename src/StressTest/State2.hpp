@@ -13,9 +13,6 @@
 #include <vector>
 
 class State2 : public jt::GameState {
-public:
-    State2() = default;
-
 private:
     jt::SmartShape::Sptr m_overlay;
     jt::SmartShape::Sptr m_sky;
@@ -24,14 +21,9 @@ private:
 
     void doInternalCreate() override;
     void doInternalUpdate(float const /*elapsed*/) override;
-    void doInternalDraw() const override
-    {
-        drawSky();
-        drawObjects();
-        m_overlay->draw(getGame()->getRenderTarget());
-    };
+    void doInternalDraw() const override;
 
-    void drawSky() const { m_sky->draw(getGame()->getRenderTarget()); }
+    void drawSky() const;
 };
 
 #endif

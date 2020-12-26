@@ -1,17 +1,21 @@
 ﻿#include "StateSelect.hpp"
-#include "Button.hpp"
 #include "SmartText.hpp"
 #include "State1.hpp"
+#include "State2.hpp"
+#include "StateBox2d.hpp"
+#include "StateTileson.hpp"
+#include "StateTween.hpp"
 
 void StateSelect::doInternalCreate()
 {
-    auto const b1 = std::make_shared<jt::Button>();
-    b1->addCallback([this]() { getGame()->switchState(std::make_shared<State1>()); });
-    auto const t1 = std::make_shared<jt::SmartText>();
-    t1->loadFont("assets/font.ttf", 8, getGame()->getRenderTarget());
-    t1->setText("State 1");
-    b1->setDrawable(t1);
-    add(b1);
+    using namespace detail;
+    std::size_t count { 0 };
+
+    AddButton<State1>("State 1");
+    AddButton<State2>("State 2");
+    AddButton<StateTween>("Tweens");
+    AddButton<StateTileson>("Tilemap");
+    AddButton<StateBox2d>("Box2D");
 }
 
 void StateSelect::doInternalUpdate(float elapsed) { }

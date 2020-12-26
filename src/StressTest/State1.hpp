@@ -10,22 +10,9 @@
 #include <iostream>
 
 class State1 : public jt::GameState {
-public:
-    State1() = default;
-
 private:
+    void doInternalCreate() override;
     void doInternalUpdate(float const /*elapsed*/) override;
-
-    void doInternalCreate() override
-    {
-        using jt::Timer;
-
-        getGame()->shake(0.5f, 2.0f);
-        jt::Timer::Sptr t
-            = std::make_shared<Timer>(0.6f, [this]() { getGame()->shake(0.5f, 2.0f); });
-        add(t);
-    }
-
     void doInternalDraw() const override {};
 };
 
