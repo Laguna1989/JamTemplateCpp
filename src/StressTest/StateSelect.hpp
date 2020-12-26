@@ -7,11 +7,11 @@
 #include <memory>
 
 namespace detail {
-constexpr float buttonOffsetX = 32;
-constexpr float buttonOffsetY = 8;
-constexpr float buttonMarginY = 4;
-constexpr unsigned int buttonSizeX = 92;
-constexpr unsigned int buttonSizeY = 16;
+constexpr float buttonOffsetX = 64;
+constexpr float buttonOffsetY = 16;
+constexpr float buttonMarginY = 8;
+constexpr unsigned int buttonSizeX = 184;
+constexpr unsigned int buttonSizeY = 32;
 } // namespace detail
 
 class StateSelect : public jt::GameState {
@@ -33,8 +33,8 @@ private:
         b->addCallback([this]() { getGame()->switchState(std::make_shared<State>()); });
         auto const t = std::make_shared<jt::SmartText>();
         t->loadFont("assets/font.ttf", 28, getGame()->getRenderTarget());
-        t->setScale(jt::Vector2 { 0.5f, 0.5f });
         t->setText(text);
+        // t->setOffset(jt::Vector2 { 32.0f, 6.0f });
         t->SetTextAlign(jt::SmartText::TextAlign::LEFT);
         b->setDrawable(t);
         b->setPosition(jt::Vector2 { detail::buttonOffsetX, posY });

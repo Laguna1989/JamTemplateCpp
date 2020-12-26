@@ -5,19 +5,18 @@
 void State2::doInternalCreate()
 {
     m_sky = std::make_shared<jt::SmartShape>();
-    m_sky->makeRect(jt::Vector2(200, 150));
+    m_sky->makeRect(jt::Vector2(400, 300));
     m_sky->setColor(jt::Color { 178, 255, 255 });
 
     using jt::SmartShape;
     using jt::TweenAlpha;
 
     m_overlay = std::make_shared<SmartShape>();
-    m_overlay->makeRect(jt::Vector2 { 200, 200 });
+    m_overlay->makeRect(jt::Vector2 { 400, 300 });
     m_overlay->setColor(jt::Color { 0, 0, 0 });
     m_overlay->update(0.0f);
     auto tw
         = TweenAlpha<SmartShape>::create(m_overlay, 0.5f, std::uint8_t { 255 }, std::uint8_t { 0 });
-    tw->addCompleteCallback([this]() { std::cout << "overlay fade in finished" << std::endl; });
     add(tw);
 
     m_SwarmObjects = std::make_shared<jt::ObjectGroup<SwarmObject>>();

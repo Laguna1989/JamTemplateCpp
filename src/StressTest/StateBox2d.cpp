@@ -88,18 +88,18 @@ void StateBox2d::CreateWalls()
 {
     b2BodyDef groundBodyDef;
     groundBodyDef.fixedRotation = true;
-    for (int i = 0; i != 20; ++i) {
+    for (int i = 0; i != 30; ++i) {
         // ceiling
         CreateOneWall(jt::Vector2 { i * 16.0f, 0.0f });
 
         // floor layers
-        CreateOneWall(jt::Vector2 { i * 16.0f, 144.0f });
-        CreateOneWall(jt::Vector2 { i * 16.0f, 144.0f - 16.0f });
-        CreateOneWall(jt::Vector2 { i * 16.0f, 144.0f - 32.0f });
+        CreateOneWall(jt::Vector2 { i * 16.0f, 320.0f });
+        CreateOneWall(jt::Vector2 { i * 16.0f, 320.0f - 16.0f });
+        CreateOneWall(jt::Vector2 { i * 16.0f, 320.0f - 32.0f });
 
         // walls
         CreateOneWall(jt::Vector2 { 0.0f, 16.0f * i });
-        CreateOneWall(jt::Vector2 { 200.0f - 16.0f, 16.0f * i });
+        CreateOneWall(jt::Vector2 { 400.0f - 16.0f, 16.0f * i });
     }
 }
 void StateBox2d::CreatePlayer()

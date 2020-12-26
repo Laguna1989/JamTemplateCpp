@@ -14,26 +14,7 @@
 class Object : public jt::GameObject {
 public:
     using Sptr = std::shared_ptr<Object>;
-    Object()
-    {
-        m_animation = std::make_shared<jt::SmartAnimation>();
-        // m_shape->makeRect(jt::Vector2(10, 10));
-        m_animation->add("assets/coin.png", "idle", jt::Vector2u { 16, 16 },
-            jt::MathHelper::vectorBetween(0U, 11U), 0.15f);
-        m_animation->play("idle");
-
-        m_animation->setColor(jt::Random::getRandomColor());
-
-        float x = jt::Random::getFloat(80, 120) - 8;
-        float y = jt::Random::getFloat(55, 95) - 8;
-
-        float vx = jt::Random::getFloatGauss(0, 50);
-        float vy = jt::Random::getFloatGauss(0, 50);
-
-        m_position = jt::Vector2 { x, y };
-        m_velocity = jt::Vector2 { vx, vy };
-        m_acceleration = jt::Vector2 { 0.0f, -50.0f / 2.0f };
-    }
+    Object() { }
 
     ~Object() = default;
 
@@ -43,6 +24,25 @@ public:
     std::shared_ptr<jt::SmartAnimation> getAnimation() { return m_animation; }
 
 private:
+    void doCreate() override
+    {
+        m_animation = std::make_shared<jt::SmartAnimation>();
+        m_animation->add("assets/coin.png", "idle", jt::Vector2u { 16, 16 },
+            jt::MathHelper::vectorBetween(0U, 11U), 0.15f);
+        m_animation->play("idle");
+
+        m_animation->setColor(jt::Random::getRandomColor());
+
+        float x = jt::Random::getFloat(180, 220) - 8;
+        float y = jt::Random::getFloat(135, 165) - 8;
+
+        float vx = jt::Random::getFloatGauss(0, 50);
+        float vy = jt::Random::getFloatGauss(0, 50);
+
+        m_position = jt::Vector2 { x, y };
+        m_velocity = jt::Vector2 { vx, vy };
+        m_acceleration = jt::Vector2 { 0.0f, -50.0f / 2.0f };
+    }
     void doUpdate(float const elapsed) override
     {
         m_velocity = m_velocity + elapsed * m_acceleration;

@@ -11,19 +11,19 @@ void StateTween::doInternalCreate()
 void StateTween::createRects()
 {
     m_background = std::make_shared<jt::SmartShape>();
-    m_background->makeRect(jt::Vector2(200, 150));
+    m_background->makeRect(jt::Vector2(400, 300));
     m_background->setColor(jt::Color { 255, 255, 255 });
 
     m_overlayR = std::make_shared<jt::SmartShape>();
-    m_overlayR->makeRect(jt::Vector2 { 200, 200 });
+    m_overlayR->makeRect(jt::Vector2 { 400, 300 });
     m_overlayR->setColor(jt::Color { 255, 0, 0, 0 });
 
     m_overlayG = std::make_shared<jt::SmartShape>();
-    m_overlayG->makeRect(jt::Vector2 { 200, 200 });
+    m_overlayG->makeRect(jt::Vector2 { 400, 300 });
     m_overlayG->setColor(jt::Color { 0, 255, 0, 0 });
 
     m_overlayB = std::make_shared<jt::SmartShape>();
-    m_overlayB->makeRect(jt::Vector2 { 200, 200 });
+    m_overlayB->makeRect(jt::Vector2 { 400, 300 });
     m_overlayB->setColor(jt::Color { 0, 0, 255, 0 });
 }
 
