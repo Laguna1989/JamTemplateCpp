@@ -29,11 +29,11 @@ public:
         m_animation->play("idle", jt::Random::getInt(0, 6));
         m_animation->setScale(jt::Vector2 { 0.5f, 0.5f });
 
-        /*setPosition(jt::Vector2(jt::Random::getFloat(0, maxX / 2),
-            jt::Random::getFloat(0, maxY / 2)));
+        setPosition(
+            jt::Vector2(jt::Random::getFloat(0, maxX / 2), jt::Random::getFloat(0, maxY / 2)));
         float mv = 50;
-        setBoundsVelocity(jt::Rect { -mv, -mv, 2 * mv, 2 * mv });
-        setBoundsPosition(jt::Rect { 0, 0, maxX, maxY });*/
+        // setBoundsVelocity(jt::Rect { -mv, -mv, 2 * mv, 2 * mv });
+        // setBoundsPosition(jt::Rect { 0, 0, maxX, maxY });
     }
 
     ~SwarmObject() = default;
@@ -42,14 +42,24 @@ public:
 
     float getSwarmWeight() const { return m_swarmWeight; }
 
+    void setPosition(jt::Vector2 const& p) { m_position = p; }
+    jt::Vector2 getPosition() const { return m_position; }
+
+    void setVelocity(jt::Vector2 const& p) { m_velocity = p; }
+    jt::Vector2 getVelocity() const { return m_velocity; }
+
 private:
     std::shared_ptr<jt::SmartAnimation> m_animation;
     float m_swarmWeight = 0.0f;
+    jt::Vector2 m_position { 0.0f, 0.0f };
+    jt::Vector2 m_velocity { 0.0f, 0.0f };
+    jt::Vector2 m_acceleration { 0.0f, 0.0f };
 
     void doUpdate(float const elapsed) override
     {
         // updateTransform(elapsed);
-        // m_animation->setPosition(getPosition());
+        m_position = m_position + elapsed * m_velocity;
+        m_animation->setPosition(getPosition());
         m_animation->update(elapsed);
     }
 

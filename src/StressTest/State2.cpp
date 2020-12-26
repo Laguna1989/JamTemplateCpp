@@ -44,43 +44,47 @@ void State2::doInternalUpdate(float const elapsed)
 
     float cutoffDistance = 10;
 
-    // jt::Vector2 centerPos {};
-    // for (auto const& o : *m_SwarmObjects) {
-    //    //centerPos += o.lock()->getPosition();
-    //}
-    // centerPos /= static_cast<float>(m_SwarmObjects->size());
+    jt::Vector2 centerPos {};
+    for (auto const& o : *m_SwarmObjects) {
+        centerPos + centerPos + o.lock()->getPosition();
+    }
+    centerPos = centerPos / static_cast<float>(m_SwarmObjects->size());
 
-    // for (size_t i = 0; i != m_SwarmObjects->size(); ++i) {
-    //    auto o1 = m_SwarmObjects->at(i).lock();
-    //    jt::Vector2 SummedUpDir {};
-    //    float lc = jt::MathHelper::length(centerPos - o1->getPosition());
-    //    SummedUpDir += (centerPos - o1->getPosition()) / lc * 1000.0f
-    //        / static_cast<float>(m_SwarmObjects->size());
-    //    for (size_t j = 0; j != m_SwarmObjects->size(); ++j) {
-    //        if (i == j)
-    //            continue;
+    jt::Vector2 mousePos = jt::InputManager::getMousePositionWorld();
 
-    //        auto o2 = m_SwarmObjects->at(j).lock();
-    //        jt::Vector2 d = o2->getPosition() - o1->getPosition();
-    //        float l = jt::MathHelper::length(d);
-    //        if (l > 2 * cutoffDistance)
-    //            continue;
-    //        SummedUpDir += o2->getVelocity() * 0.09f * o2->getSwarmWeight() /
-    //        o1->getSwarmWeight();
+    for (size_t i = 0; i != m_SwarmObjects->size(); ++i) {
+        auto o1 = m_SwarmObjects->at(i).lock();
+        jt::Vector2 SummedUpDir { 0.0f, 0.0f };
 
-    //        if (l > cutoffDistance)
-    //            continue;
-    //        if (l < 1)
-    //            l = 1;
-    //        SummedUpDir -= d / l / l * 500.0f;
-    //    }
-    //    float l = jt::MathHelper::length(SummedUpDir);
-    //    if (l > 4) {
-    //        // std::cout << i << " " << l << std::endl;
-    //    }
+        auto dist = mousePos - o1->getPosition();
+        jt::MathHelper::normalizeMe(dist);
 
-    //    o1->setVelocity(SummedUpDir);
-    //}
+        float lc = jt::MathHelper::length(centerPos - o1->getPosition());
+        SummedUpDir = SummedUpDir
+            + (centerPos - o1->getPosition()) / lc * 1000.0f
+                / static_cast<float>(m_SwarmObjects->size());
+
+        for (size_t j = 0; j != m_SwarmObjects->size(); ++j) {
+            if (i == j)
+                continue;
+
+            auto o2 = m_SwarmObjects->at(j).lock();
+            jt::Vector2 d = o2->getPosition() - o1->getPosition();
+            float l = jt::MathHelper::length(d);
+            if (l > 2 * cutoffDistance)
+                continue;
+            SummedUpDir = SummedUpDir
+                + o2->getVelocity() * 0.09f * o2->getSwarmWeight() / o1->getSwarmWeight();
+
+            if (l > cutoffDistance)
+                continue;
+            if (l < 1.5)
+                l = 1.5;
+            SummedUpDir = SummedUpDir - (d / l / l * 1000.0f);
+        }
+        SummedUpDir = SummedUpDir + dist * 30.0f;
+        o1->setVelocity(SummedUpDir);
+    }
 }
 
 void State2::doInternalDraw() const
