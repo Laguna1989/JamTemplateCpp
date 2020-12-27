@@ -34,7 +34,7 @@ SmartTilemap::SmartTilemap(std::string const& path)
         for (int i = 0; i != columns; ++i) {
             jt::SmartSprite tile {};
             tile.loadSprite(tilesetName, jt::Recti(i * ts.x, j * ts.y, ts.x, ts.y));
-            tile.setIgnoreCamMovement(true);
+            tile.setIgnoreCamMovement(false);
             m_tileSprites.at(i + j * columns) = tile;
         }
     }
@@ -51,7 +51,7 @@ SmartTilemap::SmartTilemap(std::string const& path)
 #if ENABLE_WEB
     setIgnoreCamMovement(true);
 #else
-    setIgnoreCamMovement(false);
+    setIgnoreCamMovement(true);
 #endif
 }
 

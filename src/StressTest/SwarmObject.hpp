@@ -31,7 +31,7 @@ public:
 
         setPosition(
             jt::Vector2(jt::Random::getFloat(0, maxX / 2), jt::Random::getFloat(0, maxY / 2)));
-        float mv = 50;
+        /*float mv = 50;*/
         // setBoundsVelocity(jt::Rect { -mv, -mv, 2 * mv, 2 * mv });
         // setBoundsPosition(jt::Rect { 0, 0, maxX, maxY });
     }

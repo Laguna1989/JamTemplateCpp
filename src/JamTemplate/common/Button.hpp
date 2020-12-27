@@ -39,7 +39,7 @@ public:
         // std::cout << "button destructor end\n";
     }
 
-    Button(const Button& b) = default;
+    Button(const Button& b) = delete;
     Button(Button&& b) = default;
 
     void setDrawable(SmartDrawable::Sptr sprt) { m_drawable = sprt; }

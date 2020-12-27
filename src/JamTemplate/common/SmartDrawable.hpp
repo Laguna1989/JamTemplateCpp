@@ -113,7 +113,11 @@ protected:
 
     jt::Vector2 getCamOffset() const
     {
-        return (m_ignoreCamMovement ? m_CamOffset : jt::Vector2 { 0.0f, 0.0f });
+#if ENABLE_WEB
+        return (m_ignoreCamMovement ? jt::Vector2 { 0.0f, 0.0f } : 1.0 * m_CamOffset);
+#else
+        return (m_ignoreCamMovement ? -1.0f * m_CamOffset : jt::Vector2 { 0.0f, 0.0f });
+#endif
     }
     bool getIgnoreCamMovement() const { return m_ignoreCamMovement; }
 

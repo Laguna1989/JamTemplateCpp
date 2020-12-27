@@ -3,6 +3,7 @@
 #include "State1.hpp"
 #include "State2.hpp"
 #include "StateBox2d.hpp"
+#include "StateScroll.hpp"
 #include "StateTileson.hpp"
 #include "StateTween.hpp"
 
@@ -13,6 +14,7 @@ void StateSelect::doInternalCreate()
     AddButton<StateTween>("Tweens");
     AddButton<StateTileson>("Tilemap");
     AddButton<StateBox2d>("Box2D");
+    AddButton<StateScroll>("Move Cam");
 }
 
 void StateSelect::doInternalUpdate(float /*elapsed*/)

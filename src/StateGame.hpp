@@ -24,7 +24,6 @@ protected:
 private:
     std::shared_ptr<jt::SmartShape> m_background;
     std::shared_ptr<jt::SmartShape> m_overlay;
-    std::shared_ptr<jt::SmartSprite> m_sprite;
 
     void doInternalCreate() override;
     void doInternalUpdate(float const elapsed) override;

@@ -31,10 +31,6 @@ void StateGame::doInternalCreate()
     tw->setSkipFrames();
     add(tw);
 
-    m_sprite = std::make_shared<jt::SmartSprite>();
-    m_sprite->loadSprite("assets/coin.png", jt::Recti { 0, 0, 16, 16 });
-    m_sprite->setPosition(jt::Vector2 { 100, 100 });
-
     m_hud = std::make_shared<Hud>();
     add(m_hud);
 
@@ -45,21 +41,12 @@ void StateGame::doInternalCreate()
 void StateGame::doInternalUpdate(float const elapsed)
 {
     m_background->update(elapsed);
-    m_sprite->update(elapsed);
     m_overlay->update(elapsed);
-
-    if (jt::InputManager::justPressed(jt::KeyCode::T)) {
-        m_sprite->flash(0.25f);
-    }
-    if (jt::InputManager::justPressed(jt::MouseButtonCode::MBLeft)) {
-        m_sprite->flash(0.25f, jt::colors::Red);
-    }
 }
 
 void StateGame::doInternalDraw() const
 {
     m_background->draw(getGame()->getRenderTarget());
     drawObjects();
-    m_sprite->draw(getGame()->getRenderTarget());
     m_overlay->draw(getGame()->getRenderTarget());
 }
