@@ -1,5 +1,7 @@
 ﻿#include "MathHelper.hpp"
 #include <cmath>
+#include <iomanip>
+#include <sstream>
 
 namespace jt {
 namespace MathHelper {

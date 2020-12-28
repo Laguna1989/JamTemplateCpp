@@ -36,6 +36,7 @@ it freely, subject to the following restrictions:
 #ifndef COLLISION_H
 #define COLLISION_H
 
+#include "MathHelper.hpp"
 #include "Rect.hpp"
 #include "Vector.hpp"
 #include <SFML/Graphics.hpp>
@@ -45,6 +46,7 @@ class Collision {
 public:
     Collision() = delete;
 
+#if 0
     template <class T>
     static bool Overlaps(T const& Object, jt::Vector2 const& point)
     {
@@ -58,7 +60,7 @@ public:
         OrientedBoundingBox(T const& Object) // Calculate the four points of the OBB from a
                                              // transformed (scaled, rotated...) sprite
         {
-            /*sf::Transform trans = Object.getTransform();
+            sf::Transform trans = Object.getTransform();
             auto local = Object.getGlobalBounds();
             Points[0] = trans.transformPoint(0.f, 0.f);
             Points[1] = trans.transformPoint(local.width, 0.f);
@@ -181,6 +183,7 @@ public:
     ////////
     // bool CreateTextureAndBitmask(sf::Texture &LoadInto, const std::string& Filename);
 
+#endif
     //////
     /// Test for collision using circle collision dection
     /// Radius is averaged from the dimensions of the sprite so
@@ -189,49 +192,55 @@ public:
     template <class U, class V>
     static bool CircleTest(U const& Object1, V const& Object2)
     {
-        jt::Vector2 Obj1Size = GetSpriteSize(Object1);
-        jt::Vector2 Obj2Size = GetSpriteSize(Object2);
-        float Radius1 = (Obj1Size.x + Obj1Size.y) / 4;
-        float Radius2 = (Obj2Size.x + Obj2Size.y) / 4;
+        auto const obj1Size = getSize(Object1);
+        auto const obj2Size = getSize(Object2);
+        auto const radius1 = (obj1Size.x() + obj1Size.y()) / 4.0f;
+        auto const radius2 = (obj2Size.x() + obj2Size.y()) / 4.0f;
 
-        jt::Vector2 Distance = GetSpriteCenter(Object1) - GetSpriteCenter(Object2);
+        auto const distance = getCenter(Object1) - getCenter(Object2);
 
-        return (Distance.x * Distance.x + Distance.y * Distance.y
-            <= (Radius1 + Radius2) * (Radius1 + Radius2));
+        return (
+            jt::MathHelper::lengthSquared(distance) <= (radius1 + radius2) * (radius1 + radius2));
     }
 
     template <class U, class V>
     static bool CircleTest(std::shared_ptr<U> obj1, std::shared_ptr<V> obj2)
     {
-        jt::Vector2 Obj1Size = GetSpriteSize(obj1);
-        jt::Vector2 Obj2Size = GetSpriteSize(obj2);
-        float Radius1 = (Obj1Size.x + Obj1Size.y) / 4;
-        float Radius2 = (Obj2Size.x + Obj2Size.y) / 4;
+        auto const Obj1Size = getSize(obj1);
+        auto const Obj2Size = getSize(obj2);
+        auto const Radius1 = (Obj1Size.x() + Obj1Size.y()) / 4.0f;
+        auto const Radius2 = (Obj2Size.x() + Obj2Size.y()) / 4.0f;
 
-        jt::Vector2 Distance = GetSpriteCenter(obj1) - GetSpriteCenter(obj1);
+        auto const distance = getCenter(obj1) - getCenter(obj2);
 
-        return (Distance.x * Distance.x + Distance.y * Distance.y
-            <= (Radius1 + Radius2) * (Radius1 + Radius2));
+        return (
+            jt::MathHelper::lengthSquared(distance) <= (Radius1 + Radius2) * (Radius1 + Radius2));
     }
 
 private:
     template <class U>
-    static jt::Vector2 GetSpriteSize(U const& Object)
+    static jt::Vector2 getSize(U const& Object)
     {
-        return jt::Vector2(Object.getGlobalBounds().width, Object.getGlobalBounds().height);
+        return jt::Vector2(Object.getGlobalBounds().width(), Object.getGlobalBounds().height());
     }
 
     template <class U>
-    static jt::Vector2 GetSpriteSize(std::shared_ptr<U> obj)
+    static jt::Vector2 getSize(std::shared_ptr<U> obj)
     {
-        return jt::Vector2(obj->getGlobalBounds().width, obj->getGlobalBounds().height);
+        return jt::Vector2(obj->getGlobalBounds().width(), obj->getGlobalBounds().height());
     }
 
     template <class U>
-    static jt::Vector2 GetSpriteCenter(std::shared_ptr<U> obj)
+    static jt::Vector2 getCenter(U const& obj)
     {
-        jt::Rect AABB = obj->getGlobalBounds();
-        return jt::Vector2(AABB.left + AABB.width / 2.f, AABB.top + AABB.height / 2.f);
+        auto const AABB = obj.getGlobalBounds();
+        return jt::Vector2 { AABB.left() + AABB.width() / 2.f, AABB.top() + AABB.height() / 2.f };
+    }
+    template <class U>
+    static jt::Vector2 getCenter(std::shared_ptr<U> obj)
+    {
+        auto const AABB = obj->getGlobalBounds();
+        return jt::Vector2 { AABB.left() + AABB.width() / 2.f, AABB.top() + AABB.height() / 2.f };
     }
 };
 } // namespace jt

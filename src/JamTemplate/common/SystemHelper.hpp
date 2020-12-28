@@ -1,0 +1,25 @@
+﻿#ifndef GUARD_JAMTEMPLATE_SYSTEMHELPER_HPP_INCLUDEGUARD
+#define GUARD_JAMTEMPLATE_SYSTEMHELPER_HPP_INCLUDEGUARD
+
+#include "Vector.hpp"
+#include <assert.h>
+#include <iomanip>
+#include <memory>
+#include <sstream>
+#include <string>
+#include <vector>
+
+namespace jt {
+namespace SystemHelper {
+
+template <typename T>
+bool is_uninitialized_weak_ptr(std::weak_ptr<T> const& weak)
+{
+    using wt = std::weak_ptr<T>;
+    return !weak.owner_before(wt {}) && !wt {}.owner_before(weak);
+}
+
+} // namespace SystemHelper
+} // namespace jt
+
+#endif

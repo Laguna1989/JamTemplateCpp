@@ -1,7 +1,7 @@
 ﻿#ifndef GUARD_JAMTEMPLATE_GAMEOBJECT_HPP_INCLUDEGUARD
 #define GUARD_JAMTEMPLATE_GAMEOBJECT_HPP_INCLUDEGUARD
 
-#include "MathHelper.hpp"
+#include "SystemHelper.hpp"
 #include <iostream>
 #include <memory>
 
@@ -49,7 +49,7 @@ public:
 
     void setGameInstance(std::weak_ptr<GameBase> g)
     {
-        if (!jt::MathHelper::is_uninitialized_weak_ptr(m_game)) {
+        if (!jt::SystemHelper::is_uninitialized_weak_ptr(m_game)) {
             throw std::logic_error {
                 "It is not allowed to call setGameInstance twice on a GameObject."
             };
@@ -78,7 +78,7 @@ public:
     }
     bool isAlive() const { return m_alive; }
 
-    // will be called, before object is thrown out of the gamestate.
+    // will be called, just before object is thrown out of the gamestate.
     void destroy() { doDestroy(); }
 
 protected:
@@ -93,7 +93,8 @@ private:
     virtual void doDraw() const {};
     virtual void doCreate() {};
     virtual void doKill() {};
-    // Do NOT modify the game or the gamestate in this
+
+    // Do NOT modify the game or the gamestate in this function
     virtual void doDestroy() {};
 };
 
