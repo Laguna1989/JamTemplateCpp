@@ -43,6 +43,19 @@ public:
     float& y() override { return m_y; }
     float& x() override { return m_x; }
 
+    jt::Vector2& operator+=(jt::Vector2 const& other)
+    {
+        m_x += other.m_x;
+        m_y += other.m_y;
+        return *this;
+    }
+    jt::Vector2& operator-=(jt::Vector2 const& other)
+    {
+        m_x -= other.m_x;
+        m_y -= other.m_y;
+        return *this;
+    }
+
 private:
     float m_x;
     float m_y;
@@ -84,6 +97,19 @@ public:
 
     unsigned int& x() override { return m_x; }
     unsigned int& y() override { return m_y; }
+
+    jt::Vectoru2& operator+=(jt::Vector2u const& other)
+    {
+        m_x += other.m_x;
+        m_y += other.m_y;
+        return *this;
+    }
+    jt::Vector2u& operator-=(jt::Vector2u const& other)
+    {
+        m_x -= other.m_x;
+        m_y -= other.m_y;
+        return *this;
+    }
 
 private:
     unsigned int m_x;

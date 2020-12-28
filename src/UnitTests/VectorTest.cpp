@@ -36,6 +36,24 @@ TEST(VectorAdd, AddReal)
     EXPECT_EQ(initial + add, expected);
 }
 
+TEST(VectorAddEQ, AddZero)
+{
+    jt::Vector2 const initial { 5.0f, -1.245f };
+    jt::Vector2 copy { initial };
+    jt::Vector2 const add { 0.0f, 0.0f };
+    copy += add;
+    EXPECT_EQ(copy, initial);
+}
+
+TEST(VectorAddEQ, AddReal)
+{
+    jt::Vector2 initial { 5.0f, -1.245f };
+    jt::Vector2 const add { 1.0f, -1.0f };
+    jt::Vector2 const expected { initial.x() + add.x(), initial.y() + add.y() };
+    initial += add;
+    EXPECT_EQ(initial, expected);
+}
+
 TEST(VectorAdd, SubtractZereo)
 {
     jt::Vector2 const initial { 5.0f, -1.245f };
@@ -51,6 +69,25 @@ TEST(VectorAdd, SubtractReal)
     jt::Vector2 const expected { initial.x() - add.x(), initial.y() - add.y() };
 
     EXPECT_EQ(initial - add, expected);
+}
+
+TEST(VectorSubEQ, AddZero)
+{
+    jt::Vector2 const initial { 5.0f, -1.245f };
+    jt::Vector2 copy { initial };
+    jt::Vector2 const add { 0.0f, 0.0f };
+    copy -= add;
+    EXPECT_EQ(copy, initial);
+}
+
+TEST(VectorSubEQ, AddReal)
+{
+    jt::Vector2 initial { 5.0f, -1.245f };
+    jt::Vector2 const add { 1.0f, -1.0f };
+    jt::Vector2 const expected { initial.x() - add.x(), initial.y() - add.y() };
+    initial -= add;
+    EXPECT_EQ(initial.x(), expected.x());
+    EXPECT_EQ(initial.y(), expected.y());
 }
 
 TEST(VectorMultiply, One)

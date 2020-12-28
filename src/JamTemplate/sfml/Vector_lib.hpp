@@ -37,6 +37,19 @@ public:
     float& x() override { return m_vec.x; }
     float& y() override { return m_vec.y; }
 
+    jt::Vector2& operator+=(jt::Vector2 const& other)
+    {
+        m_vec.x += other.m_vec.x;
+        m_vec.y += other.m_vec.y;
+        return *this;
+    }
+    jt::Vector2& operator-=(jt::Vector2 const& other)
+    {
+        m_vec.x -= other.m_vec.x;
+        m_vec.y -= other.m_vec.y;
+        return *this;
+    }
+
 private:
     sf::Vector2f m_vec;
 };
@@ -66,13 +79,27 @@ public:
 
     operator sf::Vector2u() const { return m_vec; }
 
-    sf::Vector2u m_vec;
-
     unsigned int x() const override { return m_vec.x; };
     unsigned int y() const override { return m_vec.y; };
 
     unsigned int& x() override { return m_vec.x; }
     unsigned int& y() override { return m_vec.y; }
+
+    jt::Vector2u& operator+=(jt::Vector2u const& other)
+    {
+        m_vec.x += other.m_vec.x;
+        m_vec.y += other.m_vec.y;
+        return *this;
+    }
+    jt::Vector2u& operator-=(jt::Vector2u const& other)
+    {
+        m_vec.x -= other.m_vec.x;
+        m_vec.y -= other.m_vec.y;
+        return *this;
+    }
+
+private:
+    sf::Vector2u m_vec;
 };
 
 } // namespace jt
