@@ -1,5 +1,6 @@
 ﻿#include "StateScroll.hpp"
 #include "InputManager.hpp"
+#include "MathHelper.hpp"
 #include "StateSelect.hpp"
 
 void StateScroll::doInternalCreate()

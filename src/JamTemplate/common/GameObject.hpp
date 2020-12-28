@@ -1,8 +1,6 @@
 ﻿#ifndef GUARD_JAMTEMPLATE_GAMEOBJECT_HPP_INCLUDEGUARD
 #define GUARD_JAMTEMPLATE_GAMEOBJECT_HPP_INCLUDEGUARD
 
-#include "SystemHelper.hpp"
-#include <iostream>
 #include <memory>
 
 namespace jt {
@@ -17,69 +15,32 @@ public:
 
     virtual ~GameObject() = default;
 
-    /// GameObject should never be copied
+    /// GameObjects should never be copied
     GameObject(GameObject const&) = delete;
     GameObject& operator=(GameObject const&) = delete;
 
     GameObject(GameObject&&) = default;
     GameObject& operator=(GameObject&&) = default;
 
-    void create()
-    {
-        try {
-            auto const g = getGame();
-        } catch (std::exception& e) {
-            std::cerr << e.what() << std::endl;
-            throw std::logic_error {
-                "Gameobject cannot be created without gameinstace being set."
-            };
-        }
-        doCreate();
-    }
+    void create();
 
-    void update(float const elapsed)
-    {
-        m_age += elapsed;
-        doUpdate(elapsed);
-    }
+    void update(float const elapsed);
 
-    void draw() const { doDraw(); };
-    float getAge() const { return m_age; }
-    void setAge(float t) { m_age = t; }
+    void draw() const;
+    float getAge() const;
+    void setAge(float t);
 
-    void setGameInstance(std::weak_ptr<GameBase> g)
-    {
-        if (!jt::SystemHelper::is_uninitialized_weak_ptr(m_game)) {
-            throw std::logic_error {
-                "It is not allowed to call setGameInstance twice on a GameObject."
-            };
-        }
-        m_game = g;
-    }
-    std::shared_ptr<GameBase> getGame()
-    {
-        if (m_game.expired())
-            throw std::exception(/*"ERROR: Cannot GameObject::getGame():  m_game expired!"*/);
-        return m_game.lock();
-    }
+    void setGameInstance(std::weak_ptr<GameBase> g);
+    std::shared_ptr<GameBase> getGame();
     // const version of getGame (required for draw functionality)
-    std::shared_ptr<GameBase> getGame() const
-    {
-        if (m_game.expired())
-            throw std::exception(/*"ERROR: Cannot GameObject::getGame():  m_game expired!"*/);
-        return m_game.lock();
-    }
+    std::shared_ptr<GameBase> getGame() const;
 
     // kill this game Object (killed/dead game objects will get thrown out of any GameState)
-    void kill()
-    {
-        m_alive = false;
-        doKill();
-    }
-    bool isAlive() const { return m_alive; }
+    void kill();
+    bool isAlive() const;
 
     // will be called, just before object is thrown out of the gamestate.
-    void destroy() { doDestroy(); }
+    void destroy();
 
 protected:
     float m_age { 0.0f };
@@ -89,13 +50,14 @@ private:
 
     std::weak_ptr<GameBase> m_game;
 
-    virtual void doUpdate(float const /*elapsed*/) {};
-    virtual void doDraw() const {};
-    virtual void doCreate() {};
-    virtual void doKill() {};
+    virtual void doUpdate(float const /*elapsed*/);
+
+    virtual void doDraw() const;
+    virtual void doCreate();
+    virtual void doKill();
 
     // Do NOT modify the game or the gamestate in this function
-    virtual void doDestroy() {};
+    virtual void doDestroy();
 };
 
 } // namespace jt
