@@ -23,16 +23,24 @@ void StateGame::doInternalCreate()
     m_background = std::make_shared<SmartShape>();
     m_background->makeRect({ w, h });
     m_background->setColor(GP::PaletteBackground());
+    m_background->setIgnoreCamMovement(true);
     m_background->update(0.0f);
 
     m_overlay = std::make_shared<SmartShape>();
     m_overlay->makeRect(jt::Vector2 { w, h });
     m_overlay->setColor(jt::Color { 0, 0, 0 });
+    m_overlay->setIgnoreCamMovement(true);
     m_overlay->update(0);
     auto tw
         = TweenAlpha<SmartShape>::create(m_overlay, 0.5f, std::uint8_t { 255 }, std::uint8_t { 0 });
     tw->setSkipFrames();
     add(tw);
+
+    m_vignette = std::make_shared<jt::SmartSprite>();
+    m_vignette->loadSprite("#v#" + std::to_string(static_cast<int>(GP::GetScreenSize().x())) + "#"
+        + std::to_string(static_cast<int>(GP::GetScreenSize().y())));
+    m_vignette->setIgnoreCamMovement(true);
+    m_vignette->setColor({ 255, 255, 255, 100 });
 
     m_hud = std::make_shared<Hud>();
     add(m_hud);
@@ -45,6 +53,7 @@ void StateGame::doInternalUpdate(float const elapsed)
 {
     m_world->Step(elapsed, GP::PhysicVelocityIterations(), GP::PhysicPositionIterations());
     m_background->update(elapsed);
+    m_vignette->update(elapsed);
     m_overlay->update(elapsed);
 }
 
@@ -52,5 +61,7 @@ void StateGame::doInternalDraw() const
 {
     m_background->draw(getGame()->getRenderTarget());
     drawObjects();
+    m_vignette->draw(getGame()->getRenderTarget());
+    m_hud->draw();
     m_overlay->draw(getGame()->getRenderTarget());
 }

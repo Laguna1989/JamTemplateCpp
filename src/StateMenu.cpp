@@ -61,10 +61,10 @@ void StateMenu::doInternalCreate()
     m_overlay->update(0);
 
     m_vignette = std::make_shared<jt::SmartSprite>();
-    m_vignette->loadSprite(
-        "#v#" + std::to_string(static_cast<int>(w)) + "#" + std::to_string(static_cast<int>(h)));
-    m_vignette->setColor(jt::Color { 255, 255, 255, 100 });
-    m_vignette->update(0.0f);
+    m_vignette->loadSprite("#v#" + std::to_string(static_cast<int>(GP::GetScreenSize().x())) + "#"
+        + std::to_string(static_cast<int>(GP::GetScreenSize().y())));
+    m_vignette->setIgnoreCamMovement(true);
+    m_vignette->setColor({ 255, 255, 255, 100 });
 
     using tp = jt::TweenPosition<jt::SmartText>;
     using ta = jt::TweenAlpha<jt::SmartText>;
@@ -115,6 +115,7 @@ void StateMenu::doInternalCreate()
 
 void StateMenu::doInternalUpdate(float const elapsed)
 {
+    m_vignette->update(elapsed);
     if (!m_starting) {
         using ip = jt::InputManager;
 
