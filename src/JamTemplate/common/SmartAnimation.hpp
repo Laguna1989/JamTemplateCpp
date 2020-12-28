@@ -1,8 +1,8 @@
 ﻿#ifndef GUARD_JAMTEMPLATE_ANIMATION_HPP_INCLUDEGUARD
 #define GUARD_JAMTEMPLATE_ANIMATION_HPP_INCLUDEGUARD
 
+#include "Rendertarget.hpp"
 #include "SmartDrawable.hpp"
-#include "rendertarget.hpp"
 #include <map>
 #include <memory>
 #include <string>

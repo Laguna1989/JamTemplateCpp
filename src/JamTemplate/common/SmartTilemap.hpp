@@ -2,9 +2,9 @@
 #define GUARD_JAMTEMPLATE_TILEMAP_HPP_GUARD
 
 #include "InfoRect.hpp"
+#include "Rendertarget.hpp"
 #include "SmartDrawable.hpp"
 #include "SmartSprite.hpp"
-#include "rendertarget.hpp"
 #include "tileson.h"
 #include <memory>
 #include <vector>

@@ -1,8 +1,8 @@
 ﻿#ifndef GUARD_JAMTEMPLATE_SMARTSHAPE_HPP_INCLUDEGUARD
 #define GUARD_JAMTEMPLATE_SMARTSHAPE_HPP_INCLUDEGUARD
 
+#include "Rendertarget.hpp"
 #include "SmartDrawable.hpp"
-#include "rendertarget.hpp"
 #include <SFML/Graphics.hpp>
 #include <memory>
 

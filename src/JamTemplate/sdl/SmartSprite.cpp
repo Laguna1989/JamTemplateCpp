@@ -1,8 +1,8 @@
 ﻿#include "SmartSprite.hpp"
 #include "MathHelper.hpp"
+#include "Rendertarget.hpp"
 #include "SDLHelper.hpp"
 #include "TextureManager.hpp"
-#include "rendertarget.hpp"
 #include <SDL_image.h>
 
 namespace jt {

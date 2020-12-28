@@ -1,9 +1,9 @@
 ﻿#ifndef GUARD_JAMTEMPLATE_SMARTBAR_HPP_INCLUDEGUARD
 #define GUARD_JAMTEMPLATE_SMARTBAR_HPP_INCLUDEGUARD
 
+#include "Rendertarget.hpp"
 #include "SmartDrawable.hpp"
 #include "SmartShape.hpp"
-#include "rendertarget.hpp"
 #include <cassert>
 #include <memory>
 #include <vector>

@@ -2,7 +2,7 @@
 #define GUARD_JAMTEMPLATE_GAME_HPP_INCLUDEGUARD
 
 #include "GameBase.hpp"
-#include "rendertarget.hpp"
+#include "Rendertarget.hpp"
 #include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
 #include <chrono>

@@ -2,9 +2,9 @@
 #define GUARD_JAMTEMPLATE_SMARTSPRITE_HPP_INCLUDEGUARD
 
 #include "Color.hpp"
+#include "Rendertarget.hpp"
 #include "SmartDrawable.hpp"
 #include "Vector.hpp"
-#include "rendertarget.hpp"
 #include <SDL.h>
 #include <memory>
 #include <string>

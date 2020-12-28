@@ -2,8 +2,8 @@
 #define GUARD_JAMTEMPLATE_TEXTUREMANAGER_HPP_INCLUDEGUARD
 
 #include "Color.hpp"
+#include "Rendertarget.hpp"
 #include "SplitString.hpp"
-#include "rendertarget.hpp"
 #include <SDL.h>
 #include <assert.h>
 #include <exception>

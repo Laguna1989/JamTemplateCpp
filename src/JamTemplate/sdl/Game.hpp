@@ -3,7 +3,7 @@
 
 #include "GameBase.hpp"
 #include "Rect.hpp"
-#include "rendertarget.hpp"
+#include "Rendertarget.hpp"
 #include <SDL2/SDL_mixer.h>
 #include <chrono>
 #include <memory>

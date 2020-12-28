@@ -1,8 +1,8 @@
 ﻿
 #include "SmartText.hpp"
+#include "Rendertarget.hpp"
 #include "SDLHelper.hpp"
 #include "SplitString.hpp"
-#include "rendertarget.hpp"
 #include <SDL.h>
 #include <SDL_ttf.h>
 #include <exception>

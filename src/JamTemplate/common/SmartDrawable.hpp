@@ -3,8 +3,8 @@
 
 #include "Lerp.hpp"
 #include "Random.hpp"
+#include "Rendertarget.hpp"
 #include "Vector.hpp"
-#include "rendertarget.hpp"
 #include <iostream>
 #include <memory>
 #include <string>

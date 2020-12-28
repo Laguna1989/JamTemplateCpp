@@ -1,10 +1,10 @@
 ﻿#include "SmartShape.hpp"
 #include "Rect.hpp"
+#include "Rendertarget.hpp"
 #include "SDLHelper.hpp"
 #include "SmartDrawable.hpp"
 #include "TextureManager.hpp"
 #include "Vector.hpp"
-#include "rendertarget.hpp"
 #include <SDL.h>
 #include <iostream>
 #include <memory>

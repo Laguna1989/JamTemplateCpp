@@ -2,7 +2,7 @@
 #define GUARD_JAMTEMPLATE_SPRITEFUNCTIONS_HPP_INCLUDEGUARD
 
 #include "Color.hpp"
-#include "rendertarget.hpp"
+#include "Rendertarget.hpp"
 #include <SDL.h>
 #include <memory>
 

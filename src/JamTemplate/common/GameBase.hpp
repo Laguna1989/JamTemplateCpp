@@ -3,8 +3,8 @@
 
 #include "Color.hpp"
 #include "GameObject.hpp"
+#include "Rendertarget.hpp"
 #include "Vector.hpp"
-#include "rendertarget.hpp"
 #include <chrono>
 #include <functional>
 #include <memory>
