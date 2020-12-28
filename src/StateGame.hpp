@@ -11,19 +11,17 @@ namespace jt {
 class SmartShape;
 class SmartSprite;
 } // namespace jt
+class b2World;
 
 class Hud;
 
 class StateGame : public jt::GameState {
-public:
-    StateGame() = default;
-
-protected:
-    std::shared_ptr<Hud> m_hud;
 
 private:
     std::shared_ptr<jt::SmartShape> m_background;
     std::shared_ptr<jt::SmartShape> m_overlay;
+    std::shared_ptr<Hud> m_hud;
+    std::shared_ptr<b2World> m_world { nullptr };
 
     void doInternalCreate() override;
     void doInternalUpdate(float const elapsed) override;

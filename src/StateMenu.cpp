@@ -31,10 +31,9 @@ void StateMenu::doInternalCreate()
     m_text_Title->loadFont("assets/font.ttf", 32U, getGame()->getRenderTarget());
     m_text_Title->setText(GP::GameName());
     m_text_Title->setPosition({ wC, 20 });
-    m_text_Title->setColor(GP::PaletteColor4());
+    m_text_Title->setColor(GP::PaletteFontFront());
     m_text_Title->SetTextAlign(jt::SmartText::TextAlign::CENTER);
     m_text_Title->update(0.0f);
-
     m_text_Title->setShadow(GP::PaletteFontShadow(), jt::Vector2 { 3, 3 });
 
     m_test_Explanation = std::make_shared<jt::SmartText>();

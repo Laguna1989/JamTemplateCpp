@@ -13,7 +13,7 @@
 class StateBox2d : public jt::GameState {
 public:
     StateBox2d()
-        : m_world { std::make_shared<b2World>(b2Vec2 { 0, 0.02f }) }
+        : m_world { std::make_shared<b2World>(b2Vec2 { 0, 100.0f }) }
     {
     }
 

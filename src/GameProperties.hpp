@@ -14,15 +14,14 @@ public:
     static std::string AuthorName() { return "TODO"; }
     static std::string JamName() { return "TODO"; }
     static std::string JamDate() { return "TODO"; }
+
     static jt::Vector2 GetWindowSize() { return jt::Vector2 { 800, 600 }; }
-    static float GetZoom() { return 1.0f; }
+    static float GetZoom() { return 2.0f; }
     static jt::Vector2 GetScreenSize() { return GetWindowSize() * (1.0f / GetZoom()); }
 
-    static jt::Color PaletteBackground() { return jt::Color { 14, 16, 20 }; }
-    static jt::Color PaletteFontFront() { return jt::Color { 248, 249, 254 }; }
+    static jt::Color PaletteBackground() { return GP::PaletteColor1(); }
+    static jt::Color PaletteFontFront() { return GP::PaletteColor4(); }
     static jt::Color PaletteFontShadow() { return GP::PaletteColor6(); }
-    static jt::Color PaletteSelector() { return jt::Color { 221, 228, 236 }; }
-    static jt::Color PaletteHighlight() { return jt::Color { 163, 183, 205 }; }
 
     static jt::Color PaletteColor1() { return jt::Color { 110, 184, 168 }; }
     static jt::Color PaletteColor2() { return jt::Color { 42, 88, 79 }; }
@@ -33,8 +32,8 @@ public:
     static jt::Color PaletteColor7() { return jt::Color { 119, 68, 72 }; }
     static jt::Color PaletteColor8() { return jt::Color { 238, 156, 93 }; }
 
-    static jt::Color PaletteFlashGreen() { return jt::Color { 51, 143, 63 }; }
-    static jt::Color PaletteFlashRed() { return jt::Color { 143, 33, 33 }; }
+    static int PhysicVelocityIterations() { return 6; }
+    static int PhysicPositionIterations() { return 2; }
 };
 
 #endif

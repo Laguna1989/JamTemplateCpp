@@ -1,4 +1,5 @@
 ﻿#include "StateGame.hpp"
+#include "Box2D/Box2D.h"
 #include "Color.hpp"
 #include "Game.hpp"
 #include "GameProperties.hpp"
@@ -11,6 +12,8 @@
 
 void StateGame::doInternalCreate()
 {
+    m_world = std::make_shared<b2World>(b2Vec2 { 0.0f, 0.0f });
+
     float const w = static_cast<float>(GP::GetWindowSize().x());
     float const h = static_cast<float>(GP::GetWindowSize().y());
 
@@ -40,6 +43,7 @@ void StateGame::doInternalCreate()
 
 void StateGame::doInternalUpdate(float const elapsed)
 {
+    m_world->Step(elapsed, GP::PhysicVelocityIterations(), GP::PhysicPositionIterations());
     m_background->update(elapsed);
     m_overlay->update(elapsed);
 }

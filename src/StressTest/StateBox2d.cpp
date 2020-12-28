@@ -20,16 +20,15 @@ void StateBox2d::doInternalCreate()
 
 void StateBox2d::doInternalUpdate(float const elapsed)
 {
-    int32 velocityIterations = 6;
-    int32 positionIterations = 2;
+    int32 const velocityIterations = 6;
+    int32 const positionIterations = 2;
+
+    m_world->Step(elapsed, velocityIterations, positionIterations);
 
     updateObjects(elapsed);
 
     m_bar1->update(elapsed);
     m_bar2->update(elapsed);
-    for (int32 i = 0; i < 60; ++i) {
-        m_world->Step(elapsed, velocityIterations, positionIterations);
-    }
 
     if (jt::InputManager::justPressed(jt::KeyCode::F1)
         || jt::InputManager::justPressed(jt::KeyCode::Escape)) {
