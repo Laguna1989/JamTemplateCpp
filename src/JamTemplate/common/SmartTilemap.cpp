@@ -61,50 +61,50 @@ void SmartTilemap::doDraw(std::shared_ptr<jt::renderTarget> const sptr) const
         return;
     }
 
-    auto const posOffset = m_position + getShakeOffset() + getOffset() + getCamOffset();
+    auto const posOffset = m_position + getShakeOffset() + getOffset();
     // std::cout << "SmartTilemap.posOffset.x " << posOffset.x() << std::endl;
 
     auto g = m_gamePtr.lock();
 
     for (auto& layer : m_map->getLayers()) {
-        if (layer.getType() == tson::LayerType::TileLayer) {
+        // skip all non-tile layers.
+        if (layer.getType() != tson::LayerType::TileLayer) {
+            continue;
+        }
 
-            for (auto& [pos, tile] : layer.getTileObjects()) {
-
-                auto const id = tile.getTile()->getId() - 1;
-                if (id < 0 || id >= m_tileSprites.size()) {
-                    throw std::invalid_argument { "Invalid tile id in map" };
-                }
-
-                auto const tilePos = Conversion::vec(tile.getPosition());
-                // optimization: don't draw tiles outside the game window
-                if (g) {
-                    jt::Vector2 const camoffset = getStaticCamOffset();
-                    // std::cout << camoffset.x() << std::endl;
-                    auto const px = tilePos.x();
-                    auto const py = tilePos.y();
-                    auto const tsx = tile.getTile()->getTileSize().x;
-                    auto const tsy = tile.getTile()->getTileSize().y;
-                    if (px + camoffset.x() + tsx < 0) {
-                        continue;
-                    }
-                    if (py + camoffset.y() + tsy < 0) {
-                        continue;
-                    }
-                    if (px + camoffset.x() >= m_screenSizeHint.x() + tsx) {
-                        continue;
-                    }
-                    if (py + camoffset.y() >= m_screenSizeHint.y() + tsy) {
-                        continue;
-                    }
-                }
-                auto const pixelPosForTile = tilePos + posOffset;
-                // std::cout << "SmartTilemap.pixelPosForTile.x " << pixelPosForTile.x() <<
-                // std::endl;
-                m_tileSprites.at(id).setPosition(pixelPosForTile);
-                m_tileSprites.at(id).update(0.0f);
-                m_tileSprites.at(id).draw(sptr);
+        for (auto& [pos, tile] : layer.getTileObjects()) {
+            auto const id = tile.getTile()->getId() - 1;
+            if (id < 0 || id >= m_tileSprites.size()) {
+                std::cout << "Invalid tile id in map\n";
+                throw std::invalid_argument { "Invalid tile id in map" };
             }
+
+            auto const tilePos = Conversion::vec(tile.getPosition());
+            // optimization: don't draw tiles outside the game window
+            if (g) {
+                jt::Vector2 const camoffset = getStaticCamOffset();
+                // std::cout << camoffset.x() << std::endl;
+                auto const px = tilePos.x();
+                auto const py = tilePos.y();
+                auto const tsx = tile.getTile()->getTileSize().x;
+                auto const tsy = tile.getTile()->getTileSize().y;
+                if (px + camoffset.x() + tsx < 0) {
+                    continue;
+                }
+                if (py + camoffset.y() + tsy < 0) {
+                    continue;
+                }
+                if (px + camoffset.x() >= m_screenSizeHint.x() + tsx) {
+                    continue;
+                }
+                if (py + camoffset.y() >= m_screenSizeHint.y() + tsy) {
+                    continue;
+                }
+            }
+            auto const pixelPosForTile = tilePos + posOffset;
+            m_tileSprites.at(id).setPosition(pixelPosForTile);
+            m_tileSprites.at(id).update(0.0f);
+            m_tileSprites.at(id).draw(sptr);
         }
     }
     // TODO

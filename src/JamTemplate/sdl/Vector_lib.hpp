@@ -98,7 +98,7 @@ public:
     unsigned int& x() override { return m_x; }
     unsigned int& y() override { return m_y; }
 
-    jt::Vectoru2& operator+=(jt::Vector2u const& other)
+    jt::Vector2u& operator+=(jt::Vector2u const& other)
     {
         m_x += other.m_x;
         m_y += other.m_y;
