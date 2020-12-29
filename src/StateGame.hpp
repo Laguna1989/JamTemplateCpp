@@ -29,6 +29,8 @@ private:
     void doInternalCreate() override;
     void doInternalUpdate(float const elapsed) override;
     void doInternalDraw() const override;
+
+    void endGame();
 };
 
 #endif
