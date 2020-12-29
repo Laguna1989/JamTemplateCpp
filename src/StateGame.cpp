@@ -34,6 +34,7 @@ void StateGame::doInternalCreate()
     auto tw
         = TweenAlpha<SmartShape>::create(m_overlay, 0.5f, std::uint8_t { 255 }, std::uint8_t { 0 });
     tw->setSkipFrames();
+    tw->addCompleteCallback([this]() { m_running = true; });
     add(tw);
 
     m_vignette = std::make_shared<jt::SmartSprite>();
@@ -51,7 +52,11 @@ void StateGame::doInternalCreate()
 
 void StateGame::doInternalUpdate(float const elapsed)
 {
-    m_world->Step(elapsed, GP::PhysicVelocityIterations(), GP::PhysicPositionIterations());
+    if (m_running) {
+        m_world->Step(elapsed, GP::PhysicVelocityIterations(), GP::PhysicPositionIterations());
+        // update game logic here
+    }
+
     m_background->update(elapsed);
     m_vignette->update(elapsed);
     m_overlay->update(elapsed);
@@ -64,4 +69,20 @@ void StateGame::doInternalDraw() const
     m_vignette->draw(getGame()->getRenderTarget());
     m_hud->draw();
     m_overlay->draw(getGame()->getRenderTarget());
+}
+
+void StateGame::endGame()
+{
+    if (m_hasEnded) {
+        // trigger this function only once
+        return;
+    }
+    m_hasEnded = true;
+    m_running = false;
+
+    auto tw = jt::TweenAlpha<jt::SmartShape>::create(
+        m_overlay, 0.5f, std::uint8_t { 0 }, std::uint8_t { 255 });
+    tw->setSkipFrames();
+    tw->addCompleteCallback([this]() { getGame()->switchState(std::make_shared<StateMenu>()); });
+    add(tw);
 }
