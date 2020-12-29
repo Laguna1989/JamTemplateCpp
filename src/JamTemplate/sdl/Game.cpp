@@ -144,6 +144,10 @@ void Game::PlayMusic(std::string const& fileName)
 
 void Game::StopMusic() { m_music = nullptr; }
 
-void Game::SetMusicVolume(float v) { }
+void Game::SetMusicVolume(float newVolume)
+{
+    int v = static_cast<int>(128 * newVolume / 100.0f);
+    Mix_VolumeMusic(v);
+}
 
 } // namespace jt

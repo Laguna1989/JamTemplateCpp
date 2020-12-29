@@ -1,4 +1,4 @@
-﻿#include "vector.hpp"
+﻿#include "Vector.hpp"
 #include "gtest/gtest.h"
 
 TEST(VectorEQ, Equal)
