@@ -6,7 +6,6 @@
 #include "InputManager.hpp"
 #include "SmartAnimation.hpp"
 #include "SmartDrawable.hpp"
-#include "TextureManager.hpp"
 #include "Vector.hpp"
 #include <functional>
 #include <memory>

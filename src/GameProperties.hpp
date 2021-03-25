@@ -19,18 +19,18 @@ public:
     static float GetZoom() { return 2.0f; }
     static jt::Vector2 GetScreenSize() { return GetWindowSize() * (1.0f / GetZoom()); }
 
-    static jt::Color PaletteBackground() { return GP::PaletteColor1(); }
+    static jt::Color PaletteBackground() { return GP::PaletteColor6(); }
     static jt::Color PaletteFontFront() { return GP::PaletteColor4(); }
-    static jt::Color PaletteFontShadow() { return GP::PaletteColor6(); }
+    static jt::Color PaletteFontShadow() { return GP::PaletteColor7(); }
 
-    static jt::Color PaletteColor1() { return jt::Color { 110, 184, 168 }; }
-    static jt::Color PaletteColor2() { return jt::Color { 42, 88, 79 }; }
-    static jt::Color PaletteColor3() { return jt::Color { 112, 163, 63 }; }
-    static jt::Color PaletteColor4() { return jt::Color { 252, 255, 192 }; }
-    static jt::Color PaletteColor5() { return jt::Color { 187, 80, 90 }; }
-    static jt::Color PaletteColor6() { return jt::Color { 47, 20, 47 }; }
-    static jt::Color PaletteColor7() { return jt::Color { 119, 68, 72 }; }
-    static jt::Color PaletteColor8() { return jt::Color { 238, 156, 93 }; }
+    static jt::Color PaletteColor1() { return jt::Color { 5, 64, 71 }; }
+    static jt::Color PaletteColor2() { return jt::Color { 32, 142, 68 }; }
+    static jt::Color PaletteColor3() { return jt::Color { 133, 225, 66 }; }
+    static jt::Color PaletteColor4() { return jt::Color { 239, 255, 124 }; }
+    static jt::Color PaletteColor5() { return jt::Color { 251, 114, 48 }; }
+    static jt::Color PaletteColor6() { return jt::Color { 184, 39, 45 }; }
+    static jt::Color PaletteColor7() { return jt::Color { 64, 23, 58 }; }
+    static jt::Color PaletteColor8() { return jt::Color { 157, 64, 43 }; }
 
     static int PhysicVelocityIterations() { return 6; }
     static int PhysicPositionIterations() { return 2; }
