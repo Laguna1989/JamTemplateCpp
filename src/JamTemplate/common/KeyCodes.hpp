@@ -5,7 +5,7 @@
 
 namespace jt {
 
-enum KeyCode {
+enum class KeyCode {
     Unknown = -1, ///< Unhandled key
     A = 0, ///< The A key
     B, ///< The B key
@@ -112,7 +112,7 @@ enum KeyCode {
     KeyCount ///< Keep last -- the total number of keyboard keys
 };
 
-enum MouseButtonCode {
+enum class MouseButtonCode {
     MBLeft = 0,
     MBMiddle,
     MBRight,

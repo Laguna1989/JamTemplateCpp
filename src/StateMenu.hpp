@@ -28,10 +28,12 @@ private:
     std::shared_ptr<jt::SmartShape> m_overlay;
     std::shared_ptr<jt::SmartSprite> m_vignette;
 
-    bool m_starting { false };
+    bool m_started { false };
 
     void doInternalCreate() override;
     void doInternalUpdate(float const /*elapsed*/) override;
+    void checkForTransitionToStateGame();
+    void startTransitionToStateGame();
     void doInternalDraw() const override;
 };
 

@@ -25,31 +25,23 @@ void StateMenu::doInternalCreate()
     m_background = jt::sdh::createRectShape(jt::Vector2 { w, h }, GP::PaletteColor1());
     m_background->update(0.0f);
 
-    m_text_Title = std::make_shared<jt::SmartText>();
-    m_text_Title->loadFont("assets/font.ttf", 32U, getGame()->getRenderTarget());
-    m_text_Title->setText(GP::GameName());
+    m_text_Title = jt::sdh::createText(
+        getGame()->getRenderTarget(), GP::GameName(), 32U, GP::PaletteFontFront());
     m_text_Title->setPosition({ wC, 20 });
-    m_text_Title->setColor(GP::PaletteFontFront());
-    m_text_Title->SetTextAlign(jt::SmartText::TextAlign::CENTER);
     m_text_Title->update(0.0f);
     m_text_Title->setShadow(GP::PaletteFontShadow(), jt::Vector2 { 3, 3 });
 
-    m_test_Explanation = std::make_shared<jt::SmartText>();
-    m_test_Explanation->loadFont("assets/font.ttf", 16U, getGame()->getRenderTarget());
-    m_test_Explanation->setText("Press Space to start the game");
+    m_test_Explanation = jt::sdh::createText(
+        getGame()->getRenderTarget(), "Press Space to start the game", 16U, GP::PaletteColor8());
     m_test_Explanation->setPosition({ wC, 150 });
-    m_test_Explanation->setColor(GP::PaletteColor8());
     m_test_Explanation->update(0.0f);
-    m_test_Explanation->SetTextAlign(jt::SmartText::TextAlign::CENTER);
     m_test_Explanation->setShadow(GP::PaletteFontShadow(), jt::Vector2 { 3, 3 });
 
-    m_text_Credits = std::make_shared<jt::SmartText>();
-    m_text_Credits->loadFont("assets/font.ttf", 10U, getGame()->getRenderTarget());
+    m_text_Credits = jt::sdh::createText(getGame()->getRenderTarget(),
+        "Created by " + GP::AuthorName() + " for " + GP::JamName() + "\n" + GP::JamDate(), 10U,
+        GP::PaletteColor5());
     m_text_Credits->SetTextAlign(jt::SmartText::TextAlign::LEFT);
-    m_text_Credits->setText(
-        "Created by " + GP::AuthorName() + " for " + GP::JamName() + "\n" + GP::JamDate());
     m_text_Credits->setPosition({ 10, GP::GetScreenSize().y() - 30 });
-    m_text_Credits->setColor(GP::PaletteColor5());
     m_text_Credits->update(0.0f);
     m_text_Credits->setShadow(GP::PaletteFontShadow(), jt::Vector2 { 1, 1 });
 
@@ -112,23 +104,36 @@ void StateMenu::doInternalCreate()
 void StateMenu::doInternalUpdate(float const elapsed)
 {
     m_vignette->update(elapsed);
-    if (!m_starting) {
-        using ip = jt::InputManager;
 
-        if (ip::justPressed(jt::KeyCode::Space) || ip::justPressed(jt::KeyCode::Enter)) {
+    checkForTransitionToStateGame();
 
-            m_starting = true;
-            auto tw = jt::TweenAlpha<jt::SmartShape>::create(
-                m_overlay, 0.5f, std::uint8_t { 0 }, std::uint8_t { 255 });
-            tw->setSkipFrames();
-            tw->addCompleteCallback(
-                [this]() { getGame()->switchState(std::make_shared<StateGame>()); });
-            add(tw);
+    m_text_Title->update(elapsed);
+    m_test_Explanation->update(elapsed);
+    m_text_Credits->update(elapsed);
+}
+
+void StateMenu::checkForTransitionToStateGame()
+{
+    auto const keysToTriggerTransition = { jt::KeyCode::Space, jt::KeyCode::Enter };
+
+    for (auto const k : keysToTriggerTransition) {
+        if (jt::InputManager::justPressed(k)) {
+            startTransitionToStateGame();
         }
+    }
+}
 
-        m_text_Title->update(elapsed);
-        m_test_Explanation->update(elapsed);
-        m_text_Credits->update(elapsed);
+void StateMenu::startTransitionToStateGame()
+{
+    if (!m_started) {
+        m_started = true;
+
+        auto tw = jt::TweenAlpha<jt::SmartShape>::create(
+            m_overlay, 0.5f, std::uint8_t { 0 }, std::uint8_t { 255 });
+        tw->setSkipFrames();
+        tw->addCompleteCallback(
+            [this]() { getGame()->switchState(std::make_shared<StateGame>()); });
+        add(tw);
     }
 }
 
