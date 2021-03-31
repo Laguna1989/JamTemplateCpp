@@ -32,18 +32,27 @@ private:
 
     void doInternalCreate() override;
 
+    void createVignette();
+    void createShapes();
+
     void createMenuText();
+    void createTextCredits();
+    void createTextExplanation();
+    void createTextTitle();
 
     void createTweens();
+    void createTweenTitleAlpha();
+    void createTweenOverlayAlpha();
+    void createTweenCreditsPosition();
+    void createTweenExplanationScale();
 
-    void createTitleAlphaTween();
-    void createOverlayAlphaTween();
-    void createCreditsPositionTween();
-    void createExplanationScaleTween();
+    void createTweenTransition();
 
-    void doInternalUpdate(float const /*elapsed*/) override;
+    void doInternalUpdate(float const elapsed) override;
+    void updateDrawables(const float& elapsed);
     void checkForTransitionToStateGame();
     void startTransitionToStateGame();
+
     void doInternalDraw() const override;
 };
 

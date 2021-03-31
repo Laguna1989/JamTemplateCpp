@@ -1,6 +1,7 @@
 ﻿
 #include "SmartDrawableHelpers.hpp"
 #include "SmartShape.hpp"
+#include "SmartSprite.hpp"
 #include "SmartText.hpp"
 
 namespace jt {
@@ -22,6 +23,16 @@ std::shared_ptr<jt::SmartText> createText(std::weak_ptr<jt::renderTarget> rt,
     ptr->loadFont(font_path, fontSize, rt);
     ptr->setText(text);
     ptr->setColor(col);
+    return ptr;
+}
+
+std::shared_ptr<jt::SmartSprite> createVignette(jt::Vector2 const& size)
+{
+    auto ptr = std::make_shared<jt::SmartSprite>();
+    ptr = std::make_shared<jt::SmartSprite>();
+    ptr->loadSprite("#v#" + std::to_string(static_cast<int>(size.x())) + "#"
+        + std::to_string(static_cast<int>(size.y())));
+    ptr->setIgnoreCamMovement(true);
     return ptr;
 }
 
