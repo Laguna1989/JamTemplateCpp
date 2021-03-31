@@ -24,6 +24,14 @@ Perform the steps from above except:
  * 1) Get the win32 zip from the [sfml website](https://www.sfml-dev.org/)
  * 5) `cmake -A Win32 ../`
 
+### Web
+I run it with WSL, but every system capable of running wegassembly/emscripten should work.
+ 1.  `emcmake cmake -DENABLE_WEB=ON ../`
+ 2. on the first run `emmake make` (do **not** pass `-j`, otherwise emscripten will get hickups with pulling libraries)
+ 3. on consecutive runs: `emmake make -j`
+ 3. `http-server .` to start a webserver locally. 
+ 4. open browser on `http://127.0.0.1:8080/` to test locally
+
 ### Mac
 For mac os you have to install cmake and sfml via homebrew: `brew install cmake sfml`
 If you use another package manager or want to install the dependencies yourself, you have to modify the paths in `CMakeLists.txt`.
