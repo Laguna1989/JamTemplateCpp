@@ -31,6 +31,16 @@ private:
     bool m_started { false };
 
     void doInternalCreate() override;
+
+    void createMenuText();
+
+    void createTweens();
+
+    void createTitleAlphaTween();
+    void createOverlayAlphaTween();
+    void createCreditsPositionTween();
+    void createExplanationScaleTween();
+
     void doInternalUpdate(float const /*elapsed*/) override;
     void checkForTransitionToStateGame();
     void startTransitionToStateGame();
