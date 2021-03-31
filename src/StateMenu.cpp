@@ -5,7 +5,7 @@
 #include "InputManager.hpp"
 #include "KeyCodes.hpp"
 #include "MathHelper.hpp"
-#include "SmartAnimation.hpp"
+#include "SmartDrawableHelpers.hpp"
 #include "SmartShape.hpp"
 #include "SmartSprite.hpp"
 #include "SmartText.hpp"
@@ -22,9 +22,7 @@ void StateMenu::doInternalCreate()
     float h = static_cast<float>(GP::GetScreenSize().y());
     float wC = w / 2;
 
-    m_background = std::make_shared<jt::SmartShape>();
-    m_background->makeRect({ w, h });
-    m_background->setColor(GP::PaletteColor1());
+    m_background = jt::sdh::createRectShape(jt::Vector2 { w, h }, GP::PaletteColor1());
     m_background->update(0.0f);
 
     m_text_Title = std::make_shared<jt::SmartText>();
@@ -55,9 +53,7 @@ void StateMenu::doInternalCreate()
     m_text_Credits->update(0.0f);
     m_text_Credits->setShadow(GP::PaletteFontShadow(), jt::Vector2 { 1, 1 });
 
-    m_overlay = std::make_shared<jt::SmartShape>();
-    m_overlay->makeRect(jt::Vector2 { w, h });
-    m_overlay->setColor(jt::Color { 0, 0, 0, 255 });
+    m_overlay = jt::sdh::createRectShape(jt::Vector2 { w, h }, jt::colors::Black);
     m_overlay->update(0);
 
     m_vignette = std::make_shared<jt::SmartSprite>();
