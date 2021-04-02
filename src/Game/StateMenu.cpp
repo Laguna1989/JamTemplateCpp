@@ -58,10 +58,10 @@ void StateMenu::createTextCredits()
 void StateMenu::createTextExplanation()
 {
     float half_width = GP::GetScreenSize().x() / 2;
-    m_test_Explanation = jt::sdh::createText(
+    m_text_Explanation = jt::sdh::createText(
         getGame()->getRenderTarget(), "Press Space to start the game", 16U, GP::PaletteColor8());
-    m_test_Explanation->setPosition({ half_width, 150 });
-    m_test_Explanation->setShadow(GP::PaletteFontShadow(), jt::Vector2 { 3, 3 });
+    m_text_Explanation->setPosition({ half_width, 150 });
+    m_text_Explanation->setShadow(GP::PaletteFontShadow(), jt::Vector2 { 3, 3 });
 }
 
 void StateMenu::createTextTitle()
@@ -83,16 +83,16 @@ void StateMenu::createTweens()
 
 void StateMenu::createTweenExplanationScale()
 {
-    auto s2 = m_test_Explanation->getPosition() + jt::Vector2 { -1000, 0 };
-    auto e2 = m_test_Explanation->getPosition();
+    auto s2 = m_text_Explanation->getPosition() + jt::Vector2 { -1000, 0 };
+    auto e2 = m_text_Explanation->getPosition();
 
-    auto tween = jt::TweenPosition<jt::SmartText>::create(m_test_Explanation, 0.5f, s2, e2);
+    auto tween = jt::TweenPosition<jt::SmartText>::create(m_text_Explanation, 0.5f, s2, e2);
     tween->setStartDelay(0.3f);
     tween->setSkipFrames();
 
     tween->addCompleteCallback([this]() {
         auto ts = jt::TweenScale<jt::SmartText>::create(
-            m_test_Explanation, 0.75f, jt::Vector2 { 1.0f, 1.0f }, jt::Vector2 { 1.05f, 1.05f });
+            m_text_Explanation, 0.75f, jt::Vector2 { 1.0f, 1.0f }, jt::Vector2 { 1.05f, 1.05f });
         ts->setRepeat(true);
         ts->setAgePercentConversion([](float age) {
             return jt::Lerp::cosine(0.0f, 1.0f, jt::MathHelper::clamp(age, 0.0f, 1.0f));
@@ -139,7 +139,7 @@ void StateMenu::updateDrawables(const float& elapsed)
 {
     m_background->update(elapsed);
     m_text_Title->update(elapsed);
-    m_test_Explanation->update(elapsed);
+    m_text_Explanation->update(elapsed);
     m_text_Credits->update(elapsed);
     m_overlay->update(elapsed);
     m_vignette->update(elapsed);
@@ -179,7 +179,7 @@ void StateMenu::doInternalDraw() const
     m_background->draw(getGame()->getRenderTarget());
 
     m_text_Title->draw(getGame()->getRenderTarget());
-    m_test_Explanation->draw(getGame()->getRenderTarget());
+    m_text_Explanation->draw(getGame()->getRenderTarget());
     m_text_Credits->draw(getGame()->getRenderTarget());
 
     m_overlay->draw(getGame()->getRenderTarget());

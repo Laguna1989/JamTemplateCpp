@@ -22,7 +22,7 @@ private:
     std::shared_ptr<jt::SmartShape> m_background;
 
     std::shared_ptr<jt::SmartText> m_text_Title;
-    std::shared_ptr<jt::SmartText> m_test_Explanation;
+    std::shared_ptr<jt::SmartText> m_text_Explanation;
     std::shared_ptr<jt::SmartText> m_text_Credits;
 
     std::shared_ptr<jt::SmartShape> m_overlay;
