@@ -9,11 +9,13 @@
 
 namespace jt {
 
-Game::Game(unsigned int w, unsigned int h, float zoom, std::string const& title)
+Game::Game(unsigned int w, unsigned int h, float zoom, std::string const& title,
+    std::shared_ptr<MusicPlayerInterface> musicPlayer)
     : m_renderWindow { std::make_shared<sf::RenderWindow>(
         sf::VideoMode(w, h), title, sf::Style::Close) }
     , m_zoom { zoom }
     , m_renderTarget { std::make_shared<jt::renderTarget>() }
+    , m_musicPlayer { musicPlayer }
 {
     m_renderWindow->setVerticalSyncEnabled(true);
 
@@ -26,6 +28,8 @@ Game::Game(unsigned int w, unsigned int h, float zoom, std::string const& title)
     m_view = std::make_shared<sf::View>(jt::Rect(0, 0, (float)scaledWidth, (float)scaledHeight));
     m_view->setViewport(jt::Rect(0, 0, 1, 1));
 }
+
+std::shared_ptr<MusicPlayerInterface> Game::getMusicPlayer() { return m_musicPlayer; }
 
 float Game::getZoom() const { return m_zoom; }
 
@@ -139,26 +143,6 @@ void Game::resetShake()
     m_shakeOffset.x() = m_shakeOffset.y() = 0;
     m_shakeTimer = -1;
     m_shakeStrength = 0;
-}
-
-void Game::PlayMusic(std::string const& fileName)
-{
-    m_music = std::make_shared<sf::Music>();
-    m_music->openFromFile(fileName);
-    m_music->play();
-    m_music->setLoop(true);
-}
-void Game::StopMusic()
-{
-    if (m_music) {
-        m_music->stop();
-    }
-}
-void Game::SetMusicVolume(float v)
-{
-    if (m_music) {
-        m_music->setVolume(v);
-    }
 }
 
 } // namespace jt

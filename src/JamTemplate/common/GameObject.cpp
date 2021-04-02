@@ -1,5 +1,5 @@
 ﻿#include "GameObject.hpp"
-#include "GameBase.hpp"
+#include "GameInterface.hpp"
 #include "SystemHelper.hpp"
 #include <exception>
 #include <iostream>
@@ -28,7 +28,7 @@ void GameObject::draw() const { doDraw(); };
 float GameObject::getAge() const { return m_age; }
 void GameObject::setAge(float t) { m_age = t; }
 
-void GameObject::setGameInstance(std::weak_ptr<GameBase> g)
+void GameObject::setGameInstance(std::weak_ptr<GameInterface> g)
 {
     if (!jt::SystemHelper::is_uninitialized_weak_ptr(m_game)) {
         throw std::logic_error {
@@ -37,14 +37,14 @@ void GameObject::setGameInstance(std::weak_ptr<GameBase> g)
     }
     m_game = g;
 }
-std::shared_ptr<GameBase> GameObject::getGame()
+std::shared_ptr<GameInterface> GameObject::getGame()
 {
     if (m_game.expired()) {
         throw std::logic_error { "ERROR: Cannot GameObject::getGame():  m_game expired!" };
     }
     return m_game.lock();
 }
-std::shared_ptr<GameBase> GameObject::getGame() const
+std::shared_ptr<GameInterface> GameObject::getGame() const
 {
     if (m_game.expired()) {
         throw std::logic_error { "ERROR: Cannot GameObject::getGame():  m_game expired!" };

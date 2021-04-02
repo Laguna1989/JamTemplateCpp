@@ -77,7 +77,7 @@ void GameBase::shake(float t, float strength, float shakeInterval)
     m_shakeInterval = m_shakeIntervalMax = shakeInterval;
 }
 
-std::weak_ptr<GameBase> GameBase::getPtr() { return shared_from_this(); }
+std::weak_ptr<GameInterface> GameBase::getPtr() { return shared_from_this(); }
 
 void GameBase::doSwitchState()
 {

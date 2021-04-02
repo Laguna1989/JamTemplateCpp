@@ -18,7 +18,8 @@ class Game final : public jt::GameBase {
 public:
     using Sptr = std::shared_ptr<Game>;
 
-    Game(unsigned int w, unsigned int h, float zoom, std::string const& title);
+    Game(unsigned int w, unsigned int h, float zoom, std::string const& title,
+        std::shared_ptr<MusicPlayerInterface> musicPlayer);
 
     void runGame(
         std::shared_ptr<GameState> InitialState, GameLoopFunctionPtr gameloop_function) override;
@@ -28,10 +29,13 @@ public:
 
     virtual float getZoom() const override;
 
+    virtual std::shared_ptr<MusicPlayerInterface> getMusicPlayer() override;
+
 private:
     std::shared_ptr<jt::renderTarget> m_renderTarget { nullptr };
     std::shared_ptr<sf::View> m_view { nullptr };
     std::shared_ptr<sf::RenderWindow> m_renderWindow { nullptr };
+    std::shared_ptr<MusicPlayerInterface> m_musicPlayer { nullptr };
     float m_zoom;
 
     // override functions from GameBase
@@ -45,11 +49,6 @@ private:
     std::shared_ptr<sf::View> getView();
 
     std::shared_ptr<sf::RenderWindow> getRenderWindow();
-
-    std::shared_ptr<sf::Music> m_music;
-    void PlayMusic(std::string const& fileName);
-    void StopMusic();
-    void SetMusicVolume(float v);
 };
 
 } // namespace jt

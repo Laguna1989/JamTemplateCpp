@@ -1,6 +1,6 @@
 ﻿#include "Hud.hpp"
 #include "Color.hpp"
-#include "GameBase.hpp"
+#include "GameInterface.hpp"
 
 Hud::Hud() = default;
 

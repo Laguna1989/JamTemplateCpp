@@ -1,6 +1,6 @@
 ﻿#include "SmartTilemap.hpp"
 #include "Conversions.hpp"
-#include "GameBase.hpp"
+#include "GameInterface.hpp"
 #include <memory>
 
 namespace jt {
@@ -159,7 +159,7 @@ const jt::Vector2 SmartTilemap::getOrigin() const { return jt::Vector2 {}; }
 
 void SmartTilemap::doRotate(float /*rot*/) { }
 
-void SmartTilemap::setScreenSizeHint(jt::Vector2 const& hint, std::shared_ptr<GameBase> ptr)
+void SmartTilemap::setScreenSizeHint(jt::Vector2 const& hint, std::shared_ptr<GameInterface> ptr)
 {
     m_screenSizeHint = hint;
     m_gamePtr = ptr;

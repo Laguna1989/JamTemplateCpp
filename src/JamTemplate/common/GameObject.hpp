@@ -5,7 +5,7 @@
 
 namespace jt {
 // forward declaration
-class GameBase;
+class GameInterface;
 
 class GameObject {
 public:
@@ -30,10 +30,10 @@ public:
     float getAge() const;
     void setAge(float t);
 
-    void setGameInstance(std::weak_ptr<GameBase> g);
-    std::shared_ptr<GameBase> getGame();
+    void setGameInstance(std::weak_ptr<GameInterface> g);
+    std::shared_ptr<GameInterface> getGame();
     // const version of getGame (required for draw functionality)
-    std::shared_ptr<GameBase> getGame() const;
+    std::shared_ptr<GameInterface> getGame() const;
 
     // kill this game Object (killed/dead game objects will get thrown out of any GameState)
     void kill();
@@ -48,7 +48,7 @@ protected:
 private:
     bool m_alive { true }; // is used to sort out "dead" game objects;
 
-    std::weak_ptr<GameBase> m_game;
+    std::weak_ptr<GameInterface> m_game;
 
     virtual void doUpdate(float const /*elapsed*/);
 

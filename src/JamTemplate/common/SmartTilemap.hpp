@@ -12,7 +12,7 @@
 namespace jt {
 
 // forward declaration
-class GameBase;
+class GameInterface;
 
 class SmartTilemap : public SmartDrawable {
 public:
@@ -50,7 +50,7 @@ public:
 
     void doRotate(float /*rot*/);
 
-    void setScreenSizeHint(jt::Vector2 const& hint, std::shared_ptr<GameBase> ptr);
+    void setScreenSizeHint(jt::Vector2 const& hint, std::shared_ptr<GameInterface> ptr);
 
     // FIXME: Not ideal because it only supports rectangles.
     std::map<std::string, std::vector<InfoRect>> getObjectGroups() { return m_objectGroups; };
@@ -66,7 +66,7 @@ private:
     jt::Vector2 m_position;
 
     jt::Vector2 m_screenSizeHint;
-    std::weak_ptr<GameBase> m_gamePtr;
+    std::weak_ptr<GameInterface> m_gamePtr;
 };
 
 } // namespace jt

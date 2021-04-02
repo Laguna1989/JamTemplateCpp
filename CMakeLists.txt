@@ -80,8 +80,22 @@ endif()
 
 if(NOT ENABLE_WEB)
 	# group together similar files for a cleaner JamTemplate Project in IDEs that support this feature
-	source_group(GameLoop FILES src/JamTemplate/common/GameBase.cpp src/JamTemplate/common/GameBase.hpp src/JamTemplate/common/GameObject.cpp src/JamTemplate/common/GameObject.hpp
-	src/JamTemplate/common/GameState.cpp src/JamTemplate/common/GameState.hpp src/JamTemplate/sfml/Game.cpp src/JamTemplate/sfml/Game.hpp)
+	source_group(
+		GameLoop FILES
+		src/JamTemplate/common/GameInterface.hpp
+
+		src/JamTemplate/common/GameBase.cpp
+		src/JamTemplate/common/GameBase.hpp
+
+		src/JamTemplate/common/GameObject.cpp
+		src/JamTemplate/common/GameObject.hpp
+
+		src/JamTemplate/common/GameState.cpp
+		src/JamTemplate/common/GameState.hpp
+
+		src/JamTemplate/sfml/Game.cpp
+		src/JamTemplate/sfml/Game.hpp
+	)
 	source_group(
 		SmartDrawables FILES
 		src/JamTemplate/common/SmartAnimation.cpp
@@ -198,7 +212,7 @@ endif()
 #####################################################
 ## setup Game executable
 #####################################################
-file(GLOB GAMEFILES src/*)
+file(GLOB GAMEFILES src/Game/*)
 add_executable(${PROJECTNAME}  ${GAMEFILES})
 if(ENABLE_WEB)
 	set(CMAKE_EXECUTABLE_SUFFIX ".html")
