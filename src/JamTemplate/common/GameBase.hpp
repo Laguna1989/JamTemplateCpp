@@ -3,6 +3,7 @@
 
 #include "Color.hpp"
 #include "GameInterface.hpp"
+#include "GameLoopInterface.hpp"
 #include "GameObject.hpp"
 #include "MusicPlayerInterface.hpp"
 #include "Rendertarget.hpp"
@@ -18,16 +19,19 @@ class GameBase : public GameInterface,
                  public GameObject,
                  public std::enable_shared_from_this<GameBase> {
 public:
-    // Ugly c-style function Pointer required by emscripten. At least it is hidden in a using alias.
-    using GameLoopFunctionPtr = void (*)();
-
     GameBase();
     // this function will likely be called by the user from within update().
     // To ensure consisten behavior within one frame, the actual switching will take place in
     // doSwitchState() which will happen at the beginning of the next update loop.
-    void switchState(std::shared_ptr<GameState> newState);
+    void switchState(std::shared_ptr<GameState> newState) override;
 
-    std::shared_ptr<GameState> getCurrentSate();
+    std::shared_ptr<GameState> getCurrentSate() override;
+
+    void run() override;
+    virtual void runGame(
+        std::shared_ptr<GameState> InitialState, GameLoopFunctionPtr gameloop_function)
+        = 0;
+
     virtual std::shared_ptr<MusicPlayerInterface> getMusicPlayer() = 0;
 
     // cannot be const because getView is not const
@@ -41,11 +45,6 @@ public:
 
     virtual void setRenderTarget(std::shared_ptr<jt::renderTarget> rt) = 0;
     virtual std::shared_ptr<jt::renderTarget> getRenderTarget() const = 0;
-
-    void run();
-    virtual void runGame(
-        std::shared_ptr<GameState> InitialState, GameLoopFunctionPtr gameloop_function)
-        = 0;
 
 protected:
     std::shared_ptr<GameState> m_state { nullptr };

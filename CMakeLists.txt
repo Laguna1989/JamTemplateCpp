@@ -84,6 +84,8 @@ if(NOT ENABLE_WEB)
 		GameLoop FILES
 		src/JamTemplate/common/GameInterface.hpp
 
+		src/JamTemplate/common/GameLoopInterface.hpp
+
 		src/JamTemplate/common/GameBase.cpp
 		src/JamTemplate/common/GameBase.hpp
 
