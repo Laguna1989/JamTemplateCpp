@@ -10,8 +10,9 @@ void State1::doInternalCreate()
 {
     using jt::Timer;
 
-    getGame()->shake(0.5f, 2.0f);
-    jt::Timer::Sptr t = std::make_shared<Timer>(0.6f, [this]() { getGame()->shake(0.5f, 2.0f); });
+    getGame()->getCamera()->shake(0.5f, 2.0f);
+    jt::Timer::Sptr t
+        = std::make_shared<Timer>(0.6f, [this]() { getGame()->getCamera()->shake(0.5f, 2.0f); });
     add(t);
 }
 

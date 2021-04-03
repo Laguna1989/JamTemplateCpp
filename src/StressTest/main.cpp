@@ -18,7 +18,7 @@ int main()
 
     jt::Random::useTimeAsRandomSeed();
 
-    game = std::make_shared<jt::Game>(800, 600, 2.0f, "Stresstest");
+    game = std::make_shared<jt::Game>(800, 600, 2.0f, "Stresstest", nullptr);
 
     game->runGame(std::make_shared<StateSelect>(), gameloop);
 

@@ -23,14 +23,14 @@ void StateTileson::doInternalUpdate(float const elapsed)
     auto const scrollspeed = 50.0f;
     m_tilemap->update(elapsed);
     if (jt::InputManager::pressed(jt::KeyCode::D)) {
-        getGame()->moveCam(jt::Vector2 { scrollspeed * elapsed, 0.0f });
+        getGame()->getCamera()->move(jt::Vector2 { scrollspeed * elapsed, 0.0f });
     } else if (jt::InputManager::pressed(jt::KeyCode::A)) {
-        getGame()->moveCam(jt::Vector2 { -scrollspeed * elapsed, 0.0f });
+        getGame()->getCamera()->move(jt::Vector2 { -scrollspeed * elapsed, 0.0f });
     }
     if (jt::InputManager::pressed(jt::KeyCode::W)) {
-        getGame()->moveCam(jt::Vector2 { 0.0f, -scrollspeed * elapsed });
+        getGame()->getCamera()->move(jt::Vector2 { 0.0f, -scrollspeed * elapsed });
     } else if (jt::InputManager::pressed(jt::KeyCode::S)) {
-        getGame()->moveCam(jt::Vector2 { 0.0f, scrollspeed * elapsed });
+        getGame()->getCamera()->move(jt::Vector2 { 0.0f, scrollspeed * elapsed });
     }
 
     if (jt::InputManager::justPressed(jt::KeyCode::F1)

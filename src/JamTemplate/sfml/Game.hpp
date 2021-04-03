@@ -19,15 +19,13 @@ public:
     using Sptr = std::shared_ptr<Game>;
 
     Game(unsigned int w, unsigned int h, float zoom, std::string const& title,
-        std::shared_ptr<MusicPlayerInterface> musicPlayer);
+        std::shared_ptr<MusicPlayerInterface> musicPlayer = nullptr);
 
     void runGame(
         std::shared_ptr<GameState> InitialState, GameLoopFunctionPtr gameloop_function) override;
 
     void setRenderTarget(std::shared_ptr<jt::renderTarget> rt) override;
     std::shared_ptr<jt::renderTarget> getRenderTarget() const override;
-
-    virtual float getZoom() const override;
 
     virtual std::shared_ptr<MusicPlayerInterface> getMusicPlayer() override;
 
@@ -38,14 +36,13 @@ private:
 
     std::shared_ptr<MusicPlayerInterface> m_musicPlayer { nullptr };
 
-    float m_zoom;
-
     // override functions from GameBase
     virtual void doUpdate(float const elapsed) override;
     virtual void doDraw() const override;
 
     void updateShake(float elapsed) override;
-    void resetShake() override;
+    void applyCamShakeToView();
+    void removeCamShakeFromView();
 
     void setView(std::shared_ptr<sf::View> view);
     std::shared_ptr<sf::View> getView();

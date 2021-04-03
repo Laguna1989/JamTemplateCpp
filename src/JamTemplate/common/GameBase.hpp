@@ -33,15 +33,8 @@ public:
         = 0;
 
     virtual std::shared_ptr<MusicPlayerInterface> getMusicPlayer() = 0;
-
-    // cannot be const because getView is not const
-    jt::Vector2 getCamOffset();
-    void setCamOffset(jt::Vector2 const& ofs);
-    void moveCam(jt::Vector2 const& v);
-
-    void shake(float t, float strength, float shakeInterval = 0.005f);
-
-    virtual float getZoom() const = 0;
+    virtual std::shared_ptr<CamInterface> getCamera() override;
+    virtual std::shared_ptr<CamInterface> getCamera() const override;
 
     virtual void setRenderTarget(std::shared_ptr<jt::renderTarget> rt) = 0;
     virtual std::shared_ptr<jt::renderTarget> getRenderTarget() const = 0;
@@ -50,15 +43,9 @@ protected:
     std::shared_ptr<GameState> m_state { nullptr };
     std::shared_ptr<GameState> m_nextState { nullptr };
 
-    jt::Vector2 m_CamOffset { 0.0f, 0.0f };
+    std::shared_ptr<CamInterface> mutable m_camera { nullptr };
 
     std::chrono::steady_clock::time_point timeLast;
-
-    float m_shakeTimer { -1.0f };
-    float m_shakeStrength { 0.0f };
-    float m_shakeInterval { 0.0f };
-    float m_shakeIntervalMax { 0.0f };
-    jt::Vector2 m_shakeOffset { 0, 0 };
 
     jt::Color m_backgroundColor { jt::colors::Black };
 
@@ -69,7 +56,6 @@ protected:
     virtual void doDraw() const override = 0;
 
     virtual void updateShake(float elapsed) = 0;
-    virtual void resetShake() = 0;
 
     void doSwitchState();
 };

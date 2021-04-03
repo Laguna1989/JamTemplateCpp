@@ -1,4 +1,5 @@
 ﻿#include "GameBase.hpp"
+#include "Camera.hpp"
 #include "GameState.hpp"
 #include "InputManager.hpp"
 #include <exception>
@@ -9,6 +10,7 @@ namespace jt {
 GameBase::GameBase()
     : m_state { nullptr }
     , m_nextState { nullptr }
+    , m_camera { std::make_shared<Camera>() }
 {
 }
 
@@ -65,18 +67,6 @@ void GameBase::run()
     }
 }
 
-jt::Vector2 GameBase::getCamOffset() { return m_CamOffset; }
-
-void GameBase::setCamOffset(jt::Vector2 const& ofs) { m_CamOffset = ofs; }
-void GameBase::moveCam(jt::Vector2 const& v) { m_CamOffset = m_CamOffset + v; }
-
-void GameBase::shake(float t, float strength, float shakeInterval)
-{
-    m_shakeTimer = t;
-    m_shakeStrength = strength;
-    m_shakeInterval = m_shakeIntervalMax = shakeInterval;
-}
-
 std::weak_ptr<GameInterface> GameBase::getPtr() { return shared_from_this(); }
 
 void GameBase::doSwitchState()
@@ -84,11 +74,13 @@ void GameBase::doSwitchState()
     m_state = m_nextState;
     m_nextState = nullptr;
 
-    m_CamOffset = jt::Vector2 { 0.0f, 0.0f };
+    getCamera()->reset();
     m_state->setGameInstance(getPtr());
     m_state->create();
     jt::InputManager::reset();
-    resetShake();
 }
+
+std::shared_ptr<CamInterface> GameBase::getCamera() { return m_camera; }
+std::shared_ptr<CamInterface> GameBase::getCamera() const { return m_camera; }
 
 } // namespace jt

@@ -1,4 +1,5 @@
 ﻿#include "Game.hpp"
+#include "Camera.hpp"
 #include "GameState.hpp"
 #include "InputManager.hpp"
 #include "Random.hpp"
@@ -13,14 +14,14 @@ Game::Game(unsigned int w, unsigned int h, float zoom, std::string const& title,
     std::shared_ptr<MusicPlayerInterface> musicPlayer)
     : m_renderWindow { std::make_shared<sf::RenderWindow>(
         sf::VideoMode(w, h), title, sf::Style::Close) }
-    , m_zoom { zoom }
     , m_renderTarget { std::make_shared<jt::renderTarget>() }
     , m_musicPlayer { musicPlayer }
 {
+    m_camera->setZoom(zoom);
     m_renderWindow->setVerticalSyncEnabled(true);
 
-    unsigned int const scaledWidth = static_cast<unsigned int>(w / m_zoom);
-    unsigned int const scaledHeight = static_cast<unsigned int>(h / m_zoom);
+    unsigned int const scaledWidth = static_cast<unsigned int>(w / zoom);
+    unsigned int const scaledHeight = static_cast<unsigned int>(h / zoom);
 
     m_renderTarget->create(scaledWidth, scaledHeight);
     m_renderTarget->setSmooth(false);
@@ -30,8 +31,6 @@ Game::Game(unsigned int w, unsigned int h, float zoom, std::string const& title,
 }
 
 std::shared_ptr<MusicPlayerInterface> Game::getMusicPlayer() { return m_musicPlayer; }
-
-float Game::getZoom() const { return m_zoom; }
 
 void Game::runGame(std::shared_ptr<GameState> InitialState, GameLoopFunctionPtr gameloop_function)
 {
@@ -75,11 +74,14 @@ void Game::doUpdate(float const elapsed)
     jt::Vector2 mpf = getRenderWindow()->mapPixelToCoords(
         sf::Mouse::getPosition(*getRenderWindow()), *getView());
     jt::Vector2 mpfs
-        = getRenderWindow()->mapPixelToCoords(sf::Mouse::getPosition(*getRenderWindow())) / m_zoom;
+        = getRenderWindow()->mapPixelToCoords(sf::Mouse::getPosition(*getRenderWindow()))
+        / getCamera()->getZoom();
     InputManager::update(mpf.x(), mpf.y(), mpfs.x(), mpfs.y(), elapsed);
 
-    int const camOffsetix { static_cast<int>(m_CamOffset.x() + getView()->getSize().x / 2) };
-    int const camOffsetiy { static_cast<int>(m_CamOffset.y() + getView()->getSize().y / 2) };
+    int const camOffsetix { static_cast<int>(
+        getCamera()->getCamOffset().x() + getView()->getSize().x / 2) };
+    int const camOffsetiy { static_cast<int>(
+        getCamera()->getCamOffset().y() + getView()->getSize().y / 2) };
 
     getView()->setCenter(
         jt::Vector2 { static_cast<float>(camOffsetix), static_cast<float>(camOffsetiy) });
@@ -102,7 +104,8 @@ void Game::doDraw() const
     sf::Sprite spr(texture);
     // Note: RenderTexture has a bug and is displayed upside down.
     // This is corrected by the following two lines
-    spr.setScale(jt::Vector2(m_zoom, -m_zoom));
+    auto const zoom = getCamera()->getZoom();
+    spr.setScale(jt::Vector2(zoom, -zoom));
     spr.setPosition(0.0f, static_cast<float>(m_renderWindow->getSize().y));
 
     // draw the sprite
@@ -114,35 +117,27 @@ void Game::doDraw() const
 
 void Game::updateShake(float elapsed)
 {
-    if (m_shakeOffset.x() != 0 || m_shakeOffset.y() != 0) {
-        getView()->move(-m_shakeOffset.x(), -m_shakeOffset.y());
-    }
+    removeCamShakeFromView();
 
-    if (m_shakeTimer > 0) {
-        m_shakeTimer -= elapsed;
-        m_shakeInterval -= elapsed;
-        if (m_shakeInterval < 0) {
-            m_shakeInterval = m_shakeIntervalMax;
-            m_shakeOffset.x() = jt::Random::getFloat(-m_shakeStrength, m_shakeStrength);
-            m_shakeOffset.y() = jt::Random::getFloat(-m_shakeStrength, m_shakeStrength);
-        }
-    } else {
-        m_shakeOffset.x() = m_shakeOffset.y() = 0;
-    }
+    getCamera()->update(elapsed);
 
+    applyCamShakeToView();
+}
+
+void jt::Game::applyCamShakeToView()
+{
+    auto const newShakeOffset = getCamera()->getShakeOffset();
     auto v = getView();
-    v->move(m_shakeOffset.x(), m_shakeOffset.y());
+    v->move(newShakeOffset.x(), newShakeOffset.y());
     setView(v);
 }
 
-void Game::resetShake()
+void jt::Game::removeCamShakeFromView()
 {
-    if (m_shakeOffset.x() != 0 || m_shakeOffset.y() != 0) {
-        getView()->move(-m_shakeOffset.x(), -m_shakeOffset.y());
+    auto const oldShakeOffset = getCamera()->getShakeOffset();
+    if (oldShakeOffset.x() != 0 || oldShakeOffset.y() != 0) {
+        getView()->move(-oldShakeOffset.x(), -oldShakeOffset.y());
     }
-    m_shakeOffset.x() = m_shakeOffset.y() = 0;
-    m_shakeTimer = -1;
-    m_shakeStrength = 0;
 }
 
 } // namespace jt
