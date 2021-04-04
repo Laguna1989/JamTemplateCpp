@@ -1,14 +1,14 @@
 ﻿#include "StateTileson.hpp"
 #include "GameInterface.hpp"
 #include "InputManager.hpp"
-#include "SmartTilemap.hpp"
 #include "StateSelect.hpp"
+#include "Tilemap.hpp"
 #include "Timer.hpp"
 #include <filesystem>
 
 void StateTileson::doInternalCreate()
 {
-    m_tilemap = std::make_shared<jt::SmartTilemap>("assets/tileson_test.json");
+    m_tilemap = std::make_shared<jt::Tilemap>("assets/tileson_test.json");
     m_tilemap->setScreenSizeHint(jt::Vector2(400, 300), getGame());
 
     m_sound = std::make_shared<jt::Sound>();

@@ -8,8 +8,8 @@
 
 // fwd decls
 namespace jt {
-class SmartShape;
-class SmartSprite;
+class Shape;
+class Sprite;
 } // namespace jt
 class b2World;
 
@@ -18,9 +18,9 @@ class Hud;
 class StateGame : public jt::GameState {
 
 private:
-    std::shared_ptr<jt::SmartShape> m_background;
-    std::shared_ptr<jt::SmartShape> m_overlay;
-    std::shared_ptr<jt::SmartSprite> m_vignette;
+    std::shared_ptr<jt::Shape> m_background;
+    std::shared_ptr<jt::Shape> m_overlay;
+    std::shared_ptr<jt::Sprite> m_vignette;
     std::shared_ptr<Hud> m_hud;
     std::shared_ptr<b2World> m_world { nullptr };
     bool m_running { false };

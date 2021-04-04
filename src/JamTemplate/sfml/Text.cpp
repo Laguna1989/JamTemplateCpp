@@ -1,19 +1,19 @@
-﻿#include "SmartText.hpp"
+﻿#include "Text.hpp"
 
 namespace jt {
 
-SmartText::~SmartText()
+Text::~Text()
 {
-    // std::cout << "SmartText dtor\n";
+    // std::cout << "Text dtor\n";
     m_text = nullptr;
-    // std::cout << "SmartText dtor2\n";
+    // std::cout << "Text dtor2\n";
     m_flashText = nullptr;
-    // std::cout << "SmartText dtor3\n";
+    // std::cout << "Text dtor3\n";
     m_font = nullptr;
-    // std::cout << "SmartText dtor4\n";
+    // std::cout << "Text dtor4\n";
 }
 
-void SmartText::loadFont(std::string const& fontFileName, unsigned int characterSize,
+void Text::loadFont(std::string const& fontFileName, unsigned int characterSize,
     std::weak_ptr<jt::renderTarget> wptr /*unused*/)
 {
     m_font = std::make_shared<sf::Font>();
@@ -26,53 +26,53 @@ void SmartText::loadFont(std::string const& fontFileName, unsigned int character
     m_flashText->setCharacterSize(characterSize);
 }
 
-void SmartText::setText(std::string text)
+void Text::setText(std::string text)
 {
     m_text->setString(text);
     m_flashText->setString(text);
 }
-std::string SmartText::getText() const { return m_text->getString(); }
+std::string Text::getText() const { return m_text->getString(); }
 
-void SmartText::setOutline(float thickness, jt::Color col)
+void Text::setOutline(float thickness, jt::Color col)
 {
     m_text->setOutlineThickness(thickness);
     m_text->setOutlineColor(col);
 }
 
-void SmartText::setPosition(jt::Vector2 const& pos) { m_position = pos; }
-const jt::Vector2 SmartText::getPosition() const { return m_position; }
+void Text::setPosition(jt::Vector2 const& pos) { m_position = pos; }
+const jt::Vector2 Text::getPosition() const { return m_position; }
 
-void SmartText::setColor(const jt::Color& col) { m_text->setFillColor(col); }
-const jt::Color SmartText::getColor() const { return m_text->getFillColor(); }
+void Text::setColor(const jt::Color& col) { m_text->setFillColor(col); }
+const jt::Color Text::getColor() const { return m_text->getFillColor(); }
 
-void SmartText::setFlashColor(const jt::Color& col) { m_flashText->setFillColor(col); }
-const jt::Color SmartText::getFlashColor() const { return m_flashText->getFillColor(); }
+void Text::setFlashColor(const jt::Color& col) { m_flashText->setFillColor(col); }
+const jt::Color Text::getFlashColor() const { return m_flashText->getFillColor(); }
 
 //  sf::Transform const getTransform() const  { return m_text->getTransform(); }
 
-jt::Rect const SmartText::getGlobalBounds() const { return m_text->getGlobalBounds(); }
-jt::Rect const SmartText::getLocalBounds() const { return m_text->getLocalBounds(); }
+jt::Rect const Text::getGlobalBounds() const { return m_text->getGlobalBounds(); }
+jt::Rect const Text::getLocalBounds() const { return m_text->getLocalBounds(); }
 
-void SmartText::setScale(jt::Vector2 const& scale)
+void Text::setScale(jt::Vector2 const& scale)
 {
     m_text->setScale(scale);
     m_flashText->setScale(scale);
 }
 
-const jt::Vector2 SmartText::getScale() const { return m_text->getScale(); }
+const jt::Vector2 Text::getScale() const { return m_text->getScale(); }
 
-void SmartText::setOrigin(jt::Vector2 const& origin)
+void Text::setOrigin(jt::Vector2 const& origin)
 {
     m_text->setOrigin(origin);
     m_flashText->setOrigin(origin);
 }
 
-const jt::Vector2 SmartText::getOrigin() const { return m_text->getOrigin(); }
+const jt::Vector2 Text::getOrigin() const { return m_text->getOrigin(); }
 
-void SmartText::SetTextAlign(SmartText::TextAlign ta) { m_textAlign = ta; }
-SmartText::TextAlign SmartText::getTextAlign() const { return m_textAlign; }
+void Text::SetTextAlign(Text::TextAlign ta) { m_textAlign = ta; }
+Text::TextAlign Text::getTextAlign() const { return m_textAlign; }
 
-void SmartText::doUpdate(float /*elapsed*/)
+void Text::doUpdate(float /*elapsed*/)
 {
     m_text->setFont(*m_font);
     m_flashText->setFont(*m_font);
@@ -89,7 +89,7 @@ void SmartText::doUpdate(float /*elapsed*/)
     m_flashText->setScale(m_text->getScale());
 }
 
-void SmartText::doDrawShadow(std::shared_ptr<jt::renderTarget> const sptr) const
+void Text::doDrawShadow(std::shared_ptr<jt::renderTarget> const sptr) const
 {
     jt::Vector2 const oldPos = m_text->getPosition();
     jt::Color const oldCol = m_text->getFillColor();
@@ -102,7 +102,7 @@ void SmartText::doDrawShadow(std::shared_ptr<jt::renderTarget> const sptr) const
     m_text->setFillColor(oldCol);
 }
 
-void SmartText::doDraw(std::shared_ptr<jt::renderTarget> const sptr) const
+void Text::doDraw(std::shared_ptr<jt::renderTarget> const sptr) const
 {
     try {
         sptr->draw(*m_text);
@@ -113,12 +113,12 @@ void SmartText::doDraw(std::shared_ptr<jt::renderTarget> const sptr) const
     }
 }
 
-void SmartText::doDrawFlash(std::shared_ptr<jt::renderTarget> const sptr) const
+void Text::doDrawFlash(std::shared_ptr<jt::renderTarget> const sptr) const
 {
     sptr->draw(*m_flashText);
 }
 
-void SmartText::doRotate(float rot)
+void Text::doRotate(float rot)
 {
     m_text->setRotation(-rot);
     m_flashText->setRotation(-rot);

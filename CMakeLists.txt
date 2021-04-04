@@ -99,30 +99,32 @@ if(NOT ENABLE_WEB)
 		src/JamTemplate/sfml/Game.hpp
 	)
 	source_group(
-		SmartDrawables FILES
-		src/JamTemplate/common/SmartAnimation.cpp
-		src/JamTemplate/common/SmartAnimation.hpp
+		Drawables FILES
+		src/JamTemplate/common/Animation.cpp
+		src/JamTemplate/common/Animation.hpp
 
-		src/JamTemplate/common/SmartBar.cpp
-		src/JamTemplate/common/SmartBar.hpp
+		src/JamTemplate/common/Bar.cpp
+		src/JamTemplate/common/Bar.hpp
 
-		src/JamTemplate/common/SmartDrawable.cpp
-		src/JamTemplate/common/SmartDrawable.hpp
+		src/JamTemplate/common/DrawableImpl.cpp
+		src/JamTemplate/common/DrawableImpl.hpp
+		
+		src/JamTemplate/common/DrawableInterface.hpp
 
-		src/JamTemplate/common/SmartDrawableHelpers.cpp
-		src/JamTemplate/common/SmartDrawableHelpers.hpp
+		src/JamTemplate/common/DrawableHelpers.cpp
+		src/JamTemplate/common/DrawableHelpers.hpp
 
-		src/JamTemplate/sfml/SmartShape.cpp
-		src/JamTemplate/sfml/SmartShape.hpp
+		src/JamTemplate/sfml/Shape.cpp
+		src/JamTemplate/sfml/Shape.hpp
 
-		src/JamTemplate/sfml/SmartSprite.cpp
-		src/JamTemplate/sfml/SmartSprite.hpp
+		src/JamTemplate/sfml/Sprite.cpp
+		src/JamTemplate/sfml/Sprite.hpp
 
-		src/JamTemplate/sfml/SmartText.cpp
-		src/JamTemplate/sfml/SmartText.hpp
+		src/JamTemplate/sfml/Text.cpp
+		src/JamTemplate/sfml/Text.hpp
 
-		src/JamTemplate/common/SmartTilemap.hpp
-		src/JamTemplate/common/SmartTilemap.cpp
+		src/JamTemplate/common/Tilemap.hpp
+		src/JamTemplate/common/Tilemap.cpp
 	)
 	source_group(Tweens REGULAR_EXPRESSION src/JamTemplate/common/Tween*)
 

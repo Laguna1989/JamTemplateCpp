@@ -10,26 +10,26 @@ void StateTween::doInternalCreate()
 
 void StateTween::createRects()
 {
-    m_background = std::make_shared<jt::SmartShape>();
+    m_background = std::make_shared<jt::Shape>();
     m_background->makeRect(jt::Vector2(400, 300));
     m_background->setColor(jt::Color { 255, 255, 255 });
 
-    m_overlayR = std::make_shared<jt::SmartShape>();
+    m_overlayR = std::make_shared<jt::Shape>();
     m_overlayR->makeRect(jt::Vector2 { 400, 300 });
     m_overlayR->setColor(jt::Color { 255, 0, 0, 0 });
 
-    m_overlayG = std::make_shared<jt::SmartShape>();
+    m_overlayG = std::make_shared<jt::Shape>();
     m_overlayG->makeRect(jt::Vector2 { 400, 300 });
     m_overlayG->setColor(jt::Color { 0, 255, 0, 0 });
 
-    m_overlayB = std::make_shared<jt::SmartShape>();
+    m_overlayB = std::make_shared<jt::Shape>();
     m_overlayB->makeRect(jt::Vector2 { 400, 300 });
     m_overlayB->setColor(jt::Color { 0, 0, 255, 0 });
 }
 
 void StateTween::createTweens()
 {
-    using ta = jt::TweenAlpha<jt::SmartShape>;
+    using ta = jt::TweenAlpha<jt::Shape>;
 
     auto twRIn = ta::create(m_overlayR, 1.0f, std::uint8_t { 0 }, std::uint8_t { 125 });
     twRIn->addCompleteCallback([this]() {

@@ -1,7 +1,7 @@
 ﻿#include "Camera.hpp"
+#include "DrawableImpl.hpp"
 #include "Random.hpp"
 #include "Rect.hpp"
-#include "SmartDrawable.hpp"
 
 namespace jt {
 

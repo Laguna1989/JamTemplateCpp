@@ -1,11 +1,11 @@
-﻿#include "SmartTilemap.hpp"
+﻿#include "Tilemap.hpp"
 #include "Conversions.hpp"
 #include "GameInterface.hpp"
 #include <memory>
 
 namespace jt {
 
-SmartTilemap::SmartTilemap(std::string const& path)
+Tilemap::Tilemap(std::string const& path)
 {
     m_position = jt::Vector2 { 0.0f, 0.0f };
     m_screenSizeHint = jt::Vector2 { 0.0f, 0.0f };
@@ -31,7 +31,7 @@ SmartTilemap::SmartTilemap(std::string const& path)
     m_tileSprites.resize(rows * columns);
     for (int j = 0; j != rows; ++j) {
         for (int i = 0; i != columns; ++i) {
-            jt::SmartSprite tile {};
+            jt::Sprite tile {};
             tile.loadSprite(tilesetName, jt::Recti(i * ts.x, j * ts.y, ts.x, ts.y));
             tile.setIgnoreCamMovement(false);
             m_tileSprites.at(i + j * columns) = tile;
@@ -54,14 +54,14 @@ SmartTilemap::SmartTilemap(std::string const& path)
 #endif
 }
 
-void SmartTilemap::doDraw(std::shared_ptr<jt::renderTarget> const sptr) const
+void Tilemap::doDraw(std::shared_ptr<jt::renderTarget> const sptr) const
 {
     if (m_map == nullptr) {
         return;
     }
 
     auto const posOffset = m_position + getShakeOffset() + getOffset();
-    // std::cout << "SmartTilemap.posOffset.x " << posOffset.x() << std::endl;
+    // std::cout << "Tilemap.posOffset.x " << posOffset.x() << std::endl;
 
     auto g = m_gamePtr.lock();
 
@@ -125,47 +125,47 @@ void SmartTilemap::doDraw(std::shared_ptr<jt::renderTarget> const sptr) const
     // }
 }
 
-void SmartTilemap::doDrawFlash(std::shared_ptr<jt::renderTarget> const /*sptr*/) const { }
-void SmartTilemap::doDrawShadow(std::shared_ptr<jt::renderTarget> const /*sptr*/) const { }
+void Tilemap::doDrawFlash(std::shared_ptr<jt::renderTarget> const /*sptr*/) const { }
+void Tilemap::doDrawShadow(std::shared_ptr<jt::renderTarget> const /*sptr*/) const { }
 
-void SmartTilemap::doUpdate(float /*elapsed*/) { }
+void Tilemap::doUpdate(float /*elapsed*/) { }
 
-void SmartTilemap::setColor(jt::Color const& col)
+void Tilemap::setColor(jt::Color const& col)
 {
     for (auto& ts : m_tileSprites) {
         ts.setColor(col);
     }
 }
-const jt::Color SmartTilemap::getColor() const { return jt::colors::Black; }
+const jt::Color Tilemap::getColor() const { return jt::colors::Black; }
 
-void SmartTilemap::setPosition(jt::Vector2 const& pos) { m_position = pos; }
-const jt::Vector2 SmartTilemap::getPosition() const { return m_position; }
+void Tilemap::setPosition(jt::Vector2 const& pos) { m_position = pos; }
+const jt::Vector2 Tilemap::getPosition() const { return m_position; }
 
-// sf::Transform const SmartTilemap::getTransform() const { return sf::Transform {}; }
-jt::Rect const SmartTilemap::getGlobalBounds() const { return jt::Rect {}; }
-jt::Rect const SmartTilemap::getLocalBounds() const { return jt::Rect {}; }
+// sf::Transform const Tilemap::getTransform() const { return sf::Transform {}; }
+jt::Rect const Tilemap::getGlobalBounds() const { return jt::Rect {}; }
+jt::Rect const Tilemap::getLocalBounds() const { return jt::Rect {}; }
 
-void SmartTilemap::setFlashColor(jt::Color const& /*col*/)
+void Tilemap::setFlashColor(jt::Color const& /*col*/)
 {
-    throw std::logic_error { "flash not supported by SmartBar" };
+    throw std::logic_error { "flash not supported by Bar" };
 }
-const jt::Color SmartTilemap::getFlashColor() const { return jt::colors::Black; }
+const jt::Color Tilemap::getFlashColor() const { return jt::colors::Black; }
 
-void SmartTilemap::setScale(jt::Vector2 const& /*scale*/) { }
-const jt::Vector2 SmartTilemap::getScale() const { return jt::Vector2 {}; }
+void Tilemap::setScale(jt::Vector2 const& /*scale*/) { }
+const jt::Vector2 Tilemap::getScale() const { return jt::Vector2 {}; }
 
-void SmartTilemap::setOrigin(jt::Vector2 const& /*origin*/) { }
-const jt::Vector2 SmartTilemap::getOrigin() const { return jt::Vector2 {}; }
+void Tilemap::setOrigin(jt::Vector2 const& /*origin*/) { }
+const jt::Vector2 Tilemap::getOrigin() const { return jt::Vector2 {}; }
 
-void SmartTilemap::doRotate(float /*rot*/) { }
+void Tilemap::doRotate(float /*rot*/) { }
 
-void SmartTilemap::setScreenSizeHint(jt::Vector2 const& hint, std::shared_ptr<GameInterface> ptr)
+void Tilemap::setScreenSizeHint(jt::Vector2 const& hint, std::shared_ptr<GameInterface> ptr)
 {
     m_screenSizeHint = hint;
     m_gamePtr = ptr;
 }
 
-const jt::Vector2u SmartTilemap::getMapSizeInTiles()
+const jt::Vector2u Tilemap::getMapSizeInTiles()
 {
     return jt::Vector2u { static_cast<unsigned int>(m_map->getSize().x),
         static_cast<unsigned int>(m_map->getSize().y) };

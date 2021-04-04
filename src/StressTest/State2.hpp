@@ -3,8 +3,8 @@
 
 #include "GameState.hpp"
 #include "ObjectGroup.hpp"
-#include "SmartShape.hpp"
-#include "SmartSprite.hpp"
+#include "Shape.hpp"
+#include "Sprite.hpp"
 #include "SwarmObject.hpp"
 #include "Timer.hpp"
 #include "TweenAlpha.hpp"
@@ -13,8 +13,8 @@
 
 class State2 : public jt::GameState {
 private:
-    jt::SmartShape::Sptr m_overlay;
-    jt::SmartShape::Sptr m_sky;
+    jt::Shape::Sptr m_overlay;
+    jt::Shape::Sptr m_sky;
 
     jt::ObjectGroup<SwarmObject>::Sptr m_SwarmObjects;
 

@@ -5,10 +5,10 @@
 
 namespace jt {
 
-class SmartText;
-class SmartShape;
-class SmartAnimation;
-class SmartSprite;
+class Text;
+class Shape;
+class Animation;
+class Sprite;
 
 } // namespace jt
 
@@ -19,14 +19,14 @@ public:
     void setScore(int s) {};
 
 private:
-    std::shared_ptr<jt::SmartShape> m_background;
+    std::shared_ptr<jt::Shape> m_background;
 
-    std::shared_ptr<jt::SmartText> m_text_Title;
-    std::shared_ptr<jt::SmartText> m_text_Explanation;
-    std::shared_ptr<jt::SmartText> m_text_Credits;
+    std::shared_ptr<jt::Text> m_text_Title;
+    std::shared_ptr<jt::Text> m_text_Explanation;
+    std::shared_ptr<jt::Text> m_text_Credits;
 
-    std::shared_ptr<jt::SmartShape> m_overlay;
-    std::shared_ptr<jt::SmartSprite> m_vignette;
+    std::shared_ptr<jt::Shape> m_overlay;
+    std::shared_ptr<jt::Sprite> m_vignette;
 
     bool m_started { false };
 

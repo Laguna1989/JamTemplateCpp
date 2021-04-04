@@ -1,10 +1,10 @@
 ﻿#ifndef GUARD_JAMTEMPLATE_TILEMAP_HPP_GUARD
 #define GUARD_JAMTEMPLATE_TILEMAP_HPP_GUARD
 
+#include "DrawableImpl.hpp"
 #include "InfoRect.hpp"
 #include "Rendertarget.hpp"
-#include "SmartDrawable.hpp"
-#include "SmartSprite.hpp"
+#include "Sprite.hpp"
 #include "tileson.h"
 #include <memory>
 #include <vector>
@@ -14,11 +14,11 @@ namespace jt {
 // forward declaration
 class GameInterface;
 
-class SmartTilemap : public SmartDrawable {
+class Tilemap : public DrawableImpl {
 public:
-    using Sptr = std::shared_ptr<SmartTilemap>;
+    using Sptr = std::shared_ptr<Tilemap>;
 
-    SmartTilemap(std::string const& path);
+    Tilemap(std::string const& path);
 
     void doDraw(std::shared_ptr<jt::renderTarget> const sptr) const;
 
@@ -61,7 +61,7 @@ private:
     // Map from object layer name to vector of objects, all rectangular.
     std::map<std::string, std::vector<InfoRect>> m_objectGroups;
     bool m_highlightObjectGroups = false;
-    mutable std::vector<jt::SmartSprite> m_tileSprites;
+    mutable std::vector<jt::Sprite> m_tileSprites;
 
     jt::Vector2 m_position;
 

@@ -3,7 +3,7 @@
 
 #include "Button.hpp"
 #include "GameState.hpp"
-#include "SmartText.hpp"
+#include "Text.hpp"
 #include <memory>
 
 namespace detail {
@@ -31,11 +31,11 @@ private:
         auto const b = std::make_shared<jt::Button>(
             jt::Vector2u { detail::buttonSizeX, detail::buttonSizeY });
         b->addCallback([this]() { getGame()->switchState(std::make_shared<State>()); });
-        auto const t = std::make_shared<jt::SmartText>();
+        auto const t = std::make_shared<jt::Text>();
         t->loadFont("assets/font.ttf", 28, getGame()->getRenderTarget());
         t->setText(text);
         // t->setOffset(jt::Vector2 { 32.0f, 6.0f });
-        t->SetTextAlign(jt::SmartText::TextAlign::LEFT);
+        t->SetTextAlign(jt::Text::TextAlign::LEFT);
         b->setDrawable(t);
         b->setPosition(jt::Vector2 { detail::buttonOffsetX, posY });
         add(std::move(b));

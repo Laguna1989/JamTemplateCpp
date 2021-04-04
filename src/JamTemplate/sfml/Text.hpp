@@ -1,8 +1,8 @@
 ﻿#ifndef GUARD_JAMTEMPLATE_SMARTTEXT_HPP_INCLUDEGUARD
 #define GUARD_JAMTEMPLATE_SMARTTEXT_HPP_INCLUDEGUARD
 
+#include "DrawableImpl.hpp"
 #include "Rendertarget.hpp"
-#include "SmartDrawable.hpp"
 #include <SFML/Graphics.hpp>
 #include <exception>
 #include <memory>
@@ -10,13 +10,13 @@
 
 namespace jt {
 
-class SmartText : public SmartDrawable {
+class Text : public DrawableImpl {
 public:
     enum class TextAlign { CENTER, LEFT, RIGHT };
 
-    using Sptr = std::shared_ptr<SmartText>;
+    using Sptr = std::shared_ptr<Text>;
 
-    virtual ~SmartText();
+    virtual ~Text();
 
     // note: it is ok to pass a nullptr as rendertarget_wptr for sfml.
     void loadFont(std::string const& fontFileName, unsigned int characterSize,

@@ -3,8 +3,8 @@
 
 #include "GameObject.hpp"
 #include "GameProperties.hpp"
-#include "SmartSprite.hpp"
-#include "SmartText.hpp"
+#include "Sprite.hpp"
+#include "Text.hpp"
 #include <string>
 
 class Hud : public jt::GameObject {
@@ -18,8 +18,8 @@ private:
     int m_scoreP1 { -1 };
     int m_scoreP2 { -1 };
 
-    jt::SmartText::Sptr m_scoreP1Text;
-    jt::SmartText::Sptr m_scoreP2Text;
+    jt::Text::Sptr m_scoreP1Text;
+    jt::Text::Sptr m_scoreP2Text;
 
     void doUpdate(float const elapsed) override;
 

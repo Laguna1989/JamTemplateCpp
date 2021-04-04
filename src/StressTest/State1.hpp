@@ -4,7 +4,7 @@
 #include "GameState.hpp"
 #include "Object.hpp"
 #include "Random.hpp"
-#include "SmartShape.hpp"
+#include "Shape.hpp"
 #include "Timer.hpp"
 #include <iostream>
 

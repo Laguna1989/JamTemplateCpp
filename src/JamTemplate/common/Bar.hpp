@@ -1,20 +1,20 @@
-﻿#ifndef GUARD_JAMTEMPLATE_SMARTBAR_HPP_INCLUDEGUARD
-#define GUARD_JAMTEMPLATE_SMARTBAR_HPP_INCLUDEGUARD
+﻿#ifndef GUARD_JAMTEMPLATE_BAR_HPP_INCLUDEGUARD
+#define GUARD_JAMTEMPLATE_BAR_HPP_INCLUDEGUARD
 
+#include "DrawableImpl.hpp"
 #include "Rendertarget.hpp"
-#include "SmartDrawable.hpp"
-#include "SmartShape.hpp"
+#include "Shape.hpp"
 #include <cassert>
 #include <memory>
 #include <vector>
 
 namespace jt {
 
-class SmartBar : public jt::SmartDrawable {
+class Bar : public jt::DrawableImpl {
 public:
-    using Sptr = std::shared_ptr<SmartBar>;
+    using Sptr = std::shared_ptr<Bar>;
 
-    SmartBar(float width, float height);
+    Bar(float width, float height);
 
     void setFrontColor(jt::Color const& col);
     void setBackColor(jt::Color const& col);
@@ -61,8 +61,8 @@ private:
     float const m_width;
     float const m_height;
 
-    mutable std::shared_ptr<jt::SmartShape> m_shapeFull;
-    std::shared_ptr<jt::SmartShape> m_shapeProgress;
+    mutable std::shared_ptr<jt::Shape> m_shapeFull;
+    std::shared_ptr<jt::Shape> m_shapeProgress;
 
     virtual void doDraw(std::shared_ptr<jt::renderTarget> const sptr) const override;
     virtual void doDrawFlash(std::shared_ptr<jt::renderTarget> const sptr) const override;

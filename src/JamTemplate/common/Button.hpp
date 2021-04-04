@@ -1,11 +1,11 @@
 ﻿#ifndef GUARD_JAMTEMPLATE_BUTTON_HPP_GUARD
 #define GUARD_JAMTEMPLATE_BUTTON_HPP_GUARD
 
+#include "Animation.hpp"
+#include "DrawableImpl.hpp"
 #include "GameInterface.hpp"
 #include "GameObject.hpp"
 #include "InputManager.hpp"
-#include "SmartAnimation.hpp"
-#include "SmartDrawable.hpp"
 #include "Vector.hpp"
 #include <functional>
 #include <memory>
@@ -19,7 +19,7 @@ public:
     Button(jt::Vector2u s = jt::Vector2u { 16, 16 })
     {
         std::string buttonImageName = "#b#" + std::to_string(s.x()) + "#" + std::to_string(s.y());
-        m_background = std::make_shared<jt::SmartAnimation>();
+        m_background = std::make_shared<jt::Animation>();
         m_background->add(buttonImageName, "normal", s, { 0 }, 1);
         m_background->add(buttonImageName, "over", s, { 1 }, 1);
         m_background->add(buttonImageName, "down", s, { 2 }, 1);
@@ -41,7 +41,7 @@ public:
     Button(const Button& b) = delete;
     Button(Button&& b) = default;
 
-    void setDrawable(SmartDrawable::Sptr sprt) { m_drawable = sprt; }
+    void setDrawable(DrawableImpl::Sptr sprt) { m_drawable = sprt; }
 
     void addCallback(std::function<void(void)> cb) { m_callbacks.push_back(cb); }
 
@@ -59,8 +59,8 @@ public:
     void setPosition(jt::Vector2 const& v) { m_pos = v; }
 
 private:
-    std::shared_ptr<SmartAnimation> m_background;
-    std::shared_ptr<SmartDrawable> m_drawable { nullptr };
+    std::shared_ptr<Animation> m_background;
+    std::shared_ptr<DrawableImpl> m_drawable { nullptr };
     std::vector<std::function<void(void)>> m_callbacks;
     jt::Vector2 m_pos;
 

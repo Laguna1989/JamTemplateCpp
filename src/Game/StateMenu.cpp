@@ -1,15 +1,15 @@
 ﻿#include "StateMenu.hpp"
 #include "Color.hpp"
+#include "DrawableHelpers.hpp"
 #include "GameInterface.hpp"
 #include "GameProperties.hpp"
 #include "InputManager.hpp"
 #include "KeyCodes.hpp"
 #include "MathHelper.hpp"
-#include "SmartDrawableHelpers.hpp"
-#include "SmartShape.hpp"
-#include "SmartSprite.hpp"
-#include "SmartText.hpp"
+#include "Shape.hpp"
+#include "Sprite.hpp"
 #include "StateGame.hpp"
+#include "Text.hpp"
 #include "TweenAlpha.hpp"
 #include "TweenPosition.hpp"
 #include "TweenScale.hpp"
@@ -50,7 +50,7 @@ void StateMenu::createTextCredits()
     m_text_Credits = jt::sdh::createText(getGame()->getRenderTarget(),
         "Created by " + GP::AuthorName() + " for " + GP::JamName() + "\n" + GP::JamDate(), 10U,
         GP::PaletteColor5());
-    m_text_Credits->SetTextAlign(jt::SmartText::TextAlign::LEFT);
+    m_text_Credits->SetTextAlign(jt::Text::TextAlign::LEFT);
     m_text_Credits->setPosition({ 10, GP::GetScreenSize().y() - 30 });
     m_text_Credits->setShadow(GP::PaletteFontShadow(), jt::Vector2 { 1, 1 });
 }
@@ -86,12 +86,12 @@ void StateMenu::createTweenExplanationScale()
     auto s2 = m_text_Explanation->getPosition() + jt::Vector2 { -1000, 0 };
     auto e2 = m_text_Explanation->getPosition();
 
-    auto tween = jt::TweenPosition<jt::SmartText>::create(m_text_Explanation, 0.5f, s2, e2);
+    auto tween = jt::TweenPosition<jt::Text>::create(m_text_Explanation, 0.5f, s2, e2);
     tween->setStartDelay(0.3f);
     tween->setSkipFrames();
 
     tween->addCompleteCallback([this]() {
-        auto ts = jt::TweenScale<jt::SmartText>::create(
+        auto ts = jt::TweenScale<jt::Text>::create(
             m_text_Explanation, 0.75f, jt::Vector2 { 1.0f, 1.0f }, jt::Vector2 { 1.05f, 1.05f });
         ts->setRepeat(true);
         ts->setAgePercentConversion([](float age) {
@@ -104,7 +104,7 @@ void StateMenu::createTweenExplanationScale()
 
 void StateMenu::createTweenTitleAlpha()
 {
-    auto tween = jt::TweenAlpha<jt::SmartText>::create(m_text_Title, 0.55f, 0, 255);
+    auto tween = jt::TweenAlpha<jt::Text>::create(m_text_Title, 0.55f, 0, 255);
     tween->setStartDelay(0.2f);
     tween->setSkipFrames();
     add(tween);
@@ -112,7 +112,7 @@ void StateMenu::createTweenTitleAlpha()
 
 void StateMenu::createTweenOverlayAlpha()
 {
-    auto tween = jt::TweenAlpha<jt::SmartShape>::create(
+    auto tween = jt::TweenAlpha<jt::Shape>::create(
         m_overlay, 0.5f, std::uint8_t { 255 }, std::uint8_t { 0 });
     tween->setSkipFrames();
     add(tween);
@@ -123,7 +123,7 @@ void StateMenu::createTweenCreditsPosition()
     auto s3 = m_text_Credits->getPosition() + jt::Vector2 { 0, 100 };
     auto e3 = m_text_Credits->getPosition();
 
-    auto tween = jt::TweenPosition<jt::SmartText>::create(m_text_Credits, 0.35f, s3, e3);
+    auto tween = jt::TweenPosition<jt::Text>::create(m_text_Credits, 0.35f, s3, e3);
     tween->setStartDelay(0.8f);
     tween->setSkipFrames();
     add(tween);
@@ -167,7 +167,7 @@ void StateMenu::startTransitionToStateGame()
 
 void StateMenu::createTweenTransition()
 {
-    auto tw = jt::TweenAlpha<jt::SmartShape>::create(
+    auto tw = jt::TweenAlpha<jt::Shape>::create(
         m_overlay, 0.5f, std::uint8_t { 0 }, std::uint8_t { 255 });
     tw->setSkipFrames();
     tw->addCompleteCallback([this]() { getGame()->switchState(std::make_shared<StateGame>()); });

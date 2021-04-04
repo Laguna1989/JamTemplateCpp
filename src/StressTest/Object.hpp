@@ -1,12 +1,12 @@
 ﻿#ifndef GAME_OBJECT_HPP_INCLUDEGUARD
 #define GAME_OBJECT_HPP_INCLUDEGUARD
 
+#include "Animation.hpp"
 #include "GameInterface.hpp"
 #include "GameState.hpp"
 #include "MathHelper.hpp"
 #include "Random.hpp"
-#include "SmartAnimation.hpp"
-#include "SmartShape.hpp"
+#include "Shape.hpp"
 #include <iostream>
 #include <memory>
 #include <random>
@@ -21,12 +21,12 @@ public:
     void Flash() { m_animation->flash(0.1f); }
     void Shake() { m_animation->shake(0.5f, 2.0f, 0.05f); }
 
-    std::shared_ptr<jt::SmartAnimation> getAnimation() { return m_animation; }
+    std::shared_ptr<jt::Animation> getAnimation() { return m_animation; }
 
 private:
     void doCreate() override
     {
-        m_animation = std::make_shared<jt::SmartAnimation>();
+        m_animation = std::make_shared<jt::Animation>();
         m_animation->add("assets/coin.png", "idle", jt::Vector2u { 16, 16 },
             jt::MathHelper::vectorBetween(0U, 11U), 0.15f);
         m_animation->play("idle");
@@ -55,7 +55,7 @@ private:
 
     void doDraw() const override { m_animation->draw(getGame()->getRenderTarget()); }
 
-    std::shared_ptr<jt::SmartAnimation> m_animation;
+    std::shared_ptr<jt::Animation> m_animation;
     jt::Vector2 m_position;
     jt::Vector2 m_velocity;
     jt::Vector2 m_acceleration;

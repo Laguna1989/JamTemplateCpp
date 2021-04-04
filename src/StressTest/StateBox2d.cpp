@@ -10,10 +10,10 @@ void StateBox2d::doInternalCreate()
 
     CreatePlayer();
 
-    m_bar1 = std::make_shared<jt::SmartBar>(100.0f, 10.0f);
+    m_bar1 = std::make_shared<jt::Bar>(100.0f, 10.0f);
     m_bar1->setPosition(jt::Vector2 { 10, 10 });
 
-    m_bar2 = std::make_shared<jt::SmartBar>(100.0f, 10.0f);
+    m_bar2 = std::make_shared<jt::Bar>(100.0f, 10.0f);
     m_bar2->setPosition(jt::Vector2 { 10, 25 });
     m_bar2->setMaxValue(2.0f);
 }
@@ -72,12 +72,12 @@ void StateBox2d::CreateOneWall(jt::Vector2 const& pos)
 
     auto const tweenstartDelay = jt::Random::getFloatGauss(0.3f, 0.05f);
 
-    auto tw1 = jt::TweenRotation<jt::SmartAnimation>::create(
+    auto tw1 = jt::TweenRotation<jt::Animation>::create(
         b2obj->getAnimation(), jt::Random::getFloatGauss(0.75f, 0.1f), 0, 360);
     tw1->setStartDelay(tweenstartDelay);
     add(tw1);
 
-    auto tw2 = jt::TweenScale<jt::SmartAnimation>::create(
+    auto tw2 = jt::TweenScale<jt::Animation>::create(
         b2obj->getAnimation(), 0.75f, jt::Vector2 { 0.0f, 0.0f }, jt::Vector2 { 1.0f, 1.0f });
     tw2->setStartDelay(tweenstartDelay);
     add(tw2);
@@ -111,7 +111,7 @@ void StateBox2d::CreatePlayer()
 
     add(myBody);
     {
-        auto tw = jt::TweenRotation<jt::SmartAnimation>::create(myBody->getAnimation(), 2, 0, 360);
+        auto tw = jt::TweenRotation<jt::Animation>::create(myBody->getAnimation(), 2, 0, 360);
         tw->setRepeat(true);
         add(tw);
     }

@@ -1,6 +1,7 @@
 ﻿#ifndef STRESSTEST_MOVEMENTOBJECT_HPP_INCLUDEGUARD
 #define STRESSTEST_MOVEMENTOBJECT_HPP_INCLUDEGUARD
 
+#include "Animation.hpp"
 #include "Box2DObject.hpp"
 #include "Conversions.hpp"
 #include "GameInterface.hpp"
@@ -9,8 +10,7 @@
 #include "MathHelper.hpp"
 #include "ObjectGroup.hpp"
 #include "Random.hpp"
-#include "SmartAnimation.hpp"
-#include "SmartShape.hpp"
+#include "Shape.hpp"
 #include <iostream>
 #include <memory>
 #include <random>
@@ -21,7 +21,7 @@ public:
     MovementObject(std::shared_ptr<b2World> world, const b2BodyDef* def)
         : Box2DObject { world, def }
     {
-        m_animation = std::make_shared<jt::SmartAnimation>();
+        m_animation = std::make_shared<jt::Animation>();
         b2FixtureDef fixtureDef;
         fixtureDef.density = 1.0f;
         fixtureDef.friction = 5.0f;
@@ -53,10 +53,10 @@ public:
 
     ~MovementObject() = default;
 
-    std::shared_ptr<jt::SmartAnimation> getAnimation() { return m_animation; }
+    std::shared_ptr<jt::Animation> getAnimation() { return m_animation; }
 
 private:
-    std::shared_ptr<jt::SmartAnimation> m_animation;
+    std::shared_ptr<jt::Animation> m_animation;
 
     void doUpdate(float const elapsed) override
     {

@@ -1,5 +1,5 @@
-﻿#include "SmartAnimation.hpp"
-#include "SmartSprite.hpp"
+﻿#include "Animation.hpp"
+#include "Sprite.hpp"
 #include <iostream>
 #include <map>
 #include <memory>
@@ -9,8 +9,8 @@ namespace jt {
 
 namespace {
 
-std::shared_ptr<jt::SmartSprite> getCurrentSprite(SmartAnimation::AnimationMapType const& frames,
-    std::string const& animName, size_t const animIndex)
+std::shared_ptr<jt::Sprite> getCurrentSprite(
+    Animation::AnimationMapType const& frames, std::string const& animName, size_t const animIndex)
 {
     auto const cit = frames.find(animName);
     if (cit == frames.cend()) {
@@ -22,7 +22,7 @@ std::shared_ptr<jt::SmartSprite> getCurrentSprite(SmartAnimation::AnimationMapTy
 
 } // namespace
 
-void SmartAnimation::add(std::string const& fileName, std::string const& animName,
+void Animation::add(std::string const& fileName, std::string const& animName,
     jt::Vector2u const& size, std::vector<unsigned int> const& frameIndices, float frameTime)
 {
     if (frameIndices.empty())
@@ -37,19 +37,19 @@ void SmartAnimation::add(std::string const& fileName, std::string const& animNam
         throw std::invalid_argument { "animation frame time is negative or zero." };
     }
 
-    m_frames[animName] = std::vector<jt::SmartSprite::Sptr> {};
+    m_frames[animName] = std::vector<jt::Sprite::Sptr> {};
     m_time[animName] = frameTime;
 
     for (auto const idx : frameIndices) {
         jt::Recti const rect { static_cast<int>(idx * size.x()), 0, static_cast<int>(size.x()),
             static_cast<int>(size.y()) };
-        SmartSprite::Sptr sptr = std::make_shared<SmartSprite>();
+        Sprite::Sptr sptr = std::make_shared<Sprite>();
         sptr->loadSprite(fileName, rect);
         m_frames[animName].push_back(sptr);
     }
 }
 
-void SmartAnimation::play(std::string const& animName, size_t startFrame, bool restart)
+void Animation::play(std::string const& animName, size_t startFrame, bool restart)
 {
     if (m_currentAnimName != animName || restart) {
         m_currentIdx = startFrame;
@@ -58,7 +58,7 @@ void SmartAnimation::play(std::string const& animName, size_t startFrame, bool r
     }
 }
 
-void SmartAnimation::setColor(jt::Color const& col)
+void Animation::setColor(jt::Color const& col)
 {
     for (auto& kvp : m_frames) {
         for (auto& spr : kvp.second) {
@@ -67,15 +67,15 @@ void SmartAnimation::setColor(jt::Color const& col)
     }
 }
 
-jt::Color const SmartAnimation::getColor() const
+jt::Color const Animation::getColor() const
 {
     return getCurrentSprite(m_frames, m_currentAnimName, m_currentIdx)->getColor();
 }
 
-void SmartAnimation::setPosition(jt::Vector2 const& pos) { m_position = pos; }
-jt::Vector2 const SmartAnimation::getPosition() const { return m_position; }
+void Animation::setPosition(jt::Vector2 const& pos) { m_position = pos; }
+jt::Vector2 const Animation::getPosition() const { return m_position; }
 
-// sf::Transform const SmartAnimation::getTransform() const
+// sf::Transform const Animation::getTransform() const
 //{
 //    sf::Transform trans;
 //    for (auto const& kvp : m_frames) {
@@ -86,16 +86,16 @@ jt::Vector2 const SmartAnimation::getPosition() const { return m_position; }
 //    return trans;
 //}
 
-jt::Rect const SmartAnimation::getGlobalBounds() const
+jt::Rect const Animation::getGlobalBounds() const
 {
     return getCurrentSprite(m_frames, m_currentAnimName, m_currentIdx)->getGlobalBounds();
 }
-jt::Rect const SmartAnimation::getLocalBounds() const
+jt::Rect const Animation::getLocalBounds() const
 {
     return getCurrentSprite(m_frames, m_currentAnimName, m_currentIdx)->getLocalBounds();
 }
 
-void SmartAnimation::setFlashColor(jt::Color const& col)
+void Animation::setFlashColor(jt::Color const& col)
 {
     for (auto& kvp : m_frames) {
         for (auto& spr : kvp.second) {
@@ -103,12 +103,12 @@ void SmartAnimation::setFlashColor(jt::Color const& col)
         }
     }
 }
-const jt::Color SmartAnimation::getFlashColor() const
+const jt::Color Animation::getFlashColor() const
 {
     return getCurrentSprite(m_frames, m_currentAnimName, m_currentIdx)->getFlashColor();
 }
 
-void SmartAnimation::setScale(jt::Vector2 const& scale)
+void Animation::setScale(jt::Vector2 const& scale)
 {
     for (auto& kvp : m_frames) {
         for (auto& spr : kvp.second) {
@@ -116,12 +116,12 @@ void SmartAnimation::setScale(jt::Vector2 const& scale)
         }
     }
 }
-const jt::Vector2 SmartAnimation::getScale() const
+const jt::Vector2 Animation::getScale() const
 {
     return getCurrentSprite(m_frames, m_currentAnimName, m_currentIdx)->getScale();
 }
 
-void SmartAnimation::setOrigin(jt::Vector2 const& origin)
+void Animation::setOrigin(jt::Vector2 const& origin)
 {
     for (auto& kvp : m_frames) {
         for (auto const& sptr : kvp.second) {
@@ -129,32 +129,32 @@ void SmartAnimation::setOrigin(jt::Vector2 const& origin)
         }
     }
 }
-jt::Vector2 const SmartAnimation::getOrigin() const
+jt::Vector2 const Animation::getOrigin() const
 {
     return getCurrentSprite(m_frames, m_currentAnimName, m_currentIdx)->getOrigin();
 }
 
-void SmartAnimation::setShadowActive(bool active)
+void Animation::setShadowActive(bool active)
 {
-    SmartDrawable::setShadowActive(active);
+    DrawableImpl::setShadowActive(active);
     for (auto& kvp : m_frames) {
         for (auto const& sptr : kvp.second) {
             sptr->setShadowActive(active);
         }
     }
 }
-void SmartAnimation::setShadowColor(jt::Color const& col)
+void Animation::setShadowColor(jt::Color const& col)
 {
-    SmartDrawable::setShadowColor(col);
+    DrawableImpl::setShadowColor(col);
     for (auto& kvp : m_frames) {
         for (auto const& sptr : kvp.second) {
             sptr->setShadowColor(col);
         }
     }
 }
-void SmartAnimation::setShadowOffset(jt::Vector2 const& v)
+void Animation::setShadowOffset(jt::Vector2 const& v)
 {
-    SmartDrawable::setShadowOffset(v);
+    DrawableImpl::setShadowOffset(v);
     for (auto& kvp : m_frames) {
         for (auto const& sptr : kvp.second) {
             sptr->setShadowOffset(v);
@@ -162,12 +162,12 @@ void SmartAnimation::setShadowOffset(jt::Vector2 const& v)
     }
 }
 
-void SmartAnimation::doDrawShadow(std::shared_ptr<jt::renderTarget> const /*sptr*/) const { }
+void Animation::doDrawShadow(std::shared_ptr<jt::renderTarget> const /*sptr*/) const { }
 
-void SmartAnimation::doDraw(std::shared_ptr<jt::renderTarget> const sptr) const
+void Animation::doDraw(std::shared_ptr<jt::renderTarget> const sptr) const
 {
     if (m_frames.count(m_currentAnimName) == 0) {
-        std::cout << "Warning: Drawing SmartAnimation with invalid animName: '" + m_currentAnimName
+        std::cout << "Warning: Drawing Animation with invalid animName: '" + m_currentAnimName
                 + "'\n";
         return;
     }
@@ -175,9 +175,9 @@ void SmartAnimation::doDraw(std::shared_ptr<jt::renderTarget> const sptr) const
     m_frames.at(m_currentAnimName).at(m_currentIdx)->draw(sptr);
 }
 
-void SmartAnimation::doDrawFlash(std::shared_ptr<jt::renderTarget> const /*sptr*/) const { }
+void Animation::doDrawFlash(std::shared_ptr<jt::renderTarget> const /*sptr*/) const { }
 
-void SmartAnimation::doFlash(float t, jt::Color col)
+void Animation::doFlash(float t, jt::Color col)
 {
     for (auto& kvp : m_frames) {
         for (auto& spr : kvp.second) {
@@ -186,11 +186,11 @@ void SmartAnimation::doFlash(float t, jt::Color col)
     }
 }
 
-void SmartAnimation::doUpdate(float elapsed)
+void Animation::doUpdate(float elapsed)
 {
     // check if valid
     if (m_frames.count(m_currentAnimName) == 0) {
-        std::cout << "Warning: Update SmartAnimation with invalid animName: '" + m_currentAnimName
+        std::cout << "Warning: Update Animation with invalid animName: '" + m_currentAnimName
                 + "'\n";
         return;
     }
@@ -213,7 +213,7 @@ void SmartAnimation::doUpdate(float elapsed)
     }
 }
 
-void SmartAnimation::doRotate(float rot)
+void Animation::doRotate(float rot)
 {
     for (auto& kvp : m_frames) {
         for (auto& spr : kvp.second) {
@@ -221,12 +221,12 @@ void SmartAnimation::doRotate(float rot)
         }
     }
 }
-float SmartAnimation::getCurrentAnimSingleFrameTime() const { return m_time.at(m_currentAnimName); }
-float SmartAnimation::getCurrentAnimTotalTime() const
+float Animation::getCurrentAnimSingleFrameTime() const { return m_time.at(m_currentAnimName); }
+float Animation::getCurrentAnimTotalTime() const
 {
     return getCurrentAnimSingleFrameTime() * getCurrentAnimFrames();
 }
-std::size_t SmartAnimation::getCurrentAnimFrames() const
+std::size_t Animation::getCurrentAnimFrames() const
 {
     return m_frames.at(m_currentAnimName).size();
 }

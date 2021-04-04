@@ -1,24 +1,24 @@
 ﻿#include "Collision.hpp"
-#include "SmartShape.hpp"
+#include "Shape.hpp"
 #include "gtest/gtest.h"
 #include <utility>
 
 using jt::Collision;
-using jt::SmartShape;
+using jt::Shape;
 
 namespace {
-jt::SmartShape makeShape(float sx, float sy, float px, float py)
+jt::Shape makeShape(float sx, float sy, float px, float py)
 {
-    SmartShape s {};
+    Shape s {};
     s.makeRect({ sx, sy });
     s.setPosition({ px, py });
     s.update(0.0f);
     return s;
 }
 
-std::shared_ptr<SmartShape> const makeShapePtr(float sx, float sy, float px, float py)
+std::shared_ptr<Shape> const makeShapePtr(float sx, float sy, float px, float py)
 {
-    return std::make_shared<SmartShape>(makeShape(sx, sy, px, py));
+    return std::make_shared<Shape>(makeShape(sx, sy, px, py));
 }
 
 } // namespace

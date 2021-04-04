@@ -1,8 +1,8 @@
 ﻿#ifndef GUARD_JAMTEMPLATE_ANIMATION_HPP_INCLUDEGUARD
 #define GUARD_JAMTEMPLATE_ANIMATION_HPP_INCLUDEGUARD
 
+#include "DrawableImpl.hpp"
 #include "Rendertarget.hpp"
-#include "SmartDrawable.hpp"
 #include <map>
 #include <memory>
 #include <string>
@@ -11,16 +11,16 @@
 namespace jt {
 
 // forward declaration
-class SmartSprite;
+class Sprite;
 
-class SmartAnimation : public SmartDrawable {
+class Animation : public DrawableImpl {
 public:
-    using Sptr = std::shared_ptr<SmartAnimation>;
-    using AnimationMapType = std::map<std::string, std::vector<std::shared_ptr<SmartSprite>>>;
+    using Sptr = std::shared_ptr<Animation>;
+    using AnimationMapType = std::map<std::string, std::vector<std::shared_ptr<Sprite>>>;
 
-    SmartAnimation() = default;
+    Animation() = default;
 
-    virtual ~SmartAnimation() = default;
+    virtual ~Animation() = default;
 
     // add a new animation to the pool of available animations
     void add(std::string const& fileName, std::string const& animName, jt::Vector2u const& size,

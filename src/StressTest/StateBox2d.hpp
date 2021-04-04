@@ -1,10 +1,10 @@
 ﻿#ifndef STRESSTEST_STATE_BOX2D_HPP_INCLUDEGUARD
 #define STRESSTEST_STATE_BOX2D_HPP_INCLUDEGUARD
 
+#include "Bar.hpp"
 #include "GameState.hpp"
 #include "MovementObject.hpp"
-#include "SmartBar.hpp"
-#include "SmartShape.hpp"
+#include "Shape.hpp"
 #include <Box2D/Box2D.h>
 #include <iostream>
 #include <vector>
@@ -19,8 +19,8 @@ public:
 private:
     std::shared_ptr<b2World> m_world { nullptr };
 
-    jt::SmartBar::Sptr m_bar1;
-    jt::SmartBar::Sptr m_bar2;
+    jt::Bar::Sptr m_bar1;
+    jt::Bar::Sptr m_bar2;
 
     void doInternalCreate() override;
     void doInternalUpdate(float const /*elapsed*/) override;

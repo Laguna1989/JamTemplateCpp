@@ -10,20 +10,20 @@
 namespace jt {
 
 // fwd declarations
-class SmartShape;
-class SmartText;
-class SmartSprite;
+class Shape;
+class Text;
+class Sprite;
 
 namespace sdh {
 
-std::shared_ptr<jt::SmartShape> createRectShape(
+std::shared_ptr<jt::Shape> createRectShape(
     jt::Vector2 size, jt::Color const& col = jt::colors::White);
 
-std::shared_ptr<jt::SmartText> createText(std::weak_ptr<jt::renderTarget> rt,
-    std::string const& text, unsigned int fontSize, jt::Color const& col = jt::colors::White,
+std::shared_ptr<jt::Text> createText(std::weak_ptr<jt::renderTarget> rt, std::string const& text,
+    unsigned int fontSize, jt::Color const& col = jt::colors::White,
     std::string const& font_path = "assets/font.ttf");
 
-std::shared_ptr<jt::SmartSprite> createVignette(jt::Vector2 const& size);
+std::shared_ptr<jt::Sprite> createVignette(jt::Vector2 const& size);
 
 } // namespace sdh
 

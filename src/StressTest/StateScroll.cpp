@@ -5,21 +5,21 @@
 
 void StateScroll::doInternalCreate()
 {
-    m_background = std::make_shared<jt::SmartShape>();
+    m_background = std::make_shared<jt::Shape>();
     m_background->makeRect(jt::Vector2 { 400.0f, 300.0f });
     m_background->setColor(jt::colors::Blue);
     m_background->setIgnoreCamMovement(true);
 
-    m_shape1 = std::make_shared<jt::SmartShape>();
+    m_shape1 = std::make_shared<jt::Shape>();
     m_shape1->makeRect(jt::Vector2 { 40.0f, 30.0f });
     m_shape1->setColor(jt::colors::Cyan);
     m_shape1->setPosition(jt::Vector2 { 100.0f, 100.0f });
 
-    m_sprite = std::make_shared<jt::SmartSprite>();
+    m_sprite = std::make_shared<jt::Sprite>();
     m_sprite->loadSprite("assets/wall.png");
     m_sprite->setPosition({ 250, 32 });
 
-    m_anim = std::make_shared<jt::SmartAnimation>();
+    m_anim = std::make_shared<jt::Animation>();
     m_anim->add("assets/coin.png", "idle", jt::Vector2u { 16, 16 },
         jt::MathHelper::vectorBetween(0U, 11U), 0.15f);
     m_anim->play("idle");

@@ -1,11 +1,11 @@
 ﻿#include "StateSelect.hpp"
-#include "SmartText.hpp"
 #include "State1.hpp"
 #include "State2.hpp"
 #include "StateBox2d.hpp"
 #include "StateScroll.hpp"
 #include "StateTileson.hpp"
 #include "StateTween.hpp"
+#include "Text.hpp"
 
 void StateSelect::doInternalCreate()
 {
