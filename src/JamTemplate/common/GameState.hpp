@@ -8,7 +8,6 @@
 namespace jt {
 
 // forward declarations
-class Game;
 class TweenBase;
 
 class GameState : public GameObject {

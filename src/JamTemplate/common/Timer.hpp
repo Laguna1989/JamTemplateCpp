@@ -7,7 +7,6 @@
 namespace jt {
 
 // forward declaration
-class Game;
 
 class Timer : public GameObject {
 public:

@@ -1,7 +1,7 @@
 ﻿#ifndef STRESSTEST_SWARMOBJECT_HPP_INCLUDEGUARD
 #define STRESSTEST_SWARMOBJECT_HPP_INCLUDEGUARD
 
-#include "Game.hpp"
+#include "GameInterface.hpp"
 #include "GameState.hpp"
 #include "MathHelper.hpp"
 #include "ObjectGroup.hpp"

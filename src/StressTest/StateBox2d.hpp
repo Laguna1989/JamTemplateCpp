@@ -1,7 +1,6 @@
 ﻿#ifndef STRESSTEST_STATE_BOX2D_HPP_INCLUDEGUARD
 #define STRESSTEST_STATE_BOX2D_HPP_INCLUDEGUARD
 
-#include "Game.hpp"
 #include "GameState.hpp"
 #include "MovementObject.hpp"
 #include "SmartBar.hpp"

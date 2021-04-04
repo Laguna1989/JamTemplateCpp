@@ -1,5 +1,5 @@
 ﻿#include "StateTileson.hpp"
-#include "Game.hpp"
+#include "GameInterface.hpp"
 #include "InputManager.hpp"
 #include "SmartTilemap.hpp"
 #include "StateSelect.hpp"

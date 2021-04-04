@@ -1,7 +1,7 @@
 ﻿#include "StateGame.hpp"
 #include "Box2D/Box2D.h"
 #include "Color.hpp"
-#include "Game.hpp"
+#include "GameInterface.hpp"
 #include "GameProperties.hpp"
 #include "Hud.hpp"
 #include "InputManager.hpp"

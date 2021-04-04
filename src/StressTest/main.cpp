@@ -4,7 +4,7 @@
 #include <iostream>
 #include <memory>
 
-std::shared_ptr<jt::GameBase> game;
+std::shared_ptr<jt::GameInterface> game;
 
 void gameloop()
 {
@@ -15,7 +15,6 @@ void gameloop()
 
 int main()
 {
-
     jt::Random::useTimeAsRandomSeed();
 
     game = std::make_shared<jt::Game>(800, 600, 2.0f, "Stresstest", nullptr);

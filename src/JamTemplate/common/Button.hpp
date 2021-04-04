@@ -1,7 +1,7 @@
 ﻿#ifndef GUARD_JAMTEMPLATE_BUTTON_HPP_GUARD
 #define GUARD_JAMTEMPLATE_BUTTON_HPP_GUARD
 
-#include "Game.hpp"
+#include "GameInterface.hpp"
 #include "GameObject.hpp"
 #include "InputManager.hpp"
 #include "SmartAnimation.hpp"

@@ -1,7 +1,7 @@
 ﻿#ifndef GAME_OBJECT_HPP_INCLUDEGUARD
 #define GAME_OBJECT_HPP_INCLUDEGUARD
 
-#include "Game.hpp"
+#include "GameInterface.hpp"
 #include "GameState.hpp"
 #include "MathHelper.hpp"
 #include "Random.hpp"

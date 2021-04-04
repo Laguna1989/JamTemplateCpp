@@ -1,6 +1,6 @@
 ﻿#include "StateMenu.hpp"
 #include "Color.hpp"
-#include "Game.hpp"
+#include "GameInterface.hpp"
 #include "GameProperties.hpp"
 #include "InputManager.hpp"
 #include "KeyCodes.hpp"

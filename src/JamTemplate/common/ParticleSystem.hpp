@@ -1,7 +1,7 @@
 ﻿#ifndef GUARD_JAMTEMPLATE_PARTICLE_SYSTEM_HPP_GUARD
 #define GUARD_JAMTEMPLATE_PARTICLE_SYSTEM_HPP_GUARD
 
-#include "Game.hpp"
+#include "GameInterface.hpp"
 #include "GameObject.hpp"
 #include <array>
 #include <functional>

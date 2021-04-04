@@ -1,7 +1,6 @@
 ﻿#ifndef STRESSTEST_STATE_SCROLL_HPP_INCLUDEGUARD
 #define STRESSTEST_STATE_SCROLL_HPP_INCLUDEGUARD
 
-#include "Game.hpp"
 #include "GameState.hpp"
 #include "SmartAnimation.hpp"
 #include "SmartShape.hpp"

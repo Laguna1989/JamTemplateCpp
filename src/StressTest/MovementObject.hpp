@@ -3,7 +3,7 @@
 
 #include "Box2DObject.hpp"
 #include "Conversions.hpp"
-#include "Game.hpp"
+#include "GameInterface.hpp"
 #include "GameState.hpp"
 #include "InputManager.hpp"
 #include "MathHelper.hpp"
