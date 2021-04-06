@@ -14,7 +14,7 @@ class Shape;
 class Text;
 class Sprite;
 
-namespace sdh {
+namespace dh {
 
 std::shared_ptr<jt::Shape> createRectShape(
     jt::Vector2 size, jt::Color const& col = jt::colors::White);
@@ -25,7 +25,7 @@ std::shared_ptr<jt::Text> createText(std::weak_ptr<jt::renderTarget> rt, std::st
 
 std::shared_ptr<jt::Sprite> createVignette(jt::Vector2 const& size);
 
-} // namespace sdh
+} // namespace dh
 
 } // namespace jt
 

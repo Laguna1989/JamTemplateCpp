@@ -5,7 +5,7 @@
 #include "Text.hpp"
 
 namespace jt {
-namespace sdh {
+namespace dh {
 
 std::shared_ptr<jt::Shape> createRectShape(jt::Vector2 size, jt::Color const& col)
 {
@@ -35,5 +35,5 @@ std::shared_ptr<jt::Sprite> createVignette(jt::Vector2 const& size)
     return ptr;
 }
 
-} // namespace sdh
+} // namespace dh
 } // namespace jt

@@ -20,6 +20,8 @@ private:
 
     void doInternalCreate() override;
     void doInternalUpdate(float const /*elapsed*/) override;
+    void updateSwarm();
+    void updateOneSwarmObject(const size_t& i, jt::Vector2& centerPos);
     void doInternalDraw() const override;
 
     void drawSky() const;

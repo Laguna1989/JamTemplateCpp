@@ -1,18 +1,15 @@
 ﻿#include "StateScroll.hpp"
+#include "DrawableHelpers.hpp"
 #include "InputManager.hpp"
 #include "MathHelper.hpp"
 #include "StateSelect.hpp"
 
 void StateScroll::doInternalCreate()
 {
-    m_background = std::make_shared<jt::Shape>();
-    m_background->makeRect(jt::Vector2 { 400.0f, 300.0f });
-    m_background->setColor(jt::colors::Blue);
+    m_background = jt::dh::createRectShape(jt::Vector2 { 400.0f, 300.0f }, jt::colors::Blue);
     m_background->setIgnoreCamMovement(true);
 
-    m_shape1 = std::make_shared<jt::Shape>();
-    m_shape1->makeRect(jt::Vector2 { 40.0f, 30.0f });
-    m_shape1->setColor(jt::colors::Cyan);
+    m_shape1 = jt::dh::createRectShape(jt::Vector2 { 40.0f, 30.0f }, jt::colors::Cyan);
     m_shape1->setPosition(jt::Vector2 { 100.0f, 100.0f });
 
     m_sprite = std::make_shared<jt::Sprite>();

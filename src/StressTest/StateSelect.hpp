@@ -2,6 +2,7 @@
 #define STRESSTEST_STATE_SELECT_HPP_INCLUDEGUARD
 
 #include "Button.hpp"
+#include "DrawableHelpers.hpp"
 #include "GameState.hpp"
 #include "Text.hpp"
 #include <memory>
@@ -24,21 +25,18 @@ private:
     std::size_t m_buttonCount { 0U };
 
     template <class State>
-    void AddButton(std::string const& text)
+    void AddButton(std::string const& textString)
     {
         float posY
             = detail::buttonOffsetY + m_buttonCount * (detail::buttonMarginY + detail::buttonSizeY);
-        auto const b = std::make_shared<jt::Button>(
+        auto const button = std::make_shared<jt::Button>(
             jt::Vector2u { detail::buttonSizeX, detail::buttonSizeY });
-        b->addCallback([this]() { getGame()->switchState(std::make_shared<State>()); });
-        auto const t = std::make_shared<jt::Text>();
-        t->loadFont("assets/font.ttf", 28, getGame()->getRenderTarget());
-        t->setText(text);
-        // t->setOffset(jt::Vector2 { 32.0f, 6.0f });
-        t->SetTextAlign(jt::Text::TextAlign::LEFT);
-        b->setDrawable(t);
-        b->setPosition(jt::Vector2 { detail::buttonOffsetX, posY });
-        add(std::move(b));
+        button->addCallback([this]() { getGame()->switchState(std::make_shared<State>()); });
+        auto const text = jt::dh::createText(getGame()->getRenderTarget(), textString, 28);
+        text->SetTextAlign(jt::Text::TextAlign::LEFT);
+        button->setDrawable(text);
+        button->setPosition(jt::Vector2 { detail::buttonOffsetX, posY });
+        add(std::move(button));
 
         m_buttonCount++;
     }

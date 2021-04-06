@@ -27,14 +27,14 @@ void StateMenu::doInternalCreate()
 
 void StateMenu::createVignette()
 {
-    m_vignette = jt::sdh::createVignette(GP::GetScreenSize());
+    m_vignette = jt::dh::createVignette(GP::GetScreenSize());
     m_vignette->setColor({ 255, 255, 255, 110 });
 }
 
 void StateMenu::createShapes()
 {
-    m_background = jt::sdh::createRectShape(GP::GetScreenSize(), GP::PaletteColor1());
-    m_overlay = jt::sdh::createRectShape(GP::GetScreenSize(), jt::colors::Black);
+    m_background = jt::dh::createRectShape(GP::GetScreenSize(), GP::PaletteColor1());
+    m_overlay = jt::dh::createRectShape(GP::GetScreenSize(), jt::colors::Black);
 }
 
 void StateMenu::createMenuText()
@@ -47,7 +47,7 @@ void StateMenu::createMenuText()
 void StateMenu::createTextCredits()
 {
     float half_width = GP::GetScreenSize().x() / 2;
-    m_text_Credits = jt::sdh::createText(getGame()->getRenderTarget(),
+    m_text_Credits = jt::dh::createText(getGame()->getRenderTarget(),
         "Created by " + GP::AuthorName() + " for " + GP::JamName() + "\n" + GP::JamDate(), 10U,
         GP::PaletteColor5());
     m_text_Credits->SetTextAlign(jt::Text::TextAlign::LEFT);
@@ -58,7 +58,7 @@ void StateMenu::createTextCredits()
 void StateMenu::createTextExplanation()
 {
     float half_width = GP::GetScreenSize().x() / 2;
-    m_text_Explanation = jt::sdh::createText(
+    m_text_Explanation = jt::dh::createText(
         getGame()->getRenderTarget(), "Press Space to start the game", 16U, GP::PaletteColor8());
     m_text_Explanation->setPosition({ half_width, 150 });
     m_text_Explanation->setShadow(GP::PaletteFontShadow(), jt::Vector2 { 3, 3 });
@@ -67,7 +67,7 @@ void StateMenu::createTextExplanation()
 void StateMenu::createTextTitle()
 {
     float half_width = GP::GetScreenSize().x() / 2;
-    m_text_Title = jt::sdh::createText(
+    m_text_Title = jt::dh::createText(
         getGame()->getRenderTarget(), GP::GameName(), 32U, GP::PaletteFontFront());
     m_text_Title->setPosition({ half_width, 20 });
     m_text_Title->setShadow(GP::PaletteFontShadow(), jt::Vector2 { 3, 3 });

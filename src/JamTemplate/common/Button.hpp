@@ -103,7 +103,7 @@ private:
             if (jt::InputManager::justReleased(jt::MouseButtonCode::MBLeft)) {
                 if (m_visible) {
                     for (auto& cb : m_callbacks) {
-                        std::cout << "callback\n";
+                        // std::cout << "callback\n";
                         cb();
                     }
                 }
