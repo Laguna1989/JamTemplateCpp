@@ -1,8 +1,8 @@
-﻿#ifndef GUARD_JAMTEMPLATE_SMARTTEXT_HPP_INCLUDEGUARD
-#define GUARD_JAMTEMPLATE_SMARTTEXT_HPP_INCLUDEGUARD
+﻿#ifndef GUARD_JAMTEMPLATE_TEXT_HPP_INCLUDEGUARD
+#define GUARD_JAMTEMPLATE_TEXT_HPP_INCLUDEGUARD
 
+#include "DrawableImpl.hpp"
 #include "Rendertarget.hpp"
-#include "SmartDrawable.hpp"
 #include <SDL.h>
 #include <SDL_ttf.h>
 #include <memory>
@@ -11,13 +11,13 @@
 
 namespace jt {
 
-class SmartText : public SmartDrawable {
+class Text : public DrawableImpl {
 public:
     enum class TextAlign { CENTER, LEFT, RIGHT };
 
-    using Sptr = std::shared_ptr<SmartText>;
+    using Sptr = std::shared_ptr<Text>;
 
-    virtual ~SmartText();
+    virtual ~Text();
 
     void loadFont(std::string const& fontFileName, unsigned int characterSize,
         std::weak_ptr<jt::renderTarget> wptr);

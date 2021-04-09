@@ -1,21 +1,24 @@
 ﻿#include "Game.hpp"
+#include "DrawableImpl.hpp"
 #include "GameState.hpp"
 #include "InputManager.hpp"
 #include "Random.hpp"
 #include "Rect.hpp"
-#include "SmartDrawable.hpp"
 #include "TextureManager.hpp"
 #include "Vector.hpp"
 #include <SDL.h>
+#include <SDL2/SDL_mixer.h>
 #include <SDL_ttf.h>
 #include <emscripten.h>
 #include <iostream>
 
 namespace jt {
 
-Game::Game(unsigned int width, unsigned int height, float zoom, std::string const& title)
+Game::Game(unsigned int width, unsigned int height, float zoom, std::string const& title,
+    std::shared_ptr<MusicPlayerInterface> musicPlayer)
+    : m_musicPlayer { musicPlayer }
 {
-    m_zoom = zoom;
+    m_camera->setZoom(zoom);
     m_fullsize = jt::Vector2 { static_cast<float>(width), static_cast<float>(height) };
 
     unsigned int scaledWidth = static_cast<unsigned int>(width / zoom);
@@ -63,20 +66,19 @@ void Game::setRenderTarget(std::shared_ptr<jt::renderTarget> rt)
 
 std::shared_ptr<jt::renderTarget> Game::getRenderTarget() const { return m_renderTarget; }
 
-float Game::getZoom() const { return m_zoom; }
-
 void Game::doUpdate(float const elapsed)
 {
     SDL_PumpEvents();
     int mxi { 0 };
     int myi { 0 };
     auto const mouseState = SDL_GetMouseState(&mxi, &myi);
-    float const x = mxi / getZoom();
-    float const y = myi / getZoom();
-    jt::InputManager::update(y + getCamOffset().x(), +getCamOffset().y(), x, y, elapsed);
+    float const x = mxi / getCamera()->getZoom();
+    float const y = myi / getCamera()->getZoom();
+    jt::InputManager::update(
+        y + getCamera()->getCamOffset().x(), +getCamera()->getCamOffset().y(), x, y, elapsed);
     m_state->update(elapsed);
 
-    SmartDrawable::setCamOffset(-1.0f * m_CamOffset);
+    DrawableImpl::setCamOffset(-1.0f * getCamera()->getCamOffset());
 };
 
 void Game::doDraw() const
@@ -98,56 +100,17 @@ void Game::doDraw() const
     SDL_RenderClear(getRenderTarget().get());
     SDL_Rect sourceRect { m_srcRect.left(), m_srcRect.top(), m_srcRect.width(),
         m_srcRect.height() };
-    SDL_Rect destRect { static_cast<int>(m_shakeOffset.x()), static_cast<int>(m_shakeOffset.y()),
-        m_destRect.width(), m_destRect.height() };
+    SDL_Rect destRect { static_cast<int>(getCamera()->getShakeOffset().x()),
+        static_cast<int>(getCamera()->getShakeOffset().y()), m_destRect.width(),
+        m_destRect.height() };
     SDL_RenderCopyEx(getRenderTarget().get(), t, &sourceRect, &destRect, 0, NULL, SDL_FLIP_NONE);
     SDL_RenderPresent(getRenderTarget().get());
 
     SDL_DestroyTexture(t);
 };
 
-void Game::updateShake(float elapsed)
-{
-    if (m_shakeTimer > 0) {
+void Game::updateShake(float elapsed) { getCamera()->update(elapsed); }
 
-        m_shakeTimer -= elapsed;
-        m_shakeInterval -= elapsed;
-        if (m_shakeInterval < 0) {
-            m_shakeInterval = m_shakeIntervalMax;
-            m_shakeOffset.x() = jt::Random::getFloat(-m_shakeStrength, m_shakeStrength);
-            m_shakeOffset.y() = jt::Random::getFloat(-m_shakeStrength, m_shakeStrength);
-        }
-    } else {
-        m_shakeOffset.x() = m_shakeOffset.y() = 0;
-    }
-}
-
-void Game::resetShake()
-{
-    m_shakeOffset.x() = m_shakeOffset.y() = 0;
-    m_shakeTimer = -1;
-    m_shakeStrength = 0;
-}
-
-void Game::PlayMusic(std::string const& fileName)
-{
-    m_music = std::shared_ptr<Mix_Music>(
-        Mix_LoadMUS(fileName.c_str()), [](Mix_Music* m) { Mix_FreeMusic(m); });
-    if (!m_music) {
-        std::cout << "load audio failed\n" << Mix_GetError();
-    }
-    auto const result = Mix_PlayMusic(m_music.get(), -1);
-    if (result == -1) {
-        std::cout << "play music failed\n" << Mix_GetError();
-    }
-}
-
-void Game::StopMusic() { m_music = nullptr; }
-
-void Game::SetMusicVolume(float newVolume)
-{
-    int v = static_cast<int>(128 * newVolume / 100.0f);
-    Mix_VolumeMusic(v);
-}
+std::shared_ptr<MusicPlayerInterface> Game::getMusicPlayer() { return m_musicPlayer; }
 
 } // namespace jt

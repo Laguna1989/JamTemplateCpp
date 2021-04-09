@@ -1,4 +1,4 @@
-﻿#include "SmartSprite.hpp"
+﻿#include "Sprite.hpp"
 #include "MathHelper.hpp"
 #include "Rendertarget.hpp"
 #include "SDLHelper.hpp"
@@ -7,7 +7,7 @@
 
 namespace jt {
 
-void SmartSprite::loadSprite(std::string const& fileName)
+void Sprite::loadSprite(std::string const& fileName)
 {
     m_text = TextureManager::get(fileName);
     m_fileName = fileName;
@@ -19,7 +19,7 @@ void SmartSprite::loadSprite(std::string const& fileName)
     m_textFlash = TextureManager::get(TextureManager::getFlashName(fileName));
 }
 
-void SmartSprite::loadSprite(std::string const& fileName, jt::Recti const& rect)
+void Sprite::loadSprite(std::string const& fileName, jt::Recti const& rect)
 {
     m_text = TextureManager::get(fileName);
     m_fileName = fileName;
@@ -31,35 +31,35 @@ void SmartSprite::loadSprite(std::string const& fileName, jt::Recti const& rect)
     m_textFlash = TextureManager::get(TextureManager::getFlashName(fileName));
 }
 
-void SmartSprite::setPosition(jt::Vector2 const& pos) { m_position = pos; }
-const jt::Vector2 SmartSprite::getPosition() const { return m_position; }
+void Sprite::setPosition(jt::Vector2 const& pos) { m_position = pos; }
+const jt::Vector2 Sprite::getPosition() const { return m_position; }
 
-void SmartSprite::setColor(jt::Color const& col) { m_color = col; }
-const jt::Color SmartSprite::getColor() const { return m_color; }
+void Sprite::setColor(jt::Color const& col) { m_color = col; }
+const jt::Color Sprite::getColor() const { return m_color; }
 
-void SmartSprite::setFlashColor(jt::Color const& col) { m_colorFlash = col; }
-const jt::Color SmartSprite::getFlashColor() const { return m_colorFlash; }
+void Sprite::setFlashColor(jt::Color const& col) { m_colorFlash = col; }
+const jt::Color Sprite::getFlashColor() const { return m_colorFlash; }
 
 //  sf::Transform const getTransform() const  { return m_sprite.getTransform(); }
 
-jt::Rect const SmartSprite::getGlobalBounds() const
+jt::Rect const Sprite::getGlobalBounds() const
 {
     return jt::Rect { 0.0f, 0.0f, static_cast<float>(m_sourceRect.width()),
         static_cast<float>(m_sourceRect.height()) };
 }
-jt::Rect const SmartSprite::getLocalBounds() const
+jt::Rect const Sprite::getLocalBounds() const
 {
     return jt::Rect { 0.0f, 0.0f, static_cast<float>(m_sourceRect.width()),
         static_cast<float>(m_sourceRect.height()) };
 }
 
-void SmartSprite::setScale(jt::Vector2 const& scale) { m_scale = scale; }
-const jt::Vector2 SmartSprite::getScale() const { return m_scale; }
+void Sprite::setScale(jt::Vector2 const& scale) { m_scale = scale; }
+const jt::Vector2 Sprite::getScale() const { return m_scale; }
 
-void SmartSprite::setOrigin(jt::Vector2 const& origin) { m_origin = origin; }
-jt::Vector2 const SmartSprite::getOrigin() const { return m_origin; }
+void Sprite::setOrigin(jt::Vector2 const& origin) { m_origin = origin; }
+jt::Vector2 const Sprite::getOrigin() const { return m_origin; }
 
-jt::Color SmartSprite::getColorAtPixel(jt::Vector2u pixelPos) const
+jt::Color Sprite::getColorAtPixel(jt::Vector2u pixelPos) const
 {
     if (!m_image) {
         m_image = std::shared_ptr<SDL_Surface>(
@@ -78,11 +78,11 @@ jt::Color SmartSprite::getColorAtPixel(jt::Vector2u pixelPos) const
     return jt::Color { r, g, b, a };
 }
 
-void SmartSprite::cleanImage() { m_image = nullptr; }
+void Sprite::cleanImage() { m_image = nullptr; }
 
-void SmartSprite::doUpdate(float /*elapsed*/) { }
+void Sprite::doUpdate(float /*elapsed*/) { }
 
-void SmartSprite::doDraw(std::shared_ptr<jt::renderTarget> const sptr) const
+void Sprite::doDraw(std::shared_ptr<jt::renderTarget> const sptr) const
 {
     SDL_Rect const sourceRect = getSourceRect();
     SDL_Rect const destRect = getDestRect();
@@ -93,7 +93,7 @@ void SmartSprite::doDraw(std::shared_ptr<jt::renderTarget> const sptr) const
     SDL_RenderCopyEx(sptr.get(), m_text.get(), &sourceRect, &destRect, getRotation(), &p, flip);
 }
 
-void SmartSprite::doDrawShadow(std::shared_ptr<jt::renderTarget> const sptr) const
+void Sprite::doDrawShadow(std::shared_ptr<jt::renderTarget> const sptr) const
 {
     SDL_Rect const sourceRect = getSourceRect();
     SDL_Rect const destRect = getDestRect(getShadowOffset());
@@ -104,7 +104,7 @@ void SmartSprite::doDrawShadow(std::shared_ptr<jt::renderTarget> const sptr) con
     SDL_RenderCopyEx(sptr.get(), m_text.get(), &sourceRect, &destRect, getRotation(), &p, flip);
 }
 
-void SmartSprite::doDrawFlash(std::shared_ptr<jt::renderTarget> const sptr) const
+void Sprite::doDrawFlash(std::shared_ptr<jt::renderTarget> const sptr) const
 {
     SDL_Rect const sourceRect = getSourceRect();
     SDL_Rect const destRect = getDestRect();
@@ -118,26 +118,26 @@ void SmartSprite::doDrawFlash(std::shared_ptr<jt::renderTarget> const sptr) cons
         sptr.get(), m_textFlash.get(), &sourceRect, &destRect, getRotation(), &p, flip);
 }
 
-void SmartSprite::doRotate(float /*rot*/) { }
+void Sprite::doRotate(float /*rot*/) { }
 
-SDL_Rect SmartSprite::getDestRect(jt::Vector2 const& positionOffset) const
+SDL_Rect Sprite::getDestRect(jt::Vector2 const& positionOffset) const
 {
-    // std::cout << "SmartSprite.CamOffset.x " << getCamOffset().x() << std::endl;
+    // std::cout << "Sprite.CamOffset.x " << getCamOffset().x() << std::endl;
     auto const pos = m_position + getShakeOffset() + getOffset() + getCamOffset() + positionOffset;
-    // std::cout << "SmartSprite.final position.x " << pos.x() << std::endl;
+    // std::cout << "Sprite.final position.x " << pos.x() << std::endl;
     SDL_Rect const destRect { static_cast<int>(pos.x()), static_cast<int>(pos.y()),
         static_cast<int>(m_sourceRect.width() * fabs(m_scale.x())),
         static_cast<int>(m_sourceRect.height() * fabs(m_scale.y())) };
     return destRect;
 }
 
-SDL_Rect SmartSprite::getSourceRect() const
+SDL_Rect Sprite::getSourceRect() const
 {
     return SDL_Rect { m_sourceRect.left(), m_sourceRect.top(), m_sourceRect.width(),
         m_sourceRect.height() };
 }
 
-void SmartSprite::setSDLColor(jt::Color const& col) const
+void Sprite::setSDLColor(jt::Color const& col) const
 {
     SDL_SetTextureColorMod(m_text.get(), col.r(), col.g(), col.b());
     SDL_SetTextureAlphaMod(m_text.get(), col.a());

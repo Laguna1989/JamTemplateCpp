@@ -4,7 +4,6 @@
 #include "GameBase.hpp"
 #include "Rect.hpp"
 #include "Rendertarget.hpp"
-#include <SDL2/SDL_mixer.h>
 #include <chrono>
 #include <memory>
 #include <string>
@@ -15,7 +14,8 @@ class Game final : public jt::GameBase {
 public:
     using Sptr = std::shared_ptr<Game>;
 
-    Game(unsigned int w, unsigned int h, float zoom, std::string const& title);
+    Game(unsigned int w, unsigned int h, float zoom, std::string const& title,
+        std::shared_ptr<MusicPlayerInterface> musicPlayer);
 
     void setRenderTarget(std::shared_ptr<jt::renderTarget> rt) override;
     std::shared_ptr<jt::renderTarget> getRenderTarget() const override;
@@ -23,12 +23,11 @@ public:
     void runGame(
         std::shared_ptr<GameState> InitialState, GameLoopFunctionPtr gameloop_function) override;
 
-    virtual float getZoom() const override;
+    virtual std::shared_ptr<MusicPlayerInterface> getMusicPlayer() override;
 
 private:
     std::shared_ptr<jt::renderTarget> m_renderTarget { nullptr };
     std::shared_ptr<SDL_Window> m_window;
-    float m_zoom;
 
     jt::Recti m_srcRect;
     jt::Recti m_destRect;
@@ -39,12 +38,8 @@ private:
     virtual void doDraw() const override;
 
     void updateShake(float elapsed) override;
-    void resetShake() override;
 
-    std::shared_ptr<Mix_Music> m_music;
-    void PlayMusic(std::string const& fileName) override;
-    void StopMusic() override;
-    void SetMusicVolume(float v) override;
+    std::shared_ptr<MusicPlayerInterface> m_musicPlayer { nullptr };
 };
 
 } // namespace jt

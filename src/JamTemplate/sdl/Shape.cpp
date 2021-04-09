@@ -1,8 +1,7 @@
-﻿#include "SmartShape.hpp"
+﻿#include "Shape.hpp"
 #include "Rect.hpp"
 #include "Rendertarget.hpp"
 #include "SDLHelper.hpp"
-#include "SmartDrawable.hpp"
 #include "TextureManager.hpp"
 #include "Vector.hpp"
 #include <SDL.h>
@@ -11,42 +10,42 @@
 #include <string>
 
 namespace jt {
-void SmartShape::makeRect(jt::Vector2 size)
+void Shape::makeRect(jt::Vector2 size)
 {
     m_text = TextureManager::get("#x#" + std::to_string(static_cast<int>(size.x())) + "#"
         + std::to_string(static_cast<int>(size.y())));
     m_sourceRect = jt::Recti { 0U, 0U, static_cast<int>(size.x()), static_cast<int>(size.y()) };
 }
 
-void SmartShape::setColor(jt::Color const& col) { m_color = col; }
-const jt::Color SmartShape::getColor() const { return m_color; }
+void Shape::setColor(jt::Color const& col) { m_color = col; }
+const jt::Color Shape::getColor() const { return m_color; }
 
-void SmartShape::setFlashColor(jt::Color const& col) { m_colorFlash = col; }
-const jt::Color SmartShape::getFlashColor() const { return m_colorFlash; }
+void Shape::setFlashColor(jt::Color const& col) { m_colorFlash = col; }
+const jt::Color Shape::getFlashColor() const { return m_colorFlash; }
 
-void SmartShape::setPosition(jt::Vector2 const& pos) { m_position = pos; }
-const jt::Vector2 SmartShape::getPosition() const { return m_position; }
+void Shape::setPosition(jt::Vector2 const& pos) { m_position = pos; }
+const jt::Vector2 Shape::getPosition() const { return m_position; }
 
 // sf::Transform const getTransform() const { return m_shape->getTransform(); }
 
-jt::Rect const SmartShape::getGlobalBounds() const
+jt::Rect const Shape::getGlobalBounds() const
 {
     return jt::Rect { m_position.x(), m_position.y(), m_sourceRect.width() * m_scale.x(),
         m_sourceRect.height() * m_scale.y() };
 }
-jt::Rect const SmartShape::getLocalBounds() const
+jt::Rect const Shape::getLocalBounds() const
 {
     return jt::Rect { m_position.x(), m_position.y(), m_sourceRect.width() * m_scale.x(),
         m_sourceRect.height() * m_scale.y() };
 }
 
-void SmartShape::setScale(jt::Vector2 const& scale) { m_scale = scale; }
-const jt::Vector2 SmartShape::getScale() const { return m_scale; }
+void Shape::setScale(jt::Vector2 const& scale) { m_scale = scale; }
+const jt::Vector2 Shape::getScale() const { return m_scale; }
 
-void SmartShape::setOrigin(jt::Vector2 const& origin) { m_origin = origin; }
-const jt::Vector2 SmartShape::getOrigin() const { return m_origin; }
+void Shape::setOrigin(jt::Vector2 const& origin) { m_origin = origin; }
+const jt::Vector2 Shape::getOrigin() const { return m_origin; }
 
-void SmartShape::doDraw(std::shared_ptr<jt::renderTarget> const sptr) const
+void Shape::doDraw(std::shared_ptr<jt::renderTarget> const sptr) const
 {
     SDL_Rect const destRect = getDestRect();
     auto const flip = jt::getFlipFromScale(m_scale);
@@ -56,7 +55,7 @@ void SmartShape::doDraw(std::shared_ptr<jt::renderTarget> const sptr) const
     SDL_RenderCopyEx(sptr.get(), m_text.get(), nullptr, &destRect, getRotation(), &p, flip);
 }
 
-void SmartShape::doDrawFlash(std::shared_ptr<jt::renderTarget> const sptr) const
+void Shape::doDrawFlash(std::shared_ptr<jt::renderTarget> const sptr) const
 {
     SDL_Rect const destRect = getDestRect();
     auto const flip = jt::getFlipFromScale(m_scale);
@@ -66,7 +65,7 @@ void SmartShape::doDrawFlash(std::shared_ptr<jt::renderTarget> const sptr) const
     SDL_RenderCopyEx(sptr.get(), m_text.get(), nullptr, &destRect, getRotation(), &p, flip);
 }
 
-void SmartShape::doDrawShadow(std::shared_ptr<jt::renderTarget> const sptr) const
+void Shape::doDrawShadow(std::shared_ptr<jt::renderTarget> const sptr) const
 {
     SDL_Rect const destRect = getDestRect(getShadowOffset());
     auto const flip = jt::getFlipFromScale(m_scale);
@@ -76,10 +75,10 @@ void SmartShape::doDrawShadow(std::shared_ptr<jt::renderTarget> const sptr) cons
     SDL_RenderCopyEx(sptr.get(), m_text.get(), nullptr, &destRect, getRotation(), &p, flip);
 }
 
-void SmartShape::doUpdate(float /*elapsed*/) { }
-void SmartShape::doRotate(float /*rot*/) { }
+void Shape::doUpdate(float /*elapsed*/) { }
+void Shape::doRotate(float /*rot*/) { }
 
-SDL_Rect SmartShape::getDestRect(jt::Vector2 const& positionOffset) const
+SDL_Rect Shape::getDestRect(jt::Vector2 const& positionOffset) const
 {
     auto const pos = m_position + getShakeOffset() + getOffset() + getCamOffset() + positionOffset;
     SDL_Rect const destRect { static_cast<int>(pos.x()), static_cast<int>(pos.y()),
@@ -88,7 +87,7 @@ SDL_Rect SmartShape::getDestRect(jt::Vector2 const& positionOffset) const
     return destRect;
 }
 
-void SmartShape::setSDLColor(jt::Color const& col) const
+void Shape::setSDLColor(jt::Color const& col) const
 {
     SDL_SetTextureColorMod(m_text.get(), col.r(), col.g(), col.b());
     SDL_SetTextureAlphaMod(m_text.get(), col.a());

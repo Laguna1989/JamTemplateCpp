@@ -1,7 +1,6 @@
 ﻿#include "DrawableImpl.hpp"
 
 namespace jt {
-jt::Vector2 DrawableImpl::m_CamOffset { 0.0f, 0.0f };
 
 void DrawableImpl::draw(std::shared_ptr<jt::renderTarget> sptr) const
 {

@@ -28,16 +28,9 @@ public:
     std::shared_ptr<GameState> getCurrentSate() override;
 
     void run() override;
-    virtual void runGame(
-        std::shared_ptr<GameState> InitialState, GameLoopFunctionPtr gameloop_function)
-        = 0;
 
-    virtual std::shared_ptr<MusicPlayerInterface> getMusicPlayer() = 0;
     virtual std::shared_ptr<CamInterface> getCamera() override;
     virtual std::shared_ptr<CamInterface> getCamera() const override;
-
-    virtual void setRenderTarget(std::shared_ptr<jt::renderTarget> rt) = 0;
-    virtual std::shared_ptr<jt::renderTarget> getRenderTarget() const = 0;
 
 protected:
     std::shared_ptr<GameState> m_state { nullptr };
@@ -49,7 +42,7 @@ protected:
 
     jt::Color m_backgroundColor { jt::colors::Black };
 
-    std::weak_ptr<GameInterface> getPtr();
+    std::weak_ptr<GameInterface> getPtr() override;
 
     // overwritten functions from GameObject
     virtual void doUpdate(float const elapsed) override = 0;

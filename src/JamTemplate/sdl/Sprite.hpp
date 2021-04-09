@@ -1,9 +1,9 @@
-﻿#ifndef GUARD_JAMTEMPLATE_SMARTSPRITE_HPP_INCLUDEGUARD
-#define GUARD_JAMTEMPLATE_SMARTSPRITE_HPP_INCLUDEGUARD
+﻿#ifndef GUARD_JAMTEMPLATE_SPRITE_HPP_INCLUDEGUARD
+#define GUARD_JAMTEMPLATE_SPRITE_HPP_INCLUDEGUARD
 
 #include "Color.hpp"
+#include "DrawableImpl.hpp"
 #include "Rendertarget.hpp"
-#include "SmartDrawable.hpp"
 #include "Vector.hpp"
 #include <SDL.h>
 #include <memory>
@@ -11,9 +11,9 @@
 
 namespace jt {
 
-class SmartSprite : public SmartDrawable {
+class Sprite : public DrawableImpl {
 public:
-    using Sptr = std::shared_ptr<SmartSprite>;
+    using Sptr = std::shared_ptr<Sprite>;
 
     void loadSprite(std::string const& fileName);
     void loadSprite(std::string const& fileName, jt::Recti const& rect);

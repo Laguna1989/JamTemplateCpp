@@ -1,17 +1,17 @@
-﻿#ifndef GUARD_JAMTEMPLATE_SMARTSHAPE_HPP_INCLUDEGUARD
-#define GUARD_JAMTEMPLATE_SMARTSHAPE_HPP_INCLUDEGUARD
+﻿#ifndef GUARD_JAMTEMPLATE_SHAPE_HPP_INCLUDEGUARD
+#define GUARD_JAMTEMPLATE_SHAPE_HPP_INCLUDEGUARD
 
+#include "DrawableImpl.hpp"
 #include "Rect.hpp"
 #include "Rendertarget.hpp"
-#include "SmartDrawable.hpp"
 #include "Vector.hpp"
 #include <SDL.h>
 #include <memory>
 
 namespace jt {
-class SmartShape : public SmartDrawable {
+class Shape : public DrawableImpl {
 public:
-    using Sptr = std::shared_ptr<SmartShape>;
+    using Sptr = std::shared_ptr<Shape>;
 
     void makeRect(jt::Vector2 size);
 

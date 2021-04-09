@@ -1,5 +1,5 @@
 ﻿
-#include "SmartText.hpp"
+#include "Text.hpp"
 #include "Rendertarget.hpp"
 #include "SDLHelper.hpp"
 #include "SplitString.hpp"
@@ -9,14 +9,14 @@
 
 namespace jt {
 
-SmartText::~SmartText()
+Text::~Text()
 {
     if (m_font != nullptr) {
         TTF_CloseFont(m_font);
     }
 }
 
-void SmartText::loadFont(std::string const& fontFileName, unsigned int characterSize,
+void Text::loadFont(std::string const& fontFileName, unsigned int characterSize,
     std::weak_ptr<jt::renderTarget> wptr)
 {
     m_font = TTF_OpenFont(fontFileName.c_str(), characterSize * getUpscaleFactor());
@@ -30,60 +30,60 @@ void SmartText::loadFont(std::string const& fontFileName, unsigned int character
     m_rendertarget = wptr;
 }
 
-void SmartText::setText(std::string const& text)
+void Text::setText(std::string const& text)
 {
     m_text = text;
     recreateTextTexture(getRenderTarget());
 }
-std::string SmartText::getText() const { return m_text; }
+std::string Text::getText() const { return m_text; }
 
-void SmartText::setOutline(float /*thickness*/, jt::Color /*col*/)
+void Text::setOutline(float /*thickness*/, jt::Color /*col*/)
 {
     std::cerr << "Font outline not suppored by SDL TTF fonts" << std::endl;
 }
 
-void SmartText::setPosition(jt::Vector2 const& pos) { m_position = pos; }
-const jt::Vector2 SmartText::getPosition() const { return m_position; }
+void Text::setPosition(jt::Vector2 const& pos) { m_position = pos; }
+const jt::Vector2 Text::getPosition() const { return m_position; }
 
-void SmartText::setColor(const jt::Color& col) { m_color = col; }
-const jt::Color SmartText::getColor() const { return m_color; }
+void Text::setColor(const jt::Color& col) { m_color = col; }
+const jt::Color Text::getColor() const { return m_color; }
 
-void SmartText::setFlashColor(const jt::Color& col) { m_flashColor = col; }
-const jt::Color SmartText::getFlashColor() const { return m_flashColor; }
+void Text::setFlashColor(const jt::Color& col) { m_flashColor = col; }
+const jt::Color Text::getFlashColor() const { return m_flashColor; }
 
 // sf::Transform const getTransform() const  { return m_text->getTransform(); }
 
-jt::Rect const SmartText::getGlobalBounds() const
+jt::Rect const Text::getGlobalBounds() const
 {
     return jt::Rect { m_position.x(), m_position.y(), m_textTextureSizeX * m_scale.x(),
         m_textTextureSizeY * m_scale.y() };
 }
-jt::Rect const SmartText::getLocalBounds() const
+jt::Rect const Text::getLocalBounds() const
 {
     return jt::Rect { 0, 0, m_textTextureSizeX * m_scale.x(), m_textTextureSizeY * m_scale.y() };
 }
 
-void SmartText::setScale(jt::Vector2 const& scale) { m_scale = scale; }
-const jt::Vector2 SmartText::getScale() const { return m_scale; }
+void Text::setScale(jt::Vector2 const& scale) { m_scale = scale; }
+const jt::Vector2 Text::getScale() const { return m_scale; }
 
-void SmartText::setOrigin(jt::Vector2 const& origin) { m_origin = origin; }
-jt::Vector2 const SmartText::getOrigin() const { return m_origin; }
+void Text::setOrigin(jt::Vector2 const& origin) { m_origin = origin; }
+jt::Vector2 const Text::getOrigin() const { return m_origin; }
 
-void SmartText::SetTextAlign(SmartText::TextAlign ta)
+void Text::SetTextAlign(Text::TextAlign ta)
 {
     if (m_textAlign != ta) {
         m_textAlign = ta;
         recreateTextTexture(getRenderTarget());
     }
 }
-SmartText::TextAlign SmartText::getTextAlign() const { return m_textAlign; }
+Text::TextAlign Text::getTextAlign() const { return m_textAlign; }
 
-void SmartText::doUpdate(float /*elapsed*/)
+void Text::doUpdate(float /*elapsed*/)
 {
     // Nothing to do here
 }
 
-void SmartText::doDrawShadow(std::shared_ptr<jt::renderTarget> const sptr) const
+void Text::doDrawShadow(std::shared_ptr<jt::renderTarget> const sptr) const
 {
     auto const destRect = getDestRect(getShadowOffset());
     SDL_Point const p { static_cast<int>(m_origin.x()), static_cast<int>(m_origin.y()) };
@@ -96,7 +96,7 @@ void SmartText::doDrawShadow(std::shared_ptr<jt::renderTarget> const sptr) const
     // std::cout << "error message: " << SDL_GetError() << std::endl;
 }
 
-void SmartText::doDraw(std::shared_ptr<jt::renderTarget> const sptr) const
+void Text::doDraw(std::shared_ptr<jt::renderTarget> const sptr) const
 {
     auto const destRect = getDestRect();
     SDL_Point const p { static_cast<int>(m_origin.x()), static_cast<int>(m_origin.y()) };
@@ -107,7 +107,7 @@ void SmartText::doDraw(std::shared_ptr<jt::renderTarget> const sptr) const
     // std::cout << "error message: " << SDL_GetError() << std::endl;
 }
 
-void SmartText::doDrawFlash(std::shared_ptr<jt::renderTarget> const sptr) const
+void Text::doDrawFlash(std::shared_ptr<jt::renderTarget> const sptr) const
 {
     auto const destRect = getDestRect();
     SDL_Point const p { static_cast<int>(m_origin.x()), static_cast<int>(m_origin.y()) };
@@ -118,12 +118,12 @@ void SmartText::doDrawFlash(std::shared_ptr<jt::renderTarget> const sptr) const
     // std::cout << "error message: " << SDL_GetError() << std::endl;
 }
 
-void SmartText::doRotate(float /*rot*/)
+void Text::doRotate(float /*rot*/)
 {
     // Nothing to do here
 }
 
-void SmartText::renderOneLineOfText(std::shared_ptr<jt::renderTarget> const sptr, std::string text,
+void Text::renderOneLineOfText(std::shared_ptr<jt::renderTarget> const sptr, std::string text,
     std::size_t i, std::size_t lineCount) const
 {
     // render text on full white, so coloring can be done afterwards
@@ -156,7 +156,7 @@ void SmartText::renderOneLineOfText(std::shared_ptr<jt::renderTarget> const sptr
     SDL_DestroyTexture(textTexture);
 }
 
-jt::Vector2u SmartText::getSizeForLine(
+jt::Vector2u Text::getSizeForLine(
     std::shared_ptr<jt::renderTarget> const sptr, std::string const& text) const
 {
     SDL_Color const col { 255U, 255U, 255U, 255U };
@@ -171,7 +171,7 @@ jt::Vector2u SmartText::getSizeForLine(
     return jt::Vector2u { static_cast<unsigned int>(w), static_cast<unsigned int>(h) };
 }
 
-void SmartText::recreateTextTexture(std::shared_ptr<jt::renderTarget> const sptr)
+void Text::recreateTextTexture(std::shared_ptr<jt::renderTarget> const sptr)
 {
     if (!m_font) {
         std::cout << "no font loaded\n";
@@ -212,22 +212,22 @@ void SmartText::recreateTextTexture(std::shared_ptr<jt::renderTarget> const sptr
     // std::cout << "text successfully created\n";
 }
 
-std::shared_ptr<jt::renderTarget> SmartText::getRenderTarget()
+std::shared_ptr<jt::renderTarget> Text::getRenderTarget()
 {
     if (m_rendertarget.expired()) {
-        std::cout << "Cannot use SmartText without valid renderTarget\n";
+        std::cout << "Cannot use Text without valid renderTarget\n";
         return nullptr;
     }
     return m_rendertarget.lock();
 }
 
-void SmartText::setSDLColor(jt::Color const& col) const
+void Text::setSDLColor(jt::Color const& col) const
 {
     SDL_SetTextureColorMod(m_textTexture.get(), col.r(), col.g(), col.b());
     SDL_SetTextureAlphaMod(m_textTexture.get(), col.a());
 }
 
-SDL_Rect SmartText::getDestRect(jt::Vector2 const& positionOffset) const
+SDL_Rect Text::getDestRect(jt::Vector2 const& positionOffset) const
 {
     jt::Vector2 alignOffset { 0, 0 };
     if (m_textAlign == TextAlign::CENTER) {
@@ -249,7 +249,7 @@ SDL_Rect SmartText::getDestRect(jt::Vector2 const& positionOffset) const
     return destRect;
 }
 
-void SmartText::calculateTextTextureSize(
+void Text::calculateTextTextureSize(
     std::shared_ptr<jt::renderTarget> const sptr, std::vector<std::string> const& ssv)
 {
     unsigned int maxLineLengthInPixel { 0U };
