@@ -19,7 +19,7 @@ int main()
 
     game = std::make_shared<jt::Game>(800, 600, 2.0f, "Stresstest", nullptr);
 
-    game->runGame(std::make_shared<StateSelect>(), gameloop);
+    game->startGame(std::make_shared<StateSelect>(), gameloop);
 
     return 0;
 }

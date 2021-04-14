@@ -18,7 +18,7 @@ public:
     virtual std::shared_ptr<GameState> getCurrentSate() = 0;
 
     virtual void run() = 0;
-    virtual void runGame(
+    virtual void startGame(
         std::shared_ptr<GameState> InitialState, GameLoopFunctionPtr gameloop_function)
         = 0;
 };

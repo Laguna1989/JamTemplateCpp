@@ -32,7 +32,7 @@ Game::Game(unsigned int w, unsigned int h, float zoom, std::string const& title,
 
 std::shared_ptr<MusicPlayerInterface> Game::getMusicPlayer() { return m_musicPlayer; }
 
-void Game::runGame(std::shared_ptr<GameState> InitialState, GameLoopFunctionPtr gameloop_function)
+void Game::startGame(std::shared_ptr<GameState> InitialState, GameLoopFunctionPtr gameloop_function)
 {
     switchState(InitialState);
     while (m_renderWindow->isOpen()) {

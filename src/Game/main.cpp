@@ -23,10 +23,10 @@ int main()
     jt::Random::useTimeAsRandomSeed();
 
     game = std::make_shared<jt::Game>(static_cast<unsigned int>(GP::GetWindowSize().x()),
-        static_cast<float>(GP::GetWindowSize().y()), GP::GetZoom(), GP::GameName(),
+        static_cast<unsigned int>(GP::GetWindowSize().y()), GP::GetZoom(), GP::GameName(),
         std::make_shared<jt::MusicPlayer>());
 
-    game->runGame(std::make_shared<StateMenu>(), gameloop);
+    game->startGame(std::make_shared<StateMenu>(), gameloop);
 
     return 0;
 }

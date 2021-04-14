@@ -21,7 +21,7 @@ public:
     Game(unsigned int w, unsigned int h, float zoom, std::string const& title,
         std::shared_ptr<MusicPlayerInterface> musicPlayer = nullptr);
 
-    void runGame(
+    void startGame(
         std::shared_ptr<GameState> InitialState, GameLoopFunctionPtr gameloop_function) override;
 
     void setRenderTarget(std::shared_ptr<jt::renderTarget> rt) override;

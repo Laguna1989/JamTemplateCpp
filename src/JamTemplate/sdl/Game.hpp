@@ -20,7 +20,7 @@ public:
     void setRenderTarget(std::shared_ptr<jt::renderTarget> rt) override;
     std::shared_ptr<jt::renderTarget> getRenderTarget() const override;
 
-    void runGame(
+    void startGame(
         std::shared_ptr<GameState> InitialState, GameLoopFunctionPtr gameloop_function) override;
 
     virtual std::shared_ptr<MusicPlayerInterface> getMusicPlayer() override;

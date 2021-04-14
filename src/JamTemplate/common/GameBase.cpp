@@ -44,15 +44,17 @@ void GameBase::run()
         if (m_state == nullptr) {
             return;
         }
+
         auto const now = std::chrono::steady_clock::now();
 
-        float const elapsed
-            = std::chrono::duration_cast<std::chrono::microseconds>(now - timeLast).count()
+        float const elapsed_in_seconds
+            = std::chrono::duration_cast<std::chrono::microseconds>(now - m_timeLast).count()
             / 1000.0f / 1000.0f;
-        timeLast = now;
+        m_timeLast = now;
+
         if (m_age != 0) {
-            updateShake(elapsed);
-            update(elapsed);
+            updateShake(elapsed_in_seconds);
+            update(elapsed_in_seconds);
             draw();
         }
         m_age++;

@@ -50,7 +50,7 @@ Game::Game(unsigned int width, unsigned int height, float zoom, std::string cons
     Mix_Init(MIX_INIT_OGG);
 }
 
-void Game::runGame(std::shared_ptr<GameState> InitialState, GameLoopFunctionPtr gameloop_function)
+void Game::startGame(std::shared_ptr<GameState> InitialState, GameLoopFunctionPtr gameloop_function)
 {
     switchState(InitialState);
     emscripten_set_main_loop(gameloop_function, 0, 1);

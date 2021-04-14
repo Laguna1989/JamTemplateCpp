@@ -2,6 +2,8 @@
 
 namespace jt {
 
+jt::Vector2 DrawableImpl::m_CamOffset { 0.0f, 0.0f };
+
 void DrawableImpl::draw(std::shared_ptr<jt::renderTarget> sptr) const
 {
     if (m_hasBeenUpdated == false) {
@@ -79,7 +81,7 @@ jt::Vector2 DrawableImpl::getCamOffset() const
     return (m_ignoreCamMovement ? jt::Vector2 { 0.0f, 0.0f }
                                 : 1.0 * DrawableInterface::getStaticCamOffset());
 #else
-    return (m_ignoreCamMovement ? -1.0f * DrawableInterface::getStaticCamOffset()
+    return (m_ignoreCamMovement ? -1.0f * DrawableImpl::getStaticCamOffset()
                                 : jt::Vector2 { 0.0f, 0.0f });
 #endif
 }
