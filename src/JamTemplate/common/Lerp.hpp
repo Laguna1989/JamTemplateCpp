@@ -2,7 +2,7 @@
 #define GUARD_JAMTEMPLATE_LERP_HPP_INCLUDEGUARD
 
 #include <assert.h>
-
+#include <cmath>
 namespace jt {
 
 namespace {
