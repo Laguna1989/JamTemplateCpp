@@ -16,8 +16,8 @@ GameState ::~GameState()
     m_objects.clear();
 }
 
-void GameState::initialize() { m_hasBeenInitialized = true; }
-bool GameState::hasBeenInitialized() const { return m_hasBeenInitialized; }
+void GameState::start() { m_started = true; }
+bool GameState::hasBeenInitialized() const { return m_started; }
 
 void GameState::add(GameObject::Sptr go)
 {
@@ -43,7 +43,7 @@ void GameState::internalCreate()
     m_tweens.clear();
     m_tweensToAdd.clear();
     doInternalCreate();
-    initialize();
+    start();
 }
 
 void GameState::internalUpdate(float elapsed)
@@ -77,7 +77,7 @@ void GameState::updateObjects(float elapsed)
 
 void GameState::updateTweens(float elapsed)
 {
-    if (!m_hasBeenInitialized)
+    if (!m_started)
         return;
     if (getAge() < 0.001f)
         return;

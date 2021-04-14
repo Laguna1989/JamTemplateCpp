@@ -65,8 +65,8 @@ private:
     bool m_doAutoUpdateTweens { true };
     bool m_doAutoDraw { true };
 
-    bool m_hasBeenInitialized { false };
-    void initialize();
+    bool m_started { false };
+    void start();
 
     /// do not override the do* function in derived states, but override doInternal* functions
     virtual void doUpdate(float const elapsed) override;
