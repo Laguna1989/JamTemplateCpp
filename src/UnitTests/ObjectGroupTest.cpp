@@ -1,11 +1,10 @@
 ﻿#include "ObjectGroup.hpp"
-#include "Game.hpp"
+#include "MockGame.hpp"
 #include "MockObject.hpp"
 #include "gmock/gmock.h"
 #include "gtest/gtest.h"
 
 using Group = jt::ObjectGroup<MockObject>;
-using jt::Game;
 using ::testing::_;
 
 TEST(ObjectGroupTest, InitialGroupIsEmpty)
@@ -24,12 +23,13 @@ TEST(ObjectGroupTest, InitialGroupIsEmpty)
 #ifndef ENABLE_WEB
 class ObjectGroupTestWithGame : public ::testing::Test {
 public:
-    std::shared_ptr<Game> game;
+    std::shared_ptr<jt::GameInterface> game;
     Group g;
     void SetUp() override
     {
-        game = std::make_shared<Game>(1, 1, 1.0f, "");
+
         EXPECT_THROW(g.getGame(), std::exception);
+        game = std::make_shared<MockGame>();
         g.setGameInstance(game);
         EXPECT_NO_THROW(g.getGame());
     }

@@ -1,8 +1,8 @@
 ﻿#include "GameObject.hpp"
-#include "Game.hpp"
+#include "MockGame.hpp"
 #include "gtest/gtest.h"
 
-using jt::Game;
+using jt::GameInterface;
 using jt::GameObject;
 
 #ifndef ENABLE_WEB
@@ -14,7 +14,7 @@ TEST(GameObjectTest, CreateWithOutGameInstanceSet)
 
 TEST(GameObjectTest, GameObjectCallsDoNotThrow)
 {
-    auto const g = std::make_shared<Game>(100, 100, 1.0f, "test");
+    auto const g = std::make_shared<MockGame>();
     GameObject go {};
     go.setGameInstance(g);
 
@@ -29,7 +29,7 @@ TEST(GameObjectTest, GameObjectCallsDoNotThrow)
 
 TEST(GameObjectTest, GameObjectAddTwice)
 {
-    auto const g = std::make_shared<Game>(100, 100, 1.0f, "test");
+    auto const g = std::make_shared<MockGame>();
     GameObject go {};
     go.setGameInstance(g);
     EXPECT_THROW(go.setGameInstance(g), std::logic_error);

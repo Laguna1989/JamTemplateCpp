@@ -1,12 +1,11 @@
 ﻿#include "GameState.hpp"
-#include "Game.hpp"
 #include "GameObject.hpp"
+#include "MockGame.hpp"
 #include "MockObject.hpp"
 #include "MockTween.hpp"
 #include "gmock/gmock.h"
 #include "gtest/gtest.h"
 
-using jt::Game;
 using jt::GameObject;
 using jt::GameState;
 using ::testing::_;
@@ -36,12 +35,13 @@ TEST(GameStateInitTest, CreateWithoutGameInstance)
 
 class GameStateTest : public ::testing::Test {
 public:
-    std::shared_ptr<Game> g;
+    std::shared_ptr<jt::GameInterface> g;
     GameStateImpl s;
     void SetUp() override
     {
-        g = std::make_shared<Game>(1, 1, 1.0f, "");
         EXPECT_THROW(s.getGame(), std::exception);
+
+        g = std::make_shared<MockGame>();
         s.setGameInstance(g);
         EXPECT_NO_THROW(s.getGame());
     }
