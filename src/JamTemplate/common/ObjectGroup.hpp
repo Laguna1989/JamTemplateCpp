@@ -2,6 +2,7 @@
 #define GUARD_JAMTEMPLATE_OBJECTGROUP_HPP_INCLUDEGUARD
 
 #include "GameObject.hpp"
+#include <algorithm>
 #include <memory>
 #include <vector>
 
