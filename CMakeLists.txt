@@ -169,7 +169,7 @@ if (ENABLE_UNITTESTS)
 	
 	file(GLOB_RECURSE UNITTESTFILES src/UnitTests/*)
 	if ( (NOT ENABLE_DISPLAY_TESTS) OR ENABLE_WEB)
-		list(REMOVE_ITEM UNITTESTFILES "${CMAKE_CURRENT_SOURCE_DIR}/src/UnitTests/GameTest.cpp")
+		list(REMOVE_ITEM UNITTESTFILES "${CMAKE_CURRENT_SOURCE_DIR}/src/UnitTests/GameTest.cpp" "${CMAKE_CURRENT_SOURCE_DIR}/src/UnitTests/InputManagerTest.cpp")
 	endif()
 	
 	if(ENABLE_WEB)
