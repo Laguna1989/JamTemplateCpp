@@ -8,7 +8,6 @@ set (PROJECTNAME "MyAwesomeGame")
 set (ENABLE_UNITTESTS OFF CACHE BOOL "enable unittests")
 set (ENABLE_STRESSTEST OFF CACHE BOOL "enable stresstest")
 set (ENABLE_WEB OFF CACHE BOOL "enable web build using SDL and em++")
-set (ENABLE_DISPLAY_TESTS ON CACHE BOOL "enable tests which require a display")
 
 #####################################################
 ## Other variables and compiler setup

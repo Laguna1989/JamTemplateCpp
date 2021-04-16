@@ -19,6 +19,6 @@ before_install:
   - unzip ext/tileson-master.zip  -d ext/
 
 script:
-  - cmake -DENABLE_UNITTESTS=ON  -DENABLE_DISPLAY_TESTS=OFF .
+  - cmake -DENABLE_UNITTESTS=ON  -DDISABLE_DISPLAY_TESTS=ON .
   - make UnitTests
   - ./UnitTests

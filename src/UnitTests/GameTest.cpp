@@ -6,7 +6,7 @@
 // TODO(Move Cam Tests to new file)
 using jt::Game;
 
-#if !defined(ENABLE_WEB) && !defined(ENABLE_DISPLAY_TESTS)
+#if !defined(ENABLE_WEB) && !defined(DISABLE_DISPLAY_TESTS)
 
 class GameTest : public ::testing::Test {
 public:
