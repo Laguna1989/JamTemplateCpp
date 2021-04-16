@@ -8,6 +8,7 @@
 #include <SFML/Graphics.hpp>
 #include <assert.h>
 #include <map>
+#include <memory>
 #include <string>
 #include <vector>
 
