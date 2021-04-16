@@ -1,7 +1,8 @@
 # JamTemplateCppSFML
+[![Build Status](https://travis-ci.com/Laguna1989/JamTemplateCpp.svg?branch=master)](https://travis-ci.com/github/Laguna1989/JamTemplateCpp)
 
 ## About
-This is my JamTemplate for C++. It will compile c++ code for native (Win, Linux) and web builds (webassembly).
+This is my JamTemplate for C++17. It will compile C++ code for native (Win, Linux) and web (webassembly) games .
 
 Some games created with this JamTemplate are
  * [Burning Glyphs](https://runvs.io/Games/burningglyphs) (Web, 7DFPS 2020)
