@@ -12,7 +12,9 @@ set (ENABLE_WEB OFF CACHE BOOL "enable web build using SDL and em++")
 #####################################################
 ## Other variables and compiler setup
 #####################################################
+set (CXX_STANDARD_REQUIRED ON)
 set (CMAKE_CXX_STANDARD 17)
+set (CXX_STANDARD 17)
 add_compile_definitions(DISABLE_CPP17_FILESYSTEM)
 if(ENABLE_WEB)
 	add_compile_definitions(MUSIC_OGG)

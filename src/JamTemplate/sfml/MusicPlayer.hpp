@@ -3,6 +3,7 @@
 
 #include "MusicPlayerInterface.hpp"
 #include <SFML/Audio.hpp>
+#include <memory>
 
 namespace jt {
 
