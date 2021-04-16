@@ -3,6 +3,7 @@ language: cpp
 matrix:
   include:
     - os: linux
+      dist: groovy
       addons:
         apt:
           sources:
