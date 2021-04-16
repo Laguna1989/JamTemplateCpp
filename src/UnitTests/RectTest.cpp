@@ -1,4 +1,4 @@
-﻿#include "rect.hpp"
+﻿#include "Rect.hpp"
 #include "gtest/gtest.h"
 
 TEST(RectEQ, Equal)

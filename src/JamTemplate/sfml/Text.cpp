@@ -14,7 +14,7 @@ Text::~Text()
 }
 
 void Text::loadFont(std::string const& fontFileName, unsigned int characterSize,
-    std::weak_ptr<jt::renderTarget> wptr /*unused*/)
+    std::weak_ptr<jt::renderTarget> /*wptr*/)
 {
     m_font = std::make_shared<sf::Font>();
     if (!m_font->loadFromFile(fontFileName)) {

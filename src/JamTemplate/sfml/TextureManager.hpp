@@ -63,7 +63,7 @@ public:
     static void addSelectiveColorReplacement(
         int idx, std::vector<std::pair<jt::Color, jt::Color>> replace)
     {
-        if (m_selectiveColorReplace.size() <= idx) {
+        if (static_cast<std::int32_t>(m_selectiveColorReplace.size()) <= idx) {
             m_selectiveColorReplace.resize(idx + 1U);
         }
 
