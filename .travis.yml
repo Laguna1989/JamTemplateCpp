@@ -16,7 +16,7 @@ matrix:
 before_install:
   - eval "${MATRIX_EVAL}"
   - sudo apt-get install -y libsfml-dev
-  - cd ext && unzip tileson-master.zip
+  - unzip ext/tileson-master.zip  -d ext/
 
 script:
   - cmake -DENABLE_UNITTESTS=ON .
