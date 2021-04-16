@@ -8,6 +8,7 @@ set (PROJECTNAME "MyAwesomeGame")
 set (ENABLE_UNITTESTS OFF CACHE BOOL "enable unittests")
 set (ENABLE_STRESSTEST OFF CACHE BOOL "enable stresstest")
 set (ENABLE_WEB OFF CACHE BOOL "enable web build using SDL and em++")
+set (ENABLE_DISPLAY_TESTS ON CACHE BOOL "enable unittests that require a display")
 
 #####################################################
 ## Other variables and compiler setup
@@ -167,6 +168,9 @@ endif()
 if (ENABLE_UNITTESTS)
 	
 	file(GLOB_RECURSE UNITTESTFILES src/UnitTests/*)
+	if ( (NOT ENABLE_DISPLAY_TESTS) OR ENABLE_WEB)
+		list(REMOVE_ITEM UNITTESTFILES "${CMAKE_CURRENT_SOURCE_DIR}/src/UnitTests/GameTest.cpp")
+	endif()
 	
 	if(ENABLE_WEB)
 		set(CMAKE_EXECUTABLE_SUFFIX ".html")
