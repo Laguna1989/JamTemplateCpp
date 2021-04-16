@@ -40,6 +40,7 @@ it freely, subject to the following restrictions:
 #include "Rect.hpp"
 #include "Vector.hpp"
 #include <SFML/Graphics.hpp>
+#include <memory>
 
 namespace jt {
 class Collision {
