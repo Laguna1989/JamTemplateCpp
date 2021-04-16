@@ -72,8 +72,8 @@ void Tilemap::doDraw(std::shared_ptr<jt::renderTarget> const sptr) const
         }
 
         for (auto& [pos, tile] : layer.getTileObjects()) {
-            auto const id = tile.getTile()->getId() - 1;
-            if (id < 0 || id >= m_tileSprites.size()) {
+            auto const id = tile.getTile()->getId() - 1U;
+            if (id < 0U || id >= m_tileSprites.size()) {
                 std::cout << "Invalid tile id in map\n";
                 throw std::invalid_argument { "Invalid tile id in map" };
             }
