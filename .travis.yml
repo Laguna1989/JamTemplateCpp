@@ -1,6 +1,21 @@
 language: cpp
-compiler: g++
-dist: bionic
+
+matrix:
+  include:
+    - os: linux
+      addons:
+        apt:
+          sources:
+            - sourceline: 'ppa:ubuntu-toolchain-r/test'
+          packages:
+            - g++-8
+      env:
+        - MATRIX_EVAL="CC=gcc-9 CXX=g++-9"
+
 before_install:
-    - sudo apt-get install -y libsfml-dev
-script: cmake -DENABLE_UNITTESTS=ON && make UnitTests && ./UnitTests
+  - eval "${MATRIX_EVAL}"
+  - sudo apt-get install -y libsfml-dev
+
+script:
+  - cmake .
+  - make UnitTests
