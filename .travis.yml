@@ -17,5 +17,6 @@ before_install:
   - sudo apt-get install -y libsfml-dev
 
 script:
-  - cmake .
+  - cmake -DENABLE_UNITTESTS=ON .
   - make UnitTests
+  - ./UnitTests
