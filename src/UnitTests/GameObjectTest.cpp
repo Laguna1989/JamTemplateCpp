@@ -35,4 +35,15 @@ TEST(GameObjectTest, GameObjectAddTwice)
     EXPECT_THROW(go.setGameInstance(g), std::logic_error);
 }
 
+TEST(GameObjectTest, UpdateLogic)
+{
+    GameObject go {};
+    go.update(0.5f);
+    EXPECT_EQ(go.getAge(), 0.5f);
+
+    EXPECT_TRUE(go.isAlive());
+    go.kill();
+    EXPECT_FALSE(go.isAlive());
+}
+
 #endif

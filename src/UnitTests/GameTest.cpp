@@ -39,15 +39,6 @@ public:
 
 TEST_F(GameTest, InitialValues) { EXPECT_EQ(g->getRenderTarget(), nullptr); }
 
-TEST_F(GameTest, UpdateLogic)
-{
-    g->update(0.5f);
-    EXPECT_EQ(g->getAge(), 0.5f);
-
-    EXPECT_TRUE(g->isAlive());
-    g->kill();
-    EXPECT_FALSE(g->isAlive());
-}
 /*
 TEST_F(GameTest, SetCamPosition)
 {
