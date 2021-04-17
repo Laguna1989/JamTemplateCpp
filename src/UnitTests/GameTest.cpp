@@ -4,7 +4,6 @@
 #include "gmock/gmock.h"
 #include "gtest/gtest.h"
 
-// TODO(Move Cam Tests to new file)
 using jt::Game;
 
 #if !defined(ENABLE_WEB)
@@ -40,50 +39,6 @@ public:
 };
 
 TEST_F(GameTest, InitialValues) { EXPECT_EQ(g->getRenderTarget(), nullptr); }
-
-/*
-TEST_F(GameTest, SetCamPosition)
-{
-    EXPECT_EQ(g->getCamOffset().x(), 0);
-    EXPECT_EQ(g->getCamOffset().y(), 0);
-
-    auto const value = 3.0f;
-    jt::Vector2 const v = { value, value };
-    g->setCamOffset(v);
-    EXPECT_NEAR(g->getCamOffset().x(), value, 0.001);
-    EXPECT_NEAR(g->getCamOffset().y(), value, 0.001);
-
-    g->setCamOffset(jt::Vector2 { 0.0f, 0.0f });
-    EXPECT_NEAR(g->getCamOffset().x(), 0.0f, 0.001);
-    EXPECT_NEAR(g->getCamOffset().y(), 0.0f, 0.001);
-
-    g->setCamOffset(v);
-    EXPECT_NEAR(g->getCamOffset().x(), value, 0.001);
-    EXPECT_NEAR(g->getCamOffset().y(), value, 0.001);
-}
-
-TEST_F(GameTest, MoveCam)
-{
-    EXPECT_EQ(g->getCamOffset().x(), 0);
-    EXPECT_EQ(g->getCamOffset().y(), 0);
-
-    g->move(jt::Vector2 { 0.0f, 0.0f });
-
-    auto const value = 3.0f;
-    jt::Vector2 const v = { value, value };
-    g->move(v);
-    EXPECT_NEAR(g->getCamOffset().x(), value, 0.001);
-    EXPECT_NEAR(g->getCamOffset().y(), value, 0.001);
-
-    g->move(v);
-    EXPECT_NEAR(g->getCamOffset().x(), 2.0f * value, 0.001);
-    EXPECT_NEAR(g->getCamOffset().y(), 2.0f * value, 0.001);
-
-    // move by zero does not move
-    g->move(jt::Vector2 { 0.0f, 0.0f });
-    EXPECT_NEAR(g->getCamOffset().x(), 2.0f * value, 0.001);
-    EXPECT_NEAR(g->getCamOffset().y(), 2.0f * value, 0.001);
-}*/
 
 TEST_F(GameTest, DrawWithNoState) { EXPECT_NO_THROW(g->draw()); }
 
@@ -146,38 +101,6 @@ TEST_F(GameTest, SetRenderTargetInvalid)
 {
     EXPECT_THROW(g->setRenderTarget(nullptr), std::invalid_argument);
 }
-/*
-TEST_F(GameTest, Shake)
-{
-    // mock state to avoid early return
-    auto ms = std::make_shared<MockState>();
-    EXPECT_CALL(*ms, doInternalCreate());
-    g->switchState(ms);
-
-    EXPECT_NO_THROW(g->shake(0.5f, 1.0f));
-    // update and stay inside shake
-    EXPECT_CALL(*ms, doInternalUpdate(0.3f));
-    EXPECT_NO_THROW(g->update(0.3f));
-    // update and leave shake
-    EXPECT_CALL(*ms, doInternalUpdate(0.6f));
-    EXPECT_NO_THROW(g->update(0.6f));
-}
-
-TEST_F(GameTest, SwitchStateWhileInShake)
-{
-    // mock state to avoid early return
-    auto ms1 = std::make_shared<NiceMock<MockState>>();
-    auto ms2 = std::make_shared<NiceMock<MockState>>();
-    // EXPECT_CALL(*ms1, doInternalCreate());
-    g->switchState(ms1);
-
-    // EXPECT_NO_THROW(g->shake(0.5f, 1.0f));
-    g->update(0.1f);
-    // update and stay inside shake
-
-    g->update(0.1f);
-}
-*/
 
 TEST_F(GameTest, GetCurrentStateNullptr) { EXPECT_EQ(g->getCurrentSate(), nullptr); }
 
@@ -203,14 +126,6 @@ TEST_F(GameTest, RunWithState)
     EXPECT_NO_THROW(g->run());
 }
 
-/* TEST_F(GameTest, RunWithStateAndShake)
-{
-    g->switchState(std::make_shared<NiceMock<MockState>>());
-    EXPECT_NO_THROW(g->run());
-    g->shake(0.5f, 1.0f);
-    EXPECT_NO_THROW(g->run());
-}*/
-
 TEST_F(GameTest, RunWithTwoStates)
 {
     g->switchState(std::make_shared<NiceMock<MockState>>());
@@ -220,4 +135,7 @@ TEST_F(GameTest, RunWithTwoStates)
     EXPECT_NO_THROW(g->run());
     EXPECT_NO_THROW(g->run());
 }
+
+// TODO Add a test that verifies that cam.reset is called on swithState();
+
 #endif

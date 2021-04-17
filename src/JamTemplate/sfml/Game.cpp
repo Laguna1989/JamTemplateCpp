@@ -32,8 +32,6 @@ Game::Game(std::shared_ptr<RenderWindowInterface> window, float zoom,
 void Game::setupRenderTarget()
 {
     m_renderTarget = std::make_shared<jt::renderTarget>();
-    // TODO add to RenderWindowInterface
-    // m_renderWindow->setVerticalSyncEnabled(true);
     auto const windowSize = m_window->getSize();
     auto const zoom = getCamera()->getZoom();
     unsigned int const scaledWidth = static_cast<unsigned int>(windowSize.x() / zoom);
@@ -70,8 +68,9 @@ std::shared_ptr<jt::renderTarget> Game::getRenderTarget() const { return m_rende
 void Game::setView(std::shared_ptr<sf::View> view)
 {
     m_view = view;
-    if (m_renderTarget != nullptr)
+    if (m_renderTarget != nullptr) {
         m_renderTarget->setView(*m_view);
+    }
 }
 std::shared_ptr<sf::View> Game::getView() { return m_view; }
 

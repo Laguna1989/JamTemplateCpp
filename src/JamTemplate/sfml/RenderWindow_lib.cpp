@@ -10,6 +10,7 @@ RenderWindow::RenderWindow(unsigned int width, unsigned int height, std::string 
 {
     m_window
         = std::make_shared<sf::RenderWindow>(sf::VideoMode(width, height), title, sf::Style::Close);
+    m_window->setVerticalSyncEnabled(true);
 }
 
 bool RenderWindow::isOpen() const { return m_window->isOpen(); }

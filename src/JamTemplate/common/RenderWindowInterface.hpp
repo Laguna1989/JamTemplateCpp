@@ -22,9 +22,6 @@ public:
 
     virtual jt::Vector2 getMousePosition() = 0;
     virtual jt::Vector2 getMousePositionScreen(float zoom) = 0;
-
-    // TODO
-    // virtual jt::Vector2 mapPixelToCoords(jt::Vector2 const& point) = 0;
 };
 } // namespace jt
 #endif
