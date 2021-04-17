@@ -25,6 +25,7 @@ public:
     void startGame(
         std::shared_ptr<GameState> InitialState, GameLoopFunctionPtr gameloop_function) override;
 
+    void setupRenderTarget() override;
     void setRenderTarget(std::shared_ptr<jt::renderTarget> rt) override;
     std::shared_ptr<jt::renderTarget> getRenderTarget() const override;
 

@@ -24,20 +24,23 @@ namespace jt {
 Game::Game(std::shared_ptr<RenderWindowInterface> window, float zoom,
     std::shared_ptr<MusicPlayerInterface> musicPlayer)
     : m_window { window }
-
-    , m_renderTarget { std::make_shared<jt::renderTarget>() }
     , m_musicPlayer { musicPlayer }
 {
     m_camera->setZoom(zoom);
+}
+
+void Game::setupRenderTarget()
+{
+    m_renderTarget = std::make_shared<jt::renderTarget>();
     // TODO add to RenderWindowInterface
     // m_renderWindow->setVerticalSyncEnabled(true);
     auto const windowSize = m_window->getSize();
+    auto const zoom = getCamera()->getZoom();
     unsigned int const scaledWidth = static_cast<unsigned int>(windowSize.x() / zoom);
     unsigned int const scaledHeight = static_cast<unsigned int>(windowSize.y() / zoom);
 
     m_renderTarget->create(scaledWidth, scaledHeight);
     m_renderTarget->setSmooth(false);
-
     m_view = std::make_shared<sf::View>(jt::Rect(0, 0, (float)scaledWidth, (float)scaledHeight));
     m_view->setViewport(jt::Rect(0, 0, 1, 1));
 }
@@ -72,6 +75,9 @@ std::shared_ptr<sf::View> Game::getView() { return m_view; }
 
 void Game::doUpdate(float const elapsed)
 {
+    if (m_renderTarget == nullptr) {
+        return;
+    }
     if (m_state == nullptr) {
         return;
     }
@@ -100,6 +106,10 @@ void Game::doUpdate(float const elapsed)
 
 void Game::doDraw() const
 {
+    if (!m_renderTarget) {
+        return;
+    }
+
     // clear the old image
     m_renderTarget->clear(m_backgroundColor);
 
@@ -137,6 +147,9 @@ void Game::updateShake(float elapsed)
 
 void jt::Game::applyCamShakeToView()
 {
+    if (m_renderTarget == nullptr) {
+        return;
+    }
     auto const newShakeOffset = getCamera()->getShakeOffset();
     auto v = getView();
     v->move(newShakeOffset.x(), newShakeOffset.y());

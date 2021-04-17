@@ -20,7 +20,7 @@ int main()
 
     game = std::make_shared<jt::Game>(
         std::make_shared<jt::RenderWindow>(800, 600, "Stresstest"), 2.0f, nullptr);
-
+    game->setupRenderTarget();
     game->startGame(std::make_shared<StateSelect>(), gameloop);
 
     return 0;

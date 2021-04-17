@@ -21,6 +21,7 @@ public:
     virtual std::shared_ptr<CamInterface> getCamera() = 0;
     virtual std::shared_ptr<CamInterface> getCamera() const = 0;
 
+    virtual void setupRenderTarget() = 0;
     virtual void setRenderTarget(std::shared_ptr<jt::renderTarget> rt) = 0;
     virtual std::shared_ptr<jt::renderTarget> getRenderTarget() const = 0;
 

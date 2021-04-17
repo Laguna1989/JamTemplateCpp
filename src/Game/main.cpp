@@ -26,6 +26,7 @@ int main()
     game = std::make_shared<jt::Game>(std::make_shared<jt::RenderWindow>(GP::GetWindowSize().x(),
                                           GP::GetWindowSize().y(), GP::GameName()),
         GP::GetZoom(), std::make_shared<jt::MusicPlayer>());
+    game->setupRenderTarget();
 
     game->startGame(std::make_shared<StateMenu>(), gameloop);
 
