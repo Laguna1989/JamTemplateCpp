@@ -22,6 +22,8 @@ public:
 
     void doDraw(std::shared_ptr<jt::renderTarget> const sptr) const;
 
+    void checkIdBounds(const tson::TileObject& tile) const;
+
     void doDrawFlash(std::shared_ptr<jt::renderTarget> const sptr) const;
     void doDrawShadow(std::shared_ptr<jt::renderTarget> const sptr) const;
 

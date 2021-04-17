@@ -72,11 +72,7 @@ void Tilemap::doDraw(std::shared_ptr<jt::renderTarget> const sptr) const
         }
 
         for (auto& [pos, tile] : layer.getTileObjects()) {
-            auto const id = tile.getTile()->getId() - 1U;
-            if (id < 0U || id >= m_tileSprites.size()) {
-                std::cout << "Invalid tile id in map\n";
-                throw std::invalid_argument { "Invalid tile id in map" };
-            }
+            checkIdBounds(tile);
 
             auto const tilePos = Conversion::vec(tile.getPosition());
             // optimization: don't draw tiles outside the game window
@@ -101,6 +97,7 @@ void Tilemap::doDraw(std::shared_ptr<jt::renderTarget> const sptr) const
                 }
             }
             auto const pixelPosForTile = tilePos + posOffset;
+            auto const id = tile.getTile()->getId() - 1U;
             m_tileSprites.at(id).setPosition(pixelPosForTile);
             m_tileSprites.at(id).update(0.0f);
             m_tileSprites.at(id).draw(sptr);
@@ -123,6 +120,15 @@ void Tilemap::doDraw(std::shared_ptr<jt::renderTarget> const sptr) const
     //         sptr->draw(shape);
     //     }
     // }
+}
+
+void Tilemap::checkIdBounds(const tson::TileObject& tile) const
+{
+    auto const rawId = tile.getTile()->getId();
+    if (rawId == 1 || rawId + 1 >= m_tileSprites.size()) {
+        std::cout << "Invalid tile id in map\n";
+        throw std::invalid_argument { "Invalid tile id in map" };
+    }
 }
 
 void Tilemap::doDrawFlash(std::shared_ptr<jt::renderTarget> const /*sptr*/) const { }
