@@ -1,6 +1,6 @@
 ﻿#include "Game.hpp"
 #include "Random.hpp"
-#include "RenderWindow_lib.hpp"
+#include "RenderWindow.hpp"
 #include "StateSelect.hpp"
 #include <iostream>
 #include <memory>

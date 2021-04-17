@@ -1,6 +1,6 @@
 ﻿#include "Game.hpp"
 #include "GameState.hpp"
-#include "RenderWindow_lib.hpp"
+#include "RenderWindow.hpp"
 #include "gmock/gmock.h"
 #include "gtest/gtest.h"
 

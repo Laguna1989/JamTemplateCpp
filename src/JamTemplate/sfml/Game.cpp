@@ -5,7 +5,7 @@
 #include "InputManager.hpp"
 #include "Random.hpp"
 #include "Rect.hpp"
-#include "RenderWindow_lib.hpp"
+#include "RenderWindow.hpp"
 #include "Sprite.hpp"
 #include "Vector.hpp"
 #include <iostream>

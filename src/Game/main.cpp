@@ -3,7 +3,7 @@
 #include "GameProperties.hpp"
 #include "MusicPlayer.hpp"
 #include "Random.hpp"
-#include "RenderWindow_lib.hpp"
+#include "RenderWindow.hpp"
 #include "StateMenu.hpp"
 #include <iostream>
 

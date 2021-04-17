@@ -1,0 +1,6 @@
+﻿#ifndef GUARD_JAMTEMPLATE_RENDERWINDOW_GUARD_HPP
+#define GUARD_JAMTEMPLATE_RENDERWINDOW_GUARD_HPP
+
+#include "RenderWindow_lib.hpp"
+
+#endif
