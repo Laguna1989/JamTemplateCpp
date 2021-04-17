@@ -4,6 +4,8 @@
 
 namespace jt {
 
+std::weak_ptr<sf::View> RenderWindow::s_view;
+
 RenderWindow::RenderWindow(unsigned int width, unsigned int height, std::string const& title)
 {
     m_window
@@ -40,5 +42,18 @@ void RenderWindow::draw(std::shared_ptr<jt::Sprite> spr)
 }
 
 void RenderWindow::display() { m_window->display(); };
+
+jt::Vector2 RenderWindow::getMousePosition()
+{
+    if (s_view.expired()) {
+        return jt::Vector2 { 0, 0 };
+    }
+    auto view = s_view.lock();
+    return m_window->mapPixelToCoords(sf::Mouse::getPosition(*m_window), *view);
+}
+jt::Vector2 RenderWindow::getMousePositionScreen(float zoom)
+{
+    return m_window->mapPixelToCoords(sf::Mouse::getPosition(*m_window)) / zoom;
+}
 
 } // namespace jt

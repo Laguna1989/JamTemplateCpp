@@ -7,6 +7,7 @@
 
 namespace sf {
 class RenderWindow;
+class View;
 } // namespace sf
 
 // TODO test this implementation class with unit tests
@@ -23,6 +24,11 @@ public:
     virtual void draw(std::shared_ptr<jt::Sprite>) override;
 
     virtual void display() override;
+
+    virtual jt::Vector2 getMousePosition() override;
+    virtual jt::Vector2 getMousePositionScreen(float zoom) override;
+
+    static std::weak_ptr<sf::View> s_view;
 
 private:
     std::shared_ptr<sf::RenderWindow> m_window;

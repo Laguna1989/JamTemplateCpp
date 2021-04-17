@@ -16,6 +16,8 @@ public:
     MOCK_METHOD(jt::Vector2, getSize, (), (const, override));
     MOCK_METHOD(void, draw, (std::shared_ptr<jt::Sprite>), (override));
     MOCK_METHOD(void, display, (), (override));
+    MOCK_METHOD(jt::Vector2, getMousePosition, (), (override));
+    MOCK_METHOD(jt::Vector2, getMousePositionScreen, (float), (override));
 };
 
 class GameTest : public ::testing::Test {

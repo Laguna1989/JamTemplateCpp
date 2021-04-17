@@ -43,6 +43,8 @@ void Game::setupRenderTarget()
     m_renderTarget->setSmooth(false);
     m_view = std::make_shared<sf::View>(jt::Rect(0, 0, (float)scaledWidth, (float)scaledHeight));
     m_view->setViewport(jt::Rect(0, 0, 1, 1));
+
+    jt::RenderWindow::s_view = m_view;
 }
 
 std::shared_ptr<MusicPlayerInterface> Game::getMusicPlayer() { return m_musicPlayer; }
@@ -83,14 +85,9 @@ void Game::doUpdate(float const elapsed)
     }
     m_state->update(elapsed);
 
-    jt::Vector2 mpf { 0.0f, 0.0f };
-    jt::Vector2 mpfs { 0.0f, 0.0f };
-    /*jt::Vector2 mpf = getRenderWindow()->mapPixelToCoords(
-        sf::Mouse::getPosition(*getRenderWindow()), *getView());
+    jt::Vector2 mpf = m_window->getMousePosition();
 
-    jt::Vector2 mpfs
-        = getRenderWindow()->mapPixelToCoords(sf::Mouse::getPosition(*getRenderWindow()))
-        / getCamera()->getZoom();*/
+    jt::Vector2 mpfs = m_window->getMousePositionScreen(getCamera()->getZoom());
 
     InputManager::update(mpf.x(), mpf.y(), mpfs.x(), mpfs.y(), elapsed);
 
