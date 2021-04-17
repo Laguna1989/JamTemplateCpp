@@ -16,7 +16,7 @@ class StateMenu : public jt::GameState {
 public:
     StateMenu();
 
-    void setScore(int s) {};
+    void setScore(int /*s*/) {};
 
 private:
     std::shared_ptr<jt::Shape> m_background;
