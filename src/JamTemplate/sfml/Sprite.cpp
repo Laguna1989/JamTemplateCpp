@@ -3,6 +3,8 @@
 
 namespace jt {
 
+void Sprite::fromTexture(sf::Texture const& text) { m_sprite = sf::Sprite { text }; }
+
 void Sprite::loadSprite(std::string const& fileName)
 {
     m_sprite = sf::Sprite { TextureManager::get(fileName) };

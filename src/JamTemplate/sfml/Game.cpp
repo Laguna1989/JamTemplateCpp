@@ -5,23 +5,35 @@
 #include "InputManager.hpp"
 #include "Random.hpp"
 #include "Rect.hpp"
+#include "RenderWindow_lib.hpp"
+#include "Sprite.hpp"
 #include "Vector.hpp"
 #include <iostream>
 
+namespace {
+void horizontalFlip(std::shared_ptr<jt::Sprite> spr, float zoom, float window_size_y)
+{
+    spr->setScale(jt::Vector2 { zoom, -zoom });
+    spr->setPosition({ 0.0f, window_size_y });
+    spr->update(0.0f);
+}
+} // namespace
+
 namespace jt {
 
-Game::Game(unsigned int w, unsigned int h, float zoom, std::string const& title,
+Game::Game(std::shared_ptr<RenderWindowInterface> window, float zoom,
     std::shared_ptr<MusicPlayerInterface> musicPlayer)
-    : m_renderWindow { std::make_shared<sf::RenderWindow>(
-        sf::VideoMode(w, h), title, sf::Style::Close) }
+    : m_window { window }
+
     , m_renderTarget { std::make_shared<jt::renderTarget>() }
     , m_musicPlayer { musicPlayer }
 {
     m_camera->setZoom(zoom);
-    m_renderWindow->setVerticalSyncEnabled(true);
-
-    unsigned int const scaledWidth = static_cast<unsigned int>(w / zoom);
-    unsigned int const scaledHeight = static_cast<unsigned int>(h / zoom);
+    // TODO add to RenderWindowInterface
+    // m_renderWindow->setVerticalSyncEnabled(true);
+    auto const windowSize = m_window->getSize();
+    unsigned int const scaledWidth = static_cast<unsigned int>(windowSize.x() / zoom);
+    unsigned int const scaledHeight = static_cast<unsigned int>(windowSize.y() / zoom);
 
     m_renderTarget->create(scaledWidth, scaledHeight);
     m_renderTarget->setSmooth(false);
@@ -35,13 +47,8 @@ std::shared_ptr<MusicPlayerInterface> Game::getMusicPlayer() { return m_musicPla
 void Game::startGame(std::shared_ptr<GameState> InitialState, GameLoopFunctionPtr gameloop_function)
 {
     switchState(InitialState);
-    while (m_renderWindow->isOpen()) {
-        sf::Event event;
-        while (m_renderWindow->pollEvent(event)) {
-            if (event.type == sf::Event::Closed) {
-                m_renderWindow->close();
-            }
-        }
+    while (m_window->isOpen()) {
+        m_window->checkForClose();
         gameloop_function();
     }
 }
@@ -54,7 +61,6 @@ void Game::setRenderTarget(std::shared_ptr<jt::renderTarget> rt)
     m_renderTarget = rt;
 }
 std::shared_ptr<jt::renderTarget> Game::getRenderTarget() const { return m_renderTarget; }
-std::shared_ptr<sf::RenderWindow> Game::getRenderWindow() { return m_renderWindow; }
 
 void Game::setView(std::shared_ptr<sf::View> view)
 {
@@ -71,11 +77,15 @@ void Game::doUpdate(float const elapsed)
     }
     m_state->update(elapsed);
 
-    jt::Vector2 mpf = getRenderWindow()->mapPixelToCoords(
+    jt::Vector2 mpf { 0.0f, 0.0f };
+    jt::Vector2 mpfs { 0.0f, 0.0f };
+    /*jt::Vector2 mpf = getRenderWindow()->mapPixelToCoords(
         sf::Mouse::getPosition(*getRenderWindow()), *getView());
+
     jt::Vector2 mpfs
         = getRenderWindow()->mapPixelToCoords(sf::Mouse::getPosition(*getRenderWindow()))
-        / getCamera()->getZoom();
+        / getCamera()->getZoom();*/
+
     InputManager::update(mpf.x(), mpf.y(), mpfs.x(), mpfs.y(), elapsed);
 
     int const camOffsetix { static_cast<int>(
@@ -101,19 +111,20 @@ void Game::doDraw() const
 
     // convert renderTexture to sprite and draw that.
     const sf::Texture& texture = m_renderTarget->getTexture();
-    sf::Sprite spr(texture);
+
+    // sf::Sprite spr(texture);
+    std::shared_ptr<jt::Sprite> spr = std::make_shared<jt::Sprite>();
+    spr->fromTexture(texture);
+
     // Note: RenderTexture has a bug and is displayed upside down.
-    // This is corrected by the following two lines
-    auto const zoom = getCamera()->getZoom();
-    spr.setScale(jt::Vector2(zoom, -zoom));
-    spr.setPosition(0.0f, static_cast<float>(m_renderWindow->getSize().y));
+    horizontalFlip(spr, getCamera()->getZoom(), m_window->getSize().y());
 
     // draw the sprite
-    m_renderWindow->draw(spr);
+    m_window->draw(spr);
 
     // blit it to the screen
-    m_renderWindow->display();
-};
+    m_window->display();
+}
 
 void Game::updateShake(float elapsed)
 {

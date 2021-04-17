@@ -1,5 +1,6 @@
 ﻿#include "Game.hpp"
 #include "GameState.hpp"
+#include "RenderWindow_lib.hpp"
 #include "gmock/gmock.h"
 #include "gtest/gtest.h"
 
@@ -8,13 +9,32 @@ using jt::Game;
 
 #if !defined(ENABLE_WEB)
 
+class MockWindow : public ::jt::RenderWindowInterface {
+public:
+    MOCK_METHOD(bool, isOpen, (), (const, override));
+    MOCK_METHOD(void, checkForClose, (), (override));
+    MOCK_METHOD(jt::Vector2, getSize, (), (const, override));
+    MOCK_METHOD(void, draw, (std::shared_ptr<jt::Sprite>), (override));
+    MOCK_METHOD(void, display, (), (override));
+};
+
 class GameTest : public ::testing::Test {
 public:
     unsigned const windowSizeX { 100 };
     unsigned const windowSizeY { 200 };
-    float const zoom { 5.0f };
-    std::shared_ptr<Game> g;
-    void SetUp() override { g = std::make_shared<Game>(windowSizeX, windowSizeY, zoom, "test"); }
+    float const zoom { 1.0f };
+    std::shared_ptr<Game> g { nullptr };
+    std::shared_ptr<MockWindow> window { nullptr };
+
+    void SetUp() override
+    {
+        window = std::make_shared<::testing::NiceMock<MockWindow>>();
+        // getSize has to be called, so that the game knows how big the rendertarget will be.
+        EXPECT_CALL(*window, getSize())
+            .Times(::testing::AnyNumber())
+            .WillRepeatedly(::testing::Return(jt::Vector2 { 100.0f, 200.0f }));
+        g = std::make_shared<Game>(window, zoom);
+    }
 };
 
 TEST_F(GameTest, InitialValues) { EXPECT_NE(g->getRenderTarget(), nullptr); }
@@ -94,6 +114,8 @@ TEST_F(GameTest, CallsToActiveState)
     g->update(expected_update_time);
 
     EXPECT_CALL(*ms, doInternalDraw());
+    EXPECT_CALL(*window, draw(::testing::_));
+    EXPECT_CALL(*window, display());
     g->draw();
 }
 

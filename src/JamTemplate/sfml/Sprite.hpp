@@ -18,6 +18,8 @@ public:
 
     void loadSprite(std::string const& fileName, jt::Recti const& rect);
 
+    void fromTexture(sf::Texture const& text);
+
     void setPosition(jt::Vector2 const& pos) override;
 
     const jt::Vector2 getPosition() const override;
@@ -46,6 +48,9 @@ public:
     jt::Color getColorAtPixel(jt::Vector2u pixelPos) const;
 
     void cleanImage();
+
+    // DO NOT CALL THIS FROM GAME CODE!
+    sf::Sprite getSFSprite() { return m_sprite; }
 
 private:
     mutable sf::Sprite m_sprite;
