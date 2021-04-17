@@ -19,9 +19,13 @@ before_install:
   - eval "${MATRIX_EVAL}"
   - sudo apt-get install -y libsfml-dev
   - unzip ext/tileson-master.zip  -d ext/
-  - "/sbin/start-stop-daemon --start --quiet --pidfile /tmp/custom_xvfb_99.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :99 -ac -screen 0 800x600x32"
+  
+before_script:
+  - "export DISPLAY=:99.0"
+  - "sh -e /etc/init.d/xvfb start"
+  - sleep 3 # give xvfb some time to start
 
 script:
   - cmake -DENABLE_UNITTESTS=ON -DENABLE_DISPLAY_TESTS=OFF .
   - make UnitTests
-  - xvfb-run ./UnitTests
+  - ./UnitTests
