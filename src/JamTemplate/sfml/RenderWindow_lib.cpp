@@ -1,6 +1,6 @@
 ﻿#include "RenderWindow_lib.hpp"
 #include "Sprite.hpp"
-#include <sfml/Graphics.hpp>
+#include <SFML/Graphics.hpp>
 
 namespace jt {
 
