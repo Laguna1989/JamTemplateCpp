@@ -17,6 +17,7 @@ public:
     MOCK_METHOD(void, display, (), (override));
     MOCK_METHOD(jt::Vector2, getMousePosition, (), (override));
     MOCK_METHOD(jt::Vector2, getMousePositionScreen, (float), (override));
+    MOCK_METHOD(std::shared_ptr<jt::renderTarget>, createRenderTarget, (), (override));
 };
 
 class GameTest : public ::testing::Test {
