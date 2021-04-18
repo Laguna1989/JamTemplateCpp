@@ -13,6 +13,9 @@ RenderWindow::RenderWindow(unsigned int width, unsigned int height, std::string 
     m_window->setVerticalSyncEnabled(true);
 }
 
+// TODO
+std::shared_ptr<jt::renderTarget> RenderWindow::createRenderTarget() { return nullptr; }
+
 bool RenderWindow::isOpen() const { return m_window->isOpen(); }
 
 void RenderWindow::checkForClose()
@@ -42,7 +45,7 @@ void RenderWindow::draw(std::shared_ptr<jt::Sprite> spr)
     m_window->draw(spr->getSFSprite());
 }
 
-void RenderWindow::display() { m_window->display(); };
+void RenderWindow::display() { m_window->display(); }
 
 jt::Vector2 RenderWindow::getMousePosition()
 {
@@ -52,6 +55,7 @@ jt::Vector2 RenderWindow::getMousePosition()
     auto view = s_view.lock();
     return m_window->mapPixelToCoords(sf::Mouse::getPosition(*m_window), *view);
 }
+
 jt::Vector2 RenderWindow::getMousePositionScreen(float zoom)
 {
     return m_window->mapPixelToCoords(sf::Mouse::getPosition(*m_window)) / zoom;

@@ -31,6 +31,7 @@ Game::Game(std::shared_ptr<RenderWindowInterface> window, float zoom,
 
 void Game::setupRenderTarget()
 {
+    // TODO move to RenderWindow.createRenderTarget()
     m_renderTarget = std::make_shared<jt::renderTarget>();
     auto const windowSize = m_window->getSize();
     auto const zoom = getCamera()->getZoom();

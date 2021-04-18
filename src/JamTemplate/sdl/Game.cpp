@@ -14,33 +14,22 @@
 
 namespace jt {
 
-Game::Game(unsigned int width, unsigned int height, float zoom, std::string const& title,
+Game::Game(std::shared_ptr<RenderWindowInterface> window, float zoom,
     std::shared_ptr<MusicPlayerInterface> musicPlayer)
     : m_musicPlayer { musicPlayer }
 {
     m_camera->setZoom(zoom);
-    m_fullsize = jt::Vector2 { static_cast<float>(width), static_cast<float>(height) };
+    auto const width = window->getSize().x();
+    auto const height = window->getSize().y();
 
     unsigned int scaledWidth = static_cast<unsigned int>(width / zoom);
     unsigned int scaledHeight = static_cast<unsigned int>(height / zoom);
     m_srcRect = jt::Recti { 0, 0, static_cast<int>(scaledWidth), static_cast<int>(scaledHeight) };
     m_destRect = jt::Recti { 0, 0, static_cast<int>(width), static_cast<int>(height) };
 
-    m_window = std::shared_ptr<SDL_Window>(SDL_CreateWindow(title.c_str(), SDL_WINDOWPOS_CENTERED,
-                                               SDL_WINDOWPOS_CENTERED, width, height, 0),
-        [](SDL_Window* w) { SDL_DestroyWindow(w); });
-    if (!m_window) {
-        throw std::logic_error { "Failed to create window." };
-    }
+    m_window = window;
 
-    m_renderTarget
-        = std::shared_ptr<SDL_Renderer>(SDL_CreateRenderer(m_window.get(), -1,
-                                            SDL_RENDERER_ACCELERATED | SDL_RENDERER_TARGETTEXTURE),
-            [](SDL_Renderer* r) { SDL_DestroyRenderer(r); });
-    if (!m_renderTarget) {
-        throw std::logic_error { "failed to create renderer." };
-    }
-    SDL_SetRenderDrawBlendMode(m_renderTarget.get(), SDL_BLENDMODE_BLEND);
+    m_renderTarget = m_window->createRenderTarget();
     TTF_Init();
     TextureManager::setRenderer(m_renderTarget);
 
@@ -49,6 +38,8 @@ Game::Game(unsigned int width, unsigned int height, float zoom, std::string cons
     Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 1024);
     Mix_Init(MIX_INIT_OGG);
 }
+
+void Game::setupRenderTarget() { }
 
 void Game::startGame(std::shared_ptr<GameState> InitialState, GameLoopFunctionPtr gameloop_function)
 {
@@ -68,12 +59,9 @@ std::shared_ptr<jt::renderTarget> Game::getRenderTarget() const { return m_rende
 
 void Game::doUpdate(float const elapsed)
 {
-    SDL_PumpEvents();
-    int mxi { 0 };
-    int myi { 0 };
-    auto const mouseState = SDL_GetMouseState(&mxi, &myi);
-    float const x = mxi / getCamera()->getZoom();
-    float const y = myi / getCamera()->getZoom();
+    auto const mousePosition = m_window->getMousePosition();
+    float const x = mousePosition.x() / getCamera()->getZoom();
+    float const y = mousePosition.y() / getCamera()->getZoom();
     jt::InputManager::update(
         y + getCamera()->getCamOffset().x(), +getCamera()->getCamOffset().y(), x, y, elapsed);
     m_state->update(elapsed);
