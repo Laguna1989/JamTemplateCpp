@@ -13,8 +13,11 @@ RenderWindow::RenderWindow(unsigned int width, unsigned int height, std::string 
     m_window->setVerticalSyncEnabled(true);
 }
 
-// TODO
-std::shared_ptr<jt::renderTarget> RenderWindow::createRenderTarget() { return nullptr; }
+std::shared_ptr<jt::renderTarget> RenderWindow::createRenderTarget()
+{
+    auto window = std::make_shared<jt::renderTarget>();
+    return window;
+}
 
 bool RenderWindow::isOpen() const { return m_window->isOpen(); }
 

@@ -31,8 +31,8 @@ Game::Game(std::shared_ptr<RenderWindowInterface> window, float zoom,
 
 void Game::setupRenderTarget()
 {
-    // TODO move to RenderWindow.createRenderTarget()
-    m_renderTarget = std::make_shared<jt::renderTarget>();
+    m_renderTarget = m_window->createRenderTarget();
+
     auto const windowSize = m_window->getSize();
     auto const zoom = getCamera()->getZoom();
     unsigned int const scaledWidth = static_cast<unsigned int>(windowSize.x() / zoom);
@@ -40,6 +40,7 @@ void Game::setupRenderTarget()
 
     m_renderTarget->create(scaledWidth, scaledHeight);
     m_renderTarget->setSmooth(false);
+
     m_view = std::make_shared<sf::View>(jt::Rect(0, 0, (float)scaledWidth, (float)scaledHeight));
     m_view->setViewport(jt::Rect(0, 0, 1, 1));
 
