@@ -10,7 +10,6 @@ class RenderWindow;
 class View;
 } // namespace sf
 
-// TODO test this implementation class with unit tests
 namespace jt {
 class RenderWindow : public RenderWindowInterface {
 public:
