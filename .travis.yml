@@ -17,8 +17,10 @@ before_install:
   - eval "${MATRIX_EVAL}"
   - sudo apt-get install -y libsfml-dev
   - unzip ext/tileson-master.zip  -d ext/
-
+  
 script:
-  - cmake -DENABLE_UNITTESTS=ON -DENABLE_DISPLAY_TESTS=OFF .
+  - cmake -DENABLE_UNITTESTS=ON -DENABLE_STRESSTEST=ON -DENABLE_DISPLAY_TESTS=OFF .
+  - make MyAwesomeGame
+  - make StressTest
   - make UnitTests
   - ./UnitTests

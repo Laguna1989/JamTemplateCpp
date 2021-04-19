@@ -3,6 +3,7 @@
 #include "GameProperties.hpp"
 #include "MusicPlayer.hpp"
 #include "Random.hpp"
+#include "RenderWindow.hpp"
 #include "StateMenu.hpp"
 #include <iostream>
 
@@ -22,9 +23,10 @@ int main()
 
     jt::Random::useTimeAsRandomSeed();
 
-    game = std::make_shared<jt::Game>(static_cast<unsigned int>(GP::GetWindowSize().x()),
-        static_cast<unsigned int>(GP::GetWindowSize().y()), GP::GetZoom(), GP::GameName(),
-        std::make_shared<jt::MusicPlayer>());
+    game = std::make_shared<jt::Game>(std::make_shared<jt::RenderWindow>(GP::GetWindowSize().x(),
+                                          GP::GetWindowSize().y(), GP::GameName()),
+        GP::GetZoom(), std::make_shared<jt::MusicPlayer>());
+    game->setupRenderTarget();
 
     game->startGame(std::make_shared<StateMenu>(), gameloop);
 

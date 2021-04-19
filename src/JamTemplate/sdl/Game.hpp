@@ -3,6 +3,7 @@
 
 #include "GameBase.hpp"
 #include "Rect.hpp"
+#include "RenderWindowInterface.hpp"
 #include "Rendertarget.hpp"
 #include <chrono>
 #include <memory>
@@ -14,11 +15,13 @@ class Game final : public jt::GameBase {
 public:
     using Sptr = std::shared_ptr<Game>;
 
-    Game(unsigned int w, unsigned int h, float zoom, std::string const& title,
-        std::shared_ptr<MusicPlayerInterface> musicPlayer);
+    Game(std::shared_ptr<RenderWindowInterface> window, float zoom,
+        std::shared_ptr<MusicPlayerInterface> musicPlayer = nullptr);
 
     void setRenderTarget(std::shared_ptr<jt::renderTarget> rt) override;
     std::shared_ptr<jt::renderTarget> getRenderTarget() const override;
+
+    virtual void setupRenderTarget() override;
 
     void startGame(
         std::shared_ptr<GameState> InitialState, GameLoopFunctionPtr gameloop_function) override;
@@ -27,11 +30,10 @@ public:
 
 private:
     std::shared_ptr<jt::renderTarget> m_renderTarget { nullptr };
-    std::shared_ptr<SDL_Window> m_window;
+    std::shared_ptr<jt::RenderWindowInterface> m_window;
 
     jt::Recti m_srcRect;
     jt::Recti m_destRect;
-    jt::Vector2 m_fullsize;
 
     // override functions from GameBase
     virtual void doUpdate(float const elapsed) override;

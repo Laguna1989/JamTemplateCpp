@@ -46,7 +46,6 @@ void StateMenu::createMenuText()
 
 void StateMenu::createTextCredits()
 {
-    float half_width = GP::GetScreenSize().x() / 2;
     m_text_Credits = jt::dh::createText(getGame()->getRenderTarget(),
         "Created by " + GP::AuthorName() + " for " + GP::JamName() + "\n" + GP::JamDate(), 10U,
         GP::PaletteColor5());

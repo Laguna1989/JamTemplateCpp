@@ -72,11 +72,7 @@ void Tilemap::doDraw(std::shared_ptr<jt::renderTarget> const sptr) const
         }
 
         for (auto& [pos, tile] : layer.getTileObjects()) {
-            auto const id = tile.getTile()->getId() - 1U;
-            if (id < 0U || id >= m_tileSprites.size()) {
-                std::cout << "Invalid tile id in map\n";
-                throw std::invalid_argument { "Invalid tile id in map" };
-            }
+            checkIdBounds(tile);
 
             auto const tilePos = Conversion::vec(tile.getPosition());
             // optimization: don't draw tiles outside the game window
@@ -101,28 +97,21 @@ void Tilemap::doDraw(std::shared_ptr<jt::renderTarget> const sptr) const
                 }
             }
             auto const pixelPosForTile = tilePos + posOffset;
+            auto const id = tile.getTile()->getId() - 1U;
             m_tileSprites.at(id).setPosition(pixelPosForTile);
             m_tileSprites.at(id).update(0.0f);
             m_tileSprites.at(id).draw(sptr);
         }
     }
-    // TODO
-    // sf::RectangleShape shape(jt::Vector2(1.0f, 1.0f));
-    // for (auto& objLayer : m_objectGroups) {
-    //     for (auto& obj : objLayer.second) {
-    //         shape.setSize(obj.sizeDiagonal);
-    //         shape.setPosition(obj.position);
-    //         shape.setRotation(obj.rotation);
-    //         if (m_highlightObjectGroups) {
-    //             shape.setOutlineColor(jt::Random::getRandomColor());
-    //         } else {
-    //             shape.setOutlineColor(jt::colors::Transparent);
-    //         }
-    //         shape.setFillColor(jt::colors::Transparent);
-    //         shape.setOutlineThickness(2.0f);
-    //         sptr->draw(shape);
-    //     }
-    // }
+}
+
+void Tilemap::checkIdBounds(const tson::TileObject& tile) const
+{
+    auto const rawId = tile.getTile()->getId();
+    if (rawId == 1 || rawId + 1 >= m_tileSprites.size()) {
+        std::cout << "Invalid tile id in map\n";
+        throw std::invalid_argument { "Invalid tile id in map" };
+    }
 }
 
 void Tilemap::doDrawFlash(std::shared_ptr<jt::renderTarget> const /*sptr*/) const { }
