@@ -11,6 +11,43 @@ set (ENABLE_WEB OFF CACHE BOOL "enable web build using SDL and em++")
 set (ENABLE_DISPLAY_TESTS ON CACHE BOOL "enable unittests that require a display")
 
 #####################################################
+## Helper Functions
+#####################################################
+function (jt_use_assets TGT)
+	add_custom_command(TARGET ${TGT} PRE_BUILD
+		COMMAND ${CMAKE_COMMAND} -E copy_directory
+		${CMAKE_SOURCE_DIR}/assets ${CMAKE_CURRENT_BINARY_DIR}/assets)
+		
+	if(MSVC)
+		add_custom_command(TARGET ${TGT} PRE_BUILD
+			COMMAND ${CMAKE_COMMAND} -E copy_directory
+			${CMAKE_SOURCE_DIR}/assets ${CMAKE_CURRENT_BINARY_DIR}/Debug/assets)
+		add_custom_command(TARGET ${TGT} PRE_BUILD
+			COMMAND ${CMAKE_COMMAND} -E copy_directory
+			${CMAKE_SOURCE_DIR}/assets ${CMAKE_CURRENT_BINARY_DIR}/Release/assets)
+	endif()
+endfunction()
+
+function (jt_deploy_dlls DESTFOLDER)
+	message (STATUS "Deploy to ${DESTFOLDER}")
+	
+	file(MAKE_DIRECTORY ${DESTFOLDER})
+	if (WIN32)	
+		# copy dlls
+		configure_file(${CMAKE_SOURCE_DIR}/ext/SFML-2.5.1/bin/sfml-system-2.dll ${DESTFOLDER}/ COPYONLY)
+		configure_file(${CMAKE_SOURCE_DIR}/ext/SFML-2.5.1/bin/sfml-window-2.dll ${DESTFOLDER}/ COPYONLY)
+		configure_file(${CMAKE_SOURCE_DIR}/ext/SFML-2.5.1/bin/sfml-graphics-2.dll ${DESTFOLDER}/ COPYONLY)
+		configure_file(${CMAKE_SOURCE_DIR}/ext/SFML-2.5.1/bin/sfml-audio-2.dll ${DESTFOLDER}/ COPYONLY)
+		
+		configure_file(${CMAKE_SOURCE_DIR}/ext/SFML-2.5.1/bin/sfml-system-d-2.dll ${DESTFOLDER}/ COPYONLY)
+		configure_file(${CMAKE_SOURCE_DIR}/ext/SFML-2.5.1/bin/sfml-window-d-2.dll ${DESTFOLDER}/ COPYONLY)
+		configure_file(${CMAKE_SOURCE_DIR}/ext/SFML-2.5.1/bin/sfml-graphics-d-2.dll ${DESTFOLDER}/ COPYONLY)
+		configure_file(${CMAKE_SOURCE_DIR}/ext/SFML-2.5.1/bin/sfml-audio-d-2.dll ${DESTFOLDER}/ COPYONLY)
+	endif()
+endfunction()
+
+
+#####################################################
 ## Other variables and compiler setup
 #####################################################
 set (CXX_STANDARD_REQUIRED ON)
@@ -157,9 +194,7 @@ if (ENABLE_STRESSTEST)
 		set(CMAKE_EXECUTABLE_SUFFIX ".html")
 	endif()
 	target_link_libraries(StressTest JamTemplate)
-	add_custom_command(TARGET StressTest PRE_BUILD
-                   COMMAND ${CMAKE_COMMAND} -E copy_directory
-                       ${CMAKE_SOURCE_DIR}/assets/ ${CMAKE_CURRENT_BINARY_DIR}/assets)
+	jt_use_assets(StressTest)
 endif()
 
 #####################################################
@@ -217,9 +252,7 @@ if (ENABLE_UNITTESTS)
 	target_link_libraries(UnitTests gmock)
 	target_link_libraries(UnitTests JamTemplate)
 	
-	add_custom_command(TARGET UnitTests PRE_BUILD
-                   COMMAND ${CMAKE_COMMAND} -E copy_directory
-                       ${CMAKE_SOURCE_DIR}/assets/ ${CMAKE_CURRENT_BINARY_DIR}/assets)
+	jt_use_assets(UnitTests)
 	add_test( UnitTests UnitTests )
 endif()
 
@@ -234,26 +267,16 @@ endif()
 
 target_link_libraries(${PROJECTNAME} JamTemplate)
 
-add_custom_command(TARGET ${PROJECTNAME} PRE_BUILD
-	COMMAND ${CMAKE_COMMAND} -E copy_directory
-	${CMAKE_SOURCE_DIR}/assets ${CMAKE_CURRENT_BINARY_DIR}/assets)
+jt_use_assets(${PROJECTNAME})
 
 #####################################################
 ## copy sfml dlls and .clang-format around
 #####################################################
-if (WIN32 AND NOT ENABLE_WEB)
-    configure_file(${CMAKE_SOURCE_DIR}/ext/SFML-2.5.1/bin/sfml-system-2.dll ${CMAKE_BINARY_DIR}/ COPYONLY)
-    configure_file(${CMAKE_SOURCE_DIR}/ext/SFML-2.5.1/bin/sfml-window-2.dll ${CMAKE_BINARY_DIR}/ COPYONLY)
-    configure_file(${CMAKE_SOURCE_DIR}/ext/SFML-2.5.1/bin/sfml-graphics-2.dll ${CMAKE_BINARY_DIR}/ COPYONLY)
-	configure_file(${CMAKE_SOURCE_DIR}/ext/SFML-2.5.1/bin/sfml-audio-2.dll ${CMAKE_BINARY_DIR}/ COPYONLY)
-	
-	configure_file(${CMAKE_SOURCE_DIR}/ext/SFML-2.5.1/bin/sfml-system-d-2.dll ${CMAKE_BINARY_DIR}/ COPYONLY)
-    configure_file(${CMAKE_SOURCE_DIR}/ext/SFML-2.5.1/bin/sfml-window-d-2.dll ${CMAKE_BINARY_DIR}/ COPYONLY)
-    configure_file(${CMAKE_SOURCE_DIR}/ext/SFML-2.5.1/bin/sfml-graphics-d-2.dll ${CMAKE_BINARY_DIR}/ COPYONLY)
-	configure_file(${CMAKE_SOURCE_DIR}/ext/SFML-2.5.1/bin/sfml-audio-d-2.dll ${CMAKE_BINARY_DIR}/ COPYONLY)
+if (NOT ENABLE_WEB)
+	jt_deploy_dlls(${CMAKE_BINARY_DIR})
+	if(MSVC)
+		jt_deploy_dlls(${CMAKE_BINARY_DIR}/Debug)
+		jt_deploy_dlls(${CMAKE_BINARY_DIR}/Release)
+    endif()
 endif()
 configure_file(${CMAKE_SOURCE_DIR}/.clang-format ${CMAKE_BINARY_DIR}/ COPYONLY)
-
-#####################################################
-## copy assets around
-#####################################################
