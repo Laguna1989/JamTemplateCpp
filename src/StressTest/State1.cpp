@@ -1,4 +1,5 @@
 ﻿#include "State1.hpp"
+#include "GameInterface.hpp"
 #include "InputManager.hpp"
 #include "StateSelect.hpp"
 #include "Timer.hpp"

@@ -1,4 +1,5 @@
 ﻿#include "StateBox2d.hpp"
+#include "GameInterface.hpp"
 #include "InputManager.hpp"
 #include "StateSelect.hpp"
 #include "TweenRotation.hpp"

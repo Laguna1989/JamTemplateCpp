@@ -1,4 +1,5 @@
 ﻿#include "StateSelect.hpp"
+#include "GameInterface.hpp"
 #include "State1.hpp"
 #include "State2.hpp"
 #include "StateBox2d.hpp"

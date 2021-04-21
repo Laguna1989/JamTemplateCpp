@@ -1,5 +1,6 @@
 ﻿#include "StateTween.hpp"
 #include "DrawableHelpers.hpp"
+#include "GameInterface.hpp"
 #include "InputManager.hpp"
 #include "StateSelect.hpp"
 
