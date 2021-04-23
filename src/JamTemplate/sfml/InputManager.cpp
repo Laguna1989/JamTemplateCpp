@@ -50,46 +50,38 @@ void InputManager::update(float mx, float my, float mxs, float mys, float elapse
     m_mouseScreenY = mys;
 
     for (auto& kvp : m_pressed) {
-        if (sf::Keyboard::isKeyPressed(static_cast<sf::Keyboard::Key>(kvp.first))) {
-            if (m_pressed[kvp.first] == false)
-                m_justPressed[kvp.first] = true;
-            else
-                m_justPressed[kvp.first] = false;
+        auto const key = kvp.first;
+        auto const sfkey = static_cast<sf::Keyboard::Key>(key);
+        auto const keyValue = sf::Keyboard::isKeyPressed(sfkey);
+        if (keyValue) {
+            m_justPressed[key] = (m_pressed[key] == false);
+            m_justReleased[key] = false;
         } else {
-            if (m_pressed[kvp.first] == true)
-                m_justReleased[kvp.first] = true;
-            else
-                m_justReleased[kvp.first] = false;
+            m_justReleased[key] = (m_pressed[key] == true);
+            m_justPressed[key] = false;
         }
-        m_pressed[kvp.first]
-            = sf::Keyboard::isKeyPressed(static_cast<sf::Keyboard::Key>(kvp.first));
-        m_released[kvp.first]
-            = !sf::Keyboard::isKeyPressed(static_cast<sf::Keyboard::Key>(kvp.first));
+        m_pressed[key] = keyValue;
+        m_released[key] = !keyValue;
     }
 
-    // std::cout << m_pressed[jt::KeyCode::I] << " " << m_released[jt::KeyCode::I] <<" "
-    // << m_justPressed[jt::KeyCode::I]<< "\n";
-
     for (auto& kvp : m_mousePressed) {
-        if (sf::Mouse::isButtonPressed(static_cast<sf::Mouse::Button>(kvp.first))) {
-            if (m_mousePressed[kvp.first] == false)
-                m_mouseJustPressed[kvp.first] = true;
-            else
-                m_mouseJustPressed[kvp.first] = false;
+        auto const button = kvp.first;
+        auto const sfbutton = static_cast<sf::Mouse::Button>(button);
+        auto const buttonValue = sf::Mouse::isButtonPressed(sfbutton);
+        if (buttonValue) {
+            m_mouseJustPressed[button] = (m_mousePressed[kvp.first] == false);
+            m_mouseJustReleased[button] = false;
 
         } else {
-            if (m_mousePressed[kvp.first] == true)
-                m_mouseJustReleased[kvp.first] = true;
-            else
-                m_mouseJustReleased[kvp.first] = false;
+            m_mouseJustReleased[button] = (m_mousePressed[button] == true);
+            m_mouseJustPressed[button] = false;
         }
+
         m_mousePressed[kvp.first]
             = sf::Mouse::isButtonPressed(static_cast<sf::Mouse::Button>(kvp.first));
         m_mouseReleased[kvp.first]
             = !sf::Mouse::isButtonPressed(static_cast<sf::Mouse::Button>(kvp.first));
     }
-    // std::cout << "a " << m_lmb_pressed << " " << m_lmb_released << " " << m_lmb_justPressed << "
-    // " << m_lmb_justReleased << std::endl;
 }
 
 jt::Vector2 InputManager::getMousePositionWorld() { return jt::Vector2 { m_mouseX, m_mouseY }; }
