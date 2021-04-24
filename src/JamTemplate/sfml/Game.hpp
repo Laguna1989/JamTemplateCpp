@@ -20,6 +20,7 @@ public:
     using Sptr = std::shared_ptr<Game>;
 
     Game(std::shared_ptr<RenderWindowInterface> window, float zoom,
+        std::shared_ptr<InputManagerInterface> inputManager = nullptr,
         std::shared_ptr<MusicPlayerInterface> musicPlayer = nullptr);
 
     void startGame(
@@ -31,11 +32,14 @@ public:
 
     virtual std::shared_ptr<MusicPlayerInterface> getMusicPlayer() override;
 
+    virtual std::shared_ptr<InputManagerInterface> input() override;
+
 private:
     std::shared_ptr<jt::RenderWindowInterface> m_window { nullptr };
     // std::shared_ptr<sf::RenderWindow> m_renderWindow { nullptr };
     std::shared_ptr<jt::renderTarget> m_renderTarget { nullptr };
 
+    std::shared_ptr<InputManagerInterface> m_input { nullptr };
     std::shared_ptr<MusicPlayerInterface> m_musicPlayer { nullptr };
 
     std::shared_ptr<sf::View> m_view { nullptr };

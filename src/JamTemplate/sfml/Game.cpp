@@ -22,12 +22,15 @@ void horizontalFlip(std::shared_ptr<jt::Sprite> spr, float zoom, float window_si
 namespace jt {
 
 Game::Game(std::shared_ptr<RenderWindowInterface> window, float zoom,
-    std::shared_ptr<MusicPlayerInterface> musicPlayer)
+    std::shared_ptr<InputManagerInterface> input, std::shared_ptr<MusicPlayerInterface> musicPlayer)
     : m_window { window }
+    , m_input { input }
     , m_musicPlayer { musicPlayer }
 {
     m_camera->setZoom(zoom);
 }
+
+std::shared_ptr<InputManagerInterface> Game::input() { return m_input; }
 
 void Game::setupRenderTarget()
 {
@@ -90,7 +93,9 @@ void Game::doUpdate(float const elapsed)
 
     jt::Vector2 mpfs = m_window->getMousePositionScreen(getCamera()->getZoom());
 
-    InputManager::update(mpf.x(), mpf.y(), mpfs.x(), mpfs.y(), elapsed);
+    input()->mouse()->updateMousePosition(MousePosition { mpf.x(), mpf.y(), mpfs.x(), mpfs.y() });
+    input()->mouse()->updateButtons();
+    input()->keyboard()->updateKeys();
 
     int const camOffsetix { static_cast<int>(
         getCamera()->getCamOffset().x() + getView()->getSize().x / 2) };

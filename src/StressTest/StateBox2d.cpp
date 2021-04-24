@@ -31,8 +31,8 @@ void StateBox2d::doInternalUpdate(float const elapsed)
     m_bar1->update(elapsed);
     m_bar2->update(elapsed);
 
-    if (jt::InputManager::justPressed(jt::KeyCode::F1)
-        || jt::InputManager::justPressed(jt::KeyCode::Escape)) {
+    if (getGame()->input()->keyboard()->justPressed(jt::KeyCode::F1)
+        || getGame()->input()->keyboard()->justPressed(jt::KeyCode::Escape)) {
         getGame()->switchState(std::make_shared<StateSelect>());
     }
 

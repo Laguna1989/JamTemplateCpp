@@ -42,8 +42,8 @@ void State1::doInternalUpdate(float const /*elapsed*/)
         add(tw3);
     }
 
-    if (jt::InputManager::justPressed(jt::KeyCode::F1)
-        || jt::InputManager::justPressed(jt::KeyCode::Escape)) {
+    if (getGame()->input()->keyboard()->justPressed(jt::KeyCode::F1)
+        || getGame()->input()->keyboard()->justPressed(jt::KeyCode::Escape)) {
         getGame()->switchState(std::make_shared<StateSelect>());
     }
 }

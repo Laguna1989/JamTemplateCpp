@@ -1,8 +1,9 @@
 ﻿#include "GameBase.hpp"
 #include "Camera.hpp"
 #include "GameState.hpp"
-#include "InputManager.hpp"
+#include "InputManagerInterface.hpp"
 #include <exception>
+#include <iostream>
 #include <stdexcept>
 
 namespace jt {
@@ -79,7 +80,9 @@ void GameBase::doSwitchState()
     getCamera()->reset();
     m_state->setGameInstance(getPtr());
     m_state->create();
-    jt::InputManager::reset();
+    if (input()) {
+        input()->reset();
+    }
 }
 
 std::shared_ptr<CamInterface> GameBase::getCamera() { return m_camera; }

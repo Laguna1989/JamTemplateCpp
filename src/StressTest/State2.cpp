@@ -32,8 +32,8 @@ void State2::doInternalCreate()
 
 void State2::doInternalUpdate(float const elapsed)
 {
-    if (jt::InputManager::justPressed(jt::KeyCode::F1)
-        || jt::InputManager::justPressed(jt::KeyCode::Escape)) {
+    if (getGame()->input()->keyboard()->justPressed(jt::KeyCode::F1)
+        || getGame()->input()->keyboard()->justPressed(jt::KeyCode::Escape)) {
         getGame()->switchState(std::make_shared<StateSelect>());
     }
 
@@ -62,7 +62,7 @@ void State2::updateOneSwarmObject(const size_t& firstSwarmObjectIndex, jt::Vecto
     auto o1 = m_SwarmObjects->at(firstSwarmObjectIndex).lock();
     jt::Vector2 SummedUpDir { 0.0f, 0.0f };
 
-    auto const mousePos = jt::InputManager::getMousePositionWorld();
+    auto const mousePos = getGame()->input()->mouse()->getMousePositionWorld();
     auto dist = mousePos - o1->getPosition();
     jt::MathHelper::normalizeMe(dist);
 
