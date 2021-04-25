@@ -4,7 +4,6 @@
 #include "GameInterface.hpp"
 #include "GameProperties.hpp"
 #include "Hud.hpp"
-#include "InputManager.hpp"
 #include "Shape.hpp"
 #include "Sprite.hpp"
 #include "StateMenu.hpp"

@@ -22,19 +22,19 @@ void StateTileson::doInternalUpdate(float const elapsed)
 {
     auto const scrollspeed = 50.0f;
     m_tilemap->update(elapsed);
-    if (jt::InputManager::pressed(jt::KeyCode::D)) {
+    if (getGame()->input()->keyboard()->pressed(jt::KeyCode::D)) {
         getGame()->getCamera()->move(jt::Vector2 { scrollspeed * elapsed, 0.0f });
-    } else if (jt::InputManager::pressed(jt::KeyCode::A)) {
+    } else if (getGame()->input()->keyboard()->pressed(jt::KeyCode::A)) {
         getGame()->getCamera()->move(jt::Vector2 { -scrollspeed * elapsed, 0.0f });
     }
-    if (jt::InputManager::pressed(jt::KeyCode::W)) {
+    if (getGame()->input()->keyboard()->pressed(jt::KeyCode::W)) {
         getGame()->getCamera()->move(jt::Vector2 { 0.0f, -scrollspeed * elapsed });
-    } else if (jt::InputManager::pressed(jt::KeyCode::S)) {
+    } else if (getGame()->input()->keyboard()->pressed(jt::KeyCode::S)) {
         getGame()->getCamera()->move(jt::Vector2 { 0.0f, scrollspeed * elapsed });
     }
 
-    if (jt::InputManager::justPressed(jt::KeyCode::F1)
-        || jt::InputManager::justPressed(jt::KeyCode::Escape)) {
+    if (getGame()->input()->keyboard()->justPressed(jt::KeyCode::F1)
+        || getGame()->input()->keyboard()->justPressed(jt::KeyCode::Escape)) {
         getGame()->switchState(std::make_shared<StateSelect>());
     }
 }

@@ -1,4 +1,5 @@
 ﻿#include "GameState.hpp"
+#include "GameInterface.hpp"
 #include "TweenBase.hpp"
 #include <algorithm>
 #include <numeric>

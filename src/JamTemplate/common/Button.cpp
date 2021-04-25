@@ -35,7 +35,7 @@ void Button::addCallback(std::function<void(void)> cb) { m_callbacks.push_back(c
 void Button::clearCallbacks() { m_callbacks.clear(); }
 size_t Button::getCallbackCount() const { return m_callbacks.size(); }
 
-bool Button::IsMouseOver() { return isOver(InputManager::getMousePositionScreen()); }
+bool Button::IsMouseOver() { return isOver(getGame()->input()->mouse()->getMousePositionScreen()); }
 
 void Button::setVisible(bool v) { m_visible = v; }
 
@@ -67,14 +67,14 @@ void Button::doUpdate(float elapsed)
         m_drawable->update(elapsed);
     }
 
-    if (isOver(jt::InputManager::getMousePositionScreen())) {
-        if (jt::InputManager::pressed(jt::MouseButtonCode::MBLeft)) {
+    if (IsMouseOver()) {
+        if (getGame()->input()->mouse()->pressed(jt::MouseButtonCode::MBLeft)) {
             m_background->play("down");
         } else {
             m_background->play("over");
         }
 
-        if (jt::InputManager::justReleased(jt::MouseButtonCode::MBLeft)) {
+        if (getGame()->input()->mouse()->justReleased(jt::MouseButtonCode::MBLeft)) {
             if (m_visible) {
                 for (auto& cb : m_callbacks) {
                     cb();

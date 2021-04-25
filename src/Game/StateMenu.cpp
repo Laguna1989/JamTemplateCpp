@@ -13,6 +13,7 @@
 #include "TweenAlpha.hpp"
 #include "TweenPosition.hpp"
 #include "TweenScale.hpp"
+#include <algorithm>
 
 StateMenu::StateMenu() = default;
 
@@ -148,10 +149,9 @@ void StateMenu::checkForTransitionToStateGame()
 {
     auto const keysToTriggerTransition = { jt::KeyCode::Space, jt::KeyCode::Enter };
 
-    for (auto const k : keysToTriggerTransition) {
-        if (jt::InputManager::justPressed(k)) {
-            startTransitionToStateGame();
-        }
+    if (std::any_of(keysToTriggerTransition.begin(), keysToTriggerTransition.end(),
+            [this](auto const k) { return getGame()->input()->keyboard()->justPressed(k); })) {
+        startTransitionToStateGame();
     }
 }
 

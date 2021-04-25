@@ -1,6 +1,9 @@
 ﻿#include "main.hpp"
 #include "Game.hpp"
 #include "GameProperties.hpp"
+#include "InputManager.hpp"
+#include "KeyboardInput.hpp"
+#include "MouseInput.hpp"
 #include "MusicPlayer.hpp"
 #include "Random.hpp"
 #include "RenderWindow.hpp"
@@ -22,10 +25,14 @@ int main()
     hideConsoleInRelease();
 
     jt::Random::useTimeAsRandomSeed();
+    auto const mouse = std::make_shared<jt::MouseInput>();
+    auto const keyboard = std::make_shared<jt::KeyboardInput>();
+    auto input = std::make_shared<jt::InputManager>(mouse, keyboard);
+    // TODO Inputmanager nullptr in unit tests
 
     game = std::make_shared<jt::Game>(std::make_shared<jt::RenderWindow>(GP::GetWindowSize().x(),
                                           GP::GetWindowSize().y(), GP::GameName()),
-        GP::GetZoom(), std::make_shared<jt::MusicPlayer>());
+        GP::GetZoom(), input, std::make_shared<jt::MusicPlayer>());
     game->setupRenderTarget();
 
     game->startGame(std::make_shared<StateMenu>(), gameloop);
