@@ -24,6 +24,7 @@ int main()
     auto const mouse = std::make_shared<jt::MouseInput>();
     auto const keyboard = std::make_shared<jt::KeyboardInput>();
     auto input = std::make_shared<jt::InputManager>(mouse, keyboard);
+
     game = std::make_shared<jt::Game>(
         std::make_shared<jt::RenderWindow>(800, 600, "Stresstest"), 2.0f, input, nullptr);
     game->setupRenderTarget();
