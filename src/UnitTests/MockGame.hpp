@@ -6,6 +6,7 @@
 
 class MockGame : public jt::GameInterface {
 public:
+    MOCK_METHOD(std::shared_ptr<jt::InputManagerInterface>, input, (), (override));
     MOCK_METHOD(std::shared_ptr<jt::MusicPlayerInterface>, getMusicPlayer, (), (override));
 
     MOCK_METHOD(std::shared_ptr<jt::CamInterface>, getCamera, (), (override));

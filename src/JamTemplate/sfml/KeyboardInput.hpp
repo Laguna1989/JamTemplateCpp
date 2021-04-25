@@ -2,13 +2,16 @@
 #define GUARD_JAMTEMPLATE_KEYBOARDINPUT_HPP_INCLUDEGUARD
 
 #include "InputManagerInterface.hpp"
+#include "KeyboardInputLib.hpp"
+#include <functional>
 #include <map>
 
 namespace jt {
 
 class KeyboardInput : public KeyboardInputInterface {
 public:
-    KeyboardInput();
+    using KeyboardKeyCheckFunction = std::function<bool(jt::KeyCode)>;
+    KeyboardInput(KeyboardKeyCheckFunction checkFunc = [](auto k) { return libKeyValue(k); });
     virtual void updateKeys() override;
 
     virtual bool pressed(jt::KeyCode k) override;
@@ -20,6 +23,7 @@ public:
     virtual void reset() override;
 
 private:
+    KeyboardKeyCheckFunction m_checkFunc;
     std::map<jt::KeyCode, bool> m_pressed;
     std::map<jt::KeyCode, bool> m_released;
 

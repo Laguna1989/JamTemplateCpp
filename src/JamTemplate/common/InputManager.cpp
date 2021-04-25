@@ -1,5 +1,4 @@
-﻿
-#include "InputManager.hpp"
+﻿#include "InputManager.hpp"
 
 namespace jt {
 

@@ -1,40 +1,12 @@
 ﻿#include "MouseInput.hpp"
-#include <SFML/Window.hpp>
+#include "InputHelper.hpp"
 #include <cstdint>
 
 namespace jt {
 
-namespace {
-
-sf::Mouse::Button toLib(jt::MouseButtonCode key) { return static_cast<sf::Mouse::Button>(key); }
-
-bool libKeyValue(sf::Mouse::Button b) { return sf::Mouse::isButtonPressed(b); }
-
-template <typename CheckFuncArg, typename KeyTypeJT>
-void updateValues(std::map<KeyTypeJT, bool>& pressed, std::map<KeyTypeJT, bool>& released,
-    std::map<KeyTypeJT, bool>& justPressed, std::map<KeyTypeJT, bool>& justReleased,
-    CheckFuncArg check)
+MouseInput::MouseInput(MouseButtonCheckFunction checkFunction)
 {
-    for (auto& kvp : pressed) {
-        auto const key = kvp.first;
-        auto const libkey = toLib(key);
-        auto const keyValue = check(libkey);
-        if (keyValue) {
-            justPressed[key] = (pressed[key] == false);
-            justReleased[key] = false;
-        } else {
-            justReleased[key] = (pressed[key] == true);
-            justPressed[key] = false;
-        }
-        pressed[key] = keyValue;
-        released[key] = !keyValue;
-    }
-}
-
-} // namespace
-
-MouseInput::MouseInput()
-{
+    m_checkFunction = checkFunction;
     auto const allButtons = jt::getAllButtons();
     for (auto const b : allButtons) {
         m_mouseReleased[b] = false;
@@ -51,8 +23,8 @@ void MouseInput::updateMousePosition(MousePosition const& mp)
 }
 void MouseInput::updateButtons()
 {
-    updateValues(m_mousePressed, m_mouseReleased, m_mouseJustPressed, m_mouseJustReleased,
-        [](auto b) { return sf::Mouse::isButtonPressed(b); });
+    jt::inputhelper::updateValues(m_mousePressed, m_mouseReleased, m_mouseJustPressed,
+        m_mouseJustReleased, [this](auto b) { return m_checkFunction(b); });
 }
 
 jt::Vector2 MouseInput::getMousePositionWorld()

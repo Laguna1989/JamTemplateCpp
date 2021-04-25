@@ -3,6 +3,7 @@
 
 #include "InputManagerInterface.hpp"
 #include <memory>
+
 namespace jt {
 
 class InputManager : public InputManagerInterface {
