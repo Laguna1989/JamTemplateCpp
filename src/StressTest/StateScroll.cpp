@@ -1,6 +1,6 @@
 ﻿#include "StateScroll.hpp"
 #include "DrawableHelpers.hpp"
-#include "Game.hpp"
+#include "GameInterface.hpp"
 #include "InputManager.hpp"
 #include "MathHelper.hpp"
 #include "StateSelect.hpp"

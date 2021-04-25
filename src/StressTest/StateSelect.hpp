@@ -3,6 +3,7 @@
 
 #include "Button.hpp"
 #include "DrawableHelpers.hpp"
+#include "GameInterface.hpp"
 #include "GameState.hpp"
 #include "Text.hpp"
 #include <memory>
