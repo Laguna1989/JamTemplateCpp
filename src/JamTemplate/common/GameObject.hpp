@@ -1,11 +1,10 @@
 ﻿#ifndef GUARD_JAMTEMPLATE_GAMEOBJECT_HPP_INCLUDEGUARD
 #define GUARD_JAMTEMPLATE_GAMEOBJECT_HPP_INCLUDEGUARD
 
+#include "GameInterface.hpp"
 #include <memory>
 
 namespace jt {
-// forward declaration
-class GameInterface;
 
 class GameObject {
 public:
