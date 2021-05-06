@@ -9,6 +9,10 @@ set (ENABLE_UNITTESTS OFF CACHE BOOL "enable unittests")
 set (ENABLE_STRESSTEST OFF CACHE BOOL "enable stresstest")
 set (ENABLE_WEB OFF CACHE BOOL "enable web build using SDL and em++")
 set (ENABLE_DISPLAY_TESTS ON CACHE BOOL "enable unittests that require a display")
+# Apple users: set to /usr/local/Cellar/sfml/2.4.2_1/lib/ or respectively
+if (WIN32)
+	set (SFML_DIR_ROOT "${CMAKE_SOURCE_DIR}/ext/SFML-2.5.1/" CACHE PATH "Path to SFML root dir.")
+endif()
 
 #####################################################
 ## Helper Functions
@@ -30,23 +34,40 @@ endfunction()
 
 function (jt_deploy_dlls DESTFOLDER)
 	message (STATUS "Deploy to ${DESTFOLDER}")
-	
-	file(MAKE_DIRECTORY ${DESTFOLDER})
-	if (WIN32)	
+
+	if (WIN32)
+		file(MAKE_DIRECTORY ${DESTFOLDER})
 		# copy dlls
-		configure_file(${CMAKE_SOURCE_DIR}/ext/SFML-2.5.1/bin/sfml-system-2.dll ${DESTFOLDER}/ COPYONLY)
-		configure_file(${CMAKE_SOURCE_DIR}/ext/SFML-2.5.1/bin/sfml-window-2.dll ${DESTFOLDER}/ COPYONLY)
-		configure_file(${CMAKE_SOURCE_DIR}/ext/SFML-2.5.1/bin/sfml-graphics-2.dll ${DESTFOLDER}/ COPYONLY)
-		configure_file(${CMAKE_SOURCE_DIR}/ext/SFML-2.5.1/bin/sfml-audio-2.dll ${DESTFOLDER}/ COPYONLY)
-		
-		configure_file(${CMAKE_SOURCE_DIR}/ext/SFML-2.5.1/bin/sfml-system-d-2.dll ${DESTFOLDER}/ COPYONLY)
-		configure_file(${CMAKE_SOURCE_DIR}/ext/SFML-2.5.1/bin/sfml-window-d-2.dll ${DESTFOLDER}/ COPYONLY)
-		configure_file(${CMAKE_SOURCE_DIR}/ext/SFML-2.5.1/bin/sfml-graphics-d-2.dll ${DESTFOLDER}/ COPYONLY)
-		configure_file(${CMAKE_SOURCE_DIR}/ext/SFML-2.5.1/bin/sfml-audio-d-2.dll ${DESTFOLDER}/ COPYONLY)
+
+		if ($ENV{CLION_IDE})
+			configure_file(${SFML_DIR_ROOT}/bin/sfml-system-2.dll ${DESTFOLDER} COPYONLY)
+			configure_file(${SFML_DIR_ROOT}/bin/sfml-window-2.dll ${DESTFOLDER} COPYONLY)
+			configure_file(${SFML_DIR_ROOT}/bin/sfml-graphics-2.dll ${DESTFOLDER} COPYONLY)
+			configure_file(${SFML_DIR_ROOT}/bin/sfml-audio-2.dll ${DESTFOLDER} COPYONLY)
+
+			configure_file(${SFML_DIR_ROOT}/bin/sfml-system-d-2.dll ${DESTFOLDER} COPYONLY)
+			configure_file(${SFML_DIR_ROOT}/bin/sfml-window-d-2.dll ${DESTFOLDER} COPYONLY)
+			configure_file(${SFML_DIR_ROOT}/bin/sfml-graphics-d-2.dll ${DESTFOLDER} COPYONLY)
+			configure_file(${SFML_DIR_ROOT}/bin/sfml-audio-d-2.dll ${DESTFOLDER} COPYONLY)
+		elseif(MSVC)
+			configure_file(${SFML_DIR_ROOT}/bin/sfml-system-2.dll ${DESTFOLDER} COPYONLY)
+			configure_file(${SFML_DIR_ROOT}/bin/sfml-window-2.dll ${DESTFOLDER} COPYONLY)
+			configure_file(${SFML_DIR_ROOT}/bin/sfml-graphics-2.dll ${DESTFOLDER} COPYONLY)
+			configure_file(${SFML_DIR_ROOT}/bin/sfml-audio-2.dll ${DESTFOLDER} COPYONLY)
+
+			configure_file(${SFML_DIR_ROOT}/bin/sfml-system-d-2.dll ${DESTFOLDER} COPYONLY)
+			configure_file(${SFML_DIR_ROOT}/bin/sfml-window-d-2.dll ${DESTFOLDER} COPYONLY)
+			configure_file(${SFML_DIR_ROOT}/bin/sfml-graphics-d-2.dll ${DESTFOLDER} COPYONLY)
+			configure_file(${SFML_DIR_ROOT}/bin/sfml-audio-d-2.dll ${DESTFOLDER} COPYONLY)
+
+		endif()
 	endif()
 endfunction()
 
-
+if (WIN32)
+	set (SFML_DIR "${SFML_DIR_ROOT}/lib/cmake/SFML")
+	find_package(SFML COMPONENTS graphics window system audio REQUIRED)
+endif()
 #####################################################
 ## Other variables and compiler setup
 #####################################################
@@ -67,7 +88,7 @@ else()
 	if(WIN32)
 		## nasty warning 5205 from tileson should not show up,
 		## so the warning level of this one is set to 4 and the global warning level is set to three
-		set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /w45205 /W3 /EHsc -Ox")
+		set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /w45205 /W3 /EHsc")
 	else()
 		set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -O3 --std=c++17 -fpermissive -lstdc++fs")
 	endif()
@@ -78,12 +99,8 @@ endif()
 #####################################################
 project (${PROJECTNAME})
 if(NOT ENABLE_WEB)
-	if (WIN32)
-		link_directories(${CMAKE_SOURCE_DIR}/ext/SFML-2.5.1/lib)
-	endif()
-
-	if (APPLE)
-		link_directories(/usr/local/Cellar/sfml/2.4.2_1/lib/)
+	if (WIN32 OR APPLE)
+		link_directories(${SFML_DIR_ROOT}/lib)
 	endif()
 endif()
 
@@ -114,8 +131,7 @@ if(ENABLE_WEB)
 	target_include_directories(JamTemplate PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/src/JamTemplate/sdl)
 else()
 	target_include_directories(JamTemplate PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/src/JamTemplate/sfml)
-	target_include_directories(JamTemplate SYSTEM PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/ext/SFML-2.5.1/include)
-	target_include_directories(JamTemplate SYSTEM PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/usr/local/Cellar/sfml/2.4.2_1/include)
+	target_include_directories(JamTemplate SYSTEM PUBLIC ${SFML_DIR_ROOT}/include)
 endif()
 
 if(NOT ENABLE_WEB)
@@ -275,8 +291,7 @@ jt_use_assets(${PROJECTNAME})
 if (NOT ENABLE_WEB)
 	jt_deploy_dlls(${CMAKE_BINARY_DIR})
 	if(MSVC)
-		jt_deploy_dlls(${CMAKE_BINARY_DIR}/Debug)
-		jt_deploy_dlls(${CMAKE_BINARY_DIR}/Release)
+		jt_deploy_dlls(${CMAKE_BINARY_DIR})
     endif()
 endif()
 configure_file(${CMAKE_SOURCE_DIR}/.clang-format ${CMAKE_BINARY_DIR}/ COPYONLY)

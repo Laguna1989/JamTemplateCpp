@@ -25,7 +25,7 @@ static T precheck(T const& ti)
 
 namespace Lerp {
 
-// linear interpolation between a and b with t between 0 and 1
+// linear interpolation between values a and b with t between 0 and 1
 template <typename T>
 static T linear(T const& a, T const& b, T const& ti)
 {
