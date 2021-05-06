@@ -10,12 +10,9 @@ set (ENABLE_STRESSTEST OFF CACHE BOOL "enable stresstest")
 set (ENABLE_WEB OFF CACHE BOOL "enable web build using SDL and em++")
 set (ENABLE_DISPLAY_TESTS ON CACHE BOOL "enable unittests that require a display")
 # Apple users: set to /usr/local/Cellar/sfml/2.4.2_1/lib/ or respectively
-set (SFML_DIR_ROOT "${CMAKE_SOURCE_DIR}/ext/SFML-2.5.1/" CACHE PATH "Path to SFML root dir.")
-
-#####################################################
-## Helper Variables
-#####################################################
-set (SFML_DIR "${SFML_DIR_ROOT}/lib/cmake/SFML")
+if (WIN32)
+	set (SFML_DIR_ROOT "${CMAKE_SOURCE_DIR}/ext/SFML-2.5.1/" CACHE PATH "Path to SFML root dir.")
+endif()
 
 #####################################################
 ## Helper Functions
@@ -67,8 +64,10 @@ function (jt_deploy_dlls DESTFOLDER)
 	endif()
 endfunction()
 
-
-find_package(SFML COMPONENTS graphics window system audio REQUIRED)
+if (WIN32)
+	set (SFML_DIR "${SFML_DIR_ROOT}/lib/cmake/SFML")
+	find_package(SFML COMPONENTS graphics window system audio REQUIRED)
+endif()
 #####################################################
 ## Other variables and compiler setup
 #####################################################
