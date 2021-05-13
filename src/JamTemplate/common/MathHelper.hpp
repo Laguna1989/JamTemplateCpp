@@ -58,6 +58,12 @@ int sgn(T val)
     return (T(0) < val) - (val < T(0));
 }
 
+template <typename T>
+constexpr bool is_powerof2(T v)
+{
+    return v && ((v & (v - 1)) == 0);
+}
+
 } // namespace MathHelper
 } // namespace jt
 
