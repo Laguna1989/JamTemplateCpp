@@ -46,4 +46,23 @@ TEST(GameObjectTest, UpdateLogic)
     EXPECT_FALSE(go.isAlive());
 }
 
+TEST(GameObjectTest, GetGameReturnsCorrectGameObject)
+{
+    auto const g = std::make_shared<MockGame>();
+    GameObject go {};
+    go.setGameInstance(g);
+
+    EXPECT_EQ(go.getGame(), g);
+}
+
+TEST(GameObjectTest, GetGameRaisesExceptionWhenGameExpired)
+{
+    auto g = std::make_shared<MockGame>();
+    GameObject go {};
+    go.setGameInstance(g);
+    // invalidate game
+    g = nullptr;
+    EXPECT_THROW(go.getGame(), std::logic_error);
+}
+
 #endif
