@@ -1,5 +1,5 @@
 # JamTemplateCppSFML
-[![Build Status](https://travis-ci.com/Laguna1989/JamTemplateCpp.svg?branch=master)](https://travis-ci.com/github/Laguna1989/JamTemplateCpp)
+[![Build Status](https://travis-ci.com/Laguna1989/JamTemplateCpp.svg?branch=master)](https://travis-ci.com/github/Laguna1989/JamTemplateCpp) [![Coverage Status](https://coveralls.io/repos/github/Laguna1989/JamTemplateCpp/badge.svg)](https://coveralls.io/github/Laguna1989/JamTemplateCpp)
 
 ## About
 This is my JamTemplate for C++17. It will compile C++ code for native (Win, Linux) and web (webassembly) games .

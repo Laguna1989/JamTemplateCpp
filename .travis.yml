@@ -17,10 +17,15 @@ before_install:
   - eval "${MATRIX_EVAL}"
   - sudo apt-get install -y libsfml-dev
   - unzip ext/tileson-master.zip  -d ext/
+  - pip install --user cpp-coveralls
   
 script:
-  - cmake -DENABLE_UNITTESTS=ON -DENABLE_STRESSTEST=ON -DENABLE_DISPLAY_TESTS=OFF .
+  - cmake -DENABLE_UNITTESTS=ON -DENABLE_STRESSTEST=ON -DENABLE_DISPLAY_TESTS=OFF -DENABLE_COVERAGE=ON .
   - make MyAwesomeGame
   - make StressTest
   - make UnitTests
   - ./UnitTests
+
+after_success:
+  - coveralls --exclude src/Game --exclude src/JamTemplate/sdl --exclude ext --exclude src/StressTest --exclude src/UnitTests --gcov-options '\-lp'
+  
