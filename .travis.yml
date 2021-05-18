@@ -27,5 +27,5 @@ script:
   - ./UnitTests
 
 after_success:
-  - coveralls --exclude ext --exclude src/StressTest --exclude src/UnitTests --gcov-options '\-lp'
+  - coveralls --exclude src/Game --exclude ext --exclude src/StressTest --exclude src/UnitTests --gcov-options '\-lp'
   
