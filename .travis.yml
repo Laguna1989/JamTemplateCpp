@@ -27,4 +27,4 @@ script:
   - ./UnitTests
 
 after_success:
-  - coveralls -t KK8CbFw3K1RZnXPMI8UPFwxqfTMoV3JTz --exclude ext --exclude CMakeFiles --exclude src/Game  --exclude src/JamTemplate/sdl --exclude src/StressTest --exclude src/UnitTests --gcov-options '\-lp'
+  - coveralls --exclude ext --exclude CMakeFiles --exclude src/Game  --exclude src/JamTemplate/sdl --exclude src/StressTest --exclude src/UnitTests --gcov-options '\-lp'
