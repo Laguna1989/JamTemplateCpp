@@ -33,24 +33,33 @@ void Shape::setOrigin(jt::Vector2 const& origin)
 }
 const jt::Vector2 Shape::getOrigin() const { return m_shape->getOrigin(); }
 
-void Shape::doDraw(std::shared_ptr<jt::renderTarget> const sptr) const { sptr->draw(*m_shape); }
+void Shape::doDraw(std::shared_ptr<jt::renderTarget> const sptr) const
+{
+    if (sptr) {
+        sptr->draw(*m_shape);
+    }
+}
 
 void Shape::doDrawFlash(std::shared_ptr<jt::renderTarget> const sptr) const
 {
-    sptr->draw(*m_flashShape);
+    if (sptr) {
+        sptr->draw(*m_flashShape);
+    }
 }
 
 void Shape::doDrawShadow(std::shared_ptr<jt::renderTarget> const sptr) const
 {
-    jt::Vector2 const oldPos = m_shape->getPosition();
-    jt::Color const oldCol = m_shape->getFillColor();
+    if (sptr) {
+        jt::Vector2 const oldPos = m_shape->getPosition();
+        jt::Color const oldCol = m_shape->getFillColor();
 
-    m_shape->setPosition(oldPos + getShadowOffset());
-    m_shape->setFillColor(getShadowColor());
-    sptr->draw(*m_shape);
+        m_shape->setPosition(oldPos + getShadowOffset());
+        m_shape->setFillColor(getShadowColor());
+        sptr->draw(*m_shape);
 
-    m_shape->setPosition(oldPos);
-    m_shape->setFillColor(oldCol);
+        m_shape->setPosition(oldPos);
+        m_shape->setFillColor(oldCol);
+    }
 }
 
 void Shape::doUpdate(float /*elapsed*/)

@@ -21,6 +21,28 @@ Bar::Bar(float width, float height)
 void Bar::setFrontColor(jt::Color const& col) { m_shapeProgress->setColor(col); }
 void Bar::setBackColor(jt::Color const& col) { m_shapeFull->setColor(col); }
 
+void Bar::setCurrentValue(float value)
+{
+    m_valueCurrent = value;
+    if (m_valueCurrent < 0) {
+        m_valueCurrent = 0;
+    } else if (m_valueCurrent > m_valueMax) {
+        m_valueCurrent = m_valueMax;
+    }
+}
+
+float Bar::getCurrentValue() const { return m_valueCurrent; }
+
+void Bar::setMaxValue(float max)
+{
+    assert(max >= 0);
+    m_valueMax = max;
+}
+
+float Bar::getMaxValue() const { return m_valueMax; }
+
+float Bar::getValueFraction() const { return m_valueCurrent / m_valueMax; }
+
 void Bar::doDraw(std::shared_ptr<jt::renderTarget> const sptr) const
 {
     m_shapeFull->draw(sptr);
@@ -43,9 +65,9 @@ void Bar::doDrawShadow(std::shared_ptr<jt::renderTarget> const sptr) const
 
 void Bar::doUpdate(float elapsed)
 {
-    float const value = static_cast<float>(m_valueCurrent) / m_valueMax;
     auto const sacleFullShape = m_shapeFull->getScale();
-    m_shapeProgress->setScale(jt::Vector2 { value * sacleFullShape.x(), sacleFullShape.y() });
+    m_shapeProgress->setScale(
+        jt::Vector2 { getValueFraction() * sacleFullShape.x(), sacleFullShape.y() });
     m_shapeFull->update(elapsed);
     m_shapeProgress->update(elapsed);
 }

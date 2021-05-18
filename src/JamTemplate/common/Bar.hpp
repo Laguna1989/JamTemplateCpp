@@ -19,21 +19,13 @@ public:
     void setFrontColor(jt::Color const& col);
     void setBackColor(jt::Color const& col);
 
-    void setCurrentValue(float position)
-    {
-        m_valueCurrent = position;
-        if (m_valueCurrent < 0) {
-            m_valueCurrent = 0;
-        } else if (m_valueCurrent > m_valueMax) {
-            m_valueCurrent = m_valueMax;
-        }
-    }
+    void setCurrentValue(float value);
+    float getCurrentValue() const;
 
-    void setMaxValue(float max)
-    {
-        assert(max >= 0);
-        m_valueMax = max;
-    }
+    void setMaxValue(float max);
+    float getMaxValue() const;
+
+    float getValueFraction() const;
 
     virtual void setColor(jt::Color const& col) override;
     virtual const jt::Color getColor() const override;
