@@ -25,7 +25,7 @@ public:
     // doSwitchState() which will happen at the beginning of the next update loop.
     void switchState(std::shared_ptr<GameState> newState) override;
 
-    std::shared_ptr<GameState> getCurrentSate() override;
+    std::shared_ptr<GameState> getCurrentState() override;
 
     void run() override;
 

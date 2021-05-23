@@ -15,7 +15,7 @@ public:
     // doSwitchState() which will happen at the beginning of the next update loop.
     virtual void switchState(std::shared_ptr<GameState> newState) = 0;
 
-    virtual std::shared_ptr<GameState> getCurrentSate() = 0;
+    virtual std::shared_ptr<GameState> getCurrentState() = 0;
 
     virtual void run() = 0;
     virtual void startGame(
