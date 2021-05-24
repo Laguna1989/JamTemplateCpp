@@ -27,7 +27,7 @@ void GameBase::switchState(std::shared_ptr<GameState> newState)
     }
 }
 
-std::shared_ptr<GameState> GameBase::getCurrentSate()
+std::shared_ptr<GameState> GameBase::getCurrentState()
 {
     if (m_nextState == nullptr) {
         return m_state;

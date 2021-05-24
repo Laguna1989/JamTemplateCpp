@@ -103,19 +103,19 @@ TEST_F(GameTest, SetRenderTargetInvalid)
     EXPECT_THROW(g->setRenderTarget(nullptr), std::invalid_argument);
 }
 
-TEST_F(GameTest, GetCurrentStateNullptr) { EXPECT_EQ(g->getCurrentSate(), nullptr); }
+TEST_F(GameTest, GetCurrentStateNullptr) { EXPECT_EQ(g->getCurrentState(), nullptr); }
 
 TEST_F(GameTest, GetCurrentStateNonNullptr)
 {
     g->switchState(std::make_shared<NiceMock<MockState>>());
-    EXPECT_NE(g->getCurrentSate(), nullptr);
+    EXPECT_NE(g->getCurrentState(), nullptr);
 }
 
 TEST_F(GameTest, GetCurrentStateAfterSwitch)
 {
     g->switchState(std::make_shared<NiceMock<MockState>>());
     EXPECT_NO_THROW(g->run());
-    EXPECT_NE(g->getCurrentSate(), nullptr);
+    EXPECT_NE(g->getCurrentState(), nullptr);
 }
 
 TEST_F(GameTest, RunWithOutState) { EXPECT_NO_THROW(g->run()); }
