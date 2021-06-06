@@ -2,6 +2,7 @@
 #define JAMTEMPLATE_CIRCULAR_BUFFER_HPP_GUARD
 
 #include "MathHelper.hpp"
+#include <algorithm>
 #include <array>
 #include <cstddef>
 #include <type_traits>
