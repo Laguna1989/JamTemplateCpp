@@ -3,10 +3,8 @@
 
 #include "Bar.hpp"
 #include "GameState.hpp"
-#include "MovementObject.hpp"
 #include "Shape.hpp"
 #include <Box2D/Box2D.h>
-#include <iostream>
 #include <vector>
 
 class StateBox2d : public jt::GameState {

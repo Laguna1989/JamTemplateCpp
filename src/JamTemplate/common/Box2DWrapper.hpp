@@ -1,6 +1,7 @@
 ﻿#include "Box2D/Box2D.h"
 #include <cassert>
 
+namespace jt {
 class Box2DWorldInterface {
 public:
     virtual b2Body* CreateBody(const b2BodyDef* def) = 0;
@@ -31,3 +32,4 @@ public:
 private:
     std::weak_ptr<b2World> m_world;
 };
+} // namespace jt
