@@ -14,7 +14,7 @@ class Bar : public jt::DrawableImpl {
 public:
     using Sptr = std::shared_ptr<Bar>;
 
-    Bar(float width, float height);
+    Bar(float width, float height, bool horizontal = true);
 
     void setFrontColor(jt::Color const& col);
     void setBackColor(jt::Color const& col);
@@ -52,6 +52,7 @@ private:
 
     float const m_width;
     float const m_height;
+    bool m_horizontal;
 
     mutable std::shared_ptr<jt::Shape> m_shapeFull;
     std::shared_ptr<jt::Shape> m_shapeProgress;

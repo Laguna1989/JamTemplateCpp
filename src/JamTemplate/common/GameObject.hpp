@@ -50,10 +50,9 @@ private:
 
     std::weak_ptr<GameInterface> m_game;
 
-    virtual void doUpdate(float const /*elapsed*/);
-
-    virtual void doDraw() const;
     virtual void doCreate();
+    virtual void doUpdate(float const /*elapsed*/);
+    virtual void doDraw() const;
     virtual void doKill();
 
     // Do NOT modify the game or the gamestate in this function

@@ -1,6 +1,7 @@
 ﻿#ifndef GUARD_JAMTEMPLATE_SOUND_BASE_GUARD_HPP_12345
 #define GUARD_JAMTEMPLATE_SOUND_BASE_GUARD_HPP_12345
 
+#include <stdexcept>
 #include <string>
 
 namespace jt {
@@ -86,9 +87,10 @@ protected:
         }
     }
 
-private:
+protected:
     bool m_isInitialized { false };
 
+private:
     virtual void doLoad(std::string const& fileName) = 0;
     virtual bool doIsPlaying() const = 0;
 

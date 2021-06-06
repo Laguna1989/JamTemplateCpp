@@ -1,4 +1,5 @@
 ﻿#include "Random.hpp"
+#include "RandomSampleAndHold.hpp"
 #include "Vector.hpp"
 #include "gtest/gtest.h"
 #include <utility>
@@ -119,3 +120,32 @@ INSTANTIATE_TEST_SUITE_P(RandomSetSeedTest, RandomSetSeedTestFixture,
 TEST_P(RandomSetSeedTestFixture, Values) { EXPECT_NO_THROW(Random::setSeed(GetParam())); }
 
 TEST(RandomSetTimeAsSeed, NoThrow) { EXPECT_NO_THROW(Random::useTimeAsRandomSeed()); }
+
+TEST(SampleAndHold, ReturnsSameSampleWithoutUpdate)
+{
+    jt::SampleAndHold sah { 10000.0f, 0.000001f };
+    auto const initial = sah.getFloat();
+
+    auto const nextValue = sah.getFloat();
+    EXPECT_FLOAT_EQ(initial, nextValue);
+}
+
+TEST(SampleAndHold, ReturnsSameSampleAfterUpdateShortThanTimerMu)
+{
+    jt::SampleAndHold sah { 10000.0f, 0.000001f };
+    auto const initial = sah.getFloat();
+
+    sah.update(0.1f);
+    auto const nextValue = sah.getFloat();
+    EXPECT_FLOAT_EQ(initial, nextValue);
+}
+
+TEST(SampleAndHold, ReturnsDifferentSampleAfterUpdateLongerThanTimerMu)
+{
+    jt::SampleAndHold sah { 100.0f, 0.000001f };
+    auto const initial = sah.getFloat();
+
+    sah.update(200.0f);
+    auto const nextValue = sah.getFloat();
+    EXPECT_NE(initial, nextValue);
+}

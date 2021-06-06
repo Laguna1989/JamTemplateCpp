@@ -73,3 +73,47 @@ TEST(CircularBufferSize2, ReadAndWriteWithWrapAround)
     EXPECT_EQ(buffer[3], value2);
     EXPECT_EQ(buffer[1], value2);
 }
+
+TEST(CircularBufferSize2, Push)
+{
+    jt::CircularBuffer<float, 2> buffer;
+    auto const value = 1.123f;
+    buffer.push(value);
+    EXPECT_FLOAT_EQ(buffer[0], value);
+}
+
+TEST(CircularBufferSize2, EmptyBufferDoesNotContainElements)
+{
+    jt::CircularBuffer<unsigned int, 2> buffer;
+    auto const value1 = 4U;
+    auto const value2 = 8U;
+
+    EXPECT_FALSE(buffer.contains(value1));
+    EXPECT_FALSE(buffer.contains(value2));
+}
+
+TEST(CircularBufferSize2, BufferContainsValuesAfterPush)
+{
+    jt::CircularBuffer<unsigned int, 2> buffer;
+    auto const value1 = 4U;
+    auto const value2 = 8U;
+
+    buffer.push(value1);
+    buffer.push(value2);
+    EXPECT_TRUE(buffer.contains(value1));
+    EXPECT_TRUE(buffer.contains(value2));
+}
+
+TEST(CircularBufferSize2, BufferDoesNotContainValueAfterItIsPushedOutOfTheBuffer)
+{
+    jt::CircularBuffer<unsigned int, 2> buffer;
+    auto const value1 = 4U;
+    auto const value2 = 8U;
+
+    buffer.push(value1);
+    buffer.push(value2);
+
+    buffer.push(value2);
+    EXPECT_FALSE(buffer.contains(value1));
+    EXPECT_TRUE(buffer.contains(value2));
+}

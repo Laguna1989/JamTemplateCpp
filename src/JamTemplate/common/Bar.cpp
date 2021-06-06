@@ -2,20 +2,26 @@
 
 namespace jt {
 
-Bar::Bar(float width, float height)
+Bar::Bar(float width, float height, bool horizontal)
     : m_valueMax { 1.0f }
     , m_valueCurrent { 0.0f }
     , m_width { width }
     , m_height { height }
+    , m_horizontal { horizontal }
 {
     m_shapeFull = std::make_shared<jt::Shape>();
     m_shapeFull->makeRect(jt::Vector2 { m_width, m_height });
     m_shapeFull->setColor(jt::Color { 150, 150, 150 });
 
     m_shapeProgress = std::make_shared<jt::Shape>();
-    m_shapeProgress->makeRect(jt::Vector2 { m_width, m_height * 0.9f });
+    if (m_horizontal) {
+        m_shapeProgress->makeRect(jt::Vector2 { m_width, m_height * 0.9f });
+        m_shapeProgress->setPosition(jt::Vector2 { 0, m_height * 0.1f });
+    } else {
+        m_shapeProgress->makeRect(jt::Vector2 { m_width - 2, m_height });
+        m_shapeProgress->setPosition(jt::Vector2 { 0 + 1, m_height });
+    }
     m_shapeProgress->setColor(jt::Color { 255, 255, 255 });
-    m_shapeProgress->setPosition(jt::Vector2 { 0, m_height * 0.1f });
 }
 
 void Bar::setFrontColor(jt::Color const& col) { m_shapeProgress->setColor(col); }
@@ -65,9 +71,15 @@ void Bar::doDrawShadow(std::shared_ptr<jt::renderTarget> const sptr) const
 
 void Bar::doUpdate(float elapsed)
 {
-    auto const sacleFullShape = m_shapeFull->getScale();
-    m_shapeProgress->setScale(
-        jt::Vector2 { getValueFraction() * sacleFullShape.x(), sacleFullShape.y() });
+    float const value = static_cast<float>(m_valueCurrent) / m_valueMax;
+    auto const scaleFullShape = m_shapeFull->getScale();
+    if (m_horizontal) {
+        m_shapeProgress->setScale(jt::Vector2 { value * scaleFullShape.x(), scaleFullShape.y() });
+    } else {
+        m_shapeProgress->setScale(jt::Vector2 { scaleFullShape.x(), value * scaleFullShape.y() });
+        m_shapeProgress->setPosition(jt::Vector2 { m_shapeFull->getPosition().x() + 1,
+            m_shapeFull->getPosition().y() + (1 - value) * m_height });
+    }
     m_shapeFull->update(elapsed);
     m_shapeProgress->update(elapsed);
 }
