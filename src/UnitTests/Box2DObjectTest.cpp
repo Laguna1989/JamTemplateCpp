@@ -1,4 +1,7 @@
 ﻿#include "Box2DObject.hpp"
+
+#include "MockGame.hpp"
+
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 
@@ -14,5 +17,55 @@ TEST(Box2DObjectTest, ConstructorCallsCreateBody)
 {
     auto mock = std::make_shared<Box2DWorldMock>();
     EXPECT_CALL(*mock, CreateBody(_));
-    jt::Box2DObject b2dobj { mock, nullptr };
+    jt::Box2DObject obj { mock, nullptr };
+}
+
+TEST(Box2DObjectTest, getBody)
+{
+    auto mock = std::make_shared<Box2DWorldMock>();
+    EXPECT_CALL(*mock, CreateBody(_)).WillOnce(Return(nullptr));
+    jt::Box2DObject obj { mock, nullptr };
+    EXPECT_EQ(obj.getB2Body(), nullptr);
+}
+
+TEST(Box2DObjectTest, create)
+{
+    auto mock = std::make_shared<Box2DWorldMock>();
+    EXPECT_CALL(*mock, CreateBody(_));
+    jt::Box2DObject obj { mock, nullptr };
+    auto g = std::make_shared<MockGame>();
+
+    obj.setGameInstance(g);
+    obj.create();
+    SUCCEED();
+}
+
+TEST(Box2DObjectTest, update)
+{
+    auto mock = std::make_shared<Box2DWorldMock>();
+    EXPECT_CALL(*mock, CreateBody(_));
+    jt::Box2DObject obj { mock, nullptr };
+    obj.update(1.0f);
+    SUCCEED();
+}
+
+TEST(Box2DObjectTest, draw)
+{
+    auto mock = std::make_shared<Box2DWorldMock>();
+    EXPECT_CALL(*mock, CreateBody(_));
+    jt::Box2DObject obj { mock, nullptr };
+    obj.draw();
+    SUCCEED();
+}
+
+TEST(Box2DObjectTest, destroy)
+{
+    auto mock = std::make_shared<Box2DWorldMock>();
+    EXPECT_CALL(*mock, CreateBody(_)).WillOnce(Return(nullptr));
+    ;
+    jt::Box2DObject obj { mock, nullptr };
+
+    EXPECT_CALL(*mock, DestroyBody(_));
+    obj.destroy();
+    SUCCEED();
 }

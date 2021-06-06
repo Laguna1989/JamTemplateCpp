@@ -41,9 +41,9 @@ private:
 
     std::shared_ptr<Box2DWorldInterface> m_world;
 
+    void doCreate() override { }
     void doUpdate(float const /*elapsed*/) override { }
     void doDraw() const override { }
-    void doCreate() override { }
 
     void doDestroy() override { m_world->DestroyBody(m_body); }
 
