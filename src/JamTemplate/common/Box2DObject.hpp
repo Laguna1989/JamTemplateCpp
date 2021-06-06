@@ -1,6 +1,7 @@
 ﻿#ifndef GUARD_JAMTEMPLATE_BOX2DOBJECT_HPP_INCLUDEGUARD
 #define GUARD_JAMTEMPLATE_BOX2DOBJECT_HPP_INCLUDEGUARD
 
+#include "Box2DWrapper.hpp"
 #include "Conversions.hpp"
 #include "GameObject.hpp"
 #include "Vector.hpp"
@@ -14,7 +15,7 @@ public:
     using Sptr = std::shared_ptr<Box2DObject>;
     Box2DObject() = delete;
 
-    Box2DObject(std::shared_ptr<b2World> world, const b2BodyDef* def)
+    Box2DObject(std::shared_ptr<Box2DWorldInterface> world, const b2BodyDef* def)
     {
         setB2Body(world->CreateBody(def));
         m_world = world;
@@ -38,20 +39,13 @@ private:
     // do never call delete on this
     b2Body* m_body { nullptr };
 
-    std::weak_ptr<b2World> m_world;
+    std::shared_ptr<Box2DWorldInterface> m_world;
 
     void doUpdate(float const /*elapsed*/) override { }
     void doDraw() const override { }
     void doCreate() override { }
 
-    void doDestroy() override
-    {
-        if (m_world.expired()) {
-            return;
-        }
-        auto w = m_world.lock();
-        w->DestroyBody(m_body);
-    }
+    void doDestroy() override { m_world->DestroyBody(m_body); }
 
     void setB2Body(b2Body* body) { m_body = body; }
 };

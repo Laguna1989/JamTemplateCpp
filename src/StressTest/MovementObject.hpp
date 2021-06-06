@@ -5,21 +5,15 @@
 #include "Box2DObject.hpp"
 #include "Conversions.hpp"
 #include "GameInterface.hpp"
-#include "GameState.hpp"
 #include "InputManager.hpp"
 #include "MathHelper.hpp"
-#include "ObjectGroup.hpp"
-#include "Random.hpp"
-#include "Shape.hpp"
-#include <iostream>
 #include <memory>
-#include <random>
 
 class MovementObject : public jt::Box2DObject {
 public:
     using Sptr = std::shared_ptr<MovementObject>;
     MovementObject(std::shared_ptr<b2World> world, const b2BodyDef* def)
-        : Box2DObject { world, def }
+        : Box2DObject { std::make_shared<Box2DWorldWrapper>(world), def }
     {
         m_animation = std::make_shared<jt::Animation>();
         b2FixtureDef fixtureDef;
