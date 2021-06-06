@@ -75,22 +75,31 @@ void Sprite::doUpdate(float /*elapsed*/)
 
 void Sprite::doDrawShadow(std::shared_ptr<jt::renderTarget> const sptr) const
 {
-    jt::Vector2 const oldPos = m_sprite.getPosition();
-    jt::Color const oldCol = m_sprite.getColor();
+    if (sptr) {
+        jt::Vector2 const oldPos = m_sprite.getPosition();
+        jt::Color const oldCol = m_sprite.getColor();
 
-    m_sprite.setPosition(oldPos + getShadowOffset());
-    m_sprite.setColor(getShadowColor());
-    sptr->draw(m_sprite);
+        m_sprite.setPosition(oldPos + getShadowOffset());
+        m_sprite.setColor(getShadowColor());
+        sptr->draw(m_sprite);
 
-    m_sprite.setPosition(oldPos);
-    m_sprite.setColor(oldCol);
+        m_sprite.setPosition(oldPos);
+        m_sprite.setColor(oldCol);
+    }
 }
 
-void Sprite::doDraw(std::shared_ptr<jt::renderTarget> const sptr) const { sptr->draw(m_sprite); }
+void Sprite::doDraw(std::shared_ptr<jt::renderTarget> const sptr) const
+{
+    if (sptr) {
+        sptr->draw(m_sprite);
+    }
+}
 
 void Sprite::doDrawFlash(std::shared_ptr<jt::renderTarget> const sptr) const
 {
-    sptr->draw(m_flashSprite);
+    if (sptr) {
+        sptr->draw(m_flashSprite);
+    }
 }
 
 void Sprite::doRotate(float rot)

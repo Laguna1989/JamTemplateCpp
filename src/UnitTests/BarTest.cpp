@@ -76,6 +76,8 @@ TEST(BarTest, ColorsCanBeSet)
     b.setFrontColor(jt::colors::Black);
     b.setBackColor(jt::colors::White);
 
+    b.setColor(jt::colors::Green);
+
     b.setFrontColor(jt::colors::Red);
     b.setBackColor(jt::colors::Blue);
 
