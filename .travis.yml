@@ -4,6 +4,8 @@ matrix:
   include:
     - os: linux
       dist: focal
+      services:
+        - xvfb
       addons:
         apt:
           sources:
