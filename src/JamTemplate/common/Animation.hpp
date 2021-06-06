@@ -19,7 +19,6 @@ public:
     using AnimationMapType = std::map<std::string, std::vector<std::shared_ptr<Sprite>>>;
 
     Animation() = default;
-
     virtual ~Animation() = default;
 
     // add a new animation to the pool of available animations
