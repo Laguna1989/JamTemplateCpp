@@ -4,11 +4,12 @@
 #include "Vector.hpp"
 #include <string>
 
+namespace jt {
 struct InfoRect {
-    jt::Vector2 position;
-    jt::Vector2 sizeDiagonal;
+    Vector2 position;
+    Vector2 sizeDiagonal;
     float rotation;
-    std::string m_type;
+    std::string type;
 };
-
+} // namespace jt
 #endif
