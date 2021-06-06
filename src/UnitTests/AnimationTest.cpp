@@ -158,3 +158,56 @@ TEST(AnimationTest, SetShadowIndividual)
     EXPECT_EQ(a.getShadowOffset().x(), 3.0f);
     EXPECT_EQ(a.getShadowOffset().y(), 3.0f);
 }
+
+TEST(AnimationTest, Times)
+{
+    jt::Animation a {};
+    a.add("assets/coin.png", "idle", { 16, 16 }, { 0, 1, 2, 3 }, 1.0f);
+    a.play("idle");
+    EXPECT_EQ(a.getCurrentAnimFrames(), 4);
+    EXPECT_FLOAT_EQ(a.getCurrentAnimSingleFrameTime(), 1.0f);
+    EXPECT_FLOAT_EQ(a.getCurrentAnimTotalTime(), 4.0f);
+}
+
+TEST(AnimationTest, UpdateSwitchesAnimationIndex)
+{
+    jt::Animation a {};
+    a.add("assets/coin.png", "idle", { 16, 16 }, { 0, 1 }, 1.0f);
+    a.play("idle");
+
+    a.update(10.0f);
+
+    SUCCEED();
+}
+
+TEST(AnimationTest, LocalBounds)
+{
+    jt::Animation a {};
+    a.add("assets/coin.png", "idle", { 16, 16 }, { 0, 1 }, 1.0f);
+    a.play("idle");
+
+    auto const bounds = a.getLocalBounds();
+    EXPECT_FLOAT_EQ(bounds.left(), 0.0f);
+    EXPECT_FLOAT_EQ(bounds.top(), 0.0f);
+
+    EXPECT_FLOAT_EQ(bounds.height(), 16.0f);
+    EXPECT_FLOAT_EQ(bounds.width(), 16.0f);
+
+    SUCCEED();
+}
+
+TEST(AnimationTest, GlobalBounds)
+{
+    jt::Animation a {};
+    a.add("assets/coin.png", "idle", { 16, 16 }, { 0, 1 }, 1.0f);
+    a.play("idle");
+
+    auto const bounds = a.getGlobalBounds();
+    EXPECT_FLOAT_EQ(bounds.left(), 0.0f);
+    EXPECT_FLOAT_EQ(bounds.top(), 0.0f);
+
+    EXPECT_FLOAT_EQ(bounds.height(), 16.0f);
+    EXPECT_FLOAT_EQ(bounds.width(), 16.0f);
+
+    SUCCEED();
+}

@@ -1,13 +1,12 @@
-﻿#include "TweenAlpha.hpp"
+﻿#include "Color.hpp"
+#include "TweenAlpha.hpp"
 #include "TweenColor.hpp"
 #include "TweenPosition.hpp"
+#include "TweenRotation.hpp"
 #include "TweenScale.hpp"
 #include "Vector.hpp"
-#include "Color.hpp"
 #include "gmock/gmock.h"
 #include "gtest/gtest.h"
-#include <limits>
-#include <utility>
 
 class Object {
 public:
@@ -22,16 +21,21 @@ public:
     jt::Vector2 getScale() const { return m_scale; };
     void setScale(jt::Vector2 const& p) { m_scale = p; };
 
+    float getRotation() const { return m_rot; }
+    void setRotation(float r) { m_rot = r; };
+
 private:
     jt::Color m_col { jt::colors::Black };
     jt::Vector2 m_pos { 0.0f, 0.0f };
     jt::Vector2 m_scale { 1.0f, 1.0f };
+    float m_rot;
 };
 
 using ta = jt::TweenAlpha<Object>;
 using tc = jt::TweenColor<Object>;
 using tp = jt::TweenPosition<Object>;
 using ts = jt::TweenScale<Object>;
+using tr = jt::TweenRotation<Object>;
 using tb = jt::Tween<Object>;
 
 class TweenBaseTest : public ::testing::Test {
@@ -223,4 +227,18 @@ TEST_F(TweenBaseTest, Scale)
     EXPECT_EQ(m_obj->getScale(), start);
     tws->update(time);
     EXPECT_EQ(m_obj->getScale(), end);
+}
+
+TEST_F(TweenBaseTest, Rotation)
+{
+    float const time { 5.0f };
+
+    float const start { 0.0f };
+    float const end { 180.0f };
+
+    auto const trs = tr::create(m_obj, time, start, end);
+    trs->update(0.0f);
+    EXPECT_EQ(m_obj->getRotation(), start);
+    trs->update(time);
+    EXPECT_EQ(m_obj->getRotation(), end);
 }
