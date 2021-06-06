@@ -28,8 +28,6 @@ TEST(DrawableHelpersTest, createVignette)
 
 TEST(DrawableHelpersTest, createText)
 {
-    float x = 150.0f;
-    float y = 50.0f;
     std::shared_ptr<jt::renderTarget> rt { nullptr };
     auto const text = jt::dh::createText(rt, "assets/font.ttf", 24, jt::colors::Green);
     ASSERT_NE(text, nullptr);
