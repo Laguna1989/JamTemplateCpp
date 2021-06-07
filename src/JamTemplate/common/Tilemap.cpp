@@ -37,16 +37,6 @@ Tilemap::Tilemap(std::string const& path)
             m_tileSprites.at(i + j * columns) = tile;
         }
     }
-    // for (auto& layer : m_map->getLayers()) {
-    //     const std::string currentGroupName = layer.getName();
-    //     for (auto& obj : layer.getObjects()) {
-
-    //         InfoRect collider { Conversion::vec(obj.getPosition()),
-    //         Conversion::vec(obj.getSize()),
-    //             obj.getRotation(), obj.getType() };
-    //         m_objectGroups[currentGroupName].push_back(collider);
-    //     }
-    // }
 #if ENABLE_WEB
     setIgnoreCamMovement(true);
 #else
@@ -56,6 +46,10 @@ Tilemap::Tilemap(std::string const& path)
 
 void Tilemap::doDraw(std::shared_ptr<jt::renderTarget> const sptr) const
 {
+    if (!sptr) {
+        return;
+    }
+
     if (m_map == nullptr) {
         return;
     }
