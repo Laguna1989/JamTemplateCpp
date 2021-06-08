@@ -51,6 +51,10 @@ void Animation::add(std::string const& fileName, std::string const& animName,
 
 void Animation::play(std::string const& animName, size_t startFrame, bool restart)
 {
+    if (m_frames.count(animName) == 0) {
+        throw std::invalid_argument { "anim name not part of animation: " + animName };
+    }
+
     if (m_currentAnimName != animName || restart) {
         m_currentIdx = startFrame;
         m_currentAnimName = animName;

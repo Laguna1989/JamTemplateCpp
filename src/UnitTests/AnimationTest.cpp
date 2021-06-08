@@ -14,6 +14,14 @@ TEST(AnimationTest, AddAnimationWithOneFrame)
     a.add("assets/coin.png", "idle", { 16, 16 }, { 0 }, 1.0f);
 }
 
+TEST(AnimationTest, PlayUpdateAndDrawAnimation)
+{
+    jt::Animation a;
+    a.add("assets/coin.png", "idle", { 16, 16 }, { 0 }, 1.0f);
+    a.update(0.1f);
+    a.draw(nullptr);
+}
+
 TEST(AnimationTest, AddAnimationWithMultipleFrame)
 {
     jt::Animation a;
@@ -31,15 +39,6 @@ TEST(AnimationTest, AddAnimationWithEmptyNameRaisesInvalidArgumentException)
     jt::Animation a;
     EXPECT_THROW(
         a.add("assets/coin.png", "", { 16, 16 }, { 0, 1, 2, 3 }, 1.0f), std::invalid_argument);
-}
-
-TEST(AnimationTest, PlayInvalidAnimation)
-{
-    jt::Animation a;
-    a.add("assets/coin.png", "idle", { 16, 16 }, { 0 }, 1.0f);
-    a.play("idle2");
-    a.update(0.0f);
-    a.draw(nullptr);
 }
 
 TEST(AnimationTest, AddAnimationWithNegativeTimeRaisesInvalidArgumentException)
@@ -93,13 +92,27 @@ TEST(AnimationTest, CanBeDrawnWithNullptrRenderTarget)
     SUCCEED();
 }
 
-TEST(AnimationTest, SetFrontColor)
+TEST(AnimationTest, SetColor)
 {
     jt::Animation a {};
     a.add("assets/coin.png", "idle", { 16, 16 }, { 0 }, 1.0f);
     a.play("idle");
     a.setColor(jt::colors::Red);
     ASSERT_EQ(a.getColor(), jt::colors::Red);
+}
+
+TEST(AnimationTest, GetColorWithoutPlay)
+{
+    jt::Animation a {};
+    a.add("assets/coin.png", "idle", { 16, 16 }, { 0 }, 1.0f);
+    EXPECT_THROW(a.getColor(), std::invalid_argument);
+}
+
+TEST(AnimationTest, PlayInvalidAnimation)
+{
+    jt::Animation a {};
+    a.add("assets/coin.png", "idle", { 16, 16 }, { 0 }, 1.0f);
+    EXPECT_THROW(a.play("test1234_invalid"), std::invalid_argument);
 }
 
 TEST(AnimationTest, RotateHasNoEffect)
@@ -118,6 +131,8 @@ TEST(AnimationTest, AnimationCanBeFlashed)
     a.add("assets/coin.png", "idle", { 16, 16 }, { 0 }, 1.0f);
     a.play("idle");
     a.flash(1.0f);
+    a.update(0.1f);
+    a.draw(nullptr);
     SUCCEED();
 }
 
