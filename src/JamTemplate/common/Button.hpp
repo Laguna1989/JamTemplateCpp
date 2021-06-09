@@ -1,6 +1,7 @@
 ﻿#ifndef GUARD_JAMTEMPLATE_BUTTON_HPP_GUARD
 #define GUARD_JAMTEMPLATE_BUTTON_HPP_GUARD
 
+#include "DrawableInterface.hpp"
 #include "GameObject.hpp"
 #include "Vector.hpp"
 #include <functional>
@@ -8,7 +9,6 @@
 
 namespace jt {
 class Animation;
-class DrawableImpl;
 
 class Button : public GameObject {
 public:
@@ -20,7 +20,7 @@ public:
     Button(const Button& b) = delete;
     Button(Button&& b) = default;
 
-    void setDrawable(std::shared_ptr<DrawableImpl> sprt);
+    void setDrawable(std::shared_ptr<DrawableInterface> sprt);
 
     void addCallback(std::function<void(void)> cb);
 
@@ -36,7 +36,7 @@ public:
 
 private:
     std::shared_ptr<Animation> m_background;
-    std::shared_ptr<DrawableImpl> m_drawable { nullptr };
+    std::shared_ptr<DrawableInterface> m_drawable { nullptr };
     std::vector<std::function<void(void)>> m_callbacks;
     jt::Vector2 m_pos;
 

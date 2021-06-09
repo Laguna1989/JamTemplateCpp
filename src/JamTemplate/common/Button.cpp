@@ -28,7 +28,7 @@ Button::~Button()
     m_callbacks.clear();
 }
 
-void Button::setDrawable(std::shared_ptr<DrawableImpl> sprt) { m_drawable = sprt; }
+void Button::setDrawable(std::shared_ptr<DrawableInterface> sprt) { m_drawable = sprt; }
 
 void Button::addCallback(std::function<void(void)> cb) { m_callbacks.push_back(cb); }
 

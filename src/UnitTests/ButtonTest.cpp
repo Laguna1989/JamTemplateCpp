@@ -1,4 +1,5 @@
 ﻿#include "Button.hpp"
+#include "MockDrawable.hpp"
 #include "MockGame.hpp"
 #include <gtest/gtest.h>
 
@@ -34,6 +35,25 @@ TEST(ButtonTest, Draw)
     jt::Button b {};
     b.setGameInstance(game);
     b.update(0.1f);
+    EXPECT_CALL(*game, getRenderTarget());
+    b.draw();
+    SUCCEED();
+}
+
+TEST(ButtonTest, CustomDrawable)
+{
+    auto game = std::make_shared<MockGame>();
+    EXPECT_CALL(*game, input());
+    jt::Button b {};
+    b.setGameInstance(game);
+    b.update(0.1f);
+
+    auto d = std::make_shared<MockDrawable>();
+    b.setDrawable(d);
+    std::shared_ptr<jt::renderTarget> rt = nullptr;
+    EXPECT_CALL(*game, getRenderTarget()).Times(2);
+    EXPECT_CALL(*d, draw(rt));
+
     b.draw();
     SUCCEED();
 }
