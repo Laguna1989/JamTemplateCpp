@@ -37,7 +37,7 @@ void jt::SoundGroup::doPlay()
         return;
     }
 
-    std::size_t const index = Random::getInt(0, m_sounds.size() - 1);
+    std::size_t const index = Random::getInt(0, static_cast<int>(m_sounds.size()) - 1);
     m_sounds.at(index)->play();
 }
 

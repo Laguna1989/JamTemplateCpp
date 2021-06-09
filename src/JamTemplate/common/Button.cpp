@@ -35,11 +35,19 @@ void Button::addCallback(std::function<void(void)> cb) { m_callbacks.push_back(c
 void Button::clearCallbacks() { m_callbacks.clear(); }
 size_t Button::getCallbackCount() const { return m_callbacks.size(); }
 
-bool Button::IsMouseOver() { return isOver(getGame()->input()->mouse()->getMousePositionScreen()); }
+bool Button::IsMouseOver()
+{
+    if (getGame()->input() == nullptr) {
+        return false;
+    }
+    return isOver(getGame()->input()->mouse()->getMousePositionScreen());
+}
 
 void Button::setVisible(bool v) { m_visible = v; }
 
 void Button::setPosition(jt::Vector2 const& v) { m_pos = v; }
+
+jt::Vector2 Button::getPosition() const { return m_pos; }
 
 void Button::doDraw() const
 {

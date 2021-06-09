@@ -32,6 +32,7 @@ public:
     void setVisible(bool v);
 
     void setPosition(jt::Vector2 const& v);
+    jt::Vector2 getPosition(void) const;
 
 private:
     std::shared_ptr<Animation> m_background;
