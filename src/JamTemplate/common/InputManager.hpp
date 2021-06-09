@@ -11,9 +11,9 @@ public:
     InputManager(std::shared_ptr<MouseInputInterface> mouse,
         std::shared_ptr<KeyboardInputInterface> keyboard);
 
-    virtual std::shared_ptr<MouseInputInterface> mouse() override;
-    virtual std::shared_ptr<KeyboardInputInterface> keyboard() override;
-    virtual void reset() override;
+    std::shared_ptr<MouseInputInterface> mouse() override;
+    std::shared_ptr<KeyboardInputInterface> keyboard() override;
+    void reset() override;
 
 private:
     std::shared_ptr<MouseInputInterface> m_mouse;
