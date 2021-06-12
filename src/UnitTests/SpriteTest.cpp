@@ -199,13 +199,24 @@ TEST(SpriteTest, RotationAfterSetRotation)
 #else
 TEST(SpriteTest, LoadSpriteFromTexture)
 {
-
     sf::Texture t;
     t.create(20U, 20U);
     jt::Sprite s;
     s.fromTexture(t);
     EXPECT_FLOAT_EQ(s.getLocalBounds().width(), 20.0f);
     EXPECT_FLOAT_EQ(s.getLocalBounds().height(), 20.0f);
+}
+
+TEST(SpriteTest, GetSfSprite)
+{
+    jt::Sprite s;
+    s.loadSprite("assets/coin.png");
+
+    sf::Sprite value = s.getSFSprite();
+    EXPECT_EQ(value.getLocalBounds().left, s.getLocalBounds().left());
+    EXPECT_EQ(value.getLocalBounds().top, s.getLocalBounds().top());
+    EXPECT_EQ(value.getLocalBounds().width, s.getLocalBounds().width());
+    EXPECT_EQ(value.getLocalBounds().height, s.getLocalBounds().height());
 }
 
 #if ENABLE_DISPLAY_TESTS
