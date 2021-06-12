@@ -180,3 +180,42 @@ TEST(Vector2U, NotEqual)
 
     EXPECT_NE(v, w);
 }
+
+TEST(Vector2U, MoveConstructor)
+{
+    jt::Vector2u vec1 { 2, 3 };
+    jt::Vector2u vec2 { std::move(vec1) };
+
+    EXPECT_EQ(vec1.x(), 2);
+    EXPECT_EQ(vec1.y(), 3);
+}
+
+#if !ENABLE_WEB
+
+TEST(Vector2U, ToSfVector)
+{
+    jt::Vector2u vec { 4, 5 };
+    sf::Vector2u expected { 4, 5 };
+    sf::Vector2u value = vec;
+    EXPECT_EQ(expected, value);
+}
+
+TEST(Vector2UAddEqual, AddZero)
+{
+    jt::Vector2u const initial { 5, 1 };
+    jt::Vector2u copy { initial };
+    jt::Vector2u const add { 0, 0 };
+    copy += add;
+    EXPECT_EQ(copy, initial);
+}
+
+TEST(Vector2UAddEqual, AddReal)
+{
+    jt::Vector2u initial { 5, 1 };
+    jt::Vector2u const add { 1, 2 };
+    jt::Vector2u const expected { initial.x() + add.x(), initial.y() + add.y() };
+    initial += add;
+    EXPECT_EQ(initial, expected);
+}
+
+#endif

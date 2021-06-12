@@ -41,9 +41,9 @@ public:
     jt::Rect const getGlobalBounds() const override;
     jt::Rect const getLocalBounds() const override;
 
-    virtual void setScale(jt::Vector2 const& scale);
+    void setScale(jt::Vector2 const& scale) override;
 
-    virtual const jt::Vector2 getScale() const;
+    const jt::Vector2 getScale() const override;
 
     virtual void setOrigin(jt::Vector2 const& origin);
 
