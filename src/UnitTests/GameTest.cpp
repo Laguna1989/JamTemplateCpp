@@ -158,10 +158,9 @@ TEST_F(GameTest, RunWithTwoStates)
 TEST_F(GameTest, StartGameWithOneIteration)
 {
     int count = 0;
-    EXPECT_CALL(*window, isOpen).WillRepeatedly(::testing::Return([&count]() {
-        count++;
-        return count <= 1;
-    }()));
+    EXPECT_CALL(*window, isOpen)
+        .WillOnce(::testing::Return(true))
+        .WillOnce(::testing::Return(false));
     auto s = std::make_shared<NiceMock<MockState>>();
     g->startGame(s, []() {});
 }
