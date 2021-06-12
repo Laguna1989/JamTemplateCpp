@@ -10,6 +10,17 @@ TEST(ButtonTest, InitialValues)
 
     EXPECT_EQ(b.getPosition(), expectedPos);
     EXPECT_EQ(b.getCallbackCount(), 0);
+    EXPECT_TRUE(b.getVisible());
+}
+
+TEST(ButtonTest, SetVisibleSetsCorrectValue)
+{
+    jt::Button b { jt::Vector2u { 32, 16 } };
+    ASSERT_TRUE(b.getVisible());
+    b.setVisible(true);
+    EXPECT_TRUE(b.getVisible());
+    b.setVisible(false);
+    EXPECT_FALSE(b.getVisible());
 }
 
 TEST(ButtonTest, UpdateWithoutGameInstanceRaisesException)
@@ -40,10 +51,23 @@ TEST(ButtonTest, Draw)
     SUCCEED();
 }
 
-TEST(ButtonTest, CustomDrawable)
+TEST(ButtonTest, DrawInvisibleButton)
 {
     auto game = std::make_shared<MockGame>();
     EXPECT_CALL(*game, input());
+    jt::Button b {};
+    b.setVisible(false);
+    b.setGameInstance(game);
+    b.update(0.1f);
+    EXPECT_CALL(*game, getRenderTarget()).Times(0);
+    b.draw();
+    SUCCEED();
+}
+
+TEST(ButtonTest, CustomDrawable)
+{
+    auto game = std::make_shared<MockGame>();
+    EXPECT_CALL(*game, input()).Times(2);
     jt::Button b {};
     b.setGameInstance(game);
     b.update(0.1f);
@@ -52,8 +76,9 @@ TEST(ButtonTest, CustomDrawable)
     b.setDrawable(d);
     std::shared_ptr<jt::renderTarget> rt = nullptr;
     EXPECT_CALL(*game, getRenderTarget()).Times(2);
+    EXPECT_CALL(*d, update(0.1f));
+    b.update(0.1f);
     EXPECT_CALL(*d, draw(rt));
-
     b.draw();
     SUCCEED();
 }

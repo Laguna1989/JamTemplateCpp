@@ -30,6 +30,7 @@ public:
     bool IsMouseOver();
 
     void setVisible(bool v);
+    bool getVisible() const;
 
     void setPosition(jt::Vector2 const& v);
     jt::Vector2 getPosition(void) const;

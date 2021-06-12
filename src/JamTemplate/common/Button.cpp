@@ -45,12 +45,17 @@ bool Button::IsMouseOver()
 
 void Button::setVisible(bool v) { m_visible = v; }
 
+bool Button::getVisible() const { return m_visible; }
+
 void Button::setPosition(jt::Vector2 const& v) { m_pos = v; }
 
 jt::Vector2 Button::getPosition() const { return m_pos; }
 
 void Button::doDraw() const
 {
+    if (!m_visible) {
+        return;
+    }
     m_background->draw(getGame()->getRenderTarget());
     if (m_drawable)
         m_drawable->draw(getGame()->getRenderTarget());
