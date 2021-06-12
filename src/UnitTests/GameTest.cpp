@@ -1,5 +1,6 @@
 ﻿#include "Game.hpp"
 #include "GameState.hpp"
+#include "Rect_lib.hpp"
 #include "RenderWindow.hpp"
 #include "gmock/gmock.h"
 #include "gtest/gtest.h"
@@ -52,23 +53,40 @@ public:
 
 using ::testing::NiceMock;
 
-TEST_F(GameTest, CallsToActiveState)
+TEST_F(GameTest, GameUpdateCallsStateUpdateForActiveState)
 {
     auto ms = std::make_shared<MockState>();
     EXPECT_CALL(*ms, doInternalCreate());
     g->switchState(ms);
 
     float expected_update_time = 0.05f;
-    // EXPECT_CALL(*ms, doInternalUpdate(expected_update_time));
+    EXPECT_CALL(*ms, doInternalUpdate(expected_update_time));
     g->update(expected_update_time);
-
-    // EXPECT_CALL(*ms, doInternalDraw());
-    g->draw();
 }
 
-TEST_F(GameTest, SwitchToNullptrStrate)
+TEST_F(GameTest, UpdateWithView)
+{
+    auto ms = std::make_shared<MockState>();
+    EXPECT_CALL(*ms, doInternalCreate());
+    g->switchState(ms);
+
+    auto view = std::make_shared<sf::View>(jt::Rect(0, 0, 100.0f, 50.0f));
+    view->setViewport(jt::Rect(0, 0, 1, 1));
+    g->setView(view);
+
+    float expected_update_time = 0.05f;
+    EXPECT_CALL(*ms, doInternalUpdate(expected_update_time));
+    g->update(expected_update_time);
+}
+
+TEST_F(GameTest, SwitchToNullptrState)
 {
     EXPECT_THROW(g->switchState(nullptr), std::invalid_argument);
+}
+
+TEST_F(GameTest, SetNullptrRendertarget)
+{
+    EXPECT_THROW(g->setRenderTarget(nullptr), std::invalid_argument);
 }
 
 TEST_F(GameTest, SwitchStateTwice)
@@ -135,6 +153,17 @@ TEST_F(GameTest, RunWithTwoStates)
     g->switchState(std::make_shared<NiceMock<MockState>>());
     EXPECT_NO_THROW(g->run());
     EXPECT_NO_THROW(g->run());
+}
+
+TEST_F(GameTest, StartGameWithOneIteration)
+{
+    int count = 0;
+    EXPECT_CALL(*window, isOpen).WillRepeatedly(::testing::Return([&count]() {
+        count++;
+        return count == 0;
+    }()));
+    auto s = std::make_shared<NiceMock<MockState>>();
+    g->startGame(s, []() {});
 }
 
 // TODO Add a test that verifies that cam.reset is called on swithState();

@@ -81,9 +81,6 @@ std::shared_ptr<sf::View> Game::getView() { return m_view; }
 
 void Game::doUpdate(float const elapsed)
 {
-    if (m_renderTarget == nullptr) {
-        return;
-    }
     if (m_state == nullptr) {
         return;
     }
@@ -92,19 +89,22 @@ void Game::doUpdate(float const elapsed)
     jt::Vector2 mpf = m_window->getMousePosition();
 
     jt::Vector2 mpfs = m_window->getMousePositionScreen(getCamera()->getZoom());
+    if (input()) {
+        input()->mouse()->updateMousePosition(
+            MousePosition { mpf.x(), mpf.y(), mpfs.x(), mpfs.y() });
+        input()->mouse()->updateButtons();
+        input()->keyboard()->updateKeys();
+    }
+    if (getView()) {
+        int const camOffsetix { static_cast<int>(
+            getCamera()->getCamOffset().x() + getView()->getSize().x / 2) };
+        int const camOffsetiy { static_cast<int>(
+            getCamera()->getCamOffset().y() + getView()->getSize().y / 2) };
 
-    input()->mouse()->updateMousePosition(MousePosition { mpf.x(), mpf.y(), mpfs.x(), mpfs.y() });
-    input()->mouse()->updateButtons();
-    input()->keyboard()->updateKeys();
-
-    int const camOffsetix { static_cast<int>(
-        getCamera()->getCamOffset().x() + getView()->getSize().x / 2) };
-    int const camOffsetiy { static_cast<int>(
-        getCamera()->getCamOffset().y() + getView()->getSize().y / 2) };
-
-    getView()->setCenter(
-        jt::Vector2 { static_cast<float>(camOffsetix), static_cast<float>(camOffsetiy) });
-    DrawableImpl::setCamOffset(-1.0f * (getView()->getCenter() - getView()->getSize() / 2.0f));
+        getView()->setCenter(
+            jt::Vector2 { static_cast<float>(camOffsetix), static_cast<float>(camOffsetiy) });
+        DrawableImpl::setCamOffset(-1.0f * (getView()->getCenter() - getView()->getSize() / 2.0f));
+    }
 };
 
 void Game::doDraw() const

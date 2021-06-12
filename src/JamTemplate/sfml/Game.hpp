@@ -30,9 +30,14 @@ public:
     void setRenderTarget(std::shared_ptr<jt::renderTarget> rt) override;
     std::shared_ptr<jt::renderTarget> getRenderTarget() const override;
 
-    virtual std::shared_ptr<MusicPlayerInterface> getMusicPlayer() override;
+    std::shared_ptr<MusicPlayerInterface> getMusicPlayer() override;
 
-    virtual std::shared_ptr<InputManagerInterface> input() override;
+    std::shared_ptr<InputManagerInterface> input() override;
+
+    // DO NOT CALL FROM GAME CODE
+    void setView(std::shared_ptr<sf::View> view);
+    // DO NOT CALL FROM GAME CODE
+    std::shared_ptr<sf::View> getView();
 
 private:
     std::shared_ptr<jt::RenderWindowInterface> m_window { nullptr };
@@ -51,9 +56,6 @@ private:
     void updateShake(float elapsed) override;
     void applyCamShakeToView();
     void removeCamShakeFromView();
-
-    void setView(std::shared_ptr<sf::View> view);
-    std::shared_ptr<sf::View> getView();
 };
 
 } // namespace jt
