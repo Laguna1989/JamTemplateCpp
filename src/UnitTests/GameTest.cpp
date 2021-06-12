@@ -160,7 +160,7 @@ TEST_F(GameTest, StartGameWithOneIteration)
     int count = 0;
     EXPECT_CALL(*window, isOpen).WillRepeatedly(::testing::Return([&count]() {
         count++;
-        return count == 0;
+        return count <= 1;
     }()));
     auto s = std::make_shared<NiceMock<MockState>>();
     g->startGame(s, []() {});
