@@ -148,15 +148,6 @@ TEST(SpriteTest, GetPixelOfSprite)
     EXPECT_EQ(s.getColorAtPixel(jt::Vector2u { 5, 5 }), expected);
 }
 
-TEST(SpriteTest, GetPixelOutOfBounds)
-{
-    testing::FLAGS_gtest_death_test_style = "threadsafe";
-    jt::Sprite s;
-    s.loadSprite("assets/coin.png", jt::Recti { 0, 0, 16, 16 });
-
-    EXPECT_DEATH(s.getColorAtPixel(jt::Vector2u { 22, 25 }), "");
-}
-
 TEST(SpriteTest, CleanImage)
 {
     jt::Sprite s;
@@ -216,4 +207,16 @@ TEST(SpriteTest, LoadSpriteFromTexture)
     EXPECT_FLOAT_EQ(s.getLocalBounds().width(), 20.0f);
     EXPECT_FLOAT_EQ(s.getLocalBounds().height(), 20.0f);
 }
+
+#if ENABLE_DISPLAY_TESTS
+TEST(SpriteTest, GetPixelOutOfBounds)
+{
+    testing::FLAGS_gtest_death_test_style = "threadsafe";
+    jt::Sprite s;
+    s.loadSprite("assets/coin.png", jt::Recti { 0, 0, 16, 16 });
+
+    EXPECT_DEATH(s.getColorAtPixel(jt::Vector2u { 22, 25 }), "");
+}
+#endif
+
 #endif
