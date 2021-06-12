@@ -41,6 +41,8 @@ private:
     void createTextTitle();
 
     void createTweens();
+    void createInstructionTweenScaleUp();
+    void createInstructionTweenScaleDown();
     void createTweenTitleAlpha();
     void createTweenOverlayAlpha();
     void createTweenCreditsPosition();

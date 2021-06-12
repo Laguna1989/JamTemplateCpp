@@ -81,6 +81,27 @@ void StateMenu::createTweens()
     createTweenExplanationScale();
 }
 
+void StateMenu::createInstructionTweenScaleUp()
+{
+    auto ts = jt::TweenScale<jt::Text>::create(
+        m_text_Explanation, 0.75f, jt::Vector2 { 1.0f, 1.0f }, jt::Vector2 { 1.05f, 1.05f });
+    ts->setAgePercentConversion([](float age) {
+        return jt::Lerp::cosine(0.0f, 1.0f, jt::MathHelper::clamp(age, 0.0f, 1.0f));
+    });
+    ts->addCompleteCallback([this]() { createInstructionTweenScaleDown(); });
+    add(ts);
+}
+void StateMenu::createInstructionTweenScaleDown()
+{
+    auto ts = jt::TweenScale<jt::Text>::create(
+        m_text_Explanation, 0.75f, jt::Vector2 { 1.05f, 1.05f }, jt::Vector2 { 1.0f, 1.0f });
+    ts->setAgePercentConversion([](float age) {
+        return jt::Lerp::cosine(0.0f, 1.0f, jt::MathHelper::clamp(age, 0.0f, 1.0f));
+    });
+    ts->addCompleteCallback([this]() { createInstructionTweenScaleUp(); });
+    add(ts);
+}
+
 void StateMenu::createTweenExplanationScale()
 {
     auto s2 = m_text_Explanation->getPosition() + jt::Vector2 { -1000, 0 };
@@ -90,15 +111,7 @@ void StateMenu::createTweenExplanationScale()
     tween->setStartDelay(0.3f);
     tween->setSkipFrames();
 
-    tween->addCompleteCallback([this]() {
-        auto ts = jt::TweenScale<jt::Text>::create(
-            m_text_Explanation, 0.75f, jt::Vector2 { 1.0f, 1.0f }, jt::Vector2 { 1.05f, 1.05f });
-        ts->setRepeat(true);
-        ts->setAgePercentConversion([](float age) {
-            return jt::Lerp::cosine(0.0f, 1.0f, jt::MathHelper::clamp(age, 0.0f, 1.0f));
-        });
-        add(ts);
-    });
+    tween->addCompleteCallback([this]() { createInstructionTweenScaleUp(); });
     add(tween);
 }
 
