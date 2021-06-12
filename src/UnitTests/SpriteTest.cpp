@@ -150,6 +150,7 @@ TEST(SpriteTest, GetPixelOfSprite)
 
 TEST(SpriteTest, GetPixelOutOfBounds)
 {
+    testing::FLAGS_gtest_death_test_style = "threadsafe";
     jt::Sprite s;
     s.loadSprite("assets/coin.png", jt::Recti { 0, 0, 16, 16 });
 
