@@ -133,12 +133,6 @@ TEST(BarTest, SetPositionSetsCorrectPosition)
     EXPECT_FLOAT_EQ(result.y(), 100.0f);
 }
 
-TEST(BarTest, FlashRaisesException)
-{
-    jt::Bar b { 10.0f, 10.0f };
-    EXPECT_THROW(b.flash(1.0f), std::logic_error);
-}
-
 TEST(BarTest, ScaleBarSetsScale)
 {
     jt::Bar b { 10.0f, 10.0f };
