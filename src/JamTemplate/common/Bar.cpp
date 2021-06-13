@@ -1,4 +1,5 @@
 ﻿#include "Bar.hpp"
+#include <iostream>
 
 namespace jt {
 
@@ -101,10 +102,7 @@ const jt::Vector2 Bar::getPosition() const { return m_shapeFull->getPosition(); 
 jt::Rect const Bar::getGlobalBounds() const { return m_shapeFull->getGlobalBounds(); }
 jt::Rect const Bar::getLocalBounds() const { return m_shapeFull->getLocalBounds(); }
 
-void Bar::setFlashColor(jt::Color const& /*col*/)
-{
-    throw std::logic_error { "flash not supported by Bar" };
-}
+void Bar::setFlashColor(jt::Color const& /*col*/) { std::cerr << "flash not supported by Bar\n"; }
 const jt::Color Bar::getFlashColor() const { return jt::colors::White; }
 
 void Bar::setScale(jt::Vector2 const& scale)

@@ -1,6 +1,7 @@
 ﻿#include "Tilemap.hpp"
 #include "Conversions.hpp"
 #include "GameInterface.hpp"
+#include <iostream>
 #include <memory>
 
 namespace jt {
@@ -130,7 +131,7 @@ jt::Rect const Tilemap::getLocalBounds() const { return jt::Rect {}; }
 
 void Tilemap::setFlashColor(jt::Color const& /*col*/)
 {
-    throw std::logic_error { "flash not supported by Bar" };
+    std::cerr << "flash not supported by Tilemap\n";
 }
 const jt::Color Tilemap::getFlashColor() const { return jt::colors::Black; }
 
