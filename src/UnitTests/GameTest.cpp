@@ -193,17 +193,26 @@ TEST_F(GameTest, SetRenderTarget)
     jt::RenderWindow::s_view = std::shared_ptr<sf::View> { nullptr };
 }
 
-TEST_F(GameTest, DrawWithRenderTarget)
+TEST_F(GameTest, DrawWithRenderTargetAndState)
 {
 
     EXPECT_CALL(*window, createRenderTarget())
         .WillOnce(::testing::Return(std::make_shared<jt::renderTarget>()));
-    EXPECT_CALL(*window, getSize()).WillOnce(::testing::Return(jt::Vector2 { 20.0f, 40.0f }));
+    EXPECT_CALL(*window, getSize()).WillRepeatedly(::testing::Return(jt::Vector2 { 20.0f, 40.0f }));
     g->setupRenderTarget();
     EXPECT_NE(g->getRenderTarget(), nullptr);
 
+    auto ms = std::make_shared<MockState>();
+    EXPECT_CALL(*ms, doInternalCreate());
+    g->switchState(ms);
+
+    EXPECT_CALL(*ms, doInternalUpdate(0.1f));
     g->update(0.1f);
+    EXPECT_CALL(*ms, doInternalDraw());
     g->draw();
+
+    // cleanup so that future tests are not affected!
+    jt::RenderWindow::s_view = std::shared_ptr<sf::View> { nullptr };
 }
 
 TEST_F(GameTest, GetMusicPlayer) { EXPECT_EQ(g->getMusicPlayer(), nullptr); }
