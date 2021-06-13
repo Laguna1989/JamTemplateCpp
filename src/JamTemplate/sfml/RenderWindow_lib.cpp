@@ -15,8 +15,7 @@ RenderWindow::RenderWindow(unsigned int width, unsigned int height, std::string 
 
 std::shared_ptr<jt::renderTarget> RenderWindow::createRenderTarget()
 {
-    auto window = std::make_shared<jt::renderTarget>();
-    return window;
+    return std::make_shared<jt::renderTarget>();
 }
 
 bool RenderWindow::isOpen() const { return m_window->isOpen(); }
@@ -39,9 +38,6 @@ jt::Vector2 RenderWindow::getSize() const
 
 void RenderWindow::draw(std::shared_ptr<jt::Sprite> spr)
 {
-    if (!m_window) {
-        throw std::invalid_argument { "Cannot draw on nullptr window" };
-    }
     if (!spr) {
         throw std::invalid_argument { "Cannot draw nullptr sprite" };
     }

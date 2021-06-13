@@ -15,19 +15,19 @@ class RenderWindow : public RenderWindowInterface {
 public:
     RenderWindow(unsigned int width, unsigned int height, std::string const& title);
 
-    virtual std::shared_ptr<jt::renderTarget> createRenderTarget() override;
+    std::shared_ptr<jt::renderTarget> createRenderTarget() override;
 
-    virtual bool isOpen() const override;
-    virtual void checkForClose() override;
+    bool isOpen() const override;
+    void checkForClose() override;
 
-    virtual jt::Vector2 getSize() const override;
+    jt::Vector2 getSize() const override;
 
-    virtual void draw(std::shared_ptr<jt::Sprite>) override;
+    void draw(std::shared_ptr<jt::Sprite>) override;
 
-    virtual void display() override;
+    void display() override;
 
-    virtual jt::Vector2 getMousePosition() override;
-    virtual jt::Vector2 getMousePositionScreen(float zoom) override;
+    jt::Vector2 getMousePosition() override;
+    jt::Vector2 getMousePositionScreen(float zoom) override;
 
     // do not use/write s_view manually from gameplay code. Should only be set once in Game.cpp.
     static std::weak_ptr<sf::View> s_view;
