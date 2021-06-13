@@ -165,6 +165,19 @@ TEST_F(GameTest, StartGameWithOneIteration)
     g->startGame(s, []() {});
 }
 
+TEST_F(GameTest, SetupRenderTarget)
+{
+    EXPECT_CALL(*window, createRenderTarget())
+        .WillOnce(::testing::Return(std::make_shared<jt::renderTarget>()));
+    EXPECT_CALL(*window, getSize()).WillOnce(::testing::Return(jt::Vector2 { 20.0f, 40.0f }));
+    g->setupRenderTarget();
+    EXPECT_FLOAT_EQ(g->getView()->getSize().x, 20.0f);
+    EXPECT_FLOAT_EQ(g->getView()->getSize().y, 40.0f);
+
+    // cleanup so that future tests are not affected!
+    jt::RenderWindow::s_view = std::shared_ptr<sf::View> { nullptr };
+}
+
 // TODO Add a test that verifies that cam.reset is called on swithState();
 
 #endif
