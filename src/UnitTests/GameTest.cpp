@@ -53,6 +53,8 @@ public:
 
 using ::testing::NiceMock;
 
+TEST_F(GameTest, GameUpdateWithoutState) { g->update(0.01f); }
+
 TEST_F(GameTest, GameUpdateCallsStateUpdateForActiveState)
 {
     auto ms = std::make_shared<MockState>();
@@ -77,6 +79,21 @@ TEST_F(GameTest, UpdateWithView)
     float expected_update_time = 0.05f;
     EXPECT_CALL(*ms, doInternalUpdate(expected_update_time));
     g->update(expected_update_time);
+}
+
+TEST_F(GameTest, SetViewWithRenderTarget)
+{
+
+    EXPECT_CALL(*window, createRenderTarget())
+        .WillOnce(::testing::Return(std::make_shared<jt::renderTarget>()));
+    EXPECT_CALL(*window, getSize()).WillRepeatedly(::testing::Return(jt::Vector2 { 20.0f, 40.0f }));
+    g->setupRenderTarget();
+    EXPECT_NE(g->getRenderTarget(), nullptr);
+
+    g->setView(g->getView());
+
+    // cleanup so that future tests are not affected!
+    jt::RenderWindow::s_view = std::shared_ptr<sf::View> { nullptr };
 }
 
 TEST_F(GameTest, SwitchToNullptrState)
@@ -195,7 +212,6 @@ TEST_F(GameTest, SetRenderTarget)
 
 TEST_F(GameTest, DrawWithRenderTargetAndState)
 {
-
     EXPECT_CALL(*window, createRenderTarget())
         .WillOnce(::testing::Return(std::make_shared<jt::renderTarget>()));
     EXPECT_CALL(*window, getSize()).WillRepeatedly(::testing::Return(jt::Vector2 { 20.0f, 40.0f }));
