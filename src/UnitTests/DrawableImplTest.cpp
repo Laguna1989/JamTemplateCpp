@@ -93,3 +93,14 @@ TEST_P(DrawableImplTestFixture, DrawWithFlash)
     drawable->update(5.0f);
     drawable->draw(rt);
 }
+
+TEST_P(DrawableImplTestFixture, DrawWithShake)
+{
+    std::shared_ptr<jt::DrawableInterface> drawable = GetParam();
+    drawable->shake(5.0f, 0.02f);
+    drawable->update(0.1f);
+    auto rt = std::make_shared<jt::renderTarget>();
+    drawable->draw(rt);
+    drawable->update(5.0f);
+    drawable->draw(rt);
+}
