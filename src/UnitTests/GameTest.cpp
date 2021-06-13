@@ -178,6 +178,36 @@ TEST_F(GameTest, SetupRenderTarget)
     jt::RenderWindow::s_view = std::shared_ptr<sf::View> { nullptr };
 }
 
+TEST_F(GameTest, SetRenderTarget)
+{
+
+    EXPECT_CALL(*window, createRenderTarget())
+        .WillOnce(::testing::Return(std::make_shared<jt::renderTarget>()));
+    EXPECT_CALL(*window, getSize()).WillOnce(::testing::Return(jt::Vector2 { 20.0f, 40.0f }));
+    g->setupRenderTarget();
+    EXPECT_NE(g->getRenderTarget(), nullptr);
+
+    g->setRenderTarget(g->getRenderTarget());
+
+    // cleanup so that future tests are not affected!
+    jt::RenderWindow::s_view = std::shared_ptr<sf::View> { nullptr };
+}
+
+TEST_F(GameTest, DrawWithRenderTarget)
+{
+
+    EXPECT_CALL(*window, createRenderTarget())
+        .WillOnce(::testing::Return(std::make_shared<jt::renderTarget>()));
+    EXPECT_CALL(*window, getSize()).WillOnce(::testing::Return(jt::Vector2 { 20.0f, 40.0f }));
+    g->setupRenderTarget();
+    EXPECT_NE(g->getRenderTarget(), nullptr);
+
+    g->update(0.1f);
+    g->draw();
+}
+
+TEST_F(GameTest, GetMusicPlayer) { EXPECT_EQ(g->getMusicPlayer(), nullptr); }
+
 // TODO Add a test that verifies that cam.reset is called on swithState();
 
 #endif
