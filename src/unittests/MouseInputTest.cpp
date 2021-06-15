@@ -1,4 +1,4 @@
-﻿#include "MouseInput.hpp"
+﻿#include "mouse_input.hpp"
 #include "gtest/gtest.h"
 
 TEST(MouseInput, UpdateStoresMousePosition)

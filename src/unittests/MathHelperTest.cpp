@@ -1,5 +1,5 @@
-﻿#include "MathHelper.hpp"
-#include "Vector.hpp"
+﻿#include "math_helper.hpp"
+#include "vector.hpp"
 #include "gtest/gtest.h"
 
 using namespace jt::MathHelper;

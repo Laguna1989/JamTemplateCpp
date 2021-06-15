@@ -1,8 +1,8 @@
-﻿#include "ObjectGroup.hpp"
-#include "MockGame.hpp"
+﻿#include "MockGame.hpp"
 #include "MockObject.hpp"
-#include "gmock/gmock.h"
-#include "gtest/gtest.h"
+#include "object_group.hpp"
+#include <gmock/gmock.h>
+#include <gtest/gtest.h>
 
 using Group = jt::ObjectGroup<MockObject>;
 using ::testing::_;

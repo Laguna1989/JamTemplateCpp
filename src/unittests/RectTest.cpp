@@ -1,5 +1,5 @@
-﻿#include "Rect.hpp"
-#include "gtest/gtest.h"
+﻿#include "rect.hpp"
+#include <gtest/gtest.h>
 
 TEST(RectEQ, Equal)
 {

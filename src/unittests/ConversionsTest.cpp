@@ -1,5 +1,5 @@
-﻿#include "Conversions.hpp"
-#include "Vector.hpp"
+﻿#include "conversions.hpp"
+#include "vector.hpp"
 #include "gtest/gtest.h"
 #include <limits>
 #include <utility>

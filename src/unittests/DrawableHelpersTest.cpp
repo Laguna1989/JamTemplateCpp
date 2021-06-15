@@ -1,8 +1,7 @@
-﻿#include "DrawableHelpers.hpp"
-#include "Shape.hpp"
-#include "Sprite.hpp"
-#include "Text.hpp"
-
+﻿#include "drawable_helpers.hpp"
+#include "shape.hpp"
+#include "sprite.hpp"
+#include "text.hpp"
 #include <gtest/gtest.h>
 
 TEST(DrawableHelpersTest, CreateRectShape)

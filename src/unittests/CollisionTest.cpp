@@ -1,7 +1,6 @@
-﻿#include "Collision.hpp"
-#include "Shape.hpp"
+﻿#include "collision.hpp"
+#include "shape.hpp"
 #include "gtest/gtest.h"
-#include <utility>
 
 using jt::Collision;
 using jt::Shape;

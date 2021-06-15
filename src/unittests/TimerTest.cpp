@@ -1,7 +1,6 @@
-﻿#include "Timer.hpp"
-#include "gtest/gtest.h"
+﻿#include "timer.hpp"
+#include <gtest/gtest.h>
 #include <limits>
-#include <utility>
 
 using jt::Timer;
 

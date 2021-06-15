@@ -1,6 +1,5 @@
-﻿#include "Sprite.hpp"
+﻿#include "sprite.hpp"
 #include <gtest/gtest.h>
-#include <stdexcept>
 
 TEST(SpriteTest, SpriteCanBeDefaultConstructed)
 {

@@ -1,4 +1,4 @@
-﻿#include "Text.hpp"
+﻿#include "text.hpp"
 #include <gtest/gtest.h>
 
 namespace {

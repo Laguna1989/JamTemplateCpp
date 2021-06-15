@@ -1,4 +1,4 @@
-﻿#include "Animation.hpp"
+﻿#include "animation.hpp"
 #include <gtest/gtest.h>
 #include <stdexcept>
 

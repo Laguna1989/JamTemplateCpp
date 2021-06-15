@@ -1,8 +1,8 @@
-﻿#include "GameState.hpp"
-#include "GameObject.hpp"
-#include "MockGame.hpp"
+﻿#include "MockGame.hpp"
 #include "MockObject.hpp"
 #include "MockTween.hpp"
+#include "game_object.hpp"
+#include "game_state.hpp"
 #include "gmock/gmock.h"
 #include "gtest/gtest.h"
 

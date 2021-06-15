@@ -1,4 +1,4 @@
-﻿#include "InfoRect.hpp"
+﻿#include "info_rect.hpp"
 #include <gtest/gtest.h>
 
 TEST(InfoRectTest, ContainsStoredValues)

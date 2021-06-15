@@ -1,4 +1,4 @@
-﻿#include "CircularBuffer.hpp"
+﻿#include "circular_buffer.hpp"
 #include <cstddef>
 #include <gtest/gtest.h>
 template <std::size_t size>

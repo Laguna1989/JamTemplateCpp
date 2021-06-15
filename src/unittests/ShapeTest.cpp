@@ -1,4 +1,4 @@
-﻿#include "Shape.hpp"
+﻿#include "shape.hpp"
 #include <gtest/gtest.h>
 
 TEST(ShapeTest, ShapeCanBeDefaultConstructed)

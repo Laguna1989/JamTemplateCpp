@@ -1,6 +1,6 @@
-﻿#include "Random.hpp"
-#include "RandomSampleAndHold.hpp"
-#include "Vector.hpp"
+﻿#include "random.hpp"
+#include "random_sample_and_hold.hpp"
+#include "vector.hpp"
 #include "gtest/gtest.h"
 #include <utility>
 

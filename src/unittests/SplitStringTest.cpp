@@ -1,5 +1,5 @@
-﻿#include "SplitString.hpp"
-#include "gtest/gtest.h"
+﻿#include "splitstring.hpp"
+#include <gtest/gtest.h>
 #include <string>
 
 using jt::SplitString;

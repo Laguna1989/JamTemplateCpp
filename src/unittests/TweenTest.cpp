@@ -1,12 +1,12 @@
-﻿#include "Color.hpp"
-#include "TweenAlpha.hpp"
-#include "TweenColor.hpp"
-#include "TweenPosition.hpp"
-#include "TweenRotation.hpp"
-#include "TweenScale.hpp"
-#include "Vector.hpp"
-#include "gmock/gmock.h"
-#include "gtest/gtest.h"
+﻿#include "color.hpp"
+#include "tween_alpha.hpp"
+#include "tween_color.hpp"
+#include "tween_position.hpp"
+#include "tween_rotation.hpp"
+#include "tween_scale.hpp"
+#include "vector.hpp"
+#include <gmock/gmock.h>
+#include <gtest/gtest.h>
 
 class Object {
 public:

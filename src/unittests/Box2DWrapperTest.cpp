@@ -1,7 +1,5 @@
-﻿#include "Box2DWrapper.hpp"
-
-#include "Conversions.hpp"
-
+﻿#include "Conversions.hpp"
+#include "box2d_wrapper.hpp"
 #include <gtest/gtest.h>
 
 using namespace ::testing;

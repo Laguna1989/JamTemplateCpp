@@ -1,7 +1,7 @@
-﻿#include "TextureManager.hpp"
-#include "Color.hpp"
-#include "gtest/gtest.h"
-#include <exception>
+﻿#include "color.hpp"
+#include "texture_manager.hpp"
+#include <gtest/gtest.h>
+#include <stdexcept>
 
 using jt::TextureManager;
 #ifndef ENABLE_WEB

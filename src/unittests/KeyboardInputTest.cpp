@@ -1,4 +1,4 @@
-﻿#include "KeyboardInput.hpp"
+﻿#include "keyboard_input.hpp"
 #include "gtest/gtest.h"
 
 TEST(KeyboardInput, AllKeysAlwaysPressed)

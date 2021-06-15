@@ -1,9 +1,9 @@
-﻿#include "Animation.hpp"
-#include "Bar.hpp"
-#include "Shape.hpp"
-#include "Sprite.hpp"
-#include "Text.hpp"
-#include "Tilemap.hpp"
+﻿#include "animation.hpp"
+#include "bar.hpp"
+#include "shape.hpp"
+#include "sprite.hpp"
+#include "text.hpp"
+#include "tilemap.hpp"
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 #include <memory>

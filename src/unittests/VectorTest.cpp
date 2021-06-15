@@ -1,5 +1,5 @@
-﻿#include "Vector.hpp"
-#include "gtest/gtest.h"
+﻿#include "vector.hpp"
+#include <gtest/gtest.h>
 
 TEST(VectorEQ, Equal)
 {

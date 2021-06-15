@@ -1,4 +1,4 @@
-﻿#include "Bar.hpp"
+﻿#include "bar.hpp"
 #include <gtest/gtest.h>
 
 TEST(BarTest, BarInitialValues)

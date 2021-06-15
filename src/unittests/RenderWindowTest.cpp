@@ -1,5 +1,5 @@
-﻿#include "RenderWindow.hpp"
-#include "Sprite.hpp"
+﻿#include "render_window.hpp"
+#include "sprite.hpp"
 #include <gtest/gtest.h>
 #include <stdexcept>
 

@@ -1,5 +1,5 @@
-﻿#include "Camera.hpp"
-#include "Vector.hpp"
+﻿#include "camera.hpp"
+#include "vector.hpp"
 #include "gtest/gtest.h"
 
 TEST(CameraTest, InitialValues)

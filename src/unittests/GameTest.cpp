@@ -1,7 +1,7 @@
-﻿#include "Game.hpp"
-#include "GameState.hpp"
-#include "Rect_lib.hpp"
-#include "RenderWindow.hpp"
+﻿#include "game.hpp"
+#include "game_state.hpp"
+#include "rect_lib.hpp"
+#include "render_window.hpp"
 #include "gmock/gmock.h"
 #include "gtest/gtest.h"
 

@@ -1,6 +1,5 @@
-﻿#include "Lerp.hpp"
+﻿#include "lerp.hpp"
 #include "gtest/gtest.h"
-#include <utility>
 
 using namespace jt::Lerp;
 

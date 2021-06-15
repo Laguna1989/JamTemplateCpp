@@ -1,5 +1,5 @@
-﻿#include "Sound.hpp"
-#include "gtest/gtest.h"
+﻿#include "sound.hpp"
+#include <gtest/gtest.h>
 #include <limits>
 #include <thread>
 #include <type_traits>

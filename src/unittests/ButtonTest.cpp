@@ -1,4 +1,4 @@
-﻿#include "Button.hpp"
+﻿#include "button.hpp"
 #include "MockDrawable.hpp"
 #include "MockGame.hpp"
 #include <gtest/gtest.h>
