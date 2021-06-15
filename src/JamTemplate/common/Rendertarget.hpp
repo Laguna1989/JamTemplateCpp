@@ -1,6 +1,0 @@
-﻿#ifndef GUARD_JAMTEMPLATE_RENDERTARGET_GUARD_HPP
-#define GUARD_JAMTEMPLATE_RENDERTARGET_GUARD_HPP
-
-#include "Rendertarget_lib.hpp"
-
-#endif

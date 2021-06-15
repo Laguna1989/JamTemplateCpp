@@ -7,7 +7,7 @@ set (PROJECTNAME "MyAwesomeGame")
 
 set (ENABLE_UNITTESTS OFF CACHE BOOL "enable unittests")
 set (ENABLE_COVERAGE OFF CACHE BOOL "enable coverage")
-set (ENABLE_STRESSTEST OFF CACHE BOOL "enable stresstest")
+set (ENABLE_STRESSTESTS OFF CACHE BOOL "enable stresstests")
 set (ENABLE_WEB OFF CACHE BOOL "enable web build using SDL and em++")
 set (ENABLE_DISPLAY_TESTS ON CACHE BOOL "enable unittests that require a display")
 # Apple users: set to /usr/local/Cellar/sfml/2.4.2_1/lib/ or respectively
@@ -125,22 +125,22 @@ target_include_directories(Box2D SYSTEM PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/ext/b
 ## setup JamTemplate
 #####################################################
 
-file(GLOB_RECURSE JAMTEMPLATEBASEFILES ${CMAKE_CURRENT_SOURCE_DIR}/src/JamTemplate/common/*)
+file(GLOB_RECURSE JAMTEMPLATEBASEFILES ${CMAKE_CURRENT_SOURCE_DIR}/src/jamtemplate/common/*)
 if(ENABLE_WEB)
-	file(GLOB_RECURSE JAMTEMPLATEFILES ${CMAKE_CURRENT_SOURCE_DIR}/src/JamTemplate/sdl/*)
+	file(GLOB_RECURSE JAMTEMPLATEFILES ${CMAKE_CURRENT_SOURCE_DIR}/src/jamtemplate/sdl/*)
 else()
-	file(GLOB_RECURSE JAMTEMPLATEFILES ${CMAKE_CURRENT_SOURCE_DIR}/src/JamTemplate/sfml/*)
+	file(GLOB_RECURSE JAMTEMPLATEFILES ${CMAKE_CURRENT_SOURCE_DIR}/src/jamtemplate/sfml/*)
 endif()
 
 add_library(JamTemplate ${JAMTEMPLATEFILES} ${JAMTEMPLATEBASEFILES})
 
 # add public includes, so they can be used by dependent targets
-target_include_directories(JamTemplate PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/src/JamTemplate/common)
+target_include_directories(JamTemplate PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/src/jamtemplate/common)
 target_include_directories(JamTemplate SYSTEM PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/ext/tileson-master/include)
 if(ENABLE_WEB)
-	target_include_directories(JamTemplate PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/src/JamTemplate/sdl)
+	target_include_directories(JamTemplate PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/src/jamtemplate/sdl)
 else()
-	target_include_directories(JamTemplate PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/src/JamTemplate/sfml)
+	target_include_directories(JamTemplate PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/src/jamtemplate/sfml)
 	target_include_directories(JamTemplate SYSTEM PUBLIC ${SFML_DIR_ROOT}/include)
 endif()
 
@@ -148,51 +148,51 @@ if(NOT ENABLE_WEB)
 	# group together similar files for a cleaner JamTemplate Project in IDEs that support this feature
 	source_group(
 		GameLoop FILES
-		src/JamTemplate/common/GameInterface.hpp
+		src/jamtemplate/common/game_interface.hpp
 
-		src/JamTemplate/common/GameLoopInterface.hpp
+		src/jamtemplate/common/game_loop_interface.hpp
 
-		src/JamTemplate/common/GameBase.cpp
-		src/JamTemplate/common/GameBase.hpp
+		src/jamtemplate/common/game_base.cpp
+		src/jamtemplate/common/game_base.hpp
 
-		src/JamTemplate/common/GameObject.cpp
-		src/JamTemplate/common/GameObject.hpp
+		src/jamtemplate/common/game_object.cpp
+		src/jamtemplate/common/game_object.hpp
 
-		src/JamTemplate/common/GameState.cpp
-		src/JamTemplate/common/GameState.hpp
+		src/jamtemplate/common/game_state.cpp
+		src/jamtemplate/common/game_state.hpp
 
-		src/JamTemplate/sfml/Game.cpp
-		src/JamTemplate/sfml/Game.hpp
+		src/jamtemplate/sfml/game.cpp
+		src/jamtemplate/sfml/game.hpp
 	)
 	source_group(
 		Drawables FILES
-		src/JamTemplate/common/Animation.cpp
-		src/JamTemplate/common/Animation.hpp
+		src/jamtemplate/common/animation.cpp
+		src/jamtemplate/common/animation.hpp
 
-		src/JamTemplate/common/Bar.cpp
-		src/JamTemplate/common/Bar.hpp
+		src/jamtemplate/common/bar.cpp
+		src/jamtemplate/common/bar.hpp
 
-		src/JamTemplate/common/DrawableImpl.cpp
-		src/JamTemplate/common/DrawableImpl.hpp
+		src/jamtemplate/common/drawable_impl.cpp
+		src/jamtemplate/common/drawable_impl.hpp
 		
-		src/JamTemplate/common/DrawableInterface.hpp
+		src/jamtemplate/common/drawable_interface.hpp
 
-		src/JamTemplate/common/DrawableHelpers.cpp
-		src/JamTemplate/common/DrawableHelpers.hpp
+		src/jamtemplate/common/drawable_helpers.cpp
+		src/jamtemplate/common/drawable_helpers.hpp
 
-		src/JamTemplate/sfml/Shape.cpp
-		src/JamTemplate/sfml/Shape.hpp
+		src/jamtemplate/sfml/shape.cpp
+		src/jamtemplate/sfml/shape.hpp
 
-		src/JamTemplate/sfml/Sprite.cpp
-		src/JamTemplate/sfml/Sprite.hpp
+		src/jamtemplate/sfml/sprite.cpp
+		src/jamtemplate/sfml/sprite.hpp
 
-		src/JamTemplate/sfml/Text.cpp
-		src/JamTemplate/sfml/Text.hpp
+		src/jamtemplate/sfml/text.cpp
+		src/jamtemplate/sfml/text.hpp
 
-		src/JamTemplate/common/Tilemap.hpp
-		src/JamTemplate/common/Tilemap.cpp
+		src/jamtemplate/common/tilemap.hpp
+		src/jamtemplate/common/tilemap.cpp
 	)
-	source_group(Tweens REGULAR_EXPRESSION src/JamTemplate/common/Tween*)
+	source_group(Tweens REGULAR_EXPRESSION src/jamtemplate/common/tween*)
 
 	target_link_libraries(JamTemplate optimized sfml-system )
 	target_link_libraries(JamTemplate optimized sfml-window )
@@ -212,15 +212,15 @@ target_link_libraries(JamTemplate Box2D)
 #####################################################
 ## setup StressTest
 #####################################################
-if (ENABLE_STRESSTEST)
-	file(GLOB_RECURSE STRESSTESTFILES src/StressTest/*)
+if (ENABLE_STRESSTESTS)
+	file(GLOB_RECURSE STRESSTESTFILES src/StressTests/*)
 	
-	add_executable(StressTest ${STRESSTESTFILES})
+	add_executable(StressTests ${STRESSTESTFILES})
 	if(ENABLE_WEB)
 		set(CMAKE_EXECUTABLE_SUFFIX ".html")
 	endif()
-	target_link_libraries(StressTest JamTemplate)
-	jt_use_assets(StressTest)
+	target_link_libraries(StressTests JamTemplate)
+	jt_use_assets(StressTests)
 endif()
 
 #####################################################
@@ -228,7 +228,7 @@ endif()
 #####################################################
 if (ENABLE_UNITTESTS)
 	
-	file(GLOB_RECURSE UNITTESTFILES src/UnitTests/*)
+	file(GLOB_RECURSE UNITTESTFILES src/unittests/*)
 	if ( (NOT ENABLE_DISPLAY_TESTS) OR ENABLE_WEB)
 		list(REMOVE_ITEM UNITTESTFILES 
 			"${CMAKE_CURRENT_SOURCE_DIR}/src/UnitTests/SoundTest.cpp")
@@ -282,7 +282,7 @@ endif()
 #####################################################
 ## setup Game executable
 #####################################################
-file(GLOB GAMEFILES src/Game/*)
+file(GLOB GAMEFILES src/game/*)
 add_executable(${PROJECTNAME}  ${GAMEFILES})
 if(ENABLE_WEB)
 	set(CMAKE_EXECUTABLE_SUFFIX ".html")
