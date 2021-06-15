@@ -1,4 +1,4 @@
-#include "SDLHelper.hpp"
+#include "sdl_helper.hpp"
 
 namespace jt {
 

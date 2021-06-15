@@ -1,7 +1,7 @@
 #ifndef GUARD_JAMTEMPLATE_MUSICPLAYER_HPP_INCLUDEGUARD
 #define GUARD_JAMTEMPLATE_MUSICPLAYER_HPP_INCLUDEGUARD
 
-#include "MusicPlayerInterface.hpp"
+#include "music_player_interface.hpp"
 #include <SDL2/SDL_mixer.h>
 
 namespace jt {

@@ -1,7 +1,7 @@
 ﻿#ifndef GUARD_JAMTEMPLATE_COLOR_LIB_GUARD_HPP
 #define GUARD_JAMTEMPLATE_COLOR_LIB_GUARD_HPP
 
-#include "Color_base.hpp"
+#include "color_base.hpp"
 #include <SDL.h>
 
 namespace jt {

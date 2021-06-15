@@ -1,7 +1,7 @@
 ﻿#ifndef GUARD_JAMTEMPLATE_SFML_SOUND_GUARD_HPP_12345
 #define GUARD_JAMTEMPLATE_SFML_SOUND_GUARD_HPP_12345
 
-#include "Sound_base.hpp"
+#include "sound_base.hpp"
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_mixer.h>
 #include <memory>

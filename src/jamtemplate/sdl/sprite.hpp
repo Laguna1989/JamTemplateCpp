@@ -1,10 +1,10 @@
 ﻿#ifndef GUARD_JAMTEMPLATE_SPRITE_HPP_INCLUDEGUARD
 #define GUARD_JAMTEMPLATE_SPRITE_HPP_INCLUDEGUARD
 
-#include "Color.hpp"
-#include "DrawableImpl.hpp"
-#include "Rendertarget.hpp"
-#include "Vector.hpp"
+#include "color.hpp"
+#include "drawable_impl.hpp"
+#include "render_target.hpp"
+#include "vector.hpp"
 #include <SDL.h>
 #include <memory>
 #include <string>

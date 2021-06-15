@@ -1,8 +1,8 @@
 ﻿#ifndef GUARD_JAMTEMPLATE_RENDERWINDOW_LIB_GUARD_HPP
 #define GUARD_JAMTEMPLATE_RENDERWINDOW_LIB_GUARD_HPP
 
-#include "RenderWindowInterface.hpp"
-#include "Sprite.hpp"
+#include "render_window_interface.hpp"
+#include "sprite.hpp"
 #include <SDL.h>
 #include <memory>
 

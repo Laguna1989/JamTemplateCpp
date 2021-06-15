@@ -1,8 +1,8 @@
 ﻿#ifndef GUARD_JAMTEMPLATE_INPUTMANAGER_HPP_INCLUDEGUARD
 #define GUARD_JAMTEMPLATE_INPUTMANAGER_HPP_INCLUDEGUARD
 
-#include "KeyCodes.hpp"
-#include "Vector.hpp"
+#include "key_codes.hpp"
+#include "vector.hpp"
 #include <SDL.h>
 #include <iostream>
 #include <map>

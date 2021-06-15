@@ -1,10 +1,10 @@
 ﻿#ifndef GUARD_JAMTEMPLATE_SHAPE_HPP_INCLUDEGUARD
 #define GUARD_JAMTEMPLATE_SHAPE_HPP_INCLUDEGUARD
 
-#include "DrawableImpl.hpp"
-#include "Rect.hpp"
-#include "Rendertarget.hpp"
-#include "Vector.hpp"
+#include "drawable_impl.hpp"
+#include "rect.hpp"
+#include "render_target.hpp"
+#include "vector.hpp"
 #include <SDL.h>
 #include <memory>
 

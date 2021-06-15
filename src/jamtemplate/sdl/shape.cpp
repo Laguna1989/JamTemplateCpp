@@ -1,9 +1,9 @@
-﻿#include "Shape.hpp"
-#include "Rect.hpp"
-#include "Rendertarget.hpp"
-#include "SDLHelper.hpp"
-#include "TextureManager.hpp"
-#include "Vector.hpp"
+﻿#include "shape.hpp"
+#include "rect.hpp"
+#include "render_target.hpp"
+#include "sdl_helper.hpp"
+#include "texture_manager.hpp"
+#include "vector.hpp"
 #include <SDL.h>
 #include <iostream>
 #include <memory>

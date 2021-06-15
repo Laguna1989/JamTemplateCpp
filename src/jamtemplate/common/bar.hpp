@@ -1,9 +1,9 @@
 ﻿#ifndef GUARD_JAMTEMPLATE_BAR_HPP_INCLUDEGUARD
 #define GUARD_JAMTEMPLATE_BAR_HPP_INCLUDEGUARD
 
-#include "Shape.hpp"
 #include "drawable_impl.hpp"
 #include "render_target.hpp"
+#include "shape.hpp"
 #include <memory>
 #include <vector>
 

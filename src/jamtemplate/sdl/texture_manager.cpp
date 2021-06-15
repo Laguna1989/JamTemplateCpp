@@ -1,7 +1,8 @@
-﻿#include "TextureManager.hpp"
-#include "SDLHelper.hpp"
-#include "SpriteFunctions.hpp"
+﻿#include "texture_manager.hpp"
+#include "sdl_helper.hpp"
+#include "sprite_functions.hpp"
 #include <SDL_image.h>
+#include <iostream>
 #include <map>
 
 namespace jt {

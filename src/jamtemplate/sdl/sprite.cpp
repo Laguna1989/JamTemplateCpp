@@ -1,8 +1,8 @@
-﻿#include "Sprite.hpp"
-#include "MathHelper.hpp"
-#include "Rendertarget.hpp"
-#include "SDLHelper.hpp"
-#include "TextureManager.hpp"
+﻿#include "sprite.hpp"
+#include "math_helper.hpp"
+#include "render_target.hpp"
+#include "sdl_helper.hpp"
+#include "texture_manager.hpp"
 #include <SDL_image.h>
 
 namespace jt {

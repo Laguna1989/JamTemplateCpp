@@ -1,8 +1,8 @@
 ﻿#ifndef GUARD_JAMTEMPLATE_SPRITEFUNCTIONS_HPP_INCLUDEGUARD
 #define GUARD_JAMTEMPLATE_SPRITEFUNCTIONS_HPP_INCLUDEGUARD
 
-#include "Color.hpp"
-#include "Rendertarget.hpp"
+#include "color.hpp"
+#include "render_target.hpp"
 #include <SDL.h>
 #include <memory>
 

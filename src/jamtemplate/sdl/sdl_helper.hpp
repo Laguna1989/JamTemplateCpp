@@ -1,7 +1,7 @@
 #ifndef GUARD_JAMTEMPLATE_SDLHELPER_GUARD_HPP
 #define GUARD_JAMTEMPLATE_SDLHELPER_GUARD_HPP
 
-#include "Vector.hpp"
+#include "vector.hpp"
 #include <SDL.h>
 #include <cstddef>
 

@@ -1,7 +1,7 @@
 #ifndef GUARD_JAMTEMPLATE_VECTOR_LIB_GUARD_HPP
 #define GUARD_JAMTEMPLATE_VECTOR_LIB_GUARD_HPP
 
-#include "Vector_base.hpp"
+#include "vector_base.hpp"
 #include <SDL.h>
 
 namespace jt {

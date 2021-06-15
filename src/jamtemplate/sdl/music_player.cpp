@@ -1,4 +1,4 @@
-#include "MusicPlayer.hpp"
+#include "music_player.hpp"
 #include <iostream>
 
 namespace jt {

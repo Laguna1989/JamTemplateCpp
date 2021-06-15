@@ -1,9 +1,9 @@
 ﻿#ifndef GUARD_JAMTEMPLATE_MOUSEINPUT_HPP_INCLUDEGUARD
 #define GUARD_JAMTEMPLATE_MOUSEINPUT_HPP_INCLUDEGUARD
 
-#include "Vector.hpp"
 #include "input_manager_interface.hpp"
 #include "mouse_input_lib.hpp"
+#include "vector.hpp"
 #include <functional>
 #include <map>
 

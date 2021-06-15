@@ -1,11 +1,11 @@
 ﻿
-#include "Text.hpp"
-#include "Rendertarget.hpp"
-#include "SDLHelper.hpp"
-#include "SplitString.hpp"
+#include "text.hpp"
+#include "render_target.hpp"
+#include "sdl_helper.hpp"
+#include "splitstring.hpp"
 #include <SDL.h>
 #include <SDL_ttf.h>
-#include <exception>
+#include <stdexcept>
 
 namespace jt {
 

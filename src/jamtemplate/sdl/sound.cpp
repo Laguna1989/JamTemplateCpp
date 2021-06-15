@@ -1,6 +1,6 @@
-﻿#include "Sound.hpp"
-#include <exception>
+﻿#include "sound.hpp"
 #include <iostream>
+#include <stdexcept>
 
 namespace jt {
 
