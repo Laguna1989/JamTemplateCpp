@@ -1,8 +1,8 @@
 ﻿#ifndef INCLUDE_MOCKGAME_HPP
 #define INCLUDE_MOCKGAME_HPP
 
-#include "GameInterface.hpp"
-#include "gmock/gmock.h"
+#include "game_interface.hpp"
+#include <gmock/gmock.h>
 
 class MockGame : public jt::GameInterface {
 public:
