@@ -1,6 +1,6 @@
 ﻿#include "button.hpp"
-#include "MockDrawable.hpp"
-#include "MockGame.hpp"
+#include "mock_drawable.hpp"
+#include "mock_game.hpp"
 #include <gtest/gtest.h>
 
 TEST(ButtonTest, InitialValues)

@@ -1,5 +1,5 @@
-﻿#include "MockInput.hpp"
-#include "input_manager.hpp"
+﻿#include "input_manager.hpp"
+#include "mock_input.hpp"
 #include <gtest/gtest.h>
 
 TEST(InputManagerTest, ReturnsNullptrIfInstantiatedWithNullptr)
