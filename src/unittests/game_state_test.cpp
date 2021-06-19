@@ -1,6 +1,6 @@
 ﻿#include "game_object.hpp"
 #include "game_state.hpp"
-#include "mock_Game.hpp"
+#include "mock_game.hpp"
 #include "mock_object.hpp"
 #include "mock_tween.hpp"
 #include "gmock/gmock.h"
