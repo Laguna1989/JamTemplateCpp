@@ -1,0 +1,152 @@
+﻿#include "input_manager.hpp"
+
+namespace jt {
+
+std::uint8_t buttonToCode(jt::MouseButtonCode k)
+{
+    switch (k) {
+    case MouseButtonCode::MBLeft:
+        return SDL_BUTTON_LEFT;
+    case MouseButtonCode::MBMiddle:
+        return SDL_BUTTON_MIDDLE;
+    case MouseButtonCode::MBRight:
+        return SDL_BUTTON_RIGHT;
+
+    default:
+        return SDL_BUTTON_MIDDLE;
+    }
+}
+
+std::map<jt::KeyCode, bool> InputManager::m_pressed;
+std::map<jt::KeyCode, bool> InputManager::m_released;
+std::map<jt::KeyCode, bool> InputManager::m_justPressed;
+std::map<jt::KeyCode, bool> InputManager::m_justReleased;
+
+std::map<jt::MouseButtonCode, bool> InputManager::m_mousePressed;
+std::map<jt::MouseButtonCode, bool> InputManager::m_mouseJustPressed;
+std::map<jt::MouseButtonCode, bool> InputManager::m_mouseReleased;
+std::map<jt::MouseButtonCode, bool> InputManager::m_mouseJustReleased;
+
+float InputManager::m_mouseX;
+float InputManager::m_mouseY;
+
+float InputManager::m_mouseScreenX;
+float InputManager::m_mouseScreenY;
+
+float InputManager::m_age;
+
+void InputManager::update(float mx, float my, float mxs, float mys, float elapsed)
+{
+    setup();
+
+    float const old_time = m_age;
+    m_age += elapsed;
+    if (old_time <= 0.1f) {
+        return;
+    }
+
+    m_mouseX = mx;
+    m_mouseY = my;
+
+    m_mouseScreenX = mxs;
+    m_mouseScreenY = mys;
+
+    auto const keyState = SDL_GetKeyboardState(NULL);
+
+    for (auto& kvp : m_pressed) {
+        if (keyState[keyCodeToScanCode(kvp.first)] == 1) {
+            if (m_pressed[kvp.first] == false)
+                m_justPressed[kvp.first] = true;
+            else
+                m_justPressed[kvp.first] = false;
+        } else {
+            if (m_pressed[kvp.first] == true)
+                m_justReleased[kvp.first] = true;
+            else
+                m_justReleased[kvp.first] = false;
+        }
+        m_pressed[kvp.first] = (keyState[keyCodeToScanCode(kvp.first)] == 1);
+        m_released[kvp.first] = (keyState[keyCodeToScanCode(kvp.first)] != 1);
+    }
+
+    SDL_PumpEvents();
+    int x { 0 };
+    int y { 0 };
+    auto const mouseState = SDL_GetMouseState(&x, &y);
+
+    for (auto& kvp : m_mousePressed) {
+        if (mouseState & SDL_BUTTON(buttonToCode(kvp.first))) {
+            if (m_mousePressed[kvp.first] == false)
+                m_mouseJustPressed[kvp.first] = true;
+            else
+                m_mouseJustPressed[kvp.first] = false;
+
+        } else {
+            if (m_mousePressed[kvp.first] == true)
+                m_mouseJustReleased[kvp.first] = true;
+            else
+                m_mouseJustReleased[kvp.first] = false;
+        }
+        m_mousePressed[kvp.first] = (mouseState & SDL_BUTTON(buttonToCode(kvp.first)));
+        m_mouseReleased[kvp.first] = !(mouseState & SDL_BUTTON(buttonToCode(kvp.first)));
+    }
+}
+
+jt::Vector2 InputManager::getMousePositionWorld() { return jt::Vector2 { m_mouseX, m_mouseY }; }
+
+jt::Vector2 InputManager::getMousePositionScreen()
+{
+    return jt::Vector2 { m_mouseScreenX, m_mouseScreenY };
+}
+
+bool InputManager::pressed(jt::KeyCode k) { return m_pressed[k]; }
+bool InputManager::pressed(jt::MouseButtonCode b) { return m_mousePressed[b]; }
+
+bool InputManager::released(jt::KeyCode k) { return m_released[k]; }
+bool InputManager::released(jt::MouseButtonCode b) { return m_mouseReleased[b]; }
+
+bool InputManager::justPressed(jt::KeyCode k) { return m_justPressed[k]; }
+bool InputManager::justPressed(jt::MouseButtonCode b) { return m_mouseJustPressed[b]; }
+
+bool InputManager::justReleased(jt::KeyCode k) { return m_justReleased[k]; }
+bool InputManager::justReleased(jt::MouseButtonCode b) { return m_mouseJustReleased[b]; }
+
+void InputManager::reset()
+{
+    m_age = 0.0f;
+    for (auto& kvp : m_released) {
+        m_pressed[kvp.first] = false;
+        m_released[kvp.first] = false;
+        m_justPressed[kvp.first] = false;
+        m_justReleased[kvp.first] = false;
+    }
+    for (auto& kvp : m_mouseReleased) {
+        m_mousePressed[kvp.first] = false;
+        m_mouseReleased[kvp.first] = false;
+        m_mouseJustPressed[kvp.first] = false;
+        m_mouseJustReleased[kvp.first] = false;
+    }
+    m_mouseScreenX = 0.0f;
+    m_mouseScreenY = 0.0f;
+    m_mouseX = 0.0f;
+    m_mouseY = 0.0f;
+}
+
+void InputManager::setup()
+{
+    if (m_released.empty()) {
+        auto const allKeys = jt::getAllKeys();
+
+        for (auto const k : allKeys) {
+            m_released[k] = false;
+        }
+
+        auto const allButtons = jt::getAllButtons();
+        for (auto const b : allButtons) {
+            m_mouseReleased[b] = false;
+        }
+        reset();
+    }
+}
+
+} // namespace jt
