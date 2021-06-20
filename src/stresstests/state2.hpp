@@ -1,15 +1,11 @@
 ﻿#ifndef STRESSTEST_STATE_2_HPP_INCLUDEGUARD
 #define STRESSTEST_STATE_2_HPP_INCLUDEGUARD
 
-#include "GameState.hpp"
-#include "ObjectGroup.hpp"
-#include "Shape.hpp"
-#include "Sprite.hpp"
-#include "SwarmObject.hpp"
-#include "Timer.hpp"
-#include "TweenAlpha.hpp"
-#include <iostream>
-#include <vector>
+#include "game_state.hpp"
+#include "object_group.hpp"
+#include "shape.hpp"
+#include "sprite.hpp"
+#include "swarm_object.hpp"
 
 class State2 : public jt::GameState {
 private:

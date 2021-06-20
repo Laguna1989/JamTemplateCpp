@@ -1,11 +1,11 @@
-﻿#include "StateBox2d.hpp"
-#include "Conversions.hpp"
-#include "GameInterface.hpp"
-#include "InputManager.hpp"
-#include "MovementObject.hpp"
-#include "StateSelect.hpp"
-#include "TweenRotation.hpp"
-#include "TweenScale.hpp"
+﻿#include "state_box2d.hpp"
+#include "conversions.hpp"
+#include "game_interface.hpp"
+#include "input_manager.hpp"
+#include "movement_object.hpp"
+#include "state_select.hpp"
+#include "tween_rotation.hpp"
+#include "tween_scale.hpp"
 
 void StateBox2d::doInternalCreate()
 {

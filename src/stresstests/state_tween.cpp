@@ -1,8 +1,10 @@
-﻿#include "StateTween.hpp"
-#include "DrawableHelpers.hpp"
-#include "GameInterface.hpp"
-#include "InputManager.hpp"
-#include "StateSelect.hpp"
+﻿#include "state_tween.hpp"
+#include "drawable_helpers.hpp"
+#include "game_interface.hpp"
+#include "input_manager.hpp"
+#include "state_select.hpp"
+#include "tween_alpha.hpp"
+#include <cstdint>
 
 void StateTween::doInternalCreate()
 {

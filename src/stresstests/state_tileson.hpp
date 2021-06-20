@@ -1,14 +1,13 @@
 ﻿#ifndef STRESSTEST_STATE_TILESOM_HPP_INCLUDEGUARD
 #define STRESSTEST_STATE_TILESOM_HPP_INCLUDEGUARD
 
-#include "GameState.hpp"
-#include "Sound.hpp"
-#include "Tilemap.hpp"
+#include "game_state.hpp"
 #include <memory>
 
 namespace jt {
 class Tilemap;
-}
+class Sound;
+} // namespace jt
 
 class StateTileson : public jt::GameState {
 public:

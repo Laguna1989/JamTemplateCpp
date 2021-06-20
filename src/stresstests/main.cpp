@@ -1,11 +1,10 @@
-﻿#include "Game.hpp"
-#include "InputManager.hpp"
-#include "KeyboardInput.hpp"
-#include "MouseInput.hpp"
-#include "Random.hpp"
-#include "RenderWindow.hpp"
-#include "StateSelect.hpp"
-#include <iostream>
+﻿#include "game.hpp"
+#include "input_manager.hpp"
+#include "keyboard_input.hpp"
+#include "mouse_input.hpp"
+#include "random.hpp"
+#include "render_window.hpp"
+#include "state_select.hpp"
 #include <memory>
 
 std::shared_ptr<jt::GameInterface> game;

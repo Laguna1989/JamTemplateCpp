@@ -1,12 +1,10 @@
-﻿#include "StateSelect.hpp"
-#include "GameInterface.hpp"
-#include "State1.hpp"
-#include "State2.hpp"
-#include "StateBox2d.hpp"
-#include "StateScroll.hpp"
-#include "StateTileson.hpp"
-#include "StateTween.hpp"
-#include "Text.hpp"
+﻿#include "state_select.hpp"
+#include "state1.hpp"
+#include "state2.hpp"
+#include "state_box2d.hpp"
+#include "state_scroll.hpp"
+#include "state_tileson.hpp"
+#include "state_tween.hpp"
 
 void StateSelect::doInternalCreate()
 {

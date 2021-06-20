@@ -1,12 +1,11 @@
 ﻿#ifndef STRESSTEST_MOVEMENTOBJECT_HPP_INCLUDEGUARD
 #define STRESSTEST_MOVEMENTOBJECT_HPP_INCLUDEGUARD
 
-#include "Animation.hpp"
-#include "Box2DObject.hpp"
-#include "Conversions.hpp"
-#include "GameInterface.hpp"
-#include "InputManager.hpp"
-#include "MathHelper.hpp"
+#include "animation.hpp"
+#include "box2d_object.hpp"
+#include "conversions.hpp"
+#include "game_interface.hpp"
+#include "math_helper.hpp"
 #include <memory>
 
 class MovementObject : public jt::Box2DObject {

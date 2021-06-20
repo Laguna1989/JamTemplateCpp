@@ -1,11 +1,11 @@
 ﻿#ifndef STRESSTEST_STATE_BOX2D_HPP_INCLUDEGUARD
 #define STRESSTEST_STATE_BOX2D_HPP_INCLUDEGUARD
 
-#include "Bar.hpp"
-#include "GameState.hpp"
-#include "Shape.hpp"
+#include "bar.hpp"
+#include "game_state.hpp"
+#include "shape.hpp"
+#include "vector.hpp"
 #include <Box2D/Box2D.h>
-#include <vector>
 
 class StateBox2d : public jt::GameState {
 public:

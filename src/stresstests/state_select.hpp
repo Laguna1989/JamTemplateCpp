@@ -1,11 +1,11 @@
 ﻿#ifndef STRESSTEST_STATE_SELECT_HPP_INCLUDEGUARD
 #define STRESSTEST_STATE_SELECT_HPP_INCLUDEGUARD
 
-#include "Button.hpp"
-#include "DrawableHelpers.hpp"
-#include "GameInterface.hpp"
-#include "GameState.hpp"
-#include "Text.hpp"
+#include "button.hpp"
+#include "drawable_helpers.hpp"
+#include "game_interface.hpp"
+#include "game_state.hpp"
+#include "text.hpp"
 #include <memory>
 
 namespace detail {
@@ -17,11 +17,9 @@ constexpr unsigned int buttonSizeY = 32;
 } // namespace detail
 
 class StateSelect : public jt::GameState {
-
-private:
-    virtual void doInternalCreate() override;
-    virtual void doInternalUpdate(float elapsed) override;
-    virtual void doInternalDraw() const override;
+    void doInternalCreate() override;
+    void doInternalUpdate(float elapsed) override;
+    void doInternalDraw() const override;
 
     std::size_t m_buttonCount { 0U };
 

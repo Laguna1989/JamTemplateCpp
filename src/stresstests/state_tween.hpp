@@ -1,12 +1,8 @@
 ﻿#ifndef STRESSTEST_STATE_TWEEN_HPP_INCLUDEGUARD
 #define STRESSTEST_STATE_TWEEN_HPP_INCLUDEGUARD
 
-#include "GameState.hpp"
-#include "Shape.hpp"
-#include "TweenAlpha.hpp"
-#include <cstdint>
-#include <iostream>
-#include <vector>
+#include "game_state.hpp"
+#include "shape.hpp"
 
 class StateTween : public jt::GameState {
 private:

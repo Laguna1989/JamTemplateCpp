@@ -1,9 +1,10 @@
-﻿#include "StateScroll.hpp"
-#include "DrawableHelpers.hpp"
-#include "GameInterface.hpp"
-#include "InputManager.hpp"
-#include "MathHelper.hpp"
-#include "StateSelect.hpp"
+﻿#include "state_scroll.hpp"
+#include "drawable_helpers.hpp"
+#include "game_interface.hpp"
+#include "input_manager.hpp"
+#include "math_helper.hpp"
+#include "state_select.hpp"
+#include <cstdint>
 
 void StateScroll::doInternalCreate()
 {

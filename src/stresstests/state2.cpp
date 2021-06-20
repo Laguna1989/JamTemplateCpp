@@ -1,8 +1,12 @@
-﻿#include "State2.hpp"
-#include "DrawableHelpers.hpp"
-#include "GameInterface.hpp"
-#include "InputManager.hpp"
-#include "StateSelect.hpp"
+﻿#include "state2.hpp"
+#include "drawable_helpers.hpp"
+#include "game_interface.hpp"
+#include "input_manager.hpp"
+#include "math_helper.hpp"
+#include "state_select.hpp"
+#include "timer.hpp"
+#include "tween_alpha.hpp"
+#include <vector>
 
 void State2::doInternalCreate()
 {

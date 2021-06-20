@@ -1,13 +1,12 @@
 ﻿#ifndef GAME_OBJECT_HPP_INCLUDEGUARD
 #define GAME_OBJECT_HPP_INCLUDEGUARD
 
-#include "Animation.hpp"
-#include "GameInterface.hpp"
-#include "GameState.hpp"
-#include "MathHelper.hpp"
-#include "Random.hpp"
-#include "Shape.hpp"
-#include <iostream>
+#include "animation.hpp"
+#include "game_interface.hpp"
+#include "game_state.hpp"
+#include "math_helper.hpp"
+#include "random.hpp"
+#include "shape.hpp"
 #include <memory>
 #include <random>
 

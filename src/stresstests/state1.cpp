@@ -1,11 +1,13 @@
-﻿#include "State1.hpp"
-#include "GameInterface.hpp"
-#include "InputManager.hpp"
-#include "StateSelect.hpp"
-#include "Timer.hpp"
-#include "TweenAlpha.hpp"
-#include "TweenColor.hpp"
-#include "TweenScale.hpp"
+﻿#include "state1.hpp"
+#include "game_interface.hpp"
+#include "input_manager.hpp"
+#include "object.hpp"
+#include "random.hpp"
+#include "state_select.hpp"
+#include "timer.hpp"
+#include "tween_alpha.hpp"
+#include "tween_color.hpp"
+#include "tween_scale.hpp"
 
 void State1::doInternalCreate()
 {
