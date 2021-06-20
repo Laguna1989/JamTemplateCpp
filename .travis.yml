@@ -17,8 +17,12 @@ matrix:
 
 before_install:
   - eval "${MATRIX_EVAL}"
-  - sudo apt-get install -y libsfml-dev
+  - sudo apt-get update -qq
+  - sudo usermod -a -G audio travis
+  - sudo apt-get install -y libsfml-dev portaudio19-dev libasound2-dev alsa-utils alsa-oss lame
+  - sudo apt-get install linux-modules-extra-$(uname -r)
   - unzip ext/tileson-master.zip  -d ext/
+  - sudo bash prep-dummy-soundcard.sh
   - pip install --user cpp-coveralls
   
 script:
