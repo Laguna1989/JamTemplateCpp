@@ -174,7 +174,6 @@ TEST_F(GameTest, RunWithTwoStates)
 
 TEST_F(GameTest, StartGameWithOneIteration)
 {
-    int count = 0;
     EXPECT_CALL(*window, isOpen)
         .WillOnce(::testing::Return(true))
         .WillOnce(::testing::Return(false));
