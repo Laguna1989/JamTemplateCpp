@@ -1,7 +1,6 @@
 ﻿#ifndef GUARD_JAMTEMPLATE_BUTTON_HPP_GUARD
 #define GUARD_JAMTEMPLATE_BUTTON_HPP_GUARD
 
-#include "drawable_interface.hpp"
 #include "game_object.hpp"
 #include "vector.hpp"
 #include <functional>
@@ -9,6 +8,7 @@
 
 namespace jt {
 class Animation;
+class DrawableInterface;
 
 class Button : public GameObject {
 public:

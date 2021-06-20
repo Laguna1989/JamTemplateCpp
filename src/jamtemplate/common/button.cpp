@@ -1,6 +1,7 @@
 ﻿#include "button.hpp"
 #include "animation.hpp"
 #include "drawable_impl.hpp"
+#include "drawable_interface.hpp"
 #include "game_interface.hpp"
 #include "game_object.hpp"
 #include "input_manager.hpp"
@@ -61,14 +62,15 @@ void Button::doDraw() const
         m_drawable->draw(getGame()->getRenderTarget());
 }
 
-bool Button::isOver(jt::Vector2 const& mp)
+bool Button::isOver(jt::Vector2 const& mousePosition)
 {
     float px = m_background->getPosition().x();
     float py = m_background->getPosition().y();
 
     float w = m_background->getGlobalBounds().width();
     float h = m_background->getGlobalBounds().height();
-    return (mp.x() > px && mp.x() <= px + w && mp.y() > py && mp.y() <= py + h);
+    return (mousePosition.x() > px && mousePosition.x() <= px + w && mousePosition.y() > py
+        && mousePosition.y() <= py + h);
 }
 
 void Button::doUpdate(float elapsed)
