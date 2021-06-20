@@ -22,8 +22,9 @@ before_install:
   - pip install --user cpp-coveralls
   
 script:
-  - cmake -DENABLE_UNITTESTS=ON -DENABLE_STRESSTEST=ON -DENABLE_DISPLAY_TESTS=OFF -DENABLE_COVERAGE=ON .
+  - cmake -DENABLE_UNITTESTS=ON -DENABLE_STRESSTESTS=ON -DENABLE_DISPLAY_TESTS=OFF -DENABLE_COVERAGE=ON .
   - make MyAwesomeGame
+  - make StressTests
   - make UnitTests
   - ./UnitTests
 
