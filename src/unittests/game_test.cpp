@@ -1,5 +1,6 @@
 ﻿#include "game.hpp"
 #include "game_state.hpp"
+#include "mock_window.hpp"
 #include "rect_lib.hpp"
 #include "render_window.hpp"
 #include "gmock/gmock.h"
@@ -8,18 +9,6 @@
 using jt::Game;
 
 #if !defined(ENABLE_WEB)
-
-class MockWindow : public ::jt::RenderWindowInterface {
-public:
-    MOCK_METHOD(bool, isOpen, (), (const, override));
-    MOCK_METHOD(void, checkForClose, (), (override));
-    MOCK_METHOD(jt::Vector2, getSize, (), (const, override));
-    MOCK_METHOD(void, draw, (std::shared_ptr<jt::Sprite>), (override));
-    MOCK_METHOD(void, display, (), (override));
-    MOCK_METHOD(jt::Vector2, getMousePosition, (), (override));
-    MOCK_METHOD(jt::Vector2, getMousePositionScreen, (float), (override));
-    MOCK_METHOD(std::shared_ptr<jt::renderTarget>, createRenderTarget, (), (override));
-};
 
 class GameTest : public ::testing::Test {
 public:

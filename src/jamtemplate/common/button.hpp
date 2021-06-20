@@ -45,7 +45,7 @@ private:
 
     void doDraw() const override;
 
-    bool isOver(jt::Vector2 const& mp);
+    bool isOver(jt::Vector2 const& mousePosition);
 
     void doUpdate(float elapsed) override;
 };
