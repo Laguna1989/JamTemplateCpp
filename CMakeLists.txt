@@ -213,7 +213,7 @@ target_link_libraries(JamTemplate Box2D)
 ## setup StressTest
 #####################################################
 if (ENABLE_STRESSTESTS)
-	file(GLOB_RECURSE STRESSTESTFILES src/StressTests/*)
+	file(GLOB_RECURSE STRESSTESTFILES src/stresstests/*)
 	
 	add_executable(StressTests ${STRESSTESTFILES})
 	if(ENABLE_WEB)
