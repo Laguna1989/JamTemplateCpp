@@ -7,7 +7,7 @@
 #include "sprite.hpp"
 #include "swarm_object.hpp"
 
-class State2 : public jt::GameState {
+class StateSwarmObjects : public jt::GameState {
 private:
     jt::Shape::Sptr m_overlay;
     jt::Shape::Sptr m_sky;

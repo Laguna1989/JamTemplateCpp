@@ -1,4 +1,4 @@
-﻿#include "state2.hpp"
+﻿#include "state_swarmobjects.hpp"
 #include "drawable_helpers.hpp"
 #include "game_interface.hpp"
 #include "input_manager.hpp"
@@ -8,7 +8,7 @@
 #include "tween_alpha.hpp"
 #include <vector>
 
-void State2::doInternalCreate()
+void StateSwarmObjects::doInternalCreate()
 {
     using jt::Shape;
     using jt::TweenAlpha;
@@ -34,7 +34,7 @@ void State2::doInternalCreate()
     setAutoDraw(false);
 }
 
-void State2::doInternalUpdate(float const elapsed)
+void StateSwarmObjects::doInternalUpdate(float const elapsed)
 {
     if (getGame()->input()->keyboard()->justPressed(jt::KeyCode::F1)
         || getGame()->input()->keyboard()->justPressed(jt::KeyCode::Escape)) {
@@ -46,7 +46,7 @@ void State2::doInternalUpdate(float const elapsed)
     updateSwarm();
 }
 
-void State2::updateSwarm()
+void StateSwarmObjects::updateSwarm()
 {
     jt::Vector2 centerPos {};
     for (auto const& o : *m_SwarmObjects) {
@@ -59,7 +59,8 @@ void State2::updateSwarm()
     }
 }
 
-void State2::updateOneSwarmObject(const size_t& firstSwarmObjectIndex, jt::Vector2& centerPos)
+void StateSwarmObjects::updateOneSwarmObject(
+    const size_t& firstSwarmObjectIndex, jt::Vector2& centerPos)
 {
     float cutoffDistance = 10;
 
@@ -98,11 +99,11 @@ void State2::updateOneSwarmObject(const size_t& firstSwarmObjectIndex, jt::Vecto
     o1->setVelocity(SummedUpDir);
 }
 
-void State2::doInternalDraw() const
+void StateSwarmObjects::doInternalDraw() const
 {
     drawSky();
     drawObjects();
     m_overlay->draw(getGame()->getRenderTarget());
 }
 
-void State2::drawSky() const { m_sky->draw(getGame()->getRenderTarget()); }
+void StateSwarmObjects::drawSky() const { m_sky->draw(getGame()->getRenderTarget()); }

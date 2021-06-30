@@ -1,4 +1,4 @@
-﻿#include "state1.hpp"
+﻿#include "state_explosion.hpp"
 #include "game_interface.hpp"
 #include "input_manager.hpp"
 #include "object.hpp"
@@ -9,7 +9,7 @@
 #include "tween_color.hpp"
 #include "tween_scale.hpp"
 
-void State1::doInternalCreate()
+void StateExplosion::doInternalCreate()
 {
     using jt::Timer;
 
@@ -19,7 +19,7 @@ void State1::doInternalCreate()
     add(t);
 }
 
-void State1::doInternalUpdate(float const /*elapsed*/)
+void StateExplosion::doInternalUpdate(float const /*elapsed*/)
 {
     unsigned int N = 1;
     for (unsigned int i = 0; i != N; ++i) {

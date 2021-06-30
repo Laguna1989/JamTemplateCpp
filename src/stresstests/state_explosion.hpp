@@ -3,7 +3,7 @@
 
 #include "game_state.hpp"
 
-class State1 : public jt::GameState {
+class StateExplosion : public jt::GameState {
 private:
     void doInternalCreate() override;
     void doInternalUpdate(float const /*elapsed*/) override;

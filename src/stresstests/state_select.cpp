@@ -1,15 +1,15 @@
 ﻿#include "state_select.hpp"
-#include "state1.hpp"
-#include "state2.hpp"
 #include "state_box2d.hpp"
+#include "state_explosion.hpp"
 #include "state_scroll.hpp"
+#include "state_swarmobjects.hpp"
 #include "state_tileson.hpp"
 #include "state_tween.hpp"
 
 void StateSelect::doInternalCreate()
 {
-    AddButton<State1>("Explode");
-    AddButton<State2>("State 2");
+    AddButton<StateExplosion>("Explode");
+    AddButton<StateSwarmObjects>("Swarm Objects");
     AddButton<StateTween>("Tweens");
     AddButton<StateTileson>("Tilemap");
     AddButton<StateBox2d>("Box2D");
