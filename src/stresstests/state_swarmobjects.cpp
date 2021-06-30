@@ -50,7 +50,7 @@ void StateSwarmObjects::updateSwarm()
 {
     jt::Vector2 centerPos {};
     for (auto const& o : *m_SwarmObjects) {
-        centerPos + centerPos + o.lock()->getPosition();
+        centerPos = centerPos + o.lock()->getPosition();
     }
     centerPos = centerPos / static_cast<float>(m_SwarmObjects->size());
 
@@ -60,43 +60,50 @@ void StateSwarmObjects::updateSwarm()
 }
 
 void StateSwarmObjects::updateOneSwarmObject(
-    const size_t& firstSwarmObjectIndex, jt::Vector2& centerPos)
+    const size_t& firstSwarmObjectIndex, jt::Vector2 const& centerPos)
 {
     float cutoffDistance = 10;
 
     auto o1 = m_SwarmObjects->at(firstSwarmObjectIndex).lock();
-    jt::Vector2 SummedUpDir { 0.0f, 0.0f };
-
+    auto p1 = o1->getPosition();
+    auto v1 = o1->getVelocity();
     auto const mousePos = getGame()->input()->mouse()->getMousePositionWorld();
-    auto dist = mousePos - o1->getPosition();
+    auto dist = mousePos - p1;
+    auto distLength = jt::MathHelper::length(dist);
     jt::MathHelper::normalizeMe(dist);
 
-    float lc = jt::MathHelper::length(centerPos - o1->getPosition());
-    SummedUpDir = SummedUpDir
-        + (centerPos - o1->getPosition()) / lc * 1000.0f
-            / static_cast<float>(m_SwarmObjects->size());
-
+    auto const vortexForce = jt::MathHelper::rotateBy(dist, 90);
+    float vortexForceStrength = distLength / 20.0f;
+    jt::Vector2 SummedUpDir { dist.x() * 15.0f, dist.y() * 15.0f };
+    SummedUpDir = SummedUpDir + vortexForce * vortexForceStrength;
+    // jt::Vector2 SummedUpDir { 0.0f, 0.0f };
     for (size_t secondSwarmObjectIndex = 0; secondSwarmObjectIndex != m_SwarmObjects->size();
          ++secondSwarmObjectIndex) {
-        if (firstSwarmObjectIndex == secondSwarmObjectIndex)
+        if (firstSwarmObjectIndex == secondSwarmObjectIndex) {
             continue;
-
+        }
         auto o2 = m_SwarmObjects->at(secondSwarmObjectIndex).lock();
-        auto const d = o2->getPosition() - o1->getPosition();
-        auto l = jt::MathHelper::length(d);
-        if (l > 2 * cutoffDistance)
-            continue;
-        SummedUpDir
-            = SummedUpDir + o2->getVelocity() * 0.09f * o2->getSwarmWeight() / o1->getSwarmWeight();
+        auto p2 = o2->getPosition();
+        auto v2 = o2->getVelocity();
 
-        if (l > cutoffDistance)
+        auto springVector = p2 - p1;
+        auto const r = jt::MathHelper::length(springVector);
+        if (r > 100) {
             continue;
-        if (l < 1.5)
-            l = 1.5;
-        SummedUpDir = SummedUpDir - (d / l / l * 1000.0f);
+        }
+
+        if (r != 0) {
+            auto f = (springVector / r) * (r - 65.0f) * 0.75f;
+            SummedUpDir = SummedUpDir + f;
+        }
+
+        auto internalFrictionForce = (v1 - v2) * 0.001f;
+        SummedUpDir = SummedUpDir - internalFrictionForce;
     }
-    SummedUpDir = SummedUpDir + dist * 30.0f;
-    o1->setVelocity(SummedUpDir);
+
+    auto velocityFrictionForce = v1 * -1.0f * 0.25f;
+    SummedUpDir = SummedUpDir + velocityFrictionForce;
+    o1->setAcceleration(SummedUpDir);
 }
 
 void StateSwarmObjects::doInternalDraw() const

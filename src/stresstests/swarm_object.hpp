@@ -17,19 +17,15 @@ public:
 
         m_swarmWeight = jt::Random::getFloat(0.5f, 1.5f);
 
-        float maxX = 200 - 12;
-        float maxY = 150 - 12;
+        float maxX = 400 - 12;
+        float maxY = 300 - 12;
 
         m_animation->add("assets/coin.png", "idle", jt::Vector2u { 16, 16 },
             jt::MathHelper::vectorBetween(0U, 11U), jt::Random::getFloat(0.13f, 0.17f));
         m_animation->play("idle", jt::Random::getInt(0, 6));
-        m_animation->setScale(jt::Vector2 { 0.5f, 0.5f });
 
         setPosition(
             jt::Vector2(jt::Random::getFloat(0, maxX / 2), jt::Random::getFloat(0, maxY / 2)));
-        /*float mv = 50;*/
-        // setBoundsVelocity(jt::Rect { -mv, -mv, 2 * mv, 2 * mv });
-        // setBoundsPosition(jt::Rect { 0, 0, maxX, maxY });
     }
 
     ~SwarmObject() = default;
@@ -44,6 +40,9 @@ public:
     void setVelocity(jt::Vector2 const& p) { m_velocity = p; }
     jt::Vector2 getVelocity() const { return m_velocity; }
 
+    void setAcceleration(jt::Vector2 const& p) { m_acceleration = p; }
+    jt::Vector2 getAcceleration() const { return m_acceleration; }
+
 private:
     std::shared_ptr<jt::Animation> m_animation;
     float m_swarmWeight = 0.0f;
@@ -53,10 +52,11 @@ private:
 
     void doUpdate(float const elapsed) override
     {
-        // updateTransform(elapsed);
+        m_velocity = m_velocity + m_acceleration * elapsed;
         m_position = m_position + elapsed * m_velocity;
         m_animation->setPosition(getPosition());
         m_animation->update(elapsed);
+        m_acceleration = jt::Vector2 { 0.0f, 0.0f };
     }
 
     void doDraw() const override { m_animation->draw(getGame()->getRenderTarget()); }
