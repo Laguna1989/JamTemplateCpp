@@ -1,6 +1,7 @@
 ﻿#include "state_select.hpp"
 #include "state_box2d.hpp"
 #include "state_explosion.hpp"
+#include "state_rope.hpp"
 #include "state_scroll.hpp"
 #include "state_swarmobjects.hpp"
 #include "state_tileson.hpp"
@@ -9,11 +10,12 @@
 void StateSelect::doInternalCreate()
 {
     AddButton<StateExplosion>("Explode");
-    AddButton<StateSwarmObjects>("Swarm Objects");
+    AddButton<StateSwarmObjects>("Swarm");
     AddButton<StateTween>("Tweens");
     AddButton<StateTileson>("Tilemap");
     AddButton<StateBox2d>("Box2D");
     AddButton<StateScroll>("Move Cam");
+    AddButton<StateRope>("Rope");
 }
 
 void StateSelect::doInternalUpdate(float /*elapsed*/)
