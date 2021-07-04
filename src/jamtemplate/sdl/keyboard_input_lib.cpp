@@ -214,7 +214,7 @@ std::uint8_t toLib(jt::KeyCode k)
 
 bool libKeyValue(jt::KeyCode b)
 {
-    auto const libkey = toLib(b);
-    return sf::Keyboard::isKeyPressed(libkey);
+    auto const keyState = SDL_GetKeyboardState(NULL);
+    return keyState[toLib(b)] == 1;
 }
 } // namespace jt

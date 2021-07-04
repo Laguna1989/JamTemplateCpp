@@ -10,6 +10,7 @@ class InputManager : public InputManagerInterface {
 public:
     InputManager(std::shared_ptr<MouseInputInterface> mouse,
         std::shared_ptr<KeyboardInputInterface> keyboard);
+    virtual ~InputManager() = default;
 
     std::shared_ptr<MouseInputInterface> mouse() override;
     std::shared_ptr<KeyboardInputInterface> keyboard() override;

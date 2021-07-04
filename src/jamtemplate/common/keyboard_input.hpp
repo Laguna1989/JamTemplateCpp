@@ -12,6 +12,7 @@ class KeyboardInput : public KeyboardInputInterface {
 public:
     using KeyboardKeyCheckFunction = std::function<bool(jt::KeyCode)>;
     KeyboardInput(KeyboardKeyCheckFunction checkFunc = [](auto k) { return libKeyValue(k); });
+
     virtual void updateKeys() override;
 
     virtual bool pressed(jt::KeyCode k) override;

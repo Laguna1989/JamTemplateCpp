@@ -16,21 +16,26 @@ public:
     using Sptr = std::shared_ptr<Game>;
 
     Game(std::shared_ptr<RenderWindowInterface> window, float zoom,
+        std::shared_ptr<InputManagerInterface> input = nullptr,
         std::shared_ptr<MusicPlayerInterface> musicPlayer = nullptr);
-
-    void setRenderTarget(std::shared_ptr<jt::renderTarget> rt) override;
-    std::shared_ptr<jt::renderTarget> getRenderTarget() const override;
-
-    virtual void setupRenderTarget() override;
 
     void startGame(
         std::shared_ptr<GameState> InitialState, GameLoopFunctionPtr gameloop_function) override;
 
-    virtual std::shared_ptr<MusicPlayerInterface> getMusicPlayer() override;
+    void setupRenderTarget() override;
+
+    void setRenderTarget(std::shared_ptr<jt::renderTarget> rt) override;
+    std::shared_ptr<jt::renderTarget> getRenderTarget() const override;
+
+    std::shared_ptr<MusicPlayerInterface> getMusicPlayer() override;
+
+    std::shared_ptr<InputManagerInterface> input() override;
 
 private:
     std::shared_ptr<jt::renderTarget> m_renderTarget { nullptr };
     std::shared_ptr<jt::RenderWindowInterface> m_window;
+
+    std::shared_ptr<InputManagerInterface> m_input { nullptr };
 
     jt::Recti m_srcRect;
     jt::Recti m_destRect;

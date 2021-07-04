@@ -15,8 +15,10 @@
 namespace jt {
 
 Game::Game(std::shared_ptr<RenderWindowInterface> window, float zoom,
-    std::shared_ptr<MusicPlayerInterface> musicPlayer)
-    : m_musicPlayer { musicPlayer }
+    std::shared_ptr<InputManagerInterface> input, std::shared_ptr<MusicPlayerInterface> musicPlayer)
+    : m_input { input }
+    , m_musicPlayer { musicPlayer }
+
 {
     m_camera->setZoom(zoom);
     auto const width = window->getSize().x();
@@ -62,8 +64,15 @@ void Game::doUpdate(float const elapsed)
     auto const mousePosition = m_window->getMousePosition();
     float const x = mousePosition.x() / getCamera()->getZoom();
     float const y = mousePosition.y() / getCamera()->getZoom();
-    jt::InputManager::update(
-        y + getCamera()->getCamOffset().x(), +getCamera()->getCamOffset().y(), x, y, elapsed);
+    // TODO Remove
+    // jt::InputManager::update(
+    //     y + getCamera()->getCamOffset().x(), +getCamera()->getCamOffset().y(), x, y, elapsed);
+
+    if (input()) {
+        input()->mouse()->updateMousePosition(MousePosition { x, y, x, y });
+        input()->mouse()->updateButtons();
+        input()->keyboard()->updateKeys();
+    }
     m_state->update(elapsed);
 
     DrawableImpl::setCamOffset(-1.0f * getCamera()->getCamOffset());
@@ -100,5 +109,7 @@ void Game::doDraw() const
 void Game::updateShake(float elapsed) { getCamera()->update(elapsed); }
 
 std::shared_ptr<MusicPlayerInterface> Game::getMusicPlayer() { return m_musicPlayer; }
+
+std::shared_ptr<InputManagerInterface> Game::input() { return m_input; }
 
 } // namespace jt

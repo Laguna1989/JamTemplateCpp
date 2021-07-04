@@ -2,20 +2,6 @@
 
 namespace jt {
 
-std::uint8_t buttonToCode(jt::MouseButtonCode k)
-{
-    switch (k) {
-    case MouseButtonCode::MBLeft:
-        return SDL_BUTTON_LEFT;
-    case MouseButtonCode::MBMiddle:
-        return SDL_BUTTON_MIDDLE;
-    case MouseButtonCode::MBRight:
-        return SDL_BUTTON_RIGHT;
-
-    default:
-        return SDL_BUTTON_MIDDLE;
-    }
-}
 
 std::map<jt::KeyCode, bool> InputManager::m_pressed;
 std::map<jt::KeyCode, bool> InputManager::m_released;

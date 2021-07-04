@@ -1,8 +1,8 @@
 ﻿#ifndef STRESSTEST_STATE_ROPE_HPP_INCLUDEGUARD
 #define STRESSTEST_STATE_ROPE_HPP_INCLUDEGUARD
 
-#include "Vector.hpp"
 #include "game_state.hpp"
+#include "vector.hpp"
 #include <vector>
 
 struct RopeMass {

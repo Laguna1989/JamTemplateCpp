@@ -13,6 +13,7 @@ class MouseInput : public MouseInputInterface {
 public:
     using MouseButtonCheckFunction = std::function<bool(jt::MouseButtonCode)>;
     MouseInput(MouseButtonCheckFunction checkFunction = [](auto b) { return libKeyValue(b); });
+
     virtual void updateMousePosition(MousePosition const& mp) override;
     virtual void updateButtons() override;
 

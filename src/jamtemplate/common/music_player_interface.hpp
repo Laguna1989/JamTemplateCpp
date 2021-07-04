@@ -7,6 +7,8 @@ namespace jt {
 
 class MusicPlayerInterface {
 public:
+    virtual ~MusicPlayerInterface() = default;
+
     virtual void PlayMusic(std::string const& fileName) = 0;
     virtual void StopMusic() = 0;
     // range: 0.0f to 100.0f

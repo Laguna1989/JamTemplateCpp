@@ -9,6 +9,8 @@ namespace jt {
 
 class CamInterface {
 public:
+    virtual ~CamInterface() = default;
+
     virtual jt::Vector2 getCamOffset() = 0;
     virtual void setCamOffset(jt::Vector2 const& ofs) = 0;
     virtual void move(jt::Vector2 const& v) = 0;

@@ -12,6 +12,8 @@ class Sprite;
 
 class RenderWindowInterface {
 public:
+    virtual ~RenderWindowInterface() = default;
+
     virtual bool isOpen() const = 0;
     virtual void checkForClose() = 0;
 

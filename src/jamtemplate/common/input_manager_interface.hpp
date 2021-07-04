@@ -17,6 +17,7 @@ struct MousePosition {
 
 class MouseInputInterface {
 public:
+    virtual ~MouseInputInterface() = default;
     virtual void updateMousePosition(MousePosition const& mp) = 0;
     virtual void updateButtons() = 0;
 
@@ -33,6 +34,7 @@ public:
 
 class KeyboardInputInterface {
 public:
+    virtual ~KeyboardInputInterface() = default;
     virtual void updateKeys() = 0;
 
     virtual bool pressed(jt::KeyCode k) = 0;
@@ -45,6 +47,7 @@ public:
 
 class InputManagerInterface {
 public:
+    virtual ~InputManagerInterface() = default;
     virtual std::shared_ptr<MouseInputInterface> mouse() = 0;
     virtual std::shared_ptr<KeyboardInputInterface> keyboard() = 0;
     virtual void reset() = 0;

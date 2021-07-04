@@ -61,6 +61,7 @@ jt::Vector2 RenderWindow::getMousePosition()
 jt::Vector2 RenderWindow::getMousePositionScreen(float zoom)
 {
     std::cerr << "RenderWindow::getMousepositonScreen() not supported by SDL Renderwindow.\n";
+    return jt::Vector2 { 0.0f, 0.0f };
 }
 
 } // namespace jt
