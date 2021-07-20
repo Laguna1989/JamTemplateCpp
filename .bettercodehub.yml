@@ -1,0 +1,15 @@
+component_depth: 4
+default_excludes: true
+languages:
+- name: cpp
+  production:
+    exclude:
+      - /ext/*.cpp
+      - /ext/*.hpp
+      - /ext/*.h
+  test:
+    include:
+      - /src/stresstests/*.cpp
+      - /src/unittests/*.cpp
+      - /src/stresstests/*.hpp
+      - /src/unittests/*.hpp
