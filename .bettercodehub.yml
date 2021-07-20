@@ -1,8 +1,0 @@
-component_depth: 4
-default_excludes: true
-languages:
-- name: cpp
-exclude:
-- /ext/*
-- /src/stresstests/*
-- /src/unittests/*
