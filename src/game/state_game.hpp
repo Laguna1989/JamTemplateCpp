@@ -22,8 +22,12 @@ private:
     std::shared_ptr<jt::Sprite> m_vignette;
     std::shared_ptr<Hud> m_hud;
     std::shared_ptr<b2World> m_world { nullptr };
+
     bool m_running { false };
     bool m_hasEnded { false };
+
+    int m_scoreP1 { 0 };
+    int m_scoreP2 { 0 };
 
     void doInternalCreate() override;
     void doInternalUpdate(float const elapsed) override;

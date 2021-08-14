@@ -3,7 +3,7 @@
 #include "color.hpp"
 #include "game_interface.hpp"
 #include "game_properties.hpp"
-#include "hud.hpp"
+#include "hud/hud.hpp"
 #include "shape.hpp"
 #include "sprite.hpp"
 #include "state_menu.hpp"
@@ -53,6 +53,14 @@ void StateGame::doInternalUpdate(float const elapsed)
     if (m_running) {
         m_world->Step(elapsed, GP::PhysicVelocityIterations(), GP::PhysicPositionIterations());
         // update game logic here
+        if (getGame()->input()->keyboard()->justPressed(jt::KeyCode::A)) {
+            m_scoreP1++;
+            m_hud->getObserverScoreP1()->notify(m_scoreP1);
+        }
+        if (getGame()->input()->keyboard()->justPressed(jt::KeyCode::D)) {
+            m_scoreP2++;
+            m_hud->getObserverScoreP2()->notify(m_scoreP2);
+        }
     }
 
     m_background->update(elapsed);

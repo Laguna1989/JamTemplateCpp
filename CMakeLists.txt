@@ -67,7 +67,7 @@ endfunction()
 
 if (WIN32)
 	set (SFML_DIR "${SFML_DIR_ROOT}/lib/cmake/SFML")
-	find_package(SFML COMPONENTS graphics window system audio REQUIRED)
+	#find_package(SFML COMPONENTS graphics window system audio REQUIRED)
 endif()
 #####################################################
 ## Other variables and compiler setup
@@ -275,12 +275,15 @@ endif()
 ## setup Game executable
 #####################################################
 file(GLOB GAMEFILES src/game/*)
-add_executable(${PROJECTNAME}  ${GAMEFILES})
+file(GLOB HUDFILES src/game/hud/*)
+message("${HUDFILES}")
+add_executable(${PROJECTNAME} ${GAMEFILES} ${HUDFILES})
 if(ENABLE_WEB)
 	set(CMAKE_EXECUTABLE_SUFFIX ".html")
 endif()
 
 target_link_libraries(${PROJECTNAME} JamTemplate)
+target_include_directories(${PROJECTNAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/src/game/)
 
 jt_use_assets(${PROJECTNAME})
 

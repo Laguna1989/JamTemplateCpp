@@ -30,8 +30,8 @@ int main()
     auto input = std::make_shared<jt::InputManager>(mouse, keyboard);
     // TODO Inputmanager nullptr in unit tests
 
-    game = std::make_shared<jt::Game>(std::make_shared<jt::RenderWindow>(GP::GetWindowSize().x(),
-                                          GP::GetWindowSize().y(), GP::GameName()),
+    game = std::make_shared<jt::Game>(std::make_shared<jt::RenderWindow>(static_cast<unsigned int>(GP::GetWindowSize().x()),
+                                          static_cast<unsigned int>(GP::GetWindowSize().y()), GP::GameName()),
         GP::GetZoom(), input, std::make_shared<jt::MusicPlayer>());
     game->setupRenderTarget();
 
