@@ -88,6 +88,8 @@ void StateRope::calculateRopeForces()
 
 void StateRope::doInternalUpdate(float elapsed)
 {
+    if (elapsed >= 1.0f)
+        elapsed = 1.0f;
     for (int i = 0; i != 7; ++i) {
         int const subdivide = 4;
         for (int i = 0; i != subdivide; ++i) {
