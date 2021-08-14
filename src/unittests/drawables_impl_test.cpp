@@ -59,6 +59,15 @@ INSTANTIATE_TEST_SUITE_P(DrawableImplTest, DrawableImplTestFixture,
     ::testing::Values(createSprite(), createAnimation(), createShape(), createText(), createBar(),
         createTileMap()));
 
+TEST_P(DrawableImplTestFixture, GetPositionAfterSetPosition)
+{
+    std::shared_ptr<jt::DrawableInterface> drawable = GetParam();
+    jt::Vector2 const pos = jt::Vector2 { 100.0f, 200.0f };
+    drawable->setPosition(pos);
+    ASSERT_EQ(pos.x(), drawable->getPosition().x());
+    ASSERT_EQ(pos.y(), drawable->getPosition().y());
+}
+
 TEST_P(DrawableImplTestFixture, DrawWithoutUpdate)
 {
     std::shared_ptr<jt::DrawableInterface> drawable = GetParam();
@@ -115,10 +124,21 @@ TEST_P(DrawableImplTestFixture, DrawWithShake)
     drawable->draw(rt);
 }
 
-TEST_P(DrawableImplTestFixture, DrawWithScale)
+TEST_P(DrawableImplTestFixture, DrawScaled)
 {
     std::shared_ptr<jt::DrawableInterface> drawable = GetParam();
     drawable->setScale(jt::Vector2 { 2.0f, 2.0f });
+    drawable->update(0.1f);
+    auto rt = std::make_shared<jt::renderTarget>();
+    jt::DrawableImpl::setCamOffset(jt::Vector2 { 100.0f, 100.0f });
+    drawable->draw(rt);
+}
+
+TEST_P(DrawableImplTestFixture, DrawRotated)
+{
+    std::shared_ptr<jt::DrawableInterface> drawable = GetParam();
+    drawable->setOrigin(jt::Vector2 { 16.0f, 16.0f });
+    drawable->setRotation(22.5f);
     drawable->update(0.1f);
     auto rt = std::make_shared<jt::renderTarget>();
     jt::DrawableImpl::setCamOffset(jt::Vector2 { 100.0f, 100.0f });

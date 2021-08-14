@@ -57,3 +57,27 @@ TEST(TilemapTest, GetColorWillAlwaysReturnBlack)
     tm.setColor(::jt::colors::Red);
     ASSERT_EQ(tm.getColor(), jt::colors::Black);
 }
+
+TEST(TilemapTest, GetScaleAlwaysReturnsDefaultConstructedVector)
+{
+    jt::Tilemap tm { "assets/tileson_test.json" };
+    ASSERT_EQ(tm.getScale(), jt::Vector2 {});
+}
+
+TEST(TilemapTest, GetGetOriginReturnsDefaultConstructedVector)
+{
+    jt::Tilemap tm { "assets/tileson_test.json" };
+    ASSERT_EQ(tm.getOrigin(), jt::Vector2 {});
+}
+
+TEST(TilemapTest, GetGlobalBoundsReturnsDefaultConstructedRect)
+{
+    jt::Tilemap tm { "assets/tileson_test.json" };
+    ASSERT_EQ(tm.getGlobalBounds(), jt::Rect {});
+}
+
+TEST(TilemapTest, GetLocalBoundsReturnsDefaultConstructedRect)
+{
+    jt::Tilemap tm { "assets/tileson_test.json" };
+    ASSERT_EQ(tm.getLocalBounds(), jt::Rect {});
+}
