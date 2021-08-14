@@ -9,7 +9,7 @@
 void StateTileson::doInternalCreate()
 {
     m_tilemap = std::make_shared<jt::Tilemap>("assets/tileson_test.json");
-    m_tilemap->setScreenSizeHint(jt::Vector2(400, 300), getGame());
+    m_tilemap->setScreenSizeHint(jt::Vector2(400, 300));
 
     m_sound = std::make_shared<jt::Sound>();
     m_sound->load("assets/test.ogg");

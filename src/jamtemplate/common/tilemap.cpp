@@ -15,12 +15,12 @@ Tilemap::Tilemap(std::string const& path)
 
     m_map = parser.parse(path);
     if (m_map->getStatus() != tson::ParseStatus::OK) {
-        std::cout << "tileson test could not be parsed.\n";
+        std::cout << "tilemap json could not be parsed.\n";
         throw std::logic_error { "tileson test could not be parsed." };
     }
 
     if (m_map->getTilesets().empty()) {
-        std::cout << "tileson test could not be parsed.\n";
+        std::cout << "tilemap json could not be parsed. Empy\n";
         throw std::invalid_argument { "empty tilesets" };
     }
     auto const tileset = m_map->getTilesets().at(0);
@@ -56,9 +56,6 @@ void Tilemap::doDraw(std::shared_ptr<jt::renderTarget> const sptr) const
     }
 
     auto const posOffset = m_position + getShakeOffset() + getOffset();
-    // std::cout << "Tilemap.posOffset.x " << posOffset.x() << std::endl;
-
-    auto g = m_gamePtr.lock();
 
     for (auto& layer : m_map->getLayers()) {
         // skip all non-tile layers.
@@ -71,9 +68,8 @@ void Tilemap::doDraw(std::shared_ptr<jt::renderTarget> const sptr) const
 
             auto const tilePos = Conversion::vec(tile.getPosition());
             // optimization: don't draw tiles outside the game window
-            if (g) {
+            if (m_screenSizeHint.x() != 0 && m_screenSizeHint.y() != 0) {
                 jt::Vector2 const camoffset = getStaticCamOffset();
-                // std::cout << camoffset.x() << std::endl;
                 auto const px = tilePos.x();
                 auto const py = tilePos.y();
                 auto const tsx = tile.getTile()->getTileSize().x;
@@ -143,11 +139,7 @@ const jt::Vector2 Tilemap::getOrigin() const { return jt::Vector2 {}; }
 
 void Tilemap::doRotate(float /*rot*/) { }
 
-void Tilemap::setScreenSizeHint(jt::Vector2 const& hint, std::shared_ptr<GameInterface> ptr)
-{
-    m_screenSizeHint = hint;
-    m_gamePtr = ptr;
-}
+void Tilemap::setScreenSizeHint(jt::Vector2 const& hint) { m_screenSizeHint = hint; }
 
 const jt::Vector2u Tilemap::getMapSizeInTiles()
 {

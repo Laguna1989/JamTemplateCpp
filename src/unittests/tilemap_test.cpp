@@ -31,3 +31,16 @@ TEST(TilemapTest, UpdateAndDraw)
     tm.update(0.1f);
     tm.draw(nullptr);
 }
+
+TEST(TilemapTest, ParseInvalidFile)
+{
+    ASSERT_THROW(jt::Tilemap tm { "assets/non_existing.json" }, std::logic_error);
+}
+
+TEST(TilemapTest, DrawWithScreensizeHint)
+{
+    jt::Tilemap tm { "assets/tileson_test.json" };
+    tm.setScreenSizeHint(jt::Vector2 { 400.0f, 300.0f });
+    tm.update(0.1f);
+    tm.draw(nullptr);
+}
