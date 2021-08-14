@@ -19,10 +19,6 @@ Tilemap::Tilemap(std::string const& path)
         throw std::logic_error { "tileson test could not be parsed." };
     }
 
-    if (m_map->getTilesets().empty()) {
-        std::cout << "tilemap json could not be parsed. Empy\n";
-        throw std::invalid_argument { "empty tilesets" };
-    }
     auto const tileset = m_map->getTilesets().at(0);
     // // std::cout << "tileset image path: " << tileset.getImagePath() << std::endl;
     auto const columns = tileset.getColumns();

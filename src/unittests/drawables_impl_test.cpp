@@ -121,5 +121,6 @@ TEST_P(DrawableImplTestFixture, DrawWithScale)
     drawable->setScale(jt::Vector2 { 2.0f, 2.0f });
     drawable->update(0.1f);
     auto rt = std::make_shared<jt::renderTarget>();
+    jt::DrawableImpl::setCamOffset(jt::Vector2 { 100.0f, 100.0f });
     drawable->draw(rt);
 }
