@@ -23,8 +23,8 @@ public:
         : Tween<T> { obj,
             [this](auto sptr, auto agePercent) {
                 jt::Color col = sptr->getColor();
-                float alpha = Lerp::linear(m_initialValue, m_finalValue, agePercent);
-                std::uint8_t a = static_cast<std::uint8_t>(alpha * 255.0f);
+                float const alpha = Lerp::linear(m_initialValue, m_finalValue, agePercent);
+                std::uint8_t const a = static_cast<std::uint8_t>(alpha * 255.0f);
                 col.a() = a;
                 sptr->setColor(col);
 

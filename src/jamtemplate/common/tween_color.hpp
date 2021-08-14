@@ -23,11 +23,11 @@ public:
             [this](auto sptr, auto agePercent) {
                 auto col = sptr->getColor();
 
-                float r = Lerp::linear(static_cast<float>(m_initialValue.r()),
+                float const r = Lerp::linear(static_cast<float>(m_initialValue.r()),
                     static_cast<float>(m_finalValue.r()), agePercent);
-                float g = Lerp::linear(static_cast<float>(m_initialValue.g()),
+                float const g = Lerp::linear(static_cast<float>(m_initialValue.g()),
                     static_cast<float>(m_finalValue.g()), agePercent);
-                float b = Lerp::linear(static_cast<float>(m_initialValue.b()),
+                float const b = Lerp::linear(static_cast<float>(m_initialValue.b()),
                     static_cast<float>(m_finalValue.b()), agePercent);
 
                 col.r() = static_cast<std::uint8_t>(r);
