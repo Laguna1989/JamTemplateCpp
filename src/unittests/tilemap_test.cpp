@@ -44,3 +44,16 @@ TEST(TilemapTest, DrawWithScreensizeHint)
     tm.update(0.1f);
     tm.draw(nullptr);
 }
+
+TEST(TilemapTest, GetColorWillReturnBlackByDefault)
+{
+    jt::Tilemap tm { "assets/tileson_test.json" };
+    ASSERT_EQ(tm.getColor(), jt::colors::Black);
+}
+
+TEST(TilemapTest, GetColorWillAlwaysReturnBlack)
+{
+    jt::Tilemap tm { "assets/tileson_test.json" };
+    tm.setColor(::jt::colors::Red);
+    ASSERT_EQ(tm.getColor(), jt::colors::Black);
+}

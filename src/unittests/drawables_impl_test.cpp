@@ -47,6 +47,7 @@ std::shared_ptr<jt::DrawableInterface> createBar()
 std::shared_ptr<jt::DrawableInterface> createTileMap()
 {
     auto t = std::make_shared<jt::Tilemap>("assets/tileson_test.json");
+    t->setScreenSizeHint(jt::Vector2 { 400.0f, 300.0f });
     return t;
 }
 
@@ -83,6 +84,15 @@ TEST_P(DrawableImplTestFixture, DrawWithShadow)
     drawable->draw(rt);
 }
 
+TEST_P(DrawableImplTestFixture, DrawWithSetColor)
+{
+    std::shared_ptr<jt::DrawableInterface> drawable = GetParam();
+    drawable->setColor(jt::colors::Red);
+    drawable->update(0.1f);
+    auto rt = std::make_shared<jt::renderTarget>();
+    drawable->draw(rt);
+}
+
 TEST_P(DrawableImplTestFixture, DrawWithFlash)
 {
     std::shared_ptr<jt::DrawableInterface> drawable = GetParam();
@@ -102,5 +112,14 @@ TEST_P(DrawableImplTestFixture, DrawWithShake)
     auto rt = std::make_shared<jt::renderTarget>();
     drawable->draw(rt);
     drawable->update(5.0f);
+    drawable->draw(rt);
+}
+
+TEST_P(DrawableImplTestFixture, DrawWithScale)
+{
+    std::shared_ptr<jt::DrawableInterface> drawable = GetParam();
+    drawable->setScale(jt::Vector2 { 2.0f, 2.0f });
+    drawable->update(0.1f);
+    auto rt = std::make_shared<jt::renderTarget>();
     drawable->draw(rt);
 }
