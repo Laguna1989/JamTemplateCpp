@@ -69,6 +69,17 @@ if (WIN32)
 	set (SFML_DIR "${SFML_DIR_ROOT}/lib/cmake/SFML")
 	#find_package(SFML COMPONENTS graphics window system audio REQUIRED)
 endif()
+
+#####################################################
+## Create Project file and link directories
+#####################################################
+project (${PROJECTNAME})
+if(NOT ENABLE_WEB)
+	if (WIN32 OR APPLE)
+		link_directories(${SFML_DIR_ROOT}/lib)
+	endif()
+endif()
+
 #####################################################
 ## Other variables and compiler setup
 #####################################################
@@ -101,16 +112,6 @@ else()
 		else ()
 			set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -O3 --std=c++17 -fpermissive -lstdc++fs")
 		endif()
-	endif()
-endif()
-
-#####################################################
-## Create Project file and link directories
-#####################################################
-project (${PROJECTNAME})
-if(NOT ENABLE_WEB)
-	if (WIN32 OR APPLE)
-		link_directories(${SFML_DIR_ROOT}/lib)
 	endif()
 endif()
 
