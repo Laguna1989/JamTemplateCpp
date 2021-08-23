@@ -91,7 +91,7 @@ if(ENABLE_WEB)
 	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -s USE_SDL_TTF=2 -s USE_PTHREADS=1")
 	add_definitions(-DENABLE_WEB)
 else()
-	if(WIN32)
+	if(MSVC)
 		## nasty warning 5205 from tileson should not show up,
 		## so the warning level of this one is set to 4 and the global warning level is set to three
 		set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /w45205 /W3 /EHsc")
