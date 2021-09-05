@@ -21,7 +21,7 @@ before_install:
   
 script:
   - cmake -DENABLE_UNITTESTS=ON -DENABLE_STRESSTESTS=ON -DENABLE_DISPLAY_TESTS=OFF -DENABLE_COVERAGE=ON .
-  - make MyAwesomeGame StressTests UnitTests
+  - make
   - ./UnitTests
 
 after_success:
