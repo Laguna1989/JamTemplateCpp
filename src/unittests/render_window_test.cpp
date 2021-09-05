@@ -58,3 +58,11 @@ TEST(RenderWindowTest, GetMousePositionWithoutView)
     jt::Vector2 const expected { 0.0f, 0.0f };
     EXPECT_EQ(rw.getMousePosition(), expected);
 }
+
+TEST(RenderWindowTest, GetMousePositionWithView)
+{
+    jt::RenderWindow rw { 100, 200, "test" };
+
+    jt::Vector2 const expected { 0.0f, 0.0f };
+    EXPECT_EQ(rw.getMousePosition(), expected);
+}

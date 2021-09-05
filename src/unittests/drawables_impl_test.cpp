@@ -4,6 +4,7 @@
 #include "sprite.hpp"
 #include "text.hpp"
 #include "tilemap.hpp"
+#include "line.hpp"
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 #include <memory>
@@ -40,7 +41,7 @@ std::shared_ptr<jt::DrawableInterface> createText()
 
 std::shared_ptr<jt::DrawableInterface> createBar()
 {
-    auto b = std::make_shared<jt::Bar>(32, 12);
+    auto b = std::make_shared<jt::Bar>(32.0f, 12.0f);
     return b;
 }
 
@@ -51,13 +52,19 @@ std::shared_ptr<jt::DrawableInterface> createTileMap()
     return t;
 }
 
+std::shared_ptr<jt::DrawableInterface> createLine()
+{
+    auto l = std::make_shared<jt::Line>(jt::Vector2{1.0f, 10.0f});
+    return l;
+}
+
 class DrawableImplTestFixture
     : public ::testing::TestWithParam<std::shared_ptr<jt::DrawableInterface>> {
 };
 
 INSTANTIATE_TEST_SUITE_P(DrawableImplTest, DrawableImplTestFixture,
     ::testing::Values(createSprite(), createAnimation(), createShape(), createText(), createBar(),
-        createTileMap()));
+        createTileMap(), createLine()));
 
 TEST_P(DrawableImplTestFixture, GetPositionAfterSetPosition)
 {
