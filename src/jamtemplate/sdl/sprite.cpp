@@ -44,9 +44,10 @@ const jt::Color Sprite::getFlashColor() const { return m_colorFlash; }
 
 jt::Rect const Sprite::getGlobalBounds() const
 {
-    return jt::Rect { 0.0f, 0.0f, static_cast<float>(m_sourceRect.width()),
+    return jt::Rect { m_position.x(), m_position.y(), static_cast<float>(m_sourceRect.width()),
         static_cast<float>(m_sourceRect.height()) };
 }
+
 jt::Rect const Sprite::getLocalBounds() const
 {
     return jt::Rect { 0.0f, 0.0f, static_cast<float>(m_sourceRect.width()),
@@ -56,7 +57,12 @@ jt::Rect const Sprite::getLocalBounds() const
 void Sprite::setScale(jt::Vector2 const& scale) { m_scale = scale; }
 const jt::Vector2 Sprite::getScale() const { return m_scale; }
 
-void Sprite::setOrigin(jt::Vector2 const& origin) { m_origin = origin; }
+void Sprite::setOrigin(jt::Vector2 const& origin)
+{
+    m_origin = origin;
+    m_offsetFromOrigin = -1.0f * origin;
+}
+
 jt::Vector2 const Sprite::getOrigin() const { return m_origin; }
 
 jt::Color Sprite::getColorAtPixel(jt::Vector2u pixelPos) const
@@ -90,7 +96,7 @@ void Sprite::doDraw(std::shared_ptr<jt::renderTarget> const sptr) const
     SDL_Point const p { static_cast<int>(m_origin.x()), static_cast<int>(m_origin.y()) };
     SDL_SetRenderDrawBlendMode(sptr.get(), SDL_BLENDMODE_BLEND);
     setSDLColor(m_color);
-    SDL_RenderCopyEx(sptr.get(), m_text.get(), &sourceRect, &destRect, getRotation(), &p, flip);
+    SDL_RenderCopyEx(sptr.get(), m_text.get(), &sourceRect, &destRect, -getRotation(), &p, flip);
 }
 
 void Sprite::doDrawShadow(std::shared_ptr<jt::renderTarget> const sptr) const
@@ -123,7 +129,7 @@ void Sprite::doRotate(float /*rot*/) { }
 SDL_Rect Sprite::getDestRect(jt::Vector2 const& positionOffset) const
 {
     // std::cout << "Sprite.CamOffset.x " << getCamOffset().x() << std::endl;
-    auto const pos = m_position + getShakeOffset() + getOffset() + getCamOffset() + positionOffset;
+    auto const pos = m_position + getShakeOffset() + getOffset() + getCamOffset() + positionOffset + m_offsetFromOrigin;
     // std::cout << "Sprite.final position.x " << pos.x() << std::endl;
     SDL_Rect const destRect { static_cast<int>(pos.x()), static_cast<int>(pos.y()),
         static_cast<int>(m_sourceRect.width() * fabs(m_scale.x())),

@@ -56,6 +56,8 @@ public:
     float getCurrentAnimTotalTime() const;
     std::size_t getCurrentAnimFrames() const;
 
+    std::string getCurrentAnimName() const;
+
 private:
     mutable AnimationMapType m_frames;
     std::map<std::string, float> m_time;

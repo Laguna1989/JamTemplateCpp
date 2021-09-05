@@ -26,6 +26,7 @@ public:
 
 protected:
     void updateObjects(float elapsed);
+    void basicUpdateObjects(float elapsed);
     void updateTweens(float elapsed);
 
     void drawObjects() const;

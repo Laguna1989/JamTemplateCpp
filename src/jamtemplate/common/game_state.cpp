@@ -66,12 +66,17 @@ void GameState::internalDraw() const
 
 void GameState::updateObjects(float elapsed)
 {
-    cleanUpObjects();
-    addNewObjects();
+    basicUpdateObjects(elapsed);
 
     for (auto& go : m_objects) {
         go->update(elapsed);
     }
+}
+
+void GameState::basicUpdateObjects(float /*elapsed*/)
+{
+    cleanUpObjects();
+    addNewObjects();
 }
 
 void GameState::updateTweens(float elapsed)

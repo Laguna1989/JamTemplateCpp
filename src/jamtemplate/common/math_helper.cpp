@@ -41,6 +41,7 @@ std::string floatToStringWithXDigits(float const number, unsigned int digits)
     stream << std::fixed << std::setprecision(digits) << number;
     return stream.str();
 }
+float angleOf(Vector2 const& in) { return rad2deg(atan2(in.y(), in.x())); }
 
 } // namespace MathHelper
 

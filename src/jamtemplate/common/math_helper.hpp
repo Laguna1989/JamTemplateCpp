@@ -37,6 +37,9 @@ float deg2rad(float a);
 
 jt::Vector2 rotateBy(jt::Vector2 const& in, float aInDegree);
 
+// angle in degree between argument vector and the x axis
+float angleOf(jt::Vector2 const& in);
+
 template <typename T>
 T clamp(T const& value, T const& min, T const& max)
 {

@@ -39,7 +39,6 @@ it freely, subject to the following restrictions:
 #include "math_helper.hpp"
 #include "rect.hpp"
 #include "vector.hpp"
-#include <SFML/Graphics.hpp>
 #include <memory>
 
 namespace jt {
@@ -186,7 +185,7 @@ public:
 
 #endif
     //////
-    /// Test for collision using circle collision dection
+    /// Test for collision using circle collision detection
     /// Radius is averaged from the dimensions of the sprite so
     /// roughly circular objects will be much more accurate
     //////

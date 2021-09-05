@@ -234,4 +234,5 @@ std::size_t Animation::getCurrentAnimFrames() const
 {
     return m_frames.at(m_currentAnimName).size();
 }
+std::string Animation::getCurrentAnimName() const { return m_currentAnimName; }
 } // namespace jt
