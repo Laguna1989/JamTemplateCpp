@@ -15,6 +15,7 @@ public:
     MOCK_METHOD(jt::Vector2, getMousePositionScreen, (float), (override));
     MOCK_METHOD(std::shared_ptr<jt::renderTarget>, createRenderTarget, (), (override));
     MOCK_METHOD(void, setMouseCursorVisible, (bool), (override));
+    MOCK_METHOD(bool, getMouseCursorVisible, (), (const, override));
 };
 
 #endif

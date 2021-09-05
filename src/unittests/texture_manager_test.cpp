@@ -72,6 +72,20 @@ TEST_F(TextureManagerTest, GetVignettteInvalid)
     EXPECT_ANY_THROW(TextureManager::get("#v#0x12#30"));
 }
 
+TEST_F(TextureManagerTest, GetBlankInvalid)
+{
+    // too many arguments
+    EXPECT_ANY_THROW(TextureManager::get("#f#10#20#30"));
+    // negative value
+    EXPECT_ANY_THROW(TextureManager::get("#f#-100#30"));
+    // chars in size argument
+    EXPECT_ANY_THROW(TextureManager::get("#f#100#3asdf0"));
+    // chars in size argument
+    EXPECT_ANY_THROW(TextureManager::get("#f#12asv12#30"));
+    // hex numbers not allowed
+    EXPECT_ANY_THROW(TextureManager::get("#f#0x12#30"));
+}
+
 TEST_F(TextureManagerTest, ColorReplaceWithEmptyChangeSet)
 {
     TextureManager::addSelectiveColorReplacement(0, {});

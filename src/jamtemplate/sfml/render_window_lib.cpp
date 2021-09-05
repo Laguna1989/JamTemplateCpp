@@ -60,6 +60,11 @@ jt::Vector2 RenderWindow::getMousePositionScreen(float zoom)
     return m_window->mapPixelToCoords(sf::Mouse::getPosition(*m_window)) / zoom;
 }
 
-void RenderWindow::setMouseCursorVisible(bool visible) { m_window->setMouseCursorVisible(visible); }
+void RenderWindow::setMouseCursorVisible(bool visible)
+{
+    m_window->setMouseCursorVisible(visible);
+    m_isMouseCursorVisible = visible;
+}
+bool RenderWindow::getMouseCursorVisible(void) const { return m_isMouseCursorVisible; }
 
 } // namespace jt

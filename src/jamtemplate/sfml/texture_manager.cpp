@@ -33,7 +33,7 @@ sf::Image createButtonImage(std::vector<std::string> const& ssv)
 sf::Image createBlankImage(std::vector<std::string> const& ssv)
 {
     if (ssv.size() != 3) {
-        throw std::invalid_argument { "create button image: vector does not contain 3 elements." };
+        throw std::invalid_argument { "create blank image: vector does not contain 3 elements." };
     }
     std::size_t count { 0 };
     long w = std::stol(ssv.at(1), &count);

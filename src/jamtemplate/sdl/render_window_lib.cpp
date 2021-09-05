@@ -66,6 +66,15 @@ jt::Vector2 RenderWindow::getMousePositionScreen(float /*zoom*/)
     return jt::Vector2 { 0.0f, 0.0f };
 }
 
-void RenderWindow::setMouseCursorVisible(bool visible) { SDL_ShowCursor(SDL_ENABLE); }
+void RenderWindow::setMouseCursorVisible(bool visible)
+{
+    SDL_ShowCursor(SDL_ENABLE);
+    m_isMouseCursorVisible = visible;
+}
+
+bool RenderWindow::getMouseCursorVisible() const
+{
+    return m_isMouseCursorVisible;
+}
 
 } // namespace jt

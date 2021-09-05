@@ -26,10 +26,12 @@ public:
     virtual jt::Vector2 getMousePositionScreen(float zoom) override;
 
     void setMouseCursorVisible(bool visible) override;
+    bool getMouseCursorVisible() const override;
 
 private:
     std::shared_ptr<SDL_Window> m_window;
     jt::Vector2 m_size;
+    bool m_isMouseCursorVisible{true};
 };
 } // namespace jt
 

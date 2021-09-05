@@ -66,3 +66,18 @@ TEST(RenderWindowTest, GetMousePositionWithView)
     jt::Vector2 const expected { 0.0f, 0.0f };
     EXPECT_EQ(rw.getMousePosition(), expected);
 }
+
+
+TEST(RenderWindowTest, MouseIsVisibleByDefault)
+{
+    jt::RenderWindow rw { 100, 200, "test" };
+
+    ASSERT_TRUE(rw.getMouseCursorVisible());
+}
+
+TEST(RenderWindowTest, MouseIsInvisibleAfterSet)
+{
+    jt::RenderWindow rw { 100, 200, "test" };
+    rw.setMouseCursorVisible(false);
+    ASSERT_FALSE(rw.getMouseCursorVisible());
+}
