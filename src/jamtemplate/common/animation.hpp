@@ -18,9 +18,6 @@ public:
     using Sptr = std::shared_ptr<Animation>;
     using AnimationMapType = std::map<std::string, std::vector<std::shared_ptr<Sprite>>>;
 
-    Animation() = default;
-    virtual ~Animation() = default;
-
     // add a new animation to the pool of available animations
     void add(std::string const& fileName, std::string const& animName, jt::Vector2u const& size,
         std::vector<unsigned int> const& frameIndices, float frameTime);
@@ -63,7 +60,7 @@ private:
     std::map<std::string, float> m_time;
 
     // which animation is playing atm?
-    std::string m_currentAnimName = "";
+    std::string m_currentAnimName { "" };
     // which frame of the animation is currently displayed?
     size_t m_currentIdx = 0;
 

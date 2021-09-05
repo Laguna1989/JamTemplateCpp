@@ -48,6 +48,21 @@ TEST(AnimationTest, AddAnimationWithNegativeTimeRaisesInvalidArgumentException)
         a.add("assets/coin.png", "test", { 16, 16 }, { 0, 1, 2, 3 }, -0.5f), std::invalid_argument);
 }
 
+TEST(AnimationTest, GetCurrentAnimNameDefaultValue)
+{
+    jt::Animation a {};
+    a.add("assets/coin.png", "idle", { 16, 16 }, { 0 }, 1.0f);
+    ASSERT_EQ(a.getCurrentAnimName(), "");
+}
+
+TEST(AnimationTest, GetCurrentAnimNameAfterPlay)
+{
+    jt::Animation a {};
+    a.add("assets/coin.png", "idle", { 16, 16 }, { 0 }, 1.0f);
+    a.play("idle");
+    ASSERT_EQ(a.getCurrentAnimName(), "idle");
+}
+
 TEST(AnimationTest, ScaleSetsScale)
 {
     jt::Animation a {};
