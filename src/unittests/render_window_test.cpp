@@ -49,3 +49,12 @@ TEST(RenderwindowTest, Display)
     jt::RenderWindow rw { 100, 200, "test" };
     rw.display();
 }
+
+TEST(RenderWindowTest, GetMousePositionWithoutView)
+{
+    jt::RenderWindow rw { 100, 200, "test" };
+    rw.s_view.reset();
+
+    jt::Vector2 const expected { 0.0f, 0.0f };
+    EXPECT_EQ(rw.getMousePosition(), expected);
+}

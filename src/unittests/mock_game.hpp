@@ -23,6 +23,7 @@ public:
         (std::shared_ptr<jt::GameState>, jt::GameLoopInterface::GameLoopFunctionPtr), (override));
 
     MOCK_METHOD(void, setupRenderTarget, (), (override));
+    MOCK_METHOD(std::shared_ptr<jt::RenderWindowInterface>, getRenderWindow, (), (const, override));
 
 protected:
     MOCK_METHOD(std::weak_ptr<jt::GameInterface>, getPtr, (), (override));
