@@ -1,7 +1,6 @@
 ﻿#include "button.hpp"
 #include "mock_drawable.hpp"
 #include "mock_game.hpp"
-#include "mock_drawable.hpp"
 #include <gtest/gtest.h>
 
 TEST(ButtonTest, InitialValues)
@@ -97,4 +96,19 @@ TEST(ButtonTest, IsNotActiveAfterSetInactive)
     b.setActive(false);
 
     ASSERT_FALSE(b.getActive());
+}
+
+TEST(ButtonTest, AddCallback)
+{
+    jt::Button b {};
+    b.addCallback([]() {});
+    ASSERT_EQ(b.getCallbackCount(), 1U);
+}
+
+TEST(ButtonTest, CallbacksAreEmptyAfterClearCallbacks)
+{
+    jt::Button b {};
+    b.addCallback([]() {});
+    b.clearCallbacks();
+    ASSERT_EQ(b.getCallbackCount(), 0U);
 }

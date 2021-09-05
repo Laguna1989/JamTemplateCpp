@@ -34,14 +34,10 @@ Button::~Button()
     m_background = nullptr;
     m_callbacks.clear();
 }
-
 void Button::setDrawable(std::shared_ptr<DrawableInterface> sprt) { m_drawable = sprt; }
-
 void Button::addCallback(std::function<void(void)> cb) { m_callbacks.push_back(cb); }
-
 void Button::clearCallbacks() { m_callbacks.clear(); }
 size_t Button::getCallbackCount() const { return m_callbacks.size(); }
-
 bool Button::IsMouseOver()
 {
     if (getGame()->input() == nullptr) {
@@ -49,15 +45,10 @@ bool Button::IsMouseOver()
     }
     return isOver(getGame()->input()->mouse()->getMousePositionScreen());
 }
-
 void Button::setVisible(bool v) { m_isVisible = v; }
-
 bool Button::getVisible() const { return m_isVisible; }
-
 void Button::setPosition(jt::Vector2 const& v) { m_pos = v; }
-
 jt::Vector2 Button::getPosition() const { return m_pos; }
-
 void Button::doDraw() const
 {
     if (!m_isVisible) {
@@ -73,7 +64,6 @@ void Button::doDraw() const
         m_disabledOverlay->draw(getGame()->getRenderTarget());
     }
 }
-
 bool Button::isOver(jt::Vector2 const& mousePosition)
 {
     if (!m_isActive)
