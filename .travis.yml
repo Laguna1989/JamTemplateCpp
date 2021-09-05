@@ -1,19 +1,17 @@
 language: cpp
 
-matrix:
-  include:
-    - os: linux
-      dist: focal
-      services:
-        - xvfb
-      addons:
-        apt:
-          sources:
-            - sourceline: 'ppa:ubuntu-toolchain-r/test'
-          packages:
-            - g++-9
-      env:
-        - MATRIX_EVAL="CC=gcc-9 CXX=g++-9"
+os: linux
+dist: focal
+services:
+  - xvfb
+addons:
+  apt:
+    sources:
+      - sourceline: 'ppa:ubuntu-toolchain-r/test'
+    packages:
+      - g++-9
+env:
+  - MATRIX_EVAL="CC=gcc-9 CXX=g++-9"
 
 before_install:
   - eval "${MATRIX_EVAL}"
@@ -23,9 +21,7 @@ before_install:
   
 script:
   - cmake -DENABLE_UNITTESTS=ON -DENABLE_STRESSTESTS=ON -DENABLE_DISPLAY_TESTS=OFF -DENABLE_COVERAGE=ON .
-  - make MyAwesomeGame
-  - make StressTests
-  - make UnitTests
+  - make MyAwesomeGame StressTests UnitTests
   - ./UnitTests
 
 after_success:
