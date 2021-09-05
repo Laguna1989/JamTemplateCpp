@@ -1,5 +1,6 @@
 ﻿#include "game.hpp"
 #include "game_state.hpp"
+#include "input_manager_interface.hpp"
 #include "mock_window.hpp"
 #include "rect_lib.hpp"
 #include "render_window.hpp"
@@ -25,6 +26,7 @@ public:
         EXPECT_CALL(*window, getSize())
             .Times(::testing::AnyNumber())
             .WillRepeatedly(::testing::Return(jt::Vector2 { 100.0f, 200.0f }));
+
         g = std::make_shared<Game>(window, zoom);
     }
 };
@@ -72,7 +74,6 @@ TEST_F(GameTest, UpdateWithView)
 
 TEST_F(GameTest, SetViewWithRenderTarget)
 {
-
     EXPECT_CALL(*window, createRenderTarget())
         .WillOnce(::testing::Return(std::make_shared<jt::renderTarget>()));
     EXPECT_CALL(*window, getSize()).WillRepeatedly(::testing::Return(jt::Vector2 { 20.0f, 40.0f }));
@@ -246,11 +247,14 @@ TEST_F(GameTest, GameRunWithStateThrowingIntException)
     auto state = std::make_shared<MockState>();
     EXPECT_CALL(*state, doInternalCreate());
     ON_CALL(*state, doInternalUpdate(::testing::_))
-    .WillByDefault(::testing::Invoke([](auto /*elapsed*/) {
-        throw 5;
-    }));
+        .WillByDefault(::testing::Invoke([](auto /*elapsed*/) { throw 5; }));
     g->switchState(state);
     EXPECT_DEATH(g->run(), "");
+}
+
+TEST_F(GameTest, GetRenderWindowDoesNotReturnNullptr)
+{
+    ASSERT_NE(g->getRenderWindow(), nullptr);
 }
 
 // TODO Add a test that verifies that cam.reset is called on switchState();
