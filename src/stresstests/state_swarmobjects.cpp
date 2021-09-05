@@ -62,8 +62,6 @@ void StateSwarmObjects::updateSwarm()
 void StateSwarmObjects::updateOneSwarmObject(
     const size_t& firstSwarmObjectIndex, jt::Vector2 const& centerPos)
 {
-    float cutoffDistance = 10;
-
     auto o1 = m_SwarmObjects->at(firstSwarmObjectIndex).lock();
     auto p1 = o1->getPosition();
     auto v1 = o1->getVelocity();
