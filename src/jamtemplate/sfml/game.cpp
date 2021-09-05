@@ -167,4 +167,6 @@ void jt::Game::removeCamShakeFromView()
     }
 }
 
+std::shared_ptr<jt::RenderWindowInterface> Game::getRenderWindow() const { return m_window; }
+
 } // namespace jt

@@ -6,6 +6,7 @@ namespace jt {
 RenderWindow::RenderWindow(unsigned int width, unsigned int height, std::string const& title)
 {
     m_size = jt::Vector2 { static_cast<float>(width), static_cast<float>(height) };
+    SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "0");
     m_window = std::shared_ptr<SDL_Window>(SDL_CreateWindow(title.c_str(), SDL_WINDOWPOS_CENTERED,
                                                SDL_WINDOWPOS_CENTERED, width, height, 0),
         [](SDL_Window* w) { SDL_DestroyWindow(w); });
@@ -55,13 +56,16 @@ jt::Vector2 RenderWindow::getMousePosition()
     int mx { 0 };
     int my { 0 };
     auto const mouseState = SDL_GetMouseState(&mx, &my);
+    (void)mouseState;
     return jt::Vector2 { static_cast<float>(mx), static_cast<float>(my) };
 }
 
-jt::Vector2 RenderWindow::getMousePositionScreen(float zoom)
+jt::Vector2 RenderWindow::getMousePositionScreen(float /*zoom*/)
 {
     std::cerr << "RenderWindow::getMousepositonScreen() not supported by SDL Renderwindow.\n";
     return jt::Vector2 { 0.0f, 0.0f };
 }
+
+void RenderWindow::setMouseCursorVisible(bool visible) { SDL_ShowCursor(SDL_ENABLE); }
 
 } // namespace jt

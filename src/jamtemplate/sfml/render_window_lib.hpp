@@ -27,6 +27,7 @@ public:
 
     jt::Vector2 getMousePosition() override;
     jt::Vector2 getMousePositionScreen(float zoom) override;
+    void setMouseCursorVisible(bool visible) override;
 
     // do not use/write s_view manually from gameplay code. Should only be set once in Game.cpp.
     static std::weak_ptr<sf::View> s_view;

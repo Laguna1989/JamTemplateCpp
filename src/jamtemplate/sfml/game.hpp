@@ -39,9 +39,10 @@ public:
     // DO NOT CALL FROM GAME CODE
     std::shared_ptr<sf::View> getView();
 
+    std::shared_ptr<jt::RenderWindowInterface> getRenderWindow() const override;
+
 private:
     std::shared_ptr<jt::RenderWindowInterface> m_window { nullptr };
-    // std::shared_ptr<sf::RenderWindow> m_renderWindow { nullptr };
     std::shared_ptr<jt::renderTarget> m_renderTarget { nullptr };
 
     std::shared_ptr<InputManagerInterface> m_input { nullptr };

@@ -6,6 +6,7 @@
 #include "input_manager_interface.hpp"
 #include "music_player_interface.hpp"
 #include "render_target.hpp"
+#include "render_window_interface.hpp"
 #include <memory>
 
 namespace jt {
@@ -23,6 +24,8 @@ public:
     virtual void setupRenderTarget() = 0;
     virtual void setRenderTarget(std::shared_ptr<jt::renderTarget> rt) = 0;
     virtual std::shared_ptr<jt::renderTarget> getRenderTarget() const = 0;
+
+    virtual std::shared_ptr<jt::RenderWindowInterface> getRenderWindow() const = 0;
 
 protected:
     virtual std::weak_ptr<GameInterface> getPtr() = 0;

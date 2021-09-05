@@ -6,6 +6,7 @@
 #include "game_object.hpp"
 #include "input_manager.hpp"
 #include "vector.hpp"
+#include "sprite.hpp"
 #include <functional>
 #include <memory>
 #include <string>
@@ -21,7 +22,12 @@ Button::Button(jt::Vector2u s)
     m_background->add(buttonImageName, "down", s, { 2 }, 1);
     m_background->play("normal");
     m_background->setIgnoreCamMovement(true);
+
+    m_disabledOverlay = std::make_shared<jt::Sprite>();
+    m_disabledOverlay->loadSprite("#f#" + std::to_string(s.x()) + "#" + std::to_string(s.y()));
+    m_disabledOverlay->setColor(jt::Color{100,100,100,150});
 }
+
 Button::~Button()
 {
     m_drawable = nullptr;
@@ -44,9 +50,9 @@ bool Button::IsMouseOver()
     return isOver(getGame()->input()->mouse()->getMousePositionScreen());
 }
 
-void Button::setVisible(bool v) { m_visible = v; }
+void Button::setVisible(bool v) { m_isVisible = v; }
 
-bool Button::getVisible() const { return m_visible; }
+bool Button::getVisible() const { return m_isVisible; }
 
 void Button::setPosition(jt::Vector2 const& v) { m_pos = v; }
 
@@ -54,16 +60,27 @@ jt::Vector2 Button::getPosition() const { return m_pos; }
 
 void Button::doDraw() const
 {
-    if (!m_visible) {
+    if (!m_isVisible) {
         return;
     }
+
     m_background->draw(getGame()->getRenderTarget());
     if (m_drawable)
         m_drawable->draw(getGame()->getRenderTarget());
+
+    if (!m_isActive)
+    {
+        m_disabledOverlay->draw(getGame()->getRenderTarget());
+    }
 }
 
 bool Button::isOver(jt::Vector2 const& mousePosition)
 {
+    if (!m_isActive)
+    {
+        return false;
+    }
+
     float px = m_background->getPosition().x();
     float py = m_background->getPosition().y();
 
@@ -76,7 +93,11 @@ bool Button::isOver(jt::Vector2 const& mousePosition)
 void Button::doUpdate(float elapsed)
 {
     m_background->update(elapsed);
+    m_disabledOverlay->update(elapsed);
+
+    m_disabledOverlay->setPosition((m_pos));
     m_background->setPosition(m_pos);
+
     if (m_drawable) {
         m_drawable->setPosition(m_pos);
         m_drawable->update(elapsed);
@@ -90,7 +111,7 @@ void Button::doUpdate(float elapsed)
         }
 
         if (getGame()->input()->mouse()->justReleased(jt::MouseButtonCode::MBLeft)) {
-            if (m_visible) {
+            if (m_isVisible) {
                 for (auto& cb : m_callbacks) {
                     cb();
                 }
@@ -100,5 +121,7 @@ void Button::doUpdate(float elapsed)
         m_background->play("normal");
     }
 }
+bool Button::getActive() const { return m_isActive; }
+void Button::setActive(bool v) { m_isActive = v; }
 
 } // namespace jt

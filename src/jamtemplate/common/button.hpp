@@ -9,6 +9,7 @@
 
 namespace jt {
 class Animation;
+class Sprite;
 class DrawableInterface;
 
 class Button : public GameObject {
@@ -33,16 +34,21 @@ public:
     void setVisible(bool v);
     bool getVisible() const;
 
+    void setActive(bool v);
+    bool getActive() const;
+
     void setPosition(jt::Vector2 const& v);
     jt::Vector2 getPosition(void) const;
 
 private:
     std::shared_ptr<Animation> m_background;
+    std::shared_ptr<jt::Sprite> m_disabledOverlay;
     std::shared_ptr<DrawableInterface> m_drawable { nullptr };
     std::vector<std::function<void(void)>> m_callbacks;
     jt::Vector2 m_pos;
 
-    bool m_visible { true };
+    bool m_isVisible { true };
+    bool m_isActive {true};
 
     void doDraw() const override;
 

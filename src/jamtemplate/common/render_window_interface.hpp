@@ -27,6 +27,7 @@ public:
 
     virtual jt::Vector2 getMousePosition() = 0;
     virtual jt::Vector2 getMousePositionScreen(float zoom) = 0;
+    virtual void setMouseCursorVisible(bool visible) = 0;
 };
 } // namespace jt
 #endif

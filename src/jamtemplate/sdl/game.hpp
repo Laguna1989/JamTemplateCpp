@@ -31,6 +31,8 @@ public:
 
     std::shared_ptr<InputManagerInterface> input() override;
 
+    std::shared_ptr<jt::RenderWindowInterface> getRenderWindow() const override;
+
 private:
     std::shared_ptr<jt::renderTarget> m_renderTarget { nullptr };
     std::shared_ptr<jt::RenderWindowInterface> m_window;
