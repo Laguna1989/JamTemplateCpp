@@ -64,6 +64,7 @@ private:
     jt::Color m_flashColor { jt::colors::White };
     jt::Vector2 m_origin { 0.0f, 0.0f };
     jt::Vector2 m_scale { 1.0f, 1.0f };
+    jt::Vector2 m_offsetFromOrigin {0.0f, 0.0f};
 
     // optimization, so the text rendering logic does not have to happen in every frame, but only
     // when the text changes.
@@ -94,7 +95,7 @@ private:
     void setSDLColor(jt::Color const& col) const;
     SDL_Rect getDestRect(jt::Vector2 const& positionOffset = jt::Vector2 { 0.0f, 0.0f }) const;
 
-    int getUpscaleFactor() const { return 5; };
+    int getUpscaleFactor() const { return 1; };
     void calculateTextTextureSize(
         std::shared_ptr<jt::renderTarget> const sptr, std::vector<std::string> const& ssv);
 };

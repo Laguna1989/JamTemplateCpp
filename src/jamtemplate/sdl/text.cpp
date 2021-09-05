@@ -55,18 +55,22 @@ const jt::Color Text::getFlashColor() const { return m_flashColor; }
 
 jt::Rect const Text::getGlobalBounds() const
 {
-    return jt::Rect { m_position.x(), m_position.y(), m_textTextureSizeX * m_scale.x(),
-        m_textTextureSizeY * m_scale.y() };
+    return jt::Rect { m_position.x(), m_position.y(), m_textTextureSizeX * m_scale.x() / getUpscaleFactor(),
+        m_textTextureSizeY * m_scale.y() /getUpscaleFactor() };
 }
 jt::Rect const Text::getLocalBounds() const
 {
-    return jt::Rect { 0, 0, m_textTextureSizeX * m_scale.x(), m_textTextureSizeY * m_scale.y() };
+    return jt::Rect { 0, 0, m_textTextureSizeX * m_scale.x()/getUpscaleFactor(), m_textTextureSizeY * m_scale.y() / getUpscaleFactor() };
 }
 
 void Text::setScale(jt::Vector2 const& scale) { m_scale = scale; }
 const jt::Vector2 Text::getScale() const { return m_scale; }
 
-void Text::setOrigin(jt::Vector2 const& origin) { m_origin = origin; }
+void Text::setOrigin(jt::Vector2 const& origin)
+{
+    m_origin = origin;
+    m_offsetFromOrigin = -1.0f * origin;
+}
 jt::Vector2 const Text::getOrigin() const { return m_origin; }
 
 void Text::SetTextAlign(Text::TextAlign ta)
@@ -129,6 +133,7 @@ void Text::renderOneLineOfText(std::shared_ptr<jt::renderTarget> const sptr, std
     // render text on full white, so coloring can be done afterwards
     SDL_Color const col { 255U, 255U, 255U, 255U };
     SDL_Surface* textSurface = TTF_RenderText_Solid(m_font, text.c_str(), col);
+    SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "0");
     SDL_Texture* textTexture = SDL_CreateTextureFromSurface(
         sptr.get(), textSurface); // now you can convert it into a texture
 
@@ -161,6 +166,7 @@ jt::Vector2u Text::getSizeForLine(
 {
     SDL_Color const col { 255U, 255U, 255U, 255U };
     SDL_Surface* textSurface = TTF_RenderText_Solid(m_font, text.c_str(), col);
+    SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "0");
     SDL_Texture* textTexture = SDL_CreateTextureFromSurface(
         sptr.get(), textSurface); // now you can convert it into a texture
     int w { 0 };
@@ -191,6 +197,7 @@ void Text::recreateTextTexture(std::shared_ptr<jt::renderTarget> const sptr)
 
     auto oldT = SDL_GetRenderTarget(sptr.get());
     // std::cout << oldT << std::endl;
+    SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "0");
     m_textTexture = std::shared_ptr<SDL_Texture>(
         SDL_CreateTexture(sptr.get(), SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_TARGET,
             m_textTextureSizeX * getUpscaleFactor(), m_textTextureSizeY * getUpscaleFactor()),
@@ -236,7 +243,7 @@ SDL_Rect Text::getDestRect(jt::Vector2 const& positionOffset) const
     }
 
     jt::Vector2 pos = m_position + getShakeOffset() + getOffset() + getCamOffset() + alignOffset
-        + positionOffset;
+        + positionOffset + m_offsetFromOrigin;
 
     SDL_Rect destRect; // create a rect
     destRect.x = pos.x(); // controls the rect's x coordinate

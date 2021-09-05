@@ -30,6 +30,28 @@ sf::Image createButtonImage(std::vector<std::string> const& ssv)
         static_cast<unsigned int>(w), static_cast<unsigned int>(h));
 }
 
+sf::Image createBlankImage(std::vector<std::string> const& ssv)
+{
+    if (ssv.size() != 3) {
+        throw std::invalid_argument { "create button image: vector does not contain 3 elements." };
+    }
+    std::size_t count { 0 };
+    long w = std::stol(ssv.at(1), &count);
+    if (count != ssv.at(1).size()) {
+        throw std::invalid_argument { "invalid image size string" };
+    }
+    long h = std::stol(ssv.at(2), &count);
+    if (count != ssv.at(2).size()) {
+        throw std::invalid_argument { "invalid image size string" };
+    }
+    if (w <= 0 || h <= 0) {
+        throw std::invalid_argument { "invalid image size" };
+    }
+
+    return SpriteFunctions::makeBlankImage(
+        static_cast<unsigned int>(w), static_cast<unsigned int>(h));
+}
+
 sf::Image createGlowImage(std::vector<std::string> const& ssv)
 {
     if (ssv.size() != 3) {
@@ -158,6 +180,8 @@ sf::Texture& TextureManager::get(std::string const& str)
             auto ssv = ss.split('#');
             if (ssv.at(0) == "b") {
                 m_textures[str].loadFromImage(createButtonImage(ssv));
+            } else if (ssv.at(0) == "f") {
+                m_textures[str].loadFromImage(createBlankImage(ssv));
             } else if (ssv.at(0) == "r") {
                 m_textures[str].loadFromImage(createReplacedImage(ssv, m_selectiveColorReplace));
             } else if (ssv.at(0) == "g") {

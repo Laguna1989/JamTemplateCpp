@@ -31,6 +31,29 @@ std::shared_ptr<SDL_Texture> createButtonImage(
     return jt::SpriteFunctions::makeButtonImage(rt, w, h);
 }
 
+std::shared_ptr<SDL_Texture> createBlankImage(
+    std::vector<std::string> const& ssv, std::shared_ptr<jt::renderTarget> rt)
+{
+    if (ssv.size() != 3) {
+        throw std::invalid_argument { "create button image: vector does not contain 3 elements." };
+    }
+    std::size_t count { 0 };
+    long w = std::stol(ssv.at(1), &count);
+    if (count != ssv.at(1).size()) {
+        throw std::invalid_argument { "invalid image size string" };
+    }
+    long h = std::stol(ssv.at(2), &count);
+    if (count != ssv.at(2).size()) {
+        throw std::invalid_argument { "invalid image size string" };
+    }
+    if (w <= 0 || h <= 0) {
+        throw std::invalid_argument { "invalid image size" };
+    }
+
+    return SpriteFunctions::makeBlankImage( rt,
+        static_cast<unsigned int>(w), static_cast<unsigned int>(h));
+}
+
 std::shared_ptr<SDL_Texture> createGlowImage(
     std::vector<std::string> const& ssv, std::shared_ptr<jt::renderTarget> rt)
 {
@@ -127,6 +150,7 @@ std::shared_ptr<SDL_Texture> createFlashImage(
         }
     }
 
+    SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "0");
     return std::shared_ptr<SDL_Texture>(SDL_CreateTextureFromSurface(rt.get(), image.get()),
         [](SDL_Texture* t) { SDL_DestroyTexture(t); });
 }
@@ -176,6 +200,8 @@ std::shared_ptr<SDL_Texture> TextureManager::get(std::string const& str)
             auto ssv = ss.split('#');
             if (ssv.at(0) == "b") {
                 m_textures[str] = createButtonImage(ssv, m_renderer.lock());
+            } else if (ssv.at(0) == "f") {
+                m_textures[str] = createBlankImage(ssv, m_renderer.lock());
             } else if (ssv.at(0) == "r") {
                 // m_textures[str].loadFromImage(createReplacedImage(ssv, m_selectiveColorReplace));
             } else if (ssv.at(0) == "g") {

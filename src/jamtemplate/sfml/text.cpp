@@ -84,7 +84,9 @@ void Text::doUpdate(float /*elapsed*/)
 
     jt::Vector2 pos = m_position + getShakeOffset() + alignOffset + getCamOffset();
 
-    m_text->setPosition(jt::Vector2 { pos.x(), pos.y() });
+    // casting to int and back to float avoids blurry text when rendered on non-integer positions
+    m_text->setPosition(jt::Vector2 { static_cast<float>(static_cast<int>(pos.x())),
+        static_cast<float>(static_cast<int>(pos.y())) });
     m_flashText->setPosition(m_text->getPosition());
     m_flashText->setScale(m_text->getScale());
 }

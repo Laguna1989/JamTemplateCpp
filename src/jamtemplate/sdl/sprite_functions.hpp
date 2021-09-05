@@ -14,6 +14,9 @@ std::shared_ptr<SDL_Texture> makeButtonImage(std::shared_ptr<jt::renderTarget> r
     jt::Color darkColor = jt::Color { 100, 100, 100 },
     jt::Color brightColor = jt::Color { 255, 255, 255 });
 
+std::shared_ptr<SDL_Texture> makeBlankImage(std::shared_ptr<jt::renderTarget> rt, unsigned int w,
+    unsigned int h);
+
 std::shared_ptr<SDL_Texture> makeGlowImage(
     std::shared_ptr<jt::renderTarget> rt, float r, std::uint8_t max = 255);
 

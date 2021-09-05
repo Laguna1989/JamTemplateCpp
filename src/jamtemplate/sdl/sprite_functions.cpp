@@ -38,6 +38,26 @@ std::shared_ptr<SDL_Texture> makeButtonImage(std::shared_ptr<jt::renderTarget> r
         setPixel(image.get(), 2 * w, j, dark);
         setPixel(image.get(), 3 * w - 1, j, bright);
     }
+    SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "0");
+    return std::shared_ptr<SDL_Texture>(SDL_CreateTextureFromSurface(rt.get(), image.get()),
+        [](SDL_Texture* t) { SDL_DestroyTexture(t); });
+}
+
+std::shared_ptr<SDL_Texture> makeBlankImage(std::shared_ptr<jt::renderTarget> rt, unsigned int w,
+    unsigned int h)
+{
+    std::shared_ptr<SDL_Surface> image
+        = std::shared_ptr<SDL_Surface>(SDL_CreateRGBSurface(0, w, h, 32, 0, 0, 0 ,0),
+            [](SDL_Surface* s) { SDL_FreeSurface(s); });
+
+    for (auto i = 0U; i != w; ++i) {
+        for (auto j = 0U; j != h; ++j) {
+            auto const col = SDL_MapRGBA(image->format, 255, 255, 255, 255U);
+            jt::setPixel(image.get(), i, j, col);
+        }
+    }
+
+    SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "0");
     return std::shared_ptr<SDL_Texture>(SDL_CreateTextureFromSurface(rt.get(), image.get()),
         [](SDL_Texture* t) { SDL_DestroyTexture(t); });
 }
@@ -65,6 +85,7 @@ std::shared_ptr<SDL_Texture> makeGlowImage(
                 SDL_MapRGBA(image->format, 255U, 255U, 255U, static_cast<uint8_t>(v)));
         }
     }
+    SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "0");
     return std::shared_ptr<SDL_Texture>(SDL_CreateTextureFromSurface(rt.get(), image.get()),
         [](SDL_Texture* t) { SDL_DestroyTexture(t); });
 }
@@ -90,7 +111,7 @@ std::shared_ptr<SDL_Texture> makeVignetteImage(
             jt::setPixel(image.get(), i, j, SDL_MapRGBA(image->format, 0U, 0U, 0U, v));
         }
     }
-
+    SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "0");
     std::shared_ptr<SDL_Texture> t(SDL_CreateTextureFromSurface(rt.get(), image.get()),
         [](SDL_Texture* t) { SDL_DestroyTexture(t); });
     SDL_SetTextureBlendMode(t.get(), SDL_BLENDMODE_BLEND);
@@ -107,6 +128,7 @@ std::shared_ptr<SDL_Texture> makeRect(
     SDL_SetSurfaceBlendMode(image.get(), SDL_BLENDMODE_BLEND);
     SDL_FillRect(image.get(), NULL, SDL_MapRGBA(image->format, 255, 255, 255, 255));
 
+    SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "0");
     std::shared_ptr<SDL_Texture> t(SDL_CreateTextureFromSurface(rt.get(), image.get()),
         [](SDL_Texture* t) { SDL_DestroyTexture(t); });
     SDL_SetTextureBlendMode(t.get(), SDL_BLENDMODE_BLEND);
