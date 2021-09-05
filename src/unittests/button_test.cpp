@@ -1,6 +1,7 @@
 ﻿#include "button.hpp"
 #include "mock_drawable.hpp"
 #include "mock_game.hpp"
+#include "mock_drawable.hpp"
 #include <gtest/gtest.h>
 
 TEST(ButtonTest, InitialValues)
@@ -81,4 +82,19 @@ TEST(ButtonTest, CustomDrawable)
     EXPECT_CALL(*d, draw(rt));
     b.draw();
     SUCCEED();
+}
+
+TEST(ButtonTest, IsActiveByDefault)
+{
+    jt::Button b {};
+
+    ASSERT_TRUE(b.getActive());
+}
+
+TEST(ButtonTest, IsNotActiveAfterSetInactive)
+{
+    jt::Button b {};
+    b.setActive(false);
+
+    ASSERT_FALSE(b.getActive());
 }
