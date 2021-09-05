@@ -86,7 +86,6 @@ TEST(ButtonTest, CustomDrawable)
 TEST(ButtonTest, IsActiveByDefault)
 {
     jt::Button b {};
-
     ASSERT_TRUE(b.getActive());
 }
 

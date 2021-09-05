@@ -11,16 +11,7 @@ class GameObject {
 public:
     using Sptr = std::shared_ptr<GameObject>;
 
-    GameObject() = default;
-
     virtual ~GameObject() = default;
-
-    /// GameObjects should never be copied
-    GameObject(GameObject const&) = delete;
-    GameObject& operator=(GameObject const&) = delete;
-
-    GameObject(GameObject&&) = default;
-    GameObject& operator=(GameObject&&) = default;
 
     void create();
 
