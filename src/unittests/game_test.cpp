@@ -142,6 +142,12 @@ TEST_F(GameTest, GetCurrentStateAfterSwitch)
     EXPECT_NE(g->getCurrentState(), nullptr);
 }
 
+TEST_F(GameTest, GetCurrentStateAfterSwitchWithoutRun)
+{
+    g->switchState(std::make_shared<NiceMock<MockState>>());
+    EXPECT_NE(g->getCurrentState(), nullptr);
+}
+
 TEST_F(GameTest, RunWithOutState) { EXPECT_NO_THROW(g->run()); }
 
 TEST_F(GameTest, RunWithState)
@@ -221,6 +227,32 @@ TEST_F(GameTest, DrawWithRenderTargetAndState)
 
 TEST_F(GameTest, GetMusicPlayer) { EXPECT_EQ(g->getMusicPlayer(), nullptr); }
 
-// TODO Add a test that verifies that cam.reset is called on swithState();
+TEST_F(GameTest, GameRunWithStateThrowingStdException)
+{
+    g->update(0.01f);
+    auto state = std::make_shared<MockState>();
+    EXPECT_CALL(*state, doInternalCreate());
+    EXPECT_CALL(*state, doInternalUpdate(::testing::_))
+        .WillOnce(::testing::Invoke([](auto /*elapsed*/) {
+            throw std::invalid_argument { "deliberately raise exception." };
+        }));
+    g->switchState(state);
+    EXPECT_THROW(g->run(), std::invalid_argument);
+}
+
+TEST_F(GameTest, GameRunWithStateThrowingIntException)
+{
+    g->update(0.01f);
+    auto state = std::make_shared<MockState>();
+    EXPECT_CALL(*state, doInternalCreate());
+    ON_CALL(*state, doInternalUpdate(::testing::_))
+    .WillByDefault(::testing::Invoke([](auto /*elapsed*/) {
+        throw 5;
+    }));
+    g->switchState(state);
+    EXPECT_DEATH(g->run(), "");
+}
+
+// TODO Add a test that verifies that cam.reset is called on switchState();
 
 #endif
