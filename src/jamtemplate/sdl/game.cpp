@@ -66,9 +66,7 @@ void Game::doUpdate(float const elapsed)
     float const y = mousePosition.y() / getCamera()->getZoom();
 
     if (input()) {
-        input()->mouse()->updateMousePosition(MousePosition { x, y, x, y });
-        input()->mouse()->updateButtons();
-        input()->keyboard()->updateKeys();
+        input()->update(MousePosition { x, y, x, y });
     }
     m_state->update(elapsed);
 

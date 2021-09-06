@@ -21,5 +21,16 @@ void InputManager::reset()
         m_keyboard->reset();
     }
 }
+void InputManager::update(const MousePosition& mp) {
+    if (m_mouse)
+    {
+        m_mouse->updateMousePosition(mp);
+        m_mouse->updateButtons();
+    }
+    if (m_keyboard)
+    {
+        m_keyboard->updateKeys();
+    }
+}
 
 } // namespace jt

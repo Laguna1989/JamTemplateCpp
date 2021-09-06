@@ -50,6 +50,7 @@ public:
     virtual ~InputManagerInterface() = default;
     virtual std::shared_ptr<MouseInputInterface> mouse() = 0;
     virtual std::shared_ptr<KeyboardInputInterface> keyboard() = 0;
+    virtual void update(MousePosition const& mp) = 0;
     virtual void reset() = 0;
 };
 

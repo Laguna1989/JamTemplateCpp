@@ -90,10 +90,8 @@ void Game::doUpdate(float const elapsed)
 
     jt::Vector2 mpfs = m_window->getMousePositionScreen(getCamera()->getZoom());
     if (input()) {
-        input()->mouse()->updateMousePosition(
+        input()->update(
             MousePosition { mpf.x(), mpf.y(), mpfs.x(), mpfs.y() });
-        input()->mouse()->updateButtons();
-        input()->keyboard()->updateKeys();
     }
     if (getView()) {
         int const camOffsetix { static_cast<int>(

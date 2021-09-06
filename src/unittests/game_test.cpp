@@ -11,6 +11,14 @@ using jt::Game;
 
 #if !defined(ENABLE_WEB)
 
+class MockInput : public jt::InputManagerInterface {
+public:
+    MOCK_METHOD(std::shared_ptr<jt::MouseInputInterface>, mouse,(), (override));
+    MOCK_METHOD(std::shared_ptr<jt::KeyboardInputInterface>, keyboard,(), (override));
+    MOCK_METHOD(void, update,(const jt::MousePosition&), (override));
+    MOCK_METHOD(void, reset,(), (override));
+};
+
 class GameTest : public ::testing::Test {
 public:
     unsigned const windowSizeX { 100 };
@@ -27,7 +35,8 @@ public:
             .Times(::testing::AnyNumber())
             .WillRepeatedly(::testing::Return(jt::Vector2 { 100.0f, 200.0f }));
 
-        g = std::make_shared<Game>(window, zoom);
+        auto input = std::make_shared<::testing::NiceMock<MockInput>>();
+        g = std::make_shared<Game>(window, zoom, input);
     }
 };
 
@@ -252,10 +261,7 @@ TEST_F(GameTest, GameRunWithStateThrowingIntException)
     EXPECT_DEATH(g->run(), "");
 }
 
-TEST_F(GameTest, GetRenderWindowDoesNotReturnNullptr)
-{
-    ASSERT_NE(g->getRenderWindow(), nullptr);
-}
+TEST_F(GameTest, GetRenderWindowDoesNotReturnNullptr) { ASSERT_NE(g->getRenderWindow(), nullptr); }
 
 // TODO Add a test that verifies that cam.reset is called on switchState();
 

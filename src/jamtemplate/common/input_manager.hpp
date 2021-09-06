@@ -8,6 +8,7 @@ namespace jt {
 
 class InputManager : public InputManagerInterface {
 public:
+    void update(const MousePosition& mp) override;
     InputManager(std::shared_ptr<MouseInputInterface> mouse,
         std::shared_ptr<KeyboardInputInterface> keyboard);
     virtual ~InputManager() = default;
