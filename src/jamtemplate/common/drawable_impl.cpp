@@ -113,5 +113,7 @@ void DrawableImpl::updateShake(float elapsed)
         m_shakeOffset.x() = m_shakeOffset.y() = 0;
     }
 }
+void DrawableImpl::setCamOffset(const Vector2& v) { m_CamOffset = v; }
+jt::Vector2 DrawableImpl::getStaticCamOffset() { return m_CamOffset; }
 
 } // namespace jt

@@ -19,34 +19,13 @@ public:
     using Sptr = std::shared_ptr<DrawableImpl>;
 
     virtual ~DrawableImpl() = default;
-
     void draw(std::shared_ptr<jt::renderTarget> sptr) const override;
 
     void flash(float t, jt::Color col = jt::colors::White) override;
-
     void shake(float t, float strength, float shakeInterval = 0.05f) override;
 
     void update(float elapsed) override;
-
-    void setColor(jt::Color const& col) override = 0;
-    const jt::Color getColor() const override = 0;
-
-    void setPosition(jt::Vector2 const& pos) override = 0;
-    const jt::Vector2 getPosition() const override = 0;
-
-    // virtual sf::Transform const getTransform() const = 0;
-    jt::Rect const getGlobalBounds() const override = 0;
-    jt::Rect const getLocalBounds() const override = 0;
-
-    void setFlashColor(jt::Color const& col) override = 0;
-    const jt::Color getFlashColor() const override = 0;
-
-    void setScale(jt::Vector2 const& scale) override = 0;
-    const jt::Vector2 getScale() const override = 0;
-
-    void setOrigin(jt::Vector2 const& origin) override = 0;
-    const jt::Vector2 getOrigin() const override = 0;
-
+    
     jt::Vector2 getOffset() const override;
     void setOffset(jt::Vector2 const offset) override;
 
@@ -67,8 +46,8 @@ public:
 
     void setShadow(jt::Color const& col, jt::Vector2 const& offset) override;
     // do not call this manually. Only place for this to be called is Game()->update();
-    static void setCamOffset(jt::Vector2 const& v) { m_CamOffset = v; }
-    static jt::Vector2 getStaticCamOffset() { return m_CamOffset; }
+    static void setCamOffset(jt::Vector2 const& v);
+    static jt::Vector2 getStaticCamOffset();
 
 protected:
     jt::Vector2 getShakeOffset() const;

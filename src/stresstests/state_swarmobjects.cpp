@@ -55,12 +55,12 @@ void StateSwarmObjects::updateSwarm()
     centerPos = centerPos / static_cast<float>(m_SwarmObjects->size());
 
     for (size_t i = 0; i != m_SwarmObjects->size(); ++i) {
-        updateOneSwarmObject(i, centerPos);
+        updateOneSwarmObject(i);
     }
 }
 
 void StateSwarmObjects::updateOneSwarmObject(
-    const size_t& firstSwarmObjectIndex, jt::Vector2 const& centerPos)
+    const size_t& firstSwarmObjectIndex)
 {
     auto o1 = m_SwarmObjects->at(firstSwarmObjectIndex).lock();
     auto p1 = o1->getPosition();

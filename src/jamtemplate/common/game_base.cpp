@@ -64,10 +64,14 @@ void GameBase::run()
         std::cerr << "!! ERROR: Exception ocurred !!\n";
         std::cerr << e.what() << std::endl;
         throw;
-    } catch (...) {
+    }
+    // the following block cannot be covered as it terminates.
+    // LCOV_EXCL_START
+    catch (...) {
         std::cerr << "!! ERROR: Unhandled Exception ocurred !!\n";
         std::terminate();
     }
+    // LCOV_EXCL_STOP
 }
 
 std::weak_ptr<GameInterface> GameBase::getPtr() { return shared_from_this(); }
