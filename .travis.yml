@@ -25,5 +25,5 @@ script:
   - ./UnitTests
 
 after_success:
-  - coveralls -e src/game -e src/jamtemplate/sdl -e ext -e src/stresstests -e src/unittests -e src/jamtemplate/sfml/keyboard_input_lib.cpp -e src/jamtemplate/sfml/mouse_input_lib.cpp --gcov-options '\-lp'
+  - coveralls -e src/game -e src/jamtemplate/sdl -e ext -e src/stresstests -e src/unittests -e src/jamtemplate/sfml/keyboard_input_lib.cpp -e src/jamtemplate/sfml/mouse_input_lib.cpp -e src/jamtemplate/sfml/sound.cpp -e src/jamtemplate/sfml/music_player.cpp --gcov-options '\-lp'
   
