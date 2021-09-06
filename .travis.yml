@@ -18,12 +18,12 @@ before_install:
   - sudo apt-get install -y libsfml-dev
   - unzip ext/tileson-master.zip  -d ext/
   - pip install --user cpp-coveralls
-  
+
 script:
   - cmake -DENABLE_UNITTESTS=ON -DENABLE_STRESSTESTS=ON -DENABLE_DISPLAY_TESTS=OFF -DENABLE_COVERAGE=ON .
   - make -j 2
   - ./UnitTests
 
 after_success:
-  - coveralls --exclude src/game --exclude src/jamtemplate/sdl --exclude ext --exclude src/stresstests --exclude src/unittests --gcov-options '\-lp'
+  - coveralls -e src/game -e src/jamtemplate/sdl -e ext -e src/stresstests -e src/unittests -e src/jamtemplate/sfml/keyboard_input_lib.cpp -e src/jamtemplate/sfml/mouse_input_lib.cpp --gcov-options '\-lp'
   
