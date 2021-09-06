@@ -21,7 +21,7 @@ before_install:
   
 script:
   - cmake -DENABLE_UNITTESTS=ON -DENABLE_STRESSTESTS=ON -DENABLE_DISPLAY_TESTS=OFF -DENABLE_COVERAGE=ON .
-  - make -j
+  - make -j 2
   - ./UnitTests
 
 after_success:
