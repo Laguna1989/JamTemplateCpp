@@ -66,12 +66,12 @@ void GameBase::run()
         throw;
     }
     // the following block cannot be covered as it terminates.
-    // LCOV_EXCL_START
+    // GCOV_EXCL_START
     catch (...) {
         std::cerr << "!! ERROR: Unhandled Exception ocurred !!\n";
         std::terminate();
     }
-    // LCOV_EXCL_STOP
+    // GCOV_EXCL_STOP
 }
 
 std::weak_ptr<GameInterface> GameBase::getPtr() { return shared_from_this(); }
