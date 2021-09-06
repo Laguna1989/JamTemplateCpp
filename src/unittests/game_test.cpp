@@ -250,15 +250,21 @@ TEST_F(GameTest, GameRunWithStateThrowingStdException)
     EXPECT_THROW(g->run(), std::invalid_argument);
 }
 
+TEST_F(GameTest, GetCurrentStateDirectlyAfterSwitch) {
+    auto state1 = std::make_shared<MockState>();
+    g->switchState(state1);
+    ASSERT_EQ(g->getCurrentState(), state1);
+}
+
 TEST_F(GameTest, GameRunWithStateThrowingIntException)
 {
     g->update(0.01f);
     auto state = std::make_shared<MockState>();
     EXPECT_CALL(*state, doInternalCreate());
     ON_CALL(*state, doInternalUpdate(::testing::_))
-        .WillByDefault(::testing::Invoke([](auto /*elapsed*/) { throw 5; }));
+        .WillByDefault(::testing::Invoke([](auto /*elapsed*/) { throw int{5}; }));
     g->switchState(state);
-    EXPECT_DEATH(g->run(), "");
+    EXPECT_THROW(g->run(), int);
 }
 
 TEST_F(GameTest, GetRenderWindowDoesNotReturnNullptr) { ASSERT_NE(g->getRenderWindow(), nullptr); }

@@ -65,13 +65,10 @@ void GameBase::run()
         std::cerr << e.what() << std::endl;
         throw;
     }
-    // the following block cannot be covered as it terminates.
-    // GCOV_EXCL_START
     catch (...) {
         std::cerr << "!! ERROR: Unhandled Exception ocurred !!\n";
-        std::terminate();
+        throw;
     }
-    // GCOV_EXCL_STOP
 }
 
 std::weak_ptr<GameInterface> GameBase::getPtr() { return shared_from_this(); }
