@@ -53,6 +53,8 @@ public:
     virtual void setShadow(jt::Color const& col, jt::Vector2 const& offset) = 0;
 
     virtual void setIgnoreCamMovement(bool ignore) = 0;
+    virtual bool getIgnoreCamMovement() const = 0;
+    // TODO Add interface method for getIgnoreCamMovement
 };
 } // namespace jt
 

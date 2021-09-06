@@ -61,7 +61,7 @@ TEST(GameObjectTest, GetGameRaisesExceptionWhenGameExpired)
     GameObject go {};
     go.setGameInstance(g);
     // invalidate game
-    g = nullptr;
+    g.reset();
     EXPECT_THROW(go.getGame(), std::logic_error);
 }
 

@@ -36,6 +36,7 @@ public:
     MOCK_METHOD(jt::Vector2 const, getShadowOffset, (), (const, override));
     MOCK_METHOD(void, setShadow, (jt::Color const&, jt::Vector2 const&), (override));
     MOCK_METHOD(void, setIgnoreCamMovement, (bool), (override));
+    MOCK_METHOD(bool, getIgnoreCamMovement,(), (const, override));
 };
 
 #endif

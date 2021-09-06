@@ -34,11 +34,19 @@ TEST(AnimationTest, OverwriteAnimation)
     a.add("assets/coin.png", "idle", { 16, 16 }, { 0, 1, 2, 3 }, 1.0f);
     a.add("assets/coin.png", "idle", { 16, 16 }, { 0 }, 1.0f);
 }
+
 TEST(AnimationTest, AddAnimationWithEmptyNameRaisesInvalidArgumentException)
 {
     jt::Animation a;
     EXPECT_THROW(
         a.add("assets/coin.png", "", { 16, 16 }, { 0, 1, 2, 3 }, 1.0f), std::invalid_argument);
+}
+
+TEST(AnimationTest, AddAnimationWithFrameIndicesDoesNotRaiseInvalidArgumentException)
+{
+    jt::Animation a;
+    EXPECT_NO_THROW(
+        a.add("assets/coin.png", "", { 16, 16 }, { }, 1.0f));
 }
 
 TEST(AnimationTest, AddAnimationWithNegativeTimeRaisesInvalidArgumentException)

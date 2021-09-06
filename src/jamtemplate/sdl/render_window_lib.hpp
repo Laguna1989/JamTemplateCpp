@@ -6,7 +6,6 @@
 #include <SDL.h>
 #include <memory>
 
-// TODO test this implementation class with unit tests
 namespace jt {
 class RenderWindow : public RenderWindowInterface {
 public:

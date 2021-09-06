@@ -61,7 +61,8 @@ TEST(TilemapTest, GetColorWillAlwaysReturnBlack)
 TEST(TilemapTest, GetScaleAlwaysReturnsDefaultConstructedVector)
 {
     jt::Tilemap tm { "assets/tileson_test.json" };
-    ASSERT_EQ(tm.getScale(), jt::Vector2 {});
+    jt::Vector2 const expected{1.0f, 1.0f};
+    ASSERT_EQ(tm.getScale(), expected);
 }
 
 TEST(TilemapTest, GetGetOriginReturnsDefaultConstructedVector)

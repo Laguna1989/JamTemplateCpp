@@ -85,7 +85,9 @@ void Tilemap::doDraw(std::shared_ptr<jt::renderTarget> const sptr) const
             }
             auto const pixelPosForTile = tilePos + posOffset;
             auto const id = tile.getTile()->getId() - 1U;
-            m_tileSprites.at(id).setPosition(pixelPosForTile);
+            m_tileSprites.at(id).setPosition(jt::Vector2 {
+                pixelPosForTile.x() * m_scale.x(), pixelPosForTile.y() * m_scale.y() });
+            m_tileSprites.at(id).setScale(m_scale);
             m_tileSprites.at(id).update(0.0f);
             m_tileSprites.at(id).draw(sptr);
         }
@@ -127,11 +129,11 @@ void Tilemap::setFlashColor(jt::Color const& /*col*/)
 }
 const jt::Color Tilemap::getFlashColor() const { return jt::colors::Black; }
 
-void Tilemap::setScale(jt::Vector2 const& /*scale*/) { }
-const jt::Vector2 Tilemap::getScale() const { return jt::Vector2 {}; }
+void Tilemap::setScale(jt::Vector2 const& scale) { m_scale = scale; }
+const jt::Vector2 Tilemap::getScale() const { return m_scale; }
 
-void Tilemap::setOrigin(jt::Vector2 const& /*origin*/) { }
-const jt::Vector2 Tilemap::getOrigin() const { return jt::Vector2 {}; }
+void Tilemap::setOrigin(jt::Vector2 const& origin) { m_origin = origin; }
+const jt::Vector2 Tilemap::getOrigin() const { return m_origin; }
 
 void Tilemap::doRotate(float /*rot*/) { }
 

@@ -66,8 +66,9 @@ private:
     mutable std::vector<jt::Sprite> m_tileSprites;
 
     jt::Vector2 m_position;
-
+    jt::Vector2 m_origin;
     jt::Vector2 m_screenSizeHint;
+    Vector2 m_scale {1.0f, 1.0f};
 };
 
 } // namespace jt

@@ -64,9 +64,6 @@ void Game::doUpdate(float const elapsed)
     auto const mousePosition = m_window->getMousePosition();
     float const x = mousePosition.x() / getCamera()->getZoom();
     float const y = mousePosition.y() / getCamera()->getZoom();
-    // TODO Remove
-    // jt::InputManager::update(
-    //     y + getCamera()->getCamOffset().x(), +getCamera()->getCamOffset().y(), x, y, elapsed);
 
     if (input()) {
         input()->mouse()->updateMousePosition(MousePosition { x, y, x, y });

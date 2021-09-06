@@ -118,6 +118,13 @@ TEST(VectorDivide, Real)
     EXPECT_EQ(initial / v, expected);
 }
 
+TEST(Vector2, DefaultConstructor)
+{
+    jt::Vector2 const vec;
+    ASSERT_EQ(vec.x(), 0.0f);
+    ASSERT_EQ(vec.y(), 0.0f);
+}
+
 TEST(Vector2UAccess, ReadAccess)
 {
     unsigned int const x { 1 };
@@ -189,6 +196,8 @@ TEST(Vector2U, MoveConstructor)
     EXPECT_EQ(vec1.x(), 2);
     EXPECT_EQ(vec1.y(), 3);
 }
+
+
 
 #if !ENABLE_WEB
 

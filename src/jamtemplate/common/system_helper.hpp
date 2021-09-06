@@ -23,8 +23,6 @@ void erase_if(ContainerT& items, const PredicateT& predicate)
             ++it;
     }
 }
-
 } // namespace SystemHelper
 } // namespace jt
-
 #endif

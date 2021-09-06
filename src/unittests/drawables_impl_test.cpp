@@ -1,10 +1,10 @@
 ﻿#include "animation.hpp"
 #include "bar.hpp"
+#include "line.hpp"
 #include "shape.hpp"
 #include "sprite.hpp"
 #include "text.hpp"
 #include "tilemap.hpp"
-#include "line.hpp"
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 #include <memory>
@@ -54,25 +54,76 @@ std::shared_ptr<jt::DrawableInterface> createTileMap()
 
 std::shared_ptr<jt::DrawableInterface> createLine()
 {
-    auto l = std::make_shared<jt::Line>(jt::Vector2{1.0f, 10.0f});
+    auto l = std::make_shared<jt::Line>(jt::Vector2 { 1.0f, 10.0f });
     return l;
 }
 
+
 class DrawableImplTestFixture
     : public ::testing::TestWithParam<std::shared_ptr<jt::DrawableInterface>> {
+public:
+    std::shared_ptr<jt::DrawableInterface> drawable { GetParam() };
 };
 
 INSTANTIATE_TEST_SUITE_P(DrawableImplTest, DrawableImplTestFixture,
     ::testing::Values(createSprite(), createAnimation(), createShape(), createText(), createBar(),
         createTileMap(), createLine()));
 
+TEST_P(DrawableImplTestFixture, GlobalBoundsEqualLocalBoundsInitially)
+{
+    ASSERT_EQ(drawable->getLocalBounds(), drawable->getGlobalBounds());
+}
+
+TEST_P(DrawableImplTestFixture, InitialOffset)
+{
+    jt::Vector2 const expected { 0.0f, 0.0f };
+    ASSERT_EQ(drawable->getOffset(), expected);
+}
+
+TEST_P(DrawableImplTestFixture, OffsetAfterSetOffset)
+{
+    jt::Vector2 const expected { -55.0f, 12.5f };
+    drawable->setOffset(expected);
+    ASSERT_EQ(drawable->getOffset(), expected);
+}
+
+TEST_P(DrawableImplTestFixture, InitialOrigin)
+{
+    jt::Vector2 const expected { 0.0f, 0.0f };
+    ASSERT_EQ(drawable->getOrigin(), expected);
+}
+
+TEST_P(DrawableImplTestFixture, OriginAfterSetOffset)
+{
+    jt::Vector2 const expected { -55.0f, 12.5f };
+    drawable->setOrigin(expected);
+    ASSERT_EQ(drawable->getOrigin(),expected);
+}
+
+TEST_P(DrawableImplTestFixture, GetPositionInitial)
+{
+    jt::Vector2 const expected{0.0f, 0.0f};
+    ASSERT_EQ(drawable->getPosition(), expected);
+}
+
 TEST_P(DrawableImplTestFixture, GetPositionAfterSetPosition)
 {
-    std::shared_ptr<jt::DrawableInterface> drawable = GetParam();
-    jt::Vector2 const pos = jt::Vector2 { 100.0f, 200.0f };
-    drawable->setPosition(pos);
-    ASSERT_EQ(pos.x(), drawable->getPosition().x());
-    ASSERT_EQ(pos.y(), drawable->getPosition().y());
+    jt::Vector2 const expected{55.5f, -12.0f};
+    drawable->setPosition(expected);
+    ASSERT_EQ(drawable->getPosition(), expected);
+}
+
+TEST_P(DrawableImplTestFixture, GetScaleInitial)
+{
+    jt::Vector2 const expected{1.0f, 1.0f};
+    ASSERT_EQ(drawable->getScale(), expected);
+}
+
+TEST_P(DrawableImplTestFixture, GetScaleAfterSetScale)
+{
+    jt::Vector2 const expected{55.5f, -12.0f};
+    drawable->setScale(expected);
+    ASSERT_EQ(drawable->getScale(), expected);
 }
 
 TEST_P(DrawableImplTestFixture, DrawWithoutUpdate)

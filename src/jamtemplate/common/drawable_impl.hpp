@@ -63,6 +63,7 @@ public:
 
     // do not call this manually. Only place to call is Game()->update();
     void setIgnoreCamMovement(bool ignore) override;
+    bool getIgnoreCamMovement() const override;
 
     void setShadow(jt::Color const& col, jt::Vector2 const& offset) override;
     // do not call this manually. Only place for this to be called is Game()->update();
@@ -73,7 +74,7 @@ protected:
     jt::Vector2 getShakeOffset() const;
 
     jt::Vector2 getCamOffset() const;
-    bool getIgnoreCamMovement() const;
+
 
 private:
     static jt::Vector2 m_CamOffset;

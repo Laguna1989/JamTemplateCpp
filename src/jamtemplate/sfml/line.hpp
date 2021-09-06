@@ -35,12 +35,16 @@ private:
     jt::Vector2 m_lineVector;
     jt::Color m_color;
     jt::Vector2 m_position;
+    Vector2 m_origin;
+    Vector2 m_scale{1.0f, 1.0f};
 
     void doDraw(std::shared_ptr<jt::renderTarget> const sptr) const override;
     void doDrawFlash(std::shared_ptr<jt::renderTarget> const sptr) const override;
     void doDrawShadow(std::shared_ptr<jt::renderTarget> const sptr) const override;
     void doUpdate(float elapsed) override;
     void doRotate(float d) override;
+
+
 };
 
 }

@@ -20,3 +20,5 @@ TEST(LerpTest, LinearOneToFive)
     EXPECT_EQ(linear(1.0f, 5.0f, 1.0f), 5.0f);
     EXPECT_EQ(linear(1.0f, 5.0f, 1.5f), 5.0f);
 }
+
+// TODO Write tests for cosine, cubic, ... including error checking

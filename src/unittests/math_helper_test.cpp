@@ -220,3 +220,29 @@ TEST(FloatToString, StringWithLengthZero)
     float const f { 1.23456f };
     EXPECT_EQ(floatToStringWithXDigits(f, 0), "1");
 }
+
+TEST(AngleOf, Horiontal)
+{
+    jt::Vector2 const vec{1.0f, 0.0f};
+    ASSERT_EQ(angleOf(vec), 0.0f);
+}
+
+TEST(AngleOf, HorzontalNegative)
+{
+    jt::Vector2 const vec{-10.0f, .0f};
+    ASSERT_EQ(angleOf(vec), -180.0f);
+}
+
+TEST(AngleOf, Vertical)
+{
+    jt::Vector2 const vec{0.0f, 1.0f};
+    ASSERT_EQ(angleOf(vec), -90.0f);
+}
+
+TEST(AngleOf, VerticalNegative)
+{
+    jt::Vector2 const vec{0.0f, 1.0f};
+    ASSERT_EQ(angleOf(vec), -90.0f);
+}
+
+
