@@ -100,6 +100,12 @@ TEST_P(DrawableImplTestFixture, OriginAfterSetOffset)
     ASSERT_EQ(drawable->getOrigin(),expected);
 }
 
+TEST_P(DrawableImplTestFixture, GetIgnoreCamMovementAfterSet)
+{
+    drawable->setIgnoreCamMovement(false);
+    ASSERT_FALSE(drawable->getIgnoreCamMovement());
+}
+
 TEST_P(DrawableImplTestFixture, GetPositionInitial)
 {
     jt::Vector2 const expected{0.0f, 0.0f};

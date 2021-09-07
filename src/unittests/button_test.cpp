@@ -64,6 +64,19 @@ TEST(ButtonTest, DrawInvisibleButton)
     SUCCEED();
 }
 
+TEST(ButtonTest, DrawInActiveButton)
+{
+    auto game = std::make_shared<MockGame>();
+    EXPECT_CALL(*game, input());
+    jt::Button b {};
+    b.setActive(false);
+    b.setGameInstance(game);
+    b.update(0.1f);
+    EXPECT_CALL(*game, getRenderTarget()).Times(2);
+    b.draw();
+    SUCCEED();
+}
+
 TEST(ButtonTest, CustomDrawable)
 {
     auto game = std::make_shared<MockGame>();
