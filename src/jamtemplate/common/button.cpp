@@ -5,8 +5,8 @@
 #include "game_interface.hpp"
 #include "game_object.hpp"
 #include "input_manager.hpp"
-#include "vector.hpp"
 #include "sprite.hpp"
+#include "vector.hpp"
 #include <functional>
 #include <memory>
 #include <string>
@@ -25,7 +25,7 @@ Button::Button(jt::Vector2u s)
 
     m_disabledOverlay = std::make_shared<jt::Sprite>();
     m_disabledOverlay->loadSprite("#f#" + std::to_string(s.x()) + "#" + std::to_string(s.y()));
-    m_disabledOverlay->setColor(jt::Color{100,100,100,150});
+    m_disabledOverlay->setColor(jt::Color { 100, 100, 100, 150 });
 }
 
 Button::~Button()
@@ -40,10 +40,11 @@ void Button::clearCallbacks() { m_callbacks.clear(); }
 size_t Button::getCallbackCount() const { return m_callbacks.size(); }
 bool Button::IsMouseOver()
 {
-    if (getGame()->input() == nullptr) {
+    auto input = getGame()->input();
+    if (input == nullptr) {
         return false;
     }
-    return isOver(getGame()->input()->mouse()->getMousePositionScreen());
+    return isOver(input->mouse()->getMousePositionScreen());
 }
 void Button::setVisible(bool v) { m_isVisible = v; }
 bool Button::getVisible() const { return m_isVisible; }
@@ -59,15 +60,13 @@ void Button::doDraw() const
     if (m_drawable)
         m_drawable->draw(getGame()->getRenderTarget());
 
-    if (!m_isActive)
-    {
+    if (!m_isActive) {
         m_disabledOverlay->draw(getGame()->getRenderTarget());
     }
 }
 bool Button::isOver(jt::Vector2 const& mousePosition)
 {
-    if (!m_isActive)
-    {
+    if (!m_isActive) {
         return false;
     }
 
