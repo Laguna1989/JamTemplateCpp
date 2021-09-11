@@ -24,18 +24,23 @@ public:
 
     bool hasBeenInitialized() const;
 
+    // note: if the user sets autoupdate/autodraw to false,
+    // he has to take care to do the respective calls himself
+    void setAutoUpdateObjects(bool performAutoUpdate);
+    bool getAutoUpdateObjects() const;
+
+    void setAutoUpdateTweens(bool performAutoUpdate);
+    bool getAutoUpdateTweens() const;
+
+    void setAutoDraw(bool performAudoDraw);
+    bool getAutoDraw() const;
+
 protected:
     void updateObjects(float elapsed);
     void basicUpdateObjects(float elapsed);
     void updateTweens(float elapsed);
 
     void drawObjects() const;
-
-    // note: if the user sets autoupdate/autodraw to false,
-    // he has to take care to do the respective calls himself
-    void setAutoUpdateObjects(bool performAutoUpdate);
-    void setAutoUpdateTweens(bool performAutoUpdate);
-    void setAutoDraw(bool performAudoDraw);
 
 private:
     /// all objects in the state

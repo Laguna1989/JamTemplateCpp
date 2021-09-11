@@ -132,11 +132,15 @@ void GameState::setAutoUpdateObjects(bool performAutoUpdate)
 {
     m_doAutoUpdateObjects = performAutoUpdate;
 }
+bool GameState::getAutoUpdateObjects() const { return m_doAutoUpdateObjects; }
 
 void GameState::setAutoUpdateTweens(bool performAutoUpdate)
 {
     m_doAutoUpdateTweens = performAutoUpdate;
 }
+bool GameState::getAutoUpdateTweens() const { return m_doAutoUpdateTweens; }
+
 void GameState::setAutoDraw(bool performAudoDraw) { m_doAutoDraw = performAudoDraw; }
+bool GameState::getAutoDraw() const { return m_doAutoDraw; }
 
 } // namespace jt
