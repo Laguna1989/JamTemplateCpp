@@ -58,7 +58,6 @@ std::shared_ptr<jt::DrawableInterface> createLine()
     return l;
 }
 
-
 class DrawableImplTestFixture
     : public ::testing::TestWithParam<std::shared_ptr<jt::DrawableInterface>> {
 public:
@@ -97,7 +96,7 @@ TEST_P(DrawableImplTestFixture, OriginAfterSetOffset)
 {
     jt::Vector2 const expected { -55.0f, 12.5f };
     drawable->setOrigin(expected);
-    ASSERT_EQ(drawable->getOrigin(),expected);
+    ASSERT_EQ(drawable->getOrigin(), expected);
 }
 
 TEST_P(DrawableImplTestFixture, GetIgnoreCamMovementAfterSet)
@@ -108,26 +107,26 @@ TEST_P(DrawableImplTestFixture, GetIgnoreCamMovementAfterSet)
 
 TEST_P(DrawableImplTestFixture, GetPositionInitial)
 {
-    jt::Vector2 const expected{0.0f, 0.0f};
+    jt::Vector2 const expected { 0.0f, 0.0f };
     ASSERT_EQ(drawable->getPosition(), expected);
 }
 
 TEST_P(DrawableImplTestFixture, GetPositionAfterSetPosition)
 {
-    jt::Vector2 const expected{55.5f, -12.0f};
+    jt::Vector2 const expected { 55.5f, -12.0f };
     drawable->setPosition(expected);
     ASSERT_EQ(drawable->getPosition(), expected);
 }
 
 TEST_P(DrawableImplTestFixture, GetScaleInitial)
 {
-    jt::Vector2 const expected{1.0f, 1.0f};
+    jt::Vector2 const expected { 1.0f, 1.0f };
     ASSERT_EQ(drawable->getScale(), expected);
 }
 
 TEST_P(DrawableImplTestFixture, GetScaleAfterSetScale)
 {
-    jt::Vector2 const expected{55.5f, -12.0f};
+    jt::Vector2 const expected { 55.5f, -12.0f };
     drawable->setScale(expected);
     ASSERT_EQ(drawable->getScale(), expected);
 }
@@ -155,6 +154,13 @@ TEST_P(DrawableImplTestFixture, DrawWithShadow)
     drawable->update(0.1f);
     auto rt = std::make_shared<jt::renderTarget>();
     drawable->draw(rt);
+}
+
+TEST_P(DrawableImplTestFixture, GetColorAfterSetColor)
+{
+    std::shared_ptr<jt::DrawableInterface> drawable = GetParam();
+    drawable->setColor(jt::colors::Red);
+    ASSERT_EQ(drawable->getColor(), jt::colors::Red);
 }
 
 TEST_P(DrawableImplTestFixture, DrawWithSetColor)

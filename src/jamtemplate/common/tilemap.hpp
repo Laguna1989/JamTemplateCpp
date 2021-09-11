@@ -68,7 +68,8 @@ private:
     jt::Vector2 m_position;
     jt::Vector2 m_origin;
     jt::Vector2 m_screenSizeHint;
-    Vector2 m_scale {1.0f, 1.0f};
+    Vector2 m_scale { 1.0f, 1.0f };
+    jt::Color m_color { jt::colors::White };
 };
 
 } // namespace jt

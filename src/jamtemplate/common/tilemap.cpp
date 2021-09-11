@@ -113,8 +113,9 @@ void Tilemap::setColor(jt::Color const& col)
     for (auto& ts : m_tileSprites) {
         ts.setColor(col);
     }
+    m_color = col;
 }
-const jt::Color Tilemap::getColor() const { return jt::colors::Black; }
+const jt::Color Tilemap::getColor() const { return m_color; }
 
 void Tilemap::setPosition(jt::Vector2 const& pos) { m_position = pos; }
 const jt::Vector2 Tilemap::getPosition() const { return m_position; }

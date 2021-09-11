@@ -45,23 +45,10 @@ TEST(TilemapTest, DrawWithScreensizeHint)
     tm.draw(nullptr);
 }
 
-TEST(TilemapTest, GetColorWillReturnBlackByDefault)
-{
-    jt::Tilemap tm { "assets/tileson_test.json" };
-    ASSERT_EQ(tm.getColor(), jt::colors::Black);
-}
-
-TEST(TilemapTest, GetColorWillAlwaysReturnBlack)
-{
-    jt::Tilemap tm { "assets/tileson_test.json" };
-    tm.setColor(::jt::colors::Red);
-    ASSERT_EQ(tm.getColor(), jt::colors::Black);
-}
-
 TEST(TilemapTest, GetScaleAlwaysReturnsDefaultConstructedVector)
 {
     jt::Tilemap tm { "assets/tileson_test.json" };
-    jt::Vector2 const expected{1.0f, 1.0f};
+    jt::Vector2 const expected { 1.0f, 1.0f };
     ASSERT_EQ(tm.getScale(), expected);
 }
 
