@@ -12,8 +12,8 @@ namespace detail {
 constexpr float buttonOffsetX = 64;
 constexpr float buttonOffsetY = 16;
 constexpr float buttonMarginY = 8;
-constexpr unsigned int buttonSizeX = 184;
-constexpr unsigned int buttonSizeY = 32;
+constexpr unsigned int buttonSizeX = 100;
+constexpr unsigned int buttonSizeY = 16;
 } // namespace detail
 
 class StateSelect : public jt::GameState {
@@ -31,8 +31,9 @@ class StateSelect : public jt::GameState {
         auto const button = std::make_shared<jt::Button>(
             jt::Vector2u { detail::buttonSizeX, detail::buttonSizeY });
         button->addCallback([this]() { getGame()->switchState(std::make_shared<State>()); });
-        auto const text = jt::dh::createText(getGame()->getRenderTarget(), textString, 28);
+        auto const text = jt::dh::createText(getGame()->getRenderTarget(), textString, 12);
         text->SetTextAlign(jt::Text::TextAlign::LEFT);
+        text->setOrigin(jt::Vector2 { -8, 0 });
         button->setDrawable(text);
         button->setPosition(jt::Vector2 { detail::buttonOffsetX, posY });
         add(std::move(button));
