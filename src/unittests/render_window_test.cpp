@@ -63,10 +63,20 @@ TEST(RenderWindowTest, GetMousePositionWithView)
 {
     jt::RenderWindow rw { 100, 200, "test" };
 
+    auto view = std::make_shared<sf::View>();
+    rw.s_view = view;
+
     jt::Vector2 const expected { 0.0f, 0.0f };
-    EXPECT_EQ(rw.getMousePosition(), expected);
+    EXPECT_NE(rw.getMousePosition(), expected);
 }
 
+TEST(RenderWindowTest, GetMousePositionOnScreen)
+{
+    jt::RenderWindow rw { 100, 200, "test" };
+
+    jt::Vector2 const expected { 0.0f, 0.0f };
+    EXPECT_NE(rw.getMousePositionScreen(1.0f), expected);
+}
 
 TEST(RenderWindowTest, MouseIsVisibleByDefault)
 {
