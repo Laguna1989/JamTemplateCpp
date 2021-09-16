@@ -5,7 +5,7 @@
 
 void StateParticles::doInternalCreate()
 {
-    m_particles = jt::ParticleSystem<jt::Shape, 500>::create(
+    m_particles = jt::ParticleSystem<jt::Shape, 500>::createPS(
         []() {
             auto s = std::make_shared<jt::Shape>();
             s->makeRect(jt::Vector2 { 4, 4 });

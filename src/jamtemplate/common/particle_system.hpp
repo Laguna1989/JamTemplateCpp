@@ -15,7 +15,7 @@ public:
     using ResetCallbackType = std::function<void(std::shared_ptr<T> particle)>;
     using InitCallbackType = std::function<std::shared_ptr<T>(void)>;
 
-    static std::shared_ptr<ParticleSystem<T, N>> create(
+    static std::shared_ptr<ParticleSystem<T, N>> createPS(
         InitCallbackType const init, ResetCallbackType const reset)
     {
         return std::make_shared<ParticleSystem<T, N>>(init, reset);
