@@ -1,4 +1,4 @@
-#include "mock_game.hpp"
+#include "mocks/mock_game.hpp"
 #include "particle_system.hpp"
 #include "shape.hpp"
 #include <gtest/gtest.h>

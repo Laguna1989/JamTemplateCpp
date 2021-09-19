@@ -1,23 +1,17 @@
 ﻿#include "game.hpp"
 #include "game_state.hpp"
-#include "input_manager_interface.hpp"
-#include "mock_window.hpp"
+#include "mocks/mock_input.hpp"
+#include "mocks/mock_state.hpp"
+#include "mocks/mock_window.hpp"
 #include "rect_lib.hpp"
 #include "render_window.hpp"
-#include "gmock/gmock.h"
-#include "gtest/gtest.h"
+#include <gmock/gmock.h>
+#include <gtest/gtest.h>
 
 using jt::Game;
+using ::testing::NiceMock;
 
 #if !defined(ENABLE_WEB)
-
-class MockInput : public jt::InputManagerInterface {
-public:
-    MOCK_METHOD(std::shared_ptr<jt::MouseInputInterface>, mouse,(), (override));
-    MOCK_METHOD(std::shared_ptr<jt::KeyboardInputInterface>, keyboard,(), (override));
-    MOCK_METHOD(void, update,(const jt::MousePosition&), (override));
-    MOCK_METHOD(void, reset,(), (override));
-};
 
 class GameTest : public ::testing::Test {
 public:
@@ -43,15 +37,6 @@ public:
 TEST_F(GameTest, InitialValues) { EXPECT_EQ(g->getRenderTarget(), nullptr); }
 
 TEST_F(GameTest, DrawWithNoState) { EXPECT_NO_THROW(g->draw()); }
-
-class MockState : public jt::GameState {
-public:
-    MOCK_METHOD(void, doInternalDraw, (), (const));
-    MOCK_METHOD(void, doInternalUpdate, (float));
-    MOCK_METHOD(void, doInternalCreate, ());
-};
-
-using ::testing::NiceMock;
 
 TEST_F(GameTest, GameUpdateWithoutState) { g->update(0.01f); }
 
@@ -250,7 +235,8 @@ TEST_F(GameTest, GameRunWithStateThrowingStdException)
     EXPECT_THROW(g->run(), std::invalid_argument);
 }
 
-TEST_F(GameTest, GetCurrentStateDirectlyAfterSwitch) {
+TEST_F(GameTest, GetCurrentStateDirectlyAfterSwitch)
+{
     auto state1 = std::make_shared<MockState>();
     g->switchState(state1);
     ASSERT_EQ(g->getCurrentState(), state1);
@@ -262,7 +248,7 @@ TEST_F(GameTest, GameRunWithStateThrowingIntException)
     auto state = std::make_shared<MockState>();
     EXPECT_CALL(*state, doInternalCreate());
     ON_CALL(*state, doInternalUpdate(::testing::_))
-        .WillByDefault(::testing::Invoke([](auto /*elapsed*/) { throw int{5}; }));
+        .WillByDefault(::testing::Invoke([](auto /*elapsed*/) { throw int { 5 }; }));
     g->switchState(state);
     EXPECT_THROW(g->run(), int);
 }

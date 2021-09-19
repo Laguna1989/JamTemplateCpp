@@ -1,6 +1,7 @@
 ﻿#include "button.hpp"
-#include "mock_drawable.hpp"
-#include "mock_game.hpp"
+#include "mocks/mock_drawable.hpp"
+#include "mocks/mock_game.hpp"
+#include "mocks/mock_input.hpp"
 #include <gtest/gtest.h>
 
 TEST(ButtonTest, InitialValues)
@@ -39,32 +40,11 @@ TEST(ButtonTest, UpdateWithGameInstanceDoesNotThrow)
     SUCCEED();
 }
 
-class MockInput : public jt::InputManagerInterface {
-public:
-    MOCK_METHOD(std::shared_ptr<jt::MouseInputInterface>, mouse, (), (override));
-    MOCK_METHOD(std::shared_ptr<jt::KeyboardInputInterface>, keyboard, (), (override));
-    MOCK_METHOD(void, update, (const jt::MousePosition&), (override));
-    MOCK_METHOD(void, reset, (), (override));
-};
-
-class MockMouse : public jt::MouseInputInterface {
-public:
-    MOCK_METHOD(void, updateMousePosition, (const jt::MousePosition&), (override));
-    MOCK_METHOD(void, updateButtons, (), (override));
-    MOCK_METHOD(jt::Vector2, getMousePositionWorld, (), (override));
-    MOCK_METHOD(jt::Vector2, getMousePositionScreen, (), (override));
-    MOCK_METHOD(bool, pressed, (jt::MouseButtonCode), (override));
-    MOCK_METHOD(bool, justReleased, (jt::MouseButtonCode), (override));
-    MOCK_METHOD(bool, justPressed, (jt::MouseButtonCode), (override));
-    MOCK_METHOD(bool, released, (jt::MouseButtonCode), (override));
-    MOCK_METHOD(void, reset, (), (override));
-};
-
 TEST(ButtonTest, IsOverWithMockMouseReturnsTrueWhenOver)
 {
     auto game = std::make_shared<testing::NiceMock<MockGame>>();
     auto input = std::make_shared<testing::NiceMock<MockInput>>();
-    auto mouse = std::make_shared<testing::NiceMock<MockMouse>>();
+    auto mouse = std::make_shared<testing::NiceMock<MockMouseInput>>();
     ON_CALL(*game, input()).WillByDefault(testing::Return(input));
     ON_CALL(*input, mouse()).WillByDefault(testing::Return(mouse));
     ON_CALL(*mouse, getMousePositionScreen()).WillByDefault(testing::Return(jt::Vector2 { 5, 5 }));
@@ -78,7 +58,7 @@ TEST(ButtonTest, IsOverWithMockMouseReturnsFalseWhenNotOver)
 {
     auto game = std::make_shared<testing::NiceMock<MockGame>>();
     auto input = std::make_shared<testing::NiceMock<MockInput>>();
-    auto mouse = std::make_shared<testing::NiceMock<MockMouse>>();
+    auto mouse = std::make_shared<testing::NiceMock<MockMouseInput>>();
     ON_CALL(*game, input()).WillByDefault(testing::Return(input));
     ON_CALL(*input, mouse()).WillByDefault(testing::Return(mouse));
     ON_CALL(*mouse, getMousePositionScreen())
@@ -93,7 +73,7 @@ TEST(ButtonTest, UpdateWithInput)
 {
     auto game = std::make_shared<testing::NiceMock<MockGame>>();
     auto input = std::make_shared<testing::NiceMock<MockInput>>();
-    auto mouse = std::make_shared<testing::NiceMock<MockMouse>>();
+    auto mouse = std::make_shared<testing::NiceMock<MockMouseInput>>();
     ON_CALL(*game, input()).WillByDefault(testing::Return(input));
     ON_CALL(*input, mouse()).WillByDefault(testing::Return(mouse));
     ON_CALL(*mouse, getMousePositionScreen()).WillByDefault(testing::Return(jt::Vector2 { 5, 5 }));

@@ -1,5 +1,5 @@
 ﻿#include "box2d_object.hpp"
-#include "mock_game.hpp"
+#include "mocks/mock_game.hpp"
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 

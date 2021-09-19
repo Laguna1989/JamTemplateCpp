@@ -27,4 +27,12 @@ public:
     MOCK_METHOD(void, reset, (), (override));
 };
 
+class MockInput : public jt::InputManagerInterface {
+public:
+    MOCK_METHOD(std::shared_ptr<jt::MouseInputInterface>, mouse, (), (override));
+    MOCK_METHOD(std::shared_ptr<jt::KeyboardInputInterface>, keyboard, (), (override));
+    MOCK_METHOD(void, update, (const jt::MousePosition&), (override));
+    MOCK_METHOD(void, reset, (), (override));
+};
+
 #endif

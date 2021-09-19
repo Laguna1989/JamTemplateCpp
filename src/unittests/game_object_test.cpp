@@ -1,5 +1,5 @@
 ﻿#include "game_object.hpp"
-#include "mock_game.hpp"
+#include "mocks/mock_game.hpp"
 #include "gtest/gtest.h"
 
 using jt::GameInterface;

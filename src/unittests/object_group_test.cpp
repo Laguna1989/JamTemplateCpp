@@ -1,5 +1,5 @@
-﻿#include "mock_game.hpp"
-#include "mock_object.hpp"
+﻿#include "mocks/mock_game.hpp"
+#include "mocks/mock_object.hpp"
 #include "object_group.hpp"
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
