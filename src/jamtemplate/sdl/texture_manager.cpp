@@ -50,8 +50,8 @@ std::shared_ptr<SDL_Texture> createBlankImage(
         throw std::invalid_argument { "invalid image size" };
     }
 
-    return SpriteFunctions::makeBlankImage( rt,
-        static_cast<unsigned int>(w), static_cast<unsigned int>(h));
+    return SpriteFunctions::makeBlankImage(
+        rt, static_cast<unsigned int>(w), static_cast<unsigned int>(h));
 }
 
 std::shared_ptr<SDL_Texture> createGlowImage(
@@ -111,17 +111,6 @@ std::shared_ptr<SDL_Texture> createRectImage(
     }
     return SpriteFunctions::makeRect(rt, w, h);
 }
-
-// void replaceOneColor(sf::Image& img, jt::Color const& from, jt::Color const& to)
-// {
-//     // TODO
-// }
-
-// sf::Image createReplacedImage(std::vector<std::string> const& ssv,
-//     TextureManager::ColorReplaceLookupVectorType const& colorReplace)
-// {
-//     // TODO
-// }
 
 std::shared_ptr<SDL_Texture> createFlashImage(
     std::string const& str, std::shared_ptr<jt::renderTarget> rt)

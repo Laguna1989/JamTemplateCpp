@@ -7,28 +7,29 @@
 using Group = jt::ObjectGroup<MockObject>;
 using ::testing::_;
 
-TEST(ObjectGroupTest, InitialGroupIsEmpty)
-{
-    Group g {};
+class ObjectGroupInitialTest : public ::testing::Test {
+protected:
+    Group g;
+};
 
-    EXPECT_EQ(g.size(), 0);
-    EXPECT_EQ(g.begin(), g.end());
-    EXPECT_EQ(g.getAge(), 0.0f);
-    EXPECT_TRUE(g.isAlive());
+TEST_F(ObjectGroupInitialTest, IsEmptyReturnsTrue) { ASSERT_EQ(g.size(), 0); }
+TEST_F(ObjectGroupInitialTest, BeginEqualsEnd) { ASSERT_EQ(g.begin(), g.end()); }
+TEST_F(ObjectGroupInitialTest, GlobalBeginEqualsBegin) { ASSERT_EQ(jt::begin(g), g.begin()); }
+TEST_F(ObjectGroupInitialTest, GlobalEndEqualsEnd) { ASSERT_EQ(jt::end(g), g.end()); }
+TEST_F(ObjectGroupInitialTest, CBeginEqualsCEnd) { ASSERT_EQ(g.cbegin(), g.cend()); }
+TEST_F(ObjectGroupInitialTest, AgeIsZero) { ASSERT_EQ(g.getAge(), 0.0f); }
+TEST_F(ObjectGroupInitialTest, IsAlive) { ASSERT_TRUE(g.isAlive()); }
+
 #ifndef ENABLE_WEB
-    EXPECT_ANY_THROW(g.getGame());
+TEST_F(ObjectGroupInitialTest, GetGameWillThrow) { EXPECT_ANY_THROW(g.getGame()); }
 #endif
-}
 
-#ifndef ENABLE_WEB
 class ObjectGroupTestWithGame : public ::testing::Test {
 public:
     std::shared_ptr<jt::GameInterface> game;
     Group g;
     void SetUp() override
     {
-
-        EXPECT_THROW(g.getGame(), std::exception);
         game = std::make_shared<MockGame>();
         g.setGameInstance(game);
         EXPECT_NO_THROW(g.getGame());
@@ -40,67 +41,51 @@ TEST_F(ObjectGroupTestWithGame, PushBackObject)
     auto mo = std::make_shared<MockObject>();
     g.push_back(mo);
 
-    EXPECT_EQ(g.size(), 1);
-    EXPECT_NO_THROW((void)g.at(0));
-
-    EXPECT_EQ(mo.use_count(), 1);
-    auto const mo2 = g.at(0).lock();
-    EXPECT_EQ(mo.use_count(), 2);
+    ASSERT_EQ(g.size(), 1);
 }
 
 TEST_F(ObjectGroupTestWithGame, EmplaceBackObject)
 {
     auto mo = std::make_shared<MockObject>();
-    // this is more performant than push_back, because the weak_pointer is moved and not copied.
-    g.emplace_back(mo);
+    g.emplace_back(std::move(mo));
 
-    EXPECT_EQ(g.size(), 1);
-    EXPECT_NO_THROW((void)g.at(0));
-
-    EXPECT_EQ(mo.use_count(), 1);
-    auto const mo2 = g.at(0).lock();
-    EXPECT_EQ(mo.use_count(), 2);
+    ASSERT_EQ(g.size(), 1);
 }
 
-// this is a "negative test", because no owning shared pointer is kept, but only the weak pointer.
-TEST_F(ObjectGroupTestWithGame, EmplaceBackObjectWithoutOwningPointer)
+TEST_F(ObjectGroupTestWithGame, atReturnsCorrectPointer)
+{
+    auto mo = std::make_shared<MockObject>();
+    g.push_back(mo);
+
+    ASSERT_EQ(g.at(0).lock(), mo);
+}
+
+TEST_F(ObjectGroupTestWithGame, UpdateRemovesObjectWhenWeakPointerExpires)
 {
     // shared pointer is created on the fly, weak pointer is created from that shared pointer,
     // shared pointer is destroyed after that.
     g.emplace_back(std::make_shared<MockObject>());
-
-    EXPECT_EQ(g.size(), 1);
-    EXPECT_NO_THROW((void)g.at(0));
-    EXPECT_TRUE(g.at(0).expired());
-    auto const mo = g.at(0).lock();
-    EXPECT_EQ(mo.use_count(), 0);
+    ASSERT_TRUE(g.at(0).expired());
 
     // update will sort out the weak pointer, as it is expired.
     g.update(0.0f);
-    EXPECT_EQ(g.size(), 0);
+    ASSERT_EQ(g.size(), 0);
 }
 
 TEST_F(ObjectGroupTestWithGame, UpdateOfObjectGroupDoesNotUpdateGameObject)
 {
     auto mo = std::make_shared<MockObject>();
-    // this is more performant than push_back, because the weak_pointer is moved and not copied.
-    g.emplace_back(mo);
-    ASSERT_EQ(g.size(), 1);
+    g.push_back(mo);
 
-    // update is not called!
+    // update is not called
     EXPECT_CALL(*mo, doUpdate(_)).Times(0);
     g.update(0.5f);
-
-    EXPECT_EQ(g.size(), 1);
 }
 
 TEST_F(ObjectGroupTestWithGame, DrawOfObjectGroupDoesNotDrawGameObject)
 {
     auto mo = std::make_shared<MockObject>();
-    // this is more performant than push_back, because the weak_pointer is moved and not copied.
-    g.emplace_back(mo);
-    ASSERT_EQ(g.size(), 1);
-
+    g.push_back(mo);
     // update is not called!
     EXPECT_CALL(*mo, doDraw()).Times(0);
     g.draw();
@@ -110,9 +95,8 @@ TEST_F(ObjectGroupTestWithGame, RangedBaseForLoopIsPossibleForObjectGroup)
 {
     auto mo1 = std::make_shared<MockObject>();
     auto mo2 = std::make_shared<MockObject>();
-    // this is more performant than push_back, because the weak_pointer is moved and not copied.
-    g.emplace_back(mo1);
-    g.emplace_back(mo2);
+    g.push_back(mo1);
+    g.push_back(mo2);
 
     ASSERT_EQ(g.size(), 2);
 
@@ -120,10 +104,7 @@ TEST_F(ObjectGroupTestWithGame, RangedBaseForLoopIsPossibleForObjectGroup)
 
     for (auto const wptr : g) {
         count++;
-        // do something with wptr
     }
 
     EXPECT_EQ(count, 2);
 }
-
-#endif

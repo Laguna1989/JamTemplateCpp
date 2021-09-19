@@ -54,7 +54,6 @@ public:
 
     virtual void setIgnoreCamMovement(bool ignore) = 0;
     virtual bool getIgnoreCamMovement() const = 0;
-    // TODO Add interface method for getIgnoreCamMovement
 };
 } // namespace jt
 

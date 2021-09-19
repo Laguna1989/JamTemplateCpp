@@ -12,7 +12,7 @@ TEST(ParticleSystemTest, InitIsCalledForEveryParticle)
             numberOfInitCalls++;
             return std::shared_ptr<jt::Shape>();
         },
-        [](auto s) {});
+        [](auto /*s*/) {});
 
     ASSERT_EQ(numberOfInitCalls, 5);
 }
@@ -22,7 +22,7 @@ TEST(ParticleSystemTest, ResetNotCalledOnConstruction)
     int numberofResetCalls = 0;
 
     jt::ParticleSystem<jt::Shape, 5> ps([]() { return std::shared_ptr<jt::Shape>(); },
-        [&numberofResetCalls](auto s) { numberofResetCalls++; });
+        [&numberofResetCalls](auto /*s*/) { numberofResetCalls++; });
 
     ASSERT_EQ(numberofResetCalls, 0);
 }
@@ -32,7 +32,7 @@ TEST(ParticleSystemTest, ResetCalledOnFire)
     int numberofResetCalls = 0;
 
     jt::ParticleSystem<jt::Shape, 5> ps([]() { return std::shared_ptr<jt::Shape>(); },
-        [&numberofResetCalls](auto s) { numberofResetCalls++; });
+        [&numberofResetCalls](auto /*s*/) { numberofResetCalls++; });
 
     ps.Fire(4);
     ASSERT_EQ(numberofResetCalls, 4);
@@ -43,7 +43,7 @@ TEST(ParticleSystemTest, ResetCalledMultipleTimes)
     int numberofResetCalls = 0;
 
     jt::ParticleSystem<jt::Shape, 5> ps([]() { return std::shared_ptr<jt::Shape>(); },
-        [&numberofResetCalls](auto s) { numberofResetCalls++; });
+        [&numberofResetCalls](auto /*s*/) { numberofResetCalls++; });
 
     ps.Fire(10);
     ps.Fire(10);
@@ -63,7 +63,7 @@ TEST(ParticleSystemTest, CreateDoesNotRaiseExceptionWhenGameInstanceIsSet)
             s->makeRect({ 1, 1 });
             return s;
         },
-        [](auto s) {});
+        [](auto /*s*/) {});
 
     ps.setGameInstance(g);
     ASSERT_NO_THROW(ps.create());
@@ -79,7 +79,7 @@ TEST(ParticleSystemTest, UpdateCallDoesNotRaiseException)
             s->makeRect({ 1, 1 });
             return s;
         },
-        [](auto s) {});
+        [](auto /*s*/) {});
 
     ps.Fire(5);
 
@@ -97,7 +97,7 @@ TEST(ParticleSystemTest, DrawWithGame)
             s->makeRect({ 1, 1 });
             return s;
         },
-        [](auto s) {});
+        [](auto /*s*/) {});
 
     ps.setGameInstance(g);
     ps.Fire(5);
