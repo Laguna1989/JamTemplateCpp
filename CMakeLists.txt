@@ -10,65 +10,34 @@ set(ENABLE_COVERAGE OFF CACHE BOOL "enable coverage")
 set(ENABLE_STRESSTESTS OFF CACHE BOOL "enable stresstests")
 set(ENABLE_WEB OFF CACHE BOOL "enable web build using SDL and em++")
 set(ENABLE_DISPLAY_TESTS ON CACHE BOOL "enable unittests that require a display")
+
+
+#####################################################
+## get externals
+#####################################################
+add_subdirectory(ext)
+
+FetchContent_GetProperties(tileson)
+FetchContent_GetProperties(sfml)
 # Apple users: set to /usr/local/Cellar/sfml/2.4.2_1/lib/ or respectively
-if (WIN32)
-    set(SFML_DIR_ROOT "${CMAKE_SOURCE_DIR}/ext/SFML-2.5.1/" CACHE PATH "Path to SFML root dir.")
+if (WIN32)	
+    set(SFML_DIR_ROOT "${sfml_SOURCE_DIR}" CACHE PATH "Path to SFML root dir.")
 endif ()
-
-#####################################################
-## Helper Functions
-#####################################################
-function(jt_use_assets TGT)
-    add_custom_command(TARGET ${TGT} PRE_BUILD
-            COMMAND ${CMAKE_COMMAND} -E copy_directory
-            ${CMAKE_SOURCE_DIR}/assets ${CMAKE_CURRENT_BINARY_DIR}/assets)
-
-    if (MSVC)
-        add_custom_command(TARGET ${TGT} PRE_BUILD
-                COMMAND ${CMAKE_COMMAND} -E copy_directory
-                ${CMAKE_SOURCE_DIR}/assets ${CMAKE_CURRENT_BINARY_DIR}/Debug/assets)
-        add_custom_command(TARGET ${TGT} PRE_BUILD
-                COMMAND ${CMAKE_COMMAND} -E copy_directory
-                ${CMAKE_SOURCE_DIR}/assets ${CMAKE_CURRENT_BINARY_DIR}/Release/assets)
-    endif ()
-endfunction()
-
-function(jt_deploy_dlls DESTFOLDER)
-    message(STATUS "Deploy to ${DESTFOLDER}")
-
-    if (WIN32)
-        file(MAKE_DIRECTORY ${DESTFOLDER})
-        # copy dlls
-
-        if ($ENV{CLION_IDE})
-            configure_file(${SFML_DIR_ROOT}/bin/sfml-system-2.dll ${DESTFOLDER} COPYONLY)
-            configure_file(${SFML_DIR_ROOT}/bin/sfml-window-2.dll ${DESTFOLDER} COPYONLY)
-            configure_file(${SFML_DIR_ROOT}/bin/sfml-graphics-2.dll ${DESTFOLDER} COPYONLY)
-            configure_file(${SFML_DIR_ROOT}/bin/sfml-audio-2.dll ${DESTFOLDER} COPYONLY)
-
-            configure_file(${SFML_DIR_ROOT}/bin/sfml-system-d-2.dll ${DESTFOLDER} COPYONLY)
-            configure_file(${SFML_DIR_ROOT}/bin/sfml-window-d-2.dll ${DESTFOLDER} COPYONLY)
-            configure_file(${SFML_DIR_ROOT}/bin/sfml-graphics-d-2.dll ${DESTFOLDER} COPYONLY)
-            configure_file(${SFML_DIR_ROOT}/bin/sfml-audio-d-2.dll ${DESTFOLDER} COPYONLY)
-        elseif (MSVC)
-            configure_file(${SFML_DIR_ROOT}/bin/sfml-system-2.dll ${DESTFOLDER} COPYONLY)
-            configure_file(${SFML_DIR_ROOT}/bin/sfml-window-2.dll ${DESTFOLDER} COPYONLY)
-            configure_file(${SFML_DIR_ROOT}/bin/sfml-graphics-2.dll ${DESTFOLDER} COPYONLY)
-            configure_file(${SFML_DIR_ROOT}/bin/sfml-audio-2.dll ${DESTFOLDER} COPYONLY)
-
-            configure_file(${SFML_DIR_ROOT}/bin/sfml-system-d-2.dll ${DESTFOLDER} COPYONLY)
-            configure_file(${SFML_DIR_ROOT}/bin/sfml-window-d-2.dll ${DESTFOLDER} COPYONLY)
-            configure_file(${SFML_DIR_ROOT}/bin/sfml-graphics-d-2.dll ${DESTFOLDER} COPYONLY)
-            configure_file(${SFML_DIR_ROOT}/bin/sfml-audio-d-2.dll ${DESTFOLDER} COPYONLY)
-
-        endif ()
-    endif ()
-endfunction()
 
 if ($ENV{CLION_IDE})
     set(SFML_DIR "${SFML_DIR_ROOT}/lib/cmake/SFML")
     find_package(SFML COMPONENTS graphics window system audio REQUIRED)
 endif ()
+
+
+set(TILESON_DIR_ROOT "${tileson_SOURCE_DIR}" CACHE PATH "Path to tileson root dir.")
+
+
+
+#####################################################
+## Helper Functions
+#####################################################
+include (config/cmake/helpers.cmake)
 
 #####################################################
 ## Create Project file and link directories
@@ -137,7 +106,7 @@ add_library(JamTemplate ${JAMTEMPLATEFILES} ${JAMTEMPLATEBASEFILES})
 
 # add public includes, so they can be used by dependent targets
 target_include_directories(JamTemplate PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/src/jamtemplate/common)
-target_include_directories(JamTemplate SYSTEM PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/ext/tileson-master/include)
+target_include_directories(JamTemplate SYSTEM PUBLIC ${TILESON_DIR_ROOT}/include)
 if (ENABLE_WEB)
     target_include_directories(JamTemplate PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/src/jamtemplate/sdl)
 else ()
@@ -278,7 +247,6 @@ endif ()
 #####################################################
 file(GLOB GAMEFILES src/game/*)
 file(GLOB HUDFILES src/game/hud/*)
-message("${HUDFILES}")
 add_executable(${PROJECTNAME} ${GAMEFILES} ${HUDFILES})
 if (ENABLE_WEB)
     set(CMAKE_EXECUTABLE_SUFFIX ".html")

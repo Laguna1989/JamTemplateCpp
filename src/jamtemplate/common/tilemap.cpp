@@ -24,7 +24,7 @@ Tilemap::Tilemap(std::string const& path)
     auto const columns = tileset.getColumns();
     auto const rows = tileset.getTileCount() / columns;
     auto const ts = tileset.getTileSize();
-    auto const tilesetName = "assets/" + tileset.getImagePath();
+    auto const tilesetName = "assets/" + tileset.getImagePath().string();
     m_tileSprites.resize(rows * columns);
     for (int j = 0; j != rows; ++j) {
         for (int i = 0; i != columns; ++i) {
@@ -94,7 +94,7 @@ void Tilemap::doDraw(std::shared_ptr<jt::renderTarget> const sptr) const
     }
 }
 
-void Tilemap::checkIdBounds(const tson::TileObject& tile) const
+void Tilemap::checkIdBounds(tson::TileObject& tile) const
 {
     auto const rawId = tile.getTile()->getId();
     if (rawId == 1 || rawId + 1 >= m_tileSprites.size()) {
