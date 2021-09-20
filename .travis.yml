@@ -20,7 +20,6 @@ env:
 before_install:
   - eval "${MATRIX_EVAL}"
   - sudo apt-get install -y libsfml-dev
-  - unzip ext/tileson-master.zip  -d ext/
   - pip install --user cpp-coveralls
 
 script:
