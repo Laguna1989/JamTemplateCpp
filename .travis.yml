@@ -8,8 +8,10 @@ addons:
   apt:
     sources:
       - sourceline: 'ppa:ubuntu-toolchain-r/test'
+      - kalakris-cmake
     packages:
       - g++-9
+      - cmake
 env:
   - MATRIX_EVAL="CC=gcc-9 CXX=g++-9"
 
