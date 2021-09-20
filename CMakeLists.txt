@@ -91,7 +91,7 @@ endif ()
 
 file(GLOB_RECURSE BOX2DFILES "${box2d_SOURCE_DIR}/Box2D/Box2D/*")
 add_library(Box2D ${BOX2DFILES})
-target_include_directories(Box2D SYSTEM PUBLIC ${box2d_SOURCE_DIR}/box2d)
+target_include_directories(Box2D SYSTEM PUBLIC ${box2d_SOURCE_DIR}/Box2D)
 
 #####################################################
 ## setup JamTemplate
