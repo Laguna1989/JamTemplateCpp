@@ -5,13 +5,15 @@ dist: focal
 services:
   - xvfb
 addons:
+  snaps:
+    - name: cmake
+      confinement: classic
+      channel: 3.19/candidate
   apt:
     sources:
       - sourceline: 'ppa:ubuntu-toolchain-r/test'
-      - kalakris-cmake
     packages:
       - g++-9
-      - cmake
 env:
   - MATRIX_EVAL="CC=gcc-9 CXX=g++-9"
 
@@ -22,7 +24,7 @@ before_install:
   - pip install --user cpp-coveralls
 
 script:
-  - cmake -DENABLE_UNITTESTS=ON -DENABLE_STRESSTESTS=ON -DENABLE_DISPLAY_TESTS=OFF -DENABLE_COVERAGE=ON .
+  - /snap/bin/cmake -DENABLE_UNITTESTS=ON -DENABLE_STRESSTESTS=ON -DENABLE_DISPLAY_TESTS=OFF -DENABLE_COVERAGE=ON .
   - make -j 2
   - ./UnitTests
 
