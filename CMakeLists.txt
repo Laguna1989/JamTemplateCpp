@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.19)
 
 #####################################################
 ## Variables to be set depending on project
@@ -15,10 +15,13 @@ set(ENABLE_DISPLAY_TESTS ON CACHE BOOL "enable unittests that require a display"
 #####################################################
 ## get externals
 #####################################################
+include(FetchContent)
 add_subdirectory(ext)
 
 FetchContent_GetProperties(tileson)
 FetchContent_GetProperties(sfml)
+FetchContent_GetProperties(box2d)
+
 # Apple users: set to /usr/local/Cellar/sfml/2.4.2_1/lib/ or respectively
 if (WIN32)	
     set(SFML_DIR_ROOT "${sfml_SOURCE_DIR}" CACHE PATH "Path to SFML root dir.")
@@ -29,9 +32,7 @@ if ($ENV{CLION_IDE})
     find_package(SFML COMPONENTS graphics window system audio REQUIRED)
 endif ()
 
-
 set(TILESON_DIR_ROOT "${tileson_SOURCE_DIR}" CACHE PATH "Path to tileson root dir.")
-
 
 
 #####################################################
@@ -87,9 +88,10 @@ endif ()
 #####################################################
 ## Setup Box2d
 #####################################################
-file(GLOB_RECURSE BOX2DFILES ext/box2d/Box2D/*)
+
+file(GLOB_RECURSE BOX2DFILES "${box2d_SOURCE_DIR}/Box2D/Box2D/*")
 add_library(Box2D ${BOX2DFILES})
-target_include_directories(Box2D SYSTEM PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/ext/box2d)
+target_include_directories(Box2D SYSTEM PUBLIC ${box2d_SOURCE_DIR}/box2d)
 
 #####################################################
 ## setup JamTemplate
