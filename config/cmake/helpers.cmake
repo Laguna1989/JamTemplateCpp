@@ -13,7 +13,7 @@ function(jt_use_assets TGT)
     endif ()
 endfunction()
 
-function(jt_deploy_dlls DESTFOLDER)
+function(jt_deploy_dlls_helper DESTFOLDER)
     if (WIN32)
         file(MAKE_DIRECTORY ${DESTFOLDER})
         # copy dlls
@@ -40,5 +40,12 @@ function(jt_deploy_dlls DESTFOLDER)
             configure_file(${SFML_DIR_ROOT}/bin/sfml-audio-d-2.dll ${DESTFOLDER} COPYONLY)
 
         endif ()
+    endif ()
+endfunction()
+
+
+function(jt_deploy_dlls)
+    if (NOT ENABLE_WEB)
+        jt_deploy_dlls_helper(${CMAKE_CURRENT_BINARY_DIR})
     endif ()
 endfunction()

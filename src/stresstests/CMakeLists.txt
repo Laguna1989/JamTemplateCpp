@@ -1,0 +1,11 @@
+if (ENABLE_STRESSTESTS)
+    file(GLOB_RECURSE STRESSTESTFILES ${CMAKE_CURRENT_SOURCE_DIR}/*)
+
+    add_executable(StressTests ${STRESSTESTFILES})
+    if (ENABLE_WEB)
+        set(CMAKE_EXECUTABLE_SUFFIX ".html")
+    endif ()
+    target_link_libraries(StressTests JamTemplate)
+    jt_use_assets(StressTests)
+    jt_deploy_dlls()
+endif ()

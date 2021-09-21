@@ -1,0 +1,45 @@
+if (ENABLE_UNITTESTS)
+    file(GLOB_RECURSE UNITTESTFILES ${CMAKE_CURRENT_SOURCE_DIR}/*)
+    if ((NOT ENABLE_DISPLAY_TESTS) OR ENABLE_WEB)
+        list(REMOVE_ITEM UNITTESTFILES
+                "${CMAKE_CURRENT_SOURCE_DIR}/sound_test.cpp"
+                "${CMAKE_CURRENT_SOURCE_DIR}/music_player_test.cpp")
+    endif ()
+
+    # Download and unpack googletest at configure time
+    configure_file(${CMAKE_SOURCE_DIR}/ext/googletest/CMakeLists.txt.in ${CMAKE_CURRENT_BINARY_DIR}/ext/googletest/googletest-download/CMakeLists.txt)
+    execute_process(COMMAND ${CMAKE_COMMAND} -G "${CMAKE_GENERATOR}" .
+            RESULT_VARIABLE result
+            WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/ext/googletest/googletest-download)
+    if (result)
+        message(FATAL_ERROR "CMake step for googletest failed: ${result}")
+    endif ()
+    execute_process(COMMAND ${CMAKE_COMMAND} --build .
+            RESULT_VARIABLE result
+            WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/ext/googletest/googletest-download)
+    if (result)
+        message(FATAL_ERROR "Build step for googletest failed: ${result}")
+    endif ()
+
+    # Prevent overriding the parent project's compiler/linker
+    # settings on Windows
+    set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+
+    # Add googletest directly to our build. This defines
+    # the gtest and gtest_main targets.
+    add_subdirectory(${CMAKE_CURRENT_BINARY_DIR}/ext/googletest/googletest-src
+            ${CMAKE_CURRENT_BINARY_DIR}/ext/googletest/googletest-build
+            EXCLUDE_FROM_ALL)
+
+    add_executable(UnitTests ${UNITTESTFILES})
+    if (ENABLE_WEB)
+        set(CMAKE_EXECUTABLE_SUFFIX ".html")
+    endif ()
+    target_link_libraries(UnitTests gtest_main)
+    target_link_libraries(UnitTests gmock)
+    target_link_libraries(UnitTests JamTemplate)
+
+    jt_use_assets(UnitTests)
+    jt_deploy_dlls()
+    add_test(UnitTests UnitTests)
+endif ()
