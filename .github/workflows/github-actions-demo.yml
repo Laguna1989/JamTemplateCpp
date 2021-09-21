@@ -31,7 +31,7 @@ jobs:
           platform: x64
 
       - name: Install SFLM
-        run: sudo apt-get install -y libsfml-dev
+        run: sudo apt-get install -y libsfml-dev xorg openbox
 
       - uses: actions/checkout@v2
 
