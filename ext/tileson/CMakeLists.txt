@@ -1,7 +1,7 @@
 FetchContent_Declare(
         tileson
-        GIT_REPOSITORY https://github.com/SSBMTonberry/tileson.git
-        GIT_TAG v1.3.0
+        GIT_REPOSITORY https://github.com/Laguna1989/tileson.git
+        GIT_TAG fix_cl_compiler_warnings
 )
 
 FetchContent_Populate(tileson)
