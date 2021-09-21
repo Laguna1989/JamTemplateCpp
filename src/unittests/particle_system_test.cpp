@@ -71,8 +71,6 @@ TEST(ParticleSystemTest, CreateDoesNotRaiseExceptionWhenGameInstanceIsSet)
 
 TEST(ParticleSystemTest, UpdateCallDoesNotRaiseException)
 {
-    int numberofResetCalls = 0;
-
     jt::ParticleSystem<jt::Shape, 5> ps(
         []() {
             auto s = std::make_shared<jt::Shape>();
