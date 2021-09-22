@@ -1,6 +1,6 @@
 # JamTemplateCppSFML
 
-[![Build Status](https://travis-ci.com/Laguna1989/JamTemplateCpp.svg?branch=master)](https://travis-ci.com/github/Laguna1989/JamTemplateCpp) [![Coverage Status](https://coveralls.io/repos/github/Laguna1989/JamTemplateCpp/badge.svg)](https://coveralls.io/github/Laguna1989/JamTemplateCpp)
+[![Build Status](https://github.com/Laguna1989/JamTemplateCpp/actions/workflows/unittests.yml/badge.svg) [![Coverage Status](https://coveralls.io/repos/github/Laguna1989/JamTemplateCpp/badge.svg)](https://coveralls.io/github/Laguna1989/JamTemplateCpp)
 
 ## About
 
