@@ -49,9 +49,8 @@ jobs:
           cmake-version: '3.19.x'
 
       - name: Set up gcc
-        uses: egor-tensin/setup-gcc@v1
+        uses: egor-tensin/setup-mingw@v1
         with:
-          version: 9
           platform: x64
 
       - uses: actions/checkout@v2
@@ -66,4 +65,4 @@ jobs:
       - name: Test
         working-directory: ${{github.workspace}}/build/src/unittests
         run: ./UnitTests
-        
+
