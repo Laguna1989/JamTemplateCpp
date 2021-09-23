@@ -7,8 +7,8 @@ on:
     branches: [ master ]
 
 jobs:
-  UnitTests:
-    runs-on: [ ubuntu-latest, windows-latest ]
+  UnitTestsUbuntu:
+    runs-on: ubuntu-latest
 
     steps:
       - name: Set up cmake
@@ -39,3 +39,31 @@ jobs:
         with:
           run: ./UnitTests
           working-directory: ${{github.workspace}}/build/src/unittests
+  UnitTestsWindows:
+    runs-on: windows-latest
+
+    steps:
+      - name: Set up cmake
+        uses: jwlawson/actions-setup-cmake@v1.10
+        with:
+          cmake-version: '3.19.x'
+
+      - name: Set up gcc
+        uses: egor-tensin/setup-gcc@v1
+        with:
+          version: 9
+          platform: x64
+
+      - uses: actions/checkout@v2
+
+      - name: CMake
+        run: cmake -B ${{github.workspace}}/build -DENABLE_STRESSTESTS=ON -DENABLE_DISPLAY_TESTS=OFF
+
+      - name: Build
+        working-directory: ${{github.workspace}}/build
+        run: make --build .
+
+      - name: Test
+        working-directory: ${{github.workspace}}/build/src/unittests
+        run: ./UnitTests
+        
