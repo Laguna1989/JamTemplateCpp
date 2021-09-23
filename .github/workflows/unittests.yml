@@ -8,7 +8,7 @@ on:
 
 jobs:
   UnitTests:
-    runs-on: ubuntu-latest
+    runs-on: [ ubuntu-latest, windows-latest ]
 
     steps:
       - name: Set up cmake
