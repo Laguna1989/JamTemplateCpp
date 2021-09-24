@@ -1,31 +1,32 @@
- name: Test Verification
+name: Test Verification
 
- on:
-   push:
-     branches: [ master ]
-   pull_request:
-     branches: [ master ]
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
 
- jobs:
-   UnitTestsWindows:
-    runs-on: windows-latest
+jobs:
 
-    steps:
-      - name: Set up cmake
-        uses: jwlawson/actions-setup-cmake@v1.10
-        with:
-          cmake-version: '3.19.x'
+UnitTestsWindows:
+  runs-on: windows-latest
 
-      - uses: actions/checkout@v2
+  steps:
+    - name: Set up cmake
+      uses: jwlawson/actions-setup-cmake@v1.10
+      with:
+        cmake-version: '3.19.x'
 
-      - name: CMake
-        run: cmake -B ${{github.workspace}}/build -DENABLE_STRESSTESTS=ON -DENABLE_DISPLAY_TESTS=OFF
+    - uses: actions/checkout@v2
 
-      - name: Build
-        working-directory: ${{github.workspace}}/build
-        run: cmake --build .
+    - name: CMake
+      run: cmake -B ${{github.workspace}}/build -DENABLE_STRESSTESTS=ON -DENABLE_DISPLAY_TESTS=OFF
 
-      - name: Test
-        working-directory: ${{github.workspace}}/build/src/unittests
-        run: Debug\UnitTests.exe
+    - name: Build
+      working-directory: ${{github.workspace}}/build
+      run: cmake --build .
+
+    - name: Test
+      working-directory: ${{github.workspace}}/build/src/unittests
+      run: Debug\UnitTests.exe
 

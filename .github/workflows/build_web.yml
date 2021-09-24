@@ -16,6 +16,12 @@ jobs:
         with:
           cmake-version: '3.19.x'
 
+      - name: Set up gcc
+        uses: egor-tensin/setup-gcc@v1
+        with:
+          version: 9
+          platform: x64
+
       - uses: mymindstorm/setup-emsdk@v9
 
       - uses: actions/checkout@v2
