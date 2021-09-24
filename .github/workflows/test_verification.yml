@@ -7,9 +7,8 @@ on:
     branches: [ master ]
 
 jobs:
-  UnitTestsUbuntu:
+  TestsLinux:
     runs-on: ubuntu-latest
-
     steps:
       - name: Set up cmake
         uses: jwlawson/actions-setup-cmake@v1.10
@@ -39,9 +38,9 @@ jobs:
         with:
           run: ./UnitTests
           working-directory: ${{github.workspace}}/build/src/unittests
-  UnitTestsWindows:
-    runs-on: windows-latest
 
+  TestsWindows:
+    runs-on: windows-latest
     steps:
       - name: Set up cmake
         uses: jwlawson/actions-setup-cmake@v1.10
@@ -61,3 +60,27 @@ jobs:
         working-directory: ${{github.workspace}}/build/src/unittests
         run: Debug\UnitTests.exe
 
+  BuildWeb:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up cmake
+        uses: jwlawson/actions-setup-cmake@v1.10
+        with:
+          cmake-version: '3.19.x'
+
+      - name: Set up gcc
+        uses: egor-tensin/setup-gcc@v1
+        with:
+          version: 9
+          platform: x64
+
+      - uses: mymindstorm/setup-emsdk@v9
+
+      - uses: actions/checkout@v2
+
+      - name: CMake
+        run: emcmake cmake -B ${{github.workspace}}/build -DENABLE_STRESSTESTS=ON -DENABLE_UNITTESTS=OFF -DENABLE_DISPLAY_TESTS=OFF -DENABLE_WEB=ON.
+
+      - name: Build
+        working-directory: ${{github.workspace}}/build
+        run: emmake make
