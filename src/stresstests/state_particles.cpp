@@ -27,7 +27,7 @@ void StateParticles::doInternalCreate()
 
     add(m_particles);
 }
-void StateParticles::doInternalUpdate(float elapsed)
+void StateParticles::doInternalUpdate(float /*elapsed*/)
 {
     m_particles->Fire(20);
 

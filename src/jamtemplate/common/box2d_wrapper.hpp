@@ -6,6 +6,7 @@ class Box2DWorldInterface {
 public:
     virtual b2Body* CreateBody(const b2BodyDef* def) = 0;
     virtual void DestroyBody(b2Body* body) = 0;
+    virtual ~Box2DWorldInterface() = default;
 };
 
 class Box2DWorldWrapper : public Box2DWorldInterface {

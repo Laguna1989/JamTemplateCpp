@@ -60,9 +60,8 @@ class RandomFloatGaussTestFixture : public ::testing::TestWithParam<std::pair<fl
 };
 
 INSTANTIATE_TEST_SUITE_P(RandomFloatGaussTest, RandomFloatGaussTestFixture,
-    ::testing::Values(std::make_pair(0.0f, 1.0f), std::make_pair(0.0f, 500),
-        std::make_pair(0.0f, 0.1f),
-        std::make_pair(
+    ::testing::Values(std::make_pair(0.0f, 1.0f), std::make_pair(0.0f, 500.0f),
+        std::make_pair(0.0f, 0.1f), std::make_pair(
             std::numeric_limits<float>::epsilon(), std::numeric_limits<float>::epsilon())));
 
 TEST_P(RandomFloatGaussTestFixture, RandomFloat)
