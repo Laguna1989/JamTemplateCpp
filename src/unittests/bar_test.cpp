@@ -21,10 +21,10 @@ TEST(BarTest, PositiveMaxValueDoesNotTriggerAssertion)
     EXPECT_FLOAT_EQ(b.getMaxValue(), expected);
 }
 
-TEST(BarTest, NegativeMaxValueTriggersAssertion)
+TEST(BarTest, NegativeMaxValueTriggersException)
 {
     jt::Bar b { 5.0f, 10.0f };
-    EXPECT_DEATH(b.setMaxValue(-5.0f), "");
+    EXPECT_ANY_THROW(b.setMaxValue(-5.0f));
 }
 
 TEST(BarTest, SetCurrentValueSetsCorrectValue)

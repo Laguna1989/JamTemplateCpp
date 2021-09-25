@@ -1,6 +1,6 @@
 ﻿#include "bar.hpp"
-#include <cassert>
 #include <iostream>
+#include <stdexcept>
 
 namespace jt {
 
@@ -43,7 +43,9 @@ float Bar::getCurrentValue() const { return m_valueCurrent; }
 
 void Bar::setMaxValue(float max)
 {
-    assert(max >= 0);
+    if (max < 0) {
+        throw std::invalid_argument { "max value can not be negative" };
+    }
     m_valueMax = max;
 }
 

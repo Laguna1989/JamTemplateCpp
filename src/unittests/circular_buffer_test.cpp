@@ -117,3 +117,59 @@ TEST(CircularBufferSize2, BufferDoesNotContainValueAfterItIsPushedOutOfTheBuffer
     EXPECT_FALSE(buffer.contains(value1));
     EXPECT_TRUE(buffer.contains(value2));
 }
+
+jt::CircularBuffer<unsigned int, 2> createBufferWithValues(unsigned int a, unsigned int b)
+{
+    jt::CircularBuffer<unsigned int, 2> buffer;
+
+    buffer.push(a);
+    buffer.push(b);
+    return buffer;
+}
+
+TEST(CircularBufferIterators, ValueAtBegin)
+{
+    auto const value1 = 4U;
+    auto const value2 = 8U;
+    auto buffer = createBufferWithValues(value1, value2);
+
+    ASSERT_EQ(value1, *buffer.begin());
+}
+
+TEST(CircularBufferSize, size)
+{
+    auto const value1 = 4U;
+    auto const value2 = 8U;
+    auto buffer = createBufferWithValues(value1, value2);
+
+    ASSERT_EQ(2, buffer.size());
+}
+
+TEST(CircularBufferIterators, ValueAtEnd)
+{
+    auto const value1 = 4U;
+    auto const value2 = 8U;
+    auto buffer = createBufferWithValues(value1, value2);
+    auto last = buffer.end();
+    --last;
+    ASSERT_EQ(value2, *(last));
+}
+
+TEST(CircularBufferIterators, ValueAtCBegin)
+{
+    auto const value1 = 9U;
+    auto const value2 = 3U;
+    auto buffer = createBufferWithValues(value1, value2);
+
+    ASSERT_EQ(value1, *buffer.cbegin());
+}
+
+TEST(CircularBufferIterators, ValueAtCEnd)
+{
+    auto const value1 = 9U;
+    auto const value2 = 3U;
+    auto buffer = createBufferWithValues(value1, value2);
+    auto clast = buffer.cend();
+    --clast;
+    ASSERT_EQ(value2, *(clast));
+}

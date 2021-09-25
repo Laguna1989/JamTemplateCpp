@@ -45,9 +45,12 @@ public:
 
 } // namespace detail
 
-template <typename T, std::size_t size>
+template <typename T, std::size_t sizeT>
 class CircularBuffer {
 public:
+    using ArrayT = std::array<T, sizeT>;
+    using IteratorT = typename ArrayT::iterator;
+    using ConstIteratorT = typename ArrayT::const_iterator;
     T const& operator[](std::size_t const position) const { return m_data[wrapper.wrap(position)]; }
     T& operator[](std::size_t const position) { return m_data[wrapper.wrap(position)]; }
     bool contains(T const& expected)
@@ -57,9 +60,17 @@ public:
     }
     void push(T const& value) { m_data[wrapper.wrap(m_pushIndex++)] = value; }
 
+    IteratorT begin() { return m_data.begin(); }
+    IteratorT end() { return m_data.end(); }
+
+    ConstIteratorT cbegin() { return m_data.cbegin(); }
+    ConstIteratorT cend() { return m_data.cend(); }
+
+    std::size_t size() { return m_data.size(); }
+
 private:
-    detail::IndexWrapper<size> wrapper;
-    std::array<T, size> m_data;
+    detail::IndexWrapper<sizeT> wrapper;
+    ArrayT m_data;
     std::size_t m_pushIndex { 0 };
 };
 } // namespace jt
