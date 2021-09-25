@@ -169,6 +169,7 @@ TEST(CircularBufferIterators, ValueAtCEnd)
     auto const value1 = 9U;
     auto const value2 = 3U;
     auto buffer = createBufferWithValues(value1, value2);
-
-    ASSERT_EQ(value2, *(--buffer.cend()));
+    auto clast = buffer.cend();
+    --clast;
+    ASSERT_EQ(value2, *(clast));
 }
