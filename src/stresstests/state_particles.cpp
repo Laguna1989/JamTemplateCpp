@@ -2,10 +2,12 @@
 #include "state_select.hpp"
 #include "tween_alpha.hpp"
 #include "tween_scale.hpp"
+#include <algorithm>
+#include <numeric>
 
 void StateParticles::doInternalCreate()
 {
-    m_particles = jt::ParticleSystem<jt::Shape, 500>::createPS(
+    m_particles = jt::ParticleSystem<jt::Shape, numberOfParticles>::createPS(
         []() {
             auto s = std::make_shared<jt::Shape>();
             s->makeRect(jt::Vector2 { 4, 4 });
@@ -27,12 +29,16 @@ void StateParticles::doInternalCreate()
 
     add(m_particles);
 }
-void StateParticles::doInternalUpdate(float /*elapsed*/)
+void StateParticles::doInternalUpdate(float elapsed)
 {
-    m_particles->Fire(20);
-
-    if (getAge() >= 5) {
+    m_particles->Fire(toFire);
+    m_timeMeasurement.push(elapsed);
+    if (getAge() >= 15) {
         getGame()->switchState(std::make_shared<StateSelect>());
+        float avg = std::accumulate(m_timeMeasurement.cbegin(), m_timeMeasurement.cend(), 0.0f)
+            / m_timeMeasurement.size();
+        std::cout << "avg: " << numberOfParticles << " "
+                  << " " << toFire << " " << avg << std::endl;
     }
 }
 void StateParticles::doInternalDraw() const { }

@@ -4,6 +4,7 @@
 #include <cassert>
 #include <functional>
 #include <memory>
+#include <type_traits>
 #include <vector>
 
 namespace jt {
@@ -11,8 +12,13 @@ namespace jt {
 class TweenBase {
 public:
     using Sptr = std::shared_ptr<TweenBase>;
-
     using OnCompleteCallbackType = std::function<void(void)>;
+
+    // This will cause a compile error if a lambda is passed, because lambdas cannot be
+    // converted to function pointers. However, it is safe to assume that the age-percent conversion
+    // will not need to capture anything as it is just a simple conversion function from float to
+    // float. If this causes issues, just change the using alias to use std::function<float(float)>
+    using AgePercentConversionFunctionType = std::add_pointer<float(float)>::type;
 
     TweenBase() = default;
     virtual ~TweenBase() = default;
@@ -68,7 +74,7 @@ public:
         return m_agePercentConversion(age);
     }
 
-    void setAgePercentConversion(std::function<float(float)> func)
+    void setAgePercentConversion(AgePercentConversionFunctionType func)
     {
         m_agePercentConversion = func;
     }
@@ -83,7 +89,7 @@ private:
     bool m_alive { true };
     bool m_repeat { false };
 
-    std::function<float(float)> m_agePercentConversion { nullptr };
+    AgePercentConversionFunctionType m_agePercentConversion { nullptr };
 
     std::vector<OnCompleteCallbackType> m_completeCallbacks;
 

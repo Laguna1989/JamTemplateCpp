@@ -13,21 +13,22 @@ template <class T, size_t N>
 class ParticleSystem : public GameObject {
 public:
     using ResetCallbackType = std::function<void(std::shared_ptr<T> particle)>;
-    using InitCallbackType = std::function<std::shared_ptr<T>(void)>;
 
+    template <typename InitCallbackT>
     static std::shared_ptr<ParticleSystem<T, N>> createPS(
-        InitCallbackType const init, ResetCallbackType const reset)
+        InitCallbackT const& init, ResetCallbackType const reset)
     {
         return std::make_shared<ParticleSystem<T, N>>(init, reset);
     }
 
-    ParticleSystem(InitCallbackType const init, ResetCallbackType const reset)
+    template <typename InitCallbackT>
+    ParticleSystem(InitCallbackT const& init, ResetCallbackType const reset)
         : m_resetCallback { reset }
         , m_particles {}
         , m_currentIndex { 0 }
     {
-        for (auto i = 0U; i != N; ++i) {
-            m_particles.at(i) = init();
+        for (auto& p : m_particles) {
+            p = init();
         }
     };
 
@@ -66,4 +67,4 @@ private:
 
 } // namespace jt
 
-#endif // !JAMTEMPLATE_CONVERSIONS_HPP_GUARD
+#endif // GUARD_JAMTEMPLATE_PARTICLE_SYSTEM_HPP_GUARD
