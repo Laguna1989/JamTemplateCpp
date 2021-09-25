@@ -150,8 +150,9 @@ TEST(CircularBufferIterators, ValueAtEnd)
     auto const value1 = 4U;
     auto const value2 = 8U;
     auto buffer = createBufferWithValues(value1, value2);
-
-    ASSERT_EQ(value2, *(--buffer.end()));
+    auto last = buffer.end();
+    --last;
+    ASSERT_EQ(value2, *(last));
 }
 
 TEST(CircularBufferIterators, ValueAtCBegin)
