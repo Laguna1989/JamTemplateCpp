@@ -56,6 +56,8 @@ private:
     mutable std::shared_ptr<jt::Shape> m_shapeFull;
     std::shared_ptr<jt::Shape> m_shapeProgress;
 
+    jt::Color m_flashColor { jt::colors::White };
+
     virtual void doDraw(std::shared_ptr<jt::renderTarget> const sptr) const override;
     virtual void doDrawFlash(std::shared_ptr<jt::renderTarget> const sptr) const override;
     virtual void doDrawShadow(std::shared_ptr<jt::renderTarget> const sptr) const override;

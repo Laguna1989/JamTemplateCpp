@@ -124,11 +124,8 @@ const jt::Vector2 Tilemap::getPosition() const { return m_position; }
 jt::Rect const Tilemap::getGlobalBounds() const { return jt::Rect {}; }
 jt::Rect const Tilemap::getLocalBounds() const { return jt::Rect {}; }
 
-void Tilemap::setFlashColor(jt::Color const& /*col*/)
-{
-    std::cerr << "flash not supported by Tilemap\n";
-}
-const jt::Color Tilemap::getFlashColor() const { return jt::colors::Black; }
+void Tilemap::setFlashColor(jt::Color const& col) { m_flashColor = col; }
+const jt::Color Tilemap::getFlashColor() const { return m_flashColor; }
 
 void Tilemap::setScale(jt::Vector2 const& scale) { m_scale = scale; }
 const jt::Vector2 Tilemap::getScale() const { return m_scale; }

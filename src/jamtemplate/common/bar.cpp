@@ -105,8 +105,8 @@ const jt::Vector2 Bar::getPosition() const { return m_shapeFull->getPosition(); 
 jt::Rect const Bar::getGlobalBounds() const { return m_shapeFull->getGlobalBounds(); }
 jt::Rect const Bar::getLocalBounds() const { return m_shapeFull->getLocalBounds(); }
 
-void Bar::setFlashColor(jt::Color const& /*col*/) { std::cerr << "flash not supported by Bar\n"; }
-const jt::Color Bar::getFlashColor() const { return jt::colors::White; }
+void Bar::setFlashColor(jt::Color const& col) { m_flashColor = col; }
+const jt::Color Bar::getFlashColor() const { return m_flashColor; }
 
 void Bar::setScale(jt::Vector2 const& scale)
 {

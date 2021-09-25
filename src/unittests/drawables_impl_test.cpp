@@ -214,3 +214,29 @@ TEST_P(DrawableImplTestFixture, DrawRotated)
     jt::DrawableImpl::setCamOffset(jt::Vector2 { 100.0f, 100.0f });
     drawable->draw(rt);
 }
+
+TEST_P(DrawableImplTestFixture, GetFlashColorReturnsWhiteByDefault)
+{
+    std::shared_ptr<jt::DrawableInterface> drawable = GetParam();
+    ASSERT_EQ(drawable->getFlashColor(), jt::colors::White);
+}
+
+TEST_P(DrawableImplTestFixture, GetFlashColorAfterSet)
+{
+    std::shared_ptr<jt::DrawableInterface> drawable = GetParam();
+    drawable->setFlashColor(jt::colors::Yellow);
+    ASSERT_EQ(drawable->getFlashColor(), jt::colors::Yellow);
+}
+
+TEST_P(DrawableImplTestFixture, GetShadowColorReturnsBlackByDefault)
+{
+    std::shared_ptr<jt::DrawableInterface> drawable = GetParam();
+    ASSERT_EQ(drawable->getShadowColor(), jt::colors::Black);
+}
+
+TEST_P(DrawableImplTestFixture, GetShadowColorAfterSet)
+{
+    std::shared_ptr<jt::DrawableInterface> drawable = GetParam();
+    drawable->setShadowColor(jt::colors::Yellow);
+    ASSERT_EQ(drawable->getShadowColor(), jt::colors::Yellow);
+}

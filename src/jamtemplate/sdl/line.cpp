@@ -22,8 +22,30 @@ void jt::Line::doDraw(std::shared_ptr<jt::renderTarget> const sptr) const
         static_cast<int>(endPosition.y()));
 }
 
-void jt::Line::doDrawFlash(std::shared_ptr<jt::renderTarget> const /*sptr*/) const { }
-void jt::Line::doDrawShadow(std::shared_ptr<jt::renderTarget> const /*sptr*/) const { }
+void jt::Line::doDrawFlash(std::shared_ptr<jt::renderTarget> const sptr) const
+{
+    auto const startPosition = getPosition() + getShakeOffset() + getOffset() + getCamOffset();
+    auto const endPosition = startPosition + m_lineVector;
+
+    SDL_SetRenderDrawColor(
+        sptr.get(), m_flashColor.r(), m_flashColor.g(), m_flashColor.b(), m_flashColor.a());
+    SDL_RenderDrawLine(sptr.get(), static_cast<int>(startPosition.x()),
+        static_cast<int>(startPosition.y()), static_cast<int>(endPosition.x()),
+        static_cast<int>(endPosition.y()));
+}
+void jt::Line::doDrawShadow(std::shared_ptr<jt::renderTarget> const sptr) const
+{
+
+    auto const startPosition
+        = getPosition() + getShakeOffset() + getOffset() + getCamOffset() + getShadowOffset();
+    auto const endPosition = startPosition + m_lineVector + getShadowOffset();
+
+    SDL_SetRenderDrawColor(sptr.get(), getShadowColor().r(), getShadowColor().g(),
+        getShadowColor().b(), getShadowColor().a());
+    SDL_RenderDrawLine(sptr.get(), static_cast<int>(startPosition.x()),
+        static_cast<int>(startPosition.y()), static_cast<int>(endPosition.x()),
+        static_cast<int>(endPosition.y()));
+}
 
 void jt::Line::doRotate(float d) { m_lineVector = jt::MathHelper::rotateBy(m_lineVector, d); }
 
@@ -36,8 +58,8 @@ const jt::Vector2 jt::Line::getPosition() const { return m_position; }
 jt::Rect const jt::Line::getGlobalBounds() const { return jt::Rect {}; }
 jt::Rect const jt::Line::getLocalBounds() const { return jt::Rect {}; }
 
-void jt::Line::setFlashColor(jt::Color const& col) { }
-const jt::Color jt::Line::getFlashColor() const { return jt::colors::White; }
+void jt::Line::setFlashColor(jt::Color const& col) { m_flashColor = col; }
+const jt::Color jt::Line::getFlashColor() const { return m_flashColor; }
 
 void jt::Line::setScale(jt::Vector2 const& scale) { }
 const jt::Vector2 jt::Line::getScale() const { return jt::Vector2 { 1.0f, 1.0f }; }

@@ -70,6 +70,7 @@ private:
     jt::Vector2 m_screenSizeHint;
     Vector2 m_scale { 1.0f, 1.0f };
     jt::Color m_color { jt::colors::White };
+    jt::Color m_flashColor { jt::colors::White };
 };
 
 } // namespace jt
