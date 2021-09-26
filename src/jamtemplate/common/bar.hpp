@@ -46,15 +46,15 @@ public:
     virtual const jt::Vector2 getOrigin() const override;
 
 private:
-    float m_valueMax;
-    float m_valueCurrent;
+    float m_valueMax { 0.0f };
+    float m_valueCurrent { 0.0f };
 
     float const m_width;
     float const m_height;
     bool m_horizontal;
 
-    mutable std::shared_ptr<jt::Shape> m_shapeFull;
-    std::shared_ptr<jt::Shape> m_shapeProgress;
+    mutable std::shared_ptr<jt::Shape> m_shapeFull { nullptr };
+    std::shared_ptr<jt::Shape> m_shapeProgress { nullptr };
 
     jt::Color m_flashColor { jt::colors::White };
 

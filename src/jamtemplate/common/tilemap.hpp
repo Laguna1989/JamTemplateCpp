@@ -59,18 +59,18 @@ public:
     void toggleObjectGroupVisibility() { m_highlightObjectGroups = !m_highlightObjectGroups; };
 
 private:
-    std::unique_ptr<tson::Map> m_map;
+    std::unique_ptr<tson::Map> m_map { nullptr };
     // Map from object layer name to vector of objects, all rectangular.
-    std::map<std::string, std::vector<InfoRect>> m_objectGroups;
-    bool m_highlightObjectGroups = false;
-    mutable std::vector<jt::Sprite> m_tileSprites;
+    std::map<std::string, std::vector<InfoRect>> m_objectGroups {};
+    bool m_highlightObjectGroups { false };
+    mutable std::vector<jt::Sprite> m_tileSprites {};
 
-    jt::Vector2 m_position;
-    jt::Vector2 m_origin;
-    jt::Vector2 m_screenSizeHint;
+    Vector2 m_position { 0.0f, 0.0f };
+    Vector2 m_origin { 0.0f, 0.0f };
+    Vector2 m_screenSizeHint { 0.0f, 0.0f };
     Vector2 m_scale { 1.0f, 1.0f };
-    jt::Color m_color { jt::colors::White };
-    jt::Color m_flashColor { jt::colors::White };
+    Color m_color { jt::colors::White };
+    Color m_flashColor { jt::colors::White };
 };
 
 } // namespace jt

@@ -8,11 +8,11 @@
 namespace jt {
 
 struct MousePosition {
-    float window_x;
-    float window_y;
+    float window_x { 0.0f };
+    float window_y { 0.0f };
 
-    float screen_x;
-    float screen_y;
+    float screen_x { 0.0f };
+    float screen_y { 0.0f };
 };
 
 class MouseInputInterface {

@@ -18,8 +18,8 @@ public:
     void reset() override;
 
 private:
-    std::shared_ptr<MouseInputInterface> m_mouse;
-    std::shared_ptr<KeyboardInputInterface> m_keyboard;
+    std::shared_ptr<MouseInputInterface> m_mouse { nullptr };
+    std::shared_ptr<KeyboardInputInterface> m_keyboard { nullptr };
 };
 
 } // namespace jt

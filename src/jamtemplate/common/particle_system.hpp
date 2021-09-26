@@ -44,6 +44,11 @@ public:
     };
 
 private:
+    ResetCallbackType m_resetCallback {};
+    std::array<std::shared_ptr<T>, N> m_particles;
+
+    std::size_t m_currentIndex { 0U };
+
     virtual void doUpdate(float const elapsed)
     {
         for (auto& p : m_particles) {
@@ -58,11 +63,6 @@ private:
         }
     };
     virtual void doCreate() {};
-
-    ResetCallbackType m_resetCallback;
-    std::array<std::shared_ptr<T>, N> m_particles;
-
-    std::size_t m_currentIndex;
 };
 
 } // namespace jt

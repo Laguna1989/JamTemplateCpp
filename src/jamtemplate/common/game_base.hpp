@@ -37,7 +37,7 @@ protected:
 
     std::shared_ptr<CamInterface> mutable m_camera { nullptr };
 
-    std::chrono::steady_clock::time_point m_timeLast;
+    std::chrono::steady_clock::time_point m_timeLast {};
 
     jt::Color m_backgroundColor { jt::colors::Black };
 

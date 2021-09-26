@@ -10,10 +10,10 @@ public:
     float getFloat() const;
 
 private:
-    float m_timerMu;
-    float m_timerSigma;
-    float m_timer;
-    float m_value;
+    float m_timerMu { 0.0f };
+    float m_timerSigma { 0.0f };
+    float m_timer { 0.0f };
+    float m_value { 0.0f };
 
     void sampleNewValue();
 };

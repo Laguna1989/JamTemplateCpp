@@ -38,8 +38,8 @@ public:
     }
 
 private:
-    jt::Vector2 m_initialValue {};
-    jt::Vector2 m_finalValue {};
+    jt::Vector2 m_initialValue { 0.0f, 0.0f };
+    jt::Vector2 m_finalValue { 0.0f, 0.0f };
 };
 
 } // namespace jt
