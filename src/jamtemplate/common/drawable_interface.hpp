@@ -1,7 +1,8 @@
 ﻿#ifndef GUARD_JAMTEMPLATE_DRAWABLEINTERFACE_HPP_INCLUDEGUARD
 #define GUARD_JAMTEMPLATE_DRAWABLEINTERFACE_HPP_INCLUDEGUARD
 
-#include "random.hpp"
+#include "color.hpp"
+#include "rect.hpp"
 #include "render_target.hpp"
 #include "vector.hpp"
 #include <memory>

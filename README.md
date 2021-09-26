@@ -8,11 +8,11 @@ This is the JamTemplate for kickstarting your gamejam entry. It will compile C++
 web (webassembly) games. Internally it uses SFLM and SDL.
 
 Some games created with this JamTemplate are
-
+* [Quasar Rush](https://runvs.io/Games/quasarrush) (Native & Web, A Game By Its Cover 2021)
 * [Space Turtles](https://runvs.io/Games/spaceturtles) (Native, MultiplayerKajam 2021)
-* [Tricky Tracktor](https://runvs.io/Games/trickytractor) (Native, FrankenGameJam 2021)
+* [Tricky Tracktor](https://runvs.io/Games/trickytractor) (Native, FrankenGameJam 2020)
 * [Burning Glyphs](https://runvs.io/Games/burningglyphs) (Web, 7DFPS 2020)
-* [Grounded](https://runvs.io/Games/grounded) (Native, FrankenGameJam 2020)
+* [Grounded](https://runvs.io/Games/grounded) (Native, FrankenGameJam 2019)
 
 and some more at [my game portfolio](https://runvs.io/Games).
 

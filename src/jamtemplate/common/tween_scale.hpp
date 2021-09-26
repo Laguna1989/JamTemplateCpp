@@ -1,7 +1,7 @@
 ﻿#ifndef GUARD_JAMTEMPLATE_TWEENSCALE_HPP_INCLUDEGUARD
 #define GUARD_JAMTEMPLATE_TWEENSCALE_HPP_INCLUDEGUARD
 
-#include "lerp.hpp"
+#include "linterp.hpp"
 #include "tween_base.hpp"
 #include "vector.hpp"
 

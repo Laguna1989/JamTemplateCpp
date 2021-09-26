@@ -1,4 +1,5 @@
 ﻿#include "render_window_lib.hpp"
+#include <iostream>
 #include <SDL.h>
 
 namespace jt {

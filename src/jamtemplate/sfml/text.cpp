@@ -1,4 +1,5 @@
 ﻿#include "text.hpp"
+#include <iostream>
 
 namespace jt {
 
