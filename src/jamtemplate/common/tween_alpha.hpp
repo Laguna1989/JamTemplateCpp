@@ -2,7 +2,7 @@
 #define GUARD_JAMTEMPLATE_TWEENALPHA_HPP_INCLUDEGUARD
 
 #include "color.hpp"
-#include "lerp.hpp"
+#include "linterp.hpp"
 #include "tween_base.hpp"
 #include <cstdint>
 

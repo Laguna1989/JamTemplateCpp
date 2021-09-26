@@ -10,7 +10,6 @@
 #include <memory>
 
 namespace jt {
-class GameState;
 
 class GameInterface : public GameLoopInterface {
 public:
