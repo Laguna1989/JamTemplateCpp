@@ -5,6 +5,7 @@
 #include "game_properties.hpp"
 #include "input_manager.hpp"
 #include "key_codes.hpp"
+#include "lerp.hpp"
 #include "math_helper.hpp"
 #include "shape.hpp"
 #include "sprite.hpp"
