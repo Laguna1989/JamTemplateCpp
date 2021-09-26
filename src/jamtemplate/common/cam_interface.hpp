@@ -3,7 +3,6 @@
 
 #include "render_target.hpp"
 #include "vector.hpp"
-#include <memory>
 
 namespace jt {
 

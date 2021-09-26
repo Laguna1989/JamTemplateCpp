@@ -1,19 +1,14 @@
-﻿#ifndef GUARD_JAMTEMPLATE_SMARTDRAWABLE_HPP_INCLUDEGUARD
-#define GUARD_JAMTEMPLATE_SMARTDRAWABLE_HPP_INCLUDEGUARD
+﻿#ifndef GUARD_JAMTEMPLATE_DRAWABLEIMPL_HPP_INCLUDEGUARD
+#define GUARD_JAMTEMPLATE_DRAWABLEIMPL_HPP_INCLUDEGUARD
 
 #include "drawable_interface.hpp"
-#include "lerp.hpp"
-#include "random.hpp"
 #include "render_target.hpp"
 #include "vector.hpp"
-#include <iostream>
 #include <memory>
-#include <string>
 
 namespace jt {
-/// <summary>
+
 ///  Implements common functionality of all Drawable classes
-/// </summary>
 class DrawableImpl : public jt::DrawableInterface {
 public:
     using Sptr = std::shared_ptr<DrawableImpl>;
@@ -25,7 +20,7 @@ public:
     void shake(float t, float strength, float shakeInterval = 0.05f) override;
 
     void update(float elapsed) override;
-    
+
     jt::Vector2 getOffset() const override;
     void setOffset(jt::Vector2 const offset) override;
 
@@ -53,7 +48,6 @@ protected:
     jt::Vector2 getShakeOffset() const;
 
     jt::Vector2 getCamOffset() const;
-
 
 private:
     static jt::Vector2 m_CamOffset;
@@ -91,6 +85,7 @@ private:
 
     void updateShake(float elapsed);
 };
+
 } // namespace jt
 
-#endif
+#endif // GUARD_JAMTEMPLATE_DRAWABLEIMPL_HPP_INCLUDEGUARD

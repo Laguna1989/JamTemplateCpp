@@ -1,9 +1,9 @@
 ﻿#include "game_object.hpp"
 #include "game_interface.hpp"
 #include "system_helper.hpp"
-#include <exception>
 #include <iostream>
 #include <memory>
+#include <stdexcept>
 
 namespace jt {
 void GameObject::create()

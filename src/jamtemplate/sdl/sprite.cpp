@@ -4,6 +4,7 @@
 #include "sdl_helper.hpp"
 #include "texture_manager.hpp"
 #include <SDL_image.h>
+#include <iostream>
 
 namespace jt {
 
