@@ -3,6 +3,7 @@
 #include "game_interface.hpp"
 #include "math_helper.hpp"
 #include "shape.hpp"
+#include <cmath>
 
 RopeMass::RopeMass(jt::Vector2 pos, float m)
     : position { pos }
