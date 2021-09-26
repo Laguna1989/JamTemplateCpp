@@ -41,14 +41,14 @@ public:
     jt::Vector2 getPosition(void) const;
 
 private:
-    std::shared_ptr<Animation> m_background;
-    std::shared_ptr<jt::Sprite> m_disabledOverlay;
+    std::shared_ptr<Animation> m_background { nullptr };
+    std::shared_ptr<jt::Sprite> m_disabledOverlay { nullptr };
     std::shared_ptr<DrawableInterface> m_drawable { nullptr };
-    std::vector<std::function<void(void)>> m_callbacks;
-    jt::Vector2 m_pos;
+    std::vector<std::function<void(void)>> m_callbacks {};
+    jt::Vector2 m_pos { 0.0f, 0.0f };
 
     bool m_isVisible { true };
-    bool m_isActive {true};
+    bool m_isActive { true };
 
     void doDraw() const override;
 

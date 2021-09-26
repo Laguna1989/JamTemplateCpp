@@ -85,7 +85,7 @@ protected:
 private:
     int m_skipFrames { 0 };
     float m_age { 0.0f };
-    float m_startDelay {};
+    float m_startDelay { 0.0f };
     bool m_alive { true };
     bool m_repeat { false };
 

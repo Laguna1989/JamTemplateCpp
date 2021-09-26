@@ -56,17 +56,17 @@ public:
     std::string getCurrentAnimName() const;
 
 private:
-    mutable AnimationMapType m_frames;
-    std::map<std::string, float> m_time;
+    mutable AnimationMapType m_frames {};
+    std::map<std::string, float> m_time {};
 
     // which animation is playing atm?
     std::string m_currentAnimName { "" };
     // which frame of the animation is currently displayed?
-    size_t m_currentIdx = 0;
+    size_t m_currentIdx { 0 };
 
-    jt::Vector2 m_position;
+    jt::Vector2 m_position { 0.0f, 0.0f };
 
-    float m_frameTime = 0;
+    float m_frameTime { 0.0f };
 
     void doDrawShadow(std::shared_ptr<jt::renderTarget> const sptr) const override;
     void doDraw(std::shared_ptr<jt::renderTarget> const sptr) const override;

@@ -39,7 +39,7 @@ private:
     // do never call delete on this
     b2Body* m_body { nullptr };
 
-    std::shared_ptr<Box2DWorldInterface> m_world;
+    std::shared_ptr<Box2DWorldInterface> m_world { nullptr };
 
     void doCreate() override { }
     void doUpdate(float const /*elapsed*/) override { }

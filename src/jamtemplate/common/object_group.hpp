@@ -31,13 +31,14 @@ public:
     void emplace_back(std::weak_ptr<T>&& wptr) { m_data.emplace_back(std::move(wptr)); }
 
 private:
+    std::vector<std::weak_ptr<T>> m_data {};
+
     void doUpdate(const float /*elapsed*/) override
     {
         m_data.erase(std::remove_if(m_data.begin(), m_data.end(),
                          [](std::weak_ptr<T> wptr) { return wptr.expired(); }),
             m_data.end());
     }
-    std::vector<std::weak_ptr<T>> m_data;
 };
 
 template <typename T>

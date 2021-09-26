@@ -43,8 +43,8 @@ public:
     }
 
 private:
-    jt::Color m_initialValue {};
-    jt::Color m_finalValue {};
+    jt::Color m_initialValue { jt::colors::White };
+    jt::Color m_finalValue { jt::colors::White };
 };
 
 } // namespace jt

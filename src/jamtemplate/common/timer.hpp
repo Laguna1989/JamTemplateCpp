@@ -22,9 +22,9 @@ public:
     Timer& operator=(Timer&&) = delete;
 
 private:
-    float m_timer;
-    CallbackType m_callback;
-    int m_repeat;
+    float m_timer { 0.0f };
+    CallbackType m_callback {};
+    int m_repeat { 1 };
 
     virtual void doUpdate(float const /*elapsed*/) override;
 };

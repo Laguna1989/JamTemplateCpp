@@ -25,7 +25,7 @@ public:
     void shake(float t, float strength, float shakeInterval = 0.05f) override;
 
     void update(float elapsed) override;
-    
+
     jt::Vector2 getOffset() const override;
     void setOffset(jt::Vector2 const offset) override;
 

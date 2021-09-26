@@ -3,6 +3,7 @@
 #include "game_interface.hpp"
 #include "math_helper.hpp"
 #include "shape.hpp"
+#include "state_select.hpp"
 
 RopeMass::RopeMass(jt::Vector2 pos, float m)
     : position { pos }
@@ -103,6 +104,11 @@ void StateRope::doInternalUpdate(float elapsed)
 
             integrationStep(realElapsed);
         }
+    }
+
+    if (getGame()->input()->keyboard()->justPressed(jt::KeyCode::F1)
+        || getGame()->input()->keyboard()->justPressed(jt::KeyCode::Escape)) {
+        getGame()->switchState(std::make_shared<StateSelect>());
     }
 }
 

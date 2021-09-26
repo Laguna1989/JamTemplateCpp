@@ -70,7 +70,7 @@ public:
     }
 
 private:
-    std::vector<float> m_sampleValues;
+    std::vector<float> m_sampleValues {};
 };
 
 } // namespace Noise

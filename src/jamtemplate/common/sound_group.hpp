@@ -12,7 +12,7 @@ public:
     explicit SoundGroup(std::vector<std::string> sounds);
 
 private:
-    std::vector<std::shared_ptr<SoundBase>> m_sounds;
+    std::vector<std::shared_ptr<SoundBase>> m_sounds {};
 
     virtual void doLoad(std::string const& fileName) override;
     virtual bool doIsPlaying() const override;

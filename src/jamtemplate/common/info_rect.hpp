@@ -6,10 +6,10 @@
 
 namespace jt {
 struct InfoRect {
-    Vector2 position;
-    Vector2 sizeDiagonal;
-    float rotation;
-    std::string type;
+    Vector2 position { 0.0f, 0.0f };
+    Vector2 sizeDiagonal { 0.0f, 0.0f };
+    float rotation { 0.0f };
+    std::string type { "" };
 };
 } // namespace jt
 #endif
