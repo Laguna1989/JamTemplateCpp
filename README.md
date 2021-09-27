@@ -5,9 +5,10 @@
 ## About
 
 This is the JamTemplate for kickstarting your gamejam entry. It will compile C++17 code for native (Win, Linux) and
-web (webassembly) games. Internally it uses SFLM and SDL.
+web (webassembly) games. Internally it uses [SFLM](https://www.sfml-dev.org/) and [SDL](https://www.libsdl.org/).
 
 Some games created with this JamTemplate are
+
 * [Quasar Rush](https://runvs.io/Games/quasarrush) (Native & Web, A Game By Its Cover 2021)
 * [Space Turtles](https://runvs.io/Games/spaceturtles) (Native, MultiplayerKajam 2021)
 * [Tricky Tracktor](https://runvs.io/Games/trickytractor) (Native, FrankenGameJam 2020)
