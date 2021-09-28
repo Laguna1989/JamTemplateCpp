@@ -9,6 +9,7 @@ jt::Text getText()
     t.loadFont("assets/font.ttf", 20, rt);
     return t;
 };
+
 } // namespace
 
 TEST(TextTest, InitialValues)
@@ -192,5 +193,3 @@ TEST(TextTest, TextAlignAfterSetLeft)
     t.SetTextAlign(jt::Text::TextAlign::LEFT);
     ASSERT_EQ(t.getTextAlign(), jt::Text::TextAlign::LEFT);
 }
-
-
