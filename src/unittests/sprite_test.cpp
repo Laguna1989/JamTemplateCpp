@@ -221,11 +221,10 @@ TEST(SpriteTest, GetSfSprite)
 #if ENABLE_DISPLAY_TESTS
 TEST(SpriteTest, GetPixelOutOfBounds)
 {
-    testing::FLAGS_gtest_death_test_style = "threadsafe";
     jt::Sprite s;
     s.loadSprite("assets/coin.png", jt::Recti { 0, 0, 16, 16 });
 
-    EXPECT_DEATH(s.getColorAtPixel(jt::Vector2u { 22, 25 }), "");
+    EXPECT_THROW(s.getColorAtPixel(jt::Vector2u { 22, 25 }), std::invalid_argument);
 }
 #endif
 
