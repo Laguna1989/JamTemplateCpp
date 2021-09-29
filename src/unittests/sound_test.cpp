@@ -68,88 +68,72 @@ TEST(SoundTest, SoundIsPlayingReturnsTrueAfterPlay)
     EXPECT_TRUE(s.isPlaying());
 }
 
-TEST(SoundTest, DefaultVolume)
-{
-    init();
-    Sound s {};
-    s.load("assets/test.ogg");
-    EXPECT_EQ(s.getVolume(), 100.0f);
-}
+// as loading of sound files is quite slow, this text fixture is speeding things up with static
+// initialization.
+class SoundTestWithLoadedSound : public ::testing::Test {
+private:
+    inline static bool m_initialized { false };
 
-TEST(SoundTest, GetVolumeAfterSetVolume)
+protected:
+    inline static Sound m_sound;
+    SoundTestWithLoadedSound() { initializeSound(); }
+    void initializeSound()
+    {
+        init();
+        if (!m_initialized) {
+            m_initialized = true;
+            m_sound.load("assets/test.ogg");
+        }
+    }
+};
+
+TEST_F(SoundTestWithLoadedSound, DefaultVolume) { EXPECT_EQ(m_sound.getVolume(), 100.0f); }
+
+TEST_F(SoundTestWithLoadedSound, GetVolumeAfterSetVolume)
 {
-    init();
-    Sound s {};
-    s.load("assets/test.ogg");
     float const newVolume = 25.245f;
-    s.setVolume(newVolume);
-    EXPECT_FLOAT_EQ(s.getVolume(), newVolume);
+    m_sound.setVolume(newVolume);
+    EXPECT_FLOAT_EQ(m_sound.getVolume(), newVolume);
 }
 
-TEST(SoundTest, SetVolumeZero)
+TEST_F(SoundTestWithLoadedSound, SetVolumeZero)
 {
-    init();
-    Sound s {};
-    s.load("assets/test.ogg");
     float const newVolume = 0.0f;
-    s.setVolume(newVolume);
-    EXPECT_FLOAT_EQ(s.getVolume(), newVolume);
+    m_sound.setVolume(newVolume);
+    EXPECT_FLOAT_EQ(m_sound.getVolume(), newVolume);
 }
 
-TEST(SoundTest, SetVolumeHundret)
+TEST_F(SoundTestWithLoadedSound, SetVolumeHundret)
 {
-    init();
-    Sound s {};
-    s.load("assets/test.ogg");
     float const newVolume = 100.0f;
-    s.setVolume(newVolume);
-    EXPECT_FLOAT_EQ(s.getVolume(), newVolume);
+    m_sound.setVolume(newVolume);
+    EXPECT_FLOAT_EQ(m_sound.getVolume(), newVolume);
 }
 
-TEST(SoundTest, StopDoesNothingWhenNotPlaying)
+TEST_F(SoundTestWithLoadedSound, StopDoesNothingWhenNotPlaying)
 {
-    init();
-    Sound s {};
-    s.load("assets/test.ogg");
-    ASSERT_FALSE(s.isPlaying());
-    s.stop();
-    EXPECT_FALSE(s.isPlaying());
+    m_sound.stop();
+    EXPECT_FALSE(m_sound.isPlaying());
 }
 
-TEST(SoundTest, StopPlayingSound)
+TEST_F(SoundTestWithLoadedSound, StopPlayingSound)
 {
-    init();
-    Sound s {};
-    s.load("assets/test.ogg");
-    s.play();
-    ASSERT_TRUE(s.isPlaying());
-    s.stop();
-    EXPECT_FALSE(s.isPlaying());
+    m_sound.play();
+    m_sound.stop();
+    EXPECT_FALSE(m_sound.isPlaying());
 }
 
-TEST(SoundTest, GetLoopReturnsFalseOnDefault)
+TEST_F(SoundTestWithLoadedSound, GetLoopReturnsFalseOnDefault) { EXPECT_FALSE(m_sound.getLoop()); }
+
+TEST_F(SoundTestWithLoadedSound, GetLoopAfterSetLoop)
 {
-    init();
-    Sound s {};
-    s.load("assets/test.ogg");
-    EXPECT_FALSE(s.getLoop());
+    m_sound.setLoop(true);
+    EXPECT_TRUE(m_sound.getLoop());
 }
 
-TEST(SoundTest, GetLoopAfterSetLoop)
+TEST_F(SoundTestWithLoadedSound, GetPositionAfterLoad)
 {
-    init();
-    Sound s {};
-    s.load("assets/test.ogg");
-    s.setLoop(true);
-    EXPECT_TRUE(s.getLoop());
-}
-
-TEST(SoundTest, GetPositionAfterLoad)
-{
-    init();
-    Sound s {};
-    s.load("assets/test.ogg");
-    EXPECT_FLOAT_EQ(s.getPosition(), 0.0f);
+    EXPECT_FLOAT_EQ(m_sound.getPosition(), 0.0f);
 }
 
 TEST(SoundCornerCaseTests, LoadTwice)
@@ -168,66 +152,48 @@ TEST(SoundCornerCaseTests, DeleteWithoutLoad)
     }
 }
 
-TEST(SoundCornerCaseTests, PlayTwice)
+TEST_F(SoundTestWithLoadedSound, PlayTwice)
 {
-    init();
-    Sound s {};
-    s.load("assets/test.ogg");
-    EXPECT_NO_THROW(s.play());
-    EXPECT_NO_THROW(s.play());
+    m_sound.play();
+    EXPECT_NO_THROW(m_sound.play());
 }
 
-TEST(SoundCornerCaseTests, StopTwice)
+TEST_F(SoundTestWithLoadedSound, StopTwice)
 {
-    init();
-    Sound s {};
-    s.load("assets/test.ogg");
-    EXPECT_NO_THROW(s.play());
-    EXPECT_NO_THROW(s.stop());
-    EXPECT_NO_THROW(s.stop());
+    m_sound.play();
+    m_sound.stop();
+    EXPECT_NO_THROW(m_sound.stop());
 }
 
-TEST(SoundCornerCaseTests, PlayAfterStop)
+TEST_F(SoundTestWithLoadedSound, PlayAfterStop)
 {
-    init();
-    Sound s {};
-    s.load("assets/test.ogg");
-    EXPECT_NO_THROW(s.play());
-    EXPECT_NO_THROW(s.stop());
-    EXPECT_NO_THROW(s.play());
+    m_sound.play();
+    m_sound.stop();
+    EXPECT_NO_THROW(m_sound.play());
 }
 
-TEST(SoundCornerCaseTests, SetVolumeWhilePlaying)
+TEST_F(SoundTestWithLoadedSound, SetVolumeWhilePlaying)
 {
-    init();
-    Sound s {};
-    s.load("assets/test.ogg");
-    EXPECT_NO_THROW(s.play());
-    ASSERT_TRUE(s.isPlaying());
-    EXPECT_NO_THROW(s.setVolume(55.5f));
-    EXPECT_NO_THROW(s.setVolume(2.5f));
-    EXPECT_NO_THROW(s.setVolume(100.0f));
+    EXPECT_NO_THROW(m_sound.play());
+    ASSERT_TRUE(m_sound.isPlaying());
+    EXPECT_NO_THROW(m_sound.setVolume(55.5f));
+    EXPECT_NO_THROW(m_sound.setVolume(2.5f));
+    EXPECT_NO_THROW(m_sound.setVolume(100.0f));
 }
 
 #ifndef ENABLE_WEB
 
-TEST(SoundTest, GetPositionAfterPlay)
+TEST_F(SoundTestWithLoadedSound, GetPositionAfterPlay)
 {
-    init();
-    Sound s {};
-    s.load("assets/test.ogg");
-    s.play();
+    m_sound.play();
     // note: play will happen in another thread, so in order to progress the
     // position, this test needs to sleep a bit.
     std::this_thread::sleep_for(std::chrono::milliseconds { 100U });
-    EXPECT_NE(s.getPosition(), 0.0f);
+    EXPECT_NE(m_sound.getPosition(), 0.0f);
 }
-TEST(SoundTest, GetDurationReturnsExpectedValue)
+TEST_F(SoundTestWithLoadedSound, GetDurationReturnsExpectedValue)
 {
-    init();
-    Sound s {};
-    s.load("assets/test.ogg");
-    auto const d = s.getDuration();
+    auto const d = m_sound.getDuration();
     float const expected { 0.262721002f };
     EXPECT_FLOAT_EQ(d, expected);
 }
