@@ -27,7 +27,7 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: CMake
-        run: cmake -B ${{github.workspace}}/build -DENABLE_DISPLAY_TESTS=OFF -DENABLE_COVERAGE=ON .
+        run: cmake -B ${{github.workspace}}/build -DENABLE_DISPLAY_TESTS=OFF .
 
       - name: Build
         working-directory: ${{github.workspace}}/build
@@ -84,3 +84,58 @@ jobs:
       - name: Build
         working-directory: ${{github.workspace}}/build
         run: emmake make
+
+  CodeCoverage:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up cmake
+        uses: jwlawson/actions-setup-cmake@v1.10
+        with:
+          cmake-version: '3.19.x'
+
+      - name: Set up gcc
+        uses: egor-tensin/setup-gcc@v1
+        with:
+          version: 9
+          platform: x64
+
+      - name: Set up SFML
+        run: sudo apt-get install -y libsfml-dev
+
+      - name: Set up cpp-coveralls
+        run: pip install --user cpp-coveralls
+
+      - uses: actions/checkout@v2
+
+      - name: CMake
+        run: |
+          cmake \
+          -DENABLE_DISPLAY_TESTS=OFF \
+          -DENABLE_COVERAGE=ON .
+
+      - name: Build
+        run: make -j 4
+
+      - name: Test
+        uses: GabrielBB/xvfb-action@v1
+        with:
+          run: ./UnitTests
+          working-directory: ${{github.workspace}}/src/unittests
+
+      - name: Coveralls
+        working-directory: ${{github.workspace}}
+        run: |
+          coveralls \
+          -t ${{ secrets.coveralls_token }} \
+          -e _deps \
+          -e ext \
+          -e src/game \
+          -e src/stresstests \
+          -e src/unittests \
+          -e src/jamtemplate/sdl \
+          -e src/jamtemplate/sfml/keyboard_input_lib.cpp \
+          -e src/jamtemplate/sfml/mouse_input_lib.cpp \
+          -e src/jamtemplate/sfml/sound.cpp \
+          -e src/jamtemplate/sfml/music_player.cpp \
+          --gcov-options '\-lp'
+
