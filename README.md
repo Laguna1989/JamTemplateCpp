@@ -82,12 +82,13 @@ e.g. calling `cmake ../ -DENABLE_UNITTESTS=ON -DENABLE_STRESSTEST=ON`
 
 ## Code Coverage
 
-Code Coverage can be investigated at [coveralls](https://coveralls.io/github/Laguna1989/JamTemplateCpp).
+Code Coverage can is reported via [coveralls](https://coveralls.io/github/Laguna1989/JamTemplateCpp).
 
-If you want to perform a local run, this code coverage helper command might be helpful for future reference:
+Unfortunately there seem to be some artifacts, which lead to a lower than actual coverage.
+
+A local run (Without the artifacts) can be executed
+via [OpenCppCoverage](https://github.com/OpenCppCoverage/OpenCppCoverage). The command :
 
 ```
 OpenCppCoverage.exe --sources C:\projects\JamTemplateCpp\* --excluded_sources C:\projects\JamTemplateCpp\src\UnitTests\* --excluded_sources C:\projects\JamTemplateCpp\src\StressTest\* --excluded_sources C:\projects\JamTemplateCpp\ext\*  -- build\Debug\UnitTests.exe
 ```
-
-[OpenCppCoverage](https://github.com/OpenCppCoverage/OpenCppCoverage) is required for this.
