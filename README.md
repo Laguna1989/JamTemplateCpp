@@ -5,7 +5,7 @@
 ## About
 
 This is the JamTemplate for kickstarting your gamejam entry. It will compile C++17 code for native (Win, Linux) and
-web (webassembly) games. Internally it uses [SFLM](https://www.sfml-dev.org/) and [SDL](https://www.libsdl.org/).
+web (webassembly) games. Internally it uses [SFML](https://www.sfml-dev.org/) and [SDL](https://www.libsdl.org/).
 
 Some games created with this JamTemplate are
 
