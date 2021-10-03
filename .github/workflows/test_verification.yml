@@ -128,7 +128,7 @@ jobs:
         working-directory: ${{github.workspace}}/build_cov/src/unittests
         run: |
           coveralls \
-          -t ${{ secrets.coveralls_token }}
+          -t ${{ secrets.coveralls_token }} \
           -e ext \
           -e src/game \
           -e src/stresstests \
