@@ -127,6 +127,7 @@ jobs:
         run: |
           coveralls \
           -t ${{ secrets.coveralls_token }} \
+          -e _deps \
           -e ext \
           -e src/game \
           -e src/stresstests \
