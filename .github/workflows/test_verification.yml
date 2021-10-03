@@ -125,6 +125,7 @@ jobs:
           working-directory: ${{github.workspace}}/build_cov/src/unittests
 
       - name: Coveralls
+        working-directory: ${{github.workspace}}/build_cov/src/unittests
         run: |
           coveralls \
           -e ext \
