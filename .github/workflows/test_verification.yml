@@ -109,9 +109,9 @@ jobs:
 
       - name: CMake
         run: |
-          cmake |
-          -B ${{github.workspace}}/build_cov |
-          -DENABLE_DISPLAY_TESTS=OFF |
+          cmake \
+          -B ${{github.workspace}}/build_cov \
+          -DENABLE_DISPLAY_TESTS=OFF \
           -DENABLE_COVERAGE=ON .
 
       - name: Build
@@ -126,15 +126,15 @@ jobs:
 
       - name: Coveralls
         run: |
-          coveralls |
-          -e src/game |
-          -e src/jamtemplate/sdl |
-          -e ext |
-          -e src/stresstests |
-          -e src/unittests |
-          -e src/jamtemplate/sfml/keyboard_input_lib.cpp |
-          -e src/jamtemplate/sfml/mouse_input_lib.cpp |
-          -e src/jamtemplate/sfml/sound.cpp |
-          -e src/jamtemplate/sfml/music_player.cpp |
+          coveralls \
+          -e ext \
+          -e src/game \
+          -e src/stresstests \
+          -e src/unittests \
+          -e src/jamtemplate/sdl \
+          -e src/jamtemplate/sfml/keyboard_input_lib.cpp \
+          -e src/jamtemplate/sfml/mouse_input_lib.cpp \
+          -e src/jamtemplate/sfml/sound.cpp \
+          -e src/jamtemplate/sfml/music_player.cpp \
           --gcov-options '\-lp'
 
