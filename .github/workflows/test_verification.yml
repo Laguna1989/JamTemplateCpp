@@ -137,5 +137,5 @@ jobs:
           -e src/jamtemplate/sfml/mouse_input_lib.cpp \
           -e src/jamtemplate/sfml/sound.cpp \
           -e src/jamtemplate/sfml/music_player.cpp \
-          --gcov-options '\-lp'
+          --gcov-options '\-m'
 
