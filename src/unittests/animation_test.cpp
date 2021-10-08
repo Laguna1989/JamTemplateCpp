@@ -1,38 +1,11 @@
 ﻿#include "animation.hpp"
 #include <gtest/gtest.h>
 #include <stdexcept>
+#include <type_traits>
 
-TEST(AnimationTest, AnimationCanBeDefaultConstructed)
+TEST(AnimationTest, IsDefaultConstructible)
 {
-    jt::Animation a;
-    SUCCEED();
-}
-
-TEST(AnimationTest, AddAnimationWithOneFrame)
-{
-    jt::Animation a;
-    a.add("assets/coin.png", "idle", { 16, 16 }, { 0 }, 1.0f);
-}
-
-TEST(AnimationTest, PlayUpdateAndDrawAnimation)
-{
-    jt::Animation a;
-    a.add("assets/coin.png", "idle", { 16, 16 }, { 0 }, 1.0f);
-    a.update(0.1f);
-    a.draw(nullptr);
-}
-
-TEST(AnimationTest, AddAnimationWithMultipleFrame)
-{
-    jt::Animation a;
-    a.add("assets/coin.png", "idle", { 16, 16 }, { 0, 1, 2, 3 }, 1.0f);
-}
-
-TEST(AnimationTest, OverwriteAnimation)
-{
-    jt::Animation a;
-    a.add("assets/coin.png", "idle", { 16, 16 }, { 0, 1, 2, 3 }, 1.0f);
-    a.add("assets/coin.png", "idle", { 16, 16 }, { 0 }, 1.0f);
+    ASSERT_TRUE(std::is_default_constructible<jt::Animation>::value);
 }
 
 TEST(AnimationTest, AddAnimationWithEmptyNameRaisesInvalidArgumentException)
@@ -42,11 +15,10 @@ TEST(AnimationTest, AddAnimationWithEmptyNameRaisesInvalidArgumentException)
         a.add("assets/coin.png", "", { 16, 16 }, { 0, 1, 2, 3 }, 1.0f), std::invalid_argument);
 }
 
-TEST(AnimationTest, AddAnimationWithFrameIndicesDoesNotRaiseInvalidArgumentException)
+TEST(AnimationTest, AddAnimationWithEmptyFrameIndicesRaisesInvalidArgumentException)
 {
     jt::Animation a;
-    EXPECT_NO_THROW(
-        a.add("assets/coin.png", "", { 16, 16 }, { }, 1.0f));
+    EXPECT_THROW(a.add("assets/coin.png", "", { 16, 16 }, {}, 1.0f), std::invalid_argument);
 }
 
 TEST(AnimationTest, AddAnimationWithNegativeTimeRaisesInvalidArgumentException)
@@ -56,196 +28,97 @@ TEST(AnimationTest, AddAnimationWithNegativeTimeRaisesInvalidArgumentException)
         a.add("assets/coin.png", "test", { 16, 16 }, { 0, 1, 2, 3 }, -0.5f), std::invalid_argument);
 }
 
-TEST(AnimationTest, GetCurrentAnimNameDefaultValue)
+TEST(AnimationTest, InitialCurrentAnimationName)
 {
     jt::Animation a {};
-    a.add("assets/coin.png", "idle", { 16, 16 }, { 0 }, 1.0f);
-    ASSERT_EQ(a.getCurrentAnimName(), "");
+    ASSERT_EQ(a.getCurrentAnimationName(), "");
 }
 
-TEST(AnimationTest, GetCurrentAnimNameAfterPlay)
+TEST(AnimationTest, UpdateWithoutPlayDoesNotRaiseException)
 {
     jt::Animation a {};
-    a.add("assets/coin.png", "idle", { 16, 16 }, { 0 }, 1.0f);
-    a.play("idle");
-    ASSERT_EQ(a.getCurrentAnimName(), "idle");
+    ASSERT_NO_THROW(a.update(0.25f));
+}
+TEST(AnimationTest, DrawWithoutPlayDoesNotRaiseException)
+{
+    jt::Animation a {};
+    ASSERT_NO_THROW(a.draw(nullptr));
 }
 
-TEST(AnimationTest, ScaleSetsScale)
+class AnimationTestWithAnimation : public ::testing::Test {
+protected:
+    jt::Animation a;
+    AnimationTestWithAnimation() { addAnimationWithFrameIndices(); }
+
+    void addAnimationWithFrameIndices(std::vector<unsigned int> frameIndices = { 0, 1, 2, 3, 4 })
+    {
+        a.add("assets/coin.png", "idle", { 16, 16 }, frameIndices, 1.0f);
+    }
+};
+
+TEST_F(AnimationTestWithAnimation, AddWillAddAnimation) { ASSERT_TRUE(a.hasAnimation("idle")); }
+
+TEST_F(AnimationTestWithAnimation, AddWillAddAnimationWithSingleFrame)
 {
-    jt::Animation a {};
-    a.add("assets/coin.png", "idle", { 16, 16 }, { 0 }, 1.0f);
-    a.play("idle");
-    a.setScale(jt::Vector2 { 100.0f, 100.0f });
-    auto const result = a.getScale();
-    EXPECT_FLOAT_EQ(result.x(), 100.0f);
-    EXPECT_FLOAT_EQ(result.y(), 100.0f);
+    addAnimationWithFrameIndices({ 0 });
+    ASSERT_TRUE(a.hasAnimation("idle"));
 }
 
-TEST(AnimationTest, SetPosition)
+TEST_F(AnimationTestWithAnimation, OverwriteAnimation)
 {
-    jt::Animation a {};
     a.add("assets/coin.png", "idle", { 16, 16 }, { 0 }, 1.0f);
-    a.play("idle");
-    a.setPosition(jt::Vector2 { 100.0f, 100.0f });
-    auto const result = a.getPosition();
-    EXPECT_FLOAT_EQ(result.x(), 100.0f);
-    EXPECT_FLOAT_EQ(result.y(), 100.0f);
+    ASSERT_TRUE(a.hasAnimation("idle"));
 }
 
-TEST(AnimationTest, SetOriginSetsOrigin)
+TEST_F(AnimationTestWithAnimation, GetColorWithoutPlayWillRaisInvalidArgument)
 {
-    jt::Animation a {};
-    a.add("assets/coin.png", "idle", { 16, 16 }, { 0 }, 1.0f);
-    a.play("idle");
-    a.setOrigin(jt::Vector2 { 100.0f, 100.0f });
-    auto const result = a.getOrigin();
-    EXPECT_FLOAT_EQ(result.x(), 100.0f);
-    EXPECT_FLOAT_EQ(result.y(), 100.0f);
-}
-
-TEST(AnimationTest, CanBeDrawnWithNullptrRenderTarget)
-{
-    jt::Animation a {};
-    a.add("assets/coin.png", "idle", { 16, 16 }, { 0 }, 1.0f);
-    a.play("idle");
-    a.update(0.1f);
-    a.draw(nullptr);
-
-    SUCCEED();
-}
-
-TEST(AnimationTest, SetColor)
-{
-    jt::Animation a {};
-    a.add("assets/coin.png", "idle", { 16, 16 }, { 0 }, 1.0f);
-    a.play("idle");
-    a.setColor(jt::colors::Red);
-    ASSERT_EQ(a.getColor(), jt::colors::Red);
-}
-
-TEST(AnimationTest, GetColorWithoutPlay)
-{
-    jt::Animation a {};
-    a.add("assets/coin.png", "idle", { 16, 16 }, { 0 }, 1.0f);
     EXPECT_THROW(a.getColor(), std::invalid_argument);
 }
 
-TEST(AnimationTest, PlayInvalidAnimation)
+TEST_F(AnimationTestWithAnimation, PlayInvalidAnimationWillRaiseInvalidArgument)
 {
-    jt::Animation a {};
-    a.add("assets/coin.png", "idle", { 16, 16 }, { 0 }, 1.0f);
     EXPECT_THROW(a.play("test1234_invalid"), std::invalid_argument);
 }
 
-TEST(AnimationTest, RotateHasNoEffect)
+class AnimationPlayingTest : public ::testing::Test {
+protected:
+    jt::Animation a;
+    AnimationPlayingTest()
+    {
+        a.add("assets/coin.png", "idle", { 16, 16 }, { 0, 1, 2, 3, 4 }, 1.0f);
+        a.play("idle");
+    }
+};
+
+TEST_F(AnimationPlayingTest, NumberOfFrames)
 {
-    jt::Animation a {};
+    EXPECT_EQ(a.getNumberOfFramesInCurrentAnimation(), 5);
+}
+
+TEST_F(AnimationPlayingTest, SingleFrameTime)
+{
+    EXPECT_FLOAT_EQ(a.getCurrentAnimSingleFrameTime(), 1.0f);
+}
+
+TEST_F(AnimationPlayingTest, TotalFrameTime) { EXPECT_FLOAT_EQ(a.getCurrentAnimTotalTime(), 5.0f); }
+
+TEST_F(AnimationPlayingTest, UpdateSwitchesAnimationIndex) { a.update(10.0f); }
+
+TEST_F(AnimationPlayingTest, CurrentAnimationNameAfterPlay)
+{
+    ASSERT_EQ(a.getCurrentAnimationName(), "idle");
+}
+
+TEST_F(AnimationPlayingTest, RotateHasNoEffect)
+{
     auto const angle = 22.0f;
-    a.add("assets/coin.png", "idle", { 16, 16 }, { 0 }, 1.0f);
-    a.play("idle");
     a.setRotation(angle);
     EXPECT_FLOAT_EQ(a.getRotation(), angle);
 }
 
-TEST(AnimationTest, AnimationCanBeFlashed)
+TEST_F(AnimationPlayingTest, AnimationCanBeFlashed)
 {
-    jt::Animation a {};
-    a.add("assets/coin.png", "idle", { 16, 16 }, { 0 }, 1.0f);
-    a.play("idle");
     a.flash(1.0f);
     a.update(0.1f);
     a.draw(nullptr);
-    SUCCEED();
-}
-
-TEST(AnimationTest, GetFlashColor)
-{
-    jt::Animation a {};
-    a.add("assets/coin.png", "idle", { 16, 16 }, { 0 }, 1.0f);
-    a.play("idle");
-    a.flash(1.0f, jt::colors::White);
-
-    EXPECT_EQ(a.getFlashColor(), jt::colors::White);
-}
-
-TEST(AnimationTest, SetShadowGroup)
-{
-    jt::Animation a {};
-    a.add("assets/coin.png", "idle", { 16, 16 }, { 0 }, 1.0f);
-    a.play("idle");
-    a.setShadow(jt::colors::Black, { 3.0f, 3.0f });
-
-    EXPECT_TRUE(a.getShadowActive());
-    EXPECT_EQ(a.getShadowColor(), jt::colors::Black);
-    EXPECT_EQ(a.getShadowOffset().x(), 3.0f);
-    EXPECT_EQ(a.getShadowOffset().y(), 3.0f);
-}
-
-TEST(AnimationTest, SetShadowIndividual)
-{
-    jt::Animation a {};
-    a.add("assets/coin.png", "idle", { 16, 16 }, { 0 }, 1.0f);
-    a.play("idle");
-    a.setShadowActive(true);
-    a.setShadowColor(jt::colors::Black);
-    a.setShadowOffset({ 3.0f, 3.0f });
-
-    EXPECT_TRUE(a.getShadowActive());
-    EXPECT_EQ(a.getShadowColor(), jt::colors::Black);
-    EXPECT_EQ(a.getShadowOffset().x(), 3.0f);
-    EXPECT_EQ(a.getShadowOffset().y(), 3.0f);
-}
-
-TEST(AnimationTest, Times)
-{
-    jt::Animation a {};
-    a.add("assets/coin.png", "idle", { 16, 16 }, { 0, 1, 2, 3 }, 1.0f);
-    a.play("idle");
-    EXPECT_EQ(a.getCurrentAnimFrames(), 4);
-    EXPECT_FLOAT_EQ(a.getCurrentAnimSingleFrameTime(), 1.0f);
-    EXPECT_FLOAT_EQ(a.getCurrentAnimTotalTime(), 4.0f);
-}
-
-TEST(AnimationTest, UpdateSwitchesAnimationIndex)
-{
-    jt::Animation a {};
-    a.add("assets/coin.png", "idle", { 16, 16 }, { 0, 1 }, 1.0f);
-    a.play("idle");
-
-    a.update(10.0f);
-
-    SUCCEED();
-}
-
-TEST(AnimationTest, LocalBounds)
-{
-    jt::Animation a {};
-    a.add("assets/coin.png", "idle", { 16, 16 }, { 0, 1 }, 1.0f);
-    a.play("idle");
-
-    auto const bounds = a.getLocalBounds();
-    EXPECT_FLOAT_EQ(bounds.left(), 0.0f);
-    EXPECT_FLOAT_EQ(bounds.top(), 0.0f);
-
-    EXPECT_FLOAT_EQ(bounds.height(), 16.0f);
-    EXPECT_FLOAT_EQ(bounds.width(), 16.0f);
-
-    SUCCEED();
-}
-
-TEST(AnimationTest, GlobalBounds)
-{
-    jt::Animation a {};
-    a.add("assets/coin.png", "idle", { 16, 16 }, { 0, 1 }, 1.0f);
-    a.play("idle");
-
-    auto const bounds = a.getGlobalBounds();
-    EXPECT_FLOAT_EQ(bounds.left(), 0.0f);
-    EXPECT_FLOAT_EQ(bounds.top(), 0.0f);
-
-    EXPECT_FLOAT_EQ(bounds.height(), 16.0f);
-    EXPECT_FLOAT_EQ(bounds.width(), 16.0f);
-
-    SUCCEED();
 }

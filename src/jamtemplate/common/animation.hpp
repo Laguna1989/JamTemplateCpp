@@ -22,6 +22,7 @@ public:
     void add(std::string const& fileName, std::string const& animName, jt::Vector2u const& size,
         std::vector<unsigned int> const& frameIndices, float frameTime);
 
+    bool hasAnimation(std::string const& animName) const;
     // start playing an animation from the pool.
     void play(std::string const& animName, size_t startFrame = 0, bool restart = false);
 
@@ -51,9 +52,9 @@ public:
 
     float getCurrentAnimSingleFrameTime() const;
     float getCurrentAnimTotalTime() const;
-    std::size_t getCurrentAnimFrames() const;
+    std::size_t getNumberOfFramesInCurrentAnimation() const;
 
-    std::string getCurrentAnimName() const;
+    std::string getCurrentAnimationName() const;
 
 private:
     mutable AnimationMapType m_frames {};

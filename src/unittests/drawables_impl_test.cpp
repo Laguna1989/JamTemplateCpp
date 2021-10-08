@@ -138,6 +138,12 @@ TEST_P(DrawableImplTestFixture, DrawWithoutUpdate)
     drawable->draw(rt);
 }
 
+TEST_P(DrawableImplTestFixture, DrawWithNullptr)
+{
+    std::shared_ptr<jt::DrawableInterface> drawable = GetParam();
+    drawable->draw(nullptr);
+}
+
 TEST_P(DrawableImplTestFixture, Draw)
 {
     std::shared_ptr<jt::DrawableInterface> drawable = GetParam();
@@ -204,6 +210,8 @@ TEST_P(DrawableImplTestFixture, DrawScaled)
     drawable->draw(rt);
 }
 
+// TODO TestRotation
+
 TEST_P(DrawableImplTestFixture, DrawRotated)
 {
     std::shared_ptr<jt::DrawableInterface> drawable = GetParam();
@@ -227,6 +235,8 @@ TEST_P(DrawableImplTestFixture, GetFlashColorAfterSet)
     drawable->setFlashColor(jt::colors::Yellow);
     ASSERT_EQ(drawable->getFlashColor(), jt::colors::Yellow);
 }
+
+// TODO Flash
 
 TEST_P(DrawableImplTestFixture, GetShadowColorReturnsBlackByDefault)
 {
