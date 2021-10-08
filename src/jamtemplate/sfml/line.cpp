@@ -13,6 +13,9 @@ void jt::Line::doUpdate(float /*elapsed*/) { }
 
 void jt::Line::doDraw(std::shared_ptr<jt::renderTarget> const sptr) const
 {
+    if (!sptr) {
+        return;
+    }
     auto const startPosition = getPosition() + getShakeOffset() + getOffset() + getCamOffset();
     auto const endPosition = startPosition
         + jt::Vector2 { m_lineVector.x() * m_scale.x(), m_lineVector.y() * m_scale.y() };

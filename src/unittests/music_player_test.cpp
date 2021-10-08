@@ -35,3 +35,17 @@ TEST(MusicPlayerTest, VolumeResetAfterPlay)
     player.PlayMusic("assets/test.wav");
     ASSERT_EQ(player.GetMusicVolume(), 100.0f);
 }
+
+TEST(MusicPlayerTest, StopWithoutPlay)
+{
+    jt::MusicPlayer player {};
+
+    player.StopMusic();
+}
+
+TEST(MusicPlayerTest, StopAfterPlay)
+{
+    jt::MusicPlayer player {};
+    player.PlayMusic("assets/test.wav");
+    player.StopMusic();
+}

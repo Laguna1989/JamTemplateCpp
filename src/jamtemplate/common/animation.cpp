@@ -26,7 +26,7 @@ void Animation::add(std::string const& fileName, std::string const& animName,
     jt::Vector2u const& size, std::vector<unsigned int> const& frameIndices, float frameTime)
 {
     if (frameIndices.empty())
-        return;
+        throw std::invalid_argument { "animation frame indices are empty." };
     if (animName.empty()) {
         throw std::invalid_argument { "animation name is empty." };
     }
@@ -48,6 +48,8 @@ void Animation::add(std::string const& fileName, std::string const& animName,
         m_frames[animName].push_back(sptr);
     }
 }
+
+bool Animation::hasAnimation(std::string const& animName) const { return m_frames.count(animName); }
 
 void Animation::play(std::string const& animName, size_t startFrame, bool restart)
 {
@@ -228,11 +230,12 @@ void Animation::doRotate(float rot)
 float Animation::getCurrentAnimSingleFrameTime() const { return m_time.at(m_currentAnimName); }
 float Animation::getCurrentAnimTotalTime() const
 {
-    return getCurrentAnimSingleFrameTime() * getCurrentAnimFrames();
+    return getCurrentAnimSingleFrameTime() * getNumberOfFramesInCurrentAnimation();
 }
-std::size_t Animation::getCurrentAnimFrames() const
+std::size_t Animation::getNumberOfFramesInCurrentAnimation() const
 {
     return m_frames.at(m_currentAnimName).size();
 }
-std::string Animation::getCurrentAnimName() const { return m_currentAnimName; }
+std::string Animation::getCurrentAnimationName() const { return m_currentAnimName; }
+
 } // namespace jt
