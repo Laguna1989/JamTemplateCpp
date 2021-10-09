@@ -12,6 +12,8 @@ class DrawableInterface {
 public:
     using Sptr = std::shared_ptr<DrawableInterface>;
 
+    virtual ~DrawableInterface() = default;
+
     virtual void draw(std::shared_ptr<jt::renderTarget> sptr) const = 0;
 
     virtual void flash(float t, jt::Color col = jt::colors::White) = 0;

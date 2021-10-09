@@ -29,10 +29,16 @@ if (USE_SFML)
     endif ()
 
 else ()
-    include_directories(JamTemplate ${SDL2_INCLUDE_DIRS})
     target_include_directories(JamTemplate PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/sdl)
+    if (NOT ENABLE_WEB)
+        include_directories(JamTemplate ${SDL2_INCLUDE_DIRS})
 
-    target_link_libraries(JamTemplate ${SDL2_LIBRARIES})
+        target_link_libraries(JamTemplate ${SDL2_LIBRARIES})
+        target_link_libraries(JamTemplate PkgConfig::SDL2_Mixer)
+        target_link_libraries(JamTemplate PkgConfig::SDL2_Image)
+        target_link_libraries(JamTemplate PkgConfig::SDL2_TTF)
+
+    endif ()
 endif ()
 
 target_link_libraries(JamTemplate Box2D)

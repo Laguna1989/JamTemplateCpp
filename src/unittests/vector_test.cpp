@@ -197,9 +197,7 @@ TEST(Vector2U, MoveConstructor)
     EXPECT_EQ(vec1.y(), 3);
 }
 
-
-
-#if !ENABLE_WEB
+#if USE_SFML
 
 TEST(Vector2U, ToSfVector)
 {

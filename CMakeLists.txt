@@ -26,12 +26,20 @@ endif ()
 #####################################################
 ## Set link directories
 #####################################################
+
 if (USE_SFML)
     if (WIN32 OR APPLE)
         link_directories(${SFML_DIR_ROOT}/lib)
     endif ()
-elseif ()
-    find_package(SDL2 REQUIRED)
+else ()
+    if (NOT ENABLE_WEB)
+        find_package(SDL2 REQUIRED)
+
+        include(FindPkgConfig)
+        pkg_check_modules(SDL2_Mixer REQUIRED IMPORTED_TARGET SDL2_mixer)
+        pkg_check_modules(SDL2_Image REQUIRED IMPORTED_TARGET SDL2_image)
+        pkg_check_modules(SDL2_TTF REQUIRED IMPORTED_TARGET SDL2_ttf)
+    endif ()
 endif ()
 
 ## Other variables and compiler setup

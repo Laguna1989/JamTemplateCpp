@@ -1,16 +1,16 @@
 set(ENABLE_UNITTESTS ON CACHE BOOL "enable unittests")
 set(ENABLE_STRESSTESTS ON CACHE BOOL "enable stresstests")
 set(ENABLE_COVERAGE OFF CACHE BOOL "enable coverage")
-# if USE_SFML is OFF, SDL will be used
-set(USE_SFML ON CACHE BOOL "Used SFML as Library")
 set(ENABLE_WEB OFF CACHE BOOL "enable web build using SDL and em++")
 set(ENABLE_DISPLAY_TESTS ON CACHE BOOL "enable unittests that require a display")
 
 # if ENABLE_WEB is ON, it is required to use SDL
 if (ENABLE_WEB)
-    set(USE_SFLM OFF)
+    set(USE_SFML OFF CACHE BOOL "Used SFML as Library")
     set(USE_SDL ON)
     add_definitions(-DENABLE_WEB)
+else ()
+    set(USE_SFML ON CACHE BOOL "Used SFML as Library")
 endif ()
 
 if (USE_SFML)

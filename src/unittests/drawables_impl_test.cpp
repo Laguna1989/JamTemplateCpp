@@ -131,12 +131,14 @@ TEST_P(DrawableImplTestFixture, GetScaleAfterSetScale)
     ASSERT_EQ(drawable->getScale(), expected);
 }
 
+#if USE_SFML
 TEST_P(DrawableImplTestFixture, DrawWithoutUpdate)
 {
     std::shared_ptr<jt::DrawableInterface> drawable = GetParam();
     auto rt = std::make_shared<jt::renderTarget>();
     drawable->draw(rt);
 }
+#endif
 
 TEST_P(DrawableImplTestFixture, DrawWithNullptr)
 {
@@ -144,6 +146,7 @@ TEST_P(DrawableImplTestFixture, DrawWithNullptr)
     drawable->draw(nullptr);
 }
 
+#if USE_SFML
 TEST_P(DrawableImplTestFixture, Draw)
 {
     std::shared_ptr<jt::DrawableInterface> drawable = GetParam();
@@ -161,6 +164,7 @@ TEST_P(DrawableImplTestFixture, DrawWithShadow)
     auto rt = std::make_shared<jt::renderTarget>();
     drawable->draw(rt);
 }
+#endif
 
 TEST_P(DrawableImplTestFixture, GetColorAfterSetColor)
 {
@@ -168,7 +172,7 @@ TEST_P(DrawableImplTestFixture, GetColorAfterSetColor)
     drawable->setColor(jt::colors::Red);
     ASSERT_EQ(drawable->getColor(), jt::colors::Red);
 }
-
+#if USE_SFML
 TEST_P(DrawableImplTestFixture, DrawWithSetColor)
 {
     std::shared_ptr<jt::DrawableInterface> drawable = GetParam();
@@ -209,6 +213,7 @@ TEST_P(DrawableImplTestFixture, DrawScaled)
     jt::DrawableImpl::setCamOffset(jt::Vector2 { 100.0f, 100.0f });
     drawable->draw(rt);
 }
+#endif
 
 TEST_P(DrawableImplTestFixture, InitialRotations)
 {
@@ -222,7 +227,7 @@ TEST_P(DrawableImplTestFixture, RotateSetsRotation)
     drawable->setRotation(22.5f);
     ASSERT_FLOAT_EQ(drawable->getRotation(), 22.5f);
 }
-
+#if USE_SFML
 TEST_P(DrawableImplTestFixture, DrawRotated)
 {
     std::shared_ptr<jt::DrawableInterface> drawable = GetParam();
@@ -233,6 +238,7 @@ TEST_P(DrawableImplTestFixture, DrawRotated)
     jt::DrawableImpl::setCamOffset(jt::Vector2 { 100.0f, 100.0f });
     drawable->draw(rt);
 }
+#endif
 
 TEST_P(DrawableImplTestFixture, GetFlashColorReturnsWhiteByDefault)
 {

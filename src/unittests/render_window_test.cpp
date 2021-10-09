@@ -50,6 +50,7 @@ TEST(RenderwindowTest, Display)
     rw.display();
 }
 
+#if USE_SFML
 TEST(RenderWindowTest, GetMousePositionWithoutView)
 {
     jt::RenderWindow rw { 100, 200, "test" };
@@ -69,6 +70,7 @@ TEST(RenderWindowTest, GetMousePositionWithView)
     jt::Vector2 const expected { 0.0f, 0.0f };
     EXPECT_NE(rw.getMousePosition(), expected);
 }
+#endif
 
 TEST(RenderWindowTest, GetMousePositionOnScreen)
 {

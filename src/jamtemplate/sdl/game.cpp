@@ -6,10 +6,15 @@
 #include "rect.hpp"
 #include "texture_manager.hpp"
 #include "vector.hpp"
-#include <SDL.h>
+
+#include <SDL2/SDL.h>
 #include <SDL2/SDL_mixer.h>
 #include <SDL_ttf.h>
+
+#ifdef ENABLE_WEB
 #include <emscripten.h>
+#endif
+
 #include <iostream>
 
 namespace jt {
@@ -46,7 +51,9 @@ void Game::setupRenderTarget() { }
 void Game::startGame(std::shared_ptr<GameState> InitialState, GameLoopFunctionPtr gameloop_function)
 {
     switchState(InitialState);
+#ifdef ENABLE_WEB
     emscripten_set_main_loop(gameloop_function, 0, 1);
+#endif
 }
 
 void Game::setRenderTarget(std::shared_ptr<jt::renderTarget> rt)

@@ -193,9 +193,8 @@ TEST(SpriteTest, RotationAfterSetRotation)
     EXPECT_FLOAT_EQ(s.getRotation(), expectedRotation);
 }
 
-#if ENABLE_WEB
+#if USE_SFML
 
-#else
 TEST(SpriteTest, LoadSpriteFromTexture)
 {
     sf::Texture t;

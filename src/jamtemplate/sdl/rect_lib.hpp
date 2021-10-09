@@ -2,7 +2,7 @@
 #define GUARD_JAMTEMPLATE_RECT_LIB_GUARD_HPP
 
 #include "rect_base.hpp"
-#include <SDL.h>
+#include <SDL2/SDL.h>
 
 namespace jt {
 

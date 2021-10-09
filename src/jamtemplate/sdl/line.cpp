@@ -1,6 +1,6 @@
 #include "line.hpp"
 #include "math_helper.hpp"
-#include <SDL.h>
+#include <SDL2/SDL.h>
 
 jt::Line::Line(jt::Vector2 lineVector)
     : m_lineVector { lineVector }

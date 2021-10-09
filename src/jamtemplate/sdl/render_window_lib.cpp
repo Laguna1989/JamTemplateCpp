@@ -1,6 +1,6 @@
 ﻿#include "render_window_lib.hpp"
+#include <SDL2/SDL.h>
 #include <iostream>
-#include <SDL.h>
 
 namespace jt {
 
@@ -73,9 +73,6 @@ void RenderWindow::setMouseCursorVisible(bool visible)
     m_isMouseCursorVisible = visible;
 }
 
-bool RenderWindow::getMouseCursorVisible() const
-{
-    return m_isMouseCursorVisible;
-}
+bool RenderWindow::getMouseCursorVisible() const { return m_isMouseCursorVisible; }
 
 } // namespace jt

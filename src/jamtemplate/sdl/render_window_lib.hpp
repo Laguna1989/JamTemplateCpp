@@ -3,7 +3,7 @@
 
 #include "render_window_interface.hpp"
 #include "sprite.hpp"
-#include <SDL.h>
+#include <SDL2/SDL.h>
 #include <memory>
 
 namespace jt {
@@ -30,7 +30,7 @@ public:
 private:
     std::shared_ptr<SDL_Window> m_window;
     jt::Vector2 m_size;
-    bool m_isMouseCursorVisible{true};
+    bool m_isMouseCursorVisible { true };
 };
 } // namespace jt
 

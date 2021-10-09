@@ -5,7 +5,7 @@
 #include "drawable_impl.hpp"
 #include "render_target.hpp"
 #include "vector.hpp"
-#include <SDL.h>
+#include <SDL2/SDL.h>
 #include <memory>
 #include <string>
 
@@ -52,7 +52,7 @@ private:
     jt::Color m_color { jt::colors::White };
     jt::Vector2 m_scale { 1.0f, 1.0f };
     jt::Vector2 m_origin { 0.0f, 0.0f };
-    jt::Vector2 m_offsetFromOrigin {0.0f, 0.0f};
+    jt::Vector2 m_offsetFromOrigin { 0.0f, 0.0f };
 
     mutable std::shared_ptr<SDL_Texture> m_textFlash;
     jt::Color m_colorFlash { jt::colors::White };
