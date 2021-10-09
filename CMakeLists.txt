@@ -26,10 +26,12 @@ endif ()
 #####################################################
 ## Set link directories
 #####################################################
-if (NOT USE_SFML)
+if (USE_SFML)
     if (WIN32 OR APPLE)
         link_directories(${SFML_DIR_ROOT}/lib)
     endif ()
+elseif ()
+    find_package(SDL2 REQUIRED)
 endif ()
 
 ## Other variables and compiler setup

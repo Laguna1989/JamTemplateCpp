@@ -15,11 +15,7 @@ target_include_directories(JamTemplate SYSTEM PUBLIC ${tileson_SOURCE_DIR}/inclu
 if (USE_SFML)
     target_include_directories(JamTemplate PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/sfml)
     target_include_directories(JamTemplate SYSTEM PUBLIC ${SFML_DIR_ROOT}/include)
-else ()
-    target_include_directories(JamTemplate PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/sdl)
-endif ()
 
-if (USE_SFML)
     target_link_libraries(JamTemplate optimized sfml-system)
     target_link_libraries(JamTemplate optimized sfml-window)
     target_link_libraries(JamTemplate optimized sfml-graphics)
@@ -31,6 +27,12 @@ if (USE_SFML)
         target_link_libraries(JamTemplate debug sfml-graphics-d)
         target_link_libraries(JamTemplate debug sfml-audio-d)
     endif ()
+
+else ()
+    include_directories(JamTemplate ${SDL2_INCLUDE_DIRS})
+    target_include_directories(JamTemplate PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/sdl)
+
+    target_link_libraries(JamTemplate ${SDL2_LIBRARIES})
 endif ()
 
 target_link_libraries(JamTemplate Box2D)
