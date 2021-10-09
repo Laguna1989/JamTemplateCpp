@@ -44,10 +44,9 @@ static T bounce(T const& a, T const& b, T t)
     } else if (t < (2.5 / 2.75)) {
         float postFix = t -= (2.25f / 2.75f);
         return b * (7.5625f * (postFix)*t + .9375f) + a;
-    } else {
-        float postFix = t -= (2.625f / 2.75f);
-        return b * (7.5625f * (postFix)*t + .984375f) + a;
     }
+    float postFix = t -= (2.625f / 2.75f);
+    return b * (7.5625f * (postFix)*t + .984375f) + a;
 }
 
 template <typename T>
