@@ -11,20 +11,20 @@ TEST(AnimationTest, IsDefaultConstructible)
 TEST(AnimationTest, AddAnimationWithEmptyNameRaisesInvalidArgumentException)
 {
     jt::Animation a;
-    EXPECT_THROW(
+    ASSERT_THROW(
         a.add("assets/coin.png", "", { 16, 16 }, { 0, 1, 2, 3 }, 1.0f), std::invalid_argument);
 }
 
 TEST(AnimationTest, AddAnimationWithEmptyFrameIndicesRaisesInvalidArgumentException)
 {
     jt::Animation a;
-    EXPECT_THROW(a.add("assets/coin.png", "", { 16, 16 }, {}, 1.0f), std::invalid_argument);
+    ASSERT_THROW(a.add("assets/coin.png", "", { 16, 16 }, {}, 1.0f), std::invalid_argument);
 }
 
 TEST(AnimationTest, AddAnimationWithNegativeTimeRaisesInvalidArgumentException)
 {
     jt::Animation a;
-    EXPECT_THROW(
+    ASSERT_THROW(
         a.add("assets/coin.png", "test", { 16, 16 }, { 0, 1, 2, 3 }, -0.5f), std::invalid_argument);
 }
 
@@ -72,12 +72,12 @@ TEST_F(AnimationTestWithAnimation, OverwriteAnimation)
 
 TEST_F(AnimationTestWithAnimation, GetColorWithoutPlayWillRaisInvalidArgument)
 {
-    EXPECT_THROW(a.getColor(), std::invalid_argument);
+    ASSERT_THROW(a.getColor(), std::invalid_argument);
 }
 
 TEST_F(AnimationTestWithAnimation, PlayInvalidAnimationWillRaiseInvalidArgument)
 {
-    EXPECT_THROW(a.play("test1234_invalid"), std::invalid_argument);
+    ASSERT_THROW(a.play("test1234_invalid"), std::invalid_argument);
 }
 
 class AnimationPlayingTest : public ::testing::Test {
@@ -92,15 +92,15 @@ protected:
 
 TEST_F(AnimationPlayingTest, NumberOfFrames)
 {
-    EXPECT_EQ(a.getNumberOfFramesInCurrentAnimation(), 5);
+    ASSERT_EQ(a.getNumberOfFramesInCurrentAnimation(), 5);
 }
 
 TEST_F(AnimationPlayingTest, SingleFrameTime)
 {
-    EXPECT_FLOAT_EQ(a.getCurrentAnimSingleFrameTime(), 1.0f);
+    ASSERT_FLOAT_EQ(a.getCurrentAnimSingleFrameTime(), 1.0f);
 }
 
-TEST_F(AnimationPlayingTest, TotalFrameTime) { EXPECT_FLOAT_EQ(a.getCurrentAnimTotalTime(), 5.0f); }
+TEST_F(AnimationPlayingTest, TotalFrameTime) { ASSERT_FLOAT_EQ(a.getCurrentAnimTotalTime(), 5.0f); }
 
 TEST_F(AnimationPlayingTest, UpdateSwitchesAnimationIndex) { a.update(10.0f); }
 
@@ -109,13 +109,7 @@ TEST_F(AnimationPlayingTest, CurrentAnimationNameAfterPlay)
     ASSERT_EQ(a.getCurrentAnimationName(), "idle");
 }
 
-TEST_F(AnimationPlayingTest, RotateHasNoEffect)
-{
-    auto const angle = 22.0f;
-    a.setRotation(angle);
-    EXPECT_FLOAT_EQ(a.getRotation(), angle);
-}
-
+// white box test for coverage
 TEST_F(AnimationPlayingTest, AnimationCanBeFlashed)
 {
     a.flash(1.0f);

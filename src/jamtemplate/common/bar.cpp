@@ -29,6 +29,8 @@ Bar::Bar(float width, float height, bool horizontal)
 void Bar::setFrontColor(jt::Color const& col) { m_shapeProgress->setColor(col); }
 void Bar::setBackColor(jt::Color const& col) { m_shapeFull->setColor(col); }
 
+jt::Color Bar::getBackColor() const { return m_shapeFull->getColor(); }
+
 void Bar::setCurrentValue(float value)
 {
     m_valueCurrent = value;

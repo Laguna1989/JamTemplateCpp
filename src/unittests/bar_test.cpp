@@ -1,58 +1,70 @@
 ﻿#include "bar.hpp"
 #include <gtest/gtest.h>
+#include <stdexcept>
 
 TEST(BarTest, BarInitialValues)
 {
     float const x = 64.0f;
     float const y = 16.0f;
     jt::Bar b { x, y };
-    EXPECT_FLOAT_EQ(b.getLocalBounds().width(), x);
-    EXPECT_FLOAT_EQ(b.getLocalBounds().height(), y);
-    EXPECT_FLOAT_EQ(b.getMaxValue(), 1.0f);
-    EXPECT_FLOAT_EQ(b.getCurrentValue(), 0.0f);
+    ASSERT_FLOAT_EQ(b.getLocalBounds().width(), x);
+    ASSERT_FLOAT_EQ(b.getLocalBounds().height(), y);
+    ASSERT_FLOAT_EQ(b.getMaxValue(), 1.0f);
+    ASSERT_FLOAT_EQ(b.getCurrentValue(), 0.0f);
 }
 
-TEST(BarTest, PositiveMaxValueDoesNotTriggerAssertion)
+TEST(BarTest, SetMaxValueWillCorrectlySetValue)
 {
     jt::Bar b { 5.0f, 10.0f };
 
     float const expected = 15.0f;
     b.setMaxValue(expected);
-    EXPECT_FLOAT_EQ(b.getMaxValue(), expected);
+    ASSERT_FLOAT_EQ(b.getMaxValue(), expected);
 }
 
-TEST(BarTest, NegativeMaxValueTriggersException)
+TEST(BarTest, SetNegativeMaxValueRaisesException)
 {
     jt::Bar b { 5.0f, 10.0f };
-    EXPECT_ANY_THROW(b.setMaxValue(-5.0f));
+    ASSERT_THROW(b.setMaxValue(-5.0f), std::invalid_argument);
 }
 
-TEST(BarTest, SetCurrentValueSetsCorrectValue)
+class BarCurrentValueTestFixture : public ::testing::TestWithParam<std::pair<float, float>> {
+protected:
+    float max;
+    float current;
+    jt::Bar bar { 5.0f, 10.0f };
+    void SetUp() override
+    {
+        max = GetParam().first;
+        current = GetParam().second;
+        bar.setMaxValue(max);
+        bar.setCurrentValue(current);
+    }
+};
+
+TEST_P(BarCurrentValueTestFixture, GetCurrentValue)
 {
-    jt::Bar b { 5.0f, 10.0f };
-
-    float const max = 100.0f;
-    b.setMaxValue(max);
-
-    float const current = 50.0f;
-    b.setCurrentValue(current);
-
-    EXPECT_FLOAT_EQ(b.getCurrentValue(), current);
-    EXPECT_FLOAT_EQ(b.getValueFraction(), current / max);
+    ASSERT_FLOAT_EQ(bar.getCurrentValue(), current);
 }
+
+TEST_P(BarCurrentValueTestFixture, GetCurrentValueFraction)
+{
+    ASSERT_FLOAT_EQ(bar.getValueFraction(), current / max);
+}
+
+INSTANTIATE_TEST_SUITE_P(BarCurrentValueTest, BarCurrentValueTestFixture,
+    ::testing::Values(
+        std::make_pair(100.0f, 50.0f), std::make_pair(65.0f, 65.0f), std::make_pair(1.0f, 0.123f)));
 
 TEST(BarTest, SetCurrentValueBelowZero)
 {
     jt::Bar b { 5.0f, 10.0f };
 
-    float const max = 100.0f;
-    b.setMaxValue(max);
-
     float const current = -1.5f;
     b.setCurrentValue(current);
 
-    EXPECT_FLOAT_EQ(b.getCurrentValue(), 0.0f);
-    EXPECT_FLOAT_EQ(b.getValueFraction(), 0.0f);
+    ASSERT_FLOAT_EQ(b.getCurrentValue(), 0.0f);
+    ASSERT_FLOAT_EQ(b.getValueFraction(), 0.0f);
 }
 
 TEST(BarTest, SetCurrentValueAboveMaxValue)
@@ -65,33 +77,8 @@ TEST(BarTest, SetCurrentValueAboveMaxValue)
     float const current = max + 15.0f;
     b.setCurrentValue(current);
 
-    EXPECT_FLOAT_EQ(b.getCurrentValue(), max);
-    EXPECT_FLOAT_EQ(b.getValueFraction(), 1.0f);
-}
-
-TEST(BarTest, ColorsCanBeSet)
-{
-    jt::Bar b { 5.0f, 10.0f };
-
-    b.setFrontColor(jt::colors::Black);
-    b.setBackColor(jt::colors::White);
-
-    b.setColor(jt::colors::Green);
-
-    b.setFrontColor(jt::colors::Red);
-    b.setBackColor(jt::colors::Blue);
-
-    SUCCEED();
-}
-
-TEST(BarTest, CanBeDrawnWithNullptrRenderTarget)
-{
-    jt::Bar b { 5.0f, 10.0f };
-
-    b.update(0.1f);
-    b.draw(nullptr);
-
-    SUCCEED();
+    ASSERT_FLOAT_EQ(b.getCurrentValue(), max);
+    ASSERT_FLOAT_EQ(b.getValueFraction(), 1.0f);
 }
 
 TEST(BarTest, VerticalBar)
@@ -114,39 +101,5 @@ TEST(BarTest, SetBackgroundColor)
 {
     jt::Bar b { 5.0f, 100.0f };
     b.setBackColor(jt::colors::Yellow);
-    SUCCEED();
-}
-
-TEST(BarTest, RotateHasNoEffect)
-{
-    jt::Bar b { 10.0f, 10.0f };
-    b.setRotation(22.0f);
-    SUCCEED();
-}
-
-TEST(BarTest, SetPositionSetsCorrectPosition)
-{
-    jt::Bar b { 10.0f, 10.0f };
-    b.setPosition(jt::Vector2 { 100.0f, 100.0f });
-    auto const result = b.getPosition();
-    EXPECT_FLOAT_EQ(result.x(), 100.0f);
-    EXPECT_FLOAT_EQ(result.y(), 100.0f);
-}
-
-TEST(BarTest, ScaleBarSetsScale)
-{
-    jt::Bar b { 10.0f, 10.0f };
-    b.setScale(jt::Vector2 { 100.0f, 100.0f });
-    auto const result = b.getScale();
-    EXPECT_FLOAT_EQ(result.x(), 100.0f);
-    EXPECT_FLOAT_EQ(result.y(), 100.0f);
-}
-
-TEST(BarTest, SetOriginSetsOrigin)
-{
-    jt::Bar b { 10.0f, 10.0f };
-    b.setOrigin(jt::Vector2 { 100.0f, 100.0f });
-    auto const result = b.getOrigin();
-    EXPECT_FLOAT_EQ(result.x(), 100.0f);
-    EXPECT_FLOAT_EQ(result.y(), 100.0f);
+    ASSERT_EQ(b.getBackColor(), jt::colors::Yellow);
 }
