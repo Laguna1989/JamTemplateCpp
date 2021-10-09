@@ -9,9 +9,17 @@ TEST(ButtonTest, InitialValues)
     jt::Button b { jt::Vector2u { 32, 16 } };
     jt::Vector2 expectedPos { 0.0f, 0.0f };
 
-    EXPECT_EQ(b.getPosition(), expectedPos);
-    EXPECT_EQ(b.getCallbackCount(), 0);
-    EXPECT_TRUE(b.getVisible());
+    ASSERT_EQ(b.getPosition(), expectedPos);
+    ASSERT_EQ(b.getCallbackCount(), 0);
+    ASSERT_TRUE(b.getVisible());
+}
+
+TEST(ButtonTest, GetPositionAfterSetPosition)
+{
+    jt::Button b { jt::Vector2u { 32, 16 } };
+    jt::Vector2 expectedPos { 20.0f, 20.0f };
+    b.setPosition(expectedPos);
+    ASSERT_EQ(b.getPosition(), expectedPos);
 }
 
 TEST(ButtonTest, SetVisibleSetsCorrectValue)
@@ -64,6 +72,21 @@ TEST(ButtonTest, IsOverWithMockMouseReturnsFalseWhenNotOver)
     ON_CALL(*mouse, getMousePositionScreen())
         .WillByDefault(testing::Return(jt::Vector2 { 50, 50 }));
     jt::Button b {};
+    b.setGameInstance(game);
+
+    ASSERT_FALSE(b.IsMouseOver());
+}
+
+TEST(ButtonTest, IsOverReturnsFalseWhenNotActive)
+{
+    auto game = std::make_shared<testing::NiceMock<MockGame>>();
+    auto input = std::make_shared<testing::NiceMock<MockInput>>();
+    auto mouse = std::make_shared<testing::NiceMock<MockMouseInput>>();
+    ON_CALL(*game, input()).WillByDefault(testing::Return(input));
+    ON_CALL(*input, mouse()).WillByDefault(testing::Return(mouse));
+    ON_CALL(*mouse, getMousePositionScreen()).WillByDefault(testing::Return(jt::Vector2 { 5, 5 }));
+    jt::Button b {};
+    b.setActive(false);
     b.setGameInstance(game);
 
     ASSERT_FALSE(b.IsMouseOver());

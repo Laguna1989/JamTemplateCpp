@@ -105,16 +105,7 @@ void Text::doDrawShadow(std::shared_ptr<jt::renderTarget> const sptr) const
     m_text->setFillColor(oldCol);
 }
 
-void Text::doDraw(std::shared_ptr<jt::renderTarget> const sptr) const
-{
-    try {
-        sptr->draw(*m_text);
-    } catch (std::exception& e) {
-        std::cout << e.what() << std::endl;
-    } catch (...) {
-        std::cerr << "error drawing text" << std::endl;
-    }
-}
+void Text::doDraw(std::shared_ptr<jt::renderTarget> const sptr) const { sptr->draw(*m_text); }
 
 void Text::doDrawFlash(std::shared_ptr<jt::renderTarget> const sptr) const
 {

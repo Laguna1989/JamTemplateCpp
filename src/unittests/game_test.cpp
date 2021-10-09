@@ -130,6 +130,14 @@ TEST_F(GameTest, GetCurrentStateNonNullptr)
     EXPECT_NE(g->getCurrentState(), nullptr);
 }
 
+TEST_F(GameTest, GetCurrentStateNonNullptrAfterUpdate)
+{
+    g->switchState(std::make_shared<NiceMock<MockState>>());
+    g->update(0.1f);
+    g->switchState(std::make_shared<NiceMock<MockState>>());
+    EXPECT_NE(g->getCurrentState(), nullptr);
+}
+
 TEST_F(GameTest, GetCurrentStateAfterSwitch)
 {
     g->switchState(std::make_shared<NiceMock<MockState>>());
