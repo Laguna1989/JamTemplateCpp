@@ -11,7 +11,7 @@
 using jt::Game;
 using ::testing::NiceMock;
 
-#if !defined(ENABLE_WEB)
+#if USE_SFML
 
 class GameTest : public ::testing::Test {
 public:
@@ -51,7 +51,6 @@ TEST_F(GameTest, GameUpdateCallsStateUpdateForActiveState)
     g->update(expected_update_time);
 }
 
-#if USE_SFLM
 TEST_F(GameTest, UpdateWithView)
 {
     auto ms = std::make_shared<MockState>();
@@ -80,7 +79,6 @@ TEST_F(GameTest, SetViewWithRenderTarget)
     // cleanup so that future tests are not affected!
     jt::RenderWindow::s_view = std::shared_ptr<sf::View> { nullptr };
 }
-#endif
 
 TEST_F(GameTest, SwitchToNullptrState)
 {
@@ -181,7 +179,6 @@ TEST_F(GameTest, StartGameWithOneIteration)
     g->startGame(s, []() {});
 }
 
-#if USE_SFML
 TEST_F(GameTest, SetupRenderTarget)
 {
     EXPECT_CALL(*window, createRenderTarget())
@@ -230,7 +227,6 @@ TEST_F(GameTest, DrawWithRenderTargetAndState)
     // cleanup so that future tests are not affected!
     jt::RenderWindow::s_view = std::shared_ptr<sf::View> { nullptr };
 }
-#endif
 
 TEST_F(GameTest, GetMusicPlayer) { EXPECT_EQ(g->getMusicPlayer(), nullptr); }
 

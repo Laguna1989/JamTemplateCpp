@@ -9,6 +9,7 @@
 #include <gtest/gtest.h>
 #include <memory>
 
+#if USE_SFML
 std::shared_ptr<jt::DrawableInterface> createSprite()
 {
     auto s = std::make_shared<jt::Sprite>();
@@ -267,3 +268,5 @@ TEST_P(DrawableImplTestFixture, GetShadowColorAfterSet)
     drawable->setShadowColor(jt::colors::Yellow);
     ASSERT_EQ(drawable->getShadowColor(), jt::colors::Yellow);
 }
+
+#endif

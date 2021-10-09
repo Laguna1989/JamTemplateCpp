@@ -35,7 +35,7 @@ if (ENABLE_UNITTESTS)
     if (ENABLE_WEB)
         set(CMAKE_EXECUTABLE_SUFFIX ".html")
     endif ()
-    target_link_libraries(UnitTests gtest_main)
+    target_link_libraries(UnitTests gtest)
     target_link_libraries(UnitTests gmock)
     target_link_libraries(UnitTests JamTemplate)
 
