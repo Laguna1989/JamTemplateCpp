@@ -24,9 +24,9 @@ if ($ENV{CLION_IDE})
 endif ()
 
 #####################################################
-## Create link directories
+## Set link directories
 #####################################################
-if (NOT ENABLE_WEB)
+if (NOT USE_SFML)
     if (WIN32 OR APPLE)
         link_directories(${SFML_DIR_ROOT}/lib)
     endif ()
@@ -50,7 +50,6 @@ if (ENABLE_WEB)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -s USE_SDL_IMAGE=2 -s SDL2_IMAGE_FORMATS='[\"bmp\",\"png\"]'")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -s USE_SDL_MIXER=2 -s USE_VORBIS=1 -s USE_OGG=1")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -s USE_SDL_TTF=2")
-    add_definitions(-DENABLE_WEB)
 else ()
     if (MSVC)
         ## nasty warning 5205 from tileson should not show up,

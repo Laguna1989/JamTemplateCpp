@@ -34,7 +34,7 @@ Tilemap::Tilemap(std::string const& path)
             m_tileSprites.at(i + j * columns) = tile;
         }
     }
-#if ENABLE_WEB
+#if USE_SDL
     setIgnoreCamMovement(true);
 #else
     setIgnoreCamMovement(true);
