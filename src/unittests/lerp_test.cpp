@@ -41,6 +41,23 @@ TEST_F(LerpTestF, bounce)
     ASSERT_EQ(expected, f(input, 0.0f, 1.0f));
 }
 
+class LerpBounceValuesTestFixture : public ::testing::TestWithParam<std::pair<float, float>> {
+};
+
+TEST_P(LerpBounceValuesTestFixture, ReturnsExpectedValue)
+{
+    auto f = jt::Lerp::bounce<float>;
+    auto const in = GetParam().first;
+    auto const expected = GetParam().second;
+    ASSERT_FLOAT_EQ(expected, f(0.0f, 1.0f, in));
+}
+
+INSTANTIATE_TEST_SUITE_P(LerpBounceValuesTest, LerpBounceValuesTestFixture,
+    ::testing::Values(std::make_pair(0.0f, 0.0f), std::make_pair(0.1f, 0.075625f),
+        std::make_pair(0.5f, 0.765625f), std::make_pair(0.7f, 0.93062496f),
+        std::make_pair(0.9f, 0.98812497f), std::make_pair(0.95f, 0.98453122f),
+        std::make_pair(1.0f, 1.0f)));
+
 TEST_F(LerpTestF, bounceinvers)
 {
     auto f = jt::Lerp::bounceInvers<float>;
