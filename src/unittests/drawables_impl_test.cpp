@@ -210,7 +210,18 @@ TEST_P(DrawableImplTestFixture, DrawScaled)
     drawable->draw(rt);
 }
 
-// TODO TestRotation
+TEST_P(DrawableImplTestFixture, InitialRotations)
+{
+    std::shared_ptr<jt::DrawableInterface> drawable = GetParam();
+    ASSERT_FLOAT_EQ(drawable->getRotation(), 0.0f);
+}
+
+TEST_P(DrawableImplTestFixture, RotateSetsRotation)
+{
+    std::shared_ptr<jt::DrawableInterface> drawable = GetParam();
+    drawable->setRotation(22.5f);
+    ASSERT_FLOAT_EQ(drawable->getRotation(), 22.5f);
+}
 
 TEST_P(DrawableImplTestFixture, DrawRotated)
 {

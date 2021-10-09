@@ -18,6 +18,8 @@ public:
     void setFrontColor(jt::Color const& col);
     void setBackColor(jt::Color const& col);
 
+    jt::Color getBackColor() const;
+
     void setCurrentValue(float value);
     float getCurrentValue() const;
 
@@ -46,7 +48,7 @@ public:
     virtual const jt::Vector2 getOrigin() const override;
 
 private:
-    float m_valueMax { 0.0f };
+    float m_valueMax { 1.0f };
     float m_valueCurrent { 0.0f };
 
     float const m_width;
