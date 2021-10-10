@@ -173,6 +173,13 @@ TEST_P(DrawableImplTestFixture, GetColorAfterSetColor)
     drawable->setColor(jt::colors::Red);
     ASSERT_EQ(drawable->getColor(), jt::colors::Red);
 }
+
+TEST_P(DrawableImplTestFixture, GetColorInitial)
+{
+    std::shared_ptr<jt::DrawableInterface> drawable = GetParam();
+    ASSERT_EQ(drawable->getColor(), jt::colors::White);
+}
+
 #if USE_SFML
 TEST_P(DrawableImplTestFixture, DrawWithSetColor)
 {

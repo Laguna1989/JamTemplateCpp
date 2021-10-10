@@ -5,6 +5,7 @@
 #include "texture_manager.hpp"
 #include <SDL_image.h>
 #include <iostream>
+#include <stdexcept>
 
 namespace jt {
 
@@ -76,6 +77,10 @@ jt::Color Sprite::getColorAtPixel(jt::Vector2u pixelPos) const
             return jt::Color { 0, 0, 0, 255 };
         }
     }
+    if (pixelPos.x() >= static_cast<unsigned int>(m_image->w)
+        || pixelPos.y() >= static_cast<unsigned int>(m_image->h)) {
+        throw std::invalid_argument { "pixel position out of bounds" };
+    }
     uint8_t r;
     uint8_t g;
     uint8_t b;
@@ -130,7 +135,8 @@ void Sprite::doRotate(float /*rot*/) { }
 SDL_Rect Sprite::getDestRect(jt::Vector2 const& positionOffset) const
 {
     // std::cout << "Sprite.CamOffset.x " << getCamOffset().x() << std::endl;
-    auto const pos = m_position + getShakeOffset() + getOffset() + getCamOffset() + positionOffset + m_offsetFromOrigin;
+    auto const pos = m_position + getShakeOffset() + getOffset() + getCamOffset() + positionOffset
+        + m_offsetFromOrigin;
     // std::cout << "Sprite.final position.x " << pos.x() << std::endl;
     SDL_Rect const destRect { static_cast<int>(pos.x()), static_cast<int>(pos.y()),
         static_cast<int>(m_sourceRect.width() * fabs(m_scale.x())),

@@ -88,55 +88,6 @@ sf::Image createVignetteImage(std::vector<std::string> const& ssv)
     return SpriteFunctions::makeVignetteImage(w, h);
 }
 
-void replaceOneColor(sf::Image& img, jt::Color const& from, jt::Color const& to)
-{
-    for (unsigned int x = 0U; x != img.getSize().x; ++x) {
-        for (unsigned int y = 0U; y != img.getSize().y; ++y) {
-            jt::Color const c = img.getPixel(x, y);
-            if (c == from) {
-                img.setPixel(x, y, to);
-            }
-        }
-    }
-}
-
-sf::Image createReplacedImage(std::vector<std::string> const& ssv,
-    TextureManager::ColorReplaceLookupVectorType const& colorReplace)
-{
-    // "#r#assets/player.png#0"
-    if (ssv.size() != 3) {
-        throw std::invalid_argument { "create button image: vector does not contain 3 elements." };
-    }
-    if (colorReplace.empty()) {
-        throw std::invalid_argument { "Color replace not possible, no color replacements stored." };
-    }
-    std::string baseFileName = ssv.at(1);
-    std::size_t counter { 0 };
-    auto idx = std::stoul(ssv.at(2), &counter);
-    if (counter != ssv.at(2).size()) {
-        throw std::invalid_argument { "invalid color replacement id" };
-    }
-    if (idx >= colorReplace.size()) {
-        throw std::invalid_argument { "No color replacement for given index i= "
-            + std::to_string(idx) };
-    }
-
-    sf::Image img {};
-    img.loadFromFile(baseFileName);
-
-    TextureManager::ColorReplaceLookupType const& cr = colorReplace.at(idx);
-    if (cr.empty()) {
-        // no color replacement to be done.
-        return img;
-    }
-
-    for (auto const kvp : cr) {
-        replaceOneColor(img, kvp.first, kvp.second);
-    }
-
-    return img;
-}
-
 sf::Image createFlashImage(sf::Image const& in)
 {
     sf::Image img { in };
@@ -161,7 +112,6 @@ sf::Texture loadTextureFromDisk(std::string const& str)
 } // namespace
 
 TextureManager::TextureMapType TextureManager::m_textures;
-TextureManager::ColorReplaceLookupVectorType TextureManager::m_selectiveColorReplace {};
 
 sf::Texture& TextureManager::get(std::string const& str)
 {
@@ -182,8 +132,6 @@ sf::Texture& TextureManager::get(std::string const& str)
                 m_textures[str].loadFromImage(createButtonImage(ssv));
             } else if (ssv.at(0) == "f") {
                 m_textures[str].loadFromImage(createBlankImage(ssv));
-            } else if (ssv.at(0) == "r") {
-                m_textures[str].loadFromImage(createReplacedImage(ssv, m_selectiveColorReplace));
             } else if (ssv.at(0) == "g") {
                 m_textures[str].loadFromImage(createGlowImage(ssv));
             } else if (ssv.at(0) == "v") {
@@ -203,10 +151,6 @@ sf::Texture& TextureManager::get(std::string const& str)
 
 std::string TextureManager::getFlashName(std::string const& str) { return str + "___flash__"; }
 
-void TextureManager::reset()
-{
-    m_textures.clear();
-    m_selectiveColorReplace.clear();
-}
+void TextureManager::reset() { m_textures.clear(); }
 
 } // namespace jt

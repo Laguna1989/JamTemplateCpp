@@ -50,8 +50,8 @@ jt::Vector2 const Sprite::getOrigin() const { return m_sprite.getOrigin(); }
 // graphics memory to ram first.
 jt::Color Sprite::getColorAtPixel(jt::Vector2u pixelPos) const
 {
-    if (pixelPos.x() > static_cast<unsigned int>(m_sprite.getLocalBounds().width)
-        || pixelPos.y() > static_cast<unsigned int>(m_sprite.getLocalBounds().height)) {
+    if (pixelPos.x() >= static_cast<unsigned int>(m_sprite.getLocalBounds().width)
+        || pixelPos.y() >= static_cast<unsigned int>(m_sprite.getLocalBounds().height)) {
         throw std::invalid_argument { "pixel position out of bounds" };
     }
     // optimization to avoid unneccesary copies
