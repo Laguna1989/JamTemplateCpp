@@ -4,7 +4,6 @@
 #include <stdexcept>
 
 using jt::TextureManager;
-#ifndef ENABLE_WEB
 
 class TextureManagerTest : public ::testing::Test {
 public:
@@ -86,12 +85,6 @@ TEST_F(TextureManagerTest, GetBlankInvalid)
     EXPECT_ANY_THROW(TextureManager::get("#f#0x12#30"));
 }
 
-TEST_F(TextureManagerTest, ColorReplaceWithEmptyChangeSet)
-{
-    TextureManager::addSelectiveColorReplacement(0, {});
-    EXPECT_NO_THROW(TextureManager::get("#r#assets/coin.png#0"));
-}
-
 TEST_F(TextureManagerTest, InvalidFileNameThrowsException)
 {
     EXPECT_THROW(
@@ -106,6 +99,13 @@ TEST_F(TextureManagerTest, GetTextureFromEmptyString)
 TEST_F(TextureManagerTest, InvalidSpecialOperation)
 {
     EXPECT_THROW(TextureManager::get("#q#1#2#3"), std::invalid_argument);
+}
+
+#if USE_SFML
+TEST_F(TextureManagerTest, ColorReplaceWithEmptyChangeSet)
+{
+    TextureManager::addSelectiveColorReplacement(0, {});
+    EXPECT_NO_THROW(TextureManager::get("#r#assets/coin.png#0"));
 }
 
 TEST_F(TextureManagerTest, ColorReplaceWithoutLookup)
@@ -131,36 +131,5 @@ TEST_F(TextureManagerTest, ColorReplaceWithInvalidIndex)
     auto p = std::make_pair(jt::Color { 0, 0, 0 }, jt::Color { 255, 0, 255 });
     TextureManager::addSelectiveColorReplacement(0, { p });
     EXPECT_THROW(TextureManager::get("#r#assets/coin.png#4"), std::invalid_argument);
-}
-#endif
-
-// TODO test uses SFML specific functions
-#if 0
-TEST_F(TextureManagerTest, ColorReplaceValid)
-{
-    // position of a pixel with a certain color
-    auto const xpos = 0U;
-    auto const ypos = 8U;
-
-    // sanity check that the correct image is present
-    auto old = TextureManager::get("assets/coin.png").copyToImage().getPixel(xpos, ypos);
-    auto const r = old.r;
-    auto const g = old.g;
-    auto const b = old.b;
-    ASSERT_EQ(r, 0);
-    ASSERT_EQ(g, 0);
-    ASSERT_EQ(b, 0);
-    ASSERT_EQ(old.a, 255);
-
-    // actual check that corlor replacement is working.
-    auto p = std::make_pair(jt::Color { r, g, b }, jt::Color { 255, 0, 255 });
-    TextureManager::addSelectiveColorReplacement(0, { p });
-    auto const& t = TextureManager::get("#r#assets/coin.png#0");
-    auto c = t.copyToImage().getPixel(xpos, ypos);
-
-    EXPECT_EQ(c.r, 255);
-    EXPECT_EQ(c.g, 0);
-    EXPECT_EQ(c.b, 255);
-    EXPECT_EQ(c.a, 255);
 }
 #endif

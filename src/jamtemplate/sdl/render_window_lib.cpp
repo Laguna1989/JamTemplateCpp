@@ -39,8 +39,11 @@ void RenderWindow::checkForClose()
 
 jt::Vector2 RenderWindow::getSize() const { return m_size; }
 
-void RenderWindow::draw(std::shared_ptr<jt::Sprite> /*spr*/)
+void RenderWindow::draw(std::shared_ptr<jt::Sprite> spr)
 {
+    if (!spr) {
+        throw std::invalid_argument { "cannot draw nullptr sprite" };
+    }
     std::cerr << "RenderWindow::draw() not supported by SDL Renderwindow. Use the Rendertarget "
                  "directly to draw\n";
 }
@@ -64,7 +67,7 @@ jt::Vector2 RenderWindow::getMousePosition()
 jt::Vector2 RenderWindow::getMousePositionScreen(float /*zoom*/)
 {
     std::cerr << "RenderWindow::getMousepositonScreen() not supported by SDL Renderwindow.\n";
-    return jt::Vector2 { 0.0f, 0.0f };
+    return jt::Vector2 { 42.0f, 42.0f };
 }
 
 void RenderWindow::setMouseCursorVisible(bool visible)

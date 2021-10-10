@@ -1,12 +1,19 @@
-﻿#include "text.hpp"
+﻿#include "sdl_setup.hpp"
+#include "text.hpp"
 #include <gtest/gtest.h>
 
 namespace {
+
 jt::Text getText()
 {
     jt::Text t;
+#if USE_SDL
+    static SDLSetup setup;
+    t.loadFont("assets/font.ttf", 20, setup.renderTarget);
+#else
     std::shared_ptr<jt::renderTarget> rt { nullptr };
     t.loadFont("assets/font.ttf", 20, rt);
+#endif
     return t;
 };
 
@@ -42,8 +49,7 @@ TEST(TextTest, LoadInvalidFont)
 {
     jt::Text t;
     std::shared_ptr<jt::renderTarget> rt { nullptr };
-    t.loadFont("assets/font_INVALID_.ttf", 20, rt);
-    SUCCEED();
+    ASSERT_NO_THROW(t.loadFont("assets/font_INVALID_.ttf", 20, rt));
 }
 
 TEST(TextTest, InitialPosition)
@@ -103,7 +109,7 @@ TEST(TextTest, InitialGlobalBounds)
     ASSERT_EQ(t.getGlobalBounds(), expectedBounds);
 }
 
-TEST(TextTest, LocalBoundsWithLoadedSprite)
+TEST(TextTest, LocalBoundsWithLoadedText)
 {
     jt::Text t = getText();
     t.setText("test1234");

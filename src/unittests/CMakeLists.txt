@@ -5,6 +5,15 @@ if (ENABLE_UNITTESTS)
                 "${CMAKE_CURRENT_SOURCE_DIR}/sound_test.cpp"
                 "${CMAKE_CURRENT_SOURCE_DIR}/music_player_test.cpp")
     endif ()
+    if (NOT USE_SFML)
+        list(REMOVE_ITEM UNITTESTFILES
+                "${CMAKE_CURRENT_SOURCE_DIR}/render_window_sfml_test.cpp"
+                "${CMAKE_CURRENT_SOURCE_DIR}/vector_sfml_test.cpp")
+    else ()
+        list(REMOVE_ITEM UNITTESTFILES
+                "${CMAKE_CURRENT_SOURCE_DIR}/vector_sdl_test.cpp")
+    endif ()
+
 
     # Download and unpack googletest at configure time
     configure_file(${CMAKE_SOURCE_DIR}/ext/googletest/CMakeLists.txt.in ${CMAKE_CURRENT_BINARY_DIR}/ext/googletest/googletest-download/CMakeLists.txt)

@@ -197,16 +197,6 @@ TEST(Vector2U, MoveConstructor)
     EXPECT_EQ(vec1.y(), 3);
 }
 
-#if USE_SFML
-
-TEST(Vector2U, ToSfVector)
-{
-    jt::Vector2u vec { 4, 5 };
-    sf::Vector2u expected { 4, 5 };
-    sf::Vector2u value = vec;
-    EXPECT_EQ(expected, value);
-}
-
 TEST(Vector2UAddEqual, AddZero)
 {
     jt::Vector2u const initial { 5, 1 };
@@ -224,5 +214,3 @@ TEST(Vector2UAddEqual, AddReal)
     initial += add;
     EXPECT_EQ(initial, expected);
 }
-
-#endif

@@ -22,8 +22,6 @@ void Text::loadFont(std::string const& fontFileName, unsigned int characterSize,
     if (!m_font) {
         std::cerr << "cannot load font: " << fontFileName << std::endl
                   << "error message: " << TTF_GetError() << std::endl;
-        throw std::invalid_argument { "cannot load font '" + fontFileName
-            + "'. Error message: " + TTF_GetError() };
     }
     m_rendertarget = wptr;
 }

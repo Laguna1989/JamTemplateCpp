@@ -10,6 +10,8 @@ void Sound::doLoad(std::string const& fileName)
         Mix_LoadWAV(fileName.c_str()), [](Mix_Chunk* wave) { Mix_FreeChunk(wave); });
 
     if (!m_wave) {
+
+        printf("Oh My Goodness, an error : %s", Mix_GetError());
         throw std::invalid_argument { "can not load sound from file " + fileName };
     }
 }

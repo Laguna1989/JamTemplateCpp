@@ -217,7 +217,6 @@ TEST(SpriteTest, GetSfSprite)
     EXPECT_EQ(value.getLocalBounds().height, s.getLocalBounds().height());
 }
 
-#if ENABLE_DISPLAY_TESTS
 TEST(SpriteTest, GetPixelOutOfBounds)
 {
     jt::Sprite s;
@@ -225,6 +224,5 @@ TEST(SpriteTest, GetPixelOutOfBounds)
 
     EXPECT_THROW(s.getColorAtPixel(jt::Vector2u { 22, 25 }), std::invalid_argument);
 }
-#endif
 
 #endif
