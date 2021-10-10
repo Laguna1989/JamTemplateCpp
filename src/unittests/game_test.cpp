@@ -11,8 +11,6 @@
 using jt::Game;
 using ::testing::NiceMock;
 
-#if USE_SFML
-
 class GameTest : public ::testing::Test {
 public:
     unsigned const windowSizeX { 100 };
@@ -264,5 +262,3 @@ TEST_F(GameTest, GameRunWithStateThrowingIntException)
 TEST_F(GameTest, GetRenderWindowDoesNotReturnNullptr) { ASSERT_NE(g->getRenderWindow(), nullptr); }
 
 // TODO Add a test that verifies that cam.reset is called on switchState();
-
-#endif

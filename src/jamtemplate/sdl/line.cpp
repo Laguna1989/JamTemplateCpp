@@ -63,8 +63,8 @@ jt::Rect const jt::Line::getLocalBounds() const { return jt::Rect {}; }
 void jt::Line::setFlashColor(jt::Color const& col) { m_flashColor = col; }
 const jt::Color jt::Line::getFlashColor() const { return m_flashColor; }
 
-void jt::Line::setScale(jt::Vector2 const& scale) { }
-const jt::Vector2 jt::Line::getScale() const { return jt::Vector2 { 1.0f, 1.0f }; }
+void jt::Line::setScale(jt::Vector2 const& scale) { m_scale = scale; }
+const jt::Vector2 jt::Line::getScale() const { return m_scale; }
 
-void jt::Line::setOrigin(jt::Vector2 const& origin) { }
-const jt::Vector2 jt::Line::getOrigin() const { return jt::Vector2 { 0.0f, 0.0f }; }
+void jt::Line::setOrigin(jt::Vector2 const& origin) { m_origin = origin; }
+const jt::Vector2 jt::Line::getOrigin() const { return m_origin; }

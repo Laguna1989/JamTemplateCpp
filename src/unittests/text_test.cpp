@@ -153,13 +153,6 @@ TEST(TextTest, Update)
     ASSERT_NO_THROW(t.update(0.1f));
 }
 
-TEST(TextTest, DrawNullptr)
-{
-    jt::Text t = getText();
-    t.update(0.0f);
-    ASSERT_NO_THROW(t.draw(nullptr));
-}
-
 TEST(TextTest, SetOutline)
 {
     jt::Text t = getText();

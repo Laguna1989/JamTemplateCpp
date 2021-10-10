@@ -35,6 +35,8 @@ private:
     jt::Vector2 m_position;
 
     jt::Color m_flashColor { jt::colors::White };
+    Vector2 m_origin;
+    Vector2 m_scale { 1.0f, 1.0f };
 
     void doDraw(std::shared_ptr<jt::renderTarget> const sptr) const override;
     void doDrawFlash(std::shared_ptr<jt::renderTarget> const sptr) const override;
