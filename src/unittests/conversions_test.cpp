@@ -21,21 +21,21 @@ TEST_P(ConversionsTestFixture, box2dVectorToJTVector)
 {
     ::jt::Vector2 const expected { GetParam().first, GetParam().second };
     b2Vec2 const input { GetParam().first, GetParam().second };
-    EXPECT_TRUE(vec(input) == expected);
+    ASSERT_EQ(vec(input), expected);
 }
 
 TEST_P(ConversionsTestFixture, JTVectorToB2Vec)
 {
     b2Vec2 const expected { GetParam().first, GetParam().second };
     jt::Vector2 const input { GetParam().first, GetParam().second };
-    EXPECT_TRUE(vec(input) == expected);
+    ASSERT_EQ(vec(input), expected);
 }
 
 TEST_P(ConversionsTestFixture, TsonVecfToJTVector)
 {
     ::jt::Vector2 const expected { GetParam().first, GetParam().second };
     tson::Vector2f const input { GetParam().first, GetParam().second };
-    EXPECT_TRUE(vec(input) == expected);
+    ASSERT_EQ(vec(input), expected);
 }
 
 TEST_P(ConversionsTestFixture, TsonVeciToJTVector)
@@ -44,5 +44,5 @@ TEST_P(ConversionsTestFixture, TsonVeciToJTVector)
         static_cast<float>(static_cast<int>(GetParam().second)) };
     tson::Vector2i const input { static_cast<int>(GetParam().first),
         static_cast<int>(GetParam().second) };
-    EXPECT_TRUE(vec(input) == expected);
+    ASSERT_EQ(vec(input), expected);
 }

@@ -1,5 +1,11 @@
 ﻿#include "info_rect.hpp"
 #include <gtest/gtest.h>
+#include <type_traits>
+
+TEST(InfoRectTest, CanBeDefaultConstructed)
+{
+    ASSERT_TRUE(std::is_default_constructible<jt::InfoRect>::value);
+}
 
 TEST(InfoRectTest, ContainsStoredValues)
 {
@@ -9,8 +15,8 @@ TEST(InfoRectTest, ContainsStoredValues)
     std::string const type { "type" };
     jt::InfoRect r { pos, size, angle, type };
 
-    EXPECT_EQ(r.type, type);
-    EXPECT_EQ(r.position, pos);
-    EXPECT_EQ(r.rotation, angle);
-    EXPECT_EQ(r.sizeDiagonal, size);
+    ASSERT_EQ(r.type, type);
+    ASSERT_EQ(r.position, pos);
+    ASSERT_EQ(r.rotation, angle);
+    ASSERT_EQ(r.sizeDiagonal, size);
 }

@@ -163,6 +163,16 @@ TEST_P(DrawableImplTestFixture, Draw)
     drawable->draw(getRenderTarget());
 }
 
+TEST_P(DrawableImplTestFixture, DrawWithCamOffset)
+{
+    std::shared_ptr<jt::DrawableInterface> drawable = GetParam();
+
+    jt::DrawableImpl::setCamOffset(jt::Vector2 { -100.0f, -100.0f });
+    drawable->update(0.1f);
+    drawable->draw(getRenderTarget());
+    jt::DrawableImpl::setCamOffset(jt::Vector2 { 0.0f, 0.0f });
+}
+
 TEST_P(DrawableImplTestFixture, DrawWithShadow)
 {
     std::shared_ptr<jt::DrawableInterface> drawable = GetParam();
