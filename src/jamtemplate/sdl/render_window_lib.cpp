@@ -29,12 +29,23 @@ std::shared_ptr<jt::renderTarget> RenderWindow::createRenderTarget()
     return renderTarget;
 }
 
-bool RenderWindow::isOpen() const { return true; }
+bool RenderWindow::isOpen() const { return m_isOpen; }
 
 void RenderWindow::checkForClose()
 {
+#if ENABLE_WEB
     std::cerr << "RenderWindow::checkForClose() not supported by SDL Renderwindow. Webbuild window "
                  "cannot be closed\n";
+#else
+    SDL_Event event;
+    while (SDL_PollEvent(&event)) {
+        switch (event.type) {
+        case SDL_QUIT:
+            m_isOpen = false;
+            break;
+        }
+    }
+#endif
 }
 
 jt::Vector2 RenderWindow::getSize() const { return m_size; }

@@ -12,14 +12,14 @@ TEST_P(IndexWrapperNoWrapTestFixture, EvenSizeNoWrap)
     auto param = GetParam();
     IndexWrapper<16> wrapper;
 
-    EXPECT_EQ(wrapper.wrap(param), param);
+    ASSERT_EQ(wrapper.wrap(param), param);
 }
 TEST_P(IndexWrapperNoWrapTestFixture, OddSizeNoWrap)
 {
     auto param = GetParam();
     IndexWrapper<17> wrapper;
 
-    EXPECT_EQ(wrapper.wrap(param), param);
+    ASSERT_EQ(wrapper.wrap(param), param);
 }
 
 INSTANTIATE_TEST_SUITE_P(IndexWrapperTest, IndexWrapperNoWrapTestFixture,
@@ -33,7 +33,7 @@ TEST_P(IndexWrapperWrapTestFixture, EvenSizeWrap)
     auto param = GetParam();
     IndexWrapper<16> wrapper;
 
-    EXPECT_EQ(wrapper.wrap(wrapper.getSize() + param), param % wrapper.getSize());
+    ASSERT_EQ(wrapper.wrap(wrapper.getSize() + param), param % wrapper.getSize());
 }
 
 TEST_P(IndexWrapperWrapTestFixture, OddSizeWrap)
@@ -41,7 +41,7 @@ TEST_P(IndexWrapperWrapTestFixture, OddSizeWrap)
     auto param = GetParam();
     IndexWrapper<15> wrapper;
 
-    EXPECT_EQ(wrapper.wrap(wrapper.getSize() + param), param % wrapper.getSize());
+    ASSERT_EQ(wrapper.wrap(wrapper.getSize() + param), param % wrapper.getSize());
 }
 
 INSTANTIATE_TEST_SUITE_P(IndexWrapperTest, IndexWrapperWrapTestFixture,
@@ -53,11 +53,11 @@ TEST(CircularBufferSize2, ReadAndWrite)
 
     auto const value = 15;
     buffer[0] = value;
-    EXPECT_EQ(buffer[0], value);
+    ASSERT_EQ(buffer[0], value);
 
     auto const value2 = 1024;
     buffer[1] = value2;
-    EXPECT_EQ(buffer[1], value2);
+    ASSERT_EQ(buffer[1], value2);
 }
 
 TEST(CircularBufferSize2, ReadAndWriteWithWrapAround)
@@ -65,13 +65,13 @@ TEST(CircularBufferSize2, ReadAndWriteWithWrapAround)
     jt::CircularBuffer<int, 2> buffer;
     auto const value = 111;
     buffer[2] = value;
-    EXPECT_EQ(buffer[2], value);
-    EXPECT_EQ(buffer[0], value);
+    ASSERT_EQ(buffer[2], value);
+    ASSERT_EQ(buffer[0], value);
 
     auto const value2 = 15;
     buffer[3] = value2;
-    EXPECT_EQ(buffer[3], value2);
-    EXPECT_EQ(buffer[1], value2);
+    ASSERT_EQ(buffer[3], value2);
+    ASSERT_EQ(buffer[1], value2);
 }
 
 TEST(CircularBufferSize2, Push)
@@ -79,7 +79,7 @@ TEST(CircularBufferSize2, Push)
     jt::CircularBuffer<float, 2> buffer;
     auto const value = 1.123f;
     buffer.push(value);
-    EXPECT_FLOAT_EQ(buffer[0], value);
+    ASSERT_FLOAT_EQ(buffer[0], value);
 }
 
 TEST(CircularBufferSize2, EmptyBufferDoesNotContainElements)
@@ -88,8 +88,8 @@ TEST(CircularBufferSize2, EmptyBufferDoesNotContainElements)
     auto const value1 = 4U;
     auto const value2 = 8U;
 
-    EXPECT_FALSE(buffer.contains(value1));
-    EXPECT_FALSE(buffer.contains(value2));
+    ASSERT_FALSE(buffer.contains(value1));
+    ASSERT_FALSE(buffer.contains(value2));
 }
 
 TEST(CircularBufferSize2, BufferContainsValuesAfterPush)
@@ -100,8 +100,8 @@ TEST(CircularBufferSize2, BufferContainsValuesAfterPush)
 
     buffer.push(value1);
     buffer.push(value2);
-    EXPECT_TRUE(buffer.contains(value1));
-    EXPECT_TRUE(buffer.contains(value2));
+    ASSERT_TRUE(buffer.contains(value1));
+    ASSERT_TRUE(buffer.contains(value2));
 }
 
 TEST(CircularBufferSize2, BufferDoesNotContainValueAfterItIsPushedOutOfTheBuffer)
@@ -114,8 +114,8 @@ TEST(CircularBufferSize2, BufferDoesNotContainValueAfterItIsPushedOutOfTheBuffer
     buffer.push(value2);
 
     buffer.push(value2);
-    EXPECT_FALSE(buffer.contains(value1));
-    EXPECT_TRUE(buffer.contains(value2));
+    ASSERT_FALSE(buffer.contains(value1));
+    ASSERT_TRUE(buffer.contains(value2));
 }
 
 jt::CircularBuffer<unsigned int, 2> createBufferWithValues(unsigned int a, unsigned int b)

@@ -53,6 +53,11 @@ void Game::startGame(std::shared_ptr<GameState> InitialState, GameLoopFunctionPt
     switchState(InitialState);
 #ifdef ENABLE_WEB
     emscripten_set_main_loop(gameloop_function, 0, 1);
+#else
+    while (m_window->isOpen()) {
+        m_window->checkForClose();
+        gameloop_function();
+    }
 #endif
 }
 

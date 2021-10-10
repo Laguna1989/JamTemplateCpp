@@ -110,7 +110,7 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: CMake
-        run: emcmake cmake -B ${{github.workspace}}/build -DENABLE_STRESSTESTS=ON -DENABLE_UNITTESTS=OFF -DENABLE_WEB=ON.
+        run: emcmake cmake -B ${{github.workspace}}/build -DENABLE_STRESSTESTS=ON -DENABLE_UNITTESTS=OFF -DENABLE_WEB=ON -DUSE_SFML=OFF .
 
       - name: Build
         working-directory: ${{github.workspace}}/build
