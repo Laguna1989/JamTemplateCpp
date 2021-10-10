@@ -30,8 +30,8 @@ void Camera::update(float elapsed) { updateShake(elapsed); }
 
 void Camera::updateShake(float elapsed)
 {
+    m_shakeTimer -= elapsed;
     if (m_shakeTimer > 0) {
-        m_shakeTimer -= elapsed;
         m_shakeInterval -= elapsed;
         if (m_shakeInterval < 0) {
             m_shakeInterval = m_shakeIntervalMax;
