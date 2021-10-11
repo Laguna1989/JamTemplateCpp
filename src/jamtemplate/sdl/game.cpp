@@ -43,8 +43,8 @@ Game::Game(std::shared_ptr<RenderWindowInterface> window, float zoom,
 
     // important fix for SDL_Mixer: OpenAudio has to be called before Mix_Init,
     // otherwise ogg is not supported.
-    Mix_Init(MIX_INIT_OGG);
     Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 1024);
+    Mix_Init(MIX_INIT_OGG);
 }
 
 void Game::setupRenderTarget() { }
