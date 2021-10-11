@@ -21,7 +21,7 @@ namespace jt {
 
 Game::Game(std::shared_ptr<RenderWindowInterface> window, float zoom,
     std::shared_ptr<InputManagerInterface> input, std::shared_ptr<MusicPlayerInterface> musicPlayer,
-    std::shared_ptr<CamInterface> camera = nullptr)
+    std::shared_ptr<CamInterface> camera)
     : GameBase { camera }
     , m_input { input }
     , m_musicPlayer { musicPlayer }
