@@ -133,8 +133,8 @@ jobs:
           version: 9
           platform: x64
 
-      - name: Set up SFML
-        run: sudo apt-get install -y libsfml-dev
+      - name: Set up system libs
+        run: sudo apt-get install -y libsfml-dev jackd
 
       - name: Set up cpp-coveralls
         run: pip install --user cpp-coveralls
@@ -144,11 +144,13 @@ jobs:
       - name: CMake
         run: |
           cmake \
-          -DENABLE_DISPLAY_TESTS=OFF \
           -DENABLE_COVERAGE=ON .
 
       - name: Build
         run: make -j 4
+
+      - name: StartJack
+        run: jackd -d dummy &
 
       - name: Test
         uses: GabrielBB/xvfb-action@v1
@@ -169,7 +171,5 @@ jobs:
           -e src/jamtemplate/sdl \
           -e src/jamtemplate/sfml/keyboard_input_lib.cpp \
           -e src/jamtemplate/sfml/mouse_input_lib.cpp \
-          -e src/jamtemplate/sfml/sound.cpp \
-          -e src/jamtemplate/sfml/music_player.cpp \
           --gcov-options '\-m'
 
