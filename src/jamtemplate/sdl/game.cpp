@@ -20,10 +20,11 @@
 namespace jt {
 
 Game::Game(std::shared_ptr<RenderWindowInterface> window, float zoom,
-    std::shared_ptr<InputManagerInterface> input, std::shared_ptr<MusicPlayerInterface> musicPlayer)
-    : m_input { input }
+    std::shared_ptr<InputManagerInterface> input, std::shared_ptr<MusicPlayerInterface> musicPlayer,
+    std::shared_ptr<CamInterface> camera = nullptr)
+    : GameBase { camera }
+    , m_input { input }
     , m_musicPlayer { musicPlayer }
-
 {
     m_camera->setZoom(zoom);
     auto const width = window->getSize().x();
