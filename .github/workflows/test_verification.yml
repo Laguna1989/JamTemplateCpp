@@ -65,7 +65,7 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: CMake
-        run: cmake -B ${{github.workspace}}/build -DUSE_SFML=OFF -DENABLE_DISPLAY_TESTS=OFF.
+        run: cmake -B ${{github.workspace}}/build -DUSE_SFML=OFF -DENABLE_DISPLAY_TESTS=OFF .
 
       - name: Build
         working-directory: ${{github.workspace}}/build
