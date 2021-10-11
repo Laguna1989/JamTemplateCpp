@@ -57,7 +57,7 @@ jobs:
           platform: x64
 
       - name: Set up SDL and jack
-        run: sudo apt-get install -y libsdl2-dev libsdl2-mixer-dev libsdl2-ttf-dev libsdl2-image-dev alsa-utils  alsa-lib alsa-oss jackd
+        run: sudo apt-get install -y libsdl2-dev libsdl2-mixer-dev libsdl2-ttf-dev libsdl2-image-dev alsa-utils jackd
 
       - uses: actions/checkout@v2
 
