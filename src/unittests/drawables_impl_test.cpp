@@ -269,7 +269,15 @@ TEST_P(DrawableImplTestFixture, GetFlashColorAfterSet)
     ASSERT_EQ(drawable->getFlashColor(), jt::colors::Yellow);
 }
 
-// TODO Flash
+TEST_P(DrawableImplTestFixture, UpdateAndDrawWithFlash)
+{
+    std::shared_ptr<jt::DrawableInterface> drawable = GetParam();
+    drawable->flash(0.5f, jt::colors::Red);
+
+    ASSERT_EQ(drawable->getFlashColor(), jt::colors::Red);
+    drawable->update(0.25f);
+    drawable->draw(getRenderTarget());
+}
 
 TEST_P(DrawableImplTestFixture, GetShadowColorReturnsBlackByDefault)
 {
