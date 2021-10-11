@@ -57,21 +57,24 @@ jobs:
           platform: x64
 
       - name: Set up SDL and jack
-        run: sudo apt-get install -y libsdl2-dev libsdl2-mixer-dev libsdl2-ttf-dev libsdl2-image-dev
+        run: sudo apt-get install -y libsdl2-dev libsdl2-mixer-dev libsdl2-ttf-dev libsdl2-image-dev alsa-utils jackd
 
       - uses: actions/checkout@v2
 
       - name: CMake
-        run: cmake -B ${{github.workspace}}/build -DUSE_SFML=OFF -DENABLE_DISPLAY_TESTS=OFF .
+        run: cmake -B ${{github.workspace}}/build -DUSE_SFML=OFF .
 
       - name: Build
         working-directory: ${{github.workspace}}/build
         run: make -j 4
 
+      - name: StartJack
+        run: jackd -d dummy &
+
       - name: Test
         uses: GabrielBB/xvfb-action@v1
         with:
-          run: ./UnitTests
+          run: export SDL_AUDIODRIVER='dsp' && ./UnitTests
           working-directory: ${{github.workspace}}/build/src/unittests
 
   TestsWindows:
@@ -173,4 +176,3 @@ jobs:
           -e src/jamtemplate/sfml/keyboard_input_lib.cpp \
           -e src/jamtemplate/sfml/mouse_input_lib.cpp \
           --gcov-options '\-m'
-
