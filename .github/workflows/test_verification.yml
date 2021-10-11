@@ -21,17 +21,20 @@ jobs:
           version: 9
           platform: x64
 
-      - name: Set up SFML
-        run: sudo apt-get install -y libsfml-dev
+      - name: Set up system libs
+        run: sudo apt-get install -y libsfml-dev jackd
 
       - uses: actions/checkout@v2
 
       - name: CMake
-        run: cmake -B ${{github.workspace}}/build -DENABLE_DISPLAY_TESTS=OFF .
+        run: cmake -B ${{github.workspace}}/build .
 
       - name: Build
         working-directory: ${{github.workspace}}/build
         run: make -j 4
+
+      - name: StartJack
+        run: jackd -d dummy &
 
       - name: Test
         uses: GabrielBB/xvfb-action@v1
