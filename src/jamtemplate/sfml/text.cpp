@@ -5,13 +5,9 @@ namespace jt {
 
 Text::~Text()
 {
-    // std::cout << "Text dtor\n";
     m_text = nullptr;
-    // std::cout << "Text dtor2\n";
     m_flashText = nullptr;
-    // std::cout << "Text dtor3\n";
     m_font = nullptr;
-    // std::cout << "Text dtor4\n";
 }
 
 void Text::loadFont(std::string const& fontFileName, unsigned int characterSize,

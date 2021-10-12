@@ -279,6 +279,19 @@ TEST_P(DrawableImplTestFixture, UpdateAndDrawWithFlash)
     drawable->draw(getRenderTarget());
 }
 
+TEST_P(DrawableImplTestFixture, GetShadowActiveIsFalseByDefault)
+{
+    std::shared_ptr<jt::DrawableInterface> drawable = GetParam();
+    ASSERT_FALSE(drawable->getShadowActive());
+}
+
+TEST_P(DrawableImplTestFixture, GetShadowActiveIsTrueAfterSetShadowActive)
+{
+    std::shared_ptr<jt::DrawableInterface> drawable = GetParam();
+    drawable->setShadowActive(true);
+    ASSERT_TRUE(drawable->getShadowActive());
+}
+
 TEST_P(DrawableImplTestFixture, GetShadowColorReturnsBlackByDefault)
 {
     std::shared_ptr<jt::DrawableInterface> drawable = GetParam();

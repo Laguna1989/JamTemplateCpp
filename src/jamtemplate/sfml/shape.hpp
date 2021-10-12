@@ -3,8 +3,11 @@
 
 #include "drawable_impl.hpp"
 #include "render_target.hpp"
-#include <SFML/Graphics.hpp>
 #include <memory>
+
+namespace sf {
+class Shape;
+}
 
 namespace jt {
 class Shape : public DrawableImpl {
@@ -31,8 +34,6 @@ public:
 
     void setOrigin(jt::Vector2 const& origin) override;
     const jt::Vector2 getOrigin() const override;
-
-    std::shared_ptr<sf::Shape> getShape();
 
 private:
     mutable std::shared_ptr<sf::Shape> m_shape = nullptr;

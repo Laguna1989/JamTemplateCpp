@@ -1,128 +1,128 @@
 ﻿#include "vector.hpp"
 #include <gtest/gtest.h>
 
-TEST(VectorEQ, Equal)
+TEST(VectorTest, DefaultValues)
+{
+    jt::Vector2 vec;
+    ASSERT_EQ(vec.x(), 0.0f);
+    ASSERT_EQ(vec.y(), 0.0f);
+}
+
+TEST(VectorTest, Equal)
 {
     jt::Vector2 const initial { 5.0f, -1.245f };
     jt::Vector2 const initial2 { initial };
 
-    EXPECT_TRUE(initial == initial2);
-    EXPECT_FALSE(initial != initial2);
+    ASSERT_TRUE(initial == initial2);
+    ASSERT_FALSE(initial != initial2);
 }
 
-TEST(VectorEQ, NotEqual)
+TEST(VectorTest, NotEqual)
 {
     jt::Vector2 const initial { 5.0f, -1.245f };
     jt::Vector2 const add { 0.0f, 0.0f };
 
-    EXPECT_FALSE(initial == add);
-    EXPECT_TRUE(initial != add);
+    ASSERT_FALSE(initial == add);
+    ASSERT_TRUE(initial != add);
 }
 
-TEST(VectorAdd, AddZereo)
+TEST(VectorTest, AddZereo)
 {
     jt::Vector2 const initial { 5.0f, -1.245f };
     jt::Vector2 const add { 0.0f, 0.0f };
 
-    EXPECT_EQ(initial, initial + add);
+    ASSERT_EQ(initial, initial + add);
 }
 
-TEST(VectorAdd, AddReal)
+TEST(VectorTest, AddReal)
 {
     jt::Vector2 const initial { 5.0f, -1.245f };
     jt::Vector2 const add { 1.0f, 1.0f };
     jt::Vector2 const expected { initial.x() + add.x(), initial.y() + add.y() };
 
-    EXPECT_EQ(initial + add, expected);
+    ASSERT_EQ(initial + add, expected);
 }
 
-TEST(VectorAddEQ, AddZero)
+TEST(VectorTest, AddEQZero)
 {
     jt::Vector2 const initial { 5.0f, -1.245f };
     jt::Vector2 copy { initial };
     jt::Vector2 const add { 0.0f, 0.0f };
     copy += add;
-    EXPECT_EQ(copy, initial);
+    ASSERT_EQ(copy, initial);
 }
 
-TEST(VectorAddEQ, AddReal)
+TEST(VectorTest, AddEQReal)
 {
     jt::Vector2 initial { 5.0f, -1.245f };
     jt::Vector2 const add { 1.0f, -1.0f };
     jt::Vector2 const expected { initial.x() + add.x(), initial.y() + add.y() };
     initial += add;
-    EXPECT_EQ(initial, expected);
+    ASSERT_EQ(initial, expected);
 }
 
-TEST(VectorAdd, SubtractZereo)
+TEST(VectorTest, SubtractZereo)
 {
     jt::Vector2 const initial { 5.0f, -1.245f };
     jt::Vector2 const add { 0.0f, 0.0f };
 
-    EXPECT_EQ(initial, initial - add);
+    ASSERT_EQ(initial, initial - add);
 }
 
-TEST(VectorAdd, SubtractReal)
+TEST(VectorTest, SubtractReal)
 {
     jt::Vector2 const initial { 5.0f, -1.245f };
     jt::Vector2 const add { 1.0f, 1.0f };
     jt::Vector2 const expected { initial.x() - add.x(), initial.y() - add.y() };
 
-    EXPECT_EQ(initial - add, expected);
+    ASSERT_EQ(initial - add, expected);
 }
 
-TEST(VectorSubEQ, AddZero)
+TEST(VectorTest, SubEQZero)
 {
     jt::Vector2 const initial { 5.0f, -1.245f };
     jt::Vector2 copy { initial };
     jt::Vector2 const add { 0.0f, 0.0f };
     copy -= add;
-    EXPECT_EQ(copy, initial);
+    ASSERT_EQ(copy, initial);
 }
 
-TEST(VectorSubEQ, AddReal)
+TEST(VectorTest, SubEQReal)
 {
     jt::Vector2 initial { 5.0f, -1.245f };
     jt::Vector2 const add { 1.0f, -1.0f };
     jt::Vector2 const expected { initial.x() - add.x(), initial.y() - add.y() };
     initial -= add;
-    EXPECT_EQ(initial.x(), expected.x());
-    EXPECT_EQ(initial.y(), expected.y());
+    ASSERT_EQ(initial.x(), expected.x());
+    ASSERT_EQ(initial.y(), expected.y());
 }
 
-TEST(VectorMultiply, One)
+TEST(VectorTest, MultiplyOne)
 {
     jt::Vector2 const initial { 4.2f, 1.1111f };
-    EXPECT_EQ(initial * 1.0f, initial);
+    ASSERT_EQ(initial * 1.0f, initial);
 }
 
-TEST(VectorMultiply, Real)
+TEST(VectorTest, MultiplyReal)
 {
     jt::Vector2 const initial { 4.2f, 1.1111f };
     float const v = 2.5f;
     jt::Vector2 const expected { initial.x() * v, initial.y() * v };
-    EXPECT_EQ(initial * v, expected);
+    ASSERT_EQ(initial * v, expected);
 }
 
-TEST(VectorDivide, One)
+TEST(VectorTest, DivideOne)
 {
     jt::Vector2 const initial { 4.2f, 1.1111f };
-    EXPECT_EQ(initial / 1.0f, initial);
+    ASSERT_EQ(initial / 1.0f, initial);
 }
 
-TEST(VectorDivide, Real)
+TEST(VectorTest, DivideReal)
 {
     jt::Vector2 const initial { 4.2f, 1.1111f };
     float const v = 2.5f;
     jt::Vector2 const expected { initial.x() / v, initial.y() / v };
-    EXPECT_EQ(initial / v, expected);
-}
-
-TEST(Vector2, DefaultConstructor)
-{
-    jt::Vector2 const vec;
-    ASSERT_EQ(vec.x(), 0.0f);
-    ASSERT_EQ(vec.y(), 0.0f);
+    ASSERT_EQ(initial / v, expected);
 }
 
 TEST(Vector2UAccess, ReadAccess)
@@ -130,8 +130,8 @@ TEST(Vector2UAccess, ReadAccess)
     unsigned int const x { 1 };
     unsigned int const y { 7 };
     jt::Vector2u const v { x, y };
-    EXPECT_EQ(v.x(), x);
-    EXPECT_EQ(v.y(), y);
+    ASSERT_EQ(v.x(), x);
+    ASSERT_EQ(v.y(), y);
 }
 
 TEST(Vector2UAccess, WriteAccess)
@@ -143,8 +143,8 @@ TEST(Vector2UAccess, WriteAccess)
     v.x() = x;
     v.y() = y;
 
-    EXPECT_EQ(v.x(), x);
-    EXPECT_EQ(v.y(), y);
+    ASSERT_EQ(v.x(), x);
+    ASSERT_EQ(v.y(), y);
 }
 
 TEST(Vector2U, AddZero)
@@ -152,7 +152,7 @@ TEST(Vector2U, AddZero)
     jt::Vector2u const v { 5, 1 };
     jt::Vector2u const w { 0, 0 };
 
-    EXPECT_EQ(v, v + w);
+    ASSERT_EQ(v, v + w);
 }
 TEST(Vector2U, AddOne)
 {
@@ -160,7 +160,7 @@ TEST(Vector2U, AddOne)
     jt::Vector2u const w { 1, 1 };
     jt::Vector2u const expected { v.x() + w.x(), v.y() + w.y() };
 
-    EXPECT_EQ(v + w, expected);
+    ASSERT_EQ(v + w, expected);
 }
 
 TEST(Vector2U, SubtractZero)
@@ -168,7 +168,7 @@ TEST(Vector2U, SubtractZero)
     jt::Vector2u const v { 5, 1 };
     jt::Vector2u const w { 0, 0 };
 
-    EXPECT_EQ(v, v - w);
+    ASSERT_EQ(v, v - w);
 }
 
 TEST(Vector2U, SubtractOne)
@@ -177,7 +177,7 @@ TEST(Vector2U, SubtractOne)
     jt::Vector2u const w { 1, 1 };
     jt::Vector2u const expected { v.x() - w.x(), v.y() - w.y() };
 
-    EXPECT_EQ(v - w, expected);
+    ASSERT_EQ(v - w, expected);
 }
 
 TEST(Vector2U, NotEqual)
@@ -185,7 +185,7 @@ TEST(Vector2U, NotEqual)
     jt::Vector2u const v { 5, 4 };
     jt::Vector2u const w { 2, 2 };
 
-    EXPECT_NE(v, w);
+    ASSERT_NE(v, w);
 }
 
 TEST(Vector2U, MoveConstructor)
@@ -193,8 +193,8 @@ TEST(Vector2U, MoveConstructor)
     jt::Vector2u vec1 { 2, 3 };
     jt::Vector2u vec2 { std::move(vec1) };
 
-    EXPECT_EQ(vec1.x(), 2);
-    EXPECT_EQ(vec1.y(), 3);
+    ASSERT_EQ(vec1.x(), 2);
+    ASSERT_EQ(vec1.y(), 3);
 }
 
 TEST(Vector2UAddEqual, AddZero)
@@ -203,7 +203,7 @@ TEST(Vector2UAddEqual, AddZero)
     jt::Vector2u copy { initial };
     jt::Vector2u const add { 0, 0 };
     copy += add;
-    EXPECT_EQ(copy, initial);
+    ASSERT_EQ(copy, initial);
 }
 
 TEST(Vector2UAddEqual, AddReal)
@@ -212,5 +212,5 @@ TEST(Vector2UAddEqual, AddReal)
     jt::Vector2u const add { 1, 2 };
     jt::Vector2u const expected { initial.x() + add.x(), initial.y() + add.y() };
     initial += add;
-    EXPECT_EQ(initial, expected);
+    ASSERT_EQ(initial, expected);
 }
