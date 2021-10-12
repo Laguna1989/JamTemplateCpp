@@ -149,6 +149,7 @@ TEST_F(ButtonTest, CustomDrawable)
     b.setDrawable(d);
     std::shared_ptr<jt::renderTarget> rt = nullptr;
     EXPECT_CALL(*game, getRenderTarget()).Times(2);
+    EXPECT_CALL(*d, setPosition(::testing::_));
     EXPECT_CALL(*d, update(0.1f));
     b.update(0.1f);
     EXPECT_CALL(*d, draw(rt));
