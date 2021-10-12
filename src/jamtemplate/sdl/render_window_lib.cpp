@@ -1,6 +1,6 @@
 ﻿#include "render_window_lib.hpp"
+#include <SDL2/SDL.h>
 #include <iostream>
-#include <SDL.h>
 
 namespace jt {
 
@@ -29,18 +29,32 @@ std::shared_ptr<jt::renderTarget> RenderWindow::createRenderTarget()
     return renderTarget;
 }
 
-bool RenderWindow::isOpen() const { return true; }
+bool RenderWindow::isOpen() const { return m_isOpen; }
 
 void RenderWindow::checkForClose()
 {
+#if ENABLE_WEB
     std::cerr << "RenderWindow::checkForClose() not supported by SDL Renderwindow. Webbuild window "
                  "cannot be closed\n";
+#else
+    SDL_Event event;
+    while (SDL_PollEvent(&event)) {
+        switch (event.type) {
+        case SDL_QUIT:
+            m_isOpen = false;
+            break;
+        }
+    }
+#endif
 }
 
 jt::Vector2 RenderWindow::getSize() const { return m_size; }
 
-void RenderWindow::draw(std::shared_ptr<jt::Sprite> /*spr*/)
+void RenderWindow::draw(std::shared_ptr<jt::Sprite> spr)
 {
+    if (!spr) {
+        throw std::invalid_argument { "cannot draw nullptr sprite" };
+    }
     std::cerr << "RenderWindow::draw() not supported by SDL Renderwindow. Use the Rendertarget "
                  "directly to draw\n";
 }
@@ -64,7 +78,7 @@ jt::Vector2 RenderWindow::getMousePosition()
 jt::Vector2 RenderWindow::getMousePositionScreen(float /*zoom*/)
 {
     std::cerr << "RenderWindow::getMousepositonScreen() not supported by SDL Renderwindow.\n";
-    return jt::Vector2 { 0.0f, 0.0f };
+    return jt::Vector2 { 42.0f, 42.0f };
 }
 
 void RenderWindow::setMouseCursorVisible(bool visible)
@@ -73,9 +87,6 @@ void RenderWindow::setMouseCursorVisible(bool visible)
     m_isMouseCursorVisible = visible;
 }
 
-bool RenderWindow::getMouseCursorVisible() const
-{
-    return m_isMouseCursorVisible;
-}
+bool RenderWindow::getMouseCursorVisible() const { return m_isMouseCursorVisible; }
 
 } // namespace jt

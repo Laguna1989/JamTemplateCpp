@@ -18,7 +18,7 @@ class GameBase : public GameInterface,
                  public GameObject,
                  public std::enable_shared_from_this<GameBase> {
 public:
-    GameBase();
+    GameBase(std::shared_ptr<CamInterface> camera = nullptr);
     // this function will likely be called by the user from within update().
     // To ensure consisten behavior within one frame, the actual switching will take place in
     // doSwitchState() which will happen at the beginning of the next update loop.

@@ -13,6 +13,8 @@ namespace jt {
 
 class GameInterface : public GameLoopInterface {
 public:
+    virtual ~GameInterface() = default;
+
     virtual std::shared_ptr<InputManagerInterface> input() = 0;
 
     virtual std::shared_ptr<MusicPlayerInterface> getMusicPlayer() = 0;

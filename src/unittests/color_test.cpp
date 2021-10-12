@@ -9,6 +9,6 @@ TEST(ColorTest, IsDefaultConstructible)
 
 TEST(ColorTest, InitialValues)
 {
-    jt::Color c;
+    jt::Color c {};
     ASSERT_EQ(c, jt::colors::Black);
 }

@@ -161,7 +161,6 @@ std::shared_ptr<SDL_Texture> loadTextureFromDisk(
 } // namespace
 
 TextureManager::TextureMapType TextureManager::m_textures;
-TextureManager::ColorReplaceLookupVectorType TextureManager::m_selectiveColorReplace {};
 std::weak_ptr<jt::renderTarget> TextureManager::m_renderer {};
 
 std::shared_ptr<SDL_Texture> TextureManager::get(std::string const& str)
@@ -191,8 +190,6 @@ std::shared_ptr<SDL_Texture> TextureManager::get(std::string const& str)
                 m_textures[str] = createButtonImage(ssv, m_renderer.lock());
             } else if (ssv.at(0) == "f") {
                 m_textures[str] = createBlankImage(ssv, m_renderer.lock());
-            } else if (ssv.at(0) == "r") {
-                // m_textures[str].loadFromImage(createReplacedImage(ssv, m_selectiveColorReplace));
             } else if (ssv.at(0) == "g") {
                 m_textures[str] = createGlowImage(ssv, m_renderer.lock());
             } else if (ssv.at(0) == "v") {
@@ -211,10 +208,6 @@ std::shared_ptr<SDL_Texture> TextureManager::get(std::string const& str)
 
 std::string TextureManager::getFlashName(std::string const& str) { return str + "___flash__"; }
 
-void TextureManager::reset()
-{
-    m_textures.clear();
-    m_selectiveColorReplace.clear();
-}
+void TextureManager::reset() { m_textures.clear(); }
 
 } // namespace jt

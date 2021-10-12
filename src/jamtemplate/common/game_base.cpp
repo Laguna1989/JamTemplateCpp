@@ -8,11 +8,14 @@
 
 namespace jt {
 
-GameBase::GameBase()
+GameBase::GameBase(std::shared_ptr<CamInterface> camera)
     : m_state { nullptr }
     , m_nextState { nullptr }
-    , m_camera { std::make_shared<Camera>() }
+    , m_camera { camera }
 {
+    if (!m_camera) {
+        m_camera = std::make_shared<Camera>();
+    }
 }
 
 void GameBase::switchState(std::shared_ptr<GameState> newState)
@@ -64,8 +67,7 @@ void GameBase::run()
         std::cerr << "!! ERROR: Exception ocurred !!\n";
         std::cerr << e.what() << std::endl;
         throw;
-    }
-    catch (...) {
+    } catch (...) {
         std::cerr << "!! ERROR: Unhandled Exception ocurred !!\n";
         throw;
     }

@@ -6,15 +6,7 @@
 
 using jt::Sound;
 
-void init()
-{
-    // in a normal game executable the sdl audio init would happen in the game class.
-    // as this test should not need to know about the game, it needs to be done here.
-#ifdef ENABLE_WEB
-    Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 1024);
-    Mix_Init(MIX_INIT_OGG);
-#endif
-}
+void init() { }
 
 TEST(SoundTest, SoundImplIsDerivedFromSoundBase)
 {

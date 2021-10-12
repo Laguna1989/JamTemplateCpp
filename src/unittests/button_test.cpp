@@ -4,51 +4,53 @@
 #include "mocks/mock_input.hpp"
 #include <gtest/gtest.h>
 
-TEST(ButtonTest, InitialValues)
-{
+class ButtonTest : public ::testing::Test {
+public:
     jt::Button b { jt::Vector2u { 32, 16 } };
-    jt::Vector2 expectedPos { 0.0f, 0.0f };
+};
 
+TEST_F(ButtonTest, InitialPosition)
+{
+    jt::Vector2 expectedPos { 0.0f, 0.0f };
     ASSERT_EQ(b.getPosition(), expectedPos);
-    ASSERT_EQ(b.getCallbackCount(), 0);
-    ASSERT_TRUE(b.getVisible());
 }
 
-TEST(ButtonTest, GetPositionAfterSetPosition)
+TEST_F(ButtonTest, InitialCallbacks) { ASSERT_EQ(b.getCallbackCount(), 0); }
+
+TEST_F(ButtonTest, InitialVisible) { ASSERT_TRUE(b.getVisible()); }
+
+TEST_F(ButtonTest, InitialActive) { ASSERT_TRUE(b.getActive()); }
+
+TEST_F(ButtonTest, GetPositionAfterSetPosition)
 {
-    jt::Button b { jt::Vector2u { 32, 16 } };
     jt::Vector2 expectedPos { 20.0f, 20.0f };
     b.setPosition(expectedPos);
     ASSERT_EQ(b.getPosition(), expectedPos);
 }
 
-TEST(ButtonTest, SetVisibleSetsCorrectValue)
+TEST_F(ButtonTest, SetVisibleSetsFalseCorrectValue)
 {
-    jt::Button b { jt::Vector2u { 32, 16 } };
-    ASSERT_TRUE(b.getVisible());
-    b.setVisible(true);
-    EXPECT_TRUE(b.getVisible());
     b.setVisible(false);
-    EXPECT_FALSE(b.getVisible());
+    ASSERT_FALSE(b.getVisible());
 }
 
-TEST(ButtonTest, UpdateWithoutGameInstanceRaisesException)
+TEST_F(ButtonTest, SetVisibleSetsTrueCorrectValue)
 {
-    jt::Button b {};
-    EXPECT_ANY_THROW(b.update(0.1f));
+    b.setVisible(true);
+    ASSERT_TRUE(b.getVisible());
 }
 
-TEST(ButtonTest, UpdateWithGameInstanceDoesNotThrow)
+TEST_F(ButtonTest, UpdateWithoutGameInstanceRaisesException) { ASSERT_ANY_THROW(b.update(0.1f)); }
+
+TEST_F(ButtonTest, UpdateWithGameInstanceDoesNotThrow)
 {
     auto game = std::make_shared<MockGame>();
     EXPECT_CALL(*game, input());
-    jt::Button b {};
     b.setGameInstance(game);
     b.update(0.1f);
-    SUCCEED();
 }
 
-TEST(ButtonTest, IsOverWithMockMouseReturnsTrueWhenOver)
+TEST_F(ButtonTest, IsOverWithMockMouseReturnsTrueWhenOver)
 {
     auto game = std::make_shared<testing::NiceMock<MockGame>>();
     auto input = std::make_shared<testing::NiceMock<MockInput>>();
@@ -56,13 +58,12 @@ TEST(ButtonTest, IsOverWithMockMouseReturnsTrueWhenOver)
     ON_CALL(*game, input()).WillByDefault(testing::Return(input));
     ON_CALL(*input, mouse()).WillByDefault(testing::Return(mouse));
     ON_CALL(*mouse, getMousePositionScreen()).WillByDefault(testing::Return(jt::Vector2 { 5, 5 }));
-    jt::Button b {};
     b.setGameInstance(game);
 
     ASSERT_TRUE(b.IsMouseOver());
 }
 
-TEST(ButtonTest, IsOverWithMockMouseReturnsFalseWhenNotOver)
+TEST_F(ButtonTest, IsOverWithMockMouseReturnsFalseWhenNotOver)
 {
     auto game = std::make_shared<testing::NiceMock<MockGame>>();
     auto input = std::make_shared<testing::NiceMock<MockInput>>();
@@ -71,13 +72,12 @@ TEST(ButtonTest, IsOverWithMockMouseReturnsFalseWhenNotOver)
     ON_CALL(*input, mouse()).WillByDefault(testing::Return(mouse));
     ON_CALL(*mouse, getMousePositionScreen())
         .WillByDefault(testing::Return(jt::Vector2 { 50, 50 }));
-    jt::Button b {};
     b.setGameInstance(game);
 
     ASSERT_FALSE(b.IsMouseOver());
 }
 
-TEST(ButtonTest, IsOverReturnsFalseWhenNotActive)
+TEST_F(ButtonTest, IsOverReturnsFalseWhenNotActive)
 {
     auto game = std::make_shared<testing::NiceMock<MockGame>>();
     auto input = std::make_shared<testing::NiceMock<MockInput>>();
@@ -85,14 +85,13 @@ TEST(ButtonTest, IsOverReturnsFalseWhenNotActive)
     ON_CALL(*game, input()).WillByDefault(testing::Return(input));
     ON_CALL(*input, mouse()).WillByDefault(testing::Return(mouse));
     ON_CALL(*mouse, getMousePositionScreen()).WillByDefault(testing::Return(jt::Vector2 { 5, 5 }));
-    jt::Button b {};
     b.setActive(false);
     b.setGameInstance(game);
 
     ASSERT_FALSE(b.IsMouseOver());
 }
 
-TEST(ButtonTest, UpdateWithInput)
+TEST_F(ButtonTest, UpdateWithInput)
 {
     auto game = std::make_shared<testing::NiceMock<MockGame>>();
     auto input = std::make_shared<testing::NiceMock<MockInput>>();
@@ -100,18 +99,16 @@ TEST(ButtonTest, UpdateWithInput)
     ON_CALL(*game, input()).WillByDefault(testing::Return(input));
     ON_CALL(*input, mouse()).WillByDefault(testing::Return(mouse));
     ON_CALL(*mouse, getMousePositionScreen()).WillByDefault(testing::Return(jt::Vector2 { 5, 5 }));
-    jt::Button b {};
     b.setGameInstance(game);
 
     b.update(0.1f);
     SUCCEED();
 }
 
-TEST(ButtonTest, Draw)
+TEST_F(ButtonTest, Draw)
 {
     auto game = std::make_shared<MockGame>();
     EXPECT_CALL(*game, input());
-    jt::Button b {};
     b.setGameInstance(game);
     b.update(0.1f);
     EXPECT_CALL(*game, getRenderTarget());
@@ -119,37 +116,32 @@ TEST(ButtonTest, Draw)
     SUCCEED();
 }
 
-TEST(ButtonTest, DrawInvisibleButton)
+TEST_F(ButtonTest, DrawInvisibleButton)
 {
     auto game = std::make_shared<MockGame>();
     EXPECT_CALL(*game, input());
-    jt::Button b {};
     b.setVisible(false);
     b.setGameInstance(game);
     b.update(0.1f);
     EXPECT_CALL(*game, getRenderTarget()).Times(0);
     b.draw();
-    SUCCEED();
 }
 
-TEST(ButtonTest, DrawInActiveButton)
+TEST_F(ButtonTest, DrawInActiveButton)
 {
     auto game = std::make_shared<MockGame>();
     EXPECT_CALL(*game, input());
-    jt::Button b {};
     b.setActive(false);
     b.setGameInstance(game);
     b.update(0.1f);
     EXPECT_CALL(*game, getRenderTarget()).Times(2);
     b.draw();
-    SUCCEED();
 }
 
-TEST(ButtonTest, CustomDrawable)
+TEST_F(ButtonTest, CustomDrawable)
 {
     auto game = std::make_shared<MockGame>();
     EXPECT_CALL(*game, input()).Times(2);
-    jt::Button b {};
     b.setGameInstance(game);
     b.update(0.1f);
 
@@ -157,6 +149,7 @@ TEST(ButtonTest, CustomDrawable)
     b.setDrawable(d);
     std::shared_ptr<jt::renderTarget> rt = nullptr;
     EXPECT_CALL(*game, getRenderTarget()).Times(2);
+    EXPECT_CALL(*d, setPosition(::testing::_));
     EXPECT_CALL(*d, update(0.1f));
     b.update(0.1f);
     EXPECT_CALL(*d, draw(rt));
@@ -164,30 +157,20 @@ TEST(ButtonTest, CustomDrawable)
     SUCCEED();
 }
 
-TEST(ButtonTest, IsActiveByDefault)
+TEST_F(ButtonTest, IsNotActiveAfterSetInactive)
 {
-    jt::Button b {};
-    ASSERT_TRUE(b.getActive());
-}
-
-TEST(ButtonTest, IsNotActiveAfterSetInactive)
-{
-    jt::Button b {};
     b.setActive(false);
-
     ASSERT_FALSE(b.getActive());
 }
 
-TEST(ButtonTest, AddCallback)
+TEST_F(ButtonTest, AddCallback)
 {
-    jt::Button b {};
     b.addCallback([]() {});
     ASSERT_EQ(b.getCallbackCount(), 1U);
 }
 
-TEST(ButtonTest, CallbacksAreEmptyAfterClearCallbacks)
+TEST_F(ButtonTest, CallbacksAreEmptyAfterClearCallbacks)
 {
-    jt::Button b {};
     b.addCallback([]() {});
     b.clearCallbacks();
     ASSERT_EQ(b.getCallbackCount(), 0U);

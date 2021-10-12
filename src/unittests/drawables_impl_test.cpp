@@ -1,6 +1,7 @@
 ﻿#include "animation.hpp"
 #include "bar.hpp"
 #include "line.hpp"
+#include "sdl_setup.hpp"
 #include "shape.hpp"
 #include "sprite.hpp"
 #include "text.hpp"
@@ -131,11 +132,21 @@ TEST_P(DrawableImplTestFixture, GetScaleAfterSetScale)
     ASSERT_EQ(drawable->getScale(), expected);
 }
 
+std::shared_ptr<jt::renderTarget> getRenderTarget()
+{
+
+#if USE_SFML
+    return std::make_shared<jt::renderTarget>();
+#else
+    static SDLSetup setup;
+    return setup.renderTarget;
+#endif
+}
+
 TEST_P(DrawableImplTestFixture, DrawWithoutUpdate)
 {
     std::shared_ptr<jt::DrawableInterface> drawable = GetParam();
-    auto rt = std::make_shared<jt::renderTarget>();
-    drawable->draw(rt);
+    drawable->draw(getRenderTarget());
 }
 
 TEST_P(DrawableImplTestFixture, DrawWithNullptr)
@@ -148,9 +159,18 @@ TEST_P(DrawableImplTestFixture, Draw)
 {
     std::shared_ptr<jt::DrawableInterface> drawable = GetParam();
 
-    auto rt = std::make_shared<jt::renderTarget>();
     drawable->update(0.1f);
-    drawable->draw(rt);
+    drawable->draw(getRenderTarget());
+}
+
+TEST_P(DrawableImplTestFixture, DrawWithCamOffset)
+{
+    std::shared_ptr<jt::DrawableInterface> drawable = GetParam();
+
+    jt::DrawableImpl::setCamOffset(jt::Vector2 { -100.0f, -100.0f });
+    drawable->update(0.1f);
+    drawable->draw(getRenderTarget());
+    jt::DrawableImpl::setCamOffset(jt::Vector2 { 0.0f, 0.0f });
 }
 
 TEST_P(DrawableImplTestFixture, DrawWithShadow)
@@ -158,8 +178,7 @@ TEST_P(DrawableImplTestFixture, DrawWithShadow)
     std::shared_ptr<jt::DrawableInterface> drawable = GetParam();
     drawable->setShadow(jt::colors::Green, jt::Vector2 { 4, 4 });
     drawable->update(0.1f);
-    auto rt = std::make_shared<jt::renderTarget>();
-    drawable->draw(rt);
+    drawable->draw(getRenderTarget());
 }
 
 TEST_P(DrawableImplTestFixture, GetColorAfterSetColor)
@@ -169,13 +188,18 @@ TEST_P(DrawableImplTestFixture, GetColorAfterSetColor)
     ASSERT_EQ(drawable->getColor(), jt::colors::Red);
 }
 
+TEST_P(DrawableImplTestFixture, GetColorInitial)
+{
+    std::shared_ptr<jt::DrawableInterface> drawable = GetParam();
+    ASSERT_EQ(drawable->getColor(), jt::colors::White);
+}
+
 TEST_P(DrawableImplTestFixture, DrawWithSetColor)
 {
     std::shared_ptr<jt::DrawableInterface> drawable = GetParam();
     drawable->setColor(jt::colors::Red);
     drawable->update(0.1f);
-    auto rt = std::make_shared<jt::renderTarget>();
-    drawable->draw(rt);
+    drawable->draw(getRenderTarget());
 }
 
 TEST_P(DrawableImplTestFixture, DrawWithFlash)
@@ -183,7 +207,7 @@ TEST_P(DrawableImplTestFixture, DrawWithFlash)
     std::shared_ptr<jt::DrawableInterface> drawable = GetParam();
     drawable->flash(5.0f);
     drawable->update(0.1f);
-    auto rt = std::make_shared<jt::renderTarget>();
+    auto rt = getRenderTarget();
     drawable->draw(rt);
     drawable->update(5.0f);
     drawable->draw(rt);
@@ -194,7 +218,7 @@ TEST_P(DrawableImplTestFixture, DrawWithShake)
     std::shared_ptr<jt::DrawableInterface> drawable = GetParam();
     drawable->shake(5.0f, 0.02f);
     drawable->update(0.1f);
-    auto rt = std::make_shared<jt::renderTarget>();
+    auto rt = getRenderTarget();
     drawable->draw(rt);
     drawable->update(5.0f);
     drawable->draw(rt);
@@ -205,9 +229,8 @@ TEST_P(DrawableImplTestFixture, DrawScaled)
     std::shared_ptr<jt::DrawableInterface> drawable = GetParam();
     drawable->setScale(jt::Vector2 { 2.0f, 2.0f });
     drawable->update(0.1f);
-    auto rt = std::make_shared<jt::renderTarget>();
     jt::DrawableImpl::setCamOffset(jt::Vector2 { 100.0f, 100.0f });
-    drawable->draw(rt);
+    drawable->draw(getRenderTarget());
 }
 
 TEST_P(DrawableImplTestFixture, InitialRotations)
@@ -229,9 +252,8 @@ TEST_P(DrawableImplTestFixture, DrawRotated)
     drawable->setOrigin(jt::Vector2 { 16.0f, 16.0f });
     drawable->setRotation(22.5f);
     drawable->update(0.1f);
-    auto rt = std::make_shared<jt::renderTarget>();
     jt::DrawableImpl::setCamOffset(jt::Vector2 { 100.0f, 100.0f });
-    drawable->draw(rt);
+    drawable->draw(getRenderTarget());
 }
 
 TEST_P(DrawableImplTestFixture, GetFlashColorReturnsWhiteByDefault)
@@ -247,7 +269,15 @@ TEST_P(DrawableImplTestFixture, GetFlashColorAfterSet)
     ASSERT_EQ(drawable->getFlashColor(), jt::colors::Yellow);
 }
 
-// TODO Flash
+TEST_P(DrawableImplTestFixture, UpdateAndDrawWithFlash)
+{
+    std::shared_ptr<jt::DrawableInterface> drawable = GetParam();
+    drawable->flash(0.5f, jt::colors::Red);
+
+    ASSERT_EQ(drawable->getFlashColor(), jt::colors::Red);
+    drawable->update(0.25f);
+    drawable->draw(getRenderTarget());
+}
 
 TEST_P(DrawableImplTestFixture, GetShadowColorReturnsBlackByDefault)
 {

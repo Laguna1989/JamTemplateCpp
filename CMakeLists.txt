@@ -24,11 +24,21 @@ if ($ENV{CLION_IDE})
 endif ()
 
 #####################################################
-## Create link directories
+## Set link directories
 #####################################################
-if (NOT ENABLE_WEB)
+
+if (USE_SFML)
     if (WIN32 OR APPLE)
         link_directories(${SFML_DIR_ROOT}/lib)
+    endif ()
+else ()
+    if (NOT ENABLE_WEB)
+        find_package(SDL2 REQUIRED)
+
+        include(FindPkgConfig)
+        pkg_check_modules(SDL2_Mixer REQUIRED IMPORTED_TARGET SDL2_mixer)
+        pkg_check_modules(SDL2_Image REQUIRED IMPORTED_TARGET SDL2_image)
+        pkg_check_modules(SDL2_TTF REQUIRED IMPORTED_TARGET SDL2_ttf)
     endif ()
 endif ()
 
@@ -38,8 +48,8 @@ set(CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_STANDARD 17)
 set(CXX_STANDARD 17)
 
-if (ENABLE_DISPLAY_TESTS)
-    add_definitions(-DENABLE_DISPLAY_TESTS)
+if (ENABLE_AUDIO_TESTS)
+    add_definitions(-DENABLE_AUDIO_TESTS)
 endif ()
 
 if (ENABLE_WEB)
@@ -50,7 +60,6 @@ if (ENABLE_WEB)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -s USE_SDL_IMAGE=2 -s SDL2_IMAGE_FORMATS='[\"bmp\",\"png\"]'")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -s USE_SDL_MIXER=2 -s USE_VORBIS=1 -s USE_OGG=1")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -s USE_SDL_TTF=2")
-    add_definitions(-DENABLE_WEB)
 else ()
     if (MSVC)
         ## nasty warning 5205 from tileson should not show up,
@@ -58,7 +67,7 @@ else ()
         set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /w45205 /W3 /EHsc")
     else ()
         if (ENABLE_COVERAGE)
-            set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -Wall -Wextra -O0 -fprofile-arcs -ftest-coverage  --std=c++17 -fpermissive -lstdc++fs")
+            set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -Wall -Wextra -O0 -fprofile-arcs -ftest-coverage --std=c++17 -fpermissive -lstdc++fs")
         else ()
             set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -O3 --std=c++17 -fpermissive -lstdc++fs")
         endif ()

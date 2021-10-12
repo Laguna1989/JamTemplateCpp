@@ -8,7 +8,6 @@ void Sound::doLoad(std::string const& fileName)
 {
     m_wave = std::shared_ptr<Mix_Chunk>(
         Mix_LoadWAV(fileName.c_str()), [](Mix_Chunk* wave) { Mix_FreeChunk(wave); });
-
     if (!m_wave) {
         throw std::invalid_argument { "can not load sound from file " + fileName };
     }

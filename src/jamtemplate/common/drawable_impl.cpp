@@ -80,12 +80,12 @@ jt::Vector2 DrawableImpl::getShakeOffset() const { return m_shakeOffset; }
 
 jt::Vector2 DrawableImpl::getCamOffset() const
 {
-#if ENABLE_WEB
-    return (m_ignoreCamMovement ? jt::Vector2 { 0.0f, 0.0f }
-                                : 1.0 * DrawableImpl::getStaticCamOffset());
-#else
+#if USE_SFML
     return (m_ignoreCamMovement ? -1.0f * DrawableImpl::getStaticCamOffset()
                                 : jt::Vector2 { 0.0f, 0.0f });
+#else
+    return (m_ignoreCamMovement ? jt::Vector2 { 0.0f, 0.0f }
+                                : 1.0 * DrawableImpl::getStaticCamOffset());
 #endif
 }
 

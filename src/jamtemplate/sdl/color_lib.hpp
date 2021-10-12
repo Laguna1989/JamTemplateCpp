@@ -2,7 +2,7 @@
 #define GUARD_JAMTEMPLATE_COLOR_LIB_GUARD_HPP
 
 #include "color_base.hpp"
-#include <SDL.h>
+#include <SDL2/SDL.h>
 
 namespace jt {
 

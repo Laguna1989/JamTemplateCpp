@@ -1,5 +1,6 @@
 ﻿#include "keyboard_input_lib.hpp"
-#include <SDL.h>
+#include <SDL2/SDL.h>
+#include <cstdint>
 
 namespace jt {
 

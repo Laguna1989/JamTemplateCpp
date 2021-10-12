@@ -34,11 +34,6 @@ Tilemap::Tilemap(std::string const& path)
             m_tileSprites.at(i + j * columns) = tile;
         }
     }
-#if ENABLE_WEB
-    setIgnoreCamMovement(true);
-#else
-    setIgnoreCamMovement(true);
-#endif
 }
 
 void Tilemap::doDraw(std::shared_ptr<jt::renderTarget> const sptr) const

@@ -6,19 +6,25 @@
 #include "rect.hpp"
 #include "texture_manager.hpp"
 #include "vector.hpp"
-#include <SDL.h>
+
+#include <SDL2/SDL.h>
 #include <SDL2/SDL_mixer.h>
 #include <SDL_ttf.h>
+
+#ifdef ENABLE_WEB
 #include <emscripten.h>
+#endif
+
 #include <iostream>
 
 namespace jt {
 
 Game::Game(std::shared_ptr<RenderWindowInterface> window, float zoom,
-    std::shared_ptr<InputManagerInterface> input, std::shared_ptr<MusicPlayerInterface> musicPlayer)
-    : m_input { input }
+    std::shared_ptr<InputManagerInterface> input, std::shared_ptr<MusicPlayerInterface> musicPlayer,
+    std::shared_ptr<CamInterface> camera)
+    : GameBase { camera }
+    , m_input { input }
     , m_musicPlayer { musicPlayer }
-
 {
     m_camera->setZoom(zoom);
     auto const width = window->getSize().x();
@@ -37,8 +43,12 @@ Game::Game(std::shared_ptr<RenderWindowInterface> window, float zoom,
 
     // important fix for SDL_Mixer: OpenAudio has to be called before Mix_Init,
     // otherwise ogg is not supported.
-    Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 1024);
-    Mix_Init(MIX_INIT_OGG);
+    if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 1024) != 0) {
+        std::cout << "cannot OpenAudio: " << Mix_GetError() << std::endl;
+    }
+    if (Mix_Init(MIX_INIT_OGG) != 0) {
+        std::cout << "cannot Mix_Init: " << Mix_GetError() << std::endl;
+    }
 }
 
 void Game::setupRenderTarget() { }
@@ -46,7 +56,14 @@ void Game::setupRenderTarget() { }
 void Game::startGame(std::shared_ptr<GameState> InitialState, GameLoopFunctionPtr gameloop_function)
 {
     switchState(InitialState);
+#ifdef ENABLE_WEB
     emscripten_set_main_loop(gameloop_function, 0, 1);
+#else
+    while (m_window->isOpen()) {
+        m_window->checkForClose();
+        gameloop_function();
+    }
+#endif
 }
 
 void Game::setRenderTarget(std::shared_ptr<jt::renderTarget> rt)

@@ -1,6 +1,7 @@
 ﻿#include "sound_group.hpp"
 #include "random.hpp"
 #include "sound.hpp"
+#include <algorithm>
 
 namespace {
 std::shared_ptr<jt::Sound> loadSound(std::string const& filename)

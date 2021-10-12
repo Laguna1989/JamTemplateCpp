@@ -9,6 +9,13 @@ TEST(RenderwindowTest, IsOpenByDefault)
     EXPECT_TRUE(rw.isOpen());
 }
 
+TEST(RenderWindowTest, MouseIsVisibleByDefault)
+{
+    jt::RenderWindow rw { 100, 200, "test" };
+
+    ASSERT_TRUE(rw.getMouseCursorVisible());
+}
+
 TEST(RenderwindowTest, SizeIsAsSet)
 {
     auto const w = 500;
@@ -53,21 +60,9 @@ TEST(RenderwindowTest, Display)
 TEST(RenderWindowTest, GetMousePositionWithoutView)
 {
     jt::RenderWindow rw { 100, 200, "test" };
-    rw.s_view.reset();
 
     jt::Vector2 const expected { 0.0f, 0.0f };
     EXPECT_EQ(rw.getMousePosition(), expected);
-}
-
-TEST(RenderWindowTest, GetMousePositionWithView)
-{
-    jt::RenderWindow rw { 100, 200, "test" };
-
-    auto view = std::make_shared<sf::View>();
-    rw.s_view = view;
-
-    jt::Vector2 const expected { 0.0f, 0.0f };
-    EXPECT_NE(rw.getMousePosition(), expected);
 }
 
 TEST(RenderWindowTest, GetMousePositionOnScreen)
@@ -76,13 +71,6 @@ TEST(RenderWindowTest, GetMousePositionOnScreen)
 
     jt::Vector2 const expected { 0.0f, 0.0f };
     EXPECT_NE(rw.getMousePositionScreen(1.0f), expected);
-}
-
-TEST(RenderWindowTest, MouseIsVisibleByDefault)
-{
-    jt::RenderWindow rw { 100, 200, "test" };
-
-    ASSERT_TRUE(rw.getMouseCursorVisible());
 }
 
 TEST(RenderWindowTest, MouseIsInvisibleAfterSet)

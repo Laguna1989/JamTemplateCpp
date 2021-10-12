@@ -2,10 +2,8 @@
 #include "render_target.hpp"
 #include "sdl_helper.hpp"
 #include "splitstring.hpp"
-#include <SDL.h>
-#include <SDL_ttf.h>
-#include <stdexcept>
 #include <iostream>
+#include <stdexcept>
 
 namespace jt {
 
@@ -24,8 +22,6 @@ void Text::loadFont(std::string const& fontFileName, unsigned int characterSize,
     if (!m_font) {
         std::cerr << "cannot load font: " << fontFileName << std::endl
                   << "error message: " << TTF_GetError() << std::endl;
-        throw std::invalid_argument { "cannot load font '" + fontFileName
-            + "'. Error message: " + TTF_GetError() };
     }
     m_rendertarget = wptr;
 }
@@ -55,12 +51,14 @@ const jt::Color Text::getFlashColor() const { return m_flashColor; }
 
 jt::Rect const Text::getGlobalBounds() const
 {
-    return jt::Rect { m_position.x(), m_position.y(), m_textTextureSizeX * m_scale.x() / getUpscaleFactor(),
-        m_textTextureSizeY * m_scale.y() /getUpscaleFactor() };
+    return jt::Rect { m_position.x(), m_position.y(),
+        m_textTextureSizeX * m_scale.x() / getUpscaleFactor(),
+        m_textTextureSizeY * m_scale.y() / getUpscaleFactor() };
 }
 jt::Rect const Text::getLocalBounds() const
 {
-    return jt::Rect { 0, 0, m_textTextureSizeX * m_scale.x()/getUpscaleFactor(), m_textTextureSizeY * m_scale.y() / getUpscaleFactor() };
+    return jt::Rect { 0, 0, m_textTextureSizeX * m_scale.x() / getUpscaleFactor(),
+        m_textTextureSizeY * m_scale.y() / getUpscaleFactor() };
 }
 
 void Text::setScale(jt::Vector2 const& scale) { m_scale = scale; }

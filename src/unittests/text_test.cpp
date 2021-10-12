@@ -1,12 +1,19 @@
-﻿#include "text.hpp"
+﻿#include "sdl_setup.hpp"
+#include "text.hpp"
 #include <gtest/gtest.h>
 
 namespace {
+
 jt::Text getText()
 {
     jt::Text t;
+#if USE_SFML
     std::shared_ptr<jt::renderTarget> rt { nullptr };
     t.loadFont("assets/font.ttf", 20, rt);
+#else
+    static SDLSetup setup;
+    t.loadFont("assets/font.ttf", 20, setup.renderTarget);
+#endif
     return t;
 };
 
@@ -42,8 +49,7 @@ TEST(TextTest, LoadInvalidFont)
 {
     jt::Text t;
     std::shared_ptr<jt::renderTarget> rt { nullptr };
-    t.loadFont("assets/font_INVALID_.ttf", 20, rt);
-    SUCCEED();
+    ASSERT_NO_THROW(t.loadFont("assets/font_INVALID_.ttf", 20, rt));
 }
 
 TEST(TextTest, InitialPosition)
@@ -103,7 +109,7 @@ TEST(TextTest, InitialGlobalBounds)
     ASSERT_EQ(t.getGlobalBounds(), expectedBounds);
 }
 
-TEST(TextTest, LocalBoundsWithLoadedSprite)
+TEST(TextTest, LocalBoundsWithLoadedText)
 {
     jt::Text t = getText();
     t.setText("test1234");
@@ -145,13 +151,6 @@ TEST(TextTest, Update)
 {
     jt::Text t = getText();
     ASSERT_NO_THROW(t.update(0.1f));
-}
-
-TEST(TextTest, DrawNullptr)
-{
-    jt::Text t = getText();
-    t.update(0.0f);
-    ASSERT_NO_THROW(t.draw(nullptr));
 }
 
 TEST(TextTest, SetOutline)
