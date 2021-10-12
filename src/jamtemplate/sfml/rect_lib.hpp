@@ -24,7 +24,6 @@ public:
 
     ~Rect() = default;
     Rect(jt::Rect const&) = default;
-    Rect(jt::Rect&&) = default;
 
     Rect& operator=(jt::Rect const&) = default;
     Rect& operator=(jt::Rect&&) = default;
