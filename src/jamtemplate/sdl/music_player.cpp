@@ -10,11 +10,11 @@ void MusicPlayer::PlayMusic(std::string const& fileName)
     m_music = std::shared_ptr<Mix_Music>(
         Mix_LoadMUS(fileName.c_str()), [](Mix_Music* m) { Mix_FreeMusic(m); });
     if (!m_music) {
-        std::cout << "load audio failed\n" << Mix_GetError();
+        std::cout << "load audio failed\n" << Mix_GetError() << std::endl;
     }
     auto const result = Mix_PlayMusic(m_music.get(), -1);
     if (result == -1) {
-        std::cout << "play music failed\n" << Mix_GetError();
+        std::cout << "play music failed\n" << Mix_GetError() << std::endl;
     }
     SetMusicVolume(100.0f);
 }
