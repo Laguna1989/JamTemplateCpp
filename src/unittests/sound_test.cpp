@@ -11,8 +11,7 @@ void init()
     // in a normal game executable the sdl audio init would happen in the game class.
     // as this test should not need to know about the game, it needs to be done here.
 #if USE_SDL
-    Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 1024);
-    Mix_Init(MIX_INIT_OGG);
+
 #endif
 }
 

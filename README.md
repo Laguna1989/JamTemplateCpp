@@ -74,7 +74,7 @@ All of those options can be set to ON or OFF via the cmake commandline
 * `ENABLE_STRESSTESTS` - Enables the stresstest (small example programs which showcase a specific theme)
 * `ENABLE_WEB` - Webbuild
 * `ENABLE_COVERAGE` - Compile with the flags set for the coverage run
-* `ENABLE_DISPLAY_TESTS` - Some of the unit tests can not be executed on travis, as they would require a graphic/sound
+* `ENABLE_AUDIO_TESTS` - Some of the unit tests can not be executed on travis, as they would require a graphic/sound
   device. This switch disables those sepcific tests. Of course the functionality is still tested, so the actual coverage
   is a bit higher than shown on coveralls.
 
