@@ -1,7 +1,7 @@
 #ifndef MYAWESOMEGAME_SDL_SETUP_HPP
 #define MYAWESOMEGAME_SDL_SETUP_HPP
 
-#if USE_SDL
+#if !USE_SFML
 #include <SDL2/SDL.h>
 #include <memory>
 

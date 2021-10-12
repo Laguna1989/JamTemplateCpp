@@ -1,4 +1,4 @@
-#if USE_SDL
+#if !USE_SFML
 #include "sdl_setup.hpp"
 #include "texture_manager.hpp"
 #include <SDL2/SDL.h>

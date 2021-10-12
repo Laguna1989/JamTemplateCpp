@@ -6,14 +6,7 @@
 
 using jt::Sound;
 
-void init()
-{
-    // in a normal game executable the sdl audio init would happen in the game class.
-    // as this test should not need to know about the game, it needs to be done here.
-#if USE_SDL
-
-#endif
-}
+void init() { }
 
 TEST(SoundTest, SoundImplIsDerivedFromSoundBase)
 {

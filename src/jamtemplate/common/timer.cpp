@@ -2,6 +2,7 @@
 #include "game_object.hpp"
 #include <assert.h>
 #include <stdexcept>
+#include <utility>
 
 namespace jt {
 

@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
 
-#if USE_SDL
+#if !USE_SFML
 #include "sdl_setup.hpp"
 SDLSetup setup;
 #endif

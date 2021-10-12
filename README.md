@@ -73,10 +73,10 @@ All of those options can be set to ON or OFF via the cmake commandline
 * `ENABLE_UNITTESTS` - Enables gtest and the unit tests
 * `ENABLE_STRESSTESTS` - Enables the stresstest (small example programs which showcase a specific theme)
 * `ENABLE_WEB` - Webbuild
+* `USE_SFML` - If `ON`, SFML will be used, if `OFF`, SDL will be used.
 * `ENABLE_COVERAGE` - Compile with the flags set for the coverage run
-* `ENABLE_AUDIO_TESTS` - Some of the unit tests can not be executed on travis, as they would require a graphic/sound
-  device. This switch disables those sepcific tests. Of course the functionality is still tested, so the actual coverage
-  is a bit higher than shown on coveralls.
+* `ENABLE_AUDIO_TESTS` - Some of the tests rely on a working audio setup, which seemingly cannot be faked easily. This
+  switch disables those sepcific tests, in case no audio is available on the respective machine.
 
 e.g. calling `cmake ../ -DENABLE_UNITTESTS=ON -DENABLE_STRESSTEST=ON`
 

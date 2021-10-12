@@ -7,12 +7,12 @@ namespace {
 jt::Text getText()
 {
     jt::Text t;
-#if USE_SDL
-    static SDLSetup setup;
-    t.loadFont("assets/font.ttf", 20, setup.renderTarget);
-#else
+#if USE_SFML
     std::shared_ptr<jt::renderTarget> rt { nullptr };
     t.loadFont("assets/font.ttf", 20, rt);
+#else
+    static SDLSetup setup;
+    t.loadFont("assets/font.ttf", 20, setup.renderTarget);
 #endif
     return t;
 };

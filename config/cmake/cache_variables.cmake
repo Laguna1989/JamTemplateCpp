@@ -7,7 +7,6 @@ set(ENABLE_AUDIO_TESTS ON CACHE BOOL "enable unittests that require a display")
 # if ENABLE_WEB is ON, it is required to use SDL
 if (ENABLE_WEB)
     set(USE_SFML OFF CACHE BOOL "Used SFML as Library")
-    set(USE_SDL ON)
     add_definitions(-DENABLE_WEB)
 else ()
     set(USE_SFML ON CACHE BOOL "Used SFML as Library")
