@@ -12,3 +12,11 @@ TEST(ColorTest, InitialValues)
     jt::Color c {};
     ASSERT_EQ(c, jt::colors::Black);
 }
+
+TEST(ColorTest, SetValues)
+{
+    jt::Color c { 0, 111, 222 };
+    ASSERT_EQ(c.r(), 0);
+    ASSERT_EQ(c.g(), 111);
+    ASSERT_EQ(c.b(), 222);
+}

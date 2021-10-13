@@ -7,7 +7,7 @@
 namespace jt {
 
 Timer::Timer(float t, Timer::CallbackType cb, int r)
-    : m_timer { t }
+    : m_totalTime { t }
     , m_callback { std::move(cb) }
     , m_repeat { r }
 {
@@ -15,23 +15,43 @@ Timer::Timer(float t, Timer::CallbackType cb, int r)
         throw std::invalid_argument("Timer callback must be valid!");
     }
 }
-void Timer::doUpdate(float const /*elapsed*/)
+void Timer::doUpdate(float const elapsed)
 {
-    if (getAge() >= m_timer) {
-        setAge(0);
-        if (isAlive()) {
-            // only call the callback if the timer is alive
-            assert(m_callback);
-            m_callback();
+    if (!isAlive()) {
+        return;
+    }
+    m_currentTime += elapsed;
+    if (elapsed >= m_totalTime) {
+        int const count = static_cast<int>(elapsed / m_totalTime);
+        for (int i = 0; i != count; ++i) {
+            invokeCallback();
+            if (!isAlive()) {
+                break;
+            }
         }
-        if (m_repeat < 0) {
-            return;
-        } else if (m_repeat == 1) {
-            kill();
-        } else {
-            m_repeat--;
+    } else {
+        if (m_currentTime >= m_totalTime) {
+            m_currentTime -= m_totalTime;
+            invokeCallback();
         }
     }
 }
+
+void Timer::invokeCallback()
+{
+    assert(isAlive());
+    assert(m_callback);
+    m_callback();
+
+    if (m_repeat < 0) {
+        return;
+    } else if (m_repeat == 1) {
+        kill();
+    } else {
+        m_repeat--;
+    }
+}
+float Timer::getTotalTime() const { return m_totalTime; }
+float Timer::getCurrentTime() const { return m_currentTime; }
 
 } // namespace jt

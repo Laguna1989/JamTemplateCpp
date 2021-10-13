@@ -83,7 +83,7 @@ TEST(CollisionTestCircle, ShapePtrSelf)
 {
     auto const s1 = makeShapePtr(20.0f, 20.0f, 0.0f, 0.0f);
 
-    EXPECT_TRUE(Collision::CircleTest(s1, s1));
+    ASSERT_TRUE(Collision::CircleTest(s1, s1));
 }
 
 TEST(CollisionTestCircle, ShapeNoOverlap)
@@ -91,7 +91,7 @@ TEST(CollisionTestCircle, ShapeNoOverlap)
     auto const s1 = makeShape(20.0f, 20.0f, 0.0f, 0.0f);
     auto const s2 = makeShape(20.0f, 20.0f, 100.0f, 100.0f);
 
-    EXPECT_FALSE(Collision::CircleTest(s1, s2));
+    ASSERT_FALSE(Collision::CircleTest(s1, s2));
 }
 
 TEST(CollisionTestCircle, ShapeOverlap)
@@ -99,12 +99,12 @@ TEST(CollisionTestCircle, ShapeOverlap)
     auto const s1 = makeShape(20.0f, 20.0f, 0.0f, 0.0f);
     auto const s2 = makeShape(20.0f, 20.0f, 10.0f, 10.0f);
 
-    EXPECT_TRUE(Collision::CircleTest(s1, s2));
+    ASSERT_TRUE(Collision::CircleTest(s1, s2));
 }
 
 TEST(CollisionTestCircle, ShapeSelf)
 {
     auto const s1 = makeShape(20.0f, 20.0f, 20.0f, 20.0f);
 
-    EXPECT_TRUE(Collision::CircleTest(s1, s1));
+    ASSERT_TRUE(Collision::CircleTest(s1, s1));
 }
