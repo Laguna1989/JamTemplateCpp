@@ -214,7 +214,7 @@ public:
         auto const distance = getCenter(obj1) - getCenter(obj2);
 
         return (
-            jt::MathHelper::lengthSquared(distance) <= (Radius1 + Radius2) * (Radius1 + Radius2));
+            jt::MathHelper::lengthSquared(distance) < ((Radius1 + Radius2) * (Radius1 + Radius2)));
     }
 
 private:
