@@ -152,3 +152,14 @@ TEST(ShapeTest, RotationAfterSetRotation)
     s.setRotation(expectedRotation);
     EXPECT_FLOAT_EQ(s.getRotation(), expectedRotation);
 }
+
+TEST(ShapeTest, GlobalBoundsWithOffset)
+{
+    jt::Shape s;
+    s.makeRect(jt::Vector2 { 100.0f, 100.0f });
+    s.setOffset(jt::Vector2 { -30.0f, -50.0f });
+    s.update(0.1f);
+    auto bounds = s.getGlobalBounds();
+    jt::Rect const expectedBounds { -30.0f, -50.0f, 100.0f, 100.0f };
+    ASSERT_EQ(bounds, expectedBounds);
+}
