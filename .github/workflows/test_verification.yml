@@ -39,7 +39,7 @@ jobs:
       - name: Test
         uses: GabrielBB/xvfb-action@v1
         with:
-          run: ./UnitTests
+          run: ./UnitTests --gtest_shuffle
           working-directory: ${{github.workspace}}/build/src/unittests
 
   TestsLinuxSDL:
@@ -79,7 +79,7 @@ jobs:
       - name: Test
         uses: GabrielBB/xvfb-action@v1
         with:
-          run: ./UnitTests
+          run: ./UnitTests --gtest_shuffle
           working-directory: ${{github.workspace}}/build/src/unittests
 
   TestsWindows:
@@ -101,7 +101,7 @@ jobs:
 
       - name: Test
         working-directory: ${{github.workspace}}/build/src/unittests
-        run: Debug\UnitTests.exe
+        run: Debug\UnitTests.exe --gtest_shuffle
 
   BuildWeb:
     runs-on: ubuntu-latest

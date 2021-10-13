@@ -76,6 +76,9 @@ protected:
             m_initialized = true;
             m_sound.load("assets/test.ogg");
         }
+        m_sound.setLoop(false);
+        m_sound.setVolume(100);
+        m_sound.stop();
     }
 };
 
