@@ -20,66 +20,69 @@ private:
 
 class GamestateInitialTest : public ::testing::Test {
 protected:
-    GameStateImpl s {};
+    GameStateImpl gamestate {};
 };
 
-TEST_F(GamestateInitialTest, Alive) { ASSERT_TRUE(s.isAlive()); }
-TEST_F(GamestateInitialTest, Age) { ASSERT_FLOAT_EQ(s.getAge(), 0.0f); }
-TEST_F(GamestateInitialTest, NumberOfObjects) { ASSERT_EQ(s.getNumberOfObjects(), 0); }
-TEST_F(GamestateInitialTest, NotInitialized) { ASSERT_FALSE(s.hasBeenInitialized()); }
-TEST_F(GamestateInitialTest, CreateWithoutGameInstance) { EXPECT_ANY_THROW(s.create()); }
-TEST_F(GamestateInitialTest, InitialAutoUpdateObjects) { ASSERT_TRUE(s.getAutoUpdateObjects()); }
-TEST_F(GamestateInitialTest, InitialAutoUpdateTweens) { ASSERT_TRUE(s.getAutoUpdateTweens()); }
-TEST_F(GamestateInitialTest, InitialAutoDraw) { ASSERT_TRUE(s.getAutoDraw()); }
+TEST_F(GamestateInitialTest, Alive) { ASSERT_TRUE(gamestate.isAlive()); }
+TEST_F(GamestateInitialTest, Age) { ASSERT_FLOAT_EQ(gamestate.getAge(), 0.0f); }
+TEST_F(GamestateInitialTest, NumberOfObjects) { ASSERT_EQ(gamestate.getNumberOfObjects(), 0); }
+TEST_F(GamestateInitialTest, NotInitialized) { ASSERT_FALSE(gamestate.hasBeenInitialized()); }
+TEST_F(GamestateInitialTest, CreateWithoutGameInstance) { ASSERT_ANY_THROW(gamestate.create()); }
+TEST_F(GamestateInitialTest, InitialAutoUpdateObjects)
+{
+    ASSERT_TRUE(gamestate.getAutoUpdateObjects());
+}
+TEST_F(GamestateInitialTest, InitialAutoUpdateTweens)
+{
+    ASSERT_TRUE(gamestate.getAutoUpdateTweens());
+}
+TEST_F(GamestateInitialTest, InitialAutoDraw) { ASSERT_TRUE(gamestate.getAutoDraw()); }
 
 class GameStateTest : public ::testing::Test {
 public:
-    std::shared_ptr<jt::GameInterface> g;
-    GameStateImpl s;
-    std::shared_ptr<MockObject> mo;
+    std::shared_ptr<jt::GameInterface> game;
+    GameStateImpl gamestate;
+    std::shared_ptr<MockObject> mockObject;
     void SetUp() override
     {
-        EXPECT_THROW(s.getGame(), std::exception);
-
-        g = std::make_shared<MockGame>();
-        s.setGameInstance(g);
-        EXPECT_NO_THROW(s.getGame());
+        game = std::make_shared<MockGame>();
+        gamestate.setGameInstance(game);
     }
     void AddGameObject()
     {
-        mo = std::make_shared<MockObject>();
-        EXPECT_CALL(*mo, doCreate());
-        s.add(mo);
+        mockObject = std::make_shared<MockObject>();
+        EXPECT_CALL(*mockObject, doCreate());
+        gamestate.add(mockObject);
     }
 };
 
-TEST_F(GameStateTest, SetGameInstance) { ASSERT_EQ(g, s.getGame()); }
+TEST_F(GameStateTest, SetGameInstance) { ASSERT_EQ(game, gamestate.getGame()); }
 
-TEST_F(GameStateTest, CreateWithGameInstance) { EXPECT_NO_THROW(s.create()); }
+TEST_F(GameStateTest, CreateWithGameInstance) { ASSERT_NO_THROW(gamestate.create()); }
 
 TEST_F(GameStateTest, AddGameObject)
 {
-    ASSERT_EQ(s.getNumberOfObjects(), 0);
-
     auto mo = std::make_shared<MockObject>();
     EXPECT_CALL(*mo, doCreate());
-    s.add(mo);
-    EXPECT_EQ(s.getNumberOfObjects(), 1);
+    gamestate.add(mo);
+    ASSERT_EQ(gamestate.getNumberOfObjects(), 1);
 }
 
-TEST_F(GameStateTest, CallsToGameObjects)
+TEST_F(GameStateTest, DrawCallsDrawOnAddedGameObjects)
 {
     AddGameObject();
 
-    // update
-    auto const delta = 0.75f;
-    EXPECT_CALL(*mo, doUpdate(delta));
-    s.update(delta);
-    EXPECT_NEAR(mo->getAge(), delta, 0.001f);
+    EXPECT_CALL(*mockObject, doDraw());
+    gamestate.draw();
+}
 
-    // draw
-    EXPECT_CALL(*mo, doDraw());
-    s.draw();
+TEST_F(GameStateTest, UpdateCallsUpdateOnAddedGameObjects)
+{
+    AddGameObject();
+
+    auto const delta = 0.75f;
+    EXPECT_CALL(*mockObject, doUpdate(delta));
+    gamestate.update(delta);
 }
 
 TEST_F(GameStateTest, GameObjectList)
@@ -89,13 +92,13 @@ TEST_F(GameStateTest, GameObjectList)
     for (auto i = 0U; i != N; ++i) {
         auto mo = std::make_shared<MockObject>();
         EXPECT_CALL(*mo, doCreate());
-        s.add(mo);
+        gamestate.add(mo);
         objects.push_back(mo);
         EXPECT_CALL(*mo, doUpdate(_));
     }
     // multiple objects are added initially only in next update call
-    s.update(0.0f);
-    EXPECT_EQ(s.getNumberOfObjects(), N);
+    gamestate.update(0.0f);
+    EXPECT_EQ(gamestate.getNumberOfObjects(), N);
 
     // kill half the objects
     for (auto i = 0U; i != N; ++i) {
@@ -109,8 +112,8 @@ TEST_F(GameStateTest, GameObjectList)
         }
     }
     // Update will clean up all killed gameobjects
-    s.update(0.0f);
-    EXPECT_EQ(s.getNumberOfObjects(), N / 2);
+    gamestate.update(0.0f);
+    EXPECT_EQ(gamestate.getNumberOfObjects(), N / 2);
 }
 
 TEST_F(GameStateTest, CallsToTween)
@@ -119,15 +122,15 @@ TEST_F(GameStateTest, CallsToTween)
     auto wp = std::weak_ptr<int> { obj };
     auto tw = std::make_shared<MockTween<int>>(
         wp, [](auto /*obj*/, auto /*elapsed*/) { return true; }, 1.0f);
-    // state needs to be initialized to work
-    s.create();
+    // state needs to be initialized
+    gamestate.create();
 
     // add tween
-    s.add(tw);
+    gamestate.add(tw);
 
     EXPECT_CALL(*tw, doUpdate(_));
     // update state
-    s.update(0.1f);
+    gamestate.update(0.1f);
 }
 
 TEST_F(GameStateTest, NoAutoUpdateTween)
@@ -137,61 +140,61 @@ TEST_F(GameStateTest, NoAutoUpdateTween)
     auto tw = std::make_shared<MockTween<int>>(
         wp, [](auto /*obj*/, auto /*elapsed*/) { return true; }, 1.0f);
     // state needs to be initialized to work
-    s.create();
+    gamestate.create();
 
     // add tween
-    s.add(tw);
+    gamestate.add(tw);
 
-    s.setAutoUpdateTweens(false);
+    gamestate.setAutoUpdateTweens(false);
 
     EXPECT_CALL(*tw, doUpdate(_)).Times(0);
     // update state
-    s.update(0.1f);
+    gamestate.update(0.1f);
 }
 
 TEST_F(GameStateTest, NoAutoUpdateObjects)
 {
     auto mo = std::make_shared<MockObject>();
     EXPECT_CALL(*mo, doCreate());
-    s.add(mo);
+    gamestate.add(mo);
 
     // update
-    s.setAutoUpdateObjects(false);
+    gamestate.setAutoUpdateObjects(false);
     EXPECT_CALL(*mo, doUpdate(0.1f)).Times(0);
-    s.update(0.1f);
+    gamestate.update(0.1f);
 }
 
 TEST_F(GameStateTest, NoAutoDrawAfterSet)
 {
     auto mo = std::make_shared<MockObject>();
     EXPECT_CALL(*mo, doCreate());
-    s.add(mo);
+    gamestate.add(mo);
 
     auto const delta = 0.75f;
     EXPECT_CALL(*mo, doUpdate(delta));
-    s.update(delta);
+    gamestate.update(delta);
 
-    s.setAutoDraw(false);
+    gamestate.setAutoDraw(false);
     EXPECT_CALL(*mo, doDraw()).Times(0);
-    s.draw();
+    gamestate.draw();
 }
 
 TEST_F(GameStateTest, AutoUpdateObjectsAfterSet)
 {
-    s.setAutoUpdateObjects(false);
-    ASSERT_FALSE(s.getAutoUpdateObjects());
+    gamestate.setAutoUpdateObjects(false);
+    ASSERT_FALSE(gamestate.getAutoUpdateObjects());
 }
 
 TEST_F(GameStateTest, AutoUpdateTweensAfterSet)
 {
-    s.setAutoUpdateTweens(false);
-    ASSERT_FALSE(s.getAutoUpdateTweens());
+    gamestate.setAutoUpdateTweens(false);
+    ASSERT_FALSE(gamestate.getAutoUpdateTweens());
 }
 
 TEST_F(GameStateTest, AutoDrawAfterSet)
 {
-    s.setAutoDraw(false);
-    ASSERT_FALSE(s.getAutoDraw());
+    gamestate.setAutoDraw(false);
+    ASSERT_FALSE(gamestate.getAutoDraw());
 }
 
 #endif
