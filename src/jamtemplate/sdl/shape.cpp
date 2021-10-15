@@ -30,8 +30,8 @@ const jt::Vector2 Shape::getPosition() const { return m_position; }
 
 jt::Rect const Shape::getGlobalBounds() const
 {
-    return jt::Rect { m_position.x(), m_position.y(), m_sourceRect.width() * m_scale.x(),
-        m_sourceRect.height() * m_scale.y() };
+    return jt::Rect { m_position.x() + getOffset().x(), m_position.y() + getOffset().y(),
+        m_sourceRect.width() * m_scale.x(), m_sourceRect.height() * m_scale.y() };
 }
 jt::Rect const Shape::getLocalBounds() const
 {

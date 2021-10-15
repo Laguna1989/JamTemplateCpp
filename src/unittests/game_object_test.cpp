@@ -9,60 +9,86 @@ using jt::GameObject;
 TEST(GameObjectTest, CreateWithOutGameInstanceSet)
 {
     GameObject go {};
-    EXPECT_THROW(go.create(), std::logic_error);
+    ASSERT_THROW(go.create(), std::logic_error);
 }
 
-TEST(GameObjectTest, GameObjectCallsDoNotThrow)
+TEST(GameObjectTest, CreateWithGameInstace)
 {
     auto const g = std::make_shared<MockGame>();
     GameObject go {};
     go.setGameInstance(g);
-
-    EXPECT_NO_THROW(go.create());
-    EXPECT_NO_THROW(go.update(1.2f));
-    EXPECT_NO_THROW(go.draw());
-
-    EXPECT_TRUE(go.isAlive());
-    EXPECT_NO_THROW(go.kill());
-    EXPECT_FALSE(go.isAlive());
+    ASSERT_NO_THROW(go.create());
 }
 
-TEST(GameObjectTest, GameObjectAddTwice)
+TEST(GameObjectTest, IsAliveIsTrueByDEfault)
 {
-    auto const g = std::make_shared<MockGame>();
     GameObject go {};
-    go.setGameInstance(g);
-    EXPECT_THROW(go.setGameInstance(g), std::logic_error);
+    ASSERT_TRUE(go.isAlive());
 }
 
-TEST(GameObjectTest, UpdateLogic)
+TEST(GameObjectTest, IsAliveIsFalseAfterKill)
 {
     GameObject go {};
-    go.update(0.5f);
-    EXPECT_EQ(go.getAge(), 0.5f);
-
-    EXPECT_TRUE(go.isAlive());
     go.kill();
-    EXPECT_FALSE(go.isAlive());
+    ASSERT_FALSE(go.isAlive());
 }
 
-TEST(GameObjectTest, GetGameReturnsCorrectGameObject)
+TEST(GameObjectTest, UpdateDoesNotThrow)
+{
+    GameObject go {};
+    ASSERT_NO_THROW(go.update(1.2f));
+}
+
+TEST(GameObjectTest, DrawDoesNotThrow)
+{
+    GameObject go {};
+    ASSERT_NO_THROW(go.draw());
+}
+
+TEST(GameObjectTest, CallingSetGameIntanceTwiceWillRaiseLogicError)
+{
+    auto const g = std::make_shared<MockGame>();
+    GameObject go {};
+    go.setGameInstance(g);
+    ASSERT_THROW(go.setGameInstance(g), std::logic_error);
+}
+
+TEST(GameObjectTest, AgeIsZeroByDefault)
+{
+    GameObject go {};
+    ASSERT_EQ(go.getAge(), 0.0f);
+}
+
+class GameObjectTimeParametrizeTestFixture : public ::testing::TestWithParam<float> {
+};
+
+TEST_P(GameObjectTimeParametrizeTestFixture, AgeIsIncreasedByUpdate)
+{
+    auto const elapsed = GetParam();
+    GameObject go {};
+    go.update(elapsed);
+    ASSERT_EQ(go.getAge(), elapsed);
+}
+INSTANTIATE_TEST_SUITE_P(GameObjectTimeParametrizeTest, GameObjectTimeParametrizeTestFixture,
+    ::testing::Values(0.0f, 0.1f, 0.5f, 10.0f, 100.0f, -1.0f));
+
+TEST(GameObjectTest, GetGameReturnsCorrectGamePointer)
 {
     auto const g = std::make_shared<MockGame>();
     GameObject go {};
     go.setGameInstance(g);
 
-    EXPECT_EQ(go.getGame(), g);
+    ASSERT_EQ(go.getGame(), g);
 }
 
-TEST(GameObjectTest, GetGameRaisesExceptionWhenGameExpired)
+TEST(GameObjectTest, GetGameRaisesExceptionWhenGameIsExpired)
 {
     auto g = std::make_shared<MockGame>();
     GameObject go {};
     go.setGameInstance(g);
     // invalidate game
     g.reset();
-    EXPECT_THROW(go.getGame(), std::logic_error);
+    ASSERT_THROW(go.getGame(), std::logic_error);
 }
 
 #endif

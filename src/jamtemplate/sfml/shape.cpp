@@ -1,4 +1,5 @@
 ﻿#include "shape.hpp"
+#include <SFML/Graphics.hpp>
 
 namespace jt {
 
@@ -33,14 +34,13 @@ jt::Rect const Shape::getLocalBounds() const
     return m_shape->getLocalBounds();
 }
 
-std::shared_ptr<sf::Shape> Shape::getShape() { return m_shape; }
-
 void Shape::setScale(jt::Vector2 const& scale)
 {
     if (m_shape) {
         m_shape->setScale(scale);
     }
 }
+
 const jt::Vector2 Shape::getScale() const
 {
     if (!m_shape) {

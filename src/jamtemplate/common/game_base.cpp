@@ -64,11 +64,8 @@ void GameBase::run()
         m_age++;
 
     } catch (std::exception const& e) {
-        std::cerr << "!! ERROR: Exception ocurred !!\n";
+        std::cerr << "!! ERROR: Exception occurred !!\n";
         std::cerr << e.what() << std::endl;
-        throw;
-    } catch (...) {
-        std::cerr << "!! ERROR: Unhandled Exception ocurred !!\n";
         throw;
     }
 }
