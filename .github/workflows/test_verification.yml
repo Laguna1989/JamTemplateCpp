@@ -33,7 +33,10 @@ jobs:
           max-size: 100M
 
       - name: CMake
-        run: cmake -B ${{github.workspace}}/build .
+        run: |
+        cmake \
+        -DCMAKE_C_COMPILER_LAUNCHER=ccache -DCMAKE_CXX_COMPILER_LAUNCHER=ccache \
+        -B ${{github.workspace}}/build .
 
       - name: Build
         working-directory: ${{github.workspace}}/build
@@ -80,9 +83,11 @@ jobs:
 
       - name: CMake
         run: |
-          cmake -B ${{github.workspace}}/build \
+          cmake \
+          -DCMAKE_C_COMPILER_LAUNCHER=ccache -DCMAKE_CXX_COMPILER_LAUNCHER=ccache \
           -DUSE_SFML=OFF \
-          -DENABLE_AUDIO_TESTS=OFF .
+          -DENABLE_AUDIO_TESTS=OFF \
+          -B ${{github.workspace}}/build .
 
       - name: Build
         working-directory: ${{github.workspace}}/build
@@ -143,6 +148,7 @@ jobs:
       - name: CMake
         run: |
           emcmake cmake -B ${{github.workspace}}/build \
+          -DCMAKE_C_COMPILER_LAUNCHER=ccache -DCMAKE_CXX_COMPILER_LAUNCHER=ccache \
           -DENABLE_DEMOS=ON \
           -DENABLE_UNITTESTS=OFF \
           -DENABLE_WEB=ON \
@@ -187,6 +193,7 @@ jobs:
       - name: CMake
         run: |
           cmake \
+          -DCMAKE_C_COMPILER_LAUNCHER=ccache -DCMAKE_CXX_COMPILER_LAUNCHER=ccache \
           -DENABLE_COVERAGE=ON .
 
       - name: Build
