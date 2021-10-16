@@ -123,6 +123,8 @@ jobs:
   BuildWeb:
     needs: TestsLinuxSDL
     runs-on: ubuntu-latest
+    env:
+      EMCC_CCACHE: 1
     steps:
       - name: Set up cmake
         uses: jwlawson/actions-setup-cmake@v1.10
