@@ -104,6 +104,7 @@ jobs:
         run: Debug\jt_tests.exe --gtest_shuffle
 
   BuildWeb:
+    needs: TestsLinuxSDL
     runs-on: ubuntu-latest
     steps:
       - name: Set up cmake
@@ -134,6 +135,7 @@ jobs:
         run: emmake make
 
   CodeCoverage:
+    needs: TestsLinuxSFML
     runs-on: ubuntu-latest
     steps:
       - name: Set up cmake
