@@ -180,6 +180,9 @@ jobs:
           libsfml-dev \
           jackd
 
+      - name: Set up cpp-coveralls
+        run: pip install --user cpp-coveralls
+
       - uses: actions/checkout@v2
 
       - name: ccache
