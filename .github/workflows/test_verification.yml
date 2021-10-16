@@ -121,7 +121,6 @@ jobs:
         run: Debug\jt_tests.exe --gtest_shuffle
 
   BuildWeb:
-    needs: TestsLinuxSDL
     runs-on: ubuntu-latest
     env:
       EMCC_CCACHE: 1
