@@ -40,7 +40,7 @@ jobs:
         uses: GabrielBB/xvfb-action@v1
         with:
           run: ./UnitTests --gtest_shuffle
-          working-directory: ${{github.workspace}}/build/src/unittests
+          working-directory: ${{github.workspace}}/build/impl/unittests
 
   TestsLinuxSDL:
     runs-on: ubuntu-latest
@@ -80,7 +80,7 @@ jobs:
         uses: GabrielBB/xvfb-action@v1
         with:
           run: ./UnitTests --gtest_shuffle
-          working-directory: ${{github.workspace}}/build/src/unittests
+          working-directory: ${{github.workspace}}/build/impl/unittests
 
   TestsWindows:
     runs-on: windows-latest
@@ -100,7 +100,7 @@ jobs:
         run: cmake --build .
 
       - name: Test
-        working-directory: ${{github.workspace}}/build/src/unittests
+        working-directory: ${{github.workspace}}/build/impl/unittests
         run: Debug\UnitTests.exe --gtest_shuffle
 
   BuildWeb:
@@ -173,7 +173,7 @@ jobs:
         uses: GabrielBB/xvfb-action@v1
         with:
           run: ./UnitTests
-          working-directory: ${{github.workspace}}/src/unittests
+          working-directory: ${{github.workspace}}/impl/unittests
 
       - name: Coveralls
         working-directory: ${{github.workspace}}
