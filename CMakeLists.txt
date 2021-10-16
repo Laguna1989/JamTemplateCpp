@@ -76,7 +76,8 @@ endif ()
 
 ## setup Projects
 #####################################################
-add_subdirectory(src)
+add_subdirectory(impl)
+add_subdirectory(test)
 
 ## copy .clang-format to build directory
 #####################################################

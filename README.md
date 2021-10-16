@@ -71,7 +71,7 @@ recommended to use the Web build to show your game to your Mac friends.
 All of those options can be set to ON or OFF via the cmake commandline
 
 * `ENABLE_UNITTESTS` - Enables gtest and the unit tests
-* `ENABLE_STRESSTESTS` - Enables the stresstest (small example programs which showcase a specific theme)
+* `ENABLE_DEMOS` - Enables the demos (small example programs which showcase a specific theme)
 * `ENABLE_WEB` - Webbuild
 * `USE_SFML` - If `ON`, SFML will be used, if `OFF`, SDL will be used.
 * `ENABLE_COVERAGE` - Compile with the flags set for the coverage run
