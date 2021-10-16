@@ -39,7 +39,7 @@ jobs:
       - name: Test
         uses: GabrielBB/xvfb-action@v1
         with:
-          run: ./UnitTests --gtest_shuffle
+          run: ./jt_tests --gtest_shuffle
           working-directory: ${{github.workspace}}/build/test/unit/jt_test
 
   TestsLinuxSDL:
@@ -79,7 +79,7 @@ jobs:
       - name: Test
         uses: GabrielBB/xvfb-action@v1
         with:
-          run: ./UnitTests --gtest_shuffle
+          run: ./jt_tests --gtest_shuffle
           working-directory: ${{github.workspace}}/build/test/unit/jt_test
 
   TestsWindows:
@@ -101,7 +101,7 @@ jobs:
 
       - name: Test
         working-directory: ${{github.workspace}}/build/test/unit/jt_test
-        run: Debug\UnitTests.exe --gtest_shuffle
+        run: Debug\jt_tests.exe --gtest_shuffle
 
   BuildWeb:
     runs-on: ubuntu-latest
@@ -172,7 +172,7 @@ jobs:
       - name: Test
         uses: GabrielBB/xvfb-action@v1
         with:
-          run: ./UnitTests
+          run: ./jt_tests
           working-directory: ${{github.workspace}}/test/unit/jt_test
 
       - name: Coveralls
@@ -182,9 +182,8 @@ jobs:
           -t ${{ secrets.coveralls_token }} \
           -e _deps \
           -e ext \
+          -e test/ \
           -e impl/game \
-          -e impl/stresstests \
-          -e impl/unittests \
           -e impl/jamtemplate/sdl \
           -e impl/jamtemplate/sfml/keyboard_input_lib.cpp \
           -e impl/jamtemplate/sfml/mouse_input_lib.cpp \
