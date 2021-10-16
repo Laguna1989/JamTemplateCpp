@@ -77,7 +77,7 @@ endif ()
 ## setup Projects
 #####################################################
 add_subdirectory(impl)
-
+add_subdirectory(test)
 ## copy .clang-format to build directory
 #####################################################
 configure_file(${CMAKE_SOURCE_DIR}/.clang-format ${CMAKE_BINARY_DIR}/ COPYONLY)
