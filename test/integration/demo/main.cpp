@@ -25,7 +25,7 @@ int main()
     auto input = std::make_shared<jt::InputManager>(mouse, keyboard);
 
     game = std::make_shared<jt::Game>(
-        std::make_shared<jt::RenderWindow>(800, 600, "Stresstest"), 2.0f, input, nullptr);
+        std::make_shared<jt::RenderWindow>(800, 600, "jt_demos"), 2.0f, input, nullptr);
     game->setupRenderTarget();
     game->startGame(std::make_shared<StateSelect>(), gameloop);
 

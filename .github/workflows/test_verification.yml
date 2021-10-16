@@ -124,7 +124,7 @@ jobs:
       - name: CMake
         run: |
           emcmake cmake -B ${{github.workspace}}/build \
-          -DENABLE_STRESSTESTS=ON \
+          -DENABLE_DEMOS=ON \
           -DENABLE_UNITTESTS=OFF \
           -DENABLE_WEB=ON \
           -DUSE_SFML=OFF .
