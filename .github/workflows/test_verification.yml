@@ -222,4 +222,4 @@ jobs:
           -e impl/jamtemplate/sdl \
           -e impl/jamtemplate/sfml/keyboard_input_lib.cpp \
           -e impl/jamtemplate/sfml/mouse_input_lib.cpp \
-          --gcov-options '\-lpm'
+          --gcov-options '\-lp'
