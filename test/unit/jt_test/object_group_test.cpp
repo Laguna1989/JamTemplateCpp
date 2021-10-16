@@ -21,7 +21,7 @@ TEST_F(ObjectGroupInitialTest, AgeIsZero) { ASSERT_EQ(g.getAge(), 0.0f); }
 TEST_F(ObjectGroupInitialTest, IsAlive) { ASSERT_TRUE(g.isAlive()); }
 
 #ifndef ENABLE_WEB
-TEST_F(ObjectGroupInitialTest, GetGameWillThrow) { EXPECT_ANY_THROW(g.getGame()); }
+TEST_F(ObjectGroupInitialTest, GetGameWillThrow) { ASSERT_ANY_THROW(g.getGame()); }
 #endif
 
 class ObjectGroupTestWithGame : public ::testing::Test {
@@ -32,7 +32,6 @@ public:
     {
         game = std::make_shared<MockGame>();
         g.setGameInstance(game);
-        EXPECT_NO_THROW(g.getGame());
     }
 };
 
@@ -98,13 +97,11 @@ TEST_F(ObjectGroupTestWithGame, RangedBaseForLoopIsPossibleForObjectGroup)
     g.push_back(mo1);
     g.push_back(mo2);
 
-    ASSERT_EQ(g.size(), 2);
-
     std::size_t count { 0 };
 
     for (auto const wptr : g) {
         count++;
     }
 
-    EXPECT_EQ(count, 2);
+    ASSERT_EQ(count, 2);
 }
