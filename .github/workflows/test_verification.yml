@@ -40,7 +40,7 @@ jobs:
         uses: GabrielBB/xvfb-action@v1
         with:
           run: ./UnitTests --gtest_shuffle
-          working-directory: ${{github.workspace}}/build/impl/unittests
+          working-directory: ${{github.workspace}}/build/impl/jt_test
 
   TestsLinuxSDL:
     runs-on: ubuntu-latest
@@ -80,7 +80,7 @@ jobs:
         uses: GabrielBB/xvfb-action@v1
         with:
           run: ./UnitTests --gtest_shuffle
-          working-directory: ${{github.workspace}}/build/impl/unittests
+          working-directory: ${{github.workspace}}/build/impl/jt_test
 
   TestsWindows:
     runs-on: windows-latest
@@ -100,7 +100,7 @@ jobs:
         run: cmake --build .
 
       - name: Test
-        working-directory: ${{github.workspace}}/build/impl/unittests
+        working-directory: ${{github.workspace}}/build/impl/jt_test
         run: Debug\UnitTests.exe --gtest_shuffle
 
   BuildWeb:
@@ -173,7 +173,7 @@ jobs:
         uses: GabrielBB/xvfb-action@v1
         with:
           run: ./UnitTests
-          working-directory: ${{github.workspace}}/impl/unittests
+          working-directory: ${{github.workspace}}/impl/jt_test
 
       - name: Coveralls
         working-directory: ${{github.workspace}}
@@ -182,10 +182,10 @@ jobs:
           -t ${{ secrets.coveralls_token }} \
           -e _deps \
           -e ext \
-          -e src/game \
-          -e src/stresstests \
-          -e src/unittests \
-          -e src/jamtemplate/sdl \
-          -e src/jamtemplate/sfml/keyboard_input_lib.cpp \
-          -e src/jamtemplate/sfml/mouse_input_lib.cpp \
+          -e impl/game \
+          -e impl/stresstests \
+          -e impl/unittests \
+          -e impl/jamtemplate/sdl \
+          -e impl/jamtemplate/sfml/keyboard_input_lib.cpp \
+          -e impl/jamtemplate/sfml/mouse_input_lib.cpp \
           --gcov-options '\-m'
