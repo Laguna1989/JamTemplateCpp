@@ -213,6 +213,7 @@ jobs:
         working-directory: ${{github.workspace}}
         run: |
           coveralls \
+          --verbose \
           -t ${{ secrets.coveralls_token }} \
           -e _deps \
           -e ext \
@@ -221,4 +222,4 @@ jobs:
           -e impl/jamtemplate/sdl \
           -e impl/jamtemplate/sfml/keyboard_input_lib.cpp \
           -e impl/jamtemplate/sfml/mouse_input_lib.cpp \
-          --gcov-options '\-m'
+          --gcov-options '\-lp'
