@@ -1,1 +1,6 @@
-add_subdirectory(demo)
+if (ENABLE_DEMOS)
+    add_subdirectory(demo)
+endif()
+if (ENABLE_PERFORMANCETESTS)
+    add_subdirectory(performance)
+endif()
