@@ -1,4 +1,4 @@
-name: Test Verification
+name: Performance Measurement
 
 on:
   push:
