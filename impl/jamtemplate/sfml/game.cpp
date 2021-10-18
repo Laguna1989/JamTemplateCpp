@@ -88,6 +88,10 @@ void Game::doUpdate(float const elapsed)
     }
     m_state->update(elapsed);
 
+    if (m_window == nullptr)
+    {
+        return;
+    }
     jt::Vector2 mpf = m_window->getMousePosition();
 
     jt::Vector2 mpfs = m_window->getMousePositionScreen(getCamera()->getZoom());
