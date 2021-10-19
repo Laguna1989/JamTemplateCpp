@@ -34,7 +34,7 @@ class StateObjectsPerformanceTest : public jt::GameState {
 private:
     std::vector<std::shared_ptr<GameObjectInstance>> m_objects;
     void doInternalCreate() override { }
-    void doInternalUpdate(float elapsed) override
+    void doInternalUpdate(float /*elapsed*/) override
     {
         spawnObject();
         spawnObject();

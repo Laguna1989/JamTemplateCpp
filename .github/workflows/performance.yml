@@ -48,8 +48,10 @@ jobs:
         run: make -j 4 jt_performance
 
       - name: Execute Performance Test
-        working-directory: ${{github.workspace}}/test/integration/performance
-        run: ./jt_performance --benchmark_format=json | tee benchmark_result.json
+        uses: GabrielBB/xvfb-action@v1
+        with:
+          working-directory: ${{github.workspace}}/test/integration/performance
+          run: ./jt_performance --benchmark_format=json | tee benchmark_result.json
 
       - name: Store benchmark result
         uses: benchmark-action/github-action-benchmark@v1
