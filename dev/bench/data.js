@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1634670428281,
+  "lastUpdate": 1634672863777,
   "repoUrl": "https://github.com/Laguna1989/JamTemplateCpp",
   "entries": {
     "Benchmark": [
@@ -84,6 +84,48 @@ window.BENCHMARK_DATA = {
             "value": 3.1981960833334213,
             "unit": "ms/iter",
             "extra": "iterations: 228\ncpu: 3.197989565789474 ms\nthreads: 1"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "laguna_1989@gmx.net",
+            "name": "Laguna1989",
+            "username": "Laguna1989"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "971d04d224e0482f11832a363dcef139323e6d47",
+          "message": "Merge pull request #61 from Laguna1989/FEATURE_TextAlign\n\nFEATURE_TextAlign",
+          "timestamp": "2021-10-19T21:45:26+02:00",
+          "tree_id": "90cb8cd5b6909f5ec50fcdbaa1d29c89e8585074",
+          "url": "https://github.com/Laguna1989/JamTemplateCpp/commit/971d04d224e0482f11832a363dcef139323e6d47"
+        },
+        "date": 1634672862700,
+        "tool": "googlecpp",
+        "benches": [
+          {
+            "name": "BM_GamestateWithObjects",
+            "value": 5.334444175572422,
+            "unit": "ms/iter",
+            "extra": "iterations: 131\ncpu: 5.334224580152672 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_StartGame",
+            "value": 9.754952690140188,
+            "unit": "ms/iter",
+            "extra": "iterations: 71\ncpu: 9.391394197183098 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GamestateWithTweeningShapes",
+            "value": 2.7855856135458574,
+            "unit": "ms/iter",
+            "extra": "iterations: 251\ncpu: 2.785213928286853 ms\nthreads: 1"
           }
         ]
       }
