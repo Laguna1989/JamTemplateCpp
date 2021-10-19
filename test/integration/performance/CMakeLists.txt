@@ -4,7 +4,6 @@ FetchContent_Declare(googlebenchmark
         )
 FetchContent_MakeAvailable(googlebenchmark)
 
-
 file(GLOB_RECURSE DEMOFILES ${CMAKE_CURRENT_SOURCE_DIR}/*)
 add_executable(jt_performance ${DEMOFILES})
 
