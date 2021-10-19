@@ -24,6 +24,18 @@ void StateScroll::doInternalCreate()
     m_anim->play("idle");
     m_anim->setColor(jt::colors::Red);
     m_anim->setPosition(jt::Vector2 { 200.0f, 200.0f });
+
+    m_text_left_aligned = jt::dh::createText(getGame()->getRenderTarget(), "left aligned", 12);
+    m_text_left_aligned->setTextAlign(jt::Text::TextAlign::LEFT);
+    m_text_left_aligned->setPosition(jt::Vector2 { 300, 100 });
+
+    m_text_center_aligned = jt::dh::createText(getGame()->getRenderTarget(), "center aligned", 12);
+    m_text_center_aligned->setTextAlign(jt::Text::TextAlign::CENTER);
+    m_text_center_aligned->setPosition(jt::Vector2 { 300, 130 });
+
+    m_text_right_aligned = jt::dh::createText(getGame()->getRenderTarget(), "right aligned", 12);
+    m_text_right_aligned->setTextAlign(jt::Text::TextAlign::RIGHT);
+    m_text_right_aligned->setPosition(jt::Vector2 { 300, 160 });
 }
 
 void StateScroll::doInternalUpdate(float const elapsed)
@@ -49,6 +61,10 @@ void StateScroll::doInternalUpdate(float const elapsed)
     m_shape1->update(elapsed);
     m_sprite->update(elapsed);
     m_anim->update(elapsed);
+
+    m_text_left_aligned->update(elapsed);
+    m_text_center_aligned->update(elapsed);
+    m_text_right_aligned->update(elapsed);
 }
 
 void StateScroll::doInternalDraw() const
@@ -59,4 +75,8 @@ void StateScroll::doInternalDraw() const
     m_sprite->draw(getGame()->getRenderTarget());
     m_shape1->draw(getGame()->getRenderTarget());
     m_anim->draw(getGame()->getRenderTarget());
+
+    m_text_left_aligned->draw(getGame()->getRenderTarget());
+    m_text_center_aligned->draw(getGame()->getRenderTarget());
+    m_text_right_aligned->draw(getGame()->getRenderTarget());
 }

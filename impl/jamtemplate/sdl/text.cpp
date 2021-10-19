@@ -71,7 +71,7 @@ void Text::setOrigin(jt::Vector2 const& origin)
 }
 jt::Vector2 const Text::getOrigin() const { return m_origin; }
 
-void Text::SetTextAlign(Text::TextAlign ta)
+void Text::setTextAlign(Text::TextAlign ta)
 {
     if (m_textAlign != ta) {
         m_textAlign = ta;

@@ -5,6 +5,7 @@
 #include "game_state.hpp"
 #include "shape.hpp"
 #include "sprite.hpp"
+#include "text.hpp"
 
 class StateScroll : public jt::GameState {
 private:
@@ -12,6 +13,10 @@ private:
     jt::Animation::Sptr m_anim;
     jt::Sprite::Sptr m_sprite;
     jt::Shape::Sptr m_background;
+
+    jt::Text::Sptr m_text_left_aligned;
+    jt::Text::Sptr m_text_center_aligned;
+    jt::Text::Sptr m_text_right_aligned;
 
     void doInternalCreate() override;
     void doInternalUpdate(float const /*elapsed*/) override;
