@@ -24,8 +24,7 @@ public:
 
     void setPosition(jt::Vector2 const& pos) override;
     const jt::Vector2 getPosition() const override;
-
-    // sf::Transform const getTransform() const override { return m_shape->getTransform(); }
+    
     jt::Rect const getGlobalBounds() const override;
     jt::Rect const getLocalBounds() const override;
 
