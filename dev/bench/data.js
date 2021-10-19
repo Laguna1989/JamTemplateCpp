@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1634657105372,
+  "lastUpdate": 1634657374658,
   "repoUrl": "https://github.com/Laguna1989/JamTemplateCpp",
   "entries": {
     "Benchmark": [
@@ -174,6 +174,48 @@ window.BENCHMARK_DATA = {
             "value": 2765212.6600789977,
             "unit": "ns/iter",
             "extra": "iterations: 253\ncpu: 2765076.347826087 ns\nthreads: 1"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "laguna.ws@gmail.com",
+            "name": "Simon Weis",
+            "username": "Laguna1989"
+          },
+          "committer": {
+            "email": "laguna.ws@gmail.com",
+            "name": "Simon Weis",
+            "username": "Laguna1989"
+          },
+          "distinct": true,
+          "id": "dbeaf50356dc72aa30ebca9af3baaec87102003c",
+          "message": "Remove points per chart option as it is the wrong axis",
+          "timestamp": "2021-10-19T17:27:49+02:00",
+          "tree_id": "95efce4bda8eba240ec5ba0e98114b101e8b3e0e",
+          "url": "https://github.com/Laguna1989/JamTemplateCpp/commit/dbeaf50356dc72aa30ebca9af3baaec87102003c"
+        },
+        "date": 1634657373584,
+        "tool": "googlecpp",
+        "benches": [
+          {
+            "name": "BM_GamestateWithObjects",
+            "value": 5356004.961832042,
+            "unit": "ns/iter",
+            "extra": "iterations: 131\ncpu: 5355480.7938931305 ns\nthreads: 1"
+          },
+          {
+            "name": "BM_StartGame",
+            "value": 9677503.513513535,
+            "unit": "ns/iter",
+            "extra": "iterations: 74\ncpu: 9295923.486486489 ns\nthreads: 1"
+          },
+          {
+            "name": "BM_GamestateWithTweeningShapes",
+            "value": 2763951.3596837856,
+            "unit": "ns/iter",
+            "extra": "iterations: 253\ncpu: 2763903.407114625 ns\nthreads: 1"
           }
         ]
       }
