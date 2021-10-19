@@ -51,8 +51,7 @@ jobs:
         uses: GabrielBB/xvfb-action@v1
         with:
           working-directory: ${{github.workspace}}/test/integration/performance
-          run: ./jt_performance
-          options: --benchmark_format=json | tee benchmark_result.json
+          run: ./jt_performance --benchmark_format=json > benchmark_result.json
 
       - name: Store benchmark result
         uses: benchmark-action/github-action-benchmark@v1
