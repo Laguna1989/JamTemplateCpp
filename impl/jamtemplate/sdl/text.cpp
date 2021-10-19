@@ -239,6 +239,10 @@ SDL_Rect Text::getDestRect(jt::Vector2 const& positionOffset) const
         alignOffset.x()
             = -static_cast<float>(m_textTextureSizeX) / 2.0f / getUpscaleFactor() * m_scale.x();
     }
+    if (m_textAlign == TextAlign::RIGHT) {
+        alignOffset.x()
+            = -static_cast<float>(m_textTextureSizeX) / getUpscaleFactor() * m_scale.x();
+    }
 
     jt::Vector2 pos = m_position + getShakeOffset() + getOffset() + getCamOffset() + alignOffset
         + positionOffset + m_offsetFromOrigin;
