@@ -62,4 +62,4 @@ static void BM_GamestateWithObjects(benchmark::State& state)
     }
 }
 
-BENCHMARK(BM_GamestateWithObjects);
+BENCHMARK(BM_GamestateWithObjects)->Unit(benchmark::kMillisecond);

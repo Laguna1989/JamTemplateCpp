@@ -33,4 +33,4 @@ static void BM_StartGame(benchmark::State& state)
     }
 }
 
-BENCHMARK(BM_StartGame);
+BENCHMARK(BM_StartGame)->Unit(benchmark::kMillisecond);

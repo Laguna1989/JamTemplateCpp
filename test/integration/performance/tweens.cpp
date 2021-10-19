@@ -53,4 +53,4 @@ static void BM_GamestateWithTweeningShapes(benchmark::State& state)
     }
 }
 
-BENCHMARK(BM_GamestateWithTweeningShapes);
+BENCHMARK(BM_GamestateWithTweeningShapes)->Unit(benchmark::kMillisecond);
