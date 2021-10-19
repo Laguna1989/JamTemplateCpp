@@ -92,3 +92,7 @@ via [OpenCppCoverage](https://github.com/OpenCppCoverage/OpenCppCoverage). The c
 ```
 OpenCppCoverage.exe --sources C:\projects\JamTemplateCpp\* --excluded_sources C:\projects\JamTemplateCpp\src\UnitTests\* --excluded_sources C:\projects\JamTemplateCpp\src\StressTest\* --excluded_sources C:\projects\JamTemplateCpp\ext\* --excluded_sources C:\projects\JamTemplateCpp\cmake-build-debug\ext\*  --excluded_sources C:\projects\JamTemplateCpp\cmake-build-debug\* .\cmake-build-debug\src\unittests\UnitTests.exe
 ```
+
+## Performance benchmark
+
+Please check the performance benchmark [report](https://laguna1989.github.io/JamTemplateCpp/dev/bench/index.html).
