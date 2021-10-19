@@ -182,13 +182,13 @@ TEST(TextTest, InitialTextAlignDefault)
 TEST(TextTest, TextAlignAfterSetRight)
 {
     jt::Text t = getText();
-    t.SetTextAlign(jt::Text::TextAlign::RIGHT);
+    t.setTextAlign(jt::Text::TextAlign::RIGHT);
     ASSERT_EQ(t.getTextAlign(), jt::Text::TextAlign::RIGHT);
 }
 
 TEST(TextTest, TextAlignAfterSetLeft)
 {
     jt::Text t = getText();
-    t.SetTextAlign(jt::Text::TextAlign::LEFT);
+    t.setTextAlign(jt::Text::TextAlign::LEFT);
     ASSERT_EQ(t.getTextAlign(), jt::Text::TextAlign::LEFT);
 }

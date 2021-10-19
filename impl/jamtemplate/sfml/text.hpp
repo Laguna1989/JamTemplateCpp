@@ -49,7 +49,7 @@ public:
 
     virtual const jt::Vector2 getOrigin() const;
 
-    void SetTextAlign(TextAlign ta);
+    void setTextAlign(TextAlign ta);
     TextAlign getTextAlign() const;
 
 private:

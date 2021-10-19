@@ -51,7 +51,7 @@ void StateMenu::createTextCredits()
     m_text_Credits = jt::dh::createText(getGame()->getRenderTarget(),
         "Created by " + GP::AuthorName() + " for " + GP::JamName() + "\n" + GP::JamDate(), 10U,
         GP::PaletteColor5());
-    m_text_Credits->SetTextAlign(jt::Text::TextAlign::LEFT);
+    m_text_Credits->setTextAlign(jt::Text::TextAlign::LEFT);
     m_text_Credits->setPosition({ 10, GP::GetScreenSize().y() - 30 });
     m_text_Credits->setShadow(GP::PaletteFontShadow(), jt::Vector2 { 1, 1 });
 }

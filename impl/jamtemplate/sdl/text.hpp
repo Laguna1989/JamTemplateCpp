@@ -50,7 +50,7 @@ public:
 
     virtual jt::Vector2 const getOrigin() const override;
 
-    void SetTextAlign(TextAlign ta);
+    void setTextAlign(TextAlign ta);
     TextAlign getTextAlign() const;
 
 private:

@@ -71,7 +71,7 @@ void Text::setOrigin(jt::Vector2 const& origin)
 }
 jt::Vector2 const Text::getOrigin() const { return m_origin; }
 
-void Text::SetTextAlign(Text::TextAlign ta)
+void Text::setTextAlign(Text::TextAlign ta)
 {
     if (m_textAlign != ta) {
         m_textAlign = ta;
@@ -238,6 +238,10 @@ SDL_Rect Text::getDestRect(jt::Vector2 const& positionOffset) const
     if (m_textAlign == TextAlign::CENTER) {
         alignOffset.x()
             = -static_cast<float>(m_textTextureSizeX) / 2.0f / getUpscaleFactor() * m_scale.x();
+    }
+    if (m_textAlign == TextAlign::RIGHT) {
+        alignOffset.x()
+            = -static_cast<float>(m_textTextureSizeX) / getUpscaleFactor() * m_scale.x();
     }
 
     jt::Vector2 pos = m_position + getShakeOffset() + getOffset() + getCamOffset() + alignOffset

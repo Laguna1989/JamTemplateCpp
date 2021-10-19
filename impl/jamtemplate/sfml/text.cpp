@@ -66,7 +66,7 @@ void Text::setOrigin(jt::Vector2 const& origin)
 
 const jt::Vector2 Text::getOrigin() const { return m_text->getOrigin(); }
 
-void Text::SetTextAlign(Text::TextAlign ta) { m_textAlign = ta; }
+void Text::setTextAlign(Text::TextAlign ta) { m_textAlign = ta; }
 Text::TextAlign Text::getTextAlign() const { return m_textAlign; }
 
 void Text::doUpdate(float /*elapsed*/)
@@ -77,14 +77,17 @@ void Text::doUpdate(float /*elapsed*/)
     jt::Vector2 alignOffset { 0, 0 };
     if (m_textAlign == TextAlign::CENTER) {
         alignOffset.x() = -m_text->getGlobalBounds().width / 2.0f;
+    } else if (m_textAlign == TextAlign::RIGHT) {
+        alignOffset.x() = -m_text->getGlobalBounds().width;
     }
 
-    jt::Vector2 pos = m_position + getShakeOffset() + alignOffset + getCamOffset();
-
+    jt::Vector2 const position = m_position + getShakeOffset() + alignOffset + getCamOffset();
     // casting to int and back to float avoids blurry text when rendered on non-integer positions
-    m_text->setPosition(jt::Vector2 { static_cast<float>(static_cast<int>(pos.x())),
-        static_cast<float>(static_cast<int>(pos.y())) });
-    m_flashText->setPosition(m_text->getPosition());
+    jt::Vector2 const pos = jt::Vector2 { static_cast<float>(static_cast<int>(position.x())),
+        static_cast<float>(static_cast<int>(position.y())) };
+
+    m_text->setPosition(pos);
+    m_flashText->setPosition(pos);
     m_flashText->setScale(m_text->getScale());
 }
 

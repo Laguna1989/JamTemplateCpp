@@ -32,7 +32,7 @@ class StateSelect : public jt::GameState {
             jt::Vector2u { detail::buttonSizeX, detail::buttonSizeY });
         button->addCallback([this]() { getGame()->switchState(std::make_shared<State>()); });
         auto const text = jt::dh::createText(getGame()->getRenderTarget(), textString, 12);
-        text->SetTextAlign(jt::Text::TextAlign::LEFT);
+        text->setTextAlign(jt::Text::TextAlign::LEFT);
         text->setOrigin(jt::Vector2 { -8, 0 });
         button->setDrawable(text);
         button->setPosition(jt::Vector2 { detail::buttonOffsetX, posY });

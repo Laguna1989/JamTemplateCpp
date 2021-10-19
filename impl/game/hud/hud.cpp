@@ -13,7 +13,7 @@ void Hud::doCreate()
     m_scoreP1Text->loadFont("assets/font.ttf", 16, getGame()->getRenderTarget());
     m_scoreP1Text->setColor(jt::Color { 248, 249, 254 });
     m_scoreP1Text->update(0.0f);
-    m_scoreP1Text->SetTextAlign(jt::Text::TextAlign::LEFT);
+    m_scoreP1Text->setTextAlign(jt::Text::TextAlign::LEFT);
     m_scoreP1Text->setPosition({ 10, 4 });
 
     m_scoreP1Display = std::make_shared<ScoreDisplay>(m_scoreP1Text, "P1 Score: ");
@@ -22,7 +22,7 @@ void Hud::doCreate()
     m_scoreP2Text->loadFont("assets/font.ttf", 16, getGame()->getRenderTarget());
     m_scoreP2Text->setColor(jt::Color { 248, 249, 254 });
     m_scoreP2Text->update(0.0f);
-    m_scoreP2Text->SetTextAlign(jt::Text::TextAlign::LEFT);
+    m_scoreP2Text->setTextAlign(jt::Text::TextAlign::LEFT);
     m_scoreP2Text->setPosition({ 600 / 2 - 10, 4 });
 
     m_scoreP2Display = std::make_shared<ScoreDisplay>(m_scoreP2Text, "P2 Score: ");
