@@ -42,6 +42,7 @@ jobs:
         run: |
           cmake \
           -DCMAKE_C_COMPILER_LAUNCHER=ccache -DCMAKE_CXX_COMPILER_LAUNCHER=ccache \
+          -DCMAKE_BUILD_TYPE=Release \
           -DENABLE_PERFORMANCETESTS=ON .
 
       - name: Build
