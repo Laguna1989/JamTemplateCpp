@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1634752616726,
+  "lastUpdate": 1634753938449,
   "repoUrl": "https://github.com/Laguna1989/JamTemplateCpp",
   "entries": {
     "Benchmark": [
@@ -210,6 +210,48 @@ window.BENCHMARK_DATA = {
             "value": 2.786040565736986,
             "unit": "ms/iter",
             "extra": "iterations: 251\ncpu: 2.7859370318725096 ms\nthreads: 1"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "laguna.ws@gmail.com",
+            "name": "Simon Weis",
+            "username": "Laguna1989"
+          },
+          "committer": {
+            "email": "laguna.ws@gmail.com",
+            "name": "Simon Weis",
+            "username": "Laguna1989"
+          },
+          "distinct": true,
+          "id": "4e1a9b71d27aa834388924aa97ccdf76555679ef",
+          "message": "no need to create a new unique ptr ever frame",
+          "timestamp": "2021-10-20T20:16:48+02:00",
+          "tree_id": "a0c0a845ed97a4885d0c5a98a117822910897176",
+          "url": "https://github.com/Laguna1989/JamTemplateCpp/commit/4e1a9b71d27aa834388924aa97ccdf76555679ef"
+        },
+        "date": 1634753937303,
+        "tool": "googlecpp",
+        "benches": [
+          {
+            "name": "BM_GamestateWithObjects",
+            "value": 5.470978718749908,
+            "unit": "ms/iter",
+            "extra": "iterations: 128\ncpu: 5.4707529218749995 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_StartGame",
+            "value": 10.629612294117408,
+            "unit": "ms/iter",
+            "extra": "iterations: 68\ncpu: 10.225949294117648 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GamestateWithTweeningShapes",
+            "value": 2.740673984313688,
+            "unit": "ms/iter",
+            "extra": "iterations: 255\ncpu: 2.7403865843137254 ms\nthreads: 1"
           }
         ]
       }
