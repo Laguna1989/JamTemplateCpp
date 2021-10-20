@@ -27,8 +27,6 @@ public:
     void setFlashColor(jt::Color const& col) override;
     const jt::Color getFlashColor() const override;
 
-    // virtual sf::Transform const getTransform() const override { return m_sprite.getTransform(); }
-
     virtual jt::Rect const getGlobalBounds() const override;
     virtual jt::Rect const getLocalBounds() const override;
 
@@ -41,7 +39,7 @@ public:
     // WARNING: This function is slow, because it needs to copy
     // graphics memory to ram first.
     jt::Color getColorAtPixel(jt::Vector2u pixelPos) const;
-    // clean up stored image
+
     void cleanImage();
 
 private:

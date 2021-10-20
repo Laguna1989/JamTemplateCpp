@@ -15,13 +15,11 @@ public:
     using Sptr = std::shared_ptr<Sprite>;
 
     void loadSprite(std::string const& fileName);
-
     void loadSprite(std::string const& fileName, jt::Recti const& rect);
 
     void fromTexture(sf::Texture const& text);
 
     void setPosition(jt::Vector2 const& pos) override;
-
     const jt::Vector2 getPosition() const override;
 
     void setColor(jt::Color const& col) override;
@@ -30,17 +28,13 @@ public:
     void setFlashColor(jt::Color const& col) override;
     const jt::Color getFlashColor() const override;
 
-    // virtual sf::Transform const getTransform() const override { return m_shape.getTransform(); }
-
     virtual jt::Rect const getGlobalBounds() const override;
     virtual jt::Rect const getLocalBounds() const override;
 
     virtual void setScale(jt::Vector2 const& scale);
-
     virtual const jt::Vector2 getScale() const;
 
     virtual void setOrigin(jt::Vector2 const& origin);
-
     virtual jt::Vector2 const getOrigin() const;
 
     // WARNING: This function is slow, because it needs to copy
