@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1634751822534,
+  "lastUpdate": 1634752616726,
   "repoUrl": "https://github.com/Laguna1989/JamTemplateCpp",
   "entries": {
     "Benchmark": [
@@ -168,6 +168,48 @@ window.BENCHMARK_DATA = {
             "value": 3.303030830188634,
             "unit": "ms/iter",
             "extra": "iterations: 212\ncpu: 3.30265625471698 ms\nthreads: 1"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "laguna.ws@gmail.com",
+            "name": "Simon Weis",
+            "username": "Laguna1989"
+          },
+          "committer": {
+            "email": "laguna.ws@gmail.com",
+            "name": "Simon Weis",
+            "username": "Laguna1989"
+          },
+          "distinct": true,
+          "id": "0899648c844ea64809d1c8424dba13983d0a7ae3",
+          "message": "Sprite drawing to renderwindow is done via unique ptr",
+          "timestamp": "2021-10-20T19:54:40+02:00",
+          "tree_id": "1c54c338d0624bbf9c8cd0e4b3d18fd663b09ef6",
+          "url": "https://github.com/Laguna1989/JamTemplateCpp/commit/0899648c844ea64809d1c8424dba13983d0a7ae3"
+        },
+        "date": 1634752616242,
+        "tool": "googlecpp",
+        "benches": [
+          {
+            "name": "BM_GamestateWithObjects",
+            "value": 2504.8148740000042,
+            "unit": "ms/iter",
+            "extra": "iterations: 1\ncpu: 114.55891700000001 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_StartGame",
+            "value": 10.327867430555434,
+            "unit": "ms/iter",
+            "extra": "iterations: 72\ncpu: 9.638224916666667 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GamestateWithTweeningShapes",
+            "value": 2.786040565736986,
+            "unit": "ms/iter",
+            "extra": "iterations: 251\ncpu: 2.7859370318725096 ms\nthreads: 1"
           }
         ]
       }
