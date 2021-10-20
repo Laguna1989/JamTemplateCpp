@@ -1,9 +1,8 @@
 ﻿#include "game.hpp"
-#include "camera.hpp"
+#include "cam_interface.hpp"
 #include "drawable_impl.hpp"
 #include "game_state.hpp"
 #include "input_manager.hpp"
-#include "random.hpp"
 #include "rect.hpp"
 #include "render_window.hpp"
 #include "sprite.hpp"
@@ -30,6 +29,7 @@ Game::Game(std::shared_ptr<RenderWindowInterface> window, float zoom,
     , m_musicPlayer { musicPlayer }
 {
     m_camera->setZoom(zoom);
+    m_sprite_for_drawing = std::make_unique<jt::Sprite>();
 }
 
 std::shared_ptr<InputManagerInterface> Game::input() { return m_input; }
@@ -127,14 +127,13 @@ void Game::doDraw() const
     // convert renderTexture to sprite and draw that.
     const sf::Texture& texture = m_renderTarget->getTexture();
 
-    auto spr = std::make_unique<jt::Sprite>();
-    spr->fromTexture(texture);
+    m_sprite_for_drawing->fromTexture(texture);
 
     // Note: RenderTexture has a bug and is displayed upside down.
-    horizontalFlip(spr, getCamera()->getZoom(), m_window->getSize().y());
+    horizontalFlip(m_sprite_for_drawing, getCamera()->getZoom(), m_window->getSize().y());
 
     // draw the sprite
-    m_window->draw(std::move(spr));
+    m_window->draw(m_sprite_for_drawing);
 
     // blit it to the screen
     m_window->display();

@@ -3,6 +3,7 @@
 
 #include "color.hpp"
 #include "render_target.hpp"
+#include "sprite.hpp"
 #include "vector.hpp"
 #include <memory>
 #include <string>
@@ -12,7 +13,6 @@ namespace jt {
 // fwd declarations
 class Shape;
 class Text;
-class Sprite;
 
 namespace dh {
 

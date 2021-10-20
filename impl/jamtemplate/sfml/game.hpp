@@ -51,6 +51,8 @@ private:
 
     std::shared_ptr<sf::View> m_view { nullptr };
 
+    mutable std::unique_ptr<jt::Sprite> m_sprite_for_drawing { nullptr };
+
     // override functions from GameBase
     virtual void doUpdate(float const elapsed) override;
     virtual void doDraw() const override;

@@ -2,13 +2,12 @@
 #define GUARD_JAMTEMPLATE_RENDERWINDOW_INTERFACE_GUARD_HPP
 
 #include "render_target.hpp"
+#include "sprite.hpp"
 #include "vector.hpp"
 #include <memory>
 #include <string>
 
 namespace jt {
-
-class Sprite;
 
 class RenderWindowInterface {
 public:
@@ -21,7 +20,7 @@ public:
 
     virtual jt::Vector2 getSize() const = 0;
 
-    virtual void draw(std::unique_ptr<jt::Sprite>) = 0;
+    virtual void draw(std::unique_ptr<jt::Sprite>&) = 0;
 
     virtual void display() = 0;
 

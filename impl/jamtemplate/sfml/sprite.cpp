@@ -3,7 +3,7 @@
 
 namespace jt {
 
-void Sprite::fromTexture(sf::Texture const& text) { m_sprite = sf::Sprite { text }; }
+void Sprite::fromTexture(sf::Texture const& text) { m_sprite.setTexture(text); }
 
 void Sprite::loadSprite(std::string const& fileName)
 {

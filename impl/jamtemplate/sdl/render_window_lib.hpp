@@ -17,7 +17,7 @@ public:
 
     virtual jt::Vector2 getSize() const override;
 
-    virtual void draw(std::unique_ptr<jt::Sprite>) override;
+    virtual void draw(std::unique_ptr<jt::Sprite>&) override;
 
     virtual void display() override;
 

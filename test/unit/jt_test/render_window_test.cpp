@@ -2,6 +2,7 @@
 #include "sprite.hpp"
 #include <gtest/gtest.h>
 #include <stdexcept>
+#include <utility>
 
 TEST(RenderwindowTest, IsOpenByDefault)
 {
@@ -40,7 +41,7 @@ TEST(RenderwindowTest, CreateRenderTargetReturnsValidTarget)
 TEST(RenderwindowTest, DrawValidSprite)
 {
     jt::RenderWindow rw { 100, 200, "test" };
-    auto spr = std::make_shared<jt::Sprite>();
+    auto spr = std::make_unique<jt::Sprite>();
     spr->loadSprite("assets/coin.png", { 0, 0, 16, 16 });
     rw.draw(spr);
 }
@@ -48,7 +49,8 @@ TEST(RenderwindowTest, DrawValidSprite)
 TEST(RenderwindowTest, DrawNullptrSprite)
 {
     jt::RenderWindow rw { 100, 200, "test" };
-    EXPECT_THROW(rw.draw(nullptr), std::invalid_argument);
+    std::unique_ptr<jt::Sprite> spr { nullptr };
+    EXPECT_THROW(rw.draw(spr), std::invalid_argument);
 }
 
 TEST(RenderwindowTest, Display)
