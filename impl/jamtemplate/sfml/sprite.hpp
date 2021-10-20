@@ -17,6 +17,7 @@ public:
     void loadSprite(std::string const& fileName);
     void loadSprite(std::string const& fileName, jt::Recti const& rect);
 
+    // DO NOT CALL THIS FROM GAME CODE!
     void fromTexture(sf::Texture const& text);
 
     void setPosition(jt::Vector2 const& pos) override;

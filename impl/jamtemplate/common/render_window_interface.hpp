@@ -21,7 +21,7 @@ public:
 
     virtual jt::Vector2 getSize() const = 0;
 
-    virtual void draw(std::shared_ptr<jt::Sprite>) = 0;
+    virtual void draw(std::unique_ptr<jt::Sprite>) = 0;
 
     virtual void display() = 0;
 

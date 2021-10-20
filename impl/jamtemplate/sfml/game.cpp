@@ -11,7 +11,7 @@
 #include <iostream>
 
 namespace {
-void horizontalFlip(std::shared_ptr<jt::Sprite> spr, float zoom, float window_size_y)
+void horizontalFlip(std::unique_ptr<jt::Sprite>& spr, float zoom, float window_size_y)
 {
     spr->setScale(jt::Vector2 { zoom, -zoom });
     spr->setPosition({ 0.0f, window_size_y });
@@ -88,8 +88,7 @@ void Game::doUpdate(float const elapsed)
     }
     m_state->update(elapsed);
 
-    if (m_window == nullptr)
-    {
+    if (m_window == nullptr) {
         return;
     }
     jt::Vector2 mpf = m_window->getMousePosition();
@@ -128,15 +127,14 @@ void Game::doDraw() const
     // convert renderTexture to sprite and draw that.
     const sf::Texture& texture = m_renderTarget->getTexture();
 
-    // sf::Sprite spr(texture);
-    std::shared_ptr<jt::Sprite> spr = std::make_shared<jt::Sprite>();
+    auto spr = std::make_unique<jt::Sprite>();
     spr->fromTexture(texture);
 
     // Note: RenderTexture has a bug and is displayed upside down.
     horizontalFlip(spr, getCamera()->getZoom(), m_window->getSize().y());
 
     // draw the sprite
-    m_window->draw(spr);
+    m_window->draw(std::move(spr));
 
     // blit it to the screen
     m_window->display();

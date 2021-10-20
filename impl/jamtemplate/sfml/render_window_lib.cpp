@@ -36,7 +36,7 @@ jt::Vector2 RenderWindow::getSize() const
         static_cast<float>(m_window->getSize().y) };
 }
 
-void RenderWindow::draw(std::shared_ptr<jt::Sprite> spr)
+void RenderWindow::draw(std::unique_ptr<jt::Sprite> spr)
 {
     if (!spr) {
         throw std::invalid_argument { "Cannot draw nullptr sprite" };

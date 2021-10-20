@@ -21,7 +21,7 @@ public:
 
     jt::Vector2 getSize() const override;
 
-    void draw(std::shared_ptr<jt::Sprite>) override;
+    void draw(std::unique_ptr<jt::Sprite>) override;
 
     void display() override;
 
@@ -35,7 +35,7 @@ public:
 
 private:
     std::shared_ptr<sf::RenderWindow> m_window;
-    bool m_isMouseCursorVisible{true};
+    bool m_isMouseCursorVisible { true };
 };
 } // namespace jt
 

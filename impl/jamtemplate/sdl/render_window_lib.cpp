@@ -50,7 +50,7 @@ void RenderWindow::checkForClose()
 
 jt::Vector2 RenderWindow::getSize() const { return m_size; }
 
-void RenderWindow::draw(std::shared_ptr<jt::Sprite> spr)
+void RenderWindow::draw(std::unique_ptr<jt::Sprite> spr)
 {
     if (!spr) {
         throw std::invalid_argument { "cannot draw nullptr sprite" };
