@@ -47,8 +47,6 @@ void Game::setupRenderTarget()
 
     m_view = std::make_shared<sf::View>(jt::Rect(0, 0, (float)scaledWidth, (float)scaledHeight));
     m_view->setViewport(jt::Rect(0, 0, 1, 1));
-
-    jt::RenderWindow::s_view = m_view;
 }
 
 std::shared_ptr<MusicPlayerInterface> Game::getMusicPlayer() { return m_musicPlayer; }

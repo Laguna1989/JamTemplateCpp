@@ -29,9 +29,6 @@ public:
     void setMouseCursorVisible(bool visible) override;
     bool getMouseCursorVisible(void) const override;
 
-    // do not use/write s_view manually from gameplay code. Should only be set once in Game.cpp.
-    static std::weak_ptr<sf::View> s_view;
-
 private:
     std::shared_ptr<sf::RenderWindow> m_window;
     bool m_isMouseCursorVisible { true };

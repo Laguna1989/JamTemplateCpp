@@ -3,8 +3,6 @@
 #include "rect.hpp"
 #include "render_window.hpp"
 
-// TODO clean up usage of sf::view
-
 TEST_F(GameTest, SetupRenderTarget)
 {
     EXPECT_CALL(*window, createRenderTarget())

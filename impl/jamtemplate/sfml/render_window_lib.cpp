@@ -4,8 +4,6 @@
 
 namespace jt {
 
-std::weak_ptr<sf::View> RenderWindow::s_view;
-
 RenderWindow::RenderWindow(unsigned int width, unsigned int height, std::string const& title)
 {
     m_window
