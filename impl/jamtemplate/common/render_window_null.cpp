@@ -41,4 +41,3 @@ bool jt::null_objects::RenderWindowNull::getMouseCursorVisible() const
 {
     return m_mouseCursorVisible;
 }
--
