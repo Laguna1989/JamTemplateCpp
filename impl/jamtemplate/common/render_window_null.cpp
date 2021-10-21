@@ -2,7 +2,7 @@
 #include <stdexcept>
 
 jt::null_objects::RenderWindowNull::RenderWindowNull(
-    unsigned int width, unsigned int height, std::string const& title)
+    unsigned int width, unsigned int height, std::string const& /*title*/)
     : m_size { static_cast<float>(width), static_cast<float>(height) }
 {
 }
@@ -11,7 +11,11 @@ bool jt::null_objects::RenderWindowNull::isOpen() const { return true; }
 void jt::null_objects::RenderWindowNull::checkForClose() { }
 std::shared_ptr<jt::renderTarget> jt::null_objects::RenderWindowNull::createRenderTarget()
 {
+#if USE_SFML
     return std::make_shared<jt::renderTarget>();
+#else
+    return nullptr;
+#endif
 }
 jt::Vector2 jt::null_objects::RenderWindowNull::getSize() const { return m_size; }
 void jt::null_objects::RenderWindowNull::draw(std::unique_ptr<jt::Sprite>& ptr)
@@ -25,7 +29,7 @@ jt::Vector2 jt::null_objects::RenderWindowNull::getMousePosition()
 {
     return jt::Vector2 { 20.0f, 20.0f };
 }
-jt::Vector2 jt::null_objects::RenderWindowNull::getMousePositionScreen(float zoom)
+jt::Vector2 jt::null_objects::RenderWindowNull::getMousePositionScreen(float /*zoom*/)
 {
     return jt::Vector2 { 100.0f, 100.0f };
 }
@@ -37,3 +41,4 @@ bool jt::null_objects::RenderWindowNull::getMouseCursorVisible() const
 {
     return m_mouseCursorVisible;
 }
+-
