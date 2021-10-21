@@ -1,34 +1,8 @@
-﻿#include "render_window.hpp"
-#include "render_window_null.hpp"
+﻿#include "render_window_test.hpp"
 #include "sprite.hpp"
 #include <gtest/gtest.h>
 #include <stdexcept>
 #include <utility>
-
-class RenderWindowFactoryInterface {
-public:
-    virtual std::shared_ptr<jt::RenderWindowInterface> createRenderWindow(
-        unsigned int width, unsigned int height, std::string const& title)
-        = 0;
-};
-
-class RenderWindowFactory : public RenderWindowFactoryInterface {
-public:
-    std::shared_ptr<jt::RenderWindowInterface> createRenderWindow(
-        unsigned int width, unsigned int height, std::string const& title) override
-    {
-        return std::make_shared<jt::RenderWindow>(width, height, title);
-    }
-};
-
-class RenderWindowNullFactory : public RenderWindowFactoryInterface {
-public:
-    std::shared_ptr<jt::RenderWindowInterface> createRenderWindow(
-        unsigned int width, unsigned int height, std::string const& title) override
-    {
-        return std::make_shared<jt::null_objects::RenderWindowNull>(width, height, title);
-    }
-};
 
 class RenderwindowCommonTestFixture
     : public ::testing::TestWithParam<std::shared_ptr<RenderWindowFactoryInterface>> {
@@ -58,14 +32,6 @@ TEST_P(RenderwindowCommonTestFixture, CheckForCloseDoesNotTerminate)
     ASSERT_NO_THROW(m_window->checkForClose());
 }
 
-// cannot create default sdl rentertexture in shared_pointer
-#if USE_SFML
-TEST_P(RenderwindowCommonTestFixture, CreateRenderTargetReturnsValidTarget)
-{
-    ASSERT_NE(m_window->createRenderTarget(), nullptr);
-}
-#endif
-
 TEST_P(RenderwindowCommonTestFixture, DrawValidSprite)
 {
     auto spr = std::make_unique<jt::Sprite>();
@@ -81,12 +47,6 @@ TEST_P(RenderwindowCommonTestFixture, DrawNullptrSprite)
 }
 
 TEST_P(RenderwindowCommonTestFixture, Display) { ASSERT_NO_THROW(m_window->display()); }
-
-TEST_P(RenderwindowCommonTestFixture, GetMousePositionWithoutView)
-{
-    jt::Vector2 const expected { 0.0f, 0.0f };
-    ASSERT_NE(m_window->getMousePosition(), expected);
-}
 
 TEST_P(RenderwindowCommonTestFixture, GetMousePositionOnScreen)
 {
