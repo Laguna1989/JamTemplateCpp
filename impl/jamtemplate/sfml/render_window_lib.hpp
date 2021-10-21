@@ -26,7 +26,6 @@ public:
     void display() override;
 
     jt::Vector2 getMousePosition() override;
-    jt::Vector2 getMousePositionScreen(float zoom) override;
     void setMouseCursorVisible(bool visible) override;
     bool getMouseCursorVisible(void) const override;
 

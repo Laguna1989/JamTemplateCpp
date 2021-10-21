@@ -48,17 +48,8 @@ void RenderWindow::display() { m_window->display(); }
 
 jt::Vector2 RenderWindow::getMousePosition()
 {
-    if (s_view.expired()) {
-        auto const mpi = sf::Mouse::getPosition(*m_window);
-        return jt::Vector2 { static_cast<float>(mpi.x), static_cast<float>(mpi.y) };
-    }
-    auto view = s_view.lock();
-    return m_window->mapPixelToCoords(sf::Mouse::getPosition(*m_window), *view);
-}
-
-jt::Vector2 RenderWindow::getMousePositionScreen(float zoom)
-{
-    return m_window->mapPixelToCoords(sf::Mouse::getPosition(*m_window)) / zoom;
+    auto const mpi = sf::Mouse::getPosition(*m_window);
+    return jt::Vector2 { static_cast<float>(mpi.x), static_cast<float>(mpi.y) };
 }
 
 void RenderWindow::setMouseCursorVisible(bool visible)

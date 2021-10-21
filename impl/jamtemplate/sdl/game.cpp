@@ -78,12 +78,11 @@ std::shared_ptr<jt::renderTarget> Game::getRenderTarget() const { return m_rende
 
 void Game::doUpdate(float const elapsed)
 {
-    auto const mousePosition = m_window->getMousePosition();
-    float const x = mousePosition.x() / getCamera()->getZoom();
-    float const y = mousePosition.y() / getCamera()->getZoom();
+    jt::Vector2 const mpf = m_window->getMousePosition() / getCamera()->getZoom();
 
     if (input()) {
-        input()->update(MousePosition { x, y, x, y });
+        input()->update(MousePosition { mpf.x() + getCamera()->getCamOffset().x(),
+            mpf.y() + getCamera()->getCamOffset().y(), mpf.x(), mpf.y() });
     }
     m_state->update(elapsed);
 

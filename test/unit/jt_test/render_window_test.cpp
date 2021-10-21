@@ -48,12 +48,6 @@ TEST_P(RenderwindowCommonTestFixture, DrawNullptrSprite)
 
 TEST_P(RenderwindowCommonTestFixture, Display) { ASSERT_NO_THROW(m_window->display()); }
 
-TEST_P(RenderwindowCommonTestFixture, GetMousePositionOnScreen)
-{
-    jt::Vector2 const expected { 0.0f, 0.0f };
-    ASSERT_NE(m_window->getMousePositionScreen(1.0f), expected);
-}
-
 TEST_P(RenderwindowCommonTestFixture, MouseIsInvisibleAfterSet)
 {
     m_window->setMouseCursorVisible(false);

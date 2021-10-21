@@ -29,10 +29,7 @@ jt::Vector2 jt::null_objects::RenderWindowNull::getMousePosition()
 {
     return jt::Vector2 { 20.0f, 20.0f };
 }
-jt::Vector2 jt::null_objects::RenderWindowNull::getMousePositionScreen(float /*zoom*/)
-{
-    return jt::Vector2 { 100.0f, 100.0f };
-}
+
 void jt::null_objects::RenderWindowNull::setMouseCursorVisible(bool visible)
 {
     m_mouseCursorVisible = visible;

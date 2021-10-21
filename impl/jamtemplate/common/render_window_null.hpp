@@ -15,7 +15,6 @@ public:
     void draw(std::unique_ptr<jt::Sprite>& ptr) override;
     void display() override;
     Vector2 getMousePosition() override;
-    Vector2 getMousePositionScreen(float zoom) override;
     void setMouseCursorVisible(bool visible) override;
     bool getMouseCursorVisible() const override;
 

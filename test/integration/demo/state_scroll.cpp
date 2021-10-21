@@ -4,7 +4,6 @@
 #include "input_manager.hpp"
 #include "math_helper.hpp"
 #include "state_select.hpp"
-#include <cstdint>
 
 void StateScroll::doInternalCreate()
 {

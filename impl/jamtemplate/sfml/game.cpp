@@ -37,7 +37,6 @@ std::shared_ptr<InputManagerInterface> Game::input() { return m_input; }
 void Game::setupRenderTarget()
 {
     m_renderTarget = m_window->createRenderTarget();
-
     auto const windowSize = m_window->getSize();
     auto const zoom = getCamera()->getZoom();
     unsigned int const scaledWidth = static_cast<unsigned int>(windowSize.x() / zoom);
@@ -83,11 +82,11 @@ void Game::doUpdate(float const elapsed)
     if (m_window == nullptr) {
         return;
     }
-    jt::Vector2 mpf = m_window->getMousePosition();
+    jt::Vector2 const mpf = m_window->getMousePosition() / getCamera()->getZoom();
 
-    jt::Vector2 mpfs = m_window->getMousePositionScreen(getCamera()->getZoom());
     if (input()) {
-        input()->update(MousePosition { mpf.x(), mpf.y(), mpfs.x(), mpfs.y() });
+        input()->update(MousePosition { mpf.x() + getCamera()->getCamOffset().x(),
+            mpf.y() + getCamera()->getCamOffset().y(), mpf.x(), mpf.y() });
     }
     if (m_view) {
         int const camOffsetix { static_cast<int>(

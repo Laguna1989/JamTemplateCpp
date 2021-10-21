@@ -75,12 +75,6 @@ jt::Vector2 RenderWindow::getMousePosition()
     return jt::Vector2 { static_cast<float>(mx), static_cast<float>(my) };
 }
 
-jt::Vector2 RenderWindow::getMousePositionScreen(float /*zoom*/)
-{
-    std::cerr << "RenderWindow::getMousepositonScreen() not supported by SDL Renderwindow.\n";
-    return jt::Vector2 { 42.0f, 42.0f };
-}
-
 void RenderWindow::setMouseCursorVisible(bool visible)
 {
     SDL_ShowCursor(SDL_ENABLE);
