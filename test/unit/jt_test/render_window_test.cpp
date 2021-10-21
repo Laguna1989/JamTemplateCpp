@@ -82,7 +82,7 @@ TEST_P(RenderwindowCommonTestFixture, Display) { ASSERT_NO_THROW(m_window->displ
 TEST_P(RenderwindowCommonTestFixture, GetMousePositionWithoutView)
 {
     jt::Vector2 const expected { 0.0f, 0.0f };
-    ASSERT_EQ(m_window->getMousePosition(), expected);
+    ASSERT_NE(m_window->getMousePosition(), expected);
 }
 
 TEST_P(RenderwindowCommonTestFixture, GetMousePositionOnScreen)

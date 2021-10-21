@@ -23,7 +23,7 @@ void jt::null_objects::RenderWindowNull::draw(std::unique_ptr<jt::Sprite>& ptr)
 void jt::null_objects::RenderWindowNull::display() { }
 jt::Vector2 jt::null_objects::RenderWindowNull::getMousePosition()
 {
-    return jt::Vector2 { 0.0f, 0.0f };
+    return jt::Vector2 { 20.0f, 20.0f };
 }
 jt::Vector2 jt::null_objects::RenderWindowNull::getMousePositionScreen(float zoom)
 {
