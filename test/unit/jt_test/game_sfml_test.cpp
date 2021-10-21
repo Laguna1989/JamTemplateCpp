@@ -13,9 +13,6 @@ TEST_F(GameTest, SetupRenderTarget)
     g->setupRenderTarget();
     ASSERT_EQ(g->getRenderTarget()->getSize().x, 20);
     ASSERT_EQ(g->getRenderTarget()->getSize().y, 40);
-
-    // cleanup so that future tests are not affected!
-    jt::RenderWindow::s_view = std::shared_ptr<sf::View> { nullptr };
 }
 
 TEST_F(GameTest, SetupRenderTargetWithZoom)
@@ -28,9 +25,6 @@ TEST_F(GameTest, SetupRenderTargetWithZoom)
     g->setupRenderTarget();
     ASSERT_EQ(g->getRenderTarget()->getSize().x, 10);
     ASSERT_EQ(g->getRenderTarget()->getSize().y, 20);
-
-    // cleanup so that future tests are not affected!
-    jt::RenderWindow::s_view = std::shared_ptr<sf::View> { nullptr };
 }
 
 TEST_F(GameTest, SetRenderTarget)
@@ -42,9 +36,6 @@ TEST_F(GameTest, SetRenderTarget)
     ASSERT_NE(g->getRenderTarget(), nullptr);
 
     g->setRenderTarget(g->getRenderTarget());
-
-    // cleanup so that future tests are not affected!
-    jt::RenderWindow::s_view = std::shared_ptr<sf::View> { nullptr };
 }
 TEST_F(GameTest, DrawWithRenderTargetAndState)
 {
@@ -62,7 +53,4 @@ TEST_F(GameTest, DrawWithRenderTargetAndState)
     g->update(0.1f);
     EXPECT_CALL(*ms, doInternalDraw());
     g->draw();
-
-    // cleanup so that future tests are not affected!
-    jt::RenderWindow::s_view = std::shared_ptr<sf::View> { nullptr };
 }

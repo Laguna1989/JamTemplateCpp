@@ -4,7 +4,6 @@
 #include "mouse_input.hpp"
 #include "random.hpp"
 #include "render_window.hpp"
-#include "render_window_null.hpp"
 #include "state_select.hpp"
 #include <memory>
 
