@@ -1,11 +1,10 @@
 #include "game.hpp"
 #include "game_state.hpp"
-#include "random.hpp"
+#include "render_window_null.hpp"
 #include "shape.hpp"
 #include "tween_color.hpp"
 #include <benchmark/benchmark.h>
 #include <memory>
-#include <render_window.hpp>
 #include <vector>
 
 class StateEmpty : public jt::GameState {
@@ -22,10 +21,10 @@ private:
 
 static void BM_StartGame(benchmark::State& state)
 {
-
     for (auto _ : state) {
         auto game = std::make_shared<jt::Game>(
-            std::make_shared<jt::RenderWindow>(800, 600, "jt_performance"), 1.0f, nullptr, nullptr);
+            std::make_shared<jt::null_objects::RenderWindowNull>(800, 600, "jt_performance"), 1.0f,
+            nullptr, nullptr);
         auto gs = std::make_shared<StateEmpty>();
         game->switchState(gs);
         game->update(0.02f);

@@ -13,7 +13,7 @@ namespace {
 void horizontalFlip(std::unique_ptr<jt::Sprite>& spr, float zoom, float window_size_y)
 {
     spr->setScale(jt::Vector2 { zoom, -zoom });
-    spr->setPosition({ 0.0f, window_size_y });
+    spr->setPosition({ spr->getPosition().x(), spr->getPosition().y() + window_size_y });
     spr->update(0.0f);
 }
 } // namespace
@@ -37,7 +37,6 @@ std::shared_ptr<InputManagerInterface> Game::input() { return m_input; }
 void Game::setupRenderTarget()
 {
     m_renderTarget = m_window->createRenderTarget();
-
     auto const windowSize = m_window->getSize();
     auto const zoom = getCamera()->getZoom();
     unsigned int const scaledWidth = static_cast<unsigned int>(windowSize.x() / zoom);
@@ -48,8 +47,6 @@ void Game::setupRenderTarget()
 
     m_view = std::make_shared<sf::View>(jt::Rect(0, 0, (float)scaledWidth, (float)scaledHeight));
     m_view->setViewport(jt::Rect(0, 0, 1, 1));
-
-    jt::RenderWindow::s_view = m_view;
 }
 
 std::shared_ptr<MusicPlayerInterface> Game::getMusicPlayer() { return m_musicPlayer; }
@@ -72,40 +69,32 @@ void Game::setRenderTarget(std::shared_ptr<jt::renderTarget> rt)
 }
 std::shared_ptr<jt::renderTarget> Game::getRenderTarget() const { return m_renderTarget; }
 
-void Game::setView(std::shared_ptr<sf::View> view)
-{
-    m_view = view;
-    if (m_renderTarget != nullptr) {
-        m_renderTarget->setView(*m_view);
-    }
-}
-std::shared_ptr<sf::View> Game::getView() { return m_view; }
-
 void Game::doUpdate(float const elapsed)
 {
     if (m_state == nullptr) {
         return;
     }
     m_state->update(elapsed);
+    getCamera()->update(elapsed);
 
     if (m_window == nullptr) {
         return;
     }
-    jt::Vector2 mpf = m_window->getMousePosition();
+    jt::Vector2 const mpf = m_window->getMousePosition() / getCamera()->getZoom();
 
-    jt::Vector2 mpfs = m_window->getMousePositionScreen(getCamera()->getZoom());
     if (input()) {
-        input()->update(MousePosition { mpf.x(), mpf.y(), mpfs.x(), mpfs.y() });
+        input()->update(MousePosition { mpf.x() + getCamera()->getCamOffset().x(),
+            mpf.y() + getCamera()->getCamOffset().y(), mpf.x(), mpf.y() });
     }
-    if (getView()) {
+    if (m_view) {
         int const camOffsetix { static_cast<int>(
-            getCamera()->getCamOffset().x() + getView()->getSize().x / 2) };
+            getCamera()->getCamOffset().x() + m_view->getSize().x / 2) };
         int const camOffsetiy { static_cast<int>(
-            getCamera()->getCamOffset().y() + getView()->getSize().y / 2) };
+            getCamera()->getCamOffset().y() + m_view->getSize().y / 2) };
 
-        getView()->setCenter(
+        m_view->setCenter(
             jt::Vector2 { static_cast<float>(camOffsetix), static_cast<float>(camOffsetiy) });
-        DrawableImpl::setCamOffset(-1.0f * (getView()->getCenter() - getView()->getSize() / 2.0f));
+        DrawableImpl::setCamOffset(-1.0f * (m_view->getCenter() - m_view->getSize() / 2.0f));
     }
 };
 
@@ -124,11 +113,14 @@ void Game::doDraw() const
 
     m_state->draw();
 
+    m_renderTarget->setView(*m_view);
     // convert renderTexture to sprite and draw that.
     const sf::Texture& texture = m_renderTarget->getTexture();
 
     m_sprite_for_drawing->fromTexture(texture);
-
+    auto const shakeOffset = getCamera()->getShakeOffset();
+    // TODO Fix magic number
+    m_sprite_for_drawing->setPosition(shakeOffset * 5.0f);
     // Note: RenderTexture has a bug and is displayed upside down.
     horizontalFlip(m_sprite_for_drawing, getCamera()->getZoom(), m_window->getSize().y());
 
@@ -137,34 +129,6 @@ void Game::doDraw() const
 
     // blit it to the screen
     m_window->display();
-}
-
-void Game::updateShake(float elapsed)
-{
-    removeCamShakeFromView();
-
-    getCamera()->update(elapsed);
-
-    applyCamShakeToView();
-}
-
-void jt::Game::applyCamShakeToView()
-{
-    if (m_renderTarget == nullptr) {
-        return;
-    }
-    auto const newShakeOffset = getCamera()->getShakeOffset();
-    auto v = getView();
-    v->move(newShakeOffset.x(), newShakeOffset.y());
-    setView(v);
-}
-
-void jt::Game::removeCamShakeFromView()
-{
-    auto const oldShakeOffset = getCamera()->getShakeOffset();
-    if (oldShakeOffset.x() != 0 || oldShakeOffset.y() != 0) {
-        getView()->move(-oldShakeOffset.x(), -oldShakeOffset.y());
-    }
 }
 
 std::shared_ptr<jt::RenderWindowInterface> Game::getRenderWindow() const { return m_window; }

@@ -1,83 +1,59 @@
-﻿#include "render_window.hpp"
+﻿#include "render_window_test.hpp"
 #include "sprite.hpp"
 #include <gtest/gtest.h>
 #include <stdexcept>
 #include <utility>
 
-TEST(RenderwindowTest, IsOpenByDefault)
+class RenderwindowCommonTestFixture
+    : public ::testing::TestWithParam<std::shared_ptr<RenderWindowFactoryInterface>> {
+protected:
+    std::shared_ptr<jt::RenderWindowInterface> m_window;
+    void SetUp() override { m_window = GetParam()->createRenderWindow(100, 200, "test"); }
+};
+
+TEST_P(RenderwindowCommonTestFixture, IsOpenByDefault) { ASSERT_TRUE(m_window->isOpen()); }
+
+TEST_P(RenderwindowCommonTestFixture, MouseIsVisibleByDefault)
 {
-    jt::RenderWindow const rw { 100, 200, "test" };
-    EXPECT_TRUE(rw.isOpen());
+    ASSERT_TRUE(m_window->getMouseCursorVisible());
 }
 
-TEST(RenderWindowTest, MouseIsVisibleByDefault)
-{
-    jt::RenderWindow rw { 100, 200, "test" };
-
-    ASSERT_TRUE(rw.getMouseCursorVisible());
-}
-
-TEST(RenderwindowTest, SizeIsAsSet)
+TEST_P(RenderwindowCommonTestFixture, SizeIsAsSet)
 {
     auto const w = 500;
     auto const h = 300;
-    jt::RenderWindow const rw { w, h, "test" };
-    EXPECT_EQ(rw.getSize().x(), w);
-    EXPECT_EQ(rw.getSize().y(), h);
+    m_window = GetParam()->createRenderWindow(w, h, "abcd");
+    ASSERT_EQ(m_window->getSize().x(), w);
+    ASSERT_EQ(m_window->getSize().y(), h);
 }
 
-TEST(RenderwindowTest, CheckForCloseDoesNotTerminate)
+TEST_P(RenderwindowCommonTestFixture, CheckForCloseDoesNotTerminate)
 {
-    jt::RenderWindow rw { 100, 200, "test" };
-    EXPECT_NO_THROW(rw.checkForClose());
+    ASSERT_NO_THROW(m_window->checkForClose());
 }
 
-TEST(RenderwindowTest, CreateRenderTargetReturnsValidTarget)
+TEST_P(RenderwindowCommonTestFixture, DrawValidSprite)
 {
-    jt::RenderWindow rw { 100, 200, "test" };
-    EXPECT_NE(rw.createRenderTarget(), nullptr);
-}
-
-TEST(RenderwindowTest, DrawValidSprite)
-{
-    jt::RenderWindow rw { 100, 200, "test" };
     auto spr = std::make_unique<jt::Sprite>();
     spr->loadSprite("assets/coin.png", { 0, 0, 16, 16 });
-    rw.draw(spr);
+    m_window->draw(spr);
 }
 
-TEST(RenderwindowTest, DrawNullptrSprite)
+TEST_P(RenderwindowCommonTestFixture, DrawNullptrSprite)
 {
     jt::RenderWindow rw { 100, 200, "test" };
     std::unique_ptr<jt::Sprite> spr { nullptr };
-    EXPECT_THROW(rw.draw(spr), std::invalid_argument);
+    ASSERT_THROW(m_window->draw(spr), std::invalid_argument);
 }
 
-TEST(RenderwindowTest, Display)
+TEST_P(RenderwindowCommonTestFixture, Display) { ASSERT_NO_THROW(m_window->display()); }
+
+TEST_P(RenderwindowCommonTestFixture, MouseIsInvisibleAfterSet)
 {
-    jt::RenderWindow rw { 100, 200, "test" };
-    rw.display();
+    m_window->setMouseCursorVisible(false);
+    ASSERT_FALSE(m_window->getMouseCursorVisible());
 }
 
-TEST(RenderWindowTest, GetMousePositionWithoutView)
-{
-    jt::RenderWindow rw { 100, 200, "test" };
-
-    jt::Vector2 const expected { 0.0f, 0.0f };
-    EXPECT_EQ(rw.getMousePosition(), expected);
-}
-
-TEST(RenderWindowTest, GetMousePositionOnScreen)
-{
-    jt::RenderWindow rw { 100, 200, "test" };
-
-    jt::Vector2 const expected { 0.0f, 0.0f };
-    EXPECT_NE(rw.getMousePositionScreen(1.0f), expected);
-}
-
-TEST(RenderWindowTest, MouseIsInvisibleAfterSet)
-{
-    jt::RenderWindow rw { 100, 200, "test" };
-    rw.setMouseCursorVisible(false);
-    ASSERT_FALSE(rw.getMouseCursorVisible());
-}
+INSTANTIATE_TEST_SUITE_P(RenderwindowCommonTest, RenderwindowCommonTestFixture,
+    ::testing::Values(
+        std::make_shared<RenderWindowFactory>(), std::make_shared<RenderWindowNullFactory>()));
