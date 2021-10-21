@@ -47,8 +47,6 @@ private:
     virtual void doUpdate(float const elapsed) override;
     virtual void doDraw() const override;
 
-    void updateShake(float elapsed) override;
-
     std::shared_ptr<MusicPlayerInterface> m_musicPlayer { nullptr };
 };
 

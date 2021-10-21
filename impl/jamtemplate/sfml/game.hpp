@@ -35,11 +35,6 @@ public:
 
     std::shared_ptr<InputManagerInterface> input() override;
 
-    // DO NOT CALL FROM GAME CODE
-    void setView(std::shared_ptr<sf::View> view);
-    // DO NOT CALL FROM GAME CODE
-    std::shared_ptr<sf::View> getView();
-
     std::shared_ptr<jt::RenderWindowInterface> getRenderWindow() const override;
 
 private:
@@ -56,10 +51,6 @@ private:
     // override functions from GameBase
     virtual void doUpdate(float const elapsed) override;
     virtual void doDraw() const override;
-
-    void updateShake(float elapsed) override;
-    void applyCamShakeToView();
-    void removeCamShakeFromView();
 };
 
 } // namespace jt

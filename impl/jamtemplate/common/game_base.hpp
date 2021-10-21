@@ -47,8 +47,6 @@ protected:
     virtual void doUpdate(float const elapsed) override = 0;
     virtual void doDraw() const override = 0;
 
-    virtual void updateShake(float elapsed) = 0;
-
     void doSwitchState();
 };
 

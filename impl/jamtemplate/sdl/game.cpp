@@ -119,8 +119,6 @@ void Game::doDraw() const
     SDL_DestroyTexture(t);
 };
 
-void Game::updateShake(float elapsed) { getCamera()->update(elapsed); }
-
 std::shared_ptr<MusicPlayerInterface> Game::getMusicPlayer() { return m_musicPlayer; }
 
 std::shared_ptr<InputManagerInterface> Game::input() { return m_input; }

@@ -57,7 +57,7 @@ void GameBase::run()
         m_timeLast = now;
 
         if (m_age != 0) {
-            updateShake(elapsed_in_seconds);
+            getCamera()->update(elapsed_in_seconds);
             update(elapsed_in_seconds);
             draw();
         }
