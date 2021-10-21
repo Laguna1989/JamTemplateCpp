@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1634753938449,
+  "lastUpdate": 1634846261872,
   "repoUrl": "https://github.com/Laguna1989/JamTemplateCpp",
   "entries": {
     "Benchmark": [
@@ -252,6 +252,48 @@ window.BENCHMARK_DATA = {
             "value": 2.740673984313688,
             "unit": "ms/iter",
             "extra": "iterations: 255\ncpu: 2.7403865843137254 ms\nthreads: 1"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "laguna_1989@gmx.net",
+            "name": "Laguna1989",
+            "username": "Laguna1989"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "b81e932996c419d287831e0b54fce8388cbb092a",
+          "message": "Merge pull request #62 from Laguna1989/FEATURE_NullObjects\n\nFeature null objects",
+          "timestamp": "2021-10-21T21:55:39+02:00",
+          "tree_id": "3130ca60e46f9716718467230f3bb1d8816a3350",
+          "url": "https://github.com/Laguna1989/JamTemplateCpp/commit/b81e932996c419d287831e0b54fce8388cbb092a"
+        },
+        "date": 1634846260791,
+        "tool": "googlecpp",
+        "benches": [
+          {
+            "name": "BM_GamestateWithObjects",
+            "value": 2501.5782240000135,
+            "unit": "ms/iter",
+            "extra": "iterations: 1\ncpu: 122.79171500000002 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_StartGame",
+            "value": 0.0011772245878877443,
+            "unit": "ms/iter",
+            "extra": "iterations: 620826\ncpu: 0.001176460164361673 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GamestateWithTweeningShapes",
+            "value": 3.1063158596490816,
+            "unit": "ms/iter",
+            "extra": "iterations: 228\ncpu: 3.106066328947369 ms\nthreads: 1"
           }
         ]
       }
