@@ -16,11 +16,12 @@ jobs:
 
       - name: CMake
         run: |
-        cmake -B ${{github.workspace}}/build \
-        -DENABLE_UNITTESTS=OFF \
-        -DCMAKE_BUILD_TYPE=Release \
-        -DENABLE_DEMOS=OFF  \
-        .
+          cmake \
+          -B ${{github.workspace}}/build \
+          -DENABLE_UNITTESTS=OFF \
+          -DCMAKE_BUILD_TYPE=Release \
+          -DENABLE_DEMOS=OFF \
+          .
 
       - name: Build
         working-directory: ${{github.workspace}}/build
