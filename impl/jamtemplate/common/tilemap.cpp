@@ -25,7 +25,7 @@ Tilemap::Tilemap(std::string const& path)
     auto const rows = tileset.getTileCount() / columns;
     auto const ts = tileset.getTileSize();
     auto const tilesetName = "assets/" + tileset.getImagePath().string();
-    m_tileSprites.resize(rows * columns);
+    m_tileSprites.resize(static_cast<std::size_t>(rows) * static_cast<std::size_t>(columns));
     for (int j = 0; j != rows; ++j) {
         for (int i = 0; i != columns; ++i) {
             jt::Sprite tile {};
