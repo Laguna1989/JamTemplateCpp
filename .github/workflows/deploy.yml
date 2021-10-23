@@ -2,7 +2,7 @@ name: Test Verification
 
 on:
   push:
-    branches: [ FEATURE_Deploy ]
+    branches: [ deploy ]
 jobs:
   BuildWindowsSFML:
     runs-on: windows-latest
@@ -21,6 +21,7 @@ jobs:
         working-directory: ${{github.workspace}}/build
         run: cmake --build .
 
+      # although built in release mode, the exe will be stored in the debug folder.
       - name: Copy files
         run: cp ${{github.workspace}}/build/impl/game/Debug/*.exe ${{github.workspace}}/build/impl/game/
 
@@ -36,7 +37,7 @@ jobs:
             !${{github.workspace}}/build/impl/game/*.dir
             !*.cmake
             !*.vcxproj*
-            !*-d-2.dll*
+            !*-d-2.dll
 
   BuildWebSDL:
     runs-on: ubuntu-latest
