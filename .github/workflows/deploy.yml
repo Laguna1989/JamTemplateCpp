@@ -2,7 +2,7 @@ name: Test Verification
 
 on:
   push:
-    branches: [ deploy ]
+    branches: [ FEATURE_Deploy ]
 jobs:
   BuildWindowsSFML:
     runs-on: windows-latest
