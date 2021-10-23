@@ -62,7 +62,6 @@ jobs:
     - name: CMake
       run: |
         cmake \
-        -DCMAKE_C_COMPILER_LAUNCHER=ccache -DCMAKE_CXX_COMPILER_LAUNCHER=ccache \
         -B ${{github.workspace}}/build .
 
     - name: Build
