@@ -21,6 +21,8 @@ jobs:
         working-directory: ${{github.workspace}}/build
         run: cmake --build .
 
+      - name: Copy files
+        run: cp ${{github.workspace}}/build/impl/game/Debug/*.exe ${{github.workspace}}/build/impl/game/
 
       - uses: actions/upload-artifact@v2
         with:
@@ -29,6 +31,11 @@ jobs:
             ${{github.workspace}}/build/impl/game/
             !${{github.workspace}}/build/impl/game/CMakeFiles
             !${{github.workspace}}/build/impl/game/Makefile
+            !${{github.workspace}}/build/impl/game/Debug
+            !${{github.workspace}}/build/impl/game/Release
+            !*.cmake
+            !*.vcxproj*
+            !*-d-2.dll*
 
   BuildWebSDL:
     runs-on: ubuntu-latest
@@ -69,11 +76,13 @@ jobs:
         working-directory: ${{github.workspace}}/build
         run: emmake make
 
+      - name: Copy files
+        run: cp ${{github.workspace}}/index.html ${{github.workspace}}/build/impl/game/index.html
+
       - uses: actions/upload-artifact@v2
         with:
           name: game_web
           path: |
-            ${{github.workspace}}/index.html
             ${{github.workspace}}/build/impl/game/*
             !${{github.workspace}}/build/impl/game/assets
             !${{github.workspace}}/build/impl/game/CMakeFiles
