@@ -33,6 +33,7 @@ jobs:
             !${{github.workspace}}/build/impl/game/Makefile
             !${{github.workspace}}/build/impl/game/Debug
             !${{github.workspace}}/build/impl/game/Release
+            !${{github.workspace}}/build/impl/game/*.dir
             !*.cmake
             !*.vcxproj*
             !*-d-2.dll*
@@ -83,10 +84,9 @@ jobs:
         with:
           name: game_web
           path: |
-            ${{github.workspace}}/build/impl/game/*
-            !${{github.workspace}}/build/impl/game/assets
-            !${{github.workspace}}/build/impl/game/CMakeFiles
-            !${{github.workspace}}/build/impl/game/cmake_install.cmake
-            !${{github.workspace}}/build/impl/game/Makefile
+            ${{github.workspace}}/build/impl/game/index.html
+            ${{github.workspace}}/build/impl/game/*.data
+            ${{github.workspace}}/build/impl/game/*.js
+            ${{github.workspace}}/build/impl/game/*.wasm
 
 
