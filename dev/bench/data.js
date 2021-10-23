@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1635016563949,
+  "lastUpdate": 1635017715815,
   "repoUrl": "https://github.com/Laguna1989/JamTemplateCpp",
   "entries": {
     "Benchmark": [
@@ -420,6 +420,48 @@ window.BENCHMARK_DATA = {
             "value": 2.726199770428014,
             "unit": "ms/iter",
             "extra": "iterations: 257\ncpu: 2.724422054474708 ms\nthreads: 1"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "laguna_1989@gmx.net",
+            "name": "Simon Weis",
+            "username": "Laguna1989"
+          },
+          "committer": {
+            "email": "laguna_1989@gmx.net",
+            "name": "Simon Weis",
+            "username": "Laguna1989"
+          },
+          "distinct": true,
+          "id": "df87e7635dce417205eebfcb499251f4d96e11a4",
+          "message": "Fix multiplication result converted to larger type",
+          "timestamp": "2021-10-23T21:32:53+02:00",
+          "tree_id": "d231e4cef8f86a39d6d0e89f4812fab3ddb801c4",
+          "url": "https://github.com/Laguna1989/JamTemplateCpp/commit/df87e7635dce417205eebfcb499251f4d96e11a4"
+        },
+        "date": 1635017714310,
+        "tool": "googlecpp",
+        "benches": [
+          {
+            "name": "BM_GamestateWithObjects",
+            "value": 5.403829423076991,
+            "unit": "ms/iter",
+            "extra": "iterations: 130\ncpu: 5.4034315230769225 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_StartGame",
+            "value": 0.0010132252129422651,
+            "unit": "ms/iter",
+            "extra": "iterations: 690915\ncpu: 0.00101310725197745 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GamestateWithTweeningShapes",
+            "value": 2.732616769531293,
+            "unit": "ms/iter",
+            "extra": "iterations: 256\ncpu: 2.732419914062499 ms\nthreads: 1"
           }
         ]
       }
