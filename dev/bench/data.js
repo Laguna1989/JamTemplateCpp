@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1634982478790,
+  "lastUpdate": 1635016420891,
   "repoUrl": "https://github.com/Laguna1989/JamTemplateCpp",
   "entries": {
     "Benchmark": [
@@ -336,6 +336,48 @@ window.BENCHMARK_DATA = {
             "value": 2.7343868320312548,
             "unit": "ms/iter",
             "extra": "iterations: 256\ncpu: 2.7342165351562504 ms\nthreads: 1"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "laguna_1989@gmx.net",
+            "name": "Laguna1989",
+            "username": "Laguna1989"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "a09b9625b90961090ad75cc130f03f4c4b226f28",
+          "message": "Create code-ql workflow",
+          "timestamp": "2021-10-23T21:12:06+02:00",
+          "tree_id": "15ded39a25106058995ab2568fcd1d7ef1500c3f",
+          "url": "https://github.com/Laguna1989/JamTemplateCpp/commit/a09b9625b90961090ad75cc130f03f4c4b226f28"
+        },
+        "date": 1635016419797,
+        "tool": "googlecpp",
+        "benches": [
+          {
+            "name": "BM_GamestateWithObjects",
+            "value": 5.508839629921405,
+            "unit": "ms/iter",
+            "extra": "iterations: 127\ncpu: 5.508240440944881 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_StartGame",
+            "value": 0.0010381348741702423,
+            "unit": "ms/iter",
+            "extra": "iterations: 674006\ncpu: 0.0010381032750450294 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GamestateWithTweeningShapes",
+            "value": 2.752852803149586,
+            "unit": "ms/iter",
+            "extra": "iterations: 254\ncpu: 2.7526213188976367 ms\nthreads: 1"
           }
         ]
       }
