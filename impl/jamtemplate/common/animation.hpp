@@ -27,24 +27,24 @@ public:
     void play(std::string const& animName, size_t startFrame = 0, bool restart = false);
 
     void setColor(jt::Color const& col) override;
-    const jt::Color getColor() const override;
+    jt::Color getColor() const override;
 
     void setPosition(jt::Vector2 const& pos) override;
-    jt::Vector2 const getPosition() const override;
+    jt::Vector2 getPosition() const override;
 
     // sf::Transform const getTransform() const;
 
-    jt::Rect const getGlobalBounds() const override;
-    virtual jt::Rect const getLocalBounds() const override;
+    jt::Rect getGlobalBounds() const override;
+    virtual jt::Rect getLocalBounds() const override;
 
     void setFlashColor(jt::Color const& col) override;
-    jt::Color const getFlashColor() const override;
+    jt::Color getFlashColor() const override;
 
     virtual void setScale(jt::Vector2 const& scale) override;
-    virtual jt::Vector2 const getScale() const override;
+    virtual jt::Vector2 getScale() const override;
 
     void setOrigin(jt::Vector2 const& origin) override;
-    jt::Vector2 const getOrigin() const override;
+    jt::Vector2 getOrigin() const override;
 
     void setShadowActive(bool active) override;
     void setShadowColor(jt::Color const& col) override;

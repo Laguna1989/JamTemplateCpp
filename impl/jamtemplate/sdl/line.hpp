@@ -12,22 +12,22 @@ public:
     Line(jt::Vector2 lineVector);
 
     void setColor(jt::Color const& col) override;
-    const jt::Color getColor() const override;
+    jt::Color getColor() const override;
 
     void setPosition(jt::Vector2 const& pos) override;
-    const jt::Vector2 getPosition() const override;
+    jt::Vector2 getPosition() const override;
 
-    jt::Rect const getGlobalBounds() const override;
-    jt::Rect const getLocalBounds() const override;
+    jt::Rect getGlobalBounds() const override;
+    jt::Rect getLocalBounds() const override;
 
     void setFlashColor(jt::Color const& col) override;
-    const jt::Color getFlashColor() const override;
+    jt::Color getFlashColor() const override;
 
     void setScale(jt::Vector2 const& scale) override;
-    const jt::Vector2 getScale() const override;
+    jt::Vector2 getScale() const override;
 
     void setOrigin(jt::Vector2 const& origin) override;
-    const jt::Vector2 getOrigin() const override;
+    jt::Vector2 getOrigin() const override;
 
 private:
     jt::Vector2 m_lineVector;

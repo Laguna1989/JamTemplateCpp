@@ -29,15 +29,15 @@ float Random::getFloatGauss(float mu, float sigma)
 
 bool Random::getChance(float c) { return (getFloat(0.0f, 1.0f) <= c); }
 
-jt::Color const Random::getRandomColor()
+jt::Color Random::getRandomColor()
 {
-    std::uint8_t const r = static_cast<std::uint8_t>(getInt(0, 255));
-    std::uint8_t const g = static_cast<std::uint8_t>(getInt(0, 255));
-    std::uint8_t const b = static_cast<std::uint8_t>(getInt(0, 255));
+    auto const r = static_cast<std::uint8_t>(getInt(0, 255));
+    auto const g = static_cast<std::uint8_t>(getInt(0, 255));
+    auto const b = static_cast<std::uint8_t>(getInt(0, 255));
     return jt::Color { r, g, b };
 }
 
-jt::Vector2 const Random::getRandomPointin(jt::Rect r)
+jt::Vector2 Random::getRandomPointin(jt::Rect r)
 {
     auto const x = getFloat(r.left(), r.left() + r.width());
     auto const y = getFloat(r.top(), r.top() + r.height());
@@ -46,4 +46,4 @@ jt::Vector2 const Random::getRandomPointin(jt::Rect r)
 
 void Random::setSeed(unsigned int s) { m_engine.seed(s); }
 
-void Random::useTimeAsRandomSeed() { setSeed(static_cast<unsigned int>(time(NULL))); }
+void Random::useTimeAsRandomSeed() { setSeed(static_cast<unsigned int>(time(nullptr))); }

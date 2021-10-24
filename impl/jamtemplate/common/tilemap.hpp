@@ -18,37 +18,37 @@ class Tilemap : public DrawableImpl {
 public:
     using Sptr = std::shared_ptr<Tilemap>;
 
-    Tilemap(std::string const& path);
+    explicit Tilemap(std::string const& path);
 
-    void doDraw(std::shared_ptr<jt::renderTarget> const sptr) const;
+    void doDraw(std::shared_ptr<jt::renderTarget> sptr) const override;
 
     void checkIdBounds(tson::TileObject& tile) const;
 
-    void doDrawFlash(std::shared_ptr<jt::renderTarget> const sptr) const;
-    void doDrawShadow(std::shared_ptr<jt::renderTarget> const sptr) const;
+    void doDrawFlash(std::shared_ptr<jt::renderTarget> sptr) const override;
+    void doDrawShadow(std::shared_ptr<jt::renderTarget> sptr) const override;
 
-    void doUpdate(float elapsed);
+    void doUpdate(float elapsed) override;
 
-    void setColor(jt::Color const& col);
-    const jt::Color getColor() const;
+    void setColor(jt::Color const& col) override;
+    jt::Color getColor() const override;
 
-    void setPosition(jt::Vector2 const& pos);
-    const jt::Vector2 getPosition() const;
+    void setPosition(jt::Vector2 const& pos) override;
+    jt::Vector2 getPosition() const override;
 
     // sf::Transform const getTransform() const;
-    jt::Rect const getGlobalBounds() const;
-    jt::Rect const getLocalBounds() const;
+    jt::Rect getGlobalBounds() const override;
+    jt::Rect getLocalBounds() const override;
 
-    void setFlashColor(jt::Color const& col);
-    const jt::Color getFlashColor() const;
+    void setFlashColor(jt::Color const& col) override;
+    jt::Color getFlashColor() const override;
 
-    void setScale(jt::Vector2 const& scale);
-    const jt::Vector2 getScale() const;
+    void setScale(jt::Vector2 const& scale) override;
+    jt::Vector2 getScale() const override;
 
-    const jt::Vector2u getMapSizeInTiles();
+    jt::Vector2u getMapSizeInTiles();
 
     void setOrigin(jt::Vector2 const& origin);
-    const jt::Vector2 getOrigin() const;
+    jt::Vector2 getOrigin() const;
 
     void doRotate(float /*rot*/);
 

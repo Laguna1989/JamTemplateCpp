@@ -37,18 +37,18 @@ void Text::setOutline(float thickness, jt::Color col)
 }
 
 void Text::setPosition(jt::Vector2 const& pos) { m_position = pos; }
-const jt::Vector2 Text::getPosition() const { return m_position; }
+jt::Vector2 Text::getPosition() const { return m_position; }
 
 void Text::setColor(const jt::Color& col) { m_text->setFillColor(col); }
-const jt::Color Text::getColor() const { return m_text->getFillColor(); }
+jt::Color Text::getColor() const { return m_text->getFillColor(); }
 
 void Text::setFlashColor(const jt::Color& col) { m_flashText->setFillColor(col); }
-const jt::Color Text::getFlashColor() const { return m_flashText->getFillColor(); }
+jt::Color Text::getFlashColor() const { return m_flashText->getFillColor(); }
 
 //  sf::Transform const getTransform() const  { return m_text->getTransform(); }
 
-jt::Rect const Text::getGlobalBounds() const { return m_text->getGlobalBounds(); }
-jt::Rect const Text::getLocalBounds() const { return m_text->getLocalBounds(); }
+jt::Rect Text::getGlobalBounds() const { return m_text->getGlobalBounds(); }
+jt::Rect Text::getLocalBounds() const { return m_text->getLocalBounds(); }
 
 void Text::setScale(jt::Vector2 const& scale)
 {
@@ -56,7 +56,7 @@ void Text::setScale(jt::Vector2 const& scale)
     m_flashText->setScale(scale);
 }
 
-const jt::Vector2 Text::getScale() const { return m_text->getScale(); }
+jt::Vector2 Text::getScale() const { return m_text->getScale(); }
 
 void Text::setOrigin(jt::Vector2 const& origin)
 {
@@ -64,7 +64,7 @@ void Text::setOrigin(jt::Vector2 const& origin)
     m_flashText->setOrigin(origin);
 }
 
-const jt::Vector2 Text::getOrigin() const { return m_text->getOrigin(); }
+jt::Vector2 Text::getOrigin() const { return m_text->getOrigin(); }
 
 void Text::setTextAlign(Text::TextAlign ta) { m_textAlign = ta; }
 Text::TextAlign Text::getTextAlign() const { return m_textAlign; }

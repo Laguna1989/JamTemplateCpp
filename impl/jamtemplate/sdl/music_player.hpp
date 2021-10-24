@@ -12,7 +12,7 @@ public:
     virtual void PlayMusic(std::string const& fileName) override;
     virtual void StopMusic() override;
     // range: 0.0f to 100.0f
-    virtual void SetMusicVolume(float v) override;
+    virtual void SetMusicVolume(float newVolume) override;
     virtual float GetMusicVolume() override;
     virtual std::string GetMusicFileName() override;
 

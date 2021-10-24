@@ -19,16 +19,16 @@ void Sprite::loadSprite(std::string const& fileName, jt::Recti const& rect)
 }
 
 void Sprite::setPosition(jt::Vector2 const& pos) { m_position = pos; }
-const jt::Vector2 Sprite::getPosition() const { return m_position; }
+jt::Vector2 Sprite::getPosition() const { return m_position; }
 
 void Sprite::setColor(jt::Color const& col) { m_sprite.setColor(col); }
-const jt::Color Sprite::getColor() const { return m_sprite.getColor(); }
+jt::Color Sprite::getColor() const { return m_sprite.getColor(); }
 
 void Sprite::setFlashColor(jt::Color const& col) { m_flashSprite.setColor(col); }
-const jt::Color Sprite::getFlashColor() const { return m_flashSprite.getColor(); }
+jt::Color Sprite::getFlashColor() const { return m_flashSprite.getColor(); }
 
-jt::Rect const Sprite::getGlobalBounds() const { return m_sprite.getGlobalBounds(); }
-jt::Rect const Sprite::getLocalBounds() const { return m_sprite.getLocalBounds(); }
+jt::Rect Sprite::getGlobalBounds() const { return m_sprite.getGlobalBounds(); }
+jt::Rect Sprite::getLocalBounds() const { return m_sprite.getLocalBounds(); }
 
 void Sprite::setScale(jt::Vector2 const& scale)
 {
@@ -36,7 +36,7 @@ void Sprite::setScale(jt::Vector2 const& scale)
     m_flashSprite.setScale(scale);
 }
 
-const jt::Vector2 Sprite::getScale() const { return m_sprite.getScale(); }
+jt::Vector2 Sprite::getScale() const { return m_sprite.getScale(); }
 
 void Sprite::setOrigin(jt::Vector2 const& origin)
 {
@@ -44,7 +44,7 @@ void Sprite::setOrigin(jt::Vector2 const& origin)
     m_flashSprite.setOrigin(origin);
 }
 
-jt::Vector2 const Sprite::getOrigin() const { return m_sprite.getOrigin(); }
+jt::Vector2 Sprite::getOrigin() const { return m_sprite.getOrigin(); }
 
 // WARNING: This function is slow, because it needs to copy
 // graphics memory to ram first.

@@ -12,7 +12,7 @@ std::shared_ptr<jt::Sound> loadSound(std::string const& filename)
 }
 } // namespace
 
-jt::SoundGroup::SoundGroup(std::vector<std::string> sounds)
+jt::SoundGroup::SoundGroup(std::vector<std::string> const& sounds)
 {
     for (auto const& f : sounds) {
         m_sounds.emplace_back(loadSound(f));

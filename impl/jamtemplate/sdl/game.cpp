@@ -103,7 +103,7 @@ void Game::doDraw() const
     m_state->draw();
 
     // Detach the texture
-    SDL_SetRenderTarget(getRenderTarget().get(), NULL);
+    SDL_SetRenderTarget(getRenderTarget().get(), nullptr);
 
     // Now render the texture target to our screen
     SDL_RenderClear(getRenderTarget().get());
@@ -112,7 +112,7 @@ void Game::doDraw() const
     SDL_Rect destRect { static_cast<int>(getCamera()->getShakeOffset().x()),
         static_cast<int>(getCamera()->getShakeOffset().y()), m_destRect.width(),
         m_destRect.height() };
-    SDL_RenderCopyEx(getRenderTarget().get(), t, &sourceRect, &destRect, 0, NULL, SDL_FLIP_NONE);
+    SDL_RenderCopyEx(getRenderTarget().get(), t, &sourceRect, &destRect, 0, nullptr, SDL_FLIP_NONE);
     SDL_RenderPresent(getRenderTarget().get());
 
     SDL_DestroyTexture(t);

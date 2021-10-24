@@ -63,9 +63,9 @@ bool DrawableImpl::getShadowActive() const { return m_shadowActive; }
 
 void DrawableImpl::setShadowColor(jt::Color const& col) { m_shadowColor = col; }
 
-jt::Color const DrawableImpl::getShadowColor() const { return m_shadowColor; }
+jt::Color DrawableImpl::getShadowColor() const { return m_shadowColor; }
 void DrawableImpl::setShadowOffset(jt::Vector2 const& v) { m_shadowOffset = v; }
-jt::Vector2 const DrawableImpl::getShadowOffset() const { return m_shadowOffset; }
+jt::Vector2 DrawableImpl::getShadowOffset() const { return m_shadowOffset; }
 
 void DrawableImpl::setIgnoreCamMovement(bool ignore) { m_ignoreCamMovement = ignore; }
 

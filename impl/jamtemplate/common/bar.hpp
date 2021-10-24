@@ -29,23 +29,23 @@ public:
     float getValueFraction() const;
 
     virtual void setColor(jt::Color const& col) override;
-    virtual const jt::Color getColor() const override;
+    virtual jt::Color getColor() const override;
 
     virtual void setPosition(jt::Vector2 const& pos) override;
-    virtual const jt::Vector2 getPosition() const override;
+    virtual jt::Vector2 getPosition() const override;
 
     // virtual sf::Transform const getTransform() const override;
-    virtual jt::Rect const getGlobalBounds() const override;
-    virtual jt::Rect const getLocalBounds() const override;
+    virtual jt::Rect getGlobalBounds() const override;
+    virtual jt::Rect getLocalBounds() const override;
 
     virtual void setFlashColor(jt::Color const& col) override;
-    virtual const jt::Color getFlashColor() const override;
+    virtual jt::Color getFlashColor() const override;
 
     virtual void setScale(jt::Vector2 const& scale) override;
-    virtual const jt::Vector2 getScale() const override;
+    virtual jt::Vector2 getScale() const override;
 
     virtual void setOrigin(jt::Vector2 const& origin) override;
-    virtual const jt::Vector2 getOrigin() const override;
+    virtual jt::Vector2 getOrigin() const override;
 
 private:
     float m_valueMax { 1.0f };

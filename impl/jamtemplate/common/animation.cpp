@@ -73,13 +73,13 @@ void Animation::setColor(jt::Color const& col)
     }
 }
 
-jt::Color const Animation::getColor() const
+jt::Color Animation::getColor() const
 {
     return getCurrentSprite(m_frames, m_currentAnimName, m_currentIdx)->getColor();
 }
 
 void Animation::setPosition(jt::Vector2 const& pos) { m_position = pos; }
-jt::Vector2 const Animation::getPosition() const { return m_position; }
+jt::Vector2 Animation::getPosition() const { return m_position; }
 
 // sf::Transform const Animation::getTransform() const
 //{
@@ -92,11 +92,11 @@ jt::Vector2 const Animation::getPosition() const { return m_position; }
 //    return trans;
 //}
 
-jt::Rect const Animation::getGlobalBounds() const
+jt::Rect Animation::getGlobalBounds() const
 {
     return getCurrentSprite(m_frames, m_currentAnimName, m_currentIdx)->getGlobalBounds();
 }
-jt::Rect const Animation::getLocalBounds() const
+jt::Rect Animation::getLocalBounds() const
 {
     return getCurrentSprite(m_frames, m_currentAnimName, m_currentIdx)->getLocalBounds();
 }
@@ -109,7 +109,7 @@ void Animation::setFlashColor(jt::Color const& col)
         }
     }
 }
-const jt::Color Animation::getFlashColor() const
+jt::Color Animation::getFlashColor() const
 {
     return getCurrentSprite(m_frames, m_currentAnimName, m_currentIdx)->getFlashColor();
 }
@@ -122,7 +122,7 @@ void Animation::setScale(jt::Vector2 const& scale)
         }
     }
 }
-const jt::Vector2 Animation::getScale() const
+jt::Vector2 Animation::getScale() const
 {
     return getCurrentSprite(m_frames, m_currentAnimName, m_currentIdx)->getScale();
 }
@@ -135,7 +135,7 @@ void Animation::setOrigin(jt::Vector2 const& origin)
         }
     }
 }
-jt::Vector2 const Animation::getOrigin() const
+jt::Vector2 Animation::getOrigin() const
 {
     return getCurrentSprite(m_frames, m_currentAnimName, m_currentIdx)->getOrigin();
 }

@@ -37,10 +37,11 @@ uint32_t getPixel(SDL_Surface* surface, int x, int y)
         break;
 
     case 3:
-        if (SDL_BYTEORDER == SDL_BIG_ENDIAN)
+        if (SDL_BYTEORDER == SDL_BIG_ENDIAN) {
             return p[0] << 16 | p[1] << 8 | p[2];
-        else
+        } else {
             return p[0] | p[1] << 8 | p[2] << 16;
+        }
         break;
 
     case 4:

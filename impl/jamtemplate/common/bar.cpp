@@ -93,7 +93,7 @@ void Bar::doFlash(float /*t*/, jt::Color /*col = jt::colors::White*/) { }
 void Bar::doRotate(float /*rot*/) { }
 
 void Bar::setColor(jt::Color const& col) { setFrontColor(col); }
-const jt::Color Bar::getColor() const { return m_shapeProgress->getColor(); }
+jt::Color Bar::getColor() const { return m_shapeProgress->getColor(); }
 
 void Bar::setPosition(jt::Vector2 const& pos)
 {
@@ -101,23 +101,23 @@ void Bar::setPosition(jt::Vector2 const& pos)
     m_shapeProgress->setPosition(pos + jt::Vector2 { 0, m_height * 0.1f });
 }
 
-const jt::Vector2 Bar::getPosition() const { return m_shapeFull->getPosition(); }
+jt::Vector2 Bar::getPosition() const { return m_shapeFull->getPosition(); }
 
 // sf::Transform const Bar::getTransform() const { return m_shapeFull.getTransform(); }
-jt::Rect const Bar::getGlobalBounds() const { return m_shapeFull->getGlobalBounds(); }
-jt::Rect const Bar::getLocalBounds() const { return m_shapeFull->getLocalBounds(); }
+jt::Rect Bar::getGlobalBounds() const { return m_shapeFull->getGlobalBounds(); }
+jt::Rect Bar::getLocalBounds() const { return m_shapeFull->getLocalBounds(); }
 
 void Bar::setFlashColor(jt::Color const& col) { m_flashColor = col; }
-const jt::Color Bar::getFlashColor() const { return m_flashColor; }
+jt::Color Bar::getFlashColor() const { return m_flashColor; }
 
 void Bar::setScale(jt::Vector2 const& scale)
 {
     m_shapeFull->setScale(scale);
     m_shapeProgress->setScale(scale);
 }
-const jt::Vector2 Bar::getScale() const { return m_shapeFull->getScale(); }
+jt::Vector2 Bar::getScale() const { return m_shapeFull->getScale(); }
 
 void Bar::setOrigin(jt::Vector2 const& origin) { m_shapeFull->setOrigin(origin); }
-const jt::Vector2 Bar::getOrigin() const { return m_shapeFull->getOrigin(); }
+jt::Vector2 Bar::getOrigin() const { return m_shapeFull->getOrigin(); }
 
 } // namespace jt

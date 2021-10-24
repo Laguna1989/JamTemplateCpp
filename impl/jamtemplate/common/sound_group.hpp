@@ -9,7 +9,7 @@ namespace jt {
 class SoundGroup : public SoundBase {
 public:
     SoundGroup() = default;
-    explicit SoundGroup(std::vector<std::string> sounds);
+    explicit SoundGroup(std::vector<std::string> const& sounds);
 
 private:
     std::vector<std::shared_ptr<SoundBase>> m_sounds {};

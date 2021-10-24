@@ -29,7 +29,7 @@ bool libKeyValue(jt::MouseButtonCode b)
     int y { 0 };
     auto const mouseState = SDL_GetMouseState(&x, &y);
 
-    return (mouseState & SDL_BUTTON(toLib(b)));
+    return ((mouseState & SDL_BUTTON(toLib(b))) != 0u);
 }
 
 } // namespace jt

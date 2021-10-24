@@ -18,36 +18,36 @@ void Shape::makeRect(jt::Vector2 size)
 }
 
 void Shape::setColor(jt::Color const& col) { m_color = col; }
-const jt::Color Shape::getColor() const { return m_color; }
+jt::Color Shape::getColor() const { return m_color; }
 
 void Shape::setFlashColor(jt::Color const& col) { m_colorFlash = col; }
-const jt::Color Shape::getFlashColor() const { return m_colorFlash; }
+jt::Color Shape::getFlashColor() const { return m_colorFlash; }
 
 void Shape::setPosition(jt::Vector2 const& pos) { m_position = pos; }
-const jt::Vector2 Shape::getPosition() const { return m_position; }
+jt::Vector2 Shape::getPosition() const { return m_position; }
 
 // sf::Transform const getTransform() const { return m_shape->getTransform(); }
 
-jt::Rect const Shape::getGlobalBounds() const
+jt::Rect Shape::getGlobalBounds() const
 {
     return jt::Rect { m_position.x() + getOffset().x(), m_position.y() + getOffset().y(),
         m_sourceRect.width() * m_scale.x(), m_sourceRect.height() * m_scale.y() };
 }
-jt::Rect const Shape::getLocalBounds() const
+jt::Rect Shape::getLocalBounds() const
 {
     return jt::Rect { m_position.x(), m_position.y(), m_sourceRect.width() * m_scale.x(),
         m_sourceRect.height() * m_scale.y() };
 }
 
 void Shape::setScale(jt::Vector2 const& scale) { m_scale = scale; }
-const jt::Vector2 Shape::getScale() const { return m_scale; }
+jt::Vector2 Shape::getScale() const { return m_scale; }
 
 void Shape::setOrigin(jt::Vector2 const& origin)
 {
     m_origin = origin;
     m_offsetFromOrigin = -1.0f * origin;
 }
-const jt::Vector2 Shape::getOrigin() const { return m_origin; }
+jt::Vector2 Shape::getOrigin() const { return m_origin; }
 
 void Shape::doDraw(std::shared_ptr<jt::renderTarget> const sptr) const
 {

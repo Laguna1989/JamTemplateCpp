@@ -60,21 +60,21 @@ void Tilemap::doDraw(std::shared_ptr<jt::renderTarget> const sptr) const
             auto const tilePos = Conversion::vec(tile.getPosition());
             // optimization: don't draw tiles outside the game window
             if (m_screenSizeHint.x() != 0 && m_screenSizeHint.y() != 0) {
-                jt::Vector2 const camoffset = getStaticCamOffset();
+                jt::Vector2 const camOffset = getStaticCamOffset();
                 auto const px = tilePos.x();
                 auto const py = tilePos.y();
                 auto const tsx = tile.getTile()->getTileSize().x;
                 auto const tsy = tile.getTile()->getTileSize().y;
-                if (px + camoffset.x() + tsx < 0) {
+                if (px + camOffset.x() + tsx < 0) {
                     continue;
                 }
-                if (py + camoffset.y() + tsy < 0) {
+                if (py + camOffset.y() + tsy < 0) {
                     continue;
                 }
-                if (px + camoffset.x() >= m_screenSizeHint.x() + tsx) {
+                if (px + camOffset.x() >= m_screenSizeHint.x() + tsx) {
                     continue;
                 }
-                if (py + camoffset.y() >= m_screenSizeHint.y() + tsy) {
+                if (py + camOffset.y() >= m_screenSizeHint.y() + tsy) {
                     continue;
                 }
             }
@@ -110,29 +110,29 @@ void Tilemap::setColor(jt::Color const& col)
     }
     m_color = col;
 }
-const jt::Color Tilemap::getColor() const { return m_color; }
+jt::Color Tilemap::getColor() const { return m_color; }
 
 void Tilemap::setPosition(jt::Vector2 const& pos) { m_position = pos; }
-const jt::Vector2 Tilemap::getPosition() const { return m_position; }
+jt::Vector2 Tilemap::getPosition() const { return m_position; }
 
 // sf::Transform const Tilemap::getTransform() const { return sf::Transform {}; }
-jt::Rect const Tilemap::getGlobalBounds() const { return jt::Rect {}; }
-jt::Rect const Tilemap::getLocalBounds() const { return jt::Rect {}; }
+jt::Rect Tilemap::getGlobalBounds() const { return jt::Rect {}; }
+jt::Rect Tilemap::getLocalBounds() const { return jt::Rect {}; }
 
 void Tilemap::setFlashColor(jt::Color const& col) { m_flashColor = col; }
-const jt::Color Tilemap::getFlashColor() const { return m_flashColor; }
+jt::Color Tilemap::getFlashColor() const { return m_flashColor; }
 
 void Tilemap::setScale(jt::Vector2 const& scale) { m_scale = scale; }
-const jt::Vector2 Tilemap::getScale() const { return m_scale; }
+jt::Vector2 Tilemap::getScale() const { return m_scale; }
 
 void Tilemap::setOrigin(jt::Vector2 const& origin) { m_origin = origin; }
-const jt::Vector2 Tilemap::getOrigin() const { return m_origin; }
+jt::Vector2 Tilemap::getOrigin() const { return m_origin; }
 
 void Tilemap::doRotate(float /*rot*/) { }
 
 void Tilemap::setScreenSizeHint(jt::Vector2 const& hint) { m_screenSizeHint = hint; }
 
-const jt::Vector2u Tilemap::getMapSizeInTiles()
+jt::Vector2u Tilemap::getMapSizeInTiles()
 {
     return jt::Vector2u { static_cast<unsigned int>(m_map->getSize().x),
         static_cast<unsigned int>(m_map->getSize().y) };

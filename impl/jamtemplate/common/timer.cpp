@@ -1,6 +1,6 @@
 ﻿#include "timer.hpp"
 #include "game_object.hpp"
-#include <assert.h>
+#include <cassert>
 #include <stdexcept>
 #include <utility>
 
@@ -43,9 +43,7 @@ void Timer::invokeCallback()
     assert(m_callback);
     m_callback();
 
-    if (m_repeat < 0) {
-        return;
-    } else if (m_repeat == 1) {
+    if (m_repeat == 1) {
         kill();
     } else {
         m_repeat--;

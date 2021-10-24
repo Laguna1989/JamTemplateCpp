@@ -15,7 +15,8 @@ void Sprite::loadSprite(std::string const& fileName)
     m_fileName = fileName;
     int w { 0 };
     int h { 0 };
-    SDL_QueryTexture(m_text.get(), NULL, NULL, &w, &h); // get the width and height of the texture
+    SDL_QueryTexture(
+        m_text.get(), nullptr, nullptr, &w, &h); // get the width and height of the texture
     m_sourceRect = jt::Recti { 0, 0, w, h };
 
     m_textFlash = TextureManager::get(TextureManager::getFlashName(fileName));
@@ -27,37 +28,38 @@ void Sprite::loadSprite(std::string const& fileName, jt::Recti const& rect)
     m_fileName = fileName;
     int w { 0 };
     int h { 0 };
-    SDL_QueryTexture(m_text.get(), NULL, NULL, &w, &h); // get the width and height of the texture
+    SDL_QueryTexture(
+        m_text.get(), nullptr, nullptr, &w, &h); // get the width and height of the texture
     m_sourceRect = jt::Recti { rect };
 
     m_textFlash = TextureManager::get(TextureManager::getFlashName(fileName));
 }
 
 void Sprite::setPosition(jt::Vector2 const& pos) { m_position = pos; }
-const jt::Vector2 Sprite::getPosition() const { return m_position; }
+jt::Vector2 Sprite::getPosition() const { return m_position; }
 
 void Sprite::setColor(jt::Color const& col) { m_color = col; }
-const jt::Color Sprite::getColor() const { return m_color; }
+jt::Color Sprite::getColor() const { return m_color; }
 
 void Sprite::setFlashColor(jt::Color const& col) { m_colorFlash = col; }
-const jt::Color Sprite::getFlashColor() const { return m_colorFlash; }
+jt::Color Sprite::getFlashColor() const { return m_colorFlash; }
 
 //  sf::Transform const getTransform() const  { return m_sprite.getTransform(); }
 
-jt::Rect const Sprite::getGlobalBounds() const
+jt::Rect Sprite::getGlobalBounds() const
 {
     return jt::Rect { m_position.x(), m_position.y(), static_cast<float>(m_sourceRect.width()),
         static_cast<float>(m_sourceRect.height()) };
 }
 
-jt::Rect const Sprite::getLocalBounds() const
+jt::Rect Sprite::getLocalBounds() const
 {
     return jt::Rect { 0.0f, 0.0f, static_cast<float>(m_sourceRect.width()),
         static_cast<float>(m_sourceRect.height()) };
 }
 
 void Sprite::setScale(jt::Vector2 const& scale) { m_scale = scale; }
-const jt::Vector2 Sprite::getScale() const { return m_scale; }
+jt::Vector2 Sprite::getScale() const { return m_scale; }
 
 void Sprite::setOrigin(jt::Vector2 const& origin)
 {
@@ -65,7 +67,7 @@ void Sprite::setOrigin(jt::Vector2 const& origin)
     m_offsetFromOrigin = -1.0f * origin;
 }
 
-jt::Vector2 const Sprite::getOrigin() const { return m_origin; }
+jt::Vector2 Sprite::getOrigin() const { return m_origin; }
 
 jt::Color Sprite::getColorAtPixel(jt::Vector2u pixelPos) const
 {

@@ -85,6 +85,34 @@ TEST_P(
 }
 
 TEST_P(TimerCountParametrizedTestFixture,
+    CallbackIsCalledExactlyCalledAsOftenAsFittingInTimeInOneUpdate)
+{
+    auto expected_count = GetParam();
+    int callback_count { 0 };
+    float const alarmTime = 1.2f;
+    Timer t { alarmTime, [&callback_count]() { callback_count++; } };
+
+    // second update could possibly trigger callback
+    t.update(alarmTime * expected_count);
+    EXPECT_EQ(callback_count, expected_count);
+}
+
+TEST_P(TimerCountParametrizedTestFixture,
+    CallbackIsCalledExactlyCalledAsOftenAsFittingInTimeInMultipleUpdates)
+{
+    auto expected_count = GetParam();
+    int callback_count { 0 };
+    float const alarmTime = 1.2f;
+    Timer t { alarmTime, [&callback_count]() { callback_count++; } };
+
+    // second update could possibly trigger callback
+    for (int i = 0; i != expected_count; ++i) {
+        t.update(alarmTime);
+    }
+    EXPECT_EQ(callback_count, expected_count);
+}
+
+TEST_P(TimerCountParametrizedTestFixture,
     CallbackIsCalledExactlyCalledAsOftenAsSpecifiedInMultipleUpdates)
 {
     auto expected_count = GetParam();

@@ -43,12 +43,11 @@ std::shared_ptr<SDL_Texture> makeButtonImage(std::shared_ptr<jt::renderTarget> r
         [](SDL_Texture* t) { SDL_DestroyTexture(t); });
 }
 
-std::shared_ptr<SDL_Texture> makeBlankImage(std::shared_ptr<jt::renderTarget> rt, unsigned int w,
-    unsigned int h)
+std::shared_ptr<SDL_Texture> makeBlankImage(
+    std::shared_ptr<jt::renderTarget> rt, unsigned int w, unsigned int h)
 {
-    std::shared_ptr<SDL_Surface> image
-        = std::shared_ptr<SDL_Surface>(SDL_CreateRGBSurface(0, w, h, 32, 0, 0, 0 ,0),
-            [](SDL_Surface* s) { SDL_FreeSurface(s); });
+    std::shared_ptr<SDL_Surface> image = std::shared_ptr<SDL_Surface>(
+        SDL_CreateRGBSurface(0, w, h, 32, 0, 0, 0, 0), [](SDL_Surface* s) { SDL_FreeSurface(s); });
 
     for (auto i = 0U; i != w; ++i) {
         for (auto j = 0U; j != h; ++j) {
@@ -126,7 +125,7 @@ std::shared_ptr<SDL_Texture> makeRect(
         [](SDL_Surface* s) { SDL_FreeSurface(s); });
     // SDL_SetAlpha(image.get(), SDL_SRCALPHA, 255);
     SDL_SetSurfaceBlendMode(image.get(), SDL_BLENDMODE_BLEND);
-    SDL_FillRect(image.get(), NULL, SDL_MapRGBA(image->format, 255, 255, 255, 255));
+    SDL_FillRect(image.get(), nullptr, SDL_MapRGBA(image->format, 255, 255, 255, 255));
 
     SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "0");
     std::shared_ptr<SDL_Texture> t(SDL_CreateTextureFromSurface(rt.get(), image.get()),

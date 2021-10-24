@@ -57,8 +57,9 @@ void Button::doDraw() const
     }
 
     m_background->draw(getGame()->getRenderTarget());
-    if (m_drawable)
+    if (m_drawable) {
         m_drawable->draw(getGame()->getRenderTarget());
+    }
 
     if (!m_isActive) {
         m_disabledOverlay->draw(getGame()->getRenderTarget());
