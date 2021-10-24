@@ -24,8 +24,16 @@ void normalizeMe(jt::Vector2& v, float lowerbound)
     }
 }
 
-float rad2deg(float a) { return a * 180.0f / pi; }
-float deg2rad(float a) { return a / 180.0f * pi; }
+float rad2deg(float a)
+{
+    auto const half_circle = 180.0f;
+    return a * half_circle / pi;
+}
+float deg2rad(float a)
+{
+    auto const half_circle = 180.0f;
+    return a / half_circle * pi;
+}
 
 jt::Vector2 rotateBy(jt::Vector2 const& in, float aInDegree)
 {

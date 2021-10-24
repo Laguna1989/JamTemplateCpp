@@ -4,8 +4,8 @@
 namespace jt {
 
 KeyboardInput::KeyboardInput(KeyboardKeyCheckFunction checkFunc)
+    : m_checkFunc { std::move(checkFunc) }
 {
-    m_checkFunc = checkFunc;
     auto const allKeys = jt::getAllKeys();
     for (auto const k : allKeys) {
         m_released[k] = false;

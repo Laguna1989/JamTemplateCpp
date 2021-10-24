@@ -1,9 +1,8 @@
 ﻿#include "random.hpp"
+#include <ctime>
 #include <stdexcept>
-#include <time.h>
 
-using namespace jt;
-
+namespace jt {
 std::default_random_engine Random::m_engine;
 
 int Random::getInt(int min, int max)
@@ -47,3 +46,4 @@ jt::Vector2 Random::getRandomPointin(jt::Rect r)
 void Random::setSeed(unsigned int s) { m_engine.seed(s); }
 
 void Random::useTimeAsRandomSeed() { setSeed(static_cast<unsigned int>(time(nullptr))); }
+} // namespace jt

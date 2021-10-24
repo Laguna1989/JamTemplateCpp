@@ -81,18 +81,21 @@ void GameState::basicUpdateObjects(float /*elapsed*/)
 
 void GameState::updateTweens(float elapsed)
 {
-    if (!m_started)
+    if (!m_started) {
         return;
-    if (getAge() < 0.001f)
+    }
+    if (getAge() < 0.001f) {
         return;
+    }
     while (true) {
         if (m_tweensToAdd.empty())
             break;
         m_tweens.emplace_back(m_tweensToAdd.back());
         m_tweensToAdd.pop_back();
     }
-    if (m_tweens.empty())
+    if (m_tweens.empty()) {
         return;
+    }
     m_tweens.erase(std::remove_if(m_tweens.begin(), m_tweens.end(),
                        [](TweenBase::Sptr go) { return !(go->isAlive()); }),
         m_tweens.end());

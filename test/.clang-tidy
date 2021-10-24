@@ -6,7 +6,11 @@
           -readability-uppercase-literal-suffix,
           -fuchsia-*,
           -readability-magic-numbers,
-          -cppcoreguidelines-avoid-magic-numbers",
+          -cppcoreguidelines-avoid-magic-numbers,
+          -modernize-concat-nested-namespaces,
+          -cert-err58-cpp,
+          -cert-msc32-c,
+          -cert-msc51-cpp",
   "WarningsAsErrors": "false",
   "CheckOptions": [
     { "key": "performance-unnecessary-value-param.AllowedTypes",

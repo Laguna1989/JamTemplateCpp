@@ -25,8 +25,9 @@ std::shared_ptr<jt::Sprite> getCurrentSprite(
 void Animation::add(std::string const& fileName, std::string const& animName,
     jt::Vector2u const& size, std::vector<unsigned int> const& frameIndices, float frameTime)
 {
-    if (frameIndices.empty())
+    if (frameIndices.empty()) {
         throw std::invalid_argument { "animation frame indices are empty." };
+    }
     if (animName.empty()) {
         throw std::invalid_argument { "animation name is empty." };
     }

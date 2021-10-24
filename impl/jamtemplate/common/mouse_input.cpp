@@ -4,8 +4,8 @@
 namespace jt {
 
 MouseInput::MouseInput(MouseButtonCheckFunction checkFunction)
+    : m_checkFunction { std::move(checkFunction) }
 {
-    m_checkFunction = checkFunction;
     auto const allButtons = jt::getAllButtons();
     for (auto const b : allButtons) {
         m_mouseReleased[b] = false;

@@ -1,8 +1,7 @@
 ﻿#include "random_sample_and_hold.hpp"
 #include "random.hpp"
 
-using namespace jt;
-
+namespace jt {
 SampleAndHold::SampleAndHold(float timerMu, float timerSigma)
 {
     m_timerMu = timerMu;
@@ -25,3 +24,4 @@ void SampleAndHold::update(float elapsed)
 }
 
 float SampleAndHold::getFloat() const { return m_value; }
+} // namespace jt

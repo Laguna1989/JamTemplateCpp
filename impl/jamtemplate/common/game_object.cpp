@@ -35,7 +35,7 @@ void GameObject::setGameInstance(std::weak_ptr<GameInterface> g)
             "It is not allowed to call setGameInstance twice on a GameObject."
         };
     }
-    m_game = g;
+    m_game = std::move(g);
 }
 std::shared_ptr<GameInterface> GameObject::getGame()
 {

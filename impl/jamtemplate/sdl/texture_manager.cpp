@@ -128,10 +128,10 @@ std::shared_ptr<SDL_Texture> createFlashImage(
     for (int x = 0; x != w; ++x) {
         for (int y = 0; y != h; ++y) {
 
-            uint8_t r;
-            uint8_t g;
-            uint8_t b;
-            uint8_t a;
+            uint8_t r = 0u;
+            uint8_t g = 0u;
+            uint8_t b = 0u;
+            uint8_t a = 0u;
             SDL_GetRGBA(jt::getPixel(image.get(), x, y), image->format, &r, &g, &b, &a);
             if (a != 0) {
                 jt::setPixel(image.get(), x, y, white);
