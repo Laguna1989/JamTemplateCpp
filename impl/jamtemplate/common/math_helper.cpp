@@ -46,7 +46,7 @@ jt::Vector2 rotateBy(jt::Vector2 const& in, float aInDegree)
 std::string floatToStringWithXDigits(float const number, unsigned int digits)
 {
     std::stringstream stream;
-    stream << std::fixed << std::setprecision(digits) << number;
+    stream << std::fixed << std::setprecision(static_cast<long long>(digits)) << number;
     return stream.str();
 }
 float angleOf(Vector2 const& in) { return rad2deg(atan2(-in.y(), in.x())); }

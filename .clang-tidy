@@ -9,7 +9,8 @@
           -modernize-concat-nested-namespaces,
           -cert-err58-cpp,
           -cert-msc32-c,
-          -cert-msc51-cpp",
+          -cert-msc51-cpp,
+          -modernize-pass-by-value",
   "WarningsAsErrors": "false",
   "CheckOptions": [
     { "key": "performance-unnecessary-value-param.AllowedTypes",

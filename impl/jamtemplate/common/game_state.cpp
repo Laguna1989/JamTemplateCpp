@@ -84,12 +84,14 @@ void GameState::updateTweens(float elapsed)
     if (!m_started) {
         return;
     }
-    if (getAge() < 0.001f) {
+    auto const expected_minimum_age = 0.001f;
+    if (getAge() < expected_minimum_age) {
         return;
     }
     while (true) {
-        if (m_tweensToAdd.empty())
+        if (m_tweensToAdd.empty()) {
             break;
+        }
         m_tweens.emplace_back(m_tweensToAdd.back());
         m_tweensToAdd.pop_back();
     }
@@ -106,7 +108,7 @@ void GameState::updateTweens(float elapsed)
 
 void GameState::drawObjects() const
 {
-    for (auto& go : m_objects) {
+    for (const auto& go : m_objects) {
         go->draw();
     }
 }

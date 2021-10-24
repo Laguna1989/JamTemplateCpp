@@ -96,7 +96,8 @@ void DrawableImpl::updateFlash(float elapsed)
     if (m_flashTimer > 0) {
         m_flashTimer -= elapsed;
         auto col = getFlashColor();
-        float const a = Lerp::linear((float)col.a(), 0.0f, 1.0f - (m_flashTimer / m_maxFlashTimer));
+        float const a = Lerp::linear(
+            static_cast<float>(col.a()), 0.0f, 1.0f - (m_flashTimer / m_maxFlashTimer));
         col.a() = static_cast<std::uint8_t>(a);
         setFlashColor(col);
     }
