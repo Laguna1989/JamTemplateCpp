@@ -4,6 +4,7 @@ set(ENABLE_PERFORMANCETESTS OFF CACHE BOOL "enable performance tests")
 set(ENABLE_COVERAGE OFF CACHE BOOL "enable coverage")
 set(ENABLE_WEB OFF CACHE BOOL "enable web build using SDL and em++")
 set(ENABLE_AUDIO_TESTS ON CACHE BOOL "enable unittests that require a display")
+set(ENABLE_CLANG_TIDY OFF CACHE BOOL "enable clang tidy checks")
 
 # if ENABLE_WEB is ON, it is required to use SDL
 if (ENABLE_WEB)

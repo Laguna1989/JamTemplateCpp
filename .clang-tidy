@@ -1,0 +1,14 @@
+{
+  "Checks": "*,
+          -cppcoreguidelines-owning-memory,
+          -modernize-use-trailing-return-type,
+          -hicpp-uppercase-literal-suffix,
+          -readability-uppercase-literal-suffix,
+          -fuchsia-*,
+          -fuchsia-default-arguments-calls",
+  "WarningsAsErrors": "false",
+  "CheckOptions": [
+    { "key": "performance-unnecessary-value-param.AllowedTypes",
+      "value": "shared_ptr" }
+  ]
+}
