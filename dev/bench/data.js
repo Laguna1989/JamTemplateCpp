@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1635017715815,
+  "lastUpdate": 1635279144113,
   "repoUrl": "https://github.com/Laguna1989/JamTemplateCpp",
   "entries": {
     "Benchmark": [
@@ -462,6 +462,48 @@ window.BENCHMARK_DATA = {
             "value": 2.732616769531293,
             "unit": "ms/iter",
             "extra": "iterations: 256\ncpu: 2.732419914062499 ms\nthreads: 1"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "laguna_1989@gmx.net",
+            "name": "Laguna1989",
+            "username": "Laguna1989"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "f40072e1a167d6dce5d7713eb9f99f6d1bc7c02f",
+          "message": "Merge pull request #69 from Laguna1989/FEATURE_ClangTidy\n\nFeature clang tidy",
+          "timestamp": "2021-10-26T22:09:56+02:00",
+          "tree_id": "a9f3a162f3e7dc78b5f4d8918125ac0e2be466ee",
+          "url": "https://github.com/Laguna1989/JamTemplateCpp/commit/f40072e1a167d6dce5d7713eb9f99f6d1bc7c02f"
+        },
+        "date": 1635279142449,
+        "tool": "googlecpp",
+        "benches": [
+          {
+            "name": "BM_GamestateWithObjects",
+            "value": 4702.380606999981,
+            "unit": "ms/iter",
+            "extra": "iterations: 1\ncpu: 119.11323900000001 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_StartGame",
+            "value": 0.0010041810170736255,
+            "unit": "ms/iter",
+            "extra": "iterations: 697216\ncpu: 0.001003907662761612 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GamestateWithTweeningShapes",
+            "value": 2.741974364705896,
+            "unit": "ms/iter",
+            "extra": "iterations: 255\ncpu: 2.741839882352941 ms\nthreads: 1"
           }
         ]
       }
