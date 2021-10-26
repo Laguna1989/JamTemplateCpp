@@ -1,10 +1,10 @@
-name: Test Verification
+name: Deployment
 
 on:
   push:
     branches: [ deploy ]
 jobs:
-  BuildWindowsSFML:
+  WindowsSFML:
     runs-on: windows-latest
     steps:
       - name: Set up cmake
@@ -21,7 +21,7 @@ jobs:
         working-directory: ${{github.workspace}}/build
         run: cmake --build .
 
-      # although built in release mode, the exe will be stored in the debug folder.
+      # although built in release mode, the exe will be stored in the debug folder. reasons.
       - name: Copy files
         run: cp ${{github.workspace}}/build/impl/game/Debug/*.exe ${{github.workspace}}/build/impl/game/
 
@@ -39,7 +39,7 @@ jobs:
             !*.vcxproj*
             !*-d-2.dll
 
-  BuildWebSDL:
+  WebSDL:
     runs-on: ubuntu-latest
     env:
       EMCC_CCACHE: 1

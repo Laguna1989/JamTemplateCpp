@@ -25,7 +25,6 @@ Button::Button(jt::Vector2u s)
 
     m_disabledOverlay = std::make_shared<jt::Sprite>();
     m_disabledOverlay->loadSprite("#f#" + std::to_string(s.x()) + "#" + std::to_string(s.y()));
-
     m_disabledOverlay->setColor(jt::Color { 100, 100, 100, 150 });
 }
 
