@@ -76,19 +76,20 @@ jt::Color Sprite::getColorAtPixel(jt::Vector2u pixelPos) const
             IMG_Load(m_fileName.c_str()), [](SDL_Surface* s) { SDL_FreeSurface(s); });
         if (!m_image) {
             std::cout << "Warning: file could not be loaded for getpixels\n";
-            return jt::Color { 0, 0, 0, 255 };
+            return jt::colors::Black;
         }
     }
     if (pixelPos.x() >= static_cast<unsigned int>(m_image->w)
         || pixelPos.y() >= static_cast<unsigned int>(m_image->h)) {
         throw std::invalid_argument { "pixel position out of bounds" };
     }
-    uint8_t r;
-    uint8_t g;
-    uint8_t b;
-    uint8_t a;
+    uint8_t r = 0u;
+    uint8_t g = 0u;
+    uint8_t b = 0u;
+    uint8_t a = 0u;
     SDL_GetRGBA(
-        jt::getPixel(m_image.get(), pixelPos.x(), pixelPos.y()), m_image->format, &r, &g, &b, &a);
+        jt::getPixel(m_image.get(), static_cast<int>(pixelPos.x()), static_cast<int>(pixelPos.y())),
+        m_image->format, &r, &g, &b, &a);
     return jt::Color { r, g, b, a };
 }
 
@@ -141,8 +142,8 @@ SDL_Rect Sprite::getDestRect(jt::Vector2 const& positionOffset) const
         + m_offsetFromOrigin;
     // std::cout << "Sprite.final position.x " << pos.x() << std::endl;
     SDL_Rect const destRect { static_cast<int>(pos.x()), static_cast<int>(pos.y()),
-        static_cast<int>(m_sourceRect.width() * fabs(m_scale.x())),
-        static_cast<int>(m_sourceRect.height() * fabs(m_scale.y())) };
+        static_cast<int>(static_cast<float>(m_sourceRect.width()) * fabs(m_scale.x())),
+        static_cast<int>(static_cast<float>(m_sourceRect.height()) * fabs(m_scale.y())) };
     return destRect;
 }
 

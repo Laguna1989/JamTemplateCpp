@@ -11,7 +11,10 @@
           -cert-err58-cpp,
           -cert-msc32-c,
           -cert-msc51-cpp,
-          -modernize-pass-by-value",
+          -modernize-pass-by-value,
+          -google-default-arguments,
+          -clang-analyzer-optin.cplusplus.VirtualCall,
+          -bugprone-narrowing-conversions",
   "WarningsAsErrors": "false",
   "CheckOptions": [
     { "key": "performance-unnecessary-value-param.AllowedTypes",

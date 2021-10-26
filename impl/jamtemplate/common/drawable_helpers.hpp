@@ -17,7 +17,7 @@ class Text;
 namespace dh {
 
 std::shared_ptr<jt::Shape> createRectShape(
-    jt::Vector2 size, jt::Color const& col = jt::colors::White);
+    jt::Vector2 const& size, jt::Color const& col = jt::colors::White);
 
 std::shared_ptr<jt::Text> createText(std::weak_ptr<jt::renderTarget> rt, std::string const& text,
     unsigned int fontSize, jt::Color const& col = jt::colors::White,

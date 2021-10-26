@@ -48,8 +48,8 @@ public:
     virtual jt::Vector2 getOrigin() const override;
 
 private:
-    float m_valueMax { 1.0f };
-    float m_valueCurrent { 0.0f };
+    float m_valueMax;
+    float m_valueCurrent;
 
     float const m_width;
     float const m_height;
@@ -59,6 +59,7 @@ private:
     std::shared_ptr<jt::Shape> m_shapeProgress { nullptr };
 
     jt::Color m_flashColor { jt::colors::White };
+    float const m_progressYOffsetFraction { 0.1f };
 
     virtual void doDraw(std::shared_ptr<jt::renderTarget> const sptr) const override;
     virtual void doDrawFlash(std::shared_ptr<jt::renderTarget> const sptr) const override;

@@ -17,7 +17,8 @@ Text::~Text()
 void Text::loadFont(std::string const& fontFileName, unsigned int characterSize,
     std::weak_ptr<jt::renderTarget> wptr)
 {
-    m_font = TTF_OpenFont(fontFileName.c_str(), characterSize * getUpscaleFactor());
+    m_font
+        = TTF_OpenFont(fontFileName.c_str(), static_cast<int>(characterSize) * getUpscaleFactor());
 
     if (!m_font) {
         std::cerr << "cannot load font: " << fontFileName << std::endl
@@ -52,13 +53,18 @@ jt::Color Text::getFlashColor() const { return m_flashColor; }
 jt::Rect Text::getGlobalBounds() const
 {
     return jt::Rect { m_position.x(), m_position.y(),
-        m_textTextureSizeX * m_scale.x() / getUpscaleFactor(),
-        m_textTextureSizeY * m_scale.y() / getUpscaleFactor() };
+        static_cast<float>(m_textTextureSizeX) * m_scale.x()
+            / static_cast<float>(getUpscaleFactor()),
+        static_cast<float>(m_textTextureSizeY) * m_scale.y()
+            / static_cast<float>(getUpscaleFactor()) };
 }
 jt::Rect Text::getLocalBounds() const
 {
-    return jt::Rect { 0, 0, m_textTextureSizeX * m_scale.x() / getUpscaleFactor(),
-        m_textTextureSizeY * m_scale.y() / getUpscaleFactor() };
+    return jt::Rect { 0, 0,
+        static_cast<float>(m_textTextureSizeX) * m_scale.x()
+            / static_cast<float>(getUpscaleFactor()),
+        static_cast<float>(m_textTextureSizeY) * m_scale.y()
+            / static_cast<float>(getUpscaleFactor()) };
 }
 
 void Text::setScale(jt::Vector2 const& scale) { m_scale = scale; }
@@ -148,8 +154,8 @@ void Text::renderOneLineOfText(std::shared_ptr<jt::renderTarget> const sptr, std
     jt::Vector2 const pos = jt::Vector2 { 0, static_cast<float>(h * i) } + alignOffset;
 
     SDL_Rect destRect; // create a rect
-    destRect.x = pos.x(); // controls the rect's x coordinate
-    destRect.y = pos.y(); // controls the rect's y coordinte
+    destRect.x = static_cast<int>(pos.x()); // controls the rect's x coordinate
+    destRect.y = static_cast<int>(pos.y()); // controls the rect's y coordinte
     destRect.w = static_cast<int>(w); // controls the width of the rect
     destRect.h = static_cast<int>(h); // controls the height of the rect
 
@@ -195,8 +201,7 @@ void Text::recreateTextTexture(std::shared_ptr<jt::renderTarget> const sptr)
     auto const ssv = ss.split('\n');
     calculateTextTextureSize(sptr, ssv);
 
-    auto oldT = SDL_GetRenderTarget(sptr.get());
-    // std::cout << oldT << std::endl;
+    auto* oldT = SDL_GetRenderTarget(sptr.get());
     SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "0");
     m_textTexture = std::shared_ptr<SDL_Texture>(
         SDL_CreateTexture(sptr.get(), SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_TARGET,
@@ -238,24 +243,24 @@ SDL_Rect Text::getDestRect(jt::Vector2 const& positionOffset) const
 {
     jt::Vector2 alignOffset { 0, 0 };
     if (m_textAlign == TextAlign::CENTER) {
-        alignOffset.x()
-            = -static_cast<float>(m_textTextureSizeX) / 2.0f / getUpscaleFactor() * m_scale.x();
+        alignOffset.x() = -static_cast<float>(m_textTextureSizeX) / 2.0f
+            / static_cast<float>(getUpscaleFactor()) * m_scale.x();
     }
     if (m_textAlign == TextAlign::RIGHT) {
-        alignOffset.x()
-            = -static_cast<float>(m_textTextureSizeX) / getUpscaleFactor() * m_scale.x();
+        alignOffset.x() = -static_cast<float>(m_textTextureSizeX)
+            / static_cast<float>(getUpscaleFactor()) * m_scale.x();
     }
 
     jt::Vector2 pos = m_position + getShakeOffset() + getOffset() + getCamOffset() + alignOffset
         + positionOffset + m_offsetFromOrigin;
 
     SDL_Rect destRect; // create a rect
-    destRect.x = pos.x(); // controls the rect's x coordinate
-    destRect.y = pos.y(); // controls the rect's y coordinte
-    destRect.w
-        = static_cast<int>(m_textTextureSizeX * m_scale.x()); // controls the width of the rect
-    destRect.h
-        = static_cast<int>(m_textTextureSizeY * m_scale.y()); // controls the height of the rect
+    destRect.x = static_cast<int>(pos.x()); // controls the rect's x coordinate
+    destRect.y = static_cast<int>(pos.y()); // controls the rect's y coordinte
+    destRect.w = static_cast<int>(
+        static_cast<float>(m_textTextureSizeX) * m_scale.x()); // controls the width of the rect
+    destRect.h = static_cast<int>(
+        static_cast<float>(m_textTextureSizeY) * m_scale.y()); // controls the height of the rect
 
     return destRect;
 }
@@ -272,8 +277,8 @@ void Text::calculateTextTextureSize(
         }
     }
 
-    m_textTextureSizeX = maxLineLengthInPixel;
-    m_textTextureSizeY = (ssv.size()) * TTF_FontHeight(m_font);
+    m_textTextureSizeX = static_cast<int>(maxLineLengthInPixel);
+    m_textTextureSizeY = static_cast<int>(ssv.size()) * TTF_FontHeight(m_font);
 }
 
 } // namespace jt

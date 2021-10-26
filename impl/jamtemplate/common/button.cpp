@@ -25,6 +25,7 @@ Button::Button(jt::Vector2u s)
 
     m_disabledOverlay = std::make_shared<jt::Sprite>();
     m_disabledOverlay->loadSprite("#f#" + std::to_string(s.x()) + "#" + std::to_string(s.y()));
+
     m_disabledOverlay->setColor(jt::Color { 100, 100, 100, 150 });
 }
 
@@ -35,7 +36,7 @@ Button::~Button()
     m_callbacks.clear();
 }
 void Button::setDrawable(std::shared_ptr<DrawableInterface> sprt) { m_drawable = sprt; }
-void Button::addCallback(std::function<void(void)> cb) { m_callbacks.push_back(cb); }
+void Button::addCallback(std::function<void(void)> cb) { m_callbacks.emplace_back(std::move(cb)); }
 void Button::clearCallbacks() { m_callbacks.clear(); }
 size_t Button::getCallbackCount() const { return m_callbacks.size(); }
 bool Button::IsMouseOver()

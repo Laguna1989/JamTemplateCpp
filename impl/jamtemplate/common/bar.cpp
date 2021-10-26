@@ -13,17 +13,18 @@ Bar::Bar(float width, float height, bool horizontal)
 {
     m_shapeFull = std::make_shared<jt::Shape>();
     m_shapeFull->makeRect(jt::Vector2 { m_width, m_height });
-    m_shapeFull->setColor(jt::Color { 150, 150, 150 });
+    m_shapeFull->setColor(jt::colors::Gray);
 
     m_shapeProgress = std::make_shared<jt::Shape>();
     if (m_horizontal) {
-        m_shapeProgress->makeRect(jt::Vector2 { m_width, m_height * 0.9f });
-        m_shapeProgress->setPosition(jt::Vector2 { 0, m_height * 0.1f });
+        auto const progressHeightFactor = 0.9f;
+        m_shapeProgress->makeRect(jt::Vector2 { m_width, m_height * progressHeightFactor });
+        m_shapeProgress->setPosition(jt::Vector2 { 0, m_height * m_progressYOffsetFraction });
     } else {
         m_shapeProgress->makeRect(jt::Vector2 { m_width - 2, m_height });
         m_shapeProgress->setPosition(jt::Vector2 { 0 + 1, m_height });
     }
-    m_shapeProgress->setColor(jt::Color { 255, 255, 255 });
+    m_shapeProgress->setColor(jt::colors::White);
 }
 
 void Bar::setFrontColor(jt::Color const& col) { m_shapeProgress->setColor(col); }
@@ -98,7 +99,7 @@ jt::Color Bar::getColor() const { return m_shapeProgress->getColor(); }
 void Bar::setPosition(jt::Vector2 const& pos)
 {
     m_shapeFull->setPosition(pos);
-    m_shapeProgress->setPosition(pos + jt::Vector2 { 0, m_height * 0.1f });
+    m_shapeProgress->setPosition(pos + jt::Vector2 { 0, m_height * m_progressYOffsetFraction });
 }
 
 jt::Vector2 Bar::getPosition() const { return m_shapeFull->getPosition(); }

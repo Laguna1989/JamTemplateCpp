@@ -3,6 +3,7 @@
 #include "sprite_functions.hpp"
 #include <SDL_image.h>
 #include <iostream>
+#include <limits>
 #include <map>
 
 namespace jt {
@@ -16,11 +17,11 @@ std::shared_ptr<SDL_Texture> createButtonImage(
         throw std::invalid_argument { "create button image: vector does not contain 3 elements." };
     }
     std::size_t count { 0 };
-    long const w = std::stol(ssv.at(1), &count);
+    std::int64_t const w = std::stol(ssv.at(1), &count);
     if (count != ssv.at(1).size()) {
         throw std::invalid_argument { "invalid button size string" };
     }
-    long const h = std::stol(ssv.at(2), &count);
+    std::int64_t const h = std::stol(ssv.at(2), &count);
     if (count != ssv.at(2).size()) {
         throw std::invalid_argument { "invalid button size string" };
     }
@@ -38,11 +39,11 @@ std::shared_ptr<SDL_Texture> createBlankImage(
         throw std::invalid_argument { "create button image: vector does not contain 3 elements." };
     }
     std::size_t count { 0 };
-    long w = std::stol(ssv.at(1), &count);
+    std::int64_t const w = std::stol(ssv.at(1), &count);
     if (count != ssv.at(1).size()) {
         throw std::invalid_argument { "invalid image size string" };
     }
-    long h = std::stol(ssv.at(2), &count);
+    std::int64_t const h = std::stol(ssv.at(2), &count);
     if (count != ssv.at(2).size()) {
         throw std::invalid_argument { "invalid image size string" };
     }
@@ -61,15 +62,18 @@ std::shared_ptr<SDL_Texture> createGlowImage(
         throw std::invalid_argument { "create glow image: vector does not contain 2 elements." };
     }
     std::size_t count { 0 };
-    auto const s = std::stol(ssv.at(1), &count);
-    if (count != ssv.at(1).size() || s <= 0) {
+    auto const glow_size = std::stol(ssv.at(1), &count);
+    if (count != ssv.at(1).size() || glow_size <= std::numeric_limits<uint8_t>::min()) {
         throw std::invalid_argument { "invalid glow size" };
     }
     auto const max = std::stol(ssv.at(2), &count);
-    if (count != ssv.at(2).size() || max <= 0 || max > 255) {
+
+    if (count != ssv.at(2).size() || max <= std::numeric_limits<uint8_t>::min()
+        || max > std::numeric_limits<uint8_t>::max()) {
         throw std::invalid_argument { "invalid glowmax" };
     }
-    return SpriteFunctions::makeGlowImage(rt, static_cast<float>(s), static_cast<uint8_t>(max));
+    return SpriteFunctions::makeGlowImage(
+        rt, static_cast<float>(glow_size), static_cast<uint8_t>(max));
 }
 
 std::shared_ptr<SDL_Texture> createVignetteImage(

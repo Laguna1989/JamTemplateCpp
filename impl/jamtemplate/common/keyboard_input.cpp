@@ -7,11 +7,13 @@ KeyboardInput::KeyboardInput(KeyboardKeyCheckFunction checkFunc)
     : m_checkFunc { std::move(checkFunc) }
 {
     auto const allKeys = jt::getAllKeys();
+    // note: do not call the virtual reset() function here, as this is the constructor
     for (auto const k : allKeys) {
+        m_pressed[k] = false;
         m_released[k] = false;
+        m_justPressed[k] = false;
+        m_justReleased[k] = false;
     }
-
-    reset();
 }
 
 void KeyboardInput::updateKeys()

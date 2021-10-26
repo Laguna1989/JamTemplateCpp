@@ -20,6 +20,8 @@ private:
     std::string m_musicFileName;
     std::shared_ptr<Mix_Music> m_music;
     float m_musicVolume { 0.0f };
+
+    float JtToSdlVolume(float jtVolume) const;
 };
 
 } // namespace jt

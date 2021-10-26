@@ -47,7 +47,7 @@ void Sound::doSetVolume(float newVolume)
 void Sound::doSetLoop(bool doLoop) { m_loop = doLoop; }
 bool Sound::doGetLoop(void) { return m_loop; }
 
-float Sound::doGetDuration() const { return static_cast<double>(m_wave->alen) / 176.4 / 1000.0; }
+float Sound::doGetDuration() const { return static_cast<float>(m_wave->alen) / 176400.0f; }
 float Sound::doGetPosition() const
 {
     std::cout << "getPosition() not supported by web audio." << std::endl;

@@ -17,7 +17,7 @@ SDL_RendererFlip getFlipFromScale(jt::Vector2 const& scale)
 
 void setPixel(SDL_Surface* surface, int x, int y, uint32_t pixel)
 {
-    uint8_t* target_pixel = (uint8_t*)surface->pixels + y * surface->pitch + x * 4;
+    uint8_t* target_pixel = static_cast<uint8_t*>(surface->pixels) + y * surface->pitch + x * 4;
     *(uint32_t*)target_pixel = pixel;
 }
 
@@ -25,7 +25,7 @@ uint32_t getPixel(SDL_Surface* surface, int x, int y)
 {
     int const bpp = surface->format->BytesPerPixel;
     /* Here p is the address to the pixel we want to retrieve */
-    uint8_t* p = (uint8_t*)surface->pixels + y * surface->pitch + x * bpp;
+    uint8_t* p = static_cast<uint8_t*>(surface->pixels) + y * surface->pitch + x * bpp;
 
     switch (bpp) {
     case 1:

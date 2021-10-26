@@ -50,7 +50,10 @@ void Animation::add(std::string const& fileName, std::string const& animName,
     }
 }
 
-bool Animation::hasAnimation(std::string const& animName) const { return m_frames.count(animName); }
+bool Animation::hasAnimation(std::string const& animName) const
+{
+    return (m_frames.count(animName) != 0);
+}
 
 void Animation::play(std::string const& animName, size_t startFrame, bool restart)
 {
