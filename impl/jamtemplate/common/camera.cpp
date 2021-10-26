@@ -3,7 +3,7 @@
 
 namespace jt {
 
-Camera::Camera() { }
+Camera::Camera() = default;
 
 jt::Vector2 Camera::getCamOffset() { return m_CamOffset; }
 void Camera::setCamOffset(jt::Vector2 const& ofs) { m_CamOffset = ofs; }

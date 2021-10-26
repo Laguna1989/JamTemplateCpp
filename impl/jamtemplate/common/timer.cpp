@@ -1,6 +1,4 @@
 ﻿#include "timer.hpp"
-#include "game_object.hpp"
-#include <assert.h>
 #include <stdexcept>
 #include <utility>
 
@@ -39,13 +37,9 @@ void Timer::doUpdate(float const elapsed)
 
 void Timer::invokeCallback()
 {
-    assert(isAlive());
-    assert(m_callback);
     m_callback();
 
-    if (m_repeat < 0) {
-        return;
-    } else if (m_repeat == 1) {
+    if (m_repeat == 1) {
         kill();
     } else {
         m_repeat--;

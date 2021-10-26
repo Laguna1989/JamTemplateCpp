@@ -30,9 +30,9 @@ Game::Game(std::shared_ptr<RenderWindowInterface> window, float zoom,
     auto const width = window->getSize().x();
     auto const height = window->getSize().y();
 
-    unsigned int scaledWidth = static_cast<unsigned int>(width / zoom);
-    unsigned int scaledHeight = static_cast<unsigned int>(height / zoom);
-    m_srcRect = jt::Recti { 0, 0, static_cast<int>(scaledWidth), static_cast<int>(scaledHeight) };
+    auto const scaledWidth = static_cast<int>(width / zoom);
+    auto const scaledHeight = static_cast<int>(height / zoom);
+    m_srcRect = jt::Recti { 0, 0, scaledWidth, scaledHeight };
     m_destRect = jt::Recti { 0, 0, static_cast<int>(width), static_cast<int>(height) };
 
     m_window = window;
@@ -93,7 +93,7 @@ void Game::doDraw() const
 {
     // for reasons this can not be a member.
     SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "0");
-    auto const t = SDL_CreateTexture(getRenderTarget().get(), SDL_PIXELFORMAT_RGBA8888,
+    auto* const t = SDL_CreateTexture(getRenderTarget().get(), SDL_PIXELFORMAT_RGBA8888,
         SDL_TEXTUREACCESS_TARGET, static_cast<int>(m_srcRect.width()),
         static_cast<int>(m_srcRect.height()));
 
@@ -103,7 +103,7 @@ void Game::doDraw() const
     m_state->draw();
 
     // Detach the texture
-    SDL_SetRenderTarget(getRenderTarget().get(), NULL);
+    SDL_SetRenderTarget(getRenderTarget().get(), nullptr);
 
     // Now render the texture target to our screen
     SDL_RenderClear(getRenderTarget().get());
@@ -112,7 +112,7 @@ void Game::doDraw() const
     SDL_Rect destRect { static_cast<int>(getCamera()->getShakeOffset().x()),
         static_cast<int>(getCamera()->getShakeOffset().y()), m_destRect.width(),
         m_destRect.height() };
-    SDL_RenderCopyEx(getRenderTarget().get(), t, &sourceRect, &destRect, 0, NULL, SDL_FLIP_NONE);
+    SDL_RenderCopyEx(getRenderTarget().get(), t, &sourceRect, &destRect, 0, nullptr, SDL_FLIP_NONE);
     SDL_RenderPresent(getRenderTarget().get());
 
     SDL_DestroyTexture(t);

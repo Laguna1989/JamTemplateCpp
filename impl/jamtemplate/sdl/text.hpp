@@ -29,26 +29,26 @@ public:
 
     void setPosition(jt::Vector2 const& pos) override;
 
-    const jt::Vector2 getPosition() const override;
+    jt::Vector2 getPosition() const override;
 
     void setColor(const jt::Color& col) override;
-    const jt::Color getColor() const override;
+    jt::Color getColor() const override;
 
     void setFlashColor(const jt::Color& col) override;
-    const jt::Color getFlashColor() const override;
+    jt::Color getFlashColor() const override;
 
     // virtual sf::Transform const getTransform() const override { return m_text->getTransform(); }
 
-    jt::Rect const getGlobalBounds() const override;
-    jt::Rect const getLocalBounds() const override;
+    jt::Rect getGlobalBounds() const override;
+    jt::Rect getLocalBounds() const override;
 
     virtual void setScale(jt::Vector2 const& scale) override;
 
-    virtual const jt::Vector2 getScale() const override;
+    virtual jt::Vector2 getScale() const override;
 
     virtual void setOrigin(jt::Vector2 const& origin) override;
 
-    virtual jt::Vector2 const getOrigin() const override;
+    virtual jt::Vector2 getOrigin() const override;
 
     void setTextAlign(TextAlign ta);
     TextAlign getTextAlign() const;

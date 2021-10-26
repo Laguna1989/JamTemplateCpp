@@ -31,9 +31,9 @@ public:
     void setShadowActive(bool active) override;
     bool getShadowActive() const override;
     void setShadowColor(jt::Color const& col) override;
-    jt::Color const getShadowColor() const override;
+    jt::Color getShadowColor() const override;
     void setShadowOffset(jt::Vector2 const& v) override;
-    jt::Vector2 const getShadowOffset() const override;
+    jt::Vector2 getShadowOffset() const override;
 
     // do not call this manually. Only place to call is Game()->update();
     void setIgnoreCamMovement(bool ignore) override;

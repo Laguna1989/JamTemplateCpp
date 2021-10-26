@@ -24,5 +24,4 @@ add_subdirectory(${CMAKE_BINARY_DIR}/ext/googletest/googletest-src
         ${CMAKE_BINARY_DIR}/ext/googletest/googletest-build
         EXCLUDE_FROM_ALL)
 
-
 add_subdirectory(jt_test)

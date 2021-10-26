@@ -17,7 +17,7 @@ private:
     void doInternalCreate() override;
     void doInternalUpdate(float const /*elapsed*/) override;
     void updateSwarm();
-    void updateOneSwarmObject(const size_t& i);
+    void updateOneSwarmObject(const size_t& firstSwarmObjectIndex);
     void doInternalDraw() const override;
 
     void drawSky() const;

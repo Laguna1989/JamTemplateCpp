@@ -29,27 +29,27 @@ public:
     float getValueFraction() const;
 
     virtual void setColor(jt::Color const& col) override;
-    virtual const jt::Color getColor() const override;
+    virtual jt::Color getColor() const override;
 
     virtual void setPosition(jt::Vector2 const& pos) override;
-    virtual const jt::Vector2 getPosition() const override;
+    virtual jt::Vector2 getPosition() const override;
 
     // virtual sf::Transform const getTransform() const override;
-    virtual jt::Rect const getGlobalBounds() const override;
-    virtual jt::Rect const getLocalBounds() const override;
+    virtual jt::Rect getGlobalBounds() const override;
+    virtual jt::Rect getLocalBounds() const override;
 
     virtual void setFlashColor(jt::Color const& col) override;
-    virtual const jt::Color getFlashColor() const override;
+    virtual jt::Color getFlashColor() const override;
 
     virtual void setScale(jt::Vector2 const& scale) override;
-    virtual const jt::Vector2 getScale() const override;
+    virtual jt::Vector2 getScale() const override;
 
     virtual void setOrigin(jt::Vector2 const& origin) override;
-    virtual const jt::Vector2 getOrigin() const override;
+    virtual jt::Vector2 getOrigin() const override;
 
 private:
-    float m_valueMax { 1.0f };
-    float m_valueCurrent { 0.0f };
+    float m_valueMax;
+    float m_valueCurrent;
 
     float const m_width;
     float const m_height;
@@ -59,6 +59,7 @@ private:
     std::shared_ptr<jt::Shape> m_shapeProgress { nullptr };
 
     jt::Color m_flashColor { jt::colors::White };
+    float const m_progressYOffsetFraction { 0.1f };
 
     virtual void doDraw(std::shared_ptr<jt::renderTarget> const sptr) const override;
     virtual void doDrawFlash(std::shared_ptr<jt::renderTarget> const sptr) const override;

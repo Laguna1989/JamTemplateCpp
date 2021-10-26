@@ -3,7 +3,7 @@
 #include <SDL2/SDL.h>
 
 jt::Line::Line(jt::Vector2 lineVector)
-    : m_lineVector { lineVector }
+    : m_lineVector { std::move(lineVector) }
     , m_color { jt::colors::White }
 {
 }
@@ -52,19 +52,19 @@ void jt::Line::doDrawShadow(std::shared_ptr<jt::renderTarget> const sptr) const
 void jt::Line::doRotate(float d) { m_lineVector = jt::MathHelper::rotateBy(m_lineVector, d); }
 
 void jt::Line::setColor(jt::Color const& col) { m_color = col; }
-const jt::Color jt::Line::getColor() const { return m_color; }
+jt::Color jt::Line::getColor() const { return m_color; }
 
 void jt::Line::setPosition(jt::Vector2 const& pos) { m_position = pos; }
-const jt::Vector2 jt::Line::getPosition() const { return m_position; }
+jt::Vector2 jt::Line::getPosition() const { return m_position; }
 
-jt::Rect const jt::Line::getGlobalBounds() const { return jt::Rect {}; }
-jt::Rect const jt::Line::getLocalBounds() const { return jt::Rect {}; }
+jt::Rect jt::Line::getGlobalBounds() const { return jt::Rect {}; }
+jt::Rect jt::Line::getLocalBounds() const { return jt::Rect {}; }
 
 void jt::Line::setFlashColor(jt::Color const& col) { m_flashColor = col; }
-const jt::Color jt::Line::getFlashColor() const { return m_flashColor; }
+jt::Color jt::Line::getFlashColor() const { return m_flashColor; }
 
 void jt::Line::setScale(jt::Vector2 const& scale) { m_scale = scale; }
-const jt::Vector2 jt::Line::getScale() const { return m_scale; }
+jt::Vector2 jt::Line::getScale() const { return m_scale; }
 
 void jt::Line::setOrigin(jt::Vector2 const& origin) { m_origin = origin; }
-const jt::Vector2 jt::Line::getOrigin() const { return m_origin; }
+jt::Vector2 jt::Line::getOrigin() const { return m_origin; }

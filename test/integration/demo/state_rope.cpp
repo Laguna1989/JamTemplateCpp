@@ -3,11 +3,11 @@
 #include "game_interface.hpp"
 #include "math_helper.hpp"
 #include "shape.hpp"
-#include <cmath>
 #include "state_select.hpp"
+#include <cmath>
 
 RopeMass::RopeMass(jt::Vector2 pos, float m)
-    : position { pos }
+    : position { std::move(pos) }
     , velocity { 0.0f, 0.0f }
     , acceleration { 0.0f, 0.0f }
     , mass { m }
@@ -17,7 +17,7 @@ RopeMass::RopeMass(jt::Vector2 pos, float m)
 
 jt::Vector2 StateRope::getRopeMassPosition(int i) const
 {
-    return m_ropeStartingPoint + jt::Vector2 { 1.5f * i, 1.0f };
+    return m_ropeStartingPoint + jt::Vector2 { 1.5f * static_cast<float>(i), 1.0f };
 }
 
 std::shared_ptr<RopeMass> StateRope::createRopeMassPointer(int i) const
@@ -90,8 +90,9 @@ void StateRope::calculateRopeForces()
 
 void StateRope::doInternalUpdate(float elapsed)
 {
-    if (elapsed >= 1.0f)
+    if (elapsed >= 1.0f) {
         elapsed = 1.0f;
+    }
     for (int i = 0; i != 7; ++i) {
         int const subdivide = 4;
         for (int i = 0; i != subdivide; ++i) {

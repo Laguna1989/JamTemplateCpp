@@ -19,22 +19,22 @@ public:
     void loadSprite(std::string const& fileName, jt::Recti const& rect);
 
     void setPosition(jt::Vector2 const& pos) override;
-    const jt::Vector2 getPosition() const override;
+    jt::Vector2 getPosition() const override;
 
     void setColor(jt::Color const& col) override;
-    const jt::Color getColor() const override;
+    jt::Color getColor() const override;
 
     void setFlashColor(jt::Color const& col) override;
-    const jt::Color getFlashColor() const override;
+    jt::Color getFlashColor() const override;
 
-    virtual jt::Rect const getGlobalBounds() const override;
-    virtual jt::Rect const getLocalBounds() const override;
+    virtual jt::Rect getGlobalBounds() const override;
+    virtual jt::Rect getLocalBounds() const override;
 
     virtual void setScale(jt::Vector2 const& scale) override;
-    virtual const jt::Vector2 getScale() const override;
+    virtual jt::Vector2 getScale() const override;
 
     virtual void setOrigin(jt::Vector2 const& origin) override;
-    virtual jt::Vector2 const getOrigin() const override;
+    virtual jt::Vector2 getOrigin() const override;
 
     // WARNING: This function is slow, because it needs to copy
     // graphics memory to ram first.

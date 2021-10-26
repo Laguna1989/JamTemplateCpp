@@ -15,6 +15,8 @@ public:
     virtual void SetMusicVolume(float v) = 0;
     virtual float GetMusicVolume() = 0;
     virtual std::string GetMusicFileName() = 0;
+
+    const float MaxVolume { 100.0f };
 };
 
 } // namespace jt

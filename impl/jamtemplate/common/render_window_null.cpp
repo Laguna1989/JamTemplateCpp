@@ -27,7 +27,8 @@ void jt::null_objects::RenderWindowNull::draw(std::unique_ptr<jt::Sprite>& ptr)
 void jt::null_objects::RenderWindowNull::display() { }
 jt::Vector2 jt::null_objects::RenderWindowNull::getMousePosition()
 {
-    return jt::Vector2 { 20.0f, 20.0f };
+    auto const magic_mouse_position = 20.0f;
+    return jt::Vector2 { magic_mouse_position, magic_mouse_position };
 }
 
 void jt::null_objects::RenderWindowNull::setMouseCursorVisible(bool visible)

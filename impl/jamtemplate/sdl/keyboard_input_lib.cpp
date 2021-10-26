@@ -7,7 +7,6 @@ namespace jt {
 namespace {
 std::uint8_t toLib(jt::KeyCode k)
 {
-    using namespace jt;
     switch (k) {
     case KeyCode::A:
         return SDL_SCANCODE_A;
@@ -213,9 +212,9 @@ std::uint8_t toLib(jt::KeyCode k)
 }
 } // namespace
 
-bool libKeyValue(jt::KeyCode b)
+bool libKeyValue(jt::KeyCode k)
 {
-    auto const keyState = SDL_GetKeyboardState(NULL);
-    return keyState[toLib(b)] == 1;
+    const auto* const keyState = SDL_GetKeyboardState(nullptr);
+    return keyState[toLib(k)] == 1;
 }
 } // namespace jt

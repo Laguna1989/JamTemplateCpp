@@ -4,14 +4,22 @@
 namespace jt {
 
 MouseInput::MouseInput(MouseButtonCheckFunction checkFunction)
+    : m_checkFunction { std::move(checkFunction) }
 {
-    m_checkFunction = checkFunction;
     auto const allButtons = jt::getAllButtons();
+    // note: do not call the virtual reset() function here, as this is the constructor
     for (auto const b : allButtons) {
+        m_mousePressed[b] = false;
         m_mouseReleased[b] = false;
+        m_mouseJustPressed[b] = false;
+        m_mouseJustReleased[b] = false;
     }
-    reset();
+    m_mouseScreenX = 0.0f;
+    m_mouseScreenY = 0.0f;
+    m_mouseWorldX = 0.0f;
+    m_mouseWorldY = 0.0f;
 }
+
 void MouseInput::updateMousePosition(MousePosition const& mp)
 {
     m_mouseWorldX = mp.window_x;
@@ -20,6 +28,7 @@ void MouseInput::updateMousePosition(MousePosition const& mp)
     m_mouseScreenX = mp.screen_x;
     m_mouseScreenY = mp.screen_y;
 }
+
 void MouseInput::updateButtons()
 {
     jt::inputhelper::updateValues(m_mousePressed, m_mouseReleased, m_mouseJustPressed,
@@ -30,6 +39,7 @@ jt::Vector2 MouseInput::getMousePositionWorld()
 {
     return jt::Vector2 { m_mouseWorldX, m_mouseWorldY };
 }
+
 jt::Vector2 MouseInput::getMousePositionScreen()
 {
     return jt::Vector2 { m_mouseScreenX, m_mouseScreenY };

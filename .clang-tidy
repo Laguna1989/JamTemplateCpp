@@ -1,0 +1,24 @@
+{
+  "Checks": "-*,
+            abseil*,
+            altera*,
+            android*,
+            boost*,
+            bugprone*,
+            cert*,
+            -cert-err58-cpp,
+            -cert-msc32-c,
+            -cert-msc51-cpp,
+            clang-analyzer*,
+            -fuchsia-*,
+            google*,
+            -google-default-arguments,
+            hicpp*,
+            -hicpp-uppercase-literal-suffix,
+            llvm*",
+  "WarningsAsErrors": "false",
+  "CheckOptions": [
+    { "key": "performance-unnecessary-value-param.AllowedTypes",
+      "value": "shared_ptr;Sptr" }
+  ]
+}

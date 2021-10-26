@@ -1,0 +1,23 @@
+{
+  "Checks": "*,
+          -cppcoreguidelines-owning-memory,
+          -modernize-use-trailing-return-type,
+          -hicpp-uppercase-literal-suffix,
+          -readability-uppercase-literal-suffix,
+          -fuchsia-*,
+          -readability-magic-numbers,
+          -cppcoreguidelines-avoid-magic-numbers,
+          -modernize-concat-nested-namespaces,
+          -cert-err58-cpp,
+          -cert-msc32-c,
+          -cert-msc51-cpp,
+          -modernize-pass-by-value,
+          -google-default-arguments,
+          -clang-analyzer-optin.cplusplus.VirtualCall,
+          -bugprone-narrowing-conversions",
+  "WarningsAsErrors": "false",
+  "CheckOptions": [
+    { "key": "performance-unnecessary-value-param.AllowedTypes",
+      "value": "shared_ptr" }
+  ]
+}

@@ -9,7 +9,7 @@ jt::Vector2 DrawableImpl::m_CamOffset { 0.0f, 0.0f };
 
 void DrawableImpl::draw(std::shared_ptr<jt::renderTarget> sptr) const
 {
-    if (m_hasBeenUpdated == false) {
+    if (!m_hasBeenUpdated) {
         std::cout << "WARNING: Calling DrawableImpl::draw() without previous call to "
                      "DrawableImpl::update()!\n";
     }
@@ -63,9 +63,9 @@ bool DrawableImpl::getShadowActive() const { return m_shadowActive; }
 
 void DrawableImpl::setShadowColor(jt::Color const& col) { m_shadowColor = col; }
 
-jt::Color const DrawableImpl::getShadowColor() const { return m_shadowColor; }
+jt::Color DrawableImpl::getShadowColor() const { return m_shadowColor; }
 void DrawableImpl::setShadowOffset(jt::Vector2 const& v) { m_shadowOffset = v; }
-jt::Vector2 const DrawableImpl::getShadowOffset() const { return m_shadowOffset; }
+jt::Vector2 DrawableImpl::getShadowOffset() const { return m_shadowOffset; }
 
 void DrawableImpl::setIgnoreCamMovement(bool ignore) { m_ignoreCamMovement = ignore; }
 
@@ -96,7 +96,8 @@ void DrawableImpl::updateFlash(float elapsed)
     if (m_flashTimer > 0) {
         m_flashTimer -= elapsed;
         auto col = getFlashColor();
-        float const a = Lerp::linear((float)col.a(), 0.0f, 1.0f - (m_flashTimer / m_maxFlashTimer));
+        float const a = Lerp::linear(
+            static_cast<float>(col.a()), 0.0f, 1.0f - (m_flashTimer / m_maxFlashTimer));
         col.a() = static_cast<std::uint8_t>(a);
         setFlashColor(col);
     }

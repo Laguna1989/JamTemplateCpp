@@ -15,7 +15,8 @@ void Sprite::loadSprite(std::string const& fileName)
     m_fileName = fileName;
     int w { 0 };
     int h { 0 };
-    SDL_QueryTexture(m_text.get(), NULL, NULL, &w, &h); // get the width and height of the texture
+    SDL_QueryTexture(
+        m_text.get(), nullptr, nullptr, &w, &h); // get the width and height of the texture
     m_sourceRect = jt::Recti { 0, 0, w, h };
 
     m_textFlash = TextureManager::get(TextureManager::getFlashName(fileName));
@@ -27,37 +28,38 @@ void Sprite::loadSprite(std::string const& fileName, jt::Recti const& rect)
     m_fileName = fileName;
     int w { 0 };
     int h { 0 };
-    SDL_QueryTexture(m_text.get(), NULL, NULL, &w, &h); // get the width and height of the texture
+    SDL_QueryTexture(
+        m_text.get(), nullptr, nullptr, &w, &h); // get the width and height of the texture
     m_sourceRect = jt::Recti { rect };
 
     m_textFlash = TextureManager::get(TextureManager::getFlashName(fileName));
 }
 
 void Sprite::setPosition(jt::Vector2 const& pos) { m_position = pos; }
-const jt::Vector2 Sprite::getPosition() const { return m_position; }
+jt::Vector2 Sprite::getPosition() const { return m_position; }
 
 void Sprite::setColor(jt::Color const& col) { m_color = col; }
-const jt::Color Sprite::getColor() const { return m_color; }
+jt::Color Sprite::getColor() const { return m_color; }
 
 void Sprite::setFlashColor(jt::Color const& col) { m_colorFlash = col; }
-const jt::Color Sprite::getFlashColor() const { return m_colorFlash; }
+jt::Color Sprite::getFlashColor() const { return m_colorFlash; }
 
 //  sf::Transform const getTransform() const  { return m_sprite.getTransform(); }
 
-jt::Rect const Sprite::getGlobalBounds() const
+jt::Rect Sprite::getGlobalBounds() const
 {
     return jt::Rect { m_position.x(), m_position.y(), static_cast<float>(m_sourceRect.width()),
         static_cast<float>(m_sourceRect.height()) };
 }
 
-jt::Rect const Sprite::getLocalBounds() const
+jt::Rect Sprite::getLocalBounds() const
 {
     return jt::Rect { 0.0f, 0.0f, static_cast<float>(m_sourceRect.width()),
         static_cast<float>(m_sourceRect.height()) };
 }
 
 void Sprite::setScale(jt::Vector2 const& scale) { m_scale = scale; }
-const jt::Vector2 Sprite::getScale() const { return m_scale; }
+jt::Vector2 Sprite::getScale() const { return m_scale; }
 
 void Sprite::setOrigin(jt::Vector2 const& origin)
 {
@@ -65,7 +67,7 @@ void Sprite::setOrigin(jt::Vector2 const& origin)
     m_offsetFromOrigin = -1.0f * origin;
 }
 
-jt::Vector2 const Sprite::getOrigin() const { return m_origin; }
+jt::Vector2 Sprite::getOrigin() const { return m_origin; }
 
 jt::Color Sprite::getColorAtPixel(jt::Vector2u pixelPos) const
 {
@@ -74,19 +76,20 @@ jt::Color Sprite::getColorAtPixel(jt::Vector2u pixelPos) const
             IMG_Load(m_fileName.c_str()), [](SDL_Surface* s) { SDL_FreeSurface(s); });
         if (!m_image) {
             std::cout << "Warning: file could not be loaded for getpixels\n";
-            return jt::Color { 0, 0, 0, 255 };
+            return jt::colors::Black;
         }
     }
     if (pixelPos.x() >= static_cast<unsigned int>(m_image->w)
         || pixelPos.y() >= static_cast<unsigned int>(m_image->h)) {
         throw std::invalid_argument { "pixel position out of bounds" };
     }
-    uint8_t r;
-    uint8_t g;
-    uint8_t b;
-    uint8_t a;
+    uint8_t r = 0u;
+    uint8_t g = 0u;
+    uint8_t b = 0u;
+    uint8_t a = 0u;
     SDL_GetRGBA(
-        jt::getPixel(m_image.get(), pixelPos.x(), pixelPos.y()), m_image->format, &r, &g, &b, &a);
+        jt::getPixel(m_image.get(), static_cast<int>(pixelPos.x()), static_cast<int>(pixelPos.y())),
+        m_image->format, &r, &g, &b, &a);
     return jt::Color { r, g, b, a };
 }
 
@@ -139,8 +142,8 @@ SDL_Rect Sprite::getDestRect(jt::Vector2 const& positionOffset) const
         + m_offsetFromOrigin;
     // std::cout << "Sprite.final position.x " << pos.x() << std::endl;
     SDL_Rect const destRect { static_cast<int>(pos.x()), static_cast<int>(pos.y()),
-        static_cast<int>(m_sourceRect.width() * fabs(m_scale.x())),
-        static_cast<int>(m_sourceRect.height() * fabs(m_scale.y())) };
+        static_cast<int>(static_cast<float>(m_sourceRect.width()) * fabs(m_scale.x())),
+        static_cast<int>(static_cast<float>(m_sourceRect.height()) * fabs(m_scale.y())) };
     return destRect;
 }
 

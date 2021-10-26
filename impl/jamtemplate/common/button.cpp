@@ -35,7 +35,7 @@ Button::~Button()
     m_callbacks.clear();
 }
 void Button::setDrawable(std::shared_ptr<DrawableInterface> sprt) { m_drawable = sprt; }
-void Button::addCallback(std::function<void(void)> cb) { m_callbacks.push_back(cb); }
+void Button::addCallback(std::function<void(void)> cb) { m_callbacks.emplace_back(std::move(cb)); }
 void Button::clearCallbacks() { m_callbacks.clear(); }
 size_t Button::getCallbackCount() const { return m_callbacks.size(); }
 bool Button::IsMouseOver()
@@ -57,8 +57,9 @@ void Button::doDraw() const
     }
 
     m_background->draw(getGame()->getRenderTarget());
-    if (m_drawable)
+    if (m_drawable) {
         m_drawable->draw(getGame()->getRenderTarget());
+    }
 
     if (!m_isActive) {
         m_disabledOverlay->draw(getGame()->getRenderTarget());
