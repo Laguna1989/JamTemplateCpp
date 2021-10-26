@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1635279144113,
+  "lastUpdate": 1635279559629,
   "repoUrl": "https://github.com/Laguna1989/JamTemplateCpp",
   "entries": {
     "Benchmark": [
@@ -504,6 +504,42 @@ window.BENCHMARK_DATA = {
             "value": 2.741974364705896,
             "unit": "ms/iter",
             "extra": "iterations: 255\ncpu: 2.741839882352941 ms\nthreads: 1"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "laguna_1989@gmx.net",
+            "name": "Simon Weis",
+            "username": "Laguna1989"
+          },
+          "committer": {
+            "email": "laguna_1989@gmx.net",
+            "name": "Simon Weis",
+            "username": "Laguna1989"
+          },
+          "distinct": true,
+          "id": "258ec38081debea5075f0e38b796c99253a26550",
+          "message": "Remove BM GameStateWithObjects as it was quite flakey\n\nFlakeyness most likely due to hdd access",
+          "timestamp": "2021-10-26T22:16:09+02:00",
+          "tree_id": "07a2d8e1723e32fe42f5b29695d7ef08666432dc",
+          "url": "https://github.com/Laguna1989/JamTemplateCpp/commit/258ec38081debea5075f0e38b796c99253a26550"
+        },
+        "date": 1635279559105,
+        "tool": "googlecpp",
+        "benches": [
+          {
+            "name": "BM_StartGame",
+            "value": 0.0012032651891669176,
+            "unit": "ms/iter",
+            "extra": "iterations: 582290\ncpu: 0.0012028890329560872 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GamestateWithTweeningShapes",
+            "value": 3.2875429859154472,
+            "unit": "ms/iter",
+            "extra": "iterations: 213\ncpu: 3.2872461784037563 ms\nthreads: 1"
           }
         ]
       }
