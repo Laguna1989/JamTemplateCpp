@@ -29,16 +29,24 @@ jobs:
 
       # although built in release mode, the exe will be stored in the debug folder. reasons.
       - name: Copy files
-        run: cp ${{github.workspace}}/build/impl/game/Debug/*.exe ${{github.workspace}}/build/impl/game/
+        run: |
+        mkdir ${{github.workspace}}/release
+        mkdir ${{github.workspace}}/release_win
+        cp ${{github.workspace}}/build/impl/game/Debug/*.exe ${{github.workspace}}/release/release_win/
+        cp ${{github.workspace}}/build/impl/game/*.dll ${{github.workspace}}/release/release_win/
+        cp ${{github.workspace}}/build/impl/game/assets ${{github.workspace}}/release/release_win/
 
+      - name: Create Archive
+        uses: thedoctor0/zip-release@master
+        with:
+          directory: ${{github.workspace}}/release
+          type: 'zip'
+          filename: 'release_win.zip'
 
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
-          files: |
-            ${{github.workspace}}/build/impl/game/*.exe
-            ${{github.workspace}}/build/impl/game/*.dll
-            ${{github.workspace}}/build/impl/game/assets
+          files: ${{github.workspace}}/release/release_win.zip
 
 #  WebSDL:
 #    runs-on: ubuntu-latest
