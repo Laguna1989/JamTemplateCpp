@@ -37,8 +37,10 @@ float deg2rad(float a)
 
 jt::Vector2 rotateBy(jt::Vector2 const& in, float aInDegree)
 {
-    float x = cos(deg2rad(aInDegree)) * in.x() - sin(deg2rad(aInDegree)) * in.y();
-    float y = sin(deg2rad(aInDegree)) * in.x() + cos(deg2rad(aInDegree)) * in.y();
+    float x = static_cast<float>(cos(deg2rad(aInDegree))) * in.x()
+        - static_cast<float>(sin(deg2rad(aInDegree))) * in.y();
+    float y = static_cast<float>(sin(deg2rad(aInDegree))) * in.x()
+        + static_cast<float>(cos(deg2rad(aInDegree))) * in.y();
 
     return jt::Vector2 { x, y };
 }
@@ -49,7 +51,7 @@ std::string floatToStringWithXDigits(float const number, unsigned int digits)
     stream << std::fixed << std::setprecision(static_cast<std::int64_t>(digits)) << number;
     return stream.str();
 }
-float angleOf(Vector2 const& in) { return rad2deg(atan2(-in.y(), in.x())); }
+float angleOf(Vector2 const& in) { return rad2deg(static_cast<float>(atan2(-in.y(), in.x()))); }
 
 } // namespace MathHelper
 

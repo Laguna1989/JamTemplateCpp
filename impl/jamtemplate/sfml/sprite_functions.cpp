@@ -11,16 +11,14 @@ sf::Image makeButtonImage(unsigned int w, unsigned int h)
 {
     jt::Color emptyColor { 0, 0, 0 };
     jt::Color borderColor { 255, 255, 255 };
-    jt::Color overBGColor {150,150, 150};
+    jt::Color overBGColor { 150, 150, 150 };
 
     sf::Image img {};
     img.create(3 * w, h, emptyColor);
 
-    for (unsigned int i = w; i !=  3* w; ++i)
-    {
-        for (unsigned int j = 0U; j != h; ++j)
-        {
-            img.setPixel(i,j, overBGColor);
+    for (unsigned int i = w; i != 3 * w; ++i) {
+        for (unsigned int j = 0U; j != h; ++j) {
+            img.setPixel(i, j, overBGColor);
         }
     }
 
@@ -52,7 +50,7 @@ sf::Image makeBlankImage(unsigned int w, unsigned int h)
 
 sf::Image makeGlowImage(float r, std::uint8_t max)
 {
-    unsigned int s = static_cast<unsigned int>(r + 0.5f * 2);
+    auto const s = static_cast<unsigned int>(r + 0.5f * 2);
     sf::Image img {};
     img.create(s, s, jt::colors::Transparent);
 
@@ -64,8 +62,9 @@ sf::Image makeGlowImage(float r, std::uint8_t max)
             auto const dy = j - c;
 
             auto const sqr = std::sqrt(dx * dx + dy * dy);
-            auto const sqrNorm = 1.0f - MathHelper::clamp(sqr / s * 2.0f, 0.0f, 1.0f);
-            float const v = std::pow(sqrNorm, 2.0f) * max;
+            auto const sqrNorm
+                = 1.0f - MathHelper::clamp(sqr / static_cast<float>(s) * 2.0f, 0.0f, 1.0f);
+            float const v = std::pow(sqrNorm, 2.0f) * static_cast<float>(max);
             img.setPixel(i, j, jt::Color { 255, 255, 255, static_cast<uint8_t>(v) });
         }
     }
@@ -75,13 +74,13 @@ sf::Image makeGlowImage(float r, std::uint8_t max)
 sf::Image makeVignetteImage(unsigned int w, unsigned int h)
 {
     sf::Image img {};
-    float const cx = w / 2.0f;
-    float const cy = h / 2.0f;
+    auto const cx = static_cast<float>(w) / 2.0f;
+    auto const cy = static_cast<float>(h) / 2.0f;
     img.create(w, h, jt::colors::Transparent);
     for (auto i = 0U; i != w; ++i) {
         for (auto j = 0U; j != h; ++j) {
-            auto const dx = i - cx;
-            auto const dy = j - cy;
+            auto const dx = static_cast<float>(i) - cx;
+            auto const dy = static_cast<float>(j) - cy;
             auto const sqr = std::sqrt(dx * dx + dy * dy);
             auto const sqrNorm = MathHelper::clamp(sqr / (cx + cy) / 1.5f * 2.0f, 0.0f, 1.0f);
             float const v = std::pow(sqrNorm, 2.0f) * 255;

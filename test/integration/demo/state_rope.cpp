@@ -119,8 +119,8 @@ void StateRope::doInternalDraw() const
     for (auto const& r : m_rope_elements) {
 
         auto const p = r->position;
-        auto s = jt::dh::createRectShape(
-            { static_cast<float>(2.0f * sqrt(r->mass)), static_cast<float>(2.0f * sqrt(r->mass)) });
+        auto const size = static_cast<float>(2.0f * static_cast<float>(std::sqrt(r->mass)));
+        auto s = jt::dh::createRectShape(jt::Vector2 { size, size });
         s->setPosition(p);
         s->update(0.1f);
         s->draw(getGame()->getRenderTarget());

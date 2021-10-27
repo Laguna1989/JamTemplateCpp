@@ -3,6 +3,7 @@
 
 #include "animation.hpp"
 #include "game_state.hpp"
+#include "line.hpp"
 #include "shape.hpp"
 #include "sprite.hpp"
 #include "text.hpp"
@@ -17,6 +18,8 @@ private:
     jt::Text::Sptr m_text_left_aligned;
     jt::Text::Sptr m_text_center_aligned;
     jt::Text::Sptr m_text_right_aligned;
+
+    jt::Line::Sptr m_line;
 
     void doInternalCreate() override;
     void doInternalUpdate(float const /*elapsed*/) override;

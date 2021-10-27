@@ -20,7 +20,7 @@ bool RenderWindow::isOpen() const { return m_window->isOpen(); }
 
 void RenderWindow::checkForClose()
 {
-    sf::Event event;
+    sf::Event event {};
     while (m_window->pollEvent(event)) {
         if (event.type == sf::Event::Closed) {
             m_window->close();
