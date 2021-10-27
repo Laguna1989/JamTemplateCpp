@@ -10,7 +10,7 @@
 #include <iostream>
 
 namespace {
-void horizontalFlip(std::unique_ptr<jt::Sprite>& spr, float zoom, float window_size_y)
+void horizontalFlip(std::unique_ptr<jt::Sprite> const& spr, float zoom, float window_size_y)
 {
     spr->setScale(jt::Vector2 { zoom, -zoom });
     spr->setPosition({ spr->getPosition().x(), spr->getPosition().y() + window_size_y });
@@ -39,13 +39,14 @@ void Game::setupRenderTarget()
     m_renderTarget = m_window->createRenderTarget();
     auto const windowSize = m_window->getSize();
     auto const zoom = getCamera()->getZoom();
-    unsigned int const scaledWidth = static_cast<unsigned int>(windowSize.x() / zoom);
-    unsigned int const scaledHeight = static_cast<unsigned int>(windowSize.y() / zoom);
+    auto const scaledWidth = static_cast<unsigned int>(windowSize.x() / zoom);
+    auto const scaledHeight = static_cast<unsigned int>(windowSize.y() / zoom);
 
     m_renderTarget->create(scaledWidth, scaledHeight);
     m_renderTarget->setSmooth(false);
 
-    m_view = std::make_shared<sf::View>(jt::Rect(0, 0, (float)scaledWidth, (float)scaledHeight));
+    m_view = std::make_shared<sf::View>(
+        jt::Rect(0, 0, static_cast<float>(scaledWidth), static_cast<float>(scaledHeight)));
     m_view->setViewport(jt::Rect(0, 0, 1, 1));
 }
 

@@ -20,9 +20,10 @@ void jt::Line::doDraw(std::shared_ptr<jt::renderTarget> const sptr) const
     auto const endPosition = startPosition
         + jt::Vector2 { m_lineVector.x() * m_scale.x(), m_lineVector.y() * m_scale.y() };
 
-    sf::Vertex line[]
-        = { sf::Vertex { startPosition, m_color }, sf::Vertex { endPosition, m_color } };
-    sptr->draw(line, 2, sf::Lines);
+    sf::VertexArray line { sf::Lines, 2 };
+    line[0] = sf::Vertex { startPosition, m_color };
+    line[1] = sf::Vertex { endPosition, m_color };
+    sptr->draw(line);
 }
 
 void jt::Line::doDrawFlash(std::shared_ptr<jt::renderTarget> const sptr) const
@@ -33,9 +34,10 @@ void jt::Line::doDrawFlash(std::shared_ptr<jt::renderTarget> const sptr) const
         + jt::Vector2 { m_lineVector.x() * m_scale.x(), m_lineVector.y() * m_scale.y() }
         + getShadowOffset();
 
-    sf::Vertex line[]
-        = { sf::Vertex { startPosition, m_color }, sf::Vertex { endPosition, getFlashColor() } };
-    sptr->draw(line, 2, sf::Lines);
+    sf::VertexArray line { sf::Lines, 2 };
+    line[0] = sf::Vertex { startPosition, getFlashColor() };
+    line[1] = sf::Vertex { endPosition, getFlashColor() };
+    sptr->draw(line);
 }
 void jt::Line::doDrawShadow(std::shared_ptr<jt::renderTarget> const sptr) const
 {
@@ -45,9 +47,10 @@ void jt::Line::doDrawShadow(std::shared_ptr<jt::renderTarget> const sptr) const
         + jt::Vector2 { m_lineVector.x() * m_scale.x(), m_lineVector.y() * m_scale.y() }
         + getShadowOffset();
 
-    sf::Vertex line[] = { sf::Vertex { startPosition, getShadowColor() },
-        sf::Vertex { endPosition, getShadowColor() } };
-    sptr->draw(line, 2, sf::Lines);
+    sf::VertexArray line { sf::Lines, 2 };
+    line[0] = sf::Vertex { startPosition, getShadowColor() };
+    line[1] = sf::Vertex { endPosition, getShadowColor() };
+    sptr->draw(line);
 }
 
 void jt::Line::doRotate(float d) { m_lineVector = jt::MathHelper::rotateBy(m_lineVector, d); }

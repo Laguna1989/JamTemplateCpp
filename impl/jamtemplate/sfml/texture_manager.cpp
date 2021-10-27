@@ -14,11 +14,11 @@ sf::Image createButtonImage(std::vector<std::string> const& ssv)
         throw std::invalid_argument { "create button image: vector does not contain 3 elements." };
     }
     std::size_t count { 0 };
-    long w = std::stol(ssv.at(1), &count);
+    std::int64_t w = std::stol(ssv.at(1), &count);
     if (count != ssv.at(1).size()) {
         throw std::invalid_argument { "invalid button size string" };
     }
-    long h = std::stol(ssv.at(2), &count);
+    std::int64_t h = std::stol(ssv.at(2), &count);
     if (count != ssv.at(2).size()) {
         throw std::invalid_argument { "invalid button size string" };
     }
@@ -36,11 +36,11 @@ sf::Image createBlankImage(std::vector<std::string> const& ssv)
         throw std::invalid_argument { "create blank image: vector does not contain 3 elements." };
     }
     std::size_t count { 0 };
-    long w = std::stol(ssv.at(1), &count);
+    std::int64_t w = std::stol(ssv.at(1), &count);
     if (count != ssv.at(1).size()) {
         throw std::invalid_argument { "invalid image size string" };
     }
-    long h = std::stol(ssv.at(2), &count);
+    std::int64_t h = std::stol(ssv.at(2), &count);
     if (count != ssv.at(2).size()) {
         throw std::invalid_argument { "invalid image size string" };
     }
@@ -92,12 +92,13 @@ sf::Image createFlashImage(sf::Image const& in)
 {
     sf::Image img { in };
 
-    for (unsigned int i = 0; i != img.getSize().x; ++i)
+    for (unsigned int i = 0; i != img.getSize().x; ++i) {
         for (unsigned int j = 0; j != img.getSize().y; ++j) {
             if (img.getPixel(i, j).a != 0) {
                 img.setPixel(i, j, jt::Color(255, 255, 255));
             }
         }
+    }
     return img;
 }
 

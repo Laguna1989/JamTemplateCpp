@@ -35,6 +35,9 @@ void StateScroll::doInternalCreate()
     m_text_right_aligned = jt::dh::createText(getGame()->getRenderTarget(), "right aligned", 12);
     m_text_right_aligned->setTextAlign(jt::Text::TextAlign::RIGHT);
     m_text_right_aligned->setPosition(jt::Vector2 { 300, 160 });
+
+    m_line = std::make_shared<jt::Line>(jt::Vector2 { 100, 50 });
+    m_line->setPosition(jt::Vector2 { 20, 200 });
 }
 
 void StateScroll::doInternalUpdate(float const elapsed)
@@ -64,6 +67,7 @@ void StateScroll::doInternalUpdate(float const elapsed)
     m_text_left_aligned->update(elapsed);
     m_text_center_aligned->update(elapsed);
     m_text_right_aligned->update(elapsed);
+    m_line->update(elapsed);
 }
 
 void StateScroll::doInternalDraw() const
@@ -78,4 +82,6 @@ void StateScroll::doInternalDraw() const
     m_text_left_aligned->draw(getGame()->getRenderTarget());
     m_text_center_aligned->draw(getGame()->getRenderTarget());
     m_text_right_aligned->draw(getGame()->getRenderTarget());
+
+    m_line->draw(getGame()->getRenderTarget());
 }
