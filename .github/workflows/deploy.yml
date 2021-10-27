@@ -34,7 +34,7 @@ jobs:
           cp ${{github.workspace}}/build/impl/game/*.dll ${{github.workspace}}/release/release_win/
           rm ${{github.workspace}}/release/release_win/*-d-2.dll
           cp ${{github.workspace}}/build/impl/game/Release/*.exe ${{github.workspace}}/release/release_win/
-          cp ${{github.workspace}}/build/impl/game/assets ${{github.workspace}}/release/release_win/
+          cp -r ${{github.workspace}}/build/impl/game/assets ${{github.workspace}}/release/release_win/
 
       - name: Create Archive
         uses: thedoctor0/zip-release@master
