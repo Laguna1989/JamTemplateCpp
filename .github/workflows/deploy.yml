@@ -2,7 +2,13 @@ name: Deployment
 
 on:
   push:
-    branches: [ deploy ]
+    tags:
+      - "v*.*.*"
+
+permissions:
+  contents: write
+
+
 jobs:
   WindowsSFML:
     runs-on: windows-latest
@@ -19,25 +25,28 @@ jobs:
 
       - name: Build
         working-directory: ${{github.workspace}}/build
-        run: cmake --build .
+        run: cmake --build . --config Release
 
-      # although built in release mode, the exe will be stored in the debug folder. reasons.
       - name: Copy files
-        run: cp ${{github.workspace}}/build/impl/game/Debug/*.exe ${{github.workspace}}/build/impl/game/
+        run: |
+          mkdir ${{github.workspace}}/release
+          mkdir ${{github.workspace}}/release/release_win
+          cp ${{github.workspace}}/build/impl/game/*.dll ${{github.workspace}}/release/release_win/
+          rm ${{github.workspace}}/release/release_win/*-d-2.dll
+          cp ${{github.workspace}}/build/impl/game/Release/*.exe ${{github.workspace}}/release/release_win/
+          cp -r ${{github.workspace}}/build/impl/game/assets ${{github.workspace}}/release/release_win/
 
-      - uses: actions/upload-artifact@v2
+      - name: Create Archive
+        uses: thedoctor0/zip-release@master
         with:
-          name: game_win
-          path: |
-            ${{github.workspace}}/build/impl/game/
-            !${{github.workspace}}/build/impl/game/CMakeFiles
-            !${{github.workspace}}/build/impl/game/Makefile
-            !${{github.workspace}}/build/impl/game/Debug
-            !${{github.workspace}}/build/impl/game/Release
-            !${{github.workspace}}/build/impl/game/*.dir
-            !*.cmake
-            !*.vcxproj*
-            !*-d-2.dll
+          directory: ${{github.workspace}}/release
+          type: 'zip'
+          filename: 'release_win.zip'
+
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: ${{github.workspace}}/release/release_win.zip
 
   WebSDL:
     runs-on: ubuntu-latest
@@ -81,13 +90,28 @@ jobs:
       - name: Copy files
         run: cp ${{github.workspace}}/index.html ${{github.workspace}}/build/impl/game/index.html
 
-      - uses: actions/upload-artifact@v2
+      - name: Copy files
+        run: |
+          mkdir ${{github.workspace}}/release
+          mkdir ${{github.workspace}}/release/release_web
+          cp ${{github.workspace}}/index.html ${{github.workspace}}/release/release_web/
+          cp ${{github.workspace}}/build/impl/game/*.data ${{github.workspace}}/release/release_web/
+          cp ${{github.workspace}}/build/impl/game/*.js ${{github.workspace}}/release/release_web/
+          cp ${{github.workspace}}/build/impl/game/*.wasm ${{github.workspace}}/release/release_web/
+
+
+      - name: Create Archive
+        uses: thedoctor0/zip-release@master
         with:
-          name: game_web
-          path: |
-            ${{github.workspace}}/build/impl/game/index.html
-            ${{github.workspace}}/build/impl/game/*.data
-            ${{github.workspace}}/build/impl/game/*.js
-            ${{github.workspace}}/build/impl/game/*.wasm
+          directory: ${{github.workspace}}/release
+          type: 'zip'
+          filename: 'release_web.zip'
+
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: ${{github.workspace}}/release/release_web.zip
+
+
 
 
