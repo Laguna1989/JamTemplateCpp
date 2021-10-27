@@ -2,7 +2,13 @@ name: Deployment
 
 on:
   push:
-    branches: [ deploy ]
+    tags:
+      - "v*.*.*"
+
+permissions:
+  contents: write
+
+
 jobs:
   WindowsSFML:
     runs-on: windows-latest
@@ -25,10 +31,11 @@ jobs:
       - name: Copy files
         run: cp ${{github.workspace}}/build/impl/game/Debug/*.exe ${{github.workspace}}/build/impl/game/
 
-      - uses: actions/upload-artifact@v2
+
+      - name: Release
+        uses: softprops/action-gh-release@v1
         with:
-          name: game_win
-          path: |
+          files: |
             ${{github.workspace}}/build/impl/game/
             !${{github.workspace}}/build/impl/game/CMakeFiles
             !${{github.workspace}}/build/impl/game/Makefile
@@ -39,55 +46,56 @@ jobs:
             !*.vcxproj*
             !*-d-2.dll
 
-  WebSDL:
-    runs-on: ubuntu-latest
-    env:
-      EMCC_CCACHE: 1
-    steps:
-      - name: Set up cmake
-        uses: jwlawson/actions-setup-cmake@v1.10
-        with:
-          cmake-version: '3.19.x'
-
-      - name: Set up gcc
-        uses: egor-tensin/setup-gcc@v1
-        with:
-          version: 9
-          platform: x64
-
-      - uses: mymindstorm/setup-emsdk@v9
-
-      - uses: actions/checkout@v2
-
-      - name: ccache
-        uses: hendrikmuhs/ccache-action@v1
-        with:
-          key: ${{ github.job }}-${{ matrix.os }}-${{ matrix.type }}
-          max-size: 100M
-
-      - name: CMake
-        run: |
-          emcmake cmake -B ${{github.workspace}}/build \
-          -DCMAKE_C_COMPILER_LAUNCHER=ccache -DCMAKE_CXX_COMPILER_LAUNCHER=ccache \
-          -DENABLE_DEMOS=OFF \
-          -DENABLE_UNITTESTS=OFF \
-          -DENABLE_WEB=ON \
-          -DUSE_SFML=OFF .
-
-      - name: Build
-        working-directory: ${{github.workspace}}/build
-        run: emmake make
-
-      - name: Copy files
-        run: cp ${{github.workspace}}/index.html ${{github.workspace}}/build/impl/game/index.html
-
-      - uses: actions/upload-artifact@v2
-        with:
-          name: game_web
-          path: |
-            ${{github.workspace}}/build/impl/game/index.html
-            ${{github.workspace}}/build/impl/game/*.data
-            ${{github.workspace}}/build/impl/game/*.js
-            ${{github.workspace}}/build/impl/game/*.wasm
-
-
+#  WebSDL:
+#    runs-on: ubuntu-latest
+#    env:
+#      EMCC_CCACHE: 1
+#    steps:
+#      - name: Set up cmake
+#        uses: jwlawson/actions-setup-cmake@v1.10
+#        with:
+#          cmake-version: '3.19.x'
+#
+#      - name: Set up gcc
+#        uses: egor-tensin/setup-gcc@v1
+#        with:
+#          version: 9
+#          platform: x64
+#
+#      - uses: mymindstorm/setup-emsdk@v9
+#
+#      - uses: actions/checkout@v2
+#
+#      - name: ccache
+#        uses: hendrikmuhs/ccache-action@v1
+#        with:
+#          key: ${{ github.job }}-${{ matrix.os }}-${{ matrix.type }}
+#          max-size: 100M
+#
+#      - name: CMake
+#        run: |
+#          emcmake cmake -B ${{github.workspace}}/build \
+#          -DCMAKE_C_COMPILER_LAUNCHER=ccache -DCMAKE_CXX_COMPILER_LAUNCHER=ccache \
+#          -DENABLE_DEMOS=OFF \
+#          -DENABLE_UNITTESTS=OFF \
+#          -DENABLE_WEB=ON \
+#          -DUSE_SFML=OFF .
+#
+#      - name: Build
+#        working-directory: ${{github.workspace}}/build
+#        run: emmake make
+#
+#      - name: Copy files
+#        run: cp ${{github.workspace}}/index.html ${{github.workspace}}/build/impl/game/index.html
+#
+#      - uses: actions/upload-artifact@v2
+#        with:
+#          name: game_web
+#          path: |
+#            ${{github.workspace}}/build/impl/game/index.html
+#            ${{github.workspace}}/build/impl/game/*.data
+#            ${{github.workspace}}/build/impl/game/*.js
+#            ${{github.workspace}}/build/impl/game/*.wasm
+#
+#
+#
