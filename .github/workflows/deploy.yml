@@ -32,8 +32,9 @@ jobs:
         run: |
           mkdir ${{github.workspace}}/release
           mkdir ${{github.workspace}}/release/release_win
-          cp ${{github.workspace}}/build/impl/game/Debug/*.exe ${{github.workspace}}/release/release_win/
           cp ${{github.workspace}}/build/impl/game/*.dll ${{github.workspace}}/release/release_win/
+          rm ${{github.workspace}}/release/release_win/*-d-2.dll
+          cp ${{github.workspace}}/build/impl/game/Debug/*.exe ${{github.workspace}}/release/release_win/
           cp ${{github.workspace}}/build/impl/game/assets ${{github.workspace}}/release/release_win/
 
       - name: Create Archive
