@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1635279559629,
+  "lastUpdate": 1635351779478,
   "repoUrl": "https://github.com/Laguna1989/JamTemplateCpp",
   "entries": {
     "Benchmark": [
@@ -540,6 +540,42 @@ window.BENCHMARK_DATA = {
             "value": 3.2875429859154472,
             "unit": "ms/iter",
             "extra": "iterations: 213\ncpu: 3.2872461784037563 ms\nthreads: 1"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "laguna_1989@gmx.net",
+            "name": "Laguna1989",
+            "username": "Laguna1989"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "a9bbab085b5d4d6d0851375804e7f3b53c2a5255",
+          "message": "Merge pull request #71 from Laguna1989/FEATURE_ClangTidySFML\n\nFix clang tidy issues for sfml",
+          "timestamp": "2021-10-27T18:21:23+02:00",
+          "tree_id": "fd48489353cec3b0b5d921eb1bd5ed697626e76b",
+          "url": "https://github.com/Laguna1989/JamTemplateCpp/commit/a9bbab085b5d4d6d0851375804e7f3b53c2a5255"
+        },
+        "date": 1635351778285,
+        "tool": "googlecpp",
+        "benches": [
+          {
+            "name": "BM_StartGame",
+            "value": 0.000997134241580409,
+            "unit": "ms/iter",
+            "extra": "iterations: 702085\ncpu: 0.0009970643056040225 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GamestateWithTweeningShapes",
+            "value": 2.7366512109374685,
+            "unit": "ms/iter",
+            "extra": "iterations: 256\ncpu: 2.7365196406250005 ms\nthreads: 1"
           }
         ]
       }
