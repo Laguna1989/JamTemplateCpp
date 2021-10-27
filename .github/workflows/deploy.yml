@@ -36,15 +36,9 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           files: |
-            ${{github.workspace}}/build/impl/game/
-            !${{github.workspace}}/build/impl/game/CMakeFiles
-            !${{github.workspace}}/build/impl/game/Makefile
-            !${{github.workspace}}/build/impl/game/Debug
-            !${{github.workspace}}/build/impl/game/Release
-            !${{github.workspace}}/build/impl/game/*.dir
-            !*.cmake
-            !*.vcxproj*
-            !*-d-2.dll
+            ${{github.workspace}}/build/impl/game/*.exe
+            ${{github.workspace}}/build/impl/game/*.dll
+            ${{github.workspace}}/build/impl/game/assets
 
 #  WebSDL:
 #    runs-on: ubuntu-latest
