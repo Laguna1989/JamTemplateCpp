@@ -31,7 +31,7 @@ jobs:
       - name: Copy files
         run: |
           mkdir ${{github.workspace}}/release
-          mkdir ${{github.workspace}}/release_win
+          mkdir ${{github.workspace}}/release/release_win
           cp ${{github.workspace}}/build/impl/game/Debug/*.exe ${{github.workspace}}/release/release_win/
           cp ${{github.workspace}}/build/impl/game/*.dll ${{github.workspace}}/release/release_win/
           cp ${{github.workspace}}/build/impl/game/assets ${{github.workspace}}/release/release_win/
