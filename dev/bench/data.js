@@ -26,12 +26,6 @@ window.BENCHMARK_DATA = {
         "tool": "googlecpp",
         "benches": [
           {
-            "name": "BM_GamestateWithObjects",
-            "value": 5.396206446153848,
-            "unit": "ms/iter",
-            "extra": "iterations: 130\ncpu: 5.373977992307693 ms\nthreads: 1"
-          },
-          {
             "name": "BM_StartGame",
             "value": 9.721930351351357,
             "unit": "ms/iter",
@@ -67,12 +61,6 @@ window.BENCHMARK_DATA = {
         "date": 1634670427706,
         "tool": "googlecpp",
         "benches": [
-          {
-            "name": "BM_GamestateWithObjects",
-            "value": 5.954589452991587,
-            "unit": "ms/iter",
-            "extra": "iterations: 117\ncpu: 5.95418305128205 ms\nthreads: 1"
-          },
           {
             "name": "BM_StartGame",
             "value": 11.48556923437516,
@@ -110,12 +98,6 @@ window.BENCHMARK_DATA = {
         "tool": "googlecpp",
         "benches": [
           {
-            "name": "BM_GamestateWithObjects",
-            "value": 5.334444175572422,
-            "unit": "ms/iter",
-            "extra": "iterations: 131\ncpu: 5.334224580152672 ms\nthreads: 1"
-          },
-          {
             "name": "BM_StartGame",
             "value": 9.754952690140188,
             "unit": "ms/iter",
@@ -151,12 +133,6 @@ window.BENCHMARK_DATA = {
         "date": 1634751822061,
         "tool": "googlecpp",
         "benches": [
-          {
-            "name": "BM_GamestateWithObjects",
-            "value": 2693.2979380000006,
-            "unit": "ms/iter",
-            "extra": "iterations: 1\ncpu: 137.809065 ms\nthreads: 1"
-          },
           {
             "name": "BM_StartGame",
             "value": 11.972464999999962,
@@ -194,12 +170,6 @@ window.BENCHMARK_DATA = {
         "tool": "googlecpp",
         "benches": [
           {
-            "name": "BM_GamestateWithObjects",
-            "value": 2504.8148740000042,
-            "unit": "ms/iter",
-            "extra": "iterations: 1\ncpu: 114.55891700000001 ms\nthreads: 1"
-          },
-          {
             "name": "BM_StartGame",
             "value": 10.327867430555434,
             "unit": "ms/iter",
@@ -235,12 +205,6 @@ window.BENCHMARK_DATA = {
         "date": 1634753937303,
         "tool": "googlecpp",
         "benches": [
-          {
-            "name": "BM_GamestateWithObjects",
-            "value": 5.470978718749908,
-            "unit": "ms/iter",
-            "extra": "iterations: 128\ncpu: 5.4707529218749995 ms\nthreads: 1"
-          },
           {
             "name": "BM_StartGame",
             "value": 10.629612294117408,
@@ -278,12 +242,6 @@ window.BENCHMARK_DATA = {
         "tool": "googlecpp",
         "benches": [
           {
-            "name": "BM_GamestateWithObjects",
-            "value": 2501.5782240000135,
-            "unit": "ms/iter",
-            "extra": "iterations: 1\ncpu: 122.79171500000002 ms\nthreads: 1"
-          },
-          {
             "name": "BM_StartGame",
             "value": 0.0011772245878877443,
             "unit": "ms/iter",
@@ -319,12 +277,6 @@ window.BENCHMARK_DATA = {
         "date": 1634982477706,
         "tool": "googlecpp",
         "benches": [
-          {
-            "name": "BM_GamestateWithObjects",
-            "value": 5.369448592307763,
-            "unit": "ms/iter",
-            "extra": "iterations: 130\ncpu: 5.369356369230769 ms\nthreads: 1"
-          },
           {
             "name": "BM_StartGame",
             "value": 0.001014588888373627,
@@ -362,12 +314,6 @@ window.BENCHMARK_DATA = {
         "tool": "googlecpp",
         "benches": [
           {
-            "name": "BM_GamestateWithObjects",
-            "value": 5.508839629921405,
-            "unit": "ms/iter",
-            "extra": "iterations: 127\ncpu: 5.508240440944881 ms\nthreads: 1"
-          },
-          {
             "name": "BM_StartGame",
             "value": 0.0010381348741702423,
             "unit": "ms/iter",
@@ -403,12 +349,6 @@ window.BENCHMARK_DATA = {
         "date": 1635016562811,
         "tool": "googlecpp",
         "benches": [
-          {
-            "name": "BM_GamestateWithObjects",
-            "value": 5.380770130769227,
-            "unit": "ms/iter",
-            "extra": "iterations: 130\ncpu: 5.380047653846154 ms\nthreads: 1"
-          },
           {
             "name": "BM_StartGame",
             "value": 0.0010074457470536716,
@@ -446,12 +386,6 @@ window.BENCHMARK_DATA = {
         "tool": "googlecpp",
         "benches": [
           {
-            "name": "BM_GamestateWithObjects",
-            "value": 5.403829423076991,
-            "unit": "ms/iter",
-            "extra": "iterations: 130\ncpu: 5.4034315230769225 ms\nthreads: 1"
-          },
-          {
             "name": "BM_StartGame",
             "value": 0.0010132252129422651,
             "unit": "ms/iter",
@@ -487,12 +421,6 @@ window.BENCHMARK_DATA = {
         "date": 1635279142449,
         "tool": "googlecpp",
         "benches": [
-          {
-            "name": "BM_GamestateWithObjects",
-            "value": 4702.380606999981,
-            "unit": "ms/iter",
-            "extra": "iterations: 1\ncpu: 119.11323900000001 ms\nthreads: 1"
-          },
           {
             "name": "BM_StartGame",
             "value": 0.0010041810170736255,
