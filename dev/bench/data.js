@@ -26,12 +26,6 @@ window.BENCHMARK_DATA = {
         "tool": "googlecpp",
         "benches": [
           {
-            "name": "BM_StartGame",
-            "value": 9.721930351351357,
-            "unit": "ms/iter",
-            "extra": "iterations: 74\ncpu: 9.310100337837836 ms\nthreads: 1"
-          },
-          {
             "name": "BM_GamestateWithTweeningShapes",
             "value": 2.8299648704453624,
             "unit": "ms/iter",
@@ -61,12 +55,6 @@ window.BENCHMARK_DATA = {
         "date": 1634670427706,
         "tool": "googlecpp",
         "benches": [
-          {
-            "name": "BM_StartGame",
-            "value": 11.48556923437516,
-            "unit": "ms/iter",
-            "extra": "iterations: 64\ncpu: 10.863388890625002 ms\nthreads: 1"
-          },
           {
             "name": "BM_GamestateWithTweeningShapes",
             "value": 3.1981960833334213,
@@ -98,12 +86,6 @@ window.BENCHMARK_DATA = {
         "tool": "googlecpp",
         "benches": [
           {
-            "name": "BM_StartGame",
-            "value": 9.754952690140188,
-            "unit": "ms/iter",
-            "extra": "iterations: 71\ncpu: 9.391394197183098 ms\nthreads: 1"
-          },
-          {
             "name": "BM_GamestateWithTweeningShapes",
             "value": 2.7855856135458574,
             "unit": "ms/iter",
@@ -133,12 +115,6 @@ window.BENCHMARK_DATA = {
         "date": 1634751822061,
         "tool": "googlecpp",
         "benches": [
-          {
-            "name": "BM_StartGame",
-            "value": 11.972464999999962,
-            "unit": "ms/iter",
-            "extra": "iterations: 60\ncpu: 11.469451516666664 ms\nthreads: 1"
-          },
           {
             "name": "BM_GamestateWithTweeningShapes",
             "value": 3.303030830188634,
@@ -170,12 +146,6 @@ window.BENCHMARK_DATA = {
         "tool": "googlecpp",
         "benches": [
           {
-            "name": "BM_StartGame",
-            "value": 10.327867430555434,
-            "unit": "ms/iter",
-            "extra": "iterations: 72\ncpu: 9.638224916666667 ms\nthreads: 1"
-          },
-          {
             "name": "BM_GamestateWithTweeningShapes",
             "value": 2.786040565736986,
             "unit": "ms/iter",
@@ -205,12 +175,6 @@ window.BENCHMARK_DATA = {
         "date": 1634753937303,
         "tool": "googlecpp",
         "benches": [
-          {
-            "name": "BM_StartGame",
-            "value": 10.629612294117408,
-            "unit": "ms/iter",
-            "extra": "iterations: 68\ncpu: 10.225949294117648 ms\nthreads: 1"
-          },
           {
             "name": "BM_GamestateWithTweeningShapes",
             "value": 2.740673984313688,
