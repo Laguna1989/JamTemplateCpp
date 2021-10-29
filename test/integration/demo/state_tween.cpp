@@ -23,7 +23,7 @@ void StateTween::createRects()
 
 void StateTween::createTweens()
 {
-    using ta = jt::TweenAlpha<jt::Shape>;
+    using ta = jt::TweenAlpha;
 
     auto twRIn = ta::create(m_overlayR, 1.0f, std::uint8_t { 0 }, std::uint8_t { 125 });
     twRIn->addCompleteCallback([this]() {

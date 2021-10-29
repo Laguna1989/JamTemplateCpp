@@ -67,6 +67,7 @@ TEST_P(CameraShakeIntervalTestFixture, ShakeOffsetNotChangedBeforeShakeIntervall
 INSTANTIATE_TEST_SUITE_P(CameraShakeIntervalTest, CameraShakeIntervalTestFixture,
     ::testing::Values(0.0f, 0.1f, 0.5f, 0.9f, 0.99f));
 
+// TODO Add DI for rng to write a test that has the correct shakeOffset
 TEST_F(CameraTest, ShakeOffsetChangedAfterShakeInterval)
 {
     float const shakeInterval = 0.5f;

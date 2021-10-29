@@ -1,4 +1,7 @@
 ﻿#include "color.hpp"
+#include "drawable_helpers.hpp"
+#include "mocks/mock_drawable.hpp"
+#include "shape.hpp"
 #include "tween_alpha.hpp"
 #include "tween_color.hpp"
 #include "tween_position.hpp"
@@ -8,42 +11,19 @@
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 
-class Object {
-public:
-    jt::Color getColor() const { return m_col; };
-    void setColor(jt::Color const& c) { m_col = c; };
-
-    std::uint8_t getAlpha() { return m_col.a(); };
-
-    jt::Vector2 getPosition() const { return m_pos; };
-    void setPosition(jt::Vector2 const& p) { m_pos = p; };
-
-    jt::Vector2 getScale() const { return m_scale; };
-    void setScale(jt::Vector2 const& p) { m_scale = p; };
-
-    float getRotation() const { return m_rot; }
-    void setRotation(float r) { m_rot = r; };
-
-private:
-    jt::Color m_col { jt::colors::Black };
-    jt::Vector2 m_pos { 0.0f, 0.0f };
-    jt::Vector2 m_scale { 1.0f, 1.0f };
-    float m_rot;
-};
-
-using ta = jt::TweenAlpha<Object>;
-using tc = jt::TweenColor<Object>;
-using tp = jt::TweenPosition<Object>;
-using ts = jt::TweenScale<Object>;
-using tr = jt::TweenRotation<Object>;
-using tb = jt::Tween<Object>;
+using ta = jt::TweenAlpha;
+using tc = jt::TweenColor;
+using tp = jt::TweenPosition;
+using ts = jt::TweenScale;
+using tr = jt::TweenRotation;
+using tb = jt::Tween;
 
 class TweenBaseTest : public ::testing::Test {
 public:
-    void SetUp() override { m_obj = std::make_shared<Object>(); }
+    void SetUp() override { m_obj = jt::dh::createRectShape(jt::Vector2 { 20.0f, 20.0f }); }
 
 protected:
-    std::shared_ptr<Object> m_obj;
+    std::shared_ptr<jt::DrawableInterface> m_obj;
 };
 
 TEST_F(TweenBaseTest, KillSetsAliveToFalse)
@@ -62,6 +42,16 @@ TEST_F(TweenBaseTest, CancelSetsAliveToFalse)
 
     t.cancel();
     EXPECT_FALSE(t.isAlive());
+}
+
+TEST_F(TweenBaseTest, AliveIsFalseAfterTweenFinishes)
+{
+    tb t(
+        m_obj, [](auto /*obj*/, auto /*agepercent*/) { return true; }, 1.0f);
+
+    t.update(1.1f);
+
+    ASSERT_FALSE(t.isAlive());
 }
 
 TEST_F(TweenBaseTest, FinishCallbackIsInvoked)
@@ -152,7 +142,7 @@ TEST_F(TweenBaseTest, AgePercentConversion)
 
 TEST_F(TweenBaseTest, TweenCanHandleDestroyedObject)
 {
-    auto obj = std::make_shared<Object>();
+    auto obj = std::make_shared<MockDrawable>();
     float returnedAgePrecent { 0.0f };
     tb t(
         obj,
@@ -173,23 +163,21 @@ TEST_F(TweenBaseTest, Alpha)
 {
     float const time { 5.0f };
 
-    EXPECT_EQ(m_obj->getAlpha(), 255U);
+    EXPECT_EQ(m_obj->getColor().a(), 255U);
 
     uint8_t const start { 0U };
     uint8_t const end { 255U };
 
     auto const twa = ta::create(m_obj, time, start, end);
     twa->update(0.0f);
-    EXPECT_EQ(m_obj->getAlpha(), start);
+    EXPECT_EQ(m_obj->getColor().a(), start);
     twa->update(time);
-    EXPECT_EQ(m_obj->getAlpha(), end);
+    EXPECT_EQ(m_obj->getColor().a(), end);
 }
 
 TEST_F(TweenBaseTest, Color)
 {
     float const time { 5.0f };
-
-    ASSERT_EQ(m_obj->getColor(), jt::colors::Black);
 
     jt::Color const start { 255, 255, 255, 255 };
     jt::Color const end { 0, 0, 0, 255 };

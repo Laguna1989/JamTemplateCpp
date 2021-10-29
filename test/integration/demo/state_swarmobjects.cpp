@@ -18,7 +18,7 @@ void StateSwarmObjects::doInternalCreate()
     m_overlay = jt::dh::createRectShape(jt::Vector2 { 400, 300 }, jt::colors::Black);
     m_overlay->update(0.0f);
 
-    auto tw = TweenAlpha<Shape>::create(m_overlay, 0.5f, std::uint8_t { 255 }, std::uint8_t { 0 });
+    auto tw = TweenAlpha::create(m_overlay, 0.5f, std::uint8_t { 255 }, std::uint8_t { 0 });
     add(tw);
 
     m_SwarmObjects = std::make_shared<jt::ObjectGroup<SwarmObject>>();
@@ -59,8 +59,7 @@ void StateSwarmObjects::updateSwarm()
     }
 }
 
-void StateSwarmObjects::updateOneSwarmObject(
-    const size_t& firstSwarmObjectIndex)
+void StateSwarmObjects::updateOneSwarmObject(const size_t& firstSwarmObjectIndex)
 {
     auto o1 = m_SwarmObjects->at(firstSwarmObjectIndex).lock();
     auto p1 = o1->getPosition();

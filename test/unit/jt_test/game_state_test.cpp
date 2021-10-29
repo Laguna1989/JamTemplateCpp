@@ -118,9 +118,9 @@ TEST_F(GameStateTest, GameObjectList)
 
 TEST_F(GameStateTest, CallsToTween)
 {
-    auto obj = std::make_shared<int>(5);
-    auto wp = std::weak_ptr<int> { obj };
-    auto tw = std::make_shared<MockTween<int>>(
+    auto obj = std::make_shared<jt::Sprite>();
+    auto wp = std::weak_ptr<jt::DrawableInterface> { obj };
+    auto tw = std::make_shared<MockTween>(
         wp, [](auto /*obj*/, auto /*elapsed*/) { return true; }, 1.0f);
     // state needs to be initialized
     gamestate.create();
@@ -135,9 +135,9 @@ TEST_F(GameStateTest, CallsToTween)
 
 TEST_F(GameStateTest, NoAutoUpdateTween)
 {
-    auto obj = std::make_shared<int>(5);
-    auto wp = std::weak_ptr<int> { obj };
-    auto tw = std::make_shared<MockTween<int>>(
+    auto obj = std::make_shared<jt::Sprite>();
+    auto wp = std::weak_ptr<jt::DrawableInterface> { obj };
+    auto tw = std::make_shared<MockTween>(
         wp, [](auto /*obj*/, auto /*elapsed*/) { return true; }, 1.0f);
     // state needs to be initialized to work
     gamestate.create();

@@ -7,19 +7,19 @@
 
 namespace jt {
 
-template <class T>
-class TweenScale : public Tween<T> {
+class TweenScale : public Tween {
 public:
     // Tween scale from valueStart to valueEnd of obj withtin time
-    static TweenBase::Sptr create(
-        std::weak_ptr<T> obj, float time, jt::Vector2 valueStart, jt::Vector2 valueEnd)
+    static TweenBase::Sptr create(std::weak_ptr<DrawableInterface> obj, float time,
+        jt::Vector2 valueStart, jt::Vector2 valueEnd)
     {
         return std::make_shared<TweenScale>(obj, time, valueStart, valueEnd);
     }
 
     // Tween scale from valueStart to valueEnd of obj withtin time
-    TweenScale(std::weak_ptr<T> obj, float time, jt::Vector2 valueStart, jt::Vector2 valueEnd)
-        : Tween<T> { obj,
+    TweenScale(std::weak_ptr<DrawableInterface> obj, float time, jt::Vector2 valueStart,
+        jt::Vector2 valueEnd)
+        : Tween { obj,
             [this](auto sptr, auto agePercent) {
                 auto scale = sptr->getScale();
 
@@ -29,7 +29,6 @@ public:
                     static_cast<float>(m_finalValue.y()), agePercent);
 
                 sptr->setScale(scale);
-                return (agePercent < 1.0f);
             },
             time }
     {
