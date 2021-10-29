@@ -10,11 +10,18 @@
 
 namespace jt {
 
+// TODO split into cpp and hpp file
+
+/// RAII type Wrapper for a box2d Object
 class Box2DObject : public GameObject {
 public:
     using Sptr = std::shared_ptr<Box2DObject>;
     Box2DObject() = delete;
 
+    /// Constructor
+    ///
+    /// \param world shared pointer to the world
+    /// \param def raw pointer to a body definition
     Box2DObject(std::shared_ptr<Box2DWorldInterface> world, const b2BodyDef* def)
     {
         setB2Body(world->CreateBody(def));
