@@ -99,7 +99,7 @@ void GameState::updateTweens(float elapsed)
         return;
     }
     m_tweens.erase(std::remove_if(m_tweens.begin(), m_tweens.end(),
-                       [](TweenBase::Sptr go) { return !(go->isAlive()); }),
+                       [](TweenBase::Sptr tween) { return !(tween->isAlive()); }),
         m_tweens.end());
     for (auto& tw : m_tweens) {
         tw->update(elapsed);

@@ -47,10 +47,10 @@ public:
 
     jt::Vector2u getMapSizeInTiles();
 
-    void setOrigin(jt::Vector2 const& origin);
-    jt::Vector2 getOrigin() const;
+    void setOrigin(jt::Vector2 const& origin) override;
+    jt::Vector2 getOrigin() const override;
 
-    void doRotate(float /*rot*/);
+    void doRotate(float /*rot*/) override;
 
     void setScreenSizeHint(jt::Vector2 const& hint);
 

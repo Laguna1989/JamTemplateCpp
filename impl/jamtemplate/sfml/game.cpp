@@ -121,7 +121,7 @@ void Game::doDraw() const
     m_sprite_for_drawing->fromTexture(texture);
     auto const shakeOffset = getCamera()->getShakeOffset();
     // TODO Fix magic number
-    m_sprite_for_drawing->setPosition(shakeOffset * 5.0f);
+    m_sprite_for_drawing->setPosition(shakeOffset);
     // Note: RenderTexture has a bug and is displayed upside down.
     horizontalFlip(m_sprite_for_drawing, getCamera()->getZoom(), m_window->getSize().y());
 

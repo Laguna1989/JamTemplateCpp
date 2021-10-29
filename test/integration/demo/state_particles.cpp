@@ -19,11 +19,11 @@ void StateParticles::doInternalCreate()
         [this](auto s) {
             s->setPosition(jt::Random::getRandomPointin(jt::Rect { 0, 0, 400, 300 }));
 
-            auto twa = jt::TweenAlpha<jt::DrawableInterface>::create(s, 0.5, 255, 0);
+            auto twa = jt::TweenAlpha::create(s, 0.5, 255, 0);
             twa->setSkipFrames(1);
             add(twa);
 
-            auto tws = jt::TweenScale<jt::DrawableInterface>::create(
+            auto tws = jt::TweenScale::create(
                 s, 0.5, jt::Vector2 { 1.0f, 1.0f }, jt::Vector2 { 2.0f, 2.0f });
             tws->setSkipFrames(1);
             add(tws);

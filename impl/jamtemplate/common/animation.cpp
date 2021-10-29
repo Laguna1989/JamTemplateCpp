@@ -23,7 +23,8 @@ std::shared_ptr<jt::Sprite> getCurrentSprite(
 } // namespace
 
 void Animation::add(std::string const& fileName, std::string const& animName,
-    jt::Vector2u const& size, std::vector<unsigned int> const& frameIndices, float frameTime)
+    jt::Vector2u const& imageSize, std::vector<unsigned int> const& frameIndices,
+    float frameTimeInSeconds)
 {
     if (frameIndices.empty()) {
         throw std::invalid_argument { "animation frame indices are empty." };
@@ -34,36 +35,36 @@ void Animation::add(std::string const& fileName, std::string const& animName,
     if (m_frames.count(animName) != 0) {
         std::cout << "Warning: Overwriting old animation with name: " << animName << std::endl;
     }
-    if (frameTime <= 0) {
+    if (frameTimeInSeconds <= 0) {
         throw std::invalid_argument { "animation frame time is negative or zero." };
     }
 
     m_frames[animName] = std::vector<jt::Sprite::Sptr> {};
-    m_time[animName] = frameTime;
+    m_time[animName] = frameTimeInSeconds;
 
     for (auto const idx : frameIndices) {
-        jt::Recti const rect { static_cast<int>(idx * size.x()), 0, static_cast<int>(size.x()),
-            static_cast<int>(size.y()) };
+        jt::Recti const rect { static_cast<int>(idx * imageSize.x()), 0,
+            static_cast<int>(imageSize.x()), static_cast<int>(imageSize.y()) };
         Sprite::Sptr sptr = std::make_shared<Sprite>();
         sptr->loadSprite(fileName, rect);
         m_frames[animName].push_back(sptr);
     }
 }
 
-bool Animation::hasAnimation(std::string const& animName) const
+bool Animation::hasAnimation(std::string const& animationName) const
 {
-    return (m_frames.count(animName) != 0);
+    return (m_frames.count(animationName) != 0);
 }
 
-void Animation::play(std::string const& animName, size_t startFrame, bool restart)
+void Animation::play(std::string const& animationName, size_t startFrameIndex, bool restart)
 {
-    if (m_frames.count(animName) == 0) {
-        throw std::invalid_argument { "anim name not part of animation: " + animName };
+    if (m_frames.count(animationName) == 0) {
+        throw std::invalid_argument { "anim name not part of animation: " + animationName };
     }
 
-    if (m_currentAnimName != animName || restart) {
-        m_currentIdx = startFrame;
-        m_currentAnimName = animName;
+    if (m_currentAnimName != animationName || restart) {
+        m_currentIdx = startFrameIndex;
+        m_currentAnimName = animationName;
         m_frameTime = 0;
     }
 }
@@ -231,10 +232,10 @@ void Animation::doRotate(float rot)
         }
     }
 }
-float Animation::getCurrentAnimSingleFrameTime() const { return m_time.at(m_currentAnimName); }
+float Animation::getCurrentAnimationSingleFrameTime() const { return m_time.at(m_currentAnimName); }
 float Animation::getCurrentAnimTotalTime() const
 {
-    return getCurrentAnimSingleFrameTime() * getNumberOfFramesInCurrentAnimation();
+    return getCurrentAnimationSingleFrameTime() * getNumberOfFramesInCurrentAnimation();
 }
 std::size_t Animation::getNumberOfFramesInCurrentAnimation() const
 {

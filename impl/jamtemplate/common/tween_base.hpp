@@ -1,6 +1,7 @@
 ﻿#ifndef GUARD_JAMTEMPLATE_TWEENBASE_HPP_INCLUDEGUARD
 #define GUARD_JAMTEMPLATE_TWEENBASE_HPP_INCLUDEGUARD
 
+#include "drawable_interface.hpp"
 #include <cassert>
 #include <functional>
 #include <memory>
@@ -49,7 +50,6 @@ public:
             return;
         }
         m_age += elapsed;
-        // if (m_age < m_startDelay) return;
         doUpdate(elapsed);
     }
     bool isAlive() { return m_alive; }
@@ -103,11 +103,10 @@ private:
     }
 };
 
-template <class T>
 class Tween : public TweenBase {
 public:
-    using OnUpdateCallbackType = std::function<bool(std::shared_ptr<T>, float)>;
-    Tween(std::weak_ptr<T> obj, OnUpdateCallbackType cb, float totalTime)
+    using OnUpdateCallbackType = std::function<void(std::shared_ptr<DrawableInterface>, float)>;
+    Tween(std::weak_ptr<DrawableInterface> obj, OnUpdateCallbackType cb, float totalTime)
         : m_obj { obj }
         , m_tweenCallback { cb }
     {
@@ -116,23 +115,24 @@ public:
 
 protected:
 private:
-    std::weak_ptr<T> m_obj;
+    std::weak_ptr<DrawableInterface> m_obj;
 
     // update callback function. If the callback returns false, the tween shall be finished.
     OnUpdateCallbackType m_tweenCallback;
     void doUpdate(float /*elapsed*/) override
     {
-        std::shared_ptr<T> sptr = nullptr;
+        if (getAgePercent() >= 1.0f) {
+            finish();
+        }
+        std::shared_ptr<DrawableInterface> sptr = nullptr;
         getObject(sptr);
         if (sptr == nullptr) {
             return;
         }
-        if (!m_tweenCallback(sptr, getConvertedAgePercent(getAgePercent()))) {
-            finish();
-        }
+        m_tweenCallback(sptr, getConvertedAgePercent(getAgePercent()));
     }
 
-    void getObject(std::shared_ptr<T>& obj)
+    void getObject(std::shared_ptr<DrawableInterface>& obj)
     {
         if (m_obj.expired()) {
             finish();

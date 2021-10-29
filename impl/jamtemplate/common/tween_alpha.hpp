@@ -8,27 +8,25 @@
 
 namespace jt {
 
-template <class T>
-class TweenAlpha : public Tween<T> {
+class TweenAlpha : public Tween {
 public:
     // Tween alpha value from valueStart to valueEnd of obj withtin time
-    static TweenBase::Sptr create(
-        std::weak_ptr<T> obj, float time, std::uint8_t valueStart, std::uint8_t valueEnd)
+    static TweenBase::Sptr create(std::weak_ptr<DrawableInterface> obj, float time,
+        std::uint8_t valueStart, std::uint8_t valueEnd)
     {
         return std::make_shared<TweenAlpha>(obj, time, valueStart, valueEnd);
     }
 
     // Tween alpha value from valueStart to valueEnd of obj withtin time
-    TweenAlpha(std::weak_ptr<T> obj, float time, std::uint8_t valueStart, std::uint8_t valueEnd)
-        : Tween<T> { obj,
+    TweenAlpha(std::weak_ptr<DrawableInterface> obj, float time, std::uint8_t valueStart,
+        std::uint8_t valueEnd)
+        : Tween { obj,
             [this](auto sptr, auto agePercent) {
                 jt::Color col = sptr->getColor();
                 float const alpha = Lerp::linear(m_initialValue, m_finalValue, agePercent);
                 std::uint8_t const a = static_cast<std::uint8_t>(alpha * 255.0f);
                 col.a() = a;
                 sptr->setColor(col);
-
-                return (agePercent < 1.0f);
             },
             time }
     {

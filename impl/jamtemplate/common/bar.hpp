@@ -13,19 +13,40 @@ class Bar : public jt::DrawableImpl {
 public:
     using Sptr = std::shared_ptr<Bar>;
 
+    /// Constructor
+    ///
+    /// \param width  width of the bar
+    /// \param height height of the bar
+    /// \param horizontal if true, bar is horizontal (left to right), if false (bottom to top)
     Bar(float width, float height, bool horizontal = true);
 
+    /// Set front color
+    ///
+    /// \param col the color
     void setFrontColor(jt::Color const& col);
+
+    /// Set back color
+    ///
+    /// \param col
     void setBackColor(jt::Color const& col);
 
     jt::Color getBackColor() const;
 
+    /// Set the current value
+    ///
+    /// \param value the value. Will be cropped to range [0, MaxValue]
     void setCurrentValue(float value);
     float getCurrentValue() const;
 
+    /// Set the maximum value
+    ///
+    /// \param max the maximum value. If negative, a invalid argument exception will be raised
     void setMaxValue(float max);
     float getMaxValue() const;
 
+    /// Get the Value fraction (current/max)
+    ///
+    /// \return return (current/max)
     float getValueFraction() const;
 
     virtual void setColor(jt::Color const& col) override;
@@ -34,7 +55,6 @@ public:
     virtual void setPosition(jt::Vector2 const& pos) override;
     virtual jt::Vector2 getPosition() const override;
 
-    // virtual sf::Transform const getTransform() const override;
     virtual jt::Rect getGlobalBounds() const override;
     virtual jt::Rect getLocalBounds() const override;
 

@@ -7,19 +7,19 @@
 
 namespace jt {
 
-template <class T>
-class TweenPosition : public Tween<T> {
+class TweenPosition : public Tween {
 public:
     // Tween position from valueStart to valueEnd of obj withtin time
-    static TweenBase::Sptr create(
-        std::weak_ptr<T> obj, float time, jt::Vector2 valueStart, jt::Vector2 valueEnd)
+    static TweenBase::Sptr create(std::weak_ptr<DrawableInterface> obj, float time,
+        jt::Vector2 valueStart, jt::Vector2 valueEnd)
     {
         return std::make_shared<TweenPosition>(obj, time, valueStart, valueEnd);
     }
 
     // Tween position from valueStart to valueEnd of obj withtin time
-    TweenPosition(std::weak_ptr<T> obj, float time, jt::Vector2 valueStart, jt::Vector2 valueEnd)
-        : Tween<T> { obj,
+    TweenPosition(std::weak_ptr<DrawableInterface> obj, float time, jt::Vector2 valueStart,
+        jt::Vector2 valueEnd)
+        : Tween { obj,
             [this](auto sptr, auto agePercent) {
                 auto pos = sptr->getPosition();
 
@@ -29,7 +29,6 @@ public:
                     static_cast<float>(m_finalValue.y()), agePercent);
 
                 sptr->setPosition(pos);
-                return (agePercent < 1.0f);
             },
             time }
     {

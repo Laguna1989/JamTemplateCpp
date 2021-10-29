@@ -97,7 +97,7 @@ TEST_F(AnimationPlayingTest, NumberOfFrames)
 
 TEST_F(AnimationPlayingTest, SingleFrameTime)
 {
-    ASSERT_FLOAT_EQ(a.getCurrentAnimSingleFrameTime(), 1.0f);
+    ASSERT_FLOAT_EQ(a.getCurrentAnimationSingleFrameTime(), 1.0f);
 }
 
 TEST_F(AnimationPlayingTest, TotalFrameTime) { ASSERT_FLOAT_EQ(a.getCurrentAnimTotalTime(), 5.0f); }
