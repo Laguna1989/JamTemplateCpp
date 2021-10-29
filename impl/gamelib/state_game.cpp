@@ -30,7 +30,7 @@ void StateGame::doInternalCreate()
     m_overlay->setColor(jt::Color { 0, 0, 0 });
     m_overlay->setIgnoreCamMovement(true);
     m_overlay->update(0);
-    auto tw = TweenAlpha<Shape>::create(m_overlay, 0.5f, std::uint8_t { 255 }, std::uint8_t { 0 });
+    auto tw = TweenAlpha::create(m_overlay, 0.5f, std::uint8_t { 255 }, std::uint8_t { 0 });
     tw->setSkipFrames();
     tw->addCompleteCallback([this]() { m_running = true; });
     add(tw);
@@ -86,8 +86,7 @@ void StateGame::endGame()
     m_hasEnded = true;
     m_running = false;
 
-    auto tw = jt::TweenAlpha<jt::Shape>::create(
-        m_overlay, 0.5f, std::uint8_t { 0 }, std::uint8_t { 255 });
+    auto tw = jt::TweenAlpha::create(m_overlay, 0.5f, std::uint8_t { 0 }, std::uint8_t { 255 });
     tw->setSkipFrames();
     tw->addCompleteCallback([this]() { getGame()->switchState(std::make_shared<StateMenu>()); });
     add(tw);
