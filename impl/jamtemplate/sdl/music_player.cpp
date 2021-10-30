@@ -34,6 +34,6 @@ void MusicPlayer::SetMusicVolume(float newVolume)
 }
 
 float MusicPlayer::GetMusicVolume() { return m_musicVolume; }
-std::string MusicPlayer::GetMusicFileName() { return m_musicFileName; }
+std::string MusicPlayer::GetMusicFilePath() { return m_musicFileName; }
 
 } // namespace jt

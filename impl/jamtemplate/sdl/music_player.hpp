@@ -14,7 +14,7 @@ public:
     // range: 0.0f to 100.0f
     virtual void SetMusicVolume(float newVolume) override;
     virtual float GetMusicVolume() override;
-    virtual std::string GetMusicFileName() override;
+    virtual std::string GetMusicFilePath() override;
 
 private:
     std::string m_musicFileName;
