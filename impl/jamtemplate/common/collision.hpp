@@ -46,11 +46,18 @@ class Collision {
 public:
     Collision() = delete;
 
-    //////
     /// Test for collision using circle collision detection
-    /// Radius is averaged from the dimensions of the sprite so
-    /// roughly circular objects will be much more accurate
-    //////
+    ///
+    /// Radius is averaged from the dimensions of the sprite so roughly circular objects will be
+    /// much more accurate
+    ///
+    /// The objects need to offer the GetGlobalBounds() function
+    ///
+    /// \tparam U Type of obj1
+    /// \tparam V Type of obj2
+    /// \param obj1 Object 1
+    /// \param obj2 Object 2
+    /// \return
     template <class U, class V>
     static bool CircleTest(U const& obj1, V const& obj2)
     {

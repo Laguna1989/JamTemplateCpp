@@ -18,14 +18,14 @@ GameState ::~GameState()
 void GameState::start() { m_started = true; }
 bool GameState::hasBeenInitialized() const { return m_started; }
 
-void GameState::add(GameObject::Sptr go)
+void GameState::add(GameObject::Sptr gameObject)
 {
-    go->setGameInstance(getGame());
-    go->create();
+    gameObject->setGameInstance(getGame());
+    gameObject->create();
     if (!m_objects.empty()) {
-        m_objectsToAdd.push_back(go);
+        m_objectsToAdd.push_back(gameObject);
     } else {
-        m_objects.push_back(go);
+        m_objects.push_back(gameObject);
     }
 }
 

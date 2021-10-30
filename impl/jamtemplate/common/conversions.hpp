@@ -8,9 +8,24 @@
 namespace jt {
 namespace Conversion {
 
+/// Convert box2d vector to jt vector
+/// \param v the box2d vector
+/// \return the jt vector
 jt::Vector2 vec(b2Vec2 const& v);
+
+/// Convert jt vector to box2d vector
+/// \param v the jt vector
+/// \return the box2d vector
 b2Vec2 vec(jt::Vector2 const& v);
+
+/// convert tson vector to jt vector
+/// \param v the tson vector
+/// \return the jt vector
 jt::Vector2 vec(tson::Vector2f const& v);
+
+/// convert jt vector to tson vector
+/// \param v the jt vector
+/// \return the tson vector
 jt::Vector2 vec(tson::Vector2i const& v);
 
 } // namespace Conversion

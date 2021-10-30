@@ -17,22 +17,54 @@ public:
 
     virtual ~GameState();
 
-    void add(GameObject::Sptr go);
+    /// Add a GameObject to the GameState
+    ///
+    /// Added gameobjects will be updated and drawn by the GameState
+    ///
+    /// \param gameObject the GameObject
+    void add(GameObject::Sptr gameObject);
+
+    /// Add a tween to the Gamestate
+    ///
+    /// Added tweens will be updated by the GameState
+    ///
+    /// \param tb
     void add(std::shared_ptr<TweenBase> tb);
 
+    /// Get the number of GameObjects in the State
+    /// \return the number of gameobjects
     std::size_t getNumberOfObjects() const;
 
+    /// Check if the State has been initialized
+    /// \return true if inizialized, false otherwise
     bool hasBeenInitialized() const;
 
-    // note: if the user sets autoupdate/autodraw to false,
-    // he has to take care to do the respective calls himself
+    /// Set auto update of Objects
+    /// note: if the user sets autoupdate to false,
+    /// he has to take care to do the respective calls himself
+    /// \param performAutoUpdate
     void setAutoUpdateObjects(bool performAutoUpdate);
+
+    /// Get auto update of Objects
+    /// \return
     bool getAutoUpdateObjects() const;
 
+    /// Set auto update of Tweens
+    /// note: if the user sets autoupdate to false,
+    /// he has to take care to do the respective calls himself
+    /// \param performAutoUpdate
     void setAutoUpdateTweens(bool performAutoUpdate);
+
+    /// Get auto updates of tweens
+    /// \return
     bool getAutoUpdateTweens() const;
 
+    /// Set auto draw of Objects
+    /// \param performAudoDraw
     void setAutoDraw(bool performAudoDraw);
+
+    /// Get auto draw of Objects
+    /// \return
     bool getAutoDraw() const;
 
 protected:

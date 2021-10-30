@@ -36,10 +36,10 @@ jt::Color Random::getRandomColor()
     return jt::Color { r, g, b };
 }
 
-jt::Vector2 Random::getRandomPointin(jt::Rect r)
+jt::Vector2 Random::getRandomPointIn(jt::Rect rect)
 {
-    auto const x = getFloat(r.left(), r.left() + r.width());
-    auto const y = getFloat(r.top(), r.top() + r.height());
+    auto const x = getFloat(rect.left(), rect.left() + rect.width());
+    auto const y = getFloat(rect.top(), rect.top() + rect.height());
     return jt::Vector2 { x, y };
 }
 

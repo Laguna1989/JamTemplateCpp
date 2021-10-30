@@ -6,12 +6,15 @@
 
 namespace jt {
 
-// forward declaration
-
+/// Timer class
 class Timer : public GameObject {
 public:
     using CallbackType = std::function<void(void)>;
-    Timer(float t, CallbackType cb, int r = -1);
+    /// Constructor
+    /// \param timeInSeconds how long until the callback is invoked (in seconds)
+    /// \param cb callback
+    /// \param r number of repetitions (-1 means infinite)
+    Timer(float timeInSeconds, CallbackType cb, int r = -1);
 
     /// Timer is not copy-able and not move-able
     Timer(Timer const&) = delete;
@@ -21,7 +24,12 @@ public:
     Timer operator=(Timer const&) = delete;
     Timer& operator=(Timer&&) = delete;
 
+    /// Get the total time (what is set in the constructor)
+    /// \return the total time
     float getTotalTime() const;
+
+    /// Get the current time
+    /// \return
     float getCurrentTime() const;
 
 private:

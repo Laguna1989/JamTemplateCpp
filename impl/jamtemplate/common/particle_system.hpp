@@ -9,11 +9,17 @@
 
 namespace jt {
 
+// TODO reuse circular buffer
 template <class T, size_t N>
 class ParticleSystem : public GameObject {
 public:
     using ResetCallbackType = std::function<void(std::shared_ptr<T> particle)>;
 
+    /// Create a Particle System
+    /// \tparam InitCallbackT Type of the init callback, should be of type T(void)
+    /// \param init init callback
+    /// \param reset reset callback
+    /// \return shared pointer to the created ParticleSystem
     template <typename InitCallbackT>
     static std::shared_ptr<ParticleSystem<T, N>> createPS(
         InitCallbackT const& init, ResetCallbackType const reset)
@@ -21,6 +27,10 @@ public:
         return std::make_shared<ParticleSystem<T, N>>(init, reset);
     }
 
+    /// Constructor
+    /// \tparam InitCallbackT Type of the init callback, should be of type T(void)
+    /// \param init init callback
+    /// \param reset reset callback
     template <typename InitCallbackT>
     ParticleSystem(InitCallbackT const& init, ResetCallbackType const reset)
         : m_resetCallback { reset }
@@ -32,6 +42,8 @@ public:
         }
     };
 
+    /// Fire the particle system, creating num particles
+    /// \param num
     void Fire(unsigned int num = 1)
     {
         for (auto i = 0U; i != num; ++i) {

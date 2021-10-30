@@ -26,16 +26,16 @@ void GameObject::update(float const elapsed)
 void GameObject::draw() const { doDraw(); };
 
 float GameObject::getAge() const { return m_age; }
-void GameObject::setAge(float t) { m_age = t; }
+void GameObject::setAge(float newAgeInSeconds) { m_age = newAgeInSeconds; }
 
-void GameObject::setGameInstance(std::weak_ptr<GameInterface> g)
+void GameObject::setGameInstance(std::weak_ptr<GameInterface> gameInstance)
 {
     if (!jt::SystemHelper::is_uninitialized_weak_ptr(m_game)) {
         throw std::logic_error {
             "It is not allowed to call setGameInstance twice on a GameObject."
         };
     }
-    m_game = std::move(g);
+    m_game = std::move(gameInstance);
 }
 std::shared_ptr<GameInterface> GameObject::getGame()
 {

@@ -8,35 +8,46 @@ namespace jt {
 
 class SoundBase {
 public:
+    /// Destructor
     virtual ~SoundBase() = default;
 
+    /// Load a sound
+    /// \param fileName path to a sound (e.g. "assets/sound.ogg")
     void load(std::string const& fileName)
     {
         doLoad(fileName);
         m_isInitialized = true;
     }
 
+    /// Check if initialized
+    /// \return true if initalized, false otherwise
     bool isInitialized() const { return m_isInitialized; }
 
+    /// Play the sound
     void play()
     {
         checkInitialized("Can not call play() of uninitialized sound. Call load().");
         doPlay();
     }
+
+    /// Check if the sound is playing
+    /// \return true if playing, false otherwise
     bool isPlaying() const
     {
         checkInitialized("Can not call isPlaying() of uninitialized sound. Call load()!");
         return doIsPlaying();
     }
 
-    // returns the volume of the sound in the range [0, 100]
+    /// Get the volume of the sound
+    /// \return volume in the range [0, 100]
     float getVolume() const
     {
         checkInitialized("Can not call getVolume() of uninitialized sound. Call load()!");
         return doGetVolume();
     }
 
-    // set the volume of the sound in the range [0, 100]
+    /// Set the volume of the sound
+    /// \param newVolume in the range [0, 100]
     void setVolume(float newVolume)
     {
         checkInitialized("Can not call setVolume() of uninitialized sound. Call load()!");
@@ -47,32 +58,39 @@ public:
         doSetVolume(newVolume);
     }
 
+    /// Stop playing the sound
     void stop()
     {
         checkInitialized("Can not call stop() of uninitialized sound. Call load()!");
         doStop();
     }
 
+    /// Set looping for sound
+    /// \param doLoop
     void setLoop(bool doLoop)
     {
         checkInitialized("Can not call setLoop() of uninitialied sound. Call load()!");
         doSetLoop(doLoop);
     }
 
+    /// Get looping for sound
+    /// \return
     bool getLoop()
     {
         checkInitialized("Can not call getLoop() of uninitialied sound. Call load()!");
         return doGetLoop();
     }
 
-    // returns the length of the sound in seconds
+    /// Get the duration of the sound in seconds
+    /// \return the duration in seconds
     float getDuration() const
     {
         checkInitialized("Can not call getDuration() of uninitialied sound. Call load()!");
         return doGetDuration();
     }
 
-    // returns the current playing position of the sound in seconds
+    /// returns the current playing position
+    /// \return current playing position in seconds
     float getPosition() const
     {
         checkInitialized("Can not call getDuration() of uninitialied sound. Call load()!");

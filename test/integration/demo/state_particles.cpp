@@ -17,7 +17,7 @@ void StateParticles::doInternalCreate()
             return s;
         },
         [this](auto s) {
-            s->setPosition(jt::Random::getRandomPointin(jt::Rect { 0, 0, 400, 300 }));
+            s->setPosition(jt::Random::getRandomPointIn(jt::Rect { 0, 0, 400, 300 }));
 
             auto twa = jt::TweenAlpha::create(s, 0.5, 255, 0);
             twa->setSkipFrames(1);

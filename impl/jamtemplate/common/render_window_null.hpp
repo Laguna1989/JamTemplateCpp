@@ -5,6 +5,7 @@
 
 namespace jt {
 namespace null_objects {
+/// Nullobj pattern for RenderWindow
 class RenderWindowNull : public ::jt::RenderWindowInterface {
 public:
     RenderWindowNull(unsigned int width, unsigned int height, std::string const& title);

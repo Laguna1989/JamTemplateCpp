@@ -60,7 +60,7 @@ TEST_F(ButtonTest, IsOverWithMockMouseReturnsTrueWhenOver)
     ON_CALL(*mouse, getMousePositionScreen()).WillByDefault(testing::Return(jt::Vector2 { 5, 5 }));
     b.setGameInstance(game);
 
-    ASSERT_TRUE(b.IsMouseOver());
+    ASSERT_TRUE(b.isMouseOver());
 }
 
 TEST_F(ButtonTest, IsOverWithMockMouseReturnsFalseWhenNotOver)
@@ -74,7 +74,7 @@ TEST_F(ButtonTest, IsOverWithMockMouseReturnsFalseWhenNotOver)
         .WillByDefault(testing::Return(jt::Vector2 { 50, 50 }));
     b.setGameInstance(game);
 
-    ASSERT_FALSE(b.IsMouseOver());
+    ASSERT_FALSE(b.isMouseOver());
 }
 
 TEST_F(ButtonTest, IsOverReturnsFalseWhenNotActive)
@@ -88,7 +88,7 @@ TEST_F(ButtonTest, IsOverReturnsFalseWhenNotActive)
     b.setActive(false);
     b.setGameInstance(game);
 
-    ASSERT_FALSE(b.IsMouseOver());
+    ASSERT_FALSE(b.isMouseOver());
 }
 
 TEST_F(ButtonTest, UpdateWithInput)

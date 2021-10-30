@@ -13,6 +13,7 @@ class DrawableImpl : public jt::DrawableInterface {
 public:
     using Sptr = std::shared_ptr<DrawableImpl>;
 
+    /// Destructor
     virtual ~DrawableImpl() = default;
     void draw(std::shared_ptr<jt::renderTarget> sptr) const override;
 
