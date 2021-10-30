@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1635447269443,
+  "lastUpdate": 1635567241512,
   "repoUrl": "https://github.com/Laguna1989/JamTemplateCpp",
   "entries": {
     "Benchmark": [
@@ -540,6 +540,42 @@ window.BENCHMARK_DATA = {
             "value": 2.7437600941176337,
             "unit": "ms/iter",
             "extra": "iterations: 255\ncpu: 2.7436044235294124 ms\nthreads: 1"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "laguna.ws@gmail.com",
+            "name": "Simon Weis",
+            "username": "Laguna1989"
+          },
+          "committer": {
+            "email": "laguna.ws@gmail.com",
+            "name": "Simon Weis",
+            "username": "Laguna1989"
+          },
+          "distinct": true,
+          "id": "b191d4f35908dd4dd9f3d7d32d7fdd88913dd389",
+          "message": "Fix use of tweens in performance test",
+          "timestamp": "2021-10-30T06:12:20+02:00",
+          "tree_id": "1f5d994d36d8254b80f8a19506fe2d1ce6e4106b",
+          "url": "https://github.com/Laguna1989/JamTemplateCpp/commit/b191d4f35908dd4dd9f3d7d32d7fdd88913dd389"
+        },
+        "date": 1635567240302,
+        "tool": "googlecpp",
+        "benches": [
+          {
+            "name": "BM_StartGame",
+            "value": 0.000996187905459447,
+            "unit": "ms/iter",
+            "extra": "iterations: 702598\ncpu: 0.0009960824909834643 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GamestateWithTweeningShapes",
+            "value": 2.622839456928828,
+            "unit": "ms/iter",
+            "extra": "iterations: 267\ncpu: 2.6224601797752807 ms\nthreads: 1"
           }
         ]
       }
