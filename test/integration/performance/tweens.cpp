@@ -26,8 +26,7 @@ private:
         }
 
         auto shape = *jt::SystemHelper::select_randomly(m_shapes.cbegin(), m_shapes.cend());
-        auto tw
-            = jt::TweenColor<jt::Shape>::create(shape, 1.0f, jt::colors::Red, jt::colors::White);
+        auto tw = jt::TweenColor::create(shape, 1.0f, jt::colors::Red, jt::colors::White);
         add(tw);
     }
 
