@@ -16,28 +16,54 @@ class Button : public GameObject {
 public:
     using Sptr = std::shared_ptr<Button>;
 
-    Button(jt::Vector2u s = jt::Vector2u { 16, 16 });
+    /// Constructor, creates a button with the given size
+    /// \param size the size of the button in pixel
+    Button(Vector2u const& size = jt::Vector2u { 16, 16 });
     ~Button();
 
     Button(const Button& b) = delete;
     Button(Button&& b) = default;
 
-    void setDrawable(std::shared_ptr<DrawableInterface> sprt);
+    /// Set the drawable (e.g. the icon or text of the button)
+    /// \param drawable the drawable to be used
+    void setDrawable(std::shared_ptr<DrawableInterface> drawable);
 
-    void addCallback(std::function<void(void)> cb);
+    /// Add a callback to be invoked when the button is clicked
+    /// \param callback the callback to be added
+    void addCallback(std::function<void(void)> callback);
 
+    /// Clear the list of callbacks
     void clearCallbacks();
-    size_t getCallbackCount() const;
 
-    bool IsMouseOver();
+    /// Get the number of callbacks currently registered
+    /// \return the number of callbacks
+    std::size_t getCallbackCount() const;
 
-    void setVisible(bool v);
+    /// Check if the mouse is over the button
+    /// \return true if it is, false otherwise
+    bool isMouseOver();
+
+    /// Set the visibility of the button (invisible buttons can not be clicked)
+    /// \param isVisible
+    void setVisible(bool isVisible);
+
+    /// Get the visibility
+    /// \return true if visible, false otherwise
     bool getVisible() const;
 
-    void setActive(bool v);
+    /// Set the button active status (inactive buttons are drawn but can not be clicked)
+    /// \param isActive
+    void setActive(bool isActive);
+
+    /// Get the active status of the button
+    /// \return
     bool getActive() const;
 
-    void setPosition(jt::Vector2 const& v);
+    /// Set the position of the Button
+    /// \param newPosition
+    void setPosition(jt::Vector2 const& newPosition);
+
+    /// Get the position of the Button
     jt::Vector2 getPosition(void) const;
 
 private:

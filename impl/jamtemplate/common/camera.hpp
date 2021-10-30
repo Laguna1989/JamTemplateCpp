@@ -6,6 +6,7 @@
 namespace jt {
 class Camera : public CamInterface {
 public:
+    /// Constructor
     Camera();
 
     jt::Vector2 getCamOffset() override;

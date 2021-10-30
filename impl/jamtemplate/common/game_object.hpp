@@ -11,27 +11,62 @@ class GameObject {
 public:
     using Sptr = std::shared_ptr<GameObject>;
 
+    /// Destructor
     virtual ~GameObject() = default;
 
+    /// Create the GameObject
+    ///
+    /// Will call doCreate
     void create();
 
+    /// Update the GameObject
+    ///
+    /// Will call doUpdate()
+    ///
+    /// \param elapsed the elapsed time in seconds
     void update(float const elapsed);
 
+    /// Draw the GameObject
+    ///
+    /// Will call doDraw
     void draw() const;
-    float getAge() const;
-    void setAge(float t);
 
-    void setGameInstance(std::weak_ptr<GameInterface> g);
+    /// Get the age of the GameObject
+    /// \return the age in seconds
+    float getAge() const;
+
+    /// Set the age of the GameObject
+    /// \param newAgeInSeconds the new age in seconds
+    void setAge(float newAgeInSeconds);
+
+    /// Set the game instance
+    /// \param gameInstance the game instance
+    void setGameInstance(std::weak_ptr<GameInterface> gameInstance);
+
+    /// Get the game instance (non const)
+    /// \return the game instance
     std::shared_ptr<GameInterface> getGame();
-    // const version of getGame (required for draw functionality)
+
+    /// Get the game instance (const)
+    /// \return the game instance
     std::shared_ptr<GameInterface> getGame() const;
 
-    // kill this game Object (killed/dead game objects will get thrown out of any GameState)
+    /// Kill this GameObject
+    ///
+    /// kill will trigger the removal of the GameObject from the GameState
     void kill();
+
+    /// Check if the GameObject is alive
+    /// \return true if alive, false otherwise
     bool isAlive() const;
 
-    // will be called, just before object is thrown out of the gamestate.
+    /// Destroy the GameObject
+    ///
+    /// destroy will be called when the GameState removes the object
+    /// NOTE: Do not modify or touch game here.
     void destroy();
+    // TODO write a test that ensures that a GameObject is only destroyed once even when present in
+    // multiple gamestates
 
 protected:
     float m_age { 0.0f };

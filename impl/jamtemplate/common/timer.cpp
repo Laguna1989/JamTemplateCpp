@@ -4,8 +4,8 @@
 
 namespace jt {
 
-Timer::Timer(float t, Timer::CallbackType cb, int r)
-    : m_totalTime { t }
+Timer::Timer(float timeInSeconds, Timer::CallbackType cb, int r)
+    : m_totalTime { timeInSeconds }
     , m_callback { std::move(cb) }
     , m_repeat { r }
 {

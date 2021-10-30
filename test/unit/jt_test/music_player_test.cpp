@@ -10,7 +10,7 @@ TEST(MusicPlayerTest, InitialVolume)
 TEST(MusicPlayerTest, InitialFileName)
 {
     jt::MusicPlayer player {};
-    ASSERT_EQ(player.GetMusicFileName(), "");
+    ASSERT_EQ(player.GetMusicFilePath(), "");
 }
 
 TEST(MusicPlayerTest, VolumeAfterPlay)
@@ -24,7 +24,7 @@ TEST(MusicPlayerTest, FileNameAfterPlay)
 {
     jt::MusicPlayer player {};
     player.PlayMusic("assets/test.wav");
-    ASSERT_EQ(player.GetMusicFileName(), "assets/test.wav");
+    ASSERT_EQ(player.GetMusicFilePath(), "assets/test.wav");
 }
 
 TEST(MusicPlayerTest, VolumeResetAfterPlay)

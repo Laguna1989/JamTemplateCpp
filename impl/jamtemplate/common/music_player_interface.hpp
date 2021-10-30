@@ -7,14 +7,27 @@ namespace jt {
 
 class MusicPlayerInterface {
 public:
+    /// Destructor
     virtual ~MusicPlayerInterface() = default;
 
+    /// Play music
+    /// \param fileName the filepath of the music (e.g. "assets/music.ogg")
     virtual void PlayMusic(std::string const& fileName) = 0;
+
+    /// Stop Music
     virtual void StopMusic() = 0;
-    // range: 0.0f to 100.0f
+
+    /// Set music volume
+    /// \param v the volume in range 0 to 100
     virtual void SetMusicVolume(float v) = 0;
+
+    /// Get music Volume
+    /// \return the colume in range 0 to 100
     virtual float GetMusicVolume() = 0;
-    virtual std::string GetMusicFileName() = 0;
+
+    /// Get the music filepath
+    /// \return the filepath
+    virtual std::string GetMusicFilePath() = 0;
 
     const float MaxVolume { 100.0f };
 };

@@ -28,17 +28,31 @@ public:
         m_world = world;
     }
 
+    /// Get the position
+    /// \return the position
     jt::Vector2 getPosition() const { return Conversion::vec(m_body->GetPosition()); }
 
-    void setPosition(jt::Vector2 p)
+    /// Set the position (overwrite box2d simulation)
+    /// \param position the new position
+    void setPosition(Vector2 const& position)
     {
-        m_body->SetTransform(Conversion::vec(p), m_body->GetAngle());
+        m_body->SetTransform(Conversion::vec(position), m_body->GetAngle());
     }
-    jt::Vector2 getVelocity() const { return Conversion::vec(m_body->GetLinearVelocity()); }
-    void setVelocity(jt::Vector2 const v) { m_body->SetLinearVelocity(Conversion::vec(v)); }
 
+    /// Get the velocity
+    /// \return the velocity
+    jt::Vector2 getVelocity() const { return Conversion::vec(m_body->GetLinearVelocity()); }
+
+    /// Set the velocity (overwrite box2d simulation)
+    /// \param v the new velocity
+    void setVelocity(Vector2 const& v) { m_body->SetLinearVelocity(Conversion::vec(v)); }
+
+    /// Set the rotation
+    /// \return the rotation
     float getRotation() const { return m_body->GetAngle(); }
 
+    /// get the Box2d body pointer
+    /// \return the pointer
     b2Body* getB2Body() { return m_body; }
 
 private:

@@ -61,7 +61,8 @@ class RandomFloatGaussTestFixture : public ::testing::TestWithParam<std::pair<fl
 
 INSTANTIATE_TEST_SUITE_P(RandomFloatGaussTest, RandomFloatGaussTestFixture,
     ::testing::Values(std::make_pair(0.0f, 1.0f), std::make_pair(0.0f, 500.0f),
-        std::make_pair(0.0f, 0.1f), std::make_pair(
+        std::make_pair(0.0f, 0.1f),
+        std::make_pair(
             std::numeric_limits<float>::epsilon(), std::numeric_limits<float>::epsilon())));
 
 TEST_P(RandomFloatGaussTestFixture, RandomFloat)
@@ -101,7 +102,7 @@ TEST(RandomInRect, Valid)
     auto const lower = 0.0f;
     auto const upper = 10.0f;
     for (auto i = 0U; i != 1000; ++i) {
-        auto const v = Random::getRandomPointin(jt::Rect { lower, lower, upper, upper });
+        auto const v = Random::getRandomPointIn(jt::Rect { lower, lower, upper, upper });
         EXPECT_GT(v.x(), lower);
         EXPECT_GT(v.y(), lower);
         EXPECT_LT(v.x(), upper);
