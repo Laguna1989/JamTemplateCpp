@@ -217,8 +217,9 @@ jobs:
           -t ${{ secrets.coveralls_token }} \
           -e _deps \
           -e ext \
-          -e test/ \
+          -e test \
           -e impl/game \
+          -e impl/gamelib \
           -e impl/jamtemplate/sdl \
           -e impl/jamtemplate/sfml/keyboard_input_lib.cpp \
           -e impl/jamtemplate/sfml/mouse_input_lib.cpp \
