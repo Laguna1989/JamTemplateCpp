@@ -90,7 +90,7 @@ A local run (Without the artifacts) can be executed
 via [OpenCppCoverage](https://github.com/OpenCppCoverage/OpenCppCoverage). The command :
 
 ```
-OpenCppCoverage.exe --sources C:\projects\JamTemplateCpp\* --excluded_sources C:\projects\JamTemplateCpp\src\UnitTests\* --excluded_sources C:\projects\JamTemplateCpp\src\StressTest\* --excluded_sources C:\projects\JamTemplateCpp\ext\* --excluded_sources C:\projects\JamTemplateCpp\cmake-build-debug\ext\*  --excluded_sources C:\projects\JamTemplateCpp\cmake-build-debug\* .\cmake-build-debug\src\unittests\UnitTests.exe
+OpenCppCoverage.exe --sources C:\projects\JamTemplateCpp\* --excluded_sources C:\projects\JamTemplateCpp\test\* --excluded_sources C:\projects\JamTemplateCpp\ext\* --excluded_sources C:\projects\JamTemplateCpp\cmake-build-debug\* .\cmake-build-debug\test\unit\jt_test\jt_tests.exe
 ```
 
 ## Performance benchmark
