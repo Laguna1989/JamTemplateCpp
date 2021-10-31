@@ -10,7 +10,7 @@ namespace jt {
 class TweenScale : public Tween {
 public:
     // Tween scale from valueStart to valueEnd of obj withtin time
-    static TweenBase::Sptr create(std::weak_ptr<DrawableInterface> obj, float time,
+    static Tween::Sptr create(std::weak_ptr<DrawableInterface> obj, float time,
         jt::Vector2 valueStart, jt::Vector2 valueEnd)
     {
         return std::make_shared<TweenScale>(obj, time, valueStart, valueEnd);

@@ -24,18 +24,25 @@ protected:
 };
 
 TEST_F(GamestateInitialTest, Alive) { ASSERT_TRUE(gamestate.isAlive()); }
+
 TEST_F(GamestateInitialTest, Age) { ASSERT_FLOAT_EQ(gamestate.getAge(), 0.0f); }
+
 TEST_F(GamestateInitialTest, NumberOfObjects) { ASSERT_EQ(gamestate.getNumberOfObjects(), 0); }
+
 TEST_F(GamestateInitialTest, NotInitialized) { ASSERT_FALSE(gamestate.hasBeenInitialized()); }
+
 TEST_F(GamestateInitialTest, CreateWithoutGameInstance) { ASSERT_ANY_THROW(gamestate.create()); }
+
 TEST_F(GamestateInitialTest, InitialAutoUpdateObjects)
 {
     ASSERT_TRUE(gamestate.getAutoUpdateObjects());
 }
+
 TEST_F(GamestateInitialTest, InitialAutoUpdateTweens)
 {
     ASSERT_TRUE(gamestate.getAutoUpdateTweens());
 }
+
 TEST_F(GamestateInitialTest, InitialAutoDraw) { ASSERT_TRUE(gamestate.getAutoDraw()); }
 
 class GameStateTest : public ::testing::Test {
@@ -116,42 +123,6 @@ TEST_F(GameStateTest, GameObjectList)
     EXPECT_EQ(gamestate.getNumberOfObjects(), N / 2);
 }
 
-TEST_F(GameStateTest, CallsToTween)
-{
-    auto obj = std::make_shared<jt::Sprite>();
-    auto wp = std::weak_ptr<jt::DrawableInterface> { obj };
-    auto tw = std::make_shared<MockTween>(
-        wp, [](auto /*obj*/, auto /*elapsed*/) { return true; }, 1.0f);
-    // state needs to be initialized
-    gamestate.create();
-
-    // add tween
-    gamestate.add(tw);
-
-    EXPECT_CALL(*tw, doUpdate(_));
-    // update state
-    gamestate.update(0.1f);
-}
-
-TEST_F(GameStateTest, NoAutoUpdateTween)
-{
-    auto obj = std::make_shared<jt::Sprite>();
-    auto wp = std::weak_ptr<jt::DrawableInterface> { obj };
-    auto tw = std::make_shared<MockTween>(
-        wp, [](auto /*obj*/, auto /*elapsed*/) { return true; }, 1.0f);
-    // state needs to be initialized to work
-    gamestate.create();
-
-    // add tween
-    gamestate.add(tw);
-
-    gamestate.setAutoUpdateTweens(false);
-
-    EXPECT_CALL(*tw, doUpdate(_)).Times(0);
-    // update state
-    gamestate.update(0.1f);
-}
-
 TEST_F(GameStateTest, NoAutoUpdateObjects)
 {
     auto mo = std::make_shared<MockObject>();
@@ -195,6 +166,33 @@ TEST_F(GameStateTest, AutoDrawAfterSet)
 {
     gamestate.setAutoDraw(false);
     ASSERT_FALSE(gamestate.getAutoDraw());
+}
+
+TEST_F(GameStateTest, AddGameObjectToTwoStatesWillRaiseException)
+{
+    auto g = std::make_shared<::testing::NiceMock<MockGame>>();
+    GameStateImpl gamestate1;
+    gamestate1.setGameInstance(g);
+
+    GameStateImpl gamestate2;
+    gamestate2.setGameInstance(g);
+
+    auto obj = std::make_shared<MockObject>();
+
+    EXPECT_CALL(*obj, doCreate());
+
+    gamestate1.add(obj);
+    ASSERT_THROW(gamestate2.add(obj), std::logic_error);
+}
+
+TEST_F(GameStateTest, RemovalOfGameObjectWillCallDoDestroyOnGameObject)
+{
+    AddGameObject();
+
+    mockObject->kill();
+    EXPECT_CALL(*mockObject, doDestroy());
+    gamestate.update(0.1f);
+    ASSERT_EQ(gamestate.getNumberOfObjects(), 0U);
 }
 
 #endif

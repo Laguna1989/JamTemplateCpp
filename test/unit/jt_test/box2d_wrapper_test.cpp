@@ -18,20 +18,20 @@ public:
 TEST_F(Box2DWrapperTestFixture, CreateObject)
 {
     b2BodyDef groundBodyDef;
-    wrapper->CreateBody(&groundBodyDef);
+    wrapper->createBody(&groundBodyDef);
 }
 
 TEST_F(Box2DWrapperTestFixture, DestroyObject)
 {
     b2BodyDef groundBodyDef;
-    auto body = wrapper->CreateBody(&groundBodyDef);
-    wrapper->DestroyBody(body);
+    auto body = wrapper->createBody(&groundBodyDef);
+    wrapper->destroyBody(body);
 }
 
 TEST_F(Box2DWrapperTestFixture, DestroyObjectWithouthWorld)
 {
     b2BodyDef groundBodyDef;
-    auto body = wrapper->CreateBody(&groundBodyDef);
+    auto body = wrapper->createBody(&groundBodyDef);
     world.reset();
-    wrapper->DestroyBody(body);
+    wrapper->destroyBody(body);
 }

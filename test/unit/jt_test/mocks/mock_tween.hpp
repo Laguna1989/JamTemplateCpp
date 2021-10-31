@@ -13,7 +13,7 @@ public:
     {
     }
 
-    MOCK_METHOD(void, doUpdate, (float const), (override));
+    //    MOCK_METHOD(void, doUpdate, (float const), (override));
 };
 
 #endif

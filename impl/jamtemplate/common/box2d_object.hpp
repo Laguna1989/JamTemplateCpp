@@ -10,8 +10,6 @@
 
 namespace jt {
 
-// TODO split into cpp and hpp file
-
 /// RAII type Wrapper for a box2d Object
 class Box2DObject : public GameObject {
 public:
@@ -22,38 +20,31 @@ public:
     ///
     /// \param world shared pointer to the world
     /// \param def raw pointer to a body definition
-    Box2DObject(std::shared_ptr<Box2DWorldInterface> world, const b2BodyDef* def)
-    {
-        setB2Body(world->CreateBody(def));
-        m_world = world;
-    }
+    Box2DObject(std::shared_ptr<Box2DWorldInterface> world, const b2BodyDef* def);
 
     /// Get the position
     /// \return the position
-    jt::Vector2 getPosition() const { return Conversion::vec(m_body->GetPosition()); }
+    jt::Vector2 getPosition() const;
 
     /// Set the position (overwrite box2d simulation)
     /// \param position the new position
-    void setPosition(Vector2 const& position)
-    {
-        m_body->SetTransform(Conversion::vec(position), m_body->GetAngle());
-    }
+    void setPosition(Vector2 const& position);
 
     /// Get the velocity
     /// \return the velocity
-    jt::Vector2 getVelocity() const { return Conversion::vec(m_body->GetLinearVelocity()); }
+    jt::Vector2 getVelocity() const;
 
     /// Set the velocity (overwrite box2d simulation)
     /// \param v the new velocity
-    void setVelocity(Vector2 const& v) { m_body->SetLinearVelocity(Conversion::vec(v)); }
+    void setVelocity(Vector2 const& v);
 
     /// Set the rotation
     /// \return the rotation
-    float getRotation() const { return m_body->GetAngle(); }
+    float getRotation() const;
 
     /// get the Box2d body pointer
     /// \return the pointer
-    b2Body* getB2Body() { return m_body; }
+    b2Body* getB2Body();
 
 private:
     // this pointer is NOT owning!
@@ -66,9 +57,9 @@ private:
     void doUpdate(float const /*elapsed*/) override { }
     void doDraw() const override { }
 
-    void doDestroy() override { m_world->DestroyBody(m_body); }
+    void doDestroy() override;
 
-    void setB2Body(b2Body* body) { m_body = body; }
+    void setB2Body(b2Body* body);
 };
 } // namespace jt
 #endif

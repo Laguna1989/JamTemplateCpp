@@ -8,11 +8,11 @@ public:
     /// Create a physics body
     /// \param definition the definition describing the body
     /// \return the createdy body
-    virtual b2Body* CreateBody(const b2BodyDef* definition) = 0;
+    virtual b2Body* createBody(const b2BodyDef* definition) = 0;
 
     /// Destroy a physics body
     /// \param body pointer to the body to be destroyed
-    virtual void DestroyBody(b2Body* body) = 0;
+    virtual void destroyBody(b2Body* body) = 0;
 
     /// Destructor
     virtual ~Box2DWorldInterface() = default;
@@ -26,13 +26,13 @@ public:
     {
     }
 
-    b2Body* CreateBody(const b2BodyDef* def) override
+    b2Body* createBody(const b2BodyDef* def) override
     {
         assert(!m_world.expired());
         return m_world.lock()->CreateBody(def);
     }
 
-    void DestroyBody(b2Body* body) override
+    void destroyBody(b2Body* body) override
     {
         if (m_world.expired()) {
             return;

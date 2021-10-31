@@ -65,8 +65,6 @@ public:
     /// destroy will be called when the GameState removes the object
     /// NOTE: Do not modify or touch game here.
     void destroy();
-    // TODO write a test that ensures that a GameObject is only destroyed once even when present in
-    // multiple gamestates
 
 protected:
     float m_age { 0.0f };

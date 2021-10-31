@@ -11,7 +11,7 @@ namespace jt {
 class TweenAlpha : public Tween {
 public:
     // Tween alpha value from valueStart to valueEnd of obj withtin time
-    static TweenBase::Sptr create(std::weak_ptr<DrawableInterface> obj, float time,
+    static Tween::Sptr create(std::weak_ptr<DrawableInterface> obj, float time,
         std::uint8_t valueStart, std::uint8_t valueEnd)
     {
         return std::make_shared<TweenAlpha>(obj, time, valueStart, valueEnd);

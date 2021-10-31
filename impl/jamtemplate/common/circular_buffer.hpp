@@ -45,10 +45,10 @@ public:
 
 } // namespace detail
 
-template <typename T, std::size_t sizeT>
+template <typename T, std::size_t N>
 class CircularBuffer {
 public:
-    using ArrayT = std::array<T, sizeT>;
+    using ArrayT = std::array<T, N>;
     using IteratorT = typename ArrayT::iterator;
     using ConstIteratorT = typename ArrayT::const_iterator;
 
@@ -85,20 +85,45 @@ public:
 
     /// Const begin iterator
     /// \return const begin iterator
-    ConstIteratorT cbegin() { return m_data.cbegin(); }
+    ConstIteratorT cbegin() const { return m_data.cbegin(); }
 
     /// Const end iterator
     /// \return const end iterator
-    ConstIteratorT cend() { return m_data.cend(); }
+    ConstIteratorT cend() const { return m_data.cend(); }
 
     /// Size of the circular buffer
     /// \return the size
     std::size_t size() { return m_data.size(); }
 
 private:
-    detail::IndexWrapper<sizeT> wrapper;
+    detail::IndexWrapper<N> wrapper;
     ArrayT m_data;
     std::size_t m_pushIndex { 0 };
 };
+
+template <typename T, std::size_t N>
+auto begin(CircularBuffer<T, N>& obj)
+{
+    return obj.begin();
+}
+
+template <typename T, std::size_t N>
+auto end(CircularBuffer<T, N>& obj)
+{
+    return obj.end();
+}
+
+template <typename T, std::size_t N>
+auto cbegin(CircularBuffer<T, N> const& obj)
+{
+    return obj.cbegin();
+}
+
+template <typename T, std::size_t N>
+auto cend(CircularBuffer<T, N> const& obj)
+{
+    return obj.cend();
+}
+
 } // namespace jt
 #endif

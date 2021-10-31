@@ -9,6 +9,7 @@ public:
     MOCK_METHOD(void, doUpdate, (float const), (override));
     MOCK_METHOD(void, doDraw, (), (const));
     MOCK_METHOD(void, doCreate, (), (override));
+    MOCK_METHOD(void, doDestroy, (), (override));
 };
 
 #endif

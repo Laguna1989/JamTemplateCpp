@@ -12,6 +12,10 @@ class View;
 namespace jt {
 class RenderWindow : public RenderWindowInterface {
 public:
+    /// Constructor
+    /// \param width width of the window in pixel
+    /// \param height height of the window in pixel
+    /// \param title title of the window
     RenderWindow(unsigned int width, unsigned int height, std::string const& title);
 
     std::shared_ptr<jt::renderTarget> createRenderTarget() override;

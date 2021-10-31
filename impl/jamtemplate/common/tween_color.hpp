@@ -10,7 +10,7 @@ namespace jt {
 class TweenColor : public Tween {
 public:
     // Tween color from valueStart to valueEnd of obj withtin time
-    static TweenBase::Sptr create(
+    static Tween::Sptr create(
         std::weak_ptr<DrawableInterface> obj, float time, jt::Color valueStart, jt::Color valueEnd)
     {
         return std::make_shared<TweenColor>(obj, time, valueStart, valueEnd);

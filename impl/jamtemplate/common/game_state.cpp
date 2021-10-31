@@ -29,7 +29,7 @@ void GameState::add(GameObject::Sptr gameObject)
     }
 }
 
-void GameState::add(TweenBase::Sptr tb) { m_tweensToAdd.push_back(tb); }
+void GameState::add(Tween::Sptr tb) { m_tweensToAdd.push_back(tb); }
 
 size_t GameState::getNumberOfObjects() const { return m_objects.size(); }
 
@@ -99,7 +99,7 @@ void GameState::updateTweens(float elapsed)
         return;
     }
     m_tweens.erase(std::remove_if(m_tweens.begin(), m_tweens.end(),
-                       [](TweenBase::Sptr tween) { return !(tween->isAlive()); }),
+                       [](Tween::Sptr tween) { return !(tween->isAlive()); }),
         m_tweens.end());
     for (auto& tw : m_tweens) {
         tw->update(elapsed);

@@ -10,7 +10,7 @@ namespace jt {
 class TweenPosition : public Tween {
 public:
     // Tween position from valueStart to valueEnd of obj withtin time
-    static TweenBase::Sptr create(std::weak_ptr<DrawableInterface> obj, float time,
+    static Tween::Sptr create(std::weak_ptr<DrawableInterface> obj, float time,
         jt::Vector2 valueStart, jt::Vector2 valueEnd)
     {
         return std::make_shared<TweenPosition>(obj, time, valueStart, valueEnd);

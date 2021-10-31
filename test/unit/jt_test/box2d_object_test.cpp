@@ -7,14 +7,14 @@ using namespace ::testing;
 
 class Box2DWorldMock : public jt::Box2DWorldInterface {
 public:
-    MOCK_METHOD(b2Body*, CreateBody, (const b2BodyDef*), (override));
-    MOCK_METHOD(void, DestroyBody, (b2Body*), (override));
+    MOCK_METHOD(b2Body*, createBody, (const b2BodyDef*), (override));
+    MOCK_METHOD(void, destroyBody, (b2Body*), (override));
 };
 
 TEST(Box2DObjectTest, ConstructorCallsCreateBody)
 {
     auto mock = std::make_shared<Box2DWorldMock>();
-    EXPECT_CALL(*mock, CreateBody(_));
+    EXPECT_CALL(*mock, createBody(_));
     jt::Box2DObject obj { mock, nullptr };
 }
 
@@ -57,6 +57,6 @@ TEST(Box2DObjectTest, DestroyCallsDestroyBodyOnWorld)
     auto mock = std::make_shared<::testing::NiceMock<Box2DWorldMock>>();
     jt::Box2DObject obj { mock, nullptr };
 
-    EXPECT_CALL(*mock, DestroyBody(_));
+    EXPECT_CALL(*mock, destroyBody(_));
     obj.destroy();
 }

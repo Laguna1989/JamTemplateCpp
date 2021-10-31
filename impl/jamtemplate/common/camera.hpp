@@ -2,6 +2,7 @@
 #define GUARD_JAMTEMPLATE_CAMERA_HPP_GUARD
 
 #include "cam_interface.hpp"
+#include "functional"
 
 namespace jt {
 class Camera : public CamInterface {
@@ -17,11 +18,14 @@ public:
     void setZoom(float zoom) override;
 
     void shake(float t, float strength, float shakeInterval = 0.005f) override;
+
     jt::Vector2 getShakeOffset() override;
 
     void reset() override;
 
     void update(float elapsed) override;
+
+    void setRandomFunction(std::function<float(float)> randomFunction);
 
 private:
     jt::Vector2 m_CamOffset { 0.0f, 0.0f };
@@ -33,8 +37,11 @@ private:
     float m_shakeIntervalMax { 0.0f };
     jt::Vector2 m_shakeOffset { 0, 0 };
 
+    std::function<float(float)> m_randomFunc = nullptr;
+
     virtual void updateShake(float elapsed);
     virtual void resetShake();
+    void setDefaultRandomFunction();
 };
 } // namespace jt
 

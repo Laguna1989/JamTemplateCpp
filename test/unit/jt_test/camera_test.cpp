@@ -67,7 +67,6 @@ TEST_P(CameraShakeIntervalTestFixture, ShakeOffsetNotChangedBeforeShakeIntervall
 INSTANTIATE_TEST_SUITE_P(CameraShakeIntervalTest, CameraShakeIntervalTestFixture,
     ::testing::Values(0.0f, 0.1f, 0.5f, 0.9f, 0.99f));
 
-// TODO Add DI for rng to write a test that has the correct shakeOffset
 TEST_F(CameraTest, ShakeOffsetChangedAfterShakeInterval)
 {
     float const shakeInterval = 0.5f;
@@ -77,6 +76,18 @@ TEST_F(CameraTest, ShakeOffsetChangedAfterShakeInterval)
 
     jt::Vector2 const initialShake { 0.0f, 0.0f };
     ASSERT_NE(cam.getShakeOffset(), initialShake);
+}
+
+TEST_F(CameraTest, ShakeOffsetIsAsSetByRandomFunction)
+{
+    float const shakeInterval = 0.5f;
+
+    cam.setRandomFunction([](auto /*unused*/) { return 1.0f; });
+    cam.shake(10, 1.0f, shakeInterval);
+    cam.update(shakeInterval * 1.01f);
+
+    jt::Vector2 const expectedShakeOffset { 1.0f, 1.0f };
+    ASSERT_EQ(cam.getShakeOffset(), expectedShakeOffset);
 }
 
 TEST_F(CameraTest, ShakeOffsetBackToZeroAfterShakeTime)
