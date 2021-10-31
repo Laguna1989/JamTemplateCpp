@@ -12,8 +12,6 @@ public:
         : jt::Tween { obj, cb, totalTime }
     {
     }
-
-    //    MOCK_METHOD(void, doUpdate, (float const), (override));
 };
 
 #endif

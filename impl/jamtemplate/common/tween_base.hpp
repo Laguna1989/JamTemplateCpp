@@ -2,10 +2,8 @@
 #define GUARD_JAMTEMPLATE_TWEENBASE_HPP_INCLUDEGUARD
 
 #include "drawable_interface.hpp"
-#include <cassert>
 #include <functional>
 #include <memory>
-#include <type_traits>
 #include <vector>
 
 namespace jt {

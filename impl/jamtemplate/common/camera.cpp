@@ -53,6 +53,7 @@ void Camera::resetShake()
     m_shakeTimer = -1;
     m_shakeStrength = 0;
 }
+
 void Camera::setRandomFunction(std::function<float(float)> randomFunc)
 {
     if (!randomFunc) {

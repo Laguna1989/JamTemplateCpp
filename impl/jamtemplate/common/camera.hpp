@@ -2,7 +2,7 @@
 #define GUARD_JAMTEMPLATE_CAMERA_HPP_GUARD
 
 #include "cam_interface.hpp"
-#include "functional"
+#include <functional>
 
 namespace jt {
 class Camera : public CamInterface {
@@ -25,6 +25,8 @@ public:
 
     void update(float elapsed) override;
 
+    /// Set random function that will be used to determine the cam displacement
+    /// \param randomFunction the random function
     void setRandomFunction(std::function<float(float)> randomFunction);
 
 private:

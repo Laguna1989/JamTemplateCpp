@@ -1,4 +1,5 @@
 #include "tween_base.hpp"
+#include <cassert>
 
 jt::Tween::Tween(std::weak_ptr<DrawableInterface> obj, jt::Tween::OnUpdateCallbackType cb,
     float totalTimeInSeconds)

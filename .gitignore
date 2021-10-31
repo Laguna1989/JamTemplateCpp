@@ -392,3 +392,6 @@ ext/SFML-2.5.1
 ext/googletest/googletest-*
 ext/tileson-master/
 cmake-build-*
+
+doc/doxygen/html
+doc/doxygen/latex
