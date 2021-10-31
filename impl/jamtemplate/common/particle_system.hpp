@@ -1,6 +1,7 @@
 ﻿#ifndef GUARD_JAMTEMPLATE_PARTICLE_SYSTEM_HPP_GUARD
 #define GUARD_JAMTEMPLATE_PARTICLE_SYSTEM_HPP_GUARD
 
+#include "circular_buffer.hpp"
 #include "game_interface.hpp"
 #include "game_object.hpp"
 #include <array>
@@ -9,7 +10,6 @@
 
 namespace jt {
 
-// TODO reuse circular buffer
 template <class T, size_t N>
 class ParticleSystem : public GameObject {
 public:
@@ -47,17 +47,14 @@ public:
     void Fire(unsigned int num = 1)
     {
         for (auto i = 0U; i != num; ++i) {
-            m_resetCallback(m_particles.at(m_currentIndex));
+            m_resetCallback(m_particles[m_currentIndex]);
             m_currentIndex++;
-            if (m_currentIndex >= m_particles.size()) {
-                m_currentIndex = 0;
-            }
         }
     };
 
 private:
     ResetCallbackType m_resetCallback {};
-    std::array<std::shared_ptr<T>, N> m_particles;
+    mutable jt::CircularBuffer<std::shared_ptr<T>, N> m_particles;
 
     std::size_t m_currentIndex { 0U };
 
@@ -70,7 +67,7 @@ private:
 
     virtual void doDraw() const
     {
-        for (auto& p : m_particles) {
+        for (auto const& p : m_particles) {
             p->draw(getGame()->getRenderTarget());
         }
     };

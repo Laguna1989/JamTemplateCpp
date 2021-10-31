@@ -3,7 +3,10 @@
 
 namespace jt {
 
-Camera::Camera() = default;
+Camera::Camera()
+{
+    m_randomFunc = [](float max) { return Random::getFloat(-max, max); };
+};
 
 jt::Vector2 Camera::getCamOffset() { return m_CamOffset; }
 void Camera::setCamOffset(jt::Vector2 const& ofs) { m_CamOffset = ofs; }
@@ -18,6 +21,7 @@ void Camera::shake(float t, float strength, float shakeInterval)
     m_shakeStrength = strength;
     m_shakeInterval = m_shakeIntervalMax = shakeInterval;
 }
+
 jt::Vector2 Camera::getShakeOffset() { return m_shakeOffset; }
 
 void Camera::reset()
@@ -35,8 +39,8 @@ void Camera::updateShake(float elapsed)
         m_shakeInterval -= elapsed;
         if (m_shakeInterval < 0) {
             m_shakeInterval = m_shakeIntervalMax;
-            m_shakeOffset.x() = jt::Random::getFloat(-m_shakeStrength, m_shakeStrength);
-            m_shakeOffset.y() = jt::Random::getFloat(-m_shakeStrength, m_shakeStrength);
+            m_shakeOffset.x() = m_randomFunc(m_shakeStrength);
+            m_shakeOffset.y() = m_randomFunc(m_shakeStrength);
         }
     } else {
         m_shakeOffset.x() = m_shakeOffset.y() = 0;
@@ -48,6 +52,14 @@ void Camera::resetShake()
     m_shakeOffset.x() = m_shakeOffset.y() = 0;
     m_shakeTimer = -1;
     m_shakeStrength = 0;
+}
+
+void Camera::setRandomFunction(std::function<float(float)> randomFunc)
+{
+    if (!randomFunc) {
+        throw std::invalid_argument { "Can not set nullptr random function for Camera" };
+    }
+    m_randomFunc = randomFunc;
 }
 
 } // namespace jt

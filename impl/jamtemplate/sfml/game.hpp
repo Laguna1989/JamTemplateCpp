@@ -12,13 +12,17 @@
 
 namespace jt {
 
-//
-// Game class to be implemented by sfml/sdl
-//
+// Actual Game class for SFML
 class Game final : public jt::GameBase {
 public:
     using Sptr = std::shared_ptr<Game>;
 
+    /// Constructor
+    /// \param window window, can be nullptr
+    /// \param zoom zoom value
+    /// \param inputManager input manager, can be nullptr
+    /// \param musicPlayer music player, can be nullptr
+    /// \param camera camera, can be nullptr
     Game(std::shared_ptr<RenderWindowInterface> window, float zoom,
         std::shared_ptr<InputManagerInterface> inputManager = nullptr,
         std::shared_ptr<MusicPlayerInterface> musicPlayer = nullptr,

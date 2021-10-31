@@ -193,8 +193,8 @@ TEST(Vector2U, MoveConstructor)
     jt::Vector2u vec1 { 2, 3 };
     jt::Vector2u vec2 { std::move(vec1) };
 
-    ASSERT_EQ(vec1.x(), 2);
-    ASSERT_EQ(vec1.y(), 3);
+    ASSERT_EQ(vec2.x(), 2);
+    ASSERT_EQ(vec2.y(), 3);
 }
 
 TEST(Vector2UAddEqual, AddZero)

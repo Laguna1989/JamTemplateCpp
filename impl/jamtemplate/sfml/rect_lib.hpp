@@ -6,31 +6,41 @@
 
 namespace jt {
 
+/// Rect class
 class Rect final : public rectBase {
 public:
+    /// Default constructor, initializes all members to 0
     Rect()
         : m_rect { 0.0f, 0.0f, 0.0f, 0.0f }
     {
     }
+
+    /// Constructor
+    /// \param left left value
+    /// \param top top value
+    /// \param width width value
+    /// \param height height value
     Rect(float left, float top, float width, float height)
         : m_rect { left, top, width, height }
     {
     }
 
+    /// Construct from sf::FloatRect
+    /// \param v
     Rect(sf::FloatRect const& v)
         : m_rect { v }
     {
     }
 
+    /// Destructor
     ~Rect() = default;
     Rect(jt::Rect const&) = default;
 
     Rect& operator=(jt::Rect const&) = default;
     Rect& operator=(jt::Rect&&) = default;
 
+    /// Conversion to sf::FloatRect
     operator sf::FloatRect() const { return m_rect; }
-
-    sf::FloatRect m_rect;
 
     float left() const override { return m_rect.left; };
     float top() const override { return m_rect.top; };
@@ -40,6 +50,9 @@ public:
     float& top() override { return m_rect.top; };
     float& width() override { return m_rect.width; };
     float& height() override { return m_rect.height; };
+
+private:
+    sf::FloatRect m_rect;
 };
 
 class Recti final : public rectiBase {

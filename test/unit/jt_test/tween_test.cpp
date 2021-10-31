@@ -61,7 +61,26 @@ TEST_F(TweenBaseTest, FinishCallbackIsInvoked)
         m_obj, [](auto /*obj*/, auto /*agepercent*/) { return true; }, 1.0f);
     t.addCompleteCallback([&invoked]() { invoked = true; });
     t.finish();
-    EXPECT_TRUE(invoked);
+    ASSERT_TRUE(invoked);
+}
+
+TEST_F(TweenBaseTest, GetRepeatReturnsFalseByDefault)
+{
+    int count { 0 };
+    tb t(
+        m_obj, [](auto /*obj*/, auto /*agepercent*/) { return true; }, 1.0f);
+
+    ASSERT_FALSE(t.getRepeat());
+}
+
+TEST_F(TweenBaseTest, GetRepeatReturnsTrueAfterSetRepeat)
+{
+    int count { 0 };
+    tb t(
+        m_obj, [](auto /*obj*/, auto /*agepercent*/) { return true; }, 1.0f);
+
+    t.setRepeat(true);
+    ASSERT_TRUE(t.getRepeat());
 }
 
 TEST_F(TweenBaseTest, CalledRepeatedly)

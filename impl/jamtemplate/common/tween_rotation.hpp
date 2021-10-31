@@ -9,7 +9,7 @@ namespace jt {
 class TweenRotation : public Tween {
 public:
     // Tween rotation from valueStart to valueEnd of obj withtin time
-    static TweenBase::Sptr create(
+    static Tween::Sptr create(
         std::weak_ptr<DrawableInterface> obj, float time, float valueStart, float valueEnd)
     {
         return std::make_shared<TweenRotation>(obj, time, valueStart, valueEnd);

@@ -8,7 +8,7 @@
 namespace jt {
 
 // forward declarations
-class TweenBase;
+class Tween;
 
 class GameState : public GameObject {
 public:
@@ -29,7 +29,7 @@ public:
     /// Added tweens will be updated by the GameState
     ///
     /// \param tb
-    void add(std::shared_ptr<TweenBase> tb);
+    void add(std::shared_ptr<Tween> tb);
 
     /// Get the number of GameObjects in the State
     /// \return the number of gameobjects
@@ -88,7 +88,7 @@ private:
     std::vector<GameObject::Sptr> m_objectsToAdd {};
 
     /// all tweens running in this state
-    std::vector<std::shared_ptr<TweenBase>> m_tweens {};
+    std::vector<std::shared_ptr<Tween>> m_tweens {};
 
     /// this is used as a level of indirection,
     /// because tweens might add or remove m_tweens while iterating over the m_tweens vector,
@@ -97,7 +97,7 @@ private:
     /// The idea is to not modify m_tweens directly when a Tween is added,
     /// but to place them in this vector first and add them to m_tweens,
     /// once it is safe to do so.
-    std::vector<std::shared_ptr<TweenBase>> m_tweensToAdd {};
+    std::vector<std::shared_ptr<Tween>> m_tweensToAdd {};
 
     bool m_doAutoUpdateObjects { true };
     bool m_doAutoUpdateTweens { true };

@@ -6,9 +6,13 @@
 #include "vector.hpp"
 
 namespace jt {
+/// Line class
 class Line : public DrawableImpl {
 public:
     using Sptr = std::shared_ptr<Line>;
+
+    /// Constructor
+    /// \param lineVector the vector from start to end of the line
     Line(jt::Vector2 lineVector);
 
     void setColor(jt::Color const& col) override;
