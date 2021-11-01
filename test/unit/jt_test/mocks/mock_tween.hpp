@@ -7,11 +7,13 @@
 
 class MockTween : public jt::Tween {
 public:
-    MockTween(std::weak_ptr<jt::DrawableInterface> obj, typename jt::Tween::OnUpdateCallbackType cb,
-        float totalTime)
-        : jt::Tween { obj, cb, totalTime }
+    MockTween(std::weak_ptr<jt::DrawableInterface> obj, float totalTime)
+        : jt::Tween { obj, totalTime }
     {
     }
+
+    MOCK_METHOD(
+        void, doUpdateObject, (std::shared_ptr<jt::DrawableInterface> const&, float), (override));
 };
 
 #endif

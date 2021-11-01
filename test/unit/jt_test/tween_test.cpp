@@ -1,6 +1,7 @@
 ﻿#include "color.hpp"
 #include "drawable_helpers.hpp"
 #include "mocks/mock_drawable.hpp"
+#include "mocks/mock_tween.hpp"
 #include "shape.hpp"
 #include "tween_alpha.hpp"
 #include "tween_color.hpp"
@@ -28,8 +29,7 @@ protected:
 
 TEST_F(TweenBaseTest, KillSetsAliveToFalse)
 {
-    tb t(
-        m_obj, [](auto /*obj*/, auto /*agepercent*/) { return true; }, 1.0f);
+    tb t(m_obj, 1.0f);
 
     t.kill();
     EXPECT_FALSE(t.isAlive());
@@ -37,8 +37,7 @@ TEST_F(TweenBaseTest, KillSetsAliveToFalse)
 
 TEST_F(TweenBaseTest, CancelSetsAliveToFalse)
 {
-    tb t(
-        m_obj, [](auto /*obj*/, auto /*agepercent*/) { return true; }, 1.0f);
+    tb t(m_obj, 1.0f);
 
     t.cancel();
     EXPECT_FALSE(t.isAlive());
@@ -46,8 +45,7 @@ TEST_F(TweenBaseTest, CancelSetsAliveToFalse)
 
 TEST_F(TweenBaseTest, AliveIsFalseAfterTweenFinishes)
 {
-    tb t(
-        m_obj, [](auto /*obj*/, auto /*agepercent*/) { return true; }, 1.0f);
+    tb t(m_obj, 1.0f);
 
     t.update(1.1f);
 
@@ -57,8 +55,7 @@ TEST_F(TweenBaseTest, AliveIsFalseAfterTweenFinishes)
 TEST_F(TweenBaseTest, FinishCallbackIsInvoked)
 {
     bool invoked { false };
-    tb t(
-        m_obj, [](auto /*obj*/, auto /*agepercent*/) { return true; }, 1.0f);
+    tb t(m_obj, 1.0f);
     t.addCompleteCallback([&invoked]() { invoked = true; });
     t.finish();
     ASSERT_TRUE(invoked);
@@ -67,8 +64,7 @@ TEST_F(TweenBaseTest, FinishCallbackIsInvoked)
 TEST_F(TweenBaseTest, GetRepeatReturnsFalseByDefault)
 {
     int count { 0 };
-    tb t(
-        m_obj, [](auto /*obj*/, auto /*agepercent*/) { return true; }, 1.0f);
+    tb t(m_obj, 1.0f);
 
     ASSERT_FALSE(t.getRepeat());
 }
@@ -76,8 +72,7 @@ TEST_F(TweenBaseTest, GetRepeatReturnsFalseByDefault)
 TEST_F(TweenBaseTest, GetRepeatReturnsTrueAfterSetRepeat)
 {
     int count { 0 };
-    tb t(
-        m_obj, [](auto /*obj*/, auto /*agepercent*/) { return true; }, 1.0f);
+    tb t(m_obj, 1.0f);
 
     t.setRepeat(true);
     ASSERT_TRUE(t.getRepeat());
@@ -86,8 +81,7 @@ TEST_F(TweenBaseTest, GetRepeatReturnsTrueAfterSetRepeat)
 TEST_F(TweenBaseTest, CalledRepeatedly)
 {
     int count { 0 };
-    tb t(
-        m_obj, [](auto /*obj*/, auto /*agepercent*/) { return true; }, 1.0f);
+    tb t(m_obj, 1.0f);
     t.addCompleteCallback([&count]() { count++; });
     t.setRepeat(true);
     t.finish();
@@ -99,8 +93,7 @@ TEST_F(TweenBaseTest, CalledRepeatedly)
 
 TEST_F(TweenBaseTest, UpdateChangesAge)
 {
-    tb t(
-        m_obj, [](auto /*obj*/, auto /*agepercent*/) { return true; }, 1.0f);
+    tb t(m_obj, 1.0f);
     float timeIncr = 0.5f;
     t.update(timeIncr);
     EXPECT_EQ(t.getAge(), timeIncr);
@@ -108,8 +101,7 @@ TEST_F(TweenBaseTest, UpdateChangesAge)
 
 TEST_F(TweenBaseTest, StartDelay)
 {
-    tb t(
-        m_obj, [](auto /*obj*/, auto /*agepercent*/) { return true; }, 1.0f);
+    tb t(m_obj, 1.0f);
     float const startDelay = 0.5f;
     t.setStartDelay(startDelay);
     EXPECT_EQ(t.getStartDelay(), startDelay);
@@ -119,8 +111,7 @@ TEST_F(TweenBaseTest, StartDelay)
 
 TEST_F(TweenBaseTest, SkipFrames)
 {
-    tb t(
-        m_obj, [](auto /*obj*/, auto /*agepercent*/) { return true; }, 1.0f);
+    tb t(m_obj, 1.0f);
     int const skipFrames = 2;
 
     t.setSkipFrames(skipFrames);
@@ -137,39 +128,23 @@ TEST_F(TweenBaseTest, SkipFrames)
 
 TEST_F(TweenBaseTest, AgePercentConversion)
 {
-    float returnedAgePrecent { 0.0f };
-    tb t(
-        m_obj,
-        [&returnedAgePrecent](auto /*obj*/, auto agepercent) {
-            returnedAgePrecent = agepercent;
-            return true;
-        },
-        1.0f);
+    MockTween t(m_obj, 1.0f);
 
     t.setAgePercentConversion([](float age) { return age / 2.0f; });
+    EXPECT_CALL(t, doUpdateObject(::testing::_, 1.0f / 2.0f));
     t.update(1.0f);
-    EXPECT_EQ(returnedAgePrecent, 1.0f / 2.0f);
 
     t.setAgePercentConversion([](float /*unused*/) { return 1.2f; });
+    EXPECT_CALL(t, doUpdateObject(::testing::_, 1.2f)).Times(3);
     t.update(0.0f);
-    EXPECT_EQ(returnedAgePrecent, 1.2f);
     t.update(9.0f);
-    EXPECT_EQ(returnedAgePrecent, 1.2f);
     t.update(100.0f);
-    EXPECT_EQ(returnedAgePrecent, 1.2f);
 }
 
 TEST_F(TweenBaseTest, TweenCanHandleDestroyedObject)
 {
     auto obj = std::make_shared<MockDrawable>();
-    float returnedAgePrecent { 0.0f };
-    tb t(
-        obj,
-        [&returnedAgePrecent](auto /*obj*/, auto agepercent) {
-            returnedAgePrecent = agepercent;
-            return true;
-        },
-        1.0f);
+    tb t(obj, 1.0f);
 
     EXPECT_NO_THROW(t.update(0.25f));
 

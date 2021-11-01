@@ -12,8 +12,6 @@ class Tween {
 public:
     using Sptr = std::shared_ptr<Tween>;
     using OnCompleteCallbackType = std::function<void(void)>;
-    using OnUpdateCallbackType
-        = std::function<void(std::shared_ptr<DrawableInterface> const&, float)>;
 
     // Using a raw function pointer will cause a compile error if a lambda is passed, because
     // lambdas cannot be converted to function pointers. However, it is safe to assume that the
@@ -26,8 +24,8 @@ public:
     ///
     /// \param obj the object to be tweened
     /// \param cb the function that does the tweening
-    /// \param totalTimeInSeconds the total time for the tween in seconds
-    Tween(std::weak_ptr<DrawableInterface> obj, OnUpdateCallbackType cb, float totalTimeInSeconds);
+    /// \param tweenDurationInSeconds the total time for the tween in seconds
+    Tween(std::weak_ptr<DrawableInterface> obj, float tweenDurationInSeconds);
 
     /// Destructor
     virtual ~Tween() = default;
@@ -111,8 +109,8 @@ private:
     bool m_repeat { false };
     std::weak_ptr<DrawableInterface> m_obj;
 
-    // update callback function. If the callback returns false, the tween shall be finished.
-    OnUpdateCallbackType m_tweenCallback;
+    virtual void doUpdateObject(
+        std::shared_ptr<DrawableInterface> const& sptr, float agePercent) const;
 
     AgePercentConversionFunctionType m_agePercentConversion { nullptr };
 

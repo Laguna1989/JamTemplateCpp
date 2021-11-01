@@ -8,23 +8,17 @@ namespace jt {
 
 class TweenRotation : public Tween {
 public:
-    // Tween rotation from valueStart to valueEnd of obj withtin time
+    // Tween rotation from valueStart to valueEnd of obj within time
     static Tween::Sptr create(
         std::weak_ptr<DrawableInterface> obj, float time, float valueStart, float valueEnd)
     {
         return std::make_shared<TweenRotation>(obj, time, valueStart, valueEnd);
     }
 
-    // Tween position from valueStart to valueEnd of obj withtin time
+    // Tween position from valueStart to valueEnd of obj within time
     TweenRotation(
         std::weak_ptr<DrawableInterface> obj, float time, float valueStart, float valueEnd)
-        : Tween { obj,
-            [this](auto sptr, auto agePercent) {
-                float rot = Lerp::linear(static_cast<float>(m_initialValue),
-                    static_cast<float>(m_finalValue), agePercent);
-                sptr->setRotation(rot);
-            },
-            time }
+        : Tween { obj, time }
     {
         m_initialValue = valueStart;
         m_finalValue = valueEnd;
@@ -33,6 +27,14 @@ public:
 private:
     float m_initialValue { 0.0f };
     float m_finalValue { 0.0f };
+
+    void doUpdateObject(
+        std::shared_ptr<DrawableInterface> const& sptr, float agePercent) const override
+    {
+        float const rot = Lerp::linear(
+            static_cast<float>(m_initialValue), static_cast<float>(m_finalValue), agePercent);
+        sptr->setRotation(rot);
+    }
 };
 } // namespace jt
 
