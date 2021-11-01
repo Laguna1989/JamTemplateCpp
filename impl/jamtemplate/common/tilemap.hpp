@@ -74,8 +74,8 @@ private:
 
     void checkIdBounds(tson::TileObject& tile) const;
 
-    void Tilemap::drawSingleTileLayer(std::shared_ptr<jt::renderTarget> const& rt,
-        Vector2 const& posOffset, tson::Layer& layer) const;
+    void drawSingleTileLayer(std::shared_ptr<jt::renderTarget> const& rt, Vector2 const& posOffset,
+        tson::Layer& layer) const;
     void parseObjects();
 };
 
