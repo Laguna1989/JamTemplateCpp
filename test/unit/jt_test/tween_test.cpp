@@ -63,7 +63,6 @@ TEST_F(TweenBaseTest, FinishCallbackIsInvoked)
 
 TEST_F(TweenBaseTest, GetRepeatReturnsFalseByDefault)
 {
-    int count { 0 };
     tb t(m_obj, 1.0f);
 
     ASSERT_FALSE(t.getRepeat());
@@ -71,7 +70,6 @@ TEST_F(TweenBaseTest, GetRepeatReturnsFalseByDefault)
 
 TEST_F(TweenBaseTest, GetRepeatReturnsTrueAfterSetRepeat)
 {
-    int count { 0 };
     tb t(m_obj, 1.0f);
 
     t.setRepeat(true);

@@ -12,8 +12,8 @@ public:
     {
     }
 
-    MOCK_METHOD(
-        void, doUpdateObject, (std::shared_ptr<jt::DrawableInterface> const&, float), (override));
+    MOCK_METHOD(void, doUpdateObject, (std::shared_ptr<jt::DrawableInterface> const&, float),
+        (const, override));
 };
 
 #endif
