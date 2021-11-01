@@ -18,5 +18,5 @@ TEST(InfoRectTest, ContainsStoredValues)
     ASSERT_EQ(r.type, type);
     ASSERT_EQ(r.position, pos);
     ASSERT_EQ(r.rotation, angle);
-    ASSERT_EQ(r.sizeDiagonal, size);
+    ASSERT_EQ(r.size, size);
 }

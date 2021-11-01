@@ -20,7 +20,7 @@ public:
     }
 
     /// Check if initialized
-    /// \return true if initalized, false otherwise
+    /// \return true if initialized, false otherwise
     bool isInitialized() const { return m_isInitialized; }
 
     /// Play the sound

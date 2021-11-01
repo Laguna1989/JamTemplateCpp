@@ -16,11 +16,10 @@ Tilemap::Tilemap(std::string const& path)
     m_map = parser.parse(path);
     if (m_map->getStatus() != tson::ParseStatus::OK) {
         std::cout << "tilemap json could not be parsed.\n";
-        throw std::logic_error { "tileson test could not be parsed." };
+        throw std::logic_error { "tilemap json could not be parsed." };
     }
 
     auto const tileset = m_map->getTilesets().at(0);
-    // // std::cout << "tileset image path: " << tileset.getImagePath() << std::endl;
     auto const columns = tileset.getColumns();
     auto const rows = tileset.getTileCount() / columns;
     auto const ts = tileset.getTileSize();
@@ -32,6 +31,20 @@ Tilemap::Tilemap(std::string const& path)
             tile.loadSprite(tilesetName, jt::Recti(i * ts.x, j * ts.y, ts.x, ts.y));
             tile.setIgnoreCamMovement(false);
             m_tileSprites.at(i + j * columns) = tile;
+        }
+    }
+
+    parseObjects();
+}
+
+void Tilemap::parseObjects()
+{
+    for (auto& layer : m_map->getLayers()) {
+        const std::string currentGroupName = layer.getName();
+        for (auto& obj : layer.getObjects()) {
+            InfoRect infoRect { Conversion::vec(obj.getPosition()), Conversion::vec(obj.getSize()),
+                obj.getRotation(), obj.getType(), obj.getName() };
+            m_objectGroups[currentGroupName].push_back(infoRect);
         }
     }
 }
@@ -53,39 +66,45 @@ void Tilemap::doDraw(std::shared_ptr<jt::renderTarget> const sptr) const
         if (layer.getType() != tson::LayerType::TileLayer) {
             continue;
         }
+        drawSingleTileLayer(sptr, posOffset, layer);
+    }
+}
 
-        for (auto& [pos, tile] : layer.getTileObjects()) {
-            checkIdBounds(tile);
+void Tilemap::drawSingleTileLayer(
+    std::shared_ptr<jt::renderTarget> const& rt, Vector2 const& posOffset, tson::Layer& layer) const
+{
+    for (auto& [pos, tile] : layer.getTileObjects()) {
+        this->checkIdBounds(tile);
 
-            auto const tilePos = Conversion::vec(tile.getPosition());
-            // optimization: don't draw tiles outside the game window
-            if (m_screenSizeHint.x() != 0 && m_screenSizeHint.y() != 0) {
-                jt::Vector2 const camOffset = getStaticCamOffset();
-                auto const px = tilePos.x();
-                auto const py = tilePos.y();
-                auto const tsx = tile.getTile()->getTileSize().x;
-                auto const tsy = tile.getTile()->getTileSize().y;
-                if (px + camOffset.x() + tsx < 0) {
-                    continue;
-                }
-                if (py + camOffset.y() + tsy < 0) {
-                    continue;
-                }
-                if (px + camOffset.x() >= m_screenSizeHint.x() + tsx) {
-                    continue;
-                }
-                if (py + camOffset.y() >= m_screenSizeHint.y() + tsy) {
-                    continue;
-                }
+        auto const tilePos = Conversion::vec(tile.getPosition());
+
+        // optimization: don't draw tiles outside the game window
+        if (this->m_screenSizeHint.x() != 0 && this->m_screenSizeHint.y() != 0) {
+            jt::Vector2 const camOffset = getStaticCamOffset();
+            auto const px = tilePos.x();
+            auto const py = tilePos.y();
+            auto const tsx = tile.getTile()->getTileSize().x;
+            auto const tsy = tile.getTile()->getTileSize().y;
+            if (px + camOffset.x() + tsx < 0) {
+                continue;
             }
-            auto const pixelPosForTile = tilePos + posOffset;
-            auto const id = tile.getTile()->getId() - 1U;
-            m_tileSprites.at(id).setPosition(jt::Vector2 {
-                pixelPosForTile.x() * m_scale.x(), pixelPosForTile.y() * m_scale.y() });
-            m_tileSprites.at(id).setScale(m_scale);
-            m_tileSprites.at(id).update(0.0f);
-            m_tileSprites.at(id).draw(sptr);
+            if (py + camOffset.y() + tsy < 0) {
+                continue;
+            }
+            if (px + camOffset.x() >= this->m_screenSizeHint.x() + tsx) {
+                continue;
+            }
+            if (py + camOffset.y() >= this->m_screenSizeHint.y() + tsy) {
+                continue;
+            }
         }
+        auto const pixelPosForTile = tilePos + posOffset;
+        auto const id = tile.getTile()->getId() - 1U;
+        this->m_tileSprites.at(id).setPosition(jt::Vector2 {
+            pixelPosForTile.x() * this->m_scale.x(), pixelPosForTile.y() * this->m_scale.y() });
+        this->m_tileSprites.at(id).setScale(this->m_scale);
+        this->m_tileSprites.at(id).update(0.0f);
+        this->m_tileSprites.at(id).draw(rt);
     }
 }
 
