@@ -1,11 +1,9 @@
 #include "tween_base.hpp"
 #include <cassert>
 
-jt::Tween::Tween(std::weak_ptr<DrawableInterface> obj, jt::Tween::OnUpdateCallbackType cb,
-    float totalTimeInSeconds)
-    : m_totalTime { totalTimeInSeconds }
+jt::Tween::Tween(std::weak_ptr<DrawableInterface> obj, float tweenDurationInSeconds)
+    : m_totalTime { tweenDurationInSeconds }
     , m_obj { obj }
-    , m_tweenCallback { cb }
 {
 }
 
@@ -81,7 +79,7 @@ void jt::Tween::doUpdate(float)
         finish();
         return;
     }
-    m_tweenCallback(m_obj.lock(), getConvertedAgePercent(getAgePercent()));
+    doUpdateObject(m_obj.lock(), getConvertedAgePercent(getAgePercent()));
 }
 
 void jt::Tween::handleCompleteCallbacks()
@@ -90,4 +88,8 @@ void jt::Tween::handleCompleteCallbacks()
         assert(cb);
         cb();
     }
+}
+void jt::Tween::doUpdateObject(
+    std::shared_ptr<DrawableInterface> const& /*sptr*/, float /*agePercent*/) const
+{
 }

@@ -5,9 +5,9 @@
 #include "random.hpp"
 #include "state_select.hpp"
 #include "timer.hpp"
-#include "tween_alpha.hpp"
-#include "tween_color.hpp"
-#include "tween_scale.hpp"
+#include "tweens/tween_alpha.hpp"
+#include "tweens/tween_color.hpp"
+#include "tweens/tween_scale.hpp"
 
 void StateExplosion::doInternalCreate()
 {
