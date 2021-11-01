@@ -3,11 +3,11 @@
 #include "mocks/mock_drawable.hpp"
 #include "mocks/mock_tween.hpp"
 #include "shape.hpp"
-#include "tween_alpha.hpp"
-#include "tween_color.hpp"
-#include "tween_position.hpp"
-#include "tween_rotation.hpp"
-#include "tween_scale.hpp"
+#include "tweens/tween_alpha.hpp"
+#include "tweens/tween_color.hpp"
+#include "tweens/tween_position.hpp"
+#include "tweens/tween_rotation.hpp"
+#include "tweens/tween_scale.hpp"
 #include "vector.hpp"
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>

@@ -2,7 +2,7 @@
 #define JAMTEMPLATE_UNITTEST_MOCKTWEEN_HPP_INCLUDEGUARD
 
 #include "drawable_interface.hpp"
-#include "tween_base.hpp"
+#include "tweens/tween_base.hpp"
 #include <gmock/gmock.h>
 
 class MockTween : public jt::Tween {

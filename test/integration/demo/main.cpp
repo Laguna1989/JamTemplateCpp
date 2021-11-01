@@ -7,6 +7,9 @@
 #include "state_select.hpp"
 #include <memory>
 
+#include <cstdlib>
+#include <stdlib.h>
+
 std::shared_ptr<jt::GameInterface> game;
 
 void gameloop()

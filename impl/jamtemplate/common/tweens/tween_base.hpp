@@ -109,6 +109,10 @@ private:
     bool m_repeat { false };
     std::weak_ptr<DrawableInterface> m_obj;
 
+    /// Function that does the actual tweening. Needs to be overwritten by derived classes
+    /// \param sptr the object to tween
+    /// \param agePercent value between 0 and 1 which indicates the percentage of the tween
+    /// progression.
     virtual void doUpdateObject(
         std::shared_ptr<DrawableInterface> const& sptr, float agePercent) const;
 

@@ -7,7 +7,7 @@
 #include "shape.hpp"
 #include "sprite.hpp"
 #include "state_menu.hpp"
-#include "tween_alpha.hpp"
+#include "tweens/tween_alpha.hpp"
 
 void StateGame::doInternalCreate()
 {

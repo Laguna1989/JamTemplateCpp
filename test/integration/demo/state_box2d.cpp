@@ -6,8 +6,8 @@
 #include "movement_object.hpp"
 #include "random.hpp"
 #include "state_select.hpp"
-#include "tween_rotation.hpp"
-#include "tween_scale.hpp"
+#include "tweens/tween_rotation.hpp"
+#include "tweens/tween_scale.hpp"
 
 void StateBox2d::doInternalCreate()
 {

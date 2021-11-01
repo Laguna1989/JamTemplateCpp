@@ -2,7 +2,7 @@
 #include "game_state.hpp"
 #include "shape.hpp"
 #include "system_helper.hpp"
-#include "tween_color.hpp"
+#include "tweens/tween_color.hpp"
 #include <benchmark/benchmark.h>
 #include <memory>
 #include <vector>

@@ -11,9 +11,9 @@
 #include "sprite.hpp"
 #include "state_game.hpp"
 #include "text.hpp"
-#include "tween_alpha.hpp"
-#include "tween_position.hpp"
-#include "tween_scale.hpp"
+#include "tweens/tween_alpha.hpp"
+#include "tweens/tween_position.hpp"
+#include "tweens/tween_scale.hpp"
 #include <algorithm>
 
 StateMenu::StateMenu() = default;

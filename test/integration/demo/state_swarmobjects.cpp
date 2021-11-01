@@ -5,7 +5,7 @@
 #include "math_helper.hpp"
 #include "state_select.hpp"
 #include "timer.hpp"
-#include "tween_alpha.hpp"
+#include "tweens/tween_alpha.hpp"
 #include <vector>
 
 void StateSwarmObjects::doInternalCreate()

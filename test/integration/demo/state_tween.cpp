@@ -3,7 +3,7 @@
 #include "game_interface.hpp"
 #include "input_manager.hpp"
 #include "state_select.hpp"
-#include "tween_alpha.hpp"
+#include "tweens/tween_alpha.hpp"
 #include <cstdint>
 
 void StateTween::doInternalCreate()

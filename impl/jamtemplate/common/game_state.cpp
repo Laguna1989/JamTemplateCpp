@@ -1,5 +1,5 @@
 ﻿#include "game_state.hpp"
-#include "tween_base.hpp"
+#include "tweens/tween_base.hpp"
 #include <algorithm>
 
 namespace jt {

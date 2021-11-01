@@ -90,6 +90,6 @@ void jt::Tween::handleCompleteCallbacks()
     }
 }
 void jt::Tween::doUpdateObject(
-    std::shared_ptr<DrawableInterface> const& sptr, float agePercent) const
+    std::shared_ptr<DrawableInterface> const& /*sptr*/, float /*agePercent*/) const
 {
 }
