@@ -8,7 +8,11 @@
 namespace jt {
 class SoundGroup : public SoundBase {
 public:
+    /// Constructor
     SoundGroup() = default;
+
+    /// Constructor
+    /// \param sounds list of filepaths to load
     explicit SoundGroup(std::vector<std::string> const& sounds);
 
 private:

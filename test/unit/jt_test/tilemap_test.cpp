@@ -17,11 +17,11 @@ TEST(TilemapTest, DefaultPosition)
     ASSERT_FLOAT_EQ(tm.getPosition().y(), 0.0f);
 }
 
-TEST(TilemapTest, JsonDoesNotContainObjectGroups)
+TEST(TilemapTest, JsonDoesContainObjectGroups)
 {
     jt::Tilemap tm { "assets/tileson_test.json" };
 
-    ASSERT_TRUE(tm.getObjectGroups().empty());
+    ASSERT_FALSE(tm.getObjectGroups().empty());
 }
 
 TEST(TilemapTest, UpdateAndDraw)
@@ -68,4 +68,54 @@ TEST(TilemapTest, GetLocalBoundsReturnsDefaultConstructedRect)
 {
     jt::Tilemap tm { "assets/tileson_test.json" };
     ASSERT_EQ(tm.getLocalBounds(), jt::Rect {});
+}
+
+TEST(TilemapObjectGroupsTest, CountIsZeroForNonExistingLayer)
+{
+    jt::Tilemap tm { "assets/tileson_test.json" };
+    ASSERT_EQ(tm.getObjectGroups().count("abcd"), 0);
+}
+
+TEST(TilemapObjectGroupsTest, CountIsOneForExistingObjectLayer)
+{
+    jt::Tilemap tm { "assets/tileson_test.json" };
+    ASSERT_EQ(tm.getObjectGroups().count("objects"), 1);
+}
+
+TEST(TilemapObjectGroupsTest, AmountOfObjectsInObjectGroupIsCorrect)
+{
+    jt::Tilemap tm { "assets/tileson_test.json" };
+    ASSERT_EQ(tm.getObjectGroups().at("objects").size(), 1U);
+}
+
+TEST(TilemapObjectGroupsTest, ObjectTypeIsParsedCorrectly)
+{
+    jt::Tilemap tm { "assets/tileson_test.json" };
+    ASSERT_EQ(tm.getObjectGroups().at("objects").at(0).type, "type1");
+}
+
+TEST(TilemapObjectGroupsTest, ObjectNameIsParsedCorrectly)
+{
+    jt::Tilemap tm { "assets/tileson_test.json" };
+    ASSERT_EQ(tm.getObjectGroups().at("objects").at(0).name, "object1");
+}
+
+TEST(TilemapObjectGroupsTest, ObjectPositionIsParsedCorrectly)
+{
+    jt::Tilemap tm { "assets/tileson_test.json" };
+    ASSERT_EQ(tm.getObjectGroups().at("objects").at(0).position.x(), 256);
+    ASSERT_EQ(tm.getObjectGroups().at("objects").at(0).position.y(), 128);
+}
+
+TEST(TilemapObjectGroupsTest, ObjectSizeIsParsedCorrectly)
+{
+    jt::Tilemap tm { "assets/tileson_test.json" };
+    ASSERT_EQ(tm.getObjectGroups().at("objects").at(0).size.x(), 64);
+    ASSERT_EQ(tm.getObjectGroups().at("objects").at(0).size.y(), 96);
+}
+
+TEST(TilemapObjectGroupsTest, ObjectRotationIsParsedCorrectly)
+{
+    jt::Tilemap tm { "assets/tileson_test.json" };
+    ASSERT_EQ(tm.getObjectGroups().at("objects").at(0).rotation, 45);
 }

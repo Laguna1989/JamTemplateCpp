@@ -9,27 +9,71 @@ by the different libs. The interface is conveyed through the
 namespace jt {
 class rectBase {
 public:
+    /// Get left of rect
+    /// \return left value
     virtual float left() const = 0;
+
+    /// top of rect
+    /// \return top value
     virtual float top() const = 0;
+
+    /// width of rect
+    /// \return width value
     virtual float width() const = 0;
+
+    /// height of rect
+    /// \return height value
     virtual float height() const = 0;
 
+    /// Get left of rect
+    /// \return left value
     virtual float& left() = 0;
+
+    /// top of rect
+    /// \return top value
     virtual float& top() = 0;
+
+    /// width of rect
+    /// \return width value
     virtual float& width() = 0;
+
+    /// height of rect
+    /// \return height value
     virtual float& height() = 0;
 };
 
 class rectiBase {
 public:
+    /// Get left of rect
+    /// \return left value
     virtual int left() const = 0;
+
+    /// top of rect
+    /// \return top value
     virtual int top() const = 0;
+
+    /// width of rect
+    /// \return width value
     virtual int width() const = 0;
+
+    /// height of rect
+    /// \return height value
     virtual int height() const = 0;
 
+    /// Get left of rect
+    /// \return left value
     virtual int& left() = 0;
+
+    /// top of rect
+    /// \return top value
     virtual int& top() = 0;
+
+    /// width of rect
+    /// \return width value
     virtual int& width() = 0;
+
+    /// height of rect
+    /// \return height value
     virtual int& height() = 0;
 };
 

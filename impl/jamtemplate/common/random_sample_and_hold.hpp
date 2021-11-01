@@ -3,10 +3,20 @@
 
 namespace jt {
 
+/// Random sample and hold
 class SampleAndHold {
 public:
+    /// Constructor
+    /// \param timerMu timer mu
+    /// \param timerSigma timer sigma
     SampleAndHold(float timerMu, float timerSigma);
+
+    /// Update the sample and hold
+    /// \param elapsed elapsed time in seconds
     void update(float elapsed);
+
+    /// Get the current random value
+    /// \return the random value
     float getFloat() const;
 
 private:

@@ -18,11 +18,15 @@ class Tilemap : public DrawableImpl {
 public:
     using Sptr = std::shared_ptr<Tilemap>;
 
+    /// Constructor
+    /// \param path path to the tilemap file
     explicit Tilemap(std::string const& path);
 
-    void doDraw(std::shared_ptr<jt::renderTarget> sptr) const override;
+    /// Get map size in Tiles
+    /// \return map size in tiles
+    jt::Vector2u getMapSizeInTiles();
 
-    void checkIdBounds(tson::TileObject& tile) const;
+    void doDraw(std::shared_ptr<jt::renderTarget> sptr) const override;
 
     void doDrawFlash(std::shared_ptr<jt::renderTarget> sptr) const override;
     void doDrawShadow(std::shared_ptr<jt::renderTarget> sptr) const override;
@@ -35,7 +39,6 @@ public:
     void setPosition(jt::Vector2 const& pos) override;
     jt::Vector2 getPosition() const override;
 
-    // sf::Transform const getTransform() const;
     jt::Rect getGlobalBounds() const override;
     jt::Rect getLocalBounds() const override;
 
@@ -45,8 +48,6 @@ public:
     void setScale(jt::Vector2 const& scale) override;
     jt::Vector2 getScale() const override;
 
-    jt::Vector2u getMapSizeInTiles();
-
     void setOrigin(jt::Vector2 const& origin) override;
     jt::Vector2 getOrigin() const override;
 
@@ -54,7 +55,8 @@ public:
 
     void setScreenSizeHint(jt::Vector2 const& hint);
 
-    // FIXME: Not ideal because it only supports rectangles.
+    /// get Object Groups from map
+    /// \return the object group
     std::map<std::string, std::vector<InfoRect>> getObjectGroups() { return m_objectGroups; };
     void toggleObjectGroupVisibility() { m_highlightObjectGroups = !m_highlightObjectGroups; };
 
@@ -71,6 +73,12 @@ private:
     Vector2 m_scale { 1.0f, 1.0f };
     Color m_color { jt::colors::White };
     Color m_flashColor { jt::colors::White };
+
+    void checkIdBounds(tson::TileObject& tile) const;
+
+    void Tilemap::drawSingleTileLayer(std::shared_ptr<jt::renderTarget> const& rt,
+        Vector2 const& posOffset, tson::Layer& layer) const;
+    void parseObjects();
 };
 
 } // namespace jt
