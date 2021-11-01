@@ -58,13 +58,11 @@ public:
     /// get Object Groups from map
     /// \return the object group
     std::map<std::string, std::vector<InfoRect>> getObjectGroups() { return m_objectGroups; };
-    void toggleObjectGroupVisibility() { m_highlightObjectGroups = !m_highlightObjectGroups; };
 
 private:
     std::unique_ptr<tson::Map> m_map { nullptr };
     // Map from object layer name to vector of objects, all rectangular.
     std::map<std::string, std::vector<InfoRect>> m_objectGroups {};
-    bool m_highlightObjectGroups { false };
     mutable std::vector<jt::Sprite> m_tileSprites {};
 
     Vector2 m_position { 0.0f, 0.0f };
