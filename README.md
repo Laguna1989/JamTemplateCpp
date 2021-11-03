@@ -11,7 +11,7 @@ Some games created with this JamTemplate are
 
 * [Quasar Rush](https://runvs.io/Games/quasarrush) (Native & Web, A Game By Its Cover 2021)
 * [Space Turtles](https://runvs.io/Games/spaceturtles) (Native, MultiplayerKajam 2021)
-* [Tricky Tracktor](https://runvs.io/Games/trickytractor) (Native, FrankenGameJam 2020)
+* [Tricky Tractor](https://runvs.io/Games/trickytractor) (Native, FrankenGameJam 2020)
 * [Burning Glyphs](https://runvs.io/Games/burningglyphs) (Web, 7DFPS 2020)
 * [Grounded](https://runvs.io/Games/grounded) (Native, FrankenGameJam 2019)
 
@@ -21,11 +21,10 @@ and some more at [my game portfolio](https://runvs.io/Games).
 
 ### Windows & Visual studio (code)
 
-1. go to ext folder and extract sfml-zip
-2. create build directory "build" parallel to src
-3. open command line (win+r "cmd")
-4. navigate to the just created build folder
-5. type `cmake ../`
+1. create build directory `build` at root level
+2. open command line (win+r `cmd`)
+3. navigate to the just created build folder
+4. type `cmake ../`
 
 ### Clion
 
@@ -77,8 +76,9 @@ All of those options can be set to ON or OFF via the cmake commandline
 * `ENABLE_COVERAGE` - Compile with the flags set for the coverage run
 * `ENABLE_AUDIO_TESTS` - Some of the tests rely on a working audio setup, which seemingly cannot be faked easily. This
   switch disables those sepcific tests, in case no audio is available on the respective machine.
+* `ENABLE_CLANG_TIDY` - Enable clang tidy checker
 
-e.g. calling `cmake ../ -DENABLE_UNITTESTS=ON -DENABLE_STRESSTEST=ON`
+e.g. calling `cmake ../ -DENABLE_UNITTESTS=ON -DENABLE_DEMOS=ON`
 
 ## Code Coverage
 

@@ -95,7 +95,6 @@ jobs:
           mkdir ${{github.workspace}}/release
           mkdir ${{github.workspace}}/release/release_web
           cp ${{github.workspace}}/index.html ${{github.workspace}}/release/release_web/
-          cp ${{github.workspace}}/reset.css ${{github.workspace}}/release/release_web/
           cp ${{github.workspace}}/build/impl/game/*.data ${{github.workspace}}/release/release_web/
           cp ${{github.workspace}}/build/impl/game/*.js ${{github.workspace}}/release/release_web/
           cp ${{github.workspace}}/build/impl/game/*.wasm ${{github.workspace}}/release/release_web/
