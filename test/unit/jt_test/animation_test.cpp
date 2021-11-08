@@ -80,6 +80,14 @@ TEST_F(AnimationTestWithAnimation, PlayInvalidAnimationWillRaiseInvalidArgument)
     ASSERT_THROW(a.play("test1234_invalid"), std::invalid_argument);
 }
 
+TEST_F(AnimationTestWithAnimation, IsLoopingByDefault) { ASSERT_TRUE(a.getIsLooping()); }
+
+TEST_F(AnimationTestWithAnimation, IsNotLoopingAfterSetLooping)
+{
+    a.setLooping(false);
+    ASSERT_FALSE(a.getIsLooping());
+}
+
 class AnimationPlayingTest : public ::testing::Test {
 protected:
     jt::Animation a;
@@ -115,4 +123,47 @@ TEST_F(AnimationPlayingTest, AnimationCanBeFlashed)
     a.flash(1.0f);
     a.update(0.1f);
     a.draw(nullptr);
+}
+
+TEST_F(AnimationPlayingTest, AnimationStartsAtFrameZero)
+{
+    ASSERT_EQ(a.getCurrentAnimationFrameIndex(), 0);
+}
+
+TEST_F(AnimationPlayingTest, IndexIsZeroIfFirstFrameIsNotPassed)
+{
+    a.update(0.99f);
+    ASSERT_EQ(a.getCurrentAnimationFrameIndex(), 0);
+}
+
+TEST_F(AnimationPlayingTest, IndexIsIncreasedAfterFrameTimePassed)
+{
+    a.update(1.01f);
+    ASSERT_EQ(a.getCurrentAnimationFrameIndex(), 1);
+}
+
+TEST_F(AnimationPlayingTest, IndexIsIncreasedAfterFrameTimePassedInOneCall)
+{
+    a.update(2.01f);
+    ASSERT_EQ(a.getCurrentAnimationFrameIndex(), 2);
+}
+
+TEST_F(AnimationPlayingTest, IndexIsIncreasedAfterFrameTimePassedTwoCalls)
+{
+    a.update(1.01f);
+    a.update(1.01f);
+    ASSERT_EQ(a.getCurrentAnimationFrameIndex(), 2);
+}
+
+TEST_F(AnimationPlayingTest, IndexIsWrappedAfterCompleteAnimationWhenLooping)
+{
+    a.update(5.1f);
+    ASSERT_EQ(a.getCurrentAnimationFrameIndex(), 0);
+}
+
+TEST_F(AnimationPlayingTest, IndexIsNotWrappedAfterCompleteAnimationWhenNotLooping)
+{
+    a.setLooping(false);
+    a.update(5.1f);
+    ASSERT_EQ(a.getCurrentAnimationFrameIndex(), 4);
 }

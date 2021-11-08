@@ -43,6 +43,16 @@ public:
     /// continue if already playing
     void play(std::string const& animationName, size_t startFrameIndex = 0, bool restart = false);
 
+    /// Set animation to looping
+    /// true by default.
+    /// If an animation is not looping, it will remain at the last frame of the animation.
+    /// \param isLooping value
+    void setLooping(bool isLooping);
+
+    /// Get looping
+    /// \return true if animation is looping, false otherwise
+    bool getIsLooping() const;
+
     void setColor(jt::Color const& col) override;
     jt::Color getColor() const override;
 
@@ -86,6 +96,8 @@ public:
     /// \return the name of the currently playing animation
     std::string getCurrentAnimationName() const;
 
+    std::size_t getCurrentAnimationFrameIndex() const;
+
 private:
     mutable AnimationMapType m_frames {};
     std::map<std::string, float> m_time {};
@@ -93,11 +105,13 @@ private:
     // which animation is playing atm?
     std::string m_currentAnimName { "" };
     // which frame of the animation is currently displayed?
-    size_t m_currentIdx { 0 };
+    std::size_t m_currentIdx { 0 };
 
     jt::Vector2 m_position { 0.0f, 0.0f };
 
     float m_frameTime { 0.0f };
+
+    bool m_isLooping { true };
 
     void doDrawShadow(std::shared_ptr<jt::renderTarget> const sptr) const override;
     void doDraw(std::shared_ptr<jt::renderTarget> const sptr) const override;
