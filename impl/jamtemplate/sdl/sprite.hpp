@@ -17,6 +17,7 @@ public:
 
     void loadSprite(std::string const& fileName);
     void loadSprite(std::string const& fileName, jt::Recti const& rect);
+    void fromTexture(std::shared_ptr<SDL_Texture> txt);
 
     void setPosition(jt::Vector2 const& pos) override;
     jt::Vector2 getPosition() const override;

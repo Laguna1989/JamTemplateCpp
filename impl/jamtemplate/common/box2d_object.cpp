@@ -1,3 +1,6 @@
+#ifndef GUARD_JAMTEMPLATE_BOX2DOBJECT_HPP_GUARD
+#define GUARD_JAMTEMPLATE_BOX2DOBJECT_HPP_GUARD
+
 #include "box2d_object.hpp"
 
 namespace jt {
@@ -32,3 +35,5 @@ void Box2DObject::doDestroy() { m_world->destroyBody(m_body); }
 
 void Box2DObject::setB2Body(b2Body* body) { m_body = body; }
 } // namespace jt
+
+#endif

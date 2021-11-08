@@ -1,7 +1,6 @@
-file(GLOB GAMELIBFILES ${CMAKE_CURRENT_SOURCE_DIR}/*)
-file(GLOB HUDFILES ../gamelib/hud/*)
+file(GLOB_RECURSE GAMELIBFILES ${CMAKE_CURRENT_SOURCE_DIR}/*)
 
-add_library(GameLib ${GAMELIBFILES} ${HUDFILES})
+add_library(GameLib ${GAMELIBFILES} )
 if (ENABLE_WEB)
     set(CMAKE_EXECUTABLE_SUFFIX ".html")
 endif ()

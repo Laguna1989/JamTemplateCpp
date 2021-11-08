@@ -22,6 +22,18 @@ void Sprite::loadSprite(std::string const& fileName)
     m_textFlash = TextureManager::get(TextureManager::getFlashName(fileName));
 }
 
+void Sprite::fromTexture(std::shared_ptr<SDL_Texture> txt)
+{
+    m_text = txt;
+    m_textFlash = txt;
+    m_fileName = "";
+    int w { 0 };
+    int h { 0 };
+    SDL_QueryTexture(
+        m_text.get(), nullptr, nullptr, &w, &h); // get the width and height of the texture
+    m_sourceRect = jt::Recti { 0, 0, w, h };
+}
+
 void Sprite::loadSprite(std::string const& fileName, jt::Recti const& rect)
 {
     m_text = TextureManager::get(fileName);

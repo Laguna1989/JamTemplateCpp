@@ -212,7 +212,11 @@ void Animation::doUpdate(float elapsed)
         m_frameTime -= m_time[m_currentAnimName];
         m_currentIdx++;
         if (m_currentIdx >= m_frames.at(m_currentAnimName).size()) {
-            m_currentIdx = 0;
+            if (m_isLooping) {
+                m_currentIdx = 0;
+            } else {
+                m_currentIdx = m_frames.at(m_currentAnimName).size() - 1;
+            }
         }
     }
     // set position
@@ -220,6 +224,7 @@ void Animation::doUpdate(float elapsed)
         for (auto& spr : kvp.second) {
             spr->setPosition(m_position + getShakeOffset() + getOffset());
             spr->update(elapsed);
+            spr->setIgnoreCamMovement(DrawableImpl::getIgnoreCamMovement());
         }
     }
 }
@@ -242,5 +247,9 @@ std::size_t Animation::getNumberOfFramesInCurrentAnimation() const
     return m_frames.at(m_currentAnimName).size();
 }
 std::string Animation::getCurrentAnimationName() const { return m_currentAnimName; }
+
+bool Animation::getIsLooping() const { return m_isLooping; }
+void Animation::setLooping(bool isLooping) { m_isLooping = isLooping; }
+std::size_t Animation::getCurrentAnimationFrameIndex() const { return m_currentIdx; }
 
 } // namespace jt
