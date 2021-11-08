@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1635957898528,
+  "lastUpdate": 1636385990963,
   "repoUrl": "https://github.com/Laguna1989/JamTemplateCpp",
   "entries": {
     "Benchmark": [
@@ -792,6 +792,42 @@ window.BENCHMARK_DATA = {
             "value": 2.9497769789916153,
             "unit": "ms/iter",
             "extra": "iterations: 238\ncpu: 2.9496384033613445 ms\nthreads: 1"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "laguna_1989@gmx.net",
+            "name": "Laguna1989",
+            "username": "Laguna1989"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "b70170cd3553ee8936b9a94e48ee760dc358e59f",
+          "message": "Merge pull request #80 from Laguna1989/FEATURE_ImprovementsFromFGJ2021\n\nAdd improvements from FrankenGameJam2021",
+          "timestamp": "2021-11-08T16:38:22+01:00",
+          "tree_id": "e4a80dcbd436bb9d243bb23c327fe831455252d6",
+          "url": "https://github.com/Laguna1989/JamTemplateCpp/commit/b70170cd3553ee8936b9a94e48ee760dc358e59f"
+        },
+        "date": 1636385989837,
+        "tool": "googlecpp",
+        "benches": [
+          {
+            "name": "BM_StartGame",
+            "value": 0.0009971454979936616,
+            "unit": "ms/iter",
+            "extra": "iterations: 701776\ncpu: 0.0009968980258658034 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GamestateWithTweeningShapes",
+            "value": 2.4599472631579324,
+            "unit": "ms/iter",
+            "extra": "iterations: 285\ncpu: 2.4597993298245617 ms\nthreads: 1"
           }
         ]
       }
