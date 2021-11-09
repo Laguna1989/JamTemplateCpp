@@ -5,17 +5,11 @@
 #include "game_state.hpp"
 #include "shape.hpp"
 #include "vector.hpp"
-#include <Box2D/Box2D.h>
+#include <box2d_world_interface.hpp>
 
 class StateBox2d : public jt::GameState {
-public:
-    StateBox2d()
-        : m_world { std::make_shared<b2World>(b2Vec2 { 0, 100.0f }) }
-    {
-    }
-
 private:
-    std::shared_ptr<b2World> m_world { nullptr };
+    std::shared_ptr<jt::Box2DWorldInterface> m_world { nullptr };
 
     jt::Bar::Sptr m_bar1;
     jt::Bar::Sptr m_bar2;

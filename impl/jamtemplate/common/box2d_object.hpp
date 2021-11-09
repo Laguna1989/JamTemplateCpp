@@ -1,7 +1,7 @@
 ﻿#ifndef GUARD_JAMTEMPLATE_BOX2DOBJECT_HPP_INCLUDEGUARD
 #define GUARD_JAMTEMPLATE_BOX2DOBJECT_HPP_INCLUDEGUARD
 
-#include "box2d_wrapper.hpp"
+#include "box2d_world_interface.hpp"
 #include "conversions.hpp"
 #include "game_object.hpp"
 #include "vector.hpp"
@@ -51,11 +51,7 @@ private:
     // do never call delete on this
     b2Body* m_body { nullptr };
 
-    std::shared_ptr<Box2DWorldInterface> m_world { nullptr };
-
-    void doCreate() override { }
-    void doUpdate(float const /*elapsed*/) override { }
-    void doDraw() const override { }
+    std::weak_ptr<Box2DWorldInterface> m_world;
 
     void doDestroy() override;
 

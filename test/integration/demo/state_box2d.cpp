@@ -1,4 +1,5 @@
 ﻿#include "state_box2d.hpp"
+#include "box2d_world_impl.hpp"
 #include "conversions.hpp"
 #include "game_interface.hpp"
 #include "input_manager.hpp"
@@ -11,6 +12,7 @@
 
 void StateBox2d::doInternalCreate()
 {
+    m_world = std::make_shared<jt::Box2DWorldImpl>(jt::Vector2 { 0.0f, 100.0f });
     CreateWalls();
 
     CreatePlayer();
@@ -28,7 +30,7 @@ void StateBox2d::doInternalUpdate(float const elapsed)
     int32 const velocityIterations = 6;
     int32 const positionIterations = 2;
 
-    m_world->Step(elapsed, velocityIterations, positionIterations);
+    m_world->step(elapsed, velocityIterations, positionIterations);
 
     updateObjects(elapsed);
 

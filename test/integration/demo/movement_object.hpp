@@ -11,8 +11,8 @@
 class MovementObject : public jt::Box2DObject {
 public:
     using Sptr = std::shared_ptr<MovementObject>;
-    MovementObject(std::shared_ptr<b2World> world, const b2BodyDef* def)
-        : Box2DObject { std::make_shared<jt::Box2DWorldWrapper>(world), def }
+    MovementObject(std::shared_ptr<jt::Box2DWorldInterface> world, const b2BodyDef* def)
+        : Box2DObject { world, def }
     {
         m_animation = std::make_shared<jt::Animation>();
         b2FixtureDef fixtureDef;
