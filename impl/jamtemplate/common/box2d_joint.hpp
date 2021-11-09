@@ -1,5 +1,5 @@
-#ifndef GUARD_JAMTEMPLATE_BOX2DOBJECT_HPP_INCLUDEGUARD
-#define GUARD_JAMTEMPLATE_BOX2DOBJECT_HPP_INCLUDEGUARD
+#ifndef GUARD_JAMTEMPLATE_BOX2DJOINT_HPP_INCLUDEGUARD
+#define GUARD_JAMTEMPLATE_BOX2DJOINT_HPP_INCLUDEGUARD
 
 #include "box2d_world_interface.hpp"
 #include "conversions.hpp"
@@ -36,5 +36,7 @@ private:
 
     void setB2Joint(b2Joint* body);
 };
-#endif
+
 } // namespace jt
+
+#endif
