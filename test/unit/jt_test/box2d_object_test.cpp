@@ -1,38 +1,33 @@
 ﻿#include "box2d_object.hpp"
+#include "mocks/box2d_world_mock.hpp"
 #include "mocks/mock_game.hpp"
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 
 using namespace ::testing;
 
-class Box2DWorldMock : public jt::Box2DWorldInterface {
+class Box2dObjectTest : public ::testing::Test {
 public:
-    MOCK_METHOD(b2Body*, createBody, (const b2BodyDef*), (override));
-    MOCK_METHOD(void, destroyBody, (b2Body*), (override));
-    MOCK_METHOD(b2Joint*, createJoint, (const b2JointDef*), (override));
-    MOCK_METHOD(void, destroyJoint, (b2Joint*), (override));
-    MOCK_METHOD(void, step, (float, int, int), (override));
-    MOCK_METHOD(void, setContactListener, (std::shared_ptr<b2ContactListener>), (override));
+    std::shared_ptr<Box2DWorldMock> m_mockWorld;
+
+    void SetUp() override { m_mockWorld = std::make_shared<NiceMock<Box2DWorldMock>>(); }
 };
 
-TEST(Box2DObjectTest, ConstructorCallsCreateBody)
+TEST_F(Box2dObjectTest, ConstructorCallsCreateBody)
 {
-    auto mock = std::make_shared<Box2DWorldMock>();
-    EXPECT_CALL(*mock, createBody(_));
-    jt::Box2DObject obj { mock, nullptr };
+    EXPECT_CALL(*m_mockWorld, createBody(_));
+    jt::Box2DObject obj { m_mockWorld, nullptr };
 }
 
-TEST(Box2DObjectTest, getBodyReturnsStoredPointer)
+TEST_F(Box2dObjectTest, GetBodyReturnsStoredPointer)
 {
-    auto mock = std::make_shared<::testing::NiceMock<Box2DWorldMock>>();
-    jt::Box2DObject obj { mock, nullptr };
+    jt::Box2DObject obj { m_mockWorld, nullptr };
     EXPECT_EQ(obj.getB2Body(), nullptr);
 }
 
-TEST(Box2DObjectTest, create)
+TEST_F(Box2dObjectTest, Create)
 {
-    auto mock = std::make_shared<::testing::NiceMock<Box2DWorldMock>>();
-    jt::Box2DObject obj { mock, nullptr };
+    jt::Box2DObject obj { m_mockWorld, nullptr };
     auto g = std::make_shared<MockGame>();
 
     obj.setGameInstance(g);
@@ -40,27 +35,24 @@ TEST(Box2DObjectTest, create)
     SUCCEED();
 }
 
-TEST(Box2DObjectTest, update)
+TEST_F(Box2dObjectTest, Update)
 {
-    auto mock = std::make_shared<::testing::NiceMock<Box2DWorldMock>>();
-    jt::Box2DObject obj { mock, nullptr };
+    jt::Box2DObject obj { m_mockWorld, nullptr };
     obj.update(1.0f);
     SUCCEED();
 }
 
-TEST(Box2DObjectTest, draw)
+TEST_F(Box2dObjectTest, Draw)
 {
-    auto mock = std::make_shared<::testing::NiceMock<Box2DWorldMock>>();
-    jt::Box2DObject obj { mock, nullptr };
+    jt::Box2DObject obj { m_mockWorld, nullptr };
     obj.draw();
     SUCCEED();
 }
 
-TEST(Box2DObjectTest, DestroyCallsDestroyBodyOnWorld)
+TEST_F(Box2dObjectTest, DestroyCallsDestroyBodyOnWorld)
 {
-    auto mock = std::make_shared<::testing::NiceMock<Box2DWorldMock>>();
-    jt::Box2DObject obj { mock, nullptr };
+    jt::Box2DObject obj { m_mockWorld, nullptr };
 
-    EXPECT_CALL(*mock, destroyBody(_));
+    EXPECT_CALL(*m_mockWorld, destroyBody(_));
     obj.destroy();
 }

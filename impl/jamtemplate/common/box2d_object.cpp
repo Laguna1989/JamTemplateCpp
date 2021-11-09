@@ -31,9 +31,16 @@ float Box2DObject::getRotation() const { return m_body->GetAngle(); }
 
 b2Body* Box2DObject::getB2Body() { return m_body; }
 
-void Box2DObject::doDestroy() { m_world->destroyBody(m_body); }
-
 void Box2DObject::setB2Body(b2Body* body) { m_body = body; }
+
+void Box2DObject::doDestroy()
+{
+    if (m_world.expired()) {
+        return;
+    }
+    m_world.lock()->destroyBody(m_body);
+}
+
 } // namespace jt
 
 #endif

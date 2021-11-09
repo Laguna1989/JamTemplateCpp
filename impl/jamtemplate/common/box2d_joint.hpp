@@ -1,8 +1,7 @@
 #ifndef GUARD_JAMTEMPLATE_BOX2DOBJECT_HPP_INCLUDEGUARD
 #define GUARD_JAMTEMPLATE_BOX2DOBJECT_HPP_INCLUDEGUARD
 
-#include "game_object.hpp"
-#include "box2d_wrapper.hpp"
+#include "box2d_world_interface.hpp"
 #include "conversions.hpp"
 #include "game_object.hpp"
 #include "vector.hpp"
@@ -19,20 +18,19 @@ public:
 
     /// Constructor
     ///
-    /// \param world shared pointer to the world
+    /// \param world shared pointer to the world. Only a weak pointer to the world will be saved
+    /// here.
     /// \param def raw pointer to a joint definition
     Box2DJoint(std::shared_ptr<Box2DWorldInterface> world, const b2JointDef* def);
+
+    b2Joint* getB2Joint() const;
 
 private:
     // this pointer is NOT owning!
     // do never call delete on this
     b2Joint* m_joint { nullptr };
 
-    std::shared_ptr<Box2DWorldInterface> m_world { nullptr };
-
-    void doCreate() override { }
-    void doUpdate(float const /*elapsed*/) override { }
-    void doDraw() const override { }
+    std::weak_ptr<Box2DWorldInterface> m_world;
 
     void doDestroy() override;
 

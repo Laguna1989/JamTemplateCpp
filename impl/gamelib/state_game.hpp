@@ -1,6 +1,7 @@
 ﻿#ifndef GAME_STATE_GAME_HPP_INCLUDEGUARD
 #define GAME_STATE_GAME_HPP_INCLUDEGUARD
 
+#include "box2d_world_interface.hpp"
 #include "game_state.hpp"
 #include <memory>
 #include <vector>
@@ -10,7 +11,6 @@ namespace jt {
 class Shape;
 class Sprite;
 } // namespace jt
-class b2World;
 
 class Hud;
 
@@ -21,7 +21,7 @@ private:
     std::shared_ptr<jt::Shape> m_overlay;
     std::shared_ptr<jt::Sprite> m_vignette;
     std::shared_ptr<Hud> m_hud;
-    std::shared_ptr<b2World> m_world { nullptr };
+    std::shared_ptr<jt::Box2DWorldInterface> m_world { nullptr };
 
     bool m_running { false };
     bool m_hasEnded { false };
