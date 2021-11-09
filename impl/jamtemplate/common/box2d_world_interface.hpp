@@ -22,26 +22,23 @@ public:
     /// \param body pointer to the body to be destroyed
     virtual void destroyBody(b2Body* body) = 0;
 
-    /// <summary>
     /// Create a Box2D joint
-    /// </summary>
-    /// <param name="defintion">The definition describing the joint</param>
-    /// <returns>The created joint</returns>
+    /// \param defintion The definition describing the joint
+    /// \return The created joint
     virtual b2Joint* createJoint(const b2JointDef* defintion) = 0;
 
-    /// <summary>
     /// Destory a Box2D joint
-    /// </summary>
-    /// <param name="joint">Pointer to the joint to be destroyed</param>
+    /// \param joint Pointer to the joint to be destroyed
     virtual void destroyJoint(b2Joint* joint) = 0;
 
-    /// <summary>
     /// Sets the contact listener for this world. Use this to react to collisions.
-    /// </summary>
-    /// <param name="listener">The contact listener to wake up when things collide in the
-    /// world.</param>
+    /// \param listener The contact listener to wake up when things collide in the world
     virtual void setContactListener(std::shared_ptr<b2ContactListener> listener) = 0;
 
+    /// step physics simulation forward
+    /// \param elapsed elapsed time in seconds
+    /// \param velocityIterations number of velocity iterations
+    /// \param positionIterations number of position iterations
     virtual void step(float elapsed, int velocityIterations, int positionIterations) = 0;
 
     /// Destructor
