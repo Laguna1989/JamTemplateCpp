@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1636385990963,
+  "lastUpdate": 1636487383835,
   "repoUrl": "https://github.com/Laguna1989/JamTemplateCpp",
   "entries": {
     "Benchmark": [
@@ -828,6 +828,42 @@ window.BENCHMARK_DATA = {
             "value": 2.4599472631579324,
             "unit": "ms/iter",
             "extra": "iterations: 285\ncpu: 2.4597993298245617 ms\nthreads: 1"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "laguna_1989@gmx.net",
+            "name": "Laguna1989",
+            "username": "Laguna1989"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "bff1e4f7706f1f1412e005d266c79b177586d6fd",
+          "message": "Merge pull request #81 from Laguna1989/FEATURE_Box2dWrappers\n\nAdd box2d Wrapper classes",
+          "timestamp": "2021-11-09T20:47:25+01:00",
+          "tree_id": "332d1743947aa3612048ee67bf21628d55f38d82",
+          "url": "https://github.com/Laguna1989/JamTemplateCpp/commit/bff1e4f7706f1f1412e005d266c79b177586d6fd"
+        },
+        "date": 1636487382803,
+        "tool": "googlecpp",
+        "benches": [
+          {
+            "name": "BM_StartGame",
+            "value": 0.0009984815779897833,
+            "unit": "ms/iter",
+            "extra": "iterations: 700765\ncpu: 0.0009983874080469204 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GamestateWithTweeningShapes",
+            "value": 2.4622370947368886,
+            "unit": "ms/iter",
+            "extra": "iterations: 285\ncpu: 2.4620900105263157 ms\nthreads: 1"
           }
         ]
       }
