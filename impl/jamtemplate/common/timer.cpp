@@ -5,34 +5,17 @@
 namespace jt {
 
 Timer::Timer(float timeInSeconds, Timer::CallbackType cb, int r)
-    : m_totalTime { timeInSeconds }
-    , m_callback { std::move(cb) }
-    , m_repeat { r }
 {
-    if (!m_callback) {
-        throw std::invalid_argument("Timer callback must be valid!");
-    }
+    m_repeat = r;
+    setTotalTime(timeInSeconds);
+    setCallback(cb);
 }
 void Timer::doUpdate(float const elapsed)
 {
     if (!isAlive()) {
         return;
     }
-    m_currentTime += elapsed;
-    if (elapsed >= m_totalTime) {
-        int const count = static_cast<int>(elapsed / m_totalTime);
-        for (int i = 0; i != count; ++i) {
-            invokeCallback();
-            if (!isAlive()) {
-                break;
-            }
-        }
-    } else {
-        if (m_currentTime >= m_totalTime) {
-            m_currentTime -= m_totalTime;
-            invokeCallback();
-        }
-    }
+    updateTimer(elapsed);
 }
 
 void Timer::invokeCallback()
@@ -60,6 +43,34 @@ void Timer::finish()
     m_currentTime = m_totalTime;
     invokeCallback();
     kill();
+}
+
+void Timer::updateTimer(float elapsed)
+{
+    m_currentTime += elapsed;
+    if (elapsed >= m_totalTime) {
+        int const count = static_cast<int>(elapsed / m_totalTime);
+        for (int i = 0; i != count; ++i) {
+            invokeCallback();
+            if (!isAlive()) {
+                break;
+            }
+        }
+    } else {
+        if (m_currentTime >= m_totalTime) {
+            m_currentTime -= m_totalTime;
+            invokeCallback();
+        }
+    }
+}
+
+void Timer::setTotalTime(float totalTime) { m_totalTime = totalTime; }
+void Timer::setCallback(TimerInterface::CallbackType cb)
+{
+    if (!cb) {
+        throw std::invalid_argument("Timer callback must be valid!");
+    }
+    m_callback = cb;
 }
 
 } // namespace jt
