@@ -135,3 +135,110 @@ TEST(TimerTest, InvalidCallback)
     auto const lambda = []() { Timer const t { 2.5f, nullptr }; };
     EXPECT_THROW(lambda(), std::invalid_argument);
 }
+
+TEST(TimerTest, InitialTimeLeftIsCompleteTime)
+{
+    auto const time = 10.0f;
+    Timer t { time, []() {} };
+    ASSERT_EQ(t.getRemainingTime(), time);
+}
+
+TEST(TimerTest, TimeLeftIsAfterUpdate)
+{
+    auto const time = 10.0f;
+    Timer t { time, []() {} };
+    t.update(5.0f);
+    ASSERT_EQ(t.getRemainingTime(), 5.0f);
+}
+
+TEST(TimerTest, CancelDoesNotInvokeCallback)
+{
+    bool callbackInvoked { false };
+    Timer t { 10.0f, [&callbackInvoked]() { callbackInvoked = true; } };
+    t.cancel();
+    ASSERT_FALSE(callbackInvoked);
+}
+
+TEST(TimerTest, CancelDoesKillTimer)
+{
+    Timer t { 10.0f, []() {} };
+    t.cancel();
+    ASSERT_FALSE(t.isAlive());
+}
+
+TEST(TimerTest, CancelDoesSetCurrentTimeToTotalTime)
+{
+    Timer t { 10.0f, []() {} };
+    t.cancel();
+    ASSERT_EQ(t.getCurrentTime(), t.getTotalTime());
+}
+
+TEST(TimerTest, CancelDoesSetTimeLeftToZero)
+{
+    Timer t { 10.0f, []() {} };
+    t.cancel();
+    ASSERT_EQ(t.getRemainingTime(), 0.0f);
+}
+
+TEST(TimerTest, UpdateAfterCancelDoesNotTriggerCallback)
+{
+    bool callbackInvoked { false };
+    Timer t { 10.0f, [&callbackInvoked]() { callbackInvoked = true; } };
+    t.cancel();
+    t.update(100.0f);
+    ASSERT_FALSE(callbackInvoked);
+}
+
+TEST(TimerTest, UpdateAfterCancelDoesNotIncrementTimer)
+{
+    Timer t { 10.0f, []() {} };
+    t.cancel();
+    t.update(100.0f);
+    ASSERT_EQ(t.getCurrentTime(), t.getTotalTime());
+}
+
+TEST(TimerTest, FinishDoesInvokeCallback)
+{
+    bool callbackInvoked { false };
+    Timer t { 10.0f, [&callbackInvoked]() { callbackInvoked = true; } };
+    t.finish();
+    ASSERT_TRUE(callbackInvoked);
+}
+
+TEST(TimerTest, FinishDoesKillTimer)
+{
+    Timer t { 10.0f, []() {} };
+    t.cancel();
+    ASSERT_FALSE(t.isAlive());
+}
+
+TEST(TimerTest, FinishDoesSetCurrentTimeToTotalTime)
+{
+    Timer t { 10.0f, []() {} };
+    t.finish();
+    ASSERT_EQ(t.getCurrentTime(), t.getTotalTime());
+}
+
+TEST(TimerTest, FinishDoesSetTimeLeftToZero)
+{
+    Timer t { 10.0f, []() {} };
+    t.finish();
+    ASSERT_EQ(t.getRemainingTime(), 0.0f);
+}
+
+TEST(TimerTest, UpdateAfterFinishDowsNotTriggerCallback)
+{
+    int invocation_count { 0 };
+    Timer t { 10.0f, [&invocation_count]() { invocation_count++; } };
+    t.finish();
+    t.update(100.0f);
+    ASSERT_EQ(invocation_count, 1);
+}
+
+TEST(TimerTest, UpdateAfterFinishDoesNotIncrementTimer)
+{
+    Timer t { 10.0f, []() {} };
+    t.finish();
+    t.update(100.0f);
+    ASSERT_EQ(t.getCurrentTime(), t.getTotalTime());
+}

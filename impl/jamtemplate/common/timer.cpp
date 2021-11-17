@@ -47,5 +47,19 @@ void Timer::invokeCallback()
 }
 float Timer::getTotalTime() const { return m_totalTime; }
 float Timer::getCurrentTime() const { return m_currentTime; }
+float Timer::getRemainingTime() { return m_totalTime - m_currentTime; }
+
+void Timer::cancel()
+{
+    m_currentTime = m_totalTime;
+    kill();
+}
+
+void Timer::finish()
+{
+    m_currentTime = m_totalTime;
+    invokeCallback();
+    kill();
+}
 
 } // namespace jt

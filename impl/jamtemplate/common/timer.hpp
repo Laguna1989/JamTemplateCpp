@@ -25,12 +25,22 @@ public:
     Timer& operator=(Timer&&) = delete;
 
     /// Get the total time (what is set in the constructor)
-    /// \return the total time
+    /// \return the total time in seconds
     float getTotalTime() const;
 
     /// Get the current time
-    /// \return
+    /// \return the current time in seconds
     float getCurrentTime() const;
+
+    /// Get the time Left until the Timer expires and triggers the callback
+    /// \return the time left in seconds
+    float getRemainingTime();
+
+    /// Cancel the timer. The callback will not be invoked.
+    void cancel();
+
+    /// Finish the timer. The callback will be invoked.
+    void finish();
 
 private:
     float m_totalTime { 0.0f };
