@@ -1,6 +1,5 @@
 ﻿#include "bar.hpp"
 #include <gtest/gtest.h>
-#include <ranges>
 #include <stdexcept>
 
 TEST(BarTest, BarInitialValues)
@@ -103,12 +102,4 @@ TEST(BarTest, SetBackgroundColor)
     jt::Bar b { 5.0f, 100.0f };
     b.setBackColor(jt::colors::Yellow);
     ASSERT_EQ(b.getBackColor(), jt::colors::Yellow);
-}
-
-TEST(RangesView, Viewtest)
-{
-    std::vector<int> numbers { 1, 2, 3, 4, 5 };
-
-    auto even = [](int i) { return 0 == i % 2; };
-    auto numbers2 = numbers | std::views::filter(even);
 }
