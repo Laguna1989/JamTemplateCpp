@@ -20,3 +20,39 @@ TEST(ColorTest, SetValues)
     ASSERT_EQ(c.g(), 111);
     ASSERT_EQ(c.b(), 222);
 }
+
+TEST(ColorTest, FromRGB)
+{
+    auto c = jt::MakeColor::FromRGB(1, 2, 3);
+    ASSERT_EQ(c.r(), 1);
+    ASSERT_EQ(c.g(), 2);
+    ASSERT_EQ(c.b(), 3);
+    ASSERT_EQ(c.a(), 255);
+}
+
+TEST(ColorTest, FromRGBA)
+{
+    auto c = jt::MakeColor::FromRGBA(1, 2, 3, 4);
+    ASSERT_EQ(c.r(), 1);
+    ASSERT_EQ(c.g(), 2);
+    ASSERT_EQ(c.b(), 3);
+    ASSERT_EQ(c.a(), 4);
+}
+
+TEST(ColorTest, FromHSV)
+{
+    auto c = jt::MakeColor::FromHSV(0.0f, 100.0f, 100.0f);
+    ASSERT_EQ(c.r(), 255);
+    ASSERT_EQ(c.g(), 0);
+    ASSERT_EQ(c.b(), 0);
+    ASSERT_EQ(c.a(), 255);
+}
+
+TEST(ColorTest, FromHSVA)
+{
+    auto c = jt::MakeColor::FromHSVA(0.0f, 100.0f, 100.0f, 25);
+    ASSERT_EQ(c.r(), 255);
+    ASSERT_EQ(c.g(), 0);
+    ASSERT_EQ(c.b(), 0);
+    ASSERT_EQ(c.a(), 25);
+}

@@ -1,4 +1,5 @@
 ﻿#include "color.hpp"
+#include "color_helpers.hpp"
 
 namespace jt {
 
@@ -7,6 +8,37 @@ bool operator==(jt::Color const& a, jt::Color const& b)
     return (a.r() == b.r() && a.g() == b.g() && a.b() == b.b() && a.a() == b.a());
 }
 bool operator!=(jt::Color const& a, jt::Color const& b) { return !(a == b); }
+
+namespace MakeColor {
+
+jt::Color FromRGB(std::uint8_t r, std::uint8_t g, std::uint8_t b)
+{
+    return jt::MakeColor::FromRGBA(r, g, b, 255);
+}
+
+jt::Color FromRGBA(std::uint8_t r, std::uint8_t g, std::uint8_t b, std::uint8_t a)
+{
+    jt::Color color;
+    color.r() = r;
+    color.g() = g;
+    color.b() = b;
+    color.a() = a;
+    return color;
+}
+jt::Color FromHSV(float h, float s, float v) { return jt::MakeColor::FromHSVA(h, s, v, 255); }
+
+jt::Color FromHSVA(float h, float s, float v, std::uint8_t a)
+{
+    jt::Color color;
+    auto [r, g, b] = jt::ColorHelpers::hsv2rgb(h, s, v);
+    color.r() = r;
+    color.g() = g;
+    color.b() = b;
+    color.a() = a;
+    return color;
+}
+
+} // namespace MakeColor
 
 const jt::Color colors::Black { 0, 0, 0, 255 }; ///< Black predefined color
 const jt::Color colors::White { 255, 255, 255, 255 }; ///< White predefined color

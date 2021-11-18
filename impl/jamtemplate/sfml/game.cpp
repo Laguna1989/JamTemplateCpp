@@ -106,7 +106,7 @@ void Game::doDraw() const
     }
 
     // clear the old image
-    m_renderTarget->clear(m_backgroundColor);
+    m_renderTarget->clear(sf::Color::Black);
 
     if (m_state == nullptr) {
         return;
