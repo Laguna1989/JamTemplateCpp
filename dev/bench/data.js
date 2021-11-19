@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1637346118156,
+  "lastUpdate": 1637346367302,
   "repoUrl": "https://github.com/Laguna1989/JamTemplateCpp",
   "entries": {
     "Benchmark": [
@@ -1044,6 +1044,42 @@ window.BENCHMARK_DATA = {
             "value": 2.818309015748064,
             "unit": "ms/iter",
             "extra": "iterations: 254\ncpu: 2.818136188976379 ms\nthreads: 1"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "laguna_1989@gmx.net",
+            "name": "Simon Weis",
+            "username": "Laguna1989"
+          },
+          "committer": {
+            "email": "laguna_1989@gmx.net",
+            "name": "Simon Weis",
+            "username": "Laguna1989"
+          },
+          "distinct": true,
+          "id": "7af5792f2cf45d62a0a994045ec23d4ce60a3c8f",
+          "message": "Fix broken rotation for flash and shadow",
+          "timestamp": "2021-11-19T19:23:47+01:00",
+          "tree_id": "242ac4bbc57613663d2d387581025434a733a682",
+          "url": "https://github.com/Laguna1989/JamTemplateCpp/commit/7af5792f2cf45d62a0a994045ec23d4ce60a3c8f"
+        },
+        "date": 1637346366683,
+        "tool": "googlecpp",
+        "benches": [
+          {
+            "name": "BM_StartGame",
+            "value": 0.0009186027395846688,
+            "unit": "ms/iter",
+            "extra": "iterations: 775227\ncpu: 0.0009183927352891475 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GamestateWithTweeningShapes",
+            "value": 2.4513840280701116,
+            "unit": "ms/iter",
+            "extra": "iterations: 285\ncpu: 2.4512239649122813 ms\nthreads: 1"
           }
         ]
       }
