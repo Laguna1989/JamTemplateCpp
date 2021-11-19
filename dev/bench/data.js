@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1637180502861,
+  "lastUpdate": 1637333526716,
   "repoUrl": "https://github.com/Laguna1989/JamTemplateCpp",
   "entries": {
     "Benchmark": [
@@ -936,6 +936,42 @@ window.BENCHMARK_DATA = {
             "value": 2.9570157004218443,
             "unit": "ms/iter",
             "extra": "iterations: 237\ncpu: 2.9562422320675106 ms\nthreads: 1"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "laguna_1989@gmx.net",
+            "name": "Laguna1989",
+            "username": "Laguna1989"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "4502eaa8c2db13302305874e8e501624e5980224",
+          "message": "Merge pull request #85 from Laguna1989/FEATURE_Color\n\nAdd Color HSV helper",
+          "timestamp": "2021-11-19T15:50:09+01:00",
+          "tree_id": "1be251ae9e33cc1db4f7133b75e369f3877e1eb3",
+          "url": "https://github.com/Laguna1989/JamTemplateCpp/commit/4502eaa8c2db13302305874e8e501624e5980224"
+        },
+        "date": 1637333525568,
+        "tool": "googlecpp",
+        "benches": [
+          {
+            "name": "BM_StartGame",
+            "value": 0.000887863243663911,
+            "unit": "ms/iter",
+            "extra": "iterations: 787671\ncpu: 0.0008876234646191114 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GamestateWithTweeningShapes",
+            "value": 2.4383483484321316,
+            "unit": "ms/iter",
+            "extra": "iterations: 287\ncpu: 2.4381029547038326 ms\nthreads: 1"
           }
         ]
       }
