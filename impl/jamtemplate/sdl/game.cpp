@@ -6,16 +6,14 @@
 #include "rect.hpp"
 #include "texture_manager.hpp"
 #include "vector.hpp"
-
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_mixer.h>
 #include <SDL_ttf.h>
+#include <iostream>
 
 #ifdef ENABLE_WEB
 #include <emscripten.h>
 #endif
-
-#include <iostream>
 
 namespace jt {
 
