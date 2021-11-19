@@ -48,6 +48,39 @@ jobs:
         with:
           files: ${{github.workspace}}/release/release_win.zip
 
+  LinuxSFML:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up cmake
+        uses: jwlawson/actions-setup-cmake@v1.10
+        with:
+          cmake-version: '3.19.x'
+      - uses: actions/checkout@v2
+
+      - name: Install system-wide dependencies
+        run: sudo apt-get update && sudo apt-get install -y libsfml-dev rsync
+
+      - name: CMake
+        run: cmake -B ${{github.workspace}}/build -DENABLE_UNITTESTS=OFF -DCMAKE_BUILD_TYPE=Release -DENABLE_DEMOS=OFF .
+
+      - name: Build
+        working-directory: ${{github.workspace}}/build
+        run: cmake --build . --config Release
+
+      - name: Copy files
+        run: |
+          export RELEASE_NAME=$(echo "${GITHUB_REPOSITORY}" | sed 's/^[^\/]*\///g')
+          mkdir -p ${{github.workspace}}/release/${RELEASE_NAME}_linux
+          cd ${{github.workspace}}/build/impl/game/
+          rsync -avr --exclude="Makefile" --exclude="CMakeFiles" --exclude="*.cmake" . ${{github.workspace}}/release/${RELEASE_NAME}_linux
+          cd ${{github.workspace}}/release
+          tar -czvf ${{github.workspace}}/release/release_linux-x86_64.tar.gz ${RELEASE_NAME}_linux
+
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: ${{github.workspace}}/release/release_linux-x86_64.tar.gz
+
   WebSDL:
     runs-on: ubuntu-latest
     env:
