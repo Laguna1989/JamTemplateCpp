@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1637346367302,
+  "lastUpdate": 1637347187823,
   "repoUrl": "https://github.com/Laguna1989/JamTemplateCpp",
   "entries": {
     "Benchmark": [
@@ -1080,6 +1080,42 @@ window.BENCHMARK_DATA = {
             "value": 2.4513840280701116,
             "unit": "ms/iter",
             "extra": "iterations: 285\ncpu: 2.4512239649122813 ms\nthreads: 1"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "laguna_1989@gmx.net",
+            "name": "Laguna1989",
+            "username": "Laguna1989"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "5c35956a9328406c37486dca8f9edf2bce88bd3a",
+          "message": "Merge pull request #87 from Thunraz/patch-1\n\nAdd Linux build to deploy.yml",
+          "timestamp": "2021-11-19T19:38:06+01:00",
+          "tree_id": "7ad52e9dc93c156863e333ea7d80c6ee1a22baea",
+          "url": "https://github.com/Laguna1989/JamTemplateCpp/commit/5c35956a9328406c37486dca8f9edf2bce88bd3a"
+        },
+        "date": 1637347186483,
+        "tool": "googlecpp",
+        "benches": [
+          {
+            "name": "BM_StartGame",
+            "value": 0.0009847005980004502,
+            "unit": "ms/iter",
+            "extra": "iterations: 709364\ncpu: 0.0009846347418250715 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GamestateWithTweeningShapes",
+            "value": 2.473940770318015,
+            "unit": "ms/iter",
+            "extra": "iterations: 283\ncpu: 2.473849961130742 ms\nthreads: 1"
           }
         ]
       }
