@@ -15,6 +15,7 @@ void jt::Box2DJoint::doDestroy()
         return;
     }
     m_world.lock()->destroyJoint(m_joint);
+    m_joint = nullptr;
 }
 
 void jt::Box2DJoint::setB2Joint(b2Joint* joint) { m_joint = joint; }

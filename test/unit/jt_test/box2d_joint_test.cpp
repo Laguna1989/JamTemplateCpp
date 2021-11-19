@@ -13,13 +13,13 @@ public:
     void SetUp() override { m_mockWorld = std::make_shared<NiceMock<Box2DWorldMock>>(); }
 };
 
-TEST_F(Box2dJointTest, ConstructorCallsCreateBody)
+TEST_F(Box2dJointTest, ConstructorCallsCreateJoint)
 {
     EXPECT_CALL(*m_mockWorld, createJoint(nullptr));
     jt::Box2DJoint obj { m_mockWorld, nullptr };
 }
 
-TEST_F(Box2dJointTest, GetBodyReturnsStoredPointer)
+TEST_F(Box2dJointTest, GetBodyReturnsNullptrWhenCreatedWithNullptrJointDef)
 {
     jt::Box2DJoint obj { m_mockWorld, nullptr };
     EXPECT_EQ(obj.getB2Joint(), nullptr);
@@ -49,7 +49,7 @@ TEST_F(Box2dJointTest, Draw)
     SUCCEED();
 }
 
-TEST_F(Box2dJointTest, DestroyCallsDestroyBodyOnWorld)
+TEST_F(Box2dJointTest, DestroyCallsDestroyJointOnWorld)
 {
     jt::Box2DJoint obj { m_mockWorld, nullptr };
 

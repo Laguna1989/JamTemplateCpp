@@ -9,6 +9,7 @@
 
 class RenderWindowFactoryInterface {
 public:
+    virtual ~RenderWindowFactoryInterface() = default;
     virtual std::shared_ptr<jt::RenderWindowInterface> createRenderWindow(
         unsigned int width, unsigned int height, std::string const& title)
         = 0;

@@ -10,26 +10,24 @@ namespace jt {
 class Color final : public jt::ColorBase {
 public:
     /// Default Constructor, will initialize the color to black
-    Color()
-        : m_color { 0, 0, 0, 255 }
-    {
-    }
+    Color();
     /// Constructor
-    /// \param r red
-    /// \param g green
-    /// \param b blue
-    /// \param a alpha
-    Color(std::uint8_t r, std::uint8_t g, std::uint8_t b, std::uint8_t a = 255)
-        : m_color { r, g, b, a }
-    {
-    }
+    /// \param r red value [0-255]
+    /// \param g green value [0-255]
+    /// \param b blue value [0-255]
+    /// \param a alpha value [0-255]
+    Color(std::uint8_t r, std::uint8_t g, std::uint8_t b, std::uint8_t a = 255);
 
     /// Conversion from sf::Color
     /// \param v
-    Color(sf::Color const& v)
-        : m_color { v }
-    {
-    }
+    Color(sf::Color const& v);
+
+    /// Create color from RGB
+    /// \param r red value [0-255]
+    /// \param g green value [0-255]
+    /// \param b blue value [0-255]
+    /// \return a Color with the respective r,g,b values. Alpha will be 255.
+    static Color FromRGB(std::uint8_t r, std::uint8_t g, std::uint8_t b);
 
     /// Destructor
     ~Color() = default;
@@ -42,39 +40,41 @@ public:
 
     /// Conversion to sf::Color
     /// \return
-    operator sf::Color() const { return m_color; }
+    operator sf::Color() const;
 
     /// Access red
     /// \return red
-    std::uint8_t r() const override { return m_color.r; };
+    std::uint8_t r() const override;
 
     /// Acces green
     /// \return green
-    std::uint8_t g() const override { return m_color.g; };
+    std::uint8_t g() const override;
 
     /// Access blue
     /// \return blue
-    std::uint8_t b() const override { return m_color.b; };
+    std::uint8_t b() const override;
 
     /// Access alpha
     /// \return alpha
-    std::uint8_t a() const override { return m_color.a; };
+    std::uint8_t a() const override;
 
     /// Access red
     /// \return red
-    std::uint8_t& r() override { return m_color.r; };
+    std::uint8_t& r() override;
 
     /// Acces green
     /// \return green
-    std::uint8_t& g() override { return m_color.g; };
+    std::uint8_t& g() override;
 
     /// Access blue
     /// \return blue
-    std::uint8_t& b() override { return m_color.b; };
+    std::uint8_t& b() override;
 
     /// Access alpha
     /// \return alpha
-    std::uint8_t& a() override { return m_color.a; };
+    std::uint8_t& a() override;
+
+    static Color FromRGBA(std::uint8_t r, std::uint8_t g, std::uint8_t b, std::uint8_t a);
 
 private:
     sf::Color m_color;
