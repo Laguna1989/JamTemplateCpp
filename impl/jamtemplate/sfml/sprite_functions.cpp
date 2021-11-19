@@ -1,6 +1,7 @@
 ﻿#include "sprite_functions.hpp"
 #include "color.hpp"
 #include "math_helper.hpp"
+#include "random.hpp"
 #include <cmath>
 
 namespace jt {
@@ -83,7 +84,7 @@ sf::Image makeVignetteImage(unsigned int w, unsigned int h)
             auto const dy = static_cast<float>(j) - cy;
             auto const sqr = std::sqrt(dx * dx + dy * dy);
             auto const sqrNorm = MathHelper::clamp(sqr / (cx + cy) / 1.5f * 2.0f, 0.0f, 1.0f);
-            float const v = std::pow(sqrNorm, 2.0f) * 255;
+            float const v = std::pow(sqrNorm, 2.0f) * 235 + jt::Random::getInt(0, 20);
             img.setPixel(i, j, jt::Color { 0, 0, 0, static_cast<uint8_t>(v) });
         }
     }

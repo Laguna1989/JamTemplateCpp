@@ -1,5 +1,6 @@
 ﻿#include "sprite_functions.hpp"
 #include "math_helper.hpp"
+#include "random.hpp"
 #include "sdl_helper.hpp"
 #include <cmath>
 
@@ -112,7 +113,8 @@ std::shared_ptr<SDL_Texture> makeVignetteImage(
             auto const dy = j - cy;
             auto const sqr = std::sqrt(dx * dx + dy * dy);
             auto const sqrNorm = MathHelper::clamp(sqr / (cx + cy) / 1.5f * 2.0f, 0.0f, 1.0f);
-            auto const v = static_cast<uint8_t>(std::pow(sqrNorm, 2.0f) * 255);
+            auto const v
+                = static_cast<uint8_t>(std::pow(sqrNorm, 2.0f) * 235 + jt::Random::getInt(0, 20));
             jt::setPixel(image.get(), i, j, SDL_MapRGBA(image->format, 0U, 0U, 0U, v));
         }
     }
