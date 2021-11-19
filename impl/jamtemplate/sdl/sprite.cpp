@@ -126,7 +126,7 @@ void Sprite::doDrawShadow(std::shared_ptr<jt::renderTarget> const sptr) const
     SDL_Point const p { static_cast<int>(m_origin.x()), static_cast<int>(m_origin.y()) };
     SDL_SetRenderDrawBlendMode(sptr.get(), SDL_BLENDMODE_BLEND);
     setSDLColor(getShadowColor());
-    SDL_RenderCopyEx(sptr.get(), m_text.get(), &sourceRect, &destRect, getRotation(), &p, flip);
+    SDL_RenderCopyEx(sptr.get(), m_text.get(), &sourceRect, &destRect, -getRotation(), &p, flip);
 }
 
 void Sprite::doDrawFlash(std::shared_ptr<jt::renderTarget> const sptr) const
@@ -140,7 +140,7 @@ void Sprite::doDrawFlash(std::shared_ptr<jt::renderTarget> const sptr) const
         m_textFlash.get(), getFlashColor().r(), getFlashColor().g(), getFlashColor().b());
     SDL_SetTextureAlphaMod(m_textFlash.get(), getFlashColor().a());
     SDL_RenderCopyEx(
-        sptr.get(), m_textFlash.get(), &sourceRect, &destRect, getRotation(), &p, flip);
+        sptr.get(), m_textFlash.get(), &sourceRect, &destRect, -getRotation(), &p, flip);
 }
 
 void Sprite::doRotate(float /*rot*/) { }
