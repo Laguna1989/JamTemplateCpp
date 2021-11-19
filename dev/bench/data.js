@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1637333526716,
+  "lastUpdate": 1637333739530,
   "repoUrl": "https://github.com/Laguna1989/JamTemplateCpp",
   "entries": {
     "Benchmark": [
@@ -972,6 +972,42 @@ window.BENCHMARK_DATA = {
             "value": 2.4383483484321316,
             "unit": "ms/iter",
             "extra": "iterations: 287\ncpu: 2.4381029547038326 ms\nthreads: 1"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "laguna.ws@gmail.com",
+            "name": "Simon Weis",
+            "username": "Laguna1989"
+          },
+          "committer": {
+            "email": "laguna.ws@gmail.com",
+            "name": "Simon Weis",
+            "username": "Laguna1989"
+          },
+          "distinct": true,
+          "id": "37de0bf35dc2328ea037b84d654d949d5a5ce19d",
+          "message": "Merge branch 'master' of github.com:Laguna1989/JamTemplateCpp into master",
+          "timestamp": "2021-11-19T15:53:43+01:00",
+          "tree_id": "2c17b356c2d7b6365d703c8bd878b01fc0f948d3",
+          "url": "https://github.com/Laguna1989/JamTemplateCpp/commit/37de0bf35dc2328ea037b84d654d949d5a5ce19d"
+        },
+        "date": 1637333738388,
+        "tool": "googlecpp",
+        "benches": [
+          {
+            "name": "BM_StartGame",
+            "value": 0.0009826915476589082,
+            "unit": "ms/iter",
+            "extra": "iterations: 713329\ncpu: 0.0009804667523681217 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GamestateWithTweeningShapes",
+            "value": 2.4720494098940278,
+            "unit": "ms/iter",
+            "extra": "iterations: 283\ncpu: 2.4720504664310963 ms\nthreads: 1"
           }
         ]
       }
