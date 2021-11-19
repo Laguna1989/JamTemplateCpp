@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1637333739530,
+  "lastUpdate": 1637346118156,
   "repoUrl": "https://github.com/Laguna1989/JamTemplateCpp",
   "entries": {
     "Benchmark": [
@@ -1008,6 +1008,42 @@ window.BENCHMARK_DATA = {
             "value": 2.4720494098940278,
             "unit": "ms/iter",
             "extra": "iterations: 283\ncpu: 2.4720504664310963 ms\nthreads: 1"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "laguna_1989@gmx.net",
+            "name": "Simon Weis",
+            "username": "Laguna1989"
+          },
+          "committer": {
+            "email": "laguna_1989@gmx.net",
+            "name": "Simon Weis",
+            "username": "Laguna1989"
+          },
+          "distinct": true,
+          "id": "459d2331e4029a76cd11bcfa80ec784640af4491",
+          "message": "Add vignette dither",
+          "timestamp": "2021-11-19T19:20:05+01:00",
+          "tree_id": "8fe9d167efbedfb5af6d8031e75f4ca33eadc628",
+          "url": "https://github.com/Laguna1989/JamTemplateCpp/commit/459d2331e4029a76cd11bcfa80ec784640af4491"
+        },
+        "date": 1637346116970,
+        "tool": "googlecpp",
+        "benches": [
+          {
+            "name": "BM_StartGame",
+            "value": 0.0010960295212291008,
+            "unit": "ms/iter",
+            "extra": "iterations: 616370\ncpu: 0.0010956701705144636 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GamestateWithTweeningShapes",
+            "value": 2.818309015748064,
+            "unit": "ms/iter",
+            "extra": "iterations: 254\ncpu: 2.818136188976379 ms\nthreads: 1"
           }
         ]
       }
