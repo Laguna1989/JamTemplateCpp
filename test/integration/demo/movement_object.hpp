@@ -21,7 +21,7 @@ public:
 
         if (def->type == b2BodyType::b2_dynamicBody) {
             m_animation->add("assets/coin.png", "idle", jt::Vector2u { 16, 16 },
-                jt::MathHelper::vectorBetween(0U, 11U), 0.13f);
+                jt::MathHelper::numbersBetween(0U, 11U), 0.13f);
             m_animation->play("idle");
             m_animation->setOffset(jt::Vector2 { 8, 8 });
             m_animation->setOrigin(jt::Vector2 { 8, 8 });

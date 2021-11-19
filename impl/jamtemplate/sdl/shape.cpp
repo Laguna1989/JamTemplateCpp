@@ -26,8 +26,6 @@ jt::Color Shape::getFlashColor() const { return m_colorFlash; }
 void Shape::setPosition(jt::Vector2 const& pos) { m_position = pos; }
 jt::Vector2 Shape::getPosition() const { return m_position; }
 
-// sf::Transform const getTransform() const { return m_shape->getTransform(); }
-
 jt::Rect Shape::getGlobalBounds() const
 {
     return jt::Rect { m_position.x() + getOffset().x(), m_position.y() + getOffset().y(),

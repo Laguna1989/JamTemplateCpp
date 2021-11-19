@@ -104,7 +104,6 @@ void Bar::setPosition(jt::Vector2 const& pos)
 
 jt::Vector2 Bar::getPosition() const { return m_shapeFull->getPosition(); }
 
-// sf::Transform const Bar::getTransform() const { return m_shapeFull.getTransform(); }
 jt::Rect Bar::getGlobalBounds() const { return m_shapeFull->getGlobalBounds(); }
 jt::Rect Bar::getLocalBounds() const { return m_shapeFull->getLocalBounds(); }
 
@@ -116,6 +115,7 @@ void Bar::setScale(jt::Vector2 const& scale)
     m_shapeFull->setScale(scale);
     m_shapeProgress->setScale(scale);
 }
+
 jt::Vector2 Bar::getScale() const { return m_shapeFull->getScale(); }
 
 void Bar::setOrigin(jt::Vector2 const& origin) { m_shapeFull->setOrigin(origin); }

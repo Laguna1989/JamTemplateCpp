@@ -37,8 +37,6 @@ public:
     void setFlashColor(const jt::Color& col) override;
     jt::Color getFlashColor() const override;
 
-    // virtual sf::Transform const getTransform() const override { return m_text->getTransform(); }
-
     jt::Rect getGlobalBounds() const override;
     jt::Rect getLocalBounds() const override;
 

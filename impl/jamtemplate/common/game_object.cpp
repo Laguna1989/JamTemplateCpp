@@ -37,6 +37,7 @@ void GameObject::setGameInstance(std::weak_ptr<GameInterface> gameInstance)
     }
     m_game = std::move(gameInstance);
 }
+
 std::shared_ptr<GameInterface> GameObject::getGame()
 {
     if (m_game.expired()) {
@@ -44,6 +45,7 @@ std::shared_ptr<GameInterface> GameObject::getGame()
     }
     return m_game.lock();
 }
+
 std::shared_ptr<GameInterface> GameObject::getGame() const
 {
     if (m_game.expired()) {
@@ -52,15 +54,14 @@ std::shared_ptr<GameInterface> GameObject::getGame() const
     return m_game.lock();
 }
 
-// kill this game Object (killed/dead game objects will get thrown out of any GameState)
 void GameObject::kill()
 {
     m_alive = false;
     doKill();
 }
+
 bool GameObject::isAlive() const { return m_alive; }
 
-// will be called, just before object is thrown out of the gamestate.
 void GameObject::destroy() { doDestroy(); }
 
 void GameObject::doUpdate(float const /*elapsed*/) {};

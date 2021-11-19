@@ -45,8 +45,6 @@ jt::Color Text::getColor() const { return m_text->getFillColor(); }
 void Text::setFlashColor(const jt::Color& col) { m_flashText->setFillColor(col); }
 jt::Color Text::getFlashColor() const { return m_flashText->getFillColor(); }
 
-//  sf::Transform const getTransform() const  { return m_text->getTransform(); }
-
 jt::Rect Text::getGlobalBounds() const { return m_text->getGlobalBounds(); }
 jt::Rect Text::getLocalBounds() const { return m_text->getLocalBounds(); }
 

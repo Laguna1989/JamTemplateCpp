@@ -9,7 +9,7 @@ TEST(VectorBetween, SingleValue)
 {
     int const lower { 4 };
     int const upper { lower };
-    auto const result = vectorBetween(lower, upper);
+    auto const result = numbersBetween(lower, upper);
     ASSERT_EQ(result.size(), upper - lower + 1);
     ASSERT_EQ(result.at(0), 4);
 }
@@ -18,7 +18,7 @@ TEST(VectorBetween, Range)
 {
     int const lower { -2 };
     int const upper { 3 };
-    auto const result = vectorBetween(lower, upper);
+    auto const result = numbersBetween(lower, upper);
     ASSERT_EQ(result.size(), upper - lower + 1);
     ASSERT_EQ(result.at(0), -2);
     ASSERT_EQ(result.at(1), -1);
@@ -29,7 +29,7 @@ TEST(VectorBetween, Inverted)
 {
     int const lower { 4 };
     int const upper { 3 };
-    auto const result = vectorBetween(lower, upper);
+    auto const result = numbersBetween(lower, upper);
     ASSERT_EQ(result.size(), lower - upper + 1);
     ASSERT_EQ(result.at(0), 3);
     ASSERT_EQ(result.at(1), 4);

@@ -1,5 +1,4 @@
-﻿
-#include "drawable_helpers.hpp"
+﻿#include "drawable_helpers.hpp"
 #include "shape.hpp"
 #include "sprite.hpp"
 #include "text.hpp"

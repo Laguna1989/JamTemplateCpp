@@ -19,7 +19,7 @@ void StateScroll::doInternalCreate()
 
     m_anim = std::make_shared<jt::Animation>();
     m_anim->add("assets/coin.png", "idle", jt::Vector2u { 16, 16 },
-        jt::MathHelper::vectorBetween(0U, 11U), 0.15f);
+        jt::MathHelper::numbersBetween(0U, 11U), 0.15f);
     m_anim->play("idle");
     m_anim->setColor(jt::colors::Red);
     m_anim->setPosition(jt::Vector2 { 200.0f, 200.0f });

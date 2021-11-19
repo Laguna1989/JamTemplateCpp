@@ -3,6 +3,8 @@
 
 #include "vector.hpp"
 #include <assert.h>
+#include <range/v3/view/iota.hpp>
+#include <range/v3/view/take.hpp>
 #include <string>
 #include <utility>
 #include <vector>
@@ -10,20 +12,21 @@
 namespace jt {
 namespace MathHelper {
 
-// create a vector with numbers between a and b (both inclusive)
-// when called with vectorBetween(4,9) the resulting vector will be
-// [4, 5, 6, 7, 8, 9]
+/// Create a vector with numbers between a and b (both inclusive)
+///
+/// when called with numbersBetween(4,9) the resulting vector will be [4, 5, 6, 7, 8, 9]
+///
+/// \param a lower bound (inclusive)
+/// \param b upper bound (inclusive)
+/// \return vector with ints between a and b
 template <typename T>
-std::vector<T> vectorBetween(T a, T b)
+std::vector<T> numbersBetween(T a, T b)
 {
     if (a > b) {
         std::swap(a, b);
     }
-    std::vector<T> values;
-    for (T i = a; i != b + 1; ++i) {
-        values.push_back(i);
-    }
-    return values;
+    auto const r = ranges::iota_view(a, b + 1);
+    return std::vector<T>(r.begin(), r.end());
 }
 
 float lengthSquared(jt::Vector2 const& v);

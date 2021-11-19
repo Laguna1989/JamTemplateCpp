@@ -48,8 +48,6 @@ jt::Color Text::getColor() const { return m_color; }
 void Text::setFlashColor(const jt::Color& col) { m_flashColor = col; }
 jt::Color Text::getFlashColor() const { return m_flashColor; }
 
-// sf::Transform const getTransform() const  { return m_text->getTransform(); }
-
 jt::Rect Text::getGlobalBounds() const
 {
     return jt::Rect { m_position.x(), m_position.y(),

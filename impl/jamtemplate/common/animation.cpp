@@ -86,17 +86,6 @@ jt::Color Animation::getColor() const
 void Animation::setPosition(jt::Vector2 const& pos) { m_position = pos; }
 jt::Vector2 Animation::getPosition() const { return m_position; }
 
-// sf::Transform const Animation::getTransform() const
-//{
-//    sf::Transform trans;
-//    for (auto const& kvp : m_frames) {
-//        for (auto const& sptr : kvp.second) {
-//            trans = sptr->getTransform();
-//        }
-//    }
-//    return trans;
-//}
-
 jt::Rect Animation::getGlobalBounds() const
 {
     return getCurrentSprite(m_frames, m_currentAnimName, m_currentIdx)->getGlobalBounds();

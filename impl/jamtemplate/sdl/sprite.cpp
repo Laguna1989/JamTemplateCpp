@@ -56,8 +56,6 @@ jt::Color Sprite::getColor() const { return m_color; }
 void Sprite::setFlashColor(jt::Color const& col) { m_colorFlash = col; }
 jt::Color Sprite::getFlashColor() const { return m_colorFlash; }
 
-//  sf::Transform const getTransform() const  { return m_sprite.getTransform(); }
-
 jt::Rect Sprite::getGlobalBounds() const
 {
     return jt::Rect { m_position.x(), m_position.y(), static_cast<float>(m_sourceRect.width()),

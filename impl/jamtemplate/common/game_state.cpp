@@ -124,7 +124,7 @@ void GameState::cleanUpObjects()
 {
     m_objects.erase(std::remove_if(m_objects.begin(), m_objects.end(),
                         [](GameObject::Sptr go) {
-                            bool isDead = !go->isAlive();
+                            bool const isDead = !go->isAlive();
                             if (isDead) {
                                 go->destroy();
                             }

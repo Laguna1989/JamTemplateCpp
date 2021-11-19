@@ -134,7 +134,6 @@ jt::Color Tilemap::getColor() const { return m_color; }
 void Tilemap::setPosition(jt::Vector2 const& pos) { m_position = pos; }
 jt::Vector2 Tilemap::getPosition() const { return m_position; }
 
-// sf::Transform const Tilemap::getTransform() const { return sf::Transform {}; }
 jt::Rect Tilemap::getGlobalBounds() const { return jt::Rect {}; }
 jt::Rect Tilemap::getLocalBounds() const { return jt::Rect {}; }
 
