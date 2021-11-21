@@ -52,7 +52,7 @@ void Game::setupRenderTarget() { }
 
 void Game::startGame(GameLoopFunctionPtr gameloop_function)
 {
-    game->setupRenderTarget();
+    setupRenderTarget();
 #ifdef ENABLE_WEB
     emscripten_set_main_loop(gameloop_function, 0, 1);
 #else
