@@ -4,7 +4,7 @@
 
 class CameraTest : public ::testing::Test {
 protected:
-    jt::Camera cam {};
+    jt::Camera cam { 1.0f };
 };
 
 TEST_F(CameraTest, InitialCamOffset)

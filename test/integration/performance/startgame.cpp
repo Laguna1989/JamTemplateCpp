@@ -24,9 +24,7 @@ static void BM_StartGame(benchmark::State& state)
     for (auto _ : state) {
         auto game = std::make_shared<jt::Game>(
             std::make_shared<jt::null_objects::RenderWindowNull>(800, 600, "jt_performance"), 1.0f,
-            nullptr, nullptr);
-        auto gs = std::make_shared<StateEmpty>();
-        game->switchState(gs);
+            nullptr, nullptr, std::make_shared<StateEmpty>());
         game->update(0.02f);
         game->draw();
     }

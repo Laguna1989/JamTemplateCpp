@@ -23,13 +23,13 @@ public:
     /// \param inputManager input manager, can be nullptr
     /// \param musicPlayer music player, can be nullptr
     /// \param camera camera, can be nullptr
-    Game(std::shared_ptr<RenderWindowInterface> window, float zoom,
+    Game(std::shared_ptr<RenderWindowInterface> window,
         std::shared_ptr<InputManagerInterface> inputManager = nullptr,
         std::shared_ptr<MusicPlayerInterface> musicPlayer = nullptr,
-        std::shared_ptr<CamInterface> camera = nullptr);
+        std::shared_ptr<CamInterface> camera = nullptr,
+        std::shared_ptr<jt::GameState> initialState = nullptr);
 
-    void startGame(
-        std::shared_ptr<GameState> InitialState, GameLoopFunctionPtr gameloop_function) override;
+    void startGame(GameLoopFunctionPtr gameloop_function) override;
 
     void setupRenderTarget() override;
     void setRenderTarget(std::shared_ptr<jt::renderTarget> rt) override;

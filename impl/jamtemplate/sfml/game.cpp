@@ -20,15 +20,14 @@ void horizontalFlip(std::unique_ptr<jt::Sprite> const& spr, float zoom, float wi
 
 namespace jt {
 
-Game::Game(std::shared_ptr<RenderWindowInterface> window, float zoom,
+Game::Game(std::shared_ptr<RenderWindowInterface> window,
     std::shared_ptr<InputManagerInterface> input, std::shared_ptr<MusicPlayerInterface> musicPlayer,
-    std::shared_ptr<CamInterface> camera)
-    : GameBase { camera }
+    std::shared_ptr<CamInterface> camera, std::shared_ptr<jt::GameState> initialState)
+    : GameBase { camera, initialState }
     , m_window { window }
     , m_input { input }
     , m_musicPlayer { musicPlayer }
 {
-    m_camera->setZoom(zoom);
     m_sprite_for_drawing = std::make_unique<jt::Sprite>();
 }
 
@@ -36,7 +35,13 @@ std::shared_ptr<InputManagerInterface> Game::input() { return m_input; }
 
 void Game::setupRenderTarget()
 {
+    if (m_window == nullptr) {
+        return;
+    }
     m_renderTarget = m_window->createRenderTarget();
+    if (m_renderTarget == nullptr) {
+        return;
+    }
     auto const windowSize = m_window->getSize();
     auto const zoom = getCamera()->getZoom();
     auto const scaledWidth = static_cast<unsigned int>(windowSize.x() / zoom);
@@ -52,9 +57,9 @@ void Game::setupRenderTarget()
 
 std::shared_ptr<MusicPlayerInterface> Game::getMusicPlayer() { return m_musicPlayer; }
 
-void Game::startGame(std::shared_ptr<GameState> InitialState, GameLoopFunctionPtr gameloop_function)
+void Game::startGame(GameLoopFunctionPtr gameloop_function)
 {
-    switchState(InitialState);
+    setupRenderTarget();
     while (m_window->isOpen()) {
         m_window->checkForClose();
         gameloop_function();

@@ -7,6 +7,7 @@
 #include "state_select.hpp"
 #include <memory>
 
+#include <camera.hpp>
 #include <cstdlib>
 #include <stdlib.h>
 
@@ -27,10 +28,12 @@ int main()
     auto const keyboard = std::make_shared<jt::KeyboardInput>();
     auto input = std::make_shared<jt::InputManager>(mouse, keyboard);
 
+    auto window = std::make_shared<jt::RenderWindow>(800, 600, "jt_demos");
+    auto camera = std::make_shared<jt::Camera>(2.0f);
+
     game = std::make_shared<jt::Game>(
-        std::make_shared<jt::RenderWindow>(800, 600, "jt_demos"), 2.0f, input, nullptr);
-    game->setupRenderTarget();
-    game->startGame(std::make_shared<StateSelect>(), gameloop);
+        window, input, nullptr, camera, std::make_shared<StateSelect>());
+    game->startGame(gameloop);
 
     return 0;
 }

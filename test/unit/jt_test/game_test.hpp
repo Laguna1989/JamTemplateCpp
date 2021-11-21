@@ -4,6 +4,7 @@
 #include "game.hpp"
 #include "mocks/mock_camera.hpp"
 #include "mocks/mock_input.hpp"
+#include "mocks/mock_state.hpp"
 #include "mocks/mock_window.hpp"
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
@@ -24,8 +25,9 @@ public:
         auto input = std::make_shared<::testing::NiceMock<MockInput>>();
 
         camera = std::make_shared<::testing::NiceMock<MockCamera>>();
-        ON_CALL(*camera, getZoom).WillByDefault([]() { return 1.0f; });
-        g = std::make_shared<jt::Game>(window, zoom, input, nullptr, camera);
+        ON_CALL(*camera, getZoom).WillByDefault([this]() { return zoom; });
+
+        g = std::make_shared<jt::Game>(window, input, nullptr, camera, nullptr);
     }
 };
 
