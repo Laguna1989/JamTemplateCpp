@@ -28,10 +28,17 @@ Game::Game(std::shared_ptr<RenderWindowInterface> window,
     , m_input { input }
     , m_musicPlayer { musicPlayer }
 {
-    m_sprite_for_drawing = std::make_unique<jt::Sprite>();
+    // TODO Write tests for checking that nullptr cannot be passed
+    if (m_window == nullptr) {
+        throw std::invalid_argument { "render window DI for game can not be null" };
+    }
+    if (m_input == nullptr) {
+        throw std::invalid_argument { "input DI for game can not be null" };
+    }
     if (m_musicPlayer == nullptr) {
         throw std::invalid_argument { "music player DI for game can not be null" };
     }
+    m_sprite_for_drawing = std::make_unique<jt::Sprite>();
 }
 
 std::shared_ptr<InputManagerInterface> Game::input() { return m_input; }

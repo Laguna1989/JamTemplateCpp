@@ -13,6 +13,9 @@ GameBase::GameBase(std::shared_ptr<CamInterface> camera, std::shared_ptr<GameSta
     , m_nextState { initialState }
     , m_camera { std::move(camera) }
 {
+    if (m_camera == nullptr) {
+        throw std::invalid_argument { "camera DI for game can not be null" };
+    }
 }
 
 void GameBase::switchState(std::shared_ptr<GameState> newState)

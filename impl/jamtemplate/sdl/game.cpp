@@ -24,6 +24,15 @@ Game::Game(std::shared_ptr<RenderWindowInterface> window,
     , m_input { input }
     , m_musicPlayer { musicPlayer }
 {
+    if (m_window == nullptr) {
+        throw std::invalid_argument { "render window DI for game can not be null" };
+    }
+    if (m_input == nullptr) {
+        throw std::invalid_argument { "input DI for game can not be null" };
+    }
+    if (m_musicPlayer == nullptr) {
+        throw std::invalid_argument { "music player DI for game can not be null" };
+    }
     auto const width = window->getSize().x();
     auto const height = window->getSize().y();
 
