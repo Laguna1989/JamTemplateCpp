@@ -1,4 +1,5 @@
 ﻿#include "main.hpp"
+#include "camera.hpp"
 #include "game.hpp"
 #include "game_properties.hpp"
 #include "input_manager.hpp"
@@ -8,7 +9,7 @@
 #include "random.hpp"
 #include "render_window.hpp"
 #include "state_menu.hpp"
-#include <camera.hpp>
+#include <memory>
 
 std::shared_ptr<jt::GameInterface> game;
 

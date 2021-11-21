@@ -13,9 +13,6 @@ GameBase::GameBase(std::shared_ptr<CamInterface> camera, std::shared_ptr<GameSta
     , m_nextState { initialState }
     , m_camera { std::move(camera) }
 {
-    if (!m_camera) {
-        m_camera = std::make_shared<Camera>(2.0f);
-    }
 }
 
 void GameBase::switchState(std::shared_ptr<GameState> newState)

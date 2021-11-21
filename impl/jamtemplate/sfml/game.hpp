@@ -19,10 +19,10 @@ public:
 
     /// Constructor
     /// \param window window, can be nullptr
-    /// \param zoom zoom value
     /// \param inputManager input manager, can be nullptr
     /// \param musicPlayer music player, can be nullptr
     /// \param camera camera, can be nullptr
+    /// \param initialState initialState
     Game(std::shared_ptr<RenderWindowInterface> window,
         std::shared_ptr<InputManagerInterface> inputManager = nullptr,
         std::shared_ptr<MusicPlayerInterface> musicPlayer = nullptr,
