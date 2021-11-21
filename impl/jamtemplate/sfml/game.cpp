@@ -29,6 +29,9 @@ Game::Game(std::shared_ptr<RenderWindowInterface> window,
     , m_musicPlayer { musicPlayer }
 {
     m_sprite_for_drawing = std::make_unique<jt::Sprite>();
+    if (m_musicPlayer == nullptr) {
+        throw std::invalid_argument { "music player DI for game can not be null" };
+    }
 }
 
 std::shared_ptr<InputManagerInterface> Game::input() { return m_input; }

@@ -114,7 +114,7 @@ TEST_F(GameTest, StartGameWithOneIteration)
     g->startGame([]() {});
 }
 
-TEST_F(GameTest, GetMusicPlayer) { ASSERT_EQ(g->getMusicPlayer(), nullptr); }
+TEST_F(GameTest, GetMusicPlayer) { ASSERT_EQ(g->getMusicPlayer(), music_player); }
 
 TEST_F(GameTest, GameRunWithStateThrowingStdException)
 {
@@ -166,5 +166,6 @@ TEST(GameTestWithOutSetup, CreateWithNullptrCamera)
 
     auto input = std::make_shared<::testing::NiceMock<MockInput>>();
 
-    auto g = std::make_shared<jt::Game>(window, input, nullptr, nullptr, nullptr);
+    auto g = std::make_shared<jt::Game>(
+        window, input, std::make_shared<jt::MusicPlayerNull>(), nullptr, nullptr);
 }

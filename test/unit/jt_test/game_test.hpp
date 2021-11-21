@@ -4,10 +4,10 @@
 #include "game.hpp"
 #include "mocks/mock_camera.hpp"
 #include "mocks/mock_input.hpp"
-#include "mocks/mock_state.hpp"
 #include "mocks/mock_window.hpp"
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
+#include <music_player_null.hpp>
 
 class GameTest : public ::testing::Test {
 public:
@@ -15,6 +15,7 @@ public:
     std::shared_ptr<jt::Game> g { nullptr };
     std::shared_ptr<MockWindow> window { nullptr };
     std::shared_ptr<MockCamera> camera { nullptr };
+    std::shared_ptr<jt::MusicPlayerInterface> music_player { nullptr };
 
     void SetUp() override
     {
@@ -24,10 +25,12 @@ public:
 
         auto input = std::make_shared<::testing::NiceMock<MockInput>>();
 
+        music_player = std::make_shared<jt::MusicPlayerNull>();
+
         camera = std::make_shared<::testing::NiceMock<MockCamera>>();
         ON_CALL(*camera, getZoom).WillByDefault([this]() { return zoom; });
 
-        g = std::make_shared<jt::Game>(window, input, nullptr, camera, nullptr);
+        g = std::make_shared<jt::Game>(window, input, music_player, camera, nullptr);
     }
 };
 

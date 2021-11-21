@@ -3,6 +3,7 @@
 #include "input_manager.hpp"
 #include "keyboard_input.hpp"
 #include "mouse_input.hpp"
+#include "music_player_null.hpp"
 #include "random.hpp"
 #include "render_window.hpp"
 #include "state_select.hpp"
@@ -26,10 +27,12 @@ int main()
     auto input = std::make_shared<jt::InputManager>(mouse, keyboard);
 
     auto window = std::make_shared<jt::RenderWindow>(800, 600, "jt_demos");
+
+    auto music_player = std::make_shared<jt::MusicPlayerNull>();
     auto camera = std::make_shared<jt::Camera>(2.0f);
 
     game = std::make_shared<jt::Game>(
-        window, input, nullptr, camera, std::make_shared<StateSelect>());
+        window, input, music_player, camera, std::make_shared<StateSelect>());
     game->startGame(gameloop);
 
     return 0;
