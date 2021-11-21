@@ -8,14 +8,11 @@
 
 namespace jt {
 
-GameBase::GameBase(std::shared_ptr<CamInterface> camera)
+GameBase::GameBase(std::shared_ptr<CamInterface> camera, std::shared_ptr<GameState> initialState)
     : m_state { nullptr }
-    , m_nextState { nullptr }
+    , m_nextState { initialState }
     , m_camera { std::move(camera) }
 {
-    if (!m_camera) {
-        m_camera = std::make_shared<Camera>();
-    }
 }
 
 void GameBase::switchState(std::shared_ptr<GameState> newState)

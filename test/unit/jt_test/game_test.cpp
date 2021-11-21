@@ -110,8 +110,8 @@ TEST_F(GameTest, StartGameWithOneIteration)
     EXPECT_CALL(*window, isOpen)
         .WillOnce(::testing::Return(true))
         .WillOnce(::testing::Return(false));
-    auto s = std::make_shared<NiceMock<MockState>>();
-    g->startGame(s, []() {});
+    g->switchState(std::make_shared<MockState>());
+    g->startGame([]() {});
 }
 
 TEST_F(GameTest, GetMusicPlayer) { ASSERT_EQ(g->getMusicPlayer(), nullptr); }
@@ -166,5 +166,5 @@ TEST(GameTestWithOutSetup, CreateWithNullptrCamera)
 
     auto input = std::make_shared<::testing::NiceMock<MockInput>>();
 
-    auto g = std::make_shared<jt::Game>(window, 1.0f, input, nullptr, nullptr);
+    auto g = std::make_shared<jt::Game>(window, input, nullptr, nullptr, nullptr);
 }

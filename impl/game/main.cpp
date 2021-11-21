@@ -1,4 +1,5 @@
 ﻿#include "main.hpp"
+#include "camera.hpp"
 #include "game.hpp"
 #include "game_properties.hpp"
 #include "input_manager.hpp"
@@ -8,6 +9,7 @@
 #include "random.hpp"
 #include "render_window.hpp"
 #include "state_menu.hpp"
+#include <memory>
 
 std::shared_ptr<jt::GameInterface> game;
 
@@ -23,17 +25,20 @@ int main()
     hideConsoleInRelease();
 
     jt::Random::useTimeAsRandomSeed();
+    auto window
+        = std::make_shared<jt::RenderWindow>(static_cast<unsigned int>(GP::GetWindowSize().x()),
+            static_cast<unsigned int>(GP::GetWindowSize().y()), GP::GameName());
+
     auto const mouse = std::make_shared<jt::MouseInput>();
     auto const keyboard = std::make_shared<jt::KeyboardInput>();
     auto input = std::make_shared<jt::InputManager>(mouse, keyboard);
 
-    game = std::make_shared<jt::Game>(
-        std::make_shared<jt::RenderWindow>(static_cast<unsigned int>(GP::GetWindowSize().x()),
-            static_cast<unsigned int>(GP::GetWindowSize().y()), GP::GameName()),
-        GP::GetZoom(), input, std::make_shared<jt::MusicPlayer>());
-    game->setupRenderTarget();
+    std::shared_ptr<jt::MusicPlayer> musicPlayer = std::make_shared<jt::MusicPlayer>();
+    auto camera = std::make_shared<jt::Camera>(GP::GetZoom());
+    std::shared_ptr<StateMenu> initialState = std::make_shared<StateMenu>();
 
-    game->startGame(std::make_shared<StateMenu>(), gameloop);
+    game = std::make_shared<jt::Game>(window, input, musicPlayer, camera, initialState);
+    game->startGame(gameloop);
 
     return 0;
 }

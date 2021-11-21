@@ -3,8 +3,9 @@
 
 namespace jt {
 
-Camera::Camera()
+Camera::Camera(float zoom)
 {
+    setZoom(zoom);
     m_randomFunc = [](float max) { return Random::getFloat(-max, max); };
 };
 

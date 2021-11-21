@@ -8,7 +8,7 @@ namespace jt {
 class Camera : public CamInterface {
 public:
     /// Constructor
-    Camera();
+    Camera(float zoom);
 
     jt::Vector2 getCamOffset() override;
     void setCamOffset(jt::Vector2 const& ofs) override;

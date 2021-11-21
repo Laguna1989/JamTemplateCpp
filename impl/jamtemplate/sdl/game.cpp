@@ -17,19 +17,18 @@
 
 namespace jt {
 
-Game::Game(std::shared_ptr<RenderWindowInterface> window, float zoom,
+Game::Game(std::shared_ptr<RenderWindowInterface> window,
     std::shared_ptr<InputManagerInterface> input, std::shared_ptr<MusicPlayerInterface> musicPlayer,
-    std::shared_ptr<CamInterface> camera)
-    : GameBase { camera }
+    std::shared_ptr<CamInterface> camera, std::shared_ptr<GameState> initialState)
+    : GameBase { camera, initialState }
     , m_input { input }
     , m_musicPlayer { musicPlayer }
 {
-    m_camera->setZoom(zoom);
     auto const width = window->getSize().x();
     auto const height = window->getSize().y();
 
-    auto const scaledWidth = static_cast<int>(width / zoom);
-    auto const scaledHeight = static_cast<int>(height / zoom);
+    auto const scaledWidth = static_cast<int>(width / getCamera()->getZoom());
+    auto const scaledHeight = static_cast<int>(height / getCamera()->getZoom());
     m_srcRect = jt::Recti { 0, 0, scaledWidth, scaledHeight };
     m_destRect = jt::Recti { 0, 0, static_cast<int>(width), static_cast<int>(height) };
 
@@ -51,9 +50,9 @@ Game::Game(std::shared_ptr<RenderWindowInterface> window, float zoom,
 
 void Game::setupRenderTarget() { }
 
-void Game::startGame(std::shared_ptr<GameState> InitialState, GameLoopFunctionPtr gameloop_function)
+void Game::startGame(GameLoopFunctionPtr gameloop_function)
 {
-    switchState(InitialState);
+    setupRenderTarget();
 #ifdef ENABLE_WEB
     emscripten_set_main_loop(gameloop_function, 0, 1);
 #else

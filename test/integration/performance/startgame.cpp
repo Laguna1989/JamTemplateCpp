@@ -1,3 +1,4 @@
+#include "camera.hpp"
 #include "game.hpp"
 #include "game_state.hpp"
 #include "render_window_null.hpp"
@@ -22,11 +23,10 @@ private:
 static void BM_StartGame(benchmark::State& state)
 {
     for (auto _ : state) {
-        auto game = std::make_shared<jt::Game>(
-            std::make_shared<jt::null_objects::RenderWindowNull>(800, 600, "jt_performance"), 1.0f,
-            nullptr, nullptr);
-        auto gs = std::make_shared<StateEmpty>();
-        game->switchState(gs);
+        std::shared_ptr<jt::null_objects::RenderWindowNull> window
+            = std::make_shared<jt::null_objects::RenderWindowNull>(800, 600, "jt_performance");
+        auto game = std::make_shared<jt::Game>(window, nullptr, nullptr,
+            std::make_shared<jt::Camera>(1.0f), std::make_shared<StateEmpty>());
         game->update(0.02f);
         game->draw();
     }

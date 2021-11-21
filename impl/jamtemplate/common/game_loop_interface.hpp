@@ -30,9 +30,7 @@ public:
     /// Start the game
     /// \param initialState the initial GameState
     /// \param gameloopFunction the game loop function
-    virtual void startGame(
-        std::shared_ptr<GameState> initialState, GameLoopFunctionPtr gameloopFunction)
-        = 0;
+    virtual void startGame(GameLoopFunctionPtr gameloopFunction) = 0;
 };
 } // namespace jt
 #endif
