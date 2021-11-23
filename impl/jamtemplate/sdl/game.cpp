@@ -24,6 +24,15 @@ Game::Game(std::shared_ptr<RenderWindowInterface> window,
     , m_input { input }
     , m_musicPlayer { musicPlayer }
 {
+    if (m_window == nullptr) {
+        throw std::invalid_argument { "render window DI for game can not be null" };
+    }
+    if (m_input == nullptr) {
+        throw std::invalid_argument { "input DI for game can not be null" };
+    }
+    if (m_musicPlayer == nullptr) {
+        throw std::invalid_argument { "music player DI for game can not be null" };
+    }
     auto const width = window->getSize().x();
     auto const height = window->getSize().y();
 
@@ -77,10 +86,8 @@ void Game::doUpdate(float const elapsed)
 {
     jt::Vector2 const mpf = m_window->getMousePosition() / getCamera()->getZoom();
 
-    if (input()) {
-        input()->update(MousePosition { mpf.x() + getCamera()->getCamOffset().x(),
-            mpf.y() + getCamera()->getCamOffset().y(), mpf.x(), mpf.y() });
-    }
+    input()->update(MousePosition { mpf.x() + getCamera()->getCamOffset().x(),
+        mpf.y() + getCamera()->getCamOffset().y(), mpf.x(), mpf.y() });
     m_state->update(elapsed);
 
     DrawableImpl::setCamOffset(-1.0f * getCamera()->getCamOffset());

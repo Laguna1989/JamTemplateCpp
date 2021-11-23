@@ -28,6 +28,15 @@ Game::Game(std::shared_ptr<RenderWindowInterface> window,
     , m_input { input }
     , m_musicPlayer { musicPlayer }
 {
+    if (m_window == nullptr) {
+        throw std::invalid_argument { "render window DI for game can not be null" };
+    }
+    if (m_input == nullptr) {
+        throw std::invalid_argument { "input DI for game can not be null" };
+    }
+    if (m_musicPlayer == nullptr) {
+        throw std::invalid_argument { "music player DI for game can not be null" };
+    }
     m_sprite_for_drawing = std::make_unique<jt::Sprite>();
 }
 
@@ -35,9 +44,6 @@ std::shared_ptr<InputManagerInterface> Game::input() { return m_input; }
 
 void Game::setupRenderTarget()
 {
-    if (m_window == nullptr) {
-        return;
-    }
     m_renderTarget = m_window->createRenderTarget();
     if (m_renderTarget == nullptr) {
         return;
@@ -83,15 +89,10 @@ void Game::doUpdate(float const elapsed)
     m_state->update(elapsed);
     getCamera()->update(elapsed);
 
-    if (m_window == nullptr) {
-        return;
-    }
     jt::Vector2 const mpf = m_window->getMousePosition() / getCamera()->getZoom();
 
-    if (input()) {
-        input()->update(MousePosition { mpf.x() + getCamera()->getCamOffset().x(),
-            mpf.y() + getCamera()->getCamOffset().y(), mpf.x(), mpf.y() });
-    }
+    input()->update(MousePosition { mpf.x() + getCamera()->getCamOffset().x(),
+        mpf.y() + getCamera()->getCamOffset().y(), mpf.x(), mpf.y() });
     if (m_view) {
         int const camOffsetix { static_cast<int>(
             getCamera()->getCamOffset().x() + m_view->getSize().x / 2) };

@@ -1,12 +1,14 @@
 #include "camera.hpp"
 #include "game.hpp"
 #include "game_state.hpp"
+#include "input_manager_null.hpp"
+#include "music_player_null.hpp"
+#include "render_window_null.hpp"
 #include "shape.hpp"
 #include "system_helper.hpp"
 #include "tweens/tween_color.hpp"
 #include <benchmark/benchmark.h>
 #include <memory>
-#include <render_window_null.hpp>
 #include <vector>
 
 class StateTweenPerformanceTest : public jt::GameState {
@@ -45,8 +47,8 @@ static void BM_GamestateWithTweeningShapes(benchmark::State& state)
     for (auto _ : state) {
         std::shared_ptr<jt::null_objects::RenderWindowNull> window
             = std::make_shared<jt::null_objects::RenderWindowNull>(800, 600, "jt_performance");
-        auto game = std::make_shared<jt::Game>(
-            window, nullptr, nullptr, std::make_shared<jt::Camera>(1.0f), nullptr);
+        auto game = std::make_shared<jt::Game>(window, std::make_shared<jt::InputManagerNull>(),
+            std::make_shared<jt::MusicPlayerNull>(), std::make_shared<jt::Camera>(1.0f), nullptr);
 
         auto gs = std::make_shared<StateTweenPerformanceTest>();
         game->switchState(gs);
