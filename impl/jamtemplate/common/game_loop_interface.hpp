@@ -21,10 +21,6 @@ public:
     /// \param newState the new state to be switched to
     virtual void switchState(std::shared_ptr<GameState> newState) = 0;
 
-    /// Get the current GameState
-    /// \return the game state
-    virtual std::shared_ptr<GameState> getCurrentState() = 0;
-
     /// Run the Game
     virtual void run() = 0;
     /// Start the game

@@ -83,10 +83,10 @@ std::shared_ptr<jt::renderTarget> Game::getRenderTarget() const { return m_rende
 
 void Game::doUpdate(float const elapsed)
 {
-    if (m_state == nullptr) {
+    if (m_stateManager->m_state == nullptr) {
         return;
     }
-    m_state->update(elapsed);
+    m_stateManager->getCurrentState()->update(elapsed);
     getCamera()->update(elapsed);
 
     jt::Vector2 const mpf = m_window->getMousePosition() / getCamera()->getZoom();
@@ -114,11 +114,11 @@ void Game::doDraw() const
     // clear the old image
     m_renderTarget->clear(sf::Color::Black);
 
-    if (m_state == nullptr) {
+    if (m_stateManager->getCurrentState() == nullptr) {
         return;
     }
 
-    m_state->draw();
+    m_stateManager->getCurrentState()->draw();
 
     m_renderTarget->setView(*m_view);
     // convert renderTexture to sprite and draw that.

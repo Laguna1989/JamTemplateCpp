@@ -44,8 +44,8 @@ TEST_F(GameTest, DrawWithRenderTargetAndState)
     ASSERT_NE(g->getRenderTarget(), nullptr);
 
     auto ms = std::make_shared<MockState>();
-    EXPECT_CALL(*ms, doInternalCreate());
-    g->switchState(ms);
+    /*EXPECT_CALL(*ms, doInternalCreate());
+    g->switchState(ms);*/
 
     EXPECT_CALL(*ms, doInternalUpdate(0.1f));
     g->update(0.1f);

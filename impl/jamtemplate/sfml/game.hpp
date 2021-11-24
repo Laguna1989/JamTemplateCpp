@@ -45,6 +45,7 @@ private:
     std::shared_ptr<jt::RenderWindowInterface> m_window { nullptr };
     std::shared_ptr<jt::renderTarget> m_renderTarget { nullptr };
 
+    // TODO move to GameBase
     std::shared_ptr<InputManagerInterface> m_input { nullptr };
     std::shared_ptr<MusicPlayerInterface> m_musicPlayer { nullptr };
 

@@ -9,10 +9,9 @@
 namespace jt {
 
 GameBase::GameBase(std::shared_ptr<CamInterface> camera, std::shared_ptr<GameState> initialState)
-    : m_state { nullptr }
-    , m_nextState { initialState }
-    , m_camera { std::move(camera) }
+    : m_camera { std::move(camera) }
 {
+    m_stateManager = std::make_shared<StateManager>(initialState);
     if (m_camera == nullptr) {
         throw std::invalid_argument { "camera DI for game can not be null" };
     }
@@ -20,33 +19,14 @@ GameBase::GameBase(std::shared_ptr<CamInterface> camera, std::shared_ptr<GameSta
 
 void GameBase::switchState(std::shared_ptr<GameState> newState)
 {
-    if (newState == nullptr) {
-        throw std::invalid_argument { "cannot switch to nullptr state!" };
-    }
-    m_nextState = newState;
-    // if no state has been assigned yet, we can directly switch state here.
-    if (m_state == nullptr) {
-        doSwitchState();
-    }
-}
-
-std::shared_ptr<GameState> GameBase::getCurrentState()
-{
-    if (m_nextState == nullptr) {
-        return m_state;
-    }
-    return m_nextState;
+    m_stateManager->switchState(newState);
 }
 
 void GameBase::run()
 {
     try {
-        if (m_nextState != nullptr) {
-            doSwitchState();
-            return;
-        }
-        if (m_state == nullptr) {
-            return;
+        if (m_stateManager->checkForGameStateSwitch(getPtr())) {
+            reset();
         }
 
         auto const now = std::chrono::steady_clock::now();
@@ -72,17 +52,10 @@ void GameBase::run()
 
 std::weak_ptr<GameInterface> GameBase::getPtr() { return shared_from_this(); }
 
-void GameBase::doSwitchState()
+void GameBase::reset()
 {
-    m_state = m_nextState;
-    m_nextState = nullptr;
-
     getCamera()->reset();
-    m_state->setGameInstance(getPtr());
-    m_state->create();
-    if (input()) {
-        input()->reset();
-    }
+    input()->reset();
 }
 
 std::shared_ptr<CamInterface> GameBase::getCamera() { return m_camera; }

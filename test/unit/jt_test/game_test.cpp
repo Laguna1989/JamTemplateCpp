@@ -58,35 +58,6 @@ TEST_F(GameTest, SetRenderTargetInvalid)
     ASSERT_THROW(g->setRenderTarget(nullptr), std::invalid_argument);
 }
 
-TEST_F(GameTest, GetCurrentStateNullptr) { EXPECT_EQ(g->getCurrentState(), nullptr); }
-
-TEST_F(GameTest, GetCurrentStateNonNullptr)
-{
-    g->switchState(std::make_shared<NiceMock<MockState>>());
-    ASSERT_NE(g->getCurrentState(), nullptr);
-}
-
-TEST_F(GameTest, GetCurrentStateNonNullptrAfterUpdate)
-{
-    g->switchState(std::make_shared<NiceMock<MockState>>());
-    g->update(0.1f);
-    g->switchState(std::make_shared<NiceMock<MockState>>());
-    ASSERT_NE(g->getCurrentState(), nullptr);
-}
-
-TEST_F(GameTest, GetCurrentStateAfterSwitch)
-{
-    g->switchState(std::make_shared<NiceMock<MockState>>());
-    ASSERT_NO_THROW(g->run());
-    ASSERT_NE(g->getCurrentState(), nullptr);
-}
-
-TEST_F(GameTest, GetCurrentStateAfterSwitchWithoutRun)
-{
-    g->switchState(std::make_shared<NiceMock<MockState>>());
-    ASSERT_NE(g->getCurrentState(), nullptr);
-}
-
 TEST_F(GameTest, RunWithOutState) { EXPECT_NO_THROW(g->run()); }
 
 TEST_F(GameTest, RunWithState)
@@ -130,12 +101,14 @@ TEST_F(GameTest, GameRunWithStateThrowingStdException)
     ASSERT_THROW(g->run(), std::invalid_argument);
 }
 
+// TODO
+/*
 TEST_F(GameTest, GetCurrentStateDirectlyAfterSwitch)
 {
     auto state1 = std::make_shared<MockState>();
     g->switchState(state1);
     ASSERT_EQ(g->getCurrentState(), state1);
-}
+}*/
 
 TEST_F(GameTest, GameRunWithStateThrowingIntException)
 {

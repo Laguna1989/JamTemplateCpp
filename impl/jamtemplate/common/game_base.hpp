@@ -6,13 +6,12 @@
 #include "game_object.hpp"
 #include "music_player_interface.hpp"
 #include "render_target.hpp"
+#include "state_manager.hpp"
 #include "vector.hpp"
 #include <chrono>
 #include <memory>
 
 namespace jt {
-class GameState;
-
 class GameBase : public GameInterface,
                  public GameObject,
                  public std::enable_shared_from_this<GameBase> {
@@ -24,16 +23,13 @@ public:
     // doSwitchState() which will happen at the beginning of the next update loop.
     void switchState(std::shared_ptr<GameState> newState) override;
 
-    std::shared_ptr<GameState> getCurrentState() override;
-
     void run() override;
 
     virtual std::shared_ptr<CamInterface> getCamera() override;
     virtual std::shared_ptr<CamInterface> getCamera() const override;
 
 protected:
-    std::shared_ptr<GameState> m_state { nullptr };
-    std::shared_ptr<GameState> m_nextState { nullptr };
+    std::shared_ptr<StateManager> m_stateManager { nullptr };
 
     std::shared_ptr<CamInterface> mutable m_camera { nullptr };
 
@@ -45,7 +41,7 @@ protected:
     virtual void doUpdate(float const elapsed) override = 0;
     virtual void doDraw() const override = 0;
 
-    void doSwitchState();
+    void reset();
 };
 
 } // namespace jt
