@@ -182,3 +182,18 @@ TEST(GameTestWithOutSetup, CreateWithNullptrMusicPlayer)
 
     ASSERT_THROW(func(), std::invalid_argument);
 }
+
+TEST(GameTestWithOutSetup, CreateWithNullptrStateManager)
+{
+    auto func = []() {
+        auto window = std::make_shared<MockWindow>();
+        auto input = std::make_shared<::testing::NiceMock<MockInput>>();
+        auto camera = std::make_shared<jt::Camera>();
+        auto musicPlayer = std::make_shared<jt::MusicPlayerNull>();
+        auto stateManager = nullptr;
+
+        auto game = std::make_shared<jt::Game>(window, input, musicPlayer, camera, stateManager);
+    };
+
+    ASSERT_THROW(func(), std::invalid_argument);
+}

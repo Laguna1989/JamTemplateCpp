@@ -2,7 +2,7 @@
 
 namespace jt {
 
-void MusicPlayer::PlayMusic(std::string const& fileName)
+void MusicPlayer::playMusic(std::string const& fileName)
 {
     m_musicFileName = fileName;
     m_music = std::make_shared<sf::Music>();
@@ -11,20 +11,20 @@ void MusicPlayer::PlayMusic(std::string const& fileName)
     m_music->setLoop(true);
 }
 
-void MusicPlayer::StopMusic()
+void MusicPlayer::stopMusic()
 {
     if (m_music) {
         m_music->stop();
     }
 }
-void MusicPlayer::SetMusicVolume(float v)
+void MusicPlayer::setMusicVolume(float v)
 {
     if (m_music) {
         m_music->setVolume(v);
     }
 }
 
-float MusicPlayer::GetMusicVolume()
+float MusicPlayer::getMusicVolume()
 {
     if (m_music) {
         return m_music->getVolume();
@@ -32,6 +32,6 @@ float MusicPlayer::GetMusicVolume()
     return 0.0f;
 }
 
-std::string MusicPlayer::GetMusicFilePath() { return m_musicFileName; }
+std::string MusicPlayer::getMusicFilePath() { return m_musicFileName; }
 
 } // namespace jt
