@@ -20,8 +20,7 @@ namespace jt {
 Game::Game(std::shared_ptr<RenderWindowInterface> window,
     std::shared_ptr<InputManagerInterface> input, std::shared_ptr<MusicPlayerInterface> musicPlayer,
     std::shared_ptr<CamInterface> camera, std::shared_ptr<StateManagerInterface> stateManager)
-    : GameBase { input, musicPlayer, camera, stateManager }
-    , m_input { input }
+    : GameBase { window, input, musicPlayer, camera, stateManager }
 {
     auto const width = getRenderWindow()->getSize().x();
     auto const height = getRenderWindow()->getSize().y();
