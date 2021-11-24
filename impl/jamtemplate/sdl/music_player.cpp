@@ -23,7 +23,7 @@ void MusicPlayer::playMusic(std::string const& fileName)
     if (result == -1) {
         std::cout << "play music failed\n" << Mix_GetError() << std::endl;
     }
-    SetMusicVolume(MaxVolume);
+    setMusicVolume(MaxVolume);
 }
 void MusicPlayer::stopMusic() { m_music = nullptr; }
 // range: 0.0f to 100.0f
