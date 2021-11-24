@@ -35,5 +35,6 @@ bool StateManager::checkForGameStateSwitch(std::weak_ptr<GameInterface> gameInst
     }
     return false;
 }
+std::shared_ptr<GameState> StateManager::getNextState() { return m_nextState; }
 
 } // namespace jt

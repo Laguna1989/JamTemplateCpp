@@ -16,7 +16,7 @@ class GameBase : public GameInterface,
                  public std::enable_shared_from_this<GameBase> {
 public:
     GameBase(std::shared_ptr<CamInterface> camera = nullptr,
-        std::shared_ptr<GameState> initialState = nullptr);
+        std::shared_ptr<StateManagerInterface> stateManager = nullptr);
 
     std::shared_ptr<StateManagerInterface> stateManager() override;
 

@@ -1,5 +1,6 @@
 ﻿#include "game_test.hpp"
 #include "mocks/mock_state.hpp"
+#include "mocks/mock_state_manager.hpp"
 #include "render_window.hpp"
 #include <camera.hpp>
 
@@ -13,19 +14,9 @@ TEST_F(GameTest, GameUpdateWithoutState) { g->update(0.01f); }
 
 TEST_F(GameTest, GameUpdateCallsStateUpdateForActiveState)
 {
-    auto ms = std::make_shared<MockState>();
-    EXPECT_CALL(*ms, doInternalCreate());
-    g->stateManager()->switchState(ms);
-
     float expected_update_time = 0.05f;
-    EXPECT_CALL(*ms, doInternalUpdate(expected_update_time));
+    EXPECT_CALL(*state, doInternalUpdate(expected_update_time));
     g->update(expected_update_time);
-}
-
-TEST_F(GameTest, SwitchToNullptrState)
-{
-    // TODO test separately for stateManager
-    ASSERT_THROW(g->stateManager()->switchState(nullptr), std::invalid_argument);
 }
 
 TEST_F(GameTest, SetNullptrRendertarget)
@@ -92,8 +83,6 @@ TEST_F(GameTest, GetMusicPlayer) { ASSERT_EQ(g->getMusicPlayer(), music_player);
 TEST_F(GameTest, GameRunWithStateThrowingStdException)
 {
     g->update(0.01f);
-    auto state = std::make_shared<MockState>();
-    EXPECT_CALL(*state, doInternalCreate());
     EXPECT_CALL(*state, doInternalUpdate(::testing::_))
         .WillOnce(::testing::Invoke([](auto /*elapsed*/) {
             throw std::invalid_argument { "deliberately raise exception." };
@@ -114,8 +103,7 @@ TEST_F(GameTest, GetCurrentStateDirectlyAfterSwitch)
 TEST_F(GameTest, GameRunWithStateThrowingIntException)
 {
     g->update(0.01f);
-    auto state = std::make_shared<MockState>();
-    EXPECT_CALL(*state, doInternalCreate());
+
     ON_CALL(*state, doInternalUpdate(::testing::_))
         .WillByDefault(::testing::Invoke([](auto /*elapsed*/) { throw int { 5 }; }));
     g->stateManager()->switchState(state);
@@ -123,13 +111,6 @@ TEST_F(GameTest, GameRunWithStateThrowingIntException)
 }
 
 TEST_F(GameTest, GetRenderWindowDoesNotReturnNullptr) { ASSERT_NE(g->getRenderWindow(), nullptr); }
-
-TEST_F(GameTest, SwitchStateCallsCameraReset)
-{
-    EXPECT_CALL(*camera, reset());
-    auto state = std::make_shared<MockState>();
-    g->stateManager()->switchState(state);
-}
 
 TEST_F(GameTest, GetCameraReturnsCorrectPointer) { ASSERT_EQ(g->getCamera(), camera); }
 
@@ -140,9 +121,12 @@ TEST(GameTestWithOutSetup, CreateWithNullptrWindow)
         auto input = std::make_shared<::testing::NiceMock<MockInput>>();
         auto camera = std::make_shared<jt::Camera>();
         auto musicPlayer = std::make_shared<jt::MusicPlayerNull>();
-        auto state = std::make_shared<MockState>();
 
-        auto game = std::make_shared<jt::Game>(window, input, musicPlayer, camera, state);
+        auto state = std::make_shared<MockState>();
+        auto stateManager = std::make_shared<MockStateManager>();
+        ON_CALL(*stateManager, getCurrentState).WillByDefault(::testing::Return(state));
+
+        auto game = std::make_shared<jt::Game>(window, input, musicPlayer, camera, stateManager);
     };
 
     ASSERT_THROW(func(), std::invalid_argument);
@@ -156,8 +140,10 @@ TEST(GameTestWithOutSetup, CreateWithNullptrInput)
         auto camera = std::make_shared<jt::Camera>();
         auto musicPlayer = std::make_shared<jt::MusicPlayerNull>();
         auto state = std::make_shared<MockState>();
+        auto stateManager = std::make_shared<MockStateManager>();
+        ON_CALL(*stateManager, getCurrentState).WillByDefault(::testing::Return(state));
 
-        auto game = std::make_shared<jt::Game>(window, input, musicPlayer, camera, state);
+        auto game = std::make_shared<jt::Game>(window, input, musicPlayer, camera, stateManager);
     };
 
     ASSERT_THROW(func(), std::invalid_argument);
@@ -171,8 +157,10 @@ TEST(GameTestWithOutSetup, CreateWithNullptrCamera)
         auto camera = nullptr;
         auto musicPlayer = std::make_shared<jt::MusicPlayerNull>();
         auto state = std::make_shared<MockState>();
+        auto stateManager = std::make_shared<MockStateManager>();
+        ON_CALL(*stateManager, getCurrentState).WillByDefault(::testing::Return(state));
 
-        auto game = std::make_shared<jt::Game>(window, input, musicPlayer, camera, state);
+        auto game = std::make_shared<jt::Game>(window, input, musicPlayer, camera, stateManager);
     };
 
     ASSERT_THROW(func(), std::invalid_argument);
@@ -186,8 +174,10 @@ TEST(GameTestWithOutSetup, CreateWithNullptrMusicPlayer)
         auto camera = std::make_shared<jt::Camera>();
         auto musicPlayer = nullptr;
         auto state = std::make_shared<MockState>();
+        auto stateManager = std::make_shared<MockStateManager>();
+        ON_CALL(*stateManager, getCurrentState).WillByDefault(::testing::Return(state));
 
-        auto game = std::make_shared<jt::Game>(window, input, musicPlayer, camera, state);
+        auto game = std::make_shared<jt::Game>(window, input, musicPlayer, camera, stateManager);
     };
 
     ASSERT_THROW(func(), std::invalid_argument);

@@ -13,6 +13,7 @@ class StateManager : public StateManagerInterface {
 public:
     StateManager(std::shared_ptr<GameState> initialState);
     std::shared_ptr<GameState> getCurrentState() override;
+    std::shared_ptr<GameState> getNextState();
 
     void switchState(std::shared_ptr<GameState> newState) override;
     void doSwitchState(std::weak_ptr<GameInterface> gameInstace) override;

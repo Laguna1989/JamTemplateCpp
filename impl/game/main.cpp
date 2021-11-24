@@ -10,6 +10,7 @@
 #include "render_window.hpp"
 #include "state_menu.hpp"
 #include <memory>
+#include <state_manager.hpp>
 
 std::shared_ptr<jt::GameInterface> game;
 
@@ -35,9 +36,9 @@ int main()
 
     std::shared_ptr<jt::MusicPlayer> musicPlayer = std::make_shared<jt::MusicPlayer>();
     auto camera = std::make_shared<jt::Camera>(GP::GetZoom());
-    std::shared_ptr<StateMenu> initialState = std::make_shared<StateMenu>();
+    auto stateManager = std::make_shared<jt::StateManager>(std::make_shared<StateMenu>());
 
-    game = std::make_shared<jt::Game>(window, input, musicPlayer, camera, initialState);
+    game = std::make_shared<jt::Game>(window, input, musicPlayer, camera, stateManager);
     game->startGame(gameloop);
 
     return 0;

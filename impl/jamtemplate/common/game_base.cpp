@@ -9,12 +9,16 @@
 
 namespace jt {
 
-GameBase::GameBase(std::shared_ptr<CamInterface> camera, std::shared_ptr<GameState> initialState)
+GameBase::GameBase(
+    std::shared_ptr<CamInterface> camera, std::shared_ptr<StateManagerInterface> stateManager)
     : m_camera { std::move(camera) }
+    , m_stateManager { stateManager }
 {
-    m_stateManager = std::make_shared<StateManager>(initialState);
     if (m_camera == nullptr) {
         throw std::invalid_argument { "camera DI for game can not be null" };
+    }
+    if (m_stateManager == nullptr) {
+        throw std::invalid_argument { "stateManager DI for game can not be null" };
     }
 }
 
