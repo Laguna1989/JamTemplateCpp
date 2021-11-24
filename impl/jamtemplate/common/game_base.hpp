@@ -11,31 +11,43 @@
 #include <memory>
 
 namespace jt {
-class GameState;
-
 class GameBase : public GameInterface,
                  public GameObject,
                  public std::enable_shared_from_this<GameBase> {
 public:
-    GameBase(std::shared_ptr<CamInterface> camera = nullptr,
-        std::shared_ptr<GameState> initialState = nullptr);
-    // this function will likely be called by the user from within update().
-    // To ensure consisten behavior within one frame, the actual switching will take place in
-    // doSwitchState() which will happen at the beginning of the next update loop.
-    void switchState(std::shared_ptr<GameState> newState) override;
-
-    std::shared_ptr<GameState> getCurrentState() override;
+    GameBase(std::shared_ptr<jt::RenderWindowInterface> renderWindow,
+        std::shared_ptr<InputManagerInterface> input,
+        std::shared_ptr<MusicPlayerInterface> musicPlayer, std::shared_ptr<CamInterface> camera,
+        std::shared_ptr<StateManagerInterface> stateManager);
 
     void run() override;
+
+    std::shared_ptr<jt::RenderWindowInterface> getRenderWindow() const override;
+
+    std::shared_ptr<InputManagerInterface> input() override;
+
+    std::shared_ptr<MusicPlayerInterface> getMusicPlayer() override;
 
     virtual std::shared_ptr<CamInterface> getCamera() override;
     virtual std::shared_ptr<CamInterface> getCamera() const override;
 
+    std::shared_ptr<StateManagerInterface> getStateManager() override;
+
+    void setRenderTarget(std::shared_ptr<jt::renderTarget> rt) override;
+    std::shared_ptr<jt::renderTarget> getRenderTarget() const override;
+
 protected:
-    std::shared_ptr<GameState> m_state { nullptr };
-    std::shared_ptr<GameState> m_nextState { nullptr };
+    std::shared_ptr<jt::RenderWindowInterface> m_renderWindow { nullptr };
+
+    std::shared_ptr<InputManagerInterface> m_inputManager { nullptr };
 
     std::shared_ptr<CamInterface> mutable m_camera { nullptr };
+
+    std::shared_ptr<MusicPlayerInterface> m_musicPlayer { nullptr };
+
+    std::shared_ptr<StateManagerInterface> m_stateManager { nullptr };
+
+    std::shared_ptr<jt::renderTarget> m_renderTarget { nullptr };
 
     std::chrono::steady_clock::time_point m_timeLast {};
 
@@ -45,7 +57,8 @@ protected:
     virtual void doUpdate(float const elapsed) override = 0;
     virtual void doDraw() const override = 0;
 
-    void doSwitchState();
+private:
+    void reset();
 };
 
 } // namespace jt

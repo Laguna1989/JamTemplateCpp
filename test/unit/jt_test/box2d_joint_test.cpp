@@ -16,43 +16,57 @@ public:
 TEST_F(Box2dJointTest, ConstructorCallsCreateJoint)
 {
     EXPECT_CALL(*m_mockWorld, createJoint(nullptr));
-    jt::Box2DJoint obj { m_mockWorld, nullptr };
+    jt::Box2DJoint joint { m_mockWorld, nullptr };
 }
 
 TEST_F(Box2dJointTest, GetBodyReturnsNullptrWhenCreatedWithNullptrJointDef)
 {
-    jt::Box2DJoint obj { m_mockWorld, nullptr };
-    EXPECT_EQ(obj.getB2Joint(), nullptr);
+    jt::Box2DJoint joint { m_mockWorld, nullptr };
+    EXPECT_EQ(joint.getB2Joint(), nullptr);
 }
 
 TEST_F(Box2dJointTest, Create)
 {
-    jt::Box2DJoint obj { m_mockWorld, nullptr };
+    jt::Box2DJoint joint { m_mockWorld, nullptr };
     auto g = std::make_shared<MockGame>();
 
-    obj.setGameInstance(g);
-    obj.create();
+    joint.setGameInstance(g);
+    joint.create();
     SUCCEED();
 }
 
 TEST_F(Box2dJointTest, Update)
 {
-    jt::Box2DJoint obj { m_mockWorld, nullptr };
-    obj.update(1.0f);
+    jt::Box2DJoint joint { m_mockWorld, nullptr };
+    joint.update(1.0f);
     SUCCEED();
 }
 
 TEST_F(Box2dJointTest, Draw)
 {
-    jt::Box2DJoint obj { m_mockWorld, nullptr };
-    obj.draw();
+    jt::Box2DJoint joint { m_mockWorld, nullptr };
+    joint.draw();
     SUCCEED();
 }
 
 TEST_F(Box2dJointTest, DestroyCallsDestroyJointOnWorld)
 {
-    jt::Box2DJoint obj { m_mockWorld, nullptr };
+    jt::Box2DJoint joint { m_mockWorld, nullptr };
 
     EXPECT_CALL(*m_mockWorld, destroyJoint(_));
-    obj.destroy();
+    joint.destroy();
+}
+
+TEST_F(Box2dJointTest, DestroyJointWithoutWorld)
+{
+    jt::Box2DJoint joint { m_mockWorld, nullptr };
+
+    m_mockWorld.reset();
+    joint.destroy();
+}
+
+TEST_F(Box2dJointTest, CreateJointWithNullptrWorldRaisesException)
+{
+    auto func = []() { jt::Box2DJoint joint { nullptr, nullptr }; };
+    ASSERT_THROW(func(), std::invalid_argument);
 }

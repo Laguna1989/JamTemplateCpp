@@ -12,11 +12,10 @@ public:
     MOCK_METHOD(std::shared_ptr<jt::CamInterface>, getCamera, (), (override));
     MOCK_METHOD(std::shared_ptr<jt::CamInterface>, getCamera, (), (const, override));
 
+    MOCK_METHOD(std::shared_ptr<jt::StateManagerInterface>, getStateManager, (), (override));
+
     MOCK_METHOD(void, setRenderTarget, (std::shared_ptr<jt::renderTarget>), (override));
     MOCK_METHOD(std::shared_ptr<jt::renderTarget>, getRenderTarget, (), (const, override));
-
-    MOCK_METHOD(void, switchState, (std::shared_ptr<jt::GameState>), (override));
-    MOCK_METHOD(std::shared_ptr<jt::GameState>, getCurrentState, (), (override));
 
     MOCK_METHOD(void, run, (), (override));
     MOCK_METHOD(void, startGame, (jt::GameLoopInterface::GameLoopFunctionPtr), (override));

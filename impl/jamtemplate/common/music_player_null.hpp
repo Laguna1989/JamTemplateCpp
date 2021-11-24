@@ -6,11 +6,11 @@
 namespace jt {
 class MusicPlayerNull : public MusicPlayerInterface {
 public:
-    void PlayMusic(std::string const& fileName) override;
-    void StopMusic() override;
-    void SetMusicVolume(float v) override;
-    float GetMusicVolume() override;
-    std::string GetMusicFilePath() override;
+    void playMusic(std::string const& fileName) override;
+    void stopMusic() override;
+    void setMusicVolume(float v) override;
+    float getMusicVolume() override;
+    std::string getMusicFilePath() override;
 
 private:
     std::string m_filename { "" };

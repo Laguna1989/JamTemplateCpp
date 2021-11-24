@@ -9,12 +9,12 @@ namespace jt {
 
 class MusicPlayer : public jt::MusicPlayerInterface {
 public:
-    virtual void PlayMusic(std::string const& fileName) override;
-    virtual void StopMusic() override;
+    virtual void playMusic(std::string const& fileName) override;
+    virtual void stopMusic() override;
     // range: 0.0f to 100.0f
-    virtual void SetMusicVolume(float newVolume) override;
-    virtual float GetMusicVolume() override;
-    virtual std::string GetMusicFilePath() override;
+    virtual void setMusicVolume(float newVolume) override;
+    virtual float getMusicVolume() override;
+    virtual std::string getMusicFilePath() override;
 
 private:
     std::string m_musicFileName;

@@ -5,6 +5,7 @@
 #include "music_player_null.hpp"
 #include "render_window_null.hpp"
 #include "shape.hpp"
+#include "state_manager.hpp"
 #include "system_helper.hpp"
 #include "tweens/tween_color.hpp"
 #include <benchmark/benchmark.h>
@@ -48,10 +49,10 @@ static void BM_GamestateWithTweeningShapes(benchmark::State& state)
         std::shared_ptr<jt::null_objects::RenderWindowNull> window
             = std::make_shared<jt::null_objects::RenderWindowNull>(800, 600, "jt_performance");
         auto game = std::make_shared<jt::Game>(window, std::make_shared<jt::InputManagerNull>(),
-            std::make_shared<jt::MusicPlayerNull>(), std::make_shared<jt::Camera>(1.0f), nullptr);
+            std::make_shared<jt::MusicPlayerNull>(), std::make_shared<jt::Camera>(1.0f),
+            std::make_shared<jt::StateManager>(std::make_shared<StateTweenPerformanceTest>()));
 
-        auto gs = std::make_shared<StateTweenPerformanceTest>();
-        game->switchState(gs);
+        game->getStateManager()->doSwitchState(game);
         for (int i = 0; i != 500; ++i) {
             game->update(0.02f);
             game->draw();

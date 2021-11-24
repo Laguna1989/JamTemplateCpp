@@ -10,7 +10,7 @@ float MusicPlayer::JtToSdlVolume(float jtVolume) const
     return max_sdl_volume * jtVolume / MaxVolume;
 }
 
-void MusicPlayer::PlayMusic(std::string const& fileName)
+void MusicPlayer::playMusic(std::string const& fileName)
 {
     m_musicFileName = fileName;
 
@@ -23,17 +23,17 @@ void MusicPlayer::PlayMusic(std::string const& fileName)
     if (result == -1) {
         std::cout << "play music failed\n" << Mix_GetError() << std::endl;
     }
-    SetMusicVolume(MaxVolume);
+    setMusicVolume(MaxVolume);
 }
-void MusicPlayer::StopMusic() { m_music = nullptr; }
+void MusicPlayer::stopMusic() { m_music = nullptr; }
 // range: 0.0f to 100.0f
-void MusicPlayer::SetMusicVolume(float newVolume)
+void MusicPlayer::setMusicVolume(float newVolume)
 {
     m_musicVolume = JtToSdlVolume(newVolume);
     Mix_VolumeMusic(static_cast<int>(m_musicVolume));
 }
 
-float MusicPlayer::GetMusicVolume() { return m_musicVolume; }
-std::string MusicPlayer::GetMusicFilePath() { return m_musicFileName; }
+float MusicPlayer::getMusicVolume() { return m_musicVolume; }
+std::string MusicPlayer::getMusicFilePath() { return m_musicFileName; }
 
 } // namespace jt

@@ -19,26 +19,15 @@ public:
         std::shared_ptr<InputManagerInterface> input = nullptr,
         std::shared_ptr<MusicPlayerInterface> musicPlayer = nullptr,
         std::shared_ptr<CamInterface> camera = nullptr,
-        std::shared_ptr<GameState> initialState = nullptr);
+        std::shared_ptr<StateManagerInterface> stateManager = nullptr);
 
     void startGame(GameLoopFunctionPtr gameloop_function) override;
 
     void setupRenderTarget() override;
 
-    void setRenderTarget(std::shared_ptr<jt::renderTarget> rt) override;
-    std::shared_ptr<jt::renderTarget> getRenderTarget() const override;
-
-    std::shared_ptr<MusicPlayerInterface> getMusicPlayer() override;
-
-    std::shared_ptr<InputManagerInterface> input() override;
-
-    std::shared_ptr<jt::RenderWindowInterface> getRenderWindow() const override;
-
 private:
     std::shared_ptr<jt::renderTarget> m_renderTarget { nullptr };
     std::shared_ptr<jt::RenderWindowInterface> m_window;
-
-    std::shared_ptr<InputManagerInterface> m_input { nullptr };
 
     jt::Recti m_srcRect;
     jt::Recti m_destRect;
@@ -46,8 +35,6 @@ private:
     // override functions from GameBase
     virtual void doUpdate(float const elapsed) override;
     virtual void doDraw() const override;
-
-    std::shared_ptr<MusicPlayerInterface> m_musicPlayer { nullptr };
 };
 
 } // namespace jt

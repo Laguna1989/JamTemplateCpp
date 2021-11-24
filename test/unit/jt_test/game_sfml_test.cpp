@@ -35,6 +35,7 @@ TEST_F(GameTest, SetRenderTarget)
 
     g->setRenderTarget(g->getRenderTarget());
 }
+
 TEST_F(GameTest, DrawWithRenderTargetAndState)
 {
     EXPECT_CALL(*window, createRenderTarget())
@@ -43,12 +44,8 @@ TEST_F(GameTest, DrawWithRenderTargetAndState)
     g->setupRenderTarget();
     ASSERT_NE(g->getRenderTarget(), nullptr);
 
-    auto ms = std::make_shared<MockState>();
-    EXPECT_CALL(*ms, doInternalCreate());
-    g->switchState(ms);
-
-    EXPECT_CALL(*ms, doInternalUpdate(0.1f));
+    EXPECT_CALL(*state, doInternalUpdate(0.1f));
     g->update(0.1f);
-    EXPECT_CALL(*ms, doInternalDraw());
+    EXPECT_CALL(*state, doInternalDraw());
     g->draw();
 }

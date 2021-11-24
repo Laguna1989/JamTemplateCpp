@@ -19,31 +19,18 @@ namespace jt {
 
 Game::Game(std::shared_ptr<RenderWindowInterface> window,
     std::shared_ptr<InputManagerInterface> input, std::shared_ptr<MusicPlayerInterface> musicPlayer,
-    std::shared_ptr<CamInterface> camera, std::shared_ptr<GameState> initialState)
-    : GameBase { camera, initialState }
-    , m_input { input }
-    , m_musicPlayer { musicPlayer }
+    std::shared_ptr<CamInterface> camera, std::shared_ptr<StateManagerInterface> stateManager)
+    : GameBase { window, input, musicPlayer, camera, stateManager }
 {
-    if (m_window == nullptr) {
-        throw std::invalid_argument { "render window DI for game can not be null" };
-    }
-    if (m_input == nullptr) {
-        throw std::invalid_argument { "input DI for game can not be null" };
-    }
-    if (m_musicPlayer == nullptr) {
-        throw std::invalid_argument { "music player DI for game can not be null" };
-    }
-    auto const width = window->getSize().x();
-    auto const height = window->getSize().y();
+    auto const width = getRenderWindow()->getSize().x();
+    auto const height = getRenderWindow()->getSize().y();
 
     auto const scaledWidth = static_cast<int>(width / getCamera()->getZoom());
     auto const scaledHeight = static_cast<int>(height / getCamera()->getZoom());
     m_srcRect = jt::Recti { 0, 0, scaledWidth, scaledHeight };
     m_destRect = jt::Recti { 0, 0, static_cast<int>(width), static_cast<int>(height) };
 
-    m_window = window;
-
-    m_renderTarget = m_window->createRenderTarget();
+    m_renderTarget = getRenderWindow()->createRenderTarget();
     TTF_Init();
     TextureManager::setRenderer(m_renderTarget);
 
@@ -65,38 +52,28 @@ void Game::startGame(GameLoopFunctionPtr gameloop_function)
 #ifdef ENABLE_WEB
     emscripten_set_main_loop(gameloop_function, 0, 1);
 #else
-    while (m_window->isOpen()) {
-        m_window->checkForClose();
+    while (getRenderWindow()->isOpen()) {
+        getRenderWindow()->checkForClose();
         gameloop_function();
     }
 #endif
 }
-
-void Game::setRenderTarget(std::shared_ptr<jt::renderTarget> rt)
-{
-    if (rt == nullptr) {
-        throw std::invalid_argument { "cannot set nullptr rendertarget" };
-    }
-    m_renderTarget = rt;
-}
-
-std::shared_ptr<jt::renderTarget> Game::getRenderTarget() const { return m_renderTarget; }
-
 void Game::doUpdate(float const elapsed)
 {
-    jt::Vector2 const mpf = m_window->getMousePosition() / getCamera()->getZoom();
+    jt::Vector2 const mpf = getRenderWindow()->getMousePosition() / getCamera()->getZoom();
 
     input()->update(MousePosition { mpf.x() + getCamera()->getCamOffset().x(),
         mpf.y() + getCamera()->getCamOffset().y(), mpf.x(), mpf.y() });
-    m_state->update(elapsed);
+    m_stateManager->getCurrentState()->update(elapsed);
 
     DrawableImpl::setCamOffset(-1.0f * getCamera()->getCamOffset());
 };
 
 void Game::doDraw() const
 {
-    // for reasons this can not be a member.
+
     SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "0");
+    // for reasons this can not be a member.
     auto* const t = SDL_CreateTexture(getRenderTarget().get(), SDL_PIXELFORMAT_RGBA8888,
         SDL_TEXTUREACCESS_TARGET, static_cast<int>(m_srcRect.width()),
         static_cast<int>(m_srcRect.height()));
@@ -104,7 +81,7 @@ void Game::doDraw() const
     // render to the small texture first
     SDL_SetRenderTarget(getRenderTarget().get(), t);
     SDL_RenderClear(getRenderTarget().get());
-    m_state->draw();
+    m_stateManager->getCurrentState()->draw();
 
     // Detach the texture
     SDL_SetRenderTarget(getRenderTarget().get(), nullptr);
@@ -121,11 +98,5 @@ void Game::doDraw() const
 
     SDL_DestroyTexture(t);
 };
-
-std::shared_ptr<MusicPlayerInterface> Game::getMusicPlayer() { return m_musicPlayer; }
-
-std::shared_ptr<InputManagerInterface> Game::input() { return m_input; }
-
-std::shared_ptr<jt::RenderWindowInterface> Game::getRenderWindow() const { return m_window; }
 
 } // namespace jt

@@ -30,7 +30,8 @@ class StateSelect : public jt::GameState {
             = detail::buttonOffsetY + m_buttonCount * (detail::buttonMarginY + detail::buttonSizeY);
         auto const button = std::make_shared<jt::Button>(
             jt::Vector2u { detail::buttonSizeX, detail::buttonSizeY });
-        button->addCallback([this]() { getGame()->switchState(std::make_shared<State>()); });
+        button->addCallback(
+            [this]() { getGame()->getStateManager()->switchState(std::make_shared<State>()); });
         auto const text = jt::dh::createText(getGame()->getRenderTarget(), textString, 12);
         text->setTextAlign(jt::Text::TextAlign::LEFT);
         text->setOrigin(jt::Vector2 { -8, 0 });
