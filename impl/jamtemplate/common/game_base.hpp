@@ -41,9 +41,9 @@ protected:
 
     std::shared_ptr<InputManagerInterface> m_inputManager { nullptr };
 
-    std::shared_ptr<MusicPlayerInterface> m_musicPlayer { nullptr };
-
     std::shared_ptr<CamInterface> mutable m_camera { nullptr };
+
+    std::shared_ptr<MusicPlayerInterface> m_musicPlayer { nullptr };
 
     std::shared_ptr<StateManagerInterface> m_stateManager { nullptr };
 

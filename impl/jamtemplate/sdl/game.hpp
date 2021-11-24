@@ -25,9 +25,6 @@ public:
 
     void setupRenderTarget() override;
 
-    void setRenderTarget(std::shared_ptr<jt::renderTarget> rt) override;
-    std::shared_ptr<jt::renderTarget> getRenderTarget() const override;
-
     std::shared_ptr<jt::RenderWindowInterface> getRenderWindow() const override;
 
 private:
