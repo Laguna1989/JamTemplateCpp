@@ -6,7 +6,6 @@
 #include "game_object.hpp"
 #include "music_player_interface.hpp"
 #include "render_target.hpp"
-#include "state_manager.hpp"
 #include "vector.hpp"
 #include <chrono>
 #include <memory>
@@ -18,10 +17,8 @@ class GameBase : public GameInterface,
 public:
     GameBase(std::shared_ptr<CamInterface> camera = nullptr,
         std::shared_ptr<GameState> initialState = nullptr);
-    // this function will likely be called by the user from within update().
-    // To ensure consisten behavior within one frame, the actual switching will take place in
-    // doSwitchState() which will happen at the beginning of the next update loop.
-    void switchState(std::shared_ptr<GameState> newState) override;
+
+    std::shared_ptr<StateManagerInterface> stateManager() override;
 
     void run() override;
 
@@ -29,7 +26,7 @@ public:
     virtual std::shared_ptr<CamInterface> getCamera() const override;
 
 protected:
-    std::shared_ptr<StateManager> m_stateManager { nullptr };
+    std::shared_ptr<StateManagerInterface> m_stateManager { nullptr };
 
     std::shared_ptr<CamInterface> mutable m_camera { nullptr };
 

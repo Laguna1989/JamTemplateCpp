@@ -11,16 +11,6 @@ class GameLoopInterface {
 public:
     using GameLoopFunctionPtr = std::add_pointer<void()>::type;
 
-    // this function will likely be called by the user from within update().
-    // To ensure consisten behavior within one frame, the actual switching will take place in
-    // doSwitchState() which will happen at the beginning of the next update loop.
-    /// Switch Gamestate
-    ///
-    /// Will only switch after the next call to update
-    ///
-    /// \param newState the new state to be switched to
-    virtual void switchState(std::shared_ptr<GameState> newState) = 0;
-
     /// Run the Game
     virtual void run() = 0;
     /// Start the game

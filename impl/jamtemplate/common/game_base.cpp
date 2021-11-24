@@ -2,6 +2,7 @@
 #include "camera.hpp"
 #include "game_state.hpp"
 #include "input_manager_interface.hpp"
+#include "state_manager.hpp"
 #include <exception>
 #include <iostream>
 #include <stdexcept>
@@ -15,11 +16,6 @@ GameBase::GameBase(std::shared_ptr<CamInterface> camera, std::shared_ptr<GameSta
     if (m_camera == nullptr) {
         throw std::invalid_argument { "camera DI for game can not be null" };
     }
-}
-
-void GameBase::switchState(std::shared_ptr<GameState> newState)
-{
-    m_stateManager->switchState(newState);
 }
 
 void GameBase::run()
@@ -60,5 +56,6 @@ void GameBase::reset()
 
 std::shared_ptr<CamInterface> GameBase::getCamera() { return m_camera; }
 std::shared_ptr<CamInterface> GameBase::getCamera() const { return m_camera; }
+std::shared_ptr<StateManagerInterface> GameBase::stateManager() { return m_stateManager; }
 
 } // namespace jt

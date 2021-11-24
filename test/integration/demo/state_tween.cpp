@@ -56,7 +56,7 @@ void StateTween::doInternalUpdate(float const elapsed)
 {
     if (getGame()->input()->keyboard()->justPressed(jt::KeyCode::F1)
         || getGame()->input()->keyboard()->justPressed(jt::KeyCode::Escape)) {
-        getGame()->switchState(std::make_shared<StateSelect>());
+        getGame()->stateManager()->switchState(std::make_shared<StateSelect>());
     }
 
     m_background->update(elapsed);

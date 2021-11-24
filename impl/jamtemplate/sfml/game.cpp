@@ -83,9 +83,6 @@ std::shared_ptr<jt::renderTarget> Game::getRenderTarget() const { return m_rende
 
 void Game::doUpdate(float const elapsed)
 {
-    if (m_stateManager->m_state == nullptr) {
-        return;
-    }
     m_stateManager->getCurrentState()->update(elapsed);
     getCamera()->update(elapsed);
 
