@@ -3,12 +3,9 @@
 
 #include "game_base.hpp"
 #include "render_target.hpp"
-#include "render_window_interface.hpp"
 #include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
 #include <chrono>
-#include <memory>
-#include <string>
 
 namespace jt {
 
@@ -18,37 +15,21 @@ public:
     using Sptr = std::shared_ptr<Game>;
 
     /// Constructor
-    /// \param window window, can be nullptr
-    /// \param inputManager input manager, can be nullptr
-    /// \param musicPlayer music player, can be nullptr
-    /// \param camera camera, can be nullptr
-    /// \param initialState initialState
+    /// \param window window
+    /// \param inputManager input manager
+    /// \param musicPlayer music player
+    /// \param camera camera
+    /// \param stateManager state manager
     Game(std::shared_ptr<RenderWindowInterface> window,
-        std::shared_ptr<InputManagerInterface> inputManager = nullptr,
-        std::shared_ptr<MusicPlayerInterface> musicPlayer = nullptr,
-        std::shared_ptr<CamInterface> camera = nullptr,
-        std::shared_ptr<jt::StateManagerInterface> stateManager = nullptr);
+        std::shared_ptr<InputManagerInterface> inputManager,
+        std::shared_ptr<MusicPlayerInterface> musicPlayer, std::shared_ptr<CamInterface> camera,
+        std::shared_ptr<jt::StateManagerInterface> stateManager);
 
     void startGame(GameLoopFunctionPtr gameloop_function) override;
 
     void setupRenderTarget() override;
-    void setRenderTarget(std::shared_ptr<jt::renderTarget> rt) override;
-    std::shared_ptr<jt::renderTarget> getRenderTarget() const override;
-
-    std::shared_ptr<MusicPlayerInterface> getMusicPlayer() override;
-
-    std::shared_ptr<InputManagerInterface> input() override;
-
-    std::shared_ptr<jt::RenderWindowInterface> getRenderWindow() const override;
 
 private:
-    std::shared_ptr<jt::RenderWindowInterface> m_window { nullptr };
-    std::shared_ptr<jt::renderTarget> m_renderTarget { nullptr };
-
-    // TODO move to GameBase
-    std::shared_ptr<InputManagerInterface> m_input { nullptr };
-    std::shared_ptr<MusicPlayerInterface> m_musicPlayer { nullptr };
-
     std::shared_ptr<sf::View> m_view { nullptr };
 
     mutable std::unique_ptr<jt::Sprite> m_sprite_for_drawing { nullptr };

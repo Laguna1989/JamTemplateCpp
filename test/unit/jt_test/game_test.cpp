@@ -29,13 +29,13 @@ TEST_F(GameTest, SwitchStateTwice)
     auto ms1 = std::make_shared<NiceMock<MockState>>();
     auto ms2 = std::make_shared<NiceMock<MockState>>();
 
-    g->stateManager()->switchState(ms1);
+    g->getStateManager()->switchState(ms1);
 
     float expected_update_time = 0.05f;
     g->update(expected_update_time);
 
     g->draw();
-    g->stateManager()->switchState(ms2);
+    g->getStateManager()->switchState(ms2);
 
     // first update is required to switch the state
     g->update(0.0f);
@@ -54,17 +54,17 @@ TEST_F(GameTest, RunWithOutState) { EXPECT_NO_THROW(g->run()); }
 
 TEST_F(GameTest, RunWithState)
 {
-    g->stateManager()->switchState(std::make_shared<NiceMock<MockState>>());
+    g->getStateManager()->switchState(std::make_shared<NiceMock<MockState>>());
     ASSERT_NO_THROW(g->run());
     ASSERT_NO_THROW(g->run());
 }
 
 TEST_F(GameTest, RunWithTwoStates)
 {
-    g->stateManager()->switchState(std::make_shared<NiceMock<MockState>>());
+    g->getStateManager()->switchState(std::make_shared<NiceMock<MockState>>());
     ASSERT_NO_THROW(g->run());
     ASSERT_NO_THROW(g->run());
-    g->stateManager()->switchState(std::make_shared<NiceMock<MockState>>());
+    g->getStateManager()->switchState(std::make_shared<NiceMock<MockState>>());
     ASSERT_NO_THROW(g->run());
     ASSERT_NO_THROW(g->run());
 }
@@ -74,7 +74,7 @@ TEST_F(GameTest, StartGameWithOneIteration)
     EXPECT_CALL(*window, isOpen)
         .WillOnce(::testing::Return(true))
         .WillOnce(::testing::Return(false));
-    g->stateManager()->switchState(std::make_shared<MockState>());
+    g->getStateManager()->switchState(std::make_shared<MockState>());
     g->startGame([]() {});
 }
 
@@ -87,7 +87,7 @@ TEST_F(GameTest, GameRunWithStateThrowingStdException)
         .WillOnce(::testing::Invoke([](auto /*elapsed*/) {
             throw std::invalid_argument { "deliberately raise exception." };
         }));
-    g->stateManager()->switchState(state);
+    g->getStateManager()->switchState(state);
     ASSERT_THROW(g->run(), std::invalid_argument);
 }
 
@@ -96,7 +96,7 @@ TEST_F(GameTest, GameRunWithStateThrowingStdException)
 TEST_F(GameTest, GetCurrentStateDirectlyAfterSwitch)
 {
     auto state1 = std::make_shared<MockState>();
-    g->stateManager()->switchState(state1);
+    g->getStateManager()->switchState(state1);
     ASSERT_EQ(g->getCurrentState(), state1);
 }*/
 
@@ -106,7 +106,7 @@ TEST_F(GameTest, GameRunWithStateThrowingIntException)
 
     ON_CALL(*state, doInternalUpdate(::testing::_))
         .WillByDefault(::testing::Invoke([](auto /*elapsed*/) { throw int { 5 }; }));
-    g->stateManager()->switchState(state);
+    g->getStateManager()->switchState(state);
     ASSERT_THROW(g->run(), int);
 }
 

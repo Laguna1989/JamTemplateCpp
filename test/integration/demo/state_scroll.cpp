@@ -44,7 +44,7 @@ void StateScroll::doInternalUpdate(float const elapsed)
 {
     if (getGame()->input()->keyboard()->justPressed(jt::KeyCode::F1)
         || getGame()->input()->keyboard()->justPressed(jt::KeyCode::Escape)) {
-        getGame()->stateManager()->switchState(std::make_shared<StateSelect>());
+        getGame()->getStateManager()->switchState(std::make_shared<StateSelect>());
     }
 
     auto const scrollspeed = 50.0f;

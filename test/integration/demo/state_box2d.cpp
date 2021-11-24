@@ -39,7 +39,7 @@ void StateBox2d::doInternalUpdate(float const elapsed)
 
     if (getGame()->input()->keyboard()->justPressed(jt::KeyCode::F1)
         || getGame()->input()->keyboard()->justPressed(jt::KeyCode::Escape)) {
-        getGame()->stateManager()->switchState(std::make_shared<StateSelect>());
+        getGame()->getStateManager()->switchState(std::make_shared<StateSelect>());
     }
 
     float max_T = 5.5f;

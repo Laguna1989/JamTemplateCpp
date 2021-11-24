@@ -17,7 +17,7 @@ public:
     /// Destructor
     virtual ~GameInterface() = default;
 
-    virtual std::shared_ptr<StateManagerInterface> stateManager() = 0;
+    virtual std::shared_ptr<StateManagerInterface> getStateManager() = 0;
 
     /// Get the input manager
     /// \return the input manager (can be nullptr)

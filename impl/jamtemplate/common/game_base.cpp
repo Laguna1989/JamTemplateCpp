@@ -9,16 +9,29 @@
 
 namespace jt {
 
-GameBase::GameBase(
+GameBase::GameBase(std::shared_ptr<jt::RenderWindowInterface> renderWindow,
+    std::shared_ptr<InputManagerInterface> input, std::shared_ptr<MusicPlayerInterface> musicPlayer,
     std::shared_ptr<CamInterface> camera, std::shared_ptr<StateManagerInterface> stateManager)
-    : m_camera { std::move(camera) }
-    , m_stateManager { stateManager }
+    : m_renderWindow { std::move(renderWindow) }
+    , m_inputManager { std::move(input) }
+    , m_camera { std::move(camera) }
+    , m_musicPlayer { std::move(musicPlayer) }
+    , m_stateManager { std::move(stateManager) }
 {
+    if (m_renderWindow == nullptr) {
+        throw std::invalid_argument { "render window DI for game can not be null" };
+    }
+    if (m_inputManager == nullptr) {
+        throw std::invalid_argument { "input DI for game can not be null" };
+    }
     if (m_camera == nullptr) {
         throw std::invalid_argument { "camera DI for game can not be null" };
     }
+    if (m_musicPlayer == nullptr) {
+        throw std::invalid_argument { "music player DI for game can not be null" };
+    }
     if (m_stateManager == nullptr) {
-        throw std::invalid_argument { "stateManager DI for game can not be null" };
+        throw std::invalid_argument { "getStateManager DI for game can not be null" };
     }
 }
 
@@ -58,8 +71,28 @@ void GameBase::reset()
     input()->reset();
 }
 
+std::shared_ptr<jt::RenderWindowInterface> GameBase::getRenderWindow() const
+{
+    return m_renderWindow;
+}
+
+std::shared_ptr<InputManagerInterface> GameBase::input() { return m_inputManager; }
+
+std::shared_ptr<MusicPlayerInterface> GameBase::getMusicPlayer() { return m_musicPlayer; }
+
 std::shared_ptr<CamInterface> GameBase::getCamera() { return m_camera; }
 std::shared_ptr<CamInterface> GameBase::getCamera() const { return m_camera; }
-std::shared_ptr<StateManagerInterface> GameBase::stateManager() { return m_stateManager; }
+
+std::shared_ptr<StateManagerInterface> GameBase::getStateManager() { return m_stateManager; }
+
+void GameBase::setRenderTarget(std::shared_ptr<jt::renderTarget> rt)
+{
+    if (rt == nullptr) {
+        throw std::invalid_argument { "cannot set nullptr rendertarget" };
+    }
+    m_renderTarget = rt;
+}
+
+std::shared_ptr<jt::renderTarget> GameBase::getRenderTarget() const { return m_renderTarget; }
 
 } // namespace jt

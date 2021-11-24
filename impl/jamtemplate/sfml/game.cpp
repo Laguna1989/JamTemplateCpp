@@ -1,13 +1,9 @@
 ﻿#include "game.hpp"
-#include "cam_interface.hpp"
 #include "drawable_impl.hpp"
-#include "game_state.hpp"
-#include "input_manager.hpp"
 #include "rect.hpp"
 #include "render_window.hpp"
 #include "sprite.hpp"
 #include "vector.hpp"
-#include <iostream>
 
 namespace {
 void horizontalFlip(std::unique_ptr<jt::Sprite> const& spr, float zoom, float window_size_y)
@@ -23,32 +19,18 @@ namespace jt {
 Game::Game(std::shared_ptr<RenderWindowInterface> window,
     std::shared_ptr<InputManagerInterface> input, std::shared_ptr<MusicPlayerInterface> musicPlayer,
     std::shared_ptr<CamInterface> camera, std::shared_ptr<jt::StateManagerInterface> stateManager)
-    : GameBase { camera, stateManager }
-    , m_window { window }
-    , m_input { input }
-    , m_musicPlayer { musicPlayer }
+    : GameBase { window, input, musicPlayer, camera, stateManager }
 {
-    if (m_window == nullptr) {
-        throw std::invalid_argument { "render window DI for game can not be null" };
-    }
-    if (m_input == nullptr) {
-        throw std::invalid_argument { "input DI for game can not be null" };
-    }
-    if (m_musicPlayer == nullptr) {
-        throw std::invalid_argument { "music player DI for game can not be null" };
-    }
     m_sprite_for_drawing = std::make_unique<jt::Sprite>();
 }
 
-std::shared_ptr<InputManagerInterface> Game::input() { return m_input; }
-
 void Game::setupRenderTarget()
 {
-    m_renderTarget = m_window->createRenderTarget();
+    m_renderTarget = getRenderWindow()->createRenderTarget();
     if (m_renderTarget == nullptr) {
         return;
     }
-    auto const windowSize = m_window->getSize();
+    auto const windowSize = getRenderWindow()->getSize();
     auto const zoom = getCamera()->getZoom();
     auto const scaledWidth = static_cast<unsigned int>(windowSize.x() / zoom);
     auto const scaledHeight = static_cast<unsigned int>(windowSize.y() / zoom);
@@ -61,32 +43,21 @@ void Game::setupRenderTarget()
     m_view->setViewport(jt::Rect(0, 0, 1, 1));
 }
 
-std::shared_ptr<MusicPlayerInterface> Game::getMusicPlayer() { return m_musicPlayer; }
-
 void Game::startGame(GameLoopFunctionPtr gameloop_function)
 {
     setupRenderTarget();
-    while (m_window->isOpen()) {
-        m_window->checkForClose();
+    while (getRenderWindow()->isOpen()) {
+        getRenderWindow()->checkForClose();
         gameloop_function();
     }
 }
-
-void Game::setRenderTarget(std::shared_ptr<jt::renderTarget> rt)
-{
-    if (rt == nullptr) {
-        throw std::invalid_argument { "cannot set nullptr rendertarget" };
-    }
-    m_renderTarget = rt;
-}
-std::shared_ptr<jt::renderTarget> Game::getRenderTarget() const { return m_renderTarget; }
 
 void Game::doUpdate(float const elapsed)
 {
     m_stateManager->getCurrentState()->update(elapsed);
     getCamera()->update(elapsed);
 
-    jt::Vector2 const mpf = m_window->getMousePosition() / getCamera()->getZoom();
+    jt::Vector2 const mpf = getRenderWindow()->getMousePosition() / getCamera()->getZoom();
 
     input()->update(MousePosition { mpf.x() + getCamera()->getCamOffset().x(),
         mpf.y() + getCamera()->getCamOffset().y(), mpf.x(), mpf.y() });
@@ -108,12 +79,7 @@ void Game::doDraw() const
         return;
     }
 
-    // clear the old image
     m_renderTarget->clear(sf::Color::Black);
-
-    if (m_stateManager->getCurrentState() == nullptr) {
-        return;
-    }
 
     m_stateManager->getCurrentState()->draw();
 
@@ -125,15 +91,11 @@ void Game::doDraw() const
     auto const shakeOffset = getCamera()->getShakeOffset();
     m_sprite_for_drawing->setPosition(shakeOffset);
     // Note: RenderTexture has a bug and is displayed upside down.
-    horizontalFlip(m_sprite_for_drawing, getCamera()->getZoom(), m_window->getSize().y());
+    horizontalFlip(m_sprite_for_drawing, getCamera()->getZoom(), getRenderWindow()->getSize().y());
 
-    // draw the sprite
-    m_window->draw(m_sprite_for_drawing);
+    getRenderWindow()->draw(m_sprite_for_drawing);
 
-    // blit it to the screen
-    m_window->display();
+    getRenderWindow()->display();
 }
-
-std::shared_ptr<jt::RenderWindowInterface> Game::getRenderWindow() const { return m_window; }
 
 } // namespace jt
