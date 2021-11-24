@@ -19,7 +19,7 @@ public:
         std::shared_ptr<InputManagerInterface> input = nullptr,
         std::shared_ptr<MusicPlayerInterface> musicPlayer = nullptr,
         std::shared_ptr<CamInterface> camera = nullptr,
-        std::shared_ptr<GameState> initialState = nullptr);
+        std::shared_ptr<StateManagerInterface> stateManager = nullptr);
 
     void startGame(GameLoopFunctionPtr gameloop_function) override;
 

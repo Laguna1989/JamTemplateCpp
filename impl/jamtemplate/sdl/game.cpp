@@ -19,8 +19,8 @@ namespace jt {
 
 Game::Game(std::shared_ptr<RenderWindowInterface> window,
     std::shared_ptr<InputManagerInterface> input, std::shared_ptr<MusicPlayerInterface> musicPlayer,
-    std::shared_ptr<CamInterface> camera, std::shared_ptr<GameState> initialState)
-    : GameBase { camera, initialState }
+    std::shared_ptr<CamInterface> camera, std::shared_ptr<StateManagerInterface> stateManager)
+    : GameBase { camera, stateManager }
     , m_input { input }
     , m_musicPlayer { musicPlayer }
 {
@@ -88,7 +88,7 @@ void Game::doUpdate(float const elapsed)
 
     input()->update(MousePosition { mpf.x() + getCamera()->getCamOffset().x(),
         mpf.y() + getCamera()->getCamOffset().y(), mpf.x(), mpf.y() });
-    m_state->update(elapsed);
+    m_stateManager->getCurrentState()->update(elapsed);
 
     DrawableImpl::setCamOffset(-1.0f * getCamera()->getCamOffset());
 };
@@ -104,7 +104,7 @@ void Game::doDraw() const
     // render to the small texture first
     SDL_SetRenderTarget(getRenderTarget().get(), t);
     SDL_RenderClear(getRenderTarget().get());
-    m_state->draw();
+    m_stateManager->getCurrentState()->draw();
 
     // Detach the texture
     SDL_SetRenderTarget(getRenderTarget().get(), nullptr);
