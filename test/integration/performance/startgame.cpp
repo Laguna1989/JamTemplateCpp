@@ -5,6 +5,7 @@
 #include "music_player_null.hpp"
 #include "render_window_null.hpp"
 #include "shape.hpp"
+#include "state_manager.hpp"
 #include "tweens/tween_color.hpp"
 #include <benchmark/benchmark.h>
 #include <memory>
@@ -27,9 +28,12 @@ static void BM_StartGame(benchmark::State& state)
     for (auto _ : state) {
         std::shared_ptr<jt::null_objects::RenderWindowNull> window
             = std::make_shared<jt::null_objects::RenderWindowNull>(800, 600, "jt_performance");
+        std::shared_ptr<jt::StateManager> stateManager
+            = std::make_shared<jt::StateManager>(std::make_shared<StateEmpty>());
         auto game = std::make_shared<jt::Game>(window, std::make_shared<jt::InputManagerNull>(),
             std::make_shared<jt::MusicPlayerNull>(), std::make_shared<jt::Camera>(1.0f),
-            std::make_shared<StateEmpty>());
+            stateManager);
+        stateManager->doSwitchState(game);
         game->update(0.02f);
         game->draw();
     }

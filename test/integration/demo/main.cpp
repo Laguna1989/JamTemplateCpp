@@ -6,9 +6,9 @@
 #include "music_player_null.hpp"
 #include "random.hpp"
 #include "render_window.hpp"
+#include "state_manager.hpp"
 #include "state_select.hpp"
 #include <memory>
-#include <state_manager.hpp>
 
 std::shared_ptr<jt::GameInterface> game;
 
