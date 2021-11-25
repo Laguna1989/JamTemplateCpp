@@ -19,11 +19,6 @@ TEST_F(GameTest, GameUpdateCallsStateUpdateForActiveState)
     g->update(expected_update_time);
 }
 
-TEST_F(GameTest, SetNullptrRendertarget)
-{
-    ASSERT_THROW(g->setRenderTarget(nullptr), std::invalid_argument);
-}
-
 TEST_F(GameTest, SwitchStateTwice)
 {
     auto ms1 = std::make_shared<NiceMock<MockState>>();
@@ -43,11 +38,6 @@ TEST_F(GameTest, SwitchStateTwice)
     g->update(expected_update_time);
 
     g->draw();
-}
-
-TEST_F(GameTest, SetRenderTargetInvalid)
-{
-    ASSERT_THROW(g->setRenderTarget(nullptr), std::invalid_argument);
 }
 
 TEST_F(GameTest, RunWithOutState) { EXPECT_NO_THROW(g->run()); }

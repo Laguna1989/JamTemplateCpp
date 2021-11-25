@@ -1,4 +1,5 @@
 #include "state_manager.hpp"
+#include <iostream>
 #include <stdexcept>
 namespace jt {
 
@@ -20,21 +21,25 @@ void StateManager::switchState(std::shared_ptr<GameState> newState)
 
 void StateManager::doSwitchState(std::weak_ptr<GameInterface> gameInstance)
 {
+    std::cout << "StateManager::doSwitchState\n";
     m_nextState->setGameInstance(gameInstance);
+    std::cout << "StateManager::doSwitchState->create state\n";
     m_nextState->create();
 
     m_state = m_nextState;
     m_nextState = nullptr;
 }
 
-bool StateManager::checkForGameStateSwitch(std::weak_ptr<GameInterface> gameInstace)
+bool StateManager::checkForGameStateSwitch(std::weak_ptr<GameInterface> gameInstance)
 {
     if (m_nextState != nullptr) {
-        doSwitchState(gameInstace);
+        std::cout << "StateManager::checkForGameStateSwitch->true\n";
+        doSwitchState(gameInstance);
         return true;
     }
     return false;
 }
+
 std::shared_ptr<GameState> StateManager::getNextState() { return m_nextState; }
 
 } // namespace jt

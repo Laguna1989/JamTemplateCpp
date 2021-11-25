@@ -26,9 +26,6 @@ public:
     void setupRenderTarget() override;
 
 private:
-    std::shared_ptr<jt::renderTarget> m_renderTarget { nullptr };
-    std::shared_ptr<jt::RenderWindowInterface> m_window;
-
     jt::Recti m_srcRect;
     jt::Recti m_destRect;
 

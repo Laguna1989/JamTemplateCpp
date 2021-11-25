@@ -32,6 +32,7 @@ void Text::setText(std::string const& text)
     m_text = text;
     recreateTextTexture(getRenderTarget());
 }
+
 std::string Text::getText() const { return m_text; }
 
 void Text::setOutline(float /*thickness*/, jt::Color /*col*/)
@@ -183,6 +184,7 @@ jt::Vector2u Text::getSizeForLine(
 
 void Text::recreateTextTexture(std::shared_ptr<jt::renderTarget> const sptr)
 {
+    std::cout << "recreateTextTexture\n";
     if (!m_font) {
         std::cout << "no font loaded\n";
         return;
@@ -224,6 +226,7 @@ void Text::recreateTextTexture(std::shared_ptr<jt::renderTarget> const sptr)
 
 std::shared_ptr<jt::renderTarget> Text::getRenderTarget()
 {
+    std::cout << "getRenderTarget\n";
     if (m_rendertarget.expired()) {
         std::cout << "Cannot use Text without valid renderTarget\n";
         return nullptr;

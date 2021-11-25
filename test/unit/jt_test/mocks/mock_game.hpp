@@ -14,11 +14,10 @@ public:
 
     MOCK_METHOD(std::shared_ptr<jt::StateManagerInterface>, getStateManager, (), (override));
 
-    MOCK_METHOD(void, setRenderTarget, (std::shared_ptr<jt::renderTarget>), (override));
     MOCK_METHOD(std::shared_ptr<jt::renderTarget>, getRenderTarget, (), (const, override));
 
     MOCK_METHOD(void, run, (), (override));
-    MOCK_METHOD(void, startGame, (jt::GameLoopInterface::GameLoopFunctionPtr), (override));
+    MOCK_METHOD(void, startGame, (jt::GameInterface::GameLoopFunctionPtr), (override));
 
     MOCK_METHOD(void, setupRenderTarget, (), (override));
     MOCK_METHOD(std::shared_ptr<jt::RenderWindowInterface>, getRenderWindow, (), (const, override));

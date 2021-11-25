@@ -2,7 +2,6 @@
 #define GUARD_JAMTEMPLATE_GAMEBASE_HPP_GUARD
 
 #include "game_interface.hpp"
-#include "game_loop_interface.hpp"
 #include "game_object.hpp"
 #include "music_player_interface.hpp"
 #include "render_target.hpp"
@@ -33,7 +32,6 @@ public:
 
     std::shared_ptr<StateManagerInterface> getStateManager() override;
 
-    void setRenderTarget(std::shared_ptr<jt::renderTarget> rt) override;
     std::shared_ptr<jt::renderTarget> getRenderTarget() const override;
 
 protected:

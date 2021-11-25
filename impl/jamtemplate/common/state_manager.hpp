@@ -16,13 +16,14 @@ public:
     std::shared_ptr<GameState> getNextState();
 
     void switchState(std::shared_ptr<GameState> newState) override;
-    void doSwitchState(std::weak_ptr<GameInterface> gameInstace) override;
 
-    bool checkForGameStateSwitch(std::weak_ptr<GameInterface> gameInstace) override;
+    bool checkForGameStateSwitch(std::weak_ptr<GameInterface> gameInstance) override;
 
 private:
     std::shared_ptr<GameState> m_state { nullptr };
     std::shared_ptr<GameState> m_nextState { nullptr };
+
+    void doSwitchState(std::weak_ptr<GameInterface> gameInstace);
 };
 } // namespace jt
 

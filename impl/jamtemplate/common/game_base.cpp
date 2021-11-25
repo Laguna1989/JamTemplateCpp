@@ -39,6 +39,7 @@ void GameBase::run()
 {
     try {
         if (m_stateManager->checkForGameStateSwitch(getPtr())) {
+            std::cout << "GameBase::switchState\n";
             reset();
         }
 
@@ -84,14 +85,6 @@ std::shared_ptr<CamInterface> GameBase::getCamera() { return m_camera; }
 std::shared_ptr<CamInterface> GameBase::getCamera() const { return m_camera; }
 
 std::shared_ptr<StateManagerInterface> GameBase::getStateManager() { return m_stateManager; }
-
-void GameBase::setRenderTarget(std::shared_ptr<jt::renderTarget> rt)
-{
-    if (rt == nullptr) {
-        throw std::invalid_argument { "cannot set nullptr rendertarget" };
-    }
-    m_renderTarget = rt;
-}
 
 std::shared_ptr<jt::renderTarget> GameBase::getRenderTarget() const { return m_renderTarget; }
 
