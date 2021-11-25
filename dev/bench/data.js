@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1637785816092,
+  "lastUpdate": 1637860329897,
   "repoUrl": "https://github.com/Laguna1989/JamTemplateCpp",
   "entries": {
     "Benchmark": [
@@ -1224,6 +1224,42 @@ window.BENCHMARK_DATA = {
             "value": 3.0622341497797256,
             "unit": "ms/iter",
             "extra": "iterations: 227\ncpu: 3.0621139118942735 ms\nthreads: 1"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "laguna_1989@gmx.net",
+            "name": "Laguna1989",
+            "username": "Laguna1989"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "fd98646feffe92ad72890ff4c3051b07e0aa3472",
+          "message": "Merge pull request #91 from Laguna1989/FEATURE_GameCleanup\n\nFix webbuild and clean up game interface",
+          "timestamp": "2021-11-25T18:09:49+01:00",
+          "tree_id": "6600227d883f0d4cb8d955bb1bdf0b9b77c36b46",
+          "url": "https://github.com/Laguna1989/JamTemplateCpp/commit/fd98646feffe92ad72890ff4c3051b07e0aa3472"
+        },
+        "date": 1637860328729,
+        "tool": "googlecpp",
+        "benches": [
+          {
+            "name": "BM_StartGame",
+            "value": 0.0014034792056598299,
+            "unit": "ms/iter",
+            "extra": "iterations: 521993\ncpu: 0.0014030594682304168 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GamestateWithTweeningShapes",
+            "value": 2.9273910646550356,
+            "unit": "ms/iter",
+            "extra": "iterations: 232\ncpu: 2.9271173534482764 ms\nthreads: 1"
           }
         ]
       }
