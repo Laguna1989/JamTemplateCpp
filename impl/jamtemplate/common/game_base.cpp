@@ -4,7 +4,6 @@
 #include "input_manager_interface.hpp"
 #include "state_manager.hpp"
 #include <exception>
-#include <iostream>
 #include <stdexcept>
 
 namespace jt {
@@ -39,7 +38,6 @@ void GameBase::run()
 {
     try {
         if (m_stateManager->checkForGameStateSwitch(getPtr())) {
-            std::cout << "GameBase::switchState\n";
             reset();
         }
 

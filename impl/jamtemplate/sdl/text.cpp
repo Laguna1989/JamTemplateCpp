@@ -100,7 +100,6 @@ void Text::doDrawShadow(std::shared_ptr<jt::renderTarget> const sptr) const
     col.a() = std::min(col.a(), m_color.a());
     setSDLColor(col);
     SDL_RenderCopyEx(sptr.get(), m_textTexture.get(), nullptr, &destRect, -getRotation(), &p, flip);
-    // std::cout << "error message: " << SDL_GetError() << std::endl;
 }
 
 void Text::doDraw(std::shared_ptr<jt::renderTarget> const sptr) const
@@ -111,7 +110,6 @@ void Text::doDraw(std::shared_ptr<jt::renderTarget> const sptr) const
     auto const flip = jt::getFlipFromScale(m_scale);
     setSDLColor(getColor());
     SDL_RenderCopyEx(sptr.get(), m_textTexture.get(), nullptr, &destRect, -getRotation(), &p, flip);
-    // std::cout << "error message: " << SDL_GetError() << std::endl;
 }
 
 void Text::doDrawFlash(std::shared_ptr<jt::renderTarget> const sptr) const
@@ -122,7 +120,6 @@ void Text::doDrawFlash(std::shared_ptr<jt::renderTarget> const sptr) const
     auto const flip = jt::getFlipFromScale(m_scale);
     setSDLColor(getFlashColor());
     SDL_RenderCopyEx(sptr.get(), m_textTexture.get(), nullptr, &destRect, -getRotation(), &p, flip);
-    // std::cout << "error message: " << SDL_GetError() << std::endl;
 }
 
 void Text::doRotate(float /*rot*/)
@@ -159,7 +156,6 @@ void Text::renderOneLineOfText(std::shared_ptr<jt::renderTarget> const sptr, std
     destRect.h = static_cast<int>(h); // controls the height of the rect
 
     SDL_RenderCopy(sptr.get(), textTexture, nullptr, &destRect);
-    // std::cout << "error message: " << SDL_GetError() << std::endl;
 
     SDL_FreeSurface(textSurface);
     SDL_DestroyTexture(textTexture);
@@ -184,7 +180,6 @@ jt::Vector2u Text::getSizeForLine(
 
 void Text::recreateTextTexture(std::shared_ptr<jt::renderTarget> const sptr)
 {
-    std::cout << "recreateTextTexture\n";
     if (!m_font) {
         std::cout << "no font loaded\n";
         return;
@@ -220,13 +215,10 @@ void Text::recreateTextTexture(std::shared_ptr<jt::renderTarget> const sptr)
     }
     // reset the renderer to the old texture
     SDL_SetRenderTarget(sptr.get(), oldT);
-
-    // std::cout << "text successfully created\n";
 }
 
 std::shared_ptr<jt::renderTarget> Text::getRenderTarget()
 {
-    std::cout << "getRenderTarget\n";
     if (m_rendertarget.expired()) {
         std::cout << "Cannot use Text without valid renderTarget\n";
         return nullptr;

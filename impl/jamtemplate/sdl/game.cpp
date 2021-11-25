@@ -22,7 +22,6 @@ Game::Game(std::shared_ptr<RenderWindowInterface> window,
     std::shared_ptr<CamInterface> camera, std::shared_ptr<StateManagerInterface> stateManager)
     : GameBase { window, input, musicPlayer, camera, stateManager }
 {
-    std::cout << "Game::ctor\n";
     auto const width = getRenderWindow()->getSize().x();
     auto const height = getRenderWindow()->getSize().y();
 
@@ -31,7 +30,6 @@ Game::Game(std::shared_ptr<RenderWindowInterface> window,
     m_srcRect = jt::Recti { 0, 0, scaledWidth, scaledHeight };
     m_destRect = jt::Recti { 0, 0, static_cast<int>(width), static_cast<int>(height) };
 
-    std::cout << "Game::ctor->setupRenderTarget\n";
     m_renderTarget = getRenderWindow()->createRenderTarget();
     TTF_Init();
     TextureManager::setRenderer(m_renderTarget);
@@ -50,8 +48,6 @@ void Game::setupRenderTarget() { }
 
 void Game::startGame(GameLoopFunctionPtr gameloop_function)
 {
-    std::cout << "Game::startGame\n";
-    std::cout << "Game::startGame->setupRenderTarget\n";
     setupRenderTarget();
 #ifdef ENABLE_WEB
     emscripten_set_main_loop(gameloop_function, 0, 1);
