@@ -4,6 +4,7 @@
 #include "input_manager_interface.hpp"
 #include "state_manager.hpp"
 #include <exception>
+#include <iostream>
 #include <stdexcept>
 
 namespace jt {
