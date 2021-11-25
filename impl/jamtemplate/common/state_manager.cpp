@@ -27,14 +27,15 @@ void StateManager::doSwitchState(std::weak_ptr<GameInterface> gameInstance)
     m_nextState = nullptr;
 }
 
-bool StateManager::checkForGameStateSwitch(std::weak_ptr<GameInterface> gameInstace)
+bool StateManager::checkForGameStateSwitch(std::weak_ptr<GameInterface> gameInstance)
 {
     if (m_nextState != nullptr) {
-        doSwitchState(gameInstace);
+        doSwitchState(gameInstance);
         return true;
     }
     return false;
 }
+
 std::shared_ptr<GameState> StateManager::getNextState() { return m_nextState; }
 
 } // namespace jt

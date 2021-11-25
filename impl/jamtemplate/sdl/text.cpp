@@ -32,6 +32,7 @@ void Text::setText(std::string const& text)
     m_text = text;
     recreateTextTexture(getRenderTarget());
 }
+
 std::string Text::getText() const { return m_text; }
 
 void Text::setOutline(float /*thickness*/, jt::Color /*col*/)
@@ -99,7 +100,6 @@ void Text::doDrawShadow(std::shared_ptr<jt::renderTarget> const sptr) const
     col.a() = std::min(col.a(), m_color.a());
     setSDLColor(col);
     SDL_RenderCopyEx(sptr.get(), m_textTexture.get(), nullptr, &destRect, -getRotation(), &p, flip);
-    // std::cout << "error message: " << SDL_GetError() << std::endl;
 }
 
 void Text::doDraw(std::shared_ptr<jt::renderTarget> const sptr) const
@@ -110,7 +110,6 @@ void Text::doDraw(std::shared_ptr<jt::renderTarget> const sptr) const
     auto const flip = jt::getFlipFromScale(m_scale);
     setSDLColor(getColor());
     SDL_RenderCopyEx(sptr.get(), m_textTexture.get(), nullptr, &destRect, -getRotation(), &p, flip);
-    // std::cout << "error message: " << SDL_GetError() << std::endl;
 }
 
 void Text::doDrawFlash(std::shared_ptr<jt::renderTarget> const sptr) const
@@ -121,7 +120,6 @@ void Text::doDrawFlash(std::shared_ptr<jt::renderTarget> const sptr) const
     auto const flip = jt::getFlipFromScale(m_scale);
     setSDLColor(getFlashColor());
     SDL_RenderCopyEx(sptr.get(), m_textTexture.get(), nullptr, &destRect, -getRotation(), &p, flip);
-    // std::cout << "error message: " << SDL_GetError() << std::endl;
 }
 
 void Text::doRotate(float /*rot*/)
@@ -158,7 +156,6 @@ void Text::renderOneLineOfText(std::shared_ptr<jt::renderTarget> const sptr, std
     destRect.h = static_cast<int>(h); // controls the height of the rect
 
     SDL_RenderCopy(sptr.get(), textTexture, nullptr, &destRect);
-    // std::cout << "error message: " << SDL_GetError() << std::endl;
 
     SDL_FreeSurface(textSurface);
     SDL_DestroyTexture(textTexture);
@@ -218,8 +215,6 @@ void Text::recreateTextTexture(std::shared_ptr<jt::renderTarget> const sptr)
     }
     // reset the renderer to the old texture
     SDL_SetRenderTarget(sptr.get(), oldT);
-
-    // std::cout << "text successfully created\n";
 }
 
 std::shared_ptr<jt::renderTarget> Text::getRenderTarget()

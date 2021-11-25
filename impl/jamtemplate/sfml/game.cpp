@@ -55,12 +55,14 @@ void Game::startGame(GameLoopFunctionPtr gameloop_function)
 void Game::doUpdate(float const elapsed)
 {
     m_stateManager->getCurrentState()->update(elapsed);
+
     getCamera()->update(elapsed);
 
     jt::Vector2 const mpf = getRenderWindow()->getMousePosition() / getCamera()->getZoom();
 
     input()->update(MousePosition { mpf.x() + getCamera()->getCamOffset().x(),
         mpf.y() + getCamera()->getCamOffset().y(), mpf.x(), mpf.y() });
+
     if (m_view) {
         int const camOffsetix { static_cast<int>(
             getCamera()->getCamOffset().x() + m_view->getSize().x / 2) };

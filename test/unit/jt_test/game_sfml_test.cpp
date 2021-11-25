@@ -32,8 +32,6 @@ TEST_F(GameTest, SetRenderTarget)
     EXPECT_CALL(*window, getSize()).WillOnce(::testing::Return(jt::Vector2 { 20.0f, 40.0f }));
     g->setupRenderTarget();
     ASSERT_NE(g->getRenderTarget(), nullptr);
-
-    g->setRenderTarget(g->getRenderTarget());
 }
 
 TEST_F(GameTest, DrawWithRenderTargetAndState)
