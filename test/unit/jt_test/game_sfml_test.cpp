@@ -25,7 +25,7 @@ TEST_F(GameTest, SetupRenderTargetWithZoom)
     ASSERT_EQ(g->getRenderTarget()->getSize().y, 20);
 }
 
-TEST_F(GameTest, SetRenderTarget)
+TEST_F(GameTest, SetUpRenderTarget)
 {
     EXPECT_CALL(*window, createRenderTarget())
         .WillOnce(::testing::Return(std::make_shared<jt::renderTarget>()));
