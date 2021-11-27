@@ -74,13 +74,13 @@ std::tuple<std::uint8_t, std::uint8_t, std::uint8_t> jt::ColorHelpers::hsv2rgb(
 namespace {
 std::uint8_t hexStringToUint8(std::string const& input)
 {
-
     std::stringstream ss;
     ss << std::hex << input;
     int value;
     ss >> value;
     return static_cast<std::uint8_t>(value);
 }
+
 } // namespace
 
 std::tuple<std::uint8_t, std::uint8_t, std::uint8_t> jt::ColorHelpers::hex2rgb(
