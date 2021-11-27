@@ -21,7 +21,7 @@ using tb = jt::Tween;
 
 class TweenBaseTest : public ::testing::Test {
 public:
-    void SetUp() override { m_obj = jt::dh::createRectShape(jt::Vector2 { 20.0f, 20.0f }); }
+    void SetUp() override { m_obj = jt::dh::createShapeRect(jt::Vector2 { 20.0f, 20.0f }); }
 
 protected:
     std::shared_ptr<jt::DrawableInterface> m_obj;

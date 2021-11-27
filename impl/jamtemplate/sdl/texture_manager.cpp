@@ -116,6 +116,20 @@ std::shared_ptr<SDL_Texture> createRectImage(
     return SpriteFunctions::makeRect(rt, w, h);
 }
 
+std::shared_ptr<SDL_Texture> createCircleImage(
+    std::vector<std::string> const& ssv, std::shared_ptr<jt::renderTarget> rt)
+{
+    if (ssv.size() != 2) {
+        throw std::invalid_argument { "create circle image: vector does not contain 1 elements." };
+    }
+    std::size_t count { 0 };
+    auto const radius = std::stol(ssv.at(1), &count);
+    if (count != ssv.at(1).size() || radius <= std::numeric_limits<uint8_t>::min()) {
+        throw std::invalid_argument { "invalid circle radius" };
+    }
+    return SpriteFunctions::makeCircle(rt, static_cast<float>(radius));
+}
+
 std::shared_ptr<SDL_Texture> createFlashImage(
     std::string const& str, std::shared_ptr<jt::renderTarget> rt)
 {
@@ -200,6 +214,8 @@ std::shared_ptr<SDL_Texture> TextureManager::get(std::string const& str)
                 m_textures[str] = createVignetteImage(ssv, m_renderer.lock());
             } else if (ssv.at(0) == "x") {
                 return createRectImage(ssv, m_renderer.lock());
+            } else if (ssv.at(0) == "c") {
+                return createCircleImage(ssv, m_renderer.lock());
             } else {
                 throw std::invalid_argument("ERROR: cannot get texture with name " + str);
             }

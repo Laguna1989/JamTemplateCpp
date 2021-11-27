@@ -20,8 +20,11 @@ namespace dh {
 /// \param size the size of the shape (full length of the rectangle)
 /// \param col the color of the shape
 /// \return shared pointer to shape
-std::shared_ptr<jt::Shape> createRectShape(
+std::shared_ptr<jt::Shape> createShapeRect(
     jt::Vector2 const& size, jt::Color const& col = jt::colors::White);
+
+std::shared_ptr<jt::Shape> createShapeCircle(
+    float radius, jt::Color const& col = jt::colors::White);
 
 /// Create a text
 /// \param rt weak pointer to rendertarget

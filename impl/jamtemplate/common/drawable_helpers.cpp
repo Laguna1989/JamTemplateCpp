@@ -6,10 +6,18 @@
 namespace jt {
 namespace dh {
 
-std::shared_ptr<jt::Shape> createRectShape(jt::Vector2 const& size, jt::Color const& col)
+std::shared_ptr<jt::Shape> createShapeRect(jt::Vector2 const& size, jt::Color const& col)
 {
     auto ptr = std::make_shared<jt::Shape>();
     ptr->makeRect(size);
+    ptr->setColor(col);
+    return ptr;
+}
+
+std::shared_ptr<jt::Shape> createShapeCircle(float radius, Color const& col)
+{
+    auto ptr = std::make_shared<jt::Shape>();
+    ptr->makeCircle(radius);
     ptr->setColor(col);
     return ptr;
 }

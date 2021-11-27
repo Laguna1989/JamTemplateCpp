@@ -9,6 +9,12 @@ void Shape::makeRect(jt::Vector2 size)
     m_flashShape = std::make_shared<sf::RectangleShape>(size);
 }
 
+void Shape::makeCircle(float radius)
+{
+    m_shape = std::make_shared<sf::CircleShape>(radius);
+    m_flashShape = std::make_shared<sf::CircleShape>(radius);
+}
+
 void Shape::setColor(jt::Color const& col) { m_shape->setFillColor(col); }
 jt::Color Shape::getColor() const { return m_shape->getFillColor(); }
 
