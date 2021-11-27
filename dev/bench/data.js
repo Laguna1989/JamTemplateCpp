@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1637997414043,
+  "lastUpdate": 1638017356685,
   "repoUrl": "https://github.com/Laguna1989/JamTemplateCpp",
   "entries": {
     "Benchmark": [
@@ -1296,6 +1296,42 @@ window.BENCHMARK_DATA = {
             "value": 2.724016027237346,
             "unit": "ms/iter",
             "extra": "iterations: 257\ncpu: 2.723928470817121 ms\nthreads: 1"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "laguna_1989@gmx.net",
+            "name": "Laguna1989",
+            "username": "Laguna1989"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "33cc474069b04c06fbc45847af7e51538e583e60",
+          "message": "Merge pull request #93 from Laguna1989/FEATURE_ColorsFromHexString\n\nAdd HexStringToColor conversion",
+          "timestamp": "2021-11-27T13:47:33+01:00",
+          "tree_id": "de06f51b31daf188af97aab9f2bae56fac90da2c",
+          "url": "https://github.com/Laguna1989/JamTemplateCpp/commit/33cc474069b04c06fbc45847af7e51538e583e60"
+        },
+        "date": 1638017356205,
+        "tool": "googlecpp",
+        "benches": [
+          {
+            "name": "BM_StartGame",
+            "value": 0.0013320471464733465,
+            "unit": "ms/iter",
+            "extra": "iterations: 556224\ncpu: 0.0013319912373432287 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GamestateWithTweeningShapes",
+            "value": 2.9108044049586406,
+            "unit": "ms/iter",
+            "extra": "iterations: 242\ncpu: 2.909666826446281 ms\nthreads: 1"
           }
         ]
       }
