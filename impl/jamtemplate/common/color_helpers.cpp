@@ -1,4 +1,7 @@
 #include "color_helpers.hpp"
+#include <sstream>
+#include <stdexcept>
+
 std::tuple<std::uint8_t, std::uint8_t, std::uint8_t> jt::ColorHelpers::hsv2rgb(
     float h, float s, float v)
 {
@@ -66,4 +69,34 @@ std::tuple<std::uint8_t, std::uint8_t, std::uint8_t> jt::ColorHelpers::hsv2rgb(
     }
     }
     return out;
+}
+
+namespace {
+std::uint8_t hexStringToUint8(std::string const& input)
+{
+
+    std::stringstream ss;
+    ss << std::hex << input;
+    int value;
+    ss >> value;
+    return static_cast<std::uint8_t>(value);
+}
+} // namespace
+
+std::tuple<std::uint8_t, std::uint8_t, std::uint8_t> jt::ColorHelpers::hex2rgb(
+    std::string const& hexString)
+{
+    auto tempString = hexString;
+    if (hexString.front() == '#') {
+        tempString = hexString.substr(1);
+    }
+    if (tempString.size() != 6) {
+        throw std::invalid_argument { "invalid color hex string '" + tempString + "'" };
+    }
+    auto const rString = tempString.substr(0, 2);
+    auto const gString = tempString.substr(2, 2);
+    auto const bString = tempString.substr(4, 2);
+
+    return std::make_tuple(
+        hexStringToUint8(rString), hexStringToUint8(gString), hexStringToUint8(bString));
 }

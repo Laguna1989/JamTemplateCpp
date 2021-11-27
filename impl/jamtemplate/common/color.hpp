@@ -2,6 +2,7 @@
 #define GUARD_JAMTEMPLATE_COLOR_GUARD_HPP_12345
 
 #include "color_lib.hpp"
+#include <string>
 
 namespace jt {
 
@@ -15,6 +16,8 @@ jt::Color FromRGBA(std::uint8_t r, std::uint8_t g, std::uint8_t b, std::uint8_t 
 
 jt::Color FromHSV(float h, float s, float v);
 jt::Color FromHSVA(float h, float s, float v, std::uint8_t a);
+
+jt::Color FromHexString(std::string const& hexString);
 
 // TODO From Hex
 // TODO From HSV

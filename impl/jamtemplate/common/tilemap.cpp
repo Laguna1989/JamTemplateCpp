@@ -75,7 +75,6 @@ void Tilemap::drawSingleTileLayer(
 {
     for (auto& [pos, tile] : layer.getTileObjects()) {
         this->checkIdBounds(tile);
-
         auto const tilePos = Conversion::vec(tile.getPosition());
 
         // optimization: don't draw tiles outside the game window

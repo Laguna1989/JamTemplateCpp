@@ -20,7 +20,7 @@ void StateTileson::doInternalCreate()
 
 void StateTileson::doInternalUpdate(float const elapsed)
 {
-    auto const scrollspeed = 50.0f;
+    auto const scrollspeed = 150.0f;
     m_tilemap->update(elapsed);
     if (getGame()->input()->keyboard()->pressed(jt::KeyCode::D)) {
         getGame()->getCamera()->move(jt::Vector2 { scrollspeed * elapsed, 0.0f });
