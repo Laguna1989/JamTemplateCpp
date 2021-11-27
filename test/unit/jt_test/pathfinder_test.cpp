@@ -1,43 +1,11 @@
+#include "pathfinder/node.hpp"
 #include "pathfinder/node_interface.hpp"
 #include "pathfinder/pathfindinder.hpp"
 #include <gtest/gtest.h>
 #include <map>
 
+using jt::pathfinder::Node;
 using jt::pathfinder::NodeT;
-
-class Node : public jt::pathfinder::NodeInterface {
-public:
-    std::vector<std::weak_ptr<NodeInterface>> getNeighbours() override { return m_neighbours; }
-
-    void visit() override { m_visited = true; }
-    void unvisit() override { m_visited = false; }
-    bool wasVisited() override { return m_visited; }
-
-    jt::Vector2 getPosition() override { return m_position; }
-
-    void setPosition(jt::Vector2 pos) { m_position = pos; }
-
-    void addNeighbour(std::weak_ptr<NodeInterface> other) override
-    {
-        auto o = other.lock();
-        if (!o) {
-            throw std::invalid_argument { "addNeighbour: Can not add nullptr." };
-        }
-        if (o.get() == this) {
-            throw std::invalid_argument { "addNeighbour: Node can not have itself as neighbour." };
-        }
-        m_neighbours.push_back(other);
-    }
-
-    float getValue() override { return m_value; }
-    void setValue(float value) override { m_value = value; }
-
-private:
-    bool m_visited { false };
-    float m_value { -1.0f };
-    jt::Vector2 m_position;
-    std::vector<std::weak_ptr<jt::pathfinder::NodeInterface>> m_neighbours;
-};
 
 TEST(PathfinderTest, ReturnsEmptyVectorWhenStartEqualsEnd)
 {
@@ -145,6 +113,7 @@ TEST(PathfinderTest, ReturnsCorrectEntryForThreeAdjacentNodesStartingIntheMiddle
     ASSERT_EQ(path.at(0), node2);
     ASSERT_EQ(path.at(1), node3);
 }
+
 
 std::vector<NodeT> createNodes()
 {

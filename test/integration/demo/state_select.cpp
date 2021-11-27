@@ -2,6 +2,7 @@
 #include "state_box2d.hpp"
 #include "state_explosion.hpp"
 #include "state_particles.h"
+#include "state_pathfinding.hpp"
 #include "state_rope.hpp"
 #include "state_scroll.hpp"
 #include "state_swarmobjects.hpp"
@@ -18,6 +19,7 @@ void StateSelect::doInternalCreate()
     AddButton<StateScroll>("Move Cam");
     AddButton<StateRope>("Rope");
     AddButton<StateParticles>("Particles");
+    AddButton<StatePathfinding>("Pathfinding");
 }
 
 void StateSelect::doInternalUpdate(float /*elapsed*/)
