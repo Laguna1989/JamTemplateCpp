@@ -18,24 +18,21 @@ jt::Color FromRGB(std::uint8_t r, std::uint8_t g, std::uint8_t b)
 
 jt::Color FromRGBA(std::uint8_t r, std::uint8_t g, std::uint8_t b, std::uint8_t a)
 {
-    jt::Color color;
-    color.r() = r;
-    color.g() = g;
-    color.b() = b;
-    color.a() = a;
-    return color;
+    return jt::Color { r, g, b, a };
 }
 jt::Color FromHSV(float h, float s, float v) { return jt::MakeColor::FromHSVA(h, s, v, 255); }
 
 jt::Color FromHSVA(float h, float s, float v, std::uint8_t a)
 {
-    jt::Color color;
+
     auto [r, g, b] = jt::ColorHelpers::hsv2rgb(h, s, v);
-    color.r() = r;
-    color.g() = g;
-    color.b() = b;
-    color.a() = a;
-    return color;
+    return jt::Color { r, g, b, a };
+}
+
+jt::Color FromHexString(std::string const& hexString)
+{
+    auto [r, g, b] = jt::ColorHelpers::hex2rgb(hexString);
+    return jt::Color { r, g, b, 255 };
 }
 
 } // namespace MakeColor

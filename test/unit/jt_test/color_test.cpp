@@ -56,3 +56,21 @@ TEST(ColorTest, FromHSVA)
     ASSERT_EQ(c.b(), 0);
     ASSERT_EQ(c.a(), 25);
 }
+
+TEST(ColorTest, FromHexString)
+{
+    auto c = jt::MakeColor::FromHexString("ac3232");
+    ASSERT_EQ(c.r(), 172);
+    ASSERT_EQ(c.g(), 50);
+    ASSERT_EQ(c.b(), 50);
+    ASSERT_EQ(c.a(), 255);
+}
+
+TEST(ColorTest, FromHexStringCapsAndHash)
+{
+    auto c = jt::MakeColor::FromHexString("#FF00FF");
+    ASSERT_EQ(c.r(), 255);
+    ASSERT_EQ(c.g(), 0);
+    ASSERT_EQ(c.b(), 255);
+    ASSERT_EQ(c.a(), 255);
+}

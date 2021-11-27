@@ -14,6 +14,8 @@ namespace ColorHelpers {
 /// \return rgb tuple, each [0-255]
 std::tuple<std::uint8_t, std::uint8_t, std::uint8_t> hsv2rgb(float h, float s, float v);
 
+std::tuple<std::uint8_t, std::uint8_t, std::uint8_t> hex2rgb(std::string const& hexString);
+
 } // namespace ColorHelpers
 } // namespace jt
 #endif // MYAWESOMEGAME_COLOR_HELPERS_HPP
