@@ -26,6 +26,8 @@ std::shared_ptr<SDL_Texture> makeVignetteImage(
 std::shared_ptr<SDL_Texture> makeRect(
     std::shared_ptr<jt::renderTarget> rt, unsigned int w, unsigned int h);
 
+std::shared_ptr<SDL_Texture> makeCircle(std::shared_ptr<jt::renderTarget> rt, float r);
+
 } // namespace SpriteFunctions
 
 } // namespace jt

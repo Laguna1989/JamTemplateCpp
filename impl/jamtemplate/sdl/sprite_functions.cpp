@@ -144,5 +144,34 @@ std::shared_ptr<SDL_Texture> makeRect(
     return t;
 }
 
+std::shared_ptr<SDL_Texture> makeCircle(std::shared_ptr<jt::renderTarget> rt, float r)
+{
+    auto const s = static_cast<unsigned int>((r + 0.5f) * 2);
+    std::shared_ptr<SDL_Surface> image = std::shared_ptr<SDL_Surface>(
+        SDL_CreateRGBSurfaceWithFormat(0, s, s, 32, SDL_PIXELFORMAT_RGBA32),
+        [](SDL_Surface* s) { SDL_FreeSurface(s); });
+
+    float const c = r;
+
+    for (auto i = 0U; i != s; ++i) {
+        for (auto j = 0U; j != s; ++j) {
+            auto const dx = i - c;
+            auto const dy = j - c;
+
+            auto const sqr = std::sqrt(dx * dx + dy * dy);
+
+            float const v = (sqr < r) ? 255 : 0;
+
+            auto const max = std::numeric_limits<std::uint8_t>::max();
+            jt::setPixel(image.get(), i, j,
+                SDL_MapRGBA(image->format, max, max, max, static_cast<uint8_t>(v)));
+        }
+    }
+
+    SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "0");
+    return std::shared_ptr<SDL_Texture>(SDL_CreateTextureFromSurface(rt.get(), image.get()),
+        [](SDL_Texture* t) { SDL_DestroyTexture(t); });
+}
+
 } // namespace SpriteFunctions
 } // namespace jt

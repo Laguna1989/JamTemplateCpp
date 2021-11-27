@@ -3,6 +3,7 @@
 
 #include "game_state.hpp"
 #include "pathfinder/node_interface.hpp"
+#include "pathfinder/pathfindinder.hpp"
 #include "shape.hpp"
 
 class Tile : public jt::GameObject {
@@ -13,6 +14,7 @@ public:
     jt::Vector2 getPosition();
     void setBlocked(bool blocked);
     bool getBlocked();
+    void reset();
 
     void setColor(jt::Color const& c);
 
@@ -39,6 +41,9 @@ class StatePathfinding : public jt::GameState {
     int mapSizeY = 14;
     void createTiles();
     void createNodeConnections();
+
+    void resetTiles();
+    void calculatePath(jt::pathfinder::NodeT start, jt::pathfinder::NodeT end);
 };
 
 #endif // GUARD_JAMTEMPLATE_STATE_PATHFINDING_HPP

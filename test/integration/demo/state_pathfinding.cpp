@@ -3,6 +3,8 @@
 #include "game_interface.hpp"
 #include "pathfinder/node.hpp"
 #include "pathfinder/pathfindinder.hpp"
+#include "state_select.hpp"
+#include <random.hpp>
 
 Tile::Tile(jt::Vector2 pos, bool blocked)
 {
@@ -31,6 +33,15 @@ jt::Vector2 Tile::getPosition() { return m_node->getPosition(); }
 void Tile::setBlocked(bool blocked) { m_blocked = blocked; }
 bool Tile::getBlocked() { return m_blocked; }
 void Tile::setColor(jt::Color const& c) { m_shape->setColor(c); }
+void Tile::reset()
+{
+    m_node->setValue(-1);
+    m_node->unvisit();
+    setColor(jt::colors::White);
+    if (m_blocked) {
+        m_shape->setColor(jt::colors::Black);
+    }
+}
 
 void StatePathfinding::doInternalCreate()
 {
@@ -38,9 +49,10 @@ void StatePathfinding::doInternalCreate()
 
     createNodeConnections();
 
-    auto start = getTileAt(7, 3)->getNode();
-    auto end = getTileAt(7, 9)->getNode();
-
+    calculatePath(getTileAt(7, 3)->getNode(), getTileAt(7, 9)->getNode());
+}
+void StatePathfinding::calculatePath(jt::pathfinder::NodeT start, jt::pathfinder::NodeT end)
+{
     auto path = jt::pathfinder::calculatePath(start, end);
     for (auto const& n : path) {
         auto const pos = n->getPosition();
@@ -102,7 +114,21 @@ void StatePathfinding::createTiles()
         add(t);
     }
 }
-void StatePathfinding::doInternalUpdate(float elapsed) { }
+void StatePathfinding::doInternalUpdate(float /*elapsed*/)
+{
+    if (getGame()->input()->keyboard()->justPressed(jt::KeyCode::Escape)) {
+        getGame()->getStateManager()->switchState(std::make_shared<StateSelect>());
+    }
+
+    if (getGame()->input()->keyboard()->justPressed(jt::KeyCode::Space)) {
+        resetTiles();
+        calculatePath(
+            getTileAt(jt::Random::getInt(0, mapSizeX - 1), jt::Random::getInt(0, mapSizeY - 1))
+                ->getNode(),
+            getTileAt(jt::Random::getInt(0, mapSizeX - 1), jt::Random::getInt(0, mapSizeY - 1))
+                ->getNode());
+    }
+}
 void StatePathfinding::doInternalDraw() const { }
 
 std::shared_ptr<Tile> StatePathfinding::getTileAt(int x, int y)
@@ -120,8 +146,15 @@ std::shared_ptr<Tile> StatePathfinding::getTileAt(int x, int y)
         return nullptr;
     }
     int const index = y + x * mapSizeY;
-    if (index >= m_tiles.size()) {
+    if (static_cast<std::size_t>(index) >= m_tiles.size()) {
         return nullptr;
     }
     return m_tiles.at(index);
+}
+
+void StatePathfinding::resetTiles()
+{
+    for (auto& t : m_tiles) {
+        t->reset();
+    }
 }
