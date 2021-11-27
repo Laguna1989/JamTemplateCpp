@@ -7,10 +7,10 @@
 
 void StateScroll::doInternalCreate()
 {
-    m_background = jt::dh::createRectShape(jt::Vector2 { 400.0f, 300.0f }, jt::colors::Blue);
+    m_background = jt::dh::createShapeRect(jt::Vector2 { 400.0f, 300.0f }, jt::colors::Blue);
     m_background->setIgnoreCamMovement(true);
 
-    m_shape1 = jt::dh::createRectShape(jt::Vector2 { 40.0f, 30.0f }, jt::colors::Cyan);
+    m_shape1 = jt::dh::createShapeRect(jt::Vector2 { 40.0f, 30.0f }, jt::colors::Cyan);
     m_shape1->setPosition(jt::Vector2 { 100.0f, 100.0f });
 
     m_sprite = std::make_shared<jt::Sprite>();

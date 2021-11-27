@@ -14,6 +14,7 @@ public:
     using Sptr = std::shared_ptr<Shape>;
 
     void makeRect(jt::Vector2 size);
+    void makeCircle(float radius);
 
     void setColor(jt::Color const& col) override;
     jt::Color getColor() const override;

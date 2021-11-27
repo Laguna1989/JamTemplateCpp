@@ -13,7 +13,7 @@ Tile::Tile(jt::Vector2 pos, bool blocked)
 }
 void Tile::doCreate()
 {
-    m_shape = jt::dh::createRectShape({ 19, 19 });
+    m_shape = jt::dh::createShapeRect({ 19, 19 });
     if (m_blocked) {
         m_shape->setColor(jt::colors::Black);
     }
@@ -44,7 +44,7 @@ void StatePathfinding::doInternalCreate()
     auto path = jt::pathfinder::calculatePath(start, end);
     for (auto const& n : path) {
         auto const pos = n->getPosition();
-        auto t = getTileAt(pos.x(), pos.y());
+        auto t = getTileAt(static_cast<int>(pos.x()), static_cast<int>(pos.y()));
         if (t) {
             t->setColor(jt::colors::Cyan);
         }
@@ -63,8 +63,8 @@ void StatePathfinding::createNodeConnections()
                 if (i == 0 && j == 0) {
                     continue;
                 }
-                auto oi = currentPos.x() + i;
-                auto oj = currentPos.y() + j;
+                auto oi = static_cast<int>(currentPos.x() + i);
+                auto oj = static_cast<int>(currentPos.y() + j);
                 auto ot = getTileAt(oi, oj);
                 if (ot) {
                     if (ot->getBlocked()) {

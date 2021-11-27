@@ -16,8 +16,11 @@ private:
     void doInternalCreate() override;
     void doInternalUpdate(float elapsed) override;
     void doInternalDraw() const override;
-    std::shared_ptr<jt::ParticleSystem<jt::Shape, numberOfParticles>> m_particles;
+    std::shared_ptr<jt::ParticleSystem<jt::Shape, numberOfParticles>> m_particlesGlitter;
+    std::shared_ptr<jt::ParticleSystem<jt::Shape, 200>> m_particlesFire;
     jt::CircularBuffer<float, 200> m_timeMeasurement;
+    void createParticlesGlitter();
+    void createParticlesFire();
 };
 
 #endif // MYAWESOMEGAME_STATE_PARTICLES_H

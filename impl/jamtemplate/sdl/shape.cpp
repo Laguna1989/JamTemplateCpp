@@ -17,6 +17,15 @@ void Shape::makeRect(jt::Vector2 size)
     m_sourceRect = jt::Recti { 0U, 0U, static_cast<int>(size.x()), static_cast<int>(size.y()) };
 }
 
+void Shape::makeCircle(float radius)
+{
+    //    TODO implement
+    std::cerr << "makeCircle not yet supported by sdl\n";
+    m_text = TextureManager::get("#x#" + std::to_string(static_cast<int>(size.x())) + "#"
+        + std::to_string(static_cast<int>(size.y())));
+    m_sourceRect = jt::Recti { 0U, 0U, static_cast<int>(size.x()), static_cast<int>(size.y()) };
+}
+
 void Shape::setColor(jt::Color const& col) { m_color = col; }
 jt::Color Shape::getColor() const { return m_color; }
 

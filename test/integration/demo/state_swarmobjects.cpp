@@ -13,9 +13,9 @@ void StateSwarmObjects::doInternalCreate()
     using jt::Shape;
     using jt::TweenAlpha;
 
-    m_sky = jt::dh::createRectShape(jt::Vector2 { 400, 300 }, jt::Color { 178, 255, 255 });
+    m_sky = jt::dh::createShapeRect(jt::Vector2 { 400, 300 }, jt::Color { 178, 255, 255 });
 
-    m_overlay = jt::dh::createRectShape(jt::Vector2 { 400, 300 }, jt::colors::Black);
+    m_overlay = jt::dh::createShapeRect(jt::Vector2 { 400, 300 }, jt::colors::Black);
     m_overlay->update(0.0f);
 
     auto tw = TweenAlpha::create(m_overlay, 0.5f, std::uint8_t { 255 }, std::uint8_t { 0 });

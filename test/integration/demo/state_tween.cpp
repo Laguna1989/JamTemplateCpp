@@ -14,11 +14,11 @@ void StateTween::doInternalCreate()
 
 void StateTween::createRects()
 {
-    m_background = jt::dh::createRectShape(jt::Vector2 { 400, 300 }, jt::colors::White);
+    m_background = jt::dh::createShapeRect(jt::Vector2 { 400, 300 }, jt::colors::White);
 
-    m_overlayR = jt::dh::createRectShape(jt::Vector2 { 400, 300 }, jt::colors::Red);
-    m_overlayG = jt::dh::createRectShape(jt::Vector2 { 400, 300 }, jt::colors::Green);
-    m_overlayB = jt::dh::createRectShape(jt::Vector2 { 400, 300 }, jt::colors::Blue);
+    m_overlayR = jt::dh::createShapeRect(jt::Vector2 { 400, 300 }, jt::colors::Red);
+    m_overlayG = jt::dh::createShapeRect(jt::Vector2 { 400, 300 }, jt::colors::Green);
+    m_overlayB = jt::dh::createShapeRect(jt::Vector2 { 400, 300 }, jt::colors::Blue);
 }
 
 void StateTween::createTweens()

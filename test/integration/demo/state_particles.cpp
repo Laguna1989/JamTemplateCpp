@@ -1,4 +1,5 @@
 #include "state_particles.h"
+#include "lerp.hpp"
 #include "random.hpp"
 #include "state_select.hpp"
 #include "tweens/tween_alpha.hpp"
@@ -6,10 +7,84 @@
 #include <algorithm>
 #include <iostream>
 #include <numeric>
+#include <tweens/tween_color.hpp>
+#include <tweens/tween_position.hpp>
 
 void StateParticles::doInternalCreate()
 {
-    m_particles = jt::ParticleSystem<jt::Shape, numberOfParticles>::createPS(
+    createParticlesGlitter();
+    createParticlesFire();
+}
+void StateParticles::createParticlesFire()
+{
+
+    m_particlesFire = jt::ParticleSystem<jt::Shape, 200>::createPS(
+        []() {
+            auto s = jt::dh::createShapeCircle(20, jt::MakeColor::FromHSV(45, 80, 100));
+            s->setOrigin(jt::Vector2 { 20, 20 });
+            s->setPosition(jt::Vector2 { -2000.0f, -2000.0f });
+            s->setScale(jt::Vector2 { 0.5f, 0.5f });
+            return s;
+        },
+        [this](auto s) {
+            auto totalTime = 0.9f;
+
+            auto startPosition = jt::Random::getRandomPointIn(jt::Rect { 295, 250, 10, 0 });
+            s->setPosition(startPosition);
+
+            s->setScale(jt::Vector2 { 0.5f, 0.5f });
+
+            jt::TweenAlpha::Sptr twaIn = jt::TweenAlpha::create(s, 0.1f, 0, 255);
+            twaIn->setSkipFrames(1);
+            add(twaIn);
+
+            jt::TweenAlpha::Sptr twaOut = jt::TweenAlpha::create(s, totalTime - 0.25f, 255, 0);
+            twaOut->setSkipFrames(1);
+            twaOut->setStartDelay(0.25f);
+            twaOut->setAgePercentConversion([](float t) {
+                t = jt::MathHelper::clamp(t, 0.0f, 1.0f);
+                return 0.9f * jt::Lerp::cubic(0.0f, 1.0f, t) + 0.1f * t;
+            });
+            add(twaOut);
+
+            auto tws = jt::TweenScale::create(
+                s, totalTime - 0.1f, jt::Vector2 { 0.5f, 0.5f }, jt::Vector2 { 1.0f, 1.0f });
+            tws->setSkipFrames(1);
+            tws->setStartDelay(0.1f);
+            add(tws);
+
+            auto endPosition
+                = startPosition + jt::Random::getRandomPointIn(jt::Rect { -30, -150, 60, 40 });
+            jt::TweenPosition::Sptr twp
+                = jt::TweenPosition::create(s, totalTime, startPosition, endPosition);
+            twp->setSkipFrames(1);
+            twp->setAgePercentConversion([](float t) {
+                t = jt::MathHelper::clamp(t, 0.0f, 1.0f);
+                return 0.5f * jt::Lerp::cubic(0.0f, 1.0f, t) + 0.5f * t;
+            });
+            add(twp);
+
+            auto intermediateColor = jt::MakeColor::FromHSV(0, 60, 67);
+            auto finalColor = jt::MakeColor::FromHSV(318, 42, 27);
+
+            float const fraction = jt::Random::getFloat(0.6f, 0.7f);
+            jt::TweenColor::Sptr twc1 = jt::TweenColor::create(
+                s, totalTime * fraction, jt::MakeColor::FromHSV(45, 80, 100), intermediateColor);
+            twc1->setSkipFrames(1);
+            twc1->addCompleteCallback(
+                [this, totalTime, fraction, s, intermediateColor, finalColor]() {
+                    jt::TweenColor::Sptr twc2 = jt::TweenColor::create(
+                        s, totalTime * (1.0f - fraction), intermediateColor, finalColor);
+                    twc2->setSkipFrames(1);
+                    add(twc2);
+                });
+            add(twc1);
+        });
+    add(m_particlesFire);
+}
+void StateParticles::createParticlesGlitter()
+{
+    m_particlesGlitter = jt::ParticleSystem<jt::Shape, numberOfParticles>::createPS(
         []() {
             auto s = std::make_shared<jt::Shape>();
             s->makeRect(jt::Vector2 { 4, 4 });
@@ -17,7 +92,7 @@ void StateParticles::doInternalCreate()
             return s;
         },
         [this](auto s) {
-            s->setPosition(jt::Random::getRandomPointIn(jt::Rect { 0, 0, 400, 300 }));
+            s->setPosition(jt::Random::getRandomPointIn(jt::Rect { 0, 0, 200, 300 }));
 
             auto twa = jt::TweenAlpha::create(s, 0.5, 255, 0);
             twa->setSkipFrames(1);
@@ -28,12 +103,17 @@ void StateParticles::doInternalCreate()
             tws->setSkipFrames(1);
             add(tws);
         });
-
-    add(m_particles);
+    add(m_particlesGlitter);
 }
 void StateParticles::doInternalUpdate(float elapsed)
 {
-    m_particles->Fire(toFire);
+    m_particlesGlitter->Fire(toFire);
+    m_particlesFire->Fire(1);
+
+    if (getGame()->input()->keyboard()->justPressed(jt::KeyCode::Escape)) {
+        getGame()->getStateManager()->switchState(std::make_shared<StateSelect>());
+    }
+
     m_timeMeasurement.push(elapsed);
     if (getAge() >= 15) {
         getGame()->getStateManager()->switchState(std::make_shared<StateSelect>());
