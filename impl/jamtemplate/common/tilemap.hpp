@@ -3,6 +3,7 @@
 
 #include "drawable_impl.hpp"
 #include "info_rect.hpp"
+#include "pathfinder/node_interface.hpp"
 #include "render_target.hpp"
 #include "sprite.hpp"
 #include "tileson.h"
@@ -71,6 +72,8 @@ private:
     Vector2 m_scale { 1.0f, 1.0f };
     Color m_color { jt::colors::White };
     Color m_flashColor { jt::colors::White };
+
+    std::vector<pathfinder::NodeInterface> nodes;
 
     void checkIdBounds(tson::TileObject& tile) const;
 
