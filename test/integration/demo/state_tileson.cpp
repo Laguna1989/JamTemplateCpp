@@ -3,7 +3,7 @@
 #include "input_manager.hpp"
 #include "sound.hpp"
 #include "state_select.hpp"
-#include "tilemap.hpp"
+#include "tilemap/tilemap.hpp"
 #include "timer.hpp"
 
 void StateTileson::doInternalCreate()

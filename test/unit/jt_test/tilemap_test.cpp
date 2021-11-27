@@ -1,4 +1,4 @@
-﻿#include "tilemap.hpp"
+﻿#include "tilemap/tilemap.hpp"
 #include <gtest/gtest.h>
 
 TEST(TilemapTest, CanLoadJson)
