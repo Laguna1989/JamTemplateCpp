@@ -15,9 +15,9 @@ public:
     void unvisit() override;
     bool wasVisited() override;
 
-    jt::Vector2 getPosition() const override;
+    jt::Vector2u getTilePosition() const override;
 
-    void setPosition(jt::Vector2 pos);
+    void setPosition(jt::Vector2u pos);
 
     void addNeighbour(std::weak_ptr<NodeInterface> other) override;
 
@@ -27,7 +27,7 @@ public:
 private:
     bool m_visited { false };
     float m_value { -1.0f };
-    jt::Vector2 m_position;
+    jt::Vector2u m_position;
     std::vector<std::weak_ptr<jt::pathfinder::NodeInterface>> m_neighbours;
 };
 } // namespace pathfinder

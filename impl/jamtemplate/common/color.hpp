@@ -19,8 +19,6 @@ jt::Color FromHSVA(float h, float s, float v, std::uint8_t a);
 
 jt::Color FromHexString(std::string const& hexString);
 
-// TODO From Hex
-// TODO From HSV
 // TODO From HSL
 
 } // namespace MakeColor

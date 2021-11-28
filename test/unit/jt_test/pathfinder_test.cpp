@@ -1,6 +1,6 @@
 #include "pathfinder/node.hpp"
 #include "pathfinder/node_interface.hpp"
-#include "pathfinder/pathfindinder.hpp"
+#include "pathfinder/pathfinder.hpp"
 #include <gtest/gtest.h>
 #include <map>
 
@@ -56,9 +56,9 @@ TEST(PathfinderTest, ReturnsEmptyVectorWhenNotConnectedWithNeighboursAtEnd)
 TEST(PathfinderTest, ReturnsCorrectEntryForTwoAdjacentNodes)
 {
     auto node1 = std::make_shared<Node>();
-    node1->setPosition(jt::Vector2 { 0, 0 });
+    node1->setPosition(jt::Vector2u { 0, 0 });
     auto node2 = std::make_shared<Node>();
-    node2->setPosition(jt::Vector2 { 1, 0 });
+    node2->setPosition(jt::Vector2u { 1, 0 });
 
     node1->addNeighbour(node2);
     node2->addNeighbour(node1);
@@ -73,11 +73,11 @@ TEST(PathfinderTest, ReturnsCorrectEntryForTwoAdjacentNodes)
 TEST(PathfinderTest, ReturnsCorrectEntryForThreeAdjacentNodes)
 {
     auto node1 = std::make_shared<Node>();
-    node1->setPosition(jt::Vector2 { 0, 0 });
+    node1->setPosition(jt::Vector2u { 0, 0 });
     auto node2 = std::make_shared<Node>();
-    node2->setPosition(jt::Vector2 { 1, 0 });
+    node2->setPosition(jt::Vector2u { 1, 0 });
     auto node3 = std::make_shared<Node>();
-    node2->setPosition(jt::Vector2 { 2, 0 });
+    node2->setPosition(jt::Vector2u { 2, 0 });
 
     node1->addNeighbour(node2);
     node2->addNeighbour(node1);
@@ -95,11 +95,11 @@ TEST(PathfinderTest, ReturnsCorrectEntryForThreeAdjacentNodes)
 TEST(PathfinderTest, ReturnsCorrectEntryForThreeAdjacentNodesStartingIntheMiddle)
 {
     auto node1 = std::make_shared<Node>();
-    node1->setPosition(jt::Vector2 { 0, 0 });
+    node1->setPosition(jt::Vector2u { 0, 0 });
     auto node2 = std::make_shared<Node>();
-    node2->setPosition(jt::Vector2 { 1, 0 });
+    node2->setPosition(jt::Vector2u { 1, 0 });
     auto node3 = std::make_shared<Node>();
-    node3->setPosition(jt::Vector2 { 2, 0 });
+    node3->setPosition(jt::Vector2u { 2, 0 });
 
     node1->addNeighbour(node2);
     node2->addNeighbour(node1);
@@ -114,14 +114,14 @@ TEST(PathfinderTest, ReturnsCorrectEntryForThreeAdjacentNodesStartingIntheMiddle
     ASSERT_EQ(path.at(1), node3);
 }
 
-
 std::vector<NodeT> createNodes()
 {
     std::map<std::pair<int, int>, NodeT> nodes;
     for (int i = 0; i != 10; ++i) {
         for (int j = 0; j != 10; ++j) {
             auto node = std::make_shared<Node>();
-            node->setPosition(jt::Vector2 { static_cast<float>(i), static_cast<float>(j) });
+            node->setPosition(
+                jt::Vector2u { static_cast<unsigned int>(i), static_cast<unsigned int>(j) });
             nodes[std::make_pair(i, j)] = node;
         }
     }
@@ -182,7 +182,9 @@ TEST(NodeTest, InitialNoNeighbours)
 TEST(NodeTest, HasCorrectNeighbours)
 {
     Node n;
+    n.setPosition({ 0, 0 });
     auto n2 = std::make_shared<Node>();
+    n2->setPosition({ 1, 2 });
     n.addNeighbour(n2);
     ASSERT_EQ(n.getNeighbours().size(), 1);
     ASSERT_EQ(n.getNeighbours().at(0).lock(), n2);

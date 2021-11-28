@@ -9,13 +9,13 @@
 namespace jt {
 
 ///  Implements common functionality of all Drawable classes
-class DrawableImpl : public jt::DrawableInterface {
+class DrawableImpl : public DrawableInterface {
 public:
     using Sptr = std::shared_ptr<DrawableImpl>;
 
     /// Destructor
     virtual ~DrawableImpl() = default;
-    void draw(std::shared_ptr<jt::renderTarget> sptr) const override;
+    void draw(std::shared_ptr<renderTarget> sptr) const override;
 
     void flash(float t, jt::Color col = jt::colors::White) override;
     void shake(float t, float strength, float shakeInterval = 0.05f) override;
