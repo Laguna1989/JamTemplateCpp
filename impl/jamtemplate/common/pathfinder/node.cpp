@@ -23,7 +23,7 @@ void Node::addNeighbour(std::weak_ptr<NodeInterface> other)
         throw std::invalid_argument { "addNeighbour: Can not add nullptr." };
     }
 
-    if (o->getTilePosition() == getTilePosition()) {
+    if (o.get() == this) {
         throw std::invalid_argument { "addNeighbour: Node can not have itself as neighbour." };
     }
     m_neighbours.push_back(other);

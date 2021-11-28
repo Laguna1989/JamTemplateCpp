@@ -35,6 +35,27 @@
                  "height":96,
                  "id":1,
                  "name":"object1",
+                 "properties":[
+                        {
+                         "name":"bool_prop",
+                         "type":"bool",
+                         "value":false
+                        }, 
+                        {
+                         "name":"float_prop",
+                         "type":"float",
+                         "value":1337.42
+                        }, 
+                        {
+                         "name":"int_prop",
+                         "type":"int",
+                         "value":1234
+                        }, 
+                        {
+                         "name":"string_prop",
+                         "type":"string",
+                         "value":"abcd"
+                        }],
                  "rotation":45,
                  "type":"type1",
                  "visible":true,

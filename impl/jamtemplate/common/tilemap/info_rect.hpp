@@ -2,19 +2,27 @@
 #define GUARD_JAMTEMPLATE_RECT_HPP
 
 #include "vector.hpp"
+#include <map>
 #include <string>
 
 namespace jt {
 
 namespace tilemap {
 
-// TODO add properties
+struct InfoRectProperties {
+    std::map<std::string, bool> bools;
+    std::map<std::string, float> floats;
+    std::map<std::string, int> ints;
+    std::map<std::string, std::string> strings;
+};
+
 struct InfoRect {
     Vector2 position { 0.0f, 0.0f };
     Vector2 size { 0.0f, 0.0f };
     float rotation { 0.0f };
     std::string type { "" };
     std::string name { "" };
+    InfoRectProperties properties {};
 };
 
 } // namespace tilemap

@@ -53,3 +53,27 @@ TEST(TilemapObjectLayerTest, ObjectRotationIsParsedCorrectly)
     ObjectLayer ol { "assets/tileson_test.json", "objects" };
     ASSERT_EQ(ol.getObjects().at(0).rotation, 45);
 }
+
+TEST(TilemapObjectLayerTest, BoolPropertyParsedCorrectly)
+{
+    ObjectLayer ol { "assets/tileson_test.json", "objects" };
+    ASSERT_EQ(ol.getObjects().at(0).properties.bools.at("bool_prop"), false);
+}
+
+TEST(TilemapObjectLayerTest, FloatPropertyParsedCorrectly)
+{
+    ObjectLayer ol { "assets/tileson_test.json", "objects" };
+    ASSERT_FLOAT_EQ(ol.getObjects().at(0).properties.floats.at("float_prop"), 1337.42);
+}
+
+TEST(TilemapObjectLayerTest, IntPropertyParsedCorrectly)
+{
+    ObjectLayer ol { "assets/tileson_test.json", "objects" };
+    ASSERT_EQ(ol.getObjects().at(0).properties.ints.at("int_prop"), 1234);
+}
+
+TEST(TilemapObjectLayerTest, StringPropertyParsedCorrectly)
+{
+    ObjectLayer ol { "assets/tileson_test.json", "objects" };
+    ASSERT_EQ(ol.getObjects().at(0).properties.strings.at("string_prop"), "abcd");
+}

@@ -4,6 +4,25 @@
 namespace jt {
 namespace tilemap {
 
+InfoRectProperties parseProperties(tson::PropertyCollection& props)
+{
+    InfoRectProperties properties;
+    for (auto pkvp : props.getProperties()) {
+        std::string const name = pkvp.first;
+        if (pkvp.second.getType() == tson::Type::Boolean) {
+            properties.bools[name] = pkvp.second.getValue<bool>();
+        } else if (pkvp.second.getType() == tson::Type::Float) {
+            properties.floats[name] = pkvp.second.getValue<float>();
+        } else if (pkvp.second.getType() == tson::Type::Int) {
+            properties.ints[name] = pkvp.second.getValue<int>();
+        } else if (pkvp.second.getType() == tson::Type::String) {
+            properties.strings[name] = pkvp.second.getValue<std::string>();
+        } else {
+        }
+    }
+    return properties;
+}
+
 ObjectLayer::ObjectLayer(std::string const& path, std::string const& layerName)
 {
     m_layerName = layerName;
@@ -27,7 +46,8 @@ void ObjectLayer::parseObjects()
 
         for (auto& obj : layer.getObjects()) {
             InfoRect infoRect { Conversion::vec(obj.getPosition()), Conversion::vec(obj.getSize()),
-                obj.getRotation(), obj.getType(), obj.getName() };
+                obj.getRotation(), obj.getType(), obj.getName(),
+                parseProperties(obj.getProperties()) };
             m_objectGroups.push_back(infoRect);
         }
     }

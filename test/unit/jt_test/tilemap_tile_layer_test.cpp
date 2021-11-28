@@ -12,7 +12,6 @@ public:
 
 TEST_F(TilemapTileLayerTest, CanLoadJson)
 {
-
     ASSERT_EQ(tm.getMapSizeInTiles().x(), 50);
     ASSERT_EQ(tm.getMapSizeInTiles().y(), 50);
 }
