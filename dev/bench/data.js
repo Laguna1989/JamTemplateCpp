@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1638110899123,
+  "lastUpdate": 1638122332776,
   "repoUrl": "https://github.com/Laguna1989/JamTemplateCpp",
   "entries": {
     "Benchmark": [
@@ -1368,6 +1368,42 @@ window.BENCHMARK_DATA = {
             "value": 2.9861483114034812,
             "unit": "ms/iter",
             "extra": "iterations: 228\ncpu: 2.9858217982456146 ms\nthreads: 1"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "laguna_1989@gmx.net",
+            "name": "Laguna1989",
+            "username": "Laguna1989"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "6d672c7c4284b53d1ad8bb37edcb880447aba59a",
+          "message": "Merge pull request #95 from Laguna1989/FEATURE_TilemapToPathfinding\n\nFeature tilemap to pathfinding",
+          "timestamp": "2021-11-28T18:56:31+01:00",
+          "tree_id": "06d6af25da390ad473382bf21d82ea0f11584331",
+          "url": "https://github.com/Laguna1989/JamTemplateCpp/commit/6d672c7c4284b53d1ad8bb37edcb880447aba59a"
+        },
+        "date": 1638122332346,
+        "tool": "googlecpp",
+        "benches": [
+          {
+            "name": "BM_StartGame",
+            "value": 0.0015109062277422001,
+            "unit": "ms/iter",
+            "extra": "iterations: 461917\ncpu: 0.0015107389617615285 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GamestateWithTweeningShapes",
+            "value": 3.35980025961537,
+            "unit": "ms/iter",
+            "extra": "iterations: 208\ncpu: 3.3596037644230767 ms\nthreads: 1"
           }
         ]
       }
