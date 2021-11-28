@@ -14,7 +14,10 @@ KeyboardInput::KeyboardInput(KeyboardKeyCheckFunction checkFunc)
         m_justPressed[k] = false;
         m_justReleased[k] = false;
 
+        m_commandsPressed[k] = std::make_shared<ControlCommandNull>();
+        m_commandsReleased[k] = std::make_shared<ControlCommandNull>();
         m_commandsJustPressed[k] = std::make_shared<ControlCommandNull>();
+        m_commandsJustReleased[k] = std::make_shared<ControlCommandNull>();
     }
 }
 
@@ -42,31 +45,45 @@ void KeyboardInput::reset()
     }
 }
 
-void KeyboardInput::setCommandJustPressed(
-    jt::KeyCode key, std::shared_ptr<jt::ControlCommandInterface> command)
-{
-    //    m_command = command;
-    m_commandsJustPressed[key] = command;
-}
-
 void KeyboardInput::setCommandPressed(
     jt::KeyCode key, std::shared_ptr<jt::ControlCommandInterface> command)
 {
+    m_commandsPressed[key] = command;
 }
 void KeyboardInput::setCommandReleased(
     jt::KeyCode key, std::shared_ptr<jt::ControlCommandInterface> command)
 {
+    m_commandsReleased[key] = command;
+}
+
+void KeyboardInput::setCommandJustPressed(
+    jt::KeyCode key, std::shared_ptr<jt::ControlCommandInterface> command)
+{
+    m_commandsJustPressed[key] = command;
 }
 void KeyboardInput::setCommandJustReleased(
     jt::KeyCode key, std::shared_ptr<jt::ControlCommandInterface> command)
 {
+    m_commandsJustReleased[key] = command;
 }
 
 void KeyboardInput::updateCommands(float elapsed)
 {
     for (auto const k : jt::getAllKeys()) {
+        if (pressed(k)) {
+            m_commandsPressed[k]->execute(elapsed);
+        }
+
+        if (released(k)) {
+            m_commandsReleased[k]->execute(elapsed);
+        }
+
         if (justPressed(k)) {
             m_commandsJustPressed[k]->execute(elapsed);
+        }
+
+        if (justReleased(k)) {
+            m_commandsJustReleased[k]->execute(elapsed);
         }
     }
 }

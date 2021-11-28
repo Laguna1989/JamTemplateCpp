@@ -23,7 +23,13 @@ public:
     MOCK_METHOD(bool, pressed, (jt::KeyCode), (override));
     MOCK_METHOD(bool, released, (jt::KeyCode), (override));
     MOCK_METHOD(bool, justPressed, (jt::KeyCode), (override));
+    MOCK_METHOD(void, setCommandPressed,
+        (jt::KeyCode, std::shared_ptr<jt::ControlCommandInterface>), (override));
+    MOCK_METHOD(void, setCommandReleased,
+        (jt::KeyCode, std::shared_ptr<jt::ControlCommandInterface>), (override));
     MOCK_METHOD(void, setCommandJustPressed,
+        (jt::KeyCode, std::shared_ptr<jt::ControlCommandInterface>), (override));
+    MOCK_METHOD(void, setCommandJustReleased,
         (jt::KeyCode, std::shared_ptr<jt::ControlCommandInterface>), (override));
     MOCK_METHOD(void, updateCommands, (float), (override));
     MOCK_METHOD(bool, justReleased, (jt::KeyCode), (override));
