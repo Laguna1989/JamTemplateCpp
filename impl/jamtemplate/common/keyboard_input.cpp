@@ -40,8 +40,10 @@ void KeyboardInput::reset()
         m_justPressed[kvp.first] = false;
         m_justReleased[kvp.first] = false;
 
-        // TODO
-        //        m_commands[kvp.first] = std::make_shared<ControlCommandNull>();
+        m_commandsPressed[kvp.first] = std::make_shared<ControlCommandNull>();
+        m_commandsReleased[kvp.first] = std::make_shared<ControlCommandNull>();
+        m_commandsJustPressed[kvp.first] = std::make_shared<ControlCommandNull>();
+        m_commandsJustReleased[kvp.first] = std::make_shared<ControlCommandNull>();
     }
 }
 

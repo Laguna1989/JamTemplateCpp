@@ -57,6 +57,8 @@ public:
     /// \return the render target
     virtual std::shared_ptr<jt::renderTarget> getRenderTarget() const = 0;
 
+    virtual void reset() = 0;
+
 protected:
     virtual std::weak_ptr<GameInterface> getPtr() = 0;
 };

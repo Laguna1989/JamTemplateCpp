@@ -38,9 +38,7 @@ GameBase::GameBase(std::shared_ptr<jt::RenderWindowInterface> renderWindow,
 void GameBase::run()
 {
     try {
-        if (m_stateManager->checkForGameStateSwitch(getPtr())) {
-            reset();
-        }
+        m_stateManager->checkAndPerformSwitchState(getPtr());
 
         auto const now = std::chrono::steady_clock::now();
 
