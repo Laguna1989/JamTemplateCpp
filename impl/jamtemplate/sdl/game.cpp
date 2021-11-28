@@ -1,7 +1,7 @@
 ﻿#include "game.hpp"
 #include "drawable_impl.hpp"
 #include "game_state.hpp"
-#include "input_manager.hpp"
+#include "input/input_manager.hpp"
 #include "random.hpp"
 #include "rect.hpp"
 #include "texture_manager.hpp"
