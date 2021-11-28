@@ -66,7 +66,8 @@ void Game::doUpdate(float const elapsed)
     jt::Vector2 const mpf = getRenderWindow()->getMousePosition() / getCamera()->getZoom();
 
     input()->update(MousePosition { mpf.x() + getCamera()->getCamOffset().x(),
-        mpf.y() + getCamera()->getCamOffset().y(), mpf.x(), mpf.y() });
+                        mpf.y() + getCamera()->getCamOffset().y(), mpf.x(), mpf.y() },
+        elapsed);
 
     DrawableImpl::setCamOffset(-1.0f * getCamera()->getCamOffset());
 };

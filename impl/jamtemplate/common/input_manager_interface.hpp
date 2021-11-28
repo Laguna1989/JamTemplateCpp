@@ -89,7 +89,19 @@ public:
 
     virtual void reset() = 0;
 
+    virtual void setCommandPressed(
+        jt::KeyCode key, std::shared_ptr<jt::ControlCommandInterface> command)
+        = 0;
+
+    virtual void setCommandReleased(
+        jt::KeyCode key, std::shared_ptr<jt::ControlCommandInterface> command)
+        = 0;
+
     virtual void setCommandJustPressed(
+        jt::KeyCode key, std::shared_ptr<jt::ControlCommandInterface> command)
+        = 0;
+
+    virtual void setCommandJustReleased(
         jt::KeyCode key, std::shared_ptr<jt::ControlCommandInterface> command)
         = 0;
 

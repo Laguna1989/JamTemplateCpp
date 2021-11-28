@@ -1,4 +1,5 @@
 ﻿#include "state_scroll.hpp"
+#include "control_command_move_cam.hpp"
 #include "drawable_helpers.hpp"
 #include "game_interface.hpp"
 #include "input_manager.hpp"
@@ -38,6 +39,10 @@ void StateScroll::doInternalCreate()
 
     m_line = std::make_shared<jt::Line>(jt::Vector2 { 100, 50 });
     m_line->setPosition(jt::Vector2 { 20, 200 });
+
+    getGame()->input()->keyboard()->setCommandJustPressed(jt::KeyCode::D,
+        std::make_shared<ControlCommandMoveCam>(
+            jt::Vector2 { 50.0f, 0.0f }, getGame()->getCamera()));
 }
 
 void StateScroll::doInternalUpdate(float const elapsed)
@@ -48,9 +53,8 @@ void StateScroll::doInternalUpdate(float const elapsed)
     }
 
     auto const scrollspeed = 50.0f;
-    if (getGame()->input()->keyboard()->pressed(jt::KeyCode::D)) {
-        getGame()->getCamera()->move(jt::Vector2 { scrollspeed * elapsed, 0.0f });
-    } else if (getGame()->input()->keyboard()->pressed(jt::KeyCode::A)) {
+
+    if (getGame()->input()->keyboard()->pressed(jt::KeyCode::A)) {
         getGame()->getCamera()->move(jt::Vector2 { -scrollspeed * elapsed, 0.0f });
     }
     if (getGame()->input()->keyboard()->pressed(jt::KeyCode::W)) {

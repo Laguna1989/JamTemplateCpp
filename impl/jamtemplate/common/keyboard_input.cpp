@@ -22,8 +22,6 @@ void KeyboardInput::updateKeys()
 {
     jt::inputhelper::updateValues(m_pressed, m_released, m_justPressed, m_justReleased,
         [this](auto k) { return m_checkFunc(k); });
-
-
 }
 
 bool KeyboardInput::pressed(jt::KeyCode k) { return m_pressed[k]; }
@@ -50,11 +48,27 @@ void KeyboardInput::setCommandJustPressed(
     //    m_command = command;
     m_commandsJustPressed[key] = command;
 }
-void KeyboardInput::updateCommands(float elapsed) {
+
+void KeyboardInput::setCommandPressed(
+    jt::KeyCode key, std::shared_ptr<jt::ControlCommandInterface> command)
+{
+}
+void KeyboardInput::setCommandReleased(
+    jt::KeyCode key, std::shared_ptr<jt::ControlCommandInterface> command)
+{
+}
+void KeyboardInput::setCommandJustReleased(
+    jt::KeyCode key, std::shared_ptr<jt::ControlCommandInterface> command)
+{
+}
+
+void KeyboardInput::updateCommands(float elapsed)
+{
     for (auto const k : jt::getAllKeys()) {
         if (justPressed(k)) {
             m_commandsJustPressed[k]->execute(elapsed);
         }
     }
 }
+
 } // namespace jt
