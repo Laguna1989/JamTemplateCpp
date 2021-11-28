@@ -1,6 +1,7 @@
 ﻿#ifndef GUARD_JAMTEMPLATE_INPUTMANAGERINTERFACE_HPP
 #define GUARD_JAMTEMPLATE_INPUTMANAGERINTERFACE_HPP
 
+#include "control_command_interface.hpp"
 #include "key_codes.hpp"
 #include "vector.hpp"
 #include <memory>
@@ -87,6 +88,12 @@ public:
     virtual bool justReleased(jt::KeyCode k) = 0;
 
     virtual void reset() = 0;
+
+    virtual void setCommandJustPressed(
+        jt::KeyCode key, std::shared_ptr<jt::ControlCommandInterface> command)
+        = 0;
+
+    virtual void updateCommands(float elapsed) = 0;
 };
 
 class InputManagerInterface {

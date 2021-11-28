@@ -21,20 +21,12 @@ void gameloop()
     }
 }
 
-class ControlCommandPrint : public jt::ControlCommandInterface {
-public:
-    void execute() override { std::cout << "Hello, World!\n"; }
-};
-
 int main()
 {
     jt::Random::useTimeAsRandomSeed();
 
     auto const mouse = std::make_shared<jt::MouseInput>();
     auto const keyboard = std::make_shared<jt::KeyboardInput>();
-
-    auto command = std::make_shared<ControlCommandPrint>();
-    keyboard->setCommandJustPressed(jt::KeyCode::L, command);
     auto input = std::make_shared<jt::InputManager>(mouse, keyboard);
 
     auto window = std::make_shared<jt::RenderWindow>(800, 600, "jt_demos");

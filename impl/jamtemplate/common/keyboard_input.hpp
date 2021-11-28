@@ -18,6 +18,7 @@ public:
 
     virtual bool pressed(jt::KeyCode k) override;
     virtual bool released(jt::KeyCode k) override;
+    void updateCommands(float elapsed) override;
 
     virtual bool justPressed(jt::KeyCode k) override;
     virtual bool justReleased(jt::KeyCode k) override;
@@ -25,7 +26,7 @@ public:
     virtual void reset() override;
 
     void setCommandJustPressed(
-        jt::KeyCode key, std::shared_ptr<jt::ControlCommandInterface> command);
+        jt::KeyCode key, std::shared_ptr<jt::ControlCommandInterface> command) override;
 
 private:
     KeyboardKeyCheckFunction m_checkFunc;

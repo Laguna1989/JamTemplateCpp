@@ -23,11 +23,7 @@ void KeyboardInput::updateKeys()
     jt::inputhelper::updateValues(m_pressed, m_released, m_justPressed, m_justReleased,
         [this](auto k) { return m_checkFunc(k); });
 
-    for (auto const k : jt::getAllKeys()) {
-        if (justPressed(k)) {
-            m_commandsJustPressed[k]->execute();
-        }
-    }
+
 }
 
 bool KeyboardInput::pressed(jt::KeyCode k) { return m_pressed[k]; }
@@ -53,5 +49,12 @@ void KeyboardInput::setCommandJustPressed(
 {
     //    m_command = command;
     m_commandsJustPressed[key] = command;
+}
+void KeyboardInput::updateCommands(float elapsed) {
+    for (auto const k : jt::getAllKeys()) {
+        if (justPressed(k)) {
+            m_commandsJustPressed[k]->execute(elapsed);
+        }
+    }
 }
 } // namespace jt

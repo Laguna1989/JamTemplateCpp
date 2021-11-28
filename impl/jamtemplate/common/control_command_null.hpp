@@ -6,7 +6,7 @@
 namespace jt {
 
 class ControlCommandNull : public ControlCommandInterface {
-    void execute() override;
+    void execute(float elapsed) override;
 };
 } // namespace jt
 #endif // GUARD_JAMTEMPLATE_CONTROL_COMMAND_NULL_HPP
