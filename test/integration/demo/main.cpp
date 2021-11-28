@@ -1,4 +1,5 @@
 ﻿#include "camera.hpp"
+#include "control_command_interface.hpp"
 #include "game.hpp"
 #include "input_manager.hpp"
 #include "keyboard_input.hpp"
@@ -8,9 +9,8 @@
 #include "render_window.hpp"
 #include "state_manager.hpp"
 #include "state_select.hpp"
-#include <memory>
-#include "control_command_interface.hpp"
 #include <iostream>
+#include <memory>
 
 std::shared_ptr<jt::GameInterface> game;
 
@@ -21,12 +21,9 @@ void gameloop()
     }
 }
 
-class ControlCommandPrint : public jt::ControlCommandInterface
-{
+class ControlCommandPrint : public jt::ControlCommandInterface {
 public:
-    void execute() override {
-        std::cout << "Hello, World!\n";
-    }
+    void execute() override { std::cout << "Hello, World!\n"; }
 };
 
 int main()
@@ -37,7 +34,7 @@ int main()
     auto const keyboard = std::make_shared<jt::KeyboardInput>();
 
     auto command = std::make_shared<ControlCommandPrint>();
-    keyboard->setCommand(command);
+    keyboard->setCommandJustPressed(jt::KeyCode::L, command);
     auto input = std::make_shared<jt::InputManager>(mouse, keyboard);
 
     auto window = std::make_shared<jt::RenderWindow>(800, 600, "jt_demos");

@@ -24,7 +24,8 @@ public:
 
     virtual void reset() override;
 
-    void setCommand(std::shared_ptr<jt::ControlCommandInterface> command);
+    void setCommandJustPressed(
+        jt::KeyCode key, std::shared_ptr<jt::ControlCommandInterface> command);
 
 private:
     KeyboardKeyCheckFunction m_checkFunc;
@@ -34,7 +35,7 @@ private:
     std::map<jt::KeyCode, bool> m_justPressed {};
     std::map<jt::KeyCode, bool> m_justReleased {};
 
-    std::shared_ptr<jt::ControlCommandInterface> m_command { nullptr };
+    std::map<jt::KeyCode, std::shared_ptr<jt::ControlCommandInterface>> m_commandsJustPressed;
 };
 
 } // namespace jt

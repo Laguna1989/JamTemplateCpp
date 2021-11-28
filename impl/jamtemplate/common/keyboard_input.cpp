@@ -7,16 +7,15 @@ namespace jt {
 KeyboardInput::KeyboardInput(KeyboardKeyCheckFunction checkFunc)
     : m_checkFunc { std::move(checkFunc) }
 {
-    auto const allKeys = jt::getAllKeys();
     // note: do not call the virtual reset() function here, as this is the constructor
-    for (auto const k : allKeys) {
+    for (auto const k : jt::getAllKeys()) {
         m_pressed[k] = false;
         m_released[k] = false;
         m_justPressed[k] = false;
         m_justReleased[k] = false;
-    }
 
-    m_command = std::make_shared<ControlCommandNull>();
+        m_commandsJustPressed[k] = std::make_shared<ControlCommandNull>();
+    }
 }
 
 void KeyboardInput::updateKeys()
@@ -24,8 +23,10 @@ void KeyboardInput::updateKeys()
     jt::inputhelper::updateValues(m_pressed, m_released, m_justPressed, m_justReleased,
         [this](auto k) { return m_checkFunc(k); });
 
-    if (justPressed(jt::KeyCode::L)) {
-        m_command->execute();
+    for (auto const k : jt::getAllKeys()) {
+        if (justPressed(k)) {
+            m_commandsJustPressed[k]->execute();
+        }
     }
 }
 
@@ -41,11 +42,16 @@ void KeyboardInput::reset()
         m_released[kvp.first] = false;
         m_justPressed[kvp.first] = false;
         m_justReleased[kvp.first] = false;
+
+        // TODO
+        //        m_commands[kvp.first] = std::make_shared<ControlCommandNull>();
     }
 }
 
-void KeyboardInput::setCommand(std::shared_ptr<jt::ControlCommandInterface> command)
+void KeyboardInput::setCommandJustPressed(
+    jt::KeyCode key, std::shared_ptr<jt::ControlCommandInterface> command)
 {
-    m_command = command;
+    //    m_command = command;
+    m_commandsJustPressed[key] = command;
 }
 } // namespace jt
