@@ -1,10 +1,10 @@
-#ifndef GUARD_JAMTEMPLATE_CONTROL_COMMAND_IMPL_HPP
-#define GUARD_JAMTEMPLATE_CONTROL_COMMAND_IMPL_HPP
+#ifndef GUARD_JAMTEMPLATE_CONTROL_COMMAND_ONCE_HPP
+#define GUARD_JAMTEMPLATE_CONTROL_COMMAND_ONCE_HPP
 
 #include "control_command_interface.hpp"
 
 namespace jt {
-class ControlCommandImpl : public jt::ControlCommandInterface {
+class ControlCommandOnce : public jt::ControlCommandInterface {
 public:
     void execute(float elapsed) override;
     void reset() override;
@@ -15,4 +15,4 @@ private:
 };
 } // namespace jt
 
-#endif // GUARD_JAMTEMPLATE_CONTROL_COMMAND_IMPL_HPP
+#endif // GUARD_JAMTEMPLATE_CONTROL_COMMAND_ONCE_HPP
