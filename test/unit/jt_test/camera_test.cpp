@@ -110,3 +110,8 @@ TEST_F(CameraTest, ResetShakeOffset)
     cam.reset();
     ASSERT_EQ(cam.getShakeOffset(), initialShake);
 }
+
+TEST_F(CameraTest, NullptrRandomFunc)
+{
+    ASSERT_THROW(cam.setRandomFunction(nullptr), std::invalid_argument);
+}

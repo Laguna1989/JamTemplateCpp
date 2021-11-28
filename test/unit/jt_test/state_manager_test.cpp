@@ -65,3 +65,10 @@ TEST(StateManagerTest, SwitchToNullptrStateThrows)
     jt::StateManager stateManager { std::make_shared<MockState>() };
     ASSERT_THROW(stateManager.switchState(nullptr), std::invalid_argument);
 }
+
+TEST(StateManagerTest, SwitchToValidState)
+{
+    jt::StateManager stateManager { std::make_shared<MockState>() };
+    auto otherState = std::make_shared<MockState>();
+    ASSERT_NO_THROW(stateManager.switchState(otherState));
+}

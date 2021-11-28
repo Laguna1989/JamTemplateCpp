@@ -28,7 +28,7 @@ TEST(CreateRectShapeTest, Color)
 
 TEST(CreateCircleShapeTest, NoNullptr)
 {
-    auto const shape = jt::dh::createShapeCircle({ 1.0f, 2.0f }, jt::colors::Green);
+    auto const shape = jt::dh::createShapeCircle(1.0f, jt::colors::Green);
     ASSERT_NE(shape, nullptr);
 }
 
