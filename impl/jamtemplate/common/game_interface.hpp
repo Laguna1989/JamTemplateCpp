@@ -2,7 +2,7 @@
 #define GUARD_JAMTEMPLATE_GAMEINTERFACE_HPP_GUARD
 
 #include "cam_interface.hpp"
-#include "input_manager_interface.hpp"
+#include "input/input_manager_interface.hpp"
 #include "music_player_interface.hpp"
 #include "render_target.hpp"
 #include "render_window_interface.hpp"

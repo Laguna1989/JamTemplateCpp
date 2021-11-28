@@ -4,7 +4,7 @@
 #include "drawable_interface.hpp"
 #include "game_interface.hpp"
 #include "game_object.hpp"
-#include "input_manager.hpp"
+#include "input/input_manager.hpp"
 #include "sprite.hpp"
 #include "vector.hpp"
 #include <functional>

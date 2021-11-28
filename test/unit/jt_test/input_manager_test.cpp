@@ -1,4 +1,4 @@
-﻿#include "input_manager.hpp"
+﻿#include "input/input_manager.hpp"
 #include "mocks/mock_input.hpp"
 #include <gtest/gtest.h>
 

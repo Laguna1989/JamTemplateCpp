@@ -1,7 +1,7 @@
 ﻿#include "game_base.hpp"
 #include "camera.hpp"
 #include "game_state.hpp"
-#include "input_manager_interface.hpp"
+#include "input/input_manager_interface.hpp"
 #include "state_manager.hpp"
 #include <exception>
 #include <iostream>

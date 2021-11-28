@@ -1,7 +1,7 @@
 #ifndef GUARD_JAMTEMPLATE_CONTROL_COMMAND_MOVECAM_HPP
 #define GUARD_JAMTEMPLATE_CONTROL_COMMAND_MOVECAM_HPP
 
-#include "control_command_interface.hpp"
+#include "input/control_command_interface.hpp"
 #include "vector.hpp"
 #include <cam_interface.hpp>
 #include <memory>
