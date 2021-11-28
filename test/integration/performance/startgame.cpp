@@ -1,7 +1,7 @@
 #include "camera.hpp"
 #include "game.hpp"
 #include "game_state.hpp"
-#include "input_manager_null.hpp"
+#include "input/input_manager_null.hpp"
 #include "music_player_null.hpp"
 #include "render_window_null.hpp"
 #include "shape.hpp"
