@@ -7,7 +7,7 @@ ControlCommandMoveCam::ControlCommandMoveCam(
     m_camera = camera;
 }
 
-void ControlCommandMoveCam::execute(float elapsed)
+void ControlCommandMoveCam::doExecute(float elapsed)
 {
     auto cam = m_camera.lock();
 

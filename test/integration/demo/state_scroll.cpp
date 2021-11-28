@@ -45,15 +45,15 @@ void StateScroll::doInternalCreate()
         std::make_shared<ControlCommandMoveCam>(
             jt::Vector2 { 0.0f, -scrollSpeed }, getGame()->getCamera()));
 
-    getGame()->input()->keyboard()->setCommandPressed({ jt::KeyCode::A },
+    getGame()->input()->keyboard()->setCommandPressed({ jt::KeyCode::A, jt::KeyCode::Left },
         std::make_shared<ControlCommandMoveCam>(
             jt::Vector2 { -scrollSpeed, 0.0f }, getGame()->getCamera()));
 
-    getGame()->input()->keyboard()->setCommandPressed({ jt::KeyCode::S },
+    getGame()->input()->keyboard()->setCommandPressed({ jt::KeyCode::S, jt::KeyCode::Down },
         std::make_shared<ControlCommandMoveCam>(
             jt::Vector2 { 0.0f, scrollSpeed }, getGame()->getCamera()));
 
-    getGame()->input()->keyboard()->setCommandPressed({ jt::KeyCode::D },
+    getGame()->input()->keyboard()->setCommandPressed({ jt::KeyCode::D, jt::KeyCode::Right },
         std::make_shared<ControlCommandMoveCam>(
             jt::Vector2 { scrollSpeed, 0.0f }, getGame()->getCamera()));
 }

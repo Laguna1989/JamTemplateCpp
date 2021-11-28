@@ -96,6 +96,13 @@ void KeyboardInput::updateCommands(float elapsed)
             m_commandsJustReleased[k]->execute(elapsed);
         }
     }
+
+    for (auto const k : jt::getAllKeys()) {
+        m_commandsPressed[k]->reset();
+        m_commandsReleased[k]->reset();
+        m_commandsJustPressed[k]->reset();
+        m_commandsJustReleased[k]->reset();
+    }
 }
 
 } // namespace jt
