@@ -1,4 +1,5 @@
 ﻿#include "keyboard_input.hpp"
+#include "control_command_null.hpp"
 #include "input_helper.hpp"
 
 namespace jt {
@@ -14,12 +15,18 @@ KeyboardInput::KeyboardInput(KeyboardKeyCheckFunction checkFunc)
         m_justPressed[k] = false;
         m_justReleased[k] = false;
     }
+
+    m_command = std::make_shared<ControlCommandNull>();
 }
 
 void KeyboardInput::updateKeys()
 {
     jt::inputhelper::updateValues(m_pressed, m_released, m_justPressed, m_justReleased,
         [this](auto k) { return m_checkFunc(k); });
+
+    if (justPressed(jt::KeyCode::L)) {
+        m_command->execute();
+    }
 }
 
 bool KeyboardInput::pressed(jt::KeyCode k) { return m_pressed[k]; }
@@ -35,5 +42,10 @@ void KeyboardInput::reset()
         m_justPressed[kvp.first] = false;
         m_justReleased[kvp.first] = false;
     }
+}
+
+void KeyboardInput::setCommand(std::shared_ptr<jt::ControlCommandInterface> command)
+{
+    m_command = command;
 }
 } // namespace jt

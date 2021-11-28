@@ -3,6 +3,7 @@
 
 namespace jt {
 class ControlCommandInterface {
+public:
     virtual ~ControlCommandInterface() = default;
     virtual void execute() = 0;
 };

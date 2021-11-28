@@ -9,6 +9,8 @@
 #include "state_manager.hpp"
 #include "state_select.hpp"
 #include <memory>
+#include "control_command_interface.hpp"
+#include <iostream>
 
 std::shared_ptr<jt::GameInterface> game;
 
@@ -19,12 +21,23 @@ void gameloop()
     }
 }
 
+class ControlCommandPrint : public jt::ControlCommandInterface
+{
+public:
+    void execute() override {
+        std::cout << "Hello, World!\n";
+    }
+};
+
 int main()
 {
     jt::Random::useTimeAsRandomSeed();
 
     auto const mouse = std::make_shared<jt::MouseInput>();
     auto const keyboard = std::make_shared<jt::KeyboardInput>();
+
+    auto command = std::make_shared<ControlCommandPrint>();
+    keyboard->setCommand(command);
     auto input = std::make_shared<jt::InputManager>(mouse, keyboard);
 
     auto window = std::make_shared<jt::RenderWindow>(800, 600, "jt_demos");
