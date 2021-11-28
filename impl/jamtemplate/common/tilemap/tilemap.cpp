@@ -1,8 +1,12 @@
 ﻿#include "tilemap.hpp"
 #include "conversions.hpp"
+#include "drawable_helpers.hpp"
 #include "game_interface.hpp"
+#include "shape.hpp"
+#include "tilemap/tile.hpp"
 #include <iostream>
 #include <memory>
+#include <pathfinder/node.hpp>
 
 namespace jt {
 
@@ -27,14 +31,78 @@ Tilemap::Tilemap(std::string const& path)
     m_tileSprites.resize(static_cast<std::size_t>(rows) * static_cast<std::size_t>(columns));
     for (int j = 0; j != rows; ++j) {
         for (int i = 0; i != columns; ++i) {
-            jt::Sprite tile {};
-            tile.loadSprite(tilesetName, jt::Recti(i * ts.x, j * ts.y, ts.x, ts.y));
-            tile.setIgnoreCamMovement(false);
-            m_tileSprites.at(i + j * columns) = tile;
+            {
+                jt::Sprite tile {};
+                tile.loadSprite(tilesetName, jt::Recti(i * ts.x, j * ts.y, ts.x, ts.y));
+                tile.setIgnoreCamMovement(false);
+                m_tileSprites.at(i + j * columns) = tile;
+            }
         }
     }
 
     parseObjects();
+    parseTiles();
+}
+void Tilemap::parseTiles()
+{
+    for (auto& layer : m_map->getLayers()) {
+        // skip all non-tile layers
+        if (layer.getType() != tson::LayerType::TileLayer) {
+            continue;
+        }
+        for (auto& [pos, tile] : layer.getTileObjects()) {
+            this->checkIdBounds(tile);
+
+            bool isBlocked = false;
+            auto blockedProperty = tile.getTile()->getProp("blocked");
+            if (blockedProperty) {
+                isBlocked = blockedProperty->getValue<bool>();
+            }
+
+            auto posx = std::get<0>(pos);
+            auto posy = std::get<1>(pos);
+
+            auto const ts = m_map->getTilesets().at(0).getTileSize();
+            auto color = jt::MakeColor::FromRGBA(1, 1, 1, 100);
+            if (!isBlocked) {
+                color = jt::MakeColor::FromRGBA(255, 255, 255, 100);
+            }
+            std::shared_ptr<jt::Shape> drawable = jt::dh::createShapeRect(
+                jt::Vector2 { static_cast<float>(ts.x - 1), static_cast<float>(ts.y - 1) }, color);
+            drawable->setPosition(
+                jt::Vector2 { static_cast<float>(ts.x * posx), static_cast<float>(ts.y * posy) });
+            auto node = std::make_shared<jt::pathfinder::Node>();
+
+            auto myTile = std::make_shared<jt::Tile>(drawable, node, isBlocked);
+
+            m_tiles[std::make_pair(posx, posy)] = myTile;
+        }
+    }
+
+    for (auto& kvp : m_tiles) {
+        auto t = kvp.second;
+        if (t->getBlocked()) {
+            continue;
+        }
+        auto const currentPos = t->getPosition();
+
+        for (int i = -1; i != 2; ++i) {
+            for (int j = -1; j != 2; ++j) {
+                if (i == 0 && j == 0) {
+                    continue;
+                }
+                auto oi = static_cast<int>(currentPos.x() + i);
+                auto oj = static_cast<int>(currentPos.y() + j);
+                auto ot = getTileAt(oi, oj);
+                if (ot) {
+                    if (ot->getBlocked()) {
+                        continue;
+                    }
+                    t->getNode()->addNeighbour(ot->getNode());
+                }
+            }
+        }
+    }
 }
 
 void Tilemap::parseObjects()
@@ -62,7 +130,7 @@ void Tilemap::doDraw(std::shared_ptr<jt::renderTarget> const sptr) const
     auto const posOffset = m_position + getShakeOffset() + getOffset();
 
     for (auto& layer : m_map->getLayers()) {
-        // skip all non-tile layers.
+        // skip all non-tile layers
         if (layer.getType() != tson::LayerType::TileLayer) {
             continue;
         }
@@ -154,6 +222,16 @@ jt::Vector2u Tilemap::getMapSizeInTiles()
 {
     return jt::Vector2u { static_cast<unsigned int>(m_map->getSize().x),
         static_cast<unsigned int>(m_map->getSize().y) };
+}
+
+std::shared_ptr<Tile> Tilemap::getTileAt(int x, int y) { return nullptr; }
+std::vector<std::shared_ptr<Tile>> Tilemap::getAllTiles()
+{
+    std::vector<std::shared_ptr<Tile>> tiles;
+    for (auto kvp : m_tiles) {
+        tiles.push_back(kvp.second);
+    }
+    return tiles;
 }
 
 } // namespace jt

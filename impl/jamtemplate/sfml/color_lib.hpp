@@ -74,8 +74,6 @@ public:
     /// \return alpha
     std::uint8_t& a() override;
 
-    static Color FromRGBA(std::uint8_t r, std::uint8_t g, std::uint8_t b, std::uint8_t a);
-
 private:
     sf::Color m_color;
 };

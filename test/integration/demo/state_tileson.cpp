@@ -11,17 +11,28 @@ void StateTileson::doInternalCreate()
     m_tilemap = std::make_shared<jt::Tilemap>("assets/tileson_test.json");
     m_tilemap->setScreenSizeHint(jt::Vector2(400, 300));
 
-    m_sound = std::make_shared<jt::Sound>();
-    m_sound->load("assets/test.ogg");
+    for (auto t : m_tilemap->getAllTiles()) {
+        add(t);
+    }
 
-    auto const t = std::make_shared<jt::Timer>(2.5f, [sound = m_sound]() { sound->play(); });
-    add(t);
+    setAutoDraw(false);
 }
 
 void StateTileson::doInternalUpdate(float const elapsed)
 {
     auto const scrollspeed = 150.0f;
     m_tilemap->update(elapsed);
+
+    moveCamera(elapsed, scrollspeed);
+
+    if (getGame()->input()->keyboard()->justPressed(jt::KeyCode::F1)
+        || getGame()->input()->keyboard()->justPressed(jt::KeyCode::Escape)) {
+        getGame()->getStateManager()->switchState(std::make_shared<StateSelect>());
+    }
+}
+
+void StateTileson::moveCamera(float const elapsed, float const scrollspeed)
+{
     if (getGame()->input()->keyboard()->pressed(jt::KeyCode::D)) {
         getGame()->getCamera()->move(jt::Vector2 { scrollspeed * elapsed, 0.0f });
     } else if (getGame()->input()->keyboard()->pressed(jt::KeyCode::A)) {
@@ -32,11 +43,13 @@ void StateTileson::doInternalUpdate(float const elapsed)
     } else if (getGame()->input()->keyboard()->pressed(jt::KeyCode::S)) {
         getGame()->getCamera()->move(jt::Vector2 { 0.0f, scrollspeed * elapsed });
     }
-
-    if (getGame()->input()->keyboard()->justPressed(jt::KeyCode::F1)
-        || getGame()->input()->keyboard()->justPressed(jt::KeyCode::Escape)) {
-        getGame()->getStateManager()->switchState(std::make_shared<StateSelect>());
-    }
 }
 
-void StateTileson::doInternalDraw() const { m_tilemap->draw(getGame()->getRenderTarget()); }
+void StateTileson::doInternalDraw() const
+{
+    m_tilemap->draw(getGame()->getRenderTarget());
+    for (auto t : m_tilemap->getAllTiles()) {
+        t->draw();
+    }
+    //    drawObjects();
+}

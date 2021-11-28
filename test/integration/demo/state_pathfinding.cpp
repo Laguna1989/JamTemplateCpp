@@ -2,7 +2,6 @@
 #include "drawable_helpers.hpp"
 #include "game_interface.hpp"
 #include "pathfinder/node.hpp"
-#include "pathfinder/pathfindinder.hpp"
 #include "state_select.hpp"
 #include <random.hpp>
 
@@ -12,6 +11,7 @@ void StatePathfinding::doInternalCreate()
 
     createNodeConnections();
 
+    resetTiles();
     calculatePath(getTileAt(7, 3)->getNode(), getTileAt(7, 9)->getNode());
 }
 void StatePathfinding::calculatePath(jt::pathfinder::NodeT start, jt::pathfinder::NodeT end)
@@ -55,8 +55,12 @@ void StatePathfinding::createTiles()
 {
     for (int i = 0; i != mapSizeX; ++i) {
         for (int j = 0; j != mapSizeY; ++j) {
-            auto t = std::make_shared<jt::Tile>(
-                jt::Vector2 { static_cast<float>(i), static_cast<float>(j) }, false);
+            std::shared_ptr<jt::Shape> drawable = jt::dh::createShapeRect(jt::Vector2 { 19, 19 });
+            drawable->setPosition(jt::Vector2 { i * 20.0f, j * 20.0f });
+            auto node = std::make_shared<jt::pathfinder::Node>();
+            node->setPosition(jt::Vector2 { static_cast<float>(i), static_cast<float>(j) });
+
+            auto t = std::make_shared<jt::Tile>(drawable, node, false);
             m_tiles.push_back(t);
         }
     }
@@ -118,6 +122,8 @@ std::shared_ptr<jt::Tile> StatePathfinding::getTileAt(int x, int y)
 void StatePathfinding::resetTiles()
 {
     for (auto& t : m_tiles) {
+        jt::Color color = t->getBlocked() ? jt::colors::Black : jt::colors::White;
+        t->getDrawable()->setColor(color);
         t->reset();
     }
 }

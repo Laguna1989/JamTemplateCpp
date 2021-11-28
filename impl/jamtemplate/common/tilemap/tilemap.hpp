@@ -6,6 +6,7 @@
 #include "pathfinder/node_interface.hpp"
 #include "render_target.hpp"
 #include "sprite.hpp"
+#include "tilemap/tile.hpp"
 #include "tileson.h"
 #include <memory>
 #include <vector>
@@ -60,6 +61,9 @@ public:
     /// \return the object group
     std::map<std::string, std::vector<InfoRect>> getObjectGroups() { return m_objectGroups; };
 
+    std::shared_ptr<Tile> getTileAt(int x, int y);
+    std::vector<std::shared_ptr<Tile>> getAllTiles();
+
 private:
     std::unique_ptr<tson::Map> m_map { nullptr };
     // Map from object layer name to vector of objects, all rectangular.
@@ -73,13 +77,14 @@ private:
     Color m_color { jt::colors::White };
     Color m_flashColor { jt::colors::White };
 
-    std::vector<pathfinder::NodeInterface> nodes;
+    std::map<std::pair<int, int>, std::shared_ptr<Tile>> m_tiles;
 
     void checkIdBounds(tson::TileObject& tile) const;
 
     void drawSingleTileLayer(std::shared_ptr<jt::renderTarget> const& rt, Vector2 const& posOffset,
         tson::Layer& layer) const;
     void parseObjects();
+    void parseTiles();
 };
 
 } // namespace jt
