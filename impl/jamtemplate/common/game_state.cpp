@@ -69,7 +69,7 @@ void GameState::updateObjects(float elapsed)
     basicUpdateObjects(elapsed);
 
     for (auto& go : m_objects) {
-        go->update(elapsed, 0);
+        go->update(elapsed);
     }
 }
 
@@ -102,7 +102,7 @@ void GameState::updateTweens(float elapsed)
                        [](Tween::Sptr tween) { return !(tween->isAlive()); }),
         m_tweens.end());
     for (auto& tw : m_tweens) {
-        tw->update(elapsed, 0);
+        tw->update(elapsed);
     }
 }
 

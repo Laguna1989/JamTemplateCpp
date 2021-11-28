@@ -20,9 +20,12 @@ public:
 class MockKeyboardInput : public jt::KeyboardInputInterface {
 public:
     MOCK_METHOD(void, updateKeys, (), (override));
-    MOCK_METHOD(bool, pressed, (jt::KeyCode k), (override));
-    MOCK_METHOD(bool, released, (jt::KeyCode k), (override));
-    MOCK_METHOD(bool, justPressed, (jt::KeyCode k), (override));
+    MOCK_METHOD(bool, pressed, (jt::KeyCode), (override));
+    MOCK_METHOD(bool, released, (jt::KeyCode), (override));
+    MOCK_METHOD(bool, justPressed, (jt::KeyCode), (override));
+    MOCK_METHOD(void, setCommandJustPressed,
+        (jt::KeyCode, std::shared_ptr<jt::ControlCommandInterface>), (override));
+    MOCK_METHOD(void, updateCommands, (float), (override));
     MOCK_METHOD(bool, justReleased, (jt::KeyCode), (override));
     MOCK_METHOD(void, reset, (), (override));
 };
@@ -31,8 +34,7 @@ class MockInput : public jt::InputManagerInterface {
 public:
     MOCK_METHOD(std::shared_ptr<jt::MouseInputInterface>, mouse, (), (override));
     MOCK_METHOD(std::shared_ptr<jt::KeyboardInputInterface>, keyboard, (), (override));
-    MOCK_METHOD(void, update, (const jt::MousePosition&), (override))
-    voidupdate(jt::MousePosition const& gmock_a0, float elapsed);
+    MOCK_METHOD(void, update, (const jt::MousePosition&, float), (override));
     MOCK_METHOD(void, reset, (), (override));
 };
 

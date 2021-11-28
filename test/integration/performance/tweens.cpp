@@ -27,7 +27,7 @@ private:
     void doInternalUpdate(float elapsed) override
     {
         for (auto s : m_shapes) {
-            s->update(elapsed, 0);
+            s->update(elapsed);
         }
 
         auto shape = *jt::SystemHelper::select_randomly(m_shapes.cbegin(), m_shapes.cend());
