@@ -8,10 +8,16 @@
 
 void StateTileson::doInternalCreate()
 {
-    m_tilemap = std::make_shared<jt::tilemap::TileLayer>("assets/tileson_test.json");
-    m_tilemap->setScreenSizeHint(jt::Vector2(400, 300));
+    m_tileLayerGround
+        = std::make_shared<jt::tilemap::TileLayer>("assets/tileson_test.json", "ground");
+    m_tileLayerGround->setScreenSizeHint(jt::Vector2(400, 300));
 
-    //    for (auto t : m_tilemap->getAllTiles()) {
+    m_tileLayerOverlay
+        = std::make_shared<jt::tilemap::TileLayer>("assets/tileson_test.json", "overlay");
+    m_tileLayerOverlay->setScreenSizeHint(jt::Vector2(400, 300));
+
+    // TODO
+    //    for (auto t : m_tileLayerGround->getAllTiles()) {
     //        add(t);
     //    }
 
@@ -21,7 +27,8 @@ void StateTileson::doInternalCreate()
 void StateTileson::doInternalUpdate(float const elapsed)
 {
     auto const scrollspeed = 150.0f;
-    m_tilemap->update(elapsed);
+    m_tileLayerGround->update(elapsed);
+    m_tileLayerOverlay->update(elapsed);
 
     moveCamera(elapsed, scrollspeed);
 
@@ -47,8 +54,9 @@ void StateTileson::moveCamera(float const elapsed, float const scrollspeed)
 
 void StateTileson::doInternalDraw() const
 {
-    m_tilemap->draw(getGame()->getRenderTarget());
-    //    for (auto t : m_tilemap->getAllTiles()) {
+    m_tileLayerGround->draw(getGame()->getRenderTarget());
+    m_tileLayerOverlay->draw(getGame()->getRenderTarget());
+    //    for (auto t : m_tileLayerGround->getAllTiles()) {
     //        t->draw();
     //    }
     //    drawObjects();

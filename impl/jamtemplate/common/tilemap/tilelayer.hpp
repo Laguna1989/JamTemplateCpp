@@ -21,7 +21,7 @@ public:
 
     /// Constructor
     /// \param path path to the tilemap file
-    explicit TileLayer(std::string const& path, std::string const& layerName = "");
+    explicit TileLayer(std::string const& path, std::string const& layerName);
 
     /// Get map size in Tiles
     /// \return map size in tiles
@@ -61,6 +61,7 @@ public:
 
 private:
     std::unique_ptr<tson::Map> m_map { nullptr };
+    std::string m_layerName { "" };
     mutable std::vector<jt::Sprite> m_tileSprites {};
 
     Vector2 m_position { 0.0f, 0.0f };

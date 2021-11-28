@@ -4,6 +4,19 @@
 namespace jt {
 namespace tilemap {
 
+ObjectLayer::ObjectLayer(std::string const& path, std::string const& layerName)
+{
+    // TODO replace by tilemapManager, similar to TextureManager
+    tson::Tileson parser;
+
+    m_map = parser.parse(path);
+    if (m_map->getStatus() != tson::ParseStatus::OK) {
+        std::cout << "tilemap json could not be parsed.\n";
+        throw std::logic_error { "tilemap json could not be parsed." };
+    }
+    parseObjects();
+}
+
 void ObjectLayer::parseObjects()
 {
     for (auto& layer : m_map->getLayers()) {
@@ -15,5 +28,6 @@ void ObjectLayer::parseObjects()
         }
     }
 }
+
 } // namespace tilemap
 } // namespace jt

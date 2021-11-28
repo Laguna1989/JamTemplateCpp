@@ -3,15 +3,14 @@
 #include "drawable_helpers.hpp"
 #include "game_interface.hpp"
 #include "shape.hpp"
-#include "tilemap/tile.hpp"
 #include <iostream>
 #include <memory>
-#include <pathfinder/node.hpp>
 
 namespace jt {
 namespace tilemap {
 TileLayer::TileLayer(std::string const& path, std::string const& layerName)
 {
+    m_layerName = layerName;
     m_position = jt::Vector2 { 0.0f, 0.0f };
     m_screenSizeHint = jt::Vector2 { 0.0f, 0.0f };
 
@@ -20,7 +19,7 @@ TileLayer::TileLayer(std::string const& path, std::string const& layerName)
     m_map = parser.parse(path);
     if (m_map->getStatus() != tson::ParseStatus::OK) {
         std::cout << "tilemap json could not be parsed.\n";
-        throw std::logic_error { "tilemap json could not be parsed." };
+        throw std::invalid_argument { "tilemap json could not be parsed." };
     }
 
     auto const tileset = m_map->getTilesets().at(0);
@@ -132,7 +131,9 @@ void TileLayer::doDraw(std::shared_ptr<jt::renderTarget> const sptr) const
         if (layer.getType() != tson::LayerType::TileLayer) {
             continue;
         }
-        drawSingleTileLayer(sptr, posOffset, layer);
+        if (layer.getName() == m_layerName) {
+            drawSingleTileLayer(sptr, posOffset, layer);
+        }
     }
 }
 

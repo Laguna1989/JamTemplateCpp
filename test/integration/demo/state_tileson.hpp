@@ -17,7 +17,8 @@ public:
     StateTileson() = default;
 
 private:
-    std::shared_ptr<jt::tilemap::TileLayer> m_tilemap;
+    std::shared_ptr<jt::tilemap::TileLayer> m_tileLayerGround;
+    std::shared_ptr<jt::tilemap::TileLayer> m_tileLayerOverlay;
 
     void doInternalCreate() override;
     void doInternalUpdate(float const elapsed) override;
