@@ -6,9 +6,8 @@
 namespace jt {
 
 class ControlCommandNull : public ControlCommandInterface {
-    void execute(float elapsed) override;
-
 public:
+    void execute(float elapsed) override;
     void reset() override;
 };
 } // namespace jt

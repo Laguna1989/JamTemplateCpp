@@ -63,7 +63,7 @@ TEST(TilemapObjectLayerTest, BoolPropertyParsedCorrectly)
 TEST(TilemapObjectLayerTest, FloatPropertyParsedCorrectly)
 {
     ObjectLayer ol { "assets/tileson_test.json", "objects" };
-    ASSERT_FLOAT_EQ(ol.getObjects().at(0).properties.floats.at("float_prop"), 1337.42);
+    ASSERT_FLOAT_EQ(ol.getObjects().at(0).properties.floats.at("float_prop"), 1337.42f);
 }
 
 TEST(TilemapObjectLayerTest, IntPropertyParsedCorrectly)
