@@ -1,4 +1,4 @@
-#include "pathfindinder.hpp"
+#include "pathfinder.hpp"
 #include "math_helper.hpp"
 #include <iostream>
 #include <limits>

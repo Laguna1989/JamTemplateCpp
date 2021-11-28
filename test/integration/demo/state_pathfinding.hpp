@@ -3,7 +3,7 @@
 
 #include "game_state.hpp"
 #include "pathfinder/node_interface.hpp"
-#include "pathfinder/pathfindinder.hpp"
+#include "pathfinder/pathfinder.hpp"
 #include "shape.hpp"
 #include "tilemap/tile_node.hpp"
 

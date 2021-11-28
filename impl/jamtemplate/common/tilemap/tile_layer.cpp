@@ -1,4 +1,4 @@
-﻿#include "tilelayer.hpp"
+﻿#include "tile_layer.hpp"
 #include "conversions.hpp"
 #include "drawable_helpers.hpp"
 #include "game_interface.hpp"
@@ -54,22 +54,22 @@ void TileLayer::doDraw(std::shared_ptr<jt::renderTarget> const sptr) const
         return;
     }
 
-    auto const posOffset = m_position + getShakeOffset() + getOffset();
-
     for (auto& layer : m_map->getLayers()) {
         // skip all non-tile layers
         if (layer.getType() != tson::LayerType::TileLayer) {
             continue;
         }
         if (layer.getName() == m_layerName) {
-            drawSingleTileLayer(sptr, posOffset, layer);
+            drawSingleTileLayer(sptr, layer);
         }
     }
 }
 
 void TileLayer::drawSingleTileLayer(
-    std::shared_ptr<jt::renderTarget> const& rt, Vector2 const& posOffset, tson::Layer& layer) const
+    std::shared_ptr<jt::renderTarget> const& rt, tson::Layer& layer) const
 {
+
+    auto const posOffset = m_position + getShakeOffset() + getOffset();
     for (auto& [pos, tile] : layer.getTileObjects()) {
         this->checkIdBounds(tile);
 

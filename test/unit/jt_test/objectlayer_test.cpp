@@ -1,4 +1,4 @@
-#include "tilemap/objectlayer.hpp"
+#include "tilemap/object_layer.hpp"
 #include <gtest/gtest.h>
 
 using ::jt::tilemap::ObjectLayer;

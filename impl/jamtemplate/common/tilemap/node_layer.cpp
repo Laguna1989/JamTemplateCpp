@@ -1,4 +1,4 @@
-#include "nodelayer.hpp"
+#include "node_layer.hpp"
 #include <drawable_helpers.hpp>
 #include <pathfinder/node.hpp>
 #include <shape.hpp>

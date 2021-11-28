@@ -3,8 +3,8 @@
 
 #include "game_state.hpp"
 #include <memory>
-#include <tilemap/nodelayer.hpp>
-#include <tilemap/objectlayer.hpp>
+#include <tilemap/node_layer.hpp>
+#include <tilemap/object_layer.hpp>
 
 namespace jt {
 namespace tilemap {

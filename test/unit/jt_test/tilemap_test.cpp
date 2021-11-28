@@ -1,4 +1,4 @@
-﻿#include "tilemap/tilelayer.hpp"
+﻿#include "tilemap/tile_layer.hpp"
 #include <gtest/gtest.h>
 
 using jt::tilemap::TileLayer;

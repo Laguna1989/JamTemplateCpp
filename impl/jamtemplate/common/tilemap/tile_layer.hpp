@@ -67,17 +67,12 @@ private:
     Color m_color { jt::colors::White };
     Color m_flashColor { jt::colors::White };
 
-    //
-
     void checkIdBounds(tson::TileObject& tile) const;
 
-    void drawSingleTileLayer(std::shared_ptr<jt::renderTarget> const& rt, Vector2 const& posOffset,
-        tson::Layer& layer) const;
-
-    //    void parseTiles();
+    void drawSingleTileLayer(std::shared_ptr<jt::renderTarget> const& rt, tson::Layer& layer) const;
 };
 
 } // namespace tilemap
 } // namespace jt
 
-#endif // !JAMTEMPLATE_TILEMAP_HPP_GUARD
+#endif // !GUARD_JAMTEMPLATE_TILEMAP_HPP_GUARD

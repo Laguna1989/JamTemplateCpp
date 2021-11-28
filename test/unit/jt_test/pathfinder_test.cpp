@@ -1,6 +1,6 @@
 #include "pathfinder/node.hpp"
 #include "pathfinder/node_interface.hpp"
-#include "pathfinder/pathfindinder.hpp"
+#include "pathfinder/pathfinder.hpp"
 #include <gtest/gtest.h>
 #include <map>
 
@@ -113,7 +113,6 @@ TEST(PathfinderTest, ReturnsCorrectEntryForThreeAdjacentNodesStartingIntheMiddle
     ASSERT_EQ(path.at(0), node2);
     ASSERT_EQ(path.at(1), node3);
 }
-
 
 std::vector<NodeT> createNodes()
 {

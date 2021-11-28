@@ -61,7 +61,8 @@ void Game::doUpdate(float const elapsed)
     jt::Vector2 const mpf = getRenderWindow()->getMousePosition() / getCamera()->getZoom();
 
     input()->update(MousePosition { mpf.x() + getCamera()->getCamOffset().x(),
-        mpf.y() + getCamera()->getCamOffset().y(), mpf.x(), mpf.y() });
+                        mpf.y() + getCamera()->getCamOffset().y(), mpf.x(), mpf.y() },
+        elapsed);
 
     if (m_view) {
         int const camOffsetix { static_cast<int>(

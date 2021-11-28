@@ -1,6 +1,7 @@
 ﻿#ifndef GUARD_JAMTEMPLATE_INPUTMANAGERINTERFACE_HPP
 #define GUARD_JAMTEMPLATE_INPUTMANAGERINTERFACE_HPP
 
+#include "control_command_interface.hpp"
 #include "key_codes.hpp"
 #include "vector.hpp"
 #include <memory>
@@ -87,6 +88,20 @@ public:
     virtual bool justReleased(jt::KeyCode k) = 0;
 
     virtual void reset() = 0;
+
+    virtual void setCommandJustPressed(
+        std::vector<jt::KeyCode> key, std::shared_ptr<jt::ControlCommandInterface> command)
+        = 0;
+    virtual void setCommandPressed(
+        std::vector<jt::KeyCode> key, std::shared_ptr<jt::ControlCommandInterface> command)
+        = 0;
+    virtual void setCommandReleased(
+        std::vector<jt::KeyCode> key, std::shared_ptr<jt::ControlCommandInterface> command)
+        = 0;
+    virtual void setCommandJustReleased(
+        std::vector<jt::KeyCode> key, std::shared_ptr<jt::ControlCommandInterface> command)
+        = 0;
+    virtual void updateCommands(float elapsed) = 0;
 };
 
 class InputManagerInterface {
@@ -104,7 +119,7 @@ public:
 
     /// Update the input
     /// \param mp the mouse buttons
-    virtual void update(MousePosition const& mp) = 0;
+    virtual void update(MousePosition const& mp, float elapsed) = 0;
 
     /// Reset the input
     virtual void reset() = 0;

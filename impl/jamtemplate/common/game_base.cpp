@@ -1,7 +1,7 @@
 ﻿#include "game_base.hpp"
 #include "camera.hpp"
 #include "game_state.hpp"
-#include "input_manager_interface.hpp"
+#include "input/input_manager_interface.hpp"
 #include "state_manager.hpp"
 #include <exception>
 #include <iostream>
@@ -38,9 +38,7 @@ GameBase::GameBase(std::shared_ptr<jt::RenderWindowInterface> renderWindow,
 void GameBase::run()
 {
     try {
-        if (m_stateManager->checkForGameStateSwitch(getPtr())) {
-            reset();
-        }
+        m_stateManager->checkAndPerformSwitchState(getPtr());
 
         auto const now = std::chrono::steady_clock::now();
 

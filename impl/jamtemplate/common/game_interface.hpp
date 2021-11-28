@@ -2,7 +2,7 @@
 #define GUARD_JAMTEMPLATE_GAMEINTERFACE_HPP_GUARD
 
 #include "cam_interface.hpp"
-#include "input_manager_interface.hpp"
+#include "input/input_manager_interface.hpp"
 #include "music_player_interface.hpp"
 #include "render_target.hpp"
 #include "render_window_interface.hpp"
@@ -56,6 +56,8 @@ public:
     /// Get the render Target
     /// \return the render target
     virtual std::shared_ptr<jt::renderTarget> getRenderTarget() const = 0;
+
+    virtual void reset() = 0;
 
 protected:
     virtual std::weak_ptr<GameInterface> getPtr() = 0;

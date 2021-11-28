@@ -5,7 +5,7 @@
 #include "shape.hpp"
 #include "sprite.hpp"
 #include "text.hpp"
-#include "tilemap/tilelayer.hpp"
+#include "tilemap/tile_layer.hpp"
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 #include <memory>

@@ -1,13 +1,13 @@
 ﻿#include "state_tileson.hpp"
 #include "game_interface.hpp"
-#include "input_manager.hpp"
+#include "input/input_manager.hpp"
 #include "shape.hpp"
 #include "sound.hpp"
 #include "state_select.hpp"
-#include "tilemap/tilelayer.hpp"
+#include "tilemap/tile_layer.hpp"
 #include "tilemap/tilemap_helpers.hpp"
 #include "timer.hpp"
-#include <pathfinder/pathfindinder.hpp>
+#include <pathfinder/pathfinder.hpp>
 
 void StateTileson::doInternalCreate()
 {

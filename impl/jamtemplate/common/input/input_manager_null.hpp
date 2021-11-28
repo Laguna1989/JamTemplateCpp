@@ -32,7 +32,7 @@ class InputManagerNull : public InputManagerInterface {
 public:
     std::shared_ptr<MouseInputInterface> mouse() override;
     std::shared_ptr<KeyboardInputInterface> keyboard() override;
-    void update(MousePosition const& mp) override;
+    void update(MousePosition const& mp, float elapsed) override;
     void reset() override;
 };
 } // namespace jt

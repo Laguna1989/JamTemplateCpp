@@ -1,7 +1,7 @@
 ﻿#include "state_tween.hpp"
 #include "drawable_helpers.hpp"
 #include "game_interface.hpp"
-#include "input_manager.hpp"
+#include "input/input_manager.hpp"
 #include "state_select.hpp"
 #include "tweens/tween_alpha.hpp"
 #include <cstdint>

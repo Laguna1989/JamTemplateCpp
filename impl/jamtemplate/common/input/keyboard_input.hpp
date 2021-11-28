@@ -1,6 +1,7 @@
 ﻿#ifndef GUARD_JAMTEMPLATE_KEYBOARDINPUT_HPP_INCLUDEGUARD
 #define GUARD_JAMTEMPLATE_KEYBOARDINPUT_HPP_INCLUDEGUARD
 
+#include "control_command_interface.hpp"
 #include "input_manager_interface.hpp"
 #include "keyboard_input_lib.hpp"
 #include <functional>
@@ -17,11 +18,21 @@ public:
 
     virtual bool pressed(jt::KeyCode k) override;
     virtual bool released(jt::KeyCode k) override;
+    void updateCommands(float elapsed) override;
 
     virtual bool justPressed(jt::KeyCode k) override;
     virtual bool justReleased(jt::KeyCode k) override;
 
     virtual void reset() override;
+
+    void setCommandJustPressed(std::vector<jt::KeyCode> key,
+        std::shared_ptr<jt::ControlCommandInterface> command) override;
+    void setCommandPressed(std::vector<jt::KeyCode> key,
+        std::shared_ptr<jt::ControlCommandInterface> command) override;
+    void setCommandReleased(std::vector<jt::KeyCode> key,
+        std::shared_ptr<jt::ControlCommandInterface> command) override;
+    void setCommandJustReleased(std::vector<jt::KeyCode> key,
+        std::shared_ptr<jt::ControlCommandInterface> command) override;
 
 private:
     KeyboardKeyCheckFunction m_checkFunc;
@@ -30,6 +41,11 @@ private:
 
     std::map<jt::KeyCode, bool> m_justPressed {};
     std::map<jt::KeyCode, bool> m_justReleased {};
+
+    std::map<jt::KeyCode, std::shared_ptr<jt::ControlCommandInterface>> m_commandsPressed;
+    std::map<jt::KeyCode, std::shared_ptr<jt::ControlCommandInterface>> m_commandsReleased;
+    std::map<jt::KeyCode, std::shared_ptr<jt::ControlCommandInterface>> m_commandsJustPressed;
+    std::map<jt::KeyCode, std::shared_ptr<jt::ControlCommandInterface>> m_commandsJustReleased;
 };
 
 } // namespace jt
