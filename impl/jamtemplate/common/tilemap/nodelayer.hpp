@@ -1,0 +1,33 @@
+#ifndef GUARD_JAMTEMPLATE_NODELAYER_HPP
+#define GUARD_JAMTEMPLATE_NODELAYER_HPP
+
+#include "tile_node.hpp"
+#include "tileson.h"
+#include <map>
+#include <memory>
+#include <vector>
+
+namespace jt {
+namespace tilemap {
+
+class NodeLayer {
+public:
+    NodeLayer(std::string const& path, std::string const& layerName);
+
+    using Sptr = std::shared_ptr<NodeLayer>;
+    std::shared_ptr<TileNode> getTileAt(unsigned int x, unsigned int y);
+    std::vector<std::shared_ptr<TileNode>> getAllTiles();
+
+private:
+    std::unique_ptr<tson::Map> m_map { nullptr };
+    std::string m_layerName { "" };
+
+    //    std::map<std::pair<unsigned int, unsigned int>, std::shared_ptr<TileNode>> m_tiles;
+    std::vector<std::shared_ptr<TileNode>> m_tiles;
+    void parseTiles();
+    void createNodeConnections();
+};
+
+} // namespace tilemap
+} // namespace jt
+#endif // GUARD_JAMTEMPLATE_NODELAYER_HPP

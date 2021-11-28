@@ -1,10 +1,13 @@
 ﻿#include "state_tileson.hpp"
 #include "game_interface.hpp"
 #include "input_manager.hpp"
+#include "shape.hpp"
 #include "sound.hpp"
 #include "state_select.hpp"
 #include "tilemap/tilelayer.hpp"
+#include "tilemap/tilemap_helpers.hpp"
 #include "timer.hpp"
+#include <pathfinder/pathfindinder.hpp>
 
 void StateTileson::doInternalCreate()
 {
@@ -16,30 +19,55 @@ void StateTileson::doInternalCreate()
         = std::make_shared<jt::tilemap::TileLayer>("assets/tileson_test.json", "overlay");
     m_tileLayerOverlay->setScreenSizeHint(jt::Vector2(400, 300));
 
-    // TODO
-    //    for (auto t : m_tileLayerGround->getAllTiles()) {
-    //        add(t);
-    //    }
+    m_objectsLayer
+        = std::make_shared<jt::tilemap::ObjectLayer>("assets/tileson_test.json", "objects");
+
+    m_nodeLayer = std::make_shared<jt::tilemap::NodeLayer>("assets/tileson_test.json", "ground");
+    for (auto& t : m_nodeLayer->getAllTiles()) {
+        add(t);
+    }
 
     setAutoDraw(false);
+
+    calculatePath(
+        m_nodeLayer->getTileAt(8, 2)->getNode(), m_nodeLayer->getTileAt(12, 6)->getNode());
 }
 
 void StateTileson::doInternalUpdate(float const elapsed)
 {
-    auto const scrollspeed = 150.0f;
+
     m_tileLayerGround->update(elapsed);
+
     m_tileLayerOverlay->update(elapsed);
 
-    moveCamera(elapsed, scrollspeed);
+    moveCamera(elapsed);
+
+    toggleVisibility();
 
     if (getGame()->input()->keyboard()->justPressed(jt::KeyCode::F1)
         || getGame()->input()->keyboard()->justPressed(jt::KeyCode::Escape)) {
         getGame()->getStateManager()->switchState(std::make_shared<StateSelect>());
     }
 }
-
-void StateTileson::moveCamera(float const elapsed, float const scrollspeed)
+void StateTileson::toggleVisibility()
 {
+    if (getGame()->input()->keyboard()->justPressed(jt::KeyCode::Num1)) {
+        m_drawTileLayer1 = !m_drawTileLayer1;
+    }
+    if (getGame()->input()->keyboard()->justPressed(jt::KeyCode::Num2)) {
+        m_drawTileLayer2 = !m_drawTileLayer2;
+    }
+    if (getGame()->input()->keyboard()->justPressed(jt::KeyCode::Num3)) {
+        m_drawObjects = !m_drawObjects;
+    }
+    if (getGame()->input()->keyboard()->justPressed(jt::KeyCode::Num4)) {
+        m_drawTileNodes = !m_drawTileNodes;
+    }
+}
+
+void StateTileson::moveCamera(float const elapsed)
+{
+    auto const scrollspeed = 150.0f;
     if (getGame()->input()->keyboard()->pressed(jt::KeyCode::D)) {
         getGame()->getCamera()->move(jt::Vector2 { scrollspeed * elapsed, 0.0f });
     } else if (getGame()->input()->keyboard()->pressed(jt::KeyCode::A)) {
@@ -54,10 +82,50 @@ void StateTileson::moveCamera(float const elapsed, float const scrollspeed)
 
 void StateTileson::doInternalDraw() const
 {
-    m_tileLayerGround->draw(getGame()->getRenderTarget());
-    m_tileLayerOverlay->draw(getGame()->getRenderTarget());
-    //    for (auto t : m_tileLayerGround->getAllTiles()) {
-    //        t->draw();
-    //    }
-    //    drawObjects();
+    drawTileLayers();
+
+    drawObjectLayer();
+    drawNodeLayer();
+}
+void StateTileson::drawNodeLayer() const
+{
+    if (!m_drawTileNodes) {
+        return;
+    }
+    for (auto& t : m_nodeLayer->getAllTiles()) {
+        t->draw();
+    }
+}
+void StateTileson::drawTileLayers() const
+{
+    if (m_drawTileLayer1) {
+        m_tileLayerGround->draw(getGame()->getRenderTarget());
+    }
+
+    if (m_drawTileLayer2) {
+        m_tileLayerOverlay->draw(getGame()->getRenderTarget());
+    }
+}
+void StateTileson::drawObjectLayer() const
+{
+    if (!m_drawObjects) {
+        return;
+    }
+    for (auto& obj : m_objectsLayer->getObjects()) {
+
+        auto shape = jt::tilemap::createShapeFrom(obj);
+        shape->draw(getGame()->getRenderTarget());
+    }
+}
+
+void StateTileson::calculatePath(jt::pathfinder::NodeT start, jt::pathfinder::NodeT end)
+{
+    auto path = jt::pathfinder::calculatePath(start, end);
+    for (auto const& n : path) {
+        auto const pos = n->getTilePosition();
+        auto t = m_nodeLayer->getTileAt(static_cast<int>(pos.x()), static_cast<int>(pos.y()));
+        if (t) {
+            t->setColor(jt::colors::Cyan);
+        }
+    }
 }

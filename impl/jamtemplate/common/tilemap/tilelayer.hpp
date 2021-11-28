@@ -6,7 +6,6 @@
 #include "pathfinder/node_interface.hpp"
 #include "render_target.hpp"
 #include "sprite.hpp"
-#include "tilemap/tile.hpp"
 #include "tileson.h"
 #include <memory>
 #include <vector>
@@ -21,7 +20,7 @@ public:
 
     /// Constructor
     /// \param path path to the tilemap file
-    explicit TileLayer(std::string const& path, std::string const& layerName);
+    TileLayer(std::string const& path, std::string const& layerName);
 
     /// Get map size in Tiles
     /// \return map size in tiles
@@ -56,9 +55,6 @@ public:
 
     void setScreenSizeHint(jt::Vector2 const& hint);
 
-    //    std::shared_ptr<Tile> getTileAt(int x, int y);
-    //    std::vector<std::shared_ptr<Tile>> getAllTiles();
-
 private:
     std::unique_ptr<tson::Map> m_map { nullptr };
     std::string m_layerName { "" };
@@ -71,7 +67,7 @@ private:
     Color m_color { jt::colors::White };
     Color m_flashColor { jt::colors::White };
 
-    //    std::map<std::pair<int, int>, std::shared_ptr<Tile>> m_tiles;
+    //
 
     void checkIdBounds(tson::TileObject& tile) const;
 

@@ -9,14 +9,17 @@ namespace pathfinder {
 
 namespace {
 
-float calculateDistance(NodeT node1, jt::Vector2 position2)
+float calculateDistance(NodeT node1, jt::Vector2u position2)
 {
-    auto const thisPosition = node1->getPosition();
-    auto const diff = position2 - thisPosition;
+    auto const thisPosition = node1->getTilePosition();
+
+    auto diff = jt::Vector2 { static_cast<float>(position2.x()) - thisPosition.x(),
+        static_cast<float>(position2.y()) - thisPosition.y() };
     return jt::MathHelper::length(diff);
 }
 
-NodeT findClosestNodeTo(std::vector<std::weak_ptr<NodeInterface>>& toCheck, jt::Vector2 endPosition)
+NodeT findClosestNodeTo(
+    std::vector<std::weak_ptr<NodeInterface>>& toCheck, jt::Vector2u endPosition)
 {
     if (toCheck.empty()) {
         throw std::invalid_argument { "cannot find closestNodeToEnd because no nodes given." };
@@ -52,7 +55,7 @@ NodeT findClosestNodeTo(std::vector<std::weak_ptr<NodeInterface>>& toCheck, jt::
 
 void setNeighbourValue(NodeT currentNode, std::shared_ptr<NodeInterface> neighbour_node)
 {
-    auto const dist = calculateDistance(neighbour_node, currentNode->getPosition());
+    auto const dist = calculateDistance(neighbour_node, currentNode->getTilePosition());
     auto const newValue = dist + currentNode->getValue();
 
     float const oldValue = neighbour_node->getValue();
@@ -79,7 +82,7 @@ void addNeighboursToToCheck(NodeT currentNode, std::vector<std::weak_ptr<NodeInt
 
 bool calculateNodeValuesFromEndToStart(NodeT start, NodeT end)
 {
-    jt::Vector2 startPosition = start->getPosition();
+    auto const startPosition = start->getTilePosition();
 
     end->visit();
     end->setValue(0.0f);

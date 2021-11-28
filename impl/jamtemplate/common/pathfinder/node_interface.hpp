@@ -15,7 +15,7 @@ public:
     virtual void unvisit() = 0;
     virtual bool wasVisited() = 0;
     virtual void addNeighbour(std::weak_ptr<NodeInterface> other) = 0;
-    virtual jt::Vector2 getPosition() const = 0;
+    virtual jt::Vector2u getTilePosition() const = 0;
     virtual float getValue() = 0;
     virtual void setValue(float value) = 0;
 };

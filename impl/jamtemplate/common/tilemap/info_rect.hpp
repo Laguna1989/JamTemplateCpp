@@ -5,6 +5,10 @@
 #include <string>
 
 namespace jt {
+
+namespace tilemap {
+
+// TODO add properties
 struct InfoRect {
     Vector2 position { 0.0f, 0.0f };
     Vector2 size { 0.0f, 0.0f };
@@ -12,5 +16,7 @@ struct InfoRect {
     std::string type { "" };
     std::string name { "" };
 };
+
+} // namespace tilemap
 } // namespace jt
 #endif

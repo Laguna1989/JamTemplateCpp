@@ -17,20 +17,19 @@ public:
 
     /// Constructor
     /// \param path path to the tilemap file
-    explicit ObjectLayer(std::string const& path, std::string const& layerName = "");
-
-    /// Get map size in Tiles
-    /// \return map size in tiles
-    jt::Vector2u getMapSizeInTiles();
+    ObjectLayer(std::string const& path, std::string const& layerName);
 
     /// get Object Groups from map
     /// \return the object group
-    std::map<std::string, std::vector<InfoRect>> getObjectGroups() { return m_objectGroups; };
+    std::vector<InfoRect> getObjects() { return m_objectGroups; };
 
 private:
     std::unique_ptr<tson::Map> m_map { nullptr };
+
+    std::string m_layerName { "" };
+
     // Map from object layer name to vector of objects, all rectangular.
-    std::map<std::string, std::vector<InfoRect>> m_objectGroups {};
+    std::vector<InfoRect> m_objectGroups {};
 
     void parseObjects();
 };

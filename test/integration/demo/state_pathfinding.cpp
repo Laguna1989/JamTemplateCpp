@@ -19,7 +19,7 @@ void StatePathfinding::calculatePath(jt::pathfinder::NodeT start, jt::pathfinder
 {
     auto path = jt::pathfinder::calculatePath(start, end);
     for (auto const& n : path) {
-        auto const pos = n->getPosition();
+        auto const pos = n->getTilePosition();
         auto t = getTileAt(static_cast<int>(pos.x()), static_cast<int>(pos.y()));
         if (t) {
             t->setColor(jt::colors::Cyan);
@@ -33,7 +33,7 @@ void StatePathfinding::createNodeConnections()
         if (t->getBlocked()) {
             continue;
         }
-        auto const currentPos = t->getPosition();
+        auto const currentPos = t->getNode()->getTilePosition();
 
         for (int i = -1; i != 2; ++i) {
             for (int j = -1; j != 2; ++j) {
@@ -61,9 +61,10 @@ void StatePathfinding::createTiles()
             std::shared_ptr<jt::Shape> drawable = jt::dh::createShapeRect(jt::Vector2 { 19, 19 });
             drawable->setPosition(jt::Vector2 { i * 20.0f, j * 20.0f });
             auto node = std::make_shared<jt::pathfinder::Node>();
-            node->setPosition(jt::Vector2 { static_cast<float>(i), static_cast<float>(j) });
+            node->setPosition(
+                jt::Vector2u { static_cast<unsigned int>(i), static_cast<unsigned int>(j) });
 
-            auto t = std::make_shared<jt::Tile>(drawable, node, false);
+            auto t = std::make_shared<jt::tilemap::TileNode>(drawable, node, false);
             m_tiles.push_back(t);
         }
     }
@@ -103,7 +104,7 @@ void StatePathfinding::doInternalUpdate(float /*elapsed*/)
 
 void StatePathfinding::doInternalDraw() const { }
 
-std::shared_ptr<jt::Tile> StatePathfinding::getTileAt(int x, int y)
+std::shared_ptr<jt::tilemap::TileNode> StatePathfinding::getTileAt(int x, int y)
 {
     if (x < 0) {
         return nullptr;

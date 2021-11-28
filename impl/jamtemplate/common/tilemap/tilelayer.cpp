@@ -40,79 +40,9 @@ TileLayer::TileLayer(std::string const& path, std::string const& layerName)
     }
 }
 /*
-void TileLayer::parseTiles()
-{
-    for (auto& layer : m_map->getLayers()) {
-        // skip all non-tile layers
-        if (layer.getType() != tson::LayerType::TileLayer) {
-            continue;
-        }
-        for (auto& [pos, tile] : layer.getTileObjects()) {
-            this->checkIdBounds(tile);
 
-            bool isBlocked = false;
-            auto blockedProperty = tile.getTile()->getProp("blocked");
-            if (blockedProperty) {
-                isBlocked = blockedProperty->getValue<bool>();
-            }
 
-            auto posx = std::get<0>(pos);
-            auto posy = std::get<1>(pos);
-
-            auto const ts = m_map->getTilesets().at(0).getTileSize();
-            auto color = jt::MakeColor::FromRGBA(1, 1, 1, 100);
-            if (!isBlocked) {
-                color = jt::MakeColor::FromRGBA(255, 255, 255, 100);
-            }
-            std::shared_ptr<jt::Shape> drawable = jt::dh::createShapeRect(
-                jt::Vector2 { static_cast<float>(ts.x - 1), static_cast<float>(ts.y - 1) }, color);
-            drawable->setPosition(
-                jt::Vector2 { static_cast<float>(ts.x * posx), static_cast<float>(ts.y * posy) });
-            auto node = std::make_shared<jt::pathfinder::Node>();
-
-            auto myTile = std::make_shared<jt::Tile>(drawable, node, isBlocked);
-
-            m_tiles[std::make_pair(posx, posy)] = myTile;
-        }
-    }
-
-    for (auto& kvp : m_tiles) {
-        auto t = kvp.second;
-        if (t->getBlocked()) {
-            continue;
-        }
-        auto const currentPos = t->getPosition();
-
-        for (int i = -1; i != 2; ++i) {
-            for (int j = -1; j != 2; ++j) {
-                if (i == 0 && j == 0) {
-                    continue;
-                }
-                auto oi = static_cast<int>(currentPos.x() + i);
-                auto oj = static_cast<int>(currentPos.y() + j);
-                auto ot = getTileAt(oi, oj);
-                if (ot) {
-                    if (ot->getBlocked()) {
-                        continue;
-                    }
-                    t->getNode()->addNeighbour(ot->getNode());
-                }
-            }
-        }
-    }
-}
-
-void TileLayer::parseObjects()
-{
-    for (auto& layer : m_map->getLayers()) {
-        const std::string currentGroupName = layer.getName();
-        for (auto& obj : layer.getObjects()) {
-            InfoRect infoRect { Conversion::vec(obj.getPosition()), Conversion::vec(obj.getSize()),
-                obj.getRotation(), obj.getType(), obj.getName() };
-            m_objectGroups[currentGroupName].push_back(infoRect);
-        }
-    }
-}*/
+*/
 
 void TileLayer::doDraw(std::shared_ptr<jt::renderTarget> const sptr) const
 {
@@ -222,16 +152,6 @@ jt::Vector2u TileLayer::getMapSizeInTiles()
     return jt::Vector2u { static_cast<unsigned int>(m_map->getSize().x),
         static_cast<unsigned int>(m_map->getSize().y) };
 }
-
-// std::shared_ptr<Tile> TileLayer::getTileAt(int x, int y) { return nullptr; }
-//  std::vector<std::shared_ptr<Tile>> TileLayer::getAllTiles()
-//{
-//      std::vector<std::shared_ptr<Tile>> tiles;
-//      for (auto kvp : m_tiles) {
-//          tiles.push_back(kvp.second);
-//      }
-//      return tiles;
-//  }
 
 } // namespace tilemap
 

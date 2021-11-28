@@ -5,57 +5,51 @@ using ::jt::tilemap::ObjectLayer;
 
 TEST(TilemapObjectLayerTest, JsonDoesContainObjectGroups)
 {
-    ObjectLayer tm { "assets/tileson_test.json" };
+    ObjectLayer ol { "assets/tileson_test.json", "objects" };
 
-    ASSERT_FALSE(tm.getObjectGroups().empty());
+    ASSERT_FALSE(ol.getObjects().empty());
 }
 
-TEST(TilemapObjectLayerTest, CountIsZeroForNonExistingLayer)
+TEST(TilemapObjectLayerTest, NonExistingLayerDoesNotContainObjects)
 {
-    ObjectLayer tm { "assets/tileson_test.json" };
-    ASSERT_EQ(tm.getObjectGroups().count("abcd"), 0);
+    ObjectLayer ol { "assets/tileson_test.json", "non_existing_object_layer" };
+    ASSERT_EQ(ol.getObjects().size(), 0);
 }
 
-TEST(TilemapObjectLayerTest, CountIsOneForExistingObjectLayer)
+TEST(TilemapObjectLayerTest, ExistingLayerDoesContainObjects)
 {
-    ObjectLayer tm { "assets/tileson_test.json" };
-    ASSERT_EQ(tm.getObjectGroups().count("objects"), 1);
-}
-
-TEST(TilemapObjectLayerTest, AmountOfObjectsInObjectGroupIsCorrect)
-{
-    ObjectLayer tm { "assets/tileson_test.json" };
-    ASSERT_EQ(tm.getObjectGroups().at("objects").size(), 1U);
+    ObjectLayer ol { "assets/tileson_test.json", "objects" };
+    ASSERT_EQ(ol.getObjects().size(), 5);
 }
 
 TEST(TilemapObjectLayerTest, ObjectTypeIsParsedCorrectly)
 {
-    ObjectLayer tm { "assets/tileson_test.json" };
-    ASSERT_EQ(tm.getObjectGroups().at("objects").at(0).type, "type1");
+    ObjectLayer ol { "assets/tileson_test.json", "objects" };
+    ASSERT_EQ(ol.getObjects().at(0).type, "type1");
 }
 
 TEST(TilemapObjectLayerTest, ObjectNameIsParsedCorrectly)
 {
-    ObjectLayer tm { "assets/tileson_test.json" };
-    ASSERT_EQ(tm.getObjectGroups().at("objects").at(0).name, "object1");
+    ObjectLayer ol { "assets/tileson_test.json", "objects" };
+    ASSERT_EQ(ol.getObjects().at(0).name, "object1");
 }
 
 TEST(TilemapObjectLayerTest, ObjectPositionIsParsedCorrectly)
 {
-    ObjectLayer tm { "assets/tileson_test.json" };
-    ASSERT_EQ(tm.getObjectGroups().at("objects").at(0).position.x(), 256);
-    ASSERT_EQ(tm.getObjectGroups().at("objects").at(0).position.y(), 128);
+    ObjectLayer ol { "assets/tileson_test.json", "objects" };
+    ASSERT_EQ(ol.getObjects().at(0).position.x(), 256);
+    ASSERT_EQ(ol.getObjects().at(0).position.y(), 128);
 }
 
 TEST(TilemapObjectLayerTest, ObjectSizeIsParsedCorrectly)
 {
-    ObjectLayer tm { "assets/tileson_test.json" };
-    ASSERT_EQ(tm.getObjectGroups().at("objects").at(0).size.x(), 64);
-    ASSERT_EQ(tm.getObjectGroups().at("objects").at(0).size.y(), 96);
+    ObjectLayer ol { "assets/tileson_test.json", "objects" };
+    ASSERT_EQ(ol.getObjects().at(0).size.x(), 64);
+    ASSERT_EQ(ol.getObjects().at(0).size.y(), 96);
 }
 
 TEST(TilemapObjectLayerTest, ObjectRotationIsParsedCorrectly)
 {
-    ObjectLayer tm { "assets/tileson_test.json" };
-    ASSERT_EQ(tm.getObjectGroups().at("objects").at(0).rotation, 45);
+    ObjectLayer ol { "assets/tileson_test.json", "objects" };
+    ASSERT_EQ(ol.getObjects().at(0).rotation, 45);
 }

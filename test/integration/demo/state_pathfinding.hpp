@@ -5,16 +5,16 @@
 #include "pathfinder/node_interface.hpp"
 #include "pathfinder/pathfindinder.hpp"
 #include "shape.hpp"
-#include "tilemap/tile.hpp"
+#include "tilemap/tile_node.hpp"
 
 class StatePathfinding : public jt::GameState {
     void doInternalCreate() override;
     void doInternalUpdate(float elapsed) override;
     void doInternalDraw() const override;
 
-    std::vector<std::shared_ptr<jt::Tile>> m_tiles;
+    std::vector<std::shared_ptr<jt::tilemap::TileNode>> m_tiles;
 
-    std::shared_ptr<jt::Tile> getTileAt(int x, int y);
+    std::shared_ptr<jt::tilemap::TileNode> getTileAt(int x, int y);
 
     int mapSizeX = 15;
     int mapSizeY = 14;
