@@ -1,6 +1,7 @@
 ﻿#ifndef GUARD_JAMTEMPLATE_KEYBOARDINPUT_HPP_INCLUDEGUARD
 #define GUARD_JAMTEMPLATE_KEYBOARDINPUT_HPP_INCLUDEGUARD
 
+#include "control_command_interface.hpp"
 #include "input_manager_interface.hpp"
 #include "keyboard_input_lib.hpp"
 #include <functional>
@@ -30,6 +31,8 @@ private:
 
     std::map<jt::KeyCode, bool> m_justPressed {};
     std::map<jt::KeyCode, bool> m_justReleased {};
+
+    std::shared_ptr<jt::ControlCommandInterface> m_command { nullptr };
 };
 
 } // namespace jt
