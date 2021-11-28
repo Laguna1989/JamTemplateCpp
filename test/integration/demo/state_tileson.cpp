@@ -3,17 +3,17 @@
 #include "input_manager.hpp"
 #include "sound.hpp"
 #include "state_select.hpp"
-#include "tilemap/tilemap.hpp"
+#include "tilemap/tilelayer.hpp"
 #include "timer.hpp"
 
 void StateTileson::doInternalCreate()
 {
-    m_tilemap = std::make_shared<jt::Tilemap>("assets/tileson_test.json");
+    m_tilemap = std::make_shared<jt::tilemap::TileLayer>("assets/tileson_test.json");
     m_tilemap->setScreenSizeHint(jt::Vector2(400, 300));
 
-    for (auto t : m_tilemap->getAllTiles()) {
-        add(t);
-    }
+    //    for (auto t : m_tilemap->getAllTiles()) {
+    //        add(t);
+    //    }
 
     setAutoDraw(false);
 }
@@ -48,8 +48,8 @@ void StateTileson::moveCamera(float const elapsed, float const scrollspeed)
 void StateTileson::doInternalDraw() const
 {
     m_tilemap->draw(getGame()->getRenderTarget());
-    for (auto t : m_tilemap->getAllTiles()) {
-        t->draw();
-    }
+    //    for (auto t : m_tilemap->getAllTiles()) {
+    //        t->draw();
+    //    }
     //    drawObjects();
 }

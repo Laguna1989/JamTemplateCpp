@@ -5,7 +5,7 @@
 #include "shape.hpp"
 #include "sprite.hpp"
 #include "text.hpp"
-#include "tilemap/tilemap.hpp"
+#include "tilemap/tilelayer.hpp"
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 #include <memory>
@@ -48,7 +48,7 @@ std::shared_ptr<jt::DrawableInterface> createBar()
 
 std::shared_ptr<jt::DrawableInterface> createTileMap()
 {
-    auto t = std::make_shared<jt::Tilemap>("assets/tileson_test.json");
+    auto t = std::make_shared<jt::TileLayer>("assets/tileson_test.json");
     t->setScreenSizeHint(jt::Vector2 { 400.0f, 300.0f });
     return t;
 }

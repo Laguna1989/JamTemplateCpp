@@ -14,6 +14,7 @@ void StatePathfinding::doInternalCreate()
     resetTiles();
     calculatePath(getTileAt(7, 3)->getNode(), getTileAt(7, 9)->getNode());
 }
+
 void StatePathfinding::calculatePath(jt::pathfinder::NodeT start, jt::pathfinder::NodeT end)
 {
     auto path = jt::pathfinder::calculatePath(start, end);
@@ -25,6 +26,7 @@ void StatePathfinding::calculatePath(jt::pathfinder::NodeT start, jt::pathfinder
         }
     }
 }
+
 void StatePathfinding::createNodeConnections()
 {
     for (auto& t : m_tiles) {
@@ -51,6 +53,7 @@ void StatePathfinding::createNodeConnections()
         }
     }
 }
+
 void StatePathfinding::createTiles()
 {
     for (int i = 0; i != mapSizeX; ++i) {
@@ -81,6 +84,7 @@ void StatePathfinding::createTiles()
         add(t);
     }
 }
+
 void StatePathfinding::doInternalUpdate(float /*elapsed*/)
 {
     if (getGame()->input()->keyboard()->justPressed(jt::KeyCode::Escape)) {
@@ -96,6 +100,7 @@ void StatePathfinding::doInternalUpdate(float /*elapsed*/)
                 ->getNode());
     }
 }
+
 void StatePathfinding::doInternalDraw() const { }
 
 std::shared_ptr<jt::Tile> StatePathfinding::getTileAt(int x, int y)

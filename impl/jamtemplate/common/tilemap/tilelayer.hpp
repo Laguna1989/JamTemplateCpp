@@ -12,17 +12,16 @@
 #include <vector>
 
 namespace jt {
+namespace tilemap {
 
-// forward declaration
-class GameInterface;
-
-class Tilemap : public DrawableImpl {
+/// One single tile Layer from a tilemap for drawing
+class TileLayer : public DrawableImpl {
 public:
-    using Sptr = std::shared_ptr<Tilemap>;
+    using Sptr = std::shared_ptr<TileLayer>;
 
     /// Constructor
     /// \param path path to the tilemap file
-    explicit Tilemap(std::string const& path);
+    explicit TileLayer(std::string const& path, std::string const& layerName = "");
 
     /// Get map size in Tiles
     /// \return map size in tiles
@@ -57,17 +56,11 @@ public:
 
     void setScreenSizeHint(jt::Vector2 const& hint);
 
-    /// get Object Groups from map
-    /// \return the object group
-    std::map<std::string, std::vector<InfoRect>> getObjectGroups() { return m_objectGroups; };
-
-    std::shared_ptr<Tile> getTileAt(int x, int y);
-    std::vector<std::shared_ptr<Tile>> getAllTiles();
+    //    std::shared_ptr<Tile> getTileAt(int x, int y);
+    //    std::vector<std::shared_ptr<Tile>> getAllTiles();
 
 private:
     std::unique_ptr<tson::Map> m_map { nullptr };
-    // Map from object layer name to vector of objects, all rectangular.
-    std::map<std::string, std::vector<InfoRect>> m_objectGroups {};
     mutable std::vector<jt::Sprite> m_tileSprites {};
 
     Vector2 m_position { 0.0f, 0.0f };
@@ -77,16 +70,17 @@ private:
     Color m_color { jt::colors::White };
     Color m_flashColor { jt::colors::White };
 
-    std::map<std::pair<int, int>, std::shared_ptr<Tile>> m_tiles;
+    //    std::map<std::pair<int, int>, std::shared_ptr<Tile>> m_tiles;
 
     void checkIdBounds(tson::TileObject& tile) const;
 
     void drawSingleTileLayer(std::shared_ptr<jt::renderTarget> const& rt, Vector2 const& posOffset,
         tson::Layer& layer) const;
-    void parseObjects();
-    void parseTiles();
+
+    //    void parseTiles();
 };
 
+} // namespace tilemap
 } // namespace jt
 
 #endif // !JAMTEMPLATE_TILEMAP_HPP_GUARD

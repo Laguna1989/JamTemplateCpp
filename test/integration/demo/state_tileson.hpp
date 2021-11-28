@@ -5,8 +5,11 @@
 #include <memory>
 
 namespace jt {
-class Tilemap;
-class Sound;
+namespace tilemap {
+
+class TileLayer;
+
+}
 } // namespace jt
 
 class StateTileson : public jt::GameState {
@@ -14,7 +17,7 @@ public:
     StateTileson() = default;
 
 private:
-    std::shared_ptr<jt::Tilemap> m_tilemap;
+    std::shared_ptr<jt::tilemap::TileLayer> m_tilemap;
 
     void doInternalCreate() override;
     void doInternalUpdate(float const elapsed) override;

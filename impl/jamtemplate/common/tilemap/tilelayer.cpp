@@ -1,4 +1,4 @@
-﻿#include "tilemap.hpp"
+﻿#include "tilelayer.hpp"
 #include "conversions.hpp"
 #include "drawable_helpers.hpp"
 #include "game_interface.hpp"
@@ -9,8 +9,8 @@
 #include <pathfinder/node.hpp>
 
 namespace jt {
-
-Tilemap::Tilemap(std::string const& path)
+namespace tilemap {
+TileLayer::TileLayer(std::string const& path, std::string const& layerName)
 {
     m_position = jt::Vector2 { 0.0f, 0.0f };
     m_screenSizeHint = jt::Vector2 { 0.0f, 0.0f };
@@ -39,11 +39,9 @@ Tilemap::Tilemap(std::string const& path)
             }
         }
     }
-
-    parseObjects();
-    parseTiles();
 }
-void Tilemap::parseTiles()
+/*
+void TileLayer::parseTiles()
 {
     for (auto& layer : m_map->getLayers()) {
         // skip all non-tile layers
@@ -105,7 +103,7 @@ void Tilemap::parseTiles()
     }
 }
 
-void Tilemap::parseObjects()
+void TileLayer::parseObjects()
 {
     for (auto& layer : m_map->getLayers()) {
         const std::string currentGroupName = layer.getName();
@@ -115,9 +113,9 @@ void Tilemap::parseObjects()
             m_objectGroups[currentGroupName].push_back(infoRect);
         }
     }
-}
+}*/
 
-void Tilemap::doDraw(std::shared_ptr<jt::renderTarget> const sptr) const
+void TileLayer::doDraw(std::shared_ptr<jt::renderTarget> const sptr) const
 {
     if (!sptr) {
         return;
@@ -138,7 +136,7 @@ void Tilemap::doDraw(std::shared_ptr<jt::renderTarget> const sptr) const
     }
 }
 
-void Tilemap::drawSingleTileLayer(
+void TileLayer::drawSingleTileLayer(
     std::shared_ptr<jt::renderTarget> const& rt, Vector2 const& posOffset, tson::Layer& layer) const
 {
     for (auto& [pos, tile] : layer.getTileObjects()) {
@@ -176,7 +174,7 @@ void Tilemap::drawSingleTileLayer(
     }
 }
 
-void Tilemap::checkIdBounds(tson::TileObject& tile) const
+void TileLayer::checkIdBounds(tson::TileObject& tile) const
 {
     auto const rawId = tile.getTile()->getId();
     if (rawId == 1 || rawId + 1 >= m_tileSprites.size()) {
@@ -185,53 +183,55 @@ void Tilemap::checkIdBounds(tson::TileObject& tile) const
     }
 }
 
-void Tilemap::doDrawFlash(std::shared_ptr<jt::renderTarget> const /*sptr*/) const { }
-void Tilemap::doDrawShadow(std::shared_ptr<jt::renderTarget> const /*sptr*/) const { }
+void TileLayer::doDrawFlash(std::shared_ptr<jt::renderTarget> const /*sptr*/) const { }
+void TileLayer::doDrawShadow(std::shared_ptr<jt::renderTarget> const /*sptr*/) const { }
 
-void Tilemap::doUpdate(float /*elapsed*/) { }
+void TileLayer::doUpdate(float /*elapsed*/) { }
 
-void Tilemap::setColor(jt::Color const& col)
+void TileLayer::setColor(jt::Color const& col)
 {
     for (auto& ts : m_tileSprites) {
         ts.setColor(col);
     }
     m_color = col;
 }
-jt::Color Tilemap::getColor() const { return m_color; }
+jt::Color TileLayer::getColor() const { return m_color; }
 
-void Tilemap::setPosition(jt::Vector2 const& pos) { m_position = pos; }
-jt::Vector2 Tilemap::getPosition() const { return m_position; }
+void TileLayer::setPosition(jt::Vector2 const& pos) { m_position = pos; }
+jt::Vector2 TileLayer::getPosition() const { return m_position; }
 
-jt::Rect Tilemap::getGlobalBounds() const { return jt::Rect {}; }
-jt::Rect Tilemap::getLocalBounds() const { return jt::Rect {}; }
+jt::Rect TileLayer::getGlobalBounds() const { return jt::Rect {}; }
+jt::Rect TileLayer::getLocalBounds() const { return jt::Rect {}; }
 
-void Tilemap::setFlashColor(jt::Color const& col) { m_flashColor = col; }
-jt::Color Tilemap::getFlashColor() const { return m_flashColor; }
+void TileLayer::setFlashColor(jt::Color const& col) { m_flashColor = col; }
+jt::Color TileLayer::getFlashColor() const { return m_flashColor; }
 
-void Tilemap::setScale(jt::Vector2 const& scale) { m_scale = scale; }
-jt::Vector2 Tilemap::getScale() const { return m_scale; }
+void TileLayer::setScale(jt::Vector2 const& scale) { m_scale = scale; }
+jt::Vector2 TileLayer::getScale() const { return m_scale; }
 
-void Tilemap::setOrigin(jt::Vector2 const& origin) { m_origin = origin; }
-jt::Vector2 Tilemap::getOrigin() const { return m_origin; }
+void TileLayer::setOrigin(jt::Vector2 const& origin) { m_origin = origin; }
+jt::Vector2 TileLayer::getOrigin() const { return m_origin; }
 
-void Tilemap::doRotate(float /*rot*/) { }
+void TileLayer::doRotate(float /*rot*/) { }
 
-void Tilemap::setScreenSizeHint(jt::Vector2 const& hint) { m_screenSizeHint = hint; }
+void TileLayer::setScreenSizeHint(jt::Vector2 const& hint) { m_screenSizeHint = hint; }
 
-jt::Vector2u Tilemap::getMapSizeInTiles()
+jt::Vector2u TileLayer::getMapSizeInTiles()
 {
     return jt::Vector2u { static_cast<unsigned int>(m_map->getSize().x),
         static_cast<unsigned int>(m_map->getSize().y) };
 }
 
-std::shared_ptr<Tile> Tilemap::getTileAt(int x, int y) { return nullptr; }
-std::vector<std::shared_ptr<Tile>> Tilemap::getAllTiles()
-{
-    std::vector<std::shared_ptr<Tile>> tiles;
-    for (auto kvp : m_tiles) {
-        tiles.push_back(kvp.second);
-    }
-    return tiles;
-}
+// std::shared_ptr<Tile> TileLayer::getTileAt(int x, int y) { return nullptr; }
+//  std::vector<std::shared_ptr<Tile>> TileLayer::getAllTiles()
+//{
+//      std::vector<std::shared_ptr<Tile>> tiles;
+//      for (auto kvp : m_tiles) {
+//          tiles.push_back(kvp.second);
+//      }
+//      return tiles;
+//  }
+
+} // namespace tilemap
 
 } // namespace jt
