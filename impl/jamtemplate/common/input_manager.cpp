@@ -21,15 +21,15 @@ void InputManager::reset()
         m_keyboard->reset();
     }
 }
-void InputManager::update(const MousePosition& mp) {
-    if (m_mouse)
-    {
+void InputManager::update(MousePosition const& mp, float elapsed)
+{
+    if (m_mouse) {
         m_mouse->updateMousePosition(mp);
         m_mouse->updateButtons();
     }
-    if (m_keyboard)
-    {
+    if (m_keyboard) {
         m_keyboard->updateKeys();
+        m_keyboard->updateCommands(elapsed);
     }
 }
 

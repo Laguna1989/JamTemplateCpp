@@ -212,7 +212,7 @@ void Animation::doUpdate(float elapsed)
     for (auto& kvp : m_frames) {
         for (auto& spr : kvp.second) {
             spr->setPosition(m_position + getShakeOffset() + getOffset());
-            spr->update(elapsed);
+            spr->update(elapsed, 0);
             spr->setIgnoreCamMovement(DrawableImpl::getIgnoreCamMovement());
         }
     }

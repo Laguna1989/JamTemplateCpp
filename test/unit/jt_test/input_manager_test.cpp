@@ -42,9 +42,9 @@ TEST(InputManagerTest, UpdateWithMocks)
     auto mouse = std::make_shared<MockMouseInput>();
     jt::InputManager im { mouse, keyboard };
 
-    jt::MousePosition const mp{1.0f, 2.0f, 3.0f, 4.0f};
+    jt::MousePosition const mp { 1.0f, 2.0f, 3.0f, 4.0f };
     EXPECT_CALL(*keyboard, updateKeys());
     EXPECT_CALL(*mouse, updateMousePosition(::testing::_));
     EXPECT_CALL(*mouse, updateButtons());
-    im.update(mp);
+    im.update(mp, 0);
 }

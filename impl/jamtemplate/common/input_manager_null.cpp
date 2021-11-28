@@ -27,7 +27,7 @@ std::shared_ptr<KeyboardInputInterface> InputManagerNull::keyboard()
     return std::shared_ptr<KeyboardInputNull>();
 }
 
-void InputManagerNull::update(MousePosition const& /*mp*/) { }
+void InputManagerNull::update(MousePosition const&, float) { }
 void InputManagerNull::reset() { }
 
 } // namespace jt

@@ -61,7 +61,7 @@ private:
     virtual void doUpdate(float const elapsed)
     {
         for (auto& p : m_particles) {
-            p->update(elapsed);
+            p->update(elapsed, 0);
         }
     };
 

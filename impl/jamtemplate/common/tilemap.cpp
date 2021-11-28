@@ -102,7 +102,7 @@ void Tilemap::drawSingleTileLayer(
         this->m_tileSprites.at(id).setPosition(jt::Vector2 {
             pixelPosForTile.x() * this->m_scale.x(), pixelPosForTile.y() * this->m_scale.y() });
         this->m_tileSprites.at(id).setScale(this->m_scale);
-        this->m_tileSprites.at(id).update(0.0f);
+        this->m_tileSprites.at(id).update(0.0f, 0);
         this->m_tileSprites.at(id).draw(rt);
     }
 }

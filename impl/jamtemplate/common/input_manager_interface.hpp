@@ -111,7 +111,7 @@ public:
 
     /// Update the input
     /// \param mp the mouse buttons
-    virtual void update(MousePosition const& mp) = 0;
+    virtual void update(MousePosition const& mp, float elapsed) = 0;
 
     /// Reset the input
     virtual void reset() = 0;
