@@ -25,14 +25,14 @@ public:
 
     virtual void reset() override;
 
-    void setCommandJustPressed(
-        jt::KeyCode key, std::shared_ptr<jt::ControlCommandInterface> command) override;
-    void setCommandPressed(
-        jt::KeyCode key, std::shared_ptr<jt::ControlCommandInterface> command) override;
-    void setCommandReleased(
-        jt::KeyCode key, std::shared_ptr<jt::ControlCommandInterface> command) override;
-    void setCommandJustReleased(
-        jt::KeyCode key, std::shared_ptr<jt::ControlCommandInterface> command) override;
+    void setCommandJustPressed(std::vector<jt::KeyCode> key,
+        std::shared_ptr<jt::ControlCommandInterface> command) override;
+    void setCommandPressed(std::vector<jt::KeyCode> key,
+        std::shared_ptr<jt::ControlCommandInterface> command) override;
+    void setCommandReleased(std::vector<jt::KeyCode> key,
+        std::shared_ptr<jt::ControlCommandInterface> command) override;
+    void setCommandJustReleased(std::vector<jt::KeyCode> key,
+        std::shared_ptr<jt::ControlCommandInterface> command) override;
 
 private:
     KeyboardKeyCheckFunction m_checkFunc;

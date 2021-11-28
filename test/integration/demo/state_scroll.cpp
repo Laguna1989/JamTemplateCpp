@@ -41,19 +41,19 @@ void StateScroll::doInternalCreate()
     m_line->setPosition(jt::Vector2 { 20, 200 });
 
     float const scrollSpeed = 50.0f;
-    getGame()->input()->keyboard()->setCommandPressed(jt::KeyCode::W,
+    getGame()->input()->keyboard()->setCommandPressed({ jt::KeyCode::W, jt::KeyCode::Up },
         std::make_shared<ControlCommandMoveCam>(
             jt::Vector2 { 0.0f, -scrollSpeed }, getGame()->getCamera()));
 
-    getGame()->input()->keyboard()->setCommandPressed(jt::KeyCode::A,
+    getGame()->input()->keyboard()->setCommandPressed({ jt::KeyCode::A },
         std::make_shared<ControlCommandMoveCam>(
             jt::Vector2 { -scrollSpeed, 0.0f }, getGame()->getCamera()));
 
-    getGame()->input()->keyboard()->setCommandPressed(jt::KeyCode::S,
+    getGame()->input()->keyboard()->setCommandPressed({ jt::KeyCode::S },
         std::make_shared<ControlCommandMoveCam>(
             jt::Vector2 { 0.0f, scrollSpeed }, getGame()->getCamera()));
 
-    getGame()->input()->keyboard()->setCommandPressed(jt::KeyCode::D,
+    getGame()->input()->keyboard()->setCommandPressed({ jt::KeyCode::D },
         std::make_shared<ControlCommandMoveCam>(
             jt::Vector2 { scrollSpeed, 0.0f }, getGame()->getCamera()));
 }

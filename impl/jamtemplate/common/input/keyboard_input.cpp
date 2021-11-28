@@ -48,25 +48,33 @@ void KeyboardInput::reset()
 }
 
 void KeyboardInput::setCommandPressed(
-    jt::KeyCode key, std::shared_ptr<jt::ControlCommandInterface> command)
+    std::vector<jt::KeyCode> keys, std::shared_ptr<jt::ControlCommandInterface> command)
 {
-    m_commandsPressed[key] = command;
+    for (auto const key : keys) {
+        m_commandsPressed[key] = command;
+    }
 }
 void KeyboardInput::setCommandReleased(
-    jt::KeyCode key, std::shared_ptr<jt::ControlCommandInterface> command)
+    std::vector<jt::KeyCode> keys, std::shared_ptr<jt::ControlCommandInterface> command)
 {
-    m_commandsReleased[key] = command;
+    for (auto const key : keys) {
+        m_commandsReleased[key] = command;
+    }
 }
 
 void KeyboardInput::setCommandJustPressed(
-    jt::KeyCode key, std::shared_ptr<jt::ControlCommandInterface> command)
+    std::vector<jt::KeyCode> keys, std::shared_ptr<jt::ControlCommandInterface> command)
 {
-    m_commandsJustPressed[key] = command;
+    for (auto const key : keys) {
+        m_commandsJustPressed[key] = command;
+    }
 }
 void KeyboardInput::setCommandJustReleased(
-    jt::KeyCode key, std::shared_ptr<jt::ControlCommandInterface> command)
+    std::vector<jt::KeyCode> keys, std::shared_ptr<jt::ControlCommandInterface> command)
 {
-    m_commandsJustReleased[key] = command;
+    for (auto const key : keys) {
+        m_commandsJustReleased[key] = command;
+    }
 }
 
 void KeyboardInput::updateCommands(float elapsed)

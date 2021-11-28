@@ -6,6 +6,7 @@ class ControlCommandInterface {
 public:
     virtual ~ControlCommandInterface() = default;
     virtual void execute(float elapsed) = 0;
+    virtual void reset() = 0;
 };
 
 } // namespace jt
