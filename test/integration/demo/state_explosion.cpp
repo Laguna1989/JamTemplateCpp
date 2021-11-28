@@ -1,6 +1,6 @@
 ﻿#include "state_explosion.hpp"
 #include "game_interface.hpp"
-#include "input_manager.hpp"
+#include "input/input_manager.hpp"
 #include "object.hpp"
 #include "random.hpp"
 #include "state_select.hpp"

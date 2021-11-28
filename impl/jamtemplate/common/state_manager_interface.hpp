@@ -25,7 +25,7 @@ public:
     /// Check for pending Game State Switch
     /// \param gameInstance instance of the game
     /// \return true if switch was performed, false otherwise
-    virtual bool checkForGameStateSwitch(std::weak_ptr<GameInterface> gameInstance) = 0;
+    virtual bool checkAndPerformSwitchState(std::weak_ptr<GameInterface> gameInstance) = 0;
 };
 
 } // namespace jt

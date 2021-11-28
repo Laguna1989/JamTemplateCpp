@@ -2,7 +2,7 @@
 #include "box2d_world_impl.hpp"
 #include "conversions.hpp"
 #include "game_interface.hpp"
-#include "input_manager.hpp"
+#include "input/input_manager.hpp"
 #include "lerp.hpp"
 #include "movement_object.hpp"
 #include "random.hpp"

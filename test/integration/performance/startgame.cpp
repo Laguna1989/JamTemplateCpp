@@ -33,7 +33,7 @@ static void BM_StartGame(benchmark::State& state)
         auto game = std::make_shared<jt::Game>(window, std::make_shared<jt::InputManagerNull>(),
             std::make_shared<jt::MusicPlayerNull>(), std::make_shared<jt::Camera>(1.0f),
             stateManager);
-        stateManager->checkForGameStateSwitch(game);
+        stateManager->checkAndPerformSwitchState(game);
         game->update(0.02f);
         game->draw();
     }

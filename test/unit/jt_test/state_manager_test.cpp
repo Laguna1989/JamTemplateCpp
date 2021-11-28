@@ -25,7 +25,7 @@ TEST(StateManagerTest, CurrentStateCorrectAfterCheckForGameStateSwitch)
     jt::StateManager stateManager { initialState };
 
     auto game = std::make_shared<MockGame>();
-    stateManager.checkForGameStateSwitch(game);
+    stateManager.checkAndPerformSwitchState(game);
 
     ASSERT_EQ(initialState, stateManager.getCurrentState());
 }
@@ -36,7 +36,7 @@ TEST(StateManagerTest, NextStateCorrectAfterCheckForGameStateSwitch)
     jt::StateManager stateManager { initialState };
 
     auto game = std::make_shared<MockGame>();
-    stateManager.checkForGameStateSwitch(game);
+    stateManager.checkAndPerformSwitchState(game);
 
     ASSERT_EQ(nullptr, stateManager.getNextState());
 }
@@ -47,7 +47,7 @@ TEST(StateManagerTest, CheckForGameStateSwitchReturnsTrue)
     jt::StateManager stateManager { initialState };
 
     auto game = std::make_shared<MockGame>();
-    ASSERT_TRUE(stateManager.checkForGameStateSwitch(game));
+    ASSERT_TRUE(stateManager.checkAndPerformSwitchState(game));
 }
 
 TEST(StateManagerTest, CheckForGameStateSwitchReturnsFalseWhenCalledASecondTime)
@@ -56,8 +56,8 @@ TEST(StateManagerTest, CheckForGameStateSwitchReturnsFalseWhenCalledASecondTime)
     jt::StateManager stateManager { initialState };
 
     auto game = std::make_shared<MockGame>();
-    stateManager.checkForGameStateSwitch(game);
-    ASSERT_FALSE(stateManager.checkForGameStateSwitch(game));
+    stateManager.checkAndPerformSwitchState(game);
+    ASSERT_FALSE(stateManager.checkAndPerformSwitchState(game));
 }
 
 TEST(StateManagerTest, SwitchToNullptrStateThrows)

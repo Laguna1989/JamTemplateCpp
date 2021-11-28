@@ -17,7 +17,7 @@ public:
 
     void switchState(std::shared_ptr<GameState> newState) override;
 
-    bool checkForGameStateSwitch(std::weak_ptr<GameInterface> gameInstance) override;
+    bool checkAndPerformSwitchState(std::weak_ptr<GameInterface> gameInstance) override;
 
 private:
     std::shared_ptr<GameState> m_state { nullptr };

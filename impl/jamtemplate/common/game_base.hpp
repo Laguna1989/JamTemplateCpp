@@ -34,6 +34,8 @@ public:
 
     std::shared_ptr<jt::renderTarget> getRenderTarget() const override;
 
+    void reset() override;
+
 protected:
     std::shared_ptr<jt::RenderWindowInterface> m_renderWindow { nullptr };
 
@@ -54,9 +56,6 @@ protected:
     // overwritten functions from GameObject
     virtual void doUpdate(float const elapsed) override = 0;
     virtual void doDraw() const override = 0;
-
-private:
-    void reset();
 };
 
 } // namespace jt

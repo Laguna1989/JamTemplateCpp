@@ -1,7 +1,7 @@
 ﻿#include "state_swarmobjects.hpp"
 #include "drawable_helpers.hpp"
 #include "game_interface.hpp"
-#include "input_manager.hpp"
+#include "input/input_manager.hpp"
 #include "math_helper.hpp"
 #include "state_select.hpp"
 #include "timer.hpp"

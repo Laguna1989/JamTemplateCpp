@@ -1,6 +1,6 @@
 ﻿#include "state_tileson.hpp"
 #include "game_interface.hpp"
-#include "input_manager.hpp"
+#include "input/input_manager.hpp"
 #include "sound.hpp"
 #include "state_select.hpp"
 #include "tilemap.hpp"
