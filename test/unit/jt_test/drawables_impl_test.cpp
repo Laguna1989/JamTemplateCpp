@@ -48,7 +48,7 @@ std::shared_ptr<jt::DrawableInterface> createBar()
 
 std::shared_ptr<jt::DrawableInterface> createTileMap()
 {
-    auto t = std::make_shared<jt::TileLayer>("assets/tileson_test.json");
+    auto t = std::make_shared<jt::tilemap::TileLayer>("assets/tileson_test.json");
     t->setScreenSizeHint(jt::Vector2 { 400.0f, 300.0f });
     return t;
 }
