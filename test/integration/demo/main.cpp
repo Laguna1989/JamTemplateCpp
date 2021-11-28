@@ -1,6 +1,6 @@
 ﻿#include "camera.hpp"
-#include "input/control_command_interface.hpp"
 #include "game.hpp"
+#include "input/control_command_interface.hpp"
 #include "input/input_manager.hpp"
 #include "input/keyboard_input.hpp"
 #include "input/mouse_input.hpp"
@@ -9,7 +9,6 @@
 #include "render_window.hpp"
 #include "state_manager.hpp"
 #include "state_select.hpp"
-#include <iostream>
 #include <memory>
 
 std::shared_ptr<jt::GameInterface> game;
