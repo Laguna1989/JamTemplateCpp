@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1638162561556,
+  "lastUpdate": 1638215270883,
   "repoUrl": "https://github.com/Laguna1989/JamTemplateCpp",
   "entries": {
     "Benchmark": [
@@ -1440,6 +1440,42 @@ window.BENCHMARK_DATA = {
             "value": 2.836857004048598,
             "unit": "ms/iter",
             "extra": "iterations: 247\ncpu: 2.8364459230769237 ms\nthreads: 1"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "laguna_1989@gmx.net",
+            "name": "Laguna1989",
+            "username": "Laguna1989"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "fa07f7ce75dac538c8e80fa448c4222bdc6a2e7c",
+          "message": "Merge pull request #97 from Laguna1989/FEATURE_IncludeGuardRename\n\nCorrect include guard names",
+          "timestamp": "2021-11-29T20:45:50+01:00",
+          "tree_id": "75994a48d7fe81653f0a108502f7d816151afa46",
+          "url": "https://github.com/Laguna1989/JamTemplateCpp/commit/fa07f7ce75dac538c8e80fa448c4222bdc6a2e7c"
+        },
+        "date": 1638215269622,
+        "tool": "googlecpp",
+        "benches": [
+          {
+            "name": "BM_StartGame",
+            "value": 0.0012678939186803345,
+            "unit": "ms/iter",
+            "extra": "iterations: 552265\ncpu: 0.001267568069676695 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GamestateWithTweeningShapes",
+            "value": 2.838559178861826,
+            "unit": "ms/iter",
+            "extra": "iterations: 246\ncpu: 2.838278471544716 ms\nthreads: 1"
           }
         ]
       }
