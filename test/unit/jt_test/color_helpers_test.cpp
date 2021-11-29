@@ -25,6 +25,7 @@ TEST_P(ColorHelpersHsv2RgbTestFixture, hsv2rgb)
 INSTANTIATE_TEST_SUITE_P(ColorHelpersHsv2RgbTestNoSaturationNoValue, ColorHelpersHsv2RgbTestFixture,
     ::testing::Values(std::make_tuple(0.0f, 0.0f, 0.0f, 0, 0, 0),
         std::make_tuple(120.0f, 0.0f, 0.0f, 0, 0, 0),
+        std::make_tuple(120.0f + 360.0f, 0.0f, 0.0f, 0, 0, 0),
         std::make_tuple(240.0f, 0.0f, 0.0f, 0, 0, 0)));
 
 INSTANTIATE_TEST_SUITE_P(ColorHelpersHsv2RgbTestBasicColors, ColorHelpersHsv2RgbTestFixture,

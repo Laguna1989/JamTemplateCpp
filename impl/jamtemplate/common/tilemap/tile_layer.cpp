@@ -39,10 +39,6 @@ TileLayer::TileLayer(std::string const& path, std::string const& layerName)
         }
     }
 }
-/*
-
-
-*/
 
 void TileLayer::doDraw(std::shared_ptr<jt::renderTarget> const sptr) const
 {

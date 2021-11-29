@@ -22,13 +22,6 @@ public:
     /// \param v
     Color(sf::Color const& v);
 
-    /// Create color from RGB
-    /// \param r red value [0-255]
-    /// \param g green value [0-255]
-    /// \param b blue value [0-255]
-    /// \return a Color with the respective r,g,b values. Alpha will be 255.
-    static Color FromRGB(std::uint8_t r, std::uint8_t g, std::uint8_t b);
-
     /// Destructor
     ~Color() = default;
 

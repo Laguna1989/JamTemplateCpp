@@ -59,3 +59,65 @@ TEST(KeyboardInput, AllButtonsJustReleased)
         EXPECT_TRUE(keyboardInput.justReleased(k));
     }
 }
+
+class CommandRecorder : public ::jt::ControlCommandInterface {
+public:
+    bool m_executed { false };
+    void execute(float elapsed) override { m_executed = true; }
+    void reset() override { }
+};
+
+TEST(KeyboardInput, CommandExecutedForPressed)
+{
+    jt::KeyboardInput keyboardInput { [](auto /*b*/) { return true; } };
+    std::shared_ptr<CommandRecorder> command = std::make_shared<CommandRecorder>();
+    keyboardInput.setCommandPressed({ jt::KeyCode::Space }, command);
+    keyboardInput.updateKeys();
+    keyboardInput.updateCommands(1.0f);
+
+    ASSERT_TRUE(command->m_executed);
+}
+
+TEST(KeyboardInput, CommandExecutedForReleased)
+{
+    jt::KeyboardInput keyboardInput { [](auto /*b*/) { return false; } };
+    std::shared_ptr<CommandRecorder> command = std::make_shared<CommandRecorder>();
+    keyboardInput.setCommandReleased({ jt::KeyCode::Space }, command);
+    keyboardInput.updateKeys();
+    keyboardInput.updateCommands(1.0f);
+
+    ASSERT_TRUE(command->m_executed);
+}
+
+TEST(KeyboardInput, CommandExecutedForJustPressed)
+{
+    jt::KeyboardInput keyboardInput { [](auto /*b*/) { return true; } };
+    std::shared_ptr<CommandRecorder> command = std::make_shared<CommandRecorder>();
+    keyboardInput.reset();
+    keyboardInput.setCommandJustPressed({ jt::KeyCode::Space }, command);
+    keyboardInput.updateKeys();
+    keyboardInput.updateCommands(1.0f);
+    ASSERT_TRUE(command->m_executed);
+}
+
+TEST(KeyboardInput, CommandExecutedForJustReleased)
+{
+    int call_count { 0 };
+    // return true on first call, false otherwise
+    jt::KeyboardInput keyboardInput { [&call_count](auto /*b*/) {
+        auto v = (call_count == 0);
+        return v;
+    } };
+
+    keyboardInput.reset();
+
+    std::shared_ptr<CommandRecorder> command = std::make_shared<CommandRecorder>();
+    keyboardInput.setCommandJustReleased({ jt::KeyCode::Space }, command);
+
+    keyboardInput.updateKeys();
+    keyboardInput.updateCommands(1.0f);
+    call_count++;
+    keyboardInput.updateKeys();
+    keyboardInput.updateCommands(1.0f);
+    ASSERT_TRUE(command->m_executed);
+}

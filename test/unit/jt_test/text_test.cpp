@@ -183,6 +183,7 @@ TEST(TextTest, TextAlignAfterSetRight)
 {
     jt::Text t = getText();
     t.setTextAlign(jt::Text::TextAlign::RIGHT);
+    t.update(0.1f);
     ASSERT_EQ(t.getTextAlign(), jt::Text::TextAlign::RIGHT);
 }
 
@@ -190,5 +191,6 @@ TEST(TextTest, TextAlignAfterSetLeft)
 {
     jt::Text t = getText();
     t.setTextAlign(jt::Text::TextAlign::LEFT);
+    t.update(0.1f);
     ASSERT_EQ(t.getTextAlign(), jt::Text::TextAlign::LEFT);
 }

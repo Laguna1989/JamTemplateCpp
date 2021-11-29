@@ -74,3 +74,8 @@ TEST(ColorTest, FromHexStringCapsAndHash)
     ASSERT_EQ(c.b(), 255);
     ASSERT_EQ(c.a(), 255);
 }
+
+TEST(ColorTest, FromHexStringInvalid)
+{
+    ASSERT_THROW(jt::MakeColor::FromHexString("#FF00FF1234XXXs"), std::invalid_argument);
+}

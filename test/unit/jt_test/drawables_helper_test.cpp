@@ -26,6 +26,12 @@ TEST(CreateRectShapeTest, Color)
     ASSERT_EQ(shape->getColor(), col);
 }
 
+TEST(CreateCircleShapeTest, NoNullptr)
+{
+    auto const shape = jt::dh::createShapeCircle(1.0f, jt::colors::Green);
+    ASSERT_NE(shape, nullptr);
+}
+
 TEST(CreateVignetteTest, NoNullptr)
 {
     float const x = 150.0f;

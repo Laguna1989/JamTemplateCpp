@@ -179,6 +179,21 @@ TEST(NodeTest, InitialNoNeighbours)
     ASSERT_TRUE(n.getNeighbours().empty());
 }
 
+TEST(NodeTest, VisitSetsVisit)
+{
+    Node n;
+    n.visit();
+    ASSERT_TRUE(n.wasVisited());
+}
+
+TEST(NodeTest, UnvisitSetsVisit)
+{
+    Node n;
+    n.visit();
+    n.unvisit();
+    ASSERT_FALSE(n.wasVisited());
+}
+
 TEST(NodeTest, HasCorrectNeighbours)
 {
     Node n;
@@ -188,4 +203,17 @@ TEST(NodeTest, HasCorrectNeighbours)
     n.addNeighbour(n2);
     ASSERT_EQ(n.getNeighbours().size(), 1);
     ASSERT_EQ(n.getNeighbours().at(0).lock(), n2);
+}
+
+TEST(NodeTest, AddExpiredWeakPointerRaisesException)
+{
+    Node n;
+    std::shared_ptr<Node> n2 { nullptr };
+    ASSERT_THROW(n.addNeighbour(n2), std::invalid_argument);
+}
+
+TEST(NodeTest, AddSelfasNeighbourRaisesException)
+{
+    auto n = std::make_shared<Node>();
+    ASSERT_THROW(n->addNeighbour(n), std::invalid_argument);
 }
