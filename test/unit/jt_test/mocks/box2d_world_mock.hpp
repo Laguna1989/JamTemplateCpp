@@ -1,5 +1,5 @@
-#ifndef MYAWESOMEGAME_BOX2D_WORLD_MOCK_HPP
-#define MYAWESOMEGAME_BOX2D_WORLD_MOCK_HPP
+#ifndef GUARD_JAMTEMAPLTE_BOX2D_WORLD_MOCK_HPP
+#define GUARD_JAMTEMAPLTE_BOX2D_WORLD_MOCK_HPP
 
 #include "Box2D/Box2D.h"
 #include "box2d_world_interface.hpp"
@@ -15,4 +15,4 @@ public:
     MOCK_METHOD(void, setContactListener, (std::shared_ptr<b2ContactListener>), (override));
 };
 
-#endif // MYAWESOMEGAME_BOX2D_WORLD_MOCK_HPP
+#endif // GUARD_JAMTEMAPLTE_BOX2D_WORLD_MOCK_HPP

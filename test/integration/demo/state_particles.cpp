@@ -1,4 +1,4 @@
-#include "state_particles.h"
+#include "state_particles.hpp"
 #include "lerp.hpp"
 #include "random.hpp"
 #include "state_select.hpp"

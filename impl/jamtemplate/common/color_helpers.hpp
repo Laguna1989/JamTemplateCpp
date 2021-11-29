@@ -1,5 +1,5 @@
-#ifndef MYAWESOMEGAME_COLOR_HELPERS_HPP
-#define MYAWESOMEGAME_COLOR_HELPERS_HPP
+#ifndef GUARD_JAMTEMAPLTE_COLOR_HELPERS_HPP
+#define GUARD_JAMTEMAPLTE_COLOR_HELPERS_HPP
 
 #include <cstdint>
 #include <string>
@@ -18,4 +18,4 @@ std::tuple<std::uint8_t, std::uint8_t, std::uint8_t> hex2rgb(std::string const& 
 
 } // namespace ColorHelpers
 } // namespace jt
-#endif // MYAWESOMEGAME_COLOR_HELPERS_HPP
+#endif // GUARD_JAMTEMAPLTE_COLOR_HELPERS_HPP

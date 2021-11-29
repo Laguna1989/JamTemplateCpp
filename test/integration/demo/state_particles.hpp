@@ -1,6 +1,6 @@
 
-#ifndef MYAWESOMEGAME_STATE_PARTICLES_H
-#define MYAWESOMEGAME_STATE_PARTICLES_H
+#ifndef GUARD_JAMTEMAPLTE_STATE_PARTICLES_H
+#define GUARD_JAMTEMAPLTE_STATE_PARTICLES_H
 
 #include "circular_buffer.hpp"
 #include "game_state.hpp"
@@ -23,4 +23,4 @@ private:
     void createParticlesFire();
 };
 
-#endif // MYAWESOMEGAME_STATE_PARTICLES_H
+#endif // GUARD_JAMTEMAPLTE_STATE_PARTICLES_H

@@ -32,6 +32,7 @@ private:
     std::shared_ptr<jt::pathfinder::NodeInterface> m_node;
     bool m_blocked { false };
 };
+
 } // namespace tilemap
 } // namespace jt
 

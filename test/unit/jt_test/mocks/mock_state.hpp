@@ -1,5 +1,5 @@
-#ifndef MYAWESOMEGAME_MOCK_STATE_HPP
-#define MYAWESOMEGAME_MOCK_STATE_HPP
+#ifndef GUARD_JAMTEMAPLTE_MOCK_STATE_HPP
+#define GUARD_JAMTEMAPLTE_MOCK_STATE_HPP
 
 #include "game_state.hpp"
 #include <gmock/gmock.h>
@@ -11,4 +11,4 @@ public:
     MOCK_METHOD(void, doInternalCreate, ());
 };
 
-#endif // MYAWESOMEGAME_MOCK_STATE_HPP
+#endif // GUARD_JAMTEMAPLTE_MOCK_STATE_HPP

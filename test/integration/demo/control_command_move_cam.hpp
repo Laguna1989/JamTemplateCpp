@@ -17,4 +17,4 @@ private:
     std::weak_ptr<jt::CamInterface> m_camera;
 };
 
-#endif // MYAWESOMEGAME_CONTROL_COMMAND_MOVECAM_HPP
+#endif // GUARD_JAMTEMAPLTE_CONTROL_COMMAND_MOVECAM_HPP
