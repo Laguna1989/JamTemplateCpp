@@ -27,10 +27,11 @@ void StateTileson::doInternalCreate()
         add(t);
     }
 
-    setAutoDraw(false);
+    m_actor = std::make_shared<Actor>();
 
-    calculatePath(
-        m_nodeLayer->getTileAt(8, 2)->getNode(), m_nodeLayer->getTileAt(12, 6)->getNode());
+    add(m_actor);
+    m_actor->setPosition(jt::Vector2u { 5, 6 });
+    setAutoDraw(false);
 }
 
 void StateTileson::doInternalUpdate(float const elapsed)
@@ -43,6 +44,19 @@ void StateTileson::doInternalUpdate(float const elapsed)
     moveCamera(elapsed);
 
     toggleVisibility();
+
+    if (getGame()->input()->mouse()->justPressed(jt::MouseButtonCode::MBLeft)) {
+        auto const actorPos
+            = jt::Vector2u { static_cast<unsigned int>(m_actor->getPosition().x() / 32.0f),
+                  static_cast<unsigned int>(m_actor->getPosition().y() / 32.0f) };
+
+        auto const mpos = getGame()->input()->mouse()->getMousePositionWorld();
+        auto const tileEndPos = jt::Vector2u { static_cast<unsigned int>(mpos.x() / 32.0f),
+            static_cast<unsigned int>(mpos.y() / 32.0f) };
+
+        calculatePath(m_nodeLayer->getTileAt(actorPos.x(), actorPos.y())->getNode(),
+            m_nodeLayer->getTileAt(tileEndPos.x(), tileEndPos.y())->getNode());
+    }
 
     if (getGame()->input()->keyboard()->justPressed(jt::KeyCode::F1)
         || getGame()->input()->keyboard()->justPressed(jt::KeyCode::Escape)) {
@@ -85,6 +99,8 @@ void StateTileson::doInternalDraw() const
     drawTileLayers();
 
     drawObjectLayer();
+
+    m_actor->draw();
     drawNodeLayer();
 }
 void StateTileson::drawNodeLayer() const
@@ -120,6 +136,7 @@ void StateTileson::drawObjectLayer() const
 
 void StateTileson::calculatePath(jt::pathfinder::NodeT start, jt::pathfinder::NodeT end)
 {
+    m_nodeLayer->reset();
     auto path = jt::pathfinder::calculatePath(start, end);
     for (auto const& n : path) {
         auto const pos = n->getTilePosition();
@@ -128,4 +145,5 @@ void StateTileson::calculatePath(jt::pathfinder::NodeT start, jt::pathfinder::No
             t->setColor(jt::colors::Cyan);
         }
     }
+    m_actor->setPath(path);
 }

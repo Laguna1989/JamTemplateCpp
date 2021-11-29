@@ -111,6 +111,17 @@ std::vector<std::shared_ptr<TileNode>> NodeLayer::getAllTiles()
     //    return tiles;
     return m_tiles;
 }
+void NodeLayer::reset()
+{
+    for (auto& t : m_tiles) {
+        auto color = jt::MakeColor::FromRGBA(1, 1, 1, 100);
+        if (!t->getBlocked()) {
+            color = jt::MakeColor::FromRGBA(255, 255, 255, 100);
+        }
+        t->setColor(color);
+        t->reset();
+    }
+}
 
 } // namespace tilemap
 } // namespace jt

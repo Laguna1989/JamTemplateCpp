@@ -18,6 +18,8 @@ public:
     std::shared_ptr<TileNode> getTileAt(unsigned int x, unsigned int y);
     std::vector<std::shared_ptr<TileNode>> getAllTiles();
 
+    void reset();
+
 private:
     std::unique_ptr<tson::Map> m_map { nullptr };
     std::string m_layerName { "" };

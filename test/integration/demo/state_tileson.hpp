@@ -1,6 +1,7 @@
 ﻿#ifndef STRESSTEST_STATE_TILESOM_HPP_INCLUDEGUARD
 #define STRESSTEST_STATE_TILESOM_HPP_INCLUDEGUARD
 
+#include "actor.hpp"
 #include "game_state.hpp"
 #include <memory>
 #include <tilemap/node_layer.hpp>
@@ -29,6 +30,8 @@ private:
 
     std::shared_ptr<jt::tilemap::NodeLayer> m_nodeLayer;
     bool m_drawTileNodes { true };
+
+    std::shared_ptr<Actor> m_actor;
 
     void doInternalCreate() override;
     void doInternalUpdate(float const elapsed) override;
