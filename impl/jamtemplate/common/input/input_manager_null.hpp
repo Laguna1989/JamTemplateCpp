@@ -1,5 +1,5 @@
-#ifndef MYAWESOMEGAME_INPUT_MANAGER_NULL_HPP
-#define MYAWESOMEGAME_INPUT_MANAGER_NULL_HPP
+#ifndef GUARD_JAMTEMAPLTE_INPUT_MANAGER_NULL_HPP
+#define GUARD_JAMTEMAPLTE_INPUT_MANAGER_NULL_HPP
 
 #include "input_manager_interface.hpp"
 
@@ -36,4 +36,4 @@ public:
     void reset() override;
 };
 } // namespace jt
-#endif // MYAWESOMEGAME_INPUT_MANAGER_NULL_HPP
+#endif // GUARD_JAMTEMAPLTE_INPUT_MANAGER_NULL_HPP

@@ -1,5 +1,5 @@
-#ifndef MYAWESOMEGAME_RENDER_WINDOW_NULL_HPP
-#define MYAWESOMEGAME_RENDER_WINDOW_NULL_HPP
+#ifndef GUARD_JAMTEMAPLTE_RENDER_WINDOW_NULL_HPP
+#define GUARD_JAMTEMAPLTE_RENDER_WINDOW_NULL_HPP
 
 #include "render_window_interface.hpp"
 
@@ -26,4 +26,4 @@ private:
 } // namespace null_objects
 } // namespace jt
 
-#endif // MYAWESOMEGAME_RENDER_WINDOW_NULL_HPP
+#endif // GUARD_JAMTEMAPLTE_RENDER_WINDOW_NULL_HPP

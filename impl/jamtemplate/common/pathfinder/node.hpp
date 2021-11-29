@@ -1,5 +1,5 @@
-#ifndef MYAWESOMEGAME_NODE_HPP
-#define MYAWESOMEGAME_NODE_HPP
+#ifndef GUARD_JAMTEMAPLTE_NODE_HPP
+#define GUARD_JAMTEMAPLTE_NODE_HPP
 
 #include "node_interface.hpp"
 #include <memory>
@@ -32,4 +32,4 @@ private:
 };
 } // namespace pathfinder
 } // namespace jt
-#endif // MYAWESOMEGAME_NODE_HPP
+#endif // GUARD_JAMTEMAPLTE_NODE_HPP

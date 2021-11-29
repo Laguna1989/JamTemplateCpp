@@ -1,5 +1,5 @@
-#ifndef MYAWESOMEGAME_BOX2D_WORLD_IMPL_HPP
-#define MYAWESOMEGAME_BOX2D_WORLD_IMPL_HPP
+#ifndef GUARD_JAMTEMAPLTE_BOX2D_WORLD_IMPL_HPP
+#define GUARD_JAMTEMAPLTE_BOX2D_WORLD_IMPL_HPP
 
 #include "box2d_world_interface.hpp"
 #include "vector.hpp"
@@ -32,4 +32,4 @@ private:
 
 } // namespace jt
 // namespace jt
-#endif // MYAWESOMEGAME_BOX2D_WORLD_IMPL_HPP
+#endif // GUARD_JAMTEMAPLTE_BOX2D_WORLD_IMPL_HPP

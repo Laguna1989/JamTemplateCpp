@@ -1,6 +1,6 @@
 
-#ifndef MYAWESOMEGAME_MOCK_CAMERA_HPP
-#define MYAWESOMEGAME_MOCK_CAMERA_HPP
+#ifndef GUARD_JAMTEMAPLTE_MOCK_CAMERA_HPP
+#define GUARD_JAMTEMAPLTE_MOCK_CAMERA_HPP
 
 #include "cam_interface.hpp"
 #include <gmock/gmock.h>
@@ -18,4 +18,4 @@ public:
     MOCK_METHOD(void, reset, (), (override));
 };
 
-#endif // MYAWESOMEGAME_MOCK_CAMERA_HPP
+#endif // GUARD_JAMTEMAPLTE_MOCK_CAMERA_HPP
