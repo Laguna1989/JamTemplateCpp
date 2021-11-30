@@ -47,8 +47,8 @@ void StateTileson::doInternalUpdate(float const elapsed)
 
     if (getGame()->input()->mouse()->justPressed(jt::MouseButtonCode::MBLeft)) {
         auto const actorPos
-            = jt::Vector2u { static_cast<unsigned int>(m_actor->getPosition().x() / 32.0f),
-                  static_cast<unsigned int>(m_actor->getPosition().y() / 32.0f) };
+            = jt::Vector2u { static_cast<unsigned int>(m_actor->getFinalPosition().x() / 32.0f),
+                  static_cast<unsigned int>(m_actor->getFinalPosition().y() / 32.0f) };
 
         auto const mpos = getGame()->input()->mouse()->getMousePositionWorld();
         auto const tileEndPos = jt::Vector2u { static_cast<unsigned int>(mpos.x() / 32.0f),
@@ -145,5 +145,6 @@ void StateTileson::calculatePath(jt::pathfinder::NodeT start, jt::pathfinder::No
             t->setColor(jt::colors::Cyan);
         }
     }
+
     m_actor->setPath(path);
 }

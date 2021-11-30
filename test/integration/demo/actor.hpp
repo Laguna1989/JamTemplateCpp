@@ -12,6 +12,8 @@ public:
 
     void setPath(std::vector<std::shared_ptr<jt::pathfinder::NodeInterface>> const& path);
 
+    jt::Vector2 getFinalPosition();
+
 private:
     void doCreate() override;
     void doUpdate(float const /*elapsed*/) override;
