@@ -6,6 +6,7 @@ void Actor::doCreate()
 {
     m_sprite = std::make_shared<jt::Sprite>();
     m_sprite->loadSprite("assets/coin.png", jt::Recti { 0, 0, 16, 16 });
+    m_sprite->setOffset(jt::Vector2 { 8, 8 });
 }
 void Actor::doUpdate(float const elapsed)
 {
@@ -53,8 +54,16 @@ jt::Vector2 Actor::getPosition() const { return m_sprite->getPosition(); }
 
 void Actor::setPath(std::vector<std::shared_ptr<jt::pathfinder::NodeInterface>> const& path)
 {
-    m_path.clear();
     for (auto& t : path) {
         m_path.push_back(t);
+    }
+}
+jt::Vector2 Actor::getFinalPosition()
+{
+    if (m_path.empty()) {
+        return getPosition();
+    } else {
+        auto const tpos = m_path.back().lock()->getTilePosition();
+        return jt::Vector2 { tpos.x() * 32.0f, tpos.y() * 32.0f };
     }
 }
