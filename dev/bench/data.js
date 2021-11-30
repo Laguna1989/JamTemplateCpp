@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1638215270883,
+  "lastUpdate": 1638283696339,
   "repoUrl": "https://github.com/Laguna1989/JamTemplateCpp",
   "entries": {
     "Benchmark": [
@@ -1476,6 +1476,42 @@ window.BENCHMARK_DATA = {
             "value": 2.838559178861826,
             "unit": "ms/iter",
             "extra": "iterations: 246\ncpu: 2.838278471544716 ms\nthreads: 1"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "laguna_1989@gmx.net",
+            "name": "Laguna1989",
+            "username": "Laguna1989"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "a8e90d17d52b8003617d9d736108d7b6629f4963",
+          "message": "Merge pull request #98 from Laguna1989/FEATURE_ActorNoWeirdMovement\n\nRemove switching paths while moving",
+          "timestamp": "2021-11-30T15:46:37+01:00",
+          "tree_id": "658a59b11d6982b804fa50eaf1c93b5ee6048d83",
+          "url": "https://github.com/Laguna1989/JamTemplateCpp/commit/a8e90d17d52b8003617d9d736108d7b6629f4963"
+        },
+        "date": 1638283695863,
+        "tool": "googlecpp",
+        "benches": [
+          {
+            "name": "BM_StartGame",
+            "value": 0.001445605382086709,
+            "unit": "ms/iter",
+            "extra": "iterations: 477287\ncpu: 0.0014454575360317798 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GamestateWithTweeningShapes",
+            "value": 3.271669830188568,
+            "unit": "ms/iter",
+            "extra": "iterations: 212\ncpu: 3.2714620094339626 ms\nthreads: 1"
           }
         ]
       }
