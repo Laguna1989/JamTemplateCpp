@@ -26,6 +26,7 @@ private:
 
     float m_walkTimerCurrent { 0.0f };
     float m_walkTimerMax { 0.5f };
+    void removeDuplicatesFromPath();
 };
 
 #endif // GUARD_JAMTEMAPLTE_ACTOR_HPP

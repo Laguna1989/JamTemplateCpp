@@ -31,6 +31,12 @@ void Actor::walkAlongPath(float const elapsed)
     auto finalPos = oldPos;
     if (nextTileIt != m_path.end()) {
         auto const nextTilePos = nextTileIt->lock()->getTilePosition();
+
+        // TODO make this a separate function checking for adjacent duplicate entries in m_path
+        //        if (nextTilePos == oldTilePos) {
+        //            // do not wait on last positions when queuing
+        //            m_path.erase(m_path.begin());
+        //        }
         auto const newPos = jt::Vector2 { nextTilePos.x() * 32.0f, nextTilePos.y() * 32.0f };
         jt::Vector2 const diff = newPos - oldPos;
         finalPos += diff * factor;
@@ -57,7 +63,19 @@ void Actor::setPath(std::vector<std::shared_ptr<jt::pathfinder::NodeInterface>> 
     for (auto& t : path) {
         m_path.push_back(t);
     }
+
+    removeDuplicatesFromPath();
 }
+
+void Actor::removeDuplicatesFromPath()
+{
+    m_path.erase(std::unique(m_path.begin(), m_path.end(),
+                     [](auto t1, auto t2) {
+                         return t1.lock()->getTilePosition() == t2.lock()->getTilePosition();
+                     }),
+        m_path.end());
+}
+
 jt::Vector2 Actor::getFinalPosition()
 {
     if (m_path.empty()) {

@@ -9,6 +9,7 @@ web (webassembly) games. Internally it uses [SFML](https://www.sfml-dev.org/) an
 
 Some games created with this JamTemplate are
 
+* [Gemga](https://runvs.io/Games/gemga) (Web & Native, FrankenGameJam 2021)
 * [Quasar Rush](https://runvs.io/Games/quasarrush) (Native & Web, A Game By Its Cover 2021)
 * [Space Turtles](https://runvs.io/Games/spaceturtles) (Native, MultiplayerKajam 2021)
 * [Tricky Tractor](https://runvs.io/Games/trickytractor) (Native, FrankenGameJam 2020)
@@ -40,8 +41,8 @@ except:
 
 ### Web
 
-I run it with WSL, but every system capable of running [wegassembly](https://webassembly.org/)
-/ [emscripten](https://emscripten.org/) should work.
+I run it with [WSL2](https://docs.microsoft.com/de-de/windows/wsl/compare-versions), but every system capable of
+running [wegassembly](https://webassembly.org/) / [emscripten](https://emscripten.org/) should work.
 
 Preconditions:
 
@@ -62,8 +63,8 @@ For mac os you have to install cmake and sfml via homebrew: `brew install cmake 
 If you use another package manager or want to install the dependencies yourself, you have to modify the paths
 in `CMakeLists.txt`.
 
-However as MacOS seems to be pretty picky with installed libraries and packaging an executable is a pain, it is highly
-recommended to use the Web build to show your game to your Mac friends.
+However, as MacOS seems to be pretty picky with installed libraries and packaging an executable is a pain, it is highly
+recommended using the Web build to show your game to your Mac friends.
 
 ## Cmake options
 
@@ -72,10 +73,10 @@ All of those options can be set to ON or OFF via the cmake commandline
 * `ENABLE_UNITTESTS` - Enables gtest and the unit tests
 * `ENABLE_DEMOS` - Enables the demos (small example programs which showcase a specific theme)
 * `ENABLE_WEB` - Webbuild
-* `USE_SFML` - If `ON`, SFML will be used, if `OFF`, SDL will be used.
+* `USE_SFML` - If `ON`, SFML will be used, if `OFF`, SDL will be used (SDL works best on linux)
 * `ENABLE_COVERAGE` - Compile with the flags set for the coverage run
 * `ENABLE_AUDIO_TESTS` - Some of the tests rely on a working audio setup, which seemingly cannot be faked easily. This
-  switch disables those sepcific tests, in case no audio is available on the respective machine.
+  switch disables those specific tests, in case no audio is available on the respective machine.
 * `ENABLE_CLANG_TIDY` - Enable clang tidy checker
 
 e.g. calling `cmake ../ -DENABLE_UNITTESTS=ON -DENABLE_DEMOS=ON`
