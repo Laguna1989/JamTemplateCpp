@@ -100,3 +100,45 @@ std::tuple<std::uint8_t, std::uint8_t, std::uint8_t> jt::ColorHelpers::hex2rgb(
     return std::make_tuple(
         hexStringToUint8(rString), hexStringToUint8(gString), hexStringToUint8(bString));
 }
+std::tuple<float, float, float> jt::ColorHelpers::rgb2hsv(
+    std::uint8_t r, std::uint8_t g, std::uint8_t b)
+{
+    std::tuple<float, float, float> out;
+    float min, max, delta;
+
+    min = r < g ? r : g;
+    min = min < b ? min : b;
+
+    max = r > g ? r : g;
+    max = max > b ? max : b;
+
+    std::get<2>(out) = max * 100.0f / 255.0f; // v
+    delta = max - min;
+    if (delta < 0.00001f) {
+        std::get<1>(out) = 0.0f;
+        std::get<0>(out) = 0.0f; // undefined, maybe nan?
+        return out;
+    }
+    if (max > 0.0) { // NOTE: if Max is == 0, this divide would cause a crash
+        std::get<1>(out) = (delta / max) * 100.0f; // s
+    } else {
+        // if max is 0, then r = g = b = 0
+        // s = 0, h is undefined
+        std::get<1>(out) = 0.0;
+        std::get<0>(out) = 0.0f; // its now undefined
+        return out;
+    }
+    if (r >= max) // > is bogus, just keeps compilor happy
+        std::get<0>(out) = (g - b) / delta; // between yellow & magenta
+    else if (g >= max)
+        std::get<0>(out) = 2.0f + (b - r) / delta; // between cyan & yellow
+    else
+        std::get<0>(out) = 4.0f + (r - g) / delta; // between magenta & cyan
+
+    std::get<0>(out) *= 60.0f; // degrees
+
+    if (std::get<0>(out) < 0.0f)
+        std::get<0>(out) += 360.0f;
+
+    return out;
+}

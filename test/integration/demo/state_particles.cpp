@@ -1,6 +1,6 @@
 #include "state_particles.hpp"
 #include "lerp.hpp"
-#include "random.hpp"
+#include "random/random.hpp"
 #include "state_select.hpp"
 #include "tweens/tween_alpha.hpp"
 #include "tweens/tween_scale.hpp"

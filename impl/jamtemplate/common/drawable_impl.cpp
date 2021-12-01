@@ -1,6 +1,6 @@
 ﻿#include "drawable_impl.hpp"
 #include "linterp.hpp"
-#include "random.hpp"
+#include "random/random.hpp"
 #include <iostream>
 
 namespace jt {

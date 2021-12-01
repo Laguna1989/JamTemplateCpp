@@ -1,5 +1,5 @@
-﻿#include "random.hpp"
-#include "random_sample_and_hold.hpp"
+﻿#include "random/random.hpp"
+#include "random/random_sample_and_hold.hpp"
 #include "vector.hpp"
 #include "gtest/gtest.h"
 #include <utility>

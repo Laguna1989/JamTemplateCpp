@@ -2,7 +2,7 @@
 #include "drawable_impl.hpp"
 #include "game_state.hpp"
 #include "input/input_manager.hpp"
-#include "random.hpp"
+#include "random/random.hpp"
 #include "rect.hpp"
 #include "texture_manager.hpp"
 #include "vector.hpp"

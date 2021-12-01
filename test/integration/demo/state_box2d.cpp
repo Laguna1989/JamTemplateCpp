@@ -5,7 +5,7 @@
 #include "input/input_manager.hpp"
 #include "lerp.hpp"
 #include "movement_object.hpp"
-#include "random.hpp"
+#include "random/random.hpp"
 #include "state_select.hpp"
 #include "tweens/tween_rotation.hpp"
 #include "tweens/tween_scale.hpp"
