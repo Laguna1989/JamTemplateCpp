@@ -2,7 +2,7 @@
 #define GUARD_JAMTEMAPLTE_BOX2D_WORLD_MOCK_HPP
 
 #include "Box2D/Box2D.h"
-#include "box2d_world_interface.hpp"
+#include "box2dwrapper/box2d_world_interface.hpp"
 #include <gmock/gmock.h>
 
 class Box2DWorldMock : public jt::Box2DWorldInterface {

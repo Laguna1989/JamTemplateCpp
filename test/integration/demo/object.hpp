@@ -5,7 +5,7 @@
 #include "game_interface.hpp"
 #include "game_state.hpp"
 #include "math_helper.hpp"
-#include "random.hpp"
+#include "random/random.hpp"
 #include "shape.hpp"
 #include <memory>
 #include <random>

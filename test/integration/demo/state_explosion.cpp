@@ -2,7 +2,7 @@
 #include "game_interface.hpp"
 #include "input/input_manager.hpp"
 #include "object.hpp"
-#include "random.hpp"
+#include "random/random.hpp"
 #include "state_select.hpp"
 #include "timer.hpp"
 #include "tweens/tween_alpha.hpp"

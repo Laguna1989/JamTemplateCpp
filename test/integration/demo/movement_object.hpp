@@ -2,7 +2,7 @@
 #define STRESSTEST_MOVEMENTOBJECT_HPP_INCLUDEGUARD
 
 #include "animation.hpp"
-#include "box2d_object.hpp"
+#include "box2dwrapper/box2d_object.hpp"
 #include "conversions.hpp"
 #include "game_interface.hpp"
 #include "math_helper.hpp"

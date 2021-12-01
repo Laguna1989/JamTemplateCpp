@@ -1,6 +1,6 @@
 ﻿#include "sprite_functions.hpp"
 #include "math_helper.hpp"
-#include "random.hpp"
+#include "random/random.hpp"
 #include "sdl_helper.hpp"
 #include <cmath>
 

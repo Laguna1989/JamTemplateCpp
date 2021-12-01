@@ -1,5 +1,5 @@
 ﻿#include "sound_group.hpp"
-#include "random.hpp"
+#include "random/random.hpp"
 #include "sound.hpp"
 #include <algorithm>
 

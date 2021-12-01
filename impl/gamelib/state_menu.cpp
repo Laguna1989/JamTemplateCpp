@@ -35,7 +35,7 @@ void StateMenu::createVignette()
 
 void StateMenu::createShapes()
 {
-    m_background = jt::dh::createShapeRect(GP::GetScreenSize(), GP::PaletteColor1());
+    m_background = jt::dh::createShapeRect(GP::GetScreenSize(), GP::getPalette().getColor(0));
     m_overlay = jt::dh::createShapeRect(GP::GetScreenSize(), jt::colors::Black);
 }
 
@@ -52,7 +52,7 @@ void StateMenu::createTextCredits()
         "Created by " + GP::AuthorName() + " for " + GP::JamName() + "\n" + GP::JamDate()
             + "\n\nThis game uses OpenAl, licensed under LGPL v2.\nPlease see "
               "https://openal.org/",
-        10U, GP::PaletteColor5());
+        10U, GP::getPalette().getColor(4));
     m_text_Credits->setTextAlign(jt::Text::TextAlign::LEFT);
     m_text_Credits->setPosition({ 10, GP::GetScreenSize().y() - 70 });
     m_text_Credits->setShadow(GP::PaletteFontShadow(), jt::Vector2 { 1, 1 });
@@ -61,8 +61,8 @@ void StateMenu::createTextCredits()
 void StateMenu::createTextExplanation()
 {
     float half_width = GP::GetScreenSize().x() / 2;
-    m_text_Explanation = jt::dh::createText(
-        getGame()->getRenderTarget(), "Press Space to start the game", 16U, GP::PaletteColor8());
+    m_text_Explanation = jt::dh::createText(getGame()->getRenderTarget(),
+        "Press Space to start the game", 16U, GP::getPalette().getColor(7));
     m_text_Explanation->setPosition({ half_width, 150 });
     m_text_Explanation->setShadow(GP::PaletteFontShadow(), jt::Vector2 { 3, 3 });
 }

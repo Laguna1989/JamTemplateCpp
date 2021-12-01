@@ -46,4 +46,11 @@ jt::Vector2 Random::getRandomPointIn(jt::Rect rect)
 void Random::setSeed(unsigned int s) { m_engine.seed(s); }
 
 void Random::useTimeAsRandomSeed() { setSeed(static_cast<unsigned int>(time(nullptr))); }
+
+jt::Color Random::getRandomColorHSV(
+    float hmin, float hmax, float smin, float smax, float vmin, float vmax)
+{
+    return jt::MakeColor::FromHSV(jt::Random::getFloat(hmin, hmax),
+        jt::Random::getFloat(smin, smax), jt::Random::getFloat(vmin, vmax));
+}
 } // namespace jt

@@ -1,4 +1,5 @@
 #include "color_helpers.hpp"
+#include <cmath>
 #include <gtest/gtest.h>
 #include <tuple>
 
@@ -20,6 +21,27 @@ TEST_P(ColorHelpersHsv2RgbTestFixture, hsv2rgb)
     ASSERT_EQ(static_cast<int>(r), static_cast<int>(r_expected));
     ASSERT_EQ(static_cast<int>(g), static_cast<int>(g_expected));
     ASSERT_EQ(static_cast<int>(b), static_cast<int>(b_expected));
+}
+
+TEST_P(ColorHelpersHsv2RgbTestFixture, rgb2hsv)
+{
+    auto h_expected = std::get<0>(GetParam());
+    auto s_expected = std::get<1>(GetParam());
+    auto v_expected = std::get<2>(GetParam());
+    auto r = std::get<3>(GetParam());
+    auto g = std::get<4>(GetParam());
+    auto b = std::get<5>(GetParam());
+
+    if (r == 0 && g == 0 && b == 0) {
+        h_expected = 0.0f;
+        s_expected = 0.0f;
+        v_expected = 0.0f;
+    }
+
+    auto [h, s, v] = jt::ColorHelpers::rgb2hsv(r, g, b);
+    ASSERT_EQ(round(h), h_expected);
+    ASSERT_EQ(round(s), s_expected);
+    ASSERT_EQ(round(v), v_expected);
 }
 
 INSTANTIATE_TEST_SUITE_P(ColorHelpersHsv2RgbTestNoSaturationNoValue, ColorHelpersHsv2RgbTestFixture,

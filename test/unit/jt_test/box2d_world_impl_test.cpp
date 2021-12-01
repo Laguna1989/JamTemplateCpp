@@ -1,5 +1,5 @@
-﻿#include "box2d_world_impl.hpp"
-#include "box2d_world_interface.hpp"
+﻿#include "box2dwrapper/box2d_world_impl.hpp"
+#include "box2dwrapper/box2d_world_interface.hpp"
 #include "conversions.hpp"
 #include <gtest/gtest.h>
 

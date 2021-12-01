@@ -6,7 +6,7 @@
 #include "input/keyboard_input.hpp"
 #include "input/mouse_input.hpp"
 #include "music_player.hpp"
-#include "random.hpp"
+#include "random/random.hpp"
 #include "render_window.hpp"
 #include "state_manager.hpp"
 #include "state_menu.hpp"

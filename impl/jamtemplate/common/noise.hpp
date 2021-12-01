@@ -2,7 +2,7 @@
 #define GUARD_JAMTEMPLATE_NOISE_HPP_INCLUDEGUARD
 
 #include "lerp.hpp"
-#include "random.hpp"
+#include "random/random.hpp"
 #include <iostream>
 #include <vector>
 

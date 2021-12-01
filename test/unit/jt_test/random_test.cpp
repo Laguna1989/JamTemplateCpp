@@ -1,5 +1,6 @@
-﻿#include "random.hpp"
-#include "random_sample_and_hold.hpp"
+﻿#include "color_helpers.hpp"
+#include "random/random.hpp"
+#include "random/random_sample_and_hold.hpp"
 #include "vector.hpp"
 #include "gtest/gtest.h"
 #include <utility>
@@ -95,6 +96,14 @@ TEST(RandomColor, NotEqual)
     auto const c1 = Random::getRandomColor();
     auto const c2 = Random::getRandomColor();
     EXPECT_TRUE(c1 != c2);
+}
+
+TEST(RandomColor, HSV)
+{
+    auto col = Random::getRandomColorHSV(0.0f, 0.0f, 90.0f, 100.0f, 0.0f, 100.0f);
+
+    auto [h, s, v] = jt::ColorHelpers::rgb2hsv(col.r(), col.g(), col.b());
+    ASSERT_FLOAT_EQ(h, 0.0f);
 }
 
 TEST(RandomInRect, Valid)
