@@ -1,5 +1,5 @@
 ﻿#include "state_box2d.hpp"
-#include "box2d_world_impl.hpp"
+#include "box2dwrapper/box2d_world_impl.hpp"
 #include "conversions.hpp"
 #include "game_interface.hpp"
 #include "input/input_manager.hpp"

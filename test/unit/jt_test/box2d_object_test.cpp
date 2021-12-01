@@ -1,4 +1,4 @@
-﻿#include "box2d_object.hpp"
+﻿#include "box2dwrapper/box2d_object.hpp"
 #include "mocks/box2d_world_mock.hpp"
 #include "mocks/mock_game.hpp"
 #include <gmock/gmock.h>
