@@ -40,6 +40,9 @@ public:
     /// \return random color
     static jt::Color getRandomColor();
 
+    static jt::Color getRandomColorHSV(
+        float hmin, float hmax, float smin, float smax, float vmin, float vmax);
+
     /// Get Random point in rect
     /// \param rect the rect to contain the point
     /// \return random point in rect
