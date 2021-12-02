@@ -1,6 +1,7 @@
 ﻿#include "state_select.hpp"
 #include "state_box2d.hpp"
 #include "state_explosion.hpp"
+#include "state_gradient.hpp"
 #include "state_particles.hpp"
 #include "state_pathfinding.hpp"
 #include "state_rope.hpp"
@@ -20,6 +21,7 @@ void StateSelect::doInternalCreate()
     AddButton<StateRope>("Rope");
     AddButton<StateParticles>("Particles");
     AddButton<StatePathfinding>("Pathfinding");
+    AddButton<StateGradient>("Palettes");
 }
 
 void StateSelect::doInternalUpdate(float /*elapsed*/)

@@ -15,5 +15,36 @@ Palette Palette::addColor(jt::Color col) const
     newColors.push_back(col);
     return Palette { newColors };
 }
+Palette Palette::createGradientH(float hmin, float hmax, float s, float v, std::size_t steps)
+{
+    std::vector<jt::Color> colors;
+    float const delta = (hmax - hmin) / steps;
+    for (std::size_t step = 0U; step != steps; ++step) {
+        auto const h = hmin + step * delta;
+        colors.emplace_back(jt::MakeColor::FromHSV(h, s, v));
+    }
+    return Palette { colors };
+}
+
+Palette Palette::createGradientS(float h, float smin, float smax, float v, std::size_t steps)
+{
+    std::vector<jt::Color> colors;
+    float const delta = (smax - smin) / steps;
+    for (std::size_t step = 0U; step != steps; ++step) {
+        auto const s = smin + step * delta;
+        colors.emplace_back(jt::MakeColor::FromHSV(h, s, v));
+    }
+    return Palette { colors };
+}
+Palette Palette::createGradientV(float h, float s, float vmin, float vmax, std::size_t steps)
+{
+    std::vector<jt::Color> colors;
+    float const delta = (vmax - vmin) / steps;
+    for (std::size_t step = 0U; step != steps; ++step) {
+        auto const v = vmin + step * delta;
+        colors.emplace_back(jt::MakeColor::FromHSV(h, s, v));
+    }
+    return Palette { colors };
+}
 
 } // namespace jt
