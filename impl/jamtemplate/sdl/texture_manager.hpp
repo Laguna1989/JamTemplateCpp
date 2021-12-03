@@ -3,7 +3,6 @@
 
 #include "color.hpp"
 #include "render_target.hpp"
-#include "splitstring.hpp"
 #include <SDL2/SDL.h>
 #include <assert.h>
 #include <exception>

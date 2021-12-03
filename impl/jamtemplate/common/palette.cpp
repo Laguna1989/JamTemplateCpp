@@ -49,7 +49,7 @@ Palette Palette::createGradientV(float h, float s, float vmin, float vmax, std::
 }
 
 namespace {
-std::vector<jt::Color> parseGPL(std::string const& input)
+std::vector<jt::Color> parseGPLImpl(std::string const& input)
 {
     std::istringstream ss { input };
     std::string line;
@@ -64,9 +64,12 @@ std::vector<jt::Color> parseGPL(std::string const& input)
             continue;
         }
     }
+
+    return std::vector<jt::Color> {};
 }
+
 } // namespace
 
-Palette Palette::parseGPL(std::string const& input) { return Palette { parseGPL(input) }; }
+Palette Palette::parseGPL(std::string const& input) { return Palette { parseGPLImpl(input) }; }
 
 } // namespace jt

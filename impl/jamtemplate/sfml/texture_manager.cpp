@@ -1,6 +1,6 @@
 ﻿#include "texture_manager.hpp"
-#include "splitstring.hpp"
 #include "sprite_functions.hpp"
+#include "strutils.hpp"
 #include <map>
 #include <stdexcept>
 
@@ -127,8 +127,7 @@ sf::Texture& TextureManager::get(std::string const& str)
             m_textures[str] = loadTextureFromDisk(str);
         } else // special type of images
         {
-            SplitString ss { str };
-            auto ssv = ss.split('#');
+            auto ssv = strutil::split(str.substr(1), '#');
             if (ssv.at(0) == "b") {
                 m_textures[str].loadFromImage(createButtonImage(ssv));
             } else if (ssv.at(0) == "f") {
