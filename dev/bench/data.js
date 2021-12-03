@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1638390021641,
+  "lastUpdate": 1638566210773,
   "repoUrl": "https://github.com/Laguna1989/JamTemplateCpp",
   "entries": {
     "Benchmark": [
@@ -1584,6 +1584,42 @@ window.BENCHMARK_DATA = {
             "value": 2.800627468000016,
             "unit": "ms/iter",
             "extra": "iterations: 250\ncpu: 2.8005254640000006 ms\nthreads: 1"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "laguna_1989@gmx.net",
+            "name": "Laguna1989",
+            "username": "Laguna1989"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "72abfba0c9298f3facfc3c761adea48c6e310620",
+          "message": "Merge pull request #102 from Laguna1989/FEATURE_DemoForColors\n\nFeature demo for colors",
+          "timestamp": "2021-12-03T22:15:08+01:00",
+          "tree_id": "684abb503a567bd81ac5472ca50090388ebe689b",
+          "url": "https://github.com/Laguna1989/JamTemplateCpp/commit/72abfba0c9298f3facfc3c761adea48c6e310620"
+        },
+        "date": 1638566209572,
+        "tool": "googlecpp",
+        "benches": [
+          {
+            "name": "BM_StartGame",
+            "value": 0.0012807551950869865,
+            "unit": "ms/iter",
+            "extra": "iterations: 546141\ncpu: 0.0012806718374925156 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GamestateWithTweeningShapes",
+            "value": 2.5418576642598985,
+            "unit": "ms/iter",
+            "extra": "iterations: 277\ncpu: 2.5417964259927794 ms\nthreads: 1"
           }
         ]
       }
