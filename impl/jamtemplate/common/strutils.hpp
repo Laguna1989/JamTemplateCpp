@@ -1,0 +1,8 @@
+//
+// Created by Laguna_HP on 03.12.2021.
+//
+
+#ifndef MYAWESOMEGAME_STRUTILS_HPP
+#define MYAWESOMEGAME_STRUTILS_HPP
+
+#endif //MYAWESOMEGAME_STRUTILS_HPP

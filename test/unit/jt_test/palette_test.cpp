@@ -125,3 +125,14 @@ TEST_P(PaletteSizeTestFixture, FromVSize)
 
 INSTANTIATE_TEST_SUITE_P(
     PaletteSizeTest, PaletteSizeTestFixture, ::testing::Values(0U, 1U, 5U, 100U));
+
+TEST(PaletteParseGPL, GPLWithOneEntry)
+{
+    auto const input = R"(GIMP Palette
+#Palette Name: MS Paint Basic
+#Description: The "Basic" Palette Used In The Program, MS Paint (Taken From JS Paint, a recreation of MS Paint For Browser) 
+#Colors: 1
+64	0	64	400040)";
+
+    jt::Palette const pal = jt::Palette::parseGPL(input);
+}

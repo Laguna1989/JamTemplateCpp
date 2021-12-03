@@ -1,4 +1,5 @@
 #include "palette.hpp"
+#include <sstream>
 
 namespace jt {
 Palette::Palette(std::vector<jt::Color> const& colors)
@@ -46,5 +47,26 @@ Palette Palette::createGradientV(float h, float s, float vmin, float vmax, std::
     }
     return Palette { colors };
 }
+
+namespace {
+std::vector<jt::Color> parseGPL(std::string const& input)
+{
+    std::istringstream ss { input };
+    std::string line;
+    // ignore first line
+    std::getline(ss, line);
+
+    while (std::getline(ss, line)) {
+        if (line.empty()) {
+            continue;
+        }
+        if (line.at(0) == '#') {
+            continue;
+        }
+    }
+}
+} // namespace
+
+Palette Palette::parseGPL(std::string const& input) { return Palette { parseGPL(input) }; }
 
 } // namespace jt

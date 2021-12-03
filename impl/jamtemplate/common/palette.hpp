@@ -20,6 +20,8 @@ public:
     [[nodiscard]] Palette addColor(jt::Color col) const;
     jt::Color const& getColor(std::size_t idx) const;
 
+    static Palette parseGPL(std::string const& input);
+
 private:
     std::vector<jt::Color> m_colors;
 };
