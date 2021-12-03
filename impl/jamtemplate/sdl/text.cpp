@@ -1,7 +1,7 @@
 ﻿#include "text.hpp"
 #include "render_target.hpp"
 #include "sdl_helper.hpp"
-#include "splitstring.hpp"
+#include "strutils.hpp"
 #include <iostream>
 #include <stdexcept>
 
@@ -192,8 +192,7 @@ void Text::recreateTextTexture(std::shared_ptr<jt::renderTarget> const sptr)
         std::cout << "no valid render target in recreateTextTexture" << std::endl;
         return;
     }
-    jt::SplitString ss { m_text };
-    auto const ssv = ss.split('\n');
+    auto const ssv = strutil::split(m_text, '\n');
     calculateTextTextureSize(sptr, ssv);
 
     auto* oldT = SDL_GetRenderTarget(sptr.get());
