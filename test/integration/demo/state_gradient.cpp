@@ -20,18 +20,18 @@ void StateGradient::createShapesFromSaturationGradient()
     for (size_t i = 0; i != palette_saturation.size(); ++i) {
         auto const col = palette_saturation.getColor(i);
         auto s = jt::dh::createShapeRect(jt::Vector2 { 40, 40 }, col);
-        s->setPosition(jt::Vector2 { 50.0f + i * 40.0f, 50.0f });
+        s->setPosition(jt::Vector2 { 10.0f + i * 40.0f, 10.0f });
         m_shapes.push_back(s);
     }
 }
 
 void StateGradient::createShapesFromHueGradient()
 {
-    auto palette_hue = jt::Palette::createGradientH(0.0f, 360.0f, 80.0f, 80.0f, 8);
+    auto palette_hue = jt::Palette::createGradientH(0.0f, 360.0f, 80.0f, 80.0f, 7);
     for (size_t i = 0; i != palette_hue.size(); ++i) {
         auto const col = palette_hue.getColor(i);
         auto s = jt::dh::createShapeRect(jt::Vector2 { 40, 40 }, col);
-        s->setPosition(jt::Vector2 { 50.0f + i * 40.0f, 100.0f });
+        s->setPosition(jt::Vector2 { 10.0f + i * 40.0f, 60.0f });
         m_shapes.push_back(s);
     }
 }
@@ -42,7 +42,7 @@ void StateGradient::createShapesFromValueGradient()
     for (size_t i = 0; i != palette_value.size(); ++i) {
         auto const col = palette_value.getColor(i);
         auto s = jt::dh::createShapeRect(jt::Vector2 { 40, 40 }, col);
-        s->setPosition(jt::Vector2 { 50.0f + i * 40.0f, 150.0f });
+        s->setPosition(jt::Vector2 { 10.0f + i * 40.0f, 110.0f });
         m_shapes.push_back(s);
     }
 }
@@ -56,7 +56,7 @@ void StateGradient::createShapesFromGPL()
     for (size_t i = 0; i != palette_gpl.size(); ++i) {
         auto const col = palette_gpl.getColor(i);
         auto s = jt::dh::createShapeRect(jt::Vector2 { 40, 40 }, col);
-        s->setPosition(jt::Vector2 { 50.0f + i * 40.0f, 200.0f });
+        s->setPosition(jt::Vector2 { 10.0f + i * 40.0f, 160.0f });
         m_shapes.push_back(s);
     }
 }
