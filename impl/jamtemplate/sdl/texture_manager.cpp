@@ -202,8 +202,7 @@ std::shared_ptr<SDL_Texture> TextureManager::get(std::string const& str)
             m_textures[getFlashName(str)] = createFlashImage(str, m_renderer.lock());
         } else // special type of images
         {
-            SplitString ss { str };
-            auto ssv = ss.split('#');
+            auto ssv = strutil::split(str, '#');
             if (ssv.at(0) == "b") {
                 m_textures[str] = createButtonImage(ssv, m_renderer.lock());
             } else if (ssv.at(0) == "f") {
