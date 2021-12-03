@@ -10,6 +10,10 @@ class StateGradient : public jt::GameState {
     void doInternalDraw() const override;
 
     std::vector<std::shared_ptr<jt::Shape>> m_shapes;
+    void createShapesFromGPL();
+    void createShapesFromValueGradient();
+    void createShapesFromHueGradient();
+    void createShapesFromSaturationGradient();
 };
 
 #endif // MYAWESOMEGAME_STATE_GRADIENT_HPP
