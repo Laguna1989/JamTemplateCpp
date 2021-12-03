@@ -1,4 +1,5 @@
 #include "palette.hpp"
+#include "strutils.hpp"
 #include <sstream>
 
 namespace jt {
@@ -56,16 +57,28 @@ std::vector<jt::Color> parseGPLImpl(std::string const& input)
     // ignore first line
     std::getline(ss, line);
 
+    std::vector<jt::Color> colors {};
     while (std::getline(ss, line)) {
+        strutil::trim(line);
         if (line.empty()) {
             continue;
         }
         if (line.at(0) == '#') {
             continue;
         }
+        strutil::replace_all(line, "\t", " ");
+        auto const ssv = strutil::split(line, " ");
+        if (ssv.size() != 4) {
+            throw std::invalid_argument { "line does not adhere to gpl spec" };
+        }
+        std::uint8_t const r = static_cast<std::uint8_t>(strutil::parse_string<int>(ssv[0]));
+        std::uint8_t const g = static_cast<std::uint8_t>(strutil::parse_string<int>(ssv[1]));
+        std::uint8_t const b = static_cast<std::uint8_t>(strutil::parse_string<int>(ssv[2]));
+        auto col = jt::MakeColor::FromRGB(r, g, b);
+        colors.push_back(col);
     }
 
-    return std::vector<jt::Color> {};
+    return colors;
 }
 
 } // namespace

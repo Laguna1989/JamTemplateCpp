@@ -132,7 +132,28 @@ TEST(PaletteParseGPL, GPLWithOneEntry)
 #Palette Name: MS Paint Basic
 #Description: The "Basic" Palette Used In The Program, MS Paint (Taken From JS Paint, a recreation of MS Paint For Browser) 
 #Colors: 1
-64	0	64	400040)";
+64	0	64	400040
+
+)";
 
     jt::Palette const pal = jt::Palette::parseGPL(input);
+    ASSERT_EQ(pal.getColor(0), jt::MakeColor::FromRGB(64, 0, 64));
+}
+
+TEST(PaletteParseGPL, GPLWithMultipleEntries)
+{
+    auto const input = R"(GIMP Palette
+#Palette Name: MS Paint Basic
+#Description: The "Basic" Palette Used In The Program, MS Paint (Taken From JS Paint, a recreation of MS Paint For Browser) 
+#Colors: 1
+64	0	64	400040
+128	255	255	80ffff
+0	64	128	004080
+
+)";
+
+    jt::Palette const pal = jt::Palette::parseGPL(input);
+    ASSERT_EQ(pal.getColor(0), jt::MakeColor::FromRGB(64, 0, 64));
+    ASSERT_EQ(pal.getColor(1), jt::MakeColor::FromRGB(128, 255, 255));
+    ASSERT_EQ(pal.getColor(2), jt::MakeColor::FromRGB(0, 64, 128));
 }
