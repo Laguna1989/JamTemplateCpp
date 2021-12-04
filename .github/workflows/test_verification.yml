@@ -160,7 +160,7 @@ jobs:
         run: emmake make
 
   CodeCoverage:
-    needs: TestsLinuxSFML
+    needs: LinuxSFML
     runs-on: ubuntu-latest
     steps:
       - name: Set up cmake
