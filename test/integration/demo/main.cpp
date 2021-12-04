@@ -9,6 +9,7 @@
 #include "render_window.hpp"
 #include "state_manager.hpp"
 #include "state_select.hpp"
+#include "texture_manager.hpp"
 #include <memory>
 
 std::shared_ptr<jt::GameInterface> game;
@@ -38,5 +39,7 @@ int main()
     game = std::make_shared<jt::Game>(window, input, music_player, camera, stateManager);
     game->startGame(gameloop);
 
+    game = nullptr;
+    jt::TextureManager::reset();
     return 0;
 }
