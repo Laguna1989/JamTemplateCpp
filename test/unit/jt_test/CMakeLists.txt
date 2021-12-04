@@ -18,15 +18,16 @@ endif ()
 
 
 add_executable(jt_tests ${UNITTESTFILES})
+target_compile_definitions(jt_tests PRIVATE -DGTEST_LINKED_AS_SHARED_LIBRARY)
 if (ENABLE_WEB)
     set(CMAKE_EXECUTABLE_SUFFIX ".html")
 endif ()
 
 target_link_libraries(jt_tests
-    JamTemplate
-    gtest
-    gmock
-    )
+        JamTemplate
+        gtest
+        gmock
+        )
 
 jt_use_assets(jt_tests)
 add_test(jt_tests jt_tests)

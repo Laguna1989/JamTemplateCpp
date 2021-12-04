@@ -1,6 +1,6 @@
 file(GLOB_RECURSE GAMELIBFILES ${CMAKE_CURRENT_SOURCE_DIR}/*)
 
-add_library(GameLib ${GAMELIBFILES})
+add_library(GameLib STATIC ${GAMELIBFILES})
 if (ENABLE_WEB)
     set(CMAKE_EXECUTABLE_SUFFIX ".html")
 endif ()
