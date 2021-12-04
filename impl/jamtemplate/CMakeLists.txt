@@ -42,6 +42,3 @@ add_library(range_v3 INTERFACE IMPORTED)
 set_target_properties(range_v3 PROPERTIES
         INTERFACE_INCLUDE_DIRECTORIES ${range-v3_SOURCE_DIR}/include)
 target_link_libraries(JamTemplate range_v3)
-
-
-

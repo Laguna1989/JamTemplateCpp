@@ -7,7 +7,6 @@ Text::~Text()
 {
     m_text = nullptr;
     m_flashText = nullptr;
-    m_font.reset();
     m_font = nullptr;
 }
 
