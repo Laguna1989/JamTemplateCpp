@@ -12,4 +12,3 @@ target_link_libraries(jt_performance benchmark::benchmark)
 target_link_libraries(jt_performance JamTemplate)
 
 jt_use_assets(jt_performance)
-jt_deploy_dlls()

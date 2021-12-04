@@ -130,7 +130,7 @@ TEST(PaletteParseGPL, GPLWithOneEntry)
 {
     auto const input = R"(GIMP Palette
 #Palette Name: MS Paint Basic
-#Description: The "Basic" Palette Used In The Program, MS Paint (Taken From JS Paint, a recreation of MS Paint For Browser) 
+#Description: The "Basic" Palette Used In The Program, MS Paint 
 #Colors: 1
 64	0	64	400040
 
@@ -144,7 +144,7 @@ TEST(PaletteParseGPL, GPLWithMultipleEntries)
 {
     auto const input = R"(GIMP Palette
 #Palette Name: MS Paint Basic
-#Description: The "Basic" Palette Used In The Program, MS Paint (Taken From JS Paint, a recreation of MS Paint For Browser) 
+#Description: The "Basic" Palette Used In The Program
 #Colors: 1
 64	0	64	400040
 128	255	255	80ffff

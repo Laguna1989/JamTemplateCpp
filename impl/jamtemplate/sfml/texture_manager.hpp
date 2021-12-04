@@ -23,7 +23,7 @@ public:
     // - #b#100#200 will create a button with width 100 and height 200
     static sf::Texture& get(std::string const& str);
 
-    // reset all stored images
+    // reset all stored textures
     static void reset();
 
     static std::string getFlashName(std::string const& str);

@@ -7,9 +7,10 @@ project(${PROJECTNAME})
 include(config/cmake/helpers.cmake)
 include(config/cmake/cache_variables.cmake)
 
+set(SFML_STATIC_LIBRARIES TRUE)
+
 ## get externals
 #####################################################
-include(FetchContent)
 add_subdirectory(ext)
 
 FetchContent_GetProperties(sfml)
@@ -20,7 +21,7 @@ endif ()
 
 if ($ENV{CLION_IDE})
     set(SFML_DIR "${SFML_DIR_ROOT}/lib/cmake/SFML")
-    find_package(SFML COMPONENTS graphics window system audio REQUIRED)
+    #    find_package(SFML COMPONENTS graphics window system audio REQUIRED)
 endif ()
 
 #####################################################

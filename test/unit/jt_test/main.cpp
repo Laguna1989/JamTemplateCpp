@@ -1,5 +1,5 @@
+#include "texture_manager.hpp"
 #include <gtest/gtest.h>
-
 #if !USE_SFML
 #include "sdl_setup.hpp"
 SDLSetup setup;
@@ -8,5 +8,8 @@ SDLSetup setup;
 int main(int argc, char** argv)
 {
     ::testing::InitGoogleTest(&argc, argv);
-    return RUN_ALL_TESTS();
+    auto result = RUN_ALL_TESTS();
+    // TODO DI TextureManager to avoid this call
+    jt::TextureManager::reset();
+    return result;
 }

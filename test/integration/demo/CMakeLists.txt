@@ -5,5 +5,4 @@ if (ENABLE_WEB)
 endif ()
 target_link_libraries(jt_demos JamTemplate)
 jt_use_assets(jt_demos)
-jt_deploy_dlls()
 

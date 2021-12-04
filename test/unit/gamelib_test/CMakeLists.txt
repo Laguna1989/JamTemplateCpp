@@ -9,5 +9,4 @@ target_link_libraries_system(gamelib_tests gmock_main)
 target_link_libraries_system(gamelib_tests GameLib)
 
 jt_use_assets(gamelib_tests)
-jt_deploy_dlls()
 add_test(gamelib_tests gamelib_tests)

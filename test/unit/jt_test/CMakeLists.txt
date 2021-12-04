@@ -21,10 +21,12 @@ add_executable(jt_tests ${UNITTESTFILES})
 if (ENABLE_WEB)
     set(CMAKE_EXECUTABLE_SUFFIX ".html")
 endif ()
-target_link_libraries_system(jt_tests gtest)
-target_link_libraries_system(jt_tests gmock)
-target_link_libraries(jt_tests JamTemplate)
+
+target_link_libraries(jt_tests
+    JamTemplate
+    gtest
+    gmock
+    )
 
 jt_use_assets(jt_tests)
-jt_deploy_dlls()
 add_test(jt_tests jt_tests)
