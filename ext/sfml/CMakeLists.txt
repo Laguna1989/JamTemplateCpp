@@ -10,6 +10,6 @@ if (NOT SFML_POPULATED)
     set(SFML_INSTALL_PKGCONFIG_FILES OFF CACHE BOOL "Install pkgconfig files")
 
     FetchContent_Populate(SFML)
-
+    set(SFML_STATIC_LIBRARIES TRUE)
     add_subdirectory(${sfml_SOURCE_DIR} ${sfml_BINARY_DIR} EXCLUDE_FROM_ALL)
 endif ()

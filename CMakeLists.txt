@@ -8,6 +8,7 @@ include(config/cmake/helpers.cmake)
 include(config/cmake/cache_variables.cmake)
 
 set(SFML_STATIC_LIBRARIES TRUE)
+set(BUILD_SHARED_LIBS OFF)
 
 ## get externals
 #####################################################
