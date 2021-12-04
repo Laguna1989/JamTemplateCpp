@@ -5,7 +5,7 @@ else ()
     file(GLOB_RECURSE JAMTEMPLATEFILES ${CMAKE_CURRENT_SOURCE_DIR}/sdl/*)
 endif ()
 
-add_library(JamTemplate ${JAMTEMPLATEFILES} ${JAMTEMPLATEBASEFILES})
+add_library(JamTemplate STATIC ${JAMTEMPLATEFILES} ${JAMTEMPLATEBASEFILES})
 
 # add public includes, so they can be used by dependent targets
 target_include_directories(JamTemplate PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/common)
