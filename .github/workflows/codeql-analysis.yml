@@ -57,7 +57,18 @@ jobs:
         platform: x64
 
     - name: Set up system libs
-      run: sudo apt-get install -y libsfml-dev jackd
+      run: |
+        sudo apt-get install -y \
+        libsfml-dev \
+        jackd \
+        libx11-dev \
+        xorg-dev \
+        freeglut3-dev \
+        libudev-dev \
+        libopenal-dev \
+        libvorbis-dev \
+        libfreetype-dev \
+        libflac-dev
 
     - name: CMake
       run: |
