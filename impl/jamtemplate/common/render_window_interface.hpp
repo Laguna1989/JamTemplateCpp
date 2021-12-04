@@ -47,6 +47,11 @@ public:
     /// Get the mouse cursor visible state
     /// \return
     virtual bool getMouseCursorVisible() const = 0;
+
+    virtual void updateGui(float elapsed) = 0;
+
+    virtual void renderGui() = 0;
+
 };
 } // namespace jt
 #endif

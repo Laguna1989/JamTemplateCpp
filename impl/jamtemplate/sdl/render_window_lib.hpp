@@ -26,11 +26,15 @@ public:
     void setMouseCursorVisible(bool visible) override;
     bool getMouseCursorVisible() const override;
 
+    void renderGui() override;
+    void updateGui(float elapsed) override;
+
 private:
     std::shared_ptr<SDL_Window> m_window;
     jt::Vector2 m_size;
     bool m_isMouseCursorVisible { true };
     bool m_isOpen { true };
+    bool m_renderGui {false};
 };
 } // namespace jt
 

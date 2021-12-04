@@ -15,6 +15,8 @@ RenderWindow::RenderWindow(unsigned int width, unsigned int height, std::string 
     if (!m_window) {
         throw std::logic_error { "Failed to create window." };
     }
+
+//    ImGui_ImplSDL2_NewFrame(*m_window.get());
 }
 
 std::shared_ptr<jt::renderTarget> RenderWindow::createRenderTarget()
@@ -62,8 +64,11 @@ void RenderWindow::draw(std::unique_ptr<jt::Sprite>& spr)
 
 void RenderWindow::display()
 {
-    std::cerr << "RenderWindow::display() not supported by SDL Renderwindow. Use the Rendertarget "
-                 "directly to draw\n";
+//    std::cerr << "RenderWindow::display() not supported by SDL Renderwindow. Use the Rendertarget "
+//                 "directly to draw\n";
+    if (m_renderGui) {
+//        ImGui::Render();
+    }
 }
 
 jt::Vector2 RenderWindow::getMousePosition()
@@ -83,5 +88,13 @@ void RenderWindow::setMouseCursorVisible(bool visible)
 }
 
 bool RenderWindow::getMouseCursorVisible() const { return m_isMouseCursorVisible; }
+
+void RenderWindow::updateGui(float elapsed) {
+    // TODO?
+}
+
+void RenderWindow::renderGui() {
+    m_renderGui = true;
+}
 
 } // namespace jt

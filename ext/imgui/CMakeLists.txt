@@ -6,7 +6,7 @@ FetchContent_Declare(
 
 FetchContent_GetProperties(imgui)
 if (NOT imgui_POPULATED)
-    message(STATUS "Fetching ImGui v${IMGUI_VERSION}")
+    message(STATUS "Fetching ImGui")
 
     FetchContent_Populate(imgui)
 endif ()

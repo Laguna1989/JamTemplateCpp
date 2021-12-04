@@ -21,16 +21,22 @@ if (USE_SFML)
             sfml-audio
             )
 
+    target_link_libraries(JamTemplate
+            ImGui-SFML::ImGui-SFML
+            )
+
 else ()
     target_include_directories(JamTemplate PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/sdl)
     if (NOT ENABLE_WEB)
         include_directories(JamTemplate ${SDL2_INCLUDE_DIRS})
 
-        target_link_libraries(JamTemplate ${SDL2_LIBRARIES})
-        target_link_libraries(JamTemplate PkgConfig::SDL2_Mixer)
-        target_link_libraries(JamTemplate PkgConfig::SDL2_Image)
-        target_link_libraries(JamTemplate PkgConfig::SDL2_TTF)
-
+        target_link_libraries(JamTemplate
+                ${SDL2_LIBRARIES}
+                PkgConfig::SDL2_Mixer
+                PkgConfig::SDL2_Image
+                PkgConfig::SDL2_TTF
+                imgui
+                )
     endif ()
 endif ()
 

@@ -9,6 +9,7 @@
 #include "state_swarmobjects.hpp"
 #include "state_tileson.hpp"
 #include "state_tween.hpp"
+#include "state_imgui.hpp"
 
 void StateSelect::doInternalCreate()
 {
@@ -22,6 +23,7 @@ void StateSelect::doInternalCreate()
     AddButton<StateParticles>("Particles");
     AddButton<StatePathfinding>("Pathfinding");
     AddButton<StateGradient>("Palettes");
+    AddButton<StateImGui>("ImGui");
 }
 
 void StateSelect::doInternalUpdate(float /*elapsed*/)
