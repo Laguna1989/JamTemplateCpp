@@ -32,7 +32,8 @@ jobs:
           libudev-dev \
           libopenal-dev \
           libvorbis-dev \
-          libfreetype-dev
+          libfreetype-dev \
+          libflac-dev
 
       - uses: actions/checkout@v2
 
