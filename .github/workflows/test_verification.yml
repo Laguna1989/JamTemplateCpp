@@ -1,4 +1,4 @@
-name: Test Verification
+name: Tests
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
     branches: [ master ]
 
 jobs:
-  TestsLinuxSFML:
+  LinuxSFML:
     runs-on: ubuntu-latest
     steps:
       - name: Set up cmake
@@ -22,7 +22,7 @@ jobs:
           platform: x64
 
       - name: Set up system libs
-        run: sudo apt-get install -y libsfml-dev jackd
+        run: sudo apt-get install -y libsfml-dev jackd libx11-dev
 
       - uses: actions/checkout@v2
 
@@ -51,7 +51,7 @@ jobs:
           run: ./jt_tests --gtest_shuffle
           working-directory: ${{github.workspace}}/build/test/unit/jt_test
 
-  TestsLinuxSDL:
+  LinuxSDL:
     runs-on: ubuntu-latest
     steps:
       - name: Set up cmake
@@ -99,7 +99,7 @@ jobs:
           run: ./jt_tests --gtest_shuffle
           working-directory: ${{github.workspace}}/build/test/unit/jt_test
 
-  TestsWindows:
+  WindowsSFML:
     runs-on: windows-latest
     steps:
       - name: Set up cmake
@@ -120,7 +120,7 @@ jobs:
         working-directory: ${{github.workspace}}/build/test/unit/jt_test
         run: Debug\jt_tests.exe --gtest_shuffle
 
-  BuildWeb:
+  WebSDL:
     runs-on: ubuntu-latest
     env:
       EMCC_CCACHE: 1
