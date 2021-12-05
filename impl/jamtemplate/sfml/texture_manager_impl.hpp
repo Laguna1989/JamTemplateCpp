@@ -18,4 +18,4 @@ private:
 };
 } // namespace jt
 
-#endif // MYAWESOMEGAME_TEXTURE_MANAGER_IMPL_HPP
+#endif // GUARD_JAMTEMPLATE_TEXTURE_MANAGER_IMPL_HPP

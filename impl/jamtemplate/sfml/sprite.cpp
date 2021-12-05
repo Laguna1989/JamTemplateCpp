@@ -3,6 +3,12 @@
 
 namespace jt {
 
+Sprite::Sprite(std::string fileName, std::shared_ptr<jt::TextureManagerInterface> textureManager) {
+    m_sprite = sf::Sprite { textureManager->get(fileName) };
+    m_flashSprite
+        = sf::Sprite { textureManager->get(textureManager->getFlashName(fileName)) };
+}
+
 void Sprite::fromTexture(sf::Texture const& text) { m_sprite.setTexture(text); }
 
 void Sprite::loadSprite(std::string const& fileName)
@@ -113,5 +119,6 @@ void Sprite::doRotate(float rot)
     m_sprite.setRotation(-rot);
     m_flashSprite.setRotation(-rot);
 }
+
 
 } // namespace jt

@@ -4,6 +4,7 @@
 #include "color.hpp"
 #include "drawable_impl.hpp"
 #include "render_target.hpp"
+#include "texture_manager_interface.hpp"
 #include <SFML/Graphics.hpp>
 #include <memory>
 #include <string>
@@ -13,6 +14,9 @@ namespace jt {
 class Sprite : public DrawableImpl {
 public:
     using Sptr = std::shared_ptr<Sprite>;
+
+    Sprite(std::string fileName,
+        std::shared_ptr<jt::TextureManagerInterface> textureManager = nullptr);
 
     void loadSprite(std::string const& fileName);
     void loadSprite(std::string const& fileName, jt::Recti const& rect);

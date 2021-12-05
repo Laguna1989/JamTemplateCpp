@@ -145,7 +145,8 @@ sf::Texture& TextureManagerImpl::get(std::string const& str)
 
     return m_textures[str];
 }
-void TextureManagerImpl::reset() { }
-std::string TextureManagerImpl::getFlashName(std::string const& str) { return std::string(); }
+void TextureManagerImpl::reset() { m_textures.clear(); }
+std::string TextureManagerImpl::getFlashName(std::string const& str) { return str + "___flash__"; }
 void TextureManagerImpl::setRenderer(std::weak_ptr<jt::renderTarget> ptr) { }
+
 } // namespace jt
