@@ -12,22 +12,24 @@
 class DrawableFactoryInterface {
 public:
     virtual ~DrawableFactoryInterface() = default;
-    virtual std::shared_ptr<jt::DrawableInterface> createDrawable() = 0;
+    virtual std::shared_ptr<jt::DrawableInterface> createDrawable(
+        std::shared_ptr<jt::TextureManagerInterface> textureManager)
+        = 0;
 };
 
 class SpriteFactory : public DrawableFactoryInterface {
 public:
-    std::shared_ptr<jt::DrawableInterface> createDrawable() override
+    std::shared_ptr<jt::DrawableInterface> createDrawable(
+        std::shared_ptr<jt::TextureManagerInterface> tm) override
     {
-        auto s = std::make_shared<jt::Sprite>();
-        s->loadSprite("assets/coin.png");
-        return s;
+        return std::make_shared<jt::Sprite>("assets/coin.png", tm);
     }
 };
 
 class AnimationFactory : public DrawableFactoryInterface {
 public:
-    std::shared_ptr<jt::DrawableInterface> createDrawable() override
+    std::shared_ptr<jt::DrawableInterface> createDrawable(
+        std::shared_ptr<jt::TextureManagerInterface> /*textureManager*/) override
     {
         auto a = std::make_shared<jt::Animation>();
         a->add("assets/coin.png", "idle", { 16, 16 }, { 0 }, 0.1f);
@@ -38,7 +40,8 @@ public:
 
 class ShapeFactory : public DrawableFactoryInterface {
 public:
-    std::shared_ptr<jt::DrawableInterface> createDrawable() override
+    std::shared_ptr<jt::DrawableInterface> createDrawable(
+        std::shared_ptr<jt::TextureManagerInterface> /*textureManager*/) override
     {
         auto s = std::make_shared<jt::Shape>();
         s->makeRect(jt::Vector2 { 16, 16 });
@@ -48,7 +51,8 @@ public:
 
 class TextFactory : public DrawableFactoryInterface {
 public:
-    std::shared_ptr<jt::DrawableInterface> createDrawable() override
+    std::shared_ptr<jt::DrawableInterface> createDrawable(
+        std::shared_ptr<jt::TextureManagerInterface> /*textureManager*/) override
     {
         auto t = std::make_shared<jt::Text>();
         std::shared_ptr<jt::renderTarget> rt { nullptr };
@@ -59,7 +63,8 @@ public:
 
 class BarFactory : public DrawableFactoryInterface {
 public:
-    std::shared_ptr<jt::DrawableInterface> createDrawable() override
+    std::shared_ptr<jt::DrawableInterface> createDrawable(
+        std::shared_ptr<jt::TextureManagerInterface> /*textureManager*/) override
     {
         auto b = std::make_shared<jt::Bar>(32.0f, 12.0f);
         return b;
@@ -68,7 +73,8 @@ public:
 
 class TileMapFactory : public DrawableFactoryInterface {
 public:
-    std::shared_ptr<jt::DrawableInterface> createDrawable() override
+    std::shared_ptr<jt::DrawableInterface> createDrawable(
+        std::shared_ptr<jt::TextureManagerInterface> /*textureManager*/) override
     {
         auto t = std::make_shared<jt::tilemap::TileLayer>("assets/tileson_test.json", "ground");
         t->setScreenSizeHint(jt::Vector2 { 400.0f, 300.0f });
@@ -78,7 +84,8 @@ public:
 
 class LineFactory : public DrawableFactoryInterface {
 public:
-    std::shared_ptr<jt::DrawableInterface> createDrawable() override
+    std::shared_ptr<jt::DrawableInterface> createDrawable(
+        std::shared_ptr<jt::TextureManagerInterface> /*textureManager*/) override
     {
         auto l = std::make_shared<jt::Line>(jt::Vector2 { 1.0f, 10.0f });
         return l;

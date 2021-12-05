@@ -1,5 +1,6 @@
 ﻿#include "drawables_impl_test.hpp"
 #include "sdl_setup.hpp"
+#include "texture_manager_impl.hpp"
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 #include <memory>
@@ -8,7 +9,12 @@ class DrawableImplTestFixture
     : public ::testing::TestWithParam<std::shared_ptr<DrawableFactoryInterface>> {
 protected:
     std::shared_ptr<jt::DrawableInterface> drawable;
-    void SetUp() override { drawable = GetParam()->createDrawable(); }
+    std::shared_ptr<jt::TextureManagerInterface> tm { nullptr };
+    void SetUp() override
+    {
+        tm = std::make_shared<jt::TextureManagerImpl>();
+        drawable = GetParam()->createDrawable(tm);
+    }
 };
 
 INSTANTIATE_TEST_SUITE_P(DrawableImplTest, DrawableImplTestFixture,

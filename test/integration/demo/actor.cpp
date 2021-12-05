@@ -4,8 +4,8 @@
 
 void Actor::doCreate()
 {
-    m_sprite = std::make_shared<jt::Sprite>();
-    m_sprite->loadSprite("assets/coin.png", jt::Recti { 0, 0, 16, 16 });
+    m_sprite = std::make_shared<jt::Sprite>(
+        "assets/coin.png", jt::Recti { 0, 0, 16, 16 }, getGame()->getTextureManager());
     m_sprite->setOffset(jt::Vector2 { 8, 8 });
 }
 void Actor::doUpdate(float const elapsed)

@@ -1,5 +1,6 @@
 ﻿#include "render_window_test.hpp"
 #include "sprite.hpp"
+#include "texture_manager_impl.hpp"
 #include <gtest/gtest.h>
 #include <stdexcept>
 #include <utility>
@@ -34,8 +35,8 @@ TEST_P(RenderwindowCommonTestFixture, CheckForCloseDoesNotTerminate)
 
 TEST_P(RenderwindowCommonTestFixture, DrawValidSprite)
 {
-    auto spr = std::make_unique<jt::Sprite>();
-    spr->loadSprite("assets/coin.png", { 0, 0, 16, 16 });
+    auto tm = std::make_shared<jt::TextureManagerImpl>();
+    auto spr = std::make_unique<jt::Sprite>("assets/coin.png", jt::Recti { 0, 0, 16, 16 }, tm);
     m_window->draw(spr);
 }
 

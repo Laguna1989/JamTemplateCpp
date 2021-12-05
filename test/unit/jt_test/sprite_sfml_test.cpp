@@ -1,4 +1,5 @@
 #include "sprite.hpp"
+#include "texture_manager_impl.hpp"
 #include <gtest/gtest.h>
 
 TEST(SpriteSFMLTest, LoadSpriteFromSfTexture)
@@ -13,8 +14,8 @@ TEST(SpriteSFMLTest, LoadSpriteFromSfTexture)
 
 TEST(SpriteSFMLTest, GetSfSprite)
 {
-    jt::Sprite s;
-    s.loadSprite("assets/coin.png");
+    auto tm = std::make_shared<jt::TextureManagerImpl>();
+    jt::Sprite s { "assets/coin.png", tm };
 
     sf::Sprite value = s.getSFSprite();
     ASSERT_EQ(value.getLocalBounds().left, s.getLocalBounds().left());

@@ -14,8 +14,7 @@ void StateScroll::doInternalCreate()
     m_shape1 = jt::dh::createShapeRect(jt::Vector2 { 40.0f, 30.0f }, jt::colors::Cyan);
     m_shape1->setPosition(jt::Vector2 { 100.0f, 100.0f });
 
-    m_sprite = std::make_shared<jt::Sprite>();
-    m_sprite->loadSprite("assets/wall.png");
+    m_sprite = std::make_shared<jt::Sprite>("assets/wall.png", getGame()->getTextureManager());
     m_sprite->setPosition({ 250, 32 });
 
     m_anim = std::make_shared<jt::Animation>();

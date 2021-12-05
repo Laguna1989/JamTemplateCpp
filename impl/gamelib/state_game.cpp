@@ -35,9 +35,10 @@ void StateGame::doInternalCreate()
     tw->addCompleteCallback([this]() { m_running = true; });
     add(tw);
 
-    m_vignette = std::make_shared<jt::Sprite>();
-    m_vignette->loadSprite("#v#" + std::to_string(static_cast<int>(GP::GetScreenSize().x())) + "#"
-        + std::to_string(static_cast<int>(GP::GetScreenSize().y())));
+    m_vignette = std::make_shared<jt::Sprite>("#v#"
+            + std::to_string(static_cast<int>(GP::GetScreenSize().x())) + "#"
+            + std::to_string(static_cast<int>(GP::GetScreenSize().y())),
+        getGame()->getTextureManager());
     m_vignette->setIgnoreCamMovement(true);
     m_vignette->setColor({ 255, 255, 255, 100 });
 
