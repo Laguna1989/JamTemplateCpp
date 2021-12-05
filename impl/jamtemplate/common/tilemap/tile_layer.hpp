@@ -9,6 +9,7 @@
 #include "tileson.h"
 #include <memory>
 #include <vector>
+#include "texture_manager_interface.hpp"
 
 namespace jt {
 namespace tilemap {
@@ -20,7 +21,7 @@ public:
 
     /// Constructor
     /// \param path path to the tilemap file
-    TileLayer(std::string const& path, std::string const& layerName);
+    TileLayer(std::string const& path, std::string const& layerName, std::shared_ptr<jt::TextureManagerInterface> textureManager);
 
     /// Get map size in Tiles
     /// \return map size in tiles
@@ -56,6 +57,7 @@ public:
     void setScreenSizeHint(jt::Vector2 const& hint);
 
 private:
+    std::shared_ptr<jt::TextureManagerInterface> m_textureManager;
     std::unique_ptr<tson::Map> m_map { nullptr };
     std::string m_layerName { "" };
     mutable std::vector<jt::Sprite> m_tileSprites {};

@@ -13,13 +13,13 @@
 
 namespace jt {
 
-Button::Button(Vector2u const& size)
+Button::Button(Vector2u const& size, std::shared_ptr<TextureManagerInterface> textureManager)
 {
     std::string buttonImageName = "#b#" + std::to_string(size.x()) + "#" + std::to_string(size.y());
     m_background = std::make_shared<jt::Animation>();
-    m_background->add(buttonImageName, "normal", size, { 0 }, 1);
-    m_background->add(buttonImageName, "over", size, { 1 }, 1);
-    m_background->add(buttonImageName, "down", size, { 2 }, 1);
+    m_background->add(buttonImageName, "normal", size, { 0 }, 1, textureManager);
+    m_background->add(buttonImageName, "over", size, { 1 }, 1, textureManager);
+    m_background->add(buttonImageName, "down", size, { 2 }, 1, textureManager);
     m_background->play("normal");
     m_background->setIgnoreCamMovement(true);
 
