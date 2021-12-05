@@ -2,6 +2,7 @@
 #include "shape.hpp"
 #include "sprite.hpp"
 #include "text.hpp"
+#include "texture_manager_impl.hpp"
 #include <gtest/gtest.h>
 
 TEST(CreateRectShapeTest, NoNullptr)
@@ -36,7 +37,8 @@ TEST(CreateVignetteTest, NoNullptr)
 {
     float const x = 150.0f;
     float const y = 50.0f;
-    auto const vignette = jt::dh::createVignette({ x, y });
+    auto textureManager = std::make_shared<jt::TextureManagerImpl>();
+    auto const vignette = jt::dh::createVignette({ x, y }, textureManager);
     ASSERT_NE(vignette, nullptr);
 }
 
@@ -44,7 +46,8 @@ TEST(CreateVignetteTest, Size)
 {
     float const x = 150.0f;
     float const y = 50.0f;
-    auto const vignette = jt::dh::createVignette({ x, y });
+    auto textureManager = std::make_shared<jt::TextureManagerImpl>();
+    auto const vignette = jt::dh::createVignette({ x, y }, textureManager);
     ASSERT_FLOAT_EQ(vignette->getLocalBounds().width(), x);
     ASSERT_FLOAT_EQ(vignette->getLocalBounds().height(), y);
 }
@@ -53,7 +56,8 @@ TEST(CreateVignetteTest, Color)
 {
     float const x = 150.0f;
     float const y = 50.0f;
-    auto const vignette = jt::dh::createVignette({ x, y });
+    auto textureManager = std::make_shared<jt::TextureManagerImpl>();
+    auto const vignette = jt::dh::createVignette({ x, y }, textureManager);
     ASSERT_EQ(vignette->getColor(), jt::colors::White);
 }
 

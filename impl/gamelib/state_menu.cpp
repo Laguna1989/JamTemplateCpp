@@ -29,7 +29,7 @@ void StateMenu::doInternalCreate()
 
 void StateMenu::createVignette()
 {
-    m_vignette = jt::dh::createVignette(GP::GetScreenSize());
+    m_vignette = jt::dh::createVignette(GP::GetScreenSize(), getGame()->getTextureManager());
     m_vignette->setColor({ 255, 255, 255, 110 });
 }
 

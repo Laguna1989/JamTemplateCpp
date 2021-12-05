@@ -12,11 +12,11 @@
 void StateTileson::doInternalCreate()
 {
     m_tileLayerGround
-        = std::make_shared<jt::tilemap::TileLayer>("assets/tileson_test.json", "ground");
+        = std::make_shared<jt::tilemap::TileLayer>("assets/tileson_test.json", "ground", getGame()->getTextureManager());
     m_tileLayerGround->setScreenSizeHint(jt::Vector2(400, 300));
 
     m_tileLayerOverlay
-        = std::make_shared<jt::tilemap::TileLayer>("assets/tileson_test.json", "overlay");
+        = std::make_shared<jt::tilemap::TileLayer>("assets/tileson_test.json", "overlay", getGame()->getTextureManager());
     m_tileLayerOverlay->setScreenSizeHint(jt::Vector2(400, 300));
 
     m_objectsLayer

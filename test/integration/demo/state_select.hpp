@@ -29,7 +29,7 @@ class StateSelect : public jt::GameState {
         float posY
             = detail::buttonOffsetY + m_buttonCount * (detail::buttonMarginY + detail::buttonSizeY);
         auto const button = std::make_shared<jt::Button>(
-            jt::Vector2u { detail::buttonSizeX, detail::buttonSizeY });
+            jt::Vector2u { detail::buttonSizeX, detail::buttonSizeY }, getGame()->getTextureManager());
         button->addCallback(
             [this]() { getGame()->getStateManager()->switchState(std::make_shared<State>()); });
         auto const text = jt::dh::createText(getGame()->getRenderTarget(), textString, 12);

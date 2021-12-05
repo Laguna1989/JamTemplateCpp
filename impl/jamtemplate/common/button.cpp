@@ -23,9 +23,7 @@ Button::Button(Vector2u const& size, std::shared_ptr<TextureManagerInterface> te
     m_background->play("normal");
     m_background->setIgnoreCamMovement(true);
 
-    m_disabledOverlay = std::make_shared<jt::Sprite>();
-    m_disabledOverlay->loadSprite(
-        "#f#" + std::to_string(size.x()) + "#" + std::to_string(size.y()));
+    m_disabledOverlay = std::make_shared<jt::Sprite>("#f#" + std::to_string(size.x()) + "#" + std::to_string(size.y()), textureManager);
     m_disabledOverlay->setColor(jt::Color { 100, 100, 100, 150 });
 }
 

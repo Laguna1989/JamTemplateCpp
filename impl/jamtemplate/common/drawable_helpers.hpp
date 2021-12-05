@@ -40,7 +40,7 @@ std::shared_ptr<jt::Text> createText(std::weak_ptr<jt::renderTarget> rt, std::st
 /// Create a vignette sprite
 /// \param size the size of the vignette
 /// \return shared pointer to sprite
-std::shared_ptr<jt::Sprite> createVignette(jt::Vector2 const& size);
+std::shared_ptr<jt::Sprite> createVignette(jt::Vector2 const& size, std::shared_ptr<jt::TextureManagerInterface> textureManager);
 
 } // namespace dh
 
