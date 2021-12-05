@@ -41,10 +41,10 @@ public:
 class ShapeFactory : public DrawableFactoryInterface {
 public:
     std::shared_ptr<jt::DrawableInterface> createDrawable(
-        std::shared_ptr<jt::TextureManagerInterface> /*textureManager*/) override
+        std::shared_ptr<jt::TextureManagerInterface> textureManager) override
     {
         auto s = std::make_shared<jt::Shape>();
-        s->makeRect(jt::Vector2 { 16, 16 });
+        s->makeRect(jt::Vector2 { 16, 16 }, textureManager);
         return s;
     }
 };
@@ -64,9 +64,9 @@ public:
 class BarFactory : public DrawableFactoryInterface {
 public:
     std::shared_ptr<jt::DrawableInterface> createDrawable(
-        std::shared_ptr<jt::TextureManagerInterface> /*textureManager*/) override
+        std::shared_ptr<jt::TextureManagerInterface> textureManager) override
     {
-        auto b = std::make_shared<jt::Bar>(32.0f, 12.0f);
+        auto b = std::make_shared<jt::Bar>(32.0f, 12.0f, true, textureManager);
         return b;
     }
 };

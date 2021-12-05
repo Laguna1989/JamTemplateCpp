@@ -7,15 +7,17 @@
 
 TEST(CreateRectShapeTest, NoNullptr)
 {
-    auto const shape = jt::dh::createShapeRect({ 1.0f, 2.0f }, jt::colors::Green);
+    auto tm = std::make_shared<jt::TextureManagerImpl>();
+    auto const shape = jt::dh::createShapeRect({ 1.0f, 2.0f }, jt::colors::Green, tm);
     ASSERT_NE(shape, nullptr);
 }
 
 TEST(RectCreateRectShapeTest, Size)
 {
     jt::Rect expected { 0.0f, 0.0f, 100.0f, 200.0f };
+    auto tm = std::make_shared<jt::TextureManagerImpl>();
     auto const shape
-        = jt::dh::createShapeRect({ expected.width(), expected.height() }, jt::colors::Green);
+        = jt::dh::createShapeRect({ expected.width(), expected.height() }, jt::colors::Green, tm);
 
     ASSERT_EQ(shape->getLocalBounds(), expected);
 }
@@ -23,13 +25,15 @@ TEST(RectCreateRectShapeTest, Size)
 TEST(CreateRectShapeTest, Color)
 {
     auto const col = jt::colors::Green;
-    auto const shape = jt::dh::createShapeRect({ 3.0f, 4.0f }, col);
+    auto tm = std::make_shared<jt::TextureManagerImpl>();
+    auto const shape = jt::dh::createShapeRect({ 3.0f, 4.0f }, col, tm);
     ASSERT_EQ(shape->getColor(), col);
 }
 
 TEST(CreateCircleShapeTest, NoNullptr)
 {
-    auto const shape = jt::dh::createShapeCircle(1.0f, jt::colors::Green);
+    auto tm = std::make_shared<jt::TextureManagerImpl>();
+    auto const shape = jt::dh::createShapeCircle(1.0f, jt::colors::Green, tm);
     ASSERT_NE(shape, nullptr);
 }
 

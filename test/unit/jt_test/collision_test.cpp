@@ -1,15 +1,17 @@
 ﻿#include "collision.hpp"
 #include "shape.hpp"
+#include "texture_manager_impl.hpp"
 #include "gtest/gtest.h"
 
 using jt::Collision;
 using jt::Shape;
 
 namespace {
-jt::Shape makeShape(float sx, float sy, float px, float py)
+jt::Shape makeShape(float sx, float sy, float px, float py,
+    std::shared_ptr<jt::TextureManagerInterface> textureManager)
 {
     Shape s {};
-    s.makeRect(jt::Vector2 { sx, sy });
+    s.makeRect(jt::Vector2 { sx, sy }, textureManager);
     s.setPosition(jt::Vector2 { px, py });
     // note: by default the top left corner of the shape is the origin. This needs to be corrected
     // here, so the center of the shape is used.
@@ -20,7 +22,9 @@ jt::Shape makeShape(float sx, float sy, float px, float py)
 
 std::shared_ptr<Shape> const makeShapePtr(float sx, float sy, float px, float py)
 {
-    return std::make_shared<Shape>(makeShape(sx, sy, px, py));
+    // TODO think about how to pass in texture manager
+    return std::make_shared<Shape>(
+        makeShape(sx, sy, px, py, std::make_shared<jt::TextureManagerImpl>()));
 }
 
 } // namespace
@@ -88,23 +92,26 @@ TEST(CollisionTestCircle, ShapePtrSelf)
 
 TEST(CollisionTestCircle, ShapeNoOverlap)
 {
-    auto const s1 = makeShape(20.0f, 20.0f, 0.0f, 0.0f);
-    auto const s2 = makeShape(20.0f, 20.0f, 100.0f, 100.0f);
+    auto tm = std::make_shared<jt::TextureManagerImpl>();
+    auto const s1 = makeShape(20.0f, 20.0f, 0.0f, 0.0f, tm);
+    auto const s2 = makeShape(20.0f, 20.0f, 100.0f, 100.0f, tm);
 
     ASSERT_FALSE(Collision::CircleTest(s1, s2));
 }
 
 TEST(CollisionTestCircle, ShapeOverlap)
 {
-    auto const s1 = makeShape(20.0f, 20.0f, 0.0f, 0.0f);
-    auto const s2 = makeShape(20.0f, 20.0f, 10.0f, 10.0f);
+    auto tm = std::make_shared<jt::TextureManagerImpl>();
+    auto const s1 = makeShape(20.0f, 20.0f, 0.0f, 0.0f, tm);
+    auto const s2 = makeShape(20.0f, 20.0f, 10.0f, 10.0f, tm);
 
     ASSERT_TRUE(Collision::CircleTest(s1, s2));
 }
 
 TEST(CollisionTestCircle, ShapeSelf)
 {
-    auto const s1 = makeShape(20.0f, 20.0f, 20.0f, 20.0f);
+    auto tm = std::make_shared<jt::TextureManagerImpl>();
+    auto const s1 = makeShape(20.0f, 20.0f, 20.0f, 20.0f, tm);
 
     ASSERT_TRUE(Collision::CircleTest(s1, s1));
 }

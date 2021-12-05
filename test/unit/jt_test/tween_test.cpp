@@ -3,6 +3,7 @@
 #include "mocks/mock_drawable.hpp"
 #include "mocks/mock_tween.hpp"
 #include "shape.hpp"
+#include "texture_manager_impl.hpp"
 #include "tweens/tween_alpha.hpp"
 #include "tweens/tween_color.hpp"
 #include "tweens/tween_position.hpp"
@@ -21,9 +22,14 @@ using tb = jt::Tween;
 
 class TweenBaseTest : public ::testing::Test {
 public:
-    void SetUp() override { m_obj = jt::dh::createShapeRect(jt::Vector2 { 20.0f, 20.0f }); }
+    void SetUp() override
+    {
+        tm = std::make_shared<jt::TextureManagerImpl>();
+        m_obj = jt::dh::createShapeRect(jt::Vector2 { 20.0f, 20.0f }, jt::colors::White, tm);
+    }
 
 protected:
+    std::shared_ptr<jt::TextureManagerInterface> tm;
     std::shared_ptr<jt::DrawableInterface> m_obj;
 };
 
