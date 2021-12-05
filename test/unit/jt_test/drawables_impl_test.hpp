@@ -29,10 +29,10 @@ public:
 class AnimationFactory : public DrawableFactoryInterface {
 public:
     std::shared_ptr<jt::DrawableInterface> createDrawable(
-        std::shared_ptr<jt::TextureManagerInterface> /*textureManager*/) override
+        std::shared_ptr<jt::TextureManagerInterface> textureManager) override
     {
         auto a = std::make_shared<jt::Animation>();
-        a->add("assets/coin.png", "idle", { 16, 16 }, { 0 }, 0.1f);
+        a->add("assets/coin.png", "idle", { 16, 16 }, { 0 }, 0.1f, textureManager);
         a->play("idle");
         return a;
     }
@@ -76,7 +76,8 @@ public:
     std::shared_ptr<jt::DrawableInterface> createDrawable(
         std::shared_ptr<jt::TextureManagerInterface> textureManager) override
     {
-        auto t = std::make_shared<jt::tilemap::TileLayer>("assets/tileson_test.json", "ground", textureManager);
+        auto t = std::make_shared<jt::tilemap::TileLayer>(
+            "assets/tileson_test.json", "ground", textureManager);
         t->setScreenSizeHint(jt::Vector2 { 400.0f, 300.0f });
         return t;
     }
