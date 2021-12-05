@@ -1,4 +1,5 @@
-﻿#include "texture_manager_impl.hpp"
+﻿#include "sdl_setup.hpp"
+#include "texture_manager_impl.hpp"
 #include <gtest/gtest.h>
 #include <stdexcept>
 
@@ -9,8 +10,10 @@ protected:
     std::unique_ptr<jt::TextureManagerImpl> m_manager;
 
 public:
-    void SetUp() override {
+    void SetUp() override
+    {
         m_manager = std::make_unique<jt::TextureManagerImpl>();
+        m_manager->setRenderer(getRenderTarget());
     }
 };
 
@@ -28,10 +31,7 @@ TEST_F(TextureManagerTest, GetGlow)
     EXPECT_NO_THROW(m_manager->get("#g#1#1"));
 }
 
-TEST_F(TextureManagerTest, GetVignette)
-{
-    EXPECT_NO_THROW(m_manager->get("#v#100#200"));
-}
+TEST_F(TextureManagerTest, GetVignette) { EXPECT_NO_THROW(m_manager->get("#v#100#200")); }
 
 TEST_F(TextureManagerTest, GetButtonInvalid)
 {
@@ -95,8 +95,8 @@ TEST_F(TextureManagerTest, GetBlankInvalid)
 
 TEST_F(TextureManagerTest, InvalidFileNameThrowsException)
 {
-    EXPECT_THROW(m_manager->get("test12345_not_existing_file.txt.bla.invalid"),
-        std::invalid_argument);
+    EXPECT_THROW(
+        m_manager->get("test12345_not_existing_file.txt.bla.invalid"), std::invalid_argument);
 }
 
 TEST_F(TextureManagerTest, GetTextureFromEmptyString)
