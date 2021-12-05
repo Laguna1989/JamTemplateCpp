@@ -1,54 +1,51 @@
-﻿#include "sprite.hpp"
+﻿#include "sdl_setup.hpp"
+#include "sprite.hpp"
+#include "texture_manager_impl.hpp"
 #include <gtest/gtest.h>
+#include <memory>
 #include <type_traits>
 
-TEST(SpriteTest, SpriteCanBeDefaultConstructed)
+class SpriteTestFixture : public ::testing::Test {
+protected:
+    std::shared_ptr<jt::TextureManagerInterface> tm { nullptr };
+
+public:
+    void SetUp() override
+    {
+        tm = std::make_shared<jt::TextureManagerImpl>();
+        tm->setRenderer(getRenderTarget());
+    }
+};
+
+TEST_F(SpriteTestFixture, SpriteCanBeDefaultConstructed)
 {
     ASSERT_TRUE(std::is_default_constructible<jt::Sprite>::value);
 }
 
-TEST(SpriteTest, SizeCorrectAfterLoadFullSprite)
+TEST_F(SpriteTestFixture, SizeCorrectAfterLoadFullSprite)
 {
-    jt::Sprite s;
-    s.loadSprite("assets/coin.png");
+    jt::Sprite s { "assets/coin.png", tm };
     ASSERT_FLOAT_EQ(s.getLocalBounds().width(), 192.0f);
     ASSERT_FLOAT_EQ(s.getLocalBounds().height(), 16.0f);
 }
 
-TEST(SpriteTest, SizeCorrecrAfterLoadPartialSprite)
+TEST_F(SpriteTestFixture, SizeCorrecrAfterLoadPartialSprite)
 {
-    jt::Sprite s;
-    s.loadSprite("assets/coin.png", jt::Recti { 0, 0, 16, 16 });
+    jt::Sprite s { "assets/coin.png", jt::Recti { 0, 0, 16, 16 }, tm };
     ASSERT_FLOAT_EQ(s.getLocalBounds().width(), 16.0f);
     ASSERT_FLOAT_EQ(s.getLocalBounds().height(), 16.0f);
 }
 
-TEST(SpriteTest, InitialLocalBounds)
+TEST_F(SpriteTestFixture, CleanImage)
 {
-    jt::Sprite s;
-    jt::Rect expectedBounds { 0.0f, 0.0f, 0.0f, 0.0f };
-    ASSERT_EQ(s.getLocalBounds(), expectedBounds);
-}
-
-TEST(SpriteTest, InitialGlobalBounds)
-{
-    jt::Sprite s;
-    jt::Rect expectedBounds { 0.0f, 0.0f, 0.0f, 0.0f };
-    ASSERT_EQ(s.getGlobalBounds(), expectedBounds);
-}
-
-TEST(SpriteTest, CleanImage)
-{
-    jt::Sprite s;
-    s.loadSprite("assets/coin.png", jt::Recti { 0, 0, 16, 16 });
+    jt::Sprite s { "assets/coin.png", jt::Recti { 0, 0, 16, 16 }, tm };
     s.cleanImage();
     SUCCEED();
 }
 
-TEST(SpriteTest, CleanImageAfterGetColor)
+TEST_F(SpriteTestFixture, CleanImageAfterGetColor)
 {
-    jt::Sprite s;
-    s.loadSprite("assets/coin.png", jt::Recti { 0, 0, 16, 16 });
+    jt::Sprite s { "assets/coin.png", jt::Recti { 0, 0, 16, 16 }, tm };
     s.getColorAtPixel(jt::Vector2u { 8, 0 });
     s.cleanImage();
     SUCCEED();
@@ -56,12 +53,20 @@ TEST(SpriteTest, CleanImageAfterGetColor)
 
 class SpriteGetPixelTestFixture
     : public ::testing::TestWithParam<std::pair<jt::Vector2u, jt::Color>> {
+protected:
+    std::shared_ptr<jt::TextureManagerInterface> tm { nullptr };
+
+public:
+    void SetUp() override
+    {
+        tm = std::make_shared<jt::TextureManagerImpl>();
+        tm->setRenderer(getRenderTarget());
+    }
 };
 
 TEST_P(SpriteGetPixelTestFixture, GetPixel)
 {
-    jt::Sprite s;
-    s.loadSprite("assets/coin.png", jt::Recti { 0, 0, 16, 16 });
+    jt::Sprite s { "assets/coin.png", jt::Recti { 0, 0, 16, 16 }, tm };
     auto const pos = GetParam().first;
     auto const expected = GetParam().second;
     auto const result = s.getColorAtPixel(pos);
@@ -80,12 +85,20 @@ INSTANTIATE_TEST_SUITE_P(SpriteGetPixelTestCenter, SpriteGetPixelTestFixture,
         std::make_pair(jt::Vector2u { 7, 7 }, jt::Color { 211, 172, 99, 255 })));
 
 class SpriteGetPixelOutOfBoundsTestFixture : public ::testing::TestWithParam<jt::Vector2u> {
+protected:
+    std::shared_ptr<jt::TextureManagerInterface> tm { nullptr };
+
+public:
+    void SetUp() override
+    {
+        tm = std::make_shared<jt::TextureManagerImpl>();
+        tm->setRenderer(getRenderTarget());
+    }
 };
 
 TEST_P(SpriteGetPixelOutOfBoundsTestFixture, GetPixelOutOfBounds)
 {
-    jt::Sprite s;
-    s.loadSprite("assets/coin.png", jt::Recti { 0, 0, 16, 16 });
+    jt::Sprite s { "assets/coin.png", jt::Recti { 0, 0, 16, 16 }, tm };
     auto const pos = GetParam();
     ASSERT_THROW(s.getColorAtPixel(pos), std::invalid_argument);
 }

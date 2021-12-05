@@ -1,162 +1,147 @@
-﻿#include "shape.hpp"
+﻿#include "sdl_setup.hpp"
+#include "shape.hpp"
+#include "texture_manager_impl.hpp"
 #include <gtest/gtest.h>
 
-TEST(ShapeTest, ShapeCanBeDefaultConstructed)
-{
+class ShapeTestFixture : public ::testing::Test {
+public:
+    std::shared_ptr<jt::TextureManagerImpl> tm { nullptr };
     jt::Shape s;
+    void SetUp() override
+    {
+        tm = std::make_shared<jt::TextureManagerImpl>();
+        tm->setRenderer(getRenderTarget());
+    }
+};
+
+TEST_F(ShapeTestFixture, ShapeCanBeDefaultConstructed) { SUCCEED(); }
+
+TEST_F(ShapeTestFixture, MakeRect)
+{
+    s.makeRect(jt::Vector2 { 50, 50 }, tm);
     SUCCEED();
 }
 
-TEST(ShapeTest, MakeRect)
+TEST_F(ShapeTestFixture, InitialPosition)
 {
-    jt::Shape s;
-    s.makeRect(jt::Vector2 { 50, 50 });
-    SUCCEED();
-}
-
-TEST(ShapeTest, InitialPosition)
-{
-    jt::Shape s;
     EXPECT_FLOAT_EQ(s.getPosition().x(), 0.0f);
     EXPECT_FLOAT_EQ(s.getPosition().y(), 0.0f);
 }
 
-TEST(ShapeTest, PositionAfterSetPosition)
+TEST_F(ShapeTestFixture, PositionAfterSetPosition)
 {
-    jt::Shape s;
     jt::Vector2 newPos { 200.0f, 150.0f };
     s.setPosition(newPos);
     EXPECT_EQ(s.getPosition(), newPos);
 }
 
-TEST(ShapeTest, InitialColor)
+TEST_F(ShapeTestFixture, InitialColor)
 {
-    jt::Shape s;
-    s.makeRect({ 25, 30 });
+    s.makeRect({ 25, 30 }, tm);
     EXPECT_EQ(s.getColor(), jt::colors::White);
 }
 
-TEST(ShapeTest, ColorAfterSetColor)
+TEST_F(ShapeTestFixture, ColorAfterSetColor)
 {
-    jt::Shape s;
-    s.makeRect({ 25, 30 });
+    s.makeRect({ 25, 30 }, tm);
     jt::Color newCol { jt::colors::Blue };
     s.setColor(newCol);
     EXPECT_EQ(s.getColor(), newCol);
 }
 
-TEST(ShapeTest, InitialFlashColor)
+TEST_F(ShapeTestFixture, InitialFlashColor)
 {
-    jt::Shape s;
-    s.makeRect({ 25, 30 });
+    s.makeRect({ 25, 30 }, tm);
     EXPECT_EQ(s.getFlashColor(), jt::colors::White);
 }
 
-TEST(ShapeTest, FlashColorAfterSetFlashColor)
+TEST_F(ShapeTestFixture, FlashColorAfterSetFlashColor)
 {
-    jt::Shape s;
-    s.makeRect({ 25, 30 });
+    s.makeRect({ 25, 30 }, tm);
     jt::Color newCol { jt::colors::Blue };
     s.setFlashColor(newCol);
     EXPECT_EQ(s.getFlashColor(), newCol);
 }
 
-TEST(ShapeTest, InitialLocalBounds)
+TEST_F(ShapeTestFixture, InitialLocalBounds)
 {
-    jt::Shape s;
-
     jt::Rect expectedBounds { 0.0f, 0.0f, 0.0f, 0.0f };
     EXPECT_EQ(s.getLocalBounds(), expectedBounds);
 }
 
-TEST(ShapeTest, InitialGlobalBounds)
+TEST_F(ShapeTestFixture, InitialGlobalBounds)
 {
-    jt::Shape s;
     jt::Rect expectedBounds { 0.0f, 0.0f, 0.0f, 0.0f };
     EXPECT_EQ(s.getGlobalBounds(), expectedBounds);
 }
 
-TEST(ShapeTest, LocalBoundsWithRectShape)
+TEST_F(ShapeTestFixture, LocalBoundsWithRectShape)
 {
-    jt::Shape s;
-    s.makeRect(jt::Vector2 { 50.0f, 50.0f });
+    s.makeRect(jt::Vector2 { 50.0f, 50.0f }, tm);
     jt::Rect expectedBounds { 0.0f, 0.0f, 50.0f, 50.0f };
     EXPECT_EQ(s.getLocalBounds(), expectedBounds);
 }
 
-TEST(ShapeTest, GlobalBoundsWithLoadedShape)
+TEST_F(ShapeTestFixture, GlobalBoundsWithLoadedShape)
 {
-    jt::Shape s;
-    s.makeRect(jt::Vector2 { 16.0f, 16.0f });
+    s.makeRect(jt::Vector2 { 16.0f, 16.0f }, tm);
     jt::Rect expectedBounds { 0.0f, 0.0f, 16.0f, 16.0f };
     EXPECT_EQ(s.getGlobalBounds(), expectedBounds);
 }
 
-TEST(ShapeTest, InitialScale)
+TEST_F(ShapeTestFixture, InitialScale)
 {
-    jt::Shape s;
     EXPECT_FLOAT_EQ(s.getScale().x(), 1.0f);
     EXPECT_FLOAT_EQ(s.getScale().y(), 1.0f);
 }
 
-TEST(ShapeTest, ScaleAfterSetScale)
+TEST_F(ShapeTestFixture, ScaleAfterSetScale)
 {
-    jt::Shape s;
-    s.makeRect({ 500, 500 });
+    s.makeRect({ 500, 500 }, tm);
     jt::Vector2 newScale { 200.0f, 150.0f };
     s.setScale(newScale);
     EXPECT_EQ(s.getScale(), newScale);
 }
 
-TEST(ShapeTest, InitialOrigin)
+TEST_F(ShapeTestFixture, InitialOrigin)
 {
-    jt::Shape s;
     EXPECT_FLOAT_EQ(s.getOrigin().x(), 0.0f);
     EXPECT_FLOAT_EQ(s.getOrigin().y(), 0.0f);
 }
 
-TEST(ShapeTest, OriginAfterSetOrigin)
+TEST_F(ShapeTestFixture, OriginAfterSetOrigin)
 {
-    jt::Shape s;
-    s.makeRect({ 5, 5 });
+    s.makeRect({ 5, 5 }, tm);
     jt::Vector2 newOrigin { 20.0f, -15.0f };
     s.setOrigin(newOrigin);
     EXPECT_EQ(s.getOrigin(), newOrigin);
 }
 
-TEST(ShapeTest, Update)
+TEST_F(ShapeTestFixture, Update)
 {
-    jt::Shape s;
     s.update(0.1f);
     SUCCEED();
 }
 
-TEST(ShapeTest, DrawNullptr)
+TEST_F(ShapeTestFixture, DrawNullptr)
 {
-    jt::Shape s;
     s.update(0.0f);
     s.draw(nullptr);
     SUCCEED();
 }
 
-TEST(ShapeTest, InitialRotation)
-{
-    jt::Shape s;
-    EXPECT_FLOAT_EQ(s.getRotation(), 0.0f);
-}
+TEST_F(ShapeTestFixture, InitialRotation) { EXPECT_FLOAT_EQ(s.getRotation(), 0.0f); }
 
-TEST(ShapeTest, RotationAfterSetRotation)
+TEST_F(ShapeTestFixture, RotationAfterSetRotation)
 {
-    jt::Shape s;
     float const expectedRotation { 45.0f };
     s.setRotation(expectedRotation);
     EXPECT_FLOAT_EQ(s.getRotation(), expectedRotation);
 }
 
-TEST(ShapeTest, GlobalBoundsWithOffset)
+TEST_F(ShapeTestFixture, GlobalBoundsWithOffset)
 {
-    jt::Shape s;
-    s.makeRect(jt::Vector2 { 100.0f, 100.0f });
+    s.makeRect(jt::Vector2 { 100.0f, 100.0f }, tm);
     s.setOffset(jt::Vector2 { -30.0f, -50.0f });
     s.update(0.1f);
     auto bounds = s.getGlobalBounds();

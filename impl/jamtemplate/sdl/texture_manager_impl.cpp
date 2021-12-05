@@ -1,4 +1,4 @@
-﻿#include "texture_manager.hpp"
+﻿#include "texture_manager_impl.hpp"
 #include "sdl_helper.hpp"
 #include "sprite_functions.hpp"
 #include "strutils.hpp"
@@ -6,6 +6,7 @@
 #include <iostream>
 #include <limits>
 #include <map>
+#include <stdexcept>
 
 namespace jt {
 
@@ -179,10 +180,7 @@ std::shared_ptr<SDL_Texture> loadTextureFromDisk(
 }
 } // namespace
 
-TextureManager::TextureMapType TextureManager::m_textures;
-std::weak_ptr<jt::renderTarget> TextureManager::m_renderer {};
-
-std::shared_ptr<SDL_Texture> TextureManager::get(std::string const& str)
+std::shared_ptr<SDL_Texture> TextureManagerImpl::get(std::string const& str)
 {
     if (str.empty()) {
         std::cout << "TextureManager get: string must not be empty" << std::endl;
@@ -226,8 +224,8 @@ std::shared_ptr<SDL_Texture> TextureManager::get(std::string const& str)
     return m_textures[str];
 }
 
-std::string TextureManager::getFlashName(std::string const& str) { return str + "___flash__"; }
+std::string TextureManagerImpl::getFlashName(std::string const& str) { return str + "___flash__"; }
 
-void TextureManager::reset() { m_textures.clear(); }
+void TextureManagerImpl::reset() { m_textures.clear(); }
 
 } // namespace jt

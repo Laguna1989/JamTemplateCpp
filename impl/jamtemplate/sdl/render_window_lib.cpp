@@ -1,4 +1,6 @@
 ﻿#include "render_window_lib.hpp"
+#include "imgui.h"
+#include "imgui_sdl.h"
 #include <SDL2/SDL.h>
 #include <iostream>
 
@@ -27,6 +29,9 @@ std::shared_ptr<jt::renderTarget> RenderWindow::createRenderTarget()
         throw std::logic_error { "failed to create renderer." };
     }
     SDL_SetRenderDrawBlendMode(renderTarget.get(), SDL_BLENDMODE_BLEND);
+    ImGui::CreateContext();
+    ImGuiSDL::Initialize(
+        renderTarget.get(), static_cast<int>(m_size.x()), static_cast<int>(m_size.y()));
     return renderTarget;
 }
 
@@ -62,8 +67,11 @@ void RenderWindow::draw(std::unique_ptr<jt::Sprite>& spr)
 
 void RenderWindow::display()
 {
-    std::cerr << "RenderWindow::display() not supported by SDL Renderwindow. Use the Rendertarget "
-                 "directly to draw\n";
+    if (m_renderGui) {
+        ImGui::Render();
+        ImGuiSDL::Render(ImGui::GetDrawData());
+    }
+    m_renderGui = false;
 }
 
 jt::Vector2 RenderWindow::getMousePosition()
@@ -83,5 +91,26 @@ void RenderWindow::setMouseCursorVisible(bool visible)
 }
 
 bool RenderWindow::getMouseCursorVisible() const { return m_isMouseCursorVisible; }
+
+void RenderWindow::updateGui(float elapsed)
+{
+    ImGuiIO& io = ImGui::GetIO();
+    io.DeltaTime = elapsed;
+    int mx { 0 };
+    int my { 0 };
+    auto const mouseState = SDL_GetMouseState(&mx, &my);
+    io.MousePos = ImVec2(static_cast<float>(mx), static_cast<float>(my));
+    io.MouseDown[0] = mouseState & SDL_BUTTON(SDL_BUTTON_LEFT);
+    io.MouseDown[1] = mouseState & SDL_BUTTON(SDL_BUTTON_RIGHT);
+    // TODO keyboard input
+
+    io.MouseWheel = 0.0f;
+}
+
+void RenderWindow::startRenderGui()
+{
+    ImGui::NewFrame();
+    m_renderGui = true;
+}
 
 } // namespace jt

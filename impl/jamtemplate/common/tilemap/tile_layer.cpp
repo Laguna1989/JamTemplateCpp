@@ -8,11 +8,12 @@
 
 namespace jt {
 namespace tilemap {
-TileLayer::TileLayer(std::string const& path, std::string const& layerName)
+TileLayer::TileLayer(std::string const& path, std::string const& layerName, std::shared_ptr<jt::TextureManagerInterface> textureManager)
 {
     m_layerName = layerName;
     m_position = jt::Vector2 { 0.0f, 0.0f };
     m_screenSizeHint = jt::Vector2 { 0.0f, 0.0f };
+    m_textureManager = textureManager;
 
     tson::Tileson parser;
 
@@ -31,8 +32,7 @@ TileLayer::TileLayer(std::string const& path, std::string const& layerName)
     for (int j = 0; j != rows; ++j) {
         for (int i = 0; i != columns; ++i) {
             {
-                jt::Sprite tile {};
-                tile.loadSprite(tilesetName, jt::Recti(i * ts.x, j * ts.y, ts.x, ts.y));
+                jt::Sprite tile {tilesetName, jt::Recti(i * ts.x, j * ts.y, ts.x, ts.y), m_textureManager };
                 tile.setIgnoreCamMovement(false);
                 m_tileSprites.at(i + j * columns) = tile;
             }

@@ -7,10 +7,57 @@ project(${PROJECTNAME})
 include(config/cmake/helpers.cmake)
 include(config/cmake/cache_variables.cmake)
 
+set(SFML_STATIC_LIBRARIES TRUE)
+set(BUILD_SHARED_LIBS OFF)
+
+## Other variables and compiler setup I
+#####################################################
+
+if (ENABLE_AUDIO_TESTS)
+    add_definitions(-DENABLE_AUDIO_TESTS)
+endif ()
+
+if (ENABLE_CLANG_TIDY)
+    set(CMAKE_CXX_CLANG_TIDY "clang-tidy")
+endif ()
+
+if (ENABLE_WEB)
+    add_compile_definitions(MUSIC_OGG)
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -O0 -g --std=c++17 -fpermissive ")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --use-preload-plugins --preload-file assets")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -s USE_SDL=2")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -s USE_SDL_IMAGE=2 -s SDL2_IMAGE_FORMATS='[\"bmp\",\"png\"]'")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -s USE_SDL_MIXER=2 -s USE_VORBIS=1 -s USE_OGG=1")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -s USE_SDL_TTF=2")
+
+    add_link_options("SHELL:-s TOTAL_MEMORY=256MB " "SHELL:-s ALLOW_MEMORY_GROWTH=1")
+else ()
+    if (MSVC)
+        ## nasty warning 5205 from tileson should not show up,
+        ## so the warning level of this one is set to 4 and the global warning level is set to three
+        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /w45205 /W3 /EHsc")
+    else ()
+        if (ENABLE_COVERAGE)
+            set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -Wall -Wextra -O0 -fprofile-arcs -ftest-coverage --std=c++17 -fpermissive -lstdc++fs")
+        elseif (ENABLE_PERFORMANCETESTS)
+            set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -O3 --std=c++17 -fpermissive -lstdc++fs")
+        else ()
+            set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -O3 --std=c++17 -fpermissive -lstdc++fs")
+        endif ()
+    endif ()
+endif ()
+
+
 ## get externals
 #####################################################
-include(FetchContent)
 add_subdirectory(ext)
+
+## Other variables and compiler setup II
+#####################################################
+set(CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_STANDARD 17)
+set(CXX_STANDARD 17)
+
 
 FetchContent_GetProperties(sfml)
 # Apple users: set to /usr/local/Cellar/sfml/2.4.2_1/lib/ or respectively
@@ -20,7 +67,6 @@ endif ()
 
 if ($ENV{CLION_IDE})
     set(SFML_DIR "${SFML_DIR_ROOT}/lib/cmake/SFML")
-    find_package(SFML COMPONENTS graphics window system audio REQUIRED)
 endif ()
 
 #####################################################
@@ -42,45 +88,6 @@ else ()
     endif ()
 endif ()
 
-## Other variables and compiler setup
-#####################################################
-set(CXX_STANDARD_REQUIRED ON)
-set(CMAKE_CXX_STANDARD 17)
-set(CXX_STANDARD 17)
-
-if (ENABLE_AUDIO_TESTS)
-    add_definitions(-DENABLE_AUDIO_TESTS)
-endif ()
-
-if (ENABLE_CLANG_TIDY)
-    set(CMAKE_CXX_CLANG_TIDY "clang-tidy")
-endif ()
-
-if (ENABLE_WEB)
-    add_compile_definitions(MUSIC_OGG)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -O2 --std=c++17 -fpermissive ")
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --use-preload-plugins --preload-file assets")
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -s USE_SDL=2")
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -s USE_SDL_IMAGE=2 -s SDL2_IMAGE_FORMATS='[\"bmp\",\"png\"]'")
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -s USE_SDL_MIXER=2 -s USE_VORBIS=1 -s USE_OGG=1")
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -s USE_SDL_TTF=2")
-
-    add_link_options("SHELL:-s TOTAL_MEMORY=128MB " "SHELL:-s ALLOW_MEMORY_GROWTH=1")
-else ()
-    if (MSVC)
-        ## nasty warning 5205 from tileson should not show up,
-        ## so the warning level of this one is set to 4 and the global warning level is set to three
-        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /w45205 /W3 /EHsc")
-    else ()
-        if (ENABLE_COVERAGE)
-            set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -Wall -Wextra -O0 -fprofile-arcs -ftest-coverage --std=c++17 -fpermissive -lstdc++fs")
-        elseif (ENABLE_PERFORMANCETESTS)
-            set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -O3 --std=c++17 -fpermissive -lstdc++fs")
-        else ()
-            set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -O3 --std=c++17 -fpermissive -lstdc++fs")
-        endif ()
-    endif ()
-endif ()
 
 ## setup Projects
 #####################################################

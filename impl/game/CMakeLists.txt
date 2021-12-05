@@ -9,5 +9,3 @@ target_link_libraries(${PROJECTNAME} GameLib)
 target_include_directories(${PROJECTNAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 
 jt_use_assets(${PROJECTNAME})
-jt_deploy_dlls()
-

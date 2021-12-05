@@ -1,4 +1,5 @@
 ﻿#include "render_window_lib.hpp"
+#include "imgui-SFML.h"
 #include "sprite.hpp"
 #include <SFML/Graphics.hpp>
 
@@ -9,6 +10,8 @@ RenderWindow::RenderWindow(unsigned int width, unsigned int height, std::string 
     m_window
         = std::make_shared<sf::RenderWindow>(sf::VideoMode(width, height), title, sf::Style::Close);
     m_window->setVerticalSyncEnabled(true);
+
+    ImGui::SFML::Init(*m_window.get());
 }
 
 std::shared_ptr<jt::renderTarget> RenderWindow::createRenderTarget()
@@ -22,6 +25,7 @@ void RenderWindow::checkForClose()
 {
     sf::Event event {};
     while (m_window->pollEvent(event)) {
+        ImGui::SFML::ProcessEvent(event);
         if (event.type == sf::Event::Closed) {
             m_window->close();
         }
@@ -42,7 +46,14 @@ void RenderWindow::draw(std::unique_ptr<jt::Sprite>& spr)
     m_window->draw(spr->getSFSprite());
 }
 
-void RenderWindow::display() { m_window->display(); }
+void RenderWindow::display()
+{
+    if (m_renderGui) {
+        ImGui::SFML::Render(*m_window.get());
+    }
+    m_window->display();
+    m_renderGui = false;
+}
 
 jt::Vector2 RenderWindow::getMousePosition()
 {
@@ -56,5 +67,12 @@ void RenderWindow::setMouseCursorVisible(bool visible)
     m_isMouseCursorVisible = visible;
 }
 bool RenderWindow::getMouseCursorVisible(void) const { return m_isMouseCursorVisible; }
+
+void RenderWindow::updateGui(float elapsed)
+{
+    ImGui::SFML::Update(*m_window.get(), sf::seconds(elapsed));
+}
+
+void RenderWindow::startRenderGui() { m_renderGui = true; }
 
 } // namespace jt

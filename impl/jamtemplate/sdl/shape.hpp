@@ -7,14 +7,15 @@
 #include "vector.hpp"
 #include <SDL2/SDL.h>
 #include <memory>
+#include "texture_manager_interface.hpp"
 
 namespace jt {
 class Shape : public DrawableImpl {
 public:
     using Sptr = std::shared_ptr<Shape>;
 
-    void makeRect(jt::Vector2 size);
-    void makeCircle(float radius);
+    void makeRect(jt::Vector2 size, std::shared_ptr<jt::TextureManagerInterface> textureManager);
+    void makeCircle(float radius, std::shared_ptr<jt::TextureManagerInterface> textureManager);
 
     void setColor(jt::Color const& col) override;
     jt::Color getColor() const override;

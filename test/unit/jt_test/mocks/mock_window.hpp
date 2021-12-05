@@ -16,6 +16,8 @@ public:
     MOCK_METHOD(std::shared_ptr<jt::renderTarget>, createRenderTarget, (), (override));
     MOCK_METHOD(void, setMouseCursorVisible, (bool), (override));
     MOCK_METHOD(bool, getMouseCursorVisible, (), (const, override));
+    MOCK_METHOD(void, updateGui, (float), (override));
+    MOCK_METHOD(void, startRenderGui, (), (override));
 };
 
 #endif

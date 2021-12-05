@@ -1,11 +1,9 @@
-﻿#include "texture_manager.hpp"
+#include "texture_manager_impl.hpp"
 #include "sprite_functions.hpp"
 #include "strutils.hpp"
-#include <map>
 #include <stdexcept>
 
 namespace jt {
-
 namespace {
 
 sf::Image createButtonImage(std::vector<std::string> const& ssv)
@@ -112,9 +110,7 @@ sf::Texture loadTextureFromDisk(std::string const& str)
 }
 } // namespace
 
-TextureManager::TextureMapType TextureManager::m_textures;
-
-sf::Texture& TextureManager::get(std::string const& str)
+sf::Texture& TextureManagerImpl::get(std::string const& str)
 {
     if (str.empty()) {
         throw std::invalid_argument { "TextureManager get: string must not be empty" };
@@ -148,9 +144,8 @@ sf::Texture& TextureManager::get(std::string const& str)
 
     return m_textures[str];
 }
-
-std::string TextureManager::getFlashName(std::string const& str) { return str + "___flash__"; }
-
-void TextureManager::reset() { m_textures.clear(); }
+void TextureManagerImpl::reset() { m_textures.clear(); }
+std::string TextureManagerImpl::getFlashName(std::string const& str) { return str + "___flash__"; }
+void TextureManagerImpl::setRenderer(std::weak_ptr<jt::renderTarget> ptr) { }
 
 } // namespace jt

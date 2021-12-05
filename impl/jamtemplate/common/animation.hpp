@@ -3,6 +3,7 @@
 
 #include "drawable_impl.hpp"
 #include "render_target.hpp"
+#include "texture_manager_interface.hpp"
 #include <map>
 #include <memory>
 #include <string>
@@ -27,7 +28,7 @@ public:
     /// \param frameTimeInSeconds how long is each frame displayed
     void add(std::string const& fileName, std::string const& animName,
         jt::Vector2u const& imageSize, std::vector<unsigned int> const& frameIndices,
-        float frameTimeInSeconds);
+        float frameTimeInSeconds, std::shared_ptr<TextureManagerInterface> textureManager);
 
     /// Check if a specific animation name is present in the pool
     ///

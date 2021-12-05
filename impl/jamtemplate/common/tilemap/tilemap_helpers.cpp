@@ -5,9 +5,11 @@
 namespace jt {
 namespace tilemap {
 
-std::shared_ptr<jt::DrawableInterface> createShapeFrom(InfoRect const& info)
+std::shared_ptr<jt::DrawableInterface> createShapeFrom(
+    InfoRect const& info, std::shared_ptr<jt::TextureManagerInterface> textureManager)
 {
-    std::shared_ptr<jt::Shape> shape = jt::dh::createShapeRect(info.size);
+    std::shared_ptr<jt::Shape> shape
+        = jt::dh::createShapeRect(info.size, jt::colors::White, textureManager);
     shape->setRotation(-info.rotation);
     shape->setPosition(info.position);
     shape->update(0.1f);

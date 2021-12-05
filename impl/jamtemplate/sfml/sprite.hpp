@@ -4,6 +4,7 @@
 #include "color.hpp"
 #include "drawable_impl.hpp"
 #include "render_target.hpp"
+#include "texture_manager_interface.hpp"
 #include <SFML/Graphics.hpp>
 #include <memory>
 #include <string>
@@ -14,8 +15,12 @@ class Sprite : public DrawableImpl {
 public:
     using Sptr = std::shared_ptr<Sprite>;
 
-    void loadSprite(std::string const& fileName);
-    void loadSprite(std::string const& fileName, jt::Recti const& rect);
+    Sprite();
+
+    Sprite(
+        std::string const& fileName, std::shared_ptr<jt::TextureManagerInterface> textureManager);
+    Sprite(std::string const& fileName, jt::Recti const& rect,
+        std::shared_ptr<jt::TextureManagerInterface> textureManager);
 
     // DO NOT CALL THIS FROM GAME CODE!
     void fromTexture(sf::Texture const& text);

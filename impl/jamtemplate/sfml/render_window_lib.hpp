@@ -26,7 +26,8 @@ public:
     jt::Vector2 getSize() const override;
 
     void draw(std::unique_ptr<jt::Sprite>&) override;
-
+    void startRenderGui() override;
+    void updateGui(float elapsed) override;
     void display() override;
 
     jt::Vector2 getMousePosition() override;
@@ -36,6 +37,7 @@ public:
 private:
     std::shared_ptr<sf::RenderWindow> m_window;
     bool m_isMouseCursorVisible { true };
+    bool m_renderGui { false };
 };
 } // namespace jt
 

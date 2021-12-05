@@ -1,45 +1,58 @@
 ﻿#include "animation.hpp"
+#include "sdl_setup.hpp"
+#include "texture_manager_impl.hpp"
 #include <gtest/gtest.h>
 #include <stdexcept>
 #include <type_traits>
 
-TEST(AnimationTest, IsDefaultConstructible)
+class AnimationTestFixtue : public ::testing::Test {
+public:
+    std::shared_ptr<jt::TextureManagerInterface> tm { nullptr };
+    void SetUp() override
+    {
+        tm = std::make_shared<jt::TextureManagerImpl>();
+        tm->setRenderer(getRenderTarget());
+    }
+};
+
+TEST_F(AnimationTestFixtue, IsDefaultConstructible)
 {
     ASSERT_TRUE(std::is_default_constructible<jt::Animation>::value);
 }
 
-TEST(AnimationTest, AddAnimationWithEmptyNameRaisesInvalidArgumentException)
+TEST_F(AnimationTestFixtue, AddAnimationWithEmptyNameRaisesInvalidArgumentException)
 {
     jt::Animation a;
     ASSERT_THROW(
-        a.add("assets/coin.png", "", { 16, 16 }, { 0, 1, 2, 3 }, 1.0f), std::invalid_argument);
+        a.add("assets/coin.png", "", { 16, 16 }, { 0, 1, 2, 3 }, 1.0f, tm), std::invalid_argument);
 }
 
-TEST(AnimationTest, AddAnimationWithEmptyFrameIndicesRaisesInvalidArgumentException)
+TEST_F(AnimationTestFixtue, AddAnimationWithEmptyFrameIndicesRaisesInvalidArgumentException)
 {
     jt::Animation a;
-    ASSERT_THROW(a.add("assets/coin.png", "", { 16, 16 }, {}, 1.0f), std::invalid_argument);
+    ASSERT_THROW(a.add("assets/coin.png", "", { 16, 16 }, {}, 1.0f, tm), std::invalid_argument);
 }
 
-TEST(AnimationTest, AddAnimationWithNegativeTimeRaisesInvalidArgumentException)
+TEST_F(AnimationTestFixtue, AddAnimationWithNegativeTimeRaisesInvalidArgumentException)
 {
     jt::Animation a;
-    ASSERT_THROW(
-        a.add("assets/coin.png", "test", { 16, 16 }, { 0, 1, 2, 3 }, -0.5f), std::invalid_argument);
+    ASSERT_THROW(a.add("assets/coin.png", "test", { 16, 16 }, { 0, 1, 2, 3 }, -0.5f, tm),
+        std::invalid_argument);
 }
 
-TEST(AnimationTest, InitialCurrentAnimationName)
+TEST_F(AnimationTestFixtue, InitialCurrentAnimationName)
 {
     jt::Animation a {};
     ASSERT_EQ(a.getCurrentAnimationName(), "");
 }
 
-TEST(AnimationTest, UpdateWithoutPlayDoesNotRaiseException)
+TEST_F(AnimationTestFixtue, UpdateWithoutPlayDoesNotRaiseException)
 {
     jt::Animation a {};
     ASSERT_NO_THROW(a.update(0.25f));
 }
-TEST(AnimationTest, DrawWithoutPlayDoesNotRaiseException)
+
+TEST_F(AnimationTestFixtue, DrawWithoutPlayDoesNotRaiseException)
 {
     jt::Animation a {};
     ASSERT_NO_THROW(a.draw(nullptr));
@@ -47,12 +60,18 @@ TEST(AnimationTest, DrawWithoutPlayDoesNotRaiseException)
 
 class AnimationTestWithAnimation : public ::testing::Test {
 protected:
+    std::shared_ptr<jt::TextureManagerInterface> tm { nullptr };
     jt::Animation a;
-    AnimationTestWithAnimation() { addAnimationWithFrameIndices(); }
+    void SetUp() override
+    {
+        tm = std::make_shared<jt::TextureManagerImpl>();
+        tm->setRenderer(getRenderTarget());
+        addAnimationWithFrameIndices();
+    }
 
     void addAnimationWithFrameIndices(std::vector<unsigned int> frameIndices = { 0, 1, 2, 3, 4 })
     {
-        a.add("assets/coin.png", "idle", { 16, 16 }, frameIndices, 1.0f);
+        a.add("assets/coin.png", "idle", { 16, 16 }, frameIndices, 1.0f, tm);
     }
 };
 
@@ -66,7 +85,7 @@ TEST_F(AnimationTestWithAnimation, AddWillAddAnimationWithSingleFrame)
 
 TEST_F(AnimationTestWithAnimation, OverwriteAnimation)
 {
-    a.add("assets/coin.png", "idle", { 16, 16 }, { 0 }, 1.0f);
+    a.add("assets/coin.png", "idle", { 16, 16 }, { 0 }, 1.0f, tm);
     ASSERT_TRUE(a.hasAnimation("idle"));
 }
 
@@ -90,10 +109,13 @@ TEST_F(AnimationTestWithAnimation, IsNotLoopingAfterSetLooping)
 
 class AnimationPlayingTest : public ::testing::Test {
 protected:
+    std::shared_ptr<jt::TextureManagerInterface> tm { nullptr };
     jt::Animation a;
-    AnimationPlayingTest()
+    void SetUp() override
     {
-        a.add("assets/coin.png", "idle", { 16, 16 }, { 0, 1, 2, 3, 4 }, 1.0f);
+        tm = std::make_shared<jt::TextureManagerImpl>();
+        tm->setRenderer(getRenderTarget());
+        a.add("assets/coin.png", "idle", { 16, 16 }, { 0, 1, 2, 3, 4 }, 1.0f, tm);
         a.play("idle");
     }
 };

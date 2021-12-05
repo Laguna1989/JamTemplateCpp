@@ -41,5 +41,6 @@ int main()
     game = std::make_shared<jt::Game>(window, input, musicPlayer, camera, stateManager);
     game->startGame(gameloop);
 
+    game = nullptr;
     return 0;
 }

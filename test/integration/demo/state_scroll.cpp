@@ -8,19 +8,20 @@
 
 void StateScroll::doInternalCreate()
 {
-    m_background = jt::dh::createShapeRect(jt::Vector2 { 400.0f, 300.0f }, jt::colors::Blue);
+    m_background = jt::dh::createShapeRect(
+        jt::Vector2 { 400.0f, 300.0f }, jt::colors::Blue, getGame()->getTextureManager());
     m_background->setIgnoreCamMovement(true);
 
-    m_shape1 = jt::dh::createShapeRect(jt::Vector2 { 40.0f, 30.0f }, jt::colors::Cyan);
+    m_shape1 = jt::dh::createShapeRect(
+        jt::Vector2 { 40.0f, 30.0f }, jt::colors::Cyan, getGame()->getTextureManager());
     m_shape1->setPosition(jt::Vector2 { 100.0f, 100.0f });
 
-    m_sprite = std::make_shared<jt::Sprite>();
-    m_sprite->loadSprite("assets/wall.png");
+    m_sprite = std::make_shared<jt::Sprite>("assets/wall.png", getGame()->getTextureManager());
     m_sprite->setPosition({ 250, 32 });
 
     m_anim = std::make_shared<jt::Animation>();
     m_anim->add("assets/coin.png", "idle", jt::Vector2u { 16, 16 },
-        jt::MathHelper::numbersBetween(0U, 11U), 0.15f);
+        jt::MathHelper::numbersBetween(0U, 11U), 0.15f, getGame()->getTextureManager());
     m_anim->play("idle");
     m_anim->setColor(jt::colors::Red);
     m_anim->setPosition(jt::Vector2 { 200.0f, 200.0f });

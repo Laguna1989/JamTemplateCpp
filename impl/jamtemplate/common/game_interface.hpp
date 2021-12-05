@@ -7,6 +7,7 @@
 #include "render_target.hpp"
 #include "render_window_interface.hpp"
 #include "state_manager_interface.hpp"
+#include "texture_manager_interface.hpp"
 #include <memory>
 
 namespace jt {
@@ -56,6 +57,8 @@ public:
     /// Get the render Target
     /// \return the render target
     virtual std::shared_ptr<jt::renderTarget> getRenderTarget() const = 0;
+
+    virtual std::shared_ptr<jt::TextureManagerInterface> getTextureManager() = 0;
 
     virtual void reset() = 0;
 

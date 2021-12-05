@@ -24,7 +24,7 @@ std::shared_ptr<jt::Sprite> getCurrentSprite(
 
 void Animation::add(std::string const& fileName, std::string const& animName,
     jt::Vector2u const& imageSize, std::vector<unsigned int> const& frameIndices,
-    float frameTimeInSeconds)
+    float frameTimeInSeconds, std::shared_ptr<TextureManagerInterface> textureManager)
 {
     if (frameIndices.empty()) {
         throw std::invalid_argument { "animation frame indices are empty." };
@@ -45,8 +45,7 @@ void Animation::add(std::string const& fileName, std::string const& animName,
     for (auto const idx : frameIndices) {
         jt::Recti const rect { static_cast<int>(idx * imageSize.x()), 0,
             static_cast<int>(imageSize.x()), static_cast<int>(imageSize.y()) };
-        Sprite::Sptr sptr = std::make_shared<Sprite>();
-        sptr->loadSprite(fileName, rect);
+        Sprite::Sptr sptr = std::make_shared<Sprite>(fileName, rect, textureManager);
         m_frames[animName].push_back(sptr);
     }
 }

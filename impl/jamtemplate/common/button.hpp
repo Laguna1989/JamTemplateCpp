@@ -3,6 +3,7 @@
 
 #include "game_object.hpp"
 #include "vector.hpp"
+#include "texture_manager_interface.hpp"
 #include <functional>
 #include <memory>
 #include <vector>
@@ -18,7 +19,7 @@ public:
 
     /// Constructor, creates a button with the given size
     /// \param size the size of the button in pixel
-    Button(Vector2u const& size = jt::Vector2u { 16, 16 });
+    Button(Vector2u const& size, std::shared_ptr<TextureManagerInterface> textureManager);
     ~Button();
 
     Button(const Button& b) = delete;

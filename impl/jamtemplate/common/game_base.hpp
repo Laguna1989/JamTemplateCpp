@@ -34,6 +34,8 @@ public:
 
     std::shared_ptr<jt::renderTarget> getRenderTarget() const override;
 
+    std::shared_ptr<jt::TextureManagerInterface> getTextureManager() override;
+
     void reset() override;
 
 protected:
@@ -48,6 +50,8 @@ protected:
     std::shared_ptr<StateManagerInterface> m_stateManager { nullptr };
 
     std::shared_ptr<jt::renderTarget> m_renderTarget { nullptr };
+
+    std::shared_ptr<jt::TextureManagerInterface> m_textureManager { nullptr };
 
     std::chrono::steady_clock::time_point m_timeLast {};
 

@@ -1,12 +1,16 @@
 ﻿#include "bar.hpp"
+#include "sdl_setup.hpp"
+#include "texture_manager_impl.hpp"
 #include <gtest/gtest.h>
 #include <stdexcept>
 
 TEST(BarTest, BarInitialValues)
 {
+    auto tm = std::make_shared<jt::TextureManagerImpl>();
+    tm->setRenderer(getRenderTarget());
     float const x = 64.0f;
     float const y = 16.0f;
-    jt::Bar b { x, y };
+    jt::Bar b { x, y, true, tm };
     ASSERT_FLOAT_EQ(b.getLocalBounds().width(), x);
     ASSERT_FLOAT_EQ(b.getLocalBounds().height(), y);
     ASSERT_FLOAT_EQ(b.getMaxValue(), 1.0f);
@@ -15,7 +19,9 @@ TEST(BarTest, BarInitialValues)
 
 TEST(BarTest, SetMaxValueWillCorrectlySetValue)
 {
-    jt::Bar b { 5.0f, 10.0f };
+    auto tm = std::make_shared<jt::TextureManagerImpl>();
+    tm->setRenderer(getRenderTarget());
+    jt::Bar b { 5.0f, 10.0f, true, tm };
 
     float const expected = 15.0f;
     b.setMaxValue(expected);
@@ -24,7 +30,9 @@ TEST(BarTest, SetMaxValueWillCorrectlySetValue)
 
 TEST(BarTest, SetNegativeMaxValueRaisesException)
 {
-    jt::Bar b { 5.0f, 10.0f };
+    auto tm = std::make_shared<jt::TextureManagerImpl>();
+    tm->setRenderer(getRenderTarget());
+    jt::Bar b { 5.0f, 10.0f, true, tm };
     ASSERT_THROW(b.setMaxValue(-5.0f), std::invalid_argument);
 }
 
@@ -32,24 +40,29 @@ class BarCurrentValueTestFixture : public ::testing::TestWithParam<std::pair<flo
 protected:
     float max;
     float current;
-    jt::Bar bar { 5.0f, 10.0f };
+    std::shared_ptr<jt::TextureManagerInterface> tm;
+    std::shared_ptr<jt::Bar> bar { nullptr };
+
     void SetUp() override
     {
+        tm = std::make_shared<jt::TextureManagerImpl>();
+        tm->setRenderer(getRenderTarget());
+        bar = std::make_shared<jt::Bar>(5.0f, 10.0f, true, tm);
         max = GetParam().first;
         current = GetParam().second;
-        bar.setMaxValue(max);
-        bar.setCurrentValue(current);
+        bar->setMaxValue(max);
+        bar->setCurrentValue(current);
     }
 };
 
 TEST_P(BarCurrentValueTestFixture, GetCurrentValue)
 {
-    ASSERT_FLOAT_EQ(bar.getCurrentValue(), current);
+    ASSERT_FLOAT_EQ(bar->getCurrentValue(), current);
 }
 
 TEST_P(BarCurrentValueTestFixture, GetCurrentValueFraction)
 {
-    ASSERT_FLOAT_EQ(bar.getValueFraction(), current / max);
+    ASSERT_FLOAT_EQ(bar->getValueFraction(), current / max);
 }
 
 INSTANTIATE_TEST_SUITE_P(BarCurrentValueTest, BarCurrentValueTestFixture,
@@ -58,7 +71,9 @@ INSTANTIATE_TEST_SUITE_P(BarCurrentValueTest, BarCurrentValueTestFixture,
 
 TEST(BarTest, SetCurrentValueBelowZero)
 {
-    jt::Bar b { 5.0f, 10.0f };
+    auto tm = std::make_shared<jt::TextureManagerImpl>();
+    tm->setRenderer(getRenderTarget());
+    jt::Bar b { 5.0f, 10.0f, true, tm };
 
     float const current = -1.5f;
     b.setCurrentValue(current);
@@ -69,7 +84,9 @@ TEST(BarTest, SetCurrentValueBelowZero)
 
 TEST(BarTest, SetCurrentValueAboveMaxValue)
 {
-    jt::Bar b { 5.0f, 10.0f };
+    auto tm = std::make_shared<jt::TextureManagerImpl>();
+    tm->setRenderer(getRenderTarget());
+    jt::Bar b { 5.0f, 10.0f, true, tm };
 
     float const max = 100.0f;
     b.setMaxValue(max);
@@ -83,7 +100,9 @@ TEST(BarTest, SetCurrentValueAboveMaxValue)
 
 TEST(BarTest, VerticalBar)
 {
-    jt::Bar b { 5.0f, 100.0f, false };
+    auto tm = std::make_shared<jt::TextureManagerImpl>();
+    tm->setRenderer(getRenderTarget());
+    jt::Bar b { 5.0f, 100.0f, false, tm };
     b.update(0.1f);
     b.draw(nullptr);
 
@@ -92,14 +111,18 @@ TEST(BarTest, VerticalBar)
 
 TEST(BarTest, SetFrontColor)
 {
-    jt::Bar b { 5.0f, 100.0f };
+    auto tm = std::make_shared<jt::TextureManagerImpl>();
+    tm->setRenderer(getRenderTarget());
+    jt::Bar b { 5.0f, 100.0f, true, tm };
     b.setFrontColor(jt::colors::Red);
     ASSERT_EQ(b.getColor(), jt::colors::Red);
 }
 
 TEST(BarTest, SetBackgroundColor)
 {
-    jt::Bar b { 5.0f, 100.0f };
+    auto tm = std::make_shared<jt::TextureManagerImpl>();
+    tm->setRenderer(getRenderTarget());
+    jt::Bar b { 5.0f, 100.0f, true, tm };
     b.setBackColor(jt::colors::Yellow);
     ASSERT_EQ(b.getBackColor(), jt::colors::Yellow);
 }

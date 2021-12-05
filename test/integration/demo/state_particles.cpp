@@ -17,10 +17,10 @@ void StateParticles::doInternalCreate()
 }
 void StateParticles::createParticlesFire()
 {
-
     m_particlesFire = jt::ParticleSystem<jt::Shape, 200>::createPS(
-        []() {
-            auto s = jt::dh::createShapeCircle(20, jt::MakeColor::FromHSV(45, 80, 100));
+        [this]() {
+            auto s = jt::dh::createShapeCircle(
+                20, jt::MakeColor::FromHSV(45, 80, 100), getGame()->getTextureManager());
             s->setOrigin(jt::Vector2 { 20, 20 });
             s->setPosition(jt::Vector2 { -2000.0f, -2000.0f });
             s->setScale(jt::Vector2 { 0.5f, 0.5f });
@@ -85,9 +85,9 @@ void StateParticles::createParticlesFire()
 void StateParticles::createParticlesGlitter()
 {
     m_particlesGlitter = jt::ParticleSystem<jt::Shape, numberOfParticles>::createPS(
-        []() {
+        [this]() {
             auto s = std::make_shared<jt::Shape>();
-            s->makeRect(jt::Vector2 { 4, 4 });
+            s->makeRect(jt::Vector2 { 4, 4 }, getGame()->getTextureManager());
             s->setOrigin({ 2, 2 });
             return s;
         },

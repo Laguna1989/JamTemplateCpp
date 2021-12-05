@@ -3,11 +3,13 @@
 
 #include "drawable_interface.hpp"
 #include "info_rect.hpp"
+#include "texture_manager_interface.hpp"
 
 namespace jt {
 namespace tilemap {
 
-std::shared_ptr<jt::DrawableInterface> createShapeFrom(InfoRect const& info);
+std::shared_ptr<jt::DrawableInterface> createShapeFrom(
+    InfoRect const& info, std::shared_ptr<jt::TextureManagerInterface> textureManager);
 
 }
 } // namespace jt

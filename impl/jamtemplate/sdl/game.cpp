@@ -4,7 +4,7 @@
 #include "input/input_manager.hpp"
 #include "random/random.hpp"
 #include "rect.hpp"
-#include "texture_manager.hpp"
+#include "texture_manager_impl.hpp"
 #include "vector.hpp"
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_mixer.h>
@@ -32,7 +32,7 @@ Game::Game(std::shared_ptr<RenderWindowInterface> window,
 
     m_renderTarget = getRenderWindow()->createRenderTarget();
     TTF_Init();
-    TextureManager::setRenderer(m_renderTarget);
+    getTextureManager()->setRenderer(m_renderTarget);
 
     // important fix for SDL_Mixer: OpenAudio has to be called before Mix_Init,
     // otherwise ogg is not supported.
@@ -97,6 +97,7 @@ void Game::doDraw() const
         static_cast<int>(getCamera()->getShakeOffset().y()), m_destRect.width(),
         m_destRect.height() };
     SDL_RenderCopyEx(getRenderTarget().get(), t, &sourceRect, &destRect, 0, nullptr, SDL_FLIP_NONE);
+    m_renderWindow->display();
     SDL_RenderPresent(getRenderTarget().get());
 
     SDL_DestroyTexture(t);
