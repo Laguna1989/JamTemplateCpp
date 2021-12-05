@@ -2,7 +2,6 @@
 
 namespace jt {
 
-// TODO remove?
 Sprite::Sprite() { }
 
 Sprite::Sprite(

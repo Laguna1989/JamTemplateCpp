@@ -19,8 +19,7 @@ public:
 
     /// Constructor, creates a button with the given size
     /// \param size the size of the button in pixel
-    // TODO replace nullptr default assignment
-    Button(Vector2u const& size = jt::Vector2u { 16, 16 }, std::shared_ptr<TextureManagerInterface> textureManager = nullptr);
+    Button(Vector2u const& size, std::shared_ptr<TextureManagerInterface> textureManager);
     ~Button();
 
     Button(const Button& b) = delete;

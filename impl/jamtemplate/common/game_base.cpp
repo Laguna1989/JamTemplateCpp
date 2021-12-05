@@ -35,7 +35,6 @@ GameBase::GameBase(std::shared_ptr<jt::RenderWindowInterface> renderWindow,
         throw std::invalid_argument { "getStateManager DI for game can not be null" };
     }
 
-    // TODO pass in as DI?
     m_textureManager = std::make_shared<jt::TextureManagerImpl>();
 }
 
