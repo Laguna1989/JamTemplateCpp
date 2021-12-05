@@ -1,4 +1,5 @@
-﻿#include "sprite.hpp"
+﻿#include "sdl_setup.hpp"
+#include "sprite.hpp"
 #include "texture_manager_impl.hpp"
 #include <gtest/gtest.h>
 #include <memory>
@@ -9,7 +10,11 @@ protected:
     std::shared_ptr<jt::TextureManagerInterface> tm { nullptr };
 
 public:
-    void SetUp() override { tm = std::make_shared<jt::TextureManagerImpl>(); }
+    void SetUp() override
+    {
+        tm = std::make_shared<jt::TextureManagerImpl>();
+        tm->setRenderer(getRenderTarget());
+    }
 };
 
 TEST_F(SpriteTestFixture, SpriteCanBeDefaultConstructed)
@@ -52,7 +57,11 @@ protected:
     std::shared_ptr<jt::TextureManagerInterface> tm { nullptr };
 
 public:
-    void SetUp() override { tm = std::make_shared<jt::TextureManagerImpl>(); }
+    void SetUp() override
+    {
+        tm = std::make_shared<jt::TextureManagerImpl>();
+        tm->setRenderer(getRenderTarget());
+    }
 };
 
 TEST_P(SpriteGetPixelTestFixture, GetPixel)
@@ -80,7 +89,11 @@ protected:
     std::shared_ptr<jt::TextureManagerInterface> tm { nullptr };
 
 public:
-    void SetUp() override { tm = std::make_shared<jt::TextureManagerImpl>(); }
+    void SetUp() override
+    {
+        tm = std::make_shared<jt::TextureManagerImpl>();
+        tm->setRenderer(getRenderTarget());
+    }
 };
 
 TEST_P(SpriteGetPixelOutOfBoundsTestFixture, GetPixelOutOfBounds)

@@ -2,6 +2,7 @@
 #include "mocks/mock_drawable.hpp"
 #include "mocks/mock_game.hpp"
 #include "mocks/mock_input.hpp"
+#include "sdl_setup.hpp"
 #include "texture_manager_impl.hpp"
 #include <gtest/gtest.h>
 
@@ -13,6 +14,7 @@ public:
     void SetUp() override
     {
         tm = std::make_shared<jt::TextureManagerImpl>();
+        tm->setRenderer(getRenderTarget());
         b = std::make_shared<jt::Button>(jt::Vector2u { 32, 16 }, tm);
     }
 };

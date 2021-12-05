@@ -1,4 +1,5 @@
-﻿#include "shape.hpp"
+﻿#include "sdl_setup.hpp"
+#include "shape.hpp"
 #include "texture_manager_impl.hpp"
 #include <gtest/gtest.h>
 
@@ -6,7 +7,11 @@ class ShapeTestFixture : public ::testing::Test {
 public:
     std::shared_ptr<jt::TextureManagerImpl> tm { nullptr };
     jt::Shape s;
-    void SetUp() override { tm = std::make_shared<jt::TextureManagerImpl>(); }
+    void SetUp() override
+    {
+        tm = std::make_shared<jt::TextureManagerImpl>();
+        tm->setRenderer(getRenderTarget());
+    }
 };
 
 TEST_F(ShapeTestFixture, ShapeCanBeDefaultConstructed) { SUCCEED(); }

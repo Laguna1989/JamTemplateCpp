@@ -1,5 +1,6 @@
-#if !USE_SFML
 #include "sdl_setup.hpp"
+
+#if !USE_SFML
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_mixer.h>
 #include <SDL_ttf.h>
@@ -24,3 +25,13 @@ SDLSetup::SDLSetup()
 }
 
 #endif
+
+std::shared_ptr<jt::renderTarget> getRenderTarget()
+{
+#if USE_SFML
+    return std::make_shared<jt::renderTarget>();
+#else
+    static SDLSetup setup;
+    return setup.renderTarget;
+#endif
+}

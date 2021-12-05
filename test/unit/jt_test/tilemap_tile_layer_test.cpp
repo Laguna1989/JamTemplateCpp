@@ -1,6 +1,7 @@
-﻿#include "tilemap/tile_layer.hpp"
-#include <gtest/gtest.h>
+﻿#include "sdl_setup.hpp"
 #include "texture_manager_impl.hpp"
+#include "tilemap/tile_layer.hpp"
+#include <gtest/gtest.h>
 
 using jt::tilemap::TileLayer;
 
@@ -12,7 +13,10 @@ public:
     void SetUp() override
     {
         textureManager = std::make_shared<jt::TextureManagerImpl>();
-        tileLayer = std::make_shared<jt::tilemap::TileLayer>("assets/tileson_test.json", "ground", textureManager);
+        textureManager->setRenderer(getRenderTarget());
+
+        tileLayer = std::make_shared<jt::tilemap::TileLayer>(
+            "assets/tileson_test.json", "ground", textureManager);
     }
 };
 
@@ -37,6 +41,7 @@ TEST_F(TilemapTileLayerTest, UpdateAndDraw)
 TEST_F(TilemapTileLayerTest, ParseInvalidFile)
 {
     auto tm = std::make_shared<jt::TextureManagerImpl>();
+    tm->setRenderer(getRenderTarget());
     auto func = [tm]() { TileLayer tl { "assets/non_existing.json", "blarb", tm }; };
     ASSERT_THROW(func(), std::invalid_argument);
 }

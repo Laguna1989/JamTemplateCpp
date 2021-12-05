@@ -1,3 +1,4 @@
+#include "sdl_setup.hpp"
 #include "sprite.hpp"
 #include "texture_manager_impl.hpp"
 #include <gtest/gtest.h>
@@ -15,6 +16,7 @@ TEST(SpriteSFMLTest, LoadSpriteFromSfTexture)
 TEST(SpriteSFMLTest, GetSfSprite)
 {
     auto tm = std::make_shared<jt::TextureManagerImpl>();
+    tm->setRenderer(getRenderTarget());
     jt::Sprite s { "assets/coin.png", tm };
 
     sf::Sprite value = s.getSFSprite();

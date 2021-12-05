@@ -1,5 +1,6 @@
 #include "mocks/mock_game.hpp"
 #include "particle_system.hpp"
+#include "sdl_setup.hpp"
 #include "shape.hpp"
 #include "texture_manager_impl.hpp"
 #include <gtest/gtest.h>
@@ -58,11 +59,12 @@ TEST(ParticleSystemTest, CreateDoesNotRaiseExceptionWhenGameInstanceIsSet)
     auto g = std::make_shared<::testing::NiceMock<MockGame>>();
     EXPECT_CALL(*g, getRenderTarget()).WillRepeatedly(::testing::Return(nullptr));
 
-    auto textureManager = std::make_shared<jt::TextureManagerImpl>();
+    auto tm = std::make_shared<jt::TextureManagerImpl>();
+    tm->setRenderer(getRenderTarget());
     jt::ParticleSystem<jt::Shape, 5> ps(
-        [textureManager]() {
+        [tm]() {
             auto s = std::make_shared<jt::Shape>();
-            s->makeRect({ 1, 1 }, textureManager);
+            s->makeRect({ 1, 1 }, tm);
             return s;
         },
         [](auto /*s*/) {});
@@ -73,11 +75,12 @@ TEST(ParticleSystemTest, CreateDoesNotRaiseExceptionWhenGameInstanceIsSet)
 
 TEST(ParticleSystemTest, UpdateCallDoesNotRaiseException)
 {
-    auto textureManager = std::make_shared<jt::TextureManagerImpl>();
+    auto tm = std::make_shared<jt::TextureManagerImpl>();
+    tm->setRenderer(getRenderTarget());
     jt::ParticleSystem<jt::Shape, 5> ps(
-        [textureManager]() {
+        [tm]() {
             auto s = std::make_shared<jt::Shape>();
-            s->makeRect({ 1, 1 }, textureManager);
+            s->makeRect({ 1, 1 }, tm);
             return s;
         },
         [](auto /*s*/) {});
@@ -91,12 +94,12 @@ TEST(ParticleSystemTest, DrawWithGame)
 {
     auto g = std::make_shared<::testing::NiceMock<MockGame>>();
     EXPECT_CALL(*g, getRenderTarget()).WillRepeatedly(::testing::Return(nullptr));
-    auto textureManager = std::make_shared<jt::TextureManagerImpl>();
-
+    auto tm = std::make_shared<jt::TextureManagerImpl>();
+    tm->setRenderer(getRenderTarget());
     jt::ParticleSystem<jt::Shape, 5> ps(
-        [textureManager]() {
+        [tm]() {
             auto s = std::make_shared<jt::Shape>();
-            s->makeRect({ 1, 1 }, textureManager);
+            s->makeRect({ 1, 1 }, tm);
             return s;
         },
         [](auto /*s*/) {});

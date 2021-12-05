@@ -1,4 +1,5 @@
 ﻿#include "drawable_helpers.hpp"
+#include "sdl_setup.hpp"
 #include "shape.hpp"
 #include "sprite.hpp"
 #include "text.hpp"
@@ -8,6 +9,7 @@
 TEST(CreateRectShapeTest, NoNullptr)
 {
     auto tm = std::make_shared<jt::TextureManagerImpl>();
+    tm->setRenderer(getRenderTarget());
     auto const shape = jt::dh::createShapeRect({ 1.0f, 2.0f }, jt::colors::Green, tm);
     ASSERT_NE(shape, nullptr);
 }
@@ -16,6 +18,7 @@ TEST(RectCreateRectShapeTest, Size)
 {
     jt::Rect expected { 0.0f, 0.0f, 100.0f, 200.0f };
     auto tm = std::make_shared<jt::TextureManagerImpl>();
+    tm->setRenderer(getRenderTarget());
     auto const shape
         = jt::dh::createShapeRect({ expected.width(), expected.height() }, jt::colors::Green, tm);
 
@@ -26,6 +29,7 @@ TEST(CreateRectShapeTest, Color)
 {
     auto const col = jt::colors::Green;
     auto tm = std::make_shared<jt::TextureManagerImpl>();
+    tm->setRenderer(getRenderTarget());
     auto const shape = jt::dh::createShapeRect({ 3.0f, 4.0f }, col, tm);
     ASSERT_EQ(shape->getColor(), col);
 }
@@ -33,6 +37,7 @@ TEST(CreateRectShapeTest, Color)
 TEST(CreateCircleShapeTest, NoNullptr)
 {
     auto tm = std::make_shared<jt::TextureManagerImpl>();
+    tm->setRenderer(getRenderTarget());
     auto const shape = jt::dh::createShapeCircle(1.0f, jt::colors::Green, tm);
     ASSERT_NE(shape, nullptr);
 }
@@ -41,8 +46,9 @@ TEST(CreateVignetteTest, NoNullptr)
 {
     float const x = 150.0f;
     float const y = 50.0f;
-    auto textureManager = std::make_shared<jt::TextureManagerImpl>();
-    auto const vignette = jt::dh::createVignette({ x, y }, textureManager);
+    auto tm = std::make_shared<jt::TextureManagerImpl>();
+    tm->setRenderer(getRenderTarget());
+    auto const vignette = jt::dh::createVignette({ x, y }, tm);
     ASSERT_NE(vignette, nullptr);
 }
 
@@ -50,8 +56,9 @@ TEST(CreateVignetteTest, Size)
 {
     float const x = 150.0f;
     float const y = 50.0f;
-    auto textureManager = std::make_shared<jt::TextureManagerImpl>();
-    auto const vignette = jt::dh::createVignette({ x, y }, textureManager);
+    auto tm = std::make_shared<jt::TextureManagerImpl>();
+    tm->setRenderer(getRenderTarget());
+    auto const vignette = jt::dh::createVignette({ x, y }, tm);
     ASSERT_FLOAT_EQ(vignette->getLocalBounds().width(), x);
     ASSERT_FLOAT_EQ(vignette->getLocalBounds().height(), y);
 }
@@ -60,8 +67,9 @@ TEST(CreateVignetteTest, Color)
 {
     float const x = 150.0f;
     float const y = 50.0f;
-    auto textureManager = std::make_shared<jt::TextureManagerImpl>();
-    auto const vignette = jt::dh::createVignette({ x, y }, textureManager);
+    auto tm = std::make_shared<jt::TextureManagerImpl>();
+    tm->setRenderer(getRenderTarget());
+    auto const vignette = jt::dh::createVignette({ x, y }, tm);
     ASSERT_EQ(vignette->getColor(), jt::colors::White);
 }
 

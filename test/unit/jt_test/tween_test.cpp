@@ -2,6 +2,7 @@
 #include "drawable_helpers.hpp"
 #include "mocks/mock_drawable.hpp"
 #include "mocks/mock_tween.hpp"
+#include "sdl_setup.hpp"
 #include "shape.hpp"
 #include "texture_manager_impl.hpp"
 #include "tweens/tween_alpha.hpp"
@@ -25,6 +26,7 @@ public:
     void SetUp() override
     {
         tm = std::make_shared<jt::TextureManagerImpl>();
+        tm->setRenderer(getRenderTarget());
         m_obj = jt::dh::createShapeRect(jt::Vector2 { 20.0f, 20.0f }, jt::colors::White, tm);
     }
 
