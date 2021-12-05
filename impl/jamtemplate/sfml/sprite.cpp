@@ -7,15 +7,17 @@ void Sprite::fromTexture(sf::Texture const& text) { m_sprite.setTexture(text); }
 
 void Sprite::loadSprite(std::string const& fileName)
 {
-    m_sprite = sf::Sprite { TextureManager::get(fileName) };
-    m_flashSprite = sf::Sprite { TextureManager::get(TextureManager::getFlashName(fileName)) };
+    m_sprite = sf::Sprite { StaticTextureManager::get(fileName) };
+    m_flashSprite
+        = sf::Sprite { StaticTextureManager::get(StaticTextureManager::getFlashName(fileName)) };
 }
 
 void Sprite::loadSprite(std::string const& fileName, jt::Recti const& rect)
 {
-    m_sprite = sf::Sprite { TextureManager::get(fileName), rect };
+    m_sprite = sf::Sprite { StaticTextureManager::get(fileName), rect };
     m_flashSprite
-        = sf::Sprite { TextureManager::get(TextureManager::getFlashName(fileName)), rect };
+        = sf::Sprite { StaticTextureManager::get(StaticTextureManager::getFlashName(fileName)),
+              rect };
 }
 
 void Sprite::setPosition(jt::Vector2 const& pos) { m_position = pos; }

@@ -1,7 +1,6 @@
 ﻿#ifndef GUARD_JAMTEMPLATE_TEXTUREMANAGER_HPP_INCLUDEGUARD
 #define GUARD_JAMTEMPLATE_TEXTUREMANAGER_HPP_INCLUDEGUARD
 
-#include "color.hpp"
 #include "render_target.hpp"
 #include <SFML/Graphics.hpp>
 #include <assert.h>
@@ -12,15 +11,11 @@
 
 namespace jt {
 
-class TextureManager {
+class StaticTextureManager {
 public:
     using TextureMapType = std::map<std::string, sf::Texture>;
-    TextureManager() = delete;
+    StaticTextureManager() = delete;
 
-    // get texture from string
-    // str can be any filename/filepath
-    // str can be a special string, e.g.
-    // - #b#100#200 will create a button with width 100 and height 200
     static sf::Texture& get(std::string const& str);
 
     // reset all stored textures

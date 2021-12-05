@@ -41,6 +41,6 @@ int main()
 
     game = nullptr;
     // TODO Pass TextureManager via DI to avoid explicitly resetting it here
-    jt::TextureManager::reset();
+    jt::StaticTextureManager::reset();
     return 0;
 }
