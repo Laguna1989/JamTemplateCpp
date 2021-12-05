@@ -9,7 +9,7 @@ namespace null_objects {
 class RenderWindowNull : public ::jt::RenderWindowInterface {
 public:
     void updateGui(float elapsed) override;
-    void renderGui() override;
+    void startRenderGui() override;
     RenderWindowNull(unsigned int width, unsigned int height, std::string const& title);
     bool isOpen() const override;
     void checkForClose() override;

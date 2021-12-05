@@ -40,6 +40,7 @@ int main()
     game->startGame(gameloop);
 
     game = nullptr;
+    // TODO Pass TextureManager via DI to avoid explicitly resetting it here
     jt::TextureManager::reset();
     return 0;
 }

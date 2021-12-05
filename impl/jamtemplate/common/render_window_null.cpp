@@ -41,4 +41,4 @@ bool jt::null_objects::RenderWindowNull::getMouseCursorVisible() const
 }
 void jt::null_objects::RenderWindowNull::updateGui(float elapsed) { }
 
-void jt::null_objects::RenderWindowNull::renderGui() { }
+void jt::null_objects::RenderWindowNull::startRenderGui() { }

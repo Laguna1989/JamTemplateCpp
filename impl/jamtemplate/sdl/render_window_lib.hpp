@@ -26,7 +26,7 @@ public:
     void setMouseCursorVisible(bool visible) override;
     bool getMouseCursorVisible() const override;
 
-    void renderGui() override;
+    void startRenderGui() override;
     void updateGui(float elapsed) override;
 
 private:
@@ -34,7 +34,7 @@ private:
     jt::Vector2 m_size;
     bool m_isMouseCursorVisible { true };
     bool m_isOpen { true };
-    bool m_renderGui {false};
+    bool m_renderGui { false };
 };
 } // namespace jt
 

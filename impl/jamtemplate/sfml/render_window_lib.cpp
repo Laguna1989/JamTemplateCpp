@@ -1,7 +1,7 @@
 ﻿#include "render_window_lib.hpp"
+#include "imgui-SFML.h"
 #include "sprite.hpp"
 #include <SFML/Graphics.hpp>
-#include "imgui-SFML.h"
 
 namespace jt {
 
@@ -46,7 +46,8 @@ void RenderWindow::draw(std::unique_ptr<jt::Sprite>& spr)
     m_window->draw(spr->getSFSprite());
 }
 
-void RenderWindow::display() {
+void RenderWindow::display()
+{
     if (m_renderGui) {
         ImGui::SFML::Render(*m_window.get());
     }
@@ -67,12 +68,11 @@ void RenderWindow::setMouseCursorVisible(bool visible)
 }
 bool RenderWindow::getMouseCursorVisible(void) const { return m_isMouseCursorVisible; }
 
-void RenderWindow::updateGui(float elapsed) {
+void RenderWindow::updateGui(float elapsed)
+{
     ImGui::SFML::Update(*m_window.get(), sf::seconds(elapsed));
 }
 
-void RenderWindow::renderGui() {
-    m_renderGui = true;
-}
+void RenderWindow::startRenderGui() { m_renderGui = true; }
 
 } // namespace jt

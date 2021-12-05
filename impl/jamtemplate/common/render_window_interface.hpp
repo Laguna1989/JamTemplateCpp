@@ -50,8 +50,7 @@ public:
 
     virtual void updateGui(float elapsed) = 0;
 
-    virtual void renderGui() = 0;
-
+    virtual void startRenderGui() = 0;
 };
 } // namespace jt
 #endif

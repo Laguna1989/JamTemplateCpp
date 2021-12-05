@@ -18,11 +18,10 @@ if (NOT imgui-sfml_POPULATED)
         FetchContent_Populate(imgui)
     endif ()
 
-    # Set relevant vars
+    # Set relevant variables
     set(IMGUI_DIR ${imgui_SOURCE_DIR})
     set(IMGUI_SFML_FIND_SFML CACHE BOOL OFF)
     set(IMGUI_SFML_IMGUI_DEMO CACHE BOOL ON)
-
 
     add_subdirectory(${imgui-sfml_SOURCE_DIR} ${imgui-sfml_BINARY_DIR} EXCLUDE_FROM_ALL)
 endif ()

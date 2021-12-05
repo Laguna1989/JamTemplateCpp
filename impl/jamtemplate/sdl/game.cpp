@@ -99,6 +99,7 @@ void Game::doDraw() const
     SDL_RenderCopyEx(getRenderTarget().get(), t, &sourceRect, &destRect, 0, nullptr, SDL_FLIP_NONE);
     m_renderWindow->display();
     SDL_RenderPresent(getRenderTarget().get());
+
     SDL_DestroyTexture(t);
 };
 

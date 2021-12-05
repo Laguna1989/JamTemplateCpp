@@ -1,3 +1,5 @@
+message(STATUS "Fetching ImGui")
+
 FetchContent_Declare(
         imgui
         GIT_REPOSITORY https://github.com/ocornut/imgui.git
@@ -6,7 +8,5 @@ FetchContent_Declare(
 
 FetchContent_GetProperties(imgui)
 if (NOT imgui_POPULATED)
-    message(STATUS "Fetching ImGui")
-
     FetchContent_Populate(imgui)
 endif ()

@@ -107,7 +107,7 @@ void RenderWindow::updateGui(float elapsed)
     io.MouseWheel = 0.0f;
 }
 
-void RenderWindow::renderGui()
+void RenderWindow::startRenderGui()
 {
     ImGui::NewFrame();
     m_renderGui = true;
