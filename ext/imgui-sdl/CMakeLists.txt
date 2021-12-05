@@ -1,9 +1,11 @@
 message(STATUS "Fetching imgui-sdl")
+
 FetchContent_Declare(
         imgui-sdl
-        GIT_REPOSITORY https://github.com/Tyyppi77/imgui_sdl.git
-        GIT_TAG master
+        GIT_REPOSITORY https://github.com/Laguna1989/imgui_sdl.git
+        GIT_TAG WebAssemblyInclude
 )
+
 FetchContent_Populate(imgui-sdl)
 FetchContent_GetProperties(imgui-sdl)
 
