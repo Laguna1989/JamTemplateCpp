@@ -20,7 +20,7 @@ private:
         std::size_t const number_of_objects = 20U;
         for (std::size_t i = 0U; i != number_of_objects; ++i) {
             auto shape = std::make_shared<jt::Shape>();
-            shape->makeRect(jt::Vector2 { 40.0f, 40.0f });
+            shape->makeRect(jt::Vector2 { 40.0f, 40.0f }, getGame()->getTextureManager());
             m_shapes.push_back(shape);
         }
     }

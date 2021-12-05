@@ -17,7 +17,7 @@ private:
     void doInternalCreate() override
     {
         m_shape = std::make_shared<jt::Shape>();
-        m_shape->makeRect({ 20.0f, 20.0f });
+        m_shape->makeRect({ 20.0f, 20.0f }, getGame()->getTextureManager());
     }
     void doInternalUpdate(float elapsed) override { m_shape->update(elapsed); }
     void doInternalDraw() const override { m_shape->draw(getGame()->getRenderTarget()); }
