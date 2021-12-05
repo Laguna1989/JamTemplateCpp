@@ -1,6 +1,5 @@
 #if !USE_SFML
 #include "sdl_setup.hpp"
-#include "texture_manager.hpp"
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_mixer.h>
 #include <SDL_ttf.h>
@@ -19,7 +18,8 @@ SDLSetup::SDLSetup()
     }
     SDL_SetRenderDrawBlendMode(renderTarget.get(), SDL_BLENDMODE_BLEND);
 
-    jt::TextureManager::setRenderer(renderTarget);
+    // TODO how to fix this?
+//    jt::TextureManager::setRenderer(renderTarget);
     TTF_Init();
 }
 

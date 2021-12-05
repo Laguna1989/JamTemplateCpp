@@ -4,6 +4,7 @@
 #if !USE_SFML
 #include <SDL2/SDL.h>
 #include <memory>
+#include "texture_manager_interface"
 
 struct SDLSetup {
     std::shared_ptr<SDL_Window> window;
