@@ -1,3 +1,4 @@
+message(STATUS "Fetching imgui-sfml")
 FetchContent_Declare(
         imgui-sfml
         GIT_REPOSITORY https://github.com/eliasdaler/imgui-sfml.git
@@ -9,8 +10,6 @@ set(SFML_DIR ${SFML_DIR_ROOT})
 FetchContent_GetProperties(imgui-sfml)
 
 if (NOT imgui-sfml_POPULATED)
-    message(STATUS "Fetching ImGui-SFML v${IMGUI_SFML_VERSION}")
-
     FetchContent_Populate(imgui-sfml)
 
     # Fetch ImGui if needed

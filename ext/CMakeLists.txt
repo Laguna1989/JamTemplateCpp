@@ -9,7 +9,10 @@ add_subdirectory(imgui)
 if (USE_SFML)
     add_subdirectory(sfml)
     add_subdirectory(imgui-sfml)
+else()
+    add_subdirectory(imgui-sdl)
 endif ()
+
 add_subdirectory(tileson)
 
 

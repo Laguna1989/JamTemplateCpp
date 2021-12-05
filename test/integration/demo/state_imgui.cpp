@@ -7,10 +7,12 @@ void StateImGui::doInternalCreate() {
 
 void StateImGui::doInternalUpdate(float elapsed) {
     getGame()->getRenderWindow()->updateGui(elapsed);
+
 }
 
 void StateImGui::doInternalDraw() const {
-    ImGui::ShowDemoWindow();
     getGame()->getRenderWindow()->renderGui();
+    ImGui::ShowDemoWindow();
+
 
 }

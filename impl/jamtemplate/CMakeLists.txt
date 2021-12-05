@@ -26,7 +26,11 @@ if (USE_SFML)
             )
 
 else ()
+    target_link_libraries(JamTemplate
+            imgui-sdl)
+
     target_include_directories(JamTemplate PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/sdl)
+
     if (NOT ENABLE_WEB)
         include_directories(JamTemplate ${SDL2_INCLUDE_DIRS})
 
@@ -35,7 +39,6 @@ else ()
                 PkgConfig::SDL2_Mixer
                 PkgConfig::SDL2_Image
                 PkgConfig::SDL2_TTF
-                imgui
                 )
     endif ()
 endif ()
