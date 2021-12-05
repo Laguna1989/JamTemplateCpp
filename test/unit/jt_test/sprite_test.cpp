@@ -6,7 +6,7 @@
 
 TEST(SpriteTest, SpriteCanBeDefaultConstructed)
 {
-    ASSERT_TRUE(std::is_default_constructible<jt::Sprite>::value);
+    ASSERT_FALSE(std::is_default_constructible<jt::Sprite>::value);
 }
 
 TEST(SpriteTest, SizeCorrectAfterLoadFullSprite)
@@ -19,38 +19,24 @@ TEST(SpriteTest, SizeCorrectAfterLoadFullSprite)
 
 TEST(SpriteTest, SizeCorrecrAfterLoadPartialSprite)
 {
-    jt::Sprite s;
-    s.loadSprite("assets/coin.png", jt::Recti { 0, 0, 16, 16 });
+    auto tm = std::make_shared<jt::TextureManagerImpl>();
+    jt::Sprite s { "assets/coin.png", jt::Recti { 0, 0, 16, 16 }, tm };
     ASSERT_FLOAT_EQ(s.getLocalBounds().width(), 16.0f);
     ASSERT_FLOAT_EQ(s.getLocalBounds().height(), 16.0f);
 }
 
-TEST(SpriteTest, InitialLocalBounds)
-{
-    jt::Sprite s;
-    jt::Rect expectedBounds { 0.0f, 0.0f, 0.0f, 0.0f };
-    ASSERT_EQ(s.getLocalBounds(), expectedBounds);
-}
-
-TEST(SpriteTest, InitialGlobalBounds)
-{
-    jt::Sprite s;
-    jt::Rect expectedBounds { 0.0f, 0.0f, 0.0f, 0.0f };
-    ASSERT_EQ(s.getGlobalBounds(), expectedBounds);
-}
-
 TEST(SpriteTest, CleanImage)
 {
-    jt::Sprite s;
-    s.loadSprite("assets/coin.png", jt::Recti { 0, 0, 16, 16 });
+    auto tm = std::make_shared<jt::TextureManagerImpl>();
+    jt::Sprite s { "assets/coin.png", jt::Recti { 0, 0, 16, 16 }, tm };
     s.cleanImage();
     SUCCEED();
 }
 
 TEST(SpriteTest, CleanImageAfterGetColor)
 {
-    jt::Sprite s;
-    s.loadSprite("assets/coin.png", jt::Recti { 0, 0, 16, 16 });
+    auto tm = std::make_shared<jt::TextureManagerImpl>();
+    jt::Sprite s { "assets/coin.png", jt::Recti { 0, 0, 16, 16 }, tm };
     s.getColorAtPixel(jt::Vector2u { 8, 0 });
     s.cleanImage();
     SUCCEED();
@@ -62,8 +48,8 @@ class SpriteGetPixelTestFixture
 
 TEST_P(SpriteGetPixelTestFixture, GetPixel)
 {
-    jt::Sprite s;
-    s.loadSprite("assets/coin.png", jt::Recti { 0, 0, 16, 16 });
+    auto tm = std::make_shared<jt::TextureManagerImpl>();
+    jt::Sprite s { "assets/coin.png", jt::Recti { 0, 0, 16, 16 }, tm };
     auto const pos = GetParam().first;
     auto const expected = GetParam().second;
     auto const result = s.getColorAtPixel(pos);

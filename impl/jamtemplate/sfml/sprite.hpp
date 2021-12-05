@@ -17,7 +17,9 @@ public:
 
     Sprite();
 
-    Sprite(std::string fileName,
+    Sprite(std::string const& fileName,
+        std::shared_ptr<jt::TextureManagerInterface> textureManager = nullptr);
+    Sprite(std::string const& fileName, jt::Recti const& rect,
         std::shared_ptr<jt::TextureManagerInterface> textureManager = nullptr);
 
     void loadSprite(std::string const& fileName);
