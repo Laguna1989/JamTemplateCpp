@@ -21,6 +21,7 @@ public:
 
     MOCK_METHOD(void, setupRenderTarget, (), (override));
     MOCK_METHOD(std::shared_ptr<jt::RenderWindowInterface>, getRenderWindow, (), (const, override));
+    MOCK_METHOD(std::shared_ptr<jt::TextureManagerInterface>, getTextureManager, (), (override));
     MOCK_METHOD(void, reset, (), (override));
 
 protected:

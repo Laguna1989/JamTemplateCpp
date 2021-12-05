@@ -1,5 +1,7 @@
 ﻿#include "sprite.hpp"
+#include "texture_manager_impl.hpp"
 #include <gtest/gtest.h>
+#include <memory>
 #include <type_traits>
 
 TEST(SpriteTest, SpriteCanBeDefaultConstructed)
@@ -9,8 +11,8 @@ TEST(SpriteTest, SpriteCanBeDefaultConstructed)
 
 TEST(SpriteTest, SizeCorrectAfterLoadFullSprite)
 {
-    jt::Sprite s;
-    s.loadSprite("assets/coin.png");
+    auto tm = std::make_shared<jt::TextureManagerImpl>();
+    jt::Sprite s { "assets/coin.png", tm };
     ASSERT_FLOAT_EQ(s.getLocalBounds().width(), 192.0f);
     ASSERT_FLOAT_EQ(s.getLocalBounds().height(), 16.0f);
 }

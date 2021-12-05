@@ -15,6 +15,8 @@ class Sprite : public DrawableImpl {
 public:
     using Sptr = std::shared_ptr<Sprite>;
 
+    Sprite();
+
     Sprite(std::string fileName,
         std::shared_ptr<jt::TextureManagerInterface> textureManager = nullptr);
 
