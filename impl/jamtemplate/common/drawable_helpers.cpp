@@ -34,8 +34,7 @@ std::shared_ptr<jt::Text> createText(std::weak_ptr<jt::renderTarget> rt, std::st
 
 std::shared_ptr<jt::Sprite> createVignette(jt::Vector2 const& size, std::shared_ptr<jt::TextureManagerInterface> textureManager)
 {
-    auto ptr = std::make_shared<jt::Sprite>();
-    ptr = std::make_shared<jt::Sprite>("#v#" + std::to_string(static_cast<int>(size.x())) + "#"
+    auto ptr = std::make_shared<jt::Sprite>("#v#" + std::to_string(static_cast<int>(size.x())) + "#"
         + std::to_string(static_cast<int>(size.y())), textureManager);
     ptr->setIgnoreCamMovement(true);
     return ptr;
