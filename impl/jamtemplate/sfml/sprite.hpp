@@ -22,9 +22,6 @@ public:
     Sprite(std::string const& fileName, jt::Recti const& rect,
         std::shared_ptr<jt::TextureManagerInterface> textureManager = nullptr);
 
-    void loadSprite(std::string const& fileName);
-    void loadSprite(std::string const& fileName, jt::Recti const& rect);
-
     // DO NOT CALL THIS FROM GAME CODE!
     void fromTexture(sf::Texture const& text);
 

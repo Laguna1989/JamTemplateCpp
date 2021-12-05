@@ -6,34 +6,22 @@ namespace jt {
 // TODO remove?
 Sprite::Sprite() { }
 
-Sprite::Sprite(std::string const& fileName, std::shared_ptr<jt::TextureManagerInterface> textureManager)
+Sprite::Sprite(
+    std::string const& fileName, std::shared_ptr<jt::TextureManagerInterface> textureManager)
 {
     m_sprite = sf::Sprite { textureManager->get(fileName) };
     m_flashSprite = sf::Sprite { textureManager->get(textureManager->getFlashName(fileName)) };
 }
 
-Sprite::Sprite(std::string const& fileName, jt::Recti const& rect, std::shared_ptr<jt::TextureManagerInterface> textureManager)
+Sprite::Sprite(std::string const& fileName, jt::Recti const& rect,
+    std::shared_ptr<jt::TextureManagerInterface> textureManager)
 {
     m_sprite = sf::Sprite { textureManager->get(fileName), rect };
-    m_flashSprite = sf::Sprite { textureManager->get(textureManager->getFlashName(fileName)), rect };
+    m_flashSprite
+        = sf::Sprite { textureManager->get(textureManager->getFlashName(fileName)), rect };
 }
 
 void Sprite::fromTexture(sf::Texture const& text) { m_sprite.setTexture(text); }
-
-void Sprite::loadSprite(std::string const& fileName)
-{
-    m_sprite = sf::Sprite { StaticTextureManager::get(fileName) };
-    m_flashSprite
-        = sf::Sprite { StaticTextureManager::get(StaticTextureManager::getFlashName(fileName)) };
-}
-
-void Sprite::loadSprite(std::string const& fileName, jt::Recti const& rect)
-{
-    m_sprite = sf::Sprite { StaticTextureManager::get(fileName), rect };
-    m_flashSprite
-        = sf::Sprite { StaticTextureManager::get(StaticTextureManager::getFlashName(fileName)),
-              rect };
-}
 
 void Sprite::setPosition(jt::Vector2 const& pos) { m_position = pos; }
 jt::Vector2 Sprite::getPosition() const { return m_position; }
