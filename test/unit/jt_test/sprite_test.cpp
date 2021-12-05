@@ -14,7 +14,7 @@ public:
 
 TEST_F(SpriteTestFixture, SpriteCanBeDefaultConstructed)
 {
-    ASSERT_FALSE(std::is_default_constructible<jt::Sprite>::value);
+    ASSERT_TRUE(std::is_default_constructible<jt::Sprite>::value);
 }
 
 TEST_F(SpriteTestFixture, SizeCorrectAfterLoadFullSprite)

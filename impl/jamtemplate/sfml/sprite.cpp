@@ -1,5 +1,4 @@
 ﻿#include "sprite.hpp"
-#include "texture_manager.hpp"
 
 namespace jt {
 

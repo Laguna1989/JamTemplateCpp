@@ -11,7 +11,6 @@
 #include "state_manager.hpp"
 #include "state_menu.hpp"
 #include <memory>
-#include <texture_manager.hpp>
 
 std::shared_ptr<jt::GameInterface> game;
 
@@ -43,7 +42,5 @@ int main()
     game->startGame(gameloop);
 
     game = nullptr;
-    // TODO Pass TextureManager via DI to avoid explicitly resetting it here
-    jt::StaticTextureManager::reset();
     return 0;
 }

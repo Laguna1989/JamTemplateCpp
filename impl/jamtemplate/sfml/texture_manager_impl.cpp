@@ -1,7 +1,6 @@
 #include "texture_manager_impl.hpp"
 #include "sprite_functions.hpp"
 #include "strutils.hpp"
-#include "texture_manager.hpp"
 #include <stdexcept>
 
 namespace jt {
