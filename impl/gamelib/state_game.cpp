@@ -20,13 +20,13 @@ void StateGame::doInternalCreate()
     using jt::TweenAlpha;
 
     m_background = std::make_shared<Shape>();
-    m_background->makeRect({ w, h });
+    m_background->makeRect({ w, h }, getGame()->getTextureManager());
     m_background->setColor(GP::PaletteBackground());
     m_background->setIgnoreCamMovement(true);
     m_background->update(0.0f);
 
     m_overlay = std::make_shared<Shape>();
-    m_overlay->makeRect(jt::Vector2 { w, h });
+    m_overlay->makeRect(jt::Vector2 { w, h }, getGame()->getTextureManager());
     m_overlay->setColor(jt::Color { 0, 0, 0 });
     m_overlay->setIgnoreCamMovement(true);
     m_overlay->update(0);

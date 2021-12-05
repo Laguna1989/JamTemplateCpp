@@ -17,10 +17,10 @@ public:
 
     Sprite();
 
-    Sprite(std::string const& fileName,
-        std::shared_ptr<jt::TextureManagerInterface> textureManager = nullptr);
+    Sprite(
+        std::string const& fileName, std::shared_ptr<jt::TextureManagerInterface> textureManager);
     Sprite(std::string const& fileName, jt::Recti const& rect,
-        std::shared_ptr<jt::TextureManagerInterface> textureManager = nullptr);
+        std::shared_ptr<jt::TextureManagerInterface> textureManager);
 
     // DO NOT CALL THIS FROM GAME CODE!
     void fromTexture(sf::Texture const& text);

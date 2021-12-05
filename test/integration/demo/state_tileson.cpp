@@ -11,18 +11,19 @@
 
 void StateTileson::doInternalCreate()
 {
-    m_tileLayerGround
-        = std::make_shared<jt::tilemap::TileLayer>("assets/tileson_test.json", "ground", getGame()->getTextureManager());
+    m_tileLayerGround = std::make_shared<jt::tilemap::TileLayer>(
+        "assets/tileson_test.json", "ground", getGame()->getTextureManager());
     m_tileLayerGround->setScreenSizeHint(jt::Vector2(400, 300));
 
-    m_tileLayerOverlay
-        = std::make_shared<jt::tilemap::TileLayer>("assets/tileson_test.json", "overlay", getGame()->getTextureManager());
+    m_tileLayerOverlay = std::make_shared<jt::tilemap::TileLayer>(
+        "assets/tileson_test.json", "overlay", getGame()->getTextureManager());
     m_tileLayerOverlay->setScreenSizeHint(jt::Vector2(400, 300));
 
     m_objectsLayer
         = std::make_shared<jt::tilemap::ObjectLayer>("assets/tileson_test.json", "objects");
 
-    m_nodeLayer = std::make_shared<jt::tilemap::NodeLayer>("assets/tileson_test.json", "ground");
+    m_nodeLayer = std::make_shared<jt::tilemap::NodeLayer>(
+        "assets/tileson_test.json", "ground", getGame()->getTextureManager());
     for (auto& t : m_nodeLayer->getAllTiles()) {
         add(t);
     }
@@ -129,7 +130,7 @@ void StateTileson::drawObjectLayer() const
     }
     for (auto& obj : m_objectsLayer->getObjects()) {
 
-        auto shape = jt::tilemap::createShapeFrom(obj);
+        auto shape = jt::tilemap::createShapeFrom(obj, getGame()->getTextureManager());
         shape->draw(getGame()->getRenderTarget());
     }
 }

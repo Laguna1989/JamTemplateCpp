@@ -6,18 +6,20 @@
 namespace jt {
 namespace dh {
 
-std::shared_ptr<jt::Shape> createShapeRect(jt::Vector2 const& size, jt::Color const& col)
+std::shared_ptr<jt::Shape> createShapeRect(jt::Vector2 const& size, jt::Color const& col,
+    std::shared_ptr<jt::TextureManagerInterface> textureManager)
 {
     auto ptr = std::make_shared<jt::Shape>();
-    ptr->makeRect(size);
+    ptr->makeRect(size, textureManager);
     ptr->setColor(col);
     return ptr;
 }
 
-std::shared_ptr<jt::Shape> createShapeCircle(float radius, Color const& col)
+std::shared_ptr<jt::Shape> createShapeCircle(
+    float radius, Color const& col, std::shared_ptr<jt::TextureManagerInterface> textureManager)
 {
     auto ptr = std::make_shared<jt::Shape>();
-    ptr->makeCircle(radius);
+    ptr->makeCircle(radius, textureManager);
     ptr->setColor(col);
     return ptr;
 }
@@ -32,10 +34,12 @@ std::shared_ptr<jt::Text> createText(std::weak_ptr<jt::renderTarget> rt, std::st
     return ptr;
 }
 
-std::shared_ptr<jt::Sprite> createVignette(jt::Vector2 const& size, std::shared_ptr<jt::TextureManagerInterface> textureManager)
+std::shared_ptr<jt::Sprite> createVignette(
+    jt::Vector2 const& size, std::shared_ptr<jt::TextureManagerInterface> textureManager)
 {
     auto ptr = std::make_shared<jt::Sprite>("#v#" + std::to_string(static_cast<int>(size.x())) + "#"
-        + std::to_string(static_cast<int>(size.y())), textureManager);
+            + std::to_string(static_cast<int>(size.y())),
+        textureManager);
     ptr->setIgnoreCamMovement(true);
     return ptr;
 }

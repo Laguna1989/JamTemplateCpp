@@ -4,7 +4,8 @@
 
 namespace jt {
 
-Bar::Bar(float width, float height, bool horizontal)
+Bar::Bar(float width, float height, bool horizontal,
+    std::shared_ptr<TextureManagerInterface> textureManager)
     : m_valueMax { 1.0f }
     , m_valueCurrent { 0.0f }
     , m_width { width }
@@ -12,16 +13,17 @@ Bar::Bar(float width, float height, bool horizontal)
     , m_horizontal { horizontal }
 {
     m_shapeFull = std::make_shared<jt::Shape>();
-    m_shapeFull->makeRect(jt::Vector2 { m_width, m_height });
+    m_shapeFull->makeRect(jt::Vector2 { m_width, m_height }, textureManager);
     m_shapeFull->setColor(jt::colors::Gray);
 
     m_shapeProgress = std::make_shared<jt::Shape>();
     if (m_horizontal) {
         auto const progressHeightFactor = 0.9f;
-        m_shapeProgress->makeRect(jt::Vector2 { m_width, m_height * progressHeightFactor });
+        m_shapeProgress->makeRect(
+            jt::Vector2 { m_width, m_height * progressHeightFactor }, textureManager);
         m_shapeProgress->setPosition(jt::Vector2 { 0, m_height * m_progressYOffsetFraction });
     } else {
-        m_shapeProgress->makeRect(jt::Vector2 { m_width - 2, m_height });
+        m_shapeProgress->makeRect(jt::Vector2 { m_width - 2, m_height }, textureManager);
         m_shapeProgress->setPosition(jt::Vector2 { 0 + 1, m_height });
     }
     m_shapeProgress->setColor(jt::colors::White);

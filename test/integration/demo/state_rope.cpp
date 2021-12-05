@@ -120,7 +120,8 @@ void StateRope::doInternalDraw() const
 
         auto const p = r->position;
         auto const size = static_cast<float>(2.0f * static_cast<float>(std::sqrt(r->mass)));
-        auto s = jt::dh::createShapeRect(jt::Vector2 { size, size });
+        auto s = jt::dh::createShapeRect(
+            jt::Vector2 { size, size }, jt::colors::White, getGame()->getTextureManager());
         s->setPosition(p);
         s->update(0.1f);
         s->draw(getGame()->getRenderTarget());

@@ -5,7 +5,8 @@
 namespace jt {
 namespace tilemap {
 
-NodeLayer::NodeLayer(std::string const& path, std::string const& layerName)
+NodeLayer::NodeLayer(std::string const& path, std::string const& layerName,
+    std::shared_ptr<jt::TextureManagerInterface> textureManager)
 {
     m_layerName = layerName;
     tson::Tileson parser;
@@ -16,12 +17,12 @@ NodeLayer::NodeLayer(std::string const& path, std::string const& layerName)
         throw std::invalid_argument { "tilemap json could not be parsed." };
     }
 
-    parseTiles();
+    parseTiles(textureManager);
 
     createNodeConnections();
 }
 
-void NodeLayer::parseTiles()
+void NodeLayer::parseTiles(std::shared_ptr<jt::TextureManagerInterface> textureManager)
 {
     for (auto& layer : m_map->getLayers()) {
         // skip all non-tile layers
@@ -49,7 +50,8 @@ void NodeLayer::parseTiles()
             }
 
             std::shared_ptr<jt::Shape> drawable = jt::dh::createShapeRect(
-                jt::Vector2 { static_cast<float>(ts.x - 1), static_cast<float>(ts.y - 1) }, color);
+                jt::Vector2 { static_cast<float>(ts.x - 1), static_cast<float>(ts.y - 1) }, color,
+                textureManager);
             Vector2 const positionInPixel
                 = jt::Vector2 { static_cast<float>(ts.x * posx), static_cast<float>(ts.y * posy) };
             drawable->setPosition(positionInPixel);
