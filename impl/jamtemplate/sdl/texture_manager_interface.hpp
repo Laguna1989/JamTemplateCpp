@@ -16,7 +16,6 @@ public:
     virtual std::shared_ptr<SDL_Texture> get(std::string const& str) = 0;
     virtual void reset() = 0;
     virtual std::string getFlashName(std::string const& str) = 0;
-    virtual void setRenderer(std::weak_ptr<jt::renderTarget> /*unused*/) = 0;
 };
 } // namespace jt
 

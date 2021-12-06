@@ -1,4 +1,5 @@
 #include "sdl_setup.hpp"
+#include "texture_manager_impl.hpp"
 
 #if !USE_SFML
 #include <SDL2/SDL.h>
@@ -19,8 +20,6 @@ SDLSetup::SDLSetup()
     }
     SDL_SetRenderDrawBlendMode(renderTarget.get(), SDL_BLENDMODE_BLEND);
 
-    // TODO how to fix this?
-//    jt::TextureManager::setRenderer(renderTarget);
     TTF_Init();
 }
 
@@ -33,5 +32,14 @@ std::shared_ptr<jt::renderTarget> getRenderTarget()
 #else
     static SDLSetup setup;
     return setup.renderTarget;
+#endif
+}
+
+std::shared_ptr<jt::TextureManagerInterface> getTextureManager()
+{
+#if USE_SFML
+    return std::make_shared<jt::TextureManagerImpl>();
+#else
+    return std::make_shared<jt::TextureManagerImpl>(getRenderTarget());
 #endif
 }

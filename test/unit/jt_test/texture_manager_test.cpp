@@ -7,14 +7,10 @@ using jt::TextureManagerImpl;
 
 class TextureManagerTest : public ::testing::Test {
 protected:
-    std::unique_ptr<jt::TextureManagerImpl> m_manager;
+    std::shared_ptr<jt::TextureManagerInterface> m_manager;
 
 public:
-    void SetUp() override
-    {
-        m_manager = std::make_unique<jt::TextureManagerImpl>();
-        m_manager->setRenderer(getRenderTarget());
-    }
+    void SetUp() override { m_manager = getTextureManager(); }
 };
 
 TEST_F(TextureManagerTest, ValidFileCanBeLoaded)

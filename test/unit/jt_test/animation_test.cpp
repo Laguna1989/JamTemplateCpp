@@ -8,11 +8,7 @@
 class AnimationTestFixtue : public ::testing::Test {
 public:
     std::shared_ptr<jt::TextureManagerInterface> tm { nullptr };
-    void SetUp() override
-    {
-        tm = std::make_shared<jt::TextureManagerImpl>();
-        tm->setRenderer(getRenderTarget());
-    }
+    void SetUp() override { tm = getTextureManager(); }
 };
 
 TEST_F(AnimationTestFixtue, IsDefaultConstructible)
@@ -64,8 +60,7 @@ protected:
     jt::Animation a;
     void SetUp() override
     {
-        tm = std::make_shared<jt::TextureManagerImpl>();
-        tm->setRenderer(getRenderTarget());
+        tm = getTextureManager();
         addAnimationWithFrameIndices();
     }
 
@@ -113,8 +108,7 @@ protected:
     jt::Animation a;
     void SetUp() override
     {
-        tm = std::make_shared<jt::TextureManagerImpl>();
-        tm->setRenderer(getRenderTarget());
+        tm = getTextureManager();
         a.add("assets/coin.png", "idle", { 16, 16 }, { 0, 1, 2, 3, 4 }, 1.0f, tm);
         a.play("idle");
     }

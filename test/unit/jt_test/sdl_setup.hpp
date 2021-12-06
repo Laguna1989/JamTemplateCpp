@@ -1,8 +1,9 @@
 #ifndef GUARD_JAMTEMAPLTE_SDL_SETUP_HPP
 #define GUARD_JAMTEMAPLTE_SDL_SETUP_HPP
 
-#include <memory>
 #include "render_target.hpp"
+#include "texture_manager_interface.hpp"
+#include <memory>
 
 #if !USE_SFML
 #include <SDL2/SDL.h>
@@ -16,5 +17,6 @@ struct SDLSetup {
 #endif
 
 std::shared_ptr<jt::renderTarget> getRenderTarget();
+std::shared_ptr<jt::TextureManagerInterface> getTextureManager();
 
 #endif // GUARD_JAMTEMAPLTE_SDL_SETUP_HPP

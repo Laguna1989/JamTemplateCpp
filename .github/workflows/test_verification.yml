@@ -9,6 +9,8 @@ on:
 jobs:
   LinuxSFML:
     runs-on: ubuntu-latest
+    env:
+      DISPLAY: :99.0
     steps:
       - name: Set up cmake
         uses: jwlawson/actions-setup-cmake@v1.10
@@ -171,6 +173,8 @@ jobs:
         run: emmake make
 
   CodeCoverage:
+    env:
+      DISPLAY: :99.0
     needs: LinuxSFML
     runs-on: ubuntu-latest
     steps:
@@ -187,17 +191,17 @@ jobs:
 
       - name: Set up system libs
         run: |
-            sudo apt-get install -y \
-            libsfml-dev \
-            jackd \
-            libx11-dev \
-            xorg-dev \
-            freeglut3-dev \
-            libudev-dev \
-            libopenal-dev \
-            libvorbis-dev \
-            libfreetype-dev \
-            libflac-dev
+          sudo apt-get install -y \
+          libsfml-dev \
+          jackd \
+          libx11-dev \
+          xorg-dev \
+          freeglut3-dev \
+          libudev-dev \
+          libopenal-dev \
+          libvorbis-dev \
+          libfreetype-dev \
+          libflac-dev
 
       - name: Set up cpp-coveralls
         run: pip install --user cpp-coveralls

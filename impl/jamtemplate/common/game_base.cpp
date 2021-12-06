@@ -3,7 +3,6 @@
 #include "game_state.hpp"
 #include "input/input_manager_interface.hpp"
 #include "state_manager.hpp"
-#include "texture_manager_impl.hpp"
 #include <exception>
 #include <iostream>
 #include <stdexcept>
@@ -34,8 +33,6 @@ GameBase::GameBase(std::shared_ptr<jt::RenderWindowInterface> renderWindow,
     if (m_stateManager == nullptr) {
         throw std::invalid_argument { "getStateManager DI for game can not be null" };
     }
-
-    m_textureManager = std::make_shared<jt::TextureManagerImpl>();
 }
 
 void GameBase::run()
