@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1638732007911,
+  "lastUpdate": 1638810288372,
   "repoUrl": "https://github.com/Laguna1989/JamTemplateCpp",
   "entries": {
     "Benchmark": [
@@ -1656,6 +1656,42 @@ window.BENCHMARK_DATA = {
             "value": 2.800053383399207,
             "unit": "ms/iter",
             "extra": "iterations: 253\ncpu: 2.7998577272727267 ms\nthreads: 1"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "laguna_1989@gmx.net",
+            "name": "Laguna1989",
+            "username": "Laguna1989"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "36604807da99ad4a07e1cc0d1ce81c079544a670",
+          "message": "Merge pull request #105 from Laguna1989/FEATURE_TextureManagerInterface\n\nFeature texture manager interface",
+          "timestamp": "2021-12-06T18:02:07+01:00",
+          "tree_id": "98d04595c36a286f4b1c470771e89cafdb13641d",
+          "url": "https://github.com/Laguna1989/JamTemplateCpp/commit/36604807da99ad4a07e1cc0d1ce81c079544a670"
+        },
+        "date": 1638810287231,
+        "tool": "googlecpp",
+        "benches": [
+          {
+            "name": "BM_StartGame",
+            "value": 0.0013137267166542638,
+            "unit": "ms/iter",
+            "extra": "iterations: 529198\ncpu: 0.001310235599907785 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GamestateWithTweeningShapes",
+            "value": 2.7378995664062433,
+            "unit": "ms/iter",
+            "extra": "iterations: 256\ncpu: 2.7374461953125007 ms\nthreads: 1"
           }
         ]
       }
