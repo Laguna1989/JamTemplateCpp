@@ -59,8 +59,7 @@ TEST(ParticleSystemTest, CreateDoesNotRaiseExceptionWhenGameInstanceIsSet)
     auto g = std::make_shared<::testing::NiceMock<MockGame>>();
     EXPECT_CALL(*g, getRenderTarget()).WillRepeatedly(::testing::Return(nullptr));
 
-    auto tm = std::make_shared<jt::TextureManagerImpl>();
-    tm->setRenderer(getRenderTarget());
+    auto tm = getTextureManager();
     jt::ParticleSystem<jt::Shape, 5> ps(
         [tm]() {
             auto s = std::make_shared<jt::Shape>();
@@ -75,8 +74,7 @@ TEST(ParticleSystemTest, CreateDoesNotRaiseExceptionWhenGameInstanceIsSet)
 
 TEST(ParticleSystemTest, UpdateCallDoesNotRaiseException)
 {
-    auto tm = std::make_shared<jt::TextureManagerImpl>();
-    tm->setRenderer(getRenderTarget());
+    auto tm = getTextureManager();
     jt::ParticleSystem<jt::Shape, 5> ps(
         [tm]() {
             auto s = std::make_shared<jt::Shape>();
@@ -94,8 +92,7 @@ TEST(ParticleSystemTest, DrawWithGame)
 {
     auto g = std::make_shared<::testing::NiceMock<MockGame>>();
     EXPECT_CALL(*g, getRenderTarget()).WillRepeatedly(::testing::Return(nullptr));
-    auto tm = std::make_shared<jt::TextureManagerImpl>();
-    tm->setRenderer(getRenderTarget());
+    auto tm = getTextureManager();
     jt::ParticleSystem<jt::Shape, 5> ps(
         [tm]() {
             auto s = std::make_shared<jt::Shape>();

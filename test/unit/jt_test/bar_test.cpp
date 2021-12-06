@@ -6,8 +6,7 @@
 
 TEST(BarTest, BarInitialValues)
 {
-    auto tm = std::make_shared<jt::TextureManagerImpl>();
-    tm->setRenderer(getRenderTarget());
+    auto tm = getTextureManager();
     float const x = 64.0f;
     float const y = 16.0f;
     jt::Bar b { x, y, true, tm };
@@ -19,8 +18,7 @@ TEST(BarTest, BarInitialValues)
 
 TEST(BarTest, SetMaxValueWillCorrectlySetValue)
 {
-    auto tm = std::make_shared<jt::TextureManagerImpl>();
-    tm->setRenderer(getRenderTarget());
+    auto tm = getTextureManager();
     jt::Bar b { 5.0f, 10.0f, true, tm };
 
     float const expected = 15.0f;
@@ -30,8 +28,7 @@ TEST(BarTest, SetMaxValueWillCorrectlySetValue)
 
 TEST(BarTest, SetNegativeMaxValueRaisesException)
 {
-    auto tm = std::make_shared<jt::TextureManagerImpl>();
-    tm->setRenderer(getRenderTarget());
+    auto tm = getTextureManager();
     jt::Bar b { 5.0f, 10.0f, true, tm };
     ASSERT_THROW(b.setMaxValue(-5.0f), std::invalid_argument);
 }
@@ -45,8 +42,7 @@ protected:
 
     void SetUp() override
     {
-        tm = std::make_shared<jt::TextureManagerImpl>();
-        tm->setRenderer(getRenderTarget());
+        auto tm = getTextureManager();
         bar = std::make_shared<jt::Bar>(5.0f, 10.0f, true, tm);
         max = GetParam().first;
         current = GetParam().second;
@@ -71,8 +67,7 @@ INSTANTIATE_TEST_SUITE_P(BarCurrentValueTest, BarCurrentValueTestFixture,
 
 TEST(BarTest, SetCurrentValueBelowZero)
 {
-    auto tm = std::make_shared<jt::TextureManagerImpl>();
-    tm->setRenderer(getRenderTarget());
+    auto tm = getTextureManager();
     jt::Bar b { 5.0f, 10.0f, true, tm };
 
     float const current = -1.5f;
@@ -84,8 +79,7 @@ TEST(BarTest, SetCurrentValueBelowZero)
 
 TEST(BarTest, SetCurrentValueAboveMaxValue)
 {
-    auto tm = std::make_shared<jt::TextureManagerImpl>();
-    tm->setRenderer(getRenderTarget());
+    auto tm = getTextureManager();
     jt::Bar b { 5.0f, 10.0f, true, tm };
 
     float const max = 100.0f;
@@ -100,8 +94,7 @@ TEST(BarTest, SetCurrentValueAboveMaxValue)
 
 TEST(BarTest, VerticalBar)
 {
-    auto tm = std::make_shared<jt::TextureManagerImpl>();
-    tm->setRenderer(getRenderTarget());
+    auto tm = getTextureManager();
     jt::Bar b { 5.0f, 100.0f, false, tm };
     b.update(0.1f);
     b.draw(nullptr);
@@ -111,8 +104,7 @@ TEST(BarTest, VerticalBar)
 
 TEST(BarTest, SetFrontColor)
 {
-    auto tm = std::make_shared<jt::TextureManagerImpl>();
-    tm->setRenderer(getRenderTarget());
+    auto tm = getTextureManager();
     jt::Bar b { 5.0f, 100.0f, true, tm };
     b.setFrontColor(jt::colors::Red);
     ASSERT_EQ(b.getColor(), jt::colors::Red);
@@ -120,8 +112,7 @@ TEST(BarTest, SetFrontColor)
 
 TEST(BarTest, SetBackgroundColor)
 {
-    auto tm = std::make_shared<jt::TextureManagerImpl>();
-    tm->setRenderer(getRenderTarget());
+    auto tm = getTextureManager();
     jt::Bar b { 5.0f, 100.0f, true, tm };
     b.setBackColor(jt::colors::Yellow);
     ASSERT_EQ(b.getBackColor(), jt::colors::Yellow);

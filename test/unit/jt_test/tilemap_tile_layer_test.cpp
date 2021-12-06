@@ -12,8 +12,7 @@ public:
 
     void SetUp() override
     {
-        textureManager = std::make_shared<jt::TextureManagerImpl>();
-        textureManager->setRenderer(getRenderTarget());
+        textureManager = getTextureManager();
 
         tileLayer = std::make_shared<jt::tilemap::TileLayer>(
             "assets/tileson_test.json", "ground", textureManager);
@@ -40,8 +39,7 @@ TEST_F(TilemapTileLayerTest, UpdateAndDraw)
 
 TEST_F(TilemapTileLayerTest, ParseInvalidFile)
 {
-    auto tm = std::make_shared<jt::TextureManagerImpl>();
-    tm->setRenderer(getRenderTarget());
+    auto tm = getTextureManager();
     auto func = [tm]() { TileLayer tl { "assets/non_existing.json", "blarb", tm }; };
     ASSERT_THROW(func(), std::invalid_argument);
 }

@@ -10,7 +10,6 @@ public:
     sf::Texture& get(std::string const& str) override;
     void reset() override;
     std::string getFlashName(std::string const& str) override;
-    void setRenderer(std::weak_ptr<jt::renderTarget> ptr) override;
 
 private:
     std::map<std::string, sf::Texture> m_textures;

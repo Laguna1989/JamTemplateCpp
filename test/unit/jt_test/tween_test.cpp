@@ -25,8 +25,7 @@ class TweenBaseTest : public ::testing::Test {
 public:
     void SetUp() override
     {
-        tm = std::make_shared<jt::TextureManagerImpl>();
-        tm->setRenderer(getRenderTarget());
+        tm = getTextureManager();
         m_obj = jt::dh::createShapeRect(jt::Vector2 { 20.0f, 20.0f }, jt::colors::White, tm);
     }
 

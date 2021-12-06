@@ -180,6 +180,11 @@ std::shared_ptr<SDL_Texture> loadTextureFromDisk(
 }
 } // namespace
 
+TextureManagerImpl::TextureManagerImpl(std::weak_ptr<jt::renderTarget> renderer)
+{
+    m_renderer = renderer;
+}
+
 std::shared_ptr<SDL_Texture> TextureManagerImpl::get(std::string const& str)
 {
     if (str.empty()) {

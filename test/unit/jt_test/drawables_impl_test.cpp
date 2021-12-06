@@ -5,7 +5,6 @@
 #include <gtest/gtest.h>
 #include <memory>
 
-
 class DrawableImplTestFixture
     : public ::testing::TestWithParam<std::shared_ptr<DrawableFactoryInterface>> {
 protected:
@@ -13,8 +12,7 @@ protected:
     std::shared_ptr<jt::TextureManagerInterface> tm { nullptr };
     void SetUp() override
     {
-        tm = std::make_shared<jt::TextureManagerImpl>();
-        tm->setRenderer(getRenderTarget());
+        tm = getTextureManager();
         drawable = GetParam()->createDrawable(tm);
     }
 };
@@ -87,7 +85,6 @@ TEST_P(DrawableImplTestFixture, GetScaleAfterSetScale)
     drawable->setScale(expected);
     ASSERT_EQ(drawable->getScale(), expected);
 }
-
 
 TEST_P(DrawableImplTestFixture, DrawWithoutUpdate) { drawable->draw(getRenderTarget()); }
 

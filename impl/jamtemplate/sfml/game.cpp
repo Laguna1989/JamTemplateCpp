@@ -3,6 +3,7 @@
 #include "rect.hpp"
 #include "render_window.hpp"
 #include "sprite.hpp"
+#include "texture_manager_impl.hpp"
 #include "vector.hpp"
 
 namespace {
@@ -22,6 +23,7 @@ Game::Game(std::shared_ptr<RenderWindowInterface> window,
     : GameBase { window, input, musicPlayer, camera, stateManager }
 {
     m_sprite_for_drawing = std::make_unique<jt::Sprite>();
+    m_textureManager = std::make_shared<jt::TextureManagerImpl>();
 }
 
 void Game::setupRenderTarget()

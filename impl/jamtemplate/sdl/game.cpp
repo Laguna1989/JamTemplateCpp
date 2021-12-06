@@ -32,7 +32,7 @@ Game::Game(std::shared_ptr<RenderWindowInterface> window,
 
     m_renderTarget = getRenderWindow()->createRenderTarget();
     TTF_Init();
-    getTextureManager()->setRenderer(m_renderTarget);
+    m_textureManager = std::make_shared<jt::TextureManagerImpl>(m_renderTarget);
 
     // important fix for SDL_Mixer: OpenAudio has to be called before Mix_Init,
     // otherwise ogg is not supported.

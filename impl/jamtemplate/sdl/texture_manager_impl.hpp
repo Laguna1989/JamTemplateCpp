@@ -12,14 +12,13 @@ namespace jt {
 
 class TextureManagerImpl : public jt::TextureManagerInterface {
 public:
+    TextureManagerImpl(std::weak_ptr<jt::renderTarget> renderer);
     std::shared_ptr<SDL_Texture> get(std::string const& str);
 
     // reset all stored images
     void reset();
 
     std::string getFlashName(std::string const& str);
-
-    void setRenderer(std::weak_ptr<jt::renderTarget> renderer) { m_renderer = renderer; };
 
 private:
     std::map<std::string, std::shared_ptr<SDL_Texture>> m_textures;

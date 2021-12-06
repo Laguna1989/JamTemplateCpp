@@ -13,8 +13,7 @@ public:
     std::shared_ptr<jt::Button> b { nullptr };
     void SetUp() override
     {
-        tm = std::make_shared<jt::TextureManagerImpl>();
-        tm->setRenderer(getRenderTarget());
+        tm = getTextureManager();
         b = std::make_shared<jt::Button>(jt::Vector2u { 32, 16 }, tm);
     }
 };
