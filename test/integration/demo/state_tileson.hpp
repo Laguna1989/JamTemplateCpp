@@ -18,6 +18,7 @@ class TileLayer;
 class StateTileson : public jt::GameState {
 public:
     StateTileson() = default;
+    std::string getName() const override;
 
 private:
     std::shared_ptr<jt::tilemap::TileLayer> m_tileLayerGround;

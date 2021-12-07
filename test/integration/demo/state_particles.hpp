@@ -12,6 +12,9 @@ constexpr std::size_t numberOfParticles = 5000;
 constexpr std::size_t toFire = 20;
 
 class StateParticles : public jt::GameState {
+public:
+    std::string getName() const override;
+
 private:
     void doInternalCreate() override;
     void doInternalUpdate(float elapsed) override;

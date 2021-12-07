@@ -8,6 +8,9 @@
 #include "swarm_object.hpp"
 
 class StateSwarmObjects : public jt::GameState {
+public:
+    std::string getName() const override;
+
 private:
     jt::Shape::Sptr m_overlay;
     jt::Shape::Sptr m_sky;

@@ -93,3 +93,4 @@ void StateGame::endGame()
         [this]() { getGame()->getStateManager()->switchState(std::make_shared<StateMenu>()); });
     add(tw);
 }
+std::string StateGame::getName() const { return "Game"; }

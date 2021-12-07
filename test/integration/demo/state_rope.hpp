@@ -3,6 +3,7 @@
 
 #include "game_state.hpp"
 #include "vector.hpp"
+#include <string>
 #include <vector>
 
 struct RopeMass {
@@ -15,6 +16,9 @@ struct RopeMass {
 };
 
 class StateRope : public jt::GameState {
+public:
+    std::string getName() const override;
+
 private:
     jt::Vector2 getRopeMassPosition(int i) const;
     std::shared_ptr<RopeMass> createRopeMassPointer(int i) const;

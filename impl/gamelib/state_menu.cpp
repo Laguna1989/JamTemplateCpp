@@ -16,8 +16,6 @@
 #include "tweens/tween_scale.hpp"
 #include <algorithm>
 
-StateMenu::StateMenu() = default;
-
 void StateMenu::doInternalCreate()
 {
     createMenuText();
@@ -201,3 +199,4 @@ void StateMenu::doInternalDraw() const
     m_overlay->draw(getGame()->getRenderTarget());
     m_vignette->draw(getGame()->getRenderTarget());
 }
+std::string StateMenu::getName() const { return "Menu"; }

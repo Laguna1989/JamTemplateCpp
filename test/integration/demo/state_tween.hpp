@@ -5,6 +5,9 @@
 #include "shape.hpp"
 
 class StateTween : public jt::GameState {
+public:
+    std::string getName() const override;
+
 private:
     jt::Shape::Sptr m_overlayR;
     jt::Shape::Sptr m_overlayG;

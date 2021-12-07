@@ -92,3 +92,4 @@ void StateScroll::doInternalDraw() const
 
     m_line->draw(getGame()->getRenderTarget());
 }
+std::string StateScroll::getName() const { return "Move Cam"; }

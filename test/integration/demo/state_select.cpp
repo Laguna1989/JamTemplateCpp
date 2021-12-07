@@ -2,6 +2,7 @@
 #include "state_box2d.hpp"
 #include "state_explosion.hpp"
 #include "state_gradient.hpp"
+#include "state_imgui.hpp"
 #include "state_particles.hpp"
 #include "state_pathfinding.hpp"
 #include "state_rope.hpp"
@@ -9,7 +10,6 @@
 #include "state_swarmobjects.hpp"
 #include "state_tileson.hpp"
 #include "state_tween.hpp"
-#include "state_imgui.hpp"
 
 void StateSelect::doInternalCreate()
 {
@@ -35,3 +35,4 @@ void StateSelect::doInternalDraw() const
 {
     // nothing to do here
 }
+std::string StateSelect::getName() const { return "Demo Select"; }

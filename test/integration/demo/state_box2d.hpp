@@ -13,6 +13,7 @@ private:
 
     jt::Bar::Sptr m_bar1;
     jt::Bar::Sptr m_bar2;
+    std::string getName() const override;
 
     void doInternalCreate() override;
     void doInternalUpdate(float const /*elapsed*/) override;

@@ -134,3 +134,4 @@ void StatePathfinding::resetTiles()
         t->reset();
     }
 }
+std::string StatePathfinding::getName() const { return "Pathfinding"; }

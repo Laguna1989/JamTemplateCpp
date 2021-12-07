@@ -32,11 +32,6 @@ void Actor::walkAlongPath(float const elapsed)
     if (nextTileIt != m_path.end()) {
         auto const nextTilePos = nextTileIt->lock()->getTilePosition();
 
-        // TODO make this a separate function checking for adjacent duplicate entries in m_path
-        //        if (nextTilePos == oldTilePos) {
-        //            // do not wait on last positions when queuing
-        //            m_path.erase(m_path.begin());
-        //        }
         auto const newPos = jt::Vector2 { nextTilePos.x() * 32.0f, nextTilePos.y() * 32.0f };
         jt::Vector2 const diff = newPos - oldPos;
         finalPos += diff * factor;

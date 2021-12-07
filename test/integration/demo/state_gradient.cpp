@@ -82,3 +82,4 @@ void StateGradient::doInternalDraw() const
         s->draw(getGame()->getRenderTarget());
     }
 }
+std::string StateGradient::getName() const { return "Palettes"; }

@@ -15,6 +15,8 @@ class Sprite;
 class Hud;
 
 class StateGame : public jt::GameState {
+public:
+    std::string getName() const override;
 
 private:
     std::shared_ptr<jt::Shape> m_background;

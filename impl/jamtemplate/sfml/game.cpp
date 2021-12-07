@@ -24,10 +24,12 @@ Game::Game(std::shared_ptr<RenderWindowInterface> window,
 {
     m_sprite_for_drawing = std::make_unique<jt::Sprite>();
     m_textureManager = std::make_shared<jt::TextureManagerImpl>();
+    m_logger->debug("Game constructor done", { "jt" });
 }
 
 void Game::setupRenderTarget()
 {
+    m_logger->debug("Game setupRenderTarget", { "jt" });
     m_renderTarget = getRenderWindow()->createRenderTarget();
     if (m_renderTarget == nullptr) {
         return;
@@ -47,6 +49,7 @@ void Game::setupRenderTarget()
 
 void Game::startGame(GameLoopFunctionPtr gameloop_function)
 {
+    m_logger->debug("startGame", { "jt" });
     setupRenderTarget();
     while (getRenderWindow()->isOpen()) {
         getRenderWindow()->checkForClose();
@@ -56,6 +59,7 @@ void Game::startGame(GameLoopFunctionPtr gameloop_function)
 
 void Game::doUpdate(float const elapsed)
 {
+    m_logger->verbose("update game, elapsed=" + std::to_string(elapsed), { "jt" });
     m_stateManager->getCurrentState()->update(elapsed);
 
     getCamera()->update(elapsed);
@@ -76,10 +80,11 @@ void Game::doUpdate(float const elapsed)
             jt::Vector2 { static_cast<float>(camOffsetix), static_cast<float>(camOffsetiy) });
         DrawableImpl::setCamOffset(-1.0f * (m_view->getCenter() - m_view->getSize() / 2.0f));
     }
-};
+}
 
 void Game::doDraw() const
 {
+    m_logger->verbose("draw game", { "jt" });
     if (!m_renderTarget) {
         return;
     }

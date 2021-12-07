@@ -127,3 +127,4 @@ void StateRope::doInternalDraw() const
         s->draw(getGame()->getRenderTarget());
     }
 }
+std::string StateRope::getName() const { return "Rope"; }

@@ -12,6 +12,9 @@ using ::testing::_;
 
 #ifndef ENABLE_WEB
 class GameStateImpl : public GameState {
+public:
+    std::string getName() const override { return "GameStateImpl"; }
+
 private:
     virtual void doInternalDraw() const override { }
     virtual void doInternalCreate() override { }

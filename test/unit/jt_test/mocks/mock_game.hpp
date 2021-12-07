@@ -2,10 +2,16 @@
 #define INCLUDE_MOCKGAME_HPP
 
 #include "game_interface.hpp"
+#include "logging/logger_null.hpp"
 #include <gmock/gmock.h>
 
 class MockGame : public jt::GameInterface {
 public:
+    MockGame()
+    {
+        ON_CALL(*this, getLogger)
+            .WillByDefault(::testing::Return(std::make_shared<jt::null_objects::LoggerNull>()));
+    }
     MOCK_METHOD(std::shared_ptr<jt::InputManagerInterface>, input, (), (override));
     MOCK_METHOD(std::shared_ptr<jt::MusicPlayerInterface>, getMusicPlayer, (), (override));
 
@@ -23,6 +29,7 @@ public:
     MOCK_METHOD(std::shared_ptr<jt::RenderWindowInterface>, getRenderWindow, (), (const, override));
     MOCK_METHOD(std::shared_ptr<jt::TextureManagerInterface>, getTextureManager, (), (override));
     MOCK_METHOD(void, reset, (), (override));
+    MOCK_METHOD(std::shared_ptr<jt::LoggerInterface>, getLogger, (), (override));
 
 protected:
     MOCK_METHOD(std::weak_ptr<jt::GameInterface>, getPtr, (), (override));
