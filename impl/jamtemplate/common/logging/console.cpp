@@ -91,6 +91,8 @@ void Console::clearInput() const { strcpy_s(m_inputBuffer.data(), 500, ""); }
 
 void Console::renderOneLogEntry(jt::LogEntry const& entry) const
 {
+    // TODO filter by tag
+    // TODO optional print filter
     ImVec4 color { 1.0f, 1.0f, 1.0f, 1.0f };
     std::string tagText = "";
     for (auto& t : entry.tags) {

@@ -1,5 +1,6 @@
 ﻿#include "game_state.hpp"
 #include "game_interface.hpp"
+#include "logging/console.hpp"
 #include "tweens/tween_base.hpp"
 #include <algorithm>
 
@@ -41,11 +42,13 @@ void GameState::internalCreate()
     m_tweens.clear();
     m_tweensToAdd.clear();
     doInternalCreate();
+    add(std::make_shared<jt::Console>(getGame()->getLogger()));
     start();
 }
 
 void GameState::internalUpdate(float elapsed)
 {
+    getGame()->getRenderWindow()->updateGui(elapsed);
     if (m_doAutoUpdateObjects) {
         updateObjects(elapsed);
     }
@@ -57,6 +60,7 @@ void GameState::internalUpdate(float elapsed)
 
 void GameState::internalDraw() const
 {
+    getGame()->getRenderWindow()->startRenderGui();
     if (m_doAutoDraw) {
         drawObjects();
     }

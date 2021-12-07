@@ -17,8 +17,6 @@ private:
     void doInternalCreate() override;
     void doInternalUpdate(float elapsed) override;
     void doInternalDraw() const override;
-
-    std::shared_ptr<jt::Console> m_console;
 };
 
 #endif // GUARD_JAMTEMPLATE_STATE_IMGUI_HPP

@@ -6,15 +6,10 @@
 #include "state_select.hpp"
 #include <iostream>
 
-void StateImGui::doInternalCreate()
-{
-    m_console = std::make_shared<jt::Console>(getGame()->getLogger());
-    add(m_console);
-}
+void StateImGui::doInternalCreate() { }
 
 void StateImGui::doInternalUpdate(float elapsed)
 {
-    getGame()->getRenderWindow()->updateGui(elapsed);
     auto mouse = getGame()->input()->mouse();
     if (mouse->justPressed(jt::MouseButtonCode::MBLeft)) {
         getGame()->getLogger()->debug("mouse button pressed", { "Game", "other Tag" });
@@ -28,9 +23,5 @@ void StateImGui::doInternalUpdate(float elapsed)
     }
 }
 
-void StateImGui::doInternalDraw() const
-{
-    getGame()->getRenderWindow()->startRenderGui();
-    ImGui::ShowDemoWindow();
-}
+void StateImGui::doInternalDraw() const { ImGui::ShowDemoWindow(); }
 std::string StateImGui::getName() const { return "Dear ImGui"; }
