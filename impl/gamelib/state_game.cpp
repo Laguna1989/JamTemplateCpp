@@ -4,7 +4,6 @@
 #include "game_interface.hpp"
 #include "game_properties.hpp"
 #include "hud/hud.hpp"
-#include "logging/console.hpp"
 #include "shape.hpp"
 #include "sprite.hpp"
 #include "state_menu.hpp"

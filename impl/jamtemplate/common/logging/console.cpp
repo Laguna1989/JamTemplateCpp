@@ -15,6 +15,9 @@ Console::Console(std::shared_ptr<jt::LoggerInterface> target)
 void Console::doUpdate(float const elapsed)
 {
     handleCommand();
+    if (!getGame()->input() || !getGame()->input()->keyboard()) {
+        return;
+    }
     if (getGame()->input()->keyboard()->justPressed(jt::KeyCode::Home)) {
 
         m_showConsole = !m_showConsole;

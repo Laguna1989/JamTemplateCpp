@@ -1,10 +1,7 @@
 #include "state_imgui.hpp"
 #include "game_interface.hpp"
 #include "imgui.h"
-#include "logging/console.hpp"
-#include "logging/logger.hpp"
 #include "state_select.hpp"
-#include <iostream>
 
 void StateImGui::doInternalCreate() { }
 

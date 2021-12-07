@@ -4,11 +4,6 @@
 #include "game_state.hpp"
 #include <string>
 
-namespace jt {
-class Console;
-
-} // namespace jt
-
 class StateImGui : public ::jt::GameState {
 public:
     std::string getName() const override;
