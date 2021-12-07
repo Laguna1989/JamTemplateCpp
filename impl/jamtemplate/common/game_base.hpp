@@ -3,6 +3,8 @@
 
 #include "game_interface.hpp"
 #include "game_object.hpp"
+#include "logging/console.hpp"
+#include "logging/logger_interface.hpp"
 #include "music_player_interface.hpp"
 #include "render_target.hpp"
 #include "vector.hpp"
@@ -36,6 +38,8 @@ public:
 
     std::shared_ptr<jt::TextureManagerInterface> getTextureManager() override;
 
+    std::shared_ptr<jt::LoggerInterface> getLogger() override;
+
     void reset() override;
 
 protected:
@@ -52,6 +56,8 @@ protected:
     std::shared_ptr<jt::renderTarget> m_renderTarget { nullptr };
 
     std::shared_ptr<jt::TextureManagerInterface> m_textureManager { nullptr };
+
+    std::shared_ptr<jt::LoggerInterface> m_logger { nullptr };
 
     std::chrono::steady_clock::time_point m_timeLast {};
 

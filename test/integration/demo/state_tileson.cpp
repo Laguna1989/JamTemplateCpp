@@ -149,3 +149,4 @@ void StateTileson::calculatePath(jt::pathfinder::NodeT start, jt::pathfinder::No
 
     m_actor->setPath(path);
 }
+std::string StateTileson::getName() const { return "Tilemap"; }

@@ -3,6 +3,7 @@
 
 #include "cam_interface.hpp"
 #include "input/input_manager_interface.hpp"
+#include "logging/logger_interface.hpp"
 #include "music_player_interface.hpp"
 #include "render_target.hpp"
 #include "render_window_interface.hpp"
@@ -59,6 +60,8 @@ public:
     virtual std::shared_ptr<jt::renderTarget> getRenderTarget() const = 0;
 
     virtual std::shared_ptr<jt::TextureManagerInterface> getTextureManager() = 0;
+
+    virtual std::shared_ptr<jt::LoggerInterface> getLogger() = 0;
 
     virtual void reset() = 0;
 

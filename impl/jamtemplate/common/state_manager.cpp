@@ -25,6 +25,7 @@ void StateManager::doSwitchState(std::weak_ptr<GameInterface> gameInstance)
     if (g) {
         g->reset();
     }
+    g->getLogger()->info("SwitchState", { "jt" });
     m_nextState->setGameInstance(gameInstance);
     m_nextState->create();
 

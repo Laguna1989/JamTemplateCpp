@@ -125,3 +125,4 @@ void StateBox2d::CreatePlayer()
         add(tw);
     }
 }
+std::string StateBox2d::getName() const { return "Box2D"; }

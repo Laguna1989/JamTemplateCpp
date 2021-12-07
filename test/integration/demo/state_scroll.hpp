@@ -9,6 +9,9 @@
 #include "text.hpp"
 
 class StateScroll : public jt::GameState {
+public:
+    std::string getName() const override;
+
 private:
     jt::Shape::Sptr m_shape1;
     jt::Animation::Sptr m_anim;

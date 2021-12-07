@@ -77,3 +77,4 @@ void StateTween::doInternalDraw() const
     m_overlayG->draw(getGame()->getRenderTarget());
     m_overlayB->draw(getGame()->getRenderTarget());
 }
+std::string StateTween::getName() const { return "Tweens"; }

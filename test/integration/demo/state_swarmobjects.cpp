@@ -113,3 +113,4 @@ void StateSwarmObjects::doInternalDraw() const
 }
 
 void StateSwarmObjects::drawSky() const { m_sky->draw(getGame()->getRenderTarget()); }
+std::string StateSwarmObjects::getName() const { return "Swarm Objects"; }

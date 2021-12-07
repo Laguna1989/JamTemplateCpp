@@ -21,6 +21,9 @@ private:
     }
     void doInternalUpdate(float elapsed) override { m_shape->update(elapsed); }
     void doInternalDraw() const override { m_shape->draw(getGame()->getRenderTarget()); }
+
+public:
+    std::string getName() const override { return "Performance StartGame"; }
 };
 
 static void BM_StartGame(benchmark::State& state)
@@ -33,6 +36,7 @@ static void BM_StartGame(benchmark::State& state)
         auto game = std::make_shared<jt::Game>(window, std::make_shared<jt::InputManagerNull>(),
             std::make_shared<jt::MusicPlayerNull>(), std::make_shared<jt::Camera>(1.0f),
             stateManager);
+        game->getLogger()->setLogLevel(LogLevel::LogLevelOff);
         stateManager->checkAndPerformSwitchState(game);
         game->update(0.02f);
         game->draw();

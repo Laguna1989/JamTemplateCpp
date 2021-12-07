@@ -1,11 +1,10 @@
 ﻿#include "game_state.hpp"
+#include "game_interface.hpp"
+#include "logging/console.hpp"
 #include "tweens/tween_base.hpp"
 #include <algorithm>
 
 namespace jt {
-
-GameState::GameState() = default;
-
 GameState ::~GameState()
 {
     m_tweens.clear();
@@ -39,14 +38,18 @@ void GameState::doDraw() const { internalDraw(); };
 
 void GameState::internalCreate()
 {
+    getGame()->getLogger()->debug("create GameState: " + getName(), { "jt" });
     m_tweens.clear();
     m_tweensToAdd.clear();
     doInternalCreate();
+    add(std::make_shared<jt::Console>(getGame()->getLogger()));
     start();
 }
 
 void GameState::internalUpdate(float elapsed)
 {
+    getGame()->getRenderWindow()->updateGui(elapsed);
+
     if (m_doAutoUpdateObjects) {
         updateObjects(elapsed);
     }
@@ -58,6 +61,7 @@ void GameState::internalUpdate(float elapsed)
 
 void GameState::internalDraw() const
 {
+    getGame()->getRenderWindow()->startRenderGui();
     if (m_doAutoDraw) {
         drawObjects();
     }

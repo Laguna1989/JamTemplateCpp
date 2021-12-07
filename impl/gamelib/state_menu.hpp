@@ -14,7 +14,7 @@ class Sprite;
 
 class StateMenu : public jt::GameState {
 public:
-    StateMenu();
+    std::string getName() const override;
 
     void setScore(int /*s*/) {};
 

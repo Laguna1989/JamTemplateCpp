@@ -124,3 +124,4 @@ void StateParticles::doInternalUpdate(float elapsed)
     }
 }
 void StateParticles::doInternalDraw() const { }
+std::string StateParticles::getName() const { return "Particles"; }

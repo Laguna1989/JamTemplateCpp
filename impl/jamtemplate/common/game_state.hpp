@@ -3,6 +3,7 @@
 
 #include "game_object.hpp"
 #include <memory>
+#include <string>
 #include <vector>
 
 namespace jt {
@@ -13,7 +14,6 @@ class Tween;
 class GameState : public GameObject {
 public:
     using Sptr = std::shared_ptr<GameState>;
-    GameState();
 
     virtual ~GameState();
 
@@ -66,6 +66,8 @@ public:
     /// Get auto draw of Objects
     /// \return
     bool getAutoDraw() const;
+
+    virtual std::string getName() const = 0;
 
 protected:
     void updateObjects(float elapsed);

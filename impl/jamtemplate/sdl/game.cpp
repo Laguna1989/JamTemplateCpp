@@ -42,6 +42,7 @@ Game::Game(std::shared_ptr<RenderWindowInterface> window,
     if (Mix_Init(MIX_INIT_OGG) != 0) {
         std::cout << "cannot Mix_Init: " << Mix_GetError() << std::endl;
     }
+    m_logger->debug("Game constructor done", { "jt" });
 }
 
 void Game::setupRenderTarget() { }
