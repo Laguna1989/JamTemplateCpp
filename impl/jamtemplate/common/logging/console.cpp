@@ -3,6 +3,7 @@
 #include "imgui.h"
 #include "strutils.hpp"
 #include <iostream>
+#include <string.h>
 
 namespace jt {
 
