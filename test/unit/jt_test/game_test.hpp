@@ -38,6 +38,7 @@ public:
         ON_CALL(*stateManager, getCurrentState).WillByDefault(::testing::Return(state));
 
         g = std::make_shared<jt::Game>(window, input, music_player, camera, stateManager);
+        state->setGameInstance(g);
     }
 };
 

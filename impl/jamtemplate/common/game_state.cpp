@@ -49,6 +49,7 @@ void GameState::internalCreate()
 void GameState::internalUpdate(float elapsed)
 {
     getGame()->getRenderWindow()->updateGui(elapsed);
+
     if (m_doAutoUpdateObjects) {
         updateObjects(elapsed);
     }

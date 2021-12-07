@@ -3,12 +3,16 @@
 
 #include "game_interface.hpp"
 #include "logging/logger_null.hpp"
+#include "render_window_null.hpp"
 #include <gmock/gmock.h>
 
 class MockGame : public jt::GameInterface {
 public:
     MockGame()
     {
+        ON_CALL(*this, getRenderWindow)
+            .WillByDefault(::testing::Return(
+                std::make_shared<jt::null_objects::RenderWindowNull>(100, 200, "abc")));
         ON_CALL(*this, getLogger)
             .WillByDefault(::testing::Return(std::make_shared<jt::null_objects::LoggerNull>()));
     }
