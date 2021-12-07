@@ -91,7 +91,7 @@ void Console::storeActionInCommand() const
     m_lastCommand = str;
     m_logger->action(str);
 }
-void Console::clearInput() const { strcpy_s(m_inputBuffer.data(), 500, ""); }
+void Console::clearInput() const { strcpy(m_inputBuffer.data(), ""); }
 
 void Console::renderOneLogEntry(jt::LogEntry const& entry) const
 {
