@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1638909851083,
+  "lastUpdate": 1638984853917,
   "repoUrl": "https://github.com/Laguna1989/JamTemplateCpp",
   "entries": {
     "Benchmark": [
@@ -1728,6 +1728,42 @@ window.BENCHMARK_DATA = {
             "value": 2.7942241832669565,
             "unit": "ms/iter",
             "extra": "iterations: 251\ncpu: 2.7940702310756973 ms\nthreads: 1"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "laguna_1989@gmx.net",
+            "name": "Laguna1989",
+            "username": "Laguna1989"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "b504e981872592cb1d39e7f593419e9d5e742462",
+          "message": "Merge pull request #107 from Laguna1989/FEATURE_LoggingTests\n\nAdd some tests for logger and loggerNull, and file output",
+          "timestamp": "2021-12-08T18:32:17+01:00",
+          "tree_id": "4a1cd2e4b44c3e4320389c28dfda10ce7a1c8056",
+          "url": "https://github.com/Laguna1989/JamTemplateCpp/commit/b504e981872592cb1d39e7f593419e9d5e742462"
+        },
+        "date": 1638984853353,
+        "tool": "googlecpp",
+        "benches": [
+          {
+            "name": "BM_StartGame",
+            "value": 0.24211552695845093,
+            "unit": "ms/iter",
+            "extra": "iterations: 12612\ncpu: 0.05246676268633048 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GamestateWithTweeningShapes",
+            "value": 3.509983448888963,
+            "unit": "ms/iter",
+            "extra": "iterations: 225\ncpu: 3.1270089866666675 ms\nthreads: 1"
           }
         ]
       }
