@@ -30,15 +30,7 @@ void Console::handleCommand() const
     if (m_lastCommand.empty()) {
         return;
     }
-
-    std::cout << m_lastCommand.size() << std::endl;
-    // TODO implement actual command callbacks
-    if (m_lastCommand == "clear") {
-        m_logger->clear();
-    } else {
-
-        m_logger->warning("unknown command '" + m_lastCommand + "'");
-    }
+    getGame()->getActionCommandManager()->executeCommand(m_lastCommand);
     m_lastCommand = "";
 }
 

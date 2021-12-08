@@ -1,4 +1,5 @@
 ﻿#include "game_base.hpp"
+#include "action_command_manager.hpp"
 #include "camera.hpp"
 #include "game_state.hpp"
 #include "input/input_manager_interface.hpp"
@@ -43,12 +44,28 @@ GameBase::GameBase(std::shared_ptr<jt::RenderWindowInterface> renderWindow,
     targetCout->setLogLevel(LogLevel::LogLevelInfo);
     m_logger->addLogTarget(targetCout);
     m_logger->addLogTarget(std::make_shared<jt::LogTargetFile>());
+
+    createActionCommandManager();
+}
+void GameBase::createActionCommandManager()
+{
+    m_actionCommandManager = std::make_shared<ActionCommandManager>(m_logger);
+
+    storeActionCommand(m_actionCommandManager->registerTemporaryCommand(
+        "help", [mgr = getActionCommandManager(), logger = getLogger()](auto /*str*/) {
+            for (auto& c : mgr->getAllCommands()) {
+                logger->action(c);
+            }
+        }));
+    storeActionCommand(m_actionCommandManager->registerTemporaryCommand(
+        "clear", [logger = getLogger()](auto /*str*/) { logger->clear(); }));
 }
 
 void GameBase::run()
 {
     try {
         getLogger()->verbose("run", { "jt" });
+        m_actionCommandManager->update();
         m_stateManager->checkAndPerformSwitchState(getPtr());
 
         auto const now = std::chrono::steady_clock::now();
@@ -103,5 +120,9 @@ std::shared_ptr<jt::TextureManagerInterface> GameBase::getTextureManager()
 }
 
 std::shared_ptr<jt::LoggerInterface> GameBase::getLogger() { return m_logger; }
+std::shared_ptr<jt::ActionCommandManagerInterface> GameBase::getActionCommandManager()
+{
+    return m_actionCommandManager;
+}
 
 } // namespace jt

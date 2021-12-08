@@ -2,6 +2,7 @@
 #define GUARD_JAMTEMPLATE_GAMEOBJECT_HPP_INCLUDEGUARD
 
 #include <memory>
+#include <vector>
 
 namespace jt {
 // forward declaration
@@ -66,6 +67,8 @@ public:
     /// NOTE: Do not modify or touch game here.
     void destroy();
 
+    void storeActionCommand(std::shared_ptr<void> commandCallback);
+
 protected:
     float m_age { 0.0f };
 
@@ -73,6 +76,8 @@ private:
     bool m_alive { true }; // is used to sort out "dead" game objects;
 
     std::weak_ptr<GameInterface> m_game;
+
+    std::vector<std::shared_ptr<void>> m_storedActionCommands;
 
     virtual void doCreate();
     virtual void doUpdate(float const /*elapsed*/);

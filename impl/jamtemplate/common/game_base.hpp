@@ -40,6 +40,8 @@ public:
 
     std::shared_ptr<jt::LoggerInterface> getLogger() override;
 
+    std::shared_ptr<jt::ActionCommandManagerInterface> getActionCommandManager() override;
+
     void reset() override;
 
 protected:
@@ -59,6 +61,8 @@ protected:
 
     std::shared_ptr<jt::LoggerInterface> m_logger { nullptr };
 
+    std::shared_ptr<jt::ActionCommandManagerInterface> m_actionCommandManager { nullptr };
+
     std::chrono::steady_clock::time_point m_timeLast {};
 
     std::weak_ptr<GameInterface> getPtr() override;
@@ -66,6 +70,7 @@ protected:
     // overwritten functions from GameObject
     virtual void doUpdate(float const elapsed) override = 0;
     virtual void doDraw() const override = 0;
+    void createActionCommandManager();
 };
 
 } // namespace jt
