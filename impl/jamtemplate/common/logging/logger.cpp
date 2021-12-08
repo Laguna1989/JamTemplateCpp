@@ -1,4 +1,7 @@
 #include "logger.hpp"
+#include <chrono>
+#include <sstream>
+#include <stdexcept>
 
 namespace jt {
 
@@ -51,11 +54,19 @@ void Logger::verbose(std::string const& string, std::vector<std::string> tags)
 
 void Logger::addLogTarget(std::shared_ptr<LogTargetInterface> target)
 {
+    if (target == nullptr) {
+        error("cannot add nullptr log target", { "jt" });
+        return;
+    }
     m_logTargets.push_back(target);
 }
 
 void Logger::addLogEntry(LogEntry entry)
 {
+    std::stringstream ss;
+    auto now = std::chrono::system_clock::now();
+    ss << std::chrono::system_clock::to_time_t(now);
+    entry.time = ss.str();
     for (auto& t : m_logTargets) {
         t->log(entry);
     }

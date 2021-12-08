@@ -10,7 +10,8 @@ namespace jt {
 Console::Console(std::shared_ptr<jt::LoggerInterface> target)
     : m_logger { target }
 {
-    m_inputBuffer.resize(500);
+    m_inputBufferAction.resize(500);
+    m_inputBufferFilter.resize(200);
 }
 
 void Console::doUpdate(float const elapsed)
@@ -45,6 +46,15 @@ void Console::doDraw() const
 {
     if (m_showConsole) {
         ImGui::Begin("Console", &m_showConsole);
+
+        drawFilter();
+
+        ImGui::Checkbox("Time", &m_drawTime);
+        ImGui::SameLine();
+        ImGui::Checkbox("Level", &m_drawLevel);
+        ImGui::SameLine();
+        ImGui::Checkbox("Tags", &m_drawTag);
+
         // Display contents in a scrolling region
         ImGui::TextColored(ImVec4(1, 1, 0, 1), "");
         const float footer_height_to_reserve
@@ -62,12 +72,19 @@ void Console::doDraw() const
         ImGui::End();
     }
 }
+
+void Console::drawFilter() const
+{
+    ImGui::InputText("Filter", m_inputBufferFilter.data(), m_inputBufferFilter.size());
+}
+
 void Console::storeInputInCommand() const
 {
     bool reclaim_focus = false;
     // TODO history and callback completion
     ImGuiInputTextFlags input_text_flags = ImGuiInputTextFlags_EnterReturnsTrue;
-    if (ImGui::InputText("Input", m_inputBuffer.data(), m_inputBuffer.size(), input_text_flags)) {
+    if (ImGui::InputText(
+            "Input", m_inputBufferAction.data(), m_inputBufferAction.size(), input_text_flags)) {
 
         storeActionInCommand();
 
@@ -83,7 +100,7 @@ void Console::storeInputInCommand() const
 }
 void Console::storeActionInCommand() const
 {
-    std::string str = m_inputBuffer.data();
+    std::string str = m_inputBufferAction.data();
     strutil::trim(str);
     if (str.empty()) {
         return;
@@ -91,21 +108,29 @@ void Console::storeActionInCommand() const
     m_lastCommand = str;
     m_logger->action(str);
 }
-void Console::clearInput() const { strcpy(m_inputBuffer.data(), ""); }
+void Console::clearInput() const { strcpy(m_inputBufferAction.data(), ""); }
 
 void Console::renderOneLogEntry(jt::LogEntry const& entry) const
 {
-    // TODO filter by tag
-    // TODO optional print filter
     ImVec4 color { 1.0f, 1.0f, 1.0f, 1.0f };
+
+    std::string timeText = "";
+    if (m_drawTime) {
+        timeText = entry.time + ": ";
+    }
+
     std::string tagText = "";
-    for (auto& t : entry.tags) {
-        tagText += "<" + t + ">";
+    if (m_drawTag) {
+        for (auto& t : entry.tags) {
+            tagText += "<" + t + ">";
+        }
+        if (!entry.tags.empty()) {
+            tagText += ": ";
+        }
     }
-    if (!entry.tags.empty()) {
-        tagText += ": ";
-    }
+
     std::string levelText = "";
+
     if (entry.level == LogLevel::LogLevelAction) {
         color = ImVec4 { 0.9f, 0.9f, 0.0f, 1.0f };
         levelText = "# ";
@@ -117,8 +142,19 @@ void Console::renderOneLogEntry(jt::LogEntry const& entry) const
         color = ImVec4 { 1.0f, 0.5f, 0.5f, 1.0f };
         levelText = "[error]";
     }
+    if (!m_drawLevel) {
+        levelText = "";
+    }
 
-    std::string text = levelText + tagText + entry.message;
+    std::string text = timeText + levelText + tagText + entry.message;
+
+    std::string filterString = m_inputBufferFilter.data();
+    strutil::trim(filterString);
+    if (!filterString.empty()) {
+        if (!strutil::contains(text, filterString)) {
+            return;
+        }
+    }
 
     ImGui::PushStyleColor(ImGuiCol_Text, color);
     ImGui::Text(text.c_str());

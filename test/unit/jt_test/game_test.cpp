@@ -81,15 +81,6 @@ TEST_F(GameTest, GameRunWithStateThrowingStdException)
     ASSERT_THROW(g->run(), std::invalid_argument);
 }
 
-// TODO
-/*
-TEST_F(GameTest, GetCurrentStateDirectlyAfterSwitch)
-{
-    auto state1 = std::make_shared<MockState>();
-    g->getStateManager()->switchState(state1);
-    ASSERT_EQ(g->getCurrentState(), state1);
-}*/
-
 TEST_F(GameTest, GameRunWithStateThrowingIntException)
 {
     g->update(0.01f);
