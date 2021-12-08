@@ -1,4 +1,5 @@
 #include "logger.hpp"
+#include <stdexcept>
 
 namespace jt {
 
@@ -51,6 +52,10 @@ void Logger::verbose(std::string const& string, std::vector<std::string> tags)
 
 void Logger::addLogTarget(std::shared_ptr<LogTargetInterface> target)
 {
+    if (target == nullptr) {
+        error("cannot add nullptr log target", { "jt" });
+        return;
+    }
     m_logTargets.push_back(target);
 }
 

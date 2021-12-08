@@ -3,6 +3,7 @@
 #include "game_state.hpp"
 #include "input/input_manager_interface.hpp"
 #include "logging/log_target_cout.hpp"
+#include "logging/log_target_file.hpp"
 #include "logging/logger.hpp"
 #include "state_manager.hpp"
 #include <exception>
@@ -41,7 +42,7 @@ GameBase::GameBase(std::shared_ptr<jt::RenderWindowInterface> renderWindow,
     auto targetCout = std::make_shared<jt::LogTargetCout>();
     targetCout->setLogLevel(LogLevel::LogLevelInfo);
     m_logger->addLogTarget(targetCout);
-    // TODO Add file logging
+    m_logger->addLogTarget(std::make_shared<jt::LogTargetFile>());
 }
 
 void GameBase::run()
