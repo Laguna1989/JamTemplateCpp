@@ -1,4 +1,6 @@
 #include "logger.hpp"
+#include <chrono>
+#include <sstream>
 #include <stdexcept>
 
 namespace jt {
@@ -61,6 +63,10 @@ void Logger::addLogTarget(std::shared_ptr<LogTargetInterface> target)
 
 void Logger::addLogEntry(LogEntry entry)
 {
+    std::stringstream ss;
+    auto now = std::chrono::system_clock::now();
+    ss << std::chrono::system_clock::to_time_t(now);
+    entry.time = ss.str();
     for (auto& t : m_logTargets) {
         t->log(entry);
     }

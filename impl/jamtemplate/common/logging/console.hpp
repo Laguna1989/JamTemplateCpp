@@ -18,21 +18,23 @@ public:
     void doDraw() const override;
 
     // TODO Add callbacks for commands
-    // TODO Print with or without Time
-    // TODO Add Textfield for filter
 private:
     std::shared_ptr<LoggerInterface> m_logger;
 
     mutable bool m_showConsole { false };
-    mutable std::vector<char> m_inputBuffer;
-
+    mutable std::vector<char> m_inputBufferFilter;
+    mutable std::vector<char> m_inputBufferAction;
     mutable std::string m_lastCommand { "" };
+    mutable bool m_drawLevel { true };
+    mutable bool m_drawTag { true };
+    mutable bool m_drawTime { false };
 
     void renderOneLogEntry(jt::LogEntry const& entry) const;
     void storeInputInCommand() const;
     void clearInput() const;
     void storeActionInCommand() const;
     void handleCommand() const;
+    void drawFilter() const;
 };
 
 } // namespace jt
