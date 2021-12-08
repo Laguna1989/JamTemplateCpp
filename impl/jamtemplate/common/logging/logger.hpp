@@ -8,7 +8,6 @@
 namespace jt {
 class Logger : public jt::LoggerInterface {
 public:
-    // TODO Add time to logs
     void action(std::string const& string) override;
     void fatal(std::string const& string, std::vector<std::string> tags = {}) override;
     void error(std::string const& string, std::vector<std::string> tags = {}) override;

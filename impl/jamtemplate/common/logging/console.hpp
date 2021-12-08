@@ -17,7 +17,6 @@ public:
     void doUpdate(float const /*elapsed*/) override;
     void doDraw() const override;
 
-    // TODO Add callbacks for commands
 private:
     std::shared_ptr<LoggerInterface> m_logger;
 
