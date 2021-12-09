@@ -52,8 +52,8 @@ void GameBase::createActionCommandManager()
 {
     m_actionCommandManager = std::make_shared<ActionCommandManager>(m_logger);
     storeActionCommand(m_actionCommandManager->registerTemporaryCommand("help",
-        [mgr = std::weak_ptr { getActionCommandManager() }, logger = std::weak_ptr { getLogger() }](
-            auto /*args*/) {
+        [mgr = std::weak_ptr<ActionCommandManagerInterface> { getActionCommandManager() },
+            logger = std::weak_ptr<LoggerInterface> { getLogger() }](auto /*args*/) {
             if (logger.expired()) {
                 return;
             }
@@ -66,7 +66,7 @@ void GameBase::createActionCommandManager()
             }
         }));
     storeActionCommand(m_actionCommandManager->registerTemporaryCommand(
-        "clear", [logger = std::weak_ptr { getLogger() }](auto /*args*/) {
+        "clear", [logger = std::weak_ptr<LoggerInterface> { getLogger() }](auto /*args*/) {
             if (logger.expired()) {
                 return;
             }
@@ -74,7 +74,8 @@ void GameBase::createActionCommandManager()
         }));
 
     storeActionCommand(m_actionCommandManager->registerTemporaryCommand("cam.shake",
-        [cam = std::weak_ptr { getCamera() }, logger = std::weak_ptr { getLogger() }](auto args) {
+        [cam = std::weak_ptr<CamInterface> { getCamera() },
+            logger = std::weak_ptr<LoggerInterface> { getLogger() }](auto args) {
             if (args.size() != 2) {
                 if (logger.expired()) {
                     return;
