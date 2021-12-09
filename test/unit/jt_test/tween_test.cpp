@@ -162,16 +162,16 @@ TEST_F(TweenBaseTest, Alpha)
 {
     float const time { 5.0f };
 
-    EXPECT_EQ(m_obj->getColor().a(), 255U);
+    EXPECT_EQ(m_obj->getColor().a, 255U);
 
     uint8_t const start { 0U };
     uint8_t const end { 255U };
 
     auto const twa = ta::create(m_obj, time, start, end);
     twa->update(0.0f);
-    EXPECT_EQ(m_obj->getColor().a(), start);
+    EXPECT_EQ(m_obj->getColor().a, start);
     twa->update(time);
-    EXPECT_EQ(m_obj->getColor().a(), end);
+    EXPECT_EQ(m_obj->getColor().a, end);
 }
 
 TEST_F(TweenBaseTest, Color)

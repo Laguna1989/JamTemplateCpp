@@ -100,7 +100,7 @@ SDL_Rect Shape::getDestRect(jt::Vector2f const& positionOffset) const
 
 void Shape::setSDLColor(jt::Color const& col) const
 {
-    SDL_SetTextureColorMod(m_text.get(), col.r(), col.g(), col.b());
-    SDL_SetTextureAlphaMod(m_text.get(), col.a());
+    SDL_SetTextureColorMod(m_text.get(), col.r, col.g, col.b);
+    SDL_SetTextureAlphaMod(m_text.get(), col.a);
 }
 } // namespace jt

@@ -1,4 +1,5 @@
 ﻿#include "sprite.hpp"
+#include "color_lib.hpp"
 #include "rect_lib.hpp"
 #include "vector_lib.hpp"
 
@@ -26,11 +27,11 @@ void Sprite::fromTexture(sf::Texture const& text) { m_sprite.setTexture(text); }
 void Sprite::setPosition(jt::Vector2f const& pos) { m_position = pos; }
 jt::Vector2f Sprite::getPosition() const { return m_position; }
 
-void Sprite::setColor(jt::Color const& col) { m_sprite.setColor(col); }
-jt::Color Sprite::getColor() const { return m_sprite.getColor(); }
+void Sprite::setColor(jt::Color const& col) { m_sprite.setColor(toLib(col)); }
+jt::Color Sprite::getColor() const { return fromLib(m_sprite.getColor()); }
 
-void Sprite::setFlashColor(jt::Color const& col) { m_flashSprite.setColor(col); }
-jt::Color Sprite::getFlashColor() const { return m_flashSprite.getColor(); }
+void Sprite::setFlashColor(jt::Color const& col) { m_flashSprite.setColor(toLib(col)); }
+jt::Color Sprite::getFlashColor() const { return fromLib(m_flashSprite.getColor()); }
 
 jt::Rectf Sprite::getGlobalBounds() const { return fromLib(m_sprite.getGlobalBounds()); }
 jt::Rectf Sprite::getLocalBounds() const { return fromLib(m_sprite.getLocalBounds()); }
@@ -64,7 +65,7 @@ jt::Color Sprite::getColorAtPixel(jt::Vector2u pixelPos) const
         m_imageStored = true;
         m_image = m_sprite.getTexture()->copyToImage();
     }
-    return jt::Color { m_image.getPixel(pixelPos.x, pixelPos.y) };
+    return jt::Color { fromLib(m_image.getPixel(pixelPos.x, pixelPos.y)) };
 }
 
 void Sprite::cleanImage()
@@ -86,14 +87,14 @@ void Sprite::doDrawShadow(std::shared_ptr<jt::renderTarget> const sptr) const
 {
     if (sptr) {
         jt::Vector2f const oldPos = fromLib(m_sprite.getPosition());
-        jt::Color const oldCol = m_sprite.getColor();
+        auto const oldCol = fromLib(m_sprite.getColor());
 
         m_sprite.setPosition(toLib(oldPos + getShadowOffset()));
-        m_sprite.setColor(getShadowColor());
+        m_sprite.setColor(toLib(getShadowColor()));
         sptr->draw(m_sprite);
 
         m_sprite.setPosition(toLib(oldPos));
-        m_sprite.setColor(oldCol);
+        m_sprite.setColor(toLib(oldCol));
     }
 }
 

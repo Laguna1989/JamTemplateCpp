@@ -1,4 +1,5 @@
 ﻿#include "shape.hpp"
+#include "color_lib.hpp"
 #include "rect_lib.hpp"
 #include "vector_lib.hpp"
 #include <SFML/Graphics.hpp>
@@ -17,11 +18,11 @@ void Shape::makeCircle(float radius, std::shared_ptr<jt::TextureManagerInterface
     m_flashShape = std::make_shared<sf::CircleShape>(radius);
 }
 
-void Shape::setColor(jt::Color const& col) { m_shape->setFillColor(col); }
-jt::Color Shape::getColor() const { return m_shape->getFillColor(); }
+void Shape::setColor(jt::Color const& col) { m_shape->setFillColor(toLib(col)); }
+jt::Color Shape::getColor() const { return fromLib(m_shape->getFillColor()); }
 
-void Shape::setFlashColor(jt::Color const& col) { m_flashShape->setFillColor(col); }
-jt::Color Shape::getFlashColor() const { return m_flashShape->getFillColor(); }
+void Shape::setFlashColor(jt::Color const& col) { m_flashShape->setFillColor(toLib(col)); }
+jt::Color Shape::getFlashColor() const { return fromLib(m_flashShape->getFillColor()); }
 
 void Shape::setPosition(jt::Vector2f const& pos) { m_position = pos; }
 jt::Vector2f Shape::getPosition() const { return m_position; }
@@ -89,14 +90,14 @@ void Shape::doDrawShadow(std::shared_ptr<jt::renderTarget> const sptr) const
 {
     if (sptr) {
         jt::Vector2f const oldPos = fromLib(m_shape->getPosition());
-        jt::Color const oldCol = m_shape->getFillColor();
+        auto const oldCol = fromLib(m_shape->getFillColor());
 
         m_shape->setPosition(toLib(oldPos + getShadowOffset()));
-        m_shape->setFillColor(getShadowColor());
+        m_shape->setFillColor(toLib(getShadowColor()));
         sptr->draw(*m_shape);
 
         m_shape->setPosition(toLib(oldPos));
-        m_shape->setFillColor(oldCol);
+        m_shape->setFillColor(toLib(oldCol));
     }
 }
 

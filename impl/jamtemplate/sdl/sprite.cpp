@@ -140,8 +140,8 @@ void Sprite::doDrawFlash(std::shared_ptr<jt::renderTarget> const sptr) const
     SDL_Point const p { static_cast<int>(m_origin.x), static_cast<int>(m_origin.y) };
     SDL_SetRenderDrawBlendMode(sptr.get(), SDL_BLENDMODE_BLEND);
     SDL_SetTextureColorMod(
-        m_textFlash.get(), getFlashColor().r(), getFlashColor().g(), getFlashColor().b());
-    SDL_SetTextureAlphaMod(m_textFlash.get(), getFlashColor().a());
+        m_textFlash.get(), getFlashColor().r, getFlashColor().g, getFlashColor().b);
+    SDL_SetTextureAlphaMod(m_textFlash.get(), getFlashColor().a);
     SDL_RenderCopyEx(
         sptr.get(), m_textFlash.get(), &sourceRect, &destRect, -getRotation(), &p, flip);
 }
@@ -168,8 +168,8 @@ SDL_Rect Sprite::getSourceRect() const
 
 void Sprite::setSDLColor(jt::Color const& col) const
 {
-    SDL_SetTextureColorMod(m_text.get(), col.r(), col.g(), col.b());
-    SDL_SetTextureAlphaMod(m_text.get(), col.a());
+    SDL_SetTextureColorMod(m_text.get(), col.r, col.g, col.b);
+    SDL_SetTextureAlphaMod(m_text.get(), col.a);
 }
 
 } // namespace jt

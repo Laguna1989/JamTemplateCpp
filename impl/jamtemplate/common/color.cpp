@@ -5,7 +5,7 @@ namespace jt {
 
 bool operator==(jt::Color const& a, jt::Color const& b)
 {
-    return (a.r() == b.r() && a.g() == b.g() && a.b() == b.b() && a.a() == b.a());
+    return (a.r == b.r && a.g == b.g && a.b == b.b && a.a == b.a);
 }
 bool operator!=(jt::Color const& a, jt::Color const& b) { return !(a == b); }
 

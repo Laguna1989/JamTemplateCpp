@@ -23,15 +23,15 @@ void TweenColor::doUpdateObject(
     auto col = sptr->getColor();
 
     float const r = Lerp::linear(
-        static_cast<float>(m_initialValue.r()), static_cast<float>(m_finalValue.r()), agePercent);
+        static_cast<float>(m_initialValue.r), static_cast<float>(m_finalValue.r), agePercent);
     float const g = Lerp::linear(
-        static_cast<float>(m_initialValue.g()), static_cast<float>(m_finalValue.g()), agePercent);
+        static_cast<float>(m_initialValue.g), static_cast<float>(m_finalValue.g), agePercent);
     float const b = Lerp::linear(
-        static_cast<float>(m_initialValue.b()), static_cast<float>(m_finalValue.b()), agePercent);
+        static_cast<float>(m_initialValue.b), static_cast<float>(m_finalValue.b), agePercent);
 
-    col.r() = static_cast<std::uint8_t>(r);
-    col.g() = static_cast<std::uint8_t>(g);
-    col.b() = static_cast<std::uint8_t>(b);
+    col.r = static_cast<std::uint8_t>(r);
+    col.g = static_cast<std::uint8_t>(g);
+    col.b = static_cast<std::uint8_t>(b);
     sptr->setColor(col);
 }
 } // namespace jt

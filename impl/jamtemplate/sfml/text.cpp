@@ -1,4 +1,5 @@
 ﻿#include "text.hpp"
+#include "color_lib.hpp"
 #include "rect_lib.hpp"
 #include "vector_lib.hpp"
 #include <iostream>
@@ -35,17 +36,17 @@ std::string Text::getText() const { return m_text->getString(); }
 void Text::setOutline(float thickness, jt::Color col)
 {
     m_text->setOutlineThickness(thickness);
-    m_text->setOutlineColor(col);
+    m_text->setOutlineColor(toLib(col));
 }
 
 void Text::setPosition(jt::Vector2f const& pos) { m_position = pos; }
 jt::Vector2f Text::getPosition() const { return m_position; }
 
-void Text::setColor(const jt::Color& col) { m_text->setFillColor(col); }
-jt::Color Text::getColor() const { return m_text->getFillColor(); }
+void Text::setColor(const jt::Color& col) { m_text->setFillColor(toLib(col)); }
+jt::Color Text::getColor() const { return fromLib(m_text->getFillColor()); }
 
-void Text::setFlashColor(const jt::Color& col) { m_flashText->setFillColor(col); }
-jt::Color Text::getFlashColor() const { return m_flashText->getFillColor(); }
+void Text::setFlashColor(const jt::Color& col) { m_flashText->setFillColor(toLib(col)); }
+jt::Color Text::getFlashColor() const { return fromLib(m_flashText->getFillColor()); }
 
 jt::Rectf Text::getGlobalBounds() const { return fromLib(m_text->getGlobalBounds()); }
 jt::Rectf Text::getLocalBounds() const { return fromLib(m_text->getLocalBounds()); }
@@ -94,14 +95,14 @@ void Text::doUpdate(float /*elapsed*/)
 void Text::doDrawShadow(std::shared_ptr<jt::renderTarget> const sptr) const
 {
     jt::Vector2f const oldPos = fromLib(m_text->getPosition());
-    jt::Color const oldCol = m_text->getFillColor();
+    auto const oldCol = fromLib(m_text->getFillColor());
 
     m_text->setPosition(toLib(oldPos + getShadowOffset()));
-    m_text->setFillColor(getShadowColor());
+    m_text->setFillColor(toLib(getShadowColor()));
     sptr->draw(*m_text);
 
     m_text->setPosition(toLib(oldPos));
-    m_text->setFillColor(oldCol);
+    m_text->setFillColor(toLib(oldCol));
 }
 
 void Text::doDraw(std::shared_ptr<jt::renderTarget> const sptr) const { sptr->draw(*m_text); }

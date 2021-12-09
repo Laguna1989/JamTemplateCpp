@@ -102,7 +102,7 @@ TEST(RandomColor, HSV)
 {
     auto col = Random::getRandomColorHSV(0.0f, 0.0f, 90.0f, 100.0f, 0.0f, 100.0f);
 
-    auto [h, s, v] = jt::ColorHelpers::rgb2hsv(col.r(), col.g(), col.b());
+    auto [h, s, v] = jt::ColorHelpers::rgb2hsv(col.r, col.g, col.b);
     ASSERT_FLOAT_EQ(h, 0.0f);
 }
 

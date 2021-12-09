@@ -1,4 +1,5 @@
 #include "line.hpp"
+#include "color_lib.hpp"
 #include "math_helper.hpp"
 #include "vector_lib.hpp"
 #include <SFML/Graphics.hpp>
@@ -22,8 +23,8 @@ void jt::Line::doDraw(std::shared_ptr<jt::renderTarget> const sptr) const
         = startPosition + jt::Vector2f { m_lineVector.x * m_scale.x, m_lineVector.y * m_scale.y };
 
     sf::VertexArray line { sf::Lines, 2 };
-    line[0] = sf::Vertex { toLib(startPosition), m_color };
-    line[1] = sf::Vertex { toLib(endPosition), m_color };
+    line[0] = sf::Vertex { toLib(startPosition), toLib(m_color) };
+    line[1] = sf::Vertex { toLib(endPosition), toLib(m_color) };
     sptr->draw(line);
 }
 
@@ -36,8 +37,8 @@ void jt::Line::doDrawFlash(std::shared_ptr<jt::renderTarget> const sptr) const
         + getShadowOffset();
 
     sf::VertexArray line { sf::Lines, 2 };
-    line[0] = sf::Vertex { toLib(startPosition), getFlashColor() };
-    line[1] = sf::Vertex { toLib(endPosition), getFlashColor() };
+    line[0] = sf::Vertex { toLib(startPosition), toLib(getFlashColor()) };
+    line[1] = sf::Vertex { toLib(endPosition), toLib(getFlashColor()) };
     sptr->draw(line);
 }
 void jt::Line::doDrawShadow(std::shared_ptr<jt::renderTarget> const sptr) const
@@ -49,8 +50,8 @@ void jt::Line::doDrawShadow(std::shared_ptr<jt::renderTarget> const sptr) const
         + getShadowOffset();
 
     sf::VertexArray line { sf::Lines, 2 };
-    line[0] = sf::Vertex { toLib(startPosition), getShadowColor() };
-    line[1] = sf::Vertex { toLib(endPosition), getShadowColor() };
+    line[0] = sf::Vertex { toLib(startPosition), toLib(getShadowColor()) };
+    line[1] = sf::Vertex { toLib(endPosition), toLib(getShadowColor()) };
     sptr->draw(line);
 }
 

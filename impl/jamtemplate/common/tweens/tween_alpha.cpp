@@ -22,7 +22,7 @@ void TweenAlpha::doUpdateObject(
 {
     jt::Color col = sptr->getColor();
     float const alpha = Lerp::linear(m_initialValue, m_finalValue, agePercent);
-    col.a() = static_cast<std::uint8_t>(alpha * 255.0f);
+    col.a = static_cast<std::uint8_t>(alpha * 255.0f);
     sptr->setColor(col);
 }
 

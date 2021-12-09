@@ -95,7 +95,7 @@ void Text::doDrawShadow(std::shared_ptr<jt::renderTarget> const sptr) const
 
     auto const flip = jt::getFlipFromScale(m_scale);
     auto col = getShadowColor();
-    col.a() = std::min(col.a(), m_color.a());
+    col.a = std::min(col.a, m_color.a);
     setSDLColor(col);
     SDL_RenderCopyEx(sptr.get(), m_textTexture.get(), nullptr, &destRect, -getRotation(), &p, flip);
 }
@@ -225,8 +225,8 @@ std::shared_ptr<jt::renderTarget> Text::getRenderTarget()
 
 void Text::setSDLColor(jt::Color const& col) const
 {
-    SDL_SetTextureColorMod(m_textTexture.get(), col.r(), col.g(), col.b());
-    SDL_SetTextureAlphaMod(m_textTexture.get(), col.a());
+    SDL_SetTextureColorMod(m_textTexture.get(), col.r, col.g, col.b);
+    SDL_SetTextureAlphaMod(m_textTexture.get(), col.a);
 }
 
 SDL_Rect Text::getDestRect(jt::Vector2f const& positionOffset) const
