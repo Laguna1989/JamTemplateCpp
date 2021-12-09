@@ -15,10 +15,10 @@ TEST(CreateRectShapeTest, NoNullptr)
 
 TEST(RectCreateRectShapeTest, Size)
 {
-    jt::Rect expected { 0.0f, 0.0f, 100.0f, 200.0f };
+    jt::Rectf expected { 0.0f, 0.0f, 100.0f, 200.0f };
     auto tm = getTextureManager();
     auto const shape
-        = jt::dh::createShapeRect({ expected.width(), expected.height() }, jt::colors::Green, tm);
+        = jt::dh::createShapeRect({ expected.width, expected.height }, jt::colors::Green, tm);
 
     ASSERT_EQ(shape->getLocalBounds(), expected);
 }
@@ -53,8 +53,8 @@ TEST(CreateVignetteTest, Size)
     float const y = 50.0f;
     auto tm = getTextureManager();
     auto const vignette = jt::dh::createVignette({ x, y }, tm);
-    ASSERT_FLOAT_EQ(vignette->getLocalBounds().width(), x);
-    ASSERT_FLOAT_EQ(vignette->getLocalBounds().height(), y);
+    ASSERT_FLOAT_EQ(vignette->getLocalBounds().width, x);
+    ASSERT_FLOAT_EQ(vignette->getLocalBounds().height, y);
 }
 
 TEST(CreateVignetteTest, Color)

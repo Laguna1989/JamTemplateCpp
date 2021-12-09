@@ -27,9 +27,9 @@ public:
 
     void setOutline(float /*thickness*/, jt::Color /*col*/);
 
-    void setPosition(jt::Vector2 const& pos) override;
+    void setPosition(jt::Vector2f const& pos) override;
 
-    jt::Vector2 getPosition() const override;
+    jt::Vector2f getPosition() const override;
 
     void setColor(const jt::Color& col) override;
     jt::Color getColor() const override;
@@ -37,16 +37,16 @@ public:
     void setFlashColor(const jt::Color& col) override;
     jt::Color getFlashColor() const override;
 
-    jt::Rect getGlobalBounds() const override;
-    jt::Rect getLocalBounds() const override;
+    jt::Rectf getGlobalBounds() const override;
+    jt::Rectf getLocalBounds() const override;
 
-    virtual void setScale(jt::Vector2 const& scale) override;
+    virtual void setScale(jt::Vector2f const& scale) override;
 
-    virtual jt::Vector2 getScale() const override;
+    virtual jt::Vector2f getScale() const override;
 
-    virtual void setOrigin(jt::Vector2 const& origin) override;
+    virtual void setOrigin(jt::Vector2f const& origin) override;
 
-    virtual jt::Vector2 getOrigin() const override;
+    virtual jt::Vector2f getOrigin() const override;
 
     void setTextAlign(TextAlign ta);
     TextAlign getTextAlign() const;
@@ -57,12 +57,12 @@ private:
 
     TextAlign m_textAlign { TextAlign::CENTER };
 
-    jt::Vector2 m_position { 0, 0 };
+    jt::Vector2f m_position { 0, 0 };
     jt::Color m_color { jt::colors::White };
     jt::Color m_flashColor { jt::colors::White };
-    jt::Vector2 m_origin { 0.0f, 0.0f };
-    jt::Vector2 m_scale { 1.0f, 1.0f };
-    jt::Vector2 m_offsetFromOrigin { 0.0f, 0.0f };
+    jt::Vector2f m_origin { 0.0f, 0.0f };
+    jt::Vector2f m_scale { 1.0f, 1.0f };
+    jt::Vector2f m_offsetFromOrigin { 0.0f, 0.0f };
 
     // optimization, so the text rendering logic does not have to happen in every frame, but only
     // when the text changes.
@@ -91,7 +91,7 @@ private:
     void recreateTextTexture(std::shared_ptr<jt::renderTarget> const sptr);
     std::shared_ptr<jt::renderTarget> getRenderTarget();
     void setSDLColor(jt::Color const& col) const;
-    SDL_Rect getDestRect(jt::Vector2 const& positionOffset = jt::Vector2 { 0.0f, 0.0f }) const;
+    SDL_Rect getDestRect(jt::Vector2f const& positionOffset = jt::Vector2f { 0.0f, 0.0f }) const;
 
     int getUpscaleFactor() const { return 1; };
     void calculateTextTextureSize(

@@ -9,13 +9,13 @@ protected:
 
 TEST_F(CameraTest, InitialCamOffset)
 {
-    jt::Vector2 const expected { 0.0f, 0.0f };
+    jt::Vector2f const expected { 0.0f, 0.0f };
     ASSERT_EQ(cam.getCamOffset(), expected);
 }
 
 TEST_F(CameraTest, InitialShakeOffset)
 {
-    jt::Vector2 const expected { 0.0f, 0.0f };
+    jt::Vector2f const expected { 0.0f, 0.0f };
     ASSERT_EQ(cam.getShakeOffset(), expected);
 }
 TEST_F(CameraTest, InitialZoom) { ASSERT_EQ(cam.getZoom(), 1); }
@@ -29,14 +29,14 @@ TEST_F(CameraTest, ZoomAfterSetZoom)
 
 TEST_F(CameraTest, MoveChangesCamOffset)
 {
-    jt::Vector2 const cameraMovement { 3.5f, -10.0f };
+    jt::Vector2f const cameraMovement { 3.5f, -10.0f };
     cam.move(cameraMovement);
     ASSERT_EQ(cam.getCamOffset(), cameraMovement);
 }
 
 TEST_F(CameraTest, SetCameraOffset)
 {
-    jt::Vector2 const newPosition { 9.99f, -20.0f };
+    jt::Vector2f const newPosition { 9.99f, -20.0f };
     cam.setCamOffset(newPosition);
     ASSERT_EQ(cam.getCamOffset(), newPosition);
 }
@@ -46,7 +46,7 @@ TEST_F(CameraTest, CamOffsetIsZeroAfterReset)
     cam.setCamOffset({ 222.0f, 241.5f });
 
     cam.reset();
-    jt::Vector2 expectedPos { 0.0f, 0.0f };
+    jt::Vector2f expectedPos { 0.0f, 0.0f };
     ASSERT_EQ(cam.getCamOffset(), expectedPos);
 }
 
@@ -60,7 +60,7 @@ TEST_P(CameraShakeIntervalTestFixture, ShakeOffsetNotChangedBeforeShakeIntervall
 
     cam.shake(10, 1.0f, shakeInterval);
     cam.update(shakeInterval * GetParam());
-    jt::Vector2 const initialShake { 0.0f, 0.0f };
+    jt::Vector2f const initialShake { 0.0f, 0.0f };
     ASSERT_EQ(cam.getShakeOffset(), initialShake);
 }
 
@@ -74,7 +74,7 @@ TEST_F(CameraTest, ShakeOffsetChangedAfterShakeInterval)
     cam.shake(10, 1.0f, shakeInterval);
     cam.update(shakeInterval * 1.01f);
 
-    jt::Vector2 const initialShake { 0.0f, 0.0f };
+    jt::Vector2f const initialShake { 0.0f, 0.0f };
     ASSERT_NE(cam.getShakeOffset(), initialShake);
 }
 
@@ -86,14 +86,14 @@ TEST_F(CameraTest, ShakeOffsetIsAsSetByRandomFunction)
     cam.shake(10, 1.0f, shakeInterval);
     cam.update(shakeInterval * 1.01f);
 
-    jt::Vector2 const expectedShakeOffset { 1.0f, 1.0f };
+    jt::Vector2f const expectedShakeOffset { 1.0f, 1.0f };
     ASSERT_EQ(cam.getShakeOffset(), expectedShakeOffset);
 }
 
 TEST_F(CameraTest, ShakeOffsetBackToZeroAfterShakeTime)
 {
     float const shakeTime = 10.0f;
-    jt::Vector2 const initialShake { 0.0f, 0.0f };
+    jt::Vector2f const initialShake { 0.0f, 0.0f };
     cam.shake(shakeTime, 1.0f, 0.1f);
     cam.update(shakeTime + 0.5f);
     ASSERT_EQ(cam.getShakeOffset(), initialShake);
@@ -102,7 +102,7 @@ TEST_F(CameraTest, ShakeOffsetBackToZeroAfterShakeTime)
 TEST_F(CameraTest, ResetShakeOffset)
 {
     float const shakeInterval = 0.5f;
-    jt::Vector2 const initialShake { 0.0f, 0.0f };
+    jt::Vector2f const initialShake { 0.0f, 0.0f };
 
     cam.shake(10, 1.0f, shakeInterval);
     cam.update(shakeInterval * 1.01f);

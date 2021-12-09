@@ -25,8 +25,8 @@ TEST_P(RenderwindowCommonTestFixture, SizeIsAsSet)
     auto const w = 500;
     auto const h = 300;
     m_window = GetParam()->createRenderWindow(w, h, "abcd");
-    ASSERT_EQ(m_window->getSize().x(), w);
-    ASSERT_EQ(m_window->getSize().y(), h);
+    ASSERT_EQ(m_window->getSize().x, w);
+    ASSERT_EQ(m_window->getSize().y, h);
 }
 
 TEST_P(RenderwindowCommonTestFixture, CheckForCloseDoesNotTerminate)

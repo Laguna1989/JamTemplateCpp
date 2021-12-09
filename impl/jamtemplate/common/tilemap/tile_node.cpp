@@ -23,7 +23,7 @@ void TileNode::doDraw() const { m_drawable->draw(getGame()->getRenderTarget()); 
 
 std::shared_ptr<jt::pathfinder::NodeInterface> TileNode::getNode() { return m_node; }
 
-// jt::Vector2 TileNode::getPosition() { return m_node->getTilePosition(); }
+// jt::Vector2f TileNode::getPosition() { return m_node->getTilePosition(); }
 
 void TileNode::setBlocked(bool blocked) { m_blocked = blocked; }
 

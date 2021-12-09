@@ -1,10 +1,16 @@
 ﻿#ifndef GUARD_JAMTEMPLATE_COLOR_GUARD_HPP_12345
 #define GUARD_JAMTEMPLATE_COLOR_GUARD_HPP_12345
 
-#include "color_lib.hpp"
 #include <string>
 
 namespace jt {
+
+struct Color {
+    std::uint8_t r { 0 };
+    std::uint8_t g { 0 };
+    std::uint8_t b { 0 };
+    std::uint8_t a { 255 };
+};
 
 bool operator==(jt::Color const& a, jt::Color const& b);
 bool operator!=(jt::Color const& a, jt::Color const& b);

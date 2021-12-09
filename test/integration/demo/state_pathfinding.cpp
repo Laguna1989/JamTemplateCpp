@@ -20,7 +20,7 @@ void StatePathfinding::calculatePath(jt::pathfinder::NodeT start, jt::pathfinder
     auto path = jt::pathfinder::calculatePath(start, end);
     for (auto const& n : path) {
         auto const pos = n->getTilePosition();
-        auto t = getTileAt(static_cast<int>(pos.x()), static_cast<int>(pos.y()));
+        auto t = getTileAt(static_cast<int>(pos.x), static_cast<int>(pos.y));
         if (t) {
             t->setColor(jt::colors::Cyan);
         }
@@ -40,8 +40,8 @@ void StatePathfinding::createNodeConnections()
                 if (i == 0 && j == 0) {
                     continue;
                 }
-                auto oi = static_cast<int>(currentPos.x() + i);
-                auto oj = static_cast<int>(currentPos.y() + j);
+                auto oi = static_cast<int>(currentPos.x + i);
+                auto oj = static_cast<int>(currentPos.y + j);
                 auto ot = getTileAt(oi, oj);
                 if (ot) {
                     if (ot->getBlocked()) {
@@ -59,8 +59,8 @@ void StatePathfinding::createTiles()
     for (int i = 0; i != mapSizeX; ++i) {
         for (int j = 0; j != mapSizeY; ++j) {
             std::shared_ptr<jt::Shape> drawable = jt::dh::createShapeRect(
-                jt::Vector2 { 19, 19 }, jt::colors::White, getGame()->getTextureManager());
-            drawable->setPosition(jt::Vector2 { i * 20.0f, j * 20.0f });
+                jt::Vector2f { 19, 19 }, jt::colors::White, getGame()->getTextureManager());
+            drawable->setPosition(jt::Vector2f { i * 20.0f, j * 20.0f });
             auto node = std::make_shared<jt::pathfinder::Node>();
             node->setPosition(
                 jt::Vector2u { static_cast<unsigned int>(i), static_cast<unsigned int>(j) });

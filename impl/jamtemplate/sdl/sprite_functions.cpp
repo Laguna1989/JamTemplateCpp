@@ -18,10 +18,10 @@ std::shared_ptr<SDL_Texture> makeButtonImage(std::shared_ptr<jt::renderTarget> r
             [](SDL_Surface* s) { SDL_FreeSurface(s); });
 
     auto const max = std::numeric_limits<std::uint8_t>::max();
-    auto const mid = SDL_MapRGBA(image->format, midColor.r(), midColor.g(), midColor.b(), max);
-    auto const dark = SDL_MapRGBA(image->format, darkColor.r(), darkColor.g(), darkColor.b(), max);
+    auto const mid = SDL_MapRGBA(image->format, midColor.r, midColor.g, midColor.b, max);
+    auto const dark = SDL_MapRGBA(image->format, darkColor.r, darkColor.g, darkColor.b, max);
     auto const bright
-        = SDL_MapRGBA(image->format, brightColor.r(), brightColor.g(), brightColor.b(), max);
+        = SDL_MapRGBA(image->format, brightColor.r, brightColor.g, brightColor.b, max);
 
     for (auto i = 0U; i != w * 3; ++i) {
         for (auto j = 0U; j != h; ++j) {

@@ -37,15 +37,15 @@ TEST(TilemapObjectLayerTest, ObjectNameIsParsedCorrectly)
 TEST(TilemapObjectLayerTest, ObjectPositionIsParsedCorrectly)
 {
     ObjectLayer ol { "assets/tileson_test.json", "objects" };
-    ASSERT_EQ(ol.getObjects().at(0).position.x(), 256);
-    ASSERT_EQ(ol.getObjects().at(0).position.y(), 128);
+    ASSERT_EQ(ol.getObjects().at(0).position.x, 256);
+    ASSERT_EQ(ol.getObjects().at(0).position.y, 128);
 }
 
 TEST(TilemapObjectLayerTest, ObjectSizeIsParsedCorrectly)
 {
     ObjectLayer ol { "assets/tileson_test.json", "objects" };
-    ASSERT_EQ(ol.getObjects().at(0).size.x(), 64);
-    ASSERT_EQ(ol.getObjects().at(0).size.y(), 96);
+    ASSERT_EQ(ol.getObjects().at(0).size.x, 64);
+    ASSERT_EQ(ol.getObjects().at(0).size.y, 96);
 }
 
 TEST(TilemapObjectLayerTest, ObjectRotationIsParsedCorrectly)

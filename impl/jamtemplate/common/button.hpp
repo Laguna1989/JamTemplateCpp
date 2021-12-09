@@ -62,24 +62,24 @@ public:
 
     /// Set the position of the Button
     /// \param newPosition
-    void setPosition(jt::Vector2 const& newPosition);
+    void setPosition(jt::Vector2f const& newPosition);
 
     /// Get the position of the Button
-    jt::Vector2 getPosition(void) const;
+    jt::Vector2f getPosition(void) const;
 
 private:
     std::shared_ptr<Animation> m_background { nullptr };
     std::shared_ptr<jt::Sprite> m_disabledOverlay { nullptr };
     std::shared_ptr<DrawableInterface> m_drawable { nullptr };
     std::vector<std::function<void(void)>> m_callbacks {};
-    jt::Vector2 m_pos { 0.0f, 0.0f };
+    jt::Vector2f m_pos { 0.0f, 0.0f };
 
     bool m_isVisible { true };
     bool m_isActive { true };
 
     void doDraw() const override;
 
-    bool isOver(jt::Vector2 const& mousePosition);
+    bool isOver(jt::Vector2f const& mousePosition);
 
     void doUpdate(float elapsed) override;
 };

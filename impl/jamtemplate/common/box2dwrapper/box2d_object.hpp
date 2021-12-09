@@ -24,19 +24,19 @@ public:
 
     /// Get the position
     /// \return the position
-    jt::Vector2 getPosition() const;
+    jt::Vector2f getPosition() const;
 
     /// Set the position (overwrite box2d simulation)
     /// \param position the new position
-    void setPosition(Vector2 const& position);
+    void setPosition(jt::Vector2f const& position);
 
     /// Get the velocity
     /// \return the velocity
-    jt::Vector2 getVelocity() const;
+    jt::Vector2f getVelocity() const;
 
     /// Set the velocity (overwrite box2d simulation)
     /// \param v the new velocity
-    void setVelocity(Vector2 const& v);
+    void setVelocity(jt::Vector2f const& v);
 
     /// Set the rotation
     /// \return the rotation

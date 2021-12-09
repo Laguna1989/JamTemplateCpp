@@ -1,4 +1,5 @@
 #include "texture_manager_impl.hpp"
+#include "color_lib.hpp"
 #include "sprite_functions.hpp"
 #include "strutils.hpp"
 #include <stdexcept>
@@ -93,7 +94,7 @@ sf::Image createFlashImage(sf::Image const& in)
     for (unsigned int i = 0; i != img.getSize().x; ++i) {
         for (unsigned int j = 0; j != img.getSize().y; ++j) {
             if (img.getPixel(i, j).a != 0) {
-                img.setPixel(i, j, jt::Color(255, 255, 255));
+                img.setPixel(i, j, toLib(jt::Color { 255, 255, 255 }));
             }
         }
     }

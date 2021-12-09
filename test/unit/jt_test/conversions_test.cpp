@@ -19,7 +19,7 @@ INSTANTIATE_TEST_SUITE_P(ConversionsTest, ConversionsTestFixture,
 
 TEST_P(ConversionsTestFixture, box2dVectorToJTVector)
 {
-    ::jt::Vector2 const expected { GetParam().first, GetParam().second };
+    ::jt::Vector2f const expected { GetParam().first, GetParam().second };
     b2Vec2 const input { GetParam().first, GetParam().second };
     ASSERT_EQ(vec(input), expected);
 }
@@ -27,20 +27,20 @@ TEST_P(ConversionsTestFixture, box2dVectorToJTVector)
 TEST_P(ConversionsTestFixture, JTVectorToB2Vec)
 {
     b2Vec2 const expected { GetParam().first, GetParam().second };
-    jt::Vector2 const input { GetParam().first, GetParam().second };
+    jt::Vector2f const input { GetParam().first, GetParam().second };
     ASSERT_EQ(vec(input), expected);
 }
 
 TEST_P(ConversionsTestFixture, TsonVecfToJTVector)
 {
-    ::jt::Vector2 const expected { GetParam().first, GetParam().second };
+    ::jt::Vector2f const expected { GetParam().first, GetParam().second };
     tson::Vector2f const input { GetParam().first, GetParam().second };
     ASSERT_EQ(vec(input), expected);
 }
 
 TEST_P(ConversionsTestFixture, TsonVeciToJTVector)
 {
-    ::jt::Vector2 const expected { static_cast<float>(static_cast<int>(GetParam().first)),
+    ::jt::Vector2f const expected { static_cast<float>(static_cast<int>(GetParam().first)),
         static_cast<float>(static_cast<int>(GetParam().second)) };
     tson::Vector2i const input { static_cast<int>(GetParam().first),
         static_cast<int>(GetParam().second) };

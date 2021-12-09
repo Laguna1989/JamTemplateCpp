@@ -7,10 +7,10 @@
 #include <vector>
 
 struct RopeMass {
-    RopeMass(jt::Vector2 pos, float m);
-    jt::Vector2 position;
-    jt::Vector2 velocity;
-    jt::Vector2 acceleration;
+    RopeMass(jt::Vector2f pos, float m);
+    jt::Vector2f position;
+    jt::Vector2f velocity;
+    jt::Vector2f acceleration;
     float mass;
     bool fixed;
 };
@@ -20,7 +20,7 @@ public:
     std::string getName() const override;
 
 private:
-    jt::Vector2 getRopeMassPosition(int i) const;
+    jt::Vector2f getRopeMassPosition(int i) const;
     std::shared_ptr<RopeMass> createRopeMassPointer(int i) const;
     void createSingleRopeMass(int i);
     void createAllRopeMasses();
@@ -32,7 +32,7 @@ private:
     void doInternalDraw() const override;
 
     std::vector<std::shared_ptr<RopeMass>> m_rope_elements;
-    jt::Vector2 const m_ropeStartingPoint { 200.0f, 20.0f };
+    jt::Vector2f const m_ropeStartingPoint { 200.0f, 20.0f };
     float const m_springConstant { 3000.0f };
 };
 

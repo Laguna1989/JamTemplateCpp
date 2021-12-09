@@ -7,11 +7,11 @@ TEST(MouseInput, UpdateStoresMousePosition)
 
     jt::MouseInput mouseInput { nullptr };
     mouseInput.updateMousePosition(mp);
-    EXPECT_EQ(mouseInput.getMousePositionWorld().x(), mp.window_x);
-    EXPECT_EQ(mouseInput.getMousePositionWorld().y(), mp.window_y);
+    EXPECT_EQ(mouseInput.getMousePositionWorld().x, mp.window_x);
+    EXPECT_EQ(mouseInput.getMousePositionWorld().y, mp.window_y);
 
-    EXPECT_EQ(mouseInput.getMousePositionScreen().x(), mp.screen_x);
-    EXPECT_EQ(mouseInput.getMousePositionScreen().y(), mp.screen_y);
+    EXPECT_EQ(mouseInput.getMousePositionScreen().x, mp.screen_x);
+    EXPECT_EQ(mouseInput.getMousePositionScreen().y, mp.screen_y);
 }
 
 TEST(MouseInput, ResetSetsMousePositionsToZero)
@@ -20,16 +20,16 @@ TEST(MouseInput, ResetSetsMousePositionsToZero)
 
     jt::MouseInput mouseInput { nullptr };
     mouseInput.updateMousePosition(mp);
-    ASSERT_EQ(mouseInput.getMousePositionWorld().x(), mp.window_x);
-    ASSERT_EQ(mouseInput.getMousePositionWorld().y(), mp.window_y);
-    ASSERT_EQ(mouseInput.getMousePositionScreen().x(), mp.screen_x);
-    ASSERT_EQ(mouseInput.getMousePositionScreen().y(), mp.screen_y);
+    ASSERT_EQ(mouseInput.getMousePositionWorld().x, mp.window_x);
+    ASSERT_EQ(mouseInput.getMousePositionWorld().y, mp.window_y);
+    ASSERT_EQ(mouseInput.getMousePositionScreen().x, mp.screen_x);
+    ASSERT_EQ(mouseInput.getMousePositionScreen().y, mp.screen_y);
 
     mouseInput.reset();
-    EXPECT_EQ(mouseInput.getMousePositionWorld().x(), 0);
-    EXPECT_EQ(mouseInput.getMousePositionWorld().y(), 0);
-    EXPECT_EQ(mouseInput.getMousePositionScreen().x(), 0);
-    EXPECT_EQ(mouseInput.getMousePositionScreen().y(), 0);
+    EXPECT_EQ(mouseInput.getMousePositionWorld().x, 0);
+    EXPECT_EQ(mouseInput.getMousePositionWorld().y, 0);
+    EXPECT_EQ(mouseInput.getMousePositionScreen().x, 0);
+    EXPECT_EQ(mouseInput.getMousePositionScreen().y, 0);
 }
 
 TEST(MouseInput, AllButtonsAlwaysPressed)

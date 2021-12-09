@@ -20,8 +20,8 @@ void StateGradient::createShapesFromSaturationGradient()
     for (size_t i = 0; i != palette_saturation.size(); ++i) {
         auto const col = palette_saturation.getColor(i);
         auto s
-            = jt::dh::createShapeRect(jt::Vector2 { 40, 40 }, col, getGame()->getTextureManager());
-        s->setPosition(jt::Vector2 { 10.0f + i * 40.0f, 10.0f });
+            = jt::dh::createShapeRect(jt::Vector2f { 40, 40 }, col, getGame()->getTextureManager());
+        s->setPosition(jt::Vector2f { 10.0f + i * 40.0f, 10.0f });
         m_shapes.push_back(s);
     }
 }
@@ -32,8 +32,8 @@ void StateGradient::createShapesFromHueGradient()
     for (size_t i = 0; i != palette_hue.size(); ++i) {
         auto const col = palette_hue.getColor(i);
         auto s
-            = jt::dh::createShapeRect(jt::Vector2 { 40, 40 }, col, getGame()->getTextureManager());
-        s->setPosition(jt::Vector2 { 10.0f + i * 40.0f, 60.0f });
+            = jt::dh::createShapeRect(jt::Vector2f { 40, 40 }, col, getGame()->getTextureManager());
+        s->setPosition(jt::Vector2f { 10.0f + i * 40.0f, 60.0f });
         m_shapes.push_back(s);
     }
 }
@@ -44,8 +44,8 @@ void StateGradient::createShapesFromValueGradient()
     for (size_t i = 0; i != palette_value.size(); ++i) {
         auto const col = palette_value.getColor(i);
         auto s
-            = jt::dh::createShapeRect(jt::Vector2 { 40, 40 }, col, getGame()->getTextureManager());
-        s->setPosition(jt::Vector2 { 10.0f + i * 40.0f, 110.0f });
+            = jt::dh::createShapeRect(jt::Vector2f { 40, 40 }, col, getGame()->getTextureManager());
+        s->setPosition(jt::Vector2f { 10.0f + i * 40.0f, 110.0f });
         m_shapes.push_back(s);
     }
 }
@@ -59,8 +59,8 @@ void StateGradient::createShapesFromGPL()
     for (size_t i = 0; i != palette_gpl.size(); ++i) {
         auto const col = palette_gpl.getColor(i);
         auto s
-            = jt::dh::createShapeRect(jt::Vector2 { 40, 40 }, col, getGame()->getTextureManager());
-        s->setPosition(jt::Vector2 { 10.0f + i * 40.0f, 160.0f });
+            = jt::dh::createShapeRect(jt::Vector2f { 40, 40 }, col, getGame()->getTextureManager());
+        s->setPosition(jt::Vector2f { 10.0f + i * 40.0f, 160.0f });
         m_shapes.push_back(s);
     }
 }

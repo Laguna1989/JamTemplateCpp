@@ -27,7 +27,7 @@ public:
 
     /// Get the size of the window
     /// \return
-    virtual jt::Vector2 getSize() const = 0;
+    virtual jt::Vector2f getSize() const = 0;
 
     /// Draw a sprite to the window
     /// \param sprite the sprite to be drawn
@@ -38,7 +38,7 @@ public:
 
     /// Get the mouse position
     /// \return the mouse position
-    virtual jt::Vector2 getMousePosition() = 0;
+    virtual jt::Vector2f getMousePosition() = 0;
 
     /// Set the mouse cursor visible state
     /// \param visible

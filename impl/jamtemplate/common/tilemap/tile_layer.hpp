@@ -6,10 +6,10 @@
 #include "pathfinder/node_interface.hpp"
 #include "render_target.hpp"
 #include "sprite.hpp"
+#include "texture_manager_interface.hpp"
 #include "tileson.h"
 #include <memory>
 #include <vector>
-#include "texture_manager_interface.hpp"
 
 namespace jt {
 namespace tilemap {
@@ -21,7 +21,8 @@ public:
 
     /// Constructor
     /// \param path path to the tilemap file
-    TileLayer(std::string const& path, std::string const& layerName, std::shared_ptr<jt::TextureManagerInterface> textureManager);
+    TileLayer(std::string const& path, std::string const& layerName,
+        std::shared_ptr<jt::TextureManagerInterface> textureManager);
 
     /// Get map size in Tiles
     /// \return map size in tiles
@@ -37,24 +38,24 @@ public:
     void setColor(jt::Color const& col) override;
     jt::Color getColor() const override;
 
-    void setPosition(jt::Vector2 const& pos) override;
-    jt::Vector2 getPosition() const override;
+    void setPosition(jt::Vector2f const& pos) override;
+    jt::Vector2f getPosition() const override;
 
-    jt::Rect getGlobalBounds() const override;
-    jt::Rect getLocalBounds() const override;
+    jt::Rectf getGlobalBounds() const override;
+    jt::Rectf getLocalBounds() const override;
 
     void setFlashColor(jt::Color const& col) override;
     jt::Color getFlashColor() const override;
 
-    void setScale(jt::Vector2 const& scale) override;
-    jt::Vector2 getScale() const override;
+    void setScale(jt::Vector2f const& scale) override;
+    jt::Vector2f getScale() const override;
 
-    void setOrigin(jt::Vector2 const& origin) override;
-    jt::Vector2 getOrigin() const override;
+    void setOrigin(jt::Vector2f const& origin) override;
+    jt::Vector2f getOrigin() const override;
 
     void doRotate(float /*rot*/) override;
 
-    void setScreenSizeHint(jt::Vector2 const& hint);
+    void setScreenSizeHint(jt::Vector2f const& hint);
 
 private:
     std::shared_ptr<jt::TextureManagerInterface> m_textureManager;
@@ -62,10 +63,10 @@ private:
     std::string m_layerName { "" };
     mutable std::vector<jt::Sprite> m_tileSprites {};
 
-    Vector2 m_position { 0.0f, 0.0f };
-    Vector2 m_origin { 0.0f, 0.0f };
-    Vector2 m_screenSizeHint { 0.0f, 0.0f };
-    Vector2 m_scale { 1.0f, 1.0f };
+    jt::Vector2f m_position { 0.0f, 0.0f };
+    jt::Vector2f m_origin { 0.0f, 0.0f };
+    jt::Vector2f m_screenSizeHint { 0.0f, 0.0f };
+    jt::Vector2f m_scale { 1.0f, 1.0f };
     Color m_color { jt::colors::White };
     Color m_flashColor { jt::colors::White };
 

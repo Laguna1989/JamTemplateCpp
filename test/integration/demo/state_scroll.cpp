@@ -9,12 +9,12 @@
 void StateScroll::doInternalCreate()
 {
     m_background = jt::dh::createShapeRect(
-        jt::Vector2 { 400.0f, 300.0f }, jt::colors::Blue, getGame()->getTextureManager());
+        jt::Vector2f { 400.0f, 300.0f }, jt::colors::Blue, getGame()->getTextureManager());
     m_background->setIgnoreCamMovement(true);
 
     m_shape1 = jt::dh::createShapeRect(
-        jt::Vector2 { 40.0f, 30.0f }, jt::colors::Cyan, getGame()->getTextureManager());
-    m_shape1->setPosition(jt::Vector2 { 100.0f, 100.0f });
+        jt::Vector2f { 40.0f, 30.0f }, jt::colors::Cyan, getGame()->getTextureManager());
+    m_shape1->setPosition(jt::Vector2f { 100.0f, 100.0f });
 
     m_sprite = std::make_shared<jt::Sprite>("assets/wall.png", getGame()->getTextureManager());
     m_sprite->setPosition({ 250, 32 });
@@ -24,39 +24,39 @@ void StateScroll::doInternalCreate()
         jt::MathHelper::numbersBetween(0U, 11U), 0.15f, getGame()->getTextureManager());
     m_anim->play("idle");
     m_anim->setColor(jt::colors::Red);
-    m_anim->setPosition(jt::Vector2 { 200.0f, 200.0f });
+    m_anim->setPosition(jt::Vector2f { 200.0f, 200.0f });
 
     m_text_left_aligned = jt::dh::createText(getGame()->getRenderTarget(), "left aligned", 12);
     m_text_left_aligned->setTextAlign(jt::Text::TextAlign::LEFT);
-    m_text_left_aligned->setPosition(jt::Vector2 { 300, 100 });
+    m_text_left_aligned->setPosition(jt::Vector2f { 300, 100 });
 
     m_text_center_aligned = jt::dh::createText(getGame()->getRenderTarget(), "center aligned", 12);
     m_text_center_aligned->setTextAlign(jt::Text::TextAlign::CENTER);
-    m_text_center_aligned->setPosition(jt::Vector2 { 300, 130 });
+    m_text_center_aligned->setPosition(jt::Vector2f { 300, 130 });
 
     m_text_right_aligned = jt::dh::createText(getGame()->getRenderTarget(), "right aligned", 12);
     m_text_right_aligned->setTextAlign(jt::Text::TextAlign::RIGHT);
-    m_text_right_aligned->setPosition(jt::Vector2 { 300, 160 });
+    m_text_right_aligned->setPosition(jt::Vector2f { 300, 160 });
 
-    m_line = std::make_shared<jt::Line>(jt::Vector2 { 100, 50 });
-    m_line->setPosition(jt::Vector2 { 20, 200 });
+    m_line = std::make_shared<jt::Line>(jt::Vector2f { 100, 50 });
+    m_line->setPosition(jt::Vector2f { 20, 200 });
 
     float const scrollSpeed = 50.0f;
     getGame()->input()->keyboard()->setCommandPressed({ jt::KeyCode::W, jt::KeyCode::Up },
         std::make_shared<ControlCommandMoveCam>(
-            jt::Vector2 { 0.0f, -scrollSpeed }, getGame()->getCamera()));
+            jt::Vector2f { 0.0f, -scrollSpeed }, getGame()->getCamera()));
 
     getGame()->input()->keyboard()->setCommandPressed({ jt::KeyCode::A, jt::KeyCode::Left },
         std::make_shared<ControlCommandMoveCam>(
-            jt::Vector2 { -scrollSpeed, 0.0f }, getGame()->getCamera()));
+            jt::Vector2f { -scrollSpeed, 0.0f }, getGame()->getCamera()));
 
     getGame()->input()->keyboard()->setCommandPressed({ jt::KeyCode::S, jt::KeyCode::Down },
         std::make_shared<ControlCommandMoveCam>(
-            jt::Vector2 { 0.0f, scrollSpeed }, getGame()->getCamera()));
+            jt::Vector2f { 0.0f, scrollSpeed }, getGame()->getCamera()));
 
     getGame()->input()->keyboard()->setCommandPressed({ jt::KeyCode::D, jt::KeyCode::Right },
         std::make_shared<ControlCommandMoveCam>(
-            jt::Vector2 { scrollSpeed, 0.0f }, getGame()->getCamera()));
+            jt::Vector2f { scrollSpeed, 0.0f }, getGame()->getCamera()));
 }
 
 void StateScroll::doInternalUpdate(float const elapsed)

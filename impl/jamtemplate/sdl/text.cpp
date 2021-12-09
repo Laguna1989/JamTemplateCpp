@@ -40,8 +40,8 @@ void Text::setOutline(float /*thickness*/, jt::Color /*col*/)
     std::cerr << "Font outline not suppored by SDL TTF fonts" << std::endl;
 }
 
-void Text::setPosition(jt::Vector2 const& pos) { m_position = pos; }
-jt::Vector2 Text::getPosition() const { return m_position; }
+void Text::setPosition(jt::Vector2f const& pos) { m_position = pos; }
+jt::Vector2f Text::getPosition() const { return m_position; }
 
 void Text::setColor(const jt::Color& col) { m_color = col; }
 jt::Color Text::getColor() const { return m_color; }
@@ -49,32 +49,30 @@ jt::Color Text::getColor() const { return m_color; }
 void Text::setFlashColor(const jt::Color& col) { m_flashColor = col; }
 jt::Color Text::getFlashColor() const { return m_flashColor; }
 
-jt::Rect Text::getGlobalBounds() const
+jt::Rectf Text::getGlobalBounds() const
 {
-    return jt::Rect { m_position.x(), m_position.y(),
-        static_cast<float>(m_textTextureSizeX) * m_scale.x()
-            / static_cast<float>(getUpscaleFactor()),
-        static_cast<float>(m_textTextureSizeY) * m_scale.y()
+    return jt::Rectf { m_position.x, m_position.y,
+        static_cast<float>(m_textTextureSizeX) * m_scale.x / static_cast<float>(getUpscaleFactor()),
+        static_cast<float>(m_textTextureSizeY) * m_scale.y
             / static_cast<float>(getUpscaleFactor()) };
 }
-jt::Rect Text::getLocalBounds() const
+jt::Rectf Text::getLocalBounds() const
 {
-    return jt::Rect { 0, 0,
-        static_cast<float>(m_textTextureSizeX) * m_scale.x()
-            / static_cast<float>(getUpscaleFactor()),
-        static_cast<float>(m_textTextureSizeY) * m_scale.y()
+    return jt::Rectf { 0, 0,
+        static_cast<float>(m_textTextureSizeX) * m_scale.x / static_cast<float>(getUpscaleFactor()),
+        static_cast<float>(m_textTextureSizeY) * m_scale.y
             / static_cast<float>(getUpscaleFactor()) };
 }
 
-void Text::setScale(jt::Vector2 const& scale) { m_scale = scale; }
-jt::Vector2 Text::getScale() const { return m_scale; }
+void Text::setScale(jt::Vector2f const& scale) { m_scale = scale; }
+jt::Vector2f Text::getScale() const { return m_scale; }
 
-void Text::setOrigin(jt::Vector2 const& origin)
+void Text::setOrigin(jt::Vector2f const& origin)
 {
     m_origin = origin;
     m_offsetFromOrigin = -1.0f * origin;
 }
-jt::Vector2 Text::getOrigin() const { return m_origin; }
+jt::Vector2f Text::getOrigin() const { return m_origin; }
 
 void Text::setTextAlign(Text::TextAlign ta)
 {
@@ -93,11 +91,11 @@ void Text::doUpdate(float /*elapsed*/)
 void Text::doDrawShadow(std::shared_ptr<jt::renderTarget> const sptr) const
 {
     auto const destRect = getDestRect(getShadowOffset());
-    SDL_Point const p { static_cast<int>(m_origin.x()), static_cast<int>(m_origin.y()) };
+    SDL_Point const p { static_cast<int>(m_origin.x), static_cast<int>(m_origin.y) };
 
     auto const flip = jt::getFlipFromScale(m_scale);
     auto col = getShadowColor();
-    col.a() = std::min(col.a(), m_color.a());
+    col.a = std::min(col.a, m_color.a);
     setSDLColor(col);
     SDL_RenderCopyEx(sptr.get(), m_textTexture.get(), nullptr, &destRect, -getRotation(), &p, flip);
 }
@@ -105,7 +103,7 @@ void Text::doDrawShadow(std::shared_ptr<jt::renderTarget> const sptr) const
 void Text::doDraw(std::shared_ptr<jt::renderTarget> const sptr) const
 {
     auto const destRect = getDestRect();
-    SDL_Point const p { static_cast<int>(m_origin.x()), static_cast<int>(m_origin.y()) };
+    SDL_Point const p { static_cast<int>(m_origin.x), static_cast<int>(m_origin.y) };
 
     auto const flip = jt::getFlipFromScale(m_scale);
     setSDLColor(getColor());
@@ -115,7 +113,7 @@ void Text::doDraw(std::shared_ptr<jt::renderTarget> const sptr) const
 void Text::doDrawFlash(std::shared_ptr<jt::renderTarget> const sptr) const
 {
     auto const destRect = getDestRect();
-    SDL_Point const p { static_cast<int>(m_origin.x()), static_cast<int>(m_origin.y()) };
+    SDL_Point const p { static_cast<int>(m_origin.x), static_cast<int>(m_origin.y) };
 
     auto const flip = jt::getFlipFromScale(m_scale);
     setSDLColor(getFlashColor());
@@ -142,16 +140,16 @@ void Text::renderOneLineOfText(std::shared_ptr<jt::renderTarget> const sptr, std
     SDL_QueryTexture(
         textTexture, nullptr, nullptr, &w, &h); // get the width and height of the texture
 
-    jt::Vector2 alignOffset {};
+    jt::Vector2f alignOffset {};
     if (lineCount != 0 && m_textAlign == TextAlign::CENTER) {
-        alignOffset.x()
+        alignOffset.x
             = static_cast<float>(m_textTextureSizeX) / 2.0f - static_cast<float>(w) / 2.0f;
     }
-    jt::Vector2 const pos = jt::Vector2 { 0, static_cast<float>(h * i) } + alignOffset;
+    jt::Vector2f const pos = jt::Vector2f { 0, static_cast<float>(h * i) } + alignOffset;
 
     SDL_Rect destRect; // create a rect
-    destRect.x = static_cast<int>(pos.x()); // controls the rect's x coordinate
-    destRect.y = static_cast<int>(pos.y()); // controls the rect's y coordinte
+    destRect.x = static_cast<int>(pos.x); // controls the rect's x coordinate
+    destRect.y = static_cast<int>(pos.y); // controls the rect's y coordinte
     destRect.w = static_cast<int>(w); // controls the width of the rect
     destRect.h = static_cast<int>(h); // controls the height of the rect
 
@@ -227,32 +225,32 @@ std::shared_ptr<jt::renderTarget> Text::getRenderTarget()
 
 void Text::setSDLColor(jt::Color const& col) const
 {
-    SDL_SetTextureColorMod(m_textTexture.get(), col.r(), col.g(), col.b());
-    SDL_SetTextureAlphaMod(m_textTexture.get(), col.a());
+    SDL_SetTextureColorMod(m_textTexture.get(), col.r, col.g, col.b);
+    SDL_SetTextureAlphaMod(m_textTexture.get(), col.a);
 }
 
-SDL_Rect Text::getDestRect(jt::Vector2 const& positionOffset) const
+SDL_Rect Text::getDestRect(jt::Vector2f const& positionOffset) const
 {
-    jt::Vector2 alignOffset { 0, 0 };
+    jt::Vector2f alignOffset { 0, 0 };
     if (m_textAlign == TextAlign::CENTER) {
-        alignOffset.x() = -static_cast<float>(m_textTextureSizeX) / 2.0f
-            / static_cast<float>(getUpscaleFactor()) * m_scale.x();
+        alignOffset.x = -static_cast<float>(m_textTextureSizeX) / 2.0f
+            / static_cast<float>(getUpscaleFactor()) * m_scale.x;
     }
     if (m_textAlign == TextAlign::RIGHT) {
-        alignOffset.x() = -static_cast<float>(m_textTextureSizeX)
-            / static_cast<float>(getUpscaleFactor()) * m_scale.x();
+        alignOffset.x = -static_cast<float>(m_textTextureSizeX)
+            / static_cast<float>(getUpscaleFactor()) * m_scale.x;
     }
 
-    jt::Vector2 pos = m_position + getShakeOffset() + getOffset() + getCamOffset() + alignOffset
+    jt::Vector2f pos = m_position + getShakeOffset() + getOffset() + getCamOffset() + alignOffset
         + positionOffset + m_offsetFromOrigin;
 
     SDL_Rect destRect; // create a rect
-    destRect.x = static_cast<int>(pos.x()); // controls the rect's x coordinate
-    destRect.y = static_cast<int>(pos.y()); // controls the rect's y coordinte
+    destRect.x = static_cast<int>(pos.x); // controls the rect's x coordinate
+    destRect.y = static_cast<int>(pos.y); // controls the rect's y coordinte
     destRect.w = static_cast<int>(
-        static_cast<float>(m_textTextureSizeX) * m_scale.x()); // controls the width of the rect
+        static_cast<float>(m_textTextureSizeX) * m_scale.x); // controls the width of the rect
     destRect.h = static_cast<int>(
-        static_cast<float>(m_textTextureSizeY) * m_scale.y()); // controls the height of the rect
+        static_cast<float>(m_textTextureSizeY) * m_scale.y); // controls the height of the rect
 
     return destRect;
 }
@@ -264,7 +262,7 @@ void Text::calculateTextTextureSize(
     std::size_t maxLineLengthInChars { 0U };
     for (auto const& l : ssv) {
         if (l.size() > maxLineLengthInChars) {
-            maxLineLengthInPixel = getSizeForLine(sptr, l).x();
+            maxLineLengthInPixel = getSizeForLine(sptr, l).x;
             maxLineLengthInChars = l.size();
         }
     }

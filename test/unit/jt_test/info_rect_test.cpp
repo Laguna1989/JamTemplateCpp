@@ -9,8 +9,8 @@ TEST(InfoRectTest, CanBeDefaultConstructed)
 
 TEST(InfoRectTest, ContainsStoredValues)
 {
-    jt::Vector2 const pos { 100.0f, 40.5f };
-    jt::Vector2 const size { 20.0f, 30.f };
+    jt::Vector2f const pos { 100.0f, 40.5f };
+    jt::Vector2f const size { 20.0f, 30.f };
     float const angle { 45.0f };
     std::string const type { "type" };
     jt::tilemap::InfoRect r { pos, size, angle, type };

@@ -12,16 +12,16 @@
 
 void StateBox2d::doInternalCreate()
 {
-    m_world = std::make_shared<jt::Box2DWorldImpl>(jt::Vector2 { 0.0f, 100.0f });
+    m_world = std::make_shared<jt::Box2DWorldImpl>(jt::Vector2f { 0.0f, 100.0f });
     CreateWalls();
 
     CreatePlayer();
 
     m_bar1 = std::make_shared<jt::Bar>(100.0f, 10.0f, true, getGame()->getTextureManager());
-    m_bar1->setPosition(jt::Vector2 { 10, 10 });
+    m_bar1->setPosition(jt::Vector2f { 10, 10 });
 
     m_bar2 = std::make_shared<jt::Bar>(100.0f, 10.0f, true, getGame()->getTextureManager());
-    m_bar2->setPosition(jt::Vector2 { 10, 25 });
+    m_bar2->setPosition(jt::Vector2f { 10, 25 });
     m_bar2->setMaxValue(2.0f);
 }
 
@@ -69,7 +69,7 @@ void StateBox2d::doInternalDraw() const
     m_bar2->draw(getGame()->getRenderTarget());
 }
 
-void StateBox2d::CreateOneWall(jt::Vector2 const& pos)
+void StateBox2d::CreateOneWall(jt::Vector2f const& pos)
 {
     b2BodyDef groundBodyDef;
     groundBodyDef.fixedRotation = true;
@@ -85,7 +85,7 @@ void StateBox2d::CreateOneWall(jt::Vector2 const& pos)
     add(tw1);
 
     auto tw2 = jt::TweenScale::create(
-        b2obj->getAnimation(), 0.75f, jt::Vector2 { 0.0f, 0.0f }, jt::Vector2 { 1.0f, 1.0f });
+        b2obj->getAnimation(), 0.75f, jt::Vector2f { 0.0f, 0.0f }, jt::Vector2f { 1.0f, 1.0f });
     tw2->setStartDelay(tweenstartDelay);
     add(tw2);
 }
@@ -97,17 +97,17 @@ void StateBox2d::CreateWalls()
     for (int i = 0; i != 30; ++i) {
         auto const i_as_float = static_cast<float>(i);
         // ceiling
-        CreateOneWall(jt::Vector2 { i_as_float * 16.0f, 0.0f });
+        CreateOneWall(jt::Vector2f { i_as_float * 16.0f, 0.0f });
 
         // floor layers
-        CreateOneWall(jt::Vector2 { i_as_float * 16.0f, 320.0f });
-        CreateOneWall(jt::Vector2 { i_as_float * 16.0f, 320.0f - 16.0f });
-        CreateOneWall(jt::Vector2 { i_as_float * 16.0f, 320.0f - 32.0f });
+        CreateOneWall(jt::Vector2f { i_as_float * 16.0f, 320.0f });
+        CreateOneWall(jt::Vector2f { i_as_float * 16.0f, 320.0f - 16.0f });
+        CreateOneWall(jt::Vector2f { i_as_float * 16.0f, 320.0f - 32.0f });
 
         // walls
 
-        CreateOneWall(jt::Vector2 { 0.0f, 16.0f * i_as_float });
-        CreateOneWall(jt::Vector2 { 400.0f - 16.0f, 16.0f * i_as_float });
+        CreateOneWall(jt::Vector2f { 0.0f, 16.0f * i_as_float });
+        CreateOneWall(jt::Vector2f { 400.0f - 16.0f, 16.0f * i_as_float });
     }
 }
 void StateBox2d::CreatePlayer()

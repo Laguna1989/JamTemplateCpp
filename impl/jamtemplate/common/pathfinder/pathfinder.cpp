@@ -13,8 +13,8 @@ float calculateDistance(NodeT node1, jt::Vector2u position2)
 {
     auto const thisPosition = node1->getTilePosition();
 
-    auto diff = jt::Vector2 { static_cast<float>(position2.x()) - thisPosition.x(),
-        static_cast<float>(position2.y()) - thisPosition.y() };
+    auto diff = jt::Vector2f { static_cast<float>(position2.x) - thisPosition.x,
+        static_cast<float>(position2.y) - thisPosition.y };
     return jt::MathHelper::length(diff);
 }
 

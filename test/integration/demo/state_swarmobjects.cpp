@@ -14,10 +14,10 @@ void StateSwarmObjects::doInternalCreate()
     using jt::TweenAlpha;
 
     m_sky = jt::dh::createShapeRect(
-        jt::Vector2 { 400, 300 }, jt::Color { 178, 255, 255 }, getGame()->getTextureManager());
+        jt::Vector2f { 400, 300 }, jt::Color { 178, 255, 255 }, getGame()->getTextureManager());
 
     m_overlay = jt::dh::createShapeRect(
-        jt::Vector2 { 400, 300 }, jt::colors::Black, getGame()->getTextureManager());
+        jt::Vector2f { 400, 300 }, jt::colors::Black, getGame()->getTextureManager());
     m_overlay->update(0.0f);
 
     auto tw = TweenAlpha::create(m_overlay, 0.5f, std::uint8_t { 255 }, std::uint8_t { 0 });
@@ -50,7 +50,7 @@ void StateSwarmObjects::doInternalUpdate(float const elapsed)
 
 void StateSwarmObjects::updateSwarm()
 {
-    jt::Vector2 centerPos {};
+    jt::Vector2f centerPos {};
     for (auto const& o : *m_SwarmObjects) {
         centerPos = centerPos + o.lock()->getPosition();
     }
@@ -73,9 +73,9 @@ void StateSwarmObjects::updateOneSwarmObject(const size_t& firstSwarmObjectIndex
 
     auto const vortexForce = jt::MathHelper::rotateBy(dist, 90);
     float vortexForceStrength = distLength / 20.0f;
-    jt::Vector2 SummedUpDir { dist.x() * 15.0f, dist.y() * 15.0f };
+    jt::Vector2f SummedUpDir { dist.x * 15.0f, dist.y * 15.0f };
     SummedUpDir = SummedUpDir + vortexForce * vortexForceStrength;
-    // jt::Vector2 SummedUpDir { 0.0f, 0.0f };
+    // jt::Vector2f SummedUpDir { 0.0f, 0.0f };
     for (size_t secondSwarmObjectIndex = 0; secondSwarmObjectIndex != m_SwarmObjects->size();
          ++secondSwarmObjectIndex) {
         if (firstSwarmObjectIndex == secondSwarmObjectIndex) {

@@ -38,9 +38,9 @@ private:
         float vx = jt::Random::getFloatGauss(0, 50);
         float vy = jt::Random::getFloatGauss(0, 50);
 
-        m_position = jt::Vector2 { x, y };
-        m_velocity = jt::Vector2 { vx, vy };
-        m_acceleration = jt::Vector2 { 0.0f, -50.0f / 2.0f };
+        m_position = jt::Vector2f { x, y };
+        m_velocity = jt::Vector2f { vx, vy };
+        m_acceleration = jt::Vector2f { 0.0f, -50.0f / 2.0f };
     }
     void doUpdate(float const elapsed) override
     {
@@ -55,9 +55,9 @@ private:
     void doDraw() const override { m_animation->draw(getGame()->getRenderTarget()); }
 
     std::shared_ptr<jt::Animation> m_animation;
-    jt::Vector2 m_position;
-    jt::Vector2 m_velocity;
-    jt::Vector2 m_acceleration;
+    jt::Vector2f m_position;
+    jt::Vector2f m_velocity;
+    jt::Vector2f m_acceleration;
 };
 
 #endif

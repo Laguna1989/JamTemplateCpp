@@ -15,13 +15,13 @@ public:
     virtual bool isOpen() const override;
     virtual void checkForClose() override;
 
-    virtual jt::Vector2 getSize() const override;
+    virtual jt::Vector2f getSize() const override;
 
     virtual void draw(std::unique_ptr<jt::Sprite>&) override;
 
     virtual void display() override;
 
-    virtual jt::Vector2 getMousePosition() override;
+    virtual jt::Vector2f getMousePosition() override;
 
     void setMouseCursorVisible(bool visible) override;
     bool getMouseCursorVisible() const override;
@@ -31,7 +31,7 @@ public:
 
 private:
     std::shared_ptr<SDL_Window> m_window;
-    jt::Vector2 m_size;
+    jt::Vector2f m_size;
     bool m_isMouseCursorVisible { true };
     bool m_isOpen { true };
     bool m_renderGui { false };

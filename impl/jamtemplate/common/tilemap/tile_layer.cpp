@@ -8,11 +8,12 @@
 
 namespace jt {
 namespace tilemap {
-TileLayer::TileLayer(std::string const& path, std::string const& layerName, std::shared_ptr<jt::TextureManagerInterface> textureManager)
+TileLayer::TileLayer(std::string const& path, std::string const& layerName,
+    std::shared_ptr<jt::TextureManagerInterface> textureManager)
 {
     m_layerName = layerName;
-    m_position = jt::Vector2 { 0.0f, 0.0f };
-    m_screenSizeHint = jt::Vector2 { 0.0f, 0.0f };
+    m_position = jt::Vector2f { 0.0f, 0.0f };
+    m_screenSizeHint = jt::Vector2f { 0.0f, 0.0f };
     m_textureManager = textureManager;
 
     tson::Tileson parser;
@@ -32,7 +33,8 @@ TileLayer::TileLayer(std::string const& path, std::string const& layerName, std:
     for (int j = 0; j != rows; ++j) {
         for (int i = 0; i != columns; ++i) {
             {
-                jt::Sprite tile {tilesetName, jt::Recti(i * ts.x, j * ts.y, ts.x, ts.y), m_textureManager };
+                jt::Sprite tile { tilesetName, jt::Recti { i * ts.x, j * ts.y, ts.x, ts.y },
+                    m_textureManager };
                 tile.setIgnoreCamMovement(false);
                 m_tileSprites.at(i + j * columns) = tile;
             }
@@ -72,29 +74,29 @@ void TileLayer::drawSingleTileLayer(
         auto const tilePos = Conversion::vec(tile.getPosition());
 
         // optimization: don't draw tiles outside the game window
-        if (this->m_screenSizeHint.x() != 0 && this->m_screenSizeHint.y() != 0) {
-            jt::Vector2 const camOffset = getStaticCamOffset();
-            auto const px = tilePos.x();
-            auto const py = tilePos.y();
+        if (this->m_screenSizeHint.x != 0 && this->m_screenSizeHint.y != 0) {
+            jt::Vector2f const camOffset = getStaticCamOffset();
+            auto const px = tilePos.x;
+            auto const py = tilePos.y;
             auto const tsx = tile.getTile()->getTileSize().x;
             auto const tsy = tile.getTile()->getTileSize().y;
-            if (px + camOffset.x() + tsx < 0) {
+            if (px + camOffset.x + tsx < 0) {
                 continue;
             }
-            if (py + camOffset.y() + tsy < 0) {
+            if (py + camOffset.y + tsy < 0) {
                 continue;
             }
-            if (px + camOffset.x() >= this->m_screenSizeHint.x() + tsx) {
+            if (px + camOffset.x >= this->m_screenSizeHint.x + tsx) {
                 continue;
             }
-            if (py + camOffset.y() >= this->m_screenSizeHint.y() + tsy) {
+            if (py + camOffset.y >= this->m_screenSizeHint.y + tsy) {
                 continue;
             }
         }
         auto const pixelPosForTile = tilePos + posOffset;
         auto const id = tile.getTile()->getId() - 1U;
-        this->m_tileSprites.at(id).setPosition(jt::Vector2 {
-            pixelPosForTile.x() * this->m_scale.x(), pixelPosForTile.y() * this->m_scale.y() });
+        this->m_tileSprites.at(id).setPosition(jt::Vector2f {
+            pixelPosForTile.x * this->m_scale.x, pixelPosForTile.y * this->m_scale.y });
         this->m_tileSprites.at(id).setScale(this->m_scale);
         this->m_tileSprites.at(id).update(0.0f);
         this->m_tileSprites.at(id).draw(rt);
@@ -124,24 +126,24 @@ void TileLayer::setColor(jt::Color const& col)
 }
 jt::Color TileLayer::getColor() const { return m_color; }
 
-void TileLayer::setPosition(jt::Vector2 const& pos) { m_position = pos; }
-jt::Vector2 TileLayer::getPosition() const { return m_position; }
+void TileLayer::setPosition(jt::Vector2f const& pos) { m_position = pos; }
+jt::Vector2f TileLayer::getPosition() const { return m_position; }
 
-jt::Rect TileLayer::getGlobalBounds() const { return jt::Rect {}; }
-jt::Rect TileLayer::getLocalBounds() const { return jt::Rect {}; }
+jt::Rectf TileLayer::getGlobalBounds() const { return jt::Rectf {}; }
+jt::Rectf TileLayer::getLocalBounds() const { return jt::Rectf {}; }
 
 void TileLayer::setFlashColor(jt::Color const& col) { m_flashColor = col; }
 jt::Color TileLayer::getFlashColor() const { return m_flashColor; }
 
-void TileLayer::setScale(jt::Vector2 const& scale) { m_scale = scale; }
-jt::Vector2 TileLayer::getScale() const { return m_scale; }
+void TileLayer::setScale(jt::Vector2f const& scale) { m_scale = scale; }
+jt::Vector2f TileLayer::getScale() const { return m_scale; }
 
-void TileLayer::setOrigin(jt::Vector2 const& origin) { m_origin = origin; }
-jt::Vector2 TileLayer::getOrigin() const { return m_origin; }
+void TileLayer::setOrigin(jt::Vector2f const& origin) { m_origin = origin; }
+jt::Vector2f TileLayer::getOrigin() const { return m_origin; }
 
 void TileLayer::doRotate(float /*rot*/) { }
 
-void TileLayer::setScreenSizeHint(jt::Vector2 const& hint) { m_screenSizeHint = hint; }
+void TileLayer::setScreenSizeHint(jt::Vector2f const& hint) { m_screenSizeHint = hint; }
 
 jt::Vector2u TileLayer::getMapSizeInTiles()
 {

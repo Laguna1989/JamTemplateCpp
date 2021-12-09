@@ -39,9 +39,9 @@ private:
             [this]() { getGame()->getStateManager()->switchState(std::make_shared<State>()); });
         auto const text = jt::dh::createText(getGame()->getRenderTarget(), textString, 12);
         text->setTextAlign(jt::Text::TextAlign::LEFT);
-        text->setOrigin(jt::Vector2 { -8, 0 });
+        text->setOrigin(jt::Vector2f { -8, 0 });
         button->setDrawable(text);
-        button->setPosition(jt::Vector2 { detail::buttonOffsetX, posY });
+        button->setPosition(jt::Vector2f { detail::buttonOffsetX, posY });
         add(std::move(button));
 
         m_buttonCount++;

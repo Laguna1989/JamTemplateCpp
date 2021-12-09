@@ -8,7 +8,7 @@ namespace jt {
 
 RenderWindow::RenderWindow(unsigned int width, unsigned int height, std::string const& title)
 {
-    m_size = jt::Vector2 { static_cast<float>(width), static_cast<float>(height) };
+    m_size = jt::Vector2f { static_cast<float>(width), static_cast<float>(height) };
     SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "0");
     m_window = std::shared_ptr<SDL_Window>(
         SDL_CreateWindow(title.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
@@ -31,7 +31,7 @@ std::shared_ptr<jt::renderTarget> RenderWindow::createRenderTarget()
     SDL_SetRenderDrawBlendMode(renderTarget.get(), SDL_BLENDMODE_BLEND);
     ImGui::CreateContext();
     ImGuiSDL::Initialize(
-        renderTarget.get(), static_cast<int>(m_size.x()), static_cast<int>(m_size.y()));
+        renderTarget.get(), static_cast<int>(m_size.x), static_cast<int>(m_size.y));
     return renderTarget;
 }
 
@@ -54,7 +54,7 @@ void RenderWindow::checkForClose()
 #endif
 }
 
-jt::Vector2 RenderWindow::getSize() const { return m_size; }
+jt::Vector2f RenderWindow::getSize() const { return m_size; }
 
 void RenderWindow::draw(std::unique_ptr<jt::Sprite>& spr)
 {
@@ -74,14 +74,14 @@ void RenderWindow::display()
     m_renderGui = false;
 }
 
-jt::Vector2 RenderWindow::getMousePosition()
+jt::Vector2f RenderWindow::getMousePosition()
 {
     SDL_PumpEvents();
     int mx { 0 };
     int my { 0 };
     auto const mouseState = SDL_GetMouseState(&mx, &my);
     (void)mouseState;
-    return jt::Vector2 { static_cast<float>(mx), static_cast<float>(my) };
+    return jt::Vector2f { static_cast<float>(mx), static_cast<float>(my) };
 }
 
 void RenderWindow::setMouseCursorVisible(bool visible)

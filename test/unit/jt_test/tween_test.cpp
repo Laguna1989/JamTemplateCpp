@@ -26,7 +26,7 @@ public:
     void SetUp() override
     {
         tm = getTextureManager();
-        m_obj = jt::dh::createShapeRect(jt::Vector2 { 20.0f, 20.0f }, jt::colors::White, tm);
+        m_obj = jt::dh::createShapeRect(jt::Vector2f { 20.0f, 20.0f }, jt::colors::White, tm);
     }
 
 protected:
@@ -162,16 +162,16 @@ TEST_F(TweenBaseTest, Alpha)
 {
     float const time { 5.0f };
 
-    EXPECT_EQ(m_obj->getColor().a(), 255U);
+    EXPECT_EQ(m_obj->getColor().a, 255U);
 
     uint8_t const start { 0U };
     uint8_t const end { 255U };
 
     auto const twa = ta::create(m_obj, time, start, end);
     twa->update(0.0f);
-    EXPECT_EQ(m_obj->getColor().a(), start);
+    EXPECT_EQ(m_obj->getColor().a, start);
     twa->update(time);
-    EXPECT_EQ(m_obj->getColor().a(), end);
+    EXPECT_EQ(m_obj->getColor().a, end);
 }
 
 TEST_F(TweenBaseTest, Color)
@@ -192,8 +192,8 @@ TEST_F(TweenBaseTest, Position)
 {
     float const time { 5.0f };
 
-    jt::Vector2 const start { 10.0f, 10.0f };
-    jt::Vector2 const end { -15.0f, -15.0f };
+    jt::Vector2f const start { 10.0f, 10.0f };
+    jt::Vector2f const end { -15.0f, -15.0f };
 
     auto const twp = tp::create(m_obj, time, start, end);
     twp->update(0.0f);
@@ -206,8 +206,8 @@ TEST_F(TweenBaseTest, Scale)
 {
     float const time { 5.0f };
 
-    jt::Vector2 const start { -1.0f, -1.0f };
-    jt::Vector2 const end { 5.0f, 5.0f };
+    jt::Vector2f const start { -1.0f, -1.0f };
+    jt::Vector2f const end { 5.0f, 5.0f };
 
     auto const tws = ts::create(m_obj, time, start, end);
     tws->update(0.0f);

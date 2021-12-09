@@ -6,7 +6,7 @@
 #include "state_select.hpp"
 #include <cmath>
 
-RopeMass::RopeMass(jt::Vector2 pos, float m)
+RopeMass::RopeMass(jt::Vector2f pos, float m)
     : position { std::move(pos) }
     , velocity { 0.0f, 0.0f }
     , acceleration { 0.0f, 0.0f }
@@ -15,14 +15,14 @@ RopeMass::RopeMass(jt::Vector2 pos, float m)
 {
 }
 
-jt::Vector2 StateRope::getRopeMassPosition(int i) const
+jt::Vector2f StateRope::getRopeMassPosition(int i) const
 {
-    return m_ropeStartingPoint + jt::Vector2 { 1.5f * static_cast<float>(i), 1.0f };
+    return m_ropeStartingPoint + jt::Vector2f { 1.5f * static_cast<float>(i), 1.0f };
 }
 
 std::shared_ptr<RopeMass> StateRope::createRopeMassPointer(int i) const
 {
-    jt::Vector2 pos = getRopeMassPosition(i);
+    jt::Vector2f pos = getRopeMassPosition(i);
     auto r = std::make_shared<RopeMass>(pos, 1.0f);
     bool const isFirstRopeMass = i == 0;
     if (isFirstRopeMass) {
@@ -79,7 +79,7 @@ void StateRope::calculateRopeForces()
         if (r == 0) {
             continue;
         }
-        jt::Vector2 force = -1.0f * (springVector / r) * (r - 1.75f) * m_springConstant;
+        jt::Vector2f force = -1.0f * (springVector / r) * (r - 1.75f) * m_springConstant;
 
         force += -10.0f * (r1->velocity - r2->velocity) * 0.9f;
 
@@ -121,7 +121,7 @@ void StateRope::doInternalDraw() const
         auto const p = r->position;
         auto const size = static_cast<float>(2.0f * static_cast<float>(std::sqrt(r->mass)));
         auto s = jt::dh::createShapeRect(
-            jt::Vector2 { size, size }, jt::colors::White, getGame()->getTextureManager());
+            jt::Vector2f { size, size }, jt::colors::White, getGame()->getTextureManager());
         s->setPosition(p);
         s->update(0.1f);
         s->draw(getGame()->getRenderTarget());

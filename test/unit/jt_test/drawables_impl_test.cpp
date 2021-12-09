@@ -30,26 +30,26 @@ TEST_P(DrawableImplTestFixture, GlobalBoundsEqualLocalBoundsInitially)
 
 TEST_P(DrawableImplTestFixture, InitialOffset)
 {
-    jt::Vector2 const expected { 0.0f, 0.0f };
+    jt::Vector2f const expected { 0.0f, 0.0f };
     ASSERT_EQ(drawable->getOffset(), expected);
 }
 
 TEST_P(DrawableImplTestFixture, OffsetAfterSetOffset)
 {
-    jt::Vector2 const expected { -55.0f, 12.5f };
+    jt::Vector2f const expected { -55.0f, 12.5f };
     drawable->setOffset(expected);
     ASSERT_EQ(drawable->getOffset(), expected);
 }
 
 TEST_P(DrawableImplTestFixture, InitialOrigin)
 {
-    jt::Vector2 const expected { 0.0f, 0.0f };
+    jt::Vector2f const expected { 0.0f, 0.0f };
     ASSERT_EQ(drawable->getOrigin(), expected);
 }
 
 TEST_P(DrawableImplTestFixture, OriginAfterSetOffset)
 {
-    jt::Vector2 const expected { -55.0f, 12.5f };
+    jt::Vector2f const expected { -55.0f, 12.5f };
     drawable->setOrigin(expected);
     ASSERT_EQ(drawable->getOrigin(), expected);
 }
@@ -62,26 +62,26 @@ TEST_P(DrawableImplTestFixture, GetIgnoreCamMovementAfterSet)
 
 TEST_P(DrawableImplTestFixture, GetPositionInitial)
 {
-    jt::Vector2 const expected { 0.0f, 0.0f };
+    jt::Vector2f const expected { 0.0f, 0.0f };
     ASSERT_EQ(drawable->getPosition(), expected);
 }
 
 TEST_P(DrawableImplTestFixture, GetPositionAfterSetPosition)
 {
-    jt::Vector2 const expected { 55.5f, -12.0f };
+    jt::Vector2f const expected { 55.5f, -12.0f };
     drawable->setPosition(expected);
     ASSERT_EQ(drawable->getPosition(), expected);
 }
 
 TEST_P(DrawableImplTestFixture, GetScaleInitial)
 {
-    jt::Vector2 const expected { 1.0f, 1.0f };
+    jt::Vector2f const expected { 1.0f, 1.0f };
     ASSERT_EQ(drawable->getScale(), expected);
 }
 
 TEST_P(DrawableImplTestFixture, GetScaleAfterSetScale)
 {
-    jt::Vector2 const expected { 55.5f, -12.0f };
+    jt::Vector2f const expected { 55.5f, -12.0f };
     drawable->setScale(expected);
     ASSERT_EQ(drawable->getScale(), expected);
 }
@@ -98,15 +98,15 @@ TEST_P(DrawableImplTestFixture, Draw)
 
 TEST_P(DrawableImplTestFixture, DrawWithCamOffset)
 {
-    jt::DrawableImpl::setCamOffset(jt::Vector2 { -100.0f, -100.0f });
+    jt::DrawableImpl::setCamOffset(jt::Vector2f { -100.0f, -100.0f });
     drawable->update(0.1f);
     drawable->draw(getRenderTarget());
-    jt::DrawableImpl::setCamOffset(jt::Vector2 { 0.0f, 0.0f });
+    jt::DrawableImpl::setCamOffset(jt::Vector2f { 0.0f, 0.0f });
 }
 
 TEST_P(DrawableImplTestFixture, DrawWithShadow)
 {
-    drawable->setShadow(jt::colors::Green, jt::Vector2 { 4, 4 });
+    drawable->setShadow(jt::colors::Green, jt::Vector2f { 4, 4 });
     drawable->update(0.1f);
     drawable->draw(getRenderTarget());
 }
@@ -151,9 +151,9 @@ TEST_P(DrawableImplTestFixture, DrawWithShake)
 
 TEST_P(DrawableImplTestFixture, DrawScaled)
 {
-    drawable->setScale(jt::Vector2 { 2.0f, 2.0f });
+    drawable->setScale(jt::Vector2f { 2.0f, 2.0f });
     drawable->update(0.1f);
-    jt::DrawableImpl::setCamOffset(jt::Vector2 { 100.0f, 100.0f });
+    jt::DrawableImpl::setCamOffset(jt::Vector2f { 100.0f, 100.0f });
     drawable->draw(getRenderTarget());
 }
 
@@ -170,10 +170,10 @@ TEST_P(DrawableImplTestFixture, RotateSetsRotation)
 
 TEST_P(DrawableImplTestFixture, DrawRotated)
 {
-    drawable->setOrigin(jt::Vector2 { 16.0f, 16.0f });
+    drawable->setOrigin(jt::Vector2f { 16.0f, 16.0f });
     drawable->setRotation(22.5f);
     drawable->update(0.1f);
-    jt::DrawableImpl::setCamOffset(jt::Vector2 { 100.0f, 100.0f });
+    jt::DrawableImpl::setCamOffset(jt::Vector2f { 100.0f, 100.0f });
     drawable->draw(getRenderTarget());
 }
 

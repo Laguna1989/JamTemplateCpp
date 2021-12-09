@@ -10,8 +10,8 @@ TEST(BarTest, BarInitialValues)
     float const x = 64.0f;
     float const y = 16.0f;
     jt::Bar b { x, y, true, tm };
-    ASSERT_FLOAT_EQ(b.getLocalBounds().width(), x);
-    ASSERT_FLOAT_EQ(b.getLocalBounds().height(), y);
+    ASSERT_FLOAT_EQ(b.getLocalBounds().width, x);
+    ASSERT_FLOAT_EQ(b.getLocalBounds().height, y);
     ASSERT_FLOAT_EQ(b.getMaxValue(), 1.0f);
     ASSERT_FLOAT_EQ(b.getCurrentValue(), 0.0f);
 }

@@ -9,11 +9,8 @@ if (NOT USE_SFML)
             "${CMAKE_CURRENT_SOURCE_DIR}/game_test.cpp"
             "${CMAKE_CURRENT_SOURCE_DIR}/game_sfml_test.cpp"
             "${CMAKE_CURRENT_SOURCE_DIR}/render_window_sfml_test.cpp"
-            "${CMAKE_CURRENT_SOURCE_DIR}/sprite_sfml_test.cpp"
-            "${CMAKE_CURRENT_SOURCE_DIR}/vector_sfml_test.cpp")
+            "${CMAKE_CURRENT_SOURCE_DIR}/sprite_sfml_test.cpp")
 else ()
-    list(REMOVE_ITEM UNITTESTFILES
-            "${CMAKE_CURRENT_SOURCE_DIR}/vector_sdl_test.cpp")
 endif ()
 
 

@@ -6,7 +6,7 @@
 namespace jt {
 namespace dh {
 
-std::shared_ptr<jt::Shape> createShapeRect(jt::Vector2 const& size, jt::Color const& col,
+std::shared_ptr<jt::Shape> createShapeRect(jt::Vector2f const& size, jt::Color const& col,
     std::shared_ptr<jt::TextureManagerInterface> textureManager)
 {
     auto ptr = std::make_shared<jt::Shape>();
@@ -35,10 +35,10 @@ std::shared_ptr<jt::Text> createText(std::weak_ptr<jt::renderTarget> rt, std::st
 }
 
 std::shared_ptr<jt::Sprite> createVignette(
-    jt::Vector2 const& size, std::shared_ptr<jt::TextureManagerInterface> textureManager)
+    jt::Vector2f const& size, std::shared_ptr<jt::TextureManagerInterface> textureManager)
 {
-    auto ptr = std::make_shared<jt::Sprite>("#v#" + std::to_string(static_cast<int>(size.x())) + "#"
-            + std::to_string(static_cast<int>(size.y())),
+    auto ptr = std::make_shared<jt::Sprite>("#v#" + std::to_string(static_cast<int>(size.x)) + "#"
+            + std::to_string(static_cast<int>(size.y)),
         textureManager);
     ptr->setIgnoreCamMovement(true);
     return ptr;

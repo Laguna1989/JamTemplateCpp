@@ -25,8 +25,8 @@ public:
     // DO NOT CALL THIS FROM GAME CODE!
     void fromTexture(sf::Texture const& text);
 
-    void setPosition(jt::Vector2 const& pos) override;
-    jt::Vector2 getPosition() const override;
+    void setPosition(jt::Vector2f const& pos) override;
+    jt::Vector2f getPosition() const override;
 
     void setColor(jt::Color const& col) override;
     jt::Color getColor() const override;
@@ -34,14 +34,14 @@ public:
     void setFlashColor(jt::Color const& col) override;
     jt::Color getFlashColor() const override;
 
-    virtual jt::Rect getGlobalBounds() const override;
-    virtual jt::Rect getLocalBounds() const override;
+    virtual jt::Rectf getGlobalBounds() const override;
+    virtual jt::Rectf getLocalBounds() const override;
 
-    virtual void setScale(jt::Vector2 const& scale);
-    virtual jt::Vector2 getScale() const;
+    virtual void setScale(jt::Vector2f const& scale);
+    virtual jt::Vector2f getScale() const;
 
-    virtual void setOrigin(jt::Vector2 const& origin);
-    virtual jt::Vector2 getOrigin() const;
+    virtual void setOrigin(jt::Vector2f const& origin);
+    virtual jt::Vector2f getOrigin() const;
 
     // WARNING: This function is slow, because it needs to copy
     // graphics memory to ram first.
@@ -59,7 +59,7 @@ private:
     mutable sf::Image m_image;
     mutable bool m_imageStored { false };
 
-    jt::Vector2 m_position { 0, 0 };
+    jt::Vector2f m_position { 0, 0 };
 
     void doUpdate(float /*elapsed*/) override;
 

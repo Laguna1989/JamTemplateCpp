@@ -15,9 +15,9 @@ public:
     static std::string JamName() { return "TODO"; }
     static std::string JamDate() { return "TODO"; }
 
-    static jt::Vector2 GetWindowSize() { return jt::Vector2 { 800, 600 }; }
+    static jt::Vector2f GetWindowSize() { return jt::Vector2f { 800, 600 }; }
     static float GetZoom() { return 2.0f; }
-    static jt::Vector2 GetScreenSize() { return GetWindowSize() * (1.0f / GetZoom()); }
+    static jt::Vector2f GetScreenSize() { return GetWindowSize() * (1.0f / GetZoom()); }
 
     static jt::Color PaletteBackground() { return GP::getPalette().getColor(5); }
     static jt::Color PaletteFontFront() { return GP::getPalette().getColor(3); }

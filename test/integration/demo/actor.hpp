@@ -8,11 +8,11 @@
 class Actor : public ::jt::GameObject {
 public:
     void setPosition(jt::Vector2u const& posInTiles);
-    jt::Vector2 getPosition() const;
+    jt::Vector2f getPosition() const;
 
     void setPath(std::vector<std::shared_ptr<jt::pathfinder::NodeInterface>> const& path);
 
-    jt::Vector2 getFinalPosition();
+    jt::Vector2f getFinalPosition();
 
 private:
     void doCreate() override;

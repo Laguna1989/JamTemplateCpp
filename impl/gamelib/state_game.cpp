@@ -11,10 +11,10 @@
 
 void StateGame::doInternalCreate()
 {
-    m_world = std::make_shared<jt::Box2DWorldImpl>(jt::Vector2 { 0.0f, 0.0f });
+    m_world = std::make_shared<jt::Box2DWorldImpl>(jt::Vector2f { 0.0f, 0.0f });
 
-    float const w = static_cast<float>(GP::GetWindowSize().x());
-    float const h = static_cast<float>(GP::GetWindowSize().y());
+    float const w = static_cast<float>(GP::GetWindowSize().x);
+    float const h = static_cast<float>(GP::GetWindowSize().y);
 
     using jt::Shape;
     using jt::TweenAlpha;
@@ -26,7 +26,7 @@ void StateGame::doInternalCreate()
     m_background->update(0.0f);
 
     m_overlay = std::make_shared<Shape>();
-    m_overlay->makeRect(jt::Vector2 { w, h }, getGame()->getTextureManager());
+    m_overlay->makeRect(jt::Vector2f { w, h }, getGame()->getTextureManager());
     m_overlay->setColor(jt::Color { 0, 0, 0 });
     m_overlay->setIgnoreCamMovement(true);
     m_overlay->update(0);
@@ -36,8 +36,8 @@ void StateGame::doInternalCreate()
     add(tw);
 
     m_vignette = std::make_shared<jt::Sprite>("#v#"
-            + std::to_string(static_cast<int>(GP::GetScreenSize().x())) + "#"
-            + std::to_string(static_cast<int>(GP::GetScreenSize().y())),
+            + std::to_string(static_cast<int>(GP::GetScreenSize().x)) + "#"
+            + std::to_string(static_cast<int>(GP::GetScreenSize().y)),
         getGame()->getTextureManager());
     m_vignette->setIgnoreCamMovement(true);
     m_vignette->setColor({ 255, 255, 255, 100 });

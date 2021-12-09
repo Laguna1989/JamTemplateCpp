@@ -21,18 +21,18 @@ void StateParticles::createParticlesFire()
         [this]() {
             auto s = jt::dh::createShapeCircle(
                 20, jt::MakeColor::FromHSV(45, 80, 100), getGame()->getTextureManager());
-            s->setOrigin(jt::Vector2 { 20, 20 });
-            s->setPosition(jt::Vector2 { -2000.0f, -2000.0f });
-            s->setScale(jt::Vector2 { 0.5f, 0.5f });
+            s->setOrigin(jt::Vector2f { 20, 20 });
+            s->setPosition(jt::Vector2f { -2000.0f, -2000.0f });
+            s->setScale(jt::Vector2f { 0.5f, 0.5f });
             return s;
         },
         [this](auto s) {
             auto totalTime = 0.9f;
 
-            auto startPosition = jt::Random::getRandomPointIn(jt::Rect { 295, 250, 10, 0 });
+            auto startPosition = jt::Random::getRandomPointIn(jt::Rectf { 295, 250, 10, 0 });
             s->setPosition(startPosition);
 
-            s->setScale(jt::Vector2 { 0.5f, 0.5f });
+            s->setScale(jt::Vector2f { 0.5f, 0.5f });
 
             jt::TweenAlpha::Sptr twaIn = jt::TweenAlpha::create(s, 0.1f, 0, 255);
             twaIn->setSkipFrames(1);
@@ -48,13 +48,13 @@ void StateParticles::createParticlesFire()
             add(twaOut);
 
             auto tws = jt::TweenScale::create(
-                s, totalTime - 0.1f, jt::Vector2 { 0.5f, 0.5f }, jt::Vector2 { 1.0f, 1.0f });
+                s, totalTime - 0.1f, jt::Vector2f { 0.5f, 0.5f }, jt::Vector2f { 1.0f, 1.0f });
             tws->setSkipFrames(1);
             tws->setStartDelay(0.1f);
             add(tws);
 
             auto endPosition
-                = startPosition + jt::Random::getRandomPointIn(jt::Rect { -30, -150, 60, 40 });
+                = startPosition + jt::Random::getRandomPointIn(jt::Rectf { -30, -150, 60, 40 });
             jt::TweenPosition::Sptr twp
                 = jt::TweenPosition::create(s, totalTime, startPosition, endPosition);
             twp->setSkipFrames(1);
@@ -87,19 +87,19 @@ void StateParticles::createParticlesGlitter()
     m_particlesGlitter = jt::ParticleSystem<jt::Shape, numberOfParticles>::createPS(
         [this]() {
             auto s = std::make_shared<jt::Shape>();
-            s->makeRect(jt::Vector2 { 4, 4 }, getGame()->getTextureManager());
+            s->makeRect(jt::Vector2f { 4, 4 }, getGame()->getTextureManager());
             s->setOrigin({ 2, 2 });
             return s;
         },
         [this](auto s) {
-            s->setPosition(jt::Random::getRandomPointIn(jt::Rect { 0, 0, 200, 300 }));
+            s->setPosition(jt::Random::getRandomPointIn(jt::Rectf { 0, 0, 200, 300 }));
 
             auto twa = jt::TweenAlpha::create(s, 0.5, 255, 0);
             twa->setSkipFrames(1);
             add(twa);
 
             auto tws = jt::TweenScale::create(
-                s, 0.5, jt::Vector2 { 1.0f, 1.0f }, jt::Vector2 { 2.0f, 2.0f });
+                s, 0.5, jt::Vector2f { 1.0f, 1.0f }, jt::Vector2f { 2.0f, 2.0f });
             tws->setSkipFrames(1);
             add(tws);
         });

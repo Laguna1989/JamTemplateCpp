@@ -32,9 +32,9 @@ void RenderWindow::checkForClose()
     }
 }
 
-jt::Vector2 RenderWindow::getSize() const
+jt::Vector2f RenderWindow::getSize() const
 {
-    return jt::Vector2 { static_cast<float>(m_window->getSize().x),
+    return jt::Vector2f { static_cast<float>(m_window->getSize().x),
         static_cast<float>(m_window->getSize().y) };
 }
 
@@ -55,10 +55,10 @@ void RenderWindow::display()
     m_renderGui = false;
 }
 
-jt::Vector2 RenderWindow::getMousePosition()
+jt::Vector2f RenderWindow::getMousePosition()
 {
     auto const mpi = sf::Mouse::getPosition(*m_window);
-    return jt::Vector2 { static_cast<float>(mpi.x), static_cast<float>(mpi.y) };
+    return jt::Vector2f { static_cast<float>(mpi.x), static_cast<float>(mpi.y) };
 }
 
 void RenderWindow::setMouseCursorVisible(bool visible)

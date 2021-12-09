@@ -7,7 +7,7 @@
 
 namespace jt {
 
-SDL_RendererFlip getFlipFromScale(jt::Vector2 const& scale);
+SDL_RendererFlip getFlipFromScale(jt::Vector2f const& scale);
 
 void setPixel(SDL_Surface* surface, int x, int y, uint32_t pixel);
 

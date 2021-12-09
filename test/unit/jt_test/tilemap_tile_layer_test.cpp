@@ -21,14 +21,14 @@ public:
 
 TEST_F(TilemapTileLayerTest, CanLoadJson)
 {
-    ASSERT_EQ(tileLayer->getMapSizeInTiles().x(), 50);
-    ASSERT_EQ(tileLayer->getMapSizeInTiles().y(), 50);
+    ASSERT_EQ(tileLayer->getMapSizeInTiles().x, 50);
+    ASSERT_EQ(tileLayer->getMapSizeInTiles().y, 50);
 }
 
 TEST_F(TilemapTileLayerTest, DefaultPosition)
 {
-    ASSERT_FLOAT_EQ(tileLayer->getPosition().x(), 0.0f);
-    ASSERT_FLOAT_EQ(tileLayer->getPosition().y(), 0.0f);
+    ASSERT_FLOAT_EQ(tileLayer->getPosition().x, 0.0f);
+    ASSERT_FLOAT_EQ(tileLayer->getPosition().y, 0.0f);
 }
 
 TEST_F(TilemapTileLayerTest, UpdateAndDraw)
@@ -46,28 +46,28 @@ TEST_F(TilemapTileLayerTest, ParseInvalidFile)
 
 TEST_F(TilemapTileLayerTest, DrawWithScreensizeHint)
 {
-    tileLayer->setScreenSizeHint(jt::Vector2 { 400.0f, 300.0f });
+    tileLayer->setScreenSizeHint(jt::Vector2f { 400.0f, 300.0f });
     tileLayer->update(0.1f);
     tileLayer->draw(nullptr);
 }
 
 TEST_F(TilemapTileLayerTest, GetScaleAlwaysReturnsDefaultConstructedVector)
 {
-    jt::Vector2 const expected { 1.0f, 1.0f };
+    jt::Vector2f const expected { 1.0f, 1.0f };
     ASSERT_EQ(tileLayer->getScale(), expected);
 }
 
 TEST_F(TilemapTileLayerTest, GetGetOriginReturnsDefaultConstructedVector)
 {
-    ASSERT_EQ(tileLayer->getOrigin(), jt::Vector2 {});
+    ASSERT_EQ(tileLayer->getOrigin(), jt::Vector2f {});
 }
 
 TEST_F(TilemapTileLayerTest, GetGlobalBoundsReturnsDefaultConstructedRect)
 {
-    ASSERT_EQ(tileLayer->getGlobalBounds(), jt::Rect {});
+    ASSERT_EQ(tileLayer->getGlobalBounds(), jt::Rectf {});
 }
 
 TEST_F(TilemapTileLayerTest, GetLocalBoundsReturnsDefaultConstructedRect)
 {
-    ASSERT_EQ(tileLayer->getLocalBounds(), jt::Rect {});
+    ASSERT_EQ(tileLayer->getLocalBounds(), jt::Rectf {});
 }

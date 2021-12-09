@@ -22,8 +22,8 @@ public:
 
     void update(float elapsed) override;
 
-    jt::Vector2 getOffset() const override;
-    void setOffset(jt::Vector2 const offset) override;
+    jt::Vector2f getOffset() const override;
+    void setOffset(jt::Vector2f const offset) override;
 
     void setRotation(float rot) override;
 
@@ -33,25 +33,25 @@ public:
     bool getShadowActive() const override;
     void setShadowColor(jt::Color const& col) override;
     jt::Color getShadowColor() const override;
-    void setShadowOffset(jt::Vector2 const& v) override;
-    jt::Vector2 getShadowOffset() const override;
+    void setShadowOffset(jt::Vector2f const& v) override;
+    jt::Vector2f getShadowOffset() const override;
 
     // do not call this manually. Only place to call is Game()->update();
     void setIgnoreCamMovement(bool ignore) override;
     bool getIgnoreCamMovement() const override;
 
-    void setShadow(jt::Color const& col, jt::Vector2 const& offset) override;
+    void setShadow(jt::Color const& col, jt::Vector2f const& offset) override;
     // do not call this manually. Only place for this to be called is Game()->update();
-    static void setCamOffset(jt::Vector2 const& v);
-    static jt::Vector2 getStaticCamOffset();
+    static void setCamOffset(jt::Vector2f const& v);
+    static jt::Vector2f getStaticCamOffset();
 
 protected:
-    jt::Vector2 getShakeOffset() const;
+    jt::Vector2f getShakeOffset() const;
 
-    jt::Vector2 getCamOffset() const;
+    jt::Vector2f getCamOffset() const;
 
 private:
-    static jt::Vector2 m_CamOffset;
+    static jt::Vector2f m_CamOffset;
     bool m_ignoreCamMovement { false };
 
     bool m_hasBeenUpdated { false };
@@ -62,13 +62,13 @@ private:
     float m_shakeStrength { 0.0f };
     float m_shakeInterval { 0.0f };
     float m_shakeIntervalMax { 0.0f };
-    jt::Vector2 m_shakeOffset { 0, 0 };
+    jt::Vector2f m_shakeOffset { 0, 0 };
 
-    jt::Vector2 m_offset { 0, 0 };
+    jt::Vector2f m_offset { 0, 0 };
     float m_rotationInDegree { 0 };
 
     bool m_shadowActive { false };
-    jt::Vector2 m_shadowOffset { 0.0f, 0.0f };
+    jt::Vector2f m_shadowOffset { 0.0f, 0.0f };
     jt::Color m_shadowColor { jt::colors::Black };
 
     virtual void doDraw(std::shared_ptr<jt::renderTarget> const sptr) const = 0;

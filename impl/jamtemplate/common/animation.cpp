@@ -43,8 +43,8 @@ void Animation::add(std::string const& fileName, std::string const& animName,
     m_time[animName] = frameTimeInSeconds;
 
     for (auto const idx : frameIndices) {
-        jt::Recti const rect { static_cast<int>(idx * imageSize.x()), 0,
-            static_cast<int>(imageSize.x()), static_cast<int>(imageSize.y()) };
+        jt::Recti const rect { static_cast<int>(idx * imageSize.x), 0,
+            static_cast<int>(imageSize.x), static_cast<int>(imageSize.y) };
         Sprite::Sptr sptr = std::make_shared<Sprite>(fileName, rect, textureManager);
         m_frames[animName].push_back(sptr);
     }
@@ -82,14 +82,14 @@ jt::Color Animation::getColor() const
     return getCurrentSprite(m_frames, m_currentAnimName, m_currentIdx)->getColor();
 }
 
-void Animation::setPosition(jt::Vector2 const& pos) { m_position = pos; }
-jt::Vector2 Animation::getPosition() const { return m_position; }
+void Animation::setPosition(jt::Vector2f const& pos) { m_position = pos; }
+jt::Vector2f Animation::getPosition() const { return m_position; }
 
-jt::Rect Animation::getGlobalBounds() const
+jt::Rectf Animation::getGlobalBounds() const
 {
     return getCurrentSprite(m_frames, m_currentAnimName, m_currentIdx)->getGlobalBounds();
 }
-jt::Rect Animation::getLocalBounds() const
+jt::Rectf Animation::getLocalBounds() const
 {
     return getCurrentSprite(m_frames, m_currentAnimName, m_currentIdx)->getLocalBounds();
 }
@@ -107,7 +107,7 @@ jt::Color Animation::getFlashColor() const
     return getCurrentSprite(m_frames, m_currentAnimName, m_currentIdx)->getFlashColor();
 }
 
-void Animation::setScale(jt::Vector2 const& scale)
+void Animation::setScale(jt::Vector2f const& scale)
 {
     for (auto& kvp : m_frames) {
         for (auto& spr : kvp.second) {
@@ -115,12 +115,12 @@ void Animation::setScale(jt::Vector2 const& scale)
         }
     }
 }
-jt::Vector2 Animation::getScale() const
+jt::Vector2f Animation::getScale() const
 {
     return getCurrentSprite(m_frames, m_currentAnimName, m_currentIdx)->getScale();
 }
 
-void Animation::setOrigin(jt::Vector2 const& origin)
+void Animation::setOrigin(jt::Vector2f const& origin)
 {
     for (auto& kvp : m_frames) {
         for (auto const& sptr : kvp.second) {
@@ -128,7 +128,7 @@ void Animation::setOrigin(jt::Vector2 const& origin)
         }
     }
 }
-jt::Vector2 Animation::getOrigin() const
+jt::Vector2f Animation::getOrigin() const
 {
     return getCurrentSprite(m_frames, m_currentAnimName, m_currentIdx)->getOrigin();
 }
@@ -151,7 +151,7 @@ void Animation::setShadowColor(jt::Color const& col)
         }
     }
 }
-void Animation::setShadowOffset(jt::Vector2 const& v)
+void Animation::setShadowOffset(jt::Vector2f const& v)
 {
     DrawableImpl::setShadowOffset(v);
     for (auto& kvp : m_frames) {

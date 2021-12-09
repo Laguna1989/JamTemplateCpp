@@ -40,7 +40,7 @@ void StateExplosion::doInternalUpdate(float const /*elapsed*/)
         add(tw2);
 
         auto tw3 = jt::TweenScale::create(
-            bp->getAnimation(), 0.9f, jt::Vector2 { 1, 1 }, jt::Vector2 { 3, 3 });
+            bp->getAnimation(), 0.9f, jt::Vector2f { 1, 1 }, jt::Vector2f { 3, 3 });
         add(tw3);
     }
 

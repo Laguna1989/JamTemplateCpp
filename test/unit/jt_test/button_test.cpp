@@ -20,7 +20,7 @@ public:
 
 TEST_F(ButtonTest, InitialPosition)
 {
-    jt::Vector2 expectedPos { 0.0f, 0.0f };
+    jt::Vector2f expectedPos { 0.0f, 0.0f };
     ASSERT_EQ(b->getPosition(), expectedPos);
 }
 
@@ -32,7 +32,7 @@ TEST_F(ButtonTest, InitialActive) { ASSERT_TRUE(b->getActive()); }
 
 TEST_F(ButtonTest, GetPositionAfterSetPosition)
 {
-    jt::Vector2 expectedPos { 20.0f, 20.0f };
+    jt::Vector2f expectedPos { 20.0f, 20.0f };
     b->setPosition(expectedPos);
     ASSERT_EQ(b->getPosition(), expectedPos);
 }
@@ -66,7 +66,7 @@ TEST_F(ButtonTest, IsOverWithMockMouseReturnsTrueWhenOver)
     auto mouse = std::make_shared<testing::NiceMock<MockMouseInput>>();
     ON_CALL(*game, input()).WillByDefault(testing::Return(input));
     ON_CALL(*input, mouse()).WillByDefault(testing::Return(mouse));
-    ON_CALL(*mouse, getMousePositionScreen()).WillByDefault(testing::Return(jt::Vector2 { 5, 5 }));
+    ON_CALL(*mouse, getMousePositionScreen()).WillByDefault(testing::Return(jt::Vector2f { 5, 5 }));
     b->setGameInstance(game);
 
     ASSERT_TRUE(b->isMouseOver());
@@ -80,7 +80,7 @@ TEST_F(ButtonTest, IsOverWithMockMouseReturnsFalseWhenNotOver)
     ON_CALL(*game, input()).WillByDefault(testing::Return(input));
     ON_CALL(*input, mouse()).WillByDefault(testing::Return(mouse));
     ON_CALL(*mouse, getMousePositionScreen())
-        .WillByDefault(testing::Return(jt::Vector2 { 50, 50 }));
+        .WillByDefault(testing::Return(jt::Vector2f { 50, 50 }));
     b->setGameInstance(game);
 
     ASSERT_FALSE(b->isMouseOver());
@@ -93,7 +93,7 @@ TEST_F(ButtonTest, IsOverReturnsFalseWhenNotActive)
     auto mouse = std::make_shared<testing::NiceMock<MockMouseInput>>();
     ON_CALL(*game, input()).WillByDefault(testing::Return(input));
     ON_CALL(*input, mouse()).WillByDefault(testing::Return(mouse));
-    ON_CALL(*mouse, getMousePositionScreen()).WillByDefault(testing::Return(jt::Vector2 { 5, 5 }));
+    ON_CALL(*mouse, getMousePositionScreen()).WillByDefault(testing::Return(jt::Vector2f { 5, 5 }));
     b->setActive(false);
     b->setGameInstance(game);
 
@@ -107,7 +107,7 @@ TEST_F(ButtonTest, UpdateWithInput)
     auto mouse = std::make_shared<testing::NiceMock<MockMouseInput>>();
     ON_CALL(*game, input()).WillByDefault(testing::Return(input));
     ON_CALL(*input, mouse()).WillByDefault(testing::Return(mouse));
-    ON_CALL(*mouse, getMousePositionScreen()).WillByDefault(testing::Return(jt::Vector2 { 5, 5 }));
+    ON_CALL(*mouse, getMousePositionScreen()).WillByDefault(testing::Return(jt::Vector2f { 5, 5 }));
     b->setGameInstance(game);
 
     b->update(0.1f);

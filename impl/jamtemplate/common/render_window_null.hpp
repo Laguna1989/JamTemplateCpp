@@ -14,15 +14,15 @@ public:
     bool isOpen() const override;
     void checkForClose() override;
     std::shared_ptr<jt::renderTarget> createRenderTarget() override;
-    Vector2 getSize() const override;
+    jt::Vector2f getSize() const override;
     void draw(std::unique_ptr<jt::Sprite>& ptr) override;
     void display() override;
-    Vector2 getMousePosition() override;
+    jt::Vector2f getMousePosition() override;
     void setMouseCursorVisible(bool visible) override;
     bool getMouseCursorVisible() const override;
 
 private:
-    jt::Vector2 m_size { 0.0f, 0.0f };
+    jt::Vector2f m_size { 0.0f, 0.0f };
     bool m_mouseCursorVisible { true };
 };
 } // namespace null_objects
