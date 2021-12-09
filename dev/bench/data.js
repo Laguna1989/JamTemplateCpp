@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1638984853917,
+  "lastUpdate": 1639069895534,
   "repoUrl": "https://github.com/Laguna1989/JamTemplateCpp",
   "entries": {
     "Benchmark": [
@@ -1764,6 +1764,42 @@ window.BENCHMARK_DATA = {
             "value": 3.509983448888963,
             "unit": "ms/iter",
             "extra": "iterations: 225\ncpu: 3.1270089866666675 ms\nthreads: 1"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "laguna_1989@gmx.net",
+            "name": "Laguna1989",
+            "username": "Laguna1989"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "a3dc36a942593f972b688f7e0dde870694a0a7fd",
+          "message": "Merge pull request #108 from Laguna1989/FEATURE_ActionManager\n\nAdd ActionCommandManager and callbacks",
+          "timestamp": "2021-12-09T18:08:52+01:00",
+          "tree_id": "f968cbc8bb745d665751fb8fa962d2dc2fa38c07",
+          "url": "https://github.com/Laguna1989/JamTemplateCpp/commit/a3dc36a942593f972b688f7e0dde870694a0a7fd"
+        },
+        "date": 1639069894359,
+        "tool": "googlecpp",
+        "benches": [
+          {
+            "name": "BM_StartGame",
+            "value": 0.27473072786352665,
+            "unit": "ms/iter",
+            "extra": "iterations: 9848\ncpu: 0.07456254071892769 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GamestateWithTweeningShapes",
+            "value": 3.1371666033057797,
+            "unit": "ms/iter",
+            "extra": "iterations: 242\ncpu: 2.8994818471074377 ms\nthreads: 1"
           }
         ]
       }
