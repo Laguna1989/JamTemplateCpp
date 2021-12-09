@@ -34,6 +34,8 @@ public:
     MOCK_METHOD(std::shared_ptr<jt::TextureManagerInterface>, getTextureManager, (), (override));
     MOCK_METHOD(void, reset, (), (override));
     MOCK_METHOD(std::shared_ptr<jt::LoggerInterface>, getLogger, (), (override));
+    MOCK_METHOD(std::shared_ptr<jt::ActionCommandManagerInterface>, getActionCommandManager, (),
+        (override));
 
 protected:
     MOCK_METHOD(std::weak_ptr<jt::GameInterface>, getPtr, (), (override));

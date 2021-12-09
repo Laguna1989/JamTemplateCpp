@@ -7,6 +7,7 @@
 class StateTween : public jt::GameState {
 public:
     std::string getName() const override;
+    void createTweens();
 
 private:
     jt::Shape::Sptr m_overlayR;
@@ -15,7 +16,7 @@ private:
     jt::Shape::Sptr m_background;
 
     void createRects();
-    void createTweens();
+
     void doInternalCreate() override;
     void doInternalUpdate(float const /*elapsed*/) override;
     void doInternalDraw() const override;

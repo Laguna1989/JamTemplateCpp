@@ -1,6 +1,7 @@
 ﻿#ifndef GUARD_JAMTEMPLATE_GAMEINTERFACE_HPP_GUARD
 #define GUARD_JAMTEMPLATE_GAMEINTERFACE_HPP_GUARD
 
+#include "action_command_manager_interface.hpp"
 #include "cam_interface.hpp"
 #include "input/input_manager_interface.hpp"
 #include "logging/logger_interface.hpp"
@@ -62,6 +63,8 @@ public:
     virtual std::shared_ptr<jt::TextureManagerInterface> getTextureManager() = 0;
 
     virtual std::shared_ptr<jt::LoggerInterface> getLogger() = 0;
+
+    virtual std::shared_ptr<jt::ActionCommandManagerInterface> getActionCommandManager() = 0;
 
     virtual void reset() = 0;
 

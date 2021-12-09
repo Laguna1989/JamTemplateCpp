@@ -70,4 +70,9 @@ void GameObject::doCreate() {};
 void GameObject::doKill() {};
 void GameObject::doDestroy() {};
 
+void GameObject::storeActionCommand(std::shared_ptr<void> commandCallback)
+{
+    m_storedActionCommands.emplace_back(std::move(commandCallback));
+}
+
 } // namespace jt

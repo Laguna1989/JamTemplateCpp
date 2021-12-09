@@ -1,4 +1,5 @@
 ﻿#include "game_base.hpp"
+#include "action_command_manager.hpp"
 #include "camera.hpp"
 #include "game_state.hpp"
 #include "input/input_manager_interface.hpp"
@@ -6,6 +7,7 @@
 #include "logging/log_target_file.hpp"
 #include "logging/logger.hpp"
 #include "state_manager.hpp"
+#include "strutils.hpp"
 #include <exception>
 #include <iostream>
 #include <stdexcept>
@@ -43,12 +45,58 @@ GameBase::GameBase(std::shared_ptr<jt::RenderWindowInterface> renderWindow,
     targetCout->setLogLevel(LogLevel::LogLevelInfo);
     m_logger->addLogTarget(targetCout);
     m_logger->addLogTarget(std::make_shared<jt::LogTargetFile>());
+
+    createActionCommandManager();
+}
+void GameBase::createActionCommandManager()
+{
+    m_actionCommandManager = std::make_shared<ActionCommandManager>(m_logger);
+    storeActionCommand(m_actionCommandManager->registerTemporaryCommand("help",
+        [mgr = std::weak_ptr<ActionCommandManagerInterface> { getActionCommandManager() },
+            logger = std::weak_ptr<LoggerInterface> { getLogger() }](auto /*args*/) {
+            if (logger.expired()) {
+                return;
+            }
+            logger.lock()->action("Available commands:");
+            if (mgr.expired()) {
+                return;
+            }
+            for (auto& c : mgr.lock()->getAllCommands()) {
+                logger.lock()->action(" - " + c);
+            }
+        }));
+    storeActionCommand(m_actionCommandManager->registerTemporaryCommand(
+        "clear", [logger = std::weak_ptr<LoggerInterface> { getLogger() }](auto /*args*/) {
+            if (logger.expired()) {
+                return;
+            }
+            logger.lock()->clear();
+        }));
+
+    storeActionCommand(m_actionCommandManager->registerTemporaryCommand("cam.shake",
+        [cam = std::weak_ptr<CamInterface> { getCamera() },
+            logger = std::weak_ptr<LoggerInterface> { getLogger() }](auto args) {
+            if (args.size() != 2) {
+                if (logger.expired()) {
+                    return;
+                }
+                logger.lock()->action("invalid number of arguments for shake");
+                return;
+            }
+            float duration = std::stof(args.at(0));
+            float strength = std::stof(args.at(1));
+            if (cam.expired()) {
+                return;
+            }
+            cam.lock()->shake(duration, strength);
+        }));
 }
 
 void GameBase::run()
 {
     try {
         getLogger()->verbose("run", { "jt" });
+        m_actionCommandManager->update();
         m_stateManager->checkAndPerformSwitchState(getPtr());
 
         auto const now = std::chrono::steady_clock::now();
@@ -103,5 +151,9 @@ std::shared_ptr<jt::TextureManagerInterface> GameBase::getTextureManager()
 }
 
 std::shared_ptr<jt::LoggerInterface> GameBase::getLogger() { return m_logger; }
+std::shared_ptr<jt::ActionCommandManagerInterface> GameBase::getActionCommandManager()
+{
+    return m_actionCommandManager;
+}
 
 } // namespace jt

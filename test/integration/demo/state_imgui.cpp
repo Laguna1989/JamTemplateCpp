@@ -5,7 +5,7 @@
 
 void StateImGui::doInternalCreate() { }
 
-void StateImGui::doInternalUpdate(float elapsed)
+void StateImGui::doInternalUpdate(float /*elapsed*/)
 {
     auto mouse = getGame()->input()->mouse();
     if (mouse->justPressed(jt::MouseButtonCode::MBLeft)) {

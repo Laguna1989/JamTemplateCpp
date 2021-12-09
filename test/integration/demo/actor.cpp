@@ -7,7 +7,11 @@ void Actor::doCreate()
     m_sprite = std::make_shared<jt::Sprite>(
         "assets/coin.png", jt::Recti { 0, 0, 16, 16 }, getGame()->getTextureManager());
     m_sprite->setOffset(jt::Vector2 { 8, 8 });
+
+    storeActionCommand(getGame()->getActionCommandManager()->registerTemporaryCommand(
+        "shake", [this](auto /*str*/) { m_sprite->shake(0.5f, 10.0f); }));
 }
+
 void Actor::doUpdate(float const elapsed)
 {
     m_sprite->update(elapsed);
