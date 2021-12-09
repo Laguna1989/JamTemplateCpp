@@ -18,7 +18,8 @@ public:
     /// \param width  width of the bar
     /// \param height height of the bar
     /// \param horizontal if true, bar is horizontal (left to right), if false (bottom to top)
-    Bar(float width, float height, bool horizontal, std::shared_ptr<TextureManagerInterface> textureManager);
+    Bar(float width, float height, bool horizontal,
+        std::shared_ptr<TextureManagerInterface> textureManager);
 
     /// Set front color
     ///
@@ -52,8 +53,8 @@ public:
     virtual void setColor(jt::Color const& col) override;
     virtual jt::Color getColor() const override;
 
-    virtual void setPosition(jt::Vector2 const& pos) override;
-    virtual jt::Vector2 getPosition() const override;
+    virtual void setPosition(jt::Vector2f const& pos) override;
+    virtual jt::Vector2f getPosition() const override;
 
     virtual jt::Rect getGlobalBounds() const override;
     virtual jt::Rect getLocalBounds() const override;
@@ -61,11 +62,11 @@ public:
     virtual void setFlashColor(jt::Color const& col) override;
     virtual jt::Color getFlashColor() const override;
 
-    virtual void setScale(jt::Vector2 const& scale) override;
-    virtual jt::Vector2 getScale() const override;
+    virtual void setScale(jt::Vector2f const& scale) override;
+    virtual jt::Vector2f getScale() const override;
 
-    virtual void setOrigin(jt::Vector2 const& origin) override;
-    virtual jt::Vector2 getOrigin() const override;
+    virtual void setOrigin(jt::Vector2f const& origin) override;
+    virtual jt::Vector2f getOrigin() const override;
 
 private:
     float m_valueMax;

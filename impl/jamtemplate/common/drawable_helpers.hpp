@@ -20,7 +20,7 @@ namespace dh {
 /// \param size the size of the shape (full length of the rectangle)
 /// \param col the color of the shape
 /// \return shared pointer to shape
-std::shared_ptr<jt::Shape> createShapeRect(jt::Vector2 const& size, jt::Color const& col,
+std::shared_ptr<jt::Shape> createShapeRect(jt::Vector2f const& size, jt::Color const& col,
     std::shared_ptr<jt::TextureManagerInterface> textureManager);
 
 std::shared_ptr<jt::Shape> createShapeCircle(float radius, jt::Color const& col,
@@ -41,7 +41,7 @@ std::shared_ptr<jt::Text> createText(std::weak_ptr<jt::renderTarget> rt, std::st
 /// \param size the size of the vignette
 /// \return shared pointer to sprite
 std::shared_ptr<jt::Sprite> createVignette(
-    jt::Vector2 const& size, std::shared_ptr<jt::TextureManagerInterface> textureManager);
+    jt::Vector2f const& size, std::shared_ptr<jt::TextureManagerInterface> textureManager);
 
 } // namespace dh
 

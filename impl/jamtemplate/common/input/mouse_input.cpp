@@ -35,14 +35,14 @@ void MouseInput::updateButtons()
         m_mouseJustReleased, [this](auto b) { return m_checkFunction(b); });
 }
 
-jt::Vector2 MouseInput::getMousePositionWorld()
+jt::Vector2f MouseInput::getMousePositionWorld()
 {
-    return jt::Vector2 { m_mouseWorldX, m_mouseWorldY };
+    return jt::Vector2f { m_mouseWorldX, m_mouseWorldY };
 }
 
-jt::Vector2 MouseInput::getMousePositionScreen()
+jt::Vector2f MouseInput::getMousePositionScreen()
 {
-    return jt::Vector2 { m_mouseScreenX, m_mouseScreenY };
+    return jt::Vector2f { m_mouseScreenX, m_mouseScreenY };
 }
 
 bool MouseInput::pressed(jt::MouseButtonCode b) { return m_mousePressed[b]; }

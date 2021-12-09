@@ -11,7 +11,7 @@ protected:
 
 TEST_P(RenderwindowSFMLTestFixture, GetMousePositionWithoutView)
 {
-    jt::Vector2 const expected { 0.0f, 0.0f };
+    jt::Vector2f const expected { 0.0f, 0.0f };
     ASSERT_NE(m_window->getMousePosition(), expected);
 }
 

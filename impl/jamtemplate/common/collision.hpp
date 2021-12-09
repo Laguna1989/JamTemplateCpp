@@ -63,8 +63,8 @@ public:
     {
         auto const obj1Size = getSize(obj1);
         auto const obj2Size = getSize(obj2);
-        auto const radius1 = (obj1Size.x() + obj1Size.y()) / 4.0f;
-        auto const radius2 = (obj2Size.x() + obj2Size.y()) / 4.0f;
+        auto const radius1 = (obj1Size.x + obj1Size.y) / 4.0f;
+        auto const radius2 = (obj2Size.x + obj2Size.y) / 4.0f;
 
         auto const distance = getCenter(obj1) - getCenter(obj2);
 
@@ -77,8 +77,8 @@ public:
     {
         auto const Obj1Size = getSize(obj1);
         auto const Obj2Size = getSize(obj2);
-        auto const Radius1 = (Obj1Size.x() + Obj1Size.y()) / 4.0f;
-        auto const Radius2 = (Obj2Size.x() + Obj2Size.y()) / 4.0f;
+        auto const Radius1 = (Obj1Size.x + Obj1Size.y) / 4.0f;
+        auto const Radius2 = (Obj2Size.x + Obj2Size.y) / 4.0f;
 
         auto const distance = getCenter(obj1) - getCenter(obj2);
 
@@ -88,28 +88,28 @@ public:
 
 private:
     template <class U>
-    static jt::Vector2 getSize(U const& Object)
+    static jt::Vector2f getSize(U const& Object)
     {
-        return jt::Vector2(Object.getGlobalBounds().width(), Object.getGlobalBounds().height());
+        return jt::Vector2f { Object.getGlobalBounds().width(), Object.getGlobalBounds().height() };
     }
 
     template <class U>
-    static jt::Vector2 getSize(std::shared_ptr<U> obj)
+    static jt::Vector2f getSize(std::shared_ptr<U> obj)
     {
-        return jt::Vector2(obj->getGlobalBounds().width(), obj->getGlobalBounds().height());
+        return jt::Vector2f { obj->getGlobalBounds().width(), obj->getGlobalBounds().height() };
     }
 
     template <class U>
-    static jt::Vector2 getCenter(U const& obj)
+    static jt::Vector2f getCenter(U const& obj)
     {
         auto const AABB = obj.getGlobalBounds();
-        return jt::Vector2 { AABB.left() + AABB.width() / 2.f, AABB.top() + AABB.height() / 2.f };
+        return jt::Vector2f { AABB.left() + AABB.width() / 2.f, AABB.top() + AABB.height() / 2.f };
     }
     template <class U>
-    static jt::Vector2 getCenter(std::shared_ptr<U> obj)
+    static jt::Vector2f getCenter(std::shared_ptr<U> obj)
     {
         auto const AABB = obj->getGlobalBounds();
-        return jt::Vector2 { AABB.left() + AABB.width() / 2.f, AABB.top() + AABB.height() / 2.f };
+        return jt::Vector2f { AABB.left() + AABB.width() / 2.f, AABB.top() + AABB.height() / 2.f };
     }
 };
 } // namespace jt

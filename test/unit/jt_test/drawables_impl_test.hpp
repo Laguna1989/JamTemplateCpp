@@ -45,7 +45,7 @@ public:
         std::shared_ptr<jt::TextureManagerInterface> textureManager) override
     {
         auto s = std::make_shared<jt::Shape>();
-        s->makeRect(jt::Vector2 { 16, 16 }, textureManager);
+        s->makeRect(jt::Vector2f { 16, 16 }, textureManager);
         return s;
     }
 };
@@ -79,7 +79,7 @@ public:
     {
         auto t = std::make_shared<jt::tilemap::TileLayer>(
             "assets/tileson_test.json", "ground", textureManager);
-        t->setScreenSizeHint(jt::Vector2 { 400.0f, 300.0f });
+        t->setScreenSizeHint(jt::Vector2f { 400.0f, 300.0f });
         return t;
     }
 };
@@ -89,7 +89,7 @@ public:
     std::shared_ptr<jt::DrawableInterface> createDrawable(
         std::shared_ptr<jt::TextureManagerInterface> /*textureManager*/) override
     {
-        auto l = std::make_shared<jt::Line>(jt::Vector2 { 1.0f, 10.0f });
+        auto l = std::make_shared<jt::Line>(jt::Vector2f { 1.0f, 10.0f });
         return l;
     }
 };

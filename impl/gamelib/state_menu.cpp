@@ -54,26 +54,26 @@ void StateMenu::createTextCredits()
               "https://openal.org/",
         10U, GP::getPalette().getColor(4));
     m_text_Credits->setTextAlign(jt::Text::TextAlign::LEFT);
-    m_text_Credits->setPosition({ 10, GP::GetScreenSize().y() - 70 });
-    m_text_Credits->setShadow(GP::PaletteFontShadow(), jt::Vector2 { 1, 1 });
+    m_text_Credits->setPosition({ 10, GP::GetScreenSize().y - 70 });
+    m_text_Credits->setShadow(GP::PaletteFontShadow(), jt::Vector2f { 1, 1 });
 }
 
 void StateMenu::createTextExplanation()
 {
-    float half_width = GP::GetScreenSize().x() / 2;
+    float half_width = GP::GetScreenSize().x / 2;
     m_text_Explanation = jt::dh::createText(getGame()->getRenderTarget(),
         "Press Space to start the game", 16U, GP::getPalette().getColor(7));
     m_text_Explanation->setPosition({ half_width, 150 });
-    m_text_Explanation->setShadow(GP::PaletteFontShadow(), jt::Vector2 { 3, 3 });
+    m_text_Explanation->setShadow(GP::PaletteFontShadow(), jt::Vector2f { 3, 3 });
 }
 
 void StateMenu::createTextTitle()
 {
-    float half_width = GP::GetScreenSize().x() / 2;
+    float half_width = GP::GetScreenSize().x / 2;
     m_text_Title = jt::dh::createText(
         getGame()->getRenderTarget(), GP::GameName(), 32U, GP::PaletteFontFront());
     m_text_Title->setPosition({ half_width, 20 });
-    m_text_Title->setShadow(GP::PaletteFontShadow(), jt::Vector2 { 3, 3 });
+    m_text_Title->setShadow(GP::PaletteFontShadow(), jt::Vector2f { 3, 3 });
 }
 
 void StateMenu::createTweens()
@@ -87,7 +87,7 @@ void StateMenu::createTweens()
 void StateMenu::createInstructionTweenScaleUp()
 {
     auto ts = jt::TweenScale::create(
-        m_text_Explanation, 0.75f, jt::Vector2 { 1.0f, 1.0f }, jt::Vector2 { 1.05f, 1.05f });
+        m_text_Explanation, 0.75f, jt::Vector2f { 1.0f, 1.0f }, jt::Vector2f { 1.05f, 1.05f });
     ts->setAgePercentConversion([](float age) {
         return jt::Lerp::cosine(0.0f, 1.0f, jt::MathHelper::clamp(age, 0.0f, 1.0f));
     });
@@ -97,7 +97,7 @@ void StateMenu::createInstructionTweenScaleUp()
 void StateMenu::createInstructionTweenScaleDown()
 {
     auto ts = jt::TweenScale::create(
-        m_text_Explanation, 0.75f, jt::Vector2 { 1.05f, 1.05f }, jt::Vector2 { 1.0f, 1.0f });
+        m_text_Explanation, 0.75f, jt::Vector2f { 1.05f, 1.05f }, jt::Vector2f { 1.0f, 1.0f });
     ts->setAgePercentConversion([](float age) {
         return jt::Lerp::cosine(0.0f, 1.0f, jt::MathHelper::clamp(age, 0.0f, 1.0f));
     });
@@ -107,7 +107,7 @@ void StateMenu::createInstructionTweenScaleDown()
 
 void StateMenu::createTweenExplanationScale()
 {
-    auto s2 = m_text_Explanation->getPosition() + jt::Vector2 { -1000, 0 };
+    auto s2 = m_text_Explanation->getPosition() + jt::Vector2f { -1000, 0 };
     auto e2 = m_text_Explanation->getPosition();
 
     auto tween = jt::TweenPosition::create(m_text_Explanation, 0.5f, s2, e2);
@@ -135,7 +135,7 @@ void StateMenu::createTweenOverlayAlpha()
 
 void StateMenu::createTweenCreditsPosition()
 {
-    auto s3 = m_text_Credits->getPosition() + jt::Vector2 { 0, 100 };
+    auto s3 = m_text_Credits->getPosition() + jt::Vector2f { 0, 100 };
     auto e3 = m_text_Credits->getPosition();
 
     auto tween = jt::TweenPosition::create(m_text_Credits, 0.35f, s3, e3);

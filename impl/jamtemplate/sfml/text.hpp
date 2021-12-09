@@ -26,9 +26,9 @@ public:
     std::string getText() const;
 
     void setOutline(float thickness, jt::Color col);
-    void setPosition(jt::Vector2 const& pos) override;
+    void setPosition(jt::Vector2f const& pos) override;
 
-    jt::Vector2 getPosition() const override;
+    jt::Vector2f getPosition() const override;
 
     void setColor(const jt::Color& col) override;
     jt::Color getColor() const override;
@@ -39,13 +39,13 @@ public:
     jt::Rect getGlobalBounds() const override;
     jt::Rect getLocalBounds() const override;
 
-    void setScale(jt::Vector2 const& scale) override;
+    void setScale(jt::Vector2f const& scale) override;
 
-    jt::Vector2 getScale() const override;
+    jt::Vector2f getScale() const override;
 
-    virtual void setOrigin(jt::Vector2 const& origin);
+    virtual void setOrigin(jt::Vector2f const& origin);
 
-    virtual jt::Vector2 getOrigin() const;
+    virtual jt::Vector2f getOrigin() const;
 
     void setTextAlign(TextAlign ta);
     TextAlign getTextAlign() const;
@@ -57,7 +57,7 @@ private:
 
     TextAlign m_textAlign { TextAlign::CENTER };
 
-    jt::Vector2 m_position { 0, 0 };
+    jt::Vector2f m_position { 0, 0 };
 
     void doUpdate(float /*elapsed*/) override;
 

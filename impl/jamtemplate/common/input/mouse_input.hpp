@@ -17,8 +17,8 @@ public:
     virtual void updateMousePosition(MousePosition const& mp) override;
     virtual void updateButtons() override;
 
-    virtual jt::Vector2 getMousePositionWorld() override;
-    virtual jt::Vector2 getMousePositionScreen() override;
+    virtual jt::Vector2f getMousePositionWorld() override;
+    virtual jt::Vector2f getMousePositionScreen() override;
 
     virtual bool pressed(jt::MouseButtonCode b) override;
     virtual bool released(jt::MouseButtonCode b) override;

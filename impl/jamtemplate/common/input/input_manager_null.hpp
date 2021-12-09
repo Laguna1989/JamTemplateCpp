@@ -9,8 +9,8 @@ class MouseInputNull : public MouseInputInterface {
 public:
     void updateMousePosition(MousePosition const& mousePosition) override;
     void updateButtons() override;
-    Vector2 getMousePositionWorld() override;
-    Vector2 getMousePositionScreen() override;
+    jt::Vector2f getMousePositionWorld() override;
+    jt::Vector2f getMousePositionScreen() override;
     bool pressed(jt::MouseButtonCode b) override;
     bool released(jt::MouseButtonCode b) override;
     bool justPressed(jt::MouseButtonCode b) override;

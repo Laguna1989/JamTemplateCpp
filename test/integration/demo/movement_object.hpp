@@ -26,8 +26,8 @@ public:
             m_animation->add("assets/coin.png", "idle", jt::Vector2u { 16, 16 },
                 jt::MathHelper::numbersBetween(0U, 11U), 0.13f, getGame()->getTextureManager());
             m_animation->play("idle");
-            m_animation->setOffset(jt::Vector2 { 8, 8 });
-            m_animation->setOrigin(jt::Vector2 { 8, 8 });
+            m_animation->setOffset(jt::Vector2f { 8, 8 });
+            m_animation->setOrigin(jt::Vector2f { 8, 8 });
 
             b2CircleShape circleCollider {};
             circleCollider.m_radius = 8.0f;
@@ -38,8 +38,8 @@ public:
             m_animation->add("assets/wall.png", "idle", jt::Vector2u { 16, 16 }, { 0 }, 100.0f,
                 getGame()->getTextureManager());
             m_animation->play("idle");
-            m_animation->setOffset(jt::Vector2 { 8, 8 });
-            m_animation->setOrigin(jt::Vector2 { 8, 8 });
+            m_animation->setOffset(jt::Vector2f { 8, 8 });
+            m_animation->setOrigin(jt::Vector2f { 8, 8 });
 
             b2PolygonShape boxCollider {};
             boxCollider.SetAsBox(8, 8);

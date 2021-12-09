@@ -15,7 +15,7 @@ class Shape : public DrawableImpl {
 public:
     using Sptr = std::shared_ptr<Shape>;
 
-    void makeRect(jt::Vector2 size, std::shared_ptr<jt::TextureManagerInterface> textureManager);
+    void makeRect(jt::Vector2f size, std::shared_ptr<jt::TextureManagerInterface> textureManager);
     void makeCircle(float radius, std::shared_ptr<jt::TextureManagerInterface> textureManager);
 
     void setColor(jt::Color const& col) override;
@@ -24,23 +24,23 @@ public:
     void setFlashColor(jt::Color const& col) override;
     jt::Color getFlashColor() const override;
 
-    void setPosition(jt::Vector2 const& pos) override;
-    jt::Vector2 getPosition() const override;
+    void setPosition(jt::Vector2f const& pos) override;
+    jt::Vector2f getPosition() const override;
 
     jt::Rect getGlobalBounds() const override;
     jt::Rect getLocalBounds() const override;
 
-    void setScale(jt::Vector2 const& scale) override;
-    jt::Vector2 getScale() const override;
+    void setScale(jt::Vector2f const& scale) override;
+    jt::Vector2f getScale() const override;
 
-    void setOrigin(jt::Vector2 const& origin) override;
-    jt::Vector2 getOrigin() const override;
+    void setOrigin(jt::Vector2f const& origin) override;
+    jt::Vector2f getOrigin() const override;
 
 private:
     mutable std::shared_ptr<sf::Shape> m_shape = nullptr;
     std::shared_ptr<sf::Shape> m_flashShape = nullptr;
 
-    jt::Vector2 m_position { 0, 0 };
+    jt::Vector2f m_position { 0, 0 };
 
     void doDraw(std::shared_ptr<jt::renderTarget> const sptr) const override;
     void doDrawFlash(std::shared_ptr<jt::renderTarget> const sptr) const override;

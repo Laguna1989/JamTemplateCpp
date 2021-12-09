@@ -4,7 +4,7 @@
 
 namespace jt {
 
-Box2DWorldImpl::Box2DWorldImpl(Vector2 const& gravity)
+Box2DWorldImpl::Box2DWorldImpl(jt::Vector2f const& gravity)
     : m_world { std::make_unique<b2World>(jt::Conversion::vec(gravity)) }
 {
 }

@@ -17,14 +17,14 @@ void StateTween::doInternalCreate()
 void StateTween::createRects()
 {
     m_background = jt::dh::createShapeRect(
-        jt::Vector2 { 400, 300 }, jt::colors::White, getGame()->getTextureManager());
+        jt::Vector2f { 400, 300 }, jt::colors::White, getGame()->getTextureManager());
 
     m_overlayR = jt::dh::createShapeRect(
-        jt::Vector2 { 400, 300 }, jt::colors::Red, getGame()->getTextureManager());
+        jt::Vector2f { 400, 300 }, jt::colors::Red, getGame()->getTextureManager());
     m_overlayG = jt::dh::createShapeRect(
-        jt::Vector2 { 400, 300 }, jt::colors::Green, getGame()->getTextureManager());
+        jt::Vector2f { 400, 300 }, jt::colors::Green, getGame()->getTextureManager());
     m_overlayB = jt::dh::createShapeRect(
-        jt::Vector2 { 400, 300 }, jt::colors::Blue, getGame()->getTextureManager());
+        jt::Vector2f { 400, 300 }, jt::colors::Blue, getGame()->getTextureManager());
 }
 
 void StateTween::createTweens()

@@ -9,7 +9,7 @@ class Box2dWorldImplTest : public ::testing::Test {
 public:
     void SetUp() override
     {
-        wrapper = std::make_shared<jt::Box2DWorldImpl>(jt::Vector2 { 0, 100.0f });
+        wrapper = std::make_shared<jt::Box2DWorldImpl>(jt::Vector2f { 0, 100.0f });
     }
     std::shared_ptr<jt::Box2DWorldImpl> wrapper;
 };

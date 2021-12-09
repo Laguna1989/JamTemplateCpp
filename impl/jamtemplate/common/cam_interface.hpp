@@ -12,15 +12,15 @@ public:
 
     /// Get the camera offset (e.g. from scrolling)
     /// \return the camera offset
-    virtual jt::Vector2 getCamOffset() = 0;
+    virtual jt::Vector2f getCamOffset() = 0;
 
     /// Set the camera offset
     /// \param newOffset
-    virtual void setCamOffset(jt::Vector2 const& newOffset) = 0;
+    virtual void setCamOffset(jt::Vector2f const& newOffset) = 0;
 
     /// Move the camera by a certain vector
     /// \param v amount that camera should be moved
-    virtual void move(jt::Vector2 const& v) = 0;
+    virtual void move(jt::Vector2f const& v) = 0;
 
     /// Get the current zoom value
     /// \return the zoom value
@@ -40,7 +40,7 @@ public:
 
     /// Get the shakeOffset of the camera
     /// \return the current shake offset
-    virtual jt::Vector2 getShakeOffset() = 0;
+    virtual jt::Vector2f getShakeOffset() = 0;
 
     /// Update the camera
     /// \param elapsed the elapsed time

@@ -24,7 +24,7 @@ public:
     {
         window = std::make_shared<::testing::NiceMock<MockWindow>>();
         // getSize has to be called, so that the game knows how big the rendertarget will be.
-        ON_CALL(*window, getSize()).WillByDefault([]() { return jt::Vector2 { 100.0f, 200.0f }; });
+        ON_CALL(*window, getSize()).WillByDefault([]() { return jt::Vector2f { 100.0f, 200.0f }; });
 
         auto input = std::make_shared<::testing::NiceMock<MockInput>>();
 

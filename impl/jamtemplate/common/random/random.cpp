@@ -36,11 +36,11 @@ jt::Color Random::getRandomColor()
     return jt::Color { r, g, b };
 }
 
-jt::Vector2 Random::getRandomPointIn(jt::Rect rect)
+jt::Vector2f Random::getRandomPointIn(jt::Rect rect)
 {
     auto const x = getFloat(rect.left(), rect.left() + rect.width());
     auto const y = getFloat(rect.top(), rect.top() + rect.height());
-    return jt::Vector2 { x, y };
+    return jt::Vector2f { x, y };
 }
 
 void Random::setSeed(unsigned int s) { m_engine.seed(s); }

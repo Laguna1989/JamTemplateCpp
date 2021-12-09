@@ -20,7 +20,7 @@ private:
     void doInternalDraw() const override;
 
     void CreateWalls();
-    void CreateOneWall(jt::Vector2 const& pos);
+    void CreateOneWall(jt::Vector2f const& pos);
     void CreatePlayer();
 };
 

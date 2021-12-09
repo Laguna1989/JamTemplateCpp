@@ -12,11 +12,11 @@ jt::Shape makeShape(float sx, float sy, float px, float py,
     std::shared_ptr<jt::TextureManagerInterface> textureManager)
 {
     Shape s {};
-    s.makeRect(jt::Vector2 { sx, sy }, textureManager);
-    s.setPosition(jt::Vector2 { px, py });
+    s.makeRect(jt::Vector2f { sx, sy }, textureManager);
+    s.setPosition(jt::Vector2f { px, py });
     // note: by default the top left corner of the shape is the origin. This needs to be corrected
     // here, so the center of the shape is used.
-    s.setOffset(jt::Vector2 { -sx / 2.0f, -sy / 2.0f });
+    s.setOffset(jt::Vector2f { -sx / 2.0f, -sy / 2.0f });
     s.update(0.0f);
     return s;
 }

@@ -15,7 +15,7 @@ namespace jt {
 
 Button::Button(Vector2u const& size, std::shared_ptr<TextureManagerInterface> textureManager)
 {
-    std::string buttonImageName = "#b#" + std::to_string(size.x()) + "#" + std::to_string(size.y());
+    std::string buttonImageName = "#b#" + std::to_string(size.x) + "#" + std::to_string(size.y);
     m_background = std::make_shared<jt::Animation>();
     m_background->add(buttonImageName, "normal", size, { 0 }, 1, textureManager);
     m_background->add(buttonImageName, "over", size, { 1 }, 1, textureManager);
@@ -23,7 +23,8 @@ Button::Button(Vector2u const& size, std::shared_ptr<TextureManagerInterface> te
     m_background->play("normal");
     m_background->setIgnoreCamMovement(true);
 
-    m_disabledOverlay = std::make_shared<jt::Sprite>("#f#" + std::to_string(size.x()) + "#" + std::to_string(size.y()), textureManager);
+    m_disabledOverlay = std::make_shared<jt::Sprite>(
+        "#f#" + std::to_string(size.x) + "#" + std::to_string(size.y), textureManager);
     m_disabledOverlay->setColor(jt::Color { 100, 100, 100, 150 });
 }
 
@@ -51,8 +52,8 @@ bool Button::isMouseOver()
 }
 void Button::setVisible(bool isVisible) { m_isVisible = isVisible; }
 bool Button::getVisible() const { return m_isVisible; }
-void Button::setPosition(jt::Vector2 const& newPosition) { m_pos = newPosition; }
-jt::Vector2 Button::getPosition() const { return m_pos; }
+void Button::setPosition(jt::Vector2f const& newPosition) { m_pos = newPosition; }
+jt::Vector2f Button::getPosition() const { return m_pos; }
 void Button::doDraw() const
 {
     if (!m_isVisible) {
@@ -68,19 +69,19 @@ void Button::doDraw() const
         m_disabledOverlay->draw(getGame()->getRenderTarget());
     }
 }
-bool Button::isOver(jt::Vector2 const& mousePosition)
+bool Button::isOver(jt::Vector2f const& mousePosition)
 {
     if (!m_isActive) {
         return false;
     }
 
-    float px = m_background->getPosition().x();
-    float py = m_background->getPosition().y();
+    float px = m_background->getPosition().x;
+    float py = m_background->getPosition().y;
 
     float w = m_background->getGlobalBounds().width();
     float h = m_background->getGlobalBounds().height();
-    return (mousePosition.x() > px && mousePosition.x() <= px + w && mousePosition.y() > py
-        && mousePosition.y() <= py + h);
+    return (mousePosition.x > px && mousePosition.x <= px + w && mousePosition.y > py
+        && mousePosition.y <= py + h);
 }
 
 void Button::doUpdate(float elapsed)

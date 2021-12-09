@@ -23,14 +23,14 @@ public:
     bool isOpen() const override;
     void checkForClose() override;
 
-    jt::Vector2 getSize() const override;
+    jt::Vector2f getSize() const override;
 
     void draw(std::unique_ptr<jt::Sprite>&) override;
     void startRenderGui() override;
     void updateGui(float elapsed) override;
     void display() override;
 
-    jt::Vector2 getMousePosition() override;
+    jt::Vector2f getMousePosition() override;
     void setMouseCursorVisible(bool visible) override;
     bool getMouseCursorVisible(void) const override;
 

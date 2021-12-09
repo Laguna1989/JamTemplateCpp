@@ -55,14 +55,14 @@ TEST(TextTest, LoadInvalidFont)
 TEST(TextTest, InitialPosition)
 {
     jt::Text t = getText();
-    ASSERT_FLOAT_EQ(t.getPosition().x(), 0.0f);
-    ASSERT_FLOAT_EQ(t.getPosition().y(), 0.0f);
+    ASSERT_FLOAT_EQ(t.getPosition().x, 0.0f);
+    ASSERT_FLOAT_EQ(t.getPosition().y, 0.0f);
 }
 
 TEST(TextTest, PositionAfterSetPosition)
 {
     jt::Text t = getText();
-    jt::Vector2 newPos { 200.0f, 150.0f };
+    jt::Vector2f newPos { 200.0f, 150.0f };
     t.setPosition(newPos);
     ASSERT_EQ(t.getPosition(), newPos);
 }
@@ -120,14 +120,14 @@ TEST(TextTest, LocalBoundsWithLoadedText)
 TEST(TextTest, InitialScale)
 {
     jt::Text t = getText();
-    ASSERT_FLOAT_EQ(t.getScale().x(), 1.0f);
-    ASSERT_FLOAT_EQ(t.getScale().y(), 1.0f);
+    ASSERT_FLOAT_EQ(t.getScale().x, 1.0f);
+    ASSERT_FLOAT_EQ(t.getScale().y, 1.0f);
 }
 
 TEST(TextTest, ScaleAfterSetScale)
 {
     jt::Text t = getText();
-    jt::Vector2 newScale { 200.0f, 150.0f };
+    jt::Vector2f newScale { 200.0f, 150.0f };
     t.setScale(newScale);
     ASSERT_EQ(t.getScale(), newScale);
 }
@@ -135,14 +135,14 @@ TEST(TextTest, ScaleAfterSetScale)
 TEST(TextTest, InitialOrigin)
 {
     jt::Text t = getText();
-    ASSERT_FLOAT_EQ(t.getOrigin().x(), 0.0f);
-    ASSERT_FLOAT_EQ(t.getOrigin().y(), 0.0f);
+    ASSERT_FLOAT_EQ(t.getOrigin().x, 0.0f);
+    ASSERT_FLOAT_EQ(t.getOrigin().y, 0.0f);
 }
 
 TEST(TextTest, OriginAfterSetOrigin)
 {
     jt::Text t = getText();
-    jt::Vector2 newOrigin { 20.0f, -15.0f };
+    jt::Vector2f newOrigin { 20.0f, -15.0f };
     t.setOrigin(newOrigin);
     ASSERT_EQ(t.getOrigin(), newOrigin);
 }

@@ -9,7 +9,7 @@
 #include <string>
 
 namespace jt {
-void Shape::makeRect(jt::Vector2 size, std::shared_ptr<jt::TextureManagerInterface> textureManager)
+void Shape::makeRect(jt::Vector2f size, std::shared_ptr<jt::TextureManagerInterface> textureManager)
 {
     m_text = textureManager->get("#x#" + std::to_string(static_cast<int>(size.x())) + "#"
         + std::to_string(static_cast<int>(size.y())));
@@ -29,31 +29,31 @@ jt::Color Shape::getColor() const { return m_color; }
 void Shape::setFlashColor(jt::Color const& col) { m_colorFlash = col; }
 jt::Color Shape::getFlashColor() const { return m_colorFlash; }
 
-void Shape::setPosition(jt::Vector2 const& pos) { m_position = pos; }
-jt::Vector2 Shape::getPosition() const { return m_position; }
+void Shape::setPosition(jt::Vector2f const& pos) { m_position = pos; }
+jt::Vector2f Shape::getPosition() const { return m_position; }
 
 jt::Rect Shape::getGlobalBounds() const
 {
-    return jt::Rect { m_position.x() + getOffset().x(), m_position.y() + getOffset().y(),
-        static_cast<float>(m_sourceRect.width()) * m_scale.x(),
-        static_cast<float>(m_sourceRect.height()) * m_scale.y() };
+    return jt::Rect { m_position.x + getOffset().x, m_position.y + getOffset().y,
+        static_cast<float>(m_sourceRect.width()) * m_scale.x,
+        static_cast<float>(m_sourceRect.height()) * m_scale.y };
 }
 jt::Rect Shape::getLocalBounds() const
 {
-    return jt::Rect { m_position.x(), m_position.y(),
-        static_cast<float>(m_sourceRect.width()) * m_scale.x(),
-        static_cast<float>(m_sourceRect.height()) * m_scale.y() };
+    return jt::Rect { m_position.x, m_position.y,
+        static_cast<float>(m_sourceRect.width()) * m_scale.x,
+        static_cast<float>(m_sourceRect.height()) * m_scale.y };
 }
 
-void Shape::setScale(jt::Vector2 const& scale) { m_scale = scale; }
-jt::Vector2 Shape::getScale() const { return m_scale; }
+void Shape::setScale(jt::Vector2f const& scale) { m_scale = scale; }
+jt::Vector2f Shape::getScale() const { return m_scale; }
 
-void Shape::setOrigin(jt::Vector2 const& origin)
+void Shape::setOrigin(jt::Vector2f const& origin)
 {
     m_origin = origin;
     m_offsetFromOrigin = -1.0f * origin;
 }
-jt::Vector2 Shape::getOrigin() const { return m_origin; }
+jt::Vector2f Shape::getOrigin() const { return m_origin; }
 
 void Shape::doDraw(std::shared_ptr<jt::renderTarget> const sptr) const
 {
@@ -88,7 +88,7 @@ void Shape::doDrawShadow(std::shared_ptr<jt::renderTarget> const sptr) const
 void Shape::doUpdate(float /*elapsed*/) { }
 void Shape::doRotate(float /*rot*/) { }
 
-SDL_Rect Shape::getDestRect(jt::Vector2 const& positionOffset) const
+SDL_Rect Shape::getDestRect(jt::Vector2f const& positionOffset) const
 {
     auto const pos = m_position + getShakeOffset() + getOffset() + getCamOffset() + positionOffset
         + m_offsetFromOrigin;

@@ -3,8 +3,8 @@
 namespace jt {
 void MouseInputNull::updateMousePosition(MousePosition const& /*mousePosition*/) { }
 void MouseInputNull::updateButtons() { }
-Vector2 MouseInputNull::getMousePositionWorld() { return jt::Vector2(); }
-Vector2 MouseInputNull::getMousePositionScreen() { return jt::Vector2(); }
+jt::Vector2f MouseInputNull::getMousePositionWorld() { return jt::Vector2f(); }
+jt::Vector2f MouseInputNull::getMousePositionScreen() { return jt::Vector2f(); }
 bool MouseInputNull::pressed(jt::MouseButtonCode /*b*/) { return false; }
 bool MouseInputNull::released(jt::MouseButtonCode /*b*/) { return false; }
 bool MouseInputNull::justPressed(jt::MouseButtonCode /*b*/) { return false; }

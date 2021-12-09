@@ -46,11 +46,11 @@ public:
 
     /// Set the position of the drawable
     /// \param pos the new position
-    virtual void setPosition(jt::Vector2 const& pos) = 0;
+    virtual void setPosition(jt::Vector2f const& pos) = 0;
 
     /// Get the position of the drawable
     /// \return the position
-    virtual jt::Vector2 getPosition() const = 0;
+    virtual jt::Vector2f getPosition() const = 0;
 
     /// Get the global bounds rect
     ///
@@ -77,30 +77,30 @@ public:
 
     /// Set the scale of the drawable
     /// \param scale the scale
-    virtual void setScale(jt::Vector2 const& scale) = 0;
+    virtual void setScale(jt::Vector2f const& scale) = 0;
 
     /// Get the scale of the drawalbe
     /// \return the scale
-    virtual jt::Vector2 getScale() const = 0;
+    virtual jt::Vector2f getScale() const = 0;
 
     /// Set the origin of the drawable
     ///
     /// The origin is used for rotation
     ///
     /// \param origin the origin
-    virtual void setOrigin(jt::Vector2 const& origin) = 0;
+    virtual void setOrigin(jt::Vector2f const& origin) = 0;
 
     /// Get the origin of the drawable
     /// \return the origin
-    virtual jt::Vector2 getOrigin() const = 0;
+    virtual jt::Vector2f getOrigin() const = 0;
 
     /// Set the offset of the drawable
     /// \param offset the offset
-    virtual void setOffset(jt::Vector2 const offset) = 0;
+    virtual void setOffset(jt::Vector2f const offset) = 0;
 
     /// get the offset of the drawable
     /// \return the offset
-    virtual jt::Vector2 getOffset() const = 0;
+    virtual jt::Vector2f getOffset() const = 0;
 
     /// Set the rotation angle of the drawable (in degree)
     ///
@@ -131,16 +131,16 @@ public:
 
     /// Set the shadow offset
     /// \param shadowOffsetInPixel offset
-    virtual void setShadowOffset(jt::Vector2 const& shadowOffsetInPixel) = 0;
+    virtual void setShadowOffset(jt::Vector2f const& shadowOffsetInPixel) = 0;
 
     /// Get the shadow offset
     /// \return the offset in pixel
-    virtual jt::Vector2 getShadowOffset() const = 0;
+    virtual jt::Vector2f getShadowOffset() const = 0;
 
     /// Set the shadow
     /// \param shadowColor the shadow color
     /// \param shadowOffset the shadow shadowOffset
-    virtual void setShadow(jt::Color const& shadowColor, jt::Vector2 const& shadowOffset) = 0;
+    virtual void setShadow(jt::Color const& shadowColor, jt::Vector2f const& shadowOffset) = 0;
 
     /// Set ignore cam movement for the drawable (e.g. for HUD elements)
     /// \param ignore

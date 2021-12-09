@@ -30,11 +30,11 @@ public:
 
     /// Get the mouse position in the world
     /// \return the mouse position
-    virtual jt::Vector2 getMousePositionWorld() = 0;
+    virtual jt::Vector2f getMousePositionWorld() = 0;
 
     /// Get the mouse on the screen
     /// \return the mouse position
-    virtual jt::Vector2 getMousePositionScreen() = 0;
+    virtual jt::Vector2f getMousePositionScreen() = 0;
 
     /// Check if a button is pressed
     /// \param b the button

@@ -6,7 +6,7 @@
 #include <utility>
 
 using jt::Random;
-using v = jt::Vector2;
+using v = jt::Vector2f;
 
 class RandomIntTestFixture : public ::testing::TestWithParam<std::pair<int, int>> {
 };
@@ -112,10 +112,10 @@ TEST(RandomInRect, Valid)
     auto const upper = 10.0f;
     for (auto i = 0U; i != 1000; ++i) {
         auto const v = Random::getRandomPointIn(jt::Rect { lower, lower, upper, upper });
-        EXPECT_GT(v.x(), lower);
-        EXPECT_GT(v.y(), lower);
-        EXPECT_LT(v.x(), upper);
-        EXPECT_LT(v.y(), upper);
+        EXPECT_GT(v.x, lower);
+        EXPECT_GT(v.y, lower);
+        EXPECT_LT(v.x, upper);
+        EXPECT_LT(v.y, upper);
     }
 }
 

@@ -17,8 +17,8 @@ struct InfoRectProperties {
 };
 
 struct InfoRect {
-    Vector2 position { 0.0f, 0.0f };
-    Vector2 size { 0.0f, 0.0f };
+    jt::Vector2f position { 0.0f, 0.0f };
+    jt::Vector2f size { 0.0f, 0.0f };
     float rotation { 0.0f };
     std::string type { "" };
     std::string name { "" };

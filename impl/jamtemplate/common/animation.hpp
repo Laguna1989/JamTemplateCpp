@@ -57,8 +57,8 @@ public:
     void setColor(jt::Color const& col) override;
     jt::Color getColor() const override;
 
-    void setPosition(jt::Vector2 const& pos) override;
-    jt::Vector2 getPosition() const override;
+    void setPosition(jt::Vector2f const& pos) override;
+    jt::Vector2f getPosition() const override;
 
     jt::Rect getGlobalBounds() const override;
     virtual jt::Rect getLocalBounds() const override;
@@ -66,15 +66,15 @@ public:
     void setFlashColor(jt::Color const& col) override;
     jt::Color getFlashColor() const override;
 
-    virtual void setScale(jt::Vector2 const& scale) override;
-    virtual jt::Vector2 getScale() const override;
+    virtual void setScale(jt::Vector2f const& scale) override;
+    virtual jt::Vector2f getScale() const override;
 
-    void setOrigin(jt::Vector2 const& origin) override;
-    jt::Vector2 getOrigin() const override;
+    void setOrigin(jt::Vector2f const& origin) override;
+    jt::Vector2f getOrigin() const override;
 
     void setShadowActive(bool active) override;
     void setShadowColor(jt::Color const& col) override;
-    void setShadowOffset(jt::Vector2 const& v) override;
+    void setShadowOffset(jt::Vector2f const& v) override;
 
     /// Get the frame time for one single frame in the current animation
     ///
@@ -108,7 +108,7 @@ private:
     // which frame of the animation is currently displayed?
     std::size_t m_currentIdx { 0 };
 
-    jt::Vector2 m_position { 0.0f, 0.0f };
+    jt::Vector2f m_position { 0.0f, 0.0f };
 
     float m_frameTime { 0.0f };
 

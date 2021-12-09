@@ -40,13 +40,14 @@ GameBase::GameBase(std::shared_ptr<jt::RenderWindowInterface> renderWindow,
     }
 
     m_logger = std::make_shared<jt::Logger>();
-    m_logger->setLogLevel(LogLevel::LogLevelDebug);
+
     auto targetCout = std::make_shared<jt::LogTargetCout>();
     targetCout->setLogLevel(LogLevel::LogLevelInfo);
     m_logger->addLogTarget(targetCout);
     m_logger->addLogTarget(std::make_shared<jt::LogTargetFile>());
-
+    getLogger()->setLogLevel(LogLevel::LogLevelOff);
     createActionCommandManager();
+    m_logger->setLogLevel(LogLevel::LogLevelDebug);
 }
 void GameBase::createActionCommandManager()
 {

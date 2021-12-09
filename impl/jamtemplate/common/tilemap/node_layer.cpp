@@ -50,10 +50,10 @@ void NodeLayer::parseTiles(std::shared_ptr<jt::TextureManagerInterface> textureM
             }
 
             std::shared_ptr<jt::Shape> drawable = jt::dh::createShapeRect(
-                jt::Vector2 { static_cast<float>(ts.x - 1), static_cast<float>(ts.y - 1) }, color,
+                jt::Vector2f { static_cast<float>(ts.x - 1), static_cast<float>(ts.y - 1) }, color,
                 textureManager);
-            Vector2 const positionInPixel
-                = jt::Vector2 { static_cast<float>(ts.x * posx), static_cast<float>(ts.y * posy) };
+            jt::Vector2f const positionInPixel
+                = jt::Vector2f { static_cast<float>(ts.x * posx), static_cast<float>(ts.y * posy) };
             drawable->setPosition(positionInPixel);
 
             auto node = std::make_shared<jt::pathfinder::Node>();
@@ -78,8 +78,8 @@ void NodeLayer::createNodeConnections()
                 if (i == 0 && j == 0) {
                     continue;
                 }
-                auto oi = static_cast<int>(currentPos.x()) + i;
-                auto oj = static_cast<int>(currentPos.y()) + j;
+                auto oi = static_cast<int>(currentPos.x) + i;
+                auto oj = static_cast<int>(currentPos.y) + j;
                 auto ot = getTileAt(static_cast<unsigned int>(oi), static_cast<unsigned int>(oj));
                 if (ot) {
                     if (ot->getBlocked()) {
@@ -95,8 +95,8 @@ void NodeLayer::createNodeConnections()
 std::shared_ptr<TileNode> NodeLayer::getTileAt(unsigned int x, unsigned int y)
 {
     auto it = std::find_if(m_tiles.begin(), m_tiles.end(), [x, y](auto tile) {
-        return tile->getNode()->getTilePosition().x() == x
-            && tile->getNode()->getTilePosition().y() == y;
+        return tile->getNode()->getTilePosition().x == x
+            && tile->getNode()->getTilePosition().y == y;
     });
     if (it == m_tiles.end()) {
         return nullptr;

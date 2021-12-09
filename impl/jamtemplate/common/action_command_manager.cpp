@@ -70,7 +70,7 @@ std::shared_ptr<bool> ActionCommandManager::registerTemporaryCommand(
     std::string const trimmedCommand = strutil::trim_copy(commandName);
     m_registeredCommands.emplace_back(
         std::make_tuple(trimmedCommand, std::weak_ptr<bool> { sharedState }, callback));
-    m_logger.lock()->info("registered command '" + trimmedCommand + "'");
+    //    m_logger.lock()->info("registered command '" + trimmedCommand + "'");
     return sharedState;
 }
 void ActionCommandManager::update() { removeUnusedCommands(); }

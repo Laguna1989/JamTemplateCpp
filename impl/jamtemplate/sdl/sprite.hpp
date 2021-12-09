@@ -25,8 +25,8 @@ public:
 
     void fromTexture(std::shared_ptr<SDL_Texture> txt);
 
-    void setPosition(jt::Vector2 const& pos) override;
-    jt::Vector2 getPosition() const override;
+    void setPosition(jt::Vector2f const& pos) override;
+    jt::Vector2f getPosition() const override;
 
     void setColor(jt::Color const& col) override;
     jt::Color getColor() const override;
@@ -37,11 +37,11 @@ public:
     virtual jt::Rect getGlobalBounds() const override;
     virtual jt::Rect getLocalBounds() const override;
 
-    virtual void setScale(jt::Vector2 const& scale) override;
-    virtual jt::Vector2 getScale() const override;
+    virtual void setScale(jt::Vector2f const& scale) override;
+    virtual jt::Vector2f getScale() const override;
 
-    virtual void setOrigin(jt::Vector2 const& origin) override;
-    virtual jt::Vector2 getOrigin() const override;
+    virtual void setOrigin(jt::Vector2f const& origin) override;
+    virtual jt::Vector2f getOrigin() const override;
 
     // WARNING: This function is slow, because it needs to copy
     // graphics memory to ram first.
@@ -52,12 +52,12 @@ public:
 private:
     mutable std::shared_ptr<SDL_Texture> m_text;
 
-    jt::Vector2 m_position { 0, 0 };
+    jt::Vector2f m_position { 0, 0 };
     jt::Recti m_sourceRect { 0, 0, 0, 0 };
     jt::Color m_color { jt::colors::White };
-    jt::Vector2 m_scale { 1.0f, 1.0f };
-    jt::Vector2 m_origin { 0.0f, 0.0f };
-    jt::Vector2 m_offsetFromOrigin { 0.0f, 0.0f };
+    jt::Vector2f m_scale { 1.0f, 1.0f };
+    jt::Vector2f m_origin { 0.0f, 0.0f };
+    jt::Vector2f m_offsetFromOrigin { 0.0f, 0.0f };
 
     mutable std::shared_ptr<SDL_Texture> m_textFlash;
     jt::Color m_colorFlash { jt::colors::White };
@@ -74,7 +74,7 @@ private:
     void doDrawFlash(std::shared_ptr<jt::renderTarget> const sptr) const override;
     void doRotate(float /*rot*/) override;
 
-    SDL_Rect getDestRect(jt::Vector2 const& positionOffset = jt::Vector2 { 0.0f, 0.0f }) const;
+    SDL_Rect getDestRect(jt::Vector2f const& positionOffset = jt::Vector2f { 0.0f, 0.0f }) const;
     SDL_Rect getSourceRect() const;
     void setSDLColor(jt::Color const& col) const;
 };

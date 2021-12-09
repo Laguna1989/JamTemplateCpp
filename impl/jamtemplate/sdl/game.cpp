@@ -22,8 +22,8 @@ Game::Game(std::shared_ptr<RenderWindowInterface> window,
     std::shared_ptr<CamInterface> camera, std::shared_ptr<StateManagerInterface> stateManager)
     : GameBase { window, input, musicPlayer, camera, stateManager }
 {
-    auto const width = getRenderWindow()->getSize().x();
-    auto const height = getRenderWindow()->getSize().y();
+    auto const width = getRenderWindow()->getSize().x;
+    auto const height = getRenderWindow()->getSize().y;
 
     auto const scaledWidth = static_cast<int>(width / getCamera()->getZoom());
     auto const scaledHeight = static_cast<int>(height / getCamera()->getZoom());
@@ -64,10 +64,10 @@ void Game::doUpdate(float const elapsed)
     m_stateManager->getCurrentState()->update(elapsed);
     getCamera()->update(elapsed);
 
-    jt::Vector2 const mpf = getRenderWindow()->getMousePosition() / getCamera()->getZoom();
+    jt::Vector2f const mpf = getRenderWindow()->getMousePosition() / getCamera()->getZoom();
 
-    input()->update(MousePosition { mpf.x() + getCamera()->getCamOffset().x(),
-                        mpf.y() + getCamera()->getCamOffset().y(), mpf.x(), mpf.y() },
+    input()->update(MousePosition { mpf.x + getCamera()->getCamOffset().x,
+                        mpf.y + getCamera()->getCamOffset().y, mpf.x, mpf.y },
         elapsed);
 
     DrawableImpl::setCamOffset(-1.0f * getCamera()->getCamOffset());

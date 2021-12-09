@@ -17,7 +17,7 @@ std::shared_ptr<jt::renderTarget> jt::null_objects::RenderWindowNull::createRend
     return nullptr;
 #endif
 }
-jt::Vector2 jt::null_objects::RenderWindowNull::getSize() const { return m_size; }
+jt::Vector2f jt::null_objects::RenderWindowNull::getSize() const { return m_size; }
 void jt::null_objects::RenderWindowNull::draw(std::unique_ptr<jt::Sprite>& ptr)
 {
     if (!ptr) {
@@ -25,10 +25,10 @@ void jt::null_objects::RenderWindowNull::draw(std::unique_ptr<jt::Sprite>& ptr)
     }
 }
 void jt::null_objects::RenderWindowNull::display() { }
-jt::Vector2 jt::null_objects::RenderWindowNull::getMousePosition()
+jt::Vector2f jt::null_objects::RenderWindowNull::getMousePosition()
 {
     auto const magic_mouse_position = 20.0f;
-    return jt::Vector2 { magic_mouse_position, magic_mouse_position };
+    return jt::Vector2f { magic_mouse_position, magic_mouse_position };
 }
 
 void jt::null_objects::RenderWindowNull::setMouseCursorVisible(bool visible)

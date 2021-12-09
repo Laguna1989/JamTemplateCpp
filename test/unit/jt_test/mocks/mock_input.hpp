@@ -8,8 +8,8 @@ class MockMouseInput : public jt::MouseInputInterface {
 public:
     MOCK_METHOD(void, updateMousePosition, (jt::MousePosition const&), (override));
     MOCK_METHOD(void, updateButtons, (), (override));
-    MOCK_METHOD(jt::Vector2, getMousePositionWorld, (), (override));
-    MOCK_METHOD(jt::Vector2, getMousePositionScreen, (), (override));
+    MOCK_METHOD(jt::Vector2f, getMousePositionWorld, (), (override));
+    MOCK_METHOD(jt::Vector2f, getMousePositionScreen, (), (override));
     MOCK_METHOD(bool, pressed, (jt::MouseButtonCode), (override));
     MOCK_METHOD(bool, justReleased, (jt::MouseButtonCode), (override));
     MOCK_METHOD(bool, justPressed, (jt::MouseButtonCode), (override));

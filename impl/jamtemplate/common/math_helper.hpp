@@ -29,19 +29,19 @@ std::vector<T> numbersBetween(T a, T b)
     return std::vector<T>(r.begin(), r.end());
 }
 
-float lengthSquared(jt::Vector2 const& v);
+float lengthSquared(jt::Vector2f const& v);
 
-float length(jt::Vector2 const& v);
+float length(jt::Vector2f const& v);
 
-void normalizeMe(jt::Vector2& v, float lowerbound = 0);
+void normalizeMe(jt::Vector2f& v, float lowerbound = 0);
 
 float rad2deg(float a);
 float deg2rad(float a);
 
-jt::Vector2 rotateBy(jt::Vector2 const& in, float aInDegree);
+jt::Vector2f rotateBy(jt::Vector2f const& in, float aInDegree);
 
 // angle in degree between argument vector and the x axis
-float angleOf(jt::Vector2 const& in);
+float angleOf(jt::Vector2f const& in);
 
 template <typename T>
 T clamp(T const& value, T const& min, T const& max)

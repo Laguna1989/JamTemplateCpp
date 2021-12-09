@@ -10,19 +10,19 @@ Box2DObject::Box2DObject(std::shared_ptr<Box2DWorldInterface> world, b2BodyDef c
     m_world = world;
 }
 
-jt::Vector2 Box2DObject::getPosition() const { return Conversion::vec(m_body->GetPosition()); }
+jt::Vector2f Box2DObject::getPosition() const { return Conversion::vec(m_body->GetPosition()); }
 
-void Box2DObject::setPosition(jt::Vector2 const& position)
+void Box2DObject::setPosition(jt::Vector2f const& position)
 {
     m_body->SetTransform(Conversion::vec(position), m_body->GetAngle());
 }
 
-jt::Vector2 Box2DObject::getVelocity() const
+jt::Vector2f Box2DObject::getVelocity() const
 {
     return Conversion::vec(m_body->GetLinearVelocity());
 }
 
-void Box2DObject::setVelocity(jt::Vector2 const& v)
+void Box2DObject::setVelocity(jt::Vector2f const& v)
 {
     m_body->SetLinearVelocity(Conversion::vec(v));
 }
