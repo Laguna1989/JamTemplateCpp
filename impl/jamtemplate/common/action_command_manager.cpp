@@ -14,15 +14,15 @@ void ActionCommandManager::executeCommand(std::string const& fullCommandString)
         return;
     }
 
-    auto splitCommand = strutil::split(strutil::trim_copy(fullCommandString), " ");
-    auto commandIdentifierString = splitCommand.at(0);
-    std::vector<std::string> commandArguments = getArguments(splitCommand);
+    auto const splitCommand = strutil::split(strutil::trim_copy(fullCommandString), " ");
+    auto const commandIdentifierString = splitCommand.at(0);
+    auto const commandArguments = getArguments(splitCommand);
 
-    auto command_entry = std::find_if(m_registeredCommands.begin(), m_registeredCommands.end(),
-        [&commandIdentifierString](auto const& c) {
-            auto currentCommandToBeChecked = std::get<0>(c);
+    auto const command_entry = std::find_if(m_registeredCommands.cbegin(),
+        m_registeredCommands.cend(), [&commandIdentifierString](auto const& c) {
+            auto const currentCommandToBeChecked = std::get<0>(c);
             if (commandIdentifierString == currentCommandToBeChecked) {
-                auto shared_state = std::get<1>(c);
+                auto const shared_state = std::get<1>(c);
                 if (shared_state.expired()) {
                     return false;
                 }
@@ -38,12 +38,13 @@ void ActionCommandManager::executeCommand(std::string const& fullCommandString)
     std::get<2> (*command_entry)(commandArguments);
 }
 
-std::vector<std::string> ActionCommandManager::getArguments(std::vector<std::string>& args) const
+std::vector<std::string> ActionCommandManager::getArguments(
+    std::vector<std::string> const& args) const
 {
     if (args.size() <= 1) {
         return {};
     }
-    return std::vector<std::string> { args.begin() + 1, args.end() };
+    return std::vector<std::string> { args.cbegin() + 1, args.cend() };
 }
 
 void ActionCommandManager::removeUnusedCommands()

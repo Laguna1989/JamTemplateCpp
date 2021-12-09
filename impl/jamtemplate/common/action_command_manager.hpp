@@ -19,7 +19,7 @@ private:
     std::vector<std::tuple<std::string, std::weak_ptr<bool>, ActionCommandCallbackType>>
         m_registeredCommands;
     void removeUnusedCommands();
-    std::vector<std::string> getArguments(std::vector<std::string>& args) const;
+    std::vector<std::string> getArguments(std::vector<std::string> const& args) const;
 };
 } // namespace jt
 
