@@ -31,7 +31,7 @@ std::shared_ptr<jt::renderTarget> RenderWindow::createRenderTarget()
     SDL_SetRenderDrawBlendMode(renderTarget.get(), SDL_BLENDMODE_BLEND);
     ImGui::CreateContext();
     ImGuiSDL::Initialize(
-        renderTarget.get(), static_cast<int>(m_size.x()), static_cast<int>(m_size.y()));
+        renderTarget.get(), static_cast<int>(m_size.x), static_cast<int>(m_size.y));
     return renderTarget;
 }
 

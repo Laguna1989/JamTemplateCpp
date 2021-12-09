@@ -7,10 +7,10 @@
 namespace jt {
 
 SDL_Point toLib(jt::Vector2f const& vec);
-jt::Vector2f fromLib(SDL_Point const& vec);
+jt::Vector2f fromLibF(SDL_Point const& vec);
 
 SDL_Point toLib(jt::Vector2u const& vec);
-jt::Vector2u fromLib(SDL_Point const& vec);
+jt::Vector2u fromLibU(SDL_Point const& vec);
 
 } // namespace jt
 

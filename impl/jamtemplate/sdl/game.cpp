@@ -94,8 +94,8 @@ void Game::doDraw() const
     SDL_RenderClear(getRenderTarget().get());
     SDL_Rect sourceRect { m_srcRect.left(), m_srcRect.top(), m_srcRect.width(),
         m_srcRect.height() };
-    SDL_Rect destRect { static_cast<int>(getCamera()->getShakeOffset().x()),
-        static_cast<int>(getCamera()->getShakeOffset().y()), m_destRect.width(),
+    SDL_Rect destRect { static_cast<int>(getCamera()->getShakeOffset().x),
+        static_cast<int>(getCamera()->getShakeOffset().y), m_destRect.width(),
         m_destRect.height() };
     SDL_RenderCopyEx(getRenderTarget().get(), t, &sourceRect, &destRect, 0, nullptr, SDL_FLIP_NONE);
     m_renderWindow->display();

@@ -19,9 +19,9 @@ void jt::Line::doDraw(std::shared_ptr<jt::renderTarget> const sptr) const
     auto const endPosition = startPosition + m_lineVector;
 
     SDL_SetRenderDrawColor(sptr.get(), m_color.r(), m_color.g(), m_color.b(), m_color.a());
-    SDL_RenderDrawLine(sptr.get(), static_cast<int>(startPosition.x()),
-        static_cast<int>(startPosition.y()), static_cast<int>(endPosition.x()),
-        static_cast<int>(endPosition.y()));
+    SDL_RenderDrawLine(sptr.get(), static_cast<int>(startPosition.x),
+        static_cast<int>(startPosition.y), static_cast<int>(endPosition.x),
+        static_cast<int>(endPosition.y));
 }
 
 void jt::Line::doDrawFlash(std::shared_ptr<jt::renderTarget> const sptr) const
@@ -31,9 +31,9 @@ void jt::Line::doDrawFlash(std::shared_ptr<jt::renderTarget> const sptr) const
 
     SDL_SetRenderDrawColor(
         sptr.get(), m_flashColor.r(), m_flashColor.g(), m_flashColor.b(), m_flashColor.a());
-    SDL_RenderDrawLine(sptr.get(), static_cast<int>(startPosition.x()),
-        static_cast<int>(startPosition.y()), static_cast<int>(endPosition.x()),
-        static_cast<int>(endPosition.y()));
+    SDL_RenderDrawLine(sptr.get(), static_cast<int>(startPosition.x),
+        static_cast<int>(startPosition.y), static_cast<int>(endPosition.x),
+        static_cast<int>(endPosition.y));
 }
 void jt::Line::doDrawShadow(std::shared_ptr<jt::renderTarget> const sptr) const
 {
@@ -44,9 +44,9 @@ void jt::Line::doDrawShadow(std::shared_ptr<jt::renderTarget> const sptr) const
 
     SDL_SetRenderDrawColor(sptr.get(), getShadowColor().r(), getShadowColor().g(),
         getShadowColor().b(), getShadowColor().a());
-    SDL_RenderDrawLine(sptr.get(), static_cast<int>(startPosition.x()),
-        static_cast<int>(startPosition.y()), static_cast<int>(endPosition.x()),
-        static_cast<int>(endPosition.y()));
+    SDL_RenderDrawLine(sptr.get(), static_cast<int>(startPosition.x),
+        static_cast<int>(startPosition.y), static_cast<int>(endPosition.x),
+        static_cast<int>(endPosition.y));
 }
 
 void jt::Line::doRotate(float d) { m_lineVector = jt::MathHelper::rotateBy(m_lineVector, d); }

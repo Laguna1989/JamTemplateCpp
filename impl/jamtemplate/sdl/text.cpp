@@ -91,7 +91,7 @@ void Text::doUpdate(float /*elapsed*/)
 void Text::doDrawShadow(std::shared_ptr<jt::renderTarget> const sptr) const
 {
     auto const destRect = getDestRect(getShadowOffset());
-    SDL_Point const p { static_cast<int>(m_origin.x()), static_cast<int>(m_origin.y()) };
+    SDL_Point const p { static_cast<int>(m_origin.x), static_cast<int>(m_origin.y) };
 
     auto const flip = jt::getFlipFromScale(m_scale);
     auto col = getShadowColor();
@@ -103,7 +103,7 @@ void Text::doDrawShadow(std::shared_ptr<jt::renderTarget> const sptr) const
 void Text::doDraw(std::shared_ptr<jt::renderTarget> const sptr) const
 {
     auto const destRect = getDestRect();
-    SDL_Point const p { static_cast<int>(m_origin.x()), static_cast<int>(m_origin.y()) };
+    SDL_Point const p { static_cast<int>(m_origin.x), static_cast<int>(m_origin.y) };
 
     auto const flip = jt::getFlipFromScale(m_scale);
     setSDLColor(getColor());
@@ -113,7 +113,7 @@ void Text::doDraw(std::shared_ptr<jt::renderTarget> const sptr) const
 void Text::doDrawFlash(std::shared_ptr<jt::renderTarget> const sptr) const
 {
     auto const destRect = getDestRect();
-    SDL_Point const p { static_cast<int>(m_origin.x()), static_cast<int>(m_origin.y()) };
+    SDL_Point const p { static_cast<int>(m_origin.x), static_cast<int>(m_origin.y) };
 
     auto const flip = jt::getFlipFromScale(m_scale);
     setSDLColor(getFlashColor());
@@ -148,8 +148,8 @@ void Text::renderOneLineOfText(std::shared_ptr<jt::renderTarget> const sptr, std
     jt::Vector2f const pos = jt::Vector2f { 0, static_cast<float>(h * i) } + alignOffset;
 
     SDL_Rect destRect; // create a rect
-    destRect.x = static_cast<int>(pos.x()); // controls the rect's x coordinate
-    destRect.y = static_cast<int>(pos.y()); // controls the rect's y coordinte
+    destRect.x = static_cast<int>(pos.x); // controls the rect's x coordinate
+    destRect.y = static_cast<int>(pos.y); // controls the rect's y coordinte
     destRect.w = static_cast<int>(w); // controls the width of the rect
     destRect.h = static_cast<int>(h); // controls the height of the rect
 
@@ -245,12 +245,12 @@ SDL_Rect Text::getDestRect(jt::Vector2f const& positionOffset) const
         + positionOffset + m_offsetFromOrigin;
 
     SDL_Rect destRect; // create a rect
-    destRect.x = static_cast<int>(pos.x()); // controls the rect's x coordinate
-    destRect.y = static_cast<int>(pos.y()); // controls the rect's y coordinte
+    destRect.x = static_cast<int>(pos.x); // controls the rect's x coordinate
+    destRect.y = static_cast<int>(pos.y); // controls the rect's y coordinte
     destRect.w = static_cast<int>(
-        static_cast<float>(m_textTextureSizeX) * m_scale.x()); // controls the width of the rect
+        static_cast<float>(m_textTextureSizeX) * m_scale.x); // controls the width of the rect
     destRect.h = static_cast<int>(
-        static_cast<float>(m_textTextureSizeY) * m_scale.y()); // controls the height of the rect
+        static_cast<float>(m_textTextureSizeY) * m_scale.y); // controls the height of the rect
 
     return destRect;
 }
