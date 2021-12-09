@@ -8,6 +8,8 @@
 namespace jt {
 class ActionCommandManagerInterface {
 public:
+    using ActionCommandCallbackType = std::function<void(std::vector<std::string>)>;
+
     virtual ~ActionCommandManagerInterface() = default;
     virtual void executeCommand(std::string const& fullCommandString) = 0;
 
@@ -17,7 +19,7 @@ public:
     /// \return shared pointer to keep the commandName alive. If the user destroys the shared
     /// pointer, the commandName is automatically unregistered
     virtual std::shared_ptr<bool> registerTemporaryCommand(
-        std::string const& commandName, std::function<void(std::string)> callback)
+        std::string const& commandName, ActionCommandCallbackType callback)
         = 0;
 
     virtual std::vector<std::string> getAllCommands() = 0;

@@ -10,15 +10,16 @@ public:
     void executeCommand(std::string const& fullCommandString) override;
 
     std::shared_ptr<bool> registerTemporaryCommand(
-        std::string const& commandName, std::function<void(std::string)> callback) override;
+        std::string const& commandName, ActionCommandCallbackType callback) override;
     void update() override;
     std::vector<std::string> getAllCommands() override;
 
 private:
     std::weak_ptr<jt::LoggerInterface> m_logger;
-    std::vector<std::tuple<std::string, std::weak_ptr<bool>, std::function<void(std::string)>>>
+    std::vector<std::tuple<std::string, std::weak_ptr<bool>, ActionCommandCallbackType>>
         m_registeredCommands;
     void removeUnusedCommands();
+    std::vector<std::string> getArguments(std::vector<std::string>& args) const;
 };
 } // namespace jt
 

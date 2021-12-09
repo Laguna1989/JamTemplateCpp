@@ -14,22 +14,38 @@ void ActionCommandManager::executeCommand(std::string const& fullCommandString)
         return;
     }
 
-    removeUnusedCommands();
+    auto splitCommand = strutil::split(strutil::trim_copy(fullCommandString), " ");
+    auto commandIdentifierString = splitCommand.at(0);
+    std::vector<std::string> commandArguments = getArguments(splitCommand);
 
-    for (auto& c : m_registeredCommands) {
-        auto commandString = std::get<0>(c);
-
-        if (fullCommandString == commandString) {
-            auto shared_state = std::get<1>(c);
-            if (shared_state.expired()) {
-                continue;
+    auto command_entry = std::find_if(m_registeredCommands.begin(), m_registeredCommands.end(),
+        [&commandIdentifierString](auto const& c) {
+            auto currentCommandToBeChecked = std::get<0>(c);
+            if (commandIdentifierString == currentCommandToBeChecked) {
+                auto shared_state = std::get<1>(c);
+                if (shared_state.expired()) {
+                    return false;
+                }
+                return true;
             }
-            std::get<2>(c)(fullCommandString);
-            return;
-        }
+            return false;
+        });
+    if (command_entry == m_registeredCommands.end()) {
+        m_logger.lock()->error("unknown commandIdentifierString '" + fullCommandString + "'");
+        return;
     }
-    m_logger.lock()->error("unknown command '" + fullCommandString + "'");
+    // perform the actual action command call
+    std::get<2> (*command_entry)(commandArguments);
 }
+
+std::vector<std::string> ActionCommandManager::getArguments(std::vector<std::string>& args) const
+{
+    if (args.size() <= 1) {
+        return {};
+    }
+    return std::vector<std::string> { args.begin() + 1, args.end() };
+}
+
 void ActionCommandManager::removeUnusedCommands()
 {
     m_registeredCommands.erase(
@@ -46,7 +62,7 @@ void ActionCommandManager::removeUnusedCommands()
 }
 
 std::shared_ptr<bool> ActionCommandManager::registerTemporaryCommand(
-    std::string const& commandName, std::function<void(std::string)> callback)
+    std::string const& commandName, ActionCommandCallbackType callback)
 {
     std::shared_ptr<bool> sharedState = std::make_shared<bool>();
 

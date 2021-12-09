@@ -7,6 +7,7 @@
 #include "logging/log_target_file.hpp"
 #include "logging/logger.hpp"
 #include "state_manager.hpp"
+#include "strutils.hpp"
 #include <exception>
 #include <iostream>
 #include <stdexcept>
@@ -52,13 +53,25 @@ void GameBase::createActionCommandManager()
     m_actionCommandManager = std::make_shared<ActionCommandManager>(m_logger);
 
     storeActionCommand(m_actionCommandManager->registerTemporaryCommand(
-        "help", [mgr = getActionCommandManager(), logger = getLogger()](auto /*str*/) {
+        "help", [mgr = getActionCommandManager(), logger = getLogger()](auto /*args*/) {
+            logger->action("Available commands:");
             for (auto& c : mgr->getAllCommands()) {
-                logger->action(c);
+                logger->action(" - " + c);
             }
         }));
     storeActionCommand(m_actionCommandManager->registerTemporaryCommand(
-        "clear", [logger = getLogger()](auto /*str*/) { logger->clear(); }));
+        "clear", [logger = getLogger()](auto /*args*/) { logger->clear(); }));
+
+    storeActionCommand(m_actionCommandManager->registerTemporaryCommand(
+        "cam.shake", [cam = getCamera(), logger = getLogger()](auto args) {
+            if (args.size() != 2) {
+                logger->action("invalid number of arguments for shake");
+                return;
+            }
+            float duration = std::stof(args.at(0));
+            float strength = std::stof(args.at(1));
+            cam->shake(duration, strength);
+        }));
 }
 
 void GameBase::run()
