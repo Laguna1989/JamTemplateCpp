@@ -51,26 +51,43 @@ GameBase::GameBase(std::shared_ptr<jt::RenderWindowInterface> renderWindow,
 void GameBase::createActionCommandManager()
 {
     m_actionCommandManager = std::make_shared<ActionCommandManager>(m_logger);
-
-    storeActionCommand(m_actionCommandManager->registerTemporaryCommand(
-        "help", [mgr = getActionCommandManager(), logger = getLogger()](auto /*args*/) {
-            logger->action("Available commands:");
-            for (auto& c : mgr->getAllCommands()) {
-                logger->action(" - " + c);
+    storeActionCommand(m_actionCommandManager->registerTemporaryCommand("help",
+        [mgr = std::weak_ptr { getActionCommandManager() }, logger = std::weak_ptr { getLogger() }](
+            auto /*args*/) {
+            if (logger.expired()) {
+                return;
+            }
+            logger.lock()->action("Available commands:");
+            if (mgr.expired()) {
+                return;
+            }
+            for (auto& c : mgr.lock()->getAllCommands()) {
+                logger.lock()->action(" - " + c);
             }
         }));
     storeActionCommand(m_actionCommandManager->registerTemporaryCommand(
-        "clear", [logger = getLogger()](auto /*args*/) { logger->clear(); }));
+        "clear", [logger = std::weak_ptr { getLogger() }](auto /*args*/) {
+            if (logger.expired()) {
+                return;
+            }
+            logger.lock()->clear();
+        }));
 
-    storeActionCommand(m_actionCommandManager->registerTemporaryCommand(
-        "cam.shake", [cam = getCamera(), logger = getLogger()](auto args) {
+    storeActionCommand(m_actionCommandManager->registerTemporaryCommand("cam.shake",
+        [cam = std::weak_ptr { getCamera() }, logger = std::weak_ptr { getLogger() }](auto args) {
             if (args.size() != 2) {
-                logger->action("invalid number of arguments for shake");
+                if (logger.expired()) {
+                    return;
+                }
+                logger.lock()->action("invalid number of arguments for shake");
                 return;
             }
             float duration = std::stof(args.at(0));
             float strength = std::stof(args.at(1));
-            cam->shake(duration, strength);
+            if (cam.expired()) {
+                return;
+            }
+            cam.lock()->shake(duration, strength);
         }));
 }
 

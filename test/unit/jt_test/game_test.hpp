@@ -31,6 +31,7 @@ public:
         music_player = std::make_shared<jt::MusicPlayerNull>();
 
         camera = std::make_shared<::testing::NiceMock<MockCamera>>();
+
         ON_CALL(*camera, getZoom).WillByDefault([this]() { return zoom; });
 
         state = std::make_shared<MockState>();
