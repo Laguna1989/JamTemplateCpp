@@ -78,8 +78,8 @@ bool Button::isOver(jt::Vector2f const& mousePosition)
     float px = m_background->getPosition().x;
     float py = m_background->getPosition().y;
 
-    float w = m_background->getGlobalBounds().width();
-    float h = m_background->getGlobalBounds().height();
+    float w = m_background->getGlobalBounds().width;
+    float h = m_background->getGlobalBounds().height;
     return (mousePosition.x > px && mousePosition.x <= px + w && mousePosition.y > py
         && mousePosition.y <= py + h);
 }

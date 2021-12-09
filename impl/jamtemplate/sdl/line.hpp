@@ -17,8 +17,8 @@ public:
     void setPosition(jt::Vector2f const& pos) override;
     jt::Vector2f getPosition() const override;
 
-    jt::Rect getGlobalBounds() const override;
-    jt::Rect getLocalBounds() const override;
+    jt::Rectf getGlobalBounds() const override;
+    jt::Rectf getLocalBounds() const override;
 
     void setFlashColor(jt::Color const& col) override;
     jt::Color getFlashColor() const override;

@@ -85,11 +85,11 @@ jt::Color Animation::getColor() const
 void Animation::setPosition(jt::Vector2f const& pos) { m_position = pos; }
 jt::Vector2f Animation::getPosition() const { return m_position; }
 
-jt::Rect Animation::getGlobalBounds() const
+jt::Rectf Animation::getGlobalBounds() const
 {
     return getCurrentSprite(m_frames, m_currentAnimName, m_currentIdx)->getGlobalBounds();
 }
-jt::Rect Animation::getLocalBounds() const
+jt::Rectf Animation::getLocalBounds() const
 {
     return getCurrentSprite(m_frames, m_currentAnimName, m_currentIdx)->getLocalBounds();
 }

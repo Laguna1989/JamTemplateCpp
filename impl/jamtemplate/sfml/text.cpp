@@ -1,4 +1,5 @@
 ﻿#include "text.hpp"
+#include "rect_lib.hpp"
 #include "vector_lib.hpp"
 #include <iostream>
 
@@ -46,8 +47,8 @@ jt::Color Text::getColor() const { return m_text->getFillColor(); }
 void Text::setFlashColor(const jt::Color& col) { m_flashText->setFillColor(col); }
 jt::Color Text::getFlashColor() const { return m_flashText->getFillColor(); }
 
-jt::Rect Text::getGlobalBounds() const { return m_text->getGlobalBounds(); }
-jt::Rect Text::getLocalBounds() const { return m_text->getLocalBounds(); }
+jt::Rectf Text::getGlobalBounds() const { return fromLib(m_text->getGlobalBounds()); }
+jt::Rectf Text::getLocalBounds() const { return fromLib(m_text->getLocalBounds()); }
 
 void Text::setScale(jt::Vector2f const& scale)
 {

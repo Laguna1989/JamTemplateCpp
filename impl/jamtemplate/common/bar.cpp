@@ -106,8 +106,8 @@ void Bar::setPosition(jt::Vector2f const& pos)
 
 jt::Vector2f Bar::getPosition() const { return m_shapeFull->getPosition(); }
 
-jt::Rect Bar::getGlobalBounds() const { return m_shapeFull->getGlobalBounds(); }
-jt::Rect Bar::getLocalBounds() const { return m_shapeFull->getLocalBounds(); }
+jt::Rectf Bar::getGlobalBounds() const { return m_shapeFull->getGlobalBounds(); }
+jt::Rectf Bar::getLocalBounds() const { return m_shapeFull->getLocalBounds(); }
 
 void Bar::setFlashColor(jt::Color const& col) { m_flashColor = col; }
 jt::Color Bar::getFlashColor() const { return m_flashColor; }

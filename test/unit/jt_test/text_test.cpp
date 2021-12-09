@@ -22,8 +22,8 @@ jt::Text getText()
 TEST(TextTest, InitialValues)
 {
     jt::Text t = getText();
-    ASSERT_FLOAT_EQ(t.getLocalBounds().width(), 0.0f);
-    ASSERT_FLOAT_EQ(t.getLocalBounds().height(), 0.0f);
+    ASSERT_FLOAT_EQ(t.getLocalBounds().width, 0.0f);
+    ASSERT_FLOAT_EQ(t.getLocalBounds().height, 0.0f);
 }
 TEST(TextTest, Destructor)
 {
@@ -98,14 +98,14 @@ TEST(TextTest, FlashColorAfterSetFlashColor)
 TEST(TextTest, InitialLocalBounds)
 {
     jt::Text t = getText();
-    jt::Rect expectedBounds { 0.0f, 0.0f, 0.0f, 0.0f };
+    jt::Rectf expectedBounds { 0.0f, 0.0f, 0.0f, 0.0f };
     ASSERT_EQ(t.getLocalBounds(), expectedBounds);
 }
 
 TEST(TextTest, InitialGlobalBounds)
 {
     jt::Text t = getText();
-    jt::Rect expectedBounds { 0.0f, 0.0f, 0.0f, 0.0f };
+    jt::Rectf expectedBounds { 0.0f, 0.0f, 0.0f, 0.0f };
     ASSERT_EQ(t.getGlobalBounds(), expectedBounds);
 }
 
@@ -113,7 +113,7 @@ TEST(TextTest, LocalBoundsWithLoadedText)
 {
     jt::Text t = getText();
     t.setText("test1234");
-    jt::Rect expectedBounds { 0.0f, 0.0f, 0.0f, 0.0f };
+    jt::Rectf expectedBounds { 0.0f, 0.0f, 0.0f, 0.0f };
     ASSERT_NE(t.getLocalBounds(), expectedBounds);
 }
 

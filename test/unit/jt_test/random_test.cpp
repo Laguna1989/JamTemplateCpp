@@ -111,7 +111,7 @@ TEST(RandomInRect, Valid)
     auto const lower = 0.0f;
     auto const upper = 10.0f;
     for (auto i = 0U; i != 1000; ++i) {
-        auto const v = Random::getRandomPointIn(jt::Rect { lower, lower, upper, upper });
+        auto const v = Random::getRandomPointIn(jt::Rectf { lower, lower, upper, upper });
         EXPECT_GT(v.x, lower);
         EXPECT_GT(v.y, lower);
         EXPECT_LT(v.x, upper);

@@ -29,7 +29,7 @@ void StateParticles::createParticlesFire()
         [this](auto s) {
             auto totalTime = 0.9f;
 
-            auto startPosition = jt::Random::getRandomPointIn(jt::Rect { 295, 250, 10, 0 });
+            auto startPosition = jt::Random::getRandomPointIn(jt::Rectf { 295, 250, 10, 0 });
             s->setPosition(startPosition);
 
             s->setScale(jt::Vector2f { 0.5f, 0.5f });
@@ -54,7 +54,7 @@ void StateParticles::createParticlesFire()
             add(tws);
 
             auto endPosition
-                = startPosition + jt::Random::getRandomPointIn(jt::Rect { -30, -150, 60, 40 });
+                = startPosition + jt::Random::getRandomPointIn(jt::Rectf { -30, -150, 60, 40 });
             jt::TweenPosition::Sptr twp
                 = jt::TweenPosition::create(s, totalTime, startPosition, endPosition);
             twp->setSkipFrames(1);
@@ -92,7 +92,7 @@ void StateParticles::createParticlesGlitter()
             return s;
         },
         [this](auto s) {
-            s->setPosition(jt::Random::getRandomPointIn(jt::Rect { 0, 0, 200, 300 }));
+            s->setPosition(jt::Random::getRandomPointIn(jt::Rectf { 0, 0, 200, 300 }));
 
             auto twa = jt::TweenAlpha::create(s, 0.5, 255, 0);
             twa->setSkipFrames(1);

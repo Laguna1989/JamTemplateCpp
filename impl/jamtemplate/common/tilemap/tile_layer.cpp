@@ -33,7 +33,7 @@ TileLayer::TileLayer(std::string const& path, std::string const& layerName,
     for (int j = 0; j != rows; ++j) {
         for (int i = 0; i != columns; ++i) {
             {
-                jt::Sprite tile { tilesetName, jt::Recti(i * ts.x, j * ts.y, ts.x, ts.y),
+                jt::Sprite tile { tilesetName, jt::Recti { i * ts.x, j * ts.y, ts.x, ts.y },
                     m_textureManager };
                 tile.setIgnoreCamMovement(false);
                 m_tileSprites.at(i + j * columns) = tile;
@@ -129,8 +129,8 @@ jt::Color TileLayer::getColor() const { return m_color; }
 void TileLayer::setPosition(jt::Vector2f const& pos) { m_position = pos; }
 jt::Vector2f TileLayer::getPosition() const { return m_position; }
 
-jt::Rect TileLayer::getGlobalBounds() const { return jt::Rect {}; }
-jt::Rect TileLayer::getLocalBounds() const { return jt::Rect {}; }
+jt::Rectf TileLayer::getGlobalBounds() const { return jt::Rectf {}; }
+jt::Rectf TileLayer::getLocalBounds() const { return jt::Rectf {}; }
 
 void TileLayer::setFlashColor(jt::Color const& col) { m_flashColor = col; }
 jt::Color TileLayer::getFlashColor() const { return m_flashColor; }

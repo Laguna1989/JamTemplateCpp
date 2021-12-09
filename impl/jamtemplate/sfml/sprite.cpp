@@ -1,4 +1,5 @@
 ﻿#include "sprite.hpp"
+#include "rect_lib.hpp"
 #include "vector_lib.hpp"
 
 namespace jt {
@@ -15,9 +16,9 @@ Sprite::Sprite(
 Sprite::Sprite(std::string const& fileName, jt::Recti const& rect,
     std::shared_ptr<jt::TextureManagerInterface> textureManager)
 {
-    m_sprite = sf::Sprite { textureManager->get(fileName), rect };
+    m_sprite = sf::Sprite { textureManager->get(fileName), toLib(rect) };
     m_flashSprite
-        = sf::Sprite { textureManager->get(textureManager->getFlashName(fileName)), rect };
+        = sf::Sprite { textureManager->get(textureManager->getFlashName(fileName)), toLib(rect) };
 }
 
 void Sprite::fromTexture(sf::Texture const& text) { m_sprite.setTexture(text); }
@@ -31,8 +32,8 @@ jt::Color Sprite::getColor() const { return m_sprite.getColor(); }
 void Sprite::setFlashColor(jt::Color const& col) { m_flashSprite.setColor(col); }
 jt::Color Sprite::getFlashColor() const { return m_flashSprite.getColor(); }
 
-jt::Rect Sprite::getGlobalBounds() const { return m_sprite.getGlobalBounds(); }
-jt::Rect Sprite::getLocalBounds() const { return m_sprite.getLocalBounds(); }
+jt::Rectf Sprite::getGlobalBounds() const { return fromLib(m_sprite.getGlobalBounds()); }
+jt::Rectf Sprite::getLocalBounds() const { return fromLib(m_sprite.getLocalBounds()); }
 
 void Sprite::setScale(jt::Vector2f const& scale)
 {

@@ -90,26 +90,26 @@ private:
     template <class U>
     static jt::Vector2f getSize(U const& Object)
     {
-        return jt::Vector2f { Object.getGlobalBounds().width(), Object.getGlobalBounds().height() };
+        return jt::Vector2f { Object.getGlobalBounds().width, Object.getGlobalBounds().height };
     }
 
     template <class U>
     static jt::Vector2f getSize(std::shared_ptr<U> obj)
     {
-        return jt::Vector2f { obj->getGlobalBounds().width(), obj->getGlobalBounds().height() };
+        return jt::Vector2f { obj->getGlobalBounds().width, obj->getGlobalBounds().height };
     }
 
     template <class U>
     static jt::Vector2f getCenter(U const& obj)
     {
         auto const AABB = obj.getGlobalBounds();
-        return jt::Vector2f { AABB.left() + AABB.width() / 2.f, AABB.top() + AABB.height() / 2.f };
+        return jt::Vector2f { AABB.left + AABB.width / 2.f, AABB.top + AABB.height / 2.f };
     }
     template <class U>
     static jt::Vector2f getCenter(std::shared_ptr<U> obj)
     {
         auto const AABB = obj->getGlobalBounds();
-        return jt::Vector2f { AABB.left() + AABB.width() / 2.f, AABB.top() + AABB.height() / 2.f };
+        return jt::Vector2f { AABB.left + AABB.width / 2.f, AABB.top + AABB.height / 2.f };
     }
 };
 } // namespace jt

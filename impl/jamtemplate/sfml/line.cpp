@@ -62,8 +62,8 @@ jt::Color jt::Line::getColor() const { return m_color; }
 void jt::Line::setPosition(jt::Vector2f const& pos) { m_position = pos; }
 jt::Vector2f jt::Line::getPosition() const { return m_position; }
 
-jt::Rect jt::Line::getGlobalBounds() const { return jt::Rect {}; }
-jt::Rect jt::Line::getLocalBounds() const { return jt::Rect {}; }
+jt::Rectf jt::Line::getGlobalBounds() const { return jt::Rectf {}; }
+jt::Rectf jt::Line::getLocalBounds() const { return jt::Rectf {}; }
 
 void jt::Line::setFlashColor(jt::Color const& col) { m_flashColor = col; }
 jt::Color jt::Line::getFlashColor() const { return m_flashColor; }

@@ -56,8 +56,8 @@ public:
     virtual void setPosition(jt::Vector2f const& pos) override;
     virtual jt::Vector2f getPosition() const override;
 
-    virtual jt::Rect getGlobalBounds() const override;
-    virtual jt::Rect getLocalBounds() const override;
+    virtual jt::Rectf getGlobalBounds() const override;
+    virtual jt::Rectf getLocalBounds() const override;
 
     virtual void setFlashColor(jt::Color const& col) override;
     virtual jt::Color getFlashColor() const override;

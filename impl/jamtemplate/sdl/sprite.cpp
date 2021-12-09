@@ -59,16 +59,16 @@ jt::Color Sprite::getColor() const { return m_color; }
 void Sprite::setFlashColor(jt::Color const& col) { m_colorFlash = col; }
 jt::Color Sprite::getFlashColor() const { return m_colorFlash; }
 
-jt::Rect Sprite::getGlobalBounds() const
+jt::Rectf Sprite::getGlobalBounds() const
 {
-    return jt::Rect { m_position.x, m_position.y, static_cast<float>(m_sourceRect.width()),
-        static_cast<float>(m_sourceRect.height()) };
+    return jt::Rectf { m_position.x, m_position.y, static_cast<float>(m_sourceRect.width),
+        static_cast<float>(m_sourceRect.height) };
 }
 
-jt::Rect Sprite::getLocalBounds() const
+jt::Rectf Sprite::getLocalBounds() const
 {
-    return jt::Rect { 0.0f, 0.0f, static_cast<float>(m_sourceRect.width()),
-        static_cast<float>(m_sourceRect.height()) };
+    return jt::Rectf { 0.0f, 0.0f, static_cast<float>(m_sourceRect.width),
+        static_cast<float>(m_sourceRect.height) };
 }
 
 void Sprite::setScale(jt::Vector2f const& scale) { m_scale = scale; }
@@ -155,15 +155,15 @@ SDL_Rect Sprite::getDestRect(jt::Vector2f const& positionOffset) const
         + m_offsetFromOrigin;
     // std::cout << "Sprite.final position.x " << pos.x << std::endl;
     SDL_Rect const destRect { static_cast<int>(pos.x), static_cast<int>(pos.y),
-        static_cast<int>(static_cast<float>(m_sourceRect.width()) * fabs(m_scale.x)),
-        static_cast<int>(static_cast<float>(m_sourceRect.height()) * fabs(m_scale.y)) };
+        static_cast<int>(static_cast<float>(m_sourceRect.width) * fabs(m_scale.x)),
+        static_cast<int>(static_cast<float>(m_sourceRect.height) * fabs(m_scale.y)) };
     return destRect;
 }
 
 SDL_Rect Sprite::getSourceRect() const
 {
-    return SDL_Rect { m_sourceRect.left(), m_sourceRect.top(), m_sourceRect.width(),
-        m_sourceRect.height() };
+    return SDL_Rect { m_sourceRect.left, m_sourceRect.top, m_sourceRect.width,
+        m_sourceRect.height };
 }
 
 void Sprite::setSDLColor(jt::Color const& col) const

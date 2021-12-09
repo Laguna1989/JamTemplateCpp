@@ -49,16 +49,16 @@ jt::Color Text::getColor() const { return m_color; }
 void Text::setFlashColor(const jt::Color& col) { m_flashColor = col; }
 jt::Color Text::getFlashColor() const { return m_flashColor; }
 
-jt::Rect Text::getGlobalBounds() const
+jt::Rectf Text::getGlobalBounds() const
 {
-    return jt::Rect { m_position.x, m_position.y,
+    return jt::Rectf { m_position.x, m_position.y,
         static_cast<float>(m_textTextureSizeX) * m_scale.x / static_cast<float>(getUpscaleFactor()),
         static_cast<float>(m_textTextureSizeY) * m_scale.y
             / static_cast<float>(getUpscaleFactor()) };
 }
-jt::Rect Text::getLocalBounds() const
+jt::Rectf Text::getLocalBounds() const
 {
-    return jt::Rect { 0, 0,
+    return jt::Rectf { 0, 0,
         static_cast<float>(m_textTextureSizeX) * m_scale.x / static_cast<float>(getUpscaleFactor()),
         static_cast<float>(m_textTextureSizeY) * m_scale.y
             / static_cast<float>(getUpscaleFactor()) };

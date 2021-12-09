@@ -58,14 +58,14 @@ public:
     /// height
     ///
     /// \return the global bounds rect
-    virtual jt::Rect getGlobalBounds() const = 0;
+    virtual jt::Rectf getGlobalBounds() const = 0;
 
     /// Get the local bounds rect
     ///
     /// Local bounds rect is defined by 0, 0 and the width and height
     ///
     /// \return the local bounds rect
-    virtual jt::Rect getLocalBounds() const = 0;
+    virtual jt::Rectf getLocalBounds() const = 0;
 
     /// Set the flash color of the drawable
     /// \param col the color

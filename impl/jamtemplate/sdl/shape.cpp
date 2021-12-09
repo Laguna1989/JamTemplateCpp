@@ -32,17 +32,17 @@ jt::Color Shape::getFlashColor() const { return m_colorFlash; }
 void Shape::setPosition(jt::Vector2f const& pos) { m_position = pos; }
 jt::Vector2f Shape::getPosition() const { return m_position; }
 
-jt::Rect Shape::getGlobalBounds() const
+jt::Rectf Shape::getGlobalBounds() const
 {
-    return jt::Rect { m_position.x + getOffset().x, m_position.y + getOffset().y,
-        static_cast<float>(m_sourceRect.width()) * m_scale.x,
-        static_cast<float>(m_sourceRect.height()) * m_scale.y };
+    return jt::Rectf { m_position.x + getOffset().x, m_position.y + getOffset().y,
+        static_cast<float>(m_sourceRect.width) * m_scale.x,
+        static_cast<float>(m_sourceRect.height) * m_scale.y };
 }
-jt::Rect Shape::getLocalBounds() const
+jt::Rectf Shape::getLocalBounds() const
 {
-    return jt::Rect { m_position.x, m_position.y,
-        static_cast<float>(m_sourceRect.width()) * m_scale.x,
-        static_cast<float>(m_sourceRect.height()) * m_scale.y };
+    return jt::Rectf { m_position.x, m_position.y,
+        static_cast<float>(m_sourceRect.width) * m_scale.x,
+        static_cast<float>(m_sourceRect.height) * m_scale.y };
 }
 
 void Shape::setScale(jt::Vector2f const& scale) { m_scale = scale; }
@@ -93,8 +93,8 @@ SDL_Rect Shape::getDestRect(jt::Vector2f const& positionOffset) const
     auto const pos = m_position + getShakeOffset() + getOffset() + getCamOffset() + positionOffset
         + m_offsetFromOrigin;
     SDL_Rect const destRect { static_cast<int>(pos.x), static_cast<int>(pos.y),
-        static_cast<int>(static_cast<float>(m_sourceRect.width()) * fabs(m_scale.x)),
-        static_cast<int>(static_cast<float>(m_sourceRect.height()) * fabs(m_scale.y)) };
+        static_cast<int>(static_cast<float>(m_sourceRect.width) * fabs(m_scale.x)),
+        static_cast<int>(static_cast<float>(m_sourceRect.height) * fabs(m_scale.y)) };
     return destRect;
 }
 

@@ -16,8 +16,8 @@ public:
     MOCK_METHOD(jt::Color, getColor, (), (const, override));
     MOCK_METHOD(void, setPosition, (jt::Vector2f const&), (override));
     MOCK_METHOD(jt::Vector2f, getPosition, (), (const, override));
-    MOCK_METHOD(jt::Rect, getGlobalBounds, (), (const, override));
-    MOCK_METHOD(jt::Rect, getLocalBounds, (), (const, override));
+    MOCK_METHOD(jt::Rectf, getGlobalBounds, (), (const, override));
+    MOCK_METHOD(jt::Rectf, getLocalBounds, (), (const, override));
     MOCK_METHOD(void, setFlashColor, (jt::Color const&), (override));
     MOCK_METHOD(jt::Color, getFlashColor, (), (const, override));
     MOCK_METHOD(void, setScale, (jt::Vector2f const&), (override));

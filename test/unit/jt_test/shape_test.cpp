@@ -61,27 +61,27 @@ TEST_F(ShapeTestFixture, FlashColorAfterSetFlashColor)
 
 TEST_F(ShapeTestFixture, InitialLocalBounds)
 {
-    jt::Rect expectedBounds { 0.0f, 0.0f, 0.0f, 0.0f };
+    jt::Rectf expectedBounds { 0.0f, 0.0f, 0.0f, 0.0f };
     EXPECT_EQ(s.getLocalBounds(), expectedBounds);
 }
 
 TEST_F(ShapeTestFixture, InitialGlobalBounds)
 {
-    jt::Rect expectedBounds { 0.0f, 0.0f, 0.0f, 0.0f };
+    jt::Rectf expectedBounds { 0.0f, 0.0f, 0.0f, 0.0f };
     EXPECT_EQ(s.getGlobalBounds(), expectedBounds);
 }
 
 TEST_F(ShapeTestFixture, LocalBoundsWithRectShape)
 {
     s.makeRect(jt::Vector2f { 50.0f, 50.0f }, tm);
-    jt::Rect expectedBounds { 0.0f, 0.0f, 50.0f, 50.0f };
+    jt::Rectf expectedBounds { 0.0f, 0.0f, 50.0f, 50.0f };
     EXPECT_EQ(s.getLocalBounds(), expectedBounds);
 }
 
 TEST_F(ShapeTestFixture, GlobalBoundsWithLoadedShape)
 {
     s.makeRect(jt::Vector2f { 16.0f, 16.0f }, tm);
-    jt::Rect expectedBounds { 0.0f, 0.0f, 16.0f, 16.0f };
+    jt::Rectf expectedBounds { 0.0f, 0.0f, 16.0f, 16.0f };
     EXPECT_EQ(s.getGlobalBounds(), expectedBounds);
 }
 
@@ -141,6 +141,6 @@ TEST_F(ShapeTestFixture, GlobalBoundsWithOffset)
     s.setOffset(jt::Vector2f { -30.0f, -50.0f });
     s.update(0.1f);
     auto bounds = s.getGlobalBounds();
-    jt::Rect const expectedBounds { -30.0f, -50.0f, 100.0f, 100.0f };
+    jt::Rectf const expectedBounds { -30.0f, -50.0f, 100.0f, 100.0f };
     ASSERT_EQ(bounds, expectedBounds);
 }

@@ -3,8 +3,8 @@
 
 TEST(RectEQ, Equal)
 {
-    jt::Rect const initial { 5.0f, -1.245f, 44.1f, 2.2f };
-    jt::Rect const initial2 { initial };
+    jt::Rectf const initial { 5.0f, -1.245f, 44.1f, 2.2f };
+    jt::Rectf const initial2 { initial };
 
     EXPECT_TRUE(initial == initial2);
     EXPECT_FALSE(initial != initial2);
@@ -12,8 +12,8 @@ TEST(RectEQ, Equal)
 
 TEST(RectEQ, NotEqual)
 {
-    jt::Rect const initial { 5.0f, -1.245f, 44.1f, 2.2f };
-    jt::Rect const initial2 { 0.0f, 0.0f, 0.0f, 0.0f };
+    jt::Rectf const initial { 5.0f, -1.245f, 44.1f, 2.2f };
+    jt::Rectf const initial2 { 0.0f, 0.0f, 0.0f, 0.0f };
 
     EXPECT_FALSE(initial == initial2);
     EXPECT_TRUE(initial != initial2);
@@ -43,12 +43,12 @@ TEST(Rect, ReadAccess)
     float const top { -1.1111f };
     float const width { 22.44f };
     float const height { 2.88f };
-    jt::Rect const r { left, top, width, height };
+    jt::Rectf const r { left, top, width, height };
 
-    EXPECT_EQ(r.left(), left);
-    EXPECT_EQ(r.top(), top);
-    EXPECT_EQ(r.width(), width);
-    EXPECT_EQ(r.height(), height);
+    EXPECT_EQ(r.left, left);
+    EXPECT_EQ(r.top, top);
+    EXPECT_EQ(r.width, width);
+    EXPECT_EQ(r.height, height);
 }
 
 TEST(RectAccess, WriteAccess)
@@ -57,17 +57,17 @@ TEST(RectAccess, WriteAccess)
     float const top { -1.1111f };
     float const width { 22.44f };
     float const height { 2.88f };
-    jt::Rect r {};
+    jt::Rectf r {};
 
-    r.left() = left;
-    r.top() = top;
-    r.width() = width;
-    r.height() = height;
+    r.left = left;
+    r.top = top;
+    r.width = width;
+    r.height = height;
 
-    EXPECT_EQ(r.left(), left);
-    EXPECT_EQ(r.top(), top);
-    EXPECT_EQ(r.width(), width);
-    EXPECT_EQ(r.height(), height);
+    EXPECT_EQ(r.left, left);
+    EXPECT_EQ(r.top, top);
+    EXPECT_EQ(r.width, width);
+    EXPECT_EQ(r.height, height);
 }
 
 TEST(RectiAccess, ReadAccess)
@@ -78,10 +78,10 @@ TEST(RectiAccess, ReadAccess)
     int const height { 2 };
     jt::Recti const r { left, top, width, height };
 
-    EXPECT_EQ(r.left(), left);
-    EXPECT_EQ(r.top(), top);
-    EXPECT_EQ(r.width(), width);
-    EXPECT_EQ(r.height(), height);
+    EXPECT_EQ(r.left, left);
+    EXPECT_EQ(r.top, top);
+    EXPECT_EQ(r.width, width);
+    EXPECT_EQ(r.height, height);
 }
 
 TEST(RectiAccess, WriteAccess)
@@ -92,13 +92,13 @@ TEST(RectiAccess, WriteAccess)
     int const height { 2 };
     jt::Recti r {};
 
-    r.left() = left;
-    r.top() = top;
-    r.width() = width;
-    r.height() = height;
+    r.left = left;
+    r.top = top;
+    r.width = width;
+    r.height = height;
 
-    EXPECT_EQ(r.left(), left);
-    EXPECT_EQ(r.top(), top);
-    EXPECT_EQ(r.width(), width);
-    EXPECT_EQ(r.height(), height);
+    EXPECT_EQ(r.left, left);
+    EXPECT_EQ(r.top, top);
+    EXPECT_EQ(r.width, width);
+    EXPECT_EQ(r.height, height);
 }

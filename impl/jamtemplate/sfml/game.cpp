@@ -1,6 +1,6 @@
 ﻿#include "game.hpp"
 #include "drawable_impl.hpp"
-#include "rect.hpp"
+#include "rect_lib.hpp"
 #include "render_window.hpp"
 #include "sprite.hpp"
 #include "texture_manager_impl.hpp"
@@ -43,9 +43,9 @@ void Game::setupRenderTarget()
     m_renderTarget->create(scaledWidth, scaledHeight);
     m_renderTarget->setSmooth(false);
 
-    m_view = std::make_shared<sf::View>(
-        jt::Rect(0, 0, static_cast<float>(scaledWidth), static_cast<float>(scaledHeight)));
-    m_view->setViewport(jt::Rect(0, 0, 1, 1));
+    m_view = std::make_shared<sf::View>(toLib(
+        jt::Rectf { 0, 0, static_cast<float>(scaledWidth), static_cast<float>(scaledHeight) }));
+    m_view->setViewport(toLib(jt::Rectf { 0, 0, 1, 1 }));
 }
 
 void Game::startGame(GameLoopFunctionPtr gameloop_function)

@@ -1,4 +1,5 @@
 ﻿#include "shape.hpp"
+#include "rect_lib.hpp"
 #include "vector_lib.hpp"
 #include <SFML/Graphics.hpp>
 
@@ -25,19 +26,19 @@ jt::Color Shape::getFlashColor() const { return m_flashShape->getFillColor(); }
 void Shape::setPosition(jt::Vector2f const& pos) { m_position = pos; }
 jt::Vector2f Shape::getPosition() const { return m_position; }
 
-jt::Rect Shape::getGlobalBounds() const
+jt::Rectf Shape::getGlobalBounds() const
 {
     if (!m_shape) {
-        return jt::Rect { 0.0f, 0.0f, 0.0f, 0.0f };
+        return jt::Rectf { 0.0f, 0.0f, 0.0f, 0.0f };
     }
-    return m_shape->getGlobalBounds();
+    return fromLib(m_shape->getGlobalBounds());
 }
-jt::Rect Shape::getLocalBounds() const
+jt::Rectf Shape::getLocalBounds() const
 {
     if (!m_shape) {
-        return jt::Rect { 0.0f, 0.0f, 0.0f, 0.0f };
+        return jt::Rectf { 0.0f, 0.0f, 0.0f, 0.0f };
     }
-    return m_shape->getLocalBounds();
+    return fromLib(m_shape->getLocalBounds());
 }
 
 void Shape::setScale(jt::Vector2f const& scale)

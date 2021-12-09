@@ -21,15 +21,15 @@ TEST_F(SpriteTestFixture, SpriteCanBeDefaultConstructed)
 TEST_F(SpriteTestFixture, SizeCorrectAfterLoadFullSprite)
 {
     jt::Sprite s { "assets/coin.png", tm };
-    ASSERT_FLOAT_EQ(s.getLocalBounds().width(), 192.0f);
-    ASSERT_FLOAT_EQ(s.getLocalBounds().height(), 16.0f);
+    ASSERT_FLOAT_EQ(s.getLocalBounds().width, 192.0f);
+    ASSERT_FLOAT_EQ(s.getLocalBounds().height, 16.0f);
 }
 
 TEST_F(SpriteTestFixture, SizeCorrecrAfterLoadPartialSprite)
 {
     jt::Sprite s { "assets/coin.png", jt::Recti { 0, 0, 16, 16 }, tm };
-    ASSERT_FLOAT_EQ(s.getLocalBounds().width(), 16.0f);
-    ASSERT_FLOAT_EQ(s.getLocalBounds().height(), 16.0f);
+    ASSERT_FLOAT_EQ(s.getLocalBounds().width, 16.0f);
+    ASSERT_FLOAT_EQ(s.getLocalBounds().height, 16.0f);
 }
 
 TEST_F(SpriteTestFixture, CleanImage)

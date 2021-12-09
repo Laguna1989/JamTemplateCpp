@@ -64,10 +64,10 @@ TEST_F(TilemapTileLayerTest, GetGetOriginReturnsDefaultConstructedVector)
 
 TEST_F(TilemapTileLayerTest, GetGlobalBoundsReturnsDefaultConstructedRect)
 {
-    ASSERT_EQ(tileLayer->getGlobalBounds(), jt::Rect {});
+    ASSERT_EQ(tileLayer->getGlobalBounds(), jt::Rectf {});
 }
 
 TEST_F(TilemapTileLayerTest, GetLocalBoundsReturnsDefaultConstructedRect)
 {
-    ASSERT_EQ(tileLayer->getLocalBounds(), jt::Rect {});
+    ASSERT_EQ(tileLayer->getLocalBounds(), jt::Rectf {});
 }
