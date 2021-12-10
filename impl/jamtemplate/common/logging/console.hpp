@@ -2,6 +2,7 @@
 #define GUARD_JAMTEMPLATE_CONSOLE_HPP
 
 #include "game_object.hpp"
+#include "imgui.h"
 #include "log_entry.hpp"
 #include "logger_interface.hpp"
 #include <memory>
@@ -17,10 +18,15 @@ public:
     void doUpdate(float const /*elapsed*/) override;
     void doDraw() const override;
 
+    int inputUserCallback(ImGuiInputTextCallbackData* data);
+
 private:
     std::shared_ptr<LoggerInterface> m_logger;
 
     mutable bool m_showConsole { false };
+    mutable bool m_focus { false };
+    mutable int HistoryPos { -1 };
+    mutable std::vector<std::string> History;
     mutable std::vector<char> m_inputBufferFilter;
     mutable std::vector<char> m_inputBufferAction;
     mutable std::string m_lastCommand { "" };

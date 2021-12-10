@@ -21,8 +21,9 @@ void Console::doUpdate(float const elapsed)
         return;
     }
     if (getGame()->input()->keyboard()->justPressed(jt::KeyCode::Home)) {
-
         m_showConsole = !m_showConsole;
+
+        //        m_focus = m_showConsole;
     }
 }
 void Console::handleCommand() const
@@ -72,21 +73,27 @@ void Console::drawFilter() const
 
 void Console::storeInputInCommand() const
 {
-    bool reclaim_focus = false;
-    // TODO history and callback completion
-    ImGuiInputTextFlags input_text_flags = ImGuiInputTextFlags_EnterReturnsTrue;
+    m_focus = false;
+    ImGuiInputTextFlags input_text_flags = ImGuiInputTextFlags_EnterReturnsTrue
+        | ImGuiInputTextFlags_CallbackCompletion | ImGuiInputTextFlags_CallbackHistory;
     if (ImGui::InputText(
-            "Input", m_inputBufferAction.data(), m_inputBufferAction.size(), input_text_flags)) {
+            "Input", m_inputBufferAction.data(), m_inputBufferAction.size(), input_text_flags,
+            [](auto data) {
+                Console* console = (Console*)data->UserData;
+                console->inputUserCallback(data);
+                return 0;
+            },
+            (void*)this)) {
 
         storeActionInCommand();
 
         clearInput();
-        reclaim_focus = true;
+        m_focus = true;
     }
 
     // focus back on console input if return was pressed.
     ImGui::SetItemDefaultFocus();
-    if (reclaim_focus) {
+    if (m_focus) {
         ImGui::SetKeyboardFocusHere(-1);
     }
 }
@@ -98,6 +105,8 @@ void Console::storeActionInCommand() const
         return;
     }
     m_lastCommand = str;
+    HistoryPos = -1;
+    History.push_back(m_lastCommand);
     m_logger->action(str);
 }
 void Console::clearInput() const { strcpy(m_inputBufferAction.data(), ""); }
@@ -151,6 +160,34 @@ void Console::renderOneLogEntry(jt::LogEntry const& entry) const
     ImGui::PushStyleColor(ImGuiCol_Text, color);
     ImGui::Text(text.c_str());
     ImGui::PopStyleColor();
+}
+int Console::inputUserCallback(ImGuiInputTextCallbackData* data)
+{
+    switch (data->EventFlag) {
+    case ImGuiInputTextFlags_CallbackHistory: {
+        // Example of HISTORY
+        const int prev_history_pos = HistoryPos;
+        if (data->EventKey == ImGuiKey_UpArrow) {
+            if (HistoryPos == -1)
+                HistoryPos = History.size() - 1;
+            else if (HistoryPos > 0)
+                HistoryPos--;
+        } else if (data->EventKey == ImGuiKey_DownArrow) {
+            if (HistoryPos != -1)
+                if (++HistoryPos >= History.size())
+                    HistoryPos = -1;
+        }
+
+        // A better implementation would preserve the data on the current input line along with
+        // cursor position.
+        if (prev_history_pos != HistoryPos) {
+            std::string history_str = (HistoryPos >= 0) ? History[HistoryPos] : "";
+            data->DeleteChars(0, data->BufTextLen);
+            data->InsertChars(0, history_str.c_str());
+        }
+    }
+    }
+    return 0;
 }
 
 } // namespace jt

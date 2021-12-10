@@ -1,4 +1,5 @@
 ﻿#include "game.hpp"
+#include "action_commands/basic_action_commands.hpp"
 #include "drawable_impl.hpp"
 #include "rect_lib.hpp"
 #include "render_window.hpp"
@@ -50,6 +51,7 @@ void Game::setupRenderTarget()
 
 void Game::startGame(GameLoopFunctionPtr gameloop_function)
 {
+    addBasicActionCommands(*this);
     m_logger->debug("startGame", { "jt" });
     setupRenderTarget();
     while (getRenderWindow()->isOpen()) {

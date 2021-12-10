@@ -10,6 +10,7 @@ public:
     sf::Texture& get(std::string const& str) override;
     void reset() override;
     std::string getFlashName(std::string const& str) override;
+    size_t getNumberOfTextures() override;
 
 private:
     std::map<std::string, sf::Texture> m_textures;

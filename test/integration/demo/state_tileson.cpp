@@ -97,6 +97,7 @@ void StateTileson::moveCamera(float const elapsed)
 
 void StateTileson::doInternalDraw() const
 {
+    drawObjects();
     drawTileLayers();
 
     drawObjectLayer();
