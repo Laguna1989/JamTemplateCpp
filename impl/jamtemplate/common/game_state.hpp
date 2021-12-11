@@ -67,8 +67,6 @@ public:
     /// \return
     bool getAutoDraw() const;
 
-    virtual std::string getName() const = 0;
-
 protected:
     void updateObjects(float elapsed);
     void basicUpdateObjects(float elapsed);

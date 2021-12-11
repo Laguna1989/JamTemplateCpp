@@ -74,5 +74,6 @@ void GameObject::storeActionCommand(std::shared_ptr<void> commandCallback)
 {
     m_storedActionCommands.emplace_back(std::move(commandCallback));
 }
+std::string GameObject::getName() const { return ""; }
 
 } // namespace jt

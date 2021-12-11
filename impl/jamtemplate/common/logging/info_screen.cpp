@@ -22,6 +22,7 @@ void InfoScreen::doDraw() const
     if (!m_showInfo) {
         return;
     }
+    ImGui::Begin("Debug Info");
     if (!ImGui::CollapsingHeader("Textures")) {
         std::string textures = "# Textures stored: "
             + std::to_string(getGame()->getTextureManager()->getNumberOfTextures());
@@ -42,5 +43,6 @@ void InfoScreen::doDraw() const
             = "# GameObjects: " + std::to_string(state->getNumberOfObjects());
         ImGui::Text(gameObjectsText.c_str());
     }
+    ImGui::End();
 }
 } // namespace jt
