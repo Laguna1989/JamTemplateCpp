@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1639084793824,
+  "lastUpdate": 1639202551978,
   "repoUrl": "https://github.com/Laguna1989/JamTemplateCpp",
   "entries": {
     "Benchmark": [
@@ -1836,6 +1836,42 @@ window.BENCHMARK_DATA = {
             "value": 2.8798385500000845,
             "unit": "ms/iter",
             "extra": "iterations: 260\ncpu: 2.6895071000000006 ms\nthreads: 1"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "laguna_1989@gmx.net",
+            "name": "Laguna1989",
+            "username": "Laguna1989"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "af444b7c92d57a3eaef2d2af7b0c5a785843f01d",
+          "message": "Merge pull request #110 from Laguna1989/FEATURE_MoreCamCommands\n\nFeature more cam commands",
+          "timestamp": "2021-12-11T07:00:13+01:00",
+          "tree_id": "61f58d43a070529a7eba8e2898d2aeb093e43b57",
+          "url": "https://github.com/Laguna1989/JamTemplateCpp/commit/af444b7c92d57a3eaef2d2af7b0c5a785843f01d"
+        },
+        "date": 1639202551549,
+        "tool": "googlecpp",
+        "benches": [
+          {
+            "name": "BM_StartGame",
+            "value": 0.2676815388001718,
+            "unit": "ms/iter",
+            "extra": "iterations: 11585\ncpu: 0.060564749503668545 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GamestateWithTweeningShapes",
+            "value": 3.6637550480349255,
+            "unit": "ms/iter",
+            "extra": "iterations: 229\ncpu: 3.1294328340611357 ms\nthreads: 1"
           }
         ]
       }
