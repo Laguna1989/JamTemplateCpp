@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1639202551978,
+  "lastUpdate": 1639249483434,
   "repoUrl": "https://github.com/Laguna1989/JamTemplateCpp",
   "entries": {
     "Benchmark": [
@@ -1872,6 +1872,42 @@ window.BENCHMARK_DATA = {
             "value": 3.6637550480349255,
             "unit": "ms/iter",
             "extra": "iterations: 229\ncpu: 3.1294328340611357 ms\nthreads: 1"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "laguna_1989@gmx.net",
+            "name": "Laguna1989",
+            "username": "Laguna1989"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "1930742629b4a5029ca3a910cf608a2140020410",
+          "message": "Merge pull request #112 from Laguna1989/FEATURE_CompileSwitches\n\nRename compile switches",
+          "timestamp": "2021-12-11T20:01:16+01:00",
+          "tree_id": "171323a72c4fba108cdd096407161d584cbde921",
+          "url": "https://github.com/Laguna1989/JamTemplateCpp/commit/1930742629b4a5029ca3a910cf608a2140020410"
+        },
+        "date": 1639249482325,
+        "tool": "googlecpp",
+        "benches": [
+          {
+            "name": "BM_StartGame",
+            "value": 0.5566782985457663,
+            "unit": "ms/iter",
+            "extra": "iterations: 5845\ncpu: 0.13335227168520103 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GamestateWithTweeningShapes",
+            "value": 4.11359557868036,
+            "unit": "ms/iter",
+            "extra": "iterations: 197\ncpu: 3.6504686345177655 ms\nthreads: 1"
           }
         ]
       }
