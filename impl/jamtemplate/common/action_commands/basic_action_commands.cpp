@@ -211,7 +211,7 @@ void addCommandsMusicPlayer(GameBase& game)
 
     game.storeActionCommand(game.getActionCommandManager()->registerTemporaryCommand("music.file",
         [logger = std::weak_ptr<LoggerInterface> { game.getLogger() },
-            player = std::weak_ptr<MusicPlayerInterface> { game.getMusicPlayer() }](auto args) {
+            player = std::weak_ptr<MusicPlayerInterface> { game.getMusicPlayer() }](auto /*args*/) {
             if (logger.expired()) {
                 return;
             }
@@ -225,7 +225,7 @@ void addCommandsMusicPlayer(GameBase& game)
 
 } // namespace
 
-void jt::addBasicActionCommands(jt::GameBase& game)
+void addBasicActionCommands(jt::GameBase& game)
 {
     addCommandHelp(game);
     addCommandClear(game);

@@ -23,7 +23,7 @@ void Console::doUpdate(float const elapsed)
     if (getGame()->input()->keyboard()->justPressed(jt::KeyCode::Home)) {
         m_showConsole = !m_showConsole;
 
-        //        m_focus = m_showConsole;
+        m_focus = m_showConsole;
     }
 }
 void Console::handleCommand() const
