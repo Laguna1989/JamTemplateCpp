@@ -1,7 +1,6 @@
 ﻿#include "render_window_lib.hpp"
 #include "backends/imgui_impl_sdl.h"
 #include "imgui.h"
-#include "imgui_sdl.h"
 #include <SDL2/SDL.h>
 #include <iostream>
 
@@ -42,7 +41,8 @@ void RenderWindow::checkForClose()
 {
     SDL_Event event;
     while (SDL_PollEvent(&event)) {
-        ImGui_ImplSDL2_ProcessEvent(&event);
+        // TODO Make input work for SDL
+        //        ImGui_ImplSDL2_ProcessEvent(&event);
         switch (event.type) {
         case SDL_QUIT:
             m_isOpen = false;
