@@ -77,7 +77,7 @@ TEST_P(RandomFloatGaussTestFixture, RandomFloat)
     }
 }
 
-#ifndef ENABLE_WEB
+#ifndef JT_ENABLE_WEB
 TEST(RandomGaussTestException, ZeroSigma)
 {
     EXPECT_THROW(Random::getFloatGauss(0.0f, 0), std::invalid_argument);

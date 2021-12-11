@@ -99,7 +99,7 @@ jobs:
           cmake \
           -DCMAKE_C_COMPILER_LAUNCHER=ccache -DCMAKE_CXX_COMPILER_LAUNCHER=ccache \
           -DUSE_SFML=OFF \
-          -DENABLE_AUDIO_TESTS=OFF \
+          -DJT_ENABLE_AUDIO_TESTS=OFF \
           -B ${{github.workspace}}/build .
 
       - name: Build
@@ -123,7 +123,7 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: CMake
-        run: cmake -B ${{github.workspace}}/build -DENABLE_AUDIO_TESTS=OFF .
+        run: cmake -B ${{github.workspace}}/build -DJT_ENABLE_AUDIO_TESTS=OFF .
 
       - name: Build
         working-directory: ${{github.workspace}}/build
@@ -163,9 +163,9 @@ jobs:
         run: |
           emcmake cmake -B ${{github.workspace}}/build \
           -DCMAKE_C_COMPILER_LAUNCHER=ccache -DCMAKE_CXX_COMPILER_LAUNCHER=ccache \
-          -DENABLE_DEMOS=ON \
-          -DENABLE_UNITTESTS=OFF \
-          -DENABLE_WEB=ON \
+          -DJT_ENABLE_DEMOS=ON \
+          -DJT_ENABLE_UNITTESTS=OFF \
+          -DJT_ENABLE_WEB=ON \
           -DUSE_SFML=OFF .
 
       - name: Build

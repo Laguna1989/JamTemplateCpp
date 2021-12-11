@@ -31,7 +31,7 @@ else ()
 
     target_include_directories(JamTemplate PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/sdl)
 
-    if (NOT ENABLE_WEB)
+    if (NOT JT_ENABLE_WEB)
         include_directories(JamTemplate ${SDL2_INCLUDE_DIRS})
 
         target_link_libraries(JamTemplate

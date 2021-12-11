@@ -52,7 +52,8 @@ jobs:
           cmake \
           -DCMAKE_C_COMPILER_LAUNCHER=ccache -DCMAKE_CXX_COMPILER_LAUNCHER=ccache \
           -DCMAKE_BUILD_TYPE=Release \
-          -DENABLE_PERFORMANCETESTS=ON .
+          -DJT_ENABLE_DEBUG=OFF \
+          -DJT_ENABLE_PERFORMANCETESTS=ON .
 
       - name: Build
         run: make -j 4 jt_performance

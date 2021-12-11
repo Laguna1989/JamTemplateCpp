@@ -20,7 +20,7 @@ TEST_F(ObjectGroupInitialTest, CBeginEqualsCEnd) { ASSERT_EQ(g.cbegin(), g.cend(
 TEST_F(ObjectGroupInitialTest, AgeIsZero) { ASSERT_EQ(g.getAge(), 0.0f); }
 TEST_F(ObjectGroupInitialTest, IsAlive) { ASSERT_TRUE(g.isAlive()); }
 
-#ifndef ENABLE_WEB
+#ifndef JT_ENABLE_WEB
 TEST_F(ObjectGroupInitialTest, GetGameWillThrow) { ASSERT_ANY_THROW(g.getGame()); }
 #endif
 

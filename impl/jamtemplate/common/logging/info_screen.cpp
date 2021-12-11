@@ -6,12 +6,11 @@ namespace jt {
 void InfoScreen::doCreate() { m_frameTimesVector.resize(m_frameTimes.size()); }
 void InfoScreen::doUpdate(float const elapsed)
 {
-#ifdef NDEBUG
+#ifdef JT_ENABLE_DEBUG
     if (getGame()->input()->keyboard()->justPressed(jt::KeyCode::End)) {
         m_showInfo = !m_showInfo;
     }
 
-    // TODO only do this in DEBUG Builds
     m_frameTimes.push(elapsed);
     auto const pushIndex = m_frameTimes.getPushIndex();
     for (auto index = pushIndex; index != pushIndex + m_frameTimes.size(); ++index) {

@@ -1,8 +1,8 @@
 ﻿#include "sound.hpp"
 #include <gtest/gtest.h>
 #include <limits>
-#include <thread>
 #include <memory>
+#include <thread>
 #include <type_traits>
 
 using jt::Sound;
@@ -178,7 +178,7 @@ TEST_F(SoundTestWithLoadedSound, SetVolumeWhilePlaying)
     EXPECT_NO_THROW(m_sound->setVolume(100.0f));
 }
 
-#ifndef ENABLE_WEB
+#ifndef JT_ENABLE_WEB
 
 TEST_F(SoundTestWithLoadedSound, GetPositionAfterPlay)
 {
