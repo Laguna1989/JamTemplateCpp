@@ -42,7 +42,7 @@ void addCommandsCam(GameBase& game)
                 if (logger.expired()) {
                     return;
                 }
-                logger.lock()->action("invalid number of arguments for shake");
+                logger.lock()->error("invalid number of arguments");
                 return;
             }
             float duration = std::stof(args.at(0));
@@ -59,7 +59,7 @@ void addCommandsCam(GameBase& game)
                 if (logger.expired()) {
                     return;
                 }
-                logger.lock()->action("invalid number of arguments for reset");
+                logger.lock()->error("invalid number of arguments");
                 return;
             }
             if (cam.expired()) {
@@ -74,7 +74,7 @@ void addCommandsCam(GameBase& game)
                 if (logger.expired()) {
                     return;
                 }
-                logger.lock()->action("invalid number of arguments for zoom");
+                logger.lock()->error("invalid number of arguments");
                 return;
             }
             float zoom = std::stof(args.at(0));
@@ -90,7 +90,7 @@ void addCommandsCam(GameBase& game)
                 if (logger.expired()) {
                     return;
                 }
-                logger.lock()->action("invalid number of arguments for pos");
+                logger.lock()->error("invalid number of arguments");
                 return;
             }
             if (cam.expired()) {
@@ -115,7 +115,7 @@ void addCommandsCam(GameBase& game)
                 if (logger.expired()) {
                     return;
                 }
-                logger.lock()->action("invalid number of arguments for move");
+                logger.lock()->error("invalid number of arguments");
                 return;
             }
             float x = std::stof(args.at(0));
@@ -127,14 +127,8 @@ void addCommandsCam(GameBase& game)
         }));
 }
 
-} // namespace
-
-void jt::addBasicActionCommands(jt::GameBase& game)
+void addCommandTextureManager(GameBase& game)
 {
-    addCommandHelp(game);
-    addCommandClear(game);
-    addCommandsCam(game);
-
     game.storeActionCommand(game.getActionCommandManager()->registerTemporaryCommand(
         "textureManagerInfo",
         [logger = std::weak_ptr<LoggerInterface> { game.getLogger() },
@@ -149,6 +143,95 @@ void jt::addBasicActionCommands(jt::GameBase& game)
             logger.lock()->action(
                 "stored textures: " + std::to_string(textureManager.lock()->getNumberOfTextures()));
         }));
+}
+
+void addCommandsMusicPlayer(GameBase& game)
+{
+    game.storeActionCommand(game.getActionCommandManager()->registerTemporaryCommand("music.stop",
+        [logger = std::weak_ptr<LoggerInterface> { game.getLogger() },
+            player = std::weak_ptr<MusicPlayerInterface> { game.getMusicPlayer() }](auto /*args*/) {
+            if (logger.expired()) {
+                return;
+            }
+            if (player.expired()) {
+                return;
+            }
+            player.lock()->stopMusic();
+        }));
+
+    game.storeActionCommand(game.getActionCommandManager()->registerTemporaryCommand("music.mute",
+        [logger = std::weak_ptr<LoggerInterface> { game.getLogger() },
+            player = std::weak_ptr<MusicPlayerInterface> { game.getMusicPlayer() }](auto /*args*/) {
+            if (logger.expired()) {
+                return;
+            }
+            if (player.expired()) {
+                return;
+            }
+            player.lock()->setMusicVolume(0);
+        }));
+
+    game.storeActionCommand(game.getActionCommandManager()->registerTemporaryCommand("music.volume",
+        [logger = std::weak_ptr<LoggerInterface> { game.getLogger() },
+            player = std::weak_ptr<MusicPlayerInterface> { game.getMusicPlayer() }](auto args) {
+            if (logger.expired()) {
+                return;
+            }
+            if (player.expired()) {
+                return;
+            }
+            if (args.size() == 0) {
+                logger.lock()->action("current volume: "
+                    + jt::MathHelper::floatToStringWithXDigits(player.lock()->getMusicVolume(), 2));
+            } else if (args.size() == 1) {
+                auto volume = std::stof(args.at(0));
+                volume = jt::MathHelper::clamp(volume, 0.0f, 100.0f);
+                player.lock()->setMusicVolume(volume);
+            } else {
+                logger.lock()->error("invalid number of arguments");
+            }
+        }));
+
+    game.storeActionCommand(game.getActionCommandManager()->registerTemporaryCommand("music.play",
+        [logger = std::weak_ptr<LoggerInterface> { game.getLogger() },
+            player = std::weak_ptr<MusicPlayerInterface> { game.getMusicPlayer() }](auto args) {
+            if (logger.expired()) {
+                return;
+            }
+            if (player.expired()) {
+                return;
+            }
+            if (args.size() == 1) {
+                auto track = args.at(0);
+                player.lock()->playMusic(track);
+            } else {
+                logger.lock()->error("invalid number of arguments");
+            }
+        }));
+
+    game.storeActionCommand(game.getActionCommandManager()->registerTemporaryCommand("music.file",
+        [logger = std::weak_ptr<LoggerInterface> { game.getLogger() },
+            player = std::weak_ptr<MusicPlayerInterface> { game.getMusicPlayer() }](auto args) {
+            if (logger.expired()) {
+                return;
+            }
+            if (player.expired()) {
+                return;
+            }
+            auto const file = player.lock()->getMusicFilePath();
+            logger.lock()->action("currently playing: '" + file + "'");
+        }));
+}
+
+} // namespace
+
+void jt::addBasicActionCommands(jt::GameBase& game)
+{
+    addCommandHelp(game);
+    addCommandClear(game);
+    addCommandsCam(game);
+    addCommandTextureManager(game);
+    addCommandsMusicPlayer(game);
 }
 
 } // namespace jt
