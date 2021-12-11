@@ -1,14 +1,10 @@
 #ifndef GUARD_JAMTEMPLATE_TEXTURE_MANAGER_INTERFACE_HPP
 #define GUARD_JAMTEMPLATE_TEXTURE_MANAGER_INTERFACE_HPP
 
-#include "color.hpp"
 #include "render_target.hpp"
 #include <SFML/Graphics.hpp>
-#include <assert.h>
-#include <map>
-#include <memory>
+#include <cstddef>
 #include <string>
-#include <vector>
 
 namespace jt {
 class TextureManagerInterface {

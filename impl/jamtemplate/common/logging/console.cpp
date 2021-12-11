@@ -169,7 +169,7 @@ int Console::inputUserCallback(ImGuiInputTextCallbackData* data)
         const int prev_history_pos = HistoryPos;
         if (data->EventKey == ImGuiKey_UpArrow) {
             if (HistoryPos == -1)
-                HistoryPos = History.size() - 1;
+                HistoryPos = static_cast<int>(History.size()) - 1;
             else if (HistoryPos > 0)
                 HistoryPos--;
         } else if (data->EventKey == ImGuiKey_DownArrow) {

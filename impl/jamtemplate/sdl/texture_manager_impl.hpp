@@ -20,7 +20,7 @@ public:
 
     std::string getFlashName(std::string const& str);
 
-    size_t getNumberOfTextures() override;
+    std::size_t getNumberOfTextures() override;
 
 private:
     std::map<std::string, std::shared_ptr<SDL_Texture>> m_textures;
