@@ -93,7 +93,9 @@ public:
 
     /// Size of the circular buffer
     /// \return the size
-    std::size_t size() { return m_data.size(); }
+    std::size_t size() const { return m_data.size(); }
+
+    std::size_t getPushIndex() const { return m_pushIndex; }
 
 private:
     detail::IndexWrapper<N> wrapper;

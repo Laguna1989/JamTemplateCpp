@@ -39,19 +39,16 @@ bool RenderWindow::isOpen() const { return m_isOpen; }
 
 void RenderWindow::checkForClose()
 {
-#if ENABLE_WEB
-    std::cerr << "RenderWindow::checkForClose() not supported by SDL Renderwindow. Webbuild window "
-                 "cannot be closed\n";
-#else
     SDL_Event event;
     while (SDL_PollEvent(&event)) {
+        // TODO make input work
+        //        ImGui_ImplSDL2_ProcessEvent(&event);
         switch (event.type) {
         case SDL_QUIT:
             m_isOpen = false;
             break;
         }
     }
-#endif
 }
 
 jt::Vector2f RenderWindow::getSize() const { return m_size; }
@@ -102,7 +99,6 @@ void RenderWindow::updateGui(float elapsed)
     io.MousePos = ImVec2(static_cast<float>(mx), static_cast<float>(my));
     io.MouseDown[0] = mouseState & SDL_BUTTON(SDL_BUTTON_LEFT);
     io.MouseDown[1] = mouseState & SDL_BUTTON(SDL_BUTTON_RIGHT);
-    // TODO keyboard input
 
     io.MouseWheel = 0.0f;
 }

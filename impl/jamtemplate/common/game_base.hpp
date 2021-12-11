@@ -18,7 +18,7 @@ public:
         std::shared_ptr<MusicPlayerInterface> musicPlayer, std::shared_ptr<CamInterface> camera,
         std::shared_ptr<StateManagerInterface> stateManager);
 
-    void run() override;
+    void runOneFrame() override;
 
     std::shared_ptr<jt::RenderWindowInterface> getRenderWindow() const override;
 
@@ -42,6 +42,12 @@ public:
     void reset() override;
 
 protected:
+    std::weak_ptr<GameInterface> getPtr() override;
+
+    // overwritten functions from GameObject
+    virtual void doUpdate(float const elapsed) override = 0;
+    virtual void doDraw() const override = 0;
+
     std::shared_ptr<jt::RenderWindowInterface> m_renderWindow { nullptr };
 
     std::shared_ptr<InputManagerInterface> m_inputManager { nullptr };
@@ -61,12 +67,6 @@ protected:
     std::shared_ptr<jt::ActionCommandManagerInterface> m_actionCommandManager { nullptr };
 
     std::chrono::steady_clock::time_point m_timeLast {};
-
-    std::weak_ptr<GameInterface> getPtr() override;
-
-    // overwritten functions from GameObject
-    virtual void doUpdate(float const elapsed) override = 0;
-    virtual void doDraw() const override = 0;
 };
 
 } // namespace jt

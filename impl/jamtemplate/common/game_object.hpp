@@ -2,6 +2,7 @@
 #define GUARD_JAMTEMPLATE_GAMEOBJECT_HPP_INCLUDEGUARD
 
 #include <memory>
+#include <string>
 #include <vector>
 
 namespace jt {
@@ -69,6 +70,8 @@ public:
 
     void storeActionCommand(std::shared_ptr<void> commandCallback);
 
+    virtual std::string getName() const;
+
 protected:
     float m_age { 0.0f };
 
@@ -82,6 +85,7 @@ private:
     virtual void doCreate();
     virtual void doUpdate(float const /*elapsed*/);
     virtual void doDraw() const;
+
     virtual void doKill();
 
     // Do NOT modify the game or the gamestate in this function

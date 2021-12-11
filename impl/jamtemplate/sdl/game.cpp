@@ -56,13 +56,13 @@ void Game::startGame(GameLoopFunctionPtr gameloop_function)
     emscripten_set_main_loop(gameloop_function, 0, 1);
 #else
     while (getRenderWindow()->isOpen()) {
-        getRenderWindow()->checkForClose();
         gameloop_function();
     }
 #endif
 }
 void Game::doUpdate(float const elapsed)
 {
+    getRenderWindow()->checkForClose();
     m_stateManager->getCurrentState()->update(elapsed);
     getCamera()->update(elapsed);
 

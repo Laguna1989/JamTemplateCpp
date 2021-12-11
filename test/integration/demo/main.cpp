@@ -16,7 +16,7 @@ std::shared_ptr<jt::GameInterface> game;
 void gameloop()
 {
     if (game) {
-        game->run();
+        game->runOneFrame();
     }
 }
 

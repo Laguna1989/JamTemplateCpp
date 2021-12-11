@@ -21,8 +21,8 @@ public:
 
     using GameLoopFunctionPtr = std::add_pointer<void()>::type;
 
-    /// Run the Game
-    virtual void run() = 0;
+    /// Run one frame of the Game
+    virtual void runOneFrame() = 0;
 
     /// Start the game
     /// \param initialState the initial GameState
@@ -60,12 +60,19 @@ public:
     /// \return the render target
     virtual std::shared_ptr<jt::renderTarget> getRenderTarget() const = 0;
 
+    /// Get the texture Manager
+    /// \return the texture Manager
     virtual std::shared_ptr<jt::TextureManagerInterface> getTextureManager() = 0;
 
+    /// Get the logger
+    /// \return the logger
     virtual std::shared_ptr<jt::LoggerInterface> getLogger() = 0;
 
+    /// Get the ActionCommandManager
+    /// \return the action command manager
     virtual std::shared_ptr<jt::ActionCommandManagerInterface> getActionCommandManager() = 0;
 
+    /// Reset the Game internals
     virtual void reset() = 0;
 
 protected:
