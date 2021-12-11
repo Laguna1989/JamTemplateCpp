@@ -23,6 +23,7 @@ public:
     Sprite(std::string const& fileName, jt::Recti const& rect,
         std::shared_ptr<jt::TextureManagerInterface> textureManager);
 
+    // DO NOT CALL THIS FROM GAME CODE!
     void fromTexture(std::shared_ptr<SDL_Texture> txt);
 
     void setPosition(jt::Vector2f const& pos) override;

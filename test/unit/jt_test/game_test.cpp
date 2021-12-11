@@ -40,23 +40,23 @@ TEST_F(GameTest, SwitchStateTwice)
     g->draw();
 }
 
-TEST_F(GameTest, RunWithOutState) { EXPECT_NO_THROW(g->run()); }
+TEST_F(GameTest, RunWithOutState) { EXPECT_NO_THROW(g->runOneFrame()); }
 
 TEST_F(GameTest, RunWithState)
 {
     g->getStateManager()->switchState(std::make_shared<NiceMock<MockState>>());
-    ASSERT_NO_THROW(g->run());
-    ASSERT_NO_THROW(g->run());
+    ASSERT_NO_THROW(g->runOneFrame());
+    ASSERT_NO_THROW(g->runOneFrame());
 }
 
 TEST_F(GameTest, RunWithTwoStates)
 {
     g->getStateManager()->switchState(std::make_shared<NiceMock<MockState>>());
-    ASSERT_NO_THROW(g->run());
-    ASSERT_NO_THROW(g->run());
+    ASSERT_NO_THROW(g->runOneFrame());
+    ASSERT_NO_THROW(g->runOneFrame());
     g->getStateManager()->switchState(std::make_shared<NiceMock<MockState>>());
-    ASSERT_NO_THROW(g->run());
-    ASSERT_NO_THROW(g->run());
+    ASSERT_NO_THROW(g->runOneFrame());
+    ASSERT_NO_THROW(g->runOneFrame());
 }
 
 TEST_F(GameTest, StartGameWithOneIteration)
@@ -78,7 +78,7 @@ TEST_F(GameTest, GameRunWithStateThrowingStdException)
             throw std::invalid_argument { "deliberately raise exception." };
         }));
     g->getStateManager()->switchState(state);
-    ASSERT_THROW(g->run(), std::invalid_argument);
+    ASSERT_THROW(g->runOneFrame(), std::invalid_argument);
 }
 
 TEST_F(GameTest, GameRunWithStateThrowingIntException)
@@ -88,7 +88,7 @@ TEST_F(GameTest, GameRunWithStateThrowingIntException)
     ON_CALL(*state, doInternalUpdate(::testing::_))
         .WillByDefault(::testing::Invoke([](auto /*elapsed*/) { throw int { 5 }; }));
     g->getStateManager()->switchState(state);
-    ASSERT_THROW(g->run(), int);
+    ASSERT_THROW(g->runOneFrame(), int);
 }
 
 TEST_F(GameTest, GetRenderWindowDoesNotReturnNullptr) { ASSERT_NE(g->getRenderWindow(), nullptr); }

@@ -15,9 +15,6 @@ class Console : public jt::GameObject {
 public:
     Console(std::shared_ptr<jt::LoggerInterface> target);
 
-    void doUpdate(float const /*elapsed*/) override;
-    void doDraw() const override;
-
     int inputUserCallback(ImGuiInputTextCallbackData* data);
 
 private:
@@ -33,6 +30,9 @@ private:
     mutable bool m_drawLevel { true };
     mutable bool m_drawTag { true };
     mutable bool m_drawTime { false };
+
+    void doUpdate(float const /*elapsed*/) override;
+    void doDraw() const override;
 
     void renderOneLogEntry(jt::LogEntry const& entry) const;
     void storeInputInCommand() const;

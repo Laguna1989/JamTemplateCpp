@@ -26,8 +26,8 @@ void StateExplosion::doInternalUpdate(float const /*elapsed*/)
         Object::Sptr bp = std::make_shared<Object>();
         add(bp);
         using jt::Timer;
-        Timer::Sptr t
-            = std::make_shared<Timer>(jt::Random::getFloat(0.125, 3), [bp]() { bp->Flash(); });
+        Timer::Sptr t = std::make_shared<Timer>(
+            jt::Random::getFloat(0.125, 3), [bp]() { bp->Flash(); }, 1);
         add(t);
 
         auto tw = jt::TweenAlpha::create(bp->getAnimation(), 0.1f, 255, 0);
@@ -43,7 +43,6 @@ void StateExplosion::doInternalUpdate(float const /*elapsed*/)
             bp->getAnimation(), 0.9f, jt::Vector2f { 1, 1 }, jt::Vector2f { 3, 3 });
         add(tw3);
     }
-
     if (getGame()->input()->keyboard()->justPressed(jt::KeyCode::F1)
         || getGame()->input()->keyboard()->justPressed(jt::KeyCode::Escape)) {
         getGame()->getStateManager()->switchState(std::make_shared<StateSelect>());

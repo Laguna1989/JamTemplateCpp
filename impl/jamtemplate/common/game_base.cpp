@@ -48,10 +48,10 @@ GameBase::GameBase(std::shared_ptr<jt::RenderWindowInterface> renderWindow,
     m_logger->setLogLevel(LogLevel::LogLevelDebug);
 }
 
-void GameBase::run()
+void GameBase::runOneFrame()
 {
     try {
-        getLogger()->verbose("run", { "jt" });
+        getLogger()->verbose("runOneFrame", { "jt" });
         m_actionCommandManager->update();
         m_stateManager->checkAndPerformSwitchState(getPtr());
 

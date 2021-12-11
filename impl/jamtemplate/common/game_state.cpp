@@ -1,6 +1,7 @@
 ﻿#include "game_state.hpp"
 #include "game_interface.hpp"
 #include "logging/console.hpp"
+#include "logging/info_screen.hpp"
 #include "tweens/tween_base.hpp"
 #include <algorithm>
 
@@ -43,6 +44,7 @@ void GameState::internalCreate()
     m_tweensToAdd.clear();
     doInternalCreate();
     add(std::make_shared<jt::Console>(getGame()->getLogger()));
+    add(std::make_shared<jt::InfoScreen>());
     start();
 }
 
