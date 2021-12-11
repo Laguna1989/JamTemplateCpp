@@ -20,6 +20,8 @@ public:
 
     std::string getFlashName(std::string const& str);
 
+    std::size_t getNumberOfTextures() override;
+
 private:
     std::map<std::string, std::shared_ptr<SDL_Texture>> m_textures;
     std::weak_ptr<jt::renderTarget> m_renderer;

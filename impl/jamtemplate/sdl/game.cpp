@@ -1,4 +1,5 @@
 ﻿#include "game.hpp"
+#include "action_commands/basic_action_commands.hpp"
 #include "drawable_impl.hpp"
 #include "game_state.hpp"
 #include "input/input_manager.hpp"
@@ -50,6 +51,7 @@ void Game::setupRenderTarget() { }
 void Game::startGame(GameLoopFunctionPtr gameloop_function)
 {
     setupRenderTarget();
+    addBasicActionCommands(*this);
 #ifdef ENABLE_WEB
     emscripten_set_main_loop(gameloop_function, 0, 1);
 #else

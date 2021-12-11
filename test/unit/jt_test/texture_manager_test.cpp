@@ -104,3 +104,22 @@ TEST_F(TextureManagerTest, InvalidSpecialOperation)
 {
     EXPECT_THROW(m_manager->get("#q#1#2#3"), std::invalid_argument);
 }
+
+TEST_F(TextureManagerTest, GetNumberOfTexturesIsInitiallyZero)
+{
+    ASSERT_EQ(m_manager->getNumberOfTextures(), 0U);
+}
+
+TEST_F(TextureManagerTest, GetNumberOfTexturesIsTwoAfterGetTexture)
+{
+    EXPECT_NO_THROW(m_manager->get("assets/coin.png"));
+    // two because of normal texture + flash texture
+    ASSERT_EQ(m_manager->getNumberOfTextures(), 2U);
+}
+
+TEST_F(TextureManagerTest, GetNumberOfTexturesIsZeroAfterReset)
+{
+    EXPECT_NO_THROW(m_manager->get("assets/coin.png"));
+    EXPECT_NO_THROW(m_manager->reset());
+    ASSERT_EQ(m_manager->getNumberOfTextures(), 0U);
+}

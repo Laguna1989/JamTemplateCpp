@@ -3,11 +3,8 @@
 
 #include "game_interface.hpp"
 #include "game_object.hpp"
-#include "logging/console.hpp"
 #include "logging/logger_interface.hpp"
-#include "music_player_interface.hpp"
 #include "render_target.hpp"
-#include "vector.hpp"
 #include <chrono>
 #include <memory>
 
@@ -70,7 +67,6 @@ protected:
     // overwritten functions from GameObject
     virtual void doUpdate(float const elapsed) override = 0;
     virtual void doDraw() const override = 0;
-    void createActionCommandManager();
 };
 
 } // namespace jt

@@ -233,4 +233,6 @@ std::string TextureManagerImpl::getFlashName(std::string const& str) { return st
 
 void TextureManagerImpl::reset() { m_textures.clear(); }
 
+size_t TextureManagerImpl::getNumberOfTextures() { return m_textures.size(); }
+
 } // namespace jt
