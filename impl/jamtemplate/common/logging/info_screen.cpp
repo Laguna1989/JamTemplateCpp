@@ -6,6 +6,7 @@ namespace jt {
 void InfoScreen::doCreate() { m_frameTimesVector.resize(m_frameTimes.size()); }
 void InfoScreen::doUpdate(float const elapsed)
 {
+#ifdef NDEBUG
     if (getGame()->input()->keyboard()->justPressed(jt::KeyCode::End)) {
         m_showInfo = !m_showInfo;
     }
@@ -16,6 +17,7 @@ void InfoScreen::doUpdate(float const elapsed)
     for (auto index = pushIndex; index != pushIndex + m_frameTimes.size(); ++index) {
         m_frameTimesVector[index - pushIndex] = m_frameTimes[index];
     }
+#endif
 }
 void InfoScreen::doDraw() const
 {

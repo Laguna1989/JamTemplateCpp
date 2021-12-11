@@ -55,6 +55,7 @@ static void BM_GamestateWithTweeningShapes(benchmark::State& state)
         auto game = std::make_shared<jt::Game>(window, std::make_shared<jt::InputManagerNull>(),
             std::make_shared<jt::MusicPlayerNull>(), std::make_shared<jt::Camera>(1.0f),
             std::make_shared<jt::StateManager>(std::make_shared<StateTweenPerformanceTest>()));
+        game->getLogger()->setLogLevel(LogLevel::LogLevelOff);
         game->getStateManager()->checkAndPerformSwitchState(game);
         for (int i = 0; i != 500; ++i) {
             game->update(0.02f);
