@@ -10,7 +10,7 @@ using jt::GameObject;
 using jt::GameState;
 using ::testing::_;
 
-#ifndef ENABLE_WEB
+#ifndef JT_ENABLE_WEB
 class GameStateImpl : public GameState {
 public:
     std::string getName() const override { return "GameStateImpl"; }

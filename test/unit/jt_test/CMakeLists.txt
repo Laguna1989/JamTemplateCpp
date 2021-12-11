@@ -1,5 +1,5 @@
 file(GLOB_RECURSE UNITTESTFILES CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/*)
-if ((NOT ENABLE_AUDIO_TESTS) OR ENABLE_WEB)
+if ((NOT JT_ENABLE_AUDIO_TESTS) OR JT_ENABLE_WEB)
     list(REMOVE_ITEM UNITTESTFILES
             "${CMAKE_CURRENT_SOURCE_DIR}/sound_test.cpp"
             "${CMAKE_CURRENT_SOURCE_DIR}/music_player_test.cpp")
@@ -15,7 +15,7 @@ endif ()
 
 
 add_executable(jt_tests ${UNITTESTFILES})
-if (ENABLE_WEB)
+if (JT_ENABLE_WEB)
     set(CMAKE_EXECUTABLE_SUFFIX ".html")
 endif ()
 

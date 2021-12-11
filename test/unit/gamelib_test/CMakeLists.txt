@@ -1,7 +1,7 @@
 file(GLOB_RECURSE GAMELIBUNITTESTFILES CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/*)
 
 add_executable(gamelib_tests ${GAMELIBUNITTESTFILES})
-if (ENABLE_WEB)
+if (JT_ENABLE_WEB)
     set(CMAKE_EXECUTABLE_SUFFIX ".html")
 endif ()
 target_link_libraries_system(gamelib_tests gtest)

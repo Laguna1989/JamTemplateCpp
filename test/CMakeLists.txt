@@ -1,4 +1,4 @@
-if (ENABLE_UNITTESTS)
+if (JT_ENABLE_UNITTESTS)
     add_subdirectory(unit)
 endif ()
 add_subdirectory(integration)

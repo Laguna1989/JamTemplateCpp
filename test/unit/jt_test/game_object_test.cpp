@@ -5,7 +5,7 @@
 using jt::GameInterface;
 using jt::GameObject;
 
-#ifndef ENABLE_WEB
+#ifndef JT_ENABLE_WEB
 TEST(GameObjectTest, CreateWithOutGameInstanceSet)
 {
     GameObject go {};

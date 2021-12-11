@@ -12,7 +12,7 @@
 #include <SDL_ttf.h>
 #include <iostream>
 
-#ifdef ENABLE_WEB
+#ifdef JT_ENABLE_WEB
 #include <emscripten.h>
 #endif
 
@@ -52,7 +52,7 @@ void Game::startGame(GameLoopFunctionPtr gameloop_function)
 {
     setupRenderTarget();
     addBasicActionCommands(*this);
-#ifdef ENABLE_WEB
+#ifdef JT_ENABLE_WEB
     emscripten_set_main_loop(gameloop_function, 0, 1);
 #else
     while (getRenderWindow()->isOpen()) {

@@ -51,7 +51,7 @@ Preconditions:
 
 Setup
 
-1. `emcmake cmake -DENABLE_WEB=ON ../`
+1. `emcmake cmake -DJT_ENABLE_WEB=ON ../`
 2. on the first run `emmake make` (do **not** pass `-j`, otherwise emscripten will get stuck with pulling libraries)
 3. on consecutive runs: `emmake make -j`
 3. `http-server .` to start a webserver locally. (needs to be installed separately)
@@ -70,16 +70,16 @@ recommended using the Web build to show your game to your Mac friends.
 
 All of those options can be set to ON or OFF via the cmake commandline
 
-* `ENABLE_UNITTESTS` - Enables gtest and the unit tests
-* `ENABLE_DEMOS` - Enables the demos (small example programs which showcase a specific theme)
-* `ENABLE_WEB` - Webbuild
+* `JT_ENABLE_UNITTESTS` - Enables gtest and the unit tests
+* `JT_ENABLE_DEMOS` - Enables the demos (small example programs which showcase a specific theme)
+* `JT_ENABLE_WEB` - Webbuild
 * `USE_SFML` - If `ON`, SFML will be used, if `OFF`, SDL will be used (SDL works best on linux)
-* `ENABLE_COVERAGE` - Compile with the flags set for the coverage run
-* `ENABLE_AUDIO_TESTS` - Some of the tests rely on a working audio setup, which seemingly cannot be faked easily. This
-  switch disables those specific tests, in case no audio is available on the respective machine.
-* `ENABLE_CLANG_TIDY` - Enable clang tidy checker
+* `JT_ENABLE_COVERAGE` - Compile with the flags set for the coverage run
+* `JT_ENABLE_AUDIO_TESTS` - Some of the tests rely on a working audio setup, which seemingly cannot be faked easily.
+  This switch disables those specific tests, in case no audio is available on the respective machine.
+* `JT_ENABLE_CLANG_TIDY` - Enable clang tidy checker
 
-e.g. calling `cmake ../ -DENABLE_UNITTESTS=ON -DENABLE_DEMOS=ON`
+e.g. calling `cmake ../ -DJT_ENABLE_UNITTESTS=ON -DENABLE_DEMOS=ON`
 
 ## Code Coverage
 
