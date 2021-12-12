@@ -7,15 +7,13 @@ using ::jt::tilemap::ObjectLayer;
 
 ObjectLayer getValidObjectLayer()
 {
-    auto tilemapManager = std::make_shared<jt::TilemapManagerTilesonImpl>();
-    jt::tilemap::TilesonLoader loader { tilemapManager, "assets/tileson_test.json" };
+    jt::tilemap::TilesonLoader loader { "assets/tileson_test.json" };
     return ObjectLayer { loader.loadObjectsFromLayer("objects") };
 }
 
 ObjectLayer getInvalidObjectLayer()
 {
-    auto tilemapManager = std::make_shared<jt::TilemapManagerTilesonImpl>();
-    jt::tilemap::TilesonLoader loader { tilemapManager, "assets/tileson_test.json" };
+    jt::tilemap::TilesonLoader loader { "assets/tileson_test.json" };
     return ObjectLayer { loader.loadObjectsFromLayer("blarz__non_existing__Blurz") };
 }
 

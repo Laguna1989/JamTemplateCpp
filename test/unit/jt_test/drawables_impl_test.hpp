@@ -80,9 +80,7 @@ public:
     std::shared_ptr<jt::DrawableInterface> createDrawable(
         std::shared_ptr<jt::TextureManagerInterface> textureManager) override
     {
-        // TODO will most likely crash
-        auto tilemapManager = std::make_shared<jt::TilemapManagerTilesonImpl>();
-        jt::tilemap::TilesonLoader loader(tilemapManager, "assets/tileson_test.json");
+        jt::tilemap::TilesonLoader loader("assets/tileson_test.json");
         auto t = std::make_shared<jt::tilemap::TileLayer>(
             loader.loadTilesFromLayer("ground", textureManager));
         t->setScreenSizeHint(jt::Vector2f { 400.0f, 300.0f });

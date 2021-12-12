@@ -78,16 +78,11 @@ std::vector<TileInfo> loadTiles(std::string const& layerName, std::unique_ptr<ts
 
 } // namespace
 
-TilesonLoader::TilesonLoader(
-    std::shared_ptr<TilemapManagerInterface> tilemapManager, std::string const& fileName)
-{
-    m_tilemapManager = tilemapManager;
-    m_fileName = fileName;
-}
+TilesonLoader::TilesonLoader(std::string const& fileName) { m_fileName = fileName; }
 
 std::vector<InfoRect> TilesonLoader::loadObjectsFromLayer(std::string const& layerName)
 {
-    auto& map = m_tilemapManager->getMap(m_fileName);
+    auto& map = m_tilemapManager.getMap(m_fileName);
 
     std::vector<InfoRect> objects;
 
@@ -109,7 +104,7 @@ std::vector<InfoRect> TilesonLoader::loadObjectsFromLayer(std::string const& lay
 std::vector<std::shared_ptr<TileNode>> TilesonLoader::loadNodesFromLayer(
     std::string const& layerName, std::shared_ptr<jt::TextureManagerInterface> textureManager)
 {
-    auto& map = m_tilemapManager->getMap(m_fileName);
+    auto& map = m_tilemapManager.getMap(m_fileName);
 
     std::vector<std::shared_ptr<TileNode>> nodeTiles;
 
@@ -158,7 +153,7 @@ std::vector<std::shared_ptr<TileNode>> TilesonLoader::loadNodesFromLayer(
 std::tuple<std::vector<TileInfo>, std::vector<jt::Sprite>> TilesonLoader::loadTilesFromLayer(
     std::string const& layerName, std::shared_ptr<jt::TextureManagerInterface> textureManager)
 {
-    auto& map = m_tilemapManager->getMap(m_fileName);
+    auto& map = m_tilemapManager.getMap(m_fileName);
 
     return std::tuple<std::vector<TileInfo>, std::vector<jt::Sprite>>(
         loadTiles(layerName, map), loadTileSetSprites(map, textureManager));

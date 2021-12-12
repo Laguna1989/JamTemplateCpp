@@ -1,4 +1,5 @@
 #include "tilemap_manager_tileson_impl.hpp"
+#include <iostream>
 
 namespace jt {
 std::unique_ptr<tson::Map>& TilemapManagerTilesonImpl::getMap(std::string const& fileName)
@@ -8,7 +9,7 @@ std::unique_ptr<tson::Map>& TilemapManagerTilesonImpl::getMap(std::string const&
 
         auto map = parser.parse(fileName);
         if (map->getStatus() != tson::ParseStatus::OK) {
-            std::cout << "tilemap json could not be parsed.\n";
+            std::cerr << "tilemap json could not be parsed.\n";
             throw std::invalid_argument { "tilemap json could not be parsed." };
         }
         m_maps[fileName] = std::move(map);

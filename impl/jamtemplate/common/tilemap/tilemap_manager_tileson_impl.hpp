@@ -1,12 +1,12 @@
 #ifndef GUARD_JAMTEMPLATE_TILEMAP_MANAGER_TILESON_IMPL_HPP
 #define GUARD_JAMTEMPLATE_TILEMAP_MANAGER_TILESON_IMPL_HPP
 
-#include "tilemap_manager_interface.hpp"
+#include "tileson.h"
 
 namespace jt {
-class TilemapManagerTilesonImpl : public TilemapManagerInterface {
+class TilemapManagerTilesonImpl {
 public:
-    std::unique_ptr<tson::Map>& getMap(std::string const& fileName) override;
+    std::unique_ptr<tson::Map>& getMap(std::string const& fileName);
 
 private:
     std::map<std::string, std::unique_ptr<tson::Map>> m_maps;

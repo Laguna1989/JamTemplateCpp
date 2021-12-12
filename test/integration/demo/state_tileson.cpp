@@ -1,9 +1,6 @@
 ﻿#include "state_tileson.hpp"
 #include "game_interface.hpp"
-#include "imgui.h"
 #include "input/input_manager.hpp"
-#include "shape.hpp"
-#include "sound.hpp"
 #include "state_select.hpp"
 #include "tilemap/tile_layer.hpp"
 #include "tilemap/tilemap_helpers.hpp"
@@ -14,8 +11,7 @@
 
 void StateTileson::doInternalCreate()
 {
-    m_tilemapManager = std::make_shared<jt::TilemapManagerTilesonImpl>();
-    jt::tilemap::TilesonLoader loader { m_tilemapManager, "assets/tileson_test.json" };
+    jt::tilemap::TilesonLoader loader { "assets/tileson_test.json" };
 
     m_tileLayerGround = std::make_shared<jt::tilemap::TileLayer>(
         loader.loadTilesFromLayer("ground", getGame()->getTextureManager()));

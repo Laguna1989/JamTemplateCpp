@@ -8,7 +8,6 @@
 #include "sprite.hpp"
 #include "texture_manager_interface.hpp"
 #include "tile_info.hpp"
-#include "tilemap_manager_interface.hpp"
 #include <memory>
 #include <vector>
 

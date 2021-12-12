@@ -2,7 +2,6 @@
 #define GUARD_JAMTEMPLATE_OBJECTLAYER_HPP
 
 #include "info_rect.hpp"
-#include "tilemap_manager_interface.hpp"
 #include "tileson.h"
 #include <map>
 #include <memory>

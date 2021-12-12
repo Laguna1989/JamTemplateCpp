@@ -11,14 +11,12 @@ class TilemapTileLayerTest : public ::testing::Test {
 public:
     std::shared_ptr<jt::tilemap::TileLayer> tileLayer;
     std::shared_ptr<jt::TextureManagerInterface> textureManager;
-    std::shared_ptr<jt::TilemapManagerInterface> tilemapManager;
 
     void SetUp() override
     {
         textureManager = getTextureManager();
 
-        tilemapManager = std::make_shared<jt::TilemapManagerTilesonImpl>();
-        jt::tilemap::TilesonLoader loader(tilemapManager, "assets/tileson_test.json");
+        jt::tilemap::TilesonLoader loader("assets/tileson_test.json");
         tileLayer = std::make_shared<jt::tilemap::TileLayer>(
             loader.loadTilesFromLayer("ground", textureManager));
     }
@@ -35,18 +33,6 @@ TEST_F(TilemapTileLayerTest, UpdateAndDraw)
     tileLayer->update(0.1f);
     tileLayer->draw(nullptr);
 }
-
-// TODO write a test for tileson loader
-// TEST_F(TilemapTileLayerTest, ParseInvalidFile)
-//{
-//    auto tm = getTextureManager();
-//    auto tilemapManager = std::make_shared<jt::TilemapManagerTilesonImpl>();
-//
-//    auto func = [tm, tilemapManager]() {
-//        TileLayer tl { "assets/non_existing.json", tilemapManager, "blarb", tm };
-//    };
-//    ASSERT_THROW(func(), std::invalid_argument);
-//}
 
 TEST_F(TilemapTileLayerTest, DrawWithScreensizeHint)
 {
@@ -74,4 +60,11 @@ TEST_F(TilemapTileLayerTest, GetGlobalBoundsReturnsDefaultConstructedRect)
 TEST_F(TilemapTileLayerTest, GetLocalBoundsReturnsDefaultConstructedRect)
 {
     ASSERT_EQ(tileLayer->getLocalBounds(), jt::Rectf {});
+}
+
+TEST(TilemapLoaderTileson, ParseInvalidFile)
+{
+    auto tilemapManager = std::make_shared<jt::TilemapManagerTilesonImpl>();
+    auto func = [tilemapManager]() { tilemapManager->getMap("invalidFile.__123"); };
+    ASSERT_THROW(func(), std::invalid_argument);
 }

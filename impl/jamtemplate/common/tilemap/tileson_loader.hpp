@@ -7,7 +7,7 @@
 #include "texture_manager_interface.hpp"
 #include "tile_info.hpp"
 #include "tile_node.hpp"
-#include "tilemap_manager_interface.hpp"
+#include "tilemap_manager_tileson_impl.hpp"
 #include <memory>
 #include <tuple>
 
@@ -16,8 +16,7 @@ namespace tilemap {
 
 class TilesonLoader {
 public:
-    TilesonLoader(
-        std::shared_ptr<TilemapManagerInterface> tilemapManager, std::string const& fileName);
+    TilesonLoader(std::string const& fileName);
 
     std::vector<InfoRect> loadObjectsFromLayer(std::string const& layerName);
 
@@ -28,7 +27,7 @@ public:
         std::string const& layerName, std::shared_ptr<jt::TextureManagerInterface> textureManager);
 
 private:
-    std::shared_ptr<TilemapManagerInterface> m_tilemapManager;
+    TilemapManagerTilesonImpl m_tilemapManager;
     std::string m_fileName;
 };
 
