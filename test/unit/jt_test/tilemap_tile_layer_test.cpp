@@ -1,6 +1,8 @@
 ﻿#include "sdl_setup.hpp"
 #include "texture_manager_impl.hpp"
 #include "tilemap/tile_layer.hpp"
+#include "tilemap/tilemap_manager_tileson_impl.hpp"
+#include "tilemap/tileson_loader.hpp"
 #include <gtest/gtest.h>
 
 using jt::tilemap::TileLayer;
@@ -14,16 +16,11 @@ public:
     {
         textureManager = getTextureManager();
 
+        jt::tilemap::TilesonLoader loader("assets/tileson_test.json");
         tileLayer = std::make_shared<jt::tilemap::TileLayer>(
-            "assets/tileson_test.json", "ground", textureManager);
+            loader.loadTilesFromLayer("ground", textureManager));
     }
 };
-
-TEST_F(TilemapTileLayerTest, CanLoadJson)
-{
-    ASSERT_EQ(tileLayer->getMapSizeInTiles().x, 50);
-    ASSERT_EQ(tileLayer->getMapSizeInTiles().y, 50);
-}
 
 TEST_F(TilemapTileLayerTest, DefaultPosition)
 {
@@ -35,13 +32,6 @@ TEST_F(TilemapTileLayerTest, UpdateAndDraw)
 {
     tileLayer->update(0.1f);
     tileLayer->draw(nullptr);
-}
-
-TEST_F(TilemapTileLayerTest, ParseInvalidFile)
-{
-    auto tm = getTextureManager();
-    auto func = [tm]() { TileLayer tl { "assets/non_existing.json", "blarb", tm }; };
-    ASSERT_THROW(func(), std::invalid_argument);
 }
 
 TEST_F(TilemapTileLayerTest, DrawWithScreensizeHint)
@@ -70,4 +60,11 @@ TEST_F(TilemapTileLayerTest, GetGlobalBoundsReturnsDefaultConstructedRect)
 TEST_F(TilemapTileLayerTest, GetLocalBoundsReturnsDefaultConstructedRect)
 {
     ASSERT_EQ(tileLayer->getLocalBounds(), jt::Rectf {});
+}
+
+TEST(TilemapLoaderTileson, ParseInvalidFile)
+{
+    auto tilemapManager = std::make_shared<jt::TilemapManagerTilesonImpl>();
+    auto func = [tilemapManager]() { tilemapManager->getMap("invalidFile.__123"); };
+    ASSERT_THROW(func(), std::invalid_argument);
 }

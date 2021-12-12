@@ -9,6 +9,8 @@
 #include "sprite.hpp"
 #include "text.hpp"
 #include "tilemap/tile_layer.hpp"
+#include "tilemap/tilemap_manager_tileson_impl.hpp"
+#include "tilemap/tileson_loader.hpp"
 
 class DrawableFactoryInterface {
 public:
@@ -74,11 +76,13 @@ public:
 
 class TileMapFactory : public DrawableFactoryInterface {
 public:
+    std::shared_ptr<jt::TilemapManagerTilesonImpl> tilemapManager;
     std::shared_ptr<jt::DrawableInterface> createDrawable(
         std::shared_ptr<jt::TextureManagerInterface> textureManager) override
     {
+        jt::tilemap::TilesonLoader loader("assets/tileson_test.json");
         auto t = std::make_shared<jt::tilemap::TileLayer>(
-            "assets/tileson_test.json", "ground", textureManager);
+            loader.loadTilesFromLayer("ground", textureManager));
         t->setScreenSizeHint(jt::Vector2f { 400.0f, 300.0f });
         return t;
     }

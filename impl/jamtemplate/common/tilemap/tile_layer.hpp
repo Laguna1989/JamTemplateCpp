@@ -7,7 +7,7 @@
 #include "render_target.hpp"
 #include "sprite.hpp"
 #include "texture_manager_interface.hpp"
-#include "tileson.h"
+#include "tile_info.hpp"
 #include <memory>
 #include <vector>
 
@@ -20,13 +20,10 @@ public:
     using Sptr = std::shared_ptr<TileLayer>;
 
     /// Constructor
-    /// \param path path to the tilemap file
-    TileLayer(std::string const& path, std::string const& layerName,
-        std::shared_ptr<jt::TextureManagerInterface> textureManager);
-
-    /// Get map size in Tiles
-    /// \return map size in tiles
-    jt::Vector2u getMapSizeInTiles();
+    /// \param tileInfo tileInfo
+    /// \param tileSetSprites Tileset Sprites
+    TileLayer(std::vector<TileInfo> const& tileInfo, std::vector<jt::Sprite> tileSetSprites);
+    TileLayer(std::tuple<std::vector<TileInfo> const&, std::vector<jt::Sprite>> mapInfo);
 
     void doDraw(std::shared_ptr<jt::renderTarget> sptr) const override;
 
@@ -59,9 +56,10 @@ public:
 
 private:
     std::shared_ptr<jt::TextureManagerInterface> m_textureManager;
-    std::unique_ptr<tson::Map> m_map { nullptr };
-    std::string m_layerName { "" };
-    mutable std::vector<jt::Sprite> m_tileSprites {};
+
+    mutable std::vector<jt::Sprite> m_tileSetSprites {};
+
+    std::vector<TileInfo> m_tiles;
 
     jt::Vector2f m_position { 0.0f, 0.0f };
     jt::Vector2f m_origin { 0.0f, 0.0f };
@@ -70,9 +68,7 @@ private:
     Color m_color { jt::colors::White };
     Color m_flashColor { jt::colors::White };
 
-    void checkIdBounds(tson::TileObject& tile) const;
-
-    void drawSingleTileLayer(std::shared_ptr<jt::renderTarget> const& rt, tson::Layer& layer) const;
+    bool isTileVisible(TileInfo const& tile, jt::Vector2f const& posOffset) const;
 };
 
 } // namespace tilemap

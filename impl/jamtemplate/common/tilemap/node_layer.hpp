@@ -13,8 +13,9 @@ namespace tilemap {
 
 class NodeLayer {
 public:
-    NodeLayer(std::string const& path, std::string const& layerName,
-        std::shared_ptr<jt::TextureManagerInterface> textureManager);
+    /// Constructor
+    /// \param nodeTiles node tiles, either create them yourself or use TilesonLoader
+    NodeLayer(std::vector<std::shared_ptr<TileNode>> nodeTiles);
 
     using Sptr = std::shared_ptr<NodeLayer>;
     std::shared_ptr<TileNode> getTileAt(unsigned int x, unsigned int y);
@@ -23,12 +24,7 @@ public:
     void reset();
 
 private:
-    std::unique_ptr<tson::Map> m_map { nullptr };
-    std::string m_layerName { "" };
-
-    //    std::map<std::pair<unsigned int, unsigned int>, std::shared_ptr<TileNode>> m_tiles;
-    std::vector<std::shared_ptr<TileNode>> m_tiles;
-    void parseTiles(std::shared_ptr<jt::TextureManagerInterface> textureManager);
+    std::vector<std::shared_ptr<TileNode>> m_nodeTiles;
     void createNodeConnections();
 };
 
