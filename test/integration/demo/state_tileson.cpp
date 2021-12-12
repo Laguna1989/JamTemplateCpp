@@ -6,6 +6,7 @@
 #include "sound.hpp"
 #include "state_select.hpp"
 #include "tilemap/tile_layer.hpp"
+#include "tilemap/tilemap_generator.hpp"
 #include "tilemap/tilemap_helpers.hpp"
 #include "tilemap/tilemap_manager_tileson_impl.hpp"
 #include "tilemap/tileson_loader.hpp"
@@ -21,8 +22,13 @@ void StateTileson::doInternalCreate()
         loader.loadTilesFromLayer("ground", getGame()->getTextureManager()));
     m_tileLayerGround->setScreenSizeHint(jt::Vector2f { 400, 300 });
 
+    //    m_tileLayerOverlay = std::make_shared<jt::tilemap::TileLayer>(
+    //        loader.loadTilesFromLayer("overlay", getGame()->getTextureManager()));
+    //    m_tileLayerOverlay->setScreenSizeHint(jt::Vector2f { 400, 300 });
+
+    jt::tilemap::TilemapGenerator gen;
     m_tileLayerOverlay = std::make_shared<jt::tilemap::TileLayer>(
-        loader.loadTilesFromLayer("overlay", getGame()->getTextureManager()));
+        gen.createRandomMap("", getGame()->getTextureManager()));
     m_tileLayerOverlay->setScreenSizeHint(jt::Vector2f { 400, 300 });
 
     m_objectsLayer
