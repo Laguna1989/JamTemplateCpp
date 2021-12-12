@@ -1,35 +1,34 @@
 #include "node_layer.hpp"
-#include <drawable_helpers.hpp>
-#include <pathfinder/node.hpp>
-#include <shape.hpp>
+#include "drawable_helpers.hpp"
+#include "pathfinder/node.hpp"
+#include "shape.hpp"
+
 namespace jt {
 namespace tilemap {
 
-NodeLayer::NodeLayer(std::string const& path, std::string const& layerName,
+NodeLayer::NodeLayer(std::string const& path,
+    std::shared_ptr<jt::TilemapManagerInterface> tilemapManager, std::string const& layerName,
     std::shared_ptr<jt::TextureManagerInterface> textureManager)
 {
-    m_layerName = layerName;
-    tson::Tileson parser;
-
-    m_map = parser.parse(path);
-    if (m_map->getStatus() != tson::ParseStatus::OK) {
-        std::cout << "tilemap json could not be parsed.\n";
-        throw std::invalid_argument { "tilemap json could not be parsed." };
+    if (tilemapManager == nullptr) {
+        throw std::invalid_argument { "tilemap manager dependency cannot be null" };
     }
 
-    parseTiles(textureManager);
+    auto& map = tilemapManager->getMap(path);
+    parseTiles(textureManager, map, layerName);
 
     createNodeConnections();
 }
 
-void NodeLayer::parseTiles(std::shared_ptr<jt::TextureManagerInterface> textureManager)
+void NodeLayer::parseTiles(std::shared_ptr<jt::TextureManagerInterface> textureManager,
+    std::unique_ptr<tson::Map>& map, std::string const& layerName)
 {
-    for (auto& layer : m_map->getLayers()) {
+    for (auto& layer : map->getLayers()) {
         // skip all non-tile layers
         if (layer.getType() != tson::LayerType::TileLayer) {
             continue;
         }
-        if (layer.getName() != m_layerName) {
+        if (layer.getName() != layerName) {
             continue;
         }
         for (auto& [pos, tile] : layer.getTileObjects()) {
@@ -43,7 +42,7 @@ void NodeLayer::parseTiles(std::shared_ptr<jt::TextureManagerInterface> textureM
             auto posx = std::get<0>(pos);
             auto posy = std::get<1>(pos);
 
-            auto const ts = m_map->getTilesets().at(0).getTileSize();
+            auto const ts = map->getTilesets().at(0).getTileSize();
             auto color = jt::MakeColor::FromRGBA(1, 1, 1, 100);
             if (!isBlocked) {
                 color = jt::MakeColor::FromRGBA(255, 255, 255, 100);

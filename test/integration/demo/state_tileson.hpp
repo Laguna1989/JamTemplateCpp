@@ -3,6 +3,7 @@
 
 #include "actor.hpp"
 #include "game_state.hpp"
+#include "tilemap/tilemap_manager_interface.hpp"
 #include <memory>
 #include <tilemap/node_layer.hpp>
 #include <tilemap/object_layer.hpp>
@@ -21,6 +22,8 @@ public:
     std::string getName() const override;
 
 private:
+    std::shared_ptr<jt::TilemapManagerInterface> m_tilemapManager;
+
     std::shared_ptr<jt::tilemap::TileLayer> m_tileLayerGround;
     std::shared_ptr<jt::tilemap::TileLayer> m_tileLayerOverlay;
     bool m_drawTileLayer1 { true };

@@ -1,39 +1,71 @@
 ﻿#include "tile_layer.hpp"
 #include "conversions.hpp"
 #include "drawable_helpers.hpp"
-#include "game_interface.hpp"
 #include "shape.hpp"
-#include <iostream>
 #include <memory>
 
 namespace jt {
 namespace tilemap {
-TileLayer::TileLayer(std::string const& path, std::string const& layerName,
+
+TileLayer::TileLayer(std::string const& path,
+    std::shared_ptr<jt::TilemapManagerInterface> tilemapManager, std::string const& layerName,
     std::shared_ptr<jt::TextureManagerInterface> textureManager)
 {
-    m_layerName = layerName;
+    if (tilemapManager == nullptr) {
+        throw std::invalid_argument { "nullptr tilemapManager is not supported" };
+    }
+
     m_position = jt::Vector2f { 0.0f, 0.0f };
     m_screenSizeHint = jt::Vector2f { 0.0f, 0.0f };
     m_textureManager = textureManager;
 
-    tson::Tileson parser;
+    auto& map = tilemapManager->getMap(path);
 
-    m_map = parser.parse(path);
-    if (m_map->getStatus() != tson::ParseStatus::OK) {
-        std::cout << "tilemap json could not be parsed.\n";
-        throw std::invalid_argument { "tilemap json could not be parsed." };
+    loadTilesetSprites(map);
+
+    loadTilemap(map, layerName);
+
+    m_mapSizeInZiles = jt::Vector2u { static_cast<unsigned int>(map->getSize().x),
+        static_cast<unsigned int>(map->getSize().y) };
+}
+void TileLayer::loadTilemap(std::unique_ptr<tson::Map>& map, std::string const& layerName)
+{
+    for (auto& layer : map->getLayers()) {
+        // skip all non-tile layers
+        if (layer.getType() != tson::LayerType::TileLayer) {
+            continue;
+        }
+        if (layer.getName() == layerName) {
+            for (auto& [_, tile] : layer.getTileObjects()) {
+                parseSingleTile(tile);
+            }
+        }
     }
+}
 
-    auto const tileset = m_map->getTilesets().at(0);
+void TileLayer::parseSingleTile(tson::TileObject& tile)
+{
+    checkIdBounds(tile);
+
+    auto const pos = Conversion::vec(tile.getPosition());
+    auto const size = Conversion::vec(tile.getTile()->getTileSize());
+    auto const id = static_cast<int>(tile.getTile()->getId()) - 1;
+
+    m_tiles.emplace_back(Tile { pos, size, id });
+}
+
+void TileLayer::loadTilesetSprites(std::unique_ptr<tson::Map>& map)
+{
+    auto const tileset = map->getTilesets().at(0);
     auto const columns = tileset.getColumns();
     auto const rows = tileset.getTileCount() / columns;
     auto const ts = tileset.getTileSize();
     auto const tilesetName = "assets/" + tileset.getImagePath().string();
-    m_tileSprites.resize(static_cast<std::size_t>(rows) * static_cast<std::size_t>(columns));
+    m_tileSprites.resize(static_cast<size_t>(rows) * static_cast<size_t>(columns));
     for (int j = 0; j != rows; ++j) {
         for (int i = 0; i != columns; ++i) {
             {
-                jt::Sprite tile { tilesetName, jt::Recti { i * ts.x, j * ts.y, ts.x, ts.y },
+                Sprite tile { tilesetName, Recti { i * ts.x, j * ts.y, ts.x, ts.y },
                     m_textureManager };
                 tile.setIgnoreCamMovement(false);
                 m_tileSprites.at(i + j * columns) = tile;
@@ -42,64 +74,47 @@ TileLayer::TileLayer(std::string const& path, std::string const& layerName,
     }
 }
 
+bool TileLayer::skipCurrentTile(Tile const& tile, jt::Vector2f const& posOffset) const
+{
+    if (m_screenSizeHint.x == 0 && m_screenSizeHint.y == 0) {
+        return false;
+    }
+
+    jt::Vector2f const camOffset = getStaticCamOffset();
+    if (tile.position.x + camOffset.x + tile.size.x < 0) {
+        return true;
+    }
+    if (tile.position.y + camOffset.y + tile.size.y < 0) {
+        return true;
+    }
+    if (tile.position.x + camOffset.x >= this->m_screenSizeHint.x + tile.size.x) {
+        return true;
+    }
+    if (tile.position.y + camOffset.y >= this->m_screenSizeHint.y + tile.size.y) {
+        return true;
+    }
+    return false;
+}
+
 void TileLayer::doDraw(std::shared_ptr<jt::renderTarget> const sptr) const
 {
     if (!sptr) {
         return;
     }
 
-    if (m_map == nullptr) {
-        return;
-    }
-
-    for (auto& layer : m_map->getLayers()) {
-        // skip all non-tile layers
-        if (layer.getType() != tson::LayerType::TileLayer) {
+    auto const posOffset = m_position + getShakeOffset() + getOffset();
+    for (auto const& tile : m_tiles) {
+        // optimization: don't draw tiles outside the game window
+        if (skipCurrentTile(tile, posOffset)) {
             continue;
         }
-        if (layer.getName() == m_layerName) {
-            drawSingleTileLayer(sptr, layer);
-        }
-    }
-}
-
-void TileLayer::drawSingleTileLayer(
-    std::shared_ptr<jt::renderTarget> const& rt, tson::Layer& layer) const
-{
-
-    auto const posOffset = m_position + getShakeOffset() + getOffset();
-    for (auto& [pos, tile] : layer.getTileObjects()) {
-        this->checkIdBounds(tile);
-
-        auto const tilePos = Conversion::vec(tile.getPosition());
-
-        // optimization: don't draw tiles outside the game window
-        if (this->m_screenSizeHint.x != 0 && this->m_screenSizeHint.y != 0) {
-            jt::Vector2f const camOffset = getStaticCamOffset();
-            auto const px = tilePos.x;
-            auto const py = tilePos.y;
-            auto const tsx = tile.getTile()->getTileSize().x;
-            auto const tsy = tile.getTile()->getTileSize().y;
-            if (px + camOffset.x + tsx < 0) {
-                continue;
-            }
-            if (py + camOffset.y + tsy < 0) {
-                continue;
-            }
-            if (px + camOffset.x >= this->m_screenSizeHint.x + tsx) {
-                continue;
-            }
-            if (py + camOffset.y >= this->m_screenSizeHint.y + tsy) {
-                continue;
-            }
-        }
-        auto const pixelPosForTile = tilePos + posOffset;
-        auto const id = tile.getTile()->getId() - 1U;
+        auto const pixelPosForTile = tile.position + posOffset;
+        auto const id = tile.id;
         this->m_tileSprites.at(id).setPosition(jt::Vector2f {
             pixelPosForTile.x * this->m_scale.x, pixelPosForTile.y * this->m_scale.y });
         this->m_tileSprites.at(id).setScale(this->m_scale);
         this->m_tileSprites.at(id).update(0.0f);
-        this->m_tileSprites.at(id).draw(rt);
+        this->m_tileSprites.at(id).draw(sptr);
     }
 }
 
@@ -107,7 +122,6 @@ void TileLayer::checkIdBounds(tson::TileObject& tile) const
 {
     auto const rawId = tile.getTile()->getId();
     if (rawId == 1 || rawId + 1 >= m_tileSprites.size()) {
-        std::cout << "Invalid tile id in map\n";
         throw std::invalid_argument { "Invalid tile id in map" };
     }
 }
@@ -145,11 +159,7 @@ void TileLayer::doRotate(float /*rot*/) { }
 
 void TileLayer::setScreenSizeHint(jt::Vector2f const& hint) { m_screenSizeHint = hint; }
 
-jt::Vector2u TileLayer::getMapSizeInTiles()
-{
-    return jt::Vector2u { static_cast<unsigned int>(m_map->getSize().x),
-        static_cast<unsigned int>(m_map->getSize().y) };
-}
+jt::Vector2u TileLayer::getMapSizeInTiles() { return m_mapSizeInZiles; }
 
 } // namespace tilemap
 

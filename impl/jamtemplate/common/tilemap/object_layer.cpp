@@ -23,24 +23,21 @@ InfoRectProperties parseProperties(tson::PropertyCollection& props)
     return properties;
 }
 
-ObjectLayer::ObjectLayer(std::string const& path, std::string const& layerName)
+ObjectLayer::ObjectLayer(std::string const& path,
+    std::shared_ptr<jt::TilemapManagerInterface> tilemapManager, std::string const& layerName)
 {
-    m_layerName = layerName;
-    // TODO replace by tilemapManager, similar to TextureManager
-    tson::Tileson parser;
-
-    m_map = parser.parse(path);
-    if (m_map->getStatus() != tson::ParseStatus::OK) {
-        std::cout << "tilemap json could not be parsed.\n";
-        throw std::logic_error { "tilemap json could not be parsed." };
+    if (tilemapManager == nullptr) {
+        throw std::invalid_argument { "tilemap manager dependency cannot be null" };
     }
-    parseObjects();
+
+    auto& map = tilemapManager->getMap(path);
+    parseObjects(map, layerName);
 }
 
-void ObjectLayer::parseObjects()
+void ObjectLayer::parseObjects(std::unique_ptr<tson::Map>& map, std::string const& layerName)
 {
-    for (auto& layer : m_map->getLayers()) {
-        if (layer.getName() != m_layerName) {
+    for (auto& layer : map->getLayers()) {
+        if (layer.getName() != layerName) {
             continue;
         }
 
@@ -52,6 +49,8 @@ void ObjectLayer::parseObjects()
         }
     }
 }
+
+std::vector<InfoRect> ObjectLayer::getObjects() { return m_objectGroups; }
 
 } // namespace tilemap
 } // namespace jt

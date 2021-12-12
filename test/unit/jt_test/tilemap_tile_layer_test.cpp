@@ -1,6 +1,7 @@
 ﻿#include "sdl_setup.hpp"
 #include "texture_manager_impl.hpp"
 #include "tilemap/tile_layer.hpp"
+#include "tilemap/tilemap_manager_tileson_impl.hpp"
 #include <gtest/gtest.h>
 
 using jt::tilemap::TileLayer;
@@ -9,13 +10,15 @@ class TilemapTileLayerTest : public ::testing::Test {
 public:
     std::shared_ptr<jt::tilemap::TileLayer> tileLayer;
     std::shared_ptr<jt::TextureManagerInterface> textureManager;
+    std::shared_ptr<jt::TilemapManagerInterface> tilemapManager;
 
     void SetUp() override
     {
         textureManager = getTextureManager();
 
+        tilemapManager = std::make_shared<jt::TilemapManagerTilesonImpl>();
         tileLayer = std::make_shared<jt::tilemap::TileLayer>(
-            "assets/tileson_test.json", "ground", textureManager);
+            "assets/tileson_test.json", tilemapManager, "ground", textureManager);
     }
 };
 
@@ -40,7 +43,11 @@ TEST_F(TilemapTileLayerTest, UpdateAndDraw)
 TEST_F(TilemapTileLayerTest, ParseInvalidFile)
 {
     auto tm = getTextureManager();
-    auto func = [tm]() { TileLayer tl { "assets/non_existing.json", "blarb", tm }; };
+    auto tilemapManager = std::make_shared<jt::TilemapManagerTilesonImpl>();
+
+    auto func = [tm, tilemapManager]() {
+        TileLayer tl { "assets/non_existing.json", tilemapManager, "blarb", tm };
+    };
     ASSERT_THROW(func(), std::invalid_argument);
 }
 

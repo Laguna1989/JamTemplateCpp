@@ -1,5 +1,5 @@
-#ifndef GUARD_JAMTEMPLATE_TILE_HPP
-#define GUARD_JAMTEMPLATE_TILE_HPP
+#ifndef GUARD_JAMTEMPLATE_TILENODE_HPP
+#define GUARD_JAMTEMPLATE_TILENODE_HPP
 
 #include "drawable_interface.hpp"
 #include "game_object.hpp"
@@ -36,4 +36,4 @@ private:
 } // namespace tilemap
 } // namespace jt
 
-#endif // GUARD_JAMTEMPLATE_TILE_HPP
+#endif // GUARD_JAMTEMPLATE_TILENODE_HPP

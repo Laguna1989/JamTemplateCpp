@@ -7,6 +7,8 @@
 #include "render_target.hpp"
 #include "sprite.hpp"
 #include "texture_manager_interface.hpp"
+#include "tile.hpp"
+#include "tilemap_manager_interface.hpp"
 #include "tileson.h"
 #include <memory>
 #include <vector>
@@ -21,8 +23,8 @@ public:
 
     /// Constructor
     /// \param path path to the tilemap file
-    TileLayer(std::string const& path, std::string const& layerName,
-        std::shared_ptr<jt::TextureManagerInterface> textureManager);
+    TileLayer(std::string const& path, std::shared_ptr<jt::TilemapManagerInterface> tilemapManager,
+        std::string const& layerName, std::shared_ptr<jt::TextureManagerInterface> textureManager);
 
     /// Get map size in Tiles
     /// \return map size in tiles
@@ -59,9 +61,11 @@ public:
 
 private:
     std::shared_ptr<jt::TextureManagerInterface> m_textureManager;
-    std::unique_ptr<tson::Map> m_map { nullptr };
-    std::string m_layerName { "" };
+
     mutable std::vector<jt::Sprite> m_tileSprites {};
+
+    std::vector<jt::Tile> m_tiles;
+    jt::Vector2u m_mapSizeInZiles;
 
     jt::Vector2f m_position { 0.0f, 0.0f };
     jt::Vector2f m_origin { 0.0f, 0.0f };
@@ -71,8 +75,10 @@ private:
     Color m_flashColor { jt::colors::White };
 
     void checkIdBounds(tson::TileObject& tile) const;
-
-    void drawSingleTileLayer(std::shared_ptr<jt::renderTarget> const& rt, tson::Layer& layer) const;
+    bool skipCurrentTile(Tile const& t, jt::Vector2f const& posOffset) const;
+    void loadTilesetSprites(std::unique_ptr<tson::Map>& map);
+    void loadTilemap(std::unique_ptr<tson::Map>& map, std::string const& layerName);
+    void parseSingleTile(tson::TileObject& tile);
 };
 
 } // namespace tilemap
