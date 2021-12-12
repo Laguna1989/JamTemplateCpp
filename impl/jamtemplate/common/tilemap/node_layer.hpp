@@ -24,9 +24,6 @@ public:
     void reset();
 
 private:
-    std::string m_layerName { "" };
-
-    //    std::map<std::pair<unsigned int, unsigned int>, std::shared_ptr<TileNode>> m_tiles;
     std::vector<std::shared_ptr<TileNode>> m_tiles;
     void parseTiles(std::shared_ptr<jt::TextureManagerInterface> textureManager,
         std::unique_ptr<tson::Map>& map, std::string const& layerName);
