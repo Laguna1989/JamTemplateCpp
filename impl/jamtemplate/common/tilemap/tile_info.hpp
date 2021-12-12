@@ -6,7 +6,7 @@
 namespace jt {
 
 namespace tilemap {
-struct Tile {
+struct TileInfo {
     jt::Vector2f position { 0.0f, 0.0f };
     jt::Vector2f size { 0.0f, 0.0f };
     int id { -1 };

@@ -2,6 +2,7 @@
 #include "texture_manager_impl.hpp"
 #include "tilemap/tile_layer.hpp"
 #include "tilemap/tilemap_manager_tileson_impl.hpp"
+#include "tilemap/tileson_loader.hpp"
 #include <gtest/gtest.h>
 
 using jt::tilemap::TileLayer;
@@ -17,16 +18,11 @@ public:
         textureManager = getTextureManager();
 
         tilemapManager = std::make_shared<jt::TilemapManagerTilesonImpl>();
+        jt::tilemap::TilesonLoader loader(tilemapManager, "assets/tileson_test.json");
         tileLayer = std::make_shared<jt::tilemap::TileLayer>(
-            "assets/tileson_test.json", tilemapManager, "ground", textureManager);
+            loader.loadTilesFromLayer("ground", textureManager));
     }
 };
-
-TEST_F(TilemapTileLayerTest, CanLoadJson)
-{
-    ASSERT_EQ(tileLayer->getMapSizeInTiles().x, 50);
-    ASSERT_EQ(tileLayer->getMapSizeInTiles().y, 50);
-}
 
 TEST_F(TilemapTileLayerTest, DefaultPosition)
 {
@@ -40,16 +36,17 @@ TEST_F(TilemapTileLayerTest, UpdateAndDraw)
     tileLayer->draw(nullptr);
 }
 
-TEST_F(TilemapTileLayerTest, ParseInvalidFile)
-{
-    auto tm = getTextureManager();
-    auto tilemapManager = std::make_shared<jt::TilemapManagerTilesonImpl>();
-
-    auto func = [tm, tilemapManager]() {
-        TileLayer tl { "assets/non_existing.json", tilemapManager, "blarb", tm };
-    };
-    ASSERT_THROW(func(), std::invalid_argument);
-}
+// TODO write a test for tileson loader
+// TEST_F(TilemapTileLayerTest, ParseInvalidFile)
+//{
+//    auto tm = getTextureManager();
+//    auto tilemapManager = std::make_shared<jt::TilemapManagerTilesonImpl>();
+//
+//    auto func = [tm, tilemapManager]() {
+//        TileLayer tl { "assets/non_existing.json", tilemapManager, "blarb", tm };
+//    };
+//    ASSERT_THROW(func(), std::invalid_argument);
+//}
 
 TEST_F(TilemapTileLayerTest, DrawWithScreensizeHint)
 {

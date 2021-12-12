@@ -2,7 +2,6 @@
 #include "conversions.hpp"
 #include "drawable_helpers.hpp"
 #include "pathfinder/node.hpp"
-#include "shape.hpp"
 
 namespace jt {
 namespace tilemap {
@@ -26,6 +25,57 @@ InfoRectProperties parseProperties(tson::PropertyCollection& props)
     }
     return properties;
 }
+
+TileInfo parseSingleTile(tson::TileObject& tile)
+{
+    auto const pos = Conversion::vec(tile.getPosition());
+    auto const size = Conversion::vec(tile.getTile()->getTileSize());
+    auto const id = static_cast<int>(tile.getTile()->getId()) - 1;
+
+    return TileInfo { pos, size, id };
+}
+
+std::vector<jt::Sprite> loadTileSetSprites(
+    std::unique_ptr<tson::Map>& map, std::shared_ptr<TextureManagerInterface> textureManager)
+{
+    std::vector<jt::Sprite> tileSetSprites;
+    auto const tileset = map->getTilesets().at(0);
+    auto const columns = tileset.getColumns();
+    auto const rows = tileset.getTileCount() / columns;
+    auto const ts = tileset.getTileSize();
+    auto const tilesetName = "assets/" + tileset.getImagePath().string();
+    tileSetSprites.clear();
+    tileSetSprites.resize(static_cast<size_t>(rows) * static_cast<size_t>(columns));
+    for (int j = 0; j != rows; ++j) {
+        for (int i = 0; i != columns; ++i) {
+            {
+                Sprite tile { tilesetName, Recti { i * ts.x, j * ts.y, ts.x, ts.y },
+                    textureManager };
+                tile.setIgnoreCamMovement(false);
+                tileSetSprites.at(i + j * columns) = tile;
+            }
+        }
+    }
+    return tileSetSprites;
+}
+
+std::vector<TileInfo> loadTiles(std::string const& layerName, std::unique_ptr<tson::Map>& map)
+{
+    std::vector<TileInfo> tiles;
+    for (auto& layer : map->getLayers()) {
+        // skip all non-tile layers
+        if (layer.getType() != tson::LayerType::TileLayer) {
+            continue;
+        }
+        if (layer.getName() == layerName) {
+            for (auto& [_, tile] : layer.getTileObjects()) {
+                tiles.emplace_back(parseSingleTile(tile));
+            }
+        }
+    }
+    return tiles;
+}
+
 } // namespace
 
 TilesonLoader::TilesonLoader(
@@ -56,7 +106,7 @@ std::vector<InfoRect> TilesonLoader::loadObjectsFromLayer(std::string const& lay
     return objects;
 }
 
-std::vector<std::shared_ptr<TileNode>> TilesonLoader::LoadNodesFromLayer(
+std::vector<std::shared_ptr<TileNode>> TilesonLoader::loadNodesFromLayer(
     std::string const& layerName, std::shared_ptr<jt::TextureManagerInterface> textureManager)
 {
     auto& map = m_tilemapManager->getMap(m_fileName);
@@ -104,6 +154,14 @@ std::vector<std::shared_ptr<TileNode>> TilesonLoader::LoadNodesFromLayer(
         }
     }
     return nodeTiles;
+}
+std::tuple<std::vector<TileInfo>, std::vector<jt::Sprite>> TilesonLoader::loadTilesFromLayer(
+    std::string const& layerName, std::shared_ptr<jt::TextureManagerInterface> textureManager)
+{
+    auto& map = m_tilemapManager->getMap(m_fileName);
+
+    return std::tuple<std::vector<TileInfo>, std::vector<jt::Sprite>>(
+        loadTiles(layerName, map), loadTileSetSprites(map, textureManager));
 }
 
 } // namespace tilemap

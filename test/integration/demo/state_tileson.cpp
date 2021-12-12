@@ -18,18 +18,18 @@ void StateTileson::doInternalCreate()
     jt::tilemap::TilesonLoader loader { m_tilemapManager, "assets/tileson_test.json" };
 
     m_tileLayerGround = std::make_shared<jt::tilemap::TileLayer>(
-        "assets/tileson_test.json", m_tilemapManager, "ground", getGame()->getTextureManager());
+        loader.loadTilesFromLayer("ground", getGame()->getTextureManager()));
     m_tileLayerGround->setScreenSizeHint(jt::Vector2f { 400, 300 });
 
     m_tileLayerOverlay = std::make_shared<jt::tilemap::TileLayer>(
-        "assets/tileson_test.json", m_tilemapManager, "overlay", getGame()->getTextureManager());
+        loader.loadTilesFromLayer("overlay", getGame()->getTextureManager()));
     m_tileLayerOverlay->setScreenSizeHint(jt::Vector2f { 400, 300 });
 
     m_objectsLayer
         = std::make_shared<jt::tilemap::ObjectLayer>(loader.loadObjectsFromLayer("objects"));
 
     m_nodeLayer = std::make_shared<jt::tilemap::NodeLayer>(
-        loader.LoadNodesFromLayer("ground", getGame()->getTextureManager()));
+        loader.loadNodesFromLayer("ground", getGame()->getTextureManager()));
 
     for (auto& t : m_nodeLayer->getAllTiles()) {
         add(t);

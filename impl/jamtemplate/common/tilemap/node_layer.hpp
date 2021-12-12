@@ -14,11 +14,8 @@ namespace tilemap {
 
 class NodeLayer {
 public:
-    //    NodeLayer(std::string const& path, std::shared_ptr<jt::TilemapManagerInterface>
-    //    tilemapManager,
-    //        std::string const& layerName, std::shared_ptr<jt::TextureManagerInterface>
-    //        textureManager);
-
+    /// Constructor
+    /// \param nodeTiles node tiles, either create them yourself or use TilesonLoader
     NodeLayer(std::vector<std::shared_ptr<TileNode>> nodeTiles);
 
     using Sptr = std::shared_ptr<NodeLayer>;

@@ -10,6 +10,7 @@
 #include "text.hpp"
 #include "tilemap/tile_layer.hpp"
 #include "tilemap/tilemap_manager_tileson_impl.hpp"
+#include "tilemap/tileson_loader.hpp"
 
 class DrawableFactoryInterface {
 public:
@@ -81,8 +82,9 @@ public:
     {
         // TODO will most likely crash
         auto tilemapManager = std::make_shared<jt::TilemapManagerTilesonImpl>();
+        jt::tilemap::TilesonLoader loader(tilemapManager, "assets/tileson_test.json");
         auto t = std::make_shared<jt::tilemap::TileLayer>(
-            "assets/tileson_test.json", tilemapManager, "ground", textureManager);
+            loader.loadTilesFromLayer("ground", textureManager));
         t->setScreenSizeHint(jt::Vector2f { 400.0f, 300.0f });
         return t;
     }
