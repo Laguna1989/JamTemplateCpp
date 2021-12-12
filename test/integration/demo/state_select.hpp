@@ -30,7 +30,7 @@ private:
     template <class State>
     void AddButton(std::string const& textString)
     {
-        float posY
+        float const posY
             = detail::buttonOffsetY + m_buttonCount * (detail::buttonMarginY + detail::buttonSizeY);
         auto const button = std::make_shared<jt::Button>(
             jt::Vector2u { detail::buttonSizeX, detail::buttonSizeY },

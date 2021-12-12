@@ -7,6 +7,7 @@
 #include "state_pathfinding.hpp"
 #include "state_rope.hpp"
 #include "state_scroll.hpp"
+#include "state_simplex_noise.hpp"
 #include "state_swarmobjects.hpp"
 #include "state_tileson.hpp"
 #include "state_tween.hpp"
@@ -24,6 +25,7 @@ void StateSelect::doInternalCreate()
     AddButton<StatePathfinding>("Pathfinding");
     AddButton<StateGradient>("Palettes");
     AddButton<StateImGui>("ImGui");
+    AddButton<StateSimplexNoise>("Simplex Noise");
 }
 
 void StateSelect::doInternalUpdate(float /*elapsed*/)
