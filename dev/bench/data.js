@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1639284891099,
+  "lastUpdate": 1639337337616,
   "repoUrl": "https://github.com/Laguna1989/JamTemplateCpp",
   "entries": {
     "Benchmark": [
@@ -1944,6 +1944,42 @@ window.BENCHMARK_DATA = {
             "value": 3.969912562189082,
             "unit": "ms/iter",
             "extra": "iterations: 201\ncpu: 3.468594109452736 ms\nthreads: 1"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "laguna_1989@gmx.net",
+            "name": "Laguna1989",
+            "username": "Laguna1989"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "3162eb4be3e970782df9c7fa66bf438f744aa783",
+          "message": "Merge pull request #113 from Laguna1989/FEATURE_WorldMapGeneration\n\nRefactor tilemap classes for lesser dependencies towards tileson",
+          "timestamp": "2021-12-12T20:26:12+01:00",
+          "tree_id": "317b4fa975fce632b72bc01e74f50d387b7e9f70",
+          "url": "https://github.com/Laguna1989/JamTemplateCpp/commit/3162eb4be3e970782df9c7fa66bf438f744aa783"
+        },
+        "date": 1639337337089,
+        "tool": "googlecpp",
+        "benches": [
+          {
+            "name": "BM_StartGame",
+            "value": 0.3063842892578516,
+            "unit": "ms/iter",
+            "extra": "iterations: 9998\ncpu: 0.07185040808161633 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GamestateWithTweeningShapes",
+            "value": 4.0729024102564635,
+            "unit": "ms/iter",
+            "extra": "iterations: 195\ncpu: 3.467407984615386 ms\nthreads: 1"
           }
         ]
       }
