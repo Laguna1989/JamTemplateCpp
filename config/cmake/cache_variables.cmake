@@ -5,6 +5,7 @@ set(JT_ENABLE_COVERAGE OFF CACHE BOOL "enable coverage")
 set(JT_ENABLE_WEB OFF CACHE BOOL "enable web build using SDL and em++")
 set(JT_ENABLE_AUDIO_TESTS ON CACHE BOOL "enable unittests that require a display")
 set(JT_ENABLE_CLANG_TIDY OFF CACHE BOOL "enable clang tidy checks")
+set(JT_ENABLE_DEBUG ON CACHE BOOL "enable debug options")
 
 # if JT_ENABLE_WEB is ON, it is required to use SDL
 if (JT_ENABLE_WEB)
@@ -12,6 +13,10 @@ if (JT_ENABLE_WEB)
     add_definitions(-DJT_ENABLE_WEB)
 else ()
     set(USE_SFML ON CACHE BOOL "Used SFML as Library")
+endif ()
+
+if (JT_ENABLE_DEBUG)
+    add_definitions(-DJT_ENABLE_DEBUG)
 endif ()
 
 if (USE_SFML)
