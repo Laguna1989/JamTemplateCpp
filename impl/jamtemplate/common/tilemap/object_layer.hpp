@@ -17,18 +17,15 @@ public:
     using Sptr = std::shared_ptr<ObjectLayer>;
 
     /// Constructor
-    /// \param path path to the tilemap file
-    ObjectLayer(std::string const& path,
-        std::shared_ptr<jt::TilemapManagerInterface> tilemapManager, std::string const& layerName);
+    /// \param objects list of objects. Create them yourself or via TilesonLoader
+    ObjectLayer(std::vector<InfoRect> const& objects);
 
     /// get Object Groups from map
     /// \return the object group
     std::vector<InfoRect> getObjects();
 
 private:
-    std::vector<InfoRect> m_objectGroups {};
-
-    void parseObjects(std::unique_ptr<tson::Map>& map, std::string const& layerName);
+    std::vector<InfoRect> m_objects {};
 };
 
 } // namespace tilemap

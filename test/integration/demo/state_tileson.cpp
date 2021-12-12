@@ -8,12 +8,15 @@
 #include "tilemap/tile_layer.hpp"
 #include "tilemap/tilemap_helpers.hpp"
 #include "tilemap/tilemap_manager_tileson_impl.hpp"
+#include "tilemap/tileson_loader.hpp"
 #include "timer.hpp"
 #include <pathfinder/pathfinder.hpp>
 
 void StateTileson::doInternalCreate()
 {
     m_tilemapManager = std::make_shared<jt::TilemapManagerTilesonImpl>();
+    jt::tilemap::TilesonLoader loader { m_tilemapManager, "assets/tileson_test.json" };
+
     m_tileLayerGround = std::make_shared<jt::tilemap::TileLayer>(
         "assets/tileson_test.json", m_tilemapManager, "ground", getGame()->getTextureManager());
     m_tileLayerGround->setScreenSizeHint(jt::Vector2f { 400, 300 });
@@ -22,11 +25,12 @@ void StateTileson::doInternalCreate()
         "assets/tileson_test.json", m_tilemapManager, "overlay", getGame()->getTextureManager());
     m_tileLayerOverlay->setScreenSizeHint(jt::Vector2f { 400, 300 });
 
-    m_objectsLayer = std::make_shared<jt::tilemap::ObjectLayer>(
-        "assets/tileson_test.json", m_tilemapManager, "objects");
+    m_objectsLayer
+        = std::make_shared<jt::tilemap::ObjectLayer>(loader.loadObjectsFromLayer("objects"));
 
     m_nodeLayer = std::make_shared<jt::tilemap::NodeLayer>(
-        "assets/tileson_test.json", m_tilemapManager, "ground", getGame()->getTextureManager());
+        loader.LoadNodesFromLayer("ground", getGame()->getTextureManager()));
+
     for (auto& t : m_nodeLayer->getAllTiles()) {
         add(t);
     }
@@ -133,7 +137,6 @@ void StateTileson::drawObjectLayer() const
         return;
     }
     for (auto& obj : m_objectsLayer->getObjects()) {
-
         auto shape = jt::tilemap::createShapeFrom(obj, getGame()->getTextureManager());
         shape->draw(getGame()->getRenderTarget());
     }

@@ -64,7 +64,7 @@ private:
 
     mutable std::vector<jt::Sprite> m_tileSprites {};
 
-    std::vector<jt::Tile> m_tiles;
+    std::vector<Tile> m_tiles;
     jt::Vector2u m_mapSizeInZiles;
 
     jt::Vector2f m_position { 0.0f, 0.0f };
