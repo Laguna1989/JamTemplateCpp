@@ -31,9 +31,8 @@ void StateSimplexNoise::doInternalDraw() const
         }
     }
 
-    //    auto max = *std::max_element(randomNumbers.begin(), randomNumbers.end());
-
-    auto max = 1.0f;
+    auto max = *std::max_element(randomNumbers.begin(), randomNumbers.end());
+        
     for (auto i = 0; i != 100; ++i) {
         for (auto j = 0; j != 100; ++j) {
             shape.setPosition(jt::Vector2f { 32 + i * 2.0f, 32 + j * 2.0f });
