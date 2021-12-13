@@ -32,7 +32,7 @@ private:
     const long m_defaultSeed;
 
     std::default_random_engine m_engine;
-    std::uniform_int<std::int64_t> distr;
+    std::uniform_int_distribution<std::int64_t> distr;
 
     std::array<short, 256> m_perm;
     std::array<short, 256> m_permGradIndex3d;
