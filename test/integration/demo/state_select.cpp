@@ -25,7 +25,7 @@ void StateSelect::doInternalCreate()
     AddButton<StatePathfinding>("Pathfinding");
     AddButton<StateGradient>("Palettes");
     AddButton<StateImGui>("ImGui");
-    AddButton<StateSimplexNoise>("Simplex Noise");
+    AddButton<StateSimplexNoise>("3D Noise");
 }
 
 void StateSelect::doInternalUpdate(float /*elapsed*/)
