@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1639496318184,
+  "lastUpdate": 1639509928039,
   "repoUrl": "https://github.com/Laguna1989/JamTemplateCpp",
   "entries": {
     "Benchmark": [
@@ -2016,6 +2016,42 @@ window.BENCHMARK_DATA = {
             "value": 3.3088413852456666,
             "unit": "ms/iter",
             "extra": "iterations: 244\ncpu: 2.8740700819672136 ms\nthreads: 1"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "laguna.ws@gmail.com",
+            "name": "Simon Weis",
+            "username": "Laguna1989"
+          },
+          "committer": {
+            "email": "laguna.ws@gmail.com",
+            "name": "Simon Weis",
+            "username": "Laguna1989"
+          },
+          "distinct": true,
+          "id": "17bd943b29d9b85d43bbc8d48ea3c99159d21736",
+          "message": "Add particle system about sparks",
+          "timestamp": "2021-12-14T20:22:41+01:00",
+          "tree_id": "2dfcff47626c0b89f00f028481036ad967589345",
+          "url": "https://github.com/Laguna1989/JamTemplateCpp/commit/17bd943b29d9b85d43bbc8d48ea3c99159d21736"
+        },
+        "date": 1639509926811,
+        "tool": "googlecpp",
+        "benches": [
+          {
+            "name": "BM_StartGame",
+            "value": 0.38227272219999975,
+            "unit": "ms/iter",
+            "extra": "iterations: 10000\ncpu: 0.051913440000000005 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GamestateWithTweeningShapes",
+            "value": 5.348528806584329,
+            "unit": "ms/iter",
+            "extra": "iterations: 243\ncpu: 2.8878958847736635 ms\nthreads: 1"
           }
         ]
       }
