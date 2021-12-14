@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1639337337616,
+  "lastUpdate": 1639496318184,
   "repoUrl": "https://github.com/Laguna1989/JamTemplateCpp",
   "entries": {
     "Benchmark": [
@@ -1980,6 +1980,42 @@ window.BENCHMARK_DATA = {
             "value": 4.0729024102564635,
             "unit": "ms/iter",
             "extra": "iterations: 195\ncpu: 3.467407984615386 ms\nthreads: 1"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "laguna_1989@gmx.net",
+            "name": "Laguna1989",
+            "username": "Laguna1989"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "047d9ee652bd8ce0269a80660d56622ce10ff2af",
+          "message": "Merge pull request #114 from Laguna1989/FEATURE_OpenSimplexNoise\n\nFeature open simplex noise",
+          "timestamp": "2021-12-14T16:36:04+01:00",
+          "tree_id": "140ae81a2a23754a87aced8ff08c89bf53150df5",
+          "url": "https://github.com/Laguna1989/JamTemplateCpp/commit/047d9ee652bd8ce0269a80660d56622ce10ff2af"
+        },
+        "date": 1639496316992,
+        "tool": "googlecpp",
+        "benches": [
+          {
+            "name": "BM_StartGame",
+            "value": 0.2565683434104562,
+            "unit": "ms/iter",
+            "extra": "iterations: 13529\ncpu: 0.05266086185231725 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GamestateWithTweeningShapes",
+            "value": 3.3088413852456666,
+            "unit": "ms/iter",
+            "extra": "iterations: 244\ncpu: 2.8740700819672136 ms\nthreads: 1"
           }
         ]
       }
