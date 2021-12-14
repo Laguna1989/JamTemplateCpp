@@ -27,10 +27,6 @@ void StateTileson::doInternalCreate()
     m_nodeLayer = std::make_shared<jt::tilemap::NodeLayer>(
         loader.loadNodesFromLayer("ground", getGame()->getTextureManager()));
 
-    for (auto& t : m_nodeLayer->getAllTiles()) {
-        add(t);
-    }
-
     m_actor = std::make_shared<Actor>();
 
     add(m_actor);
@@ -44,6 +40,10 @@ void StateTileson::doInternalUpdate(float const elapsed)
     m_tileLayerGround->update(elapsed);
 
     m_tileLayerOverlay->update(elapsed);
+
+    for (auto& t : m_nodeLayer->getAllTiles()) {
+        t->getDrawable()->update(elapsed);
+    }
 
     moveCamera(elapsed);
 
@@ -114,7 +114,7 @@ void StateTileson::drawNodeLayer() const
         return;
     }
     for (auto& t : m_nodeLayer->getAllTiles()) {
-        t->draw();
+        t->getDrawable()->draw(getGame()->getRenderTarget());
     }
 }
 void StateTileson::drawTileLayers() const
@@ -146,7 +146,7 @@ void StateTileson::calculatePath(jt::pathfinder::NodeT start, jt::pathfinder::No
         auto const pos = n->getTilePosition();
         auto t = m_nodeLayer->getTileAt(static_cast<int>(pos.x), static_cast<int>(pos.y));
         if (t) {
-            t->setColor(jt::colors::Cyan);
+            t->getDrawable()->setColor(jt::colors::Cyan);
         }
     }
 
