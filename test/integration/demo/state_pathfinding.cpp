@@ -81,10 +81,6 @@ void StatePathfinding::createTiles()
     getTileAt(5, 5)->setBlocked(true);
 
     getTileAt(9, 5)->setBlocked(true);
-
-    //    for (auto& t : m_tiles) {
-    //        add(t);
-    //    }
 }
 
 void StatePathfinding::doInternalUpdate(float elapsed)
