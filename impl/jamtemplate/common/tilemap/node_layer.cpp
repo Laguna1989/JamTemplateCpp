@@ -58,7 +58,7 @@ void NodeLayer::reset()
         if (!t->getBlocked()) {
             color = jt::MakeColor::FromRGBA(255, 255, 255, 100);
         }
-        t->setColor(color);
+        t->getDrawable()->setColor(color);
         t->reset();
     }
 }

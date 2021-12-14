@@ -22,7 +22,7 @@ void StatePathfinding::calculatePath(jt::pathfinder::NodeT start, jt::pathfinder
         auto const pos = n->getTilePosition();
         auto t = getTileAt(static_cast<int>(pos.x), static_cast<int>(pos.y));
         if (t) {
-            t->setColor(jt::colors::Cyan);
+            t->getDrawable()->setColor(jt::colors::Cyan);
         }
     }
 }
@@ -81,13 +81,9 @@ void StatePathfinding::createTiles()
     getTileAt(5, 5)->setBlocked(true);
 
     getTileAt(9, 5)->setBlocked(true);
-
-    for (auto& t : m_tiles) {
-        add(t);
-    }
 }
 
-void StatePathfinding::doInternalUpdate(float /*elapsed*/)
+void StatePathfinding::doInternalUpdate(float elapsed)
 {
     if (getGame()->input()->keyboard()->justPressed(jt::KeyCode::Escape)) {
         getGame()->getStateManager()->switchState(std::make_shared<StateSelect>());
@@ -101,9 +97,18 @@ void StatePathfinding::doInternalUpdate(float /*elapsed*/)
             getTileAt(jt::Random::getInt(0, mapSizeX - 1), jt::Random::getInt(0, mapSizeY - 1))
                 ->getNode());
     }
+
+    for (auto& t : m_tiles) {
+        t->getDrawable()->update(elapsed);
+    }
 }
 
-void StatePathfinding::doInternalDraw() const { }
+void StatePathfinding::doInternalDraw() const
+{
+    for (auto& t : m_tiles) {
+        t->getDrawable()->draw(getGame()->getRenderTarget());
+    }
+}
 
 std::shared_ptr<jt::tilemap::TileNode> StatePathfinding::getTileAt(int x, int y)
 {

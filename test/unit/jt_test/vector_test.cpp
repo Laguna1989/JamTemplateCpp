@@ -1,14 +1,14 @@
 ﻿#include "vector.hpp"
 #include <gtest/gtest.h>
 
-TEST(VectorTest, DefaultValues)
+TEST(Vector2fTest, DefaultValues)
 {
     jt::Vector2f vec;
     ASSERT_EQ(vec.x, 0.0f);
     ASSERT_EQ(vec.y, 0.0f);
 }
 
-TEST(VectorTest, Equal)
+TEST(Vector2fTest, Equal)
 {
     jt::Vector2f const initial { 5.0f, -1.245f };
     jt::Vector2f const initial2 { initial };
@@ -17,7 +17,7 @@ TEST(VectorTest, Equal)
     ASSERT_FALSE(initial != initial2);
 }
 
-TEST(VectorTest, NotEqual)
+TEST(Vector2fTest, NotEqual)
 {
     jt::Vector2f const initial { 5.0f, -1.245f };
     jt::Vector2f const add { 0.0f, 0.0f };
@@ -26,7 +26,7 @@ TEST(VectorTest, NotEqual)
     ASSERT_TRUE(initial != add);
 }
 
-TEST(VectorTest, AddZereo)
+TEST(Vector2fTest, AddZereo)
 {
     jt::Vector2f const initial { 5.0f, -1.245f };
     jt::Vector2f const add { 0.0f, 0.0f };
@@ -34,7 +34,7 @@ TEST(VectorTest, AddZereo)
     ASSERT_EQ(initial, initial + add);
 }
 
-TEST(VectorTest, AddReal)
+TEST(Vector2fTest, AddReal)
 {
     jt::Vector2f const initial { 5.0f, -1.245f };
     jt::Vector2f const add { 1.0f, 1.0f };
@@ -43,7 +43,7 @@ TEST(VectorTest, AddReal)
     ASSERT_EQ(initial + add, expected);
 }
 
-TEST(VectorTest, AddEQZero)
+TEST(Vector2fTest, AddEQZero)
 {
     jt::Vector2f const initial { 5.0f, -1.245f };
     jt::Vector2f copy { initial };
@@ -52,7 +52,7 @@ TEST(VectorTest, AddEQZero)
     ASSERT_EQ(copy, initial);
 }
 
-TEST(VectorTest, AddEQReal)
+TEST(Vector2fTest, AddEQReal)
 {
     jt::Vector2f initial { 5.0f, -1.245f };
     jt::Vector2f const add { 1.0f, -1.0f };
@@ -61,7 +61,7 @@ TEST(VectorTest, AddEQReal)
     ASSERT_EQ(initial, expected);
 }
 
-TEST(VectorTest, SubtractZereo)
+TEST(Vector2fTest, SubtractZereo)
 {
     jt::Vector2f const initial { 5.0f, -1.245f };
     jt::Vector2f const add { 0.0f, 0.0f };
@@ -69,7 +69,7 @@ TEST(VectorTest, SubtractZereo)
     ASSERT_EQ(initial, initial - add);
 }
 
-TEST(VectorTest, SubtractReal)
+TEST(Vector2fTest, SubtractReal)
 {
     jt::Vector2f const initial { 5.0f, -1.245f };
     jt::Vector2f const add { 1.0f, 1.0f };
@@ -78,7 +78,7 @@ TEST(VectorTest, SubtractReal)
     ASSERT_EQ(initial - add, expected);
 }
 
-TEST(VectorTest, SubEQZero)
+TEST(Vector2fTest, SubEQZero)
 {
     jt::Vector2f const initial { 5.0f, -1.245f };
     jt::Vector2f copy { initial };
@@ -87,7 +87,7 @@ TEST(VectorTest, SubEQZero)
     ASSERT_EQ(copy, initial);
 }
 
-TEST(VectorTest, SubEQReal)
+TEST(Vector2fTest, SubEQReal)
 {
     jt::Vector2f initial { 5.0f, -1.245f };
     jt::Vector2f const add { 1.0f, -1.0f };
@@ -97,13 +97,13 @@ TEST(VectorTest, SubEQReal)
     ASSERT_EQ(initial.y, expected.y);
 }
 
-TEST(VectorTest, MultiplyOne)
+TEST(Vector2fTest, MultiplyOne)
 {
     jt::Vector2f const initial { 4.2f, 1.1111f };
     ASSERT_EQ(initial * 1.0f, initial);
 }
 
-TEST(VectorTest, MultiplyReal)
+TEST(Vector2fTest, MultiplyReal)
 {
     jt::Vector2f const initial { 4.2f, 1.1111f };
     float const v = 2.5f;
@@ -111,13 +111,13 @@ TEST(VectorTest, MultiplyReal)
     ASSERT_EQ(initial * v, expected);
 }
 
-TEST(VectorTest, DivideOne)
+TEST(Vector2fTest, DivideOne)
 {
     jt::Vector2f const initial { 4.2f, 1.1111f };
     ASSERT_EQ(initial / 1.0f, initial);
 }
 
-TEST(VectorTest, DivideReal)
+TEST(Vector2fTest, DivideReal)
 {
     jt::Vector2f const initial { 4.2f, 1.1111f };
     float const v = 2.5f;
@@ -212,5 +212,23 @@ TEST(Vector2UAddEqual, AddReal)
     jt::Vector2u const add { 1, 2 };
     jt::Vector2u const expected { initial.x + add.x, initial.y + add.y };
     initial += add;
+    ASSERT_EQ(initial, expected);
+}
+
+TEST(Vector2UAddEqual, SubtractZero)
+{
+    jt::Vector2u const initial { 5, 1 };
+    jt::Vector2u copy { initial };
+    jt::Vector2u const sub { 0, 0 };
+    copy -= sub;
+    ASSERT_EQ(copy, initial);
+}
+
+TEST(Vector2UAddEqual, SubtractReal)
+{
+    jt::Vector2u initial { 5, 1 };
+    jt::Vector2u const sub { 1, 2 };
+    jt::Vector2u const expected { initial.x - sub.x, initial.y - sub.y };
+    initial -= sub;
     ASSERT_EQ(initial, expected);
 }
