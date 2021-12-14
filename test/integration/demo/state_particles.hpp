@@ -2,6 +2,7 @@
 #ifndef GUARD_JAMTEMAPLTE_STATE_PARTICLES_H
 #define GUARD_JAMTEMAPLTE_STATE_PARTICLES_H
 
+#include "animation.hpp"
 #include "circular_buffer.hpp"
 #include "game_state.hpp"
 #include "particle_system.hpp"
@@ -21,6 +22,8 @@ private:
     void doInternalDraw() const override;
     std::shared_ptr<jt::ParticleSystem<jt::Shape, numberOfParticles>> m_particlesGlitter;
     std::shared_ptr<jt::ParticleSystem<jt::Shape, 200>> m_particlesFire;
+    std::shared_ptr<jt::ParticleSystem<jt::Animation, 80>> m_sparkParticles;
+
     jt::CircularBuffer<float, 200> m_timeMeasurement;
     void createParticlesGlitter();
     void createParticlesFire();

@@ -14,6 +14,28 @@ void StateParticles::doInternalCreate()
 {
     createParticlesGlitter();
     createParticlesFire();
+    auto rng = std::default_random_engine {};
+
+    m_sparkParticles = jt::ParticleSystem<jt::Animation, 80>::createPS(
+        [this, &rng]() {
+            auto a = std::make_shared<jt::Animation>();
+            std::vector<unsigned int> numbers = jt::MathHelper::numbersBetween(0u, 7u);
+
+            std::shuffle(numbers.begin(), numbers.end(), rng);
+
+            a->add("assets/spark.png", "spark", jt::Vector2u { 24, 24 }, numbers,
+                jt::Random::getFloat(0.05f, 0.175f), getGame()->getTextureManager());
+            a->play("spark");
+            a->setOrigin(jt::Vector2f { 12, 12 });
+            a->setPosition(jt::Vector2f { -2000.0f, -2000.0f });
+            return a;
+        },
+        [this](auto a) {
+            auto startPosition = jt::Random::getRandomPointIn(jt::Rectf { 210, 50, 80, 200 });
+            a->setPosition(startPosition);
+            a->setRotation(jt::Random::getFloat(0.0f, 360.0f));
+        });
+    add(m_sparkParticles);
 }
 void StateParticles::createParticlesFire()
 {
@@ -29,7 +51,7 @@ void StateParticles::createParticlesFire()
         [this](auto s) {
             auto totalTime = 0.9f;
 
-            auto startPosition = jt::Random::getRandomPointIn(jt::Rectf { 295, 250, 10, 0 });
+            auto startPosition = jt::Random::getRandomPointIn(jt::Rectf { 155, 250, 10, 0 });
             s->setPosition(startPosition);
 
             s->setScale(jt::Vector2f { 0.5f, 0.5f });
@@ -92,7 +114,7 @@ void StateParticles::createParticlesGlitter()
             return s;
         },
         [this](auto s) {
-            s->setPosition(jt::Random::getRandomPointIn(jt::Rectf { 0, 0, 200, 300 }));
+            s->setPosition(jt::Random::getRandomPointIn(jt::Rectf { 0, 0, 100, 300 }));
 
             auto twa = jt::TweenAlpha::create(s, 0.5, 255, 0);
             twa->setSkipFrames(1);
@@ -109,6 +131,7 @@ void StateParticles::doInternalUpdate(float elapsed)
 {
     m_particlesGlitter->Fire(toFire);
     m_particlesFire->Fire(1);
+    m_sparkParticles->Fire(1);
 
     if (getGame()->input()->keyboard()->justPressed(jt::KeyCode::Escape)) {
         getGame()->getStateManager()->switchState(std::make_shared<StateSelect>());
