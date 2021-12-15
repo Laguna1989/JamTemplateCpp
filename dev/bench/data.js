@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1639513995307,
+  "lastUpdate": 1639602169066,
   "repoUrl": "https://github.com/Laguna1989/JamTemplateCpp",
   "entries": {
     "Benchmark": [
@@ -2088,6 +2088,42 @@ window.BENCHMARK_DATA = {
             "value": 3.9750064278846455,
             "unit": "ms/iter",
             "extra": "iterations: 208\ncpu: 3.4375336538461547 ms\nthreads: 1"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "laguna_1989@gmx.net",
+            "name": "Laguna1989",
+            "username": "Laguna1989"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "ba1542a7e5c99fd75155491896461a298cf0e47b",
+          "message": "Merge pull request #116 from Laguna1989/Coverage\n\nAdd more tests for coverage",
+          "timestamp": "2021-12-15T22:00:19+01:00",
+          "tree_id": "462f5edcb65df75102bfd800287315eca6cfb100",
+          "url": "https://github.com/Laguna1989/JamTemplateCpp/commit/ba1542a7e5c99fd75155491896461a298cf0e47b"
+        },
+        "date": 1639602167978,
+        "tool": "googlecpp",
+        "benches": [
+          {
+            "name": "BM_StartGame",
+            "value": 0.4527062006242896,
+            "unit": "ms/iter",
+            "extra": "iterations: 7048\ncpu: 0.09805788876276958 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GamestateWithTweeningShapes",
+            "value": 3.621491265116172,
+            "unit": "ms/iter",
+            "extra": "iterations: 215\ncpu: 3.2477516279069776 ms\nthreads: 1"
           }
         ]
       }
