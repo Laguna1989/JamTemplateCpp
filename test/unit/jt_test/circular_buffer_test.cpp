@@ -173,3 +173,33 @@ TEST(CircularBufferIterators, ValueAtCEnd)
     --clast;
     ASSERT_EQ(value2, *(clast));
 }
+
+TEST(CircularBufferPushIndexTest, InitialValue)
+{
+    auto buffer = jt::CircularBuffer<unsigned int, 2> {};
+    ASSERT_EQ(buffer.getPushIndex(), 0U);
+}
+
+TEST(CircularBufferPushIndexTest, ValueAfterPush)
+{
+    auto buffer = jt::CircularBuffer<unsigned int, 2> {};
+    buffer.push(1u);
+    ASSERT_EQ(buffer.getPushIndex(), 1U);
+}
+
+TEST(CircularBufferPushIndexTest, ValueAfterTwoPushes)
+{
+    auto buffer = jt::CircularBuffer<unsigned int, 2> {};
+    buffer.push(1u);
+    buffer.push(2u);
+    ASSERT_EQ(buffer.getPushIndex(), 2U);
+}
+
+TEST(CircularBufferPushIndexTest, ValueAfterThreePushes)
+{
+    auto buffer = jt::CircularBuffer<unsigned int, 2> {};
+    buffer.push(1u);
+    buffer.push(2u);
+    buffer.push(3u);
+    ASSERT_EQ(buffer.getPushIndex(), 3U);
+}
