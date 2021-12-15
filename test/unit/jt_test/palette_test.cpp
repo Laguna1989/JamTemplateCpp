@@ -140,6 +140,19 @@ TEST(PaletteParseGPL, GPLWithOneEntry)
     ASSERT_EQ(pal.getColor(0), jt::MakeColor::FromRGB(64, 0, 64));
 }
 
+TEST(PaletteParseGPL, GPLWithInvalidEntry)
+{
+    auto const input = R"(GIMP Palette
+#Palette Name: MS Paint Basic
+#Description: The "Basic" Palette Used In The Program, MS Paint
+#Colors: 1
+64	0	64	400040 1234
+
+)";
+
+    ASSERT_THROW(jt::Palette::parseGPL(input), std::invalid_argument);
+}
+
 TEST(PaletteParseGPL, GPLWithMultipleEntries)
 {
     auto const input = R"(GIMP Palette

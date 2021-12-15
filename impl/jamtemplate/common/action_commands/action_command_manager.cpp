@@ -22,10 +22,7 @@ void ActionCommandManager::executeCommand(std::string const& fullCommandString)
         m_registeredCommands.cend(), [&commandIdentifierString](auto const& c) {
             auto const currentCommandToBeChecked = std::get<0>(c);
             if (commandIdentifierString == currentCommandToBeChecked) {
-                auto const shared_state = std::get<1>(c);
-                if (shared_state.expired()) {
-                    return false;
-                }
+                // If weird behaviour occurs, add a check if shared state is still alive here.
                 return true;
             }
             return false;

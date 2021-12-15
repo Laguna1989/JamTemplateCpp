@@ -21,7 +21,7 @@ INSTANTIATE_TEST_SUITE_P(DrawableImplTest, DrawableImplTestFixture,
     ::testing::Values(std::make_shared<SpriteFactory>(), std::make_shared<AnimationFactory>(),
         std::make_shared<ShapeFactory>(), std::make_shared<TextFactory>(),
         std::make_shared<BarFactory>(), std::make_shared<TileMapFactory>(),
-        std::make_shared<LineFactory>()));
+        std::make_shared<TileMapFactoryWithoutScreenSizeHint>(), std::make_shared<LineFactory>()));
 
 TEST_P(DrawableImplTestFixture, GlobalBoundsEqualLocalBoundsInitially)
 {

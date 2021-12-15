@@ -88,6 +88,19 @@ public:
     }
 };
 
+class TileMapFactoryWithoutScreenSizeHint : public DrawableFactoryInterface {
+public:
+    std::shared_ptr<jt::TilemapManagerTilesonImpl> tilemapManager;
+    std::shared_ptr<jt::DrawableInterface> createDrawable(
+        std::shared_ptr<jt::TextureManagerInterface> textureManager) override
+    {
+        jt::tilemap::TilesonLoader loader("assets/tileson_test.json");
+        auto t = std::make_shared<jt::tilemap::TileLayer>(
+            loader.loadTilesFromLayer("ground", textureManager));
+        return t;
+    }
+};
+
 class LineFactory : public DrawableFactoryInterface {
 public:
     std::shared_ptr<jt::DrawableInterface> createDrawable(

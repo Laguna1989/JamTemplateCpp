@@ -1,4 +1,5 @@
 ﻿#include "game_test.hpp"
+#include "action_commands/basic_action_commands.hpp"
 #include "mocks/mock_state.hpp"
 #include "mocks/mock_state_manager.hpp"
 #include "render_window.hpp"
@@ -89,6 +90,12 @@ TEST_F(GameTest, GameRunWithStateThrowingIntException)
         .WillByDefault(::testing::Invoke([](auto /*elapsed*/) { throw int { 5 }; }));
     g->getStateManager()->switchState(state);
     ASSERT_THROW(g->runOneFrame(), int);
+}
+
+TEST_F(GameTest, BasicActionCommands)
+{
+    addBasicActionCommands(*g);
+    ASSERT_FALSE(g->getActionCommandManager()->getAllCommands().empty());
 }
 
 TEST_F(GameTest, GetRenderWindowDoesNotReturnNullptr) { ASSERT_NE(g->getRenderWindow(), nullptr); }
