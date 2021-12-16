@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1639602169066,
+  "lastUpdate": 1639678004147,
   "repoUrl": "https://github.com/Laguna1989/JamTemplateCpp",
   "entries": {
     "Benchmark": [
@@ -2124,6 +2124,42 @@ window.BENCHMARK_DATA = {
             "value": 3.621491265116172,
             "unit": "ms/iter",
             "extra": "iterations: 215\ncpu: 3.2477516279069776 ms\nthreads: 1"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "laguna.ws@gmail.com",
+            "name": "Simon Weis",
+            "username": "Laguna1989"
+          },
+          "committer": {
+            "email": "laguna.ws@gmail.com",
+            "name": "Simon Weis",
+            "username": "Laguna1989"
+          },
+          "distinct": true,
+          "id": "491f9451039fb77155e3d4873d1d3693f92de824",
+          "message": "Add working input for sdl webbuild",
+          "timestamp": "2021-12-16T19:03:36+01:00",
+          "tree_id": "0ccd66a3df20515d25d43f4cde2af90f4c17f434",
+          "url": "https://github.com/Laguna1989/JamTemplateCpp/commit/491f9451039fb77155e3d4873d1d3693f92de824"
+        },
+        "date": 1639678003689,
+        "tool": "googlecpp",
+        "benches": [
+          {
+            "name": "BM_StartGame",
+            "value": 0.26977336768254695,
+            "unit": "ms/iter",
+            "extra": "iterations: 11189\ncpu: 0.0624015640361069 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GamestateWithTweeningShapes",
+            "value": 3.7006100327102462,
+            "unit": "ms/iter",
+            "extra": "iterations: 214\ncpu: 3.182081308411215 ms\nthreads: 1"
           }
         ]
       }
