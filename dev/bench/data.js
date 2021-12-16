@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1639679260456,
+  "lastUpdate": 1639679691130,
   "repoUrl": "https://github.com/Laguna1989/JamTemplateCpp",
   "entries": {
     "Benchmark": [
@@ -2232,6 +2232,42 @@ window.BENCHMARK_DATA = {
             "value": 3.4111287890295743,
             "unit": "ms/iter",
             "extra": "iterations: 237\ncpu: 2.925614345991561 ms\nthreads: 1"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "laguna.ws@gmail.com",
+            "name": "Simon Weis",
+            "username": "Laguna1989"
+          },
+          "committer": {
+            "email": "laguna.ws@gmail.com",
+            "name": "Simon Weis",
+            "username": "Laguna1989"
+          },
+          "distinct": true,
+          "id": "999b467d72a78f8daf1bfdb0a45baf6cf1aa70bf",
+          "message": "Remove calls to imgui_sdl from non_web builds as they seem broken",
+          "timestamp": "2021-12-16T19:31:38+01:00",
+          "tree_id": "f0ca9cfdaf29f53a086e4635ecef737621942c81",
+          "url": "https://github.com/Laguna1989/JamTemplateCpp/commit/999b467d72a78f8daf1bfdb0a45baf6cf1aa70bf"
+        },
+        "date": 1639679690028,
+        "tool": "googlecpp",
+        "benches": [
+          {
+            "name": "BM_StartGame",
+            "value": 0.543786740173914,
+            "unit": "ms/iter",
+            "extra": "iterations: 5750\ncpu: 0.12841930434782609 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GamestateWithTweeningShapes",
+            "value": 5.59669375392667,
+            "unit": "ms/iter",
+            "extra": "iterations: 191\ncpu: 3.566247120418848 ms\nthreads: 1"
           }
         ]
       }
