@@ -8,8 +8,8 @@ namespace jt {
 namespace tilemap {
 
 TileLayer::TileLayer(std::vector<TileInfo> const& tileInfo, std::vector<jt::Sprite> tileSetSprites)
-    : m_tiles { tileInfo }
-    , m_tileSetSprites { tileSetSprites }
+    : m_tileSetSprites { tileSetSprites }
+    , m_tiles { tileInfo }
 {
 }
 

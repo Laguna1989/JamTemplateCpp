@@ -1,5 +1,6 @@
 ﻿#include "render_window_lib.hpp"
 #include "imgui.h"
+#include "imgui_impl_sdl.h"
 #include "imgui_sdl.h"
 #include <SDL2/SDL.h>
 #include <iostream>
@@ -17,6 +18,7 @@ RenderWindow::RenderWindow(unsigned int width, unsigned int height, std::string 
     if (!m_window) {
         throw std::logic_error { "Failed to create window." };
     }
+    ImGui_ImplSDL2_InitForMetal(m_window.get());
 }
 
 std::shared_ptr<jt::renderTarget> RenderWindow::createRenderTarget()
@@ -42,7 +44,7 @@ void RenderWindow::checkForClose()
     SDL_Event event;
     while (SDL_PollEvent(&event)) {
         // TODO make input work
-        //        ImGui_ImplSDL2_ProcessEvent(&event);
+        ImGui_ImplSDL2_ProcessEvent(&event);
         switch (event.type) {
         case SDL_QUIT:
             m_isOpen = false;
@@ -91,6 +93,9 @@ bool RenderWindow::getMouseCursorVisible() const { return m_isMouseCursorVisible
 
 void RenderWindow::updateGui(float elapsed)
 {
+    // actually we do not care about the initialization of the backend. However InitForMetal does
+    // not do anything more than initializing the keymap, which is exactly what we want here.
+    ImGui_ImplSDL2_InitForMetal(m_window.get());
     ImGuiIO& io = ImGui::GetIO();
     io.DeltaTime = elapsed;
     int mx { 0 };

@@ -33,7 +33,6 @@ private:
     std::default_random_engine m_engine;
     std::uniform_int_distribution<std::int64_t> distr;
     std::array<short, 256> m_perm;
-    std::array<short, 256> m_permGradIndex3d;
     std::array<char, 16> m_gradients2d;
     float extrapolate(int xsb, int ysb, float dx, float dy) const;
 };

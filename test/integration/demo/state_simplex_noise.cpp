@@ -18,7 +18,6 @@ void StateSimplexNoise::doInternalDraw() const
     jt::Shape shape;
     shape.makeRect(jt::Vector2f { 2.0f, 2.0f }, getGame()->getTextureManager());
 
-    float maxLast = 0;
     std::vector<float> randomNumbers(100 * 100, 0.0f);
     for (auto i = 0; i != 100; ++i) {
         for (auto j = 0; j != 100; ++j) {

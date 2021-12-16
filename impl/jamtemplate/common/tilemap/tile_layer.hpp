@@ -55,11 +55,9 @@ public:
     void setScreenSizeHint(jt::Vector2f const& hint);
 
 private:
-    std::shared_ptr<jt::TextureManagerInterface> m_textureManager;
-
     mutable std::vector<jt::Sprite> m_tileSetSprites {};
 
-    std::vector<TileInfo> m_tiles;
+    std::vector<TileInfo> m_tiles {};
 
     jt::Vector2f m_position { 0.0f, 0.0f };
     jt::Vector2f m_origin { 0.0f, 0.0f };

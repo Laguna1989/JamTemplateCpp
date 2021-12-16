@@ -50,30 +50,23 @@ GameBase::GameBase(std::shared_ptr<jt::RenderWindowInterface> renderWindow,
 
 void GameBase::runOneFrame()
 {
-    try {
-        getLogger()->verbose("runOneFrame", { "jt" });
-        m_actionCommandManager->update();
-        m_stateManager->checkAndPerformSwitchState(getPtr());
+    getLogger()->verbose("runOneFrame", { "jt" });
+    m_actionCommandManager->update();
+    m_stateManager->checkAndPerformSwitchState(getPtr());
 
-        auto const now = std::chrono::steady_clock::now();
+    auto const now = std::chrono::steady_clock::now();
 
-        float const elapsed_in_seconds
-            = std::chrono::duration_cast<std::chrono::microseconds>(now - m_timeLast).count()
-            / 1000.0f / 1000.0f;
-        m_timeLast = now;
+    float const elapsed_in_seconds
+        = std::chrono::duration_cast<std::chrono::microseconds>(now - m_timeLast).count() / 1000.0f
+        / 1000.0f;
+    m_timeLast = now;
 
-        if (m_age != 0) {
-            getCamera()->update(elapsed_in_seconds);
-            update(elapsed_in_seconds);
-            draw();
-        }
-        m_age++;
-
-    } catch (std::exception const& e) {
-        std::cerr << "!! ERROR: Exception occurred !!\n";
-        std::cerr << e.what() << std::endl;
-        throw;
+    if (m_age != 0) {
+        getCamera()->update(elapsed_in_seconds);
+        update(elapsed_in_seconds);
+        draw();
     }
+    m_age++;
 }
 
 std::weak_ptr<GameInterface> GameBase::getPtr() { return shared_from_this(); }
