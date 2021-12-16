@@ -1,0 +1,47 @@
+#include "ease_object.hpp"
+#include "drawable_helpers.hpp"
+#include "game_interface.hpp"
+
+EaseObject::EaseObject(std::string const& name,
+    std::function<float(float, float, float, float)> func, jt::Vector2f offset)
+{
+    m_textString = name;
+    m_func = func;
+    m_offset = offset;
+}
+
+void EaseObject::doCreate()
+{
+    m_backgroundShape = jt::dh::createShapeRect(
+        jt::Vector2f { 64.0f, 64.0f }, jt::colors::Gray, getGame()->getTextureManager());
+    m_backgroundShape->setPosition(m_offset);
+    m_objectShape = jt::dh::createShapeCircle(3, jt::colors::Red, getGame()->getTextureManager());
+    m_text = jt::dh::createText(getGame()->getRenderTarget(), m_textString, 10);
+    m_text->setTextAlign(jt::Text::TextAlign::LEFT);
+    m_text->setPosition(m_offset + jt::Vector2f { 0.0f, 64.0f });
+}
+
+void EaseObject::doUpdate(float const elapsed)
+{
+    m_backgroundShape->update(elapsed);
+
+    auto const max = 1.5f;
+    auto v = getAge();
+    while (v >= max) {
+        v -= max;
+    }
+    v /= max;
+
+    auto translatedValue = m_func(v, 0.0f, 1.0f, 1.0f);
+    jt::Vector2f const pos { m_offset.x + v * 60.0f, m_offset.y + 58.0f - translatedValue * 60.0f };
+    m_objectShape->setPosition(pos);
+    m_objectShape->update(elapsed);
+
+    m_text->update(elapsed);
+}
+void EaseObject::doDraw() const
+{
+    m_backgroundShape->draw(getGame()->getRenderTarget());
+    m_objectShape->draw(getGame()->getRenderTarget());
+    m_text->draw(getGame()->getRenderTarget());
+}

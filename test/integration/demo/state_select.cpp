@@ -1,5 +1,6 @@
 ﻿#include "state_select.hpp"
 #include "state_box2d.hpp"
+#include "state_easing.hpp"
 #include "state_explosion.hpp"
 #include "state_gradient.hpp"
 #include "state_imgui.hpp"
@@ -26,6 +27,7 @@ void StateSelect::doInternalCreate()
     AddButton<StateGradient>("Palettes");
     AddButton<StateImGui>("ImGui");
     AddButton<StateSimplexNoise>("3D Noise");
+    AddButton<StateEasing>("Easing");
 }
 
 void StateSelect::doInternalUpdate(float /*elapsed*/)
