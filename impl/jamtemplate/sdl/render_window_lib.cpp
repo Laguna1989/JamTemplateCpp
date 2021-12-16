@@ -18,7 +18,6 @@ RenderWindow::RenderWindow(unsigned int width, unsigned int height, std::string 
     if (!m_window) {
         throw std::logic_error { "Failed to create window." };
     }
-    ImGui_ImplSDL2_InitForMetal(m_window.get());
 }
 
 std::shared_ptr<jt::renderTarget> RenderWindow::createRenderTarget()
