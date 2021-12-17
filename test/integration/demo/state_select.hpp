@@ -32,7 +32,7 @@ private:
     template <class State>
     void AddButton(std::string const& textString)
     {
-        int const indexX = m_buttonCount / 11;
+        int const indexX = static_cast<int>(m_buttonCount) / 11;
         int const indexY = m_buttonCount % 11;
         float const posX
             = detail::buttonOffsetX + indexX * (detail::buttonSizeX + detail::buttonMarginX);

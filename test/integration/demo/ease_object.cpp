@@ -7,7 +7,11 @@ EaseObject::EaseObject(std::string const& name,
 {
     m_textString = name;
     m_func = func;
-    m_offset = offset;
+    jt::Vector2f const ofs { 16.0f, 16.0f };
+
+    float const spacingX = 80.0f;
+    float const spacingY = 84.0f;
+    m_offset = ofs + jt::Vector2f { offset.x * spacingX, offset.y * spacingY };
 }
 
 void EaseObject::doCreate()
@@ -18,7 +22,7 @@ void EaseObject::doCreate()
     m_objectShape = jt::dh::createShapeCircle(3, jt::colors::Red, getGame()->getTextureManager());
     m_text = jt::dh::createText(getGame()->getRenderTarget(), m_textString, 10);
     m_text->setTextAlign(jt::Text::TextAlign::LEFT);
-    m_text->setPosition(m_offset + jt::Vector2f { 0.0f, 64.0f });
+    m_text->setPosition(m_backgroundShape->getPosition() + jt::Vector2f { 0.0f, 64.0f });
 }
 
 void EaseObject::doUpdate(float const elapsed)

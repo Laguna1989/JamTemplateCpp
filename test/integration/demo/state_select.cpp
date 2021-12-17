@@ -1,4 +1,5 @@
 ﻿#include "state_select.hpp"
+#include "logging/license_info.hpp"
 #include "state_box2d.hpp"
 #include "state_easing.hpp"
 #include "state_explosion.hpp"
@@ -28,6 +29,8 @@ void StateSelect::doInternalCreate()
     AddButton<StateImGui>("ImGui");
     AddButton<StateSimplexNoise>("3D Noise");
     AddButton<StateEasing>("Easing");
+
+    add(std::make_shared<jt::LicenseInfo>());
 }
 
 void StateSelect::doInternalUpdate(float /*elapsed*/)
