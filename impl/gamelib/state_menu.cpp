@@ -6,6 +6,7 @@
 #include "input/input_manager.hpp"
 #include "input/key_codes.hpp"
 #include "lerp.hpp"
+#include "logging/license_info.hpp"
 #include "math_helper.hpp"
 #include "shape.hpp"
 #include "sprite.hpp"
@@ -23,6 +24,8 @@ void StateMenu::doInternalCreate()
     createVignette();
 
     createTweens();
+
+    add(std::make_shared<jt::LicenseInfo>());
 }
 
 void StateMenu::createVignette()
@@ -50,8 +53,7 @@ void StateMenu::createTextCredits()
 {
     m_text_Credits = jt::dh::createText(getGame()->getRenderTarget(),
         "Created by " + GP::AuthorName() + " for " + GP::JamName() + "\n" + GP::JamDate()
-            + "\n\nThis game uses OpenAl, licensed under LGPL v2.\nPlease see "
-              "https://openal.org/",
+            + "\n\nF9 for License Information",
         10U, GP::getPalette().getColor(4));
     m_text_Credits->setTextAlign(jt::Text::TextAlign::LEFT);
     m_text_Credits->setPosition({ 10, GP::GetScreenSize().y - 70 });
