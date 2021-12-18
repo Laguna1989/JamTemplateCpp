@@ -1,14 +1,14 @@
 #include "state_particles.hpp"
+#include "../state_select.hpp"
 #include "lerp.hpp"
 #include "random/random.hpp"
-#include "state_select.hpp"
 #include "tweens/tween_alpha.hpp"
+#include "tweens/tween_color.hpp"
+#include "tweens/tween_position.hpp"
 #include "tweens/tween_scale.hpp"
 #include <algorithm>
 #include <iostream>
 #include <numeric>
-#include <tweens/tween_color.hpp>
-#include <tweens/tween_position.hpp>
 
 void StateParticles::doInternalCreate()
 {

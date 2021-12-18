@@ -1,0 +1,30 @@
+[
+    {
+        "listName": "Blue Crystal",
+        "referenceId": "item_crystal_blue_01",
+        "value": 20.0,
+        "weight": 0.5,
+        "worldItemSpriteFileName": "assets/demos/inventory/oryx_16bit_scifi_world_trans.png",
+		"worldItemSpriteRect":
+		{
+			"left": 528,
+			"top": 552,
+			"width": 24,
+			"height": 24
+		}
+    },
+    {
+        "listName": "Armor 1",
+        "referenceId": "item_armor_armor_01",
+        "value": 25.0,
+        "weight": 15.0,
+        "worldItemSpriteFileName": "assets/demos/inventory/items.png",
+		"worldItemSpriteRect":
+		{
+			"left": 0,
+			"top": 96,
+			"width": 16,
+			"height": 16
+		}
+    }
+]

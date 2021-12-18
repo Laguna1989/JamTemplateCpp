@@ -1,9 +1,9 @@
 #include "state_pathfinding.hpp"
+#include "../state_select.hpp"
 #include "drawable_helpers.hpp"
 #include "game_interface.hpp"
 #include "pathfinder/node.hpp"
-#include "state_select.hpp"
-#include <random/random.hpp>
+#include "random/random.hpp"
 
 void StatePathfinding::doInternalCreate()
 {

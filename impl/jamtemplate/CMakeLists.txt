@@ -10,6 +10,10 @@ add_library(JamTemplate STATIC ${JAMTEMPLATEFILES} ${JAMTEMPLATEBASEFILES})
 # add public includes, so they can be used by dependent targets
 target_include_directories(JamTemplate PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/common)
 target_include_directories(JamTemplate SYSTEM PUBLIC ${tileson_SOURCE_DIR}/include)
+
+FetchContent_GetProperties(tileson)
+target_include_directories(JamTemplate PUBLIC ${tileson_SOURCE_DIR}/extras/)
+
 if (USE_SFML)
     target_include_directories(JamTemplate PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/sfml)
     target_include_directories(JamTemplate SYSTEM PUBLIC ${SFML_DIR_ROOT}/include)

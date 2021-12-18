@@ -1,18 +1,19 @@
 ﻿#include "state_select.hpp"
+#include "box2d/state_box2d.hpp"
+#include "easing/state_easing.hpp"
+#include "explosion/state_explosion.hpp"
+#include "gradient/state_gradient.hpp"
+#include "imgui/state_imgui.hpp"
+#include "inventory/state_inventory.hpp"
 #include "logging/license_info.hpp"
-#include "state_box2d.hpp"
-#include "state_easing.hpp"
-#include "state_explosion.hpp"
-#include "state_gradient.hpp"
-#include "state_imgui.hpp"
-#include "state_particles.hpp"
-#include "state_pathfinding.hpp"
-#include "state_rope.hpp"
-#include "state_scroll.hpp"
-#include "state_simplex_noise.hpp"
-#include "state_swarmobjects.hpp"
-#include "state_tileson.hpp"
-#include "state_tween.hpp"
+#include "particles/state_particles.hpp"
+#include "pathfinding/state_pathfinding.hpp"
+#include "rope/state_rope.hpp"
+#include "scroll/state_scroll.hpp"
+#include "simplex/state_simplex_noise.hpp"
+#include "swarmobjects/state_swarmobjects.hpp"
+#include "tileson/state_tileson.hpp"
+#include "tween/state_tween.hpp"
 
 void StateSelect::doInternalCreate()
 {
@@ -29,6 +30,7 @@ void StateSelect::doInternalCreate()
     AddButton<StateImGui>("ImGui");
     AddButton<StateSimplexNoise>("3D Noise");
     AddButton<StateEasing>("Easing");
+    AddButton<StateInventory>("Inventory");
 
     add(std::make_shared<jt::LicenseInfo>());
 }

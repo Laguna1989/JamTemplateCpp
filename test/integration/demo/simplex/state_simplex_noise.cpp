@@ -1,8 +1,8 @@
 #include "state_simplex_noise.hpp"
+#include "../state_select.hpp"
 #include "game_interface.hpp"
 #include "math_helper.hpp"
 #include "shape.hpp"
-#include "state_select.hpp"
 
 void StateSimplexNoise::doInternalCreate() { }
 void StateSimplexNoise::doInternalUpdate(float elapsed)
