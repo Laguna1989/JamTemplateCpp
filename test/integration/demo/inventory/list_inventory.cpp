@@ -1,6 +1,7 @@
 #include "list_inventory.hpp"
 #include "game_interface.hpp"
 #include "imgui.h"
+#include <iostream>
 
 ListInventory::ListInventory(std::weak_ptr<ItemRepository> repo) { m_repository = repo; }
 
@@ -25,13 +26,15 @@ void ListInventory::doUpdate(float const)
 void ListInventory::removeItemToDrop()
 {
     if (m_itemToDrop != "") {
+        std::cout << "removeItemToDrop begin. m_itemToDrop: " << m_itemToDrop << std::endl;
         if (m_inventory.count(m_itemToDrop) == 0) {
             return;
         }
         if (m_inventory[m_itemToDrop] == 0) {
             return;
         }
-        m_inventory[m_itemToDrop] = 0;
+        std::cout << "removeItemToDrop postCheck. m_itemToDrop: " << m_itemToDrop << std::endl;
+        m_inventory[m_itemToDrop]--;
         m_itemToSpawm = m_itemToDrop;
         m_itemToDrop = "";
     }
@@ -42,12 +45,12 @@ void ListInventory::doDraw() const
     if (m_drawInventory) {
         ImGui::Begin("Inventory", &m_drawInventory);
         ImGuiTableFlags flags = ImGuiTableFlags_Borders | ImGuiTableFlags_RowBg;
-        ImGui::BeginTable("table1", 5, flags);
+        ImGui::BeginTable("Inventory", 5, flags);
         ImGui::TableSetupColumn("Count");
         ImGui::TableSetupColumn("Item");
         ImGui::TableSetupColumn("Value");
         ImGui::TableSetupColumn("Weight");
-        ImGui::TableSetupColumn("");
+        ImGui::TableSetupColumn("Drop");
         ImGui::TableHeadersRow();
 
         for (auto& kvp : m_inventory) {
@@ -72,7 +75,9 @@ void ListInventory::doDraw() const
             ImGui::TableSetColumnIndex(3);
             ImGui::Text("%.1f (%.1f)", itemReference->weight * kvp.second, itemReference->weight);
             ImGui::TableSetColumnIndex(4);
-            if (ImGui::Button("Drop")) {
+            std::string const dropButtonText = "Drop##" + itemName;
+            if (ImGui::Button(dropButtonText.c_str())) {
+                std::cout << "drop clicked: " << refId << std::endl;
                 drop(refId);
             }
         }
@@ -80,7 +85,11 @@ void ListInventory::doDraw() const
         ImGui::End();
     }
 }
-void ListInventory::drop(std::string const& itemToDrop) const { m_itemToDrop = itemToDrop; }
+void ListInventory::drop(std::string const& itemToDrop) const
+{
+    m_itemToDrop = itemToDrop;
+    std::cout << "drop function. m_itemToDrop: " << m_itemToDrop << std::endl;
+}
 std::string ListInventory::getItemToSpawn()
 {
     std::string empty { "" };
