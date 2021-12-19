@@ -1,4 +1,5 @@
 #include "state_inventory.hpp"
+#include "../control_command_move_cam.hpp"
 #include "game_interface.hpp"
 #include "random/random.hpp"
 #include "tilemap/tileson_loader.hpp"
@@ -18,6 +19,23 @@ void StateInventory::doInternalCreate()
     m_inventory->addItem("item_armor_armor_01");
     add(m_inventory);
     setAutoDraw(false);
+
+    float const scrollSpeed = 170.0f;
+    getGame()->input()->keyboard()->setCommandPressed({ jt::KeyCode::W, jt::KeyCode::Up },
+        std::make_shared<ControlCommandMoveCam>(
+            jt::Vector2f { 0.0f, -scrollSpeed }, getGame()->getCamera()));
+
+    getGame()->input()->keyboard()->setCommandPressed({ jt::KeyCode::A, jt::KeyCode::Left },
+        std::make_shared<ControlCommandMoveCam>(
+            jt::Vector2f { -scrollSpeed, 0.0f }, getGame()->getCamera()));
+
+    getGame()->input()->keyboard()->setCommandPressed({ jt::KeyCode::S, jt::KeyCode::Down },
+        std::make_shared<ControlCommandMoveCam>(
+            jt::Vector2f { 0.0f, scrollSpeed }, getGame()->getCamera()));
+
+    getGame()->input()->keyboard()->setCommandPressed({ jt::KeyCode::D, jt::KeyCode::Right },
+        std::make_shared<ControlCommandMoveCam>(
+            jt::Vector2f { scrollSpeed, 0.0f }, getGame()->getCamera()));
 }
 
 void StateInventory::createWorldItems()

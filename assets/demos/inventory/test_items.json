@@ -211,7 +211,7 @@
         "worldItemSpriteFileName": "assets/demos/inventory/items.png",
 		"worldItemSpriteRect": { "left": 96, "top": 112, "width": 16, "height": 16 },
 		"worldItemOffset": { "x": 4, "y": 4 },
-		"equipSlot": "head"
+		"equipSlot": "hands"
     },
 	{
         "listName": "Gloves Lv2",
@@ -221,7 +221,7 @@
         "worldItemSpriteFileName": "assets/demos/inventory/items.png",
 		"worldItemSpriteRect": { "left": 112, "top": 112, "width": 16, "height": 16 }, 
 		"worldItemOffset": { "x": 4, "y": 4 },
-		"equipSlot": "head"
+		"equipSlot": "hands"
     },
 	{
         "listName": "Gloves Lv3",
@@ -231,7 +231,7 @@
         "worldItemSpriteFileName": "assets/demos/inventory/items.png",
 		"worldItemSpriteRect": { "left": 128, "top": 112, "width": 16, "height": 16 }, 
 		"worldItemOffset": { "x": 4, "y": 4 },
-		"equipSlot": "head"
+		"equipSlot": "hands"
     },
 	{
         "listName": "Gloves Lv4",
@@ -241,7 +241,7 @@
         "worldItemSpriteFileName": "assets/demos/inventory/items.png",
 		"worldItemSpriteRect": { "left": 144, "top": 112, "width": 16, "height": 16 }, 
 		"worldItemOffset": { "x": 4, "y": 4 },
-		"equipSlot": "head"
+		"equipSlot": "hands"
     },
 	{
         "listName": "Gloves Lv5",
@@ -251,7 +251,7 @@
         "worldItemSpriteFileName": "assets/demos/inventory/items.png",
 		"worldItemSpriteRect": { "left": 160, "top": 112, "width": 16, "height": 16 }, 
 		"worldItemOffset": { "x": 4, "y": 4 },
-		"equipSlot": "head"
+		"equipSlot": "hands"
     },
 	{
         "listName": "Gloves Lv6",
@@ -261,7 +261,117 @@
         "worldItemSpriteFileName": "assets/demos/inventory/items.png",
 		"worldItemSpriteRect": { "left": 176, "top": 112, "width": 16, "height": 16 }, 
 		"worldItemOffset": { "x": 4, "y": 4 },
-		"equipSlot": "head"
+		"equipSlot": "hands"
+    },
+	
+	
+	
+	
+	{
+        "listName": "Boots Lv1",
+        "referenceId": "item_armor_boots_01",
+        "value": 15.0,
+        "weight": 6.0,
+        "worldItemSpriteFileName": "assets/demos/inventory/items.png",
+		"worldItemSpriteRect": { "left": 96, "top": 96, "width": 16, "height": 16 },
+		"worldItemOffset": { "x": 4, "y": 4 },
+		"equipSlot": "hands"
+    },
+	{
+        "listName": "Boots Lv2",
+        "referenceId": "item_armor_boots_02",
+        "value": 30.0,
+        "weight": 6.0,
+        "worldItemSpriteFileName": "assets/demos/inventory/items.png",
+		"worldItemSpriteRect": { "left": 112, "top": 96, "width": 16, "height": 16 }, 
+		"worldItemOffset": { "x": 4, "y": 4 },
+		"equipSlot": "hands"
+    },
+	{
+        "listName": "Boots Lv3",
+        "referenceId": "item_armor_boots_03",
+        "value": 45.0,
+        "weight": 6.0,
+        "worldItemSpriteFileName": "assets/demos/inventory/items.png",
+		"worldItemSpriteRect": { "left": 128, "top": 96, "width": 16, "height": 16 }, 
+		"worldItemOffset": { "x": 4, "y": 4 },
+		"equipSlot": "hands"
+    },
+	{
+        "listName": "Boots Lv4",
+        "referenceId": "item_armor_boots_04",
+        "value": 60.0,
+        "weight": 7.0,
+        "worldItemSpriteFileName": "assets/demos/inventory/items.png",
+		"worldItemSpriteRect": { "left": 144, "top": 96, "width": 16, "height": 16 }, 
+		"worldItemOffset": { "x": 4, "y": 4 },
+		"equipSlot": "hands"
+    },
+	{
+        "listName": "Boots Lv5",
+        "referenceId": "item_armor_boots_05",
+        "value": 75.0,
+        "weight": 8.0,
+        "worldItemSpriteFileName": "assets/demos/inventory/items.png",
+		"worldItemSpriteRect": { "left": 160, "top": 96, "width": 16, "height": 16 }, 
+		"worldItemOffset": { "x": 4, "y": 4 },
+		"equipSlot": "hands"
+    },
+	{
+        "listName": "Boots Lv6",
+        "referenceId": "item_armor_boots_06",
+        "value": 100.0,
+        "weight": 8.0,
+        "worldItemSpriteFileName": "assets/demos/inventory/items.png",
+		"worldItemSpriteRect": { "left": 176, "top": 96, "width": 16, "height": 16 }, 
+		"worldItemOffset": { "x": 4, "y": 4 },
+		"equipSlot": "hands"
+    },
+	
+	
+	
+	
+	
+	{
+        "listName": "Knife",
+        "referenceId": "item_weapon_knife",
+        "value": 30.0,
+        "weight": 1.5,
+        "worldItemSpriteFileName": "assets/demos/inventory/items.png",
+		"worldItemSpriteRect": { "left": 48, "top": 80, "width": 16, "height": 16 }, 
+		"worldItemOffset": { "x": 4, "y": 4 },
+		"equipSlot": "weapon"
+    },
+	{
+        "listName": "Stun Baton",
+        "referenceId": "item_weapon_baton_01",
+        "value": 60.0,
+        "weight": 4.0,
+        "worldItemSpriteFileName": "assets/demos/inventory/items.png",
+		"worldItemSpriteRect": { "left": 112, "top": 80, "width": 16, "height": 16 }, 
+		"worldItemOffset": { "x": 4, "y": 4 },
+		"equipSlot": "weapon"
+    },
+	{
+        "listName": "Kill Baton",
+        "referenceId": "item_weapon_baton_02",
+        "value": 90.0,
+        "weight": 4.0,
+        "worldItemSpriteFileName": "assets/demos/inventory/items.png",
+		"worldItemSpriteRect": { "left": 128, "top": 80, "width": 16, "height": 16 }, 
+		"worldItemOffset": { "x": 4, "y": 4 },
+		"equipSlot": "weapon"
+    },
+	{
+        "listName": "Pistol",
+        "referenceId": "item_weapon_pistol",
+        "value": 105.0,
+        "weight": 3.0,
+        "worldItemSpriteFileName": "assets/demos/inventory/items.png",
+		"worldItemSpriteRect": { "left": 32, "top": 80, "width": 16, "height": 16 }, 
+		"worldItemOffset": { "x": 4, "y": 4 },
+		"equipSlot": "weapon"
     }
+	
 	
 ]

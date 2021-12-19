@@ -8,8 +8,8 @@ ListInventory::ListInventory(std::weak_ptr<ItemRepository> repo)
     m_repository = repo;
     m_equipped["head"] = "";
     m_equipped["torso"] = "";
-    m_equipped["left hand"] = "";
-    m_equipped["right hand"] = "";
+    m_equipped["hands"] = "";
+    m_equipped["weapon"] = "";
     m_equipped["legs"] = "";
     m_equipped["feet"] = "";
 }
@@ -82,7 +82,7 @@ void ListInventory::doDraw() const
 {
     if (m_drawInventory) {
         ImGui::SetNextWindowPos(ImVec2 { 400, 0 });
-        
+
         ImGui::SetNextWindowSize(ImVec2 { 400, 600 });
         ImGui::Begin("Inventory", &m_drawInventory);
 
