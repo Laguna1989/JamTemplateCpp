@@ -2,55 +2,84 @@
     {
         "listName": "Blue Crystal",
         "referenceId": "item_crystal_blue_01",
-        "value": 20.0,
+        "value": 4.0,
         "weight": 0.5,
         "worldItemSpriteFileName": "assets/demos/inventory/oryx_16bit_scifi_world_trans.png",
-		"worldItemSpriteRect":
-		{
-			"left": 528,
-			"top": 552,
-			"width": 24,
-			"height": 24
-		}
+		"worldItemSpriteRect": { "left": 528, "top": 552, "width": 24, "height": 24 }
     },
+	
+	
     {
         "listName": "Armor Lv1",
         "referenceId": "item_armor_armor_01",
         "value": 25.0,
         "weight": 15.0,
         "worldItemSpriteFileName": "assets/demos/inventory/items.png",
-		"worldItemSpriteRect":
-		{
-			"left": 0,
-			"top": 96,
-			"width": 16,
-			"height": 16
-		},
-		"worldItemOffset":
-		{
-			"x": 4,
-			"y": 4
-		},
+		"worldItemSpriteRect": { "left": 0, "top": 96, "width": 16, "height": 16 },
+		"worldItemOffset": {"x": 4,"y": 4},
 		"equipSlot": "torso"
     },
+	{
+        "listName": "Armor Lv2",
+        "referenceId": "item_armor_armor_02",
+        "value": 50.0,
+        "weight": 14.0,
+        "worldItemSpriteFileName": "assets/demos/inventory/items.png",
+		"worldItemSpriteRect": { "left": 16, "top": 96, "width": 16, "height": 16 },
+		"worldItemOffset": {"x": 4,"y": 4},
+		"equipSlot": "torso"
+    },
+	{
+        "listName": "Armor Lv3",
+        "referenceId": "item_armor_armor_03",
+        "value": 75.0,
+        "weight": 13.0,
+        "worldItemSpriteFileName": "assets/demos/inventory/items.png",
+		"worldItemSpriteRect": { "left": 32, "top": 96, "width": 16, "height": 16 },
+		"worldItemOffset": {"x": 4,"y": 4},
+		"equipSlot": "torso"
+    },
+	{
+        "listName": "Armor Lv4",
+        "referenceId": "item_armor_armor_04",
+        "value": 100.0,
+        "weight": 12.0,
+        "worldItemSpriteFileName": "assets/demos/inventory/items.png",
+		"worldItemSpriteRect": { "left": 48, "top": 96, "width": 16, "height": 16 },
+		"worldItemOffset": {"x": 4,"y": 4},
+		"equipSlot": "torso"
+    },
+	{
+        "listName": "Armor Lv5",
+        "referenceId": "item_armor_armor_05",
+        "value": 125.0,
+        "weight": 11.0,
+        "worldItemSpriteFileName": "assets/demos/inventory/items.png",
+		"worldItemSpriteRect": { "left": 64, "top": 96, "width": 16, "height": 16 },
+		"worldItemOffset": {"x": 4,"y": 4},
+		"equipSlot": "torso"
+    },
+	{
+        "listName": "Armor Lv6",
+        "referenceId": "item_armor_armor_06",
+        "value": 150.0,
+        "weight": 10.0,
+        "worldItemSpriteFileName": "assets/demos/inventory/items.png",
+		"worldItemSpriteRect": { "left": 80, "top": 96, "width": 16, "height": 16 },
+		"worldItemOffset": {"x": 4,"y": 4},
+		"equipSlot": "torso"
+    },
+	
+	
+	
 	{
         "listName": "Helm Lv1",
         "referenceId": "item_armor_helmet_01",
         "value": 20.0,
         "weight": 5.0,
         "worldItemSpriteFileName": "assets/demos/inventory/items.png",
-		"worldItemSpriteRect":
-		{
-			"left": 0,
-			"top": 112,
-			"width": 16,
-			"height": 16
-		},
-		"worldItemOffset":
-		{
-			"x": 4,
-			"y": 4
-		},
+		"worldItemSpriteRect": { "left": 0, "top": 112, "width": 16, "height": 16 },
+		"worldItemOffset": { "x": 4, "y": 4 },
 		"equipSlot": "head"
     },
 	{
@@ -59,18 +88,8 @@
         "value": 20.0,
         "weight": 5.0,
         "worldItemSpriteFileName": "assets/demos/inventory/items.png",
-		"worldItemSpriteRect":
-		{
-			"left": 16,
-			"top": 112,
-			"width": 16,
-			"height": 16
-		},
-		"worldItemOffset":
-		{
-			"x": 4,
-			"y": 4
-		},
+		"worldItemSpriteRect": { "left": 16, "top": 112, "width": 16, "height": 16 }, 
+		"worldItemOffset": { "x": 4, "y": 4 },
 		"equipSlot": "head"
     }
 ]

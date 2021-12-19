@@ -45,8 +45,8 @@
                  "type":"item",
                  "visible":true,
                  "width":24,
-                 "x":96,
-                 "y":72
+                 "x":24,
+                 "y":48
                 }, 
                 {
                  "height":24,
@@ -62,8 +62,8 @@
                  "type":"item",
                  "visible":true,
                  "width":24,
-                 "x":168,
-                 "y":72
+                 "x":24,
+                 "y":24
                 }, 
                 {
                  "height":24,
@@ -79,8 +79,8 @@
                  "type":"item",
                  "visible":true,
                  "width":24,
-                 "x":216,
-                 "y":72
+                 "x":48,
+                 "y":48
                 }, 
                 {
                  "height":24,
@@ -96,8 +96,8 @@
                  "type":"item",
                  "visible":true,
                  "width":24,
-                 "x":96,
-                 "y":120
+                 "x":48,
+                 "y":24
                 }, 
                 {
                  "height":24,
@@ -107,14 +107,14 @@
                         {
                          "name":"referenceid",
                          "type":"string",
-                         "value":"item_armor_armor_01"
+                         "value":"item_armor_armor_03"
                         }],
                  "rotation":0,
                  "type":"item",
                  "visible":true,
                  "width":24,
-                 "x":168,
-                 "y":120
+                 "x":96,
+                 "y":96
                 }, 
                 {
                  "height":24,
@@ -149,6 +149,91 @@
                  "width":24,
                  "x":216,
                  "y":168
+                }, 
+                {
+                 "height":24,
+                 "id":10,
+                 "name":"item_armor",
+                 "properties":[
+                        {
+                         "name":"referenceid",
+                         "type":"string",
+                         "value":"item_armor_armor_01"
+                        }],
+                 "rotation":0,
+                 "type":"item",
+                 "visible":true,
+                 "width":24,
+                 "x":48,
+                 "y":96
+                }, 
+                {
+                 "height":24,
+                 "id":11,
+                 "name":"item_armor",
+                 "properties":[
+                        {
+                         "name":"referenceid",
+                         "type":"string",
+                         "value":"item_armor_armor_02"
+                        }],
+                 "rotation":0,
+                 "type":"item",
+                 "visible":true,
+                 "width":24,
+                 "x":72,
+                 "y":96
+                }, 
+                {
+                 "height":24,
+                 "id":12,
+                 "name":"item_armor",
+                 "properties":[
+                        {
+                         "name":"referenceid",
+                         "type":"string",
+                         "value":"item_armor_armor_04"
+                        }],
+                 "rotation":0,
+                 "type":"item",
+                 "visible":true,
+                 "width":24,
+                 "x":120,
+                 "y":96
+                }, 
+                {
+                 "height":24,
+                 "id":13,
+                 "name":"item_armor",
+                 "properties":[
+                        {
+                         "name":"referenceid",
+                         "type":"string",
+                         "value":"item_armor_armor_05"
+                        }],
+                 "rotation":0,
+                 "type":"item",
+                 "visible":true,
+                 "width":24,
+                 "x":144,
+                 "y":96
+                }, 
+                {
+                 "height":24,
+                 "id":14,
+                 "name":"item_armor",
+                 "properties":[
+                        {
+                         "name":"referenceid",
+                         "type":"string",
+                         "value":"item_armor_armor_06"
+                        }],
+                 "rotation":0,
+                 "type":"item",
+                 "visible":true,
+                 "width":24,
+                 "x":168,
+                 "y":96
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -157,7 +242,7 @@
          "y":0
         }],
  "nextlayerid":4,
- "nextobjectid":9,
+ "nextobjectid":15,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.7.2",

@@ -145,7 +145,7 @@ void ListInventory::drawInventoryItems() const
     ImGui::BeginChild("Items");
     ImGuiTableFlags flags = ImGuiTableFlags_Borders | ImGuiTableFlags_RowBg;
     ImGui::BeginTable("Inventory", 4, flags);
-    ImGui::TableSetupColumn("Count");
+    ImGui::TableSetupColumn("#", ImGuiTableColumnFlags_WidthFixed, 16.0f);
     ImGui::TableSetupColumn("Item");
     ImGui::TableSetupColumn("Value");
     ImGui::TableSetupColumn("Weight");
