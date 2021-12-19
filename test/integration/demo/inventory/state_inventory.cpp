@@ -63,7 +63,7 @@ void StateInventory::doInternalUpdate(float elapsed)
 
     pickupItems();
 
-    std::string const& itemToSpawn = m_inventory->getItemToSpawn();
+    std::string const& itemToSpawn = m_inventory->getAndResetItemToSpawn();
     if (itemToSpawn != "") {
         // TODO spwan around player and not at random position.
         auto const px = jt::Random::getInt(2, 8);

@@ -14,7 +14,7 @@
 		}
     },
     {
-        "listName": "Armor 1",
+        "listName": "Armor Lv1",
         "referenceId": "item_armor_armor_01",
         "value": 25.0,
         "weight": 15.0,
@@ -34,7 +34,7 @@
 		"equipSlot": "torso"
     },
 	{
-        "listName": "Helm 1",
+        "listName": "Helm Lv1",
         "referenceId": "item_armor_helmet_01",
         "value": 20.0,
         "weight": 5.0,
@@ -42,6 +42,26 @@
 		"worldItemSpriteRect":
 		{
 			"left": 0,
+			"top": 112,
+			"width": 16,
+			"height": 16
+		},
+		"worldItemOffset":
+		{
+			"x": 4,
+			"y": 4
+		},
+		"equipSlot": "head"
+    },
+	{
+        "listName": "Helm Lv2",
+        "referenceId": "item_armor_helmet_02",
+        "value": 20.0,
+        "weight": 5.0,
+        "worldItemSpriteFileName": "assets/demos/inventory/items.png",
+		"worldItemSpriteRect":
+		{
+			"left": 16,
 			"top": 112,
 			"width": 16,
 			"height": 16

@@ -11,7 +11,7 @@ public:
     ListInventory(std::weak_ptr<ItemRepository> repo);
     void addItem(std::string const& refId);
     // TODO include count
-    std::string getItemToSpawn();
+    std::string getAndResetItemToSpawn();
 
 private:
     void doCreate() override;
@@ -28,12 +28,11 @@ private:
     mutable std::string m_itemToUnequip { "" };
     mutable std::string m_itemToEquip { "" };
 
-    // maps equipslot to itemReferenceId
+    // maps equipSlot to itemReferenceId
     std::map<std::string, std::string> m_equipped;
 
-    std::string m_itemToSpawm { "" };
+    std::string m_itemToSpawn { "" };
 
-    void dropOneOf(std::string const& itemToDrop) const;
     void removeItemToDrop();
     void drawSingleItemInInventory(std::pair<std::string const, int> const& kvp) const;
     void drawInventoryItems() const;

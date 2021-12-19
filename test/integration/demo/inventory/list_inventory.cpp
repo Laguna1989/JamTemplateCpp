@@ -74,7 +74,7 @@ void ListInventory::removeItemToDrop()
         return;
     }
     m_inventory[m_itemToDrop]--;
-    m_itemToSpawm = m_itemToDrop;
+    m_itemToSpawn = m_itemToDrop;
     m_itemToDrop = "";
 }
 
@@ -144,12 +144,11 @@ void ListInventory::drawInventoryItems() const
     // TODO Look into ListClipper
     ImGui::BeginChild("Items");
     ImGuiTableFlags flags = ImGuiTableFlags_Borders | ImGuiTableFlags_RowBg;
-    ImGui::BeginTable("Inventory", 5, flags);
+    ImGui::BeginTable("Inventory", 4, flags);
     ImGui::TableSetupColumn("Count");
     ImGui::TableSetupColumn("Item");
     ImGui::TableSetupColumn("Value");
     ImGui::TableSetupColumn("Weight");
-    ImGui::TableSetupColumn("Drop");
     ImGui::TableHeadersRow();
 
     for (auto& kvp : m_inventory) {
@@ -184,12 +183,18 @@ void ListInventory::drawSingleItemInInventory(std::pair<std::string const, int> 
         ImGui::Separator();
         std::string const dropButtonText = "Drop 1##" + itemName;
         if (ImGui::Selectable(dropButtonText.c_str())) {
-            this->dropOneOf(refId);
+            m_itemToDrop = refId;
         }
         if (itemReference->equipSlot != "") {
-            std::string const equipButtonText = "Equip##" + itemName;
-            if (ImGui::Selectable(equipButtonText.c_str())) {
-                this->dropOneOf(refId);
+
+            auto const equippedItemInSlot = m_equipped.at(itemReference->equipSlot);
+            if (equippedItemInSlot != refId) {
+
+                std::string const equipButtonText = "Equip##" + itemName;
+                if (ImGui::Selectable(equipButtonText.c_str())) {
+                    this->m_itemToEquip = refId;
+                    this->m_itemToUnequip = equippedItemInSlot;
+                }
             }
         }
         ImGui::EndPopup();
@@ -198,23 +203,13 @@ void ListInventory::drawSingleItemInInventory(std::pair<std::string const, int> 
     ImGui::Text("%.1f (%.1f)", itemReference->value * kvp.second, itemReference->value);
     ImGui::TableSetColumnIndex(3);
     ImGui::Text("%.1f (%.1f)", itemReference->weight * kvp.second, itemReference->weight);
-    ImGui::TableSetColumnIndex(4);
-    std::string const dropButtonText = "Drop##" + itemName;
-    if (ImGui::Button(dropButtonText.c_str())) {
-        this->dropOneOf(refId);
-    }
 }
 
-// TODO add Drop All
-void ListInventory::dropOneOf(std::string const& itemToDrop) const
-{
-    m_itemToDrop = itemToDrop;
-    std::cout << "dropOneOf function. m_itemToDrop: " << m_itemToDrop << std::endl;
-}
-std::string ListInventory::getItemToSpawn()
+std::string ListInventory::getAndResetItemToSpawn()
 {
     std::string empty { "" };
-    std::swap(empty, m_itemToSpawm);
+
+    std::swap(empty, m_itemToSpawn);
     return empty;
 }
 std::vector<std::string> ListInventory::getItemReferenceIdsForEquipmentSlot(
