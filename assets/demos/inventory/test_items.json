@@ -85,11 +85,183 @@
 	{
         "listName": "Helm Lv2",
         "referenceId": "item_armor_helmet_02",
-        "value": 20.0,
+        "value": 40.0,
         "weight": 5.0,
         "worldItemSpriteFileName": "assets/demos/inventory/items.png",
 		"worldItemSpriteRect": { "left": 16, "top": 112, "width": 16, "height": 16 }, 
 		"worldItemOffset": { "x": 4, "y": 4 },
 		"equipSlot": "head"
+    },
+	{
+        "listName": "Helm Lv3",
+        "referenceId": "item_armor_helmet_03",
+        "value": 60.0,
+        "weight": 5.0,
+        "worldItemSpriteFileName": "assets/demos/inventory/items.png",
+		"worldItemSpriteRect": { "left": 32, "top": 112, "width": 16, "height": 16 }, 
+		"worldItemOffset": { "x": 4, "y": 4 },
+		"equipSlot": "head"
+    },
+	{
+        "listName": "Helm Lv4",
+        "referenceId": "item_armor_helmet_04",
+        "value": 80.0,
+        "weight": 5.0,
+        "worldItemSpriteFileName": "assets/demos/inventory/items.png",
+		"worldItemSpriteRect": { "left": 48, "top": 112, "width": 16, "height": 16 }, 
+		"worldItemOffset": { "x": 4, "y": 4 },
+		"equipSlot": "head"
+    },
+	{
+        "listName": "Helm Lv5",
+        "referenceId": "item_armor_helmet_05",
+        "value": 100.0,
+        "weight": 5.0,
+        "worldItemSpriteFileName": "assets/demos/inventory/items.png",
+		"worldItemSpriteRect": { "left": 64, "top": 112, "width": 16, "height": 16 }, 
+		"worldItemOffset": { "x": 4, "y": 4 },
+		"equipSlot": "head"
+    },
+	{
+        "listName": "Helm Lv6",
+        "referenceId": "item_armor_helmet_06",
+        "value": 150.0,
+        "weight": 4.0,
+        "worldItemSpriteFileName": "assets/demos/inventory/items.png",
+		"worldItemSpriteRect": { "left": 80, "top": 112, "width": 16, "height": 16 }, 
+		"worldItemOffset": { "x": 4, "y": 4 },
+		"equipSlot": "head"
+    },
+	
+	
+	
+	
+	
+	
+	
+	{
+        "listName": "Trousers Lv1",
+        "referenceId": "item_armor_trousers_01",
+        "value": 15.0,
+        "weight": 5.0,
+        "worldItemSpriteFileName": "assets/demos/inventory/items.png",
+		"worldItemSpriteRect": { "left": 0, "top": 128, "width": 16, "height": 16 },
+		"worldItemOffset": { "x": 4, "y": 4 },
+		"equipSlot": "legs"
+    },
+	{
+        "listName": "Trousers Lv2",
+        "referenceId": "item_armor_trousers_02",
+        "value": 30.0,
+        "weight": 5.0,
+        "worldItemSpriteFileName": "assets/demos/inventory/items.png",
+		"worldItemSpriteRect": { "left": 16, "top": 128, "width": 16, "height": 16 }, 
+		"worldItemOffset": { "x": 4, "y": 4 },
+		"equipSlot": "legs"
+    },
+	{
+        "listName": "Trousers Lv3",
+        "referenceId": "item_armor_trousers_03",
+        "value": 45.0,
+        "weight": 5.0,
+        "worldItemSpriteFileName": "assets/demos/inventory/items.png",
+		"worldItemSpriteRect": { "left": 32, "top": 128, "width": 16, "height": 16 }, 
+		"worldItemOffset": { "x": 4, "y": 4 },
+		"equipSlot": "legs"
+    },
+	{
+        "listName": "Trousers Lv4",
+        "referenceId": "item_armor_trousers_04",
+        "value": 60.0,
+        "weight": 5.0,
+        "worldItemSpriteFileName": "assets/demos/inventory/items.png",
+		"worldItemSpriteRect": { "left": 48, "top": 128, "width": 16, "height": 16 }, 
+		"worldItemOffset": { "x": 4, "y": 4 },
+		"equipSlot": "legs"
+    },
+	{
+        "listName": "Trousers Lv5",
+        "referenceId": "item_armor_trousers_05",
+        "value": 75.0,
+        "weight": 4.0,
+        "worldItemSpriteFileName": "assets/demos/inventory/items.png",
+		"worldItemSpriteRect": { "left": 64, "top": 128, "width": 16, "height": 16 }, 
+		"worldItemOffset": { "x": 4, "y": 4 },
+		"equipSlot": "legs"
+    },
+	{
+        "listName": "Trousers Lv6",
+        "referenceId": "item_armor_trousers_06",
+        "value": 100.0,
+        "weight": 4.0,
+        "worldItemSpriteFileName": "assets/demos/inventory/items.png",
+		"worldItemSpriteRect": { "left": 80, "top": 128, "width": 16, "height": 16 }, 
+		"worldItemOffset": { "x": 4, "y": 4 },
+		"equipSlot": "legs"
+    },
+	
+	
+	
+	
+		{
+        "listName": "Gloves Lv1",
+        "referenceId": "item_armor_gloves_01",
+        "value": 15.0,
+        "weight": 4.0,
+        "worldItemSpriteFileName": "assets/demos/inventory/items.png",
+		"worldItemSpriteRect": { "left": 96, "top": 112, "width": 16, "height": 16 },
+		"worldItemOffset": { "x": 4, "y": 4 },
+		"equipSlot": "head"
+    },
+	{
+        "listName": "Gloves Lv2",
+        "referenceId": "item_armor_gloves_02",
+        "value": 30.0,
+        "weight": 4.0,
+        "worldItemSpriteFileName": "assets/demos/inventory/items.png",
+		"worldItemSpriteRect": { "left": 112, "top": 112, "width": 16, "height": 16 }, 
+		"worldItemOffset": { "x": 4, "y": 4 },
+		"equipSlot": "head"
+    },
+	{
+        "listName": "Gloves Lv3",
+        "referenceId": "item_armor_gloves_03",
+        "value": 45.0,
+        "weight": 4.0,
+        "worldItemSpriteFileName": "assets/demos/inventory/items.png",
+		"worldItemSpriteRect": { "left": 128, "top": 112, "width": 16, "height": 16 }, 
+		"worldItemOffset": { "x": 4, "y": 4 },
+		"equipSlot": "head"
+    },
+	{
+        "listName": "Gloves Lv4",
+        "referenceId": "item_armor_gloves_04",
+        "value": 60.0,
+        "weight": 3.0,
+        "worldItemSpriteFileName": "assets/demos/inventory/items.png",
+		"worldItemSpriteRect": { "left": 144, "top": 112, "width": 16, "height": 16 }, 
+		"worldItemOffset": { "x": 4, "y": 4 },
+		"equipSlot": "head"
+    },
+	{
+        "listName": "Gloves Lv5",
+        "referenceId": "item_armor_gloves_05",
+        "value": 75.0,
+        "weight": 3.0,
+        "worldItemSpriteFileName": "assets/demos/inventory/items.png",
+		"worldItemSpriteRect": { "left": 160, "top": 112, "width": 16, "height": 16 }, 
+		"worldItemOffset": { "x": 4, "y": 4 },
+		"equipSlot": "head"
+    },
+	{
+        "listName": "Gloves Lv6",
+        "referenceId": "item_armor_gloves_06",
+        "value": 100.0,
+        "weight": 2.0,
+        "worldItemSpriteFileName": "assets/demos/inventory/items.png",
+		"worldItemSpriteRect": { "left": 176, "top": 112, "width": 16, "height": 16 }, 
+		"worldItemOffset": { "x": 4, "y": 4 },
+		"equipSlot": "head"
     }
+	
 ]

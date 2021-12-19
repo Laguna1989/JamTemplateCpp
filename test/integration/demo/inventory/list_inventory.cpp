@@ -81,6 +81,9 @@ void ListInventory::removeItemToDrop()
 void ListInventory::doDraw() const
 {
     if (m_drawInventory) {
+        ImGui::SetNextWindowPos(ImVec2 { 400, 0 });
+        
+        ImGui::SetNextWindowSize(ImVec2 { 400, 600 });
         ImGui::Begin("Inventory", &m_drawInventory);
 
         drawEquippedItems();
