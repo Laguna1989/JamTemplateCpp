@@ -10,6 +10,8 @@ class ListInventory : public jt::GameObject {
 public:
     ListInventory(std::weak_ptr<ItemRepository> repo);
     void addItem(std::string const& refId);
+    // TODO include count
+    std::string getItemToSpawn();
 
 private:
     void doCreate() override;
@@ -20,6 +22,10 @@ private:
     std::weak_ptr<ItemRepository> m_repository;
 
     mutable bool m_drawInventory { false };
+    mutable std::string m_itemToDrop { "" };
+    std::string m_itemToSpawm { "" };
+    void drop(std::string const& itemToDrop) const;
+    void removeItemToDrop();
 };
 
 #endif // GUARD_JAMTEMPLATE_INVENTORY_HPP

@@ -14,6 +14,13 @@ void from_json(nlohmann::json const& j, jt::Recti& rect)
     j.at("width").get_to(rect.width);
     j.at("height").get_to(rect.height);
 }
+
+void from_json(nlohmann::json const& j, jt::Vector2f& vec)
+{
+    j.at("x").get_to(vec.x);
+    j.at("y").get_to(vec.y);
+}
+
 } // namespace jt
 
 void from_json(nlohmann::json const& j, ItemReference& item)
@@ -24,4 +31,7 @@ void from_json(nlohmann::json const& j, ItemReference& item)
     j.at("value").get_to(item.value);
     j.at("worldItemSpriteFileName").get_to(item.worldItemSpriteFileName);
     j.at("worldItemSpriteRect").get_to(item.worldItemSpriteRect);
+    if (j.count("worldItemOffset") != 0) {
+        j.at("worldItemOffset").get_to(item.worldItemOffset);
+    }
 }

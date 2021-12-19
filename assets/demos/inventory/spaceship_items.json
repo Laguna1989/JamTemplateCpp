@@ -98,6 +98,23 @@
                  "width":24,
                  "x":96,
                  "y":120
+                }, 
+                {
+                 "height":24,
+                 "id":6,
+                 "name":"item_armor",
+                 "properties":[
+                        {
+                         "name":"referenceid",
+                         "type":"string",
+                         "value":"item_armor_armor_01"
+                        }],
+                 "rotation":0,
+                 "type":"item",
+                 "visible":true,
+                 "width":24,
+                 "x":168,
+                 "y":120
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -106,7 +123,7 @@
          "y":0
         }],
  "nextlayerid":4,
- "nextobjectid":6,
+ "nextobjectid":7,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.7.2",

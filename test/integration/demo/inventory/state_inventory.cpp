@@ -1,5 +1,6 @@
 #include "state_inventory.hpp"
 #include "game_interface.hpp"
+#include "random/random.hpp"
 #include "tilemap/tileson_loader.hpp"
 
 void StateInventory::doInternalCreate()
@@ -26,12 +27,7 @@ void StateInventory::createWorldItems()
     for (auto it : m_objectsLayer->getObjects()) {
         if (it.type == "item") {
             auto const refId = it.properties.strings.at("referenceid");
-            auto worldItem = m_itemRepository->createWorldItem(
-                m_itemRepository->getItemReferenceFromString(refId),
-                getGame()->getTextureManager());
-            worldItem->getDrawable()->setPosition(it.position);
-            add(worldItem);
-            m_worldItems->push_back(worldItem);
+            spawnWorldItem(refId, it.position);
         }
     }
     add(m_worldItems);
@@ -65,6 +61,28 @@ void StateInventory::doInternalUpdate(float elapsed)
     m_tileLayerGround->update(elapsed);
     m_tileLayerOverlay->update(elapsed);
 
+    pickupItems();
+
+    std::string const& itemToSpawn = m_inventory->getItemToSpawn();
+    if (itemToSpawn != "") {
+        // TODO spwan around player and not at random position.
+        auto const px = jt::Random::getInt(2, 8);
+        auto const py = jt::Random::getInt(2, 8);
+        jt::Vector2f const pos { px * 24.0f, py * 24.0f };
+        spawnWorldItem(itemToSpawn, pos);
+    }
+}
+void StateInventory::spawnWorldItem(std::string const& itemReferenceId, jt::Vector2f const& pos)
+{
+    auto item = m_itemRepository->createWorldItem(
+        m_itemRepository->getItemReferenceFromString(itemReferenceId),
+        getGame()->getTextureManager());
+    item->getDrawable()->setPosition(pos);
+    add(item);
+    m_worldItems->push_back(item);
+}
+void StateInventory::pickupItems()
+{
     if (getGame()->input()->mouse()->justPressed(jt::MouseButtonCode::MBLeft)) {
         auto const mp = getGame()->input()->mouse()->getMousePositionWorld();
         for (auto& item : *m_worldItems) {

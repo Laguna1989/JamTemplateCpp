@@ -24,6 +24,8 @@ class StateInventory : public jt::GameState {
     void createItemRepository();
     void loadTilemap();
     void createWorldItems();
+    void pickupItems();
+    void spawnWorldItem(std::string const& itemReferenceId, jt::Vector2f const& pos);
 };
 
 #endif // GUARD_JAMTEMPLATE_STATE_INVENTORY_HPP

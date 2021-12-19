@@ -25,6 +25,11 @@
 			"top": 96,
 			"width": 16,
 			"height": 16
+		},
+		"worldItemOffset":
+		{
+			"x": 4,
+			"y": 4
 		}
     }
 ]
