@@ -115,6 +115,23 @@
                  "width":24,
                  "x":168,
                  "y":120
+                }, 
+                {
+                 "height":24,
+                 "id":7,
+                 "name":"item_helm",
+                 "properties":[
+                        {
+                         "name":"referenceid",
+                         "type":"string",
+                         "value":"item_armor_helmet_01"
+                        }],
+                 "rotation":0,
+                 "type":"item",
+                 "visible":true,
+                 "width":24,
+                 "x":216,
+                 "y":120
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -123,7 +140,7 @@
          "y":0
         }],
  "nextlayerid":4,
- "nextobjectid":7,
+ "nextobjectid":8,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.7.2",

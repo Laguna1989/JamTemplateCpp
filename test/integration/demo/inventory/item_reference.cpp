@@ -31,7 +31,11 @@ void from_json(nlohmann::json const& j, ItemReference& item)
     j.at("value").get_to(item.value);
     j.at("worldItemSpriteFileName").get_to(item.worldItemSpriteFileName);
     j.at("worldItemSpriteRect").get_to(item.worldItemSpriteRect);
+    // optional json entries
     if (j.count("worldItemOffset") != 0) {
         j.at("worldItemOffset").get_to(item.worldItemOffset);
+    }
+    if (j.count("equipSlot") != 0) {
+        j.at("equipSlot").get_to(item.equipSlot);
     }
 }

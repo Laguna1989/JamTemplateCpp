@@ -30,6 +30,27 @@
 		{
 			"x": 4,
 			"y": 4
-		}
+		},
+		"equipSlot": "torso"
+    },
+	{
+        "listName": "Helm 1",
+        "referenceId": "item_armor_helmet_01",
+        "value": 20.0,
+        "weight": 5.0,
+        "worldItemSpriteFileName": "assets/demos/inventory/items.png",
+		"worldItemSpriteRect":
+		{
+			"left": 0,
+			"top": 112,
+			"width": 16,
+			"height": 16
+		},
+		"worldItemOffset":
+		{
+			"x": 4,
+			"y": 4
+		},
+		"equipSlot": "head"
     }
 ]

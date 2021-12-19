@@ -14,6 +14,7 @@ struct ItemReference {
     std::string listName;
     float value { 0.0f };
     float weight { 1.0f };
+    std::string equipSlot { "" };
 };
 
 bool operator<(ItemReference const& lhs, ItemReference const& rhs);
