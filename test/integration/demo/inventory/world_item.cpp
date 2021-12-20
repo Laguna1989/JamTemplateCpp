@@ -7,14 +7,11 @@ WorldItem::WorldItem(
 {
     m_itemRef = ref;
     m_drawable = drawable;
+    m_drawable->setOffset(m_itemRef->worldItemOffset);
 }
 
 void WorldItem::doCreate() { }
-void WorldItem::doUpdate(float const elapsed)
-{
-    m_drawable->setOffset(m_itemRef->worldItemOffset);
-    m_drawable->update(elapsed);
-}
+void WorldItem::doUpdate(float const elapsed) { m_drawable->update(elapsed); }
 void WorldItem::doDraw() const { m_drawable->draw(getGame()->getRenderTarget()); }
 
 std::shared_ptr<jt::DrawableInterface> WorldItem::getDrawable() { return m_drawable; }

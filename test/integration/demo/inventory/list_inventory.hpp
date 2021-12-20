@@ -2,16 +2,22 @@
 #define GUARD_JAMTEMPLATE_INVENTORY_HPP
 
 #include "game_object.hpp"
+#include "inventory_interface.hpp"
 #include "item_reference.hpp"
 #include "item_repository.hpp"
 #include <map>
 
-class ListInventory : public jt::GameObject {
+class ListInventory : public InventoryInterface, public jt::GameObject {
 public:
     ListInventory(std::weak_ptr<ItemRepository> repo);
-    void addItem(std::string const& refId);
-    // TODO include count
-    std::string getAndResetItemToSpawn();
+    void addItem(std::string const& refId) override;
+    std::string getAndResetItemToSpawn() override;
+
+    std::vector<std::string> getEquippedItems() override;
+
+    int getTotalWeight() override;
+    int getMoney() override;
+    void changeMoney(int amount) override;
 
 private:
     void doCreate() override;
@@ -20,6 +26,8 @@ private:
 
     std::map<std::string, int> m_inventory;
     std::weak_ptr<ItemRepository> m_repository;
+
+    int m_money { 0 };
 
     mutable bool m_drawInventory { false };
 

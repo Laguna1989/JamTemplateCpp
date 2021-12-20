@@ -41,7 +41,6 @@ void ListInventory::equipItem()
     auto itemReference = m_repository.lock()->getItemReferenceFromString(m_itemToEquip);
     m_equipped.at(itemReference->equipSlot) = m_itemToEquip;
 
-    // TODO might need some rework
     m_inventory[m_itemToEquip]--;
 
     m_itemToEquip = "";
@@ -144,7 +143,6 @@ void ListInventory::drawEquippedItems() const
 }
 void ListInventory::drawInventoryItems() const
 {
-    // TODO Look into ListClipper
     ImGui::BeginChild("Items");
     ImGuiTableFlags flags = ImGuiTableFlags_Borders | ImGuiTableFlags_RowBg;
     ImGui::BeginTable("Inventory", 4, flags);
@@ -175,7 +173,6 @@ void ListInventory::drawSingleItemInInventory(std::pair<std::string const, int> 
 
     ImGui::TableSetColumnIndex(1);
     auto const itemName = itemReference->listName;
-    // TODO clickable button with actions
 
     std::string const popupName = "item" + itemName;
     if (ImGui::Button(itemName.c_str())) {
@@ -227,3 +224,34 @@ std::vector<std::string> ListInventory::getItemReferenceIdsForEquipmentSlot(
     }
     return itemsForSlot;
 }
+
+std::vector<std::string> ListInventory::getEquippedItems()
+{
+    std::vector<std::string> equippedItems;
+    for (auto const& kvp : m_equipped) {
+        if (kvp.second == "") {
+            continue;
+        }
+        equippedItems.push_back(kvp.second);
+    }
+    return equippedItems;
+}
+int ListInventory::getTotalWeight()
+{
+    int weightSum { 0 };
+    for (auto kvp : m_equipped) {
+        if (kvp.second == "") {
+            continue;
+        }
+        auto const itemReference = m_repository.lock()->getItemReferenceFromString(kvp.second);
+        weightSum += itemReference->weight;
+    }
+    for (auto const& kvp : m_inventory) {
+        auto const itemReference = m_repository.lock()->getItemReferenceFromString(kvp.first);
+        weightSum += itemReference->weight * kvp.second;
+    }
+    return weightSum;
+}
+
+int ListInventory::getMoney() { return m_money; }
+void ListInventory::changeMoney(int amount) { m_money += amount; }

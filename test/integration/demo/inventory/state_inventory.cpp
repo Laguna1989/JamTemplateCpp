@@ -1,6 +1,7 @@
 #include "state_inventory.hpp"
 #include "../control_command_move_cam.hpp"
 #include "game_interface.hpp"
+#include "list_inventory.hpp"
 #include "random/random.hpp"
 #include "tilemap/tileson_loader.hpp"
 
@@ -13,11 +14,12 @@ void StateInventory::doInternalCreate()
 
     createWorldItems();
 
-    m_inventory = std::make_shared<ListInventory>(m_itemRepository);
+    auto inventory = std::make_shared<ListInventory>(m_itemRepository);
+    add(inventory);
+    m_inventory = std::move(inventory);
     m_inventory->addItem("item_crystal_blue_01");
     m_inventory->addItem("item_crystal_blue_01");
-    m_inventory->addItem("item_armor_armor_01");
-    add(m_inventory);
+
     setAutoDraw(false);
 
     float const scrollSpeed = 170.0f;
@@ -83,7 +85,6 @@ void StateInventory::doInternalUpdate(float elapsed)
 
     std::string const& itemToSpawn = m_inventory->getAndResetItemToSpawn();
     if (itemToSpawn != "") {
-        // TODO spwan around player and not at random position.
         auto const px = jt::Random::getInt(2, 8);
         auto const py = jt::Random::getInt(2, 8);
         jt::Vector2f const pos { px * 24.0f, py * 24.0f };

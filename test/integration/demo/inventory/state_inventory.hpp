@@ -2,8 +2,8 @@
 #define GUARD_JAMTEMPLATE_STATE_INVENTORY_HPP
 
 #include "game_state.hpp"
+#include "inventory_interface.hpp"
 #include "item_repository.hpp"
-#include "list_inventory.hpp"
 #include "object_group.hpp"
 #include "tilemap/object_layer.hpp"
 #include "tilemap/tile_layer.hpp"
@@ -18,7 +18,7 @@ class StateInventory : public jt::GameState {
     std::shared_ptr<jt::tilemap::ObjectLayer> m_objectsLayer;
 
     // would normally be owned by a player object
-    std::shared_ptr<ListInventory> m_inventory;
+    std::shared_ptr<InventoryInterface> m_inventory;
     std::shared_ptr<ItemRepository> m_itemRepository;
     std::shared_ptr<jt::ObjectGroup<WorldItem>> m_worldItems;
     void createItemRepository();
