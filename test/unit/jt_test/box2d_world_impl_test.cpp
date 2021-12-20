@@ -17,7 +17,8 @@ public:
 TEST_F(Box2dWorldImplTest, CreateObject)
 {
     b2BodyDef groundBodyDef;
-    wrapper->createBody(&groundBodyDef);
+    auto body = wrapper->createBody(&groundBodyDef);
+    ASSERT_NE(body, nullptr);
 }
 
 TEST_F(Box2dWorldImplTest, DestroyObject)
@@ -26,3 +27,27 @@ TEST_F(Box2dWorldImplTest, DestroyObject)
     auto body = wrapper->createBody(&groundBodyDef);
     wrapper->destroyBody(body);
 }
+
+TEST_F(Box2dWorldImplTest, CreateJoint)
+{
+    b2BodyDef groundBodyDef;
+    auto bodya = wrapper->createBody(&groundBodyDef);
+    auto bodyb = wrapper->createBody(&groundBodyDef);
+    b2RevoluteJointDef def;
+    def.Initialize(bodya, bodyb, b2Vec2_zero);
+    auto joint = wrapper->createJoint(&def);
+    ASSERT_NE(joint, nullptr);
+}
+
+TEST_F(Box2dWorldImplTest, DestroyJoint)
+{
+    b2BodyDef groundBodyDef;
+    auto bodya = wrapper->createBody(&groundBodyDef);
+    auto bodyb = wrapper->createBody(&groundBodyDef);
+    b2RevoluteJointDef def;
+    def.Initialize(bodya, bodyb, b2Vec2_zero);
+    auto joint = wrapper->createJoint(&def);
+    wrapper->destroyJoint(joint);
+}
+
+TEST_F(Box2dWorldImplTest, Step) { wrapper->step(0.1f, 1, 1); }
