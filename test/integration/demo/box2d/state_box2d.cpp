@@ -1,4 +1,5 @@
 ﻿#include "state_box2d.hpp"
+#include "../state_select.hpp"
 #include "box2dwrapper/box2d_world_impl.hpp"
 #include "conversions.hpp"
 #include "game_interface.hpp"
@@ -6,7 +7,6 @@
 #include "lerp.hpp"
 #include "movement_object.hpp"
 #include "random/random.hpp"
-#include "state_select.hpp"
 #include "tweens/tween_rotation.hpp"
 #include "tweens/tween_scale.hpp"
 

@@ -2,8 +2,8 @@
 #define GUARD_JAMTEMAPLTE_ACTOR_HPP
 
 #include "game_object.hpp"
+#include "pathfinder/node_interface.hpp"
 #include "sprite.hpp"
-#include <pathfinder/node_interface.hpp>
 
 class Actor : public ::jt::GameObject {
 public:

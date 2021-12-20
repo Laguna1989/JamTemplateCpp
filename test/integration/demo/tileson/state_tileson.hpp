@@ -3,9 +3,9 @@
 
 #include "actor.hpp"
 #include "game_state.hpp"
+#include "tilemap/node_layer.hpp"
+#include "tilemap/object_layer.hpp"
 #include <memory>
-#include <tilemap/node_layer.hpp>
-#include <tilemap/object_layer.hpp>
 
 namespace jt {
 namespace tilemap {
