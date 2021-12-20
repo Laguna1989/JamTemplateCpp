@@ -23,8 +23,6 @@ public:
 
     void startGame(GameLoopFunctionPtr gameloop_function) override;
 
-    void setupRenderTarget() override;
-
 private:
     jt::Recti m_srcRect;
     jt::Recti m_destRect;

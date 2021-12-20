@@ -27,8 +27,6 @@ public:
 
     void startGame(GameLoopFunctionPtr gameloop_function) override;
 
-    void setupRenderTarget() override;
-
 private:
     std::shared_ptr<sf::View> m_view { nullptr };
 
@@ -37,6 +35,8 @@ private:
     // override functions from GameBase
     virtual void doUpdate(float const elapsed) override;
     virtual void doDraw() const override;
+
+    void setupRenderTarget();
 };
 
 } // namespace jt
