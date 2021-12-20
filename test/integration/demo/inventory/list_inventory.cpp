@@ -238,7 +238,7 @@ std::vector<std::string> ListInventory::getEquippedItems()
 }
 int ListInventory::getTotalWeight()
 {
-    int weightSum { 0 };
+    float weightSum { 0 };
     for (auto kvp : m_equipped) {
         if (kvp.second == "") {
             continue;
@@ -250,7 +250,7 @@ int ListInventory::getTotalWeight()
         auto const itemReference = m_repository.lock()->getItemReferenceFromString(kvp.first);
         weightSum += itemReference->weight * kvp.second;
     }
-    return weightSum;
+    return static_cast<int>(weightSum);
 }
 
 int ListInventory::getMoney() { return m_money; }

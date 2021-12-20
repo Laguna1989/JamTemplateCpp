@@ -16,8 +16,8 @@ public:
 
 private:
     std::shared_ptr<jt::DrawableInterface> m_drawable;
-    // TODO could be just a string
-    std::shared_ptr<ItemReference> m_itemRef;
+
+    std::string m_refId;
 
     void doCreate() override;
     void doUpdate(float const /*elapsed*/) override;
