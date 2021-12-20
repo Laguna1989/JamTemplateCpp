@@ -7,7 +7,6 @@
 
 void StateInventory::doInternalCreate()
 {
-
     createItemRepository();
 
     loadTilemap();
@@ -91,6 +90,7 @@ void StateInventory::doInternalUpdate(float elapsed)
         spawnWorldItem(itemToSpawn, pos);
     }
 }
+
 void StateInventory::spawnWorldItem(std::string const& itemReferenceId, jt::Vector2f const& pos)
 {
     auto item = m_itemRepository->createWorldItem(
@@ -100,6 +100,7 @@ void StateInventory::spawnWorldItem(std::string const& itemReferenceId, jt::Vect
     add(item);
     m_worldItems->push_back(item);
 }
+
 void StateInventory::pickupItems()
 {
     if (getGame()->input()->mouse()->justPressed(jt::MouseButtonCode::MBLeft)) {
