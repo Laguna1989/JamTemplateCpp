@@ -11,11 +11,7 @@ bool jt::null_objects::RenderWindowNull::isOpen() const { return true; }
 void jt::null_objects::RenderWindowNull::checkForClose() { }
 std::shared_ptr<jt::renderTarget> jt::null_objects::RenderWindowNull::createRenderTarget()
 {
-#if USE_SFML
-    return std::make_shared<jt::renderTarget>();
-#else
     return nullptr;
-#endif
 }
 jt::Vector2f jt::null_objects::RenderWindowNull::getSize() const { return m_size; }
 void jt::null_objects::RenderWindowNull::draw(std::unique_ptr<jt::Sprite>& ptr)
