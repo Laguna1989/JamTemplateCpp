@@ -1,6 +1,7 @@
 #include "inventory_list_imgui.hpp"
 #include "game_interface.hpp"
 #include "imgui.h"
+#include "item_reference.hpp"
 #include <iostream>
 
 InventoryListImgui::InventoryListImgui(std::weak_ptr<ItemRepository> repo)

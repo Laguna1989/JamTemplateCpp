@@ -1,11 +1,11 @@
-#ifndef GUARD_JAMTEMPLATE_INVENTORY_HPP
-#define GUARD_JAMTEMPLATE_INVENTORY_HPP
+#ifndef GUARD_JAMTEMPLATE_INVENTORY_LIST_IMGUI_HPP
+#define GUARD_JAMTEMPLATE_INVENTORY_LIST_IMGUI_HPP
 
 #include "game_object.hpp"
 #include "inventory_list.hpp"
-#include "item_reference.hpp"
 #include "item_repository.hpp"
-#include <map>
+#include <memory>
+#include <vector>
 
 class InventoryListImgui : public InventoryList, public jt::GameObject {
 public:
@@ -25,4 +25,4 @@ private:
     std::vector<std::string> getItemReferenceIdsForEquipmentSlot(std::string const& slot) const;
 };
 
-#endif // GUARD_JAMTEMPLATE_INVENTORY_HPP
+#endif // GUARD_JAMTEMPLATE_INVENTORY_LIST_IMGUI_HPP
