@@ -17,7 +17,7 @@ TEST_P(RenderwindowSFMLTestFixture, GetMousePositionWithoutView)
 
 TEST_P(RenderwindowSFMLTestFixture, CreateRenderTargetReturnsValidTarget)
 {
-    ASSERT_NE(m_window->createRenderTarget(), nullptr);
+    GetParam()->checkRenderTarget(m_window->createRenderTarget());
 }
 
 INSTANTIATE_TEST_SUITE_P(RenderwindowSFMLTest, RenderwindowSFMLTestFixture,
