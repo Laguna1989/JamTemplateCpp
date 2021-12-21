@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1640080350834,
+  "lastUpdate": 1640110423764,
   "repoUrl": "https://github.com/Laguna1989/JamTemplateCpp",
   "entries": {
     "Benchmark": [
@@ -2412,6 +2412,42 @@ window.BENCHMARK_DATA = {
             "value": 210.6831216250029,
             "unit": "ms/iter",
             "extra": "iterations: 8\ncpu: 76.5059625 ms\nthreads: 1"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "laguna_1989@gmx.net",
+            "name": "Laguna1989",
+            "username": "Laguna1989"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "054d04789017203ec8eae0ab72e45713e72c086d",
+          "message": "Merge pull request #122 from Laguna1989/FEATURE_RefactorRenderWindowSFML\n\nFix rendertarget issue and slow performance test",
+          "timestamp": "2021-12-21T19:11:39+01:00",
+          "tree_id": "2efcf18c9ab7709be0cd67b03766e17140201de2",
+          "url": "https://github.com/Laguna1989/JamTemplateCpp/commit/054d04789017203ec8eae0ab72e45713e72c086d"
+        },
+        "date": 1640110423277,
+        "tool": "googlecpp",
+        "benches": [
+          {
+            "name": "BM_StartGame",
+            "value": 0.2900545342740105,
+            "unit": "ms/iter",
+            "extra": "iterations: 10985\ncpu: 0.06354633591260811 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GamestateWithTweeningShapes",
+            "value": 3.301675902127712,
+            "unit": "ms/iter",
+            "extra": "iterations: 235\ncpu: 2.9273617021276594 ms\nthreads: 1"
           }
         ]
       }
