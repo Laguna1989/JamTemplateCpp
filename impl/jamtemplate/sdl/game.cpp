@@ -46,11 +46,8 @@ Game::Game(std::shared_ptr<RenderWindowInterface> window,
     m_logger->debug("Game constructor done", { "jt" });
 }
 
-void Game::setupRenderTarget() { }
-
 void Game::startGame(GameLoopFunctionPtr gameloop_function)
 {
-    setupRenderTarget();
     addBasicActionCommands(*this);
 #ifdef JT_ENABLE_WEB
     emscripten_set_main_loop(gameloop_function, 0, 1);

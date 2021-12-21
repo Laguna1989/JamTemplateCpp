@@ -19,6 +19,8 @@ public:
     std::shared_ptr<MockCamera> camera { nullptr };
     std::shared_ptr<jt::MusicPlayerInterface> music_player { nullptr };
     std::shared_ptr<MockState> state { nullptr };
+    std::shared_ptr<testing::NiceMock<MockInput>> input;
+    std::shared_ptr<testing::NiceMock<MockStateManager>> stateManager;
 
     void SetUp() override
     {
@@ -26,7 +28,7 @@ public:
         // getSize has to be called, so that the game knows how big the rendertarget will be.
         ON_CALL(*window, getSize()).WillByDefault([]() { return jt::Vector2f { 100.0f, 200.0f }; });
 
-        auto input = std::make_shared<::testing::NiceMock<MockInput>>();
+        input = std::make_shared<::testing::NiceMock<MockInput>>();
 
         music_player = std::make_shared<jt::MusicPlayerNull>();
 
@@ -35,7 +37,7 @@ public:
         ON_CALL(*camera, getZoom).WillByDefault([this]() { return zoom; });
 
         state = std::make_shared<MockState>();
-        auto stateManager = std::make_shared<::testing::NiceMock<MockStateManager>>();
+        stateManager = std::make_shared<::testing::NiceMock<MockStateManager>>();
         ON_CALL(*stateManager, getCurrentState).WillByDefault(::testing::Return(state));
 
         g = std::make_shared<jt::Game>(window, input, music_player, camera, stateManager);

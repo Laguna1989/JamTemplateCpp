@@ -1,7 +1,7 @@
 #include "state_inventory.hpp"
 #include "../control_command_move_cam.hpp"
 #include "game_interface.hpp"
-#include "list_inventory.hpp"
+#include "inventory_list_imgui.hpp"
 #include "random/random.hpp"
 #include "tilemap/tileson_loader.hpp"
 
@@ -13,7 +13,7 @@ void StateInventory::doInternalCreate()
 
     createWorldItems();
 
-    auto inventory = std::make_shared<ListInventory>(m_itemRepository);
+    auto inventory = std::make_shared<InventoryListImgui>(m_itemRepository);
     add(inventory);
     m_inventory = std::move(inventory);
     m_inventory->addItem("item_crystal_blue_01");

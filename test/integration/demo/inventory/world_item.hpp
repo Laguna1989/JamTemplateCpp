@@ -5,7 +5,7 @@
 #include "item_reference.hpp"
 #include "sprite.hpp"
 
-class ListInventory;
+class InventoryListImgui;
 
 class WorldItem : public jt::GameObject {
 public:

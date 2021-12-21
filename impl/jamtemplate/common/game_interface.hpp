@@ -53,9 +53,6 @@ public:
     /// \return the state manager
     virtual std::shared_ptr<StateManagerInterface> getStateManager() = 0;
 
-    /// Set up the render Target
-    virtual void setupRenderTarget() = 0;
-
     /// Get the render Target
     /// \return the render target
     virtual std::shared_ptr<jt::renderTarget> getRenderTarget() const = 0;

@@ -8,7 +8,7 @@ TEST_F(GameTest, SetupRenderTarget)
     EXPECT_CALL(*window, createRenderTarget())
         .WillOnce(::testing::Return(std::make_shared<jt::renderTarget>()));
     EXPECT_CALL(*window, getSize()).WillOnce(::testing::Return(jt::Vector2f { 20.0f, 40.0f }));
-    g->setupRenderTarget();
+    g = std::make_shared<jt::Game>(window, input, music_player, camera, stateManager);
     ASSERT_EQ(g->getRenderTarget()->getSize().x, 20);
     ASSERT_EQ(g->getRenderTarget()->getSize().y, 40);
 }
@@ -20,7 +20,7 @@ TEST_F(GameTest, SetupRenderTargetWithZoom)
     EXPECT_CALL(*window, createRenderTarget())
         .WillOnce(::testing::Return(std::make_shared<jt::renderTarget>()));
     EXPECT_CALL(*window, getSize()).WillOnce(::testing::Return(jt::Vector2f { 20.0f, 40.0f }));
-    g->setupRenderTarget();
+    g = std::make_shared<jt::Game>(window, input, music_player, camera, stateManager);
     ASSERT_EQ(g->getRenderTarget()->getSize().x, 10);
     ASSERT_EQ(g->getRenderTarget()->getSize().y, 20);
 }
@@ -30,7 +30,7 @@ TEST_F(GameTest, SetUpRenderTarget)
     EXPECT_CALL(*window, createRenderTarget())
         .WillOnce(::testing::Return(std::make_shared<jt::renderTarget>()));
     EXPECT_CALL(*window, getSize()).WillOnce(::testing::Return(jt::Vector2f { 20.0f, 40.0f }));
-    g->setupRenderTarget();
+    g = std::make_shared<jt::Game>(window, input, music_player, camera, stateManager);
     ASSERT_NE(g->getRenderTarget(), nullptr);
 }
 
@@ -38,8 +38,15 @@ TEST_F(GameTest, DrawWithRenderTargetAndState)
 {
     EXPECT_CALL(*window, createRenderTarget())
         .WillOnce(::testing::Return(std::make_shared<jt::renderTarget>()));
-    EXPECT_CALL(*window, getSize()).WillRepeatedly(::testing::Return(jt::Vector2f { 20.0f, 40.0f }));
-    g->setupRenderTarget();
+    EXPECT_CALL(*window, getSize())
+        .WillRepeatedly(::testing::Return(jt::Vector2f { 20.0f, 40.0f }));
+
+    state = std::make_shared<MockState>();
+    stateManager = std::make_shared<::testing::NiceMock<MockStateManager>>();
+    ON_CALL(*stateManager, getCurrentState).WillByDefault(::testing::Return(state));
+
+    g = std::make_shared<jt::Game>(window, input, music_player, camera, stateManager);
+    state->setGameInstance(g);
     ASSERT_NE(g->getRenderTarget(), nullptr);
 
     EXPECT_CALL(*state, doInternalUpdate(0.1f));

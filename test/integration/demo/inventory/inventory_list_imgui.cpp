@@ -1,30 +1,15 @@
-#include "list_inventory.hpp"
+#include "inventory_list_imgui.hpp"
 #include "game_interface.hpp"
 #include "imgui.h"
+#include "item_reference.hpp"
 #include <iostream>
 
-ListInventory::ListInventory(std::weak_ptr<ItemRepository> repo)
+InventoryListImgui::InventoryListImgui(std::weak_ptr<ItemRepository> repo)
+    : InventoryList(repo)
 {
-    m_repository = repo;
-    m_equipped["head"] = "";
-    m_equipped["torso"] = "";
-    m_equipped["hands"] = "";
-    m_equipped["weapon"] = "";
-    m_equipped["legs"] = "";
-    m_equipped["feet"] = "";
 }
 
-void ListInventory::addItem(std::string const& refId)
-{
-    if (m_inventory.count(refId) == 0) {
-        m_inventory[refId] = 0;
-    }
-    m_inventory[refId]++;
-}
-
-void ListInventory::doCreate() { }
-
-void ListInventory::doUpdate(float const)
+void InventoryListImgui::doUpdate(float const)
 {
     if (getGame()->input()->keyboard()->justPressed(jt::KeyCode::I)) {
         m_drawInventory = !m_drawInventory;
@@ -33,51 +18,8 @@ void ListInventory::doUpdate(float const)
     unequipItem();
     equipItem();
 }
-void ListInventory::equipItem()
-{
-    if (m_itemToEquip == "") {
-        return;
-    }
-    auto itemReference = m_repository.lock()->getItemReferenceFromString(m_itemToEquip);
-    m_equipped.at(itemReference->equipSlot) = m_itemToEquip;
 
-    m_inventory[m_itemToEquip]--;
-
-    m_itemToEquip = "";
-}
-
-void ListInventory::unequipItem()
-{
-    if (m_itemToUnequip == "") {
-        return;
-    }
-    for (auto& kvp : m_equipped) {
-        if (kvp.second == m_itemToUnequip) {
-            addItem(kvp.second);
-            kvp.second = "";
-            break;
-        }
-    }
-    m_itemToUnequip = "";
-}
-
-void ListInventory::removeItemToDrop()
-{
-    if (m_itemToDrop == "") {
-        return;
-    }
-    if (m_inventory.count(m_itemToDrop) == 0) {
-        return;
-    }
-    if (m_inventory[m_itemToDrop] == 0) {
-        return;
-    }
-    m_inventory[m_itemToDrop]--;
-    m_itemToSpawn = m_itemToDrop;
-    m_itemToDrop = "";
-}
-
-void ListInventory::doDraw() const
+void InventoryListImgui::doDraw() const
 {
     if (m_drawInventory) {
         ImGui::SetNextWindowPos(ImVec2 { 400, 0 });
@@ -93,11 +35,11 @@ void ListInventory::doDraw() const
         ImGui::End();
     }
 }
-void ListInventory::drawEquippedItems() const
+void InventoryListImgui::drawEquippedItems() const
 {
     ImGui::Text("Equipped Items");
     for (auto const& kvp : m_equipped) {
-        ImGui::Text(kvp.first.c_str());
+        ImGui::Text("%s", kvp.first.c_str());
         ImGui::SameLine();
         std::string const popupName = "item" + kvp.first;
 
@@ -141,7 +83,7 @@ void ListInventory::drawEquippedItems() const
         }
     }
 }
-void ListInventory::drawInventoryItems() const
+void InventoryListImgui::drawInventoryItems() const
 {
     ImGui::BeginChild("Items");
     ImGuiTableFlags flags = ImGuiTableFlags_Borders | ImGuiTableFlags_RowBg;
@@ -163,7 +105,8 @@ void ListInventory::drawInventoryItems() const
     ImGui::EndTable();
     ImGui::EndChild();
 }
-void ListInventory::drawSingleItemInInventory(std::pair<std::string const, int> const& kvp) const
+void InventoryListImgui::drawSingleItemInInventory(
+    std::pair<std::string const, int> const& kvp) const
 {
     ImGui::TableSetColumnIndex(0);
     ImGui::Text("%i", kvp.second);
@@ -205,14 +148,7 @@ void ListInventory::drawSingleItemInInventory(std::pair<std::string const, int> 
     ImGui::Text("%.1f (%.1f)", itemReference->weight * kvp.second, itemReference->weight);
 }
 
-std::string ListInventory::getAndResetItemToSpawn()
-{
-    std::string empty { "" };
-
-    std::swap(empty, m_itemToSpawn);
-    return empty;
-}
-std::vector<std::string> ListInventory::getItemReferenceIdsForEquipmentSlot(
+std::vector<std::string> InventoryListImgui::getItemReferenceIdsForEquipmentSlot(
     std::string const& slot) const
 {
     std::vector<std::string> itemsForSlot {};
@@ -224,34 +160,3 @@ std::vector<std::string> ListInventory::getItemReferenceIdsForEquipmentSlot(
     }
     return itemsForSlot;
 }
-
-std::vector<std::string> ListInventory::getEquippedItems()
-{
-    std::vector<std::string> equippedItems;
-    for (auto const& kvp : m_equipped) {
-        if (kvp.second == "") {
-            continue;
-        }
-        equippedItems.push_back(kvp.second);
-    }
-    return equippedItems;
-}
-int ListInventory::getTotalWeight()
-{
-    float weightSum { 0 };
-    for (auto kvp : m_equipped) {
-        if (kvp.second == "") {
-            continue;
-        }
-        auto const itemReference = m_repository.lock()->getItemReferenceFromString(kvp.second);
-        weightSum += itemReference->weight;
-    }
-    for (auto const& kvp : m_inventory) {
-        auto const itemReference = m_repository.lock()->getItemReferenceFromString(kvp.first);
-        weightSum += itemReference->weight * kvp.second;
-    }
-    return static_cast<int>(weightSum);
-}
-
-int ListInventory::getMoney() { return m_money; }
-void ListInventory::changeMoney(int amount) { m_money += amount; }
