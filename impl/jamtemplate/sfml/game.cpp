@@ -32,11 +32,11 @@ Game::Game(std::shared_ptr<RenderWindowInterface> window,
 
 void Game::setupRenderTarget()
 {
-    m_logger->debug("Game setupRenderTarget", { "jt" });
     m_renderTarget = getRenderWindow()->createRenderTarget();
     if (m_renderTarget == nullptr) {
         return;
     }
+    m_logger->debug("Game setupRenderTarget", { "jt" });
     auto const windowSize = getRenderWindow()->getSize();
     auto const zoom = getCamera()->getZoom();
     auto const scaledWidth = static_cast<unsigned int>(windowSize.x / zoom);
