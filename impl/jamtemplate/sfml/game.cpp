@@ -27,6 +27,7 @@ Game::Game(std::shared_ptr<RenderWindowInterface> window,
     m_sprite_for_drawing = std::make_unique<jt::Sprite>();
     m_textureManager = std::make_shared<jt::TextureManagerImpl>();
     m_logger->debug("Game constructor done", { "jt" });
+    setupRenderTarget();
 }
 
 void Game::setupRenderTarget()
@@ -51,9 +52,10 @@ void Game::setupRenderTarget()
 
 void Game::startGame(GameLoopFunctionPtr gameloop_function)
 {
+    // cannot be done in constructor as this is not fully available
     addBasicActionCommands(*this);
+
     m_logger->debug("startGame", { "jt" });
-    setupRenderTarget();
     while (getRenderWindow()->isOpen()) {
         getRenderWindow()->checkForClose();
         gameloop_function();
