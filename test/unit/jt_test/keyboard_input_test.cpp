@@ -1,5 +1,6 @@
 ﻿#include "input/keyboard_input.hpp"
 #include "gtest/gtest.h"
+#include "command_recorder.hpp"
 
 TEST(KeyboardInput, AllKeysAlwaysPressed)
 {
@@ -59,13 +60,6 @@ TEST(KeyboardInput, AllButtonsJustReleased)
         EXPECT_TRUE(keyboardInput.justReleased(k));
     }
 }
-
-class CommandRecorder : public ::jt::ControlCommandInterface {
-public:
-    bool m_executed { false };
-    void execute(float elapsed) override { m_executed = true; }
-    void reset() override { }
-};
 
 TEST(KeyboardInput, CommandExecutedForPressed)
 {
