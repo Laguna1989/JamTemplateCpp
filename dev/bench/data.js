@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1640417876201,
+  "lastUpdate": 1640444739532,
   "repoUrl": "https://github.com/Laguna1989/JamTemplateCpp",
   "entries": {
     "Benchmark": [
@@ -2448,6 +2448,42 @@ window.BENCHMARK_DATA = {
             "value": 3.925491789743628,
             "unit": "ms/iter",
             "extra": "iterations: 195\ncpu: 3.48349794871795 ms\nthreads: 1"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "laguna.ws@gmail.com",
+            "name": "Simon Weis",
+            "username": "Laguna1989"
+          },
+          "committer": {
+            "email": "laguna.ws@gmail.com",
+            "name": "Simon Weis",
+            "username": "Laguna1989"
+          },
+          "distinct": true,
+          "id": "e2ca40421b193a15c7a28a0f54b808776758afb3",
+          "message": "Fix performance test",
+          "timestamp": "2021-12-25T15:57:43+01:00",
+          "tree_id": "540070a3688ee8014e740f54aca59edc2f8c24fb",
+          "url": "https://github.com/Laguna1989/JamTemplateCpp/commit/e2ca40421b193a15c7a28a0f54b808776758afb3"
+        },
+        "date": 1640444738417,
+        "tool": "googlecpp",
+        "benches": [
+          {
+            "name": "BM_StartGame",
+            "value": 0.2390258059584219,
+            "unit": "ms/iter",
+            "extra": "iterations: 13997\ncpu: 0.04933047081517468 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GamestateWithTweeningShapes",
+            "value": 2.7188342193309185,
+            "unit": "ms/iter",
+            "extra": "iterations: 269\ncpu: 2.596471747211896 ms\nthreads: 1"
           }
         ]
       }
