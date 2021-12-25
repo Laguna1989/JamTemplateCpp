@@ -87,14 +87,14 @@ void StateTileson::moveCamera(float const elapsed)
 {
     auto const scrollspeed = 150.0f;
     if (getGame()->input().keyboard()->pressed(jt::KeyCode::D)) {
-        getGame()->getCamera()->move(jt::Vector2f { scrollspeed * elapsed, 0.0f });
+        getGame()->getCamera().move(jt::Vector2f { scrollspeed * elapsed, 0.0f });
     } else if (getGame()->input().keyboard()->pressed(jt::KeyCode::A)) {
-        getGame()->getCamera()->move(jt::Vector2f { -scrollspeed * elapsed, 0.0f });
+        getGame()->getCamera().move(jt::Vector2f { -scrollspeed * elapsed, 0.0f });
     }
     if (getGame()->input().keyboard()->pressed(jt::KeyCode::W)) {
-        getGame()->getCamera()->move(jt::Vector2f { 0.0f, -scrollspeed * elapsed });
+        getGame()->getCamera().move(jt::Vector2f { 0.0f, -scrollspeed * elapsed });
     } else if (getGame()->input().keyboard()->pressed(jt::KeyCode::S)) {
-        getGame()->getCamera()->move(jt::Vector2f { 0.0f, scrollspeed * elapsed });
+        getGame()->getCamera().move(jt::Vector2f { 0.0f, scrollspeed * elapsed });
     }
 }
 

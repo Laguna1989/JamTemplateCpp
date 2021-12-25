@@ -20,7 +20,7 @@ void horizontalFlip(std::unique_ptr<jt::Sprite> const& spr, float zoom, float wi
 namespace jt {
 
 Game::Game(RenderWindowInterface& window, InputManagerInterface& input,
-    MusicPlayerInterface& musicPlayer, std::shared_ptr<CamInterface> camera,
+    MusicPlayerInterface& musicPlayer, CamInterface& camera,
     std::shared_ptr<jt::StateManagerInterface> stateManager)
     : GameBase { window, input, musicPlayer, camera, stateManager }
 {
@@ -38,7 +38,7 @@ void Game::setupRenderTarget()
     }
     m_logger.debug("Game setupRenderTarget", { "jt" });
     auto const windowSize = getRenderWindow().getSize();
-    auto const zoom = getCamera()->getZoom();
+    auto const zoom = getCamera().getZoom();
     auto const scaledWidth = static_cast<unsigned int>(windowSize.x / zoom);
     auto const scaledHeight = static_cast<unsigned int>(windowSize.y / zoom);
 
@@ -67,19 +67,19 @@ void Game::doUpdate(float const elapsed)
     m_logger.verbose("update game, elapsed=" + std::to_string(elapsed), { "jt" });
     m_stateManager->getCurrentState()->update(elapsed);
 
-    getCamera()->update(elapsed);
+    getCamera().update(elapsed);
 
-    jt::Vector2f const mpf = getRenderWindow().getMousePosition() / getCamera()->getZoom();
+    jt::Vector2f const mpf = getRenderWindow().getMousePosition() / getCamera().getZoom();
 
-    input().update(MousePosition { mpf.x + getCamera()->getCamOffset().x,
-                       mpf.y + getCamera()->getCamOffset().y, mpf.x, mpf.y },
+    input().update(MousePosition { mpf.x + getCamera().getCamOffset().x,
+                       mpf.y + getCamera().getCamOffset().y, mpf.x, mpf.y },
         elapsed);
 
     if (m_view) {
         int const camOffsetix { static_cast<int>(
-            getCamera()->getCamOffset().x + m_view->getSize().x / 2) };
+            getCamera().getCamOffset().x + m_view->getSize().x / 2) };
         int const camOffsetiy { static_cast<int>(
-            getCamera()->getCamOffset().y + m_view->getSize().y / 2) };
+            getCamera().getCamOffset().y + m_view->getSize().y / 2) };
 
         m_view->setCenter(toLib(
             jt::Vector2f { static_cast<float>(camOffsetix), static_cast<float>(camOffsetiy) }));
@@ -103,10 +103,10 @@ void Game::doDraw() const
     const sf::Texture& texture = m_renderTarget->getTexture();
 
     m_sprite_for_drawing->fromTexture(texture);
-    auto const shakeOffset = getCamera()->getShakeOffset();
+    auto const shakeOffset = getCamera().getShakeOffset();
     m_sprite_for_drawing->setPosition(shakeOffset);
     // Note: RenderTexture has a bug and is displayed upside down.
-    horizontalFlip(m_sprite_for_drawing, getCamera()->getZoom(), getRenderWindow().getSize().y);
+    horizontalFlip(m_sprite_for_drawing, getCamera().getZoom(), getRenderWindow().getSize().y);
 
     getRenderWindow().draw(m_sprite_for_drawing);
 

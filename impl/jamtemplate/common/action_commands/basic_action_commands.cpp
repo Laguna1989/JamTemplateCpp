@@ -27,80 +27,61 @@ void addCommandClear(GameBase& game)
 
 void addCommandsCam(GameBase& game)
 {
-    game.storeActionCommand(game.getActionCommandManager()->registerTemporaryCommand("cam.shake",
-        [cam = std::weak_ptr<CamInterface> { game.getCamera() }, &logger = game.getLogger()](
-            auto args) {
+    game.storeActionCommand(game.getActionCommandManager()->registerTemporaryCommand(
+        "cam.shake", [&cam = game.getCamera(), &logger = game.getLogger()](auto args) {
             if (args.size() != 2) {
                 logger.error("invalid number of arguments");
                 return;
             }
             float duration = std::stof(args.at(0));
             float strength = std::stof(args.at(1));
-            if (cam.expired()) {
-                return;
-            }
-            cam.lock()->shake(duration, strength);
+            cam.shake(duration, strength);
         }));
-    game.storeActionCommand(game.getActionCommandManager()->registerTemporaryCommand("cam.reset",
-        [cam = std::weak_ptr<CamInterface> { game.getCamera() }, &logger = game.getLogger()](
-            auto args) {
+    game.storeActionCommand(game.getActionCommandManager()->registerTemporaryCommand(
+        "cam.reset", [&cam = game.getCamera(), &logger = game.getLogger()](auto args) {
             if (args.size() != 0) {
                 logger.error("invalid number of arguments");
                 return;
             }
-            if (cam.expired()) {
-                return;
-            }
-            cam.lock()->reset();
+            cam.reset();
         }));
-    game.storeActionCommand(game.getActionCommandManager()->registerTemporaryCommand("cam.zoom",
-        [cam = std::weak_ptr<CamInterface> { game.getCamera() }, &logger = game.getLogger()](
-            auto args) {
+    game.storeActionCommand(game.getActionCommandManager()->registerTemporaryCommand(
+        "cam.zoom", [&cam = game.getCamera(), &logger = game.getLogger()](auto args) {
             if (args.size() != 1) {
                 logger.error("invalid number of arguments");
                 return;
             }
             float zoom = std::stof(args.at(0));
-            if (cam.expired()) {
-                return;
-            }
-            cam.lock()->setZoom(zoom);
+
+            cam.setZoom(zoom);
         }));
-    game.storeActionCommand(game.getActionCommandManager()->registerTemporaryCommand("cam.pos",
-        [cam = std::weak_ptr<CamInterface> { game.getCamera() }, &logger = game.getLogger()](
-            auto args) {
+    game.storeActionCommand(game.getActionCommandManager()->registerTemporaryCommand(
+        "cam.pos", [&cam = game.getCamera(), &logger = game.getLogger()](auto args) {
             if (args.size() != 2 && args.size() != 0) {
                 logger.error("invalid number of arguments");
                 return;
             }
-            if (cam.expired()) {
-                return;
-            }
 
             if (args.size() == 0) {
-                auto const p = cam.lock()->getCamOffset();
+                auto const p = cam.getCamOffset();
                 logger.action(jt::MathHelper::floatToStringWithXDigits(p.x, 2) + " "
                     + jt::MathHelper::floatToStringWithXDigits(p.y, 2));
             } else {
                 float x = std::stof(args.at(0));
                 float y = std::stof(args.at(1));
 
-                cam.lock()->setCamOffset(Vector2f { x, y });
+                cam.setCamOffset(Vector2f { x, y });
             }
         }));
-    game.storeActionCommand(game.getActionCommandManager()->registerTemporaryCommand("cam.move",
-        [cam = std::weak_ptr<CamInterface> { game.getCamera() }, &logger = game.getLogger()](
-            auto args) {
+    game.storeActionCommand(game.getActionCommandManager()->registerTemporaryCommand(
+        "cam.move", [&cam = game.getCamera(), &logger = game.getLogger()](auto args) {
             if (args.size() != 2) {
                 logger.error("invalid number of arguments");
                 return;
             }
             float x = std::stof(args.at(0));
             float y = std::stof(args.at(1));
-            if (cam.expired()) {
-                return;
-            }
-            cam.lock()->move(Vector2f { x, y });
+            cam.move(Vector2f { x, y });
         }));
 }
 

@@ -19,15 +19,15 @@
 namespace jt {
 
 Game::Game(RenderWindowInterface& window, InputManagerInterface& input,
-    MusicPlayerInterface& musicPlayer, std::shared_ptr<CamInterface> camera,
+    MusicPlayerInterface& musicPlayer, CamInterface& camera,
     std::shared_ptr<StateManagerInterface> stateManager)
     : GameBase { window, input, musicPlayer, camera, stateManager }
 {
     auto const width = getRenderWindow().getSize().x;
     auto const height = getRenderWindow().getSize().y;
 
-    auto const scaledWidth = static_cast<int>(width / getCamera()->getZoom());
-    auto const scaledHeight = static_cast<int>(height / getCamera()->getZoom());
+    auto const scaledWidth = static_cast<int>(width / getCamera().getZoom());
+    auto const scaledHeight = static_cast<int>(height / getCamera().getZoom());
     m_srcRect = jt::Recti { 0, 0, scaledWidth, scaledHeight };
     m_destRect = jt::Recti { 0, 0, static_cast<int>(width), static_cast<int>(height) };
 
@@ -61,15 +61,15 @@ void Game::doUpdate(float const elapsed)
 {
     getRenderWindow().checkForClose();
     m_stateManager->getCurrentState()->update(elapsed);
-    getCamera()->update(elapsed);
+    getCamera().update(elapsed);
 
-    jt::Vector2f const mpf = getRenderWindow().getMousePosition() / getCamera()->getZoom();
+    jt::Vector2f const mpf = getRenderWindow().getMousePosition() / getCamera().getZoom();
 
-    input().update(MousePosition { mpf.x + getCamera()->getCamOffset().x,
-                       mpf.y + getCamera()->getCamOffset().y, mpf.x, mpf.y },
+    input().update(MousePosition { mpf.x + getCamera().getCamOffset().x,
+                       mpf.y + getCamera().getCamOffset().y, mpf.x, mpf.y },
         elapsed);
 
-    DrawableImpl::setCamOffset(-1.0f * getCamera()->getCamOffset());
+    DrawableImpl::setCamOffset(-1.0f * getCamera().getCamOffset());
 };
 
 void Game::doDraw() const
@@ -92,8 +92,8 @@ void Game::doDraw() const
     // Now render the texture target to our screen
     SDL_RenderClear(getRenderTarget().get());
     SDL_Rect sourceRect { m_srcRect.left, m_srcRect.top, m_srcRect.width, m_srcRect.height };
-    SDL_Rect destRect { static_cast<int>(getCamera()->getShakeOffset().x),
-        static_cast<int>(getCamera()->getShakeOffset().y), m_destRect.width, m_destRect.height };
+    SDL_Rect destRect { static_cast<int>(getCamera().getShakeOffset().x),
+        static_cast<int>(getCamera().getShakeOffset().y), m_destRect.width, m_destRect.height };
     SDL_RenderCopyEx(getRenderTarget().get(), t, &sourceRect, &destRect, 0, nullptr, SDL_FLIP_NONE);
     m_renderWindow.display();
     SDL_RenderPresent(getRenderTarget().get());

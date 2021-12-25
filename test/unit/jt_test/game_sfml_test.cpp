@@ -15,7 +15,7 @@ TEST_F(GameTest, SetupRenderTarget)
 
 TEST_F(GameTest, SetupRenderTargetWithZoom)
 {
-    EXPECT_CALL(*camera, getZoom()).WillOnce(::testing::Return(2.0f));
+    EXPECT_CALL(camera, getZoom()).WillOnce(::testing::Return(2.0f));
 
     EXPECT_CALL(window, createRenderTarget())
         .WillOnce(::testing::Return(std::make_shared<jt::renderTarget>()));

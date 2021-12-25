@@ -17,8 +17,8 @@ public:
     MOCK_METHOD(jt::InputManagerInterface&, input, (), (override));
     MOCK_METHOD(jt::MusicPlayerInterface&, getMusicPlayer, (), (override));
 
-    MOCK_METHOD(std::shared_ptr<jt::CamInterface>, getCamera, (), (override));
-    MOCK_METHOD(std::shared_ptr<jt::CamInterface>, getCamera, (), (const, override));
+    MOCK_METHOD(jt::CamInterface&, getCamera, (), (override));
+    MOCK_METHOD(jt::CamInterface&, getCamera, (), (const, override));
 
     MOCK_METHOD(std::shared_ptr<jt::StateManagerInterface>, getStateManager, (), (override));
 

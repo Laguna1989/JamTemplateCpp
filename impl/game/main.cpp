@@ -34,7 +34,7 @@ int main()
     jt::InputManager input { mouse, keyboard };
 
     jt::MusicPlayer musicPlayer;
-    auto camera = std::make_shared<jt::Camera>(GP::GetZoom());
+    jt::Camera camera { GP::GetZoom() };
     auto stateManager = std::make_shared<jt::StateManager>(std::make_shared<StateMenu>());
 
     game = std::make_shared<jt::Game>(window, input, musicPlayer, camera, stateManager);

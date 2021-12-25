@@ -34,20 +34,20 @@ public:
     virtual RenderWindowInterface& getRenderWindow() const = 0;
 
     /// Get the input manager
-    /// \return the input manager (can be nullptr)
+    /// \return the input manager
     virtual InputManagerInterface& input() = 0;
 
     /// Get the music player
-    /// \return the music player (can be nullptr)
+    /// \return the music player
     virtual MusicPlayerInterface& getMusicPlayer() = 0;
 
     /// Get the camera (non const)
-    /// \return the camera (can be nullptr)
-    virtual std::shared_ptr<CamInterface> getCamera() = 0;
+    /// \return the camera
+    virtual CamInterface& getCamera() = 0;
 
-    /// Get the camera (const
-    /// \return the camera (can be nullptr)
-    virtual std::shared_ptr<CamInterface> getCamera() const = 0;
+    /// Get the camera (const)
+    /// \return the camera
+    virtual CamInterface& getCamera() const = 0;
 
     /// Get the State Manager
     /// \return the state manager

@@ -31,7 +31,7 @@ int main()
     jt::RenderWindow window { 800, 600, "jt_demos" };
 
     jt::MusicPlayerNull music_player;
-    auto camera = std::make_shared<jt::Camera>(2.0f);
+    jt::Camera camera { 2.0f };
 
     auto stateManager = std::make_shared<jt::StateManager>(std::make_shared<StateSelect>());
 

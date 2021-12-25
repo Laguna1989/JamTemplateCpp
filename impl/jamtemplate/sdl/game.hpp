@@ -16,7 +16,7 @@ public:
     using Sptr = std::shared_ptr<Game>;
 
     Game(RenderWindowInterface& window, InputManagerInterface& input,
-        MusicPlayerInterface& musicPlayer, std::shared_ptr<CamInterface> camera,
+        MusicPlayerInterface& musicPlayer, CamInterface& camera,
         std::shared_ptr<StateManagerInterface> stateManager);
 
     void startGame(GameLoopFunctionPtr gameloop_function) override;
