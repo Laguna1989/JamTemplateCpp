@@ -98,6 +98,18 @@ TEST_F(GameTest, BasicActionCommands)
     ASSERT_FALSE(g->getActionCommandManager()->getAllCommands().empty());
 }
 
+TEST_F(GameTest, ResetCallsResetOnCamera)
+{
+    EXPECT_CALL(*camera, reset);
+    g->reset();
+}
+
+TEST_F(GameTest, ResetCallsResetOnInput)
+{
+    EXPECT_CALL(*input, reset);
+    g->reset();
+}
+
 TEST_F(GameTest, GetRenderWindowDoesNotReturnNullptr) { ASSERT_NE(g->getRenderWindow(), nullptr); }
 
 TEST_F(GameTest, GetCameraReturnsCorrectPointer) { ASSERT_EQ(g->getCamera(), camera); }

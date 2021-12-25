@@ -37,6 +37,9 @@ TEST_P(ColorHelpersHsv2RgbTestFixture, rgb2hsv)
         s_expected = 0.0f;
         v_expected = 0.0f;
     }
+    if (h_expected >= 360) {
+        h_expected = 0;
+    }
 
     auto [h, s, v] = jt::ColorHelpers::rgb2hsv(r, g, b);
     ASSERT_EQ(round(h), h_expected);
@@ -48,7 +51,8 @@ INSTANTIATE_TEST_SUITE_P(ColorHelpersHsv2RgbTestNoSaturationNoValue, ColorHelper
     ::testing::Values(std::make_tuple(0.0f, 0.0f, 0.0f, 0, 0, 0),
         std::make_tuple(120.0f, 0.0f, 0.0f, 0, 0, 0),
         std::make_tuple(120.0f + 360.0f, 0.0f, 0.0f, 0, 0, 0),
-        std::make_tuple(240.0f, 0.0f, 0.0f, 0, 0, 0)));
+        std::make_tuple(240.0f, 0.0f, 0.0f, 0, 0, 0),
+        std::make_tuple(361.0f, 100.0f, 100.0f, 255, 0, 0)));
 
 INSTANTIATE_TEST_SUITE_P(ColorHelpersHsv2RgbTestBasicColors, ColorHelpersHsv2RgbTestFixture,
     ::testing::Values(std::make_tuple(0.0f, 100.0f, 100.0f, 255, 0, 0),

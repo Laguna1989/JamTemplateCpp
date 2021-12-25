@@ -1,4 +1,7 @@
 #include "control_command_null.hpp"
+namespace jt {
 
-void jt::ControlCommandNull::execute(float /*elapsed*/) { }
-void jt::ControlCommandNull::reset() { }
+void ControlCommandNull::execute(float /*elapsed*/) { }
+void ControlCommandNull::reset() { }
+
+} // namespace jt

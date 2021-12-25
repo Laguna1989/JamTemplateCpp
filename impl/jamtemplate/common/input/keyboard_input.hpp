@@ -25,13 +25,13 @@ public:
 
     virtual void reset() override;
 
-    void setCommandJustPressed(std::vector<jt::KeyCode> key,
+    void setCommandJustPressed(std::vector<KeyCode> const& keys,
         std::shared_ptr<jt::ControlCommandInterface> command) override;
-    void setCommandPressed(std::vector<jt::KeyCode> key,
+    void setCommandPressed(std::vector<KeyCode> const& keys,
         std::shared_ptr<jt::ControlCommandInterface> command) override;
-    void setCommandReleased(std::vector<jt::KeyCode> key,
+    void setCommandReleased(std::vector<KeyCode> const& keys,
         std::shared_ptr<jt::ControlCommandInterface> command) override;
-    void setCommandJustReleased(std::vector<jt::KeyCode> key,
+    void setCommandJustReleased(std::vector<KeyCode> const& keys,
         std::shared_ptr<jt::ControlCommandInterface> command) override;
 
 private:

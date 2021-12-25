@@ -90,16 +90,16 @@ public:
     virtual void reset() = 0;
 
     virtual void setCommandJustPressed(
-        std::vector<jt::KeyCode> key, std::shared_ptr<jt::ControlCommandInterface> command)
+        std::vector<KeyCode> const& key, std::shared_ptr<jt::ControlCommandInterface> command)
         = 0;
     virtual void setCommandPressed(
-        std::vector<jt::KeyCode> key, std::shared_ptr<jt::ControlCommandInterface> command)
+        std::vector<KeyCode> const& key, std::shared_ptr<jt::ControlCommandInterface> command)
         = 0;
     virtual void setCommandReleased(
-        std::vector<jt::KeyCode> key, std::shared_ptr<jt::ControlCommandInterface> command)
+        std::vector<KeyCode> const& key, std::shared_ptr<jt::ControlCommandInterface> command)
         = 0;
     virtual void setCommandJustReleased(
-        std::vector<jt::KeyCode> key, std::shared_ptr<jt::ControlCommandInterface> command)
+        std::vector<KeyCode> const& key, std::shared_ptr<jt::ControlCommandInterface> command)
         = 0;
     virtual void updateCommands(float elapsed) = 0;
 };
