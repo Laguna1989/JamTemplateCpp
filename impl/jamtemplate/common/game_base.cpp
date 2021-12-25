@@ -13,12 +13,12 @@
 namespace jt {
 
 GameBase::GameBase(std::shared_ptr<jt::RenderWindowInterface> renderWindow,
-    std::shared_ptr<InputManagerInterface> input, std::shared_ptr<MusicPlayerInterface> musicPlayer,
+    std::shared_ptr<InputManagerInterface> input, MusicPlayerInterface& musicPlayer,
     std::shared_ptr<CamInterface> camera, std::shared_ptr<StateManagerInterface> stateManager)
     : m_renderWindow { std::move(renderWindow) }
     , m_inputManager { std::move(input) }
     , m_camera { std::move(camera) }
-    , m_musicPlayer { std::move(musicPlayer) }
+    , m_musicPlayer { musicPlayer }
     , m_stateManager { std::move(stateManager) }
 {
     if (m_renderWindow == nullptr) {
@@ -29,9 +29,6 @@ GameBase::GameBase(std::shared_ptr<jt::RenderWindowInterface> renderWindow,
     }
     if (m_camera == nullptr) {
         throw std::invalid_argument { "camera DI for game can not be null" };
-    }
-    if (m_musicPlayer == nullptr) {
-        throw std::invalid_argument { "music player DI for game can not be null" };
     }
     if (m_stateManager == nullptr) {
         throw std::invalid_argument { "getStateManager DI for game can not be null" };
@@ -85,7 +82,7 @@ std::shared_ptr<jt::RenderWindowInterface> GameBase::getRenderWindow() const
 
 std::shared_ptr<InputManagerInterface> GameBase::input() { return m_inputManager; }
 
-std::shared_ptr<MusicPlayerInterface> GameBase::getMusicPlayer() { return m_musicPlayer; }
+MusicPlayerInterface& GameBase::getMusicPlayer() { return m_musicPlayer; }
 
 std::shared_ptr<CamInterface> GameBase::getCamera() { return m_camera; }
 std::shared_ptr<CamInterface> GameBase::getCamera() const { return m_camera; }

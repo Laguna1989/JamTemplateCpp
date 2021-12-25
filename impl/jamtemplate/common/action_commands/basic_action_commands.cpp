@@ -149,44 +149,35 @@ void addCommandsMusicPlayer(GameBase& game)
 {
     game.storeActionCommand(game.getActionCommandManager()->registerTemporaryCommand("music.stop",
         [logger = std::weak_ptr<LoggerInterface> { game.getLogger() },
-            player = std::weak_ptr<MusicPlayerInterface> { game.getMusicPlayer() }](auto /*args*/) {
+            &player = game.getMusicPlayer()](auto /*args*/) {
             if (logger.expired()) {
                 return;
             }
-            if (player.expired()) {
-                return;
-            }
-            player.lock()->stopMusic();
+            player.stopMusic();
         }));
 
     game.storeActionCommand(game.getActionCommandManager()->registerTemporaryCommand("music.mute",
         [logger = std::weak_ptr<LoggerInterface> { game.getLogger() },
-            player = std::weak_ptr<MusicPlayerInterface> { game.getMusicPlayer() }](auto /*args*/) {
+            &player = game.getMusicPlayer()](auto /*args*/) {
             if (logger.expired()) {
                 return;
             }
-            if (player.expired()) {
-                return;
-            }
-            player.lock()->setMusicVolume(0);
+            player.setMusicVolume(0);
         }));
 
     game.storeActionCommand(game.getActionCommandManager()->registerTemporaryCommand("music.volume",
         [logger = std::weak_ptr<LoggerInterface> { game.getLogger() },
-            player = std::weak_ptr<MusicPlayerInterface> { game.getMusicPlayer() }](auto args) {
+            &player = game.getMusicPlayer()](auto args) {
             if (logger.expired()) {
-                return;
-            }
-            if (player.expired()) {
                 return;
             }
             if (args.size() == 0) {
                 logger.lock()->action("current volume: "
-                    + jt::MathHelper::floatToStringWithXDigits(player.lock()->getMusicVolume(), 2));
+                    + jt::MathHelper::floatToStringWithXDigits(player.getMusicVolume(), 2));
             } else if (args.size() == 1) {
                 auto volume = std::stof(args.at(0));
                 volume = jt::MathHelper::clamp(volume, 0.0f, 100.0f);
-                player.lock()->setMusicVolume(volume);
+                player.setMusicVolume(volume);
             } else {
                 logger.lock()->error("invalid number of arguments");
             }
@@ -194,16 +185,13 @@ void addCommandsMusicPlayer(GameBase& game)
 
     game.storeActionCommand(game.getActionCommandManager()->registerTemporaryCommand("music.play",
         [logger = std::weak_ptr<LoggerInterface> { game.getLogger() },
-            player = std::weak_ptr<MusicPlayerInterface> { game.getMusicPlayer() }](auto args) {
+            &player = game.getMusicPlayer()](auto args) {
             if (logger.expired()) {
-                return;
-            }
-            if (player.expired()) {
                 return;
             }
             if (args.size() == 1) {
                 auto track = args.at(0);
-                player.lock()->playMusic(track);
+                player.playMusic(track);
             } else {
                 logger.lock()->error("invalid number of arguments");
             }
@@ -211,14 +199,11 @@ void addCommandsMusicPlayer(GameBase& game)
 
     game.storeActionCommand(game.getActionCommandManager()->registerTemporaryCommand("music.file",
         [logger = std::weak_ptr<LoggerInterface> { game.getLogger() },
-            player = std::weak_ptr<MusicPlayerInterface> { game.getMusicPlayer() }](auto /*args*/) {
+            &player = game.getMusicPlayer()](auto /*args*/) {
             if (logger.expired()) {
                 return;
             }
-            if (player.expired()) {
-                return;
-            }
-            auto const file = player.lock()->getMusicFilePath();
+            auto const file = player.getMusicFilePath();
             logger.lock()->action("currently playing: '" + file + "'");
         }));
 }

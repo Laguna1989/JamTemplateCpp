@@ -39,7 +39,7 @@ public:
 
     /// Get the music player
     /// \return the music player (can be nullptr)
-    virtual std::shared_ptr<MusicPlayerInterface> getMusicPlayer() = 0;
+    virtual MusicPlayerInterface& getMusicPlayer() = 0;
 
     /// Get the camera (non const)
     /// \return the camera (can be nullptr)

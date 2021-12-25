@@ -16,13 +16,13 @@ public:
 
     /// Constructor
     /// \param window window
-    /// \param inputManager input manager
+    /// \param input input manager
     /// \param musicPlayer music player
     /// \param camera camera
     /// \param stateManager state manager
     Game(std::shared_ptr<RenderWindowInterface> window,
-        std::shared_ptr<InputManagerInterface> inputManager,
-        std::shared_ptr<MusicPlayerInterface> musicPlayer, std::shared_ptr<CamInterface> camera,
+        std::shared_ptr<InputManagerInterface> input, MusicPlayerInterface& musicPlayer,
+        std::shared_ptr<CamInterface> camera,
         std::shared_ptr<jt::StateManagerInterface> stateManager);
 
     void startGame(GameLoopFunctionPtr gameloop_function) override;

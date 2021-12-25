@@ -3,6 +3,7 @@
 
 #include "game_interface.hpp"
 #include "logging/logger_null.hpp"
+#include "music_player_interface.hpp"
 #include "render_window_null.hpp"
 #include <gmock/gmock.h>
 
@@ -17,7 +18,7 @@ public:
             .WillByDefault(::testing::Return(std::make_shared<jt::null_objects::LoggerNull>()));
     }
     MOCK_METHOD(std::shared_ptr<jt::InputManagerInterface>, input, (), (override));
-    MOCK_METHOD(std::shared_ptr<jt::MusicPlayerInterface>, getMusicPlayer, (), (override));
+    MOCK_METHOD(jt::MusicPlayerInterface&, getMusicPlayer, (), (override));
 
     MOCK_METHOD(std::shared_ptr<jt::CamInterface>, getCamera, (), (override));
     MOCK_METHOD(std::shared_ptr<jt::CamInterface>, getCamera, (), (const, override));
