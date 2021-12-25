@@ -3,9 +3,9 @@
 
 namespace jt {
 
-ActionCommandManager::ActionCommandManager(std::shared_ptr<jt::LoggerInterface> logger)
+ActionCommandManager::ActionCommandManager(LoggerInterface& logger)
+    : m_logger { logger }
 {
-    m_logger = logger;
 }
 
 void ActionCommandManager::executeCommand(std::string const& fullCommandString)
@@ -28,7 +28,7 @@ void ActionCommandManager::executeCommand(std::string const& fullCommandString)
             return false;
         });
     if (command_entry == m_registeredCommands.end()) {
-        m_logger.lock()->error("unknown commandIdentifierString '" + fullCommandString + "'");
+        m_logger.error("unknown commandIdentifierString '" + fullCommandString + "'");
         return;
     }
     // perform the actual action command call
@@ -51,7 +51,7 @@ void ActionCommandManager::removeUnusedCommands()
             [this](auto const& tpl) {
                 auto shared_state = std::get<1>(tpl);
                 if (shared_state.expired()) {
-                    m_logger.lock()->info("remove command '" + std::get<0>(tpl) + "'");
+                    m_logger.info("remove command '" + std::get<0>(tpl) + "'");
                     return true;
                 }
                 return false;

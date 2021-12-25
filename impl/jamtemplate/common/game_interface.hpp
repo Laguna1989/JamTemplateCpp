@@ -63,7 +63,7 @@ public:
 
     /// Get the logger
     /// \return the logger
-    virtual std::shared_ptr<jt::LoggerInterface> getLogger() = 0;
+    virtual LoggerInterface& getLogger() = 0;
 
     /// Get the ActionCommandManager
     /// \return the action command manager

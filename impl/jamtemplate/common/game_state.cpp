@@ -39,7 +39,7 @@ void GameState::doDraw() const { internalDraw(); };
 
 void GameState::internalCreate()
 {
-    getGame()->getLogger()->debug("create GameState: " + getName(), { "jt" });
+    getGame()->getLogger().debug("create GameState: " + getName(), { "jt" });
     m_tweens.clear();
     m_tweensToAdd.clear();
     doInternalCreate();

@@ -34,20 +34,18 @@ GameBase::GameBase(std::shared_ptr<jt::RenderWindowInterface> renderWindow,
         throw std::invalid_argument { "getStateManager DI for game can not be null" };
     }
 
-    m_logger = std::make_shared<jt::Logger>();
-
     auto targetCout = std::make_shared<jt::LogTargetCout>();
     targetCout->setLogLevel(LogLevel::LogLevelInfo);
-    m_logger->addLogTarget(targetCout);
-    m_logger->addLogTarget(std::make_shared<jt::LogTargetFile>());
-    getLogger()->setLogLevel(LogLevel::LogLevelOff);
+    m_logger.addLogTarget(targetCout);
+    m_logger.addLogTarget(std::make_shared<jt::LogTargetFile>());
+    m_logger.setLogLevel(LogLevel::LogLevelOff);
     m_actionCommandManager = std::make_shared<ActionCommandManager>(m_logger);
-    m_logger->setLogLevel(LogLevel::LogLevelDebug);
+    m_logger.setLogLevel(LogLevel::LogLevelDebug);
 }
 
 void GameBase::runOneFrame()
 {
-    getLogger()->verbose("runOneFrame", { "jt" });
+    m_logger.verbose("runOneFrame", { "jt" });
     m_actionCommandManager->update();
     m_stateManager->checkAndPerformSwitchState(getPtr());
 
@@ -70,7 +68,7 @@ std::weak_ptr<GameInterface> GameBase::getPtr() { return shared_from_this(); }
 
 void GameBase::reset()
 {
-    m_logger->info("Game reset", { "jt" });
+    m_logger.info("Game reset", { "jt" });
     getCamera()->reset();
     input()->reset();
 }
@@ -96,7 +94,7 @@ std::shared_ptr<jt::TextureManagerInterface> GameBase::getTextureManager()
     return m_textureManager;
 }
 
-std::shared_ptr<jt::LoggerInterface> GameBase::getLogger() { return m_logger; }
+LoggerInterface& GameBase::getLogger() { return m_logger; }
 std::shared_ptr<jt::ActionCommandManagerInterface> GameBase::getActionCommandManager()
 {
     return m_actionCommandManager;

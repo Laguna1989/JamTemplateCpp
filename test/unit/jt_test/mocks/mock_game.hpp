@@ -14,8 +14,7 @@ public:
         ON_CALL(*this, getRenderWindow)
             .WillByDefault(::testing::Return(
                 std::make_shared<jt::null_objects::RenderWindowNull>(100, 200, "abc")));
-        ON_CALL(*this, getLogger)
-            .WillByDefault(::testing::Return(std::make_shared<jt::null_objects::LoggerNull>()));
+        ON_CALL(*this, getLogger).WillByDefault(::testing::ReturnRef(logger));
     }
     MOCK_METHOD(std::shared_ptr<jt::InputManagerInterface>, input, (), (override));
     MOCK_METHOD(jt::MusicPlayerInterface&, getMusicPlayer, (), (override));
@@ -33,12 +32,13 @@ public:
     MOCK_METHOD(std::shared_ptr<jt::RenderWindowInterface>, getRenderWindow, (), (const, override));
     MOCK_METHOD(std::shared_ptr<jt::TextureManagerInterface>, getTextureManager, (), (override));
     MOCK_METHOD(void, reset, (), (override));
-    MOCK_METHOD(std::shared_ptr<jt::LoggerInterface>, getLogger, (), (override));
+    MOCK_METHOD(jt::LoggerInterface&, getLogger, (), (override));
     MOCK_METHOD(std::shared_ptr<jt::ActionCommandManagerInterface>, getActionCommandManager, (),
         (override));
 
 protected:
     MOCK_METHOD(std::weak_ptr<jt::GameInterface>, getPtr, (), (override));
+    jt::null_objects::LoggerNull logger;
 };
 
 #endif

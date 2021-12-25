@@ -3,6 +3,7 @@
 
 #include "game_interface.hpp"
 #include "game_object.hpp"
+#include "logging/logger.hpp"
 #include "logging/logger_interface.hpp"
 #include "render_target.hpp"
 #include <chrono>
@@ -34,7 +35,7 @@ public:
 
     std::shared_ptr<jt::TextureManagerInterface> getTextureManager() override;
 
-    std::shared_ptr<jt::LoggerInterface> getLogger() override;
+    LoggerInterface& getLogger() override;
 
     std::shared_ptr<jt::ActionCommandManagerInterface> getActionCommandManager() override;
 
@@ -61,7 +62,7 @@ protected:
 
     std::shared_ptr<jt::TextureManagerInterface> m_textureManager { nullptr };
 
-    std::shared_ptr<jt::LoggerInterface> m_logger { nullptr };
+    mutable jt::Logger m_logger;
 
     std::shared_ptr<jt::ActionCommandManagerInterface> m_actionCommandManager { nullptr };
 

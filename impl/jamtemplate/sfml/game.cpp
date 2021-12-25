@@ -26,7 +26,7 @@ Game::Game(std::shared_ptr<RenderWindowInterface> window,
 {
     m_sprite_for_drawing = std::make_unique<jt::Sprite>();
     m_textureManager = std::make_shared<jt::TextureManagerImpl>();
-    m_logger->debug("Game constructor done", { "jt" });
+    m_logger.debug("Game constructor done", { "jt" });
     setupRenderTarget();
 }
 
@@ -36,7 +36,7 @@ void Game::setupRenderTarget()
     if (m_renderTarget == nullptr) {
         return;
     }
-    m_logger->debug("Game setupRenderTarget", { "jt" });
+    m_logger.debug("Game setupRenderTarget", { "jt" });
     auto const windowSize = getRenderWindow()->getSize();
     auto const zoom = getCamera()->getZoom();
     auto const scaledWidth = static_cast<unsigned int>(windowSize.x / zoom);
@@ -55,7 +55,7 @@ void Game::startGame(GameLoopFunctionPtr gameloop_function)
     // cannot be done in constructor as this is not fully available
     addBasicActionCommands(*this);
 
-    m_logger->debug("startGame", { "jt" });
+    m_logger.debug("startGame", { "jt" });
     while (getRenderWindow()->isOpen()) {
         getRenderWindow()->checkForClose();
         gameloop_function();
@@ -64,7 +64,7 @@ void Game::startGame(GameLoopFunctionPtr gameloop_function)
 
 void Game::doUpdate(float const elapsed)
 {
-    m_logger->verbose("update game, elapsed=" + std::to_string(elapsed), { "jt" });
+    m_logger.verbose("update game, elapsed=" + std::to_string(elapsed), { "jt" });
     m_stateManager->getCurrentState()->update(elapsed);
 
     getCamera()->update(elapsed);
@@ -89,7 +89,7 @@ void Game::doUpdate(float const elapsed)
 
 void Game::doDraw() const
 {
-    m_logger->verbose("draw game", { "jt" });
+    m_logger.verbose("draw game", { "jt" });
     if (!m_renderTarget) {
         return;
     }

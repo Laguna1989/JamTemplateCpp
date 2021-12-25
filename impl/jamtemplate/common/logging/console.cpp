@@ -7,8 +7,8 @@
 
 namespace jt {
 
-Console::Console(std::shared_ptr<jt::LoggerInterface> target)
-    : m_logger { target }
+Console::Console(jt::LoggerInterface& logger)
+    : m_logger { logger }
 {
     m_inputBufferAction.resize(500);
     m_inputBufferFilter.resize(200);
@@ -54,7 +54,7 @@ void Console::doDraw() const
             = ImGui::GetStyle().ItemSpacing.y + ImGui::GetFrameHeightWithSpacing();
         ImGui::BeginChild("ScrollingRegion", ImVec2(0, -footer_height_to_reserve), false,
             ImGuiWindowFlags_HorizontalScrollbar);
-        for (auto& entry : m_logger->getHistory()) {
+        for (auto& entry : m_logger.getHistory()) {
             renderOneLogEntry(entry);
         }
         if (ImGui::GetScrollY() >= ImGui::GetScrollMaxY())
@@ -107,7 +107,7 @@ void Console::storeActionInCommand() const
     m_lastCommand = str;
     HistoryPos = -1;
     History.push_back(m_lastCommand);
-    m_logger->action(str);
+    m_logger.action(str);
 }
 void Console::clearInput() const { strcpy(m_inputBufferAction.data(), ""); }
 
