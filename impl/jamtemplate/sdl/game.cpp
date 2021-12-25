@@ -83,7 +83,7 @@ void Game::doDraw() const
     // render to the small texture first
     SDL_SetRenderTarget(getRenderTarget().get(), t);
     SDL_RenderClear(getRenderTarget().get());
-    m_stateManager->getCurrentState()->draw();
+    m_stateManager.getCurrentState()->draw();
 
     // Detach the texture
     SDL_SetRenderTarget(getRenderTarget().get(), nullptr);
