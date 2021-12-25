@@ -14,13 +14,13 @@ class GameBase : public GameInterface,
                  public GameObject,
                  public std::enable_shared_from_this<GameBase> {
 public:
-    GameBase(std::shared_ptr<jt::RenderWindowInterface> renderWindow,
-        std::shared_ptr<InputManagerInterface> input, MusicPlayerInterface& musicPlayer,
-        std::shared_ptr<CamInterface> camera, std::shared_ptr<StateManagerInterface> stateManager);
+    GameBase(RenderWindowInterface& renderWindow, std::shared_ptr<InputManagerInterface> input,
+        MusicPlayerInterface& musicPlayer, std::shared_ptr<CamInterface> camera,
+        std::shared_ptr<StateManagerInterface> stateManager);
 
     void runOneFrame() override;
 
-    std::shared_ptr<jt::RenderWindowInterface> getRenderWindow() const override;
+    RenderWindowInterface& getRenderWindow() const override;
 
     std::shared_ptr<InputManagerInterface> input() override;
 
@@ -48,7 +48,7 @@ protected:
     virtual void doUpdate(float const elapsed) override = 0;
     virtual void doDraw() const override = 0;
 
-    std::shared_ptr<jt::RenderWindowInterface> m_renderWindow { nullptr };
+    jt::RenderWindowInterface& m_renderWindow;
 
     std::shared_ptr<InputManagerInterface> m_inputManager { nullptr };
 

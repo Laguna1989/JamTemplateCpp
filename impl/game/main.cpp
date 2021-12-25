@@ -26,9 +26,8 @@ int main()
     hideConsoleInRelease();
 
     jt::Random::useTimeAsRandomSeed();
-    auto window
-        = std::make_shared<jt::RenderWindow>(static_cast<unsigned int>(GP::GetWindowSize().x),
-            static_cast<unsigned int>(GP::GetWindowSize().y), GP::GameName());
+    jt::RenderWindow window { static_cast<unsigned int>(GP::GetWindowSize().x),
+        static_cast<unsigned int>(GP::GetWindowSize().y), GP::GameName() };
 
     auto const mouse = std::make_shared<jt::MouseInput>();
     auto const keyboard = std::make_shared<jt::KeyboardInput>();

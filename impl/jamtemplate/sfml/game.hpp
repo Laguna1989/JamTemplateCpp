@@ -20,9 +20,8 @@ public:
     /// \param musicPlayer music player
     /// \param camera camera
     /// \param stateManager state manager
-    Game(std::shared_ptr<RenderWindowInterface> window,
-        std::shared_ptr<InputManagerInterface> input, MusicPlayerInterface& musicPlayer,
-        std::shared_ptr<CamInterface> camera,
+    Game(RenderWindowInterface& window, std::shared_ptr<InputManagerInterface> input,
+        MusicPlayerInterface& musicPlayer, std::shared_ptr<CamInterface> camera,
         std::shared_ptr<jt::StateManagerInterface> stateManager);
 
     void startGame(GameLoopFunctionPtr gameloop_function) override;

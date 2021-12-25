@@ -31,7 +31,7 @@ public:
 
     /// Get the render window
     /// \return the render window
-    virtual std::shared_ptr<jt::RenderWindowInterface> getRenderWindow() const = 0;
+    virtual RenderWindowInterface& getRenderWindow() const = 0;
 
     /// Get the input manager
     /// \return the input manager (can be nullptr)

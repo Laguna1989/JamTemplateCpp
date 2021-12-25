@@ -12,18 +12,15 @@
 
 namespace jt {
 
-GameBase::GameBase(std::shared_ptr<jt::RenderWindowInterface> renderWindow,
+GameBase::GameBase(RenderWindowInterface& renderWindow,
     std::shared_ptr<InputManagerInterface> input, MusicPlayerInterface& musicPlayer,
     std::shared_ptr<CamInterface> camera, std::shared_ptr<StateManagerInterface> stateManager)
-    : m_renderWindow { std::move(renderWindow) }
+    : m_renderWindow { renderWindow }
     , m_inputManager { std::move(input) }
     , m_camera { std::move(camera) }
     , m_musicPlayer { musicPlayer }
     , m_stateManager { std::move(stateManager) }
 {
-    if (m_renderWindow == nullptr) {
-        throw std::invalid_argument { "render window DI for game can not be null" };
-    }
     if (m_inputManager == nullptr) {
         throw std::invalid_argument { "input DI for game can not be null" };
     }
@@ -73,10 +70,7 @@ void GameBase::reset()
     input()->reset();
 }
 
-std::shared_ptr<jt::RenderWindowInterface> GameBase::getRenderWindow() const
-{
-    return m_renderWindow;
-}
+RenderWindowInterface& GameBase::getRenderWindow() const { return m_renderWindow; }
 
 std::shared_ptr<InputManagerInterface> GameBase::input() { return m_inputManager; }
 

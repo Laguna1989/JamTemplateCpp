@@ -2,7 +2,7 @@
 #include "action_commands/basic_action_commands.hpp"
 #include "mocks/mock_state.hpp"
 #include "mocks/mock_state_manager.hpp"
-#include "render_window.hpp"
+#include "render_window_null.hpp"
 #include <camera.hpp>
 
 using ::testing::NiceMock;
@@ -62,7 +62,7 @@ TEST_F(GameTest, RunWithTwoStates)
 
 TEST_F(GameTest, StartGameWithOneIteration)
 {
-    EXPECT_CALL(*window, isOpen)
+    EXPECT_CALL(window, isOpen)
         .WillOnce(::testing::Return(true))
         .WillOnce(::testing::Return(false));
     g->getStateManager()->switchState(std::make_shared<MockState>());
@@ -114,32 +114,12 @@ TEST_F(GameTest, ResetCallsResetOnInput)
     g->reset();
 }
 
-TEST_F(GameTest, GetRenderWindowDoesNotReturnNullptr) { ASSERT_NE(g->getRenderWindow(), nullptr); }
-
 TEST_F(GameTest, GetCameraReturnsCorrectPointer) { ASSERT_EQ(g->getCamera(), camera); }
-
-TEST(GameTestWithOutSetup, CreateWithNullptrWindow)
-{
-    auto func = []() {
-        auto window = nullptr;
-        auto input = std::make_shared<::testing::NiceMock<MockInput>>();
-        auto camera = std::make_shared<jt::Camera>();
-        jt::MusicPlayerNull musicPlayer;
-
-        auto state = std::make_shared<MockState>();
-        auto stateManager = std::make_shared<MockStateManager>();
-        ON_CALL(*stateManager, getCurrentState).WillByDefault(::testing::Return(state));
-
-        auto game = std::make_shared<jt::Game>(window, input, musicPlayer, camera, stateManager);
-    };
-
-    ASSERT_THROW(func(), std::invalid_argument);
-}
 
 TEST(GameTestWithOutSetup, CreateWithNullptrInput)
 {
     auto func = []() {
-        auto window = std::make_shared<MockWindow>();
+        jt::null_objects::RenderWindowNull window { 100, 200, "abcd" };
         auto input = nullptr;
         auto camera = std::make_shared<jt::Camera>();
         jt::MusicPlayerNull musicPlayer;
@@ -156,7 +136,7 @@ TEST(GameTestWithOutSetup, CreateWithNullptrInput)
 TEST(GameTestWithOutSetup, CreateWithNullptrCamera)
 {
     auto func = []() {
-        auto window = std::make_shared<MockWindow>();
+        jt::null_objects::RenderWindowNull window { 100, 200, "abcd" };
         auto input = std::make_shared<::testing::NiceMock<MockInput>>();
         auto camera = nullptr;
         jt::MusicPlayerNull musicPlayer;
@@ -173,7 +153,7 @@ TEST(GameTestWithOutSetup, CreateWithNullptrCamera)
 TEST(GameTestWithOutSetup, CreateWithNullptrStateManager)
 {
     auto func = []() {
-        auto window = std::make_shared<MockWindow>();
+        jt::null_objects::RenderWindowNull window { 100, 200, "abcd" };
         auto input = std::make_shared<::testing::NiceMock<MockInput>>();
         auto camera = std::make_shared<jt::Camera>();
         jt::MusicPlayerNull musicPlayer;

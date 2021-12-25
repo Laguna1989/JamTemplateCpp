@@ -50,7 +50,7 @@ void GameState::internalCreate()
 
 void GameState::internalUpdate(float elapsed)
 {
-    getGame()->getRenderWindow()->updateGui(elapsed);
+    getGame()->getRenderWindow().updateGui(elapsed);
 
     if (m_doAutoUpdateObjects) {
         updateObjects(elapsed);
@@ -63,7 +63,7 @@ void GameState::internalUpdate(float elapsed)
 
 void GameState::internalDraw() const
 {
-    getGame()->getRenderWindow()->startRenderGui();
+    getGame()->getRenderWindow().startRenderGui();
     if (m_doAutoDraw) {
         drawObjects();
     }

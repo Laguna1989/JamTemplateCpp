@@ -19,9 +19,9 @@ void horizontalFlip(std::unique_ptr<jt::Sprite> const& spr, float zoom, float wi
 
 namespace jt {
 
-Game::Game(std::shared_ptr<RenderWindowInterface> window,
-    std::shared_ptr<InputManagerInterface> input, MusicPlayerInterface& musicPlayer,
-    std::shared_ptr<CamInterface> camera, std::shared_ptr<jt::StateManagerInterface> stateManager)
+Game::Game(RenderWindowInterface& window, std::shared_ptr<InputManagerInterface> input,
+    MusicPlayerInterface& musicPlayer, std::shared_ptr<CamInterface> camera,
+    std::shared_ptr<jt::StateManagerInterface> stateManager)
     : GameBase { window, input, musicPlayer, camera, stateManager }
 {
     m_sprite_for_drawing = std::make_unique<jt::Sprite>();
@@ -32,12 +32,12 @@ Game::Game(std::shared_ptr<RenderWindowInterface> window,
 
 void Game::setupRenderTarget()
 {
-    m_renderTarget = getRenderWindow()->createRenderTarget();
+    m_renderTarget = getRenderWindow().createRenderTarget();
     if (m_renderTarget == nullptr) {
         return;
     }
     m_logger.debug("Game setupRenderTarget", { "jt" });
-    auto const windowSize = getRenderWindow()->getSize();
+    auto const windowSize = getRenderWindow().getSize();
     auto const zoom = getCamera()->getZoom();
     auto const scaledWidth = static_cast<unsigned int>(windowSize.x / zoom);
     auto const scaledHeight = static_cast<unsigned int>(windowSize.y / zoom);
@@ -56,8 +56,8 @@ void Game::startGame(GameLoopFunctionPtr gameloop_function)
     addBasicActionCommands(*this);
 
     m_logger.debug("startGame", { "jt" });
-    while (getRenderWindow()->isOpen()) {
-        getRenderWindow()->checkForClose();
+    while (getRenderWindow().isOpen()) {
+        getRenderWindow().checkForClose();
         gameloop_function();
     }
 }
@@ -69,7 +69,7 @@ void Game::doUpdate(float const elapsed)
 
     getCamera()->update(elapsed);
 
-    jt::Vector2f const mpf = getRenderWindow()->getMousePosition() / getCamera()->getZoom();
+    jt::Vector2f const mpf = getRenderWindow().getMousePosition() / getCamera()->getZoom();
 
     input()->update(MousePosition { mpf.x + getCamera()->getCamOffset().x,
                         mpf.y + getCamera()->getCamOffset().y, mpf.x, mpf.y },
@@ -106,11 +106,11 @@ void Game::doDraw() const
     auto const shakeOffset = getCamera()->getShakeOffset();
     m_sprite_for_drawing->setPosition(shakeOffset);
     // Note: RenderTexture has a bug and is displayed upside down.
-    horizontalFlip(m_sprite_for_drawing, getCamera()->getZoom(), getRenderWindow()->getSize().y);
+    horizontalFlip(m_sprite_for_drawing, getCamera()->getZoom(), getRenderWindow().getSize().y);
 
-    getRenderWindow()->draw(m_sprite_for_drawing);
+    getRenderWindow().draw(m_sprite_for_drawing);
 
-    getRenderWindow()->display();
+    getRenderWindow().display();
 }
 
 } // namespace jt

@@ -15,9 +15,9 @@ class Game final : public jt::GameBase {
 public:
     using Sptr = std::shared_ptr<Game>;
 
-    Game(std::shared_ptr<RenderWindowInterface> window,
-        std::shared_ptr<InputManagerInterface> input, MusicPlayerInterface& musicPlayer,
-        std::shared_ptr<CamInterface> camera, std::shared_ptr<StateManagerInterface> stateManager);
+    Game(RenderWindowInterface& window, std::shared_ptr<InputManagerInterface> input,
+        MusicPlayerInterface& musicPlayer, std::shared_ptr<CamInterface> camera,
+        std::shared_ptr<StateManagerInterface> stateManager);
 
     void startGame(GameLoopFunctionPtr gameloop_function) override;
 

@@ -18,20 +18,20 @@
 
 namespace jt {
 
-Game::Game(std::shared_ptr<RenderWindowInterface> window,
-    std::shared_ptr<InputManagerInterface> input, MusicPlayerInterface& musicPlayer,
-    std::shared_ptr<CamInterface> camera, std::shared_ptr<StateManagerInterface> stateManager)
+Game::Game(RenderWindowInterface& window, std::shared_ptr<InputManagerInterface> input,
+    MusicPlayerInterface& musicPlayer, std::shared_ptr<CamInterface> camera,
+    std::shared_ptr<StateManagerInterface> stateManager)
     : GameBase { window, input, musicPlayer, camera, stateManager }
 {
-    auto const width = getRenderWindow()->getSize().x;
-    auto const height = getRenderWindow()->getSize().y;
+    auto const width = getRenderWindow().getSize().x;
+    auto const height = getRenderWindow().getSize().y;
 
     auto const scaledWidth = static_cast<int>(width / getCamera()->getZoom());
     auto const scaledHeight = static_cast<int>(height / getCamera()->getZoom());
     m_srcRect = jt::Recti { 0, 0, scaledWidth, scaledHeight };
     m_destRect = jt::Recti { 0, 0, static_cast<int>(width), static_cast<int>(height) };
 
-    m_renderTarget = getRenderWindow()->createRenderTarget();
+    m_renderTarget = getRenderWindow().createRenderTarget();
     TTF_Init();
     m_textureManager = std::make_shared<jt::TextureManagerImpl>(m_renderTarget);
 
@@ -52,18 +52,18 @@ void Game::startGame(GameLoopFunctionPtr gameloop_function)
 #ifdef JT_ENABLE_WEB
     emscripten_set_main_loop(gameloop_function, 0, 1);
 #else
-    while (getRenderWindow()->isOpen()) {
+    while (getRenderWindow().isOpen()) {
         gameloop_function();
     }
 #endif
 }
 void Game::doUpdate(float const elapsed)
 {
-    getRenderWindow()->checkForClose();
+    getRenderWindow().checkForClose();
     m_stateManager->getCurrentState()->update(elapsed);
     getCamera()->update(elapsed);
 
-    jt::Vector2f const mpf = getRenderWindow()->getMousePosition() / getCamera()->getZoom();
+    jt::Vector2f const mpf = getRenderWindow().getMousePosition() / getCamera()->getZoom();
 
     input()->update(MousePosition { mpf.x + getCamera()->getCamOffset().x,
                         mpf.y + getCamera()->getCamOffset().y, mpf.x, mpf.y },

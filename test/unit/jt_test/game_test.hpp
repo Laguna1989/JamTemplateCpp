@@ -15,7 +15,7 @@ class GameTest : public ::testing::Test {
 public:
     float const zoom { 1.0f };
     std::shared_ptr<jt::Game> g { nullptr };
-    std::shared_ptr<MockWindow> window { nullptr };
+    MockWindow window;
     std::shared_ptr<MockCamera> camera { nullptr };
     jt::MusicPlayerNull musicPlayer;
     std::shared_ptr<MockState> state { nullptr };
@@ -24,9 +24,8 @@ public:
 
     void SetUp() override
     {
-        window = std::make_shared<::testing::NiceMock<MockWindow>>();
         // getSize has to be called, so that the game knows how big the rendertarget will be.
-        ON_CALL(*window, getSize()).WillByDefault([]() { return jt::Vector2f { 100.0f, 200.0f }; });
+        ON_CALL(window, getSize()).WillByDefault([]() { return jt::Vector2f { 100.0f, 200.0f }; });
 
         input = std::make_shared<::testing::NiceMock<MockInput>>();
 

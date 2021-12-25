@@ -28,7 +28,7 @@ int main()
     auto const keyboard = std::make_shared<jt::KeyboardInput>();
     auto input = std::make_shared<jt::InputManager>(mouse, keyboard);
 
-    auto window = std::make_shared<jt::RenderWindow>(800, 600, "jt_demos");
+    jt::RenderWindow window { 800, 600, "jt_demos" };
 
     jt::MusicPlayerNull music_player;
     auto camera = std::make_shared<jt::Camera>(2.0f);
