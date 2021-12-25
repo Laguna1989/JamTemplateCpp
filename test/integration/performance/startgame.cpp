@@ -29,15 +29,14 @@ public:
 static void BM_StartGame(benchmark::State& state)
 {
     for (auto _ : state) {
-        std::shared_ptr<jt::null_objects::RenderWindowNull> window
-            = std::make_shared<jt::null_objects::RenderWindowNull>(800, 600, "jt_performance");
-        std::shared_ptr<jt::StateManager> stateManager
-            = std::make_shared<jt::StateManager>(std::make_shared<StateEmpty>());
-        auto game = std::make_shared<jt::Game>(window, std::make_shared<jt::InputManagerNull>(),
-            std::make_shared<jt::MusicPlayerNull>(), std::make_shared<jt::Camera>(1.0f),
-            stateManager);
-        game->getLogger()->setLogLevel(LogLevel::LogLevelOff);
-        stateManager->checkAndPerformSwitchState(game);
+        jt::null_objects::RenderWindowNull window { 800, 600, "jt_performance" };
+        jt::StateManager stateManager { std::make_shared<StateEmpty>() };
+        jt::InputManagerNull input;
+        jt::MusicPlayerNull music;
+        jt::Camera camera { 1.0f };
+        auto game = std::make_shared<jt::Game>(window, input, music, camera, stateManager);
+        game->getLogger().setLogLevel(LogLevel::LogLevelOff);
+        stateManager.checkAndPerformSwitchState(game);
         game->update(0.02f);
         game->draw();
     }

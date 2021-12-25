@@ -50,12 +50,13 @@ private:
 static void BM_GamestateWithTweeningShapes(benchmark::State& state)
 {
     for (auto _ : state) {
-        std::shared_ptr<jt::null_objects::RenderWindowNull> window
-            = std::make_shared<jt::null_objects::RenderWindowNull>(800, 600, "jt_performance");
-        auto game = std::make_shared<jt::Game>(window, std::make_shared<jt::InputManagerNull>(),
-            std::make_shared<jt::MusicPlayerNull>(), std::make_shared<jt::Camera>(1.0f),
-            std::make_shared<jt::StateManager>(std::make_shared<StateTweenPerformanceTest>()));
-        game->getLogger()->setLogLevel(LogLevel::LogLevelOff);
+        jt::null_objects::RenderWindowNull window { 800, 600, "jt_performance" };
+        jt::InputManagerNull input;
+        jt::MusicPlayerNull music;
+        jt::Camera camera { 1.0f };
+        jt::StateManager stateManager { std::make_shared<StateTweenPerformanceTest>() };
+        auto game = std::make_shared<jt::Game>(window, input, music, camera, stateManager);
+        game->getLogger().setLogLevel(LogLevel::LogLevelOff);
         game->getStateManager().checkAndPerformSwitchState(game);
         for (int i = 0; i != 500; ++i) {
             game->update(0.02f);
