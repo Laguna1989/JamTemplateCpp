@@ -26,14 +26,14 @@ int main()
 
     auto const mouse = std::make_shared<jt::MouseInput>();
     auto const keyboard = std::make_shared<jt::KeyboardInput>();
-    auto input = std::make_shared<jt::InputManager>(mouse, keyboard);
+    jt::InputManager input { mouse, keyboard };
 
-    auto window = std::make_shared<jt::RenderWindow>(800, 600, "jt_demos");
+    jt::RenderWindow window { 800, 600, "jt_demos" };
 
-    auto music_player = std::make_shared<jt::MusicPlayerNull>();
-    auto camera = std::make_shared<jt::Camera>(2.0f);
+    jt::MusicPlayerNull music_player;
+    jt::Camera camera { 2.0f };
 
-    auto stateManager = std::make_shared<jt::StateManager>(std::make_shared<StateSelect>());
+    jt::StateManager stateManager { std::make_shared<StateSelect>() };
 
     game = std::make_shared<jt::Game>(window, input, music_player, camera, stateManager);
     game->startGame(gameloop);

@@ -13,9 +13,9 @@ void StateExplosion::doInternalCreate()
 {
     using jt::Timer;
 
-    getGame()->getCamera()->shake(0.5f, 2.0f);
+    getGame()->getCamera().shake(0.5f, 2.0f);
     jt::Timer::Sptr t
-        = std::make_shared<Timer>(0.6f, [this]() { getGame()->getCamera()->shake(0.5f, 10.0f); });
+        = std::make_shared<Timer>(0.6f, [this]() { getGame()->getCamera().shake(0.5f, 10.0f); });
     add(t);
 }
 
@@ -43,9 +43,9 @@ void StateExplosion::doInternalUpdate(float const /*elapsed*/)
             bp->getAnimation(), 0.9f, jt::Vector2f { 1, 1 }, jt::Vector2f { 3, 3 });
         add(tw3);
     }
-    if (getGame()->input()->keyboard()->justPressed(jt::KeyCode::F1)
-        || getGame()->input()->keyboard()->justPressed(jt::KeyCode::Escape)) {
-        getGame()->getStateManager()->switchState(std::make_shared<StateSelect>());
+    if (getGame()->input().keyboard()->justPressed(jt::KeyCode::F1)
+        || getGame()->input().keyboard()->justPressed(jt::KeyCode::Escape)) {
+        getGame()->getStateManager().switchState(std::make_shared<StateSelect>());
     }
 }
 std::string StateExplosion::getName() const { return "Explosion"; }

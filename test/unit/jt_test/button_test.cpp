@@ -54,7 +54,8 @@ TEST_F(ButtonTest, UpdateWithoutGameInstanceRaisesException) { ASSERT_ANY_THROW(
 TEST_F(ButtonTest, UpdateWithGameInstanceDoesNotThrow)
 {
     auto game = std::make_shared<MockGame>();
-    EXPECT_CALL(*game, input());
+    ::testing::NiceMock<MockInput> input;
+    EXPECT_CALL(*game, input()).WillRepeatedly(::testing::ReturnRef(input));
     b->setGameInstance(game);
     b->update(0.1f);
 }
@@ -62,10 +63,10 @@ TEST_F(ButtonTest, UpdateWithGameInstanceDoesNotThrow)
 TEST_F(ButtonTest, IsOverWithMockMouseReturnsTrueWhenOver)
 {
     auto game = std::make_shared<testing::NiceMock<MockGame>>();
-    auto input = std::make_shared<testing::NiceMock<MockInput>>();
+    testing::NiceMock<MockInput> input;
     auto mouse = std::make_shared<testing::NiceMock<MockMouseInput>>();
-    ON_CALL(*game, input()).WillByDefault(testing::Return(input));
-    ON_CALL(*input, mouse()).WillByDefault(testing::Return(mouse));
+    ON_CALL(*game, input()).WillByDefault(testing::ReturnRef(input));
+    ON_CALL(input, mouse()).WillByDefault(testing::Return(mouse));
     ON_CALL(*mouse, getMousePositionScreen()).WillByDefault(testing::Return(jt::Vector2f { 5, 5 }));
     b->setGameInstance(game);
 
@@ -75,10 +76,10 @@ TEST_F(ButtonTest, IsOverWithMockMouseReturnsTrueWhenOver)
 TEST_F(ButtonTest, IsOverWithMockMouseReturnsFalseWhenNotOver)
 {
     auto game = std::make_shared<testing::NiceMock<MockGame>>();
-    auto input = std::make_shared<testing::NiceMock<MockInput>>();
+    testing::NiceMock<MockInput> input;
     auto mouse = std::make_shared<testing::NiceMock<MockMouseInput>>();
-    ON_CALL(*game, input()).WillByDefault(testing::Return(input));
-    ON_CALL(*input, mouse()).WillByDefault(testing::Return(mouse));
+    ON_CALL(*game, input()).WillByDefault(testing::ReturnRef(input));
+    ON_CALL(input, mouse()).WillByDefault(testing::Return(mouse));
     ON_CALL(*mouse, getMousePositionScreen())
         .WillByDefault(testing::Return(jt::Vector2f { 50, 50 }));
     b->setGameInstance(game);
@@ -89,10 +90,10 @@ TEST_F(ButtonTest, IsOverWithMockMouseReturnsFalseWhenNotOver)
 TEST_F(ButtonTest, IsOverReturnsFalseWhenNotActive)
 {
     auto game = std::make_shared<testing::NiceMock<MockGame>>();
-    auto input = std::make_shared<testing::NiceMock<MockInput>>();
+    testing::NiceMock<MockInput> input;
     auto mouse = std::make_shared<testing::NiceMock<MockMouseInput>>();
-    ON_CALL(*game, input()).WillByDefault(testing::Return(input));
-    ON_CALL(*input, mouse()).WillByDefault(testing::Return(mouse));
+    ON_CALL(*game, input()).WillByDefault(testing::ReturnRef(input));
+    ON_CALL(input, mouse()).WillByDefault(testing::Return(mouse));
     ON_CALL(*mouse, getMousePositionScreen()).WillByDefault(testing::Return(jt::Vector2f { 5, 5 }));
     b->setActive(false);
     b->setGameInstance(game);
@@ -103,10 +104,10 @@ TEST_F(ButtonTest, IsOverReturnsFalseWhenNotActive)
 TEST_F(ButtonTest, UpdateWithInput)
 {
     auto game = std::make_shared<testing::NiceMock<MockGame>>();
-    auto input = std::make_shared<testing::NiceMock<MockInput>>();
+    testing::NiceMock<MockInput> input;
     auto mouse = std::make_shared<testing::NiceMock<MockMouseInput>>();
-    ON_CALL(*game, input()).WillByDefault(testing::Return(input));
-    ON_CALL(*input, mouse()).WillByDefault(testing::Return(mouse));
+    ON_CALL(*game, input()).WillByDefault(testing::ReturnRef(input));
+    ON_CALL(input, mouse()).WillByDefault(testing::Return(mouse));
     ON_CALL(*mouse, getMousePositionScreen()).WillByDefault(testing::Return(jt::Vector2f { 5, 5 }));
     b->setGameInstance(game);
 
@@ -117,10 +118,10 @@ TEST_F(ButtonTest, UpdateWithInput)
 TEST_F(ButtonTest, Draw)
 {
     auto game = std::make_shared<MockGame>();
-    EXPECT_CALL(*game, input());
+    ::testing::NiceMock<MockInput> input;
+    EXPECT_CALL(*game, input()).WillRepeatedly(::testing::ReturnRef(input));
     b->setGameInstance(game);
     b->update(0.1f);
-    EXPECT_CALL(*game, getRenderTarget());
     b->draw();
     SUCCEED();
 }
@@ -128,7 +129,8 @@ TEST_F(ButtonTest, Draw)
 TEST_F(ButtonTest, DrawInvisibleButton)
 {
     auto game = std::make_shared<MockGame>();
-    EXPECT_CALL(*game, input());
+    ::testing::NiceMock<MockInput> input;
+    EXPECT_CALL(*game, input()).WillRepeatedly(::testing::ReturnRef(input));
     b->setVisible(false);
     b->setGameInstance(game);
     b->update(0.1f);
@@ -139,7 +141,8 @@ TEST_F(ButtonTest, DrawInvisibleButton)
 TEST_F(ButtonTest, DrawInActiveButton)
 {
     auto game = std::make_shared<MockGame>();
-    EXPECT_CALL(*game, input());
+    ::testing::NiceMock<MockInput> input;
+    EXPECT_CALL(*game, input()).WillRepeatedly(::testing::ReturnRef(input));
     b->setActive(false);
     b->setGameInstance(game);
     b->update(0.1f);
@@ -150,7 +153,8 @@ TEST_F(ButtonTest, DrawInActiveButton)
 TEST_F(ButtonTest, CustomDrawable)
 {
     auto game = std::make_shared<MockGame>();
-    EXPECT_CALL(*game, input()).Times(2);
+    ::testing::NiceMock<MockInput> input;
+    EXPECT_CALL(*game, input()).Times(2).WillRepeatedly(::testing::ReturnRef(input));
     b->setGameInstance(game);
     b->update(0.1f);
 

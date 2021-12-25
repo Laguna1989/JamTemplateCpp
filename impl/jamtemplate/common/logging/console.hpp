@@ -13,12 +13,12 @@ namespace jt {
 
 class Console : public jt::GameObject {
 public:
-    Console(std::shared_ptr<jt::LoggerInterface> target);
+    Console(jt::LoggerInterface& logger);
 
     int inputUserCallback(ImGuiInputTextCallbackData* data);
 
 private:
-    std::shared_ptr<LoggerInterface> m_logger;
+    LoggerInterface& m_logger;
 
     mutable bool m_showConsole { false };
     mutable bool m_focus { false };

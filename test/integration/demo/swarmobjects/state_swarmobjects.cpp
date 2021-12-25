@@ -1,9 +1,9 @@
 ﻿#include "state_swarmobjects.hpp"
+#include "../state_select.hpp"
 #include "drawable_helpers.hpp"
 #include "game_interface.hpp"
 #include "input/input_manager.hpp"
 #include "math_helper.hpp"
-#include "../state_select.hpp"
 #include "timer.hpp"
 #include "tweens/tween_alpha.hpp"
 #include <vector>
@@ -38,9 +38,9 @@ void StateSwarmObjects::doInternalCreate()
 
 void StateSwarmObjects::doInternalUpdate(float const elapsed)
 {
-    if (getGame()->input()->keyboard()->justPressed(jt::KeyCode::F1)
-        || getGame()->input()->keyboard()->justPressed(jt::KeyCode::Escape)) {
-        getGame()->getStateManager()->switchState(std::make_shared<StateSelect>());
+    if (getGame()->input().keyboard()->justPressed(jt::KeyCode::F1)
+        || getGame()->input().keyboard()->justPressed(jt::KeyCode::Escape)) {
+        getGame()->getStateManager().switchState(std::make_shared<StateSelect>());
     }
 
     m_overlay->update(elapsed);
@@ -66,7 +66,7 @@ void StateSwarmObjects::updateOneSwarmObject(const size_t& firstSwarmObjectIndex
     auto o1 = m_SwarmObjects->at(firstSwarmObjectIndex).lock();
     auto p1 = o1->getPosition();
     auto v1 = o1->getVelocity();
-    auto const mousePos = getGame()->input()->mouse()->getMousePositionWorld();
+    auto const mousePos = getGame()->input().mouse()->getMousePositionWorld();
     auto dist = mousePos - p1;
     auto distLength = jt::MathHelper::length(dist);
     jt::MathHelper::normalizeMe(dist);

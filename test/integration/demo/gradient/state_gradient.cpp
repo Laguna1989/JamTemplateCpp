@@ -71,8 +71,8 @@ void StateGradient::doInternalUpdate(float elapsed)
         s->update(elapsed);
     }
 
-    if (getGame()->input()->keyboard()->justPressed(jt::KeyCode::Escape)) {
-        getGame()->getStateManager()->switchState(std::make_shared<StateSelect>());
+    if (getGame()->input().keyboard()->justPressed(jt::KeyCode::Escape)) {
+        getGame()->getStateManager().switchState(std::make_shared<StateSelect>());
     }
 }
 

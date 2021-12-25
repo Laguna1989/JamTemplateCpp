@@ -8,9 +8,11 @@ namespace null_objects {
 /// Nullobj pattern for RenderWindow
 class RenderWindowNull : public ::jt::RenderWindowInterface {
 public:
+    RenderWindowNull(unsigned int width, unsigned int height, std::string const& title);
+
     void updateGui(float elapsed) override;
     void startRenderGui() override;
-    RenderWindowNull(unsigned int width, unsigned int height, std::string const& title);
+
     bool isOpen() const override;
     void checkForClose() override;
     std::shared_ptr<jt::renderTarget> createRenderTarget() override;

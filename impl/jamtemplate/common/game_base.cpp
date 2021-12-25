@@ -12,47 +12,33 @@
 
 namespace jt {
 
-GameBase::GameBase(std::shared_ptr<jt::RenderWindowInterface> renderWindow,
-    std::shared_ptr<InputManagerInterface> input, std::shared_ptr<MusicPlayerInterface> musicPlayer,
-    std::shared_ptr<CamInterface> camera, std::shared_ptr<StateManagerInterface> stateManager)
-    : m_renderWindow { std::move(renderWindow) }
-    , m_inputManager { std::move(input) }
-    , m_camera { std::move(camera) }
-    , m_musicPlayer { std::move(musicPlayer) }
-    , m_stateManager { std::move(stateManager) }
+GameBase::GameBase(RenderWindowInterface& renderWindow, InputManagerInterface& input,
+    MusicPlayerInterface& musicPlayer, CamInterface& camera, StateManagerInterface& stateManager)
+    : m_renderWindow { renderWindow }
+    , m_inputManager { input }
+    , m_camera { camera }
+    , m_musicPlayer { musicPlayer }
+    , m_stateManager { stateManager }
 {
-    if (m_renderWindow == nullptr) {
-        throw std::invalid_argument { "render window DI for game can not be null" };
-    }
-    if (m_inputManager == nullptr) {
-        throw std::invalid_argument { "input DI for game can not be null" };
-    }
-    if (m_camera == nullptr) {
-        throw std::invalid_argument { "camera DI for game can not be null" };
-    }
-    if (m_musicPlayer == nullptr) {
-        throw std::invalid_argument { "music player DI for game can not be null" };
-    }
-    if (m_stateManager == nullptr) {
-        throw std::invalid_argument { "getStateManager DI for game can not be null" };
-    }
-
-    m_logger = std::make_shared<jt::Logger>();
-
-    auto targetCout = std::make_shared<jt::LogTargetCout>();
+    // TODO move this out into a separate dependency
+    createDefaultLogTargets();
+}
+void GameBase::createDefaultLogTargets()
+{
+    auto targetCout = std::make_shared<LogTargetCout>();
     targetCout->setLogLevel(LogLevel::LogLevelInfo);
-    m_logger->addLogTarget(targetCout);
-    m_logger->addLogTarget(std::make_shared<jt::LogTargetFile>());
-    getLogger()->setLogLevel(LogLevel::LogLevelOff);
+    m_logger.addLogTarget(targetCout);
+    m_logger.addLogTarget(std::make_shared<LogTargetFile>());
+    m_logger.setLogLevel(LogLevel::LogLevelOff);
     m_actionCommandManager = std::make_shared<ActionCommandManager>(m_logger);
-    m_logger->setLogLevel(LogLevel::LogLevelDebug);
+    m_logger.setLogLevel(LogLevel::LogLevelDebug);
 }
 
 void GameBase::runOneFrame()
 {
-    getLogger()->verbose("runOneFrame", { "jt" });
+    m_logger.verbose("runOneFrame", { "jt" });
     m_actionCommandManager->update();
-    m_stateManager->checkAndPerformSwitchState(getPtr());
+    m_stateManager.checkAndPerformSwitchState(getPtr());
 
     auto const now = std::chrono::steady_clock::now();
 
@@ -62,7 +48,7 @@ void GameBase::runOneFrame()
     m_timeLast = now;
 
     if (m_age != 0) {
-        getCamera()->update(elapsed_in_seconds);
+        getCamera().update(elapsed_in_seconds);
         update(elapsed_in_seconds);
         draw();
     }
@@ -73,24 +59,21 @@ std::weak_ptr<GameInterface> GameBase::getPtr() { return shared_from_this(); }
 
 void GameBase::reset()
 {
-    m_logger->info("Game reset", { "jt" });
-    getCamera()->reset();
-    input()->reset();
+    m_logger.info("Game reset", { "jt" });
+    getCamera().reset();
+    input().reset();
 }
 
-std::shared_ptr<jt::RenderWindowInterface> GameBase::getRenderWindow() const
-{
-    return m_renderWindow;
-}
+RenderWindowInterface& GameBase::getRenderWindow() const { return m_renderWindow; }
 
-std::shared_ptr<InputManagerInterface> GameBase::input() { return m_inputManager; }
+InputManagerInterface& GameBase::input() { return m_inputManager; }
 
-std::shared_ptr<MusicPlayerInterface> GameBase::getMusicPlayer() { return m_musicPlayer; }
+MusicPlayerInterface& GameBase::getMusicPlayer() { return m_musicPlayer; }
 
-std::shared_ptr<CamInterface> GameBase::getCamera() { return m_camera; }
-std::shared_ptr<CamInterface> GameBase::getCamera() const { return m_camera; }
+CamInterface& GameBase::getCamera() { return m_camera; }
+CamInterface& GameBase::getCamera() const { return m_camera; }
 
-std::shared_ptr<StateManagerInterface> GameBase::getStateManager() { return m_stateManager; }
+StateManagerInterface& GameBase::getStateManager() { return m_stateManager; }
 
 std::shared_ptr<jt::renderTarget> GameBase::getRenderTarget() const { return m_renderTarget; }
 
@@ -99,7 +82,7 @@ std::shared_ptr<jt::TextureManagerInterface> GameBase::getTextureManager()
     return m_textureManager;
 }
 
-std::shared_ptr<jt::LoggerInterface> GameBase::getLogger() { return m_logger; }
+LoggerInterface& GameBase::getLogger() { return m_logger; }
 std::shared_ptr<jt::ActionCommandManagerInterface> GameBase::getActionCommandManager()
 {
     return m_actionCommandManager;

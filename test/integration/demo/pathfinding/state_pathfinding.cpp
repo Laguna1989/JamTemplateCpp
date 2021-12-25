@@ -85,11 +85,11 @@ void StatePathfinding::createTiles()
 
 void StatePathfinding::doInternalUpdate(float elapsed)
 {
-    if (getGame()->input()->keyboard()->justPressed(jt::KeyCode::Escape)) {
-        getGame()->getStateManager()->switchState(std::make_shared<StateSelect>());
+    if (getGame()->input().keyboard()->justPressed(jt::KeyCode::Escape)) {
+        getGame()->getStateManager().switchState(std::make_shared<StateSelect>());
     }
 
-    if (getGame()->input()->keyboard()->justPressed(jt::KeyCode::Space)) {
+    if (getGame()->input().keyboard()->justPressed(jt::KeyCode::Space)) {
         resetTiles();
         calculatePath(
             getTileAt(jt::Random::getInt(0, mapSizeX - 1), jt::Random::getInt(0, mapSizeY - 1))

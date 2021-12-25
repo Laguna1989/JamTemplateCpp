@@ -6,7 +6,7 @@
 namespace jt {
 class ActionCommandManager : public ActionCommandManagerInterface {
 public:
-    ActionCommandManager(std::shared_ptr<jt::LoggerInterface> logger);
+    ActionCommandManager(LoggerInterface& logger);
     void executeCommand(std::string const& fullCommandString) override;
 
     std::shared_ptr<bool> registerTemporaryCommand(
@@ -15,7 +15,7 @@ public:
     std::vector<std::string> getAllCommands() override;
 
 private:
-    std::weak_ptr<jt::LoggerInterface> m_logger;
+    jt::LoggerInterface& m_logger;
     std::vector<std::tuple<std::string, std::weak_ptr<bool>, ActionCommandCallbackType>>
         m_registeredCommands;
     void removeUnusedCommands();

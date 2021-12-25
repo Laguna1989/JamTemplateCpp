@@ -4,14 +4,14 @@
 
 TEST(ActionCommandManagerTest, Instantiate)
 {
-    auto logger = std::make_shared<jt::null_objects::LoggerNull>();
+    jt::null_objects::LoggerNull logger;
 
     ASSERT_NO_THROW(jt::ActionCommandManager { logger });
 }
 
 TEST(ActionCommandManagerTest, ExecuteEmptyCommand)
 {
-    auto logger = std::make_shared<jt::null_objects::LoggerNull>();
+    jt::null_objects::LoggerNull logger;
 
     jt::ActionCommandManager manager { logger };
     manager.executeCommand("");
@@ -19,7 +19,7 @@ TEST(ActionCommandManagerTest, ExecuteEmptyCommand)
 
 TEST(ActionCommandManagerTest, GetAllCommandsInitial)
 {
-    auto logger = std::make_shared<jt::null_objects::LoggerNull>();
+    jt::null_objects::LoggerNull logger;
 
     jt::ActionCommandManager manager { logger };
     ASSERT_TRUE(manager.getAllCommands().empty());
@@ -27,7 +27,7 @@ TEST(ActionCommandManagerTest, GetAllCommandsInitial)
 
 TEST(ActionCommandManagerTest, GetAllCommandsAfterRegisterCommand)
 {
-    auto logger = std::make_shared<jt::null_objects::LoggerNull>();
+    jt::null_objects::LoggerNull logger;
 
     jt::ActionCommandManager manager { logger };
 
@@ -38,7 +38,7 @@ TEST(ActionCommandManagerTest, GetAllCommandsAfterRegisterCommand)
 
 TEST(ActionCommandManagerTest, GetAllCommandsAfterUpdate)
 {
-    auto logger = std::make_shared<jt::null_objects::LoggerNull>();
+    jt::null_objects::LoggerNull logger;
 
     jt::ActionCommandManager manager { logger };
 
@@ -50,7 +50,7 @@ TEST(ActionCommandManagerTest, GetAllCommandsAfterUpdate)
 
 TEST(ActionCommandManagerTest, GetAllCommandsAfterUpdateWhenStored)
 {
-    auto logger = std::make_shared<jt::null_objects::LoggerNull>();
+    jt::null_objects::LoggerNull logger;
 
     jt::ActionCommandManager manager { logger };
 
@@ -62,7 +62,7 @@ TEST(ActionCommandManagerTest, GetAllCommandsAfterUpdateWhenStored)
 
 TEST(ActionCommandManagerTest, ExecuteNonExistingCommand)
 {
-    auto logger = std::make_shared<jt::null_objects::LoggerNull>();
+    jt::null_objects::LoggerNull logger;
 
     jt::ActionCommandManager manager { logger };
     manager.executeCommand("a b c 1 2 3");

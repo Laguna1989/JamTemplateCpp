@@ -7,7 +7,7 @@ void InfoScreen::doCreate() { m_frameTimesVector.resize(m_frameTimes.size()); }
 void InfoScreen::doUpdate(float const elapsed)
 {
 #ifdef JT_ENABLE_DEBUG
-    if (getGame()->input()->keyboard()->justPressed(jt::KeyCode::End)) {
+    if (getGame()->input().keyboard()->justPressed(jt::KeyCode::End)) {
         m_showInfo = !m_showInfo;
     }
 
@@ -35,7 +35,7 @@ void InfoScreen::doDraw() const
             static_cast<int>(m_frameTimesVector.size()), 0, nullptr, 0, FLT_MAX, ImVec2 { 0, 100 });
     }
     if (!ImGui::CollapsingHeader("GameState")) {
-        auto const state = getGame()->getStateManager()->getCurrentState();
+        auto const state = getGame()->getStateManager().getCurrentState();
         ImGui::Text(state->getName().c_str());
         std::string const gameStateAge
             = "Age: " + jt::MathHelper::floatToStringWithXDigits(state->getAge(), 2) + " s";

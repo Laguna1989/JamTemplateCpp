@@ -167,7 +167,7 @@ void StateMenu::checkForTransitionToStateGame()
     auto const keysToTriggerTransition = { jt::KeyCode::Space, jt::KeyCode::Enter };
 
     if (std::any_of(keysToTriggerTransition.begin(), keysToTriggerTransition.end(),
-            [this](auto const k) { return getGame()->input()->keyboard()->justPressed(k); })) {
+            [this](auto const k) { return getGame()->input().keyboard()->justPressed(k); })) {
         startTransitionToStateGame();
     }
 }
@@ -186,7 +186,7 @@ void StateMenu::createTweenTransition()
     auto tw = jt::TweenAlpha::create(m_overlay, 0.5f, std::uint8_t { 0 }, std::uint8_t { 255 });
     tw->setSkipFrames();
     tw->addCompleteCallback(
-        [this]() { getGame()->getStateManager()->switchState(std::make_shared<StateGame>()); });
+        [this]() { getGame()->getStateManager().switchState(std::make_shared<StateGame>()); });
     add(tw);
 }
 

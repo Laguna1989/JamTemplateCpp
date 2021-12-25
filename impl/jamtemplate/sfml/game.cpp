@@ -19,26 +19,25 @@ void horizontalFlip(std::unique_ptr<jt::Sprite> const& spr, float zoom, float wi
 
 namespace jt {
 
-Game::Game(std::shared_ptr<RenderWindowInterface> window,
-    std::shared_ptr<InputManagerInterface> input, std::shared_ptr<MusicPlayerInterface> musicPlayer,
-    std::shared_ptr<CamInterface> camera, std::shared_ptr<jt::StateManagerInterface> stateManager)
+Game::Game(RenderWindowInterface& window, InputManagerInterface& input,
+    MusicPlayerInterface& musicPlayer, CamInterface& camera, StateManagerInterface& stateManager)
     : GameBase { window, input, musicPlayer, camera, stateManager }
 {
     m_sprite_for_drawing = std::make_unique<jt::Sprite>();
     m_textureManager = std::make_shared<jt::TextureManagerImpl>();
-    m_logger->debug("Game constructor done", { "jt" });
+    m_logger.debug("Game constructor done", { "jt" });
     setupRenderTarget();
 }
 
 void Game::setupRenderTarget()
 {
-    m_renderTarget = getRenderWindow()->createRenderTarget();
+    m_renderTarget = getRenderWindow().createRenderTarget();
     if (m_renderTarget == nullptr) {
         return;
     }
-    m_logger->debug("Game setupRenderTarget", { "jt" });
-    auto const windowSize = getRenderWindow()->getSize();
-    auto const zoom = getCamera()->getZoom();
+    m_logger.debug("Game setupRenderTarget", { "jt" });
+    auto const windowSize = getRenderWindow().getSize();
+    auto const zoom = getCamera().getZoom();
     auto const scaledWidth = static_cast<unsigned int>(windowSize.x / zoom);
     auto const scaledHeight = static_cast<unsigned int>(windowSize.y / zoom);
 
@@ -55,31 +54,31 @@ void Game::startGame(GameLoopFunctionPtr gameloop_function)
     // cannot be done in constructor as this is not fully available
     addBasicActionCommands(*this);
 
-    m_logger->debug("startGame", { "jt" });
-    while (getRenderWindow()->isOpen()) {
-        getRenderWindow()->checkForClose();
+    m_logger.debug("startGame", { "jt" });
+    while (getRenderWindow().isOpen()) {
+        getRenderWindow().checkForClose();
         gameloop_function();
     }
 }
 
 void Game::doUpdate(float const elapsed)
 {
-    m_logger->verbose("update game, elapsed=" + std::to_string(elapsed), { "jt" });
-    m_stateManager->getCurrentState()->update(elapsed);
+    m_logger.verbose("update game, elapsed=" + std::to_string(elapsed), { "jt" });
+    getStateManager().getCurrentState()->update(elapsed);
 
-    getCamera()->update(elapsed);
+    getCamera().update(elapsed);
 
-    jt::Vector2f const mpf = getRenderWindow()->getMousePosition() / getCamera()->getZoom();
+    jt::Vector2f const mpf = getRenderWindow().getMousePosition() / getCamera().getZoom();
 
-    input()->update(MousePosition { mpf.x + getCamera()->getCamOffset().x,
-                        mpf.y + getCamera()->getCamOffset().y, mpf.x, mpf.y },
+    input().update(MousePosition { mpf.x + getCamera().getCamOffset().x,
+                       mpf.y + getCamera().getCamOffset().y, mpf.x, mpf.y },
         elapsed);
 
     if (m_view) {
         int const camOffsetix { static_cast<int>(
-            getCamera()->getCamOffset().x + m_view->getSize().x / 2) };
+            getCamera().getCamOffset().x + m_view->getSize().x / 2) };
         int const camOffsetiy { static_cast<int>(
-            getCamera()->getCamOffset().y + m_view->getSize().y / 2) };
+            getCamera().getCamOffset().y + m_view->getSize().y / 2) };
 
         m_view->setCenter(toLib(
             jt::Vector2f { static_cast<float>(camOffsetix), static_cast<float>(camOffsetiy) }));
@@ -89,28 +88,28 @@ void Game::doUpdate(float const elapsed)
 
 void Game::doDraw() const
 {
-    m_logger->verbose("draw game", { "jt" });
+    m_logger.verbose("draw game", { "jt" });
     if (!m_renderTarget) {
         return;
     }
 
     m_renderTarget->clear(sf::Color::Black);
 
-    m_stateManager->getCurrentState()->draw();
+    m_stateManager.getCurrentState()->draw();
 
     m_renderTarget->setView(*m_view);
     // convert renderTexture to sprite and draw that.
     const sf::Texture& texture = m_renderTarget->getTexture();
 
     m_sprite_for_drawing->fromTexture(texture);
-    auto const shakeOffset = getCamera()->getShakeOffset();
+    auto const shakeOffset = getCamera().getShakeOffset();
     m_sprite_for_drawing->setPosition(shakeOffset);
     // Note: RenderTexture has a bug and is displayed upside down.
-    horizontalFlip(m_sprite_for_drawing, getCamera()->getZoom(), getRenderWindow()->getSize().y);
+    horizontalFlip(m_sprite_for_drawing, getCamera().getZoom(), getRenderWindow().getSize().y);
 
-    getRenderWindow()->draw(m_sprite_for_drawing);
+    getRenderWindow().draw(m_sprite_for_drawing);
 
-    getRenderWindow()->display();
+    getRenderWindow().display();
 }
 
 } // namespace jt

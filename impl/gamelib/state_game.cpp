@@ -54,11 +54,11 @@ void StateGame::doInternalUpdate(float const elapsed)
     if (m_running) {
         m_world->step(elapsed, GP::PhysicVelocityIterations(), GP::PhysicPositionIterations());
         // update game logic here
-        if (getGame()->input()->keyboard()->justPressed(jt::KeyCode::A)) {
+        if (getGame()->input().keyboard()->justPressed(jt::KeyCode::A)) {
             m_scoreP1++;
             m_hud->getObserverScoreP1()->notify(m_scoreP1);
         }
-        if (getGame()->input()->keyboard()->justPressed(jt::KeyCode::D)) {
+        if (getGame()->input().keyboard()->justPressed(jt::KeyCode::D)) {
             m_scoreP2++;
             m_hud->getObserverScoreP2()->notify(m_scoreP2);
         }
@@ -90,7 +90,7 @@ void StateGame::endGame()
     auto tw = jt::TweenAlpha::create(m_overlay, 0.5f, std::uint8_t { 0 }, std::uint8_t { 255 });
     tw->setSkipFrames();
     tw->addCompleteCallback(
-        [this]() { getGame()->getStateManager()->switchState(std::make_shared<StateMenu>()); });
+        [this]() { getGame()->getStateManager().switchState(std::make_shared<StateMenu>()); });
     add(tw);
 }
 std::string StateGame::getName() const { return "Game"; }

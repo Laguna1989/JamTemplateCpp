@@ -26,17 +26,16 @@ int main()
     hideConsoleInRelease();
 
     jt::Random::useTimeAsRandomSeed();
-    auto window
-        = std::make_shared<jt::RenderWindow>(static_cast<unsigned int>(GP::GetWindowSize().x),
-            static_cast<unsigned int>(GP::GetWindowSize().y), GP::GameName());
+    jt::RenderWindow window { static_cast<unsigned int>(GP::GetWindowSize().x),
+        static_cast<unsigned int>(GP::GetWindowSize().y), GP::GameName() };
 
     auto const mouse = std::make_shared<jt::MouseInput>();
     auto const keyboard = std::make_shared<jt::KeyboardInput>();
-    auto input = std::make_shared<jt::InputManager>(mouse, keyboard);
+    jt::InputManager input { mouse, keyboard };
 
-    std::shared_ptr<jt::MusicPlayer> musicPlayer = std::make_shared<jt::MusicPlayer>();
-    auto camera = std::make_shared<jt::Camera>(GP::GetZoom());
-    auto stateManager = std::make_shared<jt::StateManager>(std::make_shared<StateMenu>());
+    jt::MusicPlayer musicPlayer;
+    jt::Camera camera { GP::GetZoom() };
+    jt::StateManager stateManager { std::make_shared<StateMenu>() };
 
     game = std::make_shared<jt::Game>(window, input, musicPlayer, camera, stateManager);
     game->startGame(gameloop);

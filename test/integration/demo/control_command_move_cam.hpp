@@ -8,13 +8,12 @@
 
 class ControlCommandMoveCam : public jt::ControlCommandOnce {
 public:
-    explicit ControlCommandMoveCam(
-        jt::Vector2f scrollDirection, std::weak_ptr<jt::CamInterface> camera);
+    explicit ControlCommandMoveCam(jt::Vector2f scrollDirection, jt::CamInterface& camera);
     void doExecute(float elapsed) override;
 
 private:
     jt::Vector2f m_scrollDirection;
-    std::weak_ptr<jt::CamInterface> m_camera;
+    jt::CamInterface& m_camera;
 };
 
 #endif // GUARD_JAMTEMAPLTE_CONTROL_COMMAND_MOVECAM_HPP

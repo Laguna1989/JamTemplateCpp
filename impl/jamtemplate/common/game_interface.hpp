@@ -31,27 +31,27 @@ public:
 
     /// Get the render window
     /// \return the render window
-    virtual std::shared_ptr<jt::RenderWindowInterface> getRenderWindow() const = 0;
+    virtual RenderWindowInterface& getRenderWindow() const = 0;
 
     /// Get the input manager
-    /// \return the input manager (can be nullptr)
-    virtual std::shared_ptr<InputManagerInterface> input() = 0;
+    /// \return the input manager
+    virtual InputManagerInterface& input() = 0;
 
     /// Get the music player
-    /// \return the music player (can be nullptr)
-    virtual std::shared_ptr<MusicPlayerInterface> getMusicPlayer() = 0;
+    /// \return the music player
+    virtual MusicPlayerInterface& getMusicPlayer() = 0;
 
     /// Get the camera (non const)
-    /// \return the camera (can be nullptr)
-    virtual std::shared_ptr<CamInterface> getCamera() = 0;
+    /// \return the camera
+    virtual CamInterface& getCamera() = 0;
 
-    /// Get the camera (const
-    /// \return the camera (can be nullptr)
-    virtual std::shared_ptr<CamInterface> getCamera() const = 0;
+    /// Get the camera (const)
+    /// \return the camera
+    virtual CamInterface& getCamera() const = 0;
 
     /// Get the State Manager
     /// \return the state manager
-    virtual std::shared_ptr<StateManagerInterface> getStateManager() = 0;
+    virtual StateManagerInterface& getStateManager() = 0;
 
     /// Get the render Target
     /// \return the render target
@@ -63,7 +63,7 @@ public:
 
     /// Get the logger
     /// \return the logger
-    virtual std::shared_ptr<jt::LoggerInterface> getLogger() = 0;
+    virtual LoggerInterface& getLogger() = 0;
 
     /// Get the ActionCommandManager
     /// \return the action command manager

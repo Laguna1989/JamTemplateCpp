@@ -8,7 +8,7 @@ using BasicActionCommandsWithGame = GameTest;
 TEST_F(BasicActionCommandsWithGame, CamReset)
 {
     addBasicActionCommands(*g);
-    EXPECT_CALL(*camera, reset());
+    EXPECT_CALL(camera, reset());
     g->getActionCommandManager()->executeCommand("cam.reset");
 }
 
@@ -16,7 +16,7 @@ TEST_F(BasicActionCommandsWithGame, CamShake)
 {
     addBasicActionCommands(*g);
 
-    EXPECT_CALL(*camera, shake(::testing::_, ::testing::_, ::testing::_));
+    EXPECT_CALL(camera, shake(::testing::_, ::testing::_, ::testing::_));
     g->getActionCommandManager()->executeCommand("cam.shake 1 2");
 }
 
@@ -24,7 +24,7 @@ TEST_F(BasicActionCommandsWithGame, CamMove)
 {
     addBasicActionCommands(*g);
 
-    EXPECT_CALL(*camera, move(jt::Vector2f { 100.0f, 200.0f }));
+    EXPECT_CALL(camera, move(jt::Vector2f { 100.0f, 200.0f }));
     g->getActionCommandManager()->executeCommand("cam.move 100 200");
 }
 
@@ -32,7 +32,7 @@ TEST_F(BasicActionCommandsWithGame, CamPos)
 {
     addBasicActionCommands(*g);
 
-    EXPECT_CALL(*camera, setCamOffset(jt::Vector2f { 20.0f, 400.0f }));
+    EXPECT_CALL(camera, setCamOffset(jt::Vector2f { 20.0f, 400.0f }));
     g->getActionCommandManager()->executeCommand("cam.pos 20 400");
 }
 
@@ -40,7 +40,7 @@ TEST_F(BasicActionCommandsWithGame, CamZoom)
 {
     addBasicActionCommands(*g);
 
-    EXPECT_CALL(*camera, setZoom(2.5f));
+    EXPECT_CALL(camera, setZoom(2.5f));
     g->getActionCommandManager()->executeCommand("cam.zoom 2.5");
 }
 

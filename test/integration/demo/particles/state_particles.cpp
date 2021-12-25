@@ -133,13 +133,13 @@ void StateParticles::doInternalUpdate(float elapsed)
     m_particlesFire->Fire(1);
     m_sparkParticles->Fire(1);
 
-    if (getGame()->input()->keyboard()->justPressed(jt::KeyCode::Escape)) {
-        getGame()->getStateManager()->switchState(std::make_shared<StateSelect>());
+    if (getGame()->input().keyboard()->justPressed(jt::KeyCode::Escape)) {
+        getGame()->getStateManager().switchState(std::make_shared<StateSelect>());
     }
 
     m_timeMeasurement.push(elapsed);
     if (getAge() >= 15) {
-        getGame()->getStateManager()->switchState(std::make_shared<StateSelect>());
+        getGame()->getStateManager().switchState(std::make_shared<StateSelect>());
         float avg = std::accumulate(m_timeMeasurement.cbegin(), m_timeMeasurement.cend(), 0.0f)
             / m_timeMeasurement.size();
         std::cout << "avg: " << numberOfParticles << " "
