@@ -43,8 +43,8 @@ void StateExplosion::doInternalUpdate(float const /*elapsed*/)
             bp->getAnimation(), 0.9f, jt::Vector2f { 1, 1 }, jt::Vector2f { 3, 3 });
         add(tw3);
     }
-    if (getGame()->input()->keyboard()->justPressed(jt::KeyCode::F1)
-        || getGame()->input()->keyboard()->justPressed(jt::KeyCode::Escape)) {
+    if (getGame()->input().keyboard()->justPressed(jt::KeyCode::F1)
+        || getGame()->input().keyboard()->justPressed(jt::KeyCode::Escape)) {
         getGame()->getStateManager()->switchState(std::make_shared<StateSelect>());
     }
 }

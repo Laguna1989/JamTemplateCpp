@@ -7,7 +7,7 @@ void InfoScreen::doCreate() { m_frameTimesVector.resize(m_frameTimes.size()); }
 void InfoScreen::doUpdate(float const elapsed)
 {
 #ifdef JT_ENABLE_DEBUG
-    if (getGame()->input()->keyboard()->justPressed(jt::KeyCode::End)) {
+    if (getGame()->input().keyboard()->justPressed(jt::KeyCode::End)) {
         m_showInfo = !m_showInfo;
     }
 

@@ -31,7 +31,7 @@ int main()
 
     auto const mouse = std::make_shared<jt::MouseInput>();
     auto const keyboard = std::make_shared<jt::KeyboardInput>();
-    auto input = std::make_shared<jt::InputManager>(mouse, keyboard);
+    jt::InputManager input { mouse, keyboard };
 
     jt::MusicPlayer musicPlayer;
     auto camera = std::make_shared<jt::Camera>(GP::GetZoom());

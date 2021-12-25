@@ -381,7 +381,7 @@ void jt::LicenseInfo::doCreate()
 
 void jt::LicenseInfo::doUpdate(float const)
 {
-    if (getGame()->input()->keyboard()->justPressed(jt::KeyCode::F9)) {
+    if (getGame()->input().keyboard()->justPressed(jt::KeyCode::F9)) {
         m_showLicenseInfo = !m_showLicenseInfo;
     }
 }

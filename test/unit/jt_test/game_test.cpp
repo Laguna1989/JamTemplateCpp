@@ -110,34 +110,17 @@ TEST_F(GameTest, ResetCallsResetOnCamera)
 
 TEST_F(GameTest, ResetCallsResetOnInput)
 {
-    EXPECT_CALL(*input, reset);
+    EXPECT_CALL(input, reset);
     g->reset();
 }
 
 TEST_F(GameTest, GetCameraReturnsCorrectPointer) { ASSERT_EQ(g->getCamera(), camera); }
 
-TEST(GameTestWithOutSetup, CreateWithNullptrInput)
-{
-    auto func = []() {
-        jt::null_objects::RenderWindowNull window { 100, 200, "abcd" };
-        auto input = nullptr;
-        auto camera = std::make_shared<jt::Camera>();
-        jt::MusicPlayerNull musicPlayer;
-        auto state = std::make_shared<MockState>();
-        auto stateManager = std::make_shared<MockStateManager>();
-        ON_CALL(*stateManager, getCurrentState).WillByDefault(::testing::Return(state));
-
-        auto game = std::make_shared<jt::Game>(window, input, musicPlayer, camera, stateManager);
-    };
-
-    ASSERT_THROW(func(), std::invalid_argument);
-}
-
 TEST(GameTestWithOutSetup, CreateWithNullptrCamera)
 {
     auto func = []() {
         jt::null_objects::RenderWindowNull window { 100, 200, "abcd" };
-        auto input = std::make_shared<::testing::NiceMock<MockInput>>();
+        ::testing::NiceMock<MockInput> input;
         auto camera = nullptr;
         jt::MusicPlayerNull musicPlayer;
         auto state = std::make_shared<MockState>();
@@ -154,7 +137,7 @@ TEST(GameTestWithOutSetup, CreateWithNullptrStateManager)
 {
     auto func = []() {
         jt::null_objects::RenderWindowNull window { 100, 200, "abcd" };
-        auto input = std::make_shared<::testing::NiceMock<MockInput>>();
+        ::testing::NiceMock<MockInput> input;
         auto camera = std::make_shared<jt::Camera>();
         jt::MusicPlayerNull musicPlayer;
         auto stateManager = nullptr;

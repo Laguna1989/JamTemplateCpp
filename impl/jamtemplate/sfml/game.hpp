@@ -20,7 +20,7 @@ public:
     /// \param musicPlayer music player
     /// \param camera camera
     /// \param stateManager state manager
-    Game(RenderWindowInterface& window, std::shared_ptr<InputManagerInterface> input,
+    Game(RenderWindowInterface& window, InputManagerInterface& input,
         MusicPlayerInterface& musicPlayer, std::shared_ptr<CamInterface> camera,
         std::shared_ptr<jt::StateManagerInterface> stateManager);
 

@@ -22,19 +22,19 @@ void StateInventory::doInternalCreate()
     setAutoDraw(false);
 
     float const scrollSpeed = 170.0f;
-    getGame()->input()->keyboard()->setCommandPressed({ jt::KeyCode::W, jt::KeyCode::Up },
+    getGame()->input().keyboard()->setCommandPressed({ jt::KeyCode::W, jt::KeyCode::Up },
         std::make_shared<ControlCommandMoveCam>(
             jt::Vector2f { 0.0f, -scrollSpeed }, getGame()->getCamera()));
 
-    getGame()->input()->keyboard()->setCommandPressed({ jt::KeyCode::A, jt::KeyCode::Left },
+    getGame()->input().keyboard()->setCommandPressed({ jt::KeyCode::A, jt::KeyCode::Left },
         std::make_shared<ControlCommandMoveCam>(
             jt::Vector2f { -scrollSpeed, 0.0f }, getGame()->getCamera()));
 
-    getGame()->input()->keyboard()->setCommandPressed({ jt::KeyCode::S, jt::KeyCode::Down },
+    getGame()->input().keyboard()->setCommandPressed({ jt::KeyCode::S, jt::KeyCode::Down },
         std::make_shared<ControlCommandMoveCam>(
             jt::Vector2f { 0.0f, scrollSpeed }, getGame()->getCamera()));
 
-    getGame()->input()->keyboard()->setCommandPressed({ jt::KeyCode::D, jt::KeyCode::Right },
+    getGame()->input().keyboard()->setCommandPressed({ jt::KeyCode::D, jt::KeyCode::Right },
         std::make_shared<ControlCommandMoveCam>(
             jt::Vector2f { scrollSpeed, 0.0f }, getGame()->getCamera()));
 }
@@ -103,8 +103,8 @@ void StateInventory::spawnWorldItem(std::string const& itemReferenceId, jt::Vect
 
 void StateInventory::pickupItems()
 {
-    if (getGame()->input()->mouse()->justPressed(jt::MouseButtonCode::MBLeft)) {
-        auto const mp = getGame()->input()->mouse()->getMousePositionWorld();
+    if (getGame()->input().mouse()->justPressed(jt::MouseButtonCode::MBLeft)) {
+        auto const mp = getGame()->input().mouse()->getMousePositionWorld();
         for (auto& item : *m_worldItems) {
             auto const bounds = item.lock()->getDrawable()->getGlobalBounds();
             bool const overlapsX = mp.x > bounds.left && mp.x < bounds.left + bounds.width;

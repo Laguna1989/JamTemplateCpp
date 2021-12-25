@@ -15,7 +15,7 @@ class Game final : public jt::GameBase {
 public:
     using Sptr = std::shared_ptr<Game>;
 
-    Game(RenderWindowInterface& window, std::shared_ptr<InputManagerInterface> input,
+    Game(RenderWindowInterface& window, InputManagerInterface& input,
         MusicPlayerInterface& musicPlayer, std::shared_ptr<CamInterface> camera,
         std::shared_ptr<StateManagerInterface> stateManager);
 

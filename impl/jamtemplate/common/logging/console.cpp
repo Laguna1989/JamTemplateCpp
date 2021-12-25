@@ -17,10 +17,10 @@ Console::Console(jt::LoggerInterface& logger)
 void Console::doUpdate(float const elapsed)
 {
     handleCommand();
-    if (!getGame()->input() || !getGame()->input()->keyboard()) {
+    if (!getGame()->input().keyboard()) {
         return;
     }
-    if (getGame()->input()->keyboard()->justPressed(jt::KeyCode::Home)) {
+    if (getGame()->input().keyboard()->justPressed(jt::KeyCode::Home)) {
         m_showConsole = !m_showConsole;
 
         m_focus = m_showConsole;

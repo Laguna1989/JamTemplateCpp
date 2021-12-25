@@ -11,7 +11,7 @@ InventoryListImgui::InventoryListImgui(std::weak_ptr<ItemRepository> repo)
 
 void InventoryListImgui::doUpdate(float const)
 {
-    if (getGame()->input()->keyboard()->justPressed(jt::KeyCode::I)) {
+    if (getGame()->input().keyboard()->justPressed(jt::KeyCode::I)) {
         m_drawInventory = !m_drawInventory;
     }
     removeItemToDrop();

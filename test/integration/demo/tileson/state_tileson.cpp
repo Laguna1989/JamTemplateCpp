@@ -49,12 +49,12 @@ void StateTileson::doInternalUpdate(float const elapsed)
 
     toggleVisibility();
 
-    if (getGame()->input()->mouse()->justPressed(jt::MouseButtonCode::MBLeft)) {
+    if (getGame()->input().mouse()->justPressed(jt::MouseButtonCode::MBLeft)) {
         auto const actorPos
             = jt::Vector2u { static_cast<unsigned int>(m_actor->getFinalPosition().x / 32.0f),
                   static_cast<unsigned int>(m_actor->getFinalPosition().y / 32.0f) };
 
-        auto const mpos = getGame()->input()->mouse()->getMousePositionWorld();
+        auto const mpos = getGame()->input().mouse()->getMousePositionWorld();
         auto const tileEndPos = jt::Vector2u { static_cast<unsigned int>(mpos.x / 32.0f),
             static_cast<unsigned int>(mpos.y / 32.0f) };
 
@@ -62,23 +62,23 @@ void StateTileson::doInternalUpdate(float const elapsed)
             m_nodeLayer->getTileAt(tileEndPos.x, tileEndPos.y)->getNode());
     }
 
-    if (getGame()->input()->keyboard()->justPressed(jt::KeyCode::F1)
-        || getGame()->input()->keyboard()->justPressed(jt::KeyCode::Escape)) {
+    if (getGame()->input().keyboard()->justPressed(jt::KeyCode::F1)
+        || getGame()->input().keyboard()->justPressed(jt::KeyCode::Escape)) {
         getGame()->getStateManager()->switchState(std::make_shared<StateSelect>());
     }
 }
 void StateTileson::toggleVisibility()
 {
-    if (getGame()->input()->keyboard()->justPressed(jt::KeyCode::Num1)) {
+    if (getGame()->input().keyboard()->justPressed(jt::KeyCode::Num1)) {
         m_drawTileLayer1 = !m_drawTileLayer1;
     }
-    if (getGame()->input()->keyboard()->justPressed(jt::KeyCode::Num2)) {
+    if (getGame()->input().keyboard()->justPressed(jt::KeyCode::Num2)) {
         m_drawTileLayer2 = !m_drawTileLayer2;
     }
-    if (getGame()->input()->keyboard()->justPressed(jt::KeyCode::Num3)) {
+    if (getGame()->input().keyboard()->justPressed(jt::KeyCode::Num3)) {
         m_drawObjects = !m_drawObjects;
     }
-    if (getGame()->input()->keyboard()->justPressed(jt::KeyCode::Num4)) {
+    if (getGame()->input().keyboard()->justPressed(jt::KeyCode::Num4)) {
         m_drawTileNodes = !m_drawTileNodes;
     }
 }
@@ -86,14 +86,14 @@ void StateTileson::toggleVisibility()
 void StateTileson::moveCamera(float const elapsed)
 {
     auto const scrollspeed = 150.0f;
-    if (getGame()->input()->keyboard()->pressed(jt::KeyCode::D)) {
+    if (getGame()->input().keyboard()->pressed(jt::KeyCode::D)) {
         getGame()->getCamera()->move(jt::Vector2f { scrollspeed * elapsed, 0.0f });
-    } else if (getGame()->input()->keyboard()->pressed(jt::KeyCode::A)) {
+    } else if (getGame()->input().keyboard()->pressed(jt::KeyCode::A)) {
         getGame()->getCamera()->move(jt::Vector2f { -scrollspeed * elapsed, 0.0f });
     }
-    if (getGame()->input()->keyboard()->pressed(jt::KeyCode::W)) {
+    if (getGame()->input().keyboard()->pressed(jt::KeyCode::W)) {
         getGame()->getCamera()->move(jt::Vector2f { 0.0f, -scrollspeed * elapsed });
-    } else if (getGame()->input()->keyboard()->pressed(jt::KeyCode::S)) {
+    } else if (getGame()->input().keyboard()->pressed(jt::KeyCode::S)) {
         getGame()->getCamera()->move(jt::Vector2f { 0.0f, scrollspeed * elapsed });
     }
 }

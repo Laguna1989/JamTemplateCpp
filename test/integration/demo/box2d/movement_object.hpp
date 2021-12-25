@@ -63,16 +63,16 @@ private:
 
         m_animation->update(elapsed);
         if (getB2Body()->GetType() == b2BodyType::b2_dynamicBody) {
-            if (getGame()->input()->keyboard()->pressed(jt::KeyCode::D)) {
+            if (getGame()->input().keyboard()->pressed(jt::KeyCode::D)) {
                 getB2Body()->ApplyForceToCenter(b2Vec2 { 60000, 0 }, true);
             }
 
-            if (getGame()->input()->keyboard()->pressed(jt::KeyCode::A)) {
+            if (getGame()->input().keyboard()->pressed(jt::KeyCode::A)) {
                 getB2Body()->ApplyForceToCenter(b2Vec2 { -60000, 0 }, true);
             }
         }
 
-        if (getGame()->input()->keyboard()->pressed(jt::KeyCode::B)) {
+        if (getGame()->input().keyboard()->pressed(jt::KeyCode::B)) {
             m_animation->flash(0.5f, jt::colors::Red);
         }
     }

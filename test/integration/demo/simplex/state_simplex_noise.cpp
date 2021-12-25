@@ -7,8 +7,8 @@
 void StateSimplexNoise::doInternalCreate() { }
 void StateSimplexNoise::doInternalUpdate(float elapsed)
 {
-    if (getGame()->input()->keyboard()->justPressed(jt::KeyCode::F1)
-        || getGame()->input()->keyboard()->justPressed(jt::KeyCode::Escape)) {
+    if (getGame()->input().keyboard()->justPressed(jt::KeyCode::F1)
+        || getGame()->input().keyboard()->justPressed(jt::KeyCode::Escape)) {
         getGame()->getStateManager()->switchState(std::make_shared<StateSelect>());
     }
     m_z += elapsed * 0.9f;

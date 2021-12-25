@@ -35,7 +35,7 @@ public:
 
     /// Get the input manager
     /// \return the input manager (can be nullptr)
-    virtual std::shared_ptr<InputManagerInterface> input() = 0;
+    virtual InputManagerInterface& input() = 0;
 
     /// Get the music player
     /// \return the music player (can be nullptr)

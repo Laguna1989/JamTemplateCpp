@@ -19,7 +19,7 @@ void horizontalFlip(std::unique_ptr<jt::Sprite> const& spr, float zoom, float wi
 
 namespace jt {
 
-Game::Game(RenderWindowInterface& window, std::shared_ptr<InputManagerInterface> input,
+Game::Game(RenderWindowInterface& window, InputManagerInterface& input,
     MusicPlayerInterface& musicPlayer, std::shared_ptr<CamInterface> camera,
     std::shared_ptr<jt::StateManagerInterface> stateManager)
     : GameBase { window, input, musicPlayer, camera, stateManager }
@@ -71,8 +71,8 @@ void Game::doUpdate(float const elapsed)
 
     jt::Vector2f const mpf = getRenderWindow().getMousePosition() / getCamera()->getZoom();
 
-    input()->update(MousePosition { mpf.x + getCamera()->getCamOffset().x,
-                        mpf.y + getCamera()->getCamOffset().y, mpf.x, mpf.y },
+    input().update(MousePosition { mpf.x + getCamera()->getCamOffset().x,
+                       mpf.y + getCamera()->getCamOffset().y, mpf.x, mpf.y },
         elapsed);
 
     if (m_view) {

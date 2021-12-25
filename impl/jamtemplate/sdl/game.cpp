@@ -18,7 +18,7 @@
 
 namespace jt {
 
-Game::Game(RenderWindowInterface& window, std::shared_ptr<InputManagerInterface> input,
+Game::Game(RenderWindowInterface& window, InputManagerInterface& input,
     MusicPlayerInterface& musicPlayer, std::shared_ptr<CamInterface> camera,
     std::shared_ptr<StateManagerInterface> stateManager)
     : GameBase { window, input, musicPlayer, camera, stateManager }
@@ -65,8 +65,8 @@ void Game::doUpdate(float const elapsed)
 
     jt::Vector2f const mpf = getRenderWindow().getMousePosition() / getCamera()->getZoom();
 
-    input()->update(MousePosition { mpf.x + getCamera()->getCamOffset().x,
-                        mpf.y + getCamera()->getCamOffset().y, mpf.x, mpf.y },
+    input().update(MousePosition { mpf.x + getCamera()->getCamOffset().x,
+                       mpf.y + getCamera()->getCamOffset().y, mpf.x, mpf.y },
         elapsed);
 
     DrawableImpl::setCamOffset(-1.0f * getCamera()->getCamOffset());
@@ -95,7 +95,7 @@ void Game::doDraw() const
     SDL_Rect destRect { static_cast<int>(getCamera()->getShakeOffset().x),
         static_cast<int>(getCamera()->getShakeOffset().y), m_destRect.width, m_destRect.height };
     SDL_RenderCopyEx(getRenderTarget().get(), t, &sourceRect, &destRect, 0, nullptr, SDL_FLIP_NONE);
-    m_renderWindow->display();
+    m_renderWindow.display();
     SDL_RenderPresent(getRenderTarget().get());
 
     SDL_DestroyTexture(t);

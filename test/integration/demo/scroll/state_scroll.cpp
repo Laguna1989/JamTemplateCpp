@@ -42,27 +42,27 @@ void StateScroll::doInternalCreate()
     m_line->setPosition(jt::Vector2f { 20, 200 });
 
     float const scrollSpeed = 50.0f;
-    getGame()->input()->keyboard()->setCommandPressed({ jt::KeyCode::W, jt::KeyCode::Up },
+    getGame()->input().keyboard()->setCommandPressed({ jt::KeyCode::W, jt::KeyCode::Up },
         std::make_shared<ControlCommandMoveCam>(
             jt::Vector2f { 0.0f, -scrollSpeed }, getGame()->getCamera()));
 
-    getGame()->input()->keyboard()->setCommandPressed({ jt::KeyCode::A, jt::KeyCode::Left },
+    getGame()->input().keyboard()->setCommandPressed({ jt::KeyCode::A, jt::KeyCode::Left },
         std::make_shared<ControlCommandMoveCam>(
             jt::Vector2f { -scrollSpeed, 0.0f }, getGame()->getCamera()));
 
-    getGame()->input()->keyboard()->setCommandPressed({ jt::KeyCode::S, jt::KeyCode::Down },
+    getGame()->input().keyboard()->setCommandPressed({ jt::KeyCode::S, jt::KeyCode::Down },
         std::make_shared<ControlCommandMoveCam>(
             jt::Vector2f { 0.0f, scrollSpeed }, getGame()->getCamera()));
 
-    getGame()->input()->keyboard()->setCommandPressed({ jt::KeyCode::D, jt::KeyCode::Right },
+    getGame()->input().keyboard()->setCommandPressed({ jt::KeyCode::D, jt::KeyCode::Right },
         std::make_shared<ControlCommandMoveCam>(
             jt::Vector2f { scrollSpeed, 0.0f }, getGame()->getCamera()));
 }
 
 void StateScroll::doInternalUpdate(float const elapsed)
 {
-    if (getGame()->input()->keyboard()->justPressed(jt::KeyCode::F1)
-        || getGame()->input()->keyboard()->justPressed(jt::KeyCode::Escape)) {
+    if (getGame()->input().keyboard()->justPressed(jt::KeyCode::F1)
+        || getGame()->input().keyboard()->justPressed(jt::KeyCode::Escape)) {
         getGame()->getStateManager()->switchState(std::make_shared<StateSelect>());
     }
 

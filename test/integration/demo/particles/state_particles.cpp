@@ -133,7 +133,7 @@ void StateParticles::doInternalUpdate(float elapsed)
     m_particlesFire->Fire(1);
     m_sparkParticles->Fire(1);
 
-    if (getGame()->input()->keyboard()->justPressed(jt::KeyCode::Escape)) {
+    if (getGame()->input().keyboard()->justPressed(jt::KeyCode::Escape)) {
         getGame()->getStateManager()->switchState(std::make_shared<StateSelect>());
     }
 
