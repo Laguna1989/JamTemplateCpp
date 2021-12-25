@@ -17,7 +17,7 @@ public:
 
     Game(RenderWindowInterface& window, InputManagerInterface& input,
         MusicPlayerInterface& musicPlayer, CamInterface& camera,
-        std::shared_ptr<StateManagerInterface> stateManager);
+        StateManagerInterface& stateManager);
 
     void startGame(GameLoopFunctionPtr gameloop_function) override;
 

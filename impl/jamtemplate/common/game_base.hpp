@@ -16,7 +16,7 @@ class GameBase : public GameInterface,
 public:
     GameBase(RenderWindowInterface& renderWindow, InputManagerInterface& input,
         MusicPlayerInterface& musicPlayer, CamInterface& camera,
-        std::shared_ptr<StateManagerInterface> stateManager);
+        StateManagerInterface& stateManager);
 
     void runOneFrame() override;
 
@@ -29,7 +29,7 @@ public:
     virtual CamInterface& getCamera() override;
     virtual CamInterface& getCamera() const override;
 
-    std::shared_ptr<StateManagerInterface> getStateManager() override;
+    StateManagerInterface& getStateManager() override;
 
     std::shared_ptr<jt::renderTarget> getRenderTarget() const override;
 
@@ -56,7 +56,7 @@ protected:
 
     MusicPlayerInterface& m_musicPlayer;
 
-    std::shared_ptr<StateManagerInterface> m_stateManager { nullptr };
+    StateManagerInterface& m_stateManager;
 
     std::shared_ptr<jt::renderTarget> m_renderTarget { nullptr };
 
@@ -67,6 +67,7 @@ protected:
     std::shared_ptr<jt::ActionCommandManagerInterface> m_actionCommandManager { nullptr };
 
     std::chrono::steady_clock::time_point m_timeLast {};
+    void createDefaultLogTargets();
 };
 
 } // namespace jt

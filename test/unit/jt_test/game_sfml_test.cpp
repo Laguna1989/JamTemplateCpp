@@ -41,8 +41,8 @@ TEST_F(GameTest, DrawWithRenderTargetAndState)
     EXPECT_CALL(window, getSize()).WillRepeatedly(::testing::Return(jt::Vector2f { 20.0f, 40.0f }));
 
     state = std::make_shared<MockState>();
-    stateManager = std::make_shared<::testing::NiceMock<MockStateManager>>();
-    ON_CALL(*stateManager, getCurrentState).WillByDefault(::testing::Return(state));
+    ::testing::NiceMock<MockStateManager> stateManager;
+    ON_CALL(stateManager, getCurrentState).WillByDefault(::testing::Return(state));
 
     g = std::make_shared<jt::Game>(window, input, musicPlayer, camera, stateManager);
     state->setGameInstance(g);

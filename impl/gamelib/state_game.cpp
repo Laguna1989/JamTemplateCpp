@@ -90,7 +90,7 @@ void StateGame::endGame()
     auto tw = jt::TweenAlpha::create(m_overlay, 0.5f, std::uint8_t { 0 }, std::uint8_t { 255 });
     tw->setSkipFrames();
     tw->addCompleteCallback(
-        [this]() { getGame()->getStateManager()->switchState(std::make_shared<StateMenu>()); });
+        [this]() { getGame()->getStateManager().switchState(std::make_shared<StateMenu>()); });
     add(tw);
 }
 std::string StateGame::getName() const { return "Game"; }

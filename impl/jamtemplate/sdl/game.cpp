@@ -19,8 +19,7 @@
 namespace jt {
 
 Game::Game(RenderWindowInterface& window, InputManagerInterface& input,
-    MusicPlayerInterface& musicPlayer, CamInterface& camera,
-    std::shared_ptr<StateManagerInterface> stateManager)
+    MusicPlayerInterface& musicPlayer, CamInterface& camera, StateManagerInterface& stateManager)
     : GameBase { window, input, musicPlayer, camera, stateManager }
 {
     auto const width = getRenderWindow().getSize().x;
@@ -60,7 +59,7 @@ void Game::startGame(GameLoopFunctionPtr gameloop_function)
 void Game::doUpdate(float const elapsed)
 {
     getRenderWindow().checkForClose();
-    m_stateManager->getCurrentState()->update(elapsed);
+    getStateManager().getCurrentState()->update(elapsed);
     getCamera().update(elapsed);
 
     jt::Vector2f const mpf = getRenderWindow().getMousePosition() / getCamera().getZoom();

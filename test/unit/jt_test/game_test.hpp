@@ -20,7 +20,7 @@ public:
     jt::MusicPlayerNull musicPlayer;
     std::shared_ptr<MockState> state { nullptr };
     ::testing::NiceMock<MockInput> input;
-    std::shared_ptr<testing::NiceMock<MockStateManager>> stateManager;
+    ::testing::NiceMock<MockStateManager> stateManager;
 
     void SetUp() override
     {
@@ -30,8 +30,7 @@ public:
         ON_CALL(camera, getZoom).WillByDefault([this]() { return zoom; });
 
         state = std::make_shared<MockState>();
-        stateManager = std::make_shared<::testing::NiceMock<MockStateManager>>();
-        ON_CALL(*stateManager, getCurrentState).WillByDefault(::testing::Return(state));
+        ON_CALL(stateManager, getCurrentState).WillByDefault(::testing::Return(state));
 
         g = std::make_shared<jt::Game>(window, input, musicPlayer, camera, stateManager);
         state->setGameInstance(g);

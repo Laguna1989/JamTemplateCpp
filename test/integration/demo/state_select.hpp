@@ -42,7 +42,7 @@ private:
             jt::Vector2u { detail::buttonSizeX, detail::buttonSizeY },
             getGame()->getTextureManager());
         button->addCallback(
-            [this]() { getGame()->getStateManager()->switchState(std::make_shared<State>()); });
+            [this]() { getGame()->getStateManager().switchState(std::make_shared<State>()); });
         auto const text = jt::dh::createText(getGame()->getRenderTarget(), textString, 12);
         text->setTextAlign(jt::Text::TextAlign::LEFT);
         text->setOrigin(jt::Vector2f { -8, 0 });

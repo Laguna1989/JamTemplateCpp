@@ -22,7 +22,7 @@ public:
     /// \param stateManager state manager
     Game(RenderWindowInterface& window, InputManagerInterface& input,
         MusicPlayerInterface& musicPlayer, CamInterface& camera,
-        std::shared_ptr<jt::StateManagerInterface> stateManager);
+        StateManagerInterface& stateManager);
 
     void startGame(GameLoopFunctionPtr gameloop_function) override;
 

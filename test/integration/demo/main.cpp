@@ -33,7 +33,7 @@ int main()
     jt::MusicPlayerNull music_player;
     jt::Camera camera { 2.0f };
 
-    auto stateManager = std::make_shared<jt::StateManager>(std::make_shared<StateSelect>());
+    jt::StateManager stateManager { std::make_shared<StateSelect>() };
 
     game = std::make_shared<jt::Game>(window, input, music_player, camera, stateManager);
     game->startGame(gameloop);

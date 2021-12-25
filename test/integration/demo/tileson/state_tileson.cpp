@@ -64,7 +64,7 @@ void StateTileson::doInternalUpdate(float const elapsed)
 
     if (getGame()->input().keyboard()->justPressed(jt::KeyCode::F1)
         || getGame()->input().keyboard()->justPressed(jt::KeyCode::Escape)) {
-        getGame()->getStateManager()->switchState(std::make_shared<StateSelect>());
+        getGame()->getStateManager().switchState(std::make_shared<StateSelect>());
     }
 }
 void StateTileson::toggleVisibility()

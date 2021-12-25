@@ -20,7 +20,7 @@ public:
     MOCK_METHOD(jt::CamInterface&, getCamera, (), (override));
     MOCK_METHOD(jt::CamInterface&, getCamera, (), (const, override));
 
-    MOCK_METHOD(std::shared_ptr<jt::StateManagerInterface>, getStateManager, (), (override));
+    MOCK_METHOD(jt::StateManagerInterface&, getStateManager, (), (override));
 
     MOCK_METHOD(std::shared_ptr<jt::renderTarget>, getRenderTarget, (), (const, override));
 

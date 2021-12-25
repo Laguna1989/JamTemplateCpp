@@ -20,8 +20,7 @@ void horizontalFlip(std::unique_ptr<jt::Sprite> const& spr, float zoom, float wi
 namespace jt {
 
 Game::Game(RenderWindowInterface& window, InputManagerInterface& input,
-    MusicPlayerInterface& musicPlayer, CamInterface& camera,
-    std::shared_ptr<jt::StateManagerInterface> stateManager)
+    MusicPlayerInterface& musicPlayer, CamInterface& camera, StateManagerInterface& stateManager)
     : GameBase { window, input, musicPlayer, camera, stateManager }
 {
     m_sprite_for_drawing = std::make_unique<jt::Sprite>();
@@ -65,7 +64,7 @@ void Game::startGame(GameLoopFunctionPtr gameloop_function)
 void Game::doUpdate(float const elapsed)
 {
     m_logger.verbose("update game, elapsed=" + std::to_string(elapsed), { "jt" });
-    m_stateManager->getCurrentState()->update(elapsed);
+    getStateManager().getCurrentState()->update(elapsed);
 
     getCamera().update(elapsed);
 
@@ -96,7 +95,7 @@ void Game::doDraw() const
 
     m_renderTarget->clear(sf::Color::Black);
 
-    m_stateManager->getCurrentState()->draw();
+    m_stateManager.getCurrentState()->draw();
 
     m_renderTarget->setView(*m_view);
     // convert renderTexture to sprite and draw that.

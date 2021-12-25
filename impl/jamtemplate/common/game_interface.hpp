@@ -51,7 +51,7 @@ public:
 
     /// Get the State Manager
     /// \return the state manager
-    virtual std::shared_ptr<StateManagerInterface> getStateManager() = 0;
+    virtual StateManagerInterface& getStateManager() = 0;
 
     /// Get the render Target
     /// \return the render target
