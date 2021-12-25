@@ -37,6 +37,9 @@ TEST_P(ColorHelpersHsv2RgbTestFixture, rgb2hsv)
         s_expected = 0.0f;
         v_expected = 0.0f;
     }
+    if (h_expected >= 360) {
+        h_expected = 0;
+    }
 
     auto [h, s, v] = jt::ColorHelpers::rgb2hsv(r, g, b);
     ASSERT_EQ(round(h), h_expected);
