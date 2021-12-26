@@ -6,8 +6,10 @@
 #include "logging/logger.hpp"
 #include "logging/logger_interface.hpp"
 #include "render_target.hpp"
+#include "texture_manager_impl.hpp"
 #include <chrono>
 #include <memory>
+#include <optional>
 
 namespace jt {
 class GameBase : public GameInterface,
@@ -34,7 +36,7 @@ public:
 
     std::shared_ptr<renderTarget> getRenderTarget() const override;
 
-    std::shared_ptr<TextureManagerInterface> getTextureManager() override;
+    TextureManagerInterface& getTextureManager() override;
 
     LoggerInterface& getLogger() override;
 
@@ -61,7 +63,7 @@ protected:
 
     std::shared_ptr<renderTarget> m_renderTarget { nullptr };
 
-    std::shared_ptr<TextureManagerInterface> m_textureManager { nullptr };
+    std::optional<jt::TextureManagerImpl> m_textureManager;
 
     LoggerInterface& m_logger;
 

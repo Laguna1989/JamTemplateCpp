@@ -9,12 +9,8 @@ class DrawableImplTestFixture
     : public ::testing::TestWithParam<std::shared_ptr<DrawableFactoryInterface>> {
 protected:
     std::shared_ptr<jt::DrawableInterface> drawable;
-    std::shared_ptr<jt::TextureManagerInterface> tm { nullptr };
-    void SetUp() override
-    {
-        tm = getTextureManager();
-        drawable = GetParam()->createDrawable(tm);
-    }
+    jt::TextureManagerInterface& tm { getTextureManager() };
+    void SetUp() override { drawable = GetParam()->createDrawable(tm); }
 };
 
 INSTANTIATE_TEST_SUITE_P(DrawableImplTest, DrawableImplTestFixture,

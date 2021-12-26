@@ -4,8 +4,7 @@
 
 namespace jt {
 
-Bar::Bar(float width, float height, bool horizontal,
-    std::shared_ptr<TextureManagerInterface> textureManager)
+Bar::Bar(float width, float height, bool horizontal, jt::TextureManagerInterface& textureManager)
     : m_valueMax { 1.0f }
     , m_valueCurrent { 0.0f }
     , m_width { width }

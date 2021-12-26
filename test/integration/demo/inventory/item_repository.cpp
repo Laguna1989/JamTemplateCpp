@@ -3,7 +3,7 @@
 #include <fstream>
 
 std::shared_ptr<WorldItem> ItemRepository::createWorldItem(
-    std::shared_ptr<ItemReference> ref, std::shared_ptr<jt::TextureManagerInterface> textureManager)
+    std::shared_ptr<ItemReference> ref, jt::TextureManagerInterface& textureManager)
 {
     auto spr = std::make_shared<jt::Sprite>(
         ref->worldItemSpriteFileName, ref->worldItemSpriteRect, textureManager);

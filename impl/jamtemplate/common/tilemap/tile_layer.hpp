@@ -66,7 +66,7 @@ private:
     Color m_color { jt::colors::White };
     Color m_flashColor { jt::colors::White };
 
-    bool isTileVisible(TileInfo const& tile, jt::Vector2f const& posOffset) const;
+    bool isTileVisible(TileInfo const& tile) const;
 };
 
 } // namespace tilemap

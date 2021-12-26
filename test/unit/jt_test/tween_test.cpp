@@ -30,7 +30,7 @@ public:
     }
 
 protected:
-    std::shared_ptr<jt::TextureManagerInterface> tm;
+    jt::TextureManagerInterface& tm { getTextureManager() };
     std::shared_ptr<jt::DrawableInterface> m_obj;
 };
 

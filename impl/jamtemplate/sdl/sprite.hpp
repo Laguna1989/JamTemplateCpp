@@ -18,10 +18,9 @@ public:
 
     Sprite();
 
-    Sprite(
-        std::string const& fileName, std::shared_ptr<jt::TextureManagerInterface> textureManager);
+    Sprite(std::string const& fileName, jt::TextureManagerInterface& textureManager);
     Sprite(std::string const& fileName, jt::Recti const& rect,
-        std::shared_ptr<jt::TextureManagerInterface> textureManager);
+        jt::TextureManagerInterface& textureManager);
 
     // DO NOT CALL THIS FROM GAME CODE!
     void fromTexture(std::shared_ptr<SDL_Texture> txt);

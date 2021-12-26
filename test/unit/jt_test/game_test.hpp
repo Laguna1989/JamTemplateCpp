@@ -15,7 +15,7 @@
 class GameTest : public ::testing::Test {
 public:
     float const zoom { 1.0f };
-    std::shared_ptr<jt::Game> g { nullptr };
+    std::shared_ptr<jt::GameBase> g { nullptr };
     MockWindow window;
     MockCamera camera;
     jt::MusicPlayerNull musicPlayer;

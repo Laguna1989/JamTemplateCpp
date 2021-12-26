@@ -2,8 +2,6 @@
 #include "action_commands/basic_action_commands.hpp"
 #include "mocks/mock_state.hpp"
 #include "mocks/mock_state_manager.hpp"
-#include "render_window_null.hpp"
-#include <camera.hpp>
 
 using ::testing::NiceMock;
 
@@ -98,7 +96,7 @@ TEST_F(GameTest, GameRunWithStateThrowingIntException)
 
 TEST_F(GameTest, BasicActionCommands)
 {
-    addBasicActionCommands(*g);
+    addBasicActionCommands(g);
     ASSERT_FALSE(g->getActionCommandManager().getAllCommands().empty());
 }
 

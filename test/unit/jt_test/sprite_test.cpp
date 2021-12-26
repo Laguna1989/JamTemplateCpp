@@ -7,10 +7,7 @@
 
 class SpriteTestFixture : public ::testing::Test {
 protected:
-    std::shared_ptr<jt::TextureManagerInterface> tm { nullptr };
-
-public:
-    void SetUp() override { tm = getTextureManager(); }
+    jt::TextureManagerInterface& tm { getTextureManager() };
 };
 
 TEST_F(SpriteTestFixture, SpriteCanBeDefaultConstructed)
@@ -50,10 +47,7 @@ TEST_F(SpriteTestFixture, CleanImageAfterGetColor)
 class SpriteGetPixelTestFixture
     : public ::testing::TestWithParam<std::pair<jt::Vector2u, jt::Color>> {
 protected:
-    std::shared_ptr<jt::TextureManagerInterface> tm { nullptr };
-
-public:
-    void SetUp() override { tm = getTextureManager(); }
+    jt::TextureManagerInterface& tm { getTextureManager() };
 };
 
 TEST_P(SpriteGetPixelTestFixture, GetPixel)
@@ -78,10 +72,7 @@ INSTANTIATE_TEST_SUITE_P(SpriteGetPixelTestCenter, SpriteGetPixelTestFixture,
 
 class SpriteGetPixelOutOfBoundsTestFixture : public ::testing::TestWithParam<jt::Vector2u> {
 protected:
-    std::shared_ptr<jt::TextureManagerInterface> tm { nullptr };
-
-public:
-    void SetUp() override { tm = getTextureManager(); }
+    jt::TextureManagerInterface& tm { getTextureManager() };
 };
 
 TEST_P(SpriteGetPixelOutOfBoundsTestFixture, GetPixelOutOfBounds)

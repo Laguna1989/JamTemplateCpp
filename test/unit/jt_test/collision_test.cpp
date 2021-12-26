@@ -8,8 +8,8 @@ using jt::Collision;
 using jt::Shape;
 
 namespace {
-jt::Shape makeShape(float sx, float sy, float px, float py,
-    std::shared_ptr<jt::TextureManagerInterface> textureManager)
+jt::Shape makeShape(
+    float sx, float sy, float px, float py, jt::TextureManagerInterface& textureManager)
 {
     Shape s {};
     s.makeRect(jt::Vector2f { sx, sy }, textureManager);
@@ -24,8 +24,7 @@ jt::Shape makeShape(float sx, float sy, float px, float py,
 std::shared_ptr<Shape> const makeShapePtr(float sx, float sy, float px, float py)
 {
     // TODO think about how to pass in texture manager
-    auto tm = getTextureManager();
-    return std::make_shared<Shape>(makeShape(sx, sy, px, py, tm));
+    return std::make_shared<Shape>(makeShape(sx, sy, px, py, getTextureManager()));
 }
 
 } // namespace
@@ -93,26 +92,23 @@ TEST(CollisionTestCircle, ShapePtrSelf)
 
 TEST(CollisionTestCircle, ShapeNoOverlap)
 {
-    auto tm = getTextureManager();
-    auto const s1 = makeShape(20.0f, 20.0f, 0.0f, 0.0f, tm);
-    auto const s2 = makeShape(20.0f, 20.0f, 100.0f, 100.0f, tm);
+    auto const s1 = makeShape(20.0f, 20.0f, 0.0f, 0.0f, getTextureManager());
+    auto const s2 = makeShape(20.0f, 20.0f, 100.0f, 100.0f, getTextureManager());
 
     ASSERT_FALSE(Collision::CircleTest(s1, s2));
 }
 
 TEST(CollisionTestCircle, ShapeOverlap)
 {
-    auto tm = getTextureManager();
-    auto const s1 = makeShape(20.0f, 20.0f, 0.0f, 0.0f, tm);
-    auto const s2 = makeShape(20.0f, 20.0f, 10.0f, 10.0f, tm);
+    auto const s1 = makeShape(20.0f, 20.0f, 0.0f, 0.0f, getTextureManager());
+    auto const s2 = makeShape(20.0f, 20.0f, 10.0f, 10.0f, getTextureManager());
 
     ASSERT_TRUE(Collision::CircleTest(s1, s2));
 }
 
 TEST(CollisionTestCircle, ShapeSelf)
 {
-    auto tm = getTextureManager();
-    auto const s1 = makeShape(20.0f, 20.0f, 20.0f, 20.0f, tm);
+    auto const s1 = makeShape(20.0f, 20.0f, 20.0f, 20.0f, getTextureManager());
 
     ASSERT_TRUE(Collision::CircleTest(s1, s1));
 }

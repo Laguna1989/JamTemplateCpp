@@ -8,7 +8,7 @@
 
 class ButtonTest : public ::testing::Test {
 public:
-    std::shared_ptr<jt::TextureManagerInterface> tm { nullptr };
+    jt::TextureManagerInterface& tm { getTextureManager() };
 
     std::shared_ptr<jt::Button> b { nullptr };
     void SetUp() override

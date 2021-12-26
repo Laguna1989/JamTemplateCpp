@@ -1,5 +1,6 @@
 ﻿#include "main.hpp"
 #include "action_commands/action_command_manager.hpp"
+#include "action_commands/basic_action_commands.hpp"
 #include "camera.hpp"
 #include "game.hpp"
 #include "game_properties.hpp"
@@ -13,7 +14,7 @@
 #include "state_menu.hpp"
 #include <memory>
 
-std::shared_ptr<jt::GameInterface> game;
+std::shared_ptr<jt::GameBase> game;
 
 void gameloop()
 {
@@ -42,6 +43,8 @@ int main()
 
     game = std::make_shared<jt::Game>(
         window, input, musicPlayer, camera, stateManager, logger, actionCommandManager);
+
+    addBasicActionCommands(game);
     game->startGame(gameloop);
 
     game = nullptr;

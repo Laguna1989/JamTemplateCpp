@@ -59,7 +59,7 @@ public:
 
     /// Get the texture Manager
     /// \return the texture Manager
-    virtual std::shared_ptr<TextureManagerInterface> getTextureManager() = 0;
+    virtual TextureManagerInterface& getTextureManager() = 0;
 
     /// Get the logger
     /// \return the logger

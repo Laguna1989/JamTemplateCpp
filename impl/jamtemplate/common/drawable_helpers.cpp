@@ -6,8 +6,8 @@
 namespace jt {
 namespace dh {
 
-std::shared_ptr<jt::Shape> createShapeRect(jt::Vector2f const& size, jt::Color const& col,
-    std::shared_ptr<jt::TextureManagerInterface> textureManager)
+std::shared_ptr<jt::Shape> createShapeRect(
+    jt::Vector2f const& size, jt::Color const& col, jt::TextureManagerInterface& textureManager)
 {
     auto ptr = std::make_shared<jt::Shape>();
     ptr->makeRect(size, textureManager);
@@ -16,7 +16,7 @@ std::shared_ptr<jt::Shape> createShapeRect(jt::Vector2f const& size, jt::Color c
 }
 
 std::shared_ptr<jt::Shape> createShapeCircle(
-    float radius, Color const& col, std::shared_ptr<jt::TextureManagerInterface> textureManager)
+    float radius, Color const& col, jt::TextureManagerInterface& textureManager)
 {
     auto ptr = std::make_shared<jt::Shape>();
     ptr->makeCircle(radius, textureManager);
@@ -35,7 +35,7 @@ std::shared_ptr<jt::Text> createText(std::weak_ptr<jt::renderTarget> rt, std::st
 }
 
 std::shared_ptr<jt::Sprite> createVignette(
-    jt::Vector2f const& size, std::shared_ptr<jt::TextureManagerInterface> textureManager)
+    jt::Vector2f const& size, jt::TextureManagerInterface& textureManager)
 {
     auto ptr = std::make_shared<jt::Sprite>("#v#" + std::to_string(static_cast<int>(size.x)) + "#"
             + std::to_string(static_cast<int>(size.y)),

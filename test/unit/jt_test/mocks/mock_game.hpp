@@ -28,7 +28,7 @@ public:
     MOCK_METHOD(void, startGame, (jt::GameInterface::GameLoopFunctionPtr), (override));
 
     MOCK_METHOD(jt::RenderWindowInterface&, getRenderWindow, (), (const, override));
-    MOCK_METHOD(std::shared_ptr<jt::TextureManagerInterface>, getTextureManager, (), (override));
+    MOCK_METHOD(jt::TextureManagerInterface&, getTextureManager, (), (override));
     MOCK_METHOD(void, reset, (), (override));
     MOCK_METHOD(jt::LoggerInterface&, getLogger, (), (override));
     MOCK_METHOD(jt::ActionCommandManagerInterface&, getActionCommandManager, (), (override));

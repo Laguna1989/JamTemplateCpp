@@ -80,7 +80,7 @@ StateManagerInterface& GameBase::getStateManager() { return m_stateManager; }
 
 std::shared_ptr<renderTarget> GameBase::getRenderTarget() const { return m_renderTarget; }
 
-std::shared_ptr<TextureManagerInterface> GameBase::getTextureManager() { return m_textureManager; }
+TextureManagerInterface& GameBase::getTextureManager() { return m_textureManager.value(); }
 
 LoggerInterface& GameBase::getLogger() { return m_logger; }
 

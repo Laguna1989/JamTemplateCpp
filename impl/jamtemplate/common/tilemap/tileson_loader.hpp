@@ -21,10 +21,10 @@ public:
     std::vector<InfoRect> loadObjectsFromLayer(std::string const& layerName);
 
     std::vector<std::shared_ptr<TileNode>> loadNodesFromLayer(
-        std::string const& layerName, std::shared_ptr<jt::TextureManagerInterface> textureManager);
+        std::string const& layerName, jt::TextureManagerInterface& textureManager);
 
     std::tuple<std::vector<TileInfo>, std::vector<jt::Sprite>> loadTilesFromLayer(
-        std::string const& layerName, std::shared_ptr<jt::TextureManagerInterface> textureManager);
+        std::string const& layerName, jt::TextureManagerInterface& textureManager);
 
 private:
     TilemapManagerTilesonImpl m_tilemapManager;

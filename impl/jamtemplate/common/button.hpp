@@ -2,8 +2,8 @@
 #define GUARD_JAMTEMPLATE_BUTTON_HPP_GUARD
 
 #include "game_object.hpp"
-#include "vector.hpp"
 #include "texture_manager_interface.hpp"
+#include "vector.hpp"
 #include <functional>
 #include <memory>
 #include <vector>
@@ -19,7 +19,7 @@ public:
 
     /// Constructor, creates a button with the given size
     /// \param size the size of the button in pixel
-    Button(Vector2u const& size, std::shared_ptr<TextureManagerInterface> textureManager);
+    Button(Vector2u const& size, jt::TextureManagerInterface& textureManager);
     ~Button();
 
     Button(const Button& b) = delete;

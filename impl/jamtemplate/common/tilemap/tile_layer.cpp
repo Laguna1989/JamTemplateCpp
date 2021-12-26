@@ -18,7 +18,7 @@ TileLayer::TileLayer(std::tuple<std::vector<TileInfo> const&, std::vector<jt::Sp
 {
 }
 
-bool TileLayer::isTileVisible(TileInfo const& tile, jt::Vector2f const& posOffset) const
+bool TileLayer::isTileVisible(TileInfo const& tile) const
 {
     if (m_screenSizeHint.x == 0 && m_screenSizeHint.y == 0) {
         return true;
@@ -49,9 +49,10 @@ void TileLayer::doDraw(std::shared_ptr<jt::renderTarget> const sptr) const
     auto const posOffset = m_position + getShakeOffset() + getOffset();
     for (auto const& tile : m_tiles) {
         // optimization: don't draw tiles which are not visible in this frame
-        if (!isTileVisible(tile, posOffset)) {
+        if (!isTileVisible(tile)) {
             continue;
         }
+
         auto const pixelPosForTile = tile.position + posOffset;
         auto const id = tile.id;
         this->m_tileSetSprites.at(id).setPosition(jt::Vector2f {
