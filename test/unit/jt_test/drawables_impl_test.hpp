@@ -57,8 +57,8 @@ public:
         jt::TextureManagerInterface& /*textureManager*/) override
     {
         auto t = std::make_shared<jt::Text>();
-        std::shared_ptr<jt::renderTarget> rt { nullptr };
-        t->loadFont("assets/font.ttf", 12, rt);
+        std::shared_ptr<jt::renderTarget> renderTarget { nullptr };
+        t->loadFont("assets/font.ttf", 12, renderTarget);
         return t;
     }
 };

@@ -3,6 +3,7 @@
 
 #include "texture_manager_interface.hpp"
 #include <map>
+#include <memory>
 
 namespace jt {
 class TextureManagerImpl : public ::jt::TextureManagerInterface {

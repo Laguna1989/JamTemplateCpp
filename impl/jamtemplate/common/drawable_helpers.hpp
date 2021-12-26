@@ -27,14 +27,14 @@ std::shared_ptr<jt::Shape> createShapeCircle(
     float radius, jt::Color const& col, jt::TextureManagerInterface& textureManager);
 
 /// Create a text
-/// \param rt weak pointer to rendertarget
+/// \param renderTarget weak pointer to rendertarget
 /// \param text the string displayed in the text
 /// \param fontSize how big are the letters in the text
 /// \param col the color of the text
 /// \param font_path path to the ttf file (e.g. "assets/font.ttf")
 /// \return shared pointer to text
-std::shared_ptr<jt::Text> createText(std::weak_ptr<jt::renderTarget> rt, std::string const& text,
-    unsigned int fontSize, jt::Color const& col = jt::colors::White,
+std::shared_ptr<jt::Text> createText(std::weak_ptr<jt::renderTarget> renderTarget,
+    std::string const& text, unsigned int fontSize, jt::Color const& col = jt::colors::White,
     std::string const& font_path = "assets/font.ttf");
 
 /// Create a vignette sprite

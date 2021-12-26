@@ -160,12 +160,12 @@ TEST_F(ButtonTest, CustomDrawable)
 
     auto d = std::make_shared<MockDrawable>();
     b->setDrawable(d);
-    std::shared_ptr<jt::renderTarget> rt = nullptr;
+    std::shared_ptr<jt::renderTarget> renderTarget = nullptr;
     EXPECT_CALL(*game, getRenderTarget()).Times(2);
     EXPECT_CALL(*d, setPosition(::testing::_));
     EXPECT_CALL(*d, update(0.1f));
     b->update(0.1f);
-    EXPECT_CALL(*d, draw(rt));
+    EXPECT_CALL(*d, draw(renderTarget));
     b->draw();
     SUCCEED();
 }

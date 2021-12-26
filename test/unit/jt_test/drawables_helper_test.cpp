@@ -62,14 +62,14 @@ TEST(CreateVignetteTest, Color)
 
 TEST(CreateTextTest, NoNullptr)
 {
-    std::shared_ptr<jt::renderTarget> rt { nullptr };
-    auto const text = jt::dh::createText(rt, "assets/font.ttf", 24, jt::colors::Green);
+    std::shared_ptr<jt::renderTarget> renderTarget { nullptr };
+    auto const text = jt::dh::createText(renderTarget, "assets/font.ttf", 24, jt::colors::Green);
     ASSERT_NE(text, nullptr);
 }
 
 TEST(CreateTextTest, Color)
 {
-    std::shared_ptr<jt::renderTarget> rt { nullptr };
-    auto const text = jt::dh::createText(rt, "assets/font.ttf", 24, jt::colors::Green);
+    std::shared_ptr<jt::renderTarget> renderTarget { nullptr };
+    auto const text = jt::dh::createText(renderTarget, "assets/font.ttf", 24, jt::colors::Green);
     ASSERT_EQ(text->getColor(), jt::colors::Green);
 }

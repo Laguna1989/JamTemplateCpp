@@ -129,20 +129,20 @@ TEST_P(DrawableImplTestFixture, DrawWithFlash)
 {
     drawable->flash(5.0f);
     drawable->update(0.1f);
-    auto rt = getRenderTarget();
-    drawable->draw(rt);
+    auto renderTarget = getRenderTarget();
+    drawable->draw(renderTarget);
     drawable->update(5.0f);
-    drawable->draw(rt);
+    drawable->draw(renderTarget);
 }
 
 TEST_P(DrawableImplTestFixture, DrawWithShake)
 {
     drawable->shake(5.0f, 0.02f);
     drawable->update(0.1f);
-    auto rt = getRenderTarget();
-    drawable->draw(rt);
+    auto renderTarget = getRenderTarget();
+    drawable->draw(renderTarget);
     drawable->update(5.0f);
-    drawable->draw(rt);
+    drawable->draw(renderTarget);
 }
 
 TEST_P(DrawableImplTestFixture, DrawScaled)

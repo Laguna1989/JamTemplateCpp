@@ -24,11 +24,12 @@ std::shared_ptr<jt::Shape> createShapeCircle(
     return ptr;
 }
 
-std::shared_ptr<jt::Text> createText(std::weak_ptr<jt::renderTarget> rt, std::string const& text,
-    unsigned int fontSize, jt::Color const& col, std::string const& font_path)
+std::shared_ptr<jt::Text> createText(std::weak_ptr<jt::renderTarget> renderTarget,
+    std::string const& text, unsigned int fontSize, jt::Color const& col,
+    std::string const& font_path)
 {
     auto ptr = std::make_shared<jt::Text>();
-    ptr->loadFont(font_path, fontSize, std::move(rt));
+    ptr->loadFont(font_path, fontSize, std::move(renderTarget));
     ptr->setText(text);
     ptr->setColor(col);
     return ptr;

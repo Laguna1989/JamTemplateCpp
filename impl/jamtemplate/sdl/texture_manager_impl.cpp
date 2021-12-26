@@ -13,7 +13,7 @@ namespace jt {
 namespace {
 
 std::shared_ptr<SDL_Texture> createButtonImage(
-    std::vector<std::string> const& ssv, std::shared_ptr<jt::renderTarget> rt)
+    std::vector<std::string> const& ssv, std::shared_ptr<jt::renderTarget> renderTarget)
 {
     if (ssv.size() != 3) {
         throw std::invalid_argument { "create button image: vector does not contain 3 elements." };
@@ -31,11 +31,11 @@ std::shared_ptr<SDL_Texture> createButtonImage(
         throw std::invalid_argument { "invalid button size" };
     }
 
-    return jt::SpriteFunctions::makeButtonImage(rt, w, h);
+    return jt::SpriteFunctions::makeButtonImage(renderTarget, w, h);
 }
 
 std::shared_ptr<SDL_Texture> createBlankImage(
-    std::vector<std::string> const& ssv, std::shared_ptr<jt::renderTarget> rt)
+    std::vector<std::string> const& ssv, std::shared_ptr<jt::renderTarget> renderTarget)
 {
     if (ssv.size() != 3) {
         throw std::invalid_argument { "create button image: vector does not contain 3 elements." };
@@ -54,11 +54,11 @@ std::shared_ptr<SDL_Texture> createBlankImage(
     }
 
     return SpriteFunctions::makeBlankImage(
-        rt, static_cast<unsigned int>(w), static_cast<unsigned int>(h));
+        renderTarget, static_cast<unsigned int>(w), static_cast<unsigned int>(h));
 }
 
 std::shared_ptr<SDL_Texture> createGlowImage(
-    std::vector<std::string> const& ssv, std::shared_ptr<jt::renderTarget> rt)
+    std::vector<std::string> const& ssv, std::shared_ptr<jt::renderTarget> renderTarget)
 {
     if (ssv.size() != 3) {
         throw std::invalid_argument { "create glow image: vector does not contain 2 elements." };
@@ -75,11 +75,11 @@ std::shared_ptr<SDL_Texture> createGlowImage(
         throw std::invalid_argument { "invalid glowmax" };
     }
     return SpriteFunctions::makeGlowImage(
-        rt, static_cast<float>(glow_size), static_cast<uint8_t>(max));
+        renderTarget, static_cast<float>(glow_size), static_cast<uint8_t>(max));
 }
 
 std::shared_ptr<SDL_Texture> createVignetteImage(
-    std::vector<std::string> const& ssv, std::shared_ptr<jt::renderTarget> rt)
+    std::vector<std::string> const& ssv, std::shared_ptr<jt::renderTarget> renderTarget)
 {
     if (ssv.size() != 3) {
         throw std::invalid_argument {
@@ -96,11 +96,11 @@ std::shared_ptr<SDL_Texture> createVignetteImage(
         std::cout << "invalid vignette h\n";
         throw std::invalid_argument { "invalid vignette h" };
     }
-    return SpriteFunctions::makeVignetteImage(rt, w, h);
+    return SpriteFunctions::makeVignetteImage(renderTarget, w, h);
 }
 
 std::shared_ptr<SDL_Texture> createRectImage(
-    std::vector<std::string> const& ssv, std::shared_ptr<jt::renderTarget> rt)
+    std::vector<std::string> const& ssv, std::shared_ptr<jt::renderTarget> renderTarget)
 {
     if (ssv.size() != 3) {
         throw std::invalid_argument { "create rect image: vector does not contain 2 elements." };
@@ -115,11 +115,11 @@ std::shared_ptr<SDL_Texture> createRectImage(
         std::cout << "invalid rect h\n";
         throw std::invalid_argument { "invalid rect h" };
     }
-    return SpriteFunctions::makeRect(rt, w, h);
+    return SpriteFunctions::makeRect(renderTarget, w, h);
 }
 
 std::shared_ptr<SDL_Texture> createCircleImage(
-    std::vector<std::string> const& ssv, std::shared_ptr<jt::renderTarget> rt)
+    std::vector<std::string> const& ssv, std::shared_ptr<jt::renderTarget> renderTarget)
 {
     if (ssv.size() != 2) {
         throw std::invalid_argument { "create circle image: vector does not contain 1 elements." };
@@ -129,11 +129,11 @@ std::shared_ptr<SDL_Texture> createCircleImage(
     if (count != ssv.at(1).size() || radius <= std::numeric_limits<uint8_t>::min()) {
         throw std::invalid_argument { "invalid circle radius" };
     }
-    return SpriteFunctions::makeCircle(rt, static_cast<float>(radius));
+    return SpriteFunctions::makeCircle(renderTarget, static_cast<float>(radius));
 }
 
 std::shared_ptr<SDL_Texture> createFlashImage(
-    std::string const& str, std::shared_ptr<jt::renderTarget> rt)
+    std::string const& str, std::shared_ptr<jt::renderTarget> renderTarget)
 {
     auto image = std::shared_ptr<SDL_Surface>(
         IMG_Load(str.c_str()), [](SDL_Surface* s) { SDL_FreeSurface(s); });
@@ -160,18 +160,19 @@ std::shared_ptr<SDL_Texture> createFlashImage(
     }
 
     SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "0");
-    return std::shared_ptr<SDL_Texture>(SDL_CreateTextureFromSurface(rt.get(), image.get()),
+    return std::shared_ptr<SDL_Texture>(
+        SDL_CreateTextureFromSurface(renderTarget.get(), image.get()),
         [](SDL_Texture* t) { SDL_DestroyTexture(t); });
 }
 
 std::shared_ptr<SDL_Texture> loadTextureFromDisk(
-    std::string const& str, std::shared_ptr<jt::renderTarget> rt)
+    std::string const& str, std::shared_ptr<jt::renderTarget> renderTarget)
 {
-    if (rt == nullptr) {
+    if (renderTarget == nullptr) {
         throw std::logic_error { "rendertarget is null in loadTextureFromDisk" };
     }
-    auto t = std::shared_ptr<SDL_Texture>(
-        IMG_LoadTexture(rt.get(), str.c_str()), [](SDL_Texture* t) { SDL_DestroyTexture(t); });
+    auto t = std::shared_ptr<SDL_Texture>(IMG_LoadTexture(renderTarget.get(), str.c_str()),
+        [](SDL_Texture* t) { SDL_DestroyTexture(t); });
 
     if (t == nullptr) {
         throw std::invalid_argument { "invalid filename, cannot load texture from '" + str + "'" };

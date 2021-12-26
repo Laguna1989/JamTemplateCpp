@@ -9,24 +9,24 @@
 namespace jt {
 namespace SpriteFunctions {
 
-std::shared_ptr<SDL_Texture> makeButtonImage(std::shared_ptr<jt::renderTarget> rt, unsigned int w,
-    unsigned int h, jt::Color midColor = jt::Color { 200, 200, 200 },
+std::shared_ptr<SDL_Texture> makeButtonImage(std::shared_ptr<jt::renderTarget> renderTarget,
+    unsigned int w, unsigned int h, jt::Color midColor = jt::Color { 200, 200, 200 },
     jt::Color darkColor = jt::Color { 100, 100, 100 },
     jt::Color brightColor = jt::Color { 255, 255, 255 });
 
 std::shared_ptr<SDL_Texture> makeBlankImage(
-    std::shared_ptr<jt::renderTarget> rt, unsigned int w, unsigned int h);
+    std::shared_ptr<jt::renderTarget> renderTarget, unsigned int w, unsigned int h);
 
 std::shared_ptr<SDL_Texture> makeGlowImage(
-    std::shared_ptr<jt::renderTarget> rt, float r, std::uint8_t max = 255);
+    std::shared_ptr<jt::renderTarget> renderTarget, float r, std::uint8_t max = 255);
 
 std::shared_ptr<SDL_Texture> makeVignetteImage(
-    std::shared_ptr<jt::renderTarget> rt, unsigned int w, unsigned int h);
+    std::shared_ptr<jt::renderTarget> renderTarget, unsigned int w, unsigned int h);
 
 std::shared_ptr<SDL_Texture> makeRect(
-    std::shared_ptr<jt::renderTarget> rt, unsigned int w, unsigned int h);
+    std::shared_ptr<jt::renderTarget> renderTarget, unsigned int w, unsigned int h);
 
-std::shared_ptr<SDL_Texture> makeCircle(std::shared_ptr<jt::renderTarget> rt, float r);
+std::shared_ptr<SDL_Texture> makeCircle(std::shared_ptr<jt::renderTarget> renderTarget, float r);
 
 } // namespace SpriteFunctions
 

@@ -8,8 +8,8 @@ namespace jt {
 
 namespace SpriteFunctions {
 
-std::shared_ptr<SDL_Texture> makeButtonImage(std::shared_ptr<jt::renderTarget> rt, unsigned int w,
-    unsigned int h, jt::Color midColor, jt::Color darkColor, jt::Color brightColor)
+std::shared_ptr<SDL_Texture> makeButtonImage(std::shared_ptr<jt::renderTarget> renderTarget,
+    unsigned int w, unsigned int h, jt::Color midColor, jt::Color darkColor, jt::Color brightColor)
 {
     auto const wAsInt = static_cast<int>(w);
     auto const hAsInt = static_cast<int>(h);
@@ -43,12 +43,13 @@ std::shared_ptr<SDL_Texture> makeButtonImage(std::shared_ptr<jt::renderTarget> r
         setPixel(image.get(), 3 * wAsInt - 1, j, bright);
     }
     SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "0");
-    return std::shared_ptr<SDL_Texture>(SDL_CreateTextureFromSurface(rt.get(), image.get()),
+    return std::shared_ptr<SDL_Texture>(
+        SDL_CreateTextureFromSurface(renderTarget.get(), image.get()),
         [](SDL_Texture* t) { SDL_DestroyTexture(t); });
 }
 
 std::shared_ptr<SDL_Texture> makeBlankImage(
-    std::shared_ptr<jt::renderTarget> rt, unsigned int w, unsigned int h)
+    std::shared_ptr<jt::renderTarget> renderTarget, unsigned int w, unsigned int h)
 {
     std::shared_ptr<SDL_Surface> image = std::shared_ptr<SDL_Surface>(
         SDL_CreateRGBSurface(0, static_cast<int>(w), static_cast<int>(h), 32, 0, 0, 0, 0),
@@ -63,12 +64,13 @@ std::shared_ptr<SDL_Texture> makeBlankImage(
     }
 
     SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "0");
-    return std::shared_ptr<SDL_Texture>(SDL_CreateTextureFromSurface(rt.get(), image.get()),
+    return std::shared_ptr<SDL_Texture>(
+        SDL_CreateTextureFromSurface(renderTarget.get(), image.get()),
         [](SDL_Texture* t) { SDL_DestroyTexture(t); });
 }
 
 std::shared_ptr<SDL_Texture> makeGlowImage(
-    std::shared_ptr<jt::renderTarget> rt, float r, std::uint8_t max)
+    std::shared_ptr<jt::renderTarget> renderTarget, float r, std::uint8_t max)
 {
     auto const s = static_cast<unsigned int>(r + 0.5f * 2);
     std::shared_ptr<SDL_Surface> image = std::shared_ptr<SDL_Surface>(
@@ -92,12 +94,13 @@ std::shared_ptr<SDL_Texture> makeGlowImage(
         }
     }
     SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "0");
-    return std::shared_ptr<SDL_Texture>(SDL_CreateTextureFromSurface(rt.get(), image.get()),
+    return std::shared_ptr<SDL_Texture>(
+        SDL_CreateTextureFromSurface(renderTarget.get(), image.get()),
         [](SDL_Texture* t) { SDL_DestroyTexture(t); });
 }
 
 std::shared_ptr<SDL_Texture> makeVignetteImage(
-    std::shared_ptr<jt::renderTarget> rt, unsigned int w, unsigned int h)
+    std::shared_ptr<jt::renderTarget> renderTarget, unsigned int w, unsigned int h)
 {
     std::shared_ptr<SDL_Surface> image
         = std::shared_ptr<SDL_Surface>(SDL_CreateRGBSurfaceWithFormat(0, static_cast<int>(w),
@@ -119,14 +122,14 @@ std::shared_ptr<SDL_Texture> makeVignetteImage(
         }
     }
     SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "0");
-    std::shared_ptr<SDL_Texture> t(SDL_CreateTextureFromSurface(rt.get(), image.get()),
+    std::shared_ptr<SDL_Texture> t(SDL_CreateTextureFromSurface(renderTarget.get(), image.get()),
         [](SDL_Texture* t) { SDL_DestroyTexture(t); });
     SDL_SetTextureBlendMode(t.get(), SDL_BLENDMODE_BLEND);
     return t;
 }
 
 std::shared_ptr<SDL_Texture> makeRect(
-    std::shared_ptr<jt::renderTarget> rt, unsigned int w, unsigned int h)
+    std::shared_ptr<jt::renderTarget> renderTarget, unsigned int w, unsigned int h)
 {
     std::shared_ptr<SDL_Surface> image
         = std::shared_ptr<SDL_Surface>(SDL_CreateRGBSurfaceWithFormat(0, static_cast<int>(w),
@@ -138,13 +141,13 @@ std::shared_ptr<SDL_Texture> makeRect(
     SDL_FillRect(image.get(), nullptr, SDL_MapRGBA(image->format, max, max, max, max));
 
     SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "0");
-    std::shared_ptr<SDL_Texture> t(SDL_CreateTextureFromSurface(rt.get(), image.get()),
+    std::shared_ptr<SDL_Texture> t(SDL_CreateTextureFromSurface(renderTarget.get(), image.get()),
         [](SDL_Texture* t) { SDL_DestroyTexture(t); });
     SDL_SetTextureBlendMode(t.get(), SDL_BLENDMODE_BLEND);
     return t;
 }
 
-std::shared_ptr<SDL_Texture> makeCircle(std::shared_ptr<jt::renderTarget> rt, float r)
+std::shared_ptr<SDL_Texture> makeCircle(std::shared_ptr<jt::renderTarget> renderTarget, float r)
 {
     auto const s = static_cast<unsigned int>((r + 0.5f) * 2);
     std::shared_ptr<SDL_Surface> image = std::shared_ptr<SDL_Surface>(
@@ -169,7 +172,8 @@ std::shared_ptr<SDL_Texture> makeCircle(std::shared_ptr<jt::renderTarget> rt, fl
     }
 
     SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "0");
-    return std::shared_ptr<SDL_Texture>(SDL_CreateTextureFromSurface(rt.get(), image.get()),
+    return std::shared_ptr<SDL_Texture>(
+        SDL_CreateTextureFromSurface(renderTarget.get(), image.get()),
         [](SDL_Texture* t) { SDL_DestroyTexture(t); });
 }
 
