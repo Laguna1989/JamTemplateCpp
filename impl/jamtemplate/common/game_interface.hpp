@@ -55,11 +55,11 @@ public:
 
     /// Get the render Target
     /// \return the render target
-    virtual std::shared_ptr<jt::renderTarget> getRenderTarget() const = 0;
+    virtual std::shared_ptr<renderTarget> getRenderTarget() const = 0;
 
     /// Get the texture Manager
     /// \return the texture Manager
-    virtual std::shared_ptr<jt::TextureManagerInterface> getTextureManager() = 0;
+    virtual std::shared_ptr<TextureManagerInterface> getTextureManager() = 0;
 
     /// Get the logger
     /// \return the logger
@@ -67,7 +67,7 @@ public:
 
     /// Get the ActionCommandManager
     /// \return the action command manager
-    virtual std::shared_ptr<jt::ActionCommandManagerInterface> getActionCommandManager() = 0;
+    virtual ActionCommandManagerInterface& getActionCommandManager() = 0;
 
     /// Reset the Game internals
     virtual void reset() = 0;

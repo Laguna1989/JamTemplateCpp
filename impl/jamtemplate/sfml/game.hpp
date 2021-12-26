@@ -22,7 +22,8 @@ public:
     /// \param stateManager state manager
     Game(RenderWindowInterface& window, InputManagerInterface& input,
         MusicPlayerInterface& musicPlayer, CamInterface& camera,
-        StateManagerInterface& stateManager);
+        StateManagerInterface& stateManager, LoggerInterface& logger,
+        ActionCommandManagerInterface& actionCommandManager);
 
     void startGame(GameLoopFunctionPtr gameloop_function) override;
 

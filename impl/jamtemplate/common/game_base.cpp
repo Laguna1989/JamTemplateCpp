@@ -6,38 +6,41 @@
 #include "logging/log_target_file.hpp"
 #include "logging/logger.hpp"
 #include "state_manager.hpp"
-#include <exception>
 #include <iostream>
-#include <stdexcept>
 
 namespace jt {
 
+namespace {
+// TODO make this a free function that the user can call
+void createDefaultLogTargets(LoggerInterface& logger)
+{
+    auto targetCout = std::make_shared<LogTargetCout>();
+    targetCout->setLogLevel(LogLevel::LogLevelInfo);
+
+    logger.addLogTarget(targetCout);
+    logger.addLogTarget(std::make_shared<LogTargetFile>());
+    logger.setLogLevel(LogLevel::LogLevelDebug);
+}
+} // namespace
+
 GameBase::GameBase(RenderWindowInterface& renderWindow, InputManagerInterface& input,
-    MusicPlayerInterface& musicPlayer, CamInterface& camera, StateManagerInterface& stateManager)
+    MusicPlayerInterface& musicPlayer, CamInterface& camera, StateManagerInterface& stateManager,
+    LoggerInterface& logger, ActionCommandManagerInterface& actionCommandManager)
     : m_renderWindow { renderWindow }
     , m_inputManager { input }
     , m_camera { camera }
     , m_musicPlayer { musicPlayer }
     , m_stateManager { stateManager }
+    , m_logger { logger }
+    , m_actionCommandManager { actionCommandManager }
 {
-    // TODO move this out into a separate dependency
-    createDefaultLogTargets();
-}
-void GameBase::createDefaultLogTargets()
-{
-    auto targetCout = std::make_shared<LogTargetCout>();
-    targetCout->setLogLevel(LogLevel::LogLevelInfo);
-    m_logger.addLogTarget(targetCout);
-    m_logger.addLogTarget(std::make_shared<LogTargetFile>());
-    m_logger.setLogLevel(LogLevel::LogLevelOff);
-    m_actionCommandManager = std::make_shared<ActionCommandManager>(m_logger);
-    m_logger.setLogLevel(LogLevel::LogLevelDebug);
+    createDefaultLogTargets(m_logger);
 }
 
 void GameBase::runOneFrame()
 {
     m_logger.verbose("runOneFrame", { "jt" });
-    m_actionCommandManager->update();
+    m_actionCommandManager.update();
     m_stateManager.checkAndPerformSwitchState(getPtr());
 
     auto const now = std::chrono::steady_clock::now();
@@ -75,15 +78,13 @@ CamInterface& GameBase::getCamera() const { return m_camera; }
 
 StateManagerInterface& GameBase::getStateManager() { return m_stateManager; }
 
-std::shared_ptr<jt::renderTarget> GameBase::getRenderTarget() const { return m_renderTarget; }
+std::shared_ptr<renderTarget> GameBase::getRenderTarget() const { return m_renderTarget; }
 
-std::shared_ptr<jt::TextureManagerInterface> GameBase::getTextureManager()
-{
-    return m_textureManager;
-}
+std::shared_ptr<TextureManagerInterface> GameBase::getTextureManager() { return m_textureManager; }
 
 LoggerInterface& GameBase::getLogger() { return m_logger; }
-std::shared_ptr<jt::ActionCommandManagerInterface> GameBase::getActionCommandManager()
+
+ActionCommandManagerInterface& GameBase::getActionCommandManager()
 {
     return m_actionCommandManager;
 }

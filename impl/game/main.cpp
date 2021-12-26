@@ -1,4 +1,5 @@
 ﻿#include "main.hpp"
+#include "action_commands/action_command_manager.hpp"
 #include "camera.hpp"
 #include "game.hpp"
 #include "game_properties.hpp"
@@ -36,8 +37,11 @@ int main()
     jt::MusicPlayer musicPlayer;
     jt::Camera camera { GP::GetZoom() };
     jt::StateManager stateManager { std::make_shared<StateMenu>() };
+    jt::Logger logger;
+    jt::ActionCommandManager actionCommandManager(logger);
 
-    game = std::make_shared<jt::Game>(window, input, musicPlayer, camera, stateManager);
+    game = std::make_shared<jt::Game>(
+        window, input, musicPlayer, camera, stateManager, logger, actionCommandManager);
     game->startGame(gameloop);
 
     game = nullptr;

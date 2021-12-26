@@ -19,8 +19,9 @@
 namespace jt {
 
 Game::Game(RenderWindowInterface& window, InputManagerInterface& input,
-    MusicPlayerInterface& musicPlayer, CamInterface& camera, StateManagerInterface& stateManager)
-    : GameBase { window, input, musicPlayer, camera, stateManager }
+    MusicPlayerInterface& musicPlayer, CamInterface& camera, StateManagerInterface& stateManager,
+    LoggerInterface& logger, ActionCommandManagerInterface& actionCommandManager)
+    : GameBase { window, input, musicPlayer, camera, stateManager, logger, actionCommandManager }
 {
     auto const width = getRenderWindow().getSize().x;
     auto const height = getRenderWindow().getSize().y;

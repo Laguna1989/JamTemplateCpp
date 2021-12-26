@@ -1,6 +1,7 @@
 #ifndef JAMTEMPLATE_UNITTESTS_GAME_TEST_HPP
 #define JAMTEMPLATE_UNITTESTS_GAME_TEST_HPP
 
+#include "action_commands/action_command_manager.hpp"
 #include "game.hpp"
 #include "mocks/mock_camera.hpp"
 #include "mocks/mock_input.hpp"
@@ -21,6 +22,9 @@ public:
     std::shared_ptr<MockState> state { nullptr };
     ::testing::NiceMock<MockInput> input;
     ::testing::NiceMock<MockStateManager> stateManager;
+    jt::Logger logger;
+    // TODO use null objects if possible
+    jt::ActionCommandManager actionCommandManager { logger };
 
     void SetUp() override
     {
@@ -32,7 +36,8 @@ public:
         state = std::make_shared<MockState>();
         ON_CALL(stateManager, getCurrentState).WillByDefault(::testing::Return(state));
 
-        g = std::make_shared<jt::Game>(window, input, musicPlayer, camera, stateManager);
+        g = std::make_shared<jt::Game>(
+            window, input, musicPlayer, camera, stateManager, logger, actionCommandManager);
         state->setGameInstance(g);
     }
 };
