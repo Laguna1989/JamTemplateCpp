@@ -1,3 +1,4 @@
+#include "action_commands/action_command_manager.hpp"
 #include "camera.hpp"
 #include "game.hpp"
 #include "game_state.hpp"
@@ -55,7 +56,11 @@ static void BM_GamestateWithTweeningShapes(benchmark::State& state)
         jt::MusicPlayerNull music;
         jt::Camera camera { 1.0f };
         jt::StateManager stateManager { std::make_shared<StateTweenPerformanceTest>() };
-        auto game = std::make_shared<jt::Game>(window, input, music, camera, stateManager);
+        jt::Logger logger;
+        logger.setLogLevel(LogLevel::LogLevelOff);
+        jt::ActionCommandManager actionCommandManager { logger };
+        auto game = std::make_shared<jt::Game>(
+            window, input, music, camera, stateManager, logger, actionCommandManager);
         game->getLogger().setLogLevel(LogLevel::LogLevelOff);
         game->getStateManager().checkAndPerformSwitchState(game);
         for (int i = 0; i != 500; ++i) {

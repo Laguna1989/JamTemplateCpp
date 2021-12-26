@@ -1,3 +1,4 @@
+#include "action_commands/action_command_manager.hpp"
 #include "camera.hpp"
 #include "game.hpp"
 #include "game_state.hpp"
@@ -34,8 +35,11 @@ static void BM_StartGame(benchmark::State& state)
         jt::InputManagerNull input;
         jt::MusicPlayerNull music;
         jt::Camera camera { 1.0f };
-        auto game = std::make_shared<jt::Game>(window, input, music, camera, stateManager);
-        game->getLogger().setLogLevel(LogLevel::LogLevelOff);
+        jt::Logger logger;
+        logger.setLogLevel(LogLevel::LogLevelOff);
+        jt::ActionCommandManager actionCommandManager { logger };
+        auto game = std::make_shared<jt::Game>(
+            window, input, music, camera, stateManager, logger, actionCommandManager);
         stateManager.checkAndPerformSwitchState(game);
         game->update(0.02f);
         game->draw();
