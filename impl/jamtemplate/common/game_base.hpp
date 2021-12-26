@@ -6,8 +6,10 @@
 #include "logging/logger.hpp"
 #include "logging/logger_interface.hpp"
 #include "render_target.hpp"
+#include "texture_manager_impl.hpp"
 #include <chrono>
 #include <memory>
+#include <optional>
 
 namespace jt {
 class GameBase : public GameInterface,
@@ -16,7 +18,8 @@ class GameBase : public GameInterface,
 public:
     GameBase(RenderWindowInterface& renderWindow, InputManagerInterface& input,
         MusicPlayerInterface& musicPlayer, CamInterface& camera,
-        StateManagerInterface& stateManager);
+        StateManagerInterface& stateManager, LoggerInterface& logger,
+        ActionCommandManagerInterface& actionCommandManager);
 
     void runOneFrame() override;
 
@@ -31,13 +34,13 @@ public:
 
     StateManagerInterface& getStateManager() override;
 
-    std::shared_ptr<jt::renderTarget> getRenderTarget() const override;
+    std::shared_ptr<renderTarget> getRenderTarget() const override;
 
-    std::shared_ptr<jt::TextureManagerInterface> getTextureManager() override;
+    TextureManagerInterface& getTextureManager() override;
 
     LoggerInterface& getLogger() override;
 
-    std::shared_ptr<jt::ActionCommandManagerInterface> getActionCommandManager() override;
+    ActionCommandManagerInterface& getActionCommandManager() override;
 
     void reset() override;
 
@@ -48,7 +51,7 @@ protected:
     virtual void doUpdate(float const elapsed) override = 0;
     virtual void doDraw() const override = 0;
 
-    jt::RenderWindowInterface& m_renderWindow;
+    RenderWindowInterface& m_renderWindow;
 
     InputManagerInterface& m_inputManager;
 
@@ -58,16 +61,15 @@ protected:
 
     StateManagerInterface& m_stateManager;
 
-    std::shared_ptr<jt::renderTarget> m_renderTarget { nullptr };
+    std::shared_ptr<renderTarget> m_renderTarget { nullptr };
 
-    std::shared_ptr<jt::TextureManagerInterface> m_textureManager { nullptr };
+    std::optional<jt::TextureManagerImpl> m_textureManager;
 
-    mutable jt::Logger m_logger;
+    LoggerInterface& m_logger;
 
-    std::shared_ptr<jt::ActionCommandManagerInterface> m_actionCommandManager { nullptr };
+    ActionCommandManagerInterface& m_actionCommandManager;
 
     std::chrono::steady_clock::time_point m_timeLast {};
-    void createDefaultLogTargets();
 };
 
 } // namespace jt

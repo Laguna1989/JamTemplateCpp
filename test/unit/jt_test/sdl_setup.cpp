@@ -35,11 +35,9 @@ std::shared_ptr<jt::renderTarget> getRenderTarget()
 #endif
 }
 
-std::shared_ptr<jt::TextureManagerInterface> getTextureManager()
+jt::TextureManagerInterface& getTextureManager()
 {
-#if USE_SFML
-    return std::make_shared<jt::TextureManagerImpl>();
-#else
-    return std::make_shared<jt::TextureManagerImpl>(getRenderTarget());
-#endif
+    static jt::TextureManagerImpl tm { getRenderTarget() };
+    tm.reset();
+    return tm;
 }

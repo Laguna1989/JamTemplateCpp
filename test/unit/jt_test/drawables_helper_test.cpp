@@ -8,17 +8,16 @@
 
 TEST(CreateRectShapeTest, NoNullptr)
 {
-    auto tm = getTextureManager();
-    auto const shape = jt::dh::createShapeRect({ 1.0f, 2.0f }, jt::colors::Green, tm);
+    auto const shape
+        = jt::dh::createShapeRect({ 1.0f, 2.0f }, jt::colors::Green, getTextureManager());
     ASSERT_NE(shape, nullptr);
 }
 
 TEST(RectCreateRectShapeTest, Size)
 {
-    jt::Rectf expected { 0.0f, 0.0f, 100.0f, 200.0f };
-    auto tm = getTextureManager();
-    auto const shape
-        = jt::dh::createShapeRect({ expected.width, expected.height }, jt::colors::Green, tm);
+    jt::Rectf const expected { 0.0f, 0.0f, 100.0f, 200.0f };
+    auto const shape = jt::dh::createShapeRect(
+        { expected.width, expected.height }, jt::colors::Green, getTextureManager());
 
     ASSERT_EQ(shape->getLocalBounds(), expected);
 }
@@ -26,15 +25,13 @@ TEST(RectCreateRectShapeTest, Size)
 TEST(CreateRectShapeTest, Color)
 {
     auto const col = jt::colors::Green;
-    auto tm = getTextureManager();
-    auto const shape = jt::dh::createShapeRect({ 3.0f, 4.0f }, col, tm);
+    auto const shape = jt::dh::createShapeRect({ 3.0f, 4.0f }, col, getTextureManager());
     ASSERT_EQ(shape->getColor(), col);
 }
 
 TEST(CreateCircleShapeTest, NoNullptr)
 {
-    auto tm = getTextureManager();
-    auto const shape = jt::dh::createShapeCircle(1.0f, jt::colors::Green, tm);
+    auto const shape = jt::dh::createShapeCircle(1.0f, jt::colors::Green, getTextureManager());
     ASSERT_NE(shape, nullptr);
 }
 
@@ -42,8 +39,7 @@ TEST(CreateVignetteTest, NoNullptr)
 {
     float const x = 150.0f;
     float const y = 50.0f;
-    auto tm = getTextureManager();
-    auto const vignette = jt::dh::createVignette({ x, y }, tm);
+    auto const vignette = jt::dh::createVignette({ x, y }, getTextureManager());
     ASSERT_NE(vignette, nullptr);
 }
 
@@ -51,8 +47,7 @@ TEST(CreateVignetteTest, Size)
 {
     float const x = 150.0f;
     float const y = 50.0f;
-    auto tm = getTextureManager();
-    auto const vignette = jt::dh::createVignette({ x, y }, tm);
+    auto const vignette = jt::dh::createVignette({ x, y }, getTextureManager());
     ASSERT_FLOAT_EQ(vignette->getLocalBounds().width, x);
     ASSERT_FLOAT_EQ(vignette->getLocalBounds().height, y);
 }
@@ -61,21 +56,20 @@ TEST(CreateVignetteTest, Color)
 {
     float const x = 150.0f;
     float const y = 50.0f;
-    auto tm = getTextureManager();
-    auto const vignette = jt::dh::createVignette({ x, y }, tm);
+    auto const vignette = jt::dh::createVignette({ x, y }, getTextureManager());
     ASSERT_EQ(vignette->getColor(), jt::colors::White);
 }
 
 TEST(CreateTextTest, NoNullptr)
 {
-    std::shared_ptr<jt::renderTarget> rt { nullptr };
-    auto const text = jt::dh::createText(rt, "assets/font.ttf", 24, jt::colors::Green);
+    std::shared_ptr<jt::renderTarget> renderTarget { nullptr };
+    auto const text = jt::dh::createText(renderTarget, "assets/font.ttf", 24, jt::colors::Green);
     ASSERT_NE(text, nullptr);
 }
 
 TEST(CreateTextTest, Color)
 {
-    std::shared_ptr<jt::renderTarget> rt { nullptr };
-    auto const text = jt::dh::createText(rt, "assets/font.ttf", 24, jt::colors::Green);
+    std::shared_ptr<jt::renderTarget> renderTarget { nullptr };
+    auto const text = jt::dh::createText(renderTarget, "assets/font.ttf", 24, jt::colors::Green);
     ASSERT_EQ(text->getColor(), jt::colors::Green);
 }

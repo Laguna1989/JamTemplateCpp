@@ -4,31 +4,27 @@
 
 namespace jt {
 namespace {
-void addCommandHelp(jt::GameBase& game)
+void addCommandHelp(std::shared_ptr<GameBase>& game)
 {
-    game.storeActionCommand(game.getActionCommandManager()->registerTemporaryCommand("help",
-        [mgr = std::weak_ptr<ActionCommandManagerInterface> { game.getActionCommandManager() },
-            &logger = game.getLogger()](auto /*args*/) {
+    game->storeActionCommand(game->getActionCommandManager().registerTemporaryCommand("help",
+        [&mgr = game->getActionCommandManager(), &logger = game->getLogger()](auto /*args*/) {
             logger.action("Available commands:");
-            if (mgr.expired()) {
-                return;
-            }
-            for (auto& c : mgr.lock()->getAllCommands()) {
+            for (auto& c : mgr.getAllCommands()) {
                 logger.action(" - " + c);
             }
         }));
 }
 
-void addCommandClear(GameBase& game)
+void addCommandClear(std::shared_ptr<GameBase>& game)
 {
-    game.storeActionCommand(game.getActionCommandManager()->registerTemporaryCommand(
-        "clear", [&logger = game.getLogger()](auto /*args*/) { logger.clear(); }));
+    game->storeActionCommand(game->getActionCommandManager().registerTemporaryCommand(
+        "clear", [&logger = game->getLogger()](auto /*args*/) { logger.clear(); }));
 }
 
-void addCommandsCam(GameBase& game)
+void addCommandsCam(std::shared_ptr<GameBase>& game)
 {
-    game.storeActionCommand(game.getActionCommandManager()->registerTemporaryCommand(
-        "cam.shake", [&cam = game.getCamera(), &logger = game.getLogger()](auto args) {
+    game->storeActionCommand(game->getActionCommandManager().registerTemporaryCommand(
+        "cam.shake", [&cam = game->getCamera(), &logger = game->getLogger()](auto args) {
             if (args.size() != 2) {
                 logger.error("invalid number of arguments");
                 return;
@@ -37,16 +33,16 @@ void addCommandsCam(GameBase& game)
             float strength = std::stof(args.at(1));
             cam.shake(duration, strength);
         }));
-    game.storeActionCommand(game.getActionCommandManager()->registerTemporaryCommand(
-        "cam.reset", [&cam = game.getCamera(), &logger = game.getLogger()](auto args) {
+    game->storeActionCommand(game->getActionCommandManager().registerTemporaryCommand(
+        "cam.reset", [&cam = game->getCamera(), &logger = game->getLogger()](auto args) {
             if (args.size() != 0) {
                 logger.error("invalid number of arguments");
                 return;
             }
             cam.reset();
         }));
-    game.storeActionCommand(game.getActionCommandManager()->registerTemporaryCommand(
-        "cam.zoom", [&cam = game.getCamera(), &logger = game.getLogger()](auto args) {
+    game->storeActionCommand(game->getActionCommandManager().registerTemporaryCommand(
+        "cam.zoom", [&cam = game->getCamera(), &logger = game->getLogger()](auto args) {
             if (args.size() != 1) {
                 logger.error("invalid number of arguments");
                 return;
@@ -55,8 +51,8 @@ void addCommandsCam(GameBase& game)
 
             cam.setZoom(zoom);
         }));
-    game.storeActionCommand(game.getActionCommandManager()->registerTemporaryCommand(
-        "cam.pos", [&cam = game.getCamera(), &logger = game.getLogger()](auto args) {
+    game->storeActionCommand(game->getActionCommandManager().registerTemporaryCommand(
+        "cam.pos", [&cam = game->getCamera(), &logger = game->getLogger()](auto args) {
             if (args.size() != 2 && args.size() != 0) {
                 logger.error("invalid number of arguments");
                 return;
@@ -73,8 +69,8 @@ void addCommandsCam(GameBase& game)
                 cam.setCamOffset(Vector2f { x, y });
             }
         }));
-    game.storeActionCommand(game.getActionCommandManager()->registerTemporaryCommand(
-        "cam.move", [&cam = game.getCamera(), &logger = game.getLogger()](auto args) {
+    game->storeActionCommand(game->getActionCommandManager().registerTemporaryCommand(
+        "cam.move", [&cam = game->getCamera(), &logger = game->getLogger()](auto args) {
             if (args.size() != 2) {
                 logger.error("invalid number of arguments");
                 return;
@@ -85,35 +81,28 @@ void addCommandsCam(GameBase& game)
         }));
 }
 
-void addCommandTextureManager(GameBase& game)
+void addCommandTextureManager(std::shared_ptr<GameBase>& game)
 {
-    game.storeActionCommand(game.getActionCommandManager()->registerTemporaryCommand(
+    game->storeActionCommand(game->getActionCommandManager().registerTemporaryCommand(
         "textureManagerInfo",
-        [&logger = game.getLogger(),
-            textureManager = std::weak_ptr<TextureManagerInterface> { game.getTextureManager() }](
-            auto /*args*/) {
-            if (textureManager.expired()) {
-                return;
-            }
+        [&logger = game->getLogger(), &textureManager = game->getTextureManager()](auto /*args*/) {
             logger.action(
-                "stored textures: " + std::to_string(textureManager.lock()->getNumberOfTextures()));
+                "stored textures: " + std::to_string(textureManager.getNumberOfTextures()));
         }));
 }
 
-void addCommandsMusicPlayer(GameBase& game)
+void addCommandsMusicPlayer(std::shared_ptr<GameBase>& game)
 {
-    game.storeActionCommand(game.getActionCommandManager()->registerTemporaryCommand(
-        "music.stop", [&logger = game.getLogger(), &player = game.getMusicPlayer()](auto /*args*/) {
-            player.stopMusic();
-        }));
+    game->storeActionCommand(game->getActionCommandManager().registerTemporaryCommand("music.stop",
+        [&logger = game->getLogger(), &player = game->getMusicPlayer()](
+            auto /*args*/) { player.stopMusic(); }));
 
-    game.storeActionCommand(game.getActionCommandManager()->registerTemporaryCommand(
-        "music.mute", [&logger = game.getLogger(), &player = game.getMusicPlayer()](auto /*args*/) {
-            player.setMusicVolume(0);
-        }));
+    game->storeActionCommand(game->getActionCommandManager().registerTemporaryCommand("music.mute",
+        [&logger = game->getLogger(), &player = game->getMusicPlayer()](
+            auto /*args*/) { player.setMusicVolume(0); }));
 
-    game.storeActionCommand(game.getActionCommandManager()->registerTemporaryCommand(
-        "music.volume", [&logger = game.getLogger(), &player = game.getMusicPlayer()](auto args) {
+    game->storeActionCommand(game->getActionCommandManager().registerTemporaryCommand(
+        "music.volume", [&logger = game->getLogger(), &player = game->getMusicPlayer()](auto args) {
             if (args.size() == 0) {
                 logger.action("current volume: "
                     + jt::MathHelper::floatToStringWithXDigits(player.getMusicVolume(), 2));
@@ -126,8 +115,8 @@ void addCommandsMusicPlayer(GameBase& game)
             }
         }));
 
-    game.storeActionCommand(game.getActionCommandManager()->registerTemporaryCommand(
-        "music.play", [&logger = game.getLogger(), &player = game.getMusicPlayer()](auto args) {
+    game->storeActionCommand(game->getActionCommandManager().registerTemporaryCommand(
+        "music.play", [&logger = game->getLogger(), &player = game->getMusicPlayer()](auto args) {
             if (args.size() == 1) {
                 auto track = args.at(0);
                 player.playMusic(track);
@@ -136,8 +125,8 @@ void addCommandsMusicPlayer(GameBase& game)
             }
         }));
 
-    game.storeActionCommand(game.getActionCommandManager()->registerTemporaryCommand(
-        "music.file", [&logger = game.getLogger(), &player = game.getMusicPlayer()](auto /*args*/) {
+    game->storeActionCommand(game->getActionCommandManager().registerTemporaryCommand("music.file",
+        [&logger = game->getLogger(), &player = game->getMusicPlayer()](auto /*args*/) {
             auto const file = player.getMusicFilePath();
             logger.action("currently playing: '" + file + "'");
         }));
@@ -145,7 +134,7 @@ void addCommandsMusicPlayer(GameBase& game)
 
 } // namespace
 
-void addBasicActionCommands(jt::GameBase& game)
+void addBasicActionCommands(std::shared_ptr<GameBase>& game)
 {
     addCommandHelp(game);
     addCommandClear(game);

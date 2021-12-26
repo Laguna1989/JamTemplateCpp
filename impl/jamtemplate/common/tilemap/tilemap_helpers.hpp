@@ -9,7 +9,7 @@ namespace jt {
 namespace tilemap {
 
 std::shared_ptr<jt::DrawableInterface> createShapeFrom(
-    InfoRect const& info, std::shared_ptr<jt::TextureManagerInterface> textureManager);
+    InfoRect const& info, jt::TextureManagerInterface& textureManager);
 
 }
 } // namespace jt

@@ -10,10 +10,9 @@ namespace jt {
 
 Sprite::Sprite() { }
 
-Sprite::Sprite(
-    std::string const& fileName, std::shared_ptr<jt::TextureManagerInterface> textureManager)
+Sprite::Sprite(std::string const& fileName, jt::TextureManagerInterface& textureManager)
 {
-    m_text = textureManager->get(fileName);
+    m_text = textureManager.get(fileName);
     m_fileName = fileName;
     int w { 0 };
     int h { 0 };
@@ -21,13 +20,13 @@ Sprite::Sprite(
         m_text.get(), nullptr, nullptr, &w, &h); // get the width and height of the texture
     m_sourceRect = jt::Recti { 0, 0, w, h };
 
-    m_textFlash = textureManager->get(textureManager->getFlashName(fileName));
+    m_textFlash = textureManager.get(textureManager.getFlashName(fileName));
 }
 
-Sprite::Sprite(std::string const& fileName, jt::Recti const& rect,
-    std::shared_ptr<jt::TextureManagerInterface> textureManager)
+Sprite::Sprite(
+    std::string const& fileName, jt::Recti const& rect, jt::TextureManagerInterface& textureManager)
 {
-    m_text = textureManager->get(fileName);
+    m_text = textureManager.get(fileName);
     m_fileName = fileName;
     int w { 0 };
     int h { 0 };
@@ -35,7 +34,7 @@ Sprite::Sprite(std::string const& fileName, jt::Recti const& rect,
         m_text.get(), nullptr, nullptr, &w, &h); // get the width and height of the texture
     m_sourceRect = jt::Recti { rect };
 
-    m_textFlash = textureManager->get(textureManager->getFlashName(fileName));
+    m_textFlash = textureManager.get(textureManager.getFlashName(fileName));
 }
 
 void Sprite::fromTexture(std::shared_ptr<SDL_Texture> txt)

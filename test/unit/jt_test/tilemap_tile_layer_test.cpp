@@ -10,12 +10,10 @@ using jt::tilemap::TileLayer;
 class TilemapTileLayerTest : public ::testing::Test {
 public:
     std::shared_ptr<jt::tilemap::TileLayer> tileLayer;
-    std::shared_ptr<jt::TextureManagerInterface> textureManager;
+    jt::TextureManagerInterface& textureManager { getTextureManager() };
 
     void SetUp() override
     {
-        textureManager = getTextureManager();
-
         jt::tilemap::TilesonLoader loader("assets/tileson_test.json");
         tileLayer = std::make_shared<jt::tilemap::TileLayer>(
             loader.loadTilesFromLayer("ground", textureManager));

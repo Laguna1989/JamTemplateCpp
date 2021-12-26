@@ -19,8 +19,9 @@
 namespace jt {
 
 Game::Game(RenderWindowInterface& window, InputManagerInterface& input,
-    MusicPlayerInterface& musicPlayer, CamInterface& camera, StateManagerInterface& stateManager)
-    : GameBase { window, input, musicPlayer, camera, stateManager }
+    MusicPlayerInterface& musicPlayer, CamInterface& camera, StateManagerInterface& stateManager,
+    LoggerInterface& logger, ActionCommandManagerInterface& actionCommandManager)
+    : GameBase { window, input, musicPlayer, camera, stateManager, logger, actionCommandManager }
 {
     auto const width = getRenderWindow().getSize().x;
     auto const height = getRenderWindow().getSize().y;
@@ -32,7 +33,7 @@ Game::Game(RenderWindowInterface& window, InputManagerInterface& input,
 
     m_renderTarget = getRenderWindow().createRenderTarget();
     TTF_Init();
-    m_textureManager = std::make_shared<jt::TextureManagerImpl>(m_renderTarget);
+    m_textureManager = jt::TextureManagerImpl { m_renderTarget };
 
     // important fix for SDL_Mixer: OpenAudio has to be called before Mix_Init,
     // otherwise ogg is not supported.
@@ -47,7 +48,6 @@ Game::Game(RenderWindowInterface& window, InputManagerInterface& input,
 
 void Game::startGame(GameLoopFunctionPtr gameloop_function)
 {
-    addBasicActionCommands(*this);
 #ifdef JT_ENABLE_WEB
     emscripten_set_main_loop(gameloop_function, 0, 1);
 #else
@@ -73,7 +73,6 @@ void Game::doUpdate(float const elapsed)
 
 void Game::doDraw() const
 {
-
     SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "0");
     // for reasons this can not be a member.
     auto* const t = SDL_CreateTexture(getRenderTarget().get(), SDL_PIXELFORMAT_RGBA8888,

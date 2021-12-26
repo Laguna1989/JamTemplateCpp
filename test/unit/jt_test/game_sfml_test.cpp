@@ -8,7 +8,11 @@ TEST_F(GameTest, SetupRenderTarget)
     EXPECT_CALL(window, createRenderTarget())
         .WillOnce(::testing::Return(std::make_shared<jt::renderTarget>()));
     EXPECT_CALL(window, getSize()).WillOnce(::testing::Return(jt::Vector2f { 20.0f, 40.0f }));
-    g = std::make_shared<jt::Game>(window, input, musicPlayer, camera, stateManager);
+    jt::Logger logger;
+    // TODO use null objects if possible
+    jt::ActionCommandManager actionCommandManager { logger };
+    g = std::make_shared<jt::Game>(
+        window, input, musicPlayer, camera, stateManager, logger, actionCommandManager);
     ASSERT_EQ(g->getRenderTarget()->getSize().x, 20);
     ASSERT_EQ(g->getRenderTarget()->getSize().y, 40);
 }
@@ -20,7 +24,11 @@ TEST_F(GameTest, SetupRenderTargetWithZoom)
     EXPECT_CALL(window, createRenderTarget())
         .WillOnce(::testing::Return(std::make_shared<jt::renderTarget>()));
     EXPECT_CALL(window, getSize()).WillOnce(::testing::Return(jt::Vector2f { 20.0f, 40.0f }));
-    g = std::make_shared<jt::Game>(window, input, musicPlayer, camera, stateManager);
+    jt::Logger logger;
+    // TODO use null objects if possible
+    jt::ActionCommandManager actionCommandManager { logger };
+    g = std::make_shared<jt::Game>(
+        window, input, musicPlayer, camera, stateManager, logger, actionCommandManager);
     ASSERT_EQ(g->getRenderTarget()->getSize().x, 10);
     ASSERT_EQ(g->getRenderTarget()->getSize().y, 20);
 }
@@ -30,7 +38,11 @@ TEST_F(GameTest, SetUpRenderTarget)
     EXPECT_CALL(window, createRenderTarget())
         .WillOnce(::testing::Return(std::make_shared<jt::renderTarget>()));
     EXPECT_CALL(window, getSize()).WillOnce(::testing::Return(jt::Vector2f { 20.0f, 40.0f }));
-    g = std::make_shared<jt::Game>(window, input, musicPlayer, camera, stateManager);
+    jt::Logger logger;
+    // TODO use null objects if possible
+    jt::ActionCommandManager actionCommandManager { logger };
+    g = std::make_shared<jt::Game>(
+        window, input, musicPlayer, camera, stateManager, logger, actionCommandManager);
     ASSERT_NE(g->getRenderTarget(), nullptr);
 }
 
@@ -44,7 +56,11 @@ TEST_F(GameTest, DrawWithRenderTargetAndState)
     ::testing::NiceMock<MockStateManager> stateManager;
     ON_CALL(stateManager, getCurrentState).WillByDefault(::testing::Return(state));
 
-    g = std::make_shared<jt::Game>(window, input, musicPlayer, camera, stateManager);
+    jt::Logger logger;
+    // TODO use null objects if possible
+    jt::ActionCommandManager actionCommandManager { logger };
+    g = std::make_shared<jt::Game>(
+        window, input, musicPlayer, camera, stateManager, logger, actionCommandManager);
     state->setGameInstance(g);
     ASSERT_NE(g->getRenderTarget(), nullptr);
 

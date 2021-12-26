@@ -8,7 +8,7 @@ void Actor::doCreate()
         "assets/coin.png", jt::Recti { 0, 0, 16, 16 }, getGame()->getTextureManager());
     m_sprite->setOffset(jt::Vector2f { 8, 8 });
 
-    storeActionCommand(getGame()->getActionCommandManager()->registerTemporaryCommand(
+    storeActionCommand(getGame()->getActionCommandManager().registerTemporaryCommand(
         "shake", [this](auto /*str*/) { m_sprite->shake(0.5f, 10.0f); }));
 }
 

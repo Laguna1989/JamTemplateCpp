@@ -31,7 +31,7 @@ void Console::handleCommand() const
     if (m_lastCommand.empty()) {
         return;
     }
-    getGame()->getActionCommandManager()->executeCommand(m_lastCommand);
+    getGame()->getActionCommandManager().executeCommand(m_lastCommand);
     m_lastCommand = "";
 }
 

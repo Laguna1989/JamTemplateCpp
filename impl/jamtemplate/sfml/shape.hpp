@@ -15,8 +15,8 @@ class Shape : public DrawableImpl {
 public:
     using Sptr = std::shared_ptr<Shape>;
 
-    void makeRect(jt::Vector2f size, std::shared_ptr<jt::TextureManagerInterface> textureManager);
-    void makeCircle(float radius, std::shared_ptr<jt::TextureManagerInterface> textureManager);
+    void makeRect(jt::Vector2f size, TextureManagerInterface&);
+    void makeCircle(float radius, TextureManagerInterface&);
 
     void setColor(jt::Color const& col) override;
     jt::Color getColor() const override;

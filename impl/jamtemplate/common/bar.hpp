@@ -18,8 +18,7 @@ public:
     /// \param width  width of the bar
     /// \param height height of the bar
     /// \param horizontal if true, bar is horizontal (left to right), if false (bottom to top)
-    Bar(float width, float height, bool horizontal,
-        std::shared_ptr<TextureManagerInterface> textureManager);
+    Bar(float width, float height, bool horizontal, jt::TextureManagerInterface& textureManager);
 
     /// Set front color
     ///

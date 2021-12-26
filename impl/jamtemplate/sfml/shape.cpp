@@ -6,13 +6,13 @@
 
 namespace jt {
 
-void Shape::makeRect(jt::Vector2f size, std::shared_ptr<jt::TextureManagerInterface> /*unused*/)
+void Shape::makeRect(jt::Vector2f size, TextureManagerInterface& /*unused*/)
 {
     m_shape = std::make_shared<sf::RectangleShape>(toLib(size));
     m_flashShape = std::make_shared<sf::RectangleShape>(toLib(size));
 }
 
-void Shape::makeCircle(float radius, std::shared_ptr<jt::TextureManagerInterface> /*unused*/)
+void Shape::makeCircle(float radius, TextureManagerInterface& /*unused*/)
 {
     m_shape = std::make_shared<sf::CircleShape>(radius);
     m_flashShape = std::make_shared<sf::CircleShape>(radius);

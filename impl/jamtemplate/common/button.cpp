@@ -13,7 +13,7 @@
 
 namespace jt {
 
-Button::Button(Vector2u const& size, std::shared_ptr<TextureManagerInterface> textureManager)
+Button::Button(Vector2u const& size, jt::TextureManagerInterface& textureManager)
 {
     std::string buttonImageName = "#b#" + std::to_string(size.x) + "#" + std::to_string(size.y);
     m_background = std::make_shared<jt::Animation>();

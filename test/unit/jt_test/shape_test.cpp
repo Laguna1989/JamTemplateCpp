@@ -5,9 +5,8 @@
 
 class ShapeTestFixture : public ::testing::Test {
 public:
-    std::shared_ptr<jt::TextureManagerInterface> tm { nullptr };
+    jt::TextureManagerInterface& tm { getTextureManager() };
     jt::Shape s;
-    void SetUp() override { tm = getTextureManager(); }
 };
 
 TEST_F(ShapeTestFixture, ShapeCanBeDefaultConstructed) { SUCCEED(); }

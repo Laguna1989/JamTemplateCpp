@@ -20,11 +20,11 @@ void horizontalFlip(std::unique_ptr<jt::Sprite> const& spr, float zoom, float wi
 namespace jt {
 
 Game::Game(RenderWindowInterface& window, InputManagerInterface& input,
-    MusicPlayerInterface& musicPlayer, CamInterface& camera, StateManagerInterface& stateManager)
-    : GameBase { window, input, musicPlayer, camera, stateManager }
+    MusicPlayerInterface& musicPlayer, CamInterface& camera, StateManagerInterface& stateManager,
+    LoggerInterface& logger, ActionCommandManagerInterface& actionCommandManager)
+    : GameBase { window, input, musicPlayer, camera, stateManager, logger, actionCommandManager }
 {
     m_sprite_for_drawing = std::make_unique<jt::Sprite>();
-    m_textureManager = std::make_shared<jt::TextureManagerImpl>();
     m_logger.debug("Game constructor done", { "jt" });
     setupRenderTarget();
 }
@@ -32,9 +32,12 @@ Game::Game(RenderWindowInterface& window, InputManagerInterface& input,
 void Game::setupRenderTarget()
 {
     m_renderTarget = getRenderWindow().createRenderTarget();
+
     if (m_renderTarget == nullptr) {
+        m_textureManager = jt::TextureManagerImpl { nullptr };
         return;
     }
+    m_textureManager = jt::TextureManagerImpl { m_renderTarget };
     m_logger.debug("Game setupRenderTarget", { "jt" });
     auto const windowSize = getRenderWindow().getSize();
     auto const zoom = getCamera().getZoom();
@@ -51,9 +54,6 @@ void Game::setupRenderTarget()
 
 void Game::startGame(GameLoopFunctionPtr gameloop_function)
 {
-    // cannot be done in constructor as this is not fully available
-    addBasicActionCommands(*this);
-
     m_logger.debug("startGame", { "jt" });
     while (getRenderWindow().isOpen()) {
         getRenderWindow().checkForClose();

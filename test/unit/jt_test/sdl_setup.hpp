@@ -17,6 +17,6 @@ struct SDLSetup {
 #endif
 
 std::shared_ptr<jt::renderTarget> getRenderTarget();
-std::shared_ptr<jt::TextureManagerInterface> getTextureManager();
+jt::TextureManagerInterface& getTextureManager();
 
 #endif // GUARD_JAMTEMAPLTE_SDL_SETUP_HPP

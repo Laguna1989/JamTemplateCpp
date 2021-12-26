@@ -9,12 +9,8 @@ class DrawableImplTestFixture
     : public ::testing::TestWithParam<std::shared_ptr<DrawableFactoryInterface>> {
 protected:
     std::shared_ptr<jt::DrawableInterface> drawable;
-    std::shared_ptr<jt::TextureManagerInterface> tm { nullptr };
-    void SetUp() override
-    {
-        tm = getTextureManager();
-        drawable = GetParam()->createDrawable(tm);
-    }
+    jt::TextureManagerInterface& tm { getTextureManager() };
+    void SetUp() override { drawable = GetParam()->createDrawable(tm); }
 };
 
 INSTANTIATE_TEST_SUITE_P(DrawableImplTest, DrawableImplTestFixture,
@@ -133,20 +129,20 @@ TEST_P(DrawableImplTestFixture, DrawWithFlash)
 {
     drawable->flash(5.0f);
     drawable->update(0.1f);
-    auto rt = getRenderTarget();
-    drawable->draw(rt);
+    auto renderTarget = getRenderTarget();
+    drawable->draw(renderTarget);
     drawable->update(5.0f);
-    drawable->draw(rt);
+    drawable->draw(renderTarget);
 }
 
 TEST_P(DrawableImplTestFixture, DrawWithShake)
 {
     drawable->shake(5.0f, 0.02f);
     drawable->update(0.1f);
-    auto rt = getRenderTarget();
-    drawable->draw(rt);
+    auto renderTarget = getRenderTarget();
+    drawable->draw(renderTarget);
     drawable->update(5.0f);
-    drawable->draw(rt);
+    drawable->draw(renderTarget);
 }
 
 TEST_P(DrawableImplTestFixture, DrawScaled)

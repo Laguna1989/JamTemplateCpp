@@ -9,16 +9,16 @@
 #include <string>
 
 namespace jt {
-void Shape::makeRect(jt::Vector2f size, std::shared_ptr<jt::TextureManagerInterface> textureManager)
+void Shape::makeRect(jt::Vector2f size, jt::TextureManagerInterface& textureManager)
 {
-    m_text = textureManager->get("#x#" + std::to_string(static_cast<int>(size.x)) + "#"
+    m_text = textureManager.get("#x#" + std::to_string(static_cast<int>(size.x)) + "#"
         + std::to_string(static_cast<int>(size.y)));
     m_sourceRect = jt::Recti { 0U, 0U, static_cast<int>(size.x), static_cast<int>(size.y) };
 }
 
-void Shape::makeCircle(float radius, std::shared_ptr<jt::TextureManagerInterface> textureManager)
+void Shape::makeCircle(float radius, jt::TextureManagerInterface& textureManager)
 {
-    m_text = textureManager->get("#c#" + std::to_string(static_cast<int>(radius)));
+    m_text = textureManager.get("#c#" + std::to_string(static_cast<int>(radius)));
     m_sourceRect
         = jt::Recti { 0U, 0U, static_cast<int>(radius * 2.0f), static_cast<int>(radius * 2.0f) };
 }

@@ -6,8 +6,8 @@
 
 auto create_string(std::string const& string)
 {
-    std::shared_ptr<jt::renderTarget> rt = nullptr;
-    return jt::dh::createText(rt, string, 10, jt::colors::White, "assets/font.ttf");
+    std::shared_ptr<jt::renderTarget> renderTarget = nullptr;
+    return jt::dh::createText(renderTarget, string, 10, jt::colors::White, "assets/font.ttf");
 }
 
 TEST(ScoreDisplayTest, TextIsNotChangedByAddingItToDisplay)

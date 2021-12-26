@@ -3,10 +3,12 @@
 
 #include "texture_manager_interface.hpp"
 #include <map>
+#include <memory>
 
 namespace jt {
 class TextureManagerImpl : public ::jt::TextureManagerInterface {
 public:
+    TextureManagerImpl(std::shared_ptr<jt::renderTarget> renderer);
     sf::Texture& get(std::string const& str) override;
     void reset() override;
     std::string getFlashName(std::string const& str) override;

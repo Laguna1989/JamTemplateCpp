@@ -28,7 +28,7 @@ public:
     /// \param frameTimeInSeconds how long is each frame displayed
     void add(std::string const& fileName, std::string const& animName,
         jt::Vector2u const& imageSize, std::vector<unsigned int> const& frameIndices,
-        float frameTimeInSeconds, std::shared_ptr<TextureManagerInterface> textureManager);
+        float frameTimeInSeconds, TextureManagerInterface& textureManager);
 
     /// Check if a specific animation name is present in the pool
     ///

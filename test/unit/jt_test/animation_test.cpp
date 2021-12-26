@@ -7,7 +7,7 @@
 
 class AnimationTestFixtue : public ::testing::Test {
 public:
-    std::shared_ptr<jt::TextureManagerInterface> tm { nullptr };
+    jt::TextureManagerInterface& tm { getTextureManager() };
     void SetUp() override { tm = getTextureManager(); }
 };
 
@@ -56,13 +56,9 @@ TEST_F(AnimationTestFixtue, DrawWithoutPlayDoesNotRaiseException)
 
 class AnimationTestWithAnimation : public ::testing::Test {
 protected:
-    std::shared_ptr<jt::TextureManagerInterface> tm { nullptr };
+    jt::TextureManagerInterface& tm { getTextureManager() };
     jt::Animation a;
-    void SetUp() override
-    {
-        tm = getTextureManager();
-        addAnimationWithFrameIndices();
-    }
+    void SetUp() override { addAnimationWithFrameIndices(); }
 
     void addAnimationWithFrameIndices(std::vector<unsigned int> frameIndices = { 0, 1, 2, 3, 4 })
     {
@@ -104,11 +100,10 @@ TEST_F(AnimationTestWithAnimation, IsNotLoopingAfterSetLooping)
 
 class AnimationPlayingTest : public ::testing::Test {
 protected:
-    std::shared_ptr<jt::TextureManagerInterface> tm { nullptr };
+    jt::TextureManagerInterface& tm { getTextureManager() };
     jt::Animation a;
     void SetUp() override
     {
-        tm = getTextureManager();
         a.add("assets/coin.png", "idle", { 16, 16 }, { 0, 1, 2, 3, 4 }, 1.0f, tm);
         a.play("idle");
     }
