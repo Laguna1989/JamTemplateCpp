@@ -10,19 +10,6 @@
 
 namespace jt {
 
-namespace {
-// TODO make this a free function that the user can call
-void createDefaultLogTargets(LoggerInterface& logger)
-{
-    auto targetCout = std::make_shared<LogTargetCout>();
-    targetCout->setLogLevel(LogLevel::LogLevelInfo);
-
-    logger.addLogTarget(targetCout);
-    logger.addLogTarget(std::make_shared<LogTargetFile>());
-    logger.setLogLevel(LogLevel::LogLevelDebug);
-}
-} // namespace
-
 GameBase::GameBase(RenderWindowInterface& renderWindow, InputManagerInterface& input,
     MusicPlayerInterface& musicPlayer, CamInterface& camera, StateManagerInterface& stateManager,
     LoggerInterface& logger, ActionCommandManagerInterface& actionCommandManager)
@@ -34,7 +21,6 @@ GameBase::GameBase(RenderWindowInterface& renderWindow, InputManagerInterface& i
     , m_logger { logger }
     , m_actionCommandManager { actionCommandManager }
 {
-    createDefaultLogTargets(m_logger);
 }
 
 void GameBase::runOneFrame()
