@@ -55,6 +55,7 @@ TEST_F(BasicActionCommandsWithGame, Help)
 TEST_F(BasicActionCommandsWithGame, Clear)
 {
     addBasicActionCommands(g);
+    EXPECT_CALL(logger, clear);
     ASSERT_NO_THROW(g->getActionCommandManager().executeCommand("clear"));
 }
 
@@ -69,7 +70,7 @@ TEST_F(BasicActionCommandsWithGame, MusicStop)
 {
     addBasicActionCommands(g);
     // TODO create MusicPlayerMock
-    //    EXPECT_CALL(*music_player, stopMusic());
+    EXPECT_CALL(music_player, stopMusic());
     ASSERT_NO_THROW(g->getActionCommandManager().executeCommand("music.stop"));
 }
 

@@ -5,6 +5,7 @@
 #include "game.hpp"
 #include "mocks/mock_camera.hpp"
 #include "mocks/mock_input.hpp"
+#include "mocks/mock_logger.hpp"
 #include "mocks/mock_state.hpp"
 #include "mocks/mock_state_manager.hpp"
 #include "mocks/mock_window.hpp"
@@ -18,13 +19,14 @@ public:
     std::shared_ptr<jt::GameBase> g { nullptr };
     MockWindow window;
     MockCamera camera;
+    // TODO use mock or null objects if possible
+    jt::ActionCommandManager actionCommandManager { logger };
     jt::MusicPlayerNull musicPlayer;
+
     std::shared_ptr<MockState> state { nullptr };
     ::testing::NiceMock<MockInput> input;
     ::testing::NiceMock<MockStateManager> stateManager;
-    // TODO use mock or null objects if possible
-    jt::Logger logger;
-    jt::ActionCommandManager actionCommandManager { logger };
+    ::testing::NiceMock<MockLogger> logger;
 
     void SetUp() override
     {
