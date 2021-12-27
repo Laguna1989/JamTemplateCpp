@@ -22,8 +22,8 @@ public:
     std::shared_ptr<MockState> state { nullptr };
     ::testing::NiceMock<MockInput> input;
     ::testing::NiceMock<MockStateManager> stateManager;
+    // TODO use mock or null objects if possible
     jt::Logger logger;
-    // TODO use null objects if possible
     jt::ActionCommandManager actionCommandManager { logger };
 
     void SetUp() override

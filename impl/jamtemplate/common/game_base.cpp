@@ -10,11 +10,6 @@
 
 namespace jt {
 
-namespace {
-// TODO make this a free function that the user can call
-
-} // namespace
-
 GameBase::GameBase(RenderWindowInterface& renderWindow, InputManagerInterface& input,
     MusicPlayerInterface& musicPlayer, CamInterface& camera, StateManagerInterface& stateManager,
     LoggerInterface& logger, ActionCommandManagerInterface& actionCommandManager)
