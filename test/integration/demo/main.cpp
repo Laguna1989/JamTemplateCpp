@@ -5,6 +5,7 @@
 #include "input/input_manager.hpp"
 #include "input/keyboard_input.hpp"
 #include "input/mouse_input.hpp"
+#include "logging/default_logging.hpp"
 #include "music_player_null.hpp"
 #include "random/random.hpp"
 #include "render_window.hpp"
@@ -37,6 +38,7 @@ int main()
     jt::StateManager stateManager { std::make_shared<StateSelect>() };
 
     jt::Logger logger;
+    jt::createDefaultLogTargets(logger);
     jt::ActionCommandManager actionCommandManager(logger);
     game = std::make_shared<jt::Game>(
         window, input, music_player, camera, stateManager, logger, actionCommandManager);
