@@ -3,6 +3,7 @@
 #include "game.hpp"
 #include "game_state.hpp"
 #include "input/input_manager_null.hpp"
+#include "logging/logger_null.hpp"
 #include "music_player_null.hpp"
 #include "render_window_null.hpp"
 #include "shape.hpp"
@@ -35,8 +36,7 @@ static void BM_StartGame(benchmark::State& state)
         jt::InputManagerNull input;
         jt::MusicPlayerNull music;
         jt::Camera camera { 1.0f };
-        jt::Logger logger;
-        logger.setLogLevel(LogLevel::LogLevelOff);
+        jt::null_objects::LoggerNull logger;
         jt::ActionCommandManager actionCommandManager { logger };
         auto game = std::make_shared<jt::Game>(
             window, input, music, camera, stateManager, logger, actionCommandManager);
