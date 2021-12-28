@@ -70,7 +70,6 @@ TEST_F(BasicActionCommandsWithGame, MusicStop)
 {
     addBasicActionCommands(g);
     // TODO create MusicPlayerMock
-    EXPECT_CALL(music_player, stopMusic());
     ASSERT_NO_THROW(g->getActionCommandManager().executeCommand("music.stop"));
 }
 
