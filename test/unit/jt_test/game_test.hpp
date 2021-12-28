@@ -6,6 +6,7 @@
 #include "mocks/mock_camera.hpp"
 #include "mocks/mock_input.hpp"
 #include "mocks/mock_logger.hpp"
+#include "mocks/mock_music_player.hpp"
 #include "mocks/mock_state.hpp"
 #include "mocks/mock_state_manager.hpp"
 #include "mocks/mock_window.hpp"
@@ -21,7 +22,7 @@ public:
     MockCamera camera;
     // TODO use mock or null objects if possible
     jt::ActionCommandManager actionCommandManager { logger };
-    jt::MusicPlayerNull musicPlayer;
+    ::testing::NiceMock<MockMusicPlayer> musicPlayer;
 
     std::shared_ptr<MockState> state { nullptr };
     ::testing::NiceMock<MockInput> input;

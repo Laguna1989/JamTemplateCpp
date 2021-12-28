@@ -51,7 +51,6 @@ TEST_F(BasicActionCommandsWithGame, Help)
     ASSERT_NO_THROW(g->getActionCommandManager().executeCommand("help"));
 }
 
-// TODO Think about a meaningful verification
 TEST_F(BasicActionCommandsWithGame, Clear)
 {
     addBasicActionCommands(g);
@@ -69,34 +68,34 @@ TEST_F(BasicActionCommandsWithGame, TextureManagerInfo)
 TEST_F(BasicActionCommandsWithGame, MusicStop)
 {
     addBasicActionCommands(g);
-    // TODO create MusicPlayerMock
+    EXPECT_CALL(musicPlayer, stopMusic());
     ASSERT_NO_THROW(g->getActionCommandManager().executeCommand("music.stop"));
 }
 
 TEST_F(BasicActionCommandsWithGame, MusicVolumeGet)
 {
     addBasicActionCommands(g);
-    // TODO Think about a meaningful verification
+    EXPECT_CALL(musicPlayer, getMusicVolume());
     ASSERT_NO_THROW(g->getActionCommandManager().executeCommand("music.volume"));
 }
 
 TEST_F(BasicActionCommandsWithGame, MusicVolumeSet)
 {
     addBasicActionCommands(g);
-    // TODO Think about a meaningful verification
+    EXPECT_CALL(musicPlayer, setMusicVolume(5.0f));
     ASSERT_NO_THROW(g->getActionCommandManager().executeCommand("music.volume 5"));
 }
 
 TEST_F(BasicActionCommandsWithGame, MusicPlay)
 {
     addBasicActionCommands(g);
-    // TODO Think about a meaningful verification
+    EXPECT_CALL(musicPlayer, playMusic("a"));
     ASSERT_NO_THROW(g->getActionCommandManager().executeCommand("music.play a"));
 }
 
 TEST_F(BasicActionCommandsWithGame, MusicFile)
 {
     addBasicActionCommands(g);
-    // TODO Think about a meaningful verification
+    EXPECT_CALL(musicPlayer, getMusicFilePath());
     ASSERT_NO_THROW(g->getActionCommandManager().executeCommand("music.file"));
 }
