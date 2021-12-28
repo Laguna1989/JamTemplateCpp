@@ -9,7 +9,7 @@
 #include "shape.hpp"
 #include <memory>
 
-constexpr std::size_t numberOfParticles = 5000;
+constexpr std::size_t numberOfParticles = 1000;
 constexpr std::size_t toFire = 20;
 
 class StateParticles : public jt::GameState {
