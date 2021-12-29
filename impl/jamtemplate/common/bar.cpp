@@ -57,14 +57,14 @@ float Bar::getMaxValue() const { return m_valueMax; }
 
 float Bar::getValueFraction() const { return m_valueCurrent / m_valueMax; }
 
-void Bar::doDraw(std::shared_ptr<jt::renderTarget> const sptr) const
+void Bar::doDraw(std::shared_ptr<jt::RenderTarget> const sptr) const
 {
     m_shapeFull->draw(sptr);
     m_shapeProgress->draw(sptr);
 }
 
-void Bar::doDrawFlash(std::shared_ptr<jt::renderTarget> const /*sptr*/) const { }
-void Bar::doDrawShadow(std::shared_ptr<jt::renderTarget> const sptr) const
+void Bar::doDrawFlash(std::shared_ptr<jt::RenderTarget> const /*sptr*/) const { }
+void Bar::doDrawShadow(std::shared_ptr<jt::RenderTarget> const sptr) const
 {
     jt::Vector2f const oldPos = m_shapeFull->getPosition();
     jt::Color const oldCol = m_shapeFull->getColor();

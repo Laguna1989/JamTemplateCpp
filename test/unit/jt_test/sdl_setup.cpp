@@ -12,26 +12,26 @@ SDLSetup::SDLSetup()
     window = std::shared_ptr<SDL_Window>(
         SDL_CreateWindow("unittests", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 10, 10, 0),
         [](SDL_Window* w) { SDL_DestroyWindow(w); });
-    renderTarget = std::shared_ptr<SDL_Renderer>(
+    RenderTarget = std::shared_ptr<SDL_Renderer>(
         SDL_CreateRenderer(window.get(), -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_TARGETTEXTURE),
         [](SDL_Renderer* r) { SDL_DestroyRenderer(r); });
-    if (!renderTarget) {
+    if (!RenderTarget) {
         throw std::logic_error { "failed to create renderer." };
     }
-    SDL_SetRenderDrawBlendMode(renderTarget.get(), SDL_BLENDMODE_BLEND);
+    SDL_SetRenderDrawBlendMode(RenderTarget.get(), SDL_BLENDMODE_BLEND);
 
     TTF_Init();
 }
 
 #endif
 
-std::shared_ptr<jt::renderTarget> getRenderTarget()
+std::shared_ptr<jt::RenderTarget> getRenderTarget()
 {
 #if USE_SFML
-    return std::make_shared<jt::renderTarget>();
+    return std::make_shared<jt::RenderTarget>();
 #else
     static SDLSetup setup;
-    return setup.renderTarget;
+    return setup.RenderTarget;
 #endif
 }
 

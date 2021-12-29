@@ -99,11 +99,11 @@ void StateEasing::doInternalCreate()
     float const scrollSpeed = 150.0f;
     getGame()->input().keyboard()->setCommandPressed({ jt::KeyCode::A, jt::KeyCode::Left },
         std::make_shared<ControlCommandMoveCam>(
-            jt::Vector2f { -scrollSpeed, 0.0f }, getGame()->getCamera()));
+            jt::Vector2f { -scrollSpeed, 0.0f }, getGame()->gfx().camera()));
 
     getGame()->input().keyboard()->setCommandPressed({ jt::KeyCode::D, jt::KeyCode::Right },
         std::make_shared<ControlCommandMoveCam>(
-            jt::Vector2f { scrollSpeed, 0.0f }, getGame()->getCamera()));
+            jt::Vector2f { scrollSpeed, 0.0f }, getGame()->gfx().camera()));
 }
 
 void StateEasing::doInternalUpdate(float elapsed)

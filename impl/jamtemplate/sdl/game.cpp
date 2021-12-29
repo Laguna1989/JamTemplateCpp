@@ -26,8 +26,8 @@ Game::Game(RenderWindowInterface& window, InputManagerInterface& input,
     auto const width = getRenderWindow().getSize().x;
     auto const height = getRenderWindow().getSize().y;
 
-    auto const scaledWidth = static_cast<int>(width / getCamera().getZoom());
-    auto const scaledHeight = static_cast<int>(height / getCamera().getZoom());
+    auto const scaledWidth = static_cast<int>(width / gfx().camera().getZoom());
+    auto const scaledHeight = static_cast<int>(height / gfx().camera().getZoom());
     m_srcRect = jt::Recti { 0, 0, scaledWidth, scaledHeight };
     m_destRect = jt::Recti { 0, 0, static_cast<int>(width), static_cast<int>(height) };
 

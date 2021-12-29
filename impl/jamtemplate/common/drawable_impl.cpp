@@ -7,7 +7,7 @@ namespace jt {
 
 jt::Vector2f DrawableImpl::m_CamOffset { 0.0f, 0.0f };
 
-void DrawableImpl::draw(std::shared_ptr<jt::renderTarget> sptr) const
+void DrawableImpl::draw(std::shared_ptr<jt::RenderTarget> sptr) const
 {
     if (!m_hasBeenUpdated) {
         std::cout << "WARNING: Calling DrawableImpl::draw() without previous call to "

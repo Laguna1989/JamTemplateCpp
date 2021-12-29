@@ -24,7 +24,7 @@ void addCommandClear(std::shared_ptr<GameBase>& game)
 void addCommandsCam(std::shared_ptr<GameBase>& game)
 {
     game->storeActionCommand(game->getActionCommandManager().registerTemporaryCommand(
-        "cam.shake", [&cam = game->getCamera(), &logger = game->getLogger()](auto args) {
+        "cam.shake", [&cam = game->gfx().camera(), &logger = game->getLogger()](auto args) {
             if (args.size() != 2) {
                 logger.error("invalid number of arguments");
                 return;
@@ -34,7 +34,7 @@ void addCommandsCam(std::shared_ptr<GameBase>& game)
             cam.shake(duration, strength);
         }));
     game->storeActionCommand(game->getActionCommandManager().registerTemporaryCommand(
-        "cam.reset", [&cam = game->getCamera(), &logger = game->getLogger()](auto args) {
+        "cam.reset", [&cam = game->gfx().camera(), &logger = game->getLogger()](auto args) {
             if (args.size() != 0) {
                 logger.error("invalid number of arguments");
                 return;
@@ -42,7 +42,7 @@ void addCommandsCam(std::shared_ptr<GameBase>& game)
             cam.reset();
         }));
     game->storeActionCommand(game->getActionCommandManager().registerTemporaryCommand(
-        "cam.zoom", [&cam = game->getCamera(), &logger = game->getLogger()](auto args) {
+        "cam.zoom", [&cam = game->gfx().camera(), &logger = game->getLogger()](auto args) {
             if (args.size() != 1) {
                 logger.error("invalid number of arguments");
                 return;
@@ -52,7 +52,7 @@ void addCommandsCam(std::shared_ptr<GameBase>& game)
             cam.setZoom(zoom);
         }));
     game->storeActionCommand(game->getActionCommandManager().registerTemporaryCommand(
-        "cam.pos", [&cam = game->getCamera(), &logger = game->getLogger()](auto args) {
+        "cam.pos", [&cam = game->gfx().camera(), &logger = game->getLogger()](auto args) {
             if (args.size() != 2 && args.size() != 0) {
                 logger.error("invalid number of arguments");
                 return;
@@ -70,7 +70,7 @@ void addCommandsCam(std::shared_ptr<GameBase>& game)
             }
         }));
     game->storeActionCommand(game->getActionCommandManager().registerTemporaryCommand(
-        "cam.move", [&cam = game->getCamera(), &logger = game->getLogger()](auto args) {
+        "cam.move", [&cam = game->gfx().camera(), &logger = game->getLogger()](auto args) {
             if (args.size() != 2) {
                 logger.error("invalid number of arguments");
                 return;

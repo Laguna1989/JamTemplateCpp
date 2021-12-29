@@ -14,7 +14,7 @@ Text::~Text()
 }
 
 void Text::loadFont(std::string const& fontFileName, unsigned int characterSize,
-    std::weak_ptr<jt::renderTarget> /*wptr*/)
+    std::weak_ptr<jt::RenderTarget> /*wptr*/)
 {
     m_font = std::make_shared<sf::Font>();
     if (!m_font->loadFromFile(fontFileName)) {
@@ -92,7 +92,7 @@ void Text::doUpdate(float /*elapsed*/)
     m_flashText->setScale(m_text->getScale());
 }
 
-void Text::doDrawShadow(std::shared_ptr<jt::renderTarget> const sptr) const
+void Text::doDrawShadow(std::shared_ptr<jt::RenderTarget> const sptr) const
 {
     jt::Vector2f const oldPos = fromLib(m_text->getPosition());
     auto const oldCol = fromLib(m_text->getFillColor());
@@ -105,9 +105,9 @@ void Text::doDrawShadow(std::shared_ptr<jt::renderTarget> const sptr) const
     m_text->setFillColor(toLib(oldCol));
 }
 
-void Text::doDraw(std::shared_ptr<jt::renderTarget> const sptr) const { sptr->draw(*m_text); }
+void Text::doDraw(std::shared_ptr<jt::RenderTarget> const sptr) const { sptr->draw(*m_text); }
 
-void Text::doDrawFlash(std::shared_ptr<jt::renderTarget> const sptr) const
+void Text::doDrawFlash(std::shared_ptr<jt::RenderTarget> const sptr) const
 {
     sptr->draw(*m_flashText);
 }

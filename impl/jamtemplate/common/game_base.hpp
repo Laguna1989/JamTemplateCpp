@@ -28,12 +28,9 @@ public:
 
     MusicPlayerInterface& getMusicPlayer() override;
 
-    virtual CamInterface& getCamera() override;
-    virtual CamInterface& getCamera() const override;
-
     StateManagerInterface& getStateManager() override;
 
-    std::shared_ptr<renderTarget> getRenderTarget() const override;
+    std::shared_ptr<RenderTarget> getRenderTarget() const override;
 
     LoggerInterface& getLogger() override;
 

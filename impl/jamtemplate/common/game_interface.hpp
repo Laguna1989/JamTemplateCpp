@@ -40,21 +40,13 @@ public:
     /// \return the music player
     virtual MusicPlayerInterface& getMusicPlayer() = 0;
 
-    /// Get the camera (non const)
-    /// \return the camera
-    virtual CamInterface& getCamera() = 0;
-
-    /// Get the camera (const)
-    /// \return the camera
-    virtual CamInterface& getCamera() const = 0;
-
     /// Get the State Manager
     /// \return the state manager
     virtual StateManagerInterface& getStateManager() = 0;
 
     /// Get the render Target
     /// \return the render target
-    virtual std::shared_ptr<renderTarget> getRenderTarget() const = 0;
+    virtual std::shared_ptr<RenderTarget> getRenderTarget() const = 0;
 
     /// Get the logger
     /// \return the logger

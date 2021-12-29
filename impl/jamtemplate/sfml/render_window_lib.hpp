@@ -18,7 +18,14 @@ public:
     /// \param title title of the window
     RenderWindow(unsigned int width, unsigned int height, std::string const& title);
 
-    std::shared_ptr<jt::renderTarget> createRenderTarget() override;
+    // no copy, only move
+    RenderWindow(const RenderWindow&) = delete;
+    RenderWindow(RenderWindow&&) = default;
+    RenderWindow& operator=(const RenderWindow&) = delete;
+    RenderWindow& operator=(RenderWindow&&) = default;
+    ~RenderWindow() = default;
+
+    std::shared_ptr<jt::RenderTarget> createRenderTarget() override;
 
     bool isOpen() const override;
     void checkForClose() override;

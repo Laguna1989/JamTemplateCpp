@@ -4,6 +4,7 @@
 #include "action_commands/action_command_manager.hpp"
 #include "game.hpp"
 #include "mocks/mock_camera.hpp"
+#include "mocks/mock_gfx.hpp"
 #include "mocks/mock_input.hpp"
 #include "mocks/mock_logger.hpp"
 #include "mocks/mock_music_player.hpp"
@@ -20,6 +21,8 @@ public:
     std::shared_ptr<jt::GameBase> g { nullptr };
     MockWindow window;
     MockCamera camera;
+    jt::TextureManagerImpl textureManager { nullptr };
+    MockGfx gfx;
     jt::ActionCommandManager actionCommandManager { logger };
     ::testing::NiceMock<MockMusicPlayer> musicPlayer;
 
@@ -30,6 +33,9 @@ public:
 
     void SetUp() override
     {
+        ON_CALL(gfx, window).WillByDefault(::testing::ReturnRef(window));
+        ON_CALL(gfx, camera).WillByDefault(::testing::ReturnRef(camera));
+        ON_CALL(gfx, textureManager).WillByDefault(::testing::ReturnRef(textureManager));
         // getSize has to be called, so that the game knows how big the rendertarget will be.
         ON_CALL(window, getSize()).WillByDefault([]() { return jt::Vector2f { 100.0f, 200.0f }; });
 
@@ -39,7 +45,7 @@ public:
         ON_CALL(stateManager, getCurrentState).WillByDefault(::testing::Return(state));
 
         g = std::make_shared<jt::Game>(
-            window, input, musicPlayer, camera, stateManager, logger, actionCommandManager);
+            gfx, input, musicPlayer, stateManager, logger, actionCommandManager);
         state->setGameInstance(g);
     }
 };

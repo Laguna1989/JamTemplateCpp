@@ -6,7 +6,7 @@
 
 auto create_string(std::string const& string)
 {
-    std::shared_ptr<jt::renderTarget> renderTarget = nullptr;
+    std::shared_ptr<jt::RenderTarget> renderTarget = nullptr;
     return jt::dh::createText(renderTarget, string, 10, jt::colors::White, "assets/font.ttf");
 }
 

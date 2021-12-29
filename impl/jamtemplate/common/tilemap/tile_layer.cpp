@@ -40,7 +40,7 @@ bool TileLayer::isTileVisible(TileInfo const& tile) const
     return true;
 }
 
-void TileLayer::doDraw(std::shared_ptr<jt::renderTarget> const sptr) const
+void TileLayer::doDraw(std::shared_ptr<jt::RenderTarget> const sptr) const
 {
     if (!sptr) {
         return;
@@ -63,8 +63,8 @@ void TileLayer::doDraw(std::shared_ptr<jt::renderTarget> const sptr) const
     }
 }
 
-void TileLayer::doDrawFlash(std::shared_ptr<jt::renderTarget> const /*sptr*/) const { }
-void TileLayer::doDrawShadow(std::shared_ptr<jt::renderTarget> const /*sptr*/) const { }
+void TileLayer::doDrawFlash(std::shared_ptr<jt::RenderTarget> const /*sptr*/) const { }
+void TileLayer::doDrawShadow(std::shared_ptr<jt::RenderTarget> const /*sptr*/) const { }
 
 void TileLayer::doUpdate(float /*elapsed*/) { }
 

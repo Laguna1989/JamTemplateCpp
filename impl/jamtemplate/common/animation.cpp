@@ -161,9 +161,9 @@ void Animation::setShadowOffset(jt::Vector2f const& v)
     }
 }
 
-void Animation::doDrawShadow(std::shared_ptr<jt::renderTarget> const /*sptr*/) const { }
+void Animation::doDrawShadow(std::shared_ptr<jt::RenderTarget> const /*sptr*/) const { }
 
-void Animation::doDraw(std::shared_ptr<jt::renderTarget> const sptr) const
+void Animation::doDraw(std::shared_ptr<jt::RenderTarget> const sptr) const
 {
     if (m_frames.count(m_currentAnimName) == 0) {
         std::cout << "Warning: Drawing Animation with invalid animName: '" + m_currentAnimName
@@ -174,7 +174,7 @@ void Animation::doDraw(std::shared_ptr<jt::renderTarget> const sptr) const
     m_frames.at(m_currentAnimName).at(m_currentIdx)->draw(sptr);
 }
 
-void Animation::doDrawFlash(std::shared_ptr<jt::renderTarget> const /*sptr*/) const { }
+void Animation::doDrawFlash(std::shared_ptr<jt::RenderTarget> const /*sptr*/) const { }
 
 void Animation::doFlash(float t, jt::Color col)
 {

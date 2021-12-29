@@ -5,7 +5,7 @@
 
 namespace jt {
 
-using renderTarget = sf::RenderTexture;
+using RenderTarget = sf::RenderTexture;
 
 } // namespace jt
 

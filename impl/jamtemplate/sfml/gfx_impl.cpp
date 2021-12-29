@@ -3,9 +3,6 @@
 
 namespace jt {
 
-RenderWindow& GfxImpl::window() { return m_window; }
-CamInterface& GfxImpl::camera() { return m_camera; }
-
 GfxImpl::GfxImpl(RenderWindow&& window, Camera&& cam)
     : m_window { std::move(window) }
     , m_camera { std::move(cam) }
@@ -25,7 +22,13 @@ GfxImpl::GfxImpl(RenderWindow&& window, Camera&& cam)
     m_renderTarget->create(scaledWidth, scaledHeight);
     m_renderTarget->setSmooth(false);
 }
-std::shared_ptr<renderTarget> GfxImpl::target() { return m_renderTarget; }
+
+RenderWindowInterface& GfxImpl::window() { return m_window; }
+
+CamInterface& GfxImpl::camera() { return m_camera; }
+
+std::shared_ptr<RenderTarget> GfxImpl::target() { return m_renderTarget; }
+
 TextureManagerInterface& GfxImpl::textureManager() { return m_textureManager.value(); }
 
 } // namespace jt

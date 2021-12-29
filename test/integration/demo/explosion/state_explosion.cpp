@@ -13,9 +13,9 @@ void StateExplosion::doInternalCreate()
 {
     using jt::Timer;
 
-    getGame()->getCamera().shake(0.5f, 2.0f);
+    getGame()->gfx().camera().shake(0.5f, 2.0f);
     jt::Timer::Sptr t
-        = std::make_shared<Timer>(0.6f, [this]() { getGame()->getCamera().shake(0.5f, 10.0f); });
+        = std::make_shared<Timer>(0.6f, [this]() { getGame()->gfx().camera().shake(0.5f, 10.0f); });
     add(t);
 }
 

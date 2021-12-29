@@ -33,7 +33,7 @@ void Game::setupRenderTarget()
 {
     m_logger.debug("Game setupRenderTarget", { "jt" });
     auto const windowSize = gfx().window().getSize();
-    auto const zoom = getCamera().getZoom();
+    auto const zoom = gfx().camera().getZoom();
     auto const scaledWidth = static_cast<unsigned int>(windowSize.x / zoom);
     auto const scaledHeight = static_cast<unsigned int>(windowSize.y / zoom);
 
@@ -57,20 +57,21 @@ void Game::doUpdate(float const elapsed)
     m_logger.verbose("update game, elapsed=" + std::to_string(elapsed), { "jt" });
     getStateManager().getCurrentState()->update(elapsed);
 
-    getCamera().update(elapsed);
+    gfx().camera().update(elapsed);
 
     // TODO think about pulling mouse position into gfx
-    jt::Vector2f const mpf = gfx().window().getMousePosition() / getCamera().getZoom();
+    jt::Vector2f const mpf = gfx().window().getMousePosition() / gfx().camera().getZoom();
 
-    input().update(MousePosition { mpf.x + getCamera().getCamOffset().x,
-                       mpf.y + getCamera().getCamOffset().y, mpf.x, mpf.y },
+    input().update(MousePosition { mpf.x + gfx().camera().getCamOffset().x,
+                       mpf.y + gfx().camera().getCamOffset().y, mpf.x, mpf.y },
         elapsed);
 
+    // TODO move view to gfx
     if (m_view) {
         int const camOffsetix { static_cast<int>(
-            getCamera().getCamOffset().x + m_view->getSize().x / 2) };
+            gfx().camera().getCamOffset().x + m_view->getSize().x / 2) };
         int const camOffsetiy { static_cast<int>(
-            getCamera().getCamOffset().y + m_view->getSize().y / 2) };
+            gfx().camera().getCamOffset().y + m_view->getSize().y / 2) };
 
         m_view->setCenter(toLib(
             jt::Vector2f { static_cast<float>(camOffsetix), static_cast<float>(camOffsetiy) }));
@@ -95,10 +96,10 @@ void Game::doDraw() const
     const sf::Texture& texture = target->getTexture();
 
     m_sprite_for_drawing->fromTexture(texture);
-    auto const shakeOffset = getCamera().getShakeOffset();
+    auto const shakeOffset = gfx().camera().getShakeOffset();
     m_sprite_for_drawing->setPosition(shakeOffset);
     // Note: RenderTexture has a bug and is displayed upside down.
-    horizontalFlip(m_sprite_for_drawing, getCamera().getZoom(), gfx().window().getSize().y);
+    horizontalFlip(m_sprite_for_drawing, gfx().camera().getZoom(), gfx().window().getSize().y);
 
     gfx().window().draw(m_sprite_for_drawing);
 

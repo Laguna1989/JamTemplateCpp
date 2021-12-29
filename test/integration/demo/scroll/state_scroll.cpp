@@ -44,19 +44,19 @@ void StateScroll::doInternalCreate()
     float const scrollSpeed = 50.0f;
     getGame()->input().keyboard()->setCommandPressed({ jt::KeyCode::W, jt::KeyCode::Up },
         std::make_shared<ControlCommandMoveCam>(
-            jt::Vector2f { 0.0f, -scrollSpeed }, getGame()->getCamera()));
+            jt::Vector2f { 0.0f, -scrollSpeed }, getGame()->gfx().camera()));
 
     getGame()->input().keyboard()->setCommandPressed({ jt::KeyCode::A, jt::KeyCode::Left },
         std::make_shared<ControlCommandMoveCam>(
-            jt::Vector2f { -scrollSpeed, 0.0f }, getGame()->getCamera()));
+            jt::Vector2f { -scrollSpeed, 0.0f }, getGame()->gfx().camera()));
 
     getGame()->input().keyboard()->setCommandPressed({ jt::KeyCode::S, jt::KeyCode::Down },
         std::make_shared<ControlCommandMoveCam>(
-            jt::Vector2f { 0.0f, scrollSpeed }, getGame()->getCamera()));
+            jt::Vector2f { 0.0f, scrollSpeed }, getGame()->gfx().camera()));
 
     getGame()->input().keyboard()->setCommandPressed({ jt::KeyCode::D, jt::KeyCode::Right },
         std::make_shared<ControlCommandMoveCam>(
-            jt::Vector2f { scrollSpeed, 0.0f }, getGame()->getCamera()));
+            jt::Vector2f { scrollSpeed, 0.0f }, getGame()->gfx().camera()));
 }
 
 void StateScroll::doInternalUpdate(float const elapsed)

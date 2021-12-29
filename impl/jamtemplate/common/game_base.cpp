@@ -32,7 +32,7 @@ void GameBase::runOneFrame()
     m_timeLast = now;
 
     if (m_age != 0) {
-        getCamera().update(elapsed_in_seconds);
+        gfx().camera().update(elapsed_in_seconds);
         update(elapsed_in_seconds);
         draw();
     }
@@ -45,7 +45,7 @@ void GameBase::reset()
 {
     m_logger.info("Game reset", { "jt" });
     // TODO add reset to gfxInterface
-    getCamera().reset();
+    gfx().camera().reset();
     input().reset();
 }
 
@@ -55,12 +55,9 @@ InputManagerInterface& GameBase::input() { return m_inputManager; }
 
 MusicPlayerInterface& GameBase::getMusicPlayer() { return m_musicPlayer; }
 
-CamInterface& GameBase::getCamera() { return m_gfx.camera(); }
-CamInterface& GameBase::getCamera() const { return m_gfx.camera(); }
-
 StateManagerInterface& GameBase::getStateManager() { return m_stateManager; }
 
-std::shared_ptr<renderTarget> GameBase::getRenderTarget() const { return gfx().target(); }
+std::shared_ptr<RenderTarget> GameBase::getRenderTarget() const { return gfx().target(); }
 
 LoggerInterface& GameBase::getLogger() { return m_logger; }
 

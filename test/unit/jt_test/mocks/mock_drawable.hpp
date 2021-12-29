@@ -8,7 +8,7 @@
 
 class MockDrawable : public jt::DrawableInterface {
 public:
-    MOCK_METHOD(void, draw, (std::shared_ptr<jt::renderTarget>), (const, override));
+    MOCK_METHOD(void, draw, (std::shared_ptr<jt::RenderTarget>), (const, override));
     MOCK_METHOD(void, flash, (float, jt::Color), (override));
     MOCK_METHOD(void, shake, (float, float, float), (override));
     MOCK_METHOD(void, update, (float), (override));

@@ -11,6 +11,12 @@ namespace jt {
 
 class RenderWindowInterface {
 public:
+    // no copy, only move
+    RenderWindowInterface(const RenderWindowInterface&) = delete;
+    RenderWindowInterface(RenderWindowInterface&&) = default;
+    RenderWindowInterface& operator=(const RenderWindowInterface&) = delete;
+    RenderWindowInterface& operator=(RenderWindowInterface&&) = default;
+
     /// Destructor
     virtual ~RenderWindowInterface() = default;
 
@@ -21,9 +27,9 @@ public:
     /// Check if window was closed
     virtual void checkForClose() = 0;
 
-    /// Create the renderTarget to render to
+    /// Create the RenderTarget to render to
     /// \return shared pointer to render target
-    virtual std::shared_ptr<jt::renderTarget> createRenderTarget() = 0;
+    virtual std::shared_ptr<jt::RenderTarget> createRenderTarget() = 0;
 
     /// Get the size of the window
     /// \return
@@ -51,6 +57,9 @@ public:
     virtual void updateGui(float elapsed) = 0;
 
     virtual void startRenderGui() = 0;
+
+protected:
+    RenderWindowInterface() = default;
 };
 } // namespace jt
 #endif

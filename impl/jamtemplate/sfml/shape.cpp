@@ -72,21 +72,21 @@ jt::Vector2f Shape::getOrigin() const
     return fromLib(m_shape->getOrigin());
 }
 
-void Shape::doDraw(std::shared_ptr<jt::renderTarget> const sptr) const
+void Shape::doDraw(std::shared_ptr<jt::RenderTarget> const sptr) const
 {
     if (sptr) {
         sptr->draw(*m_shape);
     }
 }
 
-void Shape::doDrawFlash(std::shared_ptr<jt::renderTarget> const sptr) const
+void Shape::doDrawFlash(std::shared_ptr<jt::RenderTarget> const sptr) const
 {
     if (sptr) {
         sptr->draw(*m_flashShape);
     }
 }
 
-void Shape::doDrawShadow(std::shared_ptr<jt::renderTarget> const sptr) const
+void Shape::doDrawShadow(std::shared_ptr<jt::RenderTarget> const sptr) const
 {
     if (sptr) {
         jt::Vector2f const oldPos = fromLib(m_shape->getPosition());

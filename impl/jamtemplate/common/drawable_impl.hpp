@@ -15,7 +15,7 @@ public:
 
     /// Destructor
     virtual ~DrawableImpl() = default;
-    void draw(std::shared_ptr<renderTarget> sptr) const override;
+    void draw(std::shared_ptr<RenderTarget> sptr) const override;
 
     void flash(float t, jt::Color col = jt::colors::White) override;
     void shake(float t, float strength, float shakeInterval = 0.05f) override;
@@ -71,9 +71,9 @@ private:
     jt::Vector2f m_shadowOffset { 0.0f, 0.0f };
     jt::Color m_shadowColor { jt::colors::Black };
 
-    virtual void doDraw(std::shared_ptr<jt::renderTarget> const sptr) const = 0;
-    virtual void doDrawFlash(std::shared_ptr<jt::renderTarget> const sptr) const = 0;
-    virtual void doDrawShadow(std::shared_ptr<jt::renderTarget> const sptr) const = 0;
+    virtual void doDraw(std::shared_ptr<jt::RenderTarget> const sptr) const = 0;
+    virtual void doDrawFlash(std::shared_ptr<jt::RenderTarget> const sptr) const = 0;
+    virtual void doDrawShadow(std::shared_ptr<jt::RenderTarget> const sptr) const = 0;
 
     // overwrite this method:
     // things to take care of:

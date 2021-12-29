@@ -10,9 +10,9 @@ namespace jt {
 class GfxInterface {
 public:
     virtual ~GfxInterface() = default;
-    virtual RenderWindow& window() = 0;
+    virtual RenderWindowInterface& window() = 0;
     virtual CamInterface& camera() = 0;
-    virtual std::shared_ptr<renderTarget> target() = 0;
+    virtual std::shared_ptr<RenderTarget> target() = 0;
     virtual TextureManagerInterface& textureManager() = 0;
 };
 

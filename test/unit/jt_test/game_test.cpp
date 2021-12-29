@@ -111,5 +111,3 @@ TEST_F(GameTest, ResetCallsResetOnInput)
     EXPECT_CALL(input, reset);
     g->reset();
 }
-
-TEST_F(GameTest, GetCameraReturnsCorrectPointer) { ASSERT_EQ(&g->getCamera(), &camera); }

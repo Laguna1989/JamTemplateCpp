@@ -1,29 +1,30 @@
-#ifndef GUARD_JAMTEMPLATE_GFX_IMPL_HPP
-#define GUARD_JAMTEMPLATE_GFX_IMPL_HPP
+#ifndef GUARD_JAMTEMPALTE_GFX_NULL_HPP
+#define GUARD_JAMTEMPALTE_GFX_NULL_HPP
 
 #include "camera.hpp"
 #include "gfx_interface.hpp"
-#include "render_window.hpp"
+#include "render_window_null.hpp"
 #include "texture_manager_impl.hpp"
 #include <optional>
 
 namespace jt {
+namespace null_objects {
 
-class GfxImpl : public GfxInterface {
+class GfxNull : public GfxInterface {
 public:
-    GfxImpl(RenderWindow&& window, Camera&& cam);
+    GfxNull();
     RenderWindowInterface& window() override;
     CamInterface& camera() override;
     std::shared_ptr<RenderTarget> target() override;
     TextureManagerInterface& textureManager() override;
 
 private:
-    RenderWindow m_window;
-    Camera m_camera;
-    std::shared_ptr<RenderTarget> m_renderTarget { nullptr };
+    RenderWindowNull m_window;
+    jt::Camera m_camera;
     std::optional<jt::TextureManagerImpl> m_textureManager;
 };
 
+} // namespace null_objects
 } // namespace jt
 
-#endif // GUARD_JAMTEMPLATE_GFX_IMPL_HPP
+#endif // GUARD_JAMTEMPALTE_GFX_NULL_HPP
