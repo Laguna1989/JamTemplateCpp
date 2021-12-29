@@ -15,7 +15,7 @@ Text::~Text()
 }
 
 void Text::loadFont(std::string const& fontFileName, unsigned int characterSize,
-    std::weak_ptr<jt::renderTarget> wptr)
+    std::weak_ptr<jt::RenderTarget> wptr)
 {
     m_font
         = TTF_OpenFont(fontFileName.c_str(), static_cast<int>(characterSize) * getUpscaleFactor());
@@ -88,7 +88,7 @@ void Text::doUpdate(float /*elapsed*/)
     // Nothing to do here
 }
 
-void Text::doDrawShadow(std::shared_ptr<jt::renderTarget> const sptr) const
+void Text::doDrawShadow(std::shared_ptr<jt::RenderTarget> const sptr) const
 {
     auto const destRect = getDestRect(getShadowOffset());
     SDL_Point const p { static_cast<int>(m_origin.x), static_cast<int>(m_origin.y) };
@@ -100,7 +100,7 @@ void Text::doDrawShadow(std::shared_ptr<jt::renderTarget> const sptr) const
     SDL_RenderCopyEx(sptr.get(), m_textTexture.get(), nullptr, &destRect, -getRotation(), &p, flip);
 }
 
-void Text::doDraw(std::shared_ptr<jt::renderTarget> const sptr) const
+void Text::doDraw(std::shared_ptr<jt::RenderTarget> const sptr) const
 {
     auto const destRect = getDestRect();
     SDL_Point const p { static_cast<int>(m_origin.x), static_cast<int>(m_origin.y) };
@@ -110,7 +110,7 @@ void Text::doDraw(std::shared_ptr<jt::renderTarget> const sptr) const
     SDL_RenderCopyEx(sptr.get(), m_textTexture.get(), nullptr, &destRect, -getRotation(), &p, flip);
 }
 
-void Text::doDrawFlash(std::shared_ptr<jt::renderTarget> const sptr) const
+void Text::doDrawFlash(std::shared_ptr<jt::RenderTarget> const sptr) const
 {
     auto const destRect = getDestRect();
     SDL_Point const p { static_cast<int>(m_origin.x), static_cast<int>(m_origin.y) };
@@ -125,7 +125,7 @@ void Text::doRotate(float /*rot*/)
     // Nothing to do here
 }
 
-void Text::renderOneLineOfText(std::shared_ptr<jt::renderTarget> const sptr, std::string text,
+void Text::renderOneLineOfText(std::shared_ptr<jt::RenderTarget> const sptr, std::string text,
     std::size_t i, std::size_t lineCount) const
 {
     // render text on full white, so coloring can be done afterwards
@@ -160,7 +160,7 @@ void Text::renderOneLineOfText(std::shared_ptr<jt::renderTarget> const sptr, std
 }
 
 jt::Vector2u Text::getSizeForLine(
-    std::shared_ptr<jt::renderTarget> const sptr, std::string const& text) const
+    std::shared_ptr<jt::RenderTarget> const sptr, std::string const& text) const
 {
     SDL_Color const col { 255U, 255U, 255U, 255U };
     SDL_Surface* textSurface = TTF_RenderText_Solid(m_font, text.c_str(), col);
@@ -176,7 +176,7 @@ jt::Vector2u Text::getSizeForLine(
     return jt::Vector2u { static_cast<unsigned int>(w), static_cast<unsigned int>(h) };
 }
 
-void Text::recreateTextTexture(std::shared_ptr<jt::renderTarget> const sptr)
+void Text::recreateTextTexture(std::shared_ptr<jt::RenderTarget> const sptr)
 {
     if (!m_font) {
         std::cout << "no font loaded\n";
@@ -214,7 +214,7 @@ void Text::recreateTextTexture(std::shared_ptr<jt::renderTarget> const sptr)
     SDL_SetRenderTarget(sptr.get(), oldT);
 }
 
-std::shared_ptr<jt::renderTarget> Text::getRenderTarget()
+std::shared_ptr<jt::RenderTarget> Text::getRenderTarget()
 {
     if (m_rendertarget.expired()) {
         std::cout << "Cannot use Text without valid renderTarget\n";
@@ -256,7 +256,7 @@ SDL_Rect Text::getDestRect(jt::Vector2f const& positionOffset) const
 }
 
 void Text::calculateTextTextureSize(
-    std::shared_ptr<jt::renderTarget> const sptr, std::vector<std::string> const& ssv)
+    std::shared_ptr<jt::RenderTarget> const sptr, std::vector<std::string> const& ssv)
 {
     unsigned int maxLineLengthInPixel { 0U };
     std::size_t maxLineLengthInChars { 0U };

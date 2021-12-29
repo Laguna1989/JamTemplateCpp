@@ -15,8 +15,7 @@ class Game final : public jt::GameBase {
 public:
     using Sptr = std::shared_ptr<Game>;
 
-    Game(RenderWindowInterface& window, InputManagerInterface& input,
-        MusicPlayerInterface& musicPlayer, CamInterface& camera,
+    Game(GfxInterface&, InputManagerInterface& input, MusicPlayerInterface& musicPlayer,
         StateManagerInterface& stateManager, LoggerInterface& logger,
         ActionCommandManagerInterface& actionCommandManager);
 
@@ -25,6 +24,7 @@ public:
 private:
     jt::Recti m_srcRect;
     jt::Recti m_destRect;
+    std::shared_ptr<jt::RenderTarget> m_renderTarget { nullptr };
 
     // override functions from GameBase
     virtual void doUpdate(float const elapsed) override;

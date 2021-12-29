@@ -20,7 +20,7 @@ public:
     virtual ~Text();
 
     void loadFont(std::string const& fontFileName, unsigned int characterSize,
-        std::weak_ptr<jt::renderTarget> wptr);
+        std::weak_ptr<jt::RenderTarget> wptr);
 
     void setText(std::string const& text);
     std::string getText() const;
@@ -70,32 +70,32 @@ private:
     int m_textTextureSizeX { 0 };
     int m_textTextureSizeY { 0 };
 
-    std::weak_ptr<jt::renderTarget> m_rendertarget;
+    std::weak_ptr<jt::RenderTarget> m_rendertarget;
 
     void doUpdate(float /*elapsed*/) override;
 
-    void doDrawShadow(std::shared_ptr<jt::renderTarget> const sptr) const override;
+    void doDrawShadow(std::shared_ptr<jt::RenderTarget> const sptr) const override;
 
-    void renderOneLineOfText(std::shared_ptr<jt::renderTarget> const sptr, std::string text,
+    void renderOneLineOfText(std::shared_ptr<jt::RenderTarget> const sptr, std::string text,
         std::size_t i, std::size_t lineCount) const;
 
     jt::Vector2u getSizeForLine(
-        std::shared_ptr<jt::renderTarget> const sptr, std::string const& text) const;
+        std::shared_ptr<jt::RenderTarget> const sptr, std::string const& text) const;
 
-    void doDraw(std::shared_ptr<jt::renderTarget> const sptr) const override;
+    void doDraw(std::shared_ptr<jt::RenderTarget> const sptr) const override;
 
-    void doDrawFlash(std::shared_ptr<jt::renderTarget> const /*sptr*/) const override;
+    void doDrawFlash(std::shared_ptr<jt::RenderTarget> const /*sptr*/) const override;
 
     void doRotate(float /*rot*/) override;
 
-    void recreateTextTexture(std::shared_ptr<jt::renderTarget> const sptr);
-    std::shared_ptr<jt::renderTarget> getRenderTarget();
+    void recreateTextTexture(std::shared_ptr<jt::RenderTarget> const sptr);
+    std::shared_ptr<jt::RenderTarget> getRenderTarget();
     void setSDLColor(jt::Color const& col) const;
     SDL_Rect getDestRect(jt::Vector2f const& positionOffset = jt::Vector2f { 0.0f, 0.0f }) const;
 
     int getUpscaleFactor() const { return 1; };
     void calculateTextTextureSize(
-        std::shared_ptr<jt::renderTarget> const sptr, std::vector<std::string> const& ssv);
+        std::shared_ptr<jt::RenderTarget> const sptr, std::vector<std::string> const& ssv);
 };
 } // namespace jt
 

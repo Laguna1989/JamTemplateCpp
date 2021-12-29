@@ -55,7 +55,7 @@ void Shape::setOrigin(jt::Vector2f const& origin)
 }
 jt::Vector2f Shape::getOrigin() const { return m_origin; }
 
-void Shape::doDraw(std::shared_ptr<jt::renderTarget> const sptr) const
+void Shape::doDraw(std::shared_ptr<jt::RenderTarget> const sptr) const
 {
     SDL_Rect const destRect = getDestRect();
     auto const flip = jt::getFlipFromScale(m_scale);
@@ -65,7 +65,7 @@ void Shape::doDraw(std::shared_ptr<jt::renderTarget> const sptr) const
     SDL_RenderCopyEx(sptr.get(), m_text.get(), nullptr, &destRect, getRotation(), &p, flip);
 }
 
-void Shape::doDrawFlash(std::shared_ptr<jt::renderTarget> const sptr) const
+void Shape::doDrawFlash(std::shared_ptr<jt::RenderTarget> const sptr) const
 {
     SDL_Rect const destRect = getDestRect();
     auto const flip = jt::getFlipFromScale(m_scale);
@@ -75,7 +75,7 @@ void Shape::doDrawFlash(std::shared_ptr<jt::renderTarget> const sptr) const
     SDL_RenderCopyEx(sptr.get(), m_text.get(), nullptr, &destRect, getRotation(), &p, flip);
 }
 
-void Shape::doDrawShadow(std::shared_ptr<jt::renderTarget> const sptr) const
+void Shape::doDrawShadow(std::shared_ptr<jt::RenderTarget> const sptr) const
 {
     SDL_Rect const destRect = getDestRect(getShadowOffset());
     auto const flip = jt::getFlipFromScale(m_scale);

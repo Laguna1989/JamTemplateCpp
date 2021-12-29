@@ -5,7 +5,7 @@
 
 namespace jt {
 
-using renderTarget = SDL_Renderer;
+using RenderTarget = SDL_Renderer;
 
 } // namespace jt
 

@@ -67,11 +67,11 @@ private:
 
     void doUpdate(float /*elapsed*/) override;
 
-    void doDraw(std::shared_ptr<jt::renderTarget> const sptr) const override;
+    void doDraw(std::shared_ptr<jt::RenderTarget> const sptr) const override;
 
-    void doDrawShadow(std::shared_ptr<jt::renderTarget> const sptr) const override;
+    void doDrawShadow(std::shared_ptr<jt::RenderTarget> const sptr) const override;
 
-    void doDrawFlash(std::shared_ptr<jt::renderTarget> const sptr) const override;
+    void doDrawFlash(std::shared_ptr<jt::RenderTarget> const sptr) const override;
     void doRotate(float /*rot*/) override;
 
     SDL_Rect getDestRect(jt::Vector2f const& positionOffset = jt::Vector2f { 0.0f, 0.0f }) const;

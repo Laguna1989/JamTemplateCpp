@@ -20,7 +20,7 @@ RenderWindow::RenderWindow(unsigned int width, unsigned int height, std::string 
     }
 }
 
-std::shared_ptr<jt::renderTarget> RenderWindow::createRenderTarget()
+std::shared_ptr<jt::RenderTarget> RenderWindow::createRenderTarget()
 {
     auto const renderTarget
         = std::shared_ptr<SDL_Renderer>(SDL_CreateRenderer(m_window.get(), -1,
