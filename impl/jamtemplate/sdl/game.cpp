@@ -49,11 +49,12 @@ void Game::startGame(GameLoopFunctionPtr gameloop_function)
 #ifdef JT_ENABLE_WEB
     emscripten_set_main_loop(gameloop_function, 0, 1);
 #else
-    while (getRenderWindow().isOpen()) {
+    while (gfx().window().isOpen()) {
         gameloop_function();
     }
 #endif
 }
+
 void Game::doUpdate(float const elapsed)
 {
     gfx().window().checkForClose();
