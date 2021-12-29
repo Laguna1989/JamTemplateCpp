@@ -63,6 +63,7 @@ void GfxImpl::update(float elapsed)
 
     DrawableImpl::setCamOffset(-1.0f * fromLib(m_view->getCenter() - m_view->getSize() / 2.0f));
 }
+
 void GfxImpl::display()
 {
 
