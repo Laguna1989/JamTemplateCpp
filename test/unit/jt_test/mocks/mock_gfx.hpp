@@ -14,9 +14,9 @@ public:
     MOCK_METHOD(std::shared_ptr<jt::RenderTarget>, target, (), (override));
     MOCK_METHOD(jt::TextureManagerInterface&, textureManager, (), (override));
 
-    /*jt::RenderWindowInterface& m_window;
-    ::testing::NiceMock<MockCamera> m_camera;
-    jt::TextureManagerImpl m_textureManager;*/
+    MOCK_METHOD(void, reset, (), (override));
+    MOCK_METHOD(void, update, (float), (override));
+    MOCK_METHOD(void, display, (), (override));
 };
 
 #endif // MYAWESOMEGAME_MOCK_GFX_HPP

@@ -17,11 +17,17 @@ public:
     std::shared_ptr<RenderTarget> target() override;
     TextureManagerInterface& textureManager() override;
 
+    void reset() override;
+    void update(float elapsed) override;
+    void display() override;
+
 private:
     RenderWindow m_window;
     Camera m_camera;
     std::shared_ptr<RenderTarget> m_renderTarget { nullptr };
     std::optional<jt::TextureManagerImpl> m_textureManager;
+    std::shared_ptr<sf::View> m_view { nullptr };
+    std::unique_ptr<jt::Sprite> m_sprite_for_drawing;
 };
 
 } // namespace jt

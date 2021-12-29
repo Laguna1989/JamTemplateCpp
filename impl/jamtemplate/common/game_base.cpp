@@ -44,8 +44,7 @@ std::weak_ptr<GameInterface> GameBase::getPtr() { return shared_from_this(); }
 void GameBase::reset()
 {
     m_logger.info("Game reset", { "jt" });
-    // TODO add reset to gfxInterface
-    gfx().camera().reset();
+    gfx().reset();
     input().reset();
 }
 

@@ -17,6 +17,7 @@ public:
     CamInterface& camera() override;
     std::shared_ptr<RenderTarget> target() override;
     TextureManagerInterface& textureManager() override;
+    void reset() override;
 
 private:
     RenderWindow m_window;

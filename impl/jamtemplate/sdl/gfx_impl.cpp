@@ -19,4 +19,6 @@ std::shared_ptr<RenderTarget> GfxImpl::target() { return m_renderTarget; }
 
 TextureManagerInterface& GfxImpl::textureManager() { return m_textureManager.value(); }
 
+void GfxImpl::reset() { m_camera.reset(); }
+
 } // namespace jt

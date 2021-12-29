@@ -14,6 +14,10 @@ public:
     virtual CamInterface& camera() = 0;
     virtual std::shared_ptr<RenderTarget> target() = 0;
     virtual TextureManagerInterface& textureManager() = 0;
+    virtual void reset() = 0;
+    virtual void update(float elapsed) = 0;
+
+    virtual void display() = 0;
 };
 
 } // namespace jt
