@@ -40,9 +40,11 @@ int main()
     jt::Logger logger;
     jt::createDefaultLogTargets(logger);
     jt::ActionCommandManager actionCommandManager(logger);
+
     game = std::make_shared<jt::Game>(
         window, input, music_player, camera, stateManager, logger, actionCommandManager);
     addBasicActionCommands(game);
+
     game->startGame(gameloop);
 
     game = nullptr;

@@ -20,7 +20,6 @@ public:
     std::shared_ptr<jt::GameBase> g { nullptr };
     MockWindow window;
     MockCamera camera;
-    // TODO use mock or null objects if possible
     jt::ActionCommandManager actionCommandManager { logger };
     ::testing::NiceMock<MockMusicPlayer> musicPlayer;
 

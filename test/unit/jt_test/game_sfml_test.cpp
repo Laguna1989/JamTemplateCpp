@@ -9,7 +9,6 @@ TEST_F(GameTest, SetupRenderTarget)
         .WillOnce(::testing::Return(std::make_shared<jt::renderTarget>()));
     EXPECT_CALL(window, getSize()).WillOnce(::testing::Return(jt::Vector2f { 20.0f, 40.0f }));
     jt::Logger logger;
-    // TODO use null objects if possible
     jt::ActionCommandManager actionCommandManager { logger };
     g = std::make_shared<jt::Game>(
         window, input, musicPlayer, camera, stateManager, logger, actionCommandManager);
@@ -25,7 +24,6 @@ TEST_F(GameTest, SetupRenderTargetWithZoom)
         .WillOnce(::testing::Return(std::make_shared<jt::renderTarget>()));
     EXPECT_CALL(window, getSize()).WillOnce(::testing::Return(jt::Vector2f { 20.0f, 40.0f }));
     jt::Logger logger;
-    // TODO use null objects if possible
     jt::ActionCommandManager actionCommandManager { logger };
     g = std::make_shared<jt::Game>(
         window, input, musicPlayer, camera, stateManager, logger, actionCommandManager);
@@ -39,7 +37,6 @@ TEST_F(GameTest, SetUpRenderTarget)
         .WillOnce(::testing::Return(std::make_shared<jt::renderTarget>()));
     EXPECT_CALL(window, getSize()).WillOnce(::testing::Return(jt::Vector2f { 20.0f, 40.0f }));
     jt::Logger logger;
-    // TODO use null objects if possible
     jt::ActionCommandManager actionCommandManager { logger };
     g = std::make_shared<jt::Game>(
         window, input, musicPlayer, camera, stateManager, logger, actionCommandManager);
@@ -57,7 +54,6 @@ TEST_F(GameTest, DrawWithRenderTargetAndState)
     ON_CALL(stateManager, getCurrentState).WillByDefault(::testing::Return(state));
 
     jt::Logger logger;
-    // TODO use null objects if possible
     jt::ActionCommandManager actionCommandManager { logger };
     g = std::make_shared<jt::Game>(
         window, input, musicPlayer, camera, stateManager, logger, actionCommandManager);
