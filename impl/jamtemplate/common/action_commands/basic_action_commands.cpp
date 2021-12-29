@@ -83,12 +83,13 @@ void addCommandsCam(std::shared_ptr<GameBase>& game)
 
 void addCommandTextureManager(std::shared_ptr<GameBase>& game)
 {
-    game->storeActionCommand(game->getActionCommandManager().registerTemporaryCommand(
-        "textureManagerInfo",
-        [&logger = game->getLogger(), &textureManager = game->getTextureManager()](auto /*args*/) {
-            logger.action(
-                "stored textures: " + std::to_string(textureManager.getNumberOfTextures()));
-        }));
+    game->storeActionCommand(
+        game->getActionCommandManager().registerTemporaryCommand("textureManagerInfo",
+            [&logger = game->getLogger(), &textureManager = game->gfx().textureManager()](
+                auto /*args*/) {
+                logger.action(
+                    "stored textures: " + std::to_string(textureManager.getNumberOfTextures()));
+            }));
 }
 
 void addCommandsMusicPlayer(std::shared_ptr<GameBase>& game)

@@ -30,16 +30,16 @@ void StateMenu::doInternalCreate()
 
 void StateMenu::createVignette()
 {
-    m_vignette = jt::dh::createVignette(GP::GetScreenSize(), getGame()->getTextureManager());
+    m_vignette = jt::dh::createVignette(GP::GetScreenSize(), getGame()->gfx().textureManager());
     m_vignette->setColor({ 255, 255, 255, 110 });
 }
 
 void StateMenu::createShapes()
 {
     m_background = jt::dh::createShapeRect(
-        GP::GetScreenSize(), GP::getPalette().getColor(0), getGame()->getTextureManager());
+        GP::GetScreenSize(), GP::getPalette().getColor(0), getGame()->gfx().textureManager());
     m_overlay = jt::dh::createShapeRect(
-        GP::GetScreenSize(), jt::colors::Black, getGame()->getTextureManager());
+        GP::GetScreenSize(), jt::colors::Black, getGame()->gfx().textureManager());
 }
 
 void StateMenu::createMenuText()

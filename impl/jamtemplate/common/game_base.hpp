@@ -16,14 +16,13 @@ class GameBase : public GameInterface,
                  public GameObject,
                  public std::enable_shared_from_this<GameBase> {
 public:
-    GameBase(RenderWindowInterface& renderWindow, InputManagerInterface& input,
-        MusicPlayerInterface& musicPlayer, CamInterface& camera,
+    GameBase(GfxInterface& gfx, InputManagerInterface& input, MusicPlayerInterface& musicPlayer,
         StateManagerInterface& stateManager, LoggerInterface& logger,
         ActionCommandManagerInterface& actionCommandManager);
 
     void runOneFrame() override;
 
-    RenderWindowInterface& getRenderWindow() const override;
+    GfxInterface& gfx() const override;
 
     InputManagerInterface& input() override;
 
@@ -35,8 +34,6 @@ public:
     StateManagerInterface& getStateManager() override;
 
     std::shared_ptr<renderTarget> getRenderTarget() const override;
-
-    TextureManagerInterface& getTextureManager() override;
 
     LoggerInterface& getLogger() override;
 
@@ -51,19 +48,13 @@ protected:
     virtual void doUpdate(float const elapsed) override = 0;
     virtual void doDraw() const override = 0;
 
-    RenderWindowInterface& m_renderWindow;
+    GfxInterface& m_gfx;
 
     InputManagerInterface& m_inputManager;
-
-    CamInterface& m_camera;
 
     MusicPlayerInterface& m_musicPlayer;
 
     StateManagerInterface& m_stateManager;
-
-    std::shared_ptr<renderTarget> m_renderTarget { nullptr };
-
-    std::optional<jt::TextureManagerImpl> m_textureManager;
 
     LoggerInterface& m_logger;
 

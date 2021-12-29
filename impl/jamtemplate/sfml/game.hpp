@@ -20,8 +20,7 @@ public:
     /// \param musicPlayer music player
     /// \param camera camera
     /// \param stateManager state manager
-    Game(RenderWindowInterface& window, InputManagerInterface& input,
-        MusicPlayerInterface& musicPlayer, CamInterface& camera,
+    Game(GfxInterface& gfx, InputManagerInterface& input, MusicPlayerInterface& musicPlayer,
         StateManagerInterface& stateManager, LoggerInterface& logger,
         ActionCommandManagerInterface& actionCommandManager);
 

@@ -24,7 +24,7 @@ public:
         fixtureDef.friction = 5.0f;
         if (m_type == b2BodyType::b2_dynamicBody) {
             m_animation->add("assets/coin.png", "idle", jt::Vector2u { 16, 16 },
-                jt::MathHelper::numbersBetween(0U, 11U), 0.13f, getGame()->getTextureManager());
+                jt::MathHelper::numbersBetween(0U, 11U), 0.13f, getGame()->gfx().textureManager());
             m_animation->play("idle");
             m_animation->setOffset(jt::Vector2f { 8, 8 });
             m_animation->setOrigin(jt::Vector2f { 8, 8 });
@@ -36,7 +36,7 @@ public:
 
         } else {
             m_animation->add("assets/wall.png", "idle", jt::Vector2u { 16, 16 }, { 0 }, 100.0f,
-                getGame()->getTextureManager());
+                getGame()->gfx().textureManager());
             m_animation->play("idle");
             m_animation->setOffset(jt::Vector2f { 8, 8 });
             m_animation->setOrigin(jt::Vector2f { 8, 8 });

@@ -19,10 +19,10 @@ void horizontalFlip(std::unique_ptr<jt::Sprite> const& spr, float zoom, float wi
 
 namespace jt {
 
-Game::Game(RenderWindowInterface& window, InputManagerInterface& input,
-    MusicPlayerInterface& musicPlayer, CamInterface& camera, StateManagerInterface& stateManager,
-    LoggerInterface& logger, ActionCommandManagerInterface& actionCommandManager)
-    : GameBase { window, input, musicPlayer, camera, stateManager, logger, actionCommandManager }
+Game::Game(GfxInterface& gfx, InputManagerInterface& input, MusicPlayerInterface& musicPlayer,
+    StateManagerInterface& stateManager, LoggerInterface& logger,
+    ActionCommandManagerInterface& actionCommandManager)
+    : GameBase { gfx, input, musicPlayer, stateManager, logger, actionCommandManager }
 {
     m_sprite_for_drawing = std::make_unique<jt::Sprite>();
     m_logger.debug("Game constructor done", { "jt" });
@@ -31,22 +31,13 @@ Game::Game(RenderWindowInterface& window, InputManagerInterface& input,
 
 void Game::setupRenderTarget()
 {
-    m_renderTarget = getRenderWindow().createRenderTarget();
-
-    if (m_renderTarget == nullptr) {
-        m_textureManager = jt::TextureManagerImpl { nullptr };
-        return;
-    }
-    m_textureManager = jt::TextureManagerImpl { m_renderTarget };
     m_logger.debug("Game setupRenderTarget", { "jt" });
-    auto const windowSize = getRenderWindow().getSize();
+    auto const windowSize = gfx().window().getSize();
     auto const zoom = getCamera().getZoom();
     auto const scaledWidth = static_cast<unsigned int>(windowSize.x / zoom);
     auto const scaledHeight = static_cast<unsigned int>(windowSize.y / zoom);
 
-    m_renderTarget->create(scaledWidth, scaledHeight);
-    m_renderTarget->setSmooth(false);
-
+    // TODO move view to gfxImpl
     m_view = std::make_shared<sf::View>(toLib(
         jt::Rectf { 0, 0, static_cast<float>(scaledWidth), static_cast<float>(scaledHeight) }));
     m_view->setViewport(toLib(jt::Rectf { 0, 0, 1, 1 }));
@@ -55,8 +46,8 @@ void Game::setupRenderTarget()
 void Game::startGame(GameLoopFunctionPtr gameloop_function)
 {
     m_logger.debug("startGame", { "jt" });
-    while (getRenderWindow().isOpen()) {
-        getRenderWindow().checkForClose();
+    while (gfx().window().isOpen()) {
+        gfx().window().checkForClose();
         gameloop_function();
     }
 }
@@ -68,7 +59,8 @@ void Game::doUpdate(float const elapsed)
 
     getCamera().update(elapsed);
 
-    jt::Vector2f const mpf = getRenderWindow().getMousePosition() / getCamera().getZoom();
+    // TODO think about pulling mouse position into gfx
+    jt::Vector2f const mpf = gfx().window().getMousePosition() / getCamera().getZoom();
 
     input().update(MousePosition { mpf.x + getCamera().getCamOffset().x,
                        mpf.y + getCamera().getCamOffset().y, mpf.x, mpf.y },
@@ -89,27 +81,28 @@ void Game::doUpdate(float const elapsed)
 void Game::doDraw() const
 {
     m_logger.verbose("draw game", { "jt" });
-    if (!m_renderTarget) {
+    auto target = gfx().target();
+    if (!target) {
         return;
     }
 
-    m_renderTarget->clear(sf::Color::Black);
+    target->clear(sf::Color::Black);
 
     m_stateManager.getCurrentState()->draw();
 
-    m_renderTarget->setView(*m_view);
+    target->setView(*m_view);
     // convert renderTexture to sprite and draw that.
-    const sf::Texture& texture = m_renderTarget->getTexture();
+    const sf::Texture& texture = target->getTexture();
 
     m_sprite_for_drawing->fromTexture(texture);
     auto const shakeOffset = getCamera().getShakeOffset();
     m_sprite_for_drawing->setPosition(shakeOffset);
     // Note: RenderTexture has a bug and is displayed upside down.
-    horizontalFlip(m_sprite_for_drawing, getCamera().getZoom(), getRenderWindow().getSize().y);
+    horizontalFlip(m_sprite_for_drawing, getCamera().getZoom(), gfx().window().getSize().y);
 
-    getRenderWindow().draw(m_sprite_for_drawing);
+    gfx().window().draw(m_sprite_for_drawing);
 
-    getRenderWindow().display();
+    gfx().window().display();
 }
 
 } // namespace jt
