@@ -30,6 +30,8 @@ public:
     /// \param gameloopFunction the game loop function
     virtual void startGame(GameLoopFunctionPtr gameloopFunction) = 0;
 
+    /// Get the graphics context
+    /// \return the graphics context
     virtual GfxInterface& gfx() const = 0;
 
     /// Get the input manager

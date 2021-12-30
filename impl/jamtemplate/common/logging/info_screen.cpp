@@ -23,7 +23,6 @@ void InfoScreen::doDraw() const
     if (!m_showInfo) {
         return;
     }
-    // getGame()->gfx().textureManager()
     ImGui::Begin("Debug Info");
     if (!ImGui::CollapsingHeader("Textures")) {
         std::string textures = "# Textures stored: "

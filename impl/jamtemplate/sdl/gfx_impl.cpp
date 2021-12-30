@@ -6,9 +6,9 @@ namespace jt {
 GfxImpl::GfxImpl(RenderWindow&& window, Camera&& cam)
     : m_window { std::move(window) }
     , m_camera { std::move(cam) }
+    , m_renderTarget { m_window.createRenderTarget() }
+    , m_textureManager { m_renderTarget }
 {
-    m_renderTarget = m_window.createRenderTarget();
-    m_textureManager = jt::TextureManagerImpl { m_renderTarget };
 }
 
 RenderWindowInterface& GfxImpl::window() { return m_window; }

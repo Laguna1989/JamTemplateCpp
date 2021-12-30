@@ -30,7 +30,7 @@ void StateParticles::doInternalCreate()
             a->setPosition(jt::Vector2f { -2000.0f, -2000.0f });
             return a;
         },
-        [this](auto a) {
+        [](auto a) {
             auto startPosition = jt::Random::getRandomPointIn(jt::Rectf { 210, 50, 80, 200 });
             a->setPosition(startPosition);
             a->setRotation(jt::Random::getFloat(0.0f, 360.0f));

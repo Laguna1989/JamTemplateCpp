@@ -24,7 +24,6 @@ public:
 private:
     jt::Recti m_srcRect;
     jt::Recti m_destRect;
-    std::shared_ptr<jt::RenderTarget> m_renderTarget { nullptr };
 
     // override functions from GameBase
     virtual void doUpdate(float const elapsed) override;

@@ -30,7 +30,6 @@ Game::Game(GfxInterface& gfx, InputManagerInterface& input, MusicPlayerInterface
     m_srcRect = jt::Recti { 0, 0, scaledWidth, scaledHeight };
     m_destRect = jt::Recti { 0, 0, static_cast<int>(width), static_cast<int>(height) };
 
-    m_renderTarget = gfx.target();
     TTF_Init();
 
     // important fix for SDL_Mixer: OpenAudio has to be called before Mix_Init,
@@ -72,28 +71,28 @@ void Game::doUpdate(float const elapsed)
 
 void Game::doDraw() const
 {
+    auto target = getRenderTarget().get();
     SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "0");
     // for reasons this can not be a member.
-    auto* const t = SDL_CreateTexture(getRenderTarget().get(), SDL_PIXELFORMAT_RGBA8888,
-        SDL_TEXTUREACCESS_TARGET, static_cast<int>(m_srcRect.width),
-        static_cast<int>(m_srcRect.height));
+    auto* const t = SDL_CreateTexture(target, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_TARGET,
+        static_cast<int>(m_srcRect.width), static_cast<int>(m_srcRect.height));
 
     // render to the small texture first
-    SDL_SetRenderTarget(getRenderTarget().get(), t);
-    SDL_RenderClear(getRenderTarget().get());
+    SDL_SetRenderTarget(target, t);
+    SDL_RenderClear(target);
     m_stateManager.getCurrentState()->draw();
 
     // Detach the texture
-    SDL_SetRenderTarget(getRenderTarget().get(), nullptr);
+    SDL_SetRenderTarget(target, nullptr);
 
     // Now render the texture target to our screen
-    SDL_RenderClear(getRenderTarget().get());
+    SDL_RenderClear(target);
     SDL_Rect sourceRect { m_srcRect.left, m_srcRect.top, m_srcRect.width, m_srcRect.height };
     SDL_Rect destRect { static_cast<int>(gfx().camera().getShakeOffset().x),
         static_cast<int>(gfx().camera().getShakeOffset().y), m_destRect.width, m_destRect.height };
-    SDL_RenderCopyEx(getRenderTarget().get(), t, &sourceRect, &destRect, 0, nullptr, SDL_FLIP_NONE);
+    SDL_RenderCopyEx(target, t, &sourceRect, &destRect, 0, nullptr, SDL_FLIP_NONE);
     gfx().display();
-    SDL_RenderPresent(getRenderTarget().get());
+    SDL_RenderPresent(target);
 
     SDL_DestroyTexture(t);
 };

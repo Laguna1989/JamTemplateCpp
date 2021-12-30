@@ -5,13 +5,14 @@
 #include <utility>
 
 namespace {
+
 void horizontalFlip(std::unique_ptr<jt::Sprite> const& spr, float zoom, float window_size_y)
 {
-
     spr->setScale(jt::Vector2f { zoom, -zoom });
     spr->setPosition({ spr->getPosition().x, spr->getPosition().y + window_size_y });
     spr->update(0.0f);
 }
+
 } // namespace
 
 namespace jt {
@@ -19,14 +20,9 @@ namespace jt {
 GfxImpl::GfxImpl(RenderWindow&& window, Camera&& cam)
     : m_window { std::move(window) }
     , m_camera { std::move(cam) }
+    , m_renderTarget { m_window.createRenderTarget() }
+    , m_textureManager { m_renderTarget }
 {
-    m_renderTarget = m_window.createRenderTarget();
-    if (m_renderTarget == nullptr) {
-        m_textureManager = jt::TextureManagerImpl { nullptr };
-        return;
-    }
-    m_textureManager = jt::TextureManagerImpl { m_renderTarget };
-
     auto const windowSize = m_window.getSize();
     auto const zoom = m_camera.getZoom();
     auto const scaledWidth = static_cast<unsigned int>(windowSize.x / zoom);
@@ -49,11 +45,14 @@ CamInterface& GfxImpl::camera() { return m_camera; }
 std::shared_ptr<RenderTarget> GfxImpl::target() { return m_renderTarget; }
 
 TextureManagerInterface& GfxImpl::textureManager() { return m_textureManager.value(); }
+
 void GfxImpl::reset() { m_camera.reset(); }
+
 void GfxImpl::update(float elapsed)
 {
     m_camera.update(elapsed);
 
+    // cast to int and back to float to avoid rounding issues with subpixel positions
     int const camOffsetix { static_cast<int>(m_camera.getCamOffset().x + m_view->getSize().x / 2) };
     int const camOffsetiy { static_cast<int>(m_camera.getCamOffset().y + m_view->getSize().y / 2) };
 
@@ -66,7 +65,6 @@ void GfxImpl::update(float elapsed)
 
 void GfxImpl::display()
 {
-
     // convert renderTexture to sprite and draw that.
     const sf::Texture& texture = m_renderTarget->getTexture();
 
