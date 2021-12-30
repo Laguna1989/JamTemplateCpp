@@ -53,13 +53,13 @@ void Button::doDraw() const
         return;
     }
 
-    m_background->draw(getGame()->getRenderTarget());
+    m_background->draw(getGame()->gfx().target());
     if (m_drawable) {
-        m_drawable->draw(getGame()->getRenderTarget());
+        m_drawable->draw(getGame()->gfx().target());
     }
 
     if (!m_isActive) {
-        m_disabledOverlay->draw(getGame()->getRenderTarget());
+        m_disabledOverlay->draw(getGame()->gfx().target());
     }
 }
 bool Button::isOver(jt::Vector2f const& mousePosition)

@@ -68,7 +68,7 @@ private:
     virtual void doDraw() const
     {
         for (auto const& p : m_particles) {
-            p->draw(getGame()->getRenderTarget());
+            p->draw(getGame()->gfx().target());
         }
     };
     virtual void doCreate() {};

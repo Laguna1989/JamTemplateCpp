@@ -23,7 +23,7 @@ private:
         m_shape->makeRect({ 20.0f, 20.0f }, getGame()->gfx().textureManager());
     }
     void doInternalUpdate(float elapsed) override { m_shape->update(elapsed); }
-    void doInternalDraw() const override { m_shape->draw(getGame()->getRenderTarget()); }
+    void doInternalDraw() const override { m_shape->draw(getGame()->gfx().target()); }
 
 public:
     std::string getName() const override { return "Performance StartGame"; }

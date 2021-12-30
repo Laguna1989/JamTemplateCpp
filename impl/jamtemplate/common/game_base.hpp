@@ -30,8 +30,6 @@ public:
 
     StateManagerInterface& getStateManager() override;
 
-    std::shared_ptr<RenderTarget> getRenderTarget() const override;
-
     LoggerInterface& getLogger() override;
 
     ActionCommandManagerInterface& getActionCommandManager() override;

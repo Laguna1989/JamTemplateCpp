@@ -51,7 +51,7 @@ void StateMenu::createMenuText()
 
 void StateMenu::createTextCredits()
 {
-    m_text_Credits = jt::dh::createText(getGame()->getRenderTarget(),
+    m_text_Credits = jt::dh::createText(getGame()->gfx().target(),
         "Created by " + GP::AuthorName() + " for " + GP::JamName() + "\n" + GP::JamDate()
             + "\n\nF9 for License Information",
         10U, GP::getPalette().getColor(4));
@@ -63,7 +63,7 @@ void StateMenu::createTextCredits()
 void StateMenu::createTextExplanation()
 {
     float half_width = GP::GetScreenSize().x / 2;
-    m_text_Explanation = jt::dh::createText(getGame()->getRenderTarget(),
+    m_text_Explanation = jt::dh::createText(getGame()->gfx().target(),
         "Press Space to start the game", 16U, GP::getPalette().getColor(7));
     m_text_Explanation->setPosition({ half_width, 150 });
     m_text_Explanation->setShadow(GP::PaletteFontShadow(), jt::Vector2f { 3, 3 });
@@ -73,7 +73,7 @@ void StateMenu::createTextTitle()
 {
     float half_width = GP::GetScreenSize().x / 2;
     m_text_Title = jt::dh::createText(
-        getGame()->getRenderTarget(), GP::GameName(), 32U, GP::PaletteFontFront());
+        getGame()->gfx().target(), GP::GameName(), 32U, GP::PaletteFontFront());
     m_text_Title->setPosition({ half_width, 20 });
     m_text_Title->setShadow(GP::PaletteFontShadow(), jt::Vector2f { 3, 3 });
 }
@@ -192,13 +192,13 @@ void StateMenu::createTweenTransition()
 
 void StateMenu::doInternalDraw() const
 {
-    m_background->draw(getGame()->getRenderTarget());
+    m_background->draw(getGame()->gfx().target());
 
-    m_text_Title->draw(getGame()->getRenderTarget());
-    m_text_Explanation->draw(getGame()->getRenderTarget());
-    m_text_Credits->draw(getGame()->getRenderTarget());
+    m_text_Title->draw(getGame()->gfx().target());
+    m_text_Explanation->draw(getGame()->gfx().target());
+    m_text_Credits->draw(getGame()->gfx().target());
 
-    m_overlay->draw(getGame()->getRenderTarget());
-    m_vignette->draw(getGame()->getRenderTarget());
+    m_overlay->draw(getGame()->gfx().target());
+    m_vignette->draw(getGame()->gfx().target());
 }
 std::string StateMenu::getName() const { return "Menu"; }

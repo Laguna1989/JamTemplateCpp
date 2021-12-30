@@ -65,8 +65,8 @@ void StateBox2d::doInternalUpdate(float const elapsed)
 void StateBox2d::doInternalDraw() const
 {
     drawObjects();
-    m_bar1->draw(getGame()->getRenderTarget());
-    m_bar2->draw(getGame()->getRenderTarget());
+    m_bar1->draw(getGame()->gfx().target());
+    m_bar2->draw(getGame()->gfx().target());
 }
 
 void StateBox2d::CreateOneWall(jt::Vector2f const& pos)

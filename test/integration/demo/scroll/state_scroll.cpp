@@ -26,15 +26,15 @@ void StateScroll::doInternalCreate()
     m_anim->setColor(jt::colors::Red);
     m_anim->setPosition(jt::Vector2f { 200.0f, 200.0f });
 
-    m_text_left_aligned = jt::dh::createText(getGame()->getRenderTarget(), "left aligned", 12);
+    m_text_left_aligned = jt::dh::createText(getGame()->gfx().target(), "left aligned", 12);
     m_text_left_aligned->setTextAlign(jt::Text::TextAlign::LEFT);
     m_text_left_aligned->setPosition(jt::Vector2f { 300, 100 });
 
-    m_text_center_aligned = jt::dh::createText(getGame()->getRenderTarget(), "center aligned", 12);
+    m_text_center_aligned = jt::dh::createText(getGame()->gfx().target(), "center aligned", 12);
     m_text_center_aligned->setTextAlign(jt::Text::TextAlign::CENTER);
     m_text_center_aligned->setPosition(jt::Vector2f { 300, 130 });
 
-    m_text_right_aligned = jt::dh::createText(getGame()->getRenderTarget(), "right aligned", 12);
+    m_text_right_aligned = jt::dh::createText(getGame()->gfx().target(), "right aligned", 12);
     m_text_right_aligned->setTextAlign(jt::Text::TextAlign::RIGHT);
     m_text_right_aligned->setPosition(jt::Vector2f { 300, 160 });
 
@@ -79,17 +79,17 @@ void StateScroll::doInternalUpdate(float const elapsed)
 
 void StateScroll::doInternalDraw() const
 {
-    m_background->draw(getGame()->getRenderTarget());
+    m_background->draw(getGame()->gfx().target());
 
     drawObjects();
-    m_sprite->draw(getGame()->getRenderTarget());
-    m_shape1->draw(getGame()->getRenderTarget());
-    m_anim->draw(getGame()->getRenderTarget());
+    m_sprite->draw(getGame()->gfx().target());
+    m_shape1->draw(getGame()->gfx().target());
+    m_anim->draw(getGame()->gfx().target());
 
-    m_text_left_aligned->draw(getGame()->getRenderTarget());
-    m_text_center_aligned->draw(getGame()->getRenderTarget());
-    m_text_right_aligned->draw(getGame()->getRenderTarget());
+    m_text_left_aligned->draw(getGame()->gfx().target());
+    m_text_center_aligned->draw(getGame()->gfx().target());
+    m_text_right_aligned->draw(getGame()->gfx().target());
 
-    m_line->draw(getGame()->getRenderTarget());
+    m_line->draw(getGame()->gfx().target());
 }
 std::string StateScroll::getName() const { return "Move Cam"; }

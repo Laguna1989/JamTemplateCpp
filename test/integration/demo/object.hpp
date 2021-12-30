@@ -52,7 +52,7 @@ private:
             kill();
     }
 
-    void doDraw() const override { m_animation->draw(getGame()->getRenderTarget()); }
+    void doDraw() const override { m_animation->draw(getGame()->gfx().target()); }
 
     std::shared_ptr<jt::Animation> m_animation;
     jt::Vector2f m_position;

@@ -43,7 +43,7 @@ private:
             getGame()->gfx().textureManager());
         button->addCallback(
             [this]() { getGame()->getStateManager().switchState(std::make_shared<State>()); });
-        auto const text = jt::dh::createText(getGame()->getRenderTarget(), textString, 12);
+        auto const text = jt::dh::createText(getGame()->gfx().target(), textString, 12);
         text->setTextAlign(jt::Text::TextAlign::LEFT);
         text->setOrigin(jt::Vector2f { -8, 0 });
         button->setDrawable(text);

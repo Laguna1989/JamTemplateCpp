@@ -79,7 +79,7 @@ void StateGradient::doInternalUpdate(float elapsed)
 void StateGradient::doInternalDraw() const
 {
     for (auto s : m_shapes) {
-        s->draw(getGame()->getRenderTarget());
+        s->draw(getGame()->gfx().target());
     }
 }
 std::string StateGradient::getName() const { return "Palettes"; }

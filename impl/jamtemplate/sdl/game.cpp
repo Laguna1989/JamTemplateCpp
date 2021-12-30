@@ -71,7 +71,7 @@ void Game::doUpdate(float const elapsed)
 
 void Game::doDraw() const
 {
-    auto target = getRenderTarget().get();
+    auto target = gfx().target().get();
     SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "0");
     // for reasons this can not be a member.
     auto* const t = SDL_CreateTexture(target, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_TARGET,

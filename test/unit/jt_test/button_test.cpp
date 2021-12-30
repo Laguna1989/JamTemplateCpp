@@ -134,7 +134,7 @@ TEST_F(ButtonTest, DrawInvisibleButton)
     b->setVisible(false);
     b->setGameInstance(game);
     b->update(0.1f);
-    EXPECT_CALL(*game, getRenderTarget()).Times(0);
+    EXPECT_CALL(game->m_gfx, target()).Times(0);
     b->draw();
 }
 
@@ -146,7 +146,7 @@ TEST_F(ButtonTest, DrawInActiveButton)
     b->setActive(false);
     b->setGameInstance(game);
     b->update(0.1f);
-    EXPECT_CALL(*game, getRenderTarget()).Times(2);
+    EXPECT_CALL(game->m_gfx, target()).Times(2);
     b->draw();
 }
 
@@ -161,7 +161,7 @@ TEST_F(ButtonTest, CustomDrawable)
     auto d = std::make_shared<MockDrawable>();
     b->setDrawable(d);
     std::shared_ptr<jt::RenderTarget> renderTarget = nullptr;
-    EXPECT_CALL(*game, getRenderTarget()).Times(2);
+    EXPECT_CALL(game->m_gfx, target()).Times(2);
     EXPECT_CALL(*d, setPosition(::testing::_));
     EXPECT_CALL(*d, update(0.1f));
     b->update(0.1f);

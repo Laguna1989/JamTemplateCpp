@@ -73,10 +73,10 @@ void StateTween::doInternalUpdate(float const elapsed)
 
 void StateTween::doInternalDraw() const
 {
-    m_background->draw(getGame()->getRenderTarget());
+    m_background->draw(getGame()->gfx().target());
 
-    m_overlayR->draw(getGame()->getRenderTarget());
-    m_overlayG->draw(getGame()->getRenderTarget());
-    m_overlayB->draw(getGame()->getRenderTarget());
+    m_overlayR->draw(getGame()->gfx().target());
+    m_overlayG->draw(getGame()->gfx().target());
+    m_overlayB->draw(getGame()->gfx().target());
 }
 std::string StateTween::getName() const { return "Tweens"; }

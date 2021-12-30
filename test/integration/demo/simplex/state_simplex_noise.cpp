@@ -41,7 +41,7 @@ void StateSimplexNoise::doInternalDraw() const
             shape.setColor(jt::Color { vu, vu, vu, 255 });
 
             shape.update(0.1f);
-            shape.draw(getGame()->getRenderTarget());
+            shape.draw(getGame()->gfx().target());
         }
     }
 }

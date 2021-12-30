@@ -12,7 +12,7 @@ WorldItem::WorldItem(
 
 void WorldItem::doCreate() { }
 void WorldItem::doUpdate(float const elapsed) { m_drawable->update(elapsed); }
-void WorldItem::doDraw() const { m_drawable->draw(getGame()->getRenderTarget()); }
+void WorldItem::doDraw() const { m_drawable->draw(getGame()->gfx().target()); }
 
 std::shared_ptr<jt::DrawableInterface> WorldItem::getDrawable() { return m_drawable; }
 std::string WorldItem::getRefId() const { return m_refId; }

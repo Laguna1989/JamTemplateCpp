@@ -46,10 +46,6 @@ public:
     /// \return the state manager
     virtual StateManagerInterface& getStateManager() = 0;
 
-    /// Get the render Target
-    /// \return the render target
-    virtual std::shared_ptr<RenderTarget> getRenderTarget() const = 0;
-
     /// Get the logger
     /// \return the logger
     virtual LoggerInterface& getLogger() = 0;
@@ -58,7 +54,7 @@ public:
     /// \return the action command manager
     virtual ActionCommandManagerInterface& getActionCommandManager() = 0;
 
-    /// Reset the Game internals
+    /// Reset the Game internals, i.e. on a state switch
     virtual void reset() = 0;
 
 protected:

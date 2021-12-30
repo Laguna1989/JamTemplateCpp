@@ -71,11 +71,11 @@ void StateGame::doInternalUpdate(float const elapsed)
 
 void StateGame::doInternalDraw() const
 {
-    m_background->draw(getGame()->getRenderTarget());
+    m_background->draw(getGame()->gfx().target());
     drawObjects();
-    m_vignette->draw(getGame()->getRenderTarget());
+    m_vignette->draw(getGame()->gfx().target());
     m_hud->draw();
-    m_overlay->draw(getGame()->getRenderTarget());
+    m_overlay->draw(getGame()->gfx().target());
 }
 
 void StateGame::endGame()

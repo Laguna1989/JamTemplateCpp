@@ -77,7 +77,7 @@ private:
         }
     }
 
-    void doDraw() const override { m_animation->draw(getGame()->getRenderTarget()); }
+    void doDraw() const override { m_animation->draw(getGame()->gfx().target()); }
 };
 
 #endif

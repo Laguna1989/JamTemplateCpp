@@ -119,7 +119,7 @@ void StateInventory::pickupItems()
 
 void StateInventory::doInternalDraw() const
 {
-    m_tileLayerGround->draw(getGame()->getRenderTarget());
-    m_tileLayerOverlay->draw(getGame()->getRenderTarget());
+    m_tileLayerGround->draw(getGame()->gfx().target());
+    m_tileLayerOverlay->draw(getGame()->gfx().target());
     drawObjects();
 }

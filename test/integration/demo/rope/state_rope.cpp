@@ -124,7 +124,7 @@ void StateRope::doInternalDraw() const
             jt::Vector2f { size, size }, jt::colors::White, getGame()->gfx().textureManager());
         s->setPosition(p);
         s->update(0.1f);
-        s->draw(getGame()->getRenderTarget());
+        s->draw(getGame()->gfx().target());
     }
 }
 std::string StateRope::getName() const { return "Rope"; }

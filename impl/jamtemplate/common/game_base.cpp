@@ -56,8 +56,6 @@ MusicPlayerInterface& GameBase::getMusicPlayer() { return m_musicPlayer; }
 
 StateManagerInterface& GameBase::getStateManager() { return m_stateManager; }
 
-std::shared_ptr<RenderTarget> GameBase::getRenderTarget() const { return gfx().target(); }
-
 LoggerInterface& GameBase::getLogger() { return m_logger; }
 
 ActionCommandManagerInterface& GameBase::getActionCommandManager()

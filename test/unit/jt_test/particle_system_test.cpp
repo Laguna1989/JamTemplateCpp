@@ -57,7 +57,7 @@ TEST(ParticleSystemTest, ResetCalledMultipleTimes)
 TEST(ParticleSystemTest, CreateDoesNotRaiseExceptionWhenGameInstanceIsSet)
 {
     auto g = std::make_shared<::testing::NiceMock<MockGame>>();
-    EXPECT_CALL(*g, getRenderTarget()).WillRepeatedly(::testing::Return(nullptr));
+    EXPECT_CALL(g->m_gfx, target()).WillRepeatedly(::testing::Return(nullptr));
 
     jt::ParticleSystem<jt::Shape, 5> ps(
         []() {
@@ -89,7 +89,7 @@ TEST(ParticleSystemTest, UpdateCallDoesNotRaiseException)
 TEST(ParticleSystemTest, DrawWithGame)
 {
     auto g = std::make_shared<::testing::NiceMock<MockGame>>();
-    EXPECT_CALL(*g, getRenderTarget()).WillRepeatedly(::testing::Return(nullptr));
+    EXPECT_CALL(g->m_gfx, target()).WillRepeatedly(::testing::Return(nullptr));
     jt::ParticleSystem<jt::Shape, 5> ps(
         []() {
             auto s = std::make_shared<jt::Shape>();

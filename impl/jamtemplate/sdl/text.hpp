@@ -89,7 +89,7 @@ private:
     void doRotate(float /*rot*/) override;
 
     void recreateTextTexture(std::shared_ptr<jt::RenderTarget> const sptr);
-    std::shared_ptr<jt::RenderTarget> getRenderTarget();
+    std::shared_ptr<jt::RenderTarget> gfx().target();
     void setSDLColor(jt::Color const& col) const;
     SDL_Rect getDestRect(jt::Vector2f const& positionOffset = jt::Vector2f { 0.0f, 0.0f }) const;
 
