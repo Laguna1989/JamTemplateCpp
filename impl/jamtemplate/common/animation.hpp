@@ -2,7 +2,6 @@
 #define GUARD_JAMTEMPLATE_ANIMATION_HPP_INCLUDEGUARD
 
 #include "drawable_impl.hpp"
-#include "render_target.hpp"
 #include "texture_manager_interface.hpp"
 #include <map>
 #include <memory>

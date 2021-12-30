@@ -2,6 +2,7 @@
 #define GUARD_JAMTEMPLATE_PALETTE_HPP
 
 #include "color.hpp"
+#include <cstddef>
 #include <vector>
 
 namespace jt {
