@@ -2,7 +2,6 @@
 #define GUARD_JAMTEMPLATE_DRAWABLEIMPL_HPP_INCLUDEGUARD
 
 #include "drawable_interface.hpp"
-#include "render_target.hpp"
 #include "vector.hpp"
 #include <memory>
 

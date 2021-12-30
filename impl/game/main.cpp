@@ -9,6 +9,7 @@
 #include "input/keyboard_input.hpp"
 #include "input/mouse_input.hpp"
 #include "logging/default_logging.hpp"
+#include "logging/logger.hpp"
 #include "music_player.hpp"
 #include "random/random.hpp"
 #include "render_window.hpp"

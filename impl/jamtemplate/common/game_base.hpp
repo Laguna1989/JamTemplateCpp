@@ -3,13 +3,8 @@
 
 #include "game_interface.hpp"
 #include "game_object.hpp"
-#include "logging/logger.hpp"
-#include "logging/logger_interface.hpp"
-#include "render_target.hpp"
-#include "texture_manager_impl.hpp"
 #include <chrono>
 #include <memory>
-#include <optional>
 
 namespace jt {
 class GameBase : public GameInterface,

@@ -11,6 +11,7 @@ public:
     using ActionCommandCallbackType = std::function<void(std::vector<std::string>)>;
 
     virtual ~ActionCommandManagerInterface() = default;
+
     virtual void executeCommand(std::string const& fullCommandString) = 0;
 
     ///
@@ -28,4 +29,4 @@ public:
 };
 } // namespace jt
 
-#endif // GUARD_JAMTEMPLATE_COMMAND_MANAGER_INTERFACE_HPP
+#endif // GUARD_JAMTEMPLATE_ACTION_COMMAND_MANAGER_INTERFACE_HPP

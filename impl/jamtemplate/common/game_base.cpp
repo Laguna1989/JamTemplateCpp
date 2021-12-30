@@ -1,8 +1,4 @@
 ﻿#include "game_base.hpp"
-#include "action_commands/action_command_manager.hpp"
-#include "input/input_manager_interface.hpp"
-#include "logging/logger.hpp"
-#include "state_manager.hpp"
 
 namespace jt {
 

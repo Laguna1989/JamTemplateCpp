@@ -23,10 +23,8 @@ GfxImpl::GfxImpl(RenderWindow&& window, Camera&& cam)
     , m_renderTarget { m_window.createRenderTarget() }
     , m_textureManager { m_renderTarget }
 {
-    auto const windowSize = m_window.getSize();
-    auto const zoom = m_camera.getZoom();
-    auto const scaledWidth = static_cast<unsigned int>(windowSize.x / zoom);
-    auto const scaledHeight = static_cast<unsigned int>(windowSize.y / zoom);
+    auto const scaledWidth = static_cast<unsigned int>(m_window.getSize().x / m_camera.getZoom());
+    auto const scaledHeight = static_cast<unsigned int>(m_window.getSize().y / m_camera.getZoom());
 
     m_renderTarget->create(scaledWidth, scaledHeight);
     m_renderTarget->setSmooth(false);
