@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1640856074436,
+  "lastUpdate": 1640856698268,
   "repoUrl": "https://github.com/Laguna1989/JamTemplateCpp",
   "entries": {
     "Benchmark": [
@@ -2700,6 +2700,42 @@ window.BENCHMARK_DATA = {
             "value": 2.7292303696497933,
             "unit": "ms/iter",
             "extra": "iterations: 257\ncpu: 2.728905447470817 ms\nthreads: 1"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "laguna.ws@gmail.com",
+            "name": "Simon Weis",
+            "username": "Laguna1989"
+          },
+          "committer": {
+            "email": "laguna.ws@gmail.com",
+            "name": "Simon Weis",
+            "username": "Laguna1989"
+          },
+          "distinct": true,
+          "id": "61772981650f7478db166742512afb61c22ae192",
+          "message": "Remove getRenderTarget() function from gameInterface",
+          "timestamp": "2021-12-30T10:29:17+01:00",
+          "tree_id": "96445bf4a16c3e401b767999088768e2ced253bf",
+          "url": "https://github.com/Laguna1989/JamTemplateCpp/commit/61772981650f7478db166742512afb61c22ae192"
+        },
+        "date": 1640856697808,
+        "tool": "googlecpp",
+        "benches": [
+          {
+            "name": "BM_StartGame",
+            "value": 0.002222729647337713,
+            "unit": "ms/iter",
+            "extra": "iterations: 321469\ncpu: 0.0022220220301179894 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GamestateWithTweeningShapes",
+            "value": 3.0428248942730622,
+            "unit": "ms/iter",
+            "extra": "iterations: 227\ncpu: 3.042323788546256 ms\nthreads: 1"
           }
         ]
       }
