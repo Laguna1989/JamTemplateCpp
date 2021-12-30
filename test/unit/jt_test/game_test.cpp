@@ -1,5 +1,6 @@
 ﻿#include "game_test.hpp"
 #include "action_commands/basic_action_commands.hpp"
+#include "gfx_impl.hpp"
 #include "mocks/mock_state.hpp"
 #include "mocks/mock_state_manager.hpp"
 
@@ -111,3 +112,5 @@ TEST_F(GameTest, ResetCallsResetOnInput)
     EXPECT_CALL(input, reset);
     g->reset();
 }
+
+using GameTestWithGfx = GameTest;

@@ -66,6 +66,17 @@ TEST(GameObjectTest, AgeSetBySetAge)
     ASSERT_EQ(go.getAge(), 5000.0f);
 }
 
+TEST(GameObjectTest, Destroy)
+{
+    GameObject go {};
+    ASSERT_NO_THROW(go.destroy());
+}
+
+TEST(GameObjectTest, DefaultName)
+{
+    GameObject go {};
+    ASSERT_EQ(go.getName(), "");
+}
 class GameObjectTimeParametrizeTestFixture : public ::testing::TestWithParam<float> {
 };
 
