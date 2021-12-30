@@ -15,6 +15,7 @@ std::shared_ptr<RenderTarget> GfxNull::target() { return m_window.createRenderTa
 TextureManagerInterface& GfxNull::textureManager() { return m_textureManager.value(); }
 void GfxNull::reset() { m_camera.reset(); }
 void GfxNull::update(float elapsed) { m_camera.update(elapsed); }
+void GfxNull::clear() { }
 void GfxNull::display() { }
 
 } // namespace null_objects
