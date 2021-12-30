@@ -25,10 +25,10 @@ public:
     TileLayer(std::vector<TileInfo> const& tileInfo, std::vector<jt::Sprite> tileSetSprites);
     TileLayer(std::tuple<std::vector<TileInfo> const&, std::vector<jt::Sprite>> mapInfo);
 
-    void doDraw(std::shared_ptr<jt::renderTarget> sptr) const override;
+    void doDraw(std::shared_ptr<jt::RenderTarget> sptr) const override;
 
-    void doDrawFlash(std::shared_ptr<jt::renderTarget> sptr) const override;
-    void doDrawShadow(std::shared_ptr<jt::renderTarget> sptr) const override;
+    void doDrawFlash(std::shared_ptr<jt::RenderTarget> sptr) const override;
+    void doDrawShadow(std::shared_ptr<jt::RenderTarget> sptr) const override;
 
     void doUpdate(float elapsed) override;
 

@@ -8,8 +8,9 @@
 
 class ItemRepository {
 public:
-    std::shared_ptr<WorldItem> createWorldItem(std::shared_ptr<ItemReference> ref,
-        jt::TextureManagerInterface& textureManager);
+    std::shared_ptr<WorldItem> createWorldItem(
+        std::shared_ptr<ItemReference> ref, jt::TextureManagerInterface& textureManager);
+
     void registerItem(std::shared_ptr<ItemReference> ref);
 
     std::shared_ptr<ItemReference> getItemReferenceFromString(std::string const& itemRefId);

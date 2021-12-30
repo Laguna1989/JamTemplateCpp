@@ -14,18 +14,18 @@ void StateTileson::doInternalCreate()
     jt::tilemap::TilesonLoader loader { "assets/tileson_test.json" };
 
     m_tileLayerGround = std::make_shared<jt::tilemap::TileLayer>(
-        loader.loadTilesFromLayer("ground", getGame()->getTextureManager()));
+        loader.loadTilesFromLayer("ground", getGame()->gfx().textureManager()));
     m_tileLayerGround->setScreenSizeHint(jt::Vector2f { 400, 300 });
 
     m_tileLayerOverlay = std::make_shared<jt::tilemap::TileLayer>(
-        loader.loadTilesFromLayer("overlay", getGame()->getTextureManager()));
+        loader.loadTilesFromLayer("overlay", getGame()->gfx().textureManager()));
     m_tileLayerOverlay->setScreenSizeHint(jt::Vector2f { 400, 300 });
 
     m_objectsLayer
         = std::make_shared<jt::tilemap::ObjectLayer>(loader.loadObjectsFromLayer("objects"));
 
     m_nodeLayer = std::make_shared<jt::tilemap::NodeLayer>(
-        loader.loadNodesFromLayer("ground", getGame()->getTextureManager()));
+        loader.loadNodesFromLayer("ground", getGame()->gfx().textureManager()));
 
     m_actor = std::make_shared<Actor>();
 
@@ -87,14 +87,14 @@ void StateTileson::moveCamera(float const elapsed)
 {
     auto const scrollspeed = 150.0f;
     if (getGame()->input().keyboard()->pressed(jt::KeyCode::D)) {
-        getGame()->getCamera().move(jt::Vector2f { scrollspeed * elapsed, 0.0f });
+        getGame()->gfx().camera().move(jt::Vector2f { scrollspeed * elapsed, 0.0f });
     } else if (getGame()->input().keyboard()->pressed(jt::KeyCode::A)) {
-        getGame()->getCamera().move(jt::Vector2f { -scrollspeed * elapsed, 0.0f });
+        getGame()->gfx().camera().move(jt::Vector2f { -scrollspeed * elapsed, 0.0f });
     }
     if (getGame()->input().keyboard()->pressed(jt::KeyCode::W)) {
-        getGame()->getCamera().move(jt::Vector2f { 0.0f, -scrollspeed * elapsed });
+        getGame()->gfx().camera().move(jt::Vector2f { 0.0f, -scrollspeed * elapsed });
     } else if (getGame()->input().keyboard()->pressed(jt::KeyCode::S)) {
-        getGame()->getCamera().move(jt::Vector2f { 0.0f, scrollspeed * elapsed });
+        getGame()->gfx().camera().move(jt::Vector2f { 0.0f, scrollspeed * elapsed });
     }
 }
 
@@ -133,7 +133,7 @@ void StateTileson::drawObjectLayer() const
         return;
     }
     for (auto& obj : m_objectsLayer->getObjects()) {
-        auto shape = jt::tilemap::createShapeFrom(obj, getGame()->getTextureManager());
+        auto shape = jt::tilemap::createShapeFrom(obj, getGame()->gfx().textureManager());
         shape->draw(getGame()->getRenderTarget());
     }
 }

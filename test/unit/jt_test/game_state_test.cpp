@@ -5,6 +5,7 @@
 #include "mocks/mock_tween.hpp"
 #include "gmock/gmock.h"
 #include "gtest/gtest.h"
+#include <gmock/gmock.h>
 
 using jt::GameObject;
 using jt::GameState;
@@ -50,12 +51,16 @@ TEST_F(GamestateInitialTest, InitialAutoDraw) { ASSERT_TRUE(gamestate.getAutoDra
 
 class GameStateTest : public ::testing::Test {
 public:
-    std::shared_ptr<jt::GameInterface> game;
+    std::shared_ptr<MockGame> game;
     GameStateImpl gamestate;
     std::shared_ptr<MockObject> mockObject;
+    MockGfx gfx;
+    MockWindow window;
     void SetUp() override
     {
         game = std::make_shared<MockGame>();
+        ON_CALL(*game, gfx).WillByDefault(::testing::ReturnRef(gfx));
+        ON_CALL(gfx, window).WillByDefault(::testing::ReturnRef(window));
         gamestate.setGameInstance(game);
     }
     void AddGameObject()

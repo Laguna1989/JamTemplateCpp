@@ -20,7 +20,7 @@ public:
 
     // note: it is ok to pass a nullptr as rendertarget_wptr for sfml.
     void loadFont(std::string const& fontFileName, unsigned int characterSize,
-        std::weak_ptr<jt::renderTarget> rendertarget_wptr /*unused*/);
+        std::weak_ptr<jt::RenderTarget> rendertarget_wptr /*unused*/);
 
     void setText(std::string text);
     std::string getText() const;
@@ -61,9 +61,9 @@ private:
 
     void doUpdate(float /*elapsed*/) override;
 
-    void doDrawShadow(std::shared_ptr<jt::renderTarget> const sptr) const override;
-    void doDraw(std::shared_ptr<jt::renderTarget> const sptr) const override;
-    void doDrawFlash(std::shared_ptr<jt::renderTarget> const sptr) const override;
+    void doDrawShadow(std::shared_ptr<jt::RenderTarget> const sptr) const override;
+    void doDraw(std::shared_ptr<jt::RenderTarget> const sptr) const override;
+    void doDrawFlash(std::shared_ptr<jt::RenderTarget> const sptr) const override;
 
     void doRotate(float rot) override;
 };

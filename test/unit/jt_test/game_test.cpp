@@ -100,9 +100,9 @@ TEST_F(GameTest, BasicActionCommands)
     ASSERT_FALSE(g->getActionCommandManager().getAllCommands().empty());
 }
 
-TEST_F(GameTest, ResetCallsResetOnCamera)
+TEST_F(GameTest, ResetCallsResetOnGfx)
 {
-    EXPECT_CALL(camera, reset);
+    EXPECT_CALL(gfx, reset);
     g->reset();
 }
 
@@ -111,5 +111,3 @@ TEST_F(GameTest, ResetCallsResetOnInput)
     EXPECT_CALL(input, reset);
     g->reset();
 }
-
-TEST_F(GameTest, GetCameraReturnsCorrectPointer) { ASSERT_EQ(&g->getCamera(), &camera); }

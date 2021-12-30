@@ -24,19 +24,19 @@ void StateInventory::doInternalCreate()
     float const scrollSpeed = 170.0f;
     getGame()->input().keyboard()->setCommandPressed({ jt::KeyCode::W, jt::KeyCode::Up },
         std::make_shared<ControlCommandMoveCam>(
-            jt::Vector2f { 0.0f, -scrollSpeed }, getGame()->getCamera()));
+            jt::Vector2f { 0.0f, -scrollSpeed }, getGame()->gfx().camera()));
 
     getGame()->input().keyboard()->setCommandPressed({ jt::KeyCode::A, jt::KeyCode::Left },
         std::make_shared<ControlCommandMoveCam>(
-            jt::Vector2f { -scrollSpeed, 0.0f }, getGame()->getCamera()));
+            jt::Vector2f { -scrollSpeed, 0.0f }, getGame()->gfx().camera()));
 
     getGame()->input().keyboard()->setCommandPressed({ jt::KeyCode::S, jt::KeyCode::Down },
         std::make_shared<ControlCommandMoveCam>(
-            jt::Vector2f { 0.0f, scrollSpeed }, getGame()->getCamera()));
+            jt::Vector2f { 0.0f, scrollSpeed }, getGame()->gfx().camera()));
 
     getGame()->input().keyboard()->setCommandPressed({ jt::KeyCode::D, jt::KeyCode::Right },
         std::make_shared<ControlCommandMoveCam>(
-            jt::Vector2f { scrollSpeed, 0.0f }, getGame()->getCamera()));
+            jt::Vector2f { scrollSpeed, 0.0f }, getGame()->gfx().camera()));
 }
 
 void StateInventory::createWorldItems()
@@ -57,11 +57,11 @@ void StateInventory::loadTilemap()
     jt::tilemap::TilesonLoader loader { "assets/demos/inventory/spaceship_items.json" };
 
     m_tileLayerGround = std::make_shared<jt::tilemap::TileLayer>(
-        loader.loadTilesFromLayer("ground", getGame()->getTextureManager()));
+        loader.loadTilesFromLayer("ground", getGame()->gfx().textureManager()));
     m_tileLayerGround->setScreenSizeHint(jt::Vector2f { 400, 300 });
 
     m_tileLayerOverlay = std::make_shared<jt::tilemap::TileLayer>(
-        loader.loadTilesFromLayer("overlay", getGame()->getTextureManager()));
+        loader.loadTilesFromLayer("overlay", getGame()->gfx().textureManager()));
     m_tileLayerOverlay->setScreenSizeHint(jt::Vector2f { 400, 300 });
 
     m_objectsLayer
@@ -95,7 +95,7 @@ void StateInventory::spawnWorldItem(std::string const& itemReferenceId, jt::Vect
 {
     auto item = m_itemRepository->createWorldItem(
         m_itemRepository->getItemReferenceFromString(itemReferenceId),
-        getGame()->getTextureManager());
+        getGame()->gfx().textureManager());
     item->getDrawable()->setPosition(pos);
     add(item);
     m_worldItems->push_back(item);

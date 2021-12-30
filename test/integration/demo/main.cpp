@@ -2,6 +2,7 @@
 #include "action_commands/basic_action_commands.hpp"
 #include "camera.hpp"
 #include "game.hpp"
+#include "gfx_impl.hpp"
 #include "input/input_manager.hpp"
 #include "input/keyboard_input.hpp"
 #include "input/mouse_input.hpp"
@@ -31,18 +32,21 @@ int main()
     jt::InputManager input { mouse, keyboard };
 
     jt::RenderWindow window { 800, 600, "jt_demos" };
+    jt::Camera camera { 2.0f };
+    jt::GfxImpl gfx { std::move(window), std::move(camera) };
 
     jt::MusicPlayerNull music_player;
-    jt::Camera camera { 2.0f };
 
     jt::StateManager stateManager { std::make_shared<StateSelect>() };
 
     jt::Logger logger;
     jt::createDefaultLogTargets(logger);
     jt::ActionCommandManager actionCommandManager(logger);
+
     game = std::make_shared<jt::Game>(
-        window, input, music_player, camera, stateManager, logger, actionCommandManager);
+        gfx, input, music_player, stateManager, logger, actionCommandManager);
     addBasicActionCommands(game);
+
     game->startGame(gameloop);
 
     game = nullptr;

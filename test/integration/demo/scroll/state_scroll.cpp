@@ -9,19 +9,19 @@
 void StateScroll::doInternalCreate()
 {
     m_background = jt::dh::createShapeRect(
-        jt::Vector2f { 400.0f, 300.0f }, jt::colors::Blue, getGame()->getTextureManager());
+        jt::Vector2f { 400.0f, 300.0f }, jt::colors::Blue, getGame()->gfx().textureManager());
     m_background->setIgnoreCamMovement(true);
 
     m_shape1 = jt::dh::createShapeRect(
-        jt::Vector2f { 40.0f, 30.0f }, jt::colors::Cyan, getGame()->getTextureManager());
+        jt::Vector2f { 40.0f, 30.0f }, jt::colors::Cyan, getGame()->gfx().textureManager());
     m_shape1->setPosition(jt::Vector2f { 100.0f, 100.0f });
 
-    m_sprite = std::make_shared<jt::Sprite>("assets/wall.png", getGame()->getTextureManager());
+    m_sprite = std::make_shared<jt::Sprite>("assets/wall.png", getGame()->gfx().textureManager());
     m_sprite->setPosition({ 250, 32 });
 
     m_anim = std::make_shared<jt::Animation>();
     m_anim->add("assets/coin.png", "idle", jt::Vector2u { 16, 16 },
-        jt::MathHelper::numbersBetween(0U, 11U), 0.15f, getGame()->getTextureManager());
+        jt::MathHelper::numbersBetween(0U, 11U), 0.15f, getGame()->gfx().textureManager());
     m_anim->play("idle");
     m_anim->setColor(jt::colors::Red);
     m_anim->setPosition(jt::Vector2f { 200.0f, 200.0f });
@@ -44,19 +44,19 @@ void StateScroll::doInternalCreate()
     float const scrollSpeed = 50.0f;
     getGame()->input().keyboard()->setCommandPressed({ jt::KeyCode::W, jt::KeyCode::Up },
         std::make_shared<ControlCommandMoveCam>(
-            jt::Vector2f { 0.0f, -scrollSpeed }, getGame()->getCamera()));
+            jt::Vector2f { 0.0f, -scrollSpeed }, getGame()->gfx().camera()));
 
     getGame()->input().keyboard()->setCommandPressed({ jt::KeyCode::A, jt::KeyCode::Left },
         std::make_shared<ControlCommandMoveCam>(
-            jt::Vector2f { -scrollSpeed, 0.0f }, getGame()->getCamera()));
+            jt::Vector2f { -scrollSpeed, 0.0f }, getGame()->gfx().camera()));
 
     getGame()->input().keyboard()->setCommandPressed({ jt::KeyCode::S, jt::KeyCode::Down },
         std::make_shared<ControlCommandMoveCam>(
-            jt::Vector2f { 0.0f, scrollSpeed }, getGame()->getCamera()));
+            jt::Vector2f { 0.0f, scrollSpeed }, getGame()->gfx().camera()));
 
     getGame()->input().keyboard()->setCommandPressed({ jt::KeyCode::D, jt::KeyCode::Right },
         std::make_shared<ControlCommandMoveCam>(
-            jt::Vector2f { scrollSpeed, 0.0f }, getGame()->getCamera()));
+            jt::Vector2f { scrollSpeed, 0.0f }, getGame()->gfx().camera()));
 }
 
 void StateScroll::doInternalUpdate(float const elapsed)

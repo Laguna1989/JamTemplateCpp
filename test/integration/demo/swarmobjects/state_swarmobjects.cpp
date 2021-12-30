@@ -14,10 +14,10 @@ void StateSwarmObjects::doInternalCreate()
     using jt::TweenAlpha;
 
     m_sky = jt::dh::createShapeRect(
-        jt::Vector2f { 400, 300 }, jt::Color { 178, 255, 255 }, getGame()->getTextureManager());
+        jt::Vector2f { 400, 300 }, jt::Color { 178, 255, 255 }, getGame()->gfx().textureManager());
 
     m_overlay = jt::dh::createShapeRect(
-        jt::Vector2f { 400, 300 }, jt::colors::Black, getGame()->getTextureManager());
+        jt::Vector2f { 400, 300 }, jt::colors::Black, getGame()->gfx().textureManager());
     m_overlay->update(0.0f);
 
     auto tw = TweenAlpha::create(m_overlay, 0.5f, std::uint8_t { 255 }, std::uint8_t { 0 });

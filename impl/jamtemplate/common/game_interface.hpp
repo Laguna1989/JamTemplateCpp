@@ -3,6 +3,7 @@
 
 #include "action_commands/action_command_manager_interface.hpp"
 #include "cam_interface.hpp"
+#include "gfx_interface.hpp"
 #include "input/input_manager_interface.hpp"
 #include "logging/logger_interface.hpp"
 #include "music_player_interface.hpp"
@@ -29,9 +30,9 @@ public:
     /// \param gameloopFunction the game loop function
     virtual void startGame(GameLoopFunctionPtr gameloopFunction) = 0;
 
-    /// Get the render window
-    /// \return the render window
-    virtual RenderWindowInterface& getRenderWindow() const = 0;
+    /// Get the graphics context
+    /// \return the graphics context
+    virtual GfxInterface& gfx() const = 0;
 
     /// Get the input manager
     /// \return the input manager
@@ -41,25 +42,13 @@ public:
     /// \return the music player
     virtual MusicPlayerInterface& getMusicPlayer() = 0;
 
-    /// Get the camera (non const)
-    /// \return the camera
-    virtual CamInterface& getCamera() = 0;
-
-    /// Get the camera (const)
-    /// \return the camera
-    virtual CamInterface& getCamera() const = 0;
-
     /// Get the State Manager
     /// \return the state manager
     virtual StateManagerInterface& getStateManager() = 0;
 
     /// Get the render Target
     /// \return the render target
-    virtual std::shared_ptr<renderTarget> getRenderTarget() const = 0;
-
-    /// Get the texture Manager
-    /// \return the texture Manager
-    virtual TextureManagerInterface& getTextureManager() = 0;
+    virtual std::shared_ptr<RenderTarget> getRenderTarget() const = 0;
 
     /// Get the logger
     /// \return the logger

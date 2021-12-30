@@ -23,7 +23,6 @@ jt::Shape makeShape(
 
 std::shared_ptr<Shape> const makeShapePtr(float sx, float sy, float px, float py)
 {
-    // TODO think about how to pass in texture manager
     return std::make_shared<Shape>(makeShape(sx, sy, px, py, getTextureManager()));
 }
 

@@ -109,7 +109,7 @@ void Sprite::cleanImage() { m_image = nullptr; }
 
 void Sprite::doUpdate(float /*elapsed*/) { }
 
-void Sprite::doDraw(std::shared_ptr<jt::renderTarget> const sptr) const
+void Sprite::doDraw(std::shared_ptr<jt::RenderTarget> const sptr) const
 {
     SDL_Rect const sourceRect = getSourceRect();
     SDL_Rect const destRect = getDestRect();
@@ -120,7 +120,7 @@ void Sprite::doDraw(std::shared_ptr<jt::renderTarget> const sptr) const
     SDL_RenderCopyEx(sptr.get(), m_text.get(), &sourceRect, &destRect, -getRotation(), &p, flip);
 }
 
-void Sprite::doDrawShadow(std::shared_ptr<jt::renderTarget> const sptr) const
+void Sprite::doDrawShadow(std::shared_ptr<jt::RenderTarget> const sptr) const
 {
     SDL_Rect const sourceRect = getSourceRect();
     SDL_Rect const destRect = getDestRect(getShadowOffset());
@@ -131,7 +131,7 @@ void Sprite::doDrawShadow(std::shared_ptr<jt::renderTarget> const sptr) const
     SDL_RenderCopyEx(sptr.get(), m_text.get(), &sourceRect, &destRect, -getRotation(), &p, flip);
 }
 
-void Sprite::doDrawFlash(std::shared_ptr<jt::renderTarget> const sptr) const
+void Sprite::doDrawFlash(std::shared_ptr<jt::RenderTarget> const sptr) const
 {
     SDL_Rect const sourceRect = getSourceRect();
     SDL_Rect const destRect = getDestRect();

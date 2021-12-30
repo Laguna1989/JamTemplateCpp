@@ -10,7 +10,7 @@ namespace jt {
 class RenderWindow : public RenderWindowInterface {
 public:
     RenderWindow(unsigned int width, unsigned int height, std::string const& title);
-    virtual std::shared_ptr<jt::renderTarget> createRenderTarget() override;
+    virtual std::shared_ptr<jt::RenderTarget> createRenderTarget() override;
 
     virtual bool isOpen() const override;
     virtual void checkForClose() override;

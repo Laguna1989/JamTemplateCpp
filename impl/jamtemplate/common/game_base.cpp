@@ -1,21 +1,16 @@
 ﻿#include "game_base.hpp"
 #include "action_commands/action_command_manager.hpp"
-#include "camera.hpp"
 #include "input/input_manager_interface.hpp"
-#include "logging/log_target_cout.hpp"
-#include "logging/log_target_file.hpp"
 #include "logging/logger.hpp"
 #include "state_manager.hpp"
-#include <iostream>
 
 namespace jt {
 
-GameBase::GameBase(RenderWindowInterface& renderWindow, InputManagerInterface& input,
-    MusicPlayerInterface& musicPlayer, CamInterface& camera, StateManagerInterface& stateManager,
-    LoggerInterface& logger, ActionCommandManagerInterface& actionCommandManager)
-    : m_renderWindow { renderWindow }
+GameBase::GameBase(GfxInterface& gfx, InputManagerInterface& input,
+    MusicPlayerInterface& musicPlayer, StateManagerInterface& stateManager, LoggerInterface& logger,
+    ActionCommandManagerInterface& actionCommandManager)
+    : m_gfx { gfx }
     , m_inputManager { input }
-    , m_camera { camera }
     , m_musicPlayer { musicPlayer }
     , m_stateManager { stateManager }
     , m_logger { logger }
@@ -37,7 +32,7 @@ void GameBase::runOneFrame()
     m_timeLast = now;
 
     if (m_age != 0) {
-        getCamera().update(elapsed_in_seconds);
+        gfx().camera().update(elapsed_in_seconds);
         update(elapsed_in_seconds);
         draw();
     }
@@ -49,24 +44,19 @@ std::weak_ptr<GameInterface> GameBase::getPtr() { return shared_from_this(); }
 void GameBase::reset()
 {
     m_logger.info("Game reset", { "jt" });
-    getCamera().reset();
+    gfx().reset();
     input().reset();
 }
 
-RenderWindowInterface& GameBase::getRenderWindow() const { return m_renderWindow; }
+GfxInterface& GameBase::gfx() const { return m_gfx; }
 
 InputManagerInterface& GameBase::input() { return m_inputManager; }
 
 MusicPlayerInterface& GameBase::getMusicPlayer() { return m_musicPlayer; }
 
-CamInterface& GameBase::getCamera() { return m_camera; }
-CamInterface& GameBase::getCamera() const { return m_camera; }
-
 StateManagerInterface& GameBase::getStateManager() { return m_stateManager; }
 
-std::shared_ptr<renderTarget> GameBase::getRenderTarget() const { return m_renderTarget; }
-
-TextureManagerInterface& GameBase::getTextureManager() { return m_textureManager.value(); }
+std::shared_ptr<RenderTarget> GameBase::getRenderTarget() const { return gfx().target(); }
 
 LoggerInterface& GameBase::getLogger() { return m_logger; }
 

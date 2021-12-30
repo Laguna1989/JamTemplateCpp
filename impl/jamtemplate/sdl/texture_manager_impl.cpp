@@ -13,7 +13,7 @@ namespace jt {
 namespace {
 
 std::shared_ptr<SDL_Texture> createButtonImage(
-    std::vector<std::string> const& ssv, std::shared_ptr<jt::renderTarget> renderTarget)
+    std::vector<std::string> const& ssv, std::shared_ptr<jt::RenderTarget> renderTarget)
 {
     if (ssv.size() != 3) {
         throw std::invalid_argument { "create button image: vector does not contain 3 elements." };
@@ -35,7 +35,7 @@ std::shared_ptr<SDL_Texture> createButtonImage(
 }
 
 std::shared_ptr<SDL_Texture> createBlankImage(
-    std::vector<std::string> const& ssv, std::shared_ptr<jt::renderTarget> renderTarget)
+    std::vector<std::string> const& ssv, std::shared_ptr<jt::RenderTarget> renderTarget)
 {
     if (ssv.size() != 3) {
         throw std::invalid_argument { "create button image: vector does not contain 3 elements." };
@@ -58,7 +58,7 @@ std::shared_ptr<SDL_Texture> createBlankImage(
 }
 
 std::shared_ptr<SDL_Texture> createGlowImage(
-    std::vector<std::string> const& ssv, std::shared_ptr<jt::renderTarget> renderTarget)
+    std::vector<std::string> const& ssv, std::shared_ptr<jt::RenderTarget> renderTarget)
 {
     if (ssv.size() != 3) {
         throw std::invalid_argument { "create glow image: vector does not contain 2 elements." };
@@ -79,7 +79,7 @@ std::shared_ptr<SDL_Texture> createGlowImage(
 }
 
 std::shared_ptr<SDL_Texture> createVignetteImage(
-    std::vector<std::string> const& ssv, std::shared_ptr<jt::renderTarget> renderTarget)
+    std::vector<std::string> const& ssv, std::shared_ptr<jt::RenderTarget> renderTarget)
 {
     if (ssv.size() != 3) {
         throw std::invalid_argument {
@@ -100,7 +100,7 @@ std::shared_ptr<SDL_Texture> createVignetteImage(
 }
 
 std::shared_ptr<SDL_Texture> createRectImage(
-    std::vector<std::string> const& ssv, std::shared_ptr<jt::renderTarget> renderTarget)
+    std::vector<std::string> const& ssv, std::shared_ptr<jt::RenderTarget> renderTarget)
 {
     if (ssv.size() != 3) {
         throw std::invalid_argument { "create rect image: vector does not contain 2 elements." };
@@ -119,7 +119,7 @@ std::shared_ptr<SDL_Texture> createRectImage(
 }
 
 std::shared_ptr<SDL_Texture> createCircleImage(
-    std::vector<std::string> const& ssv, std::shared_ptr<jt::renderTarget> renderTarget)
+    std::vector<std::string> const& ssv, std::shared_ptr<jt::RenderTarget> renderTarget)
 {
     if (ssv.size() != 2) {
         throw std::invalid_argument { "create circle image: vector does not contain 1 elements." };
@@ -133,7 +133,7 @@ std::shared_ptr<SDL_Texture> createCircleImage(
 }
 
 std::shared_ptr<SDL_Texture> createFlashImage(
-    std::string const& str, std::shared_ptr<jt::renderTarget> renderTarget)
+    std::string const& str, std::shared_ptr<jt::RenderTarget> renderTarget)
 {
     auto image = std::shared_ptr<SDL_Surface>(
         IMG_Load(str.c_str()), [](SDL_Surface* s) { SDL_FreeSurface(s); });
@@ -166,7 +166,7 @@ std::shared_ptr<SDL_Texture> createFlashImage(
 }
 
 std::shared_ptr<SDL_Texture> loadTextureFromDisk(
-    std::string const& str, std::shared_ptr<jt::renderTarget> renderTarget)
+    std::string const& str, std::shared_ptr<jt::RenderTarget> renderTarget)
 {
     if (renderTarget == nullptr) {
         throw std::logic_error { "rendertarget is null in loadTextureFromDisk" };
@@ -181,7 +181,7 @@ std::shared_ptr<SDL_Texture> loadTextureFromDisk(
 }
 } // namespace
 
-TextureManagerImpl::TextureManagerImpl(std::shared_ptr<jt::renderTarget> renderer)
+TextureManagerImpl::TextureManagerImpl(std::shared_ptr<jt::RenderTarget> renderer)
 {
     m_renderer = renderer;
 }

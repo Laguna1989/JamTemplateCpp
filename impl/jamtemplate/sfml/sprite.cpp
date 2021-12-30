@@ -82,7 +82,7 @@ void Sprite::doUpdate(float /*elapsed*/)
     m_flashSprite.setPosition(toLib(pos));
 }
 
-void Sprite::doDrawShadow(std::shared_ptr<jt::renderTarget> const sptr) const
+void Sprite::doDrawShadow(std::shared_ptr<jt::RenderTarget> const sptr) const
 {
     if (sptr) {
         jt::Vector2f const oldPos = fromLib(m_sprite.getPosition());
@@ -97,14 +97,14 @@ void Sprite::doDrawShadow(std::shared_ptr<jt::renderTarget> const sptr) const
     }
 }
 
-void Sprite::doDraw(std::shared_ptr<jt::renderTarget> const sptr) const
+void Sprite::doDraw(std::shared_ptr<jt::RenderTarget> const sptr) const
 {
     if (sptr) {
         sptr->draw(m_sprite);
     }
 }
 
-void Sprite::doDrawFlash(std::shared_ptr<jt::renderTarget> const sptr) const
+void Sprite::doDrawFlash(std::shared_ptr<jt::RenderTarget> const sptr) const
 {
     if (sptr) {
         sptr->draw(m_flashSprite);

@@ -24,13 +24,13 @@ void StateParticles::doInternalCreate()
             std::shuffle(numbers.begin(), numbers.end(), rng);
 
             a->add("assets/spark.png", "spark", jt::Vector2u { 24, 24 }, numbers,
-                jt::Random::getFloat(0.05f, 0.175f), getGame()->getTextureManager());
+                jt::Random::getFloat(0.05f, 0.175f), getGame()->gfx().textureManager());
             a->play("spark");
             a->setOrigin(jt::Vector2f { 12, 12 });
             a->setPosition(jt::Vector2f { -2000.0f, -2000.0f });
             return a;
         },
-        [this](auto a) {
+        [](auto a) {
             auto startPosition = jt::Random::getRandomPointIn(jt::Rectf { 210, 50, 80, 200 });
             a->setPosition(startPosition);
             a->setRotation(jt::Random::getFloat(0.0f, 360.0f));
@@ -42,7 +42,7 @@ void StateParticles::createParticlesFire()
     m_particlesFire = jt::ParticleSystem<jt::Shape, 200>::createPS(
         [this]() {
             auto s = jt::dh::createShapeCircle(
-                20, jt::MakeColor::FromHSV(45, 80, 100), getGame()->getTextureManager());
+                20, jt::MakeColor::FromHSV(45, 80, 100), getGame()->gfx().textureManager());
             s->setOrigin(jt::Vector2f { 20, 20 });
             s->setPosition(jt::Vector2f { -2000.0f, -2000.0f });
             s->setScale(jt::Vector2f { 0.5f, 0.5f });
@@ -109,7 +109,7 @@ void StateParticles::createParticlesGlitter()
     m_particlesGlitter = jt::ParticleSystem<jt::Shape, numberOfParticles>::createPS(
         [this]() {
             auto s = std::make_shared<jt::Shape>();
-            s->makeRect(jt::Vector2f { 4, 4 }, getGame()->getTextureManager());
+            s->makeRect(jt::Vector2f { 4, 4 }, getGame()->gfx().textureManager());
             s->setOrigin({ 2, 2 });
             return s;
         },
