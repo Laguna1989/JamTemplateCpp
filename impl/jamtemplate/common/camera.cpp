@@ -1,5 +1,6 @@
 ﻿#include "camera.hpp"
 #include "random/random.hpp"
+#include <stdexcept>
 
 namespace jt {
 

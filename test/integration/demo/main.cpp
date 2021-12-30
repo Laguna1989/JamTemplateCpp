@@ -7,6 +7,7 @@
 #include "input/keyboard_input.hpp"
 #include "input/mouse_input.hpp"
 #include "logging/default_logging.hpp"
+#include "logging/logger.hpp"
 #include "music_player_null.hpp"
 #include "random/random.hpp"
 #include "render_window.hpp"
