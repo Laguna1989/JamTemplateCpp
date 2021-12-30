@@ -114,23 +114,3 @@ TEST_F(GameTest, ResetCallsResetOnInput)
 }
 
 using GameTestWithGfx = GameTest;
-
-TEST_F(GameTestWithGfx, Draw)
-{
-    jt::RenderWindow rw { 100, 100, "jt_test" };
-    jt::GfxImpl gfx { std::move(rw), jt::Camera { 1.0f } };
-
-    g = std::make_shared<jt::Game>(
-        gfx, input, musicPlayer, stateManager, logger, actionCommandManager);
-
-    state = std::make_shared<MockState>();
-    ON_CALL(stateManager, getCurrentState).WillByDefault(::testing::Return(state));
-
-    g = std::make_shared<jt::Game>(
-        gfx, input, musicPlayer, stateManager, logger, actionCommandManager);
-    state->setGameInstance(g);
-    EXPECT_CALL(*state, doInternalUpdate(0.1f));
-    g->update(0.1f);
-    EXPECT_CALL(*state, doInternalDraw);
-    g->draw();
-}
