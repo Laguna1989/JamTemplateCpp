@@ -2,9 +2,6 @@
 #define GUARD_JAMTEMPLATE_GAME_HPP_INCLUDEGUARD
 
 #include "game_base.hpp"
-#include <SFML/Audio.hpp>
-#include <SFML/Graphics.hpp>
-#include <chrono>
 
 namespace jt {
 
@@ -24,13 +21,6 @@ public:
         ActionCommandManagerInterface& actionCommandManager);
 
     void startGame(GameLoopFunctionPtr gameloop_function) override;
-
-private:
-    mutable std::unique_ptr<jt::Sprite> m_sprite_for_drawing { nullptr };
-
-    // override functions from GameBase
-    virtual void doUpdate(float const elapsed) override;
-    virtual void doDraw() const override;
 };
 
 } // namespace jt

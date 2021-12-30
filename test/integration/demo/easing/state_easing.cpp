@@ -106,7 +106,7 @@ void StateEasing::doInternalCreate()
             jt::Vector2f { scrollSpeed, 0.0f }, getGame()->gfx().camera()));
 }
 
-void StateEasing::doInternalUpdate(float elapsed)
+void StateEasing::doInternalUpdate(float /*elapsed*/)
 {
     if (getGame()->input().keyboard()->justPressed(jt::KeyCode::F1)
         || getGame()->input().keyboard()->justPressed(jt::KeyCode::Escape)) {

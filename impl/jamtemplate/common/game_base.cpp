@@ -32,7 +32,7 @@ void GameBase::runOneFrame()
     m_timeLast = now;
 
     if (m_age != 0) {
-        gfx().camera().update(elapsed_in_seconds);
+        gfx().window().checkForClose();
         update(elapsed_in_seconds);
         draw();
     }
@@ -61,6 +61,28 @@ LoggerInterface& GameBase::getLogger() { return m_logger; }
 ActionCommandManagerInterface& GameBase::getActionCommandManager()
 {
     return m_actionCommandManager;
+}
+
+void GameBase::doUpdate(float const elapsed)
+{
+    m_logger.verbose("update game, elapsed=" + std::to_string(elapsed), { "jt" });
+    getStateManager().getCurrentState()->update(elapsed);
+    gfx().update(elapsed);
+
+    jt::Vector2f const mpf = gfx().window().getMousePosition() / gfx().camera().getZoom();
+
+    input().update(MousePosition { mpf.x + gfx().camera().getCamOffset().x,
+                       mpf.y + gfx().camera().getCamOffset().y, mpf.x, mpf.y },
+        elapsed);
+}
+
+void GameBase::doDraw() const
+{
+    m_logger.verbose("draw game", { "jt" });
+
+    gfx().clear();
+    m_stateManager.getCurrentState()->draw();
+    gfx().display();
 }
 
 } // namespace jt

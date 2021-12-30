@@ -30,7 +30,7 @@ void Text::loadFont(std::string const& fontFileName, unsigned int characterSize,
 void Text::setText(std::string const& text)
 {
     m_text = text;
-    recreateTextTexture(gfx().target());
+    recreateTextTexture(getRenderTarget());
 }
 
 std::string Text::getText() const { return m_text; }
@@ -78,7 +78,7 @@ void Text::setTextAlign(Text::TextAlign ta)
 {
     if (m_textAlign != ta) {
         m_textAlign = ta;
-        recreateTextTexture(gfx().target());
+        recreateTextTexture(getRenderTarget());
     }
 }
 Text::TextAlign Text::getTextAlign() const { return m_textAlign; }
@@ -214,7 +214,7 @@ void Text::recreateTextTexture(std::shared_ptr<jt::RenderTarget> const sptr)
     SDL_SetRenderTarget(sptr.get(), oldT);
 }
 
-std::shared_ptr<jt::RenderTarget> Text::gfx().target()
+std::shared_ptr<jt::RenderTarget> Text::getRenderTarget()
 {
     if (m_rendertarget.expired()) {
         std::cout << "Cannot use Text without valid renderTarget\n";

@@ -12,4 +12,4 @@ float easeInOut(float t, float b, float c, float d);
 } // namespace ease
 } // namespace jt
 
-#endif GUARD_JAMTEMPLATE_EASE_CUBIC_HPP
+#endif // GUARD_JAMTEMPLATE_EASE_CUBIC_HPP

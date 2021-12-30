@@ -63,6 +63,8 @@ void GfxImpl::update(float elapsed)
     DrawableImpl::setCamOffset(-1.0f * fromLib(m_view->getCenter() - m_view->getSize() / 2.0f));
 }
 
+void GfxImpl::clear() { m_renderTarget->clear(sf::Color::Black); }
+
 void GfxImpl::display()
 {
     // convert renderTexture to sprite and draw that.

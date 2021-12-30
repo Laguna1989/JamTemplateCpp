@@ -17,6 +17,7 @@ public:
     virtual void reset() = 0;
     virtual void update(float elapsed) = 0;
 
+    virtual void clear() = 0;
     virtual void display() = 0;
 };
 

@@ -19,6 +19,7 @@ public:
 
     void reset() override;
     void update(float elapsed) override;
+    void clear() override;
     void display() override;
 
 private:

@@ -40,8 +40,8 @@ protected:
     std::weak_ptr<GameInterface> getPtr() override;
 
     // overwritten functions from GameObject
-    virtual void doUpdate(float const elapsed) override = 0;
-    virtual void doDraw() const override = 0;
+    virtual void doUpdate(float const elapsed) override;
+    virtual void doDraw() const override;
 
     GfxInterface& m_gfx;
 

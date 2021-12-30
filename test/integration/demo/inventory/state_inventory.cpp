@@ -1,5 +1,6 @@
 #include "state_inventory.hpp"
 #include "../control_command_move_cam.hpp"
+#include "../state_select.hpp"
 #include "game_interface.hpp"
 #include "inventory_list_imgui.hpp"
 #include "random/random.hpp"
@@ -77,6 +78,11 @@ void StateInventory::createItemRepository()
 
 void StateInventory::doInternalUpdate(float elapsed)
 {
+    if (getGame()->input().keyboard()->justPressed(jt::KeyCode::F1)
+        || getGame()->input().keyboard()->justPressed(jt::KeyCode::Escape)) {
+        getGame()->getStateManager().switchState(std::make_shared<StateSelect>());
+    }
+
     m_tileLayerGround->update(elapsed);
     m_tileLayerOverlay->update(elapsed);
 

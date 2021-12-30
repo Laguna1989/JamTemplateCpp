@@ -20,14 +20,6 @@ public:
         ActionCommandManagerInterface& actionCommandManager);
 
     void startGame(GameLoopFunctionPtr gameloop_function) override;
-
-private:
-    jt::Recti m_srcRect;
-    jt::Recti m_destRect;
-
-    // override functions from GameBase
-    virtual void doUpdate(float const elapsed) override;
-    virtual void doDraw() const override;
 };
 
 } // namespace jt
