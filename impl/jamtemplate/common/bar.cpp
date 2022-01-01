@@ -1,4 +1,5 @@
 ﻿#include "bar.hpp"
+#include "shape.hpp"
 #include <iostream>
 #include <stdexcept>
 

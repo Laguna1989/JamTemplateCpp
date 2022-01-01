@@ -10,16 +10,19 @@ class Game final : public jt::GameBase {
 public:
     using Sptr = std::shared_ptr<Game>;
 
-    /// Constructor
-    /// \param window window
-    /// \param input input manager
+    /// Constructor. Will mostly delegate things towards game_base
+    /// \param gfx graphics context
+    /// \param input input
     /// \param musicPlayer music player
-    /// \param camera camera
     /// \param stateManager state manager
+    /// \param logger logger
+    /// \param actionCommandManager action command manager
     Game(GfxInterface& gfx, InputManagerInterface& input, MusicPlayerInterface& musicPlayer,
         StateManagerInterface& stateManager, LoggerInterface& logger,
         ActionCommandManagerInterface& actionCommandManager);
 
+    /// Start game
+    /// \param gameloop_function
     void startGame(GameLoopFunctionPtr gameloop_function) override;
 };
 

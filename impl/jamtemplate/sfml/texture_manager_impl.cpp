@@ -2,6 +2,7 @@
 #include "color_lib.hpp"
 #include "sprite_functions.hpp"
 #include "strutils.hpp"
+#include <SFML/Graphics.hpp>
 #include <stdexcept>
 
 namespace jt {

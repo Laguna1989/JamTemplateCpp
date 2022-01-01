@@ -2,7 +2,6 @@
 #define GUARD_JAMTEMPLATE_ANIMATION_HPP_INCLUDEGUARD
 
 #include "drawable_impl.hpp"
-#include "texture_manager_interface.hpp"
 #include <map>
 #include <memory>
 #include <string>
@@ -12,6 +11,7 @@ namespace jt {
 
 // forward declaration
 class Sprite;
+class TextureManagerInterface;
 
 class Animation : public DrawableImpl {
 public:

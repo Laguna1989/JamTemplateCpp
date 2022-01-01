@@ -1,7 +1,7 @@
 ﻿#include "animation.hpp"
 #include "sprite.hpp"
+#include "texture_manager_interface.hpp"
 #include <iostream>
-#include <map>
 #include <memory>
 #include <vector>
 

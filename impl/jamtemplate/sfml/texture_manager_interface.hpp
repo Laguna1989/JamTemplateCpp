@@ -2,9 +2,12 @@
 #define GUARD_JAMTEMPLATE_TEXTURE_MANAGER_INTERFACE_HPP
 
 #include "render_target.hpp"
-#include <SFML/Graphics.hpp>
 #include <cstddef>
 #include <string>
+
+namespace sf {
+class Texture;
+}
 
 namespace jt {
 class TextureManagerInterface {
