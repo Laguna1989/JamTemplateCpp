@@ -2,11 +2,13 @@
 #define GUARD_JAMTEMPLATE_BAR_HPP_INCLUDEGUARD
 
 #include "drawable_impl.hpp"
-#include "shape.hpp"
 #include <memory>
 #include <vector>
 
 namespace jt {
+
+class Shape;
+class TextureManagerInterface;
 
 class Bar : public jt::DrawableImpl {
 public:

@@ -2,7 +2,6 @@
 #define GUARD_JAMTEMPLATE_BUTTON_HPP_GUARD
 
 #include "game_object.hpp"
-#include "texture_manager_interface.hpp"
 #include "vector.hpp"
 #include <functional>
 #include <memory>
@@ -12,6 +11,7 @@ namespace jt {
 class Animation;
 class Sprite;
 class DrawableInterface;
+class TextureManagerInterface;
 
 class Button : public GameObject {
 public:
