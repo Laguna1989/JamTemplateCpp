@@ -23,5 +23,23 @@ void CharacterSheetImgui::doDraw() const
     ImGui::SetNextWindowSize(ImVec2 { 400, 600 });
     ImGui::Begin("Character", &m_drawCharacterSheet);
 
+    int totalarmor = 0;
+    int totalResistanceElectric = 0;
+    int totalResistanceFire = 0;
+    auto itemRepository = m_repository.lock();
+    for (auto const& itemRef : m_equippedItems) {
+        auto const armor = itemRepository->getItemReferenceFromString(itemRef)->armor;
+        totalarmor += armor.armor;
+        totalResistanceFire += armor.resistanceFire;
+        totalResistanceElectric += armor.resistanceElectric;
+    }
+
+    ImGui::Text("TotalArmor: %s", std::to_string(totalarmor).c_str());
+    ImGui::Text("Fire: %s", std::to_string(totalResistanceFire).c_str());
+    ImGui::Text("Electric: %s", std::to_string(totalResistanceElectric).c_str());
     ImGui::End();
+}
+void CharacterSheetImgui::setEquippedItems(std::vector<std::string> const& items)
+{
+    m_equippedItems = items;
 }

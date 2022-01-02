@@ -90,6 +90,7 @@ void StateInventory::doInternalUpdate(float elapsed)
     m_tileLayerOverlay->update(elapsed);
 
     pickupItems();
+    m_charSheet->setEquippedItems(m_inventory->getEquippedItems());
 
     std::string const& itemToSpawn = m_inventory->getAndResetItemToSpawn();
     if (itemToSpawn != "") {

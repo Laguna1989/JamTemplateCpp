@@ -13,8 +13,12 @@ public:
 
     mutable bool m_drawCharacterSheet { false };
 
+    void setEquippedItems(std::vector<std::string> const& items);
+
 private:
     std::weak_ptr<ItemRepository> m_repository;
+
+    std::vector<std::string> m_equippedItems;
 };
 
 #endif // GUARD_JAMTEMPLATE_CHARACTER_SHEET_IMGUI_HPP
