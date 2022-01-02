@@ -20,6 +20,9 @@ void StateInventory::doInternalCreate()
     m_inventory->addItem("item_crystal_blue_01");
     m_inventory->addItem("item_crystal_blue_01");
 
+    m_charSheet = std::make_shared<CharacterSheetImgui>(m_itemRepository);
+    add(m_charSheet);
+
     setAutoDraw(false);
 
     float const scrollSpeed = 170.0f;
@@ -87,6 +90,7 @@ void StateInventory::doInternalUpdate(float elapsed)
     m_tileLayerOverlay->update(elapsed);
 
     pickupItems();
+    m_charSheet->setEquippedItems(m_inventory->getEquippedItems());
 
     std::string const& itemToSpawn = m_inventory->getAndResetItemToSpawn();
     if (itemToSpawn != "") {

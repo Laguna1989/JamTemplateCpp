@@ -23,6 +23,17 @@ void from_json(nlohmann::json const& j, jt::Vector2f& vec)
 
 } // namespace jt
 
+void from_json(nlohmann::json const& j, ArmorInfo& armor)
+{
+    j.at("armor").get_to(armor.armor);
+    if (j.count("resistanceFire") != 0) {
+        j.at("resistanceFire").get_to(armor.resistanceFire);
+    }
+    if (j.count("resistanceElectric") != 0) {
+        j.at("resistanceElectric").get_to(armor.resistanceElectric);
+    }
+}
+
 void from_json(nlohmann::json const& j, ItemReference& item)
 {
     j.at("referenceId").get_to(item.referenceId);
@@ -37,5 +48,8 @@ void from_json(nlohmann::json const& j, ItemReference& item)
     }
     if (j.count("equipSlot") != 0) {
         j.at("equipSlot").get_to(item.equipSlot);
+        if (j.count("armor") != 0) {
+            j.at("armor").get_to(item.armor);
+        }
     }
 }

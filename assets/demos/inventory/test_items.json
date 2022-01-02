@@ -17,7 +17,10 @@
         "worldItemSpriteFileName": "assets/demos/inventory/items.png",
 		"worldItemSpriteRect": { "left": 0, "top": 96, "width": 16, "height": 16 },
 		"worldItemOffset": {"x": 4,"y": 4},
-		"equipSlot": "torso"
+		"equipSlot": "torso",
+        "armor": {
+          "armor": 5
+        }
     },
 	{
         "listName": "Armor Lv2",
@@ -27,7 +30,10 @@
         "worldItemSpriteFileName": "assets/demos/inventory/items.png",
 		"worldItemSpriteRect": { "left": 16, "top": 96, "width": 16, "height": 16 },
 		"worldItemOffset": {"x": 4,"y": 4},
-		"equipSlot": "torso"
+		"equipSlot": "torso",
+        "armor": {
+          "armor": 10
+        }
     },
 	{
         "listName": "Armor Lv3",
@@ -37,7 +43,10 @@
         "worldItemSpriteFileName": "assets/demos/inventory/items.png",
 		"worldItemSpriteRect": { "left": 32, "top": 96, "width": 16, "height": 16 },
 		"worldItemOffset": {"x": 4,"y": 4},
-		"equipSlot": "torso"
+		"equipSlot": "torso",
+        "armor": {
+          "armor": 15
+        }
     },
 	{
         "listName": "Armor Lv4",
@@ -47,7 +56,10 @@
         "worldItemSpriteFileName": "assets/demos/inventory/items.png",
 		"worldItemSpriteRect": { "left": 48, "top": 96, "width": 16, "height": 16 },
 		"worldItemOffset": {"x": 4,"y": 4},
-		"equipSlot": "torso"
+		"equipSlot": "torso",
+        "armor": {
+          "armor": 20
+        }
     },
 	{
         "listName": "Armor Lv5",
@@ -57,7 +69,10 @@
         "worldItemSpriteFileName": "assets/demos/inventory/items.png",
 		"worldItemSpriteRect": { "left": 64, "top": 96, "width": 16, "height": 16 },
 		"worldItemOffset": {"x": 4,"y": 4},
-		"equipSlot": "torso"
+		"equipSlot": "torso",
+        "armor": {
+          "armor": 25
+        }
     },
 	{
         "listName": "Armor Lv6",

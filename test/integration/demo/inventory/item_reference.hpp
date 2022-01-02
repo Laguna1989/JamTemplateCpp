@@ -6,6 +6,13 @@
 #include "vector.hpp"
 #include <string>
 
+struct ArmorInfo {
+    int armor { 0 };
+    int resistanceFire { 0 };
+    int resistanceElectric { 0 };
+    // more specialized armor values
+};
+
 struct ItemReference {
     std::string referenceId { "" };
     std::string worldItemSpriteFileName { "" };
@@ -15,10 +22,12 @@ struct ItemReference {
     float value { 0.0f };
     float weight { 1.0f };
     std::string equipSlot { "" };
+    ArmorInfo armor;
 };
 
 bool operator<(ItemReference const& lhs, ItemReference const& rhs);
 
 void from_json(const nlohmann::json& j, ItemReference& item);
+void from_json(const nlohmann::json& j, ArmorInfo& armor);
 
 #endif // GUARD_JAMTEMPLATE_ITEM_HPP

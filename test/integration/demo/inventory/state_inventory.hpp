@@ -1,6 +1,7 @@
 #ifndef GUARD_JAMTEMPLATE_STATE_INVENTORY_HPP
 #define GUARD_JAMTEMPLATE_STATE_INVENTORY_HPP
 
+#include "character_sheet_imgui.hpp"
 #include "game_state.hpp"
 #include "inventory_interface.hpp"
 #include "item_repository.hpp"
@@ -19,6 +20,8 @@ class StateInventory : public jt::GameState {
 
     // would normally be owned by a player object
     std::shared_ptr<InventoryInterface> m_inventory;
+    std::shared_ptr<CharacterSheetImgui> m_charSheet;
+
     std::shared_ptr<ItemRepository> m_itemRepository;
     std::shared_ptr<jt::ObjectGroup<WorldItem>> m_worldItems;
     void createItemRepository();
