@@ -20,6 +20,9 @@ void StateInventory::doInternalCreate()
     m_inventory->addItem("item_crystal_blue_01");
     m_inventory->addItem("item_crystal_blue_01");
 
+    m_charSheet = std::make_shared<CharacterSheetImgui>(m_itemRepository);
+    add(m_charSheet);
+
     setAutoDraw(false);
 
     float const scrollSpeed = 170.0f;
