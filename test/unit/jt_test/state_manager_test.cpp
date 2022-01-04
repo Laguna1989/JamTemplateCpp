@@ -19,45 +19,14 @@ TEST(StateManagerTest, InitialNextStateReturnsCorrectImpl)
     ASSERT_EQ(initialState, stateManager.getNextState());
 }
 
-TEST(StateManagerTest, CurrentStateCorrectAfterCheckForGameStateSwitch)
-{
-    auto initialState = std::make_shared<MockState>();
-    jt::StateManager stateManager { initialState };
-
-    auto game = std::make_shared<MockGame>();
-    stateManager.update(game, 0);
-
-    ASSERT_EQ(initialState, stateManager.getCurrentState());
-}
-
-TEST(StateManagerTest, NextStateCorrectAfterCheckForGameStateSwitch)
-{
-    auto initialState = std::make_shared<MockState>();
-    jt::StateManager stateManager { initialState };
-
-    auto game = std::make_shared<MockGame>();
-    stateManager.update(game, 0);
-
-    ASSERT_EQ(nullptr, stateManager.getNextState());
-}
-
 TEST(StateManagerTest, CheckForGameStateSwitchReturnsTrue)
 {
     auto initialState = std::make_shared<MockState>();
     jt::StateManager stateManager { initialState };
 
     auto game = std::make_shared<MockGame>();
-    ASSERT_TRUE(stateManager.update(game, 0));
-}
-
-TEST(StateManagerTest, CheckForGameStateSwitchReturnsFalseWhenCalledASecondTime)
-{
-    auto initialState = std::make_shared<MockState>();
-    jt::StateManager stateManager { initialState };
-
-    auto game = std::make_shared<MockGame>();
-    stateManager.update(game, 0);
-    ASSERT_FALSE(stateManager.update(game, 0));
+    // Note: Throw because of window being a default constructed object.
+    ASSERT_ANY_THROW(stateManager.update(game, 0.0f));
 }
 
 TEST(StateManagerTest, SwitchToNullptrStateThrows)

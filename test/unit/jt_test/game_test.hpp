@@ -43,7 +43,9 @@ public:
 
         state = std::make_shared<MockState>();
         ON_CALL(stateManager, getCurrentState).WillByDefault(::testing::Return(state));
-
+        ON_CALL(stateManager, update)
+            .WillByDefault(
+                ::testing::Invoke([this](auto ptr, auto elapsed) { state->update(elapsed); }));
         g = std::make_shared<jt::Game>(
             gfx, input, musicPlayer, stateManager, logger, actionCommandManager);
         state->setGameInstance(g);

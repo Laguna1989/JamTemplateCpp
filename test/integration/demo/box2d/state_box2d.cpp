@@ -7,6 +7,7 @@
 #include "lerp.hpp"
 #include "movement_object.hpp"
 #include "random/random.hpp"
+#include "state_manager/state_manager_transition_horizontal_bars.hpp"
 #include "tweens/tween_rotation.hpp"
 #include "tweens/tween_scale.hpp"
 
@@ -23,6 +24,10 @@ void StateBox2d::doInternalCreate()
     m_bar2 = std::make_shared<jt::Bar>(100.0f, 10.0f, true, getGame()->gfx().textureManager());
     m_bar2->setPosition(jt::Vector2f { 10, 25 });
     m_bar2->setMaxValue(2.0f);
+
+    getGame()->getStateManager().setTransition(
+        std::make_shared<jt::StateManagerTransitionHorizontalBars>(
+            jt::Vector2f { 400, 25 }, 12, 0.75f, getGame()->gfx().textureManager()));
 }
 
 void StateBox2d::doInternalUpdate(float const elapsed)

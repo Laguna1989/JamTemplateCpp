@@ -14,7 +14,6 @@ public:
     virtual bool triggerStateChange() = 0;
     virtual void update(float elapsed) = 0;
     virtual void draw(std::shared_ptr<RenderTarget> rt) = 0;
-    virtual void reset() = 0;
 };
 
 } // namespace jt

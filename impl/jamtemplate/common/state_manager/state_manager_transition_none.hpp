@@ -12,7 +12,6 @@ public:
     void update(float elapsed) override;
     void draw(std::shared_ptr<RenderTarget> rt) override;
     bool triggerStateChange() override;
-    void reset() override;
 
 private:
     bool m_triggerdStateChange { false };
