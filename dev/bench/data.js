@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1641151057222,
+  "lastUpdate": 1641329201778,
   "repoUrl": "https://github.com/Laguna1989/JamTemplateCpp",
   "entries": {
     "Benchmark": [
@@ -2880,6 +2880,42 @@ window.BENCHMARK_DATA = {
             "value": 3.8475739613258826,
             "unit": "ms/iter",
             "extra": "iterations: 181\ncpu: 3.8470999999999984 ms\nthreads: 1"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "laguna.ws@gmail.com",
+            "name": "Simon Weis",
+            "username": "Laguna1989"
+          },
+          "committer": {
+            "email": "laguna.ws@gmail.com",
+            "name": "Simon Weis",
+            "username": "Laguna1989"
+          },
+          "distinct": true,
+          "id": "e03f9fe40c4cf44961c791e62ac5aa1865562c75",
+          "message": "Fix unit tests and add second transition",
+          "timestamp": "2022-01-04T21:44:05+01:00",
+          "tree_id": "c7f3fbe97ade06b7ded78658b0b867dc27246c25",
+          "url": "https://github.com/Laguna1989/JamTemplateCpp/commit/e03f9fe40c4cf44961c791e62ac5aa1865562c75"
+        },
+        "date": 1641329200530,
+        "tool": "googlecpp",
+        "benches": [
+          {
+            "name": "BM_StartGame",
+            "value": 0.0022875578726303607,
+            "unit": "ms/iter",
+            "extra": "iterations: 305222\ncpu: 0.0022872315888107673 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GamestateWithTweeningShapes",
+            "value": 3.1977137260274207,
+            "unit": "ms/iter",
+            "extra": "iterations: 219\ncpu: 3.197452054794522 ms\nthreads: 1"
           }
         ]
       }
