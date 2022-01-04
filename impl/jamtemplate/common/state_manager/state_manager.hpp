@@ -17,11 +17,19 @@ public:
 
     void switchState(std::shared_ptr<GameState> newState) override;
 
-    bool checkAndPerformSwitchState(std::weak_ptr<GameInterface> gameInstance) override;
+    void update(std::weak_ptr<GameInterface> gameInstance, float elapsed) override;
+
+    void draw(std::shared_ptr<RenderTarget> rt) override;
+
+    void setTransition(std::shared_ptr<StateManagerTransitionInterface> transition) override;
+
+    std::shared_ptr<StateManagerTransitionInterface> getTransition();
 
 private:
     std::shared_ptr<GameState> m_state { nullptr };
     std::shared_ptr<GameState> m_nextState { nullptr };
+    std::shared_ptr<StateManagerTransitionInterface> m_transition { nullptr };
+    bool m_updatedOnce { false };
 
     void doSwitchState(std::weak_ptr<GameInterface> gameInstace);
 };

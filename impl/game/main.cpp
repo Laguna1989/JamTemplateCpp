@@ -13,7 +13,7 @@
 #include "music_player.hpp"
 #include "random/random.hpp"
 #include "render_window.hpp"
-#include "state_manager.hpp"
+#include "state_manager/state_manager.hpp"
 #include "state_menu.hpp"
 #include <memory>
 

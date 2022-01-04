@@ -4,6 +4,7 @@
 #include "nlohmann.hpp"
 #include "rect.hpp"
 #include "vector.hpp"
+#include <optional>
 #include <string>
 
 struct ArmorInfo {
@@ -22,7 +23,7 @@ struct ItemReference {
     float value { 0.0f };
     float weight { 1.0f };
     std::string equipSlot { "" };
-    ArmorInfo armor;
+    std::optional<ArmorInfo> armor;
 };
 
 bool operator<(ItemReference const& lhs, ItemReference const& rhs);

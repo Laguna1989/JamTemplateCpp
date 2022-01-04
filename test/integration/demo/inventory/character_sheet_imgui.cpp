@@ -28,7 +28,11 @@ void CharacterSheetImgui::doDraw() const
     int totalResistanceFire = 0;
     auto itemRepository = m_repository.lock();
     for (auto const& itemRef : m_equippedItems) {
-        auto const armor = itemRepository->getItemReferenceFromString(itemRef)->armor;
+        auto const armor_optional = itemRepository->getItemReferenceFromString(itemRef)->armor;
+        if (!armor_optional.has_value()) {
+            continue;
+        }
+        auto const armor = armor_optional.value();
         totalarmor += armor.armor;
         totalResistanceFire += armor.resistanceFire;
         totalResistanceElectric += armor.resistanceElectric;

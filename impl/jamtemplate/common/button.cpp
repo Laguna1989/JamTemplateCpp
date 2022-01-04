@@ -78,11 +78,11 @@ bool Button::isOver(jt::Vector2f const& mousePosition)
 
 void Button::doUpdate(float elapsed)
 {
-    m_background->update(elapsed);
+    m_disabledOverlay->setPosition((m_pos));
     m_disabledOverlay->update(elapsed);
 
-    m_disabledOverlay->setPosition((m_pos));
     m_background->setPosition(m_pos);
+    m_background->update(elapsed);
 
     if (m_drawable) {
         m_drawable->setPosition(m_pos);

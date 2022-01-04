@@ -9,7 +9,7 @@
 #include "music_player_interface.hpp"
 #include "render_target.hpp"
 #include "render_window_interface.hpp"
-#include "state_manager_interface.hpp"
+#include "state_manager/state_manager_interface.hpp"
 #include <memory>
 
 namespace jt {

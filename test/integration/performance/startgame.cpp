@@ -8,7 +8,7 @@
 #include "music_player_null.hpp"
 #include "render_window_null.hpp"
 #include "shape.hpp"
-#include "state_manager.hpp"
+#include "state_manager/state_manager.hpp"
 #include "tweens/tween_color.hpp"
 #include <benchmark/benchmark.h>
 #include <memory>
@@ -41,7 +41,7 @@ static void BM_StartGame(benchmark::State& state)
         jt::ActionCommandManager actionCommandManager { logger };
         auto game = std::make_shared<jt::Game>(
             gfx, input, music, stateManager, logger, actionCommandManager);
-        stateManager.checkAndPerformSwitchState(game);
+        stateManager.update(game, 0);
         game->update(0.02f);
         game->draw();
     }

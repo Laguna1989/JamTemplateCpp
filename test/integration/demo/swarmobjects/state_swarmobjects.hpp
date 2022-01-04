@@ -12,7 +12,6 @@ public:
     std::string getName() const override;
 
 private:
-    jt::Shape::Sptr m_overlay;
     jt::Shape::Sptr m_sky;
 
     jt::ObjectGroup<SwarmObject>::Sptr m_SwarmObjects;

@@ -18,7 +18,6 @@ void GameBase::runOneFrame()
 {
     m_logger.verbose("runOneFrame", { "jt" });
     m_actionCommandManager.update();
-    m_stateManager.checkAndPerformSwitchState(getPtr());
 
     auto const now = std::chrono::steady_clock::now();
 
@@ -62,7 +61,7 @@ ActionCommandManagerInterface& GameBase::getActionCommandManager()
 void GameBase::doUpdate(float const elapsed)
 {
     m_logger.verbose("update game, elapsed=" + std::to_string(elapsed), { "jt" });
-    getStateManager().getCurrentState()->update(elapsed);
+    m_stateManager.update(getPtr(), elapsed);
     gfx().update(elapsed);
 
     jt::Vector2f const mpf = gfx().window().getMousePosition() / gfx().camera().getZoom();
@@ -77,7 +76,7 @@ void GameBase::doDraw() const
     m_logger.verbose("draw game", { "jt" });
 
     gfx().clear();
-    m_stateManager.getCurrentState()->draw();
+    m_stateManager.draw(gfx().target());
     gfx().display();
 }
 

@@ -4,6 +4,7 @@
 #include "game_interface.hpp"
 #include "input/input_manager.hpp"
 #include "math_helper.hpp"
+#include "state_manager/state_manager_transition_fade_to_black.hpp"
 #include "timer.hpp"
 #include "tweens/tween_alpha.hpp"
 #include <vector>
@@ -16,13 +17,6 @@ void StateSwarmObjects::doInternalCreate()
     m_sky = jt::dh::createShapeRect(
         jt::Vector2f { 400, 300 }, jt::Color { 178, 255, 255 }, getGame()->gfx().textureManager());
 
-    m_overlay = jt::dh::createShapeRect(
-        jt::Vector2f { 400, 300 }, jt::colors::Black, getGame()->gfx().textureManager());
-    m_overlay->update(0.0f);
-
-    auto tw = TweenAlpha::create(m_overlay, 0.5f, std::uint8_t { 255 }, std::uint8_t { 0 });
-    add(tw);
-
     m_SwarmObjects = std::make_shared<jt::ObjectGroup<SwarmObject>>();
     add(m_SwarmObjects);
     for (int i = 0; i != 50; ++i) {
@@ -34,6 +28,10 @@ void StateSwarmObjects::doInternalCreate()
     m_sky->update(0.0f);
 
     setAutoDraw(false);
+
+    getGame()->getStateManager().setTransition(
+        std::make_shared<jt::StateManagerTransitionFadeToBlack>(
+            jt::Vector2f { 400.0f, 300.0f }, getGame()->gfx().textureManager()));
 }
 
 void StateSwarmObjects::doInternalUpdate(float const elapsed)
@@ -42,8 +40,6 @@ void StateSwarmObjects::doInternalUpdate(float const elapsed)
         || getGame()->input().keyboard()->justPressed(jt::KeyCode::Escape)) {
         getGame()->getStateManager().switchState(std::make_shared<StateSelect>());
     }
-
-    m_overlay->update(elapsed);
 
     updateSwarm();
 }
@@ -109,7 +105,6 @@ void StateSwarmObjects::doInternalDraw() const
 {
     drawSky();
     drawObjects();
-    m_overlay->draw(getGame()->gfx().target());
 }
 
 void StateSwarmObjects::drawSky() const { m_sky->draw(getGame()->gfx().target()); }

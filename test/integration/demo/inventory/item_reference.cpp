@@ -1,4 +1,5 @@
 #include "item_reference.hpp"
+#include <utility>
 
 bool operator<(ItemReference const& lhs, ItemReference const& rhs)
 {
@@ -49,7 +50,8 @@ void from_json(nlohmann::json const& j, ItemReference& item)
     if (j.count("equipSlot") != 0) {
         j.at("equipSlot").get_to(item.equipSlot);
         if (j.count("armor") != 0) {
-            j.at("armor").get_to(item.armor);
+            item.armor = ArmorInfo {};
+            j.at("armor").get_to(item.armor.value());
         }
     }
 }
