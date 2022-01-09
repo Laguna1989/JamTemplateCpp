@@ -50,6 +50,7 @@ endif ()
 
 ## get externals
 #####################################################
+set(FETCHCONTENT_UPDATES_DISCONNECTED ON)
 add_subdirectory(ext)
 
 ## Other variables and compiler setup II
