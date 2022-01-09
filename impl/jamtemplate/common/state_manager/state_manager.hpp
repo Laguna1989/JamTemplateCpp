@@ -31,7 +31,7 @@ private:
     std::shared_ptr<StateManagerTransitionInterface> m_transition { nullptr };
     bool m_updatedOnce { false };
 
-    void doSwitchState(std::weak_ptr<GameInterface> gameInstace);
+    void doSwitchState(std::weak_ptr<GameInterface> gameInstance);
 };
 } // namespace jt
 
