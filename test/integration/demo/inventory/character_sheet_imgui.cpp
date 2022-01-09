@@ -21,7 +21,7 @@ void CharacterSheetImgui::doDraw() const
     ImGui::SetNextWindowPos(ImVec2 { 0, 0 });
 
     ImGui::SetNextWindowSize(ImVec2 { 400, 600 });
-    ImGui::Begin("Character", &m_drawCharacterSheet);
+    ImGui::Begin("PlayerCharacter", &m_drawCharacterSheet);
 
     int totalarmor = 0;
     int totalResistanceElectric = 0;
