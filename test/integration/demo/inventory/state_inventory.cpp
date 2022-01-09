@@ -14,14 +14,8 @@ void StateInventory::doInternalCreate()
 
     createWorldItems();
 
-    auto inventory = std::make_shared<InventoryListImgui>(m_itemRepository);
-    add(inventory);
-    m_inventory = std::move(inventory);
-    m_inventory->addItem("item_crystal_blue_01");
-    m_inventory->addItem("item_crystal_blue_01");
-
-    m_charSheet = std::make_shared<CharacterSheetImgui>(m_itemRepository);
-    add(m_charSheet);
+    m_player = std::make_shared<PlayerCharacter>(m_itemRepository);
+    add(m_player);
 
     setAutoDraw(false);
 
@@ -90,9 +84,8 @@ void StateInventory::doInternalUpdate(float elapsed)
     m_tileLayerOverlay->update(elapsed);
 
     pickupItems();
-    m_charSheet->setEquippedItems(m_inventory->getEquippedItems());
 
-    std::string const& itemToSpawn = m_inventory->getAndResetItemToSpawn();
+    std::string const& itemToSpawn = m_player->getInventory()->getAndResetItemToSpawn();
     if (itemToSpawn != "") {
         auto const px = jt::Random::getInt(2, 8);
         auto const py = jt::Random::getInt(2, 8);
@@ -120,7 +113,7 @@ void StateInventory::pickupItems()
             bool const overlapsX = mp.x > bounds.left && mp.x < bounds.left + bounds.width;
             bool const overlapsY = mp.y > bounds.top && mp.y < bounds.top + bounds.height;
             if (overlapsX && overlapsY) {
-                m_inventory->addItem(item.lock()->getRefId());
+                m_player->getInventory()->addItem(item.lock()->getRefId());
                 item.lock()->kill();
             }
         }
@@ -130,6 +123,7 @@ void StateInventory::pickupItems()
 void StateInventory::doInternalDraw() const
 {
     m_tileLayerGround->draw(getGame()->gfx().target());
+
     m_tileLayerOverlay->draw(getGame()->gfx().target());
     drawObjects();
 }
