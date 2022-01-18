@@ -5,4 +5,7 @@ FetchContent_Declare(
         GIT_TAG master
 )
 
+set(OALPP_ENABLE_UNIT_TESTS OFF)
+set(OALPP_ENABLE_INTEGRATION_TESTS OFF)
+
 FetchContent_MakeAvailable(openalpp)
