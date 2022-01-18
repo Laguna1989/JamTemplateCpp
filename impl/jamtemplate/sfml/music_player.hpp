@@ -2,13 +2,16 @@
 #define GUARD_JAMTEMPLATE_MUSICPLAYER_HPP_GUARD
 
 #include "music_player_interface.hpp"
-#include <SFML/Audio.hpp>
+#include "oalpp/sound.hpp"
+#include "oalpp/sound_data.hpp"
 #include <memory>
+#include <optional>
 
 namespace jt {
 
 class MusicPlayer : public jt::MusicPlayerInterface {
 public:
+    explicit MusicPlayer(oalpp::SoundContext const& ctx);
     virtual void playMusic(std::string const& fileName) override;
     virtual void stopMusic() override;
     // range: 0.0f to 100.0f
@@ -18,7 +21,11 @@ public:
 
 private:
     std::string m_musicFileName;
-    std::shared_ptr<sf::Music> m_music;
+    // can be optional, once oalpp sound supports copy construction
+    std::shared_ptr<oalpp::Sound> m_music;
+    std::optional<oalpp::SoundData> m_buffer;
+
+    oalpp::SoundContext const& m_ctx;
 };
 
 } // namespace jt

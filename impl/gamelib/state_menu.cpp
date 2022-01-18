@@ -26,6 +26,8 @@ void StateMenu::doInternalCreate()
     createTweens();
 
     add(std::make_shared<jt::LicenseInfo>());
+
+    getGame()->getMusicPlayer().playMusic("assets/looping_stereo_track.mp3");
 }
 
 void StateMenu::createVignette()

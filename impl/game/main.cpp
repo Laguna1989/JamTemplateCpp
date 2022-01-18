@@ -31,6 +31,8 @@ int main()
 {
     hideConsoleInRelease();
     oalpp::SoundContext ctx;
+    oalpp::SoundData musicBuffer { "assets/looping_stereo_track.mp3" };
+    oalpp::Sound music { musicBuffer, ctx };
 
     jt::Random::useTimeAsRandomSeed();
 
@@ -42,7 +44,7 @@ int main()
     auto const keyboard = std::make_shared<jt::KeyboardInput>();
     jt::InputManager input { mouse, keyboard };
 
-    jt::MusicPlayer musicPlayer;
+    jt::MusicPlayer musicPlayer { ctx };
     jt::StateManager stateManager { std::make_shared<StateMenu>() };
     jt::Logger logger;
     jt::createDefaultLogTargets(logger);

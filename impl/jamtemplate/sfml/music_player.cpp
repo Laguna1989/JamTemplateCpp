@@ -2,20 +2,25 @@
 
 namespace jt {
 
+MusicPlayer::MusicPlayer(oalpp::SoundContext const& ctx)
+    : m_ctx { ctx }
+{
+}
+
 void MusicPlayer::playMusic(std::string const& fileName)
 {
     m_musicFileName = fileName;
-    m_music = std::make_shared<sf::Music>();
-    m_music->openFromFile(fileName);
+
+    m_buffer = oalpp::SoundData { fileName };
+
+    m_music = std::make_shared<oalpp::Sound>(m_buffer.value(), m_ctx);
+    m_music->setIsLooping(true);
     m_music->play();
-    m_music->setLoop(true);
 }
 
 void MusicPlayer::stopMusic()
 {
-    if (m_music) {
-        m_music->stop();
-    }
+    // TODO implement once oalpp supports stop
 }
 void MusicPlayer::setMusicVolume(float v)
 {
