@@ -31,8 +31,6 @@ int main()
 {
     hideConsoleInRelease();
     oalpp::SoundContext ctx;
-    oalpp::SoundData musicBuffer { "assets/looping_stereo_track.mp3" };
-    oalpp::Sound music { musicBuffer, ctx };
 
     jt::Random::useTimeAsRandomSeed();
 
