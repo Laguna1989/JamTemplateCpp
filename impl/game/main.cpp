@@ -13,6 +13,7 @@
 #include "music_player.hpp"
 #include "random/random.hpp"
 #include "render_window.hpp"
+#include "sound_context.hpp"
 #include "state_manager/state_manager.hpp"
 #include "state_menu.hpp"
 #include <memory>
@@ -29,6 +30,7 @@ void gameloop()
 int main()
 {
     hideConsoleInRelease();
+    oalpp::SoundContext ctx;
 
     jt::Random::useTimeAsRandomSeed();
 

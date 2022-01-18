@@ -12,6 +12,7 @@ target_include_directories(JamTemplate PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/common
 target_include_directories(JamTemplate SYSTEM PUBLIC ${tileson_SOURCE_DIR}/include)
 
 FetchContent_GetProperties(tileson)
+FetchContent_GetProperties(openalpp)
 target_include_directories(JamTemplate PUBLIC ${tileson_SOURCE_DIR}/extras/)
 
 if (USE_SFML)
@@ -22,7 +23,7 @@ if (USE_SFML)
             sfml-system
             sfml-window
             sfml-graphics
-            sfml-audio
+            OpenALpp_Lib
             )
 
     target_link_libraries(JamTemplate
@@ -40,7 +41,7 @@ else ()
 
         target_link_libraries(JamTemplate
                 ${SDL2_LIBRARIES}
-                PkgConfig::SDL2_Mixer
+                OpenALpp_Lib
                 PkgConfig::SDL2_Image
                 PkgConfig::SDL2_TTF
                 )

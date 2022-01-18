@@ -2,6 +2,7 @@ message(STATUS "Add FetchContent")
 include(FetchContent)
 
 message(STATUS "Fetching external libraries started")
+add_subdirectory(openalpp)
 add_subdirectory(tileson)
 add_subdirectory(range-v3)
 add_subdirectory(box2d)
