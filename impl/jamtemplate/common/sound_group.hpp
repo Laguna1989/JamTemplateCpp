@@ -1,39 +1,44 @@
 ﻿#ifndef JAMTEMPLATE_SOUNDGROUP_HPP_GUARD
 #define JAMTEMPLATE_SOUNDGROUP_HPP_GUARD
 
-#include "sound_base.hpp"
+#include "sound_interface.hpp"
 #include <memory>
+#include <string>
 #include <vector>
 
+namespace oalpp {
+class SoundContext;
+}
+
 namespace jt {
-class SoundGroup : public SoundBase {
+class SoundGroup : public SoundInterface {
 public:
     /// Constructor
     SoundGroup() = default;
 
     /// Constructor
     /// \param sounds list of filepaths to load
-    explicit SoundGroup(std::vector<std::string> const& sounds);
+    explicit SoundGroup(std::vector<std::string> const& sounds, oalpp::SoundContext const& ctx);
 
 private:
-    std::vector<std::shared_ptr<SoundBase>> m_sounds {};
+    std::vector<std::shared_ptr<SoundInterface>> m_sounds {};
 
-    virtual void doLoad(std::string const& fileName) override;
-    virtual bool doIsPlaying() const override;
+    void addSound(std::string const& fileName, oalpp::SoundContext const& ctx);
+    bool isPlaying() const override;
 
-    virtual void doPlay() override;
-    virtual void doStop() override;
+    void play() override;
+    void stop() override;
 
-    virtual float doGetVolume() const override;
-    virtual void doSetVolume(float newVolume) override;
+    float getVolume() const override;
+    void setVolume(float newVolume) override;
 
-    virtual void doSetLoop(bool doLoop) override;
-    virtual bool doGetLoop(void) override;
+    void setLoop(bool doLoop) override;
+    bool getLoop(void) override;
 
     // not implemented correctly
-    virtual float doGetDuration() const override;
+    float getDuration() const override;
     // not implemented correctly
-    virtual float doGetPosition() const override;
+    float getPosition() const override;
 };
 } // namespace jt
 #endif

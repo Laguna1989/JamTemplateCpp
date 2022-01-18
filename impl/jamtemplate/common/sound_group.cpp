@@ -3,35 +3,26 @@
 #include "sound.hpp"
 #include <algorithm>
 
-namespace {
-std::shared_ptr<jt::Sound> loadSound(std::string const& filename)
-{
-    auto snd = std::make_shared<jt::Sound>();
-    snd->load(filename);
-    return snd;
-}
-} // namespace
 
-jt::SoundGroup::SoundGroup(std::vector<std::string> const& sounds)
+jt::SoundGroup::SoundGroup(std::vector<std::string> const& sounds, oalpp::SoundContext const& ctx)
 {
     for (auto const& f : sounds) {
-        m_sounds.emplace_back(loadSound(f));
+        m_sounds.emplace_back(std::make_shared<jt::Sound>(f, ctx));
     }
-    m_isInitialized = true;
 }
 
-void jt::SoundGroup::doLoad(std::string const& fileName)
+void jt::SoundGroup::addSound(std::string const& fileName, oalpp::SoundContext const& ctx)
 {
-    m_sounds.emplace_back(loadSound(fileName));
+    m_sounds.emplace_back(std::make_shared<jt::Sound>(fileName, ctx));
 }
 
-bool jt::SoundGroup::doIsPlaying() const
+bool jt::SoundGroup::isPlaying() const
 {
-    return std::any_of(m_sounds.cbegin(), m_sounds.cend(),
-        [](std::shared_ptr<SoundBase> const& snd) { return snd->isPlaying(); });
+    return std::any_of(
+        m_sounds.cbegin(), m_sounds.cend(), [](auto const& snd) { return snd->isPlaying(); });
 }
 
-void jt::SoundGroup::doPlay()
+void jt::SoundGroup::play()
 {
     if (m_sounds.empty()) {
         return;
@@ -41,14 +32,14 @@ void jt::SoundGroup::doPlay()
     m_sounds.at(index)->play();
 }
 
-void jt::SoundGroup::doStop()
+void jt::SoundGroup::stop()
 {
     for (auto& snd : m_sounds) {
         snd->stop();
     }
 }
 
-float jt::SoundGroup::doGetVolume() const
+float jt::SoundGroup::getVolume() const
 {
     if (m_sounds.empty()) {
         return 0.0f;
@@ -56,21 +47,21 @@ float jt::SoundGroup::doGetVolume() const
     return m_sounds.at(0)->getVolume();
 }
 
-void jt::SoundGroup::doSetVolume(float newVolume)
+void jt::SoundGroup::setVolume(float newVolume)
 {
     for (auto& snd : m_sounds) {
         snd->setVolume(newVolume);
     }
 }
 
-void jt::SoundGroup::doSetLoop(bool doLoop)
+void jt::SoundGroup::setLoop(bool doLoop)
 {
     for (auto& snd : m_sounds) {
         snd->setLoop(doLoop);
     }
 }
 
-bool jt::SoundGroup::doGetLoop()
+bool jt::SoundGroup::getLoop()
 {
     if (m_sounds.empty()) {
         return false;
@@ -78,6 +69,6 @@ bool jt::SoundGroup::doGetLoop()
     return m_sounds.at(0)->getLoop();
 }
 
-float jt::SoundGroup::doGetDuration() const { return 0.0f; }
+float jt::SoundGroup::getDuration() const { return 0.0f; }
 
-float jt::SoundGroup::doGetPosition() const { return 0.0f; }
+float jt::SoundGroup::getPosition() const { return 0.0f; }
