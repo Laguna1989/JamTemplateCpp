@@ -29,6 +29,9 @@ public:
     /// \return the filepath
     virtual std::string getMusicFilePath() = 0;
 
+    /// update the music
+    virtual void update() = 0;
+
     const float MaxVolume { 100.0f };
 };
 

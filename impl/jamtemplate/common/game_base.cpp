@@ -62,6 +62,7 @@ void GameBase::doUpdate(float const elapsed)
 {
     m_logger.verbose("update game, elapsed=" + std::to_string(elapsed), { "jt" });
     m_stateManager.update(getPtr(), elapsed);
+    m_musicPlayer.update();
     gfx().update(elapsed);
 
     jt::Vector2f const mpf = gfx().window().getMousePosition() / gfx().camera().getZoom();

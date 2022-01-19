@@ -18,6 +18,7 @@ public:
     virtual void setMusicVolume(float v) override;
     virtual float getMusicVolume() override;
     virtual std::string getMusicFilePath() override;
+    void update() override;
 
 private:
     std::string m_musicFileName;

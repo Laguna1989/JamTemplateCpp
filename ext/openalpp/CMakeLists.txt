@@ -7,5 +7,6 @@ FetchContent_Declare(
 
 set(OALPP_ENABLE_UNIT_TESTS OFF)
 set(OALPP_ENABLE_INTEGRATION_TESTS OFF)
+set(OALPP_STATIC_LIBRARY ON)
 
 FetchContent_MakeAvailable(openalpp)

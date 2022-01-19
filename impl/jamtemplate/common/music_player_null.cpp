@@ -5,3 +5,4 @@ void jt::MusicPlayerNull::stopMusic() { }
 void jt::MusicPlayerNull::setMusicVolume(float v) { m_volume = v; }
 float jt::MusicPlayerNull::getMusicVolume() { return m_volume; }
 std::string jt::MusicPlayerNull::getMusicFilePath() { return m_filename; }
+void jt::MusicPlayerNull::update() { }

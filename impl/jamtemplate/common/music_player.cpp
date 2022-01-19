@@ -14,6 +14,7 @@ void MusicPlayer::playMusic(std::string const& fileName)
     m_buffer = oalpp::SoundData { fileName };
 
     m_music = std::make_shared<oalpp::Sound>(m_buffer.value(), m_ctx);
+
     m_music->setIsLooping(true);
     m_music->play();
 }
@@ -38,5 +39,7 @@ float MusicPlayer::getMusicVolume()
 }
 
 std::string MusicPlayer::getMusicFilePath() { return m_musicFileName; }
+
+void MusicPlayer::update() { m_music->update(); }
 
 } // namespace jt

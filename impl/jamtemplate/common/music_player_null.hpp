@@ -11,6 +11,7 @@ public:
     void setMusicVolume(float v) override;
     float getMusicVolume() override;
     std::string getMusicFilePath() override;
+    void update() override;
 
 private:
     std::string m_filename { "" };
