@@ -1,7 +1,5 @@
-
 #include "afx_impl.hpp"
 #include "sound.hpp"
-#include <string>
 
 namespace jt {
 std::shared_ptr<SoundInterface> AfxImpl::createSound(std::string const& fileName)
