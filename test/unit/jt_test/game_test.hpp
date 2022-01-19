@@ -11,7 +11,7 @@
 #include "mocks/mock_state.hpp"
 #include "mocks/mock_state_manager.hpp"
 #include "mocks/mock_window.hpp"
-#include "music_player_null.hpp"
+#include "audio/music_player_null.hpp"
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 

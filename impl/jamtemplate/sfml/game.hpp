@@ -13,11 +13,11 @@ public:
     /// Constructor. Will mostly delegate things towards game_base
     /// \param gfx graphics context
     /// \param input input
-    /// \param musicPlayer music player
+    /// \param afx audio context
     /// \param stateManager state manager
     /// \param logger logger
     /// \param actionCommandManager action command manager
-    Game(GfxInterface& gfx, InputManagerInterface& input, MusicPlayerInterface& musicPlayer,
+    Game(GfxInterface& gfx, InputManagerInterface& input, AfxInterface& afx,
         StateManagerInterface& stateManager, LoggerInterface& logger,
         ActionCommandManagerInterface& actionCommandManager);
 

@@ -5,7 +5,7 @@
 #include "gfx_null.hpp"
 #include "input/input_manager_null.hpp"
 #include "logging/logger_null.hpp"
-#include "music_player_null.hpp"
+#include "audio/music_player_null.hpp"
 #include "render_window_null.hpp"
 #include "shape.hpp"
 #include "state_manager/state_manager.hpp"

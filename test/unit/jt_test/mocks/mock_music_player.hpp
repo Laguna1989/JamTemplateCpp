@@ -1,7 +1,7 @@
 #ifndef GUARD_JAMTEMPLATE_MOCK_MUSIC_PLAYER_HPP
 #define GUARD_JAMTEMPLATE_MOCK_MUSIC_PLAYER_HPP
 
-#include "music_player_interface.hpp"
+#include "audio/music_player_interface.hpp"
 #include <gmock/gmock.h>
 
 class MockMusicPlayer : public jt::MusicPlayerInterface {

@@ -71,7 +71,7 @@ TEST_F(GameTest, StartGameWithOneIteration)
 TEST_F(GameTest, GetMusicPlayer)
 {
     // compare by address if the correct entry is returend.
-    ASSERT_EQ(&g->getMusicPlayer(), &musicPlayer);
+    ASSERT_EQ(&g->afx(), &musicPlayer);
 }
 
 TEST_F(GameTest, GameRunWithStateThrowingStdException)

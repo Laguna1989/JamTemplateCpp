@@ -1,4 +1,4 @@
-#include "music_player.hpp"
+#include "audio/music_player.hpp"
 #include <gtest/gtest.h>
 
 TEST(MusicPlayerTest, InitialVolume)

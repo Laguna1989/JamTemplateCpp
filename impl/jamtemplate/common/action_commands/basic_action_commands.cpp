@@ -94,43 +94,47 @@ void addCommandTextureManager(std::shared_ptr<GameBase>& game)
 
 void addCommandsMusicPlayer(std::shared_ptr<GameBase>& game)
 {
-    game->storeActionCommand(game->getActionCommandManager().registerTemporaryCommand("music.stop",
-        [&logger = game->getLogger(), &player = game->getMusicPlayer()](
-            auto /*args*/) { player.stopMusic(); }));
 
-    game->storeActionCommand(game->getActionCommandManager().registerTemporaryCommand("music.mute",
-        [&logger = game->getLogger(), &player = game->getMusicPlayer()](
-            auto /*args*/) { player.setMusicVolume(0); }));
+    // TODO create new commands for new afx interface
+    //    game->storeActionCommand(game->getActionCommandManager().registerTemporaryCommand(
+    //        "music.stop", [&logger = game->getLogger(), &player = game->afx()](auto /*args*/) {
+    //            player.stopMusic();
+    //        }));
 
-    game->storeActionCommand(game->getActionCommandManager().registerTemporaryCommand(
-        "music.volume", [&logger = game->getLogger(), &player = game->getMusicPlayer()](auto args) {
-            if (args.size() == 0) {
-                logger.action("current volume: "
-                    + jt::MathHelper::floatToStringWithXDigits(player.getMusicVolume(), 2));
-            } else if (args.size() == 1) {
-                auto volume = std::stof(args.at(0));
-                volume = jt::MathHelper::clamp(volume, 0.0f, 100.0f);
-                player.setMusicVolume(volume);
-            } else {
-                logger.error("invalid number of arguments");
-            }
-        }));
-
-    game->storeActionCommand(game->getActionCommandManager().registerTemporaryCommand(
-        "music.play", [&logger = game->getLogger(), &player = game->getMusicPlayer()](auto args) {
-            if (args.size() == 1) {
-                auto track = args.at(0);
-                player.playMusic(track);
-            } else {
-                logger.error("invalid number of arguments");
-            }
-        }));
-
-    game->storeActionCommand(game->getActionCommandManager().registerTemporaryCommand("music.file",
-        [&logger = game->getLogger(), &player = game->getMusicPlayer()](auto /*args*/) {
-            auto const file = player.getMusicFilePath();
-            logger.action("currently playing: '" + file + "'");
-        }));
+    //    game->storeActionCommand(game->getActionCommandManager().registerTemporaryCommand(
+    //        "music.mute", [&logger = game->getLogger(), &player = game->afx()](auto /*args*/) {
+    //            player.setMusicVolume(0);
+    //        }));
+    //
+    //    game->storeActionCommand(game->getActionCommandManager().registerTemporaryCommand(
+    //        "music.volume", [&logger = game->getLogger(), &player = game->afx()](auto args) {
+    //            if (args.size() == 0) {
+    //                logger.action("current volume: "
+    //                    + jt::MathHelper::floatToStringWithXDigits(player.getMusicVolume(), 2));
+    //            } else if (args.size() == 1) {
+    //                auto volume = std::stof(args.at(0));
+    //                volume = jt::MathHelper::clamp(volume, 0.0f, 100.0f);
+    //                player.setMusicVolume(volume);
+    //            } else {
+    //                logger.error("invalid number of arguments");
+    //            }
+    //        }));
+    //
+    //    game->storeActionCommand(game->getActionCommandManager().registerTemporaryCommand(
+    //        "music.play", [&logger = game->getLogger(), &player = game->afx()](auto args) {
+    //            if (args.size() == 1) {
+    //                auto track = args.at(0);
+    //                player.playMusic(track);
+    //            } else {
+    //                logger.error("invalid number of arguments");
+    //            }
+    //        }));
+    //
+    //    game->storeActionCommand(game->getActionCommandManager().registerTemporaryCommand(
+    //        "music.file", [&logger = game->getLogger(), &player = game->afx()](auto /*args*/) {
+    //            auto const file = player.getMusicFilePath();
+    //            logger.action("currently playing: '" + file + "'");
+    //        }));
 }
 
 } // namespace

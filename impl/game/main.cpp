@@ -1,6 +1,8 @@
 ﻿#include "main.hpp"
 #include "action_commands/action_command_manager.hpp"
 #include "action_commands/basic_action_commands.hpp"
+#include "audio/afx_impl.hpp"
+#include "audio/music_player.hpp"
 #include "camera.hpp"
 #include "game.hpp"
 #include "game_properties.hpp"
@@ -10,7 +12,6 @@
 #include "input/mouse_input.hpp"
 #include "logging/default_logging.hpp"
 #include "logging/logger.hpp"
-#include "music_player.hpp"
 #include "oalpp/sound_context.hpp"
 #include "random/random.hpp"
 #include "render_window.hpp"
@@ -30,7 +31,6 @@ void gameloop()
 int main()
 {
     hideConsoleInRelease();
-    oalpp::SoundContext ctx;
 
     jt::Random::useTimeAsRandomSeed();
 
@@ -42,14 +42,14 @@ int main()
     auto const keyboard = std::make_shared<jt::KeyboardInput>();
     jt::InputManager input { mouse, keyboard };
 
-    jt::MusicPlayer musicPlayer { ctx };
+    jt::AfxImpl afx;
+
     jt::StateManager stateManager { std::make_shared<StateMenu>() };
     jt::Logger logger;
     jt::createDefaultLogTargets(logger);
     jt::ActionCommandManager actionCommandManager(logger);
 
-    game = std::make_shared<jt::Game>(
-        gfx, input, musicPlayer, stateManager, logger, actionCommandManager);
+    game = std::make_shared<jt::Game>(gfx, input, afx, stateManager, logger, actionCommandManager);
 
     addBasicActionCommands(game);
     game->startGame(gameloop);

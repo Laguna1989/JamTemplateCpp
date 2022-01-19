@@ -1,5 +1,6 @@
 ﻿#include "action_commands/action_command_manager.hpp"
 #include "action_commands/basic_action_commands.hpp"
+#include "audio/afx_null.hpp"
 #include "camera.hpp"
 #include "game.hpp"
 #include "gfx_impl.hpp"
@@ -8,7 +9,6 @@
 #include "input/mouse_input.hpp"
 #include "logging/default_logging.hpp"
 #include "logging/logger.hpp"
-#include "music_player_null.hpp"
 #include "random/random.hpp"
 #include "render_window.hpp"
 #include "state_manager/state_manager.hpp"
@@ -36,7 +36,7 @@ int main()
     jt::Camera camera { 2.0f };
     jt::GfxImpl gfx { std::move(window), std::move(camera) };
 
-    jt::MusicPlayerNull music_player;
+    jt::AfxNull afx;
 
     jt::StateManager stateManager { std::make_shared<StateSelect>() };
 
@@ -44,8 +44,7 @@ int main()
     jt::createDefaultLogTargets(logger);
     jt::ActionCommandManager actionCommandManager(logger);
 
-    game = std::make_shared<jt::Game>(
-        gfx, input, music_player, stateManager, logger, actionCommandManager);
+    game = std::make_shared<jt::Game>(gfx, input, afx, stateManager, logger, actionCommandManager);
     addBasicActionCommands(game);
 
     game->startGame(gameloop);
