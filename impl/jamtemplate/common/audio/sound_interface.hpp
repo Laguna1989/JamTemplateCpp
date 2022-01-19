@@ -13,7 +13,12 @@ public:
     virtual void play() = 0;
     virtual void stop() = 0;
 
+    /// Get Volume
+    /// \return volume in range 0.0 to 1.0
     virtual float getVolume() const = 0;
+
+    /// Set Volume
+    /// \param newVolume in range 0.0 to 1.0
     virtual void setVolume(float newVolume) = 0;
 
     virtual void setLoop(bool doLoop) = 0;

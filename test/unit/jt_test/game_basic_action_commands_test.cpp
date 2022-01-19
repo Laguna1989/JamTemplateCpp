@@ -64,38 +64,3 @@ TEST_F(BasicActionCommandsWithGame, TextureManagerInfo)
     addBasicActionCommands(g);
     ASSERT_NO_THROW(g->getActionCommandManager().executeCommand("textureManagerInfo"));
 }
-
-TEST_F(BasicActionCommandsWithGame, MusicStop)
-{
-    addBasicActionCommands(g);
-    EXPECT_CALL(musicPlayer, stopMusic());
-    ASSERT_NO_THROW(g->getActionCommandManager().executeCommand("music.stop"));
-}
-
-TEST_F(BasicActionCommandsWithGame, MusicVolumeGet)
-{
-    addBasicActionCommands(g);
-    EXPECT_CALL(musicPlayer, getMusicVolume());
-    ASSERT_NO_THROW(g->getActionCommandManager().executeCommand("music.volume"));
-}
-
-TEST_F(BasicActionCommandsWithGame, MusicVolumeSet)
-{
-    addBasicActionCommands(g);
-    EXPECT_CALL(musicPlayer, setMusicVolume(5.0f));
-    ASSERT_NO_THROW(g->getActionCommandManager().executeCommand("music.volume 5"));
-}
-
-TEST_F(BasicActionCommandsWithGame, MusicPlay)
-{
-    addBasicActionCommands(g);
-    EXPECT_CALL(musicPlayer, playMusic("a"));
-    ASSERT_NO_THROW(g->getActionCommandManager().executeCommand("music.play a"));
-}
-
-TEST_F(BasicActionCommandsWithGame, MusicFile)
-{
-    addBasicActionCommands(g);
-    EXPECT_CALL(musicPlayer, getMusicFilePath());
-    ASSERT_NO_THROW(g->getActionCommandManager().executeCommand("music.file"));
-}

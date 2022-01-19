@@ -4,7 +4,6 @@
 #include "game_interface.hpp"
 #include "logging/logger_null.hpp"
 #include "mock_gfx.hpp"
-#include "audio/music_player_interface.hpp"
 #include "render_window_null.hpp"
 #include <gmock/gmock.h>
 
@@ -19,7 +18,7 @@ public:
     MOCK_METHOD(jt::GfxInterface&, gfx, (), (const, override));
 
     MOCK_METHOD(jt::InputManagerInterface&, input, (), (override));
-    MOCK_METHOD(jt::MusicPlayerInterface&, getMusicPlayer, (), (override));
+    MOCK_METHOD(jt::AfxInterface&, afx, (), (override));
 
     MOCK_METHOD(jt::StateManagerInterface&, getStateManager, (), (override));
 

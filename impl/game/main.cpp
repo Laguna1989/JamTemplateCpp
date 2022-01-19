@@ -2,7 +2,6 @@
 #include "action_commands/action_command_manager.hpp"
 #include "action_commands/basic_action_commands.hpp"
 #include "audio/afx_impl.hpp"
-#include "audio/music_player.hpp"
 #include "camera.hpp"
 #include "game.hpp"
 #include "game_properties.hpp"
