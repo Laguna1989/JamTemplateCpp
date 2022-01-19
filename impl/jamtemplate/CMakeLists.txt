@@ -32,7 +32,8 @@ if (USE_SFML)
 
 else ()
     target_link_libraries(JamTemplate
-            imgui-sdl)
+            imgui-sdl
+            OpenALpp_Lib)
 
     target_include_directories(JamTemplate PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/sdl)
 
