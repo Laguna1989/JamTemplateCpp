@@ -2,7 +2,7 @@
 #define JAMTEMPLATE_UNITTESTS_GAME_TEST_HPP
 
 #include "action_commands/action_command_manager.hpp"
-#include "audio/afx_null.hpp"
+#include "audio/audio_null.hpp"
 #include "game.hpp"
 #include "mocks/mock_camera.hpp"
 #include "mocks/mock_gfx.hpp"
@@ -23,7 +23,7 @@ public:
     jt::TextureManagerImpl textureManager { nullptr };
     MockGfx gfx;
     jt::ActionCommandManager actionCommandManager { logger };
-    jt::AfxNull afx;
+    jt::AudioNull audio;
 
     std::shared_ptr<MockState> state { nullptr };
     ::testing::NiceMock<MockInput> input;
@@ -45,7 +45,8 @@ public:
         ON_CALL(stateManager, update)
             .WillByDefault(
                 ::testing::Invoke([this](auto ptr, auto elapsed) { state->update(elapsed); }));
-        g = std::make_shared<jt::Game>(gfx, input, afx, stateManager, logger, actionCommandManager);
+        g = std::make_shared<jt::Game>(
+            gfx, input, audio, stateManager, logger, actionCommandManager);
         state->setGameInstance(g);
     }
 };

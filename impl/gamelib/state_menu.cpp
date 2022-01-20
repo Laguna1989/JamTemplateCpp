@@ -27,7 +27,7 @@ void StateMenu::doInternalCreate()
 
     add(std::make_shared<jt::LicenseInfo>());
 
-    auto music = getGame()->afx().createSound("assets/looping_stereo_track.mp3");
+    auto music = getGame()->audio().createSound("assets/looping_stereo_track.mp3");
     music->setLoop(true);
     music->play();
 }

@@ -1,10 +1,10 @@
-#ifndef GUARD_JAMTEMPLATE_AFX_NULL_HPP
-#define GUARD_JAMTEMPLATE_AFX_NULL_HPP
+#ifndef GUARD_JAMTEMPLATE_AUDIO_NULL_HPP
+#define GUARD_JAMTEMPLATE_AUDIO_NULL_HPP
 
-#include "afx_interface.hpp"
+#include "audio_interface.hpp"
 
 namespace jt {
-class AfxNull : public AfxInterface {
+class AudioNull : public AudioInterface {
 public:
     std::shared_ptr<SoundInterface> createSound(std::string const& fileName) override;
     void removeSound(std::shared_ptr<SoundInterface> snd) override;
@@ -12,4 +12,4 @@ public:
 };
 } // namespace jt
 
-#endif // GUARD_JAMTEMPLATE_AFX_NULL_HPP
+#endif // GUARD_JAMTEMPLATE_AUDIO_NULL_HPP

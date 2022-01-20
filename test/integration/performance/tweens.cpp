@@ -1,5 +1,5 @@
 #include "action_commands/action_command_manager.hpp"
-#include "audio/afx_null.hpp"
+#include "audio/audio_null.hpp"
 #include "camera.hpp"
 #include "game.hpp"
 #include "game_state.hpp"
@@ -55,13 +55,13 @@ static void BM_GamestateWithTweeningShapes(benchmark::State& state)
     for (auto _ : state) {
         jt::null_objects::GfxNull gfx;
         jt::InputManagerNull input;
-        jt::AfxNull afx;
+        jt::AudioNull audio;
 
         jt::StateManager stateManager { std::make_shared<StateTweenPerformanceTest>() };
         jt::null_objects::LoggerNull logger;
         jt::ActionCommandManager actionCommandManager { logger };
         auto game = std::make_shared<jt::Game>(
-            gfx, input, afx, stateManager, logger, actionCommandManager);
+            gfx, input, audio, stateManager, logger, actionCommandManager);
         game->getStateManager().update(game, 0);
         for (int i = 0; i != 500; ++i) {
             game->update(0.02f);

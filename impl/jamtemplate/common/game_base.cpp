@@ -2,12 +2,12 @@
 
 namespace jt {
 
-GameBase::GameBase(GfxInterface& gfx, InputManagerInterface& input, AfxInterface& afx,
+GameBase::GameBase(GfxInterface& gfx, InputManagerInterface& input, AudioInterface& audio,
     StateManagerInterface& stateManager, LoggerInterface& logger,
     ActionCommandManagerInterface& actionCommandManager)
     : m_gfx { gfx }
     , m_inputManager { input }
-    , m_afx { afx }
+    , m_audio { audio }
     , m_stateManager { stateManager }
     , m_logger { logger }
     , m_actionCommandManager { actionCommandManager }
@@ -47,7 +47,7 @@ GfxInterface& GameBase::gfx() const { return m_gfx; }
 
 InputManagerInterface& GameBase::input() { return m_inputManager; }
 
-AfxInterface& GameBase::afx() { return m_afx; }
+AudioInterface& GameBase::audio() { return m_audio; }
 
 StateManagerInterface& GameBase::getStateManager() { return m_stateManager; }
 
@@ -62,7 +62,7 @@ void GameBase::doUpdate(float const elapsed)
 {
     m_logger.verbose("update game, elapsed=" + std::to_string(elapsed), { "jt" });
     m_stateManager.update(getPtr(), elapsed);
-    m_afx.update();
+    m_audio.update();
     gfx().update(elapsed);
 
     jt::Vector2f const mpf = gfx().window().getMousePosition() / gfx().camera().getZoom();

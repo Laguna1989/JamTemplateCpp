@@ -11,7 +11,7 @@ class GameBase : public GameInterface,
                  public GameObject,
                  public std::enable_shared_from_this<GameBase> {
 public:
-    GameBase(GfxInterface& gfx, InputManagerInterface& input, AfxInterface& afx,
+    GameBase(GfxInterface& gfx, InputManagerInterface& input, AudioInterface& audio,
         StateManagerInterface& stateManager, LoggerInterface& logger,
         ActionCommandManagerInterface& actionCommandManager);
 
@@ -21,7 +21,7 @@ public:
 
     InputManagerInterface& input() override;
 
-    AfxInterface& afx() override;
+    AudioInterface& audio() override;
 
     StateManagerInterface& getStateManager() override;
 
@@ -42,7 +42,7 @@ protected:
 
     InputManagerInterface& m_inputManager;
 
-    AfxInterface& m_afx;
+    AudioInterface& m_audio;
 
     StateManagerInterface& m_stateManager;
 

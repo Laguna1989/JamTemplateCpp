@@ -2,7 +2,7 @@
 #define GUARD_JAMTEMPLATE_GAMEINTERFACE_HPP_GUARD
 
 #include "action_commands/action_command_manager_interface.hpp"
-#include "audio/afx_interface.hpp"
+#include "audio/audio_interface.hpp"
 #include "cam_interface.hpp"
 #include "gfx_interface.hpp"
 #include "input/input_manager_interface.hpp"
@@ -39,7 +39,7 @@ public:
 
     /// Get the music player
     /// \return the music player
-    virtual AfxInterface& afx() = 0;
+    virtual AudioInterface& audio() = 0;
 
     /// Get the State Manager
     /// \return the state manager
