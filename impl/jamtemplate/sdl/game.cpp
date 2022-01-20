@@ -9,21 +9,13 @@
 
 namespace jt {
 
-Game::Game(GfxInterface& gfx, InputManagerInterface& input, MusicPlayerInterface& musicPlayer,
+Game::Game(GfxInterface& gfx, InputManagerInterface& input, AudioInterface& audio,
     StateManagerInterface& stateManager, LoggerInterface& logger,
     ActionCommandManagerInterface& actionCommandManager)
-    : GameBase { gfx, input, musicPlayer, stateManager, logger, actionCommandManager }
+    : GameBase { gfx, input, audio, stateManager, logger, actionCommandManager }
 {
     TTF_Init();
 
-    // important fix for SDL_Mixer: OpenAudio has to be called before Mix_Init,
-    // otherwise ogg is not supported.
-    if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 1024) != 0) {
-        m_logger.fatal("OpenAudio failed", { "jt" });
-    }
-    if (Mix_Init(MIX_INIT_OGG) != 0) {
-        m_logger.fatal("Mix_Init failed", { "jt" });
-    }
     m_logger.debug("Game constructor done", { "jt" });
 }
 

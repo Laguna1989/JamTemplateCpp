@@ -49,6 +49,7 @@ jobs:
         run: |
           cmake \
           -DCMAKE_C_COMPILER_LAUNCHER=ccache -DCMAKE_CXX_COMPILER_LAUNCHER=ccache \
+          -DJT_ENABLE_AUDIO_TESTS=OFF \
           -B ${{github.workspace}}/build .
 
       - name: Build
@@ -149,7 +150,7 @@ jobs:
           version: 9
           platform: x64
 
-      - uses: mymindstorm/setup-emsdk@v9
+      - uses: mymindstorm/setup-emsdk@v11
 
       - uses: actions/checkout@v2
 
