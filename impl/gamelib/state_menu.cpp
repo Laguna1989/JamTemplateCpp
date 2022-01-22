@@ -27,9 +27,7 @@ void StateMenu::doInternalCreate()
 
     add(std::make_shared<jt::LicenseInfo>());
 
-    auto music = getGame()->audio().createSound("assets/looping_stereo_track.mp3");
-    music->setLoop(true);
-    music->play();
+    getGame()->audio().playMusic("assets/looping_stereo_track.mp3");
 }
 
 void StateMenu::createVignette()
