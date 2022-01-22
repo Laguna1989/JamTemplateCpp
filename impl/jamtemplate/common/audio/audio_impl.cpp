@@ -1,5 +1,6 @@
 #include "audio_impl.hpp"
 #include "sound.hpp"
+#include <algorithm>
 
 namespace jt {
 
