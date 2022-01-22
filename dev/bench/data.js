@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1642773031279,
+  "lastUpdate": 1642835876935,
   "repoUrl": "https://github.com/Laguna1989/JamTemplateCpp",
   "entries": {
     "Benchmark": [
@@ -3060,6 +3060,42 @@ window.BENCHMARK_DATA = {
             "value": 3.261329689320374,
             "unit": "ms/iter",
             "extra": "iterations: 206\ncpu: 3.2609451456310676 ms\nthreads: 1"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "laguna_1989@gmx.net",
+            "name": "Laguna1989",
+            "username": "Laguna1989"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "cc3798044d3a2844555c4f777cea221ff7b1443f",
+          "message": "Merge pull request #135 from Laguna1989/FEATURE_SoundFeatures\n\nAdd stop command and clean up stored sounds",
+          "timestamp": "2022-01-22T08:15:01+01:00",
+          "tree_id": "b411d00d4b884e96c0fedf65a0f666307036f434",
+          "url": "https://github.com/Laguna1989/JamTemplateCpp/commit/cc3798044d3a2844555c4f777cea221ff7b1443f"
+        },
+        "date": 1642835876414,
+        "tool": "googlecpp",
+        "benches": [
+          {
+            "name": "BM_StartGame",
+            "value": 0.0028383892709180725,
+            "unit": "ms/iter",
+            "extra": "iterations: 258270\ncpu: 0.002837602509002206 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GamestateWithTweeningShapes",
+            "value": 3.8167043280424044,
+            "unit": "ms/iter",
+            "extra": "iterations: 189\ncpu: 3.8160904761904777 ms\nthreads: 1"
           }
         ]
       }
