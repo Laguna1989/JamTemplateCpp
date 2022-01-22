@@ -12,11 +12,9 @@ public:
     virtual ~AudioInterface() = default;
     virtual std::shared_ptr<SoundInterface> createSound(std::string const& fileName) = 0;
 
-    virtual void removeSound(std::shared_ptr<SoundInterface> snd) = 0;
-
     virtual void update() = 0;
 
-    // TODO add playMusic function
+    virtual void playMusic(std::string const& fileName) = 0;
 
     // TODO add group functionality
 };

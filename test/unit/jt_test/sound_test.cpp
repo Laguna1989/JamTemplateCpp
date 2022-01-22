@@ -8,10 +8,6 @@
 
 using jt::Sound;
 
-// TODO clean up sound tests
-
-// as loading of sound files is quite slow, this text fixture is speeding things up with static
-// initialization.
 class SoundTestWithLoadedSound : public ::testing::Test {
 private:
     oalpp::SoundContext ctx;
@@ -57,8 +53,7 @@ TEST_F(SoundTestWithLoadedSound, StopDoesNothingWhenNotPlaying)
     EXPECT_FALSE(m_sound->isPlaying());
 }
 
-// TODO fix once oalpp supports stop
-TEST_F(SoundTestWithLoadedSound, DISABLED_StopPlayingSound)
+TEST_F(SoundTestWithLoadedSound, StopPlayingSound)
 {
     m_sound->play();
     m_sound->stop();

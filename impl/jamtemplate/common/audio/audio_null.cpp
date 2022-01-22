@@ -5,7 +5,7 @@ std::shared_ptr<SoundInterface> AudioNull::createSound(std::string const& fileNa
 {
     return std::make_shared<SoundNull>();
 }
-void AudioNull::removeSound(std::shared_ptr<SoundInterface> snd) { }
-
 void AudioNull::update() { }
+
+void AudioNull::playMusic(std::string const& fileName) { }
 } // namespace jt

@@ -14,11 +14,7 @@ void Sound::update() { m_sound.update(); }
 bool Sound::isPlaying() const { return m_sound.isPlaying(); }
 
 void Sound::play() { m_sound.play(); }
-void Sound::stop()
-{
-    // TODO once oalpp supports stop
-    /*m_sound.stop();*/
-}
+void Sound::stop() { m_sound.stop(); }
 
 float Sound::getVolume() const { return m_sound.getVolume(); }
 void Sound::setVolume(float newVolume) { m_sound.setVolume(newVolume); }

@@ -7,8 +7,8 @@ namespace jt {
 class AudioNull : public AudioInterface {
 public:
     std::shared_ptr<SoundInterface> createSound(std::string const& fileName) override;
-    void removeSound(std::shared_ptr<SoundInterface> snd) override;
     void update() override;
+    void playMusic(std::string const& fileName) override;
 };
 } // namespace jt
 

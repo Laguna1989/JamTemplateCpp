@@ -8,14 +8,20 @@
 namespace jt {
 class AudioImpl : public AudioInterface {
 public:
+    ~AudioImpl();
+
     std::shared_ptr<SoundInterface> createSound(std::string const& fileName) override;
-    void removeSound(std::shared_ptr<SoundInterface> snd) override;
     void update() override;
 
+    void playMusic(std::string const& fileName) override;
+
 private:
-    // TODO should only store weak pointers
-    std::vector<std::shared_ptr<SoundInterface>> m_sounds;
     oalpp::SoundContext m_context;
+
+    std::vector<std::weak_ptr<SoundInterface>> m_sounds {};
+    std::shared_ptr<SoundInterface> m_music { nullptr };
+
+    void cleanUpUnusedSounds();
 };
 } // namespace jt
 
