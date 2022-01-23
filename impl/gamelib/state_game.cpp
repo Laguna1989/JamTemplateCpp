@@ -25,16 +25,6 @@ void StateGame::doInternalCreate()
     m_background->setIgnoreCamMovement(true);
     m_background->update(0.0f);
 
-    m_overlay = std::make_shared<Shape>();
-    m_overlay->makeRect(jt::Vector2f { w, h }, getGame()->gfx().textureManager());
-    m_overlay->setColor(jt::Color { 0, 0, 0 });
-    m_overlay->setIgnoreCamMovement(true);
-    m_overlay->update(0);
-    auto tw = TweenAlpha::create(m_overlay, 0.5f, std::uint8_t { 255 }, std::uint8_t { 0 });
-    tw->setSkipFrames();
-    tw->addCompleteCallback([this]() { m_running = true; });
-    add(tw);
-
     m_vignette = std::make_shared<jt::Sprite>("#v#"
             + std::to_string(static_cast<int>(GP::GetScreenSize().x)) + "#"
             + std::to_string(static_cast<int>(GP::GetScreenSize().y)),
@@ -66,7 +56,6 @@ void StateGame::doInternalUpdate(float const elapsed)
 
     m_background->update(elapsed);
     m_vignette->update(elapsed);
-    m_overlay->update(elapsed);
 }
 
 void StateGame::doInternalDraw() const
@@ -75,7 +64,6 @@ void StateGame::doInternalDraw() const
     drawObjects();
     m_vignette->draw(getGame()->gfx().target());
     m_hud->draw();
-    m_overlay->draw(getGame()->gfx().target());
 }
 
 void StateGame::endGame()
@@ -87,10 +75,6 @@ void StateGame::endGame()
     m_hasEnded = true;
     m_running = false;
 
-    auto tw = jt::TweenAlpha::create(m_overlay, 0.5f, std::uint8_t { 0 }, std::uint8_t { 255 });
-    tw->setSkipFrames();
-    tw->addCompleteCallback(
-        [this]() { getGame()->getStateManager().switchState(std::make_shared<StateMenu>()); });
-    add(tw);
+    getGame()->getStateManager().switchState(std::make_shared<StateMenu>());
 }
 std::string StateGame::getName() const { return "Game"; }

@@ -11,6 +11,7 @@
 #include "shape.hpp"
 #include "sprite.hpp"
 #include "state_game.hpp"
+#include "state_manager/state_manager_transition_fade_to_black.hpp"
 #include "text.hpp"
 #include "tweens/tween_alpha.hpp"
 #include "tweens/tween_position.hpp"
@@ -27,7 +28,9 @@ void StateMenu::doInternalCreate()
 
     add(std::make_shared<jt::LicenseInfo>());
 
-    getGame()->audio().playMusic("assets/looping_stereo_track.mp3");
+    getGame()->getStateManager().setTransition(
+        std::make_shared<jt::StateManagerTransitionFadeToBlack>(
+            GP::GetScreenSize(), getGame()->gfx().textureManager()));
 }
 
 void StateMenu::createVignette()
@@ -179,17 +182,8 @@ void StateMenu::startTransitionToStateGame()
     if (!m_started) {
         m_started = true;
 
-        createTweenTransition();
+        getGame()->getStateManager().switchState(std::make_shared<StateGame>());
     }
-}
-
-void StateMenu::createTweenTransition()
-{
-    auto tw = jt::TweenAlpha::create(m_overlay, 0.5f, std::uint8_t { 0 }, std::uint8_t { 255 });
-    tw->setSkipFrames();
-    tw->addCompleteCallback(
-        [this]() { getGame()->getStateManager().switchState(std::make_shared<StateGame>()); });
-    add(tw);
 }
 
 void StateMenu::doInternalDraw() const

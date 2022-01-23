@@ -1,5 +1,6 @@
 #include "palette.hpp"
 #include "strutils.hpp"
+#include <fstream>
 #include <sstream>
 
 namespace jt {
@@ -50,19 +51,22 @@ Palette Palette::createGradientV(float h, float s, float vmin, float vmax, std::
 }
 
 namespace {
-std::vector<jt::Color> parseGPLImpl(std::string const& input)
+std::vector<jt::Color> parseGPLImpl(std::string const& gplFileConent)
 {
-    std::istringstream ss { input };
+    std::istringstream ss { gplFileConent };
     std::string line;
     // ignore first line
     std::getline(ss, line);
 
     std::vector<jt::Color> colors {};
     while (std::getline(ss, line)) {
-        strutil::trim(line);
         if (line.empty()) {
             continue;
         }
+        if (line.at(0) == '#') {
+            continue;
+        }
+        strutil::trim(line);
         if (line.at(0) == '#') {
             continue;
         }
@@ -83,6 +87,17 @@ std::vector<jt::Color> parseGPLImpl(std::string const& input)
 
 } // namespace
 
-Palette Palette::parseGPL(std::string const& input) { return Palette { parseGPLImpl(input) }; }
+Palette Palette::parseGPL(std::string const& gplFileContent)
+{
+    return Palette { parseGPLImpl(gplFileContent) };
+}
+
+Palette Palette::parseGPLFromFile(std::string const& fileName)
+{
+    std::ifstream file { fileName };
+    std::stringstream buffer;
+    buffer << file.rdbuf();
+    return jt::Palette::parseGPL(buffer.str());
+}
 
 } // namespace jt
