@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1642925517070,
+  "lastUpdate": 1642929457691,
   "repoUrl": "https://github.com/Laguna1989/JamTemplateCpp",
   "entries": {
     "Benchmark": [
@@ -3132,6 +3132,42 @@ window.BENCHMARK_DATA = {
             "value": 3.054600711790426,
             "unit": "ms/iter",
             "extra": "iterations: 229\ncpu: 3.0536406113537122 ms\nthreads: 1"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "laguna.ws@gmail.com",
+            "name": "Simon Weis",
+            "username": "Laguna1989"
+          },
+          "committer": {
+            "email": "laguna.ws@gmail.com",
+            "name": "Simon Weis",
+            "username": "Laguna1989"
+          },
+          "distinct": true,
+          "id": "4f818c156d99035b65af55aa73d9c2173b43bb42",
+          "message": "Make logging audio create logging sound decorators",
+          "timestamp": "2022-01-23T10:14:57+01:00",
+          "tree_id": "682e2b1de3b6e7ec57eb2603cb9415e8e918f391",
+          "url": "https://github.com/Laguna1989/JamTemplateCpp/commit/4f818c156d99035b65af55aa73d9c2173b43bb42"
+        },
+        "date": 1642929456519,
+        "tool": "googlecpp",
+        "benches": [
+          {
+            "name": "BM_StartGame",
+            "value": 0.002265680399354807,
+            "unit": "ms/iter",
+            "extra": "iterations: 308097\ncpu: 0.0022655342311025425 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GamestateWithTweeningShapes",
+            "value": 3.194801205479331,
+            "unit": "ms/iter",
+            "extra": "iterations: 219\ncpu: 3.1945146118721466 ms\nthreads: 1"
           }
         ]
       }
