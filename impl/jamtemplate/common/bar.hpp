@@ -1,7 +1,7 @@
 ﻿#ifndef GUARD_JAMTEMPLATE_BAR_HPP_INCLUDEGUARD
 #define GUARD_JAMTEMPLATE_BAR_HPP_INCLUDEGUARD
 
-#include "drawable_impl.hpp"
+#include "graphics/drawable_impl.hpp"
 #include <memory>
 #include <vector>
 

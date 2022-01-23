@@ -1,7 +1,7 @@
 ﻿#ifndef GUARD_JAMTEMPLATE_ANIMATION_HPP_INCLUDEGUARD
 #define GUARD_JAMTEMPLATE_ANIMATION_HPP_INCLUDEGUARD
 
-#include "drawable_impl.hpp"
+#include "graphics/drawable_impl.hpp"
 #include <map>
 #include <memory>
 #include <string>

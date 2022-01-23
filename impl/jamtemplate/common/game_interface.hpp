@@ -4,11 +4,11 @@
 #include "action_commands/action_command_manager_interface.hpp"
 #include "audio/audio_interface.hpp"
 #include "cam_interface.hpp"
-#include "gfx_interface.hpp"
+#include "graphics/gfx_interface.hpp"
+#include "graphics/render_window_interface.hpp"
 #include "input/input_manager_interface.hpp"
 #include "logging/logger_interface.hpp"
 #include "render_target.hpp"
-#include "render_window_interface.hpp"
 #include "state_manager/state_manager_interface.hpp"
 #include <memory>
 

@@ -2,9 +2,9 @@
 #define GUARD_JAMTEMPLATE_GFX_IMPL_HPP
 
 #include "camera.hpp"
-#include "gfx_interface.hpp"
+#include "graphics/gfx_interface.hpp"
 #include "render_target_lib.hpp"
-#include "render_window.hpp"
+#include "graphics/render_window.hpp"
 #include "texture_manager_impl.hpp"
 #include <SDL2/SDL.h>
 #include <optional>

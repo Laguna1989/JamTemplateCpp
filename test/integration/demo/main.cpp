@@ -5,13 +5,14 @@
 #include "camera.hpp"
 #include "game.hpp"
 #include "gfx_impl.hpp"
+#include "graphics/logging_render_window_decorator.hpp"
+#include "graphics/render_window.hpp"
 #include "input/input_manager.hpp"
 #include "input/keyboard_input.hpp"
 #include "input/mouse_input.hpp"
 #include "logging/default_logging.hpp"
 #include "logging/logger.hpp"
 #include "random/random.hpp"
-#include "render_window.hpp"
 #include "state_manager/logging_state_manager_decorator.hpp"
 #include "state_manager/state_manager.hpp"
 #include "state_select.hpp"
@@ -38,8 +39,9 @@ int main()
     jt::InputManager input { mouse, keyboard };
 
     jt::RenderWindow window { 800, 600, "jt_demos" };
+    jt::LoggingRenderWindowDecorator loggingRenderWindow { window, logger };
     jt::Camera camera { 2.0f };
-    jt::GfxImpl gfx { window, camera };
+    jt::GfxImpl gfx { loggingRenderWindow, camera };
 
     jt::AudioNull audio;
     jt::LoggingAudioDecorator loggingAudio { audio, logger };

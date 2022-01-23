@@ -7,13 +7,14 @@
 #include "game.hpp"
 #include "game_properties.hpp"
 #include "gfx_impl.hpp"
+#include "graphics/logging_render_window_decorator.hpp"
+#include "graphics/render_window.hpp"
 #include "input/input_manager.hpp"
 #include "input/keyboard_input.hpp"
 #include "input/mouse_input.hpp"
 #include "logging/default_logging.hpp"
 #include "logging/logger.hpp"
 #include "random/random.hpp"
-#include "render_window.hpp"
 #include "state_manager/logging_state_manager_decorator.hpp"
 #include "state_manager/state_manager.hpp"
 #include "state_menu.hpp"
@@ -39,8 +40,9 @@ int main()
 
     jt::RenderWindow window { static_cast<unsigned int>(GP::GetWindowSize().x),
         static_cast<unsigned int>(GP::GetWindowSize().y), GP::GameName() };
+    jt::LoggingRenderWindowDecorator loggingRenderWindow { window, logger };
     jt::Camera cam { GP::GetZoom() };
-    jt::GfxImpl gfx { window, cam };
+    jt::GfxImpl gfx { loggingRenderWindow, cam };
 
     auto const mouse = std::make_shared<jt::MouseInput>();
     auto const keyboard = std::make_shared<jt::KeyboardInput>();

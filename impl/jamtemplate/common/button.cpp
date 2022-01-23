@@ -1,7 +1,7 @@
 ﻿#include "button.hpp"
 #include "animation.hpp"
-#include "drawable_interface.hpp"
 #include "game_interface.hpp"
+#include "graphics/drawable_interface.hpp"
 #include "input/input_manager.hpp"
 #include "sprite.hpp"
 #include "texture_manager_interface.hpp"
