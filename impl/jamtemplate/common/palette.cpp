@@ -60,13 +60,13 @@ std::vector<jt::Color> parseGPLImpl(std::string const& gplFileConent)
 
     std::vector<jt::Color> colors {};
     while (std::getline(ss, line)) {
+        if (line.empty()) {
+            continue;
+        }
         if (line.at(0) == '#') {
             continue;
         }
         strutil::trim(line);
-        if (line.empty()) {
-            continue;
-        }
         if (line.at(0) == '#') {
             continue;
         }
