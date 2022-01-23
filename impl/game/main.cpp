@@ -2,6 +2,7 @@
 #include "action_commands/action_command_manager.hpp"
 #include "action_commands/basic_action_commands.hpp"
 #include "audio/audio_impl.hpp"
+#include "audio/logging_audio_decorator.hpp"
 #include "camera.hpp"
 #include "game.hpp"
 #include "game_properties.hpp"
@@ -40,15 +41,18 @@ int main()
     auto const keyboard = std::make_shared<jt::KeyboardInput>();
     jt::InputManager input { mouse, keyboard };
 
-    jt::AudioImpl audio;
-
-    jt::StateManager stateManager { std::make_shared<StateMenu>() };
     jt::Logger logger;
     jt::createDefaultLogTargets(logger);
+
+    jt::AudioImpl audio;
+    jt::LoggingAudioDecorator loggingAudio { audio, logger };
+
+    jt::StateManager stateManager { std::make_shared<StateMenu>() };
+
     jt::ActionCommandManager actionCommandManager(logger);
 
-    game
-        = std::make_shared<jt::Game>(gfx, input, audio, stateManager, logger, actionCommandManager);
+    game = std::make_shared<jt::Game>(
+        gfx, input, loggingAudio, stateManager, logger, actionCommandManager);
 
     addBasicActionCommands(game);
     game->startGame(gameloop);

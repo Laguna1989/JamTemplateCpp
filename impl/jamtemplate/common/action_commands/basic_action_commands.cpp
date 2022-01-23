@@ -94,7 +94,6 @@ void addCommandTextureManager(std::shared_ptr<GameBase>& game)
 
 void addCommandsMusicPlayer(std::shared_ptr<GameBase>& game)
 {
-
     // TODO create new commands for new afx interface
 }
 
