@@ -29,7 +29,6 @@ private:
     std::shared_ptr<GameState> m_state { nullptr };
     std::shared_ptr<GameState> m_nextState { nullptr };
     std::shared_ptr<StateManagerTransitionInterface> m_transition { nullptr };
-    bool m_updatedOnce { false };
 
     void doSwitchState(std::weak_ptr<GameInterface> gameInstance);
 };

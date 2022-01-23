@@ -94,7 +94,14 @@ void addCommandTextureManager(std::shared_ptr<GameBase>& game)
 
 void addCommandsMusicPlayer(std::shared_ptr<GameBase>& game)
 {
-    // TODO create new commands for new afx interface
+    game->storeActionCommand(game->getActionCommandManager().registerTemporaryCommand(
+        "playmusic", [&logger = game->getLogger(), &audio = game->audio()](auto args) {
+            if (args.size() != 1) {
+                logger.error("invalid number of arguments");
+                return;
+            }
+            audio.playMusic(args.at(0));
+        }));
 }
 
 } // namespace

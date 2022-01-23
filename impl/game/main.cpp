@@ -14,6 +14,7 @@
 #include "logging/logger.hpp"
 #include "random/random.hpp"
 #include "render_window.hpp"
+#include "state_manager/logging_state_manager_decorator.hpp"
 #include "state_manager/state_manager.hpp"
 #include "state_menu.hpp"
 #include <memory>
@@ -33,26 +34,28 @@ int main()
 
     jt::Random::useTimeAsRandomSeed();
 
-    jt::GfxImpl gfx { jt::RenderWindow { static_cast<unsigned int>(GP::GetWindowSize().x),
-                          static_cast<unsigned int>(GP::GetWindowSize().y), GP::GameName() },
-        jt::Camera { GP::GetZoom() } };
+    jt::Logger logger;
+    jt::createDefaultLogTargets(logger);
+
+    jt::RenderWindow window { static_cast<unsigned int>(GP::GetWindowSize().x),
+        static_cast<unsigned int>(GP::GetWindowSize().y), GP::GameName() };
+    jt::Camera cam { GP::GetZoom() };
+    jt::GfxImpl gfx { window, cam };
 
     auto const mouse = std::make_shared<jt::MouseInput>();
     auto const keyboard = std::make_shared<jt::KeyboardInput>();
     jt::InputManager input { mouse, keyboard };
 
-    jt::Logger logger;
-    jt::createDefaultLogTargets(logger);
-
     jt::AudioImpl audio;
     jt::LoggingAudioDecorator loggingAudio { audio, logger };
 
     jt::StateManager stateManager { std::make_shared<StateMenu>() };
+    jt::LoggingStateManagerDecorator loggingStateManager { stateManager, logger };
 
     jt::ActionCommandManager actionCommandManager(logger);
 
     game = std::make_shared<jt::Game>(
-        gfx, input, loggingAudio, stateManager, logger, actionCommandManager);
+        gfx, input, loggingAudio, loggingStateManager, logger, actionCommandManager);
 
     addBasicActionCommands(game);
     game->startGame(gameloop);

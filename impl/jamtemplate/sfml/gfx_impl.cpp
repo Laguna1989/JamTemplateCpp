@@ -17,9 +17,9 @@ void horizontalFlip(std::unique_ptr<jt::Sprite> const& spr, float zoom, float wi
 
 namespace jt {
 
-GfxImpl::GfxImpl(RenderWindow&& window, Camera&& cam)
-    : m_window { std::move(window) }
-    , m_camera { std::move(cam) }
+GfxImpl::GfxImpl(RenderWindowInterface& window, CamInterface& cam)
+    : m_window { window }
+    , m_camera { cam }
     , m_renderTarget { m_window.createRenderTarget() }
     , m_textureManager { m_renderTarget }
 {

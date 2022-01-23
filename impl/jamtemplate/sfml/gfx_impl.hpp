@@ -11,7 +11,7 @@ namespace jt {
 
 class GfxImpl : public GfxInterface {
 public:
-    GfxImpl(RenderWindow&& window, Camera&& cam);
+    GfxImpl(RenderWindowInterface& window, CamInterface& cam);
     RenderWindowInterface& window() override;
     CamInterface& camera() override;
     std::shared_ptr<RenderTarget> target() override;
@@ -23,8 +23,8 @@ public:
     void display() override;
 
 private:
-    RenderWindow m_window;
-    Camera m_camera;
+    RenderWindowInterface& m_window;
+    CamInterface& m_camera;
     std::shared_ptr<RenderTarget> m_renderTarget { nullptr };
     std::optional<jt::TextureManagerImpl> m_textureManager;
     std::shared_ptr<sf::View> m_view { nullptr };
