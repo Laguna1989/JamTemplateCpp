@@ -21,7 +21,8 @@ public:
     [[nodiscard]] Palette addColor(jt::Color col) const;
     jt::Color const& getColor(std::size_t idx) const;
 
-    static Palette parseGPL(std::string const& input);
+    static Palette parseGPL(std::string const& gplFileContent);
+    static Palette parseGPLFromFile(std::string const& fileName);
 
 private:
     std::vector<jt::Color> m_colors;
