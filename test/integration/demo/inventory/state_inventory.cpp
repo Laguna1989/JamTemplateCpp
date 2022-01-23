@@ -35,6 +35,8 @@ void StateInventory::doInternalCreate()
     getGame()->input().keyboard()->setCommandPressed({ jt::KeyCode::D, jt::KeyCode::Right },
         std::make_shared<ControlCommandMoveCam>(
             jt::Vector2f { scrollSpeed, 0.0f }, getGame()->gfx().camera()));
+
+    m_pickupSound = getGame()->audio().createSound("assets/test.ogg");
 }
 
 void StateInventory::createWorldItems()
@@ -114,6 +116,9 @@ void StateInventory::pickupItems()
             bool const overlapsY = mp.y > bounds.top && mp.y < bounds.top + bounds.height;
             if (overlapsX && overlapsY) {
                 m_player->getInventory()->addItem(item.lock()->getRefId());
+
+                m_pickupSound->play();
+
                 item.lock()->kill();
             }
         }

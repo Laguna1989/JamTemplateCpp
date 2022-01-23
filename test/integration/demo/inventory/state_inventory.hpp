@@ -1,6 +1,7 @@
 #ifndef GUARD_JAMTEMPLATE_STATE_INVENTORY_HPP
 #define GUARD_JAMTEMPLATE_STATE_INVENTORY_HPP
 
+#include "audio/sound.hpp"
 #include "character.hpp"
 #include "character_sheet_imgui.hpp"
 #include "game_state.hpp"
@@ -23,6 +24,9 @@ class StateInventory : public jt::GameState {
 
     std::shared_ptr<ItemRepository> m_itemRepository;
     std::shared_ptr<jt::ObjectGroup<WorldItem>> m_worldItems;
+
+    std::shared_ptr<jt::SoundInterface> m_pickupSound;
+
     void createItemRepository();
     void loadTilemap();
     void createWorldItems();

@@ -1,4 +1,5 @@
 #include "logging_audio_decorator.hpp"
+#include "logging_sound_decorator.hpp"
 namespace jt {
 
 LoggingAudioDecorator::LoggingAudioDecorator(AudioInterface& decoratee, LoggerInterface& logger)
@@ -10,7 +11,7 @@ LoggingAudioDecorator::LoggingAudioDecorator(AudioInterface& decoratee, LoggerIn
 std::shared_ptr<SoundInterface> LoggingAudioDecorator::createSound(std::string const& fileName)
 {
     m_logger.debug("create sound '" + fileName + "'", { "jt", "audio" });
-    return m_decoratee.createSound(fileName);
+    return std::make_shared<LoggingSoundDecorator>(m_decoratee.createSound(fileName), m_logger);
 }
 
 void LoggingAudioDecorator::update()

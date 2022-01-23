@@ -1,6 +1,7 @@
 ﻿#include "action_commands/action_command_manager.hpp"
 #include "action_commands/basic_action_commands.hpp"
 #include "audio/audio_null.hpp"
+#include "audio/logging_audio_decorator.hpp"
 #include "camera.hpp"
 #include "game.hpp"
 #include "gfx_impl.hpp"
@@ -36,16 +37,18 @@ int main()
     jt::Camera camera { 2.0f };
     jt::GfxImpl gfx { std::move(window), std::move(camera) };
 
+    jt::Logger logger;
+    jt::createDefaultLogTargets(logger);
+
     jt::AudioNull audio;
+    jt::LoggingAudioDecorator loggingAudio { audio, logger };
 
     jt::StateManager stateManager { std::make_shared<StateSelect>() };
 
-    jt::Logger logger;
-    jt::createDefaultLogTargets(logger);
     jt::ActionCommandManager actionCommandManager(logger);
 
-    game
-        = std::make_shared<jt::Game>(gfx, input, audio, stateManager, logger, actionCommandManager);
+    game = std::make_shared<jt::Game>(
+        gfx, input, loggingAudio, stateManager, logger, actionCommandManager);
     addBasicActionCommands(game);
 
     game->startGame(gameloop);
