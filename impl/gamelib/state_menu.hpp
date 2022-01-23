@@ -48,8 +48,6 @@ private:
     void createTweenCreditsPosition();
     void createTweenExplanationScale();
 
-    void createTweenTransition();
-
     void doInternalUpdate(float const elapsed) override;
     void updateDrawables(const float& elapsed);
     void checkForTransitionToStateGame();
