@@ -1,13 +1,13 @@
-#ifndef GUARD_JAMTEMPLATE_LOGGING_SOUND_DECORATOR_HPP
-#define GUARD_JAMTEMPLATE_LOGGING_SOUND_DECORATOR_HPP
+#ifndef GUARD_JAMTEMPLATE_LOGGING_SOUND_HPP
+#define GUARD_JAMTEMPLATE_LOGGING_SOUND_HPP
 
 #include "logging/logger_interface.hpp"
 #include "sound_interface.hpp"
 
 namespace jt {
-class LoggingSoundDecorator : public SoundInterface {
+class LoggingSound : public SoundInterface {
 public:
-    LoggingSoundDecorator(std::shared_ptr<SoundInterface> decoratee, LoggerInterface& logger);
+    LoggingSound(std::shared_ptr<SoundInterface> decoratee, LoggerInterface& logger);
     void update() override;
     bool isPlaying() const override;
     void play() override;
@@ -25,4 +25,4 @@ private:
 };
 } // namespace jt
 
-#endif // GUARD_JAMTEMPLATE_LOGGING_SOUND_DECORATOR_HPP
+#endif // GUARD_JAMTEMPLATE_LOGGING_SOUND_HPP

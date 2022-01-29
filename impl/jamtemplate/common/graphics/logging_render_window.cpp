@@ -1,32 +1,32 @@
-#include "logging_render_window_decorator.hpp"
+#include "logging_render_window.hpp"
 
 namespace jt {
 
-LoggingRenderWindowDecorator::LoggingRenderWindowDecorator(
+LoggingRenderWindow::LoggingRenderWindow(
     RenderWindowInterface& decoratee, LoggerInterface& logger)
     : m_decoratee { decoratee }
     , m_logger { logger }
 {
 }
 
-bool LoggingRenderWindowDecorator::isOpen() const
+bool LoggingRenderWindow::isOpen() const
 {
     m_logger.verbose("isOpen", { "jt", "RenderWindow" });
     return m_decoratee.isOpen();
 }
 
-void LoggingRenderWindowDecorator::checkForClose()
+void LoggingRenderWindow::checkForClose()
 {
     m_logger.verbose("checkForClose", { "jt", "RenderWindow" });
     m_decoratee.checkForClose();
 }
-std::shared_ptr<jt::RenderTarget> LoggingRenderWindowDecorator::createRenderTarget()
+std::shared_ptr<jt::RenderTarget> LoggingRenderWindow::createRenderTarget()
 {
     m_logger.debug("createRenderTarget", { "jt", "RenderWindow" });
     return m_decoratee.createRenderTarget();
 }
 
-Vector2f LoggingRenderWindowDecorator::getSize() const
+Vector2f LoggingRenderWindow::getSize() const
 {
     auto const size = m_decoratee.getSize();
     m_logger.verbose(
@@ -35,40 +35,40 @@ Vector2f LoggingRenderWindowDecorator::getSize() const
     return size;
 }
 
-void LoggingRenderWindowDecorator::draw(std::unique_ptr<jt::Sprite>& sprite)
+void LoggingRenderWindow::draw(std::unique_ptr<jt::Sprite>& sprite)
 {
     m_logger.verbose("draw sprite", { "jt", "RenderWindow" });
     m_decoratee.draw(sprite);
 }
 
-void LoggingRenderWindowDecorator::display()
+void LoggingRenderWindow::display()
 {
     m_logger.verbose("display", { "jt", "RenderWindow" });
     m_decoratee.display();
 }
 
-Vector2f LoggingRenderWindowDecorator::getMousePosition()
+Vector2f LoggingRenderWindow::getMousePosition()
 {
     m_logger.verbose("getMousePosition", { "jt", "RenderWindow" });
     return m_decoratee.getMousePosition();
 }
 
-void LoggingRenderWindowDecorator::setMouseCursorVisible(bool visible)
+void LoggingRenderWindow::setMouseCursorVisible(bool visible)
 {
     m_logger.info("setMouseCursorVisible" + std::to_string(visible), { "jt", "RenderWindow" });
     m_decoratee.setMouseCursorVisible(visible);
 }
-bool LoggingRenderWindowDecorator::getMouseCursorVisible() const
+bool LoggingRenderWindow::getMouseCursorVisible() const
 {
     m_logger.info("getMouseCursorVisible", { "jt", "RenderWindow" });
     return m_decoratee.getMouseCursorVisible();
 }
-void LoggingRenderWindowDecorator::updateGui(float elapsed)
+void LoggingRenderWindow::updateGui(float elapsed)
 {
     m_logger.verbose("updateGui", { "jt", "RenderWindow" });
     m_decoratee.updateGui(elapsed);
 }
-void LoggingRenderWindowDecorator::startRenderGui()
+void LoggingRenderWindow::startRenderGui()
 {
     m_logger.verbose("startRenderGui", { "jt", "RenderWindow" });
     m_decoratee.startRenderGui();

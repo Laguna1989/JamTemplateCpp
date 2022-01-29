@@ -1,13 +1,13 @@
-#ifndef GUARD_JAMTEMPLATE_LOGGING_RENDER_WINDOW_DECORATOR_HPP
-#define GUARD_JAMTEMPLATE_LOGGING_RENDER_WINDOW_DECORATOR_HPP
+#ifndef GUARD_JAMTEMPLATE_LOGGING_RENDER_WINDOW_HPP
+#define GUARD_JAMTEMPLATE_LOGGING_RENDER_WINDOW_HPP
 
 #include "logging/logger_interface.hpp"
 #include "render_window_interface.hpp"
 
 namespace jt {
-class LoggingRenderWindowDecorator : public RenderWindowInterface {
+class LoggingRenderWindow : public RenderWindowInterface {
 public:
-    LoggingRenderWindowDecorator(RenderWindowInterface& decoratee, LoggerInterface& logger);
+    LoggingRenderWindow(RenderWindowInterface& decoratee, LoggerInterface& logger);
     bool isOpen() const override;
     void checkForClose() override;
     std::shared_ptr<jt::RenderTarget> createRenderTarget() override;
@@ -26,4 +26,4 @@ private:
 };
 } // namespace jt
 
-#endif // GUARD_JAMTEMPLATE_LOGGING_RENDER_WINDOW_DECORATOR_HPP
+#endif // GUARD_JAMTEMPLATE_LOGGING_RENDER_WINDOW_HPP

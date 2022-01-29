@@ -1,12 +1,12 @@
-#ifndef GUARD_JAMTEMPLATE_LOGGING_STATE_MANAGER_DECORATOR_HPP
-#define GUARD_JAMTEMPLATE_LOGGING_STATE_MANAGER_DECORATOR_HPP
+#ifndef GUARD_JAMTEMPLATE_LOGGING_STATE_MANAGER_HPP
+#define GUARD_JAMTEMPLATE_LOGGING_STATE_MANAGER_HPP
 
 #include "logging/logger_interface.hpp"
 #include "state_manager_interface.hpp"
 namespace jt {
-class LoggingStateManagerDecorator : public StateManagerInterface {
+class LoggingStateManager : public StateManagerInterface {
 public:
-    LoggingStateManagerDecorator(StateManagerInterface& decoratee, LoggerInterface& logger);
+    LoggingStateManager(StateManagerInterface& decoratee, LoggerInterface& logger);
 
     std::shared_ptr<GameState> getCurrentState() override;
     void setTransition(std::shared_ptr<StateManagerTransitionInterface> transition) override;
@@ -21,4 +21,4 @@ private:
 
 } // namespace jt
 
-#endif // GUARD_JAMTEMPLATE_LOGGING_STATE_MANAGER_DECORATOR_HPP
+#endif // GUARD_JAMTEMPLATE_LOGGING_STATE_MANAGER_HPP
