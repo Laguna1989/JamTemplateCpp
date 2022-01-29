@@ -1,19 +1,20 @@
 ﻿#include "action_commands/action_command_manager.hpp"
 #include "action_commands/basic_action_commands.hpp"
 #include "audio/audio_null.hpp"
-#include "audio/logging_audio_decorator.hpp"
+#include "audio/logging_audio.hpp"
 #include "camera.hpp"
 #include "game.hpp"
 #include "gfx_impl.hpp"
-#include "graphics/logging_render_window_decorator.hpp"
+#include "graphics/logging_render_window.hpp"
 #include "graphics/render_window.hpp"
 #include "input/input_manager.hpp"
 #include "input/keyboard_input.hpp"
 #include "input/mouse_input.hpp"
 #include "logging/default_logging.hpp"
 #include "logging/logger.hpp"
+#include "logging_camera.hpp"
 #include "random/random.hpp"
-#include "state_manager/logging_state_manager_decorator.hpp"
+#include "state_manager/logging_state_manager.hpp"
 #include "state_manager/state_manager.hpp"
 #include "state_select.hpp"
 #include <memory>
@@ -39,15 +40,17 @@ int main()
     jt::InputManager input { mouse, keyboard };
 
     jt::RenderWindow window { 800, 600, "jt_demos" };
-    jt::LoggingRenderWindowDecorator loggingRenderWindow { window, logger };
+    jt::LoggingRenderWindow loggingRenderWindow { window, logger };
     jt::Camera camera { 2.0f };
-    jt::GfxImpl gfx { loggingRenderWindow, camera };
+
+    jt::LoggingCamera loggingCamera { camera, logger };
+    jt::GfxImpl gfx { loggingRenderWindow, loggingCamera };
 
     jt::AudioNull audio;
-    jt::LoggingAudioDecorator loggingAudio { audio, logger };
+    jt::LoggingAudio loggingAudio { audio, logger };
 
     jt::StateManager stateManager { std::make_shared<StateSelect>() };
-    jt::LoggingStateManagerDecorator loggingStateManager { stateManager, logger };
+    jt::LoggingStateManager loggingStateManager { stateManager, logger };
 
     jt::ActionCommandManager actionCommandManager(logger);
 

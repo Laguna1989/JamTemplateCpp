@@ -14,6 +14,7 @@ public:
     GfxImpl(RenderWindowInterface& window, CamInterface& cam);
     RenderWindowInterface& window() override;
     CamInterface& camera() override;
+
     std::shared_ptr<RenderTarget> target() override;
     TextureManagerInterface& textureManager() override;
 

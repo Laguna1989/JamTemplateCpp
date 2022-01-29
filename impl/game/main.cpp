@@ -14,6 +14,7 @@
 #include "input/mouse_input.hpp"
 #include "logging/default_logging.hpp"
 #include "logging/logger.hpp"
+#include "logging_camera.hpp"
 #include "random/random.hpp"
 #include "state_manager/logging_state_manager.hpp"
 #include "state_manager/state_manager.hpp"
@@ -43,7 +44,8 @@ int main()
     jt::LoggingRenderWindow loggingRenderWindow { window, logger };
 
     jt::Camera cam { GP::GetZoom() };
-    jt::GfxImpl gfx { loggingRenderWindow, cam };
+    jt::LoggingCamera loggingCamera { cam, logger };
+    jt::GfxImpl gfx { loggingRenderWindow, loggingCamera };
 
     auto const mouse = std::make_shared<jt::MouseInput>();
     auto const keyboard = std::make_shared<jt::KeyboardInput>();
