@@ -126,11 +126,9 @@ jobs:
           cmake-version: '3.19.x'
 
       - uses: actions/checkout@v2
-      - uses: seanmiddleditch/gha-setup-ninja@master
-      - uses: ilammy/msvc-dev-cmd@v1.3.0
 
       - name: CMake
-        run: cmake -G Ninja -B ${{github.workspace}}/build -DJT_ENABLE_AUDIO_TESTS=OFF .
+        run: cmake -B ${{github.workspace}}/build -DJT_ENABLE_AUDIO_TESTS=OFF .
 
       - name: Build
         working-directory: ${{github.workspace}}/build
