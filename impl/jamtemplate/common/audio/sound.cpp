@@ -3,7 +3,7 @@
 
 namespace jt {
 
-Sound::Sound(std::string const& fileName, oalpp::SoundContext const& ctx)
+Sound::Sound(std::string const& fileName, oalpp::SoundContextInterface const& ctx)
     : m_buffer { fileName }
     , m_sound { m_buffer, ctx }
 {

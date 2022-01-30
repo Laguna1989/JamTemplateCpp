@@ -11,6 +11,8 @@ public:
     ~AudioImpl();
 
     std::shared_ptr<SoundInterface> createSound(std::string const& fileName) override;
+    std::shared_ptr<SoundWithEffect> createSoundWithEffect(
+        std::string const& fileName, oalpp::effects::MonoEffectInterface& effect) override;
     void update() override;
 
     void playMusic(std::string const& fileName) override;

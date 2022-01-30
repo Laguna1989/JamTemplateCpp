@@ -3,15 +3,15 @@
 #include "sound.hpp"
 #include <algorithm>
 
-
-jt::SoundGroup::SoundGroup(std::vector<std::string> const& sounds, oalpp::SoundContext const& ctx)
+jt::SoundGroup::SoundGroup(
+    std::vector<std::string> const& sounds, oalpp::SoundContextInterface const& ctx)
 {
     for (auto const& f : sounds) {
         m_sounds.emplace_back(std::make_shared<jt::Sound>(f, ctx));
     }
 }
 
-void jt::SoundGroup::addSound(std::string const& fileName, oalpp::SoundContext const& ctx)
+void jt::SoundGroup::addSound(std::string const& fileName, oalpp::SoundContextInterface const& ctx)
 {
     m_sounds.emplace_back(std::make_shared<jt::Sound>(fileName, ctx));
 }

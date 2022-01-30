@@ -41,5 +41,12 @@ void AudioImpl::cleanUpUnusedSounds()
         std::remove_if(m_sounds.begin(), m_sounds.end(), [](auto wptr) { return wptr.expired(); }),
         m_sounds.end());
 }
+std::shared_ptr<SoundWithEffect> AudioImpl::createSoundWithEffect(
+    std::string const& fileName, oalpp::effects::MonoEffectInterface& effect)
+{
+    auto soundWithEffect = std::make_shared<SoundWithEffect>(fileName, effect, m_context);
+    m_sounds.push_back(soundWithEffect);
+    return soundWithEffect;
+}
 
 } // namespace jt

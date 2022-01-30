@@ -25,5 +25,11 @@ void LoggingAudio::playMusic(std::string const& fileName)
     m_logger.debug("play music '" + fileName + "'", { "jt", "audio" });
     m_decoratee.playMusic(fileName);
 }
+std::shared_ptr<SoundWithEffect> LoggingAudio::createSoundWithEffect(
+    std::string const& fileName, oalpp::effects::MonoEffectInterface& effect)
+{
+    // TODO add logging
+    return m_decoratee.createSoundWithEffect(fileName, effect);
+}
 
 } // namespace jt

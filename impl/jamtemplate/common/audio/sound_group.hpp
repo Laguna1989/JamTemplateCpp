@@ -1,6 +1,7 @@
 ﻿#ifndef JAMTEMPLATE_SOUNDGROUP_HPP_GUARD
 #define JAMTEMPLATE_SOUNDGROUP_HPP_GUARD
 
+#include "oalpp/sound_context_interface.hpp"
 #include "sound_interface.hpp"
 #include <memory>
 #include <string>
@@ -18,12 +19,13 @@ public:
 
     /// Constructor
     /// \param sounds list of filepaths to load
-    explicit SoundGroup(std::vector<std::string> const& sounds, oalpp::SoundContext const& ctx);
+    explicit SoundGroup(
+        std::vector<std::string> const& sounds, oalpp::SoundContextInterface const& ctx);
 
 private:
     std::vector<std::shared_ptr<SoundInterface>> m_sounds {};
 
-    void addSound(std::string const& fileName, oalpp::SoundContext const& ctx);
+    void addSound(std::string const& fileName, oalpp::SoundContextInterface const& ctx);
     bool isPlaying() const override;
 
     void play() override;

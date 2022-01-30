@@ -1,4 +1,5 @@
 ﻿#include "state_select.hpp"
+#include "audio/state_audio.hpp"
 #include "box2d/state_box2d.hpp"
 #include "easing/state_easing.hpp"
 #include "explosion/state_explosion.hpp"
@@ -31,6 +32,7 @@ void StateSelect::doInternalCreate()
     AddButton<StateSimplexNoise>("3D Noise");
     AddButton<StateEasing>("Easing");
     AddButton<StateInventory>("Inventory");
+    AddButton<StateAudio>("Audio");
 
     add(std::make_shared<jt::LicenseInfo>());
 }

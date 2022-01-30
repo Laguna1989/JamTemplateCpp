@@ -2,6 +2,7 @@
 #define GUARD_JAMTEMPLATE_SFML_SOUND_GUARD_HPP_12345
 
 #include "oalpp/sound.hpp"
+#include "oalpp/sound_context_interface.hpp"
 #include "oalpp/sound_data.hpp"
 #include "sound_interface.hpp"
 
@@ -9,7 +10,7 @@ namespace jt {
 
 class Sound : public SoundInterface {
 public:
-    Sound(std::string const& fileName, oalpp::SoundContext const& ctx);
+    Sound(std::string const& fileName, oalpp::SoundContextInterface const& ctx);
 
     void update() override;
 

@@ -2,6 +2,7 @@
 #define JAMTEMPLATE_SOUNDINTERFACE_HPP
 
 namespace jt {
+
 class SoundInterface {
 public:
     virtual ~SoundInterface() = default;
