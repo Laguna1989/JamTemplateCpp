@@ -37,8 +37,8 @@ jobs:
           libfreetype-dev \
           libflac-dev
 
-      - uses: seanmiddleditch/gha-setup-ninja@master
       - uses: actions/checkout@v2
+      - uses: seanmiddleditch/gha-setup-ninja@master
 
       - name: ccache
         uses: hendrikmuhs/ccache-action@v1
@@ -89,8 +89,8 @@ jobs:
           libsdl2-ttf-dev \
           libsdl2-image-dev
 
-      - uses: seanmiddleditch/gha-setup-ninja@master
       - uses: actions/checkout@v2
+      - uses: seanmiddleditch/gha-setup-ninja@master
 
       - name: ccache
         uses: hendrikmuhs/ccache-action@v1
@@ -125,8 +125,8 @@ jobs:
         with:
           cmake-version: '3.19.x'
 
-      - uses: seanmiddleditch/gha-setup-ninja@master
       - uses: actions/checkout@v2
+      - uses: seanmiddleditch/gha-setup-ninja@master
 
       - name: CMake
         run: cmake -G Ninja -B ${{github.workspace}}/build -DJT_ENABLE_AUDIO_TESTS=OFF .
