@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1643527017737,
+  "lastUpdate": 1643537160759,
   "repoUrl": "https://github.com/Laguna1989/JamTemplateCpp",
   "entries": {
     "Benchmark": [
@@ -3204,6 +3204,42 @@ window.BENCHMARK_DATA = {
             "value": 3.7948285161289257,
             "unit": "ms/iter",
             "extra": "iterations: 186\ncpu: 3.7939220430107525 ms\nthreads: 1"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "laguna_1989@gmx.net",
+            "name": "Laguna1989",
+            "username": "Laguna1989"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "76d5bc6338dd21a086aa069e8f872a6b06777883",
+          "message": "Merge pull request #139 from Laguna1989/FEATURE_UseNinja\n\nUse ninja as generator to speed up compilation",
+          "timestamp": "2022-01-30T11:00:26+01:00",
+          "tree_id": "72d35df15bc38d64d0a284a2718d58fb517fcbd7",
+          "url": "https://github.com/Laguna1989/JamTemplateCpp/commit/76d5bc6338dd21a086aa069e8f872a6b06777883"
+        },
+        "date": 1643537160282,
+        "tool": "googlecpp",
+        "benches": [
+          {
+            "name": "BM_StartGame",
+            "value": 0.0027043481506707824,
+            "unit": "ms/iter",
+            "extra": "iterations: 258391\ncpu: 0.002703294619394638 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GamestateWithTweeningShapes",
+            "value": 3.76073386413058,
+            "unit": "ms/iter",
+            "extra": "iterations: 184\ncpu: 3.7601173913043464 ms\nthreads: 1"
           }
         ]
       }
