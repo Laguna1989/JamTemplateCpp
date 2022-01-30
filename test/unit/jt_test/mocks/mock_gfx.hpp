@@ -1,7 +1,7 @@
 #ifndef MYAWESOMEGAME_MOCK_GFX_HPP
 #define MYAWESOMEGAME_MOCK_GFX_HPP
 
-#include "gfx_interface.hpp"
+#include "graphics/gfx_interface.hpp"
 #include "mock_camera.hpp"
 #include "mock_window.hpp"
 #include "texture_manager_impl.hpp"
@@ -16,9 +16,8 @@ public:
 
     MOCK_METHOD(void, reset, (), (override));
     MOCK_METHOD(void, update, (float), (override));
-    MOCK_METHOD(void, clear,(), (override));
+    MOCK_METHOD(void, clear, (), (override));
     MOCK_METHOD(void, display, (), (override));
-
 };
 
 #endif // MYAWESOMEGAME_MOCK_GFX_HPP

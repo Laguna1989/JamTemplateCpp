@@ -1,7 +1,7 @@
 ﻿#ifndef JAMTEMPLATE_UNITTEST_MOCKTWEEN_HPP_INCLUDEGUARD
 #define JAMTEMPLATE_UNITTEST_MOCKTWEEN_HPP_INCLUDEGUARD
 
-#include "drawable_interface.hpp"
+#include "graphics/drawable_interface.hpp"
 #include "tweens/tween_base.hpp"
 #include <gmock/gmock.h>
 

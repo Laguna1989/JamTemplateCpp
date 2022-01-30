@@ -2,7 +2,7 @@
 #define GUARD_JAMTEMPLATE_SPRITE_HPP_INCLUDEGUARD
 
 #include "color.hpp"
-#include "drawable_impl.hpp"
+#include "graphics/drawable_impl.hpp"
 #include "render_target.hpp"
 #include "texture_manager_interface.hpp"
 #include "vector.hpp"

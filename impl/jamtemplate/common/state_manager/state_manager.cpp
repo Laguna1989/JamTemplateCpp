@@ -2,6 +2,7 @@
 #include "game_interface.hpp"
 #include "state_manager_transition_none.hpp"
 #include <stdexcept>
+
 namespace jt {
 
 StateManager::StateManager(std::shared_ptr<GameState> initialState)
@@ -28,7 +29,6 @@ void StateManager::doSwitchState(std::weak_ptr<GameInterface> gameInstance)
     if (g) {
         g->reset();
     }
-    g->getLogger().info("SwitchState", { "jt" });
     m_nextState->setGameInstance(gameInstance);
     m_nextState->create();
 

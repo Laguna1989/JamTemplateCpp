@@ -2,9 +2,9 @@
 #define INCLUDE_MOCKGAME_HPP
 
 #include "game_interface.hpp"
+#include "graphics/render_window_null.hpp"
 #include "logging/logger_null.hpp"
 #include "mock_gfx.hpp"
-#include "render_window_null.hpp"
 #include <gmock/gmock.h>
 
 class MockGame : public jt::GameInterface {

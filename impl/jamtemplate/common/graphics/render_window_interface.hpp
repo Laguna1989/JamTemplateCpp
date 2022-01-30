@@ -11,11 +11,11 @@ namespace jt {
 
 class RenderWindowInterface {
 public:
-    // no copy, only move
+    // no copy, no move. Avoid slicing.
     RenderWindowInterface(const RenderWindowInterface&) = delete;
-    RenderWindowInterface(RenderWindowInterface&&) = default;
+    RenderWindowInterface(RenderWindowInterface&&) = delete;
     RenderWindowInterface& operator=(const RenderWindowInterface&) = delete;
-    RenderWindowInterface& operator=(RenderWindowInterface&&) = default;
+    RenderWindowInterface& operator=(RenderWindowInterface&&) = delete;
 
     /// Destructor
     virtual ~RenderWindowInterface() = default;
@@ -59,6 +59,7 @@ public:
     virtual void startRenderGui() = 0;
 
 protected:
+    // constructor can only be called from derived classes
     RenderWindowInterface() = default;
 };
 } // namespace jt

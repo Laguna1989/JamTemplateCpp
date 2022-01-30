@@ -1,7 +1,7 @@
 ﻿#ifndef JAMTEMPLATE_UNITTEST_MOCKDRAWABLE_HPP_INCLUDEGUARD
 #define JAMTEMPLATE_UNITTEST_MOCKDRAWABLE_HPP_INCLUDEGUARD
 
-#include "drawable_interface.hpp"
+#include "graphics/drawable_interface.hpp"
 #include "render_target.hpp"
 #include <gmock/gmock.h>
 #include <memory>

@@ -1,7 +1,7 @@
 ﻿#ifndef GUARD_JAMTEMPLATE_TILEMAP_HPP_GUARD
 #define GUARD_JAMTEMPLATE_TILEMAP_HPP_GUARD
 
-#include "drawable_impl.hpp"
+#include "graphics/drawable_impl.hpp"
 #include "info_rect.hpp"
 #include "pathfinder/node_interface.hpp"
 #include "render_target.hpp"

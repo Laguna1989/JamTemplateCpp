@@ -1,4 +1,4 @@
-#include "render_window.hpp"
+#include "graphics/render_window.hpp"
 #include "render_window_test.hpp"
 #include <gtest/gtest.h>
 
