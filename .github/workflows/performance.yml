@@ -39,8 +39,8 @@ jobs:
           libfreetype-dev \
           libflac-dev
 
-      - uses: seanmiddleditch/gha-setup-ninja@master
       - uses: actions/checkout@v2
+      - uses: seanmiddleditch/gha-setup-ninja@master
 
       - name: ccache
         uses: hendrikmuhs/ccache-action@v1
@@ -58,7 +58,7 @@ jobs:
           -DJT_ENABLE_PERFORMANCETESTS=ON .
 
       - name: Build
-        run: make -j 4 jt_performance
+        run: ninja -j 4 jt_performance
 
       - name: Execute Performance Test
         uses: GabrielBB/xvfb-action@v1
