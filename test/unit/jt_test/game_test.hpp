@@ -44,7 +44,7 @@ public:
         ON_CALL(stateManager, getCurrentState).WillByDefault(::testing::Return(state));
         ON_CALL(stateManager, update)
             .WillByDefault(
-                ::testing::Invoke([this](auto ptr, auto elapsed) { state->update(elapsed); }));
+                ::testing::Invoke([this](auto /*ptr*/, auto elapsed) { state->update(elapsed); }));
         g = std::make_shared<jt::Game>(
             gfx, input, audio, stateManager, logger, actionCommandManager);
         state->setGameInstance(g);
