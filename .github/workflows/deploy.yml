@@ -19,6 +19,7 @@ jobs:
           cmake-version: '3.19.x'
 
       - uses: actions/checkout@v2
+      - uses: seanmiddleditch/gha-setup-ninja@master
 
       - name: CMake
         run: cmake -B ${{github.workspace}}/build -DJT_ENABLE_UNITTESTS=OFF -DCMAKE_BUILD_TYPE=Release -DJT_ENABLE_DEBUG=OFF -DJT_ENABLE_DEMOS=OFF .
@@ -53,13 +54,15 @@ jobs:
         uses: jwlawson/actions-setup-cmake@v1.11
         with:
           cmake-version: '3.19.x'
+
       - uses: actions/checkout@v2
+      - uses: seanmiddleditch/gha-setup-ninja@master
 
       - name: Install system-wide dependencies
         run: sudo apt-get update && sudo apt-get install -y libsfml-dev rsync libsdl2-dev libsdl2-mixer-dev libsdl2-ttf-dev libsdl2-image-dev
 
       - name: CMake
-        run: cmake -B ${{github.workspace}}/build -DJT_ENABLE_UNITTESTS=OFF -DCMAKE_BUILD_TYPE=Release -DJT_ENABLE_DEMOS=OFF .
+        run: cmake -G Ninja -B ${{github.workspace}}/build -DJT_ENABLE_UNITTESTS=OFF -DCMAKE_BUILD_TYPE=Release -DJT_ENABLE_DEMOS=OFF .
 
       - name: Build
         working-directory: ${{github.workspace}}/build

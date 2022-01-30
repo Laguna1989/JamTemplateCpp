@@ -38,6 +38,7 @@ jobs:
           libflac-dev
 
       - uses: actions/checkout@v2
+      - uses: seanmiddleditch/gha-setup-ninja@master
 
       - name: ccache
         uses: hendrikmuhs/ccache-action@v1
@@ -48,13 +49,14 @@ jobs:
       - name: CMake
         run: |
           cmake \
+          -G Ninja \
           -DCMAKE_C_COMPILER_LAUNCHER=ccache -DCMAKE_CXX_COMPILER_LAUNCHER=ccache \
           -DJT_ENABLE_AUDIO_TESTS=OFF \
           -B ${{github.workspace}}/build .
 
       - name: Build
         working-directory: ${{github.workspace}}/build
-        run: make -j 4
+        run: ninja -j 4
 
       - name: StartJack
         run: jackd -d dummy &
@@ -88,6 +90,7 @@ jobs:
           libsdl2-image-dev
 
       - uses: actions/checkout@v2
+      - uses: seanmiddleditch/gha-setup-ninja@master
 
       - name: ccache
         uses: hendrikmuhs/ccache-action@v1
@@ -98,6 +101,7 @@ jobs:
       - name: CMake
         run: |
           cmake \
+          -G Ninja \
           -DCMAKE_C_COMPILER_LAUNCHER=ccache -DCMAKE_CXX_COMPILER_LAUNCHER=ccache \
           -DUSE_SFML=OFF \
           -DJT_ENABLE_AUDIO_TESTS=OFF \
@@ -105,7 +109,7 @@ jobs:
 
       - name: Build
         working-directory: ${{github.workspace}}/build
-        run: make -j 4
+        run: ninja -j 4
 
       - name: Test
         uses: GabrielBB/xvfb-action@v1
