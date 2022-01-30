@@ -1,4 +1,5 @@
 #include "state_audio.hpp"
+#include "../state_select.hpp"
 #include "game_interface.hpp"
 #include "imgui.h"
 
@@ -9,7 +10,15 @@ void StateAudio::doInternalCreate()
     m_soundWithEffect->setLoop(true);
     m_soundWithEffect->play();
 }
-void StateAudio::doInternalUpdate(float elapsed) { m_soundWithEffect->setBlend(m_blend); }
+
+void StateAudio::doInternalUpdate(float elapsed)
+{
+    m_soundWithEffect->setBlend(m_blend);
+    if (getGame()->input().keyboard()->justPressed(jt::KeyCode::Escape)) {
+        getGame()->getStateManager().switchState(std::make_shared<StateSelect>());
+    }
+}
+
 void StateAudio::doInternalDraw() const
 {
     ImGui::Begin("Sound");
