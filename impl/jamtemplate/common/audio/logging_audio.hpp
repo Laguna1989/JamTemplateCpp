@@ -8,11 +8,17 @@ namespace jt {
 class LoggingAudio : public AudioInterface {
 public:
     LoggingAudio(AudioInterface& decoratee, LoggerInterface& logger);
-    std::shared_ptr<SoundInterface> createSound(std::string const& fileName) override;
+
     void update() override;
-    void playMusic(std::string const& fileName) override;
-    std::shared_ptr<SoundWithEffect> createSoundWithEffect(
-        std::string const& fileName, oalpp::effects::MonoEffectInterface& effect) override;
+    void addTemporarySound(std::weak_ptr<SoundInterface> snd) override;
+    void addPermanentSound(std::string const& identifier, std::shared_ptr<Sound> snd) override;
+    void addPermanentSoundWithEffect(
+        std::string const& identifier, std::shared_ptr<SoundWithEffect> snd) override;
+    std::shared_ptr<Sound> getPermanentSound(std::string const& identifier) override;
+    std::shared_ptr<SoundWithEffect> getPermanentSoundWithEffect(
+        std::string const& identifier) override;
+    void removePermanentSound(std::string const& identifier) override;
+    oalpp::SoundContextInterface& getContext() override;
 
 private:
     AudioInterface& m_decoratee;

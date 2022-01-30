@@ -2,6 +2,7 @@
 #define GUARD_JAMTEMPLATE_AUDIO_INTERFACE_HPP
 
 #include "oalpp/sound_context_interface.hpp"
+#include "sound.hpp"
 #include "sound_interface.hpp"
 #include "sound_with_effect.hpp"
 #include <memory>
@@ -12,15 +13,23 @@ namespace jt {
 class AudioInterface {
 public:
     virtual ~AudioInterface() = default;
-    virtual std::shared_ptr<SoundInterface> createSound(std::string const& fileName) = 0;
-
-    virtual std::shared_ptr<SoundWithEffect> createSoundWithEffect(
-        std::string const& fileName, oalpp::effects::MonoEffectInterface& effect)
-        = 0;
 
     virtual void update() = 0;
 
-    virtual void playMusic(std::string const& fileName) = 0;
+    virtual void addTemporarySound(std::weak_ptr<SoundInterface> snd) = 0;
+    virtual void addPermanentSound(std::string const& identifier, std::shared_ptr<Sound> snd) = 0;
+    virtual void addPermanentSoundWithEffect(
+        std::string const& identifier, std::shared_ptr<SoundWithEffect> snd)
+        = 0;
+
+    virtual std::shared_ptr<Sound> getPermanentSound(std::string const& identifier) = 0;
+    virtual std::shared_ptr<SoundWithEffect> getPermanentSoundWithEffect(
+        std::string const& identifier)
+        = 0;
+
+    virtual void removePermanentSound(std::string const& identifier) = 0;
+
+    virtual oalpp::SoundContextInterface& getContext() = 0;
 
     // TODO add group functionality
 };

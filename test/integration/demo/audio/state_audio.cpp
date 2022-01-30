@@ -5,10 +5,11 @@
 
 void StateAudio::doInternalCreate()
 {
-    m_soundWithEffect
-        = getGame()->audio().createSoundWithEffect("assets/looping_stereo_track.mp3", m_effect);
+    m_soundWithEffect = std::make_shared<jt::SoundWithEffect>(
+        "assets/looping_stereo_track.mp3", m_effect, getGame()->audio().getContext());
     m_soundWithEffect->setLoop(true);
     m_soundWithEffect->play();
+    getGame()->audio().addPermanentSoundWithEffect("music", m_soundWithEffect);
 }
 
 void StateAudio::doInternalUpdate(float elapsed)
