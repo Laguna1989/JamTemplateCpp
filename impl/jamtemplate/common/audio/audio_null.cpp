@@ -1,11 +1,19 @@
 #include "audio_null.hpp"
 #include "sound_null.hpp"
 namespace jt {
-std::shared_ptr<SoundInterface> AudioNull::createSound(std::string const& fileName)
-{
-    return std::make_shared<SoundNull>();
-}
 void AudioNull::update() { }
+oalpp::SoundContextInterface& AudioNull::getContext() { return m_context; }
+void AudioNull::addTemporarySound(std::weak_ptr<SoundInterface> snd) { }
+void AudioNull::addPermanentSound(
+    std::string const& identifier, std::shared_ptr<SoundInterface> snd)
+{
+}
 
-void AudioNull::playMusic(std::string const& fileName) { }
+std::shared_ptr<SoundInterface> AudioNull::getPermanentSound(std::string const& identifier)
+{
+    return nullptr;
+}
+
+void AudioNull::removePermanentSound(std::string const& identifier) { }
+
 } // namespace jt

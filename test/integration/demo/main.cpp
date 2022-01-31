@@ -1,6 +1,6 @@
 ﻿#include "action_commands/action_command_manager.hpp"
 #include "action_commands/basic_action_commands.hpp"
-#include "audio/audio_null.hpp"
+#include "audio/audio_impl.hpp"
 #include "audio/logging_audio.hpp"
 #include "camera.hpp"
 #include "game.hpp"
@@ -46,7 +46,7 @@ int main()
     jt::LoggingCamera loggingCamera { camera, logger };
     jt::GfxImpl gfx { loggingRenderWindow, loggingCamera };
 
-    jt::AudioNull audio;
+    jt::AudioImpl audio;
     jt::LoggingAudio loggingAudio { audio, logger };
 
     jt::StateManager stateManager { std::make_shared<StateSelect>() };

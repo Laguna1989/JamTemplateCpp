@@ -3,15 +3,15 @@
 #include "sound.hpp"
 #include <algorithm>
 
-
-jt::SoundGroup::SoundGroup(std::vector<std::string> const& sounds, oalpp::SoundContext const& ctx)
+jt::SoundGroup::SoundGroup(
+    std::vector<std::string> const& sounds, oalpp::SoundContextInterface const& ctx)
 {
     for (auto const& f : sounds) {
         m_sounds.emplace_back(std::make_shared<jt::Sound>(f, ctx));
     }
 }
 
-void jt::SoundGroup::addSound(std::string const& fileName, oalpp::SoundContext const& ctx)
+void jt::SoundGroup::addSound(std::string const& fileName, oalpp::SoundContextInterface const& ctx)
 {
     m_sounds.emplace_back(std::make_shared<jt::Sound>(fileName, ctx));
 }
@@ -72,3 +72,22 @@ bool jt::SoundGroup::getLoop()
 float jt::SoundGroup::getDuration() const { return 0.0f; }
 
 float jt::SoundGroup::getPosition() const { return 0.0f; }
+void jt::SoundGroup::update()
+{
+    for (auto& snd : m_sounds) {
+        snd->update();
+    }
+}
+void jt::SoundGroup::setBlend(float blend)
+{
+    for (auto& snd : m_sounds) {
+        snd->setBlend(blend);
+    }
+}
+float jt::SoundGroup::getBlend() const
+{
+    if (m_sounds.empty()) {
+        return 0.0f;
+    }
+    return m_sounds.at(0)->getBlend();
+}
