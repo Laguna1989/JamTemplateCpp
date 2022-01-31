@@ -72,3 +72,22 @@ bool jt::SoundGroup::getLoop()
 float jt::SoundGroup::getDuration() const { return 0.0f; }
 
 float jt::SoundGroup::getPosition() const { return 0.0f; }
+void jt::SoundGroup::update()
+{
+    for (auto& snd : m_sounds) {
+        snd->update();
+    }
+}
+void jt::SoundGroup::setBlend(float blend)
+{
+    for (auto& snd : m_sounds) {
+        snd->setBlend(blend);
+    }
+}
+float jt::SoundGroup::getBlend() const
+{
+    if (m_sounds.empty()) {
+        return 0.0f;
+    }
+    return m_sounds.at(0)->getBlend();
+}

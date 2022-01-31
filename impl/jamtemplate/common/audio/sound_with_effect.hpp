@@ -23,8 +23,8 @@ public:
     float getDuration() const override;
     float getPosition() const override;
 
-    float getBlend() const;
-    void setBlend(float blend);
+    float getBlend() const override;
+    void setBlend(float blend) override;
 
 private:
     oalpp::SoundData m_drySoundData;

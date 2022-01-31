@@ -29,9 +29,15 @@ public:
 
     float getPosition() const override;
 
+    void setBlend(float blend) override;
+    float getBlend() const override;
+
 private:
     oalpp::SoundData m_buffer;
     oalpp::Sound m_sound;
+
+    float m_blend = 0.0f;
+    float m_volume = 1.0f;
 };
 
 } // namespace jt

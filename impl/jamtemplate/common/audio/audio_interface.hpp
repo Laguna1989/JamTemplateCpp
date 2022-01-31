@@ -17,15 +17,11 @@ public:
     virtual void update() = 0;
 
     virtual void addTemporarySound(std::weak_ptr<SoundInterface> snd) = 0;
-    virtual void addPermanentSound(std::string const& identifier, std::shared_ptr<Sound> snd) = 0;
-    virtual void addPermanentSoundWithEffect(
-        std::string const& identifier, std::shared_ptr<SoundWithEffect> snd)
+    virtual void addPermanentSound(
+        std::string const& identifier, std::shared_ptr<SoundInterface> snd)
         = 0;
 
-    virtual std::shared_ptr<Sound> getPermanentSound(std::string const& identifier) = 0;
-    virtual std::shared_ptr<SoundWithEffect> getPermanentSoundWithEffect(
-        std::string const& identifier)
-        = 0;
+    virtual std::shared_ptr<SoundInterface> getPermanentSound(std::string const& identifier) = 0;
 
     virtual void removePermanentSound(std::string const& identifier) = 0;
 

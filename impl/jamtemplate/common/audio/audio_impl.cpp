@@ -19,9 +19,6 @@ void AudioImpl::update()
     for (auto& snd : m_permanentSounds) {
         snd.second->update();
     }
-    for (auto& snd : m_permanentSoundsWithEffect) {
-        snd.second->update();
-    }
 }
 void AudioImpl::cleanUpUnusedSounds()
 {
@@ -37,38 +34,24 @@ void AudioImpl::addTemporarySound(std::weak_ptr<SoundInterface> snd)
 
 oalpp::SoundContextInterface& AudioImpl::getContext() { return m_context; }
 
-void AudioImpl::addPermanentSound(std::string const& identifier, std::shared_ptr<Sound> snd)
+void AudioImpl::addPermanentSound(
+    std::string const& identifier, std::shared_ptr<SoundInterface> snd)
 {
     m_permanentSounds[identifier] = snd;
 }
 
-void AudioImpl::addPermanentSoundWithEffect(
-    std::string const& identifier, std::shared_ptr<SoundWithEffect> snd)
-{
-    m_permanentSoundsWithEffect[identifier] = snd;
-}
-std::shared_ptr<Sound> AudioImpl::getPermanentSound(std::string const& identifier)
+std::shared_ptr<SoundInterface> AudioImpl::getPermanentSound(std::string const& identifier)
 {
     if (m_permanentSounds.count(identifier) == 0) {
         return nullptr;
     }
     return m_permanentSounds[identifier];
 }
-std::shared_ptr<SoundWithEffect> AudioImpl::getPermanentSoundWithEffect(
-    std::string const& identifier)
-{
-    if (m_permanentSoundsWithEffect.count(identifier) == 0) {
-        return nullptr;
-    }
-    return m_permanentSoundsWithEffect[identifier];
-}
+
 void AudioImpl::removePermanentSound(std::string const& identifier)
 {
     if (m_permanentSounds.count(identifier) != 0) {
         m_permanentSounds[identifier] = nullptr;
-    }
-    if (m_permanentSoundsWithEffect.count(identifier) != 0) {
-        m_permanentSoundsWithEffect[identifier] = nullptr;
     }
 }
 

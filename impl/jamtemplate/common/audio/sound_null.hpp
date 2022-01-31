@@ -17,6 +17,9 @@ public:
     bool getLoop(void) override;
     float getDuration() const override;
     float getPosition() const override;
+
+    void setBlend(float blend) override;
+    float getBlend() const override;
 };
 } // namespace jt
 

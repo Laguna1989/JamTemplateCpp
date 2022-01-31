@@ -5,11 +5,19 @@
 
 void StateAudio::doInternalCreate()
 {
-    m_soundWithEffect = std::make_shared<jt::SoundWithEffect>(
-        "assets/looping_stereo_track.mp3", m_effect, getGame()->audio().getContext());
-    m_soundWithEffect->setLoop(true);
-    m_soundWithEffect->play();
-    getGame()->audio().addPermanentSoundWithEffect("music", m_soundWithEffect);
+    // check if music was already created
+    m_soundWithEffect = getGame()->audio().getPermanentSound("music");
+    if (m_soundWithEffect == nullptr) {
+        // create new music
+        m_soundWithEffect = std::make_shared<jt::SoundWithEffect>(
+            "assets/looping_stereo_track.mp3", m_effect, getGame()->audio().getContext());
+        m_soundWithEffect->setLoop(true);
+        m_soundWithEffect->play();
+        getGame()->audio().addPermanentSound("music", m_soundWithEffect);
+    } else {
+        // get blend property from already created music
+        m_blend = m_soundWithEffect->getBlend();
+    }
 }
 
 void StateAudio::doInternalUpdate(float elapsed)

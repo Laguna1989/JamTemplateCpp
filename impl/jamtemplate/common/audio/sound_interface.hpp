@@ -28,6 +28,9 @@ public:
     virtual float getDuration() const = 0;
 
     virtual float getPosition() const = 0;
+
+    virtual void setBlend(float blend) = 0;
+    virtual float getBlend() const = 0;
 };
 } // namespace jt
 

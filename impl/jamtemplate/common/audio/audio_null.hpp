@@ -17,13 +17,13 @@ public:
     void update() override;
 
     oalpp::SoundContextInterface& getContext() override;
+
     void addTemporarySound(std::weak_ptr<SoundInterface> snd) override;
-    void addPermanentSound(std::string const& identifier, std::shared_ptr<Sound> snd) override;
-    void addPermanentSoundWithEffect(
-        std::string const& identifier, std::shared_ptr<SoundWithEffect> snd) override;
-    std::shared_ptr<Sound> getPermanentSound(std::string const& identifier) override;
-    std::shared_ptr<SoundWithEffect> getPermanentSoundWithEffect(
-        std::string const& identifier) override;
+    void addPermanentSound(
+        std::string const& identifier, std::shared_ptr<SoundInterface> snd) override;
+
+    std::shared_ptr<SoundInterface> getPermanentSound(std::string const& identifier) override;
+
     void removePermanentSound(std::string const& identifier) override;
 
 private:
