@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1643537160759,
+  "lastUpdate": 1643645998287,
   "repoUrl": "https://github.com/Laguna1989/JamTemplateCpp",
   "entries": {
     "Benchmark": [
@@ -3240,6 +3240,42 @@ window.BENCHMARK_DATA = {
             "value": 3.76073386413058,
             "unit": "ms/iter",
             "extra": "iterations: 184\ncpu: 3.7601173913043464 ms\nthreads: 1"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "laguna_1989@gmx.net",
+            "name": "Laguna1989",
+            "username": "Laguna1989"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "1bdc52b55bd3bea270bd3e336fcee8901a764864",
+          "message": "Merge pull request #140 from Laguna1989/FEATURE_SoundWithEffect\n\nAdd soundWithEffect",
+          "timestamp": "2022-01-31T17:16:53+01:00",
+          "tree_id": "9e3a117ea580cfee6c81df1013ce2008643bc47c",
+          "url": "https://github.com/Laguna1989/JamTemplateCpp/commit/1bdc52b55bd3bea270bd3e336fcee8901a764864"
+        },
+        "date": 1643645997127,
+        "tool": "googlecpp",
+        "benches": [
+          {
+            "name": "BM_StartGame",
+            "value": 0.0025853958321073026,
+            "unit": "ms/iter",
+            "extra": "iterations: 271888\ncpu: 0.002584973959865827 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GamestateWithTweeningShapes",
+            "value": 3.664806824467953,
+            "unit": "ms/iter",
+            "extra": "iterations: 188\ncpu: 3.664656914893616 ms\nthreads: 1"
           }
         ]
       }
