@@ -10,8 +10,7 @@ namespace jt {
 
 class SoundWithEffect : public SoundInterface {
 public:
-    SoundWithEffect(std::string const& fileName, oalpp::effects::MonoEffectInterface& effect,
-        oalpp::SoundContextInterface const& ctx);
+    SoundWithEffect(std::string const& fileName, oalpp::effects::MonoEffectInterface& effect);
     void update() override;
     bool isPlaying() const override;
     void play() override;

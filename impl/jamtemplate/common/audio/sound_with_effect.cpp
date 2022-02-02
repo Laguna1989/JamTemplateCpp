@@ -2,12 +2,12 @@
 
 namespace jt {
 
-SoundWithEffect::SoundWithEffect(std::string const& fileName,
-    oalpp::effects::MonoEffectInterface& effect, oalpp::SoundContextInterface const& ctx)
+SoundWithEffect::SoundWithEffect(
+    std::string const& fileName, oalpp::effects::MonoEffectInterface& effect)
     : m_drySoundData { fileName }
-    , m_drySound { m_drySoundData, ctx }
+    , m_drySound { m_drySoundData }
     , m_wetSoundData { m_drySoundData, effect }
-    , m_wetSound { m_wetSoundData, ctx }
+    , m_wetSound { m_wetSoundData }
 {
 }
 

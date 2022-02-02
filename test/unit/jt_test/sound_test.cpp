@@ -17,7 +17,7 @@ protected:
     SoundTestWithLoadedSound() { initializeSound(); }
     void initializeSound()
     {
-        m_sound = std::make_unique<Sound>("assets/test.ogg", ctx);
+        m_sound = std::make_unique<Sound>("assets/test.ogg");
         m_sound->setLoop(false);
         m_sound->setVolume(1.0f);
         m_sound->stop();
