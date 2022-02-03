@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1643645998287,
+  "lastUpdate": 1643872116667,
   "repoUrl": "https://github.com/Laguna1989/JamTemplateCpp",
   "entries": {
     "Benchmark": [
@@ -3276,6 +3276,42 @@ window.BENCHMARK_DATA = {
             "value": 3.664806824467953,
             "unit": "ms/iter",
             "extra": "iterations: 188\ncpu: 3.664656914893616 ms\nthreads: 1"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "laguna_1989@gmx.net",
+            "name": "Laguna1989",
+            "username": "Laguna1989"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "6bf3078f7ffa290ffff509ab410b81ff441916b3",
+          "message": "Merge pull request #141 from Laguna1989/FEATURE_NewSoundAPI\n\nAdapt to new openalpp sound interface",
+          "timestamp": "2022-02-03T08:06:03+01:00",
+          "tree_id": "6cf8df2a239ef3b7f657135346c6e480f40d3c62",
+          "url": "https://github.com/Laguna1989/JamTemplateCpp/commit/6bf3078f7ffa290ffff509ab410b81ff441916b3"
+        },
+        "date": 1643872115525,
+        "tool": "googlecpp",
+        "benches": [
+          {
+            "name": "BM_StartGame",
+            "value": 0.002202521893785624,
+            "unit": "ms/iter",
+            "extra": "iterations: 317396\ncpu: 0.0022011250929438305 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GamestateWithTweeningShapes",
+            "value": 3.201629449999902,
+            "unit": "ms/iter",
+            "extra": "iterations: 220\ncpu: 3.192115 ms\nthreads: 1"
           }
         ]
       }
