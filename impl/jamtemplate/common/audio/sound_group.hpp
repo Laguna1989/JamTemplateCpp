@@ -19,8 +19,7 @@ public:
 
     /// Constructor
     /// \param sounds list of filepaths to load
-    explicit SoundGroup(
-        std::vector<std::string> const& sounds, oalpp::SoundContextInterface const& ctx);
+    explicit SoundGroup(std::vector<std::string> const& sounds);
 
     bool isPlaying() const override;
 
@@ -44,7 +43,7 @@ public:
 private:
     std::vector<std::shared_ptr<SoundInterface>> m_sounds {};
 
-    void addSound(std::string const& fileName, oalpp::SoundContextInterface const& ctx);
+    void addSound(std::string const& fileName);
 };
 } // namespace jt
 #endif

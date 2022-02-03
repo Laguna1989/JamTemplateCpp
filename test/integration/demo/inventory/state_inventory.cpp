@@ -36,7 +36,7 @@ void StateInventory::doInternalCreate()
         std::make_shared<ControlCommandMoveCam>(
             jt::Vector2f { scrollSpeed, 0.0f }, getGame()->gfx().camera()));
 
-    m_pickupSound = std::make_shared<jt::Sound>("assets/test.ogg", getGame()->audio().getContext());
+    m_pickupSound = std::make_shared<jt::Sound>("assets/test.ogg");
     getGame()->audio().addTemporarySound(m_pickupSound);
 }
 

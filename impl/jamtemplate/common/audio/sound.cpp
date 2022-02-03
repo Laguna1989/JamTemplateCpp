@@ -3,9 +3,9 @@
 
 namespace jt {
 
-Sound::Sound(std::string const& fileName, oalpp::SoundContextInterface const& ctx)
+Sound::Sound(std::string const& fileName)
     : m_buffer { fileName }
-    , m_sound { m_buffer, ctx }
+    , m_sound { m_buffer }
 {
 }
 
@@ -29,7 +29,7 @@ bool Sound::getLoop(void) { return m_sound.getIsLooping(); }
 float Sound::getDuration() const { return m_sound.getLengthInSeconds(); }
 
 float Sound::getPosition() const { return m_sound.getCurrentPositionInSeconds(); }
-void Sound::setBlend(float blend) { m_blend = blend; }
-float Sound::getBlend() const { return m_blend; }
+void Sound::setBlend(float blend) { m_blend = 1.0f - blend; }
+float Sound::getBlend() const { return 1.0f - m_blend; }
 
 } // namespace jt

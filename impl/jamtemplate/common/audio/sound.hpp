@@ -10,7 +10,7 @@ namespace jt {
 
 class Sound : public SoundInterface {
 public:
-    Sound(std::string const& fileName, oalpp::SoundContextInterface const& ctx);
+    explicit Sound(std::string const& fileName);
 
     void update() override;
 
@@ -36,7 +36,7 @@ private:
     oalpp::SoundData m_buffer;
     oalpp::Sound m_sound;
 
-    float m_blend = 0.0f;
+    float m_blend = 1.0f;
     float m_volume = 1.0f;
 };
 
