@@ -51,6 +51,10 @@ protected:
     ActionCommandManagerInterface& m_actionCommandManager;
 
     std::chrono::steady_clock::time_point m_timeLast {};
+
+    float m_lag { 0.0f };
+    float m_timePerUpdate { 0.005f };
+    int m_maxNumberOfUpdateIterations = 100;
 };
 
 } // namespace jt
