@@ -34,9 +34,6 @@ public:
 protected:
     std::weak_ptr<GameInterface> getPtr() override;
 
-    void startUpdate(float elapsedInSeconds);
-    void singleUpdate();
-
     // overwritten functions from GameObject
     virtual void doUpdate(float const elapsed) override;
     virtual void doDraw() const override;

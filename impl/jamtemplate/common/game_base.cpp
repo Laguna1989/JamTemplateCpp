@@ -21,18 +21,23 @@ void GameBase::runOneFrame()
 
     auto const now = std::chrono::steady_clock::now();
 
-    float const elapsedInSeconds
+    float const elapsedSeconds
         = std::chrono::duration_cast<std::chrono::microseconds>(now - m_timeLast).count() / 1000.0f
         / 1000.0f;
     m_timeLast = now;
 
     if (m_age != 0) {
-        startUpdate(elapsedInSeconds);
+        m_lag += elapsedSeconds;
+        gfx().window().updateGui(elapsedSeconds);
+        gfx().window().checkForClose();
 
-        singleUpdate();
         int numberOfUpdateOperations = 0;
-        while (m_lag >= m_timePerUpdate) {
-            singleUpdate();
+
+        // update has to be called at least once per frame
+        do {
+            update(m_timePerUpdate);
+            m_lag -= m_timePerUpdate;
+
             numberOfUpdateOperations++;
             if (numberOfUpdateOperations >= m_maxNumberOfUpdateIterations) {
                 getLogger().warning(
@@ -40,23 +45,10 @@ void GameBase::runOneFrame()
                 m_lag = 0.0f;
                 break;
             }
-        }
+        } while (m_lag >= m_timePerUpdate);
         draw();
     }
-    m_age += elapsedInSeconds;
-}
-
-void GameBase::startUpdate(float elapsedInSeconds)
-{
-    m_lag += elapsedInSeconds;
-    gfx().window().updateGui(elapsedInSeconds);
-    gfx().window().checkForClose();
-}
-
-void GameBase::singleUpdate()
-{
-    update(m_timePerUpdate);
-    m_lag -= m_timePerUpdate;
+    m_age += elapsedSeconds;
 }
 
 std::weak_ptr<GameInterface> GameBase::getPtr() { return shared_from_this(); }
