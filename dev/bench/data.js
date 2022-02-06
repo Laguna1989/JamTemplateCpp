@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1643872116667,
+  "lastUpdate": 1644150795409,
   "repoUrl": "https://github.com/Laguna1989/JamTemplateCpp",
   "entries": {
     "Benchmark": [
@@ -3312,6 +3312,42 @@ window.BENCHMARK_DATA = {
             "value": 3.201629449999902,
             "unit": "ms/iter",
             "extra": "iterations: 220\ncpu: 3.192115 ms\nthreads: 1"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "laguna.ws@gmail.com",
+            "name": "Laguna1989",
+            "username": "Laguna1989"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "0cbe69ff35c534794125d5a0dba453d753f7cee6",
+          "message": "Merge pull request #142 from Laguna1989/FEATURE_GameLoopFixedTimeStep\n\nImplement fixed time step update",
+          "timestamp": "2022-02-06T13:30:31+01:00",
+          "tree_id": "c26fa51d9005892c843ad9b97e0361b89b9d81b0",
+          "url": "https://github.com/Laguna1989/JamTemplateCpp/commit/0cbe69ff35c534794125d5a0dba453d753f7cee6"
+        },
+        "date": 1644150794225,
+        "tool": "googlecpp",
+        "benches": [
+          {
+            "name": "BM_StartGame",
+            "value": 0.0022216758033207,
+            "unit": "ms/iter",
+            "extra": "iterations: 311675\ncpu: 0.0022213485200930456 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GamestateWithTweeningShapes",
+            "value": 3.172869253393868,
+            "unit": "ms/iter",
+            "extra": "iterations: 221\ncpu: 3.172681447963802 ms\nthreads: 1"
           }
         ]
       }
