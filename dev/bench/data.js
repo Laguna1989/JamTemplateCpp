@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1644150795409,
+  "lastUpdate": 1644151441092,
   "repoUrl": "https://github.com/Laguna1989/JamTemplateCpp",
   "entries": {
     "Benchmark": [
@@ -3348,6 +3348,42 @@ window.BENCHMARK_DATA = {
             "value": 3.172869253393868,
             "unit": "ms/iter",
             "extra": "iterations: 221\ncpu: 3.172681447963802 ms\nthreads: 1"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "thunraz@thunraz.com",
+            "name": "Thunraz",
+            "username": "Thunraz"
+          },
+          "committer": {
+            "email": "thunraz@thunraz.com",
+            "name": "Thunraz",
+            "username": "Thunraz"
+          },
+          "distinct": true,
+          "id": "4453c725776d03f30927c13aeb4d4f9cc937b176",
+          "message": "Minor refactoring",
+          "timestamp": "2022-02-06T13:41:49+01:00",
+          "tree_id": "2f6f186e77172e63e9498399e6b3e05212040cab",
+          "url": "https://github.com/Laguna1989/JamTemplateCpp/commit/4453c725776d03f30927c13aeb4d4f9cc937b176"
+        },
+        "date": 1644151440624,
+        "tool": "googlecpp",
+        "benches": [
+          {
+            "name": "BM_StartGame",
+            "value": 0.002306898090052796,
+            "unit": "ms/iter",
+            "extra": "iterations: 310951\ncpu: 0.0023060588324205424 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GamestateWithTweeningShapes",
+            "value": 3.373908653658579,
+            "unit": "ms/iter",
+            "extra": "iterations: 205\ncpu: 3.373613658536585 ms\nthreads: 1"
           }
         ]
       }
