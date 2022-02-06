@@ -1,4 +1,5 @@
 ﻿#include "game_base.hpp"
+#include <string>
 
 namespace jt {
 
@@ -40,8 +41,9 @@ void GameBase::runOneFrame()
 
             numberOfUpdateOperations++;
             if (numberOfUpdateOperations >= m_maxNumberOfUpdateIterations) {
-                getLogger().warning(
-                    "number of update operations exceeds maximum of 100", { "jt", "gameloop" });
+                getLogger().warning("number of update operations exceeds maximum of "
+                        + std::to_string(m_maxNumberOfUpdateIterations),
+                    { "jt", "gameloop" });
                 m_lag = 0.0f;
                 break;
             }

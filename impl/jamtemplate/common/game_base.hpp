@@ -35,8 +35,8 @@ protected:
     std::weak_ptr<GameInterface> getPtr() override;
 
     // overwritten functions from GameObject
-    virtual void doUpdate(float const elapsed) override;
-    virtual void doDraw() const override;
+    void doUpdate(float const elapsed) override;
+    void doDraw() const override;
 
     GfxInterface& m_gfx;
 
@@ -54,7 +54,7 @@ protected:
 
     float m_lag { 0.0f };
     float m_timePerUpdate { 0.005f };
-    int m_maxNumberOfUpdateIterations = 100;
+    int m_maxNumberOfUpdateIterations { 100 };
 };
 
 } // namespace jt
