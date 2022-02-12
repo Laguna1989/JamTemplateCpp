@@ -14,7 +14,7 @@ private:
     void doInternalDraw() const override;
 
     oalpp::effects::filter::Butterworth24dbLowpass m_effect { 44100, 600.0f, 0.2f };
-    std::shared_ptr<jt::SoundInterface> m_soundWithEffect { nullptr };
+    std::shared_ptr<jt::SoundInterface> m_sound { nullptr };
 
     mutable float m_blend { 0.0f };
 };

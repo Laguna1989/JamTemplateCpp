@@ -38,6 +38,13 @@ void jt::SoundGroup::stop()
     }
 }
 
+void jt::SoundGroup::pause()
+{
+    for (auto& snd : m_sounds) {
+        snd->pause();
+    }
+}
+
 float jt::SoundGroup::getVolume() const
 {
     if (m_sounds.empty()) {

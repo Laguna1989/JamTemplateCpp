@@ -1,9 +1,16 @@
 #include "logging_sound.hpp"
+#include "audio/sound.hpp"
 
 namespace jt {
 
 LoggingSound::LoggingSound(std::shared_ptr<SoundInterface> decoratee, LoggerInterface& logger)
     : m_decoratee { decoratee }
+    , m_logger { logger }
+{
+}
+
+LoggingSound::LoggingSound(std::string fileName, LoggerInterface& logger)
+    : m_decoratee { std::make_shared<jt::Sound>(fileName) }
     , m_logger { logger }
 {
 }
@@ -31,6 +38,12 @@ void LoggingSound::stop()
 {
     m_logger.debug("Sound stop", { "jt", "audio", "sound" });
     m_decoratee->stop();
+}
+
+void LoggingSound::pause()
+{
+    m_logger.debug("Sound pause", { "jt", "audio", "sound" });
+    m_decoratee->pause();
 }
 
 float LoggingSound::getVolume() const
@@ -71,6 +84,19 @@ float LoggingSound::getPosition() const
     auto const position = m_decoratee->getPosition();
     m_logger.verbose("Sound getPosition: " + std::to_string(position), { "jt", "audio", "sound" });
     return position;
+}
+
+void LoggingSound::setBlend(float blend)
+{
+    m_logger.debug("Sound setBlend: " + std::to_string(blend), { "jt", "audio", "sound" });
+    m_decoratee->setBlend(blend);
+}
+
+float LoggingSound::getBlend() const
+{
+    auto const blend = m_decoratee->getBlend();
+    m_logger.verbose("Sound getBlend: " + std::to_string(blend), { "jt", "audio", "sound" });
+    return blend;
 }
 
 } // namespace jt

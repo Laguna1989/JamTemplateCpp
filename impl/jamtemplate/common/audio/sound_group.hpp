@@ -25,6 +25,7 @@ public:
 
     void play() override;
     void stop() override;
+    void pause() override;
 
     float getVolume() const override;
     void setVolume(float newVolume) override;
