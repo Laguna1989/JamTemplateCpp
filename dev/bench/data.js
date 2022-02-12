@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1644641908213,
+  "lastUpdate": 1644644482597,
   "repoUrl": "https://github.com/Laguna1989/JamTemplateCpp",
   "entries": {
     "Benchmark": [
@@ -3420,6 +3420,42 @@ window.BENCHMARK_DATA = {
             "value": 4.209463956521945,
             "unit": "ms/iter",
             "extra": "iterations: 161\ncpu: 4.208506832298135 ms\nthreads: 1"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "laguna.ws@gmail.com",
+            "name": "Laguna1989",
+            "username": "Laguna1989"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "a83b3271f9511ff93bffc9cf069e552c638f3fff",
+          "message": "Merge pull request #144 from Laguna1989/FEATURE_AudioDemoStopPause\n\nAdd Pause and Stop to Audio Demo",
+          "timestamp": "2022-02-12T06:39:07+01:00",
+          "tree_id": "0504cbb78d8717373e95aa3b7afb4610404649d5",
+          "url": "https://github.com/Laguna1989/JamTemplateCpp/commit/a83b3271f9511ff93bffc9cf069e552c638f3fff"
+        },
+        "date": 1644644482029,
+        "tool": "googlecpp",
+        "benches": [
+          {
+            "name": "BM_StartGame",
+            "value": 0.0026247439296048876,
+            "unit": "ms/iter",
+            "extra": "iterations: 261268\ncpu: 0.0026239811228317284 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GamestateWithTweeningShapes",
+            "value": 3.7196011336898804,
+            "unit": "ms/iter",
+            "extra": "iterations: 187\ncpu: 3.718236363636365 ms\nthreads: 1"
           }
         ]
       }
