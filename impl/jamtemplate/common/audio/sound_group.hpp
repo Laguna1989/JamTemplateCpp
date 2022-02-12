@@ -17,9 +17,11 @@ public:
     /// Constructor
     SoundGroup() = default;
 
-    /// Constructor
+    /// Constructor for convenience
     /// \param sounds list of filepaths to load
     explicit SoundGroup(std::vector<std::string> const& sounds);
+
+    void add(std::shared_ptr<SoundInterface> sound);
 
     bool isPlaying() const override;
 
