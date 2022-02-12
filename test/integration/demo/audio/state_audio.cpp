@@ -1,6 +1,7 @@
 #include "state_audio.hpp"
 #include "../state_select.hpp"
 #include "audio/logging_sound.hpp"
+#include "audio/sound_group.hpp"
 #include "game_interface.hpp"
 #include "imgui.h"
 
@@ -20,6 +21,18 @@ void StateAudio::doInternalCreate()
         // get blend property from already created music
         m_blend = m_sound->getBlend();
     }
+
+    auto soundGroup = std::make_shared<jt::SoundGroup>();
+    std::vector<float> pitches { 0.5f /*A3*/, 1.0f /*A4*/, 1.12234772727272727273f /*B4*/,
+        1.18920681818181818182f /*C5*/, 1.33484090909090909091f /*D5*/,
+        1.49830681818181818182f /*E5*/, 1.5874f /*F5*/, 1.78179772727272727273f /*G5*/,
+        2.0f /*A5*/ };
+    for (float pitch : pitches) {
+        auto snd = std::make_shared<jt::Sound>("assets/test.ogg");
+        snd->setPitch(pitch);
+        soundGroup->add(snd);
+    }
+    m_soundGroup = soundGroup;
 }
 
 void StateAudio::doInternalUpdate(float elapsed)
@@ -44,6 +57,11 @@ void StateAudio::doInternalDraw() const
     }
     if (ImGui::Button("stop")) {
         m_sound->stop();
+    }
+    ImGui::Separator();
+    ImGui::Text("SoundGroup");
+    if (ImGui::Button("play One Sound")) {
+        m_soundGroup->play();
     }
     ImGui::End();
 }

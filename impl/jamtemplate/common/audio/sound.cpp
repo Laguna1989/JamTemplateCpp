@@ -33,4 +33,7 @@ float Sound::getPosition() const { return m_sound.getCurrentPositionInSeconds();
 void Sound::setBlend(float blend) { m_blend = 1.0f - blend; }
 float Sound::getBlend() const { return 1.0f - m_blend; }
 
+void Sound::setPitch(float pitch) { m_sound.setPitch(pitch); }
+float Sound::getPitch() const { return m_sound.getPitch(); }
+
 } // namespace jt

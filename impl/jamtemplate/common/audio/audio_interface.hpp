@@ -14,6 +14,12 @@ class AudioInterface {
 public:
     virtual ~AudioInterface() = default;
 
+    // no copy, no move
+    AudioInterface(const AudioInterface&) = delete;
+    AudioInterface(AudioInterface&&) = delete;
+    AudioInterface& operator=(const AudioInterface&) = delete;
+    AudioInterface& operator=(AudioInterface&&) = delete;
+
     /// Update sounds in the the audio interface
     virtual void update() = 0;
 
@@ -41,6 +47,8 @@ public:
     virtual oalpp::SoundContextInterface& getContext() = 0;
 
     // TODO add group functionality
+protected:
+    AudioInterface() = default;
 };
 
 } // namespace jt

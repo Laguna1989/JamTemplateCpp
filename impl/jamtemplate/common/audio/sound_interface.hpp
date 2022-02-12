@@ -7,6 +7,12 @@ class SoundInterface {
 public:
     virtual ~SoundInterface() = default;
 
+    // no copy, no move
+    SoundInterface(const SoundInterface&) = delete;
+    SoundInterface(SoundInterface&&) = delete;
+    SoundInterface& operator=(const SoundInterface&) = delete;
+    SoundInterface& operator=(SoundInterface&&) = delete;
+
     /// Update the sound
     virtual void update() = 0;
 
@@ -51,6 +57,9 @@ public:
     /// Get blend
     /// \return blend Parameter (between 0 and 1)
     virtual float getBlend() const = 0;
+
+protected:
+    SoundInterface() = default;
 };
 } // namespace jt
 

@@ -16,6 +16,8 @@ private:
     oalpp::effects::filter::Butterworth24dbLowpass m_effect { 44100, 600.0f, 0.2f };
     std::shared_ptr<jt::SoundInterface> m_sound { nullptr };
 
+    std::shared_ptr<jt::SoundInterface> m_soundGroup { nullptr };
+
     mutable float m_blend { 0.0f };
 };
 

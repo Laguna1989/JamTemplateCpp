@@ -97,3 +97,9 @@ float jt::SoundGroup::getBlend() const
     }
     return m_sounds.at(0)->getBlend();
 }
+void jt::SoundGroup::add(std::shared_ptr<SoundInterface> sound)
+{
+    if (sound != nullptr) {
+        m_sounds.push_back(sound);
+    }
+}
