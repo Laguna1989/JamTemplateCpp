@@ -16,7 +16,7 @@ void SoundWithEffect::update()
     m_drySound.update();
     m_wetSound.update();
 
-    m_drySound.setVolume(m_volume * (1.0 - m_blend));
+    m_drySound.setVolume(m_volume * (1.0f - m_blend));
     m_wetSound.setVolume(m_volume * (m_blend));
 }
 bool SoundWithEffect::isPlaying() const { return m_drySound.isPlaying(); }
@@ -31,6 +31,12 @@ void SoundWithEffect::stop()
     m_drySound.stop();
     m_wetSound.stop();
 }
+void SoundWithEffect::pause()
+{
+    m_drySound.pause();
+    m_wetSound.pause();
+}
+
 float SoundWithEffect::getVolume() const { return m_volume; }
 
 void SoundWithEffect::setVolume(float newVolume) { m_volume = newVolume; }

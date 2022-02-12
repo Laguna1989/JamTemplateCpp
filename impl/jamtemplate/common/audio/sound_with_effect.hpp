@@ -13,12 +13,17 @@ public:
     SoundWithEffect(std::string const& fileName, oalpp::effects::MonoEffectInterface& effect);
     void update() override;
     bool isPlaying() const override;
+
     void play() override;
     void stop() override;
+    void pause() override;
+
     float getVolume() const override;
     void setVolume(float newVolume) override;
+
     void setLoop(bool doLoop) override;
     bool getLoop(void) override;
+
     float getDuration() const override;
     float getPosition() const override;
 
