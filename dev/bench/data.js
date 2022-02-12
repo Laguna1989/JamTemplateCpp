@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1644644482597,
+  "lastUpdate": 1644651963137,
   "repoUrl": "https://github.com/Laguna1989/JamTemplateCpp",
   "entries": {
     "Benchmark": [
@@ -3456,6 +3456,42 @@ window.BENCHMARK_DATA = {
             "value": 3.7196011336898804,
             "unit": "ms/iter",
             "extra": "iterations: 187\ncpu: 3.718236363636365 ms\nthreads: 1"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "laguna.ws@gmail.com",
+            "name": "Laguna1989",
+            "username": "Laguna1989"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "5217a3abc33f255dd232f6102865698271d51b1c",
+          "message": "Merge pull request #145 from Laguna1989/FEATURE_SoundGroup\n\nAdd SoundGroup to Demo",
+          "timestamp": "2022-02-12T08:42:45+01:00",
+          "tree_id": "d8f67c93da6c7faa1d1c3ea09062da1c0d7ad9c1",
+          "url": "https://github.com/Laguna1989/JamTemplateCpp/commit/5217a3abc33f255dd232f6102865698271d51b1c"
+        },
+        "date": 1644651962000,
+        "tool": "googlecpp",
+        "benches": [
+          {
+            "name": "BM_StartGame",
+            "value": 0.0024516802557209426,
+            "unit": "ms/iter",
+            "extra": "iterations: 279367\ncpu: 0.0024513743570285683 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GamestateWithTweeningShapes",
+            "value": 3.7140679787233073,
+            "unit": "ms/iter",
+            "extra": "iterations: 188\ncpu: 3.713581914893616 ms\nthreads: 1"
           }
         ]
       }
