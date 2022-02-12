@@ -1,6 +1,7 @@
 ﻿#ifndef GUARD_JAMTEMPLATE_GAMEOBJECT_HPP_INCLUDEGUARD
 #define GUARD_JAMTEMPLATE_GAMEOBJECT_HPP_INCLUDEGUARD
 
+#include "counted_object.hpp"
 #include <memory>
 #include <string>
 #include <vector>
@@ -9,7 +10,7 @@ namespace jt {
 // forward declaration
 class GameInterface;
 
-class GameObject {
+class GameObject : public CountedObj<GameObject> {
 public:
     using Sptr = std::shared_ptr<GameObject>;
 
@@ -71,6 +72,9 @@ public:
     void storeActionCommand(std::shared_ptr<void> commandCallback);
 
     virtual std::string getName() const;
+
+    std::size_t getNumberOfAliveGameObjects() const;
+    std::size_t getNumberOfCreatedGameObjects() const;
 
 protected:
     float m_age { 0.0f };

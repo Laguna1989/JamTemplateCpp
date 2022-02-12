@@ -6,6 +6,7 @@
 #include <stdexcept>
 
 namespace jt {
+
 void GameObject::create()
 {
     try {
@@ -75,5 +76,7 @@ void GameObject::storeActionCommand(std::shared_ptr<void> commandCallback)
     m_storedActionCommands.emplace_back(std::move(commandCallback));
 }
 std::string GameObject::getName() const { return ""; }
+std::size_t GameObject::getNumberOfAliveGameObjects() const { return aliveObjects(); }
+std::size_t GameObject::getNumberOfCreatedGameObjects() const { return createdObjects(); }
 
 } // namespace jt

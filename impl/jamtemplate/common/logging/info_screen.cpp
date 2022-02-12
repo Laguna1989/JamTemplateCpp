@@ -40,9 +40,18 @@ void InfoScreen::doDraw() const
         std::string const gameStateAge
             = "Age: " + jt::MathHelper::floatToStringWithXDigits(state->getAge(), 2) + " s";
         ImGui::Text(gameStateAge.c_str());
-        std::string const gameObjectsText
-            = "# GameObjects: " + std::to_string(state->getNumberOfObjects());
-        ImGui::Text(gameObjectsText.c_str());
+
+        std::string const gameObjectsInThisStateText
+            = "# GameObjects (in state): " + std::to_string(state->getNumberOfObjects());
+        ImGui::Text(gameObjectsInThisStateText.c_str());
+
+        std::string const totalGameObjectsText
+            = "# GameObjects (total): " + std::to_string(getNumberOfAliveGameObjects());
+        ImGui::Text(totalGameObjectsText.c_str());
+
+        std::string const createdGameObjectsText
+            = "# GameObjects (created): " + std::to_string(getNumberOfCreatedGameObjects());
+        ImGui::Text(createdGameObjectsText.c_str());
     }
     ImGui::End();
 }
