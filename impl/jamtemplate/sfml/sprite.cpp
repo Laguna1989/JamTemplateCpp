@@ -75,6 +75,7 @@ void Sprite::doUpdate(float /*elapsed*/)
     auto const pos = m_position + getShakeOffset() + getOffset() + getCamOffset();
     m_sprite.setPosition(toLib(pos));
     m_flashSprite.setPosition(toLib(pos));
+    m_flashSprite.setColor(toLib(getFlashColor()));
 }
 
 void Sprite::doDrawShadow(std::shared_ptr<jt::RenderTarget> const sptr) const

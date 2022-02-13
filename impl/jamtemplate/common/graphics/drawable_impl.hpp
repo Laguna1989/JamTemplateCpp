@@ -1,8 +1,9 @@
 ﻿#ifndef GUARD_JAMTEMPLATE_DRAWABLEIMPL_HPP_INCLUDEGUARD
 #define GUARD_JAMTEMPLATE_DRAWABLEIMPL_HPP_INCLUDEGUARD
 
-#include "drawable_flash_impl.hpp"
 #include "drawable_interface.hpp"
+#include "flash_impl.hpp"
+#include "shake_impl.hpp"
 #include "vector.hpp"
 #include <memory>
 
@@ -13,7 +14,9 @@ class DrawableImpl :
     //
     public DrawableInterface,
     // implementation of flash functionality via mix-in
-    private jt::DrawableFlashImpl {
+    private jt::FlashImpl,
+    // implementation of shake functionality via mix-in
+    private jt::ShakeImpl {
 public:
     using Sptr = std::shared_ptr<DrawableImpl>;
 
@@ -61,12 +64,6 @@ private:
 
     bool m_hasBeenUpdated { false };
 
-    float m_shakeTimer { -1.0f };
-    float m_shakeStrength { 0.0f };
-    float m_shakeInterval { 0.0f };
-    float m_shakeIntervalMax { 0.0f };
-    jt::Vector2f m_shakeOffset { 0, 0 };
-
     jt::Vector2f m_offset { 0, 0 };
     float m_rotationInDegree { 0 };
 
@@ -82,8 +79,6 @@ private:
     //   - make sure flash object and normal object are at the same position
     virtual void doUpdate(float elapsed) = 0;
     virtual void doRotate(float /*rot*/) = 0;
-
-    void updateShake(float elapsed);
 };
 
 } // namespace jt

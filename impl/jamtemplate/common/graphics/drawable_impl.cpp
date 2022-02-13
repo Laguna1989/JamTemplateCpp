@@ -1,5 +1,4 @@
 ﻿#include "drawable_impl.hpp"
-#include "random/random.hpp"
 #include <iostream>
 
 namespace jt {
@@ -25,9 +24,7 @@ void DrawableImpl::flash(float t, jt::Color col) { doFlash(t, col); }
 
 void DrawableImpl::shake(float t, float strength, float shakeInterval)
 {
-    m_shakeTimer = t;
-    m_shakeStrength = strength;
-    m_shakeInterval = m_shakeIntervalMax = shakeInterval;
+    doShake(t, strength, shakeInterval);
 }
 
 void DrawableImpl::update(float elapsed)
@@ -68,7 +65,7 @@ void DrawableImpl::setShadow(jt::Color const& col, jt::Vector2f const& offset)
     setShadowOffset(offset);
 }
 
-jt::Vector2f DrawableImpl::getShakeOffset() const { return m_shakeOffset; }
+jt::Vector2f DrawableImpl::getShakeOffset() const { return doGetShakeOffset(); }
 
 jt::Vector2f DrawableImpl::getCamOffset() const
 {
@@ -83,20 +80,6 @@ jt::Vector2f DrawableImpl::getCamOffset() const
 
 bool DrawableImpl::getIgnoreCamMovement() const { return m_ignoreCamMovement; }
 
-void DrawableImpl::updateShake(float elapsed)
-{
-    if (m_shakeTimer > 0) {
-        m_shakeTimer -= elapsed;
-        m_shakeInterval -= elapsed;
-        if (m_shakeInterval <= 0) {
-            m_shakeInterval = m_shakeIntervalMax;
-            m_shakeOffset.x = Random::getFloat(-m_shakeStrength, m_shakeStrength);
-            m_shakeOffset.y = Random::getFloat(-m_shakeStrength, m_shakeStrength);
-        }
-    } else {
-        m_shakeOffset.x = m_shakeOffset.y = 0;
-    }
-}
 void DrawableImpl::setCamOffset(const jt::Vector2f& v) { m_CamOffset = v; }
 jt::Vector2f DrawableImpl::getStaticCamOffset() { return m_CamOffset; }
 

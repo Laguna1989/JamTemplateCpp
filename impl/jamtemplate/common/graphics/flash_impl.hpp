@@ -1,12 +1,12 @@
-#ifndef GUARD_JAMTEMPLATE_DRAWABLE_FLASH_INTERFACE_HPP
-#define GUARD_JAMTEMPLATE_DRAWABLE_FLASH_INTERFACE_HPP
+#ifndef GUARD_JAMTEMPLATE_FLASH_INTERFACE_HPP
+#define GUARD_JAMTEMPLATE_FLASH_INTERFACE_HPP
 
 #include "color.hpp"
 #include "render_target.hpp"
 #include <memory>
 
 namespace jt {
-class DrawableFlashImpl {
+class FlashImpl {
 public:
     void drawFlash(std::shared_ptr<jt::RenderTarget> sptr) const;
     void doFlash(float t, jt::Color col);
@@ -32,4 +32,4 @@ private:
 
 } // namespace jt
 
-#endif // GUARD_JAMTEMPLATE_DRAWABLE_FLASH_INTERFACE_HPP
+#endif // GUARD_JAMTEMPLATE_FLASH_INTERFACE_HPP
