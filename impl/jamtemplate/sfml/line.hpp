@@ -37,8 +37,6 @@ private:
     jt::Vector2f m_origin;
     jt::Vector2f m_scale { 1.0f, 1.0f };
 
-    jt::Color m_flashColor { jt::colors::White };
-
     void doDraw(std::shared_ptr<jt::RenderTarget> const sptr) const override;
     void doDrawFlash(std::shared_ptr<jt::RenderTarget> const sptr) const override;
     void doDrawShadow(std::shared_ptr<jt::RenderTarget> const sptr) const override;

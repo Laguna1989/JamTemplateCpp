@@ -15,11 +15,11 @@ namespace jt {
 class DrawableImpl :
     //
     public DrawableInterface,
-    // implementation of flash, shake and shadow functionality via mix-in
+    // implementation of flash, rotation, shadow and shake functionality via mix-in
     private jt::FlashImpl,
-    private jt::ShakeImpl,
     private jt::RotationImpl,
-    private jt::ShadowImpl {
+    private jt::ShadowImpl,
+    private jt::ShakeImpl {
 public:
     using Sptr = std::shared_ptr<DrawableImpl>;
 
