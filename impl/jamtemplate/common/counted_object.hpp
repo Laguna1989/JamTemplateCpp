@@ -2,10 +2,18 @@
 #define GUARD_JAMTEMPLATE_COUNTED_OBJECT_HPP
 
 #include <cstddef>
+
 namespace jt {
 template <class Obj>
 class CountedObj {
+
 public:
+    static size_t aliveObjects() { return m_aliveObjects; }
+    static size_t createdObjects() { return m_createdObjects; }
+
+private:
+    friend Obj;
+
     CountedObj()
     {
         ++m_aliveObjects;
@@ -14,10 +22,8 @@ public:
 
     ~CountedObj() { --m_aliveObjects; }
 
-    static size_t aliveObjects() { return m_aliveObjects; }
-    static size_t createdObjects() { return m_createdObjects; }
+    static void resetCreated() { m_createdObjects = 0; }
 
-private:
     static size_t m_aliveObjects;
     static size_t m_createdObjects;
 };
