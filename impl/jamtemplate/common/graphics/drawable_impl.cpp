@@ -1,5 +1,4 @@
 ﻿#include "drawable_impl.hpp"
-#include "linterp.hpp"
 #include "random/random.hpp"
 #include <iostream>
 
@@ -19,17 +18,10 @@ void DrawableImpl::draw(std::shared_ptr<jt::RenderTarget> sptr) const
     }
 
     doDraw(sptr);
-    if (m_flashTimer > 0) {
-        doDrawFlash(sptr);
-    }
+    drawFlash(sptr);
 }
 
-void DrawableImpl::flash(float t, jt::Color col)
-{
-    m_maxFlashTimer = m_flashTimer = t;
-    setFlashColor(col);
-    doFlash(t, col);
-}
+void DrawableImpl::flash(float t, jt::Color col) { doFlash(t, col); }
 
 void DrawableImpl::shake(float t, float strength, float shakeInterval)
 {
@@ -91,18 +83,6 @@ jt::Vector2f DrawableImpl::getCamOffset() const
 
 bool DrawableImpl::getIgnoreCamMovement() const { return m_ignoreCamMovement; }
 
-void DrawableImpl::updateFlash(float elapsed)
-{
-    if (m_flashTimer > 0) {
-        m_flashTimer -= elapsed;
-        auto col = getFlashColor();
-        float const a = Lerp::linear(
-            static_cast<float>(col.a), 0.0f, 1.0f - (m_flashTimer / m_maxFlashTimer));
-        col.a = static_cast<std::uint8_t>(a);
-        setFlashColor(col);
-    }
-}
-
 void DrawableImpl::updateShake(float elapsed)
 {
     if (m_shakeTimer > 0) {
@@ -119,5 +99,8 @@ void DrawableImpl::updateShake(float elapsed)
 }
 void DrawableImpl::setCamOffset(const jt::Vector2f& v) { m_CamOffset = v; }
 jt::Vector2f DrawableImpl::getStaticCamOffset() { return m_CamOffset; }
+
+void DrawableImpl::setFlashColor(Color const& col) { doSetFlashColor(col); }
+Color DrawableImpl::getFlashColor() const { return doGetFlashColor(); }
 
 } // namespace jt

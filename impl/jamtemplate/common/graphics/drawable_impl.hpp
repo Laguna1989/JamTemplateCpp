@@ -1,6 +1,7 @@
 ﻿#ifndef GUARD_JAMTEMPLATE_DRAWABLEIMPL_HPP_INCLUDEGUARD
 #define GUARD_JAMTEMPLATE_DRAWABLEIMPL_HPP_INCLUDEGUARD
 
+#include "drawable_flash_impl.hpp"
 #include "drawable_interface.hpp"
 #include "vector.hpp"
 #include <memory>
@@ -8,7 +9,11 @@
 namespace jt {
 
 ///  Implements common functionality of all Drawable classes
-class DrawableImpl : public DrawableInterface {
+class DrawableImpl :
+    //
+    public DrawableInterface,
+    // implementation of flash functionality via mix-in
+    private jt::DrawableFlashImpl {
 public:
     using Sptr = std::shared_ptr<DrawableImpl>;
 
@@ -27,7 +32,8 @@ public:
     void setRotation(float rot) override;
 
     float getRotation() const override;
-
+    void setFlashColor(Color const& col) override;
+    Color getFlashColor() const override;
     void setShadowActive(bool active) override;
     bool getShadowActive() const override;
     void setShadowColor(jt::Color const& col) override;
@@ -54,8 +60,6 @@ private:
     bool m_ignoreCamMovement { false };
 
     bool m_hasBeenUpdated { false };
-    float m_flashTimer { -1.0f };
-    float m_maxFlashTimer { -1.0f };
 
     float m_shakeTimer { -1.0f };
     float m_shakeStrength { 0.0f };
@@ -71,17 +75,13 @@ private:
     jt::Color m_shadowColor { jt::colors::Black };
 
     virtual void doDraw(std::shared_ptr<jt::RenderTarget> const sptr) const = 0;
-    virtual void doDrawFlash(std::shared_ptr<jt::RenderTarget> const sptr) const = 0;
     virtual void doDrawShadow(std::shared_ptr<jt::RenderTarget> const sptr) const = 0;
 
     // overwrite this method:
     // things to take care of:
     //   - make sure flash object and normal object are at the same position
     virtual void doUpdate(float elapsed) = 0;
-    virtual void doFlash(float /*t*/, jt::Color /*col = jt::colors::White*/) { }
     virtual void doRotate(float /*rot*/) = 0;
-
-    void updateFlash(float elapsed);
 
     void updateShake(float elapsed);
 };

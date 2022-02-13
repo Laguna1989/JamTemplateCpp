@@ -94,19 +94,6 @@ jt::Rectf Animation::getLocalBounds() const
     return getCurrentSprite(m_frames, m_currentAnimName, m_currentIdx)->getLocalBounds();
 }
 
-void Animation::setFlashColor(jt::Color const& col)
-{
-    for (auto& kvp : m_frames) {
-        for (auto& spr : kvp.second) {
-            spr->setFlashColor(col);
-        }
-    }
-}
-jt::Color Animation::getFlashColor() const
-{
-    return getCurrentSprite(m_frames, m_currentAnimName, m_currentIdx)->getFlashColor();
-}
-
 void Animation::setScale(jt::Vector2f const& scale)
 {
     for (auto& kvp : m_frames) {
@@ -176,7 +163,7 @@ void Animation::doDraw(std::shared_ptr<jt::RenderTarget> const sptr) const
 
 void Animation::doDrawFlash(std::shared_ptr<jt::RenderTarget> const /*sptr*/) const { }
 
-void Animation::doFlash(float t, jt::Color col)
+void Animation::doFlashImpl(float t, jt::Color col)
 {
     for (auto& kvp : m_frames) {
         for (auto& spr : kvp.second) {

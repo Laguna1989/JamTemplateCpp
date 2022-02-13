@@ -41,9 +41,6 @@ public:
     jt::Rectf getGlobalBounds() const override;
     jt::Rectf getLocalBounds() const override;
 
-    void setFlashColor(jt::Color const& col) override;
-    jt::Color getFlashColor() const override;
-
     void setScale(jt::Vector2f const& scale) override;
     jt::Vector2f getScale() const override;
 

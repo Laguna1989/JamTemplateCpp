@@ -105,7 +105,7 @@ void Console::storeActionInCommand() const
         return;
     }
     m_lastCommand = str;
-    HistoryPos = -1;
+    m_historyPos = -1;
     History.push_back(m_lastCommand);
     m_logger.action(str);
 }
@@ -169,22 +169,22 @@ int Console::inputUserCallback(ImGuiInputTextCallbackData* data)
     switch (data->EventFlag) {
     case ImGuiInputTextFlags_CallbackHistory: {
         // Example of HISTORY
-        const int prev_history_pos = HistoryPos;
+        const int prev_history_pos = m_historyPos;
         if (data->EventKey == ImGuiKey_UpArrow) {
-            if (HistoryPos == -1)
-                HistoryPos = static_cast<int>(History.size()) - 1;
-            else if (HistoryPos > 0)
-                HistoryPos--;
+            if (m_historyPos == -1)
+                m_historyPos = static_cast<int>(History.size()) - 1;
+            else if (m_historyPos > 0)
+                m_historyPos--;
         } else if (data->EventKey == ImGuiKey_DownArrow) {
-            if (HistoryPos != -1)
-                if (++HistoryPos >= History.size())
-                    HistoryPos = -1;
+            if (m_historyPos != -1)
+                if (++m_historyPos >= static_cast<int>(History.size()))
+                    m_historyPos = -1;
         }
 
         // A better implementation would preserve the data on the current input line along with
         // cursor position.
-        if (prev_history_pos != HistoryPos) {
-            std::string history_str = (HistoryPos >= 0) ? History[HistoryPos] : "";
+        if (prev_history_pos != m_historyPos) {
+            std::string history_str = (m_historyPos >= 0) ? History[m_historyPos] : "";
             data->DeleteChars(0, data->BufTextLen);
             data->InsertChars(0, history_str.c_str());
         }

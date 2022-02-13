@@ -92,7 +92,7 @@ void Bar::doUpdate(float elapsed)
     m_shapeFull->update(elapsed);
     m_shapeProgress->update(elapsed);
 }
-void Bar::doFlash(float /*t*/, jt::Color /*col = jt::colors::White*/) { }
+
 void Bar::doRotate(float /*rot*/) { }
 
 void Bar::setColor(jt::Color const& col) { setFrontColor(col); }
@@ -108,9 +108,6 @@ jt::Vector2f Bar::getPosition() const { return m_shapeFull->getPosition(); }
 
 jt::Rectf Bar::getGlobalBounds() const { return m_shapeFull->getGlobalBounds(); }
 jt::Rectf Bar::getLocalBounds() const { return m_shapeFull->getLocalBounds(); }
-
-void Bar::setFlashColor(jt::Color const& col) { m_flashColor = col; }
-jt::Color Bar::getFlashColor() const { return m_flashColor; }
 
 void Bar::setScale(jt::Vector2f const& scale)
 {

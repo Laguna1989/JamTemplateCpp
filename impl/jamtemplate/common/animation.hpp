@@ -62,9 +62,6 @@ public:
     jt::Rectf getGlobalBounds() const override;
     virtual jt::Rectf getLocalBounds() const override;
 
-    void setFlashColor(jt::Color const& col) override;
-    jt::Color getFlashColor() const override;
-
     virtual void setScale(jt::Vector2f const& scale) override;
     virtual jt::Vector2f getScale() const override;
 
@@ -117,7 +114,7 @@ private:
     void doDraw(std::shared_ptr<jt::RenderTarget> const sptr) const override;
     void doDrawFlash(std::shared_ptr<jt::RenderTarget> const /*sptr*/) const override;
 
-    void doFlash(float t, jt::Color col = jt::colors::White) override;
+    void doFlashImpl(float t, jt::Color col = jt::colors::White) override;
 
     virtual void doUpdate(float elapsed) override;
 

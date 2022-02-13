@@ -21,9 +21,6 @@ void Shape::makeCircle(float radius, TextureManagerInterface& /*unused*/)
 void Shape::setColor(jt::Color const& col) { m_shape->setFillColor(toLib(col)); }
 jt::Color Shape::getColor() const { return fromLib(m_shape->getFillColor()); }
 
-void Shape::setFlashColor(jt::Color const& col) { m_flashShape->setFillColor(toLib(col)); }
-jt::Color Shape::getFlashColor() const { return fromLib(m_flashShape->getFillColor()); }
-
 void Shape::setPosition(jt::Vector2f const& pos) { m_position = pos; }
 jt::Vector2f Shape::getPosition() const { return m_position; }
 
