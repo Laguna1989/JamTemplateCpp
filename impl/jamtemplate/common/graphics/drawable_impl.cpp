@@ -1,6 +1,4 @@
 ﻿#include "drawable_impl.hpp"
-#include "linterp.hpp"
-#include "random/random.hpp"
 #include <iostream>
 
 namespace jt {
@@ -14,28 +12,16 @@ void DrawableImpl::draw(std::shared_ptr<jt::RenderTarget> sptr) const
                      "DrawableImpl::update()!\n";
     }
 
-    if (m_shadowActive) {
-        doDrawShadow(sptr);
-    }
-
+    drawShadow(sptr);
     doDraw(sptr);
-    if (m_flashTimer > 0) {
-        doDrawFlash(sptr);
-    }
+    drawFlash(sptr);
 }
 
-void DrawableImpl::flash(float t, jt::Color col)
-{
-    m_maxFlashTimer = m_flashTimer = t;
-    setFlashColor(col);
-    doFlash(t, col);
-}
+void DrawableImpl::flash(float t, jt::Color col) { doFlash(t, col); }
 
 void DrawableImpl::shake(float t, float strength, float shakeInterval)
 {
-    m_shakeTimer = t;
-    m_shakeStrength = strength;
-    m_shakeInterval = m_shakeIntervalMax = shakeInterval;
+    doShake(t, strength, shakeInterval);
 }
 
 void DrawableImpl::update(float elapsed)
@@ -49,34 +35,23 @@ void DrawableImpl::update(float elapsed)
 jt::Vector2f DrawableImpl::getOffset() const { return m_offset; }
 void DrawableImpl::setOffset(jt::Vector2f const offset) { m_offset = offset; }
 
-void DrawableImpl::setRotation(float rot)
-{
-    m_rotationInDegree = rot;
-    doRotate(rot);
-}
+void DrawableImpl::setRotation(float rot) { doSetRotation(rot); }
+float DrawableImpl::getRotation() const { return doGetRotation(); }
 
-float DrawableImpl::getRotation() const { return m_rotationInDegree; }
+void DrawableImpl::setShadowActive(bool active) { doSetShadowActive(active); }
 
-void DrawableImpl::setShadowActive(bool active) { m_shadowActive = active; }
-
-bool DrawableImpl::getShadowActive() const { return m_shadowActive; }
-
-void DrawableImpl::setShadowColor(jt::Color const& col) { m_shadowColor = col; }
-
-jt::Color DrawableImpl::getShadowColor() const { return m_shadowColor; }
-void DrawableImpl::setShadowOffset(jt::Vector2f const& v) { m_shadowOffset = v; }
-jt::Vector2f DrawableImpl::getShadowOffset() const { return m_shadowOffset; }
+bool DrawableImpl::getShadowActive() const { return doGetShadowActive(); }
+jt::Color DrawableImpl::getShadowColor() const { return doGetShadowColor(); }
+jt::Vector2f DrawableImpl::getShadowOffset() const { return doGetShadowOffset(); }
 
 void DrawableImpl::setIgnoreCamMovement(bool ignore) { m_ignoreCamMovement = ignore; }
 
 void DrawableImpl::setShadow(jt::Color const& col, jt::Vector2f const& offset)
 {
-    setShadowActive(true);
-    setShadowColor(col);
-    setShadowOffset(offset);
+    doSetShadow(col, offset);
 }
 
-jt::Vector2f DrawableImpl::getShakeOffset() const { return m_shakeOffset; }
+jt::Vector2f DrawableImpl::getShakeOffset() const { return doGetShakeOffset(); }
 
 jt::Vector2f DrawableImpl::getCamOffset() const
 {
@@ -91,33 +66,10 @@ jt::Vector2f DrawableImpl::getCamOffset() const
 
 bool DrawableImpl::getIgnoreCamMovement() const { return m_ignoreCamMovement; }
 
-void DrawableImpl::updateFlash(float elapsed)
-{
-    if (m_flashTimer > 0) {
-        m_flashTimer -= elapsed;
-        auto col = getFlashColor();
-        float const a = Lerp::linear(
-            static_cast<float>(col.a), 0.0f, 1.0f - (m_flashTimer / m_maxFlashTimer));
-        col.a = static_cast<std::uint8_t>(a);
-        setFlashColor(col);
-    }
-}
-
-void DrawableImpl::updateShake(float elapsed)
-{
-    if (m_shakeTimer > 0) {
-        m_shakeTimer -= elapsed;
-        m_shakeInterval -= elapsed;
-        if (m_shakeInterval <= 0) {
-            m_shakeInterval = m_shakeIntervalMax;
-            m_shakeOffset.x = Random::getFloat(-m_shakeStrength, m_shakeStrength);
-            m_shakeOffset.y = Random::getFloat(-m_shakeStrength, m_shakeStrength);
-        }
-    } else {
-        m_shakeOffset.x = m_shakeOffset.y = 0;
-    }
-}
 void DrawableImpl::setCamOffset(const jt::Vector2f& v) { m_CamOffset = v; }
 jt::Vector2f DrawableImpl::getStaticCamOffset() { return m_CamOffset; }
+
+void DrawableImpl::setFlashColor(Color const& col) { doSetFlashColor(col); }
+Color DrawableImpl::getFlashColor() const { return doGetFlashColor(); }
 
 } // namespace jt

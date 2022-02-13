@@ -59,9 +59,6 @@ public:
     virtual jt::Rectf getGlobalBounds() const override;
     virtual jt::Rectf getLocalBounds() const override;
 
-    virtual void setFlashColor(jt::Color const& col) override;
-    virtual jt::Color getFlashColor() const override;
-
     virtual void setScale(jt::Vector2f const& scale) override;
     virtual jt::Vector2f getScale() const override;
 
@@ -79,7 +76,6 @@ private:
     mutable std::shared_ptr<jt::Shape> m_shapeFull { nullptr };
     std::shared_ptr<jt::Shape> m_shapeProgress { nullptr };
 
-    jt::Color m_flashColor { jt::colors::White };
     float const m_progressYOffsetFraction { 0.1f };
 
     virtual void doDraw(std::shared_ptr<jt::RenderTarget> const sptr) const override;
@@ -90,7 +86,6 @@ private:
     // things to take care of:
     //   - make sure flash object and normal object are at the same position
     virtual void doUpdate(float elapsed) override;
-    virtual void doFlash(float /*t*/, jt::Color /*col = jt::colors::White*/) override;
     virtual void doRotate(float /*rot*/) override;
 };
 

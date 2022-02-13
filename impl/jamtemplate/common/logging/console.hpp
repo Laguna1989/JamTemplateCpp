@@ -22,7 +22,7 @@ private:
 
     mutable bool m_showConsole { false };
     mutable bool m_focus { false };
-    mutable int HistoryPos { -1 };
+    mutable int m_historyPos { -1 };
     mutable std::vector<std::string> History;
     mutable std::vector<char> m_inputBufferFilter;
     mutable std::vector<char> m_inputBufferAction;

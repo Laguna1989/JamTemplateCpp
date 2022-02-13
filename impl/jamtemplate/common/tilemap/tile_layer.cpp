@@ -83,9 +83,6 @@ jt::Vector2f TileLayer::getPosition() const { return m_position; }
 jt::Rectf TileLayer::getGlobalBounds() const { return jt::Rectf {}; }
 jt::Rectf TileLayer::getLocalBounds() const { return jt::Rectf {}; }
 
-void TileLayer::setFlashColor(jt::Color const& col) { m_flashColor = col; }
-jt::Color TileLayer::getFlashColor() const { return m_flashColor; }
-
 void TileLayer::setScale(jt::Vector2f const& scale) { m_scale = scale; }
 jt::Vector2f TileLayer::getScale() const { return m_scale; }
 

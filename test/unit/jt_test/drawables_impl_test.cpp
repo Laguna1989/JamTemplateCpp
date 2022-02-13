@@ -211,6 +211,6 @@ TEST_P(DrawableImplTestFixture, GetShadowColorReturnsBlackByDefault)
 
 TEST_P(DrawableImplTestFixture, GetShadowColorAfterSet)
 {
-    drawable->setShadowColor(jt::colors::Yellow);
+    drawable->setShadow(jt::colors::Yellow, jt::Vector2f { 1.0f, 1.0f });
     ASSERT_EQ(drawable->getShadowColor(), jt::colors::Yellow);
 }

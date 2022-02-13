@@ -29,9 +29,6 @@ jt::Vector2f Sprite::getPosition() const { return m_position; }
 void Sprite::setColor(jt::Color const& col) { m_sprite.setColor(toLib(col)); }
 jt::Color Sprite::getColor() const { return fromLib(m_sprite.getColor()); }
 
-void Sprite::setFlashColor(jt::Color const& col) { m_flashSprite.setColor(toLib(col)); }
-jt::Color Sprite::getFlashColor() const { return fromLib(m_flashSprite.getColor()); }
-
 jt::Rectf Sprite::getGlobalBounds() const { return fromLib(m_sprite.getGlobalBounds()); }
 jt::Rectf Sprite::getLocalBounds() const { return fromLib(m_sprite.getLocalBounds()); }
 
@@ -75,11 +72,10 @@ void Sprite::cleanImage()
 
 void Sprite::doUpdate(float /*elapsed*/)
 {
-    // std::cout << "Sprite.CamOffset.x " << getCamOffset().x << std::endl;
     auto const pos = m_position + getShakeOffset() + getOffset() + getCamOffset();
-    // std::cout << "Sprite.final position.x " << pos.x << std::endl;
     m_sprite.setPosition(toLib(pos));
     m_flashSprite.setPosition(toLib(pos));
+    m_flashSprite.setColor(toLib(getFlashColor()));
 }
 
 void Sprite::doDrawShadow(std::shared_ptr<jt::RenderTarget> const sptr) const

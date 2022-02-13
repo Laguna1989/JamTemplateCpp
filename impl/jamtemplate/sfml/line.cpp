@@ -66,9 +66,6 @@ jt::Vector2f jt::Line::getPosition() const { return m_position; }
 jt::Rectf jt::Line::getGlobalBounds() const { return jt::Rectf {}; }
 jt::Rectf jt::Line::getLocalBounds() const { return jt::Rectf {}; }
 
-void jt::Line::setFlashColor(jt::Color const& col) { m_flashColor = col; }
-jt::Color jt::Line::getFlashColor() const { return m_flashColor; }
-
 void jt::Line::setScale(jt::Vector2f const& scale) { m_scale = scale; }
 jt::Vector2f jt::Line::getScale() const { return m_scale; }
 

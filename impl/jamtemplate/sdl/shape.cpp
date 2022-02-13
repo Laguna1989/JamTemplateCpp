@@ -26,9 +26,6 @@ void Shape::makeCircle(float radius, jt::TextureManagerInterface& textureManager
 void Shape::setColor(jt::Color const& col) { m_color = col; }
 jt::Color Shape::getColor() const { return m_color; }
 
-void Shape::setFlashColor(jt::Color const& col) { m_colorFlash = col; }
-jt::Color Shape::getFlashColor() const { return m_colorFlash; }
-
 void Shape::setPosition(jt::Vector2f const& pos) { m_position = pos; }
 jt::Vector2f Shape::getPosition() const { return m_position; }
 

@@ -94,19 +94,6 @@ jt::Rectf Animation::getLocalBounds() const
     return getCurrentSprite(m_frames, m_currentAnimName, m_currentIdx)->getLocalBounds();
 }
 
-void Animation::setFlashColor(jt::Color const& col)
-{
-    for (auto& kvp : m_frames) {
-        for (auto& spr : kvp.second) {
-            spr->setFlashColor(col);
-        }
-    }
-}
-jt::Color Animation::getFlashColor() const
-{
-    return getCurrentSprite(m_frames, m_currentAnimName, m_currentIdx)->getFlashColor();
-}
-
 void Animation::setScale(jt::Vector2f const& scale)
 {
     for (auto& kvp : m_frames) {
@@ -142,24 +129,6 @@ void Animation::setShadowActive(bool active)
         }
     }
 }
-void Animation::setShadowColor(jt::Color const& col)
-{
-    DrawableImpl::setShadowColor(col);
-    for (auto& kvp : m_frames) {
-        for (auto const& sptr : kvp.second) {
-            sptr->setShadowColor(col);
-        }
-    }
-}
-void Animation::setShadowOffset(jt::Vector2f const& v)
-{
-    DrawableImpl::setShadowOffset(v);
-    for (auto& kvp : m_frames) {
-        for (auto const& sptr : kvp.second) {
-            sptr->setShadowOffset(v);
-        }
-    }
-}
 
 void Animation::doDrawShadow(std::shared_ptr<jt::RenderTarget> const /*sptr*/) const { }
 
@@ -176,7 +145,7 @@ void Animation::doDraw(std::shared_ptr<jt::RenderTarget> const sptr) const
 
 void Animation::doDrawFlash(std::shared_ptr<jt::RenderTarget> const /*sptr*/) const { }
 
-void Animation::doFlash(float t, jt::Color col)
+void Animation::doFlashImpl(float t, jt::Color col)
 {
     for (auto& kvp : m_frames) {
         for (auto& spr : kvp.second) {

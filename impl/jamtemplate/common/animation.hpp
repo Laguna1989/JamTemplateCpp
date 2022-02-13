@@ -62,9 +62,6 @@ public:
     jt::Rectf getGlobalBounds() const override;
     virtual jt::Rectf getLocalBounds() const override;
 
-    void setFlashColor(jt::Color const& col) override;
-    jt::Color getFlashColor() const override;
-
     virtual void setScale(jt::Vector2f const& scale) override;
     virtual jt::Vector2f getScale() const override;
 
@@ -72,8 +69,6 @@ public:
     jt::Vector2f getOrigin() const override;
 
     void setShadowActive(bool active) override;
-    void setShadowColor(jt::Color const& col) override;
-    void setShadowOffset(jt::Vector2f const& v) override;
 
     /// Get the frame time for one single frame in the current animation
     ///
@@ -117,7 +112,7 @@ private:
     void doDraw(std::shared_ptr<jt::RenderTarget> const sptr) const override;
     void doDrawFlash(std::shared_ptr<jt::RenderTarget> const /*sptr*/) const override;
 
-    void doFlash(float t, jt::Color col = jt::colors::White) override;
+    void doFlashImpl(float t, jt::Color col = jt::colors::White) override;
 
     virtual void doUpdate(float elapsed) override;
 

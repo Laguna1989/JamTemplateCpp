@@ -5,6 +5,7 @@
 #include "game_interface.hpp"
 #include "input/input_manager.hpp"
 #include "math_helper.hpp"
+#include "timer.hpp"
 
 void StateScroll::doInternalCreate()
 {
@@ -57,6 +58,13 @@ void StateScroll::doInternalCreate()
     getGame()->input().keyboard()->setCommandPressed({ jt::KeyCode::D, jt::KeyCode::Right },
         std::make_shared<ControlCommandMoveCam>(
             jt::Vector2f { scrollSpeed, 0.0f }, getGame()->gfx().camera()));
+
+    auto t = std::make_shared<jt::Timer>(1.5f, [this]() { m_anim->shake(0.5f, 15.0f, 0.001f); });
+    add(t);
+
+    auto t2
+        = std::make_shared<jt::Timer>(1.5f, [this]() { m_sprite->flash(0.9f, jt::colors::Green); });
+    add(t2);
 }
 
 void StateScroll::doInternalUpdate(float const elapsed)

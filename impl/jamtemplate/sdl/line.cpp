@@ -29,8 +29,8 @@ void jt::Line::doDrawFlash(std::shared_ptr<jt::RenderTarget> const sptr) const
     auto const startPosition = getPosition() + getShakeOffset() + getOffset() + getCamOffset();
     auto const endPosition = startPosition + m_lineVector;
 
-    SDL_SetRenderDrawColor(
-        sptr.get(), m_flashColor.r, m_flashColor.g, m_flashColor.b, m_flashColor.a);
+    auto const flashColor = getFlashColor();
+    SDL_SetRenderDrawColor(sptr.get(), flashColor.r, flashColor.g, flashColor.b, flashColor.a);
     SDL_RenderDrawLine(sptr.get(), static_cast<int>(startPosition.x),
         static_cast<int>(startPosition.y), static_cast<int>(endPosition.x),
         static_cast<int>(endPosition.y));
@@ -59,9 +59,6 @@ jt::Vector2f jt::Line::getPosition() const { return m_position; }
 
 jt::Rectf jt::Line::getGlobalBounds() const { return jt::Rectf {}; }
 jt::Rectf jt::Line::getLocalBounds() const { return jt::Rectf {}; }
-
-void jt::Line::setFlashColor(jt::Color const& col) { m_flashColor = col; }
-jt::Color jt::Line::getFlashColor() const { return m_flashColor; }
 
 void jt::Line::setScale(jt::Vector2f const& scale) { m_scale = scale; }
 jt::Vector2f jt::Line::getScale() const { return m_scale; }

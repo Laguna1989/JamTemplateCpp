@@ -46,9 +46,6 @@ jt::Vector2f Text::getPosition() const { return m_position; }
 void Text::setColor(const jt::Color& col) { m_color = col; }
 jt::Color Text::getColor() const { return m_color; }
 
-void Text::setFlashColor(const jt::Color& col) { m_flashColor = col; }
-jt::Color Text::getFlashColor() const { return m_flashColor; }
-
 jt::Rectf Text::getGlobalBounds() const
 {
     return jt::Rectf { m_position.x, m_position.y,
