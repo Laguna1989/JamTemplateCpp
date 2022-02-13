@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1644735457593,
+  "lastUpdate": 1644746111426,
   "repoUrl": "https://github.com/Laguna1989/JamTemplateCpp",
   "entries": {
     "Benchmark": [
@@ -3528,6 +3528,42 @@ window.BENCHMARK_DATA = {
             "value": 3.7923938478260704,
             "unit": "ms/iter",
             "extra": "iterations: 184\ncpu: 3.791477717391304 ms\nthreads: 1"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "laguna.ws@gmail.com",
+            "name": "Laguna1989",
+            "username": "Laguna1989"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "de59795908a69125871a0017f288b260df2b65bf",
+          "message": "Merge pull request #147 from Laguna1989/FEATURE_SeparateDrawableInterface\n\nFeature separate drawable interface",
+          "timestamp": "2022-02-13T10:52:07+01:00",
+          "tree_id": "de315cc128d9b809dcd1a58ee3f4f46673a90c00",
+          "url": "https://github.com/Laguna1989/JamTemplateCpp/commit/de59795908a69125871a0017f288b260df2b65bf"
+        },
+        "date": 1644746110297,
+        "tool": "googlecpp",
+        "benches": [
+          {
+            "name": "BM_StartGame",
+            "value": 0.002549119130434752,
+            "unit": "ms/iter",
+            "extra": "iterations: 277150\ncpu: 0.0025484463287028685 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GamestateWithTweeningShapes",
+            "value": 3.6501682072538575,
+            "unit": "ms/iter",
+            "extra": "iterations: 193\ncpu: 3.6497316062176166 ms\nthreads: 1"
           }
         ]
       }
