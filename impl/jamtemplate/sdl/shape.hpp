@@ -20,9 +20,6 @@ public:
     void setColor(jt::Color const& col) override;
     jt::Color getColor() const override;
 
-    void setFlashColor(jt::Color const& col) override;
-    jt::Color getFlashColor() const override;
-
     void setPosition(jt::Vector2f const& pos) override;
     jt::Vector2f getPosition() const override;
 
@@ -43,7 +40,6 @@ private:
     jt::Color m_color { jt::colors::White };
     jt::Vector2f m_scale { 1.0f, 1.0f };
     jt::Vector2f m_origin { 0.0f, 0.0f };
-    jt::Color m_colorFlash { jt::colors::White };
     jt::Vector2f m_offsetFromOrigin { 0.0f, 0.0f };
 
     void doDraw(std::shared_ptr<jt::RenderTarget> const sptr) const override;

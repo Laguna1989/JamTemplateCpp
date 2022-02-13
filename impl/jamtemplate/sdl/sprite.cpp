@@ -55,9 +55,6 @@ jt::Vector2f Sprite::getPosition() const { return m_position; }
 void Sprite::setColor(jt::Color const& col) { m_color = col; }
 jt::Color Sprite::getColor() const { return m_color; }
 
-void Sprite::setFlashColor(jt::Color const& col) { m_colorFlash = col; }
-jt::Color Sprite::getFlashColor() const { return m_colorFlash; }
-
 jt::Rectf Sprite::getGlobalBounds() const
 {
     return jt::Rectf { m_position.x, m_position.y, static_cast<float>(m_sourceRect.width),

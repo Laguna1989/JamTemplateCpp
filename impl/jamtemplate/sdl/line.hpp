@@ -20,9 +20,6 @@ public:
     jt::Rectf getGlobalBounds() const override;
     jt::Rectf getLocalBounds() const override;
 
-    void setFlashColor(jt::Color const& col) override;
-    jt::Color getFlashColor() const override;
-
     void setScale(jt::Vector2f const& scale) override;
     jt::Vector2f getScale() const override;
 
@@ -34,7 +31,6 @@ private:
     jt::Color m_color;
     jt::Vector2f m_position;
 
-    jt::Color m_flashColor { jt::colors::White };
     jt::Vector2f m_origin;
     jt::Vector2f m_scale { 1.0f, 1.0f };
 

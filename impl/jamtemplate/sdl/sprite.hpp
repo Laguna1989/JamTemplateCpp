@@ -31,9 +31,6 @@ public:
     void setColor(jt::Color const& col) override;
     jt::Color getColor() const override;
 
-    void setFlashColor(jt::Color const& col) override;
-    jt::Color getFlashColor() const override;
-
     virtual jt::Rectf getGlobalBounds() const override;
     virtual jt::Rectf getLocalBounds() const override;
 
@@ -60,7 +57,6 @@ private:
     jt::Vector2f m_offsetFromOrigin { 0.0f, 0.0f };
 
     mutable std::shared_ptr<SDL_Texture> m_textFlash;
-    jt::Color m_colorFlash { jt::colors::White };
     std::string m_fileName { "" };
 
     mutable std::shared_ptr<SDL_Surface> m_image { nullptr };
