@@ -40,9 +40,7 @@ public:
 
     MOCK_METHOD(void, setShadowActive, (bool), (override));
     MOCK_METHOD(bool, getShadowActive, (), (const, override));
-    MOCK_METHOD(void, setShadowColor, (jt::Color const&), (override));
     MOCK_METHOD(jt::Color, getShadowColor, (), (const, override));
-    MOCK_METHOD(void, setShadowOffset, (jt::Vector2f const&), (override));
     MOCK_METHOD(jt::Vector2f, getShadowOffset, (), (const, override));
     MOCK_METHOD(void, setShadow, (jt::Color const&, jt::Vector2f const&), (override));
 

@@ -121,17 +121,9 @@ public:
     /// \return the shadow active status
     virtual bool getShadowActive() const = 0;
 
-    /// Set the shadow color of the drawable
-    /// \param col the color
-    virtual void setShadowColor(jt::Color const& col) = 0;
-
     /// Get the shadow color of the drawable
     /// \return the color
     virtual jt::Color getShadowColor() const = 0;
-
-    /// Set the shadow offset
-    /// \param shadowOffsetInPixel offset
-    virtual void setShadowOffset(jt::Vector2f const& shadowOffsetInPixel) = 0;
 
     /// Get the shadow offset
     /// \return the offset in pixel

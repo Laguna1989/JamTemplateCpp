@@ -49,10 +49,9 @@ std::vector<jt::Sprite> loadTileSetSprites(
     for (int j = 0; j != rows; ++j) {
         for (int i = 0; i != columns; ++i) {
             {
-                Sprite tile { tilesetName, Recti { i * ts.x, j * ts.y, ts.x, ts.y },
-                    textureManager };
-                tile.setIgnoreCamMovement(false);
-                tileSetSprites.at(i + j * columns) = tile;
+                tileSetSprites.at(i + j * columns) = Sprite { tilesetName,
+                    Recti { i * ts.x, j * ts.y, ts.x, ts.y }, textureManager };
+                ;
             }
         }
     }

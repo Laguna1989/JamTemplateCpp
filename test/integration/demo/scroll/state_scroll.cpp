@@ -59,7 +59,7 @@ void StateScroll::doInternalCreate()
         std::make_shared<ControlCommandMoveCam>(
             jt::Vector2f { scrollSpeed, 0.0f }, getGame()->gfx().camera()));
 
-    auto t = std::make_shared<jt::Timer>(1.5f, [this]() { m_anim->shake(0.5f, 15.0f, 0.001); });
+    auto t = std::make_shared<jt::Timer>(1.5f, [this]() { m_anim->shake(0.5f, 15.0f, 0.001f); });
     add(t);
 
     auto t2

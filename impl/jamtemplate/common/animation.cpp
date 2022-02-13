@@ -129,24 +129,6 @@ void Animation::setShadowActive(bool active)
         }
     }
 }
-void Animation::setShadowColor(jt::Color const& col)
-{
-    DrawableImpl::setShadowColor(col);
-    for (auto& kvp : m_frames) {
-        for (auto const& sptr : kvp.second) {
-            sptr->setShadowColor(col);
-        }
-    }
-}
-void Animation::setShadowOffset(jt::Vector2f const& v)
-{
-    DrawableImpl::setShadowOffset(v);
-    for (auto& kvp : m_frames) {
-        for (auto const& sptr : kvp.second) {
-            sptr->setShadowOffset(v);
-        }
-    }
-}
 
 void Animation::doDrawShadow(std::shared_ptr<jt::RenderTarget> const /*sptr*/) const { }
 

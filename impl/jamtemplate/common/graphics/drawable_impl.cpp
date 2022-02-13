@@ -12,10 +12,7 @@ void DrawableImpl::draw(std::shared_ptr<jt::RenderTarget> sptr) const
                      "DrawableImpl::update()!\n";
     }
 
-    if (m_shadowActive) {
-        doDrawShadow(sptr);
-    }
-
+    drawShadow(sptr);
     doDraw(sptr);
     drawFlash(sptr);
 }
@@ -38,31 +35,20 @@ void DrawableImpl::update(float elapsed)
 jt::Vector2f DrawableImpl::getOffset() const { return m_offset; }
 void DrawableImpl::setOffset(jt::Vector2f const offset) { m_offset = offset; }
 
-void DrawableImpl::setRotation(float rot)
-{
-    m_rotationInDegree = rot;
-    doRotate(rot);
-}
+void DrawableImpl::setRotation(float rot) { doSetRotation(rot); }
+float DrawableImpl::getRotation() const { return doGetRotation(); }
 
-float DrawableImpl::getRotation() const { return m_rotationInDegree; }
+void DrawableImpl::setShadowActive(bool active) { doSetShadowActive(active); }
 
-void DrawableImpl::setShadowActive(bool active) { m_shadowActive = active; }
-
-bool DrawableImpl::getShadowActive() const { return m_shadowActive; }
-
-void DrawableImpl::setShadowColor(jt::Color const& col) { m_shadowColor = col; }
-
-jt::Color DrawableImpl::getShadowColor() const { return m_shadowColor; }
-void DrawableImpl::setShadowOffset(jt::Vector2f const& v) { m_shadowOffset = v; }
-jt::Vector2f DrawableImpl::getShadowOffset() const { return m_shadowOffset; }
+bool DrawableImpl::getShadowActive() const { return doGetShadowActive(); }
+jt::Color DrawableImpl::getShadowColor() const { return doGetShadowColor(); }
+jt::Vector2f DrawableImpl::getShadowOffset() const { return doGetShadowOffset(); }
 
 void DrawableImpl::setIgnoreCamMovement(bool ignore) { m_ignoreCamMovement = ignore; }
 
 void DrawableImpl::setShadow(jt::Color const& col, jt::Vector2f const& offset)
 {
-    setShadowActive(true);
-    setShadowColor(col);
-    setShadowOffset(offset);
+    doSetShadow(col, offset);
 }
 
 jt::Vector2f DrawableImpl::getShakeOffset() const { return doGetShakeOffset(); }

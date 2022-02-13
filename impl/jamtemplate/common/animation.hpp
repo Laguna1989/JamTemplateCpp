@@ -69,8 +69,6 @@ public:
     jt::Vector2f getOrigin() const override;
 
     void setShadowActive(bool active) override;
-    void setShadowColor(jt::Color const& col) override;
-    void setShadowOffset(jt::Vector2f const& v) override;
 
     /// Get the frame time for one single frame in the current animation
     ///
