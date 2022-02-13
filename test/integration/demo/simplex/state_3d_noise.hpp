@@ -4,7 +4,7 @@
 #include "game_state.hpp"
 #include "random/open_simplex_noise3d.hpp"
 
-class StateSimplexNoise : public jt::GameState {
+class State3DNoise : public jt::GameState {
     void doInternalCreate() override;
     void doInternalUpdate(float elapsed) override;
     void doInternalDraw() const override;

@@ -11,7 +11,7 @@
 #include "pathfinding/state_pathfinding.hpp"
 #include "rope/state_rope.hpp"
 #include "scroll/state_scroll.hpp"
-#include "simplex/state_simplex_noise.hpp"
+#include "simplex/state_3d_noise.hpp"
 #include "swarmobjects/state_swarmobjects.hpp"
 #include "tileson/state_tileson.hpp"
 #include "tween/state_tween.hpp"
@@ -29,7 +29,7 @@ void StateSelect::doInternalCreate()
     AddButton<StatePathfinding>("Pathfinding");
     AddButton<StateGradient>("Palettes");
     AddButton<StateImGui>("ImGui");
-    AddButton<StateSimplexNoise>("3D Noise");
+    AddButton<State3DNoise>("3D Noise");
     AddButton<StateEasing>("Easing");
     AddButton<StateInventory>("Inventory");
     AddButton<StateAudio>("Audio");

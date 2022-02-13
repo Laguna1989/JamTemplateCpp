@@ -1,11 +1,11 @@
-#include "state_simplex_noise.hpp"
+#include "state_3d_noise.hpp"
 #include "../state_select.hpp"
 #include "game_interface.hpp"
 #include "math_helper.hpp"
 #include "shape.hpp"
 
-void StateSimplexNoise::doInternalCreate() { }
-void StateSimplexNoise::doInternalUpdate(float elapsed)
+void State3DNoise::doInternalCreate() { }
+void State3DNoise::doInternalUpdate(float elapsed)
 {
     if (getGame()->input().keyboard()->justPressed(jt::KeyCode::F1)
         || getGame()->input().keyboard()->justPressed(jt::KeyCode::Escape)) {
@@ -13,7 +13,7 @@ void StateSimplexNoise::doInternalUpdate(float elapsed)
     }
     m_z += elapsed * 0.9f;
 }
-void StateSimplexNoise::doInternalDraw() const
+void State3DNoise::doInternalDraw() const
 {
     jt::Shape shape;
     shape.makeRect(jt::Vector2f { 2.0f, 2.0f }, getGame()->gfx().textureManager());
