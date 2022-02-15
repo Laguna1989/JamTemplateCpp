@@ -37,6 +37,8 @@ public:
         ON_CALL(gfx, textureManager).WillByDefault(::testing::ReturnRef(textureManager));
         // getSize has to be called, so that the game knows how big the rendertarget will be.
         ON_CALL(window, getSize()).WillByDefault([]() { return jt::Vector2f { 100.0f, 200.0f }; });
+        ON_CALL(window, shouldProcessKeyboard()).WillByDefault([]() { return true; });
+        ON_CALL(window, shouldProcessMouse()).WillByDefault([]() { return true; });
 
         ON_CALL(camera, getZoom).WillByDefault([this]() { return zoom; });
 
