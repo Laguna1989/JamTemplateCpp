@@ -50,7 +50,7 @@ bool SoundWithEffect::getLoop(void) { return m_drySound.getIsLooping(); }
 
 float SoundWithEffect::getDuration() const { return m_drySound.getLengthInSeconds(); }
 
-float SoundWithEffect::getPosition() const { return m_drySound.getCurrentPositionInSeconds(); }
+float SoundWithEffect::getPosition() const { return m_drySound.getCurrentOffsetInSeconds(); }
 float SoundWithEffect::getBlend() const { return m_blend; }
 void SoundWithEffect::setBlend(float blend) { m_blend = blend; }
 
