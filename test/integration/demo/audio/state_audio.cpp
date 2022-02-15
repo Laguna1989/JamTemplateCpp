@@ -23,14 +23,16 @@ void StateAudio::doInternalCreate()
     }
 
     auto soundGroup = std::make_shared<jt::SoundGroup>();
-    std::vector<float> pitches { 0.5f /*A3*/, 1.0f /*A4*/, 1.12234772727272727273f /*B4*/,
-        1.18920681818181818182f /*C5*/, 1.33484090909090909091f /*D5*/,
-        1.49830681818181818182f /*E5*/, 1.5874f /*F5*/, 1.78179772727272727273f /*G5*/,
-        2.0f /*A5*/ };
-    for (float pitch : pitches) {
+    std::map<std::string, float> pitches { { "A3", 0.5f }, { "A4", 1.0f },
+        { "B4", 1.12234772727272727273f }, { "C5", 1.18920681818181818182f },
+        { "D5", 1.33484090909090909091f }, { "E5", 1.49830681818181818182f }, { "F5", 1.5874f },
+        { "G5", 1.78179772727272727273f }, { "A5", 2.0f } };
+
+    for (auto const& kvp : pitches) {
         auto snd = std::make_shared<jt::Sound>("assets/test.ogg");
-        snd->setPitch(pitch);
+        snd->setPitch(kvp.second);
         soundGroup->add(snd);
+        m_notes[kvp.first] = snd;
     }
     m_soundGroup = soundGroup;
 }
@@ -62,6 +64,12 @@ void StateAudio::doInternalDraw() const
     ImGui::Text("SoundGroup");
     if (ImGui::Button("play One Sound")) {
         m_soundGroup->play();
+    }
+    ImGui::Separator();
+    for (auto const& kvp : m_notes) {
+        if (ImGui::Button(kvp.first.c_str())) {
+            kvp.second->play();
+        }
     }
     ImGui::End();
 }

@@ -15,6 +15,12 @@ public:
     /// Destructor
     virtual ~DrawableInterface() = default;
 
+    // no copy, no move. Avoid slicing.
+    DrawableInterface(const DrawableInterface&) = delete;
+    DrawableInterface(DrawableInterface&&) = delete;
+    DrawableInterface& operator=(const DrawableInterface&) = delete;
+    DrawableInterface& operator=(DrawableInterface&&) = delete;
+
     /// Draw the drawable on the passed render target
     /// \param renderTarget shared pointer to the rendertarget the drawable should be drawn on
     virtual void draw(std::shared_ptr<jt::RenderTarget> renderTarget) const = 0;
@@ -141,6 +147,9 @@ public:
     /// Get ignore cam movement for the drawalbe (e.g. for HUD elements)
     /// \return
     virtual bool getIgnoreCamMovement() const = 0;
+
+protected:
+    DrawableInterface() = default;
 };
 } // namespace jt
 

@@ -1,5 +1,6 @@
 ﻿#include "render_window_lib.hpp"
 #include "imgui-SFML.h"
+#include "imgui.h"
 #include "sprite.hpp"
 #include <SFML/Graphics.hpp>
 
@@ -24,6 +25,7 @@ bool RenderWindow::isOpen() const { return m_window->isOpen(); }
 void RenderWindow::checkForClose()
 {
     sf::Event event {};
+
     while (m_window->pollEvent(event)) {
         ImGui::SFML::ProcessEvent(event);
         if (event.type == sf::Event::Closed) {
@@ -49,8 +51,10 @@ void RenderWindow::draw(std::unique_ptr<jt::Sprite>& spr)
 void RenderWindow::display()
 {
     if (m_renderGui) {
+        m_hasBeenUpdatedAlready = false;
         ImGui::SFML::Render(*m_window.get());
     }
+
     m_window->display();
     m_renderGui = false;
 }
@@ -74,5 +78,8 @@ void RenderWindow::updateGui(float elapsed)
 }
 
 void RenderWindow::startRenderGui() { m_renderGui = true; }
+
+bool RenderWindow::shouldProcessKeyboard() { return !ImGui::GetIO().WantCaptureKeyboard; }
+bool RenderWindow::shouldProcessMouse() { return !ImGui::GetIO().WantCaptureMouse; }
 
 } // namespace jt

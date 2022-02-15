@@ -7,13 +7,15 @@
 namespace jt {
 namespace tilemap {
 
-TileLayer::TileLayer(std::vector<TileInfo> const& tileInfo, std::vector<jt::Sprite> tileSetSprites)
+TileLayer::TileLayer(
+    std::vector<TileInfo> const& tileInfo, std::vector<std::shared_ptr<jt::Sprite>> tileSetSprites)
     : m_tileSetSprites { tileSetSprites }
     , m_tiles { tileInfo }
 {
 }
 
-TileLayer::TileLayer(std::tuple<std::vector<TileInfo> const&, std::vector<jt::Sprite>> mapInfo)
+TileLayer::TileLayer(
+    std::tuple<std::vector<TileInfo> const&, std::vector<std::shared_ptr<jt::Sprite>>> mapInfo)
     : TileLayer { std::get<0>(mapInfo), std::get<1>(mapInfo) }
 {
 }
@@ -55,11 +57,11 @@ void TileLayer::doDraw(std::shared_ptr<jt::RenderTarget> const sptr) const
 
         auto const pixelPosForTile = tile.position + posOffset;
         auto const id = tile.id;
-        this->m_tileSetSprites.at(id).setPosition(jt::Vector2f {
+        this->m_tileSetSprites.at(id)->setPosition(jt::Vector2f {
             pixelPosForTile.x * this->m_scale.x, pixelPosForTile.y * this->m_scale.y });
-        this->m_tileSetSprites.at(id).setScale(this->m_scale);
-        this->m_tileSetSprites.at(id).update(0.0f);
-        this->m_tileSetSprites.at(id).draw(sptr);
+        this->m_tileSetSprites.at(id)->setScale(this->m_scale);
+        this->m_tileSetSprites.at(id)->update(0.0f);
+        this->m_tileSetSprites.at(id)->draw(sptr);
     }
 }
 
@@ -71,7 +73,7 @@ void TileLayer::doUpdate(float /*elapsed*/) { }
 void TileLayer::setColor(jt::Color const& col)
 {
     for (auto& ts : m_tileSetSprites) {
-        ts.setColor(col);
+        ts->setColor(col);
     }
     m_color = col;
 }

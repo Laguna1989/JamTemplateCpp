@@ -35,10 +35,10 @@ TileInfo parseSingleTile(tson::TileObject& tile)
     return TileInfo { pos, size, id };
 }
 
-std::vector<jt::Sprite> loadTileSetSprites(
+std::vector<std::shared_ptr<jt::Sprite>> loadTileSetSprites(
     std::unique_ptr<tson::Map>& map, jt::TextureManagerInterface& textureManager)
 {
-    std::vector<jt::Sprite> tileSetSprites;
+    std::vector<std::shared_ptr<jt::Sprite>> tileSetSprites;
     auto const tileset = map->getTilesets().at(0);
     auto const columns = tileset.getColumns();
     auto const rows = tileset.getTileCount() / columns;
@@ -49,8 +49,8 @@ std::vector<jt::Sprite> loadTileSetSprites(
     for (int j = 0; j != rows; ++j) {
         for (int i = 0; i != columns; ++i) {
             {
-                tileSetSprites.at(i + j * columns) = Sprite { tilesetName,
-                    Recti { i * ts.x, j * ts.y, ts.x, ts.y }, textureManager };
+                tileSetSprites.at(i + j * columns) = std::make_shared<Sprite>(
+                    tilesetName, Recti { i * ts.x, j * ts.y, ts.x, ts.y }, textureManager);
                 ;
             }
         }
@@ -149,12 +149,13 @@ std::vector<std::shared_ptr<TileNode>> TilesonLoader::loadNodesFromLayer(
     }
     return nodeTiles;
 }
-std::tuple<std::vector<TileInfo>, std::vector<jt::Sprite>> TilesonLoader::loadTilesFromLayer(
+std::tuple<std::vector<TileInfo>, std::vector<std::shared_ptr<jt::Sprite>>>
+TilesonLoader::loadTilesFromLayer(
     std::string const& layerName, jt::TextureManagerInterface& textureManager)
 {
     auto& map = m_tilemapManager.getMap(m_fileName);
 
-    return std::tuple<std::vector<TileInfo>, std::vector<jt::Sprite>>(
+    return std::tuple<std::vector<TileInfo>, std::vector<std::shared_ptr<jt::Sprite>>>(
         loadTiles(layerName, map), loadTileSetSprites(map, textureManager));
 }
 

@@ -41,10 +41,15 @@ public:
     void setMouseCursorVisible(bool visible) override;
     bool getMouseCursorVisible(void) const override;
 
+    bool shouldProcessKeyboard() override;
+    bool shouldProcessMouse() override;
+
 private:
     std::shared_ptr<sf::RenderWindow> m_window;
     bool m_isMouseCursorVisible { true };
     bool m_renderGui { false };
+
+    bool m_hasBeenUpdatedAlready { false };
 };
 } // namespace jt
 

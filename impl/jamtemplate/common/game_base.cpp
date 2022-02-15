@@ -29,8 +29,8 @@ void GameBase::runOneFrame()
 
     if (m_age != 0) {
         m_lag += elapsedSeconds;
-        gfx().window().updateGui(elapsedSeconds);
         gfx().window().checkForClose();
+        gfx().window().updateGui(elapsedSeconds);
 
         int numberOfUpdateOperations = 0;
 
@@ -85,10 +85,14 @@ void GameBase::doUpdate(float const elapsed)
     gfx().update(elapsed);
 
     jt::Vector2f const mpf = gfx().window().getMousePosition() / gfx().camera().getZoom();
-
-    input().update(MousePosition { mpf.x + gfx().camera().getCamOffset().x,
-                       mpf.y + gfx().camera().getCamOffset().y, mpf.x, mpf.y },
-        elapsed);
+    input().mouse()->updateMousePosition(MousePosition { mpf.x + gfx().camera().getCamOffset().x,
+        mpf.y + gfx().camera().getCamOffset().y, mpf.x, mpf.y });
+    if (gfx().window().shouldProcessMouse()) {
+        input().mouse()->updateButtons();
+    }
+    if (gfx().window().shouldProcessKeyboard()) {
+        input().keyboard()->updateKeys();
+    }
 }
 
 void GameBase::doDraw() const

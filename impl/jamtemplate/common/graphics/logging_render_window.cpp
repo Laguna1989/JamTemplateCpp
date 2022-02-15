@@ -2,8 +2,7 @@
 
 namespace jt {
 
-LoggingRenderWindow::LoggingRenderWindow(
-    RenderWindowInterface& decoratee, LoggerInterface& logger)
+LoggingRenderWindow::LoggingRenderWindow(RenderWindowInterface& decoratee, LoggerInterface& logger)
     : m_decoratee { decoratee }
     , m_logger { logger }
 {
@@ -73,5 +72,7 @@ void LoggingRenderWindow::startRenderGui()
     m_logger.verbose("startRenderGui", { "jt", "RenderWindow" });
     m_decoratee.startRenderGui();
 }
+bool LoggingRenderWindow::shouldProcessKeyboard() { return m_decoratee.shouldProcessKeyboard(); }
+bool LoggingRenderWindow::shouldProcessMouse() { return m_decoratee.shouldProcessMouse(); }
 
 } // namespace jt

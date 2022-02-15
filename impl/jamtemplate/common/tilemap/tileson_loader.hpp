@@ -23,7 +23,7 @@ public:
     std::vector<std::shared_ptr<TileNode>> loadNodesFromLayer(
         std::string const& layerName, jt::TextureManagerInterface& textureManager);
 
-    std::tuple<std::vector<TileInfo>, std::vector<jt::Sprite>> loadTilesFromLayer(
+    std::tuple<std::vector<TileInfo>, std::vector<std::shared_ptr<jt::Sprite>>> loadTilesFromLayer(
         std::string const& layerName, jt::TextureManagerInterface& textureManager);
 
 private:
