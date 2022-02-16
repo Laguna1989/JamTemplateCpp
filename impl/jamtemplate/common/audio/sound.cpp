@@ -29,7 +29,7 @@ bool Sound::getLoop(void) { return m_sound.getIsLooping(); }
 
 float Sound::getDuration() const { return m_sound.getLengthInSeconds(); }
 
-float Sound::getPosition() const { return m_sound.getCurrentPositionInSeconds(); }
+float Sound::getPosition() const { return m_sound.getCurrentOffsetInSeconds(); }
 void Sound::setBlend(float blend) { m_blend = 1.0f - blend; }
 float Sound::getBlend() const { return 1.0f - m_blend; }
 

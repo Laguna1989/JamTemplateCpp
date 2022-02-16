@@ -8,22 +8,22 @@ using jt::Collision;
 using jt::Shape;
 
 namespace {
-jt::Shape makeShape(
+std::shared_ptr<jt::Shape> makeShape(
     float sx, float sy, float px, float py, jt::TextureManagerInterface& textureManager)
 {
-    Shape s {};
-    s.makeRect(jt::Vector2f { sx, sy }, textureManager);
-    s.setPosition(jt::Vector2f { px, py });
+    auto s = std::make_shared<Shape>();
+    s->makeRect(jt::Vector2f { sx, sy }, textureManager);
+    s->setPosition(jt::Vector2f { px, py });
     // note: by default the top left corner of the shape is the origin. This needs to be corrected
     // here, so the center of the shape is used.
-    s.setOffset(jt::Vector2f { -sx / 2.0f, -sy / 2.0f });
-    s.update(0.0f);
+    s->setOffset(jt::Vector2f { -sx / 2.0f, -sy / 2.0f });
+    s->update(0.0f);
     return s;
 }
 
 std::shared_ptr<Shape> const makeShapePtr(float sx, float sy, float px, float py)
 {
-    return std::make_shared<Shape>(makeShape(sx, sy, px, py, getTextureManager()));
+    return makeShape(sx, sy, px, py, getTextureManager());
 }
 
 } // namespace

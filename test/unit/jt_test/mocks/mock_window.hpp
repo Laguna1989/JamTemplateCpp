@@ -18,6 +18,8 @@ public:
     MOCK_METHOD(bool, getMouseCursorVisible, (), (const, override));
     MOCK_METHOD(void, updateGui, (float), (override));
     MOCK_METHOD(void, startRenderGui, (), (override));
+    MOCK_METHOD(bool, shouldProcessKeyboard, (), (override));
+    MOCK_METHOD(bool, shouldProcessMouse, (), (override));
 };
 
 #endif

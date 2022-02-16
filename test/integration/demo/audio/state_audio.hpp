@@ -4,6 +4,7 @@
 #include "audio/sound_with_effect.hpp"
 #include "game_state.hpp"
 #include "oalpp/effects/filter/butterworth_24db_lowpass.hpp"
+#include <map>
 #include <memory>
 #include <optional>
 
@@ -17,6 +18,7 @@ private:
     std::shared_ptr<jt::SoundInterface> m_sound { nullptr };
 
     std::shared_ptr<jt::SoundInterface> m_soundGroup { nullptr };
+    std::map<std::string, std::shared_ptr<jt::SoundInterface>> m_notes;
 
     mutable float m_blend { 0.0f };
 };

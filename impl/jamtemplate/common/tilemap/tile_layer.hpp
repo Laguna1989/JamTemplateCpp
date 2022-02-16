@@ -22,8 +22,10 @@ public:
     /// Constructor
     /// \param tileInfo tileInfo
     /// \param tileSetSprites Tileset Sprites
-    TileLayer(std::vector<TileInfo> const& tileInfo, std::vector<jt::Sprite> tileSetSprites);
-    TileLayer(std::tuple<std::vector<TileInfo> const&, std::vector<jt::Sprite>> mapInfo);
+    TileLayer(std::vector<TileInfo> const& tileInfo,
+        std::vector<std::shared_ptr<jt::Sprite>> tileSetSprites);
+    TileLayer(
+        std::tuple<std::vector<TileInfo> const&, std::vector<std::shared_ptr<jt::Sprite>>> mapInfo);
 
     void doDraw(std::shared_ptr<jt::RenderTarget> sptr) const override;
 
@@ -52,7 +54,7 @@ public:
     void setScreenSizeHint(jt::Vector2f const& hint);
 
 private:
-    mutable std::vector<jt::Sprite> m_tileSetSprites {};
+    mutable std::vector<std::shared_ptr<jt::Sprite>> m_tileSetSprites {};
 
     std::vector<TileInfo> m_tiles {};
 

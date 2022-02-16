@@ -20,6 +20,9 @@ public:
     void updateGui(float elapsed) override;
     void startRenderGui() override;
 
+    bool shouldProcessKeyboard() override;
+    bool shouldProcessMouse() override;
+
 private:
     RenderWindowInterface& m_decoratee;
     LoggerInterface& m_logger;

@@ -29,6 +29,9 @@ public:
     void startRenderGui() override;
     void updateGui(float elapsed) override;
 
+    bool shouldProcessKeyboard() override;
+    bool shouldProcessMouse() override;
+
 private:
     std::shared_ptr<SDL_Window> m_window;
     jt::Vector2f m_size;

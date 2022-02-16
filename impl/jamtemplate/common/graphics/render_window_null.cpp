@@ -38,3 +38,5 @@ bool jt::null_objects::RenderWindowNull::getMouseCursorVisible() const
 void jt::null_objects::RenderWindowNull::updateGui(float /*elapsed*/) { }
 
 void jt::null_objects::RenderWindowNull::startRenderGui() { }
+bool jt::null_objects::RenderWindowNull::shouldProcessKeyboard() { return true; }
+bool jt::null_objects::RenderWindowNull::shouldProcessMouse() { return true; }

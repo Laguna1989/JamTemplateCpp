@@ -116,4 +116,7 @@ void RenderWindow::startRenderGui()
     m_renderGui = true;
 }
 
+bool RenderWindow::shouldProcessKeyboard() { return !ImGui::GetIO().WantCaptureKeyboard; }
+bool RenderWindow::shouldProcessMouse() { return !ImGui::GetIO().WantCaptureMouse; }
+
 } // namespace jt

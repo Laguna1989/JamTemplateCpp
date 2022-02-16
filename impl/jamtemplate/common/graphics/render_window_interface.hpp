@@ -58,6 +58,9 @@ public:
 
     virtual void startRenderGui() = 0;
 
+    virtual bool shouldProcessKeyboard() = 0;
+    virtual bool shouldProcessMouse() = 0;
+
 protected:
     // constructor can only be called from derived classes
     RenderWindowInterface() = default;

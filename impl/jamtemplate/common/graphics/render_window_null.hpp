@@ -22,6 +22,8 @@ public:
     jt::Vector2f getMousePosition() override;
     void setMouseCursorVisible(bool visible) override;
     bool getMouseCursorVisible() const override;
+    bool shouldProcessKeyboard() override;
+    bool shouldProcessMouse() override;
 
 private:
     jt::Vector2f m_size { 0.0f, 0.0f };
