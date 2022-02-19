@@ -29,7 +29,7 @@ private:
 
 /*
  * Size     1000            8
- * Maske    0111            7
+ * Mask     0111            7
  * index1   0010 => 0010    2
  * index2   1010 => 0010    10 => 2
  *

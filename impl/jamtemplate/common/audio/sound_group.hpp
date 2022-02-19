@@ -1,7 +1,6 @@
 ﻿#ifndef JAMTEMPLATE_SOUNDGROUP_HPP_GUARD
 #define JAMTEMPLATE_SOUNDGROUP_HPP_GUARD
 
-#include "oalpp/sound_context_interface.hpp"
 #include "sound_interface.hpp"
 #include <memory>
 #include <string>
