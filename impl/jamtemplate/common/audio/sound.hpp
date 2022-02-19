@@ -2,7 +2,6 @@
 #define GUARD_JAMTEMPLATE_SFML_SOUND_GUARD_HPP_12345
 
 #include "oalpp/sound.hpp"
-#include "oalpp/sound_context_interface.hpp"
 #include "oalpp/sound_data.hpp"
 #include "sound_interface.hpp"
 

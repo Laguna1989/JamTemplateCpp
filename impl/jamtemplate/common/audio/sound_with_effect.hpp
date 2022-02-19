@@ -3,7 +3,6 @@
 
 #include "oalpp/sound.hpp"
 #include "oalpp/sound_data.hpp"
-#include "oalpp/sound_data_with_effect.hpp"
 #include "sound_interface.hpp"
 
 namespace jt {
