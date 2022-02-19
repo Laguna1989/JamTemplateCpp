@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1645018436659,
+  "lastUpdate": 1645275841443,
   "repoUrl": "https://github.com/Laguna1989/JamTemplateCpp",
   "entries": {
     "Benchmark": [
@@ -3636,6 +3636,42 @@ window.BENCHMARK_DATA = {
             "value": 3.2062291493212536,
             "unit": "ms/iter",
             "extra": "iterations: 221\ncpu: 3.205951583710406 ms\nthreads: 1"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "laguna.ws@gmail.com",
+            "name": "Laguna1989",
+            "username": "Laguna1989"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "52936f54e680c0d569d403e65f2645ac17c19810",
+          "message": "Merge pull request #149 from Laguna1989/FEATURE_AlingWithOpenALppChanges\n\nAdapt to header structure",
+          "timestamp": "2022-02-19T14:01:31+01:00",
+          "tree_id": "32336f24fdda21802d335ef35f4162686f164513",
+          "url": "https://github.com/Laguna1989/JamTemplateCpp/commit/52936f54e680c0d569d403e65f2645ac17c19810"
+        },
+        "date": 1645275840283,
+        "tool": "googlecpp",
+        "benches": [
+          {
+            "name": "BM_StartGame",
+            "value": 0.002140633864229355,
+            "unit": "ms/iter",
+            "extra": "iterations: 328878\ncpu: 0.0021290545430220327 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GamestateWithTweeningShapes",
+            "value": 3.1068659207046783,
+            "unit": "ms/iter",
+            "extra": "iterations: 227\ncpu: 3.105452863436124 ms\nthreads: 1"
           }
         ]
       }
