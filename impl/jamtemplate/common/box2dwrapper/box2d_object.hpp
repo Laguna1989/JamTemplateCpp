@@ -20,7 +20,7 @@ public:
     ///
     /// \param world shared pointer to the world
     /// \param def raw pointer to a body definition
-    Box2DObject(std::shared_ptr<Box2DWorldInterface> world, const b2BodyDef* def);
+    Box2DObject(std::shared_ptr<Box2DWorldInterface> world, b2BodyDef const* def);
 
     /// Get the position
     /// \return the position

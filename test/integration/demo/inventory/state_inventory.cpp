@@ -1,6 +1,8 @@
 #include "state_inventory.hpp"
+#include "../control_command_move_b_2_body.hpp"
 #include "../control_command_move_cam.hpp"
 #include "../state_select.hpp"
+#include "box2dwrapper/box2d_world_impl.hpp"
 #include "game_interface.hpp"
 #include "inventory_list_imgui.hpp"
 #include "random/random.hpp"
@@ -14,27 +16,32 @@ void StateInventory::doInternalCreate()
 
     createWorldItems();
 
-    m_player = std::make_shared<PlayerCharacter>(m_itemRepository);
+    m_world = std::make_shared<jt::Box2DWorldImpl>(jt::Vector2f { 0.0f, 0.0f });
+    b2BodyDef bodyDef;
+    bodyDef.fixedRotation = true;
+    bodyDef.type = b2_dynamicBody;
+    bodyDef.position.Set(5 * 24, 7 * 24);
+    m_player = std::make_shared<PlayerCharacter>(m_world, &bodyDef, m_itemRepository);
     add(m_player);
 
     setAutoDraw(false);
 
     float const scrollSpeed = 170.0f;
-    getGame()->input().keyboard()->setCommandPressed({ jt::KeyCode::W, jt::KeyCode::Up },
-        std::make_shared<ControlCommandMoveCam>(
-            jt::Vector2f { 0.0f, -scrollSpeed }, getGame()->gfx().camera()));
-
-    getGame()->input().keyboard()->setCommandPressed({ jt::KeyCode::A, jt::KeyCode::Left },
-        std::make_shared<ControlCommandMoveCam>(
-            jt::Vector2f { -scrollSpeed, 0.0f }, getGame()->gfx().camera()));
-
-    getGame()->input().keyboard()->setCommandPressed({ jt::KeyCode::S, jt::KeyCode::Down },
-        std::make_shared<ControlCommandMoveCam>(
-            jt::Vector2f { 0.0f, scrollSpeed }, getGame()->gfx().camera()));
-
-    getGame()->input().keyboard()->setCommandPressed({ jt::KeyCode::D, jt::KeyCode::Right },
-        std::make_shared<ControlCommandMoveCam>(
-            jt::Vector2f { scrollSpeed, 0.0f }, getGame()->gfx().camera()));
+    //    getGame()->input().keyboard()->setCommandPressed({ jt::KeyCode::W, jt::KeyCode::Up },
+    //        std::make_shared<ControlCommandMoveCam>(
+    //            jt::Vector2f { 0.0f, -scrollSpeed }, getGame()->gfx().camera()));
+    //
+    //    getGame()->input().keyboard()->setCommandPressed({ jt::KeyCode::A, jt::KeyCode::Left },
+    //        std::make_shared<ControlCommandMoveCam>(
+    //            jt::Vector2f { -scrollSpeed, 0.0f }, getGame()->gfx().camera()));
+    //
+    //    getGame()->input().keyboard()->setCommandPressed({ jt::KeyCode::S, jt::KeyCode::Down },
+    //        std::make_shared<ControlCommandMoveCam>(
+    //            jt::Vector2f { 0.0f, scrollSpeed }, getGame()->gfx().camera()));
+    //
+    //    getGame()->input().keyboard()->setCommandPressed({ jt::KeyCode::D, jt::KeyCode::Right },
+    //        std::make_shared<ControlCommandMoveCam>(
+    //            jt::Vector2f { scrollSpeed, 0.0f }, getGame()->gfx().camera()));
 
     m_pickupSound = std::make_shared<jt::Sound>("assets/test.ogg");
     getGame()->audio().addTemporarySound(m_pickupSound);
@@ -85,6 +92,8 @@ void StateInventory::doInternalUpdate(float elapsed)
 
     m_tileLayerGround->update(elapsed);
     m_tileLayerOverlay->update(elapsed);
+
+    m_world->step(elapsed, 20, 20);
 
     pickupItems();
 

@@ -27,6 +27,8 @@ class StateInventory : public jt::GameState {
 
     std::shared_ptr<jt::SoundInterface> m_pickupSound;
 
+    std::shared_ptr<jt::Box2DWorldInterface> m_world { nullptr };
+
     void createItemRepository();
     void loadTilemap();
     void createWorldItems();

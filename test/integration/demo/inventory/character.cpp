@@ -1,7 +1,9 @@
 #include "character.hpp"
 #include "game_interface.hpp"
 
-PlayerCharacter::PlayerCharacter(std::weak_ptr<ItemRepository> repo)
+PlayerCharacter::PlayerCharacter(std::shared_ptr<jt::Box2DWorldInterface> world,
+    b2BodyDef const* def, std::weak_ptr<ItemRepository> repo)
+    : jt::Box2DObject { world, def }
 {
     m_inventory = std::make_shared<InventoryListImgui>(repo);
     m_charsheet = std::make_shared<CharacterSheetImgui>(repo);
@@ -22,7 +24,16 @@ void PlayerCharacter::doCreate()
 
 void PlayerCharacter::doUpdate(float const elapsed)
 {
+    auto keyboard = getGame()->input().keyboard();
+    setVelocity(jt::Vector2f { 0.0f, 0.0f });
+    if (keyboard->pressed(jt::KeyCode::D)) {
+        setVelocity(jt::Vector2f { 20.0f, 0.0f });
+    } else if (keyboard->pressed(jt::KeyCode::A)) {
+        setVelocity(jt::Vector2f { -20.0f, 0.0f });
+    }
+    m_animation->setPosition(getPosition());
     m_animation->update(elapsed);
+
     m_inventory->update(elapsed);
     m_charsheet->update(elapsed);
     m_charsheet->setEquippedItems(m_inventory->getEquippedItems());
