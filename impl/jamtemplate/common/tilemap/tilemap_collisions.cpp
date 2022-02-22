@@ -1,5 +1,5 @@
 #include "tilemap_collisions.hpp"
-#include <set>
+#include <algorithm>
 namespace jt {
 
 void TilemapCollisions::add(jt::Rectf const& r) { m_rects.push_back(r); }
