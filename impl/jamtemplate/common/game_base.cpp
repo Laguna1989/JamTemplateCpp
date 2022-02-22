@@ -89,6 +89,7 @@ void GameBase::doUpdate(float const elapsed)
         input().mouse()->updateMousePosition(
             MousePosition { mpf.x + gfx().camera().getCamOffset().x,
                 mpf.y + gfx().camera().getCamOffset().y, mpf.x, mpf.y });
+
         if (gfx().window().shouldProcessMouse()) {
             input().mouse()->updateButtons();
         }
@@ -96,6 +97,7 @@ void GameBase::doUpdate(float const elapsed)
     if (input().keyboard()) {
         if (gfx().window().shouldProcessKeyboard()) {
             input().keyboard()->updateKeys();
+            input().keyboard()->updateCommands(elapsed);
         }
     }
 }
