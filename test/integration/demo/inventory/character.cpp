@@ -32,7 +32,7 @@ void PlayerCharacter::doUpdate(float const elapsed)
 {
     auto keyboard = getGame()->input().keyboard();
     jt::Vector2f newVelocity { 0.0f, 0.0f };
-    float const speed = 70.0f;
+    float const speed = 85.0f;
     if (keyboard->pressed(jt::KeyCode::D)) {
         newVelocity += jt::Vector2f { speed, 0.0f };
     }

@@ -15,7 +15,7 @@ void camFollowObject(jt::CamInterface& cam, jt::Vector2f const& windowSize,
     auto const dif = objPos - camPos;
 
     float const margin = 80.0f;
-    float const moveSpeed = 50.0f;
+    float const moveSpeed = 60.0f;
     jt::Vector2f const screenSize = windowSize / cam.getZoom();
     if (dif.x < margin) {
         cam.move(jt::Vector2f { -moveSpeed, 0.0f } * elapsed);
@@ -185,6 +185,6 @@ void StateInventory::doInternalDraw() const
 {
     m_tileLayerGround->draw(getGame()->gfx().target());
 
-    //    m_tileLayerOverlay->draw(getGame()->gfx().target());
+    m_tileLayerOverlay->draw(getGame()->gfx().target());
     drawObjects();
 }
