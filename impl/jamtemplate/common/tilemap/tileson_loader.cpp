@@ -159,5 +159,38 @@ TilesonLoader::loadTilesFromLayer(
         loadTiles(layerName, map), loadTileSetSprites(map, textureManager));
 }
 
+TilemapCollisions TilesonLoader::loadCollisionsFromLayer(std::string const& layerName)
+{
+    TilemapCollisions collisions;
+    auto& map = m_tilemapManager.getMap(m_fileName);
+    for (auto& layer : map->getLayers()) {
+        // skip all non-tile layers
+        if (layer.getType() != tson::LayerType::TileLayer) {
+            continue;
+        }
+        if (layer.getName() != layerName) {
+            continue;
+        }
+        for (auto& [pos, tile] : layer.getTileObjects()) {
+
+            bool isBlocked = false;
+            auto blockedProperty = tile.getTile()->getProp("blocked");
+            if (!blockedProperty) {
+                continue;
+            }
+
+            auto posx = std::get<0>(pos);
+            auto posy = std::get<1>(pos);
+
+            auto const ts = map->getTilesets().at(0).getTileSize();
+            collisions.add(
+                jt::Rectf { static_cast<float>(posx * ts.x), static_cast<float>(posy * ts.y),
+                    static_cast<float>(ts.x), static_cast<float>(ts.y) });
+        }
+    }
+
+    return collisions;
+}
+
 } // namespace tilemap
 } // namespace jt

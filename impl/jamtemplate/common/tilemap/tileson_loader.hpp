@@ -7,6 +7,7 @@
 #include "texture_manager_interface.hpp"
 #include "tile_info.hpp"
 #include "tile_node.hpp"
+#include "tilemap_collisions.hpp"
 #include "tilemap_manager_tileson_impl.hpp"
 #include <memory>
 #include <tuple>
@@ -25,6 +26,8 @@ public:
 
     std::tuple<std::vector<TileInfo>, std::vector<std::shared_ptr<jt::Sprite>>> loadTilesFromLayer(
         std::string const& layerName, jt::TextureManagerInterface& textureManager);
+
+    TilemapCollisions loadCollisionsFromLayer(std::string const& layerName);
 
 private:
     TilemapManagerTilesonImpl m_tilemapManager;

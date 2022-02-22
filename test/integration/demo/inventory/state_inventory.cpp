@@ -1,6 +1,4 @@
 #include "state_inventory.hpp"
-#include "../control_command_move_b_2_body.hpp"
-#include "../control_command_move_cam.hpp"
 #include "../state_select.hpp"
 #include "box2dwrapper/box2d_world_impl.hpp"
 #include "game_interface.hpp"
@@ -8,15 +6,57 @@
 #include "random/random.hpp"
 #include "tilemap/tileson_loader.hpp"
 
+namespace {
+void camFollowObject(jt::CamInterface& cam, jt::Vector2f const& windowSize,
+    std::shared_ptr<jt::Box2DObject> obj, float elapsed)
+{
+    auto const objPos = obj->getPosition();
+    auto const camPos = cam.getCamOffset();
+    auto const dif = objPos - camPos;
+
+    float const margin = 80.0f;
+    float const moveSpeed = 50.0f;
+    jt::Vector2f const screenSize = windowSize / cam.getZoom();
+    if (dif.x < margin) {
+        cam.move(jt::Vector2f { -moveSpeed, 0.0f } * elapsed);
+        if (dif.x < margin * 0.5f) {
+            cam.move(jt::Vector2f { -moveSpeed, 0.0f } * elapsed);
+        }
+    }
+
+    if (dif.x > screenSize.x - margin) {
+        cam.move(jt::Vector2f { moveSpeed, 0.0f } * elapsed);
+        if (dif.x > screenSize.x - margin * 0.5f) {
+            cam.move(jt::Vector2f { moveSpeed, 0.0f } * elapsed);
+        }
+    }
+
+    if (dif.y < margin) {
+        cam.move(jt::Vector2f { 0.0f, -moveSpeed } * elapsed);
+        if (dif.y < margin * 0.5f) {
+            cam.move(jt::Vector2f { 0.0f, -moveSpeed } * elapsed);
+        }
+    }
+
+    if (dif.y > screenSize.y - margin) {
+        cam.move(jt::Vector2f { 0.0f, moveSpeed } * elapsed);
+        if (dif.y > screenSize.y - margin * 0.5f) {
+            cam.move(jt::Vector2f { 0.0f, moveSpeed } * elapsed);
+        }
+    }
+}
+} // namespace
+
 void StateInventory::doInternalCreate()
 {
+    m_world = std::make_shared<jt::Box2DWorldImpl>(jt::Vector2f { 0.0f, 0.0f });
+
     createItemRepository();
 
     loadTilemap();
 
     createWorldItems();
 
-    m_world = std::make_shared<jt::Box2DWorldImpl>(jt::Vector2f { 0.0f, 0.0f });
     b2BodyDef bodyDef;
     bodyDef.fixedRotation = true;
     bodyDef.type = b2_dynamicBody;
@@ -25,23 +65,6 @@ void StateInventory::doInternalCreate()
     add(m_player);
 
     setAutoDraw(false);
-
-    float const scrollSpeed = 170.0f;
-    //    getGame()->input().keyboard()->setCommandPressed({ jt::KeyCode::W, jt::KeyCode::Up },
-    //        std::make_shared<ControlCommandMoveCam>(
-    //            jt::Vector2f { 0.0f, -scrollSpeed }, getGame()->gfx().camera()));
-    //
-    //    getGame()->input().keyboard()->setCommandPressed({ jt::KeyCode::A, jt::KeyCode::Left },
-    //        std::make_shared<ControlCommandMoveCam>(
-    //            jt::Vector2f { -scrollSpeed, 0.0f }, getGame()->gfx().camera()));
-    //
-    //    getGame()->input().keyboard()->setCommandPressed({ jt::KeyCode::S, jt::KeyCode::Down },
-    //        std::make_shared<ControlCommandMoveCam>(
-    //            jt::Vector2f { 0.0f, scrollSpeed }, getGame()->gfx().camera()));
-    //
-    //    getGame()->input().keyboard()->setCommandPressed({ jt::KeyCode::D, jt::KeyCode::Right },
-    //        std::make_shared<ControlCommandMoveCam>(
-    //            jt::Vector2f { scrollSpeed, 0.0f }, getGame()->gfx().camera()));
 
     m_pickupSound = std::make_shared<jt::Sound>("assets/test.ogg");
     getGame()->audio().addTemporarySound(m_pickupSound);
@@ -66,6 +89,7 @@ void StateInventory::loadTilemap()
 
     m_tileLayerGround = std::make_shared<jt::tilemap::TileLayer>(
         loader.loadTilesFromLayer("ground", getGame()->gfx().textureManager()));
+
     m_tileLayerGround->setScreenSizeHint(jt::Vector2f { 400, 300 });
 
     m_tileLayerOverlay = std::make_shared<jt::tilemap::TileLayer>(
@@ -74,6 +98,25 @@ void StateInventory::loadTilemap()
 
     m_objectsLayer
         = std::make_shared<jt::tilemap::ObjectLayer>(loader.loadObjectsFromLayer("items"));
+
+    auto tileCollisions = loader.loadCollisionsFromLayer("ground");
+    tileCollisions.refineColliders();
+    for (auto const& r : tileCollisions.getRects()) {
+        b2BodyDef bodyDef;
+        bodyDef.fixedRotation = true;
+        bodyDef.type = b2_staticBody;
+        bodyDef.position.Set(r.left + r.width / 2.0f, r.top + r.height / 2.0f);
+
+        b2FixtureDef fixtureDef;
+        b2PolygonShape boxCollider {};
+        boxCollider.SetAsBox(r.width / 2.0f, r.height / 2.0f);
+        fixtureDef.shape = &boxCollider;
+
+        auto collider = std::make_shared<jt::Box2DObject>(m_world, &bodyDef);
+        collider->getB2Body()->CreateFixture(&fixtureDef);
+
+        m_colliders.push_back(collider);
+    }
 }
 
 void StateInventory::createItemRepository()
@@ -94,6 +137,9 @@ void StateInventory::doInternalUpdate(float elapsed)
     m_tileLayerOverlay->update(elapsed);
 
     m_world->step(elapsed, 20, 20);
+
+    camFollowObject(
+        getGame()->gfx().camera(), getGame()->gfx().window().getSize(), m_player, elapsed);
 
     pickupItems();
 
@@ -139,6 +185,6 @@ void StateInventory::doInternalDraw() const
 {
     m_tileLayerGround->draw(getGame()->gfx().target());
 
-    m_tileLayerOverlay->draw(getGame()->gfx().target());
+    //    m_tileLayerOverlay->draw(getGame()->gfx().target());
     drawObjects();
 }
