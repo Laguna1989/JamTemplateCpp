@@ -118,7 +118,7 @@ jobs:
           working-directory: ${{github.workspace}}/build/test/unit/jt_test
 
   WindowsSFML:
-    runs-on: windows-latest
+    runs-on: windows-2019
     steps:
       - name: Set up cmake
         uses: jwlawson/actions-setup-cmake@v1.11

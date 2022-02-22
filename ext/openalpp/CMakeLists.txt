@@ -2,7 +2,7 @@ message(STATUS "Fetching openalpp")
 FetchContent_Declare(
         openalpp
         GIT_REPOSITORY https://github.com/Laguna1989/OpenALpp.git
-        GIT_TAG master
+        GIT_TAG v0.2.0
 )
 
 set(OALPP_ENABLE_UNIT_TESTS OFF)
