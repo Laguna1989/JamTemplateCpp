@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1645554259129,
+  "lastUpdate": 1645559709680,
   "repoUrl": "https://github.com/Laguna1989/JamTemplateCpp",
   "entries": {
     "Benchmark": [
@@ -3708,6 +3708,42 @@ window.BENCHMARK_DATA = {
             "value": 3.8669395543478133,
             "unit": "ms/iter",
             "extra": "iterations: 184\ncpu: 3.8662277173913053 ms\nthreads: 1"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "laguna.ws@gmail.com",
+            "name": "Laguna1989",
+            "username": "Laguna1989"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "25cff37e360964f1d8d32fa89baf789c2f79e51a",
+          "message": "Merge pull request #150 from Laguna1989/FEATURE_CharacterMovement\n\nFeature character movement",
+          "timestamp": "2022-02-22T20:51:48+01:00",
+          "tree_id": "71cec7a3bf914e443ff2343b401621b8484a77f0",
+          "url": "https://github.com/Laguna1989/JamTemplateCpp/commit/25cff37e360964f1d8d32fa89baf789c2f79e51a"
+        },
+        "date": 1645559708388,
+        "tool": "googlecpp",
+        "benches": [
+          {
+            "name": "BM_StartGame",
+            "value": 0.002587004973423319,
+            "unit": "ms/iter",
+            "extra": "iterations: 257368\ncpu: 0.002586317257778745 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GamestateWithTweeningShapes",
+            "value": 3.878530186440718,
+            "unit": "ms/iter",
+            "extra": "iterations: 177\ncpu: 3.8750581920903957 ms\nthreads: 1"
           }
         ]
       }
