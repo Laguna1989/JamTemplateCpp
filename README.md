@@ -42,7 +42,7 @@ except:
 ### Web
 
 I run it with [WSL2](https://docs.microsoft.com/de-de/windows/wsl/compare-versions), but every system capable of
-running [wegassembly](https://webassembly.org/) / [emscripten](https://emscripten.org/) should work.
+running [webassembly](https://webassembly.org/) / [emscripten](https://emscripten.org/) should work.
 
 Preconditions:
 
