@@ -100,7 +100,8 @@ void StateInventory::loadTilemap()
         = std::make_shared<jt::tilemap::ObjectLayer>(loader.loadObjectsFromLayer("items"));
 
     auto tileCollisions = loader.loadCollisionsFromLayer("ground");
-    tileCollisions.refineColliders();
+
+    tileCollisions.refineColliders(24);
     for (auto const& r : tileCollisions.getRects()) {
         b2BodyDef bodyDef;
         bodyDef.fixedRotation = true;
