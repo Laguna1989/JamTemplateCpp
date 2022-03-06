@@ -58,8 +58,8 @@ void StateTileson::doInternalUpdate(float const elapsed)
         auto const tileEndPos = jt::Vector2u { static_cast<unsigned int>(mpos.x / 32.0f),
             static_cast<unsigned int>(mpos.y / 32.0f) };
 
-        calculatePath(m_nodeLayer->getTileAt(actorPos.x, actorPos.y)->getNode(),
-            m_nodeLayer->getTileAt(tileEndPos.x, tileEndPos.y)->getNode());
+        calculatePath(m_nodeLayer->getTileAt(actorPos)->getNode(),
+            m_nodeLayer->getTileAt(tileEndPos)->getNode());
     }
 
     if (getGame()->input().keyboard()->justPressed(jt::KeyCode::F1)
@@ -143,8 +143,7 @@ void StateTileson::calculatePath(jt::pathfinder::NodeT start, jt::pathfinder::No
     m_nodeLayer->reset();
     auto path = jt::pathfinder::calculatePath(start, end);
     for (auto const& n : path) {
-        auto const pos = n->getTilePosition();
-        auto t = m_nodeLayer->getTileAt(static_cast<int>(pos.x), static_cast<int>(pos.y));
+        auto t = m_nodeLayer->getTileAt(n->getTilePosition());
         if (t) {
             t->getDrawable()->setColor(jt::colors::Cyan);
         }
