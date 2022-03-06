@@ -56,9 +56,14 @@ public:
     // do not call this manually. Only place for this to be called is Game()->update();
     static void setCamOffset(jt::Vector2f const& v);
 
+    void setScreenSizeHint(Vector2f const& hint) override;
+
+    virtual bool isVisible() const;
+
 protected:
     jt::Vector2f getShakeOffset() const;
     jt::Vector2f getCamOffset() const;
+    jt::Vector2f m_screenSizeHint { 0.0f, 0.0f };
 
 private:
     static jt::Vector2f m_CamOffset;

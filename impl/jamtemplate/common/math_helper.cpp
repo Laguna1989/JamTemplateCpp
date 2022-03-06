@@ -54,6 +54,7 @@ std::string floatToStringWithXDigits(float const number, unsigned int digits)
 }
 
 float angleOf(jt::Vector2f const& in) { return rad2deg(static_cast<float>(atan2(-in.y, in.x))); }
+float dot(Vector2f const& lhs, Vector2f const& rhs) { return lhs.x * rhs.x + lhs.y * rhs.y; }
 
 } // namespace MathHelper
 

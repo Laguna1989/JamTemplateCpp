@@ -46,6 +46,8 @@ public:
 
     MOCK_METHOD(void, setIgnoreCamMovement, (bool), (override));
     MOCK_METHOD(bool, getIgnoreCamMovement, (), (const, override));
+
+    MOCK_METHOD(void, setScreenSizeHint,(jt::Vector2f const& hint), (override));
 };
 
 #endif

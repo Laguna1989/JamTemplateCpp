@@ -92,8 +92,7 @@ void TileLayer::setOrigin(jt::Vector2f const& origin) { m_origin = origin; }
 jt::Vector2f TileLayer::getOrigin() const { return m_origin; }
 
 void TileLayer::doRotate(float /*rot*/) { }
-
-void TileLayer::setScreenSizeHint(jt::Vector2f const& hint) { m_screenSizeHint = hint; }
+bool TileLayer::isVisible() const { return true; }
 
 } // namespace tilemap
 

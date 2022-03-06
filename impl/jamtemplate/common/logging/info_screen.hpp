@@ -12,6 +12,9 @@ private:
     jt::CircularBuffer<float, 200> m_frameTimes;
     std::vector<float> m_frameTimesVector;
 
+    jt::CircularBuffer<float, 800> m_GameObjectAliveCount;
+    std::vector<float> m_GameObjectAliveCountVector;
+
     virtual void doCreate();
     virtual void doUpdate(float const /*elapsed*/);
     virtual void doDraw() const;

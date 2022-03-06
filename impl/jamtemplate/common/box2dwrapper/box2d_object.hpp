@@ -38,6 +38,10 @@ public:
     /// \param v the new velocity
     void setVelocity(jt::Vector2f const& v);
 
+    /// Add the velocity (overwirte box2d simulation)
+    /// \param v the velocity to be added
+    void addVelocity(jt::Vector2f const& v);
+
     /// Set the rotation
     /// \return the rotation
     float getRotation() const;

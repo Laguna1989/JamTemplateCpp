@@ -18,10 +18,11 @@ public:
 
     virtual bool pressed(jt::KeyCode k) override;
     virtual bool released(jt::KeyCode k) override;
-    void updateCommands(float elapsed) override;
 
     virtual bool justPressed(jt::KeyCode k) override;
     virtual bool justReleased(jt::KeyCode k) override;
+
+    void updateCommands(float elapsed) override;
 
     virtual void reset() override;
 

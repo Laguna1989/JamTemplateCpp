@@ -27,6 +27,12 @@ void Box2DObject::setVelocity(jt::Vector2f const& v)
     m_body->SetLinearVelocity(Conversion::vec(v));
 }
 
+void Box2DObject::addVelocity(Vector2f const& v)
+{
+    auto oldV = Conversion::vec(m_body->GetLinearVelocity());
+    m_body->SetLinearVelocity(Conversion::vec(oldV + v));
+}
+
 float Box2DObject::getRotation() const { return m_body->GetAngle(); }
 
 b2Body* Box2DObject::getB2Body() { return m_body; }

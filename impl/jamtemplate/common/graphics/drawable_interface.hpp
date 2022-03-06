@@ -148,6 +148,8 @@ public:
     /// \return
     virtual bool getIgnoreCamMovement() const = 0;
 
+    virtual void setScreenSizeHint(jt::Vector2f const& hint) = 0;
+
 protected:
     DrawableInterface() = default;
 };

@@ -4,7 +4,7 @@
 namespace jt {
 namespace pathfinder {
 
-std::vector<std::weak_ptr<NodeInterface>> Node::getNeighbours() { return m_neighbours; }
+std::vector<std::weak_ptr<NodeInterface>> const& Node::getNeighbours() { return m_neighbours; }
 
 void Node::visit() { m_visited = true; }
 
@@ -12,7 +12,7 @@ void Node::unvisit() { m_visited = false; }
 
 bool Node::wasVisited() { return m_visited; }
 
-jt::Vector2u Node::getTilePosition() const { return m_position; }
+jt::Vector2u const& Node::getTilePosition() const { return m_position; }
 
 void Node::setPosition(jt::Vector2u pos) { m_position = pos; }
 

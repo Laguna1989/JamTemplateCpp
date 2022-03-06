@@ -3,7 +3,11 @@
 #include "imgui.h"
 
 namespace jt {
-void InfoScreen::doCreate() { m_frameTimesVector.resize(m_frameTimes.size()); }
+void InfoScreen::doCreate()
+{
+    m_frameTimesVector.resize(m_frameTimes.size());
+    m_GameObjectAliveCountVector.resize(m_GameObjectAliveCount.size());
+}
 void InfoScreen::doUpdate(float const elapsed)
 {
 #ifdef JT_ENABLE_DEBUG
@@ -15,6 +19,12 @@ void InfoScreen::doUpdate(float const elapsed)
     auto const pushIndex = m_frameTimes.getPushIndex();
     for (auto index = pushIndex; index != pushIndex + m_frameTimes.size(); ++index) {
         m_frameTimesVector[index - pushIndex] = m_frameTimes[index];
+    }
+
+    m_GameObjectAliveCount.push(getNumberOfAliveGameObjects());
+    auto const pushIndex2 = m_GameObjectAliveCount.getPushIndex();
+    for (auto index = pushIndex2; index != pushIndex2 + m_GameObjectAliveCount.size(); ++index) {
+        m_GameObjectAliveCountVector[index - pushIndex2] = m_GameObjectAliveCount[index];
     }
 #endif
 }
@@ -52,6 +62,10 @@ void InfoScreen::doDraw() const
         std::string const createdGameObjectsText
             = "# GameObjects (created): " + std::to_string(getNumberOfCreatedGameObjects());
         ImGui::Text(createdGameObjectsText.c_str());
+
+        ImGui::PlotLines("AliveGameObjects [#] = %s", m_GameObjectAliveCountVector.data(),
+            static_cast<int>(m_GameObjectAliveCountVector.size()), 0, nullptr, 0, FLT_MAX,
+            ImVec2 { 0, 100 });
     }
     ImGui::End();
 }

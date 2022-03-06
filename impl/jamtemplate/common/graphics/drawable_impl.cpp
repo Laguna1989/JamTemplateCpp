@@ -12,9 +12,11 @@ void DrawableImpl::draw(std::shared_ptr<jt::RenderTarget> sptr) const
                      "DrawableImpl::update()!\n";
     }
 
-    drawShadow(sptr);
-    doDraw(sptr);
-    drawFlash(sptr);
+    if (isVisible()) {
+        drawShadow(sptr);
+        doDraw(sptr);
+        drawFlash(sptr);
+    }
 }
 
 void DrawableImpl::flash(float t, jt::Color col) { doFlash(t, col); }
@@ -71,5 +73,29 @@ jt::Vector2f DrawableImpl::getStaticCamOffset() { return m_CamOffset; }
 
 void DrawableImpl::setFlashColor(Color const& col) { doSetFlashColor(col); }
 Color DrawableImpl::getFlashColor() const { return doGetFlashColor(); }
+
+void DrawableImpl::setScreenSizeHint(Vector2f const& hint) { m_screenSizeHint = hint; }
+
+bool DrawableImpl::isVisible() const
+{
+    if (m_screenSizeHint.x == 0 && m_screenSizeHint.y == 0) {
+        return true;
+    }
+
+    jt::Vector2f const camOffset = getStaticCamOffset();
+    if (getPosition().x + camOffset.x + getLocalBounds().width < 0) {
+        return false;
+    }
+    if (getPosition().y + camOffset.y + getLocalBounds().height < 0) {
+        return false;
+    }
+    if (getPosition().x + camOffset.x >= this->m_screenSizeHint.x + getLocalBounds().width) {
+        return false;
+    }
+    if (getPosition().y + camOffset.y >= this->m_screenSizeHint.y + getLocalBounds().height) {
+        return false;
+    }
+    return true;
+}
 
 } // namespace jt

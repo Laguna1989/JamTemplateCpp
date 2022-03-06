@@ -29,6 +29,9 @@ public:
     MOCK_METHOD(jt::LoggerInterface&, getLogger, (), (override));
     MOCK_METHOD(jt::ActionCommandManagerInterface&, getActionCommandManager, (), (override));
 
+    MOCK_METHOD(void, cheat, (), (override));
+    MOCK_METHOD(bool, wasCheating, (), (override));
+
     ::testing::NiceMock<MockGfx> m_gfx;
 
 protected:

@@ -51,7 +51,7 @@ public:
 
     void doRotate(float /*rot*/) override;
 
-    void setScreenSizeHint(jt::Vector2f const& hint);
+    bool isVisible() const override;
 
 private:
     mutable std::vector<std::shared_ptr<jt::Sprite>> m_tileSetSprites {};
@@ -60,7 +60,6 @@ private:
 
     jt::Vector2f m_position { 0.0f, 0.0f };
     jt::Vector2f m_origin { 0.0f, 0.0f };
-    jt::Vector2f m_screenSizeHint { 0.0f, 0.0f };
     jt::Vector2f m_scale { 1.0f, 1.0f };
     Color m_color { jt::colors::White };
 

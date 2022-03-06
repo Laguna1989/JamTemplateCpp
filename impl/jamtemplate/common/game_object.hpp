@@ -87,7 +87,7 @@ private:
     std::vector<std::shared_ptr<void>> m_storedActionCommands;
 
     virtual void doCreate();
-    virtual void doUpdate(float const /*elapsed*/);
+    virtual void doUpdate(float const elapsed);
     virtual void doDraw() const;
 
     virtual void doKill();
