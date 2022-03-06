@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1646033851302,
+  "lastUpdate": 1646553536047,
   "repoUrl": "https://github.com/Laguna1989/JamTemplateCpp",
   "entries": {
     "Benchmark": [
@@ -3816,6 +3816,42 @@ window.BENCHMARK_DATA = {
             "value": 3.392129829999959,
             "unit": "ms/iter",
             "extra": "iterations: 200\ncpu: 3.3915845 ms\nthreads: 1"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "laguna.ws@gmail.com",
+            "name": "Laguna1989",
+            "username": "Laguna1989"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "86d23296e020ff10c814f7a3fa4fdbb0484dda66",
+          "message": "Merge pull request #155 from Laguna1989/FEATURE_Alakajam14Changes\n\nAdd updates from Alakajam 14",
+          "timestamp": "2022-03-06T08:55:29+01:00",
+          "tree_id": "c52af15db47e9ac5f2a69110b0c2c5cf46ab31a8",
+          "url": "https://github.com/Laguna1989/JamTemplateCpp/commit/86d23296e020ff10c814f7a3fa4fdbb0484dda66"
+        },
+        "date": 1646553535007,
+        "tool": "googlecpp",
+        "benches": [
+          {
+            "name": "BM_StartGame",
+            "value": 0.002473612009676955,
+            "unit": "ms/iter",
+            "extra": "iterations: 283971\ncpu: 0.002473311711407151 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GamestateWithTweeningShapes",
+            "value": 3.341206168269213,
+            "unit": "ms/iter",
+            "extra": "iterations: 208\ncpu: 3.341143269230768 ms\nthreads: 1"
           }
         ]
       }
