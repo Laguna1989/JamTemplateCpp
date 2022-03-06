@@ -31,6 +31,9 @@ public:
 
     void reset() override;
 
+    void cheat() override;
+    bool wasCheating() override;
+
 protected:
     std::weak_ptr<GameInterface> getPtr() override;
 
@@ -55,6 +58,7 @@ protected:
     float m_lag { 0.0f };
     float m_timePerUpdate { 0.005f };
     int m_maxNumberOfUpdateIterations { 100 };
+    bool m_wasCheating { false };
 };
 
 } // namespace jt

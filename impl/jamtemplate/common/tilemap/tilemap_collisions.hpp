@@ -9,8 +9,9 @@ namespace jt {
 class TilemapCollisions {
 public:
     void add(jt::Rectf const& r);
+
     std::vector<jt::Rectf> const& getRects() const;
-    void refineColliders();
+
     void refineColliders(float size);
 
 private:

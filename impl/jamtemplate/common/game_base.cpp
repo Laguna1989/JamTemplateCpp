@@ -110,5 +110,7 @@ void GameBase::doDraw() const
     m_stateManager.draw(gfx().target());
     gfx().display();
 }
+bool GameBase::wasCheating() { return m_wasCheating; }
+void GameBase::cheat() { m_wasCheating = true; }
 
 } // namespace jt

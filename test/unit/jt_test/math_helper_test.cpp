@@ -244,3 +244,43 @@ TEST(AngleOf, VerticalNegative)
     jt::Vector2f const vec { 0.0f, 1.0f };
     ASSERT_EQ(angleOf(vec), -90.0f);
 }
+
+TEST(Dot, SameVector)
+{
+    jt::Vector2f const vec { 0.0f, 1.0f };
+    ASSERT_EQ(dot(vec, vec), 1.0f);
+}
+
+TEST(Dot, SameVector2)
+{
+    jt::Vector2f const vec { 1.0f, 0.0f };
+    ASSERT_EQ(dot(vec, vec), 1.0f);
+}
+
+TEST(Dot, OrthogonalVectors1)
+{
+    jt::Vector2f const vec1 { 1.0f, 0.0f };
+    jt::Vector2f const vec2 { 0.0f, 1.0f };
+    ASSERT_EQ(dot(vec1, vec2), 0.0f);
+}
+
+TEST(Dot, OrthogonalVectors2)
+{
+    jt::Vector2f const vec1 { 1.0f, 0.0f };
+    jt::Vector2f const vec2 { 0.0f, 1.0f };
+    ASSERT_EQ(dot(vec2, vec1), 0.0f);
+}
+
+TEST(Dot, OrthogonalVectors3)
+{
+    jt::Vector2f const vec1 { -1.0f, 0.0f };
+    jt::Vector2f const vec2 { 0.0f, 1.0f };
+    ASSERT_EQ(dot(vec2, vec1), 0.0f);
+}
+
+TEST(Dot, OrthogonalVectors4)
+{
+    jt::Vector2f const vec1 { 1.0f, 0.0f };
+    jt::Vector2f const vec2 { 0.0f, -1.0f };
+    ASSERT_EQ(dot(vec2, vec1), 0.0f);
+}

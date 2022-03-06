@@ -1,11 +1,12 @@
 #include "node_layer.hpp"
 #include "pathfinder/node.hpp"
+#include <utility>
 
 namespace jt {
 namespace tilemap {
 
 NodeLayer::NodeLayer(std::vector<std::shared_ptr<TileNode>> nodeTiles)
-    : m_nodeTiles { nodeTiles }
+    : m_nodeTiles { std::move(nodeTiles) }
 {
     createNodeConnections();
 }
@@ -23,9 +24,10 @@ void NodeLayer::createNodeConnections()
                 if (i == 0 && j == 0) {
                     continue;
                 }
-                auto oi = static_cast<int>(currentPos.x) + i;
-                auto oj = static_cast<int>(currentPos.y) + j;
-                auto ot = getTileAt(static_cast<unsigned int>(oi), static_cast<unsigned int>(oj));
+                auto const oi = static_cast<int>(currentPos.x) + i;
+                auto const oj = static_cast<int>(currentPos.y) + j;
+                auto const ot = getTileAt(
+                    jt::Vector2u { static_cast<unsigned int>(oi), static_cast<unsigned int>(oj) });
                 if (ot) {
                     if (ot->getBlocked()) {
                         continue;
@@ -37,16 +39,19 @@ void NodeLayer::createNodeConnections()
     }
 }
 
-std::shared_ptr<TileNode> NodeLayer::getTileAt(unsigned int x, unsigned int y)
+std::shared_ptr<TileNode> NodeLayer::getTileAt(jt::Vector2u const& pos)
 {
-    auto it = std::find_if(m_nodeTiles.begin(), m_nodeTiles.end(), [x, y](auto tile) {
-        return tile->getNode()->getTilePosition().x == x
-            && tile->getNode()->getTilePosition().y == y;
-    });
-    if (it == m_nodeTiles.end()) {
-        return nullptr;
+    if (m_lookupHelper.count(pos) == 0) {
+        auto it = std::find_if(m_nodeTiles.begin(), m_nodeTiles.end(), [&pos](auto tile) {
+            auto nodeTilePos = tile->getNode()->getTilePosition();
+            return nodeTilePos.x == pos.x && nodeTilePos.y == pos.y;
+        });
+        if (it == m_nodeTiles.end()) {
+            return nullptr;
+        }
+        m_lookupHelper[pos] = *it;
     }
-    return *it;
+    return m_lookupHelper.at(pos);
 }
 
 std::vector<std::shared_ptr<TileNode>> NodeLayer::getAllTiles() { return m_nodeTiles; }

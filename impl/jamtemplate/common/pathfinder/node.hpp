@@ -9,13 +9,13 @@ namespace jt {
 namespace pathfinder {
 class Node : public NodeInterface {
 public:
-    std::vector<std::weak_ptr<NodeInterface>> getNeighbours() override;
+    std::vector<std::weak_ptr<NodeInterface>> const& getNeighbours() override;
 
     void visit() override;
     void unvisit() override;
     bool wasVisited() override;
 
-    jt::Vector2u getTilePosition() const override;
+    jt::Vector2u const& getTilePosition() const override;
 
     void setPosition(jt::Vector2u pos);
 

@@ -9,9 +9,9 @@ namespace pathfinder {
 
 namespace {
 
-float calculateDistance(NodeT node1, jt::Vector2u position2)
+float calculateDistance(NodeT const& node1, jt::Vector2u const& position2)
 {
-    auto const thisPosition = node1->getTilePosition();
+    auto const& thisPosition = node1->getTilePosition();
 
     auto diff = jt::Vector2f { static_cast<float>(position2.x) - thisPosition.x,
         static_cast<float>(position2.y) - thisPosition.y };
@@ -19,7 +19,7 @@ float calculateDistance(NodeT node1, jt::Vector2u position2)
 }
 
 NodeT findClosestNodeTo(
-    std::vector<std::weak_ptr<NodeInterface>>& toCheck, jt::Vector2u endPosition)
+    std::vector<std::weak_ptr<NodeInterface>>& toCheck, jt::Vector2u const& endPosition)
 {
     if (toCheck.empty()) {
         throw std::invalid_argument { "cannot find closestNodeToEnd because no nodes given." };
@@ -53,7 +53,8 @@ NodeT findClosestNodeTo(
     return closestNode;
 }
 
-void setNeighbourValue(NodeT currentNode, std::shared_ptr<NodeInterface> neighbour_node)
+void setNeighbourValue(
+    NodeT const& currentNode, std::shared_ptr<NodeInterface> const& neighbour_node)
 {
     auto const dist = calculateDistance(neighbour_node, currentNode->getTilePosition());
     auto const newValue = dist + currentNode->getValue();
@@ -64,7 +65,8 @@ void setNeighbourValue(NodeT currentNode, std::shared_ptr<NodeInterface> neighbo
     }
 }
 
-void addNeighboursToToCheck(NodeT currentNode, std::vector<std::weak_ptr<NodeInterface>>& toCheck)
+void addNeighboursToToCheck(
+    NodeT const& currentNode, std::vector<std::weak_ptr<NodeInterface>>& toCheck)
 {
     for (auto n : currentNode->getNeighbours()) {
         auto neighbour_node = n.lock();
@@ -80,9 +82,9 @@ void addNeighboursToToCheck(NodeT currentNode, std::vector<std::weak_ptr<NodeInt
     }
 }
 
-bool calculateNodeValuesFromEndToStart(NodeT start, NodeT end)
+bool calculateNodeValuesFromEndToStart(NodeT const& start, NodeT const& end)
 {
-    auto const startPosition = start->getTilePosition();
+    auto const& startPosition = start->getTilePosition();
 
     end->visit();
     end->setValue(0.0f);
@@ -111,7 +113,7 @@ bool calculateNodeValuesFromEndToStart(NodeT start, NodeT end)
     return true;
 }
 
-NodeT findNeighbourWithSmallestValue(NodeT current)
+NodeT findNeighbourWithSmallestValue(NodeT const& current)
 {
     auto minValue = std::numeric_limits<float>::max();
     NodeT minNode = nullptr;
@@ -131,9 +133,8 @@ NodeT findNeighbourWithSmallestValue(NodeT current)
 
 } // namespace
 
-std::vector<NodeT> calculatePath(NodeT start, NodeT end)
+std::vector<NodeT> calculatePath(NodeT const& start, NodeT const& end)
 {
-
     if (start == end) {
         return std::vector<NodeT> {};
     }
@@ -142,6 +143,7 @@ std::vector<NodeT> calculatePath(NodeT start, NodeT end)
     }
     auto current = start;
     std::vector<NodeT> nodes;
+
     nodes.push_back(current);
 
     while (current != end) {

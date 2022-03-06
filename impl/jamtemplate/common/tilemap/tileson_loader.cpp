@@ -39,21 +39,24 @@ std::vector<std::shared_ptr<jt::Sprite>> loadTileSetSprites(
     std::unique_ptr<tson::Map>& map, jt::TextureManagerInterface& textureManager)
 {
     std::vector<std::shared_ptr<jt::Sprite>> tileSetSprites;
-    auto const tileset = map->getTilesets().at(0);
-    auto const columns = tileset.getColumns();
-    auto const rows = tileset.getTileCount() / columns;
-    auto const ts = tileset.getTileSize();
-    auto const tilesetName = "assets/" + tileset.getImagePath().string();
-    tileSetSprites.clear();
-    tileSetSprites.resize(static_cast<size_t>(rows) * static_cast<size_t>(columns));
-    for (int j = 0; j != rows; ++j) {
-        for (int i = 0; i != columns; ++i) {
-            {
-                tileSetSprites.at(i + j * columns) = std::make_shared<Sprite>(
-                    tilesetName, Recti { i * ts.x, j * ts.y, ts.x, ts.y }, textureManager);
-                ;
+    std::size_t offset { 0 };
+    for (auto i = 0U; i != map->getTilesets().size(); ++i) {
+        auto const tileset = map->getTilesets().at(i);
+        auto const columns = tileset.getColumns();
+        auto const rows = tileset.getTileCount() / columns;
+        auto const ts = tileset.getTileSize();
+        auto const tilesetName = "assets/" + tileset.getImagePath().string();
+
+        tileSetSprites.resize(offset + static_cast<size_t>(rows) * static_cast<size_t>(columns));
+        for (int j = 0; j != rows; ++j) {
+            for (int i = 0; i != columns; ++i) {
+                {
+                    tileSetSprites.at(offset + i + j * columns) = std::make_shared<Sprite>(
+                        tilesetName, Recti { i * ts.x, j * ts.y, ts.x, ts.y }, textureManager);
+                }
             }
         }
+        offset = tileSetSprites.size();
     }
     return tileSetSprites;
 }

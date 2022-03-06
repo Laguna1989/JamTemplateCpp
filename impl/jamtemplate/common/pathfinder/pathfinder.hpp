@@ -10,7 +10,7 @@ namespace pathfinder {
 
 using NodeT = std::shared_ptr<NodeInterface>;
 
-std::vector<NodeT> calculatePath(NodeT start, NodeT end);
+std::vector<NodeT> calculatePath(NodeT const& start, NodeT const& end);
 
 } // namespace pathfinder
 } // namespace jt

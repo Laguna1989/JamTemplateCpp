@@ -70,6 +70,8 @@ constexpr bool is_powerof2(T v)
     return v && ((v & (v - 1)) == 0);
 }
 
+float dot(Vector2f const&, Vector2f const&);
+
 } // namespace MathHelper
 } // namespace jt
 
