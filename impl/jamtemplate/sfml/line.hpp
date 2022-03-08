@@ -46,4 +46,4 @@ private:
 
 } // namespace jt
 
-#endif // QUASARRUSH_LINE_HPP
+#endif // GUARD_JAMTEMPLATE_LINE_HPP_INCLUDEGUARD
