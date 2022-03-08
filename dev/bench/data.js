@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1646770817399,
+  "lastUpdate": 1646771701159,
   "repoUrl": "https://github.com/Laguna1989/JamTemplateCpp",
   "entries": {
     "Benchmark": [
@@ -3924,6 +3924,42 @@ window.BENCHMARK_DATA = {
             "value": 3.2728187627907213,
             "unit": "ms/iter",
             "extra": "iterations: 215\ncpu: 3.272021860465117 ms\nthreads: 1"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "laguna.ws@gmail.com",
+            "name": "Simon Weis",
+            "username": "Laguna1989"
+          },
+          "committer": {
+            "email": "laguna.ws@gmail.com",
+            "name": "Simon Weis",
+            "username": "Laguna1989"
+          },
+          "distinct": true,
+          "id": "6aa82a540bc00f3236c01536516122b4ed722bf8",
+          "message": "Add new font file and fix include guard",
+          "timestamp": "2022-03-08T21:31:17+01:00",
+          "tree_id": "18f4d255e9c50ec54bc855743aa0029718706ff9",
+          "url": "https://github.com/Laguna1989/JamTemplateCpp/commit/6aa82a540bc00f3236c01536516122b4ed722bf8"
+        },
+        "date": 1646771699917,
+        "tool": "googlecpp",
+        "benches": [
+          {
+            "name": "BM_StartGame",
+            "value": 0.0022381272568301512,
+            "unit": "ms/iter",
+            "extra": "iterations: 313382\ncpu: 0.0022380210095027794 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GamestateWithTweeningShapes",
+            "value": 3.10655216371672,
+            "unit": "ms/iter",
+            "extra": "iterations: 226\ncpu: 3.1064716814159294 ms\nthreads: 1"
           }
         ]
       }
