@@ -27,15 +27,15 @@ void StateScroll::doInternalCreate()
     m_anim->setColor(jt::colors::Red);
     m_anim->setPosition(jt::Vector2f { 200.0f, 200.0f });
 
-    m_text_left_aligned = jt::dh::createText(getGame()->gfx().target(), "left aligned", 12);
+    m_text_left_aligned = jt::dh::createText(getGame()->gfx().target(), "left aligned", 16);
     m_text_left_aligned->setTextAlign(jt::Text::TextAlign::LEFT);
     m_text_left_aligned->setPosition(jt::Vector2f { 300, 100 });
 
-    m_text_center_aligned = jt::dh::createText(getGame()->gfx().target(), "center aligned", 12);
+    m_text_center_aligned = jt::dh::createText(getGame()->gfx().target(), "center aligned", 16);
     m_text_center_aligned->setTextAlign(jt::Text::TextAlign::CENTER);
     m_text_center_aligned->setPosition(jt::Vector2f { 300, 130 });
 
-    m_text_right_aligned = jt::dh::createText(getGame()->gfx().target(), "right aligned", 12);
+    m_text_right_aligned = jt::dh::createText(getGame()->gfx().target(), "right aligned", 16);
     m_text_right_aligned->setTextAlign(jt::Text::TextAlign::RIGHT);
     m_text_right_aligned->setPosition(jt::Vector2f { 300, 160 });
 
