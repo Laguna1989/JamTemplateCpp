@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1646553536047,
+  "lastUpdate": 1646770582185,
   "repoUrl": "https://github.com/Laguna1989/JamTemplateCpp",
   "entries": {
     "Benchmark": [
@@ -3852,6 +3852,42 @@ window.BENCHMARK_DATA = {
             "value": 3.341206168269213,
             "unit": "ms/iter",
             "extra": "iterations: 208\ncpu: 3.341143269230768 ms\nthreads: 1"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "laguna.ws@gmail.com",
+            "name": "Laguna1989",
+            "username": "Laguna1989"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "a887c1baec15573d556f51df4f954e4bcd0ac0e7",
+          "message": "Merge pull request #157 from Laguna1989/FEATURE_NewFont\n\nAdd new Pixel art Font",
+          "timestamp": "2022-03-08T21:10:25+01:00",
+          "tree_id": "3e5789ccb125802c2fb9eba7cea9e35357947b4e",
+          "url": "https://github.com/Laguna1989/JamTemplateCpp/commit/a887c1baec15573d556f51df4f954e4bcd0ac0e7"
+        },
+        "date": 1646770580890,
+        "tool": "googlecpp",
+        "benches": [
+          {
+            "name": "BM_StartGame",
+            "value": 0.002375914160010509,
+            "unit": "ms/iter",
+            "extra": "iterations: 296843\ncpu: 0.0023756167401623083 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GamestateWithTweeningShapes",
+            "value": 3.2659451495328113,
+            "unit": "ms/iter",
+            "extra": "iterations: 214\ncpu: 3.2656383177570083 ms\nthreads: 1"
           }
         ]
       }
