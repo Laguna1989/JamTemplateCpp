@@ -14,7 +14,8 @@ constexpr float buttonOffsetY = 16;
 constexpr float buttonMarginY = 8;
 constexpr float buttonMarginX = 8;
 constexpr unsigned int buttonSizeX = 100;
-constexpr unsigned int buttonSizeY = 16;
+constexpr unsigned int buttonSizeY = 20;
+constexpr int numberOfButtonsPerColumn = 10;
 
 } // namespace detail
 
@@ -32,8 +33,9 @@ private:
     template <class State>
     void AddButton(std::string const& textString)
     {
-        int const indexX = static_cast<int>(m_buttonCount) / 11;
-        int const indexY = m_buttonCount % 11;
+
+        int const indexX = static_cast<int>(m_buttonCount) / detail::numberOfButtonsPerColumn;
+        int const indexY = m_buttonCount % detail::numberOfButtonsPerColumn;
         float const posX
             = detail::buttonOffsetX + indexX * (detail::buttonSizeX + detail::buttonMarginX);
         float const posY
@@ -43,9 +45,9 @@ private:
             getGame()->gfx().textureManager());
         button->addCallback(
             [this]() { getGame()->getStateManager().switchState(std::make_shared<State>()); });
-        auto const text = jt::dh::createText(getGame()->gfx().target(), textString, 12);
+        auto const text = jt::dh::createText(getGame()->gfx().target(), textString, 16);
         text->setTextAlign(jt::Text::TextAlign::LEFT);
-        text->setOrigin(jt::Vector2f { -8, 0 });
+        text->setOrigin(jt::Vector2f { -8, 2 });
         button->setDrawable(text);
         button->setPosition(jt::Vector2f { posX, posY });
         add(std::move(button));
