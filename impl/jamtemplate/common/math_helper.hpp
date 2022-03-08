@@ -3,8 +3,6 @@
 
 #include "vector.hpp"
 #include <assert.h>
-#include <range/v3/view/iota.hpp>
-#include <range/v3/view/take.hpp>
 #include <string>
 #include <utility>
 #include <vector>
@@ -25,8 +23,11 @@ std::vector<T> numbersBetween(T a, T b)
     if (a > b) {
         std::swap(a, b);
     }
-    auto const r = ranges::iota_view(a, b + 1);
-    return std::vector<T>(r.begin(), r.end());
+    std::vector<T> values;
+    for (T i = a; i != b + 1; ++i) {
+        values.push_back(i);
+    }
+    return values;
 }
 
 float lengthSquared(jt::Vector2f const& v);

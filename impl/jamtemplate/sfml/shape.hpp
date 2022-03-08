@@ -43,7 +43,7 @@ private:
     void doDrawFlash(std::shared_ptr<jt::RenderTarget> const sptr) const override;
     void doDrawShadow(std::shared_ptr<jt::RenderTarget> const sptr) const override;
     void doUpdate(float elapsed) override;
-    void doRotate(float rot);
+    void doRotate(float rot) override;
 };
 } // namespace jt
 
