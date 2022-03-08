@@ -37,12 +37,10 @@ public:
     jt::Rectf getLocalBounds() const override;
 
     void setScale(jt::Vector2f const& scale) override;
-
     jt::Vector2f getScale() const override;
 
-    virtual void setOrigin(jt::Vector2f const& origin);
-
-    virtual jt::Vector2f getOrigin() const;
+    void setOrigin(jt::Vector2f const& origin) override;
+    virtual jt::Vector2f getOrigin() const override;
 
     void setTextAlign(TextAlign ta);
     TextAlign getTextAlign() const;
