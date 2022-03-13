@@ -75,7 +75,12 @@ public:
     /// \param value the new values
     void put(T const& value) { m_data[wrapper.wrap(m_tail++)] = value; }
 
-    T get() { return m_data[m_head]; }
+    T get()
+    {
+        auto const indexToRead = m_head;
+        m_head++;
+        return m_data[wrapper.wrap(indexToRead)];
+    }
 
     /// Begin iterator
     /// \return begin iterator
