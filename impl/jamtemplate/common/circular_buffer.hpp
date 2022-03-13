@@ -112,6 +112,7 @@ public:
 
     /// Size of valid elements in the buffer
     /// \return the current size
+    // TODO this will break if get is called more often than put
     std::size_t size() const { return std::min(m_tail - m_head, capacity()); }
 
     /// Position of the head
