@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1646771701159,
+  "lastUpdate": 1647204532028,
   "repoUrl": "https://github.com/Laguna1989/JamTemplateCpp",
   "entries": {
     "Benchmark": [
@@ -3960,6 +3960,42 @@ window.BENCHMARK_DATA = {
             "value": 3.10655216371672,
             "unit": "ms/iter",
             "extra": "iterations: 226\ncpu: 3.1064716814159294 ms\nthreads: 1"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "laguna.ws@gmail.com",
+            "name": "Laguna1989",
+            "username": "Laguna1989"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "aeb407a3fff003c61ce29fdea2732202b559d46f",
+          "message": "Merge pull request #160 from Laguna1989/FEATURE_ExtendCircularBuffer\n\nExtend Circular buffer",
+          "timestamp": "2022-03-13T21:46:42+01:00",
+          "tree_id": "c687cab76416bdd9dee0965b363deae9b12b4c03",
+          "url": "https://github.com/Laguna1989/JamTemplateCpp/commit/aeb407a3fff003c61ce29fdea2732202b559d46f"
+        },
+        "date": 1647204531623,
+        "tool": "googlecpp",
+        "benches": [
+          {
+            "name": "BM_StartGame",
+            "value": 0.0022746392959401515,
+            "unit": "ms/iter",
+            "extra": "iterations: 308042\ncpu: 0.0022741116471130564 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GamestateWithTweeningShapes",
+            "value": 3.270350102803805,
+            "unit": "ms/iter",
+            "extra": "iterations: 214\ncpu: 3.2697677570093466 ms\nthreads: 1"
           }
         ]
       }
