@@ -73,7 +73,12 @@ public:
 
     /// Put a new value into the circular buffer (possibly overwriting old values)
     /// \param value the new values
-    void put(T const& value) { m_data[wrapper.wrap(m_tail++)] = value; }
+    void put(T const& value)
+    {
+        auto const indexToWrite = m_tail;
+        m_tail++;
+        m_data[wrapper.wrap(indexToWrite)] = value;
+    }
 
     T get()
     {
@@ -104,7 +109,7 @@ public:
 
     /// Size of valid elements in the buffer
     /// \return the current size
-    std::size_t size() const { return m_tail - m_head; }
+    std::size_t size() const { return std::min(m_tail - m_head, capacity()); }
 
     /// Position of the head
     /// \return the head position

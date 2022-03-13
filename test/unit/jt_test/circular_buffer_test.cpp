@@ -180,6 +180,15 @@ TEST(CircularBufferHeadTest, ValueAfterTwoPuts)
     ASSERT_EQ(buffer.getHead(), 0U);
 }
 
+TEST(CircularBufferHeadTest, ValueAfterThreePuts)
+{
+    auto buffer = jt::CircularBuffer<unsigned int, 2> {};
+    buffer.put(1u);
+    buffer.put(2u);
+    buffer.put(3u);
+    ASSERT_EQ(buffer.getHead(), 0U);
+}
+
 TEST(CircularBufferGetTest, InitialGet)
 {
     auto buffer = jt::CircularBuffer<unsigned int, 2> {};
@@ -187,7 +196,7 @@ TEST(CircularBufferGetTest, InitialGet)
     ASSERT_EQ(buffer.get(), unsigned int {});
 }
 
-TEST(CircularBufferGetTest, GetAfterPut)
+TEST(CircularBufferGetTest, GetAfterSinglePut)
 {
     auto buffer = jt::CircularBuffer<unsigned int, 2> {};
     auto const expectedValue = 15u;
@@ -196,7 +205,7 @@ TEST(CircularBufferGetTest, GetAfterPut)
     ASSERT_EQ(buffer.get(), expectedValue);
 }
 
-TEST(CircularBufferGetTest, GetAfterTwoPut)
+TEST(CircularBufferGetTest, GetAfterTwoPuts)
 {
     auto buffer = jt::CircularBuffer<unsigned int, 2> {};
     auto const expectedValue = 15u;
@@ -204,6 +213,16 @@ TEST(CircularBufferGetTest, GetAfterTwoPut)
     buffer.put(1u);
 
     ASSERT_EQ(buffer.get(), expectedValue);
+}
+
+TEST(CircularBufferGetTest, GetAfterThreePuts)
+{
+    auto buffer = jt::CircularBuffer<unsigned int, 2> {};
+    buffer.put(1u);
+    buffer.put(2u);
+    buffer.put(3u);
+
+    ASSERT_EQ(buffer.get(), 3u);
 }
 
 TEST(CircularBufferGetTest, GetAfterGet)
@@ -241,4 +260,22 @@ TEST(CircularBufferSize, GetSizeAfterSinglePut)
     auto buffer = jt::CircularBuffer<unsigned int, 2> {};
     buffer.put(1u);
     ASSERT_EQ(buffer.size(), 1);
+}
+
+TEST(CircularBufferSize, GetSizeAfterTwoPuts)
+{
+    auto buffer = jt::CircularBuffer<unsigned int, 2> {};
+    buffer.put(1u);
+    buffer.put(2u);
+    ASSERT_EQ(buffer.size(), 2);
+}
+
+TEST(CircularBufferSize, GetSizeAfterThreePuts)
+{
+    auto buffer = jt::CircularBuffer<unsigned int, 2> {};
+    buffer.put(1u);
+    buffer.put(2u);
+
+    buffer.put(3u);
+    ASSERT_EQ(buffer.size(), 2);
 }
