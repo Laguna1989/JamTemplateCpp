@@ -5,8 +5,8 @@
 namespace jt {
 void InfoScreen::doCreate()
 {
-    m_frameTimesVector.resize(m_frameTimes.size());
-    m_GameObjectAliveCountVector.resize(m_GameObjectAliveCount.size());
+    m_frameTimesVector.resize(m_frameTimes.capacity());
+    m_GameObjectAliveCountVector.resize(m_GameObjectAliveCount.capacity());
 }
 void InfoScreen::doUpdate(float const elapsed)
 {
@@ -15,15 +15,15 @@ void InfoScreen::doUpdate(float const elapsed)
         m_showInfo = !m_showInfo;
     }
 
-    m_frameTimes.push(elapsed);
-    auto const pushIndex = m_frameTimes.getPushIndex();
-    for (auto index = pushIndex; index != pushIndex + m_frameTimes.size(); ++index) {
+    m_frameTimes.put(elapsed);
+    auto const pushIndex = m_frameTimes.getTail();
+    for (auto index = pushIndex; index != pushIndex + m_frameTimes.capacity(); ++index) {
         m_frameTimesVector[index - pushIndex] = m_frameTimes[index];
     }
 
-    m_GameObjectAliveCount.push(getNumberOfAliveGameObjects());
-    auto const pushIndex2 = m_GameObjectAliveCount.getPushIndex();
-    for (auto index = pushIndex2; index != pushIndex2 + m_GameObjectAliveCount.size(); ++index) {
+    m_GameObjectAliveCount.put(getNumberOfAliveGameObjects());
+    auto const pushIndex2 = m_GameObjectAliveCount.getTail();
+    for (auto index = pushIndex2; index != pushIndex2 + m_GameObjectAliveCount.capacity(); ++index) {
         m_GameObjectAliveCountVector[index - pushIndex2] = m_GameObjectAliveCount[index];
     }
 #endif

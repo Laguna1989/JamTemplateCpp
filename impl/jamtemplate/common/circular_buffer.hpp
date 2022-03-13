@@ -19,7 +19,7 @@ class IndexWrapper {
 template <std::size_t size>
 class IndexWrapper<size, typename std::enable_if<jt::MathHelper::is_powerof2(size)>::type> {
 public:
-    static_assert(size != 0, "Error: Cannot create IndexWrapper with size 0");
+    static_assert(size != 0, "Error: Cannot create IndexWrapper with capacity 0");
     std::size_t wrap(const std::size_t index) const { return index & m_mask; }
     std::size_t getSize() const { return size; }
 
@@ -38,7 +38,7 @@ private:
 template <std::size_t size>
 class IndexWrapper<size, typename std::enable_if<!jt::MathHelper::is_powerof2(size)>::type> {
 public:
-    static_assert(size != 0, "Error: Cannot create IndexWrapper with size 0");
+    static_assert(size != 0, "Error: Cannot create IndexWrapper with capacity 0");
     std::size_t wrap(const std::size_t index) const { return index % size; }
     std::size_t getSize() const { return size; }
 };
@@ -55,12 +55,15 @@ public:
     /// Access a const value from the circular buffer
     /// \param position index
     /// \return const reference to the element
-    T const& operator[](std::size_t const position) const { return m_data[wrapper.wrap(position)]; }
+    T const& operator[](std::size_t const position) const
+    {
+        return m_data[m_wrapper.wrap(position)];
+    }
 
     /// Access a value from the circular buffer
     /// \param position index
     /// \return reference to the element
-    T& operator[](std::size_t const position) { return m_data[wrapper.wrap(position)]; }
+    T& operator[](std::size_t const position) { return m_data[m_wrapper.wrap(position)]; }
 
     /// Check if the expected value is present in the circular buffer
     /// \param expected the value to be checked
@@ -71,9 +74,21 @@ public:
             [&expected](auto const& value) { return value == expected; });
     }
 
-    /// Push a new value into the circular buffer (possibly overwriting old values)
+    /// Put a new value into the circular buffer (possibly overwriting old values)
     /// \param value the new values
-    void push(T const& value) { m_data[wrapper.wrap(m_pushIndex++)] = value; }
+    void put(T const& value)
+    {
+        auto const indexToWrite = getTail();
+        m_tail++;
+        m_data[indexToWrite] = value;
+    }
+
+    T get()
+    {
+        auto const indexToRead = getHead();
+        m_head++;
+        return m_data[indexToRead];
+    }
 
     /// Begin iterator
     /// \return begin iterator
@@ -91,16 +106,29 @@ public:
     /// \return const end iterator
     ConstIteratorT cend() const { return m_data.cend(); }
 
-    /// Size of the circular buffer
-    /// \return the size
-    std::size_t size() const { return m_data.size(); }
+    /// Capacity of the circular buffer. Size of the underlying array.
+    /// \return the total capacity
+    std::size_t capacity() const { return m_data.size(); }
 
-    std::size_t getPushIndex() const { return m_pushIndex; }
+    /// Size of valid elements in the buffer
+    /// \return the current size
+    // TODO this will break if get is called more often than put
+    std::size_t size() const { return std::min(m_tail - m_head, capacity()); }
+
+    /// Position of the head
+    /// \return the head position
+    std::size_t getHead() const { return m_wrapper.wrap(m_head); }
+
+    /// Position of the tail
+    /// \return the tail position
+    std::size_t getTail() const { return m_wrapper.wrap(m_tail); }
 
 private:
-    detail::IndexWrapper<N> wrapper;
+    detail::IndexWrapper<N> m_wrapper;
     ArrayT m_data;
-    std::size_t m_pushIndex { 0 };
+
+    std::size_t m_head { 0u };
+    std::size_t m_tail { 0u };
 };
 
 template <typename T, std::size_t N>

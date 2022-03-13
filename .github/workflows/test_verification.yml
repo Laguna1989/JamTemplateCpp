@@ -175,4 +175,4 @@ jobs:
 
       - name: Build
         working-directory: ${{github.workspace}}/build
-        run: emmake make
+        run: emmake make jt_demos

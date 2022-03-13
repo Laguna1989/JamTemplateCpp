@@ -137,11 +137,11 @@ void StateParticles::doInternalUpdate(float elapsed)
         getGame()->getStateManager().switchState(std::make_shared<StateSelect>());
     }
 
-    m_timeMeasurement.push(elapsed);
+    m_timeMeasurement.put(elapsed);
     if (getAge() >= 15) {
         getGame()->getStateManager().switchState(std::make_shared<StateSelect>());
         float avg = std::accumulate(m_timeMeasurement.cbegin(), m_timeMeasurement.cend(), 0.0f)
-            / m_timeMeasurement.size();
+            / m_timeMeasurement.capacity();
         std::cout << "avg: " << numberOfParticles << " "
                   << " " << toFire << " " << avg << std::endl;
     }
