@@ -223,8 +223,8 @@ TEST(CircularBufferGetTest, GetAfterThreePuts)
     buffer.put(3u);
 
     // TODO This test seems not to have the correct expectation (although it is green)
-    ASSERT_EQ(buffer.get(), 2u);
     ASSERT_EQ(buffer.get(), 3u);
+    ASSERT_EQ(buffer.get(), 2u);
 }
 
 TEST(CircularBufferGetTest, GetAfterGet)
