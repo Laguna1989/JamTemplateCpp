@@ -193,7 +193,7 @@ TEST(CircularBufferGetTest, InitialGet)
 {
     auto buffer = jt::CircularBuffer<unsigned int, 2> {};
 
-    ASSERT_EQ(buffer.get(), unsigned int {});
+    ASSERT_EQ(buffer.get(), 0u);
 }
 
 TEST(CircularBufferGetTest, GetAfterSinglePut)
@@ -223,8 +223,8 @@ TEST(CircularBufferGetTest, GetAfterThreePuts)
     buffer.put(3u);
 
     // TODO This test seems not to have the correct expectation (although it is green)
-    ASSERT_EQ(buffer.get(), 3u);
     ASSERT_EQ(buffer.get(), 2u);
+    ASSERT_EQ(buffer.get(), 3u);
 }
 
 TEST(CircularBufferGetTest, GetAfterGet)
@@ -235,7 +235,7 @@ TEST(CircularBufferGetTest, GetAfterGet)
 
     (void)buffer.get();
 
-    ASSERT_EQ(buffer.get(), unsigned int {});
+    ASSERT_EQ(buffer.get(), 0u);
 }
 
 TEST(CircularBufferGetTest, GetAfterTwoGets)
