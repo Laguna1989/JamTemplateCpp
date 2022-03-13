@@ -71,9 +71,11 @@ public:
             [&expected](auto const& value) { return value == expected; });
     }
 
-    /// Push a new value into the circular buffer (possibly overwriting old values)
+    /// Put a new value into the circular buffer (possibly overwriting old values)
     /// \param value the new values
-    void push(T const& value) { m_data[wrapper.wrap(m_pushIndex++)] = value; }
+    void put(T const& value) { m_data[wrapper.wrap(m_tail++)] = value; }
+
+    T get() { return m_data[m_head]; }
 
     /// Begin iterator
     /// \return begin iterator
@@ -95,12 +97,20 @@ public:
     /// \return the size
     std::size_t size() const { return m_data.size(); }
 
-    std::size_t getPushIndex() const { return m_pushIndex; }
+    /// Position of the head
+    /// \return the head position
+    std::size_t getHead() const { return m_head; }
+
+    /// Position of the tail
+    /// \return the tail position
+    std::size_t getTail() const { return m_tail + 1; }
 
 private:
     detail::IndexWrapper<N> wrapper;
     ArrayT m_data;
-    std::size_t m_pushIndex { 0 };
+
+    std::size_t m_head { 0u };
+    std::size_t m_tail { 0u };
 };
 
 template <typename T, std::size_t N>

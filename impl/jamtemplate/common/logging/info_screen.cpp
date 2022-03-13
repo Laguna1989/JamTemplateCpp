@@ -15,14 +15,14 @@ void InfoScreen::doUpdate(float const elapsed)
         m_showInfo = !m_showInfo;
     }
 
-    m_frameTimes.push(elapsed);
-    auto const pushIndex = m_frameTimes.getPushIndex();
+    m_frameTimes.put(elapsed);
+    auto const pushIndex = m_frameTimes.getTail();
     for (auto index = pushIndex; index != pushIndex + m_frameTimes.size(); ++index) {
         m_frameTimesVector[index - pushIndex] = m_frameTimes[index];
     }
 
-    m_GameObjectAliveCount.push(getNumberOfAliveGameObjects());
-    auto const pushIndex2 = m_GameObjectAliveCount.getPushIndex();
+    m_GameObjectAliveCount.put(getNumberOfAliveGameObjects());
+    auto const pushIndex2 = m_GameObjectAliveCount.getTail();
     for (auto index = pushIndex2; index != pushIndex2 + m_GameObjectAliveCount.size(); ++index) {
         m_GameObjectAliveCountVector[index - pushIndex2] = m_GameObjectAliveCount[index];
     }
