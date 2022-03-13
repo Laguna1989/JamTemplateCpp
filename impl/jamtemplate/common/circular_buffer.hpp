@@ -19,7 +19,7 @@ class IndexWrapper {
 template <std::size_t size>
 class IndexWrapper<size, typename std::enable_if<jt::MathHelper::is_powerof2(size)>::type> {
 public:
-    static_assert(size != 0, "Error: Cannot create IndexWrapper with size 0");
+    static_assert(size != 0, "Error: Cannot create IndexWrapper with capacity 0");
     std::size_t wrap(const std::size_t index) const { return index & m_mask; }
     std::size_t getSize() const { return size; }
 
@@ -38,7 +38,7 @@ private:
 template <std::size_t size>
 class IndexWrapper<size, typename std::enable_if<!jt::MathHelper::is_powerof2(size)>::type> {
 public:
-    static_assert(size != 0, "Error: Cannot create IndexWrapper with size 0");
+    static_assert(size != 0, "Error: Cannot create IndexWrapper with capacity 0");
     std::size_t wrap(const std::size_t index) const { return index % size; }
     std::size_t getSize() const { return size; }
 };
@@ -98,9 +98,13 @@ public:
     /// \return const end iterator
     ConstIteratorT cend() const { return m_data.cend(); }
 
-    /// Size of the circular buffer
-    /// \return the size
-    std::size_t size() const { return m_data.size(); }
+    /// Capacity of the circular buffer. Size of the underlying array.
+    /// \return the total capacity
+    std::size_t capacity() const { return m_data.size(); }
+
+    /// Size of valid elements in the buffer
+    /// \return the current size
+    std::size_t size() const { return m_tail - m_head; }
 
     /// Position of the head
     /// \return the head position
@@ -108,7 +112,7 @@ public:
 
     /// Position of the tail
     /// \return the tail position
-    std::size_t getTail() const { return m_tail + 1; }
+    std::size_t getTail() const { return m_tail; }
 
 private:
     detail::IndexWrapper<N> wrapper;
