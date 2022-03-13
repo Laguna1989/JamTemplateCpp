@@ -147,7 +147,7 @@ TEST(CircularBufferTailTest, ValueAfterTwoPuts)
     auto buffer = jt::CircularBuffer<unsigned int, 2> {};
     buffer.put(1u);
     buffer.put(2u);
-    ASSERT_EQ(buffer.getTail(), 2U);
+    ASSERT_EQ(buffer.getTail(), 0U);
 }
 
 TEST(CircularBufferTailTest, ValueAfterThreePuts)
@@ -156,7 +156,7 @@ TEST(CircularBufferTailTest, ValueAfterThreePuts)
     buffer.put(1u);
     buffer.put(2u);
     buffer.put(3u);
-    ASSERT_EQ(buffer.getTail(), 3U);
+    ASSERT_EQ(buffer.getTail(), 1U);
 }
 
 TEST(CircularBufferHeadTest, InitialValue)
@@ -222,7 +222,9 @@ TEST(CircularBufferGetTest, GetAfterThreePuts)
     buffer.put(2u);
     buffer.put(3u);
 
+    // TODO This test seems not to have the correct expectation (although it is green)
     ASSERT_EQ(buffer.get(), 3u);
+    ASSERT_EQ(buffer.get(), 2u);
 }
 
 TEST(CircularBufferGetTest, GetAfterGet)
@@ -278,4 +280,17 @@ TEST(CircularBufferSize, GetSizeAfterThreePuts)
 
     buffer.put(3u);
     ASSERT_EQ(buffer.size(), 2);
+}
+
+TEST(CircularBufferSize, GetSizeAfterFourPuts)
+{
+    auto buffer = jt::CircularBuffer<unsigned int, 3> {};
+
+    buffer.put(1u);
+    buffer.put(2u);
+    buffer.put(3u);
+
+    buffer.put(4u);
+
+    ASSERT_EQ(buffer.size(), 3);
 }

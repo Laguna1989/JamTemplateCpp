@@ -55,12 +55,15 @@ public:
     /// Access a const value from the circular buffer
     /// \param position index
     /// \return const reference to the element
-    T const& operator[](std::size_t const position) const { return m_data[wrapper.wrap(position)]; }
+    T const& operator[](std::size_t const position) const
+    {
+        return m_data[m_wrapper.wrap(position)];
+    }
 
     /// Access a value from the circular buffer
     /// \param position index
     /// \return reference to the element
-    T& operator[](std::size_t const position) { return m_data[wrapper.wrap(position)]; }
+    T& operator[](std::size_t const position) { return m_data[m_wrapper.wrap(position)]; }
 
     /// Check if the expected value is present in the circular buffer
     /// \param expected the value to be checked
@@ -75,16 +78,16 @@ public:
     /// \param value the new values
     void put(T const& value)
     {
-        auto const indexToWrite = m_tail;
+        auto const indexToWrite = getTail();
         m_tail++;
-        m_data[wrapper.wrap(indexToWrite)] = value;
+        m_data[indexToWrite] = value;
     }
 
     T get()
     {
-        auto const indexToRead = m_head;
+        auto const indexToRead = getHead();
         m_head++;
-        return m_data[wrapper.wrap(indexToRead)];
+        return m_data[indexToRead];
     }
 
     /// Begin iterator
@@ -113,14 +116,14 @@ public:
 
     /// Position of the head
     /// \return the head position
-    std::size_t getHead() const { return m_head; }
+    std::size_t getHead() const { return m_wrapper.wrap(m_head); }
 
     /// Position of the tail
     /// \return the tail position
-    std::size_t getTail() const { return m_tail; }
+    std::size_t getTail() const { return m_wrapper.wrap(m_tail); }
 
 private:
-    detail::IndexWrapper<N> wrapper;
+    detail::IndexWrapper<N> m_wrapper;
     ArrayT m_data;
 
     std::size_t m_head { 0u };
