@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1647204532028,
+  "lastUpdate": 1647275000345,
   "repoUrl": "https://github.com/Laguna1989/JamTemplateCpp",
   "entries": {
     "Benchmark": [
@@ -3996,6 +3996,42 @@ window.BENCHMARK_DATA = {
             "value": 3.270350102803805,
             "unit": "ms/iter",
             "extra": "iterations: 214\ncpu: 3.2697677570093466 ms\nthreads: 1"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "laguna.ws@gmail.com",
+            "name": "Simon Weis",
+            "username": "Laguna1989"
+          },
+          "committer": {
+            "email": "laguna.ws@gmail.com",
+            "name": "Simon Weis",
+            "username": "Laguna1989"
+          },
+          "distinct": true,
+          "id": "83d5338d1c0775c55e94cbee24bc61722e9f781b",
+          "message": "Fix circular buffer impl and tests",
+          "timestamp": "2022-03-14T17:20:17+01:00",
+          "tree_id": "b975364896c8cc2c3873b3312aabcfef60b70ebb",
+          "url": "https://github.com/Laguna1989/JamTemplateCpp/commit/83d5338d1c0775c55e94cbee24bc61722e9f781b"
+        },
+        "date": 1647274999192,
+        "tool": "googlecpp",
+        "benches": [
+          {
+            "name": "BM_StartGame",
+            "value": 0.002368667149874121,
+            "unit": "ms/iter",
+            "extra": "iterations: 296629\ncpu: 0.0023670902035876464 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GamestateWithTweeningShapes",
+            "value": 3.212841504587346,
+            "unit": "ms/iter",
+            "extra": "iterations: 218\ncpu: 3.212387155963303 ms\nthreads: 1"
           }
         ]
       }
