@@ -246,18 +246,67 @@ TEST(CircularBufferGetTest, GetAfterTwoGets)
     (void)buffer.get();
     (void)buffer.get();
 
-    ASSERT_EQ(buffer.get(), 11u);
+    ASSERT_EQ(buffer.get(), 0u);
 }
 
 TEST(CircularBufferGetTest, GetAfterPutAfterGet)
 {
     auto buffer = jt::CircularBuffer<unsigned int, 2> {};
+    // t,h
+    // 0    0
+    // size 0
+
     // get empty value
     (void)buffer.get();
+    //      t, h
+    // 0    0
+    // size 0
+
     // put actual value
     buffer.put(11u);
+    // t    h
+    // 0    11
+    // size 1
+
     // get actual value
     ASSERT_EQ(buffer.get(), 11u);
+    // t,h
+    // 0    11
+    // size 0
+}
+
+TEST(CircularBufferGetTest, MultipleGetAfterPutAfterGet)
+{
+    auto buffer = jt::CircularBuffer<unsigned int, 2> {};
+    // t,h
+    // 0    0
+    // size 0
+
+    // get empty value
+    (void)buffer.get();
+    //      t, h
+    // 0    0
+    // size 0
+
+    // put actual value
+    buffer.put(11u);
+    // t    h
+    // 0    11
+    // size 1
+
+    // get actual value
+    ASSERT_EQ(buffer.get(), 11u);
+    // t,h
+    // 0    11
+    // size 0
+
+    ASSERT_EQ(buffer.get(), 0u);
+    //      t,h
+    // 0    11
+    // size 0
+
+    // next get returns default initialized T
+    ASSERT_EQ(buffer.get(), 0u);
 }
 
 TEST(CircularBufferSize, GetInitialValue)

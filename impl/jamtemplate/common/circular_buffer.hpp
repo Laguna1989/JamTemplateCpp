@@ -96,8 +96,7 @@ public:
 
     /// Size of valid elements in the buffer
     /// \return the current size
-    // TODO this will break if get is called more often than put
-    std::size_t size() const { return m_size; }
+    std::size_t size() const noexcept { return m_size; }
 
     /// Position of the head
     /// \return the head position
@@ -116,6 +115,7 @@ public:
         m_tail++;
         if (m_size == capacity()) {
             m_head++;
+            // could implement latest/newest policy here if needed
         } else {
             m_size++;
         }
@@ -123,6 +123,9 @@ public:
         m_data[indexToWrite] = value;
     }
 
+    /// Get the value at the head position. If there is no value stored, a default constructed T
+    /// will be returned.
+    /// \return the value at the head position
     T get()
     {
         auto const indexToRead = getHead();
@@ -130,6 +133,7 @@ public:
         m_head++;
         if (m_size == 0) {
             m_tail++;
+            return T {};
         } else {
             m_size--;
         }
