@@ -66,6 +66,15 @@ void InfoScreen::doDraw() const
         ImGui::PlotLines("AliveGameObjects [#] = %s", m_GameObjectAliveCountVector.data(),
             static_cast<int>(m_GameObjectAliveCountVector.size()), 0, nullptr, 0, FLT_MAX,
             ImVec2 { 0, 100 });
+
+        ImGui::Separator();
+        std::string const createdSoundsText
+            = "# Sounds (created): " + std::to_string(jt::Sound::createdObjects());
+        std::string const aliveSoundsText
+            = "# Sounds (alive): " + std::to_string(jt::Sound::aliveObjects());
+
+        ImGui::Text(createdSoundsText.c_str());
+        ImGui::Text(aliveSoundsText.c_str());
     }
     ImGui::End();
 }

@@ -5,6 +5,7 @@
 #include "sound.hpp"
 #include "sound_interface.hpp"
 #include "sound_with_effect.hpp"
+#include <functional>
 #include <memory>
 #include <string>
 
@@ -31,6 +32,10 @@ public:
     /// \param snd the sound to be stored
     virtual void addPermanentSound(
         std::string const& identifier, std::shared_ptr<SoundInterface> snd)
+        = 0;
+
+    virtual std::shared_ptr<SoundInterface> soundPool(std::string const& baseIdentifier,
+        std::function<std::shared_ptr<SoundInterface>()> function, std::size_t count)
         = 0;
 
     /// Get a permanent sound

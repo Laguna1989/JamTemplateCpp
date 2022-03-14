@@ -29,28 +29,32 @@ void TilemapCollisions::refineColliders(float size)
     if (m_rects.empty()) {
         return;
     }
-    int const xmin = std::min_element(m_rects.cbegin(), m_rects.cend(),
-                         [](auto const& r1, auto const& r2) { return r1.left < r2.left; })
-                         ->left
-        / size;
+    int const xmin
+        = static_cast<int>(std::min_element(m_rects.cbegin(), m_rects.cend(),
+                               [](auto const& r1, auto const& r2) { return r1.left < r2.left; })
+                               ->left
+            / size);
 
-    int const ymin = std::min_element(m_rects.cbegin(), m_rects.cend(),
-                         [](auto const& r1, auto const& r2) { return r1.top < r2.top; })
-                         ->top
-        / size;
+    int const ymin
+        = static_cast<int>(std::min_element(m_rects.cbegin(), m_rects.cend(),
+                               [](auto const& r1, auto const& r2) { return r1.top < r2.top; })
+                               ->top
+            / size);
 
-    int const xmax = std::max_element(m_rects.cbegin(), m_rects.cend(),
-                         [](auto const& r1, auto const& r2) { return r1.left < r2.left; })
-                         ->left
-        / size;
+    int const xmax
+        = static_cast<int>(std::max_element(m_rects.cbegin(), m_rects.cend(),
+                               [](auto const& r1, auto const& r2) { return r1.left < r2.left; })
+                               ->left
+            / size);
 
-    int const ymax = std::max_element(m_rects.cbegin(), m_rects.cend(),
-                         [](auto const& r1, auto const& r2) { return r1.top < r2.top; })
-                         ->top
-        / size;
+    int const ymax
+        = static_cast<int>(std::max_element(m_rects.cbegin(), m_rects.cend(),
+                               [](auto const& r1, auto const& r2) { return r1.top < r2.top; })
+                               ->top
+            / size);
 
     std::vector<int> lookup;
-    lookup.resize((xmax + 1) * (ymax + 1));
+    lookup.resize(static_cast<std::size_t>(xmax + 1) * (ymax + 1));
     for (auto const& r : m_rects) {
         setEntry(
             lookup, static_cast<int>(r.left / size), static_cast<int>(r.top / size), xmax + 1, 1);

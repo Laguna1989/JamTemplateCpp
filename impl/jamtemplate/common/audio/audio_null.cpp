@@ -9,9 +9,15 @@ void AudioNull::addPermanentSound(
 {
 }
 
+std::shared_ptr<SoundInterface> AudioNull::soundPool(std::string const& baseIdentifier,
+    std::function<std::shared_ptr<SoundInterface>()> function, std::size_t count)
+{
+    return std::make_shared<SoundNull>();
+}
+
 std::shared_ptr<SoundInterface> AudioNull::getPermanentSound(std::string const& identifier)
 {
-    return nullptr;
+    return std::make_shared<SoundNull>();
 }
 
 void AudioNull::removePermanentSound(std::string const& identifier) { }

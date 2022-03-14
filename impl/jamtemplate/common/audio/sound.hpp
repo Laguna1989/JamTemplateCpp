@@ -1,13 +1,14 @@
 ﻿#ifndef GUARD_JAMTEMPLATE_SFML_SOUND_GUARD_HPP_12345
 #define GUARD_JAMTEMPLATE_SFML_SOUND_GUARD_HPP_12345
 
+#include "counted_object.hpp"
 #include "oalpp/sound.hpp"
 #include "oalpp/sound_data.hpp"
 #include "sound_interface.hpp"
 
 namespace jt {
 
-class Sound : public SoundInterface {
+class Sound : public SoundInterface, public CountedObj<Sound> {
 public:
     explicit Sound(std::string const& fileName);
 

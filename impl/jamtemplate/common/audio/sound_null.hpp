@@ -10,6 +10,7 @@ public:
     void update() override;
     bool isPlaying() const override;
     void play() override;
+    void pause() override;
     void stop() override;
     float getVolume() const override;
     void setVolume(float newVolume) override;

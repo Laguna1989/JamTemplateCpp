@@ -13,4 +13,5 @@ float SoundNull::getDuration() const { return 0; }
 float SoundNull::getPosition() const { return 0; }
 void SoundNull::setBlend(float blend) { }
 float SoundNull::getBlend() const { return 0; }
+void SoundNull::pause() { }
 } // namespace jt

@@ -1,5 +1,4 @@
 ﻿#include "circular_buffer.hpp"
-#include <cstddef>
 #include <gtest/gtest.h>
 
 TEST(CircularBufferSize2, ReadAndWrite)
@@ -186,7 +185,7 @@ TEST(CircularBufferHeadTest, ValueAfterThreePuts)
     buffer.put(1u);
     buffer.put(2u);
     buffer.put(3u);
-    ASSERT_EQ(buffer.getHead(), 0U);
+    ASSERT_EQ(buffer.getHead(), 1U);
 }
 
 TEST(CircularBufferGetTest, InitialGet)
@@ -222,9 +221,8 @@ TEST(CircularBufferGetTest, GetAfterThreePuts)
     buffer.put(2u);
     buffer.put(3u);
 
-    // TODO This test seems not to have the correct expectation (although it is green)
-    ASSERT_EQ(buffer.get(), 3u);
     ASSERT_EQ(buffer.get(), 2u);
+    ASSERT_EQ(buffer.get(), 3u);
 }
 
 TEST(CircularBufferGetTest, GetAfterGet)
@@ -248,6 +246,17 @@ TEST(CircularBufferGetTest, GetAfterTwoGets)
     (void)buffer.get();
     (void)buffer.get();
 
+    ASSERT_EQ(buffer.get(), 11u);
+}
+
+TEST(CircularBufferGetTest, GetAfterPutAfterGet)
+{
+    auto buffer = jt::CircularBuffer<unsigned int, 2> {};
+    // get empty value
+    (void)buffer.get();
+    // put actual value
+    buffer.put(11u);
+    // get actual value
     ASSERT_EQ(buffer.get(), 11u);
 }
 

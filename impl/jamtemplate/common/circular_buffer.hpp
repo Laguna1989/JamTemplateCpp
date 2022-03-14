@@ -74,22 +74,6 @@ public:
             [&expected](auto const& value) { return value == expected; });
     }
 
-    /// Put a new value into the circular buffer (possibly overwriting old values)
-    /// \param value the new values
-    void put(T const& value)
-    {
-        auto const indexToWrite = getTail();
-        m_tail++;
-        m_data[indexToWrite] = value;
-    }
-
-    T get()
-    {
-        auto const indexToRead = getHead();
-        m_head++;
-        return m_data[indexToRead];
-    }
-
     /// Begin iterator
     /// \return begin iterator
     IteratorT begin() { return m_data.begin(); }
@@ -113,7 +97,7 @@ public:
     /// Size of valid elements in the buffer
     /// \return the current size
     // TODO this will break if get is called more often than put
-    std::size_t size() const { return std::min(m_tail - m_head, capacity()); }
+    std::size_t size() const { return m_size; }
 
     /// Position of the head
     /// \return the head position
@@ -123,12 +107,42 @@ public:
     /// \return the tail position
     std::size_t getTail() const { return m_wrapper.wrap(m_tail); }
 
+    /// Put a new value into the circular buffer (possibly overwriting old values)
+    /// \param value the new values
+    void put(T const& value)
+    {
+        auto const indexToWrite = getTail();
+
+        m_tail++;
+        if (m_size == capacity()) {
+            m_head++;
+        } else {
+            m_size++;
+        }
+
+        m_data[indexToWrite] = value;
+    }
+
+    T get()
+    {
+        auto const indexToRead = getHead();
+
+        m_head++;
+        if (m_size == 0) {
+            m_tail++;
+        } else {
+            m_size--;
+        }
+        return m_data[indexToRead];
+    }
+
 private:
     detail::IndexWrapper<N> m_wrapper;
     ArrayT m_data;
 
     std::size_t m_head { 0u };
     std::size_t m_tail { 0u };
+    std::size_t m_size { 0u };
 };
 
 template <typename T, std::size_t N>

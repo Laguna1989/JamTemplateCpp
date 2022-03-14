@@ -47,7 +47,7 @@ private:
             [this]() { getGame()->getStateManager().switchState(std::make_shared<State>()); });
         auto const text = jt::dh::createText(getGame()->gfx().target(), textString, 16);
         text->setTextAlign(jt::Text::TextAlign::LEFT);
-        text->setOrigin(jt::Vector2f { -8, 2 });
+        text->setOrigin(jt::Vector2f { -6, 1 });
         button->setDrawable(text);
         button->setPosition(jt::Vector2f { posX, posY });
         add(std::move(button));
