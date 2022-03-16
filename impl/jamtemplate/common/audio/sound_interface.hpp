@@ -58,6 +58,10 @@ public:
     /// \return blend Parameter (between 0 and 1)
     virtual float getBlend() const = 0;
 
+    /// Get sample rate
+    /// \return the sample rate in Hz
+    virtual int getSampleRate() const = 0;
+
 protected:
     SoundInterface() = default;
 };

@@ -16,7 +16,7 @@ void LoggingAudio::update()
 
 void LoggingAudio::addTemporarySound(std::weak_ptr<SoundInterface> snd)
 {
-    m_logger.debug("add temporary sound", { "jt", "audio" });
+    m_logger.verbose("add temporary sound", { "jt", "audio" });
     m_decoratee.addTemporarySound(snd);
 }
 
@@ -28,6 +28,7 @@ void LoggingAudio::addPermanentSound(
 }
 std::shared_ptr<SoundInterface> LoggingAudio::getPermanentSound(std::string const& identifier)
 {
+    m_logger.verbose("get permanent sound: " + identifier, { "jt", "audio" });
     return m_decoratee.getPermanentSound(identifier);
 }
 
@@ -37,7 +38,7 @@ oalpp::SoundContextInterface& LoggingAudio::getContext() { return m_decoratee.ge
 std::shared_ptr<SoundInterface> LoggingAudio::soundPool(std::string const& baseIdentifier,
     std::function<std::shared_ptr<SoundInterface>()> function, std::size_t count)
 {
-    m_logger.debug("sound pool: " + baseIdentifier, { "jt", "audio" });
+    m_logger.verbose("sound pool: " + baseIdentifier, { "jt", "audio" });
     return m_decoratee.soundPool(baseIdentifier, function, count);
 }
 

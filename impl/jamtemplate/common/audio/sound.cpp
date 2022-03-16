@@ -6,6 +6,7 @@ namespace jt {
 Sound::Sound(std::string const& fileName)
     : m_buffer { fileName }
     , m_sound { m_buffer }
+    , m_fileName { fileName }
 {
 }
 
@@ -35,5 +36,6 @@ float Sound::getBlend() const { return 1.0f - m_blend; }
 
 void Sound::setPitch(float pitch) { m_sound.setPitch(pitch); }
 float Sound::getPitch() const { return m_sound.getPitch(); }
+int Sound::getSampleRate() const { return m_buffer.getSampleRate(); }
 
 } // namespace jt

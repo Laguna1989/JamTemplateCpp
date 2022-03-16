@@ -53,5 +53,6 @@ float SoundWithEffect::getDuration() const { return m_drySound.getLengthInSecond
 float SoundWithEffect::getPosition() const { return m_drySound.getCurrentOffsetInSeconds(); }
 float SoundWithEffect::getBlend() const { return m_blend; }
 void SoundWithEffect::setBlend(float blend) { m_blend = blend; }
+int SoundWithEffect::getSampleRate() const { return m_drySoundData.getSampleRate(); }
 
 } // namespace jt
