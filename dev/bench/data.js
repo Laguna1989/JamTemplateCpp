@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1647276745345,
+  "lastUpdate": 1647455617217,
   "repoUrl": "https://github.com/Laguna1989/JamTemplateCpp",
   "entries": {
     "Benchmark": [
@@ -4068,6 +4068,42 @@ window.BENCHMARK_DATA = {
             "value": 3.298394258216086,
             "unit": "ms/iter",
             "extra": "iterations: 213\ncpu: 3.297945070422535 ms\nthreads: 1"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "thunraz@thunraz.com",
+            "name": "Thunraz",
+            "username": "Thunraz"
+          },
+          "committer": {
+            "email": "thunraz@thunraz.com",
+            "name": "Thunraz",
+            "username": "Thunraz"
+          },
+          "distinct": true,
+          "id": "7a3f525492c7934ded8f0b526bf2fe36d2534b29",
+          "message": "Merge remote-tracking branch 'origin/master'",
+          "timestamp": "2022-03-16T19:27:26+01:00",
+          "tree_id": "914a510af93b225428260655066a82e2ba9ee73c",
+          "url": "https://github.com/Laguna1989/JamTemplateCpp/commit/7a3f525492c7934ded8f0b526bf2fe36d2534b29"
+        },
+        "date": 1647455615976,
+        "tool": "googlecpp",
+        "benches": [
+          {
+            "name": "BM_StartGame",
+            "value": 0.0022924922405191356,
+            "unit": "ms/iter",
+            "extra": "iterations: 303693\ncpu: 0.002292417671793555 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GamestateWithTweeningShapes",
+            "value": 3.100369977876118,
+            "unit": "ms/iter",
+            "extra": "iterations: 226\ncpu: 3.1003977876106195 ms\nthreads: 1"
           }
         ]
       }
