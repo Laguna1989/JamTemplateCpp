@@ -60,7 +60,7 @@ std::shared_ptr<SoundInterface> AudioImpl::soundPool(std::string const& baseIden
     std::function<std::shared_ptr<SoundInterface>()> function, std::size_t count)
 {
     auto const randomNumber = jt::Random::getInt(0, count);
-    auto const soundName = "identifier####" + std::to_string(randomNumber);
+    auto const soundName = baseIdentifier + "####" + std::to_string(randomNumber);
 
     auto snd = getPermanentSound(soundName);
     if (snd == nullptr) {
