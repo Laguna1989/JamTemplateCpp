@@ -14,7 +14,7 @@ void StateExplosion::doInternalCreate()
     using jt::Timer;
 
     getGame()->gfx().camera().shake(0.5f, 2.0f);
-    jt::Timer::Sptr t
+    auto t
         = std::make_shared<Timer>(0.6f, [this]() { getGame()->gfx().camera().shake(0.5f, 10.0f); });
     add(t);
 }
@@ -26,7 +26,7 @@ void StateExplosion::doInternalUpdate(float const /*elapsed*/)
         Object::Sptr bp = std::make_shared<Object>();
         add(bp);
         using jt::Timer;
-        Timer::Sptr t = std::make_shared<Timer>(
+        auto t = std::make_shared<Timer>(
             jt::Random::getFloat(0.125, 3), [bp]() { bp->Flash(); }, 1);
         add(t);
 

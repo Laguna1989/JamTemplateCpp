@@ -10,9 +10,7 @@
 #include <memory>
 #include <string>
 
-namespace jt {
-
-Button::Button(Vector2u const& size, jt::TextureManagerInterface& textureManager)
+jt::Button::Button(jt::Vector2u const& size, jt::TextureManagerInterface& textureManager)
 {
     std::string buttonImageName = "#b#" + std::to_string(size.x) + "#" + std::to_string(size.y);
     m_background = std::make_shared<jt::Animation>();
@@ -27,26 +25,32 @@ Button::Button(Vector2u const& size, jt::TextureManagerInterface& textureManager
     m_disabledOverlay->setColor(jt::Color { 100, 100, 100, 150 });
 }
 
-Button::~Button()
+jt::Button::~Button()
 {
     m_drawable = nullptr;
     m_background = nullptr;
     m_callbacks.clear();
 }
 
-void Button::setDrawable(std::shared_ptr<DrawableInterface> drawable) { m_drawable = drawable; }
-void Button::addCallback(std::function<void(void)> callback)
+void jt::Button::setDrawable(std::shared_ptr<jt::DrawableInterface> drawable)
+{
+    m_drawable = drawable;
+}
+void jt::Button::addCallback(std::function<void(void)> callback)
 {
     m_callbacks.emplace_back(std::move(callback));
 }
-void Button::clearCallbacks() { m_callbacks.clear(); }
-std::size_t Button::getCallbackCount() const { return m_callbacks.size(); }
-bool Button::isMouseOver() { return isOver(getGame()->input().mouse()->getMousePositionScreen()); }
-void Button::setVisible(bool isVisible) { m_isVisible = isVisible; }
-bool Button::getVisible() const { return m_isVisible; }
-void Button::setPosition(jt::Vector2f const& newPosition) { m_pos = newPosition; }
-jt::Vector2f Button::getPosition() const { return m_pos; }
-void Button::doDraw() const
+void jt::Button::clearCallbacks() { m_callbacks.clear(); }
+std::size_t jt::Button::getCallbackCount() const { return m_callbacks.size(); }
+bool jt::Button::isMouseOver()
+{
+    return isOver(getGame()->input().mouse()->getMousePositionScreen());
+}
+void jt::Button::setVisible(bool isVisible) { m_isVisible = isVisible; }
+bool jt::Button::getVisible() const { return m_isVisible; }
+void jt::Button::setPosition(jt::Vector2f const& newPosition) { m_pos = newPosition; }
+jt::Vector2f jt::Button::getPosition() const { return m_pos; }
+void jt::Button::doDraw() const
 {
     if (!m_isVisible) {
         return;
@@ -61,7 +65,7 @@ void Button::doDraw() const
         m_disabledOverlay->draw(getGame()->gfx().target());
     }
 }
-bool Button::isOver(jt::Vector2f const& mousePosition)
+bool jt::Button::isOver(jt::Vector2f const& mousePosition)
 {
     if (!m_isActive) {
         return false;
@@ -76,7 +80,7 @@ bool Button::isOver(jt::Vector2f const& mousePosition)
         && mousePosition.y <= py + h);
 }
 
-void Button::doUpdate(float elapsed)
+void jt::Button::doUpdate(float elapsed)
 {
     m_disabledOverlay->setPosition((m_pos));
     m_disabledOverlay->update(elapsed);
@@ -112,7 +116,5 @@ void Button::doUpdate(float elapsed)
         m_background->play("normal");
     }
 }
-bool Button::getActive() const { return m_isActive; }
-void Button::setActive(bool isActive) { m_isActive = isActive; }
-
-} // namespace jt
+bool jt::Button::getActive() const { return m_isActive; }
+void jt::Button::setActive(bool isActive) { m_isActive = isActive; }

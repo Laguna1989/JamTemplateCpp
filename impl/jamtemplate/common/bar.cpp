@@ -3,9 +3,8 @@
 #include <iostream>
 #include <stdexcept>
 
-namespace jt {
-
-Bar::Bar(float width, float height, bool horizontal, jt::TextureManagerInterface& textureManager)
+jt::Bar::Bar(
+    float width, float height, bool horizontal, jt::TextureManagerInterface& textureManager)
     : m_valueMax { 1.0f }
     , m_valueCurrent { 0.0f }
     , m_width { width }
@@ -31,12 +30,12 @@ Bar::Bar(float width, float height, bool horizontal, jt::TextureManagerInterface
     m_shapeProgress->setIgnoreCamMovement(true);
 }
 
-void Bar::setFrontColor(jt::Color const& col) { m_shapeProgress->setColor(col); }
-void Bar::setBackColor(jt::Color const& col) { m_shapeFull->setColor(col); }
+void jt::Bar::setFrontColor(jt::Color const& col) { m_shapeProgress->setColor(col); }
+void jt::Bar::setBackColor(jt::Color const& col) { m_shapeFull->setColor(col); }
 
-jt::Color Bar::getBackColor() const { return m_shapeFull->getColor(); }
+jt::Color jt::Bar::getBackColor() const { return m_shapeFull->getColor(); }
 
-void Bar::setCurrentValue(float value)
+void jt::Bar::setCurrentValue(float value)
 {
     m_valueCurrent = value;
     if (m_valueCurrent < 0) {
@@ -46,9 +45,9 @@ void Bar::setCurrentValue(float value)
     }
 }
 
-float Bar::getCurrentValue() const { return m_valueCurrent; }
+float jt::Bar::getCurrentValue() const { return m_valueCurrent; }
 
-void Bar::setMaxValue(float max)
+void jt::Bar::setMaxValue(float max)
 {
     if (max < 0) {
         throw std::invalid_argument { "max value can not be negative" };
@@ -56,18 +55,18 @@ void Bar::setMaxValue(float max)
     m_valueMax = max;
 }
 
-float Bar::getMaxValue() const { return m_valueMax; }
+float jt::Bar::getMaxValue() const { return m_valueMax; }
 
-float Bar::getValueFraction() const { return m_valueCurrent / m_valueMax; }
+float jt::Bar::getValueFraction() const { return m_valueCurrent / m_valueMax; }
 
-void Bar::doDraw(std::shared_ptr<jt::RenderTarget> const sptr) const
+void jt::Bar::doDraw(std::shared_ptr<jt::RenderTarget> const sptr) const
 {
     m_shapeFull->draw(sptr);
     m_shapeProgress->draw(sptr);
 }
 
-void Bar::doDrawFlash(std::shared_ptr<jt::RenderTarget> const /*sptr*/) const { }
-void Bar::doDrawShadow(std::shared_ptr<jt::RenderTarget> const sptr) const
+void jt::Bar::doDrawFlash(std::shared_ptr<jt::RenderTarget> const /*sptr*/) const { }
+void jt::Bar::doDrawShadow(std::shared_ptr<jt::RenderTarget> const sptr) const
 {
     jt::Vector2f const oldPos = m_shapeFull->getPosition();
     jt::Color const oldCol = m_shapeFull->getColor();
@@ -80,7 +79,7 @@ void Bar::doDrawShadow(std::shared_ptr<jt::RenderTarget> const sptr) const
     m_shapeFull->setColor(oldCol);
 }
 
-void Bar::doUpdate(float elapsed)
+void jt::Bar::doUpdate(float elapsed)
 {
     float const value = static_cast<float>(m_valueCurrent) / m_valueMax;
     auto const scaleFullShape = m_shapeFull->getScale();
@@ -95,31 +94,29 @@ void Bar::doUpdate(float elapsed)
     m_shapeProgress->update(elapsed);
 }
 
-void Bar::doRotate(float /*rot*/) { }
+void jt::Bar::doRotate(float /*rot*/) { }
 
-void Bar::setColor(jt::Color const& col) { setFrontColor(col); }
-jt::Color Bar::getColor() const { return m_shapeProgress->getColor(); }
+void jt::Bar::setColor(jt::Color const& col) { setFrontColor(col); }
+jt::Color jt::Bar::getColor() const { return m_shapeProgress->getColor(); }
 
-void Bar::setPosition(jt::Vector2f const& pos)
+void jt::Bar::setPosition(jt::Vector2f const& pos)
 {
     m_shapeFull->setPosition(pos);
     m_shapeProgress->setPosition(pos + jt::Vector2f { 0, m_height * m_progressYOffsetFraction });
 }
 
-jt::Vector2f Bar::getPosition() const { return m_shapeFull->getPosition(); }
+jt::Vector2f jt::Bar::getPosition() const { return m_shapeFull->getPosition(); }
 
-jt::Rectf Bar::getGlobalBounds() const { return m_shapeFull->getGlobalBounds(); }
-jt::Rectf Bar::getLocalBounds() const { return m_shapeFull->getLocalBounds(); }
+jt::Rectf jt::Bar::getGlobalBounds() const { return m_shapeFull->getGlobalBounds(); }
+jt::Rectf jt::Bar::getLocalBounds() const { return m_shapeFull->getLocalBounds(); }
 
-void Bar::setScale(jt::Vector2f const& scale)
+void jt::Bar::setScale(jt::Vector2f const& scale)
 {
     m_shapeFull->setScale(scale);
     m_shapeProgress->setScale(scale);
 }
 
-jt::Vector2f Bar::getScale() const { return m_shapeFull->getScale(); }
+jt::Vector2f jt::Bar::getScale() const { return m_shapeFull->getScale(); }
 
-void Bar::setOrigin(jt::Vector2f const& origin) { m_shapeFull->setOrigin(origin); }
-jt::Vector2f Bar::getOrigin() const { return m_shapeFull->getOrigin(); }
-
-} // namespace jt
+void jt::Bar::setOrigin(jt::Vector2f const& origin) { m_shapeFull->setOrigin(origin); }
+jt::Vector2f jt::Bar::getOrigin() const { return m_shapeFull->getOrigin(); }

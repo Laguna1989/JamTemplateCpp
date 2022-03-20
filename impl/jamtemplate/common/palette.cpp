@@ -3,22 +3,22 @@
 #include <fstream>
 #include <sstream>
 
-namespace jt {
-Palette::Palette(std::vector<jt::Color> const& colors)
+jt::Palette::Palette(std::vector<jt::Color> const& colors)
     : m_colors { colors }
 {
 }
 
-std::size_t Palette::size() const { return m_colors.size(); }
-bool Palette::empty() const { return m_colors.empty(); }
-jt::Color const& Palette::getColor(std::size_t idx) const { return m_colors.at(idx); }
-Palette Palette::addColor(jt::Color col) const
+std::size_t jt::Palette::size() const { return m_colors.size(); }
+bool jt::Palette::empty() const { return m_colors.empty(); }
+jt::Color const& jt::Palette::getColor(std::size_t idx) const { return m_colors.at(idx); }
+jt::Palette jt::Palette::addColor(jt::Color col) const
 {
     std::vector<jt::Color> newColors { m_colors };
     newColors.push_back(col);
     return Palette { newColors };
 }
-Palette Palette::createGradientH(float hmin, float hmax, float s, float v, std::size_t steps)
+jt::Palette jt::Palette::createGradientH(
+    float hmin, float hmax, float s, float v, std::size_t steps)
 {
     std::vector<jt::Color> colors;
     float const delta = (hmax - hmin) / steps;
@@ -29,7 +29,8 @@ Palette Palette::createGradientH(float hmin, float hmax, float s, float v, std::
     return Palette { colors };
 }
 
-Palette Palette::createGradientS(float h, float smin, float smax, float v, std::size_t steps)
+jt::Palette jt::Palette::createGradientS(
+    float h, float smin, float smax, float v, std::size_t steps)
 {
     std::vector<jt::Color> colors;
     float const delta = (smax - smin) / steps;
@@ -39,7 +40,8 @@ Palette Palette::createGradientS(float h, float smin, float smax, float v, std::
     }
     return Palette { colors };
 }
-Palette Palette::createGradientV(float h, float s, float vmin, float vmax, std::size_t steps)
+jt::Palette jt::Palette::createGradientV(
+    float h, float s, float vmin, float vmax, std::size_t steps)
 {
     std::vector<jt::Color> colors;
     float const delta = (vmax - vmin) / steps;
@@ -87,17 +89,15 @@ std::vector<jt::Color> parseGPLImpl(std::string const& gplFileConent)
 
 } // namespace
 
-Palette Palette::parseGPL(std::string const& gplFileContent)
+jt::Palette jt::Palette::parseGPL(std::string const& gplFileContent)
 {
     return Palette { parseGPLImpl(gplFileContent) };
 }
 
-Palette Palette::parseGPLFromFile(std::string const& fileName)
+jt::Palette jt::Palette::parseGPLFromFile(std::string const& fileName)
 {
     std::ifstream file { fileName };
     std::stringstream buffer;
     buffer << file.rdbuf();
     return jt::Palette::parseGPL(buffer.str());
 }
-
-} // namespace jt

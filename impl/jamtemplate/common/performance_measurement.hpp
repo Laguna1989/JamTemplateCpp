@@ -1,10 +1,12 @@
-#ifndef MYAWESOMEGAME_PERFORMANCE_MEASUREMENT_HPP
-#define MYAWESOMEGAME_PERFORMANCE_MEASUREMENT_HPP
+#ifndef GUARD_JAMTEMPLATE_PERFORMANCE_MEASUREMENT_HPP
+#define GUARD_JAMTEMPLATE_PERFORMANCE_MEASUREMENT_HPP
 
 #include <chrono>
 #include <functional>
 
+namespace jt {
 float getDurationInSecondsSince(std::chrono::time_point<std::chrono::system_clock> const& since);
 float measureTime(std::function<void(void)> const& f);
 
-#endif // MYAWESOMEGAME_PERFORMANCE_MEASUREMENT_HPP
+} // namespace jt
+#endif // GUARD_JAMTEMPLATE_PERFORMANCE_MEASUREMENT_HPP

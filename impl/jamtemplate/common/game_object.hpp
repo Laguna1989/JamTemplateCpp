@@ -12,8 +12,6 @@ class GameInterface;
 
 class GameObject : public CountedObj<GameObject> {
 public:
-    using Sptr = std::shared_ptr<GameObject>;
-
     /// Destructor
     virtual ~GameObject() = default;
 

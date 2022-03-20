@@ -21,9 +21,10 @@ void InfoScreen::doUpdate(float const elapsed)
         m_frameTimesVector[index - pushIndex] = m_frameTimes[index];
     }
 
-    m_GameObjectAliveCount.put(getNumberOfAliveGameObjects());
+    m_GameObjectAliveCount.put(static_cast<float>(getNumberOfAliveGameObjects()));
     auto const pushIndex2 = m_GameObjectAliveCount.getTail();
-    for (auto index = pushIndex2; index != pushIndex2 + m_GameObjectAliveCount.capacity(); ++index) {
+    for (auto index = pushIndex2; index != pushIndex2 + m_GameObjectAliveCount.capacity();
+         ++index) {
         m_GameObjectAliveCountVector[index - pushIndex2] = m_GameObjectAliveCount[index];
     }
 #endif

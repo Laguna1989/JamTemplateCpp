@@ -3,10 +3,7 @@
 #include "sprite.hpp"
 #include "text.hpp"
 
-namespace jt {
-namespace dh {
-
-std::shared_ptr<jt::Shape> createShapeRect(
+std::shared_ptr<jt::Shape> jt::dh::createShapeRect(
     jt::Vector2f const& size, jt::Color const& col, jt::TextureManagerInterface& textureManager)
 {
     auto ptr = std::make_shared<jt::Shape>();
@@ -15,8 +12,8 @@ std::shared_ptr<jt::Shape> createShapeRect(
     return ptr;
 }
 
-std::shared_ptr<jt::Shape> createShapeCircle(
-    float radius, Color const& col, jt::TextureManagerInterface& textureManager)
+std::shared_ptr<jt::Shape> jt::dh::createShapeCircle(
+    float radius, jt::Color const& col, jt::TextureManagerInterface& textureManager)
 {
     auto ptr = std::make_shared<jt::Shape>();
     ptr->makeCircle(radius, textureManager);
@@ -24,7 +21,7 @@ std::shared_ptr<jt::Shape> createShapeCircle(
     return ptr;
 }
 
-std::shared_ptr<jt::Text> createText(std::weak_ptr<jt::RenderTarget> renderTarget,
+std::shared_ptr<jt::Text> jt::dh::createText(std::weak_ptr<jt::RenderTarget> renderTarget,
     std::string const& text, unsigned int fontSize, jt::Color const& col,
     std::string const& font_path)
 {
@@ -35,7 +32,7 @@ std::shared_ptr<jt::Text> createText(std::weak_ptr<jt::RenderTarget> renderTarge
     return ptr;
 }
 
-std::shared_ptr<jt::Sprite> createVignette(
+std::shared_ptr<jt::Sprite> jt::dh::createVignette(
     jt::Vector2f const& size, jt::TextureManagerInterface& textureManager)
 {
     auto ptr = std::make_shared<jt::Sprite>("#v#" + std::to_string(static_cast<int>(size.x)) + "#"
@@ -44,6 +41,3 @@ std::shared_ptr<jt::Sprite> createVignette(
     ptr->setIgnoreCamMovement(true);
     return ptr;
 }
-
-} // namespace dh
-} // namespace jt

@@ -8,14 +8,14 @@ namespace jt {
 class LoggingCamera : public CamInterface {
 public:
     LoggingCamera(CamInterface& decoratee, LoggerInterface& logger);
-    Vector2f getCamOffset() override;
-    void setCamOffset(Vector2f const& newOffset) override;
-    void move(Vector2f const& v) override;
+    jt::Vector2f getCamOffset() override;
+    void setCamOffset(jt::Vector2f const& newOffset) override;
+    void move(jt::Vector2f const& v) override;
     float getZoom() const override;
     void setZoom(float zoom) override;
     void shake(float shakeDurationInSeconds, float maxShakeOffsetInPixel,
         float shakeIntervalInSeconds) override;
-    Vector2f getShakeOffset() override;
+    jt::Vector2f getShakeOffset() override;
     void update(float elapsed) override;
     void reset() override;
 

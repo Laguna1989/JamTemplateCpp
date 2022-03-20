@@ -1,11 +1,9 @@
 ﻿#include "game_base.hpp"
 #include <string>
 
-namespace jt {
-
-GameBase::GameBase(GfxInterface& gfx, InputManagerInterface& input, AudioInterface& audio,
-    StateManagerInterface& stateManager, LoggerInterface& logger,
-    ActionCommandManagerInterface& actionCommandManager)
+jt::GameBase::GameBase(jt::GfxInterface& gfx, jt::InputManagerInterface& input,
+    jt::AudioInterface& audio, jt::StateManagerInterface& stateManager, jt::LoggerInterface& logger,
+    jt::ActionCommandManagerInterface& actionCommandManager)
     : m_gfx { gfx }
     , m_inputManager { input }
     , m_audio { audio }
@@ -15,7 +13,7 @@ GameBase::GameBase(GfxInterface& gfx, InputManagerInterface& input, AudioInterfa
 {
 }
 
-void GameBase::runOneFrame()
+void jt::GameBase::runOneFrame()
 {
     m_logger.verbose("runOneFrame", { "jt" });
     m_actionCommandManager.update();
@@ -53,31 +51,31 @@ void GameBase::runOneFrame()
     m_age += elapsedSeconds;
 }
 
-std::weak_ptr<GameInterface> GameBase::getPtr() { return shared_from_this(); }
+std::weak_ptr<jt::GameInterface> jt::GameBase::getPtr() { return shared_from_this(); }
 
-void GameBase::reset()
+void jt::GameBase::reset()
 {
     m_logger.info("Game reset", { "jt" });
     gfx().reset();
     input().reset();
 }
 
-GfxInterface& GameBase::gfx() const { return m_gfx; }
+jt::GfxInterface& jt::GameBase::gfx() const { return m_gfx; }
 
-InputManagerInterface& GameBase::input() { return m_inputManager; }
+jt::InputManagerInterface& jt::GameBase::input() { return m_inputManager; }
 
-AudioInterface& GameBase::audio() { return m_audio; }
+jt::AudioInterface& jt::GameBase::audio() { return m_audio; }
 
-StateManagerInterface& GameBase::getStateManager() { return m_stateManager; }
+jt::StateManagerInterface& jt::GameBase::getStateManager() { return m_stateManager; }
 
-LoggerInterface& GameBase::getLogger() { return m_logger; }
+jt::LoggerInterface& jt::GameBase::getLogger() { return m_logger; }
 
-ActionCommandManagerInterface& GameBase::getActionCommandManager()
+jt::ActionCommandManagerInterface& jt::GameBase::getActionCommandManager()
 {
     return m_actionCommandManager;
 }
 
-void GameBase::doUpdate(float const elapsed)
+void jt::GameBase::doUpdate(float const elapsed)
 {
     m_logger.verbose("update game, elapsed=" + std::to_string(elapsed), { "jt" });
     m_stateManager.update(getPtr(), elapsed);
@@ -102,7 +100,7 @@ void GameBase::doUpdate(float const elapsed)
     }
 }
 
-void GameBase::doDraw() const
+void jt::GameBase::doDraw() const
 {
     m_logger.verbose("draw game", { "jt" });
     gfx().window().startRenderGui();
@@ -110,7 +108,5 @@ void GameBase::doDraw() const
     m_stateManager.draw(gfx().target());
     gfx().display();
 }
-bool GameBase::wasCheating() { return m_wasCheating; }
-void GameBase::cheat() { m_wasCheating = true; }
-
-} // namespace jt
+bool jt::GameBase::wasCheating() { return m_wasCheating; }
+void jt::GameBase::cheat() { m_wasCheating = true; }

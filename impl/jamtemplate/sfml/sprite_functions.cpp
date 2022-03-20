@@ -4,11 +4,7 @@
 #include "random/random.hpp"
 #include <cmath>
 
-namespace jt {
-
-namespace SpriteFunctions {
-
-sf::Image makeButtonImage(unsigned int w, unsigned int h)
+sf::Image jt::SpriteFunctions::makeButtonImage(unsigned int w, unsigned int h)
 {
     jt::Color emptyColor { 0, 0, 0 };
     jt::Color borderColor { 255, 255, 255 };
@@ -42,14 +38,14 @@ sf::Image makeButtonImage(unsigned int w, unsigned int h)
     return img;
 }
 
-sf::Image makeBlankImage(unsigned int w, unsigned int h)
+sf::Image jt::SpriteFunctions::makeBlankImage(unsigned int w, unsigned int h)
 {
     sf::Image img {};
     img.create(w, h, sf::Color::White);
     return img;
 }
 
-sf::Image makeGlowImage(float r, std::uint8_t max)
+sf::Image jt::SpriteFunctions::makeGlowImage(float r, std::uint8_t max)
 {
     auto const s = static_cast<unsigned int>(r + 0.5f * 2);
     sf::Image img {};
@@ -72,7 +68,7 @@ sf::Image makeGlowImage(float r, std::uint8_t max)
     return img;
 }
 
-sf::Image makeVignetteImage(unsigned int w, unsigned int h)
+sf::Image jt::SpriteFunctions::makeVignetteImage(unsigned int w, unsigned int h)
 {
     sf::Image img {};
     auto const cx = static_cast<float>(w) / 2.0f;
@@ -90,6 +86,3 @@ sf::Image makeVignetteImage(unsigned int w, unsigned int h)
     }
     return img;
 }
-
-} // namespace SpriteFunctions
-} // namespace jt

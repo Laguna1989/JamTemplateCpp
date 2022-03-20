@@ -15,9 +15,7 @@ void horizontalFlip(std::unique_ptr<jt::Sprite> const& spr, float zoom, float wi
 
 } // namespace
 
-namespace jt {
-
-GfxImpl::GfxImpl(RenderWindowInterface& window, CamInterface& cam)
+jt::GfxImpl::GfxImpl(RenderWindowInterface& window, CamInterface& cam)
     : m_window { window }
     , m_camera { cam }
     , m_renderTarget { m_window.createRenderTarget() }
@@ -36,17 +34,17 @@ GfxImpl::GfxImpl(RenderWindowInterface& window, CamInterface& cam)
     m_sprite_for_drawing = std::make_unique<jt::Sprite>();
 }
 
-RenderWindowInterface& GfxImpl::window() { return m_window; }
+jt::RenderWindowInterface& jt::GfxImpl::window() { return m_window; }
 
-CamInterface& GfxImpl::camera() { return m_camera; }
+jt::CamInterface& jt::GfxImpl::camera() { return m_camera; }
 
-std::shared_ptr<RenderTarget> GfxImpl::target() { return m_renderTarget; }
+std::shared_ptr<jt::RenderTarget> jt::GfxImpl::target() { return m_renderTarget; }
 
-TextureManagerInterface& GfxImpl::textureManager() { return m_textureManager.value(); }
+jt::TextureManagerInterface& jt::GfxImpl::textureManager() { return m_textureManager.value(); }
 
-void GfxImpl::reset() { m_camera.reset(); }
+void jt::GfxImpl::reset() { m_camera.reset(); }
 
-void GfxImpl::update(float elapsed)
+void jt::GfxImpl::update(float elapsed)
 {
     m_camera.update(elapsed);
 
@@ -61,9 +59,9 @@ void GfxImpl::update(float elapsed)
     DrawableImpl::setCamOffset(-1.0f * fromLib(m_view->getCenter() - m_view->getSize() / 2.0f));
 }
 
-void GfxImpl::clear() { m_renderTarget->clear(sf::Color::Black); }
+void jt::GfxImpl::clear() { m_renderTarget->clear(sf::Color::Black); }
 
-void GfxImpl::display()
+void jt::GfxImpl::display()
 {
     // convert renderTexture to sprite and draw that.
     const sf::Texture& texture = m_renderTarget->getTexture();
@@ -78,5 +76,3 @@ void GfxImpl::display()
 
     m_window.display();
 }
-
-} // namespace jt
