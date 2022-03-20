@@ -1,18 +1,16 @@
 #include "sound_null.hpp"
 
-namespace jt {
-void SoundNull::update() { }
-bool SoundNull::isPlaying() const { return false; }
-void SoundNull::play() { }
-void SoundNull::stop() { }
-float SoundNull::getVolume() const { return 0; }
-void SoundNull::setVolume(float newVolume) { }
-void SoundNull::setLoop(bool doLoop) { }
-bool SoundNull::getLoop(void) { return false; }
-float SoundNull::getDuration() const { return 0; }
-float SoundNull::getPosition() const { return 0; }
-void SoundNull::setBlend(float blend) { }
-float SoundNull::getBlend() const { return 0; }
-void SoundNull::pause() { }
-int SoundNull::getSampleRate() const { return 0; }
-} // namespace jt
+void jt::SoundNull::update() { }
+bool jt::SoundNull::isPlaying() const { return false; }
+void jt::SoundNull::play() { }
+void jt::SoundNull::stop() { }
+float jt::SoundNull::getVolume() const { return 0; }
+void jt::SoundNull::setVolume(float newVolume) { }
+void jt::SoundNull::setLoop(bool doLoop) { }
+bool jt::SoundNull::getLoop(void) { return false; }
+float jt::SoundNull::getDuration() const { return 0; }
+float jt::SoundNull::getPosition() const { return 0; }
+void jt::SoundNull::setBlend(float blend) { }
+float jt::SoundNull::getBlend() const { return 0; }
+void jt::SoundNull::pause() { }
+int jt::SoundNull::getSampleRate() const { return 0; }
