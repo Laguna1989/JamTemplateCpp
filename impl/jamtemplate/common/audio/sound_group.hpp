@@ -42,6 +42,8 @@ public:
     void setBlend(float blend) override;
     float getBlend() const override;
 
+    int getSampleRate() const override;
+
 private:
     std::vector<std::shared_ptr<SoundInterface>> m_sounds {};
 
