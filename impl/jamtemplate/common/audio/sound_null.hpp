@@ -21,6 +21,8 @@ public:
 
     void setBlend(float blend) override;
     float getBlend() const override;
+
+    int getSampleRate() const override;
 };
 } // namespace jt
 

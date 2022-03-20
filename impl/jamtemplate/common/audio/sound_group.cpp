@@ -103,3 +103,10 @@ void jt::SoundGroup::add(std::shared_ptr<SoundInterface> sound)
         m_sounds.push_back(sound);
     }
 }
+int jt::SoundGroup::getSampleRate() const
+{
+    if (m_sounds.empty()) {
+        return 0;
+    }
+    return m_sounds.at(0)->getSampleRate();
+}

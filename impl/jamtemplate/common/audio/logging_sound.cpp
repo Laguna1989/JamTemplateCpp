@@ -7,12 +7,22 @@ LoggingSound::LoggingSound(std::shared_ptr<SoundInterface> decoratee, LoggerInte
     : m_decoratee { decoratee }
     , m_logger { logger }
 {
+    checkAndLogInvalidSampleRate();
 }
 
 LoggingSound::LoggingSound(std::string fileName, LoggerInterface& logger)
     : m_decoratee { std::make_shared<jt::Sound>(fileName) }
     , m_logger { logger }
 {
+    checkAndLogInvalidSampleRate();
+}
+
+void LoggingSound::checkAndLogInvalidSampleRate()
+{
+    if (m_decoratee->getSampleRate() != 44100) {
+        m_logger.error(
+            "Sound is not in 44.1kHz, but in: " + std::to_string(m_decoratee->getSampleRate()));
+    }
 }
 
 void LoggingSound::update()
@@ -98,5 +108,6 @@ float LoggingSound::getBlend() const
     m_logger.verbose("Sound getBlend: " + std::to_string(blend), { "jt", "audio", "sound" });
     return blend;
 }
+int LoggingSound::getSampleRate() const { return m_decoratee->getSampleRate(); }
 
 } // namespace jt

@@ -32,9 +32,12 @@ public:
     float getDuration() const override;
     float getPosition() const override;
 
+    int getSampleRate() const override;
+
 private:
     std::shared_ptr<SoundInterface> m_decoratee;
     LoggerInterface& m_logger;
+    void checkAndLogInvalidSampleRate();
 };
 } // namespace jt
 

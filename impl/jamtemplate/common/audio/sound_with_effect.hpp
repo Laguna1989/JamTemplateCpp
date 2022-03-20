@@ -29,6 +29,8 @@ public:
     float getBlend() const override;
     void setBlend(float blend) override;
 
+    int getSampleRate() const override;
+
 private:
     oalpp::SoundData m_drySoundData;
     oalpp::Sound m_drySound;
