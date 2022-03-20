@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1647455617217,
+  "lastUpdate": 1647753571357,
   "repoUrl": "https://github.com/Laguna1989/JamTemplateCpp",
   "entries": {
     "Benchmark": [
@@ -4104,6 +4104,42 @@ window.BENCHMARK_DATA = {
             "value": 3.100369977876118,
             "unit": "ms/iter",
             "extra": "iterations: 226\ncpu: 3.1003977876106195 ms\nthreads: 1"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "laguna.ws@gmail.com",
+            "name": "Laguna1989",
+            "username": "Laguna1989"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "a6743512f71ef655c102e492e523ecce72936a3e",
+          "message": "Merge pull request #161 from Laguna1989/FEATURE_LogInvalidSampleRate\n\nAdd logging for invalid sample rates in sounds",
+          "timestamp": "2022-03-20T06:16:30+01:00",
+          "tree_id": "167a7ef14e1b9df350160032f524aa26eae369df",
+          "url": "https://github.com/Laguna1989/JamTemplateCpp/commit/a6743512f71ef655c102e492e523ecce72936a3e"
+        },
+        "date": 1647753570251,
+        "tool": "googlecpp",
+        "benches": [
+          {
+            "name": "BM_StartGame",
+            "value": 0.002320091672786875,
+            "unit": "ms/iter",
+            "extra": "iterations: 298191\ncpu: 0.0023195810738754694 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GamestateWithTweeningShapes",
+            "value": 3.24887257870372,
+            "unit": "ms/iter",
+            "extra": "iterations: 216\ncpu: 3.2486976851851854 ms\nthreads: 1"
           }
         ]
       }
