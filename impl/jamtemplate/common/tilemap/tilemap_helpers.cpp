@@ -2,11 +2,8 @@
 #include "drawable_helpers.hpp"
 #include "shape.hpp"
 
-namespace jt {
-namespace tilemap {
-
-std::shared_ptr<jt::DrawableInterface> createShapeFrom(
-    InfoRect const& info, jt::TextureManagerInterface& textureManager)
+std::shared_ptr<jt::DrawableInterface> jt::tilemap::createShapeFrom(
+    jt::tilemap::InfoRect const& info, jt::TextureManagerInterface& textureManager)
 {
     std::shared_ptr<jt::Shape> shape
         = jt::dh::createShapeRect(info.size, jt::colors::White, textureManager);
@@ -16,5 +13,3 @@ std::shared_ptr<jt::DrawableInterface> createShapeFrom(
 
     return shape;
 }
-} // namespace tilemap
-} // namespace jt

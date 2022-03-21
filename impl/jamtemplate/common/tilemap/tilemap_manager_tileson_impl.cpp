@@ -1,8 +1,7 @@
 #include "tilemap_manager_tileson_impl.hpp"
 #include <iostream>
 
-namespace jt {
-std::unique_ptr<tson::Map>& TilemapManagerTilesonImpl::getMap(std::string const& fileName)
+std::unique_ptr<tson::Map>& jt::TilemapManagerTilesonImpl::getMap(std::string const& fileName)
 {
     if (m_maps.count(fileName) == 0) {
         tson::Tileson parser;
@@ -17,4 +16,3 @@ std::unique_ptr<tson::Map>& TilemapManagerTilesonImpl::getMap(std::string const&
 
     return m_maps.at(fileName);
 }
-} // namespace jt

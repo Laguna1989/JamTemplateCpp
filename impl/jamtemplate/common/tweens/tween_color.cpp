@@ -1,24 +1,22 @@
 #include "tween_color.hpp"
 #include "linterp.hpp"
 
-namespace jt {
-
-Tween::Sptr TweenColor::create(
-    std::weak_ptr<DrawableInterface> obj, float time, jt::Color valueStart, jt::Color valueEnd)
+jt::Tween::Sptr jt::TweenColor::create(
+    std::weak_ptr<jt::DrawableInterface> obj, float time, jt::Color valueStart, jt::Color valueEnd)
 {
     return std::make_shared<TweenColor>(obj, time, valueStart, valueEnd);
 }
 
-TweenColor::TweenColor(
-    std::weak_ptr<DrawableInterface> obj, float time, jt::Color valueStart, jt::Color valueEnd)
+jt::TweenColor::TweenColor(
+    std::weak_ptr<jt::DrawableInterface> obj, float time, jt::Color valueStart, jt::Color valueEnd)
     : Tween { obj, time }
     , m_initialValue { valueStart }
     , m_finalValue { valueEnd }
 {
 }
 
-void TweenColor::doUpdateObject(
-    std::shared_ptr<DrawableInterface> const& sptr, float agePercent) const
+void jt::TweenColor::doUpdateObject(
+    std::shared_ptr<jt::DrawableInterface> const& sptr, float agePercent) const
 {
     auto col = sptr->getColor();
 
@@ -34,4 +32,3 @@ void TweenColor::doUpdateObject(
     col.b = static_cast<std::uint8_t>(b);
     sptr->setColor(col);
 }
-} // namespace jt

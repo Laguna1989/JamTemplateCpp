@@ -4,23 +4,21 @@
 #include "shape.hpp"
 #include <memory>
 
-namespace jt {
-namespace tilemap {
-
-TileLayer::TileLayer(
-    std::vector<TileInfo> const& tileInfo, std::vector<std::shared_ptr<jt::Sprite>> tileSetSprites)
+jt::tilemap::TileLayer::TileLayer(std::vector<jt::tilemap::TileInfo> const& tileInfo,
+    std::vector<std::shared_ptr<jt::Sprite>> tileSetSprites)
     : m_tileSetSprites { tileSetSprites }
     , m_tiles { tileInfo }
 {
 }
 
-TileLayer::TileLayer(
-    std::tuple<std::vector<TileInfo> const&, std::vector<std::shared_ptr<jt::Sprite>>> mapInfo)
+jt::tilemap::TileLayer::TileLayer(
+    std::tuple<std::vector<jt::tilemap::TileInfo> const&, std::vector<std::shared_ptr<jt::Sprite>>>
+        mapInfo)
     : TileLayer { std::get<0>(mapInfo), std::get<1>(mapInfo) }
 {
 }
 
-bool TileLayer::isTileVisible(TileInfo const& tile) const
+bool jt::tilemap::TileLayer::isTileVisible(jt::tilemap::TileInfo const& tile) const
 {
     if (m_screenSizeHint.x == 0 && m_screenSizeHint.y == 0) {
         return true;
@@ -42,7 +40,7 @@ bool TileLayer::isTileVisible(TileInfo const& tile) const
     return true;
 }
 
-void TileLayer::doDraw(std::shared_ptr<jt::RenderTarget> const sptr) const
+void jt::tilemap::TileLayer::doDraw(std::shared_ptr<jt::RenderTarget> const sptr) const
 {
     if (!sptr) {
         return;
@@ -65,35 +63,32 @@ void TileLayer::doDraw(std::shared_ptr<jt::RenderTarget> const sptr) const
     }
 }
 
-void TileLayer::doDrawFlash(std::shared_ptr<jt::RenderTarget> const /*sptr*/) const { }
-void TileLayer::doDrawShadow(std::shared_ptr<jt::RenderTarget> const /*sptr*/) const { }
+void jt::tilemap::TileLayer::doDrawFlash(std::shared_ptr<jt::RenderTarget> const /*sptr*/) const { }
+void jt::tilemap::TileLayer::doDrawShadow(std::shared_ptr<jt::RenderTarget> const /*sptr*/) const {
+}
 
-void TileLayer::doUpdate(float /*elapsed*/) { }
+void jt::tilemap::TileLayer::doUpdate(float /*elapsed*/) { }
 
-void TileLayer::setColor(jt::Color const& col)
+void jt::tilemap::TileLayer::setColor(jt::Color const& col)
 {
     for (auto& ts : m_tileSetSprites) {
         ts->setColor(col);
     }
     m_color = col;
 }
-jt::Color TileLayer::getColor() const { return m_color; }
+jt::Color jt::tilemap::TileLayer::getColor() const { return m_color; }
 
-void TileLayer::setPosition(jt::Vector2f const& pos) { m_position = pos; }
-jt::Vector2f TileLayer::getPosition() const { return m_position; }
+void jt::tilemap::TileLayer::setPosition(jt::Vector2f const& pos) { m_position = pos; }
+jt::Vector2f jt::tilemap::TileLayer::getPosition() const { return m_position; }
 
-jt::Rectf TileLayer::getGlobalBounds() const { return jt::Rectf {}; }
-jt::Rectf TileLayer::getLocalBounds() const { return jt::Rectf {}; }
+jt::Rectf jt::tilemap::TileLayer::getGlobalBounds() const { return jt::Rectf {}; }
+jt::Rectf jt::tilemap::TileLayer::getLocalBounds() const { return jt::Rectf {}; }
 
-void TileLayer::setScale(jt::Vector2f const& scale) { m_scale = scale; }
-jt::Vector2f TileLayer::getScale() const { return m_scale; }
+void jt::tilemap::TileLayer::setScale(jt::Vector2f const& scale) { m_scale = scale; }
+jt::Vector2f jt::tilemap::TileLayer::getScale() const { return m_scale; }
 
-void TileLayer::setOrigin(jt::Vector2f const& origin) { m_origin = origin; }
-jt::Vector2f TileLayer::getOrigin() const { return m_origin; }
+void jt::tilemap::TileLayer::setOrigin(jt::Vector2f const& origin) { m_origin = origin; }
+jt::Vector2f jt::tilemap::TileLayer::getOrigin() const { return m_origin; }
 
-void TileLayer::doRotate(float /*rot*/) { }
-bool TileLayer::isVisible() const { return true; }
-
-} // namespace tilemap
-
-} // namespace jt
+void jt::tilemap::TileLayer::doRotate(float /*rot*/) { }
+bool jt::tilemap::TileLayer::isVisible() const { return true; }

@@ -2,16 +2,13 @@
 #include "pathfinder/node.hpp"
 #include <utility>
 
-namespace jt {
-namespace tilemap {
-
-NodeLayer::NodeLayer(std::vector<std::shared_ptr<TileNode>> nodeTiles)
+jt::tilemap::NodeLayer::NodeLayer(std::vector<std::shared_ptr<jt::tilemap::TileNode>> nodeTiles)
     : m_nodeTiles { std::move(nodeTiles) }
 {
     createNodeConnections();
 }
 
-void NodeLayer::createNodeConnections()
+void jt::tilemap::NodeLayer::createNodeConnections()
 {
     for (auto& t : m_nodeTiles) {
         if (t->getBlocked()) {
@@ -39,7 +36,7 @@ void NodeLayer::createNodeConnections()
     }
 }
 
-std::shared_ptr<TileNode> NodeLayer::getTileAt(jt::Vector2u const& pos)
+std::shared_ptr<jt::tilemap::TileNode> jt::tilemap::NodeLayer::getTileAt(jt::Vector2u const& pos)
 {
     if (m_lookupHelper.count(pos) == 0) {
         auto it = std::find_if(m_nodeTiles.cbegin(), m_nodeTiles.cend(), [&pos](auto const& tile) {
@@ -54,9 +51,12 @@ std::shared_ptr<TileNode> NodeLayer::getTileAt(jt::Vector2u const& pos)
     return m_lookupHelper.at(pos);
 }
 
-std::vector<std::shared_ptr<TileNode>> NodeLayer::getAllTiles() { return m_nodeTiles; }
+std::vector<std::shared_ptr<jt::tilemap::TileNode>> jt::tilemap::NodeLayer::getAllTiles()
+{
+    return m_nodeTiles;
+}
 
-void NodeLayer::reset()
+void jt::tilemap::NodeLayer::reset()
 {
     for (auto& t : m_nodeTiles) {
         auto color = jt::MakeColor::FromRGBA(1, 1, 1, 100);
@@ -67,6 +67,3 @@ void NodeLayer::reset()
         t->reset();
     }
 }
-
-} // namespace tilemap
-} // namespace jt
