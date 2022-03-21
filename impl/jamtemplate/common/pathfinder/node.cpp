@@ -1,22 +1,21 @@
 #include "node.hpp"
 #include <stdexcept>
 
-namespace jt {
-namespace pathfinder {
+std::vector<std::weak_ptr<jt::pathfinder::NodeInterface>> const&
+jt::pathfinder::Node::getNeighbours()
+{
+    return m_neighbours;
+}
 
-std::vector<std::weak_ptr<NodeInterface>> const& Node::getNeighbours() { return m_neighbours; }
+void jt::pathfinder::Node::visit() { m_visited = true; }
+void jt::pathfinder::Node::unvisit() { m_visited = false; }
+bool jt::pathfinder::Node::wasVisited() { return m_visited; }
 
-void Node::visit() { m_visited = true; }
+jt::Vector2u const& jt::pathfinder::Node::getTilePosition() const { return m_position; }
 
-void Node::unvisit() { m_visited = false; }
+void jt::pathfinder::Node::setPosition(jt::Vector2u pos) { m_position = pos; }
 
-bool Node::wasVisited() { return m_visited; }
-
-jt::Vector2u const& Node::getTilePosition() const { return m_position; }
-
-void Node::setPosition(jt::Vector2u pos) { m_position = pos; }
-
-void Node::addNeighbour(std::weak_ptr<NodeInterface> other)
+void jt::pathfinder::Node::addNeighbour(std::weak_ptr<jt::pathfinder::NodeInterface> other)
 {
     auto o = other.lock();
     if (!o) {
@@ -29,9 +28,6 @@ void Node::addNeighbour(std::weak_ptr<NodeInterface> other)
     m_neighbours.push_back(other);
 }
 
-float Node::getValue() { return m_value; }
+float jt::pathfinder::Node::getValue() { return m_value; }
 
-void Node::setValue(float value) { m_value = value; }
-
-} // namespace pathfinder
-} // namespace jt
+void jt::pathfinder::Node::setValue(float value) { m_value = value; }
