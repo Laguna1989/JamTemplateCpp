@@ -2,13 +2,12 @@
 #include "game_interface.hpp"
 #include "imgui.h"
 
-namespace jt {
-void InfoScreen::doCreate()
+void jt::InfoScreen::doCreate()
 {
     m_frameTimesVector.resize(m_frameTimes.capacity());
     m_GameObjectAliveCountVector.resize(m_GameObjectAliveCount.capacity());
 }
-void InfoScreen::doUpdate(float const elapsed)
+void jt::InfoScreen::doUpdate(float const elapsed)
 {
 #ifdef JT_ENABLE_DEBUG
     if (getGame()->input().keyboard()->justPressed(jt::KeyCode::End)) {
@@ -29,7 +28,7 @@ void InfoScreen::doUpdate(float const elapsed)
     }
 #endif
 }
-void InfoScreen::doDraw() const
+void jt::InfoScreen::doDraw() const
 {
     if (!m_showInfo) {
         return;
@@ -79,4 +78,3 @@ void InfoScreen::doDraw() const
     }
     ImGui::End();
 }
-} // namespace jt
