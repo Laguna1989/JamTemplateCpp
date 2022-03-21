@@ -70,7 +70,7 @@ void jt::DrawableImpl::setCamOffset(const jt::Vector2f& v) { m_CamOffset = v; }
 jt::Vector2f jt::DrawableImpl::getStaticCamOffset() { return m_CamOffset; }
 
 void jt::DrawableImpl::setFlashColor(jt::Color const& col) { doSetFlashColor(col); }
-Color jt::DrawableImpl::getFlashColor() const { return doGetFlashColor(); }
+jt::Color jt::DrawableImpl::getFlashColor() const { return doGetFlashColor(); }
 
 void jt::DrawableImpl::setScreenSizeHint(jt::Vector2f const& hint) { m_screenSizeHint = hint; }
 

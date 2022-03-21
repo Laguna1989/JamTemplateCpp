@@ -1,8 +1,6 @@
 #include "control_command_once.hpp"
 
-namespace jt {
-
-void ControlCommandOnce::execute(float elapsed)
+void jt::ControlCommandOnce::execute(float elapsed)
 {
     if (!m_hasBeenExecutedAlready) {
         doExecute(elapsed);
@@ -10,6 +8,4 @@ void ControlCommandOnce::execute(float elapsed)
     }
 }
 
-void ControlCommandOnce::reset() { m_hasBeenExecutedAlready = false; }
-
-} // namespace jt
+void jt::ControlCommandOnce::reset() { m_hasBeenExecutedAlready = false; }
