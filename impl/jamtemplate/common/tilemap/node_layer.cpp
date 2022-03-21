@@ -42,7 +42,7 @@ void NodeLayer::createNodeConnections()
 std::shared_ptr<TileNode> NodeLayer::getTileAt(jt::Vector2u const& pos)
 {
     if (m_lookupHelper.count(pos) == 0) {
-        auto it = std::find_if(m_nodeTiles.begin(), m_nodeTiles.end(), [&pos](auto tile) {
+        auto it = std::find_if(m_nodeTiles.cbegin(), m_nodeTiles.cend(), [&pos](auto const& tile) {
             auto nodeTilePos = tile->getNode()->getTilePosition();
             return nodeTilePos.x == pos.x && nodeTilePos.y == pos.y;
         });

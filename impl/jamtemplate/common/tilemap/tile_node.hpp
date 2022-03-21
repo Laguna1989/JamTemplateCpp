@@ -1,3 +1,4 @@
+
 #ifndef GUARD_JAMTEMPLATE_TILENODE_HPP
 #define GUARD_JAMTEMPLATE_TILENODE_HPP
 
@@ -8,13 +9,14 @@
 
 namespace jt {
 namespace tilemap {
+
 class TileNode {
 public:
     TileNode(std::shared_ptr<jt::DrawableInterface> drawable,
         std::shared_ptr<jt::pathfinder::NodeInterface> node, bool blocked);
 
-    std::shared_ptr<jt::pathfinder::NodeInterface> getNode();
-    std::shared_ptr<jt::DrawableInterface> getDrawable();
+    std::shared_ptr<jt::pathfinder::NodeInterface>& getNode();
+    std::shared_ptr<jt::DrawableInterface>& getDrawable();
 
     void setBlocked(bool blocked);
     bool getBlocked();
