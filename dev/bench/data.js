@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1647799726554,
+  "lastUpdate": 1647893533394,
   "repoUrl": "https://github.com/Laguna1989/JamTemplateCpp",
   "entries": {
     "Benchmark": [
@@ -4176,6 +4176,42 @@ window.BENCHMARK_DATA = {
             "value": 3.255952097674708,
             "unit": "ms/iter",
             "extra": "iterations: 215\ncpu: 3.2556395348837204 ms\nthreads: 1"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "laguna.ws@gmail.com",
+            "name": "Laguna1989",
+            "username": "Laguna1989"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "3e916baedf5992daa961b45a468acaefef4a8314",
+          "message": "Merge pull request #162 from Laguna1989/FEATURE_NoUsingNamespaceInCpp\n\nremove namespaces in cpp files",
+          "timestamp": "2022-03-21T21:07:43+01:00",
+          "tree_id": "2dc3cc7d62f2c5f08b9c6079ab58138d85890861",
+          "url": "https://github.com/Laguna1989/JamTemplateCpp/commit/3e916baedf5992daa961b45a468acaefef4a8314"
+        },
+        "date": 1647893532252,
+        "tool": "googlecpp",
+        "benches": [
+          {
+            "name": "BM_StartGame",
+            "value": 0.0028068225367905465,
+            "unit": "ms/iter",
+            "extra": "iterations: 249725\ncpu: 0.002804760836920612 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GamestateWithTweeningShapes",
+            "value": 3.914218955307023,
+            "unit": "ms/iter",
+            "extra": "iterations: 179\ncpu: 3.9136217877094963 ms\nthreads: 1"
           }
         ]
       }
