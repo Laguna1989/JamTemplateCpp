@@ -1,25 +1,25 @@
 #include "logging_state_manager.hpp"
 
-namespace jt {
-
-LoggingStateManager::LoggingStateManager(StateManagerInterface& decoratee, LoggerInterface& logger)
+jt::LoggingStateManager::LoggingStateManager(
+    jt::StateManagerInterface& decoratee, jt::LoggerInterface& logger)
     : m_decoratee { decoratee }
     , m_logger { logger }
 {
 }
 
-std::shared_ptr<GameState> LoggingStateManager::getCurrentState()
+std::shared_ptr<jt::GameState> jt::LoggingStateManager::getCurrentState()
 {
     m_logger.verbose("getCurrentState", { "jt", "StateManager" });
     return m_decoratee.getCurrentState();
 }
-void LoggingStateManager::setTransition(std::shared_ptr<StateManagerTransitionInterface> transition)
+void jt::LoggingStateManager::setTransition(
+    std::shared_ptr<jt::StateManagerTransitionInterface> transition)
 {
     m_logger.info("setTransition", { "jt", "StateManager" });
     m_decoratee.setTransition(transition);
 }
 
-void LoggingStateManager::switchState(std::shared_ptr<GameState> newState)
+void jt::LoggingStateManager::switchState(std::shared_ptr<jt::GameState> newState)
 {
     std::string stateName = "";
     if (newState) {
@@ -29,16 +29,14 @@ void LoggingStateManager::switchState(std::shared_ptr<GameState> newState)
     m_decoratee.switchState(newState);
 }
 
-void LoggingStateManager::update(std::weak_ptr<GameInterface> gameInstance, float elapsed)
+void jt::LoggingStateManager::update(std::weak_ptr<jt::GameInterface> gameInstance, float elapsed)
 {
     m_logger.verbose("update", { "jt", "StateManager" });
     m_decoratee.update(gameInstance, elapsed);
 }
 
-void LoggingStateManager::draw(std::shared_ptr<RenderTarget> rt)
+void jt::LoggingStateManager::draw(std::shared_ptr<jt::RenderTarget> rt)
 {
     m_logger.verbose("draw", { "jt", "StateManager" });
     m_decoratee.draw(rt);
 }
-
-} // namespace jt

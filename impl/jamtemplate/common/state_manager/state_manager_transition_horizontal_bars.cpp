@@ -1,10 +1,8 @@
-
 #include "state_manager_transition_horizontal_bars.hpp"
 
-namespace jt {
-
-StateManagerTransitionHorizontalBars::StateManagerTransitionHorizontalBars(
-    Vector2f const& shapeSize, int numberOfShapes, float totalTime, TextureManagerInterface& tm)
+jt::StateManagerTransitionHorizontalBars::StateManagerTransitionHorizontalBars(
+    jt::Vector2f const& shapeSize, int numberOfShapes, float totalTime,
+    jt::TextureManagerInterface& tm)
     : StateManagerTransitionImpl { totalTime }
 {
     m_shape = std::make_shared<jt::Shape>();
@@ -15,9 +13,9 @@ StateManagerTransitionHorizontalBars::StateManagerTransitionHorizontalBars(
     m_numberOfShapes = numberOfShapes;
 }
 
-void StateManagerTransitionHorizontalBars::doUpdate(float elapsed) { }
-void StateManagerTransitionHorizontalBars::doStart() { }
-void StateManagerTransitionHorizontalBars::doDraw(std::shared_ptr<jt::RenderTarget> rt)
+void jt::StateManagerTransitionHorizontalBars::doUpdate(float elapsed) { }
+void jt::StateManagerTransitionHorizontalBars::doStart() { }
+void jt::StateManagerTransitionHorizontalBars::doDraw(std::shared_ptr<jt::RenderTarget> rt)
 {
     float const r = getRatio();
 
@@ -36,5 +34,3 @@ void StateManagerTransitionHorizontalBars::doDraw(std::shared_ptr<jt::RenderTarg
         m_shape->draw(rt);
     }
 }
-
-} // namespace jt

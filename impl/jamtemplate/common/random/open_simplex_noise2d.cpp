@@ -1,9 +1,7 @@
 #include "open_simplex_noise2d.hpp"
 #include <cmath>
 
-namespace jt {
-
-OpenSimplexNoise2D::OpenSimplexNoise2D()
+jt::OpenSimplexNoise2D::OpenSimplexNoise2D()
     : m_stretch2d(-0.211324865405187f) //(1/Math.sqrt(2+1)-1)/2;
     , m_squish2d(0.366025403784439f) //(Math.sqrt(2+1)-1)/2;
     , m_norm2d(47)
@@ -30,7 +28,7 @@ OpenSimplexNoise2D::OpenSimplexNoise2D()
 {
 }
 
-OpenSimplexNoise2D::OpenSimplexNoise2D(std::int64_t seed)
+jt::OpenSimplexNoise2D::OpenSimplexNoise2D(std::int64_t seed)
     : OpenSimplexNoise2D()
 {
     m_engine.seed(static_cast<unsigned int>(seed));
@@ -52,7 +50,7 @@ OpenSimplexNoise2D::OpenSimplexNoise2D(std::int64_t seed)
     }
 }
 
-float OpenSimplexNoise2D::eval(float const x, float const y) const
+float jt::OpenSimplexNoise2D::eval(float const x, float const y) const
 {
     // Place input coordinates onto grid.
     float stretchOffset = (x + y) * m_stretch2d;
@@ -166,10 +164,8 @@ float OpenSimplexNoise2D::eval(float const x, float const y) const
     return value / m_norm2d;
 }
 
-float OpenSimplexNoise2D::extrapolate(int xsb, int ysb, float dx, float dy) const
+float jt::OpenSimplexNoise2D::extrapolate(int xsb, int ysb, float dx, float dy) const
 {
     int index = m_perm[(m_perm[xsb & 0xFF] + ysb) & 0xFF] & 0x0E;
     return m_gradients2d[index] * dx + m_gradients2d[index + 1] * dy;
 }
-
-} // namespace jt

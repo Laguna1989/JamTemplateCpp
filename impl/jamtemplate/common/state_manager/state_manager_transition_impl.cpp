@@ -1,11 +1,12 @@
 #include "state_manager_transition_impl.hpp"
 #include "math_helper.hpp"
 
-namespace jt {
+jt::StateManagerTransitionImpl::StateManagerTransitionImpl(float timerMax)
+{
+    m_timerMax = timerMax;
+}
 
-StateManagerTransitionImpl::StateManagerTransitionImpl(float timerMax) { m_timerMax = timerMax; }
-
-void StateManagerTransitionImpl::start()
+void jt::StateManagerTransitionImpl::start()
 {
     m_timer = 0.0f;
     m_started = true;
@@ -14,11 +15,11 @@ void StateManagerTransitionImpl::start()
     m_isInProgress = true;
 }
 
-bool StateManagerTransitionImpl::isInProgress() { return m_isInProgress; }
+bool jt::StateManagerTransitionImpl::isInProgress() { return m_isInProgress; }
 
-bool StateManagerTransitionImpl::triggerStateChange() { return m_triggerStateChange; }
+bool jt::StateManagerTransitionImpl::triggerStateChange() { return m_triggerStateChange; }
 
-void StateManagerTransitionImpl::update(float elapsed)
+void jt::StateManagerTransitionImpl::update(float elapsed)
 {
 
     if (m_started) {
@@ -41,19 +42,17 @@ void StateManagerTransitionImpl::update(float elapsed)
     }
 }
 
-void StateManagerTransitionImpl::draw(std::shared_ptr<RenderTarget> rt)
+void jt::StateManagerTransitionImpl::draw(std::shared_ptr<jt::RenderTarget> rt)
 {
     if (m_started) {
         doDraw(rt);
     }
 }
 
-float StateManagerTransitionImpl::getRatio() const
+float jt::StateManagerTransitionImpl::getRatio() const
 {
     float ratio { m_timer / m_timerMax };
     return jt::MathHelper::clamp(ratio, 0.0f, 1.0f);
 }
 
-bool StateManagerTransitionImpl::isInFirstHalf() const { return m_firstHalf; }
-
-} // namespace jt
+bool jt::StateManagerTransitionImpl::isInFirstHalf() const { return m_firstHalf; }
