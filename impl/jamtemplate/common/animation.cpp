@@ -155,6 +155,7 @@ void jt::Animation::doFlashImpl(float t, jt::Color col)
 void jt::Animation::doUpdate(float elapsed)
 {
     // check if valid
+    // TODO optimization idea: do check only on play and set a bool that can be checked here.
     if (m_frames.count(m_currentAnimName) == 0) {
         std::cout << "Warning: Update Animation with invalid animName: '" + m_currentAnimName
                 + "'\n";
@@ -175,6 +176,8 @@ void jt::Animation::doUpdate(float elapsed)
         }
     }
     // set position
+    // TODO optimization: Do not set the position of all frames for all animations, but store a
+    // current animation and only set that position
     for (auto& kvp : m_frames) {
         for (auto& spr : kvp.second) {
             spr->setPosition(m_position + getShakeOffset() + getOffset());
