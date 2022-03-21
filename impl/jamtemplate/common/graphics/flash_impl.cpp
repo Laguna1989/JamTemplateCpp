@@ -1,8 +1,6 @@
 #include "flash_impl.hpp"
 
-namespace jt {
-
-void FlashImpl::drawFlash(std::shared_ptr<jt::RenderTarget> sptr) const
+void jt::FlashImpl::drawFlash(std::shared_ptr<jt::RenderTarget> sptr) const
 {
     if (sptr) {
         if (m_flashTimer >= 0) {
@@ -11,7 +9,7 @@ void FlashImpl::drawFlash(std::shared_ptr<jt::RenderTarget> sptr) const
     }
 }
 
-void FlashImpl::doFlash(float t, jt::Color col)
+void jt::FlashImpl::doFlash(float t, jt::Color col)
 {
     m_flashTimer = t;
     m_maxFlashTimer = t;
@@ -20,10 +18,10 @@ void FlashImpl::doFlash(float t, jt::Color col)
     doFlashImpl(t, col);
 }
 
-void FlashImpl::doSetFlashColor(Color const& col) { m_flashColor = col; }
-jt::Color FlashImpl::doGetFlashColor() const { return m_flashColor; }
+void jt::FlashImpl::doSetFlashColor(jt::Color const& col) { m_flashColor = col; }
+jt::Color jt::FlashImpl::doGetFlashColor() const { return m_flashColor; }
 
-void FlashImpl::updateFlash(float elapsed)
+void jt::FlashImpl::updateFlash(float elapsed)
 {
     if (m_flashTimer > 0) {
         auto const a = (m_flashTimer / m_maxFlashTimer);
@@ -35,5 +33,3 @@ void FlashImpl::updateFlash(float elapsed)
         m_flashTimer -= elapsed;
     }
 }
-
-} // namespace jt

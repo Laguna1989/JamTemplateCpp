@@ -1,9 +1,7 @@
 #include "shake_impl.hpp"
 #include "random/random.hpp"
 
-namespace jt {
-
-void ShakeImpl::updateShake(float elapsed)
+void jt::ShakeImpl::updateShake(float elapsed)
 {
     if (m_shakeTimer > 0) {
         if (m_shakeInterval <= 0) {
@@ -19,13 +17,11 @@ void ShakeImpl::updateShake(float elapsed)
         m_shakeOffset.x = m_shakeOffset.y = 0;
     }
 }
-void ShakeImpl::doShake(float t, float strength, float shakeInterval)
+void jt::ShakeImpl::doShake(float t, float strength, float shakeInterval)
 {
     m_shakeTimer = t;
     m_shakeTimerMax = t;
     m_shakeStrength = strength;
     m_shakeInterval = m_shakeIntervalMax = shakeInterval;
 }
-jt::Vector2f ShakeImpl::doGetShakeOffset() const { return m_shakeOffset; }
-
-} // namespace jt
+jt::Vector2f jt::ShakeImpl::doGetShakeOffset() const { return m_shakeOffset; }
