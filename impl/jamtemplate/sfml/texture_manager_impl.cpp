@@ -5,7 +5,6 @@
 #include <SFML/Graphics.hpp>
 #include <stdexcept>
 
-namespace jt {
 namespace {
 
 sf::Image createButtonImage(std::vector<std::string> const& ssv)
@@ -26,7 +25,7 @@ sf::Image createButtonImage(std::vector<std::string> const& ssv)
         throw std::invalid_argument { "invalid button size" };
     }
 
-    return SpriteFunctions::makeButtonImage(
+    return jt::SpriteFunctions::makeButtonImage(
         static_cast<unsigned int>(w), static_cast<unsigned int>(h));
 }
 
@@ -48,7 +47,7 @@ sf::Image createBlankImage(std::vector<std::string> const& ssv)
         throw std::invalid_argument { "invalid image size" };
     }
 
-    return SpriteFunctions::makeBlankImage(
+    return jt::SpriteFunctions::makeBlankImage(
         static_cast<unsigned int>(w), static_cast<unsigned int>(h));
 }
 
@@ -66,7 +65,7 @@ sf::Image createGlowImage(std::vector<std::string> const& ssv)
     if (count != ssv.at(2).size() || max <= 0 || max > 255) {
         throw std::invalid_argument { "invalid glowmax" };
     }
-    return SpriteFunctions::makeGlowImage(static_cast<float>(s), static_cast<uint8_t>(max));
+    return jt::SpriteFunctions::makeGlowImage(static_cast<float>(s), static_cast<uint8_t>(max));
 }
 
 sf::Image createVignetteImage(std::vector<std::string> const& ssv)
@@ -85,7 +84,7 @@ sf::Image createVignetteImage(std::vector<std::string> const& ssv)
     if (count != ssv.at(2).size() || h <= 0) {
         throw std::invalid_argument { "invalid vignette h" };
     }
-    return SpriteFunctions::makeVignetteImage(w, h);
+    return jt::SpriteFunctions::makeVignetteImage(w, h);
 }
 
 sf::Image createFlashImage(sf::Image const& in)
@@ -112,12 +111,12 @@ sf::Texture loadTextureFromDisk(std::string const& str)
 }
 } // namespace
 
-TextureManagerImpl::TextureManagerImpl(std::shared_ptr<jt::RenderTarget> /*renderer*/)
+jt::TextureManagerImpl::TextureManagerImpl(std::shared_ptr<jt::RenderTarget> /*renderer*/)
 {
     // Nothing to do here
 }
 
-sf::Texture& TextureManagerImpl::get(std::string const& str)
+sf::Texture& jt::TextureManagerImpl::get(std::string const& str)
 {
     if (str.empty()) {
         throw std::invalid_argument { "TextureManager get: string must not be empty" };
@@ -151,8 +150,9 @@ sf::Texture& TextureManagerImpl::get(std::string const& str)
 
     return m_textures[str];
 }
-void TextureManagerImpl::reset() { m_textures.clear(); }
-std::string TextureManagerImpl::getFlashName(std::string const& str) { return str + "___flash__"; }
-std::size_t TextureManagerImpl::getNumberOfTextures() { return m_textures.size(); }
-
-} // namespace jt
+void jt::TextureManagerImpl::reset() { m_textures.clear(); }
+std::string jt::TextureManagerImpl::getFlashName(std::string const& str)
+{
+    return str + "___flash__";
+}
+std::size_t jt::TextureManagerImpl::getNumberOfTextures() { return m_textures.size(); }

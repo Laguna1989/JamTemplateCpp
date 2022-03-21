@@ -4,9 +4,7 @@
 #include "sprite.hpp"
 #include <SFML/Graphics.hpp>
 
-namespace jt {
-
-RenderWindow::RenderWindow(unsigned int width, unsigned int height, std::string const& title)
+jt::RenderWindow::RenderWindow(unsigned int width, unsigned int height, std::string const& title)
 {
     m_window
         = std::make_shared<sf::RenderWindow>(sf::VideoMode(width, height), title, sf::Style::Close);
@@ -15,14 +13,14 @@ RenderWindow::RenderWindow(unsigned int width, unsigned int height, std::string 
     ImGui::SFML::Init(*m_window.get());
 }
 
-std::shared_ptr<jt::RenderTarget> RenderWindow::createRenderTarget()
+std::shared_ptr<jt::RenderTarget> jt::RenderWindow::createRenderTarget()
 {
     return std::make_shared<jt::RenderTarget>();
 }
 
-bool RenderWindow::isOpen() const { return m_window->isOpen(); }
+bool jt::RenderWindow::isOpen() const { return m_window->isOpen(); }
 
-void RenderWindow::checkForClose()
+void jt::RenderWindow::checkForClose()
 {
     sf::Event event {};
 
@@ -34,13 +32,13 @@ void RenderWindow::checkForClose()
     }
 }
 
-jt::Vector2f RenderWindow::getSize() const
+jt::Vector2f jt::RenderWindow::getSize() const
 {
     return jt::Vector2f { static_cast<float>(m_window->getSize().x),
         static_cast<float>(m_window->getSize().y) };
 }
 
-void RenderWindow::draw(std::unique_ptr<jt::Sprite>& spr)
+void jt::RenderWindow::draw(std::unique_ptr<jt::Sprite>& spr)
 {
     if (!spr) {
         throw std::invalid_argument { "Cannot draw nullptr sprite" };
@@ -48,7 +46,7 @@ void RenderWindow::draw(std::unique_ptr<jt::Sprite>& spr)
     m_window->draw(spr->getSFSprite());
 }
 
-void RenderWindow::display()
+void jt::RenderWindow::display()
 {
     if (m_renderGui) {
         m_hasBeenUpdatedAlready = false;
@@ -59,27 +57,25 @@ void RenderWindow::display()
     m_renderGui = false;
 }
 
-jt::Vector2f RenderWindow::getMousePosition()
+jt::Vector2f jt::RenderWindow::getMousePosition()
 {
     auto const mpi = sf::Mouse::getPosition(*m_window);
     return jt::Vector2f { static_cast<float>(mpi.x), static_cast<float>(mpi.y) };
 }
 
-void RenderWindow::setMouseCursorVisible(bool visible)
+void jt::RenderWindow::setMouseCursorVisible(bool visible)
 {
     m_window->setMouseCursorVisible(visible);
     m_isMouseCursorVisible = visible;
 }
-bool RenderWindow::getMouseCursorVisible(void) const { return m_isMouseCursorVisible; }
+bool jt::RenderWindow::getMouseCursorVisible(void) const { return m_isMouseCursorVisible; }
 
-void RenderWindow::updateGui(float elapsed)
+void jt::RenderWindow::updateGui(float elapsed)
 {
     ImGui::SFML::Update(*m_window.get(), sf::seconds(elapsed));
 }
 
-void RenderWindow::startRenderGui() { m_renderGui = true; }
+void jt::RenderWindow::startRenderGui() { m_renderGui = true; }
 
-bool RenderWindow::shouldProcessKeyboard() { return !ImGui::GetIO().WantCaptureKeyboard; }
-bool RenderWindow::shouldProcessMouse() { return !ImGui::GetIO().WantCaptureMouse; }
-
-} // namespace jt
+bool jt::RenderWindow::shouldProcessKeyboard() { return !ImGui::GetIO().WantCaptureKeyboard; }
+bool jt::RenderWindow::shouldProcessMouse() { return !ImGui::GetIO().WantCaptureMouse; }

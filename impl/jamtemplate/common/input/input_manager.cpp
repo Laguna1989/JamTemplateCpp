@@ -1,18 +1,16 @@
 ﻿#include "input_manager.hpp"
 
-namespace jt {
-
-InputManager::InputManager(
-    std::shared_ptr<MouseInputInterface> mouse, std::shared_ptr<KeyboardInputInterface> keyboard)
+jt::InputManager::InputManager(std::shared_ptr<jt::MouseInputInterface> mouse,
+    std::shared_ptr<jt::KeyboardInputInterface> keyboard)
     : m_mouse { mouse }
     , m_keyboard { keyboard }
 {
 }
 
-std::shared_ptr<MouseInputInterface> InputManager::mouse() { return m_mouse; }
-std::shared_ptr<KeyboardInputInterface> InputManager::keyboard() { return m_keyboard; }
+std::shared_ptr<jt::MouseInputInterface> jt::InputManager::mouse() { return m_mouse; }
+std::shared_ptr<jt::KeyboardInputInterface> jt::InputManager::keyboard() { return m_keyboard; }
 
-void InputManager::reset()
+void jt::InputManager::reset()
 {
     if (m_mouse) {
         m_mouse->reset();
@@ -21,7 +19,7 @@ void InputManager::reset()
         m_keyboard->reset();
     }
 }
-void InputManager::update(MousePosition const& mp, float elapsed)
+void jt::InputManager::update(jt::MousePosition const& mp, float elapsed)
 {
     if (m_mouse) {
         m_mouse->updateMousePosition(mp);
@@ -32,5 +30,3 @@ void InputManager::update(MousePosition const& mp, float elapsed)
         m_keyboard->updateCommands(elapsed);
     }
 }
-
-} // namespace jt

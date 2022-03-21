@@ -4,10 +4,9 @@
 #include <limits>
 #include <stdexcept>
 
-namespace jt {
-namespace pathfinder {
-
 namespace {
+
+using NodeT = jt::pathfinder::NodeT;
 
 float calculateDistance(NodeT const& node1, jt::Vector2u const& position2)
 {
@@ -18,8 +17,8 @@ float calculateDistance(NodeT const& node1, jt::Vector2u const& position2)
     return jt::MathHelper::length(diff);
 }
 
-NodeT findClosestNodeTo(
-    std::vector<std::weak_ptr<NodeInterface>>& toCheck, jt::Vector2u const& endPosition)
+NodeT findClosestNodeTo(std::vector<std::weak_ptr<jt::pathfinder::NodeInterface>>& toCheck,
+    jt::Vector2u const& endPosition)
 {
     if (toCheck.empty()) {
         throw std::invalid_argument { "cannot find closestNodeToEnd because no nodes given." };
@@ -27,7 +26,7 @@ NodeT findClosestNodeTo(
 
     auto minDistance = std::numeric_limits<float>::max();
     NodeT closestNode = nullptr;
-    std::weak_ptr<NodeInterface> closestWeakNode;
+    std::weak_ptr<jt::pathfinder::NodeInterface> closestWeakNode;
 
     for (auto n : toCheck) {
         auto currentNode = n.lock();
@@ -42,7 +41,7 @@ NodeT findClosestNodeTo(
         }
     }
 
-    std::vector<std::weak_ptr<NodeInterface>> newToCheck;
+    std::vector<std::weak_ptr<jt::pathfinder::NodeInterface>> newToCheck;
     for (auto n : toCheck) {
         if (n.lock() != closestNode) {
             newToCheck.push_back(n);
@@ -54,7 +53,7 @@ NodeT findClosestNodeTo(
 }
 
 void setNeighbourValue(
-    NodeT const& currentNode, std::shared_ptr<NodeInterface> const& neighbour_node)
+    NodeT const& currentNode, std::shared_ptr<jt::pathfinder::NodeInterface> const& neighbour_node)
 {
     auto const dist = calculateDistance(neighbour_node, currentNode->getTilePosition());
     auto const newValue = dist + currentNode->getValue();
@@ -66,7 +65,7 @@ void setNeighbourValue(
 }
 
 void addNeighboursToToCheck(
-    NodeT const& currentNode, std::vector<std::weak_ptr<NodeInterface>>& toCheck)
+    NodeT const& currentNode, std::vector<std::weak_ptr<jt::pathfinder::NodeInterface>>& toCheck)
 {
     for (auto n : currentNode->getNeighbours()) {
         auto neighbour_node = n.lock();
@@ -89,7 +88,7 @@ bool calculateNodeValuesFromEndToStart(NodeT const& start, NodeT const& end)
     end->visit();
     end->setValue(0.0f);
 
-    std::vector<std::weak_ptr<NodeInterface>> toCheck;
+    std::vector<std::weak_ptr<jt::pathfinder::NodeInterface>> toCheck;
     addNeighboursToToCheck(end, toCheck);
 
     while (true) {
@@ -133,7 +132,7 @@ NodeT findNeighbourWithSmallestValue(NodeT const& current)
 
 } // namespace
 
-std::vector<NodeT> calculatePath(NodeT const& start, NodeT const& end)
+std::vector<NodeT> jt::pathfinder::calculatePath(NodeT const& start, NodeT const& end)
 {
     if (start == end) {
         return std::vector<NodeT> {};
@@ -153,6 +152,3 @@ std::vector<NodeT> calculatePath(NodeT const& start, NodeT const& end)
 
     return nodes;
 }
-
-} // namespace pathfinder
-} // namespace jt

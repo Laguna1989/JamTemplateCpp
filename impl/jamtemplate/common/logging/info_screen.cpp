@@ -2,13 +2,12 @@
 #include "game_interface.hpp"
 #include "imgui.h"
 
-namespace jt {
-void InfoScreen::doCreate()
+void jt::InfoScreen::doCreate()
 {
     m_frameTimesVector.resize(m_frameTimes.capacity());
     m_GameObjectAliveCountVector.resize(m_GameObjectAliveCount.capacity());
 }
-void InfoScreen::doUpdate(float const elapsed)
+void jt::InfoScreen::doUpdate(float const elapsed)
 {
 #ifdef JT_ENABLE_DEBUG
     if (getGame()->input().keyboard()->justPressed(jt::KeyCode::End)) {
@@ -21,14 +20,15 @@ void InfoScreen::doUpdate(float const elapsed)
         m_frameTimesVector[index - pushIndex] = m_frameTimes[index];
     }
 
-    m_GameObjectAliveCount.put(getNumberOfAliveGameObjects());
+    m_GameObjectAliveCount.put(static_cast<float>(getNumberOfAliveGameObjects()));
     auto const pushIndex2 = m_GameObjectAliveCount.getTail();
-    for (auto index = pushIndex2; index != pushIndex2 + m_GameObjectAliveCount.capacity(); ++index) {
+    for (auto index = pushIndex2; index != pushIndex2 + m_GameObjectAliveCount.capacity();
+         ++index) {
         m_GameObjectAliveCountVector[index - pushIndex2] = m_GameObjectAliveCount[index];
     }
 #endif
 }
-void InfoScreen::doDraw() const
+void jt::InfoScreen::doDraw() const
 {
     if (!m_showInfo) {
         return;
@@ -78,4 +78,3 @@ void InfoScreen::doDraw() const
     }
     ImGui::End();
 }
-} // namespace jt

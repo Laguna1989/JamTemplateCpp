@@ -5,12 +5,10 @@
 #include <memory>
 #include <vector>
 
-namespace jt {
-
 namespace {
 
-std::shared_ptr<jt::Sprite> getCurrentSprite(
-    Animation::AnimationMapType const& frames, std::string const& animName, size_t const animIndex)
+std::shared_ptr<jt::Sprite> getCurrentSprite(jt::Animation::AnimationMapType const& frames,
+    std::string const& animName, size_t const animIndex)
 {
     auto const cit = frames.find(animName);
     if (cit == frames.cend()) {
@@ -22,7 +20,7 @@ std::shared_ptr<jt::Sprite> getCurrentSprite(
 
 } // namespace
 
-void Animation::add(std::string const& fileName, std::string const& animName,
+void jt::Animation::add(std::string const& fileName, std::string const& animName,
     jt::Vector2u const& imageSize, std::vector<unsigned int> const& frameIndices,
     float frameTimeInSeconds, TextureManagerInterface& textureManager)
 {
@@ -50,12 +48,12 @@ void Animation::add(std::string const& fileName, std::string const& animName,
     }
 }
 
-bool Animation::hasAnimation(std::string const& animationName) const
+bool jt::Animation::hasAnimation(std::string const& animationName) const
 {
     return (m_frames.count(animationName) != 0);
 }
 
-void Animation::play(std::string const& animationName, size_t startFrameIndex, bool restart)
+void jt::Animation::play(std::string const& animationName, size_t startFrameIndex, bool restart)
 {
     if (m_frames.count(animationName) == 0) {
         throw std::invalid_argument { "anim name not part of animation: " + animationName };
@@ -68,7 +66,7 @@ void Animation::play(std::string const& animationName, size_t startFrameIndex, b
     }
 }
 
-void Animation::setColor(jt::Color const& col)
+void jt::Animation::setColor(jt::Color const& col)
 {
     for (auto& kvp : m_frames) {
         for (auto& spr : kvp.second) {
@@ -77,24 +75,24 @@ void Animation::setColor(jt::Color const& col)
     }
 }
 
-jt::Color Animation::getColor() const
+jt::Color jt::Animation::getColor() const
 {
     return getCurrentSprite(m_frames, m_currentAnimName, m_currentIdx)->getColor();
 }
 
-void Animation::setPosition(jt::Vector2f const& pos) { m_position = pos; }
-jt::Vector2f Animation::getPosition() const { return m_position; }
+void jt::Animation::setPosition(jt::Vector2f const& pos) { m_position = pos; }
+jt::Vector2f jt::Animation::getPosition() const { return m_position; }
 
-jt::Rectf Animation::getGlobalBounds() const
+jt::Rectf jt::Animation::getGlobalBounds() const
 {
     return getCurrentSprite(m_frames, m_currentAnimName, m_currentIdx)->getGlobalBounds();
 }
-jt::Rectf Animation::getLocalBounds() const
+jt::Rectf jt::Animation::getLocalBounds() const
 {
     return getCurrentSprite(m_frames, m_currentAnimName, m_currentIdx)->getLocalBounds();
 }
 
-void Animation::setScale(jt::Vector2f const& scale)
+void jt::Animation::setScale(jt::Vector2f const& scale)
 {
     for (auto& kvp : m_frames) {
         for (auto& spr : kvp.second) {
@@ -102,12 +100,12 @@ void Animation::setScale(jt::Vector2f const& scale)
         }
     }
 }
-jt::Vector2f Animation::getScale() const
+jt::Vector2f jt::Animation::getScale() const
 {
     return getCurrentSprite(m_frames, m_currentAnimName, m_currentIdx)->getScale();
 }
 
-void Animation::setOrigin(jt::Vector2f const& origin)
+void jt::Animation::setOrigin(jt::Vector2f const& origin)
 {
     for (auto& kvp : m_frames) {
         for (auto const& sptr : kvp.second) {
@@ -115,12 +113,12 @@ void Animation::setOrigin(jt::Vector2f const& origin)
         }
     }
 }
-jt::Vector2f Animation::getOrigin() const
+jt::Vector2f jt::Animation::getOrigin() const
 {
     return getCurrentSprite(m_frames, m_currentAnimName, m_currentIdx)->getOrigin();
 }
 
-void Animation::setShadowActive(bool active)
+void jt::Animation::setShadowActive(bool active)
 {
     DrawableImpl::setShadowActive(active);
     for (auto& kvp : m_frames) {
@@ -130,9 +128,9 @@ void Animation::setShadowActive(bool active)
     }
 }
 
-void Animation::doDrawShadow(std::shared_ptr<jt::RenderTarget> const /*sptr*/) const { }
+void jt::Animation::doDrawShadow(std::shared_ptr<jt::RenderTarget> const /*sptr*/) const { }
 
-void Animation::doDraw(std::shared_ptr<jt::RenderTarget> const sptr) const
+void jt::Animation::doDraw(std::shared_ptr<jt::RenderTarget> const sptr) const
 {
     if (m_frames.count(m_currentAnimName) == 0) {
         std::cout << "Warning: Drawing Animation with invalid animName: '" + m_currentAnimName
@@ -143,9 +141,9 @@ void Animation::doDraw(std::shared_ptr<jt::RenderTarget> const sptr) const
     m_frames.at(m_currentAnimName).at(m_currentIdx)->draw(sptr);
 }
 
-void Animation::doDrawFlash(std::shared_ptr<jt::RenderTarget> const /*sptr*/) const { }
+void jt::Animation::doDrawFlash(std::shared_ptr<jt::RenderTarget> const /*sptr*/) const { }
 
-void Animation::doFlashImpl(float t, jt::Color col)
+void jt::Animation::doFlashImpl(float t, jt::Color col)
 {
     for (auto& kvp : m_frames) {
         for (auto& spr : kvp.second) {
@@ -154,9 +152,10 @@ void Animation::doFlashImpl(float t, jt::Color col)
     }
 }
 
-void Animation::doUpdate(float elapsed)
+void jt::Animation::doUpdate(float elapsed)
 {
     // check if valid
+    // TODO optimization idea: do check only on play and set a bool that can be checked here.
     if (m_frames.count(m_currentAnimName) == 0) {
         std::cout << "Warning: Update Animation with invalid animName: '" + m_currentAnimName
                 + "'\n";
@@ -177,6 +176,8 @@ void Animation::doUpdate(float elapsed)
         }
     }
     // set position
+    // TODO optimization: Do not set the position of all frames for all animations, but store a
+    // current animation and only set that position
     for (auto& kvp : m_frames) {
         for (auto& spr : kvp.second) {
             spr->setPosition(m_position + getShakeOffset() + getOffset());
@@ -186,7 +187,7 @@ void Animation::doUpdate(float elapsed)
     }
 }
 
-void Animation::doRotate(float rot)
+void jt::Animation::doRotate(float rot)
 {
     for (auto& kvp : m_frames) {
         for (auto& spr : kvp.second) {
@@ -194,19 +195,20 @@ void Animation::doRotate(float rot)
         }
     }
 }
-float Animation::getCurrentAnimationSingleFrameTime() const { return m_time.at(m_currentAnimName); }
-float Animation::getCurrentAnimTotalTime() const
+float jt::Animation::getCurrentAnimationSingleFrameTime() const
+{
+    return m_time.at(m_currentAnimName);
+}
+float jt::Animation::getCurrentAnimTotalTime() const
 {
     return getCurrentAnimationSingleFrameTime() * getNumberOfFramesInCurrentAnimation();
 }
-std::size_t Animation::getNumberOfFramesInCurrentAnimation() const
+std::size_t jt::Animation::getNumberOfFramesInCurrentAnimation() const
 {
     return m_frames.at(m_currentAnimName).size();
 }
-std::string Animation::getCurrentAnimationName() const { return m_currentAnimName; }
+std::string jt::Animation::getCurrentAnimationName() const { return m_currentAnimName; }
 
-bool Animation::getIsLooping() const { return m_isLooping; }
-void Animation::setLooping(bool isLooping) { m_isLooping = isLooping; }
-std::size_t Animation::getCurrentAnimationFrameIndex() const { return m_currentIdx; }
-
-} // namespace jt
+bool jt::Animation::getIsLooping() const { return m_isLooping; }
+void jt::Animation::setLooping(bool isLooping) { m_isLooping = isLooping; }
+std::size_t jt::Animation::getCurrentAnimationFrameIndex() const { return m_currentIdx; }

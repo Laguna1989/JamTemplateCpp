@@ -1,13 +1,11 @@
 #include "tilemap_collisions.hpp"
 #include <algorithm>
 
-namespace jt {
-
 namespace {
 int getEntry(std::vector<int> const& vec, int x, int y, int width)
 {
     auto idx = x + y * width;
-    if (idx >= vec.size()) {
+    if (static_cast<unsigned>(idx) >= vec.size()) {
         return false;
     }
     return vec[idx];
@@ -18,13 +16,14 @@ void setEntry(std::vector<int>& vec, int x, int y, int width, int value)
     auto idx = x + y * width;
     vec[idx] = value;
 }
+
 } // namespace
 
-void TilemapCollisions::add(jt::Rectf const& r) { m_rects.push_back(r); }
+void jt::TilemapCollisions::add(jt::Rectf const& r) { m_rects.push_back(r); }
 
-std::vector<jt::Rectf> const& TilemapCollisions::getRects() const { return m_rects; }
+std::vector<jt::Rectf> const& jt::TilemapCollisions::getRects() const { return m_rects; }
 
-void TilemapCollisions::refineColliders(float size)
+void jt::TilemapCollisions::refineColliders(float size)
 {
     if (m_rects.empty()) {
         return;
@@ -109,7 +108,7 @@ void TilemapCollisions::refineColliders(float size)
     m_rects = rects;
 }
 
-bool TilemapCollisions::refineCollidersOneStep()
+bool jt::TilemapCollisions::refineCollidersOneStep()
 {
     std::vector<jt::Rectf> rects;
     // Note if this becomes a performance bottleneck, make treated a set instead of a vector.
@@ -159,5 +158,3 @@ bool TilemapCollisions::refineCollidersOneStep()
     m_rects = rects;
     return retval;
 }
-
-} // namespace jt

@@ -5,8 +5,7 @@
 #include "tweens/tween_base.hpp"
 #include <algorithm>
 
-namespace jt {
-GameState ::~GameState()
+jt::GameState::~GameState()
 {
     m_tweens.clear();
     m_tweensToAdd.clear();
@@ -15,10 +14,10 @@ GameState ::~GameState()
     m_objects.clear();
 }
 
-void GameState::start() { m_started = true; }
-bool GameState::hasBeenInitialized() const { return m_started; }
+void jt::GameState::start() { m_started = true; }
+bool jt::GameState::hasBeenInitialized() const { return m_started; }
 
-void GameState::add(GameObject::Sptr gameObject)
+void jt::GameState::add(std::shared_ptr<jt::GameObject> gameObject)
 {
     gameObject->setGameInstance(getGame());
     gameObject->create();
@@ -29,15 +28,15 @@ void GameState::add(GameObject::Sptr gameObject)
     }
 }
 
-void GameState::add(Tween::Sptr tb) { m_tweensToAdd.push_back(tb); }
+void jt::GameState::add(Tween::Sptr tb) { m_tweensToAdd.push_back(tb); }
 
-size_t GameState::getNumberOfObjects() const { return m_objects.size(); }
+size_t jt::GameState::getNumberOfObjects() const { return m_objects.size(); }
 
-void GameState::doCreate() { internalCreate(); }
-void GameState::doUpdate(float const elapsed) { internalUpdate(elapsed); }
-void GameState::doDraw() const { internalDraw(); };
+void jt::GameState::doCreate() { internalCreate(); }
+void jt::GameState::doUpdate(float const elapsed) { internalUpdate(elapsed); }
+void jt::GameState::doDraw() const { internalDraw(); };
 
-void GameState::internalCreate()
+void jt::GameState::internalCreate()
 {
     getGame()->getLogger().debug("create GameState: " + getName(), { "jt" });
     m_tweens.clear();
@@ -48,7 +47,7 @@ void GameState::internalCreate()
     start();
 }
 
-void GameState::internalUpdate(float elapsed)
+void jt::GameState::internalUpdate(float elapsed)
 {
     if (m_doAutoUpdateObjects) {
         updateObjects(elapsed);
@@ -59,7 +58,7 @@ void GameState::internalUpdate(float elapsed)
     }
 }
 
-void GameState::internalDraw() const
+void jt::GameState::internalDraw() const
 {
     if (m_doAutoDraw) {
         drawObjects();
@@ -67,7 +66,7 @@ void GameState::internalDraw() const
     doInternalDraw();
 }
 
-void GameState::updateObjects(float elapsed)
+void jt::GameState::updateObjects(float elapsed)
 {
     basicUpdateObjects(elapsed);
 
@@ -76,13 +75,13 @@ void GameState::updateObjects(float elapsed)
     }
 }
 
-void GameState::basicUpdateObjects(float /*elapsed*/)
+void jt::GameState::basicUpdateObjects(float /*elapsed*/)
 {
     cleanUpObjects();
     addNewObjects();
 }
 
-void GameState::updateTweens(float elapsed)
+void jt::GameState::updateTweens(float elapsed)
 {
     if (!m_started) {
         return;
@@ -109,24 +108,24 @@ void GameState::updateTweens(float elapsed)
     }
 }
 
-void GameState::drawObjects() const
+void jt::GameState::drawObjects() const
 {
     for (const auto& go : m_objects) {
         go->draw();
     }
 }
 
-void GameState::addNewObjects()
+void jt::GameState::addNewObjects()
 {
     while (!m_objectsToAdd.empty()) {
         m_objects.emplace_back(std::move(m_objectsToAdd.back()));
         m_objectsToAdd.pop_back();
     }
 }
-void GameState::cleanUpObjects()
+void jt::GameState::cleanUpObjects()
 {
     m_objects.erase(std::remove_if(m_objects.begin(), m_objects.end(),
-                        [](GameObject::Sptr go) {
+                        [](auto go) {
                             bool const isDead = !go->isAlive();
                             if (isDead) {
                                 go->destroy();
@@ -136,19 +135,17 @@ void GameState::cleanUpObjects()
         m_objects.end());
 }
 
-void GameState::setAutoUpdateObjects(bool performAutoUpdate)
+void jt::GameState::setAutoUpdateObjects(bool performAutoUpdate)
 {
     m_doAutoUpdateObjects = performAutoUpdate;
 }
-bool GameState::getAutoUpdateObjects() const { return m_doAutoUpdateObjects; }
+bool jt::GameState::getAutoUpdateObjects() const { return m_doAutoUpdateObjects; }
 
-void GameState::setAutoUpdateTweens(bool performAutoUpdate)
+void jt::GameState::setAutoUpdateTweens(bool performAutoUpdate)
 {
     m_doAutoUpdateTweens = performAutoUpdate;
 }
-bool GameState::getAutoUpdateTweens() const { return m_doAutoUpdateTweens; }
+bool jt::GameState::getAutoUpdateTweens() const { return m_doAutoUpdateTweens; }
 
-void GameState::setAutoDraw(bool performAudoDraw) { m_doAutoDraw = performAudoDraw; }
-bool GameState::getAutoDraw() const { return m_doAutoDraw; }
-
-} // namespace jt
+void jt::GameState::setAutoDraw(bool performAudoDraw) { m_doAutoDraw = performAudoDraw; }
+bool jt::GameState::getAutoDraw() const { return m_doAutoDraw; }

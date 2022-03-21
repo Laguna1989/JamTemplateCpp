@@ -5,9 +5,7 @@
 #include <memory>
 #include <stdexcept>
 
-namespace jt {
-
-void GameObject::create()
+void jt::GameObject::create()
 {
     try {
         auto const g = getGame();
@@ -18,18 +16,18 @@ void GameObject::create()
     doCreate();
 }
 
-void GameObject::update(float const elapsed)
+void jt::GameObject::update(float const elapsed)
 {
     m_age += elapsed;
     doUpdate(elapsed);
 }
 
-void GameObject::draw() const { doDraw(); };
+void jt::GameObject::draw() const { doDraw(); };
 
-float GameObject::getAge() const { return m_age; }
-void GameObject::setAge(float newAgeInSeconds) { m_age = newAgeInSeconds; }
+float jt::GameObject::getAge() const { return m_age; }
+void jt::GameObject::setAge(float newAgeInSeconds) { m_age = newAgeInSeconds; }
 
-void GameObject::setGameInstance(std::weak_ptr<GameInterface> gameInstance)
+void jt::GameObject::setGameInstance(std::weak_ptr<jt::GameInterface> gameInstance)
 {
     if (!jt::SystemHelper::is_uninitialized_weak_ptr(m_game)) {
         throw std::logic_error {
@@ -39,44 +37,42 @@ void GameObject::setGameInstance(std::weak_ptr<GameInterface> gameInstance)
     m_game = std::move(gameInstance);
 }
 
-std::shared_ptr<GameInterface> GameObject::getGame()
+std::shared_ptr<jt::GameInterface> jt::GameObject::getGame()
 {
     if (m_game.expired()) {
-        throw std::logic_error { "ERROR: Cannot GameObject::getGame():  m_game expired!" };
+        throw std::logic_error { "ERROR: Cannot jt::GameObject::getGame():  m_game expired!" };
     }
     return m_game.lock();
 }
 
-std::shared_ptr<GameInterface> GameObject::getGame() const
+std::shared_ptr<jt::GameInterface> jt::GameObject::getGame() const
 {
     if (m_game.expired()) {
-        throw std::logic_error { "ERROR: Cannot GameObject::getGame():  m_game expired!" };
+        throw std::logic_error { "ERROR: Cannot jt::GameObject::getGame():  m_game expired!" };
     }
     return m_game.lock();
 }
 
-void GameObject::kill()
+void jt::GameObject::kill()
 {
     m_alive = false;
     doKill();
 }
 
-bool GameObject::isAlive() const { return m_alive; }
+bool jt::GameObject::isAlive() const { return m_alive; }
 
-void GameObject::destroy() { doDestroy(); }
+void jt::GameObject::destroy() { doDestroy(); }
 
-void GameObject::doUpdate(float const /*elapsed*/) {};
-void GameObject::doDraw() const {};
-void GameObject::doCreate() {};
-void GameObject::doKill() {};
-void GameObject::doDestroy() {};
+void jt::GameObject::doUpdate(float const /*elapsed*/) {};
+void jt::GameObject::doDraw() const {};
+void jt::GameObject::doCreate() {};
+void jt::GameObject::doKill() {};
+void jt::GameObject::doDestroy() {};
 
-void GameObject::storeActionCommand(std::shared_ptr<void> commandCallback)
+void jt::GameObject::storeActionCommand(std::shared_ptr<void> commandCallback)
 {
     m_storedActionCommands.emplace_back(std::move(commandCallback));
 }
-std::string GameObject::getName() const { return ""; }
-std::size_t GameObject::getNumberOfAliveGameObjects() const { return aliveObjects(); }
-std::size_t GameObject::getNumberOfCreatedGameObjects() const { return createdObjects(); }
-
-} // namespace jt
+std::string jt::GameObject::getName() const { return ""; }
+std::size_t jt::GameObject::getNumberOfAliveGameObjects() const { return aliveObjects(); }
+std::size_t jt::GameObject::getNumberOfCreatedGameObjects() const { return createdObjects(); }

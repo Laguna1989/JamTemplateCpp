@@ -2,22 +2,21 @@
 #include <ctime>
 #include <stdexcept>
 
-namespace jt {
-std::default_random_engine Random::m_engine;
+std::default_random_engine jt::Random::m_engine;
 
-int Random::getInt(int min, int max)
+int jt::Random::getInt(int min, int max)
 {
     std::uniform_int_distribution<int> dist(min, max);
     return dist(m_engine);
 }
 
-float Random::getFloat(float min, float max)
+float jt::Random::getFloat(float min, float max)
 {
     std::uniform_real_distribution<float> dist(min, max);
     return dist(m_engine);
 }
 
-float Random::getFloatGauss(float mu, float sigma)
+float jt::Random::getFloatGauss(float mu, float sigma)
 {
     if (sigma <= 0) {
         throw std::invalid_argument { "sigma must be than larger zero for gauss distribution" };
@@ -26,9 +25,9 @@ float Random::getFloatGauss(float mu, float sigma)
     return dist(m_engine);
 }
 
-bool Random::getChance(float c) { return (getFloat(0.0f, 1.0f) <= c); }
+bool jt::Random::getChance(float c) { return (getFloat(0.0f, 1.0f) <= c); }
 
-jt::Color Random::getRandomColor()
+jt::Color jt::Random::getRandomColor()
 {
     auto const r = static_cast<std::uint8_t>(getInt(0, 255));
     auto const g = static_cast<std::uint8_t>(getInt(0, 255));
@@ -36,21 +35,20 @@ jt::Color Random::getRandomColor()
     return jt::Color { r, g, b };
 }
 
-jt::Vector2f Random::getRandomPointIn(jt::Rectf rect)
+jt::Vector2f jt::Random::getRandomPointIn(jt::Rectf rect)
 {
     auto const x = getFloat(rect.left, rect.left + rect.width);
     auto const y = getFloat(rect.top, rect.top + rect.height);
     return jt::Vector2f { x, y };
 }
 
-void Random::setSeed(unsigned int s) { m_engine.seed(s); }
+void jt::Random::setSeed(unsigned int s) { m_engine.seed(s); }
 
-void Random::useTimeAsRandomSeed() { setSeed(static_cast<unsigned int>(time(nullptr))); }
+void jt::Random::useTimeAsRandomSeed() { setSeed(static_cast<unsigned int>(time(nullptr))); }
 
-jt::Color Random::getRandomColorHSV(
+jt::Color jt::Random::getRandomColorHSV(
     float hmin, float hmax, float smin, float smax, float vmin, float vmax)
 {
     return jt::MakeColor::FromHSV(jt::Random::getFloat(hmin, hmax),
         jt::Random::getFloat(smin, smax), jt::Random::getFloat(vmin, vmax));
 }
-} // namespace jt

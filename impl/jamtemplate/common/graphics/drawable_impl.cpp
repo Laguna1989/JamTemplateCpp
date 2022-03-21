@@ -1,11 +1,9 @@
 ﻿#include "drawable_impl.hpp"
 #include <iostream>
 
-namespace jt {
+jt::Vector2f jt::DrawableImpl::m_CamOffset { 0.0f, 0.0f };
 
-jt::Vector2f DrawableImpl::m_CamOffset { 0.0f, 0.0f };
-
-void DrawableImpl::draw(std::shared_ptr<jt::RenderTarget> sptr) const
+void jt::DrawableImpl::draw(std::shared_ptr<jt::RenderTarget> sptr) const
 {
     if (!m_hasBeenUpdated) {
         std::cout << "WARNING: Calling DrawableImpl::draw() without previous call to "
@@ -19,14 +17,14 @@ void DrawableImpl::draw(std::shared_ptr<jt::RenderTarget> sptr) const
     }
 }
 
-void DrawableImpl::flash(float t, jt::Color col) { doFlash(t, col); }
+void jt::DrawableImpl::flash(float t, jt::Color col) { doFlash(t, col); }
 
-void DrawableImpl::shake(float t, float strength, float shakeInterval)
+void jt::DrawableImpl::shake(float t, float strength, float shakeInterval)
 {
     doShake(t, strength, shakeInterval);
 }
 
-void DrawableImpl::update(float elapsed)
+void jt::DrawableImpl::update(float elapsed)
 {
     updateShake(elapsed);
     updateFlash(elapsed);
@@ -34,49 +32,49 @@ void DrawableImpl::update(float elapsed)
     m_hasBeenUpdated = true;
 }
 
-jt::Vector2f DrawableImpl::getOffset() const { return m_offset; }
-void DrawableImpl::setOffset(jt::Vector2f const offset) { m_offset = offset; }
+jt::Vector2f jt::DrawableImpl::getOffset() const { return m_offset; }
+void jt::DrawableImpl::setOffset(jt::Vector2f const offset) { m_offset = offset; }
 
-void DrawableImpl::setRotation(float rot) { doSetRotation(rot); }
-float DrawableImpl::getRotation() const { return doGetRotation(); }
+void jt::DrawableImpl::setRotation(float rot) { doSetRotation(rot); }
+float jt::DrawableImpl::getRotation() const { return doGetRotation(); }
 
-void DrawableImpl::setShadowActive(bool active) { doSetShadowActive(active); }
+void jt::DrawableImpl::setShadowActive(bool active) { doSetShadowActive(active); }
 
-bool DrawableImpl::getShadowActive() const { return doGetShadowActive(); }
-jt::Color DrawableImpl::getShadowColor() const { return doGetShadowColor(); }
-jt::Vector2f DrawableImpl::getShadowOffset() const { return doGetShadowOffset(); }
+bool jt::DrawableImpl::getShadowActive() const { return doGetShadowActive(); }
+jt::Color jt::DrawableImpl::getShadowColor() const { return doGetShadowColor(); }
+jt::Vector2f jt::DrawableImpl::getShadowOffset() const { return doGetShadowOffset(); }
 
-void DrawableImpl::setIgnoreCamMovement(bool ignore) { m_ignoreCamMovement = ignore; }
+void jt::DrawableImpl::setIgnoreCamMovement(bool ignore) { m_ignoreCamMovement = ignore; }
 
-void DrawableImpl::setShadow(jt::Color const& col, jt::Vector2f const& offset)
+void jt::DrawableImpl::setShadow(jt::Color const& col, jt::Vector2f const& offset)
 {
     doSetShadow(col, offset);
 }
 
-jt::Vector2f DrawableImpl::getShakeOffset() const { return doGetShakeOffset(); }
+jt::Vector2f jt::DrawableImpl::getShakeOffset() const { return doGetShakeOffset(); }
 
-jt::Vector2f DrawableImpl::getCamOffset() const
+jt::Vector2f jt::DrawableImpl::getCamOffset() const
 {
 #if USE_SFML
-    return (m_ignoreCamMovement ? -1.0f * DrawableImpl::getStaticCamOffset()
+    return (m_ignoreCamMovement ? -1.0f * jt::DrawableImpl::getStaticCamOffset()
                                 : jt::Vector2f { 0.0f, 0.0f });
 #else
     return (m_ignoreCamMovement ? jt::Vector2f { 0.0f, 0.0f }
-                                : 1.0 * DrawableImpl::getStaticCamOffset());
+                                : 1.0 * jt::DrawableImpl::getStaticCamOffset());
 #endif
 }
 
-bool DrawableImpl::getIgnoreCamMovement() const { return m_ignoreCamMovement; }
+bool jt::DrawableImpl::getIgnoreCamMovement() const { return m_ignoreCamMovement; }
 
-void DrawableImpl::setCamOffset(const jt::Vector2f& v) { m_CamOffset = v; }
-jt::Vector2f DrawableImpl::getStaticCamOffset() { return m_CamOffset; }
+void jt::DrawableImpl::setCamOffset(const jt::Vector2f& v) { m_CamOffset = v; }
+jt::Vector2f jt::DrawableImpl::getStaticCamOffset() { return m_CamOffset; }
 
-void DrawableImpl::setFlashColor(Color const& col) { doSetFlashColor(col); }
-Color DrawableImpl::getFlashColor() const { return doGetFlashColor(); }
+void jt::DrawableImpl::setFlashColor(jt::Color const& col) { doSetFlashColor(col); }
+jt::Color jt::DrawableImpl::getFlashColor() const { return doGetFlashColor(); }
 
-void DrawableImpl::setScreenSizeHint(Vector2f const& hint) { m_screenSizeHint = hint; }
+void jt::DrawableImpl::setScreenSizeHint(jt::Vector2f const& hint) { m_screenSizeHint = hint; }
 
-bool DrawableImpl::isVisible() const
+bool jt::DrawableImpl::isVisible() const
 {
     if (m_screenSizeHint.x == 0 && m_screenSizeHint.y == 0) {
         return true;
@@ -97,5 +95,3 @@ bool DrawableImpl::isVisible() const
     }
     return true;
 }
-
-} // namespace jt

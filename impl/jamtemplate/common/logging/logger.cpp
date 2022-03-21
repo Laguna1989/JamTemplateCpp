@@ -3,56 +3,54 @@
 #include <sstream>
 #include <stdexcept>
 
-namespace jt {
-
-void Logger::action(std::string const& string)
+void jt::Logger::action(std::string const& string)
 {
     addLogEntry(LogEntry { string, "", LogLevel::LogLevelAction, {} });
 }
 
-void Logger::fatal(std::string const& string, std::vector<std::string> tags)
+void jt::Logger::fatal(std::string const& string, std::vector<std::string> tags)
 {
     if (m_logLevel >= LogLevel::LogLevelFatal) {
         addLogEntry(LogEntry { string, "", LogLevel::LogLevelFatal, tags });
     }
 }
 
-void Logger::error(std::string const& string, std::vector<std::string> tags)
+void jt::Logger::error(std::string const& string, std::vector<std::string> tags)
 {
     if (m_logLevel >= LogLevel::LogLevelError) {
         addLogEntry(LogEntry { string, "", LogLevel::LogLevelError, tags });
     }
 }
 
-void Logger::warning(std::string const& string, std::vector<std::string> tags)
+void jt::Logger::warning(std::string const& string, std::vector<std::string> tags)
 {
     if (m_logLevel >= LogLevel::LogLevelWarning) {
         addLogEntry(LogEntry { string, "", LogLevel::LogLevelWarning, tags });
     }
 }
 
-void Logger::info(std::string const& string, std::vector<std::string> tags)
+void jt::Logger::info(std::string const& string, std::vector<std::string> tags)
 {
     if (m_logLevel >= LogLevel::LogLevelInfo) {
         addLogEntry(LogEntry { string, "", LogLevel::LogLevelInfo, tags });
     }
 }
 
-void Logger::debug(std::string const& string, std::vector<std::string> tags)
+void jt::Logger::debug(std::string const& string, std::vector<std::string> tags)
 {
     if (m_logLevel >= LogLevel::LogLevelDebug) {
         addLogEntry(LogEntry { string, "", LogLevel::LogLevelDebug, tags });
     }
 }
 
-void Logger::verbose(std::string const& string, std::vector<std::string> tags)
+void jt::Logger::verbose(std::string const& string, std::vector<std::string> tags)
 {
     if (m_logLevel >= LogLevel::LogLevelVerbose) {
         addLogEntry(LogEntry { string, "", LogLevel::LogLevelVerbose, tags });
     }
 }
 
-void Logger::addLogTarget(std::shared_ptr<LogTargetInterface> target)
+void jt::Logger::addLogTarget(std::shared_ptr<jt::LogTargetInterface> target)
 {
     if (target == nullptr) {
         error("cannot add nullptr log target", { "jt" });
@@ -61,7 +59,7 @@ void Logger::addLogTarget(std::shared_ptr<LogTargetInterface> target)
     m_logTargets.push_back(target);
 }
 
-void Logger::addLogEntry(LogEntry entry)
+void jt::Logger::addLogEntry(jt::LogEntry entry)
 {
     std::stringstream ss;
     auto now = std::chrono::system_clock::now();
@@ -72,8 +70,6 @@ void Logger::addLogEntry(LogEntry entry)
     }
     m_history.push_back(entry);
 }
-std::vector<jt::LogEntry> const& Logger::getHistory() { return m_history; }
-void Logger::setLogLevel(LogLevel level) { m_logLevel = level; }
-void Logger::clear() { m_history.clear(); }
-
-} // namespace jt
+std::vector<jt::LogEntry> const& jt::Logger::getHistory() { return m_history; }
+void jt::Logger::setLogLevel(LogLevel level) { m_logLevel = level; }
+void jt::Logger::clear() { m_history.clear(); }

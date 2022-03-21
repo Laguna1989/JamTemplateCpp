@@ -1,14 +1,12 @@
 #include "action_command_manager.hpp"
 #include "strutils.hpp"
 
-namespace jt {
-
-ActionCommandManager::ActionCommandManager(LoggerInterface& logger)
+jt::ActionCommandManager::ActionCommandManager(jt::LoggerInterface& logger)
     : m_logger { logger }
 {
 }
 
-void ActionCommandManager::executeCommand(std::string const& fullCommandString)
+void jt::ActionCommandManager::executeCommand(std::string const& fullCommandString)
 {
     if (fullCommandString.empty()) {
         return;
@@ -35,7 +33,7 @@ void ActionCommandManager::executeCommand(std::string const& fullCommandString)
     std::get<2> (*command_entry)(commandArguments);
 }
 
-std::vector<std::string> ActionCommandManager::getArguments(
+std::vector<std::string> jt::ActionCommandManager::getArguments(
     std::vector<std::string> const& args) const
 {
     if (args.size() <= 1) {
@@ -44,7 +42,7 @@ std::vector<std::string> ActionCommandManager::getArguments(
     return std::vector<std::string> { args.cbegin() + 1, args.cend() };
 }
 
-void ActionCommandManager::removeUnusedCommands()
+void jt::ActionCommandManager::removeUnusedCommands()
 {
     m_registeredCommands.erase(
         std::remove_if(m_registeredCommands.begin(), m_registeredCommands.end(),
@@ -59,7 +57,7 @@ void ActionCommandManager::removeUnusedCommands()
         m_registeredCommands.end());
 }
 
-std::shared_ptr<bool> ActionCommandManager::registerTemporaryCommand(
+std::shared_ptr<bool> jt::ActionCommandManager::registerTemporaryCommand(
     std::string const& commandName, ActionCommandCallbackType callback)
 {
     std::shared_ptr<bool> sharedState = std::make_shared<bool>();
@@ -70,9 +68,9 @@ std::shared_ptr<bool> ActionCommandManager::registerTemporaryCommand(
     m_logger.info("registered command '" + trimmedCommand + "'");
     return sharedState;
 }
-void ActionCommandManager::update() { removeUnusedCommands(); }
+void jt::ActionCommandManager::update() { removeUnusedCommands(); }
 
-std::vector<std::string> ActionCommandManager::getAllCommands()
+std::vector<std::string> jt::ActionCommandManager::getAllCommands()
 {
     std::vector<std::string> commands;
     for (auto& tpl : m_registeredCommands) {
@@ -81,5 +79,3 @@ std::vector<std::string> ActionCommandManager::getAllCommands()
     std::sort(commands.begin(), commands.end());
     return commands;
 }
-
-} // namespace jt

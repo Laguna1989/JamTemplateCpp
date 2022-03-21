@@ -4,16 +4,14 @@
 #include "vector_lib.hpp"
 #include <iostream>
 
-namespace jt {
-
-Text::~Text()
+jt::Text::~Text()
 {
     m_text = nullptr;
     m_flashText = nullptr;
     m_font = nullptr;
 }
 
-void Text::loadFont(std::string const& fontFileName, unsigned int characterSize,
+void jt::Text::loadFont(std::string const& fontFileName, unsigned int characterSize,
     std::weak_ptr<jt::RenderTarget> /*wptr*/)
 {
     m_font = std::make_shared<sf::Font>();
@@ -26,48 +24,48 @@ void Text::loadFont(std::string const& fontFileName, unsigned int characterSize,
     m_flashText->setCharacterSize(characterSize);
 }
 
-void Text::setText(std::string text)
+void jt::Text::setText(std::string text)
 {
     m_text->setString(text);
     m_flashText->setString(text);
 }
-std::string Text::getText() const { return m_text->getString(); }
+std::string jt::Text::getText() const { return m_text->getString(); }
 
-void Text::setOutline(float thickness, jt::Color col)
+void jt::Text::setOutline(float thickness, jt::Color col)
 {
     m_text->setOutlineThickness(thickness);
     m_text->setOutlineColor(toLib(col));
 }
 
-void Text::setPosition(jt::Vector2f const& pos) { m_position = pos; }
-jt::Vector2f Text::getPosition() const { return m_position; }
+void jt::Text::setPosition(jt::Vector2f const& pos) { m_position = pos; }
+jt::Vector2f jt::Text::getPosition() const { return m_position; }
 
-void Text::setColor(const jt::Color& col) { m_text->setFillColor(toLib(col)); }
-jt::Color Text::getColor() const { return fromLib(m_text->getFillColor()); }
+void jt::Text::setColor(const jt::Color& col) { m_text->setFillColor(toLib(col)); }
+jt::Color jt::Text::getColor() const { return fromLib(m_text->getFillColor()); }
 
-jt::Rectf Text::getGlobalBounds() const { return fromLib(m_text->getGlobalBounds()); }
-jt::Rectf Text::getLocalBounds() const { return fromLib(m_text->getLocalBounds()); }
+jt::Rectf jt::Text::getGlobalBounds() const { return fromLib(m_text->getGlobalBounds()); }
+jt::Rectf jt::Text::getLocalBounds() const { return fromLib(m_text->getLocalBounds()); }
 
-void Text::setScale(jt::Vector2f const& scale)
+void jt::Text::setScale(jt::Vector2f const& scale)
 {
     m_text->setScale(toLib(scale));
     m_flashText->setScale(toLib(scale));
 }
 
-jt::Vector2f Text::getScale() const { return fromLib(m_text->getScale()); }
+jt::Vector2f jt::Text::getScale() const { return fromLib(m_text->getScale()); }
 
-void Text::setOrigin(jt::Vector2f const& origin)
+void jt::Text::setOrigin(jt::Vector2f const& origin)
 {
     m_text->setOrigin(toLib(origin));
     m_flashText->setOrigin(toLib(origin));
 }
 
-jt::Vector2f Text::getOrigin() const { return fromLib(m_text->getOrigin()); }
+jt::Vector2f jt::Text::getOrigin() const { return fromLib(m_text->getOrigin()); }
 
-void Text::setTextAlign(Text::TextAlign ta) { m_textAlign = ta; }
-Text::TextAlign Text::getTextAlign() const { return m_textAlign; }
+void jt::Text::setTextAlign(jt::Text::TextAlign ta) { m_textAlign = ta; }
+jt::Text::TextAlign jt::Text::getTextAlign() const { return m_textAlign; }
 
-void Text::doUpdate(float /*elapsed*/)
+void jt::Text::doUpdate(float /*elapsed*/)
 {
     m_text->setFont(*m_font);
     m_flashText->setFont(*m_font);
@@ -89,7 +87,7 @@ void Text::doUpdate(float /*elapsed*/)
     m_flashText->setScale(m_text->getScale());
 }
 
-void Text::doDrawShadow(std::shared_ptr<jt::RenderTarget> const sptr) const
+void jt::Text::doDrawShadow(std::shared_ptr<jt::RenderTarget> const sptr) const
 {
     jt::Vector2f const oldPos = fromLib(m_text->getPosition());
     auto const oldCol = fromLib(m_text->getFillColor());
@@ -102,17 +100,15 @@ void Text::doDrawShadow(std::shared_ptr<jt::RenderTarget> const sptr) const
     m_text->setFillColor(toLib(oldCol));
 }
 
-void Text::doDraw(std::shared_ptr<jt::RenderTarget> const sptr) const { sptr->draw(*m_text); }
+void jt::Text::doDraw(std::shared_ptr<jt::RenderTarget> const sptr) const { sptr->draw(*m_text); }
 
-void Text::doDrawFlash(std::shared_ptr<jt::RenderTarget> const sptr) const
+void jt::Text::doDrawFlash(std::shared_ptr<jt::RenderTarget> const sptr) const
 {
     sptr->draw(*m_flashText);
 }
 
-void Text::doRotate(float rot)
+void jt::Text::doRotate(float rot)
 {
     m_text->setRotation(-rot);
     m_flashText->setRotation(-rot);
 }
-
-} // namespace jt

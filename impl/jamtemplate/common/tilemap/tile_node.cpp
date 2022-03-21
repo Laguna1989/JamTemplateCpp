@@ -1,12 +1,6 @@
 #include "tile_node.hpp"
-#include "drawable_helpers.hpp"
-#include "game_interface.hpp"
-#include "pathfinder/node.hpp"
 
-namespace jt {
-namespace tilemap {
-
-TileNode::TileNode(std::shared_ptr<jt::DrawableInterface> drawable,
+jt::tilemap::TileNode::TileNode(std::shared_ptr<jt::DrawableInterface> drawable,
     std::shared_ptr<jt::pathfinder::NodeInterface> node, bool blocked)
 {
     m_node = node;
@@ -15,20 +9,16 @@ TileNode::TileNode(std::shared_ptr<jt::DrawableInterface> drawable,
     reset();
 }
 
-std::shared_ptr<jt::pathfinder::NodeInterface> TileNode::getNode() { return m_node; }
+std::shared_ptr<jt::pathfinder::NodeInterface>& jt::tilemap::TileNode::getNode() { return m_node; }
+std::shared_ptr<jt::DrawableInterface>& jt::tilemap::TileNode::getDrawable() { return m_drawable; }
 
-void TileNode::setBlocked(bool blocked) { m_blocked = blocked; }
+void jt::tilemap::TileNode::setBlocked(bool blocked) { m_blocked = blocked; }
+bool jt::tilemap::TileNode::getBlocked() { return m_blocked; }
 
-bool TileNode::getBlocked() { return m_blocked; }
-
-void TileNode::reset()
+void jt::tilemap::TileNode::reset()
 {
     if (m_node) {
         m_node->setValue(-1);
         m_node->unvisit();
     }
 }
-
-std::shared_ptr<jt::DrawableInterface> TileNode::getDrawable() { return m_drawable; }
-} // namespace tilemap
-} // namespace jt

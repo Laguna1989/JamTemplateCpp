@@ -5,16 +5,14 @@
 #include <iostream>
 #include <string.h>
 
-namespace jt {
-
-Console::Console(jt::LoggerInterface& logger)
+jt::Console::Console(jt::LoggerInterface& logger)
     : m_logger { logger }
 {
     m_inputBufferAction.resize(500);
     m_inputBufferFilter.resize(200);
 }
 
-void Console::doUpdate(float const elapsed)
+void jt::Console::doUpdate(float const elapsed)
 {
     handleCommand();
     if (!getGame()->input().keyboard()) {
@@ -26,7 +24,7 @@ void Console::doUpdate(float const elapsed)
         m_focus = m_showConsole;
     }
 }
-void Console::handleCommand() const
+void jt::Console::handleCommand() const
 {
     if (m_lastCommand.empty()) {
         return;
@@ -35,7 +33,7 @@ void Console::handleCommand() const
     m_lastCommand = "";
 }
 
-void Console::doDraw() const
+void jt::Console::doDraw() const
 {
     if (m_showConsole) {
         ImGui::Begin("Console", &m_showConsole);
@@ -66,12 +64,12 @@ void Console::doDraw() const
     }
 }
 
-void Console::drawFilter() const
+void jt::Console::drawFilter() const
 {
     ImGui::InputText("Filter", m_inputBufferFilter.data(), m_inputBufferFilter.size());
 }
 
-void Console::storeInputInCommand() const
+void jt::Console::storeInputInCommand() const
 {
     m_focus = false;
     ImGuiInputTextFlags input_text_flags = ImGuiInputTextFlags_EnterReturnsTrue
@@ -97,7 +95,7 @@ void Console::storeInputInCommand() const
         ImGui::SetKeyboardFocusHere(-1);
     }
 }
-void Console::storeActionInCommand() const
+void jt::Console::storeActionInCommand() const
 {
     std::string str = m_inputBufferAction.data();
     strutil::trim(str);
@@ -109,9 +107,9 @@ void Console::storeActionInCommand() const
     History.push_back(m_lastCommand);
     m_logger.action(str);
 }
-void Console::clearInput() const { strcpy(m_inputBufferAction.data(), ""); }
+void jt::Console::clearInput() const { strcpy(m_inputBufferAction.data(), ""); }
 
-void Console::renderOneLogEntry(jt::LogEntry const& entry) const
+void jt::Console::renderOneLogEntry(jt::LogEntry const& entry) const
 {
     ImVec4 color { 1.0f, 1.0f, 1.0f, 1.0f };
 
@@ -164,7 +162,7 @@ void Console::renderOneLogEntry(jt::LogEntry const& entry) const
     ImGui::Text(text.c_str());
     ImGui::PopStyleColor();
 }
-int Console::inputUserCallback(ImGuiInputTextCallbackData* data)
+int jt::Console::inputUserCallback(ImGuiInputTextCallbackData* data)
 {
     switch (data->EventFlag) {
     case ImGuiInputTextFlags_CallbackHistory: {
@@ -192,5 +190,3 @@ int Console::inputUserCallback(ImGuiInputTextCallbackData* data)
     }
     return 0;
 }
-
-} // namespace jt

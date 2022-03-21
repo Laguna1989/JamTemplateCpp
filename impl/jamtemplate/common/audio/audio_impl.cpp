@@ -3,11 +3,9 @@
 #include "sound.hpp"
 #include <algorithm>
 
-namespace jt {
+jt::AudioImpl::~AudioImpl() { m_temporarySounds.clear(); }
 
-AudioImpl::~AudioImpl() { m_temporarySounds.clear(); }
-
-void AudioImpl::update()
+void jt::AudioImpl::update()
 {
     cleanUpUnusedSounds();
 
@@ -21,27 +19,27 @@ void AudioImpl::update()
         snd.second->update();
     }
 }
-void AudioImpl::cleanUpUnusedSounds()
+void jt::AudioImpl::cleanUpUnusedSounds()
 {
     m_temporarySounds.erase(std::remove_if(m_temporarySounds.begin(), m_temporarySounds.end(),
                                 [](auto wptr) { return wptr.expired(); }),
         m_temporarySounds.end());
 }
 
-void AudioImpl::addTemporarySound(std::weak_ptr<SoundInterface> snd)
+void jt::AudioImpl::addTemporarySound(std::weak_ptr<jt::SoundInterface> snd)
 {
     m_temporarySounds.push_back(snd);
 }
 
-oalpp::SoundContextInterface& AudioImpl::getContext() { return m_context; }
+oalpp::SoundContextInterface& jt::AudioImpl::getContext() { return m_context; }
 
-void AudioImpl::addPermanentSound(
-    std::string const& identifier, std::shared_ptr<SoundInterface> snd)
+void jt::AudioImpl::addPermanentSound(
+    std::string const& identifier, std::shared_ptr<jt::SoundInterface> snd)
 {
     m_permanentSounds[identifier] = snd;
 }
 
-std::shared_ptr<SoundInterface> AudioImpl::getPermanentSound(std::string const& identifier)
+std::shared_ptr<jt::SoundInterface> jt::AudioImpl::getPermanentSound(std::string const& identifier)
 {
     if (m_permanentSounds.count(identifier) == 0) {
         return nullptr;
@@ -49,14 +47,14 @@ std::shared_ptr<SoundInterface> AudioImpl::getPermanentSound(std::string const& 
     return m_permanentSounds[identifier];
 }
 
-void AudioImpl::removePermanentSound(std::string const& identifier)
+void jt::AudioImpl::removePermanentSound(std::string const& identifier)
 {
     if (m_permanentSounds.count(identifier) != 0) {
         m_permanentSounds[identifier] = nullptr;
     }
 }
 
-std::shared_ptr<SoundInterface> AudioImpl::soundPool(std::string const& baseIdentifier,
+std::shared_ptr<jt::SoundInterface> jt::AudioImpl::soundPool(std::string const& baseIdentifier,
     std::function<std::shared_ptr<SoundInterface>()> function, std::size_t count)
 {
     auto const randomNumber = jt::Random::getInt(0, count);
@@ -69,5 +67,3 @@ std::shared_ptr<SoundInterface> AudioImpl::soundPool(std::string const& baseIden
     }
     return snd;
 }
-
-} // namespace jt

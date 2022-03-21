@@ -1,8 +1,7 @@
 ﻿#include "key_codes.hpp"
 #include <cstdint>
 
-namespace jt {
-std::vector<jt::KeyCode> getAllKeys()
+std::vector<jt::KeyCode> jt::getAllKeys()
 {
     auto const maxValue = static_cast<std::uint32_t>(jt::KeyCode::KeyCount);
     std::vector<jt::KeyCode> values(maxValue, jt::KeyCode::A);
@@ -12,7 +11,7 @@ std::vector<jt::KeyCode> getAllKeys()
     return values;
 }
 
-std::vector<jt::MouseButtonCode> getAllButtons()
+std::vector<jt::MouseButtonCode> jt::getAllButtons()
 {
     auto const maxValue = static_cast<std::uint32_t>(jt::MouseButtonCode::ButtonCount);
     std::vector<jt::MouseButtonCode> values(maxValue, jt::MouseButtonCode::MBLeft);
@@ -21,5 +20,3 @@ std::vector<jt::MouseButtonCode> getAllButtons()
     }
     return values;
 }
-
-} // namespace jt

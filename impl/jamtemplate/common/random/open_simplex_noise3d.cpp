@@ -2,9 +2,7 @@
 #include <cmath>
 #include <random>
 
-namespace jt {
-
-OpenSimplexNoise3D::OpenSimplexNoise3D()
+jt::OpenSimplexNoise3D::OpenSimplexNoise3D()
     : m_stretch3d(-1.0f / 6) //(1/Math.sqrt(3+1)-1)/3;
     , m_squish3d(1.0f / 3) //(Math.sqrt(3+1)-1)/3;
     , m_norm3d(103)
@@ -87,7 +85,7 @@ OpenSimplexNoise3D::OpenSimplexNoise3D()
 {
 }
 
-OpenSimplexNoise3D::OpenSimplexNoise3D(std::int64_t seed)
+jt::OpenSimplexNoise3D::OpenSimplexNoise3D(std::int64_t seed)
     : OpenSimplexNoise3D()
 {
     m_engine.seed(static_cast<unsigned int>(seed));
@@ -110,7 +108,7 @@ OpenSimplexNoise3D::OpenSimplexNoise3D(std::int64_t seed)
     }
 }
 
-float OpenSimplexNoise3D::eval(float x, float y, float z) const
+float jt::OpenSimplexNoise3D::eval(float x, float y, float z) const
 {
     // Place input coordinates on simplectic honeycomb.
     float stretchOffset = (x + y + z) * m_stretch3d;
@@ -682,11 +680,10 @@ float OpenSimplexNoise3D::eval(float x, float y, float z) const
     return value / m_norm3d;
 }
 
-float OpenSimplexNoise3D::extrapolate(int xsb, int ysb, int zsb, float dx, float dy, float dz) const
+float jt::OpenSimplexNoise3D::extrapolate(
+    int xsb, int ysb, int zsb, float dx, float dy, float dz) const
 {
     int index = m_permGradIndex3d[(m_perm[(m_perm[xsb & 0xFF] + ysb) & 0xFF] + zsb) & 0xFF];
     return m_gradients3d[index] * dx + m_gradients3d[index + 1] * dy
         + m_gradients3d[index + 2] * dz;
 }
-
-} // namespace jt

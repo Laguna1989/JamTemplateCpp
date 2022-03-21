@@ -13,14 +13,14 @@ public:
 
     void update() override;
 
-    void addTemporarySound(std::weak_ptr<SoundInterface> snd) override;
+    void addTemporarySound(std::weak_ptr<jt::SoundInterface> snd) override;
     void addPermanentSound(
-        std::string const& identifier, std::shared_ptr<SoundInterface> snd) override;
+        std::string const& identifier, std::shared_ptr<jt::SoundInterface> snd) override;
 
-    std::shared_ptr<SoundInterface> soundPool(std::string const& baseIdentifier,
-        std::function<std::shared_ptr<SoundInterface>()> function, std::size_t count) override;
+    std::shared_ptr<jt::SoundInterface> soundPool(std::string const& baseIdentifier,
+        std::function<std::shared_ptr<jt::SoundInterface>()> function, std::size_t count) override;
 
-    std::shared_ptr<SoundInterface> getPermanentSound(std::string const& identifier) override;
+    std::shared_ptr<jt::SoundInterface> getPermanentSound(std::string const& identifier) override;
 
     void removePermanentSound(std::string const& identifier) override;
 
@@ -29,8 +29,8 @@ public:
 private:
     oalpp::SoundContext m_context;
 
-    std::vector<std::weak_ptr<SoundInterface>> m_temporarySounds {};
-    std::map<std::string, std::shared_ptr<SoundInterface>> m_permanentSounds {};
+    std::vector<std::weak_ptr<jt::SoundInterface>> m_temporarySounds {};
+    std::map<std::string, std::shared_ptr<jt::SoundInterface>> m_permanentSounds {};
 
     void cleanUpUnusedSounds();
 };

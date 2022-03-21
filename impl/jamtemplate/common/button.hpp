@@ -68,9 +68,9 @@ public:
     jt::Vector2f getPosition(void) const;
 
 private:
-    std::shared_ptr<Animation> m_background { nullptr };
+    std::shared_ptr<jt::Animation> m_background { nullptr };
     std::shared_ptr<jt::Sprite> m_disabledOverlay { nullptr };
-    std::shared_ptr<DrawableInterface> m_drawable { nullptr };
+    std::shared_ptr<jt::DrawableInterface> m_drawable { nullptr };
     std::vector<std::function<void(void)>> m_callbacks {};
     jt::Vector2f m_pos { 0.0f, 0.0f };
 

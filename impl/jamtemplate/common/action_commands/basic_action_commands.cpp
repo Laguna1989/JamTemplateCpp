@@ -2,9 +2,8 @@
 #include "game_base.hpp"
 #include "math_helper.hpp"
 
-namespace jt {
 namespace {
-void addCommandHelp(std::shared_ptr<GameBase>& game)
+void addCommandHelp(std::shared_ptr<jt::GameBase>& game)
 {
     game->storeActionCommand(game->getActionCommandManager().registerTemporaryCommand("help",
         [&mgr = game->getActionCommandManager(), &logger = game->getLogger()](auto /*args*/) {
@@ -15,13 +14,13 @@ void addCommandHelp(std::shared_ptr<GameBase>& game)
         }));
 }
 
-void addCommandClear(std::shared_ptr<GameBase>& game)
+void addCommandClear(std::shared_ptr<jt::GameBase>& game)
 {
     game->storeActionCommand(game->getActionCommandManager().registerTemporaryCommand(
         "clear", [&logger = game->getLogger()](auto /*args*/) { logger.clear(); }));
 }
 
-void addCommandsCam(std::shared_ptr<GameBase>& game)
+void addCommandsCam(std::shared_ptr<jt::GameBase>& game)
 {
     game->storeActionCommand(game->getActionCommandManager().registerTemporaryCommand(
         "cam.shake", [&cam = game->gfx().camera(), &logger = game->getLogger()](auto args) {
@@ -66,7 +65,7 @@ void addCommandsCam(std::shared_ptr<GameBase>& game)
                 float x = std::stof(args.at(0));
                 float y = std::stof(args.at(1));
 
-                cam.setCamOffset(Vector2f { x, y });
+                cam.setCamOffset(jt::Vector2f { x, y });
             }
         }));
     game->storeActionCommand(game->getActionCommandManager().registerTemporaryCommand(
@@ -77,11 +76,11 @@ void addCommandsCam(std::shared_ptr<GameBase>& game)
             }
             float x = std::stof(args.at(0));
             float y = std::stof(args.at(1));
-            cam.move(Vector2f { x, y });
+            cam.move(jt::Vector2f { x, y });
         }));
 }
 
-void addCommandTextureManager(std::shared_ptr<GameBase>& game)
+void addCommandTextureManager(std::shared_ptr<jt::GameBase>& game)
 {
     game->storeActionCommand(
         game->getActionCommandManager().registerTemporaryCommand("textureManagerInfo",
@@ -92,14 +91,14 @@ void addCommandTextureManager(std::shared_ptr<GameBase>& game)
             }));
 }
 
-void addCommandsMusicPlayer(std::shared_ptr<GameBase>& game)
+void addCommandsMusicPlayer(std::shared_ptr<jt::GameBase>& game)
 {
     // TODO
 }
 
 } // namespace
 
-void addBasicActionCommands(std::shared_ptr<GameBase>& game)
+void jt::addBasicActionCommands(std::shared_ptr<jt::GameBase>& game)
 {
     addCommandHelp(game);
     addCommandClear(game);
@@ -107,5 +106,3 @@ void addBasicActionCommands(std::shared_ptr<GameBase>& game)
     addCommandTextureManager(game);
     addCommandsMusicPlayer(game);
 }
-
-} // namespace jt

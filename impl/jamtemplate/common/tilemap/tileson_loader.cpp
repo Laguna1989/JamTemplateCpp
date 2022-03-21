@@ -3,13 +3,10 @@
 #include "drawable_helpers.hpp"
 #include "pathfinder/node.hpp"
 
-namespace jt {
-namespace tilemap {
-
 namespace {
-InfoRectProperties parseProperties(tson::PropertyCollection& props)
+jt::tilemap::InfoRectProperties parseProperties(tson::PropertyCollection& props)
 {
-    InfoRectProperties properties;
+    jt::tilemap::InfoRectProperties properties;
     for (auto pkvp : props.getProperties()) {
         std::string const name = pkvp.first;
         if (pkvp.second.getType() == tson::Type::Boolean) {
@@ -26,13 +23,13 @@ InfoRectProperties parseProperties(tson::PropertyCollection& props)
     return properties;
 }
 
-TileInfo parseSingleTile(tson::TileObject& tile)
+jt::tilemap::TileInfo parseSingleTile(tson::TileObject& tile)
 {
-    auto const pos = Conversion::vec(tile.getPosition());
-    auto const size = Conversion::vec(tile.getTile()->getTileSize());
+    auto const pos = jt::Conversion::vec(tile.getPosition());
+    auto const size = jt::Conversion::vec(tile.getTile()->getTileSize());
     auto const id = static_cast<int>(tile.getTile()->getId()) - 1;
 
-    return TileInfo { pos, size, id };
+    return jt::tilemap::TileInfo { pos, size, id };
 }
 
 std::vector<std::shared_ptr<jt::Sprite>> loadTileSetSprites(
@@ -51,8 +48,8 @@ std::vector<std::shared_ptr<jt::Sprite>> loadTileSetSprites(
         for (int j = 0; j != rows; ++j) {
             for (int i = 0; i != columns; ++i) {
                 {
-                    tileSetSprites.at(offset + i + j * columns) = std::make_shared<Sprite>(
-                        tilesetName, Recti { i * ts.x, j * ts.y, ts.x, ts.y }, textureManager);
+                    tileSetSprites.at(offset + i + j * columns) = std::make_shared<jt::Sprite>(
+                        tilesetName, jt::Recti { i * ts.x, j * ts.y, ts.x, ts.y }, textureManager);
                 }
             }
         }
@@ -61,9 +58,10 @@ std::vector<std::shared_ptr<jt::Sprite>> loadTileSetSprites(
     return tileSetSprites;
 }
 
-std::vector<TileInfo> loadTiles(std::string const& layerName, std::unique_ptr<tson::Map>& map)
+std::vector<jt::tilemap::TileInfo> loadTiles(
+    std::string const& layerName, std::unique_ptr<tson::Map>& map)
 {
-    std::vector<TileInfo> tiles;
+    std::vector<jt::tilemap::TileInfo> tiles;
     for (auto& layer : map->getLayers()) {
         // skip all non-tile layers
         if (layer.getType() != tson::LayerType::TileLayer) {
@@ -80,9 +78,10 @@ std::vector<TileInfo> loadTiles(std::string const& layerName, std::unique_ptr<ts
 
 } // namespace
 
-TilesonLoader::TilesonLoader(std::string const& fileName) { m_fileName = fileName; }
+jt::tilemap::TilesonLoader::TilesonLoader(std::string const& fileName) { m_fileName = fileName; }
 
-std::vector<InfoRect> TilesonLoader::loadObjectsFromLayer(std::string const& layerName)
+std::vector<jt::tilemap::InfoRect> jt::tilemap::TilesonLoader::loadObjectsFromLayer(
+    std::string const& layerName)
 {
     auto& map = m_tilemapManager.getMap(m_fileName);
 
@@ -103,7 +102,7 @@ std::vector<InfoRect> TilesonLoader::loadObjectsFromLayer(std::string const& lay
     return objects;
 }
 
-std::vector<std::shared_ptr<TileNode>> TilesonLoader::loadNodesFromLayer(
+std::vector<std::shared_ptr<jt::tilemap::TileNode>> jt::tilemap::TilesonLoader::loadNodesFromLayer(
     std::string const& layerName, jt::TextureManagerInterface& textureManager)
 {
     auto& map = m_tilemapManager.getMap(m_fileName);
@@ -152,8 +151,8 @@ std::vector<std::shared_ptr<TileNode>> TilesonLoader::loadNodesFromLayer(
     }
     return nodeTiles;
 }
-std::tuple<std::vector<TileInfo>, std::vector<std::shared_ptr<jt::Sprite>>>
-TilesonLoader::loadTilesFromLayer(
+std::tuple<std::vector<jt::tilemap::TileInfo>, std::vector<std::shared_ptr<jt::Sprite>>>
+jt::tilemap::TilesonLoader::loadTilesFromLayer(
     std::string const& layerName, jt::TextureManagerInterface& textureManager)
 {
     auto& map = m_tilemapManager.getMap(m_fileName);
@@ -162,7 +161,8 @@ TilesonLoader::loadTilesFromLayer(
         loadTiles(layerName, map), loadTileSetSprites(map, textureManager));
 }
 
-TilemapCollisions TilesonLoader::loadCollisionsFromLayer(std::string const& layerName)
+jt::TilemapCollisions jt::tilemap::TilesonLoader::loadCollisionsFromLayer(
+    std::string const& layerName)
 {
     TilemapCollisions collisions;
     auto& map = m_tilemapManager.getMap(m_fileName);
@@ -194,6 +194,3 @@ TilemapCollisions TilesonLoader::loadCollisionsFromLayer(std::string const& laye
 
     return collisions;
 }
-
-} // namespace tilemap
-} // namespace jt

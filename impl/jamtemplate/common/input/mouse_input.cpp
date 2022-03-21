@@ -1,9 +1,7 @@
 ﻿#include "mouse_input.hpp"
 #include "input_helper.hpp"
 
-namespace jt {
-
-MouseInput::MouseInput(MouseButtonCheckFunction checkFunction)
+jt::MouseInput::MouseInput(MouseButtonCheckFunction checkFunction)
     : m_checkFunction { std::move(checkFunction) }
 {
     auto const allButtons = jt::getAllButtons();
@@ -20,7 +18,7 @@ MouseInput::MouseInput(MouseButtonCheckFunction checkFunction)
     m_mouseWorldY = 0.0f;
 }
 
-void MouseInput::updateMousePosition(MousePosition const& mp)
+void jt::MouseInput::updateMousePosition(jt::MousePosition const& mp)
 {
     m_mouseWorldX = mp.window_x;
     m_mouseWorldY = mp.window_y;
@@ -29,28 +27,28 @@ void MouseInput::updateMousePosition(MousePosition const& mp)
     m_mouseScreenY = mp.screen_y;
 }
 
-void MouseInput::updateButtons()
+void jt::MouseInput::updateButtons()
 {
     jt::inputhelper::updateValues(m_mousePressed, m_mouseReleased, m_mouseJustPressed,
         m_mouseJustReleased, [this](auto b) { return m_checkFunction(b); });
 }
 
-jt::Vector2f MouseInput::getMousePositionWorld()
+jt::Vector2f jt::MouseInput::getMousePositionWorld()
 {
     return jt::Vector2f { m_mouseWorldX, m_mouseWorldY };
 }
 
-jt::Vector2f MouseInput::getMousePositionScreen()
+jt::Vector2f jt::MouseInput::getMousePositionScreen()
 {
     return jt::Vector2f { m_mouseScreenX, m_mouseScreenY };
 }
 
-bool MouseInput::pressed(jt::MouseButtonCode b) { return m_mousePressed[b]; }
-bool MouseInput::released(jt::MouseButtonCode b) { return m_mouseReleased[b]; }
-bool MouseInput::justPressed(jt::MouseButtonCode b) { return m_mouseJustPressed[b]; }
-bool MouseInput::justReleased(jt::MouseButtonCode b) { return m_mouseJustReleased[b]; }
+bool jt::MouseInput::pressed(jt::MouseButtonCode b) { return m_mousePressed[b]; }
+bool jt::MouseInput::released(jt::MouseButtonCode b) { return m_mouseReleased[b]; }
+bool jt::MouseInput::justPressed(jt::MouseButtonCode b) { return m_mouseJustPressed[b]; }
+bool jt::MouseInput::justReleased(jt::MouseButtonCode b) { return m_mouseJustReleased[b]; }
 
-void MouseInput::reset()
+void jt::MouseInput::reset()
 {
     for (auto& kvp : m_mouseReleased) {
         m_mousePressed[kvp.first] = false;
@@ -63,5 +61,3 @@ void MouseInput::reset()
     m_mouseWorldX = 0.0f;
     m_mouseWorldY = 0.0f;
 }
-
-} // namespace jt

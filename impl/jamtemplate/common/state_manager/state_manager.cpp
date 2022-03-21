@@ -3,17 +3,15 @@
 #include "state_manager_transition_none.hpp"
 #include <stdexcept>
 
-namespace jt {
-
-StateManager::StateManager(std::shared_ptr<GameState> initialState)
+jt::StateManager::StateManager(std::shared_ptr<jt::GameState> initialState)
     : m_state { nullptr }
     , m_nextState { initialState }
 {
 }
 
-std::shared_ptr<GameState> StateManager::getCurrentState() { return m_state; }
+std::shared_ptr<jt::GameState> jt::StateManager::getCurrentState() { return m_state; }
 
-void StateManager::switchState(std::shared_ptr<GameState> newState)
+void jt::StateManager::switchState(std::shared_ptr<jt::GameState> newState)
 {
     if (newState == nullptr) {
         throw std::invalid_argument { "cannot switch to nullptr state!" };
@@ -23,7 +21,7 @@ void StateManager::switchState(std::shared_ptr<GameState> newState)
     getTransition()->update(0.00f);
 }
 
-void StateManager::doSwitchState(std::weak_ptr<GameInterface> gameInstance)
+void jt::StateManager::doSwitchState(std::weak_ptr<jt::GameInterface> gameInstance)
 {
     std::shared_ptr<GameInterface> g = gameInstance.lock();
     if (g) {
@@ -36,7 +34,7 @@ void StateManager::doSwitchState(std::weak_ptr<GameInterface> gameInstance)
     m_nextState = nullptr;
 }
 
-void StateManager::update(std::weak_ptr<GameInterface> gameInstance, float elapsed)
+void jt::StateManager::update(std::weak_ptr<jt::GameInterface> gameInstance, float elapsed)
 {
     getTransition()->update(elapsed);
     if (m_nextState != nullptr) {
@@ -48,14 +46,15 @@ void StateManager::update(std::weak_ptr<GameInterface> gameInstance, float elaps
     getCurrentState()->update(elapsed);
 }
 
-std::shared_ptr<GameState> StateManager::getNextState() { return m_nextState; }
+std::shared_ptr<jt::GameState> jt::StateManager::getNextState() { return m_nextState; }
 
-void StateManager::setTransition(std::shared_ptr<StateManagerTransitionInterface> transition)
+void jt::StateManager::setTransition(
+    std::shared_ptr<jt::StateManagerTransitionInterface> transition)
 {
     m_transition = transition;
 }
 
-std::shared_ptr<StateManagerTransitionInterface> StateManager::getTransition()
+std::shared_ptr<jt::StateManagerTransitionInterface> jt::StateManager::getTransition()
 {
     static std::shared_ptr<StateManagerTransitionNone> defaultTransition {
         std::make_shared<StateManagerTransitionNone>()
@@ -64,12 +63,10 @@ std::shared_ptr<StateManagerTransitionInterface> StateManager::getTransition()
     return (m_transition == nullptr) ? defaultTransition : m_transition;
 }
 
-void StateManager::draw(std::shared_ptr<RenderTarget> rt)
+void jt::StateManager::draw(std::shared_ptr<jt::RenderTarget> rt)
 {
     getCurrentState()->draw();
     if (getTransition()->isInProgress()) {
         getTransition()->draw(rt);
     }
 }
-
-} // namespace jt

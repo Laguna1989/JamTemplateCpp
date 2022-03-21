@@ -1,33 +1,30 @@
 #include "input_manager_null.hpp"
 
-namespace jt {
-void MouseInputNull::updateMousePosition(MousePosition const& /*mousePosition*/) { }
-void MouseInputNull::updateButtons() { }
-jt::Vector2f MouseInputNull::getMousePositionWorld() { return jt::Vector2f(); }
-jt::Vector2f MouseInputNull::getMousePositionScreen() { return jt::Vector2f(); }
-bool MouseInputNull::pressed(jt::MouseButtonCode /*b*/) { return false; }
-bool MouseInputNull::released(jt::MouseButtonCode /*b*/) { return false; }
-bool MouseInputNull::justPressed(jt::MouseButtonCode /*b*/) { return false; }
-bool MouseInputNull::justReleased(jt::MouseButtonCode /*b*/) { return false; }
-void MouseInputNull::reset() { }
+void jt::MouseInputNull::updateMousePosition(jt::MousePosition const& /*mousePosition*/) { }
+void jt::MouseInputNull::updateButtons() { }
+jt::Vector2f jt::MouseInputNull::getMousePositionWorld() { return jt::Vector2f(); }
+jt::Vector2f jt::MouseInputNull::getMousePositionScreen() { return jt::Vector2f(); }
+bool jt::MouseInputNull::pressed(jt::MouseButtonCode /*b*/) { return false; }
+bool jt::MouseInputNull::released(jt::MouseButtonCode /*b*/) { return false; }
+bool jt::MouseInputNull::justPressed(jt::MouseButtonCode /*b*/) { return false; }
+bool jt::MouseInputNull::justReleased(jt::MouseButtonCode /*b*/) { return false; }
+void jt::MouseInputNull::reset() { }
 
-void KeyboardInputNull::updateKeys() { }
-bool KeyboardInputNull::pressed(jt::KeyCode /*k*/) { return false; }
-bool KeyboardInputNull::released(jt::KeyCode /*k*/) { return false; }
-bool KeyboardInputNull::justPressed(jt::KeyCode /*k*/) { return false; }
-bool KeyboardInputNull::justReleased(jt::KeyCode /*k*/) { return false; }
-void KeyboardInputNull::reset() { }
+void jt::KeyboardInputNull::updateKeys() { }
+bool jt::KeyboardInputNull::pressed(jt::KeyCode /*k*/) { return false; }
+bool jt::KeyboardInputNull::released(jt::KeyCode /*k*/) { return false; }
+bool jt::KeyboardInputNull::justPressed(jt::KeyCode /*k*/) { return false; }
+bool jt::KeyboardInputNull::justReleased(jt::KeyCode /*k*/) { return false; }
+void jt::KeyboardInputNull::reset() { }
 
-std::shared_ptr<MouseInputInterface> InputManagerNull::mouse()
+std::shared_ptr<jt::MouseInputInterface> jt::InputManagerNull::mouse()
 {
     return std::shared_ptr<MouseInputNull>();
 }
-std::shared_ptr<KeyboardInputInterface> InputManagerNull::keyboard()
+std::shared_ptr<jt::KeyboardInputInterface> jt::InputManagerNull::keyboard()
 {
     return std::shared_ptr<KeyboardInputNull>();
 }
 
-void InputManagerNull::update(MousePosition const&, float) { }
-void InputManagerNull::reset() { }
-
-} // namespace jt
+void jt::InputManagerNull::update(jt::MousePosition const&, float) { }
+void jt::InputManagerNull::reset() { }

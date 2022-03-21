@@ -2,15 +2,13 @@
 #include <stdexcept>
 #include <utility>
 
-namespace jt {
-
-Timer::Timer(float timeInSeconds, Timer::CallbackType cb, int r)
+jt::Timer::Timer(float timeInSeconds, jt::Timer::CallbackType cb, int r)
 {
     m_repeat = r;
     setTotalTime(timeInSeconds);
     setCallback(cb);
 }
-void Timer::doUpdate(float const elapsed)
+void jt::Timer::doUpdate(float const elapsed)
 {
     if (!isAlive()) {
         return;
@@ -18,7 +16,7 @@ void Timer::doUpdate(float const elapsed)
     updateTimer(elapsed);
 }
 
-void Timer::invokeCallback()
+void jt::Timer::invokeCallback()
 {
     m_callback();
 
@@ -28,24 +26,24 @@ void Timer::invokeCallback()
         m_repeat--;
     }
 }
-float Timer::getTotalTime() const { return m_totalTime; }
-float Timer::getCurrentTime() const { return m_currentTime; }
-float Timer::getRemainingTime() { return m_totalTime - m_currentTime; }
+float jt::Timer::getTotalTime() const { return m_totalTime; }
+float jt::Timer::getCurrentTime() const { return m_currentTime; }
+float jt::Timer::getRemainingTime() { return m_totalTime - m_currentTime; }
 
-void Timer::cancel()
+void jt::Timer::cancel()
 {
     m_currentTime = m_totalTime;
     kill();
 }
 
-void Timer::finish()
+void jt::Timer::finish()
 {
     m_currentTime = m_totalTime;
     invokeCallback();
     kill();
 }
 
-void Timer::updateTimer(float elapsed)
+void jt::Timer::updateTimer(float elapsed)
 {
     m_currentTime += elapsed;
     if (elapsed >= m_totalTime) {
@@ -64,13 +62,11 @@ void Timer::updateTimer(float elapsed)
     }
 }
 
-void Timer::setTotalTime(float totalTime) { m_totalTime = totalTime; }
-void Timer::setCallback(TimerInterface::CallbackType cb)
+void jt::Timer::setTotalTime(float totalTime) { m_totalTime = totalTime; }
+void jt::Timer::setCallback(jt::TimerInterface::CallbackType cb)
 {
     if (!cb) {
         throw std::invalid_argument("Timer callback must be valid!");
     }
     m_callback = cb;
 }
-
-} // namespace jt

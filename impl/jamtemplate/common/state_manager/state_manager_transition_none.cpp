@@ -1,11 +1,7 @@
 #include "state_manager_transition_none.hpp"
 
-namespace jt {
-
-void StateManagerTransitionNone::start() { m_triggerdStateChange = false; }
-bool StateManagerTransitionNone::isInProgress() { return false; }
-void StateManagerTransitionNone::update(float /*elapsed*/) { }
-void StateManagerTransitionNone::draw(std::shared_ptr<RenderTarget> /*rt*/) { }
-bool StateManagerTransitionNone::triggerStateChange() { return true; }
-
-} // namespace jt
+void jt::StateManagerTransitionNone::start() { m_triggerdStateChange = false; }
+bool jt::StateManagerTransitionNone::isInProgress() { return false; }
+void jt::StateManagerTransitionNone::update(float /*elapsed*/) { }
+void jt::StateManagerTransitionNone::draw(std::shared_ptr<jt::RenderTarget> /*rt*/) { }
+bool jt::StateManagerTransitionNone::triggerStateChange() { return true; }

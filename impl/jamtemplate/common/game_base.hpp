@@ -11,9 +11,9 @@ class GameBase : public GameInterface,
                  public GameObject,
                  public std::enable_shared_from_this<GameBase> {
 public:
-    GameBase(GfxInterface& gfx, InputManagerInterface& input, AudioInterface& audio,
-        StateManagerInterface& stateManager, LoggerInterface& logger,
-        ActionCommandManagerInterface& actionCommandManager);
+    GameBase(jt::GfxInterface& gfx, jt::InputManagerInterface& input, jt::AudioInterface& audio,
+        jt::StateManagerInterface& stateManager, jt::LoggerInterface& logger,
+        jt::ActionCommandManagerInterface& actionCommandManager);
 
     void runOneFrame() override;
 

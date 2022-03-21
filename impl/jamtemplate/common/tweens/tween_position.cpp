@@ -1,15 +1,13 @@
 #include "tween_position.hpp"
 #include "linterp.hpp"
 
-namespace jt {
-
-Tween::Sptr TweenPosition::create(std::weak_ptr<DrawableInterface> obj, float time,
+jt::Tween::Sptr jt::TweenPosition::create(std::weak_ptr<DrawableInterface> obj, float time,
     jt::Vector2f valueStart, jt::Vector2f valueEnd)
 {
     return std::make_shared<TweenPosition>(obj, time, valueStart, valueEnd);
 }
 
-TweenPosition::TweenPosition(std::weak_ptr<DrawableInterface> obj, float time,
+jt::TweenPosition::TweenPosition(std::weak_ptr<jt::DrawableInterface> obj, float time,
     jt::Vector2f valueStart, jt::Vector2f valueEnd)
     : Tween { obj, time }
     , m_initialValue { valueStart }
@@ -17,8 +15,8 @@ TweenPosition::TweenPosition(std::weak_ptr<DrawableInterface> obj, float time,
 {
 }
 
-void TweenPosition::doUpdateObject(
-    std::shared_ptr<DrawableInterface> const& sptr, float agePercent) const
+void jt::TweenPosition::doUpdateObject(
+    std::shared_ptr<jt::DrawableInterface> const& sptr, float agePercent) const
 {
     auto pos = sptr->getPosition();
 
@@ -29,4 +27,3 @@ void TweenPosition::doUpdateObject(
 
     sptr->setPosition(pos);
 }
-} // namespace jt
