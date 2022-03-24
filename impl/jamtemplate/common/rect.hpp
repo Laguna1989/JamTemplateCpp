@@ -1,6 +1,8 @@
 ﻿#ifndef GUARD_JAMTEMPLATE_RECT_GUARD_HPP_12345
 #define GUARD_JAMTEMPLATE_RECT_GUARD_HPP_12345
 
+#include <iosfwd>
+
 namespace jt {
 
 struct Rectf {
@@ -23,5 +25,6 @@ bool operator!=(jt::Rectf const& a, jt::Rectf const& b);
 bool operator==(jt::Recti const& a, jt::Recti const& b);
 bool operator!=(jt::Recti const& a, jt::Recti const& b);
 
+std::ostream& operator<<(std::ostream& os, const Rectf& rect);
 } // namespace jt
 #endif

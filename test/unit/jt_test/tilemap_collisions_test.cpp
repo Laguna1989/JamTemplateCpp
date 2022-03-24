@@ -9,222 +9,103 @@ TEST(TilemapCollisions, emptyVector)
     ASSERT_TRUE(collisions.getRects().empty());
 }
 
-TEST(TilemapCollisions, OneColliderStaysUntouched)
+class TilemapCollisionsRefineWithOneColliderTestFixture
+    : public ::testing::TestWithParam<jt::Rectf> {
+};
+
+TEST_P(TilemapCollisionsRefineWithOneColliderTestFixture, OneColliderStaysUntouched)
 {
     jt::TilemapCollisions collisions {};
-    collisions.add(jt::Rectf { 0, 0, 16, 16 });
-    collisions.refineColliders(16.0f);
+    jt::Rectf const expectedRefinedRect = GetParam();
+
+    collisions.add(expectedRefinedRect);
+    collisions.refineColliders(expectedRefinedRect.width);
 
     ASSERT_EQ(collisions.getRects().size(), 1);
-    ASSERT_EQ(collisions.getRects()[0].left, 0);
-    ASSERT_EQ(collisions.getRects()[0].top, 0);
+    ASSERT_EQ(collisions.getRects()[0], expectedRefinedRect);
 }
 
-TEST(TilemapCollisions, OneColliderStaysUntouchedDifferenzsize)
+INSTANTIATE_TEST_SUITE_P(TilemapCollisionsRefineWithOneColliderTest,
+    TilemapCollisionsRefineWithOneColliderTestFixture,
+    ::testing::Values(jt::Rectf { 0.0f, 0.0f, 16.0f, 16.0f },
+        jt::Rectf { 0.0f, 0.0f, 32.0f, 32.0f }, jt::Rectf { 0.0f, 0.0f, 64.0f, 64.0f },
+        jt::Rectf { 0.0f, 0.0f, 1.0f, 1.0f }, jt::Rectf { 16.0f, 16.0f, 2.0f, 2.0f }));
+
+class TilemapCollisionsRefineWithSeparateCollidersTestFixture
+    : public ::testing::TestWithParam<std::vector<jt::Rectf>> {
+};
+
+TEST_P(TilemapCollisionsRefineWithSeparateCollidersTestFixture, SeparateCollidersStayUntouched)
 {
     jt::TilemapCollisions collisions {};
-    collisions.add(jt::Rectf { 0, 0, 32, 32 });
-    collisions.refineColliders(32.0f);
-
-    ASSERT_EQ(collisions.getRects().size(), 1);
-    ASSERT_EQ(collisions.getRects()[0].left, 0);
-    ASSERT_EQ(collisions.getRects()[0].top, 0);
-}
-
-TEST(TilemapCollisions, TwoSeparateCollidersHorizontalStayUntouched)
-{
-    jt::TilemapCollisions collisions {};
-    collisions.add(jt::Rectf { 0, 0, 1, 1 });
-    collisions.add(jt::Rectf { 2, 0, 1, 1 });
-    collisions.refineColliders(1.0f);
-
-    ASSERT_EQ(collisions.getRects().size(), 2);
-    ASSERT_EQ(collisions.getRects()[0].left, 0);
-    ASSERT_EQ(collisions.getRects()[0].top, 0);
-
-    ASSERT_FLOAT_EQ(collisions.getRects()[1].left, 2);
-    ASSERT_FLOAT_EQ(collisions.getRects()[1].top, 0);
-}
-
-TEST(TilemapCollisions, TwoSeparateCollidersVerticalStayUntouched)
-{
-    jt::TilemapCollisions collisions {};
-    collisions.add(jt::Rectf { 0, 0, 1, 1 });
-    collisions.add(jt::Rectf { 0, 2, 1, 1 });
-    collisions.refineColliders(1.0f);
-
-    ASSERT_EQ(collisions.getRects().size(), 2);
-    ASSERT_EQ(collisions.getRects()[0].left, 0);
-    ASSERT_EQ(collisions.getRects()[0].top, 0);
-
-    ASSERT_FLOAT_EQ(collisions.getRects()[1].left, 0);
-    ASSERT_FLOAT_EQ(collisions.getRects()[1].top, 2);
-}
-
-TEST(TilemapCollisions, TwoSeparateCollidersDiagonalStayUntouched)
-{
-    jt::TilemapCollisions collisions {};
-    collisions.add(jt::Rectf { 0, 0, 1, 1 });
-    collisions.add(jt::Rectf { 1, 1, 1, 1 });
-    collisions.refineColliders(1.0f);
-
-    ASSERT_EQ(collisions.getRects().size(), 2);
-    ASSERT_EQ(collisions.getRects()[0].left, 0);
-    ASSERT_EQ(collisions.getRects()[0].top, 0);
-
-    ASSERT_FLOAT_EQ(collisions.getRects()[1].left, 1);
-    ASSERT_FLOAT_EQ(collisions.getRects()[1].top, 1);
-}
-
-TEST(TilemapCollisions, TwoSeparateCollidersDiagonal2StayUntouched)
-{
-    jt::TilemapCollisions collisions {};
-    collisions.add(jt::Rectf { 0, 1, 1, 1 });
-    collisions.add(jt::Rectf { 1, 0, 1, 1 });
-    collisions.refineColliders(1.0f);
-
-    ASSERT_EQ(collisions.getRects().size(), 2);
-    ASSERT_FLOAT_EQ(collisions.getRects()[0].left, 0);
-    ASSERT_FLOAT_EQ(collisions.getRects()[0].top, 1);
-
-    ASSERT_FLOAT_EQ(collisions.getRects()[1].left, 1);
-    ASSERT_FLOAT_EQ(collisions.getRects()[1].top, 0);
-}
-
-TEST(TilemapCollisions, TwoCollidersHorizontalAreMerged)
-{
-    jt::TilemapCollisions collisions {};
-    collisions.add(jt::Rectf { 0, 0, 1, 1 });
-    collisions.add(jt::Rectf { 1, 0, 1, 1 });
-    collisions.refineColliders(1.0f);
-
-    ASSERT_EQ(collisions.getRects().size(), 1);
-    ASSERT_EQ(collisions.getRects()[0].left, 0);
-    ASSERT_EQ(collisions.getRects()[0].top, 0);
-    ASSERT_EQ(collisions.getRects()[0].width, 2);
-    ASSERT_EQ(collisions.getRects()[0].height, 1);
-}
-
-TEST(TilemapCollisions, TwoCollidersVerticalAreMerged)
-{
-    jt::TilemapCollisions collisions {};
-    collisions.add(jt::Rectf { 0, 0, 1, 1 });
-    collisions.add(jt::Rectf { 0, 1, 1, 1 });
-    collisions.refineColliders(1.0f);
-
-    ASSERT_EQ(collisions.getRects().size(), 1);
-    ASSERT_EQ(collisions.getRects()[0].left, 0);
-    ASSERT_EQ(collisions.getRects()[0].top, 0);
-    ASSERT_EQ(collisions.getRects()[0].width, 1);
-    ASSERT_EQ(collisions.getRects()[0].height, 2);
-}
-
-TEST(TilemapCollisions, ThreeCollidersHorizontalAreMerged)
-{
-    jt::TilemapCollisions collisions {};
-    collisions.add(jt::Rectf { 0, 0, 1, 1 });
-    collisions.add(jt::Rectf { 1, 0, 1, 1 });
-    collisions.add(jt::Rectf { 2, 0, 1, 1 });
-    collisions.refineColliders(1.0f);
-
-    ASSERT_EQ(collisions.getRects().size(), 1);
-    ASSERT_EQ(collisions.getRects()[0].left, 0);
-    ASSERT_EQ(collisions.getRects()[0].top, 0);
-    ASSERT_EQ(collisions.getRects()[0].width, 3);
-    ASSERT_EQ(collisions.getRects()[0].height, 1);
-}
-
-TEST(TilemapCollisions, TwoAndThreeCollidersHorizontalAreNotMerged)
-{
-    jt::TilemapCollisions collisions {};
-    collisions.add(jt::Rectf { 0, 0, 1, 1 });
-    collisions.add(jt::Rectf { 1, 0, 1, 1 });
-    collisions.add(jt::Rectf { 2, 0, 1, 1 });
-
-    collisions.add(jt::Rectf { 1, 2, 1, 1 });
-    collisions.add(jt::Rectf { 2, 2, 1, 1 });
-    collisions.add(jt::Rectf { 3, 2, 1, 1 });
+    for (auto const& c : GetParam()) {
+        collisions.add(c);
+    }
 
     collisions.refineColliders(1.0f);
 
-    ASSERT_EQ(collisions.getRects().size(), 2);
-    ASSERT_EQ(collisions.getRects()[0].left, 0);
-    ASSERT_EQ(collisions.getRects()[0].top, 0);
-    ASSERT_EQ(collisions.getRects()[0].width, 3);
-    ASSERT_EQ(collisions.getRects()[0].height, 1);
+    ASSERT_EQ(collisions.getRects().size(), GetParam().size());
+    for (auto i = 0U; i != collisions.getRects().size(); ++i) {
+        auto const& rectA = collisions.getRects().at(i);
+        auto const& rectB = GetParam().at(i);
 
-    ASSERT_EQ(collisions.getRects()[1].left, 1);
-    ASSERT_EQ(collisions.getRects()[1].top, 2);
-    ASSERT_EQ(collisions.getRects()[1].width, 3);
-    ASSERT_EQ(collisions.getRects()[1].height, 1);
+        ASSERT_EQ(rectA, rectB);
+    }
 }
 
-TEST(TilemapCollisions, TwoXThreeCollidersHorizontalAreMerged)
+INSTANTIATE_TEST_SUITE_P(TilemapCollisionsRefineWithSeparateCollidersTest,
+    TilemapCollisionsRefineWithSeparateCollidersTestFixture,
+    ::testing::Values(std::vector<jt::Rectf> { jt::Rectf { 0, 0, 1, 1 }, jt::Rectf { 2, 0, 1, 1 } },
+        std::vector<jt::Rectf> { jt::Rectf { 0, 0, 1, 1 }, jt::Rectf { 0, 2, 1, 1 } },
+        std::vector<jt::Rectf> { jt::Rectf { 0, 0, 1, 1 }, jt::Rectf { 1, 1, 1, 1 } },
+        std::vector<jt::Rectf> { jt::Rectf { 0, 1, 1, 1 }, jt::Rectf { 1, 0, 1, 1 } }));
+
+class TilemapCollisionsRefineWithMergeableCollidersTestFixture
+    : public ::testing::TestWithParam<std::pair<std::vector<jt::Rectf>, std::vector<jt::Rectf>>> {
+};
+
+TEST_P(TilemapCollisionsRefineWithMergeableCollidersTestFixture, CollidersAreMerged)
 {
     jt::TilemapCollisions collisions {};
-    collisions.add(jt::Rectf { 0, 0, 1, 1 });
-    collisions.add(jt::Rectf { 1, 0, 1, 1 });
-    collisions.add(jt::Rectf { 2, 0, 1, 1 });
-
-    collisions.add(jt::Rectf { 0, 1, 1, 1 });
-    collisions.add(jt::Rectf { 1, 1, 1, 1 });
-    collisions.add(jt::Rectf { 2, 1, 1, 1 });
+    for (auto const& c : GetParam().first) {
+        collisions.add(c);
+    }
 
     collisions.refineColliders(1.0f);
 
-    ASSERT_EQ(collisions.getRects().size(), 1);
-    ASSERT_EQ(collisions.getRects()[0].left, 0);
-    ASSERT_EQ(collisions.getRects()[0].top, 0);
-    ASSERT_EQ(collisions.getRects()[0].width, 3);
-    ASSERT_EQ(collisions.getRects()[0].height, 2);
+    ASSERT_EQ(collisions.getRects().size(), GetParam().second.size());
+
+    for (auto i = 0U; i != collisions.getRects().size(); ++i) {
+        auto const& rectA = collisions.getRects().at(i);
+        auto const& rectB = GetParam().second.at(i);
+
+        ASSERT_EQ(rectA, rectB);
+    }
 }
 
-TEST(TilemapCollisions, TCollidersAreMergedCorrectly)
-{
-    jt::TilemapCollisions collisions {};
-    collisions.add(jt::Rectf { 0, 0, 1, 1 });
-    collisions.add(jt::Rectf { 1, 0, 1, 1 });
-    collisions.add(jt::Rectf { 2, 0, 1, 1 });
-    collisions.add(jt::Rectf { 1, 1, 1, 1 });
-
-    collisions.refineColliders(1.0f);
-
-    ASSERT_EQ(collisions.getRects().size(), 2);
-    ASSERT_EQ(collisions.getRects()[0].left, 0);
-    ASSERT_EQ(collisions.getRects()[0].top, 0);
-    ASSERT_EQ(collisions.getRects()[0].width, 3);
-    ASSERT_EQ(collisions.getRects()[0].height, 1);
-
-    ASSERT_EQ(collisions.getRects()[1].left, 1);
-    ASSERT_EQ(collisions.getRects()[1].top, 1);
-    ASSERT_EQ(collisions.getRects()[1].width, 1);
-    ASSERT_EQ(collisions.getRects()[1].height, 1);
-}
-
-TEST(TilemapCollisions, T90DegCollidersAreMergedCorrectly)
-{
-    jt::TilemapCollisions collisions {};
-    collisions.add(jt::Rectf { 0, 0, 1, 1 });
-    collisions.add(jt::Rectf { 0, 1, 1, 1 });
-    collisions.add(jt::Rectf { 0, 2, 1, 1 });
-
-    collisions.add(jt::Rectf { 1, 1, 1, 1 });
-
-    collisions.refineColliders(1.0f);
-
-    ASSERT_EQ(collisions.getRects().size(), 3);
-    ASSERT_EQ(collisions.getRects()[0].left, 0);
-    ASSERT_EQ(collisions.getRects()[0].top, 0);
-    ASSERT_EQ(collisions.getRects()[0].width, 1);
-    ASSERT_EQ(collisions.getRects()[0].height, 1);
-
-    ASSERT_EQ(collisions.getRects()[1].left, 0);
-    ASSERT_EQ(collisions.getRects()[1].top, 1);
-    ASSERT_EQ(collisions.getRects()[1].width, 2);
-    ASSERT_EQ(collisions.getRects()[1].height, 1);
-
-    ASSERT_EQ(collisions.getRects()[2].left, 0);
-    ASSERT_EQ(collisions.getRects()[2].top, 2);
-    ASSERT_EQ(collisions.getRects()[2].width, 1);
-    ASSERT_EQ(collisions.getRects()[2].height, 1);
-}
+INSTANTIATE_TEST_SUITE_P(TilemapCollisionsRefineWithMergeableCollidersTest,
+    TilemapCollisionsRefineWithMergeableCollidersTestFixture,
+    ::testing::Values(std::make_pair(std::vector<jt::Rectf> { jt::Rectf { 0, 0, 1, 1 },
+                                         jt::Rectf { 1, 0, 1, 1 } },
+                          std::vector<jt::Rectf> { jt::Rectf { 0, 0, 2, 1 } }),
+        std::make_pair(
+            std::vector<jt::Rectf> { jt::Rectf { 0, 0, 1, 1 }, jt::Rectf { 0, 1, 1, 1 } },
+            std::vector<jt::Rectf> { jt::Rectf { 0, 0, 1, 2 } }),
+        std::make_pair(std::vector<jt::Rectf> { jt::Rectf { 0, 0, 1, 1 }, jt::Rectf { 1, 0, 1, 1 },
+                           jt::Rectf { 2, 0, 1, 1 } },
+            std::vector<jt::Rectf> { jt::Rectf { 0, 0, 3, 1 } }),
+        std::make_pair(std::vector<jt::Rectf> { jt::Rectf { 0, 0, 1, 1 }, jt::Rectf { 1, 0, 1, 1 },
+                           jt::Rectf { 2, 0, 1, 1 }, jt::Rectf { 1, 2, 1, 1 },
+                           jt::Rectf { 2, 2, 1, 1 }, jt::Rectf { 3, 2, 1, 1 } },
+            std::vector<jt::Rectf> { jt::Rectf { 0, 0, 3, 1 }, jt::Rectf { 1, 2, 3, 1 } }),
+        std::make_pair(std::vector<jt::Rectf> { jt::Rectf { 0, 0, 1, 1 }, jt::Rectf { 1, 0, 1, 1 },
+                           jt::Rectf { 2, 0, 1, 1 }, jt::Rectf { 0, 1, 1, 1 },
+                           jt::Rectf { 1, 1, 1, 1 }, jt::Rectf { 2, 1, 1, 1 } },
+            std::vector<jt::Rectf> { jt::Rectf { 0, 0, 3, 2 } }),
+        std::make_pair(std::vector<jt::Rectf> { jt::Rectf { 0, 0, 1, 1 }, jt::Rectf { 1, 0, 1, 1 },
+                           jt::Rectf { 2, 0, 1, 1 }, jt::Rectf { 1, 1, 1, 1 } },
+            std::vector<jt::Rectf> { jt::Rectf { 0, 0, 3, 1 }, jt::Rectf { 1, 1, 1, 1 } }),
+        std::make_pair(std::vector<jt::Rectf> { jt::Rectf { 0, 0, 1, 1 }, jt::Rectf { 0, 1, 1, 1 },
+                           jt::Rectf { 0, 2, 1, 1 }, jt::Rectf { 1, 1, 1, 1 } },
+            std::vector<jt::Rectf> {
+                jt::Rectf { 0, 0, 1, 1 }, jt::Rectf { 0, 1, 2, 1 }, jt::Rectf { 0, 2, 1, 1 } })));
