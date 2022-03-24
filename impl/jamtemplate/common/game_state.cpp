@@ -101,8 +101,8 @@ void jt::GameState::updateTweens(float elapsed)
         return;
     }
     m_tweens.erase(std::remove_if(m_tweens.begin(), m_tweens.end(),
-                       [](Tween::Sptr tween) { return !(tween->isAlive()); }),
-        m_tweens.end());
+                       [](Tween::Sptr const& tween) { return !(tween->isAlive()); }),
+        m_tweens.cend());
     for (auto& tw : m_tweens) {
         tw->update(elapsed);
     }

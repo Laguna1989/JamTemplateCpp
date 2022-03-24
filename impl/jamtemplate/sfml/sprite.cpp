@@ -32,8 +32,8 @@ jt::Rectf jt::Sprite::getLocalBounds() const { return fromLib(m_sprite.getLocalB
 
 void jt::Sprite::setScale(jt::Vector2f const& scale)
 {
-    m_sprite.setScale(toLib(scale));
-    m_flashSprite.setScale(toLib(scale));
+    m_sprite.setScale(scale.x, scale.y);
+    m_flashSprite.setScale(scale.x, scale.y);
 }
 
 jt::Vector2f jt::Sprite::getScale() const { return fromLib(m_sprite.getScale()); }

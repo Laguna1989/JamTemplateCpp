@@ -129,9 +129,9 @@ void StateParticles::createParticlesGlitter()
 }
 void StateParticles::doInternalUpdate(float elapsed)
 {
-    m_particlesGlitter->Fire(toFire);
-    m_particlesFire->Fire(1);
-    m_sparkParticles->Fire(1);
+    m_particlesGlitter->fire(toFire);
+    m_particlesFire->fire(1);
+    m_sparkParticles->fire(1);
 
     if (getGame()->input().keyboard()->justPressed(jt::KeyCode::Escape)) {
         getGame()->getStateManager().switchState(std::make_shared<StateSelect>());

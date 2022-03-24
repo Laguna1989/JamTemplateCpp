@@ -352,3 +352,25 @@ TEST(CircularBufferSize, GetSizeAfterFourPuts)
 
     ASSERT_EQ(buffer.size(), 3);
 }
+
+TEST(CircularBufferTest, CanBeSorted)
+{
+    auto buffer = jt::CircularBuffer<unsigned int, 7> {};
+
+    buffer.put(10u);
+    buffer.put(9u);
+    buffer.put(8u);
+    buffer.put(1u);
+    buffer.put(2u);
+    buffer.put(3u);
+    buffer.put(4u);
+
+    std::sort(buffer.begin(), buffer.end());
+    ASSERT_EQ(buffer[0], 1u);
+    ASSERT_EQ(buffer[1], 2u);
+    ASSERT_EQ(buffer[2], 3u);
+    ASSERT_EQ(buffer[3], 4u);
+    ASSERT_EQ(buffer[4], 8u);
+    ASSERT_EQ(buffer[5], 9u);
+    ASSERT_EQ(buffer[6], 10u);
+}
