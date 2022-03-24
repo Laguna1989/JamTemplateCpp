@@ -178,11 +178,17 @@ void jt::Animation::doUpdate(float elapsed)
         }
     }
 
-    // update current sprite
-    auto const& spr = m_frames.at(m_currentAnimName).at(m_currentIdx);
-    spr->setPosition(m_position + getShakeOffset() + getOffset());
-    spr->setIgnoreCamMovement(DrawableImpl::getIgnoreCamMovement());
-    spr->update(elapsed);
+    // update values for current sprite
+    auto const& currentSprite = m_frames.at(m_currentAnimName).at(m_currentIdx);
+    currentSprite->setPosition(m_position + getShakeOffset() + getOffset());
+    currentSprite->setIgnoreCamMovement(DrawableImpl::getIgnoreCamMovement());
+
+    // update all sprites
+    for (auto& kvp : m_frames) {
+        for (auto& spr : kvp.second) {
+            spr->update(elapsed);
+        }
+    }
 }
 
 void jt::Animation::doRotate(float rot)
