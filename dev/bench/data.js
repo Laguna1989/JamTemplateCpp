@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1647893533394,
+  "lastUpdate": 1648141730855,
   "repoUrl": "https://github.com/Laguna1989/JamTemplateCpp",
   "entries": {
     "Benchmark": [
@@ -4212,6 +4212,42 @@ window.BENCHMARK_DATA = {
             "value": 3.914218955307023,
             "unit": "ms/iter",
             "extra": "iterations: 179\ncpu: 3.9136217877094963 ms\nthreads: 1"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "laguna.ws@gmail.com",
+            "name": "Laguna1989",
+            "username": "Laguna1989"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "a27b632e0cc20a5a796cb8a829821c525e2994a9",
+          "message": "Merge pull request #165 from Laguna1989/FEATURE_BetterTestsForTilemapColliderMerge\n\nRefactored tests for tilemap collider merge",
+          "timestamp": "2022-03-24T17:43:58+01:00",
+          "tree_id": "6f294e0057571c8d379fc7dd87581eb5aa5dc1d9",
+          "url": "https://github.com/Laguna1989/JamTemplateCpp/commit/a27b632e0cc20a5a796cb8a829821c525e2994a9"
+        },
+        "date": 1648141729667,
+        "tool": "googlecpp",
+        "benches": [
+          {
+            "name": "BM_StartGame",
+            "value": 0.0022721466645888367,
+            "unit": "ms/iter",
+            "extra": "iterations: 307968\ncpu: 0.002269289341749793 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GamestateWithTweeningShapes",
+            "value": 2.6874601570882595,
+            "unit": "ms/iter",
+            "extra": "iterations: 261\ncpu: 2.6872551724137925 ms\nthreads: 1"
           }
         ]
       }
