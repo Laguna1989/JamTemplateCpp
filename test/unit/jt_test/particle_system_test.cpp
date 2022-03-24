@@ -36,7 +36,7 @@ TEST(ParticleSystemTest, ResetCalledOnFire)
     jt::ParticleSystem<jt::Shape, 5> ps([]() { return std::shared_ptr<jt::Shape>(); },
         [&numberofResetCalls](auto /*s*/) { numberofResetCalls++; });
 
-    ps.Fire(4);
+    ps.fire(4);
     ASSERT_EQ(numberofResetCalls, 4);
 }
 
@@ -47,10 +47,10 @@ TEST(ParticleSystemTest, ResetCalledMultipleTimes)
     jt::ParticleSystem<jt::Shape, 5> ps([]() { return std::shared_ptr<jt::Shape>(); },
         [&numberofResetCalls](auto /*s*/) { numberofResetCalls++; });
 
-    ps.Fire(10);
-    ps.Fire(10);
-    ps.Fire(10);
-    ps.Fire(10);
+    ps.fire(10);
+    ps.fire(10);
+    ps.fire(10);
+    ps.fire(10);
     ASSERT_EQ(numberofResetCalls, 40);
 }
 
@@ -81,7 +81,7 @@ TEST(ParticleSystemTest, UpdateCallDoesNotRaiseException)
         },
         [](auto /*s*/) {});
 
-    ps.Fire(5);
+    ps.fire(5);
 
     ASSERT_NO_THROW(ps.update(1.0f));
 }
@@ -99,7 +99,7 @@ TEST(ParticleSystemTest, DrawWithGame)
         [](auto /*s*/) {});
 
     ps.setGameInstance(g);
-    ps.Fire(5);
+    ps.fire(5);
     ps.update(0.1f);
     ASSERT_NO_THROW(ps.draw());
 }

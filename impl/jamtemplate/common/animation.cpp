@@ -7,8 +7,8 @@
 
 namespace {
 
-std::shared_ptr<jt::Sprite> getCurrentSprite(jt::Animation::AnimationMapType const& frames,
-    std::string const& animName, size_t const animIndex)
+std::shared_ptr<jt::Sprite>& getCurrentSprite(
+    jt::Animation::AnimationMapType& frames, std::string const& animName, size_t const animIndex)
 {
     auto const cit = frames.find(animName);
     if (cit == frames.cend()) {
@@ -55,8 +55,10 @@ bool jt::Animation::hasAnimation(std::string const& animationName) const
 
 void jt::Animation::play(std::string const& animationName, size_t startFrameIndex, bool restart)
 {
-    if (m_frames.count(animationName) == 0) {
-        throw std::invalid_argument { "anim name not part of animation: " + animationName };
+    m_isValid = hasAnimation(animationName);
+    if (!m_isValid) {
+        std::cout << "Warning: Play Animation with invalid animName: '" + m_currentAnimName + "'\n";
+        return;
     }
 
     if (m_currentAnimName != animationName || restart) {
@@ -113,6 +115,7 @@ void jt::Animation::setOrigin(jt::Vector2f const& origin)
         }
     }
 }
+
 jt::Vector2f jt::Animation::getOrigin() const
 {
     return getCurrentSprite(m_frames, m_currentAnimName, m_currentIdx)->getOrigin();
@@ -132,8 +135,8 @@ void jt::Animation::doDrawShadow(std::shared_ptr<jt::RenderTarget> const /*sptr*
 
 void jt::Animation::doDraw(std::shared_ptr<jt::RenderTarget> const sptr) const
 {
-    if (m_frames.count(m_currentAnimName) == 0) {
-        std::cout << "Warning: Drawing Animation with invalid animName: '" + m_currentAnimName
+    if (!m_isValid) {
+        std::cerr << "Warning: Drawing Animation with invalid animName: '" + m_currentAnimName
                 + "'\n";
         return;
     }
@@ -155,8 +158,7 @@ void jt::Animation::doFlashImpl(float t, jt::Color col)
 void jt::Animation::doUpdate(float elapsed)
 {
     // check if valid
-    // TODO optimization idea: do check only on play and set a bool that can be checked here.
-    if (m_frames.count(m_currentAnimName) == 0) {
+    if (!m_isValid) {
         std::cout << "Warning: Update Animation with invalid animName: '" + m_currentAnimName
                 + "'\n";
         return;
@@ -175,16 +177,12 @@ void jt::Animation::doUpdate(float elapsed)
             }
         }
     }
-    // set position
-    // TODO optimization: Do not set the position of all frames for all animations, but store a
-    // current animation and only set that position
-    for (auto& kvp : m_frames) {
-        for (auto& spr : kvp.second) {
-            spr->setPosition(m_position + getShakeOffset() + getOffset());
-            spr->update(elapsed);
-            spr->setIgnoreCamMovement(DrawableImpl::getIgnoreCamMovement());
-        }
-    }
+
+    // update current sprite
+    auto const& spr = m_frames.at(m_currentAnimName).at(m_currentIdx);
+    spr->setPosition(m_position + getShakeOffset() + getOffset());
+    spr->setIgnoreCamMovement(DrawableImpl::getIgnoreCamMovement());
+    spr->update(elapsed);
 }
 
 void jt::Animation::doRotate(float rot)

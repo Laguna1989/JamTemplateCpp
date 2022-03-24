@@ -40,7 +40,8 @@ jt::Rectf jt::Shape::getLocalBounds() const
 void jt::Shape::setScale(jt::Vector2f const& scale)
 {
     if (m_shape) {
-        m_shape->setScale(toLib(scale));
+        m_shape->setScale(scale.x, scale.y);
+        m_flashShape->setScale(scale.x, scale.y);
     }
 }
 
@@ -55,8 +56,8 @@ jt::Vector2f jt::Shape::getScale() const
 void jt::Shape::setOrigin(jt::Vector2f const& origin)
 {
     if (m_shape) {
-        m_shape->setOrigin(toLib(origin));
-        m_flashShape->setOrigin(toLib(origin));
+        m_shape->setOrigin(origin.x, origin.y);
+        m_flashShape->setOrigin(origin.x, origin.y);
     }
 }
 jt::Vector2f jt::Shape::getOrigin() const
@@ -100,9 +101,8 @@ void jt::Shape::doUpdate(float /*elapsed*/)
 {
     if (m_shape) {
         auto const pos = getPosition() + getShakeOffset() + getOffset() + getCamOffset();
-        m_shape->setPosition(toLib(pos));
-        m_flashShape->setPosition(toLib(pos));
-        m_flashShape->setScale(m_shape->getScale());
+        m_shape->setPosition(pos.x, pos.y);
+        m_flashShape->setPosition(pos.x, pos.y);
     }
 }
 
