@@ -42,9 +42,9 @@ public:
         }
     };
 
-    /// Fire the particle system, creating num particles
+    /// fire the particle system, creating num particles
     /// \param num
-    void Fire(unsigned int num = 1)
+    void fire(unsigned int num = 1)
     {
         for (auto i = 0U; i != num; ++i) {
             m_resetCallback(m_particles[m_currentIndex]);

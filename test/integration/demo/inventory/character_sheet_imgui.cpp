@@ -39,7 +39,7 @@ void CharacterSheetImgui::doDraw() const
     }
 
     ImGui::Text("TotalArmor: %s", std::to_string(totalarmor).c_str());
-    ImGui::Text("Fire: %s", std::to_string(totalResistanceFire).c_str());
+    ImGui::Text("fire: %s", std::to_string(totalResistanceFire).c_str());
     ImGui::Text("Electric: %s", std::to_string(totalResistanceElectric).c_str());
     ImGui::End();
 }

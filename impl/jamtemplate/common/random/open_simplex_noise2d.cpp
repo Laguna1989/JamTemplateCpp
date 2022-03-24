@@ -2,10 +2,9 @@
 #include <cmath>
 
 jt::OpenSimplexNoise2D::OpenSimplexNoise2D()
-    : m_stretch2d(-0.211324865405187f) //(1/Math.sqrt(2+1)-1)/2;
-    , m_squish2d(0.366025403784439f) //(Math.sqrt(2+1)-1)/2;
-    , m_norm2d(47)
-    , m_defaultSeed(0)
+    : m_stretch2d { -0.211324865405187f } //(1/Math.sqrt(2+1)-1)/2;
+    , m_squish2d { 0.366025403784439f } //(Math.sqrt(2+1)-1)/2;
+    , m_norm2d { 47 }
     , m_perm { 0 }
     , m_gradients2d {
         5,

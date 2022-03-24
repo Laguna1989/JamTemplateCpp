@@ -97,6 +97,8 @@ private:
     mutable AnimationMapType m_frames {};
     std::map<std::string, float> m_time {};
 
+    bool m_isValid { false };
+
     // which animation is playing atm?
     std::string m_currentAnimName { "" };
     // which frame of the animation is currently displayed?
