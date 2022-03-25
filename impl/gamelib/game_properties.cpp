@@ -1,9 +1,19 @@
 ﻿#include "game_properties.hpp"
+
 jt::Palette GP::getPalette()
 {
-    return jt::Palette { { jt::Color { 5, 64, 71 }, jt::Color { 32, 142, 68 },
-        jt::Color { 133, 225, 66 }, jt::Color { 239, 255, 124 }, jt::Color { 251, 114, 48 },
-        jt::Color { 184, 39, 45 }, jt::Color { 64, 23, 58 }, jt::Color { 157, 64, 43 } } };
+    return jt::Palette::parseGPL("GIMP Palette\n"
+                                 "#Palette Name: crayon paint\n"
+                                 "#Description: \n"
+                                 "#Colors: 8\n"
+                                 "118\t161\t241\t76a1f1\n"
+                                 "47\t106\t93\t2f6a5d\n"
+                                 "105\t191\t43\t69bf2b\n"
+                                 "251\t247\t182\tfbf7b6\n"
+                                 "233\t142\t51\te98e33\n"
+                                 "160\t48\t48\ta03030\n"
+                                 "21\t18\t18\t151212\n"
+                                 "158\t150\t155\t9e969b");
 }
 
 int GP::PhysicVelocityIterations() { return 20; }

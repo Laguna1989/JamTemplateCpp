@@ -15,7 +15,7 @@ public:
     static std::string JamName() { return "TODO"; }
     static std::string JamDate() { return "TODO"; }
 
-    static jt::Vector2f GetWindowSize() { return jt::Vector2f { 800, 600 }; }
+    static jt::Vector2f GetWindowSize() { return jt::Vector2f { 1200, 800 }; }
     static float GetZoom() { return 2.0f; }
     static jt::Vector2f GetScreenSize() { return GetWindowSize() * (1.0f / GetZoom()); }
 
