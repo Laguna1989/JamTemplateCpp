@@ -37,7 +37,7 @@ void jt::InfoScreen::doDraw() const
     if (!ImGui::CollapsingHeader("Textures")) {
         std::string textures = "# Textures stored: "
             + std::to_string(getGame()->gfx().textureManager().getNumberOfTextures());
-        ImGui::Text(textures.c_str());
+        ImGui::Text("%s", textures.c_str());
     }
     if (!ImGui::CollapsingHeader("Performance")) {
 
@@ -46,22 +46,22 @@ void jt::InfoScreen::doDraw() const
     }
     if (!ImGui::CollapsingHeader("GameState")) {
         auto const state = getGame()->getStateManager().getCurrentState();
-        ImGui::Text(state->getName().c_str());
+        ImGui::Text("%s", state->getName().c_str());
         std::string const gameStateAge
             = "Age: " + jt::MathHelper::floatToStringWithXDigits(state->getAge(), 2) + " s";
-        ImGui::Text(gameStateAge.c_str());
+        ImGui::Text("%s", gameStateAge.c_str());
 
         std::string const gameObjectsInThisStateText
             = "# GameObjects (in state): " + std::to_string(state->getNumberOfObjects());
-        ImGui::Text(gameObjectsInThisStateText.c_str());
+        ImGui::Text("%s", gameObjectsInThisStateText.c_str());
 
         std::string const totalGameObjectsText
             = "# GameObjects (total): " + std::to_string(getNumberOfAliveGameObjects());
-        ImGui::Text(totalGameObjectsText.c_str());
+        ImGui::Text("%s", totalGameObjectsText.c_str());
 
         std::string const createdGameObjectsText
             = "# GameObjects (created): " + std::to_string(getNumberOfCreatedGameObjects());
-        ImGui::Text(createdGameObjectsText.c_str());
+        ImGui::Text("%s", createdGameObjectsText.c_str());
 
         ImGui::PlotLines("AliveGameObjects [#] = %s", m_GameObjectAliveCountVector.data(),
             static_cast<int>(m_GameObjectAliveCountVector.size()), 0, nullptr, 0, FLT_MAX,
@@ -73,8 +73,8 @@ void jt::InfoScreen::doDraw() const
         std::string const aliveSoundsText
             = "# Sounds (alive): " + std::to_string(jt::Sound::aliveObjects());
 
-        ImGui::Text(createdSoundsText.c_str());
-        ImGui::Text(aliveSoundsText.c_str());
+        ImGui::Text("%s", createdSoundsText.c_str());
+        ImGui::Text("%s", aliveSoundsText.c_str());
     }
     ImGui::End();
 }
