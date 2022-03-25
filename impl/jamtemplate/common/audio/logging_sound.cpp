@@ -108,3 +108,15 @@ float jt::LoggingSound::getBlend() const
     return blend;
 }
 int jt::LoggingSound::getSampleRate() const { return m_decoratee->getSampleRate(); }
+
+void jt::LoggingSound::setPitch(float pitch)
+{
+    m_logger.debug("Sound setPitch: " + std::to_string(pitch), { "jt", "audio", "sound" });
+    m_decoratee->setPitch(pitch);
+}
+float jt::LoggingSound::getPitch() const
+{
+    auto const pitch = m_decoratee->getPitch();
+    m_logger.verbose("Sound getPitch: " + std::to_string(pitch), { "jt", "audio", "sound" });
+    return pitch;
+}

@@ -8,14 +8,21 @@ namespace jt {
 class SoundNull : public SoundInterface {
 public:
     void update() override;
+
     bool isPlaying() const override;
     void play() override;
     void pause() override;
     void stop() override;
+
     float getVolume() const override;
     void setVolume(float newVolume) override;
+
+    void setPitch(float pitch) override;
+    float getPitch() const override;
+
     void setLoop(bool doLoop) override;
     bool getLoop(void) override;
+
     float getDuration() const override;
     float getPosition() const override;
 

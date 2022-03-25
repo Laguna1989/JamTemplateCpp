@@ -42,7 +42,7 @@ void StateMenu::createVignette()
 void StateMenu::createShapes()
 {
     m_background = jt::dh::createShapeRect(
-        GP::GetScreenSize(), GP::getPalette().getColor(0), getGame()->gfx().textureManager());
+        GP::GetScreenSize(), GP::PaletteBackground(), getGame()->gfx().textureManager());
     m_overlay = jt::dh::createShapeRect(
         GP::GetScreenSize(), jt::colors::Black, getGame()->gfx().textureManager());
 }
@@ -68,8 +68,8 @@ void StateMenu::createTextCredits()
 void StateMenu::createTextExplanation()
 {
     float half_width = GP::GetScreenSize().x / 2;
-    m_text_Explanation = jt::dh::createText(getGame()->gfx().target(),
-        "Press Space to start the game", 16U, GP::getPalette().getColor(7));
+    m_text_Explanation = jt::dh::createText(
+        getGame()->gfx().target(), "Press Space to start the game", 16U, GP::PaletteFontFront());
     m_text_Explanation->setPosition({ half_width, 150 });
     m_text_Explanation->setShadow(GP::PaletteFontShadow(), jt::Vector2f { 3, 3 });
 }

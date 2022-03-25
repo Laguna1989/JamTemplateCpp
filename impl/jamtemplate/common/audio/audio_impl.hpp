@@ -13,12 +13,15 @@ public:
 
     void update() override;
 
-    void addTemporarySound(std::weak_ptr<jt::SoundInterface> snd) override;
-    void addPermanentSound(
-        std::string const& identifier, std::shared_ptr<jt::SoundInterface> snd) override;
+    std::shared_ptr<jt::SoundInterface> addTemporarySound(std::string const& fileName) override;
 
-    std::shared_ptr<jt::SoundInterface> soundPool(std::string const& baseIdentifier,
-        std::function<std::shared_ptr<jt::SoundInterface>()> function, std::size_t count) override;
+    std::shared_ptr<jt::SoundInterface> addPermanentSound(
+        std::string const& identifier, std::string const& fileName) override;
+    std::shared_ptr<jt::SoundInterface> addPermanentSound(std::string const& identifier,
+        std::string const& fileName, oalpp::effects::MonoEffectInterface& effect) override;
+
+    std::shared_ptr<jt::SoundInterface> soundPool(
+        std::string const& baseIdentifier, std::string const& fileName, std::size_t count) override;
 
     std::shared_ptr<jt::SoundInterface> getPermanentSound(std::string const& identifier) override;
 

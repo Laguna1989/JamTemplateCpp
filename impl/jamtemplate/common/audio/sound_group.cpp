@@ -110,3 +110,17 @@ int jt::SoundGroup::getSampleRate() const
     }
     return m_sounds.at(0)->getSampleRate();
 }
+
+void jt::SoundGroup::setPitch(float pitch)
+{
+    for (auto& snd : m_sounds) {
+        snd->setPitch(pitch);
+    }
+}
+float jt::SoundGroup::getPitch() const
+{
+    if (m_sounds.empty()) {
+        return 1.0f;
+    }
+    return m_sounds.at(0)->getPitch();
+}

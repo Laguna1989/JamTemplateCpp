@@ -1,6 +1,7 @@
 #include "audio_impl.hpp"
 #include "random/random.hpp"
 #include "sound.hpp"
+#include "sound_with_effect.hpp"
 #include <algorithm>
 
 jt::AudioImpl::~AudioImpl() { m_temporarySounds.clear(); }
@@ -26,18 +27,14 @@ void jt::AudioImpl::cleanUpUnusedSounds()
         m_temporarySounds.end());
 }
 
-void jt::AudioImpl::addTemporarySound(std::weak_ptr<jt::SoundInterface> snd)
+std::shared_ptr<jt::SoundInterface> jt::AudioImpl::addTemporarySound(std::string const& fileName)
 {
-    m_temporarySounds.push_back(snd);
+    auto sound = std::make_shared<jt::Sound>(fileName);
+    m_temporarySounds.push_back(sound);
+    return sound;
 }
 
 oalpp::SoundContextInterface& jt::AudioImpl::getContext() { return m_context; }
-
-void jt::AudioImpl::addPermanentSound(
-    std::string const& identifier, std::shared_ptr<jt::SoundInterface> snd)
-{
-    m_permanentSounds[identifier] = snd;
-}
 
 std::shared_ptr<jt::SoundInterface> jt::AudioImpl::getPermanentSound(std::string const& identifier)
 {
@@ -54,16 +51,30 @@ void jt::AudioImpl::removePermanentSound(std::string const& identifier)
     }
 }
 
-std::shared_ptr<jt::SoundInterface> jt::AudioImpl::soundPool(std::string const& baseIdentifier,
-    std::function<std::shared_ptr<SoundInterface>()> function, std::size_t count)
+std::shared_ptr<jt::SoundInterface> jt::AudioImpl::soundPool(
+    std::string const& baseIdentifier, std::string const& fileName, std::size_t count)
 {
-    auto const randomNumber = jt::Random::getInt(0, count);
+    auto const randomNumber = jt::Random::getInt(0, static_cast<int>(count));
     auto const soundName = baseIdentifier + "####" + std::to_string(randomNumber);
 
     auto snd = getPermanentSound(soundName);
     if (snd == nullptr) {
-        snd = function();
-        addPermanentSound(soundName, snd);
+        snd = addPermanentSound(soundName, fileName);
     }
     return snd;
+}
+std::shared_ptr<jt::SoundInterface> jt::AudioImpl::addPermanentSound(
+    std::string const& identifier, std::string const& fileName)
+{
+    auto sound = std::make_shared<jt::Sound>(fileName);
+    m_permanentSounds[identifier] = sound;
+    return sound;
+}
+
+std::shared_ptr<jt::SoundInterface> jt::AudioImpl::addPermanentSound(std::string const& identifier,
+    std::string const& fileName, oalpp::effects::MonoEffectInterface& effect)
+{
+    auto sound = std::make_shared<jt::SoundWithEffect>(fileName, effect);
+    m_permanentSounds[identifier] = sound;
+    return sound;
 }

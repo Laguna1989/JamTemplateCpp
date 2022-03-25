@@ -25,17 +25,29 @@ public:
     virtual void update() = 0;
 
     /// Add a temporary sound that will be removed once the shared pointer count is zero
-    /// \param snd weak pointer to the temporary sound
-    virtual void addTemporarySound(std::weak_ptr<SoundInterface> snd) = 0;
+    /// \param fileName filename of the sound to load
+    /// \return shared pointer of the sound created. The user needs to keep this shared pointer
+    /// alive, otherwise the sound will be deleted.
+    virtual std::shared_ptr<jt::SoundInterface> addTemporarySound(std::string const& fileName) = 0;
+
     /// Add a permanent sound that can be removed via removePermanentSound
     /// \param identifier identifier for this sound
-    /// \param snd the sound to be stored
-    virtual void addPermanentSound(
-        std::string const& identifier, std::shared_ptr<SoundInterface> snd)
+    /// \param fileName filename of the sound to load
+    virtual std::shared_ptr<jt::SoundInterface> addPermanentSound(
+        std::string const& identifier, std::string const& fileName)
         = 0;
 
-    virtual std::shared_ptr<SoundInterface> soundPool(std::string const& baseIdentifier,
-        std::function<std::shared_ptr<SoundInterface>()> function, std::size_t count)
+    /// Add a permanent sound that can be removed via removePermanentSound
+    /// \param identifier identifier for this sound
+    /// \param fileName filename of the sound to load
+    /// \param effect effect to be used on the sound
+    /// \return shared pointer to the Sound
+    virtual std::shared_ptr<jt::SoundInterface> addPermanentSound(std::string const& identifier,
+        std::string const& fileName, oalpp::effects::MonoEffectInterface& effect)
+        = 0;
+
+    virtual std::shared_ptr<SoundInterface> soundPool(
+        std::string const& baseIdentifier, std::string const& fileName, std::size_t count)
         = 0;
 
     /// Get a permanent sound
