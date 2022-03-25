@@ -1,9 +1,11 @@
 ﻿#include "input_manager.hpp"
 
 jt::InputManager::InputManager(std::shared_ptr<jt::MouseInputInterface> mouse,
-    std::shared_ptr<jt::KeyboardInputInterface> keyboard)
+    std::shared_ptr<jt::KeyboardInputInterface> keyboard,
+    std::shared_ptr<jt::GamepadInputInterface> gamepad)
     : m_mouse { mouse }
     , m_keyboard { keyboard }
+    , m_gamepad { gamepad }
 {
 }
 
@@ -18,6 +20,9 @@ void jt::InputManager::reset()
     if (m_keyboard) {
         m_keyboard->reset();
     }
+    if (m_gamepad) {
+        m_gamepad->reset();
+    }
 }
 void jt::InputManager::update(jt::MousePosition const& mp, float elapsed)
 {
@@ -29,4 +34,9 @@ void jt::InputManager::update(jt::MousePosition const& mp, float elapsed)
         m_keyboard->updateKeys();
         m_keyboard->updateCommands(elapsed);
     }
+    if (m_gamepad) {
+        m_gamepad->update();
+    }
 }
+
+std::shared_ptr<jt::GamepadInputInterface> jt::InputManager::gamepad() { return m_gamepad; }

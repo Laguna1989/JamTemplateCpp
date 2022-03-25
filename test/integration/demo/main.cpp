@@ -7,6 +7,7 @@
 #include "gfx_impl.hpp"
 #include "graphics/logging_render_window.hpp"
 #include "graphics/render_window.hpp"
+#include "input/gamepad_input.hpp"
 #include "input/input_manager.hpp"
 #include "input/keyboard_input.hpp"
 #include "input/mouse_input.hpp"
@@ -37,7 +38,8 @@ int main()
 
     auto const mouse = std::make_shared<jt::MouseInput>();
     auto const keyboard = std::make_shared<jt::KeyboardInput>();
-    jt::InputManager input { mouse, keyboard };
+    auto const gamepad = std::make_shared<jt::GamepadInput>();
+    jt::InputManager input { mouse, keyboard, gamepad };
 
     jt::RenderWindow window { 800, 600, "jt_demos" };
     jt::LoggingRenderWindow loggingRenderWindow { window, logger };

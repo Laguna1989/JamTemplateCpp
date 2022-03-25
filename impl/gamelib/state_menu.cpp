@@ -17,6 +17,7 @@
 #include "tweens/tween_position.hpp"
 #include "tweens/tween_scale.hpp"
 #include <algorithm>
+#include <iostream>
 
 void StateMenu::doInternalCreate()
 {
@@ -155,6 +156,8 @@ void StateMenu::doInternalUpdate(float const elapsed)
 {
     updateDrawables(elapsed);
     checkForTransitionToStateGame();
+    jt::Vector2f const& axis = getGame()->input().gamepad()->getAxis(jt::GamepadAxisCode::ARight);
+    std::cout << axis.x << ", " << axis.y << std::endl;
 }
 
 void StateMenu::updateDrawables(const float& elapsed)

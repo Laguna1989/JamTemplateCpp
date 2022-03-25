@@ -119,8 +119,15 @@ enum class MouseButtonCode {
     ButtonCount ///< Keep last -- the total number of mouse button
 };
 
+enum class GamepadAxisCode {
+    ALeft,
+    ARight,
+    AxisCount ///< Keep last -- the total number of mouse button
+};
+
 std::vector<jt::KeyCode> getAllKeys();
 std::vector<jt::MouseButtonCode> getAllButtons();
+std::vector<jt::GamepadAxisCode> getAllAxis();
 
 } // namespace jt
 #endif

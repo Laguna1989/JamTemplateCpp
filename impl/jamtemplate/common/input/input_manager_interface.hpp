@@ -60,6 +60,27 @@ public:
     virtual void reset() = 0;
 };
 
+class GamepadInputInterface {
+public:
+    /// Destructor
+    virtual ~GamepadInputInterface() = default;
+
+    /// Update the mouse button states
+    virtual void update() = 0;
+
+    /// Get the raw axis position value
+    /// \return the axis position
+    virtual Vector2f getAxisRaw(jt::GamepadAxisCode axis) = 0;
+
+    /// Get the axis position value
+    /// \param axis
+    /// \return the axis position with range [-1, 1]
+    virtual Vector2f getAxis(jt::GamepadAxisCode axis) = 0;
+
+    /// Reset the MouseInput
+    virtual void reset() = 0;
+};
+
 class KeyboardInputInterface {
 public:
     virtual ~KeyboardInputInterface() = default;
@@ -116,6 +137,10 @@ public:
     /// Get the keyboard input
     /// \return the keyboard input (can be nullptr)
     virtual std::shared_ptr<KeyboardInputInterface> keyboard() = 0;
+
+    /// Get the gamepad input
+    /// \return the gamepad
+    virtual std::shared_ptr<GamepadInputInterface> gamepad() = 0;
 
     /// Update the input
     /// \param mp the mouse buttons
