@@ -66,8 +66,7 @@ void StateInventory::doInternalCreate()
 
     setAutoDraw(false);
 
-    m_pickupSound = std::make_shared<jt::Sound>("assets/test.ogg");
-    getGame()->audio().addTemporarySound(m_pickupSound);
+    m_pickupSound = getGame()->audio().addTemporarySound("assets/test.ogg");
 }
 
 void StateInventory::createWorldItems()

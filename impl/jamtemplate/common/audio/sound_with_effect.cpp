@@ -44,11 +44,19 @@ void jt::SoundWithEffect::setLoop(bool doLoop)
     m_wetSound.setIsLooping(doLoop);
 }
 
-bool jt::SoundWithEffect::getLoop(void) { return m_drySound.getIsLooping(); }
+void jt::SoundWithEffect::setPitch(float pitch)
+{
+    m_drySound.setPitch(pitch);
+    m_wetSound.setPitch(pitch);
+}
+float jt::SoundWithEffect::getPitch() const { return m_drySound.getPitch(); }
 
+bool jt::SoundWithEffect::getLoop(void) { return m_drySound.getIsLooping(); }
 float jt::SoundWithEffect::getDuration() const { return m_drySound.getLengthInSeconds(); }
 
 float jt::SoundWithEffect::getPosition() const { return m_drySound.getCurrentOffsetInSeconds(); }
+
 float jt::SoundWithEffect::getBlend() const { return m_blend; }
 void jt::SoundWithEffect::setBlend(float blend) { m_blend = blend; }
+
 int jt::SoundWithEffect::getSampleRate() const { return m_drySoundData.getSampleRate(); }

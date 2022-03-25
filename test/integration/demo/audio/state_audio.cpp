@@ -11,12 +11,11 @@ void StateAudio::doInternalCreate()
     m_sound = getGame()->audio().getPermanentSound("music");
     if (m_sound == nullptr) {
         // create new music
-        m_sound = std::make_shared<jt::LoggingSound>(
-            std::make_shared<jt::SoundWithEffect>("assets/looping_stereo_track.mp3", m_effect),
-            getGame()->getLogger());
+        m_sound = getGame()->audio().addPermanentSound(
+            "music", "assets/looping_stereo_track.mp3", m_effect);
         m_sound->setLoop(true);
         m_sound->play();
-        getGame()->audio().addPermanentSound("music", m_sound);
+
     } else {
         // get blend property from already created music
         m_blend = m_sound->getBlend();
@@ -29,7 +28,7 @@ void StateAudio::doInternalCreate()
         { "G5", 1.78179772727272727273f }, { "A5", 2.0f } };
 
     for (auto const& kvp : pitches) {
-        auto snd = std::make_shared<jt::Sound>("assets/test.ogg");
+        auto snd = getGame()->audio().addTemporarySound("assets/test.ogg");
         snd->setPitch(kvp.second);
         soundGroup->add(snd);
         m_notes[kvp.first] = snd;

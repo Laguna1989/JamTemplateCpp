@@ -35,6 +35,13 @@ public:
     /// \param newVolume in range 0.0 to 1.0
     virtual void setVolume(float newVolume) = 0;
 
+    /// Set Pitch
+    /// \param pitch new pitch value
+    virtual void setPitch(float pitch) = 0;
+    /// Get pitch
+    /// \return pitch value
+    virtual float getPitch() const = 0;
+
     /// Set Loop
     /// \param doLoop true if sound should loop, false otherwise
     virtual void setLoop(bool doLoop) = 0;
