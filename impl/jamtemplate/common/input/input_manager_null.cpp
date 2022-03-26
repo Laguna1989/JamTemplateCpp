@@ -19,12 +19,26 @@ void jt::KeyboardInputNull::reset() { }
 
 std::shared_ptr<jt::MouseInputInterface> jt::InputManagerNull::mouse()
 {
+    // TODO create class member that is returned
     return std::shared_ptr<MouseInputNull>();
 }
 std::shared_ptr<jt::KeyboardInputInterface> jt::InputManagerNull::keyboard()
 {
+    // TODO create class member that is returned
     return std::shared_ptr<KeyboardInputNull>();
 }
 
 void jt::InputManagerNull::update(jt::MousePosition const&, float) { }
 void jt::InputManagerNull::reset() { }
+
+std::shared_ptr<jt::GamepadInputInterface> jt::InputManagerNull::gamepad(int gamepad_id)
+{
+    // TODO create class member that is returned
+    return std::make_shared<GamepadInputNull>();
+}
+
+size_t jt::InputManagerNull::getNumberOfGamepads() const { return 0; }
+void jt::GamepadInputNull::update() { }
+jt::Vector2f jt::GamepadInputNull::getAxisRaw(jt::GamepadAxisCode axis) { return Vector2f {}; }
+jt::Vector2f jt::GamepadInputNull::getAxis(jt::GamepadAxisCode axis) { return Vector2f {}; }
+void jt::GamepadInputNull::reset() { }

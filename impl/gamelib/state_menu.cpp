@@ -156,7 +156,7 @@ void StateMenu::doInternalUpdate(float const elapsed)
 {
     updateDrawables(elapsed);
     checkForTransitionToStateGame();
-    jt::Vector2f const& axis = getGame()->input().gamepad()->getAxis(jt::GamepadAxisCode::ARight);
+    jt::Vector2f const& axis = getGame()->input().gamepad(0)->getAxis(jt::GamepadAxisCode::ARight);
     std::cout << axis.x << ", " << axis.y << std::endl;
 }
 

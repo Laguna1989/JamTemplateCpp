@@ -50,8 +50,8 @@ int main()
 
     auto const mouse = std::make_shared<jt::MouseInput>();
     auto const keyboard = std::make_shared<jt::KeyboardInput>();
-    auto const gamepad = std::make_shared<jt::GamepadInput>();
-    jt::InputManager input { mouse, keyboard, gamepad };
+    auto const gamepad0 = std::make_shared<jt::GamepadInput>();
+    jt::InputManager input { mouse, keyboard, { gamepad0 } };
 
     jt::AudioImpl audio;
     jt::LoggingAudio loggingAudio { audio, logger };

@@ -140,7 +140,9 @@ public:
 
     /// Get the gamepad input
     /// \return the gamepad
-    virtual std::shared_ptr<GamepadInputInterface> gamepad() = 0;
+    virtual std::shared_ptr<GamepadInputInterface> gamepad(int gamepad_id) = 0;
+
+    virtual std::size_t getNumberOfGamepads() const = 0;
 
     /// Update the input
     /// \param mp the mouse buttons
