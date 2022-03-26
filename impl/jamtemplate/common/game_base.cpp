@@ -98,6 +98,9 @@ void jt::GameBase::doUpdate(float const elapsed)
             input().keyboard()->updateCommands(elapsed);
         }
     }
+    for (auto i = 0; i != input().getNumberOfGamepads(); ++i) {
+        input().gamepad(i)->update();
+    }
 }
 
 void jt::GameBase::doDraw() const

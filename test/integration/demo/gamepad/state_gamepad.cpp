@@ -16,6 +16,9 @@ void StateGamepad::doInternalCreate()
 
 void StateGamepad::doInternalUpdate(float elapsed)
 {
+    if (getGame()->input().gamepad(0)->justPressed(jt::GamepadButtonCode::GPA)) {
+        m_backgroundShape->flash(0.25f);
+    }
     m_backgroundShape->update(elapsed);
     m_dotShape->update(elapsed);
 }

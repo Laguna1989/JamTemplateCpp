@@ -6,7 +6,7 @@
 namespace jt {
 namespace inputhelper {
 
-// common template function which works for mouse buttons and keyboard keys.
+// common template function which works for mouse buttons, keyboard keys and gamepad buttons.
 template <typename CheckFuncArg, typename KeyTypeJT>
 void updateValues(std::map<KeyTypeJT, bool>& pressed, std::map<KeyTypeJT, bool>& released,
     std::map<KeyTypeJT, bool>& justPressed, std::map<KeyTypeJT, bool>& justReleased,

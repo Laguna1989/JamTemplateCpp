@@ -42,3 +42,8 @@ void jt::GamepadInputNull::update() { }
 jt::Vector2f jt::GamepadInputNull::getAxisRaw(jt::GamepadAxisCode axis) { return Vector2f {}; }
 jt::Vector2f jt::GamepadInputNull::getAxis(jt::GamepadAxisCode axis) { return Vector2f {}; }
 void jt::GamepadInputNull::reset() { }
+
+bool jt::GamepadInputNull::pressed(jt::GamepadButtonCode b) { return false; }
+bool jt::GamepadInputNull::released(jt::GamepadButtonCode b) { return false; }
+bool jt::GamepadInputNull::justPressed(jt::GamepadButtonCode b) { return false; }
+bool jt::GamepadInputNull::justReleased(jt::GamepadButtonCode b) { return false; }

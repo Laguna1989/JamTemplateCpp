@@ -4,7 +4,7 @@
 jt::MouseInput::MouseInput(MouseButtonCheckFunction checkFunction)
     : m_checkFunction { std::move(checkFunction) }
 {
-    auto const allButtons = jt::getAllButtons();
+    auto const allButtons = jt::getAllMouseButtons();
     // note: do not call the virtual reset() function here, as this is the constructor
     for (auto const b : allButtons) {
         m_mousePressed[b] = false;
