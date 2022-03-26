@@ -1,5 +1,5 @@
-#ifndef MYAWESOMEGAME_GAMEPAD_INPUT_HPP
-#define MYAWESOMEGAME_GAMEPAD_INPUT_HPP
+#ifndef GUARD_JAMTEMPLATE_GAMEPAD_INPUT_HPP
+#define GUARD_JAMTEMPLATE_GAMEPAD_INPUT_HPP
 
 #include "gamepad_input_lib.hpp"
 #include "input_manager_interface.hpp"
@@ -40,4 +40,4 @@ private:
 
 } // namespace jt
 
-#endif // MYAWESOMEGAME_GAMEPAD_INPUT_HPP
+#endif // GUARD_JAMTEMPLATE_GAMEPAD_INPUT_HPP

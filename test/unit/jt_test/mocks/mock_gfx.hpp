@@ -1,5 +1,5 @@
-#ifndef MYAWESOMEGAME_MOCK_GFX_HPP
-#define MYAWESOMEGAME_MOCK_GFX_HPP
+#ifndef GUARD_JAMTEMPLATE_MOCK_GFX_HPP
+#define GUARD_JAMTEMPLATE_MOCK_GFX_HPP
 
 #include "graphics/gfx_interface.hpp"
 #include "mock_camera.hpp"
@@ -20,4 +20,4 @@ public:
     MOCK_METHOD(void, display, (), (override));
 };
 
-#endif // MYAWESOMEGAME_MOCK_GFX_HPP
+#endif // GUARD_JAMTEMPLATE_MOCK_GFX_HPP

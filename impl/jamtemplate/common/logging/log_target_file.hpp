@@ -19,4 +19,4 @@ private:
 
 } // namespace jt
 
-#endif // MYAWESOMEGAME_LOG_TARGET_FILE_HPP
+#endif // GUARD_JAMTEMPLATE_LOG_TARGET_FILE_HPP

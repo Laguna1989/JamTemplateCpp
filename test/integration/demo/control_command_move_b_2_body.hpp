@@ -1,5 +1,5 @@
-#ifndef MYAWESOMEGAME_CONTROL_COMMAND_MOVE_B_2_BODY_HPP
-#define MYAWESOMEGAME_CONTROL_COMMAND_MOVE_B_2_BODY_HPP
+#ifndef GUARD_JAMTEMPLATE_CONTROL_COMMAND_MOVE_B_2_BODY_HPP
+#define GUARD_JAMTEMPLATE_CONTROL_COMMAND_MOVE_B_2_BODY_HPP
 
 #include "box2dwrapper/box2d_object.hpp"
 #include "input/control_command_once.hpp"
@@ -16,4 +16,4 @@ private:
     std::weak_ptr<jt::Box2DObject> m_obj;
 };
 
-#endif // MYAWESOMEGAME_CONTROL_COMMAND_MOVE_B_2_BODY_HPP
+#endif // GUARD_JAMTEMPLATE_CONTROL_COMMAND_MOVE_B_2_BODY_HPP

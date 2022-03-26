@@ -13,4 +13,4 @@ float easeInOut(float t, float b, float c, float d);
 } // namespace ease
 } // namespace jt
 
-#endif // MYAWESOMEGAME_BOUNCE_HPP
+#endif // GUARD_JAMTEMPLATE_BOUNCE_HPP
