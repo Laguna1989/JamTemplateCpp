@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1648240386989,
+  "lastUpdate": 1648405781689,
   "repoUrl": "https://github.com/Laguna1989/JamTemplateCpp",
   "entries": {
     "Benchmark": [
@@ -4320,6 +4320,42 @@ window.BENCHMARK_DATA = {
             "value": 2.689318911877388,
             "unit": "ms/iter",
             "extra": "iterations: 261\ncpu: 2.689291954022989 ms\nthreads: 1"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "laguna.ws@gmail.com",
+            "name": "Laguna1989",
+            "username": "Laguna1989"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "c064257063bcd418d5f27d3b8136df7acdd09f7e",
+          "message": "Merge pull request #171 from Laguna1989/FEATURE_GamepadSupport\n\nAdd gamepad support for SFML and SLD (web)",
+          "timestamp": "2022-03-27T20:26:50+02:00",
+          "tree_id": "f85ad3f24e5a03d4f76f35e127d067a1bc20b0dd",
+          "url": "https://github.com/Laguna1989/JamTemplateCpp/commit/c064257063bcd418d5f27d3b8136df7acdd09f7e"
+        },
+        "date": 1648405781245,
+        "tool": "googlecpp",
+        "benches": [
+          {
+            "name": "BM_StartGame",
+            "value": 0.0022130695932332726,
+            "unit": "ms/iter",
+            "extra": "iterations: 313177\ncpu: 0.0022128457709218747 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GamestateWithTweeningShapes",
+            "value": 2.7465919884615064,
+            "unit": "ms/iter",
+            "extra": "iterations: 260\ncpu: 2.746205 ms\nthreads: 1"
           }
         ]
       }
