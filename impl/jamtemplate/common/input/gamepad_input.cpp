@@ -1,10 +1,14 @@
 #include "gamepad_input.hpp"
 #include "input_helper.hpp"
 
-jt::GamepadInput::GamepadInput(jt::GamepadInput::AxisFunc axisFunc, ButtonCheckFunction buttonFunc)
-    : m_axisFunc { axisFunc }
-    , m_buttonFunc { buttonFunc }
+jt::GamepadInput::GamepadInput(int gamepadId, AxisFunc axisFunc, ButtonCheckFunction buttonFunc)
 {
+    if (axisFunc == nullptr) {
+        m_axisFunc = [gamepadId](auto k) { return libAxisValue(gamepadId, k); };
+    }
+    if (buttonFunc == nullptr) {
+        m_buttonFunc = [gamepadId](auto b) { return libGPButtonValue(gamepadId, b); };
+    }
     // note: do not call the virtual reset() function here, as this is the constructor
     for (auto const k : jt::getAllGamepadButtons()) {
         m_pressed[k] = false;

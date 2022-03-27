@@ -4,6 +4,7 @@
 #include "game_object.hpp"
 #include "input/input_manager_interface.hpp"
 #include "shape.hpp"
+#include "text.hpp"
 #include <memory>
 
 class GamepadVisualizer : public jt::GameObject {
@@ -19,6 +20,9 @@ private:
     std::shared_ptr<jt::Shape> backgroundRight;
     std::shared_ptr<jt::Shape> dotLeft;
     std::shared_ptr<jt::Shape> dotRight;
+    std::shared_ptr<jt::Text> text;
+
+    std::string getPressedKey(jt::GamepadButtonCode b);
 };
 
 #endif // GUARD_JAMTEMPLATE_GAMEPAD_VISUALIZER_HPP

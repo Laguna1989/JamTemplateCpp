@@ -14,8 +14,7 @@ public:
     using ButtonCheckFunction = std::function<bool(jt::GamepadButtonCode)>;
 
     GamepadInput(
-        AxisFunc axisFunc = [](auto k) { return libAxisValue(k); },
-        ButtonCheckFunction buttonFunc = [](auto b) { return libGPButtonValue(b); });
+        int gamepadId, AxisFunc axisFunc = nullptr, ButtonCheckFunction buttonFunc = nullptr);
     void update() override;
     jt::Vector2f getAxisRaw(jt::GamepadAxisCode axis) override;
     Vector2f getAxis(jt::GamepadAxisCode axis) override;
@@ -27,6 +26,7 @@ public:
     bool justReleased(GamepadButtonCode b) override;
 
 private:
+    int m_id { 0 };
     AxisFunc m_axisFunc;
     ButtonCheckFunction m_buttonFunc;
 

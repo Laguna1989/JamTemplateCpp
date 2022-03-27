@@ -159,7 +159,7 @@ void jt::Console::renderOneLogEntry(jt::LogEntry const& entry) const
     }
 
     ImGui::PushStyleColor(ImGuiCol_Text, color);
-    ImGui::Text(text.c_str());
+    ImGui::Text("%s", text.c_str());
     ImGui::PopStyleColor();
 }
 int jt::Console::inputUserCallback(ImGuiInputTextCallbackData* data)

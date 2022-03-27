@@ -119,6 +119,7 @@ enum class MouseButtonCode {
     ButtonCount ///< Keep last -- the total number of mouse button
 };
 
+// TODO more axis
 enum class GamepadAxisCode {
     ALeft,
     ARight,
@@ -130,6 +131,12 @@ enum class GamepadButtonCode {
     GPB,
     GPX,
     GPY,
+    GBLB,
+    GBRB,
+    GBBack,
+    GBStart,
+    GBLeftStick,
+    GBRightStick,
     GPButtonCount ///< Keep last -- the total number of gamepad button
 };
 

@@ -17,29 +17,27 @@ int toLib(jt::GamepadButtonCode b) { return static_cast<int>(b); }
 
 } // namespace
 
-jt::Vector2f jt::libAxisValue(jt::GamepadAxisCode a)
+jt::Vector2f jt::libAxisValue(int gamepadId, jt::GamepadAxisCode a)
 {
-    if (!sf::Joystick::isConnected(0)) {
+    if (!sf::Joystick::isConnected(gamepadId)) {
         return jt::Vector2f { 0.0f, 0.0f };
     }
 
     auto const libaxis = toLib(a);
 
     float x { 0.0f };
-    // TODO add support for multiple gampads
-    if (sf::Joystick::hasAxis(0, libaxis.first)) {
-        x = sf::Joystick::getAxisPosition(0, libaxis.first);
+    if (sf::Joystick::hasAxis(gamepadId, libaxis.first)) {
+        x = sf::Joystick::getAxisPosition(gamepadId, libaxis.first);
     }
     float y { 0.0f };
-    if (sf::Joystick::hasAxis(0, libaxis.second)) {
-        y = sf::Joystick::getAxisPosition(0, libaxis.second);
+    if (sf::Joystick::hasAxis(gamepadId, libaxis.second)) {
+        y = sf::Joystick::getAxisPosition(gamepadId, libaxis.second);
     }
     return jt::Vector2f { x, y };
 }
 
-bool jt::libGPButtonValue(jt::GamepadButtonCode b)
+bool jt::libGPButtonValue(int gamepadId, jt::GamepadButtonCode b)
 {
     auto const libButton = toLib(b);
-    // TODO add support for multiple gampads
-    return sf::Joystick::isButtonPressed(0, libButton);
+    return sf::Joystick::isButtonPressed(gamepadId, libButton);
 }
