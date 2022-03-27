@@ -16,7 +16,6 @@ public:
 
 private:
     std::vector<jt::Rectf> m_rects {};
-    bool refineCollidersOneStep();
 };
 
 } // namespace jt

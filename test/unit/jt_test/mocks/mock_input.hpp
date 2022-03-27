@@ -48,6 +48,8 @@ public:
     MOCK_METHOD(std::shared_ptr<jt::KeyboardInputInterface>, keyboard, (), (override));
     MOCK_METHOD(void, update, (const jt::MousePosition&, float), (override));
     MOCK_METHOD(void, reset, (), (override));
+    MOCK_METHOD(std::shared_ptr<jt::GamepadInputInterface>, gamepad, (int), (override));
+    MOCK_METHOD(size_t, getNumberOfGamepads, (), (const, override));
 };
 
 #endif
