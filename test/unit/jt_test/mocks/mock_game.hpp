@@ -20,7 +20,7 @@ public:
     MOCK_METHOD(jt::InputManagerInterface&, input, (), (override));
     MOCK_METHOD(jt::AudioInterface&, audio, (), (override));
 
-    MOCK_METHOD(jt::StateManagerInterface&, getStateManager, (), (override));
+    MOCK_METHOD(jt::StateManagerInterface&, stateManager, (), (override));
 
     MOCK_METHOD(void, runOneFrame, (), (override));
     MOCK_METHOD(void, startGame, (jt::GameInterface::GameLoopFunctionPtr), (override));

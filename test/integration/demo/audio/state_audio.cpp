@@ -36,13 +36,13 @@ void StateAudio::doInternalCreate()
     m_soundGroup = soundGroup;
 }
 
-void StateAudio::doInternalUpdate(float elapsed)
+void StateAudio::doInternalUpdate(float /*elapsed*/)
 {
     if (m_sound->getBlend() != m_blend) {
         m_sound->setBlend(m_blend);
     }
     if (getGame()->input().keyboard()->justPressed(jt::KeyCode::Escape)) {
-        getGame()->getStateManager().switchState(std::make_shared<StateSelect>());
+        getGame()->stateManager().switchState(std::make_shared<StateSelect>());
     }
 }
 

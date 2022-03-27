@@ -75,6 +75,6 @@ void StateGame::endGame()
     m_hasEnded = true;
     m_running = false;
 
-    getGame()->getStateManager().switchState(std::make_shared<StateMenu>());
+    getGame()->stateManager().switchState(std::make_shared<StateMenu>());
 }
 std::string StateGame::getName() const { return "Game"; }

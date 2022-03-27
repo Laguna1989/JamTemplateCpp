@@ -43,7 +43,7 @@ public:
 
     /// Get the State Manager
     /// \return the state manager
-    virtual StateManagerInterface& getStateManager() = 0;
+    virtual StateManagerInterface& stateManager() = 0;
 
     /// Get the logger
     /// \return the logger

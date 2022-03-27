@@ -29,16 +29,15 @@ void StateSwarmObjects::doInternalCreate()
 
     setAutoDraw(false);
 
-    getGame()->getStateManager().setTransition(
-        std::make_shared<jt::StateManagerTransitionFadeToBlack>(
-            jt::Vector2f { 400.0f, 300.0f }, getGame()->gfx().textureManager()));
+    getGame()->stateManager().setTransition(std::make_shared<jt::StateManagerTransitionFadeToBlack>(
+        jt::Vector2f { 400.0f, 300.0f }, getGame()->gfx().textureManager()));
 }
 
-void StateSwarmObjects::doInternalUpdate(float const elapsed)
+void StateSwarmObjects::doInternalUpdate(float const /*elapsed*/)
 {
     if (getGame()->input().keyboard()->justPressed(jt::KeyCode::F1)
         || getGame()->input().keyboard()->justPressed(jt::KeyCode::Escape)) {
-        getGame()->getStateManager().switchState(std::make_shared<StateSelect>());
+        getGame()->stateManager().switchState(std::make_shared<StateSelect>());
     }
 
     updateSwarm();

@@ -24,6 +24,7 @@ std::shared_ptr<SDL_GameController> createGamepad(int gamepadId)
     if (SDL_IsGameController(gamepadId)) {
         controller = std::shared_ptr<SDL_GameController>(
             SDL_GameControllerOpen(gamepadId), SDL_GameControllerClose);
+        std::cout << "create new controller: " << controller.get() << std::endl;
     }
     return controller;
 }
@@ -42,7 +43,6 @@ std::shared_ptr<SDL_GameController> getGamepad(int gamepadId)
 
 jt::Vector2f jt::libAxisValue(int gamepadId, jt::GamepadAxisCode a)
 {
-    //    std::cout << SDL_NumJoysticks() << std::endl;
     auto currentGamepad = getGamepad(gamepadId).get();
 
     if (!SDL_GameControllerGetAttached(currentGamepad)) {

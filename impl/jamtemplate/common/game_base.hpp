@@ -23,7 +23,7 @@ public:
 
     AudioInterface& audio() override;
 
-    StateManagerInterface& getStateManager() override;
+    StateManagerInterface& stateManager() override;
 
     LoggerInterface& getLogger() override;
 

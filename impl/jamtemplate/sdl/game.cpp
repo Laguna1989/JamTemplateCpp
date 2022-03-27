@@ -14,6 +14,8 @@ Game::Game(GfxInterface& gfx, InputManagerInterface& input, AudioInterface& audi
     ActionCommandManagerInterface& actionCommandManager)
     : GameBase { gfx, input, audio, stateManager, logger, actionCommandManager }
 {
+    SDL_Init(SDL_INIT_VIDEO | SDL_INIT_JOYSTICK);
+    m_logger.info("Connected gamepads: " + std::to_string(SDL_NumJoysticks()));
     TTF_Init();
 
     m_logger.debug("Game constructor done", { "jt" });

@@ -29,9 +29,8 @@ void StateMenu::doInternalCreate()
 
     add(std::make_shared<jt::LicenseInfo>());
 
-    getGame()->getStateManager().setTransition(
-        std::make_shared<jt::StateManagerTransitionFadeToBlack>(
-            GP::GetScreenSize(), getGame()->gfx().textureManager()));
+    getGame()->stateManager().setTransition(std::make_shared<jt::StateManagerTransitionFadeToBlack>(
+        GP::GetScreenSize(), getGame()->gfx().textureManager()));
 }
 
 void StateMenu::createVignette()
@@ -185,7 +184,7 @@ void StateMenu::startTransitionToStateGame()
     if (!m_started) {
         m_started = true;
 
-        getGame()->getStateManager().switchState(std::make_shared<StateGame>());
+        getGame()->stateManager().switchState(std::make_shared<StateGame>());
     }
 }
 

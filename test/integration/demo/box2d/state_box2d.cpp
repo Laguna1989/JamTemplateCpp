@@ -25,7 +25,7 @@ void StateBox2d::doInternalCreate()
     m_bar2->setPosition(jt::Vector2f { 10, 25 });
     m_bar2->setMaxValue(2.0f);
 
-    getGame()->getStateManager().setTransition(
+    getGame()->stateManager().setTransition(
         std::make_shared<jt::StateManagerTransitionHorizontalBars>(
             jt::Vector2f { 400, 25 }, 12, 0.75f, getGame()->gfx().textureManager()));
 }
@@ -44,7 +44,7 @@ void StateBox2d::doInternalUpdate(float const elapsed)
 
     if (getGame()->input().keyboard()->justPressed(jt::KeyCode::F1)
         || getGame()->input().keyboard()->justPressed(jt::KeyCode::Escape)) {
-        getGame()->getStateManager().switchState(std::make_shared<StateSelect>());
+        getGame()->stateManager().switchState(std::make_shared<StateSelect>());
     }
 
     float max_T = 5.5f;

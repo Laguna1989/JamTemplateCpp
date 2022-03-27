@@ -40,7 +40,7 @@ void GamepadVisualizer::doUpdate(float const elapsed)
     backgroundLeft->update(elapsed);
     backgroundRight->update(elapsed);
 
-    std::string textstring;
+    std::string textstring = " ";
     for (auto b : jt::getAllGamepadButtons()) {
         if (getGame()->input().gamepad(m_id)->pressed(b)) {
             textstring += this->getPressedKey(b) + ", ";

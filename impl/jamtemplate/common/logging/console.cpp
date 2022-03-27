@@ -12,7 +12,7 @@ jt::Console::Console(jt::LoggerInterface& logger)
     m_inputBufferFilter.resize(200);
 }
 
-void jt::Console::doUpdate(float const elapsed)
+void jt::Console::doUpdate(float const /*elapsed*/)
 {
     handleCommand();
     if (!getGame()->input().keyboard()) {
