@@ -137,6 +137,14 @@ enum class GamepadButtonCode {
     GBStart,
     GBLeftStick,
     GBRightStick,
+    GBU1,
+    GBU2,
+    GBU3,
+    GBU4,
+    GBU5,
+    GBU6,
+    GBU7,
+    GBU8,
     GPButtonCount ///< Keep last -- the total number of gamepad button
 };
 

@@ -1,6 +1,7 @@
 #include "gamepad_visualizer.hpp"
 #include "drawable_helpers.hpp"
 #include "game_interface.hpp"
+#include <map>
 
 GamepadVisualizer::GamepadVisualizer(std::size_t id)
     : m_id { id }
@@ -82,36 +83,18 @@ void GamepadVisualizer::doDraw() const
 
 std::string GamepadVisualizer::getPressedKey(jt::GamepadButtonCode b)
 {
-    if (b == jt::GamepadButtonCode::GPA) {
-        return "A";
-    }
-    if (b == jt::GamepadButtonCode::GPB) {
-        return "B";
-    }
-    if (b == jt::GamepadButtonCode::GPX) {
-        return "X";
-    }
-    if (b == jt::GamepadButtonCode::GPY) {
-        return "Y";
-    }
-    if (b == jt::GamepadButtonCode::GBRB) {
-        return "RB";
-    }
-    if (b == jt::GamepadButtonCode::GBLB) {
-        return "LB";
-    }
-    if (b == jt::GamepadButtonCode::GBBack) {
-        return "Back";
-    }
-    if (b == jt::GamepadButtonCode::GBStart) {
-        return "Start";
-    }
-    if (b == jt::GamepadButtonCode::GBRightStick) {
-        return "Right Stick";
-    }
-    if (b == jt::GamepadButtonCode::GBLeftStick) {
-        return "Left Stick";
-    }
+    std::map<jt::GamepadButtonCode, std::string> lookup { { jt::GamepadButtonCode::GPA, "A" },
+        { jt::GamepadButtonCode::GPB, "B" }, { jt::GamepadButtonCode::GPX, "X" },
+        { jt::GamepadButtonCode::GPY, "Y" }, { jt::GamepadButtonCode::GBLB, "LB" },
+        { jt::GamepadButtonCode::GBRB, "RB" }, { jt::GamepadButtonCode::GBBack, "Back" },
+        { jt::GamepadButtonCode::GBStart, "Start" },
+        { jt::GamepadButtonCode::GBLeftStick, "Left Stick" },
+        { jt::GamepadButtonCode::GBRightStick, "Right Stick" },
+        { jt::GamepadButtonCode::GBU1, "GBU1" }, { jt::GamepadButtonCode::GBU2, "D-Up" },
+        { jt::GamepadButtonCode::GBU3, "D-Down" }, { jt::GamepadButtonCode::GBU4, "D-Left" },
+        { jt::GamepadButtonCode::GBU5, "D-Right" }, { jt::GamepadButtonCode::GBU6, "GBU6" },
+        { jt::GamepadButtonCode::GBU7, "GBU7" }, { jt::GamepadButtonCode::GBU8, "GBU8" } };
+    return lookup[b];
 
     return "???";
 }

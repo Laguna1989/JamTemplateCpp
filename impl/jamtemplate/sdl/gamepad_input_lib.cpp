@@ -15,7 +15,31 @@ std::pair<SDL_GameControllerAxis, SDL_GameControllerAxis> toLib(jt::GamepadAxisC
     return std::make_pair(SDL_CONTROLLER_AXIS_LEFTX, SDL_CONTROLLER_AXIS_LEFTY);
 }
 
-int toLib(jt::GamepadButtonCode b) { return static_cast<int>(b); }
+SDL_GameControllerButton toLib(jt::GamepadButtonCode b)
+{
+    std::map<jt::GamepadButtonCode, jt::GamepadButtonCode> lookup {
+        { jt::GamepadButtonCode::GPA, jt::GamepadButtonCode::GPA },
+        { jt::GamepadButtonCode::GPB, jt::GamepadButtonCode::GPB },
+        { jt::GamepadButtonCode::GPX, jt::GamepadButtonCode::GPX },
+        { jt::GamepadButtonCode::GPY, jt::GamepadButtonCode::GPY },
+        { jt::GamepadButtonCode::GBLB, jt::GamepadButtonCode::GBRightStick },
+        { jt::GamepadButtonCode::GBRB, jt::GamepadButtonCode::GBU1 },
+        { jt::GamepadButtonCode::GBBack, jt::GamepadButtonCode::GBLB },
+        { jt::GamepadButtonCode::GBStart, jt::GamepadButtonCode::GBBack },
+        { jt::GamepadButtonCode::GBLeftStick, jt::GamepadButtonCode::GBStart },
+        { jt::GamepadButtonCode::GBRightStick, jt::GamepadButtonCode::GBLeftStick },
+        { jt::GamepadButtonCode::GBU1, jt::GamepadButtonCode::GBU8 },
+        { jt::GamepadButtonCode::GBU2, jt::GamepadButtonCode::GBU2 },
+        { jt::GamepadButtonCode::GBU3, jt::GamepadButtonCode::GBU3 },
+        { jt::GamepadButtonCode::GBU4, jt::GamepadButtonCode::GBU4 },
+        { jt::GamepadButtonCode::GBU5, jt::GamepadButtonCode::GBU5 },
+        { jt::GamepadButtonCode::GBU6, jt::GamepadButtonCode::GBU6 },
+        { jt::GamepadButtonCode::GBU7, jt::GamepadButtonCode::GBU7 },
+        { jt::GamepadButtonCode::GBU8, jt::GamepadButtonCode::GBU8 }
+    };
+
+    return static_cast<SDL_GameControllerButton>(lookup[b]);
+}
 
 std::shared_ptr<SDL_GameController> createGamepad(int gamepadId)
 {
@@ -56,4 +80,14 @@ jt::Vector2f jt::libAxisValue(int gamepadId, jt::GamepadAxisCode a)
     return jt::Vector2f { x, y };
 }
 
-bool jt::libGPButtonValue(int gamepadId, jt::GamepadButtonCode b) { return false; }
+bool jt::libGPButtonValue(int gamepadId, jt::GamepadButtonCode b)
+{
+    auto currentGamepad = getGamepad(gamepadId).get();
+
+    if (!SDL_GameControllerGetAttached(currentGamepad)) {
+        return false;
+    }
+
+    auto const libButton = toLib(b);
+    return static_cast<bool>(SDL_GameControllerGetButton(currentGamepad, libButton));
+}
