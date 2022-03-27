@@ -1,5 +1,5 @@
-#ifndef MYAWESOMEGAME_LOGGER_NULL_HPP
-#define MYAWESOMEGAME_LOGGER_NULL_HPP
+#ifndef GUARD_JAMTEMPLATE_LOGGER_NULL_HPP
+#define GUARD_JAMTEMPLATE_LOGGER_NULL_HPP
 
 #include "logging/logger_interface.hpp"
 
@@ -26,4 +26,4 @@ private:
 } // namespace null_objects
 } // namespace jt
 
-#endif // MYAWESOMEGAME_LOGGER_NULL_HPP
+#endif // GUARD_JAMTEMPLATE_LOGGER_NULL_HPP

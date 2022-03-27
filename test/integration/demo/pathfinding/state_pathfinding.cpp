@@ -86,7 +86,7 @@ void StatePathfinding::createTiles()
 void StatePathfinding::doInternalUpdate(float elapsed)
 {
     if (getGame()->input().keyboard()->justPressed(jt::KeyCode::Escape)) {
-        getGame()->getStateManager().switchState(std::make_shared<StateSelect>());
+        getGame()->stateManager().switchState(std::make_shared<StateSelect>());
     }
 
     if (getGame()->input().keyboard()->justPressed(jt::KeyCode::Space)) {

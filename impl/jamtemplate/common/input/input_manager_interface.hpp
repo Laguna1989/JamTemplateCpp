@@ -60,11 +60,52 @@ public:
     virtual void reset() = 0;
 };
 
+class GamepadInputInterface {
+public:
+    /// Destructor
+    virtual ~GamepadInputInterface() = default;
+
+    /// Update the gamepad button states
+    virtual void update() = 0;
+
+    /// Check if a Gamepad key is pressed
+    /// \param b the key
+    /// \return true if pressed, false otherwise
+    virtual bool pressed(GamepadButtonCode b) = 0;
+
+    /// Check if a key is released
+    /// \param b the key
+    /// \return true if released, false otherwise
+    virtual bool released(GamepadButtonCode b) = 0;
+
+    /// Check if a key is just pressed
+    /// \param b the key
+    /// \return true if just pressed, false otherwise
+    virtual bool justPressed(GamepadButtonCode b) = 0;
+
+    /// Check if a key is just released
+    /// \param b the key
+    /// \return true if just released, false otherwise
+    virtual bool justReleased(GamepadButtonCode b) = 0;
+
+    /// Get the raw axis position value
+    /// \return the axis position
+    virtual Vector2f getAxisRaw(jt::GamepadAxisCode axis) = 0;
+
+    /// Get the axis position value
+    /// \param axis
+    /// \return the axis position with range [-1, 1]
+    virtual Vector2f getAxis(jt::GamepadAxisCode axis) = 0;
+
+    /// Reset the Gamepad Input
+    virtual void reset() = 0;
+};
+
 class KeyboardInputInterface {
 public:
     virtual ~KeyboardInputInterface() = default;
 
-    /// Updathe the Keyboard State
+    /// Update the the Keyboard State
     virtual void updateKeys() = 0;
 
     /// Check if a key is pressed
@@ -116,6 +157,12 @@ public:
     /// Get the keyboard input
     /// \return the keyboard input (can be nullptr)
     virtual std::shared_ptr<KeyboardInputInterface> keyboard() = 0;
+
+    /// Get the gamepad input
+    /// \return the gamepad
+    virtual std::shared_ptr<GamepadInputInterface> gamepad(int gamepad_id) = 0;
+
+    virtual std::size_t getNumberOfGamepads() const = 0;
 
     /// Update the input
     /// \param mp the mouse buttons

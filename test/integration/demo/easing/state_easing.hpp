@@ -9,4 +9,4 @@ class StateEasing : public jt::GameState {
     void doInternalDraw() const override;
 };
 
-#endif // MYAWESOMEGAME_STATE_EASING_HPP
+#endif // GUARD_JAMTEMPLATE_STATE_EASING_HPP

@@ -26,4 +26,4 @@ private:
     jt::Vector2f m_offset;
 };
 
-#endif // MYAWESOMEGAME_EASE_OBJECT_HPP
+#endif // GUARD_JAMTEMPLATE_EASE_OBJECT_HPP

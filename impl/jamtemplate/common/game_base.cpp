@@ -66,7 +66,7 @@ jt::InputManagerInterface& jt::GameBase::input() { return m_inputManager; }
 
 jt::AudioInterface& jt::GameBase::audio() { return m_audio; }
 
-jt::StateManagerInterface& jt::GameBase::getStateManager() { return m_stateManager; }
+jt::StateManagerInterface& jt::GameBase::stateManager() { return m_stateManager; }
 
 jt::LoggerInterface& jt::GameBase::getLogger() { return m_logger; }
 
@@ -97,6 +97,9 @@ void jt::GameBase::doUpdate(float const elapsed)
             input().keyboard()->updateKeys();
             input().keyboard()->updateCommands(elapsed);
         }
+    }
+    for (auto i = 0u; i != input().getNumberOfGamepads(); ++i) {
+        input().gamepad(static_cast<int>(i))->update();
     }
 }
 

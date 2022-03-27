@@ -13,12 +13,10 @@ jt::StateManagerTransitionHorizontalBars::StateManagerTransitionHorizontalBars(
     m_numberOfShapes = numberOfShapes;
 }
 
-void jt::StateManagerTransitionHorizontalBars::doUpdate(float elapsed) { }
+void jt::StateManagerTransitionHorizontalBars::doUpdate(float /*elapsed*/) { }
 void jt::StateManagerTransitionHorizontalBars::doStart() { }
 void jt::StateManagerTransitionHorizontalBars::doDraw(std::shared_ptr<jt::RenderTarget> rt)
 {
-    float const r = getRatio();
-
     for (auto i = 0; i != m_numberOfShapes; ++i) {
 
         float const posY = i * m_shape->getLocalBounds().height;

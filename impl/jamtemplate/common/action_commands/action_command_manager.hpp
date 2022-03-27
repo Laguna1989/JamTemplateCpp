@@ -1,5 +1,5 @@
-#ifndef MYAWESOMEGAME_ACTION_COMMAND_MANAGER_HPP
-#define MYAWESOMEGAME_ACTION_COMMAND_MANAGER_HPP
+#ifndef GUARD_JAMTEMPLATE_ACTION_COMMAND_MANAGER_HPP
+#define GUARD_JAMTEMPLATE_ACTION_COMMAND_MANAGER_HPP
 
 #include "action_command_manager_interface.hpp"
 #include "logging/logger_interface.hpp"
@@ -23,4 +23,4 @@ private:
 };
 } // namespace jt
 
-#endif // MYAWESOMEGAME_ACTION_COMMAND_MANAGER_HPP
+#endif // GUARD_JAMTEMPLATE_ACTION_COMMAND_MANAGER_HPP

@@ -12,7 +12,7 @@ jt::Console::Console(jt::LoggerInterface& logger)
     m_inputBufferFilter.resize(200);
 }
 
-void jt::Console::doUpdate(float const elapsed)
+void jt::Console::doUpdate(float const /*elapsed*/)
 {
     handleCommand();
     if (!getGame()->input().keyboard()) {
@@ -159,7 +159,7 @@ void jt::Console::renderOneLogEntry(jt::LogEntry const& entry) const
     }
 
     ImGui::PushStyleColor(ImGuiCol_Text, color);
-    ImGui::Text(text.c_str());
+    ImGui::Text("%s", text.c_str());
     ImGui::PopStyleColor();
 }
 int jt::Console::inputUserCallback(ImGuiInputTextCallbackData* data)

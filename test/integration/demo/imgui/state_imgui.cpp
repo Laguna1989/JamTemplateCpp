@@ -16,7 +16,7 @@ void StateImGui::doInternalUpdate(float /*elapsed*/)
         getGame()->getLogger().fatal("keyboard 'A' not supported", { "Test" });
     }
     if (getGame()->input().keyboard()->justPressed(jt::KeyCode::Escape)) {
-        getGame()->getStateManager().switchState(std::make_shared<StateSelect>());
+        getGame()->stateManager().switchState(std::make_shared<StateSelect>());
     }
 }
 

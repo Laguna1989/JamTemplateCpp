@@ -19,12 +19,31 @@ void jt::KeyboardInputNull::reset() { }
 
 std::shared_ptr<jt::MouseInputInterface> jt::InputManagerNull::mouse()
 {
+    // TODO create class member that is returned
     return std::shared_ptr<MouseInputNull>();
 }
 std::shared_ptr<jt::KeyboardInputInterface> jt::InputManagerNull::keyboard()
 {
+    // TODO create class member that is returned
     return std::shared_ptr<KeyboardInputNull>();
 }
 
 void jt::InputManagerNull::update(jt::MousePosition const&, float) { }
 void jt::InputManagerNull::reset() { }
+
+std::shared_ptr<jt::GamepadInputInterface> jt::InputManagerNull::gamepad(int)
+{
+    // TODO create class member that is returned
+    return std::make_shared<GamepadInputNull>();
+}
+
+size_t jt::InputManagerNull::getNumberOfGamepads() const { return 0; }
+void jt::GamepadInputNull::update() { }
+jt::Vector2f jt::GamepadInputNull::getAxisRaw(jt::GamepadAxisCode) { return Vector2f {}; }
+jt::Vector2f jt::GamepadInputNull::getAxis(jt::GamepadAxisCode) { return Vector2f {}; }
+void jt::GamepadInputNull::reset() { }
+
+bool jt::GamepadInputNull::pressed(jt::GamepadButtonCode) { return false; }
+bool jt::GamepadInputNull::released(jt::GamepadButtonCode) { return false; }
+bool jt::GamepadInputNull::justPressed(jt::GamepadButtonCode) { return false; }
+bool jt::GamepadInputNull::justReleased(jt::GamepadButtonCode) { return false; }

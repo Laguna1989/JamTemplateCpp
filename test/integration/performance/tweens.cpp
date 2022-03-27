@@ -62,7 +62,7 @@ static void BM_GamestateWithTweeningShapes(benchmark::State& state)
         jt::ActionCommandManager actionCommandManager { logger };
         auto game = std::make_shared<jt::Game>(
             gfx, input, audio, stateManager, logger, actionCommandManager);
-        game->getStateManager().update(game, 0);
+        game->stateManager().update(game, 0);
         for (int i = 0; i != 500; ++i) {
             game->update(0.02f);
             game->draw();

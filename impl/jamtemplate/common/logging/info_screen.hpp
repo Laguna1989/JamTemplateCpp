@@ -21,4 +21,4 @@ private:
 };
 } // namespace jt
 
-#endif // MYAWESOMEGAME_INFO_SCREEN_HPP
+#endif // GUARD_JAMTEMPLATE_INFO_SCREEN_HPP

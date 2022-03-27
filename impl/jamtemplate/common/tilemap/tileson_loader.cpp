@@ -175,8 +175,6 @@ jt::TilemapCollisions jt::tilemap::TilesonLoader::loadCollisionsFromLayer(
             continue;
         }
         for (auto& [pos, tile] : layer.getTileObjects()) {
-
-            bool isBlocked = false;
             auto blockedProperty = tile.getTile()->getProp("blocked");
             if (!blockedProperty) {
                 continue;

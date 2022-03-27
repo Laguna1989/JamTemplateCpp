@@ -24,4 +24,4 @@ private:
     void doDraw() const override;
 };
 
-#endif // MYAWESOMEGAME_WORLD_ITEM_HPP
+#endif // GUARD_JAMTEMPLATE_WORLD_ITEM_HPP

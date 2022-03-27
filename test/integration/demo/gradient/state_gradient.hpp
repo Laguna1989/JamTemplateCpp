@@ -20,4 +20,4 @@ private:
     void createShapesFromSaturationGradient();
 };
 
-#endif // MYAWESOMEGAME_STATE_GRADIENT_HPP
+#endif // GUARD_JAMTEMPLATE_STATE_GRADIENT_HPP

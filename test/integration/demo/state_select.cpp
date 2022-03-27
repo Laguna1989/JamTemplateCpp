@@ -3,6 +3,7 @@
 #include "box2d/state_box2d.hpp"
 #include "easing/state_easing.hpp"
 #include "explosion/state_explosion.hpp"
+#include "gamepad/state_gamepad.hpp"
 #include "gradient/state_gradient.hpp"
 #include "imgui/state_imgui.hpp"
 #include "inventory/state_inventory.hpp"
@@ -33,6 +34,7 @@ void StateSelect::doInternalCreate()
     AddButton<StateEasing>("Easing");
     AddButton<StateInventory>("Inventory");
     AddButton<StateAudio>("Audio");
+    AddButton<StateGamepad>("Gamepad");
 
     add(std::make_shared<jt::LicenseInfo>());
 }
