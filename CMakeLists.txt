@@ -31,10 +31,8 @@ if (JT_ENABLE_WEB)
 
     add_link_options("SHELL:-s TOTAL_MEMORY=256MB"
             "SHELL:-s ALLOW_MEMORY_GROWTH=1"
-            "SHELL:-s FORCE_FILESYSTEM=1"
             "SHELL:--use-preload-plugins"
-            "SHELL:--preload-file assets"
-            "SHELL:--pre-js ${CMAKE_SOURCE_DIR}/joystick-pre.js")
+            "SHELL:--preload-file assets")
 else ()
     if (MSVC)
         ## nasty warning 5205 from tileson should not show up,
