@@ -9,7 +9,7 @@ if (NOT USE_SFML)
     list(REMOVE_ITEM UNITTESTFILES
             "${CMAKE_CURRENT_SOURCE_DIR}/game_test.cpp"
             "${CMAKE_CURRENT_SOURCE_DIR}/render_window_sfml_test.cpp"
-            "drawables/sprite_sfml_test.cpp")
+            "${CMAKE_CURRENT_SOURCE_DIR}/drawables/sprite_sfml_test.cpp")
 else ()
 endif ()
 
