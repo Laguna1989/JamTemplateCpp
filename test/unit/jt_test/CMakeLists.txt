@@ -1,13 +1,13 @@
 file(GLOB_RECURSE UNITTESTFILES CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/*)
 if ((NOT JT_ENABLE_AUDIO_TESTS) OR JT_ENABLE_WEB)
     list(REMOVE_ITEM UNITTESTFILES
-            "${CMAKE_CURRENT_SOURCE_DIR}/sound_test.cpp")
+            "audio/sound_test.cpp")
 endif ()
 if (NOT USE_SFML)
     list(REMOVE_ITEM UNITTESTFILES
             "${CMAKE_CURRENT_SOURCE_DIR}/game_test.cpp"
             "${CMAKE_CURRENT_SOURCE_DIR}/render_window_sfml_test.cpp"
-            "${CMAKE_CURRENT_SOURCE_DIR}/sprite_sfml_test.cpp")
+            "drawables/sprite_sfml_test.cpp")
 else ()
 endif ()
 

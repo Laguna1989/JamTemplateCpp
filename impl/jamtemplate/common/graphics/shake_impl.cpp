@@ -14,7 +14,8 @@ void jt::ShakeImpl::updateShake(float elapsed)
         m_shakeInterval -= elapsed;
 
     } else {
-        m_shakeOffset.x = m_shakeOffset.y = 0;
+        m_shakeOffset.x = 0;
+        m_shakeOffset.y = 0;
     }
 }
 void jt::ShakeImpl::doShake(float t, float strength, float shakeInterval)

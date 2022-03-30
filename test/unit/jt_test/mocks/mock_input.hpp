@@ -4,7 +4,7 @@
 #include "input/input_manager_interface.hpp"
 #include <gmock/gmock.h>
 
-class MockMouseInput : public jt::MouseInputInterface {
+class MockMouseInput : public jt::MouseInterface {
 public:
     MOCK_METHOD(void, updateMousePosition, (jt::MousePosition const&), (override));
     MOCK_METHOD(void, updateButtons, (), (override));
@@ -17,7 +17,7 @@ public:
     MOCK_METHOD(void, reset, (), (override));
 };
 
-class MockKeyboardInput : public jt::KeyboardInputInterface {
+class MockKeyboardInput : public jt::KeyboardInterface {
 public:
     MOCK_METHOD(void, updateKeys, (), (override));
     MOCK_METHOD(bool, pressed, (jt::KeyCode), (override));
@@ -44,11 +44,11 @@ public:
 
 class MockInput : public jt::InputManagerInterface {
 public:
-    MOCK_METHOD(std::shared_ptr<jt::MouseInputInterface>, mouse, (), (override));
-    MOCK_METHOD(std::shared_ptr<jt::KeyboardInputInterface>, keyboard, (), (override));
+    MOCK_METHOD(std::shared_ptr<jt::MouseInterface>, mouse, (), (override));
+    MOCK_METHOD(std::shared_ptr<jt::KeyboardInterface>, keyboard, (), (override));
     MOCK_METHOD(void, update, (const jt::MousePosition&, float), (override));
     MOCK_METHOD(void, reset, (), (override));
-    MOCK_METHOD(std::shared_ptr<jt::GamepadInputInterface>, gamepad, (int), (override));
+    MOCK_METHOD(std::shared_ptr<jt::GamepadInterface>, gamepad, (int), (override));
     MOCK_METHOD(size_t, getNumberOfGamepads, (), (const, override));
 };
 

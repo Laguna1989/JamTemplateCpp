@@ -19,7 +19,7 @@ float jt::SoundNull::getPosition() const { return 0; }
 void jt::SoundNull::setBlend(float /*blend*/) { }
 float jt::SoundNull::getBlend() const { return 0; }
 
-int jt::SoundNull::getSampleRate() const { return 0; }
+int jt::SoundNull::getSampleRate() const { return 44100; }
 
 void jt::SoundNull::setPitch(float pitch) { }
 float jt::SoundNull::getPitch() const { return 1.0f; }

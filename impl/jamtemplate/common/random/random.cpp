@@ -35,7 +35,7 @@ jt::Color jt::Random::getRandomColor()
     return jt::Color { r, g, b };
 }
 
-jt::Vector2f jt::Random::getRandomPointIn(jt::Rectf rect)
+jt::Vector2f jt::Random::getRandomPointIn(Rectf const& rect)
 {
     auto const x = getFloat(rect.left, rect.left + rect.width);
     auto const y = getFloat(rect.top, rect.top + rect.height);

@@ -1,5 +1,5 @@
 ﻿#include "state_explosion.hpp"
-#include "../object.hpp"
+#include "object.hpp"
 #include "../state_select.hpp"
 #include "game_interface.hpp"
 #include "input/input_manager.hpp"

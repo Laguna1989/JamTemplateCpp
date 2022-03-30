@@ -63,10 +63,10 @@ void GamepadVisualizer::doUpdate(float const elapsed)
         + jt::Vector2f { gpr.x * halfsize.x, gpr.y * halfsize.y });
     dotRight->update(elapsed);
 
-    if (getGame()->input().gamepad(m_id)->justPressed(jt::GamepadButtonCode::GPA)) {
+    if (getGame()->input().gamepad(m_id)->justPressed(jt::GamepadButtonCode::GBA)) {
         backgroundLeft->flash(0.25f);
     }
-    if (getGame()->input().gamepad(m_id)->justPressed(jt::GamepadButtonCode::GPB)) {
+    if (getGame()->input().gamepad(m_id)->justPressed(jt::GamepadButtonCode::GBB)) {
         backgroundRight->flash(0.125f);
     }
 }
@@ -83,9 +83,9 @@ void GamepadVisualizer::doDraw() const
 
 std::string GamepadVisualizer::getPressedKey(jt::GamepadButtonCode b)
 {
-    std::map<jt::GamepadButtonCode, std::string> lookup { { jt::GamepadButtonCode::GPA, "A" },
-        { jt::GamepadButtonCode::GPB, "B" }, { jt::GamepadButtonCode::GPX, "X" },
-        { jt::GamepadButtonCode::GPY, "Y" }, { jt::GamepadButtonCode::GBLB, "LB" },
+    std::map<jt::GamepadButtonCode, std::string> lookup { { jt::GamepadButtonCode::GBA, "A" },
+        { jt::GamepadButtonCode::GBB, "B" }, { jt::GamepadButtonCode::GBX, "X" },
+        { jt::GamepadButtonCode::GBY, "Y" }, { jt::GamepadButtonCode::GBLB, "LB" },
         { jt::GamepadButtonCode::GBRB, "RB" }, { jt::GamepadButtonCode::GBBack, "Back" },
         { jt::GamepadButtonCode::GBStart, "Start" },
         { jt::GamepadButtonCode::GBLeftStick, "Left Stick" },
