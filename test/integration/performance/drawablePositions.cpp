@@ -26,7 +26,8 @@ static void BM_UpdateDrawablePositions(benchmark::State& state)
         a.play("idle");
     }
 
-    auto const idsToChange = jt::MathHelper::numbersBetween(0U, arraySize / 3U);
+    auto const idsToChange
+        = jt::MathHelper::numbersBetween(0U, static_cast<unsigned int>(arraySize / 3U));
     for (auto _ : state) {
 
         for (auto i = 0u; i != numberOfIterationLoops; ++i) {
