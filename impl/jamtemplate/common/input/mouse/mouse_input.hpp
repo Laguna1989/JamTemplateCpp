@@ -1,7 +1,7 @@
 ﻿#ifndef GUARD_JAMTEMPLATE_MOUSEINPUT_HPP_INCLUDEGUARD
 #define GUARD_JAMTEMPLATE_MOUSEINPUT_HPP_INCLUDEGUARD
 
-#include "mouse_defaults.hpp"
+#include "mouse_defines.hpp"
 #include "mouse_input_lib.hpp"
 #include "mouse_interface.hpp"
 #include <functional>

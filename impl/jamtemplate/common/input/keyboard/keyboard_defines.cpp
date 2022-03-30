@@ -1,4 +1,4 @@
-﻿#include "keyboard_defaults.hpp"
+﻿#include "keyboard_defines.hpp"
 #include <cstdint>
 
 std::vector<jt::KeyCode> jt::getAllKeys()

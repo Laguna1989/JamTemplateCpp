@@ -1,5 +1,5 @@
-﻿#ifndef GUARD_JAMTEMPLATE_KEYCODES_HPP
-#define GUARD_JAMTEMPLATE_KEYCODES_HPP
+﻿#ifndef GUARD_JAMTEMPLATE_KEYBOARD_DEFINES_HPP
+#define GUARD_JAMTEMPLATE_KEYBOARD_DEFINES_HPP
 
 #include <vector>
 
@@ -115,4 +115,5 @@ enum class KeyCode {
 std::vector<jt::KeyCode> getAllKeys();
 
 } // namespace jt
-#endif
+
+#endif // GUARD_JAMTEMPLATE_KEYBOARD_DEFINES_HPP

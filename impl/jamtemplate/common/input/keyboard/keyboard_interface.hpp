@@ -2,7 +2,7 @@
 #define GUARD_JAMTEMPLATE_KEYBOARD_INTERFACE_HPP
 
 #include "input/control_commands/control_command_interface.hpp"
-#include "keyboard_defaults.hpp"
+#include "keyboard_defines.hpp"
 #include <memory>
 
 namespace jt {

@@ -1,4 +1,5 @@
 #include "gamepad_defines.hpp"
+#include <cstdint>
 
 namespace jt {
 

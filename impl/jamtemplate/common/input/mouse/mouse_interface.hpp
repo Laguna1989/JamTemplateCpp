@@ -1,7 +1,7 @@
 #ifndef GUARD_JAMTEMPLATE_MOUSE_INTERFACE_HPP
 #define GUARD_JAMTEMPLATE_MOUSE_INTERFACE_HPP
 
-#include "mouse_defaults.hpp"
+#include "mouse_defines.hpp"
 #include "vector.hpp"
 
 namespace jt {

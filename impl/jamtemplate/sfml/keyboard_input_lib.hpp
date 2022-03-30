@@ -1,7 +1,7 @@
 ﻿#ifndef GUARD_JAMTEMPLATE_KEYBOARDINPUTLIB_HPP_INCLUDEGUARD
 #define GUARD_JAMTEMPLATE_KEYBOARDINPUTLIB_HPP_INCLUDEGUARD
 
-#include "input/keyboard/keyboard_defaults.hpp"
+#include "input/keyboard/keyboard_defines.hpp"
 
 namespace jt {
 

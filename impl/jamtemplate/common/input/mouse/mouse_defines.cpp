@@ -1,4 +1,5 @@
-#include "mouse_defaults.hpp"
+#include "mouse_defines.hpp"
+#include <cstdint>
 
 std::vector<jt::MouseButtonCode> jt::getAllMouseButtons()
 {

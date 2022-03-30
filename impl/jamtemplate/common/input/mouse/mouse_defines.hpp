@@ -1,5 +1,5 @@
-#ifndef GUARD_JAMTEMPLATE_MOUSE_DEFAULTS_HPP
-#define GUARD_JAMTEMPLATE_MOUSE_DEFAULTS_HPP
+#ifndef GUARD_JAMTEMPLATE_MOUSE_DEFINES_HPP
+#define GUARD_JAMTEMPLATE_MOUSE_DEFINES_HPP
 
 #include <vector>
 
@@ -23,4 +23,4 @@ std::vector<jt::MouseButtonCode> getAllMouseButtons();
 
 } // namespace jt
 
-#endif // GUARD_JAMTEMPLATE_MOUSE_DEFAULTS_HPP
+#endif // GUARD_JAMTEMPLATE_MOUSE_DEFINES_HPP

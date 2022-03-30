@@ -1,7 +1,7 @@
 ﻿#ifndef GUARD_JAMTEMPLATE_MOUSEINPUTLIB_HPP_INCLUDEGUARD
 #define GUARD_JAMTEMPLATE_MOUSEINPUTLIB_HPP_INCLUDEGUARD
 
-#include "input/mouse/mouse_defaults.hpp"
+#include "input/mouse/mouse_defines.hpp"
 
 namespace jt {
 

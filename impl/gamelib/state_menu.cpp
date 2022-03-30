@@ -4,7 +4,6 @@
 #include "game_interface.hpp"
 #include "game_properties.hpp"
 #include "input/input_manager.hpp"
-#include "input/keyboard/keyboard_defaults.hpp"
 #include "lerp.hpp"
 #include "logging/license_info.hpp"
 #include "math_helper.hpp"
