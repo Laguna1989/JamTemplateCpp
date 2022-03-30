@@ -34,6 +34,10 @@ if (JT_ENABLE_WEB)
             "SHELL:--use-preload-plugins"
             "SHELL:--preload-file assets")
 else ()
+    if (NOT CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
+        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -lstdc++fs")
+    endif ()
+
     if (MSVC)
         ## nasty warning 5205 from tileson should not show up,
         ## so the warning level of this one is set to 4 and the global warning level is set to three
@@ -44,7 +48,7 @@ else ()
         elseif (JT_ENABLE_PERFORMANCETESTS)
             set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -O3 --std=c++17 -fpermissive -lstdc++fs")
         else ()
-            set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -O3 --std=c++17 -fpermissive -lstdc++fs")
+            set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -O3 --std=c++17 -fpermissive")
         endif ()
     endif ()
 endif ()
