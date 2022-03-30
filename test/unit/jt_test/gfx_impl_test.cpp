@@ -63,6 +63,8 @@ TEST(GfxImplTest, ClearDoesNotThrow)
     ASSERT_NO_THROW(gfx.clear());
 }
 
+#if USE_SFML
+
 TEST(GfxImplTest, DisplayDoesNotThrow)
 {
     jt::RenderWindow window { 800, 600, "jt_tests" };
@@ -71,3 +73,5 @@ TEST(GfxImplTest, DisplayDoesNotThrow)
 
     ASSERT_NO_THROW(gfx.display());
 }
+
+#endif
