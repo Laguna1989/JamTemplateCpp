@@ -1,149 +1,13 @@
 ﻿#ifndef GUARD_JAMTEMPLATE_INPUTMANAGERINTERFACE_HPP
 #define GUARD_JAMTEMPLATE_INPUTMANAGERINTERFACE_HPP
 
-#include "control_command_interface.hpp"
-#include "key_codes.hpp"
-#include "vector.hpp"
+#include "input/control_commands/control_command_interface.hpp"
+#include "input/gamepad/gamepad_interface.hpp"
+#include "input/keyboard/keyboard_interface.hpp"
+#include "input/mouse/mouse_interface.hpp"
 #include <memory>
 
 namespace jt {
-
-struct MousePosition {
-    float window_x { 0.0f };
-    float window_y { 0.0f };
-
-    float screen_x { 0.0f };
-    float screen_y { 0.0f };
-};
-
-class MouseInputInterface {
-public:
-    /// Destructor
-    virtual ~MouseInputInterface() = default;
-
-    /// Update the mouse position
-    /// \param mousePosition the new mouse position
-    virtual void updateMousePosition(MousePosition const& mousePosition) = 0;
-
-    /// Update the mouse button states
-    virtual void updateButtons() = 0;
-
-    /// Get the mouse position in the world
-    /// \return the mouse position
-    virtual jt::Vector2f getMousePositionWorld() = 0;
-
-    /// Get the mouse on the screen
-    /// \return the mouse position
-    virtual jt::Vector2f getMousePositionScreen() = 0;
-
-    /// Check if a button is pressed
-    /// \param b the button
-    /// \return true if pressed, false otherwise
-    virtual bool pressed(jt::MouseButtonCode b) = 0;
-
-    /// Check if a button is released
-    /// \param b the button
-    /// \return true if released, false otherwise
-    virtual bool released(jt::MouseButtonCode b) = 0;
-
-    /// Check if a button is just pressed
-    /// \param b the button
-    /// \return true if just released, false otherwise
-    virtual bool justPressed(jt::MouseButtonCode b) = 0;
-
-    /// Check if a button is just released
-    /// \param b the button
-    /// \return true if just released, false otherwise
-    virtual bool justReleased(jt::MouseButtonCode b) = 0;
-
-    /// Reset the MouseInput
-    virtual void reset() = 0;
-};
-
-class GamepadInputInterface {
-public:
-    /// Destructor
-    virtual ~GamepadInputInterface() = default;
-
-    /// Update the gamepad button states
-    virtual void update() = 0;
-
-    /// Check if a Gamepad key is pressed
-    /// \param b the key
-    /// \return true if pressed, false otherwise
-    virtual bool pressed(GamepadButtonCode b) = 0;
-
-    /// Check if a key is released
-    /// \param b the key
-    /// \return true if released, false otherwise
-    virtual bool released(GamepadButtonCode b) = 0;
-
-    /// Check if a key is just pressed
-    /// \param b the key
-    /// \return true if just pressed, false otherwise
-    virtual bool justPressed(GamepadButtonCode b) = 0;
-
-    /// Check if a key is just released
-    /// \param b the key
-    /// \return true if just released, false otherwise
-    virtual bool justReleased(GamepadButtonCode b) = 0;
-
-    /// Get the raw axis position value
-    /// \return the axis position
-    virtual Vector2f getAxisRaw(jt::GamepadAxisCode axis) = 0;
-
-    /// Get the axis position value
-    /// \param axis
-    /// \return the axis position with range [-1, 1]
-    virtual Vector2f getAxis(jt::GamepadAxisCode axis) = 0;
-
-    /// Reset the Gamepad Input
-    virtual void reset() = 0;
-};
-
-class KeyboardInputInterface {
-public:
-    virtual ~KeyboardInputInterface() = default;
-
-    /// Update the the Keyboard State
-    virtual void updateKeys() = 0;
-
-    /// Check if a key is pressed
-    /// \param k the key
-    /// \return true if pressed, false otherwise
-    virtual bool pressed(jt::KeyCode k) = 0;
-
-    /// Check if a key is released
-    /// \param k the key
-    /// \return true if released, false otherwise
-    virtual bool released(jt::KeyCode k) = 0;
-
-    /// Check if a key is just pressed
-    /// \param k the key
-    /// \return true if just pressed, false otherwise
-    virtual bool justPressed(jt::KeyCode k) = 0;
-
-    /// Check if a key is just released
-    /// \param k the key
-    /// \return true if just released, false otherwise
-    virtual bool justReleased(jt::KeyCode k) = 0;
-
-    virtual void reset() = 0;
-
-    virtual void setCommandJustPressed(
-        std::vector<KeyCode> const& key, std::shared_ptr<jt::ControlCommandInterface> command)
-        = 0;
-    virtual void setCommandPressed(
-        std::vector<KeyCode> const& key, std::shared_ptr<jt::ControlCommandInterface> command)
-        = 0;
-    virtual void setCommandReleased(
-        std::vector<KeyCode> const& key, std::shared_ptr<jt::ControlCommandInterface> command)
-        = 0;
-    virtual void setCommandJustReleased(
-        std::vector<KeyCode> const& key, std::shared_ptr<jt::ControlCommandInterface> command)
-        = 0;
-    virtual void updateCommands(float elapsed) = 0;
-};
 
 class InputManagerInterface {
 public:
@@ -152,15 +16,15 @@ public:
 
     /// Get the mouse input
     /// \return the mouse input (can be nullptr)
-    virtual std::shared_ptr<MouseInputInterface> mouse() = 0;
+    virtual std::shared_ptr<MouseInterface> mouse() = 0;
 
     /// Get the keyboard input
     /// \return the keyboard input (can be nullptr)
-    virtual std::shared_ptr<KeyboardInputInterface> keyboard() = 0;
+    virtual std::shared_ptr<KeyboardInterface> keyboard() = 0;
 
     /// Get the gamepad input
     /// \return the gamepad
-    virtual std::shared_ptr<GamepadInputInterface> gamepad(int gamepad_id) = 0;
+    virtual std::shared_ptr<GamepadInterface> gamepad(int gamepad_id) = 0;
 
     virtual std::size_t getNumberOfGamepads() const = 0;
 

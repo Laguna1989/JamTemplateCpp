@@ -2,7 +2,7 @@
 #define GUARD_JAMTEMPLATE_CONTROL_COMMAND_MOVE_B_2_BODY_HPP
 
 #include "box2dwrapper/box2d_object.hpp"
-#include "input/control_command_once.hpp"
+#include "input/control_commands/control_command_once.hpp"
 
 class ControlCommandMoveB2Body : public jt::ControlCommandOnce {
 public:

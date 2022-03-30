@@ -17,10 +17,13 @@ public:
     CamInterface& camera() override;
     std::shared_ptr<RenderTarget> target() override;
     TextureManagerInterface& textureManager() override;
+
     void reset() override;
     void update(float elapsed) override;
     void clear() override;
     void display() override;
+
+    void setTextureManager(jt::TextureManagerImpl& tm);
 
 private:
     RenderWindowNull m_window;

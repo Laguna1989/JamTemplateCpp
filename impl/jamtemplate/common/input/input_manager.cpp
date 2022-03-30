@@ -1,17 +1,18 @@
 ﻿#include "input_manager.hpp"
+#include "input/gamepad/gamepad_input_null.hpp"
 #include "input_manager_null.hpp"
 
-jt::InputManager::InputManager(std::shared_ptr<jt::MouseInputInterface> mouse,
-    std::shared_ptr<jt::KeyboardInputInterface> keyboard,
-    std::vector<std::shared_ptr<jt::GamepadInputInterface>> gamepads)
+jt::InputManager::InputManager(std::shared_ptr<jt::MouseInterface> mouse,
+    std::shared_ptr<jt::KeyboardInterface> keyboard,
+    std::vector<std::shared_ptr<jt::GamepadInterface>> gamepads)
     : m_mouse { mouse }
     , m_keyboard { keyboard }
     , m_gamepads { gamepads }
 {
 }
 
-std::shared_ptr<jt::MouseInputInterface> jt::InputManager::mouse() { return m_mouse; }
-std::shared_ptr<jt::KeyboardInputInterface> jt::InputManager::keyboard() { return m_keyboard; }
+std::shared_ptr<jt::MouseInterface> jt::InputManager::mouse() { return m_mouse; }
+std::shared_ptr<jt::KeyboardInterface> jt::InputManager::keyboard() { return m_keyboard; }
 
 void jt::InputManager::reset()
 {
@@ -41,7 +42,7 @@ void jt::InputManager::update(jt::MousePosition const& mp, float elapsed)
     }
 }
 
-std::shared_ptr<jt::GamepadInputInterface> jt::InputManager::gamepad(int gamepad_id)
+std::shared_ptr<jt::GamepadInterface> jt::InputManager::gamepad(int gamepad_id)
 {
     if (gamepad_id >= 0 && static_cast<std::size_t>(gamepad_id) < m_gamepads.size()) {
         return m_gamepads[gamepad_id];

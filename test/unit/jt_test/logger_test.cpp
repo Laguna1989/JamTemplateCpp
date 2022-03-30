@@ -1,5 +1,6 @@
 #include "logging/logger.hpp"
 #include "logging/logger_null.hpp"
+#include "mocks/mock_log_target.hpp"
 #include <gtest/gtest.h>
 
 template <typename T>
@@ -19,6 +20,12 @@ TYPED_TEST(LoggerTypedTestFixture, AddNullptrLogTarget)
 {
     TypeParam logger;
     ASSERT_NO_THROW(logger.addLogTarget(nullptr));
+}
+
+TYPED_TEST(LoggerTypedTestFixture, AddMockLogTarget)
+{
+    TypeParam logger;
+    ASSERT_NO_THROW(logger.addLogTarget(std::make_shared<MockLogTarget>()));
 }
 
 TYPED_TEST(LoggerTypedTestFixture, ActionDoesNotRaiseException)
@@ -61,6 +68,15 @@ TYPED_TEST(LoggerTypedTestFixture, VerboseDoesNotRaiseException)
 {
     TypeParam logger;
     ASSERT_NO_THROW(logger.verbose(""));
+}
+
+TEST(LoggerTest, LogToMockTarget)
+{
+    jt::Logger logger;
+    auto target = std::make_shared<MockLogTarget>();
+    logger.addLogTarget(target);
+    EXPECT_CALL(*target, log(::testing::_));
+    logger.fatal("", {});
 }
 
 TYPED_TEST(LoggerTypedTestFixture, SetLogLevelDoesNotRaiseException)

@@ -21,17 +21,17 @@ void jt::AudioNull::removePermanentSound(std::string const& /*identifier*/) { }
 std::shared_ptr<jt::SoundInterface> jt::AudioNull::addTemporarySound(
     std::string const& /*fileName*/)
 {
-    return std::shared_ptr<jt::SoundNull>();
+    return std::make_shared<jt::SoundNull>();
 }
 
 std::shared_ptr<jt::SoundInterface> jt::AudioNull::addPermanentSound(
     std::string const& /*identifier*/, std::string const& /*fileName*/)
 {
-    return std::shared_ptr<jt::SoundNull>();
+    return std::make_shared<jt::SoundNull>();
 }
 std::shared_ptr<jt::SoundInterface> jt::AudioNull::addPermanentSound(
     std::string const& /*identifier*/, std::string const& /*fileName*/,
     oalpp::effects::MonoEffectInterface& /*effect*/)
 {
-    return std::shared_ptr<jt::SoundNull>();
+    return std::make_shared<jt::SoundNull>();
 }
