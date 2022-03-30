@@ -1,8 +1,6 @@
 #include "gamepad_defines.hpp"
 #include <cstdint>
 
-namespace jt {
-
 std::vector<jt::GamepadAxisCode> jt::getAllAxis()
 {
     auto const maxValue = static_cast<std::uint32_t>(jt::GamepadAxisCode::AxisCount);
@@ -21,5 +19,3 @@ std::vector<jt::GamepadButtonCode> jt::getAllGamepadButtons()
     }
     return values;
 }
-
-} // namespace jt
