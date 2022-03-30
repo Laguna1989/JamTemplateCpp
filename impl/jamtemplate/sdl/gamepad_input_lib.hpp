@@ -1,7 +1,7 @@
 #ifndef GUARD_JAMTEMPLATE_GAMEPAD_INPUT_LIB_HPP
 #define GUARD_JAMTEMPLATE_GAMEPAD_INPUT_LIB_HPP
 
-#include "input/keyboard/keyboard_defines.hpp"
+#include "input/gamepad/gamepad_defines.hpp"
 #include "vector.hpp"
 
 namespace jt {
