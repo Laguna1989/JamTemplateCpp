@@ -18,10 +18,10 @@ std::pair<SDL_GameControllerAxis, SDL_GameControllerAxis> toLib(jt::GamepadAxisC
 SDL_GameControllerButton toLib(jt::GamepadButtonCode b)
 {
     std::map<jt::GamepadButtonCode, jt::GamepadButtonCode> lookup {
-        { jt::GamepadButtonCode::GPA, jt::GamepadButtonCode::GPA },
-        { jt::GamepadButtonCode::GPB, jt::GamepadButtonCode::GPB },
-        { jt::GamepadButtonCode::GPX, jt::GamepadButtonCode::GPX },
-        { jt::GamepadButtonCode::GPY, jt::GamepadButtonCode::GPY },
+        { jt::GamepadButtonCode::GBA, jt::GamepadButtonCode::GBA },
+        { jt::GamepadButtonCode::GBB, jt::GamepadButtonCode::GBB },
+        { jt::GamepadButtonCode::GBX, jt::GamepadButtonCode::GBX },
+        { jt::GamepadButtonCode::GBY, jt::GamepadButtonCode::GBY },
         { jt::GamepadButtonCode::GBLB, jt::GamepadButtonCode::GBRightStick },
         { jt::GamepadButtonCode::GBRB, jt::GamepadButtonCode::GBU1 },
         { jt::GamepadButtonCode::GBBack, jt::GamepadButtonCode::GBLB },
