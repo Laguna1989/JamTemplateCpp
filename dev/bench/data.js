@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1648405781689,
+  "lastUpdate": 1648668780127,
   "repoUrl": "https://github.com/Laguna1989/JamTemplateCpp",
   "entries": {
     "Benchmark": [
@@ -4356,6 +4356,48 @@ window.BENCHMARK_DATA = {
             "value": 2.7465919884615064,
             "unit": "ms/iter",
             "extra": "iterations: 260\ncpu: 2.746205 ms\nthreads: 1"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "laguna.ws@gmail.com",
+            "name": "Laguna1989",
+            "username": "Laguna1989"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "a77ff2ac1bd1c6fe831746a71e05d5d07b328e45",
+          "message": "Merge pull request #173 from Laguna1989/FEATURE_Clang\n\nDo not set lstdc++fs if using clang",
+          "timestamp": "2022-03-30T21:26:22+02:00",
+          "tree_id": "ce445b1a4b37ef1a09106aa31be23dddeff91e2d",
+          "url": "https://github.com/Laguna1989/JamTemplateCpp/commit/a77ff2ac1bd1c6fe831746a71e05d5d07b328e45"
+        },
+        "date": 1648668779025,
+        "tool": "googlecpp",
+        "benches": [
+          {
+            "name": "BM_UpdateDrawablePositions",
+            "value": 5.027304621428844,
+            "unit": "ms/iter",
+            "extra": "iterations: 140\ncpu: 5.025632142857144 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_StartGame",
+            "value": 0.003490776703646763,
+            "unit": "ms/iter",
+            "extra": "iterations: 206058\ncpu: 0.003479907113531142 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GamestateWithTweeningShapes",
+            "value": 3.6965372604165956,
+            "unit": "ms/iter",
+            "extra": "iterations: 192\ncpu: 3.6957083333333345 ms\nthreads: 1"
           }
         ]
       }
