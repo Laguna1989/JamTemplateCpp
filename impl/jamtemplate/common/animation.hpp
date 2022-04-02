@@ -93,7 +93,7 @@ public:
 
     std::size_t getCurrentAnimationFrameIndex() const;
 
-    void setCustomShader(
+    [[deprecated("Currently only implemented for SFML")]] void setCustomShader(
         std::string const& shaderCodeVertex, std::string const& shaderCodeFragment) override;
 
 private:

@@ -6,7 +6,7 @@
 namespace jt {
 class DrawableImplSdl : public jt::DrawableImpl {
 public:
-    void setCustomShader(
+    [[deprecated("Currently only implemented for SFML")]] void setCustomShader(
         std::string const& shaderCodeVertex, std::string const& shaderCodeFragment) override;
 };
 

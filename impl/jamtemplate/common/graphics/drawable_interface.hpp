@@ -148,9 +148,14 @@ public:
     /// \return
     virtual bool getIgnoreCamMovement() const = 0;
 
+    /// Set the screensize hint. This will be used to avoid drawing of off-screen drawables.
+    /// \param hint the size of the screen
     virtual void setScreenSizeHint(jt::Vector2f const& hint) = 0;
 
-    virtual void setCustomShader(
+    /// Set a custom shader for this drawable.
+    /// \param shaderCodeVertex the vertex shader code
+    /// \param shaderCodeFragment the fragment shader code
+    [[deprecated("Currently only implemented for SFML")]] virtual void setCustomShader(
         std::string const& shaderCodeVertex, std::string const& shaderCodeFragment)
         = 0;
 

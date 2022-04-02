@@ -53,7 +53,7 @@ public:
 
     bool isVisible() const override;
 
-    void setCustomShader(
+    [[deprecated("Currently only implemented for SFML")]] void setCustomShader(
         std::string const& shaderCodeVertex, std::string const& shaderCodeFragment) override;
 
 private:
