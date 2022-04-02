@@ -1,7 +1,7 @@
 ﻿#ifndef GUARD_JAMTEMPLATE_SHAPE_HPP_INCLUDEGUARD
 #define GUARD_JAMTEMPLATE_SHAPE_HPP_INCLUDEGUARD
 
-#include "graphics/drawable_impl.hpp"
+#include "drawable_impl_sfml.hpp"
 #include "render_target.hpp"
 #include "texture_manager_interface.hpp"
 #include <memory>
@@ -11,7 +11,7 @@ class Shape;
 }
 
 namespace jt {
-class Shape : public DrawableImpl {
+class Shape : public DrawableImplSFML {
 public:
     using Sptr = std::shared_ptr<Shape>;
 

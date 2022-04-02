@@ -1,12 +1,12 @@
 #ifndef GUARD_JAMTEMPLATE_LINE_HPP_INCLUDEGUARD
 #define GUARD_JAMTEMPLATE_LINE_HPP_INCLUDEGUARD
 
-#include "graphics/drawable_impl.hpp"
+#include "drawable_impl_sdl.hpp"
 #include "render_target.hpp"
 #include "vector.hpp"
 
 namespace jt {
-class Line : public DrawableImpl {
+class Line : public DrawableImplSdl {
 public:
     using Sptr = std::shared_ptr<Line>;
     Line(jt::Vector2f lineVector);

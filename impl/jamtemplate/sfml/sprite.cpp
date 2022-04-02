@@ -94,7 +94,11 @@ void jt::Sprite::doDrawShadow(std::shared_ptr<jt::RenderTarget> const sptr) cons
 void jt::Sprite::doDraw(std::shared_ptr<jt::RenderTarget> const sptr) const
 {
     if (sptr) {
-        sptr->draw(m_sprite);
+        if (m_shader) {
+            sptr->draw(m_sprite, sf::RenderStates { m_shader.get() });
+        } else {
+            sptr->draw(m_sprite);
+        }
     }
 }
 

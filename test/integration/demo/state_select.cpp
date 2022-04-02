@@ -12,6 +12,7 @@
 #include "pathfinding/state_pathfinding.hpp"
 #include "rope/state_rope.hpp"
 #include "scroll/state_scroll.hpp"
+#include "shader/state_shaders.hpp"
 #include "simplex/state_3d_noise.hpp"
 #include "swarmobjects/state_swarmobjects.hpp"
 #include "tileson/state_tileson.hpp"
@@ -35,6 +36,7 @@ void StateSelect::doInternalCreate()
     AddButton<StateInventory>("Inventory");
     AddButton<StateAudio>("Audio");
     AddButton<StateGamepad>("Gamepad");
+    AddButton<StateShaders>("Shaders");
 
     add(std::make_shared<jt::LicenseInfo>());
 }

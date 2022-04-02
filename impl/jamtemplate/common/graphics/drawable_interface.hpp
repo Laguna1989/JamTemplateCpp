@@ -150,6 +150,10 @@ public:
 
     virtual void setScreenSizeHint(jt::Vector2f const& hint) = 0;
 
+    virtual void setCustomShader(
+        std::string const& shaderCodeVertex, std::string const& shaderCodeFragment)
+        = 0;
+
 protected:
     DrawableInterface() = default;
 };

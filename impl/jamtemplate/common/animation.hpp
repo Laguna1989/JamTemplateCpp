@@ -93,6 +93,9 @@ public:
 
     std::size_t getCurrentAnimationFrameIndex() const;
 
+    void setCustomShader(
+        std::string const& shaderCodeVertex, std::string const& shaderCodeFragment) override;
+
 private:
     mutable AnimationMapType m_frames {};
     std::map<std::string, float> m_time {};

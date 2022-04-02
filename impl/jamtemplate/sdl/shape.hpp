@@ -1,7 +1,7 @@
 ﻿#ifndef GUARD_JAMTEMPLATE_SHAPE_HPP_INCLUDEGUARD
 #define GUARD_JAMTEMPLATE_SHAPE_HPP_INCLUDEGUARD
 
-#include "graphics/drawable_impl.hpp"
+#include "drawable_impl_sdl.hpp"
 #include "rect.hpp"
 #include "render_target.hpp"
 #include "texture_manager_interface.hpp"
@@ -10,7 +10,7 @@
 #include <memory>
 
 namespace jt {
-class Shape : public DrawableImpl {
+class Shape : public DrawableImplSdl {
 public:
     using Sptr = std::shared_ptr<Shape>;
 
