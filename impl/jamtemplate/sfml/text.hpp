@@ -1,7 +1,7 @@
 ﻿#ifndef GUARD_JAMTEMPLATE_TEXT_HPP_INCLUDEGUARD
 #define GUARD_JAMTEMPLATE_TEXT_HPP_INCLUDEGUARD
 
-#include "graphics/drawable_impl.hpp"
+#include "drawable_impl_sfml.hpp"
 #include "render_target.hpp"
 #include <SFML/Graphics.hpp>
 
@@ -10,7 +10,7 @@
 
 namespace jt {
 
-class Text : public DrawableImpl {
+class Text : public DrawableImplSFML {
 public:
     enum class TextAlign { CENTER, LEFT, RIGHT };
 

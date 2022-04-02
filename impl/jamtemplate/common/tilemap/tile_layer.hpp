@@ -53,6 +53,9 @@ public:
 
     bool isVisible() const override;
 
+    [[deprecated("Currently only implemented for SFML")]] void setCustomShader(
+        std::string const& shaderCodeVertex, std::string const& shaderCodeFragment) override;
+
 private:
     mutable std::vector<std::shared_ptr<jt::Sprite>> m_tileSetSprites {};
 

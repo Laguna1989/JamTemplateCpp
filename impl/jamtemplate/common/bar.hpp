@@ -65,6 +65,9 @@ public:
     virtual void setOrigin(jt::Vector2f const& origin) override;
     virtual jt::Vector2f getOrigin() const override;
 
+    [[deprecated("Currently only implemented for SFML")]] void setCustomShader(
+        std::string const& shaderCodeVertex, std::string const& shaderCodeFragment) override;
+
 private:
     float m_valueMax;
     float m_valueCurrent;

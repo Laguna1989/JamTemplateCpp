@@ -2,7 +2,7 @@
 #define GUARD_JAMTEMPLATE_SPRITE_HPP_INCLUDEGUARD
 
 #include "color.hpp"
-#include "graphics/drawable_impl.hpp"
+#include "drawable_impl_sfml.hpp"
 #include "render_target.hpp"
 #include "texture_manager_interface.hpp"
 #include <SFML/Graphics.hpp>
@@ -11,7 +11,7 @@
 
 namespace jt {
 
-class Sprite : public DrawableImpl {
+class Sprite : public DrawableImplSFML {
 public:
     using Sptr = std::shared_ptr<Sprite>;
 

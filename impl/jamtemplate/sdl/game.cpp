@@ -1,6 +1,5 @@
 ﻿#include "game.hpp"
 #include <SDL2/SDL.h>
-#include <SDL2/SDL_mixer.h>
 #include <SDL_ttf.h>
 
 #ifdef JT_ENABLE_WEB

@@ -26,7 +26,7 @@ if (JT_ENABLE_WEB)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -O3 -g --std=c++17 -fpermissive ")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -s USE_SDL=2")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -s USE_SDL_IMAGE=2 -s SDL2_IMAGE_FORMATS='[\"bmp\",\"png\"]'")
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -s USE_SDL_MIXER=2 -s USE_VORBIS=1 -s USE_OGG=1")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -s USE_VORBIS=1 -s USE_OGG=1")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -s USE_SDL_TTF=2")
 
     add_link_options("SHELL:-s TOTAL_MEMORY=256MB"
@@ -34,15 +34,14 @@ if (JT_ENABLE_WEB)
             "SHELL:--use-preload-plugins"
             "SHELL:--preload-file assets")
 else ()
-    if (NOT CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
-        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -lstdc++fs")
-    endif ()
-
     if (MSVC)
         ## nasty warning 5205 from tileson should not show up,
         ## so the warning level of this one is set to 4 and the global warning level is set to three
         set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /w45205 /W3 /EHsc")
     else ()
+        if (NOT CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
+            set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -lstdc++fs")
+        endif ()
         if (JT_ENABLE_COVERAGE)
             set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -Wall -Wextra -O0 -fprofile-arcs -ftest-coverage --std=c++17 -fpermissive -lstdc++fs")
         elseif (JT_ENABLE_PERFORMANCETESTS)
@@ -89,7 +88,6 @@ else ()
         find_package(SDL2 REQUIRED)
 
         include(FindPkgConfig)
-        pkg_check_modules(SDL2_Mixer REQUIRED IMPORTED_TARGET SDL2_mixer)
         pkg_check_modules(SDL2_Image REQUIRED IMPORTED_TARGET SDL2_image)
         pkg_check_modules(SDL2_TTF REQUIRED IMPORTED_TARGET SDL2_ttf)
     endif ()

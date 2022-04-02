@@ -1,6 +1,7 @@
 #include "actor.hpp"
 #include "game_interface.hpp"
 #include "math_helper.hpp"
+#include <algorithm>
 
 void Actor::doCreate()
 {

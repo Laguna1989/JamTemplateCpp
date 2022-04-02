@@ -16,7 +16,7 @@ public:
 
 private:
     std::map<std::string, sf::Texture> m_textures;
-    bool containsTexture(std::string const& str) { return (m_textures.count(str) != 0); }
+    bool containsTexture(std::string const& str);
 };
 } // namespace jt
 

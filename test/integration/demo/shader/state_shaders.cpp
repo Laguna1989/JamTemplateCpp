@@ -1,13 +1,11 @@
-﻿#include "state_scroll.hpp"
+#include "state_shaders.hpp"
 #include "../control_command_move_cam.hpp"
 #include "../state_select.hpp"
 #include "drawable_helpers.hpp"
 #include "game_interface.hpp"
-#include "input/input_manager.hpp"
 #include "math_helper.hpp"
-#include "timer.hpp"
 
-void StateScroll::doInternalCreate()
+void StateShaders::doInternalCreate()
 {
     m_background = jt::dh::createShapeRect(jt::Vector2f { 400.0f, 300.0f },
         jt::Color { 20, 20, 150 }, getGame()->gfx().textureManager());
@@ -25,6 +23,16 @@ void StateScroll::doInternalCreate()
         jt::MathHelper::numbersBetween(0U, 11U), 0.15f, getGame()->gfx().textureManager());
     m_anim->play("idle");
     m_anim->setPosition(jt::Vector2f { 200.0f, 200.0f });
+    m_anim->setCustomShader("", R"(uniform sampler2D texture;
+uniform float pixel_threshold;
+
+void main()
+{
+    float factor = 1.0 / (pixel_threshold + 0.01);
+    vec2 pos = floor(gl_TexCoord[0].xy * factor + 0.5) / factor;
+    gl_FragColor = texture2D(texture, pos) * gl_Color;
+}
+)");
 
     m_text_left_aligned = jt::dh::createText(getGame()->gfx().target(), "left aligned", 16);
     m_text_left_aligned->setTextAlign(jt::Text::TextAlign::LEFT);
@@ -57,16 +65,8 @@ void StateScroll::doInternalCreate()
     getGame()->input().keyboard()->setCommandPressed({ jt::KeyCode::D, jt::KeyCode::Right },
         std::make_shared<ControlCommandMoveCam>(
             jt::Vector2f { scrollSpeed, 0.0f }, getGame()->gfx().camera()));
-
-    auto t = std::make_shared<jt::Timer>(1.5f, [this]() { m_anim->shake(0.5f, 15.0f, 0.001f); });
-    add(t);
-
-    auto t2
-        = std::make_shared<jt::Timer>(1.5f, [this]() { m_sprite->flash(0.9f, jt::colors::Green); });
-    add(t2);
 }
-
-void StateScroll::doInternalUpdate(float const elapsed)
+void StateShaders::doInternalUpdate(float elapsed)
 {
     if (getGame()->input().keyboard()->justPressed(jt::KeyCode::F1)
         || getGame()->input().keyboard()->justPressed(jt::KeyCode::Escape)) {
@@ -83,8 +83,7 @@ void StateScroll::doInternalUpdate(float const elapsed)
     m_text_right_aligned->update(elapsed);
     m_line->update(elapsed);
 }
-
-void StateScroll::doInternalDraw() const
+void StateShaders::doInternalDraw() const
 {
     m_background->draw(getGame()->gfx().target());
 
@@ -99,4 +98,3 @@ void StateScroll::doInternalDraw() const
 
     m_line->draw(getGame()->gfx().target());
 }
-std::string StateScroll::getName() const { return "Move Cam"; }

@@ -92,3 +92,10 @@ jt::Vector2f jt::tilemap::TileLayer::getOrigin() const { return m_origin; }
 
 void jt::tilemap::TileLayer::doRotate(float /*rot*/) { }
 bool jt::tilemap::TileLayer::isVisible() const { return true; }
+void jt::tilemap::TileLayer::setCustomShader(
+    std::string const& shaderCodeVertex, std::string const& shaderCodeFragment)
+{
+    for (auto& ts : m_tileSetSprites) {
+        ts->setCustomShader(shaderCodeVertex, shaderCodeFragment);
+    }
+}
