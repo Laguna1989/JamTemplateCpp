@@ -1,0 +1,22 @@
+#ifndef MYAWESOMEGAME_GRAPHICS_COMPONENT_INTERFACE_HPP
+#define MYAWESOMEGAME_GRAPHICS_COMPONENT_INTERFACE_HPP
+
+#include "color.hpp"
+#include "render_target_lib.hpp"
+#include "vector.hpp"
+#include <memory>
+
+class GraphicsComponentInterface {
+public:
+    virtual ~GraphicsComponentInterface() = default;
+    virtual void updateGraphics(float elapsed) = 0;
+    virtual void setPosition(jt::Vector2f const& position) = 0;
+    virtual void draw(std::shared_ptr<jt::RenderTarget> target) = 0;
+    virtual void flash(float time, jt::Color const& color) = 0;
+    virtual bool setAnimationIfNotSet(std::string const& newAnimationName) = 0;
+    virtual void setAnimationLooping(bool isLooping) = 0;
+
+    virtual std::string getCurrentAnimation() const = 0;
+};
+
+#endif // MYAWESOMEGAME_GRAPHICS_COMPONENT_INTERFACE_HPP

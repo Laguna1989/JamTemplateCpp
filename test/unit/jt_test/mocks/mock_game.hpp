@@ -11,7 +11,7 @@ class MockGame : public jt::GameInterface {
 public:
     MockGame()
     {
-        ON_CALL(*this, getLogger).WillByDefault(::testing::ReturnRef(logger));
+        ON_CALL(*this, logger).WillByDefault(::testing::ReturnRef(m_logger));
         ON_CALL(*this, gfx).WillByDefault(::testing::ReturnRef(m_gfx));
     }
 
@@ -26,8 +26,8 @@ public:
     MOCK_METHOD(void, startGame, (jt::GameInterface::GameLoopFunctionPtr), (override));
 
     MOCK_METHOD(void, reset, (), (override));
-    MOCK_METHOD(jt::LoggerInterface&, getLogger, (), (override));
-    MOCK_METHOD(jt::ActionCommandManagerInterface&, getActionCommandManager, (), (override));
+    MOCK_METHOD(jt::LoggerInterface&, logger, (), (override));
+    MOCK_METHOD(jt::ActionCommandManagerInterface&, actionCommandManager, (), (override));
 
     MOCK_METHOD(void, cheat, (), (override));
     MOCK_METHOD(bool, wasCheating, (), (override));
@@ -36,7 +36,7 @@ public:
 
 protected:
     MOCK_METHOD(std::weak_ptr<jt::GameInterface>, getPtr, (), (override));
-    jt::null_objects::LoggerNull logger;
+    jt::null_objects::LoggerNull m_logger;
 };
 
 #endif

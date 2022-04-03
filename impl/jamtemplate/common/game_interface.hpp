@@ -47,11 +47,11 @@ public:
 
     /// Get the logger
     /// \return the logger
-    virtual LoggerInterface& getLogger() = 0;
+    virtual LoggerInterface& logger() = 0;
 
     /// Get the ActionCommandManager
     /// \return the action command manager
-    virtual ActionCommandManagerInterface& getActionCommandManager() = 0;
+    virtual ActionCommandManagerInterface& actionCommandManager() = 0;
 
     /// Reset the Game internals, i.e. on a state switch
     virtual void reset() = 0;
