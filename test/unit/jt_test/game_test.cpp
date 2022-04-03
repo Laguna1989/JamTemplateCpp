@@ -98,7 +98,7 @@ TEST_F(GameTest, GameRunWithStateThrowingIntException)
 TEST_F(GameTest, BasicActionCommands)
 {
     addBasicActionCommands(g);
-    ASSERT_FALSE(g->getActionCommandManager().getAllCommands().empty());
+    ASSERT_FALSE(g->actionCommandManager().getAllCommands().empty());
 }
 
 TEST_F(GameTest, ResetCallsResetOnGfx)

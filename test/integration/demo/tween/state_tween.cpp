@@ -10,7 +10,7 @@ void StateTween::doInternalCreate()
 {
     createRects();
     createTweens();
-    storeActionCommand(getGame()->getActionCommandManager().registerTemporaryCommand(
+    storeActionCommand(getGame()->actionCommandManager().registerTemporaryCommand(
         "start_tweens", [this](auto /*str*/) { createTweens(); }));
 }
 

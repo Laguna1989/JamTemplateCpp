@@ -9,11 +9,11 @@ void StateImGui::doInternalUpdate(float /*elapsed*/)
 {
     auto mouse = getGame()->input().mouse();
     if (mouse->justPressed(jt::MouseButtonCode::MBLeft)) {
-        getGame()->getLogger().debug("mouse button pressed", { "Game", "other Tag" });
+        getGame()->logger().debug("mouse button pressed", { "Game", "other Tag" });
     }
     if (getGame()->input().keyboard()->justPressed(jt::KeyCode::A)) {
 
-        getGame()->getLogger().fatal("keyboard 'A' not supported", { "Test" });
+        getGame()->logger().fatal("keyboard 'A' not supported", { "Test" });
     }
     if (getGame()->input().keyboard()->justPressed(jt::KeyCode::Escape)) {
         getGame()->stateManager().switchState(std::make_shared<StateSelect>());

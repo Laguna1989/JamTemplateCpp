@@ -19,3 +19,4 @@ jt::Palette GP::getPalette()
 int GP::PhysicVelocityIterations() { return 20; }
 
 int GP::PhysicPositionIterations() { return 20; }
+jt::Vector2f GP::PlayerSize() { return jt::Vector2f { 16.0f, 16.0f }; }
