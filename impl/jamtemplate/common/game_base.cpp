@@ -1,4 +1,5 @@
 ﻿#include "game_base.hpp"
+#include "git_version.hpp"
 #include <string>
 
 jt::GameBase::GameBase(jt::GfxInterface& gfx, jt::InputManagerInterface& input,
@@ -11,6 +12,8 @@ jt::GameBase::GameBase(jt::GfxInterface& gfx, jt::InputManagerInterface& input,
     , m_logger { logger }
     , m_actionCommandManager { actionCommandManager }
 {
+    m_logger.info("git commit hash: " + g_GIT_SHA1, { "jt", "git", "versioning" });
+    m_logger.info("build date: " + g_Timestamp, { "jt", "time", "versioning" });
 }
 
 void jt::GameBase::runOneFrame()
