@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1648970323140,
+  "lastUpdate": 1648985142237,
   "repoUrl": "https://github.com/Laguna1989/JamTemplateCpp",
   "entries": {
     "Benchmark": [
@@ -4482,6 +4482,48 @@ window.BENCHMARK_DATA = {
             "value": 2.876942341563775,
             "unit": "ms/iter",
             "extra": "iterations: 243\ncpu: 2.87684279835391 ms\nthreads: 1"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "laguna.ws@gmail.com",
+            "name": "Laguna1989",
+            "username": "Laguna1989"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "70850ed42f546e820325e73ff6a079ad31fdac71",
+          "message": "Merge pull request #177 from Laguna1989/FEATURE_LoadAnimationFromJson\n\nLoad animation from json",
+          "timestamp": "2022-04-03T13:22:32+02:00",
+          "tree_id": "ccc43197cb92ac99a3493b7ecfeacea675efe991",
+          "url": "https://github.com/Laguna1989/JamTemplateCpp/commit/70850ed42f546e820325e73ff6a079ad31fdac71"
+        },
+        "date": 1648985141720,
+        "tool": "googlecpp",
+        "benches": [
+          {
+            "name": "BM_UpdateDrawablePositions",
+            "value": 6.036820521008379,
+            "unit": "ms/iter",
+            "extra": "iterations: 119\ncpu: 6.033343697478992 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_StartGame",
+            "value": 0.003560413087327677,
+            "unit": "ms/iter",
+            "extra": "iterations: 198803\ncpu: 0.003559889941298673 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GamestateWithTweeningShapes",
+            "value": 3.81345292391305,
+            "unit": "ms/iter",
+            "extra": "iterations: 184\ncpu: 3.813109782608696 ms\nthreads: 1"
           }
         ]
       }
