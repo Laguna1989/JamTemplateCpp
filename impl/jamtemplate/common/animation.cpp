@@ -28,21 +28,37 @@ void jt::Animation::add(std::string const& fileName, std::string const& animName
     jt::Vector2u const& imageSize, std::vector<unsigned int> const& frameIndices,
     float frameTimeInSeconds, TextureManagerInterface& textureManager)
 {
+    if (frameTimeInSeconds <= 0) {
+        throw std::invalid_argument { "animation frame time is negative or zero." };
+    }
+    std::vector<float> frameTimes;
+    frameTimes.resize(frameIndices.size(), frameTimeInSeconds);
+    add(fileName, animName, imageSize, frameIndices, frameTimes, textureManager);
+}
+
+void jt::Animation::add(std::string const& fileName, std::string const& animName,
+    jt::Vector2u const& imageSize, std::vector<unsigned int> const& frameIndices,
+    std::vector<float> frameTimesInSeconds, jt::TextureManagerInterface& textureManager)
+{
     if (frameIndices.empty()) {
         throw std::invalid_argument { "animation frame indices are empty." };
     }
     if (animName.empty()) {
         throw std::invalid_argument { "animation name is empty." };
     }
+    if (frameTimesInSeconds.empty()) {
+        throw std::invalid_argument { "frametimes are empty." };
+    }
+
+    if (frameTimesInSeconds.size() != frameIndices.size()) {
+        throw std::invalid_argument { "different sizes for frametimes and frame indices" };
+    }
+
     if (m_frames.count(animName) != 0) {
         std::cout << "Warning: Overwriting old animation with name: " << animName << std::endl;
     }
-    if (frameTimeInSeconds <= 0) {
-        throw std::invalid_argument { "animation frame time is negative or zero." };
-    }
 
     m_frames[animName] = std::vector<jt::Sprite::Sptr> {};
-    m_time[animName] = frameTimeInSeconds;
 
     for (auto const idx : frameIndices) {
         jt::Recti const rect { static_cast<int>(idx * imageSize.x), 0,
@@ -50,6 +66,7 @@ void jt::Animation::add(std::string const& fileName, std::string const& animName
         Sprite::Sptr sptr = std::make_shared<Sprite>(fileName, rect, textureManager);
         m_frames[animName].push_back(sptr);
     }
+    m_time[animName] = frameTimesInSeconds;
 }
 
 void jt::Animation::loadFromJson(
@@ -91,22 +108,29 @@ void jt::Animation::loadFromJson(
         auto const animationName = frame["name"].get<std::string>();
         auto const animationStart = frame["from"].get<unsigned int>();
         auto const animationEnd = frame["to"].get<unsigned int>();
-        // TODO individual frame times
-        auto const frameName = baseAnimName + " " + std::to_string(animationStart) + ".ase";
-        if (j["frames"].count(frameName) == 0) {
-            throw std::invalid_argument { "json file does not have 'frames." + frameName
-                + "' entry" };
-        }
-        if (j["frames"][frameName].count("duration") == 0) {
-            throw std::invalid_argument { "json file does not have 'frames." + frameName
-                + ".duration' entry" };
+
+        auto const frameIndices = jt::MathHelper::numbersBetween(animationStart, animationEnd);
+        std::vector<float> frameTimes;
+
+        auto const startFrameName = baseAnimName + " " + std::to_string(animationStart) + ".ase";
+        auto const width = j["frames"][startFrameName]["sourceSize"]["w"].get<unsigned int>();
+        auto const height = j["frames"][startFrameName]["sourceSize"]["h"].get<unsigned int>();
+
+        for (auto const id : frameIndices) {
+            auto const frameName = baseAnimName + " " + std::to_string(id) + ".ase";
+            if (j["frames"].count(frameName) == 0) {
+                throw std::invalid_argument { "json file does not have 'frames." + frameName
+                    + "' entry" };
+            }
+            if (j["frames"][frameName].count("duration") == 0) {
+                throw std::invalid_argument { "json file does not have 'frames." + frameName
+                    + ".duration' entry" };
+            }
+            auto const frameTime = j["frames"][frameName]["duration"].get<float>() / 1000.0f;
+            frameTimes.push_back(frameTime);
         }
 
-        auto const frameTime = j["frames"][frameName]["duration"].get<float>() / 1000.0f;
-        auto const width = j["frames"][frameName]["sourceSize"]["w"].get<unsigned int>();
-        auto const height = j["frames"][frameName]["sourceSize"]["h"].get<unsigned int>();
-        add(imageFileName, animationName, jt::Vector2u { width, height },
-            jt::MathHelper::numbersBetween(animationStart, animationEnd), frameTime,
+        add(imageFileName, animationName, jt::Vector2u { width, height }, frameIndices, frameTimes,
             textureManager);
     }
 }
@@ -229,8 +253,8 @@ void jt::Animation::doUpdate(float elapsed)
 
     // proceed time
     m_frameTime += elapsed;
-    while (m_frameTime >= m_time[m_currentAnimName]) {
-        m_frameTime -= m_time[m_currentAnimName];
+    while (m_frameTime >= m_time[m_currentAnimName][m_currentIdx]) {
+        m_frameTime -= m_time[m_currentAnimName][m_currentIdx];
         m_currentIdx++;
         if (m_currentIdx >= m_frames.at(m_currentAnimName).size()) {
             if (m_isLooping) {
@@ -264,7 +288,7 @@ void jt::Animation::doRotate(float rot)
 }
 float jt::Animation::getCurrentAnimationSingleFrameTime() const
 {
-    return m_time.at(m_currentAnimName);
+    return m_time.at(m_currentAnimName).at(m_currentIdx);
 }
 float jt::Animation::getCurrentAnimTotalTime() const
 {

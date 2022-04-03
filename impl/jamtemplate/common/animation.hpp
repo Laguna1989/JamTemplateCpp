@@ -24,10 +24,21 @@ public:
     /// \param animName name of this particular animation in the pool
     /// \param imageSize size of one of the animations images, eg. 16x16
     /// \param frameIndices which frames are part of this animation
-    /// \param frameTimeInSeconds how long is each frame displayed
+    /// \param frameTimeInSeconds how long is each frame displayed. All frames have the same length
+    /// \param textureManager the texture manager to load the individual sprites
     void add(std::string const& fileName, std::string const& animName,
         jt::Vector2u const& imageSize, std::vector<unsigned int> const& frameIndices,
         float frameTimeInSeconds, TextureManagerInterface& textureManager);
+
+    /// \param fileName path to the image to be used, e.g. "assets/coin.png"
+    /// \param animName name of this particular animation in the pool
+    /// \param imageSize size of one of the animations images, eg. 16x16
+    /// \param frameIndices which frames are part of this animation
+    /// \param frameTimesInSeconds how long is each frame displayed. Framescan have different
+    /// lengths \param textureManager the texture manager to load the individual sprites
+    void add(std::string const& fileName, std::string const& animName,
+        jt::Vector2u const& imageSize, std::vector<unsigned int> const& frameIndices,
+        std::vector<float> frameTimesInSeconds, TextureManagerInterface& textureManager);
 
     void loadFromJson(std::string const& jsonFileName, TextureManagerInterface& textureManager);
 
@@ -100,7 +111,7 @@ public:
 
 private:
     mutable AnimationMapType m_frames {};
-    std::map<std::string, float> m_time {};
+    std::map<std::string, std::vector<float>> m_time {};
 
     bool m_isValid { false };
 
