@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1648901191809,
+  "lastUpdate": 1648970323140,
   "repoUrl": "https://github.com/Laguna1989/JamTemplateCpp",
   "entries": {
     "Benchmark": [
@@ -4440,6 +4440,48 @@ window.BENCHMARK_DATA = {
             "value": 3.1283780535714203,
             "unit": "ms/iter",
             "extra": "iterations: 224\ncpu: 3.123867410714284 ms\nthreads: 1"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "laguna.ws@gmail.com",
+            "name": "Laguna1989",
+            "username": "Laguna1989"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "535d1308345d9672ba1ba0a1ccbcd725907f470a",
+          "message": "Merge pull request #175 from Laguna1989/FEATURE_PlayerComponents\n\nAdd player & components in gamelib",
+          "timestamp": "2022-04-03T09:16:00+02:00",
+          "tree_id": "f704d6337569a9d332a19f7a7fc62a68fb73d48e",
+          "url": "https://github.com/Laguna1989/JamTemplateCpp/commit/535d1308345d9672ba1ba0a1ccbcd725907f470a"
+        },
+        "date": 1648970321434,
+        "tool": "googlecpp",
+        "benches": [
+          {
+            "name": "BM_UpdateDrawablePositions",
+            "value": 2.716243482758648,
+            "unit": "ms/iter",
+            "extra": "iterations: 261\ncpu: 2.713340996168582 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_StartGame",
+            "value": 0.0027596347076234585,
+            "unit": "ms/iter",
+            "extra": "iterations: 253731\ncpu: 0.0027592974449318374 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GamestateWithTweeningShapes",
+            "value": 2.876942341563775,
+            "unit": "ms/iter",
+            "extra": "iterations: 243\ncpu: 2.87684279835391 ms\nthreads: 1"
           }
         ]
       }
