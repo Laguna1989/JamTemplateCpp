@@ -1,0 +1,7 @@
+#include "git_version.hpp"
+
+#define GIT_SHA1 "@GIT_SHA1@"
+std::string g_GIT_SHA1 = GIT_SHA1;
+
+#define CONFIGURE_TIMESTAMP "@CONFIGURE_TIMESTAMP@"
+std::string g_Timestamp = CONFIGURE_TIMESTAMP;
