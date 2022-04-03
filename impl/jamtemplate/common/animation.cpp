@@ -1,6 +1,10 @@
 ﻿#include "animation.hpp"
+#include "math_helper.hpp"
+#include "nlohmann.hpp"
 #include "sprite.hpp"
+#include "strutils.hpp"
 #include "texture_manager_interface.hpp"
+#include <fstream>
 #include <iostream>
 #include <memory>
 #include <vector>
@@ -24,27 +28,110 @@ void jt::Animation::add(std::string const& fileName, std::string const& animName
     jt::Vector2u const& imageSize, std::vector<unsigned int> const& frameIndices,
     float frameTimeInSeconds, TextureManagerInterface& textureManager)
 {
+    if (frameTimeInSeconds <= 0) {
+        throw std::invalid_argument { "animation frame time is negative or zero." };
+    }
+    std::vector<float> frameTimes;
+    frameTimes.resize(frameIndices.size(), frameTimeInSeconds);
+    add(fileName, animName, imageSize, frameIndices, frameTimes, textureManager);
+}
+
+void jt::Animation::add(std::string const& fileName, std::string const& animName,
+    jt::Vector2u const& imageSize, std::vector<unsigned int> const& frameIndices,
+    std::vector<float> frameTimesInSeconds, jt::TextureManagerInterface& textureManager)
+{
     if (frameIndices.empty()) {
         throw std::invalid_argument { "animation frame indices are empty." };
     }
     if (animName.empty()) {
         throw std::invalid_argument { "animation name is empty." };
     }
+    if (frameTimesInSeconds.empty()) {
+        throw std::invalid_argument { "frametimes are empty." };
+    }
+
+    if (frameTimesInSeconds.size() != frameIndices.size()) {
+        throw std::invalid_argument { "different sizes for frametimes and frame indices" };
+    }
+
     if (m_frames.count(animName) != 0) {
         std::cout << "Warning: Overwriting old animation with name: " << animName << std::endl;
     }
-    if (frameTimeInSeconds <= 0) {
-        throw std::invalid_argument { "animation frame time is negative or zero." };
-    }
 
     m_frames[animName] = std::vector<jt::Sprite::Sptr> {};
-    m_time[animName] = frameTimeInSeconds;
 
     for (auto const idx : frameIndices) {
         jt::Recti const rect { static_cast<int>(idx * imageSize.x), 0,
             static_cast<int>(imageSize.x), static_cast<int>(imageSize.y) };
         Sprite::Sptr sptr = std::make_shared<Sprite>(fileName, rect, textureManager);
         m_frames[animName].push_back(sptr);
+    }
+    m_time[animName] = frameTimesInSeconds;
+}
+
+void jt::Animation::loadFromJson(
+    std::string const& jsonFileName, TextureManagerInterface& textureManager)
+{
+    m_frames.clear();
+    m_time.clear();
+
+    if (!strutil::ends_with(jsonFileName, ".json")) {
+        throw std::invalid_argument { "not a json file" };
+    }
+
+    auto const filePathWithoutExtension = jsonFileName.substr(0, jsonFileName.length() - 5);
+
+    auto const imageFileName = filePathWithoutExtension + ".png";
+
+    auto const baseAnimName = strutil::split(filePathWithoutExtension, "/").back();
+
+    std::ifstream file { jsonFileName };
+    nlohmann::json j;
+    file >> j;
+
+    if (j.count("frames") == 0) {
+        throw std::invalid_argument { "json file does not have 'frames' entry" };
+    }
+    if (!j["frames"].is_object()) {
+        throw std::invalid_argument { "json 'frames' is not an array" };
+    }
+    if (j.count("meta") == 0) {
+        throw std::invalid_argument { "json file does not have 'meta' entry" };
+    }
+    if (j["meta"].count("frameTags") == 0) {
+        throw std::invalid_argument { "json file does not have 'meta.frameTags' entry" };
+    }
+    if (!j["meta"]["frameTags"].is_array()) {
+        throw std::invalid_argument { "json 'meta.frameTags' is not an array" };
+    }
+    for (auto const& frame : j["meta"]["frameTags"]) {
+        auto const animationName = frame["name"].get<std::string>();
+        auto const animationStart = frame["from"].get<unsigned int>();
+        auto const animationEnd = frame["to"].get<unsigned int>();
+
+        auto const frameIndices = jt::MathHelper::numbersBetween(animationStart, animationEnd);
+        std::vector<float> frameTimes;
+
+        auto const startFrameName = baseAnimName + " " + std::to_string(animationStart) + ".ase";
+        auto const width = j["frames"][startFrameName]["sourceSize"]["w"].get<unsigned int>();
+        auto const height = j["frames"][startFrameName]["sourceSize"]["h"].get<unsigned int>();
+
+        for (auto const id : frameIndices) {
+            auto const frameName = baseAnimName + " " + std::to_string(id) + ".ase";
+            if (j["frames"].count(frameName) == 0) {
+                throw std::invalid_argument { "json file does not have 'frames." + frameName
+                    + "' entry" };
+            }
+            if (j["frames"][frameName].count("duration") == 0) {
+                throw std::invalid_argument { "json file does not have 'frames." + frameName
+                    + ".duration' entry" };
+            }
+            auto const frameTime = j["frames"][frameName]["duration"].get<float>() / 1000.0f;
+            frameTimes.push_back(frameTime);
+        }
+
+        add(imageFileName, animationName, jt::Vector2u { width, height }, frameIndices, frameTimes,
+            textureManager);
     }
 }
 
@@ -166,8 +253,8 @@ void jt::Animation::doUpdate(float elapsed)
 
     // proceed time
     m_frameTime += elapsed;
-    while (m_frameTime >= m_time[m_currentAnimName]) {
-        m_frameTime -= m_time[m_currentAnimName];
+    while (m_frameTime >= m_time[m_currentAnimName][m_currentIdx]) {
+        m_frameTime -= m_time[m_currentAnimName][m_currentIdx];
         m_currentIdx++;
         if (m_currentIdx >= m_frames.at(m_currentAnimName).size()) {
             if (m_isLooping) {
@@ -201,7 +288,7 @@ void jt::Animation::doRotate(float rot)
 }
 float jt::Animation::getCurrentAnimationSingleFrameTime() const
 {
-    return m_time.at(m_currentAnimName);
+    return m_time.at(m_currentAnimName).at(m_currentIdx);
 }
 float jt::Animation::getCurrentAnimTotalTime() const
 {
@@ -225,4 +312,16 @@ void jt::Animation::setCustomShader(
             spr->setCustomShader(shaderCodeVertex, shaderCodeFragment);
         }
     }
+}
+void jt::Animation::setFrameTimes(
+    std::string const& animationName, std::vector<float> const& frameTimes)
+{
+    if (m_frames.count(animationName) == 0) {
+        throw std::invalid_argument { "cannot set frame times for invalid animation: "
+            + animationName };
+    }
+    if (frameTimes.size() != m_frames[animationName].size()) {
+        throw std::invalid_argument { "frame times size does not match frame index size" };
+    }
+    m_time[animationName] = frameTimes;
 }
