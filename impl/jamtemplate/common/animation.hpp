@@ -29,6 +29,8 @@ public:
         jt::Vector2u const& imageSize, std::vector<unsigned int> const& frameIndices,
         float frameTimeInSeconds, TextureManagerInterface& textureManager);
 
+    void loadFromJson(std::string const& jsonFileName, TextureManagerInterface& textureManager);
+
     /// Check if a specific animation name is present in the pool
     ///
     /// \param animationName

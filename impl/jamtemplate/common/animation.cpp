@@ -1,6 +1,10 @@
 ﻿#include "animation.hpp"
+#include "math_helper.hpp"
+#include "nlohmann.hpp"
 #include "sprite.hpp"
+#include "strutils.hpp"
 #include "texture_manager_interface.hpp"
+#include <fstream>
 #include <iostream>
 #include <memory>
 #include <vector>
@@ -45,6 +49,65 @@ void jt::Animation::add(std::string const& fileName, std::string const& animName
             static_cast<int>(imageSize.x), static_cast<int>(imageSize.y) };
         Sprite::Sptr sptr = std::make_shared<Sprite>(fileName, rect, textureManager);
         m_frames[animName].push_back(sptr);
+    }
+}
+
+void jt::Animation::loadFromJson(
+    std::string const& jsonFileName, TextureManagerInterface& textureManager)
+{
+    m_frames.clear();
+    m_time.clear();
+
+    if (!strutil::ends_with(jsonFileName, ".json")) {
+        throw std::invalid_argument { "not a json file" };
+    }
+
+    auto const filePathWithoutExtension = jsonFileName.substr(0, jsonFileName.length() - 5);
+
+    auto const imageFileName = filePathWithoutExtension + ".png";
+
+    auto const baseAnimName = strutil::split(filePathWithoutExtension, "/").back();
+
+    std::ifstream file { jsonFileName };
+    nlohmann::json j;
+    file >> j;
+
+    if (j.count("frames") == 0) {
+        throw std::invalid_argument { "json file does not have 'frames' entry" };
+    }
+    if (!j["frames"].is_object()) {
+        throw std::invalid_argument { "json 'frames' is not an array" };
+    }
+    if (j.count("meta") == 0) {
+        throw std::invalid_argument { "json file does not have 'meta' entry" };
+    }
+    if (j["meta"].count("frameTags") == 0) {
+        throw std::invalid_argument { "json file does not have 'meta.frameTags' entry" };
+    }
+    if (!j["meta"]["frameTags"].is_array()) {
+        throw std::invalid_argument { "json 'meta.frameTags' is not an array" };
+    }
+    for (auto const& frame : j["meta"]["frameTags"]) {
+        auto const animationName = frame["name"].get<std::string>();
+        auto const animationStart = frame["from"].get<unsigned int>();
+        auto const animationEnd = frame["to"].get<unsigned int>();
+        // TODO individual frame times
+        auto const frameName = baseAnimName + " " + std::to_string(animationStart) + ".ase";
+        if (j["frames"].count(frameName) == 0) {
+            throw std::invalid_argument { "json file does not have 'frames." + frameName
+                + "' entry" };
+        }
+        if (j["frames"][frameName].count("duration") == 0) {
+            throw std::invalid_argument { "json file does not have 'frames." + frameName
+                + ".duration' entry" };
+        }
+
+        auto const frameTime = j["frames"][frameName]["duration"].get<float>() / 1000.0f;
+        auto const width = j["frames"][frameName]["sourceSize"]["w"].get<unsigned int>();
+        auto const height = j["frames"][frameName]["sourceSize"]["h"].get<unsigned int>();
+        add(imageFileName, animationName, jt::Vector2u { width, height },
+            jt::MathHelper::numbersBetween(animationStart, animationEnd), frameTime,
+            textureManager);
     }
 }
 
