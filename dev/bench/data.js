@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1648985142237,
+  "lastUpdate": 1649010541274,
   "repoUrl": "https://github.com/Laguna1989/JamTemplateCpp",
   "entries": {
     "Benchmark": [
@@ -4524,6 +4524,48 @@ window.BENCHMARK_DATA = {
             "value": 3.81345292391305,
             "unit": "ms/iter",
             "extra": "iterations: 184\ncpu: 3.813109782608696 ms\nthreads: 1"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "laguna.ws@gmail.com",
+            "name": "Laguna1989",
+            "username": "Laguna1989"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "57ba5d39683bcccd42b416bdf883dc23e1ffc7e5",
+          "message": "Merge pull request #178 from Laguna1989/FEATURE_GitVersions\n\nAdd git version and build timestamp to logger",
+          "timestamp": "2022-04-03T20:26:37+02:00",
+          "tree_id": "18d0cc4cdbdcc344d8a39142708588d15ddda489",
+          "url": "https://github.com/Laguna1989/JamTemplateCpp/commit/57ba5d39683bcccd42b416bdf883dc23e1ffc7e5"
+        },
+        "date": 1649010540794,
+        "tool": "googlecpp",
+        "benches": [
+          {
+            "name": "BM_UpdateDrawablePositions",
+            "value": 2.8232951983806416,
+            "unit": "ms/iter",
+            "extra": "iterations: 247\ncpu: 2.822382995951417 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_StartGame",
+            "value": 0.0030257335326491497,
+            "unit": "ms/iter",
+            "extra": "iterations: 231124\ncpu: 0.0030254279088281614 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GamestateWithTweeningShapes",
+            "value": 3.1131095555555373,
+            "unit": "ms/iter",
+            "extra": "iterations: 225\ncpu: 3.1129631111111107 ms\nthreads: 1"
           }
         ]
       }
