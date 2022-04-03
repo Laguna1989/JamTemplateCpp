@@ -313,3 +313,15 @@ void jt::Animation::setCustomShader(
         }
     }
 }
+void jt::Animation::setFrameTimes(
+    std::string const& animationName, std::vector<float> const& frameTimes)
+{
+    if (m_frames.count(animationName) == 0) {
+        throw std::invalid_argument { "cannot set frame times for invalid animation: "
+            + animationName };
+    }
+    if (frameTimes.size() != m_frames[animationName].size()) {
+        throw std::invalid_argument { "frame times size does not match frame index size" };
+    }
+    m_time[animationName] = frameTimes;
+}

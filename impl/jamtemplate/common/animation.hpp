@@ -40,7 +40,13 @@ public:
         jt::Vector2u const& imageSize, std::vector<unsigned int> const& frameIndices,
         std::vector<float> frameTimesInSeconds, TextureManagerInterface& textureManager);
 
+    /// Load animations from json file
+    /// \param jsonFileName path to the json file, needs to be next to the image file. e.g.
+    /// "assets/Pilz.json"
+    /// \param textureManager the texture manager to load the individual sprites
     void loadFromJson(std::string const& jsonFileName, TextureManagerInterface& textureManager);
+
+    void setFrameTimes(std::string const& animationName, std::vector<float> const& frameTimes);
 
     /// Check if a specific animation name is present in the pool
     ///
