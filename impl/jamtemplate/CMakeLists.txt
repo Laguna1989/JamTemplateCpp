@@ -6,6 +6,13 @@ else ()
 endif ()
 
 execute_process(
+        COMMAND git describe --exact-match --tags $ (git log -n1 --pretty='%h')
+        WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
+        RESULT_VARIABLE res
+        OUTPUT_VARIABLE GIT_TAG
+        ERROR_QUIET OUTPUT_STRIP_TRAILING_WHITESPACE)
+
+execute_process(
         COMMAND git rev-parse -q HEAD
         WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
         RESULT_VARIABLE res
@@ -14,8 +21,8 @@ execute_process(
 
 string(TIMESTAMP CONFIGURE_TIMESTAMP "%Y-%m-%d %H:%M:%S")
 
-configure_file("${CMAKE_SOURCE_DIR}/config/git_version.cpp.in" "${CMAKE_CURRENT_BINARY_DIR}/git_version.cpp" @ONLY)
-list(APPEND JAMTEMPLATEBASEFILES "${CMAKE_CURRENT_BINARY_DIR}/git_version.cpp")
+configure_file("${CMAKE_SOURCE_DIR}/config/build_info.cpp.in" "${CMAKE_CURRENT_BINARY_DIR}/build_info.cpp" @ONLY)
+list(APPEND JAMTEMPLATEBASEFILES "${CMAKE_CURRENT_BINARY_DIR}/build_info.cpp")
 
 add_library(JamTemplate STATIC ${JAMTEMPLATEFILES} ${JAMTEMPLATEBASEFILES})
 

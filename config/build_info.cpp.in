@@ -1,0 +1,16 @@
+#include "build_info.hpp"
+
+std::string jt::BuildInfo::gitCommitHash()
+{
+    return "@GIT_SHA1@";
+}
+
+std::string jt::BuildInfo::gitTagName()
+{
+    return "@GIT_TAG@";
+}
+
+std::string jt::BuildInfo::timestamp()
+{
+    return "@CONFIGURE_TIMESTAMP@";
+}
