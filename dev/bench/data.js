@@ -1754,12 +1754,6 @@ window.BENCHMARK_DATA = {
         "tool": "googlecpp",
         "benches": [
           {
-            "name": "BM_StartGame",
-            "value": 0.24211552695845093,
-            "unit": "ms/iter",
-            "extra": "iterations: 12612\ncpu: 0.05246676268633048 ms\nthreads: 1"
-          },
-          {
             "name": "BM_GamestateWithTweeningShapes",
             "value": 3.509983448888963,
             "unit": "ms/iter",
@@ -1789,12 +1783,6 @@ window.BENCHMARK_DATA = {
         "date": 1639069894359,
         "tool": "googlecpp",
         "benches": [
-          {
-            "name": "BM_StartGame",
-            "value": 0.27473072786352665,
-            "unit": "ms/iter",
-            "extra": "iterations: 9848\ncpu: 0.07456254071892769 ms\nthreads: 1"
-          },
           {
             "name": "BM_GamestateWithTweeningShapes",
             "value": 3.1371666033057797,
@@ -1826,12 +1814,6 @@ window.BENCHMARK_DATA = {
         "tool": "googlecpp",
         "benches": [
           {
-            "name": "BM_StartGame",
-            "value": 0.23986405658397628,
-            "unit": "ms/iter",
-            "extra": "iterations: 13343\ncpu: 0.052294606010642286 ms\nthreads: 1"
-          },
-          {
             "name": "BM_GamestateWithTweeningShapes",
             "value": 2.8798385500000845,
             "unit": "ms/iter",
@@ -1861,12 +1843,6 @@ window.BENCHMARK_DATA = {
         "date": 1639202551549,
         "tool": "googlecpp",
         "benches": [
-          {
-            "name": "BM_StartGame",
-            "value": 0.2676815388001718,
-            "unit": "ms/iter",
-            "extra": "iterations: 11585\ncpu: 0.060564749503668545 ms\nthreads: 1"
-          },
           {
             "name": "BM_GamestateWithTweeningShapes",
             "value": 3.6637550480349255,
@@ -1898,12 +1874,6 @@ window.BENCHMARK_DATA = {
         "tool": "googlecpp",
         "benches": [
           {
-            "name": "BM_StartGame",
-            "value": 0.5566782985457663,
-            "unit": "ms/iter",
-            "extra": "iterations: 5845\ncpu: 0.13335227168520103 ms\nthreads: 1"
-          },
-          {
             "name": "BM_GamestateWithTweeningShapes",
             "value": 4.11359557868036,
             "unit": "ms/iter",
@@ -1933,12 +1903,6 @@ window.BENCHMARK_DATA = {
         "date": 1639284890057,
         "tool": "googlecpp",
         "benches": [
-          {
-            "name": "BM_StartGame",
-            "value": 0.2834878764592313,
-            "unit": "ms/iter",
-            "extra": "iterations: 10879\ncpu: 0.06579613925912309 ms\nthreads: 1"
-          },
           {
             "name": "BM_GamestateWithTweeningShapes",
             "value": 3.969912562189082,
@@ -1970,12 +1934,6 @@ window.BENCHMARK_DATA = {
         "tool": "googlecpp",
         "benches": [
           {
-            "name": "BM_StartGame",
-            "value": 0.3063842892578516,
-            "unit": "ms/iter",
-            "extra": "iterations: 9998\ncpu: 0.07185040808161633 ms\nthreads: 1"
-          },
-          {
             "name": "BM_GamestateWithTweeningShapes",
             "value": 4.0729024102564635,
             "unit": "ms/iter",
@@ -2005,12 +1963,6 @@ window.BENCHMARK_DATA = {
         "date": 1639496316992,
         "tool": "googlecpp",
         "benches": [
-          {
-            "name": "BM_StartGame",
-            "value": 0.2565683434104562,
-            "unit": "ms/iter",
-            "extra": "iterations: 13529\ncpu: 0.05266086185231725 ms\nthreads: 1"
-          },
           {
             "name": "BM_GamestateWithTweeningShapes",
             "value": 3.3088413852456666,
@@ -2042,12 +1994,6 @@ window.BENCHMARK_DATA = {
         "tool": "googlecpp",
         "benches": [
           {
-            "name": "BM_StartGame",
-            "value": 0.38227272219999975,
-            "unit": "ms/iter",
-            "extra": "iterations: 10000\ncpu: 0.051913440000000005 ms\nthreads: 1"
-          },
-          {
             "name": "BM_GamestateWithTweeningShapes",
             "value": 5.348528806584329,
             "unit": "ms/iter",
@@ -2077,12 +2023,6 @@ window.BENCHMARK_DATA = {
         "date": 1639513994181,
         "tool": "googlecpp",
         "benches": [
-          {
-            "name": "BM_StartGame",
-            "value": 0.37852405781908455,
-            "unit": "ms/iter",
-            "extra": "iterations: 9253\ncpu: 0.06963894952988221 ms\nthreads: 1"
-          },
           {
             "name": "BM_GamestateWithTweeningShapes",
             "value": 3.9750064278846455,
@@ -2114,12 +2054,6 @@ window.BENCHMARK_DATA = {
         "tool": "googlecpp",
         "benches": [
           {
-            "name": "BM_StartGame",
-            "value": 0.4527062006242896,
-            "unit": "ms/iter",
-            "extra": "iterations: 7048\ncpu: 0.09805788876276958 ms\nthreads: 1"
-          },
-          {
             "name": "BM_GamestateWithTweeningShapes",
             "value": 3.621491265116172,
             "unit": "ms/iter",
@@ -2149,12 +2083,6 @@ window.BENCHMARK_DATA = {
         "date": 1639678003689,
         "tool": "googlecpp",
         "benches": [
-          {
-            "name": "BM_StartGame",
-            "value": 0.26977336768254695,
-            "unit": "ms/iter",
-            "extra": "iterations: 11189\ncpu: 0.0624015640361069 ms\nthreads: 1"
-          },
           {
             "name": "BM_GamestateWithTweeningShapes",
             "value": 3.7006100327102462,
@@ -2186,12 +2114,6 @@ window.BENCHMARK_DATA = {
         "tool": "googlecpp",
         "benches": [
           {
-            "name": "BM_StartGame",
-            "value": 0.5737699246018292,
-            "unit": "ms/iter",
-            "extra": "iterations: 5902\ncpu: 0.11508944425618435 ms\nthreads: 1"
-          },
-          {
             "name": "BM_GamestateWithTweeningShapes",
             "value": 3.695049050925942,
             "unit": "ms/iter",
@@ -2221,12 +2143,6 @@ window.BENCHMARK_DATA = {
         "date": 1639679259311,
         "tool": "googlecpp",
         "benches": [
-          {
-            "name": "BM_StartGame",
-            "value": 0.3059388380531753,
-            "unit": "ms/iter",
-            "extra": "iterations: 11547\ncpu: 0.06425049796483936 ms\nthreads: 1"
-          },
           {
             "name": "BM_GamestateWithTweeningShapes",
             "value": 3.4111287890295743,
@@ -2258,12 +2174,6 @@ window.BENCHMARK_DATA = {
         "tool": "googlecpp",
         "benches": [
           {
-            "name": "BM_StartGame",
-            "value": 0.543786740173914,
-            "unit": "ms/iter",
-            "extra": "iterations: 5750\ncpu: 0.12841930434782609 ms\nthreads: 1"
-          },
-          {
             "name": "BM_GamestateWithTweeningShapes",
             "value": 5.59669375392667,
             "unit": "ms/iter",
@@ -2293,12 +2203,6 @@ window.BENCHMARK_DATA = {
         "date": 1639768595301,
         "tool": "googlecpp",
         "benches": [
-          {
-            "name": "BM_StartGame",
-            "value": 0.5933824592558417,
-            "unit": "ms/iter",
-            "extra": "iterations: 6504\ncpu: 0.11573179581795819 ms\nthreads: 1"
-          },
           {
             "name": "BM_GamestateWithTweeningShapes",
             "value": 3.559937607142746,
@@ -2330,12 +2234,6 @@ window.BENCHMARK_DATA = {
         "tool": "googlecpp",
         "benches": [
           {
-            "name": "BM_StartGame",
-            "value": 0.2638053994690948,
-            "unit": "ms/iter",
-            "extra": "iterations: 13185\ncpu: 0.05558769814182784 ms\nthreads: 1"
-          },
-          {
             "name": "BM_GamestateWithTweeningShapes",
             "value": 3.270819360655649,
             "unit": "ms/iter",
@@ -2365,12 +2263,6 @@ window.BENCHMARK_DATA = {
         "date": 1640110423277,
         "tool": "googlecpp",
         "benches": [
-          {
-            "name": "BM_StartGame",
-            "value": 0.2900545342740105,
-            "unit": "ms/iter",
-            "extra": "iterations: 10985\ncpu: 0.06354633591260811 ms\nthreads: 1"
-          },
           {
             "name": "BM_GamestateWithTweeningShapes",
             "value": 3.301675902127712,
@@ -2402,12 +2294,6 @@ window.BENCHMARK_DATA = {
         "tool": "googlecpp",
         "benches": [
           {
-            "name": "BM_StartGame",
-            "value": 0.24324258200943077,
-            "unit": "ms/iter",
-            "extra": "iterations: 13785\ncpu: 0.050996467174464995 ms\nthreads: 1"
-          },
-          {
             "name": "BM_GamestateWithTweeningShapes",
             "value": 2.871974522900743,
             "unit": "ms/iter",
@@ -2437,12 +2323,6 @@ window.BENCHMARK_DATA = {
         "date": 1640417875127,
         "tool": "googlecpp",
         "benches": [
-          {
-            "name": "BM_StartGame",
-            "value": 0.21994641372707188,
-            "unit": "ms/iter",
-            "extra": "iterations: 9922\ncpu: 0.06596151985486798 ms\nthreads: 1"
-          },
           {
             "name": "BM_GamestateWithTweeningShapes",
             "value": 3.925491789743628,
@@ -2474,12 +2354,6 @@ window.BENCHMARK_DATA = {
         "tool": "googlecpp",
         "benches": [
           {
-            "name": "BM_StartGame",
-            "value": 0.2390258059584219,
-            "unit": "ms/iter",
-            "extra": "iterations: 13997\ncpu: 0.04933047081517468 ms\nthreads: 1"
-          },
-          {
             "name": "BM_GamestateWithTweeningShapes",
             "value": 2.7188342193309185,
             "unit": "ms/iter",
@@ -2509,12 +2383,6 @@ window.BENCHMARK_DATA = {
         "date": 1640533519336,
         "tool": "googlecpp",
         "benches": [
-          {
-            "name": "BM_StartGame",
-            "value": 0.5467827256133436,
-            "unit": "ms/iter",
-            "extra": "iterations: 5095\ncpu: 0.13899552502453386 ms\nthreads: 1"
-          },
           {
             "name": "BM_GamestateWithTweeningShapes",
             "value": 3.4035785882352623,
