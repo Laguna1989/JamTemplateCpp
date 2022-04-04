@@ -24,6 +24,7 @@ private:
     std::shared_ptr<jt::Text> m_text_Title;
     std::shared_ptr<jt::Text> m_text_Explanation;
     std::shared_ptr<jt::Text> m_text_Credits;
+    std::shared_ptr<jt::Text> m_text_Version;
 
     std::shared_ptr<jt::Shape> m_overlay;
     std::shared_ptr<jt::Sprite> m_vignette;

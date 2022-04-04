@@ -1,4 +1,5 @@
 ﻿#include "state_menu.hpp"
+#include "build_info.hpp"
 #include "color.hpp"
 #include "drawable_helpers.hpp"
 #include "game_interface.hpp"
@@ -62,6 +63,17 @@ void StateMenu::createTextCredits()
     m_text_Credits->setTextAlign(jt::Text::TextAlign::LEFT);
     m_text_Credits->setPosition({ 10, GP::GetScreenSize().y - 70 });
     m_text_Credits->setShadow(GP::PaletteFontShadow(), jt::Vector2f { 1, 1 });
+
+    m_text_Version
+        = jt::dh::createText(getGame()->gfx().target(), "", 16U, GP::getPalette().getColor(4));
+    if (jt::BuildInfo::gitTagName() != "") {
+        m_text_Version->setText(jt::BuildInfo::gitTagName());
+    } else {
+        m_text_Version->setText(jt::BuildInfo::gitCommitHash());
+    }
+    m_text_Version->setTextAlign(jt::Text::TextAlign::RIGHT);
+    m_text_Version->setPosition({ GP::GetScreenSize().x - 5.0f, GP::GetScreenSize().y - 20.0f });
+    m_text_Version->setShadow(GP::PaletteFontShadow(), jt::Vector2f { 1, 1 });
 }
 
 void StateMenu::createTextExplanation()
@@ -163,6 +175,7 @@ void StateMenu::updateDrawables(const float& elapsed)
     m_text_Title->update(elapsed);
     m_text_Explanation->update(elapsed);
     m_text_Credits->update(elapsed);
+    m_text_Version->update(elapsed);
     m_overlay->update(elapsed);
     m_vignette->update(elapsed);
 }
@@ -193,7 +206,7 @@ void StateMenu::doInternalDraw() const
     m_text_Title->draw(getGame()->gfx().target());
     m_text_Explanation->draw(getGame()->gfx().target());
     m_text_Credits->draw(getGame()->gfx().target());
-
+    m_text_Version->draw(getGame()->gfx().target());
     m_overlay->draw(getGame()->gfx().target());
     m_vignette->draw(getGame()->gfx().target());
 }
