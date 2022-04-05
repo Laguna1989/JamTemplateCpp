@@ -54,11 +54,6 @@ bool GraphicsComponentImpl::setAnimationIfNotSet(std::string const& newAnimation
     return false;
 }
 
-void GraphicsComponentImpl::setAnimationLooping(bool isLooping)
-{
-    m_animation->setLooping(isLooping);
-}
-
 std::string GraphicsComponentImpl::getCurrentAnimation() const
 {
     return m_animation->getCurrentAnimationName();

@@ -67,6 +67,7 @@ void jt::Animation::add(std::string const& fileName, std::string const& animName
         m_frames[animName].push_back(sptr);
     }
     m_time[animName] = frameTimesInSeconds;
+    m_isLooping[animName] = true;
 }
 
 void jt::Animation::loadFromJson(
@@ -257,7 +258,7 @@ void jt::Animation::doUpdate(float elapsed)
         m_frameTime -= m_time[m_currentAnimName][m_currentIdx];
         m_currentIdx++;
         if (m_currentIdx >= m_frames.at(m_currentAnimName).size()) {
-            if (m_isLooping) {
+            if (getIsLooping()) {
                 m_currentIdx = 0;
             } else {
                 m_currentIdx = m_frames.at(m_currentAnimName).size() - 1;
@@ -300,8 +301,20 @@ std::size_t jt::Animation::getNumberOfFramesInCurrentAnimation() const
 }
 std::string jt::Animation::getCurrentAnimationName() const { return m_currentAnimName; }
 
-bool jt::Animation::getIsLooping() const { return m_isLooping; }
-void jt::Animation::setLooping(bool isLooping) { m_isLooping = isLooping; }
+bool jt::Animation::getIsLooping() const
+{
+    if (!hasAnimation(m_currentAnimName)) {
+        return true;
+    }
+    return m_isLooping.at(m_currentAnimName);
+}
+void jt::Animation::setLooping(std::string const& animName, bool isLooping)
+{
+    if (!hasAnimation(animName)) {
+        throw std::invalid_argument { "invalid animation name: " + animName };
+    }
+    m_isLooping[animName] = isLooping;
+}
 std::size_t jt::Animation::getCurrentAnimationFrameIndex() const { return m_currentIdx; }
 
 void jt::Animation::setCustomShader(
