@@ -66,7 +66,7 @@ public:
     /// true by default.
     /// If an animation is not looping, it will remain at the last frame of the animation.
     /// \param isLooping value
-    void setLooping(bool isLooping);
+    void setLooping(std::string const& animName, bool isLooping);
 
     /// Get looping
     /// \return true if animation is looping, false otherwise
@@ -130,7 +130,7 @@ private:
 
     float m_frameTime { 0.0f };
 
-    bool m_isLooping { true };
+    std::map<std::string, bool> m_isLooping {};
 
     void doDrawShadow(std::shared_ptr<jt::RenderTarget> const sptr) const override;
     void doDraw(std::shared_ptr<jt::RenderTarget> const sptr) const override;

@@ -14,7 +14,6 @@ public:
     virtual void draw(std::shared_ptr<jt::RenderTarget> target) = 0;
     virtual void flash(float time, jt::Color const& color) = 0;
     virtual bool setAnimationIfNotSet(std::string const& newAnimationName) = 0;
-    virtual void setAnimationLooping(bool isLooping) = 0;
 
     virtual std::string getCurrentAnimation() const = 0;
 };

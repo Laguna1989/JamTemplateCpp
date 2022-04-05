@@ -16,7 +16,6 @@ public:
     void draw(std::shared_ptr<jt::RenderTarget> target) override;
     void flash(float time, jt::Color const& color) override;
     bool setAnimationIfNotSet(std::string const& newAnimationName) override;
-    void setAnimationLooping(bool isLooping) override;
     std::string getCurrentAnimation() const override;
 
 private:
