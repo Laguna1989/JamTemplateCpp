@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1649179558696,
+  "lastUpdate": 1649356185622,
   "repoUrl": "https://github.com/Laguna1989/JamTemplateCpp",
   "entries": {
     "Benchmark": [
@@ -4518,6 +4518,48 @@ window.BENCHMARK_DATA = {
             "value": 2.8372291983805966,
             "unit": "ms/iter",
             "extra": "iterations: 247\ncpu: 2.837048582995951 ms\nthreads: 1"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "laguna.ws@gmail.com",
+            "name": "Laguna1989",
+            "username": "Laguna1989"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "0e4ec3993138541c39f06a4e556a521a3a20c951",
+          "message": "Merge pull request #182 from Laguna1989/FEATURE_StateTransitionsDemo\n\nAdd demo for state transitions",
+          "timestamp": "2022-04-07T20:27:00+02:00",
+          "tree_id": "c404add7891d40c49502da237ef8dc8ce956c31d",
+          "url": "https://github.com/Laguna1989/JamTemplateCpp/commit/0e4ec3993138541c39f06a4e556a521a3a20c951"
+        },
+        "date": 1649356184424,
+        "tool": "googlecpp",
+        "benches": [
+          {
+            "name": "BM_UpdateDrawablePositions",
+            "value": 2.657624744360844,
+            "unit": "ms/iter",
+            "extra": "iterations: 266\ncpu: 2.6562015037593985 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_StartGame",
+            "value": 0.003121353904894409,
+            "unit": "ms/iter",
+            "extra": "iterations: 224193\ncpu: 0.0031213280521693353 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GamestateWithTweeningShapes",
+            "value": 2.9150241541666824,
+            "unit": "ms/iter",
+            "extra": "iterations: 240\ncpu: 2.9148070833333337 ms\nthreads: 1"
           }
         ]
       }
