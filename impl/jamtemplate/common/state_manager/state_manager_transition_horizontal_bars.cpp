@@ -6,7 +6,6 @@ jt::StateManagerTransitionHorizontalBars::StateManagerTransitionHorizontalBars(
     : StateManagerTransitionImpl { totalTime }
 {
     m_shape = std::make_shared<jt::Shape>();
-    m_shape = std::make_shared<jt::Shape>();
     m_shape->makeRect(shapeSize, tm);
     m_shape->setColor(jt::Color { 45, 45, 45, 255 });
     m_shape->setIgnoreCamMovement(true);

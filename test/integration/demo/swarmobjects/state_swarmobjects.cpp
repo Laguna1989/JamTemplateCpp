@@ -4,8 +4,6 @@
 #include "game_interface.hpp"
 #include "input/input_manager.hpp"
 #include "math_helper.hpp"
-#include "state_manager/state_manager_transition_fade_to_black.hpp"
-#include "timer.hpp"
 #include "tweens/tween_alpha.hpp"
 #include <vector>
 
@@ -28,9 +26,6 @@ void StateSwarmObjects::doInternalCreate()
     m_sky->update(0.0f);
 
     setAutoDraw(false);
-
-    getGame()->stateManager().setTransition(std::make_shared<jt::StateManagerTransitionFadeToBlack>(
-        jt::Vector2f { 400.0f, 300.0f }, getGame()->gfx().textureManager()));
 }
 
 void StateSwarmObjects::doInternalUpdate(float const /*elapsed*/)

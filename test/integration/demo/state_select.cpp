@@ -16,6 +16,7 @@
 #include "simplex/state_3d_noise.hpp"
 #include "swarmobjects/state_swarmobjects.hpp"
 #include "tileson/state_tileson.hpp"
+#include "transitions/state_transitions.hpp"
 #include "tween/state_tween.hpp"
 
 void StateSelect::doInternalCreate()
@@ -37,6 +38,7 @@ void StateSelect::doInternalCreate()
     AddButton<StateAudio>("Audio");
     AddButton<StateGamepad>("Gamepad");
     AddButton<StateShaders>("Shaders");
+    AddButton<StateTransitions>("Transitions");
 
     add(std::make_shared<jt::LicenseInfo>());
 }
