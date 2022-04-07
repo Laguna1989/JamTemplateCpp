@@ -41,7 +41,7 @@ jobs:
       - uses: seanmiddleditch/gha-setup-ninja@master
 
       - name: ccache
-        uses: hendrikmuhs/ccache-action@v1
+        uses: hendrikmuhs/ccache-action@v1.2
         with:
           key: ${{ github.job }}-${{ matrix.os }}-${{ matrix.type }}
           max-size: 100M
@@ -93,7 +93,7 @@ jobs:
       - uses: seanmiddleditch/gha-setup-ninja@master
 
       - name: ccache
-        uses: hendrikmuhs/ccache-action@v1
+        uses: hendrikmuhs/ccache-action@v1.2
         with:
           key: ${{ github.job }}-${{ matrix.os }}-${{ matrix.type }}
           max-size: 100M
