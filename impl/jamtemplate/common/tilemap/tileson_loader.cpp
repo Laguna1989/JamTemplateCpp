@@ -129,9 +129,9 @@ std::vector<std::shared_ptr<jt::tilemap::TileNode>> jt::tilemap::TilesonLoader::
             auto posy = std::get<1>(pos);
 
             auto const ts = map->getTilesets().at(0).getTileSize();
-            auto color = jt::MakeColor::FromRGBA(1, 1, 1, 100);
+            auto color = jt::Color { 1, 1, 1, 100 };
             if (!isBlocked) {
-                color = jt::MakeColor::FromRGBA(255, 255, 255, 100);
+                color = jt::Color { 255, 255, 255, 100 };
             }
 
             std::shared_ptr<jt::Shape> drawable = jt::dh::createShapeRect(

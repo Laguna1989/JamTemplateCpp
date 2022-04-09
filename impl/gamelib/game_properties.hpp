@@ -1,7 +1,7 @@
 ﻿#ifndef GAME_GAMEPROPERTIES_HPP_INCLUDEGUARD
 #define GAME_GAMEPROPERTIES_HPP_INCLUDEGUARD
 
-#include "color.hpp"
+#include "color/color.hpp"
 #include "vector.hpp"
 #include <palette.hpp>
 #include <string>

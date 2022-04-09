@@ -1,4 +1,4 @@
-#include "color_helpers.hpp"
+#include "color/color_helpers.hpp"
 #include <cmath>
 #include <gtest/gtest.h>
 #include <tuple>

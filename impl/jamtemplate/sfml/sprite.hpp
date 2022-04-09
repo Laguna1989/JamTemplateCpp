@@ -1,7 +1,7 @@
 ﻿#ifndef GUARD_JAMTEMPLATE_SPRITE_HPP_INCLUDEGUARD
 #define GUARD_JAMTEMPLATE_SPRITE_HPP_INCLUDEGUARD
 
-#include "color.hpp"
+#include "color/color.hpp"
 #include "drawable_impl_sfml.hpp"
 #include "render_target.hpp"
 #include "texture_manager_interface.hpp"

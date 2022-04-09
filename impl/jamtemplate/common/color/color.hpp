@@ -15,18 +15,6 @@ struct Color {
 bool operator==(jt::Color const& a, jt::Color const& b);
 bool operator!=(jt::Color const& a, jt::Color const& b);
 
-namespace MakeColor {
-
-jt::Color FromRGB(std::uint8_t r, std::uint8_t g, std::uint8_t b);
-jt::Color FromRGBA(std::uint8_t r, std::uint8_t g, std::uint8_t b, std::uint8_t a);
-
-jt::Color FromHSV(float h, float s, float v);
-jt::Color FromHSVA(float h, float s, float v, std::uint8_t a);
-
-jt::Color FromHexString(std::string const& hexString);
-
-} // namespace MakeColor
-
 struct colors {
     static const jt::Color Black; ///< Black predefined color
     static const jt::Color White; ///< White predefined color

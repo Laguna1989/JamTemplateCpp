@@ -1,7 +1,7 @@
 ﻿#ifndef GUARD_JAMTEMPLATE_COLOR_LIB_GUARD_HPP
 #define GUARD_JAMTEMPLATE_COLOR_LIB_GUARD_HPP
 
-#include "color.hpp"
+#include "color/color.hpp"
 #include <SFML/Graphics/Color.hpp>
 
 namespace jt {

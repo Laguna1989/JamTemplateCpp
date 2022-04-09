@@ -1,7 +1,7 @@
 ﻿#ifndef GUARD_JAMTEMPLATE_RANDOM_HPP_INCLUDEGUARD
 #define GUARD_JAMTEMPLATE_RANDOM_HPP_INCLUDEGUARD
 
-#include "color.hpp"
+#include "color/color.hpp"
 #include "rect.hpp"
 #include "vector.hpp"
 #include <random>

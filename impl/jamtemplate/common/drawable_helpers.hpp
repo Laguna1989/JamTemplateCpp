@@ -1,7 +1,7 @@
 ﻿#ifndef GUARD_JAMTEMPLATE_DRAWABLE_HELPER_GUARD_HPP
 #define GUARD_JAMTEMPLATE_DRAWABLE_HELPER_GUARD_HPP
 
-#include "color.hpp"
+#include "color/color.hpp"
 #include "render_target.hpp"
 #include "sprite.hpp"
 #include "vector.hpp"
