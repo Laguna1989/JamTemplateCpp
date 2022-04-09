@@ -1,10 +1,18 @@
 ﻿#include "color.hpp"
+#include <ostream>
 
 bool jt::operator==(jt::Color const& a, jt::Color const& b)
 {
     return (a.r == b.r && a.g == b.g && a.b == b.b && a.a == b.a);
 }
 bool jt::operator!=(jt::Color const& a, jt::Color const& b) { return !(a == b); }
+
+std::ostream& jt::operator<<(std::ostream& os, const jt::Color& color)
+{
+    os << "( " << static_cast<int>(color.r) << ", " << static_cast<int>(color.g) << ", "
+       << static_cast<int>(color.b) << ", " << static_cast<int>(color.a) << " )";
+    return os;
+}
 
 const jt::Color jt::colors::Black { 0, 0, 0, 255 }; ///< Black predefined color
 const jt::Color jt::colors::White { 255, 255, 255, 255 }; ///< White predefined color

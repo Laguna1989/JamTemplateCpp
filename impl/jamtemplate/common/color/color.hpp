@@ -1,6 +1,7 @@
 ﻿#ifndef GUARD_JAMTEMPLATE_COLOR_GUARD_HPP_12345
 #define GUARD_JAMTEMPLATE_COLOR_GUARD_HPP_12345
 
+#include <iosfwd>
 #include <string>
 
 namespace jt {
@@ -14,6 +15,8 @@ struct Color {
 
 bool operator==(jt::Color const& a, jt::Color const& b);
 bool operator!=(jt::Color const& a, jt::Color const& b);
+
+std::ostream& operator<<(std::ostream& os, const jt::Color& color);
 
 struct colors {
     static const jt::Color Black; ///< Black predefined color

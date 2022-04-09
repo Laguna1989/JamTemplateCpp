@@ -1,5 +1,5 @@
 #include "color/color.hpp"
-#include <gtest/gtest.h>
+#include "gtest/gtest.h"
 #include <type_traits>
 
 TEST(ColorTest, IsDefaultConstructible)
@@ -21,12 +21,15 @@ TEST(ColorTest, SetValues)
     ASSERT_EQ(color.b, 222);
 }
 
-/*
-TEST(ColorTest, DesaturateRed)
+TEST(ColorTest, IsEqualReturnsTrueForSameColor)
 {
-    auto const initialColor = jt::MakeColor::FromHSV(0, 100.0f, 100.0f);
-    auto const desaturatedColor = initialColor.desatrate(20.0f);
-    auto const expectedColor = jt::MakeColor::FromHSV(0, 80.0f, 100.0f);
+    jt::Color const color { 1, 2, 3 };
+    ASSERT_TRUE(color == color);
+}
 
-    ASSERT_EQ(desaturatedColor, expectedColor);
-}*/
+TEST(ColorTest, IsEqualReturnsFalseForSameColor)
+{
+    jt::Color const color1 { 1, 2, 3 };
+    jt::Color const color2 { 4, 5, 6 };
+    ASSERT_FALSE(color1 == color2);
+}
