@@ -1,5 +1,5 @@
 #include "state_particles.hpp"
-#include "../state_select.hpp"
+#include "state_select.hpp"
 #include "color/make_color.hpp"
 #include "lerp.hpp"
 #include "random/random.hpp"

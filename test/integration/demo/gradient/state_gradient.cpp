@@ -1,8 +1,8 @@
 #include "state_gradient.hpp"
-#include "../state_select.hpp"
 #include "drawable_helpers.hpp"
 #include "game_interface.hpp"
 #include "palette.hpp"
+#include "state_select.hpp"
 #include <fstream>
 #include <sstream>
 

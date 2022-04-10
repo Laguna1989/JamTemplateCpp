@@ -1,4 +1,4 @@
-﻿#include "../sdl_setup.hpp"
+﻿#include "sdl_setup.hpp"
 #include "text.hpp"
 #include "gtest/gtest.h"
 

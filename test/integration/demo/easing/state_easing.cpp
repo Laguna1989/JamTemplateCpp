@@ -1,6 +1,5 @@
 #include "state_easing.hpp"
-#include "../control_command_move_cam.hpp"
-#include "../state_select.hpp"
+#include "control_command_move_cam.hpp"
 #include "ease/back.hpp"
 #include "ease/bounce.hpp"
 #include "ease/circ.hpp"
@@ -14,6 +13,7 @@
 #include "ease/sine.hpp"
 #include "ease_object.hpp"
 #include "game_interface.hpp"
+#include "state_select.hpp"
 
 void StateEasing::doInternalCreate()
 {

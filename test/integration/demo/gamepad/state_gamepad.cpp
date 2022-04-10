@@ -1,7 +1,7 @@
 #include "state_gamepad.hpp"
-#include "../state_select.hpp"
 #include "game_interface.hpp"
 #include "gamepad_visualizer.hpp"
+#include "state_select.hpp"
 
 void StateGamepad::doInternalCreate()
 {

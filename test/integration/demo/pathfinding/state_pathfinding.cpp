@@ -1,5 +1,5 @@
 #include "state_pathfinding.hpp"
-#include "../state_select.hpp"
+#include "state_select.hpp"
 #include "drawable_helpers.hpp"
 #include "game_interface.hpp"
 #include "pathfinder/node.hpp"

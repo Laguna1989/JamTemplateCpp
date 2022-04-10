@@ -1,4 +1,4 @@
-﻿#include "../sdl_setup.hpp"
+﻿#include "sdl_setup.hpp"
 #include "shape.hpp"
 #include "texture_manager_impl.hpp"
 #include "gtest/gtest.h"

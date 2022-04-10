@@ -1,5 +1,5 @@
 #include "state_inventory.hpp"
-#include "../state_select.hpp"
+#include "state_select.hpp"
 #include "box2dwrapper/box2d_world_impl.hpp"
 #include "game_interface.hpp"
 #include "inventory_list_imgui.hpp"

@@ -1,4 +1,4 @@
-﻿#include "../command_recorder.hpp"
+﻿#include "command_recorder.hpp"
 #include "input/keyboard/keyboard_input.hpp"
 #include "gtest/gtest.h"
 

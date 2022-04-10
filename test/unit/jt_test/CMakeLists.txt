@@ -18,6 +18,8 @@ if (JT_ENABLE_WEB)
     set(CMAKE_EXECUTABLE_SUFFIX ".html")
 endif ()
 
+
+target_include_directories(jt_tests PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 target_link_libraries(jt_tests
         gtest
         gmock_main
