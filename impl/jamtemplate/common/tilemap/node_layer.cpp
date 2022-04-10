@@ -59,9 +59,9 @@ std::vector<std::shared_ptr<jt::tilemap::TileNode>> jt::tilemap::NodeLayer::getA
 void jt::tilemap::NodeLayer::reset()
 {
     for (auto& t : m_nodeTiles) {
-        auto color = jt::MakeColor::FromRGBA(1, 1, 1, 100);
+        auto color = jt::Color { 1, 1, 1, 100 };
         if (!t->getBlocked()) {
-            color = jt::MakeColor::FromRGBA(255, 255, 255, 100);
+            color = jt::Color { 255, 255, 255, 100 };
         }
         t->getDrawable()->setColor(color);
         t->reset();

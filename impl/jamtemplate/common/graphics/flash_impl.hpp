@@ -1,7 +1,7 @@
 #ifndef GUARD_JAMTEMPLATE_FLASH_INTERFACE_HPP
 #define GUARD_JAMTEMPLATE_FLASH_INTERFACE_HPP
 
-#include "color.hpp"
+#include "color/color.hpp"
 #include "render_target.hpp"
 #include <memory>
 

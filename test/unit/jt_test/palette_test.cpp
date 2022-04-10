@@ -137,7 +137,8 @@ TEST(PaletteParseGPL, GPLWithOneEntry)
 )";
 
     jt::Palette const pal = jt::Palette::parseGPL(input);
-    ASSERT_EQ(pal.getColor(0), jt::MakeColor::FromRGB(64, 0, 64));
+    jt::Color const expectedColor { 64, 0, 64 };
+    ASSERT_EQ(pal.getColor(0), expectedColor);
 }
 
 TEST(PaletteParseGPL, GPLWithInvalidEntry)
@@ -166,7 +167,10 @@ TEST(PaletteParseGPL, GPLWithMultipleEntries)
 )";
 
     jt::Palette const pal = jt::Palette::parseGPL(input);
-    ASSERT_EQ(pal.getColor(0), jt::MakeColor::FromRGB(64, 0, 64));
-    ASSERT_EQ(pal.getColor(1), jt::MakeColor::FromRGB(128, 255, 255));
-    ASSERT_EQ(pal.getColor(2), jt::MakeColor::FromRGB(0, 64, 128));
+    jt::Color const expectedColor0 { 64, 0, 64 };
+    jt::Color const expectedColor1 { 128, 255, 255 };
+    jt::Color const expectedColor2 { 0, 64, 128 };
+    ASSERT_EQ(pal.getColor(0), expectedColor0);
+    ASSERT_EQ(pal.getColor(1), expectedColor1);
+    ASSERT_EQ(pal.getColor(2), expectedColor2);
 }

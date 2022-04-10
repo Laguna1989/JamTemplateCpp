@@ -1,5 +1,5 @@
 ﻿#include "color.hpp"
-#include "color_helpers.hpp"
+#include <ostream>
 
 bool jt::operator==(jt::Color const& a, jt::Color const& b)
 {
@@ -7,31 +7,11 @@ bool jt::operator==(jt::Color const& a, jt::Color const& b)
 }
 bool jt::operator!=(jt::Color const& a, jt::Color const& b) { return !(a == b); }
 
-jt::Color jt::MakeColor::FromRGB(std::uint8_t r, std::uint8_t g, std::uint8_t b)
+std::ostream& jt::operator<<(std::ostream& os, const jt::Color& color)
 {
-    return jt::MakeColor::FromRGBA(r, g, b, 255);
-}
-
-jt::Color jt::MakeColor::FromRGBA(std::uint8_t r, std::uint8_t g, std::uint8_t b, std::uint8_t a)
-{
-    return jt::Color { r, g, b, a };
-}
-jt::Color jt::MakeColor::FromHSV(float h, float s, float v)
-{
-    return jt::MakeColor::FromHSVA(h, s, v, 255);
-}
-
-jt::Color jt::MakeColor::FromHSVA(float h, float s, float v, std::uint8_t a)
-{
-
-    auto [r, g, b] = jt::ColorHelpers::hsv2rgb(h, s, v);
-    return jt::Color { r, g, b, a };
-}
-
-jt::Color jt::MakeColor::FromHexString(std::string const& hexString)
-{
-    auto [r, g, b] = jt::ColorHelpers::hex2rgb(hexString);
-    return jt::Color { r, g, b, 255 };
+    os << "( " << static_cast<int>(color.r) << ", " << static_cast<int>(color.g) << ", "
+       << static_cast<int>(color.b) << ", " << static_cast<int>(color.a) << " )";
+    return os;
 }
 
 const jt::Color jt::colors::Black { 0, 0, 0, 255 }; ///< Black predefined color

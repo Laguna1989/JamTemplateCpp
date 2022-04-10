@@ -1,4 +1,4 @@
-﻿#include "color_helpers.hpp"
+﻿#include "color/color_helpers.hpp"
 #include "random/random.hpp"
 #include "random/random_sample_and_hold.hpp"
 #include "vector.hpp"

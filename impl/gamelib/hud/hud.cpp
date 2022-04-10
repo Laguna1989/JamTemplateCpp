@@ -1,6 +1,5 @@
 ﻿#include "hud.hpp"
-#include "../game_properties.hpp"
-#include "color.hpp"
+#include "color/color.hpp"
 #include "game_interface.hpp"
 #include "score_display.hpp"
 

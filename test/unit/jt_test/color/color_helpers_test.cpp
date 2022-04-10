@@ -1,6 +1,6 @@
-#include "color_helpers.hpp"
+#include "color/color_helpers.hpp"
+#include "gtest/gtest.h"
 #include <cmath>
-#include <gtest/gtest.h>
 #include <tuple>
 
 class ColorHelpersHsv2RgbTestFixture

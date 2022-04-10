@@ -1,5 +1,5 @@
-﻿#include "../sdl_setup.hpp"
-#include "bar.hpp"
+﻿#include "bar.hpp"
+#include "sdl_setup.hpp"
 #include "texture_manager_impl.hpp"
 #include "gtest/gtest.h"
 #include <stdexcept>

@@ -1,5 +1,5 @@
-﻿#include "../sdl_setup.hpp"
-#include "drawable_helpers.hpp"
+﻿#include "drawable_helpers.hpp"
+#include "sdl_setup.hpp"
 #include "shape.hpp"
 #include "sprite.hpp"
 #include "text.hpp"

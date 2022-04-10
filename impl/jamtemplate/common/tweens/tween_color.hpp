@@ -1,7 +1,7 @@
 ﻿#ifndef GUARD_JAMTEMPLATE_TWEENCOLOR_HPP_INCLUDEGUARD
 #define GUARD_JAMTEMPLATE_TWEENCOLOR_HPP_INCLUDEGUARD
 
-#include "color.hpp"
+#include "color/color.hpp"
 #include "tween_base.hpp"
 
 namespace jt {

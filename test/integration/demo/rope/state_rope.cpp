@@ -1,9 +1,9 @@
 ﻿#include "state_rope.hpp"
-#include "../state_select.hpp"
 #include "drawable_helpers.hpp"
 #include "game_interface.hpp"
 #include "math_helper.hpp"
 #include "shape.hpp"
+#include "state_select.hpp"
 #include <cmath>
 
 RopeMass::RopeMass(jt::Vector2f pos, float m)

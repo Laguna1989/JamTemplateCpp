@@ -1,4 +1,4 @@
-﻿#include "color.hpp"
+﻿#include "color/color.hpp"
 #include "drawable_helpers.hpp"
 #include "mocks/mock_drawable.hpp"
 #include "mocks/mock_tween.hpp"

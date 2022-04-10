@@ -1,6 +1,6 @@
 ﻿#include "state_menu.hpp"
 #include "build_info.hpp"
-#include "color.hpp"
+#include "color/color.hpp"
 #include "drawable_helpers.hpp"
 #include "game_interface.hpp"
 #include "game_properties.hpp"
