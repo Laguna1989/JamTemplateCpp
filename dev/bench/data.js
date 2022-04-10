@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1649566614995,
+  "lastUpdate": 1649608751149,
   "repoUrl": "https://github.com/Laguna1989/JamTemplateCpp",
   "entries": {
     "Benchmark": [
@@ -4602,6 +4602,48 @@ window.BENCHMARK_DATA = {
             "value": 3.177285731818167,
             "unit": "ms/iter",
             "extra": "iterations: 220\ncpu: 3.1771290909090912 ms\nthreads: 1"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "laguna.ws@gmail.com",
+            "name": "Laguna1989",
+            "username": "Laguna1989"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "c43a895c8411df8001a97af0b8e5f4bb54f1d916",
+          "message": "Merge pull request #186 from Laguna1989/FEATURE_IncludeUseLRangle\n\nuse <> for includes",
+          "timestamp": "2022-04-10T18:36:19+02:00",
+          "tree_id": "6d59176349dd31f5d0fa0d569a62e7c4962efe41",
+          "url": "https://github.com/Laguna1989/JamTemplateCpp/commit/c43a895c8411df8001a97af0b8e5f4bb54f1d916"
+        },
+        "date": 1649608750025,
+        "tool": "googlecpp",
+        "benches": [
+          {
+            "name": "BM_UpdateDrawablePositions",
+            "value": 3.257313417004007,
+            "unit": "ms/iter",
+            "extra": "iterations: 247\ncpu: 3.2568910931174084 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_StartGame",
+            "value": 0.0030233111397424527,
+            "unit": "ms/iter",
+            "extra": "iterations: 230517\ncpu: 0.003022481205290716 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GamestateWithTweeningShapes",
+            "value": 3.1491119144142807,
+            "unit": "ms/iter",
+            "extra": "iterations: 222\ncpu: 3.1488454954954967 ms\nthreads: 1"
           }
         ]
       }
