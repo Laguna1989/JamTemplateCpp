@@ -1,7 +1,6 @@
 ﻿#include "tile_layer.hpp"
-#include "conversions.hpp"
-#include "drawable_helpers.hpp"
-#include "shape.hpp"
+#include <drawable_helpers.hpp>
+#include <shape.hpp>
 #include <memory>
 
 jt::tilemap::TileLayer::TileLayer(std::vector<jt::tilemap::TileInfo> const& tileInfo,

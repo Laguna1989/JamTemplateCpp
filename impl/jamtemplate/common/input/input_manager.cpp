@@ -1,6 +1,5 @@
 ﻿#include "input_manager.hpp"
-#include "input/gamepad/gamepad_input_null.hpp"
-#include "input_manager_null.hpp"
+#include <input/gamepad/gamepad_input_null.hpp>
 
 jt::InputManager::InputManager(std::shared_ptr<jt::MouseInterface> mouse,
     std::shared_ptr<jt::KeyboardInterface> keyboard,

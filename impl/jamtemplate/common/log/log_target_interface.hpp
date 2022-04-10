@@ -1,7 +1,7 @@
 #ifndef GUARD_JAMTEMPLATE_LOG_TARGET_INTERFACE_HPP
 #define GUARD_JAMTEMPLATE_LOG_TARGET_INTERFACE_HPP
 
-#include "log_entry.hpp"
+#include <log/log_entry.hpp>
 
 namespace jt {
 class LogTargetInterface {

@@ -1,8 +1,8 @@
 #ifndef GUARD_JAMTEMPLATE_KEYBOARD_INTERFACE_HPP
 #define GUARD_JAMTEMPLATE_KEYBOARD_INTERFACE_HPP
 
-#include "input/control_commands/control_command_interface.hpp"
-#include "keyboard_defines.hpp"
+#include <input/control_commands/control_command_interface.hpp>
+#include <input/keyboard/keyboard_defines.hpp>
 #include <memory>
 
 namespace jt {

@@ -1,7 +1,7 @@
 #include "tileson_loader.hpp"
-#include "conversions.hpp"
-#include "drawable_helpers.hpp"
-#include "pathfinder/node.hpp"
+#include <conversions.hpp>
+#include <drawable_helpers.hpp>
+#include <pathfinder/node.hpp>
 
 namespace {
 jt::tilemap::InfoRectProperties parseProperties(tson::PropertyCollection& props)

@@ -1,7 +1,7 @@
 ﻿#include "text.hpp"
-#include "render_target.hpp"
-#include "sdl_helper.hpp"
-#include "strutils.hpp"
+#include <render_target.hpp>
+#include <sdl_helper.hpp>
+#include <strutils.hpp>
 #include <iostream>
 #include <stdexcept>
 

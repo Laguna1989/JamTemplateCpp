@@ -1,7 +1,7 @@
 ﻿#ifndef GUARD_JAMTEMPLATE_RENDERWINDOW_LIB_GUARD_HPP
 #define GUARD_JAMTEMPLATE_RENDERWINDOW_LIB_GUARD_HPP
 
-#include "graphics/render_window_interface.hpp"
+#include <graphics/render_window_interface.hpp>
 #include <memory>
 
 namespace sf {

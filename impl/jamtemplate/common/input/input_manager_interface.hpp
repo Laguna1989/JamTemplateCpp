@@ -1,10 +1,10 @@
 ﻿#ifndef GUARD_JAMTEMPLATE_INPUTMANAGERINTERFACE_HPP
 #define GUARD_JAMTEMPLATE_INPUTMANAGERINTERFACE_HPP
 
-#include "input/control_commands/control_command_interface.hpp"
-#include "input/gamepad/gamepad_interface.hpp"
-#include "input/keyboard/keyboard_interface.hpp"
-#include "input/mouse/mouse_interface.hpp"
+#include <input/control_commands/control_command_interface.hpp>
+#include <input/gamepad/gamepad_interface.hpp>
+#include <input/keyboard/keyboard_interface.hpp>
+#include <input/mouse/mouse_interface.hpp>
 #include <memory>
 
 namespace jt {

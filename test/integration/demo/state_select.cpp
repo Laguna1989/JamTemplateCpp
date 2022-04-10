@@ -7,7 +7,7 @@
 #include "gradient/state_gradient.hpp"
 #include "imgui/state_imgui.hpp"
 #include "inventory/state_inventory.hpp"
-#include "logging/license_info.hpp"
+#include "log/license_info.hpp"
 #include "particles/state_particles.hpp"
 #include "pathfinding/state_pathfinding.hpp"
 #include "rope/state_rope.hpp"

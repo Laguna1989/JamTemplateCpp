@@ -1,7 +1,7 @@
 #ifndef GUARD_JAMTEMPLATE_AUDIO_NULL_HPP
 #define GUARD_JAMTEMPLATE_AUDIO_NULL_HPP
 
-#include "audio_interface.hpp"
+#include <audio/audio_interface.hpp>
 
 namespace jt {
 

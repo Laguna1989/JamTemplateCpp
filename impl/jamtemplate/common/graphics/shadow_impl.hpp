@@ -1,9 +1,9 @@
 #ifndef GUARD_JAMTEMPLATE_SHADOW_IMPL_HPP
 #define GUARD_JAMTEMPLATE_SHADOW_IMPL_HPP
 
-#include "color/color.hpp"
-#include "render_target.hpp"
-#include "vector.hpp"
+#include <color/color.hpp>
+#include <render_target.hpp>
+#include <vector.hpp>
 #include <memory>
 
 namespace jt {

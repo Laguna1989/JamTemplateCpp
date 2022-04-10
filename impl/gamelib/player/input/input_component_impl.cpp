@@ -1,6 +1,5 @@
 #include "input_component_impl.hpp"
-#include "game_properties.hpp"
-#include "player/player.hpp"
+#include <game_properties.hpp>
 
 InputComponentImpl::InputComponentImpl(std::shared_ptr<jt::KeyboardInterface> keyboardInterface)
     : m_keyboard { keyboardInterface }

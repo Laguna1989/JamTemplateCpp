@@ -1,7 +1,7 @@
 #ifndef GUARD_JAMTEMPLATE_GAMEPAD_INPUT_NULL_HPP
 #define GUARD_JAMTEMPLATE_GAMEPAD_INPUT_NULL_HPP
 
-#include "gamepad_interface.hpp"
+#include <input/gamepad/gamepad_interface.hpp>
 
 namespace jt {
 

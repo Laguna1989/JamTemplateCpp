@@ -1,7 +1,7 @@
 #include "line.hpp"
-#include "color_lib.hpp"
-#include "math_helper.hpp"
-#include "vector_lib.hpp"
+#include <color_lib.hpp>
+#include <math_helper.hpp>
+#include <vector_lib.hpp>
 #include <SFML/Graphics.hpp>
 
 jt::Line::Line(jt::Vector2f lineVector)

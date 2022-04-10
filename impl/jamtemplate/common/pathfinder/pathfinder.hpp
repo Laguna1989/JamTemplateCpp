@@ -1,7 +1,7 @@
 #ifndef GUARD_JAMTEMPLATE_PATHFINDINDER_HPP
 #define GUARD_JAMTEMPLATE_PATHFINDINDER_HPP
 
-#include "node_interface.hpp"
+#include <pathfinder/node_interface.hpp>
 #include <memory>
 #include <vector>
 

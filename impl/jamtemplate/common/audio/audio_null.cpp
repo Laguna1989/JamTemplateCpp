@@ -1,5 +1,5 @@
 #include "audio_null.hpp"
-#include "sound_null.hpp"
+#include <audio/sound_null.hpp>
 
 void jt::AudioNull::update() { }
 oalpp::SoundContextInterface& jt::AudioNull::getContext() { return m_context; }

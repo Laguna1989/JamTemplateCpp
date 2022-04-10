@@ -1,5 +1,5 @@
 #include "make_color.hpp"
-#include "color_helpers.hpp"
+#include <color/color_helpers.hpp>
 
 jt::Color jt::MakeColor::FromRGB(std::uint8_t r, std::uint8_t g, std::uint8_t b)
 {

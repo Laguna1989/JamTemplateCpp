@@ -1,8 +1,8 @@
 ﻿#ifndef SCORE_DISPLAY_GUARD
 #define SCORE_DISPLAY_GUARD
 
-#include "observer_interface.hpp"
-#include "text.hpp"
+#include <hud/observer_interface.hpp>
+#include <text.hpp>
 
 class ScoreDisplay : public ObserverInterface<int> {
 public:

@@ -1,10 +1,10 @@
 #ifndef GUARD_JAMTEMPLATE_CONSOLE_HPP
 #define GUARD_JAMTEMPLATE_CONSOLE_HPP
 
-#include "game_object.hpp"
-#include "imgui.h"
-#include "log_entry.hpp"
-#include "logger_interface.hpp"
+#include <game_object.hpp>
+#include <log/log_entry.hpp>
+#include <log/logger_interface.hpp>
+#include <imgui.h>
 #include <memory>
 #include <string>
 #include <vector>

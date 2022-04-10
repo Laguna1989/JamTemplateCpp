@@ -1,7 +1,7 @@
 ﻿#include "sprite.hpp"
-#include "color_lib.hpp"
-#include "rect_lib.hpp"
-#include "vector_lib.hpp"
+#include <color_lib.hpp>
+#include <rect_lib.hpp>
+#include <vector_lib.hpp>
 
 jt::Sprite::Sprite() { }
 

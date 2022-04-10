@@ -1,9 +1,9 @@
 ﻿#ifndef GUARD_JAMTEMPLATE_SHAPE_HPP_INCLUDEGUARD
 #define GUARD_JAMTEMPLATE_SHAPE_HPP_INCLUDEGUARD
 
-#include "drawable_impl_sfml.hpp"
-#include "render_target.hpp"
-#include "texture_manager_interface.hpp"
+#include <render_target.hpp>
+#include <texture_manager_interface.hpp>
+#include <drawable_impl_sfml.hpp>
 #include <memory>
 
 namespace sf {

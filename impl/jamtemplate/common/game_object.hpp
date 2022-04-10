@@ -1,7 +1,7 @@
 ﻿#ifndef GUARD_JAMTEMPLATE_GAMEOBJECT_HPP_INCLUDEGUARD
 #define GUARD_JAMTEMPLATE_GAMEOBJECT_HPP_INCLUDEGUARD
 
-#include "counted_object.hpp"
+#include <counted_object.hpp>
 #include <memory>
 #include <string>
 #include <vector>

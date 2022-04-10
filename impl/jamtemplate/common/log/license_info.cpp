@@ -1,7 +1,6 @@
 #include "license_info.hpp"
-#include "drawable_helpers.hpp"
-#include "game_interface.hpp"
-#include "imgui.h"
+#include <game_interface.hpp>
+#include <imgui.h>
 
 constexpr auto sfmlLicenseText
     = R"(SFML (Simple and Fast Multimedia Library) - Copyright (c) Laurent Gomila

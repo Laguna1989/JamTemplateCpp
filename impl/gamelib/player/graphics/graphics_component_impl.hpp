@@ -1,9 +1,9 @@
 #ifndef GAME_PLAYER_GRAPHICS_COMPONENT_HPP
 #define GAME_PLAYER_GRAPHICS_COMPONENT_HPP
 
-#include "animation.hpp"
-#include "game_interface.hpp"
-#include "graphics_component_interface.hpp"
+#include <animation.hpp>
+#include <game_interface.hpp>
+#include <player/graphics/graphics_component_interface.hpp>
 #include <memory>
 
 class GraphicsComponentImpl : public GraphicsComponentInterface {

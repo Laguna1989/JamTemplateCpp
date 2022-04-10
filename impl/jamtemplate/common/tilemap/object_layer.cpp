@@ -1,5 +1,4 @@
 #include "object_layer.hpp"
-#include "conversions.hpp"
 
 jt::tilemap::ObjectLayer::ObjectLayer(std::vector<jt::tilemap::InfoRect> const& objects)
     : m_objects { objects }

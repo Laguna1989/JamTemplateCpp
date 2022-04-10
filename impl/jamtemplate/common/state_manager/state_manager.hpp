@@ -2,7 +2,7 @@
 #define GUARD_JAMTEMAPLTE_STATE_MANAGER_HPP
 
 #include "game_state.hpp"
-#include "state_manager_interface.hpp"
+#include <state_manager/state_manager_interface.hpp>
 #include <memory>
 
 namespace jt {

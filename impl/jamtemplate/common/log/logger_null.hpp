@@ -1,12 +1,12 @@
-#ifndef GUARD_JAMTEMPLATE_LOG_HPP
-#define GUARD_JAMTEMPLATE_LOG_HPP
+#ifndef GUARD_JAMTEMPLATE_LOGGER_NULL_HPP
+#define GUARD_JAMTEMPLATE_LOGGER_NULL_HPP
 
-#include "log_entry.hpp"
-#include "logger_interface.hpp"
-#include <vector>
+#include <log/logger_interface.hpp>
 
 namespace jt {
-class Logger : public jt::LoggerInterface {
+namespace null_objects {
+
+class LoggerNull : public jt::LoggerInterface {
 public:
     void action(std::string const& string) override;
     void fatal(std::string const& string, std::vector<std::string> tags = {}) override;
@@ -15,21 +15,15 @@ public:
     void info(std::string const& string, std::vector<std::string> tags = {}) override;
     void debug(std::string const& string, std::vector<std::string> tags = {}) override;
     void verbose(std::string const& string, std::vector<std::string> tags = {}) override;
-
     void addLogTarget(std::shared_ptr<LogTargetInterface> target) override;
-    void setLogLevel(LogLevel level) override;
-
     std::vector<jt::LogEntry> const& getHistory() override;
     void clear() override;
+    void setLogLevel(LogLevel level) override;
 
 private:
-    std::vector<std::shared_ptr<jt::LogTargetInterface>> m_logTargets;
-
-    std::vector<LogEntry> m_history;
-
-    void addLogEntry(LogEntry entry);
-    LogLevel m_logLevel { LogLevel::LogLevelVerbose };
+    std::vector<jt::LogEntry> m_history;
 };
+} // namespace null_objects
 } // namespace jt
 
-#endif // GUARD_JAMTEMPLATE_LOG_HPP
+#endif // GUARD_JAMTEMPLATE_LOGGER_NULL_HPP

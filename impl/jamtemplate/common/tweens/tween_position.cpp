@@ -1,5 +1,5 @@
 #include "tween_position.hpp"
-#include "linterp.hpp"
+#include <linterp.hpp>
 
 jt::Tween::Sptr jt::TweenPosition::create(std::weak_ptr<DrawableInterface> obj, float time,
     jt::Vector2f valueStart, jt::Vector2f valueEnd)

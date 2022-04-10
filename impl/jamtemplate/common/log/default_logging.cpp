@@ -1,4 +1,6 @@
 #include "default_logging.hpp"
+#include <log/log_target_cout.hpp>
+#include <log/log_target_file.hpp>
 
 void jt::createDefaultLogTargets(jt::LoggerInterface& logger)
 {

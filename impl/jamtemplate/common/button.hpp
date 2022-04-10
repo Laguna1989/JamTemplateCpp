@@ -1,8 +1,8 @@
 ﻿#ifndef GUARD_JAMTEMPLATE_BUTTON_HPP_GUARD
 #define GUARD_JAMTEMPLATE_BUTTON_HPP_GUARD
 
-#include "game_object.hpp"
-#include "vector.hpp"
+#include <game_object.hpp>
+#include <vector.hpp>
 #include <functional>
 #include <memory>
 #include <vector>

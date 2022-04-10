@@ -1,7 +1,7 @@
 #ifndef GUARD_JAMTEMPLATE_TILEMAP_COLLISIONS_HPP
 #define GUARD_JAMTEMPLATE_TILEMAP_COLLISIONS_HPP
 
-#include "rect.hpp"
+#include <rect.hpp>
 #include <vector>
 
 namespace jt {

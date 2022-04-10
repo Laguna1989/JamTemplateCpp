@@ -1,5 +1,5 @@
 #include "tween_scale.hpp"
-#include "linterp.hpp"
+#include <linterp.hpp>
 
 jt::Tween::Sptr jt::TweenScale::create(std::weak_ptr<jt::DrawableInterface> obj, float time,
     jt::Vector2f valueStart, jt::Vector2f valueEnd)

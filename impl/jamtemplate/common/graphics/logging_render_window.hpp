@@ -1,8 +1,8 @@
 #ifndef GUARD_JAMTEMPLATE_LOGGING_RENDER_WINDOW_HPP
 #define GUARD_JAMTEMPLATE_LOGGING_RENDER_WINDOW_HPP
 
-#include "logging/logger_interface.hpp"
-#include "render_window_interface.hpp"
+#include <graphics/render_window_interface.hpp>
+#include <log/logger_interface.hpp>
 
 namespace jt {
 class LoggingRenderWindow : public RenderWindowInterface {

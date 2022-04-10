@@ -1,5 +1,5 @@
 ﻿#include "mouse_input.hpp"
-#include "input/input_helper.hpp"
+#include <input/input_helper.hpp>
 
 jt::MouseInput::MouseInput(MouseButtonCheckFunction checkFunction)
     : m_checkFunction { std::move(checkFunction) }

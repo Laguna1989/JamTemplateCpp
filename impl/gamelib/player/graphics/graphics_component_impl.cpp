@@ -1,7 +1,6 @@
 #include "graphics_component_impl.hpp"
-#include "game_properties.hpp"
-#include "math_helper.hpp"
-#include "player/player.hpp"
+#include <game_properties.hpp>
+#include <math_helper.hpp>
 
 GraphicsComponentImpl::GraphicsComponentImpl(std::shared_ptr<jt::GameInterface> gameInterface)
 {
@@ -10,7 +9,6 @@ GraphicsComponentImpl::GraphicsComponentImpl(std::shared_ptr<jt::GameInterface> 
 
 void GraphicsComponentImpl::createAnimation(jt::TextureManagerInterface& textureManager)
 {
-    auto const frameTimeAttack = 0.05f;
     m_animation = std::make_shared<jt::Animation>();
     m_animation->loadFromJson("assets/Pilz.json", textureManager);
     m_animation->play("idle");

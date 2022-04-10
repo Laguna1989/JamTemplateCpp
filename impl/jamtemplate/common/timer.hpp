@@ -1,8 +1,8 @@
 ﻿#ifndef GUARD_JAMTEMPLATE_TIMER_HPP_INCLUDEGUARD
 #define GUARD_JAMTEMPLATE_TIMER_HPP_INCLUDEGUARD
 
-#include "game_object.hpp"
-#include "timer_interface.hpp"
+#include <game_object.hpp>
+#include <timer_interface.hpp>
 
 namespace jt {
 

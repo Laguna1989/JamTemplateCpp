@@ -1,6 +1,6 @@
 #include "tilemap_helpers.hpp"
-#include "drawable_helpers.hpp"
-#include "shape.hpp"
+#include <drawable_helpers.hpp>
+#include <shape.hpp>
 
 std::shared_ptr<jt::DrawableInterface> jt::tilemap::createShapeFrom(
     jt::tilemap::InfoRect const& info, jt::TextureManagerInterface& textureManager)

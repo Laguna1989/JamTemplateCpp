@@ -1,11 +1,11 @@
 #ifndef GUARD_JAMTEMPLATE_GFX_IMPL_HPP
 #define GUARD_JAMTEMPLATE_GFX_IMPL_HPP
 
-#include "cam_interface.hpp"
-#include "graphics/gfx_interface.hpp"
-#include "graphics/render_window_interface.hpp"
-#include "render_target_lib.hpp"
-#include "texture_manager_impl.hpp"
+#include <cam_interface.hpp>
+#include <graphics/gfx_interface.hpp>
+#include <graphics/render_window_interface.hpp>
+#include <render_target_lib.hpp>
+#include <texture_manager_impl.hpp>
 #include <SDL2/SDL.h>
 #include <optional>
 

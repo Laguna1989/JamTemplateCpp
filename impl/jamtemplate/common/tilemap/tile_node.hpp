@@ -2,9 +2,9 @@
 #ifndef GUARD_JAMTEMPLATE_TILENODE_HPP
 #define GUARD_JAMTEMPLATE_TILENODE_HPP
 
-#include "graphics/drawable_interface.hpp"
-#include "pathfinder/node_interface.hpp"
-#include "vector.hpp"
+#include <graphics/drawable_interface.hpp>
+#include <pathfinder/node_interface.hpp>
+#include <vector.hpp>
 #include <memory>
 
 namespace jt {

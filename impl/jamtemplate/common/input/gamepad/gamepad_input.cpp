@@ -1,5 +1,5 @@
 #include "gamepad_input.hpp"
-#include "input/input_helper.hpp"
+#include <input/input_helper.hpp>
 
 jt::GamepadInput::GamepadInput(int gamepadId, AxisFunc axisFunc, ButtonCheckFunction buttonFunc)
 {

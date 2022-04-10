@@ -1,9 +1,9 @@
 ﻿#ifndef GAME_GAMEPROPERTIES_HPP_INCLUDEGUARD
 #define GAME_GAMEPROPERTIES_HPP_INCLUDEGUARD
 
-#include "color/color.hpp"
-#include "vector.hpp"
+#include <color/color.hpp>
 #include <palette.hpp>
+#include <vector.hpp>
 #include <string>
 
 class GP {

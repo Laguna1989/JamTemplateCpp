@@ -1,9 +1,9 @@
 #ifndef GUARD_JAMTEMPLATE_LINE_HPP_INCLUDEGUARD
 #define GUARD_JAMTEMPLATE_LINE_HPP_INCLUDEGUARD
 
-#include "drawable_impl_sdl.hpp"
-#include "render_target.hpp"
-#include "vector.hpp"
+#include <drawable_impl_sdl.hpp>
+#include <render_target.hpp>
+#include <vector.hpp>
 
 namespace jt {
 class Line : public DrawableImplSdl {

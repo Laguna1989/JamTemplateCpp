@@ -1,5 +1,5 @@
-#include "logging/logger.hpp"
-#include "logging/logger_null.hpp"
+#include "log/logger.hpp"
+#include "log/logger_null.hpp"
 #include "mocks/mock_log_target.hpp"
 #include <gtest/gtest.h>
 

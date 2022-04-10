@@ -1,6 +1,6 @@
 ﻿#include "game_object.hpp"
-#include "game_interface.hpp"
-#include "system_helper.hpp"
+#include <game_interface.hpp>
+#include <system_helper.hpp>
 #include <iostream>
 #include <memory>
 #include <stdexcept>

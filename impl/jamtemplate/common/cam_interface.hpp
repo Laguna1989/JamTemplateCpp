@@ -1,7 +1,7 @@
 ﻿#ifndef GUARD_JAMTEMPLATE_CAMINTERFACE_HPP_GUARD
 #define GUARD_JAMTEMPLATE_CAMINTERFACE_HPP_GUARD
 
-#include "vector.hpp"
+#include <vector.hpp>
 
 namespace jt {
 

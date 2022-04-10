@@ -1,11 +1,11 @@
 #ifndef GUARD_JAMTEMPLATE_OBJECTLAYER_HPP
 #define GUARD_JAMTEMPLATE_OBJECTLAYER_HPP
 
-#include "info_rect.hpp"
-#include "tileson.h"
+#include <tilemap/info_rect.hpp>
 #include <map>
 #include <memory>
 #include <string>
+#include <tileson.h>
 #include <vector>
 
 namespace jt {

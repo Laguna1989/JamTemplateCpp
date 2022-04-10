@@ -1,7 +1,7 @@
 ﻿#ifndef JAMTEMPLATE_SOUNDGROUP_HPP_GUARD
 #define JAMTEMPLATE_SOUNDGROUP_HPP_GUARD
 
-#include "sound_interface.hpp"
+#include <audio/sound_interface.hpp>
 #include <memory>
 #include <string>
 #include <vector>

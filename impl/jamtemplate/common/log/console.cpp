@@ -1,8 +1,7 @@
 #include "console.hpp"
-#include "game_interface.hpp"
-#include "imgui.h"
-#include "strutils.hpp"
-#include <iostream>
+#include <game_interface.hpp>
+#include <strutils.hpp>
+#include <imgui.h>
 #include <string.h>
 
 jt::Console::Console(jt::LoggerInterface& logger)

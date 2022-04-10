@@ -1,5 +1,5 @@
 #include "state_manager_transition_fade_to_black.hpp"
-#include "math_helper.hpp"
+#include <math_helper.hpp>
 #include <iostream>
 
 jt::StateManagerTransitionFadeToBlack::StateManagerTransitionFadeToBlack(

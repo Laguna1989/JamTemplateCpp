@@ -1,8 +1,8 @@
 #ifndef GUARD_JAMTEMPLATE_INFO_SCREEN_HPP
 #define GUARD_JAMTEMPLATE_INFO_SCREEN_HPP
 
-#include "circular_buffer.hpp"
-#include "game_object.hpp"
+#include <circular_buffer.hpp>
+#include <game_object.hpp>
 
 namespace jt {
 class InfoScreen : public ::jt::GameObject {

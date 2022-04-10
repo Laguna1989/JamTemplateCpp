@@ -1,6 +1,6 @@
 #include "info_screen.hpp"
-#include "game_interface.hpp"
-#include "imgui.h"
+#include <game_interface.hpp>
+#include <imgui.h>
 
 void jt::InfoScreen::doCreate()
 {

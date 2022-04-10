@@ -1,10 +1,10 @@
 ﻿#ifndef GUARD_JAMTEMPLATE_SFML_SOUND_GUARD_HPP_12345
 #define GUARD_JAMTEMPLATE_SFML_SOUND_GUARD_HPP_12345
 
-#include "counted_object.hpp"
-#include "oalpp/sound.hpp"
-#include "oalpp/sound_data.hpp"
-#include "sound_interface.hpp"
+#include <audio/sound_interface.hpp>
+#include <counted_object.hpp>
+#include <oalpp/sound.hpp>
+#include <oalpp/sound_data.hpp>
 #include <string>
 
 namespace jt {

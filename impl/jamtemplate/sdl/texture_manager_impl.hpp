@@ -1,8 +1,8 @@
 ﻿#ifndef GUARD_JAMTEMPLATE_TEXTUREMANAGER_HPP_INCLUDEGUARD
 #define GUARD_JAMTEMPLATE_TEXTUREMANAGER_HPP_INCLUDEGUARD
 
-#include "render_target.hpp"
-#include "texture_manager_interface.hpp"
+#include <render_target.hpp>
+#include <texture_manager_interface.hpp>
 #include <SDL2/SDL.h>
 #include <map>
 #include <memory>

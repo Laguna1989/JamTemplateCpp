@@ -1,7 +1,8 @@
 #ifndef GUARD_JAMTEMPLATE_LICENSE_INFO_HPP
 #define GUARD_JAMTEMPLATE_LICENSE_INFO_HPP
 
-#include "game_object.hpp"
+#include <game_object.hpp>
+#include <string>
 
 namespace jt {
 

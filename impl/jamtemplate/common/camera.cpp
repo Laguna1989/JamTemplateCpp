@@ -1,5 +1,5 @@
 ﻿#include "camera.hpp"
-#include "random/random.hpp"
+#include <random/random.hpp>
 #include <stdexcept>
 
 jt::Camera::Camera(float zoom)

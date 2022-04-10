@@ -1,7 +1,7 @@
 ﻿#include "text.hpp"
-#include "color_lib.hpp"
-#include "rect_lib.hpp"
-#include "vector_lib.hpp"
+#include <color_lib.hpp>
+#include <rect_lib.hpp>
+#include <vector_lib.hpp>
 #include <iostream>
 
 jt::Text::~Text()

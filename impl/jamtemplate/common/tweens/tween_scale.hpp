@@ -1,8 +1,8 @@
 ﻿#ifndef GUARD_JAMTEMPLATE_TWEENSCALE_HPP_INCLUDEGUARD
 #define GUARD_JAMTEMPLATE_TWEENSCALE_HPP_INCLUDEGUARD
 
-#include "tween_base.hpp"
-#include "vector.hpp"
+#include <tweens/tween_base.hpp>
+#include <vector.hpp>
 
 namespace jt {
 

@@ -1,7 +1,7 @@
 #ifndef GUARD_JAMTEMPLATE_LOG_TARGET_FILE_HPP
 #define GUARD_JAMTEMPLATE_LOG_TARGET_FILE_HPP
 
-#include "log_target_interface.hpp"
+#include <log/log_target_interface.hpp>
 #include <fstream>
 
 namespace jt {

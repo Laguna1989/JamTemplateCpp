@@ -1,7 +1,7 @@
 #ifndef GUARD_JAMTEMPLATE_STATE_MANAGER_TRANSITION_NONE_HPP
 #define GUARD_JAMTEMPLATE_STATE_MANAGER_TRANSITION_NONE_HPP
 
-#include "state_manager_transition_interface.hpp"
+#include <state_manager/state_manager_transition_interface.hpp>
 
 namespace jt {
 

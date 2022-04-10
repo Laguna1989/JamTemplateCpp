@@ -1,7 +1,7 @@
 ﻿#ifndef GUARD_JAMTEMPLATE_LERP_HPP_INCLUDEGUARD
 #define GUARD_JAMTEMPLATE_LERP_HPP_INCLUDEGUARD
 
-#include "linterp.hpp"
+#include <linterp.hpp>
 #include <cmath>
 
 namespace jt {

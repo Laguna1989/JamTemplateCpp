@@ -1,6 +1,6 @@
-#include "box2d_world_impl.hpp"
-#include "Box2D/Box2D.h"
-#include "conversions.hpp"
+#include "box2dwrapper/box2d_world_impl.hpp"
+#include <conversions.hpp>
+#include <Box2D/Box2D.h>
 
 jt::Box2DWorldImpl::Box2DWorldImpl(jt::Vector2f const& gravity)
     : m_world { std::make_unique<b2World>(jt::Conversion::vec(gravity)) }

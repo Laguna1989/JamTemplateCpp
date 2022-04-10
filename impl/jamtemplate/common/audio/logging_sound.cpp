@@ -1,5 +1,5 @@
 #include "logging_sound.hpp"
-#include "audio/sound.hpp"
+#include <audio/sound.hpp>
 
 jt::LoggingSound::LoggingSound(
     std::shared_ptr<jt::SoundInterface> decoratee, jt::LoggerInterface& logger)

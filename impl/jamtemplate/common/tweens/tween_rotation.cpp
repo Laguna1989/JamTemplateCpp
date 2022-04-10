@@ -1,5 +1,5 @@
 #include "tween_rotation.hpp"
-#include "linterp.hpp"
+#include <linterp.hpp>
 
 jt::Tween::Sptr jt::TweenRotation::create(
     std::weak_ptr<jt::DrawableInterface> obj, float time, float valueStart, float valueEnd)

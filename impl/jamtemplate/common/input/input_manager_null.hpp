@@ -1,7 +1,7 @@
 #ifndef GUARD_JAMTEMAPLTE_INPUT_MANAGER_NULL_HPP
 #define GUARD_JAMTEMAPLTE_INPUT_MANAGER_NULL_HPP
 
-#include "input_manager_interface.hpp"
+#include <input/input_manager_interface.hpp>
 
 namespace jt {
 

@@ -1,8 +1,8 @@
-﻿#include "game_state.hpp"
-#include "game_interface.hpp"
-#include "logging/console.hpp"
-#include "logging/info_screen.hpp"
-#include "tweens/tween_base.hpp"
+﻿#include <game_interface.hpp>
+#include <game_state.hpp>
+#include <log/console.hpp>
+#include <log/info_screen.hpp>
+#include <tweens/tween_base.hpp>
 #include <algorithm>
 
 jt::GameState::~GameState()

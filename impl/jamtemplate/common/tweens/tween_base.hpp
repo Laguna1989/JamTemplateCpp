@@ -1,7 +1,7 @@
 ﻿#ifndef GUARD_JAMTEMPLATE_TWEENBASE_HPP_INCLUDEGUARD
 #define GUARD_JAMTEMPLATE_TWEENBASE_HPP_INCLUDEGUARD
 
-#include "graphics/drawable_interface.hpp"
+#include <graphics/drawable_interface.hpp>
 #include <functional>
 #include <memory>
 #include <vector>

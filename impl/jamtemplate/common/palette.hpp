@@ -1,7 +1,7 @@
 #ifndef GUARD_JAMTEMPLATE_PALETTE_HPP
 #define GUARD_JAMTEMPLATE_PALETTE_HPP
 
-#include "color/color.hpp"
+#include <color/color.hpp>
 #include <cstddef>
 #include <vector>
 

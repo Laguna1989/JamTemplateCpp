@@ -1,7 +1,7 @@
 #ifndef GUARD_JAMTEMAPLTE_COLOR_HELPERS_HPP
 #define GUARD_JAMTEMAPLTE_COLOR_HELPERS_HPP
 
-#include "color.hpp"
+#include <color/color.hpp>
 #include <cstdint>
 #include <string>
 #include <tuple>

@@ -1,7 +1,7 @@
 #ifndef GUARD_JAMTEMPLATE_STATE_MANAGER_TRANSITION_INTERFACE_HPP
 #define GUARD_JAMTEMPLATE_STATE_MANAGER_TRANSITION_INTERFACE_HPP
 
-#include "render_target.hpp"
+#include <render_target.hpp>
 #include <memory>
 
 namespace jt {

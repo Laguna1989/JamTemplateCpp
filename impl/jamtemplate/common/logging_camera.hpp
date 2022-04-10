@@ -1,8 +1,8 @@
 #ifndef GUARD_JAMTEMPLATE_LOGGING_CAMERA_HPP
 #define GUARD_JAMTEMPLATE_LOGGING_CAMERA_HPP
 
-#include "cam_interface.hpp"
-#include "logging/logger_interface.hpp"
+#include <cam_interface.hpp>
+#include <log/logger_interface.hpp>
 
 namespace jt {
 class LoggingCamera : public CamInterface {

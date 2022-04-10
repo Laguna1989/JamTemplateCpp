@@ -1,9 +1,9 @@
 #ifndef GUARD_JAMTEMPLATE_SOUND_WITH_EFFECT_HPP
 #define GUARD_JAMTEMPLATE_SOUND_WITH_EFFECT_HPP
 
-#include "oalpp/sound.hpp"
-#include "oalpp/sound_data.hpp"
-#include "sound_interface.hpp"
+#include <audio/sound_interface.hpp>
+#include <oalpp/sound.hpp>
+#include <oalpp/sound_data.hpp>
 
 namespace jt {
 

@@ -1,9 +1,9 @@
 ﻿#ifndef GUARD_JAMTEMPLATE_PARTICLE_SYSTEM_HPP_GUARD
 #define GUARD_JAMTEMPLATE_PARTICLE_SYSTEM_HPP_GUARD
 
-#include "circular_buffer.hpp"
-#include "game_interface.hpp"
-#include "game_object.hpp"
+#include <circular_buffer.hpp>
+#include <game_interface.hpp>
+#include <game_object.hpp>
 #include <array>
 #include <functional>
 #include <memory>
