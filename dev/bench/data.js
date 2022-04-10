@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1649356185622,
+  "lastUpdate": 1649566614995,
   "repoUrl": "https://github.com/Laguna1989/JamTemplateCpp",
   "entries": {
     "Benchmark": [
@@ -4560,6 +4560,48 @@ window.BENCHMARK_DATA = {
             "value": 2.9150241541666824,
             "unit": "ms/iter",
             "extra": "iterations: 240\ncpu: 2.9148070833333337 ms\nthreads: 1"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "laguna.ws@gmail.com",
+            "name": "Laguna1989",
+            "username": "Laguna1989"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "82c916a4a176ab09d3b82777f9282b6ea8a45f7d",
+          "message": "Merge pull request #184 from Laguna1989/FEATURE_ColorFunctions\n\nAdd Color Desaturation",
+          "timestamp": "2022-04-10T06:54:03+02:00",
+          "tree_id": "040e4e2aa986c1ec5d933ed817785e302eb868d0",
+          "url": "https://github.com/Laguna1989/JamTemplateCpp/commit/82c916a4a176ab09d3b82777f9282b6ea8a45f7d"
+        },
+        "date": 1649566614570,
+        "tool": "googlecpp",
+        "benches": [
+          {
+            "name": "BM_UpdateDrawablePositions",
+            "value": 2.8300431619432858,
+            "unit": "ms/iter",
+            "extra": "iterations: 247\ncpu: 2.829759109311741 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_StartGame",
+            "value": 0.003024698554621536,
+            "unit": "ms/iter",
+            "extra": "iterations: 229836\ncpu: 0.0030244996432238647 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GamestateWithTweeningShapes",
+            "value": 3.177285731818167,
+            "unit": "ms/iter",
+            "extra": "iterations: 220\ncpu: 3.1771290909090912 ms\nthreads: 1"
           }
         ]
       }
