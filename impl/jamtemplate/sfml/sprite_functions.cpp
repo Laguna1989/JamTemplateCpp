@@ -1,7 +1,7 @@
 ﻿#include "sprite_functions.hpp"
-#include "color_lib.hpp"
-#include "math_helper.hpp"
-#include "random/random.hpp"
+#include <color_lib.hpp>
+#include <math_helper.hpp>
+#include <random/random.hpp>
 #include <cmath>
 
 sf::Image jt::SpriteFunctions::makeButtonImage(unsigned int w, unsigned int h)

@@ -1,8 +1,8 @@
 ﻿#ifndef GUARD_JAMTEMPLATE_TEXT_HPP_INCLUDEGUARD
 #define GUARD_JAMTEMPLATE_TEXT_HPP_INCLUDEGUARD
 
-#include "drawable_impl_sfml.hpp"
-#include "render_target.hpp"
+#include <drawable_impl_sfml.hpp>
+#include <render_target.hpp>
 #include <SFML/Graphics.hpp>
 
 #include <memory>

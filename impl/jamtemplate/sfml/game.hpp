@@ -1,7 +1,7 @@
 ﻿#ifndef GUARD_JAMTEMPLATE_GAME_HPP_INCLUDEGUARD
 #define GUARD_JAMTEMPLATE_GAME_HPP_INCLUDEGUARD
 
-#include "game_base.hpp"
+#include <game_base.hpp>
 
 namespace jt {
 

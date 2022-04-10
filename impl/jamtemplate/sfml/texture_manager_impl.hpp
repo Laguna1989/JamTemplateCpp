@@ -1,7 +1,7 @@
 #ifndef GUARD_JAMTEMPLATE_TEXTURE_MANAGER_IMPL_HPP
 #define GUARD_JAMTEMPLATE_TEXTURE_MANAGER_IMPL_HPP
 
-#include "texture_manager_interface.hpp"
+#include <texture_manager_interface.hpp>
 #include <map>
 #include <memory>
 

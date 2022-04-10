@@ -1,8 +1,8 @@
 ﻿#include "render_window_lib.hpp"
-#include "imgui-SFML.h"
-#include "imgui.h"
-#include "sprite.hpp"
+#include <sprite.hpp>
 #include <SFML/Graphics.hpp>
+#include <imgui-SFML.h>
+#include <imgui.h>
 
 jt::RenderWindow::RenderWindow(unsigned int width, unsigned int height, std::string const& title)
 {

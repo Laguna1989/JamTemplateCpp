@@ -1,8 +1,7 @@
 #include "gfx_impl.hpp"
-#include "rect_lib.hpp"
-#include "sprite.hpp"
-#include "vector_lib.hpp"
-#include <utility>
+#include <rect_lib.hpp>
+#include <sprite.hpp>
+#include <vector_lib.hpp>
 
 namespace {
 

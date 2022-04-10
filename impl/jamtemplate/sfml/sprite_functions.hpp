@@ -1,7 +1,7 @@
 ﻿#ifndef GUARD_JAMTEMPLATE_SPRITEFUNCTIONS_HPP_INCLUDEGUARD
 #define GUARD_JAMTEMPLATE_SPRITEFUNCTIONS_HPP_INCLUDEGUARD
 
-#include "color/color.hpp"
+#include <color/color.hpp>
 #include <SFML/Graphics.hpp>
 
 namespace jt {

@@ -15,8 +15,10 @@ SortIncludes: 'true'
 IncludeCategories:
   - Regex: '"*(.hpp)"'
     Priority: 2
+  - Regex: '(<SFML)'
+    Priority: 3
   - Regex: '<*(.hpp)>'
     Priority: 2
   - Regex: '^((?!(.hpp)).)*$'
-    Priority: 3
+    Priority: 4
 ...
