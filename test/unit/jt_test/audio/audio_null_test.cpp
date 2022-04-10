@@ -21,7 +21,7 @@ TEST(AudioNullTest, AddPermanentSoundReturnsNoNullptr)
 
 class FakeEffect : public ::oalpp::effects::MonoEffectInterface {
 public:
-    std::vector<float> process(std::vector<float> const& input) override { return { 1.0f }; }
+    std::vector<float> process(std::vector<float> const& /*unused*/) override { return { 1.0f }; }
 };
 
 TEST(AudioNullTest, AddPermanentSoundWithEffectReturnsNoNullptr)

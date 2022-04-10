@@ -10,7 +10,6 @@ GraphicsComponentImpl::GraphicsComponentImpl(std::shared_ptr<jt::GameInterface> 
 
 void GraphicsComponentImpl::createAnimation(jt::TextureManagerInterface& textureManager)
 {
-    auto const frameTimeAttack = 0.05f;
     m_animation = std::make_shared<jt::Animation>();
     m_animation->loadFromJson("assets/Pilz.json", textureManager);
     m_animation->play("idle");
