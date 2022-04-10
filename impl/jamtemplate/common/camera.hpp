@@ -1,7 +1,7 @@
 ﻿#ifndef GUARD_JAMTEMPLATE_CAMERA_HPP_GUARD
 #define GUARD_JAMTEMPLATE_CAMERA_HPP_GUARD
 
-#include "cam_interface.hpp"
+#include <cam_interface.hpp>
 #include <functional>
 
 namespace jt {

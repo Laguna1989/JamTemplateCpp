@@ -1,8 +1,8 @@
 #ifndef GUARD_JAMTEMPLATE_LOGGING_STATE_MANAGER_HPP
 #define GUARD_JAMTEMPLATE_LOGGING_STATE_MANAGER_HPP
 
-#include "logging/logger_interface.hpp"
-#include "state_manager_interface.hpp"
+#include <log/logger_interface.hpp>
+#include <state_manager/state_manager_interface.hpp>
 namespace jt {
 class LoggingStateManager : public StateManagerInterface {
 public:

@@ -1,5 +1,5 @@
 ﻿#include "game_base.hpp"
-#include "build_info.hpp"
+#include <build_info.hpp>
 #include <string>
 
 jt::GameBase::GameBase(jt::GfxInterface& gfx, jt::InputManagerInterface& input,

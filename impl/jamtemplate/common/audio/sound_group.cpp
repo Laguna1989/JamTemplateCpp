@@ -1,6 +1,6 @@
 ﻿#include "sound_group.hpp"
-#include "random/random.hpp"
-#include "sound.hpp"
+#include <audio/sound.hpp>
+#include <random/random.hpp>
 #include <algorithm>
 
 jt::SoundGroup::SoundGroup(std::vector<std::string> const& sounds)

@@ -1,5 +1,5 @@
 #include "node_layer.hpp"
-#include "pathfinder/node.hpp"
+#include <pathfinder/node.hpp>
 #include <utility>
 
 jt::tilemap::NodeLayer::NodeLayer(std::vector<std::shared_ptr<jt::tilemap::TileNode>> nodeTiles)

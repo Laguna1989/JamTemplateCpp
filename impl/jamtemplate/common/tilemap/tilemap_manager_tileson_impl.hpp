@@ -1,7 +1,7 @@
 #ifndef GUARD_JAMTEMPLATE_TILEMAP_MANAGER_TILESON_IMPL_HPP
 #define GUARD_JAMTEMPLATE_TILEMAP_MANAGER_TILESON_IMPL_HPP
 
-#include "tileson.h"
+#include <tileson.h>
 
 namespace jt {
 class TilemapManagerTilesonImpl {

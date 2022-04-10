@@ -1,10 +1,10 @@
 ﻿#ifndef GUARD_JAMTEMPLATE_GAME_HPP_INCLUDEGUARD
 #define GUARD_JAMTEMPLATE_GAME_HPP_INCLUDEGUARD
 
-#include "game_base.hpp"
-#include "rect.hpp"
-#include "render_target.hpp"
-#include "graphics/render_window_interface.hpp"
+#include <game_base.hpp>
+#include <graphics/render_window_interface.hpp>
+#include <rect.hpp>
+#include <render_target.hpp>
 #include <chrono>
 #include <memory>
 #include <string>

@@ -1,9 +1,9 @@
 ﻿#ifndef GUARD_JAMTEMPLATE_RENDERWINDOW_INTERFACE_GUARD_HPP
 #define GUARD_JAMTEMPLATE_RENDERWINDOW_INTERFACE_GUARD_HPP
 
-#include "render_target.hpp"
-#include "sprite.hpp"
-#include "vector.hpp"
+#include <render_target.hpp>
+#include <sprite.hpp>
+#include <vector.hpp>
 #include <memory>
 #include <string>
 

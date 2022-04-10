@@ -1,7 +1,7 @@
 #include "audio_impl.hpp"
-#include "random/random.hpp"
-#include "sound.hpp"
-#include "sound_with_effect.hpp"
+#include <audio/sound.hpp>
+#include <audio/sound_with_effect.hpp>
+#include <random/random.hpp>
 #include <algorithm>
 
 jt::AudioImpl::~AudioImpl() { m_temporarySounds.clear(); }

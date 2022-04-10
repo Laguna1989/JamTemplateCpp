@@ -1,7 +1,7 @@
 ﻿#include "sprite_functions.hpp"
-#include "math_helper.hpp"
-#include "random/random.hpp"
-#include "sdl_helper.hpp"
+#include <math_helper.hpp>
+#include <random/random.hpp>
+#include <sdl_helper.hpp>
 #include <cmath>
 
 namespace jt {

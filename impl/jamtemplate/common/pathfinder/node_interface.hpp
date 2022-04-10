@@ -1,7 +1,7 @@
 #ifndef GUARD_JAMTEMPLATE_NODE_INTERFACE_HPP
 #define GUARD_JAMTEMPLATE_NODE_INTERFACE_HPP
 
-#include "vector.hpp"
+#include <vector.hpp>
 #include <memory>
 #include <vector>
 

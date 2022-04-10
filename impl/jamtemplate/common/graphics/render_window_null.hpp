@@ -1,7 +1,7 @@
 #ifndef GUARD_JAMTEMAPLTE_RENDER_WINDOW_NULL_HPP
 #define GUARD_JAMTEMAPLTE_RENDER_WINDOW_NULL_HPP
 
-#include "render_window_interface.hpp"
+#include <graphics/render_window_interface.hpp>
 
 namespace jt {
 namespace null_objects {

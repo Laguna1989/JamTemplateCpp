@@ -1,6 +1,6 @@
 #include "basic_action_commands.hpp"
-#include "game_base.hpp"
-#include "math_helper.hpp"
+#include <game_base.hpp>
+#include <math_helper.hpp>
 
 namespace {
 void addCommandHelp(std::shared_ptr<jt::GameBase>& game)

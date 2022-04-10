@@ -1,8 +1,8 @@
 #ifndef GUARD_JAMTEMPLATE_LOGGING_AUDIO_HPP
 #define GUARD_JAMTEMPLATE_LOGGING_AUDIO_HPP
 
-#include "audio_interface.hpp"
-#include "logging/logger_interface.hpp"
+#include <audio/audio_interface.hpp>
+#include <log/logger_interface.hpp>
 
 namespace jt {
 class LoggingAudio : public AudioInterface {

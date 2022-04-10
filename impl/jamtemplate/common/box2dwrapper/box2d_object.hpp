@@ -1,10 +1,10 @@
 ﻿#ifndef GUARD_JAMTEMPLATE_BOX2DOBJECT_HPP_INCLUDEGUARD
 #define GUARD_JAMTEMPLATE_BOX2DOBJECT_HPP_INCLUDEGUARD
 
-#include "box2d_world_interface.hpp"
-#include "conversions.hpp"
-#include "game_object.hpp"
-#include "vector.hpp"
+#include <box2dwrapper/box2d_world_interface.hpp>
+#include <conversions.hpp>
+#include <game_object.hpp>
+#include <vector.hpp>
 #include <Box2D/Box2D.h>
 #include <memory>
 

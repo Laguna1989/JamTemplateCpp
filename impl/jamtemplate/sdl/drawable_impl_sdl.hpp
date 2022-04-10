@@ -1,7 +1,7 @@
 #ifndef GUARD_JAMTEMPLATE_DRAWABLE_IMPL_SDL_HPP
 #define GUARD_JAMTEMPLATE_DRAWABLE_IMPL_SDL_HPP
 
-#include "graphics/drawable_impl.hpp"
+#include <graphics/drawable_impl.hpp>
 
 namespace jt {
 class DrawableImplSdl : public jt::DrawableImpl {

@@ -1,7 +1,7 @@
 ﻿#ifndef GUARD_JAMTEMPLATE_GAMESTATE_HPP_INCLUDEGUARD
 #define GUARD_JAMTEMPLATE_GAMESTATE_HPP_INCLUDEGUARD
 
-#include "game_object.hpp"
+#include <game_object.hpp>
 #include <memory>
 #include <string>
 #include <vector>

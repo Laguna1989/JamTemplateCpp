@@ -1,7 +1,7 @@
 ﻿#ifndef GUARD_JAMTEMPLATE_TWEENALPHA_HPP_INCLUDEGUARD
 #define GUARD_JAMTEMPLATE_TWEENALPHA_HPP_INCLUDEGUARD
 
-#include "tween_base.hpp"
+#include <tweens/tween_base.hpp>
 #include <cstdint>
 
 namespace jt {

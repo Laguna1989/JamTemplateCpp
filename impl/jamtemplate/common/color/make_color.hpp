@@ -1,7 +1,7 @@
 #ifndef GUARD_JAMTEMPLATE_MAKE_COLOR_HPP
 #define GUARD_JAMTEMPLATE_MAKE_COLOR_HPP
 
-#include "color.hpp"
+#include <color/color.hpp>
 
 namespace jt {
 

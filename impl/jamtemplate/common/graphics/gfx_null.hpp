@@ -1,10 +1,10 @@
 #ifndef GUARD_JAMTEMPALTE_GFX_NULL_HPP
 #define GUARD_JAMTEMPALTE_GFX_NULL_HPP
 
-#include "camera.hpp"
-#include "gfx_interface.hpp"
-#include "render_window_null.hpp"
-#include "texture_manager_impl.hpp"
+#include <camera.hpp>
+#include <graphics/gfx_interface.hpp>
+#include <graphics/render_window_null.hpp>
+#include <texture_manager_impl.hpp>
 #include <optional>
 
 namespace jt {

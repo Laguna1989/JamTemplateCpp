@@ -1,5 +1,5 @@
 #include "shake_impl.hpp"
-#include "random/random.hpp"
+#include <random/random.hpp>
 
 void jt::ShakeImpl::updateShake(float elapsed)
 {

@@ -1,8 +1,8 @@
 #ifndef GUARD_JAMTEMPLATE_AUDIO_IMPL_HPP
 #define GUARD_JAMTEMPLATE_AUDIO_IMPL_HPP
 
-#include "audio_interface.hpp"
-#include "oalpp/sound_context.hpp"
+#include <audio/audio_interface.hpp>
+#include <oalpp/sound_context.hpp>
 #include <map>
 #include <vector>
 

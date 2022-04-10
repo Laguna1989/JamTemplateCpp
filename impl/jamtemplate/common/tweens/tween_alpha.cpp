@@ -1,5 +1,5 @@
 #include "tween_alpha.hpp"
-#include "linterp.hpp"
+#include <linterp.hpp>
 
 jt::Tween::Sptr jt::TweenAlpha::create(std::weak_ptr<jt::DrawableInterface> obj,
     float tweenDurationInSeconds, std::uint8_t valueStart, std::uint8_t valueEnd)

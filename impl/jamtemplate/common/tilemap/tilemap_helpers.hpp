@@ -1,9 +1,9 @@
 #ifndef GUARD_JAMTEMPLATE_TILEMAP_HELPERS_HPP
 #define GUARD_JAMTEMPLATE_TILEMAP_HELPERS_HPP
 
-#include "graphics/drawable_interface.hpp"
-#include "info_rect.hpp"
-#include "texture_manager_interface.hpp"
+#include <graphics/drawable_interface.hpp>
+#include <texture_manager_interface.hpp>
+#include <tilemap/info_rect.hpp>
 
 namespace jt {
 namespace tilemap {

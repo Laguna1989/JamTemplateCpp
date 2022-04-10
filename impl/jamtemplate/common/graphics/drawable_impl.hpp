@@ -1,12 +1,12 @@
 ﻿#ifndef GUARD_JAMTEMPLATE_DRAWABLEIMPL_HPP_INCLUDEGUARD
 #define GUARD_JAMTEMPLATE_DRAWABLEIMPL_HPP_INCLUDEGUARD
 
-#include "drawable_interface.hpp"
-#include "flash_impl.hpp"
-#include "rotation_impl.hpp"
-#include "shadow_impl.hpp"
-#include "shake_impl.hpp"
-#include "vector.hpp"
+#include <graphics/drawable_interface.hpp>
+#include <graphics/flash_impl.hpp>
+#include <graphics/rotation_impl.hpp>
+#include <graphics/shadow_impl.hpp>
+#include <graphics/shake_impl.hpp>
+#include <vector.hpp>
 #include <memory>
 
 namespace jt {
@@ -15,6 +15,7 @@ namespace jt {
 class DrawableImpl :
     //
     public DrawableInterface,
+    // TODO no mix in actually needed. use member variables instead
     // implementation of flash, rotation, shadow and shake functionality via mix-in
     private jt::FlashImpl,
     private jt::RotationImpl,

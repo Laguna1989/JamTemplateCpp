@@ -1,13 +1,13 @@
 ﻿#ifndef GUARD_JAMTEMPLATE_TILEMAP_HPP_GUARD
 #define GUARD_JAMTEMPLATE_TILEMAP_HPP_GUARD
 
-#include "graphics/drawable_impl.hpp"
-#include "info_rect.hpp"
-#include "pathfinder/node_interface.hpp"
-#include "render_target.hpp"
-#include "sprite.hpp"
-#include "texture_manager_interface.hpp"
-#include "tile_info.hpp"
+#include <graphics/drawable_impl.hpp>
+#include <pathfinder/node_interface.hpp>
+#include <render_target.hpp>
+#include <sprite.hpp>
+#include <texture_manager_interface.hpp>
+#include <tilemap/info_rect.hpp>
+#include <tilemap/tile_info.hpp>
 #include <memory>
 #include <vector>
 

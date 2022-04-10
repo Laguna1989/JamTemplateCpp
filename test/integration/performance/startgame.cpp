@@ -5,7 +5,7 @@
 #include "game_state.hpp"
 #include "graphics/gfx_null.hpp"
 #include "input/input_manager_null.hpp"
-#include "logging/logger_null.hpp"
+#include "log/logger_null.hpp"
 #include "graphics/render_window_null.hpp"
 #include "shape.hpp"
 #include "state_manager/state_manager.hpp"

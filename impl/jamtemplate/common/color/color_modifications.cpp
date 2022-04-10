@@ -1,5 +1,5 @@
 #include "color_modifications.hpp"
-#include "color_helpers.hpp"
+#include <color/color_helpers.hpp>
 
 jt::Color jt::ColorModifications::desaturate(
     jt::Color const& initialColor, float desaturationAmount)

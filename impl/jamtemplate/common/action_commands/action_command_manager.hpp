@@ -1,8 +1,8 @@
 #ifndef GUARD_JAMTEMPLATE_ACTION_COMMAND_MANAGER_HPP
 #define GUARD_JAMTEMPLATE_ACTION_COMMAND_MANAGER_HPP
 
-#include "action_command_manager_interface.hpp"
-#include "logging/logger_interface.hpp"
+#include <action_commands/action_command_manager_interface.hpp>
+#include <log/logger_interface.hpp>
 namespace jt {
 class ActionCommandManager : public ActionCommandManagerInterface {
 public:

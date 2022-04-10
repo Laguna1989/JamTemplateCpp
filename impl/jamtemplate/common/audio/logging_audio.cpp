@@ -1,5 +1,5 @@
 #include "logging_audio.hpp"
-#include "logging_sound.hpp"
+#include <audio/logging_sound.hpp>
 
 jt::LoggingAudio::LoggingAudio(jt::AudioInterface& decoratee, jt::LoggerInterface& logger)
     : m_decoratee { decoratee }

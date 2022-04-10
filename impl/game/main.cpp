@@ -13,8 +13,8 @@
 #include <input/input_manager.hpp>
 #include <input/keyboard/keyboard_input.hpp>
 #include <input/mouse/mouse_input.hpp>
-#include <logging/default_logging.hpp>
-#include <logging/logger.hpp>
+#include <log/default_logging.hpp>
+#include <log/logger.hpp>
 #include <logging_camera.hpp>
 #include <random/random.hpp>
 #include <state_manager/logging_state_manager.hpp>

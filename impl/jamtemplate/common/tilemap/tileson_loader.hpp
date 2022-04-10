@@ -1,14 +1,14 @@
 #ifndef GUARD_JAMTEMPLATE_TILESON_LOADER_HPP
 #define GUARD_JAMTEMPLATE_TILESON_LOADER_HPP
 
-#include "info_rect.hpp"
-#include "shape.hpp"
-#include "sprite.hpp"
-#include "texture_manager_interface.hpp"
-#include "tile_info.hpp"
-#include "tile_node.hpp"
-#include "tilemap_collisions.hpp"
-#include "tilemap_manager_tileson_impl.hpp"
+#include <shape.hpp>
+#include <sprite.hpp>
+#include <texture_manager_interface.hpp>
+#include <tilemap/info_rect.hpp>
+#include <tilemap/tile_info.hpp>
+#include <tilemap/tile_node.hpp>
+#include <tilemap/tilemap_collisions.hpp>
+#include <tilemap/tilemap_manager_tileson_impl.hpp>
 #include <memory>
 #include <tuple>
 

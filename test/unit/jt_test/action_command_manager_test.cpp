@@ -1,5 +1,5 @@
 #include "action_commands/action_command_manager.hpp"
-#include "logging/logger_null.hpp"
+#include "log/logger_null.hpp"
 #include <gtest/gtest.h>
 
 TEST(ActionCommandManagerTest, Instantiate)

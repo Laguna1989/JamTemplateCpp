@@ -1,6 +1,6 @@
 #include "palette.hpp"
-#include "color/make_color.hpp"
-#include "strutils.hpp"
+#include <color/make_color.hpp>
+#include <strutils.hpp>
 #include <fstream>
 #include <sstream>
 

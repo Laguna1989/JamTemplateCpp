@@ -1,6 +1,6 @@
 #include "state_manager.hpp"
-#include "game_interface.hpp"
-#include "state_manager_transition_none.hpp"
+#include <game_interface.hpp>
+#include <state_manager/state_manager_transition_none.hpp>
 #include <stdexcept>
 
 jt::StateManager::StateManager(std::shared_ptr<jt::GameState> initialState)

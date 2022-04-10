@@ -1,8 +1,8 @@
 ﻿#ifndef GUARD_JAMTEMPLATE_GAMEBASE_HPP_GUARD
 #define GUARD_JAMTEMPLATE_GAMEBASE_HPP_GUARD
 
-#include "game_interface.hpp"
-#include "game_object.hpp"
+#include <game_interface.hpp>
+#include <game_object.hpp>
 #include <chrono>
 #include <memory>
 

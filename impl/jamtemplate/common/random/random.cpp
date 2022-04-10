@@ -1,5 +1,5 @@
 ﻿#include "random.hpp"
-#include "color/make_color.hpp"
+#include <color/make_color.hpp>
 #include <ctime>
 #include <stdexcept>
 

@@ -1,7 +1,7 @@
 #ifndef GUARD_JAMTEMPLATE_KEYBOARD_INPUT_NULL_HPP
 #define GUARD_JAMTEMPLATE_KEYBOARD_INPUT_NULL_HPP
 
-#include "keyboard_interface.hpp"
+#include <input/keyboard/keyboard_interface.hpp>
 namespace jt {
 
 class KeyboardInputNull : public KeyboardInterface {

@@ -1,7 +1,7 @@
 ﻿#ifndef JAMTEMPLATE_CIRCULAR_BUFFER_HPP_GUARD
 #define JAMTEMPLATE_CIRCULAR_BUFFER_HPP_GUARD
 
-#include "math_helper.hpp"
+#include <math_helper.hpp>
 #include <algorithm>
 #include <array>
 #include <cstddef>

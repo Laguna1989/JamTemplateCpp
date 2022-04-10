@@ -1,10 +1,10 @@
 #ifndef GUARD_JAMTEMPLATE_NODELAYER_HPP
 #define GUARD_JAMTEMPLATE_NODELAYER_HPP
 
-#include "texture_manager_interface.hpp"
-#include "tile_node.hpp"
-#include "tileson.h"
+#include <texture_manager_interface.hpp>
+#include <tilemap/tile_node.hpp>
 #include <memory>
+#include <tileson.h>
 #include <unordered_map>
 #include <vector>
 

@@ -1,7 +1,7 @@
 #ifndef GUARD_JAMTEMPLATE_CONTROL_COMMAND_COMPOSITE_HPP
 #define GUARD_JAMTEMPLATE_CONTROL_COMMAND_COMPOSITE_HPP
 
-#include "control_command_interface.hpp"
+#include <input/control_commands/control_command_interface.hpp>
 #include <memory>
 #include <vector>
 

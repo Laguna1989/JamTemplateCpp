@@ -6,7 +6,7 @@
 #include <game_properties.hpp>
 #include <input/input_manager.hpp>
 #include <lerp.hpp>
-#include <logging/license_info.hpp>
+#include <log/license_info.hpp>
 #include <math_helper.hpp>
 #include <shape.hpp>
 #include <sprite.hpp>

@@ -1,5 +1,5 @@
 #include "pathfinder.hpp"
-#include "math_helper.hpp"
+#include <math_helper.hpp>
 #include <iostream>
 #include <limits>
 #include <stdexcept>

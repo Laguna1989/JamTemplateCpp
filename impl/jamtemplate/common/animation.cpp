@@ -1,9 +1,9 @@
 ﻿#include "animation.hpp"
-#include "math_helper.hpp"
-#include "nlohmann.hpp"
-#include "sprite.hpp"
-#include "strutils.hpp"
-#include "texture_manager_interface.hpp"
+#include <math_helper.hpp>
+#include <nlohmann.hpp>
+#include <sprite.hpp>
+#include <strutils.hpp>
+#include <texture_manager_interface.hpp>
 #include <fstream>
 #include <iostream>
 #include <memory>

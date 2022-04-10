@@ -1,10 +1,10 @@
 #ifndef GUARD_JAMTEMPLATE_GFX_INTERFACE_HPP
 #define GUARD_JAMTEMPLATE_GFX_INTERFACE_HPP
 
-#include "cam_interface.hpp"
-#include "render_target.hpp"
-#include "render_window_interface.hpp"
-#include "texture_manager_interface.hpp"
+#include <cam_interface.hpp>
+#include <graphics/render_window_interface.hpp>
+#include <render_target.hpp>
+#include <texture_manager_interface.hpp>
 
 namespace jt {
 

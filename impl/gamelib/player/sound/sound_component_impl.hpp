@@ -2,7 +2,7 @@
 #define GAME_PLAYER_SOUND_COMPONENT_HPP
 
 #include <audio/audio_interface.hpp>
-#include <logging/logger_interface.hpp>
+#include <log/logger_interface.hpp>
 #include <player/sound/sound_component_interface.hpp>
 
 namespace jt {

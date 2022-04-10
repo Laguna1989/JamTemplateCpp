@@ -1,7 +1,7 @@
 #ifndef GUARD_JAMTEMAPLTE_NODE_HPP
 #define GUARD_JAMTEMAPLTE_NODE_HPP
 
-#include "node_interface.hpp"
+#include <pathfinder/node_interface.hpp>
 #include <memory>
 #include <vector>
 

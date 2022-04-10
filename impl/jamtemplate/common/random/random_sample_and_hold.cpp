@@ -1,5 +1,5 @@
 ﻿#include "random_sample_and_hold.hpp"
-#include "random.hpp"
+#include <random/random.hpp>
 
 jt::SampleAndHold::SampleAndHold(float timerMu, float timerSigma)
 {

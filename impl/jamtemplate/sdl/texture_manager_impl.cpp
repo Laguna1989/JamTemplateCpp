@@ -1,7 +1,7 @@
 ﻿#include "texture_manager_impl.hpp"
-#include "sdl_helper.hpp"
-#include "sprite_functions.hpp"
-#include "strutils.hpp"
+#include <sdl_helper.hpp>
+#include <sprite_functions.hpp>
+#include <strutils.hpp>
 #include <SDL_image.h>
 #include <iostream>
 #include <limits>

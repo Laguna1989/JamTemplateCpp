@@ -1,7 +1,7 @@
 ﻿#include "drawable_helpers.hpp"
-#include "shape.hpp"
-#include "sprite.hpp"
-#include "text.hpp"
+#include <shape.hpp>
+#include <sprite.hpp>
+#include <text.hpp>
 
 std::shared_ptr<jt::Shape> jt::dh::createShapeRect(
     jt::Vector2f const& size, jt::Color const& col, jt::TextureManagerInterface& textureManager)

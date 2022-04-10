@@ -1,8 +1,8 @@
 #ifndef GUARD_JAMTEMPLATE_GAMEPAD_INPUT_HPP
 #define GUARD_JAMTEMPLATE_GAMEPAD_INPUT_HPP
 
-#include "gamepad_input_lib.hpp"
-#include "gamepad_interface.hpp"
+#include <gamepad_input_lib.hpp>
+#include <input/gamepad/gamepad_interface.hpp>
 #include <functional>
 #include <map>
 

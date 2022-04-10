@@ -1,7 +1,7 @@
 #ifndef GUARD_JAMTEMPLATE_MOCK_LOGGER_HPP
 #define GUARD_JAMTEMPLATE_MOCK_LOGGER_HPP
 
-#include "logging/logger_interface.hpp"
+#include "log/logger_interface.hpp"
 #include <gmock/gmock.h>
 
 class MockLogger : public jt::LoggerInterface {

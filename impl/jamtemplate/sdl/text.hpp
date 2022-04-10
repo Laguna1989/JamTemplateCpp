@@ -1,8 +1,8 @@
 ﻿#ifndef GUARD_JAMTEMPLATE_TEXT_HPP_INCLUDEGUARD
 #define GUARD_JAMTEMPLATE_TEXT_HPP_INCLUDEGUARD
 
-#include "drawable_impl_sdl.hpp"
-#include "render_target.hpp"
+#include <drawable_impl_sdl.hpp>
+#include <render_target.hpp>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
 #include <memory>

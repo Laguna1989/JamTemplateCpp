@@ -1,10 +1,10 @@
 ﻿#ifndef GUARD_JAMTEMPLATE_DRAWABLEINTERFACE_HPP_INCLUDEGUARD
 #define GUARD_JAMTEMPLATE_DRAWABLEINTERFACE_HPP_INCLUDEGUARD
 
-#include "color/color.hpp"
-#include "rect.hpp"
-#include "render_target.hpp"
-#include "vector.hpp"
+#include <color/color.hpp>
+#include <rect.hpp>
+#include <render_target.hpp>
+#include <vector.hpp>
 #include <memory>
 
 namespace jt {

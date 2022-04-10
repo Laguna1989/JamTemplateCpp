@@ -3,7 +3,7 @@
 
 #include "game_interface.hpp"
 #include "graphics/render_window_null.hpp"
-#include "logging/logger_null.hpp"
+#include "log/logger_null.hpp"
 #include "mock_gfx.hpp"
 #include <gmock/gmock.h>
 

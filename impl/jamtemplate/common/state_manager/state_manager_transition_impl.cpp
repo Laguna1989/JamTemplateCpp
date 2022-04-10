@@ -1,5 +1,5 @@
 #include "state_manager_transition_impl.hpp"
-#include "math_helper.hpp"
+#include <math_helper.hpp>
 
 jt::StateManagerTransitionImpl::StateManagerTransitionImpl(float timerMax)
 {

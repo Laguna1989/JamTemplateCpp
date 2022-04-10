@@ -1,8 +1,8 @@
 #ifndef GUARD_JAMTEMAPLTE_STATE_MANAGER_INTERFACE_HPP
 #define GUARD_JAMTEMAPLTE_STATE_MANAGER_INTERFACE_HPP
 
-#include "game_state.hpp"
-#include "state_manager_transition_interface.hpp"
+#include <game_state.hpp>
+#include <state_manager/state_manager_transition_interface.hpp>
 
 namespace jt {
 

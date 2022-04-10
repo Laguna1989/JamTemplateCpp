@@ -1,7 +1,7 @@
 #ifndef GUARD_JAMTEMPLATE_CONTROL_COMMAND_ONCE_HPP
 #define GUARD_JAMTEMPLATE_CONTROL_COMMAND_ONCE_HPP
 
-#include "control_command_interface.hpp"
+#include <input/control_commands/control_command_interface.hpp>
 
 namespace jt {
 class ControlCommandOnce : public jt::ControlCommandInterface {

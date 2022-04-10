@@ -1,10 +1,10 @@
 #ifndef GUARD_JAMTEMPLATE_AUDIO_INTERFACE_HPP
 #define GUARD_JAMTEMPLATE_AUDIO_INTERFACE_HPP
 
-#include "oalpp/sound_context/sound_context_interface.hpp"
-#include "sound.hpp"
-#include "sound_interface.hpp"
-#include "sound_with_effect.hpp"
+#include <audio/sound.hpp>
+#include <audio/sound_interface.hpp>
+#include <audio/sound_with_effect.hpp>
+#include <oalpp/sound_context/sound_context_interface.hpp>
 #include <functional>
 #include <memory>
 #include <string>
