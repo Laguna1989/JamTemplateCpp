@@ -13,7 +13,7 @@
 #include "input/mouse/mouse_input.hpp"
 #include "log/default_logging.hpp"
 #include "log/logger.hpp"
-#include "log_camera.hpp"
+#include "logging_camera.hpp"
 #include "random/random.hpp"
 #include "state_manager/logging_state_manager.hpp"
 #include "state_manager/state_manager.hpp"
