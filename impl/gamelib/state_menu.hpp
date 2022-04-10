@@ -1,7 +1,7 @@
 ﻿#ifndef GAME_STATE_MENU_HPP_INCLUDEGUARD
 #define GAME_STATE_MENU_HPP_INCLUDEGUARD
 
-#include "game_state.hpp"
+#include <game_state.hpp>
 
 namespace jt {
 

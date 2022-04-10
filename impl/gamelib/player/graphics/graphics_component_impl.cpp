@@ -1,7 +1,6 @@
 #include "graphics_component_impl.hpp"
-#include "game_properties.hpp"
-#include "math_helper.hpp"
-#include "player/player.hpp"
+#include <game_properties.hpp>
+#include <math_helper.hpp>
 
 GraphicsComponentImpl::GraphicsComponentImpl(std::shared_ptr<jt::GameInterface> gameInterface)
 {

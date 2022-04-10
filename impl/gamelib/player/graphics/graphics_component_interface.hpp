@@ -1,9 +1,9 @@
 #ifndef MYAWESOMEGAME_GRAPHICS_COMPONENT_INTERFACE_HPP
 #define MYAWESOMEGAME_GRAPHICS_COMPONENT_INTERFACE_HPP
 
-#include "color/color.hpp"
-#include "render_target_lib.hpp"
-#include "vector.hpp"
+#include <color/color.hpp>
+#include <render_target_lib.hpp>
+#include <vector.hpp>
 #include <memory>
 
 class GraphicsComponentInterface {

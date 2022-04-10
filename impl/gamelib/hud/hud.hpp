@@ -1,10 +1,10 @@
 ﻿#ifndef GAME_HUD_HPP_INCLUDEGUARD
 #define GAME_HUD_HPP_INCLUDEGUARD
 
-#include "game_object.hpp"
-#include "observer_interface.hpp"
-#include "sprite.hpp"
-#include "text.hpp"
+#include <game_object.hpp>
+#include <hud/observer_interface.hpp>
+#include <sprite.hpp>
+#include <text.hpp>
 
 class ScoreDisplay;
 

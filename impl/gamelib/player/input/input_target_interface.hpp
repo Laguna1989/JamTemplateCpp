@@ -1,7 +1,7 @@
 #ifndef MYAWESOMEGAME_INPUT_TARGET_INTERFACE_HPP
 #define MYAWESOMEGAME_INPUT_TARGET_INTERFACE_HPP
 
-#include "box2dwrapper/box2d_object.hpp"
+#include <box2dwrapper/box2d_object.hpp>
 
 using InputTargetInterface = jt::Box2DObject;
 

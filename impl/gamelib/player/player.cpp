@@ -1,10 +1,10 @@
 #include "player.hpp"
-#include "game_interface.hpp"
-#include "math_helper.hpp"
-#include "player/graphics/graphics_component_impl.hpp"
-#include "player/input/input_component_impl.hpp"
-#include "player/sound/sound_component_impl.hpp"
-#include "state_game.hpp"
+#include <game_interface.hpp>
+#include <math_helper.hpp>
+#include <player/graphics/graphics_component_impl.hpp>
+#include <player/input/input_component_impl.hpp>
+#include <player/sound/sound_component_impl.hpp>
+#include <state_game.hpp>
 
 namespace {
 std::string selectWalkAnimation(jt::Vector2f const& velocity)

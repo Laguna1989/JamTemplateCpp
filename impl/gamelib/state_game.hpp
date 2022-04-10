@@ -1,9 +1,9 @@
 ﻿#ifndef GAME_STATE_GAME_HPP_INCLUDEGUARD
 #define GAME_STATE_GAME_HPP_INCLUDEGUARD
 
-#include "box2dwrapper/box2d_world_interface.hpp"
-#include "game_state.hpp"
-#include "player/player.hpp"
+#include <box2dwrapper/box2d_world_interface.hpp>
+#include <game_state.hpp>
+#include <player/player.hpp>
 #include <memory>
 #include <vector>
 

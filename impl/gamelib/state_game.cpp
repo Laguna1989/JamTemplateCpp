@@ -1,13 +1,13 @@
 ﻿#include "state_game.hpp"
-#include "box2dwrapper/box2d_world_impl.hpp"
-#include "color/color.hpp"
-#include "game_interface.hpp"
-#include "game_properties.hpp"
-#include "hud/hud.hpp"
-#include "shape.hpp"
-#include "sprite.hpp"
-#include "state_menu.hpp"
-#include "tweens/tween_alpha.hpp"
+#include <box2dwrapper/box2d_world_impl.hpp>
+#include <color/color.hpp>
+#include <game_interface.hpp>
+#include <game_properties.hpp>
+#include <hud/hud.hpp>
+#include <shape.hpp>
+#include <sprite.hpp>
+#include <state_menu.hpp>
+#include <tweens/tween_alpha.hpp>
 
 void StateGame::doInternalCreate()
 {

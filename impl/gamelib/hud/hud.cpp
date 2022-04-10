@@ -1,7 +1,7 @@
 ﻿#include "hud.hpp"
-#include "color/color.hpp"
-#include "game_interface.hpp"
-#include "score_display.hpp"
+#include <color/color.hpp>
+#include <game_interface.hpp>
+#include <hud/score_display.hpp>
 
 std::shared_ptr<ObserverInterface<int>> Hud::getObserverScoreP1() const { return m_scoreP1Display; }
 std::shared_ptr<ObserverInterface<int>> Hud::getObserverScoreP2() const { return m_scoreP2Display; }

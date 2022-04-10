@@ -1,8 +1,8 @@
 #include "sound_component_impl.hpp"
-#include "audio/logging_sound.hpp"
-#include "audio/sound.hpp"
-#include "audio/sound_group.hpp"
-#include "audio/sound_null.hpp"
+#include <audio/logging_sound.hpp>
+#include <audio/sound.hpp>
+#include <audio/sound_group.hpp>
+#include <audio/sound_null.hpp>
 
 SoundComponentImpl::SoundComponentImpl(jt::AudioInterface& audio, jt::LoggerInterface& logger)
 {

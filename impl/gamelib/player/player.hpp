@@ -1,10 +1,10 @@
 #ifndef MYAWESOMEGAME_PLAYER_HPP
 #define MYAWESOMEGAME_PLAYER_HPP
 
-#include "box2dwrapper/box2d_object.hpp"
-#include "player/graphics/graphics_component_interface.hpp"
-#include "player/input/input_component_interface.hpp"
-#include "player/sound/sound_component_interface.hpp"
+#include <box2dwrapper/box2d_object.hpp>
+#include <player/graphics/graphics_component_interface.hpp>
+#include <player/input/input_component_interface.hpp>
+#include <player/sound/sound_component_interface.hpp>
 
 class StateGame;
 
