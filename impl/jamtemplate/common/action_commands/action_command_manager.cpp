@@ -1,5 +1,6 @@
 #include "action_command_manager.hpp"
 #include <strutils.hpp>
+#include <system_helper.hpp>
 
 jt::ActionCommandManager::ActionCommandManager(jt::LoggerInterface& logger)
     : m_logger { logger }
@@ -17,8 +18,8 @@ void jt::ActionCommandManager::executeCommand(std::string const& fullCommandStri
     auto const commandArguments = getArguments(splitCommand);
 
     auto const command_entry = std::find_if(m_registeredCommands.cbegin(),
-        m_registeredCommands.cend(), [&commandIdentifierString](auto const& c) {
-            auto const currentCommandToBeChecked = std::get<0>(c);
+        m_registeredCommands.cend(), [&commandIdentifierString](auto const& kvp) {
+            auto const currentCommandToBeChecked = kvp.first;
             if (commandIdentifierString == currentCommandToBeChecked) {
                 // If weird behaviour occurs, add a check if shared state is still alive here.
                 return true;
@@ -30,7 +31,7 @@ void jt::ActionCommandManager::executeCommand(std::string const& fullCommandStri
         return;
     }
     // perform the actual action command call
-    std::get<2> (*command_entry)(commandArguments);
+    std::get<1>(command_entry->second)(commandArguments);
 }
 
 std::vector<std::string> jt::ActionCommandManager::getArguments(
@@ -44,17 +45,15 @@ std::vector<std::string> jt::ActionCommandManager::getArguments(
 
 void jt::ActionCommandManager::removeUnusedCommands()
 {
-    m_registeredCommands.erase(
-        std::remove_if(m_registeredCommands.begin(), m_registeredCommands.end(),
-            [this](auto const& tpl) {
-                auto shared_state = std::get<1>(tpl);
-                if (shared_state.expired()) {
-                    m_logger.info("remove command '" + std::get<0>(tpl) + "'");
-                    return true;
-                }
-                return false;
-            }),
-        m_registeredCommands.end());
+
+    jt::SystemHelper::erase_if(m_registeredCommands, [this](auto const& kvp) {
+        auto shared_state = std::get<0>(kvp.second);
+        if (shared_state.expired()) {
+            m_logger.info("remove command '" + kvp.first + "'");
+            return true;
+        }
+        return false;
+    });
 }
 
 std::shared_ptr<bool> jt::ActionCommandManager::registerTemporaryCommand(
@@ -63,8 +62,8 @@ std::shared_ptr<bool> jt::ActionCommandManager::registerTemporaryCommand(
     std::shared_ptr<bool> sharedState = std::make_shared<bool>();
 
     std::string const trimmedCommand = strutil::trim_copy(commandName);
-    m_registeredCommands.emplace_back(
-        std::make_tuple(trimmedCommand, std::weak_ptr<bool> { sharedState }, callback));
+    m_registeredCommands[trimmedCommand]
+        = std::make_tuple(std::weak_ptr<bool> { sharedState }, callback);
     m_logger.info("registered command '" + trimmedCommand + "'");
     return sharedState;
 }
@@ -72,9 +71,10 @@ void jt::ActionCommandManager::update() { removeUnusedCommands(); }
 
 std::vector<std::string> jt::ActionCommandManager::getAllCommands()
 {
-    std::vector<std::string> commands;
+    std::vector<std::string> commands {};
+    commands.resize(m_registeredCommands.size());
     for (auto& tpl : m_registeredCommands) {
-        commands.push_back(std::get<0>(tpl));
+        commands.push_back(tpl.first);
     }
     std::sort(commands.begin(), commands.end());
     return commands;

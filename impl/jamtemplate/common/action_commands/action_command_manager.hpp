@@ -3,6 +3,8 @@
 
 #include <action_commands/action_command_manager_interface.hpp>
 #include <log/logger_interface.hpp>
+#include <map>
+
 namespace jt {
 class ActionCommandManager : public ActionCommandManagerInterface {
 public:
@@ -16,7 +18,7 @@ public:
 
 private:
     jt::LoggerInterface& m_logger;
-    std::vector<std::tuple<std::string, std::weak_ptr<bool>, ActionCommandCallbackType>>
+    std::map<std::string, std::tuple<std::weak_ptr<bool>, ActionCommandCallbackType>>
         m_registeredCommands;
     void removeUnusedCommands();
     std::vector<std::string> getArguments(std::vector<std::string> const& args) const;
