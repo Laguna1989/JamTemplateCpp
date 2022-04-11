@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1649690695060,
+  "lastUpdate": 1649703388977,
   "repoUrl": "https://github.com/Laguna1989/JamTemplateCpp",
   "entries": {
     "Benchmark": [
@@ -4698,6 +4698,60 @@ window.BENCHMARK_DATA = {
             "value": 3.643024020512852,
             "unit": "ms/iter",
             "extra": "iterations: 195\ncpu: 3.643035897435896 ms\nthreads: 1"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "laguna.ws@gmail.com",
+            "name": "Simon Weis",
+            "username": "Laguna1989"
+          },
+          "committer": {
+            "email": "laguna.ws@gmail.com",
+            "name": "Simon Weis",
+            "username": "Laguna1989"
+          },
+          "distinct": true,
+          "id": "69357085dad05095025714923716ba0281f1e78b",
+          "message": "use map in action commands",
+          "timestamp": "2022-04-11T20:53:45+02:00",
+          "tree_id": "0ae92a930b501ecfb853e819f2fa812592d507f8",
+          "url": "https://github.com/Laguna1989/JamTemplateCpp/commit/69357085dad05095025714923716ba0281f1e78b"
+        },
+        "date": 1649703387818,
+        "tool": "googlecpp",
+        "benches": [
+          {
+            "name": "BM_UpdateDrawablePositions",
+            "value": 4.949527027027199,
+            "unit": "ms/iter",
+            "extra": "iterations: 148\ncpu: 4.948427027027028 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GetAllCommands",
+            "value": 0.32519642569151624,
+            "unit": "ms/iter",
+            "extra": "iterations: 2133\ncpu: 0.3251622128457571 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_StartGame",
+            "value": 0.0032769569482877445,
+            "unit": "ms/iter",
+            "extra": "iterations: 203453\ncpu: 0.003275295031284868 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_RefineTilemapCollisions",
+            "value": 0.24449776227045136,
+            "unit": "ms/iter",
+            "extra": "iterations: 2995\ncpu: 0.24437916527545903 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GamestateWithTweeningShapes",
+            "value": 3.372829432692288,
+            "unit": "ms/iter",
+            "extra": "iterations: 208\ncpu: 3.3619250000000003 ms\nthreads: 1"
           }
         ]
       }
