@@ -5,9 +5,9 @@
 
 static void BM_GetAllCommands(benchmark::State& state)
 {
-    jt::null_objects::LoggerNull logger;
-    jt::ActionCommandManager acm { logger };
     for (auto _ : state) {
+        jt::null_objects::LoggerNull logger;
+        jt::ActionCommandManager acm { logger };
         constexpr auto size = 40U;
         std::array<std::shared_ptr<bool>, size> myarray;
         for (std::size_t i = 0U; i != size; ++i) {
