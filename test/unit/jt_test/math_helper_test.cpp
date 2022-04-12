@@ -230,7 +230,7 @@ TEST(AngleOf, Horizontal)
 TEST(AngleOf, HorizontalNegative)
 {
     jt::Vector2f const vec { -10.0f, .0f };
-    ASSERT_EQ(angleOf(vec), -180.0f);
+    ASSERT_FLOAT_EQ(angleOf(vec), -180.0f);
 }
 
 TEST(AngleOf, Vertical)

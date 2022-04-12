@@ -39,19 +39,36 @@ else ()
         ## so the warning level of this one is set to 4 and the global warning level is set to three
         set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /w45205 /W3 /EHsc")
     else ()
-        if (NOT CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
+        if(NOT CMAKE_CXX_COMPILER_ID MATCHES "^(Apple)?Clang$")
             set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -lstdc++fs")
         endif ()
         if (JT_ENABLE_COVERAGE)
-            set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -Wall -Wextra -O0 -fprofile-arcs -ftest-coverage --std=c++17 -fpermissive -lstdc++fs")
+            set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -Wall -Wextra -O0 -fprofile-arcs -ftest-coverage --std=c++17 -fpermissive")
         elseif (JT_ENABLE_PERFORMANCETESTS)
-            set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -O3 --std=c++17 -fpermissive -lstdc++fs")
+            set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -O3 --std=c++17 -fpermissive")
         else ()
             set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -O3 --std=c++17 -fpermissive")
         endif ()
     endif ()
 endif ()
 
+
+## set include for mac homebrew
+#####################################################
+if (NOT USE_SFML)
+    if (NOT JT_ENABLE_WEB)
+        find_package(SDL2 REQUIRED)
+
+        include(FindPkgConfig)
+        pkg_check_modules(SDL2_Image REQUIRED IMPORTED_TARGET SDL2_image)
+        pkg_check_modules(SDL2_TTF REQUIRED IMPORTED_TARGET SDL2_ttf)
+        if(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+            include_directories(/usr/local/Cellar/sdl2/2.0.20/include/ 
+                                /usr/local/Cellar/sdl2_image/2.0.5/include/
+                                /usr/local/Cellar/sdl2_ttf/2.0.18_1/include/)
+        endif()
+    endif ()
+endif ()
 
 ## get externals
 #####################################################
@@ -82,14 +99,6 @@ endif ()
 if (USE_SFML)
     if (WIN32 OR APPLE)
         link_directories(${SFML_DIR_ROOT}/lib)
-    endif ()
-else ()
-    if (NOT JT_ENABLE_WEB)
-        find_package(SDL2 REQUIRED)
-
-        include(FindPkgConfig)
-        pkg_check_modules(SDL2_Image REQUIRED IMPORTED_TARGET SDL2_image)
-        pkg_check_modules(SDL2_TTF REQUIRED IMPORTED_TARGET SDL2_ttf)
     endif ()
 endif ()
 
