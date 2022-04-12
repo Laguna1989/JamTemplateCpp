@@ -54,3 +54,12 @@ std::shared_ptr<jt::SoundInterface> jt::LoggingAudio::addPermanentSound(
     return std::make_shared<jt::LoggingSound>(
         m_decoratee.addPermanentSound(identifier, fileName, effect), m_logger);
 }
+std::shared_ptr<jt::SoundInterface> jt::LoggingAudio::addPermanentSound(
+    std::string const& identifier, std::string const& introFileName,
+    std::string const& loopingFileName, oalpp::effects::MonoEffectInterface& effect)
+{
+    m_logger.debug("add permanent sound with effect: " + identifier, { "jt", "audio" });
+    return std::make_shared<jt::LoggingSound>(
+        m_decoratee.addPermanentSound(identifier, introFileName, loopingFileName, effect),
+        m_logger);
+}

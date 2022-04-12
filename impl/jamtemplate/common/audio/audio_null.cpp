@@ -35,3 +35,9 @@ std::shared_ptr<jt::SoundInterface> jt::AudioNull::addPermanentSound(
 {
     return std::make_shared<jt::SoundNull>();
 }
+std::shared_ptr<jt::SoundInterface> jt::AudioNull::addPermanentSound(std::string const& identifier,
+    std::string const& introFileName, std::string const& loopingFileName,
+    oalpp::effects::MonoEffectInterface& effect)
+{
+    return std::make_shared<jt::SoundNull>();
+}

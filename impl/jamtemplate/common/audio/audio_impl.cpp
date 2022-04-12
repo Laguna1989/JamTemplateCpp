@@ -78,3 +78,11 @@ std::shared_ptr<jt::SoundInterface> jt::AudioImpl::addPermanentSound(std::string
     m_permanentSounds[identifier] = sound;
     return sound;
 }
+std::shared_ptr<jt::SoundInterface> jt::AudioImpl::addPermanentSound(std::string const& identifier,
+    std::string const& introFileName, std::string const& loopingFileName,
+    oalpp::effects::MonoEffectInterface& effect)
+{
+    auto sound = std::make_shared<jt::SoundWithEffect>(introFileName, effect);
+    m_permanentSounds[identifier] = sound;
+    return sound;
+}

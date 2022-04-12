@@ -12,7 +12,7 @@ void StateAudio::doInternalCreate()
     if (m_sound == nullptr) {
         // create new music
         m_sound = getGame()->audio().addPermanentSound(
-            "music", "assets/looping_stereo_track.mp3", m_effect);
+            "music", "assets/demos/audio/looping_stereo_track.mp3", m_effect);
         m_sound->setLoop(true);
     } else {
         // get blend property from already created music
@@ -51,7 +51,14 @@ void StateAudio::doInternalDraw() const
     if (ImGui::Button("play looping")) {
         // create new music
         m_sound = getGame()->audio().addPermanentSound(
-            "music", "assets/looping_stereo_track.mp3", m_effect);
+            "music", "assets/demos/audio/looping_stereo_track.mp3", m_effect);
+        m_sound->setLoop(true);
+        m_sound->play();
+    }
+    if (ImGui::Button("play intro + looping")) {
+        // create new music
+        m_sound = getGame()->audio().addPermanentSound(
+            "music", "assets/demos/audio/intro.ogg", m_effect);
         m_sound->setLoop(true);
         m_sound->play();
     }
