@@ -1,5 +1,5 @@
-#ifndef GUARD_JAMTEMAPLTE_INPUT_MANAGER_NULL_HPP
-#define GUARD_JAMTEMAPLTE_INPUT_MANAGER_NULL_HPP
+#ifndef JAMTEMPLATE_INPUT_MANAGER_NULL_HPP
+#define JAMTEMPLATE_INPUT_MANAGER_NULL_HPP
 
 #include <input/input_manager_interface.hpp>
 
@@ -15,4 +15,4 @@ public:
     size_t getNumberOfGamepads() const override;
 };
 } // namespace jt
-#endif // GUARD_JAMTEMAPLTE_INPUT_MANAGER_NULL_HPP
+#endif // JAMTEMPLATE_INPUT_MANAGER_NULL_HPP

@@ -1,8 +1,8 @@
-﻿#include "sdl_setup.hpp"
-#include "texture_manager_impl.hpp"
-#include "tilemap/tile_layer.hpp"
-#include "tilemap/tilemap_manager_tileson_impl.hpp"
-#include "tilemap/tileson_loader.hpp"
+﻿#include <sdl_setup.hpp>
+#include <texture_manager_impl.hpp>
+#include <tilemap/tile_layer.hpp>
+#include <tilemap/tilemap_manager_tileson_impl.hpp>
+#include <tilemap/tileson_loader.hpp>
 #include <gtest/gtest.h>
 
 using jt::tilemap::TileLayer;

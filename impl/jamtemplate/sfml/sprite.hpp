@@ -1,5 +1,5 @@
-﻿#ifndef GUARD_JAMTEMPLATE_SPRITE_HPP_INCLUDEGUARD
-#define GUARD_JAMTEMPLATE_SPRITE_HPP_INCLUDEGUARD
+﻿#ifndef JAMTEMPLATE_SPRITE_HPP
+#define JAMTEMPLATE_SPRITE_HPP
 
 #include <color/color.hpp>
 #include <render_target.hpp>

@@ -1,5 +1,5 @@
-#ifndef GUARD_JAMTEMPLATE_LOG_INTERFACE_HPP
-#define GUARD_JAMTEMPLATE_LOG_INTERFACE_HPP
+#ifndef JAMTEMPLATE_LOG_INTERFACE_HPP
+#define JAMTEMPLATE_LOG_INTERFACE_HPP
 
 #include <log/log_entry.hpp>
 #include <log/log_target_interface.hpp>
@@ -29,4 +29,4 @@ public:
 };
 } // namespace jt
 
-#endif // GUARD_JAMTEMPLATE_LOG_INTERFACE_HPP
+#endif // JAMTEMPLATE_LOG_INTERFACE_HPP

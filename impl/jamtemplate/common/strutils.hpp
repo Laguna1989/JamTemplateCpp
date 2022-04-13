@@ -16,8 +16,8 @@
 ******************************************************************************
 */
 
-#ifndef GUARD_JAMTEMPLATE_STRUTILS_HPP
-#define GUARD_JAMTEMPLATE_STRUTILS_HPP
+#ifndef JAMTEMPLATE_STRUTILS_HPP
+#define JAMTEMPLATE_STRUTILS_HPP
 
 #include <algorithm>
 #include <cctype>

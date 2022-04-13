@@ -1,5 +1,5 @@
-﻿#ifndef GUARD_JAMTEMPLATE_RECT_HPP
-#define GUARD_JAMTEMPLATE_RECT_HPP
+﻿#ifndef JAMTEMPLATE_RECT_HPP
+#define JAMTEMPLATE_RECT_HPP
 
 #include <vector.hpp>
 #include <map>

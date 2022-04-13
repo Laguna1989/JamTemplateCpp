@@ -1,5 +1,5 @@
-#ifndef GUARD_JAMTEMPLATE_LINTERP_HPP_INCLUDEGUARD
-#define GUARD_JAMTEMPLATE_LINTERP_HPP_INCLUDEGUARD
+#ifndef JAMTEMPLATE_LINTERP_HPP
+#define JAMTEMPLATE_LINTERP_HPP
 
 #include <assert.h>
 
@@ -32,4 +32,4 @@ static T linear(T const& a, T const& b, T const& ti)
 } // namespace Lerp
 } // namespace jt
 
-#endif // GUARD_JAMTEMPLATE_LINTERP_HPP_INCLUDEGUARD
+#endif // JAMTEMPLATE_LINTERP_HPP

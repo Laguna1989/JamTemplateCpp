@@ -1,5 +1,5 @@
-#include "color/make_color.hpp"
-#include "gtest/gtest.h"
+#include <color/make_color.hpp>
+#include <gtest/gtest.h>
 
 TEST(MakeColorTest, FromRGB)
 {

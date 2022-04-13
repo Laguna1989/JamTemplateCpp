@@ -1,9 +1,9 @@
-#ifndef GUARD_JAMTEMAPLTE_RENDER_WINDOW_TEST_HPP
-#define GUARD_JAMTEMAPLTE_RENDER_WINDOW_TEST_HPP
+#ifndef JAMTEMPLATE_RENDER_WINDOW_TEST_HPP
+#define JAMTEMPLATE_RENDER_WINDOW_TEST_HPP
 
-#include "graphics/render_window.hpp"
-#include "graphics/render_window_interface.hpp"
-#include "graphics/render_window_null.hpp"
+#include <graphics/render_window.hpp>
+#include <graphics/render_window_interface.hpp>
+#include <graphics/render_window_null.hpp>
 #include <gtest/gtest.h>
 #include <memory>
 #include <string>
@@ -43,4 +43,4 @@ public:
     }
 };
 
-#endif // GUARD_JAMTEMAPLTE_RENDER_WINDOW_TEST_HPP
+#endif // JAMTEMPLATE_RENDER_WINDOW_TEST_HPP

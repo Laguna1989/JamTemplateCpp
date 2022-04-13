@@ -1,4 +1,4 @@
-﻿#include "circular_buffer.hpp"
+﻿#include <circular_buffer.hpp>
 #include <gtest/gtest.h>
 
 TEST(CircularBufferSize2, ReadAndWrite)

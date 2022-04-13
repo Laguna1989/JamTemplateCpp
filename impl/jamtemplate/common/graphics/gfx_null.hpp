@@ -1,5 +1,5 @@
-#ifndef GUARD_JAMTEMPALTE_GFX_NULL_HPP
-#define GUARD_JAMTEMPALTE_GFX_NULL_HPP
+#ifndef JAMTEMPLATE_GFX_NULL_HPP
+#define JAMTEMPLATE_GFX_NULL_HPP
 
 #include <camera.hpp>
 #include <graphics/gfx_interface.hpp>
@@ -34,4 +34,4 @@ private:
 } // namespace null_objects
 } // namespace jt
 
-#endif // GUARD_JAMTEMPALTE_GFX_NULL_HPP
+#endif // JAMTEMPLATE_GFX_NULL_HPP

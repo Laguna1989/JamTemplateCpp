@@ -1,7 +1,7 @@
-﻿#include "render_window_test.hpp"
-#include "sdl_setup.hpp"
-#include "sprite.hpp"
-#include "texture_manager_impl.hpp"
+﻿#include <render_window_test.hpp>
+#include <sdl_setup.hpp>
+#include <sprite.hpp>
+#include <texture_manager_impl.hpp>
 #include <gtest/gtest.h>
 #include <stdexcept>
 #include <utility>

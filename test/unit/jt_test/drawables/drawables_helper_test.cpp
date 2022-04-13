@@ -1,10 +1,10 @@
-﻿#include "drawable_helpers.hpp"
-#include "sdl_setup.hpp"
-#include "shape.hpp"
-#include "sprite.hpp"
-#include "text.hpp"
-#include "texture_manager_impl.hpp"
-#include "gtest/gtest.h"
+﻿#include <drawable_helpers.hpp>
+#include <sdl_setup.hpp>
+#include <shape.hpp>
+#include <sprite.hpp>
+#include <text.hpp>
+#include <texture_manager_impl.hpp>
+#include <gtest/gtest.h>
 
 TEST(CreateRectShapeTest, NoNullptr)
 {

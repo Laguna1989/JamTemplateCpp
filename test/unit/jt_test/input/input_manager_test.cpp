@@ -1,7 +1,7 @@
-﻿#include "input/gamepad/gamepad_input.hpp"
-#include "input/input_manager.hpp"
-#include "mocks/mock_input.hpp"
-#include "gtest/gtest.h"
+﻿#include <input/gamepad/gamepad_input.hpp>
+#include <input/input_manager.hpp>
+#include <mocks/mock_input.hpp>
+#include <gtest/gtest.h>
 
 TEST(InputManagerTest, ReturnsKeybaordNullptrIfInstantiatedWithNullptr)
 {

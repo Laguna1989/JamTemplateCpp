@@ -1,5 +1,5 @@
-﻿#ifndef GUARD_JAMTEMPLATE_SFML_SOUND_GUARD_HPP_12345
-#define GUARD_JAMTEMPLATE_SFML_SOUND_GUARD_HPP_12345
+﻿#ifndef JAMTEMPLATE_SOUND_HPP
+#define JAMTEMPLATE_SOUND_HPP
 
 #include <audio/sound_interface.hpp>
 #include <counted_object.hpp>
@@ -49,4 +49,4 @@ private:
 };
 
 } // namespace jt
-#endif
+#endif // JAMTEMPLATE_SOUND_HPP

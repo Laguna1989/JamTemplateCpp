@@ -1,10 +1,10 @@
-#ifndef GUARD_JAMTEMPLATE_MOCK_GFX_HPP
-#define GUARD_JAMTEMPLATE_MOCK_GFX_HPP
+#ifndef JAMTEMPLATE_MOCK_GFX_HPP
+#define JAMTEMPLATE_MOCK_GFX_HPP
 
-#include "graphics/gfx_interface.hpp"
-#include "mock_camera.hpp"
-#include "mock_window.hpp"
-#include "texture_manager_impl.hpp"
+#include <graphics/gfx_interface.hpp>
+#include <mocks/mock_camera.hpp>
+#include <mocks/mock_window.hpp>
+#include <texture_manager_impl.hpp>
 #include <gmock/gmock.h>
 
 class MockGfx : public jt::GfxInterface {
@@ -20,4 +20,4 @@ public:
     MOCK_METHOD(void, display, (), (override));
 };
 
-#endif // GUARD_JAMTEMPLATE_MOCK_GFX_HPP
+#endif // JAMTEMPLATE_MOCK_GFX_HPP

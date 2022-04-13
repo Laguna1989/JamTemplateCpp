@@ -1,8 +1,8 @@
-#ifndef GUARD_JAMTEMAPLTE_BOX2D_WORLD_MOCK_HPP
-#define GUARD_JAMTEMAPLTE_BOX2D_WORLD_MOCK_HPP
+#ifndef JAMTEMPLATE_BOX2D_WORLD_MOCK_HPP
+#define JAMTEMPLATE_BOX2D_WORLD_MOCK_HPP
 
-#include "Box2D/Box2D.h"
-#include "box2dwrapper/box2d_world_interface.hpp"
+#include <box2dwrapper/box2d_world_interface.hpp>
+#include <Box2D/Box2D.h>
 #include <gmock/gmock.h>
 
 class Box2DWorldMock : public jt::Box2DWorldInterface {
@@ -15,4 +15,4 @@ public:
     MOCK_METHOD(void, setContactListener, (std::shared_ptr<b2ContactListener>), (override));
 };
 
-#endif // GUARD_JAMTEMAPLTE_BOX2D_WORLD_MOCK_HPP
+#endif // JAMTEMPLATE_BOX2D_WORLD_MOCK_HPP

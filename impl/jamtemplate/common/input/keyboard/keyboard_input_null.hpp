@@ -1,5 +1,5 @@
-#ifndef GUARD_JAMTEMPLATE_KEYBOARD_INPUT_NULL_HPP
-#define GUARD_JAMTEMPLATE_KEYBOARD_INPUT_NULL_HPP
+#ifndef JAMTEMPLATE_KEYBOARD_INPUT_NULL_HPP
+#define JAMTEMPLATE_KEYBOARD_INPUT_NULL_HPP
 
 #include <input/keyboard/keyboard_interface.hpp>
 namespace jt {
@@ -25,4 +25,4 @@ public:
 
 } // namespace jt
 
-#endif // GUARD_JAMTEMPLATE_KEYBOARD_INPUT_NULL_HPP
+#endif // JAMTEMPLATE_KEYBOARD_INPUT_NULL_HPP

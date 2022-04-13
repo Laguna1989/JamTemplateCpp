@@ -1,8 +1,8 @@
 ﻿#include "drawables_impl_test.hpp"
-#include "sdl_setup.hpp"
-#include "texture_manager_impl.hpp"
-#include "gmock/gmock.h"
-#include "gtest/gtest.h"
+#include <sdl_setup.hpp>
+#include <texture_manager_impl.hpp>
+#include <gmock/gmock.h>
+#include <gtest/gtest.h>
 #include <memory>
 
 class DrawableImplTestFixture

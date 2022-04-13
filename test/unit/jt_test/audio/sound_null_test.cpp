@@ -1,4 +1,4 @@
-#include "audio/sound_null.hpp"
+#include <audio/sound_null.hpp>
 #include <gtest/gtest.h>
 
 TEST(SoundNullTest, UpdateDoesNotThrowException)

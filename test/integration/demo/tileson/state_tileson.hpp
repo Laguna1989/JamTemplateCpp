@@ -1,10 +1,10 @@
-﻿#ifndef STRESSTEST_STATE_TILESOM_HPP_INCLUDEGUARD
-#define STRESSTEST_STATE_TILESOM_HPP_INCLUDEGUARD
+﻿#ifndef STRESSTEST_STATE_TILESOM_HPP
+#define STRESSTEST_STATE_TILESOM_HPP
 
-#include "actor.hpp"
-#include "game_state.hpp"
-#include "tilemap/node_layer.hpp"
-#include "tilemap/object_layer.hpp"
+#include <game_state.hpp>
+#include <tilemap/node_layer.hpp>
+#include <tilemap/object_layer.hpp>
+#include <tileson/actor.hpp>
 #include <memory>
 
 namespace jt {

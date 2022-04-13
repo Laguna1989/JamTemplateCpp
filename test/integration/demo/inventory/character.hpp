@@ -1,13 +1,14 @@
 #ifndef GUATD_JAMTEMPLATE_CHARACTER_HPP
 #define GUATD_JAMTEMPLATE_CHARACTER_HPP
 
-#include "animation.hpp"
-#include "box2dwrapper/box2d_object.hpp"
-#include "character_sheet_imgui.hpp"
-#include "game_object.hpp"
-#include "inventory_list_imgui.hpp"
+#include <animation.hpp>
+#include <box2dwrapper/box2d_object.hpp>
+#include <game_object.hpp>
+#include <inventory/character_sheet_imgui.hpp>
+#include <inventory/inventory_list_imgui.hpp>
 #include <memory>
 
+// TODO replace with character class from Alakajam
 class CharacterInterface {
 public:
     virtual std::shared_ptr<InventoryInterface> getInventory() = 0;

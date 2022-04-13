@@ -1,5 +1,5 @@
-#ifndef GUARD_JAMTEMPLATE_LICENSE_INFO_HPP
-#define GUARD_JAMTEMPLATE_LICENSE_INFO_HPP
+#ifndef JAMTEMPLATE_LICENSE_INFO_HPP
+#define JAMTEMPLATE_LICENSE_INFO_HPP
 
 #include <game_object.hpp>
 #include <string>
@@ -21,4 +21,4 @@ private:
 
 } // namespace jt
 
-#endif // GUARD_JAMTEMPLATE_LICENSE_INFO_HPP
+#endif // JAMTEMPLATE_LICENSE_INFO_HPP

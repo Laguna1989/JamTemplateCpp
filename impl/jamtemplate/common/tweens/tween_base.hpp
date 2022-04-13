@@ -1,5 +1,5 @@
-﻿#ifndef GUARD_JAMTEMPLATE_TWEENBASE_HPP_INCLUDEGUARD
-#define GUARD_JAMTEMPLATE_TWEENBASE_HPP_INCLUDEGUARD
+﻿#ifndef JAMTEMPLATE_TWEENBASE_HPP
+#define JAMTEMPLATE_TWEENBASE_HPP
 
 #include <graphics/drawable_interface.hpp>
 #include <functional>

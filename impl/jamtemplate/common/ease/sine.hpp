@@ -1,5 +1,5 @@
-#ifndef GUARD_JAMTEPLATE_EASE_PENNER_SINE_HPP
-#define GUARD_JAMTEPLATE_EASE_PENNER_SINE_HPP
+#ifndef JAMTEMPLATE_EASE_PENNER_SINE_HPP
+#define JAMTEMPLATE_EASE_PENNER_SINE_HPP
 
 namespace jt {
 namespace ease {
@@ -13,4 +13,4 @@ float easeInOut(float t, float b, float c, float d);
 } // namespace ease
 } // namespace jt
 
-#endif // GUARD_JAMTEPLATE_EASE_PENNER_SINE_HPP
+#endif // JAMTEMPLATE_EASE_PENNER_SINE_HPP

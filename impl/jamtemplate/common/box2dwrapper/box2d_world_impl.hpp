@@ -1,5 +1,5 @@
-#ifndef GUARD_JAMTEMAPLTE_BOX2D_WORLD_IMPL_HPP
-#define GUARD_JAMTEMAPLTE_BOX2D_WORLD_IMPL_HPP
+#ifndef JAMTEMPLATE_BOX2D_WORLD_IMPL_HPP
+#define JAMTEMPLATE_BOX2D_WORLD_IMPL_HPP
 
 #include <box2dwrapper/box2d_world_interface.hpp>
 #include <vector.hpp>
@@ -32,4 +32,4 @@ private:
 
 } // namespace jt
 // namespace jt
-#endif // GUARD_JAMTEMAPLTE_BOX2D_WORLD_IMPL_HPP
+#endif // JAMTEMPLATE_BOX2D_WORLD_IMPL_HPP

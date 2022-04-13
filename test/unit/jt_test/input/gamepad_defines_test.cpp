@@ -1,4 +1,4 @@
-#include "input/gamepad/gamepad_defines.hpp"
+#include <input/gamepad/gamepad_defines.hpp>
 #include <gtest/gtest.h>
 
 TEST(GamepadDefinesTest, GetAllGamepadButtonsReturnsCorrectSize)

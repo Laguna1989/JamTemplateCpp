@@ -1,5 +1,5 @@
-#ifndef GUARD_JAMTEMPLATE_TILE_HPP
-#define GUARD_JAMTEMPLATE_TILE_HPP
+#ifndef JAMTEMPLATE_TILE_HPP
+#define JAMTEMPLATE_TILE_HPP
 
 #include <vector.hpp>
 
@@ -16,4 +16,4 @@ struct TileInfo {
 
 } // namespace jt
 
-#endif // GUARD_JAMTEMPLATE_TILE_HPP
+#endif // JAMTEMPLATE_TILE_HPP

@@ -1,5 +1,5 @@
-#ifndef GUARD_JAMTEMPLATE_CONTROL_COMMAND_ONCE_HPP
-#define GUARD_JAMTEMPLATE_CONTROL_COMMAND_ONCE_HPP
+#ifndef JAMTEMPLATE_CONTROL_COMMAND_ONCE_HPP
+#define JAMTEMPLATE_CONTROL_COMMAND_ONCE_HPP
 
 #include <input/control_commands/control_command_interface.hpp>
 
@@ -15,4 +15,4 @@ private:
 };
 } // namespace jt
 
-#endif // GUARD_JAMTEMPLATE_CONTROL_COMMAND_ONCE_HPP
+#endif // JAMTEMPLATE_CONTROL_COMMAND_ONCE_HPP

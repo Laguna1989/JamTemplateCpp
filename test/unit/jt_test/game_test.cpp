@@ -1,8 +1,8 @@
 ﻿#include "game_test.hpp"
-#include "action_commands/basic_action_commands.hpp"
-#include "gfx_impl.hpp"
-#include "mocks/mock_state.hpp"
-#include "mocks/mock_state_manager.hpp"
+#include <action_commands/basic_action_commands.hpp>
+#include <gfx_impl.hpp>
+#include <mocks/mock_state.hpp>
+#include <mocks/mock_state_manager.hpp>
 
 using ::testing::NiceMock;
 

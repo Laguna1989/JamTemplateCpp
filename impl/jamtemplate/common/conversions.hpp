@@ -1,5 +1,5 @@
-﻿#ifndef GUARD_JAMTEMPLATE_CONVERSIONS_HPP_GUARD
-#define GUARD_JAMTEMPLATE_CONVERSIONS_HPP_GUARD
+﻿#ifndef JAMTEMPLATE_CONVERSIONS_HPP
+#define JAMTEMPLATE_CONVERSIONS_HPP
 
 #include <vector.hpp>
 #include <Box2D/Box2D.h>
@@ -31,4 +31,4 @@ jt::Vector2f vec(tson::Vector2i const& v);
 } // namespace Conversion
 } // namespace jt
 
-#endif // !JAMTEMPLATE_CONVERSIONS_HPP_GUARD
+#endif // !JAMTEMPLATE_CONVERSIONS_HPP

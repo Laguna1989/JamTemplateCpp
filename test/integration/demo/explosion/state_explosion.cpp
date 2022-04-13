@@ -1,13 +1,13 @@
 ﻿#include "state_explosion.hpp"
-#include "game_interface.hpp"
-#include "input/input_manager.hpp"
-#include "object.hpp"
-#include "random/random.hpp"
-#include "state_select.hpp"
-#include "timer.hpp"
-#include "tweens/tween_alpha.hpp"
-#include "tweens/tween_color.hpp"
-#include "tweens/tween_scale.hpp"
+#include <explosion/object.hpp>
+#include <game_interface.hpp>
+#include <input/input_manager.hpp>
+#include <random/random.hpp>
+#include <state_select.hpp>
+#include <timer.hpp>
+#include <tweens/tween_alpha.hpp>
+#include <tweens/tween_color.hpp>
+#include <tweens/tween_scale.hpp>
 
 void StateExplosion::doInternalCreate()
 {

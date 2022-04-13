@@ -1,7 +1,7 @@
 #ifndef MYAWESOMEGAME_MOCK_LOG_TARGET_HPP
 #define MYAWESOMEGAME_MOCK_LOG_TARGET_HPP
 
-#include "log/log_target_interface.hpp"
+#include <log/log_target_interface.hpp>
 #include <gmock/gmock.h>
 
 class MockLogTarget : public jt::LogTargetInterface {

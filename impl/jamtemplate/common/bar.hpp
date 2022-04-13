@@ -1,5 +1,5 @@
-﻿#ifndef GUARD_JAMTEMPLATE_BAR_HPP_INCLUDEGUARD
-#define GUARD_JAMTEMPLATE_BAR_HPP_INCLUDEGUARD
+﻿#ifndef JAMTEMPLATE_BAR_HPP
+#define JAMTEMPLATE_BAR_HPP
 
 #include <graphics/drawable_impl.hpp>
 #include <memory>

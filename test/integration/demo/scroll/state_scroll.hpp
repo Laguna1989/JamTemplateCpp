@@ -1,12 +1,12 @@
-﻿#ifndef STRESSTEST_STATE_SCROLL_HPP_INCLUDEGUARD
-#define STRESSTEST_STATE_SCROLL_HPP_INCLUDEGUARD
+﻿#ifndef STRESSTEST_STATE_SCROLL_HPP
+#define STRESSTEST_STATE_SCROLL_HPP
 
-#include "animation.hpp"
-#include "game_state.hpp"
-#include "line.hpp"
-#include "shape.hpp"
-#include "sprite.hpp"
-#include "text.hpp"
+#include <animation.hpp>
+#include <game_state.hpp>
+#include <line.hpp>
+#include <shape.hpp>
+#include <sprite.hpp>
+#include <text.hpp>
 
 class StateScroll : public jt::GameState {
 public:

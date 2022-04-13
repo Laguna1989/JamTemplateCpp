@@ -1,17 +1,8 @@
-#include "counted_object.hpp"
+#include <counted_object.hpp>
 #include <gtest/gtest.h>
 
 class A : public jt::CountedObj<A> {
 };
-
-// class B : public jt::CountedObj<A> { // watch the typo
-// };
-
-// TEST(CountedObjectTest, getCompilerError)
-//{
-//     A a; // Ok
-//     //   B b;       // Not ok, constructor/destructor does not work
-// }
 
 class CountMe : public jt::CountedObj<CountMe> {
 public:

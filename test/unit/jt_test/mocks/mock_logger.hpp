@@ -1,7 +1,7 @@
-#ifndef GUARD_JAMTEMPLATE_MOCK_LOGGER_HPP
-#define GUARD_JAMTEMPLATE_MOCK_LOGGER_HPP
+#ifndef JAMTEMPLATE_MOCK_LOGGER_HPP
+#define JAMTEMPLATE_MOCK_LOGGER_HPP
 
-#include "log/logger_interface.hpp"
+#include <log/logger_interface.hpp>
 #include <gmock/gmock.h>
 
 class MockLogger : public jt::LoggerInterface {
@@ -19,4 +19,4 @@ public:
     MOCK_METHOD(void, setLogLevel, (LogLevel), (override));
 };
 
-#endif // GUARD_JAMTEMPLATE_MOCK_LOGGER_HPP
+#endif // JAMTEMPLATE_MOCK_LOGGER_HPP

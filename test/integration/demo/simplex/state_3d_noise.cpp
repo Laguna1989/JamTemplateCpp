@@ -1,8 +1,8 @@
 #include "state_3d_noise.hpp"
-#include "state_select.hpp"
-#include "game_interface.hpp"
-#include "math_helper.hpp"
-#include "shape.hpp"
+#include <game_interface.hpp>
+#include <math_helper.hpp>
+#include <shape.hpp>
+#include <state_select.hpp>
 
 void State3DNoise::doInternalCreate() { }
 void State3DNoise::doInternalUpdate(float elapsed)

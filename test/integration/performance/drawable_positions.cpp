@@ -1,8 +1,8 @@
-#include "animation.hpp"
-#include "graphics/gfx_null.hpp"
-#include "math_helper.hpp"
-#include "random/random.hpp"
-#include "shape.hpp"
+#include <animation.hpp>
+#include <graphics/gfx_null.hpp>
+#include <math_helper.hpp>
+#include <random/random.hpp>
+#include <shape.hpp>
 #include <array>
 #include <benchmark/benchmark.h>
 

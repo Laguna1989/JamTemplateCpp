@@ -1,5 +1,5 @@
-#ifndef GUARD_JAMTEMAPLTE_COLOR_HELPERS_HPP
-#define GUARD_JAMTEMAPLTE_COLOR_HELPERS_HPP
+#ifndef JAMTEMPLATE_COLOR_HELPERS_HPP
+#define JAMTEMPLATE_COLOR_HELPERS_HPP
 
 #include <color/color.hpp>
 #include <cstdint>
@@ -31,4 +31,4 @@ struct ColorHelpers {
 };
 
 } // namespace jt
-#endif // GUARD_JAMTEMAPLTE_COLOR_HELPERS_HPP
+#endif // JAMTEMPLATE_COLOR_HELPERS_HPP

@@ -1,5 +1,5 @@
-#ifndef GUARD_JAMTEMPLATE_LOG_ENTRY_HPP
-#define GUARD_JAMTEMPLATE_LOG_ENTRY_HPP
+#ifndef JAMTEMPLATE_LOG_ENTRY_HPP
+#define JAMTEMPLATE_LOG_ENTRY_HPP
 
 #include <string>
 #include <vector>
@@ -25,4 +25,4 @@ struct LogEntry {
 
 } // namespace jt
 
-#endif // GUARD_JAMTEMPLATE_LOG_ENTRY_HPP
+#endif // JAMTEMPLATE_LOG_ENTRY_HPP

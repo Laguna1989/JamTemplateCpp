@@ -5,6 +5,6 @@ if (JT_ENABLE_WEB)
     set(CMAKE_EXECUTABLE_SUFFIX ".html")
 endif ()
 
-target_link_libraries(GameLib PUBLIC JamTemplate)
+target_link_libraries(GameLib PUBLIC JamTemplateLib)
 target_include_directories(GameLib PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 

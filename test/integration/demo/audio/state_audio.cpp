@@ -1,9 +1,8 @@
 #include "state_audio.hpp"
-#include "audio/logging_sound.hpp"
-#include "audio/sound_group.hpp"
-#include "game_interface.hpp"
-#include "imgui.h"
-#include "state_select.hpp"
+#include <audio/sound_group.hpp>
+#include <game_interface.hpp>
+#include <imgui.h>
+#include <state_select.hpp>
 
 void StateAudio::doInternalCreate()
 {

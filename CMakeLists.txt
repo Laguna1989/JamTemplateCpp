@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.19)
-set(PROJECTNAME "MyAwesomeGame")
+set(PROJECTNAME "JamTemplate")
 project(${PROJECTNAME})
 
 ## Helper Functions

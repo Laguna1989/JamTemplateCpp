@@ -1,5 +1,5 @@
-#ifndef GUARD_JAMTEMPLATE_COUNTED_OBJECT_HPP
-#define GUARD_JAMTEMPLATE_COUNTED_OBJECT_HPP
+#ifndef JAMTEMPLATE_COUNTED_OBJECT_HPP
+#define JAMTEMPLATE_COUNTED_OBJECT_HPP
 
 #include <cstddef>
 
@@ -36,4 +36,4 @@ std::size_t CountedObj<T>::m_createdObjects { 0 };
 
 } // namespace jt
 
-#endif // GUARD_JAMTEMPLATE_COUNTED_OBJECT_HPP
+#endif // JAMTEMPLATE_COUNTED_OBJECT_HPP

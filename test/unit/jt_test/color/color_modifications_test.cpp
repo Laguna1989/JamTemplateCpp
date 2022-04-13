@@ -1,5 +1,5 @@
-#include "color/color_modifications.hpp"
-#include "color/make_color.hpp"
+#include <color/color_modifications.hpp>
+#include <color/make_color.hpp>
 #include <gtest/gtest.h>
 
 TEST(ColorModificationTest, DesaturateRed)

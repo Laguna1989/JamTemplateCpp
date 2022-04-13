@@ -1,10 +1,10 @@
-#ifndef GUARD_JAMTEMPLATE_GAMEPAD_VISUALIZER_HPP
-#define GUARD_JAMTEMPLATE_GAMEPAD_VISUALIZER_HPP
+#ifndef JAMTEMPLATE_GAMEPAD_VISUALIZER_HPP
+#define JAMTEMPLATE_GAMEPAD_VISUALIZER_HPP
 
-#include "game_object.hpp"
-#include "input/input_manager_interface.hpp"
-#include "shape.hpp"
-#include "text.hpp"
+#include <game_object.hpp>
+#include <input/input_manager_interface.hpp>
+#include <shape.hpp>
+#include <text.hpp>
 #include <memory>
 
 class GamepadVisualizer : public jt::GameObject {
@@ -25,4 +25,4 @@ private:
     std::string getPressedKey(jt::GamepadButtonCode b);
 };
 
-#endif // GUARD_JAMTEMPLATE_GAMEPAD_VISUALIZER_HPP
+#endif // JAMTEMPLATE_GAMEPAD_VISUALIZER_HPP

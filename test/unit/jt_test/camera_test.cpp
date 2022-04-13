@@ -1,6 +1,6 @@
-﻿#include "camera.hpp"
-#include "vector.hpp"
-#include "gtest/gtest.h"
+﻿#include <camera.hpp>
+#include <vector.hpp>
+#include <gtest/gtest.h>
 
 class CameraTest : public ::testing::Test {
 protected:

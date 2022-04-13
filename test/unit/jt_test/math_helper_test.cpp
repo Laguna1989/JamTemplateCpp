@@ -1,6 +1,6 @@
-﻿#include "math_helper.hpp"
-#include "vector.hpp"
-#include "gtest/gtest.h"
+﻿#include <math_helper.hpp>
+#include <vector.hpp>
+#include <gtest/gtest.h>
 
 using namespace jt::MathHelper;
 using v = jt::Vector2f;

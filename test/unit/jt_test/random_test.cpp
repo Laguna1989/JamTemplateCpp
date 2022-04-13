@@ -1,8 +1,8 @@
-﻿#include "color/color_helpers.hpp"
-#include "random/random.hpp"
-#include "random/random_sample_and_hold.hpp"
-#include "vector.hpp"
-#include "gtest/gtest.h"
+﻿#include <color/color_helpers.hpp>
+#include <random/random.hpp>
+#include <random/random_sample_and_hold.hpp>
+#include <vector.hpp>
+#include <gtest/gtest.h>
 #include <utility>
 
 using jt::Random;

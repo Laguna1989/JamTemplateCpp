@@ -1,5 +1,5 @@
-#ifndef GUARD_JAMTEMPLATE_LOG_TARGET_COUT_HPP
-#define GUARD_JAMTEMPLATE_LOG_TARGET_COUT_HPP
+#ifndef JAMTEMPLATE_LOG_TARGET_COUT_HPP
+#define JAMTEMPLATE_LOG_TARGET_COUT_HPP
 
 #include <log/log_target_interface.hpp>
 
@@ -14,4 +14,4 @@ private:
 };
 } // namespace jt
 
-#endif // GUARD_JAMTEMPLATE_LOG_TARGET_COUT_HPP
+#endif // JAMTEMPLATE_LOG_TARGET_COUT_HPP

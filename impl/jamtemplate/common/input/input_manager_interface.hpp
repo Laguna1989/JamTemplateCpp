@@ -1,5 +1,5 @@
-﻿#ifndef GUARD_JAMTEMPLATE_INPUTMANAGERINTERFACE_HPP
-#define GUARD_JAMTEMPLATE_INPUTMANAGERINTERFACE_HPP
+﻿#ifndef JAMTEMPLATE_INPUTMANAGERINTERFACE_HPP
+#define JAMTEMPLATE_INPUTMANAGERINTERFACE_HPP
 
 #include <input/control_commands/control_command_interface.hpp>
 #include <input/gamepad/gamepad_interface.hpp>

@@ -1,4 +1,4 @@
-#include "input/control_commands/control_command_null.hpp"
+#include <input/control_commands/control_command_null.hpp>
 #include <gtest/gtest.h>
 
 TEST(ControlCommandNullTest, Execute)

@@ -1,5 +1,5 @@
-﻿#ifndef GUARD_JAMTEMPLATE_GAMEINTERFACE_HPP_GUARD
-#define GUARD_JAMTEMPLATE_GAMEINTERFACE_HPP_GUARD
+﻿#ifndef JAMTEMPLATE_GAMEINTERFACE_HPP
+#define JAMTEMPLATE_GAMEINTERFACE_HPP
 
 #include <action_commands/action_command_manager_interface.hpp>
 #include <audio/audio_interface.hpp>

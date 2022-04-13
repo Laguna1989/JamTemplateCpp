@@ -25,4 +25,3 @@ add_subdirectory(${CMAKE_BINARY_DIR}/ext/googletest/googletest-src
         EXCLUDE_FROM_ALL)
 
 add_subdirectory(jt_test)
-add_subdirectory(gamelib_test)

@@ -1,6 +1,6 @@
 #include "character_sheet_imgui.hpp"
-#include "game_interface.hpp"
-#include "imgui.h"
+#include <game_interface.hpp>
+#include <imgui.h>
 
 CharacterSheetImgui::CharacterSheetImgui(std::weak_ptr<ItemRepository> repo)
     : m_repository { repo }

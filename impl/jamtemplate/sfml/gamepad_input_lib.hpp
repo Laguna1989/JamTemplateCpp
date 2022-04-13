@@ -1,5 +1,5 @@
-#ifndef GUARD_JAMTEMPLATE_GAMEPAD_INPUT_LIB_HPP
-#define GUARD_JAMTEMPLATE_GAMEPAD_INPUT_LIB_HPP
+#ifndef JAMTEMPLATE_GAMEPAD_INPUT_LIB_HPP
+#define JAMTEMPLATE_GAMEPAD_INPUT_LIB_HPP
 
 #include <input/gamepad/gamepad_defines.hpp>
 #include <input/keyboard/keyboard_defines.hpp>
@@ -13,4 +13,4 @@ bool libGPButtonValue(int gamepadId, jt::GamepadButtonCode b);
 
 } // namespace jt
 
-#endif // GUARD_JAMTEMPLATE_GAMEPAD_INPUT_LIB_HPP
+#endif // JAMTEMPLATE_GAMEPAD_INPUT_LIB_HPP

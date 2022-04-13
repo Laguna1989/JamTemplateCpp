@@ -1,5 +1,5 @@
-﻿#ifndef GUARD_JAMTEMPLATE_TEXT_HPP_INCLUDEGUARD
-#define GUARD_JAMTEMPLATE_TEXT_HPP_INCLUDEGUARD
+﻿#ifndef JAMTEMPLATE_TEXT_HPP
+#define JAMTEMPLATE_TEXT_HPP
 
 #include <drawable_impl_sfml.hpp>
 #include <render_target.hpp>

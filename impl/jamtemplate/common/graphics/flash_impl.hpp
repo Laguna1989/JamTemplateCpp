@@ -1,5 +1,5 @@
-#ifndef GUARD_JAMTEMPLATE_FLASH_INTERFACE_HPP
-#define GUARD_JAMTEMPLATE_FLASH_INTERFACE_HPP
+#ifndef JAMTEMPLATE_FLASH_INTERFACE_HPP
+#define JAMTEMPLATE_FLASH_INTERFACE_HPP
 
 #include <color/color.hpp>
 #include <render_target.hpp>
@@ -32,4 +32,4 @@ private:
 
 } // namespace jt
 
-#endif // GUARD_JAMTEMPLATE_FLASH_INTERFACE_HPP
+#endif // JAMTEMPLATE_FLASH_INTERFACE_HPP

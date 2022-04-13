@@ -1,8 +1,8 @@
-#include "mocks/mock_drawable.hpp"
-#include "pathfinder/node.hpp"
-#include "sdl_setup.hpp"
-#include "shape.hpp"
-#include "tilemap/tile_node.hpp"
+#include <mocks/mock_drawable.hpp>
+#include <pathfinder/node.hpp>
+#include <sdl_setup.hpp>
+#include <shape.hpp>
+#include <tilemap/tile_node.hpp>
 #include <gtest/gtest.h>
 
 TEST(TileNodeTest, GetCorrectDrawableNullptr)

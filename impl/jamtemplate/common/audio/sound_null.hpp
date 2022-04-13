@@ -1,5 +1,5 @@
-#ifndef GUARD_JAMTEMPLATE_SOUND_NULL_HPP
-#define GUARD_JAMTEMPLATE_SOUND_NULL_HPP
+#ifndef JAMTEMPLATE_SOUND_NULL_HPP
+#define JAMTEMPLATE_SOUND_NULL_HPP
 
 #include <audio/sound_interface.hpp>
 
@@ -33,4 +33,4 @@ public:
 };
 } // namespace jt
 
-#endif // GUARD_JAMTEMPLATE_SOUND_NULL_HPP
+#endif // JAMTEMPLATE_SOUND_NULL_HPP

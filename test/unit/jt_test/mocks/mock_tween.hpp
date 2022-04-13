@@ -1,8 +1,8 @@
-﻿#ifndef JAMTEMPLATE_UNITTEST_MOCKTWEEN_HPP_INCLUDEGUARD
-#define JAMTEMPLATE_UNITTEST_MOCKTWEEN_HPP_INCLUDEGUARD
+﻿#ifndef JAMTEMPLATE_UNITTEST_MOCKTWEEN_HPP
+#define JAMTEMPLATE_UNITTEST_MOCKTWEEN_HPP
 
-#include "graphics/drawable_interface.hpp"
-#include "tweens/tween_base.hpp"
+#include <graphics/drawable_interface.hpp>
+#include <tweens/tween_base.hpp>
 #include <gmock/gmock.h>
 
 class MockTween : public jt::Tween {

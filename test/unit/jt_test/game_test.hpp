@@ -1,16 +1,16 @@
 #ifndef JAMTEMPLATE_UNITTESTS_GAME_TEST_HPP
 #define JAMTEMPLATE_UNITTESTS_GAME_TEST_HPP
 
-#include "action_commands/action_command_manager.hpp"
-#include "audio/audio_null.hpp"
-#include "game.hpp"
-#include "mocks/mock_camera.hpp"
-#include "mocks/mock_gfx.hpp"
-#include "mocks/mock_input.hpp"
-#include "mocks/mock_logger.hpp"
-#include "mocks/mock_state.hpp"
-#include "mocks/mock_state_manager.hpp"
-#include "mocks/mock_window.hpp"
+#include <action_commands/action_command_manager.hpp>
+#include <audio/audio_null.hpp>
+#include <game.hpp>
+#include <mocks/mock_camera.hpp>
+#include <mocks/mock_gfx.hpp>
+#include <mocks/mock_input.hpp>
+#include <mocks/mock_logger.hpp>
+#include <mocks/mock_state.hpp>
+#include <mocks/mock_state_manager.hpp>
+#include <mocks/mock_window.hpp>
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 

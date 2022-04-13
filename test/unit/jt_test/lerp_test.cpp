@@ -1,6 +1,6 @@
-﻿#include "lerp.hpp"
-#include "gtest/gtest.h"
+﻿#include <lerp.hpp>
 #include <functional>
+#include <gtest/gtest.h>
 #include <tuple>
 
 using namespace jt::Lerp;

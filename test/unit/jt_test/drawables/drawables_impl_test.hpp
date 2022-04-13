@@ -1,16 +1,15 @@
+#ifndef JAMTEMPLATE_DRAWABLES_IMPL_TEST_HPP
+#define JAMTEMPLATE_DRAWABLES_IMPL_TEST_HPP
 
-#ifndef GUARD_JAMTEMPLATE_DRAWABLES_IMPL_TEST_HPP
-#define GUARD_JAMTEMPLATE_DRAWABLES_IMPL_TEST_HPP
-
-#include "animation.hpp"
-#include "bar.hpp"
-#include "line.hpp"
-#include "shape.hpp"
-#include "sprite.hpp"
-#include "text.hpp"
-#include "tilemap/tile_layer.hpp"
-#include "tilemap/tilemap_manager_tileson_impl.hpp"
-#include "tilemap/tileson_loader.hpp"
+#include <animation.hpp>
+#include <bar.hpp>
+#include <line.hpp>
+#include <shape.hpp>
+#include <sprite.hpp>
+#include <text.hpp>
+#include <tilemap/tile_layer.hpp>
+#include <tilemap/tilemap_manager_tileson_impl.hpp>
+#include <tilemap/tileson_loader.hpp>
 
 class DrawableFactoryInterface {
 public:
@@ -110,4 +109,4 @@ public:
     }
 };
 
-#endif // GUARD_JAMTEMPLATE_DRAWABLES_IMPL_TEST_HPP
+#endif // JAMTEMPLATE_DRAWABLES_IMPL_TEST_HPP

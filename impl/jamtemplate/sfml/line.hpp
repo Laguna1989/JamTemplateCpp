@@ -1,9 +1,9 @@
-#ifndef GUARD_JAMTEMPLATE_LINE_HPP_INCLUDEGUARD
-#define GUARD_JAMTEMPLATE_LINE_HPP_INCLUDEGUARD
+#ifndef JAMTEMPLATE_LINE_HPP
+#define JAMTEMPLATE_LINE_HPP
 
+#include <drawable_impl_sfml.hpp>
 #include <render_target.hpp>
 #include <vector.hpp>
-#include <drawable_impl_sfml.hpp>
 
 namespace jt {
 /// Line class
@@ -46,4 +46,4 @@ private:
 
 } // namespace jt
 
-#endif // GUARD_JAMTEMPLATE_LINE_HPP_INCLUDEGUARD
+#endif // JAMTEMPLATE_LINE_HPP

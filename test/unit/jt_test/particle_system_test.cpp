@@ -1,8 +1,8 @@
-#include "mocks/mock_game.hpp"
-#include "particle_system.hpp"
-#include "sdl_setup.hpp"
-#include "shape.hpp"
-#include "texture_manager_impl.hpp"
+#include <mocks/mock_game.hpp>
+#include <particle_system.hpp>
+#include <sdl_setup.hpp>
+#include <shape.hpp>
+#include <texture_manager_impl.hpp>
 #include <gtest/gtest.h>
 
 TEST(ParticleSystemTest, InitIsCalledForEveryParticle)

@@ -1,6 +1,6 @@
-#include "mocks/mock_game.hpp"
-#include "mocks/mock_state.hpp"
-#include "state_manager/state_manager.hpp"
+#include <mocks/mock_game.hpp>
+#include <mocks/mock_state.hpp>
+#include <state_manager/state_manager.hpp>
 #include <gtest/gtest.h>
 
 TEST(StateManagerTest, InitialCurrentStateIsNullptr)

@@ -1,4 +1,4 @@
-#include "input/gamepad/gamepad_input_null.hpp"
+#include <input/gamepad/gamepad_input_null.hpp>
 #include <gtest/gtest.h>
 
 TEST(GamepadInputNullTest, UpdateDoesNotThrow)

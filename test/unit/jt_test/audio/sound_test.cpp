@@ -1,6 +1,6 @@
-﻿#include "audio/sound.hpp"
-#include "oalpp/sound_context.hpp"
-#include "gtest/gtest.h"
+﻿#include <audio/sound.hpp>
+#include <oalpp/sound_context.hpp>
+#include <gtest/gtest.h>
 #include <limits>
 #include <memory>
 #include <thread>

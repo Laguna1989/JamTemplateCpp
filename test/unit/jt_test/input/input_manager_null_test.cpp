@@ -1,5 +1,5 @@
-﻿#include "input/input_manager_null.hpp"
-#include "gtest/gtest.h"
+﻿#include <input/input_manager_null.hpp>
+#include <gtest/gtest.h>
 
 TEST(InputManagerNullTest, ReturnsNullptrIfInstantiatedWithNullptr)
 {

@@ -1,5 +1,5 @@
-#ifndef GUARD_JAMTEMAPLTE_STATE_MANAGER_INTERFACE_HPP
-#define GUARD_JAMTEMAPLTE_STATE_MANAGER_INTERFACE_HPP
+#ifndef JAMTEMPLATE_STATE_MANAGER_INTERFACE_HPP
+#define JAMTEMPLATE_STATE_MANAGER_INTERFACE_HPP
 
 #include <game_state.hpp>
 #include <state_manager/state_manager_transition_interface.hpp>
@@ -37,4 +37,4 @@ public:
 
 } // namespace jt
 
-#endif // GUARD_JAMTEMAPLTE_STATE_MANAGER_INTERFACE_HPP
+#endif // JAMTEMPLATE_STATE_MANAGER_INTERFACE_HPP

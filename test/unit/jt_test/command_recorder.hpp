@@ -1,7 +1,7 @@
-#ifndef GUARD_JAMTEMPLATE_COMMAND_RECORDER_HPP
-#define GUARD_JAMTEMPLATE_COMMAND_RECORDER_HPP
+#ifndef JAMTEMPLATE_COMMAND_RECORDER_HPP
+#define JAMTEMPLATE_COMMAND_RECORDER_HPP
 
-#include "input/control_commands/control_command_interface.hpp"
+#include <input/control_commands/control_command_interface.hpp>
 
 class CommandRecorder : public jt::ControlCommandInterface {
 public:
@@ -11,4 +11,4 @@ public:
     void reset() override;
 };
 
-#endif // GUARD_JAMTEMPLATE_COMMAND_RECORDER_HPP
+#endif // JAMTEMPLATE_COMMAND_RECORDER_HPP

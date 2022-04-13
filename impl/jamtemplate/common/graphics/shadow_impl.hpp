@@ -1,5 +1,5 @@
-#ifndef GUARD_JAMTEMPLATE_SHADOW_IMPL_HPP
-#define GUARD_JAMTEMPLATE_SHADOW_IMPL_HPP
+#ifndef JAMTEMPLATE_SHADOW_IMPL_HPP
+#define JAMTEMPLATE_SHADOW_IMPL_HPP
 
 #include <color/color.hpp>
 #include <render_target.hpp>
@@ -29,4 +29,4 @@ private:
 
 } // namespace jt
 
-#endif // GUARD_JAMTEMPLATE_SHADOW_IMPL_HPP
+#endif // JAMTEMPLATE_SHADOW_IMPL_HPP

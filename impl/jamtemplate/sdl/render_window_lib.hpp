@@ -1,5 +1,5 @@
-﻿#ifndef GUARD_JAMTEMPLATE_RENDERWINDOW_LIB_GUARD_HPP
-#define GUARD_JAMTEMPLATE_RENDERWINDOW_LIB_GUARD_HPP
+﻿#ifndef JAMTEMPLATE_RENDERWINDOW_LIB_HPP
+#define JAMTEMPLATE_RENDERWINDOW_LIB_HPP
 
 #include <graphics/render_window_interface.hpp>
 #include <sprite.hpp>
@@ -41,4 +41,4 @@ private:
 };
 } // namespace jt
 
-#endif
+#endif // JAMTEMPLATE_RENDERWINDOW_LIB_HPP
