@@ -1,6 +1,6 @@
 #include "gamepad_visualizer.hpp"
-#include "drawable_helpers.hpp"
-#include "game_interface.hpp"
+#include <drawable_helpers.hpp>
+#include <game_interface.hpp>
 #include <map>
 
 GamepadVisualizer::GamepadVisualizer(std::size_t id)

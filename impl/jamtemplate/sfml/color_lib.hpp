@@ -1,5 +1,5 @@
-﻿#ifndef GUARD_JAMTEMPLATE_COLOR_LIB_GUARD_HPP
-#define GUARD_JAMTEMPLATE_COLOR_LIB_GUARD_HPP
+﻿#ifndef JAMTEMPLATE_COLOR_LIB_HPP
+#define JAMTEMPLATE_COLOR_LIB_HPP
 
 #include <color/color.hpp>
 #include <SFML/Graphics/Color.hpp>

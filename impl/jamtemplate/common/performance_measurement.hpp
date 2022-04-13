@@ -1,5 +1,5 @@
-#ifndef GUARD_JAMTEMPLATE_PERFORMANCE_MEASUREMENT_HPP
-#define GUARD_JAMTEMPLATE_PERFORMANCE_MEASUREMENT_HPP
+#ifndef JAMTEMPLATE_PERFORMANCE_MEASUREMENT_HPP
+#define JAMTEMPLATE_PERFORMANCE_MEASUREMENT_HPP
 
 #include <chrono>
 #include <functional>
@@ -9,4 +9,4 @@ float getDurationInSecondsSince(std::chrono::time_point<std::chrono::system_cloc
 float measureTime(std::function<void(void)> const& f);
 
 } // namespace jt
-#endif // GUARD_JAMTEMPLATE_PERFORMANCE_MEASUREMENT_HPP
+#endif // JAMTEMPLATE_PERFORMANCE_MEASUREMENT_HPP

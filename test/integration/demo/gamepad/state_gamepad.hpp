@@ -1,7 +1,7 @@
-#ifndef GUARD_JAMTEMPLATE_STATE_GAMEPAD_HPP
-#define GUARD_JAMTEMPLATE_STATE_GAMEPAD_HPP
+#ifndef JAMTEMPLATE_STATE_GAMEPAD_HPP
+#define JAMTEMPLATE_STATE_GAMEPAD_HPP
 
-#include "game_state.hpp"
+#include <game_state.hpp>
 
 class StateGamepad : public jt::GameState {
 private:
@@ -10,4 +10,4 @@ private:
     void doInternalDraw() const override;
 };
 
-#endif // GUARD_JAMTEMPLATE_STATE_GAMEPAD_HPP
+#endif // JAMTEMPLATE_STATE_GAMEPAD_HPP

@@ -1,5 +1,5 @@
-﻿#ifndef GUARD_JAMTEMPLATE_VECTOR_LIB_GUARD_HPP
-#define GUARD_JAMTEMPLATE_VECTOR_LIB_GUARD_HPP
+﻿#ifndef JAMTEMPLATE_VECTOR_LIB_HPP
+#define JAMTEMPLATE_VECTOR_LIB_HPP
 
 #include <vector.hpp>
 #include <SFML/System/Vector2.hpp>

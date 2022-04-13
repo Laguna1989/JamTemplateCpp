@@ -1,5 +1,5 @@
-﻿#ifndef OBSERVER_INTERFACE_GUARD
-#define OBSERVER_INTERFACE_GUARD
+﻿#ifndef OBSERVER_INTERFACE_HPP
+#define OBSERVER_INTERFACE_HPP
 
 template <typename T>
 class ObserverInterface {
@@ -8,4 +8,4 @@ public:
     virtual void notify(T value) = 0;
 };
 
-#endif // !OBSERVER_INTERFACE_GUARD
+#endif // !OBSERVER_INTERFACE_HPP

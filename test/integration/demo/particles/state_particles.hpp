@@ -1,12 +1,12 @@
 
-#ifndef GUARD_JAMTEMAPLTE_STATE_PARTICLES_H
-#define GUARD_JAMTEMAPLTE_STATE_PARTICLES_H
+#ifndef JAMTEMPLATE_STATE_PARTICLES_H
+#define JAMTEMPLATE_STATE_PARTICLES_H
 
-#include "animation.hpp"
-#include "circular_buffer.hpp"
-#include "game_state.hpp"
-#include "particle_system.hpp"
-#include "shape.hpp"
+#include <animation.hpp>
+#include <circular_buffer.hpp>
+#include <game_state.hpp>
+#include <particle_system.hpp>
+#include <shape.hpp>
 #include <memory>
 
 constexpr std::size_t numberOfParticles = 1000;
@@ -29,4 +29,4 @@ private:
     void createParticlesFire();
 };
 
-#endif // GUARD_JAMTEMAPLTE_STATE_PARTICLES_H
+#endif // JAMTEMPLATE_STATE_PARTICLES_H

@@ -1,8 +1,8 @@
-﻿#ifndef JAMTEMPLATE_UNITTEST_MOCKWINDOW_HPP_INCLUDEGUARD
-#define JAMTEMPLATE_UNITTEST_MOCKWINDOW_HPP_INCLUDEGUARD
+﻿#ifndef JAMTEMPLATE_UNITTEST_MOCKWINDOW_HPP
+#define JAMTEMPLATE_UNITTEST_MOCKWINDOW_HPP
 
-#include "graphics/render_window_interface.hpp"
-#include "sprite.hpp"
+#include <graphics/render_window_interface.hpp>
+#include <sprite.hpp>
 #include <gmock/gmock.h>
 
 class MockWindow : public ::jt::RenderWindowInterface {

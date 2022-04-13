@@ -1,5 +1,5 @@
-#ifndef GUARD_JAMTEMPLATE_LOGGER_NULL_HPP
-#define GUARD_JAMTEMPLATE_LOGGER_NULL_HPP
+#ifndef JAMTEMPLATE_LOGGER_NULL_HPP
+#define JAMTEMPLATE_LOGGER_NULL_HPP
 
 #include <log/logger_interface.hpp>
 
@@ -26,4 +26,4 @@ private:
 } // namespace null_objects
 } // namespace jt
 
-#endif // GUARD_JAMTEMPLATE_LOGGER_NULL_HPP
+#endif // JAMTEMPLATE_LOGGER_NULL_HPP

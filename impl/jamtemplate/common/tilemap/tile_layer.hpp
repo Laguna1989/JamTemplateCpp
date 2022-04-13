@@ -1,5 +1,5 @@
-﻿#ifndef GUARD_JAMTEMPLATE_TILEMAP_HPP_GUARD
-#define GUARD_JAMTEMPLATE_TILEMAP_HPP_GUARD
+﻿#ifndef JAMTEMPLATE_TILEMAP_HPP
+#define JAMTEMPLATE_TILEMAP_HPP
 
 #include <graphics/drawable_impl.hpp>
 #include <pathfinder/node_interface.hpp>
@@ -72,4 +72,4 @@ private:
 } // namespace tilemap
 } // namespace jt
 
-#endif // !GUARD_JAMTEMPLATE_TILEMAP_HPP_GUARD
+#endif // !JAMTEMPLATE_TILEMAP_HPP

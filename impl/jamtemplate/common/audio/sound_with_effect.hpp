@@ -1,5 +1,5 @@
-#ifndef GUARD_JAMTEMPLATE_SOUND_WITH_EFFECT_HPP
-#define GUARD_JAMTEMPLATE_SOUND_WITH_EFFECT_HPP
+#ifndef JAMTEMPLATE_SOUND_WITH_EFFECT_HPP
+#define JAMTEMPLATE_SOUND_WITH_EFFECT_HPP
 
 #include <audio/sound_interface.hpp>
 #include <oalpp/sound.hpp>
@@ -47,4 +47,4 @@ private:
 
 } // namespace jt
 
-#endif // GUARD_JAMTEMPLATE_SOUND_WITH_EFFECT_HPP
+#endif // JAMTEMPLATE_SOUND_WITH_EFFECT_HPP

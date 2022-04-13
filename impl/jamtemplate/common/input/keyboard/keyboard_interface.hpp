@@ -1,5 +1,5 @@
-#ifndef GUARD_JAMTEMPLATE_KEYBOARD_INTERFACE_HPP
-#define GUARD_JAMTEMPLATE_KEYBOARD_INTERFACE_HPP
+#ifndef JAMTEMPLATE_KEYBOARD_INTERFACE_HPP
+#define JAMTEMPLATE_KEYBOARD_INTERFACE_HPP
 
 #include <input/control_commands/control_command_interface.hpp>
 #include <input/keyboard/keyboard_defines.hpp>
@@ -53,4 +53,4 @@ public:
 
 } // namespace jt
 
-#endif // GUARD_JAMTEMPLATE_KEYBOARD_INTERFACE_HPP
+#endif // JAMTEMPLATE_KEYBOARD_INTERFACE_HPP

@@ -1,8 +1,8 @@
-#ifndef GUARD_JAMTEMPLATE_STATE_GRADIENT_HPP
-#define GUARD_JAMTEMPLATE_STATE_GRADIENT_HPP
+#ifndef JAMTEMPLATE_STATE_GRADIENT_HPP
+#define JAMTEMPLATE_STATE_GRADIENT_HPP
 
-#include "game_state.hpp"
-#include "shape.hpp"
+#include <game_state.hpp>
+#include <shape.hpp>
 
 class StateGradient : public jt::GameState {
 public:
@@ -20,4 +20,4 @@ private:
     void createShapesFromSaturationGradient();
 };
 
-#endif // GUARD_JAMTEMPLATE_STATE_GRADIENT_HPP
+#endif // JAMTEMPLATE_STATE_GRADIENT_HPP

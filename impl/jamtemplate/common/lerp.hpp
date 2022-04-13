@@ -1,5 +1,5 @@
-﻿#ifndef GUARD_JAMTEMPLATE_LERP_HPP_INCLUDEGUARD
-#define GUARD_JAMTEMPLATE_LERP_HPP_INCLUDEGUARD
+﻿#ifndef JAMTEMPLATE_LERP_HPP
+#define JAMTEMPLATE_LERP_HPP
 
 #include <linterp.hpp>
 #include <cmath>

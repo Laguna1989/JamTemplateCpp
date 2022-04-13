@@ -1,5 +1,5 @@
-#ifndef GUARD_JAMTEMPLATE_LINE_HPP_INCLUDEGUARD
-#define GUARD_JAMTEMPLATE_LINE_HPP_INCLUDEGUARD
+#ifndef JAMTEMPLATE_LINE_HPP
+#define JAMTEMPLATE_LINE_HPP
 
 #include <drawable_impl_sdl.hpp>
 #include <render_target.hpp>

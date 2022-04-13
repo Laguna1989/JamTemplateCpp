@@ -1,4 +1,4 @@
-#include "audio/audio_null.hpp"
+#include <audio/audio_null.hpp>
 #include <gtest/gtest.h>
 
 TEST(AudioNullTest, GetPermanentSoundReturnsNoNullptr)

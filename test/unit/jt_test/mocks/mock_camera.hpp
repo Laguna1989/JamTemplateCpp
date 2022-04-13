@@ -1,8 +1,7 @@
+#ifndef JAMTEMPLATE_MOCK_CAMERA_HPP
+#define JAMTEMPLATE_MOCK_CAMERA_HPP
 
-#ifndef GUARD_JAMTEMAPLTE_MOCK_CAMERA_HPP
-#define GUARD_JAMTEMAPLTE_MOCK_CAMERA_HPP
-
-#include "cam_interface.hpp"
+#include <cam_interface.hpp>
 #include <gmock/gmock.h>
 
 class MockCamera : public jt::CamInterface {
@@ -18,4 +17,4 @@ public:
     MOCK_METHOD(void, reset, (), (override));
 };
 
-#endif // GUARD_JAMTEMAPLTE_MOCK_CAMERA_HPP
+#endif // JAMTEMPLATE_MOCK_CAMERA_HPP

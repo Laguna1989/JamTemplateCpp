@@ -1,5 +1,5 @@
-#ifndef GUARD_JAMTEMPLATE_PATHFINDINDER_HPP
-#define GUARD_JAMTEMPLATE_PATHFINDINDER_HPP
+#ifndef JAMTEMPLATE_PATHFINDINDER_HPP
+#define JAMTEMPLATE_PATHFINDINDER_HPP
 
 #include <pathfinder/node_interface.hpp>
 #include <memory>
@@ -15,4 +15,4 @@ std::vector<NodeT> calculatePath(NodeT const& start, NodeT const& end);
 } // namespace pathfinder
 } // namespace jt
 
-#endif // GUARD_JAMTEMPLATE_PATHFINDINDER_HPP
+#endif // JAMTEMPLATE_PATHFINDINDER_HPP

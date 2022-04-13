@@ -1,5 +1,5 @@
 #include "character.hpp"
-#include "game_interface.hpp"
+#include <game_interface.hpp>
 
 PlayerCharacter::PlayerCharacter(std::shared_ptr<jt::Box2DWorldInterface> world,
     b2BodyDef const* def, std::weak_ptr<ItemRepository> repo)

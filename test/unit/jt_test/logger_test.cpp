@@ -1,6 +1,6 @@
-#include "log/logger.hpp"
-#include "log/logger_null.hpp"
-#include "mocks/mock_log_target.hpp"
+#include <log/logger.hpp>
+#include <log/logger_null.hpp>
+#include <mocks/mock_log_target.hpp>
 #include <gtest/gtest.h>
 
 template <typename T>

@@ -1,6 +1,6 @@
-#include "action_commands/basic_action_commands.hpp"
-#include "game_test.hpp"
-#include "mocks/mock_game.hpp"
+#include <action_commands/basic_action_commands.hpp>
+#include <game_test.hpp>
+#include <mocks/mock_game.hpp>
 #include <gtest/gtest.h>
 
 using BasicActionCommandsWithGame = GameTest;

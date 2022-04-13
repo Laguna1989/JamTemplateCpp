@@ -1,5 +1,5 @@
-﻿#ifndef GAME_STATE_MENU_HPP_INCLUDEGUARD
-#define GAME_STATE_MENU_HPP_INCLUDEGUARD
+﻿#ifndef GAME_STATE_MENU_HPP
+#define GAME_STATE_MENU_HPP
 
 #include <game_state.hpp>
 

@@ -1,5 +1,5 @@
-﻿#ifndef GAME_MAIN_HPP_GUARD_12345
-#define GAME_MAIN_HPP_GUARD_12345
+﻿#ifndef GAME_MAIN_HPP
+#define GAME_MAIN_HPP
 
 // win32 is also defined in 64bit builds
 #if defined WIN32 && defined NDEBUG // release mode

@@ -1,7 +1,7 @@
-#include "camera.hpp"
-#include "gfx_impl.hpp"
-#include "graphics/render_window.hpp"
-#include "mocks/mock_camera.hpp"
+#include <camera.hpp>
+#include <gfx_impl.hpp>
+#include <graphics/render_window.hpp>
+#include <mocks/mock_camera.hpp>
 #include <gtest/gtest.h>
 
 TEST(GfxImplTest, Reset)

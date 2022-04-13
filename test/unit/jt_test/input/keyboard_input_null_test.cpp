@@ -1,4 +1,4 @@
-#include "input/keyboard/keyboard_input_null.hpp"
+#include <input/keyboard/keyboard_input_null.hpp>
 #include <gtest/gtest.h>
 
 TEST(KeyboardInputNullTest, UpdateKeysDoesNotThrow)

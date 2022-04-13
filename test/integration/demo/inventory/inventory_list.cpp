@@ -1,4 +1,5 @@
 #include "inventory_list.hpp"
+
 InventoryList::InventoryList(std::weak_ptr<ItemRepository> repo)
 {
     m_repository = repo;

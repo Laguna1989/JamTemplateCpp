@@ -1,5 +1,5 @@
-#ifndef GUARD_JAMTEMPLATE_LOG_HPP
-#define GUARD_JAMTEMPLATE_LOG_HPP
+#ifndef JAMTEMPLATE_LOG_HPP
+#define JAMTEMPLATE_LOG_HPP
 
 #include <log/log_entry.hpp>
 #include <log/logger_interface.hpp>
@@ -25,6 +25,8 @@ public:
 private:
     std::vector<std::shared_ptr<jt::LogTargetInterface>> m_logTargets;
 
+    // TODO does the logger need to know about the history? Could be solved via decorator or
+    // separate log_target
     std::vector<LogEntry> m_history;
 
     void addLogEntry(LogEntry entry);
@@ -32,4 +34,4 @@ private:
 };
 } // namespace jt
 
-#endif // GUARD_JAMTEMPLATE_LOG_HPP
+#endif // JAMTEMPLATE_LOG_HPP

@@ -1,5 +1,5 @@
-#include "color/color.hpp"
-#include "gtest/gtest.h"
+#include <color/color.hpp>
+#include <gtest/gtest.h>
 #include <type_traits>
 
 TEST(ColorTest, IsDefaultConstructible)

@@ -1,9 +1,9 @@
-#ifndef GUARD_JAMTEMPLATE_INVENTORY_LIST_IMGUI_HPP
-#define GUARD_JAMTEMPLATE_INVENTORY_LIST_IMGUI_HPP
+#ifndef JAMTEMPLATE_INVENTORY_LIST_IMGUI_HPP
+#define JAMTEMPLATE_INVENTORY_LIST_IMGUI_HPP
 
-#include "game_object.hpp"
-#include "inventory_list.hpp"
-#include "item_repository.hpp"
+#include <game_object.hpp>
+#include <inventory/inventory_list.hpp>
+#include <inventory/item_repository.hpp>
 #include <memory>
 #include <vector>
 
@@ -25,4 +25,4 @@ private:
     std::vector<std::string> getItemReferenceIdsForEquipmentSlot(std::string const& slot) const;
 };
 
-#endif // GUARD_JAMTEMPLATE_INVENTORY_LIST_IMGUI_HPP
+#endif // JAMTEMPLATE_INVENTORY_LIST_IMGUI_HPP

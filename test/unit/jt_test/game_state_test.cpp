@@ -1,11 +1,10 @@
-﻿#include "game_object.hpp"
-#include "game_state.hpp"
-#include "mocks/mock_game.hpp"
-#include "mocks/mock_object.hpp"
-#include "mocks/mock_tween.hpp"
-#include "gmock/gmock.h"
-#include "gtest/gtest.h"
+﻿#include <game_object.hpp>
+#include <game_state.hpp>
+#include <mocks/mock_game.hpp>
+#include <mocks/mock_object.hpp>
+#include <mocks/mock_tween.hpp>
 #include <gmock/gmock.h>
+#include <gtest/gtest.h>
 
 using jt::GameObject;
 using jt::GameState;

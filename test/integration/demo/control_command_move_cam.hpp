@@ -1,9 +1,9 @@
-#ifndef GUARD_JAMTEMPLATE_CONTROL_COMMAND_MOVECAM_HPP
-#define GUARD_JAMTEMPLATE_CONTROL_COMMAND_MOVECAM_HPP
+#ifndef JAMTEMPLATE_CONTROL_COMMAND_MOVECAM_HPP
+#define JAMTEMPLATE_CONTROL_COMMAND_MOVECAM_HPP
 
-#include "input/control_commands/control_command_once.hpp"
-#include "vector.hpp"
 #include <cam_interface.hpp>
+#include <input/control_commands/control_command_once.hpp>
+#include <vector.hpp>
 #include <memory>
 
 class ControlCommandMoveCam : public jt::ControlCommandOnce {
@@ -16,4 +16,4 @@ private:
     jt::CamInterface& m_camera;
 };
 
-#endif // GUARD_JAMTEMAPLTE_CONTROL_COMMAND_MOVECAM_HPP
+#endif // JAMTEMPLATE_CONTROL_COMMAND_MOVECAM_HPP

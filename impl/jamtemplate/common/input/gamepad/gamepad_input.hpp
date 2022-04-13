@@ -1,5 +1,5 @@
-#ifndef GUARD_JAMTEMPLATE_GAMEPAD_INPUT_HPP
-#define GUARD_JAMTEMPLATE_GAMEPAD_INPUT_HPP
+#ifndef JAMTEMPLATE_GAMEPAD_INPUT_HPP
+#define JAMTEMPLATE_GAMEPAD_INPUT_HPP
 
 #include <gamepad_input_lib.hpp>
 #include <input/gamepad/gamepad_interface.hpp>
@@ -40,4 +40,4 @@ private:
 
 } // namespace jt
 
-#endif // GUARD_JAMTEMPLATE_GAMEPAD_INPUT_HPP
+#endif // JAMTEMPLATE_GAMEPAD_INPUT_HPP

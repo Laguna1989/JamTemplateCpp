@@ -1,12 +1,12 @@
-#ifndef GUARD_JAMTEMPLATE_STATE_SHADERS_HPP
-#define GUARD_JAMTEMPLATE_STATE_SHADERS_HPP
+#ifndef JAMTEMPLATE_STATE_SHADERS_HPP
+#define JAMTEMPLATE_STATE_SHADERS_HPP
 
-#include "animation.hpp"
-#include "game_state.hpp"
-#include "line.hpp"
-#include "shape.hpp"
-#include "sprite.hpp"
-#include "text.hpp"
+#include <animation.hpp>
+#include <game_state.hpp>
+#include <line.hpp>
+#include <shape.hpp>
+#include <sprite.hpp>
+#include <text.hpp>
 
 class StateShaders : public jt::GameState {
 private:
@@ -26,4 +26,4 @@ private:
     void doInternalDraw() const override;
 };
 
-#endif // GUARD_JAMTEMPLATE_STATE_SHADERS_HPP
+#endif // JAMTEMPLATE_STATE_SHADERS_HPP

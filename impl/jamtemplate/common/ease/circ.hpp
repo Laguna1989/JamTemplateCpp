@@ -1,5 +1,5 @@
-#ifndef GUARD_JAMTEMPLATE_EASE_CIRC
-#define GUARD_JAMTEMPLATE_EASE_CIRC
+#ifndef JAMTEMPLATE_EASE_CIRC
+#define JAMTEMPLATE_EASE_CIRC
 
 namespace jt {
 namespace ease {

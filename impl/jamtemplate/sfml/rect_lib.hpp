@@ -1,5 +1,5 @@
-﻿#ifndef GUARD_JAMTEMPLATE_RECT_LIB_GUARD_HPP
-#define GUARD_JAMTEMPLATE_RECT_LIB_GUARD_HPP
+﻿#ifndef JAMTEMPLATE_RECT_LIB_HPP
+#define JAMTEMPLATE_RECT_LIB_HPP
 
 #include <rect.hpp>
 #include <SFML/Graphics/Rect.hpp>

@@ -1,11 +1,11 @@
-#ifndef GUARD_JAMTEMPLATE_STATE_PATHFINDING_HPP
-#define GUARD_JAMTEMPLATE_STATE_PATHFINDING_HPP
+#ifndef JAMTEMPLATE_STATE_PATHFINDING_HPP
+#define JAMTEMPLATE_STATE_PATHFINDING_HPP
 
-#include "game_state.hpp"
-#include "pathfinder/node_interface.hpp"
-#include "pathfinder/pathfinder.hpp"
-#include "shape.hpp"
-#include "tilemap/tile_node.hpp"
+#include <game_state.hpp>
+#include <pathfinder/node_interface.hpp>
+#include <pathfinder/pathfinder.hpp>
+#include <shape.hpp>
+#include <tilemap/tile_node.hpp>
 
 class StatePathfinding : public jt::GameState {
 public:
@@ -29,4 +29,4 @@ private:
     void calculatePath(jt::pathfinder::NodeT start, jt::pathfinder::NodeT end);
 };
 
-#endif // GUARD_JAMTEMPLATE_STATE_PATHFINDING_HPP
+#endif // JAMTEMPLATE_STATE_PATHFINDING_HPP

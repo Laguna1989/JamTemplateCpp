@@ -1,6 +1,6 @@
 #include "ease_object.hpp"
-#include "drawable_helpers.hpp"
-#include "game_interface.hpp"
+#include <drawable_helpers.hpp>
+#include <game_interface.hpp>
 
 EaseObject::EaseObject(std::string const& name,
     std::function<float(float, float, float, float)> func, jt::Vector2f offset)

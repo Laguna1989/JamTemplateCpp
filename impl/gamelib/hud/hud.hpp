@@ -1,5 +1,5 @@
-﻿#ifndef GAME_HUD_HPP_INCLUDEGUARD
-#define GAME_HUD_HPP_INCLUDEGUARD
+﻿#ifndef GAME_HUD_HPP
+#define GAME_HUD_HPP
 
 #include <game_object.hpp>
 #include <hud/observer_interface.hpp>

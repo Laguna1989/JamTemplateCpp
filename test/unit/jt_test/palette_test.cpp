@@ -1,4 +1,4 @@
-#include "palette.hpp"
+#include <palette.hpp>
 #include <gtest/gtest.h>
 
 TEST(PaletteTest, InitialSizeIsZero)

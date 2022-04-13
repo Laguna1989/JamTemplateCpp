@@ -1,7 +1,7 @@
-#ifndef GUARD_JAMTEMPLATE_STATE_TRANSITIONS_HPP
-#define GUARD_JAMTEMPLATE_STATE_TRANSITIONS_HPP
+#ifndef JAMTEMPLATE_STATE_TRANSITIONS_HPP
+#define JAMTEMPLATE_STATE_TRANSITIONS_HPP
 
-#include "game_state.hpp"
+#include <game_state.hpp>
 
 class StateTransitions : public jt::GameState {
     void doInternalCreate() override;
@@ -9,4 +9,4 @@ class StateTransitions : public jt::GameState {
     void doInternalDraw() const override;
 };
 
-#endif // GUARD_JAMTEMPLATE_STATE_TRANSITIONS_HPP
+#endif // JAMTEMPLATE_STATE_TRANSITIONS_HPP

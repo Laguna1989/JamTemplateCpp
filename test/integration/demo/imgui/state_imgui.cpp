@@ -1,7 +1,7 @@
 #include "state_imgui.hpp"
-#include "game_interface.hpp"
-#include "imgui.h"
-#include "state_select.hpp"
+#include <game_interface.hpp>
+#include <state_select.hpp>
+#include <imgui.h>
 
 void StateImGui::doInternalCreate() { }
 

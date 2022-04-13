@@ -1,5 +1,5 @@
-#ifndef GUARD_JAMTEMPLATE_INFO_SCREEN_HPP
-#define GUARD_JAMTEMPLATE_INFO_SCREEN_HPP
+#ifndef JAMTEMPLATE_INFO_SCREEN_HPP
+#define JAMTEMPLATE_INFO_SCREEN_HPP
 
 #include <circular_buffer.hpp>
 #include <game_object.hpp>
@@ -21,4 +21,4 @@ private:
 };
 } // namespace jt
 
-#endif // GUARD_JAMTEMPLATE_INFO_SCREEN_HPP
+#endif // JAMTEMPLATE_INFO_SCREEN_HPP

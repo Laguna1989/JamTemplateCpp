@@ -70,6 +70,7 @@ void jt::Logger::addLogEntry(jt::LogEntry entry)
     }
     m_history.push_back(entry);
 }
+
 std::vector<jt::LogEntry> const& jt::Logger::getHistory() { return m_history; }
 void jt::Logger::setLogLevel(LogLevel level) { m_logLevel = level; }
 void jt::Logger::clear() { m_history.clear(); }

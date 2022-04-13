@@ -1,9 +1,11 @@
-#ifndef GUARD_JAMTEMPLATE_STATE_SIMPLEX_NOISE_HPP
-#define GUARD_JAMTEMPLATE_STATE_SIMPLEX_NOISE_HPP
+#ifndef JAMTEMPLATE_STATE_SIMPLEX_NOISE_HPP
+#define JAMTEMPLATE_STATE_SIMPLEX_NOISE_HPP
 
-#include "game_state.hpp"
-#include "random/open_simplex_noise3d.hpp"
+#include <game_state.hpp>
+#include <random/open_simplex_noise3d.hpp>
 
+// TODO Rewrite in a way that all images are created upfront and then only drawn -> speed up
+// performance
 class State3DNoise : public jt::GameState {
     void doInternalCreate() override;
     void doInternalUpdate(float elapsed) override;
@@ -14,4 +16,4 @@ class State3DNoise : public jt::GameState {
     jt::OpenSimplexNoise3D noiseL3 { 345 };
 };
 
-#endif // GUARD_JAMTEMPLATE_STATE_SIMPLEX_NOISE_HPP
+#endif // JAMTEMPLATE_STATE_SIMPLEX_NOISE_HPP

@@ -1,5 +1,5 @@
-#include "command_recorder.hpp"
-#include "input/control_commands/control_command_composite.hpp"
+#include <command_recorder.hpp>
+#include <input/control_commands/control_command_composite.hpp>
 #include <gtest/gtest.h>
 
 class ControlCommandCompositeTest : public ::testing::Test {

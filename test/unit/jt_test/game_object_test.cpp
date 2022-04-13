@@ -1,6 +1,6 @@
-﻿#include "game_object.hpp"
-#include "mocks/mock_game.hpp"
-#include "gtest/gtest.h"
+﻿#include <game_object.hpp>
+#include <mocks/mock_game.hpp>
+#include <gtest/gtest.h>
 
 using jt::GameInterface;
 using jt::GameObject;

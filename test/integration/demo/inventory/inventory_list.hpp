@@ -1,8 +1,8 @@
-#ifndef GUARD_JAMTEMPLATE_INVENTORY_LIST_HPP
-#define GUARD_JAMTEMPLATE_INVENTORY_LIST_HPP
+#ifndef JAMTEMPLATE_INVENTORY_LIST_HPP
+#define JAMTEMPLATE_INVENTORY_LIST_HPP
 
-#include "inventory_interface.hpp"
-#include "item_repository.hpp"
+#include <inventory/inventory_interface.hpp>
+#include <inventory/item_repository.hpp>
 #include <map>
 #include <memory>
 #include <string>
@@ -40,4 +40,4 @@ protected:
     void equipItem();
 };
 
-#endif // GUARD_JAMTEMPLATE_INVENTORY_LIST_HPP
+#endif // JAMTEMPLATE_INVENTORY_LIST_HPP

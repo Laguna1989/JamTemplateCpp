@@ -1,4 +1,4 @@
-﻿#include "system_helper.hpp"
+﻿#include <system_helper.hpp>
 #include <gtest/gtest.h>
 
 TEST(IsUninitializedWeakPtr, ReturnsFalseForValidWeakPtr)

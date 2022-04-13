@@ -1,5 +1,5 @@
-#ifndef GUARD_JAMTEMPLATE_GFX_INTERFACE_HPP
-#define GUARD_JAMTEMPLATE_GFX_INTERFACE_HPP
+#ifndef JAMTEMPLATE_GFX_INTERFACE_HPP
+#define JAMTEMPLATE_GFX_INTERFACE_HPP
 
 #include <cam_interface.hpp>
 #include <graphics/render_window_interface.hpp>
@@ -36,4 +36,4 @@ protected:
 
 } // namespace jt
 
-#endif // GUARD_JAMTEMPLATE_GFX_INTERFACE_HPP
+#endif // JAMTEMPLATE_GFX_INTERFACE_HPP

@@ -1,11 +1,11 @@
-﻿#ifndef STRESSTEST_STATE_SELECT_HPP_INCLUDEGUARD
-#define STRESSTEST_STATE_SELECT_HPP_INCLUDEGUARD
+﻿#ifndef STRESSTEST_STATE_SELECT_HPP
+#define STRESSTEST_STATE_SELECT_HPP
 
-#include "button.hpp"
-#include "drawable_helpers.hpp"
-#include "game_interface.hpp"
-#include "game_state.hpp"
-#include "text.hpp"
+#include <button.hpp>
+#include <drawable_helpers.hpp>
+#include <game_interface.hpp>
+#include <game_state.hpp>
+#include <text.hpp>
 #include <memory>
 
 namespace detail {

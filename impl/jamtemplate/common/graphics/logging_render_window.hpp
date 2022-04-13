@@ -1,5 +1,5 @@
-#ifndef GUARD_JAMTEMPLATE_LOGGING_RENDER_WINDOW_HPP
-#define GUARD_JAMTEMPLATE_LOGGING_RENDER_WINDOW_HPP
+#ifndef JAMTEMPLATE_LOGGING_RENDER_WINDOW_HPP
+#define JAMTEMPLATE_LOGGING_RENDER_WINDOW_HPP
 
 #include <graphics/render_window_interface.hpp>
 #include <log/logger_interface.hpp>
@@ -29,4 +29,4 @@ private:
 };
 } // namespace jt
 
-#endif // GUARD_JAMTEMPLATE_LOGGING_RENDER_WINDOW_HPP
+#endif // JAMTEMPLATE_LOGGING_RENDER_WINDOW_HPP

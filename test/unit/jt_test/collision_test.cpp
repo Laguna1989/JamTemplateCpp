@@ -1,8 +1,8 @@
-﻿#include "collision.hpp"
-#include "sdl_setup.hpp"
-#include "shape.hpp"
-#include "texture_manager_impl.hpp"
-#include "gtest/gtest.h"
+﻿#include <collision.hpp>
+#include <sdl_setup.hpp>
+#include <shape.hpp>
+#include <texture_manager_impl.hpp>
+#include <gtest/gtest.h>
 
 using jt::Collision;
 using jt::Shape;

@@ -1,4 +1,4 @@
-﻿#include "timer.hpp"
+﻿#include <timer.hpp>
 #include <gtest/gtest.h>
 
 using jt::Timer;

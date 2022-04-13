@@ -1,4 +1,4 @@
-#include "input/mouse/mouse_input_null.hpp"
+#include <input/mouse/mouse_input_null.hpp>
 #include <gtest/gtest.h>
 
 TEST(MouseInputNullTest, UpdateMousePositionDoesNotThrow)

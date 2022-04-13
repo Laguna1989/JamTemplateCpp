@@ -1,11 +1,11 @@
 ﻿#include "state_scroll.hpp"
-#include "control_command_move_cam.hpp"
-#include "drawable_helpers.hpp"
-#include "game_interface.hpp"
-#include "input/input_manager.hpp"
-#include "math_helper.hpp"
-#include "state_select.hpp"
-#include "timer.hpp"
+#include <control_command_move_cam.hpp>
+#include <drawable_helpers.hpp>
+#include <game_interface.hpp>
+#include <input/input_manager.hpp>
+#include <math_helper.hpp>
+#include <state_select.hpp>
+#include <timer.hpp>
 
 void StateScroll::doInternalCreate()
 {

@@ -1,7 +1,7 @@
-﻿#ifndef MOCKINPUT_HPP_GUARD
-#define MOCKINPUT_HPP_GUARD
+﻿#ifndef MOCKINPUT_HPP
+#define MOCKINPUT_HPP
 
-#include "input/input_manager_interface.hpp"
+#include <input/input_manager_interface.hpp>
 #include <gmock/gmock.h>
 
 class MockMouseInput : public jt::MouseInterface {

@@ -1,5 +1,5 @@
-#ifndef GUARD_JAMTEMPLATE_CONTROL_COMMAND_NULL_HPP
-#define GUARD_JAMTEMPLATE_CONTROL_COMMAND_NULL_HPP
+#ifndef JAMTEMPLATE_CONTROL_COMMAND_NULL_HPP
+#define JAMTEMPLATE_CONTROL_COMMAND_NULL_HPP
 
 #include <input/control_commands/control_command_interface.hpp>
 
@@ -11,4 +11,4 @@ public:
     void reset() override;
 };
 } // namespace jt
-#endif // GUARD_JAMTEMPLATE_CONTROL_COMMAND_NULL_HPP
+#endif // JAMTEMPLATE_CONTROL_COMMAND_NULL_HPP

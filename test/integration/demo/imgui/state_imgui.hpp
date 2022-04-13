@@ -1,7 +1,7 @@
-#ifndef GUARD_JAMTEMPLATE_STATE_IMGUI_HPP
-#define GUARD_JAMTEMPLATE_STATE_IMGUI_HPP
+#ifndef JAMTEMPLATE_STATE_IMGUI_HPP
+#define JAMTEMPLATE_STATE_IMGUI_HPP
 
-#include "game_state.hpp"
+#include <game_state.hpp>
 #include <string>
 
 class StateImGui : public ::jt::GameState {
@@ -14,4 +14,4 @@ private:
     void doInternalDraw() const override;
 };
 
-#endif // GUARD_JAMTEMPLATE_STATE_IMGUI_HPP
+#endif // JAMTEMPLATE_STATE_IMGUI_HPP

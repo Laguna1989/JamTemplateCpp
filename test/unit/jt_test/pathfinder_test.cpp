@@ -1,6 +1,6 @@
-#include "pathfinder/node.hpp"
-#include "pathfinder/node_interface.hpp"
-#include "pathfinder/pathfinder.hpp"
+#include <pathfinder/node.hpp>
+#include <pathfinder/node_interface.hpp>
+#include <pathfinder/pathfinder.hpp>
 #include <gtest/gtest.h>
 #include <map>
 

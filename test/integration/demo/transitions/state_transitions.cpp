@@ -1,10 +1,10 @@
 #include "state_transitions.hpp"
-#include "state_select.hpp"
-#include "game_interface.hpp"
-#include "imgui.h"
-#include "state_manager/state_manager_transition_fade_to_black.hpp"
-#include "state_manager/state_manager_transition_horizontal_bars.hpp"
-#include "state_manager/state_manager_transition_none.hpp"
+#include <game_interface.hpp>
+#include <state_manager/state_manager_transition_fade_to_black.hpp>
+#include <state_manager/state_manager_transition_horizontal_bars.hpp>
+#include <state_manager/state_manager_transition_none.hpp>
+#include <state_select.hpp>
+#include <imgui.h>
 
 void StateTransitions::doInternalCreate() { }
 void StateTransitions::doInternalUpdate(float elapsed) { }

@@ -1,5 +1,5 @@
-#include "graphics/render_window.hpp"
-#include "render_window_test.hpp"
+#include <graphics/render_window.hpp>
+#include <render_window_test.hpp>
 #include <gtest/gtest.h>
 
 class RenderwindowSFMLTestFixture

@@ -1,9 +1,9 @@
-#ifndef GUARD_JAMTEMPLATE_ITEM_HPP
-#define GUARD_JAMTEMPLATE_ITEM_HPP
+#ifndef JAMTEMPLATE_ITEM_HPP
+#define JAMTEMPLATE_ITEM_HPP
 
-#include "nlohmann.hpp"
-#include "rect.hpp"
-#include "vector.hpp"
+#include <nlohmann.hpp>
+#include <rect.hpp>
+#include <vector.hpp>
 #include <optional>
 #include <string>
 
@@ -31,4 +31,4 @@ bool operator<(ItemReference const& lhs, ItemReference const& rhs);
 void from_json(const nlohmann::json& j, ItemReference& item);
 void from_json(const nlohmann::json& j, ArmorInfo& armor);
 
-#endif // GUARD_JAMTEMPLATE_ITEM_HPP
+#endif // JAMTEMPLATE_ITEM_HPP

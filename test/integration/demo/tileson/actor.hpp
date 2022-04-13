@@ -1,9 +1,9 @@
-#ifndef GUARD_JAMTEMAPLTE_ACTOR_HPP
-#define GUARD_JAMTEMAPLTE_ACTOR_HPP
+#ifndef JAMTEMPLATE_ACTOR_HPP
+#define JAMTEMPLATE_ACTOR_HPP
 
-#include "game_object.hpp"
-#include "pathfinder/node_interface.hpp"
-#include "sprite.hpp"
+#include <game_object.hpp>
+#include <pathfinder/node_interface.hpp>
+#include <sprite.hpp>
 
 class Actor : public ::jt::GameObject {
 public:
@@ -29,4 +29,4 @@ private:
     void removeDuplicatesFromPath();
 };
 
-#endif // GUARD_JAMTEMAPLTE_ACTOR_HPP
+#endif // JAMTEMPLATE_ACTOR_HPP

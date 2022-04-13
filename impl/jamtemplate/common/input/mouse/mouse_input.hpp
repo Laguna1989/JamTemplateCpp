@@ -1,5 +1,5 @@
-﻿#ifndef GUARD_JAMTEMPLATE_MOUSEINPUT_HPP_INCLUDEGUARD
-#define GUARD_JAMTEMPLATE_MOUSEINPUT_HPP_INCLUDEGUARD
+﻿#ifndef JAMTEMPLATE_MOUSEINPUT_HPP
+#define JAMTEMPLATE_MOUSEINPUT_HPP
 
 #include <input/mouse/mouse_defines.hpp>
 #include <input/mouse/mouse_interface.hpp>

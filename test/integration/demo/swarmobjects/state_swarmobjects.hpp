@@ -1,11 +1,11 @@
-﻿#ifndef STRESSTEST_STATE_2_HPP_INCLUDEGUARD
-#define STRESSTEST_STATE_2_HPP_INCLUDEGUARD
+﻿#ifndef STRESSTEST_STATE_2_HPP
+#define STRESSTEST_STATE_2_HPP
 
-#include "game_state.hpp"
-#include "object_group.hpp"
-#include "shape.hpp"
-#include "sprite.hpp"
-#include "swarm_object.hpp"
+#include <game_state.hpp>
+#include <object_group.hpp>
+#include <shape.hpp>
+#include <sprite.hpp>
+#include <swarmobjects/swarm_object.hpp>
 
 class StateSwarmObjects : public jt::GameState {
 public:

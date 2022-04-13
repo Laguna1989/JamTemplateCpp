@@ -1,5 +1,5 @@
-#ifndef GUARD_JAMTEMPLATE_NODE_INTERFACE_HPP
-#define GUARD_JAMTEMPLATE_NODE_INTERFACE_HPP
+#ifndef JAMTEMPLATE_NODE_INTERFACE_HPP
+#define JAMTEMPLATE_NODE_INTERFACE_HPP
 
 #include <vector.hpp>
 #include <memory>
@@ -22,4 +22,4 @@ public:
 
 } // namespace pathfinder
 } // namespace jt
-#endif // GUARD_JAMTEMPLATE_NODE_INTERFACE_HPP
+#endif // JAMTEMPLATE_NODE_INTERFACE_HPP

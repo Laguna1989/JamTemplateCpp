@@ -1,9 +1,9 @@
-#ifndef GUARD_JAMTEMPLATE_EASE_OBJECT_HPP
-#define GUARD_JAMTEMPLATE_EASE_OBJECT_HPP
+#ifndef JAMTEMPLATE_EASE_OBJECT_HPP
+#define JAMTEMPLATE_EASE_OBJECT_HPP
 
-#include "game_object.hpp"
-#include "shape.hpp"
-#include "text.hpp"
+#include <game_object.hpp>
+#include <shape.hpp>
+#include <text.hpp>
 #include <functional>
 #include <memory>
 
@@ -26,4 +26,4 @@ private:
     jt::Vector2f m_offset;
 };
 
-#endif // GUARD_JAMTEMPLATE_EASE_OBJECT_HPP
+#endif // JAMTEMPLATE_EASE_OBJECT_HPP

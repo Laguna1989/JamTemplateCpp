@@ -1,5 +1,5 @@
-﻿#ifndef GUARD_JAMTEMPLATE_DRAWABLEIMPL_HPP_INCLUDEGUARD
-#define GUARD_JAMTEMPLATE_DRAWABLEIMPL_HPP_INCLUDEGUARD
+﻿#ifndef JAMTEMPLATE_DRAWABLEIMPL_HPP
+#define JAMTEMPLATE_DRAWABLEIMPL_HPP
 
 #include <graphics/drawable_interface.hpp>
 #include <graphics/flash_impl.hpp>
@@ -85,4 +85,4 @@ private:
 
 } // namespace jt
 
-#endif // GUARD_JAMTEMPLATE_DRAWABLEIMPL_HPP_INCLUDEGUARD
+#endif // JAMTEMPLATE_DRAWABLEIMPL_HPP

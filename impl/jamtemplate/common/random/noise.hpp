@@ -1,5 +1,5 @@
-﻿#ifndef GUARD_JAMTEMPLATE_NOISE_HPP_INCLUDEGUARD
-#define GUARD_JAMTEMPLATE_NOISE_HPP_INCLUDEGUARD
+﻿#ifndef JAMTEMPLATE_NOISE_HPP
+#define JAMTEMPLATE_NOISE_HPP
 
 #include <lerp.hpp>
 #include <random/random.hpp>

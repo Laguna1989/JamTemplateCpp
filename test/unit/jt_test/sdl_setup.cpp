@@ -1,5 +1,5 @@
 #include "sdl_setup.hpp"
-#include "texture_manager_impl.hpp"
+#include <texture_manager_impl.hpp>
 
 #if !USE_SFML
 #include <SDL2/SDL.h>

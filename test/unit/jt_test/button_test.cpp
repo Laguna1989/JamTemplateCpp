@@ -1,9 +1,9 @@
-﻿#include "button.hpp"
-#include "mocks/mock_drawable.hpp"
-#include "mocks/mock_game.hpp"
-#include "mocks/mock_input.hpp"
-#include "sdl_setup.hpp"
-#include "texture_manager_impl.hpp"
+﻿#include <button.hpp>
+#include <mocks/mock_drawable.hpp>
+#include <mocks/mock_game.hpp>
+#include <mocks/mock_input.hpp>
+#include <sdl_setup.hpp>
+#include <texture_manager_impl.hpp>
 #include <gtest/gtest.h>
 
 class ButtonTest : public ::testing::Test {

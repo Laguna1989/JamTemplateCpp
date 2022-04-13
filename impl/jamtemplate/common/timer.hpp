@@ -1,5 +1,5 @@
-﻿#ifndef GUARD_JAMTEMPLATE_TIMER_HPP_INCLUDEGUARD
-#define GUARD_JAMTEMPLATE_TIMER_HPP_INCLUDEGUARD
+﻿#ifndef JAMTEMPLATE_TIMER_HPP
+#define JAMTEMPLATE_TIMER_HPP
 
 #include <game_object.hpp>
 #include <timer_interface.hpp>

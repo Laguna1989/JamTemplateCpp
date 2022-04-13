@@ -1,6 +1,6 @@
-﻿#include "command_recorder.hpp"
-#include "input/keyboard/keyboard_input.hpp"
-#include "gtest/gtest.h"
+﻿#include <command_recorder.hpp>
+#include <input/keyboard/keyboard_input.hpp>
+#include <gtest/gtest.h>
 
 TEST(KeyboardInput, AllKeysAlwaysPressed)
 {
