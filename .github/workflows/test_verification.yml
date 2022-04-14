@@ -179,3 +179,33 @@ jobs:
       - name: Build
         working-directory: ${{github.workspace}}/build
         run: emmake make jt_demos
+
+  Mac_SFML:
+    runs-on: macos-latest
+    steps:
+      - name: Set up cmake
+        uses: jwlawson/actions-setup-cmake@v1.11
+        with:
+          cmake-version: '3.19.x'
+
+      - name: Install dependencies
+        run: |
+          brew install cmake ninja
+
+      - uses: actions/checkout@v2
+
+      - name: ccache
+        uses: hendrikmuhs/ccache-action@v1
+        with:
+          key: ${{ github.job }}-${{ matrix.os }}
+          max-size: 100M
+
+      - name: CMake
+        run: |
+          cmake \
+          -DJT_ENABLE_AUDIO_TESTS=OFF \
+          -B ${{github.workspace}}/build .
+
+      - name: Build
+        working-directory: ${{github.workspace}}/build
+        run: ninja
