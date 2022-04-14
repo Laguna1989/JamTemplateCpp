@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1649955671661,
+  "lastUpdate": 1649959378137,
   "repoUrl": "https://github.com/Laguna1989/JamTemplateCpp",
   "entries": {
     "Benchmark": [
@@ -5016,6 +5016,72 @@ window.BENCHMARK_DATA = {
             "value": 3.0788381718060505,
             "unit": "ms/iter",
             "extra": "iterations: 227\ncpu: 3.078748017621148 ms\nthreads: 1"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "laguna.ws@gmail.com",
+            "name": "Laguna1989",
+            "username": "Laguna1989"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "50e1c3fa965bc92f8c3b6e12a88cf2ad95e56d39",
+          "message": "Add macos workflow (#192)\n\n* Add first try for macos workflow\r\n\r\n* Fix build command\r\n\r\n* Make build parallel",
+          "timestamp": "2022-04-14T19:59:52+02:00",
+          "tree_id": "3b6ec2fab0da5ceaf96335d2049a5d25c6e82d66",
+          "url": "https://github.com/Laguna1989/JamTemplateCpp/commit/50e1c3fa965bc92f8c3b6e12a88cf2ad95e56d39"
+        },
+        "date": 1649959376817,
+        "tool": "googlecpp",
+        "benches": [
+          {
+            "name": "BM_UpdateDrawablePositions",
+            "value": 2.8352069878542996,
+            "unit": "ms/iter",
+            "extra": "iterations: 247\ncpu: 2.83495991902834 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GetAllCommands",
+            "value": 0.3016764646551647,
+            "unit": "ms/iter",
+            "extra": "iterations: 2320\ncpu: 0.3016596120689655 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_LoggerLogWithoutTarget",
+            "value": 0.7590931722643623,
+            "unit": "ms/iter",
+            "extra": "iterations: 923\ncpu: 0.7590023835319613 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_LoggerLogWithCoutTargetSetToOff",
+            "value": 0.7587663022751834,
+            "unit": "ms/iter",
+            "extra": "iterations: 923\ncpu: 0.758729902491874 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_StartGame",
+            "value": 0.0028686807456830567,
+            "unit": "ms/iter",
+            "extra": "iterations: 243696\ncpu: 0.002868603095660166 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_RefineTilemapCollisions",
+            "value": 0.18295124954271666,
+            "unit": "ms/iter",
+            "extra": "iterations: 3827\ncpu: 0.1829402926574339 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GamestateWithTweeningShapes",
+            "value": 3.0751729824562277,
+            "unit": "ms/iter",
+            "extra": "iterations: 228\ncpu: 3.074912280701755 ms\nthreads: 1"
           }
         ]
       }
