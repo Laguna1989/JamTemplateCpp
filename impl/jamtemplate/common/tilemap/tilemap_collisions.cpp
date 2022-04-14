@@ -1,19 +1,20 @@
 #include "tilemap_collisions.hpp"
 #include <algorithm>
+#include <cassert>
 
 namespace {
 int getEntry(std::vector<int> const& vec, int x, int y, int width)
 {
     auto idx = x + y * width;
-    if (static_cast<unsigned>(idx) >= vec.size()) {
-        return false;
-    }
+    assert(static_cast<unsigned>(idx) < vec.size());
+
     return vec[idx];
 }
 
 void setEntry(std::vector<int>& vec, int x, int y, int width, int value)
 {
     auto idx = x + y * width;
+    assert(static_cast<unsigned>(idx) < vec.size());
     vec[idx] = value;
 }
 

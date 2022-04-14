@@ -93,10 +93,6 @@ void jt::Button::doUpdate(float elapsed)
         m_drawable->update(elapsed);
     }
 
-    if (getGame()->input().mouse() == nullptr) {
-        return;
-    }
-
     if (isMouseOver()) {
         if (getGame()->input().mouse()->pressed(jt::MouseButtonCode::MBLeft)) {
             m_background->play("down");

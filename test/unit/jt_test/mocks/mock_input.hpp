@@ -2,6 +2,8 @@
 #define MOCKINPUT_HPP
 
 #include <input/input_manager_interface.hpp>
+#include <input/keyboard/keyboard_input_null.hpp>
+#include <input/mouse/mouse_input_null.hpp>
 #include <gmock/gmock.h>
 
 class MockMouseInput : public jt::MouseInterface {
@@ -44,6 +46,13 @@ public:
 
 class MockInput : public jt::InputManagerInterface {
 public:
+    MockInput()
+    {
+        ON_CALL(*this, mouse)
+            .WillByDefault(::testing::Return(std::make_shared<jt::MouseInputNull>()));
+        ON_CALL(*this, keyboard)
+            .WillByDefault(::testing::Return(std::make_shared<jt::KeyboardInputNull>()));
+    }
     MOCK_METHOD(std::shared_ptr<jt::MouseInterface>, mouse, (), (override));
     MOCK_METHOD(std::shared_ptr<jt::KeyboardInterface>, keyboard, (), (override));
     MOCK_METHOD(void, update, (const jt::MousePosition&, float), (override));

@@ -14,9 +14,6 @@ jt::Console::Console(jt::LoggerInterface& logger)
 void jt::Console::doUpdate(float const /*elapsed*/)
 {
     handleCommand();
-    if (!getGame()->input().keyboard()) {
-        return;
-    }
     if (getGame()->input().keyboard()->justPressed(jt::KeyCode::Home)) {
         m_showConsole = !m_showConsole;
 

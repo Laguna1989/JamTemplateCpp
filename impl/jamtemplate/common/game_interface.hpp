@@ -56,9 +56,6 @@ public:
     /// Reset the Game internals, i.e. on a state switch
     virtual void reset() = 0;
 
-    virtual void cheat() = 0;
-    virtual bool wasCheating() = 0;
-
 protected:
     virtual std::weak_ptr<GameInterface> getPtr() = 0;
 };
