@@ -208,4 +208,4 @@ jobs:
 
       - name: Build
         working-directory: ${{github.workspace}}/build
-        run: ninja
+        run: make jt_tests jt_demos jt_performance
