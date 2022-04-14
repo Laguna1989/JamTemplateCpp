@@ -56,6 +56,16 @@ TEST_P(RenderwindowCommonTestFixture, MouseIsInvisibleAfterSet)
     ASSERT_FALSE(m_window->getMouseCursorVisible());
 }
 
+TEST_P(RenderwindowCommonTestFixture, ShouldProcessKeyboardByDefault)
+{
+    ASSERT_TRUE(m_window->shouldProcessKeyboard());
+}
+
+TEST_P(RenderwindowCommonTestFixture, ShouldProcessMouseByDefault)
+{
+    ASSERT_TRUE(m_window->shouldProcessMouse());
+}
+
 INSTANTIATE_TEST_SUITE_P(RenderwindowCommonTest, RenderwindowCommonTestFixture,
     ::testing::Values(
         std::make_shared<RenderWindowFactory>(), std::make_shared<RenderWindowNullFactory>()));

@@ -3,16 +3,16 @@
 #include <mocks/mock_input.hpp>
 #include <gtest/gtest.h>
 
-TEST(InputManagerTest, ReturnsKeybaordNullptrIfInstantiatedWithNullptr)
+TEST(InputManagerTest, ReturnsKeybaordNullObjIfInstantiatedWithNullptr)
 {
     jt::InputManager im { nullptr, nullptr, std::vector<std::shared_ptr<jt::GamepadInterface>> {} };
-    ASSERT_EQ(im.keyboard(), nullptr);
+    ASSERT_NE(im.keyboard(), nullptr);
 }
 
-TEST(InputManagerTest, ReturnsMouseNullptrIfInstantiatedWithNullptr)
+TEST(InputManagerTest, ReturnsMouseNullObjIfInstantiatedWithNullptr)
 {
     jt::InputManager im { nullptr, nullptr, std::vector<std::shared_ptr<jt::GamepadInterface>> {} };
-    ASSERT_EQ(im.mouse(), nullptr);
+    ASSERT_NE(im.mouse(), nullptr);
 }
 
 TEST(InputManagerTest, GamepadReturnsNoNullptr)
@@ -47,7 +47,8 @@ TEST(InputManagerTest, ResetWithMocks)
 {
     auto keyboard = std::make_shared<MockKeyboardInput>();
     auto mouse = std::make_shared<MockMouseInput>();
-    jt::InputManager im { mouse, keyboard, std::vector<std::shared_ptr<jt::GamepadInterface>> {} };
+    std::shared_ptr<jt::GamepadInterface> gamepad = std::make_shared<jt::GamepadInput>(0);
+    jt::InputManager im { mouse, keyboard, { gamepad } };
 
     EXPECT_CALL(*mouse, reset);
     EXPECT_CALL(*keyboard, reset);
@@ -58,11 +59,18 @@ TEST(InputManagerTest, UpdateWithMocks)
 {
     auto keyboard = std::make_shared<MockKeyboardInput>();
     auto mouse = std::make_shared<MockMouseInput>();
-    jt::InputManager im { mouse, keyboard, std::vector<std::shared_ptr<jt::GamepadInterface>> {} };
+    std::shared_ptr<jt::GamepadInterface> gamepad = std::make_shared<jt::GamepadInput>(0);
+    jt::InputManager im { mouse, keyboard, { gamepad } };
 
     jt::MousePosition const mp { 1.0f, 2.0f, 3.0f, 4.0f };
     EXPECT_CALL(*keyboard, updateKeys());
     EXPECT_CALL(*mouse, updateMousePosition(::testing::_));
     EXPECT_CALL(*mouse, updateButtons());
     im.update(mp, 0);
+}
+
+TEST(InputManagerTest, NumberOfGamePadsReturnsZeroByDefault)
+{
+    jt::InputManager im { nullptr, nullptr, {} };
+    ASSERT_EQ(im.getNumberOfGamepads(), 0);
 }

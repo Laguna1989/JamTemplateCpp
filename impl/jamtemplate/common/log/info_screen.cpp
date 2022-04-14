@@ -10,9 +10,6 @@ void jt::InfoScreen::doCreate()
 void jt::InfoScreen::doUpdate(float const elapsed)
 {
 #ifdef JT_ENABLE_DEBUG
-    if (getGame()->input().keyboard() == nullptr) {
-        return;
-    }
     if (getGame()->input().keyboard()->justPressed(jt::KeyCode::End)) {
         m_showInfo = !m_showInfo;
     }

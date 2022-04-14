@@ -1,18 +1,12 @@
 ﻿#include "game_object.hpp"
 #include <game_interface.hpp>
 #include <system_helper.hpp>
-#include <iostream>
 #include <memory>
 #include <stdexcept>
 
 void jt::GameObject::create()
 {
-    try {
-        auto const g = getGame();
-    } catch (std::exception& e) {
-        std::cerr << e.what() << std::endl;
-        throw std::logic_error { "Gameobject cannot be created without gameinstace being set." };
-    }
+    auto const g = getGame();
     doCreate();
 }
 
