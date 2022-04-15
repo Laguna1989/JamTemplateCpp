@@ -47,7 +47,7 @@ jobs:
           max-size: 200M
 
       - name: CleanCcache
-        run: ccache -c
+        run: ccache -C
 
       - name: CMake
         run: |
@@ -102,7 +102,7 @@ jobs:
           max-size: 200M
 
       - name: CleanCcache
-        run: ccache -c
+        run: ccache -C
 
       - name: CMake
         run: |
@@ -174,7 +174,7 @@ jobs:
           max-size: 200M
 
       - name: CleanCcache
-        run: ccache -c
+        run: ccache -C
 
       - name: CMake
         run: |
@@ -210,7 +210,7 @@ jobs:
           max-size: 200M
 
       - name: CleanCcache
-        run: ccache -c
+        run: ccache -C
 
       - name: CMake
         run: |
