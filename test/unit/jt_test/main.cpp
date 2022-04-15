@@ -1,7 +1,7 @@
+#include <backend_setup.hpp>
 #include <gtest/gtest.h>
 
 #if !USE_SFML
-#include "sdl_setup.hpp"
 SDLSetup setup;
 #endif
 
