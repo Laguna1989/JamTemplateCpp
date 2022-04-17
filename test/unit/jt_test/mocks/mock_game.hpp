@@ -17,7 +17,7 @@ public:
 
     MOCK_METHOD(jt::GfxInterface&, gfx, (), (const, override));
 
-    MOCK_METHOD(jt::InputManagerInterface&, input, (), (override));
+    MOCK_METHOD(jt::InputInterface&, input, (), (override));
     MOCK_METHOD(jt::AudioInterface&, audio, (), (override));
 
     MOCK_METHOD(jt::StateManagerInterface&, stateManager, (), (override));

@@ -9,31 +9,43 @@
 
 namespace jt {
 
-class InputManagerInterface {
+class InputUpdateInterface {
 public:
-    /// Destructor
-    virtual ~InputManagerInterface() = default;
+    virtual ~InputUpdateInterface() = default;
+
+    /// Update the input
+    /// \param mp the mouse buttons
+    virtual void update(
+        bool shouldProcessKeys, bool shouldProcessMouse, MousePosition const& mp, float elapsed)
+        = 0;
+
+    /// Reset the input
+    virtual void reset() = 0;
+};
+
+class InputInterface {
+public:
+    virtual ~InputInterface() = default;
 
     /// Get the mouse input
-    /// \return the mouse input (can be nullptr)
+    /// \return the mouse input
     virtual std::shared_ptr<MouseInterface> mouse() = 0;
 
     /// Get the keyboard input
-    /// \return the keyboard input (can be nullptr)
-    virtual std::shared_ptr<KeyboardInterface> keyboard() = 0;
+    /// \return the keyboard input
+    virtual std::shared_ptr<jt::KeyboardInterface> keyboard() = 0;
 
     /// Get the gamepad input
     /// \return the gamepad
     virtual std::shared_ptr<GamepadInterface> gamepad(int gamepad_id) = 0;
 
     virtual std::size_t getNumberOfGamepads() const = 0;
+};
 
-    /// Update the input
-    /// \param mp the mouse buttons
-    virtual void update(MousePosition const& mp, float elapsed) = 0;
-
-    /// Reset the input
-    virtual void reset() = 0;
+class InputManagerInterface : public InputUpdateInterface, public InputInterface {
+public:
+    /// Destructor
+    virtual ~InputManagerInterface() = default;
 };
 
 } // namespace jt
