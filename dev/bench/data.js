@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1650032784415,
+  "lastUpdate": 1650173983532,
   "repoUrl": "https://github.com/Laguna1989/JamTemplateCpp",
   "entries": {
     "Benchmark": [
@@ -5148,6 +5148,72 @@ window.BENCHMARK_DATA = {
             "value": 2.706919563706614,
             "unit": "ms/iter",
             "extra": "iterations: 259\ncpu: 2.7060193050193067 ms\nthreads: 1"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "laguna.ws@gmail.com",
+            "name": "Laguna1989",
+            "username": "Laguna1989"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "65c870538084870fa656a10daa07b124fc03ede8",
+          "message": "Merge pull request #194 from Laguna1989/FEATURE_InputManagerRework\n\nSplit up InputManager Interface",
+          "timestamp": "2022-04-17T07:36:55+02:00",
+          "tree_id": "4b6198798ebb7ebfe434733b25a46056e296ca58",
+          "url": "https://github.com/Laguna1989/JamTemplateCpp/commit/65c870538084870fa656a10daa07b124fc03ede8"
+        },
+        "date": 1650173983025,
+        "tool": "googlecpp",
+        "benches": [
+          {
+            "name": "BM_UpdateDrawablePositions",
+            "value": 6.319758562499952,
+            "unit": "ms/iter",
+            "extra": "iterations: 112\ncpu: 6.302708035714285 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GetAllCommands",
+            "value": 0.3895443678815465,
+            "unit": "ms/iter",
+            "extra": "iterations: 1756\ncpu: 0.38952471526195886 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_LoggerLogWithoutTarget",
+            "value": 1.057873986784163,
+            "unit": "ms/iter",
+            "extra": "iterations: 681\ncpu: 1.0577246696035236 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_LoggerLogWithCoutTargetSetToOff",
+            "value": 1.0552309240875999,
+            "unit": "ms/iter",
+            "extra": "iterations: 685\ncpu: 1.0551240875912404 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_StartGame",
+            "value": 0.004286410424503575,
+            "unit": "ms/iter",
+            "extra": "iterations: 164286\ncpu: 0.004286023154742342 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_RefineTilemapCollisions",
+            "value": 0.2229985690440059,
+            "unit": "ms/iter",
+            "extra": "iterations: 3295\ncpu: 0.22297851289833082 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GamestateWithTweeningShapes",
+            "value": 3.87425247023812,
+            "unit": "ms/iter",
+            "extra": "iterations: 168\ncpu: 3.8738261904761915 ms\nthreads: 1"
           }
         ]
       }
