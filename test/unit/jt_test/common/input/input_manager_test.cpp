@@ -66,7 +66,7 @@ TEST(InputManagerTest, UpdateWithMocks)
     EXPECT_CALL(*keyboard, updateKeys());
     EXPECT_CALL(*mouse, updateMousePosition(::testing::_));
     EXPECT_CALL(*mouse, updateButtons());
-    im.update(mp, 0);
+    im.update(false, false, mp, 0);
 }
 
 TEST(InputManagerTest, NumberOfGamePadsReturnsZeroByDefault)

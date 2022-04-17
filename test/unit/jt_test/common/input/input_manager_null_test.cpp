@@ -27,7 +27,7 @@ TEST(InputManagerNullTest, UpdateWithMocks)
 {
     jt::InputManagerNull im;
     jt::MousePosition const mp { 1.0f, 2.0f, 3.0f, 4.0f };
-    ASSERT_NO_THROW(im.update(mp, 0));
+    ASSERT_NO_THROW(im.update(false, false, mp, 0));
 }
 
 TEST(InputManagerNullTest, NumberOfGamepads)

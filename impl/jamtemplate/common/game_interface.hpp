@@ -35,7 +35,7 @@ public:
 
     /// Get the input manager
     /// \return the input manager
-    virtual InputManagerInterface& input() = 0;
+    virtual InputInterface& input() = 0;
 
     /// Get the music player
     /// \return the music player

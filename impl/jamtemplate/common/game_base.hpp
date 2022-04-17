@@ -19,7 +19,7 @@ public:
 
     GfxInterface& gfx() const override;
 
-    InputManagerInterface& input() override;
+    InputInterface& input() override;
 
     AudioInterface& audio() override;
 
