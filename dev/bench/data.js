@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1650263741069,
+  "lastUpdate": 1650296199691,
   "repoUrl": "https://github.com/Laguna1989/JamTemplateCpp",
   "entries": {
     "Benchmark": [
@@ -5280,6 +5280,72 @@ window.BENCHMARK_DATA = {
             "value": 2.631395845864682,
             "unit": "ms/iter",
             "extra": "iterations: 266\ncpu: 2.6224804511278186 ms\nthreads: 1"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "laguna.ws@gmail.com",
+            "name": "Laguna1989",
+            "username": "Laguna1989"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "194136e8643336e3b0529cd4ebb6f91b8c0e87bd",
+          "message": "Merge pull request #196 from Laguna1989/FEATURE_ScreenEffects\n\nAdd screen effects",
+          "timestamp": "2022-04-18T17:34:27+02:00",
+          "tree_id": "edd098925d0246f27141db91ca17d744c11f2670",
+          "url": "https://github.com/Laguna1989/JamTemplateCpp/commit/194136e8643336e3b0529cd4ebb6f91b8c0e87bd"
+        },
+        "date": 1650296198994,
+        "tool": "googlecpp",
+        "benches": [
+          {
+            "name": "BM_UpdateDrawablePositions",
+            "value": 2.8832707396694532,
+            "unit": "ms/iter",
+            "extra": "iterations: 242\ncpu: 2.882847933884298 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GetAllCommands",
+            "value": 0.30282204456945405,
+            "unit": "ms/iter",
+            "extra": "iterations: 2311\ncpu: 0.3028010385114667 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_LoggerLogWithoutTarget",
+            "value": 0.7579159718310037,
+            "unit": "ms/iter",
+            "extra": "iterations: 923\ncpu: 0.7578606717226436 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_LoggerLogWithCoutTargetSetToOff",
+            "value": 0.7590345390455647,
+            "unit": "ms/iter",
+            "extra": "iterations: 922\ncpu: 0.7588039045553145 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_StartGame",
+            "value": 0.002801075004393439,
+            "unit": "ms/iter",
+            "extra": "iterations: 250372\ncpu: 0.0028002951608007295 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_RefineTilemapCollisions",
+            "value": 0.18214186080586464,
+            "unit": "ms/iter",
+            "extra": "iterations: 3822\ncpu: 0.18203464154892712 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GamestateWithTweeningShapes",
+            "value": 3.005617833333334,
+            "unit": "ms/iter",
+            "extra": "iterations: 234\ncpu: 2.9900132478632457 ms\nthreads: 1"
           }
         ]
       }
