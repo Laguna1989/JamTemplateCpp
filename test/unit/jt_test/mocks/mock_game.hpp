@@ -17,17 +17,15 @@ public:
 
     MOCK_METHOD(jt::GfxInterface&, gfx, (), (const, override));
 
-    MOCK_METHOD(jt::InputInterface&, input, (), (override));
+    MOCK_METHOD(jt::InputGetInterface&, input, (), (override));
     MOCK_METHOD(jt::AudioInterface&, audio, (), (override));
 
     MOCK_METHOD(jt::StateManagerInterface&, stateManager, (), (override));
 
-    MOCK_METHOD(void, runOneFrame, (), (override));
-    MOCK_METHOD(void, startGame, (jt::GameInterface::GameLoopFunctionPtr), (override));
-
-    MOCK_METHOD(void, reset, (), (override));
     MOCK_METHOD(jt::LoggerInterface&, logger, (), (override));
     MOCK_METHOD(jt::ActionCommandManagerInterface&, actionCommandManager, (), (override));
+
+    MOCK_METHOD(void, reset, (), (override));
 
     ::testing::NiceMock<MockGfx> m_gfx;
 

@@ -97,7 +97,7 @@ void addCommandsMusicPlayer(std::shared_ptr<jt::GameBase>& game)
 
 } // namespace
 
-void jt::addBasicActionCommands(std::shared_ptr<jt::GameBase>& game)
+void jt::addBasicActionCommands(std::shared_ptr<jt::GameBase> game)
 {
     addCommandHelp(game);
     addCommandClear(game);

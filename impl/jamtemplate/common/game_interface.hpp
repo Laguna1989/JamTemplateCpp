@@ -19,23 +19,13 @@ public:
     /// Destructor
     virtual ~GameInterface() = default;
 
-    using GameLoopFunctionPtr = std::add_pointer<void()>::type;
-
-    /// Run one frame of the Game
-    virtual void runOneFrame() = 0;
-
-    /// Start the game
-    /// \param initialState the initial GameState
-    /// \param gameloopFunction the game loop function
-    virtual void startGame(GameLoopFunctionPtr gameloopFunction) = 0;
-
     /// Get the graphics context
     /// \return the graphics context
     virtual GfxInterface& gfx() const = 0;
 
     /// Get the input manager
     /// \return the input manager
-    virtual InputInterface& input() = 0;
+    virtual InputGetInterface& input() = 0;
 
     /// Get the music player
     /// \return the music player

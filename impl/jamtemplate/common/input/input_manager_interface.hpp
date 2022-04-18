@@ -1,48 +1,13 @@
 ﻿#ifndef JAMTEMPLATE_INPUTMANAGERINTERFACE_HPP
 #define JAMTEMPLATE_INPUTMANAGERINTERFACE_HPP
 
-#include <input/control_commands/control_command_interface.hpp>
-#include <input/gamepad/gamepad_interface.hpp>
-#include <input/keyboard/keyboard_interface.hpp>
-#include <input/mouse/mouse_interface.hpp>
+#include <input/input_get_interface.hpp>
+#include <input/input_set_interface.hpp>
 #include <memory>
 
 namespace jt {
 
-class InputUpdateInterface {
-public:
-    virtual ~InputUpdateInterface() = default;
-
-    /// Update the input
-    /// \param mp the mouse buttons
-    virtual void update(
-        bool shouldProcessKeys, bool shouldProcessMouse, MousePosition const& mp, float elapsed)
-        = 0;
-
-    /// Reset the input
-    virtual void reset() = 0;
-};
-
-class InputInterface {
-public:
-    virtual ~InputInterface() = default;
-
-    /// Get the mouse input
-    /// \return the mouse input
-    virtual std::shared_ptr<MouseInterface> mouse() = 0;
-
-    /// Get the keyboard input
-    /// \return the keyboard input
-    virtual std::shared_ptr<jt::KeyboardInterface> keyboard() = 0;
-
-    /// Get the gamepad input
-    /// \return the gamepad
-    virtual std::shared_ptr<GamepadInterface> gamepad(int gamepad_id) = 0;
-
-    virtual std::size_t getNumberOfGamepads() const = 0;
-};
-
-class InputManagerInterface : public InputUpdateInterface, public InputInterface {
+class InputManagerInterface : public InputSetInterface, public InputGetInterface {
 public:
     /// Destructor
     virtual ~InputManagerInterface() = default;
