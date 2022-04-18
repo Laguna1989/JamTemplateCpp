@@ -6,7 +6,7 @@
 namespace jt {
 class GameBase;
 
-void addBasicActionCommands(std::shared_ptr<jt::GameBase>& game);
+void addBasicActionCommands(std::shared_ptr<jt::GameBase> game);
 
 } // namespace jt
 #endif // JAMTEMPLATE_BASIC_ACTION_COMMANDS_HPP

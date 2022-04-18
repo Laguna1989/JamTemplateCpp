@@ -65,7 +65,7 @@ void jt::GameBase::reset()
 
 jt::GfxInterface& jt::GameBase::gfx() const { return m_gfx; }
 
-jt::InputInterface& jt::GameBase::input() { return m_inputManager; }
+jt::InputGetInterface& jt::GameBase::input() { return m_inputManager; }
 
 jt::AudioInterface& jt::GameBase::audio() { return m_audio; }
 

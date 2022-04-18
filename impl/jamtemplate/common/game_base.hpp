@@ -11,15 +11,17 @@ class GameBase : public GameInterface,
                  public GameObject,
                  public std::enable_shared_from_this<GameBase> {
 public:
+    using GameLoopFunctionPtr = std::add_pointer<void()>::type;
+
     GameBase(jt::GfxInterface& gfx, jt::InputManagerInterface& input, jt::AudioInterface& audio,
         jt::StateManagerInterface& stateManager, jt::LoggerInterface& logger,
         jt::ActionCommandManagerInterface& actionCommandManager);
 
-    void runOneFrame() override;
+    void runOneFrame();
 
     GfxInterface& gfx() const override;
 
-    InputInterface& input() override;
+    InputGetInterface& input() override;
 
     AudioInterface& audio() override;
 
@@ -28,6 +30,10 @@ public:
     LoggerInterface& logger() override;
 
     ActionCommandManagerInterface& actionCommandManager() override;
+
+    /// Start game
+    /// \param gameloop_function
+    virtual void startGame(GameLoopFunctionPtr gameloop_function) = 0;
 
     void reset() override;
 
