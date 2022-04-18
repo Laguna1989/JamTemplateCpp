@@ -2,6 +2,7 @@
 #define JAMTEMPLATE_STATE_SCREEN_EFFECTS_HPP
 
 #include <game_state.hpp>
+#include <screeneffects/scanlines.hpp>
 #include <screeneffects/vignette.hpp>
 #include <sprite.hpp>
 #include <tilemap/tile_layer.hpp>
@@ -12,6 +13,9 @@ class StateScreenEffects : public jt::GameState {
 
     mutable bool m_drawVignette { true };
     std::shared_ptr<jt::Vignette> m_vignette;
+
+    mutable bool m_drawScanLines { true };
+    std::shared_ptr<jt::ScanLines> m_scanLines;
 
     void doInternalCreate() override;
     void doInternalUpdate(float elapsed) override;

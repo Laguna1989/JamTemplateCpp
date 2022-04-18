@@ -18,6 +18,9 @@ void StateScreenEffects::doInternalCreate()
 
     m_vignette = std::make_shared<jt::Vignette>(jt::Vector2f { 400.0f, 300.0f });
     add(m_vignette);
+
+    m_scanLines = std::make_shared<jt::ScanLines>(jt::Vector2f { 400.0f, 2.0f }, 150);
+    add(m_scanLines);
 }
 
 void StateScreenEffects::doInternalUpdate(float elapsed)
@@ -31,8 +34,6 @@ void StateScreenEffects::doInternalUpdate(float elapsed)
     }
 
     scroll(elapsed);
-
-    m_vignette->update(elapsed);
 }
 
 void StateScreenEffects::scroll(float elapsed)
@@ -51,6 +52,7 @@ void StateScreenEffects::scroll(float elapsed)
     }
 
     m_vignette->setEnabled(m_drawVignette);
+    m_scanLines->setEnabled(m_drawScanLines);
 }
 
 void StateScreenEffects::doInternalDraw() const
@@ -66,5 +68,6 @@ void StateScreenEffects::drawGui() const
 {
     ImGui::Begin("Screen Effects");
     ImGui::Checkbox("vignette", &m_drawVignette);
+    ImGui::Checkbox("scan lines", &m_drawScanLines);
     ImGui::End();
 }
