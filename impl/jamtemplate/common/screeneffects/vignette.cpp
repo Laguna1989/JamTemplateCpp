@@ -23,3 +23,5 @@ void jt::Vignette::doDraw() const
     }
 }
 void jt::Vignette::setEnabled(bool enabled) { m_enabled = enabled; }
+
+void jt::Vignette::setColor(jt::Color const& col) { m_vignette->setColor(col); }

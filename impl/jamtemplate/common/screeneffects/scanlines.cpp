@@ -27,3 +27,4 @@ void jt::ScanLines::doDraw() const
     }
 }
 void jt::ScanLines::setEnabled(bool enable) { m_enabled = enable; }
+void jt::ScanLines::setColor(jt::Color const& col) { m_shape->setColor(col); }

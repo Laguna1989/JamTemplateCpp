@@ -21,6 +21,9 @@ void StateScreenEffects::doInternalCreate()
 
     m_scanLines = std::make_shared<jt::ScanLines>(jt::Vector2f { 400.0f, 2.0f }, 150);
     add(m_scanLines);
+
+    m_clouds = std::make_shared<jt::Clouds>(jt::Vector2f { -9.0f, 5.0f });
+    add(m_clouds);
 }
 
 void StateScreenEffects::doInternalUpdate(float elapsed)
@@ -51,6 +54,7 @@ void StateScreenEffects::scroll(float elapsed)
         getGame()->gfx().camera().move(jt::Vector2f { 0.0f, scrollspeed * elapsed });
     }
 
+    m_clouds->setEnabled(m_drawClouds);
     m_vignette->setEnabled(m_drawVignette);
     m_scanLines->setEnabled(m_drawScanLines);
 }
@@ -64,9 +68,11 @@ void StateScreenEffects::doInternalDraw() const
     drawGui();
     drawObjects();
 }
+
 void StateScreenEffects::drawGui() const
 {
     ImGui::Begin("Screen Effects");
+    ImGui::Checkbox("clouds", &m_drawClouds);
     ImGui::Checkbox("vignette", &m_drawVignette);
     ImGui::Checkbox("scan lines", &m_drawScanLines);
     ImGui::End();

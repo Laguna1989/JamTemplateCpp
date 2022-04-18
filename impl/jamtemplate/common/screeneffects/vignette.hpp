@@ -1,6 +1,7 @@
 #ifndef JAMTEMPLATE_VIGNETTE_HPP
 #define JAMTEMPLATE_VIGNETTE_HPP
 
+#include <color/color.hpp>
 #include <game_object.hpp>
 #include <vector.hpp>
 namespace jt {
@@ -11,6 +12,8 @@ class Vignette : public jt::GameObject {
 public:
     explicit Vignette(jt::Vector2f const& size);
     void setEnabled(bool enabled);
+
+    void setColor(jt::Color const& col);
 
 private:
     void doCreate() override;
