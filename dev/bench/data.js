@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1650173983532,
+  "lastUpdate": 1650263741069,
   "repoUrl": "https://github.com/Laguna1989/JamTemplateCpp",
   "entries": {
     "Benchmark": [
@@ -5214,6 +5214,72 @@ window.BENCHMARK_DATA = {
             "value": 3.87425247023812,
             "unit": "ms/iter",
             "extra": "iterations: 168\ncpu: 3.8738261904761915 ms\nthreads: 1"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "laguna.ws@gmail.com",
+            "name": "Laguna1989",
+            "username": "Laguna1989"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "2c33de55eb7a5afedf0202fd604f5ab40326026b",
+          "message": "Merge pull request #195 from Laguna1989/FEATURE_SlimGameInterface\n\nMake game interface slim",
+          "timestamp": "2022-04-18T08:33:08+02:00",
+          "tree_id": "84e29219077137835aeb3e291174a0aad4a5c3da",
+          "url": "https://github.com/Laguna1989/JamTemplateCpp/commit/2c33de55eb7a5afedf0202fd604f5ab40326026b"
+        },
+        "date": 1650263739892,
+        "tool": "googlecpp",
+        "benches": [
+          {
+            "name": "BM_UpdateDrawablePositions",
+            "value": 2.5323214239130682,
+            "unit": "ms/iter",
+            "extra": "iterations: 276\ncpu: 2.5320086956521735 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GetAllCommands",
+            "value": 0.2677824401986944,
+            "unit": "ms/iter",
+            "extra": "iterations: 2617\ncpu: 0.26776194115399304 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_LoggerLogWithoutTarget",
+            "value": 0.6768536705314309,
+            "unit": "ms/iter",
+            "extra": "iterations: 1035\ncpu: 0.6768054106280195 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_LoggerLogWithCoutTargetSetToOff",
+            "value": 0.6689636030388919,
+            "unit": "ms/iter",
+            "extra": "iterations: 1053\ncpu: 0.6689221272554609 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_StartGame",
+            "value": 0.002406991280706097,
+            "unit": "ms/iter",
+            "extra": "iterations: 291308\ncpu: 0.002406822675656006 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_RefineTilemapCollisions",
+            "value": 0.15946885523031265,
+            "unit": "ms/iter",
+            "extra": "iterations: 4407\ncpu: 0.15945534377127304 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GamestateWithTweeningShapes",
+            "value": 2.631395845864682,
+            "unit": "ms/iter",
+            "extra": "iterations: 266\ncpu: 2.6224804511278186 ms\nthreads: 1"
           }
         ]
       }
