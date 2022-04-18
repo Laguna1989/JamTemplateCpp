@@ -11,6 +11,7 @@
 #include <particles/state_particles.hpp>
 #include <pathfinding/state_pathfinding.hpp>
 #include <rope/state_rope.hpp>
+#include <screeneffects/state_screen_effects.hpp>
 #include <scroll/state_scroll.hpp>
 #include <shader/state_shaders.hpp>
 #include <simplex/state_3d_noise.hpp>
@@ -39,6 +40,7 @@ void StateSelect::doInternalCreate()
     AddButton<StateGamepad>("Gamepad");
     AddButton<StateShaders>("Shaders");
     AddButton<StateTransitions>("Transitions");
+    AddButton<StateScreenEffects>("Effects");
 
     add(std::make_shared<jt::LicenseInfo>());
 }

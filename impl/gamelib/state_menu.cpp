@@ -8,6 +8,7 @@
 #include <lerp.hpp>
 #include <log/license_info.hpp>
 #include <math_helper.hpp>
+#include <screeneffects/vignette.hpp>
 #include <shape.hpp>
 #include <sprite.hpp>
 #include <state_game.hpp>
@@ -35,8 +36,8 @@ void StateMenu::doInternalCreate()
 
 void StateMenu::createVignette()
 {
-    m_vignette = jt::dh::createVignette(GP::GetScreenSize(), getGame()->gfx().textureManager());
-    m_vignette->setColor({ 255, 255, 255, 110 });
+    m_vignette = std::make_shared<jt::Vignette>(GP::GetScreenSize());
+    add(m_vignette);
 }
 
 void StateMenu::createShapes()
@@ -208,6 +209,6 @@ void StateMenu::doInternalDraw() const
     m_text_Credits->draw(getGame()->gfx().target());
     m_text_Version->draw(getGame()->gfx().target());
     m_overlay->draw(getGame()->gfx().target());
-    m_vignette->draw(getGame()->gfx().target());
+    m_vignette->draw();
 }
 std::string StateMenu::getName() const { return "Menu"; }
