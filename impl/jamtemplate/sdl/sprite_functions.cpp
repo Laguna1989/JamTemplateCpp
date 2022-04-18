@@ -117,7 +117,7 @@ std::shared_ptr<SDL_Texture> makeVignetteImage(
             auto const sqr = std::sqrt(dx * dx + dy * dy);
             auto const sqrNorm = MathHelper::clamp(sqr / (cx + cy) / 1.5f * 2.0f, 0.0f, 1.0f);
             auto const v
-                = static_cast<uint8_t>(std::pow(sqrNorm, 2.0f) * 235 + jt::Random::getInt(0, 20));
+                = static_cast<uint8_t>(std::pow(sqrNorm, 3.5f) * 245 + jt::Random::getInt(0, 10));
             jt::setPixel(image.get(), i, j, SDL_MapRGBA(image->format, 0U, 0U, 0U, v));
         }
     }

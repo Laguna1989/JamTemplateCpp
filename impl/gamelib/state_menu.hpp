@@ -9,6 +9,7 @@ class Text;
 class Shape;
 class Animation;
 class Sprite;
+class Vignette;
 
 } // namespace jt
 
@@ -27,7 +28,7 @@ private:
     std::shared_ptr<jt::Text> m_text_Version;
 
     std::shared_ptr<jt::Shape> m_overlay;
-    std::shared_ptr<jt::Sprite> m_vignette;
+    std::shared_ptr<jt::Vignette> m_vignette;
 
     bool m_started { false };
 
