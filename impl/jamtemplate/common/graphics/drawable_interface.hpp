@@ -1,5 +1,5 @@
-﻿#ifndef GUARD_JAMTEMPLATE_DRAWABLEINTERFACE_HPP_INCLUDEGUARD
-#define GUARD_JAMTEMPLATE_DRAWABLEINTERFACE_HPP_INCLUDEGUARD
+﻿#ifndef JAMTEMPLATE_DRAWABLEINTERFACE_HPP
+#define JAMTEMPLATE_DRAWABLEINTERFACE_HPP
 
 #include <color/color.hpp>
 #include <rect.hpp>
@@ -8,6 +8,9 @@
 #include <memory>
 
 namespace jt {
+
+enum class BlendMode { ADD, MUL, ALPHA };
+
 class DrawableInterface {
 public:
     using Sptr = std::shared_ptr<DrawableInterface>;
@@ -158,6 +161,9 @@ public:
     [[deprecated("Currently only implemented for SFML")]] virtual void setCustomShader(
         std::string const& shaderCodeVertex, std::string const& shaderCodeFragment)
         = 0;
+
+    virtual void setBlendMode(jt::BlendMode mode) = 0;
+    virtual jt::BlendMode getBlendMode() const = 0;
 
 protected:
     DrawableInterface() = default;

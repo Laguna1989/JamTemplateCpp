@@ -1,5 +1,5 @@
-#ifndef GUARD_JAMTEMPLATE_LOG_TARGET_FILE_HPP
-#define GUARD_JAMTEMPLATE_LOG_TARGET_FILE_HPP
+#ifndef JAMTEMPLATE_LOG_TARGET_FILE_HPP
+#define JAMTEMPLATE_LOG_TARGET_FILE_HPP
 
 #include <log/log_target_interface.hpp>
 #include <fstream>
@@ -19,4 +19,4 @@ private:
 
 } // namespace jt
 
-#endif // GUARD_JAMTEMPLATE_LOG_TARGET_FILE_HPP
+#endif // JAMTEMPLATE_LOG_TARGET_FILE_HPP

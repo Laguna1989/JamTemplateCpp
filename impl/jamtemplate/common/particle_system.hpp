@@ -1,5 +1,5 @@
-﻿#ifndef GUARD_JAMTEMPLATE_PARTICLE_SYSTEM_HPP_GUARD
-#define GUARD_JAMTEMPLATE_PARTICLE_SYSTEM_HPP_GUARD
+﻿#ifndef JAMTEMPLATE_PARTICLE_SYSTEM_HPP
+#define JAMTEMPLATE_PARTICLE_SYSTEM_HPP
 
 #include <circular_buffer.hpp>
 #include <game_interface.hpp>
@@ -76,4 +76,4 @@ private:
 
 } // namespace jt
 
-#endif // GUARD_JAMTEMPLATE_PARTICLE_SYSTEM_HPP_GUARD
+#endif // JAMTEMPLATE_PARTICLE_SYSTEM_HPP

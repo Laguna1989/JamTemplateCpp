@@ -1,6 +1,6 @@
 #include "world_item.hpp"
-#include "game_interface.hpp"
-#include "item_reference.hpp"
+#include <game_interface.hpp>
+#include <inventory/item_reference.hpp>
 
 WorldItem::WorldItem(
     std::shared_ptr<ItemReference> ref, std::shared_ptr<jt::DrawableInterface> drawable)

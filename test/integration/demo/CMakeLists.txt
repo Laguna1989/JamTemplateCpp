@@ -6,6 +6,6 @@ if (JT_ENABLE_WEB)
 endif ()
 
 target_include_directories(jt_demos PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
-target_link_libraries(jt_demos JamTemplate)
+target_link_libraries(jt_demos JamTemplateLib)
 jt_use_assets(jt_demos)
 

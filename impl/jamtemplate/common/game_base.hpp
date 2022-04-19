@@ -1,5 +1,5 @@
-﻿#ifndef GUARD_JAMTEMPLATE_GAMEBASE_HPP_GUARD
-#define GUARD_JAMTEMPLATE_GAMEBASE_HPP_GUARD
+﻿#ifndef JAMTEMPLATE_GAMEBASE_HPP
+#define JAMTEMPLATE_GAMEBASE_HPP
 
 #include <game_interface.hpp>
 #include <game_object.hpp>
@@ -11,15 +11,17 @@ class GameBase : public GameInterface,
                  public GameObject,
                  public std::enable_shared_from_this<GameBase> {
 public:
+    using GameLoopFunctionPtr = std::add_pointer<void()>::type;
+
     GameBase(jt::GfxInterface& gfx, jt::InputManagerInterface& input, jt::AudioInterface& audio,
         jt::StateManagerInterface& stateManager, jt::LoggerInterface& logger,
         jt::ActionCommandManagerInterface& actionCommandManager);
 
-    void runOneFrame() override;
+    void runOneFrame();
 
     GfxInterface& gfx() const override;
 
-    InputManagerInterface& input() override;
+    InputGetInterface& input() override;
 
     AudioInterface& audio() override;
 
@@ -29,10 +31,11 @@ public:
 
     ActionCommandManagerInterface& actionCommandManager() override;
 
-    void reset() override;
+    /// Start game
+    /// \param gameloop_function
+    virtual void startGame(GameLoopFunctionPtr gameloop_function) = 0;
 
-    void cheat() override;
-    bool wasCheating() override;
+    void reset() override;
 
 protected:
     std::weak_ptr<GameInterface> getPtr() override;
@@ -58,7 +61,6 @@ protected:
     float m_lag { 0.0f };
     float m_timePerUpdate { 0.005f };
     int m_maxNumberOfUpdateIterations { 100 };
-    bool m_wasCheating { false };
 };
 
 } // namespace jt

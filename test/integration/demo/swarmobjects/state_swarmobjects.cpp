@@ -1,10 +1,10 @@
 ﻿#include "state_swarmobjects.hpp"
-#include "drawable_helpers.hpp"
-#include "game_interface.hpp"
-#include "input/input_manager.hpp"
-#include "math_helper.hpp"
-#include "state_select.hpp"
-#include "tweens/tween_alpha.hpp"
+#include <drawable_helpers.hpp>
+#include <game_interface.hpp>
+#include <input/input_manager.hpp>
+#include <math_helper.hpp>
+#include <state_select.hpp>
+#include <tweens/tween_alpha.hpp>
 #include <vector>
 
 void StateSwarmObjects::doInternalCreate()

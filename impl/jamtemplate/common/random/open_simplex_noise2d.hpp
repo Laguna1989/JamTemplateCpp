@@ -6,8 +6,8 @@
   see https://github.com/deerel/OpenSimplexNoise
 */
 
-#ifndef GUARD_JAMTEMPLATE_RANDOM_OPEN_SIMPLEX_NOISE2D
-#define GUARD_JAMTEMPLATE_RANDOM_OPEN_SIMPLEX_NOISE2D
+#ifndef JAMTEMPLATE_RANDOM_OPEN_SIMPLEX_NOISE2D
+#define JAMTEMPLATE_RANDOM_OPEN_SIMPLEX_NOISE2D
 
 #include <array>
 #include <cstdint>
@@ -37,4 +37,4 @@ private:
 
 } // namespace jt
 
-#endif // GUARD_JAMTEMPLATE_RANDOM_OPEN_SIMPLEX_NOISE2D
+#endif // JAMTEMPLATE_RANDOM_OPEN_SIMPLEX_NOISE2D

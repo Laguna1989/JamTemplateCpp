@@ -1,15 +1,15 @@
-#ifndef GUARD_JAMTEMPLATE_STATE_INVENTORY_HPP
-#define GUARD_JAMTEMPLATE_STATE_INVENTORY_HPP
+#ifndef JAMTEMPLATE_STATE_INVENTORY_HPP
+#define JAMTEMPLATE_STATE_INVENTORY_HPP
 
-#include "audio/sound.hpp"
-#include "character.hpp"
-#include "character_sheet_imgui.hpp"
-#include "game_state.hpp"
-#include "inventory_interface.hpp"
-#include "item_repository.hpp"
-#include "object_group.hpp"
-#include "tilemap/object_layer.hpp"
-#include "tilemap/tile_layer.hpp"
+#include <audio/sound.hpp>
+#include <game_state.hpp>
+#include <inventory/character.hpp>
+#include <inventory/character_sheet_imgui.hpp>
+#include <inventory/inventory_interface.hpp>
+#include <inventory/item_repository.hpp>
+#include <object_group.hpp>
+#include <tilemap/object_layer.hpp>
+#include <tilemap/tile_layer.hpp>
 
 class StateInventory : public jt::GameState {
     void doInternalCreate() override;
@@ -37,4 +37,4 @@ class StateInventory : public jt::GameState {
     void spawnWorldItem(std::string const& itemReferenceId, jt::Vector2f const& pos);
 };
 
-#endif // GUARD_JAMTEMPLATE_STATE_INVENTORY_HPP
+#endif // JAMTEMPLATE_STATE_INVENTORY_HPP

@@ -1,5 +1,5 @@
-#ifndef GUARD_JAMTEMPLATE_MOUSE_INTERFACE_HPP
-#define GUARD_JAMTEMPLATE_MOUSE_INTERFACE_HPP
+#ifndef JAMTEMPLATE_MOUSE_INTERFACE_HPP
+#define JAMTEMPLATE_MOUSE_INTERFACE_HPP
 
 #include <input/mouse/mouse_defines.hpp>
 #include <vector.hpp>
@@ -52,4 +52,4 @@ public:
 
 } // namespace jt
 
-#endif // GUARD_JAMTEMPLATE_MOUSE_INTERFACE_HPP
+#endif // JAMTEMPLATE_MOUSE_INTERFACE_HPP

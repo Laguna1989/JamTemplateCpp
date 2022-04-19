@@ -1,5 +1,5 @@
-﻿#ifndef JAMTEMPLATE_SOUNDGROUP_HPP_GUARD
-#define JAMTEMPLATE_SOUNDGROUP_HPP_GUARD
+﻿#ifndef JAMTEMPLATE_SOUNDGROUP_HPP
+#define JAMTEMPLATE_SOUNDGROUP_HPP
 
 #include <audio/sound_interface.hpp>
 #include <memory>

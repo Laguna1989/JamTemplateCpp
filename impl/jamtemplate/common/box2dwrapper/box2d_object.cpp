@@ -1,6 +1,3 @@
-#ifndef GUARD_JAMTEMPLATE_BOX2DOBJECT_HPP_GUARD
-#define GUARD_JAMTEMPLATE_BOX2DOBJECT_HPP_GUARD
-
 #include "box2d_object.hpp"
 
 jt::Box2DObject::Box2DObject(std::shared_ptr<jt::Box2DWorldInterface> world, b2BodyDef const* def)
@@ -45,5 +42,3 @@ void jt::Box2DObject::doDestroy()
     }
     m_world.lock()->destroyBody(m_body);
 }
-
-#endif

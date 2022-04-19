@@ -1,8 +1,8 @@
-﻿#ifndef STRESSTEST_STATE_ROPE_HPP_INCLUDEGUARD
-#define STRESSTEST_STATE_ROPE_HPP_INCLUDEGUARD
+﻿#ifndef STRESSTEST_STATE_ROPE_HPP
+#define STRESSTEST_STATE_ROPE_HPP
 
-#include "game_state.hpp"
-#include "vector.hpp"
+#include <game_state.hpp>
+#include <vector.hpp>
 #include <string>
 #include <vector>
 

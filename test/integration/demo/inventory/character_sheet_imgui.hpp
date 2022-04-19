@@ -1,8 +1,8 @@
-#ifndef GUARD_JAMTEMPLATE_CHARACTER_SHEET_IMGUI_HPP
-#define GUARD_JAMTEMPLATE_CHARACTER_SHEET_IMGUI_HPP
+#ifndef JAMTEMPLATE_CHARACTER_SHEET_IMGUI_HPP
+#define JAMTEMPLATE_CHARACTER_SHEET_IMGUI_HPP
 
-#include "game_object.hpp"
-#include "item_repository.hpp"
+#include <game_object.hpp>
+#include <inventory/item_repository.hpp>
 #include <memory>
 
 class CharacterSheetImgui : public jt::GameObject {
@@ -21,4 +21,4 @@ private:
     std::vector<std::string> m_equippedItems;
 };
 
-#endif // GUARD_JAMTEMPLATE_CHARACTER_SHEET_IMGUI_HPP
+#endif // JAMTEMPLATE_CHARACTER_SHEET_IMGUI_HPP

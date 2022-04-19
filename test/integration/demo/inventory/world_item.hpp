@@ -1,9 +1,9 @@
-#ifndef GUARD_JAMTEMPLATE_WORLD_ITEM_HPP
-#define GUARD_JAMTEMPLATE_WORLD_ITEM_HPP
+#ifndef JAMTEMPLATE_WORLD_ITEM_HPP
+#define JAMTEMPLATE_WORLD_ITEM_HPP
 
-#include "game_object.hpp"
-#include "item_reference.hpp"
-#include "sprite.hpp"
+#include <game_object.hpp>
+#include <inventory/item_reference.hpp>
+#include <sprite.hpp>
 
 class InventoryListImgui;
 
@@ -24,4 +24,4 @@ private:
     void doDraw() const override;
 };
 
-#endif // GUARD_JAMTEMPLATE_WORLD_ITEM_HPP
+#endif // JAMTEMPLATE_WORLD_ITEM_HPP

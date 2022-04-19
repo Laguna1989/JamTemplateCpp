@@ -1,5 +1,5 @@
-#ifndef GUARD_JAMTEMAPLTE_RENDER_WINDOW_NULL_HPP
-#define GUARD_JAMTEMAPLTE_RENDER_WINDOW_NULL_HPP
+#ifndef JAMTEMPLATE_RENDER_WINDOW_NULL_HPP
+#define JAMTEMPLATE_RENDER_WINDOW_NULL_HPP
 
 #include <graphics/render_window_interface.hpp>
 
@@ -32,4 +32,4 @@ private:
 } // namespace null_objects
 } // namespace jt
 
-#endif // GUARD_JAMTEMAPLTE_RENDER_WINDOW_NULL_HPP
+#endif // JAMTEMPLATE_RENDER_WINDOW_NULL_HPP

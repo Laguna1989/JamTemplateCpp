@@ -1,9 +1,9 @@
-#ifndef GUARD_JAMTEMPLATE_STATE_AUDIO_HPP
-#define GUARD_JAMTEMPLATE_STATE_AUDIO_HPP
+#ifndef JAMTEMPLATE_STATE_AUDIO_HPP
+#define JAMTEMPLATE_STATE_AUDIO_HPP
 
-#include "audio/sound_with_effect.hpp"
-#include "game_state.hpp"
-#include "oalpp/effects/filter/butterworth_24db_lowpass.hpp"
+#include <audio/sound_with_effect.hpp>
+#include <game_state.hpp>
+#include <oalpp/effects/filter/butterworth_24db_lowpass.hpp>
 #include <map>
 #include <memory>
 #include <optional>
@@ -23,4 +23,4 @@ private:
     mutable float m_blend { 0.0f };
 };
 
-#endif // GUARD_JAMTEMPLATE_STATE_AUDIO_HPP
+#endif // JAMTEMPLATE_STATE_AUDIO_HPP

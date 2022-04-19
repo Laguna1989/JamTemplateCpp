@@ -1,5 +1,5 @@
-#ifndef GUARD_JAMTEMPLATE_CONSOLE_HPP
-#define GUARD_JAMTEMPLATE_CONSOLE_HPP
+#ifndef JAMTEMPLATE_CONSOLE_HPP
+#define JAMTEMPLATE_CONSOLE_HPP
 
 #include <game_object.hpp>
 #include <log/log_entry.hpp>
@@ -44,4 +44,4 @@ private:
 
 } // namespace jt
 
-#endif // GUARD_JAMTEMPLATE_CONSOLE_HPP
+#endif // JAMTEMPLATE_CONSOLE_HPP

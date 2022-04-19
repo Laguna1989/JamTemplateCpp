@@ -1,5 +1,5 @@
-#ifndef GUARD_JAMTEMPLATE_MAKE_COLOR_HPP
-#define GUARD_JAMTEMPLATE_MAKE_COLOR_HPP
+#ifndef JAMTEMPLATE_MAKE_COLOR_HPP
+#define JAMTEMPLATE_MAKE_COLOR_HPP
 
 #include <color/color.hpp>
 
@@ -45,4 +45,4 @@ struct MakeColor {
 
 } // namespace jt
 
-#endif // GUARD_JAMTEMPLATE_MAKE_COLOR_HPP
+#endif // JAMTEMPLATE_MAKE_COLOR_HPP

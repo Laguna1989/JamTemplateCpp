@@ -1,5 +1,5 @@
-#ifndef GUARD_JAMTEMPLATE_SHAKE_IMPL_HPP
-#define GUARD_JAMTEMPLATE_SHAKE_IMPL_HPP
+#ifndef JAMTEMPLATE_SHAKE_IMPL_HPP
+#define JAMTEMPLATE_SHAKE_IMPL_HPP
 
 #include <vector.hpp>
 
@@ -22,4 +22,4 @@ private:
 
 } // namespace jt
 
-#endif // GUARD_JAMTEMPLATE_SHAKE_IMPL_HPP
+#endif // JAMTEMPLATE_SHAKE_IMPL_HPP

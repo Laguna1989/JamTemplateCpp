@@ -1,5 +1,5 @@
-﻿#ifndef GUARD_JAMTEMPLATE_GAMEINTERFACE_HPP_GUARD
-#define GUARD_JAMTEMPLATE_GAMEINTERFACE_HPP_GUARD
+﻿#ifndef JAMTEMPLATE_GAMEINTERFACE_HPP
+#define JAMTEMPLATE_GAMEINTERFACE_HPP
 
 #include <action_commands/action_command_manager_interface.hpp>
 #include <audio/audio_interface.hpp>
@@ -19,23 +19,13 @@ public:
     /// Destructor
     virtual ~GameInterface() = default;
 
-    using GameLoopFunctionPtr = std::add_pointer<void()>::type;
-
-    /// Run one frame of the Game
-    virtual void runOneFrame() = 0;
-
-    /// Start the game
-    /// \param initialState the initial GameState
-    /// \param gameloopFunction the game loop function
-    virtual void startGame(GameLoopFunctionPtr gameloopFunction) = 0;
-
     /// Get the graphics context
     /// \return the graphics context
     virtual GfxInterface& gfx() const = 0;
 
     /// Get the input manager
     /// \return the input manager
-    virtual InputManagerInterface& input() = 0;
+    virtual InputGetInterface& input() = 0;
 
     /// Get the music player
     /// \return the music player
@@ -55,9 +45,6 @@ public:
 
     /// Reset the Game internals, i.e. on a state switch
     virtual void reset() = 0;
-
-    virtual void cheat() = 0;
-    virtual bool wasCheating() = 0;
 
 protected:
     virtual std::weak_ptr<GameInterface> getPtr() = 0;

@@ -1,5 +1,5 @@
-﻿#ifndef GUARD_JAMTEMPLATE_SHAPE_HPP_INCLUDEGUARD
-#define GUARD_JAMTEMPLATE_SHAPE_HPP_INCLUDEGUARD
+﻿#ifndef JAMTEMPLATE_SHAPE_HPP
+#define JAMTEMPLATE_SHAPE_HPP
 
 #include <render_target.hpp>
 #include <texture_manager_interface.hpp>

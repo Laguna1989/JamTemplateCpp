@@ -1,8 +1,8 @@
-#ifndef GUARD_JAMTEMPLATE_ITEM_REPOSITORY_HPP
-#define GUARD_JAMTEMPLATE_ITEM_REPOSITORY_HPP
+#ifndef JAMTEMPLATE_ITEM_REPOSITORY_HPP
+#define JAMTEMPLATE_ITEM_REPOSITORY_HPP
 
-#include "item_reference.hpp"
-#include "world_item.hpp"
+#include <inventory/item_reference.hpp>
+#include <inventory/world_item.hpp>
 #include <memory>
 #include <vector>
 
@@ -21,4 +21,4 @@ private:
     std::vector<std::shared_ptr<ItemReference>> m_items;
 };
 
-#endif // GUARD_JAMTEMPLATE_ITEM_REPOSITORY_HPP
+#endif // JAMTEMPLATE_ITEM_REPOSITORY_HPP

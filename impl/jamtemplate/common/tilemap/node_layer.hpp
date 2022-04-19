@@ -1,5 +1,5 @@
-#ifndef GUARD_JAMTEMPLATE_NODELAYER_HPP
-#define GUARD_JAMTEMPLATE_NODELAYER_HPP
+#ifndef JAMTEMPLATE_NODELAYER_HPP
+#define JAMTEMPLATE_NODELAYER_HPP
 
 #include <texture_manager_interface.hpp>
 #include <tilemap/tile_node.hpp>
@@ -43,4 +43,4 @@ private:
 
 } // namespace tilemap
 } // namespace jt
-#endif // GUARD_JAMTEMPLATE_NODELAYER_HPP
+#endif // JAMTEMPLATE_NODELAYER_HPP

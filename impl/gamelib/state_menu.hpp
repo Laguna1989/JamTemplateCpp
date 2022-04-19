@@ -1,5 +1,5 @@
-﻿#ifndef GAME_STATE_MENU_HPP_INCLUDEGUARD
-#define GAME_STATE_MENU_HPP_INCLUDEGUARD
+﻿#ifndef GAME_STATE_MENU_HPP
+#define GAME_STATE_MENU_HPP
 
 #include <game_state.hpp>
 
@@ -9,6 +9,7 @@ class Text;
 class Shape;
 class Animation;
 class Sprite;
+class Vignette;
 
 } // namespace jt
 
@@ -27,7 +28,7 @@ private:
     std::shared_ptr<jt::Text> m_text_Version;
 
     std::shared_ptr<jt::Shape> m_overlay;
-    std::shared_ptr<jt::Sprite> m_vignette;
+    std::shared_ptr<jt::Vignette> m_vignette;
 
     bool m_started { false };
 

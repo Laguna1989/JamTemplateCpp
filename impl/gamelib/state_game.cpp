@@ -4,6 +4,7 @@
 #include <game_interface.hpp>
 #include <game_properties.hpp>
 #include <hud/hud.hpp>
+#include <screeneffects/vignette.hpp>
 #include <shape.hpp>
 #include <sprite.hpp>
 #include <state_menu.hpp>
@@ -27,13 +28,8 @@ void StateGame::doInternalCreate()
 
     createPlayer();
 
-    m_vignette = std::make_shared<jt::Sprite>("#v#"
-            + std::to_string(static_cast<int>(GP::GetScreenSize().x)) + "#"
-            + std::to_string(static_cast<int>(GP::GetScreenSize().y)),
-        getGame()->gfx().textureManager());
-    m_vignette->setIgnoreCamMovement(true);
-    m_vignette->setColor({ 255, 255, 255, 100 });
-
+    m_vignette = std::make_shared<jt::Vignette>(GP::GetScreenSize());
+    add(m_vignette);
     m_hud = std::make_shared<Hud>();
     add(m_hud);
 
@@ -72,7 +68,7 @@ void StateGame::doInternalDraw() const
 {
     m_background->draw(getGame()->gfx().target());
     drawObjects();
-    m_vignette->draw(getGame()->gfx().target());
+    m_vignette->draw();
     m_hud->draw();
 }
 

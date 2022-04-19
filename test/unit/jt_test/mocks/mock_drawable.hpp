@@ -1,8 +1,8 @@
-﻿#ifndef JAMTEMPLATE_UNITTEST_MOCKDRAWABLE_HPP_INCLUDEGUARD
-#define JAMTEMPLATE_UNITTEST_MOCKDRAWABLE_HPP_INCLUDEGUARD
+﻿#ifndef JAMTEMPLATE_UNITTEST_MOCKDRAWABLE_HPP
+#define JAMTEMPLATE_UNITTEST_MOCKDRAWABLE_HPP
 
-#include "graphics/drawable_interface.hpp"
-#include "render_target.hpp"
+#include <graphics/drawable_interface.hpp>
+#include <render_target.hpp>
 #include <gmock/gmock.h>
 #include <memory>
 
@@ -50,6 +50,9 @@ public:
     MOCK_METHOD(void, setScreenSizeHint, (jt::Vector2f const& hint), (override));
 
     MOCK_METHOD(void, setCustomShader, (std::string const&, std::string const&), (override));
+
+    MOCK_METHOD(void, setBlendMode, (jt::BlendMode), (override));
+    MOCK_METHOD(jt::BlendMode, getBlendMode, (), (const, override));
 };
 
 #endif

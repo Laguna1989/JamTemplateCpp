@@ -1,5 +1,5 @@
-#ifndef GUARD_JAMTEMPLATE_AUDIO_IMPL_HPP
-#define GUARD_JAMTEMPLATE_AUDIO_IMPL_HPP
+#ifndef JAMTEMPLATE_AUDIO_IMPL_HPP
+#define JAMTEMPLATE_AUDIO_IMPL_HPP
 
 #include <audio/audio_interface.hpp>
 #include <oalpp/sound_context.hpp>
@@ -42,4 +42,4 @@ private:
 };
 } // namespace jt
 
-#endif // GUARD_JAMTEMPLATE_AUDIO_IMPL_HPP
+#endif // JAMTEMPLATE_AUDIO_IMPL_HPP

@@ -1,5 +1,5 @@
-#ifndef GUARD_JAMTEMPLATE_LOGGING_SOUND_HPP
-#define GUARD_JAMTEMPLATE_LOGGING_SOUND_HPP
+#ifndef JAMTEMPLATE_LOGGING_SOUND_HPP
+#define JAMTEMPLATE_LOGGING_SOUND_HPP
 
 #include <audio/sound_interface.hpp>
 #include <log/logger_interface.hpp>
@@ -44,4 +44,4 @@ private:
 };
 } // namespace jt
 
-#endif // GUARD_JAMTEMPLATE_LOGGING_SOUND_HPP
+#endif // JAMTEMPLATE_LOGGING_SOUND_HPP

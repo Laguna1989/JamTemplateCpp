@@ -1,5 +1,5 @@
-﻿#ifndef GUARD_JAMTEMPLATE_INPUTHELPER_HPP_INCLUDEGUARD
-#define GUARD_JAMTEMPLATE_INPUTHELPER_HPP_INCLUDEGUARD
+﻿#ifndef JAMTEMPLATE_INPUTHELPER_HPP
+#define JAMTEMPLATE_INPUTHELPER_HPP
 
 #include <map>
 
@@ -29,4 +29,4 @@ void updateValues(std::map<KeyTypeJT, bool>& pressed, std::map<KeyTypeJT, bool>&
 } // namespace inputhelper
 } // namespace jt
 
-#endif // !GUARD_JAMTEMPLATE_INPUTHELPER_HPP_INCLUDEGUARD
+#endif // !JAMTEMPLATE_INPUTHELPER_HPP

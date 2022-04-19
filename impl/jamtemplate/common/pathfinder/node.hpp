@@ -1,5 +1,5 @@
-#ifndef GUARD_JAMTEMAPLTE_NODE_HPP
-#define GUARD_JAMTEMAPLTE_NODE_HPP
+#ifndef JAMTEMPLATE_NODE_HPP
+#define JAMTEMPLATE_NODE_HPP
 
 #include <pathfinder/node_interface.hpp>
 #include <memory>
@@ -32,4 +32,4 @@ private:
 };
 } // namespace pathfinder
 } // namespace jt
-#endif // GUARD_JAMTEMAPLTE_NODE_HPP
+#endif // JAMTEMPLATE_NODE_HPP

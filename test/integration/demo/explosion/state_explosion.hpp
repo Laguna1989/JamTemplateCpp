@@ -1,7 +1,7 @@
-﻿#ifndef STRESSTEST_STATE_1_HPP_INCLUDEGUARD
-#define STRESSTEST_STATE_1_HPP_INCLUDEGUARD
+﻿#ifndef STRESSTEST_STATE_1_HPP
+#define STRESSTEST_STATE_1_HPP
 
-#include "game_state.hpp"
+#include <game_state.hpp>
 #include <string>
 
 class StateExplosion : public jt::GameState {

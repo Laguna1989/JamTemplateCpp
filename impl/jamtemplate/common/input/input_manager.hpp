@@ -1,5 +1,5 @@
-﻿#ifndef GUARD_JAMTEMPLATE_INPUTMANAGER_HPP_INCLUDEGUARD
-#define GUARD_JAMTEMPLATE_INPUTMANAGER_HPP_INCLUDEGUARD
+﻿#ifndef JAMTEMPLATE_INPUTMANAGER_HPP
+#define JAMTEMPLATE_INPUTMANAGER_HPP
 
 #include <input/input_manager_interface.hpp>
 #include <memory>
@@ -8,14 +8,15 @@ namespace jt {
 
 class InputManager : public InputManagerInterface {
 public:
-    void update(MousePosition const& mp, float elapsed) override;
-    InputManager(std::shared_ptr<jt::MouseInterface> mouse,
-        std::shared_ptr<jt::KeyboardInterface> keyboard,
-        std::vector<std::shared_ptr<jt::GamepadInterface>> gamepads);
+    void update(bool shouldProcessKeys, bool shouldProcessMouse, MousePosition const& mp,
+        float elapsed) override;
+    InputManager(std::shared_ptr<jt::MouseInterface> mouse = nullptr,
+        std::shared_ptr<jt::KeyboardInterface> keyboard = nullptr,
+        std::vector<std::shared_ptr<jt::GamepadInterface>> gamepads = {});
     virtual ~InputManager() = default;
 
     std::shared_ptr<MouseInterface> mouse() override;
-    std::shared_ptr<KeyboardInterface> keyboard() override;
+    std::shared_ptr<jt::KeyboardInterface> keyboard() override;
     std::shared_ptr<GamepadInterface> gamepad(int gamepad_id) override;
     size_t getNumberOfGamepads() const override;
     void reset() override;

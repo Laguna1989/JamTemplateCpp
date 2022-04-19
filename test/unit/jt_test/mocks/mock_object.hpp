@@ -1,7 +1,7 @@
-﻿#ifndef JAMTEMPLATE_UNITTEST_MOCKOBJECT_HPP_INCLUDEGUARD
-#define JAMTEMPLATE_UNITTEST_MOCKOBJECT_HPP_INCLUDEGUARD
+﻿#ifndef JAMTEMPLATE_UNITTEST_MOCKOBJECT_HPP
+#define JAMTEMPLATE_UNITTEST_MOCKOBJECT_HPP
 
-#include "game_object.hpp"
+#include <game_object.hpp>
 #include <gmock/gmock.h>
 
 class MockObject : public jt::GameObject {

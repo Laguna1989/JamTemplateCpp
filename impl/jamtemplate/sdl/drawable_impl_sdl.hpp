@@ -1,5 +1,5 @@
-#ifndef GUARD_JAMTEMPLATE_DRAWABLE_IMPL_SDL_HPP
-#define GUARD_JAMTEMPLATE_DRAWABLE_IMPL_SDL_HPP
+#ifndef JAMTEMPLATE_DRAWABLE_IMPL_SDL_HPP
+#define JAMTEMPLATE_DRAWABLE_IMPL_SDL_HPP
 
 #include <graphics/drawable_impl.hpp>
 
@@ -8,8 +8,9 @@ class DrawableImplSdl : public jt::DrawableImpl {
 public:
     [[deprecated("Currently only implemented for SFML")]] void setCustomShader(
         std::string const& shaderCodeVertex, std::string const& shaderCodeFragment) override;
+    SDL_BlendMode getSDLBlendMode() const;
 };
 
 } // namespace jt
 
-#endif // GUARD_JAMTEMPLATE_DRAWABLE_IMPL_SDL_HPP
+#endif // JAMTEMPLATE_DRAWABLE_IMPL_SDL_HPP

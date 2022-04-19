@@ -1,5 +1,5 @@
-﻿#ifndef GUARD_JAMTEMPLATE_DRAWABLEIMPL_HPP_INCLUDEGUARD
-#define GUARD_JAMTEMPLATE_DRAWABLEIMPL_HPP_INCLUDEGUARD
+﻿#ifndef JAMTEMPLATE_DRAWABLEIMPL_HPP
+#define JAMTEMPLATE_DRAWABLEIMPL_HPP
 
 #include <graphics/drawable_interface.hpp>
 #include <graphics/flash_impl.hpp>
@@ -61,6 +61,10 @@ public:
 
     virtual bool isVisible() const;
 
+    void setBlendMode(jt::BlendMode mode) override;
+
+    BlendMode getBlendMode() const override;
+
 protected:
     jt::Vector2f getShakeOffset() const;
     jt::Vector2f getCamOffset() const;
@@ -74,6 +78,8 @@ private:
 
     jt::Vector2f m_offset { 0, 0 };
 
+    jt::BlendMode m_blendMode { jt::BlendMode::ALPHA };
+
     // overwrite this method
     virtual void doDraw(std::shared_ptr<jt::RenderTarget> const sptr) const = 0;
 
@@ -85,4 +91,4 @@ private:
 
 } // namespace jt
 
-#endif // GUARD_JAMTEMPLATE_DRAWABLEIMPL_HPP_INCLUDEGUARD
+#endif // JAMTEMPLATE_DRAWABLEIMPL_HPP

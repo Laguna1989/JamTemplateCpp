@@ -1,10 +1,10 @@
 ﻿#ifndef INCLUDE_MOCKGAME_HPP
 #define INCLUDE_MOCKGAME_HPP
 
-#include "game_interface.hpp"
-#include "graphics/render_window_null.hpp"
-#include "log/logger_null.hpp"
-#include "mock_gfx.hpp"
+#include <game_interface.hpp>
+#include <graphics/render_window_null.hpp>
+#include <log/logger_null.hpp>
+#include <mocks/mock_gfx.hpp>
 #include <gmock/gmock.h>
 
 class MockGame : public jt::GameInterface {
@@ -17,20 +17,15 @@ public:
 
     MOCK_METHOD(jt::GfxInterface&, gfx, (), (const, override));
 
-    MOCK_METHOD(jt::InputManagerInterface&, input, (), (override));
+    MOCK_METHOD(jt::InputGetInterface&, input, (), (override));
     MOCK_METHOD(jt::AudioInterface&, audio, (), (override));
 
     MOCK_METHOD(jt::StateManagerInterface&, stateManager, (), (override));
 
-    MOCK_METHOD(void, runOneFrame, (), (override));
-    MOCK_METHOD(void, startGame, (jt::GameInterface::GameLoopFunctionPtr), (override));
-
-    MOCK_METHOD(void, reset, (), (override));
     MOCK_METHOD(jt::LoggerInterface&, logger, (), (override));
     MOCK_METHOD(jt::ActionCommandManagerInterface&, actionCommandManager, (), (override));
 
-    MOCK_METHOD(void, cheat, (), (override));
-    MOCK_METHOD(bool, wasCheating, (), (override));
+    MOCK_METHOD(void, reset, (), (override));
 
     ::testing::NiceMock<MockGfx> m_gfx;
 

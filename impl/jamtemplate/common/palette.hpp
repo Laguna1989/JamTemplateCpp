@@ -1,5 +1,5 @@
-#ifndef GUARD_JAMTEMPLATE_PALETTE_HPP
-#define GUARD_JAMTEMPLATE_PALETTE_HPP
+#ifndef JAMTEMPLATE_PALETTE_HPP
+#define JAMTEMPLATE_PALETTE_HPP
 
 #include <color/color.hpp>
 #include <cstddef>
@@ -30,4 +30,4 @@ private:
 
 } // namespace jt
 
-#endif // GUARD_JAMTEMPLATE_PALETTE_HPP
+#endif // JAMTEMPLATE_PALETTE_HPP

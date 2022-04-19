@@ -1,5 +1,5 @@
-﻿#ifndef SCORE_DISPLAY_GUARD
-#define SCORE_DISPLAY_GUARD
+﻿#ifndef SCORE_DISPLAY_HPP
+#define SCORE_DISPLAY_HPP
 
 #include <hud/observer_interface.hpp>
 #include <text.hpp>
@@ -14,4 +14,4 @@ private:
     std::string m_textPrefix;
 };
 
-#endif // !SCORE_DISPLAY_GUARD
+#endif // !SCORE_DISPLAY_HPP

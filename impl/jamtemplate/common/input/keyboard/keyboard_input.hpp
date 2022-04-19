@@ -1,5 +1,5 @@
-﻿#ifndef GUARD_JAMTEMPLATE_KEYBOARDINPUT_HPP_INCLUDEGUARD
-#define GUARD_JAMTEMPLATE_KEYBOARDINPUT_HPP_INCLUDEGUARD
+﻿#ifndef JAMTEMPLATE_KEYBOARDINPUT_HPP
+#define JAMTEMPLATE_KEYBOARDINPUT_HPP
 
 #include <input/control_commands/control_command_interface.hpp>
 #include <input/input_manager_interface.hpp>

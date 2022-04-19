@@ -1,5 +1,5 @@
-﻿#ifndef GUARD_JAMTEMPLATE_CAMERA_HPP_GUARD
-#define GUARD_JAMTEMPLATE_CAMERA_HPP_GUARD
+﻿#ifndef JAMTEMPLATE_CAMERA_HPP
+#define JAMTEMPLATE_CAMERA_HPP
 
 #include <cam_interface.hpp>
 #include <functional>

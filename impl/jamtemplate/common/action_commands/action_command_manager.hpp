@@ -1,5 +1,5 @@
-#ifndef GUARD_JAMTEMPLATE_ACTION_COMMAND_MANAGER_HPP
-#define GUARD_JAMTEMPLATE_ACTION_COMMAND_MANAGER_HPP
+#ifndef JAMTEMPLATE_ACTION_COMMAND_MANAGER_HPP
+#define JAMTEMPLATE_ACTION_COMMAND_MANAGER_HPP
 
 #include <action_commands/action_command_manager_interface.hpp>
 #include <log/logger_interface.hpp>
@@ -25,4 +25,4 @@ private:
 };
 } // namespace jt
 
-#endif // GUARD_JAMTEMPLATE_ACTION_COMMAND_MANAGER_HPP
+#endif // JAMTEMPLATE_ACTION_COMMAND_MANAGER_HPP

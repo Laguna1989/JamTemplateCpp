@@ -1,5 +1,5 @@
-#ifndef GUARD_JAMTEMPLATE_DRAWABLE_IMPL_SFML_HPP
-#define GUARD_JAMTEMPLATE_DRAWABLE_IMPL_SFML_HPP
+#ifndef JAMTEMPLATE_DRAWABLE_IMPL_SFML_HPP
+#define JAMTEMPLATE_DRAWABLE_IMPL_SFML_HPP
 
 #include <graphics/drawable_impl.hpp>
 #include <SFML/Graphics.hpp>
@@ -13,8 +13,10 @@ public:
 
 protected:
     std::shared_ptr<sf::Shader> m_shader { nullptr };
+
+    sf::BlendMode getSfBlendMode() const;
 };
 
 } // namespace jt
 
-#endif // GUARD_JAMTEMPLATE_DRAWABLE_IMPL_SFML_HPP
+#endif // JAMTEMPLATE_DRAWABLE_IMPL_SFML_HPP

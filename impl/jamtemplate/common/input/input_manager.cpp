@@ -1,4 +1,6 @@
 ﻿#include "input_manager.hpp"
+#include "input/keyboard/keyboard_input_null.hpp"
+#include "input/mouse/mouse_input_null.hpp"
 #include <input/gamepad/gamepad_input_null.hpp>
 
 jt::InputManager::InputManager(std::shared_ptr<jt::MouseInterface> mouse,
@@ -8,6 +10,12 @@ jt::InputManager::InputManager(std::shared_ptr<jt::MouseInterface> mouse,
     , m_keyboard { keyboard }
     , m_gamepads { gamepads }
 {
+    if (m_mouse == nullptr) {
+        m_mouse = std::make_shared<jt::MouseInputNull>();
+    }
+    if (m_keyboard == nullptr) {
+        m_keyboard = std::make_shared<jt::KeyboardInputNull>();
+    }
 }
 
 std::shared_ptr<jt::MouseInterface> jt::InputManager::mouse() { return m_mouse; }
@@ -26,7 +34,8 @@ void jt::InputManager::reset()
     }
 }
 
-void jt::InputManager::update(jt::MousePosition const& mp, float elapsed)
+void jt::InputManager::update(
+    bool shouldProcessKeys, bool shouldProcessMouse, MousePosition const& mp, float elapsed)
 {
     if (m_mouse) {
         m_mouse->updateMousePosition(mp);

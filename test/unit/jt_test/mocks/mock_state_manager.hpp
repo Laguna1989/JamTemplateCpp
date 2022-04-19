@@ -1,7 +1,7 @@
-#ifndef GUARD_JAMTEMPLATE_MOCK_STATE_MANAGER_HPP
-#define GUARD_JAMTEMPLATE_MOCK_STATE_MANAGER_HPP
+#ifndef JAMTEMPLATE_MOCK_STATE_MANAGER_HPP
+#define JAMTEMPLATE_MOCK_STATE_MANAGER_HPP
 
-#include "state_manager/state_manager_interface.hpp"
+#include <state_manager/state_manager_interface.hpp>
 #include <memory>
 
 class MockStateManager : public ::jt::StateManagerInterface {
@@ -14,4 +14,4 @@ public:
     MOCK_METHOD(void, draw, (std::shared_ptr<jt::RenderTarget> rt), (override));
 };
 
-#endif // GUARD_JAMTEMPLATE_MOCK_STATE_MANAGER_HPP
+#endif // JAMTEMPLATE_MOCK_STATE_MANAGER_HPP

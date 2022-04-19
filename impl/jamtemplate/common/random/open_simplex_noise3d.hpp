@@ -6,8 +6,8 @@
   see https://github.com/deerel/OpenSimplexNoise
 */
 
-#ifndef GUARD_JAMTEMPLATE_RANDOM_OPEN_SIMPLEX_NOISE3D
-#define GUARD_JAMTEMPLATE_RANDOM_OPEN_SIMPLEX_NOISE3D
+#ifndef JAMTEMPLATE_RANDOM_OPEN_SIMPLEX_NOISE3D
+#define JAMTEMPLATE_RANDOM_OPEN_SIMPLEX_NOISE3D
 
 #include <array>
 #include <cstdint>

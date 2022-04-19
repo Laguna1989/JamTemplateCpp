@@ -70,9 +70,8 @@ jt::Vector2f jt::Shape::getOrigin() const
 
 void jt::Shape::doDraw(std::shared_ptr<jt::RenderTarget> const sptr) const
 {
-    if (sptr) {
-        sptr->draw(*m_shape);
-    }
+    sf::RenderStates states { getSfBlendMode() };
+    sptr->draw(*m_shape, states);
 }
 
 void jt::Shape::doDrawFlash(std::shared_ptr<jt::RenderTarget> const sptr) const

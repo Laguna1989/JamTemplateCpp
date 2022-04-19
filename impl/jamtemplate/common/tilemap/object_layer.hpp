@@ -1,5 +1,5 @@
-#ifndef GUARD_JAMTEMPLATE_OBJECTLAYER_HPP
-#define GUARD_JAMTEMPLATE_OBJECTLAYER_HPP
+#ifndef JAMTEMPLATE_OBJECTLAYER_HPP
+#define JAMTEMPLATE_OBJECTLAYER_HPP
 
 #include <tilemap/info_rect.hpp>
 #include <map>
@@ -30,4 +30,4 @@ private:
 } // namespace tilemap
 } // namespace jt
 
-#endif // GUARD_JAMTEMPLATE_OBJECTLAYER_HPP
+#endif // JAMTEMPLATE_OBJECTLAYER_HPP

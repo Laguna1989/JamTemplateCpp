@@ -1,5 +1,5 @@
-﻿#ifndef GAME_GAMEPROPERTIES_HPP_INCLUDEGUARD
-#define GAME_GAMEPROPERTIES_HPP_INCLUDEGUARD
+﻿#ifndef GAME_GAMEPROPERTIES_HPP
+#define GAME_GAMEPROPERTIES_HPP
 
 #include <color/color.hpp>
 #include <palette.hpp>
