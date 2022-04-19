@@ -1,8 +1,8 @@
 #include "state_audio.hpp"
 #include <audio/sound_group.hpp>
 #include <game_interface.hpp>
-#include <imgui.h>
 #include <state_select.hpp>
+#include <imgui.h>
 
 void StateAudio::doInternalCreate()
 {
@@ -57,7 +57,7 @@ void StateAudio::doInternalDraw() const
     if (ImGui::Button("play intro + looping")) {
         // create new music
         m_sound = getGame()->audio().addPermanentSound(
-            "music", "assets/demos/audio/intro.ogg", m_effect);
+            "music", "assets/demos/audio/intro.ogg", "assets/demos/audio/loop.ogg", m_effect);
         m_sound->setLoop(true);
         m_sound->play();
     }

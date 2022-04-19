@@ -1,4 +1,10 @@
 #include "intro_looping_sound_with_effect.hpp"
+
+jt::IntroLoopingSoundWithEffect::IntroLoopingSoundWithEffect(std::string const& introFileName,
+    std::string const& loopingFileName, oalpp::effects::MonoEffectInterface& effect)
+{
+}
+
 void jt::IntroLoopingSoundWithEffect::update() { }
 bool jt::IntroLoopingSoundWithEffect::isPlaying() const { return false; }
 void jt::IntroLoopingSoundWithEffect::play() { }

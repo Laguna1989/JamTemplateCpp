@@ -2,10 +2,14 @@
 #define GUARD_JAMTEMPLATE_INTRO_LOOPING_SOUND_WITH_EFFECT_HPP
 
 #include <audio/sound_interface.hpp>
+#include <oalpp/effects/mono_effect_interface.hpp>
+#include <string>
 
 namespace jt {
 class IntroLoopingSoundWithEffect : public SoundInterface {
 public:
+    IntroLoopingSoundWithEffect(std::string const& introFileName,
+        std::string const& loopingFileName, oalpp::effects::MonoEffectInterface& effect);
     void update() override;
     bool isPlaying() const override;
     void play() override;
@@ -23,6 +27,6 @@ public:
     float getBlend() const override;
     int getSampleRate() const override;
 };
-}
+} // namespace jt
 
 #endif // GUARD_JAMTEMPLATE_INTRO_LOOPING_SOUND_WITH_EFFECT_HPP
