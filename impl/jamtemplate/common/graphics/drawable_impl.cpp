@@ -9,7 +9,9 @@ void jt::DrawableImpl::draw(std::shared_ptr<jt::RenderTarget> sptr) const
         std::cout << "WARNING: Calling DrawableImpl::draw() without previous call to "
                      "DrawableImpl::update()!\n";
     }
-
+    if (!sptr) {
+        return;
+    }
     if (isVisible()) {
         drawShadow(sptr);
         doDraw(sptr);
@@ -95,3 +97,5 @@ bool jt::DrawableImpl::isVisible() const
     }
     return true;
 }
+void jt::DrawableImpl::setBlendMode(jt::BlendMode mode) { m_blendMode = mode; }
+jt::BlendMode jt::DrawableImpl::getBlendMode() const { return m_blendMode; }

@@ -15,9 +15,6 @@ void jt::Line::doUpdate(float /*elapsed*/) { }
 
 void jt::Line::doDraw(std::shared_ptr<jt::RenderTarget> const sptr) const
 {
-    if (!sptr) {
-        return;
-    }
     auto const startPosition = getPosition() + getShakeOffset() + getOffset() + getCamOffset();
     auto const endPosition
         = startPosition + jt::Vector2f { m_lineVector.x * m_scale.x, m_lineVector.y * m_scale.y };
@@ -25,7 +22,8 @@ void jt::Line::doDraw(std::shared_ptr<jt::RenderTarget> const sptr) const
     sf::VertexArray line { sf::Lines, 2 };
     line[0] = sf::Vertex { toLib(startPosition), toLib(m_color) };
     line[1] = sf::Vertex { toLib(endPosition), toLib(m_color) };
-    sptr->draw(line);
+    sf::RenderStates states { getSfBlendMode() };
+    sptr->draw(line, states);
 }
 
 void jt::Line::doDrawFlash(std::shared_ptr<jt::RenderTarget> const sptr) const

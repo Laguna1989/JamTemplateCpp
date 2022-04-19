@@ -8,6 +8,7 @@ class DrawableImplSdl : public jt::DrawableImpl {
 public:
     [[deprecated("Currently only implemented for SFML")]] void setCustomShader(
         std::string const& shaderCodeVertex, std::string const& shaderCodeFragment) override;
+    SDL_BlendMode getSDLBlendMode() const;
 };
 
 } // namespace jt

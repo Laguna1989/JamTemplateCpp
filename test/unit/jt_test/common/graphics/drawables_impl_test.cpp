@@ -214,3 +214,9 @@ TEST_P(DrawableImplTestFixture, GetShadowColorAfterSet)
     drawable->setShadow(jt::colors::Yellow, jt::Vector2f { 1.0f, 1.0f });
     ASSERT_EQ(drawable->getShadowColor(), jt::colors::Yellow);
 }
+
+TEST_P(DrawableImplTestFixture, GetBlendModeAfterSetBlendMode)
+{
+    drawable->setBlendMode(jt::BlendMode::MUL);
+    ASSERT_EQ(drawable->getBlendMode(), jt::BlendMode::MUL);
+}

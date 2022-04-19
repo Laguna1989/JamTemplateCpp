@@ -41,10 +41,6 @@ bool jt::tilemap::TileLayer::isTileVisible(jt::tilemap::TileInfo const& tile) co
 
 void jt::tilemap::TileLayer::doDraw(std::shared_ptr<jt::RenderTarget> const sptr) const
 {
-    if (!sptr) {
-        return;
-    }
-
     auto const posOffset = m_position + getShakeOffset() + getOffset();
     for (auto const& tile : m_tiles) {
         // optimization: don't draw tiles which are not visible in this frame
@@ -58,6 +54,7 @@ void jt::tilemap::TileLayer::doDraw(std::shared_ptr<jt::RenderTarget> const sptr
             pixelPosForTile.x * this->m_scale.x, pixelPosForTile.y * this->m_scale.y });
         this->m_tileSetSprites.at(id)->setScale(this->m_scale);
         this->m_tileSetSprites.at(id)->update(0.0f);
+        this->m_tileSetSprites.at(id)->setBlendMode(getBlendMode());
         this->m_tileSetSprites.at(id)->draw(sptr);
     }
 }

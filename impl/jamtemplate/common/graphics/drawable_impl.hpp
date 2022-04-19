@@ -61,6 +61,10 @@ public:
 
     virtual bool isVisible() const;
 
+    void setBlendMode(jt::BlendMode mode) override;
+
+    BlendMode getBlendMode() const override;
+
 protected:
     jt::Vector2f getShakeOffset() const;
     jt::Vector2f getCamOffset() const;
@@ -73,6 +77,8 @@ private:
     bool m_hasBeenUpdated { false };
 
     jt::Vector2f m_offset { 0, 0 };
+
+    jt::BlendMode m_blendMode { jt::BlendMode::ALPHA };
 
     // overwrite this method
     virtual void doDraw(std::shared_ptr<jt::RenderTarget> const sptr) const = 0;

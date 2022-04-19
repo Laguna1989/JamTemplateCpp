@@ -228,7 +228,7 @@ void jt::Animation::doDraw(std::shared_ptr<jt::RenderTarget> const sptr) const
                 + "'\n";
         return;
     }
-
+    m_frames.at(m_currentAnimName).at(m_currentIdx)->setBlendMode(getBlendMode());
     m_frames.at(m_currentAnimName).at(m_currentIdx)->draw(sptr);
 }
 
