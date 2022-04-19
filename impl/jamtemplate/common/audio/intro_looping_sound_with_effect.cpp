@@ -2,18 +2,10 @@
 
 jt::IntroLoopingSoundWithEffect::IntroLoopingSoundWithEffect(std::string const& introFileName,
     std::string const& loopingFileName, oalpp::effects::MonoEffectInterface& effect)
-    : m_introDrySoundData { introFileName }
-    , m_introDrySound { m_introDrySoundData }
-    , m_loopingDrySoundData { loopingFileName }
-    , m_loopingDrySound { m_loopingDrySoundData }
-
-    , m_introWetSoundData { m_introDrySoundData, effect }
-    , m_introWetSound { m_introWetSoundData }
-    , m_loopingWetSoundData { m_loopingDrySoundData, effect }
-    , m_loopingWetSound { m_loopingWetSoundData }
+    : m_introSound { std::make_unique<jt::SoundWithEffect>(introFileName, effect) }
+    , m_loopingSound { std::make_unique<jt::SoundWithEffect>(loopingFileName, effect) }
 {
-    m_loopingDrySound.setIsLooping(true);
-    m_loopingWetSound.setIsLooping(true);
+    m_loopingSound->setLoop(true);
 }
 
 void jt::IntroLoopingSoundWithEffect::update()
@@ -22,36 +14,32 @@ void jt::IntroLoopingSoundWithEffect::update()
         return;
     }
 
-    if (m_introDrySound.isPlaying()) {
-        m_introDrySound.update();
-        m_introWetSound.update();
+    if (m_introSound->isPlaying()) {
+        m_introSound->update();
     } else {
         if (m_isIntroMusicPlaying) {
             m_isIntroMusicPlaying = false;
-            m_loopingDrySound.play();
-            m_loopingWetSound.play();
+            m_loopingSound->play();
         }
 
-        m_loopingDrySound.update();
-        m_loopingWetSound.update();
+        m_loopingSound->update();
     }
 
-    m_introDrySound.setVolume(m_volume * (1.0f - m_blend));
-    m_loopingDrySound.setVolume(m_volume * (1.0f - m_blend));
-    m_introWetSound.setVolume(m_volume * (m_blend));
-    m_loopingWetSound.setVolume(m_volume * (m_blend));
+    m_introSound->setVolume(m_volume);
+    m_loopingSound->setVolume(m_volume);
+    m_introSound->setBlend(m_blend);
+    m_loopingSound->setBlend(m_blend);
 }
 
 bool jt::IntroLoopingSoundWithEffect::isPlaying() const
 {
-    return m_introDrySound.isPlaying() || m_loopingDrySound.isPlaying();
+    return m_introSound->isPlaying() || m_loopingSound->isPlaying();
 }
 
 void jt::IntroLoopingSoundWithEffect::play()
 {
     m_isStopped = false;
-    m_introDrySound.play();
-    m_introWetSound.play();
+    m_introSound->play();
 }
 
 void jt::IntroLoopingSoundWithEffect::stop()
@@ -59,10 +47,8 @@ void jt::IntroLoopingSoundWithEffect::stop()
     m_isIntroMusicPlaying = true;
     m_isStopped = true;
 
-    m_introDrySound.stop();
-    m_loopingDrySound.stop();
-    m_introWetSound.stop();
-    m_loopingWetSound.stop();
+    m_introSound->stop();
+    m_loopingSound->stop();
 }
 
 void jt::IntroLoopingSoundWithEffect::pause()
@@ -70,11 +56,9 @@ void jt::IntroLoopingSoundWithEffect::pause()
     if (m_isIntroMusicPlaying) {
         // TODO in intro this is a stop, not a pause
         m_isStopped = true;
-        m_introDrySound.pause();
-        m_introWetSound.pause();
+        m_introSound->pause();
     } else {
-        m_loopingDrySound.pause();
-        m_loopingWetSound.pause();
+        m_loopingSound->pause();
     }
 }
 
@@ -83,33 +67,28 @@ void jt::IntroLoopingSoundWithEffect::setVolume(float newVolume) { m_volume = ne
 
 void jt::IntroLoopingSoundWithEffect::setPitch(float pitch)
 {
-    m_introDrySound.setPitch(pitch);
-    m_loopingDrySound.setPitch(pitch);
-    m_introWetSound.setPitch(pitch);
-    m_loopingWetSound.setPitch(pitch);
+    m_introSound->setPitch(pitch);
+    m_loopingSound->setPitch(pitch);
 }
-float jt::IntroLoopingSoundWithEffect::getPitch() const { return m_introDrySound.getPitch(); }
+float jt::IntroLoopingSoundWithEffect::getPitch() const { return m_introSound->getPitch(); }
 
 void jt::IntroLoopingSoundWithEffect::setLoop(bool /*doLoop*/) { }
 bool jt::IntroLoopingSoundWithEffect::getLoop() { return true; }
 
 float jt::IntroLoopingSoundWithEffect::getDuration() const
 {
-    return m_introDrySound.getLengthInSeconds() + m_loopingDrySound.getLengthInSeconds();
+    return m_introSound->getDuration() + m_loopingSound->getDuration();
 }
 
 float jt::IntroLoopingSoundWithEffect::getPosition() const
 {
-    if (m_introDrySound.isPlaying()) {
-        return m_introDrySound.getCurrentOffsetInSeconds();
+    if (m_introSound->isPlaying()) {
+        return m_introSound->getPosition();
     }
-    return m_introDrySound.getLengthInSeconds() + m_loopingDrySound.getCurrentOffsetInSeconds();
+    return m_introSound->getPosition() + m_loopingSound->getPosition();
 }
 
 void jt::IntroLoopingSoundWithEffect::setBlend(float blend) { m_blend = blend; }
 float jt::IntroLoopingSoundWithEffect::getBlend() const { return m_blend; }
 
-int jt::IntroLoopingSoundWithEffect::getSampleRate() const
-{
-    return m_introDrySoundData.getSampleRate();
-}
+int jt::IntroLoopingSoundWithEffect::getSampleRate() const { return m_introSound->getSampleRate(); }

@@ -2,10 +2,12 @@
 #define GUARD_JAMTEMPLATE_INTRO_LOOPING_SOUND_WITH_EFFECT_HPP
 
 #include <audio/sound_interface.hpp>
+#include <audio/sound_with_effect.hpp>
 #include <oalpp/effects/mono_effect_interface.hpp>
 #include <oalpp/sound.hpp>
 #include <oalpp/sound_data/sound_data.hpp>
 #include <oalpp/sound_data/sound_data_with_effect.hpp>
+#include <memory>
 #include <string>
 
 namespace jt {
@@ -31,15 +33,17 @@ public:
     int getSampleRate() const override;
 
 private:
-    oalpp::SoundData m_introDrySoundData;
-    oalpp::SoundData m_loopingDrySoundData;
-    oalpp::Sound m_introDrySound;
-    oalpp::Sound m_loopingDrySound;
-
-    oalpp::SoundDataWithEffect m_introWetSoundData;
-    oalpp::SoundDataWithEffect m_loopingWetSoundData;
-    oalpp::Sound m_introWetSound;
-    oalpp::Sound m_loopingWetSound;
+    std::unique_ptr<jt::SoundWithEffect> m_introSound { nullptr };
+    std::unique_ptr<jt::SoundWithEffect> m_loopingSound { nullptr };
+    //    oalpp::SoundData m_introDrySoundData;
+    //    oalpp::SoundData m_loopingDrySoundData;
+    //    oalpp::Sound m_introDrySound;
+    //    oalpp::Sound m_loopingDrySound;
+    //
+    //    oalpp::SoundDataWithEffect m_introWetSoundData;
+    //    oalpp::SoundDataWithEffect m_loopingWetSoundData;
+    //    oalpp::Sound m_introWetSound;
+    //    oalpp::Sound m_loopingWetSound;
 
     float m_blend { 0.0f };
     float m_volume { 1.0f };
