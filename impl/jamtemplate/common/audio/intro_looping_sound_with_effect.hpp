@@ -3,6 +3,9 @@
 
 #include <audio/sound_interface.hpp>
 #include <oalpp/effects/mono_effect_interface.hpp>
+#include <oalpp/sound.hpp>
+#include <oalpp/sound_data/sound_data.hpp>
+#include <oalpp/sound_data/sound_data_with_effect.hpp>
 #include <string>
 
 namespace jt {
@@ -26,6 +29,23 @@ public:
     void setBlend(float blend) override;
     float getBlend() const override;
     int getSampleRate() const override;
+
+private:
+    oalpp::SoundData m_introDrySoundData;
+    oalpp::SoundData m_loopingDrySoundData;
+    oalpp::Sound m_introDrySound;
+    oalpp::Sound m_loopingDrySound;
+
+    oalpp::SoundDataWithEffect m_introWetSoundData;
+    oalpp::SoundDataWithEffect m_loopingWetSoundData;
+    oalpp::Sound m_introWetSound;
+    oalpp::Sound m_loopingWetSound;
+
+    float m_blend { 0.0f };
+    float m_volume { 1.0f };
+
+    bool m_isIntroMusicPlaying { true };
+    bool m_isStopped { true };
 };
 } // namespace jt
 

@@ -58,7 +58,6 @@ void StateAudio::doInternalDraw() const
         // create new music
         m_sound = getGame()->audio().addPermanentSound(
             "music", "assets/demos/audio/intro.ogg", "assets/demos/audio/loop.ogg", m_effect);
-        m_sound->setLoop(true);
         m_sound->play();
     }
     if (ImGui::Button("pause")) {
