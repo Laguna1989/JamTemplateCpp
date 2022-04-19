@@ -57,7 +57,7 @@ void Shape::doDraw(std::shared_ptr<jt::RenderTarget> const sptr) const
     SDL_Rect const destRect = getDestRect();
     auto const flip = jt::getFlipFromScale(m_scale);
     SDL_Point const p { static_cast<int>(m_origin.x), static_cast<int>(m_origin.y) };
-    SDL_SetRenderDrawBlendMode(sptr.get(), SDL_BLENDMODE_BLEND);
+    SDL_SetRenderDrawBlendMode(sptr.get(), getSDLBlendMode());
     setSDLColor(m_color);
     SDL_RenderCopyEx(sptr.get(), m_text.get(), nullptr, &destRect, getRotation(), &p, flip);
 }

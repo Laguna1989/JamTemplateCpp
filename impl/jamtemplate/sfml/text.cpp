@@ -100,7 +100,11 @@ void jt::Text::doDrawShadow(std::shared_ptr<jt::RenderTarget> const sptr) const
     m_text->setFillColor(toLib(oldCol));
 }
 
-void jt::Text::doDraw(std::shared_ptr<jt::RenderTarget> const sptr) const { sptr->draw(*m_text); }
+void jt::Text::doDraw(std::shared_ptr<jt::RenderTarget> const sptr) const
+{
+    sf::RenderStates states { getSfBlendMode() };
+    sptr->draw(*m_text, states);
+}
 
 void jt::Text::doDrawFlash(std::shared_ptr<jt::RenderTarget> const sptr) const
 {

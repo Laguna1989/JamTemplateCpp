@@ -12,3 +12,13 @@ void jt::DrawableImplSFML::setCustomShader(
         m_shader->loadFromMemory(shaderCodeVertex, shaderCodeFragment);
     }
 }
+sf::BlendMode jt::DrawableImplSFML::getSfBlendMode() const
+{
+    if (getBlendMode() == jt::BlendMode::ADD) {
+        return sf::BlendAdd;
+    } else if (getBlendMode() == jt::BlendMode::MUL) {
+        return sf::BlendMultiply;
+    } else if (getBlendMode() == jt::BlendMode::ALPHA) {
+        return sf::BlendAlpha;
+    }
+}

@@ -13,6 +13,8 @@ public:
 
 protected:
     std::shared_ptr<sf::Shader> m_shader { nullptr };
+
+    sf::BlendMode getSfBlendMode() const;
 };
 
 } // namespace jt
