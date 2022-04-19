@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1650296199691,
+  "lastUpdate": 1650358419532,
   "repoUrl": "https://github.com/Laguna1989/JamTemplateCpp",
   "entries": {
     "Benchmark": [
@@ -5346,6 +5346,72 @@ window.BENCHMARK_DATA = {
             "value": 3.005617833333334,
             "unit": "ms/iter",
             "extra": "iterations: 234\ncpu: 2.9900132478632457 ms\nthreads: 1"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "laguna.ws@gmail.com",
+            "name": "Laguna1989",
+            "username": "Laguna1989"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "c412abcea6fdf0bedd21a0b14a0c50c13e2dfd6a",
+          "message": "Merge pull request #198 from Laguna1989/FEATURE_AddBlendModes\n\nAdd blend modes",
+          "timestamp": "2022-04-19T10:50:55+02:00",
+          "tree_id": "04e307feb5dae7db1064bd37923651819a260fb5",
+          "url": "https://github.com/Laguna1989/JamTemplateCpp/commit/c412abcea6fdf0bedd21a0b14a0c50c13e2dfd6a"
+        },
+        "date": 1650358419011,
+        "tool": "googlecpp",
+        "benches": [
+          {
+            "name": "BM_UpdateDrawablePositions",
+            "value": 2.830303514170016,
+            "unit": "ms/iter",
+            "extra": "iterations: 247\ncpu: 2.829142510121457 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GetAllCommands",
+            "value": 0.31763971870733243,
+            "unit": "ms/iter",
+            "extra": "iterations: 2197\ncpu: 0.31735634956759207 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_LoggerLogWithoutTarget",
+            "value": 0.793892969456993,
+            "unit": "ms/iter",
+            "extra": "iterations: 884\ncpu: 0.7936659502262445 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_LoggerLogWithCoutTargetSetToOff",
+            "value": 0.783124714445671,
+            "unit": "ms/iter",
+            "extra": "iterations: 893\ncpu: 0.7830484882418812 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_StartGame",
+            "value": 0.002785671064638641,
+            "unit": "ms/iter",
+            "extra": "iterations: 250949\ncpu: 0.002785491474363318 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_RefineTilemapCollisions",
+            "value": 0.181411773382241,
+            "unit": "ms/iter",
+            "extra": "iterations: 3817\ncpu: 0.1813989782551744 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GamestateWithTweeningShapes",
+            "value": 2.9265714937238543,
+            "unit": "ms/iter",
+            "extra": "iterations: 239\ncpu: 2.9265188284518855 ms\nthreads: 1"
           }
         ]
       }
