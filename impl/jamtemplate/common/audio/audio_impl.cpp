@@ -1,4 +1,5 @@
 #include "audio_impl.hpp"
+#include <audio/intro_looping_sound_with_effect.hpp>
 #include <audio/sound.hpp>
 #include <audio/sound_with_effect.hpp>
 #include <random/random.hpp>
@@ -75,6 +76,14 @@ std::shared_ptr<jt::SoundInterface> jt::AudioImpl::addPermanentSound(std::string
     std::string const& fileName, oalpp::effects::MonoEffectInterface& effect)
 {
     auto sound = std::make_shared<jt::SoundWithEffect>(fileName, effect);
+    m_permanentSounds[identifier] = sound;
+    return sound;
+}
+std::shared_ptr<jt::SoundInterface> jt::AudioImpl::addPermanentSound(std::string const& identifier,
+    std::string const& introFileName, std::string const& loopingFileName,
+    oalpp::effects::MonoEffectInterface& effect)
+{
+    auto sound = std::make_shared<jt::IntroLoopingSoundWithEffect>(introFileName, loopingFileName,  effect);
     m_permanentSounds[identifier] = sound;
     return sound;
 }

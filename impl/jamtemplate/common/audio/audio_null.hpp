@@ -23,6 +23,9 @@ public:
         std::string const& identifier, std::string const& fileName) override;
     std::shared_ptr<jt::SoundInterface> addPermanentSound(std::string const& identifier,
         std::string const& fileName, oalpp::effects::MonoEffectInterface& effect) override;
+    std::shared_ptr<jt::SoundInterface> addPermanentSound(std::string const& identifier,
+        std::string const& introFileName, std::string const& loopingFileName,
+        oalpp::effects::MonoEffectInterface& effect) override;
 
     std::shared_ptr<SoundInterface> soundPool(
         std::string const& baseIdentifier, std::string const& fileName, std::size_t count) override;

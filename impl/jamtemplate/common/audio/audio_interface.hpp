@@ -46,6 +46,17 @@ public:
         std::string const& fileName, oalpp::effects::MonoEffectInterface& effect)
         = 0;
 
+    /// Add a permanent sound that can be removed via removePermanentSound
+    /// \param identifier identifier for this sound
+    /// \param introFileName filename of the intro sound to load
+    /// \param loopingFileName filename of the sound to be looped
+    /// \param effect effect to be used on the sound
+    /// \return shared pointer to the Sound
+    virtual std::shared_ptr<jt::SoundInterface> addPermanentSound(std::string const& identifier,
+        std::string const& introFileName, std::string const& loopingFileName,
+        oalpp::effects::MonoEffectInterface& effect)
+        = 0;
+
     virtual std::shared_ptr<SoundInterface> soundPool(
         std::string const& baseIdentifier, std::string const& fileName, std::size_t count)
         = 0;

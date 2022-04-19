@@ -1,8 +1,8 @@
 #include "state_audio.hpp"
 #include <audio/sound_group.hpp>
 #include <game_interface.hpp>
-#include <imgui.h>
 #include <state_select.hpp>
+#include <imgui.h>
 
 void StateAudio::doInternalCreate()
 {
@@ -11,10 +11,8 @@ void StateAudio::doInternalCreate()
     if (m_sound == nullptr) {
         // create new music
         m_sound = getGame()->audio().addPermanentSound(
-            "music", "assets/looping_stereo_track.mp3", m_effect);
+            "music", "assets/demos/audio/looping_stereo_track.mp3", m_effect);
         m_sound->setLoop(true);
-        m_sound->play();
-
     } else {
         // get blend property from already created music
         m_blend = m_sound->getBlend();
@@ -49,7 +47,17 @@ void StateAudio::doInternalDraw() const
 {
     ImGui::Begin("Sound");
     ImGui::SliderFloat("blend", &m_blend, 0.0f, 1.0f);
-    if (ImGui::Button("play")) {
+    if (ImGui::Button("play looping")) {
+        // create new music
+        m_sound = getGame()->audio().addPermanentSound(
+            "music", "assets/demos/audio/looping_stereo_track.mp3", m_effect);
+        m_sound->setLoop(true);
+        m_sound->play();
+    }
+    if (ImGui::Button("play intro + looping")) {
+        // create new music
+        m_sound = getGame()->audio().addPermanentSound(
+            "music", "assets/demos/audio/intro.ogg", "assets/demos/audio/loop.ogg", m_effect);
         m_sound->play();
     }
     if (ImGui::Button("pause")) {
