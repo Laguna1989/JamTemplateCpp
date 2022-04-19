@@ -68,6 +68,8 @@ void jt::IntroLoopingSoundWithEffect::stop()
 void jt::IntroLoopingSoundWithEffect::pause()
 {
     if (m_isIntroMusicPlaying) {
+        // TODO in intro this is a stop, not a pause
+        m_isStopped = true;
         m_introDrySound.pause();
         m_introWetSound.pause();
     } else {
