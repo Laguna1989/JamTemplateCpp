@@ -35,15 +35,6 @@ public:
 private:
     std::unique_ptr<jt::SoundWithEffect> m_introSound { nullptr };
     std::unique_ptr<jt::SoundWithEffect> m_loopingSound { nullptr };
-    //    oalpp::SoundData m_introDrySoundData;
-    //    oalpp::SoundData m_loopingDrySoundData;
-    //    oalpp::Sound m_introDrySound;
-    //    oalpp::Sound m_loopingDrySound;
-    //
-    //    oalpp::SoundDataWithEffect m_introWetSoundData;
-    //    oalpp::SoundDataWithEffect m_loopingWetSoundData;
-    //    oalpp::Sound m_introWetSound;
-    //    oalpp::Sound m_loopingWetSound;
 
     float m_blend { 0.0f };
     float m_volume { 1.0f };
