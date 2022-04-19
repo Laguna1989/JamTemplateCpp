@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1650358419532,
+  "lastUpdate": 1650392925132,
   "repoUrl": "https://github.com/Laguna1989/JamTemplateCpp",
   "entries": {
     "Benchmark": [
@@ -5412,6 +5412,72 @@ window.BENCHMARK_DATA = {
             "value": 2.9265714937238543,
             "unit": "ms/iter",
             "extra": "iterations: 239\ncpu: 2.9265188284518855 ms\nthreads: 1"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "laguna.ws@gmail.com",
+            "name": "Laguna1989",
+            "username": "Laguna1989"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "37c9057a07de315f8aaf893cd26dc8b6fc446501",
+          "message": "Merge pull request #199 from Laguna1989/FEATURE_IntroLoopingAudio\n\nIntroLooping Sound",
+          "timestamp": "2022-04-19T20:26:13+02:00",
+          "tree_id": "594834079aac3686d57bb90f8e3980163b35fcbd",
+          "url": "https://github.com/Laguna1989/JamTemplateCpp/commit/37c9057a07de315f8aaf893cd26dc8b6fc446501"
+        },
+        "date": 1650392924610,
+        "tool": "googlecpp",
+        "benches": [
+          {
+            "name": "BM_UpdateDrawablePositions",
+            "value": 2.8487540809716685,
+            "unit": "ms/iter",
+            "extra": "iterations: 247\ncpu: 2.847275303643725 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GetAllCommands",
+            "value": 0.31986476666666325,
+            "unit": "ms/iter",
+            "extra": "iterations: 2190\ncpu: 0.31984890410958894 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_LoggerLogWithoutTarget",
+            "value": 0.7667469063180821,
+            "unit": "ms/iter",
+            "extra": "iterations: 918\ncpu: 0.7630830065359477 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_LoggerLogWithCoutTargetSetToOff",
+            "value": 0.7612104891067473,
+            "unit": "ms/iter",
+            "extra": "iterations: 918\ncpu: 0.7611293028322443 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_StartGame",
+            "value": 0.002710861111218981,
+            "unit": "ms/iter",
+            "extra": "iterations: 257645\ncpu: 0.002710692619689884 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_RefineTilemapCollisions",
+            "value": 0.18472216457352061,
+            "unit": "ms/iter",
+            "extra": "iterations: 3822\ncpu: 0.18461119832548403 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GamestateWithTweeningShapes",
+            "value": 2.9249044979079137,
+            "unit": "ms/iter",
+            "extra": "iterations: 239\ncpu: 2.9246983263598323 ms\nthreads: 1"
           }
         ]
       }
