@@ -63,8 +63,11 @@ For mac os you have to install cmake and sfml via homebrew: `brew install cmake 
 If you use another package manager or want to install the dependencies yourself, you have to modify the paths
 in `CMakeLists.txt`.
 
-However, as MacOS seems to be pretty picky with installed libraries and packaging an executable is a pain, it is highly
-recommended using the Web build to show your game to your Mac friends.
+## Deployment
+
+Automatic creation of the files is automated via github actions. If a release is created with semantic versioning (e.g. `v1.2.3`), a deployment build is triggered, which builds the game executable for windows, linux, mac and web and attaches the zipped files to the release once the build is finished. The archives can directly be uploaded on [itch](itch.io), [gamejolt](https://gamejolt.com/) or any other website.
+
+Note: Only the game executable and the `assets` folder is included in the archive. If more files are required, either adjust the deployment script or place them in the assets folder.
 
 ## Cmake options
 
