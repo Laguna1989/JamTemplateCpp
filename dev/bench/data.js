@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1650442632094,
+  "lastUpdate": 1650696150351,
   "repoUrl": "https://github.com/Laguna1989/JamTemplateCpp",
   "entries": {
     "Benchmark": [
@@ -5610,6 +5610,72 @@ window.BENCHMARK_DATA = {
             "value": 3.5725450849056446,
             "unit": "ms/iter",
             "extra": "iterations: 212\ncpu: 3.374859905660376 ms\nthreads: 1"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "laguna.ws@gmail.com",
+            "name": "Laguna1989",
+            "username": "Laguna1989"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "9cb9c62a1c2d70ef78fbf1c4d1b63b6f31518dbc",
+          "message": "Merge pull request #204 from Laguna1989/FEATURE_ClionFileTemplate\n\nAdd Clion File template",
+          "timestamp": "2022-04-23T08:39:25+02:00",
+          "tree_id": "a235fb58e7c8926e919f75af5b2936ae3192683c",
+          "url": "https://github.com/Laguna1989/JamTemplateCpp/commit/9cb9c62a1c2d70ef78fbf1c4d1b63b6f31518dbc"
+        },
+        "date": 1650696149168,
+        "tool": "googlecpp",
+        "benches": [
+          {
+            "name": "BM_UpdateDrawablePositions",
+            "value": 5.492905270491762,
+            "unit": "ms/iter",
+            "extra": "iterations: 122\ncpu: 5.488204918032787 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GetAllCommands",
+            "value": 0.30047241036414235,
+            "unit": "ms/iter",
+            "extra": "iterations: 2142\ncpu: 0.3004674136321195 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_LoggerLogWithoutTarget",
+            "value": 0.8469605346889986,
+            "unit": "ms/iter",
+            "extra": "iterations: 836\ncpu: 0.8468953349282301 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_LoggerLogWithCoutTargetSetToOff",
+            "value": 0.8599107115613639,
+            "unit": "ms/iter",
+            "extra": "iterations: 839\ncpu: 0.8598475566150177 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_StartGame",
+            "value": 0.0029942182016460934,
+            "unit": "ms/iter",
+            "extra": "iterations: 253087\ncpu: 0.0029940158917684417 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_RefineTilemapCollisions",
+            "value": 0.1704981571881844,
+            "unit": "ms/iter",
+            "extra": "iterations: 4097\ncpu: 0.17048413473273114 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GamestateWithTweeningShapes",
+            "value": 2.9949169358974554,
+            "unit": "ms/iter",
+            "extra": "iterations: 234\ncpu: 2.994654273504275 ms\nthreads: 1"
           }
         ]
       }
