@@ -31,6 +31,8 @@ and some more at [my game portfolio](https://runvs.io/Games).
 
 1. open project folder in clion
 
+Hint: There is a file template available in the `.idea` folder that will make take away some of the boilerplate code during creation of Gameobject classes. 
+
 ### Windows 32 bit
 
 There should be no need for a 32 bit executable anymore. However, if strictly required, perform the steps from above
