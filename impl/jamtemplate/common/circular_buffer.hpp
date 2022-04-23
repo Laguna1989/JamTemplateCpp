@@ -52,6 +52,14 @@ public:
     using IteratorT = typename ArrayT::iterator;
     using ConstIteratorT = typename ArrayT::const_iterator;
 
+    CircularBuffer()
+    {
+        // No uninitialized data!
+        for (auto i = 0u; i != m_data.size(); ++i) {
+            m_data[i] = T {};
+        }
+    }
+
     /// Access a const value from the circular buffer
     /// \param position index
     /// \return const reference to the element
@@ -70,6 +78,9 @@ public:
     /// \return true if present, false otherwise
     bool contains(T const& expected)
     {
+        if (m_data.empty()) {
+            return false;
+        }
         return std::any_of(m_data.cbegin(), m_data.cend(),
             [&expected](auto const& value) { return value == expected; });
     }

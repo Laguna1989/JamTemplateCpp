@@ -30,9 +30,7 @@ std::shared_ptr<jt::RenderTarget> RenderWindow::createRenderTarget()
         throw std::logic_error { "failed to create renderer." };
     }
     SDL_SetRenderDrawBlendMode(renderTarget.get(), SDL_BLENDMODE_BLEND);
-    ImGui::CreateContext();
-    ImGuiSDL::Initialize(
-        renderTarget.get(), static_cast<int>(m_size.x), static_cast<int>(m_size.y));
+    checkIfGuiInitialized();
     return renderTarget;
 }
 
@@ -67,6 +65,7 @@ void RenderWindow::draw(std::unique_ptr<jt::Sprite>& spr)
 void RenderWindow::display()
 {
     if (m_renderGui) {
+        checkIfGuiInitialized();
         ImGui::Render();
         ImGuiSDL::Render(ImGui::GetDrawData());
     }
@@ -93,6 +92,7 @@ bool RenderWindow::getMouseCursorVisible() const { return m_isMouseCursorVisible
 
 void RenderWindow::updateGui(float elapsed)
 {
+    checkIfGuiInitialized();
 #if JT_ENABLE_WEB
     // actually we do not care about the initialization of the backend. However InitForMetal does
     // not do anything more than initializing the keymap, which is exactly what we want here.
@@ -112,11 +112,30 @@ void RenderWindow::updateGui(float elapsed)
 
 void RenderWindow::startRenderGui()
 {
+    checkIfGuiInitialized();
     ImGui::NewFrame();
     m_renderGui = true;
 }
 
-bool RenderWindow::shouldProcessKeyboard() { return !ImGui::GetIO().WantCaptureKeyboard; }
-bool RenderWindow::shouldProcessMouse() { return !ImGui::GetIO().WantCaptureMouse; }
+bool RenderWindow::shouldProcessKeyboard()
+{
+    checkIfGuiInitialized();
+    return !ImGui::GetIO().WantCaptureKeyboard;
+}
+bool RenderWindow::shouldProcessMouse()
+{
+    checkIfGuiInitialized();
+    return !ImGui::GetIO().WantCaptureMouse;
+}
+
+void RenderWindow::checkIfGuiInitialized()
+{
+    if (!m_ImGuiInitialized) {
+        ImGui::CreateContext();
+        ImGuiSDL::Initialize(
+            renderTarget.get(), static_cast<int>(m_size.x), static_cast<int>(m_size.y));
+        m_ImGuiInitialized = true;
+    }
+}
 
 } // namespace jt

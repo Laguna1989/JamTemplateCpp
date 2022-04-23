@@ -38,6 +38,10 @@ private:
     bool m_isMouseCursorVisible { true };
     bool m_isOpen { true };
     bool m_renderGui { false };
+
+    bool m_ImGuiInitialized { false };
+
+    void checkIfGuiInitialized();
 };
 } // namespace jt
 
