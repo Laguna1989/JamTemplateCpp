@@ -55,16 +55,16 @@ TEST_P(SpatialObjectGridParametrizedTestFixture,
     ASSERT_EQ(obj, objects.at(0).lock());
 }
 
+// clang-format off
 INSTANTIATE_TEST_SUITE_P(SpatialObjectGridParametrizedTest,
-    SpatialObjectGridParametrizedTestFixture, ::testing::Values(jt::Vector2f { 8.0f, 8.0f }));
-
-TEST(SpatialObjectGridTest, GetObjectsAroundReturnsVectorWithCorrectEntryForOneObjectInCell)
-{
-    SpatialObjectGrid<TestObject, 16> grid {};
-    auto obj = std::make_shared<TestObject>();
-    obj->setPosition(jt::Vector2f { 8.0f, 8.0f });
-    grid.push_back(obj);
-    auto const objects = grid.getObjectsAround(jt::Vector2f { 8.0f, 8.0f }, 16.0f);
-    ASSERT_FALSE(objects.empty());
-    ASSERT_EQ(obj, objects.at(0).lock());
-}
+    SpatialObjectGridParametrizedTestFixture,
+    ::testing::Values(
+        jt::Vector2f { 8.0f, 8.0f },
+        jt::Vector2f { 0.0f, 0.0f },
+        jt::Vector2f { 15.9f, 15.9f },
+        jt::Vector2f { 8.0f, 0.0f },
+        jt::Vector2f { 0.0f, 8.0f },
+        jt::Vector2f { 15.9f, 0.0f },
+        jt::Vector2f { 0.0f, 15.9f }
+    ));
+// clang-format on
