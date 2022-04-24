@@ -4,31 +4,48 @@
 
 struct TestObject {
     jt::Vector2f getPosition() const { return m_position; }
-    jt::Vector2f setPosition(jt::Vector2f const& newPosition) { m_position = newPosition; }
+    void setPosition(jt::Vector2f const& newPosition) { m_position = newPosition; }
 
 private:
     jt::Vector2f m_position {};
 };
 
+using jt::SpatialObjectGrid;
+
 TEST(SpatialObjectGridTest, InitialGridIsEmpty)
 {
-    SpatialObjectGrid<TestObject> grid {};
+    SpatialObjectGrid<TestObject, 16> grid {};
     ASSERT_TRUE(grid.empty());
 }
 
 TEST(SpatialObjectGridTest, GridIsNotEmptyAfterPushBack)
 {
-    SpatialObjectGrid<TestObject> grid {};
+    SpatialObjectGrid<TestObject, 16> grid {};
     auto obj = std::make_shared<TestObject>();
     grid.push_back(obj);
     ASSERT_FALSE(grid.empty());
 }
 
-TEST(SpatialObjectGridTest, GetCorrectNumberOfNeighborsAroundCell)
+TEST(SpatialObjectGridTest, GetObjectsAroundReturnsEmptyVectorIfGridEmpty)
 {
-    SpatialObjectGrid<TestObject> grid {};
-    auto obj = std::make_shared<TestObject>();
-    grid.push_back(obj);
+    SpatialObjectGrid<TestObject, 16> grid {};
+    ASSERT_TRUE(grid.getObjectsAround(jt::Vector2f { 0.0f, 0.0f }, 16.0f).empty());
+}
 
-    ASSERT_FALSE(true);
+TEST(SpatialObjectGridTest, GetObjectsAroundReturnsEmptyVectorIfCellEmpty)
+{
+    SpatialObjectGrid<TestObject, 16> grid {};
+    auto obj = std::make_shared<TestObject>();
+    obj->setPosition(jt::Vector2f { 5000.0f, 5000.0f });
+    grid.push_back(obj);
+    ASSERT_TRUE(grid.getObjectsAround(jt::Vector2f { 0.0f, 0.0f }, 16.0f).empty());
+}
+
+TEST(SpatialObjectGridTest, GetObjectsAroundReturnsVectorWithCorrectEntryForOneObjectInCell)
+{
+    SpatialObjectGrid<TestObject, 16> grid {};
+    auto obj = std::make_shared<TestObject>();
+    obj->setPosition(jt::Vector2f { 8.0f, 8.0f });
+    grid.push_back(obj);
+    ASSERT_FALSE(grid.getObjectsAround(jt::Vector2f { 8.0f, 8.0f }, 16.0f).empty());
 }
