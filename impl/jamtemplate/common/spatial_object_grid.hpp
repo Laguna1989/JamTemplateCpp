@@ -17,9 +17,7 @@ public:
         m_allObjects.push_back(obj);
 
         auto const lockedObj = obj.lock();
-        jt::Vector2f const objPosition = lockedObj->getPosition();
-        std::pair<int, int> const cellIndices { static_cast<int>(objPosition.x) / gridSize,
-            static_cast<int>(objPosition.y) / gridSize };
+        auto const cellIndices = getCellIndices(lockedObj->getPosition());
 
         if (m_cells.count(cellIndices) == 0) {
             m_cells[cellIndices] = std::vector<std::weak_ptr<T>> {};
@@ -30,12 +28,22 @@ public:
 
     std::vector<std::weak_ptr<T>> getObjectsAround(jt::Vector2f position, float distance) const
     {
-        return std::vector<std::weak_ptr<T>> {};
+        auto const cellIndices = getCellIndices(position);
+        if (m_cells.count(cellIndices) == 0) {
+            return std::vector<std::weak_ptr<T>> {};
+        }
+        return m_cells.at(cellIndices);
     }
 
 private:
     std::vector<std::weak_ptr<T>> m_allObjects;
     std::map<std::pair<int, int>, std::vector<std::weak_ptr<T>>> m_cells;
+
+    std::pair<int, int> getCellIndices(jt::Vector2f const& position) const
+    {
+        return std::pair<int, int> { static_cast<int>(position.x) / gridSize,
+            static_cast<int>(position.y) / gridSize };
+    }
 };
 
 } // namespace jt

@@ -41,11 +41,30 @@ TEST(SpatialObjectGridTest, GetObjectsAroundReturnsEmptyVectorIfCellEmpty)
     ASSERT_TRUE(grid.getObjectsAround(jt::Vector2f { 0.0f, 0.0f }, 16.0f).empty());
 }
 
+class SpatialObjectGridParametrizedTestFixture : public ::testing::TestWithParam<jt::Vector2f> { };
+
+TEST_P(SpatialObjectGridParametrizedTestFixture,
+    GetObjectsAroundReturnsVectorWithCorrectEntryForOneObjectInCell)
+{
+    SpatialObjectGrid<TestObject, 16> grid {};
+    auto obj = std::make_shared<TestObject>();
+    obj->setPosition(GetParam());
+    grid.push_back(obj);
+    auto const objects = grid.getObjectsAround(jt::Vector2f { 8.0f, 8.0f }, 16.0f);
+    ASSERT_FALSE(objects.empty());
+    ASSERT_EQ(obj, objects.at(0).lock());
+}
+
+INSTANTIATE_TEST_SUITE_P(SpatialObjectGridParametrizedTest,
+    SpatialObjectGridParametrizedTestFixture, ::testing::Values(jt::Vector2f { 8.0f, 8.0f }));
+
 TEST(SpatialObjectGridTest, GetObjectsAroundReturnsVectorWithCorrectEntryForOneObjectInCell)
 {
     SpatialObjectGrid<TestObject, 16> grid {};
     auto obj = std::make_shared<TestObject>();
     obj->setPosition(jt::Vector2f { 8.0f, 8.0f });
     grid.push_back(obj);
-    ASSERT_FALSE(grid.getObjectsAround(jt::Vector2f { 8.0f, 8.0f }, 16.0f).empty());
+    auto const objects = grid.getObjectsAround(jt::Vector2f { 8.0f, 8.0f }, 16.0f);
+    ASSERT_FALSE(objects.empty());
+    ASSERT_EQ(obj, objects.at(0).lock());
 }
