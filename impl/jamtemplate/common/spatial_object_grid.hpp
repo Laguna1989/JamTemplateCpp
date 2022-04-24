@@ -8,7 +8,9 @@ template <typename T>
 class SpatialObjectGrid {
 public:
     bool empty() const { return m_allObjects.empty(); };
-    void push_back(std::weak_ptr<T> obj) {};
+    void push_back(std::weak_ptr<T> obj) {
+        m_allObjects.push_back(obj);
+    };
 
 private:
     std::vector<std::weak_ptr<T>> m_allObjects;
