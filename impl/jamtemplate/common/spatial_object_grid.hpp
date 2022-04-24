@@ -32,6 +32,8 @@ bool operator<(CellIndex const& a, CellIndex const& b)
 // TODO inherit from jt::GameObject
 // TODO implement update function and disposal of dead objects
 // TODO re-sort objects into cells
+// TODO possibly add removing objects (also consider for ObjectGroup)
+// TODO add moving objects
 template <typename T, int gridSize>
 class SpatialObjectGrid {
 public:
