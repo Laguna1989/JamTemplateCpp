@@ -6,6 +6,8 @@
 #include <memory>
 #include <vector>
 
+// TODO check for possible refactoring
+
 namespace jt {
 
 namespace detail {
@@ -27,6 +29,9 @@ bool operator<(CellIndex const& a, CellIndex const& b)
 
 } // namespace detail
 
+// TODO inherit from jt::GameObject
+// TODO implement update function and disposal of dead objects
+// TODO re-sort objects into cells
 template <typename T, int gridSize>
 class SpatialObjectGrid {
 public:
@@ -48,8 +53,9 @@ public:
 
     std::vector<std::weak_ptr<T>> getObjectsAround(jt::Vector2f position, float distance) const
     {
-        auto const cellIndices = getCellIndices(position);
+        // TODO actually use distance
 
+        auto const cellIndices = getCellIndices(position);
         std::vector<std::weak_ptr<T>> objects {};
         auto const offsets = getOffsets(distance);
         for (auto const& offset : offsets) {

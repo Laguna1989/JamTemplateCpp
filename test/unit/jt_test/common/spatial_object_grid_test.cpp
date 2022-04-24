@@ -65,7 +65,11 @@ INSTANTIATE_TEST_SUITE_P(SpatialObjectGridParametrizedTest,
         jt::Vector2f { 8.0f, 0.0f },
         jt::Vector2f { 0.0f, 8.0f },
         jt::Vector2f { 15.9f, 0.0f },
-        jt::Vector2f { 0.0f, 15.9f }
+        jt::Vector2f { 0.0f, 15.9f },
+        jt::Vector2f { -15.9f, 0.0f },
+        jt::Vector2f { 0.0f, -15.9f },
+        jt::Vector2f { 31.9f, 0.0f },
+        jt::Vector2f { 0.0f, 31.9f }
     ));
 // clang-format on
 
@@ -79,4 +83,31 @@ TEST(SpatialObjectGridTest, GetObjectsAroundFromNeighboringCell)
     ASSERT_FALSE(objects.empty());
     ASSERT_EQ(objects.size(), 1U);
     ASSERT_EQ(objects.at(0).lock(), obj);
+}
+
+TEST(SpatialObjectGridTest, GetObjectsAroundFromAllNeighboringCells)
+{
+    SpatialObjectGrid<TestObject, 16> grid {};
+
+    // clang-format off
+    std::vector<jt::Vector2f> positions {
+        { 8.0f, 8.0f }, { 24.0f, 8.0f }, { 40.0f, 8.0f },
+        { 8.0f, 24.0f }, { 24.0f, 24.0f }, { 40.0f, 24.0f },
+        { 8.0f, 40.0f }, { 24.0f, 40.0f }, { 40.0f, 40.0f },
+    };
+    // clang-format on
+
+    std::vector<std::shared_ptr<TestObject>> testObjects {};
+
+    for(auto const& position: positions)
+    {
+        auto obj = std::make_shared<TestObject>();
+        obj->setPosition(position);
+        grid.push_back(obj);
+        testObjects.push_back(obj);
+    }
+
+    auto const neighbors = grid.getObjectsAround(jt::Vector2f { 24.0f, 24.0f }, 16.0f);
+    ASSERT_FALSE(testObjects.empty());
+    ASSERT_EQ(testObjects.size(), 9U);
 }
