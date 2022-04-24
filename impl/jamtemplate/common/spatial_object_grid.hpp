@@ -7,6 +7,26 @@
 #include <vector>
 
 namespace jt {
+
+namespace detail {
+struct CellIndex {
+    int x { 0 };
+    int y { 0 };
+};
+
+bool operator==(CellIndex const& a, CellIndex const& b) { return a.x == b.x && a.y == b.y; }
+bool operator!=(CellIndex const& a, CellIndex const& b) { return !(a == b); }
+
+bool operator<(CellIndex const& a, CellIndex const& b)
+{
+    if (a.x == b.x) {
+        return a.y < b.y;
+    }
+    return a.x < b.x;
+}
+
+} // namespace detail
+
 template <typename T, int gridSize>
 class SpatialObjectGrid {
 public:
@@ -29,15 +49,11 @@ public:
     std::vector<std::weak_ptr<T>> getObjectsAround(jt::Vector2f position, float distance) const
     {
         auto const cellIndices = getCellIndices(position);
-        if (m_cells.count(cellIndices) == 0) {
-            return std::vector<std::weak_ptr<T>> {};
-        }
 
-        std::vector<std::weak_ptr<T>> objects { m_cells.at(cellIndices) };
+        std::vector<std::weak_ptr<T>> objects {};
         auto const offsets = getOffsets(distance);
         for (auto const& offset : offsets) {
-            std::pair<int, int> currentIndices { cellIndices.first + offset.first,
-                cellIndices.second + offset.second };
+            detail::CellIndex currentIndices { cellIndices.x + offset.x, cellIndices.y + offset.y };
 
             if (m_cells.count(currentIndices) == 0) {
                 continue;
@@ -52,20 +68,20 @@ public:
 
 private:
     std::vector<std::weak_ptr<T>> m_allObjects;
-    std::map<std::pair<int, int>, std::vector<std::weak_ptr<T>>> m_cells;
+    std::map<detail::CellIndex, std::vector<std::weak_ptr<T>>> m_cells;
 
-    std::pair<int, int> getCellIndices(jt::Vector2f const& position) const
+    detail::CellIndex getCellIndices(jt::Vector2f const& position) const
     {
-        return std::pair<int, int> { static_cast<int>(position.x) / gridSize,
+        return detail::CellIndex { static_cast<int>(position.x) / gridSize,
             static_cast<int>(position.y) / gridSize };
     }
 
-    std::vector<std::pair<int, int>> getOffsets(float distance) const
+    std::vector<detail::CellIndex> getOffsets(float distance) const
     {
         // clang-format off
-        return std::vector<std::pair<int, int>> {
+        return std::vector<detail::CellIndex> {
             { -1, -1 }, { -1, 0 }, { -1, 1 },
-            { 0, -1 }, { 0, 1 },
+            { 0, -1 }, { 0, 0 }, { 0, 1 },
             { 1, -1 }, { 1, 0 }, { 1, 1 },
         };
         // clang-format on
