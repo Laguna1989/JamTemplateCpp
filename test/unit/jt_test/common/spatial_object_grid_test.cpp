@@ -68,3 +68,15 @@ INSTANTIATE_TEST_SUITE_P(SpatialObjectGridParametrizedTest,
         jt::Vector2f { 0.0f, 15.9f }
     ));
 // clang-format on
+
+TEST(SpatialObjectGridTest, GetObjectsAroundFromNeighboringCell)
+{
+    SpatialObjectGrid<TestObject, 16> grid {};
+    auto obj = std::make_shared<TestObject>();
+    obj->setPosition(jt::Vector2f { 17.0f, 0.0f });
+    grid.push_back(obj);
+    auto const objects = grid.getObjectsAround(jt::Vector2f { 8.0f, 8.0f }, 16.0f);
+    ASSERT_FALSE(objects.empty());
+    ASSERT_EQ(objects.size(), 1U);
+    ASSERT_EQ(objects.at(0).lock(), obj);
+}
