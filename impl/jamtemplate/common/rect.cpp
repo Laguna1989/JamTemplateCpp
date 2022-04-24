@@ -9,7 +9,7 @@ bool jt::operator!=(jt::Rectf const& a, jt::Rectf const& b) { return !(a == b); 
 
 std::ostream& jt::operator<<(std::ostream& os, const jt::Rectf& rect)
 {
-    return os << "[ (" << rect.left << ", " << rect.top << "), ( " << rect.width << ", "
+    return os << "[ (" << rect.left << ", " << rect.top << "), (" << rect.width << ", "
               << rect.height << ") ]";
 }
 

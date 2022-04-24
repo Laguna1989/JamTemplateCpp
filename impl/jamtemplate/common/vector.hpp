@@ -1,6 +1,8 @@
 ﻿#ifndef JAMTEMPLATE_VECTOR_HPP_12345
 #define JAMTEMPLATE_VECTOR_HPP_12345
 
+#include <iosfwd>
+
 namespace jt {
 
 struct Vector2f {
@@ -27,6 +29,8 @@ jt::Vector2f operator*(jt::Vector2f const& v, float const f);
 
 jt::Vector2f operator/(jt::Vector2f const& v, float const f);
 
+std::ostream& operator<<(std::ostream& os, const Vector2f& vec);
+
 jt::Vector2u operator+(jt::Vector2u const& a, jt::Vector2u const& b);
 jt::Vector2u operator-(jt::Vector2u const& a, jt::Vector2u const& b);
 
@@ -36,6 +40,8 @@ jt::Vector2u& operator-=(jt::Vector2u& lhs, jt::Vector2u const& other);
 
 bool operator==(jt::Vector2u const& a, jt::Vector2u const& b);
 bool operator!=(jt::Vector2u const& a, jt::Vector2u const& b);
+
+std::ostream& operator<<(std::ostream& os, const Vector2u& vec);
 
 } // namespace jt
 
