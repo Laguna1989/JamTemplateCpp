@@ -11,7 +11,22 @@ template <typename T, int gridSize>
 class SpatialObjectGrid {
 public:
     bool empty() const { return m_allObjects.empty(); };
-    void push_back(std::weak_ptr<T> obj) { m_allObjects.push_back(obj); };
+
+    void push_back(std::weak_ptr<T> obj)
+    {
+        m_allObjects.push_back(obj);
+
+        auto const lockedObj = obj.lock();
+        jt::Vector2f const objPosition = lockedObj->getPosition();
+        std::pair<int, int> const cellIndices { static_cast<int>(objPosition.x) / gridSize,
+            static_cast<int>(objPosition.y) / gridSize };
+
+        if (m_cells.count(cellIndices) == 0) {
+            m_cells[cellIndices] = std::vector<std::weak_ptr<T>> {};
+        }
+
+        m_cells.at(cellIndices).push_back(obj);
+    };
 
     std::vector<std::weak_ptr<T>> getObjectsAround(jt::Vector2f position, float distance) const
     {
@@ -20,7 +35,7 @@ public:
 
 private:
     std::vector<std::weak_ptr<T>> m_allObjects;
-    std::map<std::pair<int, int>, std::vector<std::weak_ptr<T>>> m_grids;
+    std::map<std::pair<int, int>, std::vector<std::weak_ptr<T>>> m_cells;
 };
 
 } // namespace jt
