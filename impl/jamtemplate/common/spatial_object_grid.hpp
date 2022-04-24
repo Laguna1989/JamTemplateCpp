@@ -32,7 +32,22 @@ public:
         if (m_cells.count(cellIndices) == 0) {
             return std::vector<std::weak_ptr<T>> {};
         }
-        return m_cells.at(cellIndices);
+
+        std::vector<std::weak_ptr<T>> objects { m_cells.at(cellIndices) };
+        auto const offsets = getOffsets(distance);
+        for (auto const& offset : offsets) {
+            std::pair<int, int> currentIndices { cellIndices.first + offset.first,
+                cellIndices.second + offset.second };
+
+            if (m_cells.count(currentIndices) == 0) {
+                continue;
+            }
+
+            objects.insert(objects.end(), m_cells.at(currentIndices).begin(),
+                m_cells.at(currentIndices).end());
+        }
+
+        return objects;
     }
 
 private:
@@ -43,6 +58,17 @@ private:
     {
         return std::pair<int, int> { static_cast<int>(position.x) / gridSize,
             static_cast<int>(position.y) / gridSize };
+    }
+
+    std::vector<std::pair<int, int>> getOffsets(float distance) const
+    {
+        // clang-format off
+        return std::vector<std::pair<int, int>> {
+            { -1, -1 }, { -1, 0 }, { -1, 1 },
+            { 0, -1 }, { 0, 1 },
+            { 1, -1 }, { 1, 0 }, { 1, 1 },
+        };
+        // clang-format on
     }
 };
 
