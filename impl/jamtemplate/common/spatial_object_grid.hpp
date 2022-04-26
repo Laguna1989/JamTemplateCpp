@@ -3,6 +3,7 @@
 
 #include "vector.hpp"
 #include <game_object.hpp>
+#include <system_helper.hpp>
 #include <map>
 #include <memory>
 #include <vector>
@@ -48,8 +49,8 @@ public:
     {
         m_allObjects.push_back(obj);
 
-        auto const lockedObj = obj.lock();
-        auto const cellIndex = getCellIndex(lockedObj->getPosition());
+        auto const lockedObject = obj.lock();
+        auto const cellIndex = getCellIndex(lockedObject->getPosition());
 
         if (m_cells.count(cellIndex) == 0) {
             m_cells[cellIndex] = std::vector<std::weak_ptr<T>> {};
@@ -77,7 +78,28 @@ public:
         return objects;
     }
 
-    void doUpdate(float const elapsed) override { }
+    void doUpdate(float const elapsed) override
+    {
+        for (auto& kvp : m_cells) {
+            std::vector<std::weak_ptr<T>> objectsToRemove {};
+
+            for (auto& object : kvp.second) {
+                auto const lockedObject = object.lock();
+                auto const objectPosition = lockedObject->getPosition();
+
+                auto const oldIndex = kvp.first;
+                auto const newIndex = getCellIndex(objectPosition);
+
+                if (oldIndex == newIndex) {
+                    continue;
+                }
+
+                objectsToRemove.push_back(object);
+            }
+
+            // TODO finish removing objects from kvp.second
+        }
+    }
 
 private:
     std::vector<std::weak_ptr<T>> m_allObjects;
