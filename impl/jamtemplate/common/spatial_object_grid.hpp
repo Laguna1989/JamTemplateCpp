@@ -89,23 +89,14 @@ private:
 
     std::vector<detail::CellIndex> getOffsets(float distance) const
     {
+        int const distanceInCells {(static_cast<int>(distance) / cellSize) + 1};
         std::vector<detail::CellIndex> offsets;
-        int const distanceInCells = (static_cast<int>(distance) / cellSize) + 1;
-
+        
         for (auto x = -distanceInCells; x != distanceInCells + 1; ++x) {
             for (auto y = -distanceInCells; y != distanceInCells + 1; ++y) {
                 offsets.push_back({ x, y });
             }
         }
-
-        //        // TODO actually use distance
-        //        // clang-format off
-        //        return std::vector<detail::CellIndex> {
-        //            { -1, -1 }, { -1, 0 }, { -1, 1 },
-        //            { 0, -1 }, { 0, 0 }, { 0, 1 },
-        //            { 1, -1 }, { 1, 0 }, { 1, 1 },
-        //        };
-        //        // clang-format on
 
         return offsets;
     }
