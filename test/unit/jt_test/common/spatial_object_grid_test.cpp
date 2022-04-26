@@ -1,6 +1,7 @@
 #include <spatial_object_grid.hpp>
 #include <vector.hpp>
 #include <gtest/gtest.h>
+#include <tuple>
 
 struct TestObject {
     jt::Vector2f getPosition() const { return m_position; }
@@ -41,9 +42,9 @@ TEST(SpatialObjectGridTest, GetObjectsAroundReturnsEmptyVectorIfCellEmpty)
     ASSERT_TRUE(grid.getObjectsAround(jt::Vector2f { 0.0f, 0.0f }, 16.0f).empty());
 }
 
-class SpatialObjectGridParametrizedTestFixture : public ::testing::TestWithParam<jt::Vector2f> { };
+class SpatialObjectGridParameterizedTestFixture : public ::testing::TestWithParam<jt::Vector2f> { };
 
-TEST_P(SpatialObjectGridParametrizedTestFixture,
+TEST_P(SpatialObjectGridParameterizedTestFixture,
     GetObjectsAroundReturnsVectorWithCorrectEntryForOneObjectInCell)
 {
     SpatialObjectGrid<TestObject, 16> grid {};
@@ -57,7 +58,7 @@ TEST_P(SpatialObjectGridParametrizedTestFixture,
 
 // clang-format off
 INSTANTIATE_TEST_SUITE_P(SpatialObjectGridParametrizedTest,
-    SpatialObjectGridParametrizedTestFixture,
+    SpatialObjectGridParameterizedTestFixture,
     ::testing::Values(
         jt::Vector2f { 8.0f, 8.0f },
         jt::Vector2f { 0.0f, 0.0f },
@@ -123,18 +124,6 @@ TEST(SpatialObjectGridTest, GetObjectsRoundsDistanceUp)
     ASSERT_EQ(objects.at(0).lock(), obj);
 }
 
-TEST(SpatialObjectGridTest, GetObjectsWithLargerDistance)
-{
-    SpatialObjectGrid<TestObject, 16> grid {};
-    auto obj = std::make_shared<TestObject>();
-    obj->setPosition(jt::Vector2f { 8.0f, 8.0f });
-    grid.push_back(obj);
-    auto const objects = grid.getObjectsAround(jt::Vector2f { 40.0f, 40.0f }, 24.0f);
-    ASSERT_FALSE(objects.empty());
-    ASSERT_EQ(objects.size(), 1U);
-    ASSERT_EQ(objects.at(0).lock(), obj);
-}
-
 TEST(CellIndexTest, AddingTwoCellIndicesReturnsCorrectResult)
 {
     jt::detail::CellIndex const index1 { 10, 20 };
@@ -143,3 +132,36 @@ TEST(CellIndexTest, AddingTwoCellIndicesReturnsCorrectResult)
 
     ASSERT_EQ(index1 + index2, expectedResult);
 }
+
+class SpatialObjectGridDistanceParameterizedTestFixture
+    : public ::testing::TestWithParam<std::tuple<jt::Vector2f, float>> { };
+
+TEST_P(SpatialObjectGridDistanceParameterizedTestFixture,
+    GetObjectsAroundWithDistanceReturnsVectorWithCorrectEntryForOneObjectInCell)
+{
+    SpatialObjectGrid<TestObject, 16> grid {};
+    auto obj = std::make_shared<TestObject>();
+    obj->setPosition(jt::Vector2f { 8.0f, 8.0f });
+    grid.push_back(obj);
+    auto const objects = grid.getObjectsAround(std::get<0>(GetParam()), std::get<1>(GetParam()));
+    ASSERT_FALSE(objects.empty());
+    ASSERT_EQ(objects.size(), 1U);
+    ASSERT_EQ(objects.at(0).lock(), obj);
+}
+
+// clang-format off
+INSTANTIATE_TEST_SUITE_P(
+    SpatialObjectGridDistanceParameterizedTest,
+    SpatialObjectGridDistanceParameterizedTestFixture,
+    ::testing::Values(
+        std::make_tuple(jt::Vector2f { 40.0f, 40.0f }, 24.0f),
+        std::make_tuple(jt::Vector2f { 40.0f, 40.0f }, 16.1f),
+        std::make_tuple(jt::Vector2f { 40.0f, 40.0f }, 32.0f),
+        std::make_tuple(jt::Vector2f { 40.0f, 40.0f }, 96.0f),
+        std::make_tuple(jt::Vector2f { 16.1f, 8.0f }, 24.0f),
+        std::make_tuple(jt::Vector2f { 16.1f, 8.0f }, 16.1f),
+        std::make_tuple(jt::Vector2f { 16.1f, 8.0f }, 32.0f),
+        std::make_tuple(jt::Vector2f { 16.1f, 8.0f }, 96.0f),
+        std::make_tuple(jt::Vector2f { 16.0f, 0.0f }, 16.1f)
+));
+// clang-format on
