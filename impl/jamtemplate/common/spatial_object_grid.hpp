@@ -2,6 +2,7 @@
 #define JAMTEMPLATE_SPATIAL_OBJECT_GRID_HPP
 
 #include "vector.hpp"
+#include <game_object.hpp>
 #include <map>
 #include <memory>
 #include <vector>
@@ -34,13 +35,12 @@ bool operator<(CellIndex const& a, CellIndex const& b)
 
 } // namespace detail
 
-// TODO inherit from jt::GameObject
 // TODO implement update function and disposal of dead objects
 // TODO re-sort objects into cells
 // TODO possibly add removing objects (also consider for ObjectGroup)
 // TODO add moving objects
 template <typename T, int cellSize>
-class SpatialObjectGrid {
+class SpatialObjectGrid : public jt::GameObject {
 public:
     bool empty() const { return m_allObjects.empty(); };
 
@@ -77,6 +77,8 @@ public:
         return objects;
     }
 
+    void doUpdate(float const elapsed) override { }
+
 private:
     std::vector<std::weak_ptr<T>> m_allObjects;
     std::map<detail::CellIndex, std::vector<std::weak_ptr<T>>> m_cells;
@@ -89,9 +91,9 @@ private:
 
     std::vector<detail::CellIndex> getOffsets(float distance) const
     {
-        int const distanceInCells {(static_cast<int>(distance) / cellSize) + 1};
+        int const distanceInCells { (static_cast<int>(distance) / cellSize) + 1 };
         std::vector<detail::CellIndex> offsets;
-        
+
         for (auto x = -distanceInCells; x != distanceInCells + 1; ++x) {
             for (auto y = -distanceInCells; y != distanceInCells + 1; ++y) {
                 offsets.push_back({ x, y });

@@ -1,7 +1,9 @@
+#include <game_object.hpp>
 #include <spatial_object_grid.hpp>
 #include <vector.hpp>
 #include <gtest/gtest.h>
 #include <tuple>
+#include <type_traits>
 
 struct TestObject {
     jt::Vector2f getPosition() const { return m_position; }
@@ -162,6 +164,13 @@ INSTANTIATE_TEST_SUITE_P(
         std::make_tuple(jt::Vector2f { 16.1f, 8.0f }, 16.1f),
         std::make_tuple(jt::Vector2f { 16.1f, 8.0f }, 32.0f),
         std::make_tuple(jt::Vector2f { 16.1f, 8.0f }, 96.0f),
-        std::make_tuple(jt::Vector2f { 16.0f, 0.0f }, 16.1f)
+        std::make_tuple(jt::Vector2f { 16.0f, 0.0f }, 16.1f),
+        std::make_tuple(jt::Vector2f { -24.0f, 40.0f }, 24.0f)
 ));
 // clang-format on
+
+TEST(SpatialObjectGridTest, SpatialObjectGridIsInheritedFromGameObject)
+{
+    static_assert(std::is_base_of_v<jt::GameObject, jt::SpatialObjectGrid<TestObject, 16>>,
+        "SpatialObjectGrid does not inherit from GameObject");
+}
