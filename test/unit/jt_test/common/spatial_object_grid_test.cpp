@@ -111,6 +111,30 @@ TEST(SpatialObjectGridTest, GetObjectsAroundFromAllNeighboringCells)
     ASSERT_EQ(testObjects.size(), 9U);
 }
 
+TEST(SpatialObjectGridTest, GetObjectsRoundsDistanceUp)
+{
+    SpatialObjectGrid<TestObject, 16> grid {};
+    auto obj = std::make_shared<TestObject>();
+    obj->setPosition(jt::Vector2f { 8.0f, 8.0f });
+    grid.push_back(obj);
+    auto const objects = grid.getObjectsAround(jt::Vector2f { 1.0f, 1.0f }, 1.0f);
+    ASSERT_FALSE(objects.empty());
+    ASSERT_EQ(objects.size(), 1U);
+    ASSERT_EQ(objects.at(0).lock(), obj);
+}
+
+TEST(SpatialObjectGridTest, GetObjectsWithLargerDistance)
+{
+    SpatialObjectGrid<TestObject, 16> grid {};
+    auto obj = std::make_shared<TestObject>();
+    obj->setPosition(jt::Vector2f { 8.0f, 8.0f });
+    grid.push_back(obj);
+    auto const objects = grid.getObjectsAround(jt::Vector2f { 40.0f, 40.0f }, 24.0f);
+    ASSERT_FALSE(objects.empty());
+    ASSERT_EQ(objects.size(), 1U);
+    ASSERT_EQ(objects.at(0).lock(), obj);
+}
+
 TEST(CellIndexTest, AddingTwoCellIndicesReturnsCorrectResult)
 {
     jt::detail::CellIndex const index1 { 10, 20 };
