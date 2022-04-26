@@ -19,6 +19,11 @@ struct CellIndex {
 bool operator==(CellIndex const& a, CellIndex const& b) { return a.x == b.x && a.y == b.y; }
 bool operator!=(CellIndex const& a, CellIndex const& b) { return !(a == b); }
 
+CellIndex operator+(CellIndex const& a, CellIndex const& b)
+{
+    return CellIndex { a.x + b.x, a.y + b.y };
+}
+
 bool operator<(CellIndex const& a, CellIndex const& b)
 {
     if (a.x == b.x) {
@@ -34,7 +39,7 @@ bool operator<(CellIndex const& a, CellIndex const& b)
 // TODO re-sort objects into cells
 // TODO possibly add removing objects (also consider for ObjectGroup)
 // TODO add moving objects
-template <typename T, int gridSize>
+template <typename T, int cellSize>
 class SpatialObjectGrid {
 public:
     bool empty() const { return m_allObjects.empty(); };
@@ -44,31 +49,29 @@ public:
         m_allObjects.push_back(obj);
 
         auto const lockedObj = obj.lock();
-        auto const cellIndices = getCellIndices(lockedObj->getPosition());
+        auto const cellIndex = getCellIndex(lockedObj->getPosition());
 
-        if (m_cells.count(cellIndices) == 0) {
-            m_cells[cellIndices] = std::vector<std::weak_ptr<T>> {};
+        if (m_cells.count(cellIndex) == 0) {
+            m_cells[cellIndex] = std::vector<std::weak_ptr<T>> {};
         }
 
-        m_cells.at(cellIndices).push_back(obj);
+        m_cells.at(cellIndex).push_back(obj);
     };
 
     std::vector<std::weak_ptr<T>> getObjectsAround(jt::Vector2f position, float distance) const
     {
-        // TODO actually use distance
-
-        auto const cellIndices = getCellIndices(position);
+        auto const cellIndex = getCellIndex(position);
         std::vector<std::weak_ptr<T>> objects {};
         auto const offsets = getOffsets(distance);
         for (auto const& offset : offsets) {
-            detail::CellIndex currentIndices { cellIndices.x + offset.x, cellIndices.y + offset.y };
+            auto const currentIndex = cellIndex + offset;
 
-            if (m_cells.count(currentIndices) == 0) {
+            if (m_cells.count(currentIndex) == 0) {
                 continue;
             }
 
-            objects.insert(objects.end(), m_cells.at(currentIndices).begin(),
-                m_cells.at(currentIndices).end());
+            objects.insert(
+                objects.end(), m_cells.at(currentIndex).begin(), m_cells.at(currentIndex).end());
         }
 
         return objects;
@@ -78,14 +81,18 @@ private:
     std::vector<std::weak_ptr<T>> m_allObjects;
     std::map<detail::CellIndex, std::vector<std::weak_ptr<T>>> m_cells;
 
-    detail::CellIndex getCellIndices(jt::Vector2f const& position) const
+    detail::CellIndex getCellIndex(jt::Vector2f const& position) const
     {
-        return detail::CellIndex { static_cast<int>(position.x) / gridSize,
-            static_cast<int>(position.y) / gridSize };
+        return detail::CellIndex { static_cast<int>(position.x) / cellSize,
+            static_cast<int>(position.y) / cellSize };
     }
 
     std::vector<detail::CellIndex> getOffsets(float distance) const
     {
+        std::vector<detail::CellIndex> offsets;
+        int const distanceInCells = static_cast<int>(distance) / cellSize;
+
+        // TODO actually use distance
         // clang-format off
         return std::vector<detail::CellIndex> {
             { -1, -1 }, { -1, 0 }, { -1, 1 },
@@ -93,6 +100,8 @@ private:
             { 1, -1 }, { 1, 0 }, { 1, 1 },
         };
         // clang-format on
+
+        return offsets;
     }
 };
 

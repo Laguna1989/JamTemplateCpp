@@ -99,8 +99,7 @@ TEST(SpatialObjectGridTest, GetObjectsAroundFromAllNeighboringCells)
 
     std::vector<std::shared_ptr<TestObject>> testObjects {};
 
-    for(auto const& position: positions)
-    {
+    for (auto const& position : positions) {
         auto obj = std::make_shared<TestObject>();
         obj->setPosition(position);
         grid.push_back(obj);
@@ -110,4 +109,13 @@ TEST(SpatialObjectGridTest, GetObjectsAroundFromAllNeighboringCells)
     auto const neighbors = grid.getObjectsAround(jt::Vector2f { 24.0f, 24.0f }, 16.0f);
     ASSERT_FALSE(testObjects.empty());
     ASSERT_EQ(testObjects.size(), 9U);
+}
+
+TEST(CellIndexTest, AddingTwoCellIndicesReturnsCorrectResult)
+{
+    jt::detail::CellIndex const index1 { 10, 20 };
+    jt::detail::CellIndex const index2 { -5, 1 };
+    jt::detail::CellIndex const expectedResult { 5, 21 };
+
+    ASSERT_EQ(index1 + index2, expectedResult);
 }
