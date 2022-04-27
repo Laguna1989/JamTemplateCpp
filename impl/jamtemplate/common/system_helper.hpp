@@ -4,6 +4,7 @@
 #include <iterator>
 #include <memory>
 #include <random>
+#include <unordered_set>
 
 namespace jt {
 namespace SystemHelper {
@@ -33,6 +34,36 @@ void erase_if(ContainerT& items, const PredicateT& predicate)
         else
             ++it;
     }
+}
+
+/// Helper Function to remove all items of b from a.
+/// \tparam ContainerT The container type
+/// \param a the container from which elements should be removed
+/// \param b the elements that should be removed.
+template <typename ContainerT>
+void remove_intersection(ContainerT& a, ContainerT const& b)
+{
+    // TODO this algorithm might fail if a contains an element multiple times.
+    std::unordered_multiset<ContainerT::value_type> st;
+    st.insert(a.begin(), a.end());
+    st.insert(b.begin(), b.end());
+    auto predicate = [&st](const ContainerT::value_type& k) { return st.count(k) > 1; };
+    a.erase(std::remove_if(a.begin(), a.end(), predicate), a.end());
+}
+
+/// convert a vector of shared pointers to a vector of weak pointers.
+/// \tparam T The type of objects being pointed to
+/// \param pointers the vector of shared pointers
+/// \return the vector of weak pointers
+template <typename T>
+std::vector<std::weak_ptr<T>> to_weak_pointers(std::vector<std::shared_ptr<T>> const& pointers)
+{
+    std::vector<std::weak_ptr<T>> weakPointers {};
+    weakPointers.resize(pointers.size());
+    for (auto i = 0u; i != pointers.size(); ++i) {
+        weakPointers[i] = pointers[i];
+    }
+    return weakPointers;
 }
 
 /// Select random entry from container

@@ -175,7 +175,6 @@ TEST(SpatialObjectGridTest, SpatialObjectGridIsInheritedFromGameObject)
         "SpatialObjectGrid does not inherit from GameObject");
 }
 
-
 TEST(SpatialObjectGridTest, UpdateObjectCellIndex)
 {
     SpatialObjectGrid<TestObject, 16> grid {};
@@ -184,7 +183,9 @@ TEST(SpatialObjectGridTest, UpdateObjectCellIndex)
     grid.push_back(obj);
     obj->setPosition(jt::Vector2f { 24.0f, 8.0f });
     grid.update(0.1f);
-    
+
     auto const objects = grid.getObjectsAround(jt::Vector2f { -8.0f, 8.0f }, 16.0f);
     ASSERT_TRUE(objects.empty());
 }
+
+// TODO next test: check that the object is actually in the right cell after update

@@ -81,10 +81,15 @@ public:
     void doUpdate(float const elapsed) override
     {
         for (auto& kvp : m_cells) {
-            std::vector<std::weak_ptr<T>> objectsToRemove {};
+            std::vector<std::shared_ptr<T>> currentObjects {};
+            std::vector<std::shared_ptr<T>> objectsToRemove {};
 
             for (auto& object : kvp.second) {
                 auto const lockedObject = object.lock();
+                if (lockedObject == nullptr) {
+                    continue;
+                }
+                currentObjects.push_back(lockedObject);
                 auto const objectPosition = lockedObject->getPosition();
 
                 auto const oldIndex = kvp.first;
@@ -94,10 +99,12 @@ public:
                     continue;
                 }
 
-                objectsToRemove.push_back(object);
+                objectsToRemove.push_back(lockedObject);
             }
+            jt::SystemHelper::remove_intersection(currentObjects, objectsToRemove);
 
-            // TODO finish removing objects from kvp.second
+            // TODO sort ObjectsToRemove into the new, correct cell.
+            kvp.second = jt::SystemHelper::to_weak_pointers(currentObjects);
         }
     }
 
