@@ -43,12 +43,12 @@ void erase_if(ContainerT& items, const PredicateT& predicate)
 template <typename ContainerT>
 void remove_intersection(ContainerT& a, ContainerT const& b)
 {
-    // TODO this algorithm might fail if a contains an element multiple times.
-    std::unordered_multiset<ContainerT::value_type> st;
-    st.insert(a.begin(), a.end());
+    std::unordered_set<ContainerT::value_type> const uniqueAs { a.cbegin(), a.cend() };
+    std::unordered_multiset<ContainerT::value_type> st { uniqueAs.cbegin(), uniqueAs.cend() };
+
     st.insert(b.begin(), b.end());
-    auto predicate = [&st](const ContainerT::value_type& k) { return st.count(k) > 1; };
-    a.erase(std::remove_if(a.begin(), a.end(), predicate), a.end());
+    auto const predicate = [&st](ContainerT::value_type const& k) { return st.count(k) > 1; };
+    a.erase(std::remove_if(a.begin(), a.end(), predicate), a.cend());
 }
 
 /// convert a vector of shared pointers to a vector of weak pointers.
