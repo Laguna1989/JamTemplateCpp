@@ -120,13 +120,13 @@ private:
 
     detail::CellIndex getCellIndex(jt::Vector2f const& position) const
     {
-        return detail::CellIndex { static_cast<int>(position.x) / cellSize,
-            static_cast<int>(position.y) / cellSize };
+        return detail::CellIndex { static_cast<int>(std::floor(position.x / cellSize)),
+            static_cast<int>(std::floor(position.y / cellSize)) };
     }
 
     std::vector<detail::CellIndex> getOffsets(float distance) const
     {
-        int const distanceInCells { (static_cast<int>(distance) / cellSize) + 1 };
+        int const distanceInCells { static_cast<int>(std::ceil(distance / cellSize)) };
         std::vector<detail::CellIndex> offsets;
 
         for (auto x = -distanceInCells; x != distanceInCells + 1; ++x) {
