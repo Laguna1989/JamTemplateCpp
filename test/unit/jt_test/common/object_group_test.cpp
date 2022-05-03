@@ -3,6 +3,7 @@
 #include <object_group.hpp>
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
+#include <utility>
 
 using Group = jt::ObjectGroup<MockObject>;
 using ::testing::_;

@@ -12,7 +12,6 @@ TEST(IsUninitializedWeakPtr, ReturnsFalseForValidWeakPtr)
 
 TEST(IsUninitializedWeakPtr, ReturnsTrueForUninitializedWeakPtr)
 {
-
     std::weak_ptr<int> wptr;
 
     auto const result = jt::SystemHelper::is_uninitialized_weak_ptr(wptr);
@@ -42,10 +41,74 @@ TEST(EraseIf, RemoveEvenNumbersFromVector)
 
 TEST(EraseIf, FromEmptyVector)
 {
-    std::vector<int> numbers;
-    std::vector<int> expected;
+    std::vector<int> numbers {};
+    std::vector<int> expected {};
 
     jt::SystemHelper::erase_if(numbers, [](auto number) { return number % 2 == 0; });
 
     EXPECT_EQ(numbers, expected);
+}
+
+TEST(RemoveIntersectionTest, EmptyAResultsInEmptyVector)
+{
+    std::vector<int> a {};
+    std::vector<int> const b { 1, 2, 3 };
+
+    jt::SystemHelper::remove_intersection(a, b);
+
+    ASSERT_TRUE(a.empty());
+}
+
+TEST(RemoveIntersectionTest, SameVectorsResultsInEmptyVector)
+{
+    std::vector<int> a { 1, 2, 3 };
+    std::vector<int> const b { 1, 2, 3 };
+
+    jt::SystemHelper::remove_intersection(a, b);
+
+    ASSERT_TRUE(a.empty());
+}
+
+TEST(RemoveIntersectionTest, CompletelyDifferentVectorsDoesNotModifyA)
+{
+    std::vector<int> a { 1, 2, 3 };
+    std::vector<int> const expected { a.cbegin(), a.cend() };
+    std::vector<int> const b { 4, 5, 6 };
+
+    jt::SystemHelper::remove_intersection(a, b);
+
+    ASSERT_EQ(a, expected);
+}
+
+TEST(RemoveIntersectionTest, PartialIntersectionIsRemoved)
+{
+    std::vector<int> a { 1, 2, 3, 4 };
+    std::vector<int> const b { 1, 3, 5 };
+    std::vector<int> const expected { 2, 4 };
+
+    jt::SystemHelper::remove_intersection(a, b);
+
+    ASSERT_EQ(a, expected);
+}
+
+TEST(RemoveIntersectionTest, DuplicateEntriesAreNotRemovedByDefault)
+{
+    std::vector<int> a { 1, 2, 2, 3, 4 };
+    std::vector<int> const b {};
+    std::vector<int> const expected { 1, 2, 2, 3, 4 };
+
+    jt::SystemHelper::remove_intersection(a, b);
+
+    ASSERT_EQ(a, expected);
+}
+
+TEST(RemoveIntersectionTest, AllDuplicateEntriesAreRemovedIfInB)
+{
+    std::vector<int> a { 1, 2, 2, 3, 4 };
+    std::vector<int> const b { 2 };
+    std::vector<int> const expected { 1, 3, 4 };
+
+    jt::SystemHelper::remove_intersection(a, b);
+
+    ASSERT_EQ(a, expected);
 }
