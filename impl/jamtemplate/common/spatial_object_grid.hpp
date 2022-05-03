@@ -8,8 +8,6 @@
 #include <memory>
 #include <vector>
 
-// TODO check for possible refactoring
-
 namespace jt {
 
 namespace detail {
