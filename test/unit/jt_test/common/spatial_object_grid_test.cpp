@@ -188,8 +188,6 @@ TEST(SpatialObjectGridTest, UpdateObjectCellIndex)
     ASSERT_TRUE(objects.empty());
 }
 
-// TODO next test: check that the object is actually in the right cell after update
-
 TEST(SpatialObjectGridTest, CheckObjectBeingInCorrectCellAfterMove)
 {
     SpatialObjectGrid<TestObject, 16> grid {};
@@ -201,4 +199,17 @@ TEST(SpatialObjectGridTest, CheckObjectBeingInCorrectCellAfterMove)
 
     auto const objects = grid.getObjectsAround(jt::Vector2f { 24.0f, 8.0f }, 16.0f);
     ASSERT_FALSE(objects.empty());
+}
+
+TEST(SpatialObjectGridTest, DeadObjectIsRemovedFromGrid)
+{
+    SpatialObjectGrid<TestObject, 16> grid {};
+    auto obj = std::make_shared<TestObject>();
+    obj->setPosition(jt::Vector2f { 8.0f, 8.0f });
+    grid.push_back(obj);
+    obj.reset();
+
+    grid.update(0.1f);
+    auto const objects = grid.getObjectsAround(jt::Vector2f { 8.0f, 8.0f }, 16.0f);
+    ASSERT_TRUE(objects.empty());
 }
