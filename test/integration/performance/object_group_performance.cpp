@@ -1,9 +1,9 @@
+#include <object_group.hpp>
 #include <random/random.hpp>
-#include <spatial_object_grid.hpp>
 #include <benchmark/benchmark.h>
 #include <iostream>
 
-struct TestObjectB {
+struct TestObjectA {
     jt::Vector2f getPosition() const { return m_position; }
     void setPosition(jt::Vector2f const& newPosition) { m_position = newPosition; }
     jt::Vector2f m_position {};
@@ -11,28 +11,26 @@ struct TestObjectB {
     static unsigned long long m_a;
 };
 
-unsigned long long TestObjectB::m_a { 0ull };
+unsigned long long TestObjectA::m_a { 0ull };
 
-static void BM_UpdateSpatialObjectGrid(benchmark::State& state)
+static void BM_UpdateObjectGroup(benchmark::State& state)
 {
     auto numberOfObjects = 100u;
-    jt::SpatialObjectGrid<TestObjectB, 16> grid;
-    std::vector<std::shared_ptr<TestObjectB>> objects;
+    jt::ObjectGroup<TestObjectA> group;
+    std::vector<std::shared_ptr<TestObjectA>> objects;
     objects.resize(numberOfObjects);
 
     for (auto _ : state) {
         for (auto i = 0u; i != numberOfObjects; ++i) {
-            auto object = std::make_shared<TestObjectB>();
+            auto object = std::make_shared<TestObjectA>();
             object->m_position
                 = jt::Random::getRandomPointIn(jt::Rectf { 0.0f, 0.0f, 1024.0f, 1024.0f });
             objects[i] = object;
-            grid.push_back(object);
+            group.push_back(object);
         }
 
         for (auto i = 0u; i != 10; ++i) {
-            auto objects = grid.getObjectsAround(
-                jt::Random::getRandomPointIn(jt::Rectf { 0.0f, 0.0f, 1024.0f, 1024.0f }), 16.0f);
-            for (auto& o : objects) {
+            for (auto& o : group) {
                 o.lock()->perform();
             }
         }
@@ -42,18 +40,16 @@ static void BM_UpdateSpatialObjectGrid(benchmark::State& state)
                 = jt::Random::getRandomPointIn(jt::Rectf { 0.0f, 0.0f, 1024.0f, 1024.0f });
         }
 
-        grid.update(0.1f);
+        group.update(0.1f);
 
         for (auto i = 0u; i != 10; ++i) {
-            auto objects = grid.getObjectsAround(
-                jt::Random::getRandomPointIn(jt::Rectf { 0.0f, 0.0f, 1024.0f, 1024.0f }), 16.0f);
-            for (auto& o : objects) {
+            for (auto& o : group) {
                 o.lock()->perform();
             }
         }
     }
-    std::cout << TestObjectB::m_a << "\n";
-    TestObjectB::m_a = 0ull;
+    std::cout << TestObjectA::m_a << "\n";
+    TestObjectA::m_a = 0ull;
 }
 
-BENCHMARK(BM_UpdateSpatialObjectGrid)->Unit(benchmark::kMillisecond);
+BENCHMARK(BM_UpdateObjectGroup)->Unit(benchmark::kMillisecond);
