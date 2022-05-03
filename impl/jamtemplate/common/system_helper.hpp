@@ -1,6 +1,7 @@
 ﻿#ifndef JAMTEMPLATE_SYSTEMHELPER_HPP
 #define JAMTEMPLATE_SYSTEMHELPER_HPP
 
+#include <algorithm>
 #include <iterator>
 #include <memory>
 #include <random>
@@ -44,10 +45,12 @@ template <typename ContainerT>
 void remove_intersection(ContainerT& a, ContainerT const& b)
 {
     std::unordered_set<typename ContainerT::value_type> const uniqueAs { a.cbegin(), a.cend() };
-    std::unordered_multiset<typename ContainerT::value_type> st { uniqueAs.cbegin(), uniqueAs.cend() };
+    std::unordered_multiset<typename ContainerT::value_type> st { uniqueAs.cbegin(),
+        uniqueAs.cend() };
 
     st.insert(b.begin(), b.end());
-    auto const predicate = [&st](typename ContainerT::value_type const& k) { return st.count(k) > 1; };
+    auto const predicate
+        = [&st](typename ContainerT::value_type const& k) { return st.count(k) > 1; };
     a.erase(std::remove_if(a.begin(), a.end(), predicate), a.cend());
 }
 
