@@ -80,6 +80,8 @@ public:
 
     void doUpdate(float const elapsed) override
     {
+        std::unordered_set<std::shared_ptr<T>> objectsToReplace;
+
         for (auto& kvp : m_cells) {
             std::vector<std::shared_ptr<T>> currentObjects {};
             std::vector<std::shared_ptr<T>> objectsToRemove {};
@@ -103,8 +105,12 @@ public:
             }
             jt::SystemHelper::remove_intersection(currentObjects, objectsToRemove);
 
-            // TODO sort ObjectsToRemove into the new, correct cell.
+            objectsToReplace.insert(objectsToRemove.begin(), objectsToRemove.end());
             kvp.second = jt::SystemHelper::to_weak_pointers(currentObjects);
+        }
+
+        for (auto& object : objectsToReplace) {
+            push_back(object);
         }
     }
 
