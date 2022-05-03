@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1650701199245,
+  "lastUpdate": 1651596607172,
   "repoUrl": "https://github.com/Laguna1989/JamTemplateCpp",
   "entries": {
     "Benchmark": [
@@ -5742,6 +5742,84 @@ window.BENCHMARK_DATA = {
             "value": 2.938001426778348,
             "unit": "ms/iter",
             "extra": "iterations: 239\ncpu: 2.9314589958158987 ms\nthreads: 1"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "977116+Thunraz@users.noreply.github.com",
+            "name": "Julian Dinges",
+            "username": "Thunraz"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "80354c0c85700bdadfc707fac7f781cc2516fe64",
+          "message": "Spatial partition grid (#206)\n\n* Add initial SpatialObjectGrid template class and test\r\n\r\n* Addd failing test for push_back\r\n\r\n* Add getPosition and setPosition to TestObject\r\n\r\n* Add tests for GetObjectsAround\r\n\r\n* Fill map in push_back method\r\n\r\n* Start to write parametrized tests\r\n\r\n* Add parameterized test cases\r\n\r\n* Add ostream operator to jt::Vector2f and jt::Vector2u\r\n\r\n* Add test for neighboring cell\r\n\r\n* Implement looking for neighboring cells\r\n\r\n* Refactor\r\n\r\n* Add another test and TODOs for next time\r\n\r\n* Add more TODOs\r\n\r\n* Implement CellIndex::operator+ and minor refactoring\r\n\r\n* Add test and fix implementation for distance\r\n\r\n* Refaktor spatial_obect_grid.hpp\r\n\r\n* Add parameterized test\r\n\r\n* Add static assert test for is base of\r\n\r\n* Add test UpdateObjectCellIndex\r\n\r\n* Begin updating cell indices for objects\r\n\r\n* Fix the hash/weakptr problem\r\n\r\n* Fix bug in implementation\r\n\r\n* Add test to check if object is in correct cell after move\r\n\r\n* Add fix for moving objects around cells\r\n\r\n* Add Test DeadObjectIsRemovedFromGrid\r\n\r\n* Remove TODO\r\n\r\n* Add performance test for spatial object grid\r\n\r\n* Add performance test for SpatialPartitionGrid\r\n\r\n* Fix review findings\r\n\r\n* Fix missing include\r\n\r\nCo-authored-by: Simon Weis <laguna_1989@gmx.net>\r\nCo-authored-by: adkiem <adkiem@icloud.com>\r\nCo-authored-by: Simon Weis <laguna.ws@gmail.com>",
+          "timestamp": "2022-05-03T18:44:21+02:00",
+          "tree_id": "5ba583185033fd2e06e6832618a6fd20aaf6b658",
+          "url": "https://github.com/Laguna1989/JamTemplateCpp/commit/80354c0c85700bdadfc707fac7f781cc2516fe64"
+        },
+        "date": 1651596605797,
+        "tool": "googlecpp",
+        "benches": [
+          {
+            "name": "BM_UpdateDrawablePositions",
+            "value": 2.856216349593664,
+            "unit": "ms/iter",
+            "extra": "iterations: 246\ncpu: 2.855462195121951 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GetAllCommands",
+            "value": 0.3032045188230169,
+            "unit": "ms/iter",
+            "extra": "iterations: 2311\ncpu: 0.30267027260926005 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_LoggerLogWithoutTarget",
+            "value": 0.7650061617486955,
+            "unit": "ms/iter",
+            "extra": "iterations: 915\ncpu: 0.7649509289617487 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_LoggerLogWithCoutTargetSetToOff",
+            "value": 0.7666690142856508,
+            "unit": "ms/iter",
+            "extra": "iterations: 910\ncpu: 0.7666263736263739 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_UpdateObjectGroup",
+            "value": 0.04864580512713568,
+            "unit": "ms/iter",
+            "extra": "iterations: 14394\ncpu: 0.048644810337640676 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_UpdateSpatialObjectGrid",
+            "value": 0.3286758452655939,
+            "unit": "ms/iter",
+            "extra": "iterations: 2165\ncpu: 0.3286532101616628 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_StartGame",
+            "value": 0.002723429668733977,
+            "unit": "ms/iter",
+            "extra": "iterations: 256863\ncpu: 0.0027233665416973247 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_RefineTilemapCollisions",
+            "value": 0.18300060696920012,
+            "unit": "ms/iter",
+            "extra": "iterations: 3702\ncpu: 0.1829809832522962 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GamestateWithTweeningShapes",
+            "value": 2.927215125522818,
+            "unit": "ms/iter",
+            "extra": "iterations: 239\ncpu: 2.9270949790794996 ms\nthreads: 1"
           }
         ]
       }
