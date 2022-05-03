@@ -37,7 +37,6 @@ bool operator<(CellIndex const& a, CellIndex const& b)
 } // namespace detail
 
 // TODO possibly add removing objects (also consider for ObjectGroup)
-// TODO add moving objects
 template <typename T, int cellSize>
 class SpatialObjectGrid : public jt::GameObject {
 public:
