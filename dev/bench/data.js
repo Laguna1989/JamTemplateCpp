@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1651596607172,
+  "lastUpdate": 1651944689812,
   "repoUrl": "https://github.com/Laguna1989/JamTemplateCpp",
   "entries": {
     "Benchmark": [
@@ -5820,6 +5820,84 @@ window.BENCHMARK_DATA = {
             "value": 2.927215125522818,
             "unit": "ms/iter",
             "extra": "iterations: 239\ncpu: 2.9270949790794996 ms\nthreads: 1"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "laguna.ws@gmail.com",
+            "name": "Laguna1989",
+            "username": "Laguna1989"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "e72254b915ef8271d126339410f9545a523f6d20",
+          "message": "Add Mac build with SDL (#207)\n\n* Add Mac build with SDL\r\n\r\n* Add missing sdl2 dependency\r\n\r\n* Try to change link libraries for imgui-sdl build\r\n\r\n* Add specific versions to install via brew\r\n\r\n* Set to other specific sdl version\r\n\r\n* Do not install specific versions but link to the correct folders",
+          "timestamp": "2022-05-07T19:28:27+02:00",
+          "tree_id": "81ef7bf41cbd23b163854f42aa109f4c297eaeee",
+          "url": "https://github.com/Laguna1989/JamTemplateCpp/commit/e72254b915ef8271d126339410f9545a523f6d20"
+        },
+        "date": 1651944688690,
+        "tool": "googlecpp",
+        "benches": [
+          {
+            "name": "BM_UpdateDrawablePositions",
+            "value": 5.30576920149247,
+            "unit": "ms/iter",
+            "extra": "iterations: 134\ncpu: 5.305082835820896 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GetAllCommands",
+            "value": 0.37156857361181844,
+            "unit": "ms/iter",
+            "extra": "iterations: 1963\ncpu: 0.37150015282730514 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_LoggerLogWithoutTarget",
+            "value": 0.9811464567722709,
+            "unit": "ms/iter",
+            "extra": "iterations: 694\ncpu: 0.9810425072046108 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_LoggerLogWithCoutTargetSetToOff",
+            "value": 0.9868010906515718,
+            "unit": "ms/iter",
+            "extra": "iterations: 706\ncpu: 0.9867589235127482 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_UpdateObjectGroup",
+            "value": 0.05686027973280829,
+            "unit": "ms/iter",
+            "extra": "iterations: 12276\ncpu: 0.056852671880091285 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_UpdateSpatialObjectGrid",
+            "value": 0.4131423174882531,
+            "unit": "ms/iter",
+            "extra": "iterations: 1704\ncpu: 0.41312423708920193 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_StartGame",
+            "value": 0.0033073627150025276,
+            "unit": "ms/iter",
+            "extra": "iterations: 205230\ncpu: 0.0033040184183598894 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_RefineTilemapCollisions",
+            "value": 0.24173525552486383,
+            "unit": "ms/iter",
+            "extra": "iterations: 2896\ncpu: 0.24170845994475118 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GamestateWithTweeningShapes",
+            "value": 3.422177426470545,
+            "unit": "ms/iter",
+            "extra": "iterations: 204\ncpu: 3.421947549019614 ms\nthreads: 1"
           }
         ]
       }
