@@ -85,7 +85,6 @@ jobs:
         run: |
           sudo apt-get install -y \
           libsdl2-dev \
-          libsdl2-mixer-dev \
           libsdl2-ttf-dev \
           libsdl2-image-dev
 
@@ -204,6 +203,36 @@ jobs:
         run: |
           cmake \
           -DJT_ENABLE_AUDIO_TESTS=OFF \
+          -B ${{github.workspace}}/build .
+
+      - name: Build
+        working-directory: ${{github.workspace}}/build
+        run: make jt_tests jt_demos -j 8
+
+  Mac_SDL:
+    runs-on: macos-latest
+    steps:
+      - name: Set up cmake
+        uses: jwlawson/actions-setup-cmake@v1.11
+        with:
+          cmake-version: '3.19.x'
+
+      - name: Install dependencies
+        run: |
+          brew install cmake ninja sdl2 sdl2_image sdl2_ttf
+
+      - uses: actions/checkout@v2
+
+      - name: ccache
+        uses: hendrikmuhs/ccache-action@v1
+        with:
+          key: ${{ github.job }}-${{ matrix.os }}
+          max-size: 200M
+
+      - name: CMake
+        run: |
+          cmake \
+          -DJT_ENABLE_AUDIO_TESTS=OFF -DUSE_SFML=OFF \
           -B ${{github.workspace}}/build .
 
       - name: Build
