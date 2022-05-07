@@ -39,7 +39,7 @@ else ()
         ## so the warning level of this one is set to 4 and the global warning level is set to three
         set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /w45205 /W3 /EHsc")
     else ()
-        if(NOT CMAKE_CXX_COMPILER_ID MATCHES "^(Apple)?Clang$")
+        if (NOT CMAKE_CXX_COMPILER_ID MATCHES "^(Apple)?Clang$")
             set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -lstdc++fs")
         endif ()
         if (JT_ENABLE_COVERAGE)
@@ -62,11 +62,11 @@ if (NOT USE_SFML)
         include(FindPkgConfig)
         pkg_check_modules(SDL2_Image REQUIRED IMPORTED_TARGET SDL2_image)
         pkg_check_modules(SDL2_TTF REQUIRED IMPORTED_TARGET SDL2_ttf)
-        if(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
-            include_directories(/usr/local/Cellar/sdl2/2.0.20/include/ 
-                                /usr/local/Cellar/sdl2_image/2.0.5/include/
-                                /usr/local/Cellar/sdl2_ttf/2.0.18_1/include/)
-        endif()
+        if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+            include_directories(/usr/local/Cellar/sdl2/2.0.22/include/
+                    /usr/local/Cellar/sdl2_image/2.0.5/include/
+                    /usr/local/Cellar/sdl2_ttf/2.0.18_1/include/)
+        endif ()
     endif ()
 endif ()
 
