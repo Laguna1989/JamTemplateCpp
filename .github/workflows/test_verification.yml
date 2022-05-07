@@ -219,7 +219,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          brew install cmake ninja sdl2@2.0.20 sdl2_image@2.0.5 sdl2_ttf@2.0.18_1
+          brew install cmake ninja sdl2@2.0.22 sdl2_image@2.0.5 sdl2_ttf@2.0.18_1
 
       - uses: actions/checkout@v2
 
