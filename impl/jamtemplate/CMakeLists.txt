@@ -39,7 +39,6 @@ target_link_libraries(JamTemplateLib
         Box2D
         )
 
-
 if (USE_SFML)
     target_include_directories(JamTemplateLib PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/sfml)
     target_include_directories(JamTemplateLib SYSTEM PUBLIC ${SFML_DIR_ROOT}/include)

@@ -19,3 +19,5 @@ add_library(imgui-sdl STATIC ${IMGUIHEADERS} ${IMGUISOURCES} ${CMAKE_CURRENT_SOU
 target_include_directories(imgui-sdl SYSTEM PUBLIC ${imgui_SOURCE_DIR}/)
 target_include_directories(imgui-sdl SYSTEM PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/)
 target_include_directories(imgui-sdl SYSTEM PUBLIC ${imgui-sdl_SOURCE_DIR}/)
+
+target_link_libraries(imgui-sdl ${SDL2_LIBRARIES} )
