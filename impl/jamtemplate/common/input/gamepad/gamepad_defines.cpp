@@ -3,19 +3,17 @@
 
 std::vector<jt::GamepadAxisCode> jt::getAllAxis()
 {
-    auto const maxValue = static_cast<std::uint32_t>(jt::GamepadAxisCode::AxisCount);
-    std::vector<jt::GamepadAxisCode> values(maxValue, jt::GamepadAxisCode::ALeft);
-    for (std::uint32_t i = 0U; i != maxValue; ++i) {
-        values.at(i) = static_cast<jt::GamepadAxisCode>(i);
+    std::vector<GamepadAxisCode> values(GamepadAxisCode::_size(), GamepadAxisCode::ALeft);
+    for (auto k : GamepadAxisCode::_values()) {
+        values.at(k) = k;
     }
     return values;
 }
 std::vector<jt::GamepadButtonCode> jt::getAllGamepadButtons()
 {
-    auto const maxValue = static_cast<std::uint32_t>(jt::GamepadButtonCode::GPButtonCount);
-    std::vector<jt::GamepadButtonCode> values(maxValue, jt::GamepadButtonCode::GBA);
-    for (std::uint32_t i = 0U; i != maxValue; ++i) {
-        values.at(i) = static_cast<jt::GamepadButtonCode>(i);
+    std::vector<GamepadButtonCode> values(GamepadButtonCode::_size(), jt::GamepadButtonCode::GBA);
+    for (auto k : GamepadButtonCode::_values()) {
+        values.at(k) = k;
     }
     return values;
 }

@@ -7,9 +7,9 @@
 namespace {
 std::pair<SDL_GameControllerAxis, SDL_GameControllerAxis> toLib(jt::GamepadAxisCode axis)
 {
-    if (axis == jt::GamepadAxisCode::ALeft) {
+    if (axis._value == jt::GamepadAxisCode::ALeft) {
         return std::make_pair(SDL_CONTROLLER_AXIS_LEFTX, SDL_CONTROLLER_AXIS_LEFTY);
-    } else if (axis == jt::GamepadAxisCode::ARight) {
+    } else if (axis._value == jt::GamepadAxisCode::ARight) {
         return std::make_pair(SDL_CONTROLLER_AXIS_RIGHTX, SDL_CONTROLLER_AXIS_RIGHTY);
     }
     return std::make_pair(SDL_CONTROLLER_AXIS_LEFTX, SDL_CONTROLLER_AXIS_LEFTY);
