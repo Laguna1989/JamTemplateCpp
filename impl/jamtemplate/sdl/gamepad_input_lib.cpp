@@ -38,7 +38,7 @@ SDL_GameControllerButton toLib(jt::GamepadButtonCode b)
         { jt::GamepadButtonCode::GBU8, jt::GamepadButtonCode::GBU8 }
     };
 
-    return static_cast<SDL_GameControllerButton>(lookup[b]);
+    return static_cast<SDL_GameControllerButton>(lookup[b]._value);
 }
 
 std::shared_ptr<SDL_GameController> createGamepad(int gamepadId)
