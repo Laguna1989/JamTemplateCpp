@@ -32,8 +32,8 @@ target_include_directories(JamTemplateLib SYSTEM PUBLIC ${tileson_SOURCE_DIR}/in
 
 FetchContent_GetProperties(tileson)
 FetchContent_GetProperties(openalpp)
-target_include_directories(JamTemplateLib PUBLIC ${tileson_SOURCE_DIR}/extras/)
-
+target_include_directories(JamTemplateLib SYSTEM PUBLIC ${tileson_SOURCE_DIR}/extras/)
+target_include_directories(JamTemplateLib SYSTEM PUBLIC ${CMAKE_SOURCE_DIR}/ext/better_enums)
 target_link_libraries(JamTemplateLib
         OpenALpp_Lib
         Box2D
