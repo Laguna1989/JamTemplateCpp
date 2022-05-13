@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1651944689812,
+  "lastUpdate": 1652464656121,
   "repoUrl": "https://github.com/Laguna1989/JamTemplateCpp",
   "entries": {
     "Benchmark": [
@@ -5898,6 +5898,84 @@ window.BENCHMARK_DATA = {
             "value": 3.422177426470545,
             "unit": "ms/iter",
             "extra": "iterations: 204\ncpu: 3.421947549019614 ms\nthreads: 1"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "laguna.ws@gmail.com",
+            "name": "Laguna1989",
+            "username": "Laguna1989"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "2a5b99df034a27c4cfd195612701fc2151b70969",
+          "message": "Add better enums (#208)\n\n* Add better enums for gamepad and keyboard\r\n\r\n* Fix conversion\r\n\r\n* Fix sdl conversion",
+          "timestamp": "2022-05-13T19:54:58+02:00",
+          "tree_id": "071d5f2e2b495041faf2477f23431973f01c395b",
+          "url": "https://github.com/Laguna1989/JamTemplateCpp/commit/2a5b99df034a27c4cfd195612701fc2151b70969"
+        },
+        "date": 1652464655678,
+        "tool": "googlecpp",
+        "benches": [
+          {
+            "name": "BM_UpdateDrawablePositions",
+            "value": 2.860278248979563,
+            "unit": "ms/iter",
+            "extra": "iterations: 245\ncpu: 2.85982 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GetAllCommands",
+            "value": 0.30062671035667965,
+            "unit": "ms/iter",
+            "extra": "iterations: 2327\ncpu: 0.30061237645036526 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_LoggerLogWithoutTarget",
+            "value": 0.7636313675027196,
+            "unit": "ms/iter",
+            "extra": "iterations: 917\ncpu: 0.7635456924754638 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_LoggerLogWithCoutTargetSetToOff",
+            "value": 0.768258791437967,
+            "unit": "ms/iter",
+            "extra": "iterations: 911\ncpu: 0.7682086717892427 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_UpdateObjectGroup",
+            "value": 0.04903310078332591,
+            "unit": "ms/iter",
+            "extra": "iterations: 14298\ncpu: 0.0490289830745559 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_UpdateSpatialObjectGrid",
+            "value": 0.33461114629541433,
+            "unit": "ms/iter",
+            "extra": "iterations: 2119\ncpu: 0.3345891930155735 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_StartGame",
+            "value": 0.0027280043071584224,
+            "unit": "ms/iter",
+            "extra": "iterations: 257014\ncpu: 0.0027278883640579877 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_RefineTilemapCollisions",
+            "value": 0.18418901802037357,
+            "unit": "ms/iter",
+            "extra": "iterations: 3829\ncpu: 0.18417396186993998 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GamestateWithTweeningShapes",
+            "value": 2.917286612499955,
+            "unit": "ms/iter",
+            "extra": "iterations: 240\ncpu: 2.9170216666666677 ms\nthreads: 1"
           }
         ]
       }
