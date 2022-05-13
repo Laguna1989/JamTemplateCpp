@@ -17,28 +17,44 @@ std::pair<SDL_GameControllerAxis, SDL_GameControllerAxis> toLib(jt::GamepadAxisC
 
 SDL_GameControllerButton toLib(jt::GamepadButtonCode b)
 {
-    std::map<jt::GamepadButtonCode, jt::GamepadButtonCode> lookup {
-        { jt::GamepadButtonCode::GBA, jt::GamepadButtonCode::GBA },
-        { jt::GamepadButtonCode::GBB, jt::GamepadButtonCode::GBB },
-        { jt::GamepadButtonCode::GBX, jt::GamepadButtonCode::GBX },
-        { jt::GamepadButtonCode::GBY, jt::GamepadButtonCode::GBY },
-        { jt::GamepadButtonCode::GBLB, jt::GamepadButtonCode::GBRightStick },
-        { jt::GamepadButtonCode::GBRB, jt::GamepadButtonCode::GBU1 },
-        { jt::GamepadButtonCode::GBBack, jt::GamepadButtonCode::GBLB },
-        { jt::GamepadButtonCode::GBStart, jt::GamepadButtonCode::GBBack },
-        { jt::GamepadButtonCode::GBLeftStick, jt::GamepadButtonCode::GBStart },
-        { jt::GamepadButtonCode::GBRightStick, jt::GamepadButtonCode::GBLeftStick },
-        { jt::GamepadButtonCode::GBU1, jt::GamepadButtonCode::GBU8 },
-        { jt::GamepadButtonCode::GBU2, jt::GamepadButtonCode::GBU2 },
-        { jt::GamepadButtonCode::GBU3, jt::GamepadButtonCode::GBU3 },
-        { jt::GamepadButtonCode::GBU4, jt::GamepadButtonCode::GBU4 },
-        { jt::GamepadButtonCode::GBU5, jt::GamepadButtonCode::GBU5 },
-        { jt::GamepadButtonCode::GBU6, jt::GamepadButtonCode::GBU6 },
-        { jt::GamepadButtonCode::GBU7, jt::GamepadButtonCode::GBU7 },
-        { jt::GamepadButtonCode::GBU8, jt::GamepadButtonCode::GBU8 }
-    };
-
-    return static_cast<SDL_GameControllerButton>(lookup[b]._value);
+    switch (b) {
+    case jt::GamepadButtonCode::GBA:
+        return static_cast<SDL_GameControllerButton>(jt::GamepadButtonCode::GBA);
+    case jt::GamepadButtonCode::GBB:
+        return static_cast<SDL_GameControllerButton>(jt::GamepadButtonCode::GBB);
+    case jt::GamepadButtonCode::GBX:
+        return static_cast<SDL_GameControllerButton>(jt::GamepadButtonCode::GBX);
+    case jt::GamepadButtonCode::GBY:
+        return static_cast<SDL_GameControllerButton>(jt::GamepadButtonCode::GBY);
+    case jt::GamepadButtonCode::GBLB:
+        return static_cast<SDL_GameControllerButton>(jt::GamepadButtonCode::GBRightStick);
+    case jt::GamepadButtonCode::GBRB:
+        return static_cast<SDL_GameControllerButton>(jt::GamepadButtonCode::GBU1);
+    case jt::GamepadButtonCode::GBBack:
+        return static_cast<SDL_GameControllerButton>(jt::GamepadButtonCode::GBLB);
+    case jt::GamepadButtonCode::GBStart:
+        return static_cast<SDL_GameControllerButton>(jt::GamepadButtonCode::GBBack);
+    case jt::GamepadButtonCode::GBLeftStick:
+        return static_cast<SDL_GameControllerButton>(jt::GamepadButtonCode::GBStart);
+    case jt::GamepadButtonCode::GBRightStick:
+        return static_cast<SDL_GameControllerButton>(jt::GamepadButtonCode::GBLeftStick);
+    case jt::GamepadButtonCode::GBU1:
+        return static_cast<SDL_GameControllerButton>(jt::GamepadButtonCode::GBU8);
+    case jt::GamepadButtonCode::GBU2:
+        return static_cast<SDL_GameControllerButton>(jt::GamepadButtonCode::GBU2);
+    case jt::GamepadButtonCode::GBU3:
+        return static_cast<SDL_GameControllerButton>(jt::GamepadButtonCode::GBU3);
+    case jt::GamepadButtonCode::GBU4:
+        return static_cast<SDL_GameControllerButton>(jt::GamepadButtonCode::GBU4);
+    case jt::GamepadButtonCode::GBU5:
+        return static_cast<SDL_GameControllerButton>(jt::GamepadButtonCode::GBU5);
+    case jt::GamepadButtonCode::GBU6:
+        return static_cast<SDL_GameControllerButton>(jt::GamepadButtonCode::GBU6);
+    case jt::GamepadButtonCode::GBU7:
+        return static_cast<SDL_GameControllerButton>(jt::GamepadButtonCode::GBU7);
+    case jt::GamepadButtonCode::GBU8:
+        return static_cast<SDL_GameControllerButton>(jt::GamepadButtonCode::GBU8);
+    }
 }
 
 std::shared_ptr<SDL_GameController> createGamepad(int gamepadId)
