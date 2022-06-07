@@ -1,4 +1,4 @@
-#include <palette.hpp>
+#include <color/palette.hpp>
 #include <gtest/gtest.h>
 
 TEST(PaletteTest, InitialSizeIsZero)
@@ -99,8 +99,7 @@ TEST(PaletteTest, FromVOneEntryRed)
     ASSERT_EQ(col, jt::colors::Red);
 }
 
-class PaletteSizeTestFixture : public ::testing::TestWithParam<std::size_t> {
-};
+class PaletteSizeTestFixture : public ::testing::TestWithParam<std::size_t> { };
 
 TEST_P(PaletteSizeTestFixture, FromHSize)
 {
