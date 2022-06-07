@@ -2,7 +2,7 @@
 #define GAME_GAMEPROPERTIES_HPP
 
 #include <color/color.hpp>
-#include <palette.hpp>
+#include <color/palette.hpp>
 #include <vector.hpp>
 #include <string>
 
