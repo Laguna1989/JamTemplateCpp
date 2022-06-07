@@ -28,3 +28,30 @@ TEST(ColorModificationTest, OverDesaturateGreen)
 
     ASSERT_EQ(desaturatedColor, expectedColor);
 }
+
+TEST(ColorModificationTest, SaturateRed)
+{
+    auto const initialColor = jt::MakeColor::FromHSV(0, 80.0f, 100.0f);
+    auto const saturatedColor = jt::ColorModifications::saturate(initialColor, 20.0f);
+    auto const expectedColor = jt::MakeColor::FromHSV(0, 100.0f, 100.0f);
+
+    ASSERT_EQ(saturatedColor, expectedColor);
+}
+
+TEST(ColorModificationTest, SaturateGreen)
+{
+    auto const initialColor = jt::MakeColor::FromHSV(120.0f, 40.0f, 100.0f);
+    auto const saturatedColor = jt::ColorModifications::saturate(initialColor, 60.0f);
+    auto const expectedColor = jt::MakeColor::FromHSV(120.0f, 100.0f, 100.0f);
+
+    ASSERT_EQ(saturatedColor, expectedColor);
+}
+
+TEST(ColorModificationTest, OverSaturateGreen)
+{
+    auto const initialColor = jt::MakeColor::FromHSV(120.0f, 60.0f, 100.0f);
+    auto const saturatedColor = jt::ColorModifications::saturate(initialColor, 60.0f);
+    auto const expectedColor = jt::MakeColor::FromHSV(120.0f, 100.0f, 100.0f);
+
+    ASSERT_EQ(saturatedColor, expectedColor);
+}
