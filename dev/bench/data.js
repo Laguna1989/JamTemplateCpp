@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1653108697163,
+  "lastUpdate": 1654619214889,
   "repoUrl": "https://github.com/Laguna1989/JamTemplateCpp",
   "entries": {
     "Benchmark": [
@@ -6054,6 +6054,84 @@ window.BENCHMARK_DATA = {
             "value": 3.4993746500001066,
             "unit": "ms/iter",
             "extra": "iterations: 200\ncpu: 3.4990390000000016 ms\nthreads: 1"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "laguna.ws@gmail.com",
+            "name": "Laguna1989",
+            "username": "Laguna1989"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "c64f0117de07b99c2ca9ef1a6c0f720a684f5624",
+          "message": "Merge pull request #209 from Laguna1989/FEATURE_AdvancedPaletteFunctions\n\nAdd advanced color functions (saturate, rotateHue, darken, lighten)",
+          "timestamp": "2022-06-07T18:20:51+02:00",
+          "tree_id": "e6d256a990b96c7a554eaeab216f5ff281fc9965",
+          "url": "https://github.com/Laguna1989/JamTemplateCpp/commit/c64f0117de07b99c2ca9ef1a6c0f720a684f5624"
+        },
+        "date": 1654619214131,
+        "tool": "googlecpp",
+        "benches": [
+          {
+            "name": "BM_UpdateDrawablePositions",
+            "value": 5.4190324057974095,
+            "unit": "ms/iter",
+            "extra": "iterations: 138\ncpu: 5.415087681159419 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GetAllCommands",
+            "value": 0.2894650843989864,
+            "unit": "ms/iter",
+            "extra": "iterations: 2346\ncpu: 0.28941713554987214 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_LoggerLogWithoutTarget",
+            "value": 0.7858544759238222,
+            "unit": "ms/iter",
+            "extra": "iterations: 893\ncpu: 0.7857468085106384 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_LoggerLogWithCoutTargetSetToOff",
+            "value": 0.8061699520547878,
+            "unit": "ms/iter",
+            "extra": "iterations: 876\ncpu: 0.8061166666666666 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_UpdateObjectGroup",
+            "value": 0.045868946434437945,
+            "unit": "ms/iter",
+            "extra": "iterations: 15215\ncpu: 0.045863601708839984 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_UpdateSpatialObjectGrid",
+            "value": 0.42126720264549616,
+            "unit": "ms/iter",
+            "extra": "iterations: 1890\ncpu: 0.41691333333333364 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_StartGame",
+            "value": 0.0030645456202355818,
+            "unit": "ms/iter",
+            "extra": "iterations: 225503\ncpu: 0.0030639672199482926 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_RefineTilemapCollisions",
+            "value": 0.1634650466357324,
+            "unit": "ms/iter",
+            "extra": "iterations: 4310\ncpu: 0.1634509512761021 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GamestateWithTweeningShapes",
+            "value": 2.814875784482814,
+            "unit": "ms/iter",
+            "extra": "iterations: 232\ncpu: 2.8144202586206952 ms\nthreads: 1"
           }
         ]
       }
