@@ -31,9 +31,9 @@ TEST(ColorModificationTest, OverDesaturateGreen)
 
 TEST(ColorModificationTest, SaturateRed)
 {
-    auto const initialColor = jt::MakeColor::FromHSV(0, 80.0f, 100.0f);
+    auto const initialColor = jt::MakeColor::FromHSV(0.0f, 80.0f, 100.0f);
     auto const saturatedColor = jt::ColorModifications::saturate(initialColor, 20.0f);
-    auto const expectedColor = jt::MakeColor::FromHSV(0, 100.0f, 100.0f);
+    auto const expectedColor = jt::MakeColor::FromHSV(0.0f, 100.0f, 100.0f);
 
     ASSERT_EQ(saturatedColor, expectedColor);
 }
@@ -54,4 +54,30 @@ TEST(ColorModificationTest, OverSaturateGreen)
     auto const expectedColor = jt::MakeColor::FromHSV(120.0f, 100.0f, 100.0f);
 
     ASSERT_EQ(saturatedColor, expectedColor);
+}
+
+TEST(ColorModificationTest, RotateRedBy360ResultsInSameColor)
+{
+    auto const initialColor = jt::MakeColor::FromHSV(0.0f, 100.0f, 100.0f);
+    auto const rotatedHueColor = jt::ColorModifications::rotateHue(initialColor, 360.0f);
+
+    ASSERT_EQ(rotatedHueColor, initialColor);
+}
+
+TEST(ColorModificationTest, RotateRedBy120ResultsInGreen)
+{
+    auto const initialColor = jt::MakeColor::FromHSV(0.0f, 100.0f, 100.0f);
+    auto const rotatedHueColor = jt::ColorModifications::rotateHue(initialColor, 120.0f);
+    auto const expectedColor = jt::MakeColor::FromHSV(120.0f, 100.0f, 100.0f);
+
+    ASSERT_EQ(rotatedHueColor, expectedColor);
+}
+
+TEST(ColorModificationTest, RotateRedBy240ResultsInBlue)
+{
+    auto const initialColor = jt::MakeColor::FromHSV(0.0f, 100.0f, 100.0f);
+    auto const rotatedHueColor = jt::ColorModifications::rotateHue(initialColor, 240.0f);
+    auto const expectedColor = jt::MakeColor::FromHSV(240.0f, 100.0f, 100.0f);
+
+    ASSERT_EQ(rotatedHueColor, expectedColor);
 }
