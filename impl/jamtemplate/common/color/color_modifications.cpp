@@ -1,4 +1,5 @@
 #include "color_modifications.hpp"
+#include "math_helper.hpp"
 #include <color/color_helpers.hpp>
 #include <cmath>
 
@@ -22,12 +23,7 @@ jt::Color jt::ColorModifications::desaturate(
 {
     return conversionHelper(initialColor, [&desaturationAmount](auto h, auto s, auto v) {
         s -= desaturationAmount;
-        if (s < 0) {
-            s = 0;
-        }
-        if (s > 100) {
-            s = 100;
-        }
+        s = jt::MathHelper::clamp(s, 0.0f, 100.0f);
         return std::make_tuple(h, s, v);
     });
 }
@@ -41,7 +37,21 @@ jt::Color jt::ColorModifications::rotateHue(jt::Color const& initialColor, float
 {
     return conversionHelper(initialColor, [&hueAngle](auto h, auto s, auto v) {
         h += hueAngle;
-        s = fmod(s, 360.0f);
+        h = fmod(h, 360.0f);
         return std::make_tuple(h, s, v);
     });
+}
+
+jt::Color jt::ColorModifications::darken(jt::Color const& initialColor, float value)
+{
+    return conversionHelper(initialColor, [&value](auto h, auto s, auto v) {
+        v -= value;
+        v = jt::MathHelper::clamp(v, 0.0f, 100.0f);
+        return std::make_tuple(h, s, v);
+    });
+}
+
+jt::Color jt::ColorModifications::lighten(jt::Color const& color, float value)
+{
+    return darken(color, -value);
 }
