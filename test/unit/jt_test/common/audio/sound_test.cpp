@@ -47,6 +47,48 @@ TEST_F(SoundTestWithLoadedSound, SetVolumeOne)
     EXPECT_FLOAT_EQ(m_sound->getVolume(), newVolume);
 }
 
+TEST_F(SoundTestWithLoadedSound, GetBlendAfterSetBlend)
+{
+    float const newBlend = 0.25f;
+    m_sound->setBlend(newBlend);
+    EXPECT_FLOAT_EQ(m_sound->getBlend(), newBlend);
+}
+
+TEST_F(SoundTestWithLoadedSound, SetBlendZero)
+{
+    float const newBlend = 0.0f;
+    m_sound->setBlend(newBlend);
+    EXPECT_FLOAT_EQ(m_sound->getBlend(), newBlend);
+}
+
+TEST_F(SoundTestWithLoadedSound, SetBlendOne)
+{
+    float const newBlend = 1.0f;
+    m_sound->setBlend(newBlend);
+    EXPECT_FLOAT_EQ(m_sound->getBlend(), newBlend);
+}
+
+TEST_F(SoundTestWithLoadedSound, GetPitchAfterSetPitch)
+{
+    float const newPitch = 0.25f;
+    m_sound->setPitch(newPitch);
+    EXPECT_FLOAT_EQ(m_sound->getPitch(), newPitch);
+}
+
+TEST_F(SoundTestWithLoadedSound, SetPitchAboveZero)
+{
+    float const newPitch = 0.1f;
+    m_sound->setPitch(newPitch);
+    EXPECT_FLOAT_EQ(m_sound->getPitch(), newPitch);
+}
+
+TEST_F(SoundTestWithLoadedSound, SetPitchAboveOne)
+{
+    float const newPitch = 5.0f;
+    m_sound->setPitch(newPitch);
+    EXPECT_FLOAT_EQ(m_sound->getPitch(), newPitch);
+}
+
 TEST_F(SoundTestWithLoadedSound, StopDoesNothingWhenNotPlaying)
 {
     m_sound->stop();
@@ -93,6 +135,19 @@ TEST_F(SoundTestWithLoadedSound, PlayAfterStop)
     EXPECT_NO_THROW(m_sound->play());
 }
 
+TEST_F(SoundTestWithLoadedSound, Pause)
+{
+    m_sound->play();
+    EXPECT_NO_THROW(m_sound->pause());
+}
+
+TEST_F(SoundTestWithLoadedSound, PauseTwice)
+{
+    m_sound->play();
+    m_sound->pause();
+    EXPECT_NO_THROW(m_sound->pause());
+}
+
 TEST_F(SoundTestWithLoadedSound, SetVolumeWhilePlaying)
 {
     EXPECT_NO_THROW(m_sound->play());
@@ -100,6 +155,13 @@ TEST_F(SoundTestWithLoadedSound, SetVolumeWhilePlaying)
     EXPECT_NO_THROW(m_sound->setVolume(0.5f));
     EXPECT_NO_THROW(m_sound->setVolume(0.75f));
     EXPECT_NO_THROW(m_sound->setVolume(0.2f));
+}
+
+TEST_F(SoundTestWithLoadedSound, UpdateDoesNotThrow) { ASSERT_NO_THROW(m_sound->update()); }
+
+TEST_F(SoundTestWithLoadedSound, GetSampleRateReturnsExpectedValue)
+{
+    ASSERT_EQ(m_sound->getSampleRate(), 44100);
 }
 
 #ifndef JT_ENABLE_WEB
@@ -117,5 +179,24 @@ TEST_F(SoundTestWithLoadedSound, GetDurationReturnsExpectedValue)
     auto const d = m_sound->getDuration();
     float const expected { 0.262721002f };
     EXPECT_FLOAT_EQ(d, expected);
+}
+
+TEST_F(SoundTestWithLoadedSound, SetBlendBelowZeroRaisesException)
+{
+    float const newBlend = -0.1f;
+    ASSERT_THROW(m_sound->setBlend(newBlend), std::invalid_argument);
+    EXPECT_FLOAT_EQ(m_sound->getBlend(), 0.0f);
+}
+TEST_F(SoundTestWithLoadedSound, SetBlendAboveOneRaisesException)
+{
+    float const newBlend = 1.1f;
+    ASSERT_THROW(m_sound->setBlend(newBlend), std::invalid_argument);
+    EXPECT_FLOAT_EQ(m_sound->getBlend(), 0.0f);
+}
+TEST_F(SoundTestWithLoadedSound, SetPitchToZeroRaisesException)
+{
+    float const newPitch = -0.0f;
+    ASSERT_THROW(m_sound->setPitch(newPitch), std::invalid_argument);
+    EXPECT_FLOAT_EQ(m_sound->getPitch(), 1.0f);
 }
 #endif
