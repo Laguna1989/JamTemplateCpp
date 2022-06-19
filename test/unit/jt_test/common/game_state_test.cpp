@@ -2,7 +2,7 @@
 #include <game_state.hpp>
 #include <mocks/mock_game.hpp>
 #include <mocks/mock_object.hpp>
-#include <mocks/mock_tween.hpp>
+#include <mocks/mock_tween_interface.hpp>
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 
@@ -55,6 +55,7 @@ public:
     std::shared_ptr<MockObject> mockObject;
     MockGfx gfx;
     MockWindow window;
+
     void SetUp() override
     {
         game = std::make_shared<MockGame>();
@@ -80,6 +81,13 @@ TEST_F(GameStateTest, AddGameObject)
     EXPECT_CALL(*mo, doCreate());
     gamestate.add(mo);
     ASSERT_EQ(gamestate.getNumberOfObjects(), 1);
+}
+
+TEST_F(GameStateTest, AddTweenObject)
+{
+    auto tween = std::make_shared<MockTweenInterface>();
+
+    gamestate.add(tween);
 }
 
 TEST_F(GameStateTest, DrawCallsDrawOnAddedGameObjects)
