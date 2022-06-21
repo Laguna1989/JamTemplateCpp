@@ -1,6 +1,7 @@
 ﻿#ifndef JAMTEMPLATE_TWEENBASE_HPP
 #define JAMTEMPLATE_TWEENBASE_HPP
 
+#include "tween_interface.hpp"
 #include <graphics/drawable_interface.hpp>
 #include <functional>
 #include <memory>
@@ -8,7 +9,7 @@
 
 namespace jt {
 
-class Tween {
+class Tween : public TweenInterface {
 public:
     using Sptr = std::shared_ptr<Tween>;
     using OnCompleteCallbackType = std::function<void(void)>;
@@ -46,11 +47,11 @@ public:
     void finish();
 
     /// Update the tween
-    void update(float elapsed);
+    void update(float elapsed) override;
 
     /// Check if tween is alive
     /// \return true if alive, false otherwise
-    bool isAlive();
+    bool isAlive() const override;
 
     /// Kill the tween
     void kill();

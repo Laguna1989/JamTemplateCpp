@@ -29,10 +29,22 @@ bool jt::Sound::getLoop(void) { return m_sound.getIsLooping(); }
 float jt::Sound::getDuration() const { return m_sound.getLengthInSeconds(); }
 
 float jt::Sound::getPosition() const { return m_sound.getCurrentOffsetInSeconds(); }
-void jt::Sound::setBlend(float blend) { m_blend = 1.0f - blend; }
+void jt::Sound::setBlend(float blend)
+{
+    if (blend < 0.0f || blend > 1.0f) {
+        throw std::invalid_argument { "Blend has to be between [0, 1]." };
+    }
+    m_blend = 1.0f - blend;
+}
 float jt::Sound::getBlend() const { return 1.0f - m_blend; }
 
-void jt::Sound::setPitch(float pitch) { m_sound.setPitch(pitch); }
+void jt::Sound::setPitch(float pitch)
+{
+    if (pitch <= 0.0f) {
+        throw std::invalid_argument { "Pitch has to be greater than 0." };
+    }
+    m_sound.setPitch(pitch);
+}
 float jt::Sound::getPitch() const { return m_sound.getPitch(); }
 
 int jt::Sound::getSampleRate() const { return m_buffer.getSampleRate(); }

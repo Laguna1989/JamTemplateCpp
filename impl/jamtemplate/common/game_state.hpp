@@ -2,14 +2,12 @@
 #define JAMTEMPLATE_GAMESTATE_HPP
 
 #include <game_object.hpp>
+#include <tweens/tween_interface.hpp>
 #include <memory>
 #include <string>
 #include <vector>
 
 namespace jt {
-
-// forward declarations
-class Tween;
 
 class GameState : public jt::GameObject {
 public:
@@ -24,12 +22,10 @@ public:
     /// \param gameObject the GameObject
     void add(std::shared_ptr<jt::GameObject> gameObject);
 
-    /// Add a tween to the Gamestate
-    ///
-    /// Added tweens will be updated by the GameState
-    ///
-    /// \param tb
-    void add(std::shared_ptr<Tween> tb);
+    /// Add a GameObjectInterface to the GameState
+    /// Added Objects will be updated and drawn by the GameState
+    /// \param obj the GameObject
+    void add(std::shared_ptr<TweenInterface> obj);
 
     /// Get the number of GameObjects in the State
     /// \return the number of gameobjects
@@ -70,7 +66,7 @@ public:
 protected:
     void updateObjects(float elapsed);
     void basicUpdateObjects(float elapsed);
-    void updateTweens(float elapsed);
+    void updateTweens(float obj);
 
     void drawObjects() const;
 
@@ -88,16 +84,16 @@ private:
     std::vector<std::shared_ptr<GameObject>> m_objectsToAdd {};
 
     /// all tweens running in this state
-    std::vector<std::shared_ptr<Tween>> m_tweens {};
+    std::vector<std::shared_ptr<TweenInterface>> m_tweens {};
 
-    /// this is used as a level of indirection,
-    /// because tweens might add or remove m_tweens while iterating over the m_tweens vector,
-    /// which invalidates iterators, which leads to crashes.
+    /// this is used as a level of indirection, because GameObjects might add or remove objects
+    /// while iterating over the objects vector, which invalidates iterators, which leads to
+    /// crashes.
     ///
-    /// The idea is to not modify m_tweens directly when a Tween is added,
-    /// but to place them in this vector first and add them to m_tweens,
+    /// The idea is to not modify m_gameObjects directly when a Tween is added,
+    /// but to place them in this vector first and add them to m_gameObjects,
     /// once it is safe to do so.
-    std::vector<std::shared_ptr<Tween>> m_tweensToAdd {};
+    std::vector<std::shared_ptr<TweenInterface>> m_tweensToAdd {};
 
     bool m_doAutoUpdateObjects { true };
     bool m_doAutoUpdateTweens { true };

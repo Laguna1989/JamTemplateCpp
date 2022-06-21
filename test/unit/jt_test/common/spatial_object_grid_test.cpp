@@ -15,6 +15,33 @@ private:
 
 using jt::SpatialObjectGrid;
 
+TEST(CellIndex, UnequalOperatorReturnsTrueIfDifferentInX)
+{
+    jt::detail::CellIndex const ci0 { 0, 0 };
+    jt::detail::CellIndex const ci1 { 1, 0 };
+    ASSERT_TRUE(ci0 != ci1);
+}
+
+TEST(CellIndex, UnequalOperatorReturnsTrueIfDifferentInY)
+{
+    jt::detail::CellIndex const ci0 { 0, 0 };
+    jt::detail::CellIndex const ci1 { 0, 1 };
+    ASSERT_TRUE(ci0 != ci1);
+}
+
+TEST(CellIndex, UnequalOperatorReturnsTrueIfDifferentInBoth)
+{
+    jt::detail::CellIndex const ci0 { 0, 0 };
+    jt::detail::CellIndex const ci1 { 1, 1 };
+    ASSERT_TRUE(ci0 != ci1);
+}
+
+TEST(CellIndex, EqualCIsReturnFalse)
+{
+    jt::detail::CellIndex const ci0 { 0, 0 };
+    ASSERT_FALSE(ci0 != ci0);
+}
+
 TEST(SpatialObjectGridTest, InitialGridIsEmpty)
 {
     SpatialObjectGrid<TestObject, 16> grid {};
@@ -175,7 +202,7 @@ TEST(SpatialObjectGridTest, SpatialObjectGridIsInheritedFromGameObject)
         "SpatialObjectGrid does not inherit from GameObject");
 }
 
-TEST(SpatialObjectGridTest, UpdateObjectCellIndex)
+TEST(SpatialObjectGridTest, UpdateObjectWithMoveUpdatesCellIndex)
 {
     SpatialObjectGrid<TestObject, 16> grid {};
     auto obj = std::make_shared<TestObject>();
@@ -186,6 +213,19 @@ TEST(SpatialObjectGridTest, UpdateObjectCellIndex)
 
     auto const objects = grid.getObjectsAround(jt::Vector2f { -8.0f, 8.0f }, 16.0f);
     ASSERT_TRUE(objects.empty());
+}
+
+TEST(SpatialObjectGridTest, UpdateObjectWithoutMoveDoesNotChangeCellIndex)
+{
+    SpatialObjectGrid<TestObject, 16> grid {};
+    auto obj = std::make_shared<TestObject>();
+    obj->setPosition(jt::Vector2f { 8.0f, 8.0f });
+    grid.push_back(obj);
+    grid.update(0.1f);
+
+    auto const objects = grid.getObjectsAround(jt::Vector2f { -8.0f, 8.0f }, 16.0f);
+    ASSERT_EQ(objects.size(), 1);
+    ASSERT_EQ(objects.at(0).lock(), obj);
 }
 
 TEST(SpatialObjectGridTest, CheckObjectBeingInCorrectCellAfterMove)

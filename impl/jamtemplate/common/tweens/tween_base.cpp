@@ -29,7 +29,7 @@ void jt::Tween::update(float elapsed)
     doUpdate(elapsed);
 }
 
-bool jt::Tween::isAlive() { return m_alive; }
+bool jt::Tween::isAlive() const { return m_alive; }
 
 void jt::Tween::kill() { m_alive = false; }
 
