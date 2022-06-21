@@ -1,6 +1,7 @@
 # JamTemplateCpp
 
-[![Build Status](https://github.com/Laguna1989/JamTemplateCpp/actions/workflows/test_verification.yml/badge.svg)](https://github.com/Laguna1989/JamTemplateCpp/actions/workflows/unittests.yml) [![Coverage Status](https://coveralls.io/repos/github/Laguna1989/JamTemplateCpp/badge.svg)](https://coveralls.io/github/Laguna1989/JamTemplateCpp)
+[![Build Status](https://github.com/Laguna1989/JamTemplateCpp/actions/workflows/test_verification.yml/badge.svg)](https://github.com/Laguna1989/JamTemplateCpp/actions/workflows/unittests.yml)
+[![codecov](https://codecov.io/github/Laguna1989/JamTemplateCpp/branch/master/graph/badge.svg?token=9XBS3E6UWC)](https://codecov.io/github/Laguna1989/JamTemplateCpp)
 
 ## About
 
@@ -9,7 +10,8 @@ web (webassembly) games. Internally it uses [SFML](https://www.sfml-dev.org/) an
 
 Some games created with this JamTemplate are
 
-* [Gemga](https://runvs.io/Games/gemga) (Web & Native, FrankenGameJam 2021)
+* [Funky Trip](https://runvs.io/Games/funkytrip) (Native & Web, Alakajam 14 2022)
+* [Gemga](https://runvs.io/Games/gemga) (Native & Web, FrankenGameJam 2021)
 * [Quasar Rush](https://runvs.io/Games/quasarrush) (Native & Web, A Game By Its Cover 2021)
 * [Space Turtles](https://runvs.io/Games/spaceturtles) (Native, MultiplayerKajam 2021)
 * [Tricky Tractor](https://runvs.io/Games/trickytractor) (Native, FrankenGameJam 2020)
@@ -31,7 +33,8 @@ and some more at [my game portfolio](https://runvs.io/Games).
 
 1. open project folder in clion
 
-Hint: There is a file template available in the `.idea` folder that will make take away some of the boilerplate code during creation of Gameobject classes. 
+Hint: There is a file template available in the `.idea` folder that will make take away some of the boilerplate code
+during creation of Gameobject classes.
 
 ### Windows 32 bit
 
@@ -67,9 +70,13 @@ in `CMakeLists.txt`.
 
 ## Deployment
 
-Automatic creation of the files is automated via github actions. If a release is created with semantic versioning (e.g. `v1.2.3`), a deployment build is triggered, which builds the game executable for windows, linux, mac and web and attaches the zipped files to the release once the build is finished. The archives can directly be uploaded on [itch](itch.io), [gamejolt](https://gamejolt.com/) or any other website.
+Automatic creation of the files is automated via github actions. If a release is created with semantic versioning (
+e.g. `v1.2.3`), a deployment build is triggered, which builds the game executable for windows, linux, mac and web and
+attaches the zipped files to the release once the build is finished. The archives can directly be uploaded
+on [itch](itch.io), [gamejolt](https://gamejolt.com/) or any other website.
 
-Note: Only the game executable and the `assets` folder is included in the archive. If more files are required, either adjust the deployment script or place them in the assets folder.
+Note: Only the game executable and the `assets` folder is included in the archive. If more files are required, either
+adjust the deployment script or place them in the assets folder.
 
 ## Cmake options
 
@@ -79,7 +86,6 @@ All of those options can be set to ON or OFF via the cmake commandline
 * `JT_ENABLE_DEMOS` - Enables the demos (small example programs which showcase a specific theme)
 * `JT_ENABLE_WEB` - Webbuild
 * `USE_SFML` - If `ON`, SFML will be used, if `OFF`, SDL will be used (SDL works best on linux)
-* `JT_ENABLE_COVERAGE` - Compile with the flags set for the coverage run
 * `JT_ENABLE_AUDIO_TESTS` - Some of the tests rely on a working audio setup, which seemingly cannot be faked easily.
   This switch disables those specific tests, in case no audio is available on the respective machine.
 * `JT_ENABLE_CLANG_TIDY` - Enable clang tidy checker
@@ -88,12 +94,10 @@ e.g. calling `cmake ../ -DJT_ENABLE_UNITTESTS=ON -DENABLE_DEMOS=ON`
 
 ## Code Coverage
 
-Code Coverage can is reported via [coveralls](https://coveralls.io/github/Laguna1989/JamTemplateCpp).
+Code Coverage is reported via [CodeCov](https://app.codecov.io/gh/Laguna1989/JamTemplateCpp/)
 
-Unfortunately there seem to be some artifacts, which lead to a lower than actual coverage.
-
-A local run (Without the artifacts) can be executed
-via [OpenCppCoverage](https://github.com/OpenCppCoverage/OpenCppCoverage). The command :
+A local run (without the artifacts) can be executed on Windows
+via [OpenCppCoverage](https://github.com/OpenCppCoverage/OpenCppCoverage):
 
 ```
 OpenCppCoverage.exe --sources C:\projects\JamTemplateCpp\* --excluded_sources C:\projects\JamTemplateCpp\test\* --excluded_sources C:\projects\JamTemplateCpp\ext\* --excluded_sources C:\projects\JamTemplateCpp\cmake-build-debug\* .\cmake-build-debug\test\unit\jt_test\jt_tests.exe
