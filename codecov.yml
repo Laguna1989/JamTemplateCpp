@@ -1,12 +1,8 @@
 coverage:
-  branch: master
   status:
     project:
       default:
         # basic
         target: 80%
         threshold: 5%
-    patch:
-      default:
-        target: 80
-        threshold: 5%
+    patch: off
