@@ -113,7 +113,7 @@ jobs:
       - name: Test
         uses: GabrielBB/xvfb-action@v1
         with:
-          run: ./jt_tests --gtest_shuffle
+          run: ./jt_tests
           working-directory: ${{github.workspace}}/build/test/unit/jt_test
 
   WindowsSFML:
