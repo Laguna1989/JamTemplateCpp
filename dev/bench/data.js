@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1655833755897,
+  "lastUpdate": 1656240216248,
   "repoUrl": "https://github.com/Laguna1989/JamTemplateCpp",
   "entries": {
     "Benchmark": [
@@ -6288,6 +6288,84 @@ window.BENCHMARK_DATA = {
             "value": 2.682342727969385,
             "unit": "ms/iter",
             "extra": "iterations: 261\ncpu: 2.6822295019157147 ms\nthreads: 1"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "laguna.ws@gmail.com",
+            "name": "Laguna1989",
+            "username": "Laguna1989"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "e1f4aa3714f8e6fa6acdc2b68c5a9c1c13a5527a",
+          "message": "Improve Coverage (#212)\n\n* Rewrite LogTargetCout to allow for mocking\r\n\r\n* Try to add codecov yml\r\n\r\n* Add patch section to codecov yml file\r\n\r\n* Disable patch check",
+          "timestamp": "2022-06-26T12:40:35+02:00",
+          "tree_id": "56b6289882eb0ad603f38a2fe5fb2387134b2edd",
+          "url": "https://github.com/Laguna1989/JamTemplateCpp/commit/e1f4aa3714f8e6fa6acdc2b68c5a9c1c13a5527a"
+        },
+        "date": 1656240214377,
+        "tool": "googlecpp",
+        "benches": [
+          {
+            "name": "BM_UpdateDrawablePositions",
+            "value": 5.1950654338235704,
+            "unit": "ms/iter",
+            "extra": "iterations: 136\ncpu: 5.194574999999999 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GetAllCommands",
+            "value": 0.3680172160584019,
+            "unit": "ms/iter",
+            "extra": "iterations: 2055\ncpu: 0.3679740632603405 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_LoggerLogWithoutTarget",
+            "value": 0.991976915407852,
+            "unit": "ms/iter",
+            "extra": "iterations: 662\ncpu: 0.9916972809667677 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_LoggerLogWithCoutTargetSetToOff",
+            "value": 0.9695931669218896,
+            "unit": "ms/iter",
+            "extra": "iterations: 653\ncpu: 0.9695756508422666 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_UpdateObjectGroup",
+            "value": 0.06088201856322111,
+            "unit": "ms/iter",
+            "extra": "iterations: 12013\ncpu: 0.06087173894947142 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_UpdateSpatialObjectGrid",
+            "value": 0.41075277372261776,
+            "unit": "ms/iter",
+            "extra": "iterations: 1644\ncpu: 0.4106846715328471 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_StartGame",
+            "value": 0.0032711235539413567,
+            "unit": "ms/iter",
+            "extra": "iterations: 223020\ncpu: 0.0032706586853197043 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_RefineTilemapCollisions",
+            "value": 0.2312039091223231,
+            "unit": "ms/iter",
+            "extra": "iterations: 2894\ncpu: 0.23119661368348327 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GamestateWithTweeningShapes",
+            "value": 3.2673488256880985,
+            "unit": "ms/iter",
+            "extra": "iterations: 218\ncpu: 3.26702064220184 ms\nthreads: 1"
           }
         ]
       }
