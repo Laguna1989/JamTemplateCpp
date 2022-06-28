@@ -59,6 +59,14 @@ TEST_F(Box2dObjectTest, DestroyCallsDestroyBodyOnWorld)
     obj.destroy();
 }
 
+TEST_F(Box2dObjectTest, DestroyWithDeletedWorld)
+{
+    jt::Box2DObject obj { m_mockWorld, nullptr };
+
+    m_mockWorld.reset();
+    EXPECT_NO_THROW(obj.destroy());
+}
+
 class Box2dObjectWorldImplTest : public ::testing::Test {
 public:
     std::shared_ptr<jt::Box2DWorldInterface> m_world;
