@@ -1,0 +1,46 @@
+name: Code Coverage
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  run:
+    runs-on: windows-2019
+    name: Code Coverage Report
+    steps:
+      - name: Set up cmake
+        uses: jwlawson/actions-setup-cmake@v1.11
+        with:
+          cmake-version: '3.19.x'
+
+      - uses: actions/checkout@v2
+
+      - name: CMake
+        run: cmake -B ${{github.workspace}}/build -DJT_ENABLE_AUDIO_TESTS=OFF  -DJT_ENABLE_DEMOS=OFF -DJT_ENABLE_PERFORMANCETESTS=OFF .
+
+      - name: Build
+        working-directory: ${{github.workspace}}/build
+        run: cmake --build .
+
+      - name: Setup OpenCppCoverage and add to PATH
+        id: setup_opencppcoverage
+        run: |
+          choco install OpenCppCoverage -y
+          echo "C:\Program Files\OpenCppCoverage" >> $env:GITHUB_PATH
+
+      - name: Generate Report
+        id: generate_test_report
+        working-directory: ${{github.workspace}}/build/test/unit/jt_test
+        shell: cmd
+        run: OpenCppCoverage.exe --export_type cobertura:JamTemplateCoverage.xml --sources ${{github.workspace}}\impl --excluded_sources ${{github.workspace}}\test\* --excluded_sources ${{github.workspace}}\build\* --excluded_sources ${{github.workspace}}\ext\* ${{github.workspace}}\build\test\unit\jt_test\Debug\jt_tests.exe
+
+      - name: Upload Report to Codecov
+        uses: codecov/codecov-action@v2
+        with:
+          working-directory: ${{github.workspace}}/build/test/unit/jt_test
+          files: ./JamTemplateCoverage.xml
+          fail_ci_if_error: true
+          functionalities: fix

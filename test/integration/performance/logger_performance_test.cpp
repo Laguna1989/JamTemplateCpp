@@ -1,4 +1,4 @@
-#include <log/log_target_cout.hpp>
+#include <log/log_target_ostream.hpp>
 #include <log/logger.hpp>
 #include <benchmark/benchmark.h>
 
@@ -22,7 +22,7 @@ static void BM_LoggerLogWithCoutTargetSetToOff(benchmark::State& state)
 {
     for (auto _ : state) {
         jt::Logger logger;
-        auto target = std::make_shared<jt::LogTargetCout>();
+        auto target = std::make_shared<jt::LogTargetOstream>();
         target->setLogLevel(LogLevel::LogLevelOff);
         logger.addLogTarget(target);
 

@@ -1,4 +1,4 @@
-#include <log/log_target_cout.hpp>
+#include <log/log_target_ostream.hpp>
 #include <log/logger_null.hpp>
 #include <gtest/gtest.h>
 
@@ -26,7 +26,7 @@ TEST(LoggerNullTest, AddValidLogTargetDoesNothing)
 {
     jt::null_objects::LoggerNull logger;
 
-    ASSERT_NO_THROW(logger.addLogTarget(std::make_shared<jt::LogTargetCout>()));
+    ASSERT_NO_THROW(logger.addLogTarget(std::make_shared<jt::LogTargetOstream>()));
 }
 
 TEST(LoggerNullTest, HistoryIsEmptyInitially)

@@ -1,7 +1,6 @@
 set(JT_ENABLE_UNITTESTS ON CACHE BOOL "enable unittests")
 set(JT_ENABLE_DEMOS ON CACHE BOOL "enable stresstests")
 set(JT_ENABLE_PERFORMANCETESTS OFF CACHE BOOL "enable performance tests")
-set(JT_ENABLE_COVERAGE OFF CACHE BOOL "enable coverage")
 set(JT_ENABLE_WEB OFF CACHE BOOL "enable web build using SDL and em++")
 set(JT_ENABLE_AUDIO_TESTS ON CACHE BOOL "enable unittests that require a display")
 set(JT_ENABLE_CLANG_TIDY OFF CACHE BOOL "enable clang tidy checks")
