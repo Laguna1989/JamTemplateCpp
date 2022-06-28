@@ -47,7 +47,13 @@ TEST_F(Box2dWorldImplTest, DestroyJoint)
     b2RevoluteJointDef def;
     def.Initialize(bodya, bodyb, b2Vec2_zero);
     auto joint = wrapper->createJoint(&def);
-    wrapper->destroyJoint(joint);
+    ASSERT_NO_THROW(wrapper->destroyJoint(joint));
 }
 
 TEST_F(Box2dWorldImplTest, Step) { wrapper->step(0.1f, 1, 1); }
+
+TEST_F(Box2dWorldImplTest, SetContactListenerDoesNotThrow)
+{
+    auto listener = std::make_shared<b2ContactListener>();
+    ASSERT_NO_THROW(wrapper->setContactListener(listener));
+}
