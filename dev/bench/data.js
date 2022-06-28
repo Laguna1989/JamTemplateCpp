@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1656433320643,
+  "lastUpdate": 1656445108972,
   "repoUrl": "https://github.com/Laguna1989/JamTemplateCpp",
   "entries": {
     "Benchmark": [
@@ -6444,6 +6444,84 @@ window.BENCHMARK_DATA = {
             "value": 2.6836624423078947,
             "unit": "ms/iter",
             "extra": "iterations: 260\ncpu: 2.683646538461539 ms\nthreads: 1"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "laguna.ws@gmail.com",
+            "name": "Laguna1989",
+            "username": "Laguna1989"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "1da4021507ed282b6d34e1b165a845833b736c16",
+          "message": "Merge pull request #214 from Laguna1989/IMPROVE_CoverageBox2DObject\n\nAdd missing test case for early return",
+          "timestamp": "2022-06-28T21:36:17+02:00",
+          "tree_id": "0e335329fb5444919e5ea5cf317ce2aa834f9b32",
+          "url": "https://github.com/Laguna1989/JamTemplateCpp/commit/1da4021507ed282b6d34e1b165a845833b736c16"
+        },
+        "date": 1656445108116,
+        "tool": "googlecpp",
+        "benches": [
+          {
+            "name": "BM_UpdateDrawablePositions",
+            "value": 2.6597823598484553,
+            "unit": "ms/iter",
+            "extra": "iterations: 264\ncpu: 2.6594181818181815 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GetAllCommands",
+            "value": 0.3000556412017088,
+            "unit": "ms/iter",
+            "extra": "iterations: 2330\ncpu: 0.2998955793991417 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_LoggerLogWithoutTarget",
+            "value": 0.7379414403379427,
+            "unit": "ms/iter",
+            "extra": "iterations: 947\ncpu: 0.7378919746568109 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_LoggerLogWithCoutTargetSetToOff",
+            "value": 0.7393571573389524,
+            "unit": "ms/iter",
+            "extra": "iterations: 947\ncpu: 0.7393244984160509 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_UpdateObjectGroup",
+            "value": 0.06116413311263931,
+            "unit": "ms/iter",
+            "extra": "iterations: 11479\ncpu: 0.06093968986845543 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_UpdateSpatialObjectGrid",
+            "value": 0.3308035202043645,
+            "unit": "ms/iter",
+            "extra": "iterations: 2153\ncpu: 0.33057101718532267 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_StartGame",
+            "value": 0.0026724856848285234,
+            "unit": "ms/iter",
+            "extra": "iterations: 260912\ncpu: 0.002672430934567978 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_RefineTilemapCollisions",
+            "value": 0.24156679753340457,
+            "unit": "ms/iter",
+            "extra": "iterations: 2919\ncpu: 0.2413411442274751 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GamestateWithTweeningShapes",
+            "value": 2.6849765670499783,
+            "unit": "ms/iter",
+            "extra": "iterations: 261\ncpu: 2.682752490421455 ms\nthreads: 1"
           }
         ]
       }
