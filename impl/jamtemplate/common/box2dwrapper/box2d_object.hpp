@@ -42,11 +42,11 @@ public:
     /// \param v the velocity to be added
     void addVelocity(jt::Vector2f const& v);
 
-    /// Set the rotation
-    /// \return the rotation
+    /// Get the rotation in degree
+    /// \return the rotation in degree
     float getRotation() const;
 
-    /// get the Box2d body pointer
+    /// Get the Box2d body pointer
     /// \return the pointer
     b2Body* getB2Body();
 

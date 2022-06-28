@@ -1,4 +1,5 @@
 #include "box2d_object.hpp"
+#include <math_helper.hpp>
 
 jt::Box2DObject::Box2DObject(std::shared_ptr<jt::Box2DWorldInterface> world, b2BodyDef const* def)
 {
@@ -29,7 +30,7 @@ void jt::Box2DObject::addVelocity(jt::Vector2f const& v)
     m_body->SetLinearVelocity(Conversion::vec(oldV + v));
 }
 
-float jt::Box2DObject::getRotation() const { return m_body->GetAngle(); }
+float jt::Box2DObject::getRotation() const { return jt::MathHelper::rad2deg(m_body->GetAngle()); }
 
 b2Body* jt::Box2DObject::getB2Body() { return m_body; }
 
