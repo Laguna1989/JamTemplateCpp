@@ -21,7 +21,6 @@ bool jt::StateManagerTransitionImpl::triggerStateChange() { return m_triggerStat
 
 void jt::StateManagerTransitionImpl::update(float elapsed)
 {
-
     if (m_started) {
         if (m_firstHalf) {
             if (m_timer + elapsed >= m_timerMax) {

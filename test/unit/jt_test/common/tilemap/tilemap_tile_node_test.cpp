@@ -1,3 +1,4 @@
+#include "tilemap/tileson_loader.hpp"
 #include <backend_setup.hpp>
 #include <pathfinder/node.hpp>
 #include <shape.hpp>
