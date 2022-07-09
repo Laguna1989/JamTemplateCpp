@@ -6,6 +6,9 @@
 
 namespace jt {
 class InfoScreen : public ::jt::GameObject {
+public:
+    InfoScreen();
+
 private:
     mutable bool m_showInfo { false };
 
