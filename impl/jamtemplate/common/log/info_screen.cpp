@@ -2,11 +2,13 @@
 #include <game_interface.hpp>
 #include <imgui.h>
 
-void jt::InfoScreen::doCreate()
+jt::InfoScreen::InfoScreen()
 {
     m_frameTimesVector.resize(m_frameTimes.capacity());
     m_GameObjectAliveCountVector.resize(m_GameObjectAliveCount.capacity());
 }
+
+void jt::InfoScreen::doCreate() { }
 void jt::InfoScreen::doUpdate(float const elapsed)
 {
 #ifdef JT_ENABLE_DEBUG
