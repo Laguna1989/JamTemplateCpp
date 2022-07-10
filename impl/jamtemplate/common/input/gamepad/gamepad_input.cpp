@@ -3,10 +3,12 @@
 
 jt::GamepadInput::GamepadInput(int gamepadId, AxisFunc axisFunc, ButtonCheckFunction buttonFunc)
 {
-    if (axisFunc == nullptr) {
+    m_axisFunc = axisFunc;
+    if (m_axisFunc == nullptr) {
         m_axisFunc = [gamepadId](auto k) { return libAxisValue(gamepadId, k); };
     }
-    if (buttonFunc == nullptr) {
+    m_buttonFunc = buttonFunc;
+    if (m_buttonFunc == nullptr) {
         m_buttonFunc = [gamepadId](auto b) { return libGPButtonValue(gamepadId, b); };
     }
     // note: do not call the virtual reset() function here, as this is the constructor
