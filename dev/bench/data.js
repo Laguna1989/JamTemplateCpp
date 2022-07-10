@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1657440260262,
+  "lastUpdate": 1657450474049,
   "repoUrl": "https://github.com/Laguna1989/JamTemplateCpp",
   "entries": {
     "Benchmark": [
@@ -6912,6 +6912,84 @@ window.BENCHMARK_DATA = {
             "value": 2.6892390653845686,
             "unit": "ms/iter",
             "extra": "iterations: 260\ncpu: 2.6891080769230755 ms\nthreads: 1"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "laguna.ws@gmail.com",
+            "name": "Laguna1989",
+            "username": "Laguna1989"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "ddce8e4b200b5856abeddb265f76138653d80a8e",
+          "message": "Merge pull request #219 from Laguna1989/IMPROVE_CoverageGamepadInput\n\nAdd Tests for gamepad input",
+          "timestamp": "2022-07-10T12:52:23+02:00",
+          "tree_id": "a5292294b6587be0c520c0fc94755961cbfe3596",
+          "url": "https://github.com/Laguna1989/JamTemplateCpp/commit/ddce8e4b200b5856abeddb265f76138653d80a8e"
+        },
+        "date": 1657450473261,
+        "tool": "googlecpp",
+        "benches": [
+          {
+            "name": "BM_UpdateDrawablePositions",
+            "value": 2.864421624489834,
+            "unit": "ms/iter",
+            "extra": "iterations: 245\ncpu: 2.8641122448979597 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GetAllCommands",
+            "value": 0.32194145144959696,
+            "unit": "ms/iter",
+            "extra": "iterations: 2173\ncpu: 0.321916797054763 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_LoggerLogWithoutTarget",
+            "value": 0.7613683952225402,
+            "unit": "ms/iter",
+            "extra": "iterations: 921\ncpu: 0.7612919652551573 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_LoggerLogWithCoutTargetSetToOff",
+            "value": 0.7549593052858835,
+            "unit": "ms/iter",
+            "extra": "iterations: 927\ncpu: 0.7548901833872704 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_UpdateObjectGroup",
+            "value": 0.04871243977746807,
+            "unit": "ms/iter",
+            "extra": "iterations: 14380\ncpu: 0.048707837273991667 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_UpdateSpatialObjectGrid",
+            "value": 0.3247057210477871,
+            "unit": "ms/iter",
+            "extra": "iterations: 2176\ncpu: 0.3245905330882353 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_StartGame",
+            "value": 0.0026462546693044337,
+            "unit": "ms/iter",
+            "extra": "iterations: 263369\ncpu: 0.0026459139078631117 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_RefineTilemapCollisions",
+            "value": 0.1815815311116883,
+            "unit": "ms/iter",
+            "extra": "iterations: 3841\ncpu: 0.18157943243946892 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GamestateWithTweeningShapes",
+            "value": 2.8935474793388587,
+            "unit": "ms/iter",
+            "extra": "iterations: 242\ncpu: 2.89335867768595 ms\nthreads: 1"
           }
         ]
       }
