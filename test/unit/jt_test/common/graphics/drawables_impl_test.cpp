@@ -220,3 +220,40 @@ TEST_P(DrawableImplTestFixture, GetBlendModeAfterSetBlendMode)
     drawable->setBlendMode(jt::BlendMode::MUL);
     ASSERT_EQ(drawable->getBlendMode(), jt::BlendMode::MUL);
 }
+
+TEST_P(DrawableImplTestFixture, SetEmptyCustomShaderDoesNotThrow)
+{
+    ASSERT_NO_THROW(drawable->setCustomShader("", ""));
+}
+
+TEST_P(DrawableImplTestFixture, SetValidCustomShaderDoesNotThrow)
+{
+    ASSERT_NO_THROW(drawable->setCustomShader("", R"(uniform sampler2D texture;
+uniform float pixel_threshold;
+
+void main()
+{
+    float factor = 1.0 / (pixel_threshold + 0.01);
+    vec2 pos = floor(gl_TexCoord[0].xy * factor + 0.5) / factor;
+    gl_FragColor = texture2D(texture, pos) * gl_Color;
+}
+)"));
+    drawable->update(0.01f);
+    drawable->draw(getRenderTarget());
+}
+
+TEST_P(DrawableImplTestFixture, DrawableWithCustomShaderCanBeDrawn)
+{
+    drawable->setCustomShader("", R"(uniform sampler2D texture;
+uniform float pixel_threshold;
+
+void main()
+{
+    float factor = 1.0 / (pixel_threshold + 0.01);
+    vec2 pos = floor(gl_TexCoord[0].xy * factor + 0.5) / factor;
+    gl_FragColor = texture2D(texture, pos) * gl_Color;
+}
+)");
+    drawable->update(0.01f);
+    ASSERT_NO_THROW(drawable->draw(getRenderTarget()));
+}
