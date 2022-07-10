@@ -78,7 +78,7 @@ public:
     std::shared_ptr<jt::DrawableInterface> createDrawable(
         jt::TextureManagerInterface& textureManager) override
     {
-        jt::tilemap::TilesonLoader loader("assets/tileson_test.json");
+        jt::tilemap::TilesonLoader loader("assets/tileson_test_small.json");
         auto t = std::make_shared<jt::tilemap::TileLayer>(
             loader.loadTilesFromLayer("ground", textureManager));
         t->setScreenSizeHint(jt::Vector2f { 400.0f, 300.0f });
