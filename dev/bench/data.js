@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1657434161519,
+  "lastUpdate": 1657440260262,
   "repoUrl": "https://github.com/Laguna1989/JamTemplateCpp",
   "entries": {
     "Benchmark": [
@@ -6834,6 +6834,84 @@ window.BENCHMARK_DATA = {
             "value": 2.8830059917696986,
             "unit": "ms/iter",
             "extra": "iterations: 243\ncpu: 2.8827967078189296 ms\nthreads: 1"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "laguna.ws@gmail.com",
+            "name": "Laguna1989",
+            "username": "Laguna1989"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "a74ca00998516cec3b3b3bdd181788abcca3c7e4",
+          "message": "Merge pull request #218 from Laguna1989/IMPROVE_CoverageSetCustomShader\n\nAdd tests for SetCustomShader and use smaller tileson file for drawables",
+          "timestamp": "2022-07-10T10:02:32+02:00",
+          "tree_id": "b98a4bde9d226f721400140aa6ea2aa600b817ba",
+          "url": "https://github.com/Laguna1989/JamTemplateCpp/commit/a74ca00998516cec3b3b3bdd181788abcca3c7e4"
+        },
+        "date": 1657440259704,
+        "tool": "googlecpp",
+        "benches": [
+          {
+            "name": "BM_UpdateDrawablePositions",
+            "value": 2.687688340996183,
+            "unit": "ms/iter",
+            "extra": "iterations: 261\ncpu: 2.685371264367816 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GetAllCommands",
+            "value": 0.30601892257218033,
+            "unit": "ms/iter",
+            "extra": "iterations: 2286\ncpu: 0.3060058180227472 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_LoggerLogWithoutTarget",
+            "value": 0.743642886291182,
+            "unit": "ms/iter",
+            "extra": "iterations: 941\ncpu: 0.7436392136025501 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_LoggerLogWithCoutTargetSetToOff",
+            "value": 0.7427190828905429,
+            "unit": "ms/iter",
+            "extra": "iterations: 941\ncpu: 0.7426831030818278 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_UpdateObjectGroup",
+            "value": 0.060855795065589434,
+            "unit": "ms/iter",
+            "extra": "iterations: 11511\ncpu: 0.06085378333767702 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_UpdateSpatialObjectGrid",
+            "value": 0.3268652871057478,
+            "unit": "ms/iter",
+            "extra": "iterations: 2156\ncpu: 0.32682866419294976 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_StartGame",
+            "value": 0.0027034651870640482,
+            "unit": "ms/iter",
+            "extra": "iterations: 260205\ncpu: 0.0027033473607348036 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_RefineTilemapCollisions",
+            "value": 0.22750292792501373,
+            "unit": "ms/iter",
+            "extra": "iterations: 3094\ncpu: 0.2274854557207497 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GamestateWithTweeningShapes",
+            "value": 2.6892390653845686,
+            "unit": "ms/iter",
+            "extra": "iterations: 260\ncpu: 2.6891080769230755 ms\nthreads: 1"
           }
         ]
       }
