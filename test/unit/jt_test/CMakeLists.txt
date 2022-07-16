@@ -20,6 +20,10 @@ endif ()
 add_executable(jt_tests ${UNITTESTFILES_ALL})
 if (JT_ENABLE_WEB)
     set(CMAKE_EXECUTABLE_SUFFIX ".html")
+    target_link_options(jt_tests PUBLIC "SHELL:--use-preload-plugins")
+    target_link_options(jt_tests PUBLIC --preload-file assets)
+    target_link_options(jt_tests PRIVATE "SHELL:-s TOTAL_MEMORY=256MB")
+    target_link_options(jt_tests PRIVATE "SHELL:-s ALLOW_MEMORY_GROWTH=1")
 endif ()
 
 

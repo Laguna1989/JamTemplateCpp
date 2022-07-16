@@ -16,6 +16,12 @@ file(GLOB IMGUISOURCES ${imgui_SOURCE_DIR}/*.cpp)
 
 
 add_library(imgui-sdl STATIC ${IMGUIHEADERS} ${IMGUISOURCES} ${CMAKE_CURRENT_SOURCE_DIR}/imgui_impl_sdl.h ${CMAKE_CURRENT_SOURCE_DIR}/imgui_impl_sdl.cpp ${imgui-sdl_SOURCE_DIR}/imgui_sdl.h ${imgui-sdl_SOURCE_DIR}/imgui_sdl.cpp)
+
+target_compile_options(imgui-sdl PUBLIC -s USE_SDL=2)
+target_compile_options(imgui-sdl PUBLIC -s USE_SDL_IMAGE=2 -s SDL2_IMAGE_FORMATS='[\"bmp\",\"png\"]')
+target_compile_options(imgui-sdl PUBLIC -s USE_SDL_TTF=2)
+
+
 target_include_directories(imgui-sdl SYSTEM PUBLIC ${imgui_SOURCE_DIR}/)
 target_include_directories(imgui-sdl SYSTEM PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/)
 target_include_directories(imgui-sdl SYSTEM PUBLIC ${imgui-sdl_SOURCE_DIR}/)

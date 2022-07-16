@@ -26,6 +26,26 @@ list(APPEND JAMTEMPLATEBASEFILES "${CMAKE_CURRENT_BINARY_DIR}/build_info.cpp")
 
 add_library(JamTemplateLib STATIC ${JAMTEMPLATEFILES} ${JAMTEMPLATEBASEFILES})
 
+if (MSVC)
+    target_compile_options(JamTemplateLib PRIVATE "/W3")
+    target_compile_options(JamTemplateLib PUBLIC "/EHsc")
+elseif (EMSCRIPTEN)
+    target_compile_options(JamTemplateLib PUBLIC -s USE_SDL=2)
+    target_compile_options(JamTemplateLib PUBLIC -s USE_SDL_IMAGE=2 -s SDL2_IMAGE_FORMATS='[\"bmp\",\"png\"]')
+    target_compile_options(JamTemplateLib PUBLIC -s USE_SDL_TTF=2)
+    target_compile_options(JamTemplateLib PRIVATE "-Wall")
+    target_compile_options(JamTemplateLib PRIVATE "-Wextra")
+    target_compile_options(JamTemplateLib PRIVATE "-fpermissive")
+else ()
+    target_compile_options(JamTemplateLib PRIVATE "-Wall")
+    target_compile_options(JamTemplateLib PRIVATE "-Wextra")
+    target_compile_options(JamTemplateLib PRIVATE "-fpermissive")
+
+    if (NOT CMAKE_CXX_COMPILER_ID MATCHES "^(Apple)?Clang$")
+        target_link_options(JamTemplateLib PUBLIC -lstdc++fs)
+    endif ()
+endif ()
+
 # add public includes, so they can be used by dependent targets
 target_include_directories(JamTemplateLib PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/common)
 target_include_directories(JamTemplateLib SYSTEM PUBLIC ${tileson_SOURCE_DIR}/include)
