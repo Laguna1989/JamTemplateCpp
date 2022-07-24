@@ -1,7 +1,7 @@
-﻿#include <animation.hpp>
-#include <backend_setup.hpp>
-#include <texture_manager_impl.hpp>
-#include <gtest/gtest.h>
+﻿#include "animation.hpp"
+#include "backend_setup.hpp"
+#include "texture_manager_impl.hpp"
+#include "gtest/gtest.h"
 #include <stdexcept>
 #include <type_traits>
 
@@ -10,64 +10,105 @@ TEST(AnimationTest, IsDefaultConstructible)
     ASSERT_TRUE(std::is_default_constructible<jt::Animation>::value);
 }
 
-class AnimationTestFixtue : public ::testing::Test {
+class AnimationTestFixture : public ::testing::Test {
 public:
     jt::TextureManagerInterface& tm { getTextureManager() };
     jt::Animation a;
     void SetUp() override { tm = getTextureManager(); }
 };
 
-TEST_F(AnimationTestFixtue, AddAnimationWithEmptyNameRaisesInvalidArgumentException)
+TEST_F(AnimationTestFixture, AddAnimationWithEmptyNameRaisesInvalidArgumentException)
 {
     ASSERT_THROW(
         a.add("assets/coin.png", "", { 16, 16 }, { 0, 1, 2, 3 }, 1.0f, tm), std::invalid_argument);
 }
 
-TEST_F(AnimationTestFixtue, AddAnimationWithEmptyFrameIndicesRaisesInvalidArgumentException)
+TEST_F(AnimationTestFixture, AddAnimationWithEmptyFrameIndicesRaisesInvalidArgumentException)
 {
     ASSERT_THROW(a.add("assets/coin.png", "", { 16, 16 }, {}, 1.0f, tm), std::invalid_argument);
 }
 
-TEST_F(AnimationTestFixtue, AddAnimationWithEmptyFrameTimesRaisesInvalidArgumentException)
+TEST_F(AnimationTestFixture, AddAnimationWithEmptyFrameTimesRaisesInvalidArgumentException)
 {
     ASSERT_THROW(
         a.add("assets/coin.png", "", { 16, 16 }, { 1, 2, 3 }, {}, tm), std::invalid_argument);
 }
 
 TEST_F(
-    AnimationTestFixtue, AddAnimationWithDifferentNumberOfFrameTimesRaisesInvalidArgumentException)
+    AnimationTestFixture, AddAnimationWithDifferentNumberOfFrameTimesRaisesInvalidArgumentException)
 {
     ASSERT_THROW(
         a.add("assets/coin.png", "", { 16, 16 }, { 1, 2, 3 }, { 0.5f }, tm), std::invalid_argument);
 }
 
-TEST_F(AnimationTestFixtue, AddAnimationWithNegativeTimeRaisesInvalidArgumentException)
+TEST_F(AnimationTestFixture, AddAnimationWithNegativeTimeRaisesInvalidArgumentException)
 {
     ASSERT_THROW(a.add("assets/coin.png", "test", { 16, 16 }, { 0, 1, 2, 3 }, -0.5f, tm),
         std::invalid_argument);
 }
 
-TEST_F(AnimationTestFixtue, SetLoopingOnNonExistingAnimationRaisesException)
+TEST_F(AnimationTestFixture, SetLoopingOnNonExistingAnimationRaisesException)
 {
     ASSERT_THROW(a.setLooping("idle", false), std::invalid_argument);
 }
 
-TEST_F(AnimationTestFixtue, InitialCurrentAnimationName)
+TEST_F(AnimationTestFixture, InitialCurrentAnimationName)
 {
     jt::Animation a {};
     ASSERT_EQ(a.getCurrentAnimationName(), "");
 }
 
-TEST_F(AnimationTestFixtue, UpdateWithoutPlayDoesNotRaiseException)
+TEST_F(AnimationTestFixture, UpdateWithoutPlayDoesNotRaiseException)
 {
     jt::Animation a {};
     ASSERT_NO_THROW(a.update(0.25f));
 }
 
-TEST_F(AnimationTestFixtue, DrawWithoutPlayDoesNotRaiseException)
+TEST_F(AnimationTestFixture, DrawWithoutPlayDoesNotRaiseException)
 {
     jt::Animation a {};
     ASSERT_NO_THROW(a.draw(nullptr));
+}
+
+TEST_F(AnimationTestFixture, AddWithEmptyFrameTimesRaisesException)
+{
+    jt::Animation a {};
+    ASSERT_THROW(
+        a.add("abc", "def", jt::Vector2u { 8U, 8U }, { 0U, 1U }, {}, tm), std::invalid_argument);
+}
+
+TEST_F(AnimationTestFixture, AddWithWringSizeFrameTimesRaisesException)
+{
+    jt::Animation a {};
+    ASSERT_THROW(a.add("abc", "def", jt::Vector2u { 8U, 8U }, { 0U, 1U }, { 0.25f }, tm),
+        std::invalid_argument);
+}
+
+TEST_F(AnimationTestFixture, GetAllAvailableAnimationsNamesReturnsEmptyVectorByDefault)
+{
+    jt::Animation a {};
+    auto animationNames = a.getAllAvailableAnimationsNames();
+    ASSERT_EQ(animationNames.size(), 0U);
+}
+
+TEST_F(AnimationTestFixture, LoadFromJsonWithNoJsonFile)
+{
+    jt::Animation a {};
+    ASSERT_THROW(a.loadFromJson("assets/Pilz.png", tm), std::invalid_argument);
+}
+
+TEST_F(AnimationTestFixture, LoadFromJson)
+{
+    jt::Animation a {};
+    a.loadFromJson("assets/Pilz.json", tm);
+    a.play("down");
+    ASSERT_EQ(a.getGlobalBounds().left, 0);
+    ASSERT_EQ(a.getGlobalBounds().top, 0);
+    ASSERT_EQ(a.getGlobalBounds().width, 16);
+    ASSERT_EQ(a.getGlobalBounds().height, 16);
+
+    auto animationNames = a.getAllAvailableAnimationsNames();
+    ASSERT_EQ(animationNames.size(), 17U);
 }
 
 class AnimationTestWithAnimation : public ::testing::Test {
@@ -112,6 +153,27 @@ TEST_F(AnimationTestWithAnimation, IsLoopingAfterPlay)
 {
     a.play("idle");
     ASSERT_TRUE(a.getIsLooping());
+}
+
+TEST_F(AnimationTestWithAnimation, SetFrameTimes)
+{
+    a.play("idle");
+    auto const numberOfFrames = a.getNumberOfFramesInCurrentAnimation();
+    auto const expectedFrameTime = 2.45f;
+    std::vector<float> frameTimes(numberOfFrames, expectedFrameTime);
+
+    a.setFrameTimes("idle", frameTimes);
+    ASSERT_EQ(a.getCurrentAnimationSingleFrameTime(), expectedFrameTime);
+}
+
+TEST_F(AnimationTestWithAnimation, SetFrameTimesWithInvalidAnimation)
+{
+    ASSERT_THROW(a.setFrameTimes("idle5", {}), std::invalid_argument);
+}
+
+TEST_F(AnimationTestWithAnimation, SetFrameTimesWithInvalidVectorSize)
+{
+    ASSERT_THROW(a.setFrameTimes("idle", { 1.23f }), std::invalid_argument);
 }
 
 TEST_F(AnimationTestWithAnimation, IsNotLoopingAfterSetLooping)

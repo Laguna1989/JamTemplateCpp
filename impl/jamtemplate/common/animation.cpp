@@ -141,6 +141,16 @@ bool jt::Animation::hasAnimation(std::string const& animationName) const
     return (m_frames.count(animationName) != 0);
 }
 
+std::vector<std::string> jt::Animation::getAllAvailableAnimationsNames() const
+{
+    std::vector<std::string> names;
+    names.resize(m_frames.size());
+    std::transform(m_frames.cbegin(), m_frames.cend(), names.begin(),
+        [](auto kvp) -> std::string { return kvp.first; });
+
+    return names;
+}
+
 void jt::Animation::play(std::string const& animationName, size_t startFrameIndex, bool restart)
 {
     m_isValid = hasAnimation(animationName);
