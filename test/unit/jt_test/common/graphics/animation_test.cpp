@@ -100,7 +100,7 @@ TEST_F(AnimationTestFixture, LoadFromJsonWithNoJsonFile)
 TEST_F(AnimationTestFixture, LoadFromJson)
 {
     jt::Animation a {};
-    a.loadFromJson("assets/Pilz.json", tm);
+    a.loadFromJson("assets/Pilz_small.json", tm);
     a.play("down");
     ASSERT_EQ(a.getGlobalBounds().left, 0);
     ASSERT_EQ(a.getGlobalBounds().top, 0);
