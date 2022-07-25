@@ -1,5 +1,5 @@
 { "frames": {
-   "Pilz_small 0.ase": {
+   "pilz_small 0.ase": {
     "frame": { "x": 0, "y": 0, "w": 16, "h": 16 },
     "rotated": false,
     "trimmed": false,
@@ -7,7 +7,7 @@
     "sourceSize": { "w": 16, "h": 16 },
     "duration": 100
    },
-   "Pilz_small 1.ase": {
+   "pilz_small 1.ase": {
     "frame": { "x": 16, "y": 0, "w": 16, "h": 16 },
     "rotated": false,
     "trimmed": false,
@@ -15,7 +15,7 @@
     "sourceSize": { "w": 16, "h": 16 },
     "duration": 100
    },
-   "Pilz_small 2.ase": {
+   "pilz_small 2.ase": {
     "frame": { "x": 32, "y": 0, "w": 16, "h": 16 },
     "rotated": false,
     "trimmed": false,
@@ -23,7 +23,7 @@
     "sourceSize": { "w": 16, "h": 16 },
     "duration": 100
    },
-   "Pilz_small 3.ase": {
+   "pilz_small 3.ase": {
     "frame": { "x": 48, "y": 0, "w": 16, "h": 16 },
     "rotated": false,
     "trimmed": false,
@@ -31,7 +31,7 @@
     "sourceSize": { "w": 16, "h": 16 },
     "duration": 100
    },
-   "Pilz_small 4.ase": {
+   "pilz_small 4.ase": {
     "frame": { "x": 64, "y": 0, "w": 16, "h": 16 },
     "rotated": false,
     "trimmed": false,
@@ -39,7 +39,7 @@
     "sourceSize": { "w": 16, "h": 16 },
     "duration": 100
    },
-   "Pilz_small 5.ase": {
+   "pilz_small 5.ase": {
     "frame": { "x": 80, "y": 0, "w": 16, "h": 16 },
     "rotated": false,
     "trimmed": false,
@@ -47,7 +47,7 @@
     "sourceSize": { "w": 16, "h": 16 },
     "duration": 100
    },
-   "Pilz_small 6.ase": {
+   "pilz_small 6.ase": {
     "frame": { "x": 96, "y": 0, "w": 16, "h": 16 },
     "rotated": false,
     "trimmed": false,
@@ -55,7 +55,7 @@
     "sourceSize": { "w": 16, "h": 16 },
     "duration": 100
    },
-   "Pilz_small 7.ase": {
+   "pilz_small 7.ase": {
     "frame": { "x": 112, "y": 0, "w": 16, "h": 16 },
     "rotated": false,
     "trimmed": false,
@@ -63,7 +63,7 @@
     "sourceSize": { "w": 16, "h": 16 },
     "duration": 100
    },
-   "Pilz_small 8.ase": {
+   "pilz_small 8.ase": {
     "frame": { "x": 128, "y": 0, "w": 16, "h": 16 },
     "rotated": false,
     "trimmed": false,
@@ -71,7 +71,7 @@
     "sourceSize": { "w": 16, "h": 16 },
     "duration": 100
    },
-   "Pilz_small 9.ase": {
+   "pilz_small 9.ase": {
     "frame": { "x": 144, "y": 0, "w": 16, "h": 16 },
     "rotated": false,
     "trimmed": false,
@@ -83,7 +83,7 @@
  "meta": {
   "app": "http://www.aseprite.org/",
   "version": "1.2.9-x64",
-  "image": "C:\\projects\\JamTemplateCpp\\assets\\Pilz_small.png",
+  "image": "C:\\projects\\JamTemplateCpp\\assets\\pilz_small.png",
   "format": "I8",
   "size": { "w": 160, "h": 16 },
   "scale": "1",

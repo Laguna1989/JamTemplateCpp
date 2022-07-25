@@ -97,11 +97,13 @@ TEST_F(AnimationTestFixture, LoadFromJsonWithNoJsonFile)
     ASSERT_THROW(a.loadFromJson("assets/Pilz.png", tm), std::invalid_argument);
 }
 
+#ifdef USE_SFML
 TEST_F(AnimationTestFixture, LoadFromJson)
 {
     jt::Animation a {};
-    a.loadFromJson("assets/Pilz_small.json", tm);
+    a.loadFromJson("assets/pilz_small.json", tm);
     a.play("Idle");
+
     ASSERT_EQ(a.getGlobalBounds().left, 0);
     ASSERT_EQ(a.getGlobalBounds().top, 0);
     ASSERT_EQ(a.getGlobalBounds().width, 16);
@@ -110,6 +112,8 @@ TEST_F(AnimationTestFixture, LoadFromJson)
     auto animationNames = a.getAllAvailableAnimationsNames();
     ASSERT_EQ(animationNames.size(), 3U);
 }
+
+#endif
 
 class AnimationTestWithAnimation : public ::testing::Test {
 protected:
