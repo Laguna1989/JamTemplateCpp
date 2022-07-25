@@ -114,6 +114,9 @@ void jt::Animation::loadFromJson(
         std::vector<float> frameTimes;
 
         auto const startFrameName = baseAnimName + " " + std::to_string(animationStart) + ".ase";
+        if (!j["frames"].contains(startFrameName)) {
+            throw std::invalid_argument { "'frames/" + startFrameName + "' does not exist" };
+        }
         auto const width = j["frames"][startFrameName]["sourceSize"]["w"].get<unsigned int>();
         auto const height = j["frames"][startFrameName]["sourceSize"]["h"].get<unsigned int>();
 

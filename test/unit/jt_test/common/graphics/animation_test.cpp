@@ -101,14 +101,14 @@ TEST_F(AnimationTestFixture, LoadFromJson)
 {
     jt::Animation a {};
     a.loadFromJson("assets/Pilz_small.json", tm);
-    a.play("down");
+    a.play("Idle");
     ASSERT_EQ(a.getGlobalBounds().left, 0);
     ASSERT_EQ(a.getGlobalBounds().top, 0);
     ASSERT_EQ(a.getGlobalBounds().width, 16);
     ASSERT_EQ(a.getGlobalBounds().height, 16);
 
     auto animationNames = a.getAllAvailableAnimationsNames();
-    ASSERT_EQ(animationNames.size(), 17U);
+    ASSERT_EQ(animationNames.size(), 3U);
 }
 
 class AnimationTestWithAnimation : public ::testing::Test {
