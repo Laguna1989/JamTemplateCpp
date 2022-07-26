@@ -30,3 +30,22 @@ TEST(AudioNullTest, AddPermanentSoundWithEffectReturnsNoNullptr)
     FakeEffect effect;
     ASSERT_NE(audio.addPermanentSound("bla", "bla", effect), nullptr);
 }
+
+TEST(AudioNullTest, AddPermanentSoundWithLoopingEffectReturnsNoNullptr)
+{
+    jt::AudioNull audio;
+    FakeEffect effect;
+    ASSERT_NE(audio.addPermanentSound("bla0", "bla1", "bla2", effect), nullptr);
+}
+
+TEST(AudioNullTest, SoundPoolReturnsNoNullptr)
+{
+    jt::AudioNull audio;
+    ASSERT_NE(audio.soundPool("bla", "blubb", 4), nullptr);
+}
+
+TEST(AudioNullTest, RemovePermanentSoundDoesNotThrow)
+{
+    jt::AudioNull audio;
+    ASSERT_NO_THROW(audio.removePermanentSound("abcd"));
+}

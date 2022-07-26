@@ -124,3 +124,9 @@ TEST(GamepadInputTest, ButtonJustReleasedReturnsFalseIfButtonNotReleased)
         ASSERT_FALSE(gamepad.justReleased(b));
     }
 }
+
+TEST(GamepadInputTest, LibAxisValue)
+{
+    jt::Vector2f const expectedValue { 0.0f, 0.0f };
+    ASSERT_EQ(jt::libAxisValue(0, jt::GamepadAxisCode::ARight), expectedValue);
+}
