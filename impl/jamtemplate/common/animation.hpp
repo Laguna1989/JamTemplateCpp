@@ -54,6 +54,8 @@ public:
     /// \return true if an animation with animationName is present, false otherwise
     bool hasAnimation(std::string const& animationName) const;
 
+    std::vector<std::string> getAllAvailableAnimationsNames() const;
+
     /// Start playing an animation from the pool
     ///
     /// \param animationName name of the animation to play

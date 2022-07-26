@@ -114,6 +114,9 @@ void jt::Animation::loadFromJson(
         std::vector<float> frameTimes;
 
         auto const startFrameName = baseAnimName + " " + std::to_string(animationStart) + ".ase";
+        if (!j["frames"].contains(startFrameName)) {
+            throw std::invalid_argument { "'frames/" + startFrameName + "' does not exist" };
+        }
         auto const width = j["frames"][startFrameName]["sourceSize"]["w"].get<unsigned int>();
         auto const height = j["frames"][startFrameName]["sourceSize"]["h"].get<unsigned int>();
 
@@ -139,6 +142,16 @@ void jt::Animation::loadFromJson(
 bool jt::Animation::hasAnimation(std::string const& animationName) const
 {
     return (m_frames.count(animationName) != 0);
+}
+
+std::vector<std::string> jt::Animation::getAllAvailableAnimationsNames() const
+{
+    std::vector<std::string> names;
+    names.resize(m_frames.size());
+    std::transform(m_frames.cbegin(), m_frames.cend(), names.begin(),
+        [](auto kvp) -> std::string { return kvp.first; });
+
+    return names;
 }
 
 void jt::Animation::play(std::string const& animationName, size_t startFrameIndex, bool restart)
