@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1657450474049,
+  "lastUpdate": 1658809638004,
   "repoUrl": "https://github.com/Laguna1989/JamTemplateCpp",
   "entries": {
     "Benchmark": [
@@ -6990,6 +6990,84 @@ window.BENCHMARK_DATA = {
             "value": 2.8935474793388587,
             "unit": "ms/iter",
             "extra": "iterations: 242\ncpu: 2.89335867768595 ms\nthreads: 1"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "laguna.ws@gmail.com",
+            "name": "Laguna1989",
+            "username": "Laguna1989"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "ec028493b542faff2a128a8c9f3a9efdf47f7c8e",
+          "message": "Add more tests and functionality to animation class (#221)\n\n* Add more tests and functionality to animation class\r\n\r\n* Fix needlessly large png file\r\n\r\n* Fix broken test\r\n\r\n* Rename\r\n\r\n* rename2\r\n\r\n* Rname 3\r\n\r\n* Remove one test for sdl\r\n\r\n* Remove mac sdl build",
+          "timestamp": "2022-07-26T06:20:55+02:00",
+          "tree_id": "48ab7cea07af6a78522726398d732cb8e8221efb",
+          "url": "https://github.com/Laguna1989/JamTemplateCpp/commit/ec028493b542faff2a128a8c9f3a9efdf47f7c8e"
+        },
+        "date": 1658809637118,
+        "tool": "googlecpp",
+        "benches": [
+          {
+            "name": "BM_UpdateDrawablePositions",
+            "value": 5.039584028368831,
+            "unit": "ms/iter",
+            "extra": "iterations: 141\ncpu: 5.038834042553192 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GetAllCommands",
+            "value": 0.3273387410495319,
+            "unit": "ms/iter",
+            "extra": "iterations: 2039\ncpu: 0.3272708680725845 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_LoggerLogWithoutTarget",
+            "value": 0.8905236508134395,
+            "unit": "ms/iter",
+            "extra": "iterations: 799\ncpu: 0.890468085106383 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_LoggerLogWithCoutTargetSetToOff",
+            "value": 0.9026571289926858,
+            "unit": "ms/iter",
+            "extra": "iterations: 814\ncpu: 0.9024981572481574 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_UpdateObjectGroup",
+            "value": 0.05271488125381544,
+            "unit": "ms/iter",
+            "extra": "iterations: 13112\ncpu: 0.052710723001830405 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_UpdateSpatialObjectGrid",
+            "value": 0.3844935133976549,
+            "unit": "ms/iter",
+            "extra": "iterations: 1866\ncpu: 0.3844228831725613 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_StartGame",
+            "value": 0.002954041925965026,
+            "unit": "ms/iter",
+            "extra": "iterations: 245695\ncpu: 0.0029537699179877507 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_RefineTilemapCollisions",
+            "value": 0.23012321815890419,
+            "unit": "ms/iter",
+            "extra": "iterations: 3172\ncpu: 0.23009085750315292 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GamestateWithTweeningShapes",
+            "value": 3.173967203539395,
+            "unit": "ms/iter",
+            "extra": "iterations: 226\ncpu: 3.173647345132739 ms\nthreads: 1"
           }
         ]
       }
