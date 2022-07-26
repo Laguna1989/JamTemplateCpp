@@ -18,11 +18,11 @@ int toLib(jt::GamepadButtonCode b) { return static_cast<int>(b); }
 
 jt::Vector2f jt::libAxisValue(int gamepadId, jt::GamepadAxisCode a)
 {
+    auto const libaxis = toLib(a);
+
     if (!sf::Joystick::isConnected(gamepadId)) {
         return jt::Vector2f { 0.0f, 0.0f };
     }
-
-    auto const libaxis = toLib(a);
 
     float x { 0.0f };
     if (sf::Joystick::hasAxis(gamepadId, libaxis.first)) {
