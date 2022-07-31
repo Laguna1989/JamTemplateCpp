@@ -11,8 +11,7 @@ jt::ScanLines::ScanLines(jt::Vector2f const& shapeSize, std::size_t shapeCount)
 
 void jt::ScanLines::doCreate()
 {
-    m_shape = jt::dh::createShapeRect(
-        m_shapeSize, jt::Color { 0, 0, 0, 40 }, getGame()->gfx().textureManager());
+    m_shape = jt::dh::createShapeRect(m_shapeSize, jt::Color { 0, 0, 0, 40 }, textureManager());
     m_shape->setIgnoreCamMovement(true);
 }
 void jt::ScanLines::doUpdate(float const elapsed) { }

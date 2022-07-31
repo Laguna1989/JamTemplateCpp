@@ -17,10 +17,9 @@ EaseObject::EaseObject(std::string const& name,
 void EaseObject::doCreate()
 {
     m_backgroundShape = jt::dh::createShapeRect(
-        jt::Vector2f { 64.0f, 64.0f }, jt::colors::Gray, getGame()->gfx().textureManager());
+        jt::Vector2f { 64.0f, 64.0f }, jt::colors::Gray, textureManager());
     m_backgroundShape->setPosition(m_offset);
-    m_objectShape
-        = jt::dh::createShapeCircle(3, jt::colors::Red, getGame()->gfx().textureManager());
+    m_objectShape = jt::dh::createShapeCircle(3, jt::colors::Red, textureManager());
     m_text = jt::dh::createText(getGame()->gfx().target(), m_textString, 10);
     m_text->setTextAlign(jt::Text::TextAlign::LEFT);
     m_text->setPosition(m_backgroundShape->getPosition() + jt::Vector2f { 0.0f, 64.0f });

@@ -87,12 +87,12 @@ void StateInventory::loadTilemap()
     jt::tilemap::TilesonLoader loader { "assets/demos/inventory/spaceship_items.json" };
 
     m_tileLayerGround = std::make_shared<jt::tilemap::TileLayer>(
-        loader.loadTilesFromLayer("ground", getGame()->gfx().textureManager()));
+        loader.loadTilesFromLayer("ground", textureManager()));
 
     m_tileLayerGround->setScreenSizeHint(jt::Vector2f { 400, 300 });
 
     m_tileLayerOverlay = std::make_shared<jt::tilemap::TileLayer>(
-        loader.loadTilesFromLayer("overlay", getGame()->gfx().textureManager()));
+        loader.loadTilesFromLayer("overlay", textureManager()));
     m_tileLayerOverlay->setScreenSizeHint(jt::Vector2f { 400, 300 });
 
     m_objectsLayer
@@ -155,8 +155,7 @@ void StateInventory::doInternalUpdate(float elapsed)
 void StateInventory::spawnWorldItem(std::string const& itemReferenceId, jt::Vector2f const& pos)
 {
     auto item = m_itemRepository->createWorldItem(
-        m_itemRepository->getItemReferenceFromString(itemReferenceId),
-        getGame()->gfx().textureManager());
+        m_itemRepository->getItemReferenceFromString(itemReferenceId), textureManager());
     item->getDrawable()->setPosition(pos);
     add(item);
     m_worldItems->push_back(item);

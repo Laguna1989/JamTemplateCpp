@@ -59,7 +59,7 @@ void StatePathfinding::createTiles()
     for (int i = 0; i != mapSizeX; ++i) {
         for (int j = 0; j != mapSizeY; ++j) {
             std::shared_ptr<jt::Shape> drawable = jt::dh::createShapeRect(
-                jt::Vector2f { 19, 19 }, jt::colors::White, getGame()->gfx().textureManager());
+                jt::Vector2f { 19, 19 }, jt::colors::White, textureManager());
             drawable->setPosition(jt::Vector2f { i * 20.0f, j * 20.0f });
             auto node = std::make_shared<jt::pathfinder::Node>();
             node->setPosition(

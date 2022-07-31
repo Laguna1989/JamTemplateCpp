@@ -18,7 +18,7 @@ void StateTransitions::doInternalDraw() const
     if (ImGui::Button("Fade2Black")) {
         getGame()->stateManager().setTransition(
             std::make_shared<jt::StateManagerTransitionFadeToBlack>(
-                getGame()->gfx().window().getSize(), getGame()->gfx().textureManager(), 0.5f));
+                getGame()->gfx().window().getSize(), textureManager(), 0.5f));
         getGame()->stateManager().switchState(std::make_shared<StateSelect>());
     }
     if (ImGui::Button("Horizontal Bars")) {
@@ -27,7 +27,7 @@ void StateTransitions::doInternalDraw() const
                 jt::Vector2f {
                     getGame()->gfx().window().getSize().x / getGame()->gfx().camera().getZoom(),
                     32 },
-                10, 1.0f, getGame()->gfx().textureManager()));
+                10, 1.0f, textureManager()));
         getGame()->stateManager().switchState(std::make_shared<StateSelect>());
     }
     ImGui::End();

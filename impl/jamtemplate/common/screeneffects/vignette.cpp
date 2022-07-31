@@ -11,7 +11,7 @@ void jt::Vignette::doCreate()
 {
     m_vignette = std::make_shared<jt::Sprite>("#v#" + std::to_string(static_cast<int>(m_size.x))
             + "#" + std::to_string(static_cast<int>(m_size.y)),
-        getGame()->gfx().textureManager());
+        textureManager());
     m_vignette->setIgnoreCamMovement(true);
     m_vignette->setColor({ 0, 0, 0, 140 });
 }

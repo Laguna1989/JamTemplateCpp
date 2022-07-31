@@ -37,8 +37,8 @@ void jt::InfoScreen::doDraw() const
     }
     ImGui::Begin("Debug Info");
     if (!ImGui::CollapsingHeader("Textures")) {
-        std::string textures = "# Textures stored: "
-            + std::to_string(getGame()->gfx().textureManager().getNumberOfTextures());
+        std::string textures
+            = "# Textures stored: " + std::to_string(textureManager().getNumberOfTextures());
         ImGui::Text("%s", textures.c_str());
     }
     if (!ImGui::CollapsingHeader("Performance")) {

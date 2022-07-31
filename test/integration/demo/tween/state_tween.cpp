@@ -16,15 +16,15 @@ void StateTween::doInternalCreate()
 
 void StateTween::createRects()
 {
-    m_background = jt::dh::createShapeRect(
-        jt::Vector2f { 400, 300 }, jt::colors::White, getGame()->gfx().textureManager());
+    m_background
+        = jt::dh::createShapeRect(jt::Vector2f { 400, 300 }, jt::colors::White, textureManager());
 
-    m_overlayR = jt::dh::createShapeRect(
-        jt::Vector2f { 400, 300 }, jt::colors::Red, getGame()->gfx().textureManager());
-    m_overlayG = jt::dh::createShapeRect(
-        jt::Vector2f { 400, 300 }, jt::colors::Green, getGame()->gfx().textureManager());
-    m_overlayB = jt::dh::createShapeRect(
-        jt::Vector2f { 400, 300 }, jt::colors::Blue, getGame()->gfx().textureManager());
+    m_overlayR
+        = jt::dh::createShapeRect(jt::Vector2f { 400, 300 }, jt::colors::Red, textureManager());
+    m_overlayG
+        = jt::dh::createShapeRect(jt::Vector2f { 400, 300 }, jt::colors::Green, textureManager());
+    m_overlayB
+        = jt::dh::createShapeRect(jt::Vector2f { 400, 300 }, jt::colors::Blue, textureManager());
 }
 
 void StateTween::createTweens()

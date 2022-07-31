@@ -2,6 +2,7 @@
 #define JAMTEMPLATE_GAMEOBJECT_HPP
 
 #include <counted_object.hpp>
+#include <texture_manager_interface.hpp>
 #include <memory>
 #include <string>
 #include <vector>
@@ -73,6 +74,9 @@ public:
 
     std::size_t getNumberOfAliveGameObjects() const;
     std::size_t getNumberOfCreatedGameObjects() const;
+
+    // Helper functions for fast access of commonly used objects.
+    TextureManagerInterface& textureManager() const;
 
 protected:
     float m_age { 0.0f };

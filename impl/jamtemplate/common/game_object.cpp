@@ -70,3 +70,8 @@ void jt::GameObject::storeActionCommand(std::shared_ptr<void> commandCallback)
 std::string jt::GameObject::getName() const { return ""; }
 std::size_t jt::GameObject::getNumberOfAliveGameObjects() const { return aliveObjects(); }
 std::size_t jt::GameObject::getNumberOfCreatedGameObjects() const { return createdObjects(); }
+
+jt::TextureManagerInterface& jt::GameObject::textureManager() const
+{
+    return getGame()->gfx().textureManager();
+}

@@ -31,7 +31,7 @@ void StateMenu::doInternalCreate()
     add(std::make_shared<jt::LicenseInfo>());
 
     getGame()->stateManager().setTransition(std::make_shared<jt::StateManagerTransitionFadeToBlack>(
-        GP::GetScreenSize(), getGame()->gfx().textureManager()));
+        GP::GetScreenSize(), textureManager()));
 }
 
 void StateMenu::createVignette()
@@ -42,10 +42,9 @@ void StateMenu::createVignette()
 
 void StateMenu::createShapes()
 {
-    m_background = jt::dh::createShapeRect(
-        GP::GetScreenSize(), GP::PaletteBackground(), getGame()->gfx().textureManager());
-    m_overlay = jt::dh::createShapeRect(
-        GP::GetScreenSize(), jt::colors::Black, getGame()->gfx().textureManager());
+    m_background
+        = jt::dh::createShapeRect(GP::GetScreenSize(), GP::PaletteBackground(), textureManager());
+    m_overlay = jt::dh::createShapeRect(GP::GetScreenSize(), jt::colors::Black, textureManager());
 }
 
 void StateMenu::createMenuText()

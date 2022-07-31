@@ -6,7 +6,7 @@
 void Actor::doCreate()
 {
     m_sprite = std::make_shared<jt::Sprite>(
-        "assets/coin.png", jt::Recti { 0, 0, 16, 16 }, getGame()->gfx().textureManager());
+        "assets/coin.png", jt::Recti { 0, 0, 16, 16 }, textureManager());
     m_sprite->setOffset(jt::Vector2f { 8, 8 });
 
     storeActionCommand(getGame()->actionCommandManager().registerTemporaryCommand(

@@ -21,7 +21,7 @@ void StateGame::doInternalCreate()
     using jt::TweenAlpha;
 
     m_background = std::make_shared<Shape>();
-    m_background->makeRect({ w, h }, getGame()->gfx().textureManager());
+    m_background->makeRect({ w, h }, textureManager());
     m_background->setColor(GP::PaletteBackground());
     m_background->setIgnoreCamMovement(true);
     m_background->update(0.0f);
