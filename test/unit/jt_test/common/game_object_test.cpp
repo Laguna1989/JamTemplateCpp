@@ -1,5 +1,6 @@
 ﻿#include <game_object.hpp>
 #include <mocks/mock_game.hpp>
+#include <mocks/mock_texture_manager.hpp>
 #include <gtest/gtest.h>
 
 using jt::GameInterface;
@@ -20,7 +21,7 @@ TEST(GameObjectTest, CreateWithGameInstace)
     ASSERT_NO_THROW(go.create());
 }
 
-TEST(GameObjectTest, IsAliveIsTrueByDEfault)
+TEST(GameObjectTest, IsAliveIsTrueByDefault)
 {
     GameObject go {};
     ASSERT_TRUE(go.isAlive());
@@ -77,8 +78,7 @@ TEST(GameObjectTest, DefaultName)
     GameObject go {};
     ASSERT_EQ(go.getName(), "");
 }
-class GameObjectTimeParametrizeTestFixture : public ::testing::TestWithParam<float> {
-};
+class GameObjectTimeParametrizeTestFixture : public ::testing::TestWithParam<float> { };
 
 TEST_P(GameObjectTimeParametrizeTestFixture, AgeIsIncreasedByUpdate)
 {
@@ -97,6 +97,29 @@ TEST(GameObjectTest, GetGameReturnsCorrectGamePointer)
     go.setGameInstance(g);
 
     ASSERT_EQ(go.getGame(), g);
+}
+
+TEST(GameObjectTest, TextureManagerCallsGfxTextureManager)
+{
+    MockTextureManager tm;
+    auto const g = std::make_shared<MockGame>();
+    EXPECT_CALL(*g, gfx());
+    EXPECT_CALL(g->m_gfx, textureManager()).WillRepeatedly(::testing::ReturnRef(tm));
+    GameObject go {};
+    go.setGameInstance(g);
+
+    (void)go.textureManager();
+}
+
+TEST(GameObjectTest, RenderTargetCallsGfxTarget)
+{
+    auto const g = std::make_shared<MockGame>();
+    EXPECT_CALL(*g, gfx());
+    EXPECT_CALL(g->m_gfx, target()).WillRepeatedly(::testing::Return(nullptr));
+    GameObject go {};
+    go.setGameInstance(g);
+
+    (void)go.renderTarget();
 }
 
 TEST(GameObjectTest, GetGameRaisesExceptionWhenGameIsExpired)

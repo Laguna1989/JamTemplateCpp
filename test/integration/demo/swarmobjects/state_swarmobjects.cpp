@@ -13,7 +13,7 @@ void StateSwarmObjects::doInternalCreate()
     using jt::TweenAlpha;
 
     m_sky = jt::dh::createShapeRect(
-        jt::Vector2f { 400, 300 }, jt::Color { 178, 255, 255 }, getGame()->gfx().textureManager());
+        jt::Vector2f { 400, 300 }, jt::Color { 178, 255, 255 }, textureManager());
 
     m_SwarmObjects = std::make_shared<jt::ObjectGroup<SwarmObject>>();
     add(m_SwarmObjects);
@@ -101,5 +101,5 @@ void StateSwarmObjects::doInternalDraw() const
     drawObjects();
 }
 
-void StateSwarmObjects::drawSky() const { m_sky->draw(getGame()->gfx().target()); }
+void StateSwarmObjects::drawSky() const { m_sky->draw(renderTarget()); }
 std::string StateSwarmObjects::getName() const { return "Swarm Objects"; }

@@ -41,11 +41,10 @@ private:
         float const posY
             = detail::buttonOffsetY + indexY * (detail::buttonMarginY + detail::buttonSizeY);
         auto const button = std::make_shared<jt::Button>(
-            jt::Vector2u { detail::buttonSizeX, detail::buttonSizeY },
-            getGame()->gfx().textureManager());
+            jt::Vector2u { detail::buttonSizeX, detail::buttonSizeY }, textureManager());
         button->addCallback(
             [this]() { getGame()->stateManager().switchState(std::make_shared<State>()); });
-        auto const text = jt::dh::createText(getGame()->gfx().target(), textString, 16);
+        auto const text = jt::dh::createText(renderTarget(), textString, 16);
         text->setTextAlign(jt::Text::TextAlign::LEFT);
         text->setOrigin(jt::Vector2f { -6, 1 });
         button->setDrawable(text);

@@ -10,27 +10,27 @@ GamepadVisualizer::GamepadVisualizer(std::size_t id)
 void GamepadVisualizer::doCreate()
 {
     backgroundLeft = std::make_shared<jt::Shape>();
-    backgroundLeft->makeRect(jt::Vector2f { 50.0f, 50.0f }, getGame()->gfx().textureManager());
+    backgroundLeft->makeRect(jt::Vector2f { 50.0f, 50.0f }, textureManager());
     backgroundLeft->setColor(jt::colors::Gray);
     backgroundLeft->setPosition(jt::Vector2f { 25.0f, 25.0f + (10.0f + 50.0f) * m_id });
 
     backgroundRight = std::make_shared<jt::Shape>();
-    backgroundRight->makeRect(jt::Vector2f { 50.0f, 50.0f }, getGame()->gfx().textureManager());
+    backgroundRight->makeRect(jt::Vector2f { 50.0f, 50.0f }, textureManager());
     backgroundRight->setColor(jt::colors::Gray);
     backgroundRight->setPosition(
         jt::Vector2f { 25.0f + 50.0f + 10.0f, 25.0f + (10.0f + 50.0f) * m_id });
 
     dotLeft = std::make_shared<jt::Shape>();
-    dotLeft->makeRect(jt::Vector2f { 3.0f, 3.0f }, getGame()->gfx().textureManager());
+    dotLeft->makeRect(jt::Vector2f { 3.0f, 3.0f }, textureManager());
     dotLeft->setOffset(jt::Vector2f { -1.5f, -1.5f });
     dotLeft->setColor(jt::colors::Red);
 
     dotRight = std::make_shared<jt::Shape>();
-    dotRight->makeRect(jt::Vector2f { 3.0f, 3.0f }, getGame()->gfx().textureManager());
+    dotRight->makeRect(jt::Vector2f { 3.0f, 3.0f }, textureManager());
     dotRight->setOffset(jt::Vector2f { -1.5f, -1.5f });
     dotRight->setColor(jt::colors::Red);
 
-    text = jt::dh::createText(getGame()->gfx().target(), "", 16);
+    text = jt::dh::createText(renderTarget(), "", 16);
     text->setPosition(
         jt::Vector2f { 25.0f + 2.0f * (50.0f + 10.0f), 25.0f + (10.0f + 50.0f) * m_id });
     text->setTextAlign(jt::Text::TextAlign::LEFT);
@@ -73,12 +73,12 @@ void GamepadVisualizer::doUpdate(float const elapsed)
 
 void GamepadVisualizer::doDraw() const
 {
-    backgroundLeft->draw(getGame()->gfx().target());
-    backgroundRight->draw(getGame()->gfx().target());
+    backgroundLeft->draw(renderTarget());
+    backgroundRight->draw(renderTarget());
 
-    dotLeft->draw(getGame()->gfx().target());
-    dotRight->draw(getGame()->gfx().target());
-    text->draw(getGame()->gfx().target());
+    dotLeft->draw(renderTarget());
+    dotRight->draw(renderTarget());
+    text->draw(renderTarget());
 }
 
 std::string GamepadVisualizer::getPressedKey(jt::GamepadButtonCode b)

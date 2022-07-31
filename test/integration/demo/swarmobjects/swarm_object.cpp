@@ -11,7 +11,7 @@ void SwarmObject::doCreate()
 
     m_animation->add("assets/coin.png", "idle", jt::Vector2u { 16, 16 },
         jt::MathHelper::numbersBetween(0U, 11U), jt::Random::getFloat(0.13f, 0.17f),
-        getGame()->gfx().textureManager());
+        textureManager());
     m_animation->play("idle", jt::Random::getInt(0, 6));
 
     setPosition(
@@ -31,4 +31,4 @@ void SwarmObject::doUpdate(float const elapsed)
     m_animation->update(elapsed);
     m_acceleration = jt::Vector2f { 0.0f, 0.0f };
 }
-void SwarmObject::doDraw() const { m_animation->draw(getGame()->gfx().target()); }
+void SwarmObject::doDraw() const { m_animation->draw(renderTarget()); }

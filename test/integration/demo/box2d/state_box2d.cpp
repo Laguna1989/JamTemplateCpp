@@ -17,10 +17,10 @@ void StateBox2d::doInternalCreate()
 
     CreatePlayer();
 
-    m_bar1 = std::make_shared<jt::Bar>(100.0f, 10.0f, true, getGame()->gfx().textureManager());
+    m_bar1 = std::make_shared<jt::Bar>(100.0f, 10.0f, true, textureManager());
     m_bar1->setPosition(jt::Vector2f { 10, 10 });
 
-    m_bar2 = std::make_shared<jt::Bar>(100.0f, 10.0f, true, getGame()->gfx().textureManager());
+    m_bar2 = std::make_shared<jt::Bar>(100.0f, 10.0f, true, textureManager());
     m_bar2->setPosition(jt::Vector2f { 10, 25 });
     m_bar2->setMaxValue(2.0f);
 }
@@ -65,8 +65,8 @@ void StateBox2d::doInternalUpdate(float const elapsed)
 void StateBox2d::doInternalDraw() const
 {
     drawObjects();
-    m_bar1->draw(getGame()->gfx().target());
-    m_bar2->draw(getGame()->gfx().target());
+    m_bar1->draw(renderTarget());
+    m_bar2->draw(renderTarget());
 }
 
 void StateBox2d::CreateOneWall(jt::Vector2f const& pos)

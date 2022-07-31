@@ -16,7 +16,7 @@ void State3DNoise::doInternalUpdate(float elapsed)
 void State3DNoise::doInternalDraw() const
 {
     jt::Shape shape;
-    shape.makeRect(jt::Vector2f { 2.0f, 2.0f }, getGame()->gfx().textureManager());
+    shape.makeRect(jt::Vector2f { 2.0f, 2.0f }, textureManager());
 
     std::vector<float> randomNumbers(100 * 100, 0.0f);
     for (auto i = 0; i != 100; ++i) {
@@ -41,7 +41,7 @@ void State3DNoise::doInternalDraw() const
             shape.setColor(jt::Color { vu, vu, vu, 255 });
 
             shape.update(0.1f);
-            shape.draw(getGame()->gfx().target());
+            shape.draw(renderTarget());
         }
     }
 }

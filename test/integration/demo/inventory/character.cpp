@@ -19,7 +19,7 @@ void PlayerCharacter::doCreate()
 
     m_animation = std::make_shared<jt::Animation>();
     m_animation->add("assets/demos/inventory/chars.png", "idle", jt::Vector2u { 24, 24 }, { 0, 1 },
-        0.2f, getGame()->gfx().textureManager());
+        0.2f, textureManager());
 
     m_animation->play("idle");
     m_animation->setPosition(jt::Vector2f { 5 * 24, 7 * 24 });
@@ -67,7 +67,7 @@ void PlayerCharacter::doUpdate(float const elapsed)
 
 void PlayerCharacter::doDraw() const
 {
-    m_animation->draw(getGame()->gfx().target());
+    m_animation->draw(renderTarget());
     m_inventory->draw();
     m_charsheet->draw();
 }

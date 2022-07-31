@@ -13,7 +13,7 @@ void StateScreenEffects::doInternalCreate()
 
     for (auto const& layer : layerNames) {
         m_tileLayers.emplace_back(std::make_shared<jt::tilemap::TileLayer>(
-            loader.loadTilesFromLayer(layer, getGame()->gfx().textureManager())));
+            loader.loadTilesFromLayer(layer, textureManager())));
     }
 
     m_vignette = std::make_shared<jt::Vignette>(jt::Vector2f { 400.0f, 300.0f });
@@ -62,7 +62,7 @@ void StateScreenEffects::scroll(float elapsed)
 void StateScreenEffects::doInternalDraw() const
 {
     for (auto const& l : m_tileLayers) {
-        l->draw(getGame()->gfx().target());
+        l->draw(renderTarget());
     }
 
     drawGui();

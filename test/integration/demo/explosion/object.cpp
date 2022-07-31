@@ -13,7 +13,7 @@ void Object::doCreate()
 {
     m_animation = std::make_shared<jt::Animation>();
     m_animation->add("assets/coin.png", "idle", jt::Vector2u { 16, 16 },
-        jt::MathHelper::numbersBetween(0U, 11U), 0.15f, getGame()->gfx().textureManager());
+        jt::MathHelper::numbersBetween(0U, 11U), 0.15f, textureManager());
     m_animation->play("idle");
 
     m_animation->setColor(jt::Random::getRandomColor());
@@ -39,4 +39,4 @@ void Object::doUpdate(float const elapsed)
         kill();
 }
 
-void Object::doDraw() const { m_animation->draw(getGame()->gfx().target()); }
+void Object::doDraw() const { m_animation->draw(renderTarget()); }

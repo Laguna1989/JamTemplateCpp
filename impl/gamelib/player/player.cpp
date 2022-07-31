@@ -57,4 +57,4 @@ void Player::doUpdate(float const elapsed)
     m_graphics->setAnimationIfNotSet(selectWalkAnimation(getVelocity()));
     m_graphics->updateGraphics(elapsed);
 }
-void Player::doDraw() const { m_graphics->draw(getGame()->gfx().target()); }
+void Player::doDraw() const { m_graphics->draw(renderTarget()); }

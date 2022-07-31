@@ -7,20 +7,20 @@
 
 void StateShaders::doInternalCreate()
 {
-    m_background = jt::dh::createShapeRect(jt::Vector2f { 400.0f, 300.0f },
-        jt::Color { 20, 20, 150 }, getGame()->gfx().textureManager());
+    m_background = jt::dh::createShapeRect(
+        jt::Vector2f { 400.0f, 300.0f }, jt::Color { 20, 20, 150 }, textureManager());
     m_background->setIgnoreCamMovement(true);
 
     m_shape1 = jt::dh::createShapeRect(
-        jt::Vector2f { 40.0f, 30.0f }, jt::colors::Cyan, getGame()->gfx().textureManager());
+        jt::Vector2f { 40.0f, 30.0f }, jt::colors::Cyan, textureManager());
     m_shape1->setPosition(jt::Vector2f { 100.0f, 100.0f });
 
-    m_sprite = std::make_shared<jt::Sprite>("assets/wall.png", getGame()->gfx().textureManager());
+    m_sprite = std::make_shared<jt::Sprite>("assets/wall.png", textureManager());
     m_sprite->setPosition({ 250, 32 });
 
     m_anim = std::make_shared<jt::Animation>();
     m_anim->add("assets/coin.png", "idle", jt::Vector2u { 16, 16 },
-        jt::MathHelper::numbersBetween(0U, 11U), 0.15f, getGame()->gfx().textureManager());
+        jt::MathHelper::numbersBetween(0U, 11U), 0.15f, textureManager());
     m_anim->play("idle");
     m_anim->setPosition(jt::Vector2f { 200.0f, 200.0f });
     m_anim->setCustomShader("", R"(uniform sampler2D texture;
@@ -34,15 +34,15 @@ void main()
 }
 )");
 
-    m_text_left_aligned = jt::dh::createText(getGame()->gfx().target(), "left aligned", 16);
+    m_text_left_aligned = jt::dh::createText(renderTarget(), "left aligned", 16);
     m_text_left_aligned->setTextAlign(jt::Text::TextAlign::LEFT);
     m_text_left_aligned->setPosition(jt::Vector2f { 300, 100 });
 
-    m_text_center_aligned = jt::dh::createText(getGame()->gfx().target(), "center aligned", 16);
+    m_text_center_aligned = jt::dh::createText(renderTarget(), "center aligned", 16);
     m_text_center_aligned->setTextAlign(jt::Text::TextAlign::CENTER);
     m_text_center_aligned->setPosition(jt::Vector2f { 300, 130 });
 
-    m_text_right_aligned = jt::dh::createText(getGame()->gfx().target(), "right aligned", 16);
+    m_text_right_aligned = jt::dh::createText(renderTarget(), "right aligned", 16);
     m_text_right_aligned->setTextAlign(jt::Text::TextAlign::RIGHT);
     m_text_right_aligned->setPosition(jt::Vector2f { 300, 160 });
 
@@ -85,16 +85,16 @@ void StateShaders::doInternalUpdate(float elapsed)
 }
 void StateShaders::doInternalDraw() const
 {
-    m_background->draw(getGame()->gfx().target());
+    m_background->draw(renderTarget());
 
     drawObjects();
-    m_sprite->draw(getGame()->gfx().target());
-    m_shape1->draw(getGame()->gfx().target());
-    m_anim->draw(getGame()->gfx().target());
+    m_sprite->draw(renderTarget());
+    m_shape1->draw(renderTarget());
+    m_anim->draw(renderTarget());
 
-    m_text_left_aligned->draw(getGame()->gfx().target());
-    m_text_center_aligned->draw(getGame()->gfx().target());
-    m_text_right_aligned->draw(getGame()->gfx().target());
+    m_text_left_aligned->draw(renderTarget());
+    m_text_center_aligned->draw(renderTarget());
+    m_text_right_aligned->draw(renderTarget());
 
-    m_line->draw(getGame()->gfx().target());
+    m_line->draw(renderTarget());
 }

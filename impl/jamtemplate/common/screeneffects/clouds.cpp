@@ -10,18 +10,15 @@ jt::Clouds::Clouds(jt::Vector2f const& velocity)
 
 void jt::Clouds::doCreate()
 {
-    m_layer1
-        = std::make_shared<jt::Sprite>("assets/clouds1.png", getGame()->gfx().textureManager());
+    m_layer1 = std::make_shared<jt::Sprite>("assets/clouds1.png", textureManager());
     m_layer1->setColor(jt::Color { 255, 255, 255, 110 });
     m_layer1->setBlendMode(jt::BlendMode::ALPHA);
 
-    m_layer2
-        = std::make_shared<jt::Sprite>("assets/clouds2.png", getGame()->gfx().textureManager());
+    m_layer2 = std::make_shared<jt::Sprite>("assets/clouds2.png", textureManager());
     m_layer2->setColor(jt::Color { 255, 255, 255, 90 });
     m_layer2->setBlendMode(jt::BlendMode::ALPHA);
 
-    m_layer3
-        = std::make_shared<jt::Sprite>("assets/clouds3.png", getGame()->gfx().textureManager());
+    m_layer3 = std::make_shared<jt::Sprite>("assets/clouds3.png", textureManager());
     m_layer3->setColor(jt::Color { 255, 255, 255, 100 });
 
     m_layer3->setBlendMode(jt::BlendMode::ALPHA);
@@ -78,9 +75,9 @@ void drawLayer(std::shared_ptr<jt::RenderTarget> rt, std::shared_ptr<jt::Sprite>
 void jt::Clouds::doDraw() const
 {
     if (m_enabled) {
-        drawLayer(getGame()->gfx().target(), m_layer1);
-        drawLayer(getGame()->gfx().target(), m_layer2);
-        drawLayer(getGame()->gfx().target(), m_layer3);
+        drawLayer(renderTarget(), m_layer1);
+        drawLayer(renderTarget(), m_layer2);
+        drawLayer(renderTarget(), m_layer3);
     }
 }
 
