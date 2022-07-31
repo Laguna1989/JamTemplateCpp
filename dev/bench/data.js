@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1658865412222,
+  "lastUpdate": 1659291143707,
   "repoUrl": "https://github.com/Laguna1989/JamTemplateCpp",
   "entries": {
     "Benchmark": [
@@ -7146,6 +7146,84 @@ window.BENCHMARK_DATA = {
             "value": 3.4045538423645425,
             "unit": "ms/iter",
             "extra": "iterations: 203\ncpu: 3.4041857142857177 ms\nthreads: 1"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "laguna.ws@gmail.com",
+            "name": "Laguna1989",
+            "username": "Laguna1989"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "b352c524bd0e202c1160e83765f099a20e287c59",
+          "message": "Introduce helper functions for getting game_interface objects(#223)\n\n* Introduce new helper function for getting the texture manager\r\n\r\n* Add RenderTarget helper\r\n\r\n* Add test for renderTarget",
+          "timestamp": "2022-07-31T20:09:14+02:00",
+          "tree_id": "2869c48305e5f11da85382cfac8b2d5e576a9a85",
+          "url": "https://github.com/Laguna1989/JamTemplateCpp/commit/b352c524bd0e202c1160e83765f099a20e287c59"
+        },
+        "date": 1659291142812,
+        "tool": "googlecpp",
+        "benches": [
+          {
+            "name": "BM_UpdateDrawablePositions",
+            "value": 3.3769958333335004,
+            "unit": "ms/iter",
+            "extra": "iterations: 204\ncpu: 3.376512254901961 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GetAllCommands",
+            "value": 0.38162535636561695,
+            "unit": "ms/iter",
+            "extra": "iterations: 1838\ncpu: 0.38145353645266594 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_LoggerLogWithoutTarget",
+            "value": 0.9501892849533677,
+            "unit": "ms/iter",
+            "extra": "iterations: 751\ncpu: 0.950069906790945 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_LoggerLogWithCoutTargetSetToOff",
+            "value": 0.9308992764550373,
+            "unit": "ms/iter",
+            "extra": "iterations: 756\ncpu: 0.9263457671957677 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_UpdateObjectGroup",
+            "value": 0.05851507270141665,
+            "unit": "ms/iter",
+            "extra": "iterations: 11953\ncpu: 0.058513452689701366 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_UpdateSpatialObjectGrid",
+            "value": 0.3959612822085822,
+            "unit": "ms/iter",
+            "extra": "iterations: 1793\ncpu: 0.39588081427774663 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_StartGame",
+            "value": 0.0031634086618723013,
+            "unit": "ms/iter",
+            "extra": "iterations: 219837\ncpu: 0.003163144966497907 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_RefineTilemapCollisions",
+            "value": 0.22161150223357473,
+            "unit": "ms/iter",
+            "extra": "iterations: 3134\ncpu: 0.22158104658583294 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GamestateWithTweeningShapes",
+            "value": 3.5559247208122433,
+            "unit": "ms/iter",
+            "extra": "iterations: 197\ncpu: 3.5555923857868037 ms\nthreads: 1"
           }
         ]
       }
