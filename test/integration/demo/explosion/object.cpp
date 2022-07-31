@@ -39,4 +39,4 @@ void Object::doUpdate(float const elapsed)
         kill();
 }
 
-void Object::doDraw() const { m_animation->draw(getGame()->gfx().target()); }
+void Object::doDraw() const { m_animation->draw(renderTarget()); }

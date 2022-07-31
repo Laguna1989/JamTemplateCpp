@@ -101,5 +101,5 @@ void StateSwarmObjects::doInternalDraw() const
     drawObjects();
 }
 
-void StateSwarmObjects::drawSky() const { m_sky->draw(getGame()->gfx().target()); }
+void StateSwarmObjects::drawSky() const { m_sky->draw(renderTarget()); }
 std::string StateSwarmObjects::getName() const { return "Swarm Objects"; }

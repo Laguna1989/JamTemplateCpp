@@ -64,4 +64,4 @@ void MovementObject::doUpdate(float const elapsed)
     }
 }
 
-void MovementObject::doDraw() const { m_animation->draw(getGame()->gfx().target()); }
+void MovementObject::doDraw() const { m_animation->draw(renderTarget()); }

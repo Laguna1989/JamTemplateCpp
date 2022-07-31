@@ -45,7 +45,7 @@ private:
     void doInternalDraw() const override
     {
         for (auto s : m_shapes) {
-            s->draw(getGame()->gfx().target());
+            s->draw(renderTarget());
         }
     }
 };

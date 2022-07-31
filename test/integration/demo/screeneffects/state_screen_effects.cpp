@@ -62,7 +62,7 @@ void StateScreenEffects::scroll(float elapsed)
 void StateScreenEffects::doInternalDraw() const
 {
     for (auto const& l : m_tileLayers) {
-        l->draw(getGame()->gfx().target());
+        l->draw(renderTarget());
     }
 
     drawGui();

@@ -106,7 +106,7 @@ void StatePathfinding::doInternalUpdate(float elapsed)
 void StatePathfinding::doInternalDraw() const
 {
     for (auto& t : m_tiles) {
-        t->getDrawable()->draw(getGame()->gfx().target());
+        t->getDrawable()->draw(renderTarget());
     }
 }
 

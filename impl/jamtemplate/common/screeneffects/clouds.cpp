@@ -75,9 +75,9 @@ void drawLayer(std::shared_ptr<jt::RenderTarget> rt, std::shared_ptr<jt::Sprite>
 void jt::Clouds::doDraw() const
 {
     if (m_enabled) {
-        drawLayer(getGame()->gfx().target(), m_layer1);
-        drawLayer(getGame()->gfx().target(), m_layer2);
-        drawLayer(getGame()->gfx().target(), m_layer3);
+        drawLayer(renderTarget(), m_layer1);
+        drawLayer(renderTarget(), m_layer2);
+        drawLayer(renderTarget(), m_layer3);
     }
 }
 

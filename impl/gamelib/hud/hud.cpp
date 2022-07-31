@@ -9,7 +9,7 @@ std::shared_ptr<ObserverInterface<int>> Hud::getObserverScoreP2() const { return
 void Hud::doCreate()
 {
     m_scoreP1Text = std::make_shared<jt::Text>();
-    m_scoreP1Text->loadFont("assets/font.ttf", 16, getGame()->gfx().target());
+    m_scoreP1Text->loadFont("assets/font.ttf", 16, renderTarget());
     m_scoreP1Text->setColor(jt::Color { 248, 249, 254 });
     m_scoreP1Text->update(0.0f);
     m_scoreP1Text->setTextAlign(jt::Text::TextAlign::LEFT);
@@ -18,7 +18,7 @@ void Hud::doCreate()
     m_scoreP1Display = std::make_shared<ScoreDisplay>(m_scoreP1Text, "P1 Score: ");
 
     m_scoreP2Text = std::make_shared<jt::Text>();
-    m_scoreP2Text->loadFont("assets/font.ttf", 16, getGame()->gfx().target());
+    m_scoreP2Text->loadFont("assets/font.ttf", 16, renderTarget());
     m_scoreP2Text->setColor(jt::Color { 248, 249, 254 });
     m_scoreP2Text->update(0.0f);
     m_scoreP2Text->setTextAlign(jt::Text::TextAlign::LEFT);
@@ -35,6 +35,6 @@ void Hud::doUpdate(float const elapsed)
 
 void Hud::doDraw() const
 {
-    m_scoreP1Text->draw(getGame()->gfx().target());
-    m_scoreP2Text->draw(getGame()->gfx().target());
+    m_scoreP1Text->draw(renderTarget());
+    m_scoreP2Text->draw(renderTarget());
 }

@@ -65,6 +65,7 @@ void jt::Button::doDraw() const
         m_disabledOverlay->draw(getGame()->gfx().target());
     }
 }
+
 bool jt::Button::isOver(jt::Vector2f const& mousePosition)
 {
     if (!m_isActive) {

@@ -56,7 +56,7 @@ void StateMenu::createMenuText()
 
 void StateMenu::createTextCredits()
 {
-    m_text_Credits = jt::dh::createText(getGame()->gfx().target(),
+    m_text_Credits = jt::dh::createText(renderTarget(),
         "Created by " + GP::AuthorName() + " for " + GP::JamName() + "\n" + GP::JamDate()
             + "\n\nF9 for License Information",
         16U, GP::getPalette().getColor(4));
@@ -64,8 +64,7 @@ void StateMenu::createTextCredits()
     m_text_Credits->setPosition({ 10, GP::GetScreenSize().y - 70 });
     m_text_Credits->setShadow(GP::PaletteFontShadow(), jt::Vector2f { 1, 1 });
 
-    m_text_Version
-        = jt::dh::createText(getGame()->gfx().target(), "", 16U, GP::getPalette().getColor(4));
+    m_text_Version = jt::dh::createText(renderTarget(), "", 16U, GP::getPalette().getColor(4));
     if (jt::BuildInfo::gitTagName() != "") {
         m_text_Version->setText(jt::BuildInfo::gitTagName());
     } else {
@@ -80,7 +79,7 @@ void StateMenu::createTextExplanation()
 {
     float half_width = GP::GetScreenSize().x / 2;
     m_text_Explanation = jt::dh::createText(
-        getGame()->gfx().target(), "Press Space to start the game", 16U, GP::PaletteFontFront());
+        renderTarget(), "Press Space to start the game", 16U, GP::PaletteFontFront());
     m_text_Explanation->setPosition({ half_width, 150 });
     m_text_Explanation->setShadow(GP::PaletteFontShadow(), jt::Vector2f { 3, 3 });
 }
@@ -88,8 +87,7 @@ void StateMenu::createTextExplanation()
 void StateMenu::createTextTitle()
 {
     float half_width = GP::GetScreenSize().x / 2;
-    m_text_Title = jt::dh::createText(
-        getGame()->gfx().target(), GP::GameName(), 32U, GP::PaletteFontFront());
+    m_text_Title = jt::dh::createText(renderTarget(), GP::GameName(), 32U, GP::PaletteFontFront());
     m_text_Title->setPosition({ half_width, 20 });
     m_text_Title->setShadow(GP::PaletteFontShadow(), jt::Vector2f { 3, 3 });
 }
@@ -201,13 +199,13 @@ void StateMenu::startTransitionToStateGame()
 
 void StateMenu::doInternalDraw() const
 {
-    m_background->draw(getGame()->gfx().target());
+    m_background->draw(renderTarget());
 
-    m_text_Title->draw(getGame()->gfx().target());
-    m_text_Explanation->draw(getGame()->gfx().target());
-    m_text_Credits->draw(getGame()->gfx().target());
-    m_text_Version->draw(getGame()->gfx().target());
-    m_overlay->draw(getGame()->gfx().target());
+    m_text_Title->draw(renderTarget());
+    m_text_Explanation->draw(renderTarget());
+    m_text_Credits->draw(renderTarget());
+    m_text_Version->draw(renderTarget());
+    m_overlay->draw(renderTarget());
     m_vignette->draw();
 }
 std::string StateMenu::getName() const { return "Menu"; }
