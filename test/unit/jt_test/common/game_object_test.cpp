@@ -111,6 +111,17 @@ TEST(GameObjectTest, TextureManagerCallsGfxTextureManager)
     (void)go.textureManager();
 }
 
+TEST(GameObjectTest, RenderTargetCallsGfxTarget)
+{
+    auto const g = std::make_shared<MockGame>();
+    EXPECT_CALL(*g, gfx());
+    EXPECT_CALL(g->m_gfx, target()).WillRepeatedly(::testing::Return(nullptr));
+    GameObject go {};
+    go.setGameInstance(g);
+
+    (void)go.renderTarget();
+}
+
 TEST(GameObjectTest, GetGameRaisesExceptionWhenGameIsExpired)
 {
     auto g = std::make_shared<MockGame>();
