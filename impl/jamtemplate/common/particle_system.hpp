@@ -13,7 +13,8 @@ namespace jt {
 template <class T, size_t N>
 class ParticleSystem : public GameObject {
 public:
-    using ResetCallbackType = std::function<void(std::shared_ptr<T> particle)>;
+    using ResetCallbackType
+        = std::function<void(std::shared_ptr<T> particle, jt::Vector2f const& pos)>;
 
     /// Create a Particle System
     /// \tparam InitCallbackT Type of the init callback, should be of type T(void)
@@ -44,10 +45,10 @@ public:
 
     /// fire the particle system, creating num particles
     /// \param num
-    void fire(unsigned int num = 1)
+    void fire(unsigned int num = 1, jt::Vector2f const& pos = jt::Vector2f {})
     {
         for (auto i = 0U; i != num; ++i) {
-            m_resetCallback(m_particles[m_currentIndex]);
+            m_resetCallback(m_particles[m_currentIndex], pos);
             m_currentIndex++;
         }
     };

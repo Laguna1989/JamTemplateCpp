@@ -17,7 +17,7 @@ void StateParticles::doInternalCreate()
     createParticlesFire();
     auto rng = std::default_random_engine {};
 
-    m_sparkParticles = jt::ParticleSystem<jt::Animation, 80>::createPS(
+    m_sparkParticles = jt::ParticleSystem<jt::Animation, 100>::createPS(
         [this, &rng]() {
             auto a = std::make_shared<jt::Animation>();
             std::vector<unsigned int> numbers = jt::MathHelper::numbersBetween(0u, 7u);
@@ -31,7 +31,7 @@ void StateParticles::doInternalCreate()
             a->setPosition(jt::Vector2f { -2000.0f, -2000.0f });
             return a;
         },
-        [](auto a) {
+        [](auto a, auto /*pos*/) {
             auto startPosition = jt::Random::getRandomPointIn(jt::Rectf { 210, 50, 80, 200 });
             a->setPosition(startPosition);
             a->setRotation(jt::Random::getFloat(0.0f, 360.0f));
@@ -40,7 +40,7 @@ void StateParticles::doInternalCreate()
 }
 void StateParticles::createParticlesFire()
 {
-    m_particlesFire = jt::ParticleSystem<jt::Shape, 200>::createPS(
+    m_particlesFire = jt::ParticleSystem<jt::Shape, numberOfParticles>::createPS(
         [this]() {
             auto s = jt::dh::createShapeCircle(
                 20, jt::MakeColor::FromHSV(45, 80, 100), textureManager());
@@ -49,7 +49,7 @@ void StateParticles::createParticlesFire()
             s->setScale(jt::Vector2f { 0.5f, 0.5f });
             return s;
         },
-        [this](auto s) {
+        [this](auto s, auto /*pos*/) {
             auto totalTime = 0.9f;
 
             auto startPosition = jt::Random::getRandomPointIn(jt::Rectf { 155, 250, 10, 0 });
@@ -114,7 +114,7 @@ void StateParticles::createParticlesGlitter()
             s->setOrigin({ 2, 2 });
             return s;
         },
-        [this](auto s) {
+        [this](auto s, auto /*pos*/) {
             s->setPosition(jt::Random::getRandomPointIn(jt::Rectf { 0, 0, 100, 300 }));
 
             auto twa = jt::TweenAlpha::create(s, 0.5, 255, 0);

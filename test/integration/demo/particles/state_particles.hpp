@@ -9,7 +9,7 @@
 #include <shape.hpp>
 #include <memory>
 
-constexpr std::size_t numberOfParticles = 1000;
+constexpr std::size_t numberOfParticles = 500;
 constexpr std::size_t toFire = 20;
 
 class StateParticles : public jt::GameState {
@@ -21,8 +21,8 @@ private:
     void doInternalUpdate(float elapsed) override;
     void doInternalDraw() const override;
     std::shared_ptr<jt::ParticleSystem<jt::Shape, numberOfParticles>> m_particlesGlitter;
-    std::shared_ptr<jt::ParticleSystem<jt::Shape, 200>> m_particlesFire;
-    std::shared_ptr<jt::ParticleSystem<jt::Animation, 80>> m_sparkParticles;
+    std::shared_ptr<jt::ParticleSystem<jt::Shape, numberOfParticles>> m_particlesFire;
+    std::shared_ptr<jt::ParticleSystem<jt::Animation, 100>> m_sparkParticles;
 
     jt::CircularBuffer<float, 200> m_timeMeasurement;
     void createParticlesGlitter();

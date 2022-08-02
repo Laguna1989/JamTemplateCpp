@@ -14,7 +14,7 @@ TEST(ParticleSystemTest, InitIsCalledForEveryParticle)
             numberOfInitCalls++;
             return std::shared_ptr<jt::Shape>();
         },
-        [](auto /*s*/) {});
+        [](auto /*s*/, auto /*p*/) {});
 
     ASSERT_EQ(numberOfInitCalls, 5);
 }
@@ -24,7 +24,7 @@ TEST(ParticleSystemTest, ResetNotCalledOnConstruction)
     int numberofResetCalls = 0;
 
     jt::ParticleSystem<jt::Shape, 5> ps([]() { return std::shared_ptr<jt::Shape>(); },
-        [&numberofResetCalls](auto /*s*/) { numberofResetCalls++; });
+        [&numberofResetCalls](auto /*s*/, auto /*p*/) { numberofResetCalls++; });
 
     ASSERT_EQ(numberofResetCalls, 0);
 }
@@ -34,7 +34,7 @@ TEST(ParticleSystemTest, ResetCalledOnFire)
     int numberofResetCalls = 0;
 
     jt::ParticleSystem<jt::Shape, 5> ps([]() { return std::shared_ptr<jt::Shape>(); },
-        [&numberofResetCalls](auto /*s*/) { numberofResetCalls++; });
+        [&numberofResetCalls](auto /*s*/, auto /*p*/) { numberofResetCalls++; });
 
     ps.fire(4);
     ASSERT_EQ(numberofResetCalls, 4);
@@ -45,7 +45,7 @@ TEST(ParticleSystemTest, ResetCalledMultipleTimes)
     int numberofResetCalls = 0;
 
     jt::ParticleSystem<jt::Shape, 5> ps([]() { return std::shared_ptr<jt::Shape>(); },
-        [&numberofResetCalls](auto /*s*/) { numberofResetCalls++; });
+        [&numberofResetCalls](auto /*s*/, auto /*p*/) { numberofResetCalls++; });
 
     ps.fire(10);
     ps.fire(10);
@@ -65,7 +65,7 @@ TEST(ParticleSystemTest, CreateDoesNotRaiseExceptionWhenGameInstanceIsSet)
             s->makeRect({ 1, 1 }, getTextureManager());
             return s;
         },
-        [](auto /*s*/) {});
+        [](auto /*s*/, auto /*p*/) {});
 
     ps.setGameInstance(g);
     ASSERT_NO_THROW(ps.create());
@@ -79,7 +79,7 @@ TEST(ParticleSystemTest, UpdateCallDoesNotRaiseException)
             s->makeRect({ 1, 1 }, getTextureManager());
             return s;
         },
-        [](auto /*s*/) {});
+        [](auto /*s*/, auto /*p*/) {});
 
     ps.fire(5);
 
@@ -96,7 +96,7 @@ TEST(ParticleSystemTest, DrawWithGame)
             s->makeRect({ 1, 1 }, getTextureManager());
             return s;
         },
-        [](auto /*s*/) {});
+        [](auto /*s*/, auto /*p*/) {});
 
     ps.setGameInstance(g);
     ps.fire(5);
