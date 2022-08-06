@@ -98,6 +98,7 @@ private:
 
     // Do NOT modify the game or the gamestate in this function
     virtual void doDestroy();
+    void checkForValidGame() const;
 };
 
 } // namespace jt

@@ -6,8 +6,15 @@
 
 void jt::GameObject::create()
 {
-    auto const g = getGame();
+    checkForValidGame();
     doCreate();
+}
+
+void jt::GameObject::checkForValidGame() const
+{
+    if (m_game.expired()) {
+        throw std::logic_error { "ERROR: Cannot jt::GameObject::getGame():  m_game expired!" };
+    }
 }
 
 void jt::GameObject::update(float const elapsed)
@@ -41,9 +48,7 @@ std::shared_ptr<jt::GameInterface> jt::GameObject::getGame()
 
 std::shared_ptr<jt::GameInterface> jt::GameObject::getGame() const
 {
-    if (m_game.expired()) {
-        throw std::logic_error { "ERROR: Cannot jt::GameObject::getGame():  m_game expired!" };
-    }
+    checkForValidGame();
     return m_game.lock();
 }
 
