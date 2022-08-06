@@ -115,6 +115,7 @@ jobs:
         run: |
           emcmake cmake -B ${{github.workspace}}/build \
           -DCMAKE_C_COMPILER_LAUNCHER=ccache -DCMAKE_CXX_COMPILER_LAUNCHER=ccache \
+          -DCMAKE_BUILD_TYPE=Release \
           -DJT_ENABLE_DEMOS=OFF \
           -DJT_ENABLE_UNITTESTS=OFF \
           -DJT_ENABLE_WEB=ON \

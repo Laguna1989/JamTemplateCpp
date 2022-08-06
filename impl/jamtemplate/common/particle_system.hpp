@@ -2,9 +2,7 @@
 #define JAMTEMPLATE_PARTICLE_SYSTEM_HPP
 
 #include <circular_buffer.hpp>
-#include <game_interface.hpp>
 #include <game_object.hpp>
-#include <array>
 #include <functional>
 #include <memory>
 
@@ -69,7 +67,7 @@ private:
     virtual void doDraw() const
     {
         for (auto const& p : m_particles) {
-            p->draw(getGame()->gfx().target());
+            p->draw(renderTarget());
         }
     };
     virtual void doCreate() {};
