@@ -51,6 +51,27 @@ void jt::DrawableImpl::setOffset(jt::OffsetMode offset)
     }
 }
 
+void jt::DrawableImpl::setOrigin(jt::Vector2f const& origin)
+{
+    m_origin = origin;
+    m_originMode = jt::OriginMode::MANUAL;
+    setOriginInternal(m_origin);
+}
+
+jt::OriginMode jt::DrawableImpl::getOriginMode() const { return m_originMode; }
+
+void jt::DrawableImpl::setOrigin(jt::OriginMode origin)
+{
+    m_originMode = origin;
+    if (m_originMode == OriginMode::TOPLEFT) {
+        m_origin = jt::Vector2f {};
+    } else if (m_originMode == OriginMode::CENTER) {
+        m_origin = jt::Vector2f { 0.5f * getLocalBounds().width, 0.5f * getLocalBounds().height };
+    }
+    setOriginInternal(m_origin);
+}
+jt::Vector2f jt::DrawableImpl::getOrigin() const { return m_origin; }
+
 void jt::DrawableImpl::setRotation(float rot) { doSetRotation(rot); }
 float jt::DrawableImpl::getRotation() const { return doGetRotation(); }
 

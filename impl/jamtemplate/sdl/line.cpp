@@ -59,6 +59,3 @@ jt::Rectf jt::Line::getLocalBounds() const { return jt::Rectf {}; }
 
 void jt::Line::setScale(jt::Vector2f const& scale) { m_scale = scale; }
 jt::Vector2f jt::Line::getScale() const { return m_scale; }
-
-void jt::Line::setOrigin(jt::Vector2f const& origin) { m_origin = origin; }
-jt::Vector2f jt::Line::getOrigin() const { return m_origin; }

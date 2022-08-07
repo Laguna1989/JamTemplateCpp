@@ -54,13 +54,13 @@ void jt::Text::setScale(jt::Vector2f const& scale)
 
 jt::Vector2f jt::Text::getScale() const { return fromLib(m_text->getScale()); }
 
-void jt::Text::setOrigin(jt::Vector2f const& origin)
+void jt::Text::setOriginInternal(jt::Vector2f const& origin)
 {
-    m_text->setOrigin(toLib(origin));
-    m_flashText->setOrigin(toLib(origin));
+    if (m_text) {
+        m_text->setOrigin(toLib(origin));
+        m_flashText->setOrigin(toLib(origin));
+    }
 }
-
-jt::Vector2f jt::Text::getOrigin() const { return fromLib(m_text->getOrigin()); }
 
 void jt::Text::setTextAlign(jt::Text::TextAlign ta) { m_textAlign = ta; }
 jt::Text::TextAlign jt::Text::getTextAlign() const { return m_textAlign; }

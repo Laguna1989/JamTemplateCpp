@@ -356,3 +356,43 @@ TEST_P(DrawableImplTestFixture, isNotVisibleTop)
     drawable->setPosition(jt::Vector2f { 0.0f, -drawable->getLocalBounds().height - 5.0f });
     ASSERT_FALSE(drawable->isVisible());
 }
+
+TEST_P(DrawableImplTestFixture, InitialOriginModeIsManual)
+{
+    ASSERT_EQ(drawable->getOriginMode(), jt::OriginMode::MANUAL);
+}
+
+TEST_P(DrawableImplTestFixture, SetOriginModeChangesOriginMode)
+{
+    drawable->setOrigin(jt::OriginMode::TOPLEFT);
+    ASSERT_EQ(drawable->getOriginMode(), jt::OriginMode::TOPLEFT);
+}
+
+TEST_P(DrawableImplTestFixture, OriginModesOverridesManualOriginTopLeft)
+{
+    auto const origin = jt::Vector2f { -14.0f, 2.2f };
+    drawable->setOrigin(origin);
+    ASSERT_EQ(drawable->getOrigin(), origin);
+    drawable->setOrigin(jt::OriginMode::TOPLEFT);
+    auto const expectedOrigin = jt::Vector2f { 0.0f, 0.0f };
+    ASSERT_EQ(drawable->getOrigin(), expectedOrigin);
+}
+
+TEST_P(DrawableImplTestFixture, OriginModesOverridesManualOriginCenter)
+{
+    auto const origin = jt::Vector2f { -14.0f, 2.2f };
+    drawable->setOrigin(origin);
+    ASSERT_EQ(drawable->getOrigin(), origin);
+    drawable->setOrigin(jt::OriginMode::CENTER);
+    auto const expectedOrigin = 0.5f
+        * jt::Vector2f { drawable->getLocalBounds().width, drawable->getLocalBounds().height };
+    ASSERT_EQ(drawable->getOrigin(), expectedOrigin);
+}
+
+TEST_P(DrawableImplTestFixture, SetOriginChangesOriginModeToManual)
+{
+    drawable->setOrigin(jt::OriginMode::TOPLEFT);
+    ASSERT_EQ(drawable->getOriginMode(), jt::OriginMode::TOPLEFT);
+    drawable->setOrigin(jt::Vector2f { -14.0f, 2.2f });
+    ASSERT_EQ(drawable->getOriginMode(), jt::OriginMode::MANUAL);
+}

@@ -12,6 +12,7 @@ namespace jt {
 enum class BlendMode { ADD, MUL, ALPHA };
 
 enum class OffsetMode { MANUAL, TOPLEFT, CENTER };
+enum class OriginMode { MANUAL, TOPLEFT, CENTER };
 
 class DrawableInterface {
 public:
@@ -105,12 +106,23 @@ public:
     /// \return the origin
     virtual jt::Vector2f getOrigin() const = 0;
 
+    /// Set the origin of the drawable
+    ///
+    /// The origin used for rotation
+    ///
+    /// \param origin the origin mode
+    virtual void setOrigin(jt::OriginMode origin) = 0;
+
+    /// Get the originMode
+    /// \return the originMode
+    virtual jt::OriginMode getOriginMode() const = 0;
+
     /// Set the offset of the drawable
     /// \param offset the offset as a vector
     virtual void setOffset(jt::Vector2f const& offset) = 0;
 
     /// Get the offsetMode
-    /// \return the OffsetMode
+    /// \return the offsetMode
     virtual jt::OffsetMode getOffsetMode() const = 0;
 
     /// Set the offset of the drawable

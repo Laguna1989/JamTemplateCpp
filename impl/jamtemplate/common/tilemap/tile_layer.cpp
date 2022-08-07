@@ -91,8 +91,12 @@ jt::Rectf jt::tilemap::TileLayer::getLocalBounds() const
 void jt::tilemap::TileLayer::setScale(jt::Vector2f const& scale) { m_scale = scale; }
 jt::Vector2f jt::tilemap::TileLayer::getScale() const { return m_scale; }
 
-void jt::tilemap::TileLayer::setOrigin(jt::Vector2f const& origin) { m_origin = origin; }
-jt::Vector2f jt::tilemap::TileLayer::getOrigin() const { return m_origin; }
+void jt::tilemap::TileLayer::setOriginInternal(jt::Vector2f const& origin)
+{
+    for (auto& ts : m_tileSetSprites) {
+        ts->setOrigin(origin);
+    }
+}
 
 void jt::tilemap::TileLayer::doRotate(float /*rot*/) { }
 void jt::tilemap::TileLayer::setCustomShader(

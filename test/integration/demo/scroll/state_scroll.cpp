@@ -19,6 +19,8 @@ void StateScroll::doInternalCreate()
 
     m_sprite = std::make_shared<jt::Sprite>("assets/wall.png", textureManager());
     m_sprite->setPosition({ 250, 32 });
+    m_sprite->setOrigin(jt::OriginMode::CENTER);
+    m_sprite->setShadow(jt::colors::Black, jt::Vector2f { 2, 2 });
 
     m_anim = std::make_shared<jt::Animation>();
     m_anim->add("assets/coin.png", "idle", jt::Vector2u { 16, 16 },
@@ -74,8 +76,12 @@ void StateScroll::doInternalUpdate(float const elapsed)
     }
 
     m_background->update(elapsed);
+    m_shape1->setRotation(getAge() * 90);
     m_shape1->update(elapsed);
+
+    m_sprite->setRotation(-getAge() * 90);
     m_sprite->update(elapsed);
+
     m_anim->update(elapsed);
 
     m_text_left_aligned->update(elapsed);

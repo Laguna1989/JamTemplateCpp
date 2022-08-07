@@ -53,19 +53,12 @@ jt::Vector2f jt::Shape::getScale() const
     return fromLib(m_shape->getScale());
 }
 
-void jt::Shape::setOrigin(jt::Vector2f const& origin)
+void jt::Shape::setOriginInternal(jt::Vector2f const& origin)
 {
     if (m_shape) {
         m_shape->setOrigin(origin.x, origin.y);
         m_flashShape->setOrigin(origin.x, origin.y);
     }
-}
-jt::Vector2f jt::Shape::getOrigin() const
-{
-    if (!m_shape) {
-        return jt::Vector2f { 0.0f, 0.0f };
-    }
-    return fromLib(m_shape->getOrigin());
 }
 
 void jt::Shape::doDraw(std::shared_ptr<jt::RenderTarget> const sptr) const

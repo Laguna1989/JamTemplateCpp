@@ -38,14 +38,6 @@ void jt::Sprite::setScale(jt::Vector2f const& scale)
 
 jt::Vector2f jt::Sprite::getScale() const { return fromLib(m_sprite.getScale()); }
 
-void jt::Sprite::setOrigin(jt::Vector2f const& origin)
-{
-    m_sprite.setOrigin(toLib(origin));
-    m_flashSprite.setOrigin(toLib(origin));
-}
-
-jt::Vector2f jt::Sprite::getOrigin() const { return fromLib(m_sprite.getOrigin()); }
-
 // WARNING: This function is slow, because it needs to copy
 // graphics memory to ram first.
 jt::Color jt::Sprite::getColorAtPixel(jt::Vector2u pixelPos) const
@@ -113,4 +105,10 @@ void jt::Sprite::doRotate(float rot)
 {
     m_sprite.setRotation(-rot);
     m_flashSprite.setRotation(-rot);
+}
+
+void jt::Sprite::setOriginInternal(jt::Vector2f const& origin)
+{
+    m_sprite.setOrigin(origin.x, origin.y);
+    m_flashSprite.setOrigin(origin.x, origin.y);
 }

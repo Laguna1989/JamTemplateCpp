@@ -1,9 +1,9 @@
 ﻿#ifndef JAMTEMPLATE_SHAPE_HPP
 #define JAMTEMPLATE_SHAPE_HPP
 
+#include <drawable_impl_sfml.hpp>
 #include <render_target.hpp>
 #include <texture_manager_interface.hpp>
-#include <drawable_impl_sfml.hpp>
 #include <memory>
 
 namespace sf {
@@ -30,8 +30,7 @@ public:
     void setScale(jt::Vector2f const& scale) override;
     jt::Vector2f getScale() const override;
 
-    void setOrigin(jt::Vector2f const& origin) override;
-    jt::Vector2f getOrigin() const override;
+    void setOriginInternal(jt::Vector2f const& origin) override;
 
 private:
     mutable std::shared_ptr<sf::Shape> m_shape = nullptr;
