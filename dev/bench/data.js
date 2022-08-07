@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1659774130428,
+  "lastUpdate": 1659863594686,
   "repoUrl": "https://github.com/Laguna1989/JamTemplateCpp",
   "entries": {
     "Benchmark": [
@@ -7380,6 +7380,84 @@ window.BENCHMARK_DATA = {
             "value": 2.9256816875000404,
             "unit": "ms/iter",
             "extra": "iterations: 240\ncpu: 2.925409166666667 ms\nthreads: 1"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "laguna.ws@gmail.com",
+            "name": "Laguna1989",
+            "username": "Laguna1989"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "ffbb540b8a035d9e9f6551228016bf4896ce3475",
+          "message": "Merge pull request #227 from Laguna1989/FEATURE_DrawablesOriginEnum\n\nAdd tests and implementation for OffsetMode",
+          "timestamp": "2022-08-07T11:09:56+02:00",
+          "tree_id": "e2283b87cbb593a65b635afb727028889c466f8a",
+          "url": "https://github.com/Laguna1989/JamTemplateCpp/commit/ffbb540b8a035d9e9f6551228016bf4896ce3475"
+        },
+        "date": 1659863592655,
+        "tool": "googlecpp",
+        "benches": [
+          {
+            "name": "BM_UpdateDrawablePositions",
+            "value": 5.395340310924114,
+            "unit": "ms/iter",
+            "extra": "iterations: 119\ncpu: 5.388304201680674 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GetAllCommands",
+            "value": 0.3147631564565945,
+            "unit": "ms/iter",
+            "extra": "iterations: 2269\ncpu: 0.31472758924636407 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_LoggerLogWithoutTarget",
+            "value": 0.8577666920199479,
+            "unit": "ms/iter",
+            "extra": "iterations: 802\ncpu: 0.8570218204488784 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_LoggerLogWithCoutTargetSetToOff",
+            "value": 0.8539670301623887,
+            "unit": "ms/iter",
+            "extra": "iterations: 862\ncpu: 0.8519344547563803 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_UpdateObjectGroup",
+            "value": 0.05303882345904705,
+            "unit": "ms/iter",
+            "extra": "iterations: 14212\ncpu: 0.05303264846608496 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_UpdateSpatialObjectGrid",
+            "value": 0.42283738789376185,
+            "unit": "ms/iter",
+            "extra": "iterations: 1619\ncpu: 0.42280920321185894 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_StartGame",
+            "value": 0.003042063241316655,
+            "unit": "ms/iter",
+            "extra": "iterations: 225865\ncpu: 0.0030416106966550793 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_RefineTilemapCollisions",
+            "value": 0.18336788718775732,
+            "unit": "ms/iter",
+            "extra": "iterations: 3723\ncpu: 0.18334351329572915 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GamestateWithTweeningShapes",
+            "value": 3.312427628820961,
+            "unit": "ms/iter",
+            "extra": "iterations: 229\ncpu: 3.3119213973799155 ms\nthreads: 1"
           }
         ]
       }
