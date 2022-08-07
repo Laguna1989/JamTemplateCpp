@@ -11,6 +11,8 @@ namespace jt {
 
 enum class BlendMode { ADD, MUL, ALPHA };
 
+enum class OffsetMode { MANUAL, TOPLEFT, CENTER };
+
 class DrawableInterface {
 public:
     using Sptr = std::shared_ptr<DrawableInterface>;
@@ -104,8 +106,16 @@ public:
     virtual jt::Vector2f getOrigin() const = 0;
 
     /// Set the offset of the drawable
-    /// \param offset the offset
-    virtual void setOffset(jt::Vector2f const offset) = 0;
+    /// \param offset the offset as a vector
+    virtual void setOffset(jt::Vector2f const& offset) = 0;
+
+    /// Get the offsetMode
+    /// \return the OffsetMode
+    virtual jt::OffsetMode getOffsetMode() const = 0;
+
+    /// Set the offset of the drawable
+    /// \param offset the offset mode
+    virtual void setOffset(jt::OffsetMode offset) = 0;
 
     /// get the offset of the drawable
     /// \return the offset
@@ -164,6 +174,10 @@ public:
 
     virtual void setBlendMode(jt::BlendMode mode) = 0;
     virtual jt::BlendMode getBlendMode() const = 0;
+
+    /// check if is visible, based on ScreenSizeHint
+    /// \return true if visible, false if not
+    virtual bool isVisible() const = 0;
 
 protected:
     DrawableInterface() = default;

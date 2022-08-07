@@ -33,7 +33,9 @@ public:
     MOCK_METHOD(jt::Vector2f, getOrigin, (), (const, override));
 
     MOCK_METHOD(jt::Vector2f, getOffset, (), (const, override));
-    MOCK_METHOD(void, setOffset, (jt::Vector2f const), (override));
+    MOCK_METHOD(void, setOffset, (jt::Vector2f const&), (override));
+    MOCK_METHOD(jt::OffsetMode, getOffsetMode, (), (const, override));
+    MOCK_METHOD(void, setOffset, (jt::OffsetMode), (override));
 
     MOCK_METHOD(void, setRotation, (float), (override));
     MOCK_METHOD(float, getRotation, (), (const, override));
@@ -53,6 +55,8 @@ public:
 
     MOCK_METHOD(void, setBlendMode, (jt::BlendMode), (override));
     MOCK_METHOD(jt::BlendMode, getBlendMode, (), (const, override));
+
+    MOCK_METHOD(bool, isVisible,(), (const, override));
 };
 
 #endif

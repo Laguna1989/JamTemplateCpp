@@ -34,7 +34,9 @@ public:
     void update(float elapsed) override;
 
     jt::Vector2f getOffset() const override;
-    void setOffset(jt::Vector2f const offset) override;
+    void setOffset(jt::Vector2f const& offset) override;
+    OffsetMode getOffsetMode() const override;
+    void setOffset(jt::OffsetMode offset) override;
 
     void setRotation(float rot) override;
     float getRotation() const override;
@@ -59,7 +61,7 @@ public:
 
     void setScreenSizeHint(Vector2f const& hint) override;
 
-    virtual bool isVisible() const;
+    bool isVisible() const override;
 
     void setBlendMode(jt::BlendMode mode) override;
 
@@ -76,6 +78,7 @@ private:
 
     bool m_hasBeenUpdated { false };
 
+    jt::OffsetMode m_offsetMode { jt::OffsetMode::MANUAL };
     jt::Vector2f m_offset { 0, 0 };
 
     jt::BlendMode m_blendMode { jt::BlendMode::ALPHA };

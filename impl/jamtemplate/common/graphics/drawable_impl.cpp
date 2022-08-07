@@ -35,7 +35,21 @@ void jt::DrawableImpl::update(float elapsed)
 }
 
 jt::Vector2f jt::DrawableImpl::getOffset() const { return m_offset; }
-void jt::DrawableImpl::setOffset(jt::Vector2f const offset) { m_offset = offset; }
+void jt::DrawableImpl::setOffset(jt::Vector2f const& offset)
+{
+    m_offset = offset;
+    m_offsetMode = jt::OffsetMode::MANUAL;
+}
+jt::OffsetMode jt::DrawableImpl::getOffsetMode() const { return m_offsetMode; }
+void jt::DrawableImpl::setOffset(jt::OffsetMode offset)
+{
+    m_offsetMode = offset;
+    if (m_offsetMode == OffsetMode::TOPLEFT) {
+        m_offset = jt::Vector2f {};
+    } else if (m_offsetMode == OffsetMode::CENTER) {
+        m_offset = jt::Vector2f { -0.5f * getLocalBounds().width, -0.5f * getLocalBounds().height };
+    }
+}
 
 void jt::DrawableImpl::setRotation(float rot) { doSetRotation(rot); }
 float jt::DrawableImpl::getRotation() const { return doGetRotation(); }

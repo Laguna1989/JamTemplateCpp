@@ -77,8 +77,16 @@ jt::Color jt::tilemap::TileLayer::getColor() const { return m_color; }
 void jt::tilemap::TileLayer::setPosition(jt::Vector2f const& pos) { m_position = pos; }
 jt::Vector2f jt::tilemap::TileLayer::getPosition() const { return m_position; }
 
-jt::Rectf jt::tilemap::TileLayer::getGlobalBounds() const { return jt::Rectf {}; }
-jt::Rectf jt::tilemap::TileLayer::getLocalBounds() const { return jt::Rectf {}; }
+jt::Rectf jt::tilemap::TileLayer::getGlobalBounds() const
+{
+    return jt::Rectf { getPosition().x, getPosition().y, std::numeric_limits<float>::max(),
+        std::numeric_limits<float>::max() };
+}
+jt::Rectf jt::tilemap::TileLayer::getLocalBounds() const
+{
+    return jt::Rectf { getPosition().x, getPosition().y, std::numeric_limits<float>::max(),
+        std::numeric_limits<float>::max() };
+}
 
 void jt::tilemap::TileLayer::setScale(jt::Vector2f const& scale) { m_scale = scale; }
 jt::Vector2f jt::tilemap::TileLayer::getScale() const { return m_scale; }
@@ -87,7 +95,6 @@ void jt::tilemap::TileLayer::setOrigin(jt::Vector2f const& origin) { m_origin = 
 jt::Vector2f jt::tilemap::TileLayer::getOrigin() const { return m_origin; }
 
 void jt::tilemap::TileLayer::doRotate(float /*rot*/) { }
-bool jt::tilemap::TileLayer::isVisible() const { return true; }
 void jt::tilemap::TileLayer::setCustomShader(
     std::string const& shaderCodeVertex, std::string const& shaderCodeFragment)
 {

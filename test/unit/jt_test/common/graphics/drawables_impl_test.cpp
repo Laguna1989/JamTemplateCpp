@@ -11,6 +11,11 @@ protected:
     std::shared_ptr<jt::DrawableInterface> drawable;
     jt::TextureManagerInterface& tm { getTextureManager() };
     void SetUp() override { drawable = GetParam()->createDrawable(tm); }
+    void TearDown() override
+    {
+        // reset static cam offset just to make sure
+        jt::DrawableImpl::setCamOffset(jt::Vector2f { 0.0f, 0.0f });
+    }
 };
 
 INSTANTIATE_TEST_SUITE_P(DrawableImplTest, DrawableImplTestFixture,
@@ -151,6 +156,7 @@ TEST_P(DrawableImplTestFixture, DrawScaled)
     drawable->update(0.1f);
     jt::DrawableImpl::setCamOffset(jt::Vector2f { 100.0f, 100.0f });
     drawable->draw(getRenderTarget());
+    jt::DrawableImpl::setCamOffset(jt::Vector2f { 0.0f, 0.0f });
 }
 
 TEST_P(DrawableImplTestFixture, InitialRotations)
@@ -171,6 +177,7 @@ TEST_P(DrawableImplTestFixture, DrawRotated)
     drawable->update(0.1f);
     jt::DrawableImpl::setCamOffset(jt::Vector2f { 100.0f, 100.0f });
     drawable->draw(getRenderTarget());
+    jt::DrawableImpl::setCamOffset(jt::Vector2f { 0.0f, 0.0f });
 }
 
 TEST_P(DrawableImplTestFixture, GetFlashColorReturnsWhiteByDefault)
@@ -256,4 +263,96 @@ void main()
 )");
     drawable->update(0.01f);
     ASSERT_NO_THROW(drawable->draw(getRenderTarget()));
+}
+
+TEST_P(DrawableImplTestFixture, InitialOffsetModeIsManual)
+{
+    ASSERT_EQ(drawable->getOffsetMode(), jt::OffsetMode::MANUAL);
+}
+
+TEST_P(DrawableImplTestFixture, SetOffsetModeChangesOffsetMode)
+{
+    drawable->setOffset(jt::OffsetMode::TOPLEFT);
+    ASSERT_EQ(drawable->getOffsetMode(), jt::OffsetMode::TOPLEFT);
+}
+
+TEST_P(DrawableImplTestFixture, OffsetModesOverridesManualOffsetTopLeft)
+{
+    auto const offset = jt::Vector2f { -14.0f, 2.2f };
+    drawable->setOffset(offset);
+    ASSERT_EQ(drawable->getOffset(), offset);
+    drawable->setOffset(jt::OffsetMode::TOPLEFT);
+    auto const expectedOffset = jt::Vector2f { 0.0f, 0.0f };
+    ASSERT_EQ(drawable->getOffset(), expectedOffset);
+}
+
+TEST_P(DrawableImplTestFixture, OffsetModesOverridesManualOffsetCenter)
+{
+    auto const offset = jt::Vector2f { -14.0f, 2.2f };
+    drawable->setOffset(offset);
+    ASSERT_EQ(drawable->getOffset(), offset);
+    drawable->setOffset(jt::OffsetMode::CENTER);
+    auto const expectedOffset = -0.5f
+        * jt::Vector2f { drawable->getLocalBounds().width, drawable->getLocalBounds().height };
+    ASSERT_EQ(drawable->getOffset(), expectedOffset);
+}
+
+TEST_P(DrawableImplTestFixture, SetOffsetChangesOffsetModeToManual)
+{
+    drawable->setOffset(jt::OffsetMode::TOPLEFT);
+    ASSERT_EQ(drawable->getOffsetMode(), jt::OffsetMode::TOPLEFT);
+    drawable->setOffset(jt::Vector2f { -14.0f, 2.2f });
+    ASSERT_EQ(drawable->getOffsetMode(), jt::OffsetMode::MANUAL);
+}
+
+TEST_P(DrawableImplTestFixture, isVisibleByDefault) { ASSERT_TRUE(drawable->isVisible()); }
+
+TEST_P(DrawableImplTestFixture, isVisibleWithScreenSizeHint)
+{
+    drawable->setScreenSizeHint(jt::Vector2f { 100.0f, 100.0f });
+    ASSERT_TRUE(drawable->isVisible());
+}
+
+TEST_P(DrawableImplTestFixture, isNotVisibleLeft)
+{
+    if (GetParam()->skipVisibilityCheck()) {
+        return;
+    }
+    drawable->setScreenSizeHint(jt::Vector2f { 100.0f, 100.0f });
+
+    drawable->setPosition(jt::Vector2f { -drawable->getLocalBounds().width - 5.0f, 0.0f });
+    ASSERT_FALSE(drawable->isVisible());
+}
+
+TEST_P(DrawableImplTestFixture, isNotVisibleRight)
+{
+    if (GetParam()->skipVisibilityCheck()) {
+        return;
+    }
+    drawable->setScreenSizeHint(jt::Vector2f { 100.0f, 100.0f });
+
+    drawable->setPosition(jt::Vector2f { drawable->getLocalBounds().width + 5.0f + 100.0f, 0.0f });
+    ASSERT_FALSE(drawable->isVisible());
+}
+
+TEST_P(DrawableImplTestFixture, isNotVisibleBottom)
+{
+    if (GetParam()->skipVisibilityCheck()) {
+        return;
+    }
+    drawable->setScreenSizeHint(jt::Vector2f { 100.0f, 100.0f });
+
+    drawable->setPosition(jt::Vector2f { 0.0f, drawable->getLocalBounds().height + 5.0f + 100.0f });
+    ASSERT_FALSE(drawable->isVisible());
+}
+
+TEST_P(DrawableImplTestFixture, isNotVisibleTop)
+{
+    if (GetParam()->skipVisibilityCheck()) {
+        return;
+    }
+    drawable->setScreenSizeHint(jt::Vector2f { 100.0f, 100.0f });
+
+    drawable->setPosition(jt::Vector2f { 0.0f, -drawable->getLocalBounds().height - 5.0f });
+    ASSERT_FALSE(drawable->isVisible());
 }

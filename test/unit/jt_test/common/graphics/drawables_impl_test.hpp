@@ -17,6 +17,7 @@ public:
     virtual std::shared_ptr<jt::DrawableInterface> createDrawable(
         jt::TextureManagerInterface& textureManager)
         = 0;
+    virtual bool skipVisibilityCheck() const { return false; }
 };
 
 class SpriteFactory : public DrawableFactoryInterface {
@@ -84,6 +85,8 @@ public:
         t->setScreenSizeHint(jt::Vector2f { 400.0f, 300.0f });
         return t;
     }
+
+    bool skipVisibilityCheck() const override { return true; }
 };
 
 class TileMapFactoryWithoutScreenSizeHint : public DrawableFactoryInterface {
@@ -97,6 +100,8 @@ public:
             loader.loadTilesFromLayer("ground", textureManager));
         return t;
     }
+
+    bool skipVisibilityCheck() const override { return true; }
 };
 
 class LineFactory : public DrawableFactoryInterface {
