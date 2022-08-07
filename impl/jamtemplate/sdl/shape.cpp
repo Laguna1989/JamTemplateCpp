@@ -52,7 +52,7 @@ void Shape::doDraw(std::shared_ptr<jt::RenderTarget> const sptr) const
     SDL_Point const p { static_cast<int>(getOrigin().x), static_cast<int>(getOrigin().y) };
     SDL_SetRenderDrawBlendMode(sptr.get(), getSDLBlendMode());
     setSDLColor(m_color);
-    SDL_RenderCopyEx(sptr.get(), m_text.get(), nullptr, &destRect, getRotation(), &p, flip);
+    SDL_RenderCopyEx(sptr.get(), m_text.get(), nullptr, &destRect, -getRotation(), &p, flip);
 }
 
 void Shape::doDrawFlash(std::shared_ptr<jt::RenderTarget> const sptr) const
@@ -62,7 +62,7 @@ void Shape::doDrawFlash(std::shared_ptr<jt::RenderTarget> const sptr) const
     SDL_Point const p { static_cast<int>(getOrigin().x), static_cast<int>(getOrigin().y) };
     SDL_SetRenderDrawBlendMode(sptr.get(), SDL_BLENDMODE_BLEND);
     setSDLColor(getFlashColor());
-    SDL_RenderCopyEx(sptr.get(), m_text.get(), nullptr, &destRect, getRotation(), &p, flip);
+    SDL_RenderCopyEx(sptr.get(), m_text.get(), nullptr, &destRect, -getRotation(), &p, flip);
 }
 
 void Shape::doDrawShadow(std::shared_ptr<jt::RenderTarget> const sptr) const
@@ -72,7 +72,7 @@ void Shape::doDrawShadow(std::shared_ptr<jt::RenderTarget> const sptr) const
     SDL_Point const p { static_cast<int>(getOrigin().x), static_cast<int>(getOrigin().y) };
     SDL_SetRenderDrawBlendMode(sptr.get(), SDL_BLENDMODE_BLEND);
     setSDLColor(getShadowColor());
-    SDL_RenderCopyEx(sptr.get(), m_text.get(), nullptr, &destRect, getRotation(), &p, flip);
+    SDL_RenderCopyEx(sptr.get(), m_text.get(), nullptr, &destRect, -getRotation(), &p, flip);
 }
 
 void Shape::doUpdate(float /*elapsed*/) { }
