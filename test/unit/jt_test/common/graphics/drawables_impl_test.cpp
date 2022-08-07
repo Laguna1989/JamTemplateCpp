@@ -357,8 +357,6 @@ TEST_P(DrawableImplTestFixture, isNotVisibleTop)
     ASSERT_FALSE(drawable->isVisible());
 }
 
-/////////////////////////////////
-
 TEST_P(DrawableImplTestFixture, InitialOriginModeIsManual)
 {
     ASSERT_EQ(drawable->getOriginMode(), jt::OriginMode::MANUAL);

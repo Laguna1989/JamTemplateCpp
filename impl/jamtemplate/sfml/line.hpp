@@ -31,7 +31,6 @@ private:
     jt::Vector2f m_lineVector;
     jt::Color m_color;
     jt::Vector2f m_position;
-    jt::Vector2f m_origin;
     jt::Vector2f m_scale { 1.0f, 1.0f };
 
     void doDraw(std::shared_ptr<jt::RenderTarget> const sptr) const override;
