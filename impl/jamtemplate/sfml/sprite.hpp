@@ -2,10 +2,10 @@
 #define JAMTEMPLATE_SPRITE_HPP
 
 #include <color/color.hpp>
+#include <drawable_impl_sfml.hpp>
 #include <render_target.hpp>
 #include <texture_manager_interface.hpp>
 #include <SFML/Graphics.hpp>
-#include <drawable_impl_sfml.hpp>
 #include <memory>
 #include <string>
 
@@ -35,9 +35,6 @@ public:
 
     void setScale(jt::Vector2f const& scale) override;
     jt::Vector2f getScale() const override;
-
-    void setOrigin(jt::Vector2f const& origin) override;
-    jt::Vector2f getOrigin() const override;
 
     // WARNING: This function is slow, because it needs to copy
     // graphics memory to ram first.

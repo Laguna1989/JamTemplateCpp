@@ -70,14 +70,6 @@ jt::Rectf Sprite::getLocalBounds() const
 void Sprite::setScale(jt::Vector2f const& scale) { m_scale = scale; }
 jt::Vector2f Sprite::getScale() const { return m_scale; }
 
-void Sprite::setOrigin(jt::Vector2f const& origin)
-{
-    m_origin = origin;
-    m_offsetFromOrigin = -1.0f * origin;
-}
-
-jt::Vector2f Sprite::getOrigin() const { return m_origin; }
-
 jt::Color Sprite::getColorAtPixel(jt::Vector2u pixelPos) const
 {
     if (!m_image) {
@@ -111,7 +103,7 @@ void Sprite::doDraw(std::shared_ptr<jt::RenderTarget> const sptr) const
     SDL_Rect const sourceRect = getSourceRect();
     SDL_Rect const destRect = getDestRect();
     auto const flip = jt::getFlipFromScale(m_scale);
-    SDL_Point const p { static_cast<int>(m_origin.x), static_cast<int>(m_origin.y) };
+    SDL_Point const p { static_cast<int>(getOrigin().x), static_cast<int>(getOrigin().y) };
     SDL_SetRenderDrawBlendMode(sptr.get(), SDL_BLENDMODE_BLEND);
     setSDLColor(m_color);
     SDL_RenderCopyEx(sptr.get(), m_text.get(), &sourceRect, &destRect, -getRotation(), &p, flip);
@@ -122,7 +114,7 @@ void Sprite::doDrawShadow(std::shared_ptr<jt::RenderTarget> const sptr) const
     SDL_Rect const sourceRect = getSourceRect();
     SDL_Rect const destRect = getDestRect(getShadowOffset());
     auto const flip = jt::getFlipFromScale(m_scale);
-    SDL_Point const p { static_cast<int>(m_origin.x), static_cast<int>(m_origin.y) };
+    SDL_Point const p { static_cast<int>(getOrigin().x), static_cast<int>(getOrigin().y) };
     SDL_SetRenderDrawBlendMode(sptr.get(), SDL_BLENDMODE_BLEND);
     setSDLColor(getShadowColor());
     SDL_RenderCopyEx(sptr.get(), m_text.get(), &sourceRect, &destRect, -getRotation(), &p, flip);
@@ -133,7 +125,7 @@ void Sprite::doDrawFlash(std::shared_ptr<jt::RenderTarget> const sptr) const
     SDL_Rect const sourceRect = getSourceRect();
     SDL_Rect const destRect = getDestRect();
     auto const flip = jt::getFlipFromScale(m_scale);
-    SDL_Point const p { static_cast<int>(m_origin.x), static_cast<int>(m_origin.y) };
+    SDL_Point const p { static_cast<int>(getOrigin().x), static_cast<int>(getOrigin().y) };
     SDL_SetRenderDrawBlendMode(sptr.get(), SDL_BLENDMODE_BLEND);
     SDL_SetTextureColorMod(
         m_textFlash.get(), getFlashColor().r, getFlashColor().g, getFlashColor().b);
@@ -146,6 +138,7 @@ void Sprite::doRotate(float /*rot*/) { }
 
 SDL_Rect Sprite::getDestRect(jt::Vector2f const& positionOffset) const
 {
+    m_offsetFromOrigin = -1.0f * getOrigin();
     // std::cout << "Sprite.CamOffset.x " << getCamOffset().x << std::endl;
     auto const pos = m_position + getShakeOffset() + getOffset() + getCamOffset() + positionOffset
         + m_offsetFromOrigin;

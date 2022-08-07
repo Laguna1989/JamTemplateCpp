@@ -38,6 +38,11 @@ public:
     OffsetMode getOffsetMode() const override;
     void setOffset(jt::OffsetMode offset) override;
 
+    void setOrigin(Vector2f const& origin) override;
+    void setOrigin(jt::OriginMode origin) override;
+    OriginMode getOriginMode() const override;
+    Vector2f getOrigin() const override;
+
     void setRotation(float rot) override;
     float getRotation() const override;
 
@@ -79,7 +84,10 @@ private:
     bool m_hasBeenUpdated { false };
 
     jt::OffsetMode m_offsetMode { jt::OffsetMode::MANUAL };
-    jt::Vector2f m_offset { 0, 0 };
+    jt::Vector2f m_offset { 0.0f, 0.0f };
+
+    jt::OriginMode m_originMode { jt::OriginMode::MANUAL };
+    jt::Vector2f m_origin { 0.0f, 0.0f };
 
     jt::BlendMode m_blendMode { jt::BlendMode::ALPHA };
 

@@ -31,6 +31,8 @@ public:
 
     MOCK_METHOD(void, setOrigin, (jt::Vector2f const&), (override));
     MOCK_METHOD(jt::Vector2f, getOrigin, (), (const, override));
+    MOCK_METHOD(void, setOrigin,(jt::OriginMode), (override));
+    MOCK_METHOD(jt::OriginMode, getOriginMode,(), (const, override));
 
     MOCK_METHOD(jt::Vector2f, getOffset, (), (const, override));
     MOCK_METHOD(void, setOffset, (jt::Vector2f const&), (override));

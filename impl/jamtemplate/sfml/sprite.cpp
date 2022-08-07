@@ -38,14 +38,6 @@ void jt::Sprite::setScale(jt::Vector2f const& scale)
 
 jt::Vector2f jt::Sprite::getScale() const { return fromLib(m_sprite.getScale()); }
 
-void jt::Sprite::setOrigin(jt::Vector2f const& origin)
-{
-    m_sprite.setOrigin(toLib(origin));
-    m_flashSprite.setOrigin(toLib(origin));
-}
-
-jt::Vector2f jt::Sprite::getOrigin() const { return fromLib(m_sprite.getOrigin()); }
-
 // WARNING: This function is slow, because it needs to copy
 // graphics memory to ram first.
 jt::Color jt::Sprite::getColorAtPixel(jt::Vector2u pixelPos) const
@@ -72,6 +64,7 @@ void jt::Sprite::doUpdate(float /*elapsed*/)
 {
     auto const pos = m_position + getShakeOffset() + getOffset() + getCamOffset();
     m_sprite.setPosition(pos.x, pos.y);
+    m_sprite.setOrigin(getOrigin().x, getOrigin().y);
     m_flashSprite.setPosition(pos.x, pos.y);
     m_flashSprite.setColor(toLib(getFlashColor()));
 }
