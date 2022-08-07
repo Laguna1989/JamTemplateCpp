@@ -52,12 +52,16 @@ TEST_F(TilemapTileLayerTest, GetGetOriginReturnsDefaultConstructedVector)
 
 TEST_F(TilemapTileLayerTest, GetGlobalBoundsReturnsDefaultConstructedRect)
 {
-    ASSERT_EQ(tileLayer->getGlobalBounds(), jt::Rectf {});
+    jt::Rectf const expectedRect { 0.0f, 0.0f, std::numeric_limits<float>::max(),
+        std::numeric_limits<float>::max() };
+    ASSERT_EQ(tileLayer->getGlobalBounds(), expectedRect);
 }
 
 TEST_F(TilemapTileLayerTest, GetLocalBoundsReturnsDefaultConstructedRect)
 {
-    ASSERT_EQ(tileLayer->getLocalBounds(), jt::Rectf {});
+    jt::Rectf const expectedRect { 0.0f, 0.0f, std::numeric_limits<float>::max(),
+        std::numeric_limits<float>::max() };
+    ASSERT_EQ(tileLayer->getLocalBounds(), expectedRect);
 }
 
 TEST(TilemapLoaderTileson, ParseInvalidFile)
