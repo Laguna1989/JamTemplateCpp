@@ -77,6 +77,8 @@ protected:
     jt::Vector2f getCamOffset() const;
     jt::Vector2f m_screenSizeHint { 0.0f, 0.0f };
 
+    virtual void setOriginInternal(jt::Vector2f const& origin) { }
+
 private:
     static jt::Vector2f m_CamOffset;
     bool m_ignoreCamMovement { false };

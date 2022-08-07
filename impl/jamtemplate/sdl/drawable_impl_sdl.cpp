@@ -15,3 +15,8 @@ SDL_BlendMode jt::DrawableImplSdl::getSDLBlendMode() const
         return SDL_BLENDMODE_MOD;
     }
 }
+
+void jt::DrawableImplSdl::setOriginInternal(jt::Vector2f const& origin)
+{
+    m_offsetFromOrigin = -1.0f * origin;
+}

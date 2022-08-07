@@ -62,9 +62,6 @@ public:
     virtual void setScale(jt::Vector2f const& scale) override;
     virtual jt::Vector2f getScale() const override;
 
-    virtual void setOrigin(jt::Vector2f const& origin) override;
-    virtual jt::Vector2f getOrigin() const override;
-
     [[deprecated("Currently only implemented for SFML")]] void setCustomShader(
         std::string const& shaderCodeVertex, std::string const& shaderCodeFragment) override;
 

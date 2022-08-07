@@ -64,7 +64,6 @@ void jt::Sprite::doUpdate(float /*elapsed*/)
 {
     auto const pos = m_position + getShakeOffset() + getOffset() + getCamOffset();
     m_sprite.setPosition(pos.x, pos.y);
-    m_sprite.setOrigin(getOrigin().x, getOrigin().y);
     m_flashSprite.setPosition(pos.x, pos.y);
     m_flashSprite.setColor(toLib(getFlashColor()));
 }
@@ -106,4 +105,10 @@ void jt::Sprite::doRotate(float rot)
 {
     m_sprite.setRotation(-rot);
     m_flashSprite.setRotation(-rot);
+}
+
+void jt::Sprite::setOriginInternal(jt::Vector2f const& origin)
+{
+    m_sprite.setOrigin(origin.x, origin.y);
+    m_flashSprite.setOrigin(origin.x, origin.y);
 }

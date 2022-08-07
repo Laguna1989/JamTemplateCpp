@@ -86,8 +86,7 @@ public:
     virtual void setScale(jt::Vector2f const& scale) override;
     virtual jt::Vector2f getScale() const override;
 
-    void setOrigin(jt::Vector2f const& origin) override;
-    jt::Vector2f getOrigin() const override;
+    void setOriginInternal(jt::Vector2f const& origin) override;
 
     void setShadowActive(bool active) override;
 

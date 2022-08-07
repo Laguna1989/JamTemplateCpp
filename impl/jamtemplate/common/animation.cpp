@@ -208,18 +208,13 @@ jt::Vector2f jt::Animation::getScale() const
     return getCurrentSprite(m_frames, m_currentAnimName, m_currentIdx)->getScale();
 }
 
-void jt::Animation::setOrigin(jt::Vector2f const& origin)
+void jt::Animation::setOriginInternal(jt::Vector2f const& origin)
 {
     for (auto& kvp : m_frames) {
         for (auto const& sptr : kvp.second) {
             sptr->setOrigin(origin);
         }
     }
-}
-
-jt::Vector2f jt::Animation::getOrigin() const
-{
-    return getCurrentSprite(m_frames, m_currentAnimName, m_currentIdx)->getOrigin();
 }
 
 void jt::Animation::setShadowActive(bool active)

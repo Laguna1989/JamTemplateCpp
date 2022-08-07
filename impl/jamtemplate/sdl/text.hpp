@@ -41,10 +41,6 @@ public:
 
     virtual jt::Vector2f getScale() const override;
 
-    virtual void setOrigin(jt::Vector2f const& origin) override;
-
-    virtual jt::Vector2f getOrigin() const override;
-
     void setTextAlign(TextAlign ta);
     TextAlign getTextAlign() const;
 
@@ -56,9 +52,7 @@ private:
 
     jt::Vector2f m_position { 0, 0 };
     jt::Color m_color { jt::colors::White };
-    jt::Vector2f m_origin { 0.0f, 0.0f };
     jt::Vector2f m_scale { 1.0f, 1.0f };
-    jt::Vector2f m_offsetFromOrigin { 0.0f, 0.0f };
 
     // optimization, so the text rendering logic does not have to happen in every frame, but only
     // when the text changes.

@@ -44,6 +44,7 @@ public:
 
     // DO NOT CALL THIS FROM GAME CODE!
     sf::Sprite getSFSprite() { return m_sprite; }
+    void setOriginInternal(jt::Vector2f const& origin) override;
 
 private:
     mutable sf::Sprite m_sprite;

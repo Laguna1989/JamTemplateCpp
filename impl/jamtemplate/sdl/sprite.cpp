@@ -138,7 +138,6 @@ void Sprite::doRotate(float /*rot*/) { }
 
 SDL_Rect Sprite::getDestRect(jt::Vector2f const& positionOffset) const
 {
-    m_offsetFromOrigin = -1.0f * getOrigin();
     // std::cout << "Sprite.CamOffset.x " << getCamOffset().x << std::endl;
     auto const pos = m_position + getShakeOffset() + getOffset() + getCamOffset() + positionOffset
         + m_offsetFromOrigin;

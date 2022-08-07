@@ -118,8 +118,6 @@ void jt::Bar::setScale(jt::Vector2f const& scale)
 
 jt::Vector2f jt::Bar::getScale() const { return m_shapeFull->getScale(); }
 
-void jt::Bar::setOrigin(jt::Vector2f const& origin) { m_shapeFull->setOrigin(origin); }
-jt::Vector2f jt::Bar::getOrigin() const { return m_shapeFull->getOrigin(); }
 void jt::Bar::setCustomShader(
     std::string const& shaderCodeVertex, std::string const& shaderCodeFragment)
 {

@@ -64,13 +64,6 @@ jt::Rectf Text::getLocalBounds() const
 void Text::setScale(jt::Vector2f const& scale) { m_scale = scale; }
 jt::Vector2f Text::getScale() const { return m_scale; }
 
-void Text::setOrigin(jt::Vector2f const& origin)
-{
-    m_origin = origin;
-    m_offsetFromOrigin = -1.0f * origin;
-}
-jt::Vector2f Text::getOrigin() const { return m_origin; }
-
 void Text::setTextAlign(Text::TextAlign ta)
 {
     if (m_textAlign != ta) {
@@ -88,7 +81,7 @@ void Text::doUpdate(float /*elapsed*/)
 void Text::doDrawShadow(std::shared_ptr<jt::RenderTarget> const sptr) const
 {
     auto const destRect = getDestRect(getShadowOffset());
-    SDL_Point const p { static_cast<int>(m_origin.x), static_cast<int>(m_origin.y) };
+    SDL_Point const p { static_cast<int>(getOrigin().x), static_cast<int>(getOrigin().y) };
 
     auto const flip = jt::getFlipFromScale(m_scale);
     auto col = getShadowColor();
@@ -100,21 +93,21 @@ void Text::doDrawShadow(std::shared_ptr<jt::RenderTarget> const sptr) const
 void Text::doDraw(std::shared_ptr<jt::RenderTarget> const sptr) const
 {
     auto const destRect = getDestRect();
-    SDL_Point const p { static_cast<int>(m_origin.x), static_cast<int>(m_origin.y) };
+    SDL_Point const p { static_cast<int>(getOrigin().x), static_cast<int>(getOrigin().y) };
 
-    auto const flip = jt::getFlipFromScale(m_scale);
     setSDLColor(getColor());
-    SDL_RenderCopyEx(sptr.get(), m_textTexture.get(), nullptr, &destRect, -getRotation(), &p, flip);
+    SDL_RenderCopyEx(sptr.get(), m_textTexture.get(), nullptr, &destRect, -getRotation(), &p,
+        jt::getFlipFromScale(m_scale));
 }
 
 void Text::doDrawFlash(std::shared_ptr<jt::RenderTarget> const sptr) const
 {
     auto const destRect = getDestRect();
-    SDL_Point const p { static_cast<int>(m_origin.x), static_cast<int>(m_origin.y) };
+    SDL_Point const p { static_cast<int>(getOrigin().x), static_cast<int>(getOrigin().y) };
 
-    auto const flip = jt::getFlipFromScale(m_scale);
     setSDLColor(getFlashColor());
-    SDL_RenderCopyEx(sptr.get(), m_textTexture.get(), nullptr, &destRect, -getRotation(), &p, flip);
+    SDL_RenderCopyEx(sptr.get(), m_textTexture.get(), nullptr, &destRect, -getRotation(), &p,
+        jt::getFlipFromScale(m_scale));
 }
 
 void Text::doRotate(float /*rot*/)

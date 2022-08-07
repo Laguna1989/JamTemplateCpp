@@ -27,9 +27,6 @@ public:
     void setScale(jt::Vector2f const& scale) override;
     jt::Vector2f getScale() const override;
 
-    void setOrigin(jt::Vector2f const& origin) override;
-    jt::Vector2f getOrigin() const override;
-
 private:
     jt::Vector2f m_lineVector;
     jt::Color m_color;

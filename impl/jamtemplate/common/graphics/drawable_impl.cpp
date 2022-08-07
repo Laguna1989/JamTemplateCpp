@@ -55,6 +55,7 @@ void jt::DrawableImpl::setOrigin(jt::Vector2f const& origin)
 {
     m_origin = origin;
     m_originMode = jt::OriginMode::MANUAL;
+    setOriginInternal(m_origin);
 }
 
 jt::OriginMode jt::DrawableImpl::getOriginMode() const { return m_originMode; }
@@ -67,6 +68,7 @@ void jt::DrawableImpl::setOrigin(jt::OriginMode origin)
     } else if (m_originMode == OriginMode::CENTER) {
         m_origin = jt::Vector2f { 0.5f * getLocalBounds().width, 0.5f * getLocalBounds().height };
     }
+    setOriginInternal(m_origin);
 }
 jt::Vector2f jt::DrawableImpl::getOrigin() const { return m_origin; }
 
