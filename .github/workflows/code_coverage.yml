@@ -35,7 +35,7 @@ jobs:
         id: generate_test_report
         working-directory: ${{github.workspace}}/build/test/unit/jt_test
         shell: cmd
-        run: OpenCppCoverage.exe --export_type cobertura:JamTemplateCoverage.xml --sources ${{github.workspace}}\impl --excluded_sources ${{github.workspace}}\test\* --excluded_sources ${{github.workspace}}\build\* --excluded_sources ${{github.workspace}}\ext\* ${{github.workspace}}\build\test\unit\jt_test\Debug\jt_tests.exe
+        run: OpenCppCoverage.exe --export_type cobertura:JamTemplateCoverage.xml --sources ${{github.workspace}}\impl --excluded_sources ${{github.workspace}}\test\* --excluded_sources ${{github.workspace}}\build\* --excluded_sources ${{github.workspace}}\ext\* --excluded_sources ${{github.workspace}}\impl\jamtemplate\common\log\console.* ${{github.workspace}}\build\test\unit\jt_test\Debug\jt_tests.exe
 
       - name: Upload Report to Codecov
         uses: codecov/codecov-action@v2
