@@ -13,16 +13,17 @@ void PlayerCharacter::doCreate()
 {
     b2FixtureDef fixtureDef;
     b2PolygonShape boxCollider {};
-    boxCollider.SetAsBox(12, 12);
+    boxCollider.SetAsBox(8, 11);
     fixtureDef.shape = &boxCollider;
     getB2Body()->CreateFixture(&fixtureDef);
 
     m_animation = std::make_shared<jt::Animation>();
-    m_animation->add("assets/demos/inventory/chars.png", "idle", jt::Vector2u { 24, 24 }, { 0, 1 },
-        0.2f, textureManager());
+    m_animation->add("assets/demos/inventory/chars.png", "idle", jt::Vector2u { 24, 24 },
+        { 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 0, 1 }, 0.25f, textureManager());
 
     m_animation->play("idle");
     m_animation->setPosition(jt::Vector2f { 5 * 24, 7 * 24 });
+    m_animation->setOrigin(jt::OriginMode::CENTER);
 
     m_inventory->setGameInstance(getGame());
     m_charsheet->setGameInstance(getGame());
@@ -49,16 +50,12 @@ void PlayerCharacter::doUpdate(float const elapsed)
 
     setVelocity(newVelocity);
 
-    m_animation->setPosition(getPosition() - jt::Vector2f { 12, 12 });
+    m_animation->setPosition(getPosition());
     m_animation->update(elapsed);
 
-    if (newVelocity.x > 0) {
-        //        m_animation->setScale({ -1.0f, 0.0 });
-        //        m_animation->setOffset({ 24, 0 });
-    } else {
-        //        m_animation->setScale({ 1.0f, 0.0 });
-        //        m_animation->setOffset({ 0.0f, 0 });
-    }
+    float xscale = ((newVelocity.x < 0.0f) ? 1.0f : -1.0f);
+
+    m_animation->setScale(jt::Vector2f { xscale, 1.0f });
 
     m_inventory->update(elapsed);
     m_charsheet->update(elapsed);
