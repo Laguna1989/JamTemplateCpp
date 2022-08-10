@@ -72,12 +72,13 @@ void StateInventory::doInternalCreate()
 void StateInventory::createWorldItems()
 {
     m_worldItems = std::make_shared<jt::ObjectGroup<WorldItem>>();
-
-    for (auto it : m_objectsLayer->getObjects()) {
-        if (it.type == "item") {
-            auto const refId = it.properties.strings.at("referenceid");
-            spawnWorldItem(refId, it.position);
+    std::cout << "createWorldItems\n";
+    for (auto const& it : m_objectsLayer->getObjects()) {
+        if (it.type != "item") {
+            //        continue; // once tileson supports the class attribute.
         }
+        auto const refId = it.properties.strings.at("referenceid");
+        spawnWorldItem(refId, it.position);
     }
     add(m_worldItems);
 }

@@ -16,3 +16,5 @@ void WorldItem::doDraw() const { m_drawable->draw(renderTarget()); }
 
 std::shared_ptr<jt::DrawableInterface> WorldItem::getDrawable() { return m_drawable; }
 std::string WorldItem::getRefId() const { return m_refId; }
+
+std::string WorldItem::getName() const { return m_refId; }

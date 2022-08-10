@@ -14,6 +14,8 @@ public:
 
     std::string getRefId() const;
 
+    std::string getName() const override;
+
 private:
     std::shared_ptr<jt::DrawableInterface> m_drawable;
 
