@@ -9,6 +9,7 @@ namespace jt {
 namespace pathfinder {
 class Node : public NodeInterface {
 public:
+    void addNeighbour(std::weak_ptr<NodeInterface> other) override;
     std::vector<std::weak_ptr<NodeInterface>> const& getNeighbours() override;
 
     void visit() override;
@@ -18,8 +19,6 @@ public:
     jt::Vector2u const& getTilePosition() const override;
 
     void setPosition(jt::Vector2u pos);
-
-    void addNeighbour(std::weak_ptr<NodeInterface> other) override;
 
     float getValue() override;
     void setValue(float value) override;

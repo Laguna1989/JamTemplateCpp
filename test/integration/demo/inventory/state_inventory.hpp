@@ -7,6 +7,7 @@
 #include <inventory/character_sheet_imgui.hpp>
 #include <inventory/inventory_interface.hpp>
 #include <inventory/item_repository.hpp>
+#include <inventory/temperature_manager.hpp>
 #include <object_group.hpp>
 #include <tilemap/object_layer.hpp>
 #include <tilemap/tile_layer.hpp>
@@ -29,6 +30,8 @@ class StateInventory : public jt::GameState {
 
     std::shared_ptr<jt::Box2DWorldInterface> m_world { nullptr };
     std::vector<std::shared_ptr<jt::Box2DObject>> m_colliders {};
+
+    std::shared_ptr<TemperatureManager> m_temperatureManager { nullptr };
 
     void createItemRepository();
     void loadTilemap();
