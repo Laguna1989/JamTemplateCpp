@@ -102,12 +102,12 @@ std::vector<jt::tilemap::InfoRect> jt::tilemap::TilesonLoader::loadObjectsFromLa
     return objects;
 }
 
-std::vector<std::shared_ptr<jt::tilemap::TileNode>> jt::tilemap::TilesonLoader::loadNodesFromLayer(
-    std::string const& layerName, jt::TextureManagerInterface& textureManager)
+std::vector<std::shared_ptr<jt::pathfinder::NodeInterface>>
+jt::tilemap::TilesonLoader::loadNodesFromLayer(std::string const& layerName)
 {
     auto& map = m_tilemapManager.getMap(m_fileName);
 
-    std::vector<std::shared_ptr<TileNode>> nodeTiles;
+    std::vector<std::shared_ptr<jt::pathfinder::NodeInterface>> nodes;
 
     for (auto& layer : map->getLayers()) {
         // skip all non-tile layers
@@ -125,32 +125,54 @@ std::vector<std::shared_ptr<jt::tilemap::TileNode>> jt::tilemap::TilesonLoader::
                 isBlocked = blockedProperty->getValue<bool>();
             }
 
-            auto posx = std::get<0>(pos);
-            auto posy = std::get<1>(pos);
-
-            auto const ts = map->getTilesets().at(0).getTileSize();
-            auto color = jt::Color { 1, 1, 1, 100 };
-            if (!isBlocked) {
-                color = jt::Color { 255, 255, 255, 100 };
-            }
-
-            std::shared_ptr<jt::Shape> drawable = jt::dh::createShapeRect(
-                jt::Vector2f { static_cast<float>(ts.x - 1), static_cast<float>(ts.y - 1) }, color,
-                textureManager);
-            jt::Vector2f const positionInPixel
-                = jt::Vector2f { static_cast<float>(ts.x * posx), static_cast<float>(ts.y * posy) };
-            drawable->setPosition(positionInPixel);
+            auto const posx = std::get<0>(pos);
+            auto const posy = std::get<1>(pos);
 
             auto node = std::make_shared<jt::pathfinder::Node>();
             node->setPosition(
                 jt::Vector2u { static_cast<unsigned int>(posx), static_cast<unsigned int>(posy) });
 
-            nodeTiles.emplace_back(
-                std::make_shared<jt::tilemap::TileNode>(drawable, node, isBlocked));
+            node->setTileID(parseSingleTile(tile).id);
+            node->setBlocked(isBlocked);
+            nodes.push_back(node);
         }
+    }
+    return nodes;
+}
+
+std::vector<std::shared_ptr<jt::tilemap::TileNode>>
+jt::tilemap::TilesonLoader::loadTileNodesFromLayer(std::string const& layerName,
+    jt::TextureManagerInterface& textureManager, bool dismissBlockedTiles)
+{
+    auto& map = m_tilemapManager.getMap(m_fileName);
+
+    std::vector<std::shared_ptr<TileNode>> nodeTiles;
+
+    auto const nodes = loadNodesFromLayer(layerName);
+
+    for (auto const& node : nodes) {
+        if (dismissBlockedTiles) {
+            if (node->getBlocked()) {
+                continue;
+            }
+        }
+        auto const ts = map->getTilesets().at(0).getTileSize();
+        auto color = jt::Color { 1, 1, 1, 100 };
+        if (!node->getBlocked()) {
+            color = jt::Color { 255, 255, 255, 100 };
+        }
+        std::shared_ptr<jt::Shape> drawable = jt::dh::createShapeRect(
+            jt::Vector2f { static_cast<float>(ts.x - 1), static_cast<float>(ts.y - 1) }, color,
+            textureManager);
+        jt::Vector2f const positionInPixel
+            = jt::Vector2f { static_cast<float>(ts.x * node->getTilePosition().x),
+                  static_cast<float>(ts.y * node->getTilePosition().y) };
+        drawable->setPosition(positionInPixel);
+        nodeTiles.emplace_back(std::make_shared<jt::tilemap::TileNode>(drawable, node));
     }
     return nodeTiles;
 }
+
 std::tuple<std::vector<jt::tilemap::TileInfo>, std::vector<std::shared_ptr<jt::Sprite>>>
 jt::tilemap::TilesonLoader::loadTilesFromLayer(
     std::string const& layerName, jt::TextureManagerInterface& textureManager)

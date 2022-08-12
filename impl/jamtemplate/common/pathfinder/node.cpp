@@ -31,3 +31,8 @@ void jt::pathfinder::Node::addNeighbour(std::weak_ptr<jt::pathfinder::NodeInterf
 float jt::pathfinder::Node::getValue() { return m_value; }
 
 void jt::pathfinder::Node::setValue(float value) { m_value = value; }
+int jt::pathfinder::Node::getTileID() { return 0; }
+
+void jt::pathfinder::Node::setTileID(int id) { m_tileId = id; }
+bool jt::pathfinder::Node::getBlocked() { return m_isBlocked; }
+void jt::pathfinder::Node::setBlocked(bool blocked) { m_isBlocked = blocked; }

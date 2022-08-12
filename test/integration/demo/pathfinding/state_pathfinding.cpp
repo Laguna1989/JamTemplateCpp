@@ -65,7 +65,7 @@ void StatePathfinding::createTiles()
             node->setPosition(
                 jt::Vector2u { static_cast<unsigned int>(i), static_cast<unsigned int>(j) });
 
-            auto t = std::make_shared<jt::tilemap::TileNode>(drawable, node, false);
+            auto t = std::make_shared<jt::tilemap::TileNode>(drawable, node);
             m_tiles.push_back(t);
         }
     }
