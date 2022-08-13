@@ -25,7 +25,7 @@ void StateTileson::doInternalCreate()
         = std::make_shared<jt::tilemap::ObjectLayer>(loader.loadObjectsFromLayer("objects"));
 
     m_nodeLayer = std::make_shared<jt::tilemap::NodeLayer>(
-        loader.loadNodesFromLayer("ground", textureManager()));
+        loader.loadTileNodesFromLayer("ground", textureManager()));
 
     m_actor = std::make_shared<Actor>();
 

@@ -118,6 +118,15 @@ void StateInventory::loadTilemap()
 
         m_colliders.push_back(collider);
     }
+
+    loadTemperatureManager(loader);
+}
+void StateInventory::loadTemperatureManager(jt::tilemap::TilesonLoader& loader)
+{
+    m_temperatureManager = std::make_shared<TemperatureManager>(
+        loader.loadNodesFromLayer("ground"), loader.loadObjectsFromLayer("temp"));
+
+    add(m_temperatureManager);
 }
 
 void StateInventory::createItemRepository()

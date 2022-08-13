@@ -21,8 +21,11 @@ public:
 
     std::vector<InfoRect> loadObjectsFromLayer(std::string const& layerName);
 
-    std::vector<std::shared_ptr<TileNode>> loadNodesFromLayer(
-        std::string const& layerName, jt::TextureManagerInterface& textureManager);
+    std::vector<std::shared_ptr<TileNode>> loadTileNodesFromLayer(std::string const& layerName,
+        jt::TextureManagerInterface& textureManager, bool dismissBlockedTiles = false);
+
+    std::vector<std::shared_ptr<jt::pathfinder::NodeInterface>> loadNodesFromLayer(
+        std::string const& layerName);
 
     std::tuple<std::vector<TileInfo>, std::vector<std::shared_ptr<jt::Sprite>>> loadTilesFromLayer(
         std::string const& layerName, jt::TextureManagerInterface& textureManager);

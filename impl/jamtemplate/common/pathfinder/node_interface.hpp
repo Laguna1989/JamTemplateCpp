@@ -18,6 +18,9 @@ public:
     virtual jt::Vector2u const& getTilePosition() const = 0;
     virtual float getValue() = 0;
     virtual void setValue(float value) = 0;
+    virtual int getTileID() = 0;
+    virtual void setBlocked(bool blocked) = 0;
+    virtual bool getBlocked() = 0;
 };
 
 } // namespace pathfinder
