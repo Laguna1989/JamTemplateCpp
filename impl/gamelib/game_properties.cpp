@@ -2,18 +2,20 @@
 
 jt::Palette GP::getPalette()
 {
-    return jt::Palette::parseGPL("GIMP Palette\n"
-                                 "#Palette Name: crayon paint\n"
-                                 "#Description: \n"
-                                 "#Colors: 8\n"
-                                 "118\t161\t241\t76a1f1\n"
-                                 "47\t106\t93\t2f6a5d\n"
-                                 "105\t191\t43\t69bf2b\n"
-                                 "251\t247\t182\tfbf7b6\n"
-                                 "233\t142\t51\te98e33\n"
-                                 "160\t48\t48\ta03030\n"
-                                 "21\t18\t18\t151212\n"
-                                 "158\t150\t155\t9e969b");
+    static auto const p = jt::Palette::parseGPL(R"(GIMP Palette
+#Palette Name: Dreamscape8
+#Description: A palette made of low saturation colours to give your art a dreamlike quality. 
+#Colors: 8
+201	204	161	c9cca1
+202	160	90	caa05a
+174	106	71	ae6a47
+139	64	73	8b4049
+84	51	68	543344
+81	82	98	515262
+99	120	125	63787d
+142	160	145	8ea091
+)");
+    return p;
 }
 
 int GP::PhysicVelocityIterations() { return 20; }

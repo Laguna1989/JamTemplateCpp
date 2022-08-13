@@ -59,12 +59,12 @@ void StateMenu::createTextCredits()
     m_text_Credits = jt::dh::createText(renderTarget(),
         "Created by " + GP::AuthorName() + " for " + GP::JamName() + "\n" + GP::JamDate()
             + "\n\nF9 for License Information",
-        16U, GP::getPalette().getColor(4));
+        16U, GP::PaletteFontCredits());
     m_text_Credits->setTextAlign(jt::Text::TextAlign::LEFT);
     m_text_Credits->setPosition({ 10, GP::GetScreenSize().y - 70 });
     m_text_Credits->setShadow(GP::PaletteFontShadow(), jt::Vector2f { 1, 1 });
 
-    m_text_Version = jt::dh::createText(renderTarget(), "", 16U, GP::getPalette().getColor(4));
+    m_text_Version = jt::dh::createText(renderTarget(), "", 16U, GP::PaletteFontCredits());
     if (jt::BuildInfo::gitTagName() != "") {
         m_text_Version->setText(jt::BuildInfo::gitTagName());
     } else {
