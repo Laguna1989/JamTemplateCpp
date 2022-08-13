@@ -95,6 +95,7 @@ void jt::Shape::doUpdate(float /*elapsed*/)
         auto const pos = getPosition() + getShakeOffset() + getOffset() + getCamOffset();
         m_shape->setPosition(pos.x, pos.y);
         m_flashShape->setPosition(pos.x, pos.y);
+        m_flashShape->setFillColor(toLib(getFlashColor()));
     }
 }
 
