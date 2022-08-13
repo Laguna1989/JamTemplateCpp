@@ -63,8 +63,10 @@ void StateScroll::doInternalCreate()
     auto t = std::make_shared<jt::Timer>(1.5f, [this]() { m_anim->shake(0.5f, 15.0f, 0.001f); });
     add(t);
 
-    auto t2
-        = std::make_shared<jt::Timer>(1.5f, [this]() { m_sprite->flash(0.9f, jt::colors::Green); });
+    auto t2 = std::make_shared<jt::Timer>(1.5f, [this]() {
+        m_sprite->flash(0.9f, jt::colors::Green);
+        m_shape1->flash(0.5f, jt::colors::Red);
+    });
     add(t2);
 }
 
