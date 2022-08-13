@@ -1,6 +1,7 @@
 #ifndef JAMTEMPLATE_STATE_INVENTORY_HPP
 #define JAMTEMPLATE_STATE_INVENTORY_HPP
 
+#include "tilemap/tileson_loader.hpp"
 #include <audio/sound.hpp>
 #include <game_state.hpp>
 #include <inventory/character.hpp>
@@ -38,6 +39,7 @@ class StateInventory : public jt::GameState {
     void createWorldItems();
     void pickupItems();
     void spawnWorldItem(std::string const& itemReferenceId, jt::Vector2f const& pos);
+    void loadTemperatureManager(jt::tilemap::TilesonLoader& loader);
 };
 
 #endif // JAMTEMPLATE_STATE_INVENTORY_HPP

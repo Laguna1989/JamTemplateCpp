@@ -1,12 +1,16 @@
 #include "temperature_manager.hpp"
+#include <game_interface.hpp>
 #include <linterp.hpp>
 #include <math_helper.hpp>
+#include <strutils.hpp>
 #include <iostream>
 
 TemperatureManager::TemperatureManager(
-    std::vector<std::shared_ptr<jt::pathfinder::NodeInterface>> nodes)
+    std::vector<std::shared_ptr<jt::pathfinder::NodeInterface>> nodes,
+    std::vector<jt::tilemap::InfoRect> tempObjects)
 {
     for (auto const& node : nodes) {
+
         auto temperatureNode = std::make_shared<TemperatureNode>(node);
         if (node->getBlocked()) {
             temperatureNode->m_throughputFactor = 0.0f;
@@ -15,6 +19,34 @@ TemperatureManager::TemperatureManager(
     }
 
     createNodeConnections();
+    std::map<std::string, std::shared_ptr<TemperatureNode>> sensors;
+    for (auto const& obj : tempObjects) {
+        auto tilePos = jt::Vector2u { static_cast<unsigned int>(obj.position.x / 24.0f),
+            static_cast<unsigned int>(obj.position.y / 24.0f) };
+
+        if (obj.properties.strings.at("type") == "const") {
+            getNodeAt(tilePos)->m_inflow = obj.properties.floats.at("value");
+            std::cout << "spawn const heater\n";
+        } else if (obj.properties.strings.at("type") == "sensor") {
+            sensors[obj.name] = getNodeAt(tilePos);
+        }
+    }
+    for (auto const& obj : tempObjects) {
+        auto tilePos = jt::Vector2u { static_cast<unsigned int>(obj.position.x / 24.0f),
+            static_cast<unsigned int>(obj.position.y / 24.0f) };
+        if (obj.properties.strings.at("type") == "controlled") {
+            std::vector<std::shared_ptr<TemperatureNode>> currentSensors;
+            auto sensorString = obj.properties.strings.at("sensors");
+            auto sensorsVector = strutil::split(sensorString, ",");
+            for (auto& s : sensorsVector) {
+                strutil::trim(s);
+                currentSensors.push_back(sensors[s]);
+            }
+
+            m_controllers.emplace_back(
+                std::make_shared<TemperatureController>(currentSensors, getNodeAt(tilePos)));
+        }
+    }
 }
 void TemperatureManager::createNodeConnections()
 {
@@ -44,7 +76,15 @@ void TemperatureManager::doCreate()
 }
 void TemperatureManager::doUpdate(float const elapsed)
 {
+    if (getGame()->input().keyboard()->justPressed(jt::KeyCode::Num1)) {
+        m_draw = !m_draw;
+    }
     m_shape->update(elapsed);
+
+    for (auto const& c : m_controllers) {
+        c->setInflow();
+    }
+
     for (auto const& n : m_tempNodes) {
         n->m_currentTemp += n->m_inflow * elapsed;
         n->m_newTemp = n->m_currentTemp;
@@ -67,29 +107,20 @@ void TemperatureManager::doUpdate(float const elapsed)
 }
 void TemperatureManager::doDraw() const
 {
+    if (!m_draw) {
+        return;
+    }
     for (auto const& n : m_tempNodes) {
 
         m_shape->setPosition(n->getPosition());
 
         // between 0 and 1
-        float const t = jt::MathHelper::clamp(n->m_currentTemp, -100.0f, 100.0f) / 200.0f + 0.5f;
-        if (n->getTilePosition().x == 3 && n->getTilePosition().y == 3) {
-            n->m_inflow = 200.0f;
-            //            std::cout << n->m_currentTemp << "\t" << t << std::endl;
-        }
+        float const t = jt::MathHelper::clamp(n->m_currentTemp, -50.0f, 50.0f) / 100.0f + 0.5f;
 
-        if (n->getTilePosition().x == 3 && n->getTilePosition().y == 10) {
-            n->m_inflow = -200.0f;
-            //            std::cout << n->m_currentTemp << "\t" << t << std::endl;
-        }
-        //        if (n->getTilePosition().x == 5 && n->getTilePosition().y == 3) {
-        //            //            n->m_inflow = 80.0f;
-        //            std::cout << n->m_currentTemp << "\t" << t << std::endl;
-        //        }
         std::uint8_t const r = static_cast<std::uint8_t>(jt::Lerp::linear(50.0f, 250.0f, t));
         std::uint8_t const g = static_cast<std::uint8_t>(jt::Lerp::linear(150.0f, 150.0f, t));
         std::uint8_t const b = static_cast<std::uint8_t>(jt::Lerp::linear(250.0f, 50.0f, t));
-        std::uint8_t const a = 100u;
+        std::uint8_t const a = 200u;
         m_shape->setColor(jt::Color { r, g, b, a });
 
         m_shape->update(0.1f);
@@ -123,4 +154,23 @@ void TemperatureNode::addNeighbour(std::weak_ptr<TemperatureNode> other)
 std::vector<std::weak_ptr<TemperatureNode>> const& TemperatureNode::getNeighbours()
 {
     return m_neighbours;
+}
+TemperatureController::TemperatureController(
+    std::vector<std::shared_ptr<TemperatureNode>> const& sensors,
+    std::shared_ptr<TemperatureNode> node)
+{
+    m_sensors = sensors;
+    m_node = node;
+}
+
+void TemperatureController::setInflow() const
+{
+    float sum = 0.0f;
+    for (auto const& n : m_sensors) {
+        sum += n->m_currentTemp;
+    }
+
+    float const averageTemperature = sum / m_sensors.size();
+    m_node->m_inflow = -averageTemperature * 20.0f;
+    std::cout << m_node->m_inflow << std::endl;
 }
