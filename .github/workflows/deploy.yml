@@ -84,8 +84,6 @@ jobs:
 
   WebSDL:
     runs-on: ubuntu-latest
-    env:
-      EMCC_CCACHE: 1
     steps:
       - name: Set up cmake
         uses: jwlawson/actions-setup-cmake@v1.12
@@ -105,16 +103,9 @@ jobs:
 
       - uses: actions/checkout@v2
 
-      - name: ccache
-        uses: hendrikmuhs/ccache-action@v1.2
-        with:
-          key: ${{ github.job }}-${{ matrix.os }}-${{ matrix.type }}
-          max-size: 100M
-
       - name: CMake
         run: |
           emcmake cmake -B ${{github.workspace}}/build \
-          -DCMAKE_C_COMPILER_LAUNCHER=ccache -DCMAKE_CXX_COMPILER_LAUNCHER=ccache \
           -DCMAKE_BUILD_TYPE=Release \
           -DJT_ENABLE_DEMOS=OFF \
           -DJT_ENABLE_UNITTESTS=OFF \
@@ -125,7 +116,7 @@ jobs:
         working-directory: ${{github.workspace}}/build
         run: emmake make
 
-      - name: Copy files
+      - name: Copy index.html
         run: cp ${{github.workspace}}/index.html ${{github.workspace}}/build/impl/game/index.html
 
       - name: Copy files
@@ -142,14 +133,14 @@ jobs:
       - name: Create Archive
         uses: thedoctor0/zip-release@master
         with:
-          directory: ${{github.workspace}}/release
+          directory: ${{github.workspace}}/release/release_web
           type: 'zip'
           filename: 'release_web.zip'
 
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
-          files: ${{github.workspace}}/release/release_web.zip
+          files: ${{github.workspace}}/release/release_web/release_web.zip
 
   Mac_SFML:
     runs-on: macos-latest
