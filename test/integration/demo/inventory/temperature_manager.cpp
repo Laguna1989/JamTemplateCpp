@@ -172,5 +172,4 @@ void TemperatureController::setInflow() const
 
     float const averageTemperature = sum / m_sensors.size();
     m_node->m_inflow = -averageTemperature * 20.0f;
-    std::cout << m_node->m_inflow << std::endl;
 }
