@@ -68,6 +68,9 @@ void StateScroll::doInternalCreate()
         m_shape1->flash(0.5f, jt::colors::Red);
     });
     add(t2);
+
+    auto t3 = std::make_shared<jt::Timer>(1.2f, [this]() { m_sprite->flicker(0.9f, 0.05f); });
+    add(t3);
 }
 
 void StateScroll::doInternalUpdate(float const elapsed)

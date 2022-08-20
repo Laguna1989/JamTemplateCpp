@@ -13,9 +13,16 @@ void jt::DrawableImpl::draw(std::shared_ptr<jt::RenderTarget> sptr) const
         return;
     }
     if (isVisible()) {
-        drawShadow(sptr);
-        doDraw(sptr);
-        drawFlash(sptr);
+        if (!doesFlickerAffectsShadow()) {
+            drawShadow(sptr);
+        }
+        if (allowDrawFromFlicker()) {
+            if (doesFlickerAffectsShadow()) {
+                drawShadow(sptr);
+            }
+            doDraw(sptr);
+            drawFlash(sptr);
+        }
     }
 }
 
@@ -26,10 +33,16 @@ void jt::DrawableImpl::shake(float t, float strength, float shakeInterval)
     doShake(t, strength, shakeInterval);
 }
 
+void jt::DrawableImpl::flicker(float duration, float interval, bool affectShadow)
+{
+    doFlicker(duration, interval, affectShadow);
+}
+
 void jt::DrawableImpl::update(float elapsed)
 {
     updateShake(elapsed);
     updateFlash(elapsed);
+    updateFlicker(elapsed);
     doUpdate(elapsed);
     m_hasBeenUpdated = true;
 }
