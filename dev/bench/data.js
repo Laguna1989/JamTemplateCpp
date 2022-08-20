@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1660455301487,
+  "lastUpdate": 1661011849899,
   "repoUrl": "https://github.com/Laguna1989/JamTemplateCpp",
   "entries": {
     "Benchmark": [
@@ -8082,6 +8082,84 @@ window.BENCHMARK_DATA = {
             "value": 3.918449747191113,
             "unit": "ms/iter",
             "extra": "iterations: 178\ncpu: 3.9182348314606674 ms\nthreads: 1"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "laguna.ws@gmail.com",
+            "name": "Laguna1989",
+            "username": "Laguna1989"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "e99d517238480f8799add907a32857762ea23bb4",
+          "message": "Merge pull request #237 from Laguna1989/FEATURE_DrawableFlicker\n\nAdd Flicker effect to drawables",
+          "timestamp": "2022-08-20T18:07:44+02:00",
+          "tree_id": "b9e8596dac9ed9d806fc1acb7bb353d7c32e13e0",
+          "url": "https://github.com/Laguna1989/JamTemplateCpp/commit/e99d517238480f8799add907a32857762ea23bb4"
+        },
+        "date": 1661011848823,
+        "tool": "googlecpp",
+        "benches": [
+          {
+            "name": "BM_UpdateDrawablePositions",
+            "value": 3.9634173259669194,
+            "unit": "ms/iter",
+            "extra": "iterations: 181\ncpu: 3.9627513812154698 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GetAllCommands",
+            "value": 0.36158307541322526,
+            "unit": "ms/iter",
+            "extra": "iterations: 1936\ncpu: 0.36145878099173545 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_LoggerLogWithoutTarget",
+            "value": 0.903054065976746,
+            "unit": "ms/iter",
+            "extra": "iterations: 773\ncpu: 0.9029655886157826 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_LoggerLogWithCoutTargetSetToOff",
+            "value": 0.9090838554687286,
+            "unit": "ms/iter",
+            "extra": "iterations: 768\ncpu: 0.9087359374999998 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_UpdateObjectGroup",
+            "value": 0.05845049716240877,
+            "unit": "ms/iter",
+            "extra": "iterations: 11982\ncpu: 0.05844312301786016 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_UpdateSpatialObjectGrid",
+            "value": 0.3897265298342603,
+            "unit": "ms/iter",
+            "extra": "iterations: 1810\ncpu: 0.38956386740331506 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_StartGame",
+            "value": 0.00322078758938853,
+            "unit": "ms/iter",
+            "extra": "iterations: 216331\ncpu: 0.003220333655370706 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_RefineTilemapCollisions",
+            "value": 0.21847527658914886,
+            "unit": "ms/iter",
+            "extra": "iterations: 3225\ncpu: 0.21843761240310056 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GamestateWithTweeningShapes",
+            "value": 4.093411582822127,
+            "unit": "ms/iter",
+            "extra": "iterations: 163\ncpu: 4.092247239263801 ms\nthreads: 1"
           }
         ]
       }
