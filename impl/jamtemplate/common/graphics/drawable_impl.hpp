@@ -3,6 +3,7 @@
 
 #include <graphics/drawable_interface.hpp>
 #include <graphics/flash_impl.hpp>
+#include <graphics/flicker_impl.hpp>
 #include <graphics/rotation_impl.hpp>
 #include <graphics/shadow_impl.hpp>
 #include <graphics/shake_impl.hpp>
@@ -15,9 +16,9 @@ namespace jt {
 class DrawableImpl :
     //
     public DrawableInterface,
-    // TODO no mix in actually needed. use member variables instead
     // implementation of flash, rotation, shadow and shake functionality via mix-in
     private jt::FlashImpl,
+    private jt::FlickerImpl,
     private jt::RotationImpl,
     private jt::ShadowImpl,
     private jt::ShakeImpl {
@@ -30,7 +31,7 @@ public:
 
     void flash(float t, jt::Color col = jt::colors::White) override;
     void shake(float t, float strength, float shakeInterval = 0.05f) override;
-
+    void flicker(float duration, float interval = 0.05f, bool affectShadow = false) override;
     void update(float elapsed) override;
 
     jt::Vector2f getOffset() const override;

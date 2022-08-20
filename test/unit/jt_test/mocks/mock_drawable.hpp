@@ -14,6 +14,8 @@ public:
     MOCK_METHOD(void, flash, (float, jt::Color), (override));
     MOCK_METHOD(void, shake, (float, float, float), (override));
 
+    MOCK_METHOD(void, flicker, (float, float, bool), (override));
+
     MOCK_METHOD(void, setColor, (jt::Color const&), (override));
     MOCK_METHOD(jt::Color, getColor, (), (const, override));
 
@@ -31,8 +33,8 @@ public:
 
     MOCK_METHOD(void, setOrigin, (jt::Vector2f const&), (override));
     MOCK_METHOD(jt::Vector2f, getOrigin, (), (const, override));
-    MOCK_METHOD(void, setOrigin,(jt::OriginMode), (override));
-    MOCK_METHOD(jt::OriginMode, getOriginMode,(), (const, override));
+    MOCK_METHOD(void, setOrigin, (jt::OriginMode), (override));
+    MOCK_METHOD(jt::OriginMode, getOriginMode, (), (const, override));
 
     MOCK_METHOD(jt::Vector2f, getOffset, (), (const, override));
     MOCK_METHOD(void, setOffset, (jt::Vector2f const&), (override));
@@ -58,7 +60,7 @@ public:
     MOCK_METHOD(void, setBlendMode, (jt::BlendMode), (override));
     MOCK_METHOD(jt::BlendMode, getBlendMode, (), (const, override));
 
-    MOCK_METHOD(bool, isVisible,(), (const, override));
+    MOCK_METHOD(bool, isVisible, (), (const, override));
 };
 
 #endif
