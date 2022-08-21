@@ -1,7 +1,6 @@
 ﻿#include <audio/sound.hpp>
 #include <oalpp/sound_context.hpp>
 #include <gtest/gtest.h>
-#include <limits>
 #include <memory>
 #include <thread>
 #include <type_traits>
@@ -17,7 +16,7 @@ protected:
     SoundTestWithLoadedSound() { initializeSound(); }
     void initializeSound()
     {
-        m_sound = std::make_unique<Sound>("assets/test.ogg");
+        m_sound = std::make_unique<Sound>("assets/test/unit/jt_test/test.ogg");
         m_sound->setLoop(false);
         m_sound->setVolume(1.0f);
         m_sound->stop();

@@ -14,9 +14,9 @@ public:
 
     void SetUp() override
     {
-        jt::tilemap::TilesonLoader loader("assets/tileson_test.json");
+        jt::tilemap::TilesonLoader loader("assets/test/unit/jt_test/tileson_test.json");
         tileLayer = std::make_shared<jt::tilemap::TileLayer>(
-            loader.loadTilesFromLayer("ground", textureManager));
+            loader.loadTilesFromLayer("ground", textureManager, "assets/test/unit/jt_test/"));
     }
 };
 

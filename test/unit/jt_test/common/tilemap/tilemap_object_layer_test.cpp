@@ -7,13 +7,13 @@ using ::jt::tilemap::ObjectLayer;
 
 ObjectLayer getValidObjectLayer()
 {
-    jt::tilemap::TilesonLoader loader { "assets/tileson_test.json" };
+    jt::tilemap::TilesonLoader loader { "assets/test/unit/jt_test/tileson_test.json" };
     return ObjectLayer { loader.loadObjectsFromLayer("objects") };
 }
 
 ObjectLayer getInvalidObjectLayer()
 {
-    jt::tilemap::TilesonLoader loader { "assets/tileson_test.json" };
+    jt::tilemap::TilesonLoader loader { "assets/test/unit/jt_test/tileson_test.json" };
     return ObjectLayer { loader.loadObjectsFromLayer("blarz__non_existing__Blurz") };
 }
 

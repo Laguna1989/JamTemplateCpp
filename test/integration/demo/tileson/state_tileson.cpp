@@ -11,14 +11,14 @@
 
 void StateTileson::doInternalCreate()
 {
-    jt::tilemap::TilesonLoader loader { "assets/tileson_test.json" };
+    jt::tilemap::TilesonLoader loader { "assets/test/integration/demo/tileson_test.json" };
 
     m_tileLayerGround = std::make_shared<jt::tilemap::TileLayer>(
-        loader.loadTilesFromLayer("ground", textureManager()));
+        loader.loadTilesFromLayer("ground", textureManager(), "assets/test/integration/demo/"));
     m_tileLayerGround->setScreenSizeHint(jt::Vector2f { 400, 300 });
 
     m_tileLayerOverlay = std::make_shared<jt::tilemap::TileLayer>(
-        loader.loadTilesFromLayer("overlay", textureManager()));
+        loader.loadTilesFromLayer("overlay", textureManager(), "assets/test/integration/demo/"));
     m_tileLayerOverlay->setScreenSizeHint(jt::Vector2f { 400, 300 });
 
     m_objectsLayer

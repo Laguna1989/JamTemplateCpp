@@ -4,7 +4,7 @@
         "referenceId": "item_crystal_blue_01",
         "value": 4.0,
         "weight": 0.5,
-        "worldItemSpriteFileName": "assets/demos/inventory/oryx_16bit_scifi_world_trans.png",
+        "worldItemSpriteFileName": "assets/test/integration/demo/oryx_16bit_scifi_world_trans.png",
 		"worldItemSpriteRect": { "left": 528, "top": 552, "width": 24, "height": 24 }
     },
 	
@@ -14,7 +14,7 @@
         "referenceId": "item_armor_armor_01",
         "value": 25.0,
         "weight": 15.0,
-        "worldItemSpriteFileName": "assets/demos/inventory/items.png",
+        "worldItemSpriteFileName": "assets/test/integration/demo/items.png",
 		"worldItemSpriteRect": { "left": 0, "top": 96, "width": 16, "height": 16 },
 		"worldItemOffset": {"x": 4,"y": 4},
 		"equipSlot": "torso",
@@ -27,7 +27,7 @@
         "referenceId": "item_armor_armor_02",
         "value": 50.0,
         "weight": 14.0,
-        "worldItemSpriteFileName": "assets/demos/inventory/items.png",
+        "worldItemSpriteFileName": "assets/test/integration/demo/items.png",
 		"worldItemSpriteRect": { "left": 16, "top": 96, "width": 16, "height": 16 },
 		"worldItemOffset": {"x": 4,"y": 4},
 		"equipSlot": "torso",
@@ -40,7 +40,7 @@
         "referenceId": "item_armor_armor_03",
         "value": 75.0,
         "weight": 13.0,
-        "worldItemSpriteFileName": "assets/demos/inventory/items.png",
+        "worldItemSpriteFileName": "assets/test/integration/demo/items.png",
 		"worldItemSpriteRect": { "left": 32, "top": 96, "width": 16, "height": 16 },
 		"worldItemOffset": {"x": 4,"y": 4},
 		"equipSlot": "torso",
@@ -53,7 +53,7 @@
         "referenceId": "item_armor_armor_04",
         "value": 100.0,
         "weight": 12.0,
-        "worldItemSpriteFileName": "assets/demos/inventory/items.png",
+        "worldItemSpriteFileName": "assets/test/integration/demo/items.png",
 		"worldItemSpriteRect": { "left": 48, "top": 96, "width": 16, "height": 16 },
 		"worldItemOffset": {"x": 4,"y": 4},
 		"equipSlot": "torso",
@@ -66,7 +66,7 @@
         "referenceId": "item_armor_armor_05",
         "value": 125.0,
         "weight": 11.0,
-        "worldItemSpriteFileName": "assets/demos/inventory/items.png",
+        "worldItemSpriteFileName": "assets/test/integration/demo/items.png",
 		"worldItemSpriteRect": { "left": 64, "top": 96, "width": 16, "height": 16 },
 		"worldItemOffset": {"x": 4,"y": 4},
 		"equipSlot": "torso",
@@ -79,7 +79,7 @@
         "referenceId": "item_armor_armor_06",
         "value": 150.0,
         "weight": 10.0,
-        "worldItemSpriteFileName": "assets/demos/inventory/items.png",
+        "worldItemSpriteFileName": "assets/test/integration/demo/items.png",
 		"worldItemSpriteRect": { "left": 80, "top": 96, "width": 16, "height": 16 },
 		"worldItemOffset": {"x": 4,"y": 4},
 		"equipSlot": "torso"
@@ -92,7 +92,7 @@
         "referenceId": "item_armor_helmet_01",
         "value": 20.0,
         "weight": 5.0,
-        "worldItemSpriteFileName": "assets/demos/inventory/items.png",
+        "worldItemSpriteFileName": "assets/test/integration/demo/items.png",
 		"worldItemSpriteRect": { "left": 0, "top": 112, "width": 16, "height": 16 },
 		"worldItemOffset": { "x": 4, "y": 4 },
 		"equipSlot": "head"
@@ -102,7 +102,7 @@
         "referenceId": "item_armor_helmet_02",
         "value": 40.0,
         "weight": 5.0,
-        "worldItemSpriteFileName": "assets/demos/inventory/items.png",
+        "worldItemSpriteFileName": "assets/test/integration/demo/items.png",
 		"worldItemSpriteRect": { "left": 16, "top": 112, "width": 16, "height": 16 }, 
 		"worldItemOffset": { "x": 4, "y": 4 },
 		"equipSlot": "head"
@@ -112,7 +112,7 @@
         "referenceId": "item_armor_helmet_03",
         "value": 60.0,
         "weight": 5.0,
-        "worldItemSpriteFileName": "assets/demos/inventory/items.png",
+        "worldItemSpriteFileName": "assets/test/integration/demo/items.png",
 		"worldItemSpriteRect": { "left": 32, "top": 112, "width": 16, "height": 16 }, 
 		"worldItemOffset": { "x": 4, "y": 4 },
 		"equipSlot": "head"
@@ -122,7 +122,7 @@
         "referenceId": "item_armor_helmet_04",
         "value": 80.0,
         "weight": 5.0,
-        "worldItemSpriteFileName": "assets/demos/inventory/items.png",
+        "worldItemSpriteFileName": "assets/test/integration/demo/items.png",
 		"worldItemSpriteRect": { "left": 48, "top": 112, "width": 16, "height": 16 }, 
 		"worldItemOffset": { "x": 4, "y": 4 },
 		"equipSlot": "head"
@@ -132,7 +132,7 @@
         "referenceId": "item_armor_helmet_05",
         "value": 100.0,
         "weight": 5.0,
-        "worldItemSpriteFileName": "assets/demos/inventory/items.png",
+        "worldItemSpriteFileName": "assets/test/integration/demo/items.png",
 		"worldItemSpriteRect": { "left": 64, "top": 112, "width": 16, "height": 16 }, 
 		"worldItemOffset": { "x": 4, "y": 4 },
 		"equipSlot": "head"
@@ -142,7 +142,7 @@
         "referenceId": "item_armor_helmet_06",
         "value": 150.0,
         "weight": 4.0,
-        "worldItemSpriteFileName": "assets/demos/inventory/items.png",
+        "worldItemSpriteFileName": "assets/test/integration/demo/items.png",
 		"worldItemSpriteRect": { "left": 80, "top": 112, "width": 16, "height": 16 }, 
 		"worldItemOffset": { "x": 4, "y": 4 },
 		"equipSlot": "head"
@@ -159,7 +159,7 @@
         "referenceId": "item_armor_trousers_01",
         "value": 15.0,
         "weight": 5.0,
-        "worldItemSpriteFileName": "assets/demos/inventory/items.png",
+        "worldItemSpriteFileName": "assets/test/integration/demo/items.png",
 		"worldItemSpriteRect": { "left": 0, "top": 128, "width": 16, "height": 16 },
 		"worldItemOffset": { "x": 4, "y": 4 },
 		"equipSlot": "legs"
@@ -169,7 +169,7 @@
         "referenceId": "item_armor_trousers_02",
         "value": 30.0,
         "weight": 5.0,
-        "worldItemSpriteFileName": "assets/demos/inventory/items.png",
+        "worldItemSpriteFileName": "assets/test/integration/demo/items.png",
 		"worldItemSpriteRect": { "left": 16, "top": 128, "width": 16, "height": 16 }, 
 		"worldItemOffset": { "x": 4, "y": 4 },
 		"equipSlot": "legs"
@@ -179,7 +179,7 @@
         "referenceId": "item_armor_trousers_03",
         "value": 45.0,
         "weight": 5.0,
-        "worldItemSpriteFileName": "assets/demos/inventory/items.png",
+        "worldItemSpriteFileName": "assets/test/integration/demo/items.png",
 		"worldItemSpriteRect": { "left": 32, "top": 128, "width": 16, "height": 16 }, 
 		"worldItemOffset": { "x": 4, "y": 4 },
 		"equipSlot": "legs"
@@ -189,7 +189,7 @@
         "referenceId": "item_armor_trousers_04",
         "value": 60.0,
         "weight": 5.0,
-        "worldItemSpriteFileName": "assets/demos/inventory/items.png",
+        "worldItemSpriteFileName": "assets/test/integration/demo/items.png",
 		"worldItemSpriteRect": { "left": 48, "top": 128, "width": 16, "height": 16 }, 
 		"worldItemOffset": { "x": 4, "y": 4 },
 		"equipSlot": "legs"
@@ -199,7 +199,7 @@
         "referenceId": "item_armor_trousers_05",
         "value": 75.0,
         "weight": 4.0,
-        "worldItemSpriteFileName": "assets/demos/inventory/items.png",
+        "worldItemSpriteFileName": "assets/test/integration/demo/items.png",
 		"worldItemSpriteRect": { "left": 64, "top": 128, "width": 16, "height": 16 }, 
 		"worldItemOffset": { "x": 4, "y": 4 },
 		"equipSlot": "legs"
@@ -209,7 +209,7 @@
         "referenceId": "item_armor_trousers_06",
         "value": 100.0,
         "weight": 4.0,
-        "worldItemSpriteFileName": "assets/demos/inventory/items.png",
+        "worldItemSpriteFileName": "assets/test/integration/demo/items.png",
 		"worldItemSpriteRect": { "left": 80, "top": 128, "width": 16, "height": 16 }, 
 		"worldItemOffset": { "x": 4, "y": 4 },
 		"equipSlot": "legs"
@@ -223,7 +223,7 @@
         "referenceId": "item_armor_gloves_01",
         "value": 15.0,
         "weight": 4.0,
-        "worldItemSpriteFileName": "assets/demos/inventory/items.png",
+        "worldItemSpriteFileName": "assets/test/integration/demo/items.png",
 		"worldItemSpriteRect": { "left": 96, "top": 112, "width": 16, "height": 16 },
 		"worldItemOffset": { "x": 4, "y": 4 },
 		"equipSlot": "hands"
@@ -233,7 +233,7 @@
         "referenceId": "item_armor_gloves_02",
         "value": 30.0,
         "weight": 4.0,
-        "worldItemSpriteFileName": "assets/demos/inventory/items.png",
+        "worldItemSpriteFileName": "assets/test/integration/demo/items.png",
 		"worldItemSpriteRect": { "left": 112, "top": 112, "width": 16, "height": 16 }, 
 		"worldItemOffset": { "x": 4, "y": 4 },
 		"equipSlot": "hands"
@@ -243,7 +243,7 @@
         "referenceId": "item_armor_gloves_03",
         "value": 45.0,
         "weight": 4.0,
-        "worldItemSpriteFileName": "assets/demos/inventory/items.png",
+        "worldItemSpriteFileName": "assets/test/integration/demo/items.png",
 		"worldItemSpriteRect": { "left": 128, "top": 112, "width": 16, "height": 16 }, 
 		"worldItemOffset": { "x": 4, "y": 4 },
 		"equipSlot": "hands"
@@ -253,7 +253,7 @@
         "referenceId": "item_armor_gloves_04",
         "value": 60.0,
         "weight": 3.0,
-        "worldItemSpriteFileName": "assets/demos/inventory/items.png",
+        "worldItemSpriteFileName": "assets/test/integration/demo/items.png",
 		"worldItemSpriteRect": { "left": 144, "top": 112, "width": 16, "height": 16 }, 
 		"worldItemOffset": { "x": 4, "y": 4 },
 		"equipSlot": "hands"
@@ -263,7 +263,7 @@
         "referenceId": "item_armor_gloves_05",
         "value": 75.0,
         "weight": 3.0,
-        "worldItemSpriteFileName": "assets/demos/inventory/items.png",
+        "worldItemSpriteFileName": "assets/test/integration/demo/items.png",
 		"worldItemSpriteRect": { "left": 160, "top": 112, "width": 16, "height": 16 }, 
 		"worldItemOffset": { "x": 4, "y": 4 },
 		"equipSlot": "hands"
@@ -273,7 +273,7 @@
         "referenceId": "item_armor_gloves_06",
         "value": 100.0,
         "weight": 2.0,
-        "worldItemSpriteFileName": "assets/demos/inventory/items.png",
+        "worldItemSpriteFileName": "assets/test/integration/demo/items.png",
 		"worldItemSpriteRect": { "left": 176, "top": 112, "width": 16, "height": 16 }, 
 		"worldItemOffset": { "x": 4, "y": 4 },
 		"equipSlot": "hands"
@@ -287,7 +287,7 @@
         "referenceId": "item_armor_boots_01",
         "value": 15.0,
         "weight": 6.0,
-        "worldItemSpriteFileName": "assets/demos/inventory/items.png",
+        "worldItemSpriteFileName": "assets/test/integration/demo/items.png",
 		"worldItemSpriteRect": { "left": 96, "top": 96, "width": 16, "height": 16 },
 		"worldItemOffset": { "x": 4, "y": 4 },
 		"equipSlot": "hands"
@@ -297,7 +297,7 @@
         "referenceId": "item_armor_boots_02",
         "value": 30.0,
         "weight": 6.0,
-        "worldItemSpriteFileName": "assets/demos/inventory/items.png",
+        "worldItemSpriteFileName": "assets/test/integration/demo/items.png",
 		"worldItemSpriteRect": { "left": 112, "top": 96, "width": 16, "height": 16 }, 
 		"worldItemOffset": { "x": 4, "y": 4 },
 		"equipSlot": "hands"
@@ -307,7 +307,7 @@
         "referenceId": "item_armor_boots_03",
         "value": 45.0,
         "weight": 6.0,
-        "worldItemSpriteFileName": "assets/demos/inventory/items.png",
+        "worldItemSpriteFileName": "assets/test/integration/demo/items.png",
 		"worldItemSpriteRect": { "left": 128, "top": 96, "width": 16, "height": 16 }, 
 		"worldItemOffset": { "x": 4, "y": 4 },
 		"equipSlot": "hands"
@@ -317,7 +317,7 @@
         "referenceId": "item_armor_boots_04",
         "value": 60.0,
         "weight": 7.0,
-        "worldItemSpriteFileName": "assets/demos/inventory/items.png",
+        "worldItemSpriteFileName": "assets/test/integration/demo/items.png",
 		"worldItemSpriteRect": { "left": 144, "top": 96, "width": 16, "height": 16 }, 
 		"worldItemOffset": { "x": 4, "y": 4 },
 		"equipSlot": "hands"
@@ -327,7 +327,7 @@
         "referenceId": "item_armor_boots_05",
         "value": 75.0,
         "weight": 8.0,
-        "worldItemSpriteFileName": "assets/demos/inventory/items.png",
+        "worldItemSpriteFileName": "assets/test/integration/demo/items.png",
 		"worldItemSpriteRect": { "left": 160, "top": 96, "width": 16, "height": 16 }, 
 		"worldItemOffset": { "x": 4, "y": 4 },
 		"equipSlot": "hands"
@@ -337,7 +337,7 @@
         "referenceId": "item_armor_boots_06",
         "value": 100.0,
         "weight": 8.0,
-        "worldItemSpriteFileName": "assets/demos/inventory/items.png",
+        "worldItemSpriteFileName": "assets/test/integration/demo/items.png",
 		"worldItemSpriteRect": { "left": 176, "top": 96, "width": 16, "height": 16 }, 
 		"worldItemOffset": { "x": 4, "y": 4 },
 		"equipSlot": "hands"
@@ -352,7 +352,7 @@
         "referenceId": "item_weapon_knife",
         "value": 30.0,
         "weight": 1.5,
-        "worldItemSpriteFileName": "assets/demos/inventory/items.png",
+        "worldItemSpriteFileName": "assets/test/integration/demo/items.png",
 		"worldItemSpriteRect": { "left": 48, "top": 80, "width": 16, "height": 16 }, 
 		"worldItemOffset": { "x": 4, "y": 4 },
 		"equipSlot": "weapon"
@@ -362,7 +362,7 @@
         "referenceId": "item_weapon_baton_01",
         "value": 60.0,
         "weight": 4.0,
-        "worldItemSpriteFileName": "assets/demos/inventory/items.png",
+        "worldItemSpriteFileName": "assets/test/integration/demo/items.png",
 		"worldItemSpriteRect": { "left": 112, "top": 80, "width": 16, "height": 16 }, 
 		"worldItemOffset": { "x": 4, "y": 4 },
 		"equipSlot": "weapon"
@@ -372,7 +372,7 @@
         "referenceId": "item_weapon_baton_02",
         "value": 90.0,
         "weight": 4.0,
-        "worldItemSpriteFileName": "assets/demos/inventory/items.png",
+        "worldItemSpriteFileName": "assets/test/integration/demo/items.png",
 		"worldItemSpriteRect": { "left": 128, "top": 80, "width": 16, "height": 16 }, 
 		"worldItemOffset": { "x": 4, "y": 4 },
 		"equipSlot": "weapon"
@@ -382,7 +382,7 @@
         "referenceId": "item_weapon_pistol",
         "value": 105.0,
         "weight": 3.0,
-        "worldItemSpriteFileName": "assets/demos/inventory/items.png",
+        "worldItemSpriteFileName": "assets/test/integration/demo/items.png",
 		"worldItemSpriteRect": { "left": 32, "top": 80, "width": 16, "height": 16 }, 
 		"worldItemOffset": { "x": 4, "y": 4 },
 		"equipSlot": "weapon"

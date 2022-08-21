@@ -7,13 +7,13 @@
 
 void StateScreenEffects::doInternalCreate()
 {
-    jt::tilemap::TilesonLoader loader { "assets/demos/screeneffects/map.json" };
+    jt::tilemap::TilesonLoader loader { "assets/test/integration/demo/screeneffect_map.json" };
     std::vector<std::string> const layerNames { "ground", "water_edges", "rug", "shadows", "fence",
         "walls", "props" };
 
     for (auto const& layer : layerNames) {
         m_tileLayers.emplace_back(std::make_shared<jt::tilemap::TileLayer>(
-            loader.loadTilesFromLayer(layer, textureManager())));
+            loader.loadTilesFromLayer(layer, textureManager(), "assets/test/integration/demo/")));
     }
 
     m_vignette = std::make_shared<jt::Vignette>(jt::Vector2f { 400.0f, 300.0f });

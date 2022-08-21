@@ -28,7 +28,8 @@ public:
         std::string const& layerName);
 
     std::tuple<std::vector<TileInfo>, std::vector<std::shared_ptr<jt::Sprite>>> loadTilesFromLayer(
-        std::string const& layerName, jt::TextureManagerInterface& textureManager);
+        std::string const& layerName, jt::TextureManagerInterface& textureManager,
+        std::string const& tilesetPathPrefix = "assets/");
 
     TilemapCollisions loadCollisionsFromLayer(std::string const& layerName);
 

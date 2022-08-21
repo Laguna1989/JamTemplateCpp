@@ -36,7 +36,7 @@ TEST_P(RenderwindowCommonTestFixture, CheckForCloseDoesNotTerminate)
 TEST_P(RenderwindowCommonTestFixture, DrawValidSprite)
 {
     auto spr = std::make_unique<jt::Sprite>(
-        "assets/coin.png", jt::Recti { 0, 0, 16, 16 }, getTextureManager());
+        "assets/test/unit/jt_test/coin.png", jt::Recti { 0, 0, 16, 16 }, getTextureManager());
     m_window->draw(spr);
 }
 

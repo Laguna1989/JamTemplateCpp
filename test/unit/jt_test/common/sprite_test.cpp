@@ -17,28 +17,28 @@ TEST_F(SpriteTestFixture, SpriteCanBeDefaultConstructed)
 
 TEST_F(SpriteTestFixture, SizeCorrectAfterLoadFullSprite)
 {
-    jt::Sprite s { "assets/coin.png", tm };
+    jt::Sprite s { "assets/test/unit/jt_test/coin.png", tm };
     ASSERT_FLOAT_EQ(s.getLocalBounds().width, 192.0f);
     ASSERT_FLOAT_EQ(s.getLocalBounds().height, 16.0f);
 }
 
 TEST_F(SpriteTestFixture, SizeCorrecrAfterLoadPartialSprite)
 {
-    jt::Sprite s { "assets/coin.png", jt::Recti { 0, 0, 16, 16 }, tm };
+    jt::Sprite s { "assets/test/unit/jt_test/coin.png", jt::Recti { 0, 0, 16, 16 }, tm };
     ASSERT_FLOAT_EQ(s.getLocalBounds().width, 16.0f);
     ASSERT_FLOAT_EQ(s.getLocalBounds().height, 16.0f);
 }
 
 TEST_F(SpriteTestFixture, CleanImage)
 {
-    jt::Sprite s { "assets/coin.png", jt::Recti { 0, 0, 16, 16 }, tm };
+    jt::Sprite s { "assets/test/unit/jt_test/coin.png", jt::Recti { 0, 0, 16, 16 }, tm };
     s.cleanImage();
     SUCCEED();
 }
 
 TEST_F(SpriteTestFixture, CleanImageAfterGetColor)
 {
-    jt::Sprite s { "assets/coin.png", jt::Recti { 0, 0, 16, 16 }, tm };
+    jt::Sprite s { "assets/test/unit/jt_test/coin.png", jt::Recti { 0, 0, 16, 16 }, tm };
     s.getColorAtPixel(jt::Vector2u { 8, 0 });
     s.cleanImage();
     SUCCEED();
@@ -52,7 +52,7 @@ protected:
 
 TEST_P(SpriteGetPixelTestFixture, GetPixel)
 {
-    jt::Sprite s { "assets/coin.png", jt::Recti { 0, 0, 16, 16 }, tm };
+    jt::Sprite s { "assets/test/unit/jt_test/coin.png", jt::Recti { 0, 0, 16, 16 }, tm };
     auto const pos = GetParam().first;
     auto const expected = GetParam().second;
     auto const result = s.getColorAtPixel(pos);
@@ -77,7 +77,7 @@ protected:
 
 TEST_P(SpriteGetPixelOutOfBoundsTestFixture, GetPixelOutOfBounds)
 {
-    jt::Sprite s { "assets/coin.png", jt::Recti { 0, 0, 16, 16 }, tm };
+    jt::Sprite s { "assets/test/unit/jt_test/coin.png", jt::Recti { 0, 0, 16, 16 }, tm };
     auto const pos = GetParam();
     ASSERT_THROW(s.getColorAtPixel(pos), std::invalid_argument);
 }
