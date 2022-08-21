@@ -21,7 +21,7 @@ static void BM_UpdateDrawablePositions(benchmark::State& state)
 
     std::array<jt::Animation, arraySize> animations;
     for (auto& a : animations) {
-        a.add("assets/coin.png", "idle", jt::Vector2u { 16, 16 },
+        a.add("assets/test/integration/performance/coin.png", "idle", jt::Vector2u { 16, 16 },
             jt::MathHelper::numbersBetween(0U, 11U), 0.15f, gfx.textureManager());
         a.play("idle");
     }

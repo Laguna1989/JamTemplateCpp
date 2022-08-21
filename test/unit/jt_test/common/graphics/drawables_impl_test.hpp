@@ -24,7 +24,7 @@ class SpriteFactory : public DrawableFactoryInterface {
 public:
     std::shared_ptr<jt::DrawableInterface> createDrawable(jt::TextureManagerInterface& tm) override
     {
-        return std::make_shared<jt::Sprite>("assets/coin.png", tm);
+        return std::make_shared<jt::Sprite>("assets/test/unit/jt_test/coin.png", tm);
     }
 };
 
@@ -34,7 +34,8 @@ public:
         jt::TextureManagerInterface& textureManager) override
     {
         auto a = std::make_shared<jt::Animation>();
-        a->add("assets/coin.png", "idle", { 16, 16 }, { 0 }, 0.1f, textureManager);
+        a->add(
+            "assets/test/unit/jt_test/coin.png", "idle", { 16, 16 }, { 0 }, 0.1f, textureManager);
         a->play("idle");
         return a;
     }
@@ -79,9 +80,9 @@ public:
     std::shared_ptr<jt::DrawableInterface> createDrawable(
         jt::TextureManagerInterface& textureManager) override
     {
-        jt::tilemap::TilesonLoader loader("assets/tileson_test_small.json");
+        jt::tilemap::TilesonLoader loader("assets/test/unit/jt_test/tileson_test_small.json");
         auto t = std::make_shared<jt::tilemap::TileLayer>(
-            loader.loadTilesFromLayer("ground", textureManager));
+            loader.loadTilesFromLayer("ground", textureManager, "assets/test/unit/jt_test/"));
         t->setScreenSizeHint(jt::Vector2f { 400.0f, 300.0f });
         return t;
     }
@@ -95,9 +96,9 @@ public:
     std::shared_ptr<jt::DrawableInterface> createDrawable(
         jt::TextureManagerInterface& textureManager) override
     {
-        jt::tilemap::TilesonLoader loader("assets/tileson_test.json");
+        jt::tilemap::TilesonLoader loader("assets/test/unit/jt_test/tileson_test.json");
         auto t = std::make_shared<jt::tilemap::TileLayer>(
-            loader.loadTilesFromLayer("ground", textureManager));
+            loader.loadTilesFromLayer("ground", textureManager, "assets/test/unit/jt_test/"));
         return t;
     }
 

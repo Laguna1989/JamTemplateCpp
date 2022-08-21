@@ -15,7 +15,7 @@ TEST(SpriteSFMLTest, LoadSpriteFromSfTexture)
 
 TEST(SpriteSFMLTest, GetSfSprite)
 {
-    jt::Sprite s { "assets/coin.png", getTextureManager() };
+    jt::Sprite s { "assets/test/unit/jt_test/coin.png", getTextureManager() };
 
     sf::Sprite value = s.getSFSprite();
     ASSERT_EQ(value.getLocalBounds().left, s.getLocalBounds().left);

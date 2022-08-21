@@ -12,7 +12,7 @@ protected:
 
 TEST_F(TextureManagerTest, ValidFileCanBeLoaded)
 {
-    EXPECT_NO_THROW(m_manager.get("assets/coin.png"));
+    EXPECT_NO_THROW(m_manager.get("assets/test/unit/jt_test/coin.png"));
 }
 
 TEST_F(TextureManagerTest, GetButton) { EXPECT_NO_THROW(m_manager.get("#b#100#200")); }
@@ -109,14 +109,14 @@ TEST_F(TextureManagerTest, GetNumberOfTexturesIsInitiallyZero)
 
 TEST_F(TextureManagerTest, GetNumberOfTexturesIsTwoAfterGetTexture)
 {
-    EXPECT_NO_THROW(m_manager.get("assets/coin.png"));
+    EXPECT_NO_THROW(m_manager.get("assets/test/unit/jt_test/coin.png"));
     // two because of normal texture + flash texture
     ASSERT_EQ(m_manager.getNumberOfTextures(), 2U);
 }
 
 TEST_F(TextureManagerTest, GetNumberOfTexturesIsZeroAfterReset)
 {
-    EXPECT_NO_THROW(m_manager.get("assets/coin.png"));
+    EXPECT_NO_THROW(m_manager.get("assets/test/unit/jt_test/coin.png"));
     EXPECT_NO_THROW(m_manager.reset());
     ASSERT_EQ(m_manager.getNumberOfTextures(), 0U);
 }

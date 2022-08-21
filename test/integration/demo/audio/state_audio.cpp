@@ -11,7 +11,7 @@ void StateAudio::doInternalCreate()
     if (m_sound == nullptr) {
         // create new music
         m_sound = getGame()->audio().addPermanentSound(
-            "music", "assets/demos/audio/looping_stereo_track.mp3", m_effect);
+            "music", "assets/test/integration/demo/looping_stereo_track.mp3", m_effect);
         m_sound->setLoop(true);
     } else {
         // get blend property from already created music
@@ -25,7 +25,7 @@ void StateAudio::doInternalCreate()
         { "G5", 1.78179772727272727273f }, { "A5", 2.0f } };
 
     for (auto const& kvp : pitches) {
-        auto snd = getGame()->audio().addTemporarySound("assets/test.ogg");
+        auto snd = getGame()->audio().addTemporarySound("assets/test/integration/demo/test.ogg");
         snd->setPitch(kvp.second);
         soundGroup->add(snd);
         m_notes[kvp.first] = snd;
@@ -50,14 +50,15 @@ void StateAudio::doInternalDraw() const
     if (ImGui::Button("play looping")) {
         // create new music
         m_sound = getGame()->audio().addPermanentSound(
-            "music", "assets/demos/audio/looping_stereo_track.mp3", m_effect);
+            "music", "assets/test/integration/demo/looping_stereo_track.mp3", m_effect);
         m_sound->setLoop(true);
         m_sound->play();
     }
     if (ImGui::Button("play intro + looping")) {
         // create new music
-        m_sound = getGame()->audio().addPermanentSound(
-            "music", "assets/demos/audio/intro.ogg", "assets/demos/audio/loop.ogg", m_effect);
+        m_sound = getGame()->audio().addPermanentSound("music",
+            "assets/test/integration/demo/intro.ogg", "assets/test/integration/demo/loop.ogg",
+            m_effect);
         m_sound->play();
     }
     if (ImGui::Button("pause")) {

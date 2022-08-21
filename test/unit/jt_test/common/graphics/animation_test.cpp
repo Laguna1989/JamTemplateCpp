@@ -20,30 +20,34 @@ public:
 TEST_F(AnimationTestFixture, AddAnimationWithEmptyNameRaisesInvalidArgumentException)
 {
     ASSERT_THROW(
-        a.add("assets/coin.png", "", { 16, 16 }, { 0, 1, 2, 3 }, 1.0f, tm), std::invalid_argument);
+        a.add("assets/test/unit/jt_test/coin.png", "", { 16, 16 }, { 0, 1, 2, 3 }, 1.0f, tm),
+        std::invalid_argument);
 }
 
 TEST_F(AnimationTestFixture, AddAnimationWithEmptyFrameIndicesRaisesInvalidArgumentException)
 {
-    ASSERT_THROW(a.add("assets/coin.png", "", { 16, 16 }, {}, 1.0f, tm), std::invalid_argument);
+    ASSERT_THROW(a.add("assets/test/unit/jt_test/coin.png", "", { 16, 16 }, {}, 1.0f, tm),
+        std::invalid_argument);
 }
 
 TEST_F(AnimationTestFixture, AddAnimationWithEmptyFrameTimesRaisesInvalidArgumentException)
 {
-    ASSERT_THROW(
-        a.add("assets/coin.png", "", { 16, 16 }, { 1, 2, 3 }, {}, tm), std::invalid_argument);
+    ASSERT_THROW(a.add("assets/test/unit/jt_test/coin.png", "", { 16, 16 }, { 1, 2, 3 }, {}, tm),
+        std::invalid_argument);
 }
 
 TEST_F(
     AnimationTestFixture, AddAnimationWithDifferentNumberOfFrameTimesRaisesInvalidArgumentException)
 {
     ASSERT_THROW(
-        a.add("assets/coin.png", "", { 16, 16 }, { 1, 2, 3 }, { 0.5f }, tm), std::invalid_argument);
+        a.add("assets/test/unit/jt_test/coin.png", "", { 16, 16 }, { 1, 2, 3 }, { 0.5f }, tm),
+        std::invalid_argument);
 }
 
 TEST_F(AnimationTestFixture, AddAnimationWithNegativeTimeRaisesInvalidArgumentException)
 {
-    ASSERT_THROW(a.add("assets/coin.png", "test", { 16, 16 }, { 0, 1, 2, 3 }, -0.5f, tm),
+    ASSERT_THROW(
+        a.add("assets/test/unit/jt_test/coin.png", "test", { 16, 16 }, { 0, 1, 2, 3 }, -0.5f, tm),
         std::invalid_argument);
 }
 
@@ -101,7 +105,7 @@ TEST_F(AnimationTestFixture, LoadFromJsonWithNoJsonFile)
 TEST_F(AnimationTestFixture, LoadFromJson)
 {
     jt::Animation a {};
-    a.loadFromJson("assets/pilz_small.json", tm);
+    a.loadFromJson("assets/test/unit/jt_test/pilz_small.json", tm);
     a.play("Idle");
 
     ASSERT_EQ(a.getGlobalBounds().left, 0);
@@ -123,7 +127,7 @@ protected:
 
     void addAnimationWithFrameIndices(std::vector<unsigned int> frameIndices = { 0, 1, 2, 3, 4 })
     {
-        a.add("assets/coin.png", "idle", { 16, 16 }, frameIndices, 1.0f, tm);
+        a.add("assets/test/unit/jt_test/coin.png", "idle", { 16, 16 }, frameIndices, 1.0f, tm);
     }
 };
 
@@ -137,7 +141,7 @@ TEST_F(AnimationTestWithAnimation, AddWillAddAnimationWithSingleFrame)
 
 TEST_F(AnimationTestWithAnimation, OverwriteAnimation)
 {
-    a.add("assets/coin.png", "idle", { 16, 16 }, { 0 }, 1.0f, tm);
+    a.add("assets/test/unit/jt_test/coin.png", "idle", { 16, 16 }, { 0 }, 1.0f, tm);
     ASSERT_TRUE(a.hasAnimation("idle"));
 }
 
@@ -193,7 +197,7 @@ protected:
     jt::Animation a;
     void SetUp() override
     {
-        a.add("assets/coin.png", "idle", { 16, 16 }, { 0, 1, 2, 3, 4 }, 1.0f, tm);
+        a.add("assets/test/unit/jt_test/coin.png", "idle", { 16, 16 }, { 0, 1, 2, 3, 4 }, 1.0f, tm);
         a.play("idle");
     }
 };

@@ -66,13 +66,14 @@ void StateInventory::doInternalCreate()
 
     setAutoDraw(false);
 
-    m_pickupSound = getGame()->audio().addTemporarySound("assets/test.ogg");
+    m_pickupSound = getGame()->audio().addTemporarySound("assets/test/integration/demo/test.ogg");
 }
 
 void StateInventory::createWorldItems()
 {
     m_worldItems = std::make_shared<jt::ObjectGroup<WorldItem>>();
     std::cout << "createWorldItems\n";
+
     for (auto const& it : m_objectsLayer->getObjects()) {
         if (it.type != "item") {
             //        continue; // once tileson supports the class attribute.
@@ -85,10 +86,10 @@ void StateInventory::createWorldItems()
 
 void StateInventory::loadTilemap()
 {
-    jt::tilemap::TilesonLoader loader { "assets/demos/inventory/spaceship_items.json" };
+    jt::tilemap::TilesonLoader loader { "assets/test/integration/demo/spaceship_items.json" };
 
     m_tileLayerGround = std::make_shared<jt::tilemap::TileLayer>(
-        loader.loadTilesFromLayer("ground", textureManager()));
+        loader.loadTilesFromLayer("ground", textureManager(), "assets/test/integration/demo/"));
 
     m_tileLayerGround->setScreenSizeHint(jt::Vector2f { 400, 300 });
 
@@ -133,7 +134,7 @@ void StateInventory::createItemRepository()
 {
     m_itemRepository = std::make_shared<ItemRepository>();
 
-    m_itemRepository->loadFromJson("assets/demos/inventory/test_items.json");
+    m_itemRepository->loadFromJson("assets/test/integration/demo/test_items.json");
 }
 
 void StateInventory::doInternalUpdate(float elapsed)

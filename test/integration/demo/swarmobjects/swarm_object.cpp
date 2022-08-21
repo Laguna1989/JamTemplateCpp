@@ -9,7 +9,7 @@ void SwarmObject::doCreate()
     float maxX = 400 - 12;
     float maxY = 300 - 12;
 
-    m_animation->add("assets/coin.png", "idle", jt::Vector2u { 16, 16 },
+    m_animation->add("assets/test/integration/demo/coin.png", "idle", jt::Vector2u { 16, 16 },
         jt::MathHelper::numbersBetween(0U, 11U), jt::Random::getFloat(0.13f, 0.17f),
         textureManager());
     m_animation->play("idle", jt::Random::getInt(0, 6));

@@ -6,7 +6,7 @@
 TEST(TilesonLoaderTestNodes, LoadCorrectAmountOfNodes)
 {
     jt::TextureManagerInterface& textureManager { getTextureManager() };
-    jt::tilemap::TilesonLoader loader("assets/tileson_test.json");
+    jt::tilemap::TilesonLoader loader("assets/test/unit/jt_test/tileson_test.json");
     auto const nodes = loader.loadTileNodesFromLayer("ground", textureManager);
 
     ASSERT_EQ(nodes.size(), 2500U);
@@ -16,7 +16,7 @@ TEST(TilesonLoaderTestNodes, LoadCorrectAmountOfNodes)
 TEST(TilesonLoaderTestNodes, LoadedNodesAreSortedYFirst)
 {
     jt::TextureManagerInterface& textureManager { getTextureManager() };
-    jt::tilemap::TilesonLoader loader("assets/tileson_test.json");
+    jt::tilemap::TilesonLoader loader("assets/test/unit/jt_test/tileson_test.json");
     auto const nodes = loader.loadTileNodesFromLayer("ground", textureManager);
 
     for (auto i = 0U; i != nodes.size(); ++i) {
@@ -33,7 +33,7 @@ TEST(TilesonLoaderTestNodes, LoadedNodesAreSortedYFirst)
 TEST(TilesonLoaderTestCollisions, LoadsCorrectAmountOfCollisions)
 {
     jt::TextureManagerInterface& textureManager { getTextureManager() };
-    jt::tilemap::TilesonLoader loader("assets/tileson_test.json");
+    jt::tilemap::TilesonLoader loader("assets/test/unit/jt_test/tileson_test.json");
 
     auto const collisions = loader.loadCollisionsFromLayer("ground");
     ASSERT_EQ(collisions.getRects().size(), 83U);
@@ -42,7 +42,7 @@ TEST(TilesonLoaderTestCollisions, LoadsCorrectAmountOfCollisions)
 TEST(TilesonLoaderTestCollisions, LoadedCollidersAreSortedYFirst)
 {
     jt::TextureManagerInterface& textureManager { getTextureManager() };
-    jt::tilemap::TilesonLoader loader("assets/tileson_test.json");
+    jt::tilemap::TilesonLoader loader("assets/test/unit/jt_test/tileson_test.json");
 
     auto const collisions = loader.loadCollisionsFromLayer("ground");
     ASSERT_EQ(collisions.getRects().at(0).left, 0U);

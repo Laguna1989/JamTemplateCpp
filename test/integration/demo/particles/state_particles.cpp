@@ -24,8 +24,8 @@ void StateParticles::doInternalCreate()
 
             std::shuffle(numbers.begin(), numbers.end(), rng);
 
-            a->add("assets/spark.png", "spark", jt::Vector2u { 24, 24 }, numbers,
-                jt::Random::getFloat(0.05f, 0.175f), textureManager());
+            a->add("assets/test/integration/demo/spark.png", "spark", jt::Vector2u { 24, 24 },
+                numbers, jt::Random::getFloat(0.05f, 0.175f), textureManager());
             a->play("spark");
             a->setOrigin(jt::Vector2f { 12, 12 });
             a->setPosition(jt::Vector2f { -2000.0f, -2000.0f });

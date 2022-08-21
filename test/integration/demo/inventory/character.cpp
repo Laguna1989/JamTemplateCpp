@@ -18,7 +18,7 @@ void PlayerCharacter::doCreate()
     getB2Body()->CreateFixture(&fixtureDef);
 
     m_animation = std::make_shared<jt::Animation>();
-    m_animation->add("assets/demos/inventory/chars.png", "idle", jt::Vector2u { 24, 24 },
+    m_animation->add("assets/test/integration/demo/chars.png", "idle", jt::Vector2u { 24, 24 },
         { 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 0, 1 }, 0.25f, textureManager());
 
     m_animation->play("idle");
