@@ -69,6 +69,8 @@ public:
 
     void setScreenSizeHint(Vector2f const& hint) override;
 
+    Vector2f getScreenSizeHint() const override;
+
     bool isVisible() const override;
 
     void setBlendMode(jt::BlendMode mode) override;

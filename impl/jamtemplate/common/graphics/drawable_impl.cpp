@@ -152,3 +152,4 @@ jt::Vector2f jt::DrawableImpl::getScreenPosition() const
 {
     return getPosition() + getStaticCamOffset();
 }
+jt::Vector2f jt::DrawableImpl::getScreenSizeHint() const { return m_screenSizeHint; }

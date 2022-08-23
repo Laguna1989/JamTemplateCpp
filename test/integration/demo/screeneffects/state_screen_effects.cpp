@@ -17,7 +17,7 @@ void StateScreenEffects::doInternalCreate()
             loader.loadTilesFromLayer(layer, textureManager(), "assets/test/integration/demo/")));
     }
 
-    m_stars = std::make_shared<jt::Stars>(1U, jt::colors::White, jt::Vector2f { 400.0f, 300.0f });
+    m_stars = std::make_shared<jt::Stars>(100U, jt::colors::White, jt::Vector2f { 400.0f, 300.0f });
     add(m_stars);
 
     m_vignette = std::make_shared<jt::Vignette>(jt::Vector2f { 400.0f, 300.0f });

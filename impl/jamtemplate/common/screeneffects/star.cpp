@@ -1,7 +1,6 @@
 #include "star.hpp"
 #include <game_interface.hpp>
 #include <random/random.hpp>
-#include <iostream>
 
 void jt::Star::setPosition(jt::Vector2f const& screenSizeHint)
 {
@@ -49,7 +48,24 @@ void jt::Star::doUpdate(float const elapsed)
     col.a = alpha;
     m_shape->setColor(col);
 
-    std::cout << m_shape->getScreenPosition().x << std::endl;
+    auto posScreen = m_shape->getScreenPosition();
+    auto posWorld = m_shape->getPosition();
+
+    auto const screenSize = m_shape->getScreenSizeHint();
+    if (screenSize.x == 0) {
+        return;
+    }
+    if (posScreen.x < -10) {
+        posWorld.x += screenSize.x + 11;
+    } else if (posScreen.x > screenSize.x + 10) {
+        posWorld.x -= screenSize.x + 11;
+    }
+    if (posScreen.y < -10) {
+        posWorld.y += screenSize.y + 11;
+    } else if (posScreen.y > screenSize.y + 10) {
+        posWorld.y -= screenSize.y + 11;
+    }
+    m_shape->setPosition(posWorld);
 }
 
 void jt::Star::doDraw() const { m_shape->draw(getGame()->gfx().target()); }

@@ -66,10 +66,12 @@ public:
     /// \param pos the new position
     virtual void setPosition(jt::Vector2f const& pos) = 0;
 
-    /// Get the position of the drawable
+    /// Get the position of the drawable in world coordinates
     /// \return the position
     virtual jt::Vector2f getPosition() const = 0;
 
+    /// Get the position of the drawables in screen coordinates.
+    /// \return the position on screen
     virtual jt::Vector2f getScreenPosition() const = 0;
 
     /// Get the global bounds rect
@@ -184,6 +186,10 @@ public:
     /// Set the screensize hint. This will be used to avoid drawing of off-screen drawables.
     /// \param hint the size of the screen
     virtual void setScreenSizeHint(jt::Vector2f const& hint) = 0;
+
+    /// Get the stored screensize hint.
+    /// \return
+    virtual jt::Vector2f getScreenSizeHint() const = 0;
 
     /// Set a custom shader for this drawable.
     /// \param shaderCodeVertex the vertex shader code
