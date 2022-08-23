@@ -56,14 +56,14 @@ void jt::Star::doUpdate(float const elapsed)
         return;
     }
     if (posScreen.x < -10) {
-        posWorld.x += screenSize.x + 11;
+        posWorld.x += screenSize.x + 10;
     } else if (posScreen.x > screenSize.x + 10) {
-        posWorld.x -= screenSize.x + 11;
+        posWorld.x -= screenSize.x + 10;
     }
     if (posScreen.y < -10) {
-        posWorld.y += screenSize.y + 11;
+        posWorld.y += screenSize.y + 10;
     } else if (posScreen.y > screenSize.y + 10) {
-        posWorld.y -= screenSize.y + 11;
+        posWorld.y -= screenSize.y + 10;
     }
     m_shape->setPosition(posWorld);
 }
