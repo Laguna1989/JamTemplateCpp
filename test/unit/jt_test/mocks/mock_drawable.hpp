@@ -22,6 +22,8 @@ public:
     MOCK_METHOD(void, setPosition, (jt::Vector2f const&), (override));
     MOCK_METHOD(jt::Vector2f, getPosition, (), (const, override));
 
+    MOCK_METHOD(jt::Vector2f, getScreenPosition,(), (const, override));
+
     MOCK_METHOD(jt::Rectf, getGlobalBounds, (), (const, override));
     MOCK_METHOD(jt::Rectf, getLocalBounds, (), (const, override));
 

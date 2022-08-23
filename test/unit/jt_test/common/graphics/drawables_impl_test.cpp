@@ -67,11 +67,31 @@ TEST_P(DrawableImplTestFixture, GetPositionInitial)
     ASSERT_EQ(drawable->getPosition(), expected);
 }
 
+TEST_P(DrawableImplTestFixture, GetScreenPositionInitial)
+{
+    jt::Vector2f const expected { 0.0f, 0.0f };
+    ASSERT_EQ(drawable->getScreenPosition(), expected);
+}
+
 TEST_P(DrawableImplTestFixture, GetPositionAfterSetPosition)
 {
     jt::Vector2f const expected { 55.5f, -12.0f };
     drawable->setPosition(expected);
     ASSERT_EQ(drawable->getPosition(), expected);
+}
+
+TEST_P(DrawableImplTestFixture, GetScreenPositionAfterSetPosition)
+{
+    jt::Vector2f const expected { 55.5f, -12.0f };
+    drawable->setPosition(expected);
+    ASSERT_EQ(drawable->getScreenPosition(), expected);
+}
+
+TEST_P(DrawableImplTestFixture, GetScreenPositionAfterCamMove)
+{
+    jt::Vector2f const expected { 55.5f, -12.0f };
+    jt::DrawableImpl::setCamOffset(expected);
+    ASSERT_EQ(drawable->getScreenPosition(), expected);
 }
 
 TEST_P(DrawableImplTestFixture, GetScaleInitial)

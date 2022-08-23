@@ -70,6 +70,8 @@ public:
     /// \return the position
     virtual jt::Vector2f getPosition() const = 0;
 
+    virtual jt::Vector2f getScreenPosition() const = 0;
+
     /// Get the global bounds rect
     ///
     /// Global bounds rect is defined by the top left corner of the drawable and its witdh and

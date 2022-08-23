@@ -1,6 +1,7 @@
 #ifndef JAMTEMPLATE_STATE_SCREEN_EFFECTS_HPP
 #define JAMTEMPLATE_STATE_SCREEN_EFFECTS_HPP
 
+#include "screeneffects/stars.hpp"
 #include <game_state.hpp>
 #include <screeneffects/clouds.hpp>
 #include <screeneffects/scanlines.hpp>
@@ -20,6 +21,9 @@ class StateScreenEffects : public jt::GameState {
 
     mutable bool m_drawClouds { true };
     std::shared_ptr<jt::Clouds> m_clouds { nullptr };
+
+    mutable bool m_drawStars { true };
+    std::shared_ptr<jt::Stars> m_stars { nullptr };
 
     void doInternalCreate() override;
     void doInternalUpdate(float elapsed) override;

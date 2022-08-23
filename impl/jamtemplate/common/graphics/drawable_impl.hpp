@@ -34,6 +34,8 @@ public:
     void flicker(float duration, float interval = 0.05f, bool affectShadow = false) override;
     void update(float elapsed) override;
 
+    Vector2f getScreenPosition() const override;
+
     jt::Vector2f getOffset() const override;
     void setOffset(jt::Vector2f const& offset) override;
     OffsetMode getOffsetMode() const override;

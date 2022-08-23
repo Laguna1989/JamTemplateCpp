@@ -147,3 +147,8 @@ bool jt::DrawableImpl::isVisible() const
 }
 void jt::DrawableImpl::setBlendMode(jt::BlendMode mode) { m_blendMode = mode; }
 jt::BlendMode jt::DrawableImpl::getBlendMode() const { return m_blendMode; }
+
+jt::Vector2f jt::DrawableImpl::getScreenPosition() const
+{
+    return getPosition() + getStaticCamOffset();
+}
