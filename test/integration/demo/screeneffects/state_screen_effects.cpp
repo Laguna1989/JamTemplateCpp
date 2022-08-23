@@ -7,6 +7,7 @@
 
 void StateScreenEffects::doInternalCreate()
 {
+
     jt::tilemap::TilesonLoader loader { "assets/test/integration/demo/screeneffect_map.json" };
     std::vector<std::string> const layerNames { "ground", "water_edges", "rug", "shadows", "fence",
         "walls", "props" };
@@ -16,6 +17,9 @@ void StateScreenEffects::doInternalCreate()
             loader.loadTilesFromLayer(layer, textureManager(), "assets/test/integration/demo/")));
     }
 
+    m_stars = std::make_shared<jt::Stars>(100U, jt::colors::White, jt::Vector2f { 400.0f, 300.0f });
+    add(m_stars);
+
     m_vignette = std::make_shared<jt::Vignette>(jt::Vector2f { 400.0f, 300.0f });
     add(m_vignette);
 
@@ -24,6 +28,7 @@ void StateScreenEffects::doInternalCreate()
 
     m_clouds = std::make_shared<jt::Clouds>(jt::Vector2f { -9.0f, 5.0f });
     add(m_clouds);
+    setAutoDraw(false);
 }
 
 void StateScreenEffects::doInternalUpdate(float elapsed)
@@ -57,16 +62,21 @@ void StateScreenEffects::scroll(float elapsed)
     m_clouds->setEnabled(m_drawClouds);
     m_vignette->setEnabled(m_drawVignette);
     m_scanLines->setEnabled(m_drawScanLines);
+    m_stars->setEnabled(m_drawStars);
 }
 
 void StateScreenEffects::doInternalDraw() const
 {
+    m_stars->draw();
     for (auto const& l : m_tileLayers) {
         l->draw(renderTarget());
     }
 
+    m_clouds->draw();
+    m_vignette->draw();
+    m_scanLines->draw();
+
     drawGui();
-    drawObjects();
 }
 
 void StateScreenEffects::drawGui() const
@@ -75,5 +85,6 @@ void StateScreenEffects::drawGui() const
     ImGui::Checkbox("clouds", &m_drawClouds);
     ImGui::Checkbox("vignette", &m_drawVignette);
     ImGui::Checkbox("scan lines", &m_drawScanLines);
+    ImGui::Checkbox("stars", &m_drawStars);
     ImGui::End();
 }
