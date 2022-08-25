@@ -77,6 +77,9 @@ public:
 
     BlendMode getBlendMode() const override;
 
+    void setCamMovementFactor(float factor) override;
+    float getCamMovementFactor() const override;
+
 protected:
     jt::Vector2f getShakeOffset() const;
     jt::Vector2f getCamOffset() const;
@@ -105,6 +108,7 @@ private:
     // things to take care of:
     //   - make sure flash object and normal object are at the same position
     virtual void doUpdate(float elapsed) = 0;
+    float m_camMovementFactor { 1.0f };
 };
 
 } // namespace jt

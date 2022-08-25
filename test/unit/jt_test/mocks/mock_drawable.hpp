@@ -65,6 +65,8 @@ public:
 
     MOCK_METHOD(bool, isVisible, (), (const, override));
 
+    MOCK_METHOD(void, setCamMovementFactor, (float), (override));
+    MOCK_METHOD(float, getCamMovementFactor, (), (const, override));
 };
 
 #endif

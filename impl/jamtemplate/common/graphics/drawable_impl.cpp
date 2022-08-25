@@ -150,6 +150,9 @@ jt::BlendMode jt::DrawableImpl::getBlendMode() const { return m_blendMode; }
 
 jt::Vector2f jt::DrawableImpl::getScreenPosition() const
 {
-    return getPosition() + getStaticCamOffset();
+    auto const camOffset = getStaticCamOffset();
+    return getPosition() + camOffset * m_camMovementFactor;
 }
 jt::Vector2f jt::DrawableImpl::getScreenSizeHint() const { return m_screenSizeHint; }
+void jt::DrawableImpl::setCamMovementFactor(float factor) { m_camMovementFactor = factor; }
+float jt::DrawableImpl::getCamMovementFactor() const { return m_camMovementFactor; }
