@@ -1,6 +1,7 @@
 #include "star.hpp"
 #include <game_interface.hpp>
 #include <random/random.hpp>
+#include <screeneffects/screen_wrap.hpp>
 
 void jt::Star::setPosition(jt::Vector2f const& screenSizeHint)
 {
@@ -47,25 +48,7 @@ void jt::Star::doUpdate(float const elapsed)
     auto col = m_shape->getColor();
     col.a = alpha;
     m_shape->setColor(col);
-
-    auto posScreen = m_shape->getScreenPosition();
-    auto posWorld = m_shape->getPosition();
-
-    auto const screenSize = m_shape->getScreenSizeHint();
-    if (screenSize.x == 0) {
-        return;
-    }
-    if (posScreen.x < -10) {
-        posWorld.x += screenSize.x + 10;
-    } else if (posScreen.x > screenSize.x + 10) {
-        posWorld.x -= screenSize.x + 10;
-    }
-    if (posScreen.y < -10) {
-        posWorld.y += screenSize.y + 10;
-    } else if (posScreen.y > screenSize.y + 10) {
-        posWorld.y -= screenSize.y + 10;
-    }
-    m_shape->setPosition(posWorld);
+    jt::wrapOnScreen(*m_shape.get());
 }
 
 void jt::Star::doDraw() const { m_shape->draw(getGame()->gfx().target()); }

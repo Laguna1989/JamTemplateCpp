@@ -64,6 +64,7 @@ public:
     MOCK_METHOD(jt::BlendMode, getBlendMode, (), (const, override));
 
     MOCK_METHOD(bool, isVisible, (), (const, override));
+
 };
 
 #endif
