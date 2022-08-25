@@ -84,14 +84,14 @@ INSTANTIATE_TEST_CASE_P(ScreenWrapBecauseOfCamPositionTest,
     ScreenWrapBecauseOfCamPositionTestFixture,
     ::testing::Values(
         // inside, no wrap
-        std::make_tuple(jt::Vector2f { 0.0f, 0.0f }, jt::Vector2f { 10.0f, 20.0f }, 0.0f)
+        std::make_tuple(jt::Vector2f { 0.0f, 0.0f }, jt::Vector2f { 10.0f, 20.0f }, 0.0f),
         // inside, no wrap
-        //        std::make_tuple(jt::Vector2f { -100.0f, -200.0f }, jt::Vector2f { 10.0f, 20.0f },
-        //        0.0f),
+        std::make_tuple(jt::Vector2f { 100.0f, 200.0f }, jt::Vector2f { 10.0f, 20.0f }, 0.0f),
         // left out
-        //        std::make_tuple(jt::Vector2f { 20.0f, 0.0f }, jt::Vector2f { 790.0f, 20.0f },
-        //        0.0f)
-        ));
-
-// TODO First write tests for getScreenPosition
-// TODO Then add further tests here
+        std::make_tuple(jt::Vector2f { -20.0f, 0.0f }, jt::Vector2f { 810.0f, 20.0f }, 0.0f),
+        // right out
+        std::make_tuple(jt::Vector2f { 800.0f, 0.0f }, jt::Vector2f { -790.0f, 20.0f }, 0.0f),
+        // top out
+        std::make_tuple(jt::Vector2f { 0.0f, -30.0f }, jt::Vector2f { 10.0f, 620.0f }, 0.0f),
+        // bottom out
+        std::make_tuple(jt::Vector2f { 0.0f, 600.0f }, jt::Vector2f { 10.0f, -580.0f }, 0.0f)));
