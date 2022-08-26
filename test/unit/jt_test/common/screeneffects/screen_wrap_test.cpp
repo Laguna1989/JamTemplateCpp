@@ -25,8 +25,7 @@ class ScreenWrapBecauseOfWorldPositionTestFixture
     : public ScreenWrapTest,
       public ::testing::WithParamInterface<std::tuple<jt::Vector2f, jt::Vector2f, float>> { };
 
-TEST_P(
-    ScreenWrapBecauseOfWorldPositionTestFixture, DoesWrapWhenOutOfScreenLeftBecauseOfWorldPosition)
+TEST_P(ScreenWrapBecauseOfWorldPositionTestFixture, WraptTest)
 {
     auto const initialPosition = std::get<0>(GetParam());
     auto const expectedPositionAfterWrap = std::get<1>(GetParam());
@@ -68,7 +67,7 @@ class ScreenWrapBecauseOfCamPositionTestFixture
     : public ScreenWrapTest,
       public ::testing::WithParamInterface<std::tuple<jt::Vector2f, jt::Vector2f, float>> { };
 
-TEST_P(ScreenWrapBecauseOfCamPositionTestFixture, DoesWrapWhenOutOfScreenLeftBecauseOfWorldPosition)
+TEST_P(ScreenWrapBecauseOfCamPositionTestFixture, WrapTest)
 {
     auto const camPosition = std::get<0>(GetParam());
     auto const expectedPositionAfterWrap = std::get<1>(GetParam());
@@ -95,3 +94,50 @@ INSTANTIATE_TEST_CASE_P(ScreenWrapBecauseOfCamPositionTest,
         std::make_tuple(jt::Vector2f { 0.0f, -30.0f }, jt::Vector2f { 10.0f, 620.0f }, 0.0f),
         // bottom out
         std::make_tuple(jt::Vector2f { 0.0f, 600.0f }, jt::Vector2f { 10.0f, -580.0f }, 0.0f)));
+
+class ScreenWrapWithCamFactorTestFixture
+    : public ScreenWrapTest,
+      public ::testing::WithParamInterface<std::tuple<jt::Vector2f, jt::Vector2f, float>> { };
+
+TEST_P(ScreenWrapWithCamFactorTestFixture, WrapTest)
+{
+    auto const camPosition = std::get<0>(GetParam());
+    auto const expectedPositionAfterWrap = std::get<1>(GetParam());
+    auto const camFactor = std::get<2>(GetParam());
+    jt::Vector2f const initialPosition { 10.0f, 20.0f };
+    drawable->setPosition(initialPosition);
+    drawable->setCamMovementFactor(camFactor);
+    jt::DrawableImpl::setCamOffset(camPosition);
+    jt::wrapOnScreen(*drawable.get(), 0.0f);
+    EXPECT_EQ(drawable->getPosition(), expectedPositionAfterWrap);
+}
+
+INSTANTIATE_TEST_CASE_P(ScreenWrapWithCamFactorTest, ScreenWrapWithCamFactorTestFixture,
+    ::testing::Values(
+        // inside, no wrap
+        std::make_tuple(jt::Vector2f { 0.0f, 0.0f }, jt::Vector2f { 10.0f, 20.0f }, 1.0f),
+        // inside, no wrap
+        std::make_tuple(jt::Vector2f { 100.0f, 200.0f }, jt::Vector2f { 10.0f, 20.0f }, 1.0f),
+        // outside, no wrap because of CamFactor 0
+        std::make_tuple(jt::Vector2f { -20.0f, 0.0f }, jt::Vector2f { 10.0f, 20.0f }, 0.0f),
+        // no wrap because of low CamFactor
+        std::make_tuple(jt::Vector2f { 800.0f, 0.0f }, jt::Vector2f { 10.0f, 20.0f }, 0.5f),
+        // wrap because left out
+        std::make_tuple(jt::Vector2f { 1600.0f, 0.0f }, jt::Vector2f { -790.0f, 20.0f }, 0.5f),
+        // wrap because right out
+        std::make_tuple(jt::Vector2f { -400.0f, 600.0f }, jt::Vector2f { 810.0f, 20.0f }, 0.1f)));
+
+TEST_F(ScreenWrapTest, TestWrapScreenPositionAfterWrapWithCamFactor)
+{
+    jt::Vector2f const camPosition { -100.0f, 0.0f };
+    jt::Vector2f const expectedScreenPositionAfterWrap { 750.0f, 0.0f };
+    jt::Vector2f const expectedWorldPositionAfterWrap { 800.0f, 0.0f };
+    float const camFactor = 0.5f;
+    jt::Vector2f const initialPosition { 0.0f, 0.0f };
+    drawable->setPosition(initialPosition);
+    drawable->setCamMovementFactor(camFactor);
+    jt::DrawableImpl::setCamOffset(camPosition);
+    jt::wrapOnScreen(*drawable.get(), 0.0f);
+    EXPECT_EQ(drawable->getScreenPosition(), expectedScreenPositionAfterWrap);
+    EXPECT_EQ(drawable->getPosition(), expectedWorldPositionAfterWrap);
+}

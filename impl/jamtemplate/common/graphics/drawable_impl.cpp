@@ -94,7 +94,13 @@ bool jt::DrawableImpl::getShadowActive() const { return doGetShadowActive(); }
 jt::Color jt::DrawableImpl::getShadowColor() const { return doGetShadowColor(); }
 jt::Vector2f jt::DrawableImpl::getShadowOffset() const { return doGetShadowOffset(); }
 
-void jt::DrawableImpl::setIgnoreCamMovement(bool ignore) { m_ignoreCamMovement = ignore; }
+void jt::DrawableImpl::setIgnoreCamMovement(bool ignore)
+{
+    m_ignoreCamMovement = ignore;
+    if (m_ignoreCamMovement) {
+        m_camMovementFactor = 0.0f;
+    }
+}
 
 void jt::DrawableImpl::setShadow(jt::Color const& col, jt::Vector2f const& offset)
 {
@@ -106,8 +112,9 @@ jt::Vector2f jt::DrawableImpl::getShakeOffset() const { return doGetShakeOffset(
 jt::Vector2f jt::DrawableImpl::getCamOffset() const
 {
 #if USE_SFML
-    return (m_ignoreCamMovement ? -1.0f * jt::DrawableImpl::getStaticCamOffset()
-                                : jt::Vector2f { 0.0f, 0.0f });
+    auto const value = (m_ignoreCamMovement ? -1.0f * jt::DrawableImpl::getStaticCamOffset()
+                                            : jt::Vector2f { 0.0f, 0.0f });
+    return value;
 #else
     return (m_ignoreCamMovement ? jt::Vector2f { 0.0f, 0.0f }
                                 : 1.0 * jt::DrawableImpl::getStaticCamOffset());
@@ -130,7 +137,7 @@ bool jt::DrawableImpl::isVisible() const
         return true;
     }
 
-    jt::Vector2f const camOffset = getStaticCamOffset();
+    jt::Vector2f const camOffset = getStaticCamOffset() * m_camMovementFactor;
     if (getPosition().x + camOffset.x + getLocalBounds().width < 0) {
         return false;
     }
@@ -154,5 +161,10 @@ jt::Vector2f jt::DrawableImpl::getScreenPosition() const
     return getPosition() + camOffset * m_camMovementFactor;
 }
 jt::Vector2f jt::DrawableImpl::getScreenSizeHint() const { return m_screenSizeHint; }
-void jt::DrawableImpl::setCamMovementFactor(float factor) { m_camMovementFactor = factor; }
+void jt::DrawableImpl::setCamMovementFactor(float factor)
+{
+    m_camMovementFactor = factor;
+    bool const ignoreCamMovement = m_camMovementFactor != 1.0f;
+    m_ignoreCamMovement = ignoreCamMovement;
+}
 float jt::DrawableImpl::getCamMovementFactor() const { return m_camMovementFactor; }

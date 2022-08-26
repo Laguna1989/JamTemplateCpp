@@ -80,8 +80,8 @@ void Shape::doRotate(float /*rot*/) { }
 
 SDL_Rect Shape::getDestRect(jt::Vector2f const& positionOffset) const
 {
-    auto const pos = m_position + getShakeOffset() + getOffset() + getCamOffset() + positionOffset
-        + m_offsetFromOrigin;
+    auto const pos = m_position + getShakeOffset() + getOffset() + positionOffset
+        + getCompleteCamOffset() + m_offsetFromOrigin;
     SDL_Rect const destRect { static_cast<int>(pos.x), static_cast<int>(pos.y),
         static_cast<int>(static_cast<float>(m_sourceRect.width) * fabs(m_scale.x)),
         static_cast<int>(static_cast<float>(m_sourceRect.height) * fabs(m_scale.y)) };

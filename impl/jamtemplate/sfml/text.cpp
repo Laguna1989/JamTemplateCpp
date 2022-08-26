@@ -77,7 +77,8 @@ void jt::Text::doUpdate(float /*elapsed*/)
         alignOffset.x = -m_text->getGlobalBounds().width;
     }
 
-    jt::Vector2f const position = m_position + getShakeOffset() + alignOffset + getCamOffset();
+    jt::Vector2f const position
+        = m_position + getShakeOffset() + alignOffset + getCompleteCamOffset();
     // casting to int and back to float avoids blurry text when rendered on non-integer positions
     jt::Vector2f const pos = jt::Vector2f { static_cast<float>(static_cast<int>(position.x)),
         static_cast<float>(static_cast<int>(position.y)) };

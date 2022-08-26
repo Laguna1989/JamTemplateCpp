@@ -86,6 +86,7 @@ protected:
     jt::Vector2f m_screenSizeHint { 0.0f, 0.0f };
 
     virtual void setOriginInternal(jt::Vector2f const& /*origin*/) { }
+    float m_camMovementFactor { 1.0f };
 
 private:
     static jt::Vector2f m_CamOffset;
@@ -108,7 +109,6 @@ private:
     // things to take care of:
     //   - make sure flash object and normal object are at the same position
     virtual void doUpdate(float elapsed) = 0;
-    float m_camMovementFactor { 1.0f };
 };
 
 } // namespace jt

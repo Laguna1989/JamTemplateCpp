@@ -3,6 +3,7 @@
 #include "rect_lib.hpp"
 #include "vector_lib.hpp"
 #include <SFML/Graphics.hpp>
+#include <iostream>
 
 void jt::Shape::makeRect(jt::Vector2f size, jt::TextureManagerInterface& /*unused*/)
 {
@@ -92,9 +93,10 @@ void jt::Shape::doDrawShadow(std::shared_ptr<jt::RenderTarget> const sptr) const
 void jt::Shape::doUpdate(float /*elapsed*/)
 {
     if (m_shape) {
-        auto const pos = getPosition() + getShakeOffset() + getOffset() + getCamOffset();
-        m_shape->setPosition(pos.x, pos.y);
-        m_flashShape->setPosition(pos.x, pos.y);
+        auto const screenPosition
+            = getPosition() + getShakeOffset() + getOffset() + getCompleteCamOffset();
+        m_shape->setPosition(screenPosition.x, screenPosition.y);
+        m_flashShape->setPosition(screenPosition.x, screenPosition.y);
         m_flashShape->setFillColor(toLib(getFlashColor()));
     }
 }

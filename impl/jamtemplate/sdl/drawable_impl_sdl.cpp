@@ -20,3 +20,12 @@ void jt::DrawableImplSdl::setOriginInternal(jt::Vector2f const& origin)
 {
     m_offsetFromOrigin = -1.0f * origin;
 }
+
+jt::Vector2f jt::DrawableImplSdl::getCompleteCamOffset() const
+{
+    if (getIgnoreCamMovement()) {
+        return getCamOffset() + m_camMovementFactor * getStaticCamOffset();
+    } else {
+        return getCamOffset();
+    }
+}
