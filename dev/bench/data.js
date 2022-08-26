@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1661285264043,
+  "lastUpdate": 1661538310489,
   "repoUrl": "https://github.com/Laguna1989/JamTemplateCpp",
   "entries": {
     "Benchmark": [
@@ -8472,6 +8472,84 @@ window.BENCHMARK_DATA = {
             "value": 4.142519701754508,
             "unit": "ms/iter",
             "extra": "iterations: 171\ncpu: 4.140612865497074 ms\nthreads: 1"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "laguna.ws@gmail.com",
+            "name": "Laguna1989",
+            "username": "Laguna1989"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "9b6e8be158eb816bfbac5c7aca840a67d99b1782",
+          "message": "Merge pull request #243 from Laguna1989/FEATURE_ScreenWrapRefactor\n\nScreen wrap and CamMovementFactor",
+          "timestamp": "2022-08-26T20:21:46+02:00",
+          "tree_id": "95698a6ba7d2feea8cee228cbf5a16b6eaf9e9ed",
+          "url": "https://github.com/Laguna1989/JamTemplateCpp/commit/9b6e8be158eb816bfbac5c7aca840a67d99b1782"
+        },
+        "date": 1661538309494,
+        "tool": "googlecpp",
+        "benches": [
+          {
+            "name": "BM_UpdateDrawablePositions",
+            "value": 6.07074396491214,
+            "unit": "ms/iter",
+            "extra": "iterations: 114\ncpu: 6.063917543859649 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GetAllCommands",
+            "value": 0.3600526504401867,
+            "unit": "ms/iter",
+            "extra": "iterations: 1931\ncpu: 0.3596838943552562 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_LoggerLogWithoutTarget",
+            "value": 0.9439543141210541,
+            "unit": "ms/iter",
+            "extra": "iterations: 694\ncpu: 0.9433170028818444 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_LoggerLogWithCoutTargetSetToOff",
+            "value": 0.9507159832495592,
+            "unit": "ms/iter",
+            "extra": "iterations: 597\ncpu: 0.9428638190954773 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_UpdateObjectGroup",
+            "value": 0.057015219143176026,
+            "unit": "ms/iter",
+            "extra": "iterations: 12558\ncpu: 0.05700538302277434 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_UpdateSpatialObjectGrid",
+            "value": 0.40526709151515317,
+            "unit": "ms/iter",
+            "extra": "iterations: 1650\ncpu: 0.4052132727272731 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_StartGame",
+            "value": 0.0031259304600069556,
+            "unit": "ms/iter",
+            "extra": "iterations: 228214\ncpu: 0.0031254414716012165 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_RefineTilemapCollisions",
+            "value": 0.2332948537303679,
+            "unit": "ms/iter",
+            "extra": "iterations: 3056\ncpu: 0.23325307591623043 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GamestateWithTweeningShapes",
+            "value": 3.682956322751292,
+            "unit": "ms/iter",
+            "extra": "iterations: 189\ncpu: 3.681400529100524 ms\nthreads: 1"
           }
         ]
       }
