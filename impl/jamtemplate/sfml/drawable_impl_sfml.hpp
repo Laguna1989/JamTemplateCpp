@@ -15,6 +15,8 @@ protected:
     std::shared_ptr<sf::Shader> m_shader { nullptr };
 
     sf::BlendMode getSfBlendMode() const;
+
+    jt::Vector2f getCompleteCamOffset() const;
 };
 
 } // namespace jt

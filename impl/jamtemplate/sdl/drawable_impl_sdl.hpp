@@ -12,6 +12,8 @@ public:
 
     void setOriginInternal(jt::Vector2f const& origin) override;
 
+    jt::Vector2f getCompleteCamOffset() const;
+
 protected:
     jt::Vector2f m_offsetFromOrigin { 0.0f, 0.0f };
 };

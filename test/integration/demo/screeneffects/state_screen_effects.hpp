@@ -11,6 +11,8 @@
 #include <vector>
 
 class StateScreenEffects : public jt::GameState {
+
+    mutable bool m_drawLevel { true };
     std::vector<std::shared_ptr<jt::tilemap::TileLayer>> m_tileLayers {};
 
     mutable bool m_drawVignette { true };
@@ -23,6 +25,7 @@ class StateScreenEffects : public jt::GameState {
     std::shared_ptr<jt::Clouds> m_clouds { nullptr };
 
     mutable bool m_drawStars { true };
+    mutable float m_starsMovementFactor { 1.0f };
     std::shared_ptr<jt::Stars> m_stars { nullptr };
 
     void doInternalCreate() override;

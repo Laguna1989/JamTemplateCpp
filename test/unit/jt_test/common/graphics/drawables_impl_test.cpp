@@ -87,11 +87,68 @@ TEST_P(DrawableImplTestFixture, GetScreenPositionAfterSetPosition)
     ASSERT_EQ(drawable->getScreenPosition(), expected);
 }
 
-TEST_P(DrawableImplTestFixture, GetScreenPositionAfterCamMove)
+TEST_P(DrawableImplTestFixture, GetInitialScreenPositionAfterCamMove)
 {
     jt::Vector2f const expected { 55.5f, -12.0f };
     jt::DrawableImpl::setCamOffset(expected);
     ASSERT_EQ(drawable->getScreenPosition(), expected);
+}
+
+TEST_P(DrawableImplTestFixture, GetPositionAfterCamMove)
+{
+    jt::Vector2f const expected { 100.0f, 200.0f };
+    drawable->setPosition(expected);
+    jt::DrawableImpl::setCamOffset(jt::Vector2f { 100.0f, 200.0f });
+    ASSERT_EQ(drawable->getScreenPosition(), 2.0f * expected);
+}
+
+TEST_P(DrawableImplTestFixture, GetInitialScreenPositionWithCamFactorSmallerOne)
+{
+    jt::Vector2f const expected { 100.0f, 200.0f };
+    drawable->setPosition(expected);
+    drawable->setCamMovementFactor(0.5f);
+    ASSERT_EQ(drawable->getScreenPosition(), expected);
+}
+
+TEST_P(DrawableImplTestFixture, GetInitialScreenPositionWithCamFactorBiggerOne)
+{
+    jt::Vector2f const expected { 100.0f, 200.0f };
+    drawable->setPosition(expected);
+    drawable->setCamMovementFactor(1.5f);
+    ASSERT_EQ(drawable->getScreenPosition(), expected);
+}
+
+TEST_P(DrawableImplTestFixture, GetScreenPositionWithCamFactorSmallerOne1)
+{
+    jt::Vector2f const worldPosition { 100.0f, 200.0f };
+    drawable->setPosition(worldPosition);
+    float const camMovementFactor { 0.1f };
+    drawable->setCamMovementFactor(camMovementFactor);
+    auto camOffset = jt::Vector2f { 100.0f, 200.0f };
+    jt::DrawableImpl::setCamOffset(camOffset);
+    ASSERT_EQ(drawable->getScreenPosition(), worldPosition + camMovementFactor * camOffset);
+}
+
+TEST_P(DrawableImplTestFixture, GetScreenPositionWithCamFactorSmallerOne2)
+{
+    jt::Vector2f const worldPosition { 1.0f, 200.0f };
+    drawable->setPosition(worldPosition);
+    float const camMovementFactor { 0.1f };
+    drawable->setCamMovementFactor(camMovementFactor);
+    auto camOffset = jt::Vector2f { 1.0f, 0.0f };
+    jt::DrawableImpl::setCamOffset(camOffset);
+    ASSERT_EQ(drawable->getScreenPosition(), worldPosition + camMovementFactor * camOffset);
+}
+
+TEST_P(DrawableImplTestFixture, GetScreenPositionWithCamFactorBiggerOne)
+{
+    jt::Vector2f const worldPosition { 100.0f, 200.0f };
+    drawable->setPosition(worldPosition);
+    float const camMovementFactor { 2.0f };
+    drawable->setCamMovementFactor(camMovementFactor);
+    auto camOffset = jt::Vector2f { 100.0f, 200.0f };
+    jt::DrawableImpl::setCamOffset(camOffset);
+    ASSERT_EQ(drawable->getScreenPosition(), worldPosition + camMovementFactor * camOffset);
 }
 
 TEST_P(DrawableImplTestFixture, GetScaleInitial)

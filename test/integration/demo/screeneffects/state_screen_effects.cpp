@@ -41,6 +41,8 @@ void StateScreenEffects::doInternalUpdate(float elapsed)
         getGame()->stateManager().switchState(std::make_shared<StateSelect>());
     }
 
+    m_stars->setCamMovementFactor(m_starsMovementFactor);
+
     scroll(elapsed);
 }
 
@@ -82,9 +84,12 @@ void StateScreenEffects::doInternalDraw() const
 void StateScreenEffects::drawGui() const
 {
     ImGui::Begin("Screen Effects");
+    ImGui::Checkbox("stars", &m_drawStars);
+    ImGui::SliderFloat("stars parallax", &m_starsMovementFactor, 0.0f, 1.5f, "%.1f");
+    ImGui::Checkbox("level", &m_drawLevel);
     ImGui::Checkbox("clouds", &m_drawClouds);
     ImGui::Checkbox("vignette", &m_drawVignette);
     ImGui::Checkbox("scan lines", &m_drawScanLines);
-    ImGui::Checkbox("stars", &m_drawStars);
+
     ImGui::End();
 }

@@ -77,12 +77,16 @@ public:
 
     BlendMode getBlendMode() const override;
 
+    void setCamMovementFactor(float factor) override;
+    float getCamMovementFactor() const override;
+
 protected:
     jt::Vector2f getShakeOffset() const;
     jt::Vector2f getCamOffset() const;
     jt::Vector2f m_screenSizeHint { 0.0f, 0.0f };
 
     virtual void setOriginInternal(jt::Vector2f const& /*origin*/) { }
+    float m_camMovementFactor { 1.0f };
 
 private:
     static jt::Vector2f m_CamOffset;

@@ -14,6 +14,7 @@ class Stars : public jt::GameObject {
 public:
     Stars(std::size_t count, jt::Color const& col, jt::Vector2f const& screenSizeHint);
     void setEnabled(bool enable);
+    void setCamMovementFactor(float factor);
 
 private:
     void doCreate() override;
