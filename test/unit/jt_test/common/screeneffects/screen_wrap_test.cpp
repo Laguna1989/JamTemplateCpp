@@ -35,7 +35,7 @@ TEST_P(ScreenWrapBecauseOfWorldPositionTestFixture, WraptTest)
     EXPECT_EQ(drawable->getPosition(), expectedPositionAfterWrap);
 }
 
-INSTANTIATE_TEST_CASE_P(ScreenWrapBecauseOfWorldPositionTest,
+INSTANTIATE_TEST_SUITE_P(ScreenWrapBecauseOfWorldPositionTest,
     ScreenWrapBecauseOfWorldPositionTestFixture,
     ::testing::Values(
         // inside, no wrap
@@ -79,7 +79,7 @@ TEST_P(ScreenWrapBecauseOfCamPositionTestFixture, WrapTest)
     EXPECT_EQ(drawable->getPosition(), expectedPositionAfterWrap);
 }
 
-INSTANTIATE_TEST_CASE_P(ScreenWrapBecauseOfCamPositionTest,
+INSTANTIATE_TEST_SUITE_P(ScreenWrapBecauseOfCamPositionTest,
     ScreenWrapBecauseOfCamPositionTestFixture,
     ::testing::Values(
         // inside, no wrap
@@ -112,7 +112,7 @@ TEST_P(ScreenWrapWithCamFactorTestFixture, WrapTest)
     EXPECT_EQ(drawable->getPosition(), expectedPositionAfterWrap);
 }
 
-INSTANTIATE_TEST_CASE_P(ScreenWrapWithCamFactorTest, ScreenWrapWithCamFactorTestFixture,
+INSTANTIATE_TEST_SUITE_P(ScreenWrapWithCamFactorTest, ScreenWrapWithCamFactorTestFixture,
     ::testing::Values(
         // inside, no wrap
         std::make_tuple(jt::Vector2f { 0.0f, 0.0f }, jt::Vector2f { 10.0f, 20.0f }, 1.0f),
