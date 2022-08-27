@@ -114,6 +114,7 @@ Please check the performance benchmark [report](https://laguna1989.github.io/Jam
 * remove the folders
     * `test`
     * `assets/test`
+    * `.github/workflows/` everything except `deploy.yml`
 * Changes in `CMakeLists.txt`:
     * Set the project name
     * Remove or comment the line `add_subdirectory(test)`
