@@ -106,3 +106,17 @@ OpenCppCoverage.exe --sources C:\projects\JamTemplateCpp\* --excluded_sources C:
 ## Performance benchmark
 
 Please check the performance benchmark [report](https://laguna1989.github.io/JamTemplateCpp/dev/bench/index.html).
+
+## 1hgj Setup
+
+* Use this repo as a template
+* Clone the new repository
+* remove the folders
+    * `test`
+    * `assets/test`
+* Changes in `CMakeLists.txt`:
+    * Set the project name
+    * Remove or comment the line `add_subdirectory(test)`
+* Set most cmake variables to `OFF` in `config/cmake/cache_variables.cmake`
+* Import a new palette into `gamelib/game_properties.cpp`, e.g. from [this website](https://lospec.com/palette-list) (
+  save as gpl and paste file content)
