@@ -19,6 +19,7 @@
 #include <tileson/state_tileson.hpp>
 #include <transitions/state_transitions.hpp>
 #include <tween/state_tween.hpp>
+#include <tilemap_effects/state_tilemap_effects.hpp>
 
 void StateSelect::doInternalCreate()
 {
@@ -41,6 +42,7 @@ void StateSelect::doInternalCreate()
     AddButton<StateShaders>("Shaders");
     AddButton<StateTransitions>("Transitions");
     AddButton<StateScreenEffects>("Effects");
+    AddButton<StateTilemapEffects>("Tile Effects");
 
     add(std::make_shared<jt::LicenseInfo>());
 }

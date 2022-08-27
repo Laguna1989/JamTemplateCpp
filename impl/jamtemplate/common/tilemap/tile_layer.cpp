@@ -50,8 +50,13 @@ void jt::tilemap::TileLayer::doDraw(std::shared_ptr<jt::RenderTarget> const sptr
 
         auto const pixelPosForTile = tile.position + posOffset;
         auto const id = tile.id;
-        this->m_tileSetSprites.at(id)->setPosition(jt::Vector2f {
-            pixelPosForTile.x * this->m_scale.x, pixelPosForTile.y * this->m_scale.y });
+        this->m_tileSetSprites.at(id)->setPosition(
+            jt::Vector2f { pixelPosForTile.x, pixelPosForTile.y });
+        auto color = jt::colors::White;
+        if (m_colorFunction != nullptr) {
+            color = m_colorFunction(tile.position);
+        }
+        this->m_tileSetSprites.at(id)->setColor(color);
         this->m_tileSetSprites.at(id)->setScale(this->m_scale);
         this->m_tileSetSprites.at(id)->update(0.0f);
         this->m_tileSetSprites.at(id)->setBlendMode(getBlendMode());
@@ -98,11 +103,21 @@ void jt::tilemap::TileLayer::setOriginInternal(jt::Vector2f const& origin)
     }
 }
 
-void jt::tilemap::TileLayer::doRotate(float /*rot*/) { }
+void jt::tilemap::TileLayer::doRotate(float rot)
+{
+    for (auto& ts : m_tileSetSprites) {
+        ts->setRotation(rot);
+    }
+}
 void jt::tilemap::TileLayer::setCustomShader(
     std::string const& shaderCodeVertex, std::string const& shaderCodeFragment)
 {
     for (auto& ts : m_tileSetSprites) {
         ts->setCustomShader(shaderCodeVertex, shaderCodeFragment);
     }
+}
+void jt::tilemap::TileLayer::setColorFunction(
+    std::function<jt::Color(jt::Vector2f const&)> colorFunc)
+{
+    m_colorFunction = colorFunc;
 }
