@@ -1,5 +1,5 @@
-﻿#ifndef STRESSTEST_STATE_TILESOM_HPP
-#define STRESSTEST_STATE_TILESOM_HPP
+﻿#ifndef JAMTEMPLATE_DEMOS_TILESON
+#define JAMTEMPLATE_DEMOS_TILESON
 
 #include <game_state.hpp>
 #include <tilemap/node_layer.hpp>
@@ -47,4 +47,5 @@ private:
     void calculatePath(std::shared_ptr<jt::pathfinder::NodeInterface> start,
         std::shared_ptr<jt::pathfinder::NodeInterface> end);
 };
-#endif
+
+#endif // JAMTEMPLATE_DEMOS_TILESON

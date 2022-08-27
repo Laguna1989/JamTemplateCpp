@@ -8,6 +8,7 @@
 #include <texture_manager_interface.hpp>
 #include <tilemap/info_rect.hpp>
 #include <tilemap/tile_info.hpp>
+#include <functional>
 #include <memory>
 #include <vector>
 
@@ -53,8 +54,11 @@ public:
     [[deprecated("Currently only implemented for SFML")]] void setCustomShader(
         std::string const& shaderCodeVertex, std::string const& shaderCodeFragment) override;
 
+    void setColorFunction(std::function<jt::Color(jt::Vector2f const&)>);
+
 private:
     mutable std::vector<std::shared_ptr<jt::Sprite>> m_tileSetSprites {};
+    std::function<jt::Color(jt::Vector2f const&)> m_colorFunction { nullptr };
 
     std::vector<TileInfo> m_tiles {};
 
