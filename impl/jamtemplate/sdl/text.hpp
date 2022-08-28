@@ -52,7 +52,6 @@ private:
 
     jt::Vector2f m_position { 0, 0 };
     jt::Color m_color { jt::colors::White };
-    jt::Vector2f m_scale { 1.0f, 1.0f };
 
     // optimization, so the text rendering logic does not have to happen in every frame, but only
     // when the text changes.

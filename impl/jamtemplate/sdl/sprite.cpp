@@ -131,7 +131,8 @@ void Sprite::doDrawFlash(std::shared_ptr<jt::RenderTarget> const sptr) const
     SDL_Rect const sourceRect = getSourceRect();
     SDL_Rect const destRect = getDestRect();
     auto const flip = jt::getFlipFromScale(m_scale);
-    SDL_Point const p { static_cast<int>(getOrigin().x), static_cast<int>(getOrigin().y) };
+    SDL_Point const p { static_cast<int>(getOrigin().x * m_scale.x),
+        static_cast<int>(getOrigin().y * m_scale.y) };
     SDL_SetRenderDrawBlendMode(sptr.get(), SDL_BLENDMODE_BLEND);
     SDL_SetTextureColorMod(
         m_textFlash.get(), getFlashColor().r, getFlashColor().g, getFlashColor().b);

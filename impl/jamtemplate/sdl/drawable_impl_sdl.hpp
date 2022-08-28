@@ -16,6 +16,7 @@ public:
 
 protected:
     jt::Vector2f m_offsetFromOrigin { 0.0f, 0.0f };
+    jt::Vector2f m_scale { 1.0f, 1.0f };
 };
 
 } // namespace jt

@@ -49,7 +49,6 @@ private:
     jt::Vector2f m_position { 0, 0 };
     jt::Recti m_sourceRect { 0, 0, 0, 0 };
     jt::Color m_color { jt::colors::White };
-    jt::Vector2f m_scale { 1.0f, 1.0f };
 
     mutable std::shared_ptr<SDL_Texture> m_textFlash;
     std::string m_fileName { "" };
