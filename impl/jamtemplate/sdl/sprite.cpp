@@ -67,7 +67,11 @@ jt::Rectf Sprite::getLocalBounds() const
         static_cast<float>(m_sourceRect.height) };
 }
 
-void Sprite::setScale(jt::Vector2f const& scale) { m_scale = scale; }
+void Sprite::setScale(jt::Vector2f const& scale)
+{
+    m_scale = scale;
+    setOriginInternal(m_origin);
+}
 jt::Vector2f Sprite::getScale() const { return m_scale; }
 
 jt::Color Sprite::getColorAtPixel(jt::Vector2u pixelPos) const
@@ -103,7 +107,8 @@ void Sprite::doDraw(std::shared_ptr<jt::RenderTarget> const sptr) const
     SDL_Rect const sourceRect = getSourceRect();
     SDL_Rect const destRect = getDestRect();
     auto const flip = jt::getFlipFromScale(m_scale);
-    SDL_Point const p { static_cast<int>(getOrigin().x), static_cast<int>(getOrigin().y) };
+    SDL_Point const p { static_cast<int>(getOrigin().x * m_scale.x),
+        static_cast<int>(getOrigin().y * m_scale.y) };
     SDL_SetRenderDrawBlendMode(sptr.get(), SDL_BLENDMODE_BLEND);
     setSDLColor(m_color);
     SDL_RenderCopyEx(sptr.get(), m_text.get(), &sourceRect, &destRect, -getRotation(), &p, flip);
@@ -114,7 +119,8 @@ void Sprite::doDrawShadow(std::shared_ptr<jt::RenderTarget> const sptr) const
     SDL_Rect const sourceRect = getSourceRect();
     SDL_Rect const destRect = getDestRect(getShadowOffset());
     auto const flip = jt::getFlipFromScale(m_scale);
-    SDL_Point const p { static_cast<int>(getOrigin().x), static_cast<int>(getOrigin().y) };
+    SDL_Point const p { static_cast<int>(getOrigin().x * m_scale.x),
+        static_cast<int>(getOrigin().y * m_scale.y) };
     SDL_SetRenderDrawBlendMode(sptr.get(), SDL_BLENDMODE_BLEND);
     setSDLColor(getShadowColor());
     SDL_RenderCopyEx(sptr.get(), m_text.get(), &sourceRect, &destRect, -getRotation(), &p, flip);
@@ -125,7 +131,8 @@ void Sprite::doDrawFlash(std::shared_ptr<jt::RenderTarget> const sptr) const
     SDL_Rect const sourceRect = getSourceRect();
     SDL_Rect const destRect = getDestRect();
     auto const flip = jt::getFlipFromScale(m_scale);
-    SDL_Point const p { static_cast<int>(getOrigin().x), static_cast<int>(getOrigin().y) };
+    SDL_Point const p { static_cast<int>(getOrigin().x * m_scale.x),
+        static_cast<int>(getOrigin().y * m_scale.y) };
     SDL_SetRenderDrawBlendMode(sptr.get(), SDL_BLENDMODE_BLEND);
     SDL_SetTextureColorMod(
         m_textFlash.get(), getFlashColor().r, getFlashColor().g, getFlashColor().b);

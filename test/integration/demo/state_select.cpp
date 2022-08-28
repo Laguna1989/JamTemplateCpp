@@ -1,4 +1,5 @@
 ﻿#include "state_select.hpp"
+#include "offset_origin/state_offset_origin.hpp"
 #include <audio/state_audio.hpp>
 #include <box2d/state_box2d.hpp>
 #include <easing/state_easing.hpp>
@@ -16,10 +17,10 @@
 #include <shader/state_shaders.hpp>
 #include <simplex/state_3d_noise.hpp>
 #include <swarmobjects/state_swarmobjects.hpp>
+#include <tilemap_effects/state_tilemap_effects.hpp>
 #include <tileson/state_tileson.hpp>
 #include <transitions/state_transitions.hpp>
 #include <tween/state_tween.hpp>
-#include <tilemap_effects/state_tilemap_effects.hpp>
 
 void StateSelect::doInternalCreate()
 {
@@ -43,6 +44,7 @@ void StateSelect::doInternalCreate()
     AddButton<StateTransitions>("Transitions");
     AddButton<StateScreenEffects>("Effects");
     AddButton<StateTilemapEffects>("Tile Effects");
+    AddButton<StateOffsetOrigin>("offset origin");
 
     add(std::make_shared<jt::LicenseInfo>());
 }

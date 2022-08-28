@@ -42,14 +42,19 @@ jt::Rectf Shape::getLocalBounds() const
         static_cast<float>(m_sourceRect.height) * m_scale.y };
 }
 
-void Shape::setScale(jt::Vector2f const& scale) { m_scale = scale; }
+void Shape::setScale(jt::Vector2f const& scale)
+{
+    m_scale = scale;
+    setOriginInternal(m_origin);
+}
 jt::Vector2f Shape::getScale() const { return m_scale; }
 
 void Shape::doDraw(std::shared_ptr<jt::RenderTarget> const sptr) const
 {
     SDL_Rect const destRect = getDestRect();
     auto const flip = jt::getFlipFromScale(m_scale);
-    SDL_Point const p { static_cast<int>(getOrigin().x), static_cast<int>(getOrigin().y) };
+    SDL_Point const p { static_cast<int>(getOrigin().x * m_scale.x),
+        static_cast<int>(getOrigin().y * m_scale.y) };
     SDL_SetRenderDrawBlendMode(sptr.get(), getSDLBlendMode());
     setSDLColor(m_color);
     SDL_RenderCopyEx(sptr.get(), m_text.get(), nullptr, &destRect, -getRotation(), &p, flip);
@@ -59,7 +64,8 @@ void Shape::doDrawFlash(std::shared_ptr<jt::RenderTarget> const sptr) const
 {
     SDL_Rect const destRect = getDestRect();
     auto const flip = jt::getFlipFromScale(m_scale);
-    SDL_Point const p { static_cast<int>(getOrigin().x), static_cast<int>(getOrigin().y) };
+    SDL_Point const p { static_cast<int>(getOrigin().x * m_scale.x),
+        static_cast<int>(getOrigin().y * m_scale.y) };
     SDL_SetRenderDrawBlendMode(sptr.get(), SDL_BLENDMODE_BLEND);
     setSDLColor(getFlashColor());
     SDL_RenderCopyEx(sptr.get(), m_text.get(), nullptr, &destRect, -getRotation(), &p, flip);
@@ -69,7 +75,8 @@ void Shape::doDrawShadow(std::shared_ptr<jt::RenderTarget> const sptr) const
 {
     SDL_Rect const destRect = getDestRect(getShadowOffset());
     auto const flip = jt::getFlipFromScale(m_scale);
-    SDL_Point const p { static_cast<int>(getOrigin().x), static_cast<int>(getOrigin().y) };
+    SDL_Point const p { static_cast<int>(getOrigin().x * m_scale.x),
+        static_cast<int>(getOrigin().y * m_scale.y) };
     SDL_SetRenderDrawBlendMode(sptr.get(), SDL_BLENDMODE_BLEND);
     setSDLColor(getShadowColor());
     SDL_RenderCopyEx(sptr.get(), m_text.get(), nullptr, &destRect, -getRotation(), &p, flip);
