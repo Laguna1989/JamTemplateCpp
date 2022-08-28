@@ -18,7 +18,7 @@ SDL_BlendMode jt::DrawableImplSdl::getSDLBlendMode() const
 
 void jt::DrawableImplSdl::setOriginInternal(jt::Vector2f const& origin)
 {
-    m_offsetFromOrigin = -1.0f * origin;
+    m_offsetFromOrigin = -1.0f * jt::Vector2f { origin.x * getScale().x, origin.y * getScale().y };
 }
 
 jt::Vector2f jt::DrawableImplSdl::getCompleteCamOffset() const

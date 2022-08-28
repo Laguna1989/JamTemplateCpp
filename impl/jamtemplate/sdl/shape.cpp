@@ -42,7 +42,11 @@ jt::Rectf Shape::getLocalBounds() const
         static_cast<float>(m_sourceRect.height) * m_scale.y };
 }
 
-void Shape::setScale(jt::Vector2f const& scale) { m_scale = scale; }
+void Shape::setScale(jt::Vector2f const& scale)
+{
+    m_scale = scale;
+    setOriginInternal(m_origin);
+}
 jt::Vector2f Shape::getScale() const { return m_scale; }
 
 void Shape::doDraw(std::shared_ptr<jt::RenderTarget> const sptr) const

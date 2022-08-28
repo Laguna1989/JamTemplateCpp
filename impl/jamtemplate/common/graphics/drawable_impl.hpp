@@ -88,6 +88,9 @@ protected:
     virtual void setOriginInternal(jt::Vector2f const& /*origin*/) { }
     float m_camMovementFactor { 1.0f };
 
+    jt::OriginMode m_originMode { jt::OriginMode::MANUAL };
+    jt::Vector2f m_origin { 0.0f, 0.0f };
+
 private:
     static jt::Vector2f m_CamOffset;
     bool m_ignoreCamMovement { false };
@@ -96,9 +99,6 @@ private:
 
     jt::OffsetMode m_offsetMode { jt::OffsetMode::MANUAL };
     jt::Vector2f m_offset { 0.0f, 0.0f };
-
-    jt::OriginMode m_originMode { jt::OriginMode::MANUAL };
-    jt::Vector2f m_origin { 0.0f, 0.0f };
 
     jt::BlendMode m_blendMode { jt::BlendMode::ALPHA };
 

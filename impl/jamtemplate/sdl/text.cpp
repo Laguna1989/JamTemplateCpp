@@ -61,7 +61,11 @@ jt::Rectf Text::getLocalBounds() const
             / static_cast<float>(getUpscaleFactor()) };
 }
 
-void Text::setScale(jt::Vector2f const& scale) { m_scale = scale; }
+void Text::setScale(jt::Vector2f const& scale)
+{
+    m_scale = scale;
+    setOriginInternal(m_origin);
+}
 jt::Vector2f Text::getScale() const { return m_scale; }
 
 void Text::setTextAlign(Text::TextAlign ta)
