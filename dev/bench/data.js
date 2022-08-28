@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1661616039774,
+  "lastUpdate": 1661679902492,
   "repoUrl": "https://github.com/Laguna1989/JamTemplateCpp",
   "entries": {
     "Benchmark": [
@@ -8784,6 +8784,84 @@ window.BENCHMARK_DATA = {
             "value": 4.272936337662296,
             "unit": "ms/iter",
             "extra": "iterations: 154\ncpu: 4.272588311688311 ms\nthreads: 1"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "laguna.ws@gmail.com",
+            "name": "Laguna1989",
+            "username": "Laguna1989"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "45223cac4664a10b40ccac6ca6251e5935452d21",
+          "message": "Merge pull request #245 from Laguna1989/FEATURE_Face\n\nFix Origin Offset for SDL",
+          "timestamp": "2022-08-28T11:42:24+02:00",
+          "tree_id": "0b7cf80044f9f5b627eecc00fe8eb0d28800fb51",
+          "url": "https://github.com/Laguna1989/JamTemplateCpp/commit/45223cac4664a10b40ccac6ca6251e5935452d21"
+        },
+        "date": 1661679901529,
+        "tool": "googlecpp",
+        "benches": [
+          {
+            "name": "BM_UpdateDrawablePositions",
+            "value": 2.9650386877636685,
+            "unit": "ms/iter",
+            "extra": "iterations: 237\ncpu: 2.9572561181434605 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GetAllCommands",
+            "value": 0.30342203987862737,
+            "unit": "ms/iter",
+            "extra": "iterations: 2307\ncpu: 0.3029257477243174 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_LoggerLogWithoutTarget",
+            "value": 0.7449771623931454,
+            "unit": "ms/iter",
+            "extra": "iterations: 936\ncpu: 0.7443147435897439 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_LoggerLogWithCoutTargetSetToOff",
+            "value": 0.7454812761194225,
+            "unit": "ms/iter",
+            "extra": "iterations: 938\ncpu: 0.7454350746268656 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_UpdateObjectGroup",
+            "value": 0.060948173262591436,
+            "unit": "ms/iter",
+            "extra": "iterations: 11497\ncpu: 0.06094554231538664 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_UpdateSpatialObjectGrid",
+            "value": 0.332243418615526,
+            "unit": "ms/iter",
+            "extra": "iterations: 2138\ncpu: 0.3322179139382601 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_StartGame",
+            "value": 0.0027968721225987846,
+            "unit": "ms/iter",
+            "extra": "iterations: 250443\ncpu: 0.0027887698997376632 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_RefineTilemapCollisions",
+            "value": 0.23007337675939712,
+            "unit": "ms/iter",
+            "extra": "iterations: 3055\ncpu: 0.22996896890343727 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GamestateWithTweeningShapes",
+            "value": 3.0508564672490492,
+            "unit": "ms/iter",
+            "extra": "iterations: 229\ncpu: 3.0507030567685574 ms\nthreads: 1"
           }
         ]
       }
