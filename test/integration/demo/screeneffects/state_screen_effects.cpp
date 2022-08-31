@@ -7,7 +7,6 @@
 
 void StateScreenEffects::doInternalCreate()
 {
-
     jt::tilemap::TilesonLoader loader { "assets/test/integration/demo/screeneffect_map.json" };
     std::vector<std::string> const layerNames { "ground", "water_edges", "rug", "shadows", "fence",
         "walls", "props" };
@@ -17,8 +16,11 @@ void StateScreenEffects::doInternalCreate()
             loader.loadTilesFromLayer(layer, textureManager(), "assets/test/integration/demo/")));
     }
 
-    m_stars = std::make_shared<jt::Stars>(100U, jt::colors::White, jt::Vector2f { 400.0f, 300.0f });
+    m_stars = std::make_shared<jt::Stars>(50U, jt::colors::White, jt::Vector2f { 400.0f, 300.0f });
     add(m_stars);
+
+    m_bubbleSmoke = std::make_shared<jt::BubbleSmoke>();
+    add(m_bubbleSmoke);
 
     m_vignette = std::make_shared<jt::Vignette>(jt::Vector2f { 400.0f, 300.0f });
     add(m_vignette);
@@ -70,9 +72,13 @@ void StateScreenEffects::scroll(float elapsed)
 void StateScreenEffects::doInternalDraw() const
 {
     m_stars->draw();
-    for (auto const& l : m_tileLayers) {
-        l->draw(renderTarget());
+    if (m_drawLevel) {
+        for (auto const& l : m_tileLayers) {
+            l->draw(renderTarget());
+        }
     }
+
+    m_bubbleSmoke->draw();
 
     m_clouds->draw();
     m_vignette->draw();
@@ -90,6 +96,9 @@ void StateScreenEffects::drawGui() const
     ImGui::Checkbox("clouds", &m_drawClouds);
     ImGui::Checkbox("vignette", &m_drawVignette);
     ImGui::Checkbox("scan lines", &m_drawScanLines);
+    if (ImGui::Button("bubbles")) {
+        m_bubbleSmoke->fire(jt::Vector2f { 400.0f, 300.0f });
+    }
 
     ImGui::End();
 }

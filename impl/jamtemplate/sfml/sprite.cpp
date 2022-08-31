@@ -62,9 +62,10 @@ void jt::Sprite::cleanImage()
 
 void jt::Sprite::doUpdate(float /*elapsed*/)
 {
-    auto const pos = m_position + getShakeOffset() + getOffset() + getCompleteCamOffset();
-    m_sprite.setPosition(pos.x, pos.y);
-    m_flashSprite.setPosition(pos.x, pos.y);
+    auto const screenPosition
+        = getPosition() + getShakeOffset() + getOffset() + getCompleteCamOffset();
+    m_sprite.setPosition(screenPosition.x, screenPosition.y);
+    m_flashSprite.setPosition(screenPosition.x, screenPosition.y);
     m_flashSprite.setColor(toLib(getFlashColor()));
 }
 
