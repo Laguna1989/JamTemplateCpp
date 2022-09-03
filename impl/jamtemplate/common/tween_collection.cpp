@@ -24,3 +24,4 @@ void jt::TweenCollection::update(float elapsed)
         tween->update(elapsed);
     }
 }
+std::size_t jt::TweenCollection::size() const { return m_tweens.size() + m_tweensToAdd.size(); }

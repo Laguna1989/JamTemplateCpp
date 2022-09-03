@@ -4,8 +4,6 @@
 #include <sdl_helper.hpp>
 #include <cmath>
 
-#include <iostream>
-
 namespace jt {
 
 namespace SpriteFunctions {

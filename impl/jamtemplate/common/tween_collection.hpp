@@ -2,6 +2,7 @@
 #define JAMTEMPLATE_TWEEN_COLLECTION_HPP
 
 #include <tweens/tween_interface.hpp>
+#include <algorithm>
 #include <memory>
 #include <vector>
 
@@ -9,10 +10,10 @@ namespace jt {
 class TweenCollection {
 public:
     void clear();
-
     void add(std::shared_ptr<jt::TweenInterface> tween);
-
     void update(float tween);
+
+    std::size_t size() const;
 
 private:
     /// all tweens running in this collection
