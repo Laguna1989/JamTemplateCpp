@@ -87,6 +87,20 @@ sf::Image createVignetteImage(std::vector<std::string> const& ssv)
     return jt::SpriteFunctions::makeVignetteImage(w, h);
 }
 
+sf::Image createRingImage(std::vector<std::string> const& ssv)
+{
+    if (ssv.size() != 2) {
+        throw std::invalid_argument { "create ring image: vector does not contain 1 elements." };
+    }
+    std::size_t count { 0 };
+    auto const ringImageSize = std::stol(ssv.at(1), &count);
+    if (count != ssv.at(1).size() || ringImageSize <= 0) {
+        throw std::invalid_argument { "invalid ring image size" };
+    }
+
+    return jt::SpriteFunctions::makeRing(ringImageSize);
+}
+
 sf::Image createFlashImage(sf::Image const& in)
 {
     sf::Image img { in };
@@ -138,6 +152,8 @@ sf::Texture& jt::TextureManagerImpl::get(std::string const& str)
                 m_textures[str].loadFromImage(createGlowImage(ssv));
             } else if (ssv.at(0) == "v") {
                 m_textures[str].loadFromImage(createVignetteImage(ssv));
+            } else if (ssv.at(0) == "r") {
+                m_textures[str].loadFromImage(createRingImage(ssv));
             } else {
                 throw std::invalid_argument("ERROR: cannot get texture with name " + str);
             }

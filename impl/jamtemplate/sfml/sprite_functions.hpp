@@ -15,6 +15,8 @@ sf::Image makeVignetteImage(unsigned int w, unsigned int h);
 
 sf::Image makeBlankImage(unsigned int w, unsigned int h);
 
+sf::Image makeRing(unsigned int w);
+
 } // namespace SpriteFunctions
 
 } // namespace jt

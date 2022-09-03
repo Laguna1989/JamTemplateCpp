@@ -90,7 +90,7 @@ void addCommandTextureManager(std::shared_ptr<jt::GameBase>& game)
         }));
 }
 
-void addCommandsMusicPlayer(std::shared_ptr<jt::GameBase>& game)
+void addCommandsMusicPlayer(std::shared_ptr<jt::GameBase>& /*game*/)
 {
     // TODO
 }

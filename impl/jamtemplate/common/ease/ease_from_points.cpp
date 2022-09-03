@@ -18,6 +18,7 @@ jt::EaseFromPoints::EaseFromPoints(std::deque<jt::Vector2f> const& vec)
         m_points.push_back(jt::Vector2f { 1.0f, m_points.back().y });
     }
 }
+
 float jt::EaseFromPoints::easeIn(float t, float minY, float maxY) const
 {
     auto const diffY = maxY - minY;

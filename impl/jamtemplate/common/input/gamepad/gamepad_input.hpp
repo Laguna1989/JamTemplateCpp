@@ -26,7 +26,6 @@ public:
     bool justReleased(GamepadButtonCode b) override;
 
 private:
-    int m_id { 0 };
     AxisFunc m_axisFunc;
     ButtonCheckFunction m_buttonFunc;
 

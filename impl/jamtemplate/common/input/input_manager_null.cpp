@@ -16,8 +16,8 @@ std::shared_ptr<jt::KeyboardInterface> jt::InputManagerNull::keyboard() { return
 
 std::shared_ptr<jt::GamepadInterface> jt::InputManagerNull::gamepad(int) { return m_gamepad; }
 
-void jt::InputManagerNull::update(
-    bool shouldProcessKeys, bool shouldProcessMouse, MousePosition const&, float)
+void jt::InputManagerNull::update(bool /*shouldProcessKeys*/, bool /*shouldProcessMouse*/,
+    MousePosition const& /*mp*/, float /*elapsed*/)
 {
 }
 void jt::InputManagerNull::reset() { }

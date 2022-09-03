@@ -86,3 +86,25 @@ sf::Image jt::SpriteFunctions::makeVignetteImage(unsigned int w, unsigned int h)
     }
     return img;
 }
+
+sf::Image jt::SpriteFunctions::makeRing(unsigned int w)
+{
+    sf::Image img {};
+    float const r = w / 2.0f;
+    float const minAngle = acos(1 - 1 / r);
+    img.create(w + 1, w + 1, toLib(jt::colors::Transparent));
+
+    for (auto a = 0.0f; a <= 90.0f; a += minAngle) {
+        float const xo = sin(a * 3.14152f / 180.0f) * r;
+        float const yo = cos(a * 3.14152f / 180.0f) * r;
+        img.setPixel(static_cast<unsigned int>(r + xo), static_cast<unsigned int>(r + yo),
+            toLib(jt::Color { 255, 255, 255, 255 }));
+        img.setPixel(static_cast<unsigned int>(r + xo), static_cast<unsigned int>(r - yo),
+            toLib(jt::Color { 255, 255, 255, 255 }));
+        img.setPixel(static_cast<unsigned int>(r - xo), static_cast<unsigned int>(r + yo),
+            toLib(jt::Color { 255, 255, 255, 255 }));
+        img.setPixel(static_cast<unsigned int>(r - xo), static_cast<unsigned int>(r - yo),
+            toLib(jt::Color { 255, 255, 255, 255 }));
+    }
+    return img;
+}
