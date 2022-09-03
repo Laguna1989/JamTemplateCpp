@@ -107,7 +107,7 @@ OpenCppCoverage.exe --sources C:\projects\JamTemplateCpp\* --excluded_sources C:
 
 Please check the performance benchmark [report](https://laguna1989.github.io/JamTemplateCpp/dev/bench/index.html).
 
-## 1hgj Setup
+## gamejam setup recommended steps
 
 * Use this repo as a template
 * Clone the new repository
@@ -120,5 +120,6 @@ Please check the performance benchmark [report](https://laguna1989.github.io/Jam
     * Remove or comment the line `add_subdirectory(test)`
 * Change js filename in `index.html`
 * Set most cmake variables to `OFF` in `config/cmake/cache_variables.cmake`
-* Import a new palette into `gamelib/game_properties.cpp`, e.g. from [this website](https://lospec.com/palette-list) (
+* Import a new palette into `impl/gamelib/game_properties.cpp`, e.g. from [this website](https://lospec.com/palette-list) (
   save as gpl and paste file content)
+* Change `impl/gamelib/game_properties.hpp` settings as needed (window size, jam, author and date)
