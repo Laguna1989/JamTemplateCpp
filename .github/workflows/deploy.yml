@@ -112,9 +112,13 @@ jobs:
           -DJT_ENABLE_WEB=ON \
           -DUSE_SFML=OFF .
 
-      - name: Build
+      - name: BuildFirst
         working-directory: ${{github.workspace}}/build
-        run: emmake make
+        run: emmake make Box2D
+
+      - name: BuildAll
+        working-directory: ${{github.workspace}}/build
+        run: emmake make -j
 
       - name: Copy index.html
         run: cp ${{github.workspace}}/index.html ${{github.workspace}}/build/impl/game/index.html
