@@ -31,7 +31,7 @@ void StateParticles::doInternalCreate()
             a->setPosition(jt::Vector2f { -2000.0f, -2000.0f });
             return a;
         },
-        [](auto a, auto /*pos*/) {
+        [](auto& a, auto /*pos*/) {
             auto startPosition = jt::Random::getRandomPointIn(jt::Rectf { 210, 50, 80, 200 });
             a->setPosition(startPosition);
             a->setRotation(jt::Random::getFloat(0.0f, 360.0f));
@@ -49,7 +49,7 @@ void StateParticles::createParticlesFire()
             s->setScale(jt::Vector2f { 0.5f, 0.5f });
             return s;
         },
-        [this](auto s, auto /*pos*/) {
+        [this](auto& s, auto /*pos*/) {
             auto totalTime = 0.9f;
 
             auto startPosition = jt::Random::getRandomPointIn(jt::Rectf { 155, 250, 10, 0 });
@@ -114,7 +114,7 @@ void StateParticles::createParticlesGlitter()
             s->setOrigin({ 2, 2 });
             return s;
         },
-        [this](auto s, auto /*pos*/) {
+        [this](auto& s, auto /*pos*/) {
             s->setPosition(jt::Random::getRandomPointIn(jt::Rectf { 0, 0, 100, 300 }));
 
             auto twa = jt::TweenAlpha::create(s, 0.5, 255, 0);

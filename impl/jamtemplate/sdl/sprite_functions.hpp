@@ -28,6 +28,9 @@ std::shared_ptr<SDL_Texture> makeRect(
 
 std::shared_ptr<SDL_Texture> makeCircle(std::shared_ptr<jt::RenderTarget> renderTarget, float r);
 
+std::shared_ptr<SDL_Texture> makeRing(
+    std::shared_ptr<jt::RenderTarget> renderTarget, unsigned int w);
+
 } // namespace SpriteFunctions
 
 } // namespace jt

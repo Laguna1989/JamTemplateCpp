@@ -38,7 +38,7 @@ std::shared_ptr<SDL_Texture> createBlankImage(
     std::vector<std::string> const& ssv, std::shared_ptr<jt::RenderTarget> renderTarget)
 {
     if (ssv.size() != 3) {
-        throw std::invalid_argument { "create button image: vector does not contain 3 elements." };
+        throw std::invalid_argument { "create blank image: vector does not contain 2 elements." };
     }
     std::size_t count { 0 };
     std::int64_t const w = std::stol(ssv.at(1), &count);
@@ -132,6 +132,21 @@ std::shared_ptr<SDL_Texture> createCircleImage(
     return SpriteFunctions::makeCircle(renderTarget, static_cast<float>(radius));
 }
 
+std::shared_ptr<SDL_Texture> createRingImage(
+    std::vector<std::string> const& ssv, std::shared_ptr<jt::RenderTarget> renderTarget)
+{
+    if (ssv.size() != 2) {
+        throw std::invalid_argument { "create ring image: vector does not contain 1 elements." };
+    }
+    std::size_t count { 0 };
+    auto const ringImageSize = std::stol(ssv.at(1), &count);
+    if (count != ssv.at(1).size() || ringImageSize <= 0) {
+        throw std::invalid_argument { "invalid ring image size" };
+    }
+
+    return SpriteFunctions::makeRing(renderTarget, ringImageSize);
+}
+
 std::shared_ptr<SDL_Texture> createFlashImage(
     std::string const& str, std::shared_ptr<jt::RenderTarget> renderTarget)
 {
@@ -217,9 +232,11 @@ std::shared_ptr<SDL_Texture> TextureManagerImpl::get(std::string const& str)
             } else if (ssv.at(0) == "v") {
                 m_textures[str] = createVignetteImage(ssv, m_renderer.lock());
             } else if (ssv.at(0) == "x") {
-                return createRectImage(ssv, m_renderer.lock());
+                m_textures[str] = createRectImage(ssv, m_renderer.lock());
             } else if (ssv.at(0) == "c") {
-                return createCircleImage(ssv, m_renderer.lock());
+                m_textures[str] = createCircleImage(ssv, m_renderer.lock());
+            } else if (ssv.at(0) == "r") {
+                m_textures[str] = createRingImage(ssv, m_renderer.lock());
             } else {
                 throw std::invalid_argument("ERROR: cannot get texture with name " + str);
             }

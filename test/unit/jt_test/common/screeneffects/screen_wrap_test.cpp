@@ -79,6 +79,18 @@ TEST_P(ScreenWrapBecauseOfCamPositionTestFixture, WrapTest)
     EXPECT_EQ(drawable->getPosition(), expectedPositionAfterWrap);
 }
 
+TEST_P(ScreenWrapBecauseOfCamPositionTestFixture, WrapTestWithZeroScreenSizeDoesNothing)
+{
+    auto const camPosition = std::get<0>(GetParam());
+    auto const margin = std::get<2>(GetParam());
+    jt::Vector2f const initialPosition { 10.0f, 20.0f };
+    drawable->setPosition(initialPosition);
+    drawable->setScreenSizeHint({ 0.0f, 0.0f });
+    jt::DrawableImpl::setCamOffset(camPosition);
+    jt::wrapOnScreen(*drawable.get(), margin);
+    EXPECT_EQ(drawable->getPosition(), initialPosition);
+}
+
 INSTANTIATE_TEST_SUITE_P(ScreenWrapBecauseOfCamPositionTest,
     ScreenWrapBecauseOfCamPositionTestFixture,
     ::testing::Values(

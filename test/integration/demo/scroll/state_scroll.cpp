@@ -23,6 +23,9 @@ void StateScroll::doInternalCreate()
     m_sprite->setOrigin(jt::OriginMode::CENTER);
     m_sprite->setShadow(jt::colors::Black, jt::Vector2f { 2, 2 });
 
+    m_spriteCircle = std::make_shared<jt::Sprite>("#r#32", textureManager());
+    m_spriteCircle->setPosition({ 350, 64 });
+
     m_anim = std::make_shared<jt::Animation>();
     m_anim->add("assets/test/integration/demo/coin.png", "idle", jt::Vector2u { 16, 16 },
         jt::MathHelper::numbersBetween(0U, 11U), 0.15f, textureManager());
@@ -88,6 +91,8 @@ void StateScroll::doInternalUpdate(float const elapsed)
     m_sprite->setRotation(-getAge() * 90);
     m_sprite->update(elapsed);
 
+    m_spriteCircle->update(elapsed);
+
     m_anim->update(elapsed);
 
     m_text_left_aligned->update(elapsed);
@@ -102,6 +107,7 @@ void StateScroll::doInternalDraw() const
 
     drawObjects();
     m_sprite->draw(renderTarget());
+    m_spriteCircle->draw(renderTarget());
     m_shape1->draw(renderTarget());
     m_anim->draw(renderTarget());
 

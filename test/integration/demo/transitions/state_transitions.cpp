@@ -7,7 +7,7 @@
 #include <imgui.h>
 
 void StateTransitions::doInternalCreate() { }
-void StateTransitions::doInternalUpdate(float elapsed) { }
+void StateTransitions::doInternalUpdate(float /*elapsed*/) { }
 void StateTransitions::doInternalDraw() const
 {
     ImGui::Begin("Transitions");

@@ -35,7 +35,7 @@ void jt::InputManager::reset()
 }
 
 void jt::InputManager::update(
-    bool shouldProcessKeys, bool shouldProcessMouse, MousePosition const& mp, float elapsed)
+    bool /*shouldProcessKeys*/, bool /*shouldProcessMouse*/, MousePosition const& mp, float elapsed)
 {
     if (m_mouse) {
         m_mouse->updateMousePosition(mp);

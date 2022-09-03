@@ -26,6 +26,8 @@ TEST_F(TextureManagerTest, GetGlow)
 
 TEST_F(TextureManagerTest, GetVignette) { EXPECT_NO_THROW(m_manager.get("#v#100#200")); }
 
+TEST_F(TextureManagerTest, GetRing) { EXPECT_NO_THROW(m_manager.get("#r#32")); }
+
 TEST_F(TextureManagerTest, GetButtonInvalid)
 {
     // too many arguments
@@ -70,6 +72,18 @@ TEST_F(TextureManagerTest, GetVignettteInvalid)
     EXPECT_ANY_THROW(m_manager.get("#v#12asv12#30"));
     // hex numbers not allowed
     EXPECT_ANY_THROW(m_manager.get("#v#0x12#30"));
+}
+
+TEST_F(TextureManagerTest, GetRingInvalid)
+{
+    // too many arguments
+    EXPECT_ANY_THROW(m_manager.get("#r#10#20#30"));
+    // negative value
+    EXPECT_ANY_THROW(m_manager.get("#r#-100"));
+    // chars in size argument
+    EXPECT_ANY_THROW(m_manager.get("#r#3asdf0"));
+    // hex numbers not allowed
+    EXPECT_ANY_THROW(m_manager.get("#r#0x12"));
 }
 
 TEST_F(TextureManagerTest, GetBlankInvalid)

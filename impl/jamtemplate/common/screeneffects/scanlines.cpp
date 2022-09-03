@@ -14,7 +14,6 @@ void jt::ScanLines::doCreate()
     m_shape = jt::dh::createShapeRect(m_shapeSize, jt::Color { 0, 0, 0, 40 }, textureManager());
     m_shape->setIgnoreCamMovement(true);
 }
-void jt::ScanLines::doUpdate(float const elapsed) { }
 void jt::ScanLines::doDraw() const
 {
     if (m_enabled) {

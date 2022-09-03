@@ -1,6 +1,7 @@
 ﻿#ifndef JAMTEMPLATE_GAMESTATE_HPP
 #define JAMTEMPLATE_GAMESTATE_HPP
 
+#include "tween_collection.hpp"
 #include <game_object.hpp>
 #include <tweens/tween_interface.hpp>
 #include <memory>
@@ -24,8 +25,8 @@ public:
 
     /// Add a GameObjectInterface to the GameState
     /// Added Objects will be updated and drawn by the GameState
-    /// \param obj the GameObject
-    void add(std::shared_ptr<TweenInterface> obj);
+    /// \param tween the GameObject
+    void add(std::shared_ptr<TweenInterface> tween);
 
     /// Get the number of GameObjects in the State
     /// \return the number of gameobjects
@@ -83,17 +84,7 @@ private:
     /// once it is safe to do so.
     std::vector<std::shared_ptr<GameObject>> m_objectsToAdd {};
 
-    /// all tweens running in this state
-    std::vector<std::shared_ptr<TweenInterface>> m_tweens {};
-
-    /// this is used as a level of indirection, because GameObjects might add or remove objects
-    /// while iterating over the objects vector, which invalidates iterators, which leads to
-    /// crashes.
-    ///
-    /// The idea is to not modify m_gameObjects directly when a Tween is added,
-    /// but to place them in this vector first and add them to m_gameObjects,
-    /// once it is safe to do so.
-    std::vector<std::shared_ptr<TweenInterface>> m_tweensToAdd {};
+    jt::TweenCollection m_tweens;
 
     bool m_doAutoUpdateObjects { true };
     bool m_doAutoUpdateTweens { true };

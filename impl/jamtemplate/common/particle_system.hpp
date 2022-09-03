@@ -12,7 +12,7 @@ template <class T, size_t N>
 class ParticleSystem : public GameObject {
 public:
     using ResetCallbackType
-        = std::function<void(std::shared_ptr<T> particle, jt::Vector2f const& pos)>;
+        = std::function<void(std::shared_ptr<T>& particle, jt::Vector2f const& pos)>;
 
     /// Create a Particle System
     /// \tparam InitCallbackT Type of the init callback, should be of type T(void)

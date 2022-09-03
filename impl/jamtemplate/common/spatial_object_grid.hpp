@@ -73,7 +73,7 @@ public:
         return objects;
     }
 
-    void doUpdate(float const elapsed) override
+    void doUpdate(float const /*elapsed*/) override
     {
         std::unordered_set<std::shared_ptr<T>> objectsToReplace;
 

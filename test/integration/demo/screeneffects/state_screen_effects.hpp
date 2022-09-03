@@ -3,6 +3,7 @@
 
 #include "screeneffects/stars.hpp"
 #include <game_state.hpp>
+#include <screeneffects/bubble_smoke.hpp>
 #include <screeneffects/clouds.hpp>
 #include <screeneffects/scanlines.hpp>
 #include <screeneffects/vignette.hpp>
@@ -27,6 +28,8 @@ class StateScreenEffects : public jt::GameState {
     mutable bool m_drawStars { true };
     mutable float m_starsMovementFactor { 1.0f };
     std::shared_ptr<jt::Stars> m_stars { nullptr };
+
+    std::shared_ptr<jt::BubbleSmoke> m_bubbleSmoke { nullptr };
 
     void doInternalCreate() override;
     void doInternalUpdate(float elapsed) override;

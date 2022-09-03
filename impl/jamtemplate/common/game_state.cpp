@@ -7,7 +7,6 @@
 jt::GameState::~GameState()
 {
     m_tweens.clear();
-    m_tweensToAdd.clear();
 
     m_objectsToAdd.clear();
     m_objects.clear();
@@ -27,7 +26,7 @@ void jt::GameState::add(std::shared_ptr<jt::GameObject> gameObject)
     }
 }
 
-void jt::GameState::add(std::shared_ptr<TweenInterface> obj) { m_tweensToAdd.push_back(obj); }
+void jt::GameState::add(std::shared_ptr<TweenInterface> tween) { m_tweens.add(tween); }
 
 size_t jt::GameState::getNumberOfObjects() const { return m_objects.size(); }
 
@@ -39,7 +38,6 @@ void jt::GameState::internalCreate()
 {
     getGame()->logger().debug("create GameState: " + getName(), { "jt" });
     m_tweens.clear();
-    m_tweensToAdd.clear();
     doInternalCreate();
     add(std::make_shared<jt::Console>(getGame()->logger()));
     add(std::make_shared<jt::InfoScreen>());
@@ -89,19 +87,7 @@ void jt::GameState::updateTweens(float elapsed)
     if (getAge() < expected_minimum_age) {
         return;
     }
-    m_tweens.insert(m_tweens.end(), m_tweensToAdd.cbegin(), m_tweensToAdd.cend());
-    m_tweensToAdd.clear();
-    if (m_tweens.empty()) {
-        return;
-    }
-    m_tweens.erase(
-        std::remove_if(m_tweens.begin(), m_tweens.end(),
-            [](std::shared_ptr<TweenInterface> const& obj) { return !(obj->isAlive()); }),
-        m_tweens.cend());
-
-    for (auto& obj : m_tweens) {
-        obj->update(elapsed);
-    }
+    m_tweens.update(elapsed);
 }
 
 void jt::GameState::drawObjects() const

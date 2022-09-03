@@ -7,7 +7,7 @@ ControlCommandMoveB2Body::ControlCommandMoveB2Body(
 {
 }
 
-void ControlCommandMoveB2Body::doExecute(float elapsed)
+void ControlCommandMoveB2Body::doExecute(float /*elapsed*/)
 {
     auto obj = m_obj.lock();
     if (obj) {

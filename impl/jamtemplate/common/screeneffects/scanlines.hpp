@@ -25,7 +25,6 @@ private:
     std::size_t m_shapeCount;
 
     void doCreate() override;
-    void doUpdate(float const elapsed) override;
     void doDraw() const override;
 };
 

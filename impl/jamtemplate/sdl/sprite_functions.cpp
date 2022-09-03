@@ -177,5 +177,36 @@ std::shared_ptr<SDL_Texture> makeCircle(std::shared_ptr<jt::RenderTarget> render
         [](SDL_Texture* t) { SDL_DestroyTexture(t); });
 }
 
+std::shared_ptr<SDL_Texture> makeRing(
+    std::shared_ptr<jt::RenderTarget> renderTarget, unsigned int w)
+{
+    std::shared_ptr<SDL_Surface> image = std::shared_ptr<SDL_Surface>(
+        SDL_CreateRGBSurfaceWithFormat(0, w + 1, w + 1, 32, SDL_PIXELFORMAT_RGBA32),
+        [](SDL_Surface* s) { SDL_FreeSurface(s); });
+
+    float const r = w / 2.0f;
+    float const minAngle = acos(1 - 1 / r);
+
+    SDL_FillRect(image.get(), nullptr, SDL_MapRGBA(image->format, 255, 255, 255, 0));
+    for (auto a = 0.0f; a <= 90.0f; a += minAngle) {
+        float const xo = sin(a * 3.14152f / 180.0f) * r;
+        float const yo = cos(a * 3.14152f / 180.0f) * r;
+
+        jt::setPixel(image.get(), static_cast<unsigned int>(r + xo),
+            static_cast<unsigned int>(r + yo), SDL_MapRGBA(image->format, 255, 255, 255, 255));
+        jt::setPixel(image.get(), static_cast<unsigned int>(r - xo),
+            static_cast<unsigned int>(r + yo), SDL_MapRGBA(image->format, 255, 255, 255, 255));
+        jt::setPixel(image.get(), static_cast<unsigned int>(r + xo),
+            static_cast<unsigned int>(r - yo), SDL_MapRGBA(image->format, 255, 255, 255, 255));
+        jt::setPixel(image.get(), static_cast<unsigned int>(r - xo),
+            static_cast<unsigned int>(r - yo), SDL_MapRGBA(image->format, 255, 255, 255, 255));
+    }
+
+    SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "0");
+    return std::shared_ptr<SDL_Texture>(
+        SDL_CreateTextureFromSurface(renderTarget.get(), image.get()),
+        [](SDL_Texture* t) { SDL_DestroyTexture(t); });
+}
+
 } // namespace SpriteFunctions
 } // namespace jt
