@@ -46,7 +46,12 @@ public:
     /// Get Random point in rect
     /// \param rect the rect to contain the point
     /// \return random point in rect
-    static jt::Vector2f getRandomPointIn(Rectf const& rect);
+    static jt::Vector2f getRandomPointIn(jt::Rectf const& rect);
+
+    /// Get Random point in rect
+    /// \param size the size of the rect to contain the point. Offset of rect is (0, 0)
+    /// \return random point in rect
+    static jt::Vector2f getRandomPointIn(jt::Vector2f const& size);
 
     /// Set the seed of the rng
     /// \param s seed value

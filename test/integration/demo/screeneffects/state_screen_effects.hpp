@@ -2,6 +2,7 @@
 #define JAMTEMPLATE_STATE_SCREEN_EFFECTS_HPP
 
 #include "screeneffects/stars.hpp"
+#include "screeneffects/wind_particles.hpp"
 #include <game_state.hpp>
 #include <screeneffects/bubble_smoke.hpp>
 #include <screeneffects/clouds.hpp>
@@ -30,6 +31,10 @@ class StateScreenEffects : public jt::GameState {
     std::shared_ptr<jt::Stars> m_stars { nullptr };
 
     std::shared_ptr<jt::BubbleSmoke> m_bubbleSmoke { nullptr };
+
+    mutable bool m_drawWind { true };
+    mutable float m_windStrength { 1.0f };
+    std::shared_ptr<jt::WindParticles> m_wind { nullptr };
 
     void doInternalCreate() override;
     void doInternalUpdate(float elapsed) override;

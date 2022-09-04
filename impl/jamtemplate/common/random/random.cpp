@@ -43,6 +43,11 @@ jt::Vector2f jt::Random::getRandomPointIn(Rectf const& rect)
     return jt::Vector2f { x, y };
 }
 
+jt::Vector2f jt::Random::getRandomPointIn(jt::Vector2f const& size)
+{
+    return getRandomPointIn(jt::Rectf { 0.0f, 0.0f, size.x, size.y });
+}
+
 void jt::Random::setSeed(unsigned int s) { m_engine.seed(s); }
 
 void jt::Random::useTimeAsRandomSeed() { setSeed(static_cast<unsigned int>(time(nullptr))); }
