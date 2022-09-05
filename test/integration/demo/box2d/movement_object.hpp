@@ -7,13 +7,12 @@
 #include <Box2D/Box2D.h>
 #include <memory>
 
-// TODO Split into static colliders and Player
-class MovementObject : public jt::GameObject {
+class Player : public jt::GameObject {
 public:
-    using Sptr = std::shared_ptr<MovementObject>;
-    MovementObject(std::shared_ptr<jt::Box2DWorldInterface> world, const b2BodyDef* def);
+    using Sptr = std::shared_ptr<Player>;
+    Player(std::shared_ptr<jt::Box2DWorldInterface> world, const b2BodyDef* def);
 
-    ~MovementObject() = default;
+    ~Player() = default;
 
     std::shared_ptr<jt::Animation> getAnimation();
 

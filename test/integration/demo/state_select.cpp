@@ -47,6 +47,8 @@ void StateSelect::doInternalCreate()
     AddButton<StateOffsetOrigin>("offset origin");
 
     add(std::make_shared<jt::LicenseInfo>());
+
+    //    getGame()->gfx().camera().setZoom(2.0f);
 }
 
 void StateSelect::doInternalUpdate(float /*elapsed*/)

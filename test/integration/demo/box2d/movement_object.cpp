@@ -3,66 +3,73 @@
 #include <game_interface.hpp>
 #include <math_helper.hpp>
 
-MovementObject::MovementObject(std::shared_ptr<jt::Box2DWorldInterface> world, b2BodyDef const* def)
+Player::Player(std::shared_ptr<jt::Box2DWorldInterface> world, b2BodyDef const* def)
 {
     m_physicsObject = std::make_shared<jt::Box2DObject>(world, def);
-    m_type = def->type;
 }
 
-void MovementObject::doCreate()
+void Player::doCreate()
 {
     m_animation = std::make_shared<jt::Animation>();
+
+    m_animation->add("assets/test/integration/demo/hero_8x8.png", "walk", jt::Vector2u { 8, 8 },
+        { 0, 1 }, 0.23f, textureManager());
+    m_animation->play("walk");
+    //    m_animation->setOffset(jt::OffsetMode::CENTER);
+
     b2FixtureDef fixtureDef;
     fixtureDef.density = 1.0f;
-    fixtureDef.friction = 5.0f;
-    if (m_type == b2BodyType::b2_dynamicBody) {
-        m_animation->add("assets/test/integration/demo/coin.png", "idle", jt::Vector2u { 16, 16 },
-            jt::MathHelper::numbersBetween(0U, 11U), 0.13f, textureManager());
-        m_animation->play("idle");
-        m_animation->setOffset(jt::Vector2f { 8, 8 });
-        m_animation->setOrigin(jt::Vector2f { 8, 8 });
-
-        b2CircleShape circleCollider {};
-        circleCollider.m_radius = 8.0f;
-        fixtureDef.shape = &circleCollider;
-        m_physicsObject->getB2Body()->CreateFixture(&fixtureDef);
-
-    } else {
-        m_animation->add("assets/test/integration/demo/wall.png", "idle", jt::Vector2u { 16, 16 },
-            { 0 }, 100.0f, textureManager());
-        m_animation->play("idle");
-        m_animation->setOffset(jt::Vector2f { 8, 8 });
-        m_animation->setOrigin(jt::Vector2f { 8, 8 });
-
-        b2PolygonShape boxCollider {};
-        boxCollider.SetAsBox(8, 8);
-        fixtureDef.shape = &boxCollider;
-        m_physicsObject->getB2Body()->CreateFixture(&fixtureDef);
-    }
+    fixtureDef.friction = 0.0f;
+    b2CircleShape circleCollider {};
+    circleCollider.m_radius = 8.0f;
+    fixtureDef.shape = &circleCollider;
+    m_physicsObject->getB2Body()->CreateFixture(&fixtureDef);
 }
 
-std::shared_ptr<jt::Animation> MovementObject::getAnimation() { return m_animation; }
+std::shared_ptr<jt::Animation> Player::getAnimation() { return m_animation; }
 
-void MovementObject::doUpdate(float const elapsed)
+void Player::doUpdate(float const elapsed)
 {
     using namespace jt::Conversion;
     m_animation->setPosition(vec(m_physicsObject->getB2Body()->GetPosition()));
 
     m_animation->update(elapsed);
     auto b2b = m_physicsObject->getB2Body();
-    if (b2b->GetType() == b2BodyType::b2_dynamicBody) {
-        if (getGame()->input().keyboard()->pressed(jt::KeyCode::D)) {
-            b2b->ApplyForceToCenter(b2Vec2 { 60000, 0 }, true);
-        }
 
-        if (getGame()->input().keyboard()->pressed(jt::KeyCode::A)) {
-            b2b->ApplyForceToCenter(b2Vec2 { -60000, 0 }, true);
-        }
+    bool horizontalMovement { false };
+    if (getGame()->input().keyboard()->pressed(jt::KeyCode::D)) {
+        b2b->ApplyForceToCenter(b2Vec2 { 60000, 0 }, true);
+        horizontalMovement = true;
+    }
+
+    if (getGame()->input().keyboard()->pressed(jt::KeyCode::A)) {
+        b2b->ApplyForceToCenter(b2Vec2 { -60000, 0 }, true);
+        horizontalMovement = true;
     }
 
     if (getGame()->input().keyboard()->pressed(jt::KeyCode::B)) {
         m_animation->flash(0.5f, jt::colors::Red);
     }
+
+    auto v = m_physicsObject->getVelocity();
+    // clamp horizontal Velocity
+    float const maxHorizontalVelocity = 70.0f;
+    if (v.x >= maxHorizontalVelocity) {
+        v.x = maxHorizontalVelocity;
+    } else if (v.x <= -maxHorizontalVelocity) {
+        v.x = -maxHorizontalVelocity;
+    }
+
+    float const horizontalDampening { 100.0f };
+    if (!horizontalMovement) {
+        if (v.x > 0) {
+            v.x -= horizontalDampening * elapsed;
+        } else if (v.x < 0) {
+            v.x += horizontalDampening * elapsed;
+        }
+    }
+
+    m_physicsObject->setVelocity(v);
 }
 
-void MovementObject::doDraw() const { m_animation->draw(renderTarget()); }
+void Player::doDraw() const { m_animation->draw(renderTarget()); }
