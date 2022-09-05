@@ -39,9 +39,7 @@ void StateGame::doInternalCreate()
 
 void StateGame::createPlayer()
 {
-    b2BodyDef def;
-    def.type = b2BodyType::b2_dynamicBody;
-    m_player = std::make_shared<Player>(m_world, &def, *this);
+    m_player = std::make_shared<Player>(m_world, *this);
     add(m_player);
 }
 
@@ -83,4 +81,5 @@ void StateGame::endGame()
 
     getGame()->stateManager().switchState(std::make_shared<StateMenu>());
 }
-std::string StateGame::getName() const { return "Game"; }
+
+std::string StateGame::getName() const { return "State Game"; }

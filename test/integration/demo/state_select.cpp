@@ -1,11 +1,11 @@
 ﻿#include "state_select.hpp"
 #include "offset_origin/state_offset_origin.hpp"
+#include "palette/state_palette.hpp"
 #include <audio/state_audio.hpp>
 #include <box2d/state_box2d.hpp>
 #include <easing/state_easing.hpp>
 #include <explosion/state_explosion.hpp>
 #include <gamepad/state_gamepad.hpp>
-#include <gradient/state_gradient.hpp>
 #include <imgui/state_imgui.hpp>
 #include <inventory/state_inventory.hpp>
 #include <log/license_info.hpp>
@@ -33,7 +33,7 @@ void StateSelect::doInternalCreate()
     AddButton<StateRope>("Rope");
     AddButton<StateParticles>("Particles");
     AddButton<StatePathfinding>("Pathfinding");
-    AddButton<StateGradient>("Palettes");
+    AddButton<StatePalette>("Palettes");
     AddButton<StateImGui>("ImGui");
     AddButton<State3DNoise>("3D Noise");
     AddButton<StateEasing>("Easing");
@@ -58,4 +58,4 @@ void StateSelect::doInternalDraw() const
 {
     // nothing to do here
 }
-std::string StateSelect::getName() const { return "Demo Select"; }
+std::string StateSelect::getName() const { return "State Demo Select"; }

@@ -1,4 +1,5 @@
 #include "control_command_move_b_2_body.hpp"
+#include <iostream>
 
 ControlCommandMoveB2Body::ControlCommandMoveB2Body(
     jt::Vector2f scrollDirection, std::weak_ptr<jt::Box2DObject> obj)

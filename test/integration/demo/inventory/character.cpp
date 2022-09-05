@@ -1,12 +1,18 @@
 #include "character.hpp"
 #include <game_interface.hpp>
+#include <Box2D/Box2D.h>
 
-PlayerCharacter::PlayerCharacter(std::shared_ptr<jt::Box2DWorldInterface> world,
-    b2BodyDef const* def, std::weak_ptr<ItemRepository> repo)
-    : jt::Box2DObject { world, def }
+PlayerCharacter::PlayerCharacter(
+    std::shared_ptr<jt::Box2DWorldInterface> world, std::weak_ptr<ItemRepository> repo)
 {
     m_inventory = std::make_shared<InventoryListImgui>(repo);
     m_charsheet = std::make_shared<CharacterSheetImgui>(repo);
+
+    b2BodyDef bodyDef;
+    bodyDef.fixedRotation = true;
+    bodyDef.type = b2_dynamicBody;
+    bodyDef.position.Set(5 * 24, 7 * 24);
+    m_physicsObject = std::make_shared<jt::Box2DObject>(world, &bodyDef);
 }
 
 void PlayerCharacter::doCreate()
@@ -15,7 +21,7 @@ void PlayerCharacter::doCreate()
     b2PolygonShape boxCollider {};
     boxCollider.SetAsBox(8, 11);
     fixtureDef.shape = &boxCollider;
-    getB2Body()->CreateFixture(&fixtureDef);
+    m_physicsObject->getB2Body()->CreateFixture(&fixtureDef);
 
     m_animation = std::make_shared<jt::Animation>();
     m_animation->add("assets/test/integration/demo/chars.png", "idle", jt::Vector2u { 24, 24 },
@@ -48,9 +54,9 @@ void PlayerCharacter::doUpdate(float const elapsed)
         newVelocity += jt::Vector2f { 0.0f, speed };
     }
 
-    setVelocity(newVelocity);
+    m_physicsObject->setVelocity(newVelocity);
 
-    m_animation->setPosition(getPosition());
+    m_animation->setPosition(m_physicsObject->getPosition());
     m_animation->update(elapsed);
 
     float xscale = ((newVelocity.x < 0.0f) ? 1.0f : -1.0f);
@@ -71,3 +77,4 @@ void PlayerCharacter::doDraw() const
 
 std::shared_ptr<InventoryInterface> PlayerCharacter::getInventory() { return m_inventory; }
 std::shared_ptr<CharacterSheetImgui> PlayerCharacter::getCharSheet() { return m_charsheet; }
+std::shared_ptr<jt::Box2DObject> PlayerCharacter::getBox2DObject() const { return m_physicsObject; }

@@ -1,4 +1,4 @@
-#include "state_gradient.hpp"
+#include "state_palette.hpp"
 #include <color/palette.hpp>
 #include <drawable_helpers.hpp>
 #include <game_interface.hpp>
@@ -6,7 +6,7 @@
 #include <fstream>
 #include <sstream>
 
-void StateGradient::doInternalCreate()
+void StatePalette::doInternalCreate()
 {
     createShapesFromSaturationGradient();
     createShapesFromHueGradient();
@@ -14,7 +14,7 @@ void StateGradient::doInternalCreate()
     createShapesFromGPL();
 }
 
-void StateGradient::createShapesFromSaturationGradient()
+void StatePalette::createShapesFromSaturationGradient()
 {
     auto palette_saturation = jt::Palette::createGradientS(40.0f, 0.0f, 100.0f, 80.0f, 5);
     for (size_t i = 0; i != palette_saturation.size(); ++i) {
@@ -25,7 +25,7 @@ void StateGradient::createShapesFromSaturationGradient()
     }
 }
 
-void StateGradient::createShapesFromHueGradient()
+void StatePalette::createShapesFromHueGradient()
 {
     auto palette_hue = jt::Palette::createGradientH(0.0f, 360.0f, 80.0f, 80.0f, 7);
     for (size_t i = 0; i != palette_hue.size(); ++i) {
@@ -36,7 +36,7 @@ void StateGradient::createShapesFromHueGradient()
     }
 }
 
-void StateGradient::createShapesFromValueGradient()
+void StatePalette::createShapesFromValueGradient()
 {
     auto palette_value = jt::Palette::createGradientV(200.0f, 80.0f, 10.0f, 100.0f, 6);
     for (size_t i = 0; i != palette_value.size(); ++i) {
@@ -47,7 +47,7 @@ void StateGradient::createShapesFromValueGradient()
     }
 }
 
-void StateGradient::createShapesFromGPL()
+void StatePalette::createShapesFromGPL()
 {
     std::ifstream file { "assets/crayon-paint.gpl" };
     std::stringstream buffer;
@@ -61,7 +61,7 @@ void StateGradient::createShapesFromGPL()
     }
 }
 
-void StateGradient::doInternalUpdate(float elapsed)
+void StatePalette::doInternalUpdate(float elapsed)
 {
     for (auto s : m_shapes) {
         s->update(elapsed);
@@ -72,10 +72,11 @@ void StateGradient::doInternalUpdate(float elapsed)
     }
 }
 
-void StateGradient::doInternalDraw() const
+void StatePalette::doInternalDraw() const
 {
     for (auto s : m_shapes) {
         s->draw(renderTarget());
     }
 }
-std::string StateGradient::getName() const { return "Palettes"; }
+
+std::string StatePalette::getName() const { return "State Demo Palettes"; }

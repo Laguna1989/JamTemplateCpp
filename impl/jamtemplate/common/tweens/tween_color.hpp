@@ -9,11 +9,11 @@ namespace jt {
 /// Tween color of obj from valueStart to valueEnd, ignoring the alpha value
 class TweenColor : public Tween {
 public:
-    static Tween::Sptr create(
-        std::weak_ptr<DrawableInterface> obj, float time, jt::Color valueStart, jt::Color valueEnd);
+    static Tween::Sptr create(std::weak_ptr<DrawableInterface> obj, float time,
+        jt::Color const& valueStart, jt::Color const& valueEnd);
 
-    TweenColor(
-        std::weak_ptr<DrawableInterface> obj, float time, jt::Color valueStart, jt::Color valueEnd);
+    TweenColor(std::weak_ptr<DrawableInterface> obj, float time, jt::Color const& valueStart,
+        jt::Color const& valueEnd);
 
 private:
     jt::Color m_initialValue;

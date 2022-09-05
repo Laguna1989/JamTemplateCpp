@@ -28,6 +28,10 @@ void StateScreenEffects::doInternalCreate()
     m_scanLines = std::make_shared<jt::ScanLines>(jt::Vector2f { 400.0f, 2.0f }, 150);
     add(m_scanLines);
 
+    m_wind = std::make_shared<jt::WindParticles>(jt::Vector2f { 400.0f, 300.0f },
+        std::vector<jt::Color> { jt::colors::Black, jt::colors::Gray, jt::colors::White });
+    add(m_wind);
+
     m_clouds = std::make_shared<jt::Clouds>(jt::Vector2f { -9.0f, 5.0f });
     add(m_clouds);
     setAutoDraw(false);
@@ -67,6 +71,8 @@ void StateScreenEffects::scroll(float elapsed)
     m_vignette->setEnabled(m_drawVignette);
     m_scanLines->setEnabled(m_drawScanLines);
     m_stars->setEnabled(m_drawStars);
+    m_wind->setEnabled(m_drawWind);
+    m_wind->m_windSpeed = m_windStrength;
 }
 
 void StateScreenEffects::doInternalDraw() const
@@ -79,7 +85,7 @@ void StateScreenEffects::doInternalDraw() const
     }
 
     m_bubbleSmoke->draw();
-
+    m_wind->draw();
     m_clouds->draw();
     m_vignette->draw();
     m_scanLines->draw();
@@ -96,6 +102,8 @@ void StateScreenEffects::drawGui() const
     ImGui::Checkbox("clouds", &m_drawClouds);
     ImGui::Checkbox("vignette", &m_drawVignette);
     ImGui::Checkbox("scan lines", &m_drawScanLines);
+    ImGui::Checkbox("wind", &m_drawWind);
+    ImGui::SliderFloat("wind strength", &m_windStrength, 0.0f, 4.0f, "%.1f");
     if (ImGui::Button("bubbles")) {
         m_bubbleSmoke->fire(jt::Vector2f { 400.0f, 300.0f });
     }

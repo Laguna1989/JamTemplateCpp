@@ -1,14 +1,14 @@
 #include "tween_color.hpp"
 #include <linterp.hpp>
 
-jt::Tween::Sptr jt::TweenColor::create(
-    std::weak_ptr<jt::DrawableInterface> obj, float time, jt::Color valueStart, jt::Color valueEnd)
+jt::Tween::Sptr jt::TweenColor::create(std::weak_ptr<jt::DrawableInterface> obj, float time,
+    jt::Color const& valueStart, jt::Color const& valueEnd)
 {
     return std::make_shared<TweenColor>(obj, time, valueStart, valueEnd);
 }
 
-jt::TweenColor::TweenColor(
-    std::weak_ptr<jt::DrawableInterface> obj, float time, jt::Color valueStart, jt::Color valueEnd)
+jt::TweenColor::TweenColor(std::weak_ptr<jt::DrawableInterface> obj, float time,
+    jt::Color const& valueStart, jt::Color const& valueEnd)
     : Tween { obj, time }
     , m_initialValue { valueStart }
     , m_finalValue { valueEnd }

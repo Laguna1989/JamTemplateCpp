@@ -2,16 +2,15 @@
 #define JAMTEMPLATE_BOX2DOBJECT_HPP
 
 #include <box2dwrapper/box2d_world_interface.hpp>
-#include <conversions.hpp>
-#include <game_object.hpp>
 #include <vector.hpp>
-#include <Box2D/Box2D.h>
 #include <memory>
+
+class b2Body;
 
 namespace jt {
 
 /// RAII type Wrapper for a box2d Object
-class Box2DObject : public GameObject {
+class Box2DObject {
 public:
     using Sptr = std::shared_ptr<Box2DObject>;
     Box2DObject() = delete;
@@ -21,6 +20,8 @@ public:
     /// \param world shared pointer to the world
     /// \param def raw pointer to a body definition
     Box2DObject(std::shared_ptr<Box2DWorldInterface> world, b2BodyDef const* def);
+
+    virtual ~Box2DObject();
 
     /// Get the position
     /// \return the position
@@ -57,9 +58,8 @@ private:
 
     std::weak_ptr<Box2DWorldInterface> m_world;
 
-    void doDestroy() override;
-
     void setB2Body(b2Body* body);
 };
+
 } // namespace jt
 #endif

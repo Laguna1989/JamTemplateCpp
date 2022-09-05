@@ -4,8 +4,8 @@
 #include <math_helper.hpp>
 
 MovementObject::MovementObject(std::shared_ptr<jt::Box2DWorldInterface> world, b2BodyDef const* def)
-    : Box2DObject { world, def }
 {
+    m_physicsObject = std::make_shared<jt::Box2DObject>(world, def);
     m_type = def->type;
 }
 
@@ -25,7 +25,7 @@ void MovementObject::doCreate()
         b2CircleShape circleCollider {};
         circleCollider.m_radius = 8.0f;
         fixtureDef.shape = &circleCollider;
-        getB2Body()->CreateFixture(&fixtureDef);
+        m_physicsObject->getB2Body()->CreateFixture(&fixtureDef);
 
     } else {
         m_animation->add("assets/test/integration/demo/wall.png", "idle", jt::Vector2u { 16, 16 },
@@ -37,7 +37,7 @@ void MovementObject::doCreate()
         b2PolygonShape boxCollider {};
         boxCollider.SetAsBox(8, 8);
         fixtureDef.shape = &boxCollider;
-        getB2Body()->CreateFixture(&fixtureDef);
+        m_physicsObject->getB2Body()->CreateFixture(&fixtureDef);
     }
 }
 
@@ -46,16 +46,17 @@ std::shared_ptr<jt::Animation> MovementObject::getAnimation() { return m_animati
 void MovementObject::doUpdate(float const elapsed)
 {
     using namespace jt::Conversion;
-    m_animation->setPosition(vec(getB2Body()->GetPosition()));
+    m_animation->setPosition(vec(m_physicsObject->getB2Body()->GetPosition()));
 
     m_animation->update(elapsed);
-    if (getB2Body()->GetType() == b2BodyType::b2_dynamicBody) {
+    auto b2b = m_physicsObject->getB2Body();
+    if (b2b->GetType() == b2BodyType::b2_dynamicBody) {
         if (getGame()->input().keyboard()->pressed(jt::KeyCode::D)) {
-            getB2Body()->ApplyForceToCenter(b2Vec2 { 60000, 0 }, true);
+            b2b->ApplyForceToCenter(b2Vec2 { 60000, 0 }, true);
         }
 
         if (getGame()->input().keyboard()->pressed(jt::KeyCode::A)) {
-            getB2Body()->ApplyForceToCenter(b2Vec2 { -60000, 0 }, true);
+            b2b->ApplyForceToCenter(b2Vec2 { -60000, 0 }, true);
         }
     }
 

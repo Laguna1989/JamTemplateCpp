@@ -5,6 +5,7 @@
 #include <player/input/input_component_impl.hpp>
 #include <player/sound/sound_component_impl.hpp>
 #include <state_game.hpp>
+#include <Box2D/Box2D.h>
 
 namespace {
 std::string selectWalkAnimation(jt::Vector2f const& velocity)
@@ -35,11 +36,12 @@ std::string selectWalkAnimation(jt::Vector2f const& velocity)
 }
 } // namespace
 
-Player::Player(
-    std::shared_ptr<jt::Box2DWorldInterface> world, b2BodyDef const* def, StateGame& state)
-    : jt::Box2DObject { world, def }
-    , m_state { state }
+Player::Player(std::shared_ptr<jt::Box2DWorldInterface> world, StateGame& state)
+    : m_state { state }
 {
+    b2BodyDef def;
+    def.type = b2BodyType::b2_dynamicBody;
+    m_b2Object = std::make_unique<jt::Box2DObject>(world, &def);
 }
 
 void Player::doCreate()
@@ -51,10 +53,10 @@ void Player::doCreate()
 
 void Player::doUpdate(float const elapsed)
 {
-    m_input->updateMovement(*this);
-    m_graphics->setPosition(getPosition());
+    m_input->updateMovement(*m_b2Object);
+    m_graphics->setPosition(m_b2Object->getPosition());
 
-    m_graphics->setAnimationIfNotSet(selectWalkAnimation(getVelocity()));
+    m_graphics->setAnimationIfNotSet(selectWalkAnimation(m_b2Object->getVelocity()));
     m_graphics->updateGraphics(elapsed);
 }
 void Player::doDraw() const { m_graphics->draw(renderTarget()); }
