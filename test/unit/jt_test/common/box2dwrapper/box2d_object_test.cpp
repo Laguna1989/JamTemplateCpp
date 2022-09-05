@@ -30,41 +30,23 @@ TEST_F(Box2dObjectTest, GetBodyReturnsStoredPointer)
 TEST_F(Box2dObjectTest, Create)
 {
     jt::Box2DObject obj { m_mockWorld, nullptr };
-    auto g = std::make_shared<MockGame>();
-
-    obj.setGameInstance(g);
-    obj.create();
-    SUCCEED();
-}
-
-TEST_F(Box2dObjectTest, Update)
-{
-    jt::Box2DObject obj { m_mockWorld, nullptr };
-    obj.update(1.0f);
-    SUCCEED();
-}
-
-TEST_F(Box2dObjectTest, Draw)
-{
-    jt::Box2DObject obj { m_mockWorld, nullptr };
-    obj.draw();
     SUCCEED();
 }
 
 TEST_F(Box2dObjectTest, DestroyCallsDestroyBodyOnWorld)
 {
-    jt::Box2DObject obj { m_mockWorld, nullptr };
+    auto obj = std::make_shared<jt::Box2DObject>(m_mockWorld, nullptr);
 
     EXPECT_CALL(*m_mockWorld, destroyBody(_));
-    obj.destroy();
+    obj.reset();
 }
 
 TEST_F(Box2dObjectTest, DestroyWithDeletedWorld)
 {
-    jt::Box2DObject obj { m_mockWorld, nullptr };
+    auto obj = std::make_shared<jt::Box2DObject>(m_mockWorld, nullptr);
 
     m_mockWorld.reset();
-    EXPECT_NO_THROW(obj.destroy());
+    EXPECT_NO_THROW(obj.reset());
 }
 
 class Box2dObjectWorldImplTest : public ::testing::Test {

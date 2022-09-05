@@ -1,10 +1,10 @@
-#ifndef JAMTEMPLATE_STATE_GRADIENT_HPP
-#define JAMTEMPLATE_STATE_GRADIENT_HPP
+#ifndef JAMTEMPLATE_STATE_PALETTE_HPP
+#define JAMTEMPLATE_STATE_PALETTE_HPP
 
 #include <game_state.hpp>
 #include <shape.hpp>
 
-class StateGradient : public jt::GameState {
+class StatePalette : public jt::GameState {
 public:
     std::string getName() const override;
 
@@ -20,4 +20,4 @@ private:
     void createShapesFromSaturationGradient();
 };
 
-#endif // JAMTEMPLATE_STATE_GRADIENT_HPP
+#endif // JAMTEMPLATE_STATE_PALETTE_HPP

@@ -15,6 +15,7 @@
 #include <state_manager/state_manager_transition_fade_to_black.hpp>
 #include <text.hpp>
 #include <tweens/tween_alpha.hpp>
+#include <tweens/tween_color.hpp>
 #include <tweens/tween_position.hpp>
 #include <tweens/tween_scale.hpp>
 #include <algorithm>
@@ -50,46 +51,56 @@ void StateMenu::createShapes()
 void StateMenu::createMenuText()
 {
     createTextTitle();
+    createTextStart();
     createTextExplanation();
     createTextCredits();
+}
+void StateMenu::createTextExplanation()
+{
+    m_textExplanation
+        = jt::dh::createText(renderTarget(), GP::ExplanationText(), 16U, GP::PaletteFontFront());
+    auto const half_width = GP::GetScreenSize().x / 2.0f;
+    m_textExplanation->setPosition({ half_width, 180 });
+    m_textExplanation->setShadow(GP::PaletteFontShadow(), jt::Vector2f { 2, 2 });
 }
 
 void StateMenu::createTextCredits()
 {
-    m_text_Credits = jt::dh::createText(renderTarget(),
+    m_textCredits = jt::dh::createText(renderTarget(),
         "Created by " + GP::AuthorName() + " for " + GP::JamName() + "\n" + GP::JamDate()
             + "\n\nF9 for License Information",
         16U, GP::PaletteFontCredits());
-    m_text_Credits->setTextAlign(jt::Text::TextAlign::LEFT);
-    m_text_Credits->setPosition({ 10, GP::GetScreenSize().y - 70 });
-    m_text_Credits->setShadow(GP::PaletteFontShadow(), jt::Vector2f { 1, 1 });
+    m_textCredits->setTextAlign(jt::Text::TextAlign::LEFT);
+    m_textCredits->setPosition({ 10, GP::GetScreenSize().y - 70 });
+    m_textCredits->setShadow(GP::PaletteFontShadow(), jt::Vector2f { 1, 1 });
 
-    m_text_Version = jt::dh::createText(renderTarget(), "", 16U, GP::PaletteFontCredits());
+    m_textVersion = jt::dh::createText(renderTarget(), "", 16U, GP::PaletteFontCredits());
     if (jt::BuildInfo::gitTagName() != "") {
-        m_text_Version->setText(jt::BuildInfo::gitTagName());
+        m_textVersion->setText(jt::BuildInfo::gitTagName());
     } else {
-        m_text_Version->setText(jt::BuildInfo::gitCommitHash());
+        m_textVersion->setText(
+            jt::BuildInfo::gitCommitHash().substr(0, 6) + " " + jt::BuildInfo::timestamp());
     }
-    m_text_Version->setTextAlign(jt::Text::TextAlign::RIGHT);
-    m_text_Version->setPosition({ GP::GetScreenSize().x - 5.0f, GP::GetScreenSize().y - 20.0f });
-    m_text_Version->setShadow(GP::PaletteFontShadow(), jt::Vector2f { 1, 1 });
+    m_textVersion->setTextAlign(jt::Text::TextAlign::RIGHT);
+    m_textVersion->setPosition({ GP::GetScreenSize().x - 5.0f, GP::GetScreenSize().y - 20.0f });
+    m_textVersion->setShadow(GP::PaletteFontShadow(), jt::Vector2f { 1, 1 });
 }
 
-void StateMenu::createTextExplanation()
+void StateMenu::createTextStart()
 {
-    float half_width = GP::GetScreenSize().x / 2;
-    m_text_Explanation = jt::dh::createText(
-        renderTarget(), "Press Space to start the game", 16U, GP::PaletteFontFront());
-    m_text_Explanation->setPosition({ half_width, 150 });
-    m_text_Explanation->setShadow(GP::PaletteFontShadow(), jt::Vector2f { 3, 3 });
+    auto const half_width = GP::GetScreenSize().x / 2.0f;
+    m_textStart = jt::dh::createText(
+        renderTarget(), "Press Space to start the game", 24U, GP::PaletteFontFront());
+    m_textStart->setPosition({ half_width, 150 });
+    m_textStart->setShadow(GP::PaletteFontShadow(), jt::Vector2f { 3, 3 });
 }
 
 void StateMenu::createTextTitle()
 {
     float half_width = GP::GetScreenSize().x / 2;
-    m_text_Title = jt::dh::createText(renderTarget(), GP::GameName(), 32U, GP::PaletteFontFront());
-    m_text_Title->setPosition({ half_width, 20 });
-    m_text_Title->setShadow(GP::PaletteFontShadow(), jt::Vector2f { 3, 3 });
+    m_textTitle = jt::dh::createText(renderTarget(), GP::GameName(), 48U, GP::PaletteFontFront());
+    m_textTitle->setPosition({ half_width, 20 });
+    m_textTitle->setShadow(GP::PaletteFontShadow(), jt::Vector2f { 4, 4 });
 }
 
 void StateMenu::createTweens()
@@ -97,46 +108,48 @@ void StateMenu::createTweens()
     createTweenOverlayAlpha();
     createTweenTitleAlpha();
     createTweenCreditsPosition();
-    createTweenExplanationScale();
+    createTweenExplanation();
 }
 
-void StateMenu::createInstructionTweenScaleUp()
+void StateMenu::createInstructionTweenColor1()
 {
-    auto ts = jt::TweenScale::create(
-        m_text_Explanation, 0.75f, jt::Vector2f { 1.0f, 1.0f }, jt::Vector2f { 1.05f, 1.05f });
-    ts->setAgePercentConversion([](float age) {
-        return jt::Lerp::cosine(0.0f, 1.0f, jt::MathHelper::clamp(age, 0.0f, 1.0f));
+    auto tc = jt::TweenColor::create(
+        m_textStart, 0.5f, GP::PaletteFontFront(), GP::PalleteFrontHighlight());
+    tc->addCompleteCallback([this]() { createInstructionTweenColor2(); });
+    tc->setAgePercentConversion([](float age) {
+        return jt::Lerp::cubic(0.0f, 1.0f, jt::MathHelper::clamp(age, 0.0f, 1.0f));
     });
-    ts->addCompleteCallback([this]() { createInstructionTweenScaleDown(); });
-    add(ts);
+    add(tc);
 }
-void StateMenu::createInstructionTweenScaleDown()
+
+void StateMenu::createInstructionTweenColor2()
 {
-    auto ts = jt::TweenScale::create(
-        m_text_Explanation, 0.75f, jt::Vector2f { 1.05f, 1.05f }, jt::Vector2f { 1.0f, 1.0f });
-    ts->setAgePercentConversion([](float age) {
-        return jt::Lerp::cosine(0.0f, 1.0f, jt::MathHelper::clamp(age, 0.0f, 1.0f));
+    auto tc = jt::TweenColor::create(
+        m_textStart, 0.45f, GP::PalleteFrontHighlight(), GP::PaletteFontFront());
+    tc->setAgePercentConversion([](float age) {
+        return jt::Lerp::cubic(0.0f, 1.0f, jt::MathHelper::clamp(age, 0.0f, 1.0f));
     });
-    ts->addCompleteCallback([this]() { createInstructionTweenScaleUp(); });
-    add(ts);
+    tc->setStartDelay(0.2f);
+    tc->addCompleteCallback([this]() { createInstructionTweenColor1(); });
+    add(tc);
 }
 
-void StateMenu::createTweenExplanationScale()
+void StateMenu::createTweenExplanation()
 {
-    auto s2 = m_text_Explanation->getPosition() + jt::Vector2f { -1000, 0 };
-    auto e2 = m_text_Explanation->getPosition();
+    auto s2 = m_textStart->getPosition() + jt::Vector2f { -1000, 0 };
+    auto e2 = m_textStart->getPosition();
 
-    auto tween = jt::TweenPosition::create(m_text_Explanation, 0.5f, s2, e2);
+    auto tween = jt::TweenPosition::create(m_textStart, 0.5f, s2, e2);
     tween->setStartDelay(0.3f);
     tween->setSkipFrames();
 
-    tween->addCompleteCallback([this]() { createInstructionTweenScaleUp(); });
+    tween->addCompleteCallback([this]() { createInstructionTweenColor1(); });
     add(tween);
 }
 
 void StateMenu::createTweenTitleAlpha()
 {
-    auto tween = jt::TweenAlpha::create(m_text_Title, 0.55f, 0, 255);
+    auto tween = jt::TweenAlpha::create(m_textTitle, 0.55f, 0, 255);
     tween->setStartDelay(0.2f);
     tween->setSkipFrames();
     add(tween);
@@ -151,13 +164,22 @@ void StateMenu::createTweenOverlayAlpha()
 
 void StateMenu::createTweenCreditsPosition()
 {
-    auto s3 = m_text_Credits->getPosition() + jt::Vector2f { 0, 100 };
-    auto e3 = m_text_Credits->getPosition();
+    auto creditsPositionStart = m_textCredits->getPosition() + jt::Vector2f { 0, 150 };
+    auto creditsPositionEnd = m_textCredits->getPosition();
 
-    auto tween = jt::TweenPosition::create(m_text_Credits, 0.35f, s3, e3);
-    tween->setStartDelay(0.8f);
-    tween->setSkipFrames();
-    add(tween);
+    auto tweenCredits
+        = jt::TweenPosition::create(m_textCredits, 0.75f, creditsPositionStart, creditsPositionEnd);
+    tweenCredits->setStartDelay(0.8f);
+    tweenCredits->setSkipFrames();
+    add(tweenCredits);
+
+    auto versionPositionStart = m_textVersion->getPosition() + jt::Vector2f { 0, 150 };
+    auto versionPositionEnd = m_textVersion->getPosition();
+    auto tweenVersion
+        = jt::TweenPosition::create(m_textVersion, 0.75f, versionPositionStart, versionPositionEnd);
+    tweenVersion->setStartDelay(0.8f);
+    tweenVersion->setSkipFrames();
+    add(tweenVersion);
 }
 
 void StateMenu::doInternalUpdate(float const elapsed)
@@ -170,10 +192,11 @@ void StateMenu::doInternalUpdate(float const elapsed)
 void StateMenu::updateDrawables(const float& elapsed)
 {
     m_background->update(elapsed);
-    m_text_Title->update(elapsed);
-    m_text_Explanation->update(elapsed);
-    m_text_Credits->update(elapsed);
-    m_text_Version->update(elapsed);
+    m_textTitle->update(elapsed);
+    m_textStart->update(elapsed);
+    m_textExplanation->update(elapsed);
+    m_textCredits->update(elapsed);
+    m_textVersion->update(elapsed);
     m_overlay->update(elapsed);
     m_vignette->update(elapsed);
 }
@@ -201,11 +224,13 @@ void StateMenu::doInternalDraw() const
 {
     m_background->draw(renderTarget());
 
-    m_text_Title->draw(renderTarget());
-    m_text_Explanation->draw(renderTarget());
-    m_text_Credits->draw(renderTarget());
-    m_text_Version->draw(renderTarget());
+    m_textTitle->draw(renderTarget());
+    m_textStart->draw(renderTarget());
+    m_textExplanation->draw(renderTarget());
+    m_textCredits->draw(renderTarget());
+    m_textVersion->draw(renderTarget());
     m_overlay->draw(renderTarget());
     m_vignette->draw();
 }
-std::string StateMenu::getName() const { return "Menu"; }
+
+std::string StateMenu::getName() const { return "State Menu"; }

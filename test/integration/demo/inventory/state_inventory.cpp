@@ -5,6 +5,7 @@
 #include <random/random.hpp>
 #include <state_select.hpp>
 #include <tilemap/tileson_loader.hpp>
+#include <box2d/Box2D.h>
 
 namespace {
 void camFollowObject(jt::CamInterface& cam, jt::Vector2f const& windowSize,
@@ -57,11 +58,7 @@ void StateInventory::doInternalCreate()
 
     createWorldItems();
 
-    b2BodyDef bodyDef;
-    bodyDef.fixedRotation = true;
-    bodyDef.type = b2_dynamicBody;
-    bodyDef.position.Set(5 * 24, 7 * 24);
-    m_player = std::make_shared<PlayerCharacter>(m_world, &bodyDef, m_itemRepository);
+    m_player = std::make_shared<PlayerCharacter>(m_world, m_itemRepository);
     add(m_player);
 
     setAutoDraw(false);
@@ -94,7 +91,7 @@ void StateInventory::loadTilemap()
     m_tileLayerGround->setScreenSizeHint(jt::Vector2f { 400, 300 });
 
     m_tileLayerOverlay = std::make_shared<jt::tilemap::TileLayer>(
-        loader.loadTilesFromLayer("overlay", textureManager()));
+        loader.loadTilesFromLayer("overlay", textureManager(), "assets/test/integration/demo/"));
     m_tileLayerOverlay->setScreenSizeHint(jt::Vector2f { 400, 300 });
 
     m_objectsLayer
@@ -149,8 +146,8 @@ void StateInventory::doInternalUpdate(float elapsed)
 
     m_world->step(elapsed, 20, 20);
 
-    camFollowObject(
-        getGame()->gfx().camera(), getGame()->gfx().window().getSize(), m_player, elapsed);
+    camFollowObject(getGame()->gfx().camera(), getGame()->gfx().window().getSize(),
+        m_player->getBox2DObject(), elapsed);
 
     pickupItems();
 

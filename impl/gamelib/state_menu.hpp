@@ -22,10 +22,11 @@ public:
 private:
     std::shared_ptr<jt::Shape> m_background;
 
-    std::shared_ptr<jt::Text> m_text_Title;
-    std::shared_ptr<jt::Text> m_text_Explanation;
-    std::shared_ptr<jt::Text> m_text_Credits;
-    std::shared_ptr<jt::Text> m_text_Version;
+    std::shared_ptr<jt::Text> m_textTitle;
+    std::shared_ptr<jt::Text> m_textStart;
+    std::shared_ptr<jt::Text> m_textExplanation;
+    std::shared_ptr<jt::Text> m_textCredits;
+    std::shared_ptr<jt::Text> m_textVersion;
 
     std::shared_ptr<jt::Shape> m_overlay;
     std::shared_ptr<jt::Vignette> m_vignette;
@@ -41,16 +42,16 @@ private:
 
     void createMenuText();
     void createTextCredits();
-    void createTextExplanation();
+    void createTextStart();
     void createTextTitle();
 
     void createTweens();
-    void createInstructionTweenScaleUp();
-    void createInstructionTweenScaleDown();
+    void createInstructionTweenColor1();
+    void createInstructionTweenColor2();
     void createTweenTitleAlpha();
     void createTweenOverlayAlpha();
     void createTweenCreditsPosition();
-    void createTweenExplanationScale();
+    void createTweenExplanation();
 
     void doInternalUpdate(float const elapsed) override;
     void updateDrawables(const float& elapsed);
@@ -58,6 +59,7 @@ private:
     void startTransitionToStateGame();
 
     void doInternalDraw() const override;
+    void createTextExplanation();
 };
 
 #endif

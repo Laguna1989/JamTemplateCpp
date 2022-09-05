@@ -1,5 +1,7 @@
 #include "box2d_object.hpp"
+#include <conversions.hpp>
 #include <math_helper.hpp>
+#include <Box2D/Box2D.h>
 
 jt::Box2DObject::Box2DObject(std::shared_ptr<jt::Box2DWorldInterface> world, b2BodyDef const* def)
 {
@@ -26,7 +28,7 @@ void jt::Box2DObject::setVelocity(jt::Vector2f const& v)
 
 void jt::Box2DObject::addVelocity(jt::Vector2f const& v)
 {
-    auto oldV = Conversion::vec(m_body->GetLinearVelocity());
+    auto const oldV = Conversion::vec(m_body->GetLinearVelocity());
     m_body->SetLinearVelocity(Conversion::vec(oldV + v));
 }
 
@@ -36,7 +38,7 @@ b2Body* jt::Box2DObject::getB2Body() { return m_body; }
 
 void jt::Box2DObject::setB2Body(b2Body* body) { m_body = body; }
 
-void jt::Box2DObject::doDestroy()
+jt::Box2DObject::~Box2DObject()
 {
     if (m_world.expired()) {
         return;
