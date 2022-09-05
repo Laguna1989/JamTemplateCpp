@@ -5,7 +5,7 @@
 #include <random/random.hpp>
 #include <state_select.hpp>
 #include <tilemap/tileson_loader.hpp>
-#include <box2d/Box2D.h>
+#include <Box2D/Box2D.h>
 
 namespace {
 void camFollowObject(jt::CamInterface& cam, jt::Vector2f const& windowSize,

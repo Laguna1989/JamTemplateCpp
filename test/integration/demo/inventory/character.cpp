@@ -1,6 +1,6 @@
 #include "character.hpp"
 #include <game_interface.hpp>
-#include <box2d/Box2D.h>
+#include <Box2D/Box2D.h>
 
 PlayerCharacter::PlayerCharacter(
     std::shared_ptr<jt::Box2DWorldInterface> world, std::weak_ptr<ItemRepository> repo)

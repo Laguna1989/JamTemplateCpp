@@ -4,7 +4,7 @@
 #include <animation.hpp>
 #include <box2dwrapper/box2d_object.hpp>
 #include <game_object.hpp>
-#include <box2d/Box2D.h>
+#include <Box2D/Box2D.h>
 #include <memory>
 
 // TODO Split into static colliders and Player

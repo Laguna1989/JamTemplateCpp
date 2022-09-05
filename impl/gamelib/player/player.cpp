@@ -5,7 +5,7 @@
 #include <player/input/input_component_impl.hpp>
 #include <player/sound/sound_component_impl.hpp>
 #include <state_game.hpp>
-#include <box2d/Box2D.h>
+#include <Box2D/Box2D.h>
 
 namespace {
 std::string selectWalkAnimation(jt::Vector2f const& velocity)
