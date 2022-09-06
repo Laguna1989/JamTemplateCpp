@@ -1,5 +1,5 @@
-﻿#ifndef STRESSTEST_STATE_BOX2D_HPP
-#define STRESSTEST_STATE_BOX2D_HPP
+﻿#ifndef DEMO_STATE_PLATFORMER_HPP
+#define DEMO_STATE_PLATFORMER_HPP
 
 #include "box2dwrapper/box2d_object.hpp"
 #include "tilemap/tile_layer.hpp"
@@ -10,7 +10,7 @@
 #include <shape.hpp>
 #include <vector.hpp>
 
-class StateBox2d : public jt::GameState {
+class StatePlatformer : public jt::GameState {
 private:
     std::shared_ptr<jt::Box2DWorldInterface> m_world { nullptr };
     std::vector<std::shared_ptr<jt::Box2DObject>> m_colliders {};
@@ -27,4 +27,4 @@ private:
     void loadLevel();
 };
 
-#endif
+#endif // DEMO_STATE_PLATFORMER_HPP

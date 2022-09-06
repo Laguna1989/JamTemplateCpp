@@ -11,17 +11,17 @@
 #include <tweens/tween_rotation.hpp>
 #include <tweens/tween_scale.hpp>
 
-void StateBox2d::doInternalCreate()
+void StatePlatformer::doInternalCreate()
 {
     //    getGame()->gfx().camera().setZoom(4.0f);
-    m_world = std::make_shared<jt::Box2DWorldImpl>(jt::Vector2f { 0.0f, 100.0f });
+    m_world = std::make_shared<jt::Box2DWorldImpl>(jt::Vector2f { 0.0f, 400.0f });
 
     loadLevel();
 
     CreatePlayer();
 }
 
-void StateBox2d::loadLevel()
+void StatePlatformer::loadLevel()
 {
     jt::tilemap::TilesonLoader loader { "assets/test/integration/demo/platformer.json" };
 
@@ -49,7 +49,7 @@ void StateBox2d::loadLevel()
     }
 }
 
-void StateBox2d::doInternalUpdate(float const elapsed)
+void StatePlatformer::doInternalUpdate(float const elapsed)
 {
     int32 const velocityIterations = 6;
     int32 const positionIterations = 2;
@@ -65,9 +65,9 @@ void StateBox2d::doInternalUpdate(float const elapsed)
     }
 }
 
-void StateBox2d::doInternalDraw() const { m_tileLayerGround->draw(renderTarget()); }
+void StatePlatformer::doInternalDraw() const { m_tileLayerGround->draw(renderTarget()); }
 
-void StateBox2d::CreatePlayer()
+void StatePlatformer::CreatePlayer()
 {
     b2BodyDef bodyDef;
     bodyDef.fixedRotation = true;
@@ -78,4 +78,4 @@ void StateBox2d::CreatePlayer()
     add(m_player);
 }
 
-std::string StateBox2d::getName() const { return "Box2D"; }
+std::string StatePlatformer::getName() const { return "Box2D"; }

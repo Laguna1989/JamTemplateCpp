@@ -28,7 +28,7 @@ void StateSelect::doInternalCreate()
     AddButton<StateSwarmObjects>("Swarm");
     AddButton<StateTween>("Tweens");
     AddButton<StateTileson>("Tilemap");
-    AddButton<StateBox2d>("Box2D");
+    AddButton<StatePlatformer>("Box2D");
     AddButton<StateScroll>("Move Cam");
     AddButton<StateRope>("Rope");
     AddButton<StateParticles>("Particles");

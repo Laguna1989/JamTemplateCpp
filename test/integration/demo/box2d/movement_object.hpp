@@ -25,6 +25,7 @@ private:
     void doUpdate(float const elapsed) override;
 
     void doDraw() const override;
+    void handleMovement(float const elapsed);
 };
 
 #endif

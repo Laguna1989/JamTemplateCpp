@@ -34,16 +34,35 @@ void Player::doUpdate(float const elapsed)
     m_animation->setPosition(vec(m_physicsObject->getB2Body()->GetPosition()));
 
     m_animation->update(elapsed);
-    auto b2b = m_physicsObject->getB2Body();
+
+    handleMovement(elapsed);
+}
+void Player::handleMovement(float const elapsed)
+{
+    auto const horizontalAcceleration = 55000.0f;
+    auto const maxHorizontalVelocity = 80.0f;
+    auto const horizontalDampening = 110.0f;
+
+    auto const jumpInitialVelocity = -140.0f;
+    auto const maxVerticalVelocity = 100.0f;
+    auto const jumpVerticalAcceleration = -25000.0f;
 
     bool horizontalMovement { false };
+    auto b2b = m_physicsObject->getB2Body();
+    auto v = m_physicsObject->getVelocity();
     if (getGame()->input().keyboard()->pressed(jt::KeyCode::D)) {
-        b2b->ApplyForceToCenter(b2Vec2 { 60000, 0 }, true);
+        if (v.x < 0) {
+            v.x *= 0.9f;
+        }
+        b2b->ApplyForceToCenter(b2Vec2 { horizontalAcceleration, 0 }, true);
         horizontalMovement = true;
     }
 
     if (getGame()->input().keyboard()->pressed(jt::KeyCode::A)) {
-        b2b->ApplyForceToCenter(b2Vec2 { -60000, 0 }, true);
+        if (v.x > 0) {
+            v.x *= 0.9f;
+        }
+        b2b->ApplyForceToCenter(b2Vec2 { -horizontalAcceleration, 0 }, true);
         horizontalMovement = true;
     }
 
@@ -51,16 +70,27 @@ void Player::doUpdate(float const elapsed)
         m_animation->flash(0.5f, jt::colors::Red);
     }
 
-    auto v = m_physicsObject->getVelocity();
+    if (getGame()->input().keyboard()->justPressed(jt::KeyCode::W)) {
+        v.y = jumpInitialVelocity;
+    }
+    if (getGame()->input().keyboard()->pressed(jt::KeyCode::W)) {
+        if (v.y < 0) {
+            std::cout << "reduce gravity\n";
+            b2b->ApplyForceToCenter(b2Vec2 { 0, jumpVerticalAcceleration }, true);
+        }
+    }
+
+    if (v.y >= maxVerticalVelocity) {
+        v.y = maxVerticalVelocity;
+    }
     // clamp horizontal Velocity
-    float const maxHorizontalVelocity = 70.0f;
     if (v.x >= maxHorizontalVelocity) {
         v.x = maxHorizontalVelocity;
     } else if (v.x <= -maxHorizontalVelocity) {
         v.x = -maxHorizontalVelocity;
     }
 
-    float const horizontalDampening { 100.0f };
+    // damp horizontal movement
     if (!horizontalMovement) {
         if (v.x > 0) {
             v.x -= horizontalDampening * elapsed;
