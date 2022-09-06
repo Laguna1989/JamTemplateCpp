@@ -7,8 +7,6 @@
 jt::GameState::~GameState()
 {
     m_tweens.clear();
-
-    m_objectsToAdd.clear();
     m_objects.clear();
 }
 
@@ -19,11 +17,7 @@ void jt::GameState::add(std::shared_ptr<jt::GameObject> gameObject)
 {
     gameObject->setGameInstance(getGame());
     gameObject->create();
-    if (!m_objects.empty()) {
-        m_objectsToAdd.push_back(gameObject);
-    } else {
-        m_objects.push_back(gameObject);
-    }
+    m_objects.add(gameObject);
 }
 
 void jt::GameState::add(std::shared_ptr<TweenInterface> tween) { m_tweens.add(tween); }
@@ -63,20 +57,7 @@ void jt::GameState::internalDraw() const
     doInternalDraw();
 }
 
-void jt::GameState::updateObjects(float elapsed)
-{
-    basicUpdateObjects(elapsed);
-
-    for (auto& go : m_objects) {
-        go->update(elapsed);
-    }
-}
-
-void jt::GameState::basicUpdateObjects(float /*elapsed*/)
-{
-    cleanUpObjects();
-    addNewObjects();
-}
+void jt::GameState::updateObjects(float elapsed) { m_objects.update(elapsed); }
 
 void jt::GameState::updateTweens(float elapsed)
 {
@@ -90,32 +71,7 @@ void jt::GameState::updateTweens(float elapsed)
     m_tweens.update(elapsed);
 }
 
-void jt::GameState::drawObjects() const
-{
-    for (const auto& go : m_objects) {
-        go->draw();
-    }
-}
-
-void jt::GameState::addNewObjects()
-{
-    while (!m_objectsToAdd.empty()) {
-        m_objects.emplace_back(std::move(m_objectsToAdd.back()));
-        m_objectsToAdd.pop_back();
-    }
-}
-void jt::GameState::cleanUpObjects()
-{
-    m_objects.erase(std::remove_if(m_objects.begin(), m_objects.end(),
-                        [](auto go) {
-                            bool const isDead = !go->isAlive();
-                            if (isDead) {
-                                go->destroy();
-                            }
-                            return isDead;
-                        }),
-        m_objects.end());
-}
+void jt::GameState::drawObjects() const { m_objects.draw(); }
 
 void jt::GameState::setAutoUpdateObjects(bool performAutoUpdate)
 {
