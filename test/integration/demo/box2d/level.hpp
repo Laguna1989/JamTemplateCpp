@@ -5,6 +5,7 @@
 #include "tilemap/tile_layer.hpp"
 #include <box2dwrapper/box2d_world_interface.hpp>
 #include <game_object.hpp>
+#include <shape.hpp>
 
 class Level : public jt::GameObject {
 public:
@@ -15,6 +16,7 @@ private:
     void doUpdate(float const elapsed) override;
     void doDraw() const override;
 
+    std::shared_ptr<jt::Shape> m_background;
     std::string m_fileName { "" };
     std::weak_ptr<jt::Box2DWorldInterface> m_world;
 

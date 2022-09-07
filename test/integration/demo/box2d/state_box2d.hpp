@@ -3,6 +3,7 @@
 
 #include "box2dwrapper/box2d_object.hpp"
 #include "my_contact_listener.hpp"
+#include "screeneffects/vignette.hpp"
 #include "tilemap/tile_layer.hpp"
 #include <bar.hpp>
 #include <box2d/PlatformPlayer.hpp>
@@ -19,6 +20,7 @@ private:
     std::shared_ptr<Level> m_level { nullptr };
     std::shared_ptr<Player> m_player { nullptr };
     std::shared_ptr<MyContactListener> m_contactListener { nullptr };
+    std::shared_ptr<jt::Vignette> m_vignette { nullptr };
 
     std::string getName() const override;
 

@@ -10,7 +10,19 @@ Level::Level(std::string const& fileName, std::weak_ptr<jt::Box2DWorldInterface>
 
 void Level::doCreate()
 {
+    m_background = std::make_shared<jt::Shape>();
+    m_background->makeRect(jt::Vector2f { 400, 300 }, textureManager());
+
+    m_background->setCamMovementFactor(0.0f);
+
     jt::tilemap::TilesonLoader loader { m_fileName };
+
+    auto settings = loader.loadObjectsFromLayer("settings");
+    auto const props = settings.front().properties;
+
+    m_background->setColor(jt::Color { static_cast<std::uint8_t>(props.ints.at("bg_r")),
+        static_cast<std::uint8_t>(props.ints.at("bg_g")),
+        static_cast<std::uint8_t>(props.ints.at("bg_b")) });
 
     m_tileLayerGround = std::make_shared<jt::tilemap::TileLayer>(
         loader.loadTilesFromLayer("ground", textureManager(), "assets/test/integration/demo/"));
@@ -35,6 +47,14 @@ void Level::doCreate()
         m_colliders.push_back(collider);
     }
 }
-void Level::doUpdate(float const elapsed) { m_tileLayerGround->update(elapsed); }
+void Level::doUpdate(float const elapsed)
+{
+    m_background->update(elapsed);
+    m_tileLayerGround->update(elapsed);
+}
 
-void Level::doDraw() const { m_tileLayerGround->draw(renderTarget()); }
+void Level::doDraw() const
+{
+    m_background->draw(renderTarget());
+    m_tileLayerGround->draw(renderTarget());
+}

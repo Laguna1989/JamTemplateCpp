@@ -22,6 +22,10 @@ void StatePlatformer::doInternalCreate()
     m_contactListener = std::make_shared<MyContactListener>();
     m_contactListener->setPlayer(m_player);
     m_world->setContactListener(m_contactListener);
+
+    m_vignette = std::make_shared<jt::Vignette>(jt::Vector2f { 400.0f, 300.0f });
+    add(m_vignette);
+    setAutoDraw(false);
 }
 
 void StatePlatformer::loadLevel()
@@ -64,7 +68,12 @@ void StatePlatformer::doInternalUpdate(float const elapsed)
     }
 }
 
-void StatePlatformer::doInternalDraw() const { m_level->draw(); }
+void StatePlatformer::doInternalDraw() const
+{
+    m_level->draw();
+    m_player->draw();
+    m_vignette->draw();
+}
 
 void StatePlatformer::CreatePlayer()
 {
