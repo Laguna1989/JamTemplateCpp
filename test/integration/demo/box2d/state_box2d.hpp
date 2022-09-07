@@ -2,9 +2,10 @@
 #define DEMO_STATE_PLATFORMER_HPP
 
 #include "box2dwrapper/box2d_object.hpp"
+#include "my_contact_listener.hpp"
 #include "tilemap/tile_layer.hpp"
 #include <bar.hpp>
-#include <box2d/movement_object.hpp>
+#include <box2d/PlatformPlayer.hpp>
 #include <box2dwrapper/box2d_world_interface.hpp>
 #include <game_state.hpp>
 #include <shape.hpp>
@@ -16,6 +17,7 @@ private:
     std::vector<std::shared_ptr<jt::Box2DObject>> m_colliders {};
     std::shared_ptr<jt::tilemap::TileLayer> m_tileLayerGround { nullptr };
     std::shared_ptr<Player> m_player { nullptr };
+    std::shared_ptr<MyContactListener> m_contactListener { nullptr };
 
     std::string getName() const override;
 

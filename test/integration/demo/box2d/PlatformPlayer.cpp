@@ -1,4 +1,4 @@
-#include "movement_object.hpp"
+#include "PlatformPlayer.hpp"
 #include <conversions.hpp>
 #include <game_interface.hpp>
 #include <math_helper.hpp>
@@ -15,15 +15,22 @@ void Player::doCreate()
     m_animation->add("assets/test/integration/demo/hero_8x8.png", "walk", jt::Vector2u { 8, 8 },
         { 0, 1 }, 0.23f, textureManager());
     m_animation->play("walk");
-    //    m_animation->setOffset(jt::OffsetMode::CENTER);
+    m_animation->setOffset(jt::OffsetMode::CENTER);
 
     b2FixtureDef fixtureDef;
     fixtureDef.density = 1.0f;
     fixtureDef.friction = 0.0f;
     b2CircleShape circleCollider {};
-    circleCollider.m_radius = 8.0f;
+    circleCollider.m_radius = 4.0f;
     fixtureDef.shape = &circleCollider;
     m_physicsObject->getB2Body()->CreateFixture(&fixtureDef);
+
+    fixtureDef.isSensor = true;
+    b2PolygonShape polygonShape;
+    polygonShape.SetAsBox(2, 0.3f, b2Vec2(0, 4), 0);
+    fixtureDef.isSensor = true;
+    b2Fixture* footSensorFixture = m_physicsObject->getB2Body()->CreateFixture(&fixtureDef);
+    footSensorFixture->SetUserData((void*)3);
 }
 
 std::shared_ptr<jt::Animation> Player::getAnimation() { return m_animation; }
@@ -37,18 +44,20 @@ void Player::doUpdate(float const elapsed)
 
     handleMovement(elapsed);
 }
+
 void Player::handleMovement(float const elapsed)
 {
-    auto const horizontalAcceleration = 55000.0f;
+    auto const horizontalAcceleration = 35000.0f;
     auto const maxHorizontalVelocity = 80.0f;
-    auto const horizontalDampening = 110.0f;
+    auto const horizontalDampening = 130.0f;
 
     auto const jumpInitialVelocity = -140.0f;
     auto const maxVerticalVelocity = 100.0f;
-    auto const jumpVerticalAcceleration = -25000.0f;
+    auto const jumpVerticalAcceleration = -5000.0f;
 
     bool horizontalMovement { false };
-    auto b2b = m_physicsObject->getB2Body();
+    auto b2b = getB2Body();
+
     auto v = m_physicsObject->getVelocity();
     if (getGame()->input().keyboard()->pressed(jt::KeyCode::D)) {
         if (v.x < 0) {
@@ -71,11 +80,12 @@ void Player::handleMovement(float const elapsed)
     }
 
     if (getGame()->input().keyboard()->justPressed(jt::KeyCode::W)) {
-        v.y = jumpInitialVelocity;
+        if (m_canJump) {
+            v.y = jumpInitialVelocity;
+        }
     }
     if (getGame()->input().keyboard()->pressed(jt::KeyCode::W)) {
         if (v.y < 0) {
-            std::cout << "reduce gravity\n";
             b2b->ApplyForceToCenter(b2Vec2 { 0, jumpVerticalAcceleration }, true);
         }
     }
@@ -101,5 +111,7 @@ void Player::handleMovement(float const elapsed)
 
     m_physicsObject->setVelocity(v);
 }
+b2Body* Player::getB2Body() { return m_physicsObject->getB2Body(); }
 
 void Player::doDraw() const { m_animation->draw(renderTarget()); }
+void Player::setCanJump(bool canJump) { m_canJump = canJump; }

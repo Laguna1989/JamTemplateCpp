@@ -15,11 +15,16 @@ public:
     ~Player() = default;
 
     std::shared_ptr<jt::Animation> getAnimation();
+    b2Body* getB2Body();
+
+    void setCanJump(bool canJump);
 
 private:
     std::shared_ptr<jt::Animation> m_animation;
     std::shared_ptr<jt::Box2DObject> m_physicsObject;
     b2BodyType m_type;
+
+    bool m_canJump { false };
 
     void doCreate() override;
     void doUpdate(float const elapsed) override;
