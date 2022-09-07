@@ -53,7 +53,7 @@ void Player::handleMovement(float const elapsed)
 
     auto const jumpInitialVelocity = -140.0f;
     auto const maxVerticalVelocity = 100.0f;
-    auto const jumpVerticalAcceleration = -5000.0f;
+    auto const jumpVerticalAcceleration = -9000.0f;
 
     bool horizontalMovement { false };
     auto b2b = getB2Body();
@@ -80,7 +80,7 @@ void Player::handleMovement(float const elapsed)
     }
 
     if (getGame()->input().keyboard()->justPressed(jt::KeyCode::W)) {
-        if (m_canJump) {
+        if (m_touchingGround) {
             v.y = jumpInitialVelocity;
         }
     }
@@ -114,4 +114,5 @@ void Player::handleMovement(float const elapsed)
 b2Body* Player::getB2Body() { return m_physicsObject->getB2Body(); }
 
 void Player::doDraw() const { m_animation->draw(renderTarget()); }
-void Player::setCanJump(bool canJump) { m_canJump = canJump; }
+void Player::setTouchesGround(bool touchingGround) { m_touchingGround = touchingGround; }
+jt::Vector2f Player::getPosOnScreen() const { return m_animation->getScreenPosition(); }

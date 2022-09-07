@@ -6,6 +6,7 @@
 #include "tilemap/tile_layer.hpp"
 #include <bar.hpp>
 #include <box2d/PlatformPlayer.hpp>
+#include <box2d/level.hpp>
 #include <box2dwrapper/box2d_world_interface.hpp>
 #include <game_state.hpp>
 #include <shape.hpp>
@@ -14,8 +15,8 @@
 class StatePlatformer : public jt::GameState {
 private:
     std::shared_ptr<jt::Box2DWorldInterface> m_world { nullptr };
-    std::vector<std::shared_ptr<jt::Box2DObject>> m_colliders {};
-    std::shared_ptr<jt::tilemap::TileLayer> m_tileLayerGround { nullptr };
+
+    std::shared_ptr<Level> m_level { nullptr };
     std::shared_ptr<Player> m_player { nullptr };
     std::shared_ptr<MyContactListener> m_contactListener { nullptr };
 

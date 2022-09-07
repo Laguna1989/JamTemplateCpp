@@ -11,8 +11,8 @@ void MyContactListener::BeginContact(b2Contact* contact)
     if (isPlayerFeetFixture(fa) || isPlayerFeetFixture(fb)) {
         m_numberOfFeetContacts++;
     }
-    std::cout << "start contact: " << m_numberOfFeetContacts << std::endl;
-    m_player.lock()->setCanJump(m_numberOfFeetContacts >= 1);
+    //    std::cout << "start contact: " << m_numberOfFeetContacts << std::endl;
+    m_player.lock()->setTouchesGround(m_numberOfFeetContacts >= 1);
 }
 
 void MyContactListener::EndContact(b2Contact* contact)
@@ -23,8 +23,8 @@ void MyContactListener::EndContact(b2Contact* contact)
     if (isPlayerFeetFixture(fa) || isPlayerFeetFixture(fb)) {
         m_numberOfFeetContacts--;
     }
-    std::cout << "end contact: " << m_numberOfFeetContacts << std::endl;
-    m_player.lock()->setCanJump(m_numberOfFeetContacts >= 1);
+    //    std::cout << "end contact: " << m_numberOfFeetContacts << std::endl;
+    m_player.lock()->setTouchesGround(m_numberOfFeetContacts >= 1);
 }
 void MyContactListener::setPlayer(std::weak_ptr<Player> player) { m_player = player; }
 bool MyContactListener::isPlayerFeetFixture(b2Fixture* fa) const

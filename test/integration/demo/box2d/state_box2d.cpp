@@ -26,49 +26,45 @@ void StatePlatformer::doInternalCreate()
 
 void StatePlatformer::loadLevel()
 {
-    jt::tilemap::TilesonLoader loader { "assets/test/integration/demo/platformer.json" };
-
-    m_tileLayerGround = std::make_shared<jt::tilemap::TileLayer>(
-        loader.loadTilesFromLayer("ground", textureManager(), "assets/test/integration/demo/"));
-
-    auto tileCollisions = loader.loadCollisionsFromLayer("ground");
-
-    tileCollisions.refineColliders(8);
-    for (auto const& r : tileCollisions.getRects()) {
-        b2BodyDef bodyDef;
-        bodyDef.fixedRotation = true;
-        bodyDef.type = b2_staticBody;
-        bodyDef.position.Set(r.left + r.width / 2.0f, r.top + r.height / 2.0f);
-
-        b2FixtureDef fixtureDef;
-        b2PolygonShape boxCollider {};
-        boxCollider.SetAsBox(r.width / 2.0f, r.height / 2.0f);
-        fixtureDef.shape = &boxCollider;
-
-        auto collider = std::make_shared<jt::Box2DObject>(m_world, &bodyDef);
-        collider->getB2Body()->CreateFixture(&fixtureDef);
-
-        m_colliders.push_back(collider);
-    }
+    m_level = std::make_shared<Level>("assets/test/integration/demo/platformer.json", m_world);
+    add(m_level);
 }
 
 void StatePlatformer::doInternalUpdate(float const elapsed)
 {
-    int32 const velocityIterations = 6;
-    int32 const positionIterations = 2;
-
+    std::int32_t const velocityIterations = 20;
+    std::int32_t const positionIterations = 20;
     m_world->step(elapsed, velocityIterations, positionIterations);
 
     updateObjects(elapsed);
-    m_tileLayerGround->update(elapsed);
+    m_level->update(elapsed);
+
+    auto ps = m_player->getPosOnScreen();
+    float const rightMargin = 150.0f;
+    float const leftMargin = 10.0f;
+    float const scrollSpeed = 60.0f;
+    auto& cam = getGame()->gfx().camera();
+
+    if (ps.x < leftMargin) {
+        cam.move(jt::Vector2f { -scrollSpeed * elapsed, 0.0f });
+        if (ps.x < rightMargin / 2) {
+            cam.move(jt::Vector2f { -scrollSpeed * elapsed, 0.0f });
+        }
+    } else if (ps.x > 400.0f - rightMargin) {
+        cam.move(jt::Vector2f { scrollSpeed * elapsed, 0.0f });
+        if (ps.x > 400.0f - rightMargin / 3 * 2) {
+            cam.move(jt::Vector2f { scrollSpeed * elapsed, 0.0f });
+        }
+    }
 
     if (getGame()->input().keyboard()->justPressed(jt::KeyCode::F1)
         || getGame()->input().keyboard()->justPressed(jt::KeyCode::Escape)) {
+
         getGame()->stateManager().switchState(std::make_shared<StateSelect>());
     }
 }
 
-void StatePlatformer::doInternalDraw() const { m_tileLayerGround->draw(renderTarget()); }
+void StatePlatformer::doInternalDraw() const { m_level->draw(); }
 
 void StatePlatformer::CreatePlayer()
 {
