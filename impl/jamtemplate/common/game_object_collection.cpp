@@ -1,4 +1,5 @@
 #include "game_object_collection.hpp"
+#include <algorithm>
 
 void jt::GameObjectCollection::clear()
 {
