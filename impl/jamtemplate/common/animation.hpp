@@ -116,6 +116,9 @@ public:
     [[deprecated("Currently only implemented for SFML")]] void setCustomShader(
         std::string const& shaderCodeVertex, std::string const& shaderCodeFragment) override;
 
+    void setAnimationSpeedFactor(float factor);
+    float getAnimationSpeedFactor() const;
+
 private:
     mutable AnimationMapType m_frames {};
     std::map<std::string, std::vector<float>> m_time {};
@@ -132,6 +135,8 @@ private:
     float m_frameTime { 0.0f };
 
     std::map<std::string, bool> m_isLooping {};
+
+    float m_animationplaybackSpeed { 1.0f };
 
     void doDrawShadow(std::shared_ptr<jt::RenderTarget> const sptr) const override;
     void doDraw(std::shared_ptr<jt::RenderTarget> const sptr) const override;

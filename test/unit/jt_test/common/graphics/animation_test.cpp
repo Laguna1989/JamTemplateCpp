@@ -271,3 +271,10 @@ TEST_F(AnimationPlayingTest, IndexIsNotWrappedAfterCompleteAnimationWhenNotLoopi
     a.update(5.1f);
     ASSERT_EQ(a.getCurrentAnimationFrameIndex(), 4);
 }
+
+TEST_F(AnimationPlayingTest, AnimationPlaybackSpeed)
+{
+    auto const expectedValue = 0.5f;
+    a.setAnimationSpeedFactor(expectedValue);
+    ASSERT_EQ(a.getAnimationSpeedFactor(), expectedValue);
+}

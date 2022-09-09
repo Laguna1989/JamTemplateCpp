@@ -93,7 +93,7 @@ TEST_F(GameStateTest, AddTweenObject)
 TEST_F(GameStateTest, DrawCallsDrawOnAddedGameObjects)
 {
     AddGameObject();
-
+    gamestate.update(0.1f);
     EXPECT_CALL(*mockObject, doDraw());
     gamestate.draw();
 }

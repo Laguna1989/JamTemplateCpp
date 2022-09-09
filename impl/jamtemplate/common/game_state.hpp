@@ -1,6 +1,7 @@
 ﻿#ifndef JAMTEMPLATE_GAMESTATE_HPP
 #define JAMTEMPLATE_GAMESTATE_HPP
 
+#include "game_object_collection.hpp"
 #include "tween_collection.hpp"
 #include <game_object.hpp>
 #include <tweens/tween_interface.hpp>
@@ -66,25 +67,13 @@ public:
 
 protected:
     void updateObjects(float elapsed);
-    void basicUpdateObjects(float elapsed);
     void updateTweens(float obj);
 
     void drawObjects() const;
 
 private:
-    /// all objects in the state
-    std::vector<std::shared_ptr<GameObject>> m_objects {};
-
-    /// this is used as a level of indirection,
-    /// because objects might add or remove m_objects while iterating over the m_objects vector,
-    /// which invalidates iterators, which leads to crashes.
-    ///
-    /// The idea is to not modify m_objects directly when a GameObject is added,
-    /// but to place them in this vector first and add them to m_objects,
-    /// once it is safe to do so.
-    std::vector<std::shared_ptr<GameObject>> m_objectsToAdd {};
-
     jt::TweenCollection m_tweens;
+    jt::GameObjectCollection m_objects;
 
     bool m_doAutoUpdateObjects { true };
     bool m_doAutoUpdateTweens { true };
@@ -105,9 +94,6 @@ private:
     virtual void doInternalCreate() = 0;
     virtual void doInternalUpdate(float elapsed) = 0;
     virtual void doInternalDraw() const = 0;
-
-    void addNewObjects();
-    void cleanUpObjects();
 };
 
 } // namespace jt

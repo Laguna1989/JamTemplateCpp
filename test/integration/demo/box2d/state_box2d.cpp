@@ -1,5 +1,5 @@
 ﻿#include "state_box2d.hpp"
-#include <box2d/movement_object.hpp>
+#include <box2d/PlatformPlayer.hpp>
 #include <box2dwrapper/box2d_world_impl.hpp>
 #include <conversions.hpp>
 #include <game_interface.hpp>
@@ -7,122 +7,95 @@
 #include <lerp.hpp>
 #include <random/random.hpp>
 #include <state_select.hpp>
+#include <tilemap/tileson_loader.hpp>
 #include <tweens/tween_rotation.hpp>
 #include <tweens/tween_scale.hpp>
 
-void StateBox2d::doInternalCreate()
+void StatePlatformer::doInternalCreate()
 {
-    m_world = std::make_shared<jt::Box2DWorldImpl>(jt::Vector2f { 0.0f, 100.0f });
-    CreateWalls();
+    //    getGame()->gfx().camera().setZoom(4.0f);
+    m_world = std::make_shared<jt::Box2DWorldImpl>(jt::Vector2f { 0.0f, 400.0f });
+
+    loadLevel();
 
     CreatePlayer();
+    m_contactListener = std::make_shared<MyContactListener>();
+    m_contactListener->setPlayer(m_player);
+    m_world->setContactListener(m_contactListener);
 
-    m_bar1 = std::make_shared<jt::Bar>(100.0f, 10.0f, true, textureManager());
-    m_bar1->setPosition(jt::Vector2f { 10, 10 });
-
-    m_bar2 = std::make_shared<jt::Bar>(100.0f, 10.0f, true, textureManager());
-    m_bar2->setPosition(jt::Vector2f { 10, 25 });
-    m_bar2->setMaxValue(2.0f);
+    m_vignette = std::make_shared<jt::Vignette>(jt::Vector2f { 400.0f, 300.0f });
+    add(m_vignette);
+    setAutoDraw(false);
 }
 
-void StateBox2d::doInternalUpdate(float const elapsed)
+void StatePlatformer::loadLevel()
 {
-    int32 const velocityIterations = 6;
-    int32 const positionIterations = 2;
+    m_level = std::make_shared<Level>("assets/test/integration/demo/platformer.json", m_world);
+    add(m_level);
+}
 
-    m_world->step(elapsed, velocityIterations, positionIterations);
+void StatePlatformer::doInternalUpdate(float const elapsed)
+{
+    if (!m_ending) {
+        std::int32_t const velocityIterations = 20;
+        std::int32_t const positionIterations = 20;
+        m_world->step(elapsed, velocityIterations, positionIterations);
 
-    updateObjects(elapsed);
+        updateObjects(elapsed);
+        m_level->update(elapsed);
 
-    m_bar1->update(elapsed);
-    m_bar2->update(elapsed);
+        if (m_level->checkIfPlayerIsInKillbox(m_player->getPosition())) {
+            if (!m_ending) {
+                m_ending = true;
+                getGame()->stateManager().switchState(std::make_shared<StatePlatformer>());
+            }
+        }
 
+        handleCameraScrolling(elapsed);
+    }
     if (getGame()->input().keyboard()->justPressed(jt::KeyCode::F1)
         || getGame()->input().keyboard()->justPressed(jt::KeyCode::Escape)) {
+
         getGame()->stateManager().switchState(std::make_shared<StateSelect>());
     }
-
-    float max_T = 5.5f;
-    float current = getAge() / max_T;
-    while (current > 1) {
-        current = current - 1.0f;
-    }
-    if (current < 0) {
-        current = 0;
-    }
-    float v = jt::Lerp::cosine(0.0f, 1.0f, current);
-    m_bar1->setCurrentValue(v);
-    if (current < 0.25f) {
-        m_bar1->setFrontColor(jt::colors::Red);
-    } else {
-        m_bar1->setFrontColor(jt::colors::White);
-    }
-
-    m_bar2->setCurrentValue((1 - v));
-    m_bar2->setBackColor(jt::colors::Blue);
 }
-
-void StateBox2d::doInternalDraw() const
+void StatePlatformer::handleCameraScrolling(float const elapsed)
 {
-    drawObjects();
-    m_bar1->draw(renderTarget());
-    m_bar2->draw(renderTarget());
-}
+    auto ps = m_player->getPosOnScreen();
+    float const rightMargin = 150.0f;
+    float const leftMargin = 10.0f;
+    float const scrollSpeed = 60.0f;
+    auto& cam = getGame()->gfx().camera();
 
-void StateBox2d::CreateOneWall(jt::Vector2f const& pos)
-{
-    b2BodyDef groundBodyDef;
-    groundBodyDef.fixedRotation = true;
-    groundBodyDef.position = jt::Conversion::vec(pos);
-    MovementObject::Sptr b2obj = std::make_shared<MovementObject>(m_world, &groundBodyDef);
-    add(b2obj);
-
-    auto const tweenstartDelay = jt::Random::getFloatGauss(0.3f, 0.05f);
-
-    auto tw1 = jt::TweenRotation::create(
-        b2obj->getAnimation(), jt::Random::getFloatGauss(0.75f, 0.1f), 0, 360);
-    tw1->setStartDelay(tweenstartDelay);
-    add(tw1);
-
-    auto tw2 = jt::TweenScale::create(
-        b2obj->getAnimation(), 0.75f, jt::Vector2f { 0.0f, 0.0f }, jt::Vector2f { 1.0f, 1.0f });
-    tw2->setStartDelay(tweenstartDelay);
-    add(tw2);
-}
-
-void StateBox2d::CreateWalls()
-{
-    b2BodyDef groundBodyDef;
-    groundBodyDef.fixedRotation = true;
-    for (int i = 0; i != 30; ++i) {
-        auto const i_as_float = static_cast<float>(i);
-        // ceiling
-        CreateOneWall(jt::Vector2f { i_as_float * 16.0f, 0.0f });
-
-        // floor layers
-        CreateOneWall(jt::Vector2f { i_as_float * 16.0f, 320.0f });
-        CreateOneWall(jt::Vector2f { i_as_float * 16.0f, 320.0f - 16.0f });
-        CreateOneWall(jt::Vector2f { i_as_float * 16.0f, 320.0f - 32.0f });
-
-        // walls
-
-        CreateOneWall(jt::Vector2f { 0.0f, 16.0f * i_as_float });
-        CreateOneWall(jt::Vector2f { 400.0f - 16.0f, 16.0f * i_as_float });
+    if (ps.x < leftMargin) {
+        cam.move(jt::Vector2f { -scrollSpeed * elapsed, 0.0f });
+        if (ps.x < rightMargin / 2) {
+            cam.move(jt::Vector2f { -scrollSpeed * elapsed, 0.0f });
+        }
+    } else if (ps.x > 400.0f - rightMargin) {
+        cam.move(jt::Vector2f { scrollSpeed * elapsed, 0.0f });
+        if (ps.x > 400.0f - rightMargin / 3 * 2) {
+            cam.move(jt::Vector2f { scrollSpeed * elapsed, 0.0f });
+        }
     }
 }
-void StateBox2d::CreatePlayer()
+
+void StatePlatformer::doInternalDraw() const
+{
+    m_level->draw();
+    m_player->draw();
+    m_vignette->draw();
+}
+
+void StatePlatformer::CreatePlayer()
 {
     b2BodyDef bodyDef;
     bodyDef.fixedRotation = true;
     bodyDef.type = b2_dynamicBody;
     bodyDef.position.Set(48, 32.0f);
-    MovementObject::Sptr myBody = std::make_shared<MovementObject>(m_world, &bodyDef);
-
-    add(myBody);
-    {
-        auto tw = jt::TweenRotation::create(myBody->getAnimation(), 2, 0, 360);
-        tw->setRepeat(true);
-        add(tw);
-    }
+    m_player = std::make_shared<Player>(m_world, &bodyDef);
+    m_player->setPosition(m_level->getPlayerStart());
+    add(m_player);
 }
-std::string StateBox2d::getName() const { return "Box2D"; }
+
+std::string StatePlatformer::getName() const { return "Box2D"; }

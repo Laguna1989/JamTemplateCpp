@@ -261,7 +261,7 @@ void jt::Animation::doUpdate(float elapsed)
     }
 
     // proceed time
-    m_frameTime += elapsed;
+    m_frameTime += elapsed * m_animationplaybackSpeed;
     while (m_frameTime >= m_time[m_currentAnimName][m_currentIdx]) {
         m_frameTime -= m_time[m_currentAnimName][m_currentIdx];
         m_currentIdx++;
@@ -346,3 +346,5 @@ void jt::Animation::setFrameTimes(
     }
     m_time[animationName] = frameTimes;
 }
+void jt::Animation::setAnimationSpeedFactor(float factor) { m_animationplaybackSpeed = factor; }
+float jt::Animation::getAnimationSpeedFactor() const { return m_animationplaybackSpeed; }
