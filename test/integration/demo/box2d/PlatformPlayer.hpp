@@ -26,7 +26,6 @@ public:
 private:
     std::shared_ptr<jt::Animation> m_animation;
     std::shared_ptr<jt::Box2DObject> m_physicsObject;
-    b2BodyType m_type;
 
     bool m_touchingGround { false };
 

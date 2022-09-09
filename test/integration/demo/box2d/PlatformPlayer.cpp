@@ -31,7 +31,7 @@ void Player::doCreate()
     fixtureDef.isSensor = true;
     fixtureDef.shape = &polygonShape;
     b2Fixture* footSensorFixture = m_physicsObject->getB2Body()->CreateFixture(&fixtureDef);
-    footSensorFixture->SetUserData((void*)3);
+    footSensorFixture->SetUserData((void*)std::uint64_t { 3U });
 }
 
 std::shared_ptr<jt::Animation> Player::getAnimation() { return m_animation; }
@@ -42,7 +42,6 @@ void Player::doUpdate(float const elapsed)
     m_animation->setPosition(vec(m_physicsObject->getB2Body()->GetPosition()));
 
     auto const v = abs(m_physicsObject->getVelocity().x) / 80.0f;
-    //    std::cout << v << std::endl;
     m_animation->setAnimationSpeedFactor(v);
     m_animation->update(elapsed);
 

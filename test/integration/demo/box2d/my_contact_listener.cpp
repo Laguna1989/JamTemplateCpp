@@ -39,5 +39,5 @@ void MyContactListener::setPlayer(std::weak_ptr<Player> player) { m_player = pla
 bool MyContactListener::isPlayerFeetFixture(b2Fixture* fa) const
 {
     void* fixtureUserData = fa->GetUserData();
-    return (int)fixtureUserData == 3;
+    return (std::uint64_t)fixtureUserData == 3U;
 }
