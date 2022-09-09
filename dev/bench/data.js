@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1662393524374,
+  "lastUpdate": 1662746135828,
   "repoUrl": "https://github.com/Laguna1989/JamTemplateCpp",
   "entries": {
     "Benchmark": [
@@ -9174,6 +9174,84 @@ window.BENCHMARK_DATA = {
             "value": 3.7835547348066867,
             "unit": "ms/iter",
             "extra": "iterations: 181\ncpu: 3.7828171270718256 ms\nthreads: 1"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "laguna.ws@gmail.com",
+            "name": "Laguna1989",
+            "username": "Laguna1989"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "d5b212c9bb32cde9075dd82236c700f4b0536ed5",
+          "message": "Merge pull request #250 from Laguna1989/FEATURE_PlatformerBox2D\n\nplatformer box2d",
+          "timestamp": "2022-09-09T19:53:06+02:00",
+          "tree_id": "09409777ecd15cbb087841b150ea3796c9b0610f",
+          "url": "https://github.com/Laguna1989/JamTemplateCpp/commit/d5b212c9bb32cde9075dd82236c700f4b0536ed5"
+        },
+        "date": 1662746135280,
+        "tool": "googlecpp",
+        "benches": [
+          {
+            "name": "BM_UpdateDrawablePositions",
+            "value": 3.709144413978408,
+            "unit": "ms/iter",
+            "extra": "iterations: 186\ncpu: 3.706904838709677 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GetAllCommands",
+            "value": 0.3161005033677566,
+            "unit": "ms/iter",
+            "extra": "iterations: 2227\ncpu: 0.31510444544229904 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_LoggerLogWithoutTarget",
+            "value": 0.7566315471289218,
+            "unit": "ms/iter",
+            "extra": "iterations: 923\ncpu: 0.7565586132177682 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_LoggerLogWithCoutTargetSetToOff",
+            "value": 0.7700715588558718,
+            "unit": "ms/iter",
+            "extra": "iterations: 909\ncpu: 0.7699581958195821 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_UpdateObjectGroup",
+            "value": 0.04881962212783742,
+            "unit": "ms/iter",
+            "extra": "iterations: 14362\ncpu: 0.0488166063222392 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_UpdateSpatialObjectGrid",
+            "value": 0.3327472771254138,
+            "unit": "ms/iter",
+            "extra": "iterations: 2129\ncpu: 0.33268689525598877 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_StartGame",
+            "value": 0.0028288756747987974,
+            "unit": "ms/iter",
+            "extra": "iterations: 246555\ncpu: 0.0028286532416702146 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_RefineTilemapCollisions",
+            "value": 0.18325536735224784,
+            "unit": "ms/iter",
+            "extra": "iterations: 3841\ncpu: 0.1832282999218953 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GamestateWithTweeningShapes",
+            "value": 3.3432170622009645,
+            "unit": "ms/iter",
+            "extra": "iterations: 209\ncpu: 3.342871770334924 ms\nthreads: 1"
           }
         ]
       }
