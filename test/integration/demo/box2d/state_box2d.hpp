@@ -21,6 +21,7 @@ private:
     std::shared_ptr<Player> m_player { nullptr };
     std::shared_ptr<MyContactListener> m_contactListener { nullptr };
     std::shared_ptr<jt::Vignette> m_vignette { nullptr };
+    bool m_ending { false };
 
     std::string getName() const override;
 
@@ -30,6 +31,7 @@ private:
 
     void CreatePlayer();
     void loadLevel();
+    void handleCameraScrolling(float const elapsed);
 };
 
 #endif // DEMO_STATE_PLATFORMER_HPP

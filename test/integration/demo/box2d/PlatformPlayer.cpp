@@ -27,8 +27,9 @@ void Player::doCreate()
 
     fixtureDef.isSensor = true;
     b2PolygonShape polygonShape;
-    polygonShape.SetAsBox(2, 0.3f, b2Vec2(0, 4), 0);
+    polygonShape.SetAsBox(2.0f, 0.3f, b2Vec2(0, 4), 0);
     fixtureDef.isSensor = true;
+    fixtureDef.shape = &polygonShape;
     b2Fixture* footSensorFixture = m_physicsObject->getB2Body()->CreateFixture(&fixtureDef);
     footSensorFixture->SetUserData((void*)3);
 }
@@ -40,6 +41,9 @@ void Player::doUpdate(float const elapsed)
     using namespace jt::Conversion;
     m_animation->setPosition(vec(m_physicsObject->getB2Body()->GetPosition()));
 
+    auto const v = abs(m_physicsObject->getVelocity().x) / 80.0f;
+    //    std::cout << v << std::endl;
+    m_animation->setAnimationSpeedFactor(v);
     m_animation->update(elapsed);
 
     handleMovement(elapsed);
@@ -47,13 +51,13 @@ void Player::doUpdate(float const elapsed)
 
 void Player::handleMovement(float const elapsed)
 {
-    auto const horizontalAcceleration = 35000.0f;
+    auto const horizontalAcceleration = 15000.0f;
     auto const maxHorizontalVelocity = 80.0f;
     auto const horizontalDampening = 130.0f;
 
     auto const jumpInitialVelocity = -140.0f;
     auto const maxVerticalVelocity = 100.0f;
-    auto const jumpVerticalAcceleration = -9000.0f;
+    auto const jumpVerticalAcceleration = -5000.0f;
 
     bool horizontalMovement { false };
     auto b2b = getB2Body();
@@ -116,3 +120,5 @@ b2Body* Player::getB2Body() { return m_physicsObject->getB2Body(); }
 void Player::doDraw() const { m_animation->draw(renderTarget()); }
 void Player::setTouchesGround(bool touchingGround) { m_touchingGround = touchingGround; }
 jt::Vector2f Player::getPosOnScreen() const { return m_animation->getScreenPosition(); }
+void Player::setPosition(jt::Vector2f const& pos) { m_physicsObject->setPosition(pos); }
+jt::Vector2f Player::getPosition() const { return m_physicsObject->getPosition(); }

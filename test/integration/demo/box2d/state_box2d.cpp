@@ -36,13 +36,31 @@ void StatePlatformer::loadLevel()
 
 void StatePlatformer::doInternalUpdate(float const elapsed)
 {
-    std::int32_t const velocityIterations = 20;
-    std::int32_t const positionIterations = 20;
-    m_world->step(elapsed, velocityIterations, positionIterations);
+    if (!m_ending) {
+        std::int32_t const velocityIterations = 20;
+        std::int32_t const positionIterations = 20;
+        m_world->step(elapsed, velocityIterations, positionIterations);
 
-    updateObjects(elapsed);
-    m_level->update(elapsed);
+        updateObjects(elapsed);
+        m_level->update(elapsed);
 
+        if (m_level->checkIfPlayerIsInKillbox(m_player->getPosition())) {
+            if (!m_ending) {
+                m_ending = true;
+                getGame()->stateManager().switchState(std::make_shared<StatePlatformer>());
+            }
+        }
+
+        handleCameraScrolling(elapsed);
+    }
+    if (getGame()->input().keyboard()->justPressed(jt::KeyCode::F1)
+        || getGame()->input().keyboard()->justPressed(jt::KeyCode::Escape)) {
+
+        getGame()->stateManager().switchState(std::make_shared<StateSelect>());
+    }
+}
+void StatePlatformer::handleCameraScrolling(float const elapsed)
+{
     auto ps = m_player->getPosOnScreen();
     float const rightMargin = 150.0f;
     float const leftMargin = 10.0f;
@@ -60,12 +78,6 @@ void StatePlatformer::doInternalUpdate(float const elapsed)
             cam.move(jt::Vector2f { scrollSpeed * elapsed, 0.0f });
         }
     }
-
-    if (getGame()->input().keyboard()->justPressed(jt::KeyCode::F1)
-        || getGame()->input().keyboard()->justPressed(jt::KeyCode::Escape)) {
-
-        getGame()->stateManager().switchState(std::make_shared<StateSelect>());
-    }
 }
 
 void StatePlatformer::doInternalDraw() const
@@ -82,7 +94,7 @@ void StatePlatformer::CreatePlayer()
     bodyDef.type = b2_dynamicBody;
     bodyDef.position.Set(48, 32.0f);
     m_player = std::make_shared<Player>(m_world, &bodyDef);
-
+    m_player->setPosition(m_level->getPlayerStart());
     add(m_player);
 }
 

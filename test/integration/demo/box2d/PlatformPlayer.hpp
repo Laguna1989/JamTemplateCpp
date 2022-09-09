@@ -20,6 +20,8 @@ public:
     void setTouchesGround(bool touchingGround);
 
     jt::Vector2f getPosOnScreen() const;
+    void setPosition(jt::Vector2f const& pos);
+    jt::Vector2f getPosition() const;
 
 private:
     std::shared_ptr<jt::Animation> m_animation;
