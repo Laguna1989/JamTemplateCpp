@@ -57,7 +57,15 @@ float jt::MathHelper::angleOf(jt::Vector2f const& in)
 {
     return rad2deg(static_cast<float>(atan2(-in.y, in.x)));
 }
+
 float jt::MathHelper::dot(Vector2f const& lhs, Vector2f const& rhs)
 {
     return lhs.x * rhs.x + lhs.y * rhs.y;
+}
+
+bool jt::MathHelper::checkIsIn(jt::Rectf const& r, jt::Vector2f const& p)
+{
+    bool const overlapsX = p.x > r.left && p.x < r.left + r.width;
+    bool const overlapsY = p.y > r.top && p.y < r.top + r.height;
+    return (overlapsX && overlapsY);
 }

@@ -1,4 +1,5 @@
 #include "license_info.hpp"
+#include <build_info.hpp>
 #include <game_interface.hpp>
 #include <imgui.h>
 
@@ -365,6 +366,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.)";
 
 void jt::LicenseInfo::doCreate()
 {
+    addLicenseText(jt::BuildInfo::timestamp() + " " + jt::BuildInfo::gitCommitHash());
     addLicenseText(sfmlLicenseText);
     addLicenseText(sdlLicenseText);
     addLicenseText(gtestLicenseText);
