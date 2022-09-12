@@ -1,6 +1,7 @@
 ﻿#ifndef JAMTEMPLATE_MATHHELPER_HPP
 #define JAMTEMPLATE_MATHHELPER_HPP
 
+#include <rect.hpp>
 #include <vector.hpp>
 #include <assert.h>
 #include <string>
@@ -72,6 +73,8 @@ constexpr bool is_powerof2(T v)
 }
 
 float dot(Vector2f const&, Vector2f const&);
+
+bool checkIsIn(jt::Rectf const& r, jt::Vector2f const& p);
 
 } // namespace MathHelper
 } // namespace jt

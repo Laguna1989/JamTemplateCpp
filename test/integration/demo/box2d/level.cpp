@@ -1,6 +1,7 @@
 #include "level.hpp"
-#include "tilemap/tileson_loader.hpp"
-#include "Box2D/Box2D.h"
+#include <math_helper.hpp>
+#include <tilemap/tileson_loader.hpp>
+#include <Box2D/Box2D.h>
 
 Level::Level(std::string const& fileName, std::weak_ptr<jt::Box2DWorldInterface> world)
 {
@@ -87,16 +88,13 @@ jt::Vector2f Level::getPlayerStart() const { return m_playerStart; }
 
 bool Level::checkIfPlayerIsInKillbox(jt::Vector2f const& playerPosition) const
 {
+    // TODO move to separate Killbox class
     if (m_killboxes.empty()) {
         return false;
     }
     for (auto const& kb : m_killboxes) {
-
-        bool const overlapsX
-            = playerPosition.x > kb.position.x && playerPosition.x < kb.position.x + kb.size.x;
-        bool const overlapsY
-            = playerPosition.y > kb.position.y && playerPosition.y < kb.position.y + kb.size.y;
-        if (overlapsX && overlapsY) {
+        jt::Rectf const killboxRect { kb.position.x, kb.position.y, kb.size.x, kb.size.y };
+        if (jt::MathHelper::checkIsIn(killboxRect, playerPosition)) {
             return true;
         }
     }
