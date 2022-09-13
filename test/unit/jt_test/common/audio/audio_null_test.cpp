@@ -16,7 +16,8 @@ TEST(AudioNullTest, AddTemporarySoundReturnsNoNullptr)
 TEST(AudioNullTest, AddTemporarySoundGroupReturnsNoNullptr)
 {
     jt::AudioNull audio;
-    ASSERT_NE(audio.addTemporarySoundGroup(std::vector<std::string> { "bla", "blubb" }), nullptr);
+
+    ASSERT_NE(audio.addTemporarySoundGroup({ nullptr, nullptr }), nullptr);
 }
 
 TEST(AudioNullTest, AddPermanentSoundReturnsNoNullptr)

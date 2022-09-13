@@ -74,7 +74,13 @@ public:
     /// \return the SoundContextInterface
     virtual oalpp::SoundContextInterface& getContext() = 0;
 
-    // TODO add group functionality
+    /// Add a temporary sound group
+    /// \param sounds the sounds to create the group from
+    /// \return a shared pointer to a sound group
+    virtual std::shared_ptr<jt::SoundInterface> addTemporarySoundGroup(
+        std::vector<std::shared_ptr<jt::SoundInterface>> const& sounds)
+        = 0;
+
 protected:
     AudioInterface() = default;
 };

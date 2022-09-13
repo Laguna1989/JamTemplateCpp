@@ -44,11 +44,11 @@ std::shared_ptr<jt::SoundInterface> jt::AudioNull::addPermanentSound(std::string
 }
 
 std::shared_ptr<jt::SoundInterface> jt::AudioNull::addTemporarySoundGroup(
-    std::vector<std::string> const& fileNames)
+    std::vector<std::shared_ptr<jt::SoundInterface>> const& sounds)
 {
     auto group = std::make_shared<jt::SoundGroup>();
 
-    for (auto const& fileName : fileNames) {
+    for (auto const& sound : sounds) {
         group->add(std::make_shared<jt::SoundNull>());
     }
 
