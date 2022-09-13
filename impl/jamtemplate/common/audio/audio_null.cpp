@@ -1,4 +1,5 @@
 #include "audio_null.hpp"
+#include <audio/sound_group.hpp>
 #include <audio/sound_null.hpp>
 
 void jt::AudioNull::update() { }
@@ -43,7 +44,13 @@ std::shared_ptr<jt::SoundInterface> jt::AudioNull::addPermanentSound(std::string
 }
 
 std::shared_ptr<jt::SoundInterface> jt::AudioNull::addTemporarySoundGroup(
-    std::vector<std::string> fileNames)
+    std::vector<std::string> const& fileNames)
 {
-    return nullptr;
+    auto group = std::make_shared<jt::SoundGroup>();
+
+    for (auto const& fileName : fileNames) {
+        group->add(std::make_shared<jt::SoundNull>());
+    }
+
+    return group;
 }

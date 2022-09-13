@@ -33,7 +33,8 @@ public:
 
     void removePermanentSound(std::string const& identifier) override;
 
-    std::shared_ptr<jt::SoundInterface> addTemporarySoundGroup(std::vector<std::string> fileNames);
+    std::shared_ptr<jt::SoundInterface> addTemporarySoundGroup(
+        std::vector<std::string> const& fileNames);
 
 private:
     null_objects::SoundContextNull m_context;
