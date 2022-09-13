@@ -13,6 +13,13 @@ TEST(AudioNullTest, AddTemporarySoundReturnsNoNullptr)
     ASSERT_NE(audio.addTemporarySound("bla"), nullptr);
 }
 
+TEST(AudioNullTest, AddTemporarySoundGroupReturnsNoNullptr)
+{
+    jt::AudioNull audio;
+
+    ASSERT_NE(audio.addTemporarySoundGroup({ nullptr, nullptr }), nullptr);
+}
+
 TEST(AudioNullTest, AddPermanentSoundReturnsNoNullptr)
 {
     jt::AudioNull audio;

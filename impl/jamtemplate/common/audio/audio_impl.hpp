@@ -14,6 +14,8 @@ public:
     void update() override;
 
     std::shared_ptr<jt::SoundInterface> addTemporarySound(std::string const& fileName) override;
+    std::shared_ptr<jt::SoundInterface> addTemporarySoundGroup(
+        std::vector<std::shared_ptr<jt::SoundInterface>> const& sounds) override;
 
     std::shared_ptr<jt::SoundInterface> addPermanentSound(
         std::string const& identifier, std::string const& fileName) override;

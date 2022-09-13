@@ -9,6 +9,9 @@
 #include <optional>
 
 class StateAudio : public jt::GameState {
+public:
+    std::string getName() const override;
+
 private:
     void doInternalCreate() override;
     void doInternalUpdate(float elapsed) override;

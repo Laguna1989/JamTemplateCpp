@@ -1,6 +1,7 @@
 #include "audio_impl.hpp"
 #include <audio/intro_looping_sound_with_effect.hpp>
 #include <audio/sound.hpp>
+#include <audio/sound_group.hpp>
 #include <audio/sound_with_effect.hpp>
 #include <random/random.hpp>
 #include <algorithm>
@@ -30,7 +31,7 @@ void jt::AudioImpl::cleanUpUnusedSounds()
 
 std::shared_ptr<jt::SoundInterface> jt::AudioImpl::addTemporarySound(std::string const& fileName)
 {
-    auto sound = std::make_shared<jt::Sound>(fileName);
+    auto const sound = std::make_shared<jt::Sound>(fileName);
     m_temporarySounds.push_back(sound);
     return sound;
 }
@@ -67,7 +68,7 @@ std::shared_ptr<jt::SoundInterface> jt::AudioImpl::soundPool(
 std::shared_ptr<jt::SoundInterface> jt::AudioImpl::addPermanentSound(
     std::string const& identifier, std::string const& fileName)
 {
-    auto sound = std::make_shared<jt::Sound>(fileName);
+    auto const sound = std::make_shared<jt::Sound>(fileName);
     m_permanentSounds[identifier] = sound;
     return sound;
 }
@@ -75,7 +76,7 @@ std::shared_ptr<jt::SoundInterface> jt::AudioImpl::addPermanentSound(
 std::shared_ptr<jt::SoundInterface> jt::AudioImpl::addPermanentSound(std::string const& identifier,
     std::string const& fileName, oalpp::effects::MonoEffectInterface& effect)
 {
-    auto sound = std::make_shared<jt::SoundWithEffect>(fileName, effect);
+    auto const sound = std::make_shared<jt::SoundWithEffect>(fileName, effect);
     m_permanentSounds[identifier] = sound;
     return sound;
 }
@@ -83,7 +84,15 @@ std::shared_ptr<jt::SoundInterface> jt::AudioImpl::addPermanentSound(std::string
     std::string const& introFileName, std::string const& loopingFileName,
     oalpp::effects::MonoEffectInterface& effect)
 {
-    auto sound = std::make_shared<jt::IntroLoopingSoundWithEffect>(introFileName, loopingFileName,  effect);
+    auto const sound
+        = std::make_shared<jt::IntroLoopingSoundWithEffect>(introFileName, loopingFileName, effect);
     m_permanentSounds[identifier] = sound;
     return sound;
+}
+std::shared_ptr<jt::SoundInterface> jt::AudioImpl::addTemporarySoundGroup(
+    std::vector<std::shared_ptr<jt::SoundInterface>> const& sounds)
+{
+    auto const group = std::make_shared<jt::SoundGroup>(sounds);
+    m_temporarySounds.push_back(group);
+    return group;
 }

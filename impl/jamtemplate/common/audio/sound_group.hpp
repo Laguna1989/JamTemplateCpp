@@ -18,7 +18,9 @@ public:
 
     /// Constructor for convenience
     /// \param sounds list of filepaths to load
-    explicit SoundGroup(std::vector<std::string> const& sounds);
+    explicit SoundGroup(std::vector<std::shared_ptr<jt::SoundInterface>> const& sounds);
+
+    std::size_t size() const;
 
     void add(std::shared_ptr<SoundInterface> sound);
 
@@ -49,8 +51,6 @@ public:
 
 private:
     std::vector<std::shared_ptr<SoundInterface>> m_sounds {};
-
-    void addSound(std::string const& fileName);
 };
 } // namespace jt
 #endif
