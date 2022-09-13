@@ -20,6 +20,8 @@ public:
     /// \param sounds list of filepaths to load
     explicit SoundGroup(std::vector<std::string> const& sounds);
 
+    std::size_t size() const;
+
     void add(std::shared_ptr<SoundInterface> sound);
 
     bool isPlaying() const override;
@@ -47,12 +49,8 @@ public:
 
     int getSampleRate() const override;
 
-    std::size_t size() const;
-
 private:
     std::vector<std::shared_ptr<SoundInterface>> m_sounds {};
-
-    void addSound(std::string const& fileName);
 };
 } // namespace jt
 #endif

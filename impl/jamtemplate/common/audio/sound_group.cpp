@@ -10,11 +10,6 @@ jt::SoundGroup::SoundGroup(std::vector<std::string> const& sounds)
     }
 }
 
-void jt::SoundGroup::addSound(std::string const& fileName)
-{
-    m_sounds.emplace_back(std::make_shared<jt::Sound>(fileName));
-}
-
 bool jt::SoundGroup::isPlaying() const
 {
     return std::any_of(
@@ -76,8 +71,8 @@ bool jt::SoundGroup::getLoop()
 }
 
 float jt::SoundGroup::getDuration() const { return 0.0f; }
-
 float jt::SoundGroup::getPosition() const { return 0.0f; }
+
 void jt::SoundGroup::update()
 {
     for (auto& snd : m_sounds) {
@@ -125,4 +120,4 @@ float jt::SoundGroup::getPitch() const
     return m_sounds.at(0)->getPitch();
 }
 
-std::size_t jt::SoundGroup::size() const { return 1; }
+std::size_t jt::SoundGroup::size() const { return m_sounds.size(); }
