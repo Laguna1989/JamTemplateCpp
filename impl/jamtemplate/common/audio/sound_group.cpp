@@ -124,3 +124,5 @@ float jt::SoundGroup::getPitch() const
     }
     return m_sounds.at(0)->getPitch();
 }
+
+std::size_t jt::SoundGroup::size() const { return 1; }

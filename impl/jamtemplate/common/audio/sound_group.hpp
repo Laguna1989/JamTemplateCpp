@@ -47,6 +47,8 @@ public:
 
     int getSampleRate() const override;
 
+    std::size_t size() const;
+
 private:
     std::vector<std::shared_ptr<SoundInterface>> m_sounds {};
 
