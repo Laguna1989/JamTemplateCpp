@@ -41,3 +41,9 @@ std::shared_ptr<jt::SoundInterface> jt::AudioNull::addPermanentSound(std::string
 {
     return std::make_shared<jt::SoundNull>();
 }
+
+std::shared_ptr<jt::SoundInterface> jt::AudioNull::addTemporarySoundGroup(
+    std::vector<std::string> fileNames)
+{
+    return nullptr;
+}

@@ -7,8 +7,7 @@ namespace jt {
 
 namespace null_objects {
 
-class SoundContextNull : public oalpp::SoundContextInterface {
-};
+class SoundContextNull : public oalpp::SoundContextInterface { };
 
 } // namespace null_objects
 
@@ -27,12 +26,14 @@ public:
         std::string const& introFileName, std::string const& loopingFileName,
         oalpp::effects::MonoEffectInterface& effect) override;
 
-    std::shared_ptr<SoundInterface> soundPool(
+    std::shared_ptr<jt::SoundInterface> soundPool(
         std::string const& baseIdentifier, std::string const& fileName, std::size_t count) override;
 
-    std::shared_ptr<SoundInterface> getPermanentSound(std::string const& identifier) override;
+    std::shared_ptr<jt::SoundInterface> getPermanentSound(std::string const& identifier) override;
 
     void removePermanentSound(std::string const& identifier) override;
+
+    std::shared_ptr<jt::SoundInterface> addTemporarySoundGroup(std::vector<std::string> fileNames);
 
 private:
     null_objects::SoundContextNull m_context;
