@@ -1,12 +1,11 @@
 ﻿#include "sound_group.hpp"
-#include <audio/sound.hpp>
 #include <random/random.hpp>
 #include <algorithm>
 
-jt::SoundGroup::SoundGroup(std::vector<std::string> const& sounds)
+jt::SoundGroup::SoundGroup(std::vector<std::shared_ptr<jt::SoundInterface>> const& sounds)
 {
-    for (auto const& f : sounds) {
-        m_sounds.emplace_back(std::make_shared<jt::Sound>(f));
+    for (auto const& sound : sounds) {
+        m_sounds.emplace_back(sound);
     }
 }
 
