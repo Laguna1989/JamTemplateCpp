@@ -63,6 +63,7 @@ std::shared_ptr<jt::SoundInterface> jt::LoggingAudio::addPermanentSound(
         m_decoratee.addPermanentSound(identifier, introFileName, loopingFileName, effect),
         m_logger);
 }
+
 std::shared_ptr<jt::SoundInterface> jt::LoggingAudio::addTemporarySoundGroup(
     std::vector<std::shared_ptr<jt::SoundInterface>> const& sounds)
 {
