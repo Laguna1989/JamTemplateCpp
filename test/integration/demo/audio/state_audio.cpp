@@ -18,19 +18,20 @@ void StateAudio::doInternalCreate()
         m_blend = m_sound->getBlend();
     }
 
-    auto soundGroup = std::make_shared<jt::SoundGroup>();
+    std::vector<std::shared_ptr<jt::SoundInterface>> soundGroupSounds {};
     std::map<std::string, float> pitches { { "A3", 0.5f }, { "A4", 1.0f },
         { "B4", 1.12234772727272727273f }, { "C5", 1.18920681818181818182f },
         { "D5", 1.33484090909090909091f }, { "E5", 1.49830681818181818182f }, { "F5", 1.5874f },
         { "G5", 1.78179772727272727273f }, { "A5", 2.0f } };
 
     for (auto const& kvp : pitches) {
-        auto snd = getGame()->audio().addTemporarySound("assets/test/integration/demo/test.ogg");
-        snd->setPitch(kvp.second);
-        soundGroup->add(snd);
-        m_notes[kvp.first] = snd;
+        auto soundGroupSound
+            = getGame()->audio().addTemporarySound("assets/test/integration/demo/test.ogg");
+        soundGroupSound->setPitch(kvp.second);
+        soundGroupSounds.push_back(soundGroupSound);
+        m_notes[kvp.first] = soundGroupSound;
     }
-    m_soundGroup = soundGroup;
+    m_soundGroup = getGame()->audio().addTemporarySoundGroup(soundGroupSounds);
 }
 
 void StateAudio::doInternalUpdate(float /*elapsed*/)
@@ -80,3 +81,4 @@ void StateAudio::doInternalDraw() const
     }
     ImGui::End();
 }
+std::string StateAudio::getName() const { return "State Demo Audio"; }

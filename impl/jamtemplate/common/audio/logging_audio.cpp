@@ -27,14 +27,14 @@ oalpp::SoundContextInterface& jt::LoggingAudio::getContext() { return m_decorate
 std::shared_ptr<jt::SoundInterface> jt::LoggingAudio::soundPool(
     std::string const& baseIdentifier, std::string const& fileName, std::size_t count)
 {
-    m_logger.verbose("sound pool: " + baseIdentifier, { "jt", "audio" });
+    m_logger.debug("sound pool: " + baseIdentifier, { "jt", "audio" });
     return std::make_shared<jt::LoggingSound>(
         m_decoratee.soundPool(baseIdentifier, fileName, count), m_logger);
 }
 
 std::shared_ptr<jt::SoundInterface> jt::LoggingAudio::addTemporarySound(std::string const& fileName)
 {
-    m_logger.verbose("add temporary sound", { "jt", "audio" });
+    m_logger.debug("add temporary sound", { "jt", "audio" });
     return std::make_shared<jt::LoggingSound>(m_decoratee.addTemporarySound(fileName), m_logger);
 }
 
@@ -62,4 +62,11 @@ std::shared_ptr<jt::SoundInterface> jt::LoggingAudio::addPermanentSound(
     return std::make_shared<jt::LoggingSound>(
         m_decoratee.addPermanentSound(identifier, introFileName, loopingFileName, effect),
         m_logger);
+}
+std::shared_ptr<jt::SoundInterface> jt::LoggingAudio::addTemporarySoundGroup(
+    std::vector<std::shared_ptr<jt::SoundInterface>> const& sounds)
+{
+    m_logger.debug("add temporary sound group with " + std::to_string(sounds.size()) + " entries",
+        { "jt", "audio" });
+    return std::make_shared<jt::LoggingSound>(m_decoratee.addTemporarySoundGroup(sounds), m_logger);
 }
