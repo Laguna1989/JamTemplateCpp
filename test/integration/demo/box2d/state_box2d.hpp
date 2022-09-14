@@ -14,9 +14,13 @@
 #include <vector.hpp>
 
 class StatePlatformer : public jt::GameState {
+public:
+    explicit StatePlatformer(std::string const& levelName = "platformer1.json");
+
 private:
     std::shared_ptr<jt::Box2DWorldInterface> m_world { nullptr };
 
+    std::string m_levelName { "" };
     std::shared_ptr<Level> m_level { nullptr };
     std::shared_ptr<Player> m_player { nullptr };
     std::shared_ptr<MyContactListener> m_contactListener { nullptr };
@@ -32,6 +36,7 @@ private:
     void CreatePlayer();
     void loadLevel();
     void handleCameraScrolling(float const elapsed);
+    void endGame();
 };
 
 #endif // DEMO_STATE_PLATFORMER_HPP

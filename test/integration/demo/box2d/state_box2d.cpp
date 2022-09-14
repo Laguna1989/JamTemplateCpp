@@ -11,6 +11,8 @@
 #include <tweens/tween_rotation.hpp>
 #include <tweens/tween_scale.hpp>
 
+StatePlatformer::StatePlatformer(std::string const& levelName) { m_levelName = levelName; }
+
 void StatePlatformer::doInternalCreate()
 {
     //    getGame()->gfx().camera().setZoom(4.0f);
@@ -30,7 +32,7 @@ void StatePlatformer::doInternalCreate()
 
 void StatePlatformer::loadLevel()
 {
-    m_level = std::make_shared<Level>("assets/test/integration/demo/platformer.json", m_world);
+    m_level = std::make_shared<Level>("assets/test/integration/demo/" + m_levelName, m_world);
     add(m_level);
 }
 
@@ -44,12 +46,15 @@ void StatePlatformer::doInternalUpdate(float const elapsed)
         updateObjects(elapsed);
         m_level->update(elapsed);
 
-        if (m_level->checkIfPlayerIsInKillbox(m_player->getPosition())) {
-            if (!m_ending) {
-                m_ending = true;
-                getGame()->stateManager().switchState(std::make_shared<StatePlatformer>());
-            }
-        }
+        m_level->checkIfPlayerIsInKillbox(m_player->getPosition(), [this]() { endGame(); });
+        m_level->checkIfPlayerIsInExit(
+            m_player->getPosition(), [this](std::string const& newLevelName) {
+                if (!m_ending) {
+                    m_ending = true;
+                    getGame()->stateManager().switchState(
+                        std::make_shared<StatePlatformer>(newLevelName));
+                }
+            });
 
         handleCameraScrolling(elapsed);
     }
@@ -59,6 +64,15 @@ void StatePlatformer::doInternalUpdate(float const elapsed)
         getGame()->stateManager().switchState(std::make_shared<StateSelect>());
     }
 }
+
+void StatePlatformer::endGame()
+{
+    if (!m_ending) {
+        m_ending = true;
+        getGame()->stateManager().switchState(std::make_shared<StatePlatformer>(m_levelName));
+    }
+}
+
 void StatePlatformer::handleCameraScrolling(float const elapsed)
 {
     auto ps = m_player->getPosOnScreen();

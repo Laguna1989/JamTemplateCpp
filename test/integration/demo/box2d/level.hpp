@@ -1,19 +1,24 @@
 #ifndef JAMTEMPLATE_LEVEL_HPP
 #define JAMTEMPLATE_LEVEL_HPP
 
-#include "box2dwrapper/box2d_object.hpp"
-#include "tilemap/tile_layer.hpp"
-#include "tilemap/tileson_loader.hpp"
+#include <box2dwrapper/box2d_object.hpp>
 #include <box2dwrapper/box2d_world_interface.hpp>
 #include <game_object.hpp>
 #include <shape.hpp>
+#include <tilemap/tile_layer.hpp>
+#include <tilemap/tileson_loader.hpp>
+#include <functional>
 
 class Level : public jt::GameObject {
 public:
     Level(std::string const& fileName, std::weak_ptr<jt::Box2DWorldInterface> world);
     jt::Vector2f getPlayerStart() const;
 
-    bool checkIfPlayerIsInKillbox(jt::Vector2f const& playerPosition) const;
+    void checkIfPlayerIsInKillbox(
+        jt::Vector2f const& playerPosition, std::function<void(void)> callback) const;
+
+    void checkIfPlayerIsInExit(
+        jt::Vector2f const& playerPosition, std::function<void(std::string const&)> callback);
 
 private:
     void doCreate() override;
@@ -29,6 +34,8 @@ private:
     jt::Vector2f m_playerStart { 0.0f, 0.0f };
 
     std::vector<jt::tilemap::InfoRect> m_killboxes;
+    jt::tilemap::InfoRect m_exit;
+
     void loadLevelSettings(jt::tilemap::TilesonLoader& loader);
     void loadLevelTileLayer(jt::tilemap::TilesonLoader& loader);
     void loadLevelCollisions(jt::tilemap::TilesonLoader& loader);
