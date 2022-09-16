@@ -69,11 +69,12 @@ void Level::loadLevelSettings(jt::tilemap::TilesonLoader& loader)
 {
     auto settings = loader.loadObjectsFromLayer("settings");
     for (auto const& info : settings) {
+        
         if (info.name == "map_settings") {
-            auto const props = settings.front().properties;
-            m_background->setColor(jt::Color { static_cast<uint8_t>(props.ints.at("bg_r")),
-                static_cast<uint8_t>(props.ints.at("bg_g")),
-                static_cast<uint8_t>(props.ints.at("bg_b")) });
+            m_background->setColor(
+                jt::Color { static_cast<uint8_t>(info.properties.ints.at("bg_r")),
+                    static_cast<uint8_t>(info.properties.ints.at("bg_g")),
+                    static_cast<uint8_t>(info.properties.ints.at("bg_b")) });
         } else if (info.name == "player_start") {
             m_playerStart = info.position;
         } else if (info.name == "exit") {

@@ -75,30 +75,35 @@ void StatePlatformer::endGame()
 
 void StatePlatformer::handleCameraScrolling(float const elapsed)
 {
+    // TODO add y scrolling if needed
     auto ps = m_player->getPosOnScreen();
+
     float const rightMargin = 150.0f;
     float const leftMargin = 10.0f;
+
     float const scrollSpeed = 60.0f;
     auto& cam = getGame()->gfx().camera();
 
+    auto const screenWidth = 400.0f;
     if (ps.x < leftMargin) {
         cam.move(jt::Vector2f { -scrollSpeed * elapsed, 0.0f });
         if (ps.x < rightMargin / 2) {
             cam.move(jt::Vector2f { -scrollSpeed * elapsed, 0.0f });
         }
-    } else if (ps.x > 400.0f - rightMargin) {
+    } else if (ps.x > screenWidth - rightMargin) {
         cam.move(jt::Vector2f { scrollSpeed * elapsed, 0.0f });
-        if (ps.x > 400.0f - rightMargin / 3 * 2) {
+        if (ps.x > screenWidth - rightMargin / 3 * 2) {
             cam.move(jt::Vector2f { scrollSpeed * elapsed, 0.0f });
         }
     }
 
+    // clamp camera to level bounds
     auto offset = cam.getCamOffset();
     if (offset.x < 0) {
         offset.x = 0;
     }
     auto const levelWidth = m_level->getLevelSizeInPixel().x;
-    auto const maxCamPosition = levelWidth - 400.0f;
+    auto const maxCamPosition = levelWidth - screenWidth;
     if (offset.x > maxCamPosition) {
         offset.x = maxCamPosition;
     }
