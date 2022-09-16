@@ -18,11 +18,17 @@ void Level::doCreate()
 
     jt::tilemap::TilesonLoader loader { m_fileName };
 
+    loadLevelSize(loader);
     loadLevelSettings(loader);
     loadLevelTileLayer(loader);
     loadLevelCollisions(loader);
-
     loadLevelKillboxes(loader);
+}
+
+void Level::loadLevelSize(jt::tilemap::TilesonLoader const& loader)
+{
+    auto const sizeInTiles = loader.getMapSizeInTiles();
+    m_levelSizeInPixel = jt::Vector2f { 8.0f * sizeInTiles.x, 8.0f * sizeInTiles.y };
 }
 
 void Level::loadLevelKillboxes(jt::tilemap::TilesonLoader& loader)
@@ -111,3 +117,5 @@ void Level::checkIfPlayerIsInExit(
         callback(m_exit.properties.strings["next_level"]);
     }
 }
+
+jt::Vector2f Level::getLevelSizeInPixel() const { return m_levelSizeInPixel; }

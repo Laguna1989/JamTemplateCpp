@@ -92,6 +92,17 @@ void StatePlatformer::handleCameraScrolling(float const elapsed)
             cam.move(jt::Vector2f { scrollSpeed * elapsed, 0.0f });
         }
     }
+
+    auto offset = cam.getCamOffset();
+    if (offset.x < 0) {
+        offset.x = 0;
+    }
+    auto const levelWidth = m_level->getLevelSizeInPixel().x;
+    auto const maxCamPosition = levelWidth - 400.0f;
+    if (offset.x > maxCamPosition) {
+        offset.x = maxCamPosition;
+    }
+    cam.setCamOffset(offset);
 }
 
 void StatePlatformer::doInternalDraw() const

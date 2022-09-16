@@ -33,6 +33,8 @@ public:
 
     TilemapCollisions loadCollisionsFromLayer(std::string const& layerName);
 
+    jt::Vector2u getMapSizeInTiles() const;
+
 private:
     TilemapManagerTilesonImpl m_tilemapManager;
     std::string m_fileName;

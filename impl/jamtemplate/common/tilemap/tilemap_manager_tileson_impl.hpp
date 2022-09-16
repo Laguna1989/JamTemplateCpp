@@ -6,10 +6,10 @@
 namespace jt {
 class TilemapManagerTilesonImpl {
 public:
-    std::unique_ptr<tson::Map>& getMap(std::string const& fileName);
+    std::unique_ptr<tson::Map>& getMap(std::string const& fileName) const;
 
 private:
-    std::map<std::string, std::unique_ptr<tson::Map>> m_maps;
+    mutable std::map<std::string, std::unique_ptr<tson::Map>> m_maps;
 };
 } // namespace jt
 

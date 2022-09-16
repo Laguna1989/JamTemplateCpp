@@ -15,7 +15,7 @@
 
 class StatePlatformer : public jt::GameState {
 public:
-    explicit StatePlatformer(std::string const& levelName = "platformer1.json");
+    explicit StatePlatformer(std::string const& levelName = "platformer_0_0.json");
 
 private:
     std::shared_ptr<jt::Box2DWorldInterface> m_world { nullptr };
@@ -25,6 +25,7 @@ private:
     std::shared_ptr<Player> m_player { nullptr };
     std::shared_ptr<MyContactListener> m_contactListener { nullptr };
     std::shared_ptr<jt::Vignette> m_vignette { nullptr };
+
     bool m_ending { false };
 
     std::string getName() const override;

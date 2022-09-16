@@ -50,3 +50,11 @@ TEST(TilesonLoaderTestCollisions, LoadedCollidersAreSortedYFirst)
     ASSERT_EQ(collisions.getRects().at(1).left, 0U);
     ASSERT_EQ(collisions.getRects().at(1).top, 32U);
 }
+
+TEST(TilesonLoaderTest, MapSizeInTiles)
+{
+    jt::TextureManagerInterface& textureManager { getTextureManager() };
+    jt::tilemap::TilesonLoader loader("assets/test/unit/jt_test/tileson_test_small.json");
+    jt::Vector2u const expectedValue { 14U, 15U };
+    ASSERT_EQ(loader.getMapSizeInTiles(), expectedValue);
+}

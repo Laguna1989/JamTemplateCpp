@@ -214,3 +214,10 @@ jt::TilemapCollisions jt::tilemap::TilesonLoader::loadCollisionsFromLayer(
 
     return collisions;
 }
+
+jt::Vector2u jt::tilemap::TilesonLoader::getMapSizeInTiles() const
+{
+    auto& map = m_tilemapManager.getMap(m_fileName);
+    auto const size = map->getSize();
+    return jt::Vector2u { static_cast<unsigned int>(size.x), static_cast<unsigned int>(size.y) };
+}

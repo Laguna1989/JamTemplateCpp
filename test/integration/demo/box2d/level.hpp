@@ -20,26 +20,30 @@ public:
     void checkIfPlayerIsInExit(
         jt::Vector2f const& playerPosition, std::function<void(std::string const&)> callback);
 
+    jt::Vector2f getLevelSizeInPixel() const;
+
 private:
     void doCreate() override;
     void doUpdate(float const elapsed) override;
     void doDraw() const override;
 
-    std::shared_ptr<jt::Shape> m_background;
+    std::shared_ptr<jt::Shape> m_background { nullptr };
     std::string m_fileName { "" };
-    std::weak_ptr<jt::Box2DWorldInterface> m_world;
+    std::weak_ptr<jt::Box2DWorldInterface> m_world {};
 
     std::vector<std::shared_ptr<jt::Box2DObject>> m_colliders {};
     std::shared_ptr<jt::tilemap::TileLayer> m_tileLayerGround { nullptr };
     jt::Vector2f m_playerStart { 0.0f, 0.0f };
 
-    std::vector<jt::tilemap::InfoRect> m_killboxes;
-    jt::tilemap::InfoRect m_exit;
+    std::vector<jt::tilemap::InfoRect> m_killboxes {};
+    jt::tilemap::InfoRect m_exit {};
+    jt::Vector2f m_levelSizeInPixel { 0.0f, 0.0f };
 
     void loadLevelSettings(jt::tilemap::TilesonLoader& loader);
     void loadLevelTileLayer(jt::tilemap::TilesonLoader& loader);
     void loadLevelCollisions(jt::tilemap::TilesonLoader& loader);
     void loadLevelKillboxes(jt::tilemap::TilesonLoader& loader);
+    void loadLevelSize(jt::tilemap::TilesonLoader const& loader);
 };
 
 #endif // JAMTEMPLATE_LEVEL_HPP
