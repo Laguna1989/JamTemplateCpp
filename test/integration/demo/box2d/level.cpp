@@ -75,6 +75,7 @@ void Level::loadLevelSettings(jt::tilemap::TilesonLoader& loader)
         }
     }
 }
+
 void Level::doUpdate(float const elapsed)
 {
     m_background->update(elapsed);
