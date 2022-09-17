@@ -14,6 +14,8 @@ public:
     void update(std::weak_ptr<GameInterface> gameInstance, float elapsed) override;
     void draw(std::shared_ptr<RenderTarget> rt) override;
 
+    std::shared_ptr<StateManagerTransitionInterface> getTransition() override;
+
 private:
     StateManagerInterface& m_decoratee;
     LoggerInterface& m_logger;

@@ -17,9 +17,13 @@ public:
     /// \return the current state
     virtual std::shared_ptr<GameState> getCurrentState() = 0;
 
-    /// Set the out transition
-    /// \param transition the out transition to play
+    /// Set the state switch transition
+    /// \param transition the transition to play
     virtual void setTransition(std::shared_ptr<StateManagerTransitionInterface> transition) = 0;
+
+    /// Get the set state switch transition
+    /// \return the set transition
+    virtual std::shared_ptr<StateManagerTransitionInterface> getTransition() = 0;
 
     /// Switch to a new state
     ///
@@ -32,6 +36,8 @@ public:
     /// \return true if switch was performed, false otherwise
     virtual void update(std::weak_ptr<GameInterface> gameInstance, float elapsed) = 0;
 
+    /// Draw the state
+    /// \param rt
     virtual void draw(std::shared_ptr<RenderTarget> rt) = 0;
 };
 

@@ -7,6 +7,7 @@ jt::StateManager::StateManager(std::shared_ptr<jt::GameState> initialState)
     : m_state { nullptr }
     , m_nextState { initialState }
 {
+    m_transition = std::make_shared<jt::StateManagerTransitionNone>();
 }
 
 std::shared_ptr<jt::GameState> jt::StateManager::getCurrentState() { return m_state; }

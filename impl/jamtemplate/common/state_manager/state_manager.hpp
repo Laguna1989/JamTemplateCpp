@@ -23,7 +23,7 @@ public:
 
     void setTransition(std::shared_ptr<StateManagerTransitionInterface> transition) override;
 
-    std::shared_ptr<StateManagerTransitionInterface> getTransition();
+    std::shared_ptr<StateManagerTransitionInterface> getTransition() override;
 
 private:
     std::shared_ptr<GameState> m_state { nullptr };

@@ -38,7 +38,7 @@ void StatePlatformer::loadLevel()
 
 void StatePlatformer::doInternalUpdate(float const elapsed)
 {
-    if (!m_ending) {
+    if (!m_ending && !getGame()->stateManager().getTransition()->isInProgress()) {
         std::int32_t const velocityIterations = 20;
         std::int32_t const positionIterations = 20;
         m_world->step(elapsed, velocityIterations, positionIterations);
