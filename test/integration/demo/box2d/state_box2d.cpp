@@ -1,13 +1,13 @@
 ﻿#include "state_box2d.hpp"
+#include "tweens/tween_position.hpp"
 #include <box2d/PlatformPlayer.hpp>
 #include <box2dwrapper/box2d_world_impl.hpp>
 #include <conversions.hpp>
 #include <game_interface.hpp>
 #include <input/input_manager.hpp>
-#include <lerp.hpp>
 #include <random/random.hpp>
 #include <state_select.hpp>
-#include <tilemap/tileson_loader.hpp>
+#include <tweens/tween_alpha.hpp>
 #include <tweens/tween_rotation.hpp>
 #include <tweens/tween_scale.hpp>
 
@@ -113,19 +113,57 @@ void StatePlatformer::handleCameraScrolling(float const elapsed)
 void StatePlatformer::doInternalDraw() const
 {
     m_level->draw();
+
     m_player->draw();
+    m_walkParticles->draw();
     m_vignette->draw();
 }
 
 void StatePlatformer::CreatePlayer()
 {
-    b2BodyDef bodyDef;
-    bodyDef.fixedRotation = true;
-    bodyDef.type = b2_dynamicBody;
-    bodyDef.position.Set(48, 32.0f);
-    m_player = std::make_shared<Player>(m_world, &bodyDef);
+    m_player = std::make_shared<Player>(m_world);
     m_player->setPosition(m_level->getPlayerStart());
     add(m_player);
+
+    m_walkParticles = jt::ParticleSystem<jt::Shape, 50>::createPS(
+        [this]() {
+            auto s = std::make_shared<jt::Shape>();
+            s->makeRect(jt::Vector2f { 1.0f, 1.0f }, textureManager());
+            s->setColor(jt::colors::Black);
+            s->setPosition(jt::Vector2f { -50000, -50000 });
+            return s;
+        },
+        [this](auto s, auto p) {
+            s->setPosition(p);
+
+            auto twa = jt::TweenAlpha::create(s, 1.5f, 255, 0);
+            add(twa);
+
+            auto const rp
+                = p + jt::Vector2f { 0, 4 } + jt::Vector2f { jt::Random::getFloat(-4, 4), 0 };
+
+            auto topPos = rp;
+            auto botPos = rp;
+            auto const maxHeight = jt::Random::getFloat(3.0f, 8.0f);
+            if (jt::Random::getChance()) {
+                topPos = rp + jt::Vector2f { 5, -maxHeight };
+                botPos = rp + jt::Vector2f { 10, 0 };
+            } else {
+                topPos = rp + jt::Vector2f { -5, -maxHeight };
+                botPos = rp + jt::Vector2f { -10, 0 };
+            }
+            auto const totalTime = jt::Random::getFloat(0.3f, 0.6f);
+            std::shared_ptr<jt::Tween> twp1
+                = jt::TweenPosition::create(s, totalTime / 2.0f, rp, topPos);
+            add(twp1);
+            twp1->addCompleteCallback([this, topPos, botPos, s, totalTime]() {
+                auto twp2 = jt::TweenPosition::create(s, totalTime / 2.0f, topPos, botPos);
+                add(twp2);
+            });
+        });
+    add(m_walkParticles);
+
+    m_player->setWalkParticleSystem(m_walkParticles);
 }
 
 std::string StatePlatformer::getName() const { return "Box2D"; }

@@ -1,16 +1,16 @@
 ﻿#ifndef DEMO_STATE_PLATFORMER_HPP
 #define DEMO_STATE_PLATFORMER_HPP
 
-#include "box2dwrapper/box2d_object.hpp"
-#include "my_contact_listener.hpp"
-#include "screeneffects/vignette.hpp"
-#include "tilemap/tile_layer.hpp"
-#include <bar.hpp>
 #include <box2d/PlatformPlayer.hpp>
 #include <box2d/level.hpp>
+#include <box2d/my_contact_listener.hpp>
+#include <box2dwrapper/box2d_object.hpp>
 #include <box2dwrapper/box2d_world_interface.hpp>
 #include <game_state.hpp>
+#include <particle_system.hpp>
+#include <screeneffects/vignette.hpp>
 #include <shape.hpp>
+#include <tilemap/tile_layer.hpp>
 #include <vector.hpp>
 
 class StatePlatformer : public jt::GameState {
@@ -25,6 +25,8 @@ private:
     std::shared_ptr<Player> m_player { nullptr };
     std::shared_ptr<MyContactListener> m_contactListener { nullptr };
     std::shared_ptr<jt::Vignette> m_vignette { nullptr };
+
+    std::shared_ptr<jt::ParticleSystem<jt::Shape, 50>> m_walkParticles { nullptr };
 
     bool m_ending { false };
 

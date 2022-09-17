@@ -4,13 +4,15 @@
 #include <animation.hpp>
 #include <box2dwrapper/box2d_object.hpp>
 #include <game_object.hpp>
+#include <particle_system.hpp>
+#include <shape.hpp>
 #include <Box2D/Box2D.h>
 #include <memory>
 
 class Player : public jt::GameObject {
 public:
     using Sptr = std::shared_ptr<Player>;
-    Player(std::shared_ptr<jt::Box2DWorldInterface> world, const b2BodyDef* def);
+    Player(std::shared_ptr<jt::Box2DWorldInterface> world);
 
     ~Player() = default;
 
@@ -23,17 +25,24 @@ public:
     void setPosition(jt::Vector2f const& pos);
     jt::Vector2f getPosition() const;
 
+    void setWalkParticleSystem(std::weak_ptr<jt::ParticleSystem<jt::Shape, 50>> ps);
+
 private:
     std::shared_ptr<jt::Animation> m_animation;
     std::shared_ptr<jt::Box2DObject> m_physicsObject;
+    float m_walkParticlesTimer = 0.0f;
+    std::weak_ptr<jt::ParticleSystem<jt::Shape, 50>> m_walkParticles;
 
-    bool m_touchingGround { false };
+    bool m_isTouchingGround { false };
+
+    bool m_isMoving { false };
 
     void doCreate() override;
     void doUpdate(float const elapsed) override;
 
     void doDraw() const override;
     void handleMovement(float const elapsed);
+    void updateAnimation(float elapsed);
 };
 
 #endif
