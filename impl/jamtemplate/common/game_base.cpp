@@ -4,13 +4,14 @@
 
 jt::GameBase::GameBase(jt::GfxInterface& gfx, jt::InputManagerInterface& input,
     jt::AudioInterface& audio, jt::StateManagerInterface& stateManager, jt::LoggerInterface& logger,
-    jt::ActionCommandManagerInterface& actionCommandManager)
+    jt::ActionCommandManagerInterface& actionCommandManager, jt::CacheInterface& cache)
     : m_gfx { gfx }
     , m_inputManager { input }
     , m_audio { audio }
     , m_stateManager { stateManager }
     , m_logger { logger }
     , m_actionCommandManager { actionCommandManager }
+    , m_cache { cache }
 {
     m_logger.info("git commit hash: " + jt::BuildInfo::gitCommitHash(), { "jt", "build info" });
     m_logger.info("build date: " + jt::BuildInfo::timestamp(), { "jt", "build info" });
@@ -58,7 +59,7 @@ std::weak_ptr<jt::GameInterface> jt::GameBase::getPtr() { return shared_from_thi
 
 void jt::GameBase::reset()
 {
-    m_logger.info("Game reset", { "jt" });
+    m_logger.info("Game reset", { "jt", "game" });
     gfx().reset();
     m_inputManager.reset();
 }
@@ -102,3 +103,5 @@ void jt::GameBase::doDraw() const
     m_stateManager.draw(gfx().target());
     gfx().display();
 }
+
+jt::CacheInterface& jt::GameBase::cache() { return m_cache; }

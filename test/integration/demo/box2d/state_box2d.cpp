@@ -11,6 +11,8 @@
 #include <tweens/tween_rotation.hpp>
 #include <tweens/tween_scale.hpp>
 
+StatePlatformer::StatePlatformer(std::string const& levelName) { m_levelName = levelName; }
+
 void StatePlatformer::doInternalCreate()
 {
     //    getGame()->gfx().camera().setZoom(4.0f);
@@ -30,13 +32,13 @@ void StatePlatformer::doInternalCreate()
 
 void StatePlatformer::loadLevel()
 {
-    m_level = std::make_shared<Level>("assets/test/integration/demo/platformer.json", m_world);
+    m_level = std::make_shared<Level>("assets/test/integration/demo/" + m_levelName, m_world);
     add(m_level);
 }
 
 void StatePlatformer::doInternalUpdate(float const elapsed)
 {
-    if (!m_ending) {
+    if (!m_ending && !getGame()->stateManager().getTransition()->isInProgress()) {
         std::int32_t const velocityIterations = 20;
         std::int32_t const positionIterations = 20;
         m_world->step(elapsed, velocityIterations, positionIterations);
@@ -44,12 +46,15 @@ void StatePlatformer::doInternalUpdate(float const elapsed)
         updateObjects(elapsed);
         m_level->update(elapsed);
 
-        if (m_level->checkIfPlayerIsInKillbox(m_player->getPosition())) {
-            if (!m_ending) {
-                m_ending = true;
-                getGame()->stateManager().switchState(std::make_shared<StatePlatformer>());
-            }
-        }
+        m_level->checkIfPlayerIsInKillbox(m_player->getPosition(), [this]() { endGame(); });
+        m_level->checkIfPlayerIsInExit(
+            m_player->getPosition(), [this](std::string const& newLevelName) {
+                if (!m_ending) {
+                    m_ending = true;
+                    getGame()->stateManager().switchState(
+                        std::make_shared<StatePlatformer>(newLevelName));
+                }
+            });
 
         handleCameraScrolling(elapsed);
     }
@@ -59,25 +64,50 @@ void StatePlatformer::doInternalUpdate(float const elapsed)
         getGame()->stateManager().switchState(std::make_shared<StateSelect>());
     }
 }
+
+void StatePlatformer::endGame()
+{
+    if (!m_ending) {
+        m_ending = true;
+        getGame()->stateManager().switchState(std::make_shared<StatePlatformer>(m_levelName));
+    }
+}
+
 void StatePlatformer::handleCameraScrolling(float const elapsed)
 {
+    // TODO add y scrolling if needed
     auto ps = m_player->getPosOnScreen();
+
     float const rightMargin = 150.0f;
     float const leftMargin = 10.0f;
+
     float const scrollSpeed = 60.0f;
     auto& cam = getGame()->gfx().camera();
 
+    auto const screenWidth = 400.0f;
     if (ps.x < leftMargin) {
         cam.move(jt::Vector2f { -scrollSpeed * elapsed, 0.0f });
         if (ps.x < rightMargin / 2) {
             cam.move(jt::Vector2f { -scrollSpeed * elapsed, 0.0f });
         }
-    } else if (ps.x > 400.0f - rightMargin) {
+    } else if (ps.x > screenWidth - rightMargin) {
         cam.move(jt::Vector2f { scrollSpeed * elapsed, 0.0f });
-        if (ps.x > 400.0f - rightMargin / 3 * 2) {
+        if (ps.x > screenWidth - rightMargin / 3 * 2) {
             cam.move(jt::Vector2f { scrollSpeed * elapsed, 0.0f });
         }
     }
+
+    // clamp camera to level bounds
+    auto offset = cam.getCamOffset();
+    if (offset.x < 0) {
+        offset.x = 0;
+    }
+    auto const levelWidth = m_level->getLevelSizeInPixel().x;
+    auto const maxCamPosition = levelWidth - screenWidth;
+    if (offset.x > maxCamPosition) {
+        offset.x = maxCamPosition;
+    }
+    cam.setCamOffset(offset);
 }
 
 void StatePlatformer::doInternalDraw() const

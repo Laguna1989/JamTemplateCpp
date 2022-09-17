@@ -40,3 +40,8 @@ void jt::LoggingStateManager::draw(std::shared_ptr<jt::RenderTarget> rt)
     m_logger.verbose("draw", { "jt", "StateManager" });
     m_decoratee.draw(rt);
 }
+std::shared_ptr<jt::StateManagerTransitionInterface> jt::LoggingStateManager::getTransition()
+{
+    m_logger.verbose("getTransition", { "jt", "StateManager" });
+    return m_decoratee.getTransition();
+}

@@ -33,7 +33,6 @@ private:
     template <class State>
     void AddButton(std::string const& textString)
     {
-
         int const indexX = static_cast<int>(m_buttonCount) / detail::numberOfButtonsPerColumn;
         int const indexY = m_buttonCount % detail::numberOfButtonsPerColumn;
         float const posX

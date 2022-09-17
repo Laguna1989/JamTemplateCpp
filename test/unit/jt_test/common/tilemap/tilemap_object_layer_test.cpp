@@ -1,19 +1,23 @@
 #include <tilemap/object_layer.hpp>
-#include <tilemap/tilemap_manager_tileson_impl.hpp>
+#include <tilemap/tilemap_cache.hpp>
 #include <tilemap/tileson_loader.hpp>
 #include <gtest/gtest.h>
 
 using ::jt::tilemap::ObjectLayer;
 
+namespace {
+jt::TilemapCache cache;
+}
+
 ObjectLayer getValidObjectLayer()
 {
-    jt::tilemap::TilesonLoader loader { "assets/test/unit/jt_test/tileson_test.json" };
+    jt::tilemap::TilesonLoader loader { cache, "assets/test/unit/jt_test/tileson_test_small.json" };
     return ObjectLayer { loader.loadObjectsFromLayer("objects") };
 }
 
 ObjectLayer getInvalidObjectLayer()
 {
-    jt::tilemap::TilesonLoader loader { "assets/test/unit/jt_test/tileson_test.json" };
+    jt::tilemap::TilesonLoader loader { cache, "assets/test/unit/jt_test/tileson_test_small.json" };
     return ObjectLayer { loader.loadObjectsFromLayer("blarz__non_existing__Blurz") };
 }
 

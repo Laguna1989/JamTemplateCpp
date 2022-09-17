@@ -1,4 +1,5 @@
 ﻿#include "main.hpp"
+#include "cache_impl.hpp"
 #include <action_commands/action_command_manager.hpp>
 #include <action_commands/basic_action_commands.hpp>
 #include <audio/audio_impl.hpp>
@@ -61,8 +62,10 @@ int main()
 
     jt::ActionCommandManager actionCommandManager(logger);
 
+    jt::CacheImpl cache;
+
     game = std::make_shared<jt::Game>(
-        gfx, input, loggingAudio, loggingStateManager, logger, actionCommandManager);
+        gfx, input, loggingAudio, loggingStateManager, logger, actionCommandManager, cache);
 
     addBasicActionCommands(game);
     game->startGame(gameloop);

@@ -2,9 +2,13 @@
 #include <tilemap/tileson_loader.hpp>
 #include <benchmark/benchmark.h>
 
+namespace {
+jt::TilemapCache cache;
+}
+
 static void BM_RefineTilemapCollisions(benchmark::State& state)
 {
-    jt::tilemap::TilesonLoader loader { "assets/performance/test_level.json" };
+    jt::tilemap::TilesonLoader loader { cache, "assets/performance/test_level.json" };
     auto const collisions = loader.loadCollisionsFromLayer("ground1");
     for (auto _ : state) {
         auto newCollisions = collisions;

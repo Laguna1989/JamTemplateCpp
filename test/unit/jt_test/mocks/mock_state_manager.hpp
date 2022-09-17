@@ -11,6 +11,8 @@ public:
     MOCK_METHOD(void, update, (std::weak_ptr<jt::GameInterface>, float), (override));
     MOCK_METHOD(void, setTransition,
         (std::shared_ptr<jt::StateManagerTransitionInterface> transition), (override));
+    MOCK_METHOD(
+        std::shared_ptr<jt::StateManagerTransitionInterface>, getTransition, (), (override));
     MOCK_METHOD(void, draw, (std::shared_ptr<jt::RenderTarget> rt), (override));
 };
 

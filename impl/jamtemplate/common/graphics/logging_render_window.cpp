@@ -5,6 +5,10 @@ jt::LoggingRenderWindow::LoggingRenderWindow(
     : m_decoratee { decoratee }
     , m_logger { logger }
 {
+    auto const size = m_decoratee.getSize();
+    m_logger.info("RenderWindow constructed. Size (" + std::to_string(static_cast<int>(size.x))
+            + ", " + std::to_string(static_cast<int>(size.y)) + ")",
+        { "jt", "RenderWindow" });
 }
 
 bool jt::LoggingRenderWindow::isOpen() const
@@ -18,6 +22,7 @@ void jt::LoggingRenderWindow::checkForClose()
     m_logger.verbose("checkForClose", { "jt", "RenderWindow" });
     m_decoratee.checkForClose();
 }
+
 std::shared_ptr<jt::RenderTarget> jt::LoggingRenderWindow::createRenderTarget()
 {
     m_logger.debug("createRenderTarget", { "jt", "RenderWindow" });

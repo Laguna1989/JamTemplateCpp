@@ -8,7 +8,7 @@
 #include <sprite.hpp>
 #include <text.hpp>
 #include <tilemap/tile_layer.hpp>
-#include <tilemap/tilemap_manager_tileson_impl.hpp>
+#include <tilemap/tilemap_cache.hpp>
 #include <tilemap/tileson_loader.hpp>
 
 class DrawableFactoryInterface {
@@ -74,15 +74,39 @@ public:
     }
 };
 
+class TileMapLoaderCache {
+public:
+    static std::shared_ptr<jt::tilemap::TilesonLoader> getLoader()
+    {
+        if (!m_initialized) {
+            m_loader = std::make_shared<jt::tilemap::TilesonLoader>(
+                m_cache, "assets/test/unit/jt_test/tileson_test_small.json");
+            m_initialized = true;
+        }
+        return m_loader;
+    };
+
+private:
+    static bool m_initialized;
+    static std::shared_ptr<jt::tilemap::TilesonLoader> m_loader;
+    static jt::TilemapCache m_cache;
+};
+
+bool TileMapLoaderCache::m_initialized { false };
+std::shared_ptr<jt::tilemap::TilesonLoader> TileMapLoaderCache::m_loader { nullptr };
+jt::TilemapCache TileMapLoaderCache::m_cache {};
+
 class TileMapFactory : public DrawableFactoryInterface {
 public:
-    std::shared_ptr<jt::TilemapManagerTilesonImpl> tilemapManager;
+    std::shared_ptr<jt::TilemapCache> tilemapManager;
     std::shared_ptr<jt::DrawableInterface> createDrawable(
         jt::TextureManagerInterface& textureManager) override
     {
-        jt::tilemap::TilesonLoader loader("assets/test/unit/jt_test/tileson_test_small.json");
+        //        jt::tilemap::TilesonLoader
+        //        loader("assets/test/unit/jt_test/tileson_test_small.json");
         auto t = std::make_shared<jt::tilemap::TileLayer>(
-            loader.loadTilesFromLayer("ground", textureManager, "assets/test/unit/jt_test/"));
+            TileMapLoaderCache::getLoader()->loadTilesFromLayer(
+                "ground", textureManager, "assets/test/unit/jt_test/"));
         t->setScreenSizeHint(jt::Vector2f { 400.0f, 300.0f });
         return t;
     }
@@ -92,13 +116,15 @@ public:
 
 class TileMapFactoryWithoutScreenSizeHint : public DrawableFactoryInterface {
 public:
-    std::shared_ptr<jt::TilemapManagerTilesonImpl> tilemapManager;
+    std::shared_ptr<jt::TilemapCache> tilemapManager;
     std::shared_ptr<jt::DrawableInterface> createDrawable(
         jt::TextureManagerInterface& textureManager) override
     {
-        jt::tilemap::TilesonLoader loader("assets/test/unit/jt_test/tileson_test.json");
+        //        jt::tilemap::TilesonLoader
+        //        loader("assets/test/unit/jt_test/tileson_test_small.json");
         auto t = std::make_shared<jt::tilemap::TileLayer>(
-            loader.loadTilesFromLayer("ground", textureManager, "assets/test/unit/jt_test/"));
+            TileMapLoaderCache::getLoader()->loadTilesFromLayer(
+                "ground", textureManager, "assets/test/unit/jt_test/"));
         return t;
     }
 

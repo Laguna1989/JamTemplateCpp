@@ -1,4 +1,5 @@
 #include "level.hpp"
+#include <game_interface.hpp>
 #include <math_helper.hpp>
 #include <tilemap/tileson_loader.hpp>
 #include <Box2D/Box2D.h>
@@ -16,13 +17,19 @@ void Level::doCreate()
 
     m_background->setCamMovementFactor(0.0f);
 
-    jt::tilemap::TilesonLoader loader { m_fileName };
+    jt::tilemap::TilesonLoader loader { getGame()->cache().getTilemapCache(), m_fileName };
 
+    loadLevelSize(loader);
     loadLevelSettings(loader);
     loadLevelTileLayer(loader);
     loadLevelCollisions(loader);
-
     loadLevelKillboxes(loader);
+}
+
+void Level::loadLevelSize(jt::tilemap::TilesonLoader const& loader)
+{
+    auto const sizeInTiles = loader.getMapSizeInTiles();
+    m_levelSizeInPixel = jt::Vector2f { 8.0f * sizeInTiles.x, 8.0f * sizeInTiles.y };
 }
 
 void Level::loadLevelKillboxes(jt::tilemap::TilesonLoader& loader)
@@ -63,16 +70,20 @@ void Level::loadLevelSettings(jt::tilemap::TilesonLoader& loader)
 {
     auto settings = loader.loadObjectsFromLayer("settings");
     for (auto const& info : settings) {
+
         if (info.name == "map_settings") {
-            auto const props = settings.front().properties;
-            m_background->setColor(jt::Color { static_cast<uint8_t>(props.ints.at("bg_r")),
-                static_cast<uint8_t>(props.ints.at("bg_g")),
-                static_cast<uint8_t>(props.ints.at("bg_b")) });
+            m_background->setColor(
+                jt::Color { static_cast<uint8_t>(info.properties.ints.at("bg_r")),
+                    static_cast<uint8_t>(info.properties.ints.at("bg_g")),
+                    static_cast<uint8_t>(info.properties.ints.at("bg_b")) });
         } else if (info.name == "player_start") {
             m_playerStart = info.position;
+        } else if (info.name == "exit") {
+            m_exit = info;
         }
     }
 }
+
 void Level::doUpdate(float const elapsed)
 {
     m_background->update(elapsed);
@@ -86,17 +97,27 @@ void Level::doDraw() const
 }
 jt::Vector2f Level::getPlayerStart() const { return m_playerStart; }
 
-bool Level::checkIfPlayerIsInKillbox(jt::Vector2f const& playerPosition) const
+void Level::checkIfPlayerIsInKillbox(
+    jt::Vector2f const& playerPosition, std::function<void(void)> callback) const
 {
-    // TODO move to separate Killbox class
-    if (m_killboxes.empty()) {
-        return false;
-    }
+    // TODO move check to separate Killbox class
     for (auto const& kb : m_killboxes) {
         jt::Rectf const killboxRect { kb.position.x, kb.position.y, kb.size.x, kb.size.y };
         if (jt::MathHelper::checkIsIn(killboxRect, playerPosition)) {
-            return true;
+            callback();
+            break;
         }
     }
-    return false;
 }
+
+void Level::checkIfPlayerIsInExit(
+    jt::Vector2f const& playerPosition, std::function<void(std::string const&)> callback)
+{
+    // TODO move to separate Exit class
+    jt::Rectf const exitRect { m_exit.position.x, m_exit.position.y, m_exit.size.x, m_exit.size.y };
+    if (jt::MathHelper::checkIsIn(exitRect, playerPosition)) {
+        callback(m_exit.properties.strings["next_level"]);
+    }
+}
+
+jt::Vector2f Level::getLevelSizeInPixel() const { return m_levelSizeInPixel; }
