@@ -8,8 +8,7 @@
 using jt::Random;
 using v = jt::Vector2f;
 
-class RandomIntTestFixture : public ::testing::TestWithParam<std::pair<int, int>> {
-};
+class RandomIntTestFixture : public ::testing::TestWithParam<std::pair<int, int>> { };
 
 INSTANTIATE_TEST_SUITE_P(RandomIntTest, RandomIntTestFixture,
     ::testing::Values(std::make_pair(1, 6), std::make_pair(0, 100), std::make_pair(-20, 20),
@@ -26,8 +25,7 @@ TEST_P(RandomIntTestFixture, RandomInt)
     }
 }
 
-class RandomFloatTestFixture : public ::testing::TestWithParam<std::pair<float, float>> {
-};
+class RandomFloatTestFixture : public ::testing::TestWithParam<std::pair<float, float>> { };
 
 INSTANTIATE_TEST_SUITE_P(RandomFloatTest, RandomFloatTestFixture,
     ::testing::Values(
@@ -57,8 +55,7 @@ TEST(RandomChanceTest, ChanceZeroAlwaysTrue)
     }
 }
 
-class RandomFloatGaussTestFixture : public ::testing::TestWithParam<std::pair<float, float>> {
-};
+class RandomFloatGaussTestFixture : public ::testing::TestWithParam<std::pair<float, float>> { };
 
 INSTANTIATE_TEST_SUITE_P(RandomFloatGaussTest, RandomFloatGaussTestFixture,
     ::testing::Values(std::make_pair(0.0f, 1.0f), std::make_pair(0.0f, 500.0f),
@@ -106,21 +103,36 @@ TEST(RandomColor, HSV)
     ASSERT_FLOAT_EQ(h, 0.0f);
 }
 
-TEST(RandomInRect, Valid)
+TEST(RandomPointIn, ValidWithRect)
 {
-    auto const lower = 0.0f;
-    auto const upper = 10.0f;
+    auto const lowerX = 10.0f;
+    auto const lowerY = 10.0f;
+    auto const upperX = 3.0f;
+    auto const upperY = 9.0f;
     for (auto i = 0U; i != 1000; ++i) {
-        auto const v = Random::getRandomPointIn(jt::Rectf { lower, lower, upper, upper });
-        EXPECT_GT(v.x, lower);
-        EXPECT_GT(v.y, lower);
-        EXPECT_LT(v.x, upper);
-        EXPECT_LT(v.y, upper);
+        auto const v = Random::getRandomPointIn(jt::Rectf { lowerX, lowerY, upperX, upperY });
+        EXPECT_GT(v.x, lowerX);
+        EXPECT_GT(v.y, lowerY);
+        EXPECT_LT(v.x, lowerX + upperX);
+        EXPECT_LT(v.y, lowerY + upperY);
     }
 }
 
-class RandomSetSeedTestFixture : public ::testing::TestWithParam<unsigned int> {
-};
+TEST(RandomPointIn, ValidWithVector)
+{
+    auto const lower = 0.0f;
+    auto const upperX = 13.0f;
+    auto const upperY = 7.0f;
+    for (auto i = 0U; i != 1000; ++i) {
+        auto const v = Random::getRandomPointIn(jt::Vector2f { upperX, upperY });
+        EXPECT_GT(v.x, lower);
+        EXPECT_GT(v.y, lower);
+        EXPECT_LT(v.x, upperX);
+        EXPECT_LT(v.y, upperY);
+    }
+}
+
+class RandomSetSeedTestFixture : public ::testing::TestWithParam<unsigned int> { };
 
 INSTANTIATE_TEST_SUITE_P(RandomSetSeedTest, RandomSetSeedTestFixture,
     ::testing::Values(0U, 1U, 10U, 100U, 1000U, std::numeric_limits<unsigned int>::epsilon(),

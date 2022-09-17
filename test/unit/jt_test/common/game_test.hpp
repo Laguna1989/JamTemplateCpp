@@ -1,9 +1,9 @@
 #ifndef JAMTEMPLATE_UNITTESTS_GAME_TEST_HPP
 #define JAMTEMPLATE_UNITTESTS_GAME_TEST_HPP
 
-#include "cache_null.hpp"
 #include <action_commands/action_command_manager.hpp>
 #include <audio/audio_null.hpp>
+#include <cache_null.hpp>
 #include <game.hpp>
 #include <mocks/mock_camera.hpp>
 #include <mocks/mock_gfx.hpp>
