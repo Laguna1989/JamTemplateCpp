@@ -1,11 +1,15 @@
 ﻿#include <backend_setup.hpp>
 #include <texture_manager_impl.hpp>
 #include <tilemap/tile_layer.hpp>
-#include <tilemap/tilemap_manager_tileson_impl.hpp>
+#include <tilemap/tilemap_cache.hpp>
 #include <tilemap/tileson_loader.hpp>
 #include <gtest/gtest.h>
 
 using jt::tilemap::TileLayer;
+
+namespace {
+jt::TilemapCache cache;
+}
 
 class TilemapTileLayerTest : public ::testing::Test {
 public:
@@ -14,7 +18,7 @@ public:
 
     void SetUp() override
     {
-        jt::tilemap::TilesonLoader loader("assets/test/unit/jt_test/tileson_test.json");
+        jt::tilemap::TilesonLoader loader(cache, "assets/test/unit/jt_test/tileson_test.json");
         tileLayer = std::make_shared<jt::tilemap::TileLayer>(
             loader.loadTilesFromLayer("ground", textureManager, "assets/test/unit/jt_test/"));
     }
@@ -66,7 +70,7 @@ TEST_F(TilemapTileLayerTest, GetLocalBoundsReturnsDefaultConstructedRect)
 
 TEST(TilemapLoaderTileson, ParseInvalidFile)
 {
-    auto tilemapManager = std::make_shared<jt::TilemapManagerTilesonImpl>();
+    auto tilemapManager = std::make_shared<jt::TilemapCache>();
     auto func = [tilemapManager]() { tilemapManager->getMap("invalidFile.__123"); };
     ASSERT_THROW(func(), std::invalid_argument);
 }

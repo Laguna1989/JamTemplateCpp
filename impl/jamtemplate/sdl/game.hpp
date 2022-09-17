@@ -17,7 +17,7 @@ public:
 
     Game(GfxInterface&, InputManagerInterface& input, AudioInterface& audio,
         StateManagerInterface& stateManager, LoggerInterface& logger,
-        ActionCommandManagerInterface& actionCommandManager);
+        ActionCommandManagerInterface& actionCommandManager, CacheInterface& cache);
 
     void startGame(GameLoopFunctionPtr gameloop_function) override;
 };

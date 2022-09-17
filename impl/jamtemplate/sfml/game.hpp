@@ -19,7 +19,7 @@ public:
     /// \param actionCommandManager action command manager
     Game(GfxInterface& gfx, InputManagerInterface& input, AudioInterface& audio,
         StateManagerInterface& stateManager, LoggerInterface& logger,
-        ActionCommandManagerInterface& actionCommandManager);
+        ActionCommandManagerInterface& actionCommandManager, jt::CacheInterface& cache);
 
     /// Start game
     /// \param gameloop_function

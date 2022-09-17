@@ -1,4 +1,5 @@
 #include "level.hpp"
+#include <game_interface.hpp>
 #include <math_helper.hpp>
 #include <tilemap/tileson_loader.hpp>
 #include <Box2D/Box2D.h>
@@ -16,7 +17,7 @@ void Level::doCreate()
 
     m_background->setCamMovementFactor(0.0f);
 
-    jt::tilemap::TilesonLoader loader { m_fileName };
+    jt::tilemap::TilesonLoader loader { getGame()->cache().getTilemapCache(), m_fileName };
 
     loadLevelSize(loader);
     loadLevelSettings(loader);
@@ -69,7 +70,7 @@ void Level::loadLevelSettings(jt::tilemap::TilesonLoader& loader)
 {
     auto settings = loader.loadObjectsFromLayer("settings");
     for (auto const& info : settings) {
-        
+
         if (info.name == "map_settings") {
             m_background->setColor(
                 jt::Color { static_cast<uint8_t>(info.properties.ints.at("bg_r")),

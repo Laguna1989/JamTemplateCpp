@@ -83,7 +83,8 @@ void StateInventory::createWorldItems()
 
 void StateInventory::loadTilemap()
 {
-    jt::tilemap::TilesonLoader loader { "assets/test/integration/demo/spaceship_items.json" };
+    jt::tilemap::TilesonLoader loader { getGame()->cache().getTilemapCache(),
+        "assets/test/integration/demo/spaceship_items.json" };
 
     m_tileLayerGround = std::make_shared<jt::tilemap::TileLayer>(
         loader.loadTilesFromLayer("ground", textureManager(), "assets/test/integration/demo/"));

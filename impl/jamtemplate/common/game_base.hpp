@@ -15,7 +15,7 @@ public:
 
     GameBase(jt::GfxInterface& gfx, jt::InputManagerInterface& input, jt::AudioInterface& audio,
         jt::StateManagerInterface& stateManager, jt::LoggerInterface& logger,
-        jt::ActionCommandManagerInterface& actionCommandManager);
+        jt::ActionCommandManagerInterface& actionCommandManager, jt::CacheInterface& cache);
 
     void runOneFrame();
 
@@ -30,6 +30,8 @@ public:
     LoggerInterface& logger() override;
 
     ActionCommandManagerInterface& actionCommandManager() override;
+
+    CacheInterface& cache() override;
 
     /// Start game
     /// \param gameloop_function
@@ -55,6 +57,8 @@ protected:
     LoggerInterface& m_logger;
 
     ActionCommandManagerInterface& m_actionCommandManager;
+
+    CacheInterface& m_cache;
 
     std::chrono::steady_clock::time_point m_timeLast {};
 

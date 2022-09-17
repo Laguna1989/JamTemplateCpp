@@ -1,6 +1,7 @@
 ﻿#ifndef JAMTEMPLATE_GAMEINTERFACE_HPP
 #define JAMTEMPLATE_GAMEINTERFACE_HPP
 
+#include "cache_interface.hpp"
 #include <action_commands/action_command_manager_interface.hpp>
 #include <audio/audio_interface.hpp>
 #include <cam_interface.hpp>
@@ -42,6 +43,10 @@ public:
     /// Get the ActionCommandManager
     /// \return the action command manager
     virtual ActionCommandManagerInterface& actionCommandManager() = 0;
+
+    /// Get the cache
+    /// \return the cache
+    virtual CacheInterface& cache() = 0;
 
     /// Reset the Game internals, i.e. on a state switch
     virtual void reset() = 0;

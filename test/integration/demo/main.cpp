@@ -2,6 +2,7 @@
 #include <action_commands/basic_action_commands.hpp>
 #include <audio/audio_impl.hpp>
 #include <audio/logging_audio.hpp>
+#include <cache_impl.hpp>
 #include <camera.hpp>
 #include <game.hpp>
 #include <gfx_impl.hpp>
@@ -55,10 +56,12 @@ int main()
     jt::StateManager stateManager { std::make_shared<StateSelect>() };
     jt::LoggingStateManager loggingStateManager { stateManager, logger };
 
-    jt::ActionCommandManager actionCommandManager(logger);
+    jt::ActionCommandManager actionCommandManager { logger };
+
+    jt::CacheImpl cache;
 
     game = std::make_shared<jt::Game>(
-        gfx, input, loggingAudio, loggingStateManager, logger, actionCommandManager);
+        gfx, input, loggingAudio, loggingStateManager, logger, actionCommandManager, cache);
     addBasicActionCommands(game);
 
     game->startGame(gameloop);

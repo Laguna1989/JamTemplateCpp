@@ -1,6 +1,7 @@
 #ifndef JAMTEMPLATE_UNITTESTS_GAME_TEST_HPP
 #define JAMTEMPLATE_UNITTESTS_GAME_TEST_HPP
 
+#include "cache_null.hpp"
 #include <action_commands/action_command_manager.hpp>
 #include <audio/audio_null.hpp>
 #include <game.hpp>
@@ -29,6 +30,7 @@ public:
     ::testing::NiceMock<MockInput> input;
     ::testing::NiceMock<MockStateManager> stateManager;
     ::testing::NiceMock<MockLogger> logger;
+    jt::CacheNull m_cache;
 
     void SetUp() override
     {
@@ -48,7 +50,7 @@ public:
             .WillByDefault(
                 ::testing::Invoke([this](auto /*ptr*/, auto elapsed) { state->update(elapsed); }));
         g = std::make_shared<jt::Game>(
-            gfx, input, audio, stateManager, logger, actionCommandManager);
+            gfx, input, audio, stateManager, logger, actionCommandManager, m_cache);
         state->setGameInstance(g);
     }
 };

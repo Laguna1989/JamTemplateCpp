@@ -7,7 +7,8 @@
 
 void StateScreenEffects::doInternalCreate()
 {
-    jt::tilemap::TilesonLoader loader { "assets/test/integration/demo/screeneffect_map.json" };
+    jt::tilemap::TilesonLoader loader { getGame()->cache().getTilemapCache(),
+        "assets/test/integration/demo/screeneffect_map.json" };
     std::vector<std::string> const layerNames { "ground", "water_edges", "rug", "shadows", "fence",
         "walls", "props" };
 

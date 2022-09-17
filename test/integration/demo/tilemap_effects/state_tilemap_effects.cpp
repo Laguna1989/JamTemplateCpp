@@ -6,14 +6,15 @@
 #include <pathfinder/pathfinder.hpp>
 #include <state_select.hpp>
 #include <tilemap/tile_layer.hpp>
+#include <tilemap/tilemap_cache.hpp>
 #include <tilemap/tilemap_helpers.hpp>
-#include <tilemap/tilemap_manager_tileson_impl.hpp>
 #include <tilemap/tileson_loader.hpp>
 #include <imgui.h>
 
 void StateTilemapEffects::doInternalCreate()
 {
-    jt::tilemap::TilesonLoader loader { "assets/test/integration/demo/tilemap_onebit.json" };
+    jt::tilemap::TilesonLoader loader { getGame()->cache().getTilemapCache(),
+        "assets/test/integration/demo/tilemap_onebit.json" };
 
     m_tileLayerGround = std::make_shared<jt::tilemap::TileLayer>(
         loader.loadTilesFromLayer("ground", textureManager(), "assets/test/integration/demo/"));

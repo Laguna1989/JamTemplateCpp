@@ -5,13 +5,14 @@
 #include <pathfinder/pathfinder.hpp>
 #include <state_select.hpp>
 #include <tilemap/tile_layer.hpp>
+#include <tilemap/tilemap_cache.hpp>
 #include <tilemap/tilemap_helpers.hpp>
-#include <tilemap/tilemap_manager_tileson_impl.hpp>
 #include <tilemap/tileson_loader.hpp>
 
 void StateTileson::doInternalCreate()
 {
-    jt::tilemap::TilesonLoader loader { "assets/test/integration/demo/tileson_test.json" };
+    jt::tilemap::TilesonLoader loader { getGame()->cache().getTilemapCache(),
+        "assets/test/integration/demo/tileson_test.json" };
 
     m_tileLayerGround = std::make_shared<jt::tilemap::TileLayer>(
         loader.loadTilesFromLayer("ground", textureManager(), "assets/test/integration/demo/"));

@@ -1,3 +1,4 @@
+#include "cache_null.hpp"
 #include <action_commands/action_command_manager.hpp>
 #include <audio/audio_null.hpp>
 #include <camera.hpp>
@@ -60,8 +61,10 @@ static void BM_GamestateWithTweeningShapes(benchmark::State& state)
         jt::StateManager stateManager { std::make_shared<StateTweenPerformanceTest>() };
         jt::null_objects::LoggerNull logger;
         jt::ActionCommandManager actionCommandManager { logger };
+        jt::CacheNull cache;
+
         auto game = std::make_shared<jt::Game>(
-            gfx, input, audio, stateManager, logger, actionCommandManager);
+            gfx, input, audio, stateManager, logger, actionCommandManager, cache);
         game->stateManager().update(game, 0);
         for (int i = 0; i != 500; ++i) {
             game->update(0.02f);

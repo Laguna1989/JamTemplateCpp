@@ -7,8 +7,8 @@
 #include <tilemap/info_rect.hpp>
 #include <tilemap/tile_info.hpp>
 #include <tilemap/tile_node.hpp>
+#include <tilemap/tilemap_cache.hpp>
 #include <tilemap/tilemap_collisions.hpp>
-#include <tilemap/tilemap_manager_tileson_impl.hpp>
 #include <memory>
 #include <tuple>
 
@@ -17,7 +17,7 @@ namespace tilemap {
 
 class TilesonLoader {
 public:
-    TilesonLoader(std::string const& fileName);
+    TilesonLoader(jt::TilemapCache& cache, std::string const& fileName);
 
     std::vector<InfoRect> loadObjectsFromLayer(std::string const& layerName);
 
@@ -36,7 +36,7 @@ public:
     jt::Vector2u getMapSizeInTiles() const;
 
 private:
-    TilemapManagerTilesonImpl m_tilemapManager;
+    TilemapCache& m_tilemapCache;
     std::string m_fileName;
 };
 

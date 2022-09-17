@@ -1,10 +1,10 @@
-#ifndef JAMTEMPLATE_TILEMAP_MANAGER_TILESON_IMPL_HPP
-#define JAMTEMPLATE_TILEMAP_MANAGER_TILESON_IMPL_HPP
+#ifndef JAMTEMPLATE_TILEMAP_CACHE_HPP
+#define JAMTEMPLATE_TILEMAP_CACHE_HPP
 
 #include <tileson.h>
 
 namespace jt {
-class TilemapManagerTilesonImpl {
+class TilemapCache {
 public:
     std::unique_ptr<tson::Map>& getMap(std::string const& fileName) const;
 
@@ -13,4 +13,4 @@ private:
 };
 } // namespace jt
 
-#endif // JAMTEMPLATE_TILEMAP_MANAGER_TILESON_IMPL_HPP
+#endif // JAMTEMPLATE_TILEMAP_CACHE_HPP
