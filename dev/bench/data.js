@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1663085815144,
+  "lastUpdate": 1663404827236,
   "repoUrl": "https://github.com/Laguna1989/JamTemplateCpp",
   "entries": {
     "Benchmark": [
@@ -9408,6 +9408,84 @@ window.BENCHMARK_DATA = {
             "value": 3.4413274726367473,
             "unit": "ms/iter",
             "extra": "iterations: 201\ncpu: 3.440886069651748 ms\nthreads: 1"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "laguna.ws@gmail.com",
+            "name": "Laguna1989",
+            "username": "Laguna1989"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "e98b68412ae494a333fa615510cbfa681d9c539f",
+          "message": "Merge pull request #256 from Laguna1989/FEATURE_DemoPlatformerImprove\n\nImprove platformer demo",
+          "timestamp": "2022-09-17T10:51:11+02:00",
+          "tree_id": "a174923594327c1c7d313aa1478f517302846040",
+          "url": "https://github.com/Laguna1989/JamTemplateCpp/commit/e98b68412ae494a333fa615510cbfa681d9c539f"
+        },
+        "date": 1663404826695,
+        "tool": "googlecpp",
+        "benches": [
+          {
+            "name": "BM_UpdateDrawablePositions",
+            "value": 3.897362627118631,
+            "unit": "ms/iter",
+            "extra": "iterations: 177\ncpu: 3.8962220338983053 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GetAllCommands",
+            "value": 0.3205714333794385,
+            "unit": "ms/iter",
+            "extra": "iterations: 2169\ncpu: 0.3205491470723835 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_LoggerLogWithoutTarget",
+            "value": 0.7618700816104601,
+            "unit": "ms/iter",
+            "extra": "iterations: 919\ncpu: 0.7618140369967359 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_LoggerLogWithCoutTargetSetToOff",
+            "value": 0.760102391965257,
+            "unit": "ms/iter",
+            "extra": "iterations: 921\ncpu: 0.760071226927253 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_UpdateObjectGroup",
+            "value": 0.048672596581433775,
+            "unit": "ms/iter",
+            "extra": "iterations: 14392\ncpu: 0.04867010144524735 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_UpdateSpatialObjectGrid",
+            "value": 0.3268283883003148,
+            "unit": "ms/iter",
+            "extra": "iterations: 2171\ncpu: 0.3267915246430216 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_StartGame",
+            "value": 0.002842616692691241,
+            "unit": "ms/iter",
+            "extra": "iterations: 245281\ncpu: 0.0028424423416408134 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_RefineTilemapCollisions",
+            "value": 0.18184768685030733,
+            "unit": "ms/iter",
+            "extra": "iterations: 3848\ncpu: 0.18183178274428258 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GamestateWithTweeningShapes",
+            "value": 3.3704919086538885,
+            "unit": "ms/iter",
+            "extra": "iterations: 208\ncpu: 3.3599524038461563 ms\nthreads: 1"
           }
         ]
       }
