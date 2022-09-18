@@ -2,6 +2,7 @@
 #define JAMTEMPLATE_LEVEL_HPP
 
 #include "exit.hpp"
+#include <box2d/moving_platform.hpp>
 #include <box2dwrapper/box2d_object.hpp>
 #include <box2dwrapper/box2d_world_interface.hpp>
 #include <game_object.hpp>
@@ -40,11 +41,14 @@ private:
     std::vector<Exit> m_exits {};
     jt::Vector2f m_levelSizeInPixel { 0.0f, 0.0f };
 
+    std::vector<std::shared_ptr<MovingPlatform>> m_movingPlatforms {};
+
     void loadLevelSettings(jt::tilemap::TilesonLoader& loader);
     void loadLevelTileLayer(jt::tilemap::TilesonLoader& loader);
     void loadLevelCollisions(jt::tilemap::TilesonLoader& loader);
     void loadLevelKillboxes(jt::tilemap::TilesonLoader& loader);
     void loadLevelSize(jt::tilemap::TilesonLoader const& loader);
+    void loadMovingPlatforms(jt::tilemap::TilesonLoader& loader);
 };
 
 #endif // JAMTEMPLATE_LEVEL_HPP

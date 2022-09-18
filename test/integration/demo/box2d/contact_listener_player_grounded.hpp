@@ -1,7 +1,7 @@
 #ifndef JAMTEMPLATE_CONTACT_LISTENER_PLAYER_GROUNDED_HPP
 #define JAMTEMPLATE_CONTACT_LISTENER_PLAYER_GROUNDED_HPP
 
-#include "PlatformPlayer.hpp"
+#include "platform_player.hpp"
 #include <Box2D/Dynamics/b2WorldCallbacks.h>
 #include <memory>
 

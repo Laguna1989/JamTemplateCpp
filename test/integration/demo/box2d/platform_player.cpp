@@ -1,4 +1,4 @@
-#include "PlatformPlayer.hpp"
+#include "platform_player.hpp"
 #include <game_interface.hpp>
 #include <math_helper.hpp>
 
@@ -21,7 +21,7 @@ void Player::doCreate()
 
     b2FixtureDef fixtureDef;
     fixtureDef.density = 1.0f;
-    fixtureDef.friction = 0.0f;
+    fixtureDef.friction = 0.75f;
     b2CircleShape circleCollider {};
     circleCollider.m_radius = 4.0f;
     fixtureDef.shape = &circleCollider;
@@ -102,7 +102,7 @@ void Player::handleMovement(float const elapsed)
 
     auto const jumpInitialVelocity = -140.0f;
     auto const maxVerticalVelocity = 100.0f;
-    auto const jumpVerticalAcceleration = -5000.0f;
+    auto const jumpVerticalAcceleration = -9500.0f;
 
     bool horizontalMovement { false };
     auto b2b = getB2Body();

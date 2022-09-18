@@ -1,9 +1,9 @@
 ﻿#ifndef DEMO_STATE_PLATFORMER_HPP
 #define DEMO_STATE_PLATFORMER_HPP
 
-#include <box2d/PlatformPlayer.hpp>
 #include <box2d/contact_listener_player_grounded.hpp>
 #include <box2d/level.hpp>
+#include <box2d/platform_player.hpp>
 #include <box2dwrapper/box2d_object.hpp>
 #include <box2dwrapper/box2d_world_interface.hpp>
 #include <game_state.hpp>

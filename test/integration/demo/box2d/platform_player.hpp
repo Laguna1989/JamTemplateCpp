@@ -46,8 +46,8 @@ private:
 
     void doCreate() override;
     void doUpdate(float const elapsed) override;
-
     void doDraw() const override;
+
     void handleMovement(float const elapsed);
     void updateAnimation(float elapsed);
 };

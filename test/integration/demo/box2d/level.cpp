@@ -1,6 +1,7 @@
 #include "level.hpp"
 #include <game_interface.hpp>
 #include <math_helper.hpp>
+#include <strutils.hpp>
 #include <tilemap/tileson_loader.hpp>
 #include <Box2D/Box2D.h>
 
@@ -24,6 +25,36 @@ void Level::doCreate()
     loadLevelTileLayer(loader);
     loadLevelCollisions(loader);
     loadLevelKillboxes(loader);
+    loadMovingPlatforms(loader);
+}
+
+void Level::loadMovingPlatforms(jt::tilemap::TilesonLoader& loader)
+{
+    auto const platform_infos = loader.loadObjectsFromLayer("platforms");
+    std::map<std::string, jt::Vector2f> allPositionsInLevel;
+    for (auto const& p : platform_infos) {
+        if (p.properties.strings.empty()) {
+            allPositionsInLevel[p.name] = p.position;
+        }
+    }
+    for (auto const& p : platform_infos) {
+        if (!p.properties.strings.empty()) {
+            std::vector<jt::Vector2f> currentPlatformPositions;
+            auto const positionsString = p.properties.strings.at("positions");
+            auto const individualPositionStrings = strutil::split(positionsString, ",");
+            for (auto const& ps : individualPositionStrings) {
+                if (allPositionsInLevel.count(ps) == 0) {
+                    getGame()->logger().warning("position not found in level: " + ps, { "level" });
+                }
+                currentPlatformPositions.push_back(allPositionsInLevel[ps]);
+            }
+            auto platform = std::make_shared<MovingPlatform>(m_world.lock(), p.size,
+                currentPlatformPositions, p.properties.floats.at("velocity"));
+            platform->setGameInstance(getGame());
+            platform->create();
+            m_movingPlatforms.push_back(platform);
+        }
+    }
 }
 
 void Level::loadLevelSize(jt::tilemap::TilesonLoader const& loader)
@@ -94,6 +125,9 @@ void Level::doUpdate(float const elapsed)
     for (auto& exit : m_exits) {
         exit.update(elapsed);
     }
+    for (auto& p : m_movingPlatforms) {
+        p->update(elapsed);
+    }
 }
 
 void Level::doDraw() const
@@ -103,7 +137,11 @@ void Level::doDraw() const
     for (auto const& exit : m_exits) {
         exit.draw();
     }
+    for (auto const& p : m_movingPlatforms) {
+        p->draw();
+    }
 }
+
 jt::Vector2f Level::getPlayerStart() const { return m_playerStart; }
 
 void Level::checkIfPlayerIsInKillbox(
@@ -124,6 +162,7 @@ void Level::checkIfPlayerIsInExit(
 {
     for (auto& exit : m_exits) {
         exit.checkIfPlayerIsInExit(playerPosition, callback);
+        break;
     }
 }
 
