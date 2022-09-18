@@ -79,7 +79,10 @@ void Level::loadLevelSettings(jt::tilemap::TilesonLoader& loader)
         } else if (info.name == "player_start") {
             m_playerStart = info.position;
         } else if (info.name == "exit") {
-            m_exit = info;
+            auto exit = Exit { info };
+            exit.setGameInstance(getGame());
+            exit.create();
+            m_exits.emplace_back(exit);
         }
     }
 }
@@ -88,12 +91,18 @@ void Level::doUpdate(float const elapsed)
 {
     m_background->update(elapsed);
     m_tileLayerGround->update(elapsed);
+    for (auto& exit : m_exits) {
+        exit.update(elapsed);
+    }
 }
 
 void Level::doDraw() const
 {
     m_background->draw(renderTarget());
     m_tileLayerGround->draw(renderTarget());
+    for (auto const& exit : m_exits) {
+        exit.draw();
+    }
 }
 jt::Vector2f Level::getPlayerStart() const { return m_playerStart; }
 
@@ -113,10 +122,8 @@ void Level::checkIfPlayerIsInKillbox(
 void Level::checkIfPlayerIsInExit(
     jt::Vector2f const& playerPosition, std::function<void(std::string const&)> callback)
 {
-    // TODO move to separate Exit class
-    jt::Rectf const exitRect { m_exit.position.x, m_exit.position.y, m_exit.size.x, m_exit.size.y };
-    if (jt::MathHelper::checkIsIn(exitRect, playerPosition)) {
-        callback(m_exit.properties.strings["next_level"]);
+    for (auto& exit : m_exits) {
+        exit.checkIfPlayerIsInExit(playerPosition, callback);
     }
 }
 

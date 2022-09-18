@@ -116,7 +116,7 @@ void StatePlatformer::doInternalDraw() const
 
     m_player->draw();
     m_walkParticles->draw();
-    m_playerPostJumpParticles->draw();
+    m_playerJumpParticles->draw();
     m_vignette->draw();
 }
 
@@ -124,11 +124,15 @@ void StatePlatformer::CreatePlayer()
 {
     m_player = std::make_shared<Player>(m_world);
     m_player->setPosition(m_level->getPlayerStart());
+    m_player->setLevelSize(m_level->getLevelSizeInPixel());
     add(m_player);
 
     createPlayerWalkParticles();
-
-    m_playerPostJumpParticles = jt::ParticleSystem<jt::Shape, 50>::createPS(
+    createPlayerJumpParticleSystem();
+}
+void StatePlatformer::createPlayerJumpParticleSystem()
+{
+    m_playerJumpParticles = jt::ParticleSystem<jt::Shape, 50>::createPS(
         [this]() {
             auto s = std::make_shared<jt::Shape>();
             if (jt::Random::getChance()) {
@@ -166,8 +170,8 @@ void StatePlatformer::CreatePlayer()
             auto twr = jt::TweenRotation::create(s, totalTime, minAngle, maxAngle);
             add(twr);
         });
-    add(m_playerPostJumpParticles);
-    m_player->setPostJumpParticleSystem(m_playerPostJumpParticles);
+    add(m_playerJumpParticles);
+    m_player->setJumpParticleSystem(m_playerJumpParticles);
 }
 
 void StatePlatformer::createPlayerWalkParticles()

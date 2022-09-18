@@ -40,7 +40,16 @@ std::shared_ptr<jt::Animation> Player::getAnimation() { return m_animation; }
 
 void Player::doUpdate(float const elapsed)
 {
-    m_animation->setPosition(m_physicsObject->getPosition());
+
+    auto currentPosition = m_physicsObject->getPosition();
+    if (currentPosition.x < 4) {
+        currentPosition.x = 4;
+    }
+    if (currentPosition.x > m_levelSizeInTiles.x - 4) {
+        currentPosition.x = m_levelSizeInTiles.x - 4;
+    }
+    m_physicsObject->setPosition(currentPosition);
+    m_animation->setPosition(currentPosition);
     updateAnimation(elapsed);
     handleMovement(elapsed);
 
@@ -51,7 +60,7 @@ void Player::doUpdate(float const elapsed)
         }
         auto ps = m_postJumpParticles.lock();
         if (ps) {
-            ps->fire(count, m_physicsObject->getPosition() + jt::Vector2f { 0.0f, 5.0f });
+            ps->fire(count, currentPosition + jt::Vector2f { 0.0f, 5.0f });
         }
     }
 
@@ -166,7 +175,12 @@ void Player::setWalkParticleSystem(std::weak_ptr<jt::ParticleSystem<jt::Shape, 5
     m_walkParticles = ps;
 }
 
-void Player::setPostJumpParticleSystem(std::weak_ptr<jt::ParticleSystem<jt::Shape, 50>> ps)
+void Player::setJumpParticleSystem(std::weak_ptr<jt::ParticleSystem<jt::Shape, 50>> ps)
 {
     m_postJumpParticles = ps;
+}
+
+void Player::setLevelSize(jt::Vector2f const& levelSizeInTiles)
+{
+    m_levelSizeInTiles = levelSizeInTiles;
 }

@@ -8,7 +8,7 @@ std::unique_ptr<tson::Map>& jt::TilemapCache::getMap(std::string const& fileName
 
         auto map = parser.parse(fileName);
         if (map->getStatus() != tson::ParseStatus::OK) {
-            std::cerr << "tilemap json could not be parsed.\n";
+            std::cerr << "tilemap json could not be parsed: '" << fileName << std::endl;
             throw std::invalid_argument { "tilemap json could not be parsed." };
         }
         m_maps[fileName] = std::move(map);

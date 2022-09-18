@@ -1,6 +1,7 @@
 #ifndef JAMTEMPLATE_LEVEL_HPP
 #define JAMTEMPLATE_LEVEL_HPP
 
+#include "exit.hpp"
 #include <box2dwrapper/box2d_object.hpp>
 #include <box2dwrapper/box2d_world_interface.hpp>
 #include <game_object.hpp>
@@ -36,7 +37,7 @@ private:
     jt::Vector2f m_playerStart { 0.0f, 0.0f };
 
     std::vector<jt::tilemap::InfoRect> m_killboxes {};
-    jt::tilemap::InfoRect m_exit {};
+    std::vector<Exit> m_exits {};
     jt::Vector2f m_levelSizeInPixel { 0.0f, 0.0f };
 
     void loadLevelSettings(jt::tilemap::TilesonLoader& loader);

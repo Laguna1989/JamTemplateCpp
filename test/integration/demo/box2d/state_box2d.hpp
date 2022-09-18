@@ -27,7 +27,7 @@ private:
     std::shared_ptr<jt::Vignette> m_vignette { nullptr };
 
     std::shared_ptr<jt::ParticleSystem<jt::Shape, 50>> m_walkParticles { nullptr };
-    std::shared_ptr<jt::ParticleSystem<jt::Shape, 50>> m_playerPostJumpParticles { nullptr };
+    std::shared_ptr<jt::ParticleSystem<jt::Shape, 50>> m_playerJumpParticles { nullptr };
 
     bool m_ending { false };
 
@@ -42,6 +42,7 @@ private:
     void handleCameraScrolling(float const elapsed);
     void endGame();
     void createPlayerWalkParticles();
+    void createPlayerJumpParticleSystem();
 };
 
 #endif // DEMO_STATE_PLATFORMER_HPP
