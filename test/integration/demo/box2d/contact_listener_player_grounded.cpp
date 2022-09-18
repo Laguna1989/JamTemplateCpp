@@ -1,9 +1,9 @@
 
-#include "my_contact_listener.hpp"
+#include "contact_listener_player_grounded.hpp"
 #include <Box2D/Dynamics/Contacts/b2Contact.h>
 #include <iostream>
 
-void MyContactListener::BeginContact(b2Contact* contact)
+void ContactListenerPlayerGrounded::BeginContact(b2Contact* contact)
 {
     auto p = m_player.lock();
     if (!p) {
@@ -20,7 +20,7 @@ void MyContactListener::BeginContact(b2Contact* contact)
     p->setTouchesGround(m_numberOfFeetContacts >= 1);
 }
 
-void MyContactListener::EndContact(b2Contact* contact)
+void ContactListenerPlayerGrounded::EndContact(b2Contact* contact)
 {
     auto p = m_player.lock();
     if (!p) {
@@ -35,8 +35,8 @@ void MyContactListener::EndContact(b2Contact* contact)
     //    std::cout << "end contact: " << m_numberOfFeetContacts << std::endl;
     p->setTouchesGround(m_numberOfFeetContacts >= 1);
 }
-void MyContactListener::setPlayer(std::weak_ptr<Player> player) { m_player = player; }
-bool MyContactListener::isPlayerFeetFixture(b2Fixture* fa) const
+void ContactListenerPlayerGrounded::setPlayer(std::weak_ptr<Player> player) { m_player = player; }
+bool ContactListenerPlayerGrounded::isPlayerFeetFixture(b2Fixture* fa) const
 {
     void* fixtureUserData = fa->GetUserData();
     return (std::uint64_t)fixtureUserData == 3U;

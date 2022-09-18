@@ -40,10 +40,22 @@ std::shared_ptr<jt::Animation> Player::getAnimation() { return m_animation; }
 
 void Player::doUpdate(float const elapsed)
 {
-
     m_animation->setPosition(m_physicsObject->getPosition());
     updateAnimation(elapsed);
     handleMovement(elapsed);
+
+    if (m_isTouchingGround != m_wasTouchingGroundLastFrame) {
+        auto count = 25;
+        if (m_wasTouchingGroundLastFrame) {
+            count = 10;
+        }
+        auto ps = m_postJumpParticles.lock();
+        if (ps) {
+            ps->fire(count, m_physicsObject->getPosition() + jt::Vector2f { 0.0f, 5.0f });
+        }
+    }
+
+    m_wasTouchingGroundLastFrame = m_isTouchingGround;
 }
 
 void Player::updateAnimation(float elapsed)
@@ -152,4 +164,9 @@ jt::Vector2f Player::getPosition() const { return m_physicsObject->getPosition()
 void Player::setWalkParticleSystem(std::weak_ptr<jt::ParticleSystem<jt::Shape, 50>> ps)
 {
     m_walkParticles = ps;
+}
+
+void Player::setPostJumpParticleSystem(std::weak_ptr<jt::ParticleSystem<jt::Shape, 50>> ps)
+{
+    m_postJumpParticles = ps;
 }

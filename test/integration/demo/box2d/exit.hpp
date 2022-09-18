@@ -1,0 +1,7 @@
+
+#ifndef JAMTEMPLATE_EXIT_HPP
+#define JAMTEMPLATE_EXIT_HPP
+
+class Exit { };
+
+#endif // JAMTEMPLATE_EXIT_HPP

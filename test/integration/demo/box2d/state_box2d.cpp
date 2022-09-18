@@ -21,7 +21,7 @@ void StatePlatformer::doInternalCreate()
     loadLevel();
 
     CreatePlayer();
-    m_contactListener = std::make_shared<MyContactListener>();
+    m_contactListener = std::make_shared<ContactListenerPlayerGrounded>();
     m_contactListener->setPlayer(m_player);
     m_world->setContactListener(m_contactListener);
 
@@ -116,6 +116,7 @@ void StatePlatformer::doInternalDraw() const
 
     m_player->draw();
     m_walkParticles->draw();
+    m_playerPostJumpParticles->draw();
     m_vignette->draw();
 }
 
@@ -125,6 +126,52 @@ void StatePlatformer::CreatePlayer()
     m_player->setPosition(m_level->getPlayerStart());
     add(m_player);
 
+    createPlayerWalkParticles();
+
+    m_playerPostJumpParticles = jt::ParticleSystem<jt::Shape, 50>::createPS(
+        [this]() {
+            auto s = std::make_shared<jt::Shape>();
+            if (jt::Random::getChance()) {
+                s->makeRect(jt::Vector2f { 1.0f, 1.0f }, textureManager());
+            } else {
+                s->makeRect(jt::Vector2f { 2.0f, 2.0f }, textureManager());
+            }
+            s->setColor(jt::colors::White);
+            s->setPosition(jt::Vector2f { -50000, -50000 });
+            s->setOrigin(jt::Vector2f { 1.0f, 1.0f });
+            return s;
+        },
+        [this](auto s, auto p) {
+            s->setPosition(p);
+            s->update(0.0f);
+            auto const totalTime = jt::Random::getFloat(0.2f, 0.3f);
+
+            auto twa = jt::TweenAlpha::create(s, totalTime / 2.0f, 255, 0);
+            twa->setStartDelay(totalTime / 2.0f);
+            add(twa);
+
+            auto const startPos = p;
+            auto const endPos = p
+                + jt::Vector2f { jt::Random::getFloatGauss(0, 4.5f),
+                      jt::Random::getFloat(-2.0f, 0.0f) };
+            auto twp = jt::TweenPosition::create(s, totalTime, startPos, endPos);
+            add(twp);
+
+            float minAngle = 0.0f;
+            float maxAngle = 360.0f;
+            if (endPos.x < startPos.x) {
+                minAngle = 360.0f;
+                maxAngle = 0.0f;
+            }
+            auto twr = jt::TweenRotation::create(s, totalTime, minAngle, maxAngle);
+            add(twr);
+        });
+    add(m_playerPostJumpParticles);
+    m_player->setPostJumpParticleSystem(m_playerPostJumpParticles);
+}
+
+void StatePlatformer::createPlayerWalkParticles()
+{
     m_walkParticles = jt::ParticleSystem<jt::Shape, 50>::createPS(
         [this]() {
             auto s = std::make_shared<jt::Shape>();
@@ -144,13 +191,14 @@ void StatePlatformer::CreatePlayer()
 
             auto topPos = rp;
             auto botPos = rp;
-            auto const maxHeight = jt::Random::getFloat(3.0f, 8.0f);
+            auto const maxHeight = jt::Random::getFloat(2.0f, 7.0f);
+            auto const maxWidth = jt::Random::getFloat(2.0f, 6.0f);
             if (jt::Random::getChance()) {
-                topPos = rp + jt::Vector2f { 5, -maxHeight };
-                botPos = rp + jt::Vector2f { 10, 0 };
+                topPos = rp + jt::Vector2f { maxWidth / 2, -maxHeight };
+                botPos = rp + jt::Vector2f { maxWidth, 0 };
             } else {
-                topPos = rp + jt::Vector2f { -5, -maxHeight };
-                botPos = rp + jt::Vector2f { -10, 0 };
+                topPos = rp + jt::Vector2f { -maxWidth / 2, -maxHeight };
+                botPos = rp + jt::Vector2f { -maxWidth, 0 };
             }
             auto const totalTime = jt::Random::getFloat(0.3f, 0.6f);
             std::shared_ptr<jt::Tween> twp1
@@ -162,7 +210,6 @@ void StatePlatformer::CreatePlayer()
             });
         });
     add(m_walkParticles);
-
     m_player->setWalkParticleSystem(m_walkParticles);
 }
 

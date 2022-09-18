@@ -26,14 +26,17 @@ public:
     jt::Vector2f getPosition() const;
 
     void setWalkParticleSystem(std::weak_ptr<jt::ParticleSystem<jt::Shape, 50>> ps);
+    void setPostJumpParticleSystem(std::weak_ptr<jt::ParticleSystem<jt::Shape, 50>> ps);
 
 private:
     std::shared_ptr<jt::Animation> m_animation;
     std::shared_ptr<jt::Box2DObject> m_physicsObject;
     float m_walkParticlesTimer = 0.0f;
     std::weak_ptr<jt::ParticleSystem<jt::Shape, 50>> m_walkParticles;
+    std::weak_ptr<jt::ParticleSystem<jt::Shape, 50>> m_postJumpParticles;
 
     bool m_isTouchingGround { false };
+    bool m_wasTouchingGroundLastFrame { false };
 
     bool m_isMoving { false };
 

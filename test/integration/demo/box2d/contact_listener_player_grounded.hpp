@@ -1,11 +1,11 @@
-#ifndef JAMTEMPLATE_MY_CONTACT_LISTENER_HPP
-#define JAMTEMPLATE_MY_CONTACT_LISTENER_HPP
+#ifndef JAMTEMPLATE_CONTACT_LISTENER_PLAYER_GROUNDED_HPP
+#define JAMTEMPLATE_CONTACT_LISTENER_PLAYER_GROUNDED_HPP
 
 #include "PlatformPlayer.hpp"
 #include <Box2D/Dynamics/b2WorldCallbacks.h>
 #include <memory>
 
-class MyContactListener : public b2ContactListener {
+class ContactListenerPlayerGrounded : public b2ContactListener {
 public:
     void setPlayer(std::weak_ptr<Player> player);
 
@@ -22,4 +22,4 @@ private:
     bool isPlayerFeetFixture(b2Fixture* fa) const;
 };
 
-#endif // JAMTEMPLATE_MY_CONTACT_LISTENER_HPP
+#endif // JAMTEMPLATE_CONTACT_LISTENER_PLAYER_GROUNDED_HPP
