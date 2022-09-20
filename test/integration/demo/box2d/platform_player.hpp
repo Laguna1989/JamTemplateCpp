@@ -44,12 +44,19 @@ private:
 
     jt::Vector2f m_levelSizeInTiles { 0.0f, 0.0f };
 
+    float m_lastTouchedGroundTimer { 0.0f };
+    float m_lastJumpTimer { 0.0f };
+
+    float m_wantsToJumpTimer { 0.0f };
+
+    bool canJump() const;
     void doCreate() override;
     void doUpdate(float const elapsed) override;
     void doDraw() const override;
 
     void handleMovement(float const elapsed);
     void updateAnimation(float elapsed);
+    void clampPositionToLevelSize(jt::Vector2f& currentPosition) const;
 };
 
 #endif
