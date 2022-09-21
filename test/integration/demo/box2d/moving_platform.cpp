@@ -50,7 +50,6 @@ void MovingPlatform::doUpdate(float const elapsed)
     if (m_timeTilNextPlatform > 0) {
         m_timeTilNextPlatform -= elapsed;
     } else {
-
         if (m_movingForward) {
             if (m_currentIndex >= m_positions.size() - 2) {
 

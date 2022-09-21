@@ -82,7 +82,7 @@ void StatePlatformer::handleCameraScrolling(float const elapsed)
     auto ps = m_player->getPosOnScreen();
 
     float const rightMargin = 150.0f;
-    float const leftMargin = 10.0f;
+    float const leftMargin = 150.0f;
 
     float const scrollSpeed = 60.0f;
     auto& cam = getGame()->gfx().camera();
