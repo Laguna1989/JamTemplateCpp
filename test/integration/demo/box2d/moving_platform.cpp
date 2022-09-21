@@ -24,7 +24,7 @@ void MovingPlatform::doCreate()
 
     b2FixtureDef fixtureDef;
     fixtureDef.density = 1.0f;
-    fixtureDef.friction = 1.0f;
+    fixtureDef.friction = 0.5f;
     b2PolygonShape collider {};
     collider.SetAsBox(m_platformSize.x / 2.0f, m_platformSize.y / 2.0f,
         b2Vec2(m_platformSize.x / 2.0f, m_platformSize.y / 2.0f), 0);
@@ -50,6 +50,7 @@ void MovingPlatform::doUpdate(float const elapsed)
     if (m_timeTilNextPlatform > 0) {
         m_timeTilNextPlatform -= elapsed;
     } else {
+
         if (m_movingForward) {
             if (m_currentIndex >= m_positions.size() - 2) {
 

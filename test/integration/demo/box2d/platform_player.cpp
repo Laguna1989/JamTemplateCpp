@@ -21,7 +21,7 @@ void Player::doCreate()
 
     b2FixtureDef fixtureDef;
     fixtureDef.density = 1.0f;
-    fixtureDef.friction = 0.75f;
+    fixtureDef.friction = 0.5f;
     b2CircleShape circleCollider {};
     circleCollider.m_radius = 4.0f;
     fixtureDef.shape = &circleCollider;
