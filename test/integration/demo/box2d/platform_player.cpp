@@ -85,7 +85,7 @@ void Player::updateAnimation(float elapsed)
     } else {
         m_isMoving = false;
     }
-    auto const v = abs(m_physicsObject->getVelocity().x) / 80.0f;
+    auto const v = m_horizontalMovement ? abs(m_physicsObject->getVelocity().x) / 80.0f : 0.0f;
     m_animation->setAnimationSpeedFactor(v);
     m_animation->update(elapsed);
 
@@ -114,8 +114,9 @@ void Player::handleMovement(float const elapsed)
     auto const jumpDeadTime = 0.3f;
     auto const preLandJumpTimeFrame = 0.1f;
 
-    bool horizontalMovement { false };
     auto b2b = getB2Body();
+
+    m_horizontalMovement = false;
 
     auto v = m_physicsObject->getVelocity();
     if (getGame()->input().keyboard()->pressed(jt::KeyCode::D)) {
@@ -123,7 +124,7 @@ void Player::handleMovement(float const elapsed)
             v.x *= 0.9f;
         }
         b2b->ApplyForceToCenter(b2Vec2 { horizontalAcceleration, 0 }, true);
-        horizontalMovement = true;
+        m_horizontalMovement = true;
     }
 
     if (getGame()->input().keyboard()->pressed(jt::KeyCode::A)) {
@@ -131,7 +132,7 @@ void Player::handleMovement(float const elapsed)
             v.x *= 0.9f;
         }
         b2b->ApplyForceToCenter(b2Vec2 { -horizontalAcceleration, 0 }, true);
-        horizontalMovement = true;
+        m_horizontalMovement = true;
     }
 
     if (getGame()->input().keyboard()->justPressed(jt::KeyCode::W)) {
@@ -165,8 +166,9 @@ void Player::handleMovement(float const elapsed)
     }
 
     // damp horizontal movement
-    if (!horizontalMovement) {
+    if (!m_horizontalMovement) {
         if (v.x > 0) {
+
             v.x -= horizontalDampening * elapsed;
             if (v.x < 0) {
                 v.x = 0;
@@ -184,6 +186,7 @@ void Player::handleMovement(float const elapsed)
 b2Body* Player::getB2Body() { return m_physicsObject->getB2Body(); }
 
 void Player::doDraw() const { m_animation->draw(renderTarget()); }
+
 void Player::setTouchesGround(bool touchingGround)
 {
     auto const m_postDropJumpTimeFrame = 0.2f;
@@ -192,8 +195,11 @@ void Player::setTouchesGround(bool touchingGround)
         m_lastTouchedGroundTimer = m_postDropJumpTimeFrame;
     }
 }
+
 jt::Vector2f Player::getPosOnScreen() const { return m_animation->getScreenPosition(); }
+
 void Player::setPosition(jt::Vector2f const& pos) { m_physicsObject->setPosition(pos); }
+
 jt::Vector2f Player::getPosition() const { return m_physicsObject->getPosition(); }
 
 void Player::setWalkParticleSystem(std::weak_ptr<jt::ParticleSystem<jt::Shape, 50>> ps)

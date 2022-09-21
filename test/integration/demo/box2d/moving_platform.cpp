@@ -18,10 +18,6 @@ MovingPlatform::MovingPlatform(std::shared_ptr<jt::Box2DWorldInterface> world,
 
 void MovingPlatform::doCreate()
 {
-    m_shape = std::make_shared<jt::Shape>();
-    m_shape->makeRect(m_platformSize, textureManager());
-    m_shape->setColor(jt::colors::Blue);
-
     b2FixtureDef fixtureDef;
     fixtureDef.density = 1.0f;
     fixtureDef.friction = 0.5f;
@@ -43,10 +39,19 @@ void MovingPlatform::doCreate()
     m_timeTilNextPlatform = jt::MathHelper::length(totalDiff) / m_velocity;
     m_physicsObject->setPosition(p1);
     m_physicsObject->setVelocity(m_currentVelocity);
+
+    m_spriteL = std::make_shared<jt::Sprite>(
+        "assets/test/integration/demo/platform_l.png", textureManager());
+    m_spriteM = std::make_shared<jt::Sprite>(
+        "assets/test/integration/demo/platform_m.png", textureManager());
+    m_spriteR = std::make_shared<jt::Sprite>(
+        "assets/test/integration/demo/platform_r.png", textureManager());
 }
 
 void MovingPlatform::doUpdate(float const elapsed)
 {
+
+    // TODO Refactor this mess
     if (m_timeTilNextPlatform > 0) {
         m_timeTilNextPlatform -= elapsed;
     } else {
@@ -119,8 +124,24 @@ void MovingPlatform::doUpdate(float const elapsed)
             }
         }
     }
-    m_shape->setPosition(m_physicsObject->getPosition());
-    m_shape->update(elapsed);
 }
 
-void MovingPlatform::doDraw() const { m_shape->draw(renderTarget()); }
+void MovingPlatform::doDraw() const
+{
+    m_spriteL->setPosition(m_physicsObject->getPosition());
+    m_spriteL->update(0.0f);
+    m_spriteL->draw(renderTarget());
+
+    auto numberOfMiddleParts = static_cast<int>(m_platformSize.x) / 8 - 2;
+    for (int i = 0; i != numberOfMiddleParts; ++i) {
+        m_spriteM->setPosition(
+            m_physicsObject->getPosition() + jt::Vector2f { (i + 1) * 8.0f, 0.0f });
+        m_spriteM->update(0.0f);
+        m_spriteM->draw(renderTarget());
+    }
+
+    m_spriteR->setPosition(
+        m_physicsObject->getPosition() + jt::Vector2f { m_platformSize.x - 8, 0.0f });
+    m_spriteR->update(0.0f);
+    m_spriteR->draw(renderTarget());
+}

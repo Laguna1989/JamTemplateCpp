@@ -57,6 +57,7 @@ private:
     void handleMovement(float const elapsed);
     void updateAnimation(float elapsed);
     void clampPositionToLevelSize(jt::Vector2f& currentPosition) const;
+    bool m_horizontalMovement { false };
 };
 
 #endif

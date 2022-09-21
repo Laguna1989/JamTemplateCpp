@@ -1,6 +1,7 @@
 #ifndef MYAWESOMEGAME_MOVING_PLATFORM_HPP
 #define MYAWESOMEGAME_MOVING_PLATFORM_HPP
 
+#include "sprite.hpp"
 #include <box2dwrapper/box2d_object.hpp>
 #include <game_object.hpp>
 #include <shape.hpp>
@@ -16,9 +17,9 @@ private:
     std::vector<jt::Vector2f> m_positions;
     float m_velocity { 1.0f };
     jt::Vector2f m_platformSize { 0.0f, 0.0f };
-
-    // TODO replace with real graphics
-    std::shared_ptr<jt::Shape> m_shape;
+    mutable std::shared_ptr<jt::Sprite> m_spriteL { nullptr };
+    mutable std::shared_ptr<jt::Sprite> m_spriteM { nullptr };
+    mutable std::shared_ptr<jt::Sprite> m_spriteR { nullptr };
 
     bool m_movingForward { true };
     std::size_t m_currentIndex { 0 };
