@@ -1,4 +1,5 @@
 #include "level.hpp"
+#include <box2d/enemy_movement_horizontal.hpp>
 #include <game_interface.hpp>
 #include <math_helper.hpp>
 #include <strutils.hpp>
@@ -26,6 +27,21 @@ void Level::doCreate()
     loadLevelCollisions(loader);
     loadLevelKillboxes(loader);
     loadMovingPlatforms(loader);
+
+    auto const enemies = loader.loadObjectsFromLayer("enemies");
+    for (auto const& enemy : enemies) {
+        if (enemy.name == "bee") {
+            std::shared_ptr<EnemyMovementInterface> movement { nullptr };
+            if (enemy.properties.strings.at("movement") == "horizontal") {
+                movement = std::make_shared<EnemyMovementHorizontal>(enemy.position.x,
+                    enemy.position.x + enemy.properties.ints.at("distance_in_tiles") * 8.0f);
+            }
+            auto bee = std::make_shared<Bee>(m_world.lock(), enemy.position, movement);
+            bee->setGameInstance(getGame());
+            bee->create();
+            m_bees.push_back(bee);
+        }
+    }
 }
 
 void Level::loadMovingPlatforms(jt::tilemap::TilesonLoader& loader)
@@ -128,6 +144,9 @@ void Level::doUpdate(float const elapsed)
     for (auto& p : m_movingPlatforms) {
         p->update(elapsed);
     }
+    for (auto& b : m_bees) {
+        b->update(elapsed);
+    }
 }
 
 void Level::doDraw() const
@@ -139,6 +158,9 @@ void Level::doDraw() const
     }
     for (auto const& p : m_movingPlatforms) {
         p->draw();
+    }
+    for (auto const& b : m_bees) {
+        b->draw();
     }
 }
 

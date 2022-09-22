@@ -168,7 +168,6 @@ void Player::handleMovement(float const elapsed)
     // damp horizontal movement
     if (!m_horizontalMovement) {
         if (v.x > 0) {
-
             v.x -= horizontalDampening * elapsed;
             if (v.x < 0) {
                 v.x = 0;
