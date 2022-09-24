@@ -38,7 +38,7 @@ void jt::Animation::add(std::string const& fileName, std::string const& animName
 
 void jt::Animation::add(std::string const& fileName, std::string const& animName,
     jt::Vector2u const& imageSize, std::vector<unsigned int> const& frameIndices,
-    std::vector<float> frameTimesInSeconds, jt::TextureManagerInterface& textureManager)
+    std::vector<float> const& frameTimesInSeconds, jt::TextureManagerInterface& textureManager)
 {
     if (frameIndices.empty()) {
         throw std::invalid_argument { "animation frame indices are empty." };
@@ -210,7 +210,7 @@ jt::Vector2f jt::Animation::getScale() const
 
 void jt::Animation::setOriginInternal(jt::Vector2f const& origin)
 {
-    for (auto& kvp : m_frames) {
+    for (auto const& kvp : m_frames) {
         for (auto const& sptr : kvp.second) {
             sptr->setOrigin(origin);
         }
@@ -220,7 +220,7 @@ void jt::Animation::setOriginInternal(jt::Vector2f const& origin)
 void jt::Animation::setShadowActive(bool active)
 {
     DrawableImpl::setShadowActive(active);
-    for (auto& kvp : m_frames) {
+    for (auto const& kvp : m_frames) {
         for (auto const& sptr : kvp.second) {
             sptr->setShadowActive(active);
         }

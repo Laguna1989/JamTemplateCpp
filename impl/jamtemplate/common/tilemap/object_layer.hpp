@@ -17,7 +17,7 @@ public:
 
     /// Constructor
     /// \param objects list of objects. Create them yourself or via TilesonLoader
-    ObjectLayer(std::vector<InfoRect> const& objects);
+    explicit ObjectLayer(std::vector<InfoRect> const& objects);
 
     /// get Object Groups from map
     /// \return the object group

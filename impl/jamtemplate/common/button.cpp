@@ -36,10 +36,12 @@ void jt::Button::setDrawable(std::shared_ptr<jt::DrawableInterface> drawable)
 {
     m_drawable = drawable;
 }
-void jt::Button::addCallback(std::function<void(void)> callback)
+
+void jt::Button::addCallback(std::function<void(void)> const& callback)
 {
     m_callbacks.emplace_back(std::move(callback));
 }
+
 void jt::Button::clearCallbacks() { m_callbacks.clear(); }
 std::size_t jt::Button::getCallbackCount() const { return m_callbacks.size(); }
 bool jt::Button::isMouseOver()

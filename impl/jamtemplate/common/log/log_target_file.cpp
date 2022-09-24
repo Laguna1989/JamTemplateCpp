@@ -1,6 +1,9 @@
 #include "log_target_file.hpp"
 
-jt::LogTargetFile::LogTargetFile() { m_file = std::ofstream { "log.txt" }; }
+jt::LogTargetFile::LogTargetFile()
+    : m_file { std::ofstream { "log.txt" } }
+{
+}
 
 void jt::LogTargetFile::log(jt::LogEntry const& entry)
 {

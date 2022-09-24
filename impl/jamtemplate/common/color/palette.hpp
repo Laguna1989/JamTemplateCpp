@@ -9,7 +9,7 @@ namespace jt {
 class Palette {
 public:
     Palette() = default;
-    Palette(std::vector<jt::Color> const& colors);
+    explicit Palette(std::vector<jt::Color> const& colors);
 
     static Palette createGradientH(float hmin, float hmax, float s, float v, std::size_t steps);
     static Palette createGradientS(float h, float smin, float smax, float v, std::size_t steps);

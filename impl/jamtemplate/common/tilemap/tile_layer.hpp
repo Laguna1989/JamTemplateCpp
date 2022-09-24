@@ -24,9 +24,10 @@ public:
     /// \param tileInfo tileInfo
     /// \param tileSetSprites Tileset Sprites
     TileLayer(std::vector<TileInfo> const& tileInfo,
-        std::vector<std::shared_ptr<jt::Sprite>> tileSetSprites);
+        std::vector<std::shared_ptr<jt::Sprite>> const& tileSetSprites);
     TileLayer(
-        std::tuple<std::vector<TileInfo> const&, std::vector<std::shared_ptr<jt::Sprite>>> mapInfo);
+        std::tuple<std::vector<TileInfo> const&, std::vector<std::shared_ptr<jt::Sprite>>> const&
+            mapInfo);
 
     void doDraw(std::shared_ptr<jt::RenderTarget> sptr) const override;
 

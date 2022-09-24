@@ -12,7 +12,9 @@ namespace jt {
 class KeyboardInput : public KeyboardInterface {
 public:
     using KeyboardKeyCheckFunction = std::function<bool(jt::KeyCode)>;
-    KeyboardInput(KeyboardKeyCheckFunction checkFunc = [](auto k) { return libKeyValue(k); });
+
+    explicit KeyboardInput(
+        KeyboardKeyCheckFunction checkFunc = [](auto k) { return libKeyValue(k); });
 
     virtual void updateKeys() override;
 

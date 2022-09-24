@@ -18,7 +18,7 @@ namespace jt {
 class OpenSimplexNoise3D {
 public:
     OpenSimplexNoise3D();
-    OpenSimplexNoise3D(int64_t seed);
+    explicit OpenSimplexNoise3D(int64_t seed);
 
     // 3D Open Simplex Noise.
     float eval(float x, float y, float z) const;

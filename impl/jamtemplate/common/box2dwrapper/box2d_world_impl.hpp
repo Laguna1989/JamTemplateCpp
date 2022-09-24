@@ -12,7 +12,7 @@ namespace jt {
 /// Implementation of the Box2DWorldInterface
 class Box2DWorldImpl : public Box2DWorldInterface {
 public:
-    Box2DWorldImpl(jt::Vector2f const& gravity);
+    explicit Box2DWorldImpl(jt::Vector2f const& gravity);
 
     b2Body* createBody(const b2BodyDef* defintion) override;
 

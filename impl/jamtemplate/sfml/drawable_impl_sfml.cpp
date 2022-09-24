@@ -20,6 +20,8 @@ sf::BlendMode jt::DrawableImplSFML::getSfBlendMode() const
         return sf::BlendMultiply;
     } else if (getBlendMode() == jt::BlendMode::ALPHA) {
         return sf::BlendAlpha;
+    } else {
+        throw std::logic_error { "invalid Blend Mode" };
     }
 }
 

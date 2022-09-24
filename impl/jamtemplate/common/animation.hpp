@@ -38,7 +38,7 @@ public:
     /// lengths \param textureManager the texture manager to load the individual sprites
     void add(std::string const& fileName, std::string const& animName,
         jt::Vector2u const& imageSize, std::vector<unsigned int> const& frameIndices,
-        std::vector<float> frameTimesInSeconds, TextureManagerInterface& textureManager);
+        std::vector<float> const& frameTimesInSeconds, TextureManagerInterface& textureManager);
 
     /// Load animations from json file
     /// \param jsonFileName path to the json file, needs to be next to the image file. e.g.

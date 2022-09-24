@@ -13,7 +13,7 @@ public:
 
     /// Constructor
     /// \param lineVector the vector from start to end of the line
-    Line(jt::Vector2f lineVector);
+    explicit Line(jt::Vector2f lineVector);
 
     void setColor(jt::Color const& col) override;
     jt::Color getColor() const override;

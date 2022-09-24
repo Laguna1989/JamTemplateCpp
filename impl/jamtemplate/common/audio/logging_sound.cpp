@@ -9,7 +9,7 @@ jt::LoggingSound::LoggingSound(
     checkAndLogInvalidSampleRate();
 }
 
-jt::LoggingSound::LoggingSound(std::string fileName, jt::LoggerInterface& logger)
+jt::LoggingSound::LoggingSound(std::string const& fileName, jt::LoggerInterface& logger)
     : m_decoratee { std::make_shared<jt::Sound>(fileName) }
     , m_logger { logger }
 {

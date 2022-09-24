@@ -1,12 +1,12 @@
 ﻿#include "sound_group.hpp"
 #include <random/random.hpp>
 #include <algorithm>
+#include <iterator>
 
 jt::SoundGroup::SoundGroup(std::vector<std::shared_ptr<jt::SoundInterface>> const& sounds)
 {
-    for (auto const& sound : sounds) {
-        m_sounds.emplace_back(sound);
-    }
+    m_sounds.resize(sounds.size());
+    std::copy(sounds.cbegin(), sounds.cend(), m_sounds.begin());
 }
 
 bool jt::SoundGroup::isPlaying() const

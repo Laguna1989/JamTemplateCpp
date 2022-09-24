@@ -8,7 +8,7 @@ void addCommandHelp(std::shared_ptr<jt::GameBase>& game)
     game->storeActionCommand(game->actionCommandManager().registerTemporaryCommand(
         "help", [&mgr = game->actionCommandManager(), &logger = game->logger()](auto /*args*/) {
             logger.action("Available commands:");
-            for (auto& c : mgr.getAllCommands()) {
+            for (auto const& c : mgr.getAllCommands()) {
                 logger.action(" - " + c);
             }
         }));

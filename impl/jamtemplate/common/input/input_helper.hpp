@@ -12,7 +12,7 @@ void updateValues(std::map<KeyTypeJT, bool>& pressed, std::map<KeyTypeJT, bool>&
     std::map<KeyTypeJT, bool>& justPressed, std::map<KeyTypeJT, bool>& justReleased,
     CheckFuncArg check)
 {
-    for (auto& kvp : pressed) {
+    for (auto const& kvp : pressed) {
         auto const key = kvp.first;
         auto const keyValue = check(key);
         if (keyValue) {

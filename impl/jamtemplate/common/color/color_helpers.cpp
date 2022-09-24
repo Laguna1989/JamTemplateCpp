@@ -86,6 +86,9 @@ std::uint8_t hexStringToUint8(std::string const& input)
 std::tuple<std::uint8_t, std::uint8_t, std::uint8_t> jt::ColorHelpers::hex2rgb(
     std::string const& hexString)
 {
+    if (hexString.empty()) {
+        throw std::invalid_argument { "cannot create color from empty hex string" };
+    }
     auto tempString = hexString;
     if (hexString.front() == '#') {
         tempString = hexString.substr(1);

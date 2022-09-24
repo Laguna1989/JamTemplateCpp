@@ -50,7 +50,7 @@ bool jt::MouseInput::justReleased(jt::MouseButtonCode b) { return m_mouseJustRel
 
 void jt::MouseInput::reset()
 {
-    for (auto& kvp : m_mouseReleased) {
+    for (auto const& kvp : m_mouseReleased) {
         m_mousePressed[kvp.first] = false;
         m_mouseReleased[kvp.first] = false;
         m_mouseJustPressed[kvp.first] = false;

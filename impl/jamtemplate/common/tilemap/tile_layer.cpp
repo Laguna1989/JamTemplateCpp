@@ -4,15 +4,14 @@
 #include <memory>
 
 jt::tilemap::TileLayer::TileLayer(std::vector<jt::tilemap::TileInfo> const& tileInfo,
-    std::vector<std::shared_ptr<jt::Sprite>> tileSetSprites)
+    std::vector<std::shared_ptr<jt::Sprite>> const& tileSetSprites)
     : m_tileSetSprites { tileSetSprites }
     , m_tiles { tileInfo }
 {
 }
 
-jt::tilemap::TileLayer::TileLayer(
-    std::tuple<std::vector<jt::tilemap::TileInfo> const&, std::vector<std::shared_ptr<jt::Sprite>>>
-        mapInfo)
+jt::tilemap::TileLayer::TileLayer(std::tuple<std::vector<jt::tilemap::TileInfo> const&,
+    std::vector<std::shared_ptr<jt::Sprite>>> const& mapInfo)
     : TileLayer { std::get<0>(mapInfo), std::get<1>(mapInfo) }
 {
 }

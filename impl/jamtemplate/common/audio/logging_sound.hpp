@@ -11,7 +11,7 @@ public:
     LoggingSound(std::shared_ptr<SoundInterface> decoratee, LoggerInterface& logger);
 
     /// Constructor for convenience for creating a normal sound
-    LoggingSound(std::string fileName, LoggerInterface& logger);
+    LoggingSound(std::string const& fileName, LoggerInterface& logger);
 
     void update() override;
     bool isPlaying() const override;

@@ -4,10 +4,10 @@
 #include <input/mouse/mouse_input_null.hpp>
 
 jt::InputManagerNull::InputManagerNull()
+    : m_mouse { std::make_shared<MouseInputNull>() }
+    , m_keyboard { std::make_shared<KeyboardInputNull>() }
+    , m_gamepad { std::make_shared<GamepadInputNull>() }
 {
-    m_mouse = std::make_shared<MouseInputNull>();
-    m_keyboard = std::make_shared<KeyboardInputNull>();
-    m_gamepad = std::make_shared<GamepadInputNull>();
 }
 
 std::shared_ptr<jt::MouseInterface> jt::InputManagerNull::mouse() { return m_mouse; }

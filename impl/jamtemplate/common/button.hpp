@@ -31,7 +31,7 @@ public:
 
     /// Add a callback to be invoked when the button is clicked
     /// \param callback the callback to be added
-    void addCallback(std::function<void(void)> callback);
+    void addCallback(std::function<void(void)> const& callback);
 
     /// Clear the list of callbacks
     void clearCallbacks();

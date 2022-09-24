@@ -6,17 +6,17 @@
 jt::Sprite::Sprite() { }
 
 jt::Sprite::Sprite(std::string const& fileName, jt::TextureManagerInterface& textureManager)
+    : m_sprite { sf::Sprite { textureManager.get(fileName) } }
+    , m_flashSprite { sf::Sprite { textureManager.get(textureManager.getFlashName(fileName)) } }
 {
-    m_sprite = sf::Sprite { textureManager.get(fileName) };
-    m_flashSprite = sf::Sprite { textureManager.get(textureManager.getFlashName(fileName)) };
 }
 
 jt::Sprite::Sprite(
     std::string const& fileName, jt::Recti const& rect, jt::TextureManagerInterface& textureManager)
+    : m_sprite { sf::Sprite { textureManager.get(fileName), toLib(rect) } }
+    , m_flashSprite { sf::Sprite {
+          textureManager.get(textureManager.getFlashName(fileName)), toLib(rect) } }
 {
-    m_sprite = sf::Sprite { textureManager.get(fileName), toLib(rect) };
-    m_flashSprite
-        = sf::Sprite { textureManager.get(textureManager.getFlashName(fileName)), toLib(rect) };
 }
 
 void jt::Sprite::fromTexture(sf::Texture const& text) { m_sprite.setTexture(text); }

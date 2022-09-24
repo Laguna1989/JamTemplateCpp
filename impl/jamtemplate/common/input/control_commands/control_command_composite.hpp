@@ -9,7 +9,9 @@ namespace jt {
 
 class ControlCommandComposite : public jt::ControlCommandInterface {
 public:
-    ControlCommandComposite(std::vector<std::shared_ptr<jt::ControlCommandInterface>> const&);
+    explicit ControlCommandComposite(
+        std::vector<std::shared_ptr<jt::ControlCommandInterface>> const& commands);
+
     void execute(float elapsed) override;
     void reset() override;
 
