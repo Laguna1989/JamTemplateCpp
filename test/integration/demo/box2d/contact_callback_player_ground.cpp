@@ -40,5 +40,5 @@ bool ContactCallbackPlayerGround::isPlayerFeetFixture(b2Fixture* fa) const
     void* fixtureUserData = fa->GetUserData();
     return (std::uint64_t)fixtureUserData == 3U;
 }
-void ContactCallbackPlayerGround::setEnabled(bool /*enabled*/) { }
+void ContactCallbackPlayerGround::setEnabled(bool enabled) { m_enabled = enabled; }
 bool ContactCallbackPlayerGround::getEnabled() const { return true; }

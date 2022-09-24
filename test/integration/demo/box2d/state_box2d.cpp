@@ -1,15 +1,12 @@
 ﻿#include "state_box2d.hpp"
-#include "tweens/tween_position.hpp"
 #include <box2d/platform_player.hpp>
 #include <box2dwrapper/box2d_world_impl.hpp>
-#include <conversions.hpp>
-#include <game_interface.hpp>
 #include <input/input_manager.hpp>
 #include <random/random.hpp>
 #include <state_select.hpp>
 #include <tweens/tween_alpha.hpp>
+#include <tweens/tween_position.hpp>
 #include <tweens/tween_rotation.hpp>
-#include <tweens/tween_scale.hpp>
 
 StatePlatformer::StatePlatformer(std::string const& levelName) { m_levelName = levelName; }
 

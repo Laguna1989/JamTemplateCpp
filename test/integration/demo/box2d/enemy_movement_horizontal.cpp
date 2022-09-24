@@ -1,4 +1,3 @@
-
 #include "enemy_movement_horizontal.hpp"
 
 EnemyMovementHorizontal::EnemyMovementHorizontal(float minX, float maxX)

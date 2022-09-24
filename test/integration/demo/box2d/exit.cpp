@@ -1,4 +1,3 @@
-
 #include "exit.hpp"
 #include "math_helper.hpp"
 #include <game_interface.hpp>

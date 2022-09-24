@@ -1,5 +1,5 @@
-﻿#ifndef STRESSTEST_MOVEMENTOBJECT_HPP
-#define STRESSTEST_MOVEMENTOBJECT_HPP
+﻿#ifndef JAMTEMPLATE_DEMO_PLATFORM_PLAYER
+#define JAMTEMPLATE_DEMO_PLATFORM_PLAYER
 
 #include <animation.hpp>
 #include <box2dwrapper/box2d_object.hpp>
@@ -60,4 +60,4 @@ private:
     bool m_horizontalMovement { false };
 };
 
-#endif
+#endif // JAMTEMPLATE_DEMO_PLATFORM_PLAYER

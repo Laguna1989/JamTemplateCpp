@@ -1,4 +1,3 @@
-
 #ifndef JAMTEMPLATE_BEE_HPP
 #define JAMTEMPLATE_BEE_HPP
 

@@ -10,6 +10,7 @@
 #include <vector>
 
 namespace jt {
+// TODO create interface for Box2DContactManager and make this an implementation of the interface
 class Box2DContactManager : public b2ContactListener {
 public:
     std::size_t size() const;

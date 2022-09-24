@@ -32,6 +32,7 @@ public:
     /// \param joint Pointer to the joint to be destroyed
     virtual void destroyJoint(b2Joint* joint) = 0;
 
+    // TODO make this return an Interface and use DI to allow decorator usage
     /// Get a reference to the ContactManager
     /// \return the ContactManager
     virtual jt::Box2DContactManager& getContactManager() = 0;

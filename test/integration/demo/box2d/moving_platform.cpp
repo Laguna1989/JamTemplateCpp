@@ -50,7 +50,6 @@ void MovingPlatform::doCreate()
 
 void MovingPlatform::doUpdate(float const elapsed)
 {
-
     // TODO Refactor this mess
     if (m_timeTilNextPlatform > 0) {
         m_timeTilNextPlatform -= elapsed;

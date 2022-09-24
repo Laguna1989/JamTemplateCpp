@@ -1,4 +1,3 @@
-
 #include "bee.hpp"
 #include <Box2D/Box2D.h>
 

@@ -1,4 +1,3 @@
-
 #ifndef JAMTEMPLATE_EXIT_HPP
 #define JAMTEMPLATE_EXIT_HPP
 
