@@ -1,7 +1,8 @@
-﻿#include "box2dwrapper/box2d_world_impl.hpp"
-#include "box2dwrapper/box2d_world_interface.hpp"
-#include "conversions.hpp"
-#include "gtest/gtest.h"
+﻿#include <box2dwrapper/box2d_world_impl.hpp>
+#include <box2dwrapper/box2d_world_interface.hpp>
+#include <conversions.hpp>
+#include <gmock/gmock.h>
+#include <gtest/gtest.h>
 
 using namespace ::testing;
 
@@ -52,8 +53,16 @@ TEST_F(Box2dWorldImplTest, DestroyJoint)
 
 TEST_F(Box2dWorldImplTest, Step) { wrapper->step(0.1f, 1, 1); }
 
-TEST_F(Box2dWorldImplTest, SetContactListenerDoesNotThrow)
+class MockCallbackInterface : public jt::Box2DContactCallbackInterface {
+public:
+    MOCK_METHOD(void, onBeginContact, (b2Contact*), (override));
+    MOCK_METHOD(void, onEndContact, (b2Contact*), (override));
+    MOCK_METHOD(void, setEnabled, (bool), (override));
+    MOCK_METHOD(bool, getEnabled, (), (const, override));
+};
+
+TEST_F(Box2dWorldImplTest, RedisterCallbackDoesNotThrow)
 {
-    auto listener = std::make_shared<b2ContactListener>();
-    ASSERT_NO_THROW(wrapper->setContactListener(listener));
+    auto callback = std::make_shared<MockCallbackInterface>();
+    ASSERT_NO_THROW(wrapper->getContactManager().registerCallback("mock", callback));
 }

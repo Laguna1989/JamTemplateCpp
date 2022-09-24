@@ -1,6 +1,8 @@
 #include "level.hpp"
+#include <box2d/enemy_movement_horizontal.hpp>
 #include <game_interface.hpp>
 #include <math_helper.hpp>
+#include <strutils.hpp>
 #include <tilemap/tileson_loader.hpp>
 #include <Box2D/Box2D.h>
 
@@ -24,6 +26,51 @@ void Level::doCreate()
     loadLevelTileLayer(loader);
     loadLevelCollisions(loader);
     loadLevelKillboxes(loader);
+    loadMovingPlatforms(loader);
+
+    auto const enemies = loader.loadObjectsFromLayer("enemies");
+    for (auto const& enemy : enemies) {
+        if (enemy.name == "bee") {
+            std::shared_ptr<EnemyMovementInterface> movement { nullptr };
+            if (enemy.properties.strings.at("movement") == "horizontal") {
+                movement = std::make_shared<EnemyMovementHorizontal>(enemy.position.x,
+                    enemy.position.x + enemy.properties.ints.at("distance_in_tiles") * 8.0f);
+            }
+            auto bee = std::make_shared<Bee>(m_world.lock(), enemy.position, movement);
+            bee->setGameInstance(getGame());
+            bee->create();
+            m_bees.push_back(bee);
+        }
+    }
+}
+
+void Level::loadMovingPlatforms(jt::tilemap::TilesonLoader& loader)
+{
+    auto const platform_infos = loader.loadObjectsFromLayer("platforms");
+    std::map<std::string, jt::Vector2f> allPositionsInLevel;
+    for (auto const& p : platform_infos) {
+        if (p.properties.strings.empty()) {
+            allPositionsInLevel[p.name] = p.position;
+        }
+    }
+    for (auto const& p : platform_infos) {
+        if (!p.properties.strings.empty()) {
+            std::vector<jt::Vector2f> currentPlatformPositions;
+            auto const positionsString = p.properties.strings.at("positions");
+            auto const individualPositionStrings = strutil::split(positionsString, ",");
+            for (auto const& ps : individualPositionStrings) {
+                if (allPositionsInLevel.count(ps) == 0) {
+                    getGame()->logger().warning("position not found in level: " + ps, { "level" });
+                }
+                currentPlatformPositions.push_back(allPositionsInLevel[ps]);
+            }
+            auto platform = std::make_shared<MovingPlatform>(m_world.lock(), p.size,
+                currentPlatformPositions, p.properties.floats.at("velocity"));
+            platform->setGameInstance(getGame());
+            platform->create();
+            m_movingPlatforms.push_back(platform);
+        }
+    }
 }
 
 void Level::loadLevelSize(jt::tilemap::TilesonLoader const& loader)
@@ -79,7 +126,10 @@ void Level::loadLevelSettings(jt::tilemap::TilesonLoader& loader)
         } else if (info.name == "player_start") {
             m_playerStart = info.position;
         } else if (info.name == "exit") {
-            m_exit = info;
+            auto exit = Exit { info };
+            exit.setGameInstance(getGame());
+            exit.create();
+            m_exits.emplace_back(exit);
         }
     }
 }
@@ -88,13 +138,32 @@ void Level::doUpdate(float const elapsed)
 {
     m_background->update(elapsed);
     m_tileLayerGround->update(elapsed);
+    for (auto& exit : m_exits) {
+        exit.update(elapsed);
+    }
+    for (auto& p : m_movingPlatforms) {
+        p->update(elapsed);
+    }
+    for (auto& b : m_bees) {
+        b->update(elapsed);
+    }
 }
 
 void Level::doDraw() const
 {
     m_background->draw(renderTarget());
     m_tileLayerGround->draw(renderTarget());
+    for (auto const& exit : m_exits) {
+        exit.draw();
+    }
+    for (auto const& p : m_movingPlatforms) {
+        p->draw();
+    }
+    for (auto const& b : m_bees) {
+        b->draw();
+    }
 }
+
 jt::Vector2f Level::getPlayerStart() const { return m_playerStart; }
 
 void Level::checkIfPlayerIsInKillbox(
@@ -113,10 +182,9 @@ void Level::checkIfPlayerIsInKillbox(
 void Level::checkIfPlayerIsInExit(
     jt::Vector2f const& playerPosition, std::function<void(std::string const&)> callback)
 {
-    // TODO move to separate Exit class
-    jt::Rectf const exitRect { m_exit.position.x, m_exit.position.y, m_exit.size.x, m_exit.size.y };
-    if (jt::MathHelper::checkIsIn(exitRect, playerPosition)) {
-        callback(m_exit.properties.strings["next_level"]);
+    for (auto& exit : m_exits) {
+        exit.checkIfPlayerIsInExit(playerPosition, callback);
+        break;
     }
 }
 
