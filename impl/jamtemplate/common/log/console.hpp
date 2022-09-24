@@ -13,7 +13,7 @@ namespace jt {
 
 class Console : public jt::GameObject {
 public:
-    Console(jt::LoggerInterface& logger);
+    explicit Console(jt::LoggerInterface& logger);
 
     int inputUserCallback(ImGuiInputTextCallbackData* data);
 

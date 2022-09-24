@@ -57,6 +57,14 @@ public:
         oalpp::effects::MonoEffectInterface& effect)
         = 0;
 
+    /// Get one random sound from a sound pool of similar sounds. Use this if you want to limit the
+    /// number of instances of a specific sound. E.g. if there are pickups and all have the same
+    /// sound, not every pickup needs to have an individual instance, but you can play one randomly
+    /// from the pool.
+    /// \param baseIdentifier the name under which the sounds are stored
+    /// \param fileName the filename to loaded
+    /// \param count how many distinct sound instances are in the pool
+    /// \return shared pointer to the stored sound
     virtual std::shared_ptr<SoundInterface> soundPool(
         std::string const& baseIdentifier, std::string const& fileName, std::size_t count)
         = 0;
@@ -76,7 +84,8 @@ public:
 
     /// Add a temporary sound group
     /// \param sounds the sounds to create the group from
-    /// \return a shared pointer to a sound group
+    /// \return a shared pointer to a sound group. The user needs to keep this alive, otherwise they
+    /// will be removed from the audio implementation.
     virtual std::shared_ptr<jt::SoundInterface> addTemporarySoundGroup(
         std::vector<std::shared_ptr<jt::SoundInterface>> const& sounds)
         = 0;

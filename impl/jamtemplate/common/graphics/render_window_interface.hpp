@@ -54,11 +54,19 @@ public:
     /// \return
     virtual bool getMouseCursorVisible() const = 0;
 
+    /// Update GUI
+    /// \param elapsed the elapsed time in seconds
     virtual void updateGui(float elapsed) = 0;
 
+    /// start to render the GUI
     virtual void startRenderGui() = 0;
 
+    /// Can be used to check if ImGui is taking the keyboard focus
+    /// \return true if game should process keyboard input
     virtual bool shouldProcessKeyboard() = 0;
+
+    /// Can be used to check if ImGui is taking the mouse focus
+    /// \return true if the game should process mouse input
     virtual bool shouldProcessMouse() = 0;
 
 protected:

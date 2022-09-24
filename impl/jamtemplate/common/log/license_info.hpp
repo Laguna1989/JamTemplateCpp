@@ -6,6 +6,7 @@
 
 namespace jt {
 
+/// Class to display license and build info
 class LicenseInfo : public GameObject {
 public:
     void addLicenseText(std::string const& text);

@@ -17,7 +17,7 @@ public:
     virtual void update() = 0;
 
     /// Get isPlaying
-    /// \return true if is playing, false otherwise
+    /// \return true if the sound is playing, false otherwise
     virtual bool isPlaying() const = 0;
 
     /// Play the sound
@@ -36,10 +36,10 @@ public:
     virtual void setVolume(float newVolume) = 0;
 
     /// Set Pitch
-    /// \param pitch new pitch value
+    /// \param pitch new pitch value in range 0 to inf
     virtual void setPitch(float pitch) = 0;
     /// Get pitch
-    /// \return pitch value
+    /// \return pitch value in range 0 to inf
     virtual float getPitch() const = 0;
 
     /// Set Loop
@@ -54,11 +54,12 @@ public:
     virtual float getDuration() const = 0;
 
     /// Get Position
-    /// \return the current playing position in seconds
+    /// \return the current playing position in seconds. Note: This is only accurate to around 0.3s
+    /// as OpenALpp does not provide realtime audio manipulation.
     virtual float getPosition() const = 0;
 
-    /// Set blend
-    /// \param blend blend parameter (between 0 and 1)
+    /// Set blend. E.g. used for Effect Sounds. Normal sounds just fade.
+    /// \param blend blend parameter (between 0 and 1).
     virtual void setBlend(float blend) = 0;
 
     /// Get blend

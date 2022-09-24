@@ -18,14 +18,33 @@ public:
     GfxInterface& operator=(const GfxInterface&) = delete;
     GfxInterface& operator=(GfxInterface&&) = delete;
 
+    /// Get the render window
+    /// \return the render window
     virtual RenderWindowInterface& window() = 0;
+
+    /// Get the camera
+    /// \return the camera
     virtual CamInterface& camera() = 0;
+
+    /// Get the render target
+    /// \return the render target
     virtual std::shared_ptr<RenderTarget> target() = 0;
+
+    /// Get the texture manager
+    /// \return the texture manager
     virtual TextureManagerInterface& textureManager() = 0;
 
+    /// Reset the gfx (e.g. on switchState())
     virtual void reset() = 0;
+
+    /// update the gfx
+    /// \param elapsed the elapsed time
     virtual void update(float elapsed) = 0;
+
+    /// clear the gfx
     virtual void clear() = 0;
+
+    /// display the drawables to the screen
     virtual void display() = 0;
 
 protected:

@@ -17,7 +17,7 @@ public:
 
     /// Constructor
     ///
-    /// \param world shared pointer to the world
+    /// \param world shared pointer to the world. Only a weak pointer will be stored.
     /// \param def raw pointer to a body definition
     Box2DObject(std::shared_ptr<Box2DWorldInterface> world, b2BodyDef const* def);
 
@@ -47,7 +47,7 @@ public:
     /// \return the rotation in degree
     float getRotation() const;
 
-    /// Get the Box2d body pointer
+    /// Get the low level Box2d body pointer
     /// \return the pointer
     b2Body* getB2Body();
 

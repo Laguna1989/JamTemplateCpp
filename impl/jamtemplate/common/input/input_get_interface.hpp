@@ -23,6 +23,8 @@ public:
     /// \return the gamepad
     virtual std::shared_ptr<GamepadInterface> gamepad(int gamepad_id) = 0;
 
+    /// Get the number of connected gamepads
+    /// \return the number of gamepads
     virtual std::size_t getNumberOfGamepads() const = 0;
 };
 

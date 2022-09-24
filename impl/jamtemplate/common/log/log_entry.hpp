@@ -16,6 +16,7 @@ enum class LogLevel {
 };
 
 namespace jt {
+/// POD type to represent one log entry
 struct LogEntry {
     std::string message { "" };
     std::string time { "" };

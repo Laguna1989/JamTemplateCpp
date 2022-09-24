@@ -36,11 +36,12 @@ public:
         , m_particles {}
         , m_currentIndex { 0 }
     {
-        std::generate(m_particles.begin(), m_particles.end, init);
+        std::generate(m_particles.begin(), m_particles.end(), init);
     };
 
-    /// fire the particle system, creating num particles
-    /// \param num
+    /// Fire the particle system, creating num particles
+    /// \param num the amount of particles to spawn
+    /// \param pos the position where to spawn the particles
     void fire(unsigned int num = 1, jt::Vector2f const& pos = jt::Vector2f {})
     {
         for (auto i = 0U; i != num; ++i) {
