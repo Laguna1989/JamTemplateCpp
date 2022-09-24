@@ -1,7 +1,7 @@
 ﻿#ifndef DEMO_STATE_PLATFORMER_HPP
 #define DEMO_STATE_PLATFORMER_HPP
 
-#include <box2d/contact_listener_player_grounded.hpp>
+#include <box2d/contact_callback_player_ground.hpp>
 #include <box2d/level.hpp>
 #include <box2d/platform_player.hpp>
 #include <box2dwrapper/box2d_object.hpp>
@@ -23,7 +23,6 @@ private:
     std::string m_levelName { "" };
     std::shared_ptr<Level> m_level { nullptr };
     std::shared_ptr<Player> m_player { nullptr };
-    std::shared_ptr<ContactListenerPlayerGrounded> m_contactListener { nullptr };
     std::shared_ptr<jt::Vignette> m_vignette { nullptr };
 
     std::shared_ptr<jt::ParticleSystem<jt::Shape, 50>> m_walkParticles { nullptr };

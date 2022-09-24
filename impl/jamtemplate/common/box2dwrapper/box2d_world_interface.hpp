@@ -1,6 +1,7 @@
 ﻿#ifndef JAMTEMPLATE_BOX2DWRAPPER_HPP
 #define JAMTEMPLATE_BOX2DWRAPPER_HPP
 
+#include <box2dwrapper/box_2d_contact_manager.hpp>
 #include <memory>
 
 class b2Body;
@@ -31,11 +32,11 @@ public:
     /// \param joint Pointer to the joint to be destroyed
     virtual void destroyJoint(b2Joint* joint) = 0;
 
-    /// Sets the contact listener for this world. Use this to react to collisions.
-    /// \param listener The contact listener to wake up when things collide in the world
-    virtual void setContactListener(std::shared_ptr<b2ContactListener> listener) = 0;
+    /// Get a reference to the ContactManager
+    /// \return the ContactManager
+    virtual jt::Box2DContactManager& getContactManager() = 0;
 
-    /// step physics simulation forward
+    /// Step physics simulation forward
     /// \param elapsed elapsed time in seconds
     /// \param velocityIterations number of velocity iterations
     /// \param positionIterations number of position iterations

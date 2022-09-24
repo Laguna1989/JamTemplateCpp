@@ -21,9 +21,9 @@ void StatePlatformer::doInternalCreate()
     loadLevel();
 
     CreatePlayer();
-    m_contactListener = std::make_shared<ContactListenerPlayerGrounded>();
-    m_contactListener->setPlayer(m_player);
-    m_world->setContactListener(m_contactListener);
+    auto playerContactListener = std::make_shared<ContactCallbackPlayerGround>();
+    playerContactListener->setPlayer(m_player);
+    m_world->getContactManager().registerCallback("player_ground", playerContactListener);
 
     m_vignette = std::make_shared<jt::Vignette>(jt::Vector2f { 400.0f, 300.0f });
     add(m_vignette);

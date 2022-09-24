@@ -2,6 +2,7 @@
 #define JAMTEMPLATE_BOX2D_WORLD_IMPL_HPP
 
 #include <box2dwrapper/box2d_world_interface.hpp>
+#include <box2dwrapper/box_2d_contact_manager.hpp>
 #include <vector.hpp>
 #include <Box2D/Dynamics/b2World.h>
 #include <memory>
@@ -21,13 +22,13 @@ public:
 
     void destroyJoint(b2Joint* joint) override;
 
-    void setContactListener(std::shared_ptr<b2ContactListener> listener) override;
+    Box2DContactManager& getContactManager() override;
 
     void step(float elapsed, int velocityIterations, int positionIterations) override;
 
 private:
-    std::unique_ptr<b2World> m_world;
-    std::shared_ptr<b2ContactListener> m_contactListener;
+    std::unique_ptr<b2World> m_world { nullptr };
+    jt::Box2DContactManager m_contactManager;
 };
 
 } // namespace jt
