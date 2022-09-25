@@ -13,6 +13,8 @@ public:
     /// Get the tilemap cache
     /// \return
     virtual jt::TilemapCache& getTilemapCache() = 0;
+
+    // TODO expand to other cached items
 };
 } // namespace jt
 

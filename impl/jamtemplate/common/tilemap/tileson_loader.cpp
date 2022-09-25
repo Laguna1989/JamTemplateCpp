@@ -45,11 +45,13 @@ std::vector<std::shared_ptr<jt::Sprite>> loadTileSetSprites(std::unique_ptr<tson
         auto const tilesetName = tilesetPathPrefix + tileset.getImagePath().string();
 
         tileSetSprites.resize(offset + static_cast<size_t>(rows) * static_cast<size_t>(columns));
-        for (int j = 0; j != rows; ++j) {
-            for (int i = 0; i != columns; ++i) {
+        for (int rowIndex = 0; rowIndex != rows; ++rowIndex) {
+            for (int columnIndex = 0; columnIndex != columns; ++columnIndex) {
                 {
-                    tileSetSprites.at(offset + i + j * columns) = std::make_shared<jt::Sprite>(
-                        tilesetName, jt::Recti { i * ts.x, j * ts.y, ts.x, ts.y }, textureManager);
+                    tileSetSprites.at(offset + columnIndex + rowIndex * columns)
+                        = std::make_shared<jt::Sprite>(tilesetName,
+                            jt::Recti { columnIndex * ts.x, rowIndex * ts.y, ts.x, ts.y },
+                            textureManager);
                 }
             }
         }

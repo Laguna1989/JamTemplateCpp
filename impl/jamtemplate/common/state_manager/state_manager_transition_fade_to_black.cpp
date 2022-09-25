@@ -4,9 +4,9 @@
 
 jt::StateManagerTransitionFadeToBlack::StateManagerTransitionFadeToBlack(
     jt::Vector2f const& overlaySize, jt::TextureManagerInterface& tm, float timerMax)
-    : StateManagerTransitionImpl(timerMax)
+    : StateManagerTransitionImpl { timerMax }
+    , m_shape { std::make_shared<jt::Shape>() }
 {
-    m_shape = std::make_shared<jt::Shape>();
     m_shape->makeRect(overlaySize, tm);
     m_shape->setColor(jt::Color { 0, 0, 0, 0 });
     m_shape->setIgnoreCamMovement(true);

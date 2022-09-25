@@ -2,10 +2,9 @@
 #include "stars.hpp"
 
 jt::Stars::Stars(std::size_t count, jt::Color const& col, jt::Vector2f const& screenSizeHint)
+    : m_color { col }
+    , m_screenSizeHint { screenSizeHint }
 {
-    m_color = col;
-    m_screenSizeHint = screenSizeHint;
-
     m_stars.resize(count);
 }
 

@@ -36,13 +36,12 @@ public:
         , m_particles {}
         , m_currentIndex { 0 }
     {
-        for (auto& p : m_particles) {
-            p = init();
-        }
+        std::generate(m_particles.begin(), m_particles.end(), init);
     };
 
-    /// fire the particle system, creating num particles
-    /// \param num
+    /// Fire the particle system, creating num particles
+    /// \param num the amount of particles to spawn
+    /// \param pos the position where to spawn the particles
     void fire(unsigned int num = 1, jt::Vector2f const& pos = jt::Vector2f {})
     {
         for (auto i = 0U; i != num; ++i) {
@@ -57,20 +56,19 @@ private:
 
     std::size_t m_currentIndex { 0U };
 
-    virtual void doUpdate(float const elapsed)
+    void doUpdate(float const elapsed) override
     {
         for (auto& p : m_particles) {
             p->update(elapsed);
         }
     };
 
-    virtual void doDraw() const
+    void doDraw() const override
     {
         for (auto const& p : m_particles) {
             p->draw(renderTarget());
         }
     };
-    virtual void doCreate() {};
 };
 
 } // namespace jt

@@ -8,7 +8,7 @@
 namespace jt {
 class ActionCommandManager : public ActionCommandManagerInterface {
 public:
-    ActionCommandManager(LoggerInterface& logger);
+    explicit ActionCommandManager(LoggerInterface& logger);
     void executeCommand(std::string const& fullCommandString) override;
 
     std::shared_ptr<bool> registerTemporaryCommand(

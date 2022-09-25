@@ -11,6 +11,7 @@ struct b2JointDef;
 class b2ContactListener;
 
 namespace jt {
+
 /// Interface for box2World
 class Box2DWorldInterface {
 public:
@@ -33,7 +34,8 @@ public:
     virtual void destroyJoint(b2Joint* joint) = 0;
 
     // TODO make this return an Interface and use DI to allow decorator usage
-    /// Get a reference to the ContactManager
+
+    /// Get the ContactManager. This can be used to register/unregister contact callbacks.
     /// \return the ContactManager
     virtual jt::Box2DContactManager& getContactManager() = 0;
 

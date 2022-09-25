@@ -38,7 +38,7 @@ public:
     /// lengths \param textureManager the texture manager to load the individual sprites
     void add(std::string const& fileName, std::string const& animName,
         jt::Vector2u const& imageSize, std::vector<unsigned int> const& frameIndices,
-        std::vector<float> frameTimesInSeconds, TextureManagerInterface& textureManager);
+        std::vector<float> const& frameTimesInSeconds, TextureManagerInterface& textureManager);
 
     /// Load animations from json file
     /// \param jsonFileName path to the json file, needs to be next to the image file. e.g.
@@ -46,6 +46,10 @@ public:
     /// \param textureManager the texture manager to load the individual sprites
     void loadFromJson(std::string const& jsonFileName, TextureManagerInterface& textureManager);
 
+    /// Set the fame time for a specific animation.
+    /// \param animationName the name of the animation
+    /// \param frameTimes the individual frame times. The size needs to match the number of frames
+    /// in this animation.
     void setFrameTimes(std::string const& animationName, std::vector<float> const& frameTimes);
 
     /// Check if a specific animation name is present in the pool
@@ -54,6 +58,8 @@ public:
     /// \return true if an animation with animationName is present, false otherwise
     bool hasAnimation(std::string const& animationName) const;
 
+    /// Get all animation names
+    /// \return the vector of the animation names
     std::vector<std::string> getAllAvailableAnimationsNames() const;
 
     /// Start playing an animation from the pool
@@ -116,7 +122,11 @@ public:
     [[deprecated("Currently only implemented for SFML")]] void setCustomShader(
         std::string const& shaderCodeVertex, std::string const& shaderCodeFragment) override;
 
+    /// Set the animation speed
+    /// \param factor the factor. Normal value is 1.0, can be in range from -inf to inf.
     void setAnimationSpeedFactor(float factor);
+    /// Get the animation speed
+    /// \return the factor. Normal value is 1.0, can be in range from -inf to inf.
     float getAnimationSpeedFactor() const;
 
 private:

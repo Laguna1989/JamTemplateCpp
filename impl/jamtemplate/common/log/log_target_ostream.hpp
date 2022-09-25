@@ -8,7 +8,7 @@
 namespace jt {
 class LogTargetOstream : public LogTargetInterface {
 public:
-    LogTargetOstream(std::ostream& stream = std::cout);
+    explicit LogTargetOstream(std::ostream& stream = std::cout);
     void setLogLevel(LogLevel level) override;
     void log(LogEntry const& entry) override;
 

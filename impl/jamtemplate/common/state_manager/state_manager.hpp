@@ -11,7 +11,7 @@ class GameInterface;
 
 class StateManager : public StateManagerInterface {
 public:
-    StateManager(std::shared_ptr<GameState> initialState);
+    explicit StateManager(std::shared_ptr<GameState> initialState);
     std::shared_ptr<GameState> getCurrentState() override;
     std::shared_ptr<GameState> getNextState();
 

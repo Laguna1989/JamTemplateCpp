@@ -2,8 +2,8 @@
 
 jt::null_objects::GfxNull::GfxNull()
     : m_window { 800, 600, "test" }
+    , m_textureManager { TextureManagerImpl { nullptr } }
 {
-    m_textureManager = TextureManagerImpl { nullptr };
 }
 
 jt::RenderWindowInterface& jt::null_objects::GfxNull::window() { return m_window; }
@@ -20,8 +20,3 @@ void jt::null_objects::GfxNull::reset() { m_camera.reset(); }
 void jt::null_objects::GfxNull::update(float elapsed) { m_camera.update(elapsed); }
 void jt::null_objects::GfxNull::clear() { }
 void jt::null_objects::GfxNull::display() { }
-
-void jt::null_objects::GfxNull::setTextureManager(jt::TextureManagerImpl& tm)
-{
-    m_textureManager = tm;
-}

@@ -26,7 +26,6 @@ NodeT findClosestNodeTo(std::vector<std::weak_ptr<jt::pathfinder::NodeInterface>
 
     auto minDistance = std::numeric_limits<float>::max();
     NodeT closestNode = nullptr;
-    std::weak_ptr<jt::pathfinder::NodeInterface> closestWeakNode;
 
     for (auto n : toCheck) {
         auto currentNode = n.lock();

@@ -13,10 +13,15 @@ namespace tilemap {
 
 class NodeLayer {
 public:
+    using Sptr = std::shared_ptr<NodeLayer>;
+
     /// Constructor
     /// \param nodeTiles node tiles, either create them yourself or use TilesonLoader
-    NodeLayer(std::vector<std::shared_ptr<TileNode>> nodeTiles);
-    using Sptr = std::shared_ptr<NodeLayer>;
+    explicit NodeLayer(std::vector<std::shared_ptr<TileNode>> nodeTiles);
+
+    /// Get the tile at a specific position. Will return nullptr if no tile exists.
+    /// \param pos the position in tile coordinates
+    /// \return pointer to the tile (or nullptr)
     std::shared_ptr<TileNode> getTileAt(jt::Vector2u const& pos);
 
     std::vector<std::shared_ptr<TileNode>> getAllTiles();

@@ -113,8 +113,8 @@ TEST(RandomPointIn, ValidWithRect)
         auto const v = Random::getRandomPointIn(jt::Rectf { lowerX, lowerY, upperX, upperY });
         EXPECT_GT(v.x, lowerX);
         EXPECT_GT(v.y, lowerY);
-        EXPECT_LT(v.x, lowerX + upperX);
-        EXPECT_LT(v.y, lowerY + upperY);
+        EXPECT_LE(v.x, lowerX + upperX);
+        EXPECT_LE(v.y, lowerY + upperY);
     }
 }
 

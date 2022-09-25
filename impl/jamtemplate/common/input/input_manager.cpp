@@ -5,7 +5,7 @@
 
 jt::InputManager::InputManager(std::shared_ptr<jt::MouseInterface> mouse,
     std::shared_ptr<jt::KeyboardInterface> keyboard,
-    std::vector<std::shared_ptr<jt::GamepadInterface>> gamepads)
+    std::vector<std::shared_ptr<jt::GamepadInterface>> const& gamepads)
     : m_mouse { mouse }
     , m_keyboard { keyboard }
     , m_gamepads { gamepads }

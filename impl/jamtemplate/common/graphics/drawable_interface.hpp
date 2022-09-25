@@ -206,7 +206,12 @@ public:
         std::string const& shaderCodeVertex, std::string const& shaderCodeFragment)
         = 0;
 
+    /// Set the Blend mode
+    /// \param mode the blend mode
     virtual void setBlendMode(jt::BlendMode mode) = 0;
+
+    /// Get the Blend mode.
+    /// \return the blend mode
     virtual jt::BlendMode getBlendMode() const = 0;
 
     /// check if is visible, based on ScreenSizeHint

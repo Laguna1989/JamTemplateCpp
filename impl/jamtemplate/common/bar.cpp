@@ -10,13 +10,13 @@ jt::Bar::Bar(
     , m_width { width }
     , m_height { height }
     , m_horizontal { horizontal }
+    , m_shapeFull { std::make_shared<jt::Shape>() }
+    , m_shapeProgress { std::make_shared<jt::Shape>() }
 {
-    m_shapeFull = std::make_shared<jt::Shape>();
     m_shapeFull->makeRect(jt::Vector2f { m_width, m_height }, textureManager);
     m_shapeFull->setColor(jt::colors::Gray);
     m_shapeFull->setIgnoreCamMovement(true);
 
-    m_shapeProgress = std::make_shared<jt::Shape>();
     if (m_horizontal) {
         auto const progressHeightFactor = 0.9f;
         m_shapeProgress->makeRect(

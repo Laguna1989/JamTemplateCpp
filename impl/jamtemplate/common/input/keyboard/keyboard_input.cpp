@@ -33,7 +33,7 @@ bool jt::KeyboardInput::justReleased(jt::KeyCode k) { return m_justReleased[k]; 
 
 void jt::KeyboardInput::reset()
 {
-    for (auto& kvp : m_released) {
+    for (auto const& kvp : m_released) {
         m_pressed[kvp.first] = false;
         m_released[kvp.first] = false;
         m_justPressed[kvp.first] = false;

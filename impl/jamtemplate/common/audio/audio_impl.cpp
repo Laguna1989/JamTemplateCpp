@@ -48,9 +48,7 @@ std::shared_ptr<jt::SoundInterface> jt::AudioImpl::getPermanentSound(std::string
 
 void jt::AudioImpl::removePermanentSound(std::string const& identifier)
 {
-    if (m_permanentSounds.count(identifier) != 0) {
-        m_permanentSounds[identifier] = nullptr;
-    }
+    m_permanentSounds.erase(identifier);
 }
 
 std::shared_ptr<jt::SoundInterface> jt::AudioImpl::soundPool(

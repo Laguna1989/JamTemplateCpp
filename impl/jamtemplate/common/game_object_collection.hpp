@@ -8,10 +8,20 @@
 namespace jt {
 class GameObjectCollection {
 public:
+    /// clear all GameObjects
     void clear();
+
+    /// Add a new GameObject
+    /// \param object the object to add
     void add(std::shared_ptr<jt::GameObject> object);
+
+    /// Update all GameObjects
+    /// \param elapsed the elapsed time in seconds
     void update(float elapsed);
+    /// Draw all GameObjects
     void draw() const;
+    /// Get the number of stored GameObjects
+    /// \return the number of stored GameObjects
     std::size_t size() const;
 
 private:

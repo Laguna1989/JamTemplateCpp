@@ -6,6 +6,9 @@
 namespace jt {
 
 // TODO place in class
+
+/// create a default log target
+/// \param logger the logger to be used
 void createDefaultLogTargets(LoggerInterface& logger);
 
 } // namespace jt

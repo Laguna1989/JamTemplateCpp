@@ -6,14 +6,15 @@
 
 namespace jt {
 
+/// Class to display license and build info
 class LicenseInfo : public GameObject {
 public:
     void addLicenseText(std::string const& text);
 
 private:
-    virtual void doCreate();
-    virtual void doUpdate(float const /*elapsed*/);
-    virtual void doDraw() const;
+    void doCreate() override;
+    void doUpdate(float const /*elapsed*/) override;
+    void doDraw() const override;
 
     std::vector<std::string> m_licenseTexts;
     mutable bool m_showLicenseInfo { false };

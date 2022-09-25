@@ -27,6 +27,7 @@ public:
 
     /// Destructor
     virtual ~DrawableImpl() = default;
+
     void draw(std::shared_ptr<RenderTarget> sptr) const override;
 
     void flash(float t, jt::Color col = jt::colors::White) override;
@@ -62,6 +63,8 @@ public:
     void setIgnoreCamMovement(bool ignore) override;
     bool getIgnoreCamMovement() const override;
 
+    /// Get the static camera offset
+    /// \return the camera offset
     static jt::Vector2f getStaticCamOffset();
 
     // do not call this manually. Only place for this to be called is Game()->update();

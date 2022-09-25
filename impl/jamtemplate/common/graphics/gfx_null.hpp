@@ -23,8 +23,6 @@ public:
     void clear() override;
     void display() override;
 
-    void setTextureManager(jt::TextureManagerImpl& tm);
-
 private:
     RenderWindowNull m_window;
     jt::Camera m_camera;

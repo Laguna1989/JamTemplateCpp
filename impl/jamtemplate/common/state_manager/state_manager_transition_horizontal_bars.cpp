@@ -4,12 +4,12 @@ jt::StateManagerTransitionHorizontalBars::StateManagerTransitionHorizontalBars(
     jt::Vector2f const& shapeSize, int numberOfShapes, float totalTime,
     jt::TextureManagerInterface& tm)
     : StateManagerTransitionImpl { totalTime }
+    , m_shape { std::make_shared<jt::Shape>() }
+    , m_numberOfShapes { numberOfShapes }
 {
-    m_shape = std::make_shared<jt::Shape>();
     m_shape->makeRect(shapeSize, tm);
     m_shape->setColor(jt::Color { 45, 45, 45, 255 });
     m_shape->setIgnoreCamMovement(true);
-    m_numberOfShapes = numberOfShapes;
 }
 
 void jt::StateManagerTransitionHorizontalBars::doUpdate(float /*elapsed*/) { }

@@ -104,7 +104,7 @@ public:
             kvp.second = jt::SystemHelper::to_weak_pointers(currentObjects);
         }
 
-        for (auto& object : objectsToReplace) {
+        for (auto const& object : objectsToReplace) {
             push_back(object);
         }
     }

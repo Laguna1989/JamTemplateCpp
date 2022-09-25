@@ -71,9 +71,13 @@ public:
 
     void storeActionCommand(std::shared_ptr<void> commandCallback);
 
+    /// Get the name of the Object. Should be overwritten by the derived class
+    /// \return the name of the GameObject.
     virtual std::string getName() const;
 
+    /// Get the number of alive gameobjects.
     std::size_t getNumberOfAliveGameObjects() const;
+    /// Get the number of created gameobjects.
     std::size_t getNumberOfCreatedGameObjects() const;
 
     // Helper functions for fast access of commonly used objects.

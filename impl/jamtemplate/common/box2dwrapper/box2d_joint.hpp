@@ -18,11 +18,12 @@ public:
 
     /// Constructor
     ///
-    /// \param world shared pointer to the world. Only a weak pointer to the world will be saved
-    /// here.
+    /// \param world shared pointer to the world. Only a weak pointer to the world will be stored.
     /// \param def raw pointer to a joint definition
     Box2DJoint(std::shared_ptr<Box2DWorldInterface> world, const b2JointDef* def);
 
+    /// Access function for the low level Box2D Joint
+    /// \return pointer to the Box2D joint object
     b2Joint* getB2Joint() const;
 
 private:

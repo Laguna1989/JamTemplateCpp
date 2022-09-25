@@ -2,8 +2,9 @@
 #include <input/input_helper.hpp>
 
 jt::GamepadInput::GamepadInput(int gamepadId, AxisFunc axisFunc, ButtonCheckFunction buttonFunc)
+    : m_axisFunc { axisFunc }
 {
-    m_axisFunc = axisFunc;
+
     if (m_axisFunc == nullptr) {
         m_axisFunc = [gamepadId](auto k) { return libAxisValue(gamepadId, k); };
     }

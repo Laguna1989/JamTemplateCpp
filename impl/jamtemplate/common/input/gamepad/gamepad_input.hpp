@@ -13,7 +13,7 @@ public:
     using AxisFunc = std::function<jt::Vector2f(jt::GamepadAxisCode)>;
     using ButtonCheckFunction = std::function<bool(jt::GamepadButtonCode)>;
 
-    GamepadInput(
+    explicit GamepadInput(
         int gamepadId, AxisFunc axisFunc = nullptr, ButtonCheckFunction buttonFunc = nullptr);
     void update() override;
     jt::Vector2f getAxisRaw(jt::GamepadAxisCode axis) override;

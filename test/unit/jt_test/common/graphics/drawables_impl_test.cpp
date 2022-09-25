@@ -309,10 +309,25 @@ TEST_P(DrawableImplTestFixture, GetShadowColorAfterSet)
     ASSERT_EQ(drawable->getShadowColor(), jt::colors::Yellow);
 }
 
-TEST_P(DrawableImplTestFixture, GetBlendModeAfterSetBlendMode)
+TEST_P(DrawableImplTestFixture, GetSetBlendModeMul)
 {
-    drawable->setBlendMode(jt::BlendMode::MUL);
-    ASSERT_EQ(drawable->getBlendMode(), jt::BlendMode::MUL);
+    auto const expectedBlendMode = jt::BlendMode::MUL;
+    drawable->setBlendMode(expectedBlendMode);
+    ASSERT_EQ(drawable->getBlendMode(), expectedBlendMode);
+}
+
+TEST_P(DrawableImplTestFixture, GetSetBlendModeAdd)
+{
+    auto const expectedBlendMode = jt::BlendMode::ADD;
+    drawable->setBlendMode(expectedBlendMode);
+    ASSERT_EQ(drawable->getBlendMode(), expectedBlendMode);
+}
+
+TEST_P(DrawableImplTestFixture, GetSetBlendModeAlpha)
+{
+    auto const expectedBlendMode = jt::BlendMode::ALPHA;
+    drawable->setBlendMode(expectedBlendMode);
+    ASSERT_EQ(drawable->getBlendMode(), expectedBlendMode);
 }
 
 TEST_P(DrawableImplTestFixture, SetEmptyCustomShaderDoesNotThrow)

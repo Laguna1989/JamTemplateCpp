@@ -2,9 +2,9 @@
 
 jt::tilemap::TileNode::TileNode(std::shared_ptr<jt::DrawableInterface> drawable,
     std::shared_ptr<jt::pathfinder::NodeInterface> node)
+    : m_node { node }
+    , m_drawable { drawable }
 {
-    m_node = node;
-    m_drawable = drawable;
     reset();
 }
 
