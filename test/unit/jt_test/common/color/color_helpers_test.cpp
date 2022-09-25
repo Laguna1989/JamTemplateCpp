@@ -1,12 +1,11 @@
 #include <color/color_helpers.hpp>
-#include <gtest/gtest.h>
 #include <cmath>
+#include <gtest/gtest.h>
 #include <tuple>
 
 class ColorHelpersHsv2RgbTestFixture
     : public ::testing::TestWithParam<
-          std::tuple<float, float, float, std::uint8_t, std::uint8_t, std::uint8_t>> {
-};
+          std::tuple<float, float, float, std::uint8_t, std::uint8_t, std::uint8_t>> { };
 
 TEST_P(ColorHelpersHsv2RgbTestFixture, hsv2rgb)
 {
@@ -66,3 +65,9 @@ INSTANTIATE_TEST_SUITE_P(ColorHelpersHsv2RgbTestBasicColorsTwo, ColorHelpersHsv2
 
 INSTANTIATE_TEST_SUITE_P(ColorHelpersHsv2RgbTestComplexColors, ColorHelpersHsv2RgbTestFixture,
     ::testing::Values(std::make_tuple(200.0f, 70.0f, 50.0f, 38, 97, 127)));
+
+TEST(hex2rgbTest, EmptyStringThrowsException)
+{
+    std::string const input { "" };
+    ASSERT_THROW(jt::ColorHelpers::hex2rgb(input), std::invalid_argument);
+}
