@@ -15,8 +15,6 @@ void ContactCallbackPlayerGround::onBeginContact(b2Contact* contact)
     if (isPlayerFeetFixture(fa) || isPlayerFeetFixture(fb)) {
         m_numberOfFeetContacts++;
     }
-    //    std::cout << "start contact: " << m_numberOfFeetContacts << std::endl;
-
     p->setTouchesGround(m_numberOfFeetContacts >= 1);
 }
 

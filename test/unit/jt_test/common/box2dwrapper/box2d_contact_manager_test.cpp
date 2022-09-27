@@ -1,4 +1,4 @@
-#include <box2dwrapper/box_2d_contact_manager.hpp>
+#include <box2dwrapper/box2d_contact_manager.hpp>
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 

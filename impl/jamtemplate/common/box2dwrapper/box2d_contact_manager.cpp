@@ -1,4 +1,4 @@
-#include "box_2d_contact_manager.hpp"
+#include "box2d_contact_manager.hpp"
 #include <algorithm>
 #include <iterator>
 

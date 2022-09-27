@@ -30,7 +30,6 @@ void Player::doCreate()
     fixtureDef.isSensor = true;
     b2PolygonShape polygonShape;
     polygonShape.SetAsBox(3.0f, 0.2f, b2Vec2(0, 4), 0);
-    fixtureDef.isSensor = true;
     fixtureDef.shape = &polygonShape;
     b2Fixture* footSensorFixture = m_physicsObject->getB2Body()->CreateFixture(&fixtureDef);
     footSensorFixture->SetUserData((void*)std::uint64_t { 3U });

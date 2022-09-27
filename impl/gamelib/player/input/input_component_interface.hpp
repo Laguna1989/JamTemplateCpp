@@ -1,5 +1,5 @@
-#ifndef MYAWESOMEGAME_INPUT_COMPONENT_INTERFACE_HPP
-#define MYAWESOMEGAME_INPUT_COMPONENT_INTERFACE_HPP
+#ifndef JAMTEMPLATE_INPUT_COMPONENT_INTERFACE_HPP
+#define JAMTEMPLATE_INPUT_COMPONENT_INTERFACE_HPP
 
 #include <player/input/input_target_interface.hpp>
 
@@ -10,4 +10,4 @@ public:
     virtual void updateMovement(InputTargetInterface& target) = 0;
 };
 
-#endif // MYAWESOMEGAME_INPUT_COMPONENT_INTERFACE_HPP
+#endif // JAMTEMPLATE_INPUT_COMPONENT_INTERFACE_HPP

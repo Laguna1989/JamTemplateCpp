@@ -2,7 +2,7 @@
 #define JAMTEMPLATE_CONTACT_CALLBACK_PLAYER_GROUND_HPP
 
 #include "platform_player.hpp"
-#include <box2dwrapper/box_2d_contact_callback_interface.hpp>
+#include <box2dwrapper/box2d_contact_callback_interface.hpp>
 #include <Box2D/Dynamics/b2WorldCallbacks.h>
 #include <memory>
 
