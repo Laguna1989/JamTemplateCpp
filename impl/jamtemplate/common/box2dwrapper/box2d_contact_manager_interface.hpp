@@ -4,7 +4,7 @@
 #include <Box2D/Dynamics/b2WorldCallbacks.h>
 
 namespace jt {
-class Box2DContactManagerInterface : public Box2DContactCallbackRegistryInterface,
+class Box2DContactManagerInterface : public jt::Box2DContactCallbackRegistryInterface,
                                      public b2ContactListener { };
 } // namespace jt
 
