@@ -1,4 +1,5 @@
 #include "box2dwrapper/box2d_world_impl.hpp"
+#include <box2dwrapper/box2d_contact_manager.hpp>
 #include <conversions.hpp>
 #include <Box2D/Box2D.h>
 

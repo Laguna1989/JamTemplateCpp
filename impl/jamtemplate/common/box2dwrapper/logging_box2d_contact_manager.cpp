@@ -1,4 +1,5 @@
 #include "logging_box2d_contact_manager.hpp"
+#include <stdexcept>
 
 jt::LoggingBox2DContactManager::LoggingBox2DContactManager(
     std::shared_ptr<jt::Box2DContactManagerInterface> decoratee, jt::LoggerInterface& logger)
@@ -6,8 +7,11 @@ jt::LoggingBox2DContactManager::LoggingBox2DContactManager(
     , m_logger { logger }
 {
     if (m_decoratee == nullptr) {
-        m_logger.error(
+        m_logger.fatal(
             "LoggingBox2DContactManager instantiated with nullptr decoratee", { "jt", "box2d" });
+        throw std::invalid_argument {
+            "LoggingBox2DContactManager instantiated with nullptr decoratee"
+        };
     }
     m_logger.info("Box2DContactManager created", { "jt", "box2d" });
 }

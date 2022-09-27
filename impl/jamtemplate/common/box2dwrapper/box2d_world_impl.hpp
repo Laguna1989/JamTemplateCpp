@@ -1,7 +1,7 @@
 #ifndef JAMTEMPLATE_BOX2D_WORLD_IMPL_HPP
 #define JAMTEMPLATE_BOX2D_WORLD_IMPL_HPP
 
-#include <box2dwrapper/box2d_contact_manager.hpp>
+#include <box2dwrapper/box2d_contact_manager_interface.hpp>
 #include <box2dwrapper/box2d_world_interface.hpp>
 #include <vector.hpp>
 #include <Box2D/Dynamics/b2World.h>
