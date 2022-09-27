@@ -1,5 +1,5 @@
-#ifndef MYAWESOMEGAME_MOCK_LOG_TARGET_HPP
-#define MYAWESOMEGAME_MOCK_LOG_TARGET_HPP
+#ifndef JAMTEMPLATE_MOCK_LOG_TARGET_HPP
+#define JAMTEMPLATE_MOCK_LOG_TARGET_HPP
 
 #include <log/log_target_interface.hpp>
 #include <gmock/gmock.h>
@@ -10,4 +10,4 @@ public:
     MOCK_METHOD(void, setLogLevel, (LogLevel), (override));
 };
 
-#endif // MYAWESOMEGAME_MOCK_LOG_TARGET_HPP
+#endif // JAMTEMPLATE_MOCK_LOG_TARGET_HPP

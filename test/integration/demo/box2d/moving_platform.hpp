@@ -1,5 +1,5 @@
-#ifndef MYAWESOMEGAME_MOVING_PLATFORM_HPP
-#define MYAWESOMEGAME_MOVING_PLATFORM_HPP
+#ifndef JAMTEMPLATE_MOVING_PLATFORM_HPP
+#define JAMTEMPLATE_MOVING_PLATFORM_HPP
 
 #include "sprite.hpp"
 #include <box2dwrapper/box2d_object.hpp>
@@ -31,4 +31,4 @@ private:
     void doDraw() const override;
 };
 
-#endif // MYAWESOMEGAME_MOVING_PLATFORM_HPP
+#endif // JAMTEMPLATE_MOVING_PLATFORM_HPP

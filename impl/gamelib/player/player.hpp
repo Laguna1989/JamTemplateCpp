@@ -1,5 +1,5 @@
-#ifndef MYAWESOMEGAME_PLAYER_HPP
-#define MYAWESOMEGAME_PLAYER_HPP
+#ifndef JAMTEMPLATE_PLAYER_HPP
+#define JAMTEMPLATE_PLAYER_HPP
 
 #include <box2dwrapper/box2d_object.hpp>
 #include <game_object.hpp>
@@ -27,4 +27,4 @@ private:
     virtual void doDraw() const;
 };
 
-#endif // MYAWESOMEGAME_PLAYER_HPP
+#endif // JAMTEMPLATE_PLAYER_HPP
