@@ -1,6 +1,7 @@
 ﻿#include "state_box2d.hpp"
 #include <box2d/platform_player.hpp>
 #include <box2dwrapper/box2d_world_impl.hpp>
+#include <box2dwrapper/logging_box2d_contact_manager.hpp>
 #include <input/input_manager.hpp>
 #include <random/random.hpp>
 #include <state_select.hpp>
@@ -12,8 +13,11 @@ StatePlatformer::StatePlatformer(std::string const& levelName) { m_levelName = l
 
 void StatePlatformer::doInternalCreate()
 {
-    //    getGame()->gfx().camera().setZoom(4.0f);
-    m_world = std::make_shared<jt::Box2DWorldImpl>(jt::Vector2f { 0.0f, 400.0f });
+    auto contactManager = std::make_shared<jt::Box2DContactManager>();
+    auto loggingContactManager
+        = std::make_shared<jt::LoggingBox2DContactManager>(contactManager, getGame()->logger());
+    m_world = std::make_shared<jt::Box2DWorldImpl>(
+        jt::Vector2f { 0.0f, 400.0f }, loggingContactManager);
 
     loadLevel();
 

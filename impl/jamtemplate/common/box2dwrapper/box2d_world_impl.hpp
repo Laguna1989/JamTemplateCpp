@@ -1,8 +1,8 @@
 #ifndef JAMTEMPLATE_BOX2D_WORLD_IMPL_HPP
 #define JAMTEMPLATE_BOX2D_WORLD_IMPL_HPP
 
+#include <box2dwrapper/box2d_contact_manager.hpp>
 #include <box2dwrapper/box2d_world_interface.hpp>
-#include <box2dwrapper/box_2d_contact_manager.hpp>
 #include <vector.hpp>
 #include <Box2D/Dynamics/b2World.h>
 #include <memory>
@@ -23,7 +23,7 @@ public:
 
     void destroyJoint(b2Joint* joint) override;
 
-    Box2DContactCallbackManagerInterface& getContactManager() override;
+    Box2DContactCallbackRegistryInterface& getContactManager() override;
 
     void step(float elapsed, int velocityIterations, int positionIterations) override;
 

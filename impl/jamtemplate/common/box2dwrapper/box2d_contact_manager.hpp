@@ -1,7 +1,7 @@
 #ifndef JAMTEMPLATE_BOX_2_D_CONTACT_MANAGER_HPP
 #define JAMTEMPLATE_BOX_2_D_CONTACT_MANAGER_HPP
 
-#include <box2dwrapper/box_2d_contact_manager_interface.hpp>
+#include <box2dwrapper/box2d_contact_manager_interface.hpp>
 #include <cstddef>
 #include <map>
 #include <memory>

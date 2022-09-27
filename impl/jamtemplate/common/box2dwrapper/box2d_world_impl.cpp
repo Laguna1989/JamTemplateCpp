@@ -33,7 +33,7 @@ void jt::Box2DWorldImpl::step(float elapsed, int velocityIterations, int positio
     m_world->Step(elapsed, velocityIterations, positionIterations);
 }
 
-jt::Box2DContactCallbackManagerInterface& jt::Box2DWorldImpl::getContactManager()
+jt::Box2DContactCallbackRegistryInterface& jt::Box2DWorldImpl::getContactManager()
 {
     return *m_newContactManager;
 }

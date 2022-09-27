@@ -1,7 +1,7 @@
 #ifndef MYAWESOMEGAME_BOX_2D_CONTACT_MANAGER_INTERFACE_HPP
 #define MYAWESOMEGAME_BOX_2D_CONTACT_MANAGER_INTERFACE_HPP
 
-#include <box2dwrapper/box_2d_contact_callback_interface.hpp>
+#include <box2dwrapper/box2d_contact_callback_interface.hpp>
 #include <cstddef>
 #include <memory>
 #include <string>
@@ -9,9 +9,9 @@
 
 namespace jt {
 
-class Box2DContactCallbackManagerInterface {
+class Box2DContactCallbackRegistryInterface {
 public:
-    virtual ~Box2DContactCallbackManagerInterface() = default;
+    virtual ~Box2DContactCallbackRegistryInterface() = default;
 
     /// Get the number of registered callbacks.
     /// \return the number of registered callbacks

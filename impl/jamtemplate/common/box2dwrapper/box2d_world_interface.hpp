@@ -1,7 +1,7 @@
 ﻿#ifndef JAMTEMPLATE_BOX2DWRAPPER_HPP
 #define JAMTEMPLATE_BOX2DWRAPPER_HPP
 
-#include <box2dwrapper/box_2d_contact_callback_manager_interface.hpp>
+#include <box2dwrapper/box2d_contact_callback_registry_interface.hpp>
 #include <memory>
 
 class b2Body;
@@ -35,7 +35,7 @@ public:
 
     /// Get the ContactManager. This can be used to register/unregister contact callbacks.
     /// \return the ContactManager
-    virtual jt::Box2DContactCallbackManagerInterface& getContactManager() = 0;
+    virtual jt::Box2DContactCallbackRegistryInterface& getContactManager() = 0;
 
     /// Step physics simulation forward
     /// \param elapsed elapsed time in seconds
