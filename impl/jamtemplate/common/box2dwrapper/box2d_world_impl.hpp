@@ -14,11 +14,11 @@ class Box2DWorldImpl : public Box2DWorldInterface {
 public:
     explicit Box2DWorldImpl(jt::Vector2f const& gravity);
 
-    b2Body* createBody(const b2BodyDef* defintion) override;
+    b2Body* createBody(const b2BodyDef* definition) override;
 
     void destroyBody(b2Body* body) override;
 
-    b2Joint* createJoint(const b2JointDef* defintion) override;
+    b2Joint* createJoint(const b2JointDef* definition) override;
 
     void destroyJoint(b2Joint* joint) override;
 

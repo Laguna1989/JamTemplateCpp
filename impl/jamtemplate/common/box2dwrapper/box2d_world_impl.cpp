@@ -8,16 +8,16 @@ jt::Box2DWorldImpl::Box2DWorldImpl(jt::Vector2f const& gravity)
     m_world->SetContactListener(&m_contactManager);
 }
 
-b2Body* jt::Box2DWorldImpl::createBody(b2BodyDef const* defintion)
+b2Body* jt::Box2DWorldImpl::createBody(b2BodyDef const* definition)
 {
-    return m_world->CreateBody(defintion);
+    return m_world->CreateBody(definition);
 }
 
 void jt::Box2DWorldImpl::destroyBody(b2Body* body) { m_world->DestroyBody(body); }
 
-b2Joint* jt::Box2DWorldImpl::createJoint(b2JointDef const* defintion)
+b2Joint* jt::Box2DWorldImpl::createJoint(b2JointDef const* definition)
 {
-    return m_world->CreateJoint(defintion);
+    return m_world->CreateJoint(definition);
 }
 
 void jt::Box2DWorldImpl::destroyJoint(b2Joint* joint) { m_world->DestroyJoint(joint); }
