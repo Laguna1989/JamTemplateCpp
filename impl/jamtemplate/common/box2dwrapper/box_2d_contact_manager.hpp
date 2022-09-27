@@ -1,9 +1,7 @@
 #ifndef JAMTEMPLATE_BOX_2_D_CONTACT_MANAGER_HPP
 #define JAMTEMPLATE_BOX_2_D_CONTACT_MANAGER_HPP
 
-#include <box2dwrapper/box_2d_contact_callback_interface.hpp>
 #include <box2dwrapper/box_2d_contact_manager_interface.hpp>
-#include <Box2D/Box2D.h>
 #include <cstddef>
 #include <map>
 #include <memory>
@@ -11,7 +9,7 @@
 #include <vector>
 
 namespace jt {
-class Box2DContactManager : public b2ContactListener, public jt::Box2DContactManagerInterface {
+class Box2DContactManager : public jt::Box2DContactManagerInterface {
 public:
     std::size_t size() const override;
     void registerCallback(std::string const& callbackIdentifier,

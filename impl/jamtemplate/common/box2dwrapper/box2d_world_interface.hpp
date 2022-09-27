@@ -1,7 +1,7 @@
 ﻿#ifndef JAMTEMPLATE_BOX2DWRAPPER_HPP
 #define JAMTEMPLATE_BOX2DWRAPPER_HPP
 
-#include <box2dwrapper/box_2d_contact_manager.hpp>
+#include <box2dwrapper/box_2d_contact_callback_manager_interface.hpp>
 #include <memory>
 
 class b2Body;
@@ -33,11 +33,9 @@ public:
     /// \param joint Pointer to the joint to be destroyed
     virtual void destroyJoint(b2Joint* joint) = 0;
 
-    // TODO make this return an Interface and use DI to allow decorator usage
-
     /// Get the ContactManager. This can be used to register/unregister contact callbacks.
     /// \return the ContactManager
-    virtual jt::Box2DContactManager& getContactManager() = 0;
+    virtual jt::Box2DContactCallbackManagerInterface& getContactManager() = 0;
 
     /// Step physics simulation forward
     /// \param elapsed elapsed time in seconds

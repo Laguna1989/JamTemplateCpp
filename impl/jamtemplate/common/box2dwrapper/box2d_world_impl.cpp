@@ -2,10 +2,16 @@
 #include <conversions.hpp>
 #include <Box2D/Box2D.h>
 
-jt::Box2DWorldImpl::Box2DWorldImpl(jt::Vector2f const& gravity)
+jt::Box2DWorldImpl::Box2DWorldImpl(
+    jt::Vector2f const& gravity, std::shared_ptr<jt::Box2DContactManagerInterface> contactManager)
     : m_world { std::make_unique<b2World>(jt::Conversion::vec(gravity)) }
+    , m_newContactManager { contactManager }
 {
-    m_world->SetContactListener(&m_contactManager);
+    if (m_newContactManager == nullptr) {
+        m_newContactManager = std::make_shared<jt::Box2DContactManager>();
+    }
+
+    m_world->SetContactListener(m_newContactManager.get());
 }
 
 b2Body* jt::Box2DWorldImpl::createBody(b2BodyDef const* definition)
@@ -27,4 +33,7 @@ void jt::Box2DWorldImpl::step(float elapsed, int velocityIterations, int positio
     m_world->Step(elapsed, velocityIterations, positionIterations);
 }
 
-jt::Box2DContactManager& jt::Box2DWorldImpl::getContactManager() { return m_contactManager; }
+jt::Box2DContactCallbackManagerInterface& jt::Box2DWorldImpl::getContactManager()
+{
+    return *m_newContactManager;
+}

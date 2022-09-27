@@ -12,7 +12,8 @@ namespace jt {
 /// Implementation of the Box2DWorldInterface
 class Box2DWorldImpl : public Box2DWorldInterface {
 public:
-    explicit Box2DWorldImpl(jt::Vector2f const& gravity);
+    Box2DWorldImpl(jt::Vector2f const& gravity,
+        std::shared_ptr<jt::Box2DContactManagerInterface> contactManager = nullptr);
 
     b2Body* createBody(const b2BodyDef* definition) override;
 
@@ -22,13 +23,13 @@ public:
 
     void destroyJoint(b2Joint* joint) override;
 
-    Box2DContactManager& getContactManager() override;
+    Box2DContactCallbackManagerInterface& getContactManager() override;
 
     void step(float elapsed, int velocityIterations, int positionIterations) override;
 
 private:
     std::unique_ptr<b2World> m_world { nullptr };
-    jt::Box2DContactManager m_contactManager;
+    std::shared_ptr<jt::Box2DContactManagerInterface> m_newContactManager { nullptr };
 };
 
 } // namespace jt
