@@ -1,5 +1,6 @@
 ﻿#include "state_box2d.hpp"
 #include <box2d/platform_player.hpp>
+#include <box2dwrapper/box2d_contact_manager.hpp>
 #include <box2dwrapper/box2d_world_impl.hpp>
 #include <box2dwrapper/logging_box2d_contact_manager.hpp>
 #include <input/input_manager.hpp>

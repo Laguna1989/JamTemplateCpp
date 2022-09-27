@@ -1,5 +1,5 @@
-#ifndef JAMTEMPLATE_BOX_2_D_CONTACT_MANAGER_HPP
-#define JAMTEMPLATE_BOX_2_D_CONTACT_MANAGER_HPP
+#ifndef JAMTEMPLATE_BOX2D_CONTACT_MANAGER_HPP
+#define JAMTEMPLATE_BOX2D_CONTACT_MANAGER_HPP
 
 #include <box2dwrapper/box2d_contact_manager_interface.hpp>
 #include <cstddef>
@@ -31,4 +31,4 @@ private:
     std::map<std::string, std::shared_ptr<Box2DContactCallbackInterface>> m_callbacks;
 };
 } // namespace jt
-#endif // JAMTEMPLATE_BOX_2_D_CONTACT_MANAGER_HPP
+#endif // JAMTEMPLATE_BOX2D_CONTACT_MANAGER_HPP
