@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1664085899866,
+  "lastUpdate": 1664303510825,
   "repoUrl": "https://github.com/Laguna1989/JamTemplateCpp",
   "entries": {
     "Benchmark": [
@@ -9720,6 +9720,84 @@ window.BENCHMARK_DATA = {
             "value": 3.087994433628231,
             "unit": "ms/iter",
             "extra": "iterations: 226\ncpu: 3.0878057522123865 ms\nthreads: 1"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "977116+Thunraz@users.noreply.github.com",
+            "name": "Julian Dinges",
+            "username": "Thunraz"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "ebb7e89fb484b94309af6264569450a29315cc51",
+          "message": "Refactor Box2D ContactManager (#260)\n\n* Add interface for box2dcontactcallback\r\n\r\n* Add new interface Box2DContactCallbackManager\r\n\r\n* Implement logging contact manager\r\n\r\n* Add tests for LoggingBox2DContactManager\r\n\r\n* Replace MYAWESOMEGAME include guard\r\n\r\n* Rename file\r\n\r\n* Fix include guard\r\n\r\n* Fix includes\r\n\r\nCo-authored-by: Simon Weis <laguna_1989@gmx.net>",
+          "timestamp": "2022-09-27T20:29:04+02:00",
+          "tree_id": "76a35c47600358771b51bf0677c554af97ba74e4",
+          "url": "https://github.com/Laguna1989/JamTemplateCpp/commit/ebb7e89fb484b94309af6264569450a29315cc51"
+        },
+        "date": 1664303510091,
+        "tool": "googlecpp",
+        "benches": [
+          {
+            "name": "BM_UpdateDrawablePositions",
+            "value": 2.9628003417719464,
+            "unit": "ms/iter",
+            "extra": "iterations: 237\ncpu: 2.952907594936709 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GetAllCommands",
+            "value": 0.3089854059056774,
+            "unit": "ms/iter",
+            "extra": "iterations: 2269\ncpu: 0.30896289114147213 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_LoggerLogWithoutTarget",
+            "value": 0.748641380748613,
+            "unit": "ms/iter",
+            "extra": "iterations: 935\ncpu: 0.7486165775401074 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_LoggerLogWithCoutTargetSetToOff",
+            "value": 0.7497339699892358,
+            "unit": "ms/iter",
+            "extra": "iterations: 933\ncpu: 0.749691961414791 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_UpdateObjectGroup",
+            "value": 0.060929264027839665,
+            "unit": "ms/iter",
+            "extra": "iterations: 11495\ncpu: 0.06092640278381906 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_UpdateSpatialObjectGrid",
+            "value": 0.328460013908187,
+            "unit": "ms/iter",
+            "extra": "iterations: 2157\ncpu: 0.32841877607788594 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_StartGame",
+            "value": 0.0029455280732586945,
+            "unit": "ms/iter",
+            "extra": "iterations: 237842\ncpu: 0.0029404554283936376 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_RefineTilemapCollisions",
+            "value": 0.24063952321981008,
+            "unit": "ms/iter",
+            "extra": "iterations: 2907\ncpu: 0.24061898864809095 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GamestateWithTweeningShapes",
+            "value": 3.08054516740102,
+            "unit": "ms/iter",
+            "extra": "iterations: 227\ncpu: 3.0803312775330416 ms\nthreads: 1"
           }
         ]
       }
