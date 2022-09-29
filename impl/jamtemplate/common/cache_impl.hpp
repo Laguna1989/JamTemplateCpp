@@ -6,10 +6,11 @@
 namespace jt {
 class CacheImpl : public jt::CacheInterface {
 public:
-    jt::TilemapCache& getTilemapCache() override;
+    explicit CacheImpl(std::unique_ptr<jt::TilemapCacheInterface> tilemapCache = nullptr);
+    jt::TilemapCacheInterface& getTilemapCache() override;
 
 private:
-    jt::TilemapCache m_tilemapCache;
+    std::unique_ptr<jt::TilemapCacheInterface> m_tilemapCache { nullptr };
 };
 
 } // namespace jt

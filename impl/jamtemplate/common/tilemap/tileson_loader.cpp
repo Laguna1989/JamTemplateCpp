@@ -32,7 +32,7 @@ jt::tilemap::TileInfo parseSingleTile(tson::TileObject& tile)
     return jt::tilemap::TileInfo { pos, size, id };
 }
 
-std::vector<std::shared_ptr<jt::Sprite>> loadTileSetSprites(std::unique_ptr<tson::Map>& map,
+std::vector<std::shared_ptr<jt::Sprite>> loadTileSetSprites(std::shared_ptr<tson::Map> map,
     jt::TextureManagerInterface& textureManager, std::string const& tilesetPathPrefix = "assets/")
 {
     std::vector<std::shared_ptr<jt::Sprite>> tileSetSprites;
@@ -61,7 +61,7 @@ std::vector<std::shared_ptr<jt::Sprite>> loadTileSetSprites(std::unique_ptr<tson
 }
 
 std::vector<jt::tilemap::TileInfo> loadTiles(
-    std::string const& layerName, std::unique_ptr<tson::Map>& map)
+    std::string const& layerName, std::shared_ptr<tson::Map> map)
 {
     std::vector<jt::tilemap::TileInfo> tiles;
     for (auto& layer : map->getLayers()) {
@@ -80,7 +80,8 @@ std::vector<jt::tilemap::TileInfo> loadTiles(
 
 } // namespace
 
-jt::tilemap::TilesonLoader::TilesonLoader(jt::TilemapCache& cache, std::string const& fileName)
+jt::tilemap::TilesonLoader::TilesonLoader(
+    jt::TilemapCacheInterface& cache, std::string const& fileName)
     : m_tilemapCache { cache }
     , m_fileName { fileName }
 {
@@ -183,7 +184,7 @@ std::tuple<std::vector<jt::tilemap::TileInfo>, std::vector<std::shared_ptr<jt::S
 jt::tilemap::TilesonLoader::loadTilesFromLayer(std::string const& layerName,
     jt::TextureManagerInterface& textureManager, std::string const& tilesetPathPrefix)
 {
-    auto& map = m_tilemapCache.getMap(m_fileName);
+    auto map = m_tilemapCache.getMap(m_fileName);
 
     return std::tuple<std::vector<TileInfo>, std::vector<std::shared_ptr<jt::Sprite>>>(
         loadTiles(layerName, map), loadTileSetSprites(map, textureManager, tilesetPathPrefix));

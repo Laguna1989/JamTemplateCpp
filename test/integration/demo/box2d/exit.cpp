@@ -8,6 +8,7 @@ void Exit::doCreate()
 {
     m_sprite
         = std::make_shared<jt::Sprite>("assets/test/integration/demo/exit.png", textureManager());
+
     m_sprite->setPosition(m_info.position);
 }
 

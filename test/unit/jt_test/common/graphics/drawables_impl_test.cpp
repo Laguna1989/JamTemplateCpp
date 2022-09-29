@@ -330,14 +330,83 @@ TEST_P(DrawableImplTestFixture, GetSetBlendModeAlpha)
     ASSERT_EQ(drawable->getBlendMode(), expectedBlendMode);
 }
 
+TEST_P(DrawableImplTestFixture, DrawWithBlendModeMul)
+{
+    auto const expectedBlendMode = jt::BlendMode::MUL;
+    drawable->setBlendMode(expectedBlendMode);
+    drawable->update(0.0f);
+    drawable->draw(getRenderTarget());
+}
+
+TEST_P(DrawableImplTestFixture, DrawWithBlendModeAdd)
+{
+    auto const expectedBlendMode = jt::BlendMode::ADD;
+    drawable->setBlendMode(expectedBlendMode);
+    drawable->update(0.0f);
+    drawable->draw(getRenderTarget());
+}
+
+TEST_P(DrawableImplTestFixture, DrawWithBlendModeAlpha)
+{
+    auto const expectedBlendMode = jt::BlendMode::ALPHA;
+    drawable->setBlendMode(expectedBlendMode);
+    drawable->update(0.0f);
+    drawable->draw(getRenderTarget());
+}
+
 TEST_P(DrawableImplTestFixture, SetEmptyCustomShaderDoesNotThrow)
 {
     ASSERT_NO_THROW(drawable->setCustomShader("", ""));
 }
 
-TEST_P(DrawableImplTestFixture, SetValidCustomShaderDoesNotThrow)
+TEST_P(DrawableImplTestFixture, SetValidCustomFragmentShaderDoesNotThrow)
 {
     ASSERT_NO_THROW(drawable->setCustomShader("", R"(uniform sampler2D texture;
+uniform float pixel_threshold;
+
+void main()
+{
+    float factor = 1.0 / (pixel_threshold + 0.01);
+    vec2 pos = floor(gl_TexCoord[0].xy * factor + 0.5) / factor;
+    gl_FragColor = texture2D(texture, pos) * gl_Color;
+}
+)"));
+    drawable->update(0.01f);
+    drawable->draw(getRenderTarget());
+}
+
+TEST_P(DrawableImplTestFixture, SetValidCustomVertexShaderDoesNotThrow)
+{
+    ASSERT_NO_THROW(drawable->setCustomShader(R"(void main()
+{
+    // transform the vertex position
+    gl_Position = gl_ModelViewProjectionMatrix * gl_Vertex;
+
+    // transform the texture coordinates
+    gl_TexCoord[0] = gl_TextureMatrix[0] * gl_MultiTexCoord0;
+
+    // forward the vertex color
+    gl_FrontColor = gl_Color;
+})",
+        ""));
+    drawable->update(0.01f);
+    drawable->draw(getRenderTarget());
+}
+
+TEST_P(DrawableImplTestFixture, SetValidCustomFragmentAndVertexShaderDoesNotThrow)
+{
+    ASSERT_NO_THROW(drawable->setCustomShader(R"(void main()
+{
+    // transform the vertex position
+    gl_Position = gl_ModelViewProjectionMatrix * gl_Vertex;
+
+    // transform the texture coordinates
+    gl_TexCoord[0] = gl_TextureMatrix[0] * gl_MultiTexCoord0;
+
+    // forward the vertex color
+    gl_FrontColor = gl_Color;
+})",
+        R"(uniform sampler2D texture;
 uniform float pixel_threshold;
 
 void main()

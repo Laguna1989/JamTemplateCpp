@@ -1,7 +1,7 @@
 #ifndef JAMTEMPLATE_CACHE_INTERFACE_HPP
 #define JAMTEMPLATE_CACHE_INTERFACE_HPP
 
-#include <tilemap/tilemap_cache.hpp>
+#include <tilemap/tilemap_cache_interface.hpp>
 
 namespace jt {
 class CacheInterface {
@@ -12,7 +12,7 @@ public:
 
     /// Get the tilemap cache
     /// \return
-    virtual jt::TilemapCache& getTilemapCache() = 0;
+    virtual jt::TilemapCacheInterface& getTilemapCache() = 0;
 
     // TODO expand to other cached items
 };

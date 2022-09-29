@@ -102,8 +102,6 @@ public:
     std::shared_ptr<jt::DrawableInterface> createDrawable(
         jt::TextureManagerInterface& textureManager) override
     {
-        //        jt::tilemap::TilesonLoader
-        //        loader("assets/test/unit/jt_test/tileson_test_small.json");
         auto t = std::make_shared<jt::tilemap::TileLayer>(
             TileMapLoaderCache::getLoader()->loadTilesFromLayer(
                 "ground", textureManager, "assets/test/unit/jt_test/"));
