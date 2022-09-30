@@ -68,6 +68,11 @@ void StatePlatformer::doInternalUpdate(float const elapsed)
         getGame()->stateManager().switchState(
             std::make_shared<StatePlatformer>("platformer_0_3.json"));
     }
+    if (getGame()->input().keyboard()->justPressed(jt::KeyCode::F5)) {
+
+        getGame()->stateManager().switchState(
+            std::make_shared<StatePlatformer>("platformer_0_5.json"));
+    }
 }
 
 void StatePlatformer::endGame()
