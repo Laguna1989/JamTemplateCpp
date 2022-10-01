@@ -3,6 +3,7 @@
 
 #include <box2d/bee.hpp>
 #include <box2d/exit.hpp>
+#include <box2d/killbox.hpp>
 #include <box2d/moving_platform.hpp>
 #include <box2dwrapper/box2d_object.hpp>
 #include <box2dwrapper/box2d_world_interface.hpp>
@@ -41,8 +42,7 @@ private:
     // TODO create enemy interface/base class
     std::vector<std::shared_ptr<Bee>> m_bees {};
 
-    // TODO switch to own killbox class that draws the spikes on its own
-    std::vector<jt::tilemap::InfoRect> m_killboxes {};
+    std::vector<std::shared_ptr<Killbox>> m_killboxes {};
     std::vector<Exit> m_exits {};
     jt::Vector2f m_levelSizeInPixel { 0.0f, 0.0f };
 

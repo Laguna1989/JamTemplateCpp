@@ -86,7 +86,7 @@ void Player::updateAnimation(float elapsed)
     } else {
         m_isMoving = false;
     }
-    auto const v = m_horizontalMovement ? abs(m_physicsObject->getVelocity().x) / 80.0f : 0.0f;
+    auto const v = m_horizontalMovement ? abs(m_physicsObject->getVelocity().x) / 90.0f : 0.0f;
     m_animation->setAnimationSpeedFactor(v);
     m_animation->update(elapsed);
 
@@ -105,7 +105,7 @@ void Player::updateAnimation(float elapsed)
 void Player::handleMovement(float const elapsed)
 {
     auto const horizontalAcceleration = 15000.0f;
-    auto const maxHorizontalVelocity = 80.0f;
+    auto const maxHorizontalVelocity = 90.0f;
     auto const horizontalDampening = 130.0f;
 
     auto const jumpInitialVelocity = -140.0f;

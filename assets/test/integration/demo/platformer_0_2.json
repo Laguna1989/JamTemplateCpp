@@ -156,6 +156,28 @@
                  "width":8,
                  "x":152,
                  "y":216
+                }, 
+                {
+                 "class":"",
+                 "height":8,
+                 "id":10,
+                 "name":"bee",
+                 "properties":[
+                        {
+                         "name":"distance_in_tiles",
+                         "type":"int",
+                         "value":5
+                        }, 
+                        {
+                         "name":"movement",
+                         "type":"string",
+                         "value":"vertical"
+                        }],
+                 "rotation":0,
+                 "visible":true,
+                 "width":8,
+                 "x":224,
+                 "y":144
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -164,7 +186,7 @@
          "y":0
         }],
  "nextlayerid":5,
- "nextobjectid":10,
+ "nextobjectid":11,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.9.0",

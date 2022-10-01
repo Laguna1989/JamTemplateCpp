@@ -131,24 +131,37 @@ void MovingPlatform::doUpdate(float const elapsed)
             }
         }
     }
+
+    if (m_linkedKillbox) {
+        m_linkedKillbox->setPosition(m_physicsObject->getPosition() + m_linkedKillboxOffset);
+    }
 }
 
 void MovingPlatform::doDraw() const
 {
-    m_spriteL->setPosition(m_physicsObject->getPosition());
-    m_spriteL->update(0.0f);
-    m_spriteL->draw(renderTarget());
+    auto numberOfMiddlePartsY = static_cast<int>(m_platformSize.y) / 8;
+    for (int j = 0; j != numberOfMiddlePartsY; ++j) {
+        m_spriteL->setPosition(m_physicsObject->getPosition() + jt::Vector2f { 0.0f, j * 8.0f });
+        m_spriteL->update(0.0f);
+        m_spriteL->draw(renderTarget());
 
-    auto numberOfMiddleParts = static_cast<int>(m_platformSize.x) / 8 - 2;
-    for (int i = 0; i != numberOfMiddleParts; ++i) {
-        m_spriteM->setPosition(
-            m_physicsObject->getPosition() + jt::Vector2f { (i + 1) * 8.0f, 0.0f });
-        m_spriteM->update(0.0f);
-        m_spriteM->draw(renderTarget());
+        auto numberOfMiddlePartsX = static_cast<int>(m_platformSize.x) / 8 - 2;
+
+        for (int i = 0; i != numberOfMiddlePartsX; ++i) {
+            m_spriteM->setPosition(
+                m_physicsObject->getPosition() + jt::Vector2f { (i + 1) * 8.0f, j * 8.0f });
+            m_spriteM->update(0.0f);
+            m_spriteM->draw(renderTarget());
+        }
+        m_spriteR->setPosition(
+            m_physicsObject->getPosition() + jt::Vector2f { m_platformSize.x - 8, j * 8.0f });
+        m_spriteR->update(0.0f);
+        m_spriteR->draw(renderTarget());
     }
+}
 
-    m_spriteR->setPosition(
-        m_physicsObject->getPosition() + jt::Vector2f { m_platformSize.x - 8, 0.0f });
-    m_spriteR->update(0.0f);
-    m_spriteR->draw(renderTarget());
+void MovingPlatform::setLinkedKillbox(std::shared_ptr<Killbox> kb)
+{
+    m_linkedKillbox = kb;
+    m_linkedKillboxOffset = kb->getPosition() - m_positions[0];
 }

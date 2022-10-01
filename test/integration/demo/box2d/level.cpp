@@ -1,5 +1,6 @@
 #include "level.hpp"
 #include <box2d/enemy_movement_horizontal.hpp>
+#include <box2d/enemy_movement_vertical.hpp>
 #include <game_interface.hpp>
 #include <math_helper.hpp>
 #include <strutils.hpp>
@@ -35,6 +36,9 @@ void Level::doCreate()
             if (enemy.properties.strings.at("movement") == "horizontal") {
                 movement = std::make_shared<EnemyMovementHorizontal>(enemy.position.x,
                     enemy.position.x + enemy.properties.ints.at("distance_in_tiles") * 8.0f);
+            } else if (enemy.properties.strings.at("movement") == "vertical") {
+                movement = std::make_shared<EnemyMovementVertical>(enemy.position.y,
+                    enemy.position.y + enemy.properties.ints.at("distance_in_tiles") * 8.0f);
             }
             auto bee = std::make_shared<Bee>(m_world.lock(), enemy.position, movement);
             bee->setGameInstance(getGame());
@@ -70,6 +74,23 @@ void Level::loadMovingPlatforms(jt::tilemap::TilesonLoader& loader)
             }
             auto platform = std::make_shared<MovingPlatform>(m_world.lock(), p.size,
                 currentPlatformPositions, p.properties.floats.at("velocity"), timeoffset);
+            std::string linkedKillbox { "" };
+            if (p.properties.strings.count("linked_killbox") == 1) {
+                linkedKillbox = p.properties.strings.at("linked_killbox");
+            }
+            if (!linkedKillbox.empty()) {
+                std::shared_ptr<Killbox> ptr { nullptr };
+                for (auto kb : m_killboxes) {
+                    if (kb->getName() == linkedKillbox) {
+                        ptr = kb;
+                        break;
+                    }
+                }
+
+                if (ptr != nullptr) {
+                    platform->setLinkedKillbox(ptr);
+                }
+            }
             platform->setGameInstance(getGame());
             platform->create();
             m_movingPlatforms.push_back(platform);
@@ -85,7 +106,19 @@ void Level::loadLevelSize(jt::tilemap::TilesonLoader const& loader)
 
 void Level::loadLevelKillboxes(jt::tilemap::TilesonLoader& loader)
 {
-    m_killboxes = loader.loadObjectsFromLayer("killboxes");
+    auto killboxInfos = loader.loadObjectsFromLayer("killboxes");
+    for (auto const& i : killboxInfos) {
+        std::string name { i.name };
+        std::string type { "" };
+        if (i.properties.strings.count("type") == 1) {
+            type = i.properties.strings.at("type");
+        }
+        auto kb = std::make_shared<Killbox>(
+            jt::Rectf { i.position.x, i.position.y, i.size.x, i.size.y }, name, type);
+        kb->setGameInstance(getGame());
+        kb->create();
+        m_killboxes.push_back(kb);
+    }
 }
 
 void Level::loadLevelCollisions(jt::tilemap::TilesonLoader& loader)
@@ -151,6 +184,9 @@ void Level::doUpdate(float const elapsed)
     for (auto& b : m_bees) {
         b->update(elapsed);
     }
+    for (auto& kb : m_killboxes) {
+        kb->update(elapsed);
+    }
 }
 
 void Level::doDraw() const
@@ -166,6 +202,9 @@ void Level::doDraw() const
     for (auto const& b : m_bees) {
         b->draw();
     }
+    for (auto const& kb : m_killboxes) {
+        kb->draw();
+    }
 }
 
 jt::Vector2f Level::getPlayerStart() const { return m_playerStart; }
@@ -173,13 +212,8 @@ jt::Vector2f Level::getPlayerStart() const { return m_playerStart; }
 void Level::checkIfPlayerIsInKillbox(
     jt::Vector2f const& playerPosition, std::function<void(void)> callback) const
 {
-    // TODO move check to separate Killbox class
     for (auto const& kb : m_killboxes) {
-        jt::Rectf const killboxRect { kb.position.x, kb.position.y, kb.size.x, kb.size.y };
-        if (jt::MathHelper::checkIsIn(killboxRect, playerPosition)) {
-            callback();
-            break;
-        }
+        kb->checkIfPlayerIsInKillbox(playerPosition, callback);
     }
 }
 

@@ -70,15 +70,21 @@ void StatePlatformer::doInternalUpdate(float const elapsed)
         getGame()->stateManager().switchState(std::make_shared<StateSelect>());
     }
 
+    if (getGame()->input().keyboard()->justPressed(jt::KeyCode::F2)) {
+        getGame()->stateManager().switchState(
+            std::make_shared<StatePlatformer>("platformer_0_2.json"));
+    }
     if (getGame()->input().keyboard()->justPressed(jt::KeyCode::F3)) {
-
         getGame()->stateManager().switchState(
             std::make_shared<StatePlatformer>("platformer_0_3.json"));
     }
     if (getGame()->input().keyboard()->justPressed(jt::KeyCode::F5)) {
-
         getGame()->stateManager().switchState(
             std::make_shared<StatePlatformer>("platformer_0_5.json"));
+    }
+    if (getGame()->input().keyboard()->justPressed(jt::KeyCode::F6)) {
+        getGame()->stateManager().switchState(
+            std::make_shared<StatePlatformer>("platformer_0_6.json"));
     }
 }
 
@@ -97,7 +103,6 @@ void StatePlatformer::handleCameraScrolling(float const elapsed)
 
     float const rightMargin = 150.0f;
     float const leftMargin = 150.0f;
-
     float const scrollSpeed = 60.0f;
     auto& cam = getGame()->gfx().camera();
 
