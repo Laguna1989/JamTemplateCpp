@@ -51,11 +51,3 @@ TEST(StateManagerTest, SetGetTransition)
     stateManager.setTransition(transition);
     ASSERT_EQ(stateManager.getTransition(), transition);
 }
-
-TEST(StateManagerTest, Draw)
-{
-    jt::StateManager stateManager { std::make_shared<MockState>() };
-    auto game = std::make_shared<MockGame>();
-    stateManager.update(game, 0.0f);
-    stateManager.draw(getRenderTarget());
-}
