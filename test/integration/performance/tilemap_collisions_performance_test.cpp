@@ -1,3 +1,4 @@
+#include <tilemap/tilemap_cache.hpp>
 #include <tilemap/tilemap_collisions.hpp>
 #include <tilemap/tileson_loader.hpp>
 #include <benchmark/benchmark.h>
