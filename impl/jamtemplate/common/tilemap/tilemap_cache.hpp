@@ -1,15 +1,15 @@
 #ifndef JAMTEMPLATE_TILEMAP_CACHE_HPP
 #define JAMTEMPLATE_TILEMAP_CACHE_HPP
 
-#include <tileson.h>
+#include <tilemap/tilemap_cache_interface.hpp>
 
 namespace jt {
-class TilemapCache {
+class TilemapCache : public jt::TilemapCacheInterface {
 public:
-    std::unique_ptr<tson::Map>& getMap(std::string const& fileName) const;
+    std::shared_ptr<tson::Map> getMap(std::string const& fileName) const override;
 
 private:
-    mutable std::map<std::string, std::unique_ptr<tson::Map>> m_maps;
+    mutable std::map<std::string, std::shared_ptr<tson::Map>> m_maps;
 };
 } // namespace jt
 

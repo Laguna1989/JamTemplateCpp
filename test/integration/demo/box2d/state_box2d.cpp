@@ -23,9 +23,13 @@ void StatePlatformer::doInternalCreate()
     loadLevel();
 
     CreatePlayer();
-    auto playerContactListener = std::make_shared<ContactCallbackPlayerGround>();
-    playerContactListener->setPlayer(m_player);
-    m_world->getContactManager().registerCallback("player_ground", playerContactListener);
+    auto playerGroundContactListener = std::make_shared<ContactCallbackPlayerGround>();
+    playerGroundContactListener->setPlayer(m_player);
+    m_world->getContactManager().registerCallback("player_ground", playerGroundContactListener);
+
+    auto playerEnemyContactListener = std::make_shared<ContactCallbackPlayerEnemy>();
+    playerEnemyContactListener->setPlayer(m_player);
+    m_world->getContactManager().registerCallback("player_enemy", playerEnemyContactListener);
 
     m_vignette = std::make_shared<jt::Vignette>(jt::Vector2f { 400.0f, 300.0f });
     add(m_vignette);
@@ -45,6 +49,9 @@ void StatePlatformer::doInternalUpdate(float const elapsed)
         std::int32_t const positionIterations = 20;
         m_world->step(elapsed, velocityIterations, positionIterations);
 
+        if (!m_player->isAlive()) {
+            endGame();
+        }
         m_level->checkIfPlayerIsInKillbox(m_player->getPosition(), [this]() { endGame(); });
         m_level->checkIfPlayerIsInExit(
             m_player->getPosition(), [this](std::string const& newLevelName) {
@@ -63,10 +70,21 @@ void StatePlatformer::doInternalUpdate(float const elapsed)
         getGame()->stateManager().switchState(std::make_shared<StateSelect>());
     }
 
+    if (getGame()->input().keyboard()->justPressed(jt::KeyCode::F2)) {
+        getGame()->stateManager().switchState(
+            std::make_shared<StatePlatformer>("platformer_0_2.json"));
+    }
     if (getGame()->input().keyboard()->justPressed(jt::KeyCode::F3)) {
-
         getGame()->stateManager().switchState(
             std::make_shared<StatePlatformer>("platformer_0_3.json"));
+    }
+    if (getGame()->input().keyboard()->justPressed(jt::KeyCode::F5)) {
+        getGame()->stateManager().switchState(
+            std::make_shared<StatePlatformer>("platformer_0_5.json"));
+    }
+    if (getGame()->input().keyboard()->justPressed(jt::KeyCode::F6)) {
+        getGame()->stateManager().switchState(
+            std::make_shared<StatePlatformer>("platformer_0_6.json"));
     }
 }
 
@@ -85,7 +103,6 @@ void StatePlatformer::handleCameraScrolling(float const elapsed)
 
     float const rightMargin = 150.0f;
     float const leftMargin = 150.0f;
-
     float const scrollSpeed = 60.0f;
     auto& cam = getGame()->gfx().camera();
 

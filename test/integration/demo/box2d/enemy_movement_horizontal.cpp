@@ -4,6 +4,9 @@ EnemyMovementHorizontal::EnemyMovementHorizontal(float minX, float maxX)
 {
     m_xMin = minX;
     m_xMax = maxX;
+    if (m_xMin > m_xMax) {
+        std::swap(m_xMin, m_xMax);
+    }
 }
 
 void EnemyMovementHorizontal::update(float elapsed, std::shared_ptr<jt::Box2DObject> obj)

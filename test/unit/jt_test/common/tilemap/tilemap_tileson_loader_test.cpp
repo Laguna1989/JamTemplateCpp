@@ -1,5 +1,6 @@
 #include <backend_setup.hpp>
 #include <texture_manager_impl.hpp>
+#include <tilemap/tilemap_cache.hpp>
 #include <tilemap/tileson_loader.hpp>
 #include <gtest/gtest.h>
 

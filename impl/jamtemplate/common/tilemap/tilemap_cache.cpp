@@ -1,7 +1,7 @@
 #include "tilemap_cache.hpp"
 #include <iostream>
 
-std::unique_ptr<tson::Map>& jt::TilemapCache::getMap(std::string const& fileName) const
+std::shared_ptr<tson::Map> jt::TilemapCache::getMap(std::string const& fileName) const
 {
     if (m_maps.count(fileName) == 0) {
         tson::Tileson parser;

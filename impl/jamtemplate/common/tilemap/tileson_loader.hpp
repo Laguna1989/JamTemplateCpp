@@ -7,7 +7,7 @@
 #include <tilemap/info_rect.hpp>
 #include <tilemap/tile_info.hpp>
 #include <tilemap/tile_node.hpp>
-#include <tilemap/tilemap_cache.hpp>
+#include <tilemap/tilemap_cache_interface.hpp>
 #include <tilemap/tilemap_collisions.hpp>
 #include <memory>
 #include <tuple>
@@ -20,7 +20,7 @@ public:
     /// Tileson loader Constructor
     /// \param cache the cache to be used (to avoid duplicate loading of the same json
     /// \param fileName the filename of the json file to be loaded
-    TilesonLoader(jt::TilemapCache& cache, std::string const& fileName);
+    TilesonLoader(jt::TilemapCacheInterface& cache, std::string const& fileName);
 
     /// Load Objects from layer. Can directly be used to construct an ObjectLayer.
     /// \param layerName the name of the object layer
@@ -62,7 +62,7 @@ public:
     jt::Vector2u getMapSizeInTiles() const;
 
 private:
-    TilemapCache& m_tilemapCache;
+    TilemapCacheInterface& m_tilemapCache;
     std::string m_fileName;
 };
 

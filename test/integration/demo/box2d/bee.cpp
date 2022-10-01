@@ -1,4 +1,5 @@
 #include "bee.hpp"
+#include <box2d/user_data_entries.hpp>
 #include <Box2D/Box2D.h>
 
 Bee::Bee(std::shared_ptr<jt::Box2DWorldInterface> world, jt::Vector2f const& position,
@@ -8,6 +9,7 @@ Bee::Bee(std::shared_ptr<jt::Box2DWorldInterface> world, jt::Vector2f const& pos
         throw std::invalid_argument { "invalid movement pattern" };
     }
     m_position = position;
+
     m_movement = movement;
 
     b2BodyDef bodyDef;
@@ -24,8 +26,9 @@ void Bee::doCreate()
     circleCollider.m_radius = 3.5f;
     circleCollider.m_p.Set(3.5f, 3.5f);
     fixtureDef.shape = &circleCollider;
-    m_physicsObject->getB2Body()->CreateFixture(&fixtureDef);
+    auto collider = m_physicsObject->getB2Body()->CreateFixture(&fixtureDef);
     m_physicsObject->setPosition(m_position);
+    collider->SetUserData((void*)g_userDataEnemyID);
 
     m_anim = std::make_shared<jt::Animation>();
     m_anim->add("assets/test/integration/demo/bee.png", "right", jt::Vector2u { 8U, 8U }, { 0, 1 },

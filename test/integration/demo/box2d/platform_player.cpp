@@ -1,4 +1,5 @@
 #include "platform_player.hpp"
+#include <box2d/user_data_entries.hpp>
 #include <game_interface.hpp>
 #include <math_helper.hpp>
 
@@ -25,14 +26,15 @@ void Player::doCreate()
     b2CircleShape circleCollider {};
     circleCollider.m_radius = 4.0f;
     fixtureDef.shape = &circleCollider;
-    m_physicsObject->getB2Body()->CreateFixture(&fixtureDef);
+    auto playerCollider = m_physicsObject->getB2Body()->CreateFixture(&fixtureDef);
+    playerCollider->SetUserData((void*)g_userDataPlayerID);
 
     fixtureDef.isSensor = true;
     b2PolygonShape polygonShape;
     polygonShape.SetAsBox(3.0f, 0.2f, b2Vec2(0, 4), 0);
     fixtureDef.shape = &polygonShape;
-    b2Fixture* footSensorFixture = m_physicsObject->getB2Body()->CreateFixture(&fixtureDef);
-    footSensorFixture->SetUserData((void*)std::uint64_t { 3U });
+    auto footSensorFixture = m_physicsObject->getB2Body()->CreateFixture(&fixtureDef);
+    footSensorFixture->SetUserData((void*)g_userDataPlayerFeetID);
 }
 
 std::shared_ptr<jt::Animation> Player::getAnimation() { return m_animation; }
@@ -84,7 +86,7 @@ void Player::updateAnimation(float elapsed)
     } else {
         m_isMoving = false;
     }
-    auto const v = m_horizontalMovement ? abs(m_physicsObject->getVelocity().x) / 80.0f : 0.0f;
+    auto const v = m_horizontalMovement ? abs(m_physicsObject->getVelocity().x) / 90.0f : 0.0f;
     m_animation->setAnimationSpeedFactor(v);
     m_animation->update(elapsed);
 
@@ -103,7 +105,7 @@ void Player::updateAnimation(float elapsed)
 void Player::handleMovement(float const elapsed)
 {
     auto const horizontalAcceleration = 15000.0f;
-    auto const maxHorizontalVelocity = 80.0f;
+    auto const maxHorizontalVelocity = 90.0f;
     auto const horizontalDampening = 130.0f;
 
     auto const jumpInitialVelocity = -140.0f;
