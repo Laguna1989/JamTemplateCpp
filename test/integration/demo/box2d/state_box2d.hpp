@@ -1,6 +1,7 @@
 ﻿#ifndef DEMO_STATE_PLATFORMER_HPP
 #define DEMO_STATE_PLATFORMER_HPP
 
+#include <box2d/contact_callback_player_enemy.hpp>
 #include <box2d/contact_callback_player_ground.hpp>
 #include <box2d/level.hpp>
 #include <box2d/platform_player.hpp>

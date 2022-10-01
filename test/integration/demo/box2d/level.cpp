@@ -64,8 +64,12 @@ void Level::loadMovingPlatforms(jt::tilemap::TilesonLoader& loader)
                 }
                 currentPlatformPositions.push_back(allPositionsInLevel[ps]);
             }
+            float timeoffset = 0.0f;
+            if (p.properties.floats.count("timeoffset") == 1) {
+                timeoffset = p.properties.floats.at("timeoffset");
+            }
             auto platform = std::make_shared<MovingPlatform>(m_world.lock(), p.size,
-                currentPlatformPositions, p.properties.floats.at("velocity"));
+                currentPlatformPositions, p.properties.floats.at("velocity"), timeoffset);
             platform->setGameInstance(getGame());
             platform->create();
             m_movingPlatforms.push_back(platform);

@@ -4,11 +4,13 @@
 #include <iostream>
 
 MovingPlatform::MovingPlatform(std::shared_ptr<jt::Box2DWorldInterface> world,
-    jt::Vector2f const& size, std::vector<jt::Vector2f> const& positions, float velocity)
+    jt::Vector2f const& size, std::vector<jt::Vector2f> const& positions, float velocity,
+    float timeoffset)
 {
     m_platformSize = size;
     m_positions = positions;
     m_velocity = velocity;
+    m_timeOffset = timeoffset;
 
     b2BodyDef bodyDef;
     bodyDef.fixedRotation = true;
@@ -38,7 +40,7 @@ void MovingPlatform::doCreate()
 
     m_timeTilNextPlatform = jt::MathHelper::length(totalDiff) / m_velocity;
     m_physicsObject->setPosition(p1);
-    m_physicsObject->setVelocity(m_currentVelocity);
+    //    m_physicsObject->setVelocity(m_currentVelocity);
 
     m_spriteL = std::make_shared<jt::Sprite>(
         "assets/test/integration/demo/platform_l.png", textureManager());
@@ -50,6 +52,12 @@ void MovingPlatform::doCreate()
 
 void MovingPlatform::doUpdate(float const elapsed)
 {
+    m_timeOffset -= elapsed;
+    if (m_timeOffset > 0) {
+        return;
+    } else {
+        m_physicsObject->setVelocity(m_currentVelocity);
+    }
     // TODO Refactor this mess
     if (m_timeTilNextPlatform > 0) {
         m_timeTilNextPlatform -= elapsed;

@@ -1,4 +1,5 @@
 #include "platform_player.hpp"
+#include <box2d/user_data_entries.hpp>
 #include <game_interface.hpp>
 #include <math_helper.hpp>
 
@@ -25,14 +26,15 @@ void Player::doCreate()
     b2CircleShape circleCollider {};
     circleCollider.m_radius = 4.0f;
     fixtureDef.shape = &circleCollider;
-    m_physicsObject->getB2Body()->CreateFixture(&fixtureDef);
+    auto playerCollider = m_physicsObject->getB2Body()->CreateFixture(&fixtureDef);
+    playerCollider->SetUserData((void*)g_userDataPlayerID);
 
     fixtureDef.isSensor = true;
     b2PolygonShape polygonShape;
     polygonShape.SetAsBox(3.0f, 0.2f, b2Vec2(0, 4), 0);
     fixtureDef.shape = &polygonShape;
-    b2Fixture* footSensorFixture = m_physicsObject->getB2Body()->CreateFixture(&fixtureDef);
-    footSensorFixture->SetUserData((void*)std::uint64_t { 3U });
+    auto footSensorFixture = m_physicsObject->getB2Body()->CreateFixture(&fixtureDef);
+    footSensorFixture->SetUserData((void*)g_userDataPlayerFeetID);
 }
 
 std::shared_ptr<jt::Animation> Player::getAnimation() { return m_animation; }

@@ -10,12 +10,13 @@
 class MovingPlatform : public jt::GameObject {
 public:
     MovingPlatform(std::shared_ptr<jt::Box2DWorldInterface> world, jt::Vector2f const& size,
-        std::vector<jt::Vector2f> const& positions, float velocity);
+        std::vector<jt::Vector2f> const& positions, float velocity, float timeoffset);
 
 private:
     std::shared_ptr<jt::Box2DObject> m_physicsObject;
     std::vector<jt::Vector2f> m_positions;
     float m_velocity { 1.0f };
+    float m_timeOffset { 0.0f };
     jt::Vector2f m_platformSize { 0.0f, 0.0f };
     mutable std::shared_ptr<jt::Sprite> m_spriteL { nullptr };
     mutable std::shared_ptr<jt::Sprite> m_spriteM { nullptr };
