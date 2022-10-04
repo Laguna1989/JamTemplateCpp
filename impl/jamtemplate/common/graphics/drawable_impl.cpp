@@ -14,7 +14,9 @@ void jt::DrawableImpl::draw(
         return;
     }
     auto sptr = targetContainer->get(m_z);
-    draw(sptr);
+    if (sptr) {
+        draw(sptr);
+    }
 }
 
 void jt::DrawableImpl::draw(std::shared_ptr<RenderTarget> sptr) const

@@ -4,6 +4,7 @@
 #include <camera.hpp>
 #include <graphics/gfx_interface.hpp>
 #include <graphics/render_window_null.hpp>
+#include <render_target_container.hpp>
 #include <texture_manager_impl.hpp>
 #include <optional>
 
@@ -23,10 +24,13 @@ public:
     void clear() override;
     void display() override;
 
+    void createZLayer(int z) override;
+
 private:
     RenderWindowNull m_window;
     jt::Camera m_camera;
     std::optional<jt::TextureManagerImpl> m_textureManager;
+    std::shared_ptr<jt::RenderTargetContainer> m_targets;
 };
 
 } // namespace null_objects
