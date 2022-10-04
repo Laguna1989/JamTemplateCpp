@@ -12,7 +12,6 @@ void jt::DrawableImpl::draw(std::shared_ptr<jt::RenderTargetContainer> targets) 
     if (!targets) {
         return;
     }
-    // TODO use correct z coordinate
     auto sptr = targets->m_targets[m_z];
     draw(sptr);
 }

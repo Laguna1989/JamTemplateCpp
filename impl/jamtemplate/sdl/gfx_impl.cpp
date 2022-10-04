@@ -39,31 +39,32 @@ void GfxImpl::update(float elapsed)
 
 void GfxImpl::clear()
 {
-    m_tmpTarget = m_targets->m_targets[0].get();
+    //    m_tmpTarget = m_targets->m_targets[0].get();
     SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "0");
 
-    m_tmpTexture
-        = SDL_CreateTexture(m_tmpTarget, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_TARGET,
-            static_cast<int>(m_srcRect.width), static_cast<int>(m_srcRect.height));
+    m_tmpTexture = SDL_CreateTexture(m_targets->m_targets[0].get(), SDL_PIXELFORMAT_RGBA8888,
+        SDL_TEXTUREACCESS_TARGET, static_cast<int>(m_srcRect.width),
+        static_cast<int>(m_srcRect.height));
 
     // render to the small texture first
-    SDL_SetRenderTarget(m_tmpTarget, m_tmpTexture);
-    SDL_RenderClear(m_tmpTarget);
+    SDL_SetRenderTarget(m_targets->m_targets[0].get(), m_tmpTexture);
+    SDL_RenderClear(m_targets->m_targets[0].get());
 }
 
 void GfxImpl::display()
 {
     // Detach the texture
-    SDL_SetRenderTarget(m_tmpTarget, nullptr);
+    SDL_SetRenderTarget(m_targets->m_targets[0].get(), nullptr);
 
     // Now render the texture target to our screen
-    SDL_RenderClear(m_tmpTarget);
+    SDL_RenderClear(m_targets->m_targets[0].get());
     SDL_Rect sourceRect { m_srcRect.left, m_srcRect.top, m_srcRect.width, m_srcRect.height };
     SDL_Rect destRect { static_cast<int>(m_camera.getShakeOffset().x),
         static_cast<int>(m_camera.getShakeOffset().y), m_destRect.width, m_destRect.height };
-    SDL_RenderCopyEx(m_tmpTarget, m_tmpTexture, &sourceRect, &destRect, 0, nullptr, SDL_FLIP_NONE);
+    SDL_RenderCopyEx(m_targets->m_targets[0].get(), m_tmpTexture, &sourceRect, &destRect, 0,
+        nullptr, SDL_FLIP_NONE);
     m_window.display();
-    SDL_RenderPresent(m_tmpTarget);
+    SDL_RenderPresent(m_targets->m_targets[0].get());
 
     SDL_DestroyTexture(m_tmpTexture);
 }
