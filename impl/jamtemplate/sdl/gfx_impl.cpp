@@ -1,4 +1,5 @@
 #include "gfx_impl.hpp"
+
 #include <utility>
 
 namespace jt {
@@ -7,6 +8,7 @@ GfxImpl::GfxImpl(RenderWindowInterface& window, CamInterface& cam)
     : m_window { window }
     , m_camera { cam }
 {
+    // TODO
     m_targets = std::make_shared<jt::RenderTargetContainer>();
     m_targets->m_targets[0] = m_window.createRenderTarget();
 
@@ -25,7 +27,7 @@ RenderWindowInterface& GfxImpl::window() { return m_window; }
 
 CamInterface& GfxImpl::camera() { return m_camera; }
 
-std::shared_ptr<jt::RenderTargetContainer> GfxImpl::target() { return m_targets; }
+std::shared_ptr<jt::RenderTargetContainerInterface> GfxImpl::target() { return m_targets; }
 
 TextureManagerInterface& GfxImpl::textureManager() { return m_textureManager.value(); }
 
@@ -39,7 +41,6 @@ void GfxImpl::update(float elapsed)
 
 void GfxImpl::clear()
 {
-    //    m_tmpTarget = m_targets->m_targets[0].get();
     SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "0");
 
     m_tmpTexture = SDL_CreateTexture(m_targets->m_targets[0].get(), SDL_PIXELFORMAT_RGBA8888,

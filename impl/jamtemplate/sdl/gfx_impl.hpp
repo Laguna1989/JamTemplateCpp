@@ -3,6 +3,7 @@
 
 #include <cam_interface.hpp>
 #include <graphics/gfx_interface.hpp>
+#include <graphics/render_target_container_interface.hpp>
 #include <graphics/render_window_interface.hpp>
 #include <render_target_lib.hpp>
 #include <texture_manager_impl.hpp>
@@ -16,7 +17,7 @@ public:
     GfxImpl(RenderWindowInterface& window, CamInterface& cam);
     RenderWindowInterface& window() override;
     CamInterface& camera() override;
-    std::shared_ptr<RenderTargetContainer> target() override;
+    std::shared_ptr<RenderTargetContainerInterface> target() override;
     TextureManagerInterface& textureManager() override;
     void reset() override;
     void update(float elapsed) override;
@@ -28,7 +29,7 @@ public:
 private:
     RenderWindowInterface& m_window;
     CamInterface& m_camera;
-    std::shared_ptr<RenderTargetContainer> m_targets { nullptr };
+    std::shared_ptr<RenderTargetContainerInterface> m_targets { nullptr };
     std::optional<jt::TextureManagerImpl> m_textureManager;
     //    RenderTarget* m_tmpTarget;
     SDL_Texture* m_tmpTexture;
