@@ -47,8 +47,10 @@ public:
     /// display the drawables to the screen
     virtual void display() = 0;
 
-    // TODO documentation
-    virtual void createTargetForZ(int z) = 0;
+    /// Create a ZLayer (to be used with DrawableInterface::setZ()
+    /// \param z The z layer. Drawables will be drawn in ascending order, that means zlayer 2 is
+    /// drawn above zlayer 1.
+    virtual void createZLayer(int z) = 0;
 
 protected:
     // constructor can only be called from derived classes

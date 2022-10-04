@@ -1,6 +1,5 @@
 #include "gfx_impl.hpp"
 #include <rect_lib.hpp>
-#include <render_target_container.hpp>
 #include <sprite.hpp>
 #include <vector_lib.hpp>
 
@@ -22,7 +21,7 @@ jt::GfxImpl::GfxImpl(RenderWindowInterface& window, CamInterface& cam)
     , m_textureManager { nullptr }
 {
     m_targets = std::make_shared<jt::RenderTargetContainer>();
-    createTargetForZ(0);
+    createZLayer(0);
     auto const scaledWidth = static_cast<unsigned int>(m_window.getSize().x / m_camera.getZoom());
     auto const scaledHeight = static_cast<unsigned int>(m_window.getSize().y / m_camera.getZoom());
 
@@ -93,7 +92,7 @@ void jt::GfxImpl::drawOneZLayer(jt::RenderTarget& rt)
     m_window.draw(spriteForDrawing);
 }
 
-void jt::GfxImpl::createTargetForZ(int z)
+void jt::GfxImpl::createZLayer(int z)
 {
     auto target = m_window.createRenderTarget();
 

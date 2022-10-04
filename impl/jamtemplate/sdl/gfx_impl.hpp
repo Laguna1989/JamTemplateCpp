@@ -25,7 +25,7 @@ public:
     void clear() override;
     void display() override;
 
-    void createTargetForZ(int z) override;
+    void createZLayer(int z) override;
 
 private:
     RenderWindowInterface& m_window;

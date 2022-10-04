@@ -16,7 +16,7 @@ void StateScroll::doInternalCreate()
     m_shape1 = jt::dh::createShapeRect(
         jt::Vector2f { 40.0f, 30.0f }, jt::colors::Cyan, textureManager());
     m_shape1->setPosition(jt::Vector2f { 100.0f, 100.0f });
-    getGame()->gfx().createTargetForZ(5);
+    getGame()->gfx().createZLayer(5);
     m_shape1->setZ(5);
 
     m_shape2 = jt::dh::createShapeRect(

@@ -3,8 +3,8 @@
 
 #include <camera.hpp>
 #include <graphics/gfx_interface.hpp>
-#include <graphics/render_target_container_interface.hpp>
 #include <graphics/render_window.hpp>
+#include <render_target_container.hpp>
 #include <texture_manager_impl.hpp>
 #include <optional>
 
@@ -24,12 +24,12 @@ public:
     void clear() override;
     void display() override;
 
-    void createTargetForZ(int z) override;
+    void createZLayer(int z) override;
 
 private:
     RenderWindowInterface& m_window;
     CamInterface& m_camera;
-    std::shared_ptr<RenderTargetContainerInterface> m_targets { nullptr };
+    std::shared_ptr<jt::RenderTargetContainer> m_targets { nullptr };
     std::optional<jt::TextureManagerImpl> m_textureManager;
     std::shared_ptr<sf::View> m_view { nullptr };
     void drawOneZLayer(jt::RenderTarget& rt);
