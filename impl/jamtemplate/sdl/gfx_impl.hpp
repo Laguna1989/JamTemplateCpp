@@ -5,6 +5,7 @@
 #include <graphics/gfx_interface.hpp>
 #include <graphics/render_target_container_interface.hpp>
 #include <graphics/render_window_interface.hpp>
+#include <render_target_container.hpp>
 #include <render_target_lib.hpp>
 #include <texture_manager_impl.hpp>
 #include <SDL2/SDL.h>
@@ -29,7 +30,7 @@ public:
 private:
     RenderWindowInterface& m_window;
     CamInterface& m_camera;
-    std::shared_ptr<RenderTargetContainerInterface> m_targets { nullptr };
+    std::shared_ptr<RenderTargetContainer> m_targets { nullptr };
     std::optional<jt::TextureManagerImpl> m_textureManager;
     //    RenderTarget* m_tmpTarget;
     SDL_Texture* m_tmpTexture;
