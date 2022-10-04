@@ -46,7 +46,7 @@ private:
     void doInternalDraw() const override
     {
         for (auto s : m_shapes) {
-            s->draw(renderTarget());
+            s->draw(renderTargets());
         }
     }
 };

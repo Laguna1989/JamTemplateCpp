@@ -115,17 +115,17 @@ void StateTileson::drawNodeLayer() const
         return;
     }
     for (auto& t : m_nodeLayer->getAllTiles()) {
-        t->getDrawable()->draw(renderTarget());
+        t->getDrawable()->draw(renderTargets());
     }
 }
 void StateTileson::drawTileLayers() const
 {
     if (m_drawTileLayer1) {
-        m_tileLayerGround->draw(renderTarget());
+        m_tileLayerGround->draw(renderTargets());
     }
 
     if (m_drawTileLayer2) {
-        m_tileLayerOverlay->draw(renderTarget());
+        m_tileLayerOverlay->draw(renderTargets());
     }
 }
 void StateTileson::drawObjectLayer() const
@@ -135,7 +135,7 @@ void StateTileson::drawObjectLayer() const
     }
     for (auto& obj : m_objectsLayer->getObjects()) {
         auto shape = jt::tilemap::createShapeFrom(obj, textureManager());
-        shape->draw(renderTarget());
+        shape->draw(renderTargets());
     }
 }
 

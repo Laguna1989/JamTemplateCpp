@@ -20,7 +20,7 @@ void jt::ScanLines::doDraw() const
         for (auto i = 0u; i != m_shapeCount; ++i) {
             m_shape->setPosition(jt::Vector2f { 0.0f, i * 2 * m_shapeSize.y });
             m_shape->update(0.1f);
-            m_shape->draw(renderTarget());
+            m_shape->draw(renderTargets());
         }
     }
 }

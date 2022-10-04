@@ -31,4 +31,4 @@ void SwarmObject::doUpdate(float const elapsed)
     m_animation->update(elapsed);
     m_acceleration = jt::Vector2f { 0.0f, 0.0f };
 }
-void SwarmObject::doDraw() const { m_animation->draw(renderTarget()); }
+void SwarmObject::doDraw() const { m_animation->draw(renderTargets()); }

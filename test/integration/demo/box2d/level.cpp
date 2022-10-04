@@ -191,8 +191,8 @@ void Level::doUpdate(float const elapsed)
 
 void Level::doDraw() const
 {
-    m_background->draw(renderTarget());
-    m_tileLayerGround->draw(renderTarget());
+    m_background->draw(renderTargets());
+    m_tileLayerGround->draw(renderTargets());
     for (auto const& exit : m_exits) {
         exit.draw();
     }

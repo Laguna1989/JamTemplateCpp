@@ -143,7 +143,7 @@ void MovingPlatform::doDraw() const
     for (int j = 0; j != numberOfMiddlePartsY; ++j) {
         m_spriteL->setPosition(m_physicsObject->getPosition() + jt::Vector2f { 0.0f, j * 8.0f });
         m_spriteL->update(0.0f);
-        m_spriteL->draw(renderTarget());
+        m_spriteL->draw(renderTargets());
 
         auto numberOfMiddlePartsX = static_cast<int>(m_platformSize.x) / 8 - 2;
 
@@ -151,12 +151,12 @@ void MovingPlatform::doDraw() const
             m_spriteM->setPosition(
                 m_physicsObject->getPosition() + jt::Vector2f { (i + 1) * 8.0f, j * 8.0f });
             m_spriteM->update(0.0f);
-            m_spriteM->draw(renderTarget());
+            m_spriteM->draw(renderTargets());
         }
         m_spriteR->setPosition(
             m_physicsObject->getPosition() + jt::Vector2f { m_platformSize.x - 8, j * 8.0f });
         m_spriteR->update(0.0f);
-        m_spriteR->draw(renderTarget());
+        m_spriteR->draw(renderTargets());
     }
 }
 

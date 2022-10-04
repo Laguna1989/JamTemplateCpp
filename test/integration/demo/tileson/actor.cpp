@@ -50,7 +50,7 @@ void Actor::walkAlongPath(float const elapsed)
     }
 }
 
-void Actor::doDraw() const { m_sprite->draw(renderTarget()); }
+void Actor::doDraw() const { m_sprite->draw(renderTargets()); }
 
 void Actor::setPosition(jt::Vector2u const& posInTiles)
 {

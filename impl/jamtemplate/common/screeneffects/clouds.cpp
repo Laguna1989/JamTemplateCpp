@@ -75,9 +75,9 @@ void drawLayer(std::shared_ptr<jt::RenderTargetContainer> rt, std::shared_ptr<jt
 void jt::Clouds::doDraw() const
 {
     if (m_enabled) {
-        drawLayer(renderTarget(), m_layer1);
-        drawLayer(renderTarget(), m_layer2);
-        drawLayer(renderTarget(), m_layer3);
+        drawLayer(renderTargets(), m_layer1);
+        drawLayer(renderTargets(), m_layer2);
+        drawLayer(renderTargets(), m_layer3);
     }
 }
 

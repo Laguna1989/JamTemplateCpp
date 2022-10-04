@@ -58,7 +58,7 @@ void StateMenu::createMenuText()
 void StateMenu::createTextExplanation()
 {
     m_textExplanation
-        = jt::dh::createText(renderTarget(), GP::ExplanationText(), 16U, GP::PaletteFontFront());
+        = jt::dh::createText(renderTargets(), GP::ExplanationText(), 16U, GP::PaletteFontFront());
     auto const half_width = GP::GetScreenSize().x / 2.0f;
     m_textExplanation->setPosition({ half_width, 180 });
     m_textExplanation->setShadow(GP::PaletteFontShadow(), jt::Vector2f { 2, 2 });
@@ -66,7 +66,7 @@ void StateMenu::createTextExplanation()
 
 void StateMenu::createTextCredits()
 {
-    m_textCredits = jt::dh::createText(renderTarget(),
+    m_textCredits = jt::dh::createText(renderTargets(),
         "Created by " + GP::AuthorName() + " for " + GP::JamName() + "\n" + GP::JamDate()
             + "\n\nF9 for License Information",
         16U, GP::PaletteFontCredits());
@@ -74,7 +74,7 @@ void StateMenu::createTextCredits()
     m_textCredits->setPosition({ 10, GP::GetScreenSize().y - 70 });
     m_textCredits->setShadow(GP::PaletteFontShadow(), jt::Vector2f { 1, 1 });
 
-    m_textVersion = jt::dh::createText(renderTarget(), "", 16U, GP::PaletteFontCredits());
+    m_textVersion = jt::dh::createText(renderTargets(), "", 16U, GP::PaletteFontCredits());
     if (jt::BuildInfo::gitTagName() != "") {
         m_textVersion->setText(jt::BuildInfo::gitTagName());
     } else {
@@ -90,7 +90,7 @@ void StateMenu::createTextStart()
 {
     auto const half_width = GP::GetScreenSize().x / 2.0f;
     m_textStart = jt::dh::createText(
-        renderTarget(), "Press Space to start the game", 24U, GP::PaletteFontFront());
+        renderTargets(), "Press Space to start the game", 24U, GP::PaletteFontFront());
     m_textStart->setPosition({ half_width, 150 });
     m_textStart->setShadow(GP::PaletteFontShadow(), jt::Vector2f { 3, 3 });
 }
@@ -98,7 +98,7 @@ void StateMenu::createTextStart()
 void StateMenu::createTextTitle()
 {
     float half_width = GP::GetScreenSize().x / 2;
-    m_textTitle = jt::dh::createText(renderTarget(), GP::GameName(), 48U, GP::PaletteFontFront());
+    m_textTitle = jt::dh::createText(renderTargets(), GP::GameName(), 48U, GP::PaletteFontFront());
     m_textTitle->setPosition({ half_width, 20 });
     m_textTitle->setShadow(GP::PaletteFontShadow(), jt::Vector2f { 4, 4 });
 }
@@ -222,14 +222,14 @@ void StateMenu::startTransitionToStateGame()
 
 void StateMenu::doInternalDraw() const
 {
-    m_background->draw(renderTarget());
+    m_background->draw(renderTargets());
 
-    m_textTitle->draw(renderTarget());
-    m_textStart->draw(renderTarget());
-    m_textExplanation->draw(renderTarget());
-    m_textCredits->draw(renderTarget());
-    m_textVersion->draw(renderTarget());
-    m_overlay->draw(renderTarget());
+    m_textTitle->draw(renderTargets());
+    m_textStart->draw(renderTargets());
+    m_textExplanation->draw(renderTargets());
+    m_textCredits->draw(renderTargets());
+    m_textVersion->draw(renderTargets());
+    m_overlay->draw(renderTargets());
     m_vignette->draw();
 }
 

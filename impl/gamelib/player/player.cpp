@@ -59,4 +59,4 @@ void Player::doUpdate(float const elapsed)
     m_graphics->setAnimationIfNotSet(selectWalkAnimation(m_b2Object->getVelocity()));
     m_graphics->updateGraphics(elapsed);
 }
-void Player::doDraw() const { m_graphics->draw(renderTarget()); }
+void Player::doDraw() const { m_graphics->draw(renderTargets()); }

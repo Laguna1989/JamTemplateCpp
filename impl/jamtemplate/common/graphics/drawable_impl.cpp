@@ -3,16 +3,16 @@
 
 jt::Vector2f jt::DrawableImpl::m_CamOffset { 0.0f, 0.0f };
 
-void jt::DrawableImpl::draw(std::shared_ptr<jt::RenderTargetContainer> targets) const
+void jt::DrawableImpl::draw(std::shared_ptr<jt::RenderTargetContainer> targetContainer) const
 {
     if (!m_hasBeenUpdated) {
         std::cout << "WARNING: Calling DrawableImpl::draw() without previous call to "
                      "DrawableImpl::update()!\n";
     }
-    if (!targets) {
+    if (!targetContainer) {
         return;
     }
-    auto sptr = targets->m_targets[m_z];
+    auto sptr = targetContainer->m_targets[m_z];
     draw(sptr);
 }
 

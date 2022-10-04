@@ -28,7 +28,7 @@ public:
     /// Destructor
     virtual ~DrawableImpl() = default;
 
-    void draw(std::shared_ptr<RenderTargetContainer> targets) const override;
+    void draw(std::shared_ptr<RenderTargetContainer> targetContainer) const override;
 
     void draw(std::shared_ptr<RenderTarget> targets) const;
 

@@ -24,7 +24,7 @@ private:
         m_shape->makeRect({ 20.0f, 20.0f }, textureManager());
     }
     void doInternalUpdate(float elapsed) override { m_shape->update(elapsed); }
-    void doInternalDraw() const override { m_shape->draw(renderTarget()); }
+    void doInternalDraw() const override { m_shape->draw(renderTargets()); }
 
 public:
     std::string getName() const override { return "Performance StartGame"; }

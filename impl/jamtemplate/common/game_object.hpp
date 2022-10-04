@@ -82,7 +82,7 @@ public:
 
     // Helper functions for fast access of commonly used objects.
     TextureManagerInterface& textureManager() const;
-    std::shared_ptr<RenderTargetContainer> renderTarget() const;
+    std::shared_ptr<RenderTargetContainer> renderTargets() const;
 
 protected:
     float m_age { 0.0f };

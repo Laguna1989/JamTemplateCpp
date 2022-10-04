@@ -119,7 +119,7 @@ TEST(GameObjectTest, RenderTargetCallsGfxTarget)
     GameObject go {};
     go.setGameInstance(g);
 
-    (void)go.renderTarget();
+    (void)go.renderTargets();
 }
 
 TEST(GameObjectTest, GetGameRaisesExceptionWhenGameIsExpired)

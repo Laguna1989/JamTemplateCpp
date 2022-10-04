@@ -81,7 +81,7 @@ void StateScreenEffects::doInternalDraw() const
     m_stars->draw();
     if (m_drawLevel) {
         for (auto const& l : m_tileLayers) {
-            l->draw(renderTarget());
+            l->draw(renderTargets());
         }
     }
 

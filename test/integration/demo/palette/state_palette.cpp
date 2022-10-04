@@ -75,7 +75,7 @@ void StatePalette::doInternalUpdate(float elapsed)
 void StatePalette::doInternalDraw() const
 {
     for (auto s : m_shapes) {
-        s->draw(renderTarget());
+        s->draw(renderTargets());
     }
 }
 
