@@ -81,7 +81,7 @@ jt::TextureManagerInterface& jt::GameObject::textureManager() const
     return getGame()->gfx().textureManager();
 }
 
-std::shared_ptr<jt::RenderTargetContainer> jt::GameObject::renderTargets() const
+std::shared_ptr<jt::RenderTargetContainerInterface> jt::GameObject::renderTargets() const
 {
     return getGame()->gfx().target();
 }

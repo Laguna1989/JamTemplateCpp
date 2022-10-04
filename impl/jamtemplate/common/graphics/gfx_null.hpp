@@ -15,7 +15,7 @@ public:
     GfxNull();
     RenderWindowInterface& window() override;
     CamInterface& camera() override;
-    std::shared_ptr<RenderTargetContainer> target() override;
+    std::shared_ptr<RenderTargetContainerInterface> target() override;
     TextureManagerInterface& textureManager() override;
 
     void reset() override;

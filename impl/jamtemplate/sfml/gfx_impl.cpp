@@ -1,5 +1,6 @@
 #include "gfx_impl.hpp"
 #include <rect_lib.hpp>
+#include <render_target_container.hpp>
 #include <sprite.hpp>
 #include <vector_lib.hpp>
 
@@ -34,7 +35,7 @@ jt::RenderWindowInterface& jt::GfxImpl::window() { return m_window; }
 
 jt::CamInterface& jt::GfxImpl::camera() { return m_camera; }
 
-std::shared_ptr<jt::RenderTargetContainer> jt::GfxImpl::target() { return m_targets; }
+std::shared_ptr<jt::RenderTargetContainerInterface> jt::GfxImpl::target() { return m_targets; }
 
 jt::TextureManagerInterface& jt::GfxImpl::textureManager() { return m_textureManager.value(); }
 
@@ -58,14 +59,15 @@ void jt::GfxImpl::update(float elapsed)
 void jt::GfxImpl::clear()
 {
     bool first { true };
-    for (auto& kvp : m_targets->m_targets) {
+
+    m_targets->forall([&first](auto t) {
         if (first) {
-            kvp.second->clear(sf::Color::Black);
+            t->clear(sf::Color::Black);
             first = false;
         } else {
-            kvp.second->clear(sf::Color::Transparent);
+            t->clear(sf::Color::Transparent);
         }
-    }
+    });
 }
 
 void jt::GfxImpl::display()
@@ -93,10 +95,13 @@ void jt::GfxImpl::drawOneZLayer(jt::RenderTarget& rt)
 
 void jt::GfxImpl::createTargetForZ(int z)
 {
-    m_targets->m_targets[z] = m_window.createRenderTarget();
+    auto target = m_window.createRenderTarget();
+
     auto const scaledWidth = static_cast<unsigned int>(m_window.getSize().x / m_camera.getZoom());
     auto const scaledHeight = static_cast<unsigned int>(m_window.getSize().y / m_camera.getZoom());
 
-    m_targets->m_targets[z]->create(scaledWidth, scaledHeight);
-    m_targets->m_targets[z]->setSmooth(false);
+    target->create(scaledWidth, scaledHeight);
+    target->setSmooth(false);
+
+    m_targets->add(z, target);
 }

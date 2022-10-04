@@ -15,7 +15,7 @@ public:
     bool isInProgress() override;
     bool triggerStateChange() override;
     void update(float elapsed) override;
-    void draw(std::shared_ptr<RenderTargetContainer> rt) override;
+    void draw(std::shared_ptr<RenderTargetContainerInterface> rt) override;
 
     float getRatio() const;
     bool isInFirstHalf() const;
@@ -30,7 +30,7 @@ private:
 
     virtual void doUpdate(float elapsed) = 0;
     virtual void doStart() = 0;
-    virtual void doDraw(std::shared_ptr<jt::RenderTargetContainer> rt) = 0;
+    virtual void doDraw(std::shared_ptr<jt::RenderTargetContainerInterface> rt) = 0;
 };
 
 } // namespace jt

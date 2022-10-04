@@ -35,7 +35,7 @@ void jt::LoggingStateManager::update(std::weak_ptr<jt::GameInterface> gameInstan
     m_decoratee.update(gameInstance, elapsed);
 }
 
-void jt::LoggingStateManager::draw(std::shared_ptr<jt::RenderTargetContainer> rt)
+void jt::LoggingStateManager::draw(std::shared_ptr<jt::RenderTargetContainerInterface> rt)
 {
     m_logger.verbose("draw", { "jt", "StateManager" });
     m_decoratee.draw(rt);

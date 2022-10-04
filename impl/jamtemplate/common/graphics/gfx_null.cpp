@@ -1,4 +1,5 @@
 #include "gfx_null.hpp"
+#include <render_target_container.hpp>
 
 jt::null_objects::GfxNull::GfxNull()
     : m_window { 800, 600, "test" }
@@ -8,7 +9,7 @@ jt::null_objects::GfxNull::GfxNull()
 
 jt::RenderWindowInterface& jt::null_objects::GfxNull::window() { return m_window; }
 jt::CamInterface& jt::null_objects::GfxNull::camera() { return m_camera; }
-std::shared_ptr<jt::RenderTargetContainer> jt::null_objects::GfxNull::target()
+std::shared_ptr<jt::RenderTargetContainerInterface> jt::null_objects::GfxNull::target()
 {
     return std::shared_ptr<jt::RenderTargetContainer>();
 }
