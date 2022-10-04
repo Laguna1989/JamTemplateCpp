@@ -49,7 +49,7 @@ void StateSelect::doInternalCreate()
     add(std::make_shared<jt::LicenseInfo>());
 }
 
-void StateSelect::doInternalUpdate(float elapsed) { }
+void StateSelect::doInternalUpdate(float /*elapsed*/) { }
 
 void StateSelect::doInternalDraw() const { }
 std::string StateSelect::getName() const { return "State Demo Select"; }

@@ -32,8 +32,6 @@ private:
     CamInterface& m_camera;
     std::shared_ptr<RenderTargetContainer> m_targets { nullptr };
     std::optional<jt::TextureManagerImpl> m_textureManager;
-    //    RenderTarget* m_tmpTarget;
-    SDL_Texture* m_tmpTexture;
 
     jt::Recti m_srcRect;
     jt::Recti m_destRect;

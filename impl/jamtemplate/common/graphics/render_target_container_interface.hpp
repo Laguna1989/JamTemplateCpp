@@ -10,6 +10,7 @@ namespace jt {
 
 class RenderTargetContainerInterface {
 public:
+    virtual ~RenderTargetContainerInterface() = default;
     virtual void forall(std::function<void(std::shared_ptr<jt::RenderTarget>)> func) = 0;
     virtual std::shared_ptr<jt::RenderTarget> get(int z) = 0;
 

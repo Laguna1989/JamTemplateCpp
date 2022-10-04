@@ -1,16 +1,23 @@
-
 #include "render_target_container.hpp"
 
 void jt::RenderTargetContainer::forall(std::function<void(std::shared_ptr<jt::RenderTarget>)> func)
 {
-    for (auto& kvp : m_targets) {
-        func(kvp.second);
-    }
+//    for (auto& kvp : m_textures) {
+//        func(kvp.second);
+//    }
 }
 
-std::shared_ptr<jt::RenderTarget> jt::RenderTargetContainer::get(int z) { return m_targets[z]; }
+std::shared_ptr<jt::RenderTarget> jt::RenderTargetContainer::get(int z) {
+    // TODO check if texture is available
+    SDL_SetRenderTarget(m_target.get(), m_textures[z]);
+    return m_target;
+}
 
 void jt::RenderTargetContainer::add(int z, std::shared_ptr<jt::RenderTarget> target)
 {
-    m_targets[z] = target;
+    if (!m_target)
+    {
+        m_target = target;
+    }
+    // TODO create texture for this layer
 }

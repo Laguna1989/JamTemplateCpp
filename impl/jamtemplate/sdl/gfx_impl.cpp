@@ -10,9 +10,7 @@ GfxImpl::GfxImpl(RenderWindowInterface& window, CamInterface& cam)
 {
     // TODO
     m_targets = std::make_shared<jt::RenderTargetContainer>();
-    m_targets->m_targets[0] = m_window.createRenderTarget();
-
-    m_textureManager = TextureManagerImpl { m_targets->m_targets[0] };
+    m_targets->m_target = m_window.createRenderTarget();
 
     auto const width = m_window.getSize().x;
     auto const height = m_window.getSize().y;
@@ -21,6 +19,12 @@ GfxImpl::GfxImpl(RenderWindowInterface& window, CamInterface& cam)
     auto const scaledHeight = static_cast<int>(height / m_camera.getZoom());
     m_srcRect = jt::Recti { 0, 0, scaledWidth, scaledHeight };
     m_destRect = jt::Recti { 0, 0, static_cast<int>(width), static_cast<int>(height) };
+
+    createTargetForZ(0);
+
+    m_textureManager = TextureManagerImpl { m_targets->get(0) };
+
+
 }
 
 RenderWindowInterface& GfxImpl::window() { return m_window; }
@@ -43,33 +47,51 @@ void GfxImpl::clear()
 {
     SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "0");
 
-    m_tmpTexture = SDL_CreateTexture(m_targets->m_targets[0].get(), SDL_PIXELFORMAT_RGBA8888,
-        SDL_TEXTUREACCESS_TARGET, static_cast<int>(m_srcRect.width),
-        static_cast<int>(m_srcRect.height));
-
     // render to the small texture first
-    SDL_SetRenderTarget(m_targets->m_targets[0].get(), m_tmpTexture);
-    SDL_RenderClear(m_targets->m_targets[0].get());
+    bool first{true};
+    for (auto& kvp : m_targets->m_textures) {
+        SDL_SetRenderTarget(m_targets->m_target.get(), kvp.second);
+        if (first) {
+            SDL_SetTextureAlphaMod(kvp.second, 255);
+            SDL_SetRenderDrawColor(m_targets->m_target.get(), 0, 0, 0, 255);
+            SDL_RenderClear(m_targets->m_target.get());
+            first = false;
+        } else {
+//            SDL_SetTextureAlphaMod(kvp.second, 0);
+            SDL_SetRenderDrawColor(m_targets->m_target.get(), 0, 0, 0, 0);
+            SDL_RenderClear(m_targets->m_target.get());
+        }
+
+    }
 }
 
 void GfxImpl::display()
 {
     // Detach the texture
-    SDL_SetRenderTarget(m_targets->m_targets[0].get(), nullptr);
+    SDL_SetRenderTarget(m_targets->m_target.get(), nullptr);
+    SDL_RenderClear(m_targets->m_target.get());
 
-    // Now render the texture target to our screen
-    SDL_RenderClear(m_targets->m_targets[0].get());
-    SDL_Rect sourceRect { m_srcRect.left, m_srcRect.top, m_srcRect.width, m_srcRect.height };
-    SDL_Rect destRect { static_cast<int>(m_camera.getShakeOffset().x),
-        static_cast<int>(m_camera.getShakeOffset().y), m_destRect.width, m_destRect.height };
-    SDL_RenderCopyEx(m_targets->m_targets[0].get(), m_tmpTexture, &sourceRect, &destRect, 0,
-        nullptr, SDL_FLIP_NONE);
-    m_window.display();
-    SDL_RenderPresent(m_targets->m_targets[0].get());
+    for (auto& kvp : m_targets->m_textures)
+    {
+        // Now render the textures to our screen
 
-    SDL_DestroyTexture(m_tmpTexture);
+        SDL_Rect sourceRect { m_srcRect.left, m_srcRect.top, m_srcRect.width, m_srcRect.height };
+        SDL_Rect destRect { static_cast<int>(m_camera.getShakeOffset().x),
+            static_cast<int>(m_camera.getShakeOffset().y), m_destRect.width, m_destRect.height };
+        SDL_RenderCopyEx(m_targets->m_target.get(), kvp.second, &sourceRect, &destRect, 0,
+            nullptr, SDL_FLIP_NONE);
+        m_window.display();
+        SDL_RenderPresent(m_targets->m_target.get());
+    }
 }
 
-void GfxImpl::createTargetForZ(int z) { }
+// TODO rename into CreateZLayer
+void GfxImpl::createTargetForZ(int z) {
+    SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "0");
+    m_targets->m_textures[z] = SDL_CreateTexture(m_targets->m_target.get(), SDL_PIXELFORMAT_RGBA8888,
+        SDL_TEXTUREACCESS_TARGET, static_cast<int>(m_srcRect.width),
+        static_cast<int>(m_srcRect.height));
+    SDL_SetTextureBlendMode(m_targets->m_textures[z], SDL_BLENDMODE_BLEND);
+}
 
 } // namespace jt
