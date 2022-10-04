@@ -15,7 +15,7 @@ public:
     RenderWindowInterface& window() override;
     CamInterface& camera() override;
 
-    std::shared_ptr<RenderTarget> target() override;
+    std::shared_ptr<RenderTargetContainer> target() override;
     TextureManagerInterface& textureManager() override;
 
     void reset() override;
@@ -23,13 +23,15 @@ public:
     void clear() override;
     void display() override;
 
+    void createTargetForZ(int z) override;
+
 private:
     RenderWindowInterface& m_window;
     CamInterface& m_camera;
-    std::shared_ptr<RenderTarget> m_renderTarget { nullptr };
+    std::shared_ptr<RenderTargetContainer> m_targets { nullptr };
     std::optional<jt::TextureManagerImpl> m_textureManager;
     std::shared_ptr<sf::View> m_view { nullptr };
-    std::unique_ptr<jt::Sprite> m_sprite_for_drawing;
+    void drawOneZLayer(jt::RenderTarget& rt);
 };
 
 } // namespace jt

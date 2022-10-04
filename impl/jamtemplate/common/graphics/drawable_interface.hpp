@@ -2,8 +2,8 @@
 #define JAMTEMPLATE_DRAWABLEINTERFACE_HPP
 
 #include <color/color.hpp>
+#include <graphics/render_target_container.hpp>
 #include <rect.hpp>
-#include <render_target.hpp>
 #include <vector.hpp>
 #include <memory>
 
@@ -29,7 +29,7 @@ public:
 
     /// Draw the drawable on the passed render target
     /// \param renderTarget shared pointer to the rendertarget the drawable should be drawn on
-    virtual void draw(std::shared_ptr<jt::RenderTarget> renderTarget) const = 0;
+    virtual void draw(std::shared_ptr<jt::RenderTargetContainer> renderTarget) const = 0;
 
     /// Flash the drawable
     /// \param timeInSeconds duration of the flash
@@ -217,6 +217,9 @@ public:
     /// check if is visible, based on ScreenSizeHint
     /// \return true if visible, false if not
     virtual bool isVisible() const = 0;
+
+    virtual void setZ(int z) = 0;
+    virtual int getZ() const = 0;
 
 protected:
     DrawableInterface() = default;

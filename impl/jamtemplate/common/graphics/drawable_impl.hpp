@@ -28,7 +28,9 @@ public:
     /// Destructor
     virtual ~DrawableImpl() = default;
 
-    void draw(std::shared_ptr<RenderTarget> sptr) const override;
+    void draw(std::shared_ptr<RenderTargetContainer> targets) const override;
+
+    void draw(std::shared_ptr<RenderTarget> targets) const;
 
     void flash(float t, jt::Color col = jt::colors::White) override;
     void shake(float t, float strength, float shakeInterval = 0.05f) override;
@@ -83,6 +85,9 @@ public:
     void setCamMovementFactor(float factor) override;
     float getCamMovementFactor() const override;
 
+    void setZ(int z) override;
+    int getZ() const override;
+
 protected:
     jt::Vector2f getShakeOffset() const;
     jt::Vector2f getCamOffset() const;
@@ -105,13 +110,15 @@ private:
 
     jt::BlendMode m_blendMode { jt::BlendMode::ALPHA };
 
-    // overwrite this method
-    virtual void doDraw(std::shared_ptr<jt::RenderTarget> const sptr) const = 0;
+    int m_z { 0 };
 
     // overwrite this method:
     // things to take care of:
     //   - make sure flash object and normal object are at the same position
     virtual void doUpdate(float elapsed) = 0;
+
+    // overwrite this method
+    virtual void doDraw(std::shared_ptr<jt::RenderTarget> const sptr) const = 0;
 };
 
 } // namespace jt

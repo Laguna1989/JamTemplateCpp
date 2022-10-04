@@ -38,7 +38,7 @@ public:
 
     /// Draw the state
     /// \param rt
-    virtual void draw(std::shared_ptr<RenderTarget> rt) = 0;
+    virtual void draw(std::shared_ptr<RenderTargetContainer> rt) = 0;
 };
 
 } // namespace jt

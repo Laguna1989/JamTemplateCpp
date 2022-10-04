@@ -3,15 +3,22 @@
 
 jt::Vector2f jt::DrawableImpl::m_CamOffset { 0.0f, 0.0f };
 
-void jt::DrawableImpl::draw(std::shared_ptr<jt::RenderTarget> sptr) const
+void jt::DrawableImpl::draw(std::shared_ptr<jt::RenderTargetContainer> targets) const
 {
     if (!m_hasBeenUpdated) {
         std::cout << "WARNING: Calling DrawableImpl::draw() without previous call to "
                      "DrawableImpl::update()!\n";
     }
-    if (!sptr) {
+    if (!targets) {
         return;
     }
+    // TODO use correct z coordinate
+    auto sptr = targets->m_targets[m_z];
+    draw(sptr);
+}
+
+void jt::DrawableImpl::draw(std::shared_ptr<RenderTarget> sptr) const
+{
     if (isVisible()) {
         if (!doesFlickerAffectsShadow()) {
             drawShadow(sptr);
@@ -168,3 +175,5 @@ void jt::DrawableImpl::setCamMovementFactor(float factor)
     m_ignoreCamMovement = ignoreCamMovement;
 }
 float jt::DrawableImpl::getCamMovementFactor() const { return m_camMovementFactor; }
+void jt::DrawableImpl::setZ(int z) { m_z = z; }
+int jt::DrawableImpl::getZ() const { return m_z; }

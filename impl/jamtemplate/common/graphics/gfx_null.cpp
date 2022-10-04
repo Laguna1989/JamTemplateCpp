@@ -8,9 +8,9 @@ jt::null_objects::GfxNull::GfxNull()
 
 jt::RenderWindowInterface& jt::null_objects::GfxNull::window() { return m_window; }
 jt::CamInterface& jt::null_objects::GfxNull::camera() { return m_camera; }
-std::shared_ptr<jt::RenderTarget> jt::null_objects::GfxNull::target()
+std::shared_ptr<jt::RenderTargetContainer> jt::null_objects::GfxNull::target()
 {
-    return m_window.createRenderTarget();
+    return std::shared_ptr<jt::RenderTargetContainer>();
 }
 jt::TextureManagerInterface& jt::null_objects::GfxNull::textureManager()
 {

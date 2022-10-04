@@ -2,8 +2,8 @@
 #define JAMTEMPLATE_GFX_INTERFACE_HPP
 
 #include <cam_interface.hpp>
+#include <graphics/render_target_container.hpp>
 #include <graphics/render_window_interface.hpp>
-#include <render_target.hpp>
 #include <texture_manager_interface.hpp>
 
 namespace jt {
@@ -28,7 +28,7 @@ public:
 
     /// Get the render target
     /// \return the render target
-    virtual std::shared_ptr<RenderTarget> target() = 0;
+    virtual std::shared_ptr<RenderTargetContainer> target() = 0;
 
     /// Get the texture manager
     /// \return the texture manager
@@ -46,6 +46,9 @@ public:
 
     /// display the drawables to the screen
     virtual void display() = 0;
+
+    // TODO documentation
+    virtual void createTargetForZ(int z) = 0;
 
 protected:
     // constructor can only be called from derived classes

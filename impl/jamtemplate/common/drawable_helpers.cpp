@@ -32,6 +32,13 @@ std::shared_ptr<jt::Text> jt::dh::createText(std::weak_ptr<jt::RenderTarget> ren
     return ptr;
 }
 
+std::shared_ptr<jt::Text> jt::dh::createText(
+    std::shared_ptr<jt::RenderTargetContainer> renderTarget, std::string const& text,
+    unsigned int fontSize, jt::Color const& col, std::string const& font_path)
+{
+    return createText(renderTarget->m_targets[0], text, fontSize, col, font_path);
+}
+
 std::shared_ptr<jt::Sprite> jt::dh::createVignette(
     jt::Vector2f const& size, jt::TextureManagerInterface& textureManager)
 {

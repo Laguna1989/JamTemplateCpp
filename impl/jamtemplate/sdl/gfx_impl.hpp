@@ -16,20 +16,22 @@ public:
     GfxImpl(RenderWindowInterface& window, CamInterface& cam);
     RenderWindowInterface& window() override;
     CamInterface& camera() override;
-    std::shared_ptr<RenderTarget> target() override;
+    std::shared_ptr<RenderTargetContainer> target() override;
     TextureManagerInterface& textureManager() override;
     void reset() override;
     void update(float elapsed) override;
     void clear() override;
     void display() override;
 
+    void createTargetForZ(int z) override;
+
 private:
     RenderWindowInterface& m_window;
     CamInterface& m_camera;
-    std::shared_ptr<RenderTarget> m_renderTarget { nullptr };
+    std::shared_ptr<RenderTargetContainer> m_targets { nullptr };
     std::optional<jt::TextureManagerImpl> m_textureManager;
-    RenderTarget* tmpTarget;
-    SDL_Texture* t;
+    RenderTarget* m_tmpTarget;
+    SDL_Texture* m_tmpTexture;
 
     jt::Recti m_srcRect;
     jt::Recti m_destRect;
