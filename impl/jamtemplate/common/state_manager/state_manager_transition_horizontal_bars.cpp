@@ -15,7 +15,7 @@ jt::StateManagerTransitionHorizontalBars::StateManagerTransitionHorizontalBars(
 void jt::StateManagerTransitionHorizontalBars::doUpdate(float /*elapsed*/) { }
 void jt::StateManagerTransitionHorizontalBars::doStart() { }
 void jt::StateManagerTransitionHorizontalBars::doDraw(
-    std::shared_ptr<jt::RenderTargetContainerInterface> rt)
+    std::shared_ptr<jt::RenderTargetInterface> rt)
 {
     for (auto i = 0; i != m_numberOfShapes; ++i) {
 

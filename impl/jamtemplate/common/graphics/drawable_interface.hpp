@@ -2,7 +2,7 @@
 #define JAMTEMPLATE_DRAWABLEINTERFACE_HPP
 
 #include <color/color.hpp>
-#include <graphics/render_target_container_interface.hpp>
+#include <graphics/render_target_interface.hpp>
 #include <rect.hpp>
 #include <vector.hpp>
 #include <memory>
@@ -29,7 +29,7 @@ public:
 
     /// Draw the drawable on the passed render target
     /// \param renderTarget shared pointer to the rendertarget the drawable should be drawn on
-    virtual void draw(std::shared_ptr<jt::RenderTargetContainerInterface> renderTarget) const = 0;
+    virtual void draw(std::shared_ptr<jt::RenderTargetInterface> renderTarget) const = 0;
 
     /// Flash the drawable
     /// \param timeInSeconds duration of the flash

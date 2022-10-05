@@ -4,7 +4,7 @@
 jt::Vector2f jt::DrawableImpl::m_CamOffset { 0.0f, 0.0f };
 
 void jt::DrawableImpl::draw(
-    std::shared_ptr<jt::RenderTargetContainerInterface> targetContainer) const
+    std::shared_ptr<jt::RenderTargetInterface> targetContainer) const
 {
     if (!m_hasBeenUpdated) {
         std::cout << "WARNING: Calling DrawableImpl::draw() without previous call to "
@@ -19,7 +19,7 @@ void jt::DrawableImpl::draw(
     }
 }
 
-void jt::DrawableImpl::draw(std::shared_ptr<RenderTarget> sptr) const
+void jt::DrawableImpl::draw(std::shared_ptr<RenderTargetLayer> sptr) const
 {
     if (isVisible()) {
         if (!doesFlickerAffectsShadow()) {

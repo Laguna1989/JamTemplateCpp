@@ -7,7 +7,7 @@ void jt::ShadowImpl::doSetShadow(jt::Color const& col, jt::Vector2f const& offse
     m_shadowOffset = offset;
 }
 
-void jt::ShadowImpl::drawShadow(std::shared_ptr<jt::RenderTarget> const sptr) const
+void jt::ShadowImpl::drawShadow(std::shared_ptr<jt::RenderTargetLayer> const sptr) const
 {
     if (sptr) {
         if (m_shadowActive) {

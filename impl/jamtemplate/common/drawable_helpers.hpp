@@ -33,13 +33,13 @@ std::shared_ptr<jt::Shape> createShapeCircle(
 /// \param col the color of the text
 /// \param font_path path to the ttf file (e.g. "assets/font.ttf")
 /// \return shared pointer to text
-std::shared_ptr<jt::Text> createText(std::weak_ptr<jt::RenderTarget> renderTarget,
+std::shared_ptr<jt::Text> createText(std::weak_ptr<jt::RenderTargetLayer> renderTarget,
     std::string const& text, unsigned int fontSize, jt::Color const& col = jt::colors::White,
     std::string const& font_path = "assets/font.ttf");
 
 // TODO remove overload
 std::shared_ptr<jt::Text> createText(
-    std::shared_ptr<jt::RenderTargetContainerInterface> renderTarget, std::string const& text,
+    std::shared_ptr<jt::RenderTargetInterface> renderTarget, std::string const& text,
     unsigned int fontSize, jt::Color const& col = jt::colors::White,
     std::string const& font_path = "assets/font.ttf");
 

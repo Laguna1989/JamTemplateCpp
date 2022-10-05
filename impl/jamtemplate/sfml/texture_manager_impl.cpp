@@ -125,7 +125,7 @@ sf::Texture loadTextureFromDisk(std::string const& str)
 }
 } // namespace
 
-jt::TextureManagerImpl::TextureManagerImpl(std::shared_ptr<jt::RenderTarget> /*renderer*/)
+jt::TextureManagerImpl::TextureManagerImpl(std::shared_ptr<jt::RenderTargetLayer> /*renderer*/)
 {
     // Nothing to do here
 }

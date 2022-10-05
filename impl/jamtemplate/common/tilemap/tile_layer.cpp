@@ -38,7 +38,7 @@ bool jt::tilemap::TileLayer::isTileVisible(jt::tilemap::TileInfo const& tile) co
     return true;
 }
 
-void jt::tilemap::TileLayer::doDraw(std::shared_ptr<jt::RenderTarget> const sptr) const
+void jt::tilemap::TileLayer::doDraw(std::shared_ptr<jt::RenderTargetLayer> const sptr) const
 {
     auto const posOffset = m_position + getShakeOffset() + getOffset();
     for (auto const& tile : m_tiles) {
@@ -63,8 +63,13 @@ void jt::tilemap::TileLayer::doDraw(std::shared_ptr<jt::RenderTarget> const sptr
     }
 }
 
-void jt::tilemap::TileLayer::doDrawFlash(std::shared_ptr<jt::RenderTarget> const /*sptr*/) const { }
-void jt::tilemap::TileLayer::doDrawShadow(std::shared_ptr<jt::RenderTarget> const /*sptr*/) const {
+void jt::tilemap::TileLayer::doDrawFlash(
+    std::shared_ptr<jt::RenderTargetLayer> const /*sptr*/) const
+{
+}
+void jt::tilemap::TileLayer::doDrawShadow(
+    std::shared_ptr<jt::RenderTargetLayer> const /*sptr*/) const
+{
 }
 
 void jt::tilemap::TileLayer::doUpdate(float /*elapsed*/) { }

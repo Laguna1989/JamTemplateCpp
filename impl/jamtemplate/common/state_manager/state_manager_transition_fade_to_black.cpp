@@ -26,7 +26,7 @@ void jt::StateManagerTransitionFadeToBlack::doStart()
 }
 
 void jt::StateManagerTransitionFadeToBlack::doDraw(
-    std::shared_ptr<jt::RenderTargetContainerInterface> rt)
+    std::shared_ptr<jt::RenderTargetInterface> rt)
 {
     m_shape->draw(rt);
 }

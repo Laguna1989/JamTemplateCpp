@@ -69,7 +69,7 @@ void jt::Sprite::doUpdate(float /*elapsed*/)
     m_flashSprite.setColor(toLib(getFlashColor()));
 }
 
-void jt::Sprite::doDrawShadow(std::shared_ptr<jt::RenderTarget> const sptr) const
+void jt::Sprite::doDrawShadow(std::shared_ptr<jt::RenderTargetLayer> const sptr) const
 {
     if (sptr) {
         jt::Vector2f const oldPos = fromLib(m_sprite.getPosition());
@@ -84,7 +84,7 @@ void jt::Sprite::doDrawShadow(std::shared_ptr<jt::RenderTarget> const sptr) cons
     }
 }
 
-void jt::Sprite::doDraw(std::shared_ptr<jt::RenderTarget> const sptr) const
+void jt::Sprite::doDraw(std::shared_ptr<jt::RenderTargetLayer> const sptr) const
 {
     if (sptr) {
         sf::RenderStates states { getSfBlendMode() };
@@ -95,7 +95,7 @@ void jt::Sprite::doDraw(std::shared_ptr<jt::RenderTarget> const sptr) const
     }
 }
 
-void jt::Sprite::doDrawFlash(std::shared_ptr<jt::RenderTarget> const sptr) const
+void jt::Sprite::doDrawFlash(std::shared_ptr<jt::RenderTargetLayer> const sptr) const
 {
     if (sptr) {
         sptr->draw(m_flashSprite);

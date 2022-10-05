@@ -19,7 +19,7 @@ public:
 
     void update(std::weak_ptr<GameInterface> gameInstance, float elapsed) override;
 
-    void draw(std::shared_ptr<RenderTargetContainerInterface> rt) override;
+    void draw(std::shared_ptr<jt::RenderTargetInterface> rt) override;
 
     void setTransition(std::shared_ptr<StateManagerTransitionInterface> transition) override;
 

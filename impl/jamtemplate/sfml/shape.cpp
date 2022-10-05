@@ -62,20 +62,20 @@ void jt::Shape::setOriginInternal(jt::Vector2f const& origin)
     }
 }
 
-void jt::Shape::doDraw(std::shared_ptr<jt::RenderTarget> const sptr) const
+void jt::Shape::doDraw(std::shared_ptr<jt::RenderTargetLayer> const sptr) const
 {
     sf::RenderStates states { getSfBlendMode() };
     sptr->draw(*m_shape, states);
 }
 
-void jt::Shape::doDrawFlash(std::shared_ptr<jt::RenderTarget> const sptr) const
+void jt::Shape::doDrawFlash(std::shared_ptr<jt::RenderTargetLayer> const sptr) const
 {
     if (sptr) {
         sptr->draw(*m_flashShape);
     }
 }
 
-void jt::Shape::doDrawShadow(std::shared_ptr<jt::RenderTarget> const sptr) const
+void jt::Shape::doDrawShadow(std::shared_ptr<jt::RenderTargetLayer> const sptr) const
 {
     if (sptr) {
         jt::Vector2f const oldPos = fromLib(m_shape->getPosition());

@@ -27,9 +27,9 @@ public:
     /// Check if window was closed
     virtual void checkForClose() = 0;
 
-    /// Create the RenderTarget to render to
+    /// Create the RenderTargetLayer to render to
     /// \return shared pointer to render target
-    virtual std::shared_ptr<jt::RenderTarget> createRenderTarget() = 0;
+    virtual std::shared_ptr<jt::RenderTargetLayer> createRenderTarget() = 0;
 
     /// Get the size of the window
     /// \return

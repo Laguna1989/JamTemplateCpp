@@ -33,14 +33,14 @@ TEST_F(TilemapTileLayerTest, DefaultPosition)
 TEST_F(TilemapTileLayerTest, UpdateAndDraw)
 {
     tileLayer->update(0.1f);
-    tileLayer->draw(std::shared_ptr<jt::RenderTargetContainerInterface> { nullptr });
+    tileLayer->draw(std::shared_ptr<jt::RenderTargetInterface> { nullptr });
 }
 
 TEST_F(TilemapTileLayerTest, DrawWithScreensizeHint)
 {
     tileLayer->setScreenSizeHint(jt::Vector2f { 400.0f, 300.0f });
     tileLayer->update(0.1f);
-    tileLayer->draw(std::shared_ptr<jt::RenderTargetContainerInterface> { nullptr });
+    tileLayer->draw(std::shared_ptr<jt::RenderTargetInterface> { nullptr });
 }
 
 TEST_F(TilemapTileLayerTest, GetScaleAlwaysReturnsDefaultConstructedVector)

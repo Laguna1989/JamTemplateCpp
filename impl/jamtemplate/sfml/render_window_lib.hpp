@@ -25,7 +25,7 @@ public:
     RenderWindow& operator=(RenderWindow&&) = default;
     ~RenderWindow() = default;
 
-    std::shared_ptr<jt::RenderTarget> createRenderTarget() override;
+    std::shared_ptr<jt::RenderTargetLayer> createRenderTarget() override;
 
     bool isOpen() const override;
     void checkForClose() override;

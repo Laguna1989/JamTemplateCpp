@@ -21,7 +21,7 @@ std::shared_ptr<jt::Shape> jt::dh::createShapeCircle(
     return ptr;
 }
 
-std::shared_ptr<jt::Text> jt::dh::createText(std::weak_ptr<jt::RenderTarget> renderTarget,
+std::shared_ptr<jt::Text> jt::dh::createText(std::weak_ptr<jt::RenderTargetLayer> renderTarget,
     std::string const& text, unsigned int fontSize, jt::Color const& col,
     std::string const& font_path)
 {
@@ -33,7 +33,7 @@ std::shared_ptr<jt::Text> jt::dh::createText(std::weak_ptr<jt::RenderTarget> ren
 }
 
 std::shared_ptr<jt::Text> jt::dh::createText(
-    std::shared_ptr<jt::RenderTargetContainerInterface> renderTarget, std::string const& text,
+    std::shared_ptr<jt::RenderTargetInterface> renderTarget, std::string const& text,
     unsigned int fontSize, jt::Color const& col, std::string const& font_path)
 {
     return createText(renderTarget->get(0), text, fontSize, col, font_path);

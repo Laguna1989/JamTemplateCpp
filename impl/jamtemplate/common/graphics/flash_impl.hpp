@@ -8,7 +8,7 @@
 namespace jt {
 class FlashImpl {
 public:
-    void drawFlash(std::shared_ptr<jt::RenderTarget> sptr) const;
+    void drawFlash(std::shared_ptr<jt::RenderTargetLayer> sptr) const;
     void doFlash(float t, jt::Color col);
 
     /// Set the flash color of the drawable
@@ -22,7 +22,7 @@ public:
     void updateFlash(float elapsed);
 
 private:
-    virtual void doDrawFlash(std::shared_ptr<jt::RenderTarget> sptr) const = 0;
+    virtual void doDrawFlash(std::shared_ptr<jt::RenderTargetLayer> sptr) const = 0;
     virtual void doFlashImpl(float /*t*/, jt::Color /*col = jt::colors::White*/) { }
     float m_flashTimer { -1.0f };
     float m_maxFlashTimer { -1.0f };

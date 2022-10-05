@@ -28,9 +28,9 @@ public:
     /// Destructor
     virtual ~DrawableImpl() = default;
 
-    void draw(std::shared_ptr<RenderTargetContainerInterface> targetContainer) const override;
+    void draw(std::shared_ptr<jt::RenderTargetInterface> targetContainer) const override;
 
-    void draw(std::shared_ptr<RenderTarget> targets) const;
+    void draw(std::shared_ptr<jt::RenderTargetLayer> targets) const;
 
     void flash(float t, jt::Color col = jt::colors::White) override;
     void shake(float t, float strength, float shakeInterval = 0.05f) override;
@@ -118,7 +118,7 @@ private:
     virtual void doUpdate(float elapsed) = 0;
 
     // overwrite this method
-    virtual void doDraw(std::shared_ptr<jt::RenderTarget> const sptr) const = 0;
+    virtual void doDraw(std::shared_ptr<jt::RenderTargetLayer> const sptr) const = 0;
 };
 
 } // namespace jt

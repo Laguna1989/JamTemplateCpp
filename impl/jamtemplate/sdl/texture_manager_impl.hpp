@@ -12,7 +12,7 @@ namespace jt {
 
 class TextureManagerImpl : public jt::TextureManagerInterface {
 public:
-    TextureManagerImpl(std::shared_ptr<jt::RenderTarget> renderer);
+    TextureManagerImpl(std::shared_ptr<jt::RenderTargetLayer> renderer);
     std::shared_ptr<SDL_Texture> get(std::string const& str) override;
 
     // reset all stored images
@@ -24,7 +24,7 @@ public:
 
 private:
     std::map<std::string, std::shared_ptr<SDL_Texture>> m_textures;
-    std::weak_ptr<jt::RenderTarget> m_renderer;
+    std::weak_ptr<jt::RenderTargetLayer> m_renderer;
     bool containsTexture(std::string const& str) { return (m_textures.count(str) != 0); }
 };
 

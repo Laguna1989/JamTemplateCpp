@@ -71,7 +71,7 @@ TEST_F(AnimationTestFixture, UpdateWithoutPlayDoesNotRaiseException)
 TEST_F(AnimationTestFixture, DrawWithoutPlayDoesNotRaiseException)
 {
     jt::Animation a {};
-    ASSERT_NO_THROW(a.draw(std::shared_ptr<jt::RenderTargetContainerInterface> { nullptr }));
+    ASSERT_NO_THROW(a.draw(std::shared_ptr<jt::RenderTargetInterface> { nullptr }));
 }
 
 TEST_F(AnimationTestFixture, AddWithEmptyFrameTimesRaisesException)
@@ -226,7 +226,7 @@ TEST_F(AnimationPlayingTest, AnimationCanBeFlashed)
 {
     a.flash(1.0f);
     a.update(0.1f);
-    a.draw(std::shared_ptr<jt::RenderTargetContainerInterface> { nullptr });
+    a.draw(std::shared_ptr<jt::RenderTargetInterface> { nullptr });
 }
 
 TEST_F(AnimationPlayingTest, AnimationStartsAtFrameZero)

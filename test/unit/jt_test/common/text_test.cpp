@@ -8,11 +8,11 @@ std::shared_ptr<jt::Text> getText()
 {
     auto t = std::make_shared<jt::Text>();
 #if USE_SFML
-    std::shared_ptr<jt::RenderTarget> renderTarget { nullptr };
+    std::shared_ptr<jt::RenderTargetLayer> renderTarget { nullptr };
     t->loadFont("assets/font.ttf", 20, renderTarget);
 #else
     static SDLSetup setup;
-    t->loadFont("assets/font.ttf", 20, setup.RenderTarget);
+    t->loadFont("assets/font.ttf", 20, setup.m_renderTarget);
 #endif
     return t;
 };
@@ -48,7 +48,7 @@ TEST(TextTest, SetText)
 TEST(TextTest, LoadInvalidFont)
 {
     auto t = std::make_shared<jt::Text>();
-    std::shared_ptr<jt::RenderTarget> renderTarget { nullptr };
+    std::shared_ptr<jt::RenderTargetLayer> renderTarget { nullptr };
     ASSERT_NO_THROW(t->loadFont("assets/font_INVALID_.ttf", 20, renderTarget));
 }
 

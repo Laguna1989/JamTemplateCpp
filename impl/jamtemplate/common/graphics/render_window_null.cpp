@@ -9,7 +9,7 @@ jt::null_objects::RenderWindowNull::RenderWindowNull(
 
 bool jt::null_objects::RenderWindowNull::isOpen() const { return true; }
 void jt::null_objects::RenderWindowNull::checkForClose() { }
-std::shared_ptr<jt::RenderTarget> jt::null_objects::RenderWindowNull::createRenderTarget()
+std::shared_ptr<jt::RenderTargetLayer> jt::null_objects::RenderWindowNull::createRenderTarget()
 {
     return nullptr;
 }

@@ -11,7 +11,7 @@ class MockGfx : public jt::GfxInterface {
 public:
     MOCK_METHOD(jt::RenderWindowInterface&, window, (), (override));
     MOCK_METHOD(jt::CamInterface&, camera, (), (override));
-    MOCK_METHOD(std::shared_ptr<jt::RenderTargetContainerInterface>, target, (), (override));
+    MOCK_METHOD(std::shared_ptr<jt::RenderTargetInterface>, target, (), (override));
     MOCK_METHOD(jt::TextureManagerInterface&, textureManager, (), (override));
 
     MOCK_METHOD(void, reset, (), (override));

@@ -4,7 +4,7 @@
 #include <camera.hpp>
 #include <graphics/gfx_interface.hpp>
 #include <graphics/render_window_null.hpp>
-#include <render_target_container.hpp>
+#include <render_target_lib.hpp>
 #include <texture_manager_impl.hpp>
 #include <optional>
 
@@ -16,7 +16,7 @@ public:
     GfxNull();
     RenderWindowInterface& window() override;
     CamInterface& camera() override;
-    std::shared_ptr<RenderTargetContainerInterface> target() override;
+    std::shared_ptr<jt::RenderTargetInterface> target() override;
     TextureManagerInterface& textureManager() override;
 
     void reset() override;
@@ -30,7 +30,7 @@ private:
     RenderWindowNull m_window;
     jt::Camera m_camera;
     std::optional<jt::TextureManagerImpl> m_textureManager;
-    std::shared_ptr<jt::RenderTargetContainer> m_targets;
+    std::shared_ptr<jt::RenderTarget> m_targets;
 };
 
 } // namespace null_objects

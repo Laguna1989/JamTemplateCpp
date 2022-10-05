@@ -17,7 +17,7 @@ private:
 
     void doStart() override;
 
-    void doDraw(std::shared_ptr<jt::RenderTargetContainerInterface> rt) override;
+    void doDraw(std::shared_ptr<jt::RenderTargetInterface> rt) override;
 
     std::shared_ptr<jt::Shape> m_shape { nullptr };
     int m_numberOfShapes { 0 };

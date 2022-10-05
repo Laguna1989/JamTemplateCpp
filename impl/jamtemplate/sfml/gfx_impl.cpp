@@ -20,7 +20,7 @@ jt::GfxImpl::GfxImpl(RenderWindowInterface& window, CamInterface& cam)
     , m_targets {}
     , m_textureManager { nullptr }
 {
-    m_targets = std::make_shared<jt::RenderTargetContainer>();
+    m_targets = std::make_shared<jt::RenderTarget>();
     createZLayer(0);
     auto const scaledWidth = static_cast<unsigned int>(m_window.getSize().x / m_camera.getZoom());
     auto const scaledHeight = static_cast<unsigned int>(m_window.getSize().y / m_camera.getZoom());
@@ -34,7 +34,7 @@ jt::RenderWindowInterface& jt::GfxImpl::window() { return m_window; }
 
 jt::CamInterface& jt::GfxImpl::camera() { return m_camera; }
 
-std::shared_ptr<jt::RenderTargetContainerInterface> jt::GfxImpl::target() { return m_targets; }
+std::shared_ptr<jt::RenderTargetInterface> jt::GfxImpl::target() { return m_targets; }
 
 jt::TextureManagerInterface& jt::GfxImpl::textureManager() { return m_textureManager.value(); }
 
@@ -61,14 +61,16 @@ void jt::GfxImpl::display()
 {
     m_targets->forall([this](auto t) {
         if (t == nullptr) {
-            throw std::invalid_argument { "GfXImpl::display called with nullptr jt::RenderTarget" };
+            throw std::invalid_argument {
+                "GfXImpl::display called with nullptr jt::RenderTargetLayer"
+            };
         }
         drawOneZLayer(*t);
     });
     m_window.display();
 }
 
-void jt::GfxImpl::drawOneZLayer(jt::RenderTarget& rt)
+void jt::GfxImpl::drawOneZLayer(jt::RenderTargetLayer& rt)
 {
     // convert renderTarget to sprite and draw that.
     auto spriteForDrawing = std::make_unique<Sprite>();

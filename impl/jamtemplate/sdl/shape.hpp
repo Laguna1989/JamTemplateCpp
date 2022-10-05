@@ -36,11 +36,11 @@ private:
     jt::Recti m_sourceRect { 0, 0, 0, 0 };
     jt::Color m_color { jt::colors::White };
 
-    void doDraw(std::shared_ptr<jt::RenderTarget> const sptr) const override;
+    void doDraw(std::shared_ptr<jt::RenderTargetLayer> const sptr) const override;
 
-    void doDrawFlash(std::shared_ptr<jt::RenderTarget> const sptr) const override;
+    void doDrawFlash(std::shared_ptr<jt::RenderTargetLayer> const sptr) const override;
 
-    void doDrawShadow(std::shared_ptr<jt::RenderTarget> const sptr) const override;
+    void doDrawShadow(std::shared_ptr<jt::RenderTargetLayer> const sptr) const override;
 
     void doUpdate(float /*elapsed*/) override;
     void doRotate(float /*rot*/) override;

@@ -4,7 +4,7 @@
 #include <camera.hpp>
 #include <graphics/gfx_interface.hpp>
 #include <graphics/render_window.hpp>
-#include <render_target_container.hpp>
+#include <render_target_lib.hpp>
 #include <texture_manager_impl.hpp>
 #include <optional>
 
@@ -16,7 +16,7 @@ public:
     RenderWindowInterface& window() override;
     CamInterface& camera() override;
 
-    std::shared_ptr<RenderTargetContainerInterface> target() override;
+    std::shared_ptr<jt::RenderTargetInterface> target() override;
     TextureManagerInterface& textureManager() override;
 
     void reset() override;
@@ -29,10 +29,10 @@ public:
 private:
     RenderWindowInterface& m_window;
     CamInterface& m_camera;
-    std::shared_ptr<jt::RenderTargetContainer> m_targets { nullptr };
+    std::shared_ptr<jt::RenderTarget> m_targets { nullptr };
     std::optional<jt::TextureManagerImpl> m_textureManager;
     std::shared_ptr<sf::View> m_view { nullptr };
-    void drawOneZLayer(jt::RenderTarget& rt);
+    void drawOneZLayer(jt::RenderTargetLayer& rt);
 };
 
 } // namespace jt

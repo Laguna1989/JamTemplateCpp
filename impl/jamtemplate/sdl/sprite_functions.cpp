@@ -8,7 +8,7 @@ namespace jt {
 
 namespace SpriteFunctions {
 
-std::shared_ptr<SDL_Texture> makeButtonImage(std::shared_ptr<jt::RenderTarget> renderTarget,
+std::shared_ptr<SDL_Texture> makeButtonImage(std::shared_ptr<jt::RenderTargetLayer> renderTarget,
     unsigned int w, unsigned int h, jt::Color midColor, jt::Color darkColor, jt::Color brightColor)
 {
     auto const wAsInt = static_cast<int>(w);
@@ -49,7 +49,7 @@ std::shared_ptr<SDL_Texture> makeButtonImage(std::shared_ptr<jt::RenderTarget> r
 }
 
 std::shared_ptr<SDL_Texture> makeBlankImage(
-    std::shared_ptr<jt::RenderTarget> renderTarget, unsigned int w, unsigned int h)
+    std::shared_ptr<jt::RenderTargetLayer> renderTarget, unsigned int w, unsigned int h)
 {
     std::shared_ptr<SDL_Surface> image = std::shared_ptr<SDL_Surface>(
         SDL_CreateRGBSurface(0, static_cast<int>(w), static_cast<int>(h), 32, 0, 0, 0, 0),
@@ -70,7 +70,7 @@ std::shared_ptr<SDL_Texture> makeBlankImage(
 }
 
 std::shared_ptr<SDL_Texture> makeGlowImage(
-    std::shared_ptr<jt::RenderTarget> renderTarget, float r, std::uint8_t max)
+    std::shared_ptr<jt::RenderTargetLayer> renderTarget, float r, std::uint8_t max)
 {
     auto const s = static_cast<unsigned int>(r + 0.5f * 2);
     std::shared_ptr<SDL_Surface> image = std::shared_ptr<SDL_Surface>(
@@ -100,7 +100,7 @@ std::shared_ptr<SDL_Texture> makeGlowImage(
 }
 
 std::shared_ptr<SDL_Texture> makeVignetteImage(
-    std::shared_ptr<jt::RenderTarget> renderTarget, unsigned int w, unsigned int h)
+    std::shared_ptr<jt::RenderTargetLayer> renderTarget, unsigned int w, unsigned int h)
 {
     std::shared_ptr<SDL_Surface> image
         = std::shared_ptr<SDL_Surface>(SDL_CreateRGBSurfaceWithFormat(0, static_cast<int>(w),
@@ -129,7 +129,7 @@ std::shared_ptr<SDL_Texture> makeVignetteImage(
 }
 
 std::shared_ptr<SDL_Texture> makeRect(
-    std::shared_ptr<jt::RenderTarget> renderTarget, unsigned int w, unsigned int h)
+    std::shared_ptr<jt::RenderTargetLayer> renderTarget, unsigned int w, unsigned int h)
 {
     std::shared_ptr<SDL_Surface> image
         = std::shared_ptr<SDL_Surface>(SDL_CreateRGBSurfaceWithFormat(0, static_cast<int>(w),
@@ -147,7 +147,8 @@ std::shared_ptr<SDL_Texture> makeRect(
     return t;
 }
 
-std::shared_ptr<SDL_Texture> makeCircle(std::shared_ptr<jt::RenderTarget> renderTarget, float r)
+std::shared_ptr<SDL_Texture> makeCircle(
+    std::shared_ptr<jt::RenderTargetLayer> renderTarget, float r)
 {
     auto const s = static_cast<unsigned int>((r + 0.5f) * 2);
     std::shared_ptr<SDL_Surface> image = std::shared_ptr<SDL_Surface>(
@@ -178,7 +179,7 @@ std::shared_ptr<SDL_Texture> makeCircle(std::shared_ptr<jt::RenderTarget> render
 }
 
 std::shared_ptr<SDL_Texture> makeRing(
-    std::shared_ptr<jt::RenderTarget> renderTarget, unsigned int w)
+    std::shared_ptr<jt::RenderTargetLayer> renderTarget, unsigned int w)
 {
     std::shared_ptr<SDL_Surface> image = std::shared_ptr<SDL_Surface>(
         SDL_CreateRGBSurfaceWithFormat(0, w + 1, w + 1, 32, SDL_PIXELFORMAT_RGBA32),

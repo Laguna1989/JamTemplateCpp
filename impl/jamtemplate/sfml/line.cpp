@@ -13,7 +13,7 @@ jt::Line::Line(jt::Vector2f lineVector)
 
 void jt::Line::doUpdate(float /*elapsed*/) { }
 
-void jt::Line::doDraw(std::shared_ptr<jt::RenderTarget> const sptr) const
+void jt::Line::doDraw(std::shared_ptr<jt::RenderTargetLayer> const sptr) const
 {
     auto const startPosition
         = getPosition() + getShakeOffset() + getOffset() + getCompleteCamOffset();
@@ -27,7 +27,7 @@ void jt::Line::doDraw(std::shared_ptr<jt::RenderTarget> const sptr) const
     sptr->draw(line, states);
 }
 
-void jt::Line::doDrawFlash(std::shared_ptr<jt::RenderTarget> const sptr) const
+void jt::Line::doDrawFlash(std::shared_ptr<jt::RenderTargetLayer> const sptr) const
 {
     auto const startPosition
         = getPosition() + getShakeOffset() + getOffset() + getCamOffset() + getShadowOffset();
@@ -40,7 +40,7 @@ void jt::Line::doDrawFlash(std::shared_ptr<jt::RenderTarget> const sptr) const
     line[1] = sf::Vertex { toLib(endPosition), toLib(getFlashColor()) };
     sptr->draw(line);
 }
-void jt::Line::doDrawShadow(std::shared_ptr<jt::RenderTarget> const sptr) const
+void jt::Line::doDrawShadow(std::shared_ptr<jt::RenderTargetLayer> const sptr) const
 {
     auto const startPosition
         = getPosition() + getShakeOffset() + getOffset() + getCamOffset() + getShadowOffset();
