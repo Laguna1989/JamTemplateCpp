@@ -90,7 +90,7 @@ TEST(BarTest, VerticalBar)
 {
     jt::Bar b { 5.0f, 100.0f, false, getTextureManager() };
     b.update(0.1f);
-    b.draw(nullptr);
+    b.draw(std::shared_ptr<jt::RenderTargetContainerInterface> { nullptr });
 
     SUCCEED();
 }

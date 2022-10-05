@@ -40,25 +40,7 @@ void GfxImpl::update(float elapsed)
     DrawableImpl::setCamOffset(-1.0f * m_camera.getCamOffset());
 }
 
-void GfxImpl::clear()
-{
-    SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "0");
-
-    // render to the small texture first
-    bool first { true };
-    for (auto& kvp : m_targets->m_textures) {
-        SDL_SetRenderTarget(m_targets->m_target.get(), kvp.second.get());
-        if (first) {
-            SDL_SetTextureAlphaMod(kvp.second.get(), 255);
-            SDL_SetRenderDrawColor(m_targets->m_target.get(), 0, 0, 0, 255);
-            SDL_RenderClear(m_targets->m_target.get());
-            first = false;
-        } else {
-            SDL_SetRenderDrawColor(m_targets->m_target.get(), 0, 0, 0, 0);
-            SDL_RenderClear(m_targets->m_target.get());
-        }
-    }
-}
+void GfxImpl::clear() { m_targets->clear(); }
 
 void GfxImpl::display()
 {
@@ -82,7 +64,6 @@ void GfxImpl::display()
 void GfxImpl::createZLayer(int z)
 {
     SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "0");
-
     auto texture = std::shared_ptr<SDL_Texture>(
         SDL_CreateTexture(m_targets->m_target.get(), SDL_PIXELFORMAT_RGBA8888,
             SDL_TEXTUREACCESS_TARGET, static_cast<int>(m_srcRect.width),

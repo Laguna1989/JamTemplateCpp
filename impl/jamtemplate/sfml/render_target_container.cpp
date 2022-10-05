@@ -14,3 +14,16 @@ void jt::RenderTargetContainer::add(int z, std::shared_ptr<jt::RenderTarget> tar
 {
     m_targets[z] = target;
 }
+void jt::RenderTargetContainer::clear()
+{
+    bool first { true };
+
+    for (auto& kvp : m_targets) {
+        if (first) {
+            kvp.second->clear(sf::Color::Black);
+            first = false;
+        } else {
+            kvp.second->clear(sf::Color::Transparent);
+        }
+    }
+}

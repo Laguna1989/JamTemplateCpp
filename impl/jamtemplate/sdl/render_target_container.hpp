@@ -9,10 +9,12 @@ namespace jt {
 
 class RenderTargetContainer : public RenderTargetContainerInterface {
 public:
-    explicit RenderTargetContainer(std::shared_ptr<jt::RenderTarget> target);
+    explicit RenderTargetContainer(std::shared_ptr<jt::RenderTarget> target = nullptr);
     std::shared_ptr<jt::RenderTarget> get(int z) override;
 
     void add(int z, std::shared_ptr<SDL_Texture> texture);
+
+    void clear();
     std::map<int, std::shared_ptr<SDL_Texture>> m_textures;
 
     std::shared_ptr<jt::RenderTarget> m_target { nullptr };

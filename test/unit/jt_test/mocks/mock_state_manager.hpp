@@ -13,7 +13,7 @@ public:
         (std::shared_ptr<jt::StateManagerTransitionInterface> transition), (override));
     MOCK_METHOD(
         std::shared_ptr<jt::StateManagerTransitionInterface>, getTransition, (), (override));
-    MOCK_METHOD(void, draw, (std::shared_ptr<jt::RenderTarget> rt), (override));
+    MOCK_METHOD(void, draw, (std::shared_ptr<jt::RenderTargetContainerInterface> rt), (override));
 };
 
 #endif // JAMTEMPLATE_MOCK_STATE_MANAGER_HPP

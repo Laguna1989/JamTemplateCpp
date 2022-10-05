@@ -11,6 +11,7 @@ public:
 
     void forall(std::function<void(std::shared_ptr<jt::RenderTarget>)> func);
     void add(int z, std::shared_ptr<jt::RenderTarget> target);
+    void clear();
 
 private:
     std::map<int, std::shared_ptr<jt::RenderTarget>> m_targets;

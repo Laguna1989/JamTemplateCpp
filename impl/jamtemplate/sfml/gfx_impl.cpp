@@ -55,19 +55,7 @@ void jt::GfxImpl::update(float elapsed)
     DrawableImpl::setCamOffset(-1.0f * fromLib(m_view->getCenter() - m_view->getSize() / 2.0f));
 }
 
-void jt::GfxImpl::clear()
-{
-    bool first { true };
-
-    m_targets->forall([&first](auto t) {
-        if (first) {
-            t->clear(sf::Color::Black);
-            first = false;
-        } else {
-            t->clear(sf::Color::Transparent);
-        }
-    });
-}
+void jt::GfxImpl::clear() { m_targets->clear(); }
 
 void jt::GfxImpl::display()
 {
