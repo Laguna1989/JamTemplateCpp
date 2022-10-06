@@ -37,10 +37,8 @@ std::shared_ptr<jt::Text> createText(std::weak_ptr<jt::RenderTargetLayer> render
     std::string const& text, unsigned int fontSize, jt::Color const& col = jt::colors::White,
     std::string const& font_path = "assets/font.ttf");
 
-// TODO remove overload
-std::shared_ptr<jt::Text> createText(
-    std::shared_ptr<jt::RenderTargetInterface> renderTarget, std::string const& text,
-    unsigned int fontSize, jt::Color const& col = jt::colors::White,
+std::shared_ptr<jt::Text> createText(std::shared_ptr<jt::RenderTargetInterface> renderTarget,
+    std::string const& text, unsigned int fontSize, jt::Color const& col = jt::colors::White,
     std::string const& font_path = "assets/font.ttf");
 
 /// Create a vignette sprite

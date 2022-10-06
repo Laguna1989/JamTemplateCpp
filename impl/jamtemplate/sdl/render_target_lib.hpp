@@ -14,7 +14,7 @@ public:
 
     void add(int z, std::shared_ptr<SDL_Texture> texture);
 
-    void clear();
+    void clearPixels();
     std::map<int, std::shared_ptr<SDL_Texture>> m_textures;
 
     std::shared_ptr<SDL_Renderer> m_renderer { nullptr };

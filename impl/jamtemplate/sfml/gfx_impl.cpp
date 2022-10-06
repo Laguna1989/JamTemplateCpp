@@ -17,10 +17,10 @@ void horizontalFlip(std::unique_ptr<jt::Sprite> const& spr, float zoom, float wi
 jt::GfxImpl::GfxImpl(RenderWindowInterface& window, CamInterface& cam)
     : m_window { window }
     , m_camera { cam }
-    , m_targets {}
+    , m_target {}
     , m_textureManager { nullptr }
 {
-    m_targets = std::make_shared<jt::RenderTarget>();
+    m_target = std::make_shared<jt::RenderTarget>();
     createZLayer(0);
     auto const scaledWidth = static_cast<unsigned int>(m_window.getSize().x / m_camera.getZoom());
     auto const scaledHeight = static_cast<unsigned int>(m_window.getSize().y / m_camera.getZoom());
@@ -34,7 +34,7 @@ jt::RenderWindowInterface& jt::GfxImpl::window() { return m_window; }
 
 jt::CamInterface& jt::GfxImpl::camera() { return m_camera; }
 
-std::shared_ptr<jt::RenderTargetInterface> jt::GfxImpl::target() { return m_targets; }
+std::shared_ptr<jt::RenderTargetInterface> jt::GfxImpl::target() { return m_target; }
 
 jt::TextureManagerInterface& jt::GfxImpl::textureManager() { return m_textureManager.value(); }
 
@@ -48,18 +48,18 @@ void jt::GfxImpl::update(float elapsed)
     int const camOffsetix { static_cast<int>(m_camera.getCamOffset().x + m_view->getSize().x / 2) };
     int const camOffsetiy { static_cast<int>(m_camera.getCamOffset().y + m_view->getSize().y / 2) };
 
-    m_targets->forall([this](auto t) { t->setView(*m_view); });
+    m_target->forall([this](auto t) { t->setView(*m_view); });
     m_view->setCenter(
         toLib(jt::Vector2f { static_cast<float>(camOffsetix), static_cast<float>(camOffsetiy) }));
 
     DrawableImpl::setCamOffset(-1.0f * fromLib(m_view->getCenter() - m_view->getSize() / 2.0f));
 }
 
-void jt::GfxImpl::clear() { m_targets->clear(); }
+void jt::GfxImpl::clear() { m_target->clearPixels(); }
 
 void jt::GfxImpl::display()
 {
-    m_targets->forall([this](auto t) {
+    m_target->forall([this](auto t) {
         if (t == nullptr) {
             throw std::invalid_argument {
                 "GfXImpl::display called with nullptr jt::RenderTargetLayer"
@@ -92,5 +92,5 @@ void jt::GfxImpl::createZLayer(int z)
     target->create(scaledWidth, scaledHeight);
     target->setSmooth(false);
 
-    m_targets->add(z, target);
+    m_target->add(z, target);
 }

@@ -11,7 +11,7 @@ public:
 
     void forall(std::function<void(std::shared_ptr<jt::RenderTargetLayer>)> func);
     void add(int z, std::shared_ptr<jt::RenderTargetLayer> target);
-    void clear();
+    void clearPixels();
 
 private:
     std::map<int, std::shared_ptr<jt::RenderTargetLayer>> m_targets;

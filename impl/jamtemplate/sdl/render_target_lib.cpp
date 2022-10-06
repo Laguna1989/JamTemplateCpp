@@ -17,7 +17,7 @@ std::shared_ptr<jt::RenderTargetLayer> jt::RenderTarget::get(int z)
 
 void jt::RenderTarget::add(int z, std::shared_ptr<SDL_Texture> texture) { m_textures[z] = texture; }
 
-void jt::RenderTarget::clear()
+void jt::RenderTarget::clearPixels()
 {
     SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "0");
 

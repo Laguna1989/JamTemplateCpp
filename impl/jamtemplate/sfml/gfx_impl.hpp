@@ -29,7 +29,7 @@ public:
 private:
     RenderWindowInterface& m_window;
     CamInterface& m_camera;
-    std::shared_ptr<jt::RenderTarget> m_targets { nullptr };
+    std::shared_ptr<jt::RenderTarget> m_target { nullptr };
     std::optional<jt::TextureManagerImpl> m_textureManager;
     std::shared_ptr<sf::View> m_view { nullptr };
     void drawOneZLayer(jt::RenderTargetLayer& rt);

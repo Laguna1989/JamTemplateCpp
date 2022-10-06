@@ -218,7 +218,14 @@ public:
     /// \return true if visible, false if not
     virtual bool isVisible() const = 0;
 
+    /// Set the ZLayer of this drawable. Drawables are drawn in ascending Z order.
+    /// Note: You need to add the respective ZLayer first to the GFXInterface via createZLayer().
+    /// \param z the z layer.
     virtual void setZ(int z) = 0;
+
+    /// Get the ZLayer of this drawable. Drawables are drawn in ascending Z order.
+    /// Note: You need to add the respective ZLayer first to the GFXInterface via createZLayer().
+    /// \return the z layer.
     virtual int getZ() const = 0;
 
 protected:

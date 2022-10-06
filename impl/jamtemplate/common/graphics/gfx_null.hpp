@@ -30,7 +30,7 @@ private:
     RenderWindowNull m_window;
     jt::Camera m_camera;
     std::optional<jt::TextureManagerImpl> m_textureManager;
-    std::shared_ptr<jt::RenderTarget> m_targets;
+    std::shared_ptr<jt::RenderTarget> m_target;
 };
 
 } // namespace null_objects
