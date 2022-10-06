@@ -124,7 +124,7 @@ void TemperatureManager::doDraw() const
         m_shape->setColor(jt::Color { r, g, b, a });
 
         m_shape->update(0.1f);
-        m_shape->draw(renderTargets());
+        m_shape->draw(renderTarget());
     }
 }
 std::shared_ptr<TemperatureNode> TemperatureManager::getNodeAt(jt::Vector2u const& pos)

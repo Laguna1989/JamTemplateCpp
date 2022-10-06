@@ -38,7 +38,7 @@ void Killbox::doDraw() const
             for (int i = 0; i != numberOfParts; ++i) {
                 m_drawable->setPosition(jt::Vector2f { m_rect.left + i * 8.0f, m_rect.top + 0.0f });
                 m_drawable->update(0.0f);
-                m_drawable->draw(renderTargets());
+                m_drawable->draw(renderTarget());
             }
             //            m_drawable->draw(renderTarget());
         }

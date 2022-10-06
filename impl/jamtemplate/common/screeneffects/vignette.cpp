@@ -19,7 +19,7 @@ void jt::Vignette::doUpdate(float const elapsed) { m_vignette->update(elapsed); 
 void jt::Vignette::doDraw() const
 {
     if (m_enabled) {
-        m_vignette->draw(renderTargets());
+        m_vignette->draw(renderTarget());
     }
 }
 void jt::Vignette::setEnabled(bool enabled) { m_enabled = enabled; }

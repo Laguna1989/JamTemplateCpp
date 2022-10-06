@@ -64,7 +64,7 @@ void StateGame::doInternalUpdate(float const elapsed)
 
 void StateGame::doInternalDraw() const
 {
-    m_background->draw(renderTargets());
+    m_background->draw(renderTarget());
     drawObjects();
     m_vignette->draw();
     m_hud->draw();

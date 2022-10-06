@@ -185,7 +185,7 @@ void Player::handleMovement(float const elapsed)
 }
 b2Body* Player::getB2Body() { return m_physicsObject->getB2Body(); }
 
-void Player::doDraw() const { m_animation->draw(renderTargets()); }
+void Player::doDraw() const { m_animation->draw(renderTarget()); }
 
 void Player::setTouchesGround(bool touchingGround)
 {

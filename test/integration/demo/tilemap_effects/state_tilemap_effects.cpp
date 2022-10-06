@@ -56,7 +56,7 @@ void StateTilemapEffects::moveCamera(float const elapsed)
 void StateTilemapEffects::doInternalDraw() const
 {
     drawObjects();
-    m_tileLayerGround->draw(renderTargets());
+    m_tileLayerGround->draw(renderTarget());
 
     ImGui::Begin("Tilemap Effects");
     if (ImGui::Button("Shake")) {

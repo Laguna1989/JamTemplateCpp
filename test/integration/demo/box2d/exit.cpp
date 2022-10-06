@@ -14,7 +14,7 @@ void Exit::doCreate()
 
 void Exit::doUpdate(float const elapsed) { m_sprite->update(elapsed); }
 
-void Exit::doDraw() const { m_sprite->draw(renderTargets()); }
+void Exit::doDraw() const { m_sprite->draw(renderTarget()); }
 
 void Exit::checkIfPlayerIsInExit(
     jt::Vector2f const& playerPosition, std::function<void(std::string const&)> callback)

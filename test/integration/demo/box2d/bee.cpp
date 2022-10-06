@@ -54,4 +54,4 @@ void Bee::doUpdate(float const elapsed)
     m_anim->update(elapsed);
 }
 
-void Bee::doDraw() const { m_anim->draw(renderTargets()); }
+void Bee::doDraw() const { m_anim->draw(renderTarget()); }

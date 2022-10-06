@@ -35,15 +35,15 @@ void main()
 }
 )");
 
-    m_text_left_aligned = jt::dh::createText(renderTargets(), "left aligned", 16);
+    m_text_left_aligned = jt::dh::createText(renderTarget(), "left aligned", 16);
     m_text_left_aligned->setTextAlign(jt::Text::TextAlign::LEFT);
     m_text_left_aligned->setPosition(jt::Vector2f { 300, 100 });
 
-    m_text_center_aligned = jt::dh::createText(renderTargets(), "center aligned", 16);
+    m_text_center_aligned = jt::dh::createText(renderTarget(), "center aligned", 16);
     m_text_center_aligned->setTextAlign(jt::Text::TextAlign::CENTER);
     m_text_center_aligned->setPosition(jt::Vector2f { 300, 130 });
 
-    m_text_right_aligned = jt::dh::createText(renderTargets(), "right aligned", 16);
+    m_text_right_aligned = jt::dh::createText(renderTarget(), "right aligned", 16);
     m_text_right_aligned->setTextAlign(jt::Text::TextAlign::RIGHT);
     m_text_right_aligned->setPosition(jt::Vector2f { 300, 160 });
 
@@ -86,16 +86,16 @@ void StateShaders::doInternalUpdate(float elapsed)
 }
 void StateShaders::doInternalDraw() const
 {
-    m_background->draw(renderTargets());
+    m_background->draw(renderTarget());
 
     drawObjects();
-    m_sprite->draw(renderTargets());
-    m_shape1->draw(renderTargets());
-    m_anim->draw(renderTargets());
+    m_sprite->draw(renderTarget());
+    m_shape1->draw(renderTarget());
+    m_anim->draw(renderTarget());
 
-    m_text_left_aligned->draw(renderTargets());
-    m_text_center_aligned->draw(renderTargets());
-    m_text_right_aligned->draw(renderTargets());
+    m_text_left_aligned->draw(renderTarget());
+    m_text_center_aligned->draw(renderTarget());
+    m_text_right_aligned->draw(renderTarget());
 
-    m_line->draw(renderTargets());
+    m_line->draw(renderTarget());
 }

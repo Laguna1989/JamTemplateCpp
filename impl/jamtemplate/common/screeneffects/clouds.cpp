@@ -56,8 +56,7 @@ void jt::Clouds::doUpdate(float const elapsed)
     m_layer3->update(elapsed);
 }
 
-void drawLayer(
-    std::shared_ptr<jt::RenderTargetInterface> rt, std::shared_ptr<jt::Sprite> layer)
+void drawLayer(std::shared_ptr<jt::RenderTargetInterface> rt, std::shared_ptr<jt::Sprite> layer)
 {
     auto const oldPos = layer->getPosition();
     for (auto j = -1; j != 2; ++j) {
@@ -76,9 +75,9 @@ void drawLayer(
 void jt::Clouds::doDraw() const
 {
     if (m_enabled) {
-        drawLayer(renderTargets(), m_layer1);
-        drawLayer(renderTargets(), m_layer2);
-        drawLayer(renderTargets(), m_layer3);
+        drawLayer(renderTarget(), m_layer1);
+        drawLayer(renderTarget(), m_layer2);
+        drawLayer(renderTarget(), m_layer3);
     }
 }
 

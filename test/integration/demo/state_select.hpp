@@ -43,7 +43,7 @@ private:
             jt::Vector2u { detail::buttonSizeX, detail::buttonSizeY }, textureManager());
         button->addCallback(
             [this]() { getGame()->stateManager().switchState(std::make_shared<State>()); });
-        auto const text = jt::dh::createText(renderTargets(), textString, 16);
+        auto const text = jt::dh::createText(renderTarget(), textString, 16);
         text->setTextAlign(jt::Text::TextAlign::LEFT);
         text->setOrigin(jt::Vector2f { -6, 1 });
         button->setDrawable(text);

@@ -70,7 +70,7 @@ void PlayerCharacter::doUpdate(float const elapsed)
 
 void PlayerCharacter::doDraw() const
 {
-    m_animation->draw(renderTargets());
+    m_animation->draw(renderTarget());
     m_inventory->draw();
     m_charsheet->draw();
 }

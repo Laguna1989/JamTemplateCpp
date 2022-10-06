@@ -50,7 +50,7 @@ void jt::WindParticles::doDraw() const
         return;
     }
     for (auto const& s : m_shapes) {
-        s->draw(renderTargets());
+        s->draw(renderTarget());
     }
 }
 

@@ -20,7 +20,7 @@ void EaseObject::doCreate()
         jt::Vector2f { 64.0f, 64.0f }, jt::colors::Gray, textureManager());
     m_backgroundShape->setPosition(m_offset);
     m_objectShape = jt::dh::createShapeCircle(3, jt::colors::Red, textureManager());
-    m_text = jt::dh::createText(renderTargets(), m_textString, 10);
+    m_text = jt::dh::createText(renderTarget(), m_textString, 10);
     m_text->setTextAlign(jt::Text::TextAlign::LEFT);
     m_text->setPosition(m_backgroundShape->getPosition() + jt::Vector2f { 0.0f, 64.0f });
 }
@@ -45,7 +45,7 @@ void EaseObject::doUpdate(float const elapsed)
 }
 void EaseObject::doDraw() const
 {
-    m_backgroundShape->draw(renderTargets());
-    m_objectShape->draw(renderTargets());
-    m_text->draw(renderTargets());
+    m_backgroundShape->draw(renderTarget());
+    m_objectShape->draw(renderTarget());
+    m_text->draw(renderTarget());
 }

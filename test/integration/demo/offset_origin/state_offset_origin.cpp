@@ -45,10 +45,10 @@ void StateOffsetOrigin::doInternalUpdate(float const elapsed)
 void StateOffsetOrigin::doInternalDraw() const
 {
     for (auto const& s : m_sprites) {
-        s->draw(renderTargets());
+        s->draw(renderTarget());
     }
 
     for (auto const& s : m_shapes) {
-        s->draw(renderTargets());
+        s->draw(renderTarget());
     }
 }
