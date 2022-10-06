@@ -2,8 +2,8 @@
 #define JAMTEMPLATE_DRAWABLEINTERFACE_HPP
 
 #include <color/color.hpp>
+#include <graphics/render_target_interface.hpp>
 #include <rect.hpp>
-#include <render_target.hpp>
 #include <vector.hpp>
 #include <memory>
 
@@ -29,7 +29,7 @@ public:
 
     /// Draw the drawable on the passed render target
     /// \param renderTarget shared pointer to the rendertarget the drawable should be drawn on
-    virtual void draw(std::shared_ptr<jt::RenderTarget> renderTarget) const = 0;
+    virtual void draw(std::shared_ptr<jt::RenderTargetInterface> renderTarget) const = 0;
 
     /// Flash the drawable
     /// \param timeInSeconds duration of the flash
@@ -217,6 +217,16 @@ public:
     /// check if is visible, based on ScreenSizeHint
     /// \return true if visible, false if not
     virtual bool isVisible() const = 0;
+
+    /// Set the ZLayer of this drawable. Drawables are drawn in ascending Z order.
+    /// Note: You need to add the respective ZLayer first to the GFXInterface via createZLayer().
+    /// \param z the z layer.
+    virtual void setZ(int z) = 0;
+
+    /// Get the ZLayer of this drawable. Drawables are drawn in ascending Z order.
+    /// Note: You need to add the respective ZLayer first to the GFXInterface via createZLayer().
+    /// \return the z layer.
+    virtual int getZ() const = 0;
 
 protected:
     DrawableInterface() = default;

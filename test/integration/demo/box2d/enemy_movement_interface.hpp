@@ -5,7 +5,7 @@
 
 class EnemyMovementInterface {
 public:
-    ~EnemyMovementInterface() = default;
+    virtual ~EnemyMovementInterface() = default;
     virtual void update(float elapsed, std::shared_ptr<jt::Box2DObject> obj) = 0;
 };
 

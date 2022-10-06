@@ -121,7 +121,7 @@ TEST_F(ShapeTestFixture, Update)
 TEST_F(ShapeTestFixture, DrawNullptr)
 {
     s.update(0.0f);
-    s.draw(nullptr);
+    s.draw(std::shared_ptr<jt::RenderTargetInterface> { nullptr });
     SUCCEED();
 }
 

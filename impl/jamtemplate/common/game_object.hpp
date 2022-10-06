@@ -2,7 +2,7 @@
 #define JAMTEMPLATE_GAMEOBJECT_HPP
 
 #include <counted_object.hpp>
-#include <render_target.hpp>
+#include <graphics/render_target_interface.hpp>
 #include <texture_manager_interface.hpp>
 #include <memory>
 #include <string>
@@ -82,7 +82,7 @@ public:
 
     // Helper functions for fast access of commonly used objects.
     TextureManagerInterface& textureManager() const;
-    std::shared_ptr<RenderTarget> renderTarget() const;
+    std::shared_ptr<jt::RenderTargetInterface> renderTarget() const;
 
 protected:
     float m_age { 0.0f };

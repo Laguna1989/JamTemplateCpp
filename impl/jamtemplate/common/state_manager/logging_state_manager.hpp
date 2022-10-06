@@ -12,7 +12,7 @@ public:
     void setTransition(std::shared_ptr<StateManagerTransitionInterface> transition) override;
     void switchState(std::shared_ptr<GameState> newState) override;
     void update(std::weak_ptr<GameInterface> gameInstance, float elapsed) override;
-    void draw(std::shared_ptr<RenderTarget> rt) override;
+    void draw(std::shared_ptr<jt::RenderTargetInterface> rt) override;
 
     std::shared_ptr<StateManagerTransitionInterface> getTransition() override;
 

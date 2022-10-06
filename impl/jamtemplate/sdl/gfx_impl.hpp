@@ -3,7 +3,9 @@
 
 #include <cam_interface.hpp>
 #include <graphics/gfx_interface.hpp>
+#include <graphics/render_target_interface.hpp>
 #include <graphics/render_window_interface.hpp>
+#include <render_target_layer_lib.hpp>
 #include <render_target_lib.hpp>
 #include <texture_manager_impl.hpp>
 #include <SDL2/SDL.h>
@@ -16,20 +18,20 @@ public:
     GfxImpl(RenderWindowInterface& window, CamInterface& cam);
     RenderWindowInterface& window() override;
     CamInterface& camera() override;
-    std::shared_ptr<RenderTarget> target() override;
+    std::shared_ptr<jt::RenderTargetInterface> target() override;
     TextureManagerInterface& textureManager() override;
     void reset() override;
     void update(float elapsed) override;
     void clear() override;
     void display() override;
 
+    void createZLayer(int z) override;
+
 private:
     RenderWindowInterface& m_window;
     CamInterface& m_camera;
-    std::shared_ptr<RenderTarget> m_renderTarget { nullptr };
+    std::shared_ptr<jt::RenderTarget> m_target { nullptr };
     std::optional<jt::TextureManagerImpl> m_textureManager;
-    RenderTarget* tmpTarget;
-    SDL_Texture* t;
 
     jt::Recti m_srcRect;
     jt::Recti m_destRect;

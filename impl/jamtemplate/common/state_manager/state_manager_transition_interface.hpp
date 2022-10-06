@@ -1,7 +1,7 @@
 #ifndef JAMTEMPLATE_STATE_MANAGER_TRANSITION_INTERFACE_HPP
 #define JAMTEMPLATE_STATE_MANAGER_TRANSITION_INTERFACE_HPP
 
-#include <render_target.hpp>
+#include <graphics/render_target_interface.hpp>
 #include <memory>
 
 namespace jt {
@@ -26,7 +26,7 @@ public:
 
     /// Draw the transition
     /// \param rt the render target
-    virtual void draw(std::shared_ptr<jt::RenderTarget> rt) = 0;
+    virtual void draw(std::shared_ptr<jt::RenderTargetInterface> rt) = 0;
 };
 
 } // namespace jt

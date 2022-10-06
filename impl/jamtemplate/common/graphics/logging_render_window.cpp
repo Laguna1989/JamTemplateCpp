@@ -23,7 +23,7 @@ void jt::LoggingRenderWindow::checkForClose()
     m_decoratee.checkForClose();
 }
 
-std::shared_ptr<jt::RenderTarget> jt::LoggingRenderWindow::createRenderTarget()
+std::shared_ptr<jt::RenderTargetLayer> jt::LoggingRenderWindow::createRenderTarget()
 {
     m_logger.debug("createRenderTarget", { "jt", "RenderWindow" });
     return m_decoratee.createRenderTarget();

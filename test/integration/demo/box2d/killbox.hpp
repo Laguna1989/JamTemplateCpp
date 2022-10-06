@@ -14,7 +14,7 @@ public:
     void checkIfPlayerIsInKillbox(
         jt::Vector2f const& playerPosition, std::function<void(void)> callback) const;
 
-    std::string getName() const;
+    std::string getName() const override;
 
     jt::Vector2f getPosition() const;
     void setPosition(jt::Vector2f const& pos);

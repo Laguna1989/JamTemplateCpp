@@ -13,7 +13,7 @@ public:
     void updateGraphics(float elapsed) override;
     void setPosition(jt::Vector2f const& playerPosition) override;
 
-    void draw(std::shared_ptr<jt::RenderTarget> target) override;
+    void draw(std::shared_ptr<jt::RenderTargetInterface> target) override;
     void flash(float time, jt::Color const& color) override;
     bool setAnimationIfNotSet(std::string const& newAnimationName) override;
     std::string getCurrentAnimation() const override;

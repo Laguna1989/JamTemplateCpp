@@ -41,7 +41,7 @@ void jt::StateManagerTransitionImpl::update(float elapsed)
     }
 }
 
-void jt::StateManagerTransitionImpl::draw(std::shared_ptr<jt::RenderTarget> rt)
+void jt::StateManagerTransitionImpl::draw(std::shared_ptr<jt::RenderTargetInterface> rt)
 {
     if (m_started) {
         doDraw(rt);

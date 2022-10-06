@@ -29,10 +29,10 @@ public:
         std::tuple<std::vector<TileInfo> const&, std::vector<std::shared_ptr<jt::Sprite>>> const&
             mapInfo);
 
-    void doDraw(std::shared_ptr<jt::RenderTarget> sptr) const override;
+    void doDraw(std::shared_ptr<jt::RenderTargetLayer> sptr) const override;
 
-    void doDrawFlash(std::shared_ptr<jt::RenderTarget> sptr) const override;
-    void doDrawShadow(std::shared_ptr<jt::RenderTarget> sptr) const override;
+    void doDrawFlash(std::shared_ptr<jt::RenderTargetLayer> sptr) const override;
+    void doDrawShadow(std::shared_ptr<jt::RenderTargetLayer> sptr) const override;
 
     void doUpdate(float elapsed) override;
 

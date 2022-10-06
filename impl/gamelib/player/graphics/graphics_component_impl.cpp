@@ -23,7 +23,7 @@ void GraphicsComponentImpl::setPosition(jt::Vector2f const& playerPosition)
     m_animation->setPosition(spritePosition);
 }
 
-void GraphicsComponentImpl::draw(std::shared_ptr<jt::RenderTarget> target)
+void GraphicsComponentImpl::draw(std::shared_ptr<jt::RenderTargetInterface> target)
 {
     m_animation->draw(target);
 }

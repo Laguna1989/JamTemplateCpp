@@ -16,6 +16,12 @@ void StateScroll::doInternalCreate()
     m_shape1 = jt::dh::createShapeRect(
         jt::Vector2f { 40.0f, 30.0f }, jt::colors::Cyan, textureManager());
     m_shape1->setPosition(jt::Vector2f { 100.0f, 100.0f });
+    getGame()->gfx().createZLayer(5);
+    m_shape1->setZ(5);
+
+    m_shape2 = jt::dh::createShapeRect(
+        jt::Vector2f { 40.0f, 30.0f }, jt::colors::Blue, textureManager());
+    m_shape2->setPosition(jt::Vector2f { 120.0f, 115.0f });
 
     m_sprite
         = std::make_shared<jt::Sprite>("assets/test/integration/demo/wall.png", textureManager());
@@ -88,6 +94,8 @@ void StateScroll::doInternalUpdate(float const elapsed)
     m_shape1->setRotation(getAge() * 90);
     m_shape1->update(elapsed);
 
+    m_shape2->update(elapsed);
+
     m_sprite->setRotation(-getAge() * 90);
     m_sprite->update(elapsed);
 
@@ -109,6 +117,7 @@ void StateScroll::doInternalDraw() const
     m_sprite->draw(renderTarget());
     m_spriteCircle->draw(renderTarget());
     m_shape1->draw(renderTarget());
+    m_shape2->draw(renderTarget());
     m_anim->draw(renderTarget());
 
     m_text_left_aligned->draw(renderTarget());

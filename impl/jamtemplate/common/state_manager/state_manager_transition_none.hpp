@@ -10,7 +10,7 @@ public:
     void start() override;
     bool isInProgress() override;
     void update(float elapsed) override;
-    void draw(std::shared_ptr<RenderTarget> rt) override;
+    void draw(std::shared_ptr<jt::RenderTargetInterface> rt) override;
     bool triggerStateChange() override;
 
 private:

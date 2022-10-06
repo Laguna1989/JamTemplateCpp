@@ -13,9 +13,9 @@ jt::RenderWindow::RenderWindow(unsigned int width, unsigned int height, std::str
     ImGui::SFML::Init(*m_window.get());
 }
 
-std::shared_ptr<jt::RenderTarget> jt::RenderWindow::createRenderTarget()
+std::shared_ptr<jt::RenderTargetLayer> jt::RenderWindow::createRenderTarget()
 {
-    return std::make_shared<jt::RenderTarget>();
+    return std::make_shared<jt::RenderTargetLayer>();
 }
 
 bool jt::RenderWindow::isOpen() const { return m_window->isOpen(); }

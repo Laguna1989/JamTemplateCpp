@@ -12,7 +12,7 @@ constexpr std::size_t numberOfIterationLoops { 100u };
 static void BM_UpdateDrawablePositions(benchmark::State& state)
 {
     jt::null_objects::GfxNull gfx;
-    jt::TextureManagerImpl tm(gfx.target());
+    jt::TextureManagerImpl tm(gfx.target()->get(0));
 
     std::array<jt::Shape, arraySize> shapes;
     for (auto& s : shapes) {

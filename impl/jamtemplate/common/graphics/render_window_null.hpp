@@ -15,7 +15,7 @@ public:
 
     bool isOpen() const override;
     void checkForClose() override;
-    std::shared_ptr<jt::RenderTarget> createRenderTarget() override;
+    std::shared_ptr<jt::RenderTargetLayer> createRenderTarget() override;
     jt::Vector2f getSize() const override;
     void draw(std::unique_ptr<jt::Sprite>& ptr) override;
     void display() override;

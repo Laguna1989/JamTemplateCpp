@@ -1,9 +1,9 @@
 ﻿#ifndef JAMTEMPLATE_GAMESTATE_HPP
 #define JAMTEMPLATE_GAMESTATE_HPP
 
-#include "game_object_collection.hpp"
-#include "tween_collection.hpp"
 #include <game_object.hpp>
+#include <game_object_collection.hpp>
+#include <tween_collection.hpp>
 #include <tweens/tween_interface.hpp>
 #include <memory>
 #include <string>

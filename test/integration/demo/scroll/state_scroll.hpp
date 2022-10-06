@@ -14,6 +14,7 @@ public:
 
 private:
     jt::Shape::Sptr m_shape1;
+    jt::Shape::Sptr m_shape2;
     jt::Animation::Sptr m_anim;
     jt::Sprite::Sptr m_sprite;
     jt::Sprite::Sptr m_spriteCircle;

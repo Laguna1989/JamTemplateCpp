@@ -11,13 +11,15 @@ class MockGfx : public jt::GfxInterface {
 public:
     MOCK_METHOD(jt::RenderWindowInterface&, window, (), (override));
     MOCK_METHOD(jt::CamInterface&, camera, (), (override));
-    MOCK_METHOD(std::shared_ptr<jt::RenderTarget>, target, (), (override));
+    MOCK_METHOD(std::shared_ptr<jt::RenderTargetInterface>, target, (), (override));
     MOCK_METHOD(jt::TextureManagerInterface&, textureManager, (), (override));
 
     MOCK_METHOD(void, reset, (), (override));
     MOCK_METHOD(void, update, (float), (override));
     MOCK_METHOD(void, clear, (), (override));
     MOCK_METHOD(void, display, (), (override));
+
+    MOCK_METHOD(void, createZLayer, (int), (override));
 };
 
 #endif // JAMTEMPLATE_MOCK_GFX_HPP

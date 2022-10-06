@@ -8,7 +8,7 @@
 namespace jt {
 class TextureManagerImpl : public ::jt::TextureManagerInterface {
 public:
-    explicit TextureManagerImpl(std::shared_ptr<jt::RenderTarget> renderer);
+    explicit TextureManagerImpl(std::shared_ptr<jt::RenderTargetLayer> renderer);
     sf::Texture& get(std::string const& str) override;
     void reset() override;
     std::string getFlashName(std::string const& str) override;
