@@ -18,9 +18,9 @@
 #include <log/logger.hpp>
 #include <logging_camera.hpp>
 #include <random/random.hpp>
+#include <state_intro.hpp>
 #include <state_manager/logging_state_manager.hpp>
 #include <state_manager/state_manager.hpp>
-#include <state_menu.hpp>
 #include <memory>
 
 std::shared_ptr<jt::GameBase> game;
@@ -57,7 +57,7 @@ int main()
     jt::AudioImpl audio;
     jt::LoggingAudio loggingAudio { audio, logger };
 
-    jt::StateManager stateManager { std::make_shared<StateMenu>() };
+    jt::StateManager stateManager { std::make_shared<StateIntro>() };
     jt::LoggingStateManager loggingStateManager { stateManager, logger };
 
     jt::ActionCommandManager actionCommandManager(logger);
