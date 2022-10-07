@@ -85,12 +85,6 @@ bool jt::Button::isOver(jt::Vector2f const& mousePosition)
 
 void jt::Button::doUpdate(float elapsed)
 {
-    m_disabledOverlay->setPosition((m_pos));
-    m_disabledOverlay->update(elapsed);
-
-    m_background->setPosition(m_pos);
-    m_background->update(elapsed);
-
     if (m_drawable) {
         m_drawable->setPosition(m_pos);
         m_drawable->update(elapsed);
@@ -114,6 +108,11 @@ void jt::Button::doUpdate(float elapsed)
     } else {
         m_background->play("normal");
     }
+    m_disabledOverlay->setPosition((m_pos));
+    m_disabledOverlay->update(elapsed);
+
+    m_background->setPosition(m_pos);
+    m_background->update(elapsed);
 }
 bool jt::Button::getActive() const { return m_isActive; }
 void jt::Button::setActive(bool isActive) { m_isActive = isActive; }
