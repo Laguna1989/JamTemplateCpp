@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1664647236474,
+  "lastUpdate": 1665118956101,
   "repoUrl": "https://github.com/Laguna1989/JamTemplateCpp",
   "entries": {
     "Benchmark": [
@@ -10032,6 +10032,84 @@ window.BENCHMARK_DATA = {
             "value": 3.6579230366491764,
             "unit": "ms/iter",
             "extra": "iterations: 191\ncpu: 3.657119371727749 ms\nthreads: 1"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "laguna.ws@gmail.com",
+            "name": "Laguna1989",
+            "username": "Laguna1989"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "bfb8aec9ad4d67a8cec078acf528489a27c25b96",
+          "message": "z layers (#262)\n\n* Add first implementation for sfml, not yet working on sdl\r\n\r\n* Small improvements for SDL\r\n\r\n* Rename renderTarget() to renderTargets()\r\n\r\n* Refactor for starting SDL work\r\n\r\n* Fix include\r\n\r\n* Add include\r\n\r\n* More includes in header\r\n\r\n* Fix Z layering on SDL\r\n\r\n* Clean up SDL RenderTargetContainer implementation\r\n\r\n* Make JamTemplate and Performancetests run\r\n\r\n* Make unittests pass, refactor code a bit\r\n\r\n* Fix SDL test\r\n\r\n* Rename rendertargets\r\n\r\n* Minor improvements",
+          "timestamp": "2022-10-06T22:09:16+02:00",
+          "tree_id": "7542ea7051d2f46630167f68d9f27cde442574d8",
+          "url": "https://github.com/Laguna1989/JamTemplateCpp/commit/bfb8aec9ad4d67a8cec078acf528489a27c25b96"
+        },
+        "date": 1665118955575,
+        "tool": "googlecpp",
+        "benches": [
+          {
+            "name": "BM_UpdateDrawablePositions",
+            "value": 3.776154735135151,
+            "unit": "ms/iter",
+            "extra": "iterations: 185\ncpu: 3.7760108108108104 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GetAllCommands",
+            "value": 0.32047424403669744,
+            "unit": "ms/iter",
+            "extra": "iterations: 2180\ncpu: 0.3203366055045871 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_LoggerLogWithoutTarget",
+            "value": 0.7683002089715653,
+            "unit": "ms/iter",
+            "extra": "iterations: 914\ncpu: 0.7680062363238511 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_LoggerLogWithCoutTargetSetToOff",
+            "value": 0.8285485813679425,
+            "unit": "ms/iter",
+            "extra": "iterations: 848\ncpu: 0.827966745283019 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_UpdateObjectGroup",
+            "value": 0.048716316933794634,
+            "unit": "ms/iter",
+            "extra": "iterations: 14350\ncpu: 0.04871266898954707 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_UpdateSpatialObjectGrid",
+            "value": 0.3329712153558102,
+            "unit": "ms/iter",
+            "extra": "iterations: 2136\ncpu: 0.3325715823970039 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_StartGame",
+            "value": 0.003210565128559096,
+            "unit": "ms/iter",
+            "extra": "iterations: 220249\ncpu: 0.003199045171601235 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_RefineTilemapCollisions",
+            "value": 0.18388822195955237,
+            "unit": "ms/iter",
+            "extra": "iterations: 3807\ncpu: 0.18386903073286046 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GamestateWithTweeningShapes",
+            "value": 3.489846660000069,
+            "unit": "ms/iter",
+            "extra": "iterations: 200\ncpu: 3.489614999999997 ms\nthreads: 1"
           }
         ]
       }
