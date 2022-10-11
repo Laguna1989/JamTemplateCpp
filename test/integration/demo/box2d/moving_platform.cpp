@@ -4,8 +4,8 @@
 #include <iostream>
 
 MovingPlatform::MovingPlatform(std::shared_ptr<jt::Box2DWorldInterface> world,
-    jt::Vector2f const& size, std::vector<jt::Vector2f> const& positions, float velocity,
-    float timeoffset)
+    jt::Vector2f const& size, std::vector<std::pair<jt::Vector2f, float>> const& positions,
+    float velocity, float timeoffset)
 {
     m_platformSize = size;
     m_positions = positions;
@@ -29,9 +29,9 @@ void MovingPlatform::doCreate()
     fixtureDef.shape = &collider;
     m_physicsObject->getB2Body()->CreateFixture(&fixtureDef);
 
-    auto const p1 = m_positions[m_currentIndex];
+    auto const p1 = m_positions[m_currentIndex].first;
 
-    auto const p2 = m_positions[m_currentIndex + 1];
+    auto const p2 = m_positions[m_currentIndex + 1].first;
 
     auto const totalDiff = p2 - p1;
     auto diff = totalDiff;
@@ -50,6 +50,29 @@ void MovingPlatform::doCreate()
         "assets/test/integration/demo/platform_r.png", textureManager());
 }
 
+bool MovingPlatform::moveFromTo(
+    std::pair<jt::Vector2f, float> from, std::pair<jt::Vector2f, float> to, float elapsed)
+{
+    if (m_waitTime <= from.second) {
+        m_waitTime += elapsed;
+        m_physicsObject->setVelocity(jt::Vector2f { 0.0f, 0.0f });
+        return false;
+    }
+    auto const p1 = from.first;
+    auto const p2 = to.first;
+
+    auto const totalDiff = p2 - p1;
+    auto diff = totalDiff;
+    jt::MathHelper::normalizeMe(diff);
+    m_currentVelocity = diff * m_velocity;
+
+    m_timeTilNextPlatform = jt::MathHelper::length(totalDiff) / m_velocity;
+    m_physicsObject->setPosition(p1);
+
+    m_physicsObject->setVelocity(m_currentVelocity);
+    return true;
+}
+
 void MovingPlatform::doUpdate(float const elapsed)
 {
     m_timeOffset -= elapsed;
@@ -58,76 +81,36 @@ void MovingPlatform::doUpdate(float const elapsed)
     } else {
         m_physicsObject->setVelocity(m_currentVelocity);
     }
-    // TODO Refactor this mess
+
     if (m_timeTilNextPlatform > 0) {
         m_timeTilNextPlatform -= elapsed;
+        m_waitTime = 0.0f;
     } else {
         if (m_movingForward) {
-            if (m_currentIndex >= m_positions.size() - 2) {
-
-                m_physicsObject->setVelocity(jt::Vector2f { 0.0f, 0.0f });
-                m_movingForward = false;
-
-                auto const p1 = m_positions[m_currentIndex + 1];
-                auto const p2 = m_positions[m_currentIndex];
-
-                auto const totalDiff = p2 - p1;
-                auto diff = totalDiff;
-                jt::MathHelper::normalizeMe(diff);
-                m_currentVelocity = diff * m_velocity;
-
-                m_timeTilNextPlatform = jt::MathHelper::length(totalDiff) / m_velocity;
-                m_physicsObject->setPosition(p1);
-
-                m_physicsObject->setVelocity(m_currentVelocity);
-
+            auto const hasReachedLastPosition = m_currentIndex >= m_positions.size() - 2;
+            if (hasReachedLastPosition) {
+                if (moveFromTo(
+                        m_positions[m_currentIndex + 1], m_positions[m_currentIndex], elapsed)) {
+                    m_movingForward = false;
+                }
             } else {
-                m_currentIndex++;
-                auto const p1 = m_positions[m_currentIndex];
-                auto const p2 = m_positions[m_currentIndex + 1];
-
-                auto const totalDiff = p2 - p1;
-                auto diff = totalDiff;
-                jt::MathHelper::normalizeMe(diff);
-                m_currentVelocity = diff * m_velocity;
-
-                m_timeTilNextPlatform = jt::MathHelper::length(totalDiff) / m_velocity;
-                m_physicsObject->setPosition(p1);
-
-                m_physicsObject->setVelocity(m_currentVelocity);
+                if (moveFromTo(m_positions[m_currentIndex + 1], m_positions[m_currentIndex + 2],
+                        elapsed)) {
+                    m_currentIndex++;
+                }
             }
         } else {
-            if (m_currentIndex <= 0) {
-                m_physicsObject->setVelocity(jt::Vector2f { 0.0f, 0.0f });
-                m_movingForward = true;
-
-                auto const p1 = m_positions[m_currentIndex];
-                auto const p2 = m_positions[m_currentIndex + 1];
-
-                auto const totalDiff = p2 - p1;
-                auto diff = totalDiff;
-                jt::MathHelper::normalizeMe(diff);
-                m_currentVelocity = diff * m_velocity;
-
-                m_timeTilNextPlatform = jt::MathHelper::length(totalDiff) / m_velocity;
-                m_physicsObject->setPosition(p1);
-
-                m_physicsObject->setVelocity(m_currentVelocity);
-
+            auto const hasReachedFirstPosition = m_currentIndex <= 0;
+            if (hasReachedFirstPosition) {
+                if (moveFromTo(
+                        m_positions[m_currentIndex], m_positions[m_currentIndex + 1], elapsed)) {
+                    m_movingForward = true;
+                }
             } else {
-
-                auto const p1 = m_positions[m_currentIndex];
-                auto const p2 = m_positions[m_currentIndex - 1];
-                m_currentIndex--;
-                auto const totalDiff = p2 - p1;
-                auto diff = totalDiff;
-                jt::MathHelper::normalizeMe(diff);
-                m_currentVelocity = diff * m_velocity;
-
-                m_timeTilNextPlatform = jt::MathHelper::length(totalDiff) / m_velocity;
-                m_physicsObject->setPosition(p1);
-
-                m_physicsObject->setVelocity(m_currentVelocity);
+                if (moveFromTo(
+                        m_positions[m_currentIndex], m_positions[m_currentIndex - 1], elapsed)) {
+                    m_currentIndex--;
+                }
             }
         }
     }
@@ -163,5 +146,5 @@ void MovingPlatform::doDraw() const
 void MovingPlatform::setLinkedKillbox(std::shared_ptr<Killbox> kb)
 {
     m_linkedKillbox = kb;
-    m_linkedKillboxOffset = kb->getPosition() - m_positions[0];
+    m_linkedKillboxOffset = kb->getPosition() - m_positions[0].first;
 }
