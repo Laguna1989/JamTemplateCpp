@@ -47,9 +47,9 @@ public:
     /// display the drawables to the screen
     virtual void display() = 0;
 
-    /// Create a ZLayer (to be used with DrawableInterface::setZ()
-    /// \param z The z layer. Drawables will be drawn in ascending order, that means zlayer 2 is
-    /// drawn above zlayer 1.
+    /// Create a ZLayer (to be used with DrawableInterface::setZ())
+    /// \param z The z layer. Drawables will be drawn in ascending order, that means z layer 2 is
+    /// drawn above z layer 1.
     virtual void createZLayer(int z) = 0;
 
 protected:

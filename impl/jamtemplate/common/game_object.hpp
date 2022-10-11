@@ -2,6 +2,7 @@
 #define JAMTEMPLATE_GAMEOBJECT_HPP
 
 #include <counted_object.hpp>
+#include <game_object_interface.hpp>
 #include <graphics/render_target_interface.hpp>
 #include <texture_manager_interface.hpp>
 #include <memory>
@@ -12,35 +13,31 @@ namespace jt {
 // forward declaration
 class GameInterface;
 
-class GameObject : public CountedObj<GameObject> {
+class GameObject : public jt::GameObjectInterface, public CountedObj<GameObject> {
 public:
     /// Destructor
     virtual ~GameObject() = default;
 
-    /// Create the GameObject
+    /// Create the GameObject. It is expected that SetGameInstance was called before.
     ///
     /// Will call doCreate
-    void create();
+    void create() final;
 
     /// Update the GameObject
     ///
     /// Will call doUpdate()
     ///
     /// \param elapsed the elapsed time in seconds
-    void update(float const elapsed);
+    void update(float const elapsed) final;
 
     /// Draw the GameObject
     ///
     /// Will call doDraw
-    void draw() const;
+    void draw() const final;
 
     /// Get the age of the GameObject
     /// \return the age in seconds
     float getAge() const;
-
-    /// Set the age of the GameObject
-    /// \param newAgeInSeconds the new age in seconds
-    void setAge(float newAgeInSeconds);
 
     /// Set the game instance
     /// \param gameInstance the game instance
@@ -57,23 +54,23 @@ public:
     /// Kill this GameObject
     ///
     /// kill will trigger the removal of the GameObject from the GameState
-    void kill();
+    void kill() final;
 
     /// Check if the GameObject is alive
     /// \return true if alive, false otherwise
-    bool isAlive() const;
+    bool isAlive() const final;
 
     /// Destroy the GameObject
     ///
     /// destroy will be called when the GameState removes the object
     /// NOTE: Do not modify or touch game here.
-    void destroy();
+    void destroy() final;
 
     void storeActionCommand(std::shared_ptr<void> commandCallback);
 
     /// Get the name of the Object. Should be overwritten by the derived class
     /// \return the name of the GameObject.
-    virtual std::string getName() const;
+    virtual std::string getName() const override;
 
     /// Get the number of alive gameobjects.
     std::size_t getNumberOfAliveGameObjects() const;
@@ -102,6 +99,7 @@ private:
 
     // Do NOT modify the game or the gamestate in this function
     virtual void doDestroy();
+
     void checkForValidGame() const;
 };
 

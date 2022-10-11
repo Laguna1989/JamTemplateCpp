@@ -17,6 +17,10 @@ void StateExplosion::doInternalCreate()
     auto t
         = std::make_shared<Timer>(0.6f, [this]() { getGame()->gfx().camera().shake(0.5f, 10.0f); });
     add(t);
+
+    for (auto i = 1; i != 20; ++i) {
+        getGame()->gfx().createZLayer(i);
+    }
 }
 
 void StateExplosion::doInternalUpdate(float const /*elapsed*/)
@@ -28,6 +32,7 @@ void StateExplosion::doInternalUpdate(float const /*elapsed*/)
         using jt::Timer;
         auto t = std::make_shared<Timer>(
             jt::Random::getFloat(0.125, 3), [bp]() { bp->Flash(); }, 1);
+        bp->getAnimation()->setZ(jt::Random::getInt(0, 19));
         add(t);
 
         auto tw = jt::TweenAlpha::create(bp->getAnimation(), 0.1f, 255, 0);

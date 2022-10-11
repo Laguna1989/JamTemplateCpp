@@ -51,15 +51,19 @@ void Level::doCreate()
 void Level::loadMovingPlatforms(jt::tilemap::TilesonLoader& loader)
 {
     auto const platform_infos = loader.loadObjectsFromLayer("platforms");
-    std::map<std::string, jt::Vector2f> allPositionsInLevel;
+    std::map<std::string, std::pair<jt::Vector2f, float>> allPositionsInLevel;
     for (auto const& p : platform_infos) {
-        if (p.properties.strings.empty()) {
-            allPositionsInLevel[p.name] = p.position;
+        if (p.properties.strings.count("type") == 0) {
+            float waitTime = 0.0f;
+            if (p.properties.floats.count("wait")) {
+                waitTime = p.properties.floats.at("wait");
+            }
+            allPositionsInLevel[p.name] = std::make_pair(p.position, waitTime);
         }
     }
     for (auto const& p : platform_infos) {
         if (!p.properties.strings.empty()) {
-            std::vector<jt::Vector2f> currentPlatformPositions;
+            std::vector<std::pair<jt::Vector2f, float>> currentPlatformPositions;
             auto const positionsString = p.properties.strings.at("positions");
             auto const individualPositionStrings = strutil::split(positionsString, ",");
             for (auto const& ps : individualPositionStrings) {
