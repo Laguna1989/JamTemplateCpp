@@ -1,13 +1,21 @@
 ﻿#include <game_interface.hpp>
+#include <game_object_collection.hpp>
 #include <game_state.hpp>
 #include <log/console.hpp>
 #include <log/info_screen.hpp>
+#include <tween_collection.hpp>
 #include <algorithm>
+
+jt::GameState::GameState()
+{
+    m_objects = std::make_unique<jt::GameObjectCollection>();
+    m_tweens = std::make_unique<jt::TweenCollection>();
+}
 
 jt::GameState::~GameState()
 {
-    m_tweens.clear();
-    m_objects.clear();
+    m_tweens->clear();
+    m_objects->clear();
 }
 
 void jt::GameState::start() { m_started = true; }
@@ -17,12 +25,12 @@ void jt::GameState::add(std::shared_ptr<jt::GameObject> gameObject)
 {
     gameObject->setGameInstance(getGame());
     gameObject->create();
-    m_objects.add(gameObject);
+    m_objects->add(gameObject);
 }
 
-void jt::GameState::add(std::shared_ptr<TweenInterface> tween) { m_tweens.add(tween); }
+void jt::GameState::add(std::shared_ptr<TweenInterface> tween) { m_tweens->add(tween); }
 
-size_t jt::GameState::getNumberOfObjects() const { return m_objects.size(); }
+size_t jt::GameState::getNumberOfObjects() const { return m_objects->size(); }
 
 void jt::GameState::doCreate() { internalCreate(); }
 void jt::GameState::doUpdate(float const elapsed) { internalUpdate(elapsed); }
@@ -31,7 +39,7 @@ void jt::GameState::doDraw() const { internalDraw(); };
 void jt::GameState::internalCreate()
 {
     getGame()->logger().debug("create GameState: " + getName(), { "jt" });
-    m_tweens.clear();
+    m_tweens->clear();
     doInternalCreate();
     add(std::make_shared<jt::Console>(getGame()->logger()));
     add(std::make_shared<jt::InfoScreen>());
@@ -57,7 +65,7 @@ void jt::GameState::internalDraw() const
     doInternalDraw();
 }
 
-void jt::GameState::updateObjects(float elapsed) { m_objects.update(elapsed); }
+void jt::GameState::updateObjects(float elapsed) { m_objects->update(elapsed); }
 
 void jt::GameState::updateTweens(float elapsed)
 {
@@ -68,10 +76,10 @@ void jt::GameState::updateTweens(float elapsed)
     if (getAge() < expected_minimum_age) {
         return;
     }
-    m_tweens.update(elapsed);
+    m_tweens->update(elapsed);
 }
 
-void jt::GameState::drawObjects() const { m_objects.draw(); }
+void jt::GameState::drawObjects() const { m_objects->draw(); }
 
 void jt::GameState::setAutoUpdateObjects(bool performAutoUpdate)
 {

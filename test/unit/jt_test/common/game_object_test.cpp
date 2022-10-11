@@ -60,10 +60,10 @@ TEST(GameObjectTest, AgeIsZeroByDefault)
     ASSERT_EQ(go.getAge(), 0.0f);
 }
 
-TEST(GameObjectTest, AgeSetBySetAge)
+TEST(GameObjectTest, AgeIncreasedByUpdate)
 {
     GameObject go {};
-    go.setAge(5000.0f);
+    go.update(5000.0f);
     ASSERT_EQ(go.getAge(), 5000.0f);
 }
 

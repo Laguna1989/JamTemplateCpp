@@ -2,8 +2,7 @@
 #define JAMTEMPLATE_GAMESTATE_HPP
 
 #include <game_object.hpp>
-#include <game_object_collection.hpp>
-#include <tween_collection.hpp>
+#include <game_object_interface.hpp>
 #include <tweens/tween_interface.hpp>
 #include <memory>
 #include <string>
@@ -11,10 +10,16 @@
 
 namespace jt {
 
+class GameObjectCollection;
+class TweenCollection;
+
 class GameState : public jt::GameObject {
 public:
     using Sptr = std::shared_ptr<jt::GameState>;
 
+    GameState();
+
+    /// Destructor
     virtual ~GameState();
 
     /// Add a GameObject to the GameState
@@ -72,8 +77,8 @@ protected:
     void drawObjects() const;
 
 private:
-    jt::TweenCollection m_tweens;
-    jt::GameObjectCollection m_objects;
+    std::unique_ptr<jt::TweenCollection> m_tweens;
+    std::unique_ptr<jt::GameObjectCollection> m_objects;
 
     bool m_doAutoUpdateObjects { true };
     bool m_doAutoUpdateTweens { true };

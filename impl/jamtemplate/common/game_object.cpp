@@ -26,7 +26,6 @@ void jt::GameObject::update(float const elapsed)
 void jt::GameObject::draw() const { doDraw(); };
 
 float jt::GameObject::getAge() const { return m_age; }
-void jt::GameObject::setAge(float newAgeInSeconds) { m_age = newAgeInSeconds; }
 
 void jt::GameObject::setGameInstance(std::weak_ptr<jt::GameInterface> gameInstance)
 {
@@ -72,6 +71,7 @@ void jt::GameObject::storeActionCommand(std::shared_ptr<void> commandCallback)
 {
     m_storedActionCommands.emplace_back(std::move(commandCallback));
 }
+
 std::string jt::GameObject::getName() const { return ""; }
 std::size_t jt::GameObject::getNumberOfAliveGameObjects() const { return aliveObjects(); }
 std::size_t jt::GameObject::getNumberOfCreatedGameObjects() const { return createdObjects(); }

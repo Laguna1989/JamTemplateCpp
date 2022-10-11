@@ -6,7 +6,7 @@ void jt::GameObjectCollection::clear()
     m_objects.clear();
     m_objectsToAdd.clear();
 }
-void jt::GameObjectCollection::add(std::shared_ptr<jt::GameObject> object)
+void jt::GameObjectCollection::add(std::shared_ptr<jt::GameObjectInterface> object)
 {
     m_objectsToAdd.push_back(object);
 }

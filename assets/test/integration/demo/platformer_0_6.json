@@ -281,6 +281,12 @@
                  "height":8,
                  "id":53,
                  "name":"p1t",
+                 "properties":[
+                        {
+                         "name":"wait",
+                         "type":"float",
+                         "value":1
+                        }],
                  "rotation":0,
                  "visible":true,
                  "width":8,
@@ -367,6 +373,12 @@
                  "height":8,
                  "id":64,
                  "name":"p2t",
+                 "properties":[
+                        {
+                         "name":"wait",
+                         "type":"float",
+                         "value":1
+                        }],
                  "rotation":0,
                  "visible":true,
                  "width":8,
@@ -421,6 +433,12 @@
                  "height":8,
                  "id":68,
                  "name":"p3t",
+                 "properties":[
+                        {
+                         "name":"wait",
+                         "type":"float",
+                         "value":1
+                        }],
                  "rotation":0,
                  "visible":true,
                  "width":8,
@@ -507,6 +525,12 @@
                  "height":8,
                  "id":73,
                  "name":"p4t",
+                 "properties":[
+                        {
+                         "name":"wait",
+                         "type":"float",
+                         "value":1
+                        }],
                  "rotation":0,
                  "visible":true,
                  "width":8,
@@ -529,6 +553,12 @@
                  "height":8,
                  "id":75,
                  "name":"p5t",
+                 "properties":[
+                        {
+                         "name":"wait",
+                         "type":"float",
+                         "value":1
+                        }],
                  "rotation":0,
                  "visible":true,
                  "width":8,
