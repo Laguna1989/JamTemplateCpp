@@ -178,7 +178,7 @@
                         {
                          "name":"positions",
                          "type":"string",
-                         "value":"p3,p2,p1"
+                         "value":"p2,p1"
                         }, 
                         {
                          "name":"velocity",
@@ -196,6 +196,12 @@
                  "height":8,
                  "id":8,
                  "name":"p1",
+                 "properties":[
+                        {
+                         "name":"wait",
+                         "type":"float",
+                         "value":1
+                        }],
                  "rotation":0,
                  "visible":true,
                  "width":8,
@@ -207,22 +213,17 @@
                  "height":8,
                  "id":9,
                  "name":"p2",
+                 "properties":[
+                        {
+                         "name":"wait",
+                         "type":"float",
+                         "value":1
+                        }],
                  "rotation":0,
                  "visible":true,
                  "width":8,
                  "x":368,
                  "y":192
-                }, 
-                {
-                 "class":"",
-                 "height":8,
-                 "id":10,
-                 "name":"p3",
-                 "rotation":0,
-                 "visible":true,
-                 "width":8,
-                 "x":368,
-                 "y":136
                 }],
          "opacity":1,
          "type":"objectgroup",
