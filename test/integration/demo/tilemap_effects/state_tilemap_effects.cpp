@@ -1,6 +1,6 @@
 ﻿#include "state_tilemap_effects.hpp"
-#include "timer.hpp"
 #include <color/palette.hpp>
+#include <color/palette_builder.hpp>
 #include <game_interface.hpp>
 #include <input/input_manager.hpp>
 #include <pathfinder/pathfinder.hpp>
@@ -9,6 +9,7 @@
 #include <tilemap/tilemap_cache.hpp>
 #include <tilemap/tilemap_helpers.hpp>
 #include <tilemap/tileson_loader.hpp>
+#include <timer.hpp>
 #include <imgui.h>
 
 void StateTilemapEffects::doInternalCreate()
@@ -73,9 +74,10 @@ void StateTilemapEffects::doInternalDraw() const
     ImGui::Separator();
     if (ImGui::Button("Colorize X+Y")) {
         auto const numberOfColors = 360U;
+        jt::PaletteBuilder builder;
         m_tileLayerGround->setColorFunction(
             [&t = m_time,
-                palette = jt::Palette::createGradientH(0, 360, 100.0, 100.0f, numberOfColors)](
+                palette = builder.createGradientH(0, 360, 100.0, 100.0f, numberOfColors).create()](
                 jt::Vector2f const& pos) {
                 auto const positionScale = 9;
                 auto const timeScale = 120.0f;
@@ -88,9 +90,10 @@ void StateTilemapEffects::doInternalDraw() const
 
     if (ImGui::Button("Colorize Rad")) {
         auto const numberOfColors = 360U;
+        jt::PaletteBuilder builder;
         m_tileLayerGround->setColorFunction(
             [&t = m_time,
-                palette = jt::Palette::createGradientH(0, 360, 100.0, 100.0f, numberOfColors)](
+                palette = builder.createGradientH(0, 360, 100.0, 100.0f, numberOfColors).create()](
                 jt::Vector2f const& pos) {
                 jt::Vector2f const center { 8.0f * 16.0f, 8.0f * 16.0f };
                 auto dist = pos - center;

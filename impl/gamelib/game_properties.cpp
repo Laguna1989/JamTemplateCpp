@@ -1,10 +1,15 @@
 ﻿#include "game_properties.hpp"
+#include <color/palette_builder.hpp>
 
-jt::Palette GP::getPalette()
+namespace {
+
+jt::Palette createPalette()
 {
-    static auto const p = jt::Palette::parseGPL(R"(GIMP Palette
+    jt::PaletteBuilder builder;
+    return builder
+        .parseGPL(R"(GIMP Palette
 #Palette Name: Dreamscape8
-#Description: A palette made of low saturation colours to give your art a dreamlike quality. 
+#Description: A palette made of low saturation colours to give your art a dreamlike quality.
 #Colors: 8
 201	204	161	c9cca1
 202	160	90	caa05a
@@ -14,7 +19,15 @@ jt::Palette GP::getPalette()
 81	82	98	515262
 99	120	125	63787d
 142	160	145	8ea091
-)");
+)")
+        .create();
+}
+
+} // namespace
+
+jt::Palette GP::getPalette()
+{
+    static auto const p = createPalette();
     return p;
 }
 

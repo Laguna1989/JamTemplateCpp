@@ -1,8 +1,8 @@
-#include "color_helpers.hpp"
+#include "color_conversions.hpp"
 #include <sstream>
 #include <stdexcept>
 
-std::tuple<std::uint8_t, std::uint8_t, std::uint8_t> jt::ColorHelpers::hsv2rgb(
+std::tuple<std::uint8_t, std::uint8_t, std::uint8_t> jt::ColorConversions::hsv2rgb(
     float h, float s, float v)
 {
     s /= 100.0f;
@@ -83,7 +83,7 @@ std::uint8_t hexStringToUint8(std::string const& input)
 
 } // namespace
 
-std::tuple<std::uint8_t, std::uint8_t, std::uint8_t> jt::ColorHelpers::hex2rgb(
+std::tuple<std::uint8_t, std::uint8_t, std::uint8_t> jt::ColorConversions::hex2rgb(
     std::string const& hexString)
 {
     if (hexString.empty()) {
@@ -103,7 +103,7 @@ std::tuple<std::uint8_t, std::uint8_t, std::uint8_t> jt::ColorHelpers::hex2rgb(
     return std::make_tuple(
         hexStringToUint8(rString), hexStringToUint8(gString), hexStringToUint8(bString));
 }
-std::tuple<float, float, float> jt::ColorHelpers::rgb2hsv(
+std::tuple<float, float, float> jt::ColorConversions::rgb2hsv(
     std::uint8_t r, std::uint8_t g, std::uint8_t b)
 {
     std::tuple<float, float, float> out;

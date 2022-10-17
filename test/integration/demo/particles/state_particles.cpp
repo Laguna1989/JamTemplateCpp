@@ -1,5 +1,5 @@
 #include "state_particles.hpp"
-#include <color/make_color.hpp>
+#include <color/color_builder.hpp>
 #include <lerp.hpp>
 #include <random/random.hpp>
 #include <state_select.hpp>
@@ -43,7 +43,7 @@ void StateParticles::createParticlesFire()
     m_particlesFire = jt::ParticleSystem<jt::Shape, numberOfParticles>::createPS(
         [this]() {
             auto s = jt::dh::createShapeCircle(
-                20, jt::MakeColor::FromHSV(45, 80, 100), textureManager());
+                20, jt::ColorBuilder::fromHSV(45, 80, 100), textureManager());
             s->setOrigin(jt::Vector2f { 20, 20 });
             s->setPosition(jt::Vector2f { -2000.0f, -2000.0f });
             s->setScale(jt::Vector2f { 0.5f, 0.5f });
@@ -87,12 +87,12 @@ void StateParticles::createParticlesFire()
             });
             add(twp);
 
-            auto intermediateColor = jt::MakeColor::FromHSV(0, 60, 67);
-            auto finalColor = jt::MakeColor::FromHSV(318, 42, 27);
+            auto intermediateColor = jt::ColorBuilder::fromHSV(0, 60, 67);
+            auto finalColor = jt::ColorBuilder::fromHSV(318, 42, 27);
 
             float const fraction = jt::Random::getFloat(0.6f, 0.7f);
             jt::TweenColor::Sptr twc1 = jt::TweenColor::create(
-                s, totalTime * fraction, jt::MakeColor::FromHSV(45, 80, 100), intermediateColor);
+                s, totalTime * fraction, jt::ColorBuilder::fromHSV(45, 80, 100), intermediateColor);
             twc1->setSkipFrames(1);
             twc1->addCompleteCallback(
                 [this, totalTime, fraction, s, intermediateColor, finalColor]() {

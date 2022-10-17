@@ -1,6 +1,6 @@
 #include "color_modifications.hpp"
 #include "math_helper.hpp"
-#include <color/color_helpers.hpp>
+#include <color/color_conversions.hpp>
 #include <cmath>
 
 namespace {
@@ -9,11 +9,11 @@ template <typename T>
 jt::Color conversionHelper(jt::Color const& initialColor, T const& innerFunc)
 {
     auto const [h, s, v]
-        = jt::ColorHelpers::rgb2hsv(initialColor.r, initialColor.g, initialColor.b);
+        = jt::ColorConversions::rgb2hsv(initialColor.r, initialColor.g, initialColor.b);
 
     auto const [h2, s2, v2] = innerFunc(h, s, v);
 
-    auto const [r, g, b] = jt::ColorHelpers::hsv2rgb(h2, s2, v2);
+    auto const [r, g, b] = jt::ColorConversions::hsv2rgb(h2, s2, v2);
     return jt::Color { r, g, b, initialColor.a };
 }
 } // namespace
