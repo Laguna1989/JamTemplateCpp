@@ -1,4 +1,4 @@
-#include <color/color_helpers.hpp>
+#include <color/color_conversions.hpp>
 #include <cmath>
 #include <gtest/gtest.h>
 #include <tuple>
@@ -16,7 +16,7 @@ TEST_P(ColorHelpersHsv2RgbTestFixture, hsv2rgb)
     auto g_expected = std::get<4>(GetParam());
     auto b_expected = std::get<5>(GetParam());
 
-    auto [r, g, b] = jt::ColorHelpers::hsv2rgb(h, s, v);
+    auto [r, g, b] = jt::ColorConversions::hsv2rgb(h, s, v);
     ASSERT_EQ(static_cast<int>(r), static_cast<int>(r_expected));
     ASSERT_EQ(static_cast<int>(g), static_cast<int>(g_expected));
     ASSERT_EQ(static_cast<int>(b), static_cast<int>(b_expected));
@@ -40,7 +40,7 @@ TEST_P(ColorHelpersHsv2RgbTestFixture, rgb2hsv)
         h_expected = 0;
     }
 
-    auto [h, s, v] = jt::ColorHelpers::rgb2hsv(r, g, b);
+    auto [h, s, v] = jt::ColorConversions::rgb2hsv(r, g, b);
     ASSERT_EQ(round(h), h_expected);
     ASSERT_EQ(round(s), s_expected);
     ASSERT_EQ(round(v), v_expected);
@@ -69,5 +69,5 @@ INSTANTIATE_TEST_SUITE_P(ColorHelpersHsv2RgbTestComplexColors, ColorHelpersHsv2R
 TEST(hex2rgbTest, EmptyStringThrowsException)
 {
     std::string const input { "" };
-    ASSERT_THROW(jt::ColorHelpers::hex2rgb(input), std::invalid_argument);
+    ASSERT_THROW(jt::ColorConversions::hex2rgb(input), std::invalid_argument);
 }
