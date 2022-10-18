@@ -7,10 +7,10 @@ jt::LoggingAudio::LoggingAudio(jt::AudioInterface& decoratee, jt::LoggerInterfac
 {
 }
 
-void jt::LoggingAudio::update()
+void jt::LoggingAudio::update(float elapsed)
 {
-    m_logger.verbose("Audio update", { "jt", "audio" });
-    m_decoratee.update();
+    m_logger.verbose("Audio update(" + std::to_string(elapsed) + ")", { "jt", "audio" });
+    m_decoratee.update(elapsed);
 }
 
 std::shared_ptr<jt::SoundInterface> jt::LoggingAudio::getPermanentSound(
@@ -70,4 +70,9 @@ std::shared_ptr<jt::SoundInterface> jt::LoggingAudio::addTemporarySoundGroup(
     m_logger.debug("add temporary sound group with " + std::to_string(sounds.size()) + " entries",
         { "jt", "audio" });
     return std::make_shared<jt::LoggingSound>(m_decoratee.addTemporarySoundGroup(sounds), m_logger);
+}
+jt::SoundFadeManager& jt::LoggingAudio::fades()
+{
+    m_logger.verbose("fades ", { "jt", "audio" });
+    return m_decoratee.fades();
 }

@@ -68,6 +68,12 @@ void StateAudio::doInternalDraw() const
     if (ImGui::Button("stop")) {
         m_sound->stop();
     }
+    if (ImGui::Button("Fade Out")) {
+        getGame()->audio().fades().volumeFade(m_sound, 1.0f, m_sound->getVolume(), 0.0f);
+    }
+    if (ImGui::Button("Fade In")) {
+        getGame()->audio().fades().volumeFade(m_sound, 1.0f, m_sound->getVolume(), 1.0f);
+    }
     ImGui::Separator();
     ImGui::Text("SoundGroup");
     if (ImGui::Button("play One Sound")) {

@@ -2,7 +2,7 @@
 #include <audio/sound_group.hpp>
 #include <audio/sound_null.hpp>
 
-void jt::AudioNull::update() { }
+void jt::AudioNull::update(float /*elapsed*/) { }
 oalpp::SoundContextInterface& jt::AudioNull::getContext() { return m_context; }
 
 std::shared_ptr<jt::SoundInterface> jt::AudioNull::soundPool(
@@ -54,3 +54,4 @@ std::shared_ptr<jt::SoundInterface> jt::AudioNull::addTemporarySoundGroup(
 
     return group;
 }
+jt::SoundFadeManager& jt::AudioNull::fades() { return m_fades; }

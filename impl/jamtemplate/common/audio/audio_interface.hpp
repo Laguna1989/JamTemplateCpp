@@ -2,6 +2,7 @@
 #define JAMTEMPLATE_AUDIO_INTERFACE_HPP
 
 #include <audio/sound.hpp>
+#include <audio/sound_fade_manager.hpp>
 #include <audio/sound_interface.hpp>
 #include <audio/sound_with_effect.hpp>
 #include <oalpp/sound_context/sound_context_interface.hpp>
@@ -22,7 +23,7 @@ public:
     AudioInterface& operator=(AudioInterface&&) = delete;
 
     /// Update sounds in the the audio interface
-    virtual void update() = 0;
+    virtual void update(float elapsed) = 0;
 
     /// Add a temporary sound that will be removed once the shared pointer count is zero
     /// \param fileName filename of the sound to load
@@ -89,6 +90,10 @@ public:
     virtual std::shared_ptr<jt::SoundInterface> addTemporarySoundGroup(
         std::vector<std::shared_ptr<jt::SoundInterface>> const& sounds)
         = 0;
+
+    /// Get the SoundFadeManager
+    /// \return the SoundFadeManager
+    virtual jt::SoundFadeManager& fades() = 0;
 
 protected:
     AudioInterface() = default;

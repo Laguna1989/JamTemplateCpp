@@ -1,4 +1,6 @@
 #include "tween_collection.hpp"
+#include <algorithm>
+
 void jt::TweenCollection::clear()
 {
     m_tweens.clear();

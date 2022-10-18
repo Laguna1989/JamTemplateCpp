@@ -13,7 +13,7 @@ class SoundContextNull : public oalpp::SoundContextInterface { };
 
 class AudioNull : public AudioInterface {
 public:
-    void update() override;
+    void update(float elapsed) override;
 
     oalpp::SoundContextInterface& getContext() override;
 
@@ -36,8 +36,12 @@ public:
     std::shared_ptr<jt::SoundInterface> addTemporarySoundGroup(
         std::vector<std::shared_ptr<jt::SoundInterface>> const& sounds) override;
 
+    SoundFadeManager& fades() override;
+
 private:
     null_objects::SoundContextNull m_context;
+
+    SoundFadeManager m_fades;
 };
 } // namespace jt
 
