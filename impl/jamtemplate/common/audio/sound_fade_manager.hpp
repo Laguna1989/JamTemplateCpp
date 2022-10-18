@@ -1,0 +1,24 @@
+#ifndef JAMTEMPLATE_FADE_MANAGER_HPP
+#define JAMTEMPLATE_FADE_MANAGER_HPP
+
+#include <audio/sound_fade_info.hpp>
+#include <audio/sound_interface.hpp>
+#include <memory>
+#include <vector>
+
+namespace jt {
+
+class SoundFadeManager {
+public:
+    void volumeFade(std::weak_ptr<SoundInterface> sound, float durationInSeconds, float startVolume,
+        float endVolume);
+
+    void update(float elapsed);
+
+private:
+    std::vector<SoundFadeInfo> m_fades {};
+};
+
+} // namespace jt
+
+#endif // JAMTEMPLATE_FADE_MANAGER_HPP
