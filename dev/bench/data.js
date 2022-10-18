@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1666036897524,
+  "lastUpdate": 1666111796932,
   "repoUrl": "https://github.com/Laguna1989/JamTemplateCpp",
   "entries": {
     "Benchmark": [
@@ -10422,6 +10422,84 @@ window.BENCHMARK_DATA = {
             "value": 4.29717901863357,
             "unit": "ms/iter",
             "extra": "iterations: 161\ncpu: 4.296219254658377 ms\nthreads: 1"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "977116+Thunraz@users.noreply.github.com",
+            "name": "Julian Dinges",
+            "username": "Thunraz"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "2c241e56c57096f1f4e78d453d125ade7357b1fc",
+          "message": "Merge pull request #265 from Laguna1989/FEATURE_AutomaticAudioFade\n\nsound fades",
+          "timestamp": "2022-10-18T18:46:51+02:00",
+          "tree_id": "fb12e55ed1c75ebe3b5a5f9646496923a63d7a56",
+          "url": "https://github.com/Laguna1989/JamTemplateCpp/commit/2c241e56c57096f1f4e78d453d125ade7357b1fc"
+        },
+        "date": 1666111795813,
+        "tool": "googlecpp",
+        "benches": [
+          {
+            "name": "BM_UpdateDrawablePositions",
+            "value": 3.7053879552237747,
+            "unit": "ms/iter",
+            "extra": "iterations: 201\ncpu: 3.704501990049751 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GetAllCommands",
+            "value": 0.2958296861401939,
+            "unit": "ms/iter",
+            "extra": "iterations: 2482\ncpu: 0.29576152296535047 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_LoggerLogWithoutTarget",
+            "value": 0.7030269921027003,
+            "unit": "ms/iter",
+            "extra": "iterations: 1013\ncpu: 0.7029811451135239 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_LoggerLogWithCoutTargetSetToOff",
+            "value": 0.7092807529880272,
+            "unit": "ms/iter",
+            "extra": "iterations: 1004\ncpu: 0.7091806772908363 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_UpdateObjectGroup",
+            "value": 0.04687792470198118,
+            "unit": "ms/iter",
+            "extra": "iterations: 15100\ncpu: 0.046874728476821205 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_UpdateSpatialObjectGrid",
+            "value": 0.3057409840525642,
+            "unit": "ms/iter",
+            "extra": "iterations: 2132\ncpu: 0.3056948874296435 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_StartGame",
+            "value": 0.0032126046253377026,
+            "unit": "ms/iter",
+            "extra": "iterations: 212525\ncpu: 0.0032123613692506764 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_RefineTilemapCollisions",
+            "value": 0.17444751833498223,
+            "unit": "ms/iter",
+            "extra": "iterations: 4036\ncpu: 0.1744324826560953 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GamestateWithTweeningShapes",
+            "value": 3.247613252381143,
+            "unit": "ms/iter",
+            "extra": "iterations: 210\ncpu: 3.247452857142854 ms\nthreads: 1"
           }
         ]
       }
