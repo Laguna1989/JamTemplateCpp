@@ -13,7 +13,7 @@ class SoundContextNull : public oalpp::SoundContextInterface { };
 
 class AudioNull : public AudioInterface {
 public:
-    void update() override;
+    void update(float elapsed) override;
 
     oalpp::SoundContextInterface& getContext() override;
 

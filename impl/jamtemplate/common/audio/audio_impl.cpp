@@ -8,7 +8,7 @@
 
 jt::AudioImpl::~AudioImpl() { m_temporarySounds.clear(); }
 
-void jt::AudioImpl::update()
+void jt::AudioImpl::update(float elapsed)
 {
     cleanUpUnusedSounds();
 
@@ -18,10 +18,12 @@ void jt::AudioImpl::update()
             sound->update();
         }
     }
+    m_fades->update(elapsed);
     for (auto& snd : m_permanentSounds) {
         snd.second->update();
     }
 }
+
 void jt::AudioImpl::cleanUpUnusedSounds()
 {
     m_temporarySounds.erase(std::remove_if(m_temporarySounds.begin(), m_temporarySounds.end(),
@@ -63,6 +65,7 @@ std::shared_ptr<jt::SoundInterface> jt::AudioImpl::soundPool(
     }
     return snd;
 }
+
 std::shared_ptr<jt::SoundInterface> jt::AudioImpl::addPermanentSound(
     std::string const& identifier, std::string const& fileName)
 {
@@ -78,6 +81,7 @@ std::shared_ptr<jt::SoundInterface> jt::AudioImpl::addPermanentSound(std::string
     m_permanentSounds[identifier] = sound;
     return sound;
 }
+
 std::shared_ptr<jt::SoundInterface> jt::AudioImpl::addPermanentSound(std::string const& identifier,
     std::string const& introFileName, std::string const& loopingFileName,
     oalpp::effects::MonoEffectInterface& effect)
@@ -87,6 +91,7 @@ std::shared_ptr<jt::SoundInterface> jt::AudioImpl::addPermanentSound(std::string
     m_permanentSounds[identifier] = sound;
     return sound;
 }
+
 std::shared_ptr<jt::SoundInterface> jt::AudioImpl::addTemporarySoundGroup(
     std::vector<std::shared_ptr<jt::SoundInterface>> const& sounds)
 {
@@ -94,4 +99,5 @@ std::shared_ptr<jt::SoundInterface> jt::AudioImpl::addTemporarySoundGroup(
     m_temporarySounds.push_back(group);
     return group;
 }
+
 jt::SoundFadeManager& jt::AudioImpl::fades() { return *m_fades; }

@@ -7,10 +7,10 @@ jt::LoggingAudio::LoggingAudio(jt::AudioInterface& decoratee, jt::LoggerInterfac
 {
 }
 
-void jt::LoggingAudio::update()
+void jt::LoggingAudio::update(float elapsed)
 {
-    m_logger.verbose("Audio update", { "jt", "audio" });
-    m_decoratee.update();
+    m_logger.verbose("Audio update(" + std::to_string(elapsed) + ")", { "jt", "audio" });
+    m_decoratee.update(elapsed);
 }
 
 std::shared_ptr<jt::SoundInterface> jt::LoggingAudio::getPermanentSound(

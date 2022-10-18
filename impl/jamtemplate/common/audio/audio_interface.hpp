@@ -23,7 +23,7 @@ public:
     AudioInterface& operator=(AudioInterface&&) = delete;
 
     /// Update sounds in the the audio interface
-    virtual void update() = 0;
+    virtual void update(float elapsed) = 0;
 
     /// Add a temporary sound that will be removed once the shared pointer count is zero
     /// \param fileName filename of the sound to load

@@ -9,7 +9,7 @@ class LoggingAudio : public AudioInterface {
 public:
     LoggingAudio(AudioInterface& decoratee, LoggerInterface& logger);
 
-    void update() override;
+    void update(float elapsed) override;
 
     std::shared_ptr<jt::SoundInterface> addTemporarySound(std::string const& fileName) override;
     std::shared_ptr<jt::SoundInterface> addTemporarySoundGroup(
