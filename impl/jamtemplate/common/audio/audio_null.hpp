@@ -36,8 +36,12 @@ public:
     std::shared_ptr<jt::SoundInterface> addTemporarySoundGroup(
         std::vector<std::shared_ptr<jt::SoundInterface>> const& sounds) override;
 
+    SoundFadeManager& fades() override;
+
 private:
     null_objects::SoundContextNull m_context;
+
+    SoundFadeManager m_fades;
 };
 } // namespace jt
 

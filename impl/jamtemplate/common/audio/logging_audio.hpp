@@ -32,6 +32,8 @@ public:
 
     oalpp::SoundContextInterface& getContext() override;
 
+    SoundFadeManager& fades() override;
+
 private:
     AudioInterface& m_decoratee;
     LoggerInterface& m_logger;

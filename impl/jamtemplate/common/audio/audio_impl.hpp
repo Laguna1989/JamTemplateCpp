@@ -34,11 +34,15 @@ public:
 
     oalpp::SoundContextInterface& getContext() override;
 
+    SoundFadeManager& fades() override;
+
 private:
     oalpp::SoundContext m_context;
 
     std::vector<std::weak_ptr<jt::SoundInterface>> m_temporarySounds {};
     std::map<std::string, std::shared_ptr<jt::SoundInterface>> m_permanentSounds {};
+
+    std::unique_ptr<SoundFadeManager> m_fades { std::make_unique<SoundFadeManager>() };
 
     void cleanUpUnusedSounds();
 };

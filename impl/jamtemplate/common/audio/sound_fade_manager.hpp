@@ -3,6 +3,7 @@
 
 #include <audio/sound_fade_info.hpp>
 #include <audio/sound_interface.hpp>
+#include <cstddef>
 #include <memory>
 #include <vector>
 
@@ -13,10 +14,12 @@ public:
     void volumeFade(std::weak_ptr<SoundInterface> sound, float durationInSeconds, float startVolume,
         float endVolume);
 
-    void update(float elapsed);
+    void update(float fadeInfo);
+
+    std::size_t size() const;
 
 private:
-    std::vector<SoundFadeInfo> m_fades {};
+    std::vector<SoundFadeInfo> m_fadeInfos {};
 };
 
 } // namespace jt

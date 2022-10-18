@@ -2,7 +2,6 @@
 #define JAMTEMPLATE_TWEEN_COLLECTION_HPP
 
 #include <tweens/tween_interface.hpp>
-#include <algorithm>
 #include <memory>
 #include <vector>
 

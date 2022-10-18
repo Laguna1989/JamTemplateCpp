@@ -94,3 +94,4 @@ std::shared_ptr<jt::SoundInterface> jt::AudioImpl::addTemporarySoundGroup(
     m_temporarySounds.push_back(group);
     return group;
 }
+jt::SoundFadeManager& jt::AudioImpl::fades() { return *m_fades; }
