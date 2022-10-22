@@ -1,8 +1,5 @@
 #include "palette.hpp"
-#include <color/color_builder.hpp>
 #include <strutils.hpp>
-#include <fstream>
-#include <sstream>
 
 jt::Palette::Palette(std::vector<jt::Color> const& colors)
     : m_colors { colors }

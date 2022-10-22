@@ -1,6 +1,23 @@
 ﻿#include <vector.hpp>
 #include <gtest/gtest.h>
 
+TEST(Vector2fTest, CanBeDefaultConstructed)
+{
+    static_assert(std::is_default_constructible<jt::Vector2f>::value,
+        "Vector2f is not default constructible");
+}
+
+TEST(Vector2fTest, CanBeConstructedWithTwoArguments)
+{
+    static_assert(std::is_constructible<jt::Vector2f, float, float>::value,
+        "Vector2f is not constructible from two floats");
+}
+TEST(Vector2fTest, CanNotBeConstructedWithOneArguments)
+{
+    static_assert(!std::is_constructible<jt::Vector2f, float>::value,
+        "Vector2f is constructible from one float");
+}
+
 TEST(Vector2fTest, DefaultValues)
 {
     jt::Vector2f vec;
@@ -123,6 +140,23 @@ TEST(Vector2fTest, DivideReal)
     float const v = 2.5f;
     jt::Vector2f const expected { initial.x / v, initial.y / v };
     ASSERT_EQ(initial / v, expected);
+}
+
+TEST(Vector2uTest, CanBeDefaultConstructed)
+{
+    static_assert(std::is_default_constructible<jt::Vector2u>::value,
+        "Vector2u is not default constructible");
+}
+
+TEST(Vector2uTest, CanBeConstructedWithTwoArguments)
+{
+    static_assert(std::is_constructible<jt::Vector2u, unsigned int, unsigned int>::value,
+        "Vector2u is not constructible from two unsigned ints");
+}
+TEST(Vector2uTest, CanNotBeConstructedWithOneArguments)
+{
+    static_assert(!std::is_constructible<jt::Vector2u, unsigned int>::value,
+        "Vector2u is constructible from one unsigned int");
 }
 
 TEST(Vector2UAccess, ReadAccess)

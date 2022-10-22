@@ -1,12 +1,12 @@
-#ifndef JAMTEMPLATE_COLOR_BUILDER_HPP
-#define JAMTEMPLATE_COLOR_BUILDER_HPP
+#ifndef JAMTEMPLATE_COLOR_FACTORY_HPP
+#define JAMTEMPLATE_COLOR_FACTORY_HPP
 
 #include <color/color.hpp>
 
 namespace jt {
 
 /// Struct for accumulating color creation functionality
-struct ColorBuilder {
+struct ColorFactory {
     /// Create a color based on rgb values
     /// \param r red value [0-255]
     /// \param g green value [0-255]
@@ -45,4 +45,4 @@ struct ColorBuilder {
 
 } // namespace jt
 
-#endif // JAMTEMPLATE_COLOR_BUILDER_HPP
+#endif // JAMTEMPLATE_COLOR_FACTORY_HPP

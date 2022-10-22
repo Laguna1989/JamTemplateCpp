@@ -6,11 +6,15 @@
 namespace jt {
 
 struct Vector2f {
+    Vector2f();
+    Vector2f(float x, float y);
     float x { 0.0f };
     float y { 0.0f };
 };
 
 struct Vector2u {
+    Vector2u();
+    Vector2u(unsigned int x, unsigned int y);
     unsigned int x { 0U };
     unsigned int y { 0U };
 };

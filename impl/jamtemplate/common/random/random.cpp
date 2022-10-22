@@ -1,5 +1,5 @@
 ﻿#include "random.hpp"
-#include <color/color_builder.hpp>
+#include <color/color_factory.hpp>
 #include <ctime>
 #include <stdexcept>
 
@@ -55,6 +55,6 @@ void jt::Random::useTimeAsRandomSeed() { setSeed(static_cast<unsigned int>(time(
 jt::Color jt::Random::getRandomColorHSV(
     float hmin, float hmax, float smin, float smax, float vmin, float vmax)
 {
-    return jt::ColorBuilder::fromHSV(jt::Random::getFloat(hmin, hmax),
+    return jt::ColorFactory::fromHSV(jt::Random::getFloat(hmin, hmax),
         jt::Random::getFloat(smin, smax), jt::Random::getFloat(vmin, vmax));
 }

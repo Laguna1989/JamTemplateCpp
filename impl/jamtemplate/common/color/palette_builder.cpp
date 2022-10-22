@@ -1,6 +1,6 @@
 
 #include "palette_builder.hpp"
-#include <color/color_builder.hpp>
+#include <color/color_factory.hpp>
 #include <strutils.hpp>
 #include <fstream>
 #include <sstream>
@@ -32,7 +32,7 @@ std::vector<jt::Color> parseGPLImpl(std::string const& gplFileConent)
         std::uint8_t const r = static_cast<std::uint8_t>(strutil::parse_string<int>(ssv[0]));
         std::uint8_t const g = static_cast<std::uint8_t>(strutil::parse_string<int>(ssv[1]));
         std::uint8_t const b = static_cast<std::uint8_t>(strutil::parse_string<int>(ssv[2]));
-        auto col = jt::ColorBuilder::fromRGB(r, g, b);
+        auto col = jt::ColorFactory::fromRGB(r, g, b);
         colors.push_back(col);
     }
 
@@ -57,7 +57,7 @@ PaletteBuilder& PaletteBuilder::createGradientH(
     float const delta = (hmax - hmin) / steps;
     for (std::size_t step = 0U; step != steps; ++step) {
         auto const h = hmin + step * delta;
-        colors.emplace_back(jt::ColorBuilder::fromHSV(h, s, v));
+        colors.emplace_back(jt::ColorFactory::fromHSV(h, s, v));
     }
     m_colors.insert(m_colors.end(), colors.cbegin(), colors.cend());
     return *this;
@@ -69,7 +69,7 @@ PaletteBuilder& PaletteBuilder::createGradientS(
     float const delta = (smax - smin) / steps;
     for (std::size_t step = 0U; step != steps; ++step) {
         auto const s = smin + step * delta;
-        colors.emplace_back(jt::ColorBuilder::fromHSV(h, s, v));
+        colors.emplace_back(jt::ColorFactory::fromHSV(h, s, v));
     }
     m_colors.insert(m_colors.end(), colors.cbegin(), colors.cend());
     return *this;
@@ -81,7 +81,7 @@ PaletteBuilder& PaletteBuilder::createGradientV(
     float const delta = (vmax - vmin) / steps;
     for (std::size_t step = 0U; step != steps; ++step) {
         auto const v = vmin + step * delta;
-        colors.emplace_back(jt::ColorBuilder::fromHSV(h, s, v));
+        colors.emplace_back(jt::ColorFactory::fromHSV(h, s, v));
     }
 
     m_colors.insert(m_colors.end(), colors.cbegin(), colors.cend());
