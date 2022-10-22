@@ -90,8 +90,7 @@ TEST(Rad2DegConversion, Inverse)
     ASSERT_NEAR(v, rad2deg(deg2rad(v)), 0.0001f);
 }
 
-class RotateByTestFixture : public ::testing::TestWithParam<jt::Vector2f> {
-};
+class RotateByTestFixture : public ::testing::TestWithParam<jt::Vector2f> { };
 
 INSTANTIATE_TEST_SUITE_P(RotateByTest, RotateByTestFixture,
     ::testing::Values(jt::Vector2f { 1.0f, 0.0f }, jt::Vector2f { 0.0f, 1.0f },
@@ -283,4 +282,25 @@ TEST(Dot, OrthogonalVectors4)
     jt::Vector2f const vec1 { 1.0f, 0.0f };
     jt::Vector2f const vec2 { 0.0f, -1.0f };
     ASSERT_EQ(dot(vec2, vec1), 0.0f);
+}
+
+TEST(CheckIsIn, Inside)
+{
+    jt::Rectf const rect { 1.0f, 1.0f, 1.0f, 1.0f };
+    jt::Vector2f const point { 1.5f, 1.5f };
+    ASSERT_TRUE(jt::MathHelper::checkIsIn(rect, point));
+}
+
+TEST(CheckIsIn, OutsideX)
+{
+    jt::Rectf const rect { 1.0f, 1.0f, 1.0f, 1.0f };
+    jt::Vector2f const point { -1.5f, 1.5f };
+    ASSERT_FALSE(jt::MathHelper::checkIsIn(rect, point));
+}
+
+TEST(CheckIsIn, OutsideY)
+{
+    jt::Rectf const rect { 1.0f, 1.0f, 1.0f, 1.0f };
+    jt::Vector2f const point { 1.5f, 5.5f };
+    ASSERT_FALSE(jt::MathHelper::checkIsIn(rect, point));
 }
