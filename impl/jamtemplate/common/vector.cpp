@@ -1,6 +1,17 @@
 ﻿#include "vector.hpp"
 #include <ostream>
 
+jt::Vector2f::Vector2f(float x, float y)
+    : x { x }
+    , y { y }
+{
+}
+jt::Vector2f::Vector2f()
+    : x { 0.0f }
+    , y { 0.0f }
+{
+}
+
 jt::Vector2f jt::operator+(jt::Vector2f const& a, jt::Vector2f const& b)
 {
     return jt::Vector2f { a.x + b.x, a.y + b.y };
@@ -46,6 +57,17 @@ jt::Vector2f jt::operator/(jt::Vector2f const& v, float const f)
 std::ostream& jt::operator<<(std::ostream& os, jt::Vector2f const& vec)
 {
     return os << "(" << vec.x << ", " << vec.y << ")";
+}
+
+jt::Vector2u::Vector2u(unsigned int x, unsigned int y)
+    : x { x }
+    , y { y }
+{
+}
+jt::Vector2u::Vector2u()
+    : x { 0U }
+    , y { 0u }
+{
 }
 
 jt::Vector2u jt::operator+(jt::Vector2u const& a, jt::Vector2u const& b)

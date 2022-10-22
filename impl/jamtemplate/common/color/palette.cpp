@@ -1,5 +1,5 @@
 #include "palette.hpp"
-#include <color/color_builder.hpp>
+#include <color/color_factory.hpp>
 #include <strutils.hpp>
 #include <fstream>
 #include <sstream>

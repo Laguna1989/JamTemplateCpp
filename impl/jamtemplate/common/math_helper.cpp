@@ -3,7 +3,7 @@
 #include <iomanip>
 #include <sstream>
 
-const float pi = 2.0f * std::acos(0.0f);
+constexpr double pi = 3.14159265358979323846;
 
 float jt::MathHelper::lengthSquared(jt::Vector2f const& v) { return v.x * v.x + v.y * v.y; }
 
@@ -27,13 +27,13 @@ void jt::MathHelper::normalizeMe(jt::Vector2f& v, float lowerbound)
 float jt::MathHelper::rad2deg(float a)
 {
     auto const half_circle = 180.0f;
-    return a * half_circle / pi;
+    return static_cast<float>(a * half_circle / pi);
 }
 
 float jt::MathHelper::deg2rad(float a)
 {
     auto const half_circle = 180.0f;
-    return a / half_circle * pi;
+    return static_cast<float>(a / half_circle * pi);
 }
 
 jt::Vector2f jt::MathHelper::rotateBy(jt::Vector2f const& in, float aInDegree)
