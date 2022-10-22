@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1666111796932,
+  "lastUpdate": 1666429892356,
   "repoUrl": "https://github.com/Laguna1989/JamTemplateCpp",
   "entries": {
     "Benchmark": [
@@ -10500,6 +10500,84 @@ window.BENCHMARK_DATA = {
             "value": 3.247613252381143,
             "unit": "ms/iter",
             "extra": "iterations: 210\ncpu: 3.247452857142854 ms\nthreads: 1"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "laguna.ws@gmail.com",
+            "name": "Laguna1989",
+            "username": "Laguna1989"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "f2f726a8ce6b71fa5be79ac11e5e053f1fe6f2c7",
+          "message": "Merge pull request #266 from Laguna1989/FEATURE_VectorConstructor\n\nIntroduce Vector constructors and factory",
+          "timestamp": "2022-10-22T11:07:20+02:00",
+          "tree_id": "9e78977a0912142d30e40a1c80f369015baf36ec",
+          "url": "https://github.com/Laguna1989/JamTemplateCpp/commit/f2f726a8ce6b71fa5be79ac11e5e053f1fe6f2c7"
+        },
+        "date": 1666429891053,
+        "tool": "googlecpp",
+        "benches": [
+          {
+            "name": "BM_UpdateDrawablePositions",
+            "value": 7.751097265957305,
+            "unit": "ms/iter",
+            "extra": "iterations: 94\ncpu: 7.7498585106382984 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GetAllCommands",
+            "value": 0.34100253609755404,
+            "unit": "ms/iter",
+            "extra": "iterations: 2050\ncpu: 0.34095990243902435 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_LoggerLogWithoutTarget",
+            "value": 0.9038041462205946,
+            "unit": "ms/iter",
+            "extra": "iterations: 807\ncpu: 0.9033044609665427 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_LoggerLogWithCoutTargetSetToOff",
+            "value": 0.9000367373096716,
+            "unit": "ms/iter",
+            "extra": "iterations: 788\ncpu: 0.8998800761421322 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_UpdateObjectGroup",
+            "value": 0.05407236946742298,
+            "unit": "ms/iter",
+            "extra": "iterations: 13782\ncpu: 0.05406473661297348 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_UpdateSpatialObjectGrid",
+            "value": 0.43922363548579774,
+            "unit": "ms/iter",
+            "extra": "iterations: 1657\ncpu: 0.43920494870247445 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_StartGame",
+            "value": 0.0037539119341825477,
+            "unit": "ms/iter",
+            "extra": "iterations: 188643\ncpu: 0.0037535392248850973 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_RefineTilemapCollisions",
+            "value": 0.191304014488781,
+            "unit": "ms/iter",
+            "extra": "iterations: 3658\ncpu: 0.19128734281027882 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GamestateWithTweeningShapes",
+            "value": 4.257001058479476,
+            "unit": "ms/iter",
+            "extra": "iterations: 171\ncpu: 4.2564824561403505 ms\nthreads: 1"
           }
         ]
       }
