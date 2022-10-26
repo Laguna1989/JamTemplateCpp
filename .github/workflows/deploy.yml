@@ -19,6 +19,7 @@ jobs:
           cmake-version: '3.19.x'
 
       - uses: actions/checkout@v2
+
       - uses: seanmiddleditch/gha-setup-ninja@master
 
       - name: CMake
