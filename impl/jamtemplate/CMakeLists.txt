@@ -6,11 +6,13 @@ else ()
 endif ()
 
 execute_process(
-        COMMAND git describe --exact-match --tags $ (git log -n1 --pretty='%h')
+        COMMAND git describe --exact-match --tags
         WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
         RESULT_VARIABLE res
         OUTPUT_VARIABLE GIT_TAG
         ERROR_QUIET OUTPUT_STRIP_TRAILING_WHITESPACE)
+
+message(STATUS "Jamtemplate repository tag: '${GIT_TAG}'")
 
 execute_process(
         COMMAND git rev-parse -q HEAD
