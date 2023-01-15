@@ -117,9 +117,3 @@ void jt::Bar::setScale(jt::Vector2f const& scale)
 }
 
 jt::Vector2f jt::Bar::getScale() const { return m_shapeFull->getScale(); }
-
-void jt::Bar::setCustomShader(
-    std::string const& shaderCodeVertex, std::string const& shaderCodeFragment)
-{
-    m_shapeFull->setCustomShader(shaderCodeVertex, shaderCodeFragment);
-}

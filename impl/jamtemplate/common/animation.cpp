@@ -325,15 +325,6 @@ void jt::Animation::setLooping(std::string const& animName, bool isLooping)
 }
 std::size_t jt::Animation::getCurrentAnimationFrameIndex() const { return m_currentIdx; }
 
-void jt::Animation::setCustomShader(
-    std::string const& shaderCodeVertex, std::string const& shaderCodeFragment)
-{
-    for (auto& kvp : m_frames) {
-        for (auto& spr : kvp.second) {
-            spr->setCustomShader(shaderCodeVertex, shaderCodeFragment);
-        }
-    }
-}
 void jt::Animation::setFrameTimes(
     std::string const& animationName, std::vector<float> const& frameTimes)
 {

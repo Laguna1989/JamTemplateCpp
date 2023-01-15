@@ -119,9 +119,6 @@ public:
 
     std::size_t getCurrentAnimationFrameIndex() const;
 
-    [[deprecated("Currently only implemented for SFML")]] void setCustomShader(
-        std::string const& shaderCodeVertex, std::string const& shaderCodeFragment) override;
-
     /// Set the animation speed
     /// \param factor the factor. Normal value is 1.0, can be in range from -inf to inf.
     void setAnimationSpeedFactor(float factor);

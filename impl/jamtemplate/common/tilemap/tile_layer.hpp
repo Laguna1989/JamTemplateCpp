@@ -52,9 +52,6 @@ public:
 
     void doRotate(float /*rot*/) override;
 
-    [[deprecated("Currently only implemented for SFML")]] void setCustomShader(
-        std::string const& shaderCodeVertex, std::string const& shaderCodeFragment) override;
-
     void setColorFunction(std::function<jt::Color(jt::Vector2f const&)>);
 
 private:
