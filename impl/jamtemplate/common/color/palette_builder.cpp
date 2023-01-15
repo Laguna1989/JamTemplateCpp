@@ -1,9 +1,8 @@
-
 #include "palette_builder.hpp"
 #include <color/color_factory.hpp>
 #include <strutils.hpp>
+#include <system_helper.hpp>
 #include <fstream>
-#include <sstream>
 
 namespace jt {
 
@@ -92,4 +91,21 @@ PaletteBuilder& PaletteBuilder::addColor(jt::Color const& col)
     m_colors.push_back(col);
     return *this;
 }
+PaletteBuilder& PaletteBuilder::addColorsFromPicture(Sprite& sprite)
+{
+    auto const w = static_cast<unsigned int>(sprite.getLocalBounds().width);
+    auto const h = static_cast<unsigned int>(sprite.getLocalBounds().height);
+    std::vector<jt::Color> colorsFromSprite;
+    for (auto x = 0u; x != w; ++x) {
+        for (auto y = 0u; y != h; ++y) {
+            colorsFromSprite.push_back(sprite.getColorAtPixel(jt::Vector2u { x, y }));
+        }
+    }
+    colorsFromSprite.erase(
+        SystemHelper::remove_duplicates(colorsFromSprite.begin(), colorsFromSprite.end()),
+        colorsFromSprite.end());
+    m_colors.insert(m_colors.end(), colorsFromSprite.cbegin(), colorsFromSprite.cend());
+    return *this;
+}
+
 } // namespace jt

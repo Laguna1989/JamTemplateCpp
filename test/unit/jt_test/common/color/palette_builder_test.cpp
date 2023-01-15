@@ -1,3 +1,4 @@
+#include <backend_setup.hpp>
 #include <color/palette_builder.hpp>
 #include <gtest/gtest.h>
 
@@ -168,4 +169,24 @@ TEST(PaletteBuilderParseGPL, GPLWithMultipleEntries)
     ASSERT_EQ(pal.getColor(0), expectedColor0);
     ASSERT_EQ(pal.getColor(1), expectedColor1);
     ASSERT_EQ(pal.getColor(2), expectedColor2);
+}
+
+TEST(PaletteBuilderTest, AddFromSprite)
+{
+    jt::PaletteBuilder builder;
+    jt::TextureManagerInterface& tm { getTextureManager() };
+    jt::Sprite sprite { "assets/test/unit/jt_test/coin.png", jt::Recti { 0, 0, 16, 16 }, tm };
+
+    auto const palette = builder.addColorsFromPicture(sprite).create();
+    ASSERT_EQ(palette.size(), 5u);
+    jt::Color const expectedColor0 { 0, 0, 0, 0 };
+    jt::Color const expectedColor1 { 0, 0, 0, 255 };
+    jt::Color const expectedColor2 { 211, 172, 99 };
+    jt::Color const expectedColor3 { 207, 149, 39 };
+    jt::Color const expectedColor4 { 212, 193, 156 };
+    ASSERT_EQ(palette.getColor(0), expectedColor0);
+    ASSERT_EQ(palette.getColor(1), expectedColor1);
+    ASSERT_EQ(palette.getColor(2), expectedColor2);
+    ASSERT_EQ(palette.getColor(3), expectedColor3);
+    ASSERT_EQ(palette.getColor(4), expectedColor4);
 }

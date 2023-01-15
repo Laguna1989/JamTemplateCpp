@@ -3,6 +3,7 @@
 #define JAMTEMPLATE_PALETTE_BUILDER_HPP
 
 #include <color/palette.hpp>
+#include <sprite.hpp>
 
 namespace jt {
 
@@ -50,6 +51,8 @@ public:
     /// \param col The color to be added.
     /// \return the palette object
     [[nodiscard]] PaletteBuilder& addColor(jt::Color const& col);
+
+    [[nodiscard]] PaletteBuilder& addColorsFromPicture(jt::Sprite& sprite);
 
 private:
     std::vector<Color> m_colors {};
