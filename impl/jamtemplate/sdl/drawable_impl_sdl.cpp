@@ -1,10 +1,5 @@
 #include "drawable_impl_sdl.hpp"
 
-void jt::DrawableImplSdl::setCustomShader(
-    std::string const& shaderCodeVertex, std::string const& shaderCodeFragment)
-{
-}
-
 SDL_BlendMode jt::DrawableImplSdl::getSDLBlendMode() const
 {
     if (getBlendMode() == jt::BlendMode::ALPHA) {

@@ -14,7 +14,6 @@
 #include <rope/state_rope.hpp>
 #include <screeneffects/state_screen_effects.hpp>
 #include <scroll/state_scroll.hpp>
-#include <shader/state_shaders.hpp>
 #include <simplex/state_3d_noise.hpp>
 #include <swarmobjects/state_swarmobjects.hpp>
 #include <tilemap_effects/state_tilemap_effects.hpp>
@@ -40,7 +39,6 @@ void StateSelect::doInternalCreate()
     AddButton<StateInventory>("Inventory");
     AddButton<StateAudio>("Audio");
     AddButton<StateGamepad>("Gamepad");
-    AddButton<StateShaders>("Shaders");
     AddButton<StateTransitions>("Transitions");
     AddButton<StateScreenEffects>("Effects");
     AddButton<StateTilemapEffects>("Tile Effects");

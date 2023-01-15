@@ -113,13 +113,6 @@ void jt::tilemap::TileLayer::doRotate(float rot)
         ts->setRotation(rot);
     }
 }
-void jt::tilemap::TileLayer::setCustomShader(
-    std::string const& shaderCodeVertex, std::string const& shaderCodeFragment)
-{
-    for (auto& ts : m_tileSetSprites) {
-        ts->setCustomShader(shaderCodeVertex, shaderCodeFragment);
-    }
-}
 void jt::tilemap::TileLayer::setColorFunction(
     std::function<jt::Color(jt::Vector2f const&)> colorFunc)
 {

@@ -88,9 +88,6 @@ void jt::Sprite::doDraw(std::shared_ptr<jt::RenderTargetLayer> const sptr) const
 {
     if (sptr) {
         sf::RenderStates states { getSfBlendMode() };
-        if (m_shader) {
-            states.shader = m_shader.get();
-        }
         sptr->draw(m_sprite, states);
     }
 }
