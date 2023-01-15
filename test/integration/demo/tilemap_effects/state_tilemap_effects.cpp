@@ -77,7 +77,7 @@ void StateTilemapEffects::doInternalDraw() const
         jt::PaletteBuilder builder;
         m_tileLayerGround->setColorFunction(
             [&t = m_time,
-                palette = builder.createGradientH(0, 360, 100.0, 100.0f, numberOfColors).create()](
+                palette = builder.addGradientH(0, 360, 100.0, 100.0f, numberOfColors).create()](
                 jt::Vector2f const& pos) {
                 auto const positionScale = 9;
                 auto const timeScale = 120.0f;
@@ -93,7 +93,7 @@ void StateTilemapEffects::doInternalDraw() const
         jt::PaletteBuilder builder;
         m_tileLayerGround->setColorFunction(
             [&t = m_time,
-                palette = builder.createGradientH(0, 360, 100.0, 100.0f, numberOfColors).create()](
+                palette = builder.addGradientH(0, 360, 100.0, 100.0f, numberOfColors).create()](
                 jt::Vector2f const& pos) {
                 jt::Vector2f const center { 8.0f * 16.0f, 8.0f * 16.0f };
                 auto dist = pos - center;

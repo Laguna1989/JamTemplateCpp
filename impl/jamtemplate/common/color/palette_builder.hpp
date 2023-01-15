@@ -9,12 +9,14 @@ namespace jt {
 
 class PaletteBuilder {
 public:
+    /// Convert the PaletteBuilder into a Palette
+    /// \return the palette object
     [[nodiscard]] Palette create() const;
 
     /// Parse a palette from a GPL string
     /// \param gplFileContent the content of the GPL file
-    /// \return the palette object
-    [[nodiscard]] PaletteBuilder& parseGPL(std::string const& gplFileContent);
+    /// \return the palette builder object
+    [[nodiscard]] PaletteBuilder& addColorsFromGPL(std::string const& gplFileContent);
 
     /// Create a palette from a gradient with varying hue.
     /// \param hmin minimum hue value
@@ -22,8 +24,8 @@ public:
     /// \param s saturation
     /// \param v value
     /// \param steps how many colors should be in the palette
-    /// \return the Palette object
-    [[nodiscard]] PaletteBuilder& createGradientH(
+    /// \return the palette builder object
+    [[nodiscard]] PaletteBuilder& addGradientH(
         float hmin, float hmax, float s, float v, std::size_t steps);
 
     /// Create a palette from a gradient with varying saturation.
@@ -32,8 +34,8 @@ public:
     /// \param smax maximum saturation value
     /// \param v value
     /// \param steps how many colors should be in the palette
-    /// \return the palette object
-    [[nodiscard]] PaletteBuilder& createGradientS(
+    /// \return the palette builder object
+    [[nodiscard]] PaletteBuilder& addGradientS(
         float h, float smin, float smax, float v, std::size_t steps);
 
     /// Create a palette from a gradient with varying value
@@ -42,17 +44,23 @@ public:
     /// \param vmin minimum value
     /// \param vmax maximum value
     /// \param steps how many colors should be in the palette
-    /// \return the palette object
-    [[nodiscard]] PaletteBuilder& createGradientV(
+    /// \return the palette builder object
+    [[nodiscard]] PaletteBuilder& addGradientV(
         float h, float s, float vmin, float vmax, std::size_t steps);
 
-    /// Add a new color to the palette. Note: The palette is not modified, but a new Palette is
-    /// returned.
+    /// Add a new color to the palette.
     /// \param col The color to be added.
-    /// \return the palette object
+    /// \return the palette builder object
     [[nodiscard]] PaletteBuilder& addColor(jt::Color const& col);
 
+    /// Add colors from a sprite
+    /// \param sprite the sprite from which colors are added
+    /// \return the palette builder object
     [[nodiscard]] PaletteBuilder& addColorsFromPicture(jt::Sprite& sprite);
+
+    /// Make the colors unique
+    /// \return the palette builder object
+    [[nodiscard]] PaletteBuilder& makeUnique();
 
 private:
     std::vector<Color> m_colors {};

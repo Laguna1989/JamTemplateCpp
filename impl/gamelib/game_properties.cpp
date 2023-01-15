@@ -7,7 +7,7 @@ jt::Palette createPalette()
 {
     jt::PaletteBuilder builder;
     return builder
-        .parseGPL(R"(GIMP Palette
+        .addColorsFromGPL(R"(GIMP Palette
 #Palette Name: Dreamscape8
 #Description: A palette made of low saturation colours to give your art a dreamlike quality.
 #Colors: 8

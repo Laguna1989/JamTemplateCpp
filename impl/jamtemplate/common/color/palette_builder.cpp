@@ -42,14 +42,14 @@ std::vector<jt::Color> parseGPLImpl(std::string const& gplFileConent)
 
 Palette PaletteBuilder::create() const { return Palette { m_colors }; }
 
-PaletteBuilder& PaletteBuilder::parseGPL(std::string const& gplFileContent)
+PaletteBuilder& PaletteBuilder::addColorsFromGPL(std::string const& gplFileContent)
 {
     auto const newColors = parseGPLImpl(gplFileContent);
     m_colors.insert(m_colors.end(), newColors.cbegin(), newColors.cend());
     return *this;
 }
 
-PaletteBuilder& PaletteBuilder::createGradientH(
+PaletteBuilder& PaletteBuilder::addGradientH(
     float hmin, float hmax, float s, float v, std::size_t steps)
 {
     std::vector<jt::Color> colors;
@@ -61,7 +61,7 @@ PaletteBuilder& PaletteBuilder::createGradientH(
     m_colors.insert(m_colors.end(), colors.cbegin(), colors.cend());
     return *this;
 }
-PaletteBuilder& PaletteBuilder::createGradientS(
+PaletteBuilder& PaletteBuilder::addGradientS(
     float h, float smin, float smax, float v, std::size_t steps)
 {
     std::vector<jt::Color> colors;
@@ -73,7 +73,7 @@ PaletteBuilder& PaletteBuilder::createGradientS(
     m_colors.insert(m_colors.end(), colors.cbegin(), colors.cend());
     return *this;
 }
-PaletteBuilder& PaletteBuilder::createGradientV(
+PaletteBuilder& PaletteBuilder::addGradientV(
     float h, float s, float vmin, float vmax, std::size_t steps)
 {
     std::vector<jt::Color> colors;
@@ -91,6 +91,7 @@ PaletteBuilder& PaletteBuilder::addColor(jt::Color const& col)
     m_colors.push_back(col);
     return *this;
 }
+
 PaletteBuilder& PaletteBuilder::addColorsFromPicture(Sprite& sprite)
 {
     auto const w = static_cast<unsigned int>(sprite.getLocalBounds().width);
@@ -105,6 +106,13 @@ PaletteBuilder& PaletteBuilder::addColorsFromPicture(Sprite& sprite)
         SystemHelper::remove_duplicates(colorsFromSprite.begin(), colorsFromSprite.end()),
         colorsFromSprite.end());
     m_colors.insert(m_colors.end(), colorsFromSprite.cbegin(), colorsFromSprite.cend());
+    return *this;
+}
+
+PaletteBuilder& PaletteBuilder::makeUnique()
+{
+    m_colors.erase(
+        SystemHelper::remove_duplicates(m_colors.begin(), m_colors.end()), m_colors.end());
     return *this;
 }
 
