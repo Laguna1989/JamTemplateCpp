@@ -12,12 +12,9 @@ public:
     bool m_updateCalled { false };
 
 private:
-    void doUpdate(float elapsed) override { m_updateCalled = true; }
+    void doUpdate(float /*elapsed*/) override { m_updateCalled = true; }
     void doStart() override { }
-    void doDraw(std::shared_ptr<jt::RenderTargetInterface> rt) override
-    {
-        m_drawCalled = true;
-    }
+    void doDraw(std::shared_ptr<jt::RenderTargetInterface> rt) override { m_drawCalled = true; }
 };
 
 TEST(StateManagerTransitionImplTest, IsInProgressReturnsFalseByDefault)

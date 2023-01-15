@@ -20,7 +20,11 @@ std::shared_ptr<jt::SoundInterface> jt::LoggingAudio::getPermanentSound(
     return m_decoratee.getPermanentSound(identifier);
 }
 
-void jt::LoggingAudio::removePermanentSound(std::string const& identifier) { }
+void jt::LoggingAudio::removePermanentSound(std::string const& identifier)
+{
+    m_logger.debug("remove permanent sound: " + identifier, { "jt", "audio" });
+    m_decoratee.removePermanentSound(identifier);
+}
 
 oalpp::SoundContextInterface& jt::LoggingAudio::getContext() { return m_decoratee.getContext(); }
 
