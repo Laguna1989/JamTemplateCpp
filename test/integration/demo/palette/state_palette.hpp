@@ -1,6 +1,7 @@
 #ifndef JAMTEMPLATE_STATE_PALETTE_HPP
 #define JAMTEMPLATE_STATE_PALETTE_HPP
 
+#include "color/palette.hpp"
 #include <game_state.hpp>
 #include <shape.hpp>
 
@@ -18,6 +19,9 @@ private:
     void createShapesFromValueGradient();
     void createShapesFromHueGradient();
     void createShapesFromSaturationGradient();
+    void createShapesFromSprite();
+
+    void createPaletteShapes(jt::Palette const& palette_saturation, float ypos);
 };
 
 #endif // JAMTEMPLATE_STATE_PALETTE_HPP
