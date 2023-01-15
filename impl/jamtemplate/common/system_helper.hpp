@@ -54,6 +54,27 @@ void remove_intersection(ContainerT& a, ContainerT const& b)
     a.erase(std::remove_if(a.begin(), a.end(), predicate), a.cend());
 }
 
+/// Helper function to remove duplicates for containers of elements that can not be ordered
+/// \tparam ForwardIterator Iterator type
+/// \param first where to start
+/// \param last where to end
+/// \return first element to be removed
+template <typename ForwardIterator>
+ForwardIterator remove_duplicates(ForwardIterator first, ForwardIterator last)
+{
+    auto new_last = first;
+
+    for (auto current = first; current != last; ++current) {
+        if (std::find(first, new_last, *current) == new_last) {
+            if (new_last != current)
+                *new_last = *current;
+            ++new_last;
+        }
+    }
+
+    return new_last;
+}
+
 /// convert a vector of shared pointers to a vector of weak pointers.
 /// \tparam T The type of objects being pointed to
 /// \param pointers the vector of shared pointers
