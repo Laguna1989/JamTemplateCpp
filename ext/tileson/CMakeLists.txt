@@ -5,6 +5,7 @@ FetchContent_Declare(
         GIT_TAG master
 )
 
+SET(BUILD_TESTS OFF)
 FetchContent_GetProperties(tileson)
 
 if (NOT tileson_POPULATED)
