@@ -49,6 +49,8 @@ public:
 
     int getSampleRate() const override;
 
+    void setVolumeProvider(GroupVolumeGetterInterface& provider) override;
+
 private:
     std::vector<std::shared_ptr<SoundInterface>> m_sounds {};
 };

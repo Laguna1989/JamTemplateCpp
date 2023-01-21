@@ -23,3 +23,5 @@ int jt::SoundNull::getSampleRate() const { return 44100; }
 
 void jt::SoundNull::setPitch(float /*pitch*/) { }
 float jt::SoundNull::getPitch() const { return 1.0f; }
+
+void jt::SoundNull::setVolumeProvider(jt::GroupVolumeGetterInterface& provider) { }

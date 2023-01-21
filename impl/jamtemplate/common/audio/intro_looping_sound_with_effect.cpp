@@ -92,3 +92,8 @@ void jt::IntroLoopingSoundWithEffect::setBlend(float blend) { m_blend = blend; }
 float jt::IntroLoopingSoundWithEffect::getBlend() const { return m_blend; }
 
 int jt::IntroLoopingSoundWithEffect::getSampleRate() const { return m_introSound->getSampleRate(); }
+void jt::IntroLoopingSoundWithEffect::setVolumeProvider(jt::GroupVolumeGetterInterface& provider)
+{
+    m_introSound->setVolumeProvider(provider);
+    m_loopingSound->setVolumeProvider(provider);
+}

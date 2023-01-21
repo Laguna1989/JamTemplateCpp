@@ -32,6 +32,8 @@ public:
     float getBlend() const override;
     int getSampleRate() const override;
 
+    void setVolumeProvider(GroupVolumeGetterInterface& provider) override;
+
 private:
     std::unique_ptr<jt::SoundWithEffect> m_introSound { nullptr };
     std::unique_ptr<jt::SoundWithEffect> m_loopingSound { nullptr };

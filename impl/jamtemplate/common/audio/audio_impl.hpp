@@ -2,6 +2,7 @@
 #define JAMTEMPLATE_AUDIO_IMPL_HPP
 
 #include <audio/audio_interface.hpp>
+#include <audio/group_volume_manager.hpp>
 #include <oalpp/sound_context.hpp>
 #include <map>
 #include <vector>
@@ -36,6 +37,8 @@ public:
 
     SoundFadeManager& fades() override;
 
+    GroupVolumeSetterInterface& groups() override;
+
 private:
     oalpp::SoundContext m_context;
 
@@ -43,6 +46,8 @@ private:
     std::map<std::string, std::shared_ptr<jt::SoundInterface>> m_permanentSounds {};
 
     std::unique_ptr<SoundFadeManager> m_fades { std::make_unique<SoundFadeManager>() };
+
+    GroupVolumeManager m_volumeGroups;
 
     void cleanUpUnusedSounds();
 };

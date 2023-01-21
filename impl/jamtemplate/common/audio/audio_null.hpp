@@ -2,6 +2,7 @@
 #define JAMTEMPLATE_AUDIO_NULL_HPP
 
 #include <audio/audio_interface.hpp>
+#include <audio/group_volume_manager.hpp>
 
 namespace jt {
 
@@ -37,11 +38,13 @@ public:
         std::vector<std::shared_ptr<jt::SoundInterface>> const& sounds) override;
 
     SoundFadeManager& fades() override;
+    GroupVolumeSetterInterface& groups() override;
 
 private:
     null_objects::SoundContextNull m_context;
 
     SoundFadeManager m_fades;
+    GroupVolumeManager m_groups;
 };
 } // namespace jt
 

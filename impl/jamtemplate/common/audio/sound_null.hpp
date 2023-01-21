@@ -30,6 +30,7 @@ public:
     float getBlend() const override;
 
     int getSampleRate() const override;
+    void setVolumeProvider(GroupVolumeGetterInterface& provider) override;
 };
 } // namespace jt
 

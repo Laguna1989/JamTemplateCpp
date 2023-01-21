@@ -120,3 +120,8 @@ float jt::LoggingSound::getPitch() const
     m_logger.verbose("Sound getPitch: " + std::to_string(pitch), { "jt", "audio", "sound" });
     return pitch;
 }
+void jt::LoggingSound::setVolumeProvider(jt::GroupVolumeGetterInterface& provider)
+{
+    m_logger.info("SetVolumeProvider", { "jt", "audio", "sound", "volumeProvider" });
+    m_decoratee->setVolumeProvider(provider);
+}

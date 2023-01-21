@@ -36,6 +36,7 @@ void StateAudio::doInternalCreate()
 
 void StateAudio::doInternalUpdate(float /*elapsed*/)
 {
+    getGame()->audio().groups().setGroupVolume("master", m_master_volume);
     if (m_sound->getBlend() != m_blend) {
         m_sound->setBlend(m_blend);
     }
@@ -47,6 +48,8 @@ void StateAudio::doInternalUpdate(float /*elapsed*/)
 void StateAudio::doInternalDraw() const
 {
     ImGui::Begin("Sound");
+    ImGui::SliderFloat("master volume", &m_master_volume, 0.0f, 1.0f);
+    ImGui::Separator();
     ImGui::SliderFloat("blend", &m_blend, 0.0f, 1.0f);
     if (ImGui::Button("play looping")) {
         // create new music

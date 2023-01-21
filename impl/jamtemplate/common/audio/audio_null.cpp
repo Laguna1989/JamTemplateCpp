@@ -55,3 +55,4 @@ std::shared_ptr<jt::SoundInterface> jt::AudioNull::addTemporarySoundGroup(
     return group;
 }
 jt::SoundFadeManager& jt::AudioNull::fades() { return m_fades; }
+jt::GroupVolumeSetterInterface& jt::AudioNull::groups() { return m_groups; }
