@@ -62,9 +62,6 @@ void jt::IntroLoopingSoundWithEffect::pause()
     }
 }
 
-float jt::IntroLoopingSoundWithEffect::getVolume() const { return m_volume; }
-void jt::IntroLoopingSoundWithEffect::setVolume(float newVolume) { m_volume = newVolume; }
-
 void jt::IntroLoopingSoundWithEffect::setPitch(float pitch)
 {
     m_introSound->setPitch(pitch);
@@ -88,12 +85,6 @@ float jt::IntroLoopingSoundWithEffect::getPosition() const
     return m_introSound->getPosition() + m_loopingSound->getPosition();
 }
 
-void jt::IntroLoopingSoundWithEffect::setBlend(float blend) { m_blend = blend; }
-float jt::IntroLoopingSoundWithEffect::getBlend() const { return m_blend; }
-
 int jt::IntroLoopingSoundWithEffect::getSampleRate() const { return m_introSound->getSampleRate(); }
-void jt::IntroLoopingSoundWithEffect::setVolumeProvider(jt::GroupVolumeGetterInterface& provider)
-{
-    m_introSound->setVolumeProvider(provider);
-    m_loopingSound->setVolumeProvider(provider);
+void jt::IntroLoopingSoundWithEffect::setVolumeProvider(jt::GroupVolumeGetterInterface& provider) {
 }

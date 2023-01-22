@@ -1,11 +1,11 @@
-#ifndef JAMTEMPLATE_SOUND_IMPL_HPP
-#define JAMTEMPLATE_SOUND_IMPL_HPP
+#ifndef JAMTEMPLATE_SOUND_BASE_HPP
+#define JAMTEMPLATE_SOUND_BASE_HPP
 
 #include <audio/sound_interface.hpp>
 
 namespace jt {
 
-class SoundImpl : public jt::SoundInterface {
+class SoundBase : public jt::SoundInterface {
 public:
     float getVolume() const override;
     void setVolume(float newVolume) override;
@@ -14,11 +14,13 @@ public:
     float getBlend() const override;
 
     void setVolumeProvider(GroupVolumeGetterInterface& provider) override;
+    void setVolumeGroup(std::string const& volumeGroupName) override;
 
 protected:
-    float m_blend = 1.0f;
-    float m_volume = 1.0f;
+    float m_blend { 1.0f };
+    float m_volume { 1.0f };
 
+    std::string m_volumeGroup { "" };
     GroupVolumeGetterInterface* m_volumeProvider = nullptr;
 
     float getVolumeFromVolumeProvider() const;
@@ -26,4 +28,4 @@ protected:
 
 } // namespace jt
 
-#endif // JAMTEMPLATE_SOUND_IMPL_HPP
+#endif // JAMTEMPLATE_SOUND_BASE_HPP

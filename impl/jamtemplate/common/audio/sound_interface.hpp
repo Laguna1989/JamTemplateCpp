@@ -74,6 +74,9 @@ public:
     /// \return the sample rate in Hz
     virtual int getSampleRate() const = 0;
 
+    /// Set volume group
+    virtual void setVolumeGroup(std::string const& volumeGroupName) = 0;
+
 protected:
     SoundInterface() = default;
 };

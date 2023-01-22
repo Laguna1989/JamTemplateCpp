@@ -31,6 +31,7 @@ public:
 
     int getSampleRate() const override;
     void setVolumeProvider(GroupVolumeGetterInterface& provider) override;
+    void setVolumeGroup(std::string const& string) override;
 };
 } // namespace jt
 

@@ -24,7 +24,7 @@ private:
     std::map<std::string, std::shared_ptr<jt::SoundInterface>> m_notes;
 
     mutable float m_blend { 0.0f };
-    mutable float m_master_volume { 1.0f };
+    mutable std::map<std::string, float> m_volumes;
 };
 
 #endif // JAMTEMPLATE_STATE_AUDIO_HPP

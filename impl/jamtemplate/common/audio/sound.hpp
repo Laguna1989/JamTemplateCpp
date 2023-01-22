@@ -1,7 +1,7 @@
 ﻿#ifndef JAMTEMPLATE_SOUND_HPP
 #define JAMTEMPLATE_SOUND_HPP
 
-#include <audio/sound_impl.hpp>
+#include <audio/sound_base.hpp>
 #include <counted_object.hpp>
 #include <oalpp/sound.hpp>
 #include <oalpp/sound_data.hpp>
@@ -9,7 +9,7 @@
 
 namespace jt {
 
-class Sound : public SoundImpl, public CountedObj<Sound> {
+class Sound : public SoundBase, public CountedObj<Sound> {
 public:
     explicit Sound(std::string const& fileName);
 

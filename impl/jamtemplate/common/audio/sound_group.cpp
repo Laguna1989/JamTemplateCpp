@@ -127,3 +127,9 @@ void jt::SoundGroup::setVolumeProvider(jt::GroupVolumeGetterInterface& provider)
         s->setVolumeProvider(provider);
     }
 }
+void jt::SoundGroup::setVolumeGroup(std::string const& volumeGroupName)
+{
+    for (auto& s : m_sounds) {
+        s->setVolumeGroup(volumeGroupName);
+    }
+}

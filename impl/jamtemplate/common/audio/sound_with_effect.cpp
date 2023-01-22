@@ -11,8 +11,8 @@ jt::SoundWithEffect::SoundWithEffect(
 
 void jt::SoundWithEffect::update()
 {
-    m_drySound.setVolume(m_volume * (1.0f - m_blend) * m_volumeProvider->getVolume(""));
-    m_wetSound.setVolume(m_volume * (m_blend)*m_volumeProvider->getVolume(""));
+    m_drySound.setVolume(m_volume * (1.0f - m_blend) * getVolumeFromVolumeProvider());
+    m_wetSound.setVolume(m_volume * m_blend * getVolumeFromVolumeProvider());
 
     m_drySound.update();
     m_wetSound.update();
@@ -30,6 +30,7 @@ void jt::SoundWithEffect::stop()
     m_drySound.stop();
     m_wetSound.stop();
 }
+
 void jt::SoundWithEffect::pause()
 {
     m_drySound.pause();
@@ -47,6 +48,7 @@ void jt::SoundWithEffect::setPitch(float pitch)
     m_drySound.setPitch(pitch);
     m_wetSound.setPitch(pitch);
 }
+
 float jt::SoundWithEffect::getPitch() const { return m_drySound.getPitch(); }
 
 bool jt::SoundWithEffect::getLoop(void) { return m_drySound.getIsLooping(); }

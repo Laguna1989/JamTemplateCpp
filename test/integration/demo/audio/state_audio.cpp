@@ -12,6 +12,7 @@ void StateAudio::doInternalCreate()
         // create new music
         m_sound = getGame()->audio().addPermanentSound(
             "music", "assets/test/integration/demo/looping_stereo_track.mp3", m_effect);
+        m_sound->setVolumeGroup("music");
         m_sound->setLoop(true);
     } else {
         // get blend property from already created music
@@ -25,18 +26,21 @@ void StateAudio::doInternalCreate()
         { "G5", 1.78179772727272727273f }, { "A5", 2.0f } };
 
     for (auto const& kvp : pitches) {
-        auto soundGroupSound
-            = getGame()->audio().addTemporarySound("assets/test/integration/demo/test.ogg");
-        soundGroupSound->setPitch(kvp.second);
-        soundGroupSounds.push_back(soundGroupSound);
-        m_notes[kvp.first] = soundGroupSound;
+        auto sound = getGame()->audio().addTemporarySound("assets/test/integration/demo/test.ogg");
+        sound->setPitch(kvp.second);
+        sound->setVolumeGroup("blip");
+        soundGroupSounds.push_back(sound);
+        m_notes[kvp.first] = sound;
     }
     m_soundGroup = getGame()->audio().addTemporarySoundGroup(soundGroupSounds);
 }
 
 void StateAudio::doInternalUpdate(float /*elapsed*/)
 {
-    getGame()->audio().groups().setGroupVolume("master", m_master_volume);
+    for (auto const& kvp : m_volumes) {
+        getGame()->audio().groups().setGroupVolume(kvp.first, kvp.second);
+    }
+
     if (m_sound->getBlend() != m_blend) {
         m_sound->setBlend(m_blend);
     }
@@ -48,7 +52,15 @@ void StateAudio::doInternalUpdate(float /*elapsed*/)
 void StateAudio::doInternalDraw() const
 {
     ImGui::Begin("Sound");
-    ImGui::SliderFloat("master volume", &m_master_volume, 0.0f, 1.0f);
+    ImGui::Text("Volume Groups");
+    auto const groupNames = getGame()->audio().groups().getAllGroupNames();
+    for (auto const& n : groupNames) {
+        if (m_volumes.count(n) == 0) {
+            m_volumes[n] = 1.0f;
+        }
+        auto const str = "volume '" + n + "'";
+        ImGui::SliderFloat(str.c_str(), &m_volumes[n], 0.0f, 1.0f);
+    }
     ImGui::Separator();
     ImGui::SliderFloat("blend", &m_blend, 0.0f, 1.0f);
     if (ImGui::Button("play looping")) {
@@ -56,6 +68,7 @@ void StateAudio::doInternalDraw() const
         m_sound = getGame()->audio().addPermanentSound(
             "music", "assets/test/integration/demo/looping_stereo_track.mp3", m_effect);
         m_sound->setLoop(true);
+        m_sound->setVolumeGroup("music");
         m_sound->play();
     }
     if (ImGui::Button("play intro + looping")) {

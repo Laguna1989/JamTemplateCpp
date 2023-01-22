@@ -12,9 +12,9 @@ class GroupVolumeManager : public jt::GroupVolumeGetterInterface,
 public:
     float getVolume(std::string const& groupName) const override;
     void setGroupVolume(std::string const& groupName, float volume) override;
+    std::vector<std::string> getAllGroupNames() const override;
 
 private:
-    float getVolumeFromGroup(std::string const& groupName) const;
     mutable std::map<std::string, float> m_volumeGroups;
 };
 

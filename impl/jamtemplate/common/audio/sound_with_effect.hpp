@@ -1,13 +1,13 @@
 #ifndef JAMTEMPLATE_SOUND_WITH_EFFECT_HPP
 #define JAMTEMPLATE_SOUND_WITH_EFFECT_HPP
 
-#include <audio/sound_impl.hpp>
+#include <audio/sound_base.hpp>
 #include <oalpp/sound.hpp>
 #include <oalpp/sound_data.hpp>
 
 namespace jt {
 
-class SoundWithEffect : public SoundImpl {
+class SoundWithEffect : public SoundBase {
 public:
     SoundWithEffect(std::string const& fileName, oalpp::effects::MonoEffectInterface& effect);
     void update() override;

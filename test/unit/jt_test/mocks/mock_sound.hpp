@@ -23,6 +23,7 @@ public:
     MOCK_METHOD(float, getBlend, (), (const, override));
     MOCK_METHOD(int, getSampleRate, (), (const, override));
     MOCK_METHOD(void, setVolumeProvider, (jt::GroupVolumeGetterInterface&), (override));
+    MOCK_METHOD(void, setVolumeGroup,(std::string const&), (override));
 };
 
 #endif // JAMTEMPLATE_MOCK_SOUND_HPP
