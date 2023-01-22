@@ -36,6 +36,8 @@ public:
     float getPosition() const override;
 
     int getSampleRate() const override;
+    void setVolumeProvider(GroupVolumeGetterInterface& provider) override;
+    void setVolumeGroup(std::string const& volumeGroupName) override;
 
 private:
     std::shared_ptr<SoundInterface> m_decoratee;

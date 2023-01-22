@@ -13,8 +13,7 @@ private:
 
 protected:
     std::unique_ptr<Sound> m_sound;
-    SoundTestWithLoadedSound() { initializeSound(); }
-    void initializeSound()
+    SoundTestWithLoadedSound()
     {
         m_sound = std::make_unique<Sound>("assets/test/unit/jt_test/test.ogg");
         m_sound->setLoop(false);

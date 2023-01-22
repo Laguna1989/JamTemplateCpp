@@ -1,6 +1,7 @@
 #ifndef JAMTEMPLATE_AUDIO_INTERFACE_HPP
 #define JAMTEMPLATE_AUDIO_INTERFACE_HPP
 
+#include <audio/group_volume_setter_interface.hpp>
 #include <audio/sound.hpp>
 #include <audio/sound_fade_manager.hpp>
 #include <audio/sound_interface.hpp>
@@ -94,6 +95,10 @@ public:
     /// Get the SoundFadeManager
     /// \return the SoundFadeManager
     virtual jt::SoundFadeManager& fades() = 0;
+
+    /// Get the GroupVolumes
+    /// \return the GroupVolumeSetter
+    virtual jt::GroupVolumeSetterInterface& groups() = 0;
 
 protected:
     AudioInterface() = default;

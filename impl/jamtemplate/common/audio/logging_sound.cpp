@@ -120,3 +120,14 @@ float jt::LoggingSound::getPitch() const
     m_logger.verbose("Sound getPitch: " + std::to_string(pitch), { "jt", "audio", "sound" });
     return pitch;
 }
+void jt::LoggingSound::setVolumeProvider(jt::GroupVolumeGetterInterface& provider)
+{
+    m_logger.debug("SetVolumeProvider", { "jt", "audio", "sound", "volumeProvider" });
+    m_decoratee->setVolumeProvider(provider);
+}
+void jt::LoggingSound::setVolumeGroup(std::string const& volumeGroupName)
+{
+    m_logger.info(
+        "SetVolumeGroup: '" + volumeGroupName + "'", { "jt", "audio", "sound", "volumeGroup" });
+    m_decoratee->setVolumeGroup(volumeGroupName);
+}

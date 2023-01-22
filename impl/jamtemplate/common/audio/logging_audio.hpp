@@ -33,6 +33,7 @@ public:
     oalpp::SoundContextInterface& getContext() override;
 
     SoundFadeManager& fades() override;
+    GroupVolumeSetterInterface& groups() override;
 
 private:
     AudioInterface& m_decoratee;

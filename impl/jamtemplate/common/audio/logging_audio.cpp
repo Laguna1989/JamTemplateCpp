@@ -77,6 +77,11 @@ std::shared_ptr<jt::SoundInterface> jt::LoggingAudio::addTemporarySoundGroup(
 }
 jt::SoundFadeManager& jt::LoggingAudio::fades()
 {
-    m_logger.verbose("fades ", { "jt", "audio" });
+    m_logger.verbose("fades", { "jt", "audio" });
     return m_decoratee.fades();
+}
+jt::GroupVolumeSetterInterface& jt::LoggingAudio::groups()
+{
+    m_logger.verbose("groups", { "jt", "audio", "sound groups" });
+    return m_decoratee.groups();
 }

@@ -1,6 +1,8 @@
 #ifndef JAMTEMPLATE_SOUNDINTERFACE_HPP
 #define JAMTEMPLATE_SOUNDINTERFACE_HPP
 
+#include <audio/volume_provider_interface.hpp>
+
 namespace jt {
 
 class SoundInterface {
@@ -34,6 +36,8 @@ public:
     /// Set Volume
     /// \param newVolume in range 0.0 to 1.0
     virtual void setVolume(float newVolume) = 0;
+
+    virtual void setVolumeProvider(jt::GroupVolumeGetterInterface& provider) = 0;
 
     /// Set Pitch
     /// \param pitch new pitch value in range 0 to inf
@@ -69,6 +73,9 @@ public:
     /// Get sample rate
     /// \return the sample rate in Hz
     virtual int getSampleRate() const = 0;
+
+    /// Set volume group
+    virtual void setVolumeGroup(std::string const& volumeGroupName) = 0;
 
 protected:
     SoundInterface() = default;

@@ -120,3 +120,16 @@ float jt::SoundGroup::getPitch() const
 }
 
 std::size_t jt::SoundGroup::size() const { return m_sounds.size(); }
+
+void jt::SoundGroup::setVolumeProvider(jt::GroupVolumeGetterInterface& provider)
+{
+    for (auto& s : m_sounds) {
+        s->setVolumeProvider(provider);
+    }
+}
+void jt::SoundGroup::setVolumeGroup(std::string const& volumeGroupName)
+{
+    for (auto& s : m_sounds) {
+        s->setVolumeGroup(volumeGroupName);
+    }
+}

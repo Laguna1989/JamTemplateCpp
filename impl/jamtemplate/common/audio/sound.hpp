@@ -1,7 +1,7 @@
 ﻿#ifndef JAMTEMPLATE_SOUND_HPP
 #define JAMTEMPLATE_SOUND_HPP
 
-#include <audio/sound_interface.hpp>
+#include <audio/sound_base.hpp>
 #include <counted_object.hpp>
 #include <oalpp/sound.hpp>
 #include <oalpp/sound_data.hpp>
@@ -9,7 +9,7 @@
 
 namespace jt {
 
-class Sound : public SoundInterface, public CountedObj<Sound> {
+class Sound : public SoundBase, public CountedObj<Sound> {
 public:
     explicit Sound(std::string const& fileName);
 
@@ -21,9 +21,6 @@ public:
     void stop() override;
     void pause() override;
 
-    float getVolume() const override;
-    void setVolume(float newVolume) override;
-
     void setPitch(float pitch) override;
     float getPitch() const override;
 
@@ -34,18 +31,12 @@ public:
 
     float getPosition() const override;
 
-    void setBlend(float blend) override;
-    float getBlend() const override;
-
     int getSampleRate() const override;
 
 private:
     oalpp::SoundData m_buffer;
     oalpp::Sound m_sound;
     std::string m_fileName;
-
-    float m_blend = 1.0f;
-    float m_volume = 1.0f;
 };
 
 } // namespace jt
