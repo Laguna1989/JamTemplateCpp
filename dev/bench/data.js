@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1673801524230,
+  "lastUpdate": 1674395006889,
   "repoUrl": "https://github.com/Laguna1989/JamTemplateCpp",
   "entries": {
     "Benchmark": [
@@ -10890,6 +10890,84 @@ window.BENCHMARK_DATA = {
             "value": 3.2721244345795415,
             "unit": "ms/iter",
             "extra": "iterations: 214\ncpu: 3.2719757009345773 ms\nthreads: 1"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "laguna.ws@gmail.com",
+            "name": "Laguna1989",
+            "username": "Laguna1989"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "5181d68dbc343e20f9b96041549a42dc8e194665",
+          "message": "Merge pull request #275 from Laguna1989/feature/global_volume\n\nGlobal Volume & Sound Groups",
+          "timestamp": "2023-01-22T14:40:35+01:00",
+          "tree_id": "51af30a376ba92652e3415c85d38f05fffc8fb84",
+          "url": "https://github.com/Laguna1989/JamTemplateCpp/commit/5181d68dbc343e20f9b96041549a42dc8e194665"
+        },
+        "date": 1674395005570,
+        "tool": "googlecpp",
+        "benches": [
+          {
+            "name": "BM_UpdateDrawablePositions",
+            "value": 3.294104481132124,
+            "unit": "ms/iter",
+            "extra": "iterations: 212\ncpu: 3.292875943396226 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GetAllCommands",
+            "value": 0.36108082561726446,
+            "unit": "ms/iter",
+            "extra": "iterations: 1944\ncpu: 0.36042222222222225 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_LoggerLogWithoutTarget",
+            "value": 0.7700982827282657,
+            "unit": "ms/iter",
+            "extra": "iterations: 909\ncpu: 0.770029702970297 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_LoggerLogWithCoutTargetSetToOff",
+            "value": 0.7716686207277009,
+            "unit": "ms/iter",
+            "extra": "iterations: 907\ncpu: 0.7715079382579935 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_UpdateObjectGroup",
+            "value": 0.06196324707860964,
+            "unit": "ms/iter",
+            "extra": "iterations: 11296\ncpu: 0.06195940155807367 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_UpdateSpatialObjectGrid",
+            "value": 0.32882045147874356,
+            "unit": "ms/iter",
+            "extra": "iterations: 2164\ncpu: 0.32879833641404804 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_StartGame",
+            "value": 0.003140135496811343,
+            "unit": "ms/iter",
+            "extra": "iterations: 221865\ncpu: 0.0031308746309692864 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_RefineTilemapCollisions",
+            "value": 0.2333663486973922,
+            "unit": "ms/iter",
+            "extra": "iterations: 2994\ncpu: 0.23334706078824305 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GamestateWithTweeningShapes",
+            "value": 3.2850536150235476,
+            "unit": "ms/iter",
+            "extra": "iterations: 213\ncpu: 3.2847840375586874 ms\nthreads: 1"
           }
         ]
       }
