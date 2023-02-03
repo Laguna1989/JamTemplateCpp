@@ -1,6 +1,7 @@
 #ifndef GUATD_JAMTEMPLATE_CHARACTER_HPP
 #define GUATD_JAMTEMPLATE_CHARACTER_HPP
 
+#include "character_controller_interface.hpp"
 #include <animation.hpp>
 #include <box2dwrapper/box2d_object.hpp>
 #include <game_object.hpp>
@@ -17,16 +18,21 @@ public:
 
 class PlayerCharacter : public CharacterInterface, public jt::GameObject {
 public:
-    PlayerCharacter(std::shared_ptr<jt::Box2DWorldInterface> world,
-        std::weak_ptr<ItemRepository> repository);
+    PlayerCharacter(
+        std::shared_ptr<jt::Box2DWorldInterface> world, std::weak_ptr<ItemRepository> repository);
 
     std::shared_ptr<jt::Box2DObject> getBox2DObject() const;
+
+    void setCurrentTemperature(float temp);
 
 private:
     std::shared_ptr<jt::Animation> m_animation;
     std::shared_ptr<InventoryListImgui> m_inventory;
     std::shared_ptr<CharacterSheetImgui> m_charsheet;
     std::shared_ptr<jt::Box2DObject> m_physicsObject;
+
+    std::unique_ptr<CharacterControllerInterface> m_characterController { nullptr };
+    float m_current_temperature { 0.0f };
 
     void doCreate() override;
     void doUpdate(float const /*elapsed*/) override;

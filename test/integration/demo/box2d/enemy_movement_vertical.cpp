@@ -6,7 +6,7 @@ EnemyMovementVertical::EnemyMovementVertical(float minY, float maxY)
     m_yMax = maxY;
 }
 
-void EnemyMovementVertical::update(float elapsed, std::shared_ptr<jt::Box2DObject> obj)
+void EnemyMovementVertical::update(float /*elapsed*/, std::shared_ptr<jt::Box2DObject> obj)
 {
     auto const beeMovementSpeed = 30.0f;
     if (m_movingRight) {

@@ -150,6 +150,15 @@ void StateInventory::doInternalUpdate(float elapsed)
     camFollowObject(getGame()->gfx().camera(), getGame()->gfx().window().getSize(),
         m_player->getBox2DObject(), elapsed);
 
+    auto const playerPosFloat = m_player->getBox2DObject()->getPosition();
+    jt::Vector2u const playerPosTiles { static_cast<unsigned int>(playerPosFloat.x / 24),
+        static_cast<unsigned int>(playerPosFloat.y / 24) };
+    auto node = m_temperatureManager->getNodeAt(playerPosTiles);
+    if (node) {
+        m_player->setCurrentTemperature(node->m_currentTemp);
+    } else {
+        m_player->setCurrentTemperature(0.0f);
+    }
     pickupItems();
 
     std::string const& itemToSpawn = m_player->getInventory()->getAndResetItemToSpawn();

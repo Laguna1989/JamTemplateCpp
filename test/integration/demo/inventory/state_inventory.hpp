@@ -4,7 +4,7 @@
 #include "tilemap/tileson_loader.hpp"
 #include <audio/sound.hpp>
 #include <game_state.hpp>
-#include <inventory/character.hpp>
+#include <inventory/character/character.hpp>
 #include <inventory/character_sheet_imgui.hpp>
 #include <inventory/inventory_interface.hpp>
 #include <inventory/item_repository.hpp>

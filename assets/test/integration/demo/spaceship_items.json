@@ -924,7 +924,7 @@
  "nextobjectid":47,
  "orientation":"orthogonal",
  "renderorder":"right-down",
- "tiledversion":"1.9.0",
+ "tiledversion":"1.9.2",
  "tileheight":24,
  "tilesets":[
         {
@@ -1084,6 +1084,15 @@
                         }]
                 }, 
                 {
+                 "id":47,
+                 "properties":[
+                        {
+                         "name":"blocked",
+                         "type":"bool",
+                         "value":true
+                        }]
+                }, 
+                {
                  "id":57,
                  "properties":[
                         {
@@ -1199,7 +1208,8 @@
                          "type":"bool",
                          "value":true
                         }]
-                }, 
+                },
+            
                 {
                  "id":179,
                  "properties":[
@@ -1208,8 +1218,7 @@
                          "type":"bool",
                          "value":true
                         }]
-                },
-            
+                }, 
                 {
                  "id":180,
                  "properties":[

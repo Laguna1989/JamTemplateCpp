@@ -1,5 +1,6 @@
 #include "character.hpp"
 #include <game_interface.hpp>
+#include <inventory/character/character_controller_player.hpp>
 #include <Box2D/Box2D.h>
 
 PlayerCharacter::PlayerCharacter(
@@ -33,29 +34,16 @@ void PlayerCharacter::doCreate()
 
     m_inventory->setGameInstance(getGame());
     m_charsheet->setGameInstance(getGame());
+    m_characterController
+        = std::make_unique<CharacterControllerPlayer>(getGame()->input().keyboard());
 }
 
 void PlayerCharacter::doUpdate(float const elapsed)
 {
-    auto keyboard = getGame()->input().keyboard();
-    jt::Vector2f newVelocity { 0.0f, 0.0f };
-    float const speed = 85.0f;
-    if (keyboard->pressed(jt::KeyCode::D)) {
-        newVelocity += jt::Vector2f { speed, 0.0f };
+    if (m_characterController) {
+        m_characterController->update(*m_physicsObject.get());
     }
-    if (keyboard->pressed(jt::KeyCode::A)) {
-        newVelocity += jt::Vector2f { -speed, 0.0f };
-    }
-
-    if (keyboard->pressed(jt::KeyCode::W)) {
-        newVelocity += jt::Vector2f { 0.0f, -speed };
-    }
-    if (keyboard->pressed(jt::KeyCode::S)) {
-        newVelocity += jt::Vector2f { 0.0f, speed };
-    }
-
-    m_physicsObject->setVelocity(newVelocity);
-
+    auto const newVelocity = m_physicsObject->getVelocity();
     m_animation->setPosition(m_physicsObject->getPosition());
     m_animation->update(elapsed);
 
@@ -64,8 +52,9 @@ void PlayerCharacter::doUpdate(float const elapsed)
     m_animation->setScale(jt::Vector2f { xscale, 1.0f });
 
     m_inventory->update(elapsed);
-    m_charsheet->update(elapsed);
     m_charsheet->setEquippedItems(m_inventory->getEquippedItems());
+    m_charsheet->setCurrentTemperature(m_current_temperature);
+    m_charsheet->update(elapsed);
 }
 
 void PlayerCharacter::doDraw() const
@@ -78,3 +67,4 @@ void PlayerCharacter::doDraw() const
 std::shared_ptr<InventoryInterface> PlayerCharacter::getInventory() { return m_inventory; }
 std::shared_ptr<CharacterSheetImgui> PlayerCharacter::getCharSheet() { return m_charsheet; }
 std::shared_ptr<jt::Box2DObject> PlayerCharacter::getBox2DObject() const { return m_physicsObject; }
+void PlayerCharacter::setCurrentTemperature(float temp) { m_current_temperature = temp; }

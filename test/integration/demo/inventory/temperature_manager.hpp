@@ -54,7 +54,7 @@ public:
     std::shared_ptr<TemperatureNode> getNodeAt(jt::Vector2u const& pos);
 
 private:
-    bool m_draw { true };
+    bool m_draw { false };
     std::vector<std::shared_ptr<TemperatureNode>> m_tempNodes;
 
     std::shared_ptr<jt::Shape> mutable m_shape;

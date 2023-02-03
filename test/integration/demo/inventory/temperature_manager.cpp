@@ -76,7 +76,8 @@ void TemperatureManager::doCreate()
 }
 void TemperatureManager::doUpdate(float const elapsed)
 {
-    if (getGame()->input().keyboard()->justPressed(jt::KeyCode::Num1)) {
+    if (getGame()->input().keyboard()->justPressed(jt::KeyCode::V)) {
+        std::cout << "changed drawmode\n";
         m_draw = !m_draw;
     }
     m_shape->update(elapsed);

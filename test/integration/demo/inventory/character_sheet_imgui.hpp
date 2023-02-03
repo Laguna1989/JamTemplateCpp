@@ -15,10 +15,14 @@ public:
 
     void setEquippedItems(std::vector<std::string> const& items);
 
+    void setCurrentTemperature(float temp);
+
 private:
     std::weak_ptr<ItemRepository> m_repository;
 
     std::vector<std::string> m_equippedItems;
+
+    float m_currentTemperature { 0.0f };
 };
 
 #endif // JAMTEMPLATE_CHARACTER_SHEET_IMGUI_HPP
