@@ -114,9 +114,12 @@ void TemperatureManager::doDraw() const
     for (auto const& n : m_tempNodes) {
 
         m_shape->setPosition(n->getPosition());
-
+        auto const maxTempDisplayValue = 25.0f;
         // between 0 and 1
-        float const t = jt::MathHelper::clamp(n->m_currentTemp, -50.0f, 50.0f) / 100.0f + 0.5f;
+        float const t
+            = jt::MathHelper::clamp(n->m_currentTemp, -maxTempDisplayValue, maxTempDisplayValue)
+                / (2 * maxTempDisplayValue)
+            + 0.5f;
 
         std::uint8_t const r = static_cast<std::uint8_t>(jt::Lerp::linear(50.0f, 250.0f, t));
         std::uint8_t const g = static_cast<std::uint8_t>(jt::Lerp::linear(150.0f, 150.0f, t));

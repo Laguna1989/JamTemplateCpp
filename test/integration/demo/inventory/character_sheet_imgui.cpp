@@ -1,9 +1,25 @@
 #include "character_sheet_imgui.hpp"
 #include <game_interface.hpp>
+#include <math_helper.hpp>
 #include <imgui.h>
 
-CharacterSheetImgui::CharacterSheetImgui(std::weak_ptr<ItemRepository> repo)
+CharacterSheetBase::CharacterSheetBase(std::weak_ptr<ItemRepository> repo)
     : m_repository { repo }
+{
+}
+
+void CharacterSheetBase::doUpdate(float const /*elapsed*/) { }
+void CharacterSheetBase::doDraw() const { }
+
+void CharacterSheetBase::setEquippedItems(std::vector<std::string> const& items)
+{
+    m_equippedItems = items;
+}
+
+void CharacterSheetBase::setCurrentTemperature(float temp) { m_currentTemperature = temp; }
+
+CharacterSheetImgui::CharacterSheetImgui(std::weak_ptr<ItemRepository> repo)
+    : CharacterSheetBase(repo)
 {
 }
 
@@ -42,11 +58,7 @@ void CharacterSheetImgui::doDraw() const
     ImGui::Text("fire: %s", std::to_string(totalResistanceFire).c_str());
     ImGui::Text("Electric: %s", std::to_string(totalResistanceElectric).c_str());
     ImGui::Separator();
-    ImGui::Text("Temperature: %s", std::to_string(m_currentTemperature).c_str());
+    ImGui::Text("Temperature: %s",
+        jt::MathHelper::floatToStringWithXDigits(m_currentTemperature, 2).c_str());
     ImGui::End();
 }
-void CharacterSheetImgui::setEquippedItems(std::vector<std::string> const& items)
-{
-    m_equippedItems = items;
-}
-void CharacterSheetImgui::setCurrentTemperature(float temp) { m_currentTemperature = temp; }

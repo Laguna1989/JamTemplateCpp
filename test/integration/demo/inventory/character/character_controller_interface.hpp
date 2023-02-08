@@ -5,6 +5,7 @@
 #include <box2dwrapper/box2d_object.hpp>
 class CharacterControllerInterface {
 public:
+    virtual ~CharacterControllerInterface() = default;
     virtual void update(jt::Box2DObject& physObject) = 0;
 };
 

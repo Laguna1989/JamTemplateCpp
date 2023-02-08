@@ -5,24 +5,37 @@
 #include <inventory/item_repository.hpp>
 #include <memory>
 
-class CharacterSheetImgui : public jt::GameObject {
+class CharacterSheetInterface : public jt::GameObject {
+public:
+    virtual ~CharacterSheetInterface() = default;
+    virtual void setEquippedItems(std::vector<std::string> const& items) = 0;
+    virtual void setCurrentTemperature(float temperature) = 0;
+};
+
+class CharacterSheetBase : public CharacterSheetInterface {
+public:
+    CharacterSheetBase(std::weak_ptr<ItemRepository> repo);
+    void doUpdate(float const /*elapsed*/) override;
+    void doDraw() const override;
+
+    void setEquippedItems(std::vector<std::string> const& items) override;
+
+    void setCurrentTemperature(float temp) override;
+
+protected:
+    std::weak_ptr<ItemRepository> m_repository;
+    std::vector<std::string> m_equippedItems;
+    float m_currentTemperature { 0.0f };
+};
+
+class CharacterSheetImgui : public CharacterSheetBase {
 public:
     CharacterSheetImgui(std::weak_ptr<ItemRepository> repo);
     void doUpdate(float const /*elapsed*/) override;
     void doDraw() const override;
 
-    mutable bool m_drawCharacterSheet { false };
-
-    void setEquippedItems(std::vector<std::string> const& items);
-
-    void setCurrentTemperature(float temp);
-
 private:
-    std::weak_ptr<ItemRepository> m_repository;
-
-    std::vector<std::string> m_equippedItems;
-
-    float m_currentTemperature { 0.0f };
+    mutable bool m_drawCharacterSheet { false };
 };
 
 #endif // JAMTEMPLATE_CHARACTER_SHEET_IMGUI_HPP

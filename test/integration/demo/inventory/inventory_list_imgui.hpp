@@ -7,7 +7,7 @@
 #include <memory>
 #include <vector>
 
-class InventoryListImgui : public InventoryList, public jt::GameObject {
+class InventoryListImgui : public InventoryList {
 public:
     InventoryListImgui(std::weak_ptr<ItemRepository> repo);
 

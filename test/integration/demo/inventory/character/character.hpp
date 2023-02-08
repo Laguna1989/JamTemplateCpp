@@ -13,13 +13,14 @@
 class CharacterInterface {
 public:
     virtual std::shared_ptr<InventoryInterface> getInventory() = 0;
-    virtual std::shared_ptr<CharacterSheetImgui> getCharSheet() = 0;
 };
 
-class PlayerCharacter : public CharacterInterface, public jt::GameObject {
+class Character : public CharacterInterface, public jt::GameObject {
 public:
-    PlayerCharacter(
-        std::shared_ptr<jt::Box2DWorldInterface> world, std::weak_ptr<ItemRepository> repository);
+    Character(std::shared_ptr<jt::Box2DWorldInterface> world,
+        std::weak_ptr<ItemRepository> repository,
+        std::unique_ptr<CharacterControllerInterface>&& controller, jt::Vector2f const& pos,
+        bool isPlayer = false);
 
     std::shared_ptr<jt::Box2DObject> getBox2DObject() const;
 
@@ -27,8 +28,8 @@ public:
 
 private:
     std::shared_ptr<jt::Animation> m_animation;
-    std::shared_ptr<InventoryListImgui> m_inventory;
-    std::shared_ptr<CharacterSheetImgui> m_charsheet;
+    std::shared_ptr<InventoryInterface> m_inventory;
+    std::shared_ptr<CharacterSheetInterface> m_charsheet;
     std::shared_ptr<jt::Box2DObject> m_physicsObject;
 
     std::unique_ptr<CharacterControllerInterface> m_characterController { nullptr };
@@ -40,7 +41,6 @@ private:
 
 public:
     std::shared_ptr<InventoryInterface> getInventory() override;
-    std::shared_ptr<CharacterSheetImgui> getCharSheet() override;
 };
 
 #endif // GUATD_JAMTEMPLATE_CHARACTER_HPP

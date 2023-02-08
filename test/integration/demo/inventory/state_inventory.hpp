@@ -22,7 +22,8 @@ class StateInventory : public jt::GameState {
     std::shared_ptr<jt::tilemap::TileLayer> m_tileLayerOverlay;
     std::shared_ptr<jt::tilemap::ObjectLayer> m_objectsLayer;
 
-    std::shared_ptr<PlayerCharacter> m_player;
+    std::shared_ptr<Character> m_player;
+    std::vector<std::shared_ptr<Character>> m_characters;
 
     std::shared_ptr<ItemRepository> m_itemRepository;
     std::shared_ptr<jt::ObjectGroup<WorldItem>> m_worldItems;
@@ -40,6 +41,7 @@ class StateInventory : public jt::GameState {
     void pickupItems();
     void spawnWorldItem(std::string const& itemReferenceId, jt::Vector2f const& pos);
     void loadTemperatureManager(jt::tilemap::TilesonLoader& loader);
+    void handleCharacterTemperature();
 };
 
 #endif // JAMTEMPLATE_STATE_INVENTORY_HPP

@@ -1,4 +1,6 @@
 #include "state_inventory.hpp"
+#include "inventory/character/character_controller_player.hpp"
+#include "inventory/character/character_controller_walk.hpp"
 #include <box2dwrapper/box2d_world_impl.hpp>
 #include <game_interface.hpp>
 #include <inventory/inventory_list_imgui.hpp>
@@ -58,8 +60,15 @@ void StateInventory::doInternalCreate()
 
     createWorldItems();
 
-    m_player = std::make_shared<PlayerCharacter>(m_world, m_itemRepository);
+    m_player = std::make_shared<Character>(m_world, m_itemRepository,
+        std::make_unique<CharacterControllerPlayer>(getGame()->input().keyboard()),
+        jt::Vector2f { 5 * 24, 7 * 24 }, true);
     add(m_player);
+    m_characters.push_back(m_player);
+    auto guy = std::make_shared<Character>(m_world, m_itemRepository,
+        std::make_unique<CharacterControllerWalk>(), jt::Vector2f { 13 * 24, 4 * 24 });
+    add(guy);
+    m_characters.push_back(guy);
 
     setAutoDraw(false);
 
@@ -150,15 +159,7 @@ void StateInventory::doInternalUpdate(float elapsed)
     camFollowObject(getGame()->gfx().camera(), getGame()->gfx().window().getSize(),
         m_player->getBox2DObject(), elapsed);
 
-    auto const playerPosFloat = m_player->getBox2DObject()->getPosition();
-    jt::Vector2u const playerPosTiles { static_cast<unsigned int>(playerPosFloat.x / 24),
-        static_cast<unsigned int>(playerPosFloat.y / 24) };
-    auto node = m_temperatureManager->getNodeAt(playerPosTiles);
-    if (node) {
-        m_player->setCurrentTemperature(node->m_currentTemp);
-    } else {
-        m_player->setCurrentTemperature(0.0f);
-    }
+    handleCharacterTemperature();
     pickupItems();
 
     std::string const& itemToSpawn = m_player->getInventory()->getAndResetItemToSpawn();
@@ -167,6 +168,20 @@ void StateInventory::doInternalUpdate(float elapsed)
         auto const py = jt::Random::getInt(2, 8);
         jt::Vector2f const pos { px * 24.0f, py * 24.0f };
         spawnWorldItem(itemToSpawn, pos);
+    }
+}
+void StateInventory::handleCharacterTemperature()
+{
+    for (auto c : m_characters) {
+        auto const posFloat = c->getBox2DObject()->getPosition();
+        jt::Vector2u const posInTiles { static_cast<unsigned int>(posFloat.x / 24),
+            static_cast<unsigned int>(posFloat.y / 24) };
+        auto node = m_temperatureManager->getNodeAt(posInTiles);
+        if (node) {
+            c->setCurrentTemperature(node->m_currentTemp);
+        } else {
+            c->setCurrentTemperature(0.0f);
+        }
     }
 }
 
