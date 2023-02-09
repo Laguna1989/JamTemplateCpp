@@ -8,7 +8,6 @@ Character::Character(std::shared_ptr<jt::Box2DWorldInterface> world,
     jt::Vector2f const& pos, bool isPlayer)
     : m_characterController { std::move(controller) }
 {
-
     if (isPlayer) {
         m_inventory = std::make_shared<InventoryListImgui>(repo);
         m_charsheet = std::make_shared<CharacterSheetImgui>(repo);

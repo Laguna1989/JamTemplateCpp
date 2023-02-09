@@ -1,6 +1,7 @@
 #ifndef JAMTEMPLATE_STATE_INVENTORY_HPP
 #define JAMTEMPLATE_STATE_INVENTORY_HPP
 
+#include "object_door.hpp"
 #include "tilemap/tileson_loader.hpp"
 #include <audio/sound.hpp>
 #include <game_state.hpp>
@@ -20,6 +21,7 @@ class StateInventory : public jt::GameState {
 
     std::shared_ptr<jt::tilemap::TileLayer> m_tileLayerGround;
     std::shared_ptr<jt::tilemap::TileLayer> m_tileLayerOverlay;
+    std::shared_ptr<jt::tilemap::ObjectLayer> m_itemsLayer;
     std::shared_ptr<jt::tilemap::ObjectLayer> m_objectsLayer;
 
     std::shared_ptr<Character> m_player;
@@ -34,6 +36,8 @@ class StateInventory : public jt::GameState {
     std::vector<std::shared_ptr<jt::Box2DObject>> m_colliders {};
 
     std::shared_ptr<TemperatureManager> m_temperatureManager { nullptr };
+    // TODO find a more generic way to store those
+    std::vector<std::shared_ptr<ObjectDoor>> m_doors;
 
     void createItemRepository();
     void loadTilemap();

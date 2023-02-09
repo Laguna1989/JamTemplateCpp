@@ -1,6 +1,7 @@
 #include "state_inventory.hpp"
 #include "inventory/character/character_controller_player.hpp"
 #include "inventory/character/character_controller_walk.hpp"
+#include "object_door.hpp"
 #include <box2dwrapper/box2d_world_impl.hpp>
 #include <game_interface.hpp>
 #include <inventory/inventory_list_imgui.hpp>
@@ -60,6 +61,21 @@ void StateInventory::doInternalCreate()
 
     createWorldItems();
 
+    std::cout << "create world objects\n";
+    for (auto const& obj : m_objectsLayer->getObjects()) {
+        if (obj.properties.strings.at("type") == "door") {
+            auto door = std::make_shared<ObjectDoor>(m_temperatureManager->getNodeAt(
+                jt::Vector2u { static_cast<unsigned int>(obj.position.x / 24),
+                    static_cast<unsigned int>(obj.position.y / 24) }));
+            door->m_name = obj.name;
+            door->m_closed = !obj.properties.bools.at("initial_open");
+            door->m_inflowOpen = obj.properties.floats.at("temp_inflow_open");
+            door->m_inflowClosed = obj.properties.floats.at("temp_inflow_closed");
+            m_doors.push_back(door);
+            add(door);
+        }
+    }
+
     m_player = std::make_shared<Character>(m_world, m_itemRepository,
         std::make_unique<CharacterControllerPlayer>(getGame()->input().keyboard()),
         jt::Vector2f { 5 * 24, 7 * 24 }, true);
@@ -80,7 +96,7 @@ void StateInventory::createWorldItems()
     m_worldItems = std::make_shared<jt::ObjectGroup<WorldItem>>();
     std::cout << "createWorldItems\n";
 
-    for (auto const& it : m_objectsLayer->getObjects()) {
+    for (auto const& it : m_itemsLayer->getObjects()) {
         if (it.type != "item") {
             //        continue; // once tileson supports the class attribute.
         }
@@ -104,8 +120,10 @@ void StateInventory::loadTilemap()
         loader.loadTilesFromLayer("overlay", textureManager(), "assets/test/integration/demo/"));
     m_tileLayerOverlay->setScreenSizeHint(jt::Vector2f { 400, 300 });
 
+    m_itemsLayer = std::make_shared<jt::tilemap::ObjectLayer>(loader.loadObjectsFromLayer("items"));
+
     m_objectsLayer
-        = std::make_shared<jt::tilemap::ObjectLayer>(loader.loadObjectsFromLayer("items"));
+        = std::make_shared<jt::tilemap::ObjectLayer>(loader.loadObjectsFromLayer("objects"));
 
     auto tileCollisions = loader.loadCollisionsFromLayer("ground");
 
@@ -178,7 +196,7 @@ void StateInventory::handleCharacterTemperature()
             static_cast<unsigned int>(posFloat.y / 24) };
         auto node = m_temperatureManager->getNodeAt(posInTiles);
         if (node) {
-            c->setCurrentTemperature(node->m_currentTemp);
+            c->setCurrentTemperature(node->getCurrentTemperature());
         } else {
             c->setCurrentTemperature(0.0f);
         }

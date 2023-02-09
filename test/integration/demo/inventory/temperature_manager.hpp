@@ -3,33 +3,13 @@
 #define JAMTEMPLATE_TEMPERATURE_MANAGER_HPP
 
 #include <game_object.hpp>
+#include <inventory/temperature_node.hpp>
 #include <pathfinder/node_interface.hpp>
 #include <shape.hpp>
 #include <tilemap/info_rect.hpp>
 #include <vector>
 
-class TemperatureNode {
-public:
-    // TODO do use NodeInterface from Pathfinder
-    TemperatureNode(std::shared_ptr<jt::pathfinder::NodeInterface> node);
-    // TODO move to private
-    float m_currentTemp { 0.0f };
-    float m_throughputFactor { 0.9f };
-    float m_inflow { 0.0f };
-    float m_newTemp { 0.0f };
-
-    void addNeighbour(std::weak_ptr<TemperatureNode> other);
-    std::vector<std::weak_ptr<TemperatureNode>> const& getNeighbours();
-
-    jt::Vector2f const& getPosition() const;
-    jt::Vector2u const& getTilePosition() const;
-
-private:
-    jt::Vector2f m_position;
-    jt::Vector2u m_tilePosition;
-    std::vector<std::weak_ptr<TemperatureNode>> m_neighbours;
-};
-
+// controller for one heater and 0..N Sensors
 class TemperatureController {
 public:
     explicit TemperatureController(std::vector<std::shared_ptr<TemperatureNode>> const& sensors,
@@ -40,6 +20,8 @@ public:
 private:
     std::vector<std::shared_ptr<TemperatureNode>> m_sensors;
     std::shared_ptr<TemperatureNode> m_node;
+    // TODO make this configurable from tiled?
+    float m_maxHeaterInflow { 50.0f };
 };
 
 class TemperatureManager : public jt::GameObject {
