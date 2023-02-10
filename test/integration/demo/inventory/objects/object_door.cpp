@@ -1,5 +1,5 @@
 #include "object_door.hpp"
-#include <game_interface.hpp>
+#include "game_interface.hpp"
 
 ObjectDoor::ObjectDoor(std::weak_ptr<TemperatureNode> node)
     : m_tempNode { node }
@@ -18,10 +18,6 @@ void ObjectDoor::doCreate()
 }
 void ObjectDoor::doUpdate(float const elapsed)
 {
-
-    if (getGame()->input().keyboard()->justPressed(jt::KeyCode::T)) {
-        toggleDoor();
-    }
     auto door = m_tempNode.lock();
     if (m_closed) {
         door->setInflow(m_inflowClosed);
@@ -36,3 +32,4 @@ void ObjectDoor::doUpdate(float const elapsed)
 }
 void ObjectDoor::doDraw() const { m_anim->draw(renderTarget()); }
 void ObjectDoor::toggleDoor() { m_closed = !m_closed; }
+bool ObjectDoor::getIsOpen() const { return !m_closed; }

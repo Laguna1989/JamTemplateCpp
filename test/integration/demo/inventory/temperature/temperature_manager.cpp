@@ -44,8 +44,8 @@ TemperatureManager::TemperatureManager(
                 currentSensors.push_back(sensors[s]);
             }
 
-            m_controllers.emplace_back(
-                std::make_shared<TemperatureController>(currentSensors, getNodeAt(tilePos)));
+            m_controllers.emplace_back(std::make_shared<TemperatureController>(
+                currentSensors, getNodeAt(tilePos), obj.name));
         }
     }
 }
@@ -84,7 +84,7 @@ void TemperatureManager::doUpdate(float const elapsed)
     m_shape->update(elapsed);
 
     for (auto const& c : m_controllers) {
-        c->setInflow();
+        c->calculateInflow();
     }
 
     for (auto const& n : m_tempNodes) {
@@ -111,6 +111,7 @@ void TemperatureManager::doUpdate(float const elapsed)
         n->flipNewAndCurrentTemp();
     }
 }
+
 void TemperatureManager::doDraw() const
 {
     if (!m_draw) {
@@ -129,7 +130,7 @@ void TemperatureManager::doDraw() const
         std::uint8_t const r = static_cast<std::uint8_t>(jt::Lerp::linear(5.0f, 255.0f, t));
         std::uint8_t const g = static_cast<std::uint8_t>(jt::Lerp::linear(150.0f, 150.0f, t));
         std::uint8_t const b = static_cast<std::uint8_t>(jt::Lerp::linear(255.0f, 5.0f, t));
-        std::uint8_t const a = static_cast<std::uint8_t>(100 + abs(t - 0.5f) * 2 * 155);
+        std::uint8_t const a = static_cast<std::uint8_t>(70 + abs(t - 0.5f) * 2 * 120);
 
         m_shape->setColor(jt::Color { r, g, b, a });
 
@@ -137,6 +138,7 @@ void TemperatureManager::doDraw() const
         m_shape->draw(renderTarget());
     }
 }
+
 std::shared_ptr<TemperatureNode> TemperatureManager::getNodeAt(jt::Vector2u const& pos)
 {
     for (auto const& n : m_tempNodes) {
@@ -145,29 +147,13 @@ std::shared_ptr<TemperatureNode> TemperatureManager::getNodeAt(jt::Vector2u cons
     }
     return nullptr;
 }
-
-TemperatureController::TemperatureController(
-    std::vector<std::shared_ptr<TemperatureNode>> const& sensors,
-    std::shared_ptr<TemperatureNode> node)
+std::weak_ptr<TemperatureController> TemperatureManager::getControllerByName(
+    std::string const& name)
 {
-    m_sensors = sensors;
-    m_node = node;
-}
-
-void TemperatureController::setInflow() const
-{
-    float sum = 0.0f;
-    for (auto const& n : m_sensors) {
-        sum += n->getCurrentTemperature();
+    for (auto const& c : m_controllers) {
+        if (c->getName() == name) {
+            return c;
+        }
     }
-    // TODO add option for desiredTemperature
-    float const averageTemperature = sum / m_sensors.size();
-
-    float desiredInflow = -averageTemperature * 20.0f;
-    if (desiredInflow < -m_maxHeaterInflow) {
-        desiredInflow = -m_maxHeaterInflow;
-    } else if (desiredInflow > m_maxHeaterInflow) {
-        desiredInflow = m_maxHeaterInflow;
-    }
-    m_node->setInflow(desiredInflow);
+    return std::weak_ptr<TemperatureController>();
 }

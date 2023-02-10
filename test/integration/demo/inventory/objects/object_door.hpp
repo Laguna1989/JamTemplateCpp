@@ -2,9 +2,9 @@
 #ifndef JAMTEMPLATE_OBJECT_DOOR_HPP
 #define JAMTEMPLATE_OBJECT_DOOR_HPP
 
-#include "temperature_node.hpp"
-#include <animation.hpp>
-#include <game_object.hpp>
+#include "animation.hpp"
+#include "game_object.hpp"
+#include "inventory/temperature/temperature_node.hpp"
 #include <memory>
 
 class ObjectDoor : public jt::GameObject {
@@ -16,6 +16,7 @@ public:
     std::string m_name;
 
     void toggleDoor();
+    bool getIsOpen() const;
 
     void doCreate() override;
     void doUpdate(float const elapsed) override;

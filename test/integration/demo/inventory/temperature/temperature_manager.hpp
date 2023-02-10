@@ -3,26 +3,12 @@
 #define JAMTEMPLATE_TEMPERATURE_MANAGER_HPP
 
 #include <game_object.hpp>
-#include <inventory/temperature_node.hpp>
+#include <inventory/temperature/temperature_controller.hpp>
+#include <inventory/temperature/temperature_node.hpp>
 #include <pathfinder/node_interface.hpp>
 #include <shape.hpp>
 #include <tilemap/info_rect.hpp>
 #include <vector>
-
-// controller for one heater and 0..N Sensors
-class TemperatureController {
-public:
-    explicit TemperatureController(std::vector<std::shared_ptr<TemperatureNode>> const& sensors,
-        std::shared_ptr<TemperatureNode> node);
-
-    void setInflow() const;
-
-private:
-    std::vector<std::shared_ptr<TemperatureNode>> m_sensors;
-    std::shared_ptr<TemperatureNode> m_node;
-    // TODO make this configurable from tiled?
-    float m_maxHeaterInflow { 50.0f };
-};
 
 class TemperatureManager : public jt::GameObject {
 public:
@@ -34,6 +20,8 @@ public:
     void doDraw() const override;
 
     std::shared_ptr<TemperatureNode> getNodeAt(jt::Vector2u const& pos);
+
+    std::weak_ptr<TemperatureController> getControllerByName(std::string const& name);
 
 private:
     bool m_draw { false };

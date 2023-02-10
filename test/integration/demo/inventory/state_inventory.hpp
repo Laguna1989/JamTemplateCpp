@@ -1,18 +1,19 @@
 #ifndef JAMTEMPLATE_STATE_INVENTORY_HPP
 #define JAMTEMPLATE_STATE_INVENTORY_HPP
 
-#include "object_door.hpp"
-#include "tilemap/tileson_loader.hpp"
 #include <audio/sound.hpp>
 #include <game_state.hpp>
 #include <inventory/character/character.hpp>
 #include <inventory/character_sheet_imgui.hpp>
 #include <inventory/inventory_interface.hpp>
 #include <inventory/item_repository.hpp>
-#include <inventory/temperature_manager.hpp>
+#include <inventory/objects/object_controller.hpp>
+#include <inventory/objects/object_door.hpp>
+#include <inventory/temperature/temperature_manager.hpp>
 #include <object_group.hpp>
 #include <tilemap/object_layer.hpp>
 #include <tilemap/tile_layer.hpp>
+#include <tilemap/tileson_loader.hpp>
 
 class StateInventory : public jt::GameState {
     void doInternalCreate() override;
@@ -36,8 +37,9 @@ class StateInventory : public jt::GameState {
     std::vector<std::shared_ptr<jt::Box2DObject>> m_colliders {};
 
     std::shared_ptr<TemperatureManager> m_temperatureManager { nullptr };
-    // TODO find a more generic way to store those
+    // TODO find a more generic way to store Objects
     std::vector<std::shared_ptr<ObjectDoor>> m_doors;
+    std::vector<std::shared_ptr<ObjectController>> m_controllers;
 
     void createItemRepository();
     void loadTilemap();
@@ -46,6 +48,8 @@ class StateInventory : public jt::GameState {
     void spawnWorldItem(std::string const& itemReferenceId, jt::Vector2f const& pos);
     void loadTemperatureManager(jt::tilemap::TilesonLoader& loader);
     void handleCharacterTemperature();
+    jt::Vector2f m_player_start_pos;
+    void createObjects();
 };
 
 #endif // JAMTEMPLATE_STATE_INVENTORY_HPP

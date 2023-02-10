@@ -13,24 +13,24 @@
             12, 141, 1, 1, 1, 1, 4, 1, 1, 1, 141, 12, 72, 71, 71, 71, 71, 71, 71, 71, 71, 71, 71, 1, 1, 1, 1, 1, 1, 12,
             12, 141, 141, 141, 141, 36, 36, 141, 141, 141, 141, 12, 71, 71, 14, 9, 9, 9, 9, 9, 10, 626, 626, 8, 9, 9, 9, 9, 9, 20,
             21, 9, 9, 9, 10, 73, 73, 8, 19, 9, 9, 17, 1, 8, 20, 526, 526, 526, 526, 526, 423, 526, 526, 423, 526, 526, 526, 526, 526, 12,
-            12, 1, 1, 1, 1, 36, 36, 1, 12, 1, 1, 1, 1, 1, 12, 526, 526, 526, 526, 526, 526, 526, 526, 526, 526, 526, 526, 526, 526, 12,
-            12, 1, 37, 37, 1, 1, 1, 1, 12, 1, 1, 1, 1, 1, 12, 526, 526, 526, 526, 526, 526, 526, 526, 526, 526, 526, 526, 526, 526, 12,
+            12, 1, 1, 1, 3, 36, 36, 3, 12, 1, 1, 1, 1, 1, 12, 526, 526, 526, 526, 526, 526, 526, 526, 526, 526, 526, 526, 526, 526, 12,
+            12, 2, 37, 37, 2, 1, 1, 1, 12, 1, 1, 1, 1, 1, 12, 526, 526, 526, 526, 526, 526, 526, 526, 526, 526, 526, 526, 526, 526, 12,
             21, 10, 1, 1, 8, 15, 2, 2, 12, 2, 1, 1, 1, 1, 12, 526, 526, 526, 526, 526, 526, 526, 526, 526, 526, 526, 526, 526, 526, 12,
-            12, 1, 37, 37, 1, 12, 2, 1, 13, 2, 1, 1, 1, 1, 13, 423, 526, 526, 526, 526, 526, 526, 526, 526, 526, 526, 526, 526, 526, 12,
+            12, 3, 37, 37, 3, 12, 2, 3, 13, 3, 1, 1, 1, 1, 13, 423, 526, 526, 526, 526, 526, 526, 526, 526, 526, 526, 526, 526, 526, 12,
             12, 1, 142, 142, 1, 12, 2, 2, 1, 2, 1, 1, 1, 1, 1, 526, 526, 526, 526, 526, 526, 526, 526, 526, 526, 526, 526, 526, 526, 12,
-            12, 1, 1, 1, 1, 47, 2, 1, 11, 2, 1, 1, 1, 1, 1, 526, 526, 526, 526, 526, 526, 526, 526, 526, 526, 526, 526, 526, 526, 12,
+            12, 1, 1, 1, 1, 47, 2, 3, 11, 3, 1, 1, 1, 1, 1, 526, 526, 526, 526, 526, 526, 526, 526, 526, 526, 526, 526, 526, 526, 12,
             12, 1, 1, 1, 1, 12, 2, 1, 12, 2, 1, 1, 1, 1, 11, 423, 526, 526, 526, 526, 526, 526, 526, 526, 526, 526, 526, 526, 526, 12,
             12, 142, 142, 142, 142, 12, 2, 2, 12, 2, 1, 1, 1, 1, 12, 526, 526, 526, 526, 526, 526, 526, 526, 526, 526, 526, 526, 526, 526, 12,
             12, 1, 1, 1, 1, 12, 2, 2, 12, 2, 1, 1, 1, 1, 12, 526, 526, 526, 526, 526, 526, 526, 526, 526, 526, 526, 526, 526, 526, 12,
             12, 142, 142, 142, 142, 12, 1, 1, 12, 1, 1, 1, 1, 1, 12, 526, 526, 526, 526, 526, 526, 526, 526, 526, 526, 526, 526, 526, 526, 12,
             21, 9, 9, 9, 9, 17, 2, 2, 16, 9, 9, 15, 1, 8, 20, 526, 526, 526, 526, 526, 423, 526, 526, 423, 526, 526, 526, 526, 526, 12,
-            12, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 12, 1, 1, 16, 9, 9, 19, 9, 9, 10, 595, 595, 9, 9, 9, 9, 9, 9, 20,
-            12, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 12, 1, 1, 1, 1, 1, 13, 3, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 12,
-            12, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 12, 1, 1, 1, 1, 1, 1, 1, 3, 1, 1, 1, 2, 1, 1, 1, 3, 1, 12,
-            12, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 12, 1, 1, 1, 1, 1, 11, 3, 2, 2, 2, 2, 2, 1, 1, 2, 2, 2, 12,
-            12, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 12, 1, 1, 1, 1, 1, 12, 1, 1, 1, 1, 1, 1, 1, 1, 14, 9, 9, 20,
-            12, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 12, 1, 1, 1, 1, 1, 12, 1, 1, 1, 1, 1, 1, 1, 3, 12, 3, 3, 12,
-            12, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 12, 1, 1, 1, 1, 1, 12, 1, 1, 1, 1, 1, 1, 1, 1, 112, 1, 1, 1,
+            12, 1, 1, 1, 1, 3, 1, 1, 3, 1, 1, 12, 1, 1, 16, 9, 9, 19, 9, 9, 10, 595, 595, 9, 9, 9, 9, 9, 9, 20,
+            12, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 12, 1, 1, 1, 1, 1, 12, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 12,
+            12, 1, 1, 1, 3, 1, 1, 1, 1, 1, 1, 12, 1, 1, 1, 1, 1, 12, 1, 3, 1, 1, 1, 2, 1, 1, 1, 3, 1, 12,
+            12, 3, 3, 1, 1, 1, 1, 1, 1, 1, 3, 13, 1, 1, 1, 1, 1, 13, 3, 2, 2, 2, 2, 2, 1, 1, 2, 2, 2, 12,
+            1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 14, 9, 9, 20,
+            12, 3, 3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 12, 3, 3, 12,
+            12, 1, 1, 1, 3, 1, 1, 1, 1, 1, 3, 11, 1, 1, 1, 1, 1, 11, 3, 1, 1, 1, 1, 1, 1, 1, 112, 1, 1, 1,
             12, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 12, 1, 1, 1, 1, 1, 12, 1, 1, 1, 1, 1, 1, 1, 3, 12, 3, 3, 12,
             16, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 22, 9, 9, 9, 9, 9, 22, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 17],
          "height":30,
@@ -713,7 +713,7 @@
                         {
                          "name":"sensors",
                          "type":"string",
-                         "value":"s_airlock_w"
+                         "value":"s_airlock_w1, s_airlock_w2"
                         }, 
                         {
                          "name":"type",
@@ -724,13 +724,13 @@
                  "visible":true,
                  "width":24,
                  "x":432,
-                 "y":528
+                 "y":576
                 }, 
                 {
                  "class":"",
                  "height":24,
                  "id":40,
-                 "name":"heater_airlock_m",
+                 "name":"heater_airlock_m2",
                  "properties":[
                         {
                          "name":"sensors",
@@ -752,7 +752,7 @@
                  "class":"",
                  "height":24,
                  "id":42,
-                 "name":"s_airlock_w",
+                 "name":"s_airlock_w2",
                  "properties":[
                         {
                          "name":"type",
@@ -763,7 +763,7 @@
                  "visible":true,
                  "width":24,
                  "x":432,
-                 "y":552
+                 "y":624
                 }, 
                 {
                  "class":"",
@@ -1013,7 +1013,7 @@
                         {
                          "name":"sensors",
                          "type":"string",
-                         "value":"s_airlock_w"
+                         "value":"s_airlock_w1, s_airlock_w2"
                         }, 
                         {
                          "name":"type",
@@ -1024,18 +1024,18 @@
                  "visible":true,
                  "width":24,
                  "x":432,
-                 "y":576
+                 "y":648
                 }, 
                 {
                  "class":"",
                  "height":24,
                  "id":56,
-                 "name":"heater_airlock_w3",
+                 "name":"heater_airlock_m1",
                  "properties":[
                         {
                          "name":"sensors",
                          "type":"string",
-                         "value":"s_airlock_w"
+                         "value":"s_airlock_w1"
                         }, 
                         {
                          "name":"type",
@@ -1126,6 +1126,501 @@
                  "width":24,
                  "x":672,
                  "y":648
+                }, 
+                {
+                 "class":"",
+                 "height":24,
+                 "id":66,
+                 "name":"heater_bridge_w2",
+                 "properties":[
+                        {
+                         "name":"sensors",
+                         "type":"string",
+                         "value":"s_bridge_w1, s_bridge_w2"
+                        }, 
+                        {
+                         "name":"type",
+                         "type":"string",
+                         "value":"controlled"
+                        }],
+                 "rotation":0,
+                 "visible":true,
+                 "width":24,
+                 "x":360,
+                 "y":384
+                }, 
+                {
+                 "class":"",
+                 "height":24,
+                 "id":67,
+                 "name":"heater_bridge_w1",
+                 "properties":[
+                        {
+                         "name":"sensors",
+                         "type":"string",
+                         "value":"s_bridge_w1, s_bridge_w2"
+                        }, 
+                        {
+                         "name":"type",
+                         "type":"string",
+                         "value":"controlled"
+                        }],
+                 "rotation":0,
+                 "visible":true,
+                 "width":24,
+                 "x":360,
+                 "y":312
+                }, 
+                {
+                 "class":"",
+                 "height":24,
+                 "id":68,
+                 "name":"s_bridge_w1",
+                 "properties":[
+                        {
+                         "name":"type",
+                         "type":"string",
+                         "value":"sensor"
+                        }],
+                 "rotation":0,
+                 "visible":true,
+                 "width":24,
+                 "x":360,
+                 "y":336
+                }, 
+                {
+                 "class":"",
+                 "height":24,
+                 "id":69,
+                 "name":"s_bridge_w2",
+                 "properties":[
+                        {
+                         "name":"type",
+                         "type":"string",
+                         "value":"sensor"
+                        }],
+                 "rotation":0,
+                 "visible":true,
+                 "width":24,
+                 "x":360,
+                 "y":360
+                }, 
+                {
+                 "class":"",
+                 "height":24,
+                 "id":71,
+                 "name":"heater_freight_n2",
+                 "properties":[
+                        {
+                         "name":"sensors",
+                         "type":"string",
+                         "value":"s_freight_n1, s_freight_n2"
+                        }, 
+                        {
+                         "name":"type",
+                         "type":"string",
+                         "value":"controlled"
+                        }],
+                 "rotation":0,
+                 "visible":true,
+                 "width":24,
+                 "x":192,
+                 "y":504
+                }, 
+                {
+                 "class":"",
+                 "height":24,
+                 "id":72,
+                 "name":"s_freight_n1",
+                 "properties":[
+                        {
+                         "name":"type",
+                         "type":"string",
+                         "value":"sensor"
+                        }],
+                 "rotation":0,
+                 "visible":true,
+                 "width":24,
+                 "x":144,
+                 "y":504
+                }, 
+                {
+                 "class":"",
+                 "height":24,
+                 "id":73,
+                 "name":"s_freight_n2",
+                 "properties":[
+                        {
+                         "name":"type",
+                         "type":"string",
+                         "value":"sensor"
+                        }],
+                 "rotation":0,
+                 "visible":true,
+                 "width":24,
+                 "x":168,
+                 "y":504
+                }, 
+                {
+                 "class":"",
+                 "height":24,
+                 "id":75,
+                 "name":"heater_weapons_1",
+                 "properties":[
+                        {
+                         "name":"sensors",
+                         "type":"string",
+                         "value":"s_weapons_1, s_weapons_2"
+                        }, 
+                        {
+                         "name":"type",
+                         "type":"string",
+                         "value":"controlled"
+                        }],
+                 "rotation":0,
+                 "visible":true,
+                 "width":24,
+                 "x":96,
+                 "y":312
+                }, 
+                {
+                 "class":"",
+                 "height":24,
+                 "id":76,
+                 "name":"heater_weapons_2",
+                 "properties":[
+                        {
+                         "name":"sensors",
+                         "type":"string",
+                         "value":"s_weapons_1, s_weapons_2"
+                        }, 
+                        {
+                         "name":"type",
+                         "type":"string",
+                         "value":"controlled"
+                        }],
+                 "rotation":0,
+                 "visible":true,
+                 "width":24,
+                 "x":24,
+                 "y":312
+                }, 
+                {
+                 "class":"",
+                 "height":24,
+                 "id":77,
+                 "name":"s_weapons_1",
+                 "properties":[
+                        {
+                         "name":"type",
+                         "type":"string",
+                         "value":"sensor"
+                        }],
+                 "rotation":0,
+                 "visible":true,
+                 "width":24,
+                 "x":48,
+                 "y":312
+                }, 
+                {
+                 "class":"",
+                 "height":24,
+                 "id":79,
+                 "name":"s_weapons_2",
+                 "properties":[
+                        {
+                         "name":"type",
+                         "type":"string",
+                         "value":"sensor"
+                        }],
+                 "rotation":0,
+                 "visible":true,
+                 "width":24,
+                 "x":72,
+                 "y":312
+                }, 
+                {
+                 "class":"",
+                 "height":24,
+                 "id":80,
+                 "name":"heater_freight_n1",
+                 "properties":[
+                        {
+                         "name":"sensors",
+                         "type":"string",
+                         "value":"s_freight_n1, s_freight_n2"
+                        }, 
+                        {
+                         "name":"type",
+                         "type":"string",
+                         "value":"controlled"
+                        }],
+                 "rotation":0,
+                 "visible":true,
+                 "width":24,
+                 "x":120,
+                 "y":504
+                }, 
+                {
+                 "class":"",
+                 "height":24,
+                 "id":81,
+                 "name":"s_airlock_w1",
+                 "properties":[
+                        {
+                         "name":"type",
+                         "type":"string",
+                         "value":"sensor"
+                        }],
+                 "rotation":0,
+                 "visible":true,
+                 "width":24,
+                 "x":432,
+                 "y":600
+                }, 
+                {
+                 "class":"",
+                 "height":24,
+                 "id":82,
+                 "name":"s_freight_e1",
+                 "properties":[
+                        {
+                         "name":"type",
+                         "type":"string",
+                         "value":"sensor"
+                        }],
+                 "rotation":0,
+                 "visible":true,
+                 "width":24,
+                 "x":240,
+                 "y":600
+                }, 
+                {
+                 "class":"",
+                 "height":24,
+                 "id":83,
+                 "name":"s_freight_e2",
+                 "properties":[
+                        {
+                         "name":"type",
+                         "type":"string",
+                         "value":"sensor"
+                        }],
+                 "rotation":0,
+                 "visible":true,
+                 "width":24,
+                 "x":240,
+                 "y":624
+                }, 
+                {
+                 "class":"",
+                 "height":24,
+                 "id":84,
+                 "name":"heater_freight_e1",
+                 "properties":[
+                        {
+                         "name":"sensors",
+                         "type":"string",
+                         "value":"s_freight_e1, s_freight_e2"
+                        }, 
+                        {
+                         "name":"type",
+                         "type":"string",
+                         "value":"controlled"
+                        }],
+                 "rotation":0,
+                 "visible":true,
+                 "width":24,
+                 "x":240,
+                 "y":576
+                }, 
+                {
+                 "class":"",
+                 "height":24,
+                 "id":85,
+                 "name":"heater_freight_e2",
+                 "properties":[
+                        {
+                         "name":"sensors",
+                         "type":"string",
+                         "value":"s_freight_e1, s_freight_e2"
+                        }, 
+                        {
+                         "name":"type",
+                         "type":"string",
+                         "value":"controlled"
+                        }],
+                 "rotation":0,
+                 "visible":true,
+                 "width":24,
+                 "x":240,
+                 "y":648
+                }, 
+                {
+                 "class":"",
+                 "height":24,
+                 "id":86,
+                 "name":"heater_freight_w1",
+                 "properties":[
+                        {
+                         "name":"sensors",
+                         "type":"string",
+                         "value":"s_freight_w"
+                        }, 
+                        {
+                         "name":"type",
+                         "type":"string",
+                         "value":"controlled"
+                        }],
+                 "rotation":0,
+                 "visible":true,
+                 "width":24,
+                 "x":24,
+                 "y":576
+                }, 
+                {
+                 "class":"",
+                 "height":24,
+                 "id":87,
+                 "name":"heater_freight_w2",
+                 "properties":[
+                        {
+                         "name":"sensors",
+                         "type":"string",
+                         "value":"s_freight_w"
+                        }, 
+                        {
+                         "name":"type",
+                         "type":"string",
+                         "value":"controlled"
+                        }],
+                 "rotation":0,
+                 "visible":true,
+                 "width":24,
+                 "x":24,
+                 "y":624
+                }, 
+                {
+                 "class":"",
+                 "height":24,
+                 "id":88,
+                 "name":"s_freight_w",
+                 "properties":[
+                        {
+                         "name":"type",
+                         "type":"string",
+                         "value":"sensor"
+                        }],
+                 "rotation":0,
+                 "visible":true,
+                 "width":24,
+                 "x":24,
+                 "y":600
+                }, 
+                {
+                 "class":"",
+                 "height":24,
+                 "id":89,
+                 "name":"heater_freight_m1",
+                 "properties":[
+                        {
+                         "name":"sensors",
+                         "type":"string",
+                         "value":"s_freight_m"
+                        }, 
+                        {
+                         "name":"type",
+                         "type":"string",
+                         "value":"controlled"
+                        }],
+                 "rotation":0,
+                 "visible":true,
+                 "width":24,
+                 "x":96,
+                 "y":552
+                }, 
+                {
+                 "class":"",
+                 "height":24,
+                 "id":90,
+                 "name":"heater_freight_m2",
+                 "properties":[
+                        {
+                         "name":"sensors",
+                         "type":"string",
+                         "value":"s_freight_m"
+                        }, 
+                        {
+                         "name":"type",
+                         "type":"string",
+                         "value":"controlled"
+                        }],
+                 "rotation":0,
+                 "visible":true,
+                 "width":24,
+                 "x":96,
+                 "y":648
+                }, 
+                {
+                 "class":"",
+                 "height":24,
+                 "id":91,
+                 "name":"s_freight_m",
+                 "properties":[
+                        {
+                         "name":"type",
+                         "type":"string",
+                         "value":"sensor"
+                        }],
+                 "rotation":0,
+                 "visible":true,
+                 "width":24,
+                 "x":96,
+                 "y":600
+                }, 
+                {
+                 "class":"",
+                 "height":24,
+                 "id":92,
+                 "name":"heater_freight_w3",
+                 "properties":[
+                        {
+                         "name":"sensors",
+                         "type":"string",
+                         "value":"s_freight_w"
+                        }, 
+                        {
+                         "name":"type",
+                         "type":"string",
+                         "value":"controlled"
+                        }],
+                 "rotation":0,
+                 "visible":true,
+                 "width":24,
+                 "x":48,
+                 "y":576
+                }, 
+                {
+                 "class":"",
+                 "height":24,
+                 "id":93,
+                 "name":"heater_freight_w4",
+                 "properties":[
+                        {
+                         "name":"sensors",
+                         "type":"string",
+                         "value":"s_freight_w"
+                        }, 
+                        {
+                         "name":"type",
+                         "type":"string",
+                         "value":"controlled"
+                        }],
+                 "rotation":0,
+                 "visible":true,
+                 "width":24,
+                 "x":48,
+                 "y":624
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -1143,7 +1638,7 @@
                  "class":"",
                  "height":24,
                  "id":58,
-                 "name":"door_airlock",
+                 "name":"door_airlock_outer",
                  "properties":[
                         {
                          "name":"initial_open",
@@ -1158,7 +1653,7 @@
                         {
                          "name":"temp_inflow_open",
                          "type":"float",
-                         "value":-400
+                         "value":-600
                         }, 
                         {
                          "name":"type",
@@ -1175,7 +1670,7 @@
                  "class":"",
                  "height":24,
                  "id":63,
-                 "name":"door_airlock",
+                 "name":"door_airlock_inner",
                  "properties":[
                         {
                          "name":"initial_open",
@@ -1202,6 +1697,126 @@
                  "width":24,
                  "x":624,
                  "y":648
+                }, 
+                {
+                 "class":"",
+                 "height":24,
+                 "id":64,
+                 "name":"player_start",
+                 "properties":[
+                        {
+                         "name":"type",
+                         "type":"string",
+                         "value":"player_start"
+                        }],
+                 "rotation":0,
+                 "visible":true,
+                 "width":24,
+                 "x":480,
+                 "y":600
+                }, 
+                {
+                 "class":"",
+                 "height":24,
+                 "id":74,
+                 "name":"door_freight",
+                 "properties":[
+                        {
+                         "name":"initial_open",
+                         "type":"bool",
+                         "value":false
+                        }, 
+                        {
+                         "name":"temp_inflow_closed",
+                         "type":"float",
+                         "value":-10
+                        }, 
+                        {
+                         "name":"temp_inflow_open",
+                         "type":"float",
+                         "value":-600
+                        }, 
+                        {
+                         "name":"type",
+                         "type":"string",
+                         "value":"door"
+                        }],
+                 "rotation":0,
+                 "visible":true,
+                 "width":24,
+                 "x":0,
+                 "y":600
+                }, 
+                {
+                 "class":"",
+                 "height":24,
+                 "id":94,
+                 "name":"door_control_airlock",
+                 "properties":[
+                        {
+                         "name":"doors",
+                         "type":"string",
+                         "value":"door_airlock_inner, door_airlock_outer"
+                        }, 
+                        {
+                         "name":"type",
+                         "type":"string",
+                         "value":"controller"
+                        }],
+                 "rotation":0,
+                 "visible":true,
+                 "width":24,
+                 "x":624,
+                 "y":576
+                }, 
+                {
+                 "class":"",
+                 "height":24,
+                 "id":95,
+                 "name":"door_freight_airlock",
+                 "properties":[
+                        {
+                         "name":"doors",
+                         "type":"string",
+                         "value":"door_freight"
+                        }, 
+                        {
+                         "name":"type",
+                         "type":"string",
+                         "value":"controller"
+                        }],
+                 "rotation":0,
+                 "visible":true,
+                 "width":24,
+                 "x":96,
+                 "y":504
+                }, 
+                {
+                 "class":"",
+                 "height":24,
+                 "id":96,
+                 "name":"heater_control_airlock",
+                 "properties":[
+                        {
+                         "name":"doors",
+                         "type":"string",
+                         "value":""
+                        }, 
+                        {
+                         "name":"heaters",
+                         "type":"string",
+                         "value":"heater_airlock_w1, heater_airlock_w2"
+                        }, 
+                        {
+                         "name":"type",
+                         "type":"string",
+                         "value":"controller"
+                        }],
+                 "rotation":0,
+                 "visible":true,
+                 "width":24,
+                 "x":504,
+                 "y":672
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -1210,7 +1825,7 @@
          "y":0
         }],
  "nextlayerid":7,
- "nextobjectid":64,
+ "nextobjectid":97,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.9.2",

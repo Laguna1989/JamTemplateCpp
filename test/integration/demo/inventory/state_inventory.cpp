@@ -1,12 +1,14 @@
 #include "state_inventory.hpp"
 #include "inventory/character/character_controller_player.hpp"
 #include "inventory/character/character_controller_walk.hpp"
-#include "object_door.hpp"
+#include "inventory/objects/object_door.hpp"
+#include "system_helper.hpp"
 #include <box2dwrapper/box2d_world_impl.hpp>
 #include <game_interface.hpp>
 #include <inventory/inventory_list_imgui.hpp>
 #include <random/random.hpp>
 #include <state_select.hpp>
+#include <strutils.hpp>
 #include <tilemap/tileson_loader.hpp>
 #include <Box2D/Box2D.h>
 
@@ -18,8 +20,8 @@ void camFollowObject(jt::CamInterface& cam, jt::Vector2f const& windowSize,
     auto const camPos = cam.getCamOffset();
     auto const dif = objPos - camPos;
 
-    float const margin = 80.0f;
-    float const moveSpeed = 60.0f;
+    float const margin = 100.0f;
+    float const moveSpeed = 90.0f;
     jt::Vector2f const screenSize = windowSize / cam.getZoom();
     if (dif.x < margin) {
         cam.move(jt::Vector2f { -moveSpeed, 0.0f } * elapsed);
@@ -61,25 +63,13 @@ void StateInventory::doInternalCreate()
 
     createWorldItems();
 
-    std::cout << "create world objects\n";
-    for (auto const& obj : m_objectsLayer->getObjects()) {
-        if (obj.properties.strings.at("type") == "door") {
-            auto door = std::make_shared<ObjectDoor>(m_temperatureManager->getNodeAt(
-                jt::Vector2u { static_cast<unsigned int>(obj.position.x / 24),
-                    static_cast<unsigned int>(obj.position.y / 24) }));
-            door->m_name = obj.name;
-            door->m_closed = !obj.properties.bools.at("initial_open");
-            door->m_inflowOpen = obj.properties.floats.at("temp_inflow_open");
-            door->m_inflowClosed = obj.properties.floats.at("temp_inflow_closed");
-            m_doors.push_back(door);
-            add(door);
-        }
-    }
+    createObjects();
 
     m_player = std::make_shared<Character>(m_world, m_itemRepository,
         std::make_unique<CharacterControllerPlayer>(getGame()->input().keyboard()),
-        jt::Vector2f { 5 * 24, 7 * 24 }, true);
+        m_player_start_pos, true);
     add(m_player);
+
     m_characters.push_back(m_player);
     auto guy = std::make_shared<Character>(m_world, m_itemRepository,
         std::make_unique<CharacterControllerWalk>(), jt::Vector2f { 13 * 24, 4 * 24 });
@@ -89,6 +79,58 @@ void StateInventory::doInternalCreate()
     setAutoDraw(false);
 
     m_pickupSound = getGame()->audio().addTemporarySound("assets/test/integration/demo/test.ogg");
+}
+void StateInventory::createObjects()
+{
+    std::cout << "create world objects\n";
+    for (auto const& obj : m_objectsLayer->getObjects()) {
+        auto const type = obj.properties.strings.at("type");
+        if (type == "door") {
+            auto door = std::make_shared<ObjectDoor>(m_temperatureManager->getNodeAt(
+                jt::Vector2u { static_cast<unsigned int>(obj.position.x / 24),
+                    static_cast<unsigned int>(obj.position.y / 24) }));
+            door->m_name = obj.name;
+            door->m_closed = !obj.properties.bools.at("initial_open");
+            door->m_inflowOpen = obj.properties.floats.at("temp_inflow_open");
+            door->m_inflowClosed = obj.properties.floats.at("temp_inflow_closed");
+            m_doors.push_back(door);
+            add(door);
+        } else if (type == "player_start") {
+            m_player_start_pos = obj.position;
+        }
+    }
+    for (auto const& obj : m_objectsLayer->getObjects()) {
+        auto const type = obj.properties.strings.at("type");
+        if (type == "controller") {
+            auto controller = std::make_shared<ObjectController>(obj.position);
+            if (obj.properties.strings.count("doors") == 1) {
+                auto const allDoorsString = obj.properties.strings.at("doors");
+                auto allDoorsVector = strutil::split(allDoorsString, ",");
+                for (auto& doorString : allDoorsVector) {
+                    strutil::trim(doorString);
+                    for (auto const& d : m_doors) {
+                        if (d->m_name == doorString) {
+                            controller->addDoor(d);
+                        }
+                    }
+                }
+            }
+            if (obj.properties.strings.count("heaters") == 1) {
+                auto const allHeatersString = obj.properties.strings.at("heaters");
+                auto allHeaterssVector = strutil::split(allHeatersString, ",");
+                for (auto& heaterString : allHeaterssVector) {
+                    strutil::trim(heaterString);
+                    auto const h = m_temperatureManager->getControllerByName(heaterString);
+                    if (!jt::SystemHelper::is_uninitialized_weak_ptr(h)) {
+                        controller->addHeater(h);
+                    }
+                }
+            }
+
+            add(controller);
+            m_controllers.push_back(controller);
+        }
+    }
 }
 
 void StateInventory::createWorldItems()
@@ -179,6 +221,9 @@ void StateInventory::doInternalUpdate(float elapsed)
 
     handleCharacterTemperature();
     pickupItems();
+    for (auto& c : m_controllers) {
+        c->setPlayerPosition(m_player->getBox2DObject()->getPosition());
+    }
 
     std::string const& itemToSpawn = m_player->getInventory()->getAndResetItemToSpawn();
     if (itemToSpawn != "") {
