@@ -1,5 +1,6 @@
 #include "temperature_manager.hpp"
 #include <game_interface.hpp>
+#include <inventory/temperature/temperature_controller.hpp>
 #include <linterp.hpp>
 #include <math_helper.hpp>
 #include <strutils.hpp>
@@ -17,6 +18,7 @@ TemperatureManager::TemperatureManager(
         }
         m_tempNodes.push_back(temperatureNode);
     }
+    m_masterController = std::make_shared<TemperatureControllerMaster>();
 
     createNodeConnections();
     std::map<std::string, std::shared_ptr<TemperatureNode>> sensors;
@@ -44,8 +46,10 @@ TemperatureManager::TemperatureManager(
                 currentSensors.push_back(sensors[s]);
             }
 
-            m_controllers.emplace_back(std::make_shared<TemperatureController>(
-                currentSensors, getNodeAt(tilePos), obj.name));
+            auto controller = std::make_shared<TemperatureController>(
+                currentSensors, getNodeAt(tilePos), obj.name);
+            m_controllers.emplace_back(controller);
+            m_masterController->addController(controller);
         }
     }
 }
@@ -102,7 +106,7 @@ void TemperatureManager::doUpdate(float const elapsed)
 
             auto const diff = other->getCurrentTemperature() - n->getCurrentTemperature();
             auto const throughPutFactor = n->getThroughputFactor() * other->getThroughputFactor();
-            newTemperature += diff * elapsed * throughPutFactor;
+            newTemperature += diff * elapsed * throughPutFactor * 2.5f;
         }
         n->setNewTemp(newTemperature);
     }
@@ -147,13 +151,16 @@ std::shared_ptr<TemperatureNode> TemperatureManager::getNodeAt(jt::Vector2u cons
     }
     return nullptr;
 }
-std::weak_ptr<TemperatureController> TemperatureManager::getControllerByName(
+std::weak_ptr<TemperatureControllerInterface> TemperatureManager::getControllerByName(
     std::string const& name)
 {
+    if (name == "master") {
+        return m_masterController;
+    }
     for (auto const& c : m_controllers) {
         if (c->getName() == name) {
             return c;
         }
     }
-    return std::weak_ptr<TemperatureController>();
+    return std::weak_ptr<TemperatureControllerInterface>();
 }

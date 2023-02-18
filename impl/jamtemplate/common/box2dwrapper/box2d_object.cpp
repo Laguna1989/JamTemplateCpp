@@ -8,6 +8,13 @@ jt::Box2DObject::Box2DObject(std::shared_ptr<jt::Box2DWorldInterface> world, b2B
     setB2Body(world->createBody(def));
     m_world = world;
 }
+jt::Box2DObject::~Box2DObject()
+{
+    if (m_world.expired()) {
+        return;
+    }
+    m_world.lock()->destroyBody(m_body);
+}
 
 jt::Vector2f jt::Box2DObject::getPosition() const { return Conversion::vec(m_body->GetPosition()); }
 
@@ -37,11 +44,3 @@ float jt::Box2DObject::getRotation() const { return jt::MathHelper::rad2deg(m_bo
 b2Body* jt::Box2DObject::getB2Body() { return m_body; }
 
 void jt::Box2DObject::setB2Body(b2Body* body) { m_body = body; }
-
-jt::Box2DObject::~Box2DObject()
-{
-    if (m_world.expired()) {
-        return;
-    }
-    m_world.lock()->destroyBody(m_body);
-}

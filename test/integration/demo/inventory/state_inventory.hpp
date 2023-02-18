@@ -6,24 +6,24 @@
 #include <inventory/character/character.hpp>
 #include <inventory/character_sheet_imgui.hpp>
 #include <inventory/inventory_interface.hpp>
+#include <inventory/inventory_level.hpp>
 #include <inventory/item_repository.hpp>
 #include <inventory/objects/object_controller.hpp>
 #include <inventory/objects/object_door.hpp>
 #include <inventory/temperature/temperature_manager.hpp>
+#include <inventory/world_clock.hpp>
 #include <object_group.hpp>
 #include <tilemap/object_layer.hpp>
 #include <tilemap/tile_layer.hpp>
 #include <tilemap/tileson_loader.hpp>
 
 class StateInventory : public jt::GameState {
+public:
     void doInternalCreate() override;
     void doInternalUpdate(float elapsed) override;
     void doInternalDraw() const override;
 
-    std::shared_ptr<jt::tilemap::TileLayer> m_tileLayerGround;
-    std::shared_ptr<jt::tilemap::TileLayer> m_tileLayerOverlay;
-    std::shared_ptr<jt::tilemap::ObjectLayer> m_itemsLayer;
-    std::shared_ptr<jt::tilemap::ObjectLayer> m_objectsLayer;
+    std::shared_ptr<jt::Box2DWorldInterface> m_world { nullptr };
 
     std::shared_ptr<Character> m_player;
     std::vector<std::shared_ptr<Character>> m_characters;
@@ -33,13 +33,17 @@ class StateInventory : public jt::GameState {
 
     std::shared_ptr<jt::SoundInterface> m_pickupSound;
 
-    std::shared_ptr<jt::Box2DWorldInterface> m_world { nullptr };
-    std::vector<std::shared_ptr<jt::Box2DObject>> m_colliders {};
+    std::shared_ptr<InventoryLevel> m_level { nullptr };
+    // TODO move more stuff into Level
+    std::shared_ptr<jt::tilemap::ObjectLayer> m_itemsLayer;
+    std::shared_ptr<jt::tilemap::ObjectLayer> m_objectsLayer;
 
     std::shared_ptr<TemperatureManager> m_temperatureManager { nullptr };
     // TODO find a more generic way to store Objects
-    std::vector<std::shared_ptr<ObjectDoor>> m_doors;
-    std::vector<std::shared_ptr<ObjectController>> m_controllers;
+    std::vector<std::shared_ptr<ObjectDoor>> m_doors {};
+    std::vector<std::shared_ptr<ObjectController>> m_controllers {};
+
+    std::shared_ptr<WorldClock> m_clock { nullptr };
 
     void createItemRepository();
     void loadTilemap();

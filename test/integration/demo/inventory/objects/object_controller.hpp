@@ -5,7 +5,7 @@
 #include "sprite.hpp"
 #include <game_object.hpp>
 #include <inventory/objects/object_door.hpp>
-#include <inventory/temperature/temperature_controller.hpp>
+#include <inventory/temperature/temperature_controller_interface.hpp>
 #include <vector.hpp>
 #include <memory>
 #include <vector>
@@ -15,7 +15,8 @@ public:
     ObjectController(jt::Vector2f const& pos);
 
     void addDoor(std::weak_ptr<ObjectDoor> door);
-    void addHeater(std::weak_ptr<TemperatureController> heater);
+    // TODO encapsulate this in a HeaterSettings or some smaller interface
+    void addHeater(std::weak_ptr<TemperatureControllerInterface> heater);
     void setPlayerPosition(jt::Vector2f const& pos);
 
 private:
@@ -24,7 +25,7 @@ private:
     jt::Vector2f m_playerPos;
     std::shared_ptr<jt::Sprite> m_sprite;
     std::vector<std::weak_ptr<ObjectDoor>> m_doors;
-    std::vector<std::weak_ptr<TemperatureController>> m_heaters;
+    std::vector<std::weak_ptr<TemperatureControllerInterface>> m_heaters;
 
     void doCreate() override;
     void doUpdate(float const elapsed) override;

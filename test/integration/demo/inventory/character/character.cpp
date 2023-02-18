@@ -38,7 +38,7 @@ void Character::doCreate()
     m_animation->play("idle");
     m_animation->setPosition(jt::Vector2f { 5 * 24, 7 * 24 });
     m_animation->setOrigin(jt::OriginMode::CENTER);
-
+    m_animation->setZ(2);
     m_inventory->setGameInstance(getGame());
     m_charsheet->setGameInstance(getGame());
 }

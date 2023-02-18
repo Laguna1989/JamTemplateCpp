@@ -1,14 +1,14 @@
 #include "state_inventory.hpp"
-#include "inventory/character/character_controller_player.hpp"
-#include "inventory/character/character_controller_walk.hpp"
-#include "inventory/objects/object_door.hpp"
-#include "system_helper.hpp"
 #include <box2dwrapper/box2d_world_impl.hpp>
 #include <game_interface.hpp>
+#include <inventory/character/character_controller_player.hpp>
+#include <inventory/character/character_controller_walk.hpp>
 #include <inventory/inventory_list_imgui.hpp>
+#include <inventory/objects/object_door.hpp>
 #include <random/random.hpp>
 #include <state_select.hpp>
 #include <strutils.hpp>
+#include <system_helper.hpp>
 #include <tilemap/tileson_loader.hpp>
 #include <Box2D/Box2D.h>
 
@@ -55,6 +55,16 @@ void camFollowObject(jt::CamInterface& cam, jt::Vector2f const& windowSize,
 
 void StateInventory::doInternalCreate()
 {
+    getGame()->gfx().createZLayer(-2);
+    getGame()->gfx().createZLayer(-1);
+
+    getGame()->gfx().createZLayer(1);
+    getGame()->gfx().createZLayer(2);
+    getGame()->gfx().createZLayer(3);
+    getGame()->gfx().createZLayer(5);
+    m_clock = std::make_shared<WorldClock>();
+    add(m_clock);
+
     m_world = std::make_shared<jt::Box2DWorldImpl>(jt::Vector2f { 0.0f, 0.0f });
 
     createItemRepository();
@@ -89,7 +99,7 @@ void StateInventory::createObjects()
             auto door = std::make_shared<ObjectDoor>(m_temperatureManager->getNodeAt(
                 jt::Vector2u { static_cast<unsigned int>(obj.position.x / 24),
                     static_cast<unsigned int>(obj.position.y / 24) }));
-            door->m_name = obj.name;
+            door->setDoorName(obj.name);
             door->m_closed = !obj.properties.bools.at("initial_open");
             door->m_inflowOpen = obj.properties.floats.at("temp_inflow_open");
             door->m_inflowClosed = obj.properties.floats.at("temp_inflow_closed");
@@ -109,7 +119,7 @@ void StateInventory::createObjects()
                 for (auto& doorString : allDoorsVector) {
                     strutil::trim(doorString);
                     for (auto const& d : m_doors) {
-                        if (d->m_name == doorString) {
+                        if (d->getDoorName() == doorString) {
                             controller->addDoor(d);
                         }
                     }
@@ -120,6 +130,7 @@ void StateInventory::createObjects()
                 auto allHeaterssVector = strutil::split(allHeatersString, ",");
                 for (auto& heaterString : allHeaterssVector) {
                     strutil::trim(heaterString);
+
                     auto const h = m_temperatureManager->getControllerByName(heaterString);
                     if (!jt::SystemHelper::is_uninitialized_weak_ptr(h)) {
                         controller->addHeater(h);
@@ -153,42 +164,19 @@ void StateInventory::loadTilemap()
     jt::tilemap::TilesonLoader loader { getGame()->cache().getTilemapCache(),
         "assets/test/integration/demo/spaceship_items.json" };
 
-    m_tileLayerGround = std::make_shared<jt::tilemap::TileLayer>(
-        loader.loadTilesFromLayer("ground", textureManager(), "assets/test/integration/demo/"));
-
-    m_tileLayerGround->setScreenSizeHint(jt::Vector2f { 400, 300 });
-
-    m_tileLayerOverlay = std::make_shared<jt::tilemap::TileLayer>(
-        loader.loadTilesFromLayer("overlay", textureManager(), "assets/test/integration/demo/"));
-    m_tileLayerOverlay->setScreenSizeHint(jt::Vector2f { 400, 300 });
+    m_level = std::make_shared<InventoryLevel>(m_world);
+    add(m_level);
+    m_level->loadTileLayers(loader);
+    m_level->loadLevelCollisions(loader);
 
     m_itemsLayer = std::make_shared<jt::tilemap::ObjectLayer>(loader.loadObjectsFromLayer("items"));
 
     m_objectsLayer
         = std::make_shared<jt::tilemap::ObjectLayer>(loader.loadObjectsFromLayer("objects"));
 
-    auto tileCollisions = loader.loadCollisionsFromLayer("ground");
-
-    tileCollisions.refineColliders(24);
-    for (auto const& r : tileCollisions.getRects()) {
-        b2BodyDef bodyDef;
-        bodyDef.fixedRotation = true;
-        bodyDef.type = b2_staticBody;
-        bodyDef.position.Set(r.left + r.width / 2.0f, r.top + r.height / 2.0f);
-
-        b2FixtureDef fixtureDef;
-        b2PolygonShape boxCollider {};
-        boxCollider.SetAsBox(r.width / 2.0f, r.height / 2.0f);
-        fixtureDef.shape = &boxCollider;
-
-        auto collider = std::make_shared<jt::Box2DObject>(m_world, &bodyDef);
-        collider->getB2Body()->CreateFixture(&fixtureDef);
-
-        m_colliders.push_back(collider);
-    }
-
     loadTemperatureManager(loader);
 }
+
 void StateInventory::loadTemperatureManager(jt::tilemap::TilesonLoader& loader)
 {
     m_temperatureManager = std::make_shared<TemperatureManager>(
@@ -210,9 +198,6 @@ void StateInventory::doInternalUpdate(float elapsed)
         || getGame()->input().keyboard()->justPressed(jt::KeyCode::Escape)) {
         getGame()->stateManager().switchState(std::make_shared<StateSelect>());
     }
-
-    m_tileLayerGround->update(elapsed);
-    m_tileLayerOverlay->update(elapsed);
 
     m_world->step(elapsed, 20, 20);
 
@@ -276,10 +261,4 @@ void StateInventory::pickupItems()
     }
 }
 
-void StateInventory::doInternalDraw() const
-{
-    m_tileLayerGround->draw(renderTarget());
-
-    m_tileLayerOverlay->draw(renderTarget());
-    drawObjects();
-}
+void StateInventory::doInternalDraw() const { drawObjects(); }

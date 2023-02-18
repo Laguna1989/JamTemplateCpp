@@ -3,7 +3,8 @@
 #define JAMTEMPLATE_TEMPERATURE_MANAGER_HPP
 
 #include <game_object.hpp>
-#include <inventory/temperature/temperature_controller.hpp>
+#include <inventory/temperature/temperature_controller_interface.hpp>
+#include <inventory/temperature/temperature_controller_master.hpp>
 #include <inventory/temperature/temperature_node.hpp>
 #include <pathfinder/node_interface.hpp>
 #include <shape.hpp>
@@ -21,7 +22,7 @@ public:
 
     std::shared_ptr<TemperatureNode> getNodeAt(jt::Vector2u const& pos);
 
-    std::weak_ptr<TemperatureController> getControllerByName(std::string const& name);
+    std::weak_ptr<TemperatureControllerInterface> getControllerByName(std::string const& name);
 
 private:
     bool m_draw { false };
@@ -29,7 +30,8 @@ private:
 
     std::shared_ptr<jt::Shape> mutable m_shape;
 
-    std::vector<std::shared_ptr<TemperatureController>> m_controllers;
+    std::vector<std::shared_ptr<TemperatureControllerInterface>> m_controllers;
+    std::shared_ptr<TemperatureControllerMaster> m_masterController;
     void createNodeConnections();
 };
 

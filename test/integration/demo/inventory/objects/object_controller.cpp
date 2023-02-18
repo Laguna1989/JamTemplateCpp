@@ -29,8 +29,9 @@ void ObjectController::doDraw() const
         ImGui::Begin("Controller");
         for (auto const& door : m_doors) {
             auto d = door.lock();
-            ImGui::Text("Door: %s", d->m_name);
-            if (ImGui::Button(d->m_name.c_str())) {
+            auto const n = d->getDoorName();
+            ImGui::Text("Door: %s", n.c_str());
+            if (ImGui::Button(n.c_str())) {
                 d->toggleDoor();
             }
             ImGui::Separator();
@@ -43,7 +44,8 @@ void ObjectController::doDraw() const
 
             float maxInflow = h->getMaxHeaterInflow();
             std::string const labelName1 = "max Flow##" + h->getName();
-            ImGui::SliderFloat(labelName1.c_str(), &maxInflow, 0.0f, 100.0f, "%.1f", 0);
+
+            ImGui::SliderFloat(labelName1.c_str(), &maxInflow, 0.0f, 30.0f, "%.1f", 0);
             h->setMaxHeaterInflow(maxInflow);
 
             float desiredTemp = h->getDesiredTemperature();
@@ -65,7 +67,7 @@ void ObjectController::addDoor(std::weak_ptr<ObjectDoor> door)
     m_doors.push_back(door);
 }
 void ObjectController::setPlayerPosition(jt::Vector2f const& pos) { m_playerPos = pos; }
-void ObjectController::addHeater(std::weak_ptr<TemperatureController> heater)
+void ObjectController::addHeater(std::weak_ptr<TemperatureControllerInterface> heater)
 {
 
     if (jt::SystemHelper::is_uninitialized_weak_ptr(heater)) {

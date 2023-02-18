@@ -33,3 +33,5 @@ void ObjectDoor::doUpdate(float const elapsed)
 void ObjectDoor::doDraw() const { m_anim->draw(renderTarget()); }
 void ObjectDoor::toggleDoor() { m_closed = !m_closed; }
 bool ObjectDoor::getIsOpen() const { return !m_closed; }
+std::string ObjectDoor::getDoorName() const { return m_name; }
+void ObjectDoor::setDoorName(std::string const& name) { m_name = name; }
