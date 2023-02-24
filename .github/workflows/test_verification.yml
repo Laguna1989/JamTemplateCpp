@@ -15,7 +15,7 @@ jobs:
       - name: Set up cmake
         uses: jwlawson/actions-setup-cmake@v1.11
         with:
-          cmake-version: '3.19.x'
+          cmake-version: '3.21.x'
 
       - name: Set up gcc
         uses: egor-tensin/setup-gcc@v1
@@ -73,7 +73,7 @@ jobs:
       - name: Set up cmake
         uses: jwlawson/actions-setup-cmake@v1.11
         with:
-          cmake-version: '3.19.x'
+          cmake-version: '3.21.x'
 
       - name: Set up gcc
         uses: egor-tensin/setup-gcc@v1
@@ -122,7 +122,7 @@ jobs:
       - name: Set up cmake
         uses: jwlawson/actions-setup-cmake@v1.11
         with:
-          cmake-version: '3.19.x'
+          cmake-version: '3.21.x'
 
       - uses: actions/checkout@v2
 
@@ -145,7 +145,7 @@ jobs:
       - name: Set up cmake
         uses: jwlawson/actions-setup-cmake@v1.12
         with:
-          cmake-version: '3.19.x'
+          cmake-version: '3.21.x'
 
       - name: Set up gcc
         uses: egor-tensin/setup-gcc@v1
@@ -185,7 +185,7 @@ jobs:
       - name: Set up cmake
         uses: jwlawson/actions-setup-cmake@v1.11
         with:
-          cmake-version: '3.19.x'
+          cmake-version: '3.21.x'
 
       - name: Install dependencies
         run: |
