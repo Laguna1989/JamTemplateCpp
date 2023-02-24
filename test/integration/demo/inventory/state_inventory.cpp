@@ -4,7 +4,6 @@
 #include <inventory/character/character_controller_player.hpp>
 #include <inventory/character/character_controller_walk.hpp>
 #include <inventory/inventory_list_imgui.hpp>
-#include <inventory/objects/object_door.hpp>
 #include <random/random.hpp>
 #include <state_select.hpp>
 #include <strutils.hpp>
@@ -55,18 +54,23 @@ void camFollowObject(jt::CamInterface& cam, jt::Vector2f const& windowSize,
 
 void StateInventory::doInternalCreate()
 {
+    // -2: tiles background
     getGame()->gfx().createZLayer(-2);
+    // -1: tiles overlay
     getGame()->gfx().createZLayer(-1);
 
     getGame()->gfx().createZLayer(1);
+    // 2: characters
     getGame()->gfx().createZLayer(2);
     getGame()->gfx().createZLayer(3);
+    // 4: items
+    getGame()->gfx().createZLayer(4);
+    // 5: hud
     getGame()->gfx().createZLayer(5);
     m_clock = std::make_shared<WorldClock>();
     add(m_clock);
 
     m_world = std::make_shared<jt::Box2DWorldImpl>(jt::Vector2f { 0.0f, 0.0f });
-
     createItemRepository();
 
     loadTilemap();
@@ -74,7 +78,6 @@ void StateInventory::doInternalCreate()
     createWorldItems();
 
     createObjects();
-
     m_player = std::make_shared<Character>(m_world, m_itemRepository,
         std::make_unique<CharacterControllerPlayer>(getGame()->input().keyboard()),
         m_player_start_pos, true);
@@ -90,26 +93,13 @@ void StateInventory::doInternalCreate()
 
     m_pickupSound = getGame()->audio().addTemporarySound("assets/test/integration/demo/test.ogg");
 }
+
 void StateInventory::createObjects()
 {
     std::cout << "create world objects\n";
-    for (auto const& obj : m_objectsLayer->getObjects()) {
-        auto const type = obj.properties.strings.at("type");
-        if (type == "door") {
-            auto door = std::make_shared<ObjectDoor>(m_temperatureManager->getNodeAt(
-                jt::Vector2u { static_cast<unsigned int>(obj.position.x / 24),
-                    static_cast<unsigned int>(obj.position.y / 24) }));
-            door->setDoorName(obj.name);
-            door->m_closed = !obj.properties.bools.at("initial_open");
-            door->m_inflowOpen = obj.properties.floats.at("temp_inflow_open");
-            door->m_inflowClosed = obj.properties.floats.at("temp_inflow_closed");
-            m_doors.push_back(door);
-            add(door);
-        } else if (type == "player_start") {
-            m_player_start_pos = obj.position;
-        }
-    }
-    for (auto const& obj : m_objectsLayer->getObjects()) {
+    m_level->createDoors(m_temperatureManager, m_world);
+    m_player_start_pos = m_level->getPlayerStartingPos();
+    for (auto const& obj : m_level->getObjects()) {
         auto const type = obj.properties.strings.at("type");
         if (type == "controller") {
             auto controller = std::make_shared<ObjectController>(obj.position);
@@ -118,7 +108,7 @@ void StateInventory::createObjects()
                 auto allDoorsVector = strutil::split(allDoorsString, ",");
                 for (auto& doorString : allDoorsVector) {
                     strutil::trim(doorString);
-                    for (auto const& d : m_doors) {
+                    for (auto const& d : m_level->getDoors()) {
                         if (d->getDoorName() == doorString) {
                             controller->addDoor(d);
                         }
@@ -149,7 +139,7 @@ void StateInventory::createWorldItems()
     m_worldItems = std::make_shared<jt::ObjectGroup<WorldItem>>();
     std::cout << "createWorldItems\n";
 
-    for (auto const& it : m_itemsLayer->getObjects()) {
+    for (auto const& it : m_level->getItemObjects()) {
         if (it.type != "item") {
             //        continue; // once tileson supports the class attribute.
         }
@@ -168,11 +158,6 @@ void StateInventory::loadTilemap()
     add(m_level);
     m_level->loadTileLayers(loader);
     m_level->loadLevelCollisions(loader);
-
-    m_itemsLayer = std::make_shared<jt::tilemap::ObjectLayer>(loader.loadObjectsFromLayer("items"));
-
-    m_objectsLayer
-        = std::make_shared<jt::tilemap::ObjectLayer>(loader.loadObjectsFromLayer("objects"));
 
     loadTemperatureManager(loader);
 }

@@ -58,7 +58,8 @@
 		"worldItemOffset": {"x": 4,"y": 4},
 		"equipSlot": "torso",
         "armor": {
-          "armor": 20
+          "armor": 20,
+		  "resistanceHeat": 75
         }
     },
 	{

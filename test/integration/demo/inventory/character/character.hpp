@@ -9,7 +9,6 @@
 #include <inventory/inventory_list_imgui.hpp>
 #include <memory>
 
-// TODO replace with character class from Alakajam
 class CharacterInterface {
 public:
     virtual std::shared_ptr<InventoryInterface> getInventory() = 0;
@@ -25,22 +24,34 @@ public:
     std::shared_ptr<jt::Box2DObject> getBox2DObject() const;
 
     void setCurrentTemperature(float temp);
+    std::shared_ptr<InventoryInterface> getInventory() override;
+
+    // TODO make this function take a damage object to handle things like cold or heat
+    // damage
+    void takeDamage(float damage);
+
+    bool isDead() const;
 
 private:
     std::shared_ptr<jt::Animation> m_animation;
     std::shared_ptr<InventoryInterface> m_inventory;
+    std::weak_ptr<ItemRepository> m_repo;
     std::shared_ptr<CharacterSheetInterface> m_charsheet;
     std::shared_ptr<jt::Box2DObject> m_physicsObject;
 
     std::unique_ptr<CharacterControllerInterface> m_characterController { nullptr };
-    float m_current_temperature { 0.0f };
+    float m_currentTemperature { 0.0f };
+    float m_temperatureDamageTimer { 0.0f };
+    float m_health { 100.0f };
+    float m_maxHealth { 100.0f };
 
     void doCreate() override;
     void doUpdate(float const /*elapsed*/) override;
     void doDraw() const override;
 
-public:
-    std::shared_ptr<InventoryInterface> getInventory() override;
+    void handleTemperature(float const elapsed);
+    void updateCharsheetValues(float const elapsed);
+    void die();
 };
 
 #endif // GUATD_JAMTEMPLATE_CHARACTER_HPP

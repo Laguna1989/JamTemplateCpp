@@ -10,6 +10,7 @@ public:
     virtual ~CharacterSheetInterface() = default;
     virtual void setEquippedItems(std::vector<std::string> const& items) = 0;
     virtual void setCurrentTemperature(float temperature) = 0;
+    virtual void setHealth(float current, float max) = 0;
 };
 
 class CharacterSheetBase : public CharacterSheetInterface {
@@ -21,11 +22,14 @@ public:
     void setEquippedItems(std::vector<std::string> const& items) override;
 
     void setCurrentTemperature(float temp) override;
+    void setHealth(float current, float max) override;
 
 protected:
     std::weak_ptr<ItemRepository> m_repository;
     std::vector<std::string> m_equippedItems;
     float m_currentTemperature { 0.0f };
+    float m_health { 100.0f };
+    float m_maxHealth { 100.0f };
 };
 
 class CharacterSheetImgui : public CharacterSheetBase {

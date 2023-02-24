@@ -34,13 +34,9 @@ public:
     std::shared_ptr<jt::SoundInterface> m_pickupSound;
 
     std::shared_ptr<InventoryLevel> m_level { nullptr };
-    // TODO move more stuff into Level
-    std::shared_ptr<jt::tilemap::ObjectLayer> m_itemsLayer;
-    std::shared_ptr<jt::tilemap::ObjectLayer> m_objectsLayer;
 
     std::shared_ptr<TemperatureManager> m_temperatureManager { nullptr };
     // TODO find a more generic way to store Objects
-    std::vector<std::shared_ptr<ObjectDoor>> m_doors {};
     std::vector<std::shared_ptr<ObjectController>> m_controllers {};
 
     std::shared_ptr<WorldClock> m_clock { nullptr };

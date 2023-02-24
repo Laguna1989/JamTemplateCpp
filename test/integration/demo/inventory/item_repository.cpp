@@ -1,13 +1,15 @@
 #include "item_repository.hpp"
 #include <nlohmann.hpp>
 #include <fstream>
+#include <iostream>
 
 std::shared_ptr<WorldItem> ItemRepository::createWorldItem(
     std::shared_ptr<ItemReference> ref, jt::TextureManagerInterface& textureManager)
 {
-    auto spr = std::make_shared<jt::Sprite>(
+    auto sprite = std::make_shared<jt::Sprite>(
         ref->worldItemSpriteFileName, ref->worldItemSpriteRect, textureManager);
-    auto worldItem = std::make_shared<WorldItem>(ref, spr);
+    sprite->setZ(4);
+    auto worldItem = std::make_shared<WorldItem>(ref, sprite);
     return worldItem;
 }
 
@@ -25,12 +27,17 @@ std::shared_ptr<ItemReference> ItemRepository::getItemReferenceFromString(
 }
 void ItemRepository::loadFromJson(std::string const& fileName)
 {
-    std::ifstream file { fileName };
-    nlohmann::json j;
-    file >> j;
-    std::vector<ItemReference> items = j;
-    m_items.clear();
-    for (auto i : items) {
-        m_items.emplace_back(std::make_shared<ItemReference>(i));
+    try {
+        std::ifstream file { fileName };
+        nlohmann::json j;
+        file >> j;
+        std::vector<ItemReference> items = j;
+        m_items.clear();
+        for (auto i : items) {
+            m_items.emplace_back(std::make_shared<ItemReference>(i));
+        }
+    } catch (std::exception& e) {
+        std::cout << e.what() << std::endl;
+        throw;
     }
 }

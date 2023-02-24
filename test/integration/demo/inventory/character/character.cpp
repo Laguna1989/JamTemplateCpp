@@ -1,13 +1,16 @@
 #include "character.hpp"
 #include <game_interface.hpp>
 #include <inventory/character/character_controller_player.hpp>
+#include <inventory/inventory_calculator.hpp>
 #include <Box2D/Box2D.h>
 
 Character::Character(std::shared_ptr<jt::Box2DWorldInterface> world,
     std::weak_ptr<ItemRepository> repo, std::unique_ptr<CharacterControllerInterface>&& controller,
     jt::Vector2f const& pos, bool isPlayer)
     : m_characterController { std::move(controller) }
+    , m_repo { repo }
 {
+    // TODO pass in via DI and then create a factory
     if (isPlayer) {
         m_inventory = std::make_shared<InventoryListImgui>(repo);
         m_charsheet = std::make_shared<CharacterSheetImgui>(repo);
@@ -45,20 +48,55 @@ void Character::doCreate()
 
 void Character::doUpdate(float const elapsed)
 {
+    m_animation->setPosition(m_physicsObject->getPosition());
+    m_animation->update(elapsed);
+    if (isDead()) {
+        return;
+    }
     if (m_characterController) {
         m_characterController->update(*m_physicsObject.get());
     }
     auto const newVelocity = m_physicsObject->getVelocity();
-    m_animation->setPosition(m_physicsObject->getPosition());
-    m_animation->update(elapsed);
 
     float xscale = ((newVelocity.x < 0.0f) ? 1.0f : -1.0f);
-
     m_animation->setScale(jt::Vector2f { xscale, 1.0f });
 
     m_inventory->update(elapsed);
+    handleTemperature(elapsed);
+    updateCharsheetValues(elapsed);
+}
+void Character::handleTemperature(float elapsed)
+{
+    m_temperatureDamageTimer += elapsed;
+    float heatResistance = getHeatResistance(m_inventory->getEquippedItems(), m_repo);
+
+    auto const minTemperature = -15 - heatResistance;
+    auto const maxTemperature = 40 + heatResistance;
+    if (m_currentTemperature > minTemperature && m_currentTemperature < maxTemperature) {
+        return;
+    }
+    if (m_currentTemperature < minTemperature) {
+        auto const diff = std::abs(minTemperature - m_currentTemperature);
+        if (m_temperatureDamageTimer >= 1) {
+            m_temperatureDamageTimer = 0.0f;
+            auto const damagePerSecond = diff / 10.0f;
+            takeDamage(damagePerSecond);
+        }
+    } else if (m_currentTemperature > maxTemperature) {
+        auto const diff = std::abs(maxTemperature - m_currentTemperature);
+        if (m_temperatureDamageTimer >= 1) {
+            m_temperatureDamageTimer = 0.0f;
+            auto const damagePerSecond = diff / 10.0f;
+            takeDamage(damagePerSecond);
+        }
+    }
+}
+void Character::updateCharsheetValues(float const elapsed)
+{
     m_charsheet->setEquippedItems(m_inventory->getEquippedItems());
-    m_charsheet->setCurrentTemperature(m_current_temperature);
+    // TODO could be done via observer pattern
+    m_charsheet->setCurrentTemperature(m_currentTemperature);
+    m_charsheet->setHealth(m_health, m_maxHealth);
     m_charsheet->update(elapsed);
 }
 
@@ -71,4 +109,24 @@ void Character::doDraw() const
 
 std::shared_ptr<InventoryInterface> Character::getInventory() { return m_inventory; }
 std::shared_ptr<jt::Box2DObject> Character::getBox2DObject() const { return m_physicsObject; }
-void Character::setCurrentTemperature(float temp) { m_current_temperature = temp; }
+void Character::setCurrentTemperature(float temp) { m_currentTemperature = temp; }
+void Character::takeDamage(float damage)
+{
+    if (m_health <= 0.0f) {
+        // already dead
+        return;
+    }
+    m_health -= damage;
+    m_animation->flash(0.25f, jt::colors::Red);
+    if (m_health <= 0) {
+        m_health = 0.0f;
+        die();
+    }
+}
+void Character::die()
+{
+    m_animation->setRotation(90.0f);
+    m_animation->setColor(jt::Color { 100, 100, 100 });
+    m_physicsObject->getB2Body()->SetActive(false);
+}
+bool Character::isDead() const { return m_health <= 0; }

@@ -17,6 +17,11 @@ void CharacterSheetBase::setEquippedItems(std::vector<std::string> const& items)
 }
 
 void CharacterSheetBase::setCurrentTemperature(float temp) { m_currentTemperature = temp; }
+void CharacterSheetBase::setHealth(float current, float max)
+{
+    m_health = current;
+    m_maxHealth = max;
+}
 
 CharacterSheetImgui::CharacterSheetImgui(std::weak_ptr<ItemRepository> repo)
     : CharacterSheetBase(repo)
@@ -39,23 +44,27 @@ void CharacterSheetImgui::doDraw() const
     ImGui::SetNextWindowSize(ImVec2 { 400, 600 });
     ImGui::Begin("PlayerCharacter", &m_drawCharacterSheet);
 
+    ImGui::Text("Health: %s / %s", jt::MathHelper::floatToStringWithXDigits(m_health, 0).c_str(),
+        jt::MathHelper::floatToStringWithXDigits(m_maxHealth, 0).c_str());
+
     int totalArmor = 0;
     int totalResistanceElectric = 0;
-    int totalResistanceFire = 0;
+    int totalResistanceHeat = 0;
     auto itemRepository = m_repository.lock();
     for (auto const& itemRef : m_equippedItems) {
         auto const armor_optional = itemRepository->getItemReferenceFromString(itemRef)->armor;
         if (!armor_optional.has_value()) {
             continue;
         }
+
         auto const armor = armor_optional.value();
         totalArmor += armor.armor;
-        totalResistanceFire += armor.resistanceFire;
+        totalResistanceHeat += armor.resistanceHeat;
         totalResistanceElectric += armor.resistanceElectric;
     }
 
     ImGui::Text("TotalArmor: %s", std::to_string(totalArmor).c_str());
-    ImGui::Text("fire: %s", std::to_string(totalResistanceFire).c_str());
+    ImGui::Text("Heat: %s", std::to_string(totalResistanceHeat).c_str());
     ImGui::Text("Electric: %s", std::to_string(totalResistanceElectric).c_str());
     ImGui::Separator();
     ImGui::Text("Temperature: %s",
