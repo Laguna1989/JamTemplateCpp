@@ -1,10 +1,11 @@
 #ifndef JAMTEMPLATE_INVENTORY_INTERFACE_HPP
 #define JAMTEMPLATE_INVENTORY_INTERFACE_HPP
 
+#include <game_object.hpp>
 #include <string>
 #include <vector>
 
-class InventoryInterface {
+class InventoryInterface : public jt::GameObject {
 public:
     virtual ~InventoryInterface() = default;
     virtual void addItem(std::string const& referenceId) = 0;

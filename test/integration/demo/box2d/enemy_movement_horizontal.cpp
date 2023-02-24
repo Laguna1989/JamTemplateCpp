@@ -9,7 +9,7 @@ EnemyMovementHorizontal::EnemyMovementHorizontal(float minX, float maxX)
     }
 }
 
-void EnemyMovementHorizontal::update(float elapsed, std::shared_ptr<jt::Box2DObject> obj)
+void EnemyMovementHorizontal::update(float /*elapsed*/, std::shared_ptr<jt::Box2DObject> obj)
 {
     auto const beeMovementSpeed = 30.0f;
     if (m_movingRight) {

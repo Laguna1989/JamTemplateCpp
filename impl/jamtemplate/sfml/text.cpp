@@ -24,7 +24,7 @@ void jt::Text::loadFont(std::string const& fontFileName, unsigned int characterS
     m_flashText->setCharacterSize(characterSize);
 }
 
-void jt::Text::setText(std::string text)
+void jt::Text::setText(std::string const& text)
 {
     m_text->setString(text);
     m_flashText->setString(text);

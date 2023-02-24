@@ -22,7 +22,7 @@ public:
     void loadFont(std::string const& fontFileName, unsigned int characterSize,
         std::weak_ptr<jt::RenderTargetLayer> rendertarget_wptr /*unused*/);
 
-    void setText(std::string text);
+    void setText(std::string const& text);
     std::string getText() const;
 
     void setOutline(float thickness, jt::Color col);

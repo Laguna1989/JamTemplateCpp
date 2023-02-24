@@ -45,6 +45,12 @@ public:
 
     /// Destructor
     virtual ~Box2DWorldInterface() = default;
+    // avoid slicing
+    Box2DWorldInterface() = default;
+    Box2DWorldInterface(const Box2DWorldInterface&) = delete;
+    Box2DWorldInterface(Box2DWorldInterface&&) = delete;
+    Box2DWorldInterface& operator=(const Box2DWorldInterface&) = delete;
+    Box2DWorldInterface& operator=(Box2DWorldInterface&&) = delete;
 };
 } // namespace jt
 

@@ -9,7 +9,7 @@
 
 struct ArmorInfo {
     int armor { 0 };
-    int resistanceFire { 0 };
+    int resistanceHeat { 0 };
     int resistanceElectric { 0 };
     // more specialized armor values
 };

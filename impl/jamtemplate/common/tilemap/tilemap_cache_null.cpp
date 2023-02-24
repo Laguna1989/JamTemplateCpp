@@ -4,7 +4,8 @@ namespace jt {
 
 TilemapCacheNull::TilemapCacheNull() { m_map = std::make_shared<tson::Map>(); }
 
-std::shared_ptr<tson::Map> TilemapCacheNull::getMap(std::string const& fileName) const
+std::shared_ptr<tson::Map> TilemapCacheNull::getMap(std::string const& /*unused*/
+) const
 {
     return m_map;
 }

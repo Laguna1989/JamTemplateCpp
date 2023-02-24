@@ -27,8 +27,8 @@ void from_json(nlohmann::json const& j, jt::Vector2f& vec)
 void from_json(nlohmann::json const& j, ArmorInfo& armor)
 {
     j.at("armor").get_to(armor.armor);
-    if (j.count("resistanceFire") != 0) {
-        j.at("resistanceFire").get_to(armor.resistanceFire);
+    if (j.count("resistanceHeat") != 0) {
+        j.at("resistanceHeat").get_to(armor.resistanceHeat);
     }
     if (j.count("resistanceElectric") != 0) {
         j.at("resistanceElectric").get_to(armor.resistanceElectric);

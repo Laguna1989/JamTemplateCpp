@@ -21,7 +21,7 @@ void ContactCallbackPlayerEnemy::onBeginContact(b2Contact* contact)
         p->kill();
     }
 }
-void ContactCallbackPlayerEnemy::onEndContact(b2Contact* contact) { }
+void ContactCallbackPlayerEnemy::onEndContact(b2Contact* /*contact*/) { }
 bool ContactCallbackPlayerEnemy::isPlayerFixture(b2Fixture* fa) const
 {
     void* fixtureUserData = fa->GetUserData();

@@ -1,9 +1,13 @@
 #include "state_inventory.hpp"
 #include <box2dwrapper/box2d_world_impl.hpp>
 #include <game_interface.hpp>
+#include <inventory/character/character_controller_player.hpp>
+#include <inventory/character/character_controller_walk.hpp>
 #include <inventory/inventory_list_imgui.hpp>
 #include <random/random.hpp>
 #include <state_select.hpp>
+#include <strutils.hpp>
+#include <system_helper.hpp>
 #include <tilemap/tileson_loader.hpp>
 #include <Box2D/Box2D.h>
 
@@ -15,8 +19,8 @@ void camFollowObject(jt::CamInterface& cam, jt::Vector2f const& windowSize,
     auto const camPos = cam.getCamOffset();
     auto const dif = objPos - camPos;
 
-    float const margin = 80.0f;
-    float const moveSpeed = 60.0f;
+    float const margin = 100.0f;
+    float const moveSpeed = 90.0f;
     jt::Vector2f const screenSize = windowSize / cam.getZoom();
     if (dif.x < margin) {
         cam.move(jt::Vector2f { -moveSpeed, 0.0f } * elapsed);
@@ -50,20 +54,84 @@ void camFollowObject(jt::CamInterface& cam, jt::Vector2f const& windowSize,
 
 void StateInventory::doInternalCreate()
 {
-    m_world = std::make_shared<jt::Box2DWorldImpl>(jt::Vector2f { 0.0f, 0.0f });
+    // -2: tiles background
+    getGame()->gfx().createZLayer(-2);
+    // -1: tiles overlay
+    getGame()->gfx().createZLayer(-1);
 
+    getGame()->gfx().createZLayer(1);
+    // 2: characters
+    getGame()->gfx().createZLayer(2);
+    getGame()->gfx().createZLayer(3);
+    // 4: items
+    getGame()->gfx().createZLayer(4);
+    // 5: hud
+    getGame()->gfx().createZLayer(5);
+    m_clock = std::make_shared<WorldClock>();
+    add(m_clock);
+
+    m_world = std::make_shared<jt::Box2DWorldImpl>(jt::Vector2f { 0.0f, 0.0f });
     createItemRepository();
 
     loadTilemap();
 
     createWorldItems();
 
-    m_player = std::make_shared<PlayerCharacter>(m_world, m_itemRepository);
+    createObjects();
+    m_player = std::make_shared<Character>(m_world, m_itemRepository,
+        std::make_unique<CharacterControllerPlayer>(getGame()->input().keyboard()),
+        m_player_start_pos, true);
     add(m_player);
+
+    m_characters.push_back(m_player);
+    auto guy = std::make_shared<Character>(m_world, m_itemRepository,
+        std::make_unique<CharacterControllerWalk>(), jt::Vector2f { 13 * 24, 4 * 24 });
+    add(guy);
+    m_characters.push_back(guy);
 
     setAutoDraw(false);
 
     m_pickupSound = getGame()->audio().addTemporarySound("assets/test/integration/demo/test.ogg");
+}
+
+void StateInventory::createObjects()
+{
+    std::cout << "create world objects\n";
+    m_level->createDoors(m_temperatureManager, m_world);
+    m_player_start_pos = m_level->getPlayerStartingPos();
+    for (auto const& obj : m_level->getObjects()) {
+        auto const type = obj.properties.strings.at("type");
+        if (type == "controller") {
+            auto controller = std::make_shared<ObjectController>(obj.position);
+            if (obj.properties.strings.count("doors") == 1) {
+                auto const allDoorsString = obj.properties.strings.at("doors");
+                auto allDoorsVector = strutil::split(allDoorsString, ",");
+                for (auto& doorString : allDoorsVector) {
+                    strutil::trim(doorString);
+                    for (auto const& d : m_level->getDoors()) {
+                        if (d->getDoorName() == doorString) {
+                            controller->addDoor(d);
+                        }
+                    }
+                }
+            }
+            if (obj.properties.strings.count("heaters") == 1) {
+                auto const allHeatersString = obj.properties.strings.at("heaters");
+                auto allHeaterssVector = strutil::split(allHeatersString, ",");
+                for (auto& heaterString : allHeaterssVector) {
+                    strutil::trim(heaterString);
+
+                    auto const h = m_temperatureManager->getControllerByName(heaterString);
+                    if (!jt::SystemHelper::is_uninitialized_weak_ptr(h)) {
+                        controller->addHeater(h);
+                    }
+                }
+            }
+
+            add(controller);
+            m_controllers.push_back(controller);
+        }
+    }
 }
 
 void StateInventory::createWorldItems()
@@ -71,7 +139,7 @@ void StateInventory::createWorldItems()
     m_worldItems = std::make_shared<jt::ObjectGroup<WorldItem>>();
     std::cout << "createWorldItems\n";
 
-    for (auto const& it : m_objectsLayer->getObjects()) {
+    for (auto const& it : m_level->getItemObjects()) {
         if (it.type != "item") {
             //        continue; // once tileson supports the class attribute.
         }
@@ -86,40 +154,14 @@ void StateInventory::loadTilemap()
     jt::tilemap::TilesonLoader loader { getGame()->cache().getTilemapCache(),
         "assets/test/integration/demo/spaceship_items.json" };
 
-    m_tileLayerGround = std::make_shared<jt::tilemap::TileLayer>(
-        loader.loadTilesFromLayer("ground", textureManager(), "assets/test/integration/demo/"));
-
-    m_tileLayerGround->setScreenSizeHint(jt::Vector2f { 400, 300 });
-
-    m_tileLayerOverlay = std::make_shared<jt::tilemap::TileLayer>(
-        loader.loadTilesFromLayer("overlay", textureManager(), "assets/test/integration/demo/"));
-    m_tileLayerOverlay->setScreenSizeHint(jt::Vector2f { 400, 300 });
-
-    m_objectsLayer
-        = std::make_shared<jt::tilemap::ObjectLayer>(loader.loadObjectsFromLayer("items"));
-
-    auto tileCollisions = loader.loadCollisionsFromLayer("ground");
-
-    tileCollisions.refineColliders(24);
-    for (auto const& r : tileCollisions.getRects()) {
-        b2BodyDef bodyDef;
-        bodyDef.fixedRotation = true;
-        bodyDef.type = b2_staticBody;
-        bodyDef.position.Set(r.left + r.width / 2.0f, r.top + r.height / 2.0f);
-
-        b2FixtureDef fixtureDef;
-        b2PolygonShape boxCollider {};
-        boxCollider.SetAsBox(r.width / 2.0f, r.height / 2.0f);
-        fixtureDef.shape = &boxCollider;
-
-        auto collider = std::make_shared<jt::Box2DObject>(m_world, &bodyDef);
-        collider->getB2Body()->CreateFixture(&fixtureDef);
-
-        m_colliders.push_back(collider);
-    }
+    m_level = std::make_shared<InventoryLevel>(m_world);
+    add(m_level);
+    m_level->loadTileLayers(loader);
+    m_level->loadLevelCollisions(loader);
 
     loadTemperatureManager(loader);
 }
+
 void StateInventory::loadTemperatureManager(jt::tilemap::TilesonLoader& loader)
 {
     m_temperatureManager = std::make_shared<TemperatureManager>(
@@ -142,15 +184,16 @@ void StateInventory::doInternalUpdate(float elapsed)
         getGame()->stateManager().switchState(std::make_shared<StateSelect>());
     }
 
-    m_tileLayerGround->update(elapsed);
-    m_tileLayerOverlay->update(elapsed);
-
     m_world->step(elapsed, 20, 20);
 
     camFollowObject(getGame()->gfx().camera(), getGame()->gfx().window().getSize(),
         m_player->getBox2DObject(), elapsed);
 
+    handleCharacterTemperature();
     pickupItems();
+    for (auto& c : m_controllers) {
+        c->setPlayerPosition(m_player->getBox2DObject()->getPosition());
+    }
 
     std::string const& itemToSpawn = m_player->getInventory()->getAndResetItemToSpawn();
     if (itemToSpawn != "") {
@@ -158,6 +201,20 @@ void StateInventory::doInternalUpdate(float elapsed)
         auto const py = jt::Random::getInt(2, 8);
         jt::Vector2f const pos { px * 24.0f, py * 24.0f };
         spawnWorldItem(itemToSpawn, pos);
+    }
+}
+void StateInventory::handleCharacterTemperature()
+{
+    for (auto c : m_characters) {
+        auto const posFloat = c->getBox2DObject()->getPosition();
+        jt::Vector2u const posInTiles { static_cast<unsigned int>(posFloat.x / 24),
+            static_cast<unsigned int>(posFloat.y / 24) };
+        auto node = m_temperatureManager->getNodeAt(posInTiles);
+        if (node) {
+            c->setCurrentTemperature(node->getCurrentTemperature());
+        } else {
+            c->setCurrentTemperature(0.0f);
+        }
     }
 }
 
@@ -189,10 +246,4 @@ void StateInventory::pickupItems()
     }
 }
 
-void StateInventory::doInternalDraw() const
-{
-    m_tileLayerGround->draw(renderTarget());
-
-    m_tileLayerOverlay->draw(renderTarget());
-    drawObjects();
-}
+void StateInventory::doInternalDraw() const { drawObjects(); }
