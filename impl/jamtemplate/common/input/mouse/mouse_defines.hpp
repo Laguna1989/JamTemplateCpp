@@ -14,8 +14,8 @@ struct MousePosition {
 
 enum class MouseButtonCode {
     MBLeft = 0,
-    MBMiddle,
     MBRight,
+    MBMiddle,
     ButtonCount ///< Keep last -- the total number of mouse button
 };
 

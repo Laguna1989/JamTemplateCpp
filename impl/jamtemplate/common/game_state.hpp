@@ -99,6 +99,7 @@ private:
     virtual void doInternalCreate() = 0;
     virtual void doInternalUpdate(float elapsed) = 0;
     virtual void doInternalDraw() const = 0;
+    void checkForMuteUnmute();
 };
 
 } // namespace jt
