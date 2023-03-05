@@ -37,16 +37,16 @@ jobs:
           cp -r ${{github.workspace}}/build/impl/game/assets ${{github.workspace}}/release/release_win/
 
       - name: Create Archive
-        uses: thedoctor0/zip-release@master
+        uses: thedoctor0/zip-release@0.6.2
         with:
           directory: ${{github.workspace}}/release
           type: 'zip'
           filename: 'release_win.zip'
 
       - name: Release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v0.1.13
         with:
-          files: ${{github.workspace}}/release/release_win.zip
+          files: ${{github.workspace}}\release\release_win.zip
 
   LinuxSFML:
     runs-on: ubuntu-latest

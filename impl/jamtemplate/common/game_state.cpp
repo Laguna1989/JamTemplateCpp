@@ -51,9 +51,20 @@ void jt::GameState::internalUpdate(float elapsed)
     if (m_doAutoUpdateObjects) {
         updateObjects(elapsed);
     }
+    checkForMuteUnmute();
     doInternalUpdate(elapsed);
+
     if (m_doAutoUpdateTweens) {
         updateTweens(elapsed);
+    }
+}
+void jt::GameState::checkForMuteUnmute()
+{
+    if (getGame()->input().keyboard()->justPressed(KeyCode::M)) {
+        getGame()->audio().groups().setGroupVolume("master", 0.0f);
+    }
+    if (getGame()->input().keyboard()->justPressed(KeyCode::U)) {
+        getGame()->audio().groups().setGroupVolume("master", 1.0f);
     }
 }
 
