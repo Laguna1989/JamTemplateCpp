@@ -16,7 +16,7 @@ public:
     static std::string JamDate() { return "TODO"; }
     static std::string ExplanationText()
     {
-        return "Win the game\n[W,A,S,D] to move \n[Space] to jump";
+        return "Win the game\n[W,A,S,D] to move \n[Space] to jump\n[M/U] to mute/unmute audio";
     }
 
     static jt::Vector2f GetWindowSize() { return jt::Vector2f { 1200, 800 }; }
