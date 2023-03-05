@@ -1,6 +1,7 @@
 ﻿#include <game_object.hpp>
 #include <game_state.hpp>
 #include <mocks/mock_game.hpp>
+#include <mocks/mock_input.hpp>
 #include <mocks/mock_object.hpp>
 #include <mocks/mock_tween_interface.hpp>
 #include <gmock/gmock.h>
@@ -55,12 +56,14 @@ public:
     std::shared_ptr<MockObject> mockObject;
     MockGfx gfx;
     MockWindow window;
+    MockInput input;
 
     void SetUp() override
     {
         game = std::make_shared<MockGame>();
         ON_CALL(*game, gfx).WillByDefault(::testing::ReturnRef(gfx));
         ON_CALL(gfx, window).WillByDefault(::testing::ReturnRef(window));
+        ON_CALL(*game, input).WillByDefault(::testing::ReturnRef(input));
         gamestate.setGameInstance(game);
     }
     void AddGameObject()
