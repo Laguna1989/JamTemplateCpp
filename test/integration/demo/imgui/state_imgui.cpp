@@ -20,5 +20,29 @@ void StateImGui::doInternalUpdate(float /*elapsed*/)
     }
 }
 
-void StateImGui::doInternalDraw() const { ImGui::ShowDemoWindow(); }
+void StateImGui::doInternalDraw() const
+{
+    ImGui::ShowDemoWindow();
+
+    ImGui::Begin("arbitrary precision integers");
+    ImGui::Text("%s", m_api.to_string().c_str());
+
+    ImGui::SliderInt("Value", &number, 0, 999999);
+    if (ImGui::Button("add")) {
+        m_api = m_api + api::from_uint64(number);
+    }
+    ImGui::SameLine();
+    if (ImGui::Button("subtract")) {
+        m_api = m_api - api::from_uint64(number);
+    }
+    if (ImGui::Button("multiply")) {
+        m_api = m_api * api::from_uint64(number);
+    }
+    ImGui::SameLine();
+    if (ImGui::Button("divide")) {
+        m_api = m_api / api::from_uint64(number);
+    }
+
+    ImGui::End();
+}
 std::string StateImGui::getName() const { return "Dear ImGui"; }
