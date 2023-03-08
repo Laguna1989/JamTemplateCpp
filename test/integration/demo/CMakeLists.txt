@@ -6,6 +6,7 @@ if (JT_ENABLE_WEB)
 endif ()
 
 target_include_directories(jt_demos PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
-target_link_libraries(jt_demos JamTemplateLib)
+FetchContent_GetProperties(api)
+target_link_libraries(jt_demos JamTemplateLib ArbitraryPrecisionInteger)
 jt_use_assets(jt_demos)
 
