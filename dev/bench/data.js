@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1678023538780,
+  "lastUpdate": 1678291223362,
   "repoUrl": "https://github.com/Laguna1989/JamTemplateCpp",
   "entries": {
     "Benchmark": [
@@ -11280,6 +11280,84 @@ window.BENCHMARK_DATA = {
             "value": 3.5733478928572326,
             "unit": "ms/iter",
             "extra": "iterations: 196\ncpu: 3.5728331632653125 ms\nthreads: 1"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "laguna.ws@gmail.com",
+            "name": "Laguna1989",
+            "username": "Laguna1989"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "1ac2afdb3b068fec5f15fea7dedd53fd545255e7",
+          "message": "Merge pull request #278 from Laguna1989/feature/fetchArbitraryPrecisionInts\n\nAdd arbitrary precision int to imgui demo",
+          "timestamp": "2023-03-08T16:57:58+01:00",
+          "tree_id": "c0a11efe3a7df1b8d3bc51f704580a2f33353c59",
+          "url": "https://github.com/Laguna1989/JamTemplateCpp/commit/1ac2afdb3b068fec5f15fea7dedd53fd545255e7"
+        },
+        "date": 1678291222509,
+        "tool": "googlecpp",
+        "benches": [
+          {
+            "name": "BM_UpdateDrawablePositions",
+            "value": 3.7101536719578134,
+            "unit": "ms/iter",
+            "extra": "iterations: 189\ncpu: 3.709744973544973 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GetAllCommands",
+            "value": 0.3734409119060333,
+            "unit": "ms/iter",
+            "extra": "iterations: 1873\ncpu: 0.37341927389215157 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_LoggerLogWithoutTarget",
+            "value": 0.7691354676888948,
+            "unit": "ms/iter",
+            "extra": "iterations: 913\ncpu: 0.7687204819277108 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_LoggerLogWithCoutTargetSetToOff",
+            "value": 0.7691352296703726,
+            "unit": "ms/iter",
+            "extra": "iterations: 910\ncpu: 0.7690571428571427 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_UpdateObjectGroup",
+            "value": 0.0496679343982983,
+            "unit": "ms/iter",
+            "extra": "iterations: 14085\ncpu: 0.049663272985445525 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_UpdateSpatialObjectGrid",
+            "value": 0.32498430575869314,
+            "unit": "ms/iter",
+            "extra": "iterations: 2188\ncpu: 0.3249588208409505 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_StartGame",
+            "value": 0.0033452612572276996,
+            "unit": "ms/iter",
+            "extra": "iterations: 209954\ncpu: 0.0033319870066776556 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_RefineTilemapCollisions",
+            "value": 0.18348630668414792,
+            "unit": "ms/iter",
+            "extra": "iterations: 3815\ncpu: 0.1834511926605507 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GamestateWithTweeningShapes",
+            "value": 3.54003670707064,
+            "unit": "ms/iter",
+            "extra": "iterations: 198\ncpu: 3.5396217171717197 ms\nthreads: 1"
           }
         ]
       }
