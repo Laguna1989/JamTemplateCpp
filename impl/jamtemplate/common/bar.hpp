@@ -70,6 +70,8 @@ private:
     float const m_height;
     bool m_horizontal;
 
+    jt::Vector2f m_position;
+
     mutable std::shared_ptr<jt::Shape> m_shapeFull { nullptr };
     std::shared_ptr<jt::Shape> m_shapeProgress { nullptr };
 

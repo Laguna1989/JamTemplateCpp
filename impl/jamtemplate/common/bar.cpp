@@ -83,6 +83,9 @@ void jt::Bar::doUpdate(float elapsed)
 {
     float const value = static_cast<float>(m_valueCurrent) / m_valueMax;
     auto const scaleFullShape = m_shapeFull->getScale();
+
+    m_shapeFull->setPosition(m_position + getShakeOffset() + getOffset());
+
     if (m_horizontal) {
         m_shapeProgress->setScale(jt::Vector2f { value * scaleFullShape.x, scaleFullShape.y });
     } else {
@@ -90,6 +93,7 @@ void jt::Bar::doUpdate(float elapsed)
         m_shapeProgress->setPosition(jt::Vector2f { m_shapeFull->getPosition().x + 1,
             m_shapeFull->getPosition().y + (1 - value) * m_height });
     }
+
     m_shapeFull->update(elapsed);
     m_shapeProgress->update(elapsed);
 }
@@ -99,13 +103,9 @@ void jt::Bar::doRotate(float /*rot*/) { }
 void jt::Bar::setColor(jt::Color const& col) { setFrontColor(col); }
 jt::Color jt::Bar::getColor() const { return m_shapeProgress->getColor(); }
 
-void jt::Bar::setPosition(jt::Vector2f const& pos)
-{
-    m_shapeFull->setPosition(pos);
-    m_shapeProgress->setPosition(pos + jt::Vector2f { 0, m_height * m_progressYOffsetFraction });
-}
+void jt::Bar::setPosition(jt::Vector2f const& pos) { m_position = pos; }
 
-jt::Vector2f jt::Bar::getPosition() const { return m_shapeFull->getPosition(); }
+jt::Vector2f jt::Bar::getPosition() const { return m_position; }
 
 jt::Rectf jt::Bar::getGlobalBounds() const { return m_shapeFull->getGlobalBounds(); }
 jt::Rectf jt::Bar::getLocalBounds() const { return m_shapeFull->getLocalBounds(); }
