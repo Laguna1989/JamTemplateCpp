@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1678512359741,
+  "lastUpdate": 1678514834261,
   "repoUrl": "https://github.com/Laguna1989/JamTemplateCpp",
   "entries": {
     "Benchmark": [
@@ -11436,6 +11436,84 @@ window.BENCHMARK_DATA = {
             "value": 3.302326400943401,
             "unit": "ms/iter",
             "extra": "iterations: 212\ncpu: 3.302324528301887 ms\nthreads: 1"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "laguna.ws@gmail.com",
+            "name": "Simon Weis",
+            "username": "Laguna1989"
+          },
+          "committer": {
+            "email": "laguna.ws@gmail.com",
+            "name": "Simon Weis",
+            "username": "Laguna1989"
+          },
+          "distinct": true,
+          "id": "e7c13fb8f5310ac8959ed36204d458642218e922",
+          "message": "Fix bug that bar.shake did not have any effect",
+          "timestamp": "2023-03-11T06:54:38+01:00",
+          "tree_id": "7d8bc09ff361704c9230c545be04f9c42f373bd5",
+          "url": "https://github.com/Laguna1989/JamTemplateCpp/commit/e7c13fb8f5310ac8959ed36204d458642218e922"
+        },
+        "date": 1678514833692,
+        "tool": "googlecpp",
+        "benches": [
+          {
+            "name": "BM_UpdateDrawablePositions",
+            "value": 3.657705130890064,
+            "unit": "ms/iter",
+            "extra": "iterations: 191\ncpu: 3.6543916230366498 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GetAllCommands",
+            "value": 0.37403753358208114,
+            "unit": "ms/iter",
+            "extra": "iterations: 1876\ncpu: 0.3737168443496802 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_LoggerLogWithoutTarget",
+            "value": 0.7869615196850426,
+            "unit": "ms/iter",
+            "extra": "iterations: 889\ncpu: 0.7865319460067494 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_LoggerLogWithCoutTargetSetToOff",
+            "value": 0.7704583042998894,
+            "unit": "ms/iter",
+            "extra": "iterations: 907\ncpu: 0.7701234840132304 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_UpdateObjectGroup",
+            "value": 0.04981192978587139,
+            "unit": "ms/iter",
+            "extra": "iterations: 14057\ncpu: 0.04980907021412823 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_UpdateSpatialObjectGrid",
+            "value": 0.3248867233653307,
+            "unit": "ms/iter",
+            "extra": "iterations: 2187\ncpu: 0.3248644261545499 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_StartGame",
+            "value": 0.003385477204420773,
+            "unit": "ms/iter",
+            "extra": "iterations: 208286\ncpu: 0.0033720259642990922 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_RefineTilemapCollisions",
+            "value": 0.1852659375165471,
+            "unit": "ms/iter",
+            "extra": "iterations: 3777\ncpu: 0.18525806195393152 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GamestateWithTweeningShapes",
+            "value": 3.509968502512561,
+            "unit": "ms/iter",
+            "extra": "iterations: 199\ncpu: 3.509765326633162 ms\nthreads: 1"
           }
         ]
       }
