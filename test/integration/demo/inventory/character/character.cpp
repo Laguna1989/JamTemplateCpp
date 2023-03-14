@@ -68,7 +68,8 @@ void Character::doUpdate(float const elapsed)
 void Character::handleTemperature(float elapsed)
 {
     m_temperatureDamageTimer += elapsed;
-    float heatResistance = getHeatResistance(m_inventory->getEquippedItems(), m_repo);
+    float heatResistance
+        = static_cast<float>(getHeatResistance(m_inventory->getEquippedItems(), m_repo));
 
     auto const minTemperature = -15 - heatResistance;
     auto const maxTemperature = 40 + heatResistance;

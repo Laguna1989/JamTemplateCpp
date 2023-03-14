@@ -46,6 +46,13 @@ void jt::InfoScreen::doDraw() const
         ImGui::PlotLines("Frame Time [s]", m_frameTimesVector.data(),
             static_cast<int>(m_frameTimesVector.size()), 0, nullptr, 0, FLT_MAX, ImVec2 { 0, 100 });
     }
+    if (!ImGui::CollapsingHeader("GameStates")) {
+        auto const states = getGame()->stateManager().getStoredStateIdentifiers();
+        ImGui::Text("Stored States: %i", states.size());
+        for (auto const& s : states) {
+            ImGui::Text("   %s", s.c_str());
+        }
+    }
     if (!ImGui::CollapsingHeader("GameState")) {
         auto const state = getGame()->stateManager().getCurrentState();
         ImGui::Text("%s", state->getName().c_str());

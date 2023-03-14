@@ -39,7 +39,7 @@ public:
     std::size_t getNumberOfObjects() const;
 
     /// Check if the State has been initialized
-    /// \return true if inizialized, false otherwise
+    /// \return true if initialized, false otherwise
     bool hasBeenInitialized() const;
 
     /// Set auto update of Objects
