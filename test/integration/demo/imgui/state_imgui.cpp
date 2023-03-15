@@ -3,9 +3,11 @@
 #include <state_select.hpp>
 #include <imgui.h>
 
-void StateImGui::doInternalCreate() { }
+void StateImGui::onCreate() { }
 
-void StateImGui::doInternalUpdate(float /*elapsed*/)
+void StateImGui::onEnter() { }
+
+void StateImGui::onUpdate(float /*elapsed*/)
 {
     auto mouse = getGame()->input().mouse();
     if (mouse->justPressed(jt::MouseButtonCode::MBLeft)) {
@@ -20,7 +22,7 @@ void StateImGui::doInternalUpdate(float /*elapsed*/)
     }
 }
 
-void StateImGui::doInternalDraw() const
+void StateImGui::onDraw() const
 {
     ImGui::ShowDemoWindow();
 

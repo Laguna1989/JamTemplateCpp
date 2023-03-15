@@ -19,7 +19,7 @@
 class StateTweenPerformanceTest : public jt::GameState {
 private:
     std::vector<std::shared_ptr<jt::Shape>> m_shapes;
-    void doInternalCreate() override
+    void onCreate() override
     {
         std::size_t const number_of_objects = 20U;
         for (std::size_t i = 0U; i != number_of_objects; ++i) {
@@ -28,7 +28,8 @@ private:
             m_shapes.push_back(shape);
         }
     }
-    void doInternalUpdate(float elapsed) override
+    void onEnter() override { }
+    void onUpdate(float elapsed) override
     {
         for (auto s : m_shapes) {
             s->update(elapsed);
@@ -43,7 +44,7 @@ public:
     std::string getName() const override { return "Performance Tweens"; }
 
 private:
-    void doInternalDraw() const override
+    void onDraw() const override
     {
         for (auto s : m_shapes) {
             s->draw(renderTarget());

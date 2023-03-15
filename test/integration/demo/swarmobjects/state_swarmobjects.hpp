@@ -16,11 +16,12 @@ private:
 
     jt::ObjectGroup<SwarmObject>::Sptr m_SwarmObjects;
 
-    void doInternalCreate() override;
-    void doInternalUpdate(float const /*elapsed*/) override;
+    void onCreate() override;
+    void onEnter() override;
+    void onUpdate(float const /*elapsed*/) override;
     void updateSwarm();
     void updateOneSwarmObject(const size_t& firstSwarmObjectIndex);
-    void doInternalDraw() const override;
+    void onDraw() const override;
 
     void drawSky() const;
 };

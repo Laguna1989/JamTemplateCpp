@@ -4,8 +4,10 @@
 #include <shape.hpp>
 #include <state_select.hpp>
 
-void State3DNoise::doInternalCreate() { }
-void State3DNoise::doInternalUpdate(float elapsed)
+void State3DNoise::onCreate() { }
+void State3DNoise::onEnter() { }
+
+void State3DNoise::onUpdate(float elapsed)
 {
     if (getGame()->input().keyboard()->justPressed(jt::KeyCode::F1)
         || getGame()->input().keyboard()->justPressed(jt::KeyCode::Escape)) {
@@ -13,7 +15,7 @@ void State3DNoise::doInternalUpdate(float elapsed)
     }
     m_z += elapsed * 0.9f;
 }
-void State3DNoise::doInternalDraw() const
+void State3DNoise::onDraw() const
 {
     jt::Shape shape;
     shape.makeRect(jt::Vector2f { 2.0f, 2.0f }, textureManager());

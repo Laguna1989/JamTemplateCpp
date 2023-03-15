@@ -5,9 +5,10 @@
 
 class StateGamepad : public jt::GameState {
 private:
-    void doInternalCreate() override;
-    void doInternalUpdate(float elapsed) override;
-    void doInternalDraw() const override;
+    void onCreate() override;
+    void onEnter() override;
+    void onUpdate(float elapsed) override;
+    void onDraw() const override;
 };
 
 #endif // JAMTEMPLATE_STATE_GAMEPAD_HPP

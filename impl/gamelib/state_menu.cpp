@@ -21,18 +21,22 @@
 #include <algorithm>
 #include <iostream>
 
-void StateMenu::doInternalCreate()
+void StateMenu::onCreate()
 {
     createMenuText();
     createShapes();
     createVignette();
 
-    createTweens();
-
     add(std::make_shared<jt::LicenseInfo>());
 
     getGame()->stateManager().setTransition(std::make_shared<jt::StateManagerTransitionFadeToBlack>(
         GP::GetScreenSize(), textureManager()));
+}
+
+void StateMenu::onEnter()
+{
+    createTweens();
+    m_started = false;
 }
 
 void StateMenu::createVignette()
@@ -182,7 +186,7 @@ void StateMenu::createTweenCreditsPosition()
     add(tweenVersion);
 }
 
-void StateMenu::doInternalUpdate(float const elapsed)
+void StateMenu::onUpdate(float const elapsed)
 {
     updateDrawables(elapsed);
     checkForTransitionToStateGame();
@@ -214,12 +218,12 @@ void StateMenu::startTransitionToStateGame()
 {
     if (!m_started) {
         m_started = true;
-
+        getGame()->stateManager().storeCurrentState("menu");
         getGame()->stateManager().switchState(std::make_shared<StateGame>());
     }
 }
 
-void StateMenu::doInternalDraw() const
+void StateMenu::onDraw() const
 {
     m_background->draw(renderTarget());
 

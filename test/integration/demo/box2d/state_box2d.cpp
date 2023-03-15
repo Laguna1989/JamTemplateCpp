@@ -12,7 +12,7 @@
 
 StatePlatformer::StatePlatformer(std::string const& levelName) { m_levelName = levelName; }
 
-void StatePlatformer::doInternalCreate()
+void StatePlatformer::onCreate()
 {
     auto contactManager = std::make_shared<jt::Box2DContactManager>();
     auto loggingContactManager
@@ -35,6 +35,7 @@ void StatePlatformer::doInternalCreate()
     add(m_vignette);
     setAutoDraw(false);
 }
+void StatePlatformer::onEnter() { }
 
 void StatePlatformer::loadLevel()
 {
@@ -42,7 +43,7 @@ void StatePlatformer::loadLevel()
     add(m_level);
 }
 
-void StatePlatformer::doInternalUpdate(float const elapsed)
+void StatePlatformer::onUpdate(float const elapsed)
 {
     if (!m_ending && !getGame()->stateManager().getTransition()->isInProgress()) {
         std::int32_t const velocityIterations = 20;
@@ -132,7 +133,7 @@ void StatePlatformer::handleCameraScrolling(float const elapsed)
     cam.setCamOffset(offset);
 }
 
-void StatePlatformer::doInternalDraw() const
+void StatePlatformer::onDraw() const
 {
     m_level->draw();
 

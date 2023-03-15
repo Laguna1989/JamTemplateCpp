@@ -17,9 +17,10 @@ public:
     std::string getName() const override;
 
 private:
-    void doInternalCreate() override;
-    void doInternalUpdate(float elapsed) override;
-    void doInternalDraw() const override;
+    void onCreate() override;
+    void onEnter() override;
+    void onUpdate(float elapsed) override;
+    void onDraw() const override;
     std::shared_ptr<jt::ParticleSystem<jt::Shape, numberOfParticles>> m_particlesGlitter;
     std::shared_ptr<jt::ParticleSystem<jt::Shape, numberOfParticles>> m_particlesFire;
     std::shared_ptr<jt::ParticleSystem<jt::Animation, 100>> m_sparkParticles;
@@ -27,6 +28,7 @@ private:
     jt::CircularBuffer<float, 200> m_timeMeasurement;
     void createParticlesGlitter();
     void createParticlesFire();
+    void createSparkParticles();
 };
 
 #endif // JAMTEMPLATE_STATE_PARTICLES_H

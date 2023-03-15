@@ -19,9 +19,14 @@
 
 class StateInventory : public jt::GameState {
 public:
-    void doInternalCreate() override;
-    void doInternalUpdate(float elapsed) override;
-    void doInternalDraw() const override;
+    void onCreate() override;
+
+private:
+    void onEnter() override;
+
+public:
+    void onUpdate(float elapsed) override;
+    void onDraw() const override;
 
     std::shared_ptr<jt::Box2DWorldInterface> m_world { nullptr };
 

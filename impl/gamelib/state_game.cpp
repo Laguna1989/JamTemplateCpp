@@ -6,11 +6,9 @@
 #include <hud/hud.hpp>
 #include <screeneffects/vignette.hpp>
 #include <shape.hpp>
-#include <sprite.hpp>
 #include <state_menu.hpp>
-#include <tweens/tween_alpha.hpp>
 
-void StateGame::doInternalCreate()
+void StateGame::onCreate()
 {
     m_world = std::make_shared<jt::Box2DWorldImpl>(jt::Vector2f { 0.0f, 0.0f });
 
@@ -18,7 +16,6 @@ void StateGame::doInternalCreate()
     float const h = static_cast<float>(GP::GetWindowSize().y);
 
     using jt::Shape;
-    using jt::TweenAlpha;
 
     m_background = std::make_shared<Shape>();
     m_background->makeRect({ w, h }, textureManager());
@@ -37,13 +34,15 @@ void StateGame::doInternalCreate()
     setAutoDraw(false);
 }
 
+void StateGame::onEnter() { }
+
 void StateGame::createPlayer()
 {
     m_player = std::make_shared<Player>(m_world, *this);
     add(m_player);
 }
 
-void StateGame::doInternalUpdate(float const elapsed)
+void StateGame::onUpdate(float const elapsed)
 {
     if (m_running) {
         m_world->step(elapsed, GP::PhysicVelocityIterations(), GP::PhysicPositionIterations());
@@ -56,13 +55,17 @@ void StateGame::doInternalUpdate(float const elapsed)
             m_scoreP2++;
             m_hud->getObserverScoreP2()->notify(m_scoreP2);
         }
+        if (getGame()->input().keyboard()->pressed(jt::KeyCode::LShift)
+            && getGame()->input().keyboard()->pressed(jt::KeyCode::Escape)) {
+            endGame();
+        }
     }
 
     m_background->update(elapsed);
     m_vignette->update(elapsed);
 }
 
-void StateGame::doInternalDraw() const
+void StateGame::onDraw() const
 {
     m_background->draw(renderTarget());
     drawObjects();
@@ -79,7 +82,7 @@ void StateGame::endGame()
     m_hasEnded = true;
     m_running = false;
 
-    getGame()->stateManager().switchState(std::make_shared<StateMenu>());
+    getGame()->stateManager().switchToStoredState("menu");
 }
 
 std::string StateGame::getName() const { return "State Game"; }

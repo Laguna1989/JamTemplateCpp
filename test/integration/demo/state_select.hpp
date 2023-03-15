@@ -24,9 +24,10 @@ public:
     std::string getName() const override;
 
 private:
-    void doInternalCreate() override;
-    void doInternalUpdate(float elapsed) override;
-    void doInternalDraw() const override;
+    void onCreate() override;
+    void onUpdate(float elapsed) override;
+    void onDraw() const override;
+    void onEnter() override;
 
     std::size_t m_buttonCount { 0U };
 

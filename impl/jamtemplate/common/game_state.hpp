@@ -38,8 +38,11 @@ public:
     /// \return the number of gameobjects
     std::size_t getNumberOfObjects() const;
 
+    /// Enter the GameState
+    void enter();
+
     /// Check if the State has been initialized
-    /// \return true if inizialized, false otherwise
+    /// \return true if initialized, false otherwise
     bool hasBeenInitialized() const;
 
     /// Set auto update of Objects
@@ -87,18 +90,22 @@ private:
     bool m_started { false };
     void start();
 
-    /// do not override the do* function in derived states, but override doInternal* functions
+    /// do not override the do* function in derived states, but override on* functions
+    virtual void doCreate() override;
+    virtual void doEnter();
     virtual void doUpdate(float const elapsed) override;
     virtual void doDraw() const override;
-    virtual void doCreate() override;
 
     void internalCreate();
+    void internalEnter();
     void internalUpdate(float elapsed);
     void internalDraw() const;
 
-    virtual void doInternalCreate() = 0;
-    virtual void doInternalUpdate(float elapsed) = 0;
-    virtual void doInternalDraw() const = 0;
+    virtual void onCreate() = 0;
+    virtual void onEnter() = 0;
+    virtual void onUpdate(float elapsed) = 0;
+    virtual void onDraw() const = 0;
+
     void checkForMuteUnmute();
 };
 

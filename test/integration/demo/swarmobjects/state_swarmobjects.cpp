@@ -4,14 +4,10 @@
 #include <input/input_manager.hpp>
 #include <math_helper.hpp>
 #include <state_select.hpp>
-#include <tweens/tween_alpha.hpp>
 #include <vector>
 
-void StateSwarmObjects::doInternalCreate()
+void StateSwarmObjects::onCreate()
 {
-    using jt::Shape;
-    using jt::TweenAlpha;
-
     m_sky = jt::dh::createShapeRect(
         jt::Vector2f { 400, 300 }, jt::Color { 178, 255, 255 }, textureManager());
 
@@ -23,12 +19,11 @@ void StateSwarmObjects::doInternalCreate()
         m_SwarmObjects->push_back(sptr);
     }
 
-    m_sky->update(0.0f);
-
     setAutoDraw(false);
 }
+void StateSwarmObjects::onEnter() { m_sky->update(0.0f); }
 
-void StateSwarmObjects::doInternalUpdate(float const /*elapsed*/)
+void StateSwarmObjects::onUpdate(float const /*elapsed*/)
 {
     if (getGame()->input().keyboard()->justPressed(jt::KeyCode::F1)
         || getGame()->input().keyboard()->justPressed(jt::KeyCode::Escape)) {
@@ -95,7 +90,7 @@ void StateSwarmObjects::updateOneSwarmObject(const size_t& firstSwarmObjectIndex
     o1->setAcceleration(SummedUpDir);
 }
 
-void StateSwarmObjects::doInternalDraw() const
+void StateSwarmObjects::onDraw() const
 {
     drawSky();
     drawObjects();

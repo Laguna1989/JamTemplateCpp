@@ -15,13 +15,14 @@
 #include <screeneffects/state_screen_effects.hpp>
 #include <scroll/state_scroll.hpp>
 #include <simplex/state_3d_noise.hpp>
+#include <store_gamestate/state_store_gamestate.hpp>
 #include <swarmobjects/state_swarmobjects.hpp>
 #include <tilemap_effects/state_tilemap_effects.hpp>
 #include <tileson/state_tileson.hpp>
 #include <transitions/state_transitions.hpp>
 #include <tween/state_tween.hpp>
 
-void StateSelect::doInternalCreate()
+void StateSelect::onCreate()
 {
     AddButton<StateExplosion>("Explode");
     AddButton<StateSwarmObjects>("Swarm");
@@ -43,11 +44,13 @@ void StateSelect::doInternalCreate()
     AddButton<StateScreenEffects>("Effects");
     AddButton<StateTilemapEffects>("Tile Effects");
     AddButton<StateOffsetOrigin>("offset origin");
+    AddButton<StateStoreGamestate>("store state");
 
     add(std::make_shared<jt::LicenseInfo>());
 }
+void StateSelect::onEnter() { }
 
-void StateSelect::doInternalUpdate(float /*elapsed*/) { }
+void StateSelect::onUpdate(float /*elapsed*/) { }
 
-void StateSelect::doInternalDraw() const { }
+void StateSelect::onDraw() const { }
 std::string StateSelect::getName() const { return "State Demo Select"; }

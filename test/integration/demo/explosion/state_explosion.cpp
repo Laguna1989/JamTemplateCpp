@@ -9,11 +9,10 @@
 #include <tweens/tween_color.hpp>
 #include <tweens/tween_scale.hpp>
 
-void StateExplosion::doInternalCreate()
+void StateExplosion::onCreate()
 {
     using jt::Timer;
 
-    getGame()->gfx().camera().shake(0.5f, 2.0f);
     auto t
         = std::make_shared<Timer>(0.6f, [this]() { getGame()->gfx().camera().shake(0.5f, 10.0f); });
     add(t);
@@ -22,8 +21,9 @@ void StateExplosion::doInternalCreate()
         getGame()->gfx().createZLayer(i);
     }
 }
+void StateExplosion::onEnter() { getGame()->gfx().camera().shake(0.5f, 2.0f); }
 
-void StateExplosion::doInternalUpdate(float const /*elapsed*/)
+void StateExplosion::onUpdate(float const /*elapsed*/)
 {
     unsigned int N = 1;
     for (unsigned int i = 0; i != N; ++i) {

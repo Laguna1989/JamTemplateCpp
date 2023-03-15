@@ -52,7 +52,7 @@ void camFollowObject(jt::CamInterface& cam, jt::Vector2f const& windowSize,
 }
 } // namespace
 
-void StateInventory::doInternalCreate()
+void StateInventory::onCreate()
 {
     // -2: tiles background
     getGame()->gfx().createZLayer(-2);
@@ -93,6 +93,8 @@ void StateInventory::doInternalCreate()
 
     m_pickupSound = getGame()->audio().addTemporarySound("assets/test/integration/demo/test.ogg");
 }
+
+void StateInventory::onEnter() { }
 
 void StateInventory::createObjects()
 {
@@ -177,7 +179,7 @@ void StateInventory::createItemRepository()
     m_itemRepository->loadFromJson("assets/test/integration/demo/test_items.json");
 }
 
-void StateInventory::doInternalUpdate(float elapsed)
+void StateInventory::onUpdate(float elapsed)
 {
     if (getGame()->input().keyboard()->justPressed(jt::KeyCode::F1)
         || getGame()->input().keyboard()->justPressed(jt::KeyCode::Escape)) {
@@ -246,4 +248,4 @@ void StateInventory::pickupItems()
     }
 }
 
-void StateInventory::doInternalDraw() const { drawObjects(); }
+void StateInventory::onDraw() const { drawObjects(); }

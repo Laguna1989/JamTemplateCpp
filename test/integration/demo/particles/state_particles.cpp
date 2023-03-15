@@ -11,10 +11,14 @@
 #include <iostream>
 #include <numeric>
 
-void StateParticles::doInternalCreate()
+void StateParticles::onCreate()
 {
     createParticlesGlitter();
     createParticlesFire();
+    createSparkParticles();
+}
+void StateParticles::createSparkParticles()
+{
     auto rng = std::default_random_engine {};
 
     m_sparkParticles = jt::ParticleSystem<jt::Animation, 100>::createPS(
@@ -38,6 +42,9 @@ void StateParticles::doInternalCreate()
         });
     add(m_sparkParticles);
 }
+
+void StateParticles::onEnter() { }
+
 void StateParticles::createParticlesFire()
 {
     m_particlesFire = jt::ParticleSystem<jt::Shape, numberOfParticles>::createPS(
@@ -128,7 +135,7 @@ void StateParticles::createParticlesGlitter()
         });
     add(m_particlesGlitter);
 }
-void StateParticles::doInternalUpdate(float elapsed)
+void StateParticles::onUpdate(float elapsed)
 {
     m_particlesGlitter->fire(toFire);
     m_particlesFire->fire(1);
@@ -147,5 +154,5 @@ void StateParticles::doInternalUpdate(float elapsed)
                   << " " << toFire << " " << avg << std::endl;
     }
 }
-void StateParticles::doInternalDraw() const { }
+void StateParticles::onDraw() const { }
 std::string StateParticles::getName() const { return "Particles"; }

@@ -14,6 +14,11 @@ public:
     MOCK_METHOD(
         std::shared_ptr<jt::StateManagerTransitionInterface>, getTransition, (), (override));
     MOCK_METHOD(void, draw, (std::shared_ptr<jt::RenderTargetInterface> rt), (override));
+    MOCK_METHOD(void, switchToStoredState, (std::string const&), (override));
+    MOCK_METHOD(void, storeCurrentState, (std::string const&), (override));
+    MOCK_METHOD(std::shared_ptr<jt::GameState>, getStoredState, (std::string const&), (override));
+    MOCK_METHOD(void, clearStoredState, (std::string const&), (override));
+    MOCK_METHOD(std::vector<std::string>, getStoredStateIdentifiers, (), (const, override));
 };
 
 #endif // JAMTEMPLATE_MOCK_STATE_MANAGER_HPP

@@ -13,9 +13,10 @@ public:
     std::string getName() const override;
 
 private:
-    void doInternalCreate() override;
-    void doInternalUpdate(float elapsed) override;
-    void doInternalDraw() const override;
+    void onCreate() override;
+    void onEnter() override;
+    void onUpdate(float elapsed) override;
+    void onDraw() const override;
 
     mutable oalpp::effects::filter::Butterworth24dbLowpass m_effect { 44100, 600.0f, 0.2f };
     mutable std::shared_ptr<jt::SoundInterface> m_sound { nullptr };

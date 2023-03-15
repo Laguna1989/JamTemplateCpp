@@ -11,9 +11,10 @@ private:
     std::shared_ptr<jt::Sprite> m_sprite;
     std::shared_ptr<jt::SoundInterface> m_jingle;
 
-    void doInternalCreate() override;
-    void doInternalUpdate(float elapsed) override;
-    void doInternalDraw() const override;
+    void onCreate() override;
+    void onEnter() override;
+    void onUpdate(float elapsed) override;
+    void onDraw() const override;
 };
 
 #endif // JAMTEMPLATE_STATE_INTRO_HPP

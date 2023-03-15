@@ -1,7 +1,7 @@
 
 #include "state_offset_origin.hpp"
 std::string StateOffsetOrigin::getName() const { return "Offset Origin"; }
-void StateOffsetOrigin::doInternalCreate()
+void StateOffsetOrigin::onCreate()
 {
     for (auto i = 0; i != 4; ++i) {
         for (auto j = 0; j != 3; ++j) {
@@ -32,8 +32,9 @@ void StateOffsetOrigin::doInternalCreate()
         }
     }
 }
+void StateOffsetOrigin::onEnter() { }
 
-void StateOffsetOrigin::doInternalUpdate(float const elapsed)
+void StateOffsetOrigin::onUpdate(float const elapsed)
 {
     for (auto const& s : m_shapes) {
         s->update(elapsed);
@@ -42,7 +43,7 @@ void StateOffsetOrigin::doInternalUpdate(float const elapsed)
         s->update(elapsed);
     }
 }
-void StateOffsetOrigin::doInternalDraw() const
+void StateOffsetOrigin::onDraw() const
 {
     for (auto const& s : m_sprites) {
         s->draw(renderTarget());

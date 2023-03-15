@@ -79,9 +79,6 @@ void jt::Tween::doUpdate(float)
         finish();
         return;
     }
-    if (getAge() < 0) {
-        return;
-    }
     doUpdateObject(m_obj.lock(), getConvertedAgePercent(getAgePercent()));
 }
 
