@@ -23,6 +23,7 @@ private:
         m_shape = std::make_shared<jt::Shape>();
         m_shape->makeRect({ 20.0f, 20.0f }, textureManager());
     }
+    void onEnter() override { }
     void onUpdate(float elapsed) override { m_shape->update(elapsed); }
     void onDraw() const override { m_shape->draw(renderTarget()); }
 

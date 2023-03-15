@@ -28,6 +28,7 @@ private:
             m_shapes.push_back(shape);
         }
     }
+    void onEnter() override { }
     void onUpdate(float elapsed) override
     {
         for (auto s : m_shapes) {
