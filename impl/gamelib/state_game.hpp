@@ -34,6 +34,7 @@ private:
     int m_scoreP2 { 0 };
 
     void onCreate() override;
+    void onEnter() override;
     void onUpdate(float const elapsed) override;
     void onDraw() const override;
 

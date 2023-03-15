@@ -12,6 +12,7 @@ private:
     std::shared_ptr<jt::SoundInterface> m_jingle;
 
     void onCreate() override;
+    void onEnter() override;
     void onUpdate(float elapsed) override;
     void onDraw() const override;
 };

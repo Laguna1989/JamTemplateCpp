@@ -27,12 +27,16 @@ void StateMenu::onCreate()
     createShapes();
     createVignette();
 
-    createTweens();
-
     add(std::make_shared<jt::LicenseInfo>());
 
     getGame()->stateManager().setTransition(std::make_shared<jt::StateManagerTransitionFadeToBlack>(
         GP::GetScreenSize(), textureManager()));
+}
+
+void StateMenu::onEnter()
+{
+    createTweens();
+    m_started = false;
 }
 
 void StateMenu::createVignette()
@@ -214,7 +218,7 @@ void StateMenu::startTransitionToStateGame()
 {
     if (!m_started) {
         m_started = true;
-        // TODO do not create a new Menu state but switch back to the stored one
+        getGame()->stateManager().storeCurrentState("menu");
         getGame()->stateManager().switchState(std::make_shared<StateGame>());
     }
 }

@@ -6,9 +6,7 @@
 #include <hud/hud.hpp>
 #include <screeneffects/vignette.hpp>
 #include <shape.hpp>
-#include <sprite.hpp>
 #include <state_menu.hpp>
-#include <tweens/tween_alpha.hpp>
 
 void StateGame::onCreate()
 {
@@ -18,7 +16,6 @@ void StateGame::onCreate()
     float const h = static_cast<float>(GP::GetWindowSize().y);
 
     using jt::Shape;
-    using jt::TweenAlpha;
 
     m_background = std::make_shared<Shape>();
     m_background->makeRect({ w, h }, textureManager());
@@ -36,6 +33,8 @@ void StateGame::onCreate()
     // StateGame will call drawObjects itself.
     setAutoDraw(false);
 }
+
+void StateGame::onEnter() { }
 
 void StateGame::createPlayer()
 {
@@ -55,6 +54,10 @@ void StateGame::onUpdate(float const elapsed)
         if (getGame()->input().keyboard()->justPressed(jt::KeyCode::D)) {
             m_scoreP2++;
             m_hud->getObserverScoreP2()->notify(m_scoreP2);
+        }
+        if (getGame()->input().keyboard()->pressed(jt::KeyCode::LShift)
+            && getGame()->input().keyboard()->pressed(jt::KeyCode::Escape)) {
+            endGame();
         }
     }
 
@@ -79,7 +82,7 @@ void StateGame::endGame()
     m_hasEnded = true;
     m_running = false;
 
-    getGame()->stateManager().switchState(std::make_shared<StateMenu>());
+    getGame()->stateManager().switchToStoredState("menu");
 }
 
 std::string StateGame::getName() const { return "State Game"; }

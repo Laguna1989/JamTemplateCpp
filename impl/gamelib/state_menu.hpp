@@ -36,7 +36,7 @@ private:
     bool m_started { false };
 
     void onCreate() override;
-
+    void onEnter() override;
     void createVignette();
     void createShapes();
 
