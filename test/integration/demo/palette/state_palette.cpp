@@ -6,7 +6,7 @@
 #include <state_select.hpp>
 #include <fstream>
 
-void StatePalette::doInternalCreate()
+void StatePalette::onCreate()
 {
     createShapesFromSaturationGradient();
     createShapesFromHueGradient();
@@ -14,6 +14,9 @@ void StatePalette::doInternalCreate()
     createShapesFromGPL();
     createShapesFromSprite();
 }
+
+void StatePalette::onEnter() { }
+
 void StatePalette::createShapesFromSprite()
 {
     jt::PaletteBuilder builder;
@@ -65,7 +68,7 @@ void StatePalette::createShapesFromGPL()
     createPaletteShapes(palette_gpl, 160.0f);
 }
 
-void StatePalette::doInternalUpdate(float elapsed)
+void StatePalette::onUpdate(float elapsed)
 {
     for (auto s : m_shapes) {
         s->update(elapsed);
@@ -76,7 +79,7 @@ void StatePalette::doInternalUpdate(float elapsed)
     }
 }
 
-void StatePalette::doInternalDraw() const
+void StatePalette::onDraw() const
 {
     for (auto s : m_shapes) {
         s->draw(renderTarget());

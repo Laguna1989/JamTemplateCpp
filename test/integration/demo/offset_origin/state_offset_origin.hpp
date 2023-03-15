@@ -16,9 +16,10 @@ public:
     std::vector<std::shared_ptr<jt::Sprite>> m_sprites;
 
 private:
-    void doInternalCreate() override;
-    void doInternalUpdate(float const /*elapsed*/) override;
-    void doInternalDraw() const override;
+    void onCreate() override;
+    void onEnter() override;
+    void onUpdate(float const /*elapsed*/) override;
+    void onDraw() const override;
 };
 
 #endif // JAMTEMPLATE_STATE_OFFSET_ORIGIN_HPP

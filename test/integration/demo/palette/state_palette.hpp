@@ -10,9 +10,10 @@ public:
     std::string getName() const override;
 
 private:
-    void doInternalCreate() override;
-    void doInternalUpdate(float elapsed) override;
-    void doInternalDraw() const override;
+    void onCreate() override;
+    void onEnter() override;
+    void onUpdate(float elapsed) override;
+    void onDraw() const override;
 
     std::vector<std::shared_ptr<jt::Shape>> m_shapes;
     void createShapesFromGPL();

@@ -5,7 +5,7 @@
 #include <tilemap/tileson_loader.hpp>
 #include <imgui.h>
 
-void StateScreenEffects::doInternalCreate()
+void StateScreenEffects::onCreate()
 {
     jt::tilemap::TilesonLoader loader { getGame()->cache().getTilemapCache(),
         "assets/test/integration/demo/screeneffect_map.json" };
@@ -38,7 +38,9 @@ void StateScreenEffects::doInternalCreate()
     setAutoDraw(false);
 }
 
-void StateScreenEffects::doInternalUpdate(float elapsed)
+void StateScreenEffects::onEnter() { }
+
+void StateScreenEffects::onUpdate(float elapsed)
 {
     for (auto& l : m_tileLayers) {
         l->update(elapsed);
@@ -76,7 +78,7 @@ void StateScreenEffects::scroll(float elapsed)
     m_wind->m_windSpeed = m_windStrength;
 }
 
-void StateScreenEffects::doInternalDraw() const
+void StateScreenEffects::onDraw() const
 {
     m_stars->draw();
     if (m_drawLevel) {

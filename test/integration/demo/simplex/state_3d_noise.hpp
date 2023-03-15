@@ -7,9 +7,10 @@
 // TODO Rewrite in a way that all images are created upfront and then only drawn -> speed up
 // performance
 class State3DNoise : public jt::GameState {
-    void doInternalCreate() override;
-    void doInternalUpdate(float elapsed) override;
-    void doInternalDraw() const override;
+    void onCreate() override;
+    void onEnter() override;
+    void onUpdate(float elapsed) override;
+    void onDraw() const override;
     float m_z { 0.0f };
     jt::OpenSimplexNoise3D noiseL1 { 123 };
     jt::OpenSimplexNoise3D noiseL2 { 234 };

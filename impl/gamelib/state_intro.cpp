@@ -6,7 +6,7 @@
 #include <tweens/tween_alpha.hpp>
 #include <tweens/tween_position.hpp>
 
-void StateIntro::doInternalCreate()
+void StateIntro::onCreate()
 {
     m_sprite = std::make_shared<jt::Sprite>("assets/runvs_logo.png", textureManager());
     //    m_sprite->setScale(jt::Vector2f { 0.5f, 0.5f });
@@ -29,7 +29,7 @@ void StateIntro::doInternalCreate()
     m_jingle->play();
 }
 
-void StateIntro::doInternalUpdate(float elapsed)
+void StateIntro::onUpdate(float elapsed)
 {
     m_sprite->update(elapsed);
     if (getAge() >= 1.7) {
@@ -37,4 +37,4 @@ void StateIntro::doInternalUpdate(float elapsed)
     }
 }
 
-void StateIntro::doInternalDraw() const { m_sprite->draw(renderTarget()); }
+void StateIntro::onDraw() const { m_sprite->draw(renderTarget()); }

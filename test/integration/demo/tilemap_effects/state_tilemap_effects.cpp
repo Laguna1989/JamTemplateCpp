@@ -12,7 +12,7 @@
 #include <timer.hpp>
 #include <imgui.h>
 
-void StateTilemapEffects::doInternalCreate()
+void StateTilemapEffects::onCreate()
 {
     jt::tilemap::TilesonLoader loader { getGame()->cache().getTilemapCache(),
         "assets/test/integration/demo/tilemap_onebit.json" };
@@ -24,7 +24,9 @@ void StateTilemapEffects::doInternalCreate()
     setAutoDraw(false);
 }
 
-void StateTilemapEffects::doInternalUpdate(float const elapsed)
+void StateTilemapEffects::onEnter() { }
+
+void StateTilemapEffects::onUpdate(float const elapsed)
 {
     m_tileLayerGround->setRotation(m_rotation);
     m_tileLayerGround->setScale(jt::Vector2f { m_scaleX, m_scaleY });
@@ -54,7 +56,7 @@ void StateTilemapEffects::moveCamera(float const elapsed)
     }
 }
 
-void StateTilemapEffects::doInternalDraw() const
+void StateTilemapEffects::onDraw() const
 {
     drawObjects();
     m_tileLayerGround->draw(renderTarget());

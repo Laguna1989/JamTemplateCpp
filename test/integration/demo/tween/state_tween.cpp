@@ -6,13 +6,15 @@
 #include <tweens/tween_alpha.hpp>
 #include <cstdint>
 
-void StateTween::doInternalCreate()
+void StateTween::onCreate()
 {
     createRects();
-    createTweens();
+
     storeActionCommand(getGame()->actionCommandManager().registerTemporaryCommand(
         "start_tweens", [this](auto /*str*/) { createTweens(); }));
 }
+
+void StateTween::onEnter() { createTweens(); }
 
 void StateTween::createRects()
 {
@@ -58,7 +60,7 @@ void StateTween::createTweens()
     add(twBIn);
 }
 
-void StateTween::doInternalUpdate(float const elapsed)
+void StateTween::onUpdate(float const elapsed)
 {
     if (getGame()->input().keyboard()->justPressed(jt::KeyCode::F1)
         || getGame()->input().keyboard()->justPressed(jt::KeyCode::Escape)) {
@@ -71,7 +73,7 @@ void StateTween::doInternalUpdate(float const elapsed)
     m_overlayB->update(elapsed);
 }
 
-void StateTween::doInternalDraw() const
+void StateTween::onDraw() const
 {
     m_background->draw(renderTarget());
 
@@ -79,4 +81,5 @@ void StateTween::doInternalDraw() const
     m_overlayG->draw(renderTarget());
     m_overlayB->draw(renderTarget());
 }
-std::string StateTween::getName() const { return "Tweens"; }
+
+std::string StateTween::getName() const { return "Demo Tweens"; }

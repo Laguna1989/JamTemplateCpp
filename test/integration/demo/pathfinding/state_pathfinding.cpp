@@ -5,12 +5,14 @@
 #include <random/random.hpp>
 #include <state_select.hpp>
 
-void StatePathfinding::doInternalCreate()
+void StatePathfinding::onCreate()
 {
     createTiles();
 
     createNodeConnections();
-
+}
+void StatePathfinding::onEnter()
+{
     resetTiles();
     calculatePath(getTileAt(7, 3)->getNode(), getTileAt(7, 9)->getNode());
 }
@@ -83,7 +85,7 @@ void StatePathfinding::createTiles()
     getTileAt(9, 5)->setBlocked(true);
 }
 
-void StatePathfinding::doInternalUpdate(float elapsed)
+void StatePathfinding::onUpdate(float elapsed)
 {
     if (getGame()->input().keyboard()->justPressed(jt::KeyCode::Escape)) {
         getGame()->stateManager().switchState(std::make_shared<StateSelect>());
@@ -103,7 +105,7 @@ void StatePathfinding::doInternalUpdate(float elapsed)
     }
 }
 
-void StatePathfinding::doInternalDraw() const
+void StatePathfinding::onDraw() const
 {
     for (auto& t : m_tiles) {
         t->getDrawable()->draw(renderTarget());

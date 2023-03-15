@@ -44,7 +44,9 @@ void StateRope::createAllRopeMasses()
     }
 }
 
-void StateRope::doInternalCreate() { createAllRopeMasses(); }
+void StateRope::onCreate() { createAllRopeMasses(); }
+
+void StateRope::onEnter() { }
 
 void StateRope::resetAccelerations()
 {
@@ -88,7 +90,7 @@ void StateRope::calculateRopeForces()
     }
 }
 
-void StateRope::doInternalUpdate(float elapsed)
+void StateRope::onUpdate(float elapsed)
 {
     if (elapsed >= 1.0f) {
         elapsed = 1.0f;
@@ -114,7 +116,7 @@ void StateRope::doInternalUpdate(float elapsed)
     }
 }
 
-void StateRope::doInternalDraw() const
+void StateRope::onDraw() const
 {
     for (auto const& r : m_rope_elements) {
 

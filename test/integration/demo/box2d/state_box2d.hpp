@@ -33,9 +33,10 @@ private:
 
     std::string getName() const override;
 
-    void doInternalCreate() override;
-    void doInternalUpdate(float const /*elapsed*/) override;
-    void doInternalDraw() const override;
+    void onCreate() override;
+    void onEnter() override;
+    void onUpdate(float const /*elapsed*/) override;
+    void onDraw() const override;
 
     void CreatePlayer();
     void loadLevel();

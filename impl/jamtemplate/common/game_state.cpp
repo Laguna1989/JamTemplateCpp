@@ -32,18 +32,27 @@ void jt::GameState::add(std::shared_ptr<TweenInterface> tween) { m_tweens->add(t
 
 size_t jt::GameState::getNumberOfObjects() const { return m_objects->size(); }
 
+void jt::GameState::enter() { doEnter(); }
+
 void jt::GameState::doCreate() { internalCreate(); }
 void jt::GameState::doUpdate(float const elapsed) { internalUpdate(elapsed); }
 void jt::GameState::doDraw() const { internalDraw(); };
+void jt::GameState::doEnter() { internalEnter(); }
 
 void jt::GameState::internalCreate()
 {
-    getGame()->logger().debug("create GameState: " + getName(), { "jt" });
-    m_tweens->clear();
-    doInternalCreate();
+    getGame()->logger().debug("create GameState: " + getName(), { "jt", "GameState" });
+    onCreate();
     add(std::make_shared<jt::Console>(getGame()->logger()));
     add(std::make_shared<jt::InfoScreen>());
     start();
+}
+
+void jt::GameState::internalEnter()
+{
+    getGame()->logger().debug("enter GameState: " + getName(), { "jt", "GameState" });
+    m_tweens->clear();
+    onEnter();
 }
 
 void jt::GameState::internalUpdate(float elapsed)
@@ -52,7 +61,7 @@ void jt::GameState::internalUpdate(float elapsed)
         updateObjects(elapsed);
     }
     checkForMuteUnmute();
-    doInternalUpdate(elapsed);
+    onUpdate(elapsed);
 
     if (m_doAutoUpdateTweens) {
         updateTweens(elapsed);
@@ -73,7 +82,7 @@ void jt::GameState::internalDraw() const
     if (m_doAutoDraw) {
         drawObjects();
     }
-    doInternalDraw();
+    onDraw();
 }
 
 void jt::GameState::updateObjects(float elapsed) { m_objects->update(elapsed); }

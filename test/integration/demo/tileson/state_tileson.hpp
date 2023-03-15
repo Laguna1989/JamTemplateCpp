@@ -34,9 +34,10 @@ private:
 
     std::shared_ptr<Actor> m_actor;
 
-    void doInternalCreate() override;
-    void doInternalUpdate(float const elapsed) override;
-    void doInternalDraw() const override;
+    void onCreate() override;
+    void onEnter() override;
+    void onUpdate(float const elapsed) override;
+    void onDraw() const override;
     void moveCamera(float const elapsed);
 
     void drawObjectLayer() const;

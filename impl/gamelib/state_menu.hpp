@@ -35,7 +35,7 @@ private:
 
     bool m_started { false };
 
-    void doInternalCreate() override;
+    void onCreate() override;
 
     void createVignette();
     void createShapes();
@@ -53,12 +53,12 @@ private:
     void createTweenCreditsPosition();
     void createTweenExplanation();
 
-    void doInternalUpdate(float const elapsed) override;
+    void onUpdate(float const elapsed) override;
     void updateDrawables(const float& elapsed);
     void checkForTransitionToStateGame();
     void startTransitionToStateGame();
 
-    void doInternalDraw() const override;
+    void onDraw() const override;
     void createTextExplanation();
 };
 

@@ -15,7 +15,7 @@ TEST_F(GameTest, GameUpdateWithoutState) { g->update(0.01f); }
 TEST_F(GameTest, GameUpdateCallsStateUpdateForActiveState)
 {
     float expected_update_time = 0.05f;
-    EXPECT_CALL(*state, doInternalUpdate(expected_update_time));
+    EXPECT_CALL(*state, onUpdate(expected_update_time));
     g->update(expected_update_time);
 }
 
@@ -77,10 +77,9 @@ TEST_F(GameTest, GetMusicPlayer)
 TEST_F(GameTest, GameRunWithStateThrowingStdException)
 {
     g->update(0.01f);
-    EXPECT_CALL(*state, doInternalUpdate(::testing::_))
-        .WillOnce(::testing::Invoke([](auto /*elapsed*/) {
-            throw std::invalid_argument { "deliberately raise exception." };
-        }));
+    EXPECT_CALL(*state, onUpdate(::testing::_)).WillOnce(::testing::Invoke([](auto /*elapsed*/) {
+        throw std::invalid_argument { "deliberately raise exception." };
+    }));
     g->stateManager().switchState(state);
     ASSERT_THROW(g->runOneFrame(), std::invalid_argument);
 }
@@ -89,8 +88,9 @@ TEST_F(GameTest, GameRunWithStateThrowingIntException)
 {
     g->update(0.01f);
 
-    ON_CALL(*state, doInternalUpdate(::testing::_))
-        .WillByDefault(::testing::Invoke([](auto /*elapsed*/) { throw int { 5 }; }));
+    ON_CALL(*state, onUpdate(::testing::_)).WillByDefault(::testing::Invoke([](auto /*elapsed*/) {
+        throw int { 5 };
+    }));
     g->stateManager().switchState(state);
     ASSERT_THROW(g->runOneFrame(), int);
 }

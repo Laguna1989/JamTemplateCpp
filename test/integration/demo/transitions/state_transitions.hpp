@@ -4,9 +4,10 @@
 #include <game_state.hpp>
 
 class StateTransitions : public jt::GameState {
-    void doInternalCreate() override;
-    void doInternalUpdate(float elapsed) override;
-    void doInternalDraw() const override;
+    void onCreate() override;
+    void onEnter() override;
+    void onUpdate(float elapsed) override;
+    void onDraw() const override;
 };
 
 #endif // JAMTEMPLATE_STATE_TRANSITIONS_HPP

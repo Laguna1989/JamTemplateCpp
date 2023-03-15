@@ -3,9 +3,10 @@
 #include <state_select.hpp>
 #include <imgui.h>
 
-void StateStoreGamestate::doInternalCreate() { }
-void StateStoreGamestate::doInternalUpdate(float /*elapsed*/) { }
-void StateStoreGamestate::doInternalDraw() const
+void StateStoreGamestate::onCreate() { }
+void StateStoreGamestate::onEnter() { }
+void StateStoreGamestate::onUpdate(float /*elapsed*/) { }
+void StateStoreGamestate::onDraw() const
 {
     ImGui::Begin("Store Gamestate");
 

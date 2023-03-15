@@ -9,7 +9,7 @@
 #include <tilemap/tilemap_helpers.hpp>
 #include <tilemap/tileson_loader.hpp>
 
-void StateTileson::doInternalCreate()
+void StateTileson::onCreate()
 {
     jt::tilemap::TilesonLoader loader { getGame()->cache().getTilemapCache(),
         "assets/test/integration/demo/tileson_test.json" };
@@ -31,11 +31,12 @@ void StateTileson::doInternalCreate()
     m_actor = std::make_shared<Actor>();
 
     add(m_actor);
-    m_actor->setPosition(jt::Vector2u { 5, 6 });
     setAutoDraw(false);
 }
 
-void StateTileson::doInternalUpdate(float const elapsed)
+void StateTileson::onEnter() { m_actor->setPosition(jt::Vector2u { 5, 6 }); }
+
+void StateTileson::onUpdate(float const elapsed)
 {
 
     m_tileLayerGround->update(elapsed);
@@ -99,7 +100,7 @@ void StateTileson::moveCamera(float const elapsed)
     }
 }
 
-void StateTileson::doInternalDraw() const
+void StateTileson::onDraw() const
 {
     drawObjects();
     drawTileLayers();

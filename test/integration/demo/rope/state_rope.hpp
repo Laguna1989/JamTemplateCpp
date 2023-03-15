@@ -20,16 +20,19 @@ public:
     std::string getName() const override;
 
 private:
+    void onCreate() override;
+    void onEnter() override;
+    void onUpdate(float elapsed) override;
+    void onDraw() const override;
+
     jt::Vector2f getRopeMassPosition(int i) const;
     std::shared_ptr<RopeMass> createRopeMassPointer(int i) const;
     void createSingleRopeMass(int i);
     void createAllRopeMasses();
-    void doInternalCreate() override;
+
     void resetAccelerations();
     void integrationStep(float elapsed);
     void calculateRopeForces();
-    void doInternalUpdate(float elapsed) override;
-    void doInternalDraw() const override;
 
     std::vector<std::shared_ptr<RopeMass>> m_rope_elements;
     jt::Vector2f const m_ropeStartingPoint { 200.0f, 20.0f };

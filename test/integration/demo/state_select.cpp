@@ -22,7 +22,7 @@
 #include <transitions/state_transitions.hpp>
 #include <tween/state_tween.hpp>
 
-void StateSelect::doInternalCreate()
+void StateSelect::onCreate()
 {
     AddButton<StateExplosion>("Explode");
     AddButton<StateSwarmObjects>("Swarm");
@@ -48,8 +48,9 @@ void StateSelect::doInternalCreate()
 
     add(std::make_shared<jt::LicenseInfo>());
 }
+void StateSelect::onEnter() { }
 
-void StateSelect::doInternalUpdate(float /*elapsed*/) { }
+void StateSelect::onUpdate(float /*elapsed*/) { }
 
-void StateSelect::doInternalDraw() const { }
+void StateSelect::onDraw() const { }
 std::string StateSelect::getName() const { return "State Demo Select"; }

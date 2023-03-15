@@ -5,15 +5,14 @@
 #include <string>
 
 class StateExplosion : public jt::GameState {
-private:
-    void doInternalCreate() override;
-
 public:
     std::string getName() const override;
 
 private:
-    void doInternalUpdate(float const /*elapsed*/) override;
-    void doInternalDraw() const override {};
+    void onCreate() override;
+    void onEnter() override;
+    void onUpdate(float const /*elapsed*/) override;
+    void onDraw() const override {};
 };
 
 #endif

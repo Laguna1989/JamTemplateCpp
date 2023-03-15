@@ -10,7 +10,7 @@
 #include <state_menu.hpp>
 #include <tweens/tween_alpha.hpp>
 
-void StateGame::doInternalCreate()
+void StateGame::onCreate()
 {
     m_world = std::make_shared<jt::Box2DWorldImpl>(jt::Vector2f { 0.0f, 0.0f });
 
@@ -43,7 +43,7 @@ void StateGame::createPlayer()
     add(m_player);
 }
 
-void StateGame::doInternalUpdate(float const elapsed)
+void StateGame::onUpdate(float const elapsed)
 {
     if (m_running) {
         m_world->step(elapsed, GP::PhysicVelocityIterations(), GP::PhysicPositionIterations());
@@ -62,7 +62,7 @@ void StateGame::doInternalUpdate(float const elapsed)
     m_vignette->update(elapsed);
 }
 
-void StateGame::doInternalDraw() const
+void StateGame::onDraw() const
 {
     m_background->draw(renderTarget());
     drawObjects();

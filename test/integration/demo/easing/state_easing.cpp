@@ -15,7 +15,7 @@
 #include <game_interface.hpp>
 #include <state_select.hpp>
 
-void StateEasing::doInternalCreate()
+void StateEasing::onCreate()
 {
     add(std::make_shared<EaseObject>(
         "back i", jt::ease::back::easeIn, jt::Vector2f { 0.0f, 0.0f }));
@@ -105,8 +105,9 @@ void StateEasing::doInternalCreate()
         std::make_shared<ControlCommandMoveCam>(
             jt::Vector2f { scrollSpeed, 0.0f }, getGame()->gfx().camera()));
 }
+void StateEasing::onEnter() { }
 
-void StateEasing::doInternalUpdate(float /*elapsed*/)
+void StateEasing::onUpdate(float /*elapsed*/)
 {
     if (getGame()->input().keyboard()->justPressed(jt::KeyCode::F1)
         || getGame()->input().keyboard()->justPressed(jt::KeyCode::Escape)) {
@@ -114,4 +115,4 @@ void StateEasing::doInternalUpdate(float /*elapsed*/)
     }
 }
 
-void StateEasing::doInternalDraw() const { }
+void StateEasing::onDraw() const { }

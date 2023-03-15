@@ -41,8 +41,8 @@ void jt::StateManager::doSwitchState(std::weak_ptr<jt::GameInterface> gameInstan
         m_nextState->setGameInstance(gameInstance);
         m_nextState->create();
     }
-    // TODO add enter functionality
-    //    m_nextNewState->enter();
+
+    m_nextState->enter();
 
     m_currentState = m_nextState;
     m_nextState = nullptr;

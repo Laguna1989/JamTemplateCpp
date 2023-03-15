@@ -21,7 +21,7 @@
 #include <algorithm>
 #include <iostream>
 
-void StateMenu::doInternalCreate()
+void StateMenu::onCreate()
 {
     createMenuText();
     createShapes();
@@ -182,7 +182,7 @@ void StateMenu::createTweenCreditsPosition()
     add(tweenVersion);
 }
 
-void StateMenu::doInternalUpdate(float const elapsed)
+void StateMenu::onUpdate(float const elapsed)
 {
     updateDrawables(elapsed);
     checkForTransitionToStateGame();
@@ -214,12 +214,12 @@ void StateMenu::startTransitionToStateGame()
 {
     if (!m_started) {
         m_started = true;
-
+        // TODO do not create a new Menu state but switch back to the stored one
         getGame()->stateManager().switchState(std::make_shared<StateGame>());
     }
 }
 
-void StateMenu::doInternalDraw() const
+void StateMenu::onDraw() const
 {
     m_background->draw(renderTarget());
 

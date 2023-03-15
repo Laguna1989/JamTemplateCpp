@@ -6,9 +6,10 @@
 #include <state_select.hpp>
 #include <imgui.h>
 
-void StateTransitions::doInternalCreate() { }
-void StateTransitions::doInternalUpdate(float /*elapsed*/) { }
-void StateTransitions::doInternalDraw() const
+void StateTransitions::onCreate() { }
+void StateTransitions::onEnter() { }
+void StateTransitions::onUpdate(float /*elapsed*/) { }
+void StateTransitions::onDraw() const
 {
     ImGui::Begin("Transitions");
     if (ImGui::Button("None")) {

@@ -7,7 +7,7 @@
 #include <state_select.hpp>
 #include <timer.hpp>
 
-void StateScroll::doInternalCreate()
+void StateScroll::onCreate()
 {
     m_background = jt::dh::createShapeRect(
         jt::Vector2f { 400.0f, 300.0f }, jt::Color { 20, 20, 150 }, textureManager());
@@ -83,7 +83,9 @@ void StateScroll::doInternalCreate()
     add(t3);
 }
 
-void StateScroll::doInternalUpdate(float const elapsed)
+void StateScroll::onEnter() { }
+
+void StateScroll::onUpdate(float const elapsed)
 {
     if (getGame()->input().keyboard()->justPressed(jt::KeyCode::F1)
         || getGame()->input().keyboard()->justPressed(jt::KeyCode::Escape)) {
@@ -109,7 +111,7 @@ void StateScroll::doInternalUpdate(float const elapsed)
     m_line->update(elapsed);
 }
 
-void StateScroll::doInternalDraw() const
+void StateScroll::onDraw() const
 {
     m_background->draw(renderTarget());
 

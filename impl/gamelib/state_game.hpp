@@ -33,9 +33,9 @@ private:
     int m_scoreP1 { 0 };
     int m_scoreP2 { 0 };
 
-    void doInternalCreate() override;
-    void doInternalUpdate(float const elapsed) override;
-    void doInternalDraw() const override;
+    void onCreate() override;
+    void onUpdate(float const elapsed) override;
+    void onDraw() const override;
 
     void endGame();
     void createPlayer();

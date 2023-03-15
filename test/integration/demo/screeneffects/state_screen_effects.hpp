@@ -36,9 +36,11 @@ class StateScreenEffects : public jt::GameState {
     mutable float m_windStrength { 1.0f };
     std::shared_ptr<jt::WindParticles> m_wind { nullptr };
 
-    void doInternalCreate() override;
-    void doInternalUpdate(float elapsed) override;
-    void doInternalDraw() const override;
+    void onCreate() override;
+    void onEnter() override;
+    void onUpdate(float elapsed) override;
+    void onDraw() const override;
+
     void scroll(float elapsed);
     void drawGui() const;
 };

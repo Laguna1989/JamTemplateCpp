@@ -4,7 +4,7 @@
 #include <state_select.hpp>
 #include <imgui.h>
 
-void StateAudio::doInternalCreate()
+void StateAudio::onCreate()
 {
     // check if music was already created
     m_sound = getGame()->audio().getPermanentSound("music");
@@ -34,8 +34,9 @@ void StateAudio::doInternalCreate()
     }
     m_soundGroup = getGame()->audio().addTemporarySoundGroup(soundGroupSounds);
 }
+void StateAudio::onEnter() { }
 
-void StateAudio::doInternalUpdate(float /*elapsed*/)
+void StateAudio::onUpdate(float /*elapsed*/)
 {
     for (auto const& kvp : m_volumes) {
         getGame()->audio().groups().setGroupVolume(kvp.first, kvp.second);
@@ -49,7 +50,7 @@ void StateAudio::doInternalUpdate(float /*elapsed*/)
     }
 }
 
-void StateAudio::doInternalDraw() const
+void StateAudio::onDraw() const
 {
     ImGui::Begin("Sound");
     ImGui::Text("Volume Groups");

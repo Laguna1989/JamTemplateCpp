@@ -17,9 +17,10 @@ public:
     std::string getName() const override { return "GameStateImpl"; }
 
 private:
-    virtual void doInternalDraw() const override { }
-    virtual void doInternalCreate() override { }
-    virtual void doInternalUpdate(float /*elapsed*/) override { }
+    virtual void onCreate() override { }
+    void onEnter() override { }
+    virtual void onUpdate(float /*elapsed*/) override { }
+    virtual void onDraw() const override { }
 };
 
 class GamestateInitialTest : public ::testing::Test {
