@@ -69,6 +69,10 @@ void jt::Logger::addLogEntry(jt::LogEntry entry)
         t->log(entry);
     }
     m_history.push_back(entry);
+
+    if (m_history.size() > 300) {
+        m_history.erase(m_history.begin(), m_history.begin() + 150);
+    }
 }
 
 std::vector<jt::LogEntry> const& jt::Logger::getHistory() { return m_history; }

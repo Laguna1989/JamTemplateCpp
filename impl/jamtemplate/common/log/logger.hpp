@@ -19,6 +19,9 @@ public:
     void addLogTarget(std::shared_ptr<LogTargetInterface> target) override;
     void setLogLevel(LogLevel level) override;
 
+    /// Returns the history.
+    /// \return vector of log entries. Note: Do not keep the reference as the vector might be
+    /// modified and thus re-allocate.
     std::vector<jt::LogEntry> const& getHistory() override;
     void clear() override;
 

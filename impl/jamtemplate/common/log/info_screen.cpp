@@ -72,7 +72,7 @@ void jt::InfoScreen::doDraw() const
             = "# GameObjects (created): " + std::to_string(getNumberOfCreatedGameObjects());
         ImGui::Text("%s", createdGameObjectsText.c_str());
 
-        ImGui::PlotLines("AliveGameObjects [#] = %s", m_GameObjectAliveCountVector.data(),
+        ImGui::PlotLines("AliveGameObjects [#]", m_GameObjectAliveCountVector.data(),
             static_cast<int>(m_GameObjectAliveCountVector.size()), 0, nullptr, 0, FLT_MAX,
             ImVec2 { 0, 100 });
 
