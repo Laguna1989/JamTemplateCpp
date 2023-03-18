@@ -1,9 +1,12 @@
 #ifndef JAMTEMPLATE_LOG_TARGET_INTERFACE_HPP
 #define JAMTEMPLATE_LOG_TARGET_INTERFACE_HPP
 
-#include <log/log_entry.hpp>
+#include <log/log_level.hpp>
 
 namespace jt {
+
+struct LogEntry;
+
 class LogTargetInterface {
 public:
     virtual ~LogTargetInterface() = default;

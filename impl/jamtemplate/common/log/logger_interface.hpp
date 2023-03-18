@@ -2,12 +2,14 @@
 #define JAMTEMPLATE_LOG_INTERFACE_HPP
 
 #include <log/log_entry.hpp>
-#include <log/log_target_interface.hpp>
 #include <memory>
 #include <string>
 #include <vector>
 
 namespace jt {
+
+class LogTargetInterface;
+
 class LoggerInterface {
 public:
     virtual ~LoggerInterface() = default;
@@ -15,32 +17,32 @@ public:
     /// Log a fatal message
     /// \param string the log message
     /// \param tags the message tags
-    virtual void fatal(std::string const& string, std::vector<std::string> tags = {}) = 0;
+    virtual void fatal(std::string const& string, std::vector<std::string> const& tags = {}) = 0;
 
     /// Log a error message
     /// \param string the log message
     /// \param tags the message tags
-    virtual void error(std::string const& string, std::vector<std::string> tags = {}) = 0;
+    virtual void error(std::string const& string, std::vector<std::string> const& tags = {}) = 0;
 
     /// Log a warning message
     /// \param string the log message
     /// \param tags the message tags
-    virtual void warning(std::string const& string, std::vector<std::string> tags = {}) = 0;
+    virtual void warning(std::string const& string, std::vector<std::string> const& tags = {}) = 0;
 
     /// Log a info message
     /// \param string the log message
     /// \param tags the message tags
-    virtual void info(std::string const& string, std::vector<std::string> tags = {}) = 0;
+    virtual void info(std::string const& string, std::vector<std::string> const& tags = {}) = 0;
 
     /// Log a debug message
     /// \param string the log message
     /// \param tags the message tags
-    virtual void debug(std::string const& string, std::vector<std::string> tags = {}) = 0;
+    virtual void debug(std::string const& string, std::vector<std::string> const& tags = {}) = 0;
 
     /// Log a verbose message
     /// \param string the log message
     /// \param tags the message tags
-    virtual void verbose(std::string const& string, std::vector<std::string> tags = {}) = 0;
+    virtual void verbose(std::string const& string, std::vector<std::string> const& tags = {}) = 0;
 
     /// Log a action message (from the console
     /// \param string the log message

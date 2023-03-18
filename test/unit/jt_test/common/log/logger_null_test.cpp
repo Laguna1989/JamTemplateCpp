@@ -1,3 +1,4 @@
+#include <log/log_level.hpp>
 #include <log/log_target_ostream.hpp>
 #include <log/logger_null.hpp>
 #include <gtest/gtest.h>
@@ -45,7 +46,7 @@ TEST(LoggerNullTest, HistoryIsEmptyAfterLogging)
 TEST(LoggerNullTest, SetLogLevelDoesNothing)
 {
     jt::null_objects::LoggerNull logger;
-    ASSERT_NO_THROW(logger.setLogLevel(LogLevel::LogLevelFatal));
+    ASSERT_NO_THROW(logger.setLogLevel(jt::LogLevel::LogLevelFatal));
 }
 
 TEST(LoggerNullTest, ClearDoesNothing)

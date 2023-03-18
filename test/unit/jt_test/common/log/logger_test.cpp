@@ -4,8 +4,7 @@
 #include <gtest/gtest.h>
 
 template <typename T>
-class LoggerTypedTestFixture : public ::testing::Test {
-};
+class LoggerTypedTestFixture : public ::testing::Test { };
 
 using MyTypes = testing::Types<jt::Logger, jt::null_objects::LoggerNull>;
 TYPED_TEST_SUITE(LoggerTypedTestFixture, MyTypes);
@@ -82,7 +81,7 @@ TEST(LoggerTest, LogToMockTarget)
 TYPED_TEST(LoggerTypedTestFixture, SetLogLevelDoesNotRaiseException)
 {
     TypeParam logger;
-    ASSERT_NO_THROW(logger.setLogLevel(LogLevel::LogLevelInfo));
+    ASSERT_NO_THROW(logger.setLogLevel(jt::LogLevel::LogLevelInfo));
 }
 
 TYPED_TEST(LoggerTypedTestFixture, ClearDoesNotRaiseException)

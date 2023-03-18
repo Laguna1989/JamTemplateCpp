@@ -1,4 +1,5 @@
 #include "log_target_ostream.hpp"
+#include <log/log_entry.hpp>
 #include <iostream>
 
 jt::LogTargetOstream::LogTargetOstream(std::ostream& stream)

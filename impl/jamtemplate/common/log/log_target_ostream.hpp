@@ -1,11 +1,13 @@
 #ifndef JAMTEMPLATE_LOG_TARGET_OSTREAM_HPP
 #define JAMTEMPLATE_LOG_TARGET_OSTREAM_HPP
 
+#include <log/log_level.hpp>
 #include <log/log_target_interface.hpp>
 #include <iostream>
 #include <ostream>
 
 namespace jt {
+struct LogEntry;
 class LogTargetOstream : public LogTargetInterface {
 public:
     explicit LogTargetOstream(std::ostream& stream = std::cout);
