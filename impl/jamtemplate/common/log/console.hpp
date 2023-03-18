@@ -3,7 +3,7 @@
 
 #include <game_object.hpp>
 #include <log/log_entry.hpp>
-#include <log/logger_interface.hpp>
+#include <log/log_history_interface.hpp>
 #include <imgui.h>
 #include <memory>
 #include <string>
@@ -13,12 +13,12 @@ namespace jt {
 
 class Console : public jt::GameObject {
 public:
-    explicit Console(jt::LoggerInterface& logger);
+    Console();
 
     int inputUserCallback(ImGuiInputTextCallbackData* data);
 
 private:
-    LoggerInterface& m_logger;
+    std::shared_ptr<jt::LogHistoryInterface> m_history;
 
     mutable bool m_showConsole { false };
     mutable bool m_focus { false };
@@ -31,6 +31,7 @@ private:
     mutable bool m_drawTag { true };
     mutable bool m_drawTime { false };
 
+    void doCreate() override;
     void doUpdate(float const /*elapsed*/) override;
     void doDraw() const override;
 

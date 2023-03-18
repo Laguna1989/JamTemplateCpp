@@ -4,12 +4,13 @@
 #include <imgui.h>
 #include <string.h>
 
-jt::Console::Console(jt::LoggerInterface& logger)
-    : m_logger { logger }
+jt::Console::Console()
 {
     m_inputBufferAction.resize(500);
     m_inputBufferFilter.resize(200);
 }
+
+void jt::Console::doCreate() { m_history = getGame()->cache().getLogHistory(); }
 
 void jt::Console::doUpdate(float const /*elapsed*/)
 {
@@ -48,7 +49,7 @@ void jt::Console::doDraw() const
             = ImGui::GetStyle().ItemSpacing.y + ImGui::GetFrameHeightWithSpacing();
         ImGui::BeginChild("ScrollingRegion", ImVec2(0, -footer_height_to_reserve), false,
             ImGuiWindowFlags_HorizontalScrollbar);
-        for (auto& entry : m_logger.getHistory()) {
+        for (auto& entry : m_history->getHistory()) {
             renderOneLogEntry(entry);
         }
         if (ImGui::GetScrollY() >= ImGui::GetScrollMaxY())
@@ -101,7 +102,7 @@ void jt::Console::storeActionInCommand() const
     m_lastCommand = str;
     m_historyPos = -1;
     History.push_back(m_lastCommand);
-    m_logger.action(str);
+    getGame()->logger().action(str);
 }
 void jt::Console::clearInput() const { strcpy(m_inputBufferAction.data(), ""); }
 

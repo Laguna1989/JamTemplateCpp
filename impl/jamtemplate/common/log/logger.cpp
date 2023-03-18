@@ -1,8 +1,13 @@
 #include "logger.hpp"
+#include <log/log_entry.hpp>
+#include <log/log_history_interface.hpp>
 #include <log/log_target_interface.hpp>
+#include <system_helper.hpp>
 #include <chrono>
 #include <sstream>
 #include <stdexcept>
+
+jt::Logger::Logger(std::weak_ptr<jt::LogHistoryInterface> history) { m_history = history; }
 
 void jt::Logger::action(std::string const& string)
 {
@@ -69,13 +74,22 @@ void jt::Logger::addLogEntry(jt::LogEntry entry)
     for (auto& t : m_logTargets) {
         t->log(entry);
     }
-    m_history.push_back(entry);
-
-    if (m_history.size() > 300) {
-        m_history.erase(m_history.begin(), m_history.begin() + 150);
-    }
+    addLogEntryToHistory(entry);
 }
 
-std::vector<jt::LogEntry> const& jt::Logger::getHistory() { return m_history; }
+void jt::Logger::addLogEntryToHistory(jt::LogEntry const& entry) const
+{
+    if (SystemHelper::is_uninitialized_weak_ptr(m_history)) {
+        return;
+    }
+    if (m_history.expired()) {
+        return;
+    }
+    auto const h = m_history.lock();
+    if (h == nullptr) {
+        return;
+    }
+    h->addEntry(entry);
+}
+
 void jt::Logger::setLogLevel(LogLevel level) { m_logLevel = level; }
-void jt::Logger::clear() { m_history.clear(); }

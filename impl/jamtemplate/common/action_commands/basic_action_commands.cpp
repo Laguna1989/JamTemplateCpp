@@ -17,7 +17,7 @@ void addCommandHelp(std::shared_ptr<jt::GameBase>& game)
 void addCommandClear(std::shared_ptr<jt::GameBase>& game)
 {
     game->storeActionCommand(game->actionCommandManager().registerTemporaryCommand(
-        "clear", [&logger = game->logger()](auto /*args*/) { logger.clear(); }));
+        "clear", [history = game->cache().getLogHistory()](auto /*args*/) { history->clear(); }));
 }
 
 void addCommandsCam(std::shared_ptr<jt::GameBase>& game)

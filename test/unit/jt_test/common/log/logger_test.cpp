@@ -9,12 +9,6 @@ class LoggerTypedTestFixture : public ::testing::Test { };
 using MyTypes = testing::Types<jt::Logger, jt::null_objects::LoggerNull>;
 TYPED_TEST_SUITE(LoggerTypedTestFixture, MyTypes);
 
-TYPED_TEST(LoggerTypedTestFixture, GetCompleteLogIsEmptyByDefault)
-{
-    TypeParam logger;
-    ASSERT_TRUE(logger.getHistory().empty());
-}
-
 TYPED_TEST(LoggerTypedTestFixture, AddNullptrLogTarget)
 {
     TypeParam logger;
@@ -71,7 +65,7 @@ TYPED_TEST(LoggerTypedTestFixture, VerboseDoesNotRaiseException)
 
 TEST(LoggerTest, LogToMockTarget)
 {
-    jt::Logger logger;
+    jt::Logger logger {};
     auto target = std::make_shared<MockLogTarget>();
     logger.addLogTarget(target);
     EXPECT_CALL(*target, log(::testing::_));
@@ -82,10 +76,4 @@ TYPED_TEST(LoggerTypedTestFixture, SetLogLevelDoesNotRaiseException)
 {
     TypeParam logger;
     ASSERT_NO_THROW(logger.setLogLevel(jt::LogLevel::LogLevelInfo));
-}
-
-TYPED_TEST(LoggerTypedTestFixture, ClearDoesNotRaiseException)
-{
-    TypeParam logger;
-    ASSERT_NO_THROW(logger.clear());
 }

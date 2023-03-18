@@ -34,7 +34,9 @@ int main()
 {
     jt::Random::useTimeAsRandomSeed();
 
-    jt::Logger logger;
+    jt::CacheImpl cache {};
+
+    jt::Logger logger { cache.getLogHistory() };
     jt::createDefaultLogTargets(logger);
 
     auto const mouse = std::make_shared<jt::MouseInput>();
@@ -57,8 +59,6 @@ int main()
     jt::LoggingStateManager loggingStateManager { stateManager, logger };
 
     jt::ActionCommandManager actionCommandManager { logger };
-
-    jt::CacheImpl cache;
 
     game = std::make_shared<jt::Game>(
         gfx, input, loggingAudio, loggingStateManager, logger, actionCommandManager, cache);

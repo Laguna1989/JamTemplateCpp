@@ -43,7 +43,7 @@ void jt::GameState::internalCreate()
 {
     getGame()->logger().debug("create GameState: " + getName(), { "jt", "GameState" });
     onCreate();
-    add(std::make_shared<jt::Console>(getGame()->logger()));
+    add(std::make_shared<jt::Console>());
     add(std::make_shared<jt::InfoScreen>());
     start();
 }

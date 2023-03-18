@@ -1,6 +1,7 @@
 ﻿#ifndef INCLUDE_MOCKGAME_HPP
 #define INCLUDE_MOCKGAME_HPP
 
+#include <cache_null.hpp>
 #include <game_interface.hpp>
 #include <graphics/render_window_null.hpp>
 #include <log/logger_null.hpp>
@@ -13,6 +14,7 @@ public:
     {
         ON_CALL(*this, logger).WillByDefault(::testing::ReturnRef(m_logger));
         ON_CALL(*this, gfx).WillByDefault(::testing::ReturnRef(m_gfx));
+        ON_CALL(*this, cache).WillByDefault(::testing::ReturnRef(m_cache));
     }
 
     MOCK_METHOD(jt::GfxInterface&, gfx, (), (const, override));
@@ -34,6 +36,7 @@ public:
 protected:
     MOCK_METHOD(std::weak_ptr<jt::GameInterface>, getPtr, (), (override));
     jt::null_objects::LoggerNull m_logger;
+    jt::CacheNull m_cache;
 };
 
 #endif

@@ -30,27 +30,8 @@ TEST(LoggerNullTest, AddValidLogTargetDoesNothing)
     ASSERT_NO_THROW(logger.addLogTarget(std::make_shared<jt::LogTargetOstream>()));
 }
 
-TEST(LoggerNullTest, HistoryIsEmptyInitially)
-{
-    jt::null_objects::LoggerNull logger;
-    ASSERT_TRUE(logger.getHistory().empty());
-}
-
-TEST(LoggerNullTest, HistoryIsEmptyAfterLogging)
-{
-    jt::null_objects::LoggerNull logger;
-    logger.fatal("test");
-    ASSERT_TRUE(logger.getHistory().empty());
-}
-
 TEST(LoggerNullTest, SetLogLevelDoesNothing)
 {
     jt::null_objects::LoggerNull logger;
     ASSERT_NO_THROW(logger.setLogLevel(jt::LogLevel::LogLevelFatal));
-}
-
-TEST(LoggerNullTest, ClearDoesNothing)
-{
-    jt::null_objects::LoggerNull logger;
-    ASSERT_NO_THROW(logger.clear());
 }

@@ -28,6 +28,4 @@ void jt::null_objects::LoggerNull::verbose(
 {
 }
 void jt::null_objects::LoggerNull::addLogTarget(std::shared_ptr<LogTargetInterface> /*target*/) { }
-std::vector<jt::LogEntry> const& jt::null_objects::LoggerNull::getHistory() { return m_history; }
 void jt::null_objects::LoggerNull::setLogLevel(LogLevel /*level*/) { }
-void jt::null_objects::LoggerNull::clear() { }

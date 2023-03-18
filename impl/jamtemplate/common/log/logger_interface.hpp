@@ -1,7 +1,7 @@
 #ifndef JAMTEMPLATE_LOG_INTERFACE_HPP
 #define JAMTEMPLATE_LOG_INTERFACE_HPP
 
-#include <log/log_entry.hpp>
+#include <log/log_level.hpp>
 #include <memory>
 #include <string>
 #include <vector>
@@ -53,15 +53,8 @@ public:
     /// \param target the target to be added
     virtual void addLogTarget(std::shared_ptr<LogTargetInterface> target) = 0;
 
-    /// Get the history of log entries
-    /// \return
-    virtual std::vector<jt::LogEntry> const& getHistory() = 0;
-
-    /// Clear all log entries
-    virtual void clear() = 0;
-
     /// Set the overall log level
-    virtual void setLogLevel(LogLevel level) = 0;
+    virtual void setLogLevel(jt::LogLevel level) = 0;
 };
 } // namespace jt
 

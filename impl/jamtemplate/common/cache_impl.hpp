@@ -6,11 +6,15 @@
 namespace jt {
 class CacheImpl : public jt::CacheInterface {
 public:
-    explicit CacheImpl(std::unique_ptr<jt::TilemapCacheInterface> tilemapCache = nullptr);
+    CacheImpl(std::unique_ptr<jt::TilemapCacheInterface> tilemapCache = nullptr,
+        std::shared_ptr<jt::LogHistoryInterface> logHistory = nullptr);
+
     jt::TilemapCacheInterface& getTilemapCache() override;
+    std::shared_ptr<jt::LogHistoryInterface> getLogHistory() override;
 
 private:
     std::unique_ptr<jt::TilemapCacheInterface> m_tilemapCache { nullptr };
+    std::shared_ptr<jt::LogHistoryInterface> m_logHistory { nullptr };
 };
 
 } // namespace jt
