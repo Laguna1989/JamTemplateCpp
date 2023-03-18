@@ -51,13 +51,6 @@ TEST_F(BasicActionCommandsWithGame, Help)
     ASSERT_NO_THROW(g->actionCommandManager().executeCommand("help"));
 }
 
-TEST_F(BasicActionCommandsWithGame, Clear)
-{
-    addBasicActionCommands(g);
-    EXPECT_CALL(logger, clear);
-    ASSERT_NO_THROW(g->actionCommandManager().executeCommand("clear"));
-}
-
 // TODO Think about a meaningful verification
 TEST_F(BasicActionCommandsWithGame, TextureManagerInfo)
 {

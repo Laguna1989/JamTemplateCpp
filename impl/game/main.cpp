@@ -62,7 +62,7 @@ int main()
 
     jt::ActionCommandManager actionCommandManager(logger);
 
-    jt::CacheImpl cache;
+    jt::CacheImpl cache(nullptr);
 
     game = std::make_shared<jt::Game>(
         gfx, input, loggingAudio, loggingStateManager, logger, actionCommandManager, cache);

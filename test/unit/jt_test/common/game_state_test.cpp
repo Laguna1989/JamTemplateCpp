@@ -52,7 +52,7 @@ TEST_F(GamestateInitialTest, InitialAutoDraw) { ASSERT_TRUE(gamestate.getAutoDra
 
 class GameStateTest : public ::testing::Test {
 public:
-    std::shared_ptr<MockGame> game;
+    std::shared_ptr<::testing::NiceMock<MockGame>> game;
     GameStateImpl gamestate;
     std::shared_ptr<MockObject> mockObject;
     MockGfx gfx;
@@ -61,7 +61,7 @@ public:
 
     void SetUp() override
     {
-        game = std::make_shared<MockGame>();
+        game = std::make_shared<::testing::NiceMock<MockGame>>();
         ON_CALL(*game, gfx).WillByDefault(::testing::ReturnRef(gfx));
         ON_CALL(gfx, window).WillByDefault(::testing::ReturnRef(window));
         ON_CALL(*game, input).WillByDefault(::testing::ReturnRef(input));

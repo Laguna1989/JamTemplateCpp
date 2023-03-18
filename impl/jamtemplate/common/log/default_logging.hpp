@@ -5,9 +5,7 @@
 
 namespace jt {
 
-// TODO place in class
-
-/// create a default log target
+/// create default log targets (file and cout)
 /// \param logger the logger to be used
 void createDefaultLogTargets(LoggerInterface& logger);
 
