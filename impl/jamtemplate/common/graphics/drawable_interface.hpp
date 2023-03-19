@@ -48,7 +48,7 @@ public:
     /// \param duration how long the flicker will take
     /// \param interval how fast the flicker will switch
     /// \param affectShadow if the shadow is also affected by the flicker effect
-    virtual void flicker(float duration, float interval = 0.05f, bool affectShadow = false) = 0;
+    virtual void flicker(float duration, float interval = 0.05f) = 0;
 
     /// update the drawable
     /// \param elapsed the time elapsed (in seconds)

@@ -15,7 +15,7 @@ public:
     MOCK_METHOD(void, flash, (float, jt::Color), (override));
     MOCK_METHOD(void, shake, (float, float, float), (override));
 
-    MOCK_METHOD(void, flicker, (float, float, bool), (override));
+    MOCK_METHOD(void, flicker, (float, float), (override));
 
     MOCK_METHOD(void, setColor, (jt::Color const&), (override));
     MOCK_METHOD(jt::Color, getColor, (), (const, override));

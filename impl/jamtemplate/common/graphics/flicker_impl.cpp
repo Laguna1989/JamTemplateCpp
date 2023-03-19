@@ -19,11 +19,9 @@ bool jt::FlickerImpl::allowDrawFromFlicker() const
     return m_doDraw;
 }
 
-void jt::FlickerImpl::doFlicker(float duration, float interval, bool affectShadow)
+void jt::FlickerImpl::doFlicker(float duration, float interval)
 {
     m_flickerTimer = duration;
     m_flickerInterval = interval;
     m_flickerIntervalTimer = 0.0f;
-    m_affectShadow = affectShadow;
 }
-bool jt::FlickerImpl::doesFlickerAffectsShadow() const { return m_affectShadow; }

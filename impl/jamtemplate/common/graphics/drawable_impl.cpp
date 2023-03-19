@@ -3,8 +3,7 @@
 
 jt::Vector2f jt::DrawableImpl::m_CamOffset { 0.0f, 0.0f };
 
-void jt::DrawableImpl::draw(
-    std::shared_ptr<jt::RenderTargetInterface> targetContainer) const
+void jt::DrawableImpl::draw(std::shared_ptr<jt::RenderTargetInterface> targetContainer) const
 {
     if (!m_hasBeenUpdated) {
         std::cout << "WARNING: Calling DrawableImpl::draw() without previous call to "
@@ -22,13 +21,9 @@ void jt::DrawableImpl::draw(
 void jt::DrawableImpl::draw(std::shared_ptr<RenderTargetLayer> sptr) const
 {
     if (isVisible()) {
-        if (!doesFlickerAffectsShadow()) {
-            drawShadow(sptr);
-        }
         if (allowDrawFromFlicker()) {
-            if (doesFlickerAffectsShadow()) {
-                drawShadow(sptr);
-            }
+
+            drawShadow(sptr);
             doDraw(sptr);
             drawFlash(sptr);
         }
@@ -42,10 +37,7 @@ void jt::DrawableImpl::shake(float t, float strength, float shakeInterval)
     doShake(t, strength, shakeInterval);
 }
 
-void jt::DrawableImpl::flicker(float duration, float interval, bool affectShadow)
-{
-    doFlicker(duration, interval, affectShadow);
-}
+void jt::DrawableImpl::flicker(float duration, float interval) { doFlicker(duration, interval); }
 
 void jt::DrawableImpl::update(float elapsed)
 {

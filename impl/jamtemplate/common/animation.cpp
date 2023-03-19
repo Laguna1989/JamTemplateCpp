@@ -217,6 +217,16 @@ void jt::Animation::setOriginInternal(jt::Vector2f const& origin)
     }
 }
 
+void jt::Animation::setShadow(jt::Color const& col, jt::Vector2f const& offset)
+{
+    DrawableImpl::setShadow(col, offset);
+    for (auto const& kvp : m_frames) {
+        for (auto const& sptr : kvp.second) {
+            sptr->setShadow(col, offset);
+        }
+    }
+}
+
 void jt::Animation::setShadowActive(bool active)
 {
     DrawableImpl::setShadowActive(active);
