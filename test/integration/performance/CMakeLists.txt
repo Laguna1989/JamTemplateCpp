@@ -11,4 +11,12 @@ add_executable(jt_performance ${PERFORMANCEFILES})
 target_link_libraries(jt_performance benchmark::benchmark)
 target_link_libraries(jt_performance JamTemplateLib)
 
+if (MSVC)
+    target_compile_options(jt_performance PRIVATE "/W3")
+    target_compile_options(jt_performance PRIVATE "/EHsc")
+else ()
+    target_compile_options(jt_performance PRIVATE "-Wall")
+    target_compile_options(jt_performance PRIVATE "-Wextra")
+endif ()
+
 jt_use_assets(jt_performance)

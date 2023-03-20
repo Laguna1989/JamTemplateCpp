@@ -9,6 +9,7 @@ SDL_BlendMode jt::DrawableImplSdl::getSDLBlendMode() const
     } else if (getBlendMode() == jt::BlendMode::MUL) {
         return SDL_BLENDMODE_MOD;
     }
+    return SDL_BLENDMODE_ADD;
 }
 
 void jt::DrawableImplSdl::setOriginInternal(jt::Vector2f const& origin)

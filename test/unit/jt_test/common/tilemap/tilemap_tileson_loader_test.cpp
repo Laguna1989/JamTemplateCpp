@@ -37,7 +37,6 @@ TEST(TilesonLoaderTestNodes, LoadedNodesAreSortedYFirst)
 
 TEST(TilesonLoaderTestCollisions, LoadsCorrectAmountOfCollisions)
 {
-    jt::TextureManagerInterface& textureManager { getTextureManager() };
     jt::tilemap::TilesonLoader loader(cache, "assets/test/unit/jt_test/tileson_test.json");
 
     auto const collisions = loader.loadCollisionsFromLayer("ground");
@@ -46,7 +45,6 @@ TEST(TilesonLoaderTestCollisions, LoadsCorrectAmountOfCollisions)
 
 TEST(TilesonLoaderTestCollisions, LoadedCollidersAreSortedYFirst)
 {
-    jt::TextureManagerInterface& textureManager { getTextureManager() };
     jt::tilemap::TilesonLoader loader(cache, "assets/test/unit/jt_test/tileson_test.json");
 
     auto const collisions = loader.loadCollisionsFromLayer("ground");
@@ -58,7 +56,6 @@ TEST(TilesonLoaderTestCollisions, LoadedCollidersAreSortedYFirst)
 
 TEST(TilesonLoaderTest, MapSizeInTiles)
 {
-    jt::TextureManagerInterface& textureManager { getTextureManager() };
     jt::tilemap::TilesonLoader loader(cache, "assets/test/unit/jt_test/tileson_test_small.json");
     jt::Vector2u const expectedValue { 14U, 15U };
     ASSERT_EQ(loader.getMapSizeInTiles(), expectedValue);

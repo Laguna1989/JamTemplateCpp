@@ -23,7 +23,7 @@ endif ()
 
 if (JT_ENABLE_WEB)
     add_compile_definitions(MUSIC_OGG)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -g --std=c++17 -fpermissive ")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -s USE_SDL=2")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -s USE_SDL_IMAGE=2 -s SDL2_IMAGE_FORMATS='[\"bmp\",\"png\"]'")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -s USE_VORBIS=1 -s USE_OGG=1")
@@ -33,25 +33,10 @@ if (JT_ENABLE_WEB)
             "SHELL:-s ALLOW_MEMORY_GROWTH=1"
             "SHELL:--use-preload-plugins"
             "SHELL:--preload-file assets")
-else ()
-    if (MSVC)
-        ## disable warnings from external libraries:
-        ## * 5205 from tileson
-        ## * 4005 from better enums
-        ## the warning level for those is set to 4 (disable) while general warning level is 3
-        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /w45205 /w44005 /W3 /EHsc")
-    else ()
-        if (NOT CMAKE_CXX_COMPILER_ID MATCHES "^(Apple)?Clang$")
-            set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -lstdc++fs")
-        endif ()
-        if (JT_ENABLE_PERFORMANCETESTS)
-            set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra --std=c++17 -fpermissive")
-        else ()
-            set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra --std=c++17 -fpermissive")
-        endif ()
-    endif ()
+elseif (MSVC)
+elseif (NOT CMAKE_CXX_COMPILER_ID MATCHES "^(Apple)?Clang$")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -lstdc++fs")
 endif ()
-
 
 ## set include for mac homebrew
 #####################################################

@@ -48,7 +48,7 @@ void jt::InfoScreen::doDraw() const
     }
     if (!ImGui::CollapsingHeader("GameStates")) {
         auto const states = getGame()->stateManager().getStoredStateIdentifiers();
-        ImGui::Text("Stored States: %i", states.size());
+        ImGui::Text("Stored States: %zu", states.size());
         for (auto const& s : states) {
             ImGui::Text("   %s", s.c_str());
         }

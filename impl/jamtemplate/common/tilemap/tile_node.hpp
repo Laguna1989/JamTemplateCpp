@@ -23,8 +23,8 @@ public:
     void reset();
 
 private:
-    std::shared_ptr<jt::DrawableInterface> m_drawable;
     std::shared_ptr<jt::pathfinder::NodeInterface> m_node;
+    std::shared_ptr<jt::DrawableInterface> m_drawable;
 };
 
 } // namespace tilemap
