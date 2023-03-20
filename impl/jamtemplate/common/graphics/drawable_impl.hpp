@@ -34,7 +34,7 @@ public:
 
     void flash(float t, jt::Color col = jt::colors::White) override;
     void shake(float t, float strength, float shakeInterval = 0.05f) override;
-    void flicker(float duration, float interval = 0.05f, bool affectShadow = false) override;
+    void flicker(float duration, float interval = 0.05f) override;
     void update(float elapsed) override;
 
     Vector2f getScreenPosition() const override;

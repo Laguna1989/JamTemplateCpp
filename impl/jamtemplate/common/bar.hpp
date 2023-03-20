@@ -62,6 +62,9 @@ public:
     virtual void setScale(jt::Vector2f const& scale) override;
     virtual jt::Vector2f getScale() const override;
 
+    void setShadowActive(bool active) override;
+    void setShadow(jt::Color const& color, jt::Vector2f const& offset) override;
+
 private:
     float m_valueMax;
     float m_valueCurrent;

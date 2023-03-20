@@ -117,3 +117,15 @@ void jt::Bar::setScale(jt::Vector2f const& scale)
 }
 
 jt::Vector2f jt::Bar::getScale() const { return m_shapeFull->getScale(); }
+
+void jt::Bar::setShadowActive(bool active)
+{
+    m_shapeFull->setShadowActive(active);
+    DrawableImpl::setShadowActive(active);
+}
+
+void jt::Bar::setShadow(jt::Color const& color, jt::Vector2f const& offset)
+{
+    m_shapeFull->setShadow(color, offset);
+    DrawableImpl::setShadow(color, offset);
+}
