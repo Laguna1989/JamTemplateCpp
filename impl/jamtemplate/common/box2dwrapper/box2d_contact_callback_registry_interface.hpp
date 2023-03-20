@@ -11,8 +11,6 @@ namespace jt {
 
 class Box2DContactCallbackRegistryInterface {
 public:
-    virtual ~Box2DContactCallbackRegistryInterface() = default;
-
     /// Get the number of registered callbacks.
     /// \return the number of registered callbacks
     virtual std::size_t size() const = 0;
@@ -32,6 +30,20 @@ public:
     /// Get a vector of all identifier strings.
     /// \return the vector of identifiers.
     virtual std::vector<std::string> getAllCallbackIdentifiers() const = 0;
+
+    virtual ~Box2DContactCallbackRegistryInterface() = default;
+
+    // no copy, no move
+    Box2DContactCallbackRegistryInterface(const Box2DContactCallbackRegistryInterface&) = delete;
+    Box2DContactCallbackRegistryInterface(Box2DContactCallbackRegistryInterface&&) = delete;
+    Box2DContactCallbackRegistryInterface& operator=(const Box2DContactCallbackRegistryInterface&)
+        = delete;
+    Box2DContactCallbackRegistryInterface& operator=(Box2DContactCallbackRegistryInterface&&)
+        = delete;
+
+protected:
+    // default constructor can only be called from derived classes
+    Box2DContactCallbackRegistryInterface() = default;
 };
 
 } // namespace jt

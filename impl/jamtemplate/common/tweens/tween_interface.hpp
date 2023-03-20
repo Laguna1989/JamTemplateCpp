@@ -4,10 +4,26 @@
 namespace jt {
 class TweenInterface {
 public:
+    /// update the tween
+    /// \param elapsed elapsed time in seconds
+    virtual void update(float elapsed) = 0;
+
+    /// check if the tween is alive
+    /// \return true if alive, false otherwise
+    virtual bool isAlive() const = 0;
+
+    /// Destructor
     virtual ~TweenInterface() = default;
 
-    virtual void update(float elapsed) = 0;
-    virtual bool isAlive() const = 0;
+    // no copy, no move. Avoid slicing.
+    TweenInterface(const TweenInterface&) = delete;
+    TweenInterface(TweenInterface&&) = delete;
+    TweenInterface& operator=(const TweenInterface&) = delete;
+    TweenInterface& operator=(TweenInterface&&) = delete;
+
+protected:
+    // default default constructor can only be called from derived classes
+    TweenInterface() = default;
 };
 } // namespace jt
 

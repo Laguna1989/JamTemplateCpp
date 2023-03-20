@@ -12,8 +12,6 @@ class LogTargetInterface;
 
 class LoggerInterface {
 public:
-    virtual ~LoggerInterface() = default;
-
     /// Log a fatal message
     /// \param string the log message
     /// \param tags the message tags
@@ -55,6 +53,19 @@ public:
 
     /// Set the overall log level
     virtual void setLogLevel(jt::LogLevel level) = 0;
+
+    /// Destructor
+    virtual ~LoggerInterface() = default;
+
+    // no copy, no move. Avoid slicing.
+    LoggerInterface(const LoggerInterface&) = delete;
+    LoggerInterface(LoggerInterface&&) = delete;
+    LoggerInterface& operator=(const LoggerInterface&) = delete;
+    LoggerInterface& operator=(LoggerInterface&&) = delete;
+
+protected:
+    // default default constructor can only be called from derived classes
+    LoggerInterface() = default;
 };
 } // namespace jt
 

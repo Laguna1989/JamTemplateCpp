@@ -9,14 +9,26 @@ struct LogEntry;
 
 class LogTargetInterface {
 public:
-    virtual ~LogTargetInterface() = default;
-
     /// Log a log entry to the log target
     /// \param entry the entry to be logged
     virtual void log(LogEntry const& entry) = 0;
+
     /// Set the log level of this LogTarget
     /// \param level the loglevel
     virtual void setLogLevel(LogLevel level) = 0;
+
+    /// Destructor
+    virtual ~LogTargetInterface() = default;
+
+    // no copy, no move. Avoid slicing.
+    LogTargetInterface(const LogTargetInterface&) = delete;
+    LogTargetInterface(LogTargetInterface&&) = delete;
+    LogTargetInterface& operator=(const LogTargetInterface&) = delete;
+    LogTargetInterface& operator=(LogTargetInterface&&) = delete;
+
+protected:
+    // default default constructor can only be called from derived classes
+    LogTargetInterface() = default;
 };
 } // namespace jt
 

@@ -17,9 +17,6 @@ namespace jt {
 
 class GameInterface {
 public:
-    /// Destructor
-    virtual ~GameInterface() = default;
-
     /// Get the graphics context
     /// \return the graphics context
     virtual GfxInterface& gfx() const = 0;
@@ -51,7 +48,18 @@ public:
     /// Reset the Game internals, i.e. on a state switch
     virtual void reset() = 0;
 
+    /// Destructor
+    virtual ~GameInterface() = default;
+
+    // no copy, no move. Avoid slicing.
+    GameInterface(const GameInterface&) = delete;
+    GameInterface(GameInterface&&) = delete;
+    GameInterface& operator=(const GameInterface&) = delete;
+    GameInterface& operator=(GameInterface&&) = delete;
+
 protected:
+    // default default constructor can only be called from derived classes
+    GameInterface() = default;
     virtual std::weak_ptr<GameInterface> getPtr() = 0;
 };
 

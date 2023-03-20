@@ -1,8 +1,8 @@
 #ifndef JAMTEMPLATE_GROUP_VOLUME_MANAGER_HPP
 #define JAMTEMPLATE_GROUP_VOLUME_MANAGER_HPP
 
+#include <audio/group_volume_getter_interface.hpp>
 #include <audio/group_volume_setter_interface.hpp>
-#include <audio/volume_provider_interface.hpp>
 #include <map>
 
 namespace jt {

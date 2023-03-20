@@ -6,8 +6,6 @@
 namespace jt {
 class Box2DContactCallbackInterface {
 public:
-    virtual ~Box2DContactCallbackInterface() = default;
-
     /// Will be invoked when a two bodies start to be into contact.
     /// \param contact the box2d contact information
     virtual void onBeginContact(b2Contact* contact) = 0;
@@ -19,9 +17,22 @@ public:
     /// Enable the callback. Disabled callbacks are ignored by the ContactManager
     /// \param enabled
     virtual void setEnabled(bool enabled) = 0;
+
     /// Get if the callback is enabled
     /// \return true if enabled, false otherwise.
     virtual bool getEnabled() const = 0;
+
+    virtual ~Box2DContactCallbackInterface() = default;
+
+    // no copy, no move
+    Box2DContactCallbackInterface(const Box2DContactCallbackInterface&) = delete;
+    Box2DContactCallbackInterface(Box2DContactCallbackInterface&&) = delete;
+    Box2DContactCallbackInterface& operator=(const Box2DContactCallbackInterface&) = delete;
+    Box2DContactCallbackInterface& operator=(Box2DContactCallbackInterface&&) = delete;
+
+protected:
+    // default constructor can only be called from derived classes
+    Box2DContactCallbackInterface() = default;
 };
 } // namespace jt
 

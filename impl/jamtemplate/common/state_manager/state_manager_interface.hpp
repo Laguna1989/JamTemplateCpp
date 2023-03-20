@@ -10,9 +10,6 @@ class GameInterface;
 
 class StateManagerInterface {
 public:
-    /// Destructor
-    virtual ~StateManagerInterface() = default;
-
     /// Get the current GameState
     /// \return the current state
     virtual std::shared_ptr<GameState> getCurrentState() = 0;
@@ -62,6 +59,19 @@ public:
     /// Draw the state
     /// \param rt
     virtual void draw(std::shared_ptr<jt::RenderTargetInterface> rt) = 0;
+
+    /// Destructor
+    virtual ~StateManagerInterface() = default;
+
+    // no copy, no move. Avoid slicing.
+    StateManagerInterface(const StateManagerInterface&) = delete;
+    StateManagerInterface(StateManagerInterface&&) = delete;
+    StateManagerInterface& operator=(const StateManagerInterface&) = delete;
+    StateManagerInterface& operator=(StateManagerInterface&&) = delete;
+
+protected:
+    // default default constructor can only be called from derived classes
+    StateManagerInterface() = default;
 };
 
 } // namespace jt

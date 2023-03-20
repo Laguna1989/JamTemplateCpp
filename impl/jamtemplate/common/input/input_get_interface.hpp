@@ -9,8 +9,6 @@ namespace jt {
 
 class InputGetInterface {
 public:
-    virtual ~InputGetInterface() = default;
-
     /// Get the mouse input
     /// \return the mouse input
     virtual std::shared_ptr<MouseInterface> mouse() = 0;
@@ -26,6 +24,18 @@ public:
     /// Get the number of connected gamepads
     /// \return the number of gamepads
     virtual std::size_t getNumberOfGamepads() const = 0;
+
+    virtual ~InputGetInterface() = default;
+
+    // no copy, no move. Avoid slicing.
+    InputGetInterface(const InputGetInterface&) = delete;
+    InputGetInterface(InputGetInterface&&) = delete;
+    InputGetInterface& operator=(const InputGetInterface&) = delete;
+    InputGetInterface& operator=(InputGetInterface&&) = delete;
+
+protected:
+    // default default constructor can only be called from derived classes
+    InputGetInterface() = default;
 };
 
 } // namespace jt

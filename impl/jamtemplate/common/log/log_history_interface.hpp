@@ -8,8 +8,6 @@ namespace jt {
 
 class LogHistoryInterface {
 public:
-    virtual ~LogHistoryInterface() = default;
-
     /// Add a log entry to the history
     /// \param entry the entry to be added
     virtual void addEntry(jt::LogEntry const& entry) = 0;
@@ -20,6 +18,19 @@ public:
 
     /// Clear all log entries
     virtual void clear() = 0;
+
+    /// Destructor
+    virtual ~LogHistoryInterface() = default;
+
+    // no copy, no move. Avoid slicing.
+    LogHistoryInterface(const LogHistoryInterface&) = delete;
+    LogHistoryInterface(LogHistoryInterface&&) = delete;
+    LogHistoryInterface& operator=(const LogHistoryInterface&) = delete;
+    LogHistoryInterface& operator=(LogHistoryInterface&&) = delete;
+
+protected:
+    // default default constructor can only be called from derived classes
+    LogHistoryInterface() = default;
 };
 } // namespace jt
 

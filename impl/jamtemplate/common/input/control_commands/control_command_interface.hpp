@@ -4,9 +4,23 @@
 namespace jt {
 class ControlCommandInterface {
 public:
-    virtual ~ControlCommandInterface() = default;
+    /// execute a control command
+    /// \param elapsed elapsed time in seconds
     virtual void execute(float elapsed) = 0;
+    /// reset the control command
     virtual void reset() = 0;
+
+    virtual ~ControlCommandInterface() = default;
+
+    // no copy, no move. Avoid slicing.
+    ControlCommandInterface(const ControlCommandInterface&) = delete;
+    ControlCommandInterface(ControlCommandInterface&&) = delete;
+    ControlCommandInterface& operator=(const ControlCommandInterface&) = delete;
+    ControlCommandInterface& operator=(ControlCommandInterface&&) = delete;
+
+protected:
+    // default default constructor can only be called from derived classes
+    ControlCommandInterface() = default;
 };
 
 } // namespace jt
