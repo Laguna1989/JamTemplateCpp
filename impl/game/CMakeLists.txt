@@ -8,4 +8,13 @@ endif ()
 target_link_libraries(${PROJECTNAME} GameLib)
 target_include_directories(${PROJECTNAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 
+if (MSVC)
+    target_compile_options(${PROJECTNAME} PRIVATE "/W3")
+    target_compile_options(${PROJECTNAME} PRIVATE "/EHsc")
+else ()
+    target_compile_options(${PROJECTNAME} PRIVATE "-Wall")
+    target_compile_options(${PROJECTNAME} PRIVATE "-Wextra")
+endif ()
+
+
 jt_use_assets(${PROJECTNAME})
