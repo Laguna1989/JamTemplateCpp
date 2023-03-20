@@ -8,8 +8,6 @@ namespace jt {
 
 class GamepadInterface {
 public:
-    virtual ~GamepadInterface() = default;
-
     /// Update the gamepad button states
     virtual void update() = 0;
 
@@ -44,6 +42,18 @@ public:
 
     /// Reset the Gamepad Input
     virtual void reset() = 0;
+
+    virtual ~GamepadInterface() = default;
+
+    // no copy, no move. Avoid slicing.
+    GamepadInterface(const GamepadInterface&) = delete;
+    GamepadInterface(GamepadInterface&&) = delete;
+    GamepadInterface& operator=(const GamepadInterface&) = delete;
+    GamepadInterface& operator=(GamepadInterface&&) = delete;
+
+protected:
+    // default default constructor can only be called from derived classes
+    GamepadInterface() = default;
 };
 
 } // namespace jt

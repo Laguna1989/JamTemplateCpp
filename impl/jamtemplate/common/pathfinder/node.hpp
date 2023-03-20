@@ -10,24 +10,24 @@ namespace pathfinder {
 class Node : public NodeInterface {
 public:
     void addNeighbour(std::weak_ptr<NodeInterface> other) override;
-    std::vector<std::weak_ptr<NodeInterface>> const& getNeighbours() override;
+    std::vector<std::weak_ptr<NodeInterface>> const& getNeighbours() const override;
 
     void visit() override;
     void unvisit() override;
-    bool wasVisited() override;
+    bool wasVisited() const override;
 
     jt::Vector2u const& getTilePosition() const override;
 
     void setPosition(jt::Vector2u pos);
 
-    float getValue() override;
+    float getValue() const override;
     void setValue(float value) override;
 
     void setTileID(int id);
-    int getTileID() override;
+    int getTileID() const override;
 
     void setBlocked(bool blocked) override;
-    bool getBlocked() override;
+    bool getBlocked() const override;
 
 private:
     bool m_visited { false };

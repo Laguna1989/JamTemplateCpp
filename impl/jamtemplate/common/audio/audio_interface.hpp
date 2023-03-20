@@ -15,14 +15,6 @@ namespace jt {
 
 class AudioInterface {
 public:
-    virtual ~AudioInterface() = default;
-
-    // no copy, no move
-    AudioInterface(const AudioInterface&) = delete;
-    AudioInterface(AudioInterface&&) = delete;
-    AudioInterface& operator=(const AudioInterface&) = delete;
-    AudioInterface& operator=(AudioInterface&&) = delete;
-
     /// Update sounds in the the audio interface
     virtual void update(float elapsed) = 0;
 
@@ -100,7 +92,16 @@ public:
     /// \return the GroupVolumeSetter
     virtual jt::GroupVolumeSetterInterface& groups() = 0;
 
+    virtual ~AudioInterface() = default;
+
+    // no copy, no move
+    AudioInterface(const AudioInterface&) = delete;
+    AudioInterface(AudioInterface&&) = delete;
+    AudioInterface& operator=(const AudioInterface&) = delete;
+    AudioInterface& operator=(AudioInterface&&) = delete;
+
 protected:
+    // default constructor can only be called from derived classes
     AudioInterface() = default;
 };
 

@@ -7,8 +7,6 @@
 namespace jt {
 class StateManagerTransitionInterface {
 public:
-    virtual ~StateManagerTransitionInterface() = default;
-
     /// Start a transition
     virtual void start() = 0;
 
@@ -27,6 +25,19 @@ public:
     /// Draw the transition
     /// \param rt the render target
     virtual void draw(std::shared_ptr<jt::RenderTargetInterface> rt) = 0;
+
+    /// Destructor
+    virtual ~StateManagerTransitionInterface() = default;
+
+    // no copy, no move. Avoid slicing.
+    StateManagerTransitionInterface(const StateManagerTransitionInterface&) = delete;
+    StateManagerTransitionInterface(StateManagerTransitionInterface&&) = delete;
+    StateManagerTransitionInterface& operator=(const StateManagerTransitionInterface&) = delete;
+    StateManagerTransitionInterface& operator=(StateManagerTransitionInterface&&) = delete;
+
+protected:
+    // default default constructor can only be called from derived classes
+    StateManagerTransitionInterface() = default;
 };
 
 } // namespace jt

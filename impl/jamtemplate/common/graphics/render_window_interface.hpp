@@ -11,15 +11,6 @@ namespace jt {
 
 class RenderWindowInterface {
 public:
-    // no copy, no move. Avoid slicing.
-    RenderWindowInterface(const RenderWindowInterface&) = delete;
-    RenderWindowInterface(RenderWindowInterface&&) = delete;
-    RenderWindowInterface& operator=(const RenderWindowInterface&) = delete;
-    RenderWindowInterface& operator=(RenderWindowInterface&&) = delete;
-
-    /// Destructor
-    virtual ~RenderWindowInterface() = default;
-
     /// Check if window is open
     /// \return true if window is open, false otherwise
     virtual bool isOpen() const = 0;
@@ -69,8 +60,17 @@ public:
     /// \return true if the game should process mouse input
     virtual bool shouldProcessMouse() = 0;
 
+    /// Destructor
+    virtual ~RenderWindowInterface() = default;
+
+    // no copy, no move. Avoid slicing.
+    RenderWindowInterface(const RenderWindowInterface&) = delete;
+    RenderWindowInterface(RenderWindowInterface&&) = delete;
+    RenderWindowInterface& operator=(const RenderWindowInterface&) = delete;
+    RenderWindowInterface& operator=(RenderWindowInterface&&) = delete;
+
 protected:
-    // constructor can only be called from derived classes
+    // default default constructor can only be called from derived classes
     RenderWindowInterface() = default;
 };
 } // namespace jt

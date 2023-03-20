@@ -7,8 +7,6 @@ namespace jt {
 
 class InputSetInterface {
 public:
-    virtual ~InputSetInterface() = default;
-
     /// Update the input
     /// \param mp the mouse buttons
     virtual void update(
@@ -17,6 +15,18 @@ public:
 
     /// Reset the input
     virtual void reset() = 0;
+
+    virtual ~InputSetInterface() = default;
+
+    // no copy, no move. Avoid slicing.
+    InputSetInterface(const InputSetInterface&) = delete;
+    InputSetInterface(InputSetInterface&&) = delete;
+    InputSetInterface& operator=(const InputSetInterface&) = delete;
+    InputSetInterface& operator=(InputSetInterface&&) = delete;
+
+protected:
+    // default default constructor can only be called from derived classes
+    InputSetInterface() = default;
 };
 
 } // namespace jt

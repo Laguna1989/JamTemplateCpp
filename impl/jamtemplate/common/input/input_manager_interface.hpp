@@ -7,11 +7,7 @@
 
 namespace jt {
 
-class InputManagerInterface : public InputSetInterface, public InputGetInterface {
-public:
-    /// Destructor
-    virtual ~InputManagerInterface() = default;
-};
+class InputManagerInterface : public InputSetInterface, public InputGetInterface { };
 
 } // namespace jt
 #endif

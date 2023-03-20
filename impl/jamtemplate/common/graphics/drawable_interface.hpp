@@ -18,15 +18,6 @@ class DrawableInterface {
 public:
     using Sptr = std::shared_ptr<DrawableInterface>;
 
-    /// Destructor
-    virtual ~DrawableInterface() = default;
-
-    // no copy, no move. Avoid slicing.
-    DrawableInterface(const DrawableInterface&) = delete;
-    DrawableInterface(DrawableInterface&&) = delete;
-    DrawableInterface& operator=(const DrawableInterface&) = delete;
-    DrawableInterface& operator=(DrawableInterface&&) = delete;
-
     /// Draw the drawable on the passed render target
     /// \param renderTarget shared pointer to the rendertarget the drawable should be drawn on
     virtual void draw(std::shared_ptr<jt::RenderTargetInterface> renderTarget) const = 0;
@@ -221,7 +212,17 @@ public:
     /// \return the z layer.
     virtual int getZ() const = 0;
 
+    /// Destructor
+    virtual ~DrawableInterface() = default;
+
+    // no copy, no move. Avoid slicing.
+    DrawableInterface(const DrawableInterface&) = delete;
+    DrawableInterface(DrawableInterface&&) = delete;
+    DrawableInterface& operator=(const DrawableInterface&) = delete;
+    DrawableInterface& operator=(DrawableInterface&&) = delete;
+
 protected:
+    // default constructor can only be called from derived classes
     DrawableInterface() = default;
 };
 } // namespace jt

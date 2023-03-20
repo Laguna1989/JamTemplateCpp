@@ -43,14 +43,16 @@ public:
     /// \param positionIterations number of position iterations
     virtual void step(float elapsed, int velocityIterations, int positionIterations) = 0;
 
-    /// Destructor
     virtual ~Box2DWorldInterface() = default;
     // avoid slicing
-    Box2DWorldInterface() = default;
     Box2DWorldInterface(const Box2DWorldInterface&) = delete;
     Box2DWorldInterface(Box2DWorldInterface&&) = delete;
     Box2DWorldInterface& operator=(const Box2DWorldInterface&) = delete;
     Box2DWorldInterface& operator=(Box2DWorldInterface&&) = delete;
+
+protected:
+    // default constructor can only be called from derived classes
+    Box2DWorldInterface() = default;
 };
 } // namespace jt
 

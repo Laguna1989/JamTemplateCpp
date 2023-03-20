@@ -7,8 +7,6 @@
 namespace jt {
 class CacheInterface {
 public:
-    virtual ~CacheInterface() = default;
-
     /// Get the tilemap cache
     /// \return the tilemap cache
     virtual jt::TilemapCacheInterface& getTilemapCache() = 0;
@@ -17,7 +15,18 @@ public:
     /// \return the log history
     virtual std::shared_ptr<jt::LogHistoryInterface> getLogHistory() = 0;
 
-    // TODO expand to other cached items
+    /// Destructor
+    virtual ~CacheInterface() = default;
+
+    // no copy, no move. Avoid slicing.
+    CacheInterface(const CacheInterface&) = delete;
+    CacheInterface(CacheInterface&&) = delete;
+    CacheInterface& operator=(const CacheInterface&) = delete;
+    CacheInterface& operator=(CacheInterface&&) = delete;
+
+protected:
+    // default default constructor can only be called from derived classes
+    CacheInterface() = default;
 };
 } // namespace jt
 

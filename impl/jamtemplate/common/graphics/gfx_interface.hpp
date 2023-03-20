@@ -10,14 +10,6 @@ namespace jt {
 
 class GfxInterface {
 public:
-    virtual ~GfxInterface() = default;
-
-    // no copy, no move. Avoid slicing.
-    GfxInterface(const GfxInterface&) = delete;
-    GfxInterface(GfxInterface&&) = delete;
-    GfxInterface& operator=(const GfxInterface&) = delete;
-    GfxInterface& operator=(GfxInterface&&) = delete;
-
     /// Get the render window
     /// \return the render window
     virtual RenderWindowInterface& window() = 0;
@@ -52,9 +44,16 @@ public:
     /// drawn above z layer 1.
     virtual void createZLayer(int z) = 0;
 
-protected:
-    // constructor can only be called from derived classes
+    virtual ~GfxInterface() = default;
 
+    // no copy, no move. Avoid slicing.
+    GfxInterface(const GfxInterface&) = delete;
+    GfxInterface(GfxInterface&&) = delete;
+    GfxInterface& operator=(const GfxInterface&) = delete;
+    GfxInterface& operator=(GfxInterface&&) = delete;
+
+protected:
+    // default default constructor can only be called from derived classes
     GfxInterface() = default;
 };
 

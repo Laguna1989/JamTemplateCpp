@@ -7,14 +7,6 @@ namespace jt {
 
 class CamInterface {
 public:
-    virtual ~CamInterface() = default;
-
-    // no copy, no move. Avoid slicing.
-    CamInterface(const CamInterface&) = delete;
-    CamInterface(CamInterface&&) = delete;
-    CamInterface& operator=(const CamInterface&) = delete;
-    CamInterface& operator=(CamInterface&&) = delete;
-
     /// Get the camera offset (e.g. from scrolling)
     /// \return the camera offset
     virtual jt::Vector2f getCamOffset() = 0;
@@ -54,7 +46,16 @@ public:
     /// Reset the camera
     virtual void reset() = 0;
 
+    virtual ~CamInterface() = default;
+
+    // no copy, no move. Avoid slicing.
+    CamInterface(const CamInterface&) = delete;
+    CamInterface(CamInterface&&) = delete;
+    CamInterface& operator=(const CamInterface&) = delete;
+    CamInterface& operator=(CamInterface&&) = delete;
+
 protected:
+    // default default constructor can only be called from derived classes
     CamInterface() = default;
 };
 } // namespace jt

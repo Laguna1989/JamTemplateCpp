@@ -1,20 +1,12 @@
 #ifndef JAMTEMPLATE_SOUNDINTERFACE_HPP
 #define JAMTEMPLATE_SOUNDINTERFACE_HPP
 
-#include <audio/volume_provider_interface.hpp>
+#include <audio/group_volume_getter_interface.hpp>
 
 namespace jt {
 
 class SoundInterface {
 public:
-    virtual ~SoundInterface() = default;
-
-    // no copy, no move
-    SoundInterface(const SoundInterface&) = delete;
-    SoundInterface(SoundInterface&&) = delete;
-    SoundInterface& operator=(const SoundInterface&) = delete;
-    SoundInterface& operator=(SoundInterface&&) = delete;
-
     /// Update the sound
     virtual void update() = 0;
 
@@ -74,10 +66,21 @@ public:
     /// \return the sample rate in Hz
     virtual int getSampleRate() const = 0;
 
-    /// Set volume group
+    /// Set volume group. A Sound can be part of one volume group. A Sound is always in the "master"
+    /// volume group.
+    /// \param volumeGroupName name to identify the volume group
     virtual void setVolumeGroup(std::string const& volumeGroupName) = 0;
 
+    virtual ~SoundInterface() = default;
+
+    // no copy, no move
+    SoundInterface(const SoundInterface&) = delete;
+    SoundInterface(SoundInterface&&) = delete;
+    SoundInterface& operator=(const SoundInterface&) = delete;
+    SoundInterface& operator=(SoundInterface&&) = delete;
+
 protected:
+    // default constructor can only be called from derived classes
     SoundInterface() = default;
 };
 } // namespace jt
