@@ -5,6 +5,7 @@
 jt::CacheImpl::CacheImpl(std::unique_ptr<jt::TilemapCacheInterface> tilemapCache,
     std::shared_ptr<jt::LogHistoryInterface> logHistory)
     : m_tilemapCache { std::move(tilemapCache) }
+    , m_logHistory { logHistory }
 {
     if (m_tilemapCache == nullptr) {
         m_tilemapCache = std::make_unique<jt::TilemapCache>();

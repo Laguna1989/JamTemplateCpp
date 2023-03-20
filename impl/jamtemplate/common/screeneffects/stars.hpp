@@ -21,9 +21,9 @@ private:
     void doUpdate(float const elapsed) override;
     void doDraw() const override;
 
-    jt::Vector2f m_screenSizeHint;
     jt::Color m_color;
-
+    jt::Vector2f m_screenSizeHint;
+    
     bool m_enabled { true };
 
     std::vector<std::unique_ptr<Star>> m_stars;

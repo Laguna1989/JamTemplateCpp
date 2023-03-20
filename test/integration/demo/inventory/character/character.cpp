@@ -7,8 +7,9 @@
 Character::Character(std::shared_ptr<jt::Box2DWorldInterface> world,
     std::weak_ptr<ItemRepository> repo, std::unique_ptr<CharacterControllerInterface>&& controller,
     jt::Vector2f const& pos, bool isPlayer)
-    : m_characterController { std::move(controller) }
-    , m_repo { repo }
+    : m_repo { repo }
+    , m_characterController { std::move(controller) }
+
 {
     // TODO pass in via DI and then create a factory
     if (isPlayer) {
