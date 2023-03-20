@@ -9,7 +9,7 @@ TEST(TweenCollectionTest, UpdateWithoutTweensDoesNotThrow)
 
 class FakeTween : public jt::TweenInterface {
 public:
-    void update(float elapsed) override { m_hasBeenUpdated = true; }
+    void update(float /*elapsed*/) override { m_hasBeenUpdated = true; }
     bool isAlive() const override { return m_alive; }
 
     bool m_alive { true };

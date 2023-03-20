@@ -86,5 +86,8 @@ float jt::IntroLoopingSoundWithEffect::getPosition() const
 }
 
 int jt::IntroLoopingSoundWithEffect::getSampleRate() const { return m_introSound->getSampleRate(); }
-void jt::IntroLoopingSoundWithEffect::setVolumeProvider(jt::GroupVolumeGetterInterface& provider) {
+void jt::IntroLoopingSoundWithEffect::setVolumeProvider(jt::GroupVolumeGetterInterface& provider)
+{
+    m_introSound->setVolumeProvider(provider);
+    m_loopingSound->setVolumeProvider(provider);
 }
