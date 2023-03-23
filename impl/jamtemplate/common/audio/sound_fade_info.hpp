@@ -8,13 +8,17 @@ namespace jt {
 class SoundFadeManager;
 
 class SoundFadeInfo {
-    friend class SoundFadeManager;
 
+public:
     SoundFadeInfo(std::weak_ptr<jt::SoundInterface> const& sound, float duration, float startVolume,
         float endVolume);
 
     void update(float elapsed);
 
+    bool hasValidSound() const;
+    bool isAlive() const;
+
+private:
     std::weak_ptr<jt::SoundInterface> m_sound;
     float m_startVolume { 0.0f };
     float m_endVolume { 0.0f };
