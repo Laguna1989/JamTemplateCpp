@@ -1,8 +1,8 @@
 #include "audio_impl.hpp"
-#include <audio/intro_looping_sound_with_effect.hpp>
-#include <audio/sound.hpp>
-#include <audio/sound_group.hpp>
-#include <audio/sound_with_effect.hpp>
+#include <audio/sound/intro_looping_sound_with_effect.hpp>
+#include <audio/sound/sound.hpp>
+#include <audio/sound/sound_group.hpp>
+#include <audio/sound/sound_with_effect.hpp>
 #include <random/random.hpp>
 #include <algorithm>
 

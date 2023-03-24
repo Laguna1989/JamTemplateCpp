@@ -1,7 +1,7 @@
 #ifndef JAMTEMPLATE_AUDIO_NULL_HPP
 #define JAMTEMPLATE_AUDIO_NULL_HPP
 
-#include <audio/audio_interface.hpp>
+#include <audio/audio/audio_interface.hpp>
 #include <audio/group_volume_manager.hpp>
 
 namespace jt {

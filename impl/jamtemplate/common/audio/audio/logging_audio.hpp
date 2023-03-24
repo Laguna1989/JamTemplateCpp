@@ -1,16 +1,13 @@
-#ifndef JAMTEMPLATE_AUDIO_IMPL_HPP
-#define JAMTEMPLATE_AUDIO_IMPL_HPP
+#ifndef JAMTEMPLATE_LOGGING_AUDIO_HPP
+#define JAMTEMPLATE_LOGGING_AUDIO_HPP
 
-#include <audio/audio_interface.hpp>
-#include <audio/group_volume_manager.hpp>
-#include <oalpp/sound_context.hpp>
-#include <map>
-#include <vector>
+#include <audio/audio/audio_interface.hpp>
+#include <log/logger_interface.hpp>
 
 namespace jt {
-class AudioImpl : public AudioInterface {
+class LoggingAudio : public AudioInterface {
 public:
-    ~AudioImpl();
+    LoggingAudio(AudioInterface& decoratee, LoggerInterface& logger);
 
     void update(float elapsed) override;
 
@@ -26,31 +23,22 @@ public:
         std::string const& introFileName, std::string const& loopingFileName,
         oalpp::effects::MonoEffectInterface& effect) override;
 
-    std::shared_ptr<jt::SoundInterface> soundPool(
+    std::shared_ptr<SoundInterface> soundPool(
         std::string const& baseIdentifier, std::string const& fileName, std::size_t count) override;
 
-    std::shared_ptr<jt::SoundInterface> getPermanentSound(std::string const& identifier) override;
+    std::shared_ptr<SoundInterface> getPermanentSound(std::string const& identifier) override;
 
     void removePermanentSound(std::string const& identifier) override;
 
     oalpp::SoundContextInterface& getContext() override;
 
     SoundFadeManager& fades() override;
-
     GroupVolumeSetterInterface& groups() override;
 
 private:
-    oalpp::SoundContext m_context;
-
-    std::vector<std::weak_ptr<jt::SoundInterface>> m_temporarySounds {};
-    std::map<std::string, std::shared_ptr<jt::SoundInterface>> m_permanentSounds {};
-
-    std::unique_ptr<SoundFadeManager> m_fades { std::make_unique<SoundFadeManager>() };
-
-    GroupVolumeManager m_volumeGroups;
-
-    void cleanUpUnusedSounds();
+    AudioInterface& m_decoratee;
+    LoggerInterface& m_logger;
 };
 } // namespace jt
 
-#endif // JAMTEMPLATE_AUDIO_IMPL_HPP
+#endif // JAMTEMPLATE_LOGGING_AUDIO_HPP

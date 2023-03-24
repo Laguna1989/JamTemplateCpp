@@ -1,7 +1,7 @@
 #ifndef JAMTEMPLATE_MOCK_SOUND_HPP
 #define JAMTEMPLATE_MOCK_SOUND_HPP
 
-#include <audio/sound_interface.hpp>
+#include <audio/sound/sound_interface.hpp>
 #include <gmock/gmock.h>
 
 class MockSound : public jt::SoundInterface {
@@ -23,7 +23,7 @@ public:
     MOCK_METHOD(float, getBlend, (), (const, override));
     MOCK_METHOD(int, getSampleRate, (), (const, override));
     MOCK_METHOD(void, setVolumeProvider, (jt::GroupVolumeGetterInterface&), (override));
-    MOCK_METHOD(void, setVolumeGroup,(std::string const&), (override));
+    MOCK_METHOD(void, setVolumeGroup, (std::string const&), (override));
 };
 
 #endif // JAMTEMPLATE_MOCK_SOUND_HPP

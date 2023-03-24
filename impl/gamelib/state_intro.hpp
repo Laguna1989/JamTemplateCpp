@@ -1,7 +1,7 @@
 #ifndef JAMTEMPLATE_STATE_INTRO_HPP
 #define JAMTEMPLATE_STATE_INTRO_HPP
 
-#include <audio/sound_interface.hpp>
+#include <audio/sound/sound_interface.hpp>
 #include <game_state.hpp>
 #include <sprite.hpp>
 #include <memory>

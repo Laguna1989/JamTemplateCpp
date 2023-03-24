@@ -1,8 +1,8 @@
 #ifndef JAMTEMPLATE_FADE_MANAGER_HPP
 #define JAMTEMPLATE_FADE_MANAGER_HPP
 
+#include <audio/sound/sound_interface.hpp>
 #include <audio/sound_fade_info.hpp>
-#include <audio/sound_interface.hpp>
 #include <cstddef>
 #include <memory>
 #include <vector>

@@ -1,7 +1,7 @@
 ﻿#include <action_commands/action_command_manager.hpp>
 #include <action_commands/basic_action_commands.hpp>
-#include <audio/audio_impl.hpp>
-#include <audio/logging_audio.hpp>
+#include <audio/audio/audio_impl.hpp>
+#include <audio/audio/logging_audio.hpp>
 #include <cache_impl.hpp>
 #include <camera.hpp>
 #include <game.hpp>

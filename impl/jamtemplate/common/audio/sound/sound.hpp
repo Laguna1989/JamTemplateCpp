@@ -1,16 +1,20 @@
-#ifndef JAMTEMPLATE_SOUND_WITH_EFFECT_HPP
-#define JAMTEMPLATE_SOUND_WITH_EFFECT_HPP
+﻿#ifndef JAMTEMPLATE_SOUND_HPP
+#define JAMTEMPLATE_SOUND_HPP
 
-#include <audio/sound_base.hpp>
+#include <audio/sound/sound_base.hpp>
+#include <counted_object.hpp>
 #include <oalpp/sound.hpp>
 #include <oalpp/sound_data.hpp>
+#include <string>
 
 namespace jt {
 
-class SoundWithEffect : public SoundBase {
+class Sound : public SoundBase, public CountedObj<Sound> {
 public:
-    SoundWithEffect(std::string const& fileName, oalpp::effects::MonoEffectInterface& effect);
+    explicit Sound(std::string const& fileName);
+
     void update() override;
+
     bool isPlaying() const override;
 
     void play() override;
@@ -24,18 +28,16 @@ public:
     bool getLoop(void) override;
 
     float getDuration() const override;
+
     float getPosition() const override;
 
     int getSampleRate() const override;
 
 private:
-    oalpp::SoundData m_drySoundData;
-    oalpp::Sound m_drySound;
-
-    oalpp::SoundDataWithEffect m_wetSoundData;
-    oalpp::Sound m_wetSound;
+    oalpp::SoundData m_buffer;
+    oalpp::Sound m_sound;
+    std::string m_fileName;
 };
 
 } // namespace jt
-
-#endif // JAMTEMPLATE_SOUND_WITH_EFFECT_HPP
+#endif // JAMTEMPLATE_SOUND_HPP
