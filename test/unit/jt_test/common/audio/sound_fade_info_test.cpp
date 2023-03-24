@@ -1,4 +1,4 @@
-#include <audio/sound_fade_info.hpp>
+#include <audio/fades/sound_fade_info.hpp>
 #include <mocks/mock_sound.hpp>
 #include <gtest/gtest.h>
 

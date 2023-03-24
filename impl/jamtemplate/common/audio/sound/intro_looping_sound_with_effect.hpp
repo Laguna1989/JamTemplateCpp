@@ -1,8 +1,8 @@
 #ifndef GUARD_JAMTEMPLATE_INTRO_LOOPING_SOUND_WITH_EFFECT_HPP
 #define GUARD_JAMTEMPLATE_INTRO_LOOPING_SOUND_WITH_EFFECT_HPP
 
-#include <audio/sound_base.hpp>
-#include <audio/sound_with_effect.hpp>
+#include <audio/sound/sound_base.hpp>
+#include <audio/sound/sound_with_effect.hpp>
 #include <oalpp/effects/mono_effect_interface.hpp>
 #include <oalpp/sound.hpp>
 #include <oalpp/sound_data/sound_data.hpp>

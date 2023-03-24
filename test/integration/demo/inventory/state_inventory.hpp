@@ -1,7 +1,7 @@
 #ifndef JAMTEMPLATE_STATE_INVENTORY_HPP
 #define JAMTEMPLATE_STATE_INVENTORY_HPP
 
-#include <audio/sound.hpp>
+#include <audio/sound/sound.hpp>
 #include <game_state.hpp>
 #include <inventory/character/character.hpp>
 #include <inventory/character_sheet_imgui.hpp>

@@ -1,4 +1,4 @@
-#include <audio/group_volume_manager.hpp>
+#include <audio/sound_groups/group_volume_manager.hpp>
 #include <gtest/gtest.h>
 
 TEST(GroupVolumeManagerTest, InitialVolumeIsOne)

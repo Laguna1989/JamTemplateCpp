@@ -1,7 +1,7 @@
 #ifndef JAMTEMPLATE_SOUND_NULL_HPP
 #define JAMTEMPLATE_SOUND_NULL_HPP
 
-#include <audio/sound_interface.hpp>
+#include <audio/sound/sound_interface.hpp>
 
 namespace jt {
 

@@ -2,7 +2,7 @@
 #define JAMTEMPLATE_GAMEINTERFACE_HPP
 
 #include <action_commands/action_command_manager_interface.hpp>
-#include <audio/audio_interface.hpp>
+#include <audio/audio/audio_interface.hpp>
 #include <cache_interface.hpp>
 #include <cam_interface.hpp>
 #include <graphics/gfx_interface.hpp>

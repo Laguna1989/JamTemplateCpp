@@ -1,7 +1,7 @@
 #ifndef JAMTEMPLATE_STATE_AUDIO_HPP
 #define JAMTEMPLATE_STATE_AUDIO_HPP
 
-#include <audio/sound_with_effect.hpp>
+#include <audio/sound/sound_with_effect.hpp>
 #include <game_state.hpp>
 #include <oalpp/effects/filter/butterworth_24db_lowpass.hpp>
 #include <map>

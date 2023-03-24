@@ -1,7 +1,7 @@
 #ifndef MYAWESOMEGAME_SOUND_FADE_INFO_HPP
 #define MYAWESOMEGAME_SOUND_FADE_INFO_HPP
 
-#include <audio/sound_interface.hpp>
+#include <audio/sound/sound_interface.hpp>
 #include <memory>
 
 namespace jt {

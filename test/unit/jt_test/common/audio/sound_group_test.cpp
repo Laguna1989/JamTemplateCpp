@@ -1,5 +1,5 @@
-#include <audio/sound_group.hpp>
-#include <audio/sound_null.hpp>
+#include <audio/sound/sound_group.hpp>
+#include <audio/sound/sound_null.hpp>
 #include <gtest/gtest.h>
 
 TEST(SoundGroupTest, EmptySoundGroupContainsNoSound)

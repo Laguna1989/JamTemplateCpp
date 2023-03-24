@@ -1,6 +1,6 @@
 #include "audio_null.hpp"
-#include <audio/sound_group.hpp>
-#include <audio/sound_null.hpp>
+#include <audio/sound/sound_group.hpp>
+#include <audio/sound/sound_null.hpp>
 
 void jt::AudioNull::update(float /*elapsed*/) { }
 oalpp::SoundContextInterface& jt::AudioNull::getContext() { return m_context; }

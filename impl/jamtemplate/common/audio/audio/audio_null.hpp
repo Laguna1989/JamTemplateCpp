@@ -1,23 +1,24 @@
-#ifndef JAMTEMPLATE_AUDIO_IMPL_HPP
-#define JAMTEMPLATE_AUDIO_IMPL_HPP
+#ifndef JAMTEMPLATE_AUDIO_NULL_HPP
+#define JAMTEMPLATE_AUDIO_NULL_HPP
 
-#include <audio/audio_interface.hpp>
-#include <audio/group_volume_manager.hpp>
-#include <oalpp/sound_context.hpp>
-#include <map>
-#include <vector>
+#include <audio/audio/audio_interface.hpp>
+#include <audio/sound_groups/group_volume_manager.hpp>
 
 namespace jt {
-class AudioImpl : public AudioInterface {
-public:
-    ~AudioImpl();
 
+namespace null_objects {
+
+class SoundContextNull : public oalpp::SoundContextInterface { };
+
+} // namespace null_objects
+
+class AudioNull : public AudioInterface {
+public:
     void update(float elapsed) override;
 
-    std::shared_ptr<jt::SoundInterface> addTemporarySound(std::string const& fileName) override;
-    std::shared_ptr<jt::SoundInterface> addTemporarySoundGroup(
-        std::vector<std::shared_ptr<jt::SoundInterface>> const& sounds) override;
+    oalpp::SoundContextInterface& getContext() override;
 
+    std::shared_ptr<jt::SoundInterface> addTemporarySound(std::string const& fileName) override;
     std::shared_ptr<jt::SoundInterface> addPermanentSound(
         std::string const& identifier, std::string const& fileName) override;
     std::shared_ptr<jt::SoundInterface> addPermanentSound(std::string const& identifier,
@@ -33,24 +34,18 @@ public:
 
     void removePermanentSound(std::string const& identifier) override;
 
-    oalpp::SoundContextInterface& getContext() override;
+    std::shared_ptr<jt::SoundInterface> addTemporarySoundGroup(
+        std::vector<std::shared_ptr<jt::SoundInterface>> const& sounds) override;
 
     SoundFadeManager& fades() override;
-
     GroupVolumeSetterInterface& groups() override;
 
 private:
-    oalpp::SoundContext m_context;
+    null_objects::SoundContextNull m_context;
 
-    std::vector<std::weak_ptr<jt::SoundInterface>> m_temporarySounds {};
-    std::map<std::string, std::shared_ptr<jt::SoundInterface>> m_permanentSounds {};
-
-    std::unique_ptr<SoundFadeManager> m_fades { std::make_unique<SoundFadeManager>() };
-
-    GroupVolumeManager m_volumeGroups;
-
-    void cleanUpUnusedSounds();
+    SoundFadeManager m_fades;
+    GroupVolumeManager m_groups;
 };
 } // namespace jt
 
-#endif // JAMTEMPLATE_AUDIO_IMPL_HPP
+#endif // JAMTEMPLATE_AUDIO_NULL_HPP
