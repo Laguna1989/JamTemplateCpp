@@ -27,7 +27,7 @@ void StateImGui::onDraw() const
     ImGui::ShowDemoWindow();
 
     ImGui::Begin("arbitrary precision integers");
-    ImGui::Text("%s", m_api.to_string().c_str());
+    ImGui::Text("%s", m_api.to_exp_string().c_str());
 
     ImGui::SliderInt("Value", &number, 0, 999999);
     if (ImGui::Button("add")) {
