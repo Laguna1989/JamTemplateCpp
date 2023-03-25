@@ -6,6 +6,14 @@
 #include <random/random.hpp>
 #include <algorithm>
 
+jt::AudioImpl::AudioImpl(std::unique_ptr<SoundFadeManagerInterface> soundFadeManager)
+    : m_fades { std::move(soundFadeManager) }
+{
+    if (!m_fades) {
+        m_fades = std::make_unique<SoundFadeManager>();
+    }
+}
+
 jt::AudioImpl::~AudioImpl() { m_temporarySounds.clear(); }
 
 void jt::AudioImpl::update(float elapsed)
@@ -105,5 +113,5 @@ std::shared_ptr<jt::SoundInterface> jt::AudioImpl::addTemporarySoundGroup(
     return group;
 }
 
-jt::SoundFadeManager& jt::AudioImpl::fades() { return *m_fades; }
+jt::SoundFadeManagerInterface& jt::AudioImpl::fades() { return *m_fades; }
 jt::GroupVolumeSetterInterface& jt::AudioImpl::groups() { return m_volumeGroups; }

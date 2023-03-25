@@ -2,6 +2,7 @@
 #define JAMTEMPLATE_AUDIO_IMPL_HPP
 
 #include <audio/audio/audio_interface.hpp>
+#include <audio/fades/sound_fade_manager.hpp>
 #include <audio/sound_groups/group_volume_manager.hpp>
 #include <oalpp/sound_context.hpp>
 #include <map>
@@ -10,6 +11,7 @@
 namespace jt {
 class AudioImpl : public AudioInterface {
 public:
+    AudioImpl(std::unique_ptr<SoundFadeManagerInterface> soundFadeManager = nullptr);
     ~AudioImpl();
 
     void update(float elapsed) override;
@@ -35,7 +37,7 @@ public:
 
     oalpp::SoundContextInterface& getContext() override;
 
-    SoundFadeManager& fades() override;
+    SoundFadeManagerInterface& fades() override;
 
     GroupVolumeSetterInterface& groups() override;
 
@@ -45,7 +47,7 @@ private:
     std::vector<std::weak_ptr<jt::SoundInterface>> m_temporarySounds {};
     std::map<std::string, std::shared_ptr<jt::SoundInterface>> m_permanentSounds {};
 
-    std::unique_ptr<SoundFadeManager> m_fades { std::make_unique<SoundFadeManager>() };
+    std::unique_ptr<SoundFadeManagerInterface> m_fades;
 
     GroupVolumeManager m_volumeGroups;
 

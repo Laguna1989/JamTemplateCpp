@@ -2,22 +2,20 @@
 #define JAMTEMPLATE_FADE_MANAGER_HPP
 
 #include <audio/fades/sound_fade_info.hpp>
-#include <audio/sound/sound_interface.hpp>
-#include <cstddef>
-#include <memory>
+#include <audio/fades/sound_fade_manager_interface.hpp>
 #include <vector>
 
 namespace jt {
 
 // TODO This class should implement an interface.
-class SoundFadeManager {
+class SoundFadeManager : public jt::SoundFadeManagerInterface {
 public:
     void volumeFade(std::weak_ptr<SoundInterface> sound, float durationInSeconds, float startVolume,
-        float endVolume);
+        float endVolume) override;
 
-    void update(float fadeInfo);
+    void update(float elapsed) override;
 
-    std::size_t size() const;
+    std::size_t size() const override;
 
 private:
     std::vector<SoundFadeInfo> m_fadeInfos {};
