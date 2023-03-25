@@ -1,5 +1,5 @@
 #include "logging_audio.hpp"
-#include <audio/logging_sound.hpp>
+#include <audio/sound/logging_sound.hpp>
 
 jt::LoggingAudio::LoggingAudio(jt::AudioInterface& decoratee, jt::LoggerInterface& logger)
     : m_decoratee { decoratee }
@@ -75,11 +75,13 @@ std::shared_ptr<jt::SoundInterface> jt::LoggingAudio::addTemporarySoundGroup(
         { "jt", "audio" });
     return std::make_shared<jt::LoggingSound>(m_decoratee.addTemporarySoundGroup(sounds), m_logger);
 }
-jt::SoundFadeManager& jt::LoggingAudio::fades()
+
+jt::SoundFadeManagerInterface& jt::LoggingAudio::fades()
 {
     m_logger.verbose("fades", { "jt", "audio" });
     return m_decoratee.fades();
 }
+
 jt::GroupVolumeSetterInterface& jt::LoggingAudio::groups()
 {
     m_logger.verbose("groups", { "jt", "audio", "sound groups" });

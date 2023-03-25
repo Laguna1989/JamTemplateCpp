@@ -1,7 +1,7 @@
 #ifndef JAMTEMPLATE_LOGGING_SOUND_HPP
 #define JAMTEMPLATE_LOGGING_SOUND_HPP
 
-#include <audio/sound_interface.hpp>
+#include <audio/sound/sound_interface.hpp>
 #include <log/logger_interface.hpp>
 
 namespace jt {

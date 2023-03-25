@@ -1,5 +1,5 @@
 #include "state_intro.hpp"
-#include <audio/sound.hpp>
+#include <audio/sound/sound.hpp>
 #include <game_interface.hpp>
 #include <game_properties.hpp>
 #include <state_menu.hpp>
@@ -22,7 +22,7 @@ void StateIntro::onEnter()
     jt::Vector2f const endPos { GP::GetScreenSize().x / 2, GP::GetScreenSize().y / 2 };
     m_sprite->setPosition(startPos);
     m_sprite->update(0.0f);
-    
+
     auto twp = jt::TweenPosition::create(m_sprite, 0.8f, startPos, endPos);
     add(twp);
 

@@ -1,7 +1,7 @@
 #ifndef JAMTEMPLATE_SOUNDINTERFACE_HPP
 #define JAMTEMPLATE_SOUNDINTERFACE_HPP
 
-#include <audio/group_volume_getter_interface.hpp>
+#include <audio/sound_groups/group_volume_getter_interface.hpp>
 
 namespace jt {
 

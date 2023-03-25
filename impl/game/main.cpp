@@ -1,8 +1,9 @@
 ﻿#include "main.hpp"
 #include <action_commands/action_command_manager.hpp>
 #include <action_commands/basic_action_commands.hpp>
-#include <audio/audio_impl.hpp>
-#include <audio/logging_audio.hpp>
+#include <audio/audio/audio_impl.hpp>
+#include <audio/audio/logging_audio.hpp>
+#include <audio/fades/logging_sound_fade_manager.hpp>
 #include <cache_impl.hpp>
 #include <camera.hpp>
 #include <game.hpp>
@@ -54,7 +55,8 @@ int main()
     auto const gamepad0 = std::make_shared<jt::GamepadInput>(0);
     jt::InputManager input { mouse, keyboard, { gamepad0 } };
 
-    jt::AudioImpl audio;
+    jt::SoundFadeManager fades;
+    jt::AudioImpl audio { std::make_unique<jt::LoggingSoundFadeManager>(fades, logger) };
     jt::LoggingAudio loggingAudio { audio, logger };
 
     jt::StateManager stateManager { std::make_shared<StateIntro>() };

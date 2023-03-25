@@ -1,4 +1,4 @@
-﻿#include <audio/sound.hpp>
+﻿#include <audio/sound/sound.hpp>
 #include <oalpp/sound_context.hpp>
 #include <gtest/gtest.h>
 #include <memory>

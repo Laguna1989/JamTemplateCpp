@@ -23,3 +23,12 @@ void jt::SoundFadeInfo::update(float elapsed)
         snd->setVolume(value);
     }
 }
+bool jt::SoundFadeInfo::isAlive() const { return m_age < m_duration; }
+
+bool jt::SoundFadeInfo::hasValidSound() const
+{
+    if (m_sound.expired()) {
+        return false;
+    }
+    return true;
+}

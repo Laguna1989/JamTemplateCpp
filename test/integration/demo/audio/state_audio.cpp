@@ -1,5 +1,5 @@
 #include "state_audio.hpp"
-#include <audio/sound_group.hpp>
+#include <audio/sound/sound_group.hpp>
 #include <game_interface.hpp>
 #include <state_select.hpp>
 #include <imgui.h>

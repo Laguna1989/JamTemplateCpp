@@ -1,24 +1,20 @@
-#ifndef JAMTEMPLATE_AUDIO_NULL_HPP
-#define JAMTEMPLATE_AUDIO_NULL_HPP
+#ifndef JAMTEMPLATE_LOGGING_AUDIO_HPP
+#define JAMTEMPLATE_LOGGING_AUDIO_HPP
 
-#include <audio/audio_interface.hpp>
-#include <audio/group_volume_manager.hpp>
+#include <audio/audio/audio_interface.hpp>
+#include <log/logger_interface.hpp>
 
 namespace jt {
-
-namespace null_objects {
-
-class SoundContextNull : public oalpp::SoundContextInterface { };
-
-} // namespace null_objects
-
-class AudioNull : public AudioInterface {
+class LoggingAudio : public AudioInterface {
 public:
+    LoggingAudio(AudioInterface& decoratee, LoggerInterface& logger);
+
     void update(float elapsed) override;
 
-    oalpp::SoundContextInterface& getContext() override;
-
     std::shared_ptr<jt::SoundInterface> addTemporarySound(std::string const& fileName) override;
+    std::shared_ptr<jt::SoundInterface> addTemporarySoundGroup(
+        std::vector<std::shared_ptr<jt::SoundInterface>> const& sounds) override;
+
     std::shared_ptr<jt::SoundInterface> addPermanentSound(
         std::string const& identifier, std::string const& fileName) override;
     std::shared_ptr<jt::SoundInterface> addPermanentSound(std::string const& identifier,
@@ -27,25 +23,22 @@ public:
         std::string const& introFileName, std::string const& loopingFileName,
         oalpp::effects::MonoEffectInterface& effect) override;
 
-    std::shared_ptr<jt::SoundInterface> soundPool(
+    std::shared_ptr<SoundInterface> soundPool(
         std::string const& baseIdentifier, std::string const& fileName, std::size_t count) override;
 
-    std::shared_ptr<jt::SoundInterface> getPermanentSound(std::string const& identifier) override;
+    std::shared_ptr<SoundInterface> getPermanentSound(std::string const& identifier) override;
 
     void removePermanentSound(std::string const& identifier) override;
 
-    std::shared_ptr<jt::SoundInterface> addTemporarySoundGroup(
-        std::vector<std::shared_ptr<jt::SoundInterface>> const& sounds) override;
+    oalpp::SoundContextInterface& getContext() override;
 
-    SoundFadeManager& fades() override;
+    SoundFadeManagerInterface& fades() override;
     GroupVolumeSetterInterface& groups() override;
 
 private:
-    null_objects::SoundContextNull m_context;
-
-    SoundFadeManager m_fades;
-    GroupVolumeManager m_groups;
+    AudioInterface& m_decoratee;
+    LoggerInterface& m_logger;
 };
 } // namespace jt
 
-#endif // JAMTEMPLATE_AUDIO_NULL_HPP
+#endif // JAMTEMPLATE_LOGGING_AUDIO_HPP
