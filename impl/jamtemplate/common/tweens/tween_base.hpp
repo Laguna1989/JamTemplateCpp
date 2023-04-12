@@ -93,9 +93,9 @@ public:
     float getAgePercent() const;
 
     /// Get age percent converted
-    /// \param age the age
+    /// \param agePercent the age
     /// \return the updated converted age percent, in range 0 - 1
-    float getConvertedAgePercent(float age) const;
+    float getConvertedAgePercent(float agePercent) const;
 
     /// Set conversion function for age percent (e.g. cubic)
     /// \param func the conversion function

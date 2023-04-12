@@ -2,7 +2,7 @@
 #define GAME_MAIN_HPP
 
 // win32 is also defined in 64bit builds
-#if defined WIN32 && defined NDEBUG // release mode
+#if defined WIN32 && !defined(JT_ENABLE_DEBUG) // release mode
 #include <windows.h>
 void hideConsoleInRelease()
 {
@@ -14,7 +14,7 @@ void hideConsoleInRelease()
 
 void hideConsoleInRelease()
 {
-    // nothing to do in debug mode
+    // nothing to do in debug mode or non-windows builds
 }
 
 #endif

@@ -48,6 +48,14 @@ jt::Vector2f jt::Random::getRandomPointIn(jt::Vector2f const& size)
     return getRandomPointIn(jt::Rectf { 0.0f, 0.0f, size.x, size.y });
 }
 
+jt::Vector2f jt::Random::getRandomPointInCircle(float radius)
+{
+    float const angle = getFloat(0, 2 * 3.141592f);
+    float const range = getFloat(0, radius);
+    return jt::Vector2f { range * static_cast<float>(cos(static_cast<double>(angle))),
+        range * static_cast<float>(sin(static_cast<double>(angle))) };
+}
+
 void jt::Random::setSeed(unsigned int s) { m_engine.seed(s); }
 
 void jt::Random::useTimeAsRandomSeed() { setSeed(static_cast<unsigned int>(time(nullptr))); }

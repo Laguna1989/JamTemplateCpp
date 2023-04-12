@@ -13,8 +13,7 @@ namespace detail {
 
 // primary template
 template <std::size_t size, typename = void>
-class IndexWrapper {
-};
+class IndexWrapper { };
 
 template <std::size_t size>
 class IndexWrapper<size, typename std::enable_if<jt::MathHelper::is_powerof2(size)>::type> {
@@ -81,6 +80,14 @@ public:
     /// End iterator
     /// \return
     IteratorT end() { return m_data.end(); }
+
+    /// Begin iterator
+    /// \return begin iterator
+    ConstIteratorT begin() const { return m_data.cbegin(); }
+
+    /// End iterator
+    /// \return
+    ConstIteratorT end() const { return m_data.cend(); }
 
     /// Const begin iterator
     /// \return const begin iterator

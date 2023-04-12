@@ -57,12 +57,12 @@ float jt::Tween::getAge() const { return m_age - m_startDelayInSeconds; }
 
 float jt::Tween::getAgePercent() const { return getAge() / m_totalTime; }
 
-float jt::Tween::getConvertedAgePercent(float age) const
+float jt::Tween::getConvertedAgePercent(float agePercent) const
 {
     if (m_agePercentConversion == nullptr) {
-        return age;
+        return agePercent;
     }
-    return m_agePercentConversion(age);
+    return m_agePercentConversion(agePercent);
 }
 
 void jt::Tween::setAgePercentConversion(jt::Tween::AgePercentConversionFunctionType func)
@@ -89,6 +89,7 @@ void jt::Tween::handleCompleteCallbacks()
         cb();
     }
 }
+
 void jt::Tween::doUpdateObject(
     std::shared_ptr<DrawableInterface> const& /*sptr*/, float /*agePercent*/) const
 {

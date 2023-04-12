@@ -390,7 +390,9 @@ void jt::LicenseInfo::doUpdate(float const)
 void jt::LicenseInfo::doDraw() const
 {
     if (m_showLicenseInfo) {
-        ImGui::Begin("License Info", &m_showLicenseInfo);
+        ImGui::SetNextWindowSize(ImVec2 { 800, 400 });
+        static ImGuiWindowFlags flags = ImGuiWindowFlags_NoResize;
+        ImGui::Begin("License Info (close with [F9])", &m_showLicenseInfo, flags);
         ImGui::BeginChild("L");
         for (auto i = 0U; i != m_licenseTexts.size(); ++i) {
             ImGui::TextWrapped("%s", m_licenseTexts[i].c_str());
