@@ -53,6 +53,11 @@ public:
     /// \return random point in rect
     static jt::Vector2f getRandomPointIn(jt::Vector2f const& size);
 
+    /// Get Random point in circle with radius
+    /// \param radius the radius
+    /// \return random point in radius range
+    static jt::Vector2f getRandomPointInCircle(float radius);
+
     /// Set the seed of the rng
     /// \param s seed value
     static void setSeed(unsigned int s);

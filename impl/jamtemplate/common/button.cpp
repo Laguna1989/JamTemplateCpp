@@ -19,6 +19,8 @@ jt::Button::Button(jt::Vector2u const& size, jt::TextureManagerInterface& textur
     m_background->add(buttonImageName, "down", size, { 2 }, 1, textureManager);
     m_background->play("normal");
     m_background->setIgnoreCamMovement(true);
+    m_background->setOrigin(jt::OriginMode::CENTER);
+    m_background->setOffset(jt::Vector2f { size.x / 2.0f, size.y / 2.0f });
 
     m_disabledOverlay = std::make_shared<jt::Sprite>(
         "#f#" + std::to_string(size.x) + "#" + std::to_string(size.y), textureManager);
@@ -50,7 +52,14 @@ bool jt::Button::isMouseOver()
 }
 void jt::Button::setVisible(bool isVisible) { m_isVisible = isVisible; }
 bool jt::Button::getVisible() const { return m_isVisible; }
-void jt::Button::setPosition(jt::Vector2f const& newPosition) { m_pos = newPosition; }
+void jt::Button::setPosition(jt::Vector2f const& newPosition)
+{
+    m_pos = newPosition;
+    m_background->setPosition(m_pos);
+    if (m_drawable) {
+        m_drawable->setPosition(m_pos);
+    }
+}
 jt::Vector2f jt::Button::getPosition() const { return m_pos; }
 void jt::Button::doDraw() const
 {
@@ -74,11 +83,11 @@ bool jt::Button::isOver(jt::Vector2f const& mousePosition)
         return false;
     }
 
-    float px = m_background->getPosition().x;
-    float py = m_background->getPosition().y;
+    float const px = m_background->getPosition().x;
+    float const py = m_background->getPosition().y;
 
-    float w = m_background->getGlobalBounds().width;
-    float h = m_background->getGlobalBounds().height;
+    float const w = m_background->getGlobalBounds().width;
+    float const h = m_background->getGlobalBounds().height;
     return (mousePosition.x > px && mousePosition.x <= px + w && mousePosition.y > py
         && mousePosition.y <= py + h);
 }
@@ -86,7 +95,6 @@ bool jt::Button::isOver(jt::Vector2f const& mousePosition)
 void jt::Button::doUpdate(float elapsed)
 {
     if (m_drawable) {
-        m_drawable->setPosition(m_pos);
         m_drawable->update(elapsed);
     }
 
@@ -108,11 +116,14 @@ void jt::Button::doUpdate(float elapsed)
     } else {
         m_background->play("normal");
     }
-    m_disabledOverlay->setPosition((m_pos));
+
     m_disabledOverlay->update(elapsed);
 
-    m_background->setPosition(m_pos);
+    m_disabledOverlay->setPosition(m_background->getPosition());
     m_background->update(elapsed);
 }
 bool jt::Button::getActive() const { return m_isActive; }
 void jt::Button::setActive(bool isActive) { m_isActive = isActive; }
+
+std::shared_ptr<jt::DrawableInterface> jt::Button::getBackground() { return m_background; }
+std::shared_ptr<jt::DrawableInterface> jt::Button::getDrawable() const { return m_drawable; }

@@ -41,7 +41,7 @@ void jt::LoggingCamera::setZoom(float zoom)
 void jt::LoggingCamera::shake(
     float shakeDurationInSeconds, float maxShakeOffsetInPixel, float shakeIntervalInSeconds)
 {
-    m_logger.info("shake", { "jt", "camera" });
+    m_logger.debug("shake", { "jt", "camera" });
     m_decoratee.shake(shakeDurationInSeconds, maxShakeOffsetInPixel, shakeIntervalInSeconds);
 }
 

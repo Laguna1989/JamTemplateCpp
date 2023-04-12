@@ -85,7 +85,12 @@ jt::Vector2f RenderWindow::getMousePosition()
 
 void RenderWindow::setMouseCursorVisible(bool visible)
 {
-    SDL_ShowCursor(SDL_ENABLE);
+    if (visible) {
+        SDL_ShowCursor(SDL_ENABLE);
+    } else {
+        SDL_ShowCursor(SDL_DISABLE);
+    }
+
     m_isMouseCursorVisible = visible;
 }
 
