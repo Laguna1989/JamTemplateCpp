@@ -18,6 +18,7 @@ static void BM_GetAllCommands(benchmark::State& state)
         for (int i = 0; i != 100; ++i) {
             auto commands = acm.getAllCommands();
             for (auto const& c : commands) {
+                (void)c;
                 /*noop*/
             }
         }

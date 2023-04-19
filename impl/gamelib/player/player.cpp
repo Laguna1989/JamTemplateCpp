@@ -36,8 +36,7 @@ std::string selectWalkAnimation(jt::Vector2f const& velocity)
 }
 } // namespace
 
-Player::Player(std::shared_ptr<jt::Box2DWorldInterface> world, StateGame& state)
-    : m_state { state }
+Player::Player(std::shared_ptr<jt::Box2DWorldInterface> world)
 {
     b2BodyDef def;
     def.type = b2BodyType::b2_dynamicBody;

@@ -11,11 +11,9 @@ class StateGame;
 
 class Player : public jt::GameObject {
 public:
-    Player(std::shared_ptr<jt::Box2DWorldInterface> world, StateGame& state);
+    Player(std::shared_ptr<jt::Box2DWorldInterface> world);
 
 private:
-    StateGame& m_state;
-
     std::unique_ptr<InputComponentInterface> m_input { nullptr };
     std::unique_ptr<GraphicsComponentInterface> m_graphics { nullptr };
     std::unique_ptr<SoundComponentInterface> m_sound { nullptr };
