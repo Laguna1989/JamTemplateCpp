@@ -1,5 +1,6 @@
 ﻿#include "random.hpp"
 #include <color/color_factory.hpp>
+#include <vector_factory.hpp>
 #include <ctime>
 #include <stdexcept>
 
@@ -50,10 +51,9 @@ jt::Vector2f jt::Random::getRandomPointIn(jt::Vector2f const& size)
 
 jt::Vector2f jt::Random::getRandomPointInCircle(float radius)
 {
-    float const angle = getFloat(0, 2 * 3.141592f);
     float const range = getFloat(0, radius);
-    return jt::Vector2f { range * static_cast<float>(cos(static_cast<double>(angle))),
-        range * static_cast<float>(sin(static_cast<double>(angle))) };
+    float const angle = getFloat(0, 360.0f);
+    return jt::VectorFactory::fromPolar(range, angle);
 }
 
 void jt::Random::setSeed(unsigned int s) { m_engine.seed(s); }

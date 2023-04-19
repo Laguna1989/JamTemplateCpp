@@ -53,7 +53,8 @@ public:
     /// \return random point in rect
     static jt::Vector2f getRandomPointIn(jt::Vector2f const& size);
 
-    /// Get Random point in circle with radius
+    /// Get Random point in circle with radius. Note: Points in the center are more likely to be
+    /// picked tha points further out.
     /// \param radius the radius
     /// \return random point in radius range
     static jt::Vector2f getRandomPointInCircle(float radius);

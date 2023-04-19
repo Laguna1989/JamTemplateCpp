@@ -6,45 +6,39 @@
 ## About
 
 This is the JamTemplate for kickstarting your gamejam entry. It will compile C++17 code for native (Win, Linux) and
-web (webassembly) games. Internally it uses [SFML](https://www.sfml-dev.org/) and [SDL](https://www.libsdl.org/).
+web (webassembly) games. Internally it uses [SFML](https://www.sfml-dev.org/), [SDL](https://www.libsdl.org/) and
+[OpenALpp](https://github.com/Laguna1989/OpenALpp).
 
 Some games created with this JamTemplate are
 
-* [Funky Trip](https://runvs.io/Games/funkytrip) (Native & Web, Alakajam 14 2022)
-* [Gemga](https://runvs.io/Games/gemga) (Native & Web, FrankenGameJam 2021)
-* [Quasar Rush](https://runvs.io/Games/quasarrush) (Native & Web, A Game By Its Cover 2021)
-* [Space Turtles](https://runvs.io/Games/spaceturtles) (Native, MultiplayerKajam 2021)
-* [Tricky Tractor](https://runvs.io/Games/trickytractor) (Native, FrankenGameJam 2020)
-* [Burning Glyphs](https://runvs.io/Games/burningglyphs) (Web, 7DFPS 2020)
-* [Grounded](https://runvs.io/Games/grounded) (Native, FrankenGameJam 2019)
+* [Mines of Gloria](https://runvs.io/Games/minesofgloria) (Incremental Clicker Game, Native & Web, ClickerJam Spring
+    2023)
+* [Tworld](https://runvs.io/Games/tworld)(Jump and Run, Native & Web, FrankenGameJam 2022)
+* [Funky Trip](https://runvs.io/Games/funkytrip) (Top Down ARPG, Native & Web, Alakajam 14 2022)
+* [Gemga](https://runvs.io/Games/gemga) (Puzzler, Native & Web, FrankenGameJam 2021)
+* [Quasar Rush](https://runvs.io/Games/quasarrush) (Physics based puzzle game, Native & Web, A Game By Its Cover 2021)
+* [Space Turtles](https://runvs.io/Games/spaceturtles) (Multiplayer SHMUP, Native, MultiplayerKajam 2021)
+* [Tricky Tractor](https://runvs.io/Games/trickytractor) (Puzzler, Native, FrankenGameJam 2020)
+* [Burning Glyphs](https://runvs.io/Games/burningglyphs) (FPS, Web, 7DFPS 2020)
+* [Grounded](https://runvs.io/Games/grounded) (2 Player Couch Battle, Native, FrankenGameJam 2019)
 
-and some more at [my game portfolio](https://runvs.io/Games).
+and more at [my game portfolio](https://runvs.io/Games).
 
 ## Setup
 
-### Windows & Visual studio (code)
+### Visual Studio
 
 1. create build directory `build` at root level
 2. open command line (win+r `cmd`)
 3. navigate to the just created build folder
 4. type `cmake ../`
+5. Open generated solution file with Visual Studio
 
-### Clion
+### Clion (Win, Linux)
 
 1. open project folder in clion
 
-Hint: There is a file template available in the `.idea` folder that will make take away some of the boilerplate code
-during creation of Gameobject classes.
-
-### Windows 32 bit
-
-There should be no need for a 32 bit executable anymore. However, if strictly required, perform the steps from above
-except:
-
-1. Get the win32 zip from the [sfml website](https://www.sfml-dev.org/)
-2. `cmake -A Win32 ../`
-
-### Web
+### Building for Web
 
 I run it with [WSL2](https://docs.microsoft.com/de-de/windows/wsl/compare-versions), but every system capable of
 running [webassembly](https://webassembly.org/) / [emscripten](https://emscripten.org/) should work.
@@ -76,11 +70,11 @@ attaches the zipped files to the release once the build is finished. The archive
 on [itch](itch.io), [gamejolt](https://gamejolt.com/) or any other website.
 
 Note: Only the game executable and the `assets` folder is included in the archive. If more files are required, either
-adjust the deployment script or place them in the assets folder.
+adjust the deployment script (`.github/workflows/deploy.yml`) or place them in the `assets` folder.
 
 ## Cmake options
 
-All of those options can be set to ON or OFF via the cmake commandline
+The options can be set to ON or OFF via the cmake commandline or cmake-gui:
 
 * `JT_ENABLE_UNITTESTS` - Enables gtest and the unit tests
 * `JT_ENABLE_DEMOS` - Enables the demos (small example programs which showcase a specific theme)
@@ -120,6 +114,7 @@ Please check the performance benchmark [report](https://laguna1989.github.io/Jam
     * Remove or comment the line `add_subdirectory(test)`
 * Change js filename in `index.html`
 * Set most cmake variables to `OFF` in `config/cmake/cache_variables.cmake`
-* Import a new palette into `impl/gamelib/game_properties.cpp`, e.g. from [this website](https://lospec.com/palette-list) (
+* Import a new palette into `impl/gamelib/game_properties.cpp`, e.g.
+  from [this website](https://lospec.com/palette-list) (
   save as gpl and paste file content)
 * Change `impl/gamelib/game_properties.hpp` settings as needed (window size, jam, author and date)

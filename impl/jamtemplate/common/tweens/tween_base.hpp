@@ -35,8 +35,8 @@ public:
     Tween(Tween const&) = delete;
     Tween& operator=(Tween const&) = delete;
 
-    Tween(Tween&&) = default;
-    Tween& operator=(Tween&&) = default;
+    Tween(Tween&&) = delete;
+    Tween& operator=(Tween&&) = delete;
 
     /// Cancel the tween
     void cancel();
