@@ -1,0 +1,11 @@
+FROM ubuntu:latest
+
+run apt-get update
+# build tools
+RUN apt-get install -y git cmake make g++ gcc vim
+# sfml dependencies
+RUN apt-get install -y x11-xserver-utils libfreetype-dev libopenal-dev xorg-dev udev libudev-dev
+
+RUN git clone https://github.com/Laguna1989/JamTemplateCpp.git
+RUN cd JamTemplateCpp && mkdir build
+

@@ -38,7 +38,7 @@ TEST(CircularBufferSize2, Push)
 
 TEST(CircularBufferSize2, EmptyBufferDoesNotContainElements)
 {
-    jt::CircularBuffer<unsigned int, 2> buffer;
+    jt::CircularBuffer<unsigned int, 2> buffer {};
     auto const value1 = 4U;
     auto const value2 = 8U;
 
