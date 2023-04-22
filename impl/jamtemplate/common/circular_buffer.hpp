@@ -149,7 +149,7 @@ public:
 
 private:
     detail::IndexWrapper<N> m_wrapper;
-    ArrayT m_data;
+    ArrayT m_data {};
 
     std::size_t m_head { 0u };
     std::size_t m_tail { 0u };
