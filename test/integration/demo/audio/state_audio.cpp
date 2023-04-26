@@ -6,7 +6,7 @@
 
 void StateAudio::onCreate()
 {
-    check if music was already created m_sound = getGame()->audio().getPermanentSound("music");
+    // check if music was already created m_sound = getGame()->audio().getPermanentSound("music");
     if (m_sound == nullptr) {
         // create new music
         m_sound = getGame()->audio().addPermanentSound(
