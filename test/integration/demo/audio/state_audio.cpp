@@ -6,8 +6,7 @@
 
 void StateAudio::onCreate()
 {
-    // check if music was already created
-    m_sound = getGame()->audio().getPermanentSound("music");
+    // check if music was already created m_sound = getGame()->audio().getPermanentSound("music");
     if (m_sound == nullptr) {
         // create new music
         m_sound = getGame()->audio().addPermanentSound(
@@ -33,6 +32,9 @@ void StateAudio::onCreate()
         m_notes[kvp.first] = sound;
     }
     m_soundGroup = getGame()->audio().addTemporarySoundGroup(soundGroupSounds);
+
+    m_loopingSound = getGame()->audio().addTemporarySound("assets/test/integration/demo/test.ogg");
+    m_loopingSound->setLoop(true);
 }
 void StateAudio::onEnter() { }
 
@@ -101,6 +103,13 @@ void StateAudio::onDraw() const
         if (ImGui::Button(kvp.first.c_str())) {
             kvp.second->play();
         }
+    }
+    ImGui::Separator();
+    if (ImGui::Button("Play looping sound")) {
+        m_loopingSound->play();
+    }
+    if (ImGui::Button("Stop looping sound")) {
+        m_loopingSound->stop();
     }
     ImGui::End();
 }
