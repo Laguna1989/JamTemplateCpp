@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1682530006783,
+  "lastUpdate": 1682571230196,
   "repoUrl": "https://github.com/Laguna1989/JamTemplateCpp",
   "entries": {
     "Benchmark": [
@@ -12294,6 +12294,84 @@ window.BENCHMARK_DATA = {
             "value": 4.260798496932448,
             "unit": "ms/iter",
             "extra": "iterations: 163\ncpu: 4.259398773006131 ms\nthreads: 1"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "laguna.ws@gmail.com",
+            "name": "Laguna1989",
+            "username": "Laguna1989"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "2aca93d35617e1dabdb6e9b4b65dcc3c77bd431a",
+          "message": "Merge pull request #290 from Laguna1989/FIX/TestForShortLoopingSound\n\nAdd test for short looping sound in audio demo",
+          "timestamp": "2023-04-26T19:21:15+02:00",
+          "tree_id": "27adb73159cd78014e2ae1b86ac79e343af5fff1",
+          "url": "https://github.com/Laguna1989/JamTemplateCpp/commit/2aca93d35617e1dabdb6e9b4b65dcc3c77bd431a"
+        },
+        "date": 1682571229562,
+        "tool": "googlecpp",
+        "benches": [
+          {
+            "name": "BM_UpdateDrawablePositions",
+            "value": 3.763858086021508,
+            "unit": "ms/iter",
+            "extra": "iterations: 186\ncpu: 3.7624973118279565 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GetAllCommands",
+            "value": 0.3725829447102444,
+            "unit": "ms/iter",
+            "extra": "iterations: 1881\ncpu: 0.3725149920255183 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_LoggerLogWithoutTarget",
+            "value": 0.6433973238270432,
+            "unit": "ms/iter",
+            "extra": "iterations: 1087\ncpu: 0.6432686292548297 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_LoggerLogWithCoutTargetSetToOff",
+            "value": 0.6471973271719265,
+            "unit": "ms/iter",
+            "extra": "iterations: 1082\ncpu: 0.647152402957486 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_UpdateObjectGroup",
+            "value": 0.049712879375222424,
+            "unit": "ms/iter",
+            "extra": "iterations: 14085\ncpu: 0.04969378771742991 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_UpdateSpatialObjectGrid",
+            "value": 0.3223105689654969,
+            "unit": "ms/iter",
+            "extra": "iterations: 2204\ncpu: 0.3215068965517243 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_StartGame",
+            "value": 0.0037588237750556834,
+            "unit": "ms/iter",
+            "extra": "iterations: 186784\ncpu: 0.0037585419522014737 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_RefineTilemapCollisions",
+            "value": 0.18186315952195672,
+            "unit": "ms/iter",
+            "extra": "iterations: 3849\ncpu: 0.18185739153026753 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GamestateWithTweeningShapes",
+            "value": 3.575635641025726,
+            "unit": "ms/iter",
+            "extra": "iterations: 195\ncpu: 3.5753892307692325 ms\nthreads: 1"
           }
         ]
       }
