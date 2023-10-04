@@ -60,12 +60,19 @@ else ()
     target_include_directories(JamTemplateLib PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/sdl)
     if (NOT JT_ENABLE_WEB)
         include_directories(JamTemplateLib ${SDL2_INCLUDE_DIRS})
-
-        target_link_libraries(JamTemplateLib
-                ${SDL2_LIBRARIES}
-                PkgConfig::SDL2_Image
-                PkgConfig::SDL2_TTF
-                )
+        if (WIN32)
+            target_link_libraries(JamTemplateLib
+                    SDL2::SDL2
+                    SDL2_image::SDL2_image
+                    SDL2_ttf::SDL2_ttf
+                    )
+        else()
+            target_link_libraries(JamTemplateLib
+                    ${SDL2_LIBRARIES}
+                    PkgConfig::SDL2_Image
+                    PkgConfig::SDL2_TTF
+                    )
+        endif()
     endif ()
 endif ()
 

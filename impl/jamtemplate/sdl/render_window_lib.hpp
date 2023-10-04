@@ -3,7 +3,7 @@
 
 #include <graphics/render_window_interface.hpp>
 #include <sprite.hpp>
-#include <SDL2/SDL.h>
+#include <sdl_2_include.hpp>
 #include <memory>
 
 namespace jt {

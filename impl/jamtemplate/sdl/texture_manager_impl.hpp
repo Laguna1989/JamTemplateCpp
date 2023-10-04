@@ -3,7 +3,7 @@
 
 #include <render_target.hpp>
 #include <texture_manager_interface.hpp>
-#include <SDL2/SDL.h>
+#include <sdl_2_include.hpp>
 #include <map>
 #include <memory>
 #include <string>

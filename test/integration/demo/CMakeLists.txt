@@ -9,6 +9,10 @@ target_include_directories(jt_demos PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 FetchContent_GetProperties(api)
 target_link_libraries(jt_demos JamTemplateLib ArbitraryPrecisionInteger)
 
+if (NOT USE_SFML)
+    target_link_libraries(jt_demos SDL2::SDL2main)
+endif()
+
 if (MSVC)
     target_compile_options(jt_demos PRIVATE "/W3")
     target_compile_options(jt_demos PRIVATE "/EHsc")

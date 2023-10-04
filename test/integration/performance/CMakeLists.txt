@@ -11,6 +11,10 @@ add_executable(jt_performance ${PERFORMANCEFILES})
 target_link_libraries(jt_performance benchmark::benchmark)
 target_link_libraries(jt_performance JamTemplateLib)
 
+if (NOT USE_SFML)
+    target_link_libraries(jt_performance SDL2::SDL2main)
+endif()
+
 if (MSVC)
     target_compile_options(jt_performance PRIVATE "/W3")
     target_compile_options(jt_performance PRIVATE "/EHsc")

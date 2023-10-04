@@ -8,6 +8,10 @@ endif ()
 target_link_libraries(${PROJECTNAME} GameLib)
 target_include_directories(${PROJECTNAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 
+if (NOT USE_SFML)
+    target_link_libraries(${PROJECTNAME} SDL2::SDL2main)
+endif()
+
 if (MSVC)
     target_compile_options(${PROJECTNAME} PRIVATE "/W3")
     target_compile_options(${PROJECTNAME} PRIVATE "/EHsc")

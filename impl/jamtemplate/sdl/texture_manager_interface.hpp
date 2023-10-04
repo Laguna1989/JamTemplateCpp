@@ -2,7 +2,7 @@
 #define JAMTEMPLATE_TEXTURE_MANAGER_INTERFACE_HPP
 
 #include <render_target.hpp>
-#include <SDL2/SDL.h>
+#include <sdl_2_include.hpp>
 #include <cstddef>
 #include <memory>
 #include <string>

@@ -1,11 +1,18 @@
 message(STATUS "Fetching imgui-sdl")
 
-FetchContent_Declare(
-        imgui-sdl
-        GIT_REPOSITORY https://github.com/Laguna1989/imgui_sdl.git
-        GIT_TAG WebAssemblyInclude
-)
-
+if (JT_ENABLE_WEB)
+    FetchContent_Declare(
+            imgui-sdl
+            GIT_REPOSITORY https://github.com/Laguna1989/imgui_sdl.git
+            GIT_TAG WebAssemblyInclude
+    )
+else()
+    FetchContent_Declare(
+            imgui-sdl
+            GIT_REPOSITORY https://github.com/Laguna1989/imgui_sdl.git
+            GIT_TAG master
+    )
+endif()
 FetchContent_Populate(imgui-sdl)
 FetchContent_GetProperties(imgui-sdl)
 
@@ -20,4 +27,14 @@ target_include_directories(imgui-sdl SYSTEM PUBLIC ${imgui_SOURCE_DIR}/)
 target_include_directories(imgui-sdl SYSTEM PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/)
 target_include_directories(imgui-sdl SYSTEM PUBLIC ${imgui-sdl_SOURCE_DIR}/)
 
-target_link_libraries(imgui-sdl ${SDL2_LIBRARIES} )
+if (JT_ENABLE_WEB)
+    target_link_libraries(imgui-sdl ${SDL2_LIBRARIES} )
+else()
+    FetchContent_GetProperties(sdl2)
+    set(SDL2_DIR "${sdl2_SOURCE_DIR}/cmake" CACHE PATH "Path to sdl2 root dir.")
+    find_package(SDL2 REQUIRED)
+    target_link_libraries(imgui-sdl SDL2::SDL2 )
+endif()
+
+
+

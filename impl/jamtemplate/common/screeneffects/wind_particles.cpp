@@ -1,7 +1,7 @@
-
 #include "wind_particles.hpp"
 #include <random/random.hpp>
 #include <screeneffects/screen_wrap.hpp>
+#include <stdexcept>
 
 jt::WindParticles::WindParticles(
     jt::Vector2f const& screenSize, std::vector<jt::Color> const& colors)

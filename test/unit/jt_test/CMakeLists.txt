@@ -21,6 +21,11 @@ add_executable(jt_tests ${UNITTESTFILES_ALL})
 if (JT_ENABLE_WEB)
     set(CMAKE_EXECUTABLE_SUFFIX ".html")
 endif ()
+
+if (NOT USE_SFML)
+    target_link_libraries(jt_tests SDL2::SDL2main)
+endif()
+
 if (MSVC)
     target_compile_options(jt_tests PRIVATE "/W3")
     target_compile_options(jt_tests PRIVATE "/EHsc")

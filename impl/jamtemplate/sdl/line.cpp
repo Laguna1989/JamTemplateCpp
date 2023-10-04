@@ -1,6 +1,6 @@
 #include "line.hpp"
 #include <math_helper.hpp>
-#include <SDL2/SDL.h>
+#include <sdl_2_include.hpp>
 
 jt::Line::Line(jt::Vector2f lineVector)
     : m_lineVector { std::move(lineVector) }

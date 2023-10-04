@@ -3,7 +3,7 @@
 
 #include <color/color.hpp>
 #include <render_target.hpp>
-#include <SDL2/SDL.h>
+#include <sdl_2_include.hpp>
 #include <memory>
 
 namespace jt {

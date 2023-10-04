@@ -2,7 +2,7 @@
 #define JAMTEMPLATE_RENDER_TARGET_LIB_HPP
 
 #include <graphics/render_target_interface.hpp>
-#include <SDL2/SDL.h>
+#include <sdl_2_include.hpp>
 #include <memory>
 
 namespace jt {

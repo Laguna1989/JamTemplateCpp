@@ -8,7 +8,7 @@
 #include <render_target_layer_lib.hpp>
 #include <render_target_lib.hpp>
 #include <texture_manager_impl.hpp>
-#include <SDL2/SDL.h>
+#include <sdl_2_include.hpp>
 #include <optional>
 
 namespace jt {

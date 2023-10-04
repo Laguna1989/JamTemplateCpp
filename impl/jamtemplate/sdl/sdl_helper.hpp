@@ -2,7 +2,7 @@
 #define JAMTEMPLATE_SDLHELPER_HPP
 
 #include <vector.hpp>
-#include <SDL2/SDL.h>
+#include <sdl_2_include.hpp>
 #include <cstddef>
 
 namespace jt {

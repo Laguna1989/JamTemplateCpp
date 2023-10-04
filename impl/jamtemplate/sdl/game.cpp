@@ -1,6 +1,6 @@
 ﻿#include "game.hpp"
-#include <SDL2/SDL.h>
-#include <SDL_ttf.h>
+
+#include <sdl_2_include.hpp>
 
 #ifdef JT_ENABLE_WEB
 #include <emscripten.h>
