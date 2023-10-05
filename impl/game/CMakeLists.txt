@@ -9,7 +9,9 @@ target_link_libraries(${PROJECTNAME} GameLib)
 target_include_directories(${PROJECTNAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 
 if (NOT USE_SFML)
-    target_link_libraries(${PROJECTNAME} SDL2::SDL2main)
+	if (NOT JT_ENABLE_WEB)
+		target_link_libraries(${PROJECTNAME} SDL2::SDL2main)
+	endif()
 endif()
 
 if (MSVC)
@@ -22,3 +24,6 @@ endif ()
 
 
 jt_use_assets(${PROJECTNAME})
+if (NOT USE_SFML)
+    deploy_sdl_dlls()
+endif()

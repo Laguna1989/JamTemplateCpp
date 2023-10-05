@@ -10,7 +10,10 @@ FetchContent_GetProperties(api)
 target_link_libraries(jt_demos JamTemplateLib ArbitraryPrecisionInteger)
 
 if (NOT USE_SFML)
-    target_link_libraries(jt_demos SDL2::SDL2main)
+	if (WIN32)
+		target_link_libraries(jt_demos SDL2::SDL2main)
+		deploy_sdl_dlls()
+	endif()
 endif()
 
 if (MSVC)

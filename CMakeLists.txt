@@ -40,79 +40,23 @@ endif ()
 
 ## set include for mac homebrew
 #####################################################
-# TODO clean up if else massacre in complete file
-if (NOT USE_SFML)
-    if (NOT JT_ENABLE_WEB)
-        if (APPLE)
-            find_package(SDL2 REQUIRED)
-
-            include(FindPkgConfig)
-            pkg_check_modules(SDL2_Image REQUIRED IMPORTED_TARGET SDL2_image)
-            pkg_check_modules(SDL2_TTF REQUIRED IMPORTED_TARGET SDL2_ttf)
-            if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
-                include_directories(/usr/local/Cellar/sdl2/2.0.22/include/
-                        /usr/local/Cellar/sdl2_image/2.0.5/include/
-                        /usr/local/Cellar/sdl2_ttf/2.0.18_1/include/)
-            endif()
-        endif()
-    endif ()
-endif ()
+mac_sdl_setup()
 
 ## get externals
 #####################################################
 set(FETCHCONTENT_UPDATES_DISCONNECTED ON)
 add_subdirectory(ext)
 
-if (WIN32)
-    if (NOT USE_SFML)
-        FETCHCONTENT_GETPROPERTIES(sdl2)
-        FETCHCONTENT_GETPROPERTIES(sdl2-image)
-        FETCHCONTENT_GETPROPERTIES(sdl2-ttf)
-        message(STATUS "sdl2_SOURCE_DIR: ${sdl2_SOURCE_DIR}")
-        message(STATUS "sdl2-image_SOURCE_DIR: ${sdl2-image_SOURCE_DIR}")
-        message(STATUS "sdl2-ttf_SOURCE_DIR: ${sdl2-ttf_SOURCE_DIR}")
-
-        set(SDL2_DIR "${sdl2_SOURCE_DIR}/cmake" CACHE PATH "Path to sdl2 root dir.")
-        find_package(SDL2 REQUIRED)
-
-        set(sdl2_image_DIR "${sdl2-image_SOURCE_DIR}/cmake" CACHE PATH "Path to sdl2_image root dir.")
-        find_package(sdl2_image REQUIRED)
-
-        set(sdl2_ttf_DIR "${sdl2-ttf_SOURCE_DIR}/cmake" CACHE PATH "Path to sdl2_ttf root dir.")
-        find_package(sdl2_ttf REQUIRED)
-    endif()
-endif()
-
-## Other variables and compiler setup II
-#####################################################
 set(CXX_STANDARD_REQUIRED ON)
-set(CMAKE_CXX_STANDARD 17)
-set(CXX_STANDARD 17)
-
-
-FetchContent_GetProperties(sfml)
-# Apple users: set to /usr/local/Cellar/sfml/2.4.2_1/lib/ or respectively
-if (WIN32)
-    set(SFML_DIR_ROOT "${sfml_SOURCE_DIR}" CACHE PATH "Path to SFML root dir.")
-endif ()
-
-if ($ENV{CLION_IDE})
-    set(SFML_DIR "${SFML_DIR_ROOT}/lib/cmake/SFML")
-endif ()
-
-#####################################################
-## Set link directories
-#####################################################
+set(CMAKE_CXX_STANDARD 20)
+set(CXX_STANDARD 20)
 
 if (USE_SFML)
-    if (WIN32 OR APPLE)
-        link_directories(${SFML_DIR_ROOT}/lib)
-    endif ()
-endif ()
+    setup_sfml()
+else ()
+    setup_sdl()
+endif()
 
-
-## setup Projects
-#####################################################
 add_subdirectory(impl)
 add_subdirectory(test)
 
