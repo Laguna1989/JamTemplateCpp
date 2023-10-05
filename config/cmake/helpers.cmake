@@ -85,7 +85,11 @@ function (setup_sdl)
         set(sdl2_ttf_DIR "${sdl2-ttf_SOURCE_DIR}/cmake" CACHE PATH "Path to sdl2_ttf root dir.")
         find_package(sdl2_ttf REQUIRED)
     else()
-        message(STATUS "no automatic setup for sdl2 on non-windows systems")
+        message(STATUS "non-windows systems it is expected that sdl2, sdl2_image and sdl2_ttf is already installed")
+        include(FindPkgConfig)
+        pkg_check_modules(SDL2_Image REQUIRED IMPORTED_TARGET SDL2_image)
+        pkg_check_modules(SDL2_TTF REQUIRED IMPORTED_TARGET SDL2_ttf)
+
     endif()
     # on non-windows it is expected that sdl is available on the system
 endfunction()

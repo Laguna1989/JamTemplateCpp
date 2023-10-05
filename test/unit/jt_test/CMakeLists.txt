@@ -23,8 +23,10 @@ if (JT_ENABLE_WEB)
 endif ()
 
 if (NOT USE_SFML)
-    target_link_libraries(jt_tests SDL2::SDL2main)
-    deploy_sdl_dlls()
+    if (WIN32)
+        target_link_libraries(jt_tests SDL2::SDL2main)
+        deploy_sdl_dlls()
+    endif()
 endif()
 
 if (MSVC)

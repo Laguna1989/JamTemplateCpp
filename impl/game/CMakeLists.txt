@@ -10,7 +10,10 @@ target_include_directories(${PROJECTNAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 
 if (NOT USE_SFML)
 	if (NOT JT_ENABLE_WEB)
-		target_link_libraries(${PROJECTNAME} SDL2::SDL2main)
+        if (WIN32)
+		    target_link_libraries(${PROJECTNAME} SDL2::SDL2main)
+            deploy_sdl_dlls()
+        endif()
 	endif()
 endif()
 
@@ -24,6 +27,3 @@ endif ()
 
 
 jt_use_assets(${PROJECTNAME})
-if (NOT USE_SFML)
-    deploy_sdl_dlls()
-endif()
