@@ -23,12 +23,17 @@ function(target_link_libraries_system target)
 endfunction(target_link_libraries_system)
 
 function(deploy_sdl_dlls)
-    FETCHCONTENT_GETPROPERTIES(sdl2)
-    FETCHCONTENT_GETPROPERTIES(sdl2-image)
-    FETCHCONTENT_GETPROPERTIES(sdl2-ttf)
-    configure_file(${sdl2_SOURCE_DIR}/lib/x64/SDL2.dll ${CMAKE_CURRENT_BINARY_DIR}/ COPYONLY)
-    configure_file(${sdl2-image_SOURCE_DIR}/lib/x64/SDL2_image.dll ${CMAKE_CURRENT_BINARY_DIR}/ COPYONLY)
-    configure_file(${sdl2-ttf_SOURCE_DIR}/lib/x64/SDL2_ttf.dll ${CMAKE_CURRENT_BINARY_DIR}/ COPYONLY)
+    if(WIN32)
+        FETCHCONTENT_GETPROPERTIES(sdl2)
+        FETCHCONTENT_GETPROPERTIES(sdl2-image)
+        FETCHCONTENT_GETPROPERTIES(sdl2-ttf)
+        configure_file(${sdl2_SOURCE_DIR}/lib/x64/SDL2.dll ${CMAKE_CURRENT_BINARY_DIR}/ COPYONLY)
+        configure_file(${sdl2-image_SOURCE_DIR}/lib/x64/SDL2_image.dll ${CMAKE_CURRENT_BINARY_DIR}/ COPYONLY)
+        configure_file(${sdl2-ttf_SOURCE_DIR}/lib/x64/SDL2_ttf.dll ${CMAKE_CURRENT_BINARY_DIR}/ COPYONLY)
+    else ()
+        message(STATUS "No dlls to copy on non-windows system")
+    endif()
+
 endfunction()
 
 
@@ -79,6 +84,8 @@ function (setup_sdl)
 
         set(sdl2_ttf_DIR "${sdl2-ttf_SOURCE_DIR}/cmake" CACHE PATH "Path to sdl2_ttf root dir.")
         find_package(sdl2_ttf REQUIRED)
+    else()
+        message(STATUS "no automatic setup for sdl2 on non-windows systems")
     endif()
     # on non-windows it is expected that sdl is available on the system
 endfunction()
