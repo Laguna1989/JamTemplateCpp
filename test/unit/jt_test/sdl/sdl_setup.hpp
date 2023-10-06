@@ -3,7 +3,7 @@
 
 #include <graphics/render_target_interface.hpp>
 #include <texture_manager_interface.hpp>
-#include <SDL2/SDL.h>
+#include <sdl_2_include.hpp>
 #include <memory>
 
 struct SDLSetup {

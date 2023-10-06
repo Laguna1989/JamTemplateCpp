@@ -1,5 +1,5 @@
 ﻿#include "render_window_lib.hpp"
-#include <SDL2/SDL.h>
+#include <sdl_2_include.hpp>
 #include <imgui.h>
 #include <imgui_impl_sdl.h>
 #include <imgui_sdl.h>

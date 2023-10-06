@@ -1,7 +1,5 @@
 #include "gfx_impl.hpp"
 #include <render_target_lib.hpp>
-#include <SDL2/SDL.h>
-#include <utility>
 
 namespace jt {
 

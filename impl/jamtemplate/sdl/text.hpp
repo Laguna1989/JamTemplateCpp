@@ -3,8 +3,7 @@
 
 #include <drawable_impl_sdl.hpp>
 #include <render_target.hpp>
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_ttf.h>
+#include <sdl_2_include.hpp>
 #include <memory>
 #include <string>
 #include <vector>

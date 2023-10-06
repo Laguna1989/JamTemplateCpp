@@ -1,6 +1,7 @@
 #include "bee.hpp"
 #include <box2d/user_data_entries.hpp>
 #include <Box2D/Box2D.h>
+#include <stdexcept>
 
 Bee::Bee(std::shared_ptr<jt::Box2DWorldInterface> world, jt::Vector2f const& position,
     std::shared_ptr<EnemyMovementInterface> movement)

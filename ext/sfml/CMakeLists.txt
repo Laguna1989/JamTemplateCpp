@@ -1,4 +1,5 @@
 message(STATUS "Fetching sfml")
+cmake_policy(SET CMP0135 OLD)
 FetchContent_Declare(
         SFML
         URL "https://github.com/SFML/SFML/archive/2.5.1.zip"

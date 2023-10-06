@@ -1,5 +1,5 @@
 #include "gamepad_input_lib.hpp"
-#include <SDL2/SDL.h>
+#include <sdl_2_include.hpp>
 #include <iostream>
 #include <map>
 #include <memory>
@@ -55,6 +55,7 @@ SDL_GameControllerButton toLib(jt::GamepadButtonCode b)
     case jt::GamepadButtonCode::GBU8:
         return static_cast<SDL_GameControllerButton>(jt::GamepadButtonCode::GBU8);
     }
+    return static_cast<SDL_GameControllerButton>(jt::GamepadButtonCode::GBA);
 }
 
 std::shared_ptr<SDL_GameController> createGamepad(int gamepadId)

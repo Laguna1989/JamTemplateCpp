@@ -15,7 +15,7 @@ jobs:
       - name: Set up cmake
         uses: jwlawson/actions-setup-cmake@v1.11
         with:
-          cmake-version: '3.21.x'
+          cmake-version: '3.26.x'
 
       - name: Set up gcc
         uses: egor-tensin/setup-gcc@v1
@@ -70,7 +70,7 @@ jobs:
       - name: Set up cmake
         uses: jwlawson/actions-setup-cmake@v1.11
         with:
-          cmake-version: '3.21.x'
+          cmake-version: '3.26.x'
 
       - name: Set up gcc
         uses: egor-tensin/setup-gcc@v1
@@ -119,7 +119,7 @@ jobs:
       - name: Set up cmake
         uses: jwlawson/actions-setup-cmake@v1.11
         with:
-          cmake-version: '3.21.x'
+          cmake-version: '3.26.x'
 
       - uses: actions/checkout@v2
 
@@ -133,7 +133,26 @@ jobs:
       - name: Test
         working-directory: ${{github.workspace}}/build/test/unit/jt_test
         run: Debug\jt_tests.exe --gtest_shuffle
+  WindowsSDL:
+    runs-on: windows-2019
+    steps:
+      - name: Set up cmake
+        uses: jwlawson/actions-setup-cmake@v1.11
+        with:
+          cmake-version: '3.26.x'
 
+      - uses: actions/checkout@v2
+
+      - name: CMake
+        run: cmake -B ${{github.workspace}}/build -DJT_ENABLE_AUDIO_TESTS=OFF -DUSE_SFML=OFF .
+
+      - name: Build
+        working-directory: ${{github.workspace}}/build
+        run: cmake --build .
+
+      - name: Test
+        working-directory: ${{github.workspace}}/build/test/unit/jt_test
+        run: Debug\jt_tests.exe --gtest_shuffle
   WebSDL:
     runs-on: ubuntu-latest
     env:
@@ -142,7 +161,7 @@ jobs:
       - name: Set up cmake
         uses: jwlawson/actions-setup-cmake@v1.12
         with:
-          cmake-version: '3.21.x'
+          cmake-version: '3.26.x'
 
       - name: Set up gcc
         uses: egor-tensin/setup-gcc@v1
@@ -182,7 +201,7 @@ jobs:
       - name: Set up cmake
         uses: jwlawson/actions-setup-cmake@v1.11
         with:
-          cmake-version: '3.21.x'
+          cmake-version: '3.26.x'
 
       - name: Install dependencies
         run: |

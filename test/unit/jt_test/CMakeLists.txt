@@ -3,7 +3,7 @@ file(GLOB UNITTESTFILES_BASE CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/*)
 file(GLOB_RECURSE UNITTESTFILES_SFML CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/sfml/*)
 file(GLOB_RECURSE UNITTESTFILES_SDL CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/sdl/*)
 
-set(UNITTESTFILES_ALL ${UNITTESTFILES_COMMON} common/audio/sound_fade_info_test.cpp)
+set(UNITTESTFILES_ALL ${UNITTESTFILES_COMMON} ${UNITTESTFILES_BASE} common/audio/sound_fade_info_test.cpp)
 
 if (USE_SFML)
     list(APPEND UNITTESTFILES_ALL ${UNITTESTFILES_SFML})
@@ -21,6 +21,14 @@ add_executable(jt_tests ${UNITTESTFILES_ALL})
 if (JT_ENABLE_WEB)
     set(CMAKE_EXECUTABLE_SUFFIX ".html")
 endif ()
+
+if (NOT USE_SFML)
+    if (WIN32)
+        target_link_libraries(jt_tests SDL2::SDL2main)
+        deploy_sdl_dlls()
+    endif()
+endif()
+
 if (MSVC)
     target_compile_options(jt_tests PRIVATE "/W3")
     target_compile_options(jt_tests PRIVATE "/EHsc")

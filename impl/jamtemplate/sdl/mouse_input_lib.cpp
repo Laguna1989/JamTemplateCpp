@@ -1,5 +1,5 @@
 #include "mouse_input_lib.hpp"
-#include <SDL2/SDL.h>
+#include <sdl_2_include.hpp>
 #include <cstdint>
 
 namespace jt {

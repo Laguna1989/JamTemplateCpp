@@ -56,8 +56,17 @@
 #include <iostream>
 
 // SDL
+#if JT_ENABLE_WEB
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_syswm.h>
+#elif WIN32
+#include "SDL.h"
+#include "SDL_syswm.h"
+#else
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_syswm.h>
+#endif
+
 #if defined(__APPLE__)
 #include <TargetConditionals.h>
 #endif

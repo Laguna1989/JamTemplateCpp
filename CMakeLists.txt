@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.19)
+cmake_minimum_required(VERSION 3.26)
 set(PROJECTNAME "JamTemplate")
 project(${PROJECTNAME})
 
@@ -40,56 +40,25 @@ endif ()
 
 ## set include for mac homebrew
 #####################################################
-if (NOT USE_SFML)
-    if (NOT JT_ENABLE_WEB)
-        find_package(SDL2 REQUIRED)
-
-        include(FindPkgConfig)
-        pkg_check_modules(SDL2_Image REQUIRED IMPORTED_TARGET SDL2_image)
-        pkg_check_modules(SDL2_TTF REQUIRED IMPORTED_TARGET SDL2_ttf)
-        if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
-            include_directories(/usr/local/Cellar/sdl2/2.0.22/include/
-                    /usr/local/Cellar/sdl2_image/2.0.5/include/
-                    /usr/local/Cellar/sdl2_ttf/2.0.18_1/include/)
-        endif ()
-    endif ()
+if (APPLE)
+    mac_sdl_setup()
 endif ()
+
+set(CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_STANDARD 17)
+set(CXX_STANDARD 17)
 
 ## get externals
 #####################################################
 set(FETCHCONTENT_UPDATES_DISCONNECTED ON)
 add_subdirectory(ext)
 
-## Other variables and compiler setup II
-#####################################################
-set(CXX_STANDARD_REQUIRED ON)
-set(CMAKE_CXX_STANDARD 17)
-set(CXX_STANDARD 17)
-
-
-FetchContent_GetProperties(sfml)
-# Apple users: set to /usr/local/Cellar/sfml/2.4.2_1/lib/ or respectively
-if (WIN32)
-    set(SFML_DIR_ROOT "${sfml_SOURCE_DIR}" CACHE PATH "Path to SFML root dir.")
-endif ()
-
-if ($ENV{CLION_IDE})
-    set(SFML_DIR "${SFML_DIR_ROOT}/lib/cmake/SFML")
-endif ()
-
-#####################################################
-## Set link directories
-#####################################################
-
 if (USE_SFML)
-    if (WIN32 OR APPLE)
-        link_directories(${SFML_DIR_ROOT}/lib)
-    endif ()
+    setup_sfml()
+else ()
+    setup_sdl()
 endif ()
 
-
-## setup Projects
-#####################################################
 add_subdirectory(impl)
 add_subdirectory(test)
 

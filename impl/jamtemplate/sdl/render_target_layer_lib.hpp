@@ -1,7 +1,7 @@
 ﻿#ifndef JAMTEMPLATE_RENDERTARGET_LAYER_LIB_HPP
 #define JAMTEMPLATE_RENDERTARGET_LAYER_LIB_HPP
 
-#include <SDL2/SDL.h>
+#include <sdl_2_include.hpp>
 
 namespace jt {
 

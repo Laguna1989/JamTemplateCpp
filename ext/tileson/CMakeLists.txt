@@ -2,7 +2,7 @@ message(STATUS "Fetching tileson")
 FetchContent_Declare(
         tileson
         GIT_REPOSITORY https://github.com/SSBMTonberry/tileson.git
-        GIT_TAG master
+        GIT_TAG v1.4.0
 )
 
 SET(BUILD_TESTS OFF)
