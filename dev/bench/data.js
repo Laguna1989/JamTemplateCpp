@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1683438327063,
+  "lastUpdate": 1696592985945,
   "repoUrl": "https://github.com/Laguna1989/JamTemplateCpp",
   "entries": {
     "Benchmark": [
@@ -12450,6 +12450,84 @@ window.BENCHMARK_DATA = {
             "value": 3.5870993794875314,
             "unit": "ms/iter",
             "extra": "iterations: 195\ncpu: 3.5867907692307655 ms\nthreads: 1"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "laguna.ws@gmail.com",
+            "name": "Laguna1989",
+            "username": "Laguna1989"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "ba9479c621bfb80d75f8bbe48e631eef6218a833",
+          "message": "SDL precompiled on windows (#291)\n\n* Add first working commit\r\n\r\n* Clean up a bit\r\n\r\n* Upgrade cmake to 3.26 in github actions\r\n\r\n* Clean up cmakelists and extract helper functions\r\n\r\n* do not try to copy dlls on non-windows systems\r\n\r\n* Use fixed tileson version\r\n\r\n* Make more changes that hopefully make this work\r\n\r\n* Make more changes that hopefully make this work\r\n\r\n* remove superfluous sdl syswm include",
+          "timestamp": "2023-10-06T12:28:04+02:00",
+          "tree_id": "8ca900b74aaa829053dd43f83d1ce71bfd9754ee",
+          "url": "https://github.com/Laguna1989/JamTemplateCpp/commit/ba9479c621bfb80d75f8bbe48e631eef6218a833"
+        },
+        "date": 1696592984840,
+        "tool": "googlecpp",
+        "benches": [
+          {
+            "name": "BM_UpdateDrawablePositions",
+            "value": 3.282982478873277,
+            "unit": "ms/iter",
+            "extra": "iterations: 213\ncpu: 3.2826633802816896 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GetAllCommands",
+            "value": 0.3560381836215594,
+            "unit": "ms/iter",
+            "extra": "iterations: 1966\ncpu: 0.35597644964394703 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_LoggerLogWithoutTarget",
+            "value": 0.38365685972602886,
+            "unit": "ms/iter",
+            "extra": "iterations: 1825\ncpu: 0.38364252054794507 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_LoggerLogWithCoutTargetSetToOff",
+            "value": 0.3837684040570254,
+            "unit": "ms/iter",
+            "extra": "iterations: 1824\ncpu: 0.38373547149122816 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_UpdateObjectGroup",
+            "value": 0.06204609930900045,
+            "unit": "ms/iter",
+            "extra": "iterations: 11288\ncpu: 0.06204487951807229 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_UpdateSpatialObjectGrid",
+            "value": 0.32591834928670294,
+            "unit": "ms/iter",
+            "extra": "iterations: 2173\ncpu: 0.32589484583525097 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_StartGame",
+            "value": 0.0037354795857388336,
+            "unit": "ms/iter",
+            "extra": "iterations: 187418\ncpu: 0.003735340789038404 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_RefineTilemapCollisions",
+            "value": 0.23329030076692353,
+            "unit": "ms/iter",
+            "extra": "iterations: 2999\ncpu: 0.2332713904634878 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GamestateWithTweeningShapes",
+            "value": 3.3462493397129522,
+            "unit": "ms/iter",
+            "extra": "iterations: 209\ncpu: 3.346104306220096 ms\nthreads: 1"
           }
         ]
       }
