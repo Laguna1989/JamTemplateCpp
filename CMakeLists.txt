@@ -40,22 +40,24 @@ endif ()
 
 ## set include for mac homebrew
 #####################################################
-mac_sdl_setup()
+if (APPLE)
+    mac_sdl_setup()
+endif ()
+
+set(CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_STANDARD 17)
+set(CXX_STANDARD 17)
 
 ## get externals
 #####################################################
 set(FETCHCONTENT_UPDATES_DISCONNECTED ON)
 add_subdirectory(ext)
 
-set(CXX_STANDARD_REQUIRED ON)
-set(CMAKE_CXX_STANDARD 20)
-set(CXX_STANDARD 20)
-
 if (USE_SFML)
     setup_sfml()
 else ()
     setup_sdl()
-endif()
+endif ()
 
 add_subdirectory(impl)
 add_subdirectory(test)

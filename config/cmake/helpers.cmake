@@ -33,17 +33,11 @@ function(deploy_sdl_dlls)
     else ()
         message(STATUS "No dlls to copy on non-windows system")
     endif()
-
 endfunction()
 
 
 function (mac_sdl_setup)
-    if (APPLE AND NOT USE_SFML)
-        find_package(SDL2 REQUIRED)
-
-        include(FindPkgConfig)
-        pkg_check_modules(SDL2_Image REQUIRED IMPORTED_TARGET SDL2_image)
-        pkg_check_modules(SDL2_TTF REQUIRED IMPORTED_TARGET SDL2_ttf)
+    if (NOT USE_SFML)
         if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
             include_directories(/usr/local/Cellar/sdl2/2.0.22/include/
                     /usr/local/Cellar/sdl2_image/2.0.5/include/
@@ -87,6 +81,7 @@ function (setup_sdl)
     else()
         message(STATUS "non-windows systems it is expected that sdl2, sdl2_image and sdl2_ttf is already installed")
         if(NOT JT_ENABLE_WEB)
+            find_package(SDL2 REQUIRED)
             include(FindPkgConfig)
             pkg_check_modules(SDL2_Image REQUIRED IMPORTED_TARGET SDL2_image)
             pkg_check_modules(SDL2_TTF REQUIRED IMPORTED_TARGET SDL2_ttf)
