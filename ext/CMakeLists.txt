@@ -3,6 +3,7 @@ include(FetchContent)
 
 message(STATUS "Fetching external libraries started")
 add_subdirectory(api)
+add_subdirectory(aselib)
 add_subdirectory(openalpp)
 add_subdirectory(tileson)
 add_subdirectory(box2d)
