@@ -23,7 +23,7 @@ public:
     RenderWindow(RenderWindow&&) = default;
     RenderWindow& operator=(const RenderWindow&) = delete;
     RenderWindow& operator=(RenderWindow&&) = default;
-    ~RenderWindow() = default;
+    ~RenderWindow();
 
     std::shared_ptr<jt::RenderTargetLayer> createRenderTarget() override;
 
