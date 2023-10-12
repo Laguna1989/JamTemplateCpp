@@ -50,7 +50,8 @@ set(CXX_STANDARD 17)
 
 ## get externals
 #####################################################
-set(FETCHCONTENT_UPDATES_DISCONNECTED ON)
+
+
 add_subdirectory(ext)
 
 if (USE_SFML)
