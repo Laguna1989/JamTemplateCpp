@@ -1,4 +1,5 @@
 ﻿#include "animation.hpp"
+#include <aselib/aseprite_data.hpp>
 #include <math_helper.hpp>
 #include <nlohmann.hpp>
 #include <sprite.hpp>
@@ -136,6 +137,42 @@ void jt::Animation::loadFromJson(
 
         add(imageFileName, animationName, jt::Vector2u { width, height }, frameIndices, frameTimes,
             textureManager);
+    }
+}
+
+void jt::Animation::loadFromAseprite(
+    std::string const& asepriteFileName, jt::TextureManagerInterface& textureManager)
+{
+    aselib::AsepriteData ase { asepriteFileName };
+    if (ase.m_frames[0].m_chunks.m_tag_chunks.empty()) {
+        throw std::invalid_argument { "aseprite file '" + asepriteFileName
+            + "' does not contain any tags/animations" };
+    }
+
+    auto const imageSize
+        = jt::Vector2u { ase.m_header.m_width_in_pixel, ase.m_header.m_height_in_pixel };
+
+    for (auto const& tagChunk : ase.m_frames[0].m_chunks.m_tag_chunks) {
+        for (auto const& tag : tagChunk.m_tags) {
+            auto const animName = tag.m_tag_name;
+            auto const startFrame = tag.m_from_frame;
+            auto const endFrame = tag.m_to_frame;
+            auto const repeat = tag.m_repeat_animation == 0;
+
+            std::vector<unsigned int> frameIDs = jt::MathHelper::numbersBetween(
+                static_cast<unsigned int>(startFrame), static_cast<unsigned int>(endFrame));
+
+            std::vector<float> frame_times;
+            frame_times.resize(frameIDs.size());
+            std::transform(
+                frameIDs.cbegin(), frameIDs.cend(), frame_times.begin(), [&ase](auto const id) {
+                    // aseprite stores the frametime in milliseconds, JT expects it in seconds.
+                    return ase.m_frames.at(id).m_frame_header.m_frame_duration / 1000.0f;
+                });
+
+            add(asepriteFileName, animName, imageSize, frameIDs, frame_times, textureManager);
+            setLooping(animName, repeat);
+        }
     }
 }
 

@@ -1,12 +1,52 @@
 message(STATUS "Add FetchContent")
 include(FetchContent)
 
+message(STATUS "Add CMP.cmake")
+# download CPM.cmake
+file(
+        DOWNLOAD
+        https://github.com/cpm-cmake/CPM.cmake/releases/download/v0.38.3/CPM.cmake
+        ${CMAKE_BINARY_DIR}/cmake/CPM.cmake
+        EXPECTED_HASH SHA256=cc155ce02e7945e7b8967ddfaff0b050e958a723ef7aad3766d368940cb15494
+)
+include(${CMAKE_BINARY_DIR}/cmake/CPM.cmake)
+
 message(STATUS "Fetching external libraries started")
-add_subdirectory(api)
-add_subdirectory(openalpp)
-add_subdirectory(tileson)
-add_subdirectory(box2d)
+
+CPMAddPackage(
+        NAME api
+        GITHUB_REPOSITORY Laguna1989/arbitrary_precision_int_cpp
+        GIT_TAG master
+        OPTIONS
+        "API_ENABLE_UNIT_TESTS OFF"
+        "API_ENABLE_PERFORMANCE_TESTS OFF"
+)
+CPMAddPackage(
+        NAME aselib
+        GITHUB_REPOSITORY Laguna1989/aselib
+        GIT_TAG v0.1.0
+        OPTIONS
+        "ASE_LIB_ENABLE_UNIT_TESTS OFF"
+)
+CPMAddPackage(
+        NAME openalpp
+        GITHUB_REPOSITORY Laguna1989/OpenALpp
+        GIT_TAG v0.2.2
+        OPTIONS
+        "OALPP_ENABLE_UNIT_TESTS OFF"
+        "OALPP_ENABLE_INTEGRATION_TESTS OFF"
+        "OALPP_ENABLE_APPROVAL_TESTS OFF"
+        "OALPP_STATIC_LIBRARY ON"
+)
+CPMAddPackage(
+        NAME tileson
+        GITHUB_REPOSITORY SSBMTonberry/tileson
+        GIT_TAG v1.4.0
+        OPTIONS
+        "BUILD_TESTS OFF"
+)
 add_subdirectory(imgui)
+add_subdirectory(box2d)
 if (USE_SFML)
     add_subdirectory(sfml)
     add_subdirectory(imgui-sfml)
@@ -18,5 +58,15 @@ else ()
     endif ()
     add_subdirectory(imgui-sdl)
 endif ()
+
+if(JT_ENABLE_UNITTESTS)
+CPMAddPackage(
+        NAME googletest
+        GITHUB_REPOSITORY google/googletest
+        GIT_TAG v1.14.0
+        VERSION 1.14.0
+        OPTIONS "INSTALL_GTEST OFF" "gtest_force_shared_crt"
+)
+endif()
 
 message(STATUS "Fetching external libraries done")

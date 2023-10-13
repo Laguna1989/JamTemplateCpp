@@ -46,6 +46,12 @@ public:
     /// \param textureManager the texture manager to load the individual sprites
     void loadFromJson(std::string const& jsonFileName, TextureManagerInterface& textureManager);
 
+    /// Load animation from aseprite file
+    /// \param asepriteFileName path to the aseprite file
+    /// \param textureManager the texture manager to load the individual sprites
+    void loadFromAseprite(
+        std::string const& asepriteFileName, TextureManagerInterface& textureManager);
+
     /// Set the fame time for a specific animation.
     /// \param animationName the name of the animation
     /// \param frameTimes the individual frame times. The size needs to match the number of frames

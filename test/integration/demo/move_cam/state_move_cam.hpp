@@ -8,7 +8,7 @@
 #include <sprite.hpp>
 #include <text.hpp>
 
-class StateScroll : public jt::GameState {
+class StateMoveCam : public jt::GameState {
 public:
     std::string getName() const override;
 
@@ -17,6 +17,8 @@ private:
     jt::Shape::Sptr m_shape2;
     jt::Animation::Sptr m_anim;
     jt::Sprite::Sptr m_sprite;
+    jt::Sprite::Sptr m_spriteDino;
+    jt::Animation::Sptr m_animMiner;
     jt::Sprite::Sptr m_spriteCircle;
     jt::Shape::Sptr m_background;
 

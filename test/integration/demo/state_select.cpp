@@ -9,11 +9,11 @@
 #include <imgui/state_imgui.hpp>
 #include <inventory/state_inventory.hpp>
 #include <log/license_info.hpp>
+#include <move_cam/state_move_cam.hpp>
 #include <particles/state_particles.hpp>
 #include <pathfinding/state_pathfinding.hpp>
 #include <rope/state_rope.hpp>
 #include <screeneffects/state_screen_effects.hpp>
-#include <scroll/state_scroll.hpp>
 #include <simplex/state_3d_noise.hpp>
 #include <store_gamestate/state_store_gamestate.hpp>
 #include <swarmobjects/state_swarmobjects.hpp>
@@ -29,7 +29,7 @@ void StateSelect::onCreate()
     AddButton<StateTween>("Tweens");
     AddButton<StateTileson>("Tilemap");
     AddButton<StatePlatformer>("Box2D");
-    AddButton<StateScroll>("Move Cam");
+    AddButton<StateMoveCam>("Move Cam");
     AddButton<StateRope>("Rope");
     AddButton<StateParticles>("Particles");
     AddButton<StatePathfinding>("Pathfinding");

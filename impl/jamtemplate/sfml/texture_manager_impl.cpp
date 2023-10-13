@@ -1,4 +1,5 @@
 #include "texture_manager_impl.hpp"
+#include <aselib/image_builder.hpp>
 #include <color_lib.hpp>
 #include <sprite_functions.hpp>
 #include <strutils.hpp>
@@ -6,6 +7,26 @@
 #include <stdexcept>
 
 namespace {
+
+sf::Image createImageFromAse(std::string const& filename)
+{
+    aselib::AsepriteData aseData { filename };
+    auto const aseImage = aselib::makeImageFromAse(aseData);
+    sf::Image sfImgage {};
+    jt::Color emptyColor { 0, 0, 0, 0 };
+    auto const w = aseImage.m_width;
+    auto const h = aseImage.m_height;
+    sfImgage.create(w, h, toLib(emptyColor));
+
+    for (auto i = 0u; i != w; ++i) {
+        for (auto j = 0U; j != h; ++j) {
+            auto const p = aseImage.m_pixels[aseImage.posToIndex(i, j)];
+            auto const col = jt::Color { p.r, p.g, p.b, p.a };
+            sfImgage.setPixel(i, j, toLib(col));
+        }
+    }
+    return sfImgage;
+}
 
 sf::Image createButtonImage(std::vector<std::string> const& ssv)
 {
@@ -137,32 +158,44 @@ sf::Texture& jt::TextureManagerImpl::get(std::string const& str)
     }
 
     // check if texture is already stored in texture manager
-    if (!containsTexture(str)) {
-        // normal filenames do not start with a '#'
-        if (str.at(0) != '#') {
-            m_textures[str] = loadTextureFromDisk(str);
-        } else // special type of images
-        {
-            auto ssv = strutil::split(str.substr(1), '#');
-            if (ssv.at(0) == "b") {
-                m_textures[str].loadFromImage(createButtonImage(ssv));
-            } else if (ssv.at(0) == "f") {
-                m_textures[str].loadFromImage(createBlankImage(ssv));
-            } else if (ssv.at(0) == "g") {
-                m_textures[str].loadFromImage(createGlowImage(ssv));
-            } else if (ssv.at(0) == "v") {
-                m_textures[str].loadFromImage(createVignetteImage(ssv));
-            } else if (ssv.at(0) == "r") {
-                m_textures[str].loadFromImage(createRingImage(ssv));
-            } else {
-                throw std::invalid_argument("ERROR: cannot get texture with name " + str);
-            }
-        }
+    if (containsTexture(str)) {
+        return m_textures[str];
+    }
 
-        // create Flash Image
+    // Check if special ase parsing is required
+    if (strutil::ends_with(str, ".aseprite")) {
+        m_textures[str].loadFromImage(createImageFromAse(str));
         m_textures[getFlashName(str)].loadFromImage(
             createFlashImage(m_textures[str].copyToImage()));
+        return m_textures[str];
     }
+
+    // normal filenames do not start with a '#'
+    if (!strutil::starts_with(str, '#')) {
+        m_textures[str] = loadTextureFromDisk(str);
+        m_textures[getFlashName(str)].loadFromImage(
+            createFlashImage(m_textures[str].copyToImage()));
+        return m_textures[str];
+    }
+
+    // special type of images
+    auto ssv = strutil::split(str.substr(1), '#');
+    if (ssv.at(0) == "b") {
+        m_textures[str].loadFromImage(createButtonImage(ssv));
+    } else if (ssv.at(0) == "f") {
+        m_textures[str].loadFromImage(createBlankImage(ssv));
+    } else if (ssv.at(0) == "g") {
+        m_textures[str].loadFromImage(createGlowImage(ssv));
+    } else if (ssv.at(0) == "v") {
+        m_textures[str].loadFromImage(createVignetteImage(ssv));
+    } else if (ssv.at(0) == "r") {
+        m_textures[str].loadFromImage(createRingImage(ssv));
+    } else {
+        throw std::invalid_argument("ERROR: cannot get texture with name " + str);
+    }
+
+    // create Flash Image
+    m_textures[getFlashName(str)].loadFromImage(createFlashImage(m_textures[str].copyToImage()));
 
     return m_textures[str];
 }

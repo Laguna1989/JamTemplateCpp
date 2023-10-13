@@ -13,6 +13,12 @@ jt::RenderWindow::RenderWindow(unsigned int width, unsigned int height, std::str
     ImGui::SFML::Init(*m_window.get());
 }
 
+jt::RenderWindow::~RenderWindow()
+{
+    ImGui::SFML::Shutdown();
+    m_window.reset();
+}
+
 std::shared_ptr<jt::RenderTargetLayer> jt::RenderWindow::createRenderTarget()
 {
     return std::make_shared<jt::RenderTargetLayer>();

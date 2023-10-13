@@ -1,16 +1,50 @@
 ﻿#include "texture_manager_impl.hpp"
+#include <aselib/image_builder.hpp>
 #include <sdl_helper.hpp>
 #include <sprite_functions.hpp>
 #include <strutils.hpp>
 #include <SDL_image.h>
 #include <iostream>
 #include <limits>
-#include <map>
 #include <stdexcept>
 
 namespace jt {
 
 namespace {
+
+std::shared_ptr<SDL_Texture> createImageFromAse(
+    std::string const& filename, std::shared_ptr<jt::RenderTargetLayer> renderTarget)
+{
+    aselib::AsepriteData aseData { filename };
+    auto const aseImage = aselib::makeImageFromAse(aseData);
+
+    auto const w = aseImage.m_width;
+    auto const h = aseImage.m_height;
+    auto const wAsInt = static_cast<int>(w);
+    auto const hAsInt = static_cast<int>(h);
+    std::shared_ptr<SDL_Surface> image = std::shared_ptr<SDL_Surface>(
+        SDL_CreateRGBSurfaceWithFormat(0, wAsInt, hAsInt, 32, SDL_PIXELFORMAT_RGBA32),
+        [](SDL_Surface* s) { SDL_FreeSurface(s); });
+
+    auto const transparent = SDL_MapRGBA(image->format, 0, 0, 0, 0);
+
+    for (auto i = 0U; i != w; ++i) {
+        for (auto j = 0U; j != h; ++j) {
+            jt::setPixel(image.get(), i, j, transparent);
+        }
+    }
+
+    for (auto i = 0u; i != w; ++i) {
+        for (auto j = 0U; j != h; ++j) {
+            auto const p = aseImage.m_pixels[aseImage.posToIndex(i, j)];
+            auto const col = SDL_MapRGBA(image->format, p.r, p.g, p.b, p.a);
+            jt::setPixel(image.get(), i, j, col);
+        }
+    }
+    return std::shared_ptr<SDL_Texture>(
+        SDL_CreateTextureFromSurface(renderTarget.get(), image.get()),
+        [](SDL_Texture* t) { SDL_DestroyTexture(t); });
+}
 
 std::shared_ptr<SDL_Texture> createButtonImage(
     std::vector<std::string> const& ssv, std::shared_ptr<jt::RenderTargetLayer> renderTarget)
@@ -213,36 +247,46 @@ std::shared_ptr<SDL_Texture> TextureManagerImpl::get(std::string const& str)
     }
 
     // check if texture is already stored in texture manager
-    if (!containsTexture(str)) {
-        // normal filenames do not start with a '#'
-        if (str.at(0) != '#') {
-            m_textures[str] = loadTextureFromDisk(str, m_renderer.lock());
-
-            // create Flash Image
-            m_textures[getFlashName(str)] = createFlashImage(str, m_renderer.lock());
-        } else // special type of images
-        {
-            auto ssv = strutil::split(str.substr(1U), '#');
-            if (ssv.at(0) == "b") {
-                m_textures[str] = createButtonImage(ssv, m_renderer.lock());
-            } else if (ssv.at(0) == "f") {
-                m_textures[str] = createBlankImage(ssv, m_renderer.lock());
-            } else if (ssv.at(0) == "g") {
-                m_textures[str] = createGlowImage(ssv, m_renderer.lock());
-            } else if (ssv.at(0) == "v") {
-                m_textures[str] = createVignetteImage(ssv, m_renderer.lock());
-            } else if (ssv.at(0) == "x") {
-                m_textures[str] = createRectImage(ssv, m_renderer.lock());
-            } else if (ssv.at(0) == "c") {
-                m_textures[str] = createCircleImage(ssv, m_renderer.lock());
-            } else if (ssv.at(0) == "r") {
-                m_textures[str] = createRingImage(ssv, m_renderer.lock());
-            } else {
-                throw std::invalid_argument("ERROR: cannot get texture with name " + str);
-            }
-            m_textures[getFlashName(str)] = m_textures[str];
-        }
+    if (containsTexture(str)) {
+        return m_textures[str];
     }
+
+    // Check if special ase parsing is required
+    if (strutil::ends_with(str, ".aseprite")) {
+        m_textures[str] = createImageFromAse(str, m_renderer.lock());
+        m_textures[getFlashName(str)] = createFlashImage(str, m_renderer.lock());
+        return m_textures[str];
+    }
+
+    // normal filenames do not start with a '#'
+    if (!strutil::starts_with(str, '#')) {
+        m_textures[str] = loadTextureFromDisk(str, m_renderer.lock());
+        // create Flash Image
+        m_textures[getFlashName(str)] = createFlashImage(str, m_renderer.lock());
+        return m_textures[str];
+    }
+
+    auto ssv = strutil::split(str.substr(1U), '#');
+    if (ssv.at(0) == "b") {
+        m_textures[str] = createButtonImage(ssv, m_renderer.lock());
+    } else if (ssv.at(0) == "f") {
+        m_textures[str] = createBlankImage(ssv, m_renderer.lock());
+    } else if (ssv.at(0) == "g") {
+        m_textures[str] = createGlowImage(ssv, m_renderer.lock());
+    } else if (ssv.at(0) == "v") {
+        m_textures[str] = createVignetteImage(ssv, m_renderer.lock());
+    } else if (ssv.at(0) == "x") {
+        m_textures[str] = createRectImage(ssv, m_renderer.lock());
+    } else if (ssv.at(0) == "c") {
+        m_textures[str] = createCircleImage(ssv, m_renderer.lock());
+    } else if (ssv.at(0) == "r") {
+        m_textures[str] = createRingImage(ssv, m_renderer.lock());
+    } else {
+        throw std::invalid_argument("ERROR: cannot get texture with name " + str);
+    }
+
+    // create Flash Image
+    m_textures[getFlashName(str)] = m_textures[str];
 
     return m_textures[str];
 }

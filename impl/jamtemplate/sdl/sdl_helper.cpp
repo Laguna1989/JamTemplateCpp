@@ -1,4 +1,5 @@
 #include "sdl_helper.hpp"
+#include <stdexcept>
 
 namespace jt {
 
@@ -49,7 +50,7 @@ uint32_t getPixel(SDL_Surface* surface, int x, int y)
         break;
 
     default:
-        return 0; /* shouldn't happen, but avoids warnings */
+        throw std::invalid_argument { "invalid bits per pixel in getPixel" };
     }
 }
 

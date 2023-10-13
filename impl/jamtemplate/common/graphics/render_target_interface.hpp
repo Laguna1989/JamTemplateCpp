@@ -24,7 +24,7 @@ public:
     RenderTargetInterface& operator=(RenderTargetInterface&&) = delete;
 
 protected:
-    // default default constructor can only be called from derived classes
+    // default constructor can only be called from derived classes
     RenderTargetInterface() = default;
 };
 } // namespace jt
