@@ -45,12 +45,7 @@ CPMAddPackage(
         OPTIONS
         "BUILD_TESTS OFF"
 )
-CPMAddPackage(
-        NAME imgui
-        GITHUB_REPOSITORY ocornut/imgui
-        GIT_TAG v1.87
-)
-
+add_subdirectory(imgui)
 add_subdirectory(box2d)
 if (USE_SFML)
     add_subdirectory(sfml)
