@@ -59,7 +59,7 @@ jobs:
         run: jackd -d dummy &
 
       - name: Test
-        uses: GabrielBB/xvfb-action@v1
+        uses: coactions/setup-xvfb@v1
         with:
           run: ./jt_tests --gtest_shuffle
           working-directory: ${{github.workspace}}/build/test/unit/jt_test
