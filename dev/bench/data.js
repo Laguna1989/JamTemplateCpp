@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1697224457405,
+  "lastUpdate": 1697265544101,
   "repoUrl": "https://github.com/Laguna1989/JamTemplateCpp",
   "entries": {
     "Benchmark": [
@@ -12684,6 +12684,84 @@ window.BENCHMARK_DATA = {
             "value": 3.5422129393940383,
             "unit": "ms/iter",
             "extra": "iterations: 198\ncpu: 3.541686868686871 ms\nthreads: 1"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "laguna.ws@gmail.com",
+            "name": "Laguna1989",
+            "username": "Laguna1989"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "5ba49a0afe7a689a820bef0930953fd45fadb498",
+          "message": "Directly use xvfb-run instead of (flaky) setup-xvfb actions in github actions (#294)\n\n* Try new xvfb action\r\n\r\n* Test calling xvfb-run directly",
+          "timestamp": "2023-10-14T08:36:24+02:00",
+          "tree_id": "1de6d98ccd6dbc6db4a14cb2673339a28f938d49",
+          "url": "https://github.com/Laguna1989/JamTemplateCpp/commit/5ba49a0afe7a689a820bef0930953fd45fadb498"
+        },
+        "date": 1697265543072,
+        "tool": "googlecpp",
+        "benches": [
+          {
+            "name": "BM_UpdateDrawablePositions",
+            "value": 3.325100971563757,
+            "unit": "ms/iter",
+            "extra": "iterations: 211\ncpu: 3.3247511848341227 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GetAllCommands",
+            "value": 0.3533222696004046,
+            "unit": "ms/iter",
+            "extra": "iterations: 1977\ncpu: 0.35329833080424883 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_LoggerLogWithoutTarget",
+            "value": 0.3863144762431085,
+            "unit": "ms/iter",
+            "extra": "iterations: 1810\ncpu: 0.3862964088397789 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_LoggerLogWithCoutTargetSetToOff",
+            "value": 0.3865443349916815,
+            "unit": "ms/iter",
+            "extra": "iterations: 1809\ncpu: 0.3865224433388615 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_UpdateObjectGroup",
+            "value": 0.06200314053097248,
+            "unit": "ms/iter",
+            "extra": "iterations: 11300\ncpu: 0.06200110619469027 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_UpdateSpatialObjectGrid",
+            "value": 0.3237906879889642,
+            "unit": "ms/iter",
+            "extra": "iterations: 2173\ncpu: 0.3237567418315692 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_StartGame",
+            "value": 0.0038165905047434097,
+            "unit": "ms/iter",
+            "extra": "iterations: 182786\ncpu: 0.0038164471020756497 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_RefineTilemapCollisions",
+            "value": 0.2290025564227618,
+            "unit": "ms/iter",
+            "extra": "iterations: 3075\ncpu: 0.22797489430894297 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GamestateWithTweeningShapes",
+            "value": 3.411844464114925,
+            "unit": "ms/iter",
+            "extra": "iterations: 209\ncpu: 3.348968421052632 ms\nthreads: 1"
           }
         ]
       }
