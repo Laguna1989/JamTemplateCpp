@@ -59,10 +59,8 @@ jobs:
         run: jackd -d dummy &
 
       - name: Test
-        uses: coactions/setup-xvfb@v1
-        with:
-          run: ./jt_tests --gtest_shuffle
-          working-directory: ${{github.workspace}}/build/test/unit/jt_test
+        run: xvfb-run ./jt_tests --gtest_shuffle
+        working-directory: ${{github.workspace}}/build/test/unit/jt_test
 
   LinuxSDL:
     runs-on: ubuntu-latest
@@ -108,10 +106,8 @@ jobs:
         run: ninja
 
       - name: Test
-        uses: GabrielBB/xvfb-action@v1
-        with:
-          run: ./jt_tests
-          working-directory: ${{github.workspace}}/build/test/unit/jt_test
+        run: xvfb-run ./jt_tests
+        working-directory: ${{github.workspace}}/build/test/unit/jt_test
 
   WindowsSFML:
     runs-on: windows-2019
