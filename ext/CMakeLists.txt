@@ -1,7 +1,7 @@
 message(STATUS "Add FetchContent")
 include(FetchContent)
 
-message(STATUS "Add CMP.cmake")
+message(STATUS "Add CPM.cmake")
 # download CPM.cmake
 file(
         DOWNLOAD
