@@ -40,6 +40,7 @@ private:
     std::shared_ptr<jt::Box2DObject> m_physicsObject;
 
     std::unique_ptr<CharacterControllerInterface> m_characterController { nullptr };
+
     float m_currentTemperature { 0.0f };
     float m_temperatureDamageTimer { 0.0f };
     float m_health { 100.0f };

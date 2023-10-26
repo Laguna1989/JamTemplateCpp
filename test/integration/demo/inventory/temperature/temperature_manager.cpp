@@ -134,7 +134,7 @@ void TemperatureManager::doDraw() const
         std::uint8_t const r = static_cast<std::uint8_t>(jt::Lerp::linear(5.0f, 255.0f, t));
         std::uint8_t const g = static_cast<std::uint8_t>(jt::Lerp::linear(150.0f, 150.0f, t));
         std::uint8_t const b = static_cast<std::uint8_t>(jt::Lerp::linear(255.0f, 5.0f, t));
-        std::uint8_t const a = static_cast<std::uint8_t>(70 + abs(t - 0.5f) * 2 * 120);
+        std::uint8_t const a = static_cast<std::uint8_t>(150 + abs(t - 0.5f) * 2 * 50);
 
         m_shape->setColor(jt::Color { r, g, b, a });
 

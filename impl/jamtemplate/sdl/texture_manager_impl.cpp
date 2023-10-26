@@ -15,8 +15,21 @@ namespace {
 std::shared_ptr<SDL_Texture> createImageFromAse(
     std::string const& filename, std::shared_ptr<jt::RenderTargetLayer> renderTarget)
 {
+    auto const asepritePos = filename.rfind(".aseprite");
+    auto const splittedFilename = filename.substr(0, asepritePos + 9);
+    auto const postFix = filename.substr(asepritePos + 9);
     aselib::AsepriteData aseData { filename };
-    auto const aseImage = aselib::makeImageFromAse(aseData);
+
+    std::unique_ptr<aselib::Image> aseImage { nullptr };
+    if (strutil::contains(postFix, ".layer=")) {
+        auto const layerPos = postFix.find(".layer=");
+        auto const layerName = postFix.substr(layerPos + 7);
+        aseImage = std::make_unique<aselib::Image>(aselib::makeImageFromLayer(aseData, layerName));
+    } else {
+        auto const ignore_transparent = strutil::contains(postFix, ".ignore_transparent");
+        aseImage = std::make_unique<aselib::Image>(
+            aselib::makeImageFromAse(aseData, !ignore_transparent));
+    }
 
     auto const w = aseImage.m_width;
     auto const h = aseImage.m_height;

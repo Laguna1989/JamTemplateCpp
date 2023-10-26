@@ -191,6 +191,23 @@ TEST(PaletteBuilderTest, AddFromSprite)
     ASSERT_EQ(palette.getColor(4), expectedColor4);
 }
 
+TEST(PaletteBuilderTest, AddFromAseprite)
+{
+    jt::PaletteBuilder builder;
+
+    auto const palette
+        = builder.addColorsFromAseprite("assets/test/unit/jt_test/dino_salto.aseprite").create();
+
+    ASSERT_EQ(palette.size(), 22u);
+
+    jt::Color const expectedColor0 { 0, 0, 0, 255 };
+    jt::Color const expectedColor1 { 32, 59, 32 };
+    jt::Color const expectedColor20 { 128, 82, 56, 255 };
+    ASSERT_EQ(palette.getColor(0), expectedColor0);
+    ASSERT_EQ(palette.getColor(1), expectedColor1);
+    ASSERT_EQ(palette.getColor(20), expectedColor20);
+}
+
 TEST(PaletteBuilderTest, MakeUnique)
 {
     jt::PaletteBuilder builder;

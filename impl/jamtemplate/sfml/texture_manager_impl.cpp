@@ -10,17 +10,31 @@ namespace {
 
 sf::Image createImageFromAse(std::string const& filename)
 {
+    auto const asepritePos = filename.rfind(".aseprite");
+    auto const splittedFilename = filename.substr(0, asepritePos + 9);
+    auto const postFix = filename.substr(asepritePos + 9);
     aselib::AsepriteData aseData { filename };
-    auto const aseImage = aselib::makeImageFromAse(aseData);
+
+    std::unique_ptr<aselib::Image> aseImage { nullptr };
+    if (strutil::contains(postFix, ".layer=")) {
+        auto const layerPos = postFix.find(".layer=");
+        auto const layerName = postFix.substr(layerPos + 7);
+        aseImage = std::make_unique<aselib::Image>(aselib::makeImageFromLayer(aseData, layerName));
+    } else {
+        auto const ignore_transparent = strutil::contains(postFix, ".ignore_transparent");
+        aseImage = std::make_unique<aselib::Image>(
+            aselib::makeImageFromAse(aseData, !ignore_transparent));
+    }
+
     sf::Image sfImgage {};
     jt::Color emptyColor { 0, 0, 0, 0 };
-    auto const w = aseImage.m_width;
-    auto const h = aseImage.m_height;
+    auto const w = aseImage->m_width;
+    auto const h = aseImage->m_height;
     sfImgage.create(w, h, toLib(emptyColor));
 
     for (auto i = 0u; i != w; ++i) {
         for (auto j = 0U; j != h; ++j) {
-            auto const p = aseImage.m_pixels[aseImage.posToIndex(i, j)];
+            auto const p = aseImage->m_pixels[aseImage->posToIndex(i, j)];
             auto const col = jt::Color { p.r, p.g, p.b, p.a };
             sfImgage.setPixel(i, j, toLib(col));
         }
@@ -163,7 +177,7 @@ sf::Texture& jt::TextureManagerImpl::get(std::string const& str)
     }
 
     // Check if special ase parsing is required
-    if (strutil::ends_with(str, ".aseprite")) {
+    if (strutil::contains(str, ".aseprite")) {
         m_textures[str].loadFromImage(createImageFromAse(str));
         m_textures[getFlashName(str)].loadFromImage(
             createFlashImage(m_textures[str].copyToImage()));
