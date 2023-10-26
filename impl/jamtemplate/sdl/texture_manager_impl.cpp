@@ -31,8 +31,8 @@ std::shared_ptr<SDL_Texture> createImageFromAse(
             aselib::makeImageFromAse(aseData, !ignore_transparent));
     }
 
-    auto const w = aseImage.m_width;
-    auto const h = aseImage.m_height;
+    auto const w = aseImage->m_width;
+    auto const h = aseImage->m_height;
     auto const wAsInt = static_cast<int>(w);
     auto const hAsInt = static_cast<int>(h);
     std::shared_ptr<SDL_Surface> image = std::shared_ptr<SDL_Surface>(
@@ -49,7 +49,7 @@ std::shared_ptr<SDL_Texture> createImageFromAse(
 
     for (auto i = 0u; i != w; ++i) {
         for (auto j = 0U; j != h; ++j) {
-            auto const p = aseImage.m_pixels[aseImage.posToIndex(i, j)];
+            auto const& p = aseImage->getPixelAt(i, j);
             auto const col = SDL_MapRGBA(image->format, p.r, p.g, p.b, p.a);
             jt::setPixel(image.get(), i, j, col);
         }
