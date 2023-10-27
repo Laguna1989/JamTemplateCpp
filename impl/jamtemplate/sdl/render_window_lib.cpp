@@ -33,6 +33,7 @@ std::shared_ptr<jt::RenderTargetLayer> RenderWindow::createRenderTarget()
     ImGui::CreateContext();
     ImGuiSDL::Initialize(
         renderTarget.get(), static_cast<int>(m_size.x), static_cast<int>(m_size.y));
+    m_renderTargetCreated = true;
     return renderTarget;
 }
 
@@ -98,11 +99,15 @@ bool RenderWindow::getMouseCursorVisible() const { return m_isMouseCursorVisible
 
 void RenderWindow::updateGui(float elapsed)
 {
+    if (!m_renderTargetCreated) {
+        return;
+    }
 #if JT_ENABLE_WEB
     // actually we do not care about the initialization of the backend. However InitForMetal does
     // not do anything more than initializing the keymap, which is exactly what we want here.
     ImGui_ImplSDL2_InitForMetal(m_window.get());
 #endif
+
     ImGuiIO& io = ImGui::GetIO();
     io.DeltaTime = elapsed;
     int mx { 0 };
