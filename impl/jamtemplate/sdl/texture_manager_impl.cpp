@@ -15,11 +15,24 @@ namespace {
 std::shared_ptr<SDL_Texture> createImageFromAse(
     std::string const& filename, std::shared_ptr<jt::RenderTargetLayer> renderTarget)
 {
+    auto const asepritePos = filename.rfind(".aseprite");
+    auto const splittedFilename = filename.substr(0, asepritePos + 9);
+    auto const postFix = filename.substr(asepritePos + 9);
     aselib::AsepriteData aseData { filename };
-    auto const aseImage = aselib::makeImageFromAse(aseData);
 
-    auto const w = aseImage.m_width;
-    auto const h = aseImage.m_height;
+    std::unique_ptr<aselib::Image> aseImage { nullptr };
+    if (strutil::contains(postFix, ".layer=")) {
+        auto const layerPos = postFix.find(".layer=");
+        auto const layerName = postFix.substr(layerPos + 7);
+        aseImage = std::make_unique<aselib::Image>(aselib::makeImageFromLayer(aseData, layerName));
+    } else {
+        auto const ignore_transparent = strutil::contains(postFix, ".ignore_transparent");
+        aseImage = std::make_unique<aselib::Image>(
+            aselib::makeImageFromAse(aseData, !ignore_transparent));
+    }
+
+    auto const w = aseImage->m_width;
+    auto const h = aseImage->m_height;
     auto const wAsInt = static_cast<int>(w);
     auto const hAsInt = static_cast<int>(h);
     std::shared_ptr<SDL_Surface> image = std::shared_ptr<SDL_Surface>(
@@ -36,7 +49,7 @@ std::shared_ptr<SDL_Texture> createImageFromAse(
 
     for (auto i = 0u; i != w; ++i) {
         for (auto j = 0U; j != h; ++j) {
-            auto const p = aseImage.m_pixels[aseImage.posToIndex(i, j)];
+            auto const& p = aseImage->getPixelAt(i, j);
             auto const col = SDL_MapRGBA(image->format, p.r, p.g, p.b, p.a);
             jt::setPixel(image.get(), i, j, col);
         }

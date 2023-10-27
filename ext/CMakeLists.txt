@@ -5,9 +5,9 @@ message(STATUS "Add CPM.cmake")
 # download CPM.cmake
 file(
         DOWNLOAD
-        https://github.com/cpm-cmake/CPM.cmake/releases/download/v0.38.3/CPM.cmake
+        https://github.com/cpm-cmake/CPM.cmake/releases/download/v0.38.6/CPM.cmake
         ${CMAKE_BINARY_DIR}/cmake/CPM.cmake
-        EXPECTED_HASH SHA256=cc155ce02e7945e7b8967ddfaff0b050e958a723ef7aad3766d368940cb15494
+        EXPECTED_HASH SHA256=11c3fa5f1ba14f15d31c2fb63dbc8628ee133d81c8d764caad9a8db9e0bacb07
 )
 include(${CMAKE_BINARY_DIR}/cmake/CPM.cmake)
 
@@ -24,7 +24,7 @@ CPMAddPackage(
 CPMAddPackage(
         NAME aselib
         GITHUB_REPOSITORY Laguna1989/aselib
-        GIT_TAG v0.1.0
+        GIT_TAG v0.2.0
         OPTIONS
         "ASE_LIB_ENABLE_UNIT_TESTS OFF"
 )

@@ -2,8 +2,8 @@
 #define JAMTEMPLATE_RENDERWINDOW_LIB_HPP
 
 #include <graphics/render_window_interface.hpp>
-#include <sprite.hpp>
 #include <sdl_2_include.hpp>
+#include <sprite.hpp>
 #include <memory>
 
 namespace jt {
@@ -38,6 +38,8 @@ private:
     bool m_isMouseCursorVisible { true };
     bool m_isOpen { true };
     bool m_renderGui { false };
+
+    bool m_renderTargetCreated { false };
 };
 } // namespace jt
 

@@ -1,4 +1,5 @@
 #include "palette_builder.hpp"
+#include <aselib/aseprite_data.hpp>
 #include <color/color_factory.hpp>
 #include <strutils.hpp>
 #include <system_helper.hpp>
@@ -113,6 +114,22 @@ PaletteBuilder& PaletteBuilder::makeUnique()
 {
     m_colors.erase(
         SystemHelper::remove_duplicates(m_colors.begin(), m_colors.end()), m_colors.end());
+    return *this;
+}
+PaletteBuilder& PaletteBuilder::addColorsFromAseprite(std::string const& filepath)
+{
+    aselib::AsepriteData ase { filepath };
+    if (ase.m_frames.empty()) {
+        throw std::invalid_argument { "aseprite file does not contain any frames" };
+    }
+    if (ase.m_frames.front().m_chunks.m_palette_chunks.empty()) {
+        throw std::invalid_argument { "aseprite file does not contain any palettes" };
+    }
+    for (auto const& col :
+        ase.m_frames.front().m_chunks.m_palette_chunks.front().m_palette_entries) {
+        m_colors.emplace_back(
+            jt::Color { col.m_color.r, col.m_color.g, col.m_color.b, col.m_color.a });
+    }
     return *this;
 }
 
