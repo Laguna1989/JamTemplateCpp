@@ -67,6 +67,9 @@ void RenderWindow::draw(std::unique_ptr<jt::Sprite>& spr)
 
 void RenderWindow::display()
 {
+    if (!m_renderTargetCreated) {
+        return;
+    }
     if (m_renderGui) {
         ImGui::Render();
         ImGuiSDL::Render(ImGui::GetDrawData());
@@ -122,11 +125,26 @@ void RenderWindow::updateGui(float elapsed)
 
 void RenderWindow::startRenderGui()
 {
+    if (!m_renderTargetCreated) {
+        return;
+    }
     ImGui::NewFrame();
     m_renderGui = true;
 }
 
-bool RenderWindow::shouldProcessKeyboard() { return !ImGui::GetIO().WantCaptureKeyboard; }
-bool RenderWindow::shouldProcessMouse() { return !ImGui::GetIO().WantCaptureMouse; }
+bool RenderWindow::shouldProcessKeyboard()
+{
+    if (!m_renderTargetCreated) {
+        return true;
+    }
+    return !ImGui::GetIO().WantCaptureKeyboard;
+}
+bool RenderWindow::shouldProcessMouse()
+{
+    if (!m_renderTargetCreated) {
+        return true;
+    }
+    return !ImGui::GetIO().WantCaptureMouse;
+}
 
 } // namespace jt
