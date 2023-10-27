@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1697643690022,
+  "lastUpdate": 1698431723781,
   "repoUrl": "https://github.com/Laguna1989/JamTemplateCpp",
   "entries": {
     "Benchmark": [
@@ -12840,6 +12840,84 @@ window.BENCHMARK_DATA = {
             "value": 4.287754134969541,
             "unit": "ms/iter",
             "extra": "iterations: 163\ncpu: 4.286357055214721 ms\nthreads: 1"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "laguna.ws@gmail.com",
+            "name": "Laguna1989",
+            "username": "Laguna1989"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "18d884626230eb13f5b82322dbe7803ddf3b8367",
+          "message": "Merge pull request #295 from Laguna1989/feature/add_support_for_layers_from_aselib\n\nUse latest aselib version, extend palette demo",
+          "timestamp": "2023-10-27T20:27:45+02:00",
+          "tree_id": "a3f034fa1989cc2eb58d595c1a882f6f5144e486",
+          "url": "https://github.com/Laguna1989/JamTemplateCpp/commit/18d884626230eb13f5b82322dbe7803ddf3b8367"
+        },
+        "date": 1698431722659,
+        "tool": "googlecpp",
+        "benches": [
+          {
+            "name": "BM_UpdateDrawablePositions",
+            "value": 6.3911733739132615,
+            "unit": "ms/iter",
+            "extra": "iterations: 115\ncpu: 6.297452173913044 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GetAllCommands",
+            "value": 0.4022675306712676,
+            "unit": "ms/iter",
+            "extra": "iterations: 1728\ncpu: 0.40197858796296293 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_LoggerLogWithoutTarget",
+            "value": 0.4036128874999923,
+            "unit": "ms/iter",
+            "extra": "iterations: 1680\ncpu: 0.4035576190476189 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_LoggerLogWithCoutTargetSetToOff",
+            "value": 0.40642418828449783,
+            "unit": "ms/iter",
+            "extra": "iterations: 1673\ncpu: 0.40637208607292247 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_UpdateObjectGroup",
+            "value": 0.05841796558594803,
+            "unit": "ms/iter",
+            "extra": "iterations: 11042\ncpu: 0.05825259916681759 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_UpdateSpatialObjectGrid",
+            "value": 0.4095533548199918,
+            "unit": "ms/iter",
+            "extra": "iterations: 1722\ncpu: 0.40952090592334484 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_StartGame",
+            "value": 0.004366555067563308,
+            "unit": "ms/iter",
+            "extra": "iterations: 163254\ncpu: 0.004365948766952111 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_RefineTilemapCollisions",
+            "value": 0.24080957128024139,
+            "unit": "ms/iter",
+            "extra": "iterations: 2890\ncpu: 0.2407779930795845 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GamestateWithTweeningShapes",
+            "value": 4.123022672514606,
+            "unit": "ms/iter",
+            "extra": "iterations: 171\ncpu: 4.122019883040931 ms\nthreads: 1"
           }
         ]
       }
