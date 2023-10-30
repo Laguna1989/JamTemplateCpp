@@ -18,6 +18,16 @@ TEST(TilesonLoaderTestNodes, LoadCorrectAmountOfNodes)
     ASSERT_TRUE(nodes.at(0)->getBlocked());
 }
 
+TEST(TilesonLoaderTestNodes, LoadCorrectAmountOfNodesWhenBlockedNodesAreIgnored)
+{
+    jt::TextureManagerInterface& textureManager { getTextureManager() };
+    jt::tilemap::TilesonLoader loader(cache, "assets/test/unit/jt_test/tileson_test.json");
+    auto const nodes = loader.loadTileNodesFromLayer("ground", textureManager, true);
+
+    ASSERT_EQ(nodes.size(), 2417u);
+    ASSERT_TRUE(nodes.at(0)->getBlocked());
+}
+
 TEST(TilesonLoaderTestNodes, LoadedNodesAreSortedYFirst)
 {
     jt::TextureManagerInterface& textureManager { getTextureManager() };

@@ -36,6 +36,20 @@ TEST_F(TilemapTileLayerTest, UpdateAndDraw)
     tileLayer->draw(std::shared_ptr<jt::RenderTargetInterface> { nullptr });
 }
 
+TEST_F(TilemapTileLayerTest, UpdateAndDrawWithColorFunction)
+{
+    tileLayer->setColorFunction([](auto const& p) {
+        return jt::Color {
+            255u,
+            255u,
+            255u,
+            static_cast<std::uint8_t>((p.x / 20.0f + p.y / 20.0f) * 255u),
+        };
+    });
+    tileLayer->update(0.1f);
+    tileLayer->draw(std::shared_ptr<jt::RenderTargetInterface> { nullptr });
+}
+
 TEST_F(TilemapTileLayerTest, DrawWithScreensizeHint)
 {
     tileLayer->setScreenSizeHint(jt::Vector2f { 400.0f, 300.0f });
