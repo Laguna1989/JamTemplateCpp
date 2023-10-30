@@ -15,7 +15,6 @@ public:
 private:
     // TODO make dependent on Interface, not on concrete class
     std::weak_ptr<Player> m_player;
-    int m_numberOfFeetContacts { 0 };
     bool m_enabled { true };
 
     /// Called when two fixtures begin to touch.

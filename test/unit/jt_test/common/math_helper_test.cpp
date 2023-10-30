@@ -59,6 +59,30 @@ TEST(VectorLengthTest, LengthOfVectorTwoDimensions)
     ASSERT_NEAR(lengthSquared(v0), l * l, 0.005);
 }
 
+TEST(DistanceBetweenTest, DistanceBetweenTwoVectorsOnlyX)
+{
+    jt::Vector2f const a { 10.0f, 0.0f };
+    jt::Vector2f const b { 20.0f, 0.0f };
+    float const expectedLength { 10.0f };
+    ASSERT_NEAR(distanceBetween(a, b), expectedLength, 0.0005f);
+}
+
+TEST(DistanceBetweenTest, DistanceBetweenTwoVectorsOnlyY)
+{
+    jt::Vector2f const a { 0.0f, -10.0f };
+    jt::Vector2f const b { 0.0f, 35.0f };
+    float const expectedLength { 45.0f };
+    ASSERT_NEAR(distanceBetween(a, b), expectedLength, 0.0005f);
+}
+
+TEST(DistanceBetweenTest, DistanceBetweenTwoVectorsBothDimensions)
+{
+    jt::Vector2f const a { 1.0f, 1.0f };
+    jt::Vector2f const b { 0.0f, 2.0f };
+    float const expectedLength { 1.41421f };
+    ASSERT_NEAR(distanceBetween(a, b), expectedLength, 0.0005f);
+}
+
 TEST(VectorNoralize, NormalizeOfNormalizedVector)
 {
     jt::Vector2f v0 { 1, 0 };
@@ -167,7 +191,7 @@ TEST(RotateByTestFixture, MinusNinetyDegree)
     ASSERT_NEAR(initial3.y, rotated4.y, 0.001f);
 }
 
-TEST(ClampTest, working)
+TEST(ClampTest, inside)
 {
     float const in { 0.5f };
     float const out = clamp(in, 0.0f, 1.0f);
@@ -190,34 +214,76 @@ TEST(ClampTest, upper)
     ASSERT_EQ(upper, out);
 }
 
+TEST(ClampVectorTest, inside)
+{
+    jt::Vector2f const in { 0.5f, 0.5f };
+    auto const out = clamp(in, jt::Vector2f { 0.0f, 0.0f }, jt::Vector2f { 1.0f, 1.0f });
+    ASSERT_EQ(in, out);
+}
+
+TEST(ClampVectorTest, lowerX)
+{
+    jt::Vector2f const in { -0.5f, 0.5f };
+    float const lower { 0.0f };
+    auto const out = clamp(in, jt::Vector2f { lower, lower }, jt::Vector2f { 1.0f, 1.0f });
+    ASSERT_EQ(lower, out.x);
+    ASSERT_EQ(0.5f, out.y);
+}
+
+TEST(ClampVectorTest, lowerY)
+{
+    jt::Vector2f const in { 0.5f, -9999.9f };
+    float const lower { 0.0f };
+    auto const out = clamp(in, jt::Vector2f { lower, lower }, jt::Vector2f { 1.0f, 1.0f });
+    ASSERT_EQ(0.5f, out.x);
+    ASSERT_EQ(lower, out.y);
+}
+
+TEST(ClampVectorTest, upperX)
+{
+    jt::Vector2f const in { 2.5f, 0.5f };
+    float const upper { 2.2f };
+    auto const out = clamp(in, jt::Vector2f { 0.0f, 0.0f }, jt::Vector2f { upper, upper });
+    ASSERT_EQ(upper, out.x);
+    ASSERT_EQ(0.5f, out.y);
+}
+TEST(ClampVectorTest, upperY)
+{
+    jt::Vector2f const in { 0.5f, 9999.9f };
+    float const upper { 2.2f };
+    auto const out = clamp(in, jt::Vector2f { 0.0f, 0.0f }, jt::Vector2f { upper, upper });
+    ASSERT_EQ(0.5f, out.x);
+    ASSERT_EQ(upper, out.y);
+}
+
 TEST(FloatToString, ValidEntryZero)
 {
     float const f { 0.0f };
-    ASSERT_EQ(floatToStringWithXDigits(f, 1), "0.0");
-    ASSERT_EQ(floatToStringWithXDigits(f, 2), "0.00");
-    ASSERT_EQ(floatToStringWithXDigits(f, 3), "0.000");
-    ASSERT_EQ(floatToStringWithXDigits(f, 4), "0.0000");
+    ASSERT_EQ(floatToStringWithXDecimalDigits(f, 1), "0.0");
+    ASSERT_EQ(floatToStringWithXDecimalDigits(f, 2), "0.00");
+    ASSERT_EQ(floatToStringWithXDecimalDigits(f, 3), "0.000");
+    ASSERT_EQ(floatToStringWithXDecimalDigits(f, 4), "0.0000");
 }
 
 TEST(FloatToString, CorrectRounding)
 {
     float const f { 1.8f };
-    ASSERT_EQ(floatToStringWithXDigits(f, 0), "2");
+    ASSERT_EQ(floatToStringWithXDecimalDigits(f, 0), "2");
 }
 
 TEST(FloatToString, ValidEntry)
 {
     float const f { 1.23456f };
-    ASSERT_EQ(floatToStringWithXDigits(f, 1), "1.2");
-    ASSERT_EQ(floatToStringWithXDigits(f, 2), "1.23");
-    ASSERT_EQ(floatToStringWithXDigits(f, 3), "1.235");
-    ASSERT_EQ(floatToStringWithXDigits(f, 4), "1.2346");
+    ASSERT_EQ(floatToStringWithXDecimalDigits(f, 1), "1.2");
+    ASSERT_EQ(floatToStringWithXDecimalDigits(f, 2), "1.23");
+    ASSERT_EQ(floatToStringWithXDecimalDigits(f, 3), "1.235");
+    ASSERT_EQ(floatToStringWithXDecimalDigits(f, 4), "1.2346");
 }
 
 TEST(FloatToString, StringWithLengthZero)
 {
     float const f { 1.23456f };
-    ASSERT_EQ(floatToStringWithXDigits(f, 0), "1");
+    ASSERT_EQ(floatToStringWithXDecimalDigits(f, 0), "1");
 }
 
 TEST(AngleOf, Horizontal)

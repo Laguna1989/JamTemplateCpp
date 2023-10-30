@@ -41,7 +41,7 @@ void WorldClock::updateText()
     }
 
     m_text->setText(hourString + ":" + minuteString + "  x"
-        + jt::MathHelper::floatToStringWithXDigits(m_factor, 1));
+        + jt::MathHelper::floatToStringWithXDecimalDigits(m_factor, 1));
 }
 void WorldClock::updateTime(float const elapsed)
 {

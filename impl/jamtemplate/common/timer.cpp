@@ -8,6 +8,7 @@ jt::Timer::Timer(float timeInSeconds, jt::Timer::CallbackType cb, int r)
     setTotalTime(timeInSeconds);
     setCallback(cb);
 }
+
 void jt::Timer::doUpdate(float const elapsed)
 {
     if (!isAlive()) {
@@ -26,8 +27,11 @@ void jt::Timer::invokeCallback()
         m_repeat--;
     }
 }
+
 float jt::Timer::getTotalTime() const { return m_totalTime; }
+
 float jt::Timer::getCurrentTime() const { return m_currentTime; }
+
 float jt::Timer::getRemainingTime() { return m_totalTime - m_currentTime; }
 
 void jt::Timer::cancel()
@@ -63,6 +67,7 @@ void jt::Timer::updateTimer(float elapsed)
 }
 
 void jt::Timer::setTotalTime(float totalTime) { m_totalTime = totalTime; }
+
 void jt::Timer::setCallback(jt::TimerInterface::CallbackType cb)
 {
     if (!cb) {

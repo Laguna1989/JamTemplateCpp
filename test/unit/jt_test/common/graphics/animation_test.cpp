@@ -56,7 +56,7 @@ TEST_F(AnimationTestFixture, SetLoopingOnNonExistingAnimationRaisesException)
     ASSERT_THROW(a.setLooping("idle", false), std::invalid_argument);
 }
 
-TEST_F(AnimationTestFixture, InitialCurrentAnimationName)
+TEST_F(AnimationTestFixture, InitialCurrentAnimationNameForDefaultConstructedAnimation)
 {
     jt::Animation a {};
     ASSERT_EQ(a.getCurrentAnimationName(), "");
@@ -81,7 +81,7 @@ TEST_F(AnimationTestFixture, AddWithEmptyFrameTimesRaisesException)
         a.add("abc", "def", jt::Vector2u { 8U, 8U }, { 0U, 1U }, {}, tm), std::invalid_argument);
 }
 
-TEST_F(AnimationTestFixture, AddWithWringSizeFrameTimesRaisesException)
+TEST_F(AnimationTestFixture, AddWithWrongSizeFrameTimesRaisesException)
 {
     jt::Animation a {};
     ASSERT_THROW(a.add("abc", "def", jt::Vector2u { 8U, 8U }, { 0U, 1U }, { 0.25f }, tm),
@@ -91,11 +91,11 @@ TEST_F(AnimationTestFixture, AddWithWringSizeFrameTimesRaisesException)
 TEST_F(AnimationTestFixture, GetAllAvailableAnimationsNamesReturnsEmptyVectorByDefault)
 {
     jt::Animation a {};
-    auto animationNames = a.getAllAvailableAnimationsNames();
+    auto const animationNames = a.getAllAvailableAnimationsNames();
     ASSERT_EQ(animationNames.size(), 0U);
 }
 
-TEST_F(AnimationTestFixture, LoadFromJsonWithNoJsonFile)
+TEST_F(AnimationTestFixture, LoadFromJsonWithFileTypeThatIsNotJson)
 {
     jt::Animation a {};
     ASSERT_THROW(a.loadFromJson("assets/Pilz.png", tm), std::invalid_argument);
@@ -113,7 +113,7 @@ TEST_F(AnimationTestFixture, LoadFromJson)
     ASSERT_EQ(a.getGlobalBounds().width, 16);
     ASSERT_EQ(a.getGlobalBounds().height, 16);
 
-    auto animationNames = a.getAllAvailableAnimationsNames();
+    auto const animationNames = a.getAllAvailableAnimationsNames();
     ASSERT_EQ(animationNames.size(), 3U);
 }
 

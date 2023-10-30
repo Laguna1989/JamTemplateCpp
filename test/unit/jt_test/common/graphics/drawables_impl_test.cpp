@@ -19,10 +19,18 @@ protected:
 };
 
 INSTANTIATE_TEST_SUITE_P(DrawableImplTest, DrawableImplTestFixture,
-    ::testing::Values(std::make_shared<SpriteFactory>(), std::make_shared<AnimationFactory>(),
-        std::make_shared<ShapeFactory>(), std::make_shared<TextFactory>(),
-        std::make_shared<BarFactory>(), std::make_shared<TileMapFactory>(),
-        std::make_shared<TileMapFactoryWithoutScreenSizeHint>(), std::make_shared<LineFactory>()));
+    ::testing::Values(
+        // clang-format off
+        std::make_shared<SpriteFactory>(),                          // 0
+        std::make_shared<AnimationFactory>(),                       // 1
+        std::make_shared<ShapeFactory>(),                           // 2
+        std::make_shared<TextFactory>(),                            // 3
+        std::make_shared<BarFactory>(),                             // 4
+        std::make_shared<TileMapFactory>(),                         // 5
+        std::make_shared<TileMapFactoryWithoutScreenSizeHint>(),    // 6
+        std::make_shared<LineFactory>()                             // 7
+        // clang-format on
+        ));
 
 TEST_P(DrawableImplTestFixture, GlobalBoundsEqualLocalBoundsInitially)
 {
