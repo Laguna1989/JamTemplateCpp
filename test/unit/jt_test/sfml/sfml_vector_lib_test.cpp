@@ -15,8 +15,8 @@ TEST(SFMLVectorLibTest, Vector2fToLib)
 
 TEST(SFMLVectorLibTest, Vector2uToLib)
 {
-    auto const x = 1U;
-    auto const y = 15U;
+    auto const x = 1u;
+    auto const y = 15u;
     jt::Vector2u const initialValue { x, y };
     sf::Vector2u const expectedSFVector { x, y };
 
@@ -39,8 +39,8 @@ TEST(SFMLVectorLibTest, Vector2fFromLib)
 
 TEST(SFMLVectorLibTest, Vector2FromLib)
 {
-    auto const x = 13U;
-    auto const y = 1U;
+    auto const x = 13u;
+    auto const y = 1u;
     sf::Vector2u const initialValue { x, y };
     jt::Vector2u const expectedJTVector { x, y };
 

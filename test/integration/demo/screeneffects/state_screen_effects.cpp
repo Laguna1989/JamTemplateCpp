@@ -17,7 +17,7 @@ void StateScreenEffects::onCreate()
             loader.loadTilesFromLayer(layer, textureManager(), "assets/test/integration/demo/")));
     }
 
-    m_stars = std::make_shared<jt::Stars>(50U, jt::colors::White, jt::Vector2f { 400.0f, 300.0f });
+    m_stars = std::make_shared<jt::Stars>(50u, jt::colors::White, jt::Vector2f { 400.0f, 300.0f });
     add(m_stars);
 
     m_bubbleSmoke = std::make_shared<jt::BubbleSmoke>();

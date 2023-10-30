@@ -19,14 +19,14 @@ public:
 TEST(TweenCollectionTest, InitialSizeIsZero)
 {
     jt::TweenCollection collection;
-    ASSERT_EQ(collection.size(), 0U);
+    ASSERT_EQ(collection.size(), 0u);
 }
 
 TEST(TweenCollectionTest, AddIncreasesCount)
 {
     jt::TweenCollection collection;
     collection.add(std::make_shared<FakeTween>());
-    ASSERT_EQ(collection.size(), 1U);
+    ASSERT_EQ(collection.size(), 1u);
 }
 
 TEST(TweenCollectionTest, UpdateUpdatesTween)
@@ -45,5 +45,5 @@ TEST(TweenCollectionTest, KillingTweenRemovesItInUpdate)
     collection.add(tw);
     tw->m_alive = false;
     collection.update(0.1f);
-    ASSERT_EQ(collection.size(), 0U);
+    ASSERT_EQ(collection.size(), 0u);
 }

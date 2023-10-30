@@ -22,12 +22,12 @@ static void BM_UpdateDrawablePositions(benchmark::State& state)
     std::array<jt::Animation, arraySize> animations;
     for (auto& a : animations) {
         a.add("assets/test/integration/performance/coin.png", "idle", jt::Vector2u { 16, 16 },
-            jt::MathHelper::numbersBetween(0U, 11U), 0.15f, gfx.textureManager());
+            jt::MathHelper::numbersBetween(0u, 11u), 0.15f, gfx.textureManager());
         a.play("idle");
     }
 
     auto const idsToChange
-        = jt::MathHelper::numbersBetween(0U, static_cast<unsigned int>(arraySize / 3U));
+        = jt::MathHelper::numbersBetween(0u, static_cast<unsigned int>(arraySize / 3u));
     for (auto _ : state) {
 
         for (auto i = 0u; i != numberOfIterationLoops; ++i) {

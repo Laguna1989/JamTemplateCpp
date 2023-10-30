@@ -75,7 +75,7 @@ void StateTilemapEffects::onDraw() const
 
     ImGui::Separator();
     if (ImGui::Button("Colorize X+Y")) {
-        auto const numberOfColors = 360U;
+        auto const numberOfColors = 360u;
         jt::PaletteBuilder builder;
         m_tileLayerGround->setColorFunction(
             [&t = m_time,
@@ -91,7 +91,7 @@ void StateTilemapEffects::onDraw() const
     }
 
     if (ImGui::Button("Colorize Rad")) {
-        auto const numberOfColors = 360U;
+        auto const numberOfColors = 360u;
         jt::PaletteBuilder builder;
         m_tileLayerGround->setColorFunction(
             [&t = m_time,

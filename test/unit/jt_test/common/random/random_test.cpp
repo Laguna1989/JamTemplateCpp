@@ -18,7 +18,7 @@ TEST_P(RandomIntTestFixture, RandomInt)
 {
     int const lower { GetParam().first };
     int const upper { GetParam().second };
-    for (auto i = 0U; i != 1000; ++i) {
+    for (auto i = 0u; i != 1000; ++i) {
         int const v { Random::getInt(lower, upper) };
         EXPECT_GE(v, lower);
         EXPECT_LE(v, upper);
@@ -35,7 +35,7 @@ TEST_P(RandomFloatTestFixture, RandomFloat)
 {
     float const lower { GetParam().first };
     float const upper { GetParam().second };
-    for (auto i = 0U; i != 1000; ++i) {
+    for (auto i = 0u; i != 1000; ++i) {
         float const v { Random::getFloat(lower, upper) };
         EXPECT_GE(v, lower);
         EXPECT_LE(v, upper);
@@ -44,13 +44,13 @@ TEST_P(RandomFloatTestFixture, RandomFloat)
 
 TEST(RandomChanceTest, ChanceZeroAlwaysFalse)
 {
-    for (auto i = 0U; i != 1000; ++i) {
+    for (auto i = 0u; i != 1000; ++i) {
         EXPECT_FALSE(Random::getChance(0.0f));
     }
 }
 TEST(RandomChanceTest, ChanceZeroAlwaysTrue)
 {
-    for (auto i = 0U; i != 1000; ++i) {
+    for (auto i = 0u; i != 1000; ++i) {
         EXPECT_TRUE(Random::getChance(1.0f));
     }
 }
@@ -67,7 +67,7 @@ TEST_P(RandomFloatGaussTestFixture, RandomFloat)
 {
     float const mu { GetParam().first };
     float const sigma { GetParam().second };
-    for (auto i = 0U; i != 1000; ++i) {
+    for (auto i = 0u; i != 1000; ++i) {
         auto const r = Random::getFloatGauss(mu, sigma);
         EXPECT_GT(r, std::numeric_limits<float>::lowest());
         EXPECT_LT(r, std::numeric_limits<float>::max());
@@ -109,7 +109,7 @@ TEST(RandomPointIn, ValidWithRect)
     auto const lowerY = 10.0f;
     auto const upperX = 3.0f;
     auto const upperY = 9.0f;
-    for (auto i = 0U; i != 1000; ++i) {
+    for (auto i = 0u; i != 1000; ++i) {
         auto const v = Random::getRandomPointIn(jt::Rectf { lowerX, lowerY, upperX, upperY });
         EXPECT_GT(v.x, lowerX);
         EXPECT_GT(v.y, lowerY);
@@ -123,7 +123,7 @@ TEST(RandomPointIn, ValidWithVector)
     auto const lower = 0.0f;
     auto const upperX = 13.0f;
     auto const upperY = 7.0f;
-    for (auto i = 0U; i != 1000; ++i) {
+    for (auto i = 0u; i != 1000; ++i) {
         auto const v = Random::getRandomPointIn(jt::Vector2f { upperX, upperY });
         EXPECT_GT(v.x, lower);
         EXPECT_GT(v.y, lower);
@@ -135,7 +135,7 @@ TEST(RandomPointIn, ValidWithVector)
 class RandomSetSeedTestFixture : public ::testing::TestWithParam<unsigned int> { };
 
 INSTANTIATE_TEST_SUITE_P(RandomSetSeedTest, RandomSetSeedTestFixture,
-    ::testing::Values(0U, 1U, 10U, 100U, 1000U, std::numeric_limits<unsigned int>::epsilon(),
+    ::testing::Values(0u, 1u, 10u, 100u, 1000u, std::numeric_limits<unsigned int>::epsilon(),
         std::numeric_limits<unsigned int>::min(), std::numeric_limits<unsigned int>::max()));
 
 TEST_P(RandomSetSeedTestFixture, Values) { EXPECT_NO_THROW(Random::setSeed(GetParam())); }

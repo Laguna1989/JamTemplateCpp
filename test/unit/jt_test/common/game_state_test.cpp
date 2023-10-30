@@ -113,9 +113,9 @@ TEST_F(GameStateTest, UpdateCallsUpdateOnAddedGameObjects)
 
 TEST_F(GameStateTest, GameObjectList)
 {
-    auto const N = 500U;
+    auto const N = 500u;
     std::vector<std::weak_ptr<MockObject>> objects;
-    for (auto i = 0U; i != N; ++i) {
+    for (auto i = 0u; i != N; ++i) {
         auto mo = std::make_shared<MockObject>();
         EXPECT_CALL(*mo, doCreate());
         gamestate.add(mo);
@@ -127,7 +127,7 @@ TEST_F(GameStateTest, GameObjectList)
     EXPECT_EQ(gamestate.getNumberOfObjects(), N);
 
     // kill half the objects
-    for (auto i = 0U; i != N; ++i) {
+    for (auto i = 0u; i != N; ++i) {
         auto mo = objects.at(i);
 
         bool designate_object_for_kill = static_cast<bool>(i % 2 == 1);
@@ -211,7 +211,7 @@ TEST_F(GameStateTest, RemovalOfGameObjectWillCallDoDestroyOnGameObject)
     mockObject->kill();
     EXPECT_CALL(*mockObject, doDestroy());
     gamestate.update(0.1f);
-    ASSERT_EQ(gamestate.getNumberOfObjects(), 0U);
+    ASSERT_EQ(gamestate.getNumberOfObjects(), 0u);
 }
 
 #endif

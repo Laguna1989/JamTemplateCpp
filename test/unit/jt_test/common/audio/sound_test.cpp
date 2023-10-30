@@ -169,7 +169,7 @@ TEST_F(SoundTestWithLoadedSound, GetPositionAfterPlay)
     m_sound->play();
     // note: play will happen in another thread, so in order to progress the
     // position, this test needs to sleep a bit.
-    std::this_thread::sleep_for(std::chrono::milliseconds { 100U });
+    std::this_thread::sleep_for(std::chrono::milliseconds { 100u });
     EXPECT_NE(m_sound->getPosition(), 0.0f);
 }
 TEST_F(SoundTestWithLoadedSound, GetDurationReturnsExpectedValue)

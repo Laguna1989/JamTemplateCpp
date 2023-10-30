@@ -15,7 +15,7 @@ public:
 
     std::string getFlashName(std::string const& /*str*/) override { return ""; }
 
-    std::size_t getNumberOfTextures() override { return 0U; }
+    std::size_t getNumberOfTextures() override { return 0u; }
 };
 #else
 class MockTextureManager : public jt::TextureManagerInterface {
@@ -23,7 +23,7 @@ public:
     std::shared_ptr<SDL_Texture> get(std::string const& /*str*/) override { return nullptr; }
     void reset() override { }
     std::string getFlashName(std::string const& /*str*/) override { return ""; }
-    std::size_t getNumberOfTextures() override { return 0U; }
+    std::size_t getNumberOfTextures() override { return 0u; }
 };
 #endif
 

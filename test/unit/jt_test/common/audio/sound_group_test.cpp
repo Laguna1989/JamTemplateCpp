@@ -5,15 +5,15 @@
 TEST(SoundGroupTest, EmptySoundGroupContainsNoSound)
 {
     jt::SoundGroup const group {};
-    ASSERT_EQ(group.size(), 0U);
+    ASSERT_EQ(group.size(), 0u);
 }
 
 TEST(SoundGroupTest, ContainsCorrectNumberOfElements)
 {
     jt::SoundGroup group {};
-    auto const expectedNumberOfElements = 5U;
+    auto const expectedNumberOfElements = 5u;
 
-    for (auto i = 0U; i != expectedNumberOfElements; ++i) {
+    for (auto i = 0u; i != expectedNumberOfElements; ++i) {
         group.add(std::make_shared<jt::SoundNull>());
     }
     ASSERT_EQ(group.size(), expectedNumberOfElements);

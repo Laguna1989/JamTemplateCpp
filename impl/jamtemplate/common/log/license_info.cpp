@@ -394,7 +394,7 @@ void jt::LicenseInfo::doDraw() const
         static ImGuiWindowFlags flags = ImGuiWindowFlags_NoResize;
         ImGui::Begin("License Info (close with [F9])", &m_showLicenseInfo, flags);
         ImGui::BeginChild("L");
-        for (auto i = 0U; i != m_licenseTexts.size(); ++i) {
+        for (auto i = 0u; i != m_licenseTexts.size(); ++i) {
             ImGui::TextWrapped("%s", m_licenseTexts[i].c_str());
             ImGui::Separator();
             ImGui::Spacing();

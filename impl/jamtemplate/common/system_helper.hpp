@@ -101,7 +101,7 @@ template <typename Iter, typename RandomGenerator>
 Iter select_randomly(Iter start, Iter end, RandomGenerator& g)
 {
     std::uniform_int_distribution<std::size_t> dis(
-        0U, static_cast<std::size_t>(std::distance(start, end)) - 1U);
+        0u, static_cast<std::size_t>(std::distance(start, end)) - 1u);
     std::advance(start, dis(g));
     return start;
 }

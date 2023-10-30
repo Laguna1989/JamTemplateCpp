@@ -45,7 +45,7 @@ void StateMoveCam::onCreate()
 
     m_anim = std::make_shared<jt::Animation>();
     m_anim->add("assets/test/integration/demo/coin.png", "idle", jt::Vector2u { 16, 16 },
-        jt::MathHelper::numbersBetween(0U, 11U), 0.15f, textureManager());
+        jt::MathHelper::numbersBetween(0u, 11u), 0.15f, textureManager());
     m_anim->play("idle");
     m_anim->setShadow(jt::colors::Black, jt::Vector2f { 3.0f, 3.0f });
     m_anim->setPosition(jt::Vector2f { 200.0f, 200.0f });

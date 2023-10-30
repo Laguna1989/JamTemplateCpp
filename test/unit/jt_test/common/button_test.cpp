@@ -178,12 +178,12 @@ TEST_F(ButtonTest, IsNotActiveAfterSetInactive)
 TEST_F(ButtonTest, AddCallback)
 {
     b->addCallback([]() {});
-    ASSERT_EQ(b->getCallbackCount(), 1U);
+    ASSERT_EQ(b->getCallbackCount(), 1u);
 }
 
 TEST_F(ButtonTest, CallbacksAreEmptyAfterClearCallbacks)
 {
     b->addCallback([]() {});
     b->clearCallbacks();
-    ASSERT_EQ(b->getCallbackCount(), 0U);
+    ASSERT_EQ(b->getCallbackCount(), 0u);
 }

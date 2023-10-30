@@ -19,7 +19,7 @@ TEST(GroupVolumeManagerTest, VolumeAfterSet)
 TEST(GroupVolumeManagerTest, InitialListOfGroupsIsEmpty)
 {
     jt::GroupVolumeManager manager;
-    ASSERT_EQ(manager.getAllGroupNames().size(), 0U);
+    ASSERT_EQ(manager.getAllGroupNames().size(), 0u);
 }
 
 TEST(GroupVolumeManagerTest, ListOfGroupsIsExtendedBySetVolume)

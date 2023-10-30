@@ -55,7 +55,7 @@ PaletteBuilder& PaletteBuilder::addGradientH(
 {
     std::vector<jt::Color> colors;
     float const delta = (hmax - hmin) / steps;
-    for (std::size_t step = 0U; step != steps; ++step) {
+    for (std::size_t step = 0u; step != steps; ++step) {
         auto const h = hmin + step * delta;
         colors.emplace_back(jt::ColorFactory::fromHSV(h, s, v));
     }
@@ -67,7 +67,7 @@ PaletteBuilder& PaletteBuilder::addGradientS(
 {
     std::vector<jt::Color> colors;
     float const delta = (smax - smin) / steps;
-    for (std::size_t step = 0U; step != steps; ++step) {
+    for (std::size_t step = 0u; step != steps; ++step) {
         auto const s = smin + step * delta;
         colors.emplace_back(jt::ColorFactory::fromHSV(h, s, v));
     }
@@ -79,7 +79,7 @@ PaletteBuilder& PaletteBuilder::addGradientV(
 {
     std::vector<jt::Color> colors;
     float const delta = (vmax - vmin) / steps;
-    for (std::size_t step = 0U; step != steps; ++step) {
+    for (std::size_t step = 0u; step != steps; ++step) {
         auto const v = vmin + step * delta;
         colors.emplace_back(jt::ColorFactory::fromHSV(h, s, v));
     }

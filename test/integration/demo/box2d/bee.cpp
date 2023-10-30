@@ -32,9 +32,9 @@ void Bee::doCreate()
     collider->SetUserData((void*)g_userDataEnemyID);
 
     m_anim = std::make_shared<jt::Animation>();
-    m_anim->add("assets/test/integration/demo/bee.png", "right", jt::Vector2u { 8U, 8U }, { 0, 1 },
+    m_anim->add("assets/test/integration/demo/bee.png", "right", jt::Vector2u { 8u, 8u }, { 0, 1 },
         0.09f, textureManager());
-    m_anim->add("assets/test/integration/demo/bee.png", "left", jt::Vector2u { 8U, 8U }, { 2, 3 },
+    m_anim->add("assets/test/integration/demo/bee.png", "left", jt::Vector2u { 8u, 8u }, { 2, 3 },
         0.09f, textureManager());
     m_anim->setPosition(jt::Vector2f { 100.0f, 100.0f });
     m_anim->play("left");

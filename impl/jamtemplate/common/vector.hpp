@@ -15,8 +15,8 @@ struct Vector2f {
 struct Vector2u {
     Vector2u();
     Vector2u(unsigned int x, unsigned int y);
-    unsigned int x { 0U };
-    unsigned int y { 0U };
+    unsigned int x { 0u };
+    unsigned int y { 0u };
 };
 
 jt::Vector2f operator+(jt::Vector2f const& a, jt::Vector2f const& b);

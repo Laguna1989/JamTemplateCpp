@@ -27,15 +27,15 @@ TEST(PaletteBuilderTest, AddTwoColors)
 TEST(PaletteBuilderTest, FromHEmpty)
 {
     jt::PaletteBuilder builder;
-    auto const pal = builder.addGradientH(0.0f, 0.0f, 0.0f, 0.0f, 0U).create();
+    auto const pal = builder.addGradientH(0.0f, 0.0f, 0.0f, 0.0f, 0u).create();
     ASSERT_TRUE(pal.empty());
 }
 
 TEST(PaletteBuilderTest, FromHOneEntryBlack)
 {
     jt::PaletteBuilder builder;
-    auto const pal = builder.addGradientH(0.0f, 0.0f, 0.0f, 0.0f, 1U).create();
-    ASSERT_EQ(pal.size(), 1U);
+    auto const pal = builder.addGradientH(0.0f, 0.0f, 0.0f, 0.0f, 1u).create();
+    ASSERT_EQ(pal.size(), 1u);
 
     auto col = pal.getColor(0);
     ASSERT_EQ(col, jt::colors::Black);
@@ -44,8 +44,8 @@ TEST(PaletteBuilderTest, FromHOneEntryBlack)
 TEST(PaletteBuilderTest, FromHOneEntryRed)
 {
     jt::PaletteBuilder builder;
-    auto const pal = builder.addGradientH(0.0f, 0.0f, 100.0f, 100.0f, 1U).create();
-    ASSERT_EQ(pal.size(), 1U);
+    auto const pal = builder.addGradientH(0.0f, 0.0f, 100.0f, 100.0f, 1u).create();
+    ASSERT_EQ(pal.size(), 1u);
 
     auto col = pal.getColor(0);
     ASSERT_EQ(col, jt::colors::Red);
@@ -54,8 +54,8 @@ TEST(PaletteBuilderTest, FromHOneEntryRed)
 TEST(PaletteBuilderTest, FromSOneEntryBlack)
 {
     jt::PaletteBuilder builder;
-    auto const pal = builder.addGradientS(0.0f, 0.0f, 0.0f, 0.0f, 1U).create();
-    ASSERT_EQ(pal.size(), 1U);
+    auto const pal = builder.addGradientS(0.0f, 0.0f, 0.0f, 0.0f, 1u).create();
+    ASSERT_EQ(pal.size(), 1u);
 
     auto col = pal.getColor(0);
     ASSERT_EQ(col, jt::colors::Black);
@@ -64,8 +64,8 @@ TEST(PaletteBuilderTest, FromSOneEntryBlack)
 TEST(PaletteBuilderTest, FromSOneEntryRed)
 {
     jt::PaletteBuilder builder;
-    auto const pal = builder.addGradientS(0.0f, 100.0f, 100.0f, 100.0f, 1U).create();
-    ASSERT_EQ(pal.size(), 1U);
+    auto const pal = builder.addGradientS(0.0f, 100.0f, 100.0f, 100.0f, 1u).create();
+    ASSERT_EQ(pal.size(), 1u);
 
     auto col = pal.getColor(0);
     ASSERT_EQ(col, jt::colors::Red);
@@ -74,8 +74,8 @@ TEST(PaletteBuilderTest, FromSOneEntryRed)
 TEST(PaletteBuilderTest, FromVOneEntryBlack)
 {
     jt::PaletteBuilder builder;
-    auto const pal = builder.addGradientV(0.0f, 0.0f, 0.0f, 0.0f, 1U).create();
-    ASSERT_EQ(pal.size(), 1U);
+    auto const pal = builder.addGradientV(0.0f, 0.0f, 0.0f, 0.0f, 1u).create();
+    ASSERT_EQ(pal.size(), 1u);
 
     auto col = pal.getColor(0);
     ASSERT_EQ(col, jt::colors::Black);
@@ -84,8 +84,8 @@ TEST(PaletteBuilderTest, FromVOneEntryBlack)
 TEST(PaletteBuilderTest, FromVOneEntryRed)
 {
     jt::PaletteBuilder builder;
-    auto const pal = builder.addGradientV(0.0f, 100.0f, 100.0f, 100.0f, 1U).create();
-    ASSERT_EQ(pal.size(), 1U);
+    auto const pal = builder.addGradientV(0.0f, 100.0f, 100.0f, 100.0f, 1u).create();
+    ASSERT_EQ(pal.size(), 1u);
 
     auto col = pal.getColor(0);
     ASSERT_EQ(col, jt::colors::Red);
@@ -118,7 +118,7 @@ TEST_P(PaletteBuilderSizeTestFixture, FromVSize)
 }
 
 INSTANTIATE_TEST_SUITE_P(
-    PaletteBuilderSizeTest, PaletteBuilderSizeTestFixture, ::testing::Values(0U, 1U, 5U, 100U));
+    PaletteBuilderSizeTest, PaletteBuilderSizeTestFixture, ::testing::Values(0u, 1u, 5u, 100u));
 
 TEST(PaletteBuilderParseGPL, GPLWithOneEntry)
 {

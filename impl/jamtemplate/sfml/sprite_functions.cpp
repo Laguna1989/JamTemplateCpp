@@ -14,21 +14,21 @@ sf::Image jt::SpriteFunctions::makeButtonImage(unsigned int w, unsigned int h)
     img.create(3 * w, h, toLib(emptyColor));
 
     for (unsigned int i = w; i != 3 * w; ++i) {
-        for (unsigned int j = 0U; j != h; ++j) {
+        for (unsigned int j = 0u; j != h; ++j) {
             img.setPixel(i, j, toLib(overBGColor));
         }
     }
 
-    for (unsigned int i = 0U; i != w; ++i) {
-        img.setPixel(i, 0U, toLib(borderColor));
+    for (unsigned int i = 0u; i != w; ++i) {
+        img.setPixel(i, 0u, toLib(borderColor));
         img.setPixel(i, h - 1, toLib(borderColor));
 
         img.setPixel(2 * w + i, 0, toLib(borderColor));
         img.setPixel(2 * w + i, h - 1, toLib(borderColor));
     }
 
-    for (unsigned int j = 0U; j != h; ++j) {
-        img.setPixel(0U, j, toLib(borderColor));
+    for (unsigned int j = 0u; j != h; ++j) {
+        img.setPixel(0u, j, toLib(borderColor));
         img.setPixel(w - 1, j, toLib(borderColor));
 
         img.setPixel(2 * w, j, toLib(borderColor));
@@ -53,8 +53,8 @@ sf::Image jt::SpriteFunctions::makeGlowImage(float r, std::uint8_t max)
 
     float const c = r / 2;
 
-    for (auto i = 0U; i != s; ++i) {
-        for (auto j = 0U; j != s; ++j) {
+    for (auto i = 0u; i != s; ++i) {
+        for (auto j = 0u; j != s; ++j) {
             auto const dx = i - c;
             auto const dy = j - c;
 
@@ -74,8 +74,8 @@ sf::Image jt::SpriteFunctions::makeVignetteImage(unsigned int w, unsigned int h)
     auto const cx = static_cast<float>(w) / 2.0f;
     auto const cy = static_cast<float>(h) / 2.0f;
     img.create(w, h, toLib(jt::colors::Transparent));
-    for (auto i = 0U; i != w; ++i) {
-        for (auto j = 0U; j != h; ++j) {
+    for (auto i = 0u; i != w; ++i) {
+        for (auto j = 0u; j != h; ++j) {
             auto const dx = static_cast<float>(i) - cx;
             auto const dy = static_cast<float>(j) - cy;
             auto const sqr = std::sqrt(dx * dx + dy * dy);

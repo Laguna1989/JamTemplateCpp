@@ -118,19 +118,19 @@ TEST_F(TextureManagerTest, InvalidSpecialOperation)
 
 TEST_F(TextureManagerTest, GetNumberOfTexturesIsInitiallyZero)
 {
-    ASSERT_EQ(m_manager.getNumberOfTextures(), 0U);
+    ASSERT_EQ(m_manager.getNumberOfTextures(), 0u);
 }
 
 TEST_F(TextureManagerTest, GetNumberOfTexturesIsTwoAfterGetTexture)
 {
     EXPECT_NO_THROW(m_manager.get("assets/test/unit/jt_test/coin.png"));
     // two because of normal texture + flash texture
-    ASSERT_EQ(m_manager.getNumberOfTextures(), 2U);
+    ASSERT_EQ(m_manager.getNumberOfTextures(), 2u);
 }
 
 TEST_F(TextureManagerTest, GetNumberOfTexturesIsZeroAfterReset)
 {
     EXPECT_NO_THROW(m_manager.get("assets/test/unit/jt_test/coin.png"));
     EXPECT_NO_THROW(m_manager.reset());
-    ASSERT_EQ(m_manager.getNumberOfTextures(), 0U);
+    ASSERT_EQ(m_manager.getNumberOfTextures(), 0u);
 }

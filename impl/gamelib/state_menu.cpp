@@ -62,7 +62,7 @@ void StateMenu::createMenuText()
 void StateMenu::createTextExplanation()
 {
     m_textExplanation
-        = jt::dh::createText(renderTarget(), GP::ExplanationText(), 16U, GP::PaletteFontFront());
+        = jt::dh::createText(renderTarget(), GP::ExplanationText(), 16u, GP::PaletteFontFront());
     auto const half_width = GP::GetScreenSize().x / 2.0f;
     m_textExplanation->setPosition({ half_width, 180 });
     m_textExplanation->setShadow(GP::PaletteFontShadow(), jt::Vector2f { 2, 2 });
@@ -73,12 +73,12 @@ void StateMenu::createTextCredits()
     m_textCredits = jt::dh::createText(renderTarget(),
         "Created by " + GP::AuthorName() + " for " + GP::JamName() + "\n" + GP::JamDate()
             + "\n\nF9 for License Information",
-        16U, GP::PaletteFontCredits());
+        16u, GP::PaletteFontCredits());
     m_textCredits->setTextAlign(jt::Text::TextAlign::LEFT);
     m_textCredits->setPosition({ 10, GP::GetScreenSize().y - 70 });
     m_textCredits->setShadow(GP::PaletteFontShadow(), jt::Vector2f { 1, 1 });
 
-    m_textVersion = jt::dh::createText(renderTarget(), "", 16U, GP::PaletteFontCredits());
+    m_textVersion = jt::dh::createText(renderTarget(), "", 16u, GP::PaletteFontCredits());
     if (jt::BuildInfo::gitTagName() != "") {
         m_textVersion->setText(jt::BuildInfo::gitTagName());
     } else {
@@ -94,7 +94,7 @@ void StateMenu::createTextStart()
 {
     auto const half_width = GP::GetScreenSize().x / 2.0f;
     m_textStart = jt::dh::createText(
-        renderTarget(), "Press Space to start the game", 24U, GP::PaletteFontFront());
+        renderTarget(), "Press Space to start the game", 24u, GP::PaletteFontFront());
     m_textStart->setPosition({ half_width, 150 });
     m_textStart->setShadow(GP::PaletteFontShadow(), jt::Vector2f { 3, 3 });
 }
@@ -102,7 +102,7 @@ void StateMenu::createTextStart()
 void StateMenu::createTextTitle()
 {
     float half_width = GP::GetScreenSize().x / 2;
-    m_textTitle = jt::dh::createText(renderTarget(), GP::GameName(), 48U, GP::PaletteFontFront());
+    m_textTitle = jt::dh::createText(renderTarget(), GP::GameName(), 48u, GP::PaletteFontFront());
     m_textTitle->setPosition({ half_width, 20 });
     m_textTitle->setShadow(GP::PaletteFontShadow(), jt::Vector2f { 4, 4 });
 }

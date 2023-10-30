@@ -123,7 +123,7 @@ void Text::renderOneLineOfText(std::shared_ptr<jt::RenderTargetLayer> const sptr
     std::size_t i, std::size_t lineCount) const
 {
     // render text on full white, so coloring can be done afterwards
-    SDL_Color const col { 255U, 255U, 255U, 255U };
+    SDL_Color const col { 255u, 255u, 255u, 255u };
     SDL_Surface* textSurface = TTF_RenderText_Solid(m_font, text.c_str(), col);
     SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "0");
     SDL_Texture* textTexture = SDL_CreateTextureFromSurface(
@@ -156,7 +156,7 @@ void Text::renderOneLineOfText(std::shared_ptr<jt::RenderTargetLayer> const sptr
 jt::Vector2u Text::getSizeForLine(
     std::shared_ptr<jt::RenderTargetLayer> const sptr, std::string const& text) const
 {
-    SDL_Color const col { 255U, 255U, 255U, 255U };
+    SDL_Color const col { 255u, 255u, 255u, 255u };
     SDL_Surface* textSurface = TTF_RenderText_Solid(m_font, text.c_str(), col);
     SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "0");
     SDL_Texture* textTexture = SDL_CreateTextureFromSurface(
@@ -252,8 +252,8 @@ SDL_Rect Text::getDestRect(jt::Vector2f const& positionOffset) const
 void Text::calculateTextTextureSize(
     std::shared_ptr<jt::RenderTargetLayer> const sptr, std::vector<std::string> const& ssv)
 {
-    unsigned int maxLineLengthInPixel { 0U };
-    std::size_t maxLineLengthInChars { 0U };
+    unsigned int maxLineLengthInPixel { 0u };
+    std::size_t maxLineLengthInChars { 0u };
     for (auto const& l : ssv) {
         if (l.size() > maxLineLengthInChars) {
             maxLineLengthInPixel = getSizeForLine(sptr, l).x;

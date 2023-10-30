@@ -10,7 +10,7 @@ jt::Stars::Stars(std::size_t count, jt::Color const& col, jt::Vector2f const& sc
 
 void jt::Stars::doCreate()
 {
-    for (auto i = 0U; i != m_stars.size(); ++i) {
+    for (auto i = 0u; i != m_stars.size(); ++i) {
         auto star = std::make_unique<Star>();
         star->setGameInstance(getGame());
         star->create();

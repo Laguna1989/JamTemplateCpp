@@ -33,5 +33,5 @@ TEST(InputManagerNullTest, UpdateWithMocks)
 TEST(InputManagerNullTest, NumberOfGamepads)
 {
     jt::InputManagerNull im;
-    ASSERT_EQ(im.getNumberOfGamepads(), 0U);
+    ASSERT_EQ(im.getNumberOfGamepads(), 0u);
 }

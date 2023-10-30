@@ -39,8 +39,8 @@ TEST(CircularBufferSize2, Push)
 TEST(CircularBufferSize2, EmptyBufferDoesNotContainElements)
 {
     jt::CircularBuffer<unsigned int, 2> buffer {};
-    auto const value1 = 4U;
-    auto const value2 = 8U;
+    auto const value1 = 4u;
+    auto const value2 = 8u;
 
     ASSERT_FALSE(buffer.contains(value1));
     ASSERT_FALSE(buffer.contains(value2));
@@ -49,8 +49,8 @@ TEST(CircularBufferSize2, EmptyBufferDoesNotContainElements)
 TEST(CircularBufferSize2, BufferContainsValuesAfterPush)
 {
     jt::CircularBuffer<unsigned int, 2> buffer;
-    auto const value1 = 4U;
-    auto const value2 = 8U;
+    auto const value1 = 4u;
+    auto const value2 = 8u;
 
     buffer.put(value1);
     buffer.put(value2);
@@ -61,8 +61,8 @@ TEST(CircularBufferSize2, BufferContainsValuesAfterPush)
 TEST(CircularBufferSize2, BufferDoesNotContainValueAfterItIsPushedOutOfTheBuffer)
 {
     jt::CircularBuffer<unsigned int, 2> buffer;
-    auto const value1 = 4U;
-    auto const value2 = 8U;
+    auto const value1 = 4u;
+    auto const value2 = 8u;
 
     buffer.put(value1);
     buffer.put(value2);
@@ -83,8 +83,8 @@ jt::CircularBuffer<unsigned int, 2> createBufferWithValues(unsigned int a, unsig
 
 TEST(CircularBufferIterators, ValueAtBegin)
 {
-    auto const value1 = 4U;
-    auto const value2 = 8U;
+    auto const value1 = 4u;
+    auto const value2 = 8u;
     auto buffer = createBufferWithValues(value1, value2);
 
     ASSERT_EQ(value1, *buffer.begin());
@@ -92,8 +92,8 @@ TEST(CircularBufferIterators, ValueAtBegin)
 
 TEST(CircularBufferCapacity, Capacity)
 {
-    auto const value1 = 4U;
-    auto const value2 = 8U;
+    auto const value1 = 4u;
+    auto const value2 = 8u;
     auto buffer = createBufferWithValues(value1, value2);
 
     ASSERT_EQ(2, buffer.capacity());
@@ -101,8 +101,8 @@ TEST(CircularBufferCapacity, Capacity)
 
 TEST(CircularBufferIterators, ValueAtEnd)
 {
-    auto const value1 = 4U;
-    auto const value2 = 8U;
+    auto const value1 = 4u;
+    auto const value2 = 8u;
     auto buffer = createBufferWithValues(value1, value2);
     auto last = buffer.end();
     --last;
@@ -111,8 +111,8 @@ TEST(CircularBufferIterators, ValueAtEnd)
 
 TEST(CircularBufferIterators, ValueAtCBegin)
 {
-    auto const value1 = 9U;
-    auto const value2 = 3U;
+    auto const value1 = 9u;
+    auto const value2 = 3u;
     auto buffer = createBufferWithValues(value1, value2);
 
     ASSERT_EQ(value1, *buffer.cbegin());
@@ -120,8 +120,8 @@ TEST(CircularBufferIterators, ValueAtCBegin)
 
 TEST(CircularBufferIterators, ValueAtCEnd)
 {
-    auto const value1 = 9U;
-    auto const value2 = 3U;
+    auto const value1 = 9u;
+    auto const value2 = 3u;
     auto buffer = createBufferWithValues(value1, value2);
     auto clast = buffer.cend();
     --clast;
@@ -131,14 +131,14 @@ TEST(CircularBufferIterators, ValueAtCEnd)
 TEST(CircularBufferTailTest, InitialValue)
 {
     auto buffer = jt::CircularBuffer<unsigned int, 2> {};
-    ASSERT_EQ(buffer.getTail(), 0U);
+    ASSERT_EQ(buffer.getTail(), 0u);
 }
 
 TEST(CircularBufferTailTest, ValueAfterPut)
 {
     auto buffer = jt::CircularBuffer<unsigned int, 2> {};
     buffer.put(1u);
-    ASSERT_EQ(buffer.getTail(), 1U);
+    ASSERT_EQ(buffer.getTail(), 1u);
 }
 
 TEST(CircularBufferTailTest, ValueAfterTwoPuts)
@@ -146,7 +146,7 @@ TEST(CircularBufferTailTest, ValueAfterTwoPuts)
     auto buffer = jt::CircularBuffer<unsigned int, 2> {};
     buffer.put(1u);
     buffer.put(2u);
-    ASSERT_EQ(buffer.getTail(), 0U);
+    ASSERT_EQ(buffer.getTail(), 0u);
 }
 
 TEST(CircularBufferTailTest, ValueAfterThreePuts)
@@ -155,20 +155,20 @@ TEST(CircularBufferTailTest, ValueAfterThreePuts)
     buffer.put(1u);
     buffer.put(2u);
     buffer.put(3u);
-    ASSERT_EQ(buffer.getTail(), 1U);
+    ASSERT_EQ(buffer.getTail(), 1u);
 }
 
 TEST(CircularBufferHeadTest, InitialValue)
 {
     auto buffer = jt::CircularBuffer<unsigned int, 2> {};
-    ASSERT_EQ(buffer.getHead(), 0U);
+    ASSERT_EQ(buffer.getHead(), 0u);
 }
 
 TEST(CircularBufferHeadTest, ValueAfterPut)
 {
     auto buffer = jt::CircularBuffer<unsigned int, 2> {};
     buffer.put(1u);
-    ASSERT_EQ(buffer.getHead(), 0U);
+    ASSERT_EQ(buffer.getHead(), 0u);
 }
 
 TEST(CircularBufferHeadTest, ValueAfterTwoPuts)
@@ -176,7 +176,7 @@ TEST(CircularBufferHeadTest, ValueAfterTwoPuts)
     auto buffer = jt::CircularBuffer<unsigned int, 2> {};
     buffer.put(1u);
     buffer.put(2u);
-    ASSERT_EQ(buffer.getHead(), 0U);
+    ASSERT_EQ(buffer.getHead(), 0u);
 }
 
 TEST(CircularBufferHeadTest, ValueAfterThreePuts)
@@ -185,7 +185,7 @@ TEST(CircularBufferHeadTest, ValueAfterThreePuts)
     buffer.put(1u);
     buffer.put(2u);
     buffer.put(3u);
-    ASSERT_EQ(buffer.getHead(), 1U);
+    ASSERT_EQ(buffer.getHead(), 1u);
 }
 
 TEST(CircularBufferGetTest, InitialGet)
