@@ -9,7 +9,7 @@ class SoundBase : public jt::SoundInterface {
 public:
     float getVolume() const override;
     void setVolume(float newVolume) override;
-
+    
     void setBlend(float blend) override;
     float getBlend() const override;
 

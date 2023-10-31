@@ -8,9 +8,9 @@ static void BM_GetAllCommands(benchmark::State& state)
     for (auto _ : state) {
         jt::null_objects::LoggerNull logger;
         jt::ActionCommandManager acm { logger };
-        constexpr auto size = 40U;
+        constexpr auto size = 40u;
         std::array<std::shared_ptr<bool>, size> myarray;
-        for (std::size_t i = 0U; i != size; ++i) {
+        for (std::size_t i = 0u; i != size; ++i) {
             myarray[i]
                 = acm.registerTemporaryCommand(std::to_string(i), [](auto const& /*unused*/) {});
         }

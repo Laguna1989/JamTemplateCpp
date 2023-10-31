@@ -10,8 +10,7 @@ TEST(TilemapCollisions, emptyVector)
 }
 
 class TilemapCollisionsRefineWithOneColliderTestFixture
-    : public ::testing::TestWithParam<jt::Rectf> {
-};
+    : public ::testing::TestWithParam<jt::Rectf> { };
 
 TEST_P(TilemapCollisionsRefineWithOneColliderTestFixture, OneColliderStaysUntouched)
 {
@@ -32,8 +31,7 @@ INSTANTIATE_TEST_SUITE_P(TilemapCollisionsRefineWithOneColliderTest,
         jt::Rectf { 0.0f, 0.0f, 1.0f, 1.0f }, jt::Rectf { 16.0f, 16.0f, 2.0f, 2.0f }));
 
 class TilemapCollisionsRefineWithSeparateCollidersTestFixture
-    : public ::testing::TestWithParam<std::vector<jt::Rectf>> {
-};
+    : public ::testing::TestWithParam<std::vector<jt::Rectf>> { };
 
 TEST_P(TilemapCollisionsRefineWithSeparateCollidersTestFixture, SeparateCollidersStayUntouched)
 {
@@ -45,7 +43,7 @@ TEST_P(TilemapCollisionsRefineWithSeparateCollidersTestFixture, SeparateCollider
     collisions.refineColliders(1.0f);
 
     ASSERT_EQ(collisions.getRects().size(), GetParam().size());
-    for (auto i = 0U; i != collisions.getRects().size(); ++i) {
+    for (auto i = 0u; i != collisions.getRects().size(); ++i) {
         auto const& rectA = collisions.getRects().at(i);
         auto const& rectB = GetParam().at(i);
 
@@ -75,7 +73,7 @@ TEST_P(TilemapCollisionsRefineWithMergeableCollidersTestFixture, CollidersAreMer
 
     ASSERT_EQ(collisions.getRects().size(), GetParam().second.size());
 
-    for (auto i = 0U; i != collisions.getRects().size(); ++i) {
+    for (auto i = 0u; i != collisions.getRects().size(); ++i) {
         auto const& rectA = collisions.getRects().at(i);
         auto const& rectB = GetParam().second.at(i);
 

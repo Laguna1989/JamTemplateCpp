@@ -15,7 +15,7 @@ public:
 private:
     std::shared_ptr<jt::Shape> m_shape;
     std::shared_ptr<jt::Sprite> m_glow;
-    std::uint8_t m_starAlphaMax { 100U };
+    std::uint8_t m_starAlphaMax { 100u };
 
     float m_rand1 { 0.0f };
     float m_rand2 { 0.0f };

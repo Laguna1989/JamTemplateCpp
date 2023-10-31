@@ -29,7 +29,7 @@ private:
     void onDraw() const override;
     void onEnter() override;
 
-    std::size_t m_buttonCount { 0U };
+    std::size_t m_buttonCount { 0u };
 
     template <class State>
     void AddButton(std::string const& textString)

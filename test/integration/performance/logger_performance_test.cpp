@@ -7,7 +7,7 @@ static void BM_LoggerLogWithoutTarget(benchmark::State& state)
     for (auto _ : state) {
         jt::Logger logger;
 
-        for (auto i = 0U; i != 200U; ++i) {
+        for (auto i = 0u; i != 200u; ++i) {
             logger.verbose("abcd1", { "b", "c" });
             logger.debug("abcd2", { "b", "c" });
             logger.info("abcd3", { "b", "c" });
@@ -26,7 +26,7 @@ static void BM_LoggerLogWithCoutTargetSetToOff(benchmark::State& state)
         target->setLogLevel(jt::LogLevel::LogLevelOff);
         logger.addLogTarget(target);
 
-        for (auto i = 0U; i != 200U; ++i) {
+        for (auto i = 0u; i != 200u; ++i) {
             logger.verbose("abcd1", { "b", "c" });
             logger.debug("abcd2", { "b", "c" });
             logger.info("abcd3", { "b", "c" });

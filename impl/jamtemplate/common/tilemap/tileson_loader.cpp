@@ -37,7 +37,7 @@ std::vector<std::shared_ptr<jt::Sprite>> loadTileSetSprites(std::shared_ptr<tson
 {
     std::vector<std::shared_ptr<jt::Sprite>> tileSetSprites;
     std::size_t offset { 0 };
-    for (auto i = 0U; i != map->getTilesets().size(); ++i) {
+    for (auto i = 0u; i != map->getTilesets().size(); ++i) {
         auto const tileset = map->getTilesets().at(i);
         auto const columns = tileset.getColumns();
         auto const rows = tileset.getTileCount() / columns;
@@ -138,8 +138,7 @@ jt::tilemap::TilesonLoader::loadNodesFromLayer(std::string const& layerName)
             auto node = std::make_shared<jt::pathfinder::Node>();
             node->setPosition(
                 jt::Vector2u { static_cast<unsigned int>(posx), static_cast<unsigned int>(posy) });
-
-            node->setTileID(parseSingleTile(tile).id);
+            
             node->setBlocked(isBlocked);
             nodes.push_back(node);
         }

@@ -33,7 +33,7 @@ sf::Image createImageFromAse(std::string const& filename)
     sfImgage.create(w, h, toLib(emptyColor));
 
     for (auto i = 0u; i != w; ++i) {
-        for (auto j = 0U; j != h; ++j) {
+        for (auto j = 0u; j != h; ++j) {
             auto const p = aseImage->m_pixels[aseImage->posToIndex(i, j)];
             auto const col = jt::Color { p.r, p.g, p.b, p.a };
             sfImgage.setPixel(i, j, toLib(col));

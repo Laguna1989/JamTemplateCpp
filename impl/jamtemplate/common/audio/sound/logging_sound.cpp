@@ -62,6 +62,14 @@ float jt::LoggingSound::getVolume() const
     return volume;
 }
 
+float jt::LoggingSound::getFinalVolume() const
+{
+    auto const finalVolume = m_decoratee->getFinalVolume();
+    m_logger.debug(
+        "Sound final volume: " + std::to_string(finalVolume), { "jt", "audio", "sound" });
+    return finalVolume;
+}
+
 void jt::LoggingSound::setVolume(float newVolume)
 {
     m_logger.debug("Sound setVolume " + std::to_string(newVolume), { "jt", "audio", "sound" });
@@ -107,6 +115,7 @@ float jt::LoggingSound::getBlend() const
     m_logger.verbose("Sound getBlend: " + std::to_string(blend), { "jt", "audio", "sound" });
     return blend;
 }
+
 int jt::LoggingSound::getSampleRate() const { return m_decoratee->getSampleRate(); }
 
 void jt::LoggingSound::setPitch(float pitch)
@@ -114,17 +123,20 @@ void jt::LoggingSound::setPitch(float pitch)
     m_logger.debug("Sound setPitch: " + std::to_string(pitch), { "jt", "audio", "sound" });
     m_decoratee->setPitch(pitch);
 }
+
 float jt::LoggingSound::getPitch() const
 {
     auto const pitch = m_decoratee->getPitch();
     m_logger.verbose("Sound getPitch: " + std::to_string(pitch), { "jt", "audio", "sound" });
     return pitch;
 }
+
 void jt::LoggingSound::setVolumeProvider(jt::GroupVolumeGetterInterface& provider)
 {
     m_logger.debug("SetVolumeProvider", { "jt", "audio", "sound", "volumeProvider" });
     m_decoratee->setVolumeProvider(provider);
 }
+
 void jt::LoggingSound::setVolumeGroup(std::string const& volumeGroupName)
 {
     m_logger.info(

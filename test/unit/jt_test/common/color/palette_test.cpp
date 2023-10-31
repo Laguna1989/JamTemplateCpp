@@ -4,7 +4,7 @@
 TEST(PaletteTest, InitialSizeIsZero)
 {
     jt::Palette const pal;
-    ASSERT_EQ(pal.size(), 0U);
+    ASSERT_EQ(pal.size(), 0u);
 }
 
 TEST(PaletteTest, InitialEmpty)
@@ -16,13 +16,13 @@ TEST(PaletteTest, InitialEmpty)
 TEST(PaletteTest, ConstructorResultsInCorrectSize1)
 {
     jt::Palette const pal { { jt::colors::Black } };
-    ASSERT_EQ(pal.size(), 1U);
+    ASSERT_EQ(pal.size(), 1u);
 }
 
 TEST(PaletteTest, ConstructorResultsInCorrectSize2)
 {
     jt::Palette const pal { { jt::colors::Black, jt::colors::White } };
-    ASSERT_EQ(pal.size(), 2U);
+    ASSERT_EQ(pal.size(), 2u);
 }
 
 TEST(PaletteTest, ConstructorInitialEmpty)

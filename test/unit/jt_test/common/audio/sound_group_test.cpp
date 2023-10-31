@@ -1,19 +1,21 @@
 #include <audio/sound/sound_group.hpp>
 #include <audio/sound/sound_null.hpp>
+#include <audio/sound_groups/group_volume_manager.hpp>
+#include <mocks/mock_sound.hpp>
 #include <gtest/gtest.h>
 
 TEST(SoundGroupTest, EmptySoundGroupContainsNoSound)
 {
     jt::SoundGroup const group {};
-    ASSERT_EQ(group.size(), 0U);
+    ASSERT_EQ(group.size(), 0u);
 }
 
 TEST(SoundGroupTest, ContainsCorrectNumberOfElements)
 {
     jt::SoundGroup group {};
-    auto const expectedNumberOfElements = 5U;
+    auto const expectedNumberOfElements = 5u;
 
-    for (auto i = 0U; i != expectedNumberOfElements; ++i) {
+    for (auto i = 0u; i != expectedNumberOfElements; ++i) {
         group.add(std::make_shared<jt::SoundNull>());
     }
     ASSERT_EQ(group.size(), expectedNumberOfElements);
@@ -176,6 +178,7 @@ TEST(SoundGroupTest, SetBlendForEmptyGroupHasNoEffect)
     jt::SoundGroup group {};
     ASSERT_NO_THROW(group.setBlend(1.0f));
 }
+
 TEST(SoundGroupTest, SetBlendOnNullSound)
 {
     jt::SoundGroup group {};
@@ -259,4 +262,43 @@ TEST(SoundGroupTest, GetPitchOnNullSound)
     group.add(snd);
 
     ASSERT_EQ(group.getPitch(), 1.0f);
+}
+
+TEST(SoundGroupTest, GetFinalVolumeOnEmptyGroupReturnsZero)
+{
+    jt::SoundGroup group {};
+    ASSERT_EQ(group.getFinalVolume(), 0.0f);
+}
+
+TEST(SoundGroupTest, SetVolumeProvider)
+{
+    jt::SoundGroup group {};
+    auto const snd = std::make_shared<::testing::NiceMock<MockSound>>();
+    group.add(snd);
+
+    jt::GroupVolumeManager vm;
+    EXPECT_CALL(*snd, setVolumeProvider(::testing::_));
+    group.setVolumeProvider(vm);
+}
+
+TEST(SoundGroupTest, SetVolumeGroup)
+{
+    jt::SoundGroup group {};
+    auto const snd = std::make_shared<::testing::NiceMock<MockSound>>();
+    group.add(snd);
+
+    jt::GroupVolumeManager vm;
+    EXPECT_CALL(*snd, setVolumeGroup("abcd"));
+    group.setVolumeGroup("abcd");
+}
+
+TEST(SoundGroupTest, GetFinalVolumeOnGroupWithSoundReturnsFinalVolumeFromSound)
+{
+    jt::SoundGroup group {};
+    auto const snd = std::make_shared<::testing::NiceMock<MockSound>>();
+    group.add(snd);
+
+    group.update();
+    EXPECT_CALL(*snd, getFinalVolume()).WillOnce(::testing::Return(0.5f));
+    ASSERT_EQ(group.getFinalVolume(), 0.5f);
 }

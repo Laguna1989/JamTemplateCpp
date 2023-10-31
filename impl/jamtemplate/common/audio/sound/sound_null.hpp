@@ -17,6 +17,8 @@ public:
     float getVolume() const override;
     void setVolume(float newVolume) override;
 
+    float getFinalVolume() const override;
+
     void setPitch(float pitch) override;
     float getPitch() const override;
 

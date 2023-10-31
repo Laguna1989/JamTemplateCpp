@@ -84,10 +84,12 @@ void jt::StateManager::draw(std::shared_ptr<jt::RenderTargetInterface> rt)
         getTransition()->draw(rt);
     }
 }
+
 void jt::StateManager::storeCurrentState(std::string const& identifier)
 {
     m_storedStates[identifier] = getCurrentState();
 }
+
 std::shared_ptr<jt::GameState> jt::StateManager::getStoredState(std::string const& identifier)
 {
     if (m_storedStates.count(identifier) == 0) {
@@ -100,6 +102,7 @@ void jt::StateManager::clearStoredState(std::string const& identifier)
 {
     m_storedStates.erase(identifier);
 }
+
 std::vector<std::string> jt::StateManager::getStoredStateIdentifiers() const
 {
     std::vector<std::string> identifiers;

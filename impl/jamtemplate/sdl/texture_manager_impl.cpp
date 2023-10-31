@@ -41,14 +41,14 @@ std::shared_ptr<SDL_Texture> createImageFromAse(
 
     auto const transparent = SDL_MapRGBA(image->format, 0, 0, 0, 0);
 
-    for (auto i = 0U; i != w; ++i) {
-        for (auto j = 0U; j != h; ++j) {
+    for (auto i = 0u; i != w; ++i) {
+        for (auto j = 0u; j != h; ++j) {
             jt::setPixel(image.get(), i, j, transparent);
         }
     }
 
     for (auto i = 0u; i != w; ++i) {
-        for (auto j = 0U; j != h; ++j) {
+        for (auto j = 0u; j != h; ++j) {
             auto const& p = aseImage->getPixelAt(i, j);
             auto const col = SDL_MapRGBA(image->format, p.r, p.g, p.b, p.a);
             jt::setPixel(image.get(), i, j, col);
@@ -205,7 +205,7 @@ std::shared_ptr<SDL_Texture> createFlashImage(
     int const w = image->w;
     int const h = image->h;
 
-    auto const white = SDL_MapRGBA(image->format, 255U, 255U, 255U, 255U);
+    auto const white = SDL_MapRGBA(image->format, 255u, 255u, 255u, 255u);
 
     for (int x = 0; x != w; ++x) {
         for (int y = 0; y != h; ++y) {
@@ -279,7 +279,7 @@ std::shared_ptr<SDL_Texture> TextureManagerImpl::get(std::string const& str)
         return m_textures[str];
     }
 
-    auto ssv = strutil::split(str.substr(1U), '#');
+    auto ssv = strutil::split(str.substr(1u), '#');
     if (ssv.at(0) == "b") {
         m_textures[str] = createButtonImage(ssv, m_renderer.lock());
     } else if (ssv.at(0) == "f") {

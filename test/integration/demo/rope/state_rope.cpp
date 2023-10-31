@@ -68,7 +68,7 @@ void StateRope::integrationStep(float elapsed)
 
 void StateRope::calculateRopeForces()
 {
-    for (auto i = 0U; i != m_rope_elements.size() - 1; ++i) {
+    for (auto i = 0u; i != m_rope_elements.size() - 1; ++i) {
         std::size_t idx1 = i;
         std::size_t idx2 = i + 1;
 

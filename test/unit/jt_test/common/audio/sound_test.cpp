@@ -1,4 +1,5 @@
 ﻿#include <audio/sound/sound.hpp>
+#include <audio/sound_groups/group_volume_manager.hpp>
 #include <oalpp/sound_context.hpp>
 #include <gtest/gtest.h>
 #include <memory>
@@ -13,6 +14,7 @@ private:
 
 protected:
     std::unique_ptr<Sound> m_sound;
+
     SoundTestWithLoadedSound()
     {
         m_sound = std::make_unique<Sound>("assets/test/unit/jt_test/test.ogg");
@@ -169,9 +171,10 @@ TEST_F(SoundTestWithLoadedSound, GetPositionAfterPlay)
     m_sound->play();
     // note: play will happen in another thread, so in order to progress the
     // position, this test needs to sleep a bit.
-    std::this_thread::sleep_for(std::chrono::milliseconds { 100U });
+    std::this_thread::sleep_for(std::chrono::milliseconds { 100u });
     EXPECT_NE(m_sound->getPosition(), 0.0f);
 }
+
 TEST_F(SoundTestWithLoadedSound, GetDurationReturnsExpectedValue)
 {
     auto const d = m_sound->getDuration();
@@ -185,16 +188,29 @@ TEST_F(SoundTestWithLoadedSound, SetBlendBelowZeroRaisesException)
     ASSERT_THROW(m_sound->setBlend(newBlend), std::invalid_argument);
     EXPECT_FLOAT_EQ(m_sound->getBlend(), 0.0f);
 }
+
 TEST_F(SoundTestWithLoadedSound, SetBlendAboveOneRaisesException)
 {
     float const newBlend = 1.1f;
     ASSERT_THROW(m_sound->setBlend(newBlend), std::invalid_argument);
     EXPECT_FLOAT_EQ(m_sound->getBlend(), 0.0f);
 }
+
 TEST_F(SoundTestWithLoadedSound, SetPitchToZeroRaisesException)
 {
     float const newPitch = -0.0f;
     ASSERT_THROW(m_sound->setPitch(newPitch), std::invalid_argument);
     EXPECT_FLOAT_EQ(m_sound->getPitch(), 1.0f);
 }
+
+TEST_F(SoundTestWithLoadedSound, SetVolumeGroup)
+{
+    jt::GroupVolumeManager vm;
+    m_sound->setVolumeProvider(vm);
+    m_sound->setVolumeGroup("testGroup");
+    vm.setGroupVolume("testGroup", 0.5f);
+
+    ASSERT_EQ(m_sound->getFinalVolume(), 0.5f);
+}
+
 #endif

@@ -15,6 +15,8 @@ public:
 
     void update() override;
 
+    float getFinalVolume() const override;
+
     bool isPlaying() const override;
 
     void play() override;

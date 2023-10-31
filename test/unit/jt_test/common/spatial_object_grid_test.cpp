@@ -111,7 +111,7 @@ TEST(SpatialObjectGridTest, GetObjectsAroundFromNeighboringCell)
     grid.push_back(obj);
     auto const objects = grid.getObjectsAround(jt::Vector2f { 8.0f, 8.0f }, 16.0f);
     ASSERT_FALSE(objects.empty());
-    ASSERT_EQ(objects.size(), 1U);
+    ASSERT_EQ(objects.size(), 1u);
     ASSERT_EQ(objects.at(0).lock(), obj);
 }
 
@@ -138,7 +138,7 @@ TEST(SpatialObjectGridTest, GetObjectsAroundFromAllNeighboringCells)
 
     auto const neighbors = grid.getObjectsAround(jt::Vector2f { 24.0f, 24.0f }, 16.0f);
     ASSERT_FALSE(testObjects.empty());
-    ASSERT_EQ(testObjects.size(), 9U);
+    ASSERT_EQ(testObjects.size(), 9u);
 }
 
 TEST(SpatialObjectGridTest, GetObjectsRoundsDistanceUp)
@@ -149,7 +149,7 @@ TEST(SpatialObjectGridTest, GetObjectsRoundsDistanceUp)
     grid.push_back(obj);
     auto const objects = grid.getObjectsAround(jt::Vector2f { 1.0f, 1.0f }, 1.0f);
     ASSERT_FALSE(objects.empty());
-    ASSERT_EQ(objects.size(), 1U);
+    ASSERT_EQ(objects.size(), 1u);
     ASSERT_EQ(objects.at(0).lock(), obj);
 }
 
@@ -174,7 +174,7 @@ TEST_P(SpatialObjectGridDistanceParameterizedTestFixture,
     grid.push_back(obj);
     auto const objects = grid.getObjectsAround(std::get<0>(GetParam()), std::get<1>(GetParam()));
     ASSERT_FALSE(objects.empty());
-    ASSERT_EQ(objects.size(), 1U);
+    ASSERT_EQ(objects.size(), 1u);
     ASSERT_EQ(objects.at(0).lock(), obj);
 }
 

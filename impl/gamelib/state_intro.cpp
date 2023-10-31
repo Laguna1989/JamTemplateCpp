@@ -26,7 +26,7 @@ void StateIntro::onEnter()
     auto twp = jt::TweenPosition::create(m_sprite, 0.8f, startPos, endPos);
     add(twp);
 
-    auto twa2 = jt::TweenAlpha::create(m_sprite, 0.3f, 255U, 0U);
+    auto twa2 = jt::TweenAlpha::create(m_sprite, 0.3f, 255u, 0u);
     twa2->setStartDelay(1.4f);
     add(twa2);
 

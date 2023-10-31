@@ -78,13 +78,13 @@ TEST_F(AnimationTestFixture, AddWithEmptyFrameTimesRaisesException)
 {
     jt::Animation a {};
     ASSERT_THROW(
-        a.add("abc", "def", jt::Vector2u { 8U, 8U }, { 0U, 1U }, {}, tm), std::invalid_argument);
+        a.add("abc", "def", jt::Vector2u { 8u, 8u }, { 0u, 1u }, {}, tm), std::invalid_argument);
 }
 
 TEST_F(AnimationTestFixture, AddWithWrongSizeFrameTimesRaisesException)
 {
     jt::Animation a {};
-    ASSERT_THROW(a.add("abc", "def", jt::Vector2u { 8U, 8U }, { 0U, 1U }, { 0.25f }, tm),
+    ASSERT_THROW(a.add("abc", "def", jt::Vector2u { 8u, 8u }, { 0u, 1u }, { 0.25f }, tm),
         std::invalid_argument);
 }
 
@@ -92,7 +92,7 @@ TEST_F(AnimationTestFixture, GetAllAvailableAnimationsNamesReturnsEmptyVectorByD
 {
     jt::Animation a {};
     auto const animationNames = a.getAllAvailableAnimationsNames();
-    ASSERT_EQ(animationNames.size(), 0U);
+    ASSERT_EQ(animationNames.size(), 0u);
 }
 
 TEST_F(AnimationTestFixture, LoadFromJsonWithFileTypeThatIsNotJson)
@@ -114,7 +114,7 @@ TEST_F(AnimationTestFixture, LoadFromJson)
     ASSERT_EQ(a.getGlobalBounds().height, 16);
 
     auto const animationNames = a.getAllAvailableAnimationsNames();
-    ASSERT_EQ(animationNames.size(), 3U);
+    ASSERT_EQ(animationNames.size(), 3u);
 }
 
 #endif

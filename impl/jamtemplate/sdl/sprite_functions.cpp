@@ -23,8 +23,8 @@ std::shared_ptr<SDL_Texture> makeButtonImage(std::shared_ptr<jt::RenderTargetLay
     auto const bright
         = SDL_MapRGBA(image->format, brightColor.r, brightColor.g, brightColor.b, max);
 
-    for (auto i = 0U; i != w * 3; ++i) {
-        for (auto j = 0U; j != h; ++j) {
+    for (auto i = 0u; i != w * 3; ++i) {
+        for (auto j = 0u; j != h; ++j) {
             jt::setPixel(image.get(), i, j, mid);
         }
     }
@@ -55,8 +55,8 @@ std::shared_ptr<SDL_Texture> makeBlankImage(
         SDL_CreateRGBSurface(0, static_cast<int>(w), static_cast<int>(h), 32, 0, 0, 0, 0),
         [](SDL_Surface* s) { SDL_FreeSurface(s); });
 
-    for (auto i = 0U; i != w; ++i) {
-        for (auto j = 0U; j != h; ++j) {
+    for (auto i = 0u; i != w; ++i) {
+        for (auto j = 0u; j != h; ++j) {
             auto const max = std::numeric_limits<std::uint8_t>::max();
             auto const col = SDL_MapRGBA(image->format, max, max, max, max);
             jt::setPixel(image.get(), i, j, col);
@@ -79,8 +79,8 @@ std::shared_ptr<SDL_Texture> makeGlowImage(
 
     float const c = r / 2;
 
-    for (auto i = 0U; i != s; ++i) {
-        for (auto j = 0U; j != s; ++j) {
+    for (auto i = 0u; i != s; ++i) {
+        for (auto j = 0u; j != s; ++j) {
             auto const dx = i - c;
             auto const dy = j - c;
 
@@ -110,15 +110,15 @@ std::shared_ptr<SDL_Texture> makeVignetteImage(
     SDL_SetSurfaceBlendMode(image.get(), SDL_BLENDMODE_BLEND);
     float const cx = static_cast<float>(w) / 2.0f;
     float const cy = static_cast<float>(h) / 2.0f;
-    for (auto i = 0U; i != w; ++i) {
-        for (auto j = 0U; j != h; ++j) {
+    for (auto i = 0u; i != w; ++i) {
+        for (auto j = 0u; j != h; ++j) {
             auto const dx = i - cx;
             auto const dy = j - cy;
             auto const sqr = std::sqrt(dx * dx + dy * dy);
             auto const sqrNorm = MathHelper::clamp(sqr / (cx + cy) / 1.5f * 2.0f, 0.0f, 1.0f);
             auto const v
                 = static_cast<uint8_t>(std::pow(sqrNorm, 3.5f) * 245 + jt::Random::getInt(0, 10));
-            jt::setPixel(image.get(), i, j, SDL_MapRGBA(image->format, 0U, 0U, 0U, v));
+            jt::setPixel(image.get(), i, j, SDL_MapRGBA(image->format, 0u, 0u, 0u, v));
         }
     }
     SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "0");
@@ -157,8 +157,8 @@ std::shared_ptr<SDL_Texture> makeCircle(
 
     float const c = r;
 
-    for (auto i = 0U; i != s; ++i) {
-        for (auto j = 0U; j != s; ++j) {
+    for (auto i = 0u; i != s; ++i) {
+        for (auto j = 0u; j != s; ++j) {
             auto const dx = i - c;
             auto const dy = j - c;
 

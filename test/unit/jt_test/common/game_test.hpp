@@ -19,10 +19,10 @@ class GameTest : public ::testing::Test {
 public:
     float const zoom { 1.0f };
     std::shared_ptr<jt::Game> g { nullptr };
-    MockWindow window;
-    MockCamera camera;
+    ::testing::NiceMock<MockWindow> window;
+    ::testing::NiceMock<MockCamera> camera;
     jt::TextureManagerImpl textureManager { nullptr };
-    MockGfx gfx;
+    ::testing::NiceMock<MockGfx> gfx;
     jt::ActionCommandManager actionCommandManager { logger };
     jt::AudioNull audio;
 
@@ -44,7 +44,7 @@ public:
 
         ON_CALL(camera, getZoom).WillByDefault([this]() { return zoom; });
 
-        state = std::make_shared<MockState>();
+        state = std::make_shared<::testing::NiceMock<MockState>>();
         ON_CALL(stateManager, getCurrentState).WillByDefault(::testing::Return(state));
         ON_CALL(stateManager, update)
             .WillByDefault(

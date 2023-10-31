@@ -3,8 +3,8 @@
 
 #include <cstdint>
 
-constexpr std::uint64_t g_userDataPlayerID { 10U };
-constexpr std::uint64_t g_userDataPlayerFeetID { 11U };
-constexpr std::uint64_t g_userDataEnemyID { 30U };
+constexpr std::uint64_t g_userDataPlayerID { 10u };
+constexpr std::uint64_t g_userDataPlayerFeetID { 11u };
+constexpr std::uint64_t g_userDataEnemyID { 30u };
 
 #endif // JAMTEMPLATE_USER_DATA_ENTRIES_HPP

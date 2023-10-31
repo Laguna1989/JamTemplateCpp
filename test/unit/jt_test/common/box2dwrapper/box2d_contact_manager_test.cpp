@@ -5,25 +5,25 @@
 TEST(Box2DContactManagerTest, InitiallyZeroCallbacksRegistered)
 {
     jt::Box2DContactManager manager;
-    ASSERT_EQ(manager.size(), 0U);
+    ASSERT_EQ(manager.size(), 0u);
 }
 
 TEST(Box2DContactManagerTest, RegisterIncreasesSizeIfNew)
 {
     jt::Box2DContactManager manager;
     manager.registerCallback("empty_callback1", nullptr);
-    ASSERT_EQ(manager.size(), 1U);
+    ASSERT_EQ(manager.size(), 1u);
     manager.registerCallback("empty_callback2", nullptr);
-    ASSERT_EQ(manager.size(), 2U);
+    ASSERT_EQ(manager.size(), 2u);
 }
 
 TEST(Box2DContactManagerTest, RegisterDoesNotIncreaseSizeIfAlreadyKnown)
 {
     jt::Box2DContactManager manager;
     manager.registerCallback("callback_to_override", nullptr);
-    ASSERT_EQ(manager.size(), 1U);
+    ASSERT_EQ(manager.size(), 1u);
     manager.registerCallback("callback_to_override", nullptr);
-    ASSERT_EQ(manager.size(), 1U);
+    ASSERT_EQ(manager.size(), 1u);
 }
 
 TEST(Box2DContactManagerTest, UnregisterDecreasesSize)
@@ -32,11 +32,11 @@ TEST(Box2DContactManagerTest, UnregisterDecreasesSize)
     manager.registerCallback("empty_callback1", nullptr);
     manager.registerCallback("empty_callback2", nullptr);
     // sanity check
-    ASSERT_EQ(manager.size(), 2U);
+    ASSERT_EQ(manager.size(), 2u);
     manager.unregisterCallback("empty_callback1");
-    ASSERT_EQ(manager.size(), 1U);
+    ASSERT_EQ(manager.size(), 1u);
     manager.unregisterCallback("empty_callback2");
-    ASSERT_EQ(manager.size(), 0U);
+    ASSERT_EQ(manager.size(), 0u);
 }
 
 TEST(Box2DContactManagerTest, UnregisterOfNonExistingCallbackHasNoEffect)

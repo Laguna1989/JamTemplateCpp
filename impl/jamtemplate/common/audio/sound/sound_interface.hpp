@@ -22,8 +22,15 @@ public:
     virtual void pause() = 0;
 
     /// Get Volume
+    /// This is the currently stored volume that was set. It does not take SoundGroups into account.
     /// \return volume in range 0.0 to 1.0
     virtual float getVolume() const = 0;
+
+    /// Get final Volume
+    /// This is the final volume of the sound, based on the volume, the SoundGroup volume and
+    /// other factors (e.g. blend).
+    /// \return the final Volume in range 0.0 to 1.0
+    virtual float getFinalVolume() const = 0;
 
     /// Set Volume
     /// \param newVolume in range 0.0 to 1.0
@@ -74,9 +81,9 @@ public:
     virtual ~SoundInterface() = default;
 
     // no copy, no move
-    SoundInterface(const SoundInterface&) = delete;
+    SoundInterface(SoundInterface const&) = delete;
     SoundInterface(SoundInterface&&) = delete;
-    SoundInterface& operator=(const SoundInterface&) = delete;
+    SoundInterface& operator=(SoundInterface const&) = delete;
     SoundInterface& operator=(SoundInterface&&) = delete;
 
 protected:

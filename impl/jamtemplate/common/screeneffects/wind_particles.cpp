@@ -17,7 +17,7 @@ jt::WindParticles::WindParticles(
 
 void jt::WindParticles::doCreate()
 {
-    for (auto i = 0U; i != 100U; ++i) {
+    for (auto i = 0u; i != 100u; ++i) {
         auto s = std::make_shared<jt::Shape>();
         s->makeRect({ 8, 2 }, textureManager());
         s->setPosition(jt::Random::getRandomPointIn(m_screenSize));
@@ -34,7 +34,7 @@ void jt::WindParticles::doCreate()
 void jt::WindParticles::doUpdate(float const elapsed)
 {
     jt::Vector2f const windSpeed { -150.0f, 0.0f };
-    for (auto i = 0U; i != m_shapes.size(); ++i) {
+    for (auto i = 0u; i != m_shapes.size(); ++i) {
         auto& s = m_shapes.at(i);
         auto p = s->getPosition();
         //        float const f =

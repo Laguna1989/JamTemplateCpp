@@ -10,17 +10,25 @@ jt::Sound::Sound(std::string const& fileName)
 
 void jt::Sound::update()
 {
-    m_sound.setVolume(m_blend * m_volume * getVolumeFromVolumeProvider());
+    m_sound.setVolume(getFinalVolume());
     m_sound.update();
+}
+
+float jt::Sound::getFinalVolume() const
+{
+    return m_blend * m_volume * getVolumeFromVolumeProvider();
 }
 
 bool jt::Sound::isPlaying() const { return m_sound.isPlaying(); }
 
 void jt::Sound::play() { m_sound.play(); }
+
 void jt::Sound::stop() { m_sound.stop(); }
+
 void jt::Sound::pause() { m_sound.pause(); }
 
 void jt::Sound::setLoop(bool doLoop) { m_sound.setIsLooping(doLoop); }
+
 bool jt::Sound::getLoop(void) { return m_sound.getIsLooping(); }
 
 float jt::Sound::getDuration() const { return m_sound.getLengthInSeconds(); }
@@ -34,6 +42,7 @@ void jt::Sound::setPitch(float pitch)
     }
     m_sound.setPitch(pitch);
 }
+
 float jt::Sound::getPitch() const { return m_sound.getPitch(); }
 
 int jt::Sound::getSampleRate() const { return m_buffer.getSampleRate(); }

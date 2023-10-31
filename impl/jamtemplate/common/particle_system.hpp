@@ -44,7 +44,7 @@ public:
     /// \param pos the position where to spawn the particles
     void fire(unsigned int num = 1, jt::Vector2f const& pos = jt::Vector2f {})
     {
-        for (auto i = 0U; i != num; ++i) {
+        for (auto i = 0u; i != num; ++i) {
             m_resetCallback(m_particles[m_currentIndex], pos);
             m_currentIndex++;
         }
@@ -54,7 +54,7 @@ private:
     ResetCallbackType m_resetCallback {};
     mutable jt::CircularBuffer<std::shared_ptr<T>, N> m_particles;
 
-    std::size_t m_currentIndex { 0U };
+    std::size_t m_currentIndex { 0u };
 
     void doUpdate(float const elapsed) override
     {

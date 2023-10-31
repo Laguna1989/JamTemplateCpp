@@ -68,7 +68,7 @@ void jt::Star::doUpdate(float const elapsed)
     auto col = m_shape->getColor();
     col.a = alpha;
     m_shape->setColor(col);
-    col.a = jt::MathHelper::clamp(col.a, std::uint8_t { 20U }, m_starAlphaMax);
+    col.a = jt::MathHelper::clamp(col.a, std::uint8_t { 20u }, m_starAlphaMax);
     m_glow->setColor(col);
 
     jt::wrapOnScreen(*m_shape.get(), 0.0f);

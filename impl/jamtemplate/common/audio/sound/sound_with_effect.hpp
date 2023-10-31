@@ -11,6 +11,9 @@ class SoundWithEffect : public SoundBase {
 public:
     SoundWithEffect(std::string const& fileName, oalpp::effects::MonoEffectInterface& effect);
     void update() override;
+
+    float getFinalVolume() const override;
+
     bool isPlaying() const override;
 
     void play() override;

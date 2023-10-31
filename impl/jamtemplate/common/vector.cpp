@@ -65,7 +65,7 @@ jt::Vector2u::Vector2u(unsigned int x, unsigned int y)
 {
 }
 jt::Vector2u::Vector2u()
-    : x { 0U }
+    : x { 0u }
     , y { 0u }
 {
 }

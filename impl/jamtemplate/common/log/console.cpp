@@ -21,6 +21,7 @@ void jt::Console::doUpdate(float const /*elapsed*/)
         m_focus = m_showConsole;
     }
 }
+
 void jt::Console::handleCommand() const
 {
     if (m_lastCommand.empty()) {
@@ -45,7 +46,7 @@ void jt::Console::doDraw() const
 
         // Display contents in a scrolling region
         ImGui::TextColored(ImVec4(1, 1, 0, 1), "");
-        const float footer_height_to_reserve
+        float const footer_height_to_reserve
             = ImGui::GetStyle().ItemSpacing.y + ImGui::GetFrameHeightWithSpacing();
         ImGui::BeginChild("ScrollingRegion", ImVec2(0, -footer_height_to_reserve), false,
             ImGuiWindowFlags_HorizontalScrollbar);
@@ -92,6 +93,7 @@ void jt::Console::storeInputInCommand() const
         ImGui::SetKeyboardFocusHere(-1);
     }
 }
+
 void jt::Console::storeActionInCommand() const
 {
     std::string str = m_inputBufferAction.data();
@@ -104,6 +106,7 @@ void jt::Console::storeActionInCommand() const
     History.push_back(m_lastCommand);
     getGame()->logger().action(str);
 }
+
 void jt::Console::clearInput() const { strcpy(m_inputBufferAction.data(), ""); }
 
 void jt::Console::renderOneLogEntry(jt::LogEntry const& entry) const
@@ -159,12 +162,13 @@ void jt::Console::renderOneLogEntry(jt::LogEntry const& entry) const
     ImGui::Text("%s", text.c_str());
     ImGui::PopStyleColor();
 }
+
 int jt::Console::inputUserCallback(ImGuiInputTextCallbackData* data)
 {
     switch (data->EventFlag) {
     case ImGuiInputTextFlags_CallbackHistory: {
         // Example of HISTORY
-        const int prev_history_pos = m_historyPos;
+        int const prev_history_pos = m_historyPos;
         if (data->EventKey == ImGuiKey_UpArrow) {
             if (m_historyPos == -1)
                 m_historyPos = static_cast<int>(History.size()) - 1;

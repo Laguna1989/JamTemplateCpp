@@ -6,7 +6,7 @@
 TEST(SpriteSFMLTest, LoadSpriteFromSfTexture)
 {
     sf::Texture t;
-    t.create(20U, 20U);
+    t.create(20u, 20u);
     jt::Sprite s;
     s.fromTexture(t);
     ASSERT_FLOAT_EQ(s.getLocalBounds().width, 20.0f);
