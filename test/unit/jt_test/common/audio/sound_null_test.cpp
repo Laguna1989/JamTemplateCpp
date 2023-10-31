@@ -1,4 +1,5 @@
 #include <audio/sound/sound_null.hpp>
+#include <audio/sound_groups/group_volume_manager.hpp>
 #include <gtest/gtest.h>
 
 TEST(SoundNullTest, UpdateDoesNotThrowException)
@@ -41,6 +42,12 @@ TEST(SoundNullTest, GetVolumeReturnsZero)
 {
     jt::SoundNull snd;
     ASSERT_EQ(snd.getVolume(), 0.0f);
+}
+
+TEST(SoundNullTest, GetFinalVolumeReturnsZero)
+{
+    jt::SoundNull snd;
+    ASSERT_EQ(snd.getFinalVolume(), 0.0f);
 }
 
 TEST(SoundNullTest, SetLoopDoesNotThrowException)
@@ -98,4 +105,17 @@ TEST(SoundNullTest, SetPitchDoesNotThrow)
     ASSERT_NO_THROW(snd.setPitch(0.0f));
     ASSERT_NO_THROW(snd.setPitch(1.0f));
     ASSERT_NO_THROW(snd.setPitch(2.0f));
+}
+
+TEST(SoundNullTest, setVolumeProviderDoesNotThrow)
+{
+    jt::SoundNull snd;
+    jt::GroupVolumeManager vm;
+    ASSERT_NO_THROW(snd.setVolumeProvider(vm));
+}
+
+TEST(SoundNullTest, setVolumeGroupDoesNotThrow)
+{
+    jt::SoundNull snd;
+    ASSERT_NO_THROW(snd.setVolumeGroup("abcd"));
 }

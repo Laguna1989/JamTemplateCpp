@@ -17,6 +17,8 @@ public:
         std::string const& loopingFileName, oalpp::effects::MonoEffectInterface& effect);
     void update() override;
 
+    float getFinalVolume() const override;
+
     bool isPlaying() const override;
     void play() override;
     void stop() override;

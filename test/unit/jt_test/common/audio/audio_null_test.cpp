@@ -1,6 +1,12 @@
 #include <audio/audio/audio_null.hpp>
 #include <gtest/gtest.h>
 
+TEST(AudioNullTest, getContext)
+{
+    jt::AudioNull audio;
+    ASSERT_NO_THROW(audio.getContext());
+}
+
 TEST(AudioNullTest, GetPermanentSoundReturnsNoNullptr)
 {
     jt::AudioNull audio;
@@ -55,4 +61,16 @@ TEST(AudioNullTest, RemovePermanentSoundDoesNotThrow)
 {
     jt::AudioNull audio;
     ASSERT_NO_THROW(audio.removePermanentSound("abcd"));
+}
+
+TEST(AudioNullTest, Fades)
+{
+    jt::AudioNull audio;
+    ASSERT_NO_THROW(audio.fades());
+}
+
+TEST(AudioNullTest, groups)
+{
+    jt::AudioNull audio;
+    ASSERT_NO_THROW(audio.groups());
 }

@@ -18,7 +18,13 @@ void jt::SoundWithEffect::update()
     m_wetSound.update();
 }
 
+float jt::SoundWithEffect::getFinalVolume() const
+{
+    return m_volume * getVolumeFromVolumeProvider();
+}
+
 bool jt::SoundWithEffect::isPlaying() const { return m_drySound.isPlaying(); }
+
 void jt::SoundWithEffect::play()
 {
     m_drySound.play();
@@ -52,6 +58,7 @@ void jt::SoundWithEffect::setPitch(float pitch)
 float jt::SoundWithEffect::getPitch() const { return m_drySound.getPitch(); }
 
 bool jt::SoundWithEffect::getLoop(void) { return m_drySound.getIsLooping(); }
+
 float jt::SoundWithEffect::getDuration() const { return m_drySound.getLengthInSeconds(); }
 
 float jt::SoundWithEffect::getPosition() const { return m_drySound.getCurrentOffsetInSeconds(); }

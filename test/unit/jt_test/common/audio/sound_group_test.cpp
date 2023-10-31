@@ -1,5 +1,7 @@
 #include <audio/sound/sound_group.hpp>
 #include <audio/sound/sound_null.hpp>
+#include <audio/sound_groups/group_volume_manager.hpp>
+#include <mocks/mock_sound.hpp>
 #include <gtest/gtest.h>
 
 TEST(SoundGroupTest, EmptySoundGroupContainsNoSound)
@@ -176,6 +178,7 @@ TEST(SoundGroupTest, SetBlendForEmptyGroupHasNoEffect)
     jt::SoundGroup group {};
     ASSERT_NO_THROW(group.setBlend(1.0f));
 }
+
 TEST(SoundGroupTest, SetBlendOnNullSound)
 {
     jt::SoundGroup group {};
@@ -259,4 +262,43 @@ TEST(SoundGroupTest, GetPitchOnNullSound)
     group.add(snd);
 
     ASSERT_EQ(group.getPitch(), 1.0f);
+}
+
+TEST(SoundGroupTest, GetFinalVolumeOnEmptyGroupReturnsZero)
+{
+    jt::SoundGroup group {};
+    ASSERT_EQ(group.getFinalVolume(), 0.0f);
+}
+
+TEST(SoundGroupTest, SetVolumeProvider)
+{
+    jt::SoundGroup group {};
+    auto const snd = std::make_shared<::testing::NiceMock<MockSound>>();
+    group.add(snd);
+
+    jt::GroupVolumeManager vm;
+    EXPECT_CALL(*snd, setVolumeProvider(::testing::_));
+    group.setVolumeProvider(vm);
+}
+
+TEST(SoundGroupTest, SetVolumeGroup)
+{
+    jt::SoundGroup group {};
+    auto const snd = std::make_shared<::testing::NiceMock<MockSound>>();
+    group.add(snd);
+
+    jt::GroupVolumeManager vm;
+    EXPECT_CALL(*snd, setVolumeGroup("abcd"));
+    group.setVolumeGroup("abcd");
+}
+
+TEST(SoundGroupTest, GetFinalVolumeOnGroupWithSoundReturnsFinalVolumeFromSound)
+{
+    jt::SoundGroup group {};
+    auto const snd = std::make_shared<::testing::NiceMock<MockSound>>();
+    group.add(snd);
+
+    group.update();
+    EXPECT_CALL(*snd, getFinalVolume()).WillOnce(::testing::Return(0.5f));
+    ASSERT_EQ(group.getFinalVolume(), 0.5f);
 }

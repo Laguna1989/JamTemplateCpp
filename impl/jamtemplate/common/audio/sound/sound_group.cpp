@@ -54,6 +54,14 @@ void jt::SoundGroup::setVolume(float newVolume)
     }
 }
 
+float jt::SoundGroup::getFinalVolume() const
+{
+    if (m_sounds.empty()) {
+        return 0.0f;
+    }
+    return m_sounds.at(0)->getFinalVolume();
+}
+
 void jt::SoundGroup::setLoop(bool doLoop)
 {
     for (auto& snd : m_sounds) {
@@ -70,6 +78,7 @@ bool jt::SoundGroup::getLoop()
 }
 
 float jt::SoundGroup::getDuration() const { return 0.0f; }
+
 float jt::SoundGroup::getPosition() const { return 0.0f; }
 
 void jt::SoundGroup::update()
@@ -78,12 +87,14 @@ void jt::SoundGroup::update()
         snd->update();
     }
 }
+
 void jt::SoundGroup::setBlend(float blend)
 {
     for (auto& snd : m_sounds) {
         snd->setBlend(blend);
     }
 }
+
 float jt::SoundGroup::getBlend() const
 {
     if (m_sounds.empty()) {
@@ -91,12 +102,14 @@ float jt::SoundGroup::getBlend() const
     }
     return m_sounds.at(0)->getBlend();
 }
+
 void jt::SoundGroup::add(std::shared_ptr<SoundInterface> sound)
 {
     if (sound != nullptr) {
         m_sounds.push_back(sound);
     }
 }
+
 int jt::SoundGroup::getSampleRate() const
 {
     if (m_sounds.empty()) {
@@ -111,6 +124,7 @@ void jt::SoundGroup::setPitch(float pitch)
         snd->setPitch(pitch);
     }
 }
+
 float jt::SoundGroup::getPitch() const
 {
     if (m_sounds.empty()) {
@@ -127,6 +141,7 @@ void jt::SoundGroup::setVolumeProvider(jt::GroupVolumeGetterInterface& provider)
         s->setVolumeProvider(provider);
     }
 }
+
 void jt::SoundGroup::setVolumeGroup(std::string const& volumeGroupName)
 {
     for (auto& s : m_sounds) {

@@ -13,6 +13,7 @@ public:
     MOCK_METHOD(void, pause, (), (override));
     MOCK_METHOD(float, getVolume, (), (const, override));
     MOCK_METHOD(void, setVolume, (float), (override));
+    MOCK_METHOD(float, getFinalVolume, (), (const, override));
     MOCK_METHOD(void, setPitch, (float), (override));
     MOCK_METHOD(float, getPitch, (), (const, override));
     MOCK_METHOD(void, setLoop, (bool), (override));
