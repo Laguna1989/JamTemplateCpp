@@ -27,7 +27,7 @@ bool is_uninitialized_weak_ptr(std::weak_ptr<T> const& weak)
 /// \param items the container
 /// \param predicate the check function. If it returns true for an object, it will be removed
 template <typename ContainerT, typename PredicateT>
-void erase_if(ContainerT& items, const PredicateT& predicate)
+void erase_if(ContainerT& items, PredicateT const& predicate)
 {
     for (auto it = items.begin(); it != items.end();) {
         if (predicate(*it))
@@ -51,7 +51,7 @@ void remove_intersection(ContainerT& a, ContainerT const& b)
     st.insert(b.begin(), b.end());
     auto const predicate
         = [&st](typename ContainerT::value_type const& k) { return st.count(k) > 1; };
-    a.erase(std::remove_if(a.begin(), a.end(), predicate), a.cend());
+    std::erase_if(a, predicate);
 }
 
 /// Helper function to remove duplicates for containers of elements that can not be ordered

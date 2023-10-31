@@ -6,6 +6,7 @@ void jt::GameObjectCollection::clear()
     m_objects.clear();
     m_objectsToAdd.clear();
 }
+
 void jt::GameObjectCollection::add(std::shared_ptr<jt::GameObjectInterface> object)
 {
     m_objectsToAdd.push_back(object);
@@ -23,23 +24,22 @@ void jt::GameObjectCollection::update(float elapsed)
 
 void jt::GameObjectCollection::draw() const
 {
-    for (const auto& go : m_objects) {
+    for (auto const& go : m_objects) {
         go->draw();
     }
 }
 
 void jt::GameObjectCollection::cleanUpObjects()
 {
-    m_objects.erase(std::remove_if(m_objects.begin(), m_objects.end(),
-                        [](auto go) {
-                            bool const isDead = !go->isAlive();
-                            if (isDead) {
-                                go->destroy();
-                            }
-                            return isDead;
-                        }),
-        m_objects.end());
+    std::erase_if(m_objects, [](auto go) {
+        bool const isDead = !go->isAlive();
+        if (isDead) {
+            go->destroy();
+        }
+        return isDead;
+    });
 }
+
 void jt::GameObjectCollection::addNewObjects()
 {
     while (!m_objectsToAdd.empty()) {

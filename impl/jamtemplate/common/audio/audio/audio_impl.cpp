@@ -34,9 +34,7 @@ void jt::AudioImpl::update(float elapsed)
 
 void jt::AudioImpl::cleanUpUnusedSounds()
 {
-    m_temporarySounds.erase(std::remove_if(m_temporarySounds.begin(), m_temporarySounds.end(),
-                                [](auto wptr) { return wptr.expired(); }),
-        m_temporarySounds.end());
+    std::erase_if(m_temporarySounds, [](auto wptr) { return wptr.expired(); });
 }
 
 std::shared_ptr<jt::SoundInterface> jt::AudioImpl::addTemporarySound(std::string const& fileName)
@@ -114,4 +112,5 @@ std::shared_ptr<jt::SoundInterface> jt::AudioImpl::addTemporarySoundGroup(
 }
 
 jt::SoundFadeManagerInterface& jt::AudioImpl::fades() { return *m_fades; }
+
 jt::GroupVolumeSetterInterface& jt::AudioImpl::groups() { return m_volumeGroups; }
