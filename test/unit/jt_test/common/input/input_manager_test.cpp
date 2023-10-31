@@ -57,8 +57,8 @@ TEST(InputManagerTest, ResetWithMocks)
 
 TEST(InputManagerTest, UpdateWithMocks)
 {
-    auto keyboard = std::make_shared<MockKeyboardInput>();
-    auto mouse = std::make_shared<MockMouseInput>();
+    auto keyboard = std::make_shared<::testing::NiceMock<MockKeyboardInput>>();
+    auto mouse = std::make_shared<::testing::NiceMock<MockMouseInput>>();
     std::shared_ptr<jt::GamepadInterface> gamepad = std::make_shared<jt::GamepadInput>(0);
     jt::InputManager im { mouse, keyboard, { gamepad } };
 

@@ -11,6 +11,7 @@ public:
     jt::TextureManagerInterface& tm { getTextureManager() };
 
     std::shared_ptr<jt::Button> b { nullptr };
+
     void SetUp() override
     {
         tm = getTextureManager();
@@ -117,7 +118,7 @@ TEST_F(ButtonTest, UpdateWithInput)
 
 TEST_F(ButtonTest, Draw)
 {
-    auto game = std::make_shared<MockGame>();
+    auto game = std::make_shared<::testing::NiceMock<MockGame>>();
     ::testing::NiceMock<MockInput> input;
     EXPECT_CALL(*game, input()).WillRepeatedly(::testing::ReturnRef(input));
     b->setGameInstance(game);
@@ -128,7 +129,7 @@ TEST_F(ButtonTest, Draw)
 
 TEST_F(ButtonTest, DrawInvisibleButton)
 {
-    auto game = std::make_shared<MockGame>();
+    auto game = std::make_shared<::testing::NiceMock<MockGame>>();
     ::testing::NiceMock<MockInput> input;
     EXPECT_CALL(*game, input()).WillRepeatedly(::testing::ReturnRef(input));
     b->setVisible(false);
@@ -138,9 +139,9 @@ TEST_F(ButtonTest, DrawInvisibleButton)
     b->draw();
 }
 
-TEST_F(ButtonTest, DrawInActiveButton)
+TEST_F(ButtonTest, DrawInactiveButton)
 {
-    auto game = std::make_shared<MockGame>();
+    auto game = std::make_shared<::testing::NiceMock<MockGame>>();
     ::testing::NiceMock<MockInput> input;
     EXPECT_CALL(*game, input()).WillRepeatedly(::testing::ReturnRef(input));
     b->setActive(false);
@@ -152,13 +153,13 @@ TEST_F(ButtonTest, DrawInActiveButton)
 
 TEST_F(ButtonTest, CustomDrawable)
 {
-    auto game = std::make_shared<MockGame>();
+    auto game = std::make_shared<::testing::NiceMock<MockGame>>();
     ::testing::NiceMock<MockInput> input;
     EXPECT_CALL(*game, input()).Times(2).WillRepeatedly(::testing::ReturnRef(input));
     b->setGameInstance(game);
     b->update(0.1f);
 
-    auto d = std::make_shared<MockDrawable>();
+    auto d = std::make_shared<::testing::NiceMock<MockDrawable>>();
     b->setDrawable(d);
     std::shared_ptr<jt::RenderTargetInterface> renderTarget { nullptr };
     EXPECT_CALL(game->m_gfx, target()).Times(2);

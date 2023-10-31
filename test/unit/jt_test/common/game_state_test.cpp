@@ -18,8 +18,11 @@ public:
 
 private:
     virtual void onCreate() override { }
+
     void onEnter() override { }
+
     virtual void onUpdate(float /*elapsed*/) override { }
+
     virtual void onDraw() const override { }
 };
 
@@ -57,7 +60,7 @@ public:
     std::shared_ptr<MockObject> mockObject;
     MockGfx gfx;
     MockWindow window;
-    MockInput input;
+    ::testing::NiceMock<MockInput> input;
 
     void SetUp() override
     {
@@ -67,6 +70,7 @@ public:
         ON_CALL(*game, input).WillByDefault(::testing::ReturnRef(input));
         gamestate.setGameInstance(game);
     }
+
     void AddGameObject()
     {
         mockObject = std::make_shared<MockObject>();
@@ -97,6 +101,7 @@ TEST_F(GameStateTest, AddTweenObject)
 TEST_F(GameStateTest, DrawCallsDrawOnAddedGameObjects)
 {
     AddGameObject();
+    EXPECT_CALL(*mockObject, doUpdate(0.1f));
     gamestate.update(0.1f);
     EXPECT_CALL(*mockObject, doDraw());
     gamestate.draw();
@@ -132,7 +137,9 @@ TEST_F(GameStateTest, GameObjectList)
 
         bool designate_object_for_kill = static_cast<bool>(i % 2 == 1);
         if (designate_object_for_kill) {
+            EXPECT_CALL(*mo.lock(), doKill());
             mo.lock()->kill();
+            EXPECT_CALL(*mo.lock(), doDestroy());
         } else {
             EXPECT_CALL(*mo.lock(), doUpdate(_));
         }
@@ -196,7 +203,7 @@ TEST_F(GameStateTest, AddGameObjectToTwoStatesWillRaiseException)
     GameStateImpl gamestate2;
     gamestate2.setGameInstance(g);
 
-    auto obj = std::make_shared<MockObject>();
+    auto obj = std::make_shared<::testing::NiceMock<MockObject>>();
 
     EXPECT_CALL(*obj, doCreate());
 
@@ -208,6 +215,7 @@ TEST_F(GameStateTest, RemovalOfGameObjectWillCallDoDestroyOnGameObject)
 {
     AddGameObject();
 
+    EXPECT_CALL(*mockObject, doKill());
     mockObject->kill();
     EXPECT_CALL(*mockObject, doDestroy());
     gamestate.update(0.1f);

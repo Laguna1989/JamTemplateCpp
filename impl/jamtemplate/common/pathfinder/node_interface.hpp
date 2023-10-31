@@ -38,10 +38,6 @@ public:
     /// \param value value to be set
     virtual void setValue(float value) = 0;
 
-    /// get tile id
-    /// \return
-    virtual int getTileID() const = 0;
-
     /// set tile blocked
     /// \param blocked true if blocked, false otherwise
     virtual void setBlocked(bool blocked) = 0;

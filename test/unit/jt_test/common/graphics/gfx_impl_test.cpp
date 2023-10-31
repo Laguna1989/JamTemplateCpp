@@ -47,7 +47,7 @@ TEST(GfxImplTest, TargetReturnsNoNullptr)
 TEST(GfxImplTest, UpdateCallUpdateOnCamera)
 {
     jt::RenderWindow window { 800, 600, "jt_tests" };
-    MockCamera cam {};
+    ::testing::NiceMock<MockCamera> cam {};
     jt::GfxImpl gfx { window, cam };
     EXPECT_CALL(cam, update(1.0f));
 

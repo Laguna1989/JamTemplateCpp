@@ -1,4 +1,5 @@
 ﻿#include <color/color_conversions.hpp>
+#include <math_helper.hpp>
 #include <random/random.hpp>
 #include <random/random_sample_and_hold.hpp>
 #include <vector.hpp>
@@ -103,7 +104,7 @@ TEST(RandomColor, HSV)
     ASSERT_FLOAT_EQ(h, 0.0f);
 }
 
-TEST(RandomPointIn, ValidWithRect)
+TEST(RandomPointIn, ResultIsInRectCreatedByRect)
 {
     auto const lowerX = 10.0f;
     auto const lowerY = 10.0f;
@@ -118,7 +119,7 @@ TEST(RandomPointIn, ValidWithRect)
     }
 }
 
-TEST(RandomPointIn, ValidWithVector)
+TEST(RandomPointIn, ResultIsInRectCreatedByVector)
 {
     auto const lower = 0.0f;
     auto const upperX = 13.0f;
@@ -129,6 +130,16 @@ TEST(RandomPointIn, ValidWithVector)
         EXPECT_GT(v.y, lower);
         EXPECT_LT(v.x, upperX);
         EXPECT_LT(v.y, upperY);
+    }
+}
+
+TEST(RandomPointInCircle, ResultIsInsideCircle)
+{
+    auto const radius = 30.0f;
+
+    for (auto i = 0u; i != 1000; ++i) {
+        auto const v = Random::getRandomPointInCircle(radius);
+        ASSERT_LE(jt::MathHelper::distanceBetween(v, { 0.0f, 0.0f }), radius);
     }
 }
 
