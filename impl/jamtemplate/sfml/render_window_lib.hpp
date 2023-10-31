@@ -1,6 +1,7 @@
 ﻿#ifndef JAMTEMPLATE_RENDERWINDOW_LIB_HPP
 #define JAMTEMPLATE_RENDERWINDOW_LIB_HPP
 
+#include <SFML/Graphics.hpp>
 #include <graphics/render_window_interface.hpp>
 #include <memory>
 
@@ -19,9 +20,9 @@ public:
     RenderWindow(unsigned int width, unsigned int height, std::string const& title);
 
     // no copy, only move
-    RenderWindow(const RenderWindow&) = delete;
+    RenderWindow(RenderWindow const&) = delete;
     RenderWindow(RenderWindow&&) = default;
-    RenderWindow& operator=(const RenderWindow&) = delete;
+    RenderWindow& operator=(RenderWindow const&) = delete;
     RenderWindow& operator=(RenderWindow&&) = default;
     ~RenderWindow();
 

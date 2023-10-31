@@ -1,8 +1,8 @@
 ﻿#ifndef JAMTEMPLATE_TWEENBASE_HPP
 #define JAMTEMPLATE_TWEENBASE_HPP
 
-#include "tween_interface.hpp"
 #include <graphics/drawable_interface.hpp>
+#include <tweens/tween_interface.hpp>
 #include <functional>
 #include <memory>
 #include <vector>

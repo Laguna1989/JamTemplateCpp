@@ -2,7 +2,6 @@
 #include <color_lib.hpp>
 #include <math_helper.hpp>
 #include <vector_lib.hpp>
-#include <SFML/Graphics.hpp>
 
 jt::Line::Line(jt::Vector2f lineVector)
     : m_lineVector { std::move(lineVector) }
@@ -40,6 +39,7 @@ void jt::Line::doDrawFlash(std::shared_ptr<jt::RenderTargetLayer> const sptr) co
     line[1] = sf::Vertex { toLib(endPosition), toLib(getFlashColor()) };
     sptr->draw(line);
 }
+
 void jt::Line::doDrawShadow(std::shared_ptr<jt::RenderTargetLayer> const sptr) const
 {
     auto const startPosition
@@ -57,13 +57,17 @@ void jt::Line::doDrawShadow(std::shared_ptr<jt::RenderTargetLayer> const sptr) c
 void jt::Line::doRotate(float d) { m_lineVector = jt::MathHelper::rotateBy(m_lineVector, d); }
 
 void jt::Line::setColor(jt::Color const& col) { m_color = col; }
+
 jt::Color jt::Line::getColor() const { return m_color; }
 
 void jt::Line::setPosition(jt::Vector2f const& pos) { m_position = pos; }
+
 jt::Vector2f jt::Line::getPosition() const { return m_position; }
 
 jt::Rectf jt::Line::getGlobalBounds() const { return jt::Rectf {}; }
+
 jt::Rectf jt::Line::getLocalBounds() const { return jt::Rectf {}; }
 
 void jt::Line::setScale(jt::Vector2f const& scale) { m_scale = scale; }
+
 jt::Vector2f jt::Line::getScale() const { return m_scale; }

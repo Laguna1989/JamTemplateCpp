@@ -1,6 +1,7 @@
 ﻿#ifndef JAMTEMPLATE_SHAPE_HPP
 #define JAMTEMPLATE_SHAPE_HPP
 
+#include <SFML/Graphics.hpp>
 #include <drawable_impl_sfml.hpp>
 #include <render_target.hpp>
 #include <texture_manager_interface.hpp>

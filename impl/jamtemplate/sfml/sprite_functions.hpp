@@ -1,8 +1,8 @@
 ﻿#ifndef JAMTEMPLATE_SPRITEFUNCTIONS_HPP
 #define JAMTEMPLATE_SPRITEFUNCTIONS_HPP
 
-#include <color/color.hpp>
 #include <SFML/Graphics.hpp>
+#include <color/color.hpp>
 
 namespace jt {
 namespace SpriteFunctions {

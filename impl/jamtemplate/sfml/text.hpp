@@ -1,10 +1,9 @@
 ﻿#ifndef JAMTEMPLATE_TEXT_HPP
 #define JAMTEMPLATE_TEXT_HPP
 
+#include <SFML/Graphics.hpp>
 #include <drawable_impl_sfml.hpp>
 #include <render_target.hpp>
-#include <SFML/Graphics.hpp>
-
 #include <memory>
 #include <string>
 
@@ -30,7 +29,7 @@ public:
 
     jt::Vector2f getPosition() const override;
 
-    void setColor(const jt::Color& col) override;
+    void setColor(jt::Color const& col) override;
     jt::Color getColor() const override;
 
     jt::Rectf getGlobalBounds() const override;

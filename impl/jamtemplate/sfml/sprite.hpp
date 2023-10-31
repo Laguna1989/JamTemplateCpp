@@ -1,11 +1,11 @@
 ﻿#ifndef JAMTEMPLATE_SPRITE_HPP
 #define JAMTEMPLATE_SPRITE_HPP
 
+#include <SFML/Graphics.hpp>
 #include <color/color.hpp>
 #include <drawable_impl_sfml.hpp>
 #include <render_target.hpp>
 #include <texture_manager_interface.hpp>
-#include <SFML/Graphics.hpp>
 #include <memory>
 #include <string>
 
@@ -44,6 +44,7 @@ public:
 
     // DO NOT CALL THIS FROM GAME CODE!
     sf::Sprite getSFSprite() { return m_sprite; }
+
     void setOriginInternal(jt::Vector2f const& origin) override;
 
 private:

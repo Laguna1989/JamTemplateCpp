@@ -1,6 +1,7 @@
 #ifndef JAMTEMPLATE_TEXTURE_MANAGER_IMPL_HPP
 #define JAMTEMPLATE_TEXTURE_MANAGER_IMPL_HPP
 
+#include <SFML/Graphics.hpp>
 #include <texture_manager_interface.hpp>
 #include <map>
 #include <memory>

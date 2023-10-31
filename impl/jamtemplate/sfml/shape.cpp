@@ -1,9 +1,7 @@
 ﻿#include "shape.hpp"
-#include "color_lib.hpp"
-#include "rect_lib.hpp"
-#include "vector_lib.hpp"
-#include <SFML/Graphics.hpp>
-#include <iostream>
+#include <color_lib.hpp>
+#include <rect_lib.hpp>
+#include <vector_lib.hpp>
 
 void jt::Shape::makeRect(jt::Vector2f size, jt::TextureManagerInterface& /*unused*/)
 {
@@ -18,9 +16,11 @@ void jt::Shape::makeCircle(float radius, jt::TextureManagerInterface& /*unused*/
 }
 
 void jt::Shape::setColor(jt::Color const& col) { m_shape->setFillColor(toLib(col)); }
+
 jt::Color jt::Shape::getColor() const { return fromLib(m_shape->getFillColor()); }
 
 void jt::Shape::setPosition(jt::Vector2f const& pos) { m_position = pos; }
+
 jt::Vector2f jt::Shape::getPosition() const { return m_position; }
 
 jt::Rectf jt::Shape::getGlobalBounds() const
@@ -30,6 +30,7 @@ jt::Rectf jt::Shape::getGlobalBounds() const
     }
     return fromLib(m_shape->getGlobalBounds());
 }
+
 jt::Rectf jt::Shape::getLocalBounds() const
 {
     if (!m_shape) {

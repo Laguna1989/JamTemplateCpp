@@ -1,6 +1,7 @@
 #ifndef JAMTEMPLATE_LINE_HPP
 #define JAMTEMPLATE_LINE_HPP
 
+#include <SFML/Graphics.hpp>
 #include <drawable_impl_sfml.hpp>
 #include <render_target.hpp>
 #include <vector.hpp>

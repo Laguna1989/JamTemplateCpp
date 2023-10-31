@@ -36,9 +36,9 @@ it freely, subject to the following restrictions:
 #ifndef COLLISION_H
 #define COLLISION_H
 
-#include "math_helper.hpp"
-#include "rect.hpp"
-#include "vector.hpp"
+#include <math_helper.hpp>
+#include <rect.hpp>
+#include <vector.hpp>
 #include <memory>
 
 namespace jt {
@@ -105,6 +105,7 @@ private:
         auto const AABB = obj.getGlobalBounds();
         return jt::Vector2f { AABB.left + AABB.width / 2.f, AABB.top + AABB.height / 2.f };
     }
+
     template <class U>
     static jt::Vector2f getCenter(std::shared_ptr<U> obj)
     {

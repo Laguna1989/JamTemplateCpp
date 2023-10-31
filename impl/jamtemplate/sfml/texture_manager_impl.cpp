@@ -3,7 +3,6 @@
 #include <color_lib.hpp>
 #include <sprite_functions.hpp>
 #include <strutils.hpp>
-#include <SFML/Graphics.hpp>
 #include <stdexcept>
 
 namespace {
@@ -213,12 +212,16 @@ sf::Texture& jt::TextureManagerImpl::get(std::string const& str)
 
     return m_textures[str];
 }
+
 void jt::TextureManagerImpl::reset() { m_textures.clear(); }
+
 std::string jt::TextureManagerImpl::getFlashName(std::string const& str)
 {
     return str + "___flash__";
 }
+
 std::size_t jt::TextureManagerImpl::getNumberOfTextures() { return m_textures.size(); }
+
 bool jt::TextureManagerImpl::containsTexture(std::string const& str)
 {
     return (m_textures.count(str) != 0);

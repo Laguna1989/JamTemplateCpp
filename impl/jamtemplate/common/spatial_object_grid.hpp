@@ -1,9 +1,9 @@
 #ifndef JAMTEMPLATE_SPATIAL_OBJECT_GRID_HPP
 #define JAMTEMPLATE_SPATIAL_OBJECT_GRID_HPP
 
-#include "vector.hpp"
 #include <game_object.hpp>
 #include <system_helper.hpp>
+#include <vector.hpp>
 #include <map>
 #include <memory>
 #include <vector>
@@ -17,6 +17,7 @@ struct CellIndex {
 };
 
 bool operator==(CellIndex const& a, CellIndex const& b) { return a.x == b.x && a.y == b.y; }
+
 bool operator!=(CellIndex const& a, CellIndex const& b) { return !(a == b); }
 
 CellIndex operator+(CellIndex const& a, CellIndex const& b)

@@ -1,8 +1,8 @@
 #ifndef JAMTEMPLATE_DRAWABLE_IMPL_SFML_HPP
 #define JAMTEMPLATE_DRAWABLE_IMPL_SFML_HPP
 
-#include <graphics/drawable_impl.hpp>
 #include <SFML/Graphics.hpp>
+#include <graphics/drawable_impl.hpp>
 
 namespace jt {
 

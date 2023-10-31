@@ -1,6 +1,5 @@
 ﻿#include "render_window_lib.hpp"
 #include <sprite.hpp>
-#include <SFML/Graphics.hpp>
 #include <imgui-SFML.h>
 #include <imgui.h>
 
@@ -74,6 +73,7 @@ void jt::RenderWindow::setMouseCursorVisible(bool visible)
     m_window->setMouseCursorVisible(visible);
     m_isMouseCursorVisible = visible;
 }
+
 bool jt::RenderWindow::getMouseCursorVisible(void) const { return m_isMouseCursorVisible; }
 
 void jt::RenderWindow::updateGui(float elapsed)
@@ -84,4 +84,5 @@ void jt::RenderWindow::updateGui(float elapsed)
 void jt::RenderWindow::startRenderGui() { m_renderGui = true; }
 
 bool jt::RenderWindow::shouldProcessKeyboard() { return !ImGui::GetIO().WantCaptureKeyboard; }
+
 bool jt::RenderWindow::shouldProcessMouse() { return !ImGui::GetIO().WantCaptureMouse; }
