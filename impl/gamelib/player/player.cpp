@@ -38,7 +38,7 @@ std::string selectWalkAnimation(jt::Vector2f const& velocity)
 
 Player::Player(std::shared_ptr<jt::Box2DWorldInterface> world)
 {
-    b2BodyDef def;
+    b2BodyDef def {};
     def.type = b2BodyType::b2_dynamicBody;
     m_b2Object = std::make_unique<jt::Box2DObject>(world, &def);
 }
@@ -58,4 +58,5 @@ void Player::doUpdate(float const elapsed)
     m_graphics->setAnimationIfNotSet(selectWalkAnimation(m_b2Object->getVelocity()));
     m_graphics->updateGraphics(elapsed);
 }
+
 void Player::doDraw() const { m_graphics->draw(renderTarget()); }

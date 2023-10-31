@@ -9,8 +9,6 @@ on:
 jobs:
   LinuxSFML:
     runs-on: ubuntu-latest
-    env:
-      DISPLAY: ':99'
     steps:
       - name: Set up cmake
         uses: jwlawson/actions-setup-cmake@v1.11
@@ -59,7 +57,7 @@ jobs:
         run: jackd -d dummy &
 
       - name: Test
-        run: xvfb-run ./jt_tests --gtest_shuffle
+        run: xvfb-run ./jt_tests
         working-directory: ${{github.workspace}}/build/test/unit/jt_test
 
   LinuxSDL:
