@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1698730109015,
+  "lastUpdate": 1698730407632,
   "repoUrl": "https://github.com/Laguna1989/JamTemplateCpp",
   "entries": {
     "Benchmark": [
@@ -12996,6 +12996,84 @@ window.BENCHMARK_DATA = {
             "value": 4.275224650306486,
             "unit": "ms/iter",
             "extra": "iterations: 163\ncpu: 4.2743539877300565 ms\nthreads: 1"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "laguna.ws@gmail.com",
+            "name": "Laguna1989",
+            "username": "Laguna1989"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "7a216c2ee4283b1bbe0fdaf9141531d651113a9e",
+          "message": "Update README.md\n\nAdd Medibellum, JT_ENABLE_PERFORMANCETESTS and small formatting fiex",
+          "timestamp": "2023-10-31T06:30:41+01:00",
+          "tree_id": "9f391f29f682de56956e9a816cbb92dd07e8a6db",
+          "url": "https://github.com/Laguna1989/JamTemplateCpp/commit/7a216c2ee4283b1bbe0fdaf9141531d651113a9e"
+        },
+        "date": 1698730406696,
+        "tool": "googlecpp",
+        "benches": [
+          {
+            "name": "BM_UpdateDrawablePositions",
+            "value": 3.8075787923499065,
+            "unit": "ms/iter",
+            "extra": "iterations: 183\ncpu: 3.806590710382514 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GetAllCommands",
+            "value": 0.3861088682469801,
+            "unit": "ms/iter",
+            "extra": "iterations: 1814\ncpu: 0.3860778941565601 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_LoggerLogWithoutTarget",
+            "value": 0.3424089403422736,
+            "unit": "ms/iter",
+            "extra": "iterations: 2045\ncpu: 0.34239290953545237 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_LoggerLogWithCoutTargetSetToOff",
+            "value": 0.3464560669013892,
+            "unit": "ms/iter",
+            "extra": "iterations: 1988\ncpu: 0.3464318410462776 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_UpdateObjectGroup",
+            "value": 0.049920992588897616,
+            "unit": "ms/iter",
+            "extra": "iterations: 14033\ncpu: 0.049917123922183414 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_UpdateSpatialObjectGrid",
+            "value": 0.3244137300641623,
+            "unit": "ms/iter",
+            "extra": "iterations: 2182\ncpu: 0.324342025664528 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_StartGame",
+            "value": 0.003870433352168324,
+            "unit": "ms/iter",
+            "extra": "iterations: 180516\ncpu: 0.0038700763367236182 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_RefineTilemapCollisions",
+            "value": 0.18671824279616753,
+            "unit": "ms/iter",
+            "extra": "iterations: 3748\ncpu: 0.18669447705442915 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GamestateWithTweeningShapes",
+            "value": 3.5856254307692583,
+            "unit": "ms/iter",
+            "extra": "iterations: 195\ncpu: 3.5852774358974377 ms\nthreads: 1"
           }
         ]
       }
