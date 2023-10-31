@@ -1,6 +1,4 @@
-﻿#define NOMINMAX
-
-#include "main.hpp"
+﻿#include "main.hpp"
 #include <action_commands/action_command_manager.hpp>
 #include <action_commands/basic_action_commands.hpp>
 #include <audio/audio/audio_impl.hpp>

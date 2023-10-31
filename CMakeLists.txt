@@ -37,6 +37,7 @@ if (JT_ENABLE_WEB)
             "SHELL:--use-preload-plugins"
             "SHELL:--preload-file assets")
 elseif (MSVC)
+    add_compile_definitions(NOMINMAX)
 elseif (NOT CMAKE_CXX_COMPILER_ID MATCHES "^(Apple)?Clang$")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -lstdc++fs")
 endif ()
