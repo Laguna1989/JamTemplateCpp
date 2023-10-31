@@ -11,9 +11,10 @@ web (webassembly) games. Internally it uses [SFML](https://www.sfml-dev.org/), [
 
 Some games created with this JamTemplate are
 
+* [Medibellum](https://runvs.io/Games/medibellum) (Multiplayer Autobattler Game, Native, Kajam-13 2023)
 * [Mines of Gloria](https://runvs.io/Games/minesofgloria) (Incremental Clicker Game, Native & Web, ClickerJam Spring
     2023)
-* [Tworld](https://runvs.io/Games/tworld)(Jump and Run, Native & Web, FrankenGameJam 2022)
+* [Tworld](https://runvs.io/Games/tworld) (Jump and Run, Native & Web, FrankenGameJam 2022)
 * [Funky Trip](https://runvs.io/Games/funkytrip) (Top Down ARPG, Native & Web, Alakajam 14 2022)
 * [Gemga](https://runvs.io/Games/gemga) (Puzzler, Native & Web, FrankenGameJam 2021)
 * [Quasar Rush](https://runvs.io/Games/quasarrush) (Physics based puzzle game, Native & Web, A Game By Its Cover 2021)
@@ -72,11 +73,12 @@ on [itch](itch.io), [gamejolt](https://gamejolt.com/) or any other website.
 Note: Only the game executable and the `assets` folder is included in the archive. If more files are required, either
 adjust the deployment script (`.github/workflows/deploy.yml`) or place them in the `assets` folder.
 
-## Cmake options
+## CMake options
 
 The options can be set to ON or OFF via the cmake commandline or cmake-gui:
 
 * `JT_ENABLE_UNITTESTS` - Enables gtest and the unit tests
+* `JT_ENABLE_PERFORMANCETESTS` Enables the performance tests
 * `JT_ENABLE_DEMOS` - Enables the demos (small example programs which showcase a specific theme)
 * `JT_ENABLE_WEB` - Webbuild
 * `USE_SFML` - If `ON`, SFML will be used, if `OFF`, SDL will be used (SDL works best on linux)
@@ -90,7 +92,7 @@ e.g. calling `cmake ../ -DJT_ENABLE_UNITTESTS=ON -DENABLE_DEMOS=ON`
 
 Code Coverage is reported via [CodeCov](https://app.codecov.io/gh/Laguna1989/JamTemplateCpp/)
 
-A local run (without the artifacts) can be executed on Windows
+A local run (without the artifacts) can be executed e.g. on Windows
 via [OpenCppCoverage](https://github.com/OpenCppCoverage/OpenCppCoverage):
 
 ```
@@ -101,11 +103,11 @@ OpenCppCoverage.exe --sources C:\projects\JamTemplateCpp\* --excluded_sources C:
 
 Please check the performance benchmark [report](https://laguna1989.github.io/JamTemplateCpp/dev/bench/index.html).
 
-## gamejam setup recommended steps
+## 1hgj setup (recommended steps)
 
 * Use this repo as a template
 * Clone the new repository
-* remove the folders
+* Remove the folders
     * `test`
     * `assets/test`
     * `.github/workflows/` everything except `deploy.yml`
