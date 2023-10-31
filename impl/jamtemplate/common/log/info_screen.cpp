@@ -57,7 +57,7 @@ void jt::InfoScreen::doDraw() const
         auto const state = getGame()->stateManager().getCurrentState();
         ImGui::Text("%s", state->getName().c_str());
         std::string const gameStateAge
-            = "Age: " + jt::MathHelper::floatToStringWithXDigits(state->getAge(), 2) + " s";
+            = "Age: " + jt::MathHelper::floatToStringWithXDecimalDigits(state->getAge(), 2) + " s";
         ImGui::Text("%s", gameStateAge.c_str());
 
         std::string const gameObjectsInThisStateText

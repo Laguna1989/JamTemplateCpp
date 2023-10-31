@@ -59,8 +59,8 @@ void addCommandsCam(std::shared_ptr<jt::GameBase>& game)
 
             if (args.size() == 0) {
                 auto const p = cam.getCamOffset();
-                logger.action(jt::MathHelper::floatToStringWithXDigits(p.x, 2) + " "
-                    + jt::MathHelper::floatToStringWithXDigits(p.y, 2));
+                logger.action(jt::MathHelper::floatToStringWithXDecimalDigits(p.x, 2) + " "
+                    + jt::MathHelper::floatToStringWithXDecimalDigits(p.y, 2));
             } else {
                 float x = std::stof(args.at(0));
                 float y = std::stof(args.at(1));

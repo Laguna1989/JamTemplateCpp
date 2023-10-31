@@ -61,14 +61,14 @@ private:
         for (auto& p : m_particles) {
             p->update(elapsed);
         }
-    };
+    }
 
     void doDraw() const override
     {
         for (auto const& p : m_particles) {
             p->draw(renderTarget());
         }
-    };
+    }
 };
 
 } // namespace jt

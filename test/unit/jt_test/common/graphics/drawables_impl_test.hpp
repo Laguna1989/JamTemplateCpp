@@ -58,7 +58,7 @@ public:
         jt::TextureManagerInterface& /*textureManager*/) override
     {
         auto t = std::make_shared<jt::Text>();
-        std::shared_ptr<jt::RenderTargetLayer> renderTarget { nullptr };
+        static std::shared_ptr<jt::RenderTargetLayer> renderTarget { nullptr };
         t->loadFont("assets/font.ttf", 12, renderTarget);
         return t;
     }
@@ -102,9 +102,9 @@ public:
     std::shared_ptr<jt::DrawableInterface> createDrawable(
         jt::TextureManagerInterface& textureManager) override
     {
-        auto t = std::make_shared<jt::tilemap::TileLayer>(
-            TileMapLoaderCache::getLoader()->loadTilesFromLayer(
-                "ground", textureManager, "assets/test/unit/jt_test/"));
+        static auto const tiles = TileMapLoaderCache::getLoader()->loadTilesFromLayer(
+            "ground", textureManager, "assets/test/unit/jt_test/");
+        auto t = std::make_shared<jt::tilemap::TileLayer>(tiles);
         t->setScreenSizeHint(jt::Vector2f { 400.0f, 300.0f });
         return t;
     }

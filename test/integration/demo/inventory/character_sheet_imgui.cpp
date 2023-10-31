@@ -44,8 +44,9 @@ void CharacterSheetImgui::doDraw() const
     ImGui::SetNextWindowSize(ImVec2 { 400, 600 });
     ImGui::Begin("PlayerCharacter", &m_drawCharacterSheet);
 
-    ImGui::Text("Health: %s / %s", jt::MathHelper::floatToStringWithXDigits(m_health, 0).c_str(),
-        jt::MathHelper::floatToStringWithXDigits(m_maxHealth, 0).c_str());
+    ImGui::Text("Health: %s / %s",
+        jt::MathHelper::floatToStringWithXDecimalDigits(m_health, 0).c_str(),
+        jt::MathHelper::floatToStringWithXDecimalDigits(m_maxHealth, 0).c_str());
 
     int totalArmor = 0;
     int totalResistanceElectric = 0;
@@ -68,6 +69,6 @@ void CharacterSheetImgui::doDraw() const
     ImGui::Text("Electric: %s", std::to_string(totalResistanceElectric).c_str());
     ImGui::Separator();
     ImGui::Text("Temperature: %s",
-        jt::MathHelper::floatToStringWithXDigits(m_currentTemperature, 2).c_str());
+        jt::MathHelper::floatToStringWithXDecimalDigits(m_currentTemperature, 2).c_str());
     ImGui::End();
 }

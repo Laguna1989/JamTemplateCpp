@@ -47,8 +47,13 @@ public:
     void loadFromJson(std::string const& jsonFileName, TextureManagerInterface& textureManager);
 
     /// Load animation from aseprite file
-    /// \param asepriteFileName path to the aseprite file
-    /// \param textureManager the texture manager to load the individual sprites
+    ///
+    /// If there are no animations (tags) defined in the aseprite file, a default animation
+    /// with name "idle" will be created, which contains alle frames and has a default frame time of
+    /// 0.1s.
+    ///
+    /// \param asepriteFileName path to the aseprite file \param textureManager the
+    /// texture manager to load the individual sprites
     void loadFromAseprite(
         std::string const& asepriteFileName, TextureManagerInterface& textureManager);
 

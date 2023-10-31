@@ -25,6 +25,9 @@ public:
     /// \param tileSetSprites Tileset Sprites
     TileLayer(std::vector<TileInfo> const& tileInfo,
         std::vector<std::shared_ptr<jt::Sprite>> const& tileSetSprites);
+
+    /// Constructor
+    /// \param mapInfo tuple which contains the information for all tiles and sprites of the tilemap
     TileLayer(
         std::tuple<std::vector<TileInfo> const&, std::vector<std::shared_ptr<jt::Sprite>>> const&
             mapInfo);

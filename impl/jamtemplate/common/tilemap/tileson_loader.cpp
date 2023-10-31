@@ -184,7 +184,7 @@ std::tuple<std::vector<jt::tilemap::TileInfo>, std::vector<std::shared_ptr<jt::S
 jt::tilemap::TilesonLoader::loadTilesFromLayer(std::string const& layerName,
     jt::TextureManagerInterface& textureManager, std::string const& tilesetPathPrefix)
 {
-    auto map = m_tilemapCache.getMap(m_fileName);
+    auto const map = m_tilemapCache.getMap(m_fileName);
 
     return std::tuple<std::vector<TileInfo>, std::vector<std::shared_ptr<jt::Sprite>>>(
         loadTiles(layerName, map), loadTileSetSprites(map, textureManager, tilesetPathPrefix));

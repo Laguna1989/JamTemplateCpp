@@ -37,7 +37,7 @@ std::string Text::getText() const { return m_text; }
 
 void Text::setOutline(float /*thickness*/, jt::Color /*col*/)
 {
-    std::cerr << "Font outline not suppored by SDL TTF fonts" << std::endl;
+    std::cerr << "Font outline not supported by SDL TTF fonts" << std::endl;
 }
 
 void Text::setPosition(jt::Vector2f const& pos) { m_position = pos; }

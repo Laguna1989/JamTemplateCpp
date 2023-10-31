@@ -16,7 +16,7 @@ template <std::size_t size, typename = void>
 class IndexWrapper { };
 
 template <std::size_t size>
-class IndexWrapper<size, typename std::enable_if<jt::MathHelper::is_powerof2(size)>::type> {
+class IndexWrapper<size, typename std::enable_if<jt::MathHelper::isPowerOfTwo(size)>::type> {
 public:
     static_assert(size != 0, "Error: Cannot create IndexWrapper with capacity 0");
     std::size_t wrap(const std::size_t index) const { return index & m_mask; }
@@ -35,7 +35,7 @@ private:
  */
 
 template <std::size_t size>
-class IndexWrapper<size, typename std::enable_if<!jt::MathHelper::is_powerof2(size)>::type> {
+class IndexWrapper<size, typename std::enable_if<!jt::MathHelper::isPowerOfTwo(size)>::type> {
 public:
     static_assert(size != 0, "Error: Cannot create IndexWrapper with capacity 0");
     std::size_t wrap(const std::size_t index) const { return index % size; }

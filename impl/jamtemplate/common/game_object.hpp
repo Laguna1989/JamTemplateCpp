@@ -4,6 +4,8 @@
 #include <counted_object.hpp>
 #include <game_object_interface.hpp>
 #include <graphics/render_target_interface.hpp>
+#include <input/keyboard/keyboard_interface.hpp>
+#include <input/mouse/mouse_interface.hpp>
 #include <texture_manager_interface.hpp>
 #include <memory>
 #include <string>
@@ -80,6 +82,8 @@ public:
     // Helper functions for fast access of commonly used objects.
     TextureManagerInterface& textureManager() const;
     std::shared_ptr<jt::RenderTargetInterface> renderTarget() const;
+    std::shared_ptr<jt::KeyboardInterface> keyboard() const;
+    std::shared_ptr<jt::MouseInterface> mouse() const;
 
 protected:
     float m_age { 0.0f };

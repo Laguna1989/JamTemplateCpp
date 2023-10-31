@@ -85,3 +85,11 @@ std::shared_ptr<jt::RenderTargetInterface> jt::GameObject::renderTarget() const
 {
     return getGame()->gfx().target();
 }
+std::shared_ptr<jt::KeyboardInterface> jt::GameObject::keyboard() const
+{
+    return getGame()->input().keyboard();
+}
+std::shared_ptr<jt::MouseInterface> jt::GameObject::mouse() const
+{
+    return getGame()->input().mouse();
+}
