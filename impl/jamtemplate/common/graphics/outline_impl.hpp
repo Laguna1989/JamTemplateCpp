@@ -5,6 +5,7 @@
 #include <render_target.hpp>
 #include <vector.hpp>
 #include <memory>
+#include <vector>
 
 namespace jt {
 
