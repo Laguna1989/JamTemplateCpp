@@ -5,7 +5,7 @@
 
 ## About
 
-This is the JamTemplate for kickstarting your gamejam entry. It will compile C++17 code for native (Win, Linux) and
+This is the JamTemplate for kickstarting your gamejam entry. It will compile C++20 code for native (Win, Linux) and
 web (webassembly) games. Internally it uses [SFML](https://www.sfml-dev.org/), [SDL](https://www.libsdl.org/) and
 [OpenALpp](https://github.com/Laguna1989/OpenALpp).
 
