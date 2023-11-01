@@ -137,4 +137,14 @@ PaletteBuilder& PaletteBuilder::addColorsFromAseprite(std::string const& filepat
     return *this;
 }
 
+PaletteBuilder& PaletteBuilder::applyToPalette(
+    std::function<jt::Color(jt::Color const&)> const& function)
+{
+    for (auto& c : m_colors) {
+        c = function(c);
+    }
+    
+    return *this;
+}
+
 } // namespace jt
