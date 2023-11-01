@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1698825936293,
+  "lastUpdate": 1698830842544,
   "repoUrl": "https://github.com/Laguna1989/JamTemplateCpp",
   "entries": {
     "Benchmark": [
@@ -13620,6 +13620,84 @@ window.BENCHMARK_DATA = {
             "value": 3.5846367384611093,
             "unit": "ms/iter",
             "extra": "iterations: 195\ncpu: 3.584468717948716 ms\nthreads: 1"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "laguna.ws@gmail.com",
+            "name": "Laguna1989",
+            "username": "Laguna1989"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "7dc74907dca50afb8e361ce58fdd4c5257808d93",
+          "message": "Merge pull request #299 from Laguna1989/feature/ColorComplement\n\nFeature/color complement",
+          "timestamp": "2023-11-01T10:24:08+01:00",
+          "tree_id": "3313c784020a5e0e612fff9ce878128bf0c0bbcd",
+          "url": "https://github.com/Laguna1989/JamTemplateCpp/commit/7dc74907dca50afb8e361ce58fdd4c5257808d93"
+        },
+        "date": 1698830841181,
+        "tool": "googlecpp",
+        "benches": [
+          {
+            "name": "BM_UpdateDrawablePositions",
+            "value": 7.452697595959358,
+            "unit": "ms/iter",
+            "extra": "iterations: 99\ncpu: 7.431235353535353 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GetAllCommands",
+            "value": 0.4219111680049382,
+            "unit": "ms/iter",
+            "extra": "iterations: 1619\ncpu: 0.42187893761581224 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_LoggerLogWithoutTarget",
+            "value": 0.4600503085830995,
+            "unit": "ms/iter",
+            "extra": "iterations: 1468\ncpu: 0.458965667574932 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_LoggerLogWithCoutTargetSetToOff",
+            "value": 0.4732466108870835,
+            "unit": "ms/iter",
+            "extra": "iterations: 1488\ncpu: 0.4727621639784944 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_UpdateObjectGroup",
+            "value": 0.060166818142094,
+            "unit": "ms/iter",
+            "extra": "iterations: 11443\ncpu: 0.0601534300445687 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_UpdateSpatialObjectGrid",
+            "value": 0.4678229504563147,
+            "unit": "ms/iter",
+            "extra": "iterations: 1534\ncpu: 0.4677452411994786 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_StartGame",
+            "value": 0.005066417138874638,
+            "unit": "ms/iter",
+            "extra": "iterations: 132004\ncpu: 0.005064353352928705 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_RefineTilemapCollisions",
+            "value": 0.2038119196009382,
+            "unit": "ms/iter",
+            "extra": "iterations: 3408\ncpu: 0.20380014671361485 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GamestateWithTweeningShapes",
+            "value": 4.531871259259128,
+            "unit": "ms/iter",
+            "extra": "iterations: 162\ncpu: 4.530748765432098 ms\nthreads: 1"
           }
         ]
       }
