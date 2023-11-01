@@ -67,6 +67,12 @@ public:
     /// \return the palette builder object
     [[nodiscard]] PaletteBuilder& makeUnique();
 
+    ///
+    /// \param function
+    /// \return
+    [[nodiscard]] PaletteBuilder& applyToPalette(
+        std::function<jt::Color(jt::Color const&)> const& function);
+
 private:
     std::vector<Color> m_colors {};
 };

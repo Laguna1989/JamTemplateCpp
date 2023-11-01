@@ -1,4 +1,5 @@
 #include <backend_setup.hpp>
+#include <color/color_modifications.hpp>
 #include <color/palette_builder.hpp>
 #include <gtest/gtest.h>
 
@@ -226,4 +227,18 @@ TEST(PaletteBuilderTest, MakeUnique)
     ASSERT_EQ(palette.getColor(0), expectedColor0);
     ASSERT_EQ(palette.getColor(1), expectedColor1);
     ASSERT_EQ(palette.getColor(2), expectedColor2);
+}
+
+TEST(PaletteBuilderTest, ApplyFunction)
+{
+    jt::PaletteBuilder builder;
+    auto const palette = builder.addColor(jt::colors::Red)
+                             .addColor(jt::colors::Green)
+                             .addColor(jt::colors::Blue)
+                             .applyToPalette(jt::ColorModifications::complement)
+                             .create();
+    ASSERT_EQ(palette.size(), 3u);
+    ASSERT_EQ(palette.getColor(0), jt::colors::Cyan);
+    ASSERT_EQ(palette.getColor(1), jt::colors::Magenta);
+    ASSERT_EQ(palette.getColor(2), jt::colors::Yellow);
 }
