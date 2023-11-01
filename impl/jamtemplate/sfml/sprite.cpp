@@ -22,12 +22,15 @@ jt::Sprite::Sprite(
 void jt::Sprite::fromTexture(sf::Texture const& text) { m_sprite.setTexture(text); }
 
 void jt::Sprite::setPosition(jt::Vector2f const& pos) { m_position = pos; }
+
 jt::Vector2f jt::Sprite::getPosition() const { return m_position; }
 
 void jt::Sprite::setColor(jt::Color const& col) { m_sprite.setColor(toLib(col)); }
+
 jt::Color jt::Sprite::getColor() const { return fromLib(m_sprite.getColor()); }
 
 jt::Rectf jt::Sprite::getGlobalBounds() const { return fromLib(m_sprite.getGlobalBounds()); }
+
 jt::Rectf jt::Sprite::getLocalBounds() const { return fromLib(m_sprite.getLocalBounds()); }
 
 void jt::Sprite::setScale(jt::Vector2f const& scale)
@@ -84,6 +87,22 @@ void jt::Sprite::doDrawShadow(std::shared_ptr<jt::RenderTargetLayer> const sptr)
     }
 }
 
+void jt::Sprite::doDrawOutline(std::shared_ptr<jt::RenderTargetLayer> const sptr) const
+{
+    jt::Vector2f const oldPos = fromLib(m_sprite.getPosition());
+    jt::Color const oldCol = fromLib(m_sprite.getColor());
+
+    m_sprite.setColor(toLib(getOutlineColor()));
+
+    for (auto const outlineOffset : getOutlineOffsets()) {
+        m_sprite.setPosition(toLib(oldPos + outlineOffset));
+        sptr->draw(m_sprite);
+    }
+
+    m_sprite.setPosition(toLib(oldPos));
+    m_sprite.setColor(toLib(oldCol));
+}
+
 void jt::Sprite::doDraw(std::shared_ptr<jt::RenderTargetLayer> const sptr) const
 {
     if (sptr) {
@@ -101,8 +120,8 @@ void jt::Sprite::doDrawFlash(std::shared_ptr<jt::RenderTargetLayer> const sptr) 
 
 void jt::Sprite::doRotate(float rot)
 {
-    m_sprite.setRotation(-rot);
-    m_flashSprite.setRotation(-rot);
+    m_sprite.setRotation(rot);
+    m_flashSprite.setRotation(rot);
 }
 
 void jt::Sprite::setOriginInternal(jt::Vector2f const& origin)

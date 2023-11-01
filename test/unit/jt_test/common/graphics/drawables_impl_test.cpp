@@ -1,7 +1,6 @@
 ﻿#include "drawables_impl_test.hpp"
 #include <backend_setup.hpp>
 #include <texture_manager_impl.hpp>
-#include <gmock/gmock.h>
 #include <gtest/gtest.h>
 #include <memory>
 
@@ -10,7 +9,9 @@ class DrawableImplTestFixture
 protected:
     std::shared_ptr<jt::DrawableInterface> drawable;
     jt::TextureManagerInterface& tm { getTextureManager() };
+
     void SetUp() override { drawable = GetParam()->createDrawable(tm); }
+
     void TearDown() override
     {
         // reset static cam offset just to make sure
@@ -197,6 +198,13 @@ TEST_P(DrawableImplTestFixture, DrawWithShadow)
     drawable->draw(getRenderTargetContainer());
 }
 
+TEST_P(DrawableImplTestFixture, DrawWithOutline)
+{
+    drawable->setOutline(jt::colors::Green, 4);
+    drawable->update(0.1f);
+    drawable->draw(getRenderTargetContainer());
+}
+
 TEST_P(DrawableImplTestFixture, GetColorAfterSetColor)
 {
     drawable->setColor(jt::colors::Red);
@@ -315,6 +323,34 @@ TEST_P(DrawableImplTestFixture, GetShadowColorAfterSet)
 {
     drawable->setShadow(jt::colors::Yellow, jt::Vector2f { 1.0f, 1.0f });
     ASSERT_EQ(drawable->getShadowColor(), jt::colors::Yellow);
+}
+
+TEST_P(DrawableImplTestFixture, GetOutlineActiveIsFalseByDefault)
+{
+    ASSERT_FALSE(drawable->getOutlineActive());
+}
+
+TEST_P(DrawableImplTestFixture, GetOutlineActiveIsTrueAfterSetOutline)
+{
+    drawable->setOutline(jt::colors::Yellow, 1);
+    ASSERT_TRUE(drawable->getOutlineActive());
+}
+
+TEST_P(DrawableImplTestFixture, GetOutlineColorReturnsBlackByDefault)
+{
+    ASSERT_EQ(drawable->getOutlineColor(), jt::colors::Black);
+}
+
+TEST_P(DrawableImplTestFixture, GetOutlineColorAfterSet)
+{
+    drawable->setOutline(jt::colors::Yellow, 2);
+    ASSERT_EQ(drawable->getOutlineColor(), jt::colors::Yellow);
+}
+
+TEST_P(DrawableImplTestFixture, GetOutlineWidthAfterSet)
+{
+    drawable->setOutline(jt::colors::Yellow, 5);
+    ASSERT_EQ(drawable->getOutlineWidth(), 5);
 }
 
 TEST_P(DrawableImplTestFixture, GetSetBlendModeMul)

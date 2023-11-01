@@ -24,7 +24,6 @@ public:
     void setText(std::string const& text);
     std::string getText() const;
 
-    void setOutline(float thickness, jt::Color col);
     void setPosition(jt::Vector2f const& pos) override;
 
     jt::Vector2f getPosition() const override;
@@ -55,6 +54,7 @@ private:
     void doUpdate(float /*elapsed*/) override;
 
     void doDrawShadow(std::shared_ptr<jt::RenderTargetLayer> const sptr) const override;
+    void doDrawOutline(std::shared_ptr<jt::RenderTargetLayer> const sptr) const override;
     void doDraw(std::shared_ptr<jt::RenderTargetLayer> const sptr) const override;
     void doDrawFlash(std::shared_ptr<jt::RenderTargetLayer> const sptr) const override;
 

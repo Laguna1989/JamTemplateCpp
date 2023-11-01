@@ -64,7 +64,7 @@ void jt::Animation::add(std::string const& fileName, std::string const& animName
     for (auto const idx : frameIndices) {
         jt::Recti const rect { static_cast<int>(idx * imageSize.x), 0,
             static_cast<int>(imageSize.x), static_cast<int>(imageSize.y) };
-        Sprite::Sptr sptr = std::make_shared<Sprite>(fileName, rect, textureManager);
+        auto sptr = std::make_shared<Sprite>(fileName, rect, textureManager);
         m_frames[animName].push_back(sptr);
     }
     m_time[animName] = frameTimesInSeconds;
@@ -226,12 +226,14 @@ jt::Color jt::Animation::getColor() const
 }
 
 void jt::Animation::setPosition(jt::Vector2f const& pos) { m_position = pos; }
+
 jt::Vector2f jt::Animation::getPosition() const { return m_position; }
 
 jt::Rectf jt::Animation::getGlobalBounds() const
 {
     return getCurrentSprite(m_frames, m_currentAnimName, m_currentIdx)->getGlobalBounds();
 }
+
 jt::Rectf jt::Animation::getLocalBounds() const
 {
     return getCurrentSprite(m_frames, m_currentAnimName, m_currentIdx)->getLocalBounds();
@@ -245,6 +247,7 @@ void jt::Animation::setScale(jt::Vector2f const& scale)
         }
     }
 }
+
 jt::Vector2f jt::Animation::getScale() const
 {
     return getCurrentSprite(m_frames, m_currentAnimName, m_currentIdx)->getScale();
@@ -259,12 +262,22 @@ void jt::Animation::setOriginInternal(jt::Vector2f const& origin)
     }
 }
 
-void jt::Animation::setShadow(jt::Color const& col, jt::Vector2f const& offset)
+void jt::Animation::setOutline(jt::Color const& color, int width)
 {
-    DrawableImpl::setShadow(col, offset);
+    DrawableImpl::setOutline(color, width);
     for (auto const& kvp : m_frames) {
-        for (auto const& sptr : kvp.second) {
-            sptr->setShadow(col, offset);
+        for (auto const& sprite : kvp.second) {
+            sprite->setOutline(color, width);
+        }
+    }
+}
+
+void jt::Animation::setShadow(jt::Color const& color, jt::Vector2f const& offset)
+{
+    DrawableImpl::setShadow(color, offset);
+    for (auto const& kvp : m_frames) {
+        for (auto const& sprite : kvp.second) {
+            sprite->setShadow(color, offset);
         }
     }
 }
@@ -273,13 +286,15 @@ void jt::Animation::setShadowActive(bool active)
 {
     DrawableImpl::setShadowActive(active);
     for (auto const& kvp : m_frames) {
-        for (auto const& sptr : kvp.second) {
-            sptr->setShadowActive(active);
+        for (auto const& sprite : kvp.second) {
+            sprite->setShadowActive(active);
         }
     }
 }
 
 void jt::Animation::doDrawShadow(std::shared_ptr<jt::RenderTargetLayer> const /*sptr*/) const { }
+
+void jt::Animation::doDrawOutline(std::shared_ptr<jt::RenderTargetLayer> const /*sptr*/) const { }
 
 void jt::Animation::doDraw(std::shared_ptr<jt::RenderTargetLayer> const sptr) const
 {
@@ -297,8 +312,8 @@ void jt::Animation::doDrawFlash(std::shared_ptr<jt::RenderTargetLayer> const /*s
 void jt::Animation::doFlashImpl(float t, jt::Color col)
 {
     for (auto& kvp : m_frames) {
-        for (auto& spr : kvp.second) {
-            spr->flash(t, col);
+        for (auto& sprite : kvp.second) {
+            sprite->flash(t, col);
         }
     }
 }
@@ -333,8 +348,8 @@ void jt::Animation::doUpdate(float elapsed)
 
     // update all sprites
     for (auto& kvp : m_frames) {
-        for (auto& spr : kvp.second) {
-            spr->update(elapsed);
+        for (auto& sprite : kvp.second) {
+            sprite->update(elapsed);
         }
     }
 }
@@ -342,23 +357,27 @@ void jt::Animation::doUpdate(float elapsed)
 void jt::Animation::doRotate(float rot)
 {
     for (auto& kvp : m_frames) {
-        for (auto& spr : kvp.second) {
-            spr->setRotation(rot);
+        for (auto& sprite : kvp.second) {
+            sprite->setRotation(rot);
         }
     }
 }
+
 float jt::Animation::getCurrentAnimationSingleFrameTime() const
 {
     return m_time.at(m_currentAnimName).at(m_currentIdx);
 }
+
 float jt::Animation::getCurrentAnimTotalTime() const
 {
     return getCurrentAnimationSingleFrameTime() * getNumberOfFramesInCurrentAnimation();
 }
+
 std::size_t jt::Animation::getNumberOfFramesInCurrentAnimation() const
 {
     return m_frames.at(m_currentAnimName).size();
 }
+
 std::string jt::Animation::getCurrentAnimationName() const { return m_currentAnimName; }
 
 bool jt::Animation::getIsLooping() const
@@ -368,6 +387,7 @@ bool jt::Animation::getIsLooping() const
     }
     return m_isLooping.at(m_currentAnimName);
 }
+
 void jt::Animation::setLooping(std::string const& animName, bool isLooping)
 {
     if (!hasAnimation(animName)) {
@@ -375,6 +395,7 @@ void jt::Animation::setLooping(std::string const& animName, bool isLooping)
     }
     m_isLooping[animName] = isLooping;
 }
+
 std::size_t jt::Animation::getCurrentAnimationFrameIndex() const { return m_currentIdx; }
 
 void jt::Animation::setFrameTimes(
@@ -389,5 +410,7 @@ void jt::Animation::setFrameTimes(
     }
     m_time[animationName] = frameTimes;
 }
+
 void jt::Animation::setAnimationSpeedFactor(float factor) { m_animationplaybackSpeed = factor; }
+
 float jt::Animation::getAnimationSpeedFactor() const { return m_animationplaybackSpeed; }

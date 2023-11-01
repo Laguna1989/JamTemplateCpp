@@ -24,13 +24,11 @@ public:
     void setText(std::string const& text);
     std::string getText() const;
 
-    void setOutline(float /*thickness*/, jt::Color /*col*/);
-
     void setPosition(jt::Vector2f const& pos) override;
 
     jt::Vector2f getPosition() const override;
 
-    void setColor(const jt::Color& col) override;
+    void setColor(jt::Color const& col) override;
     jt::Color getColor() const override;
 
     jt::Rectf getGlobalBounds() const override;
@@ -62,17 +60,16 @@ private:
 
     void doUpdate(float /*elapsed*/) override;
 
-    void doDrawShadow(std::shared_ptr<jt::RenderTargetLayer> const sptr) const override;
-
     void renderOneLineOfText(std::shared_ptr<jt::RenderTargetLayer> const sptr, std::string text,
         std::size_t i, std::size_t lineCount) const;
 
     jt::Vector2u getSizeForLine(
         std::shared_ptr<jt::RenderTargetLayer> const sptr, std::string const& text) const;
 
+    void doDrawShadow(std::shared_ptr<jt::RenderTargetLayer> const sptr) const override;
+    void doDrawOutline(std::shared_ptr<jt::RenderTargetLayer> const sptr) const override;
     void doDraw(std::shared_ptr<jt::RenderTargetLayer> const sptr) const override;
-
-    void doDrawFlash(std::shared_ptr<jt::RenderTargetLayer> const /*sptr*/) const override;
+    void doDrawFlash(std::shared_ptr<jt::RenderTargetLayer> const sptr) const override;
 
     void doRotate(float /*rot*/) override;
 
@@ -82,6 +79,7 @@ private:
     SDL_Rect getDestRect(jt::Vector2f const& positionOffset = jt::Vector2f { 0.0f, 0.0f }) const;
 
     int getUpscaleFactor() const { return 1; };
+
     void calculateTextTextureSize(
         std::shared_ptr<jt::RenderTargetLayer> const sptr, std::vector<std::string> const& ssv);
 };

@@ -35,6 +35,7 @@ void StateMoveCam::onCreate()
     m_spriteDino = std::make_shared<jt::Sprite>(
         "assets/test/integration/demo/dino_salto.aseprite", textureManager());
     m_spriteDino->setPosition({ 150, 232 });
+    m_spriteDino->setOutline(jt::colors::Black, 1);
     m_spriteDino->setScale({ 2.0f, 2.0f });
 
     m_animMiner = std::make_shared<jt::Animation>();
@@ -56,14 +57,19 @@ void StateMoveCam::onCreate()
 
     m_text_center_aligned = jt::dh::createText(renderTarget(), "center aligned", 16);
     m_text_center_aligned->setTextAlign(jt::Text::TextAlign::CENTER);
+    m_text_center_aligned->setOutline(jt::Color { 30, 30, 30, 255 }, 1);
     m_text_center_aligned->setPosition(jt::Vector2f { 300, 130 });
 
     m_text_right_aligned = jt::dh::createText(renderTarget(), "right aligned", 16);
     m_text_right_aligned->setTextAlign(jt::Text::TextAlign::RIGHT);
     m_text_right_aligned->setPosition(jt::Vector2f { 300, 160 });
 
-    m_line = std::make_shared<jt::Line>(jt::Vector2f { 100, 50 });
-    m_line->setPosition(jt::Vector2f { 20, 200 });
+    m_line1 = std::make_shared<jt::Line>(jt::Vector2f { 100, 50 });
+    m_line1->setPosition(jt::Vector2f { 20, 200 });
+
+    m_line2 = std::make_shared<jt::Line>(jt::Vector2f { -50, 100 });
+    m_line2->setOutline(jt::colors::Black, 2);
+    m_line2->setPosition(jt::Vector2f { 20, 200 } + jt::Vector2f { 100, -50 });
 
     float const scrollSpeed = 50.0f;
     getGame()->input().keyboard()->setCommandPressed({ jt::KeyCode::W, jt::KeyCode::Up },
@@ -114,12 +120,12 @@ void StateMoveCam::onUpdate(float const elapsed)
     }
 
     m_background->update(elapsed);
-    m_shape1->setRotation(getAge() * 90);
+    m_shape1->setRotation(getAge() * 90.0f);
     m_shape1->update(elapsed);
 
     m_shape2->update(elapsed);
 
-    m_sprite->setRotation(-getAge() * 90);
+    m_sprite->setRotation(-getAge() * 90.0f);
     m_sprite->update(elapsed);
 
     m_spriteCircle->update(elapsed);
@@ -132,7 +138,8 @@ void StateMoveCam::onUpdate(float const elapsed)
     m_text_left_aligned->update(elapsed);
     m_text_center_aligned->update(elapsed);
     m_text_right_aligned->update(elapsed);
-    m_line->update(elapsed);
+    m_line1->update(elapsed);
+    m_line2->update(elapsed);
 }
 
 void StateMoveCam::onDraw() const
@@ -152,6 +159,8 @@ void StateMoveCam::onDraw() const
     m_text_center_aligned->draw(renderTarget());
     m_text_right_aligned->draw(renderTarget());
 
-    m_line->draw(renderTarget());
+    m_line1->draw(renderTarget());
+    m_line2->draw(renderTarget());
 }
+
 std::string StateMoveCam::getName() const { return "Move Cam"; }

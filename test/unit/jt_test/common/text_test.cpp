@@ -25,6 +25,7 @@ TEST(TextTest, InitialValues)
     ASSERT_FLOAT_EQ(t->getLocalBounds().width, 0.0f);
     ASSERT_FLOAT_EQ(t->getLocalBounds().height, 0.0f);
 }
+
 TEST(TextTest, Destructor)
 {
     {
@@ -156,7 +157,7 @@ TEST(TextTest, Update)
 TEST(TextTest, SetOutline)
 {
     auto t = getText();
-    t->setOutline(2.0f, jt::colors::Red);
+    t->setOutline(jt::colors::Red, 2);
 }
 
 TEST(TextTest, InitialRotation)

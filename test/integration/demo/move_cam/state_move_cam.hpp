@@ -26,7 +26,8 @@ private:
     jt::Text::Sptr m_text_center_aligned;
     jt::Text::Sptr m_text_right_aligned;
 
-    jt::Line::Sptr m_line;
+    jt::Line::Sptr m_line1;
+    jt::Line::Sptr m_line2;
 
     void onCreate() override;
     void onEnter() override;

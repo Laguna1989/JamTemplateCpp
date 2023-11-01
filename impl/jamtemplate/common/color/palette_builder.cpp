@@ -62,6 +62,7 @@ PaletteBuilder& PaletteBuilder::addGradientH(
     m_colors.insert(m_colors.end(), colors.cbegin(), colors.cend());
     return *this;
 }
+
 PaletteBuilder& PaletteBuilder::addGradientS(
     float h, float smin, float smax, float v, std::size_t steps)
 {
@@ -74,6 +75,7 @@ PaletteBuilder& PaletteBuilder::addGradientS(
     m_colors.insert(m_colors.end(), colors.cbegin(), colors.cend());
     return *this;
 }
+
 PaletteBuilder& PaletteBuilder::addGradientV(
     float h, float s, float vmin, float vmax, std::size_t steps)
 {
@@ -87,6 +89,7 @@ PaletteBuilder& PaletteBuilder::addGradientV(
     m_colors.insert(m_colors.end(), colors.cbegin(), colors.cend());
     return *this;
 }
+
 PaletteBuilder& PaletteBuilder::addColor(jt::Color const& col)
 {
     m_colors.push_back(col);
@@ -116,6 +119,7 @@ PaletteBuilder& PaletteBuilder::makeUnique()
         SystemHelper::remove_duplicates(m_colors.begin(), m_colors.end()), m_colors.end());
     return *this;
 }
+
 PaletteBuilder& PaletteBuilder::addColorsFromAseprite(std::string const& filepath)
 {
     aselib::AsepriteData ase { filepath };

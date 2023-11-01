@@ -35,15 +35,12 @@ void Text::setText(std::string const& text)
 
 std::string Text::getText() const { return m_text; }
 
-void Text::setOutline(float /*thickness*/, jt::Color /*col*/)
-{
-    std::cerr << "Font outline not supported by SDL TTF fonts" << std::endl;
-}
-
 void Text::setPosition(jt::Vector2f const& pos) { m_position = pos; }
+
 jt::Vector2f Text::getPosition() const { return m_position; }
 
-void Text::setColor(const jt::Color& col) { m_color = col; }
+void Text::setColor(jt::Color const& col) { m_color = col; }
+
 jt::Color Text::getColor() const { return m_color; }
 
 jt::Rectf Text::getGlobalBounds() const
@@ -53,6 +50,7 @@ jt::Rectf Text::getGlobalBounds() const
         static_cast<float>(m_textTextureSizeY) * m_scale.y
             / static_cast<float>(getUpscaleFactor()) };
 }
+
 jt::Rectf Text::getLocalBounds() const
 {
     return jt::Rectf { 0, 0,
@@ -66,6 +64,7 @@ void Text::setScale(jt::Vector2f const& scale)
     m_scale = scale;
     setOriginInternal(m_origin);
 }
+
 jt::Vector2f Text::getScale() const { return m_scale; }
 
 void Text::setTextAlign(Text::TextAlign ta)
@@ -75,6 +74,7 @@ void Text::setTextAlign(Text::TextAlign ta)
         recreateTextTexture(getRenderTarget());
     }
 }
+
 Text::TextAlign Text::getTextAlign() const { return m_textAlign; }
 
 void Text::doUpdate(float /*elapsed*/)
@@ -91,7 +91,24 @@ void Text::doDrawShadow(std::shared_ptr<jt::RenderTargetLayer> const sptr) const
     auto col = getShadowColor();
     col.a = std::min(col.a, m_color.a);
     setSDLColor(col);
-    SDL_RenderCopyEx(sptr.get(), m_textTexture.get(), nullptr, &destRect, -getRotation(), &p, flip);
+    SDL_RenderCopyEx(sptr.get(), m_textTexture.get(), nullptr, &destRect, getRotation(), &p, flip);
+}
+
+void Text::doDrawOutline(std::shared_ptr<jt::RenderTargetLayer> const sptr) const
+{
+    SDL_Point const p { static_cast<int>(getOrigin().x), static_cast<int>(getOrigin().y) };
+
+    auto const flip = jt::getFlipFromScale(m_scale);
+    auto col = getOutlineColor();
+    col.a = std::min(col.a, m_color.a);
+    setSDLColor(col);
+
+    for (auto const& outlineOffset : getOutlineOffsets()) {
+        auto const destRect = getDestRect(outlineOffset);
+
+        SDL_RenderCopyEx(
+            sptr.get(), m_textTexture.get(), nullptr, &destRect, getRotation(), &p, flip);
+    }
 }
 
 void Text::doDraw(std::shared_ptr<jt::RenderTargetLayer> const sptr) const
@@ -100,7 +117,7 @@ void Text::doDraw(std::shared_ptr<jt::RenderTargetLayer> const sptr) const
     SDL_Point const p { static_cast<int>(getOrigin().x), static_cast<int>(getOrigin().y) };
 
     setSDLColor(getColor());
-    SDL_RenderCopyEx(sptr.get(), m_textTexture.get(), nullptr, &destRect, -getRotation(), &p,
+    SDL_RenderCopyEx(sptr.get(), m_textTexture.get(), nullptr, &destRect, getRotation(), &p,
         jt::getFlipFromScale(m_scale));
 }
 
@@ -110,7 +127,7 @@ void Text::doDrawFlash(std::shared_ptr<jt::RenderTargetLayer> const sptr) const
     SDL_Point const p { static_cast<int>(getOrigin().x), static_cast<int>(getOrigin().y) };
 
     setSDLColor(getFlashColor());
-    SDL_RenderCopyEx(sptr.get(), m_textTexture.get(), nullptr, &destRect, -getRotation(), &p,
+    SDL_RenderCopyEx(sptr.get(), m_textTexture.get(), nullptr, &destRect, getRotation(), &p,
         jt::getFlipFromScale(m_scale));
 }
 

@@ -4,9 +4,9 @@
 #include <color/color.hpp>
 #include <drawable_impl_sdl.hpp>
 #include <render_target.hpp>
+#include <sdl_2_include.hpp>
 #include <texture_manager_interface.hpp>
 #include <vector.hpp>
-#include <sdl_2_include.hpp>
 #include <memory>
 #include <string>
 
@@ -57,10 +57,9 @@ private:
 
     void doUpdate(float /*elapsed*/) override;
 
-    void doDraw(std::shared_ptr<jt::RenderTargetLayer> const sptr) const override;
-
+    void doDrawOutline(std::shared_ptr<jt::RenderTargetLayer> const sptr) const override;
     void doDrawShadow(std::shared_ptr<jt::RenderTargetLayer> const sptr) const override;
-
+    void doDraw(std::shared_ptr<jt::RenderTargetLayer> const sptr) const override;
     void doDrawFlash(std::shared_ptr<jt::RenderTargetLayer> const sptr) const override;
     void doRotate(float /*rot*/) override;
 

@@ -1,7 +1,6 @@
 ﻿#include <backend_setup.hpp>
 #include <drawable_helpers.hpp>
 #include <shape.hpp>
-#include <sprite.hpp>
 #include <text.hpp>
 #include <texture_manager_impl.hpp>
 #include <gtest/gtest.h>
