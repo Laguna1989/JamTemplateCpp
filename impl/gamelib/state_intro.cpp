@@ -9,8 +9,9 @@
 void StateIntro::onCreate()
 {
     m_sprite = std::make_shared<jt::Sprite>("assets/runvs_logo.png", textureManager());
-    //    m_sprite->setScale(jt::Vector2f { 0.5f, 0.5f });
-    m_sprite->setOffset(jt::OffsetMode::CENTER);
+    m_sprite->setOrigin(jt::OriginMode::CENTER);
+    //    m_sprite->setOffset(jt::OffsetMode::CENTER);
+    m_sprite->setScale(jt::Vector2f { 0.5f, 0.5f });
 
     m_jingle = getGame()->audio().addTemporarySound("assets/intro.mp3");
 }

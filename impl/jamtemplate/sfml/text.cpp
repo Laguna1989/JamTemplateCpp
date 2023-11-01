@@ -92,7 +92,12 @@ void jt::Text::doDrawShadow(std::shared_ptr<jt::RenderTargetLayer> const sptr) c
     jt::Vector2f const oldPos = fromLib(m_text->getPosition());
     auto const oldCol = fromLib(m_text->getFillColor());
 
-    m_text->setPosition(toLib(oldPos + getShadowOffset()));
+    auto const position = oldPos + getShadowOffset();
+
+    jt::Vector2f const pos = jt::Vector2f { static_cast<float>(static_cast<int>(position.x)),
+        static_cast<float>(static_cast<int>(position.y)) };
+
+    m_text->setPosition(toLib(pos));
     m_text->setFillColor(toLib(getShadowColor()));
     sptr->draw(*m_text);
 
