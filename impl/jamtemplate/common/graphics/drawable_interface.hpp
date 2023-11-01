@@ -115,6 +115,9 @@ public:
     virtual void setOrigin(jt::OriginMode origin) = 0;
 
     /// Get the originMode
+    ///
+    /// The originMode is used for rotation
+    ///
     /// \return the originMode
     virtual jt::OriginMode getOriginMode() const = 0;
 
@@ -134,16 +137,22 @@ public:
     /// \return the offset
     virtual jt::Vector2f getOffset() const = 0;
 
-    /// Set the rotation angle of the drawable (in degree)
+    /// Set the rotation angle of the drawable (in degree).
+    /// Rotation is done counter-clockwise.
     ///
-    /// Rotation will happen around the origin
+    /// Rotation will happen around the origin.
     ///
     /// \param angleInDegree the rotation
     virtual void setRotation(float angleInDegree) = 0;
 
-    /// Get the rotation angle of the drawable (in degree)
+    /// Get the rotation angle of the drawable (in degree).
+    /// Rotation is done counter-clockwise.
     /// \return the rotation angle
     virtual float getRotation() const = 0;
+
+    /// Set the outline width of the drawable
+    /// \param width outline width in pixel
+    virtual void setOutline(jt::Color const& col, int width) = 0;
 
     /// Set the shadow active status of the of the drawable
     /// \param active
@@ -153,13 +162,25 @@ public:
     /// \return the shadow active status
     virtual bool getShadowActive() const = 0;
 
-    /// Get the shadow color of the drawable
-    /// \return the color
+    /// Get the shadow color
+    /// \return the shadow color
     virtual jt::Color getShadowColor() const = 0;
 
     /// Get the shadow offset
     /// \return the offset in pixel
     virtual jt::Vector2f getShadowOffset() const = 0;
+
+    /// Get the outline active status of the drawable
+    /// \return the outline active status
+    virtual bool getOutlineActive() const = 0;
+
+    /// Get the outline color
+    /// \return the outline color
+    virtual jt::Color getOutlineColor() const = 0;
+
+    /// Get the outline width
+    /// \return the outline width in pixel
+    virtual int getOutlineWidth() const = 0;
 
     /// Set the shadow
     /// \param shadowColor the shadow color
@@ -216,9 +237,9 @@ public:
     virtual ~DrawableInterface() = default;
 
     // no copy, no move. Avoid slicing.
-    DrawableInterface(const DrawableInterface&) = delete;
+    DrawableInterface(DrawableInterface const&) = delete;
     DrawableInterface(DrawableInterface&&) = delete;
-    DrawableInterface& operator=(const DrawableInterface&) = delete;
+    DrawableInterface& operator=(DrawableInterface const&) = delete;
     DrawableInterface& operator=(DrawableInterface&&) = delete;
 
 protected:

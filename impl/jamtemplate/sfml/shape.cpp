@@ -105,7 +105,23 @@ void jt::Shape::doUpdate(float /*elapsed*/)
 void jt::Shape::doRotate(float rot)
 {
     if (m_shape) {
-        m_shape->setRotation(-rot);
-        m_flashShape->setRotation(-rot);
+        m_shape->setRotation(rot);
+        m_flashShape->setRotation(rot);
     }
+}
+
+void jt::Shape::doDrawOutline(std::shared_ptr<jt::RenderTargetLayer> const sptr) const
+{
+    jt::Vector2f const oldPos = fromLib(m_shape->getPosition());
+    jt::Color const oldCol = fromLib(m_shape->getFillColor());
+
+    m_shape->setFillColor(toLib(getOutlineColor()));
+
+    for (auto const outlineOffset : getOutlineOffsets()) {
+        m_shape->setPosition(toLib(oldPos + outlineOffset));
+        sptr->draw(*m_shape);
+    }
+
+    m_shape->setPosition(toLib(oldPos));
+    m_shape->setFillColor(toLib(oldCol));
 }

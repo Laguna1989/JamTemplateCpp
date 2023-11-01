@@ -29,21 +29,19 @@ void jt::Text::setText(std::string const& text)
     m_text->setString(text);
     m_flashText->setString(text);
 }
+
 std::string jt::Text::getText() const { return m_text->getString(); }
 
-void jt::Text::setOutline(float thickness, jt::Color col)
-{
-    m_text->setOutlineThickness(thickness);
-    m_text->setOutlineColor(toLib(col));
-}
-
 void jt::Text::setPosition(jt::Vector2f const& pos) { m_position = pos; }
+
 jt::Vector2f jt::Text::getPosition() const { return m_position; }
 
-void jt::Text::setColor(const jt::Color& col) { m_text->setFillColor(toLib(col)); }
+void jt::Text::setColor(jt::Color const& col) { m_text->setFillColor(toLib(col)); }
+
 jt::Color jt::Text::getColor() const { return fromLib(m_text->getFillColor()); }
 
 jt::Rectf jt::Text::getGlobalBounds() const { return fromLib(m_text->getGlobalBounds()); }
+
 jt::Rectf jt::Text::getLocalBounds() const { return fromLib(m_text->getLocalBounds()); }
 
 void jt::Text::setScale(jt::Vector2f const& scale)
@@ -63,6 +61,7 @@ void jt::Text::setOriginInternal(jt::Vector2f const& origin)
 }
 
 void jt::Text::setTextAlign(jt::Text::TextAlign ta) { m_textAlign = ta; }
+
 jt::Text::TextAlign jt::Text::getTextAlign() const { return m_textAlign; }
 
 void jt::Text::doUpdate(float /*elapsed*/)
@@ -101,6 +100,28 @@ void jt::Text::doDrawShadow(std::shared_ptr<jt::RenderTargetLayer> const sptr) c
     m_text->setFillColor(toLib(oldCol));
 }
 
+void jt::Text::doDrawOutline(std::shared_ptr<jt::RenderTargetLayer> const sptr) const
+{
+    jt::Vector2f const oldPos = fromLib(m_text->getPosition());
+    jt::Color const oldCol = fromLib(m_text->getFillColor());
+
+    m_text->setFillColor(toLib(getOutlineColor()));
+
+    auto const maxWidth = getOutlineWidth();
+    for (auto currentWidth = 1; currentWidth != maxWidth + 1; ++currentWidth) {
+        for (auto i = -currentWidth; i != currentWidth + 1; ++i) {
+            for (auto j = -currentWidth; j != currentWidth + 1; ++j) {
+                m_text->setPosition(
+                    toLib(oldPos + jt::Vector2f { static_cast<float>(i), static_cast<float>(j) }));
+                sptr->draw(*m_text);
+            }
+        }
+    }
+
+    m_text->setPosition(toLib(oldPos));
+    m_text->setFillColor(toLib(oldCol));
+}
+
 void jt::Text::doDraw(std::shared_ptr<jt::RenderTargetLayer> const sptr) const
 {
     sf::RenderStates states { getSfBlendMode() };
@@ -114,6 +135,6 @@ void jt::Text::doDrawFlash(std::shared_ptr<jt::RenderTargetLayer> const sptr) co
 
 void jt::Text::doRotate(float rot)
 {
-    m_text->setRotation(-rot);
-    m_flashText->setRotation(-rot);
+    m_text->setRotation(rot);
+    m_flashText->setRotation(rot);
 }

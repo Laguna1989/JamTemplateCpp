@@ -31,6 +31,7 @@ jt::Bar::Bar(
 }
 
 void jt::Bar::setFrontColor(jt::Color const& col) { m_shapeProgress->setColor(col); }
+
 void jt::Bar::setBackColor(jt::Color const& col) { m_shapeFull->setColor(col); }
 
 jt::Color jt::Bar::getBackColor() const { return m_shapeFull->getColor(); }
@@ -66,6 +67,7 @@ void jt::Bar::doDraw(std::shared_ptr<jt::RenderTargetLayer> const sptr) const
 }
 
 void jt::Bar::doDrawFlash(std::shared_ptr<jt::RenderTargetLayer> const /*sptr*/) const { }
+
 void jt::Bar::doDrawShadow(std::shared_ptr<jt::RenderTargetLayer> const sptr) const
 {
     jt::Vector2f const oldPos = m_shapeFull->getPosition();
@@ -73,7 +75,31 @@ void jt::Bar::doDrawShadow(std::shared_ptr<jt::RenderTargetLayer> const sptr) co
 
     m_shapeFull->setPosition(oldPos + getShadowOffset());
     m_shapeFull->setColor(getShadowColor());
+    m_shapeFull->update(0.0f);
     m_shapeFull->draw(sptr);
+
+    m_shapeFull->setPosition(oldPos);
+    m_shapeFull->setColor(oldCol);
+}
+
+void jt::Bar::doDrawOutline(std::shared_ptr<jt::RenderTargetLayer> const sptr) const
+{
+    jt::Vector2f const oldPos = m_shapeFull->getPosition();
+    jt::Color const oldCol = m_shapeFull->getColor();
+
+    m_shapeFull->setColor(getOutlineColor());
+
+    auto const maxWidth = getOutlineWidth();
+    for (auto currentWidth = 1; currentWidth != maxWidth + 1; ++currentWidth) {
+        for (auto i = -currentWidth; i != currentWidth; ++i) {
+            for (auto j = -currentWidth; j != currentWidth; ++j) {
+                m_shapeFull->setPosition(
+                    oldPos + jt::Vector2f { static_cast<float>(i), static_cast<float>(j) });
+                m_shapeFull->update(0.0f);
+                m_shapeFull->draw(sptr);
+            }
+        }
+    }
 
     m_shapeFull->setPosition(oldPos);
     m_shapeFull->setColor(oldCol);
@@ -101,6 +127,7 @@ void jt::Bar::doUpdate(float elapsed)
 void jt::Bar::doRotate(float /*rot*/) { }
 
 void jt::Bar::setColor(jt::Color const& col) { setFrontColor(col); }
+
 jt::Color jt::Bar::getColor() const { return m_shapeProgress->getColor(); }
 
 void jt::Bar::setPosition(jt::Vector2f const& pos) { m_position = pos; }
@@ -108,6 +135,7 @@ void jt::Bar::setPosition(jt::Vector2f const& pos) { m_position = pos; }
 jt::Vector2f jt::Bar::getPosition() const { return m_position; }
 
 jt::Rectf jt::Bar::getGlobalBounds() const { return m_shapeFull->getGlobalBounds(); }
+
 jt::Rectf jt::Bar::getLocalBounds() const { return m_shapeFull->getLocalBounds(); }
 
 void jt::Bar::setScale(jt::Vector2f const& scale)
@@ -128,4 +156,10 @@ void jt::Bar::setShadow(jt::Color const& color, jt::Vector2f const& offset)
 {
     m_shapeFull->setShadow(color, offset);
     DrawableImpl::setShadow(color, offset);
+}
+
+void jt::Bar::setOutline(jt::Color const& color, int width)
+{
+    m_shapeFull->setOutline(color, width);
+    DrawableImpl::setOutline(color, width);
 }

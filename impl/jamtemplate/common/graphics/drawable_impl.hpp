@@ -4,6 +4,7 @@
 #include <graphics/drawable_interface.hpp>
 #include <graphics/flash_impl.hpp>
 #include <graphics/flicker_impl.hpp>
+#include <graphics/outline_impl.hpp>
 #include <graphics/rotation_impl.hpp>
 #include <graphics/shadow_impl.hpp>
 #include <graphics/shake_impl.hpp>
@@ -19,6 +20,7 @@ class DrawableImpl :
     // implementation of flash, rotation, shadow and shake functionality via mix-in
     private jt::FlashImpl,
     private jt::FlickerImpl,
+    private jt::OutlineImpl,
     private jt::RotationImpl,
     private jt::ShadowImpl,
     private jt::ShakeImpl {
@@ -54,6 +56,13 @@ public:
 
     void setFlashColor(Color const& col) override;
     Color getFlashColor() const override;
+
+    bool getOutlineActive() const override;
+    void setOutline(jt::Color const& col, int width) override;
+    Color getOutlineColor() const override;
+    int getOutlineWidth() const override;
+
+    std::vector<jt::Vector2f> getOutlineOffsets() const;
 
     void setShadow(jt::Color const& col, jt::Vector2f const& offset) override;
     void setShadowActive(bool active) override;
@@ -94,6 +103,7 @@ protected:
     jt::Vector2f m_screenSizeHint { 0.0f, 0.0f };
 
     virtual void setOriginInternal(jt::Vector2f const& /*origin*/) { }
+
     float m_camMovementFactor { 1.0f };
 
     jt::OriginMode m_originMode { jt::OriginMode::MANUAL };

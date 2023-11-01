@@ -64,6 +64,7 @@ public:
 
     void setShadowActive(bool active) override;
     void setShadow(jt::Color const& color, jt::Vector2f const& offset) override;
+    void setOutline(jt::Color const& color, int width) override;
 
 private:
     float m_valueMax;
@@ -83,6 +84,8 @@ private:
     virtual void doDraw(std::shared_ptr<jt::RenderTargetLayer> const sptr) const override;
     virtual void doDrawFlash(std::shared_ptr<jt::RenderTargetLayer> const sptr) const override;
     virtual void doDrawShadow(std::shared_ptr<jt::RenderTargetLayer> const sptr) const override;
+
+    void doDrawOutline(std::shared_ptr<jt::RenderTargetLayer> const sptr) const override;
 
     // overwrite this method:
     // things to take care of:

@@ -24,6 +24,7 @@ void jt::DrawableImpl::draw(std::shared_ptr<RenderTargetLayer> sptr) const
         if (allowDrawFromFlicker()) {
 
             drawShadow(sptr);
+            drawOutline(sptr);
             doDraw(sptr);
             drawFlash(sptr);
         }
@@ -49,12 +50,15 @@ void jt::DrawableImpl::update(float elapsed)
 }
 
 jt::Vector2f jt::DrawableImpl::getOffset() const { return m_offset; }
+
 void jt::DrawableImpl::setOffset(jt::Vector2f const& offset)
 {
     m_offset = offset;
     m_offsetMode = jt::OffsetMode::MANUAL;
 }
+
 jt::OffsetMode jt::DrawableImpl::getOffsetMode() const { return m_offsetMode; }
+
 void jt::DrawableImpl::setOffset(jt::OffsetMode offset)
 {
     m_offsetMode = offset;
@@ -84,15 +88,19 @@ void jt::DrawableImpl::setOrigin(jt::OriginMode origin)
     }
     setOriginInternal(m_origin);
 }
+
 jt::Vector2f jt::DrawableImpl::getOrigin() const { return m_origin; }
 
 void jt::DrawableImpl::setRotation(float rot) { doSetRotation(rot); }
+
 float jt::DrawableImpl::getRotation() const { return doGetRotation(); }
 
 void jt::DrawableImpl::setShadowActive(bool active) { doSetShadowActive(active); }
 
 bool jt::DrawableImpl::getShadowActive() const { return doGetShadowActive(); }
+
 jt::Color jt::DrawableImpl::getShadowColor() const { return doGetShadowColor(); }
+
 jt::Vector2f jt::DrawableImpl::getShadowOffset() const { return doGetShadowOffset(); }
 
 void jt::DrawableImpl::setIgnoreCamMovement(bool ignore)
@@ -107,6 +115,8 @@ void jt::DrawableImpl::setShadow(jt::Color const& col, jt::Vector2f const& offse
 {
     doSetShadow(col, offset);
 }
+
+void jt::DrawableImpl::setOutline(jt::Color const& col, int width) { doSetOutline(col, width); }
 
 jt::Vector2f jt::DrawableImpl::getShakeOffset() const { return doGetShakeOffset(); }
 
@@ -124,10 +134,12 @@ jt::Vector2f jt::DrawableImpl::getCamOffset() const
 
 bool jt::DrawableImpl::getIgnoreCamMovement() const { return m_ignoreCamMovement; }
 
-void jt::DrawableImpl::setCamOffset(const jt::Vector2f& v) { m_CamOffset = v; }
+void jt::DrawableImpl::setCamOffset(jt::Vector2f const& v) { m_CamOffset = v; }
+
 jt::Vector2f jt::DrawableImpl::getStaticCamOffset() { return m_CamOffset; }
 
 void jt::DrawableImpl::setFlashColor(jt::Color const& col) { doSetFlashColor(col); }
+
 jt::Color jt::DrawableImpl::getFlashColor() const { return doGetFlashColor(); }
 
 void jt::DrawableImpl::setScreenSizeHint(jt::Vector2f const& hint) { m_screenSizeHint = hint; }
@@ -153,7 +165,9 @@ bool jt::DrawableImpl::isVisible() const
     }
     return true;
 }
+
 void jt::DrawableImpl::setBlendMode(jt::BlendMode mode) { m_blendMode = mode; }
+
 jt::BlendMode jt::DrawableImpl::getBlendMode() const { return m_blendMode; }
 
 jt::Vector2f jt::DrawableImpl::getScreenPosition() const
@@ -161,13 +175,29 @@ jt::Vector2f jt::DrawableImpl::getScreenPosition() const
     auto const camOffset = getStaticCamOffset();
     return getPosition() + camOffset * m_camMovementFactor;
 }
+
 jt::Vector2f jt::DrawableImpl::getScreenSizeHint() const { return m_screenSizeHint; }
+
 void jt::DrawableImpl::setCamMovementFactor(float factor)
 {
     m_camMovementFactor = factor;
     bool const ignoreCamMovement = m_camMovementFactor != 1.0f;
     m_ignoreCamMovement = ignoreCamMovement;
 }
+
 float jt::DrawableImpl::getCamMovementFactor() const { return m_camMovementFactor; }
+
 void jt::DrawableImpl::setZ(int z) { m_z = z; }
+
 int jt::DrawableImpl::getZ() const { return m_z; }
+
+bool jt::DrawableImpl::getOutlineActive() const { return getOutlineWidth() != 0; }
+
+jt::Color jt::DrawableImpl::getOutlineColor() const { return doGetOutlineColor(); }
+
+int jt::DrawableImpl::getOutlineWidth() const { return doGetOutlineWidth(); }
+
+std::vector<jt::Vector2f> jt::DrawableImpl::getOutlineOffsets() const
+{
+    return doGetOutlineOffsets();
+}

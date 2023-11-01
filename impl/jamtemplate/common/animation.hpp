@@ -108,6 +108,8 @@ public:
     void setShadowActive(bool active) override;
     void setShadow(jt::Color const& color, jt::Vector2f const& offset) override;
 
+    void setOutline(jt::Color const& color, int width) override;
+
     /// Get the frame time for one single frame in the current animation
     ///
     /// \return the time set in add for the currently playing animation
@@ -158,6 +160,7 @@ private:
     float m_animationplaybackSpeed { 1.0f };
 
     void doDrawShadow(std::shared_ptr<jt::RenderTargetLayer> const sptr) const override;
+    void doDrawOutline(std::shared_ptr<jt::RenderTargetLayer> const sptr) const override;
     void doDraw(std::shared_ptr<jt::RenderTargetLayer> const sptr) const override;
     void doDrawFlash(std::shared_ptr<jt::RenderTargetLayer> const /*sptr*/) const override;
 

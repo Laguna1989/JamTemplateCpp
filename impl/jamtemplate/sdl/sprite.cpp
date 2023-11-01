@@ -50,9 +50,11 @@ void Sprite::fromTexture(std::shared_ptr<SDL_Texture> txt)
 }
 
 void Sprite::setPosition(jt::Vector2f const& pos) { m_position = pos; }
+
 jt::Vector2f Sprite::getPosition() const { return m_position; }
 
 void Sprite::setColor(jt::Color const& col) { m_color = col; }
+
 jt::Color Sprite::getColor() const { return m_color; }
 
 jt::Rectf Sprite::getGlobalBounds() const
@@ -72,6 +74,7 @@ void Sprite::setScale(jt::Vector2f const& scale)
     m_scale = scale;
     setOriginInternal(m_origin);
 }
+
 jt::Vector2f Sprite::getScale() const { return m_scale; }
 
 jt::Color Sprite::getColorAtPixel(jt::Vector2u pixelPos) const
@@ -111,7 +114,7 @@ void Sprite::doDraw(std::shared_ptr<jt::RenderTargetLayer> const sptr) const
         static_cast<int>(getOrigin().y * m_scale.y) };
     SDL_SetRenderDrawBlendMode(sptr.get(), SDL_BLENDMODE_BLEND);
     setSDLColor(m_color);
-    SDL_RenderCopyEx(sptr.get(), m_text.get(), &sourceRect, &destRect, -getRotation(), &p, flip);
+    SDL_RenderCopyEx(sptr.get(), m_text.get(), &sourceRect, &destRect, getRotation(), &p, flip);
 }
 
 void Sprite::doDrawShadow(std::shared_ptr<jt::RenderTargetLayer> const sptr) const
@@ -123,7 +126,22 @@ void Sprite::doDrawShadow(std::shared_ptr<jt::RenderTargetLayer> const sptr) con
         static_cast<int>(getOrigin().y * m_scale.y) };
     SDL_SetRenderDrawBlendMode(sptr.get(), SDL_BLENDMODE_BLEND);
     setSDLColor(getShadowColor());
-    SDL_RenderCopyEx(sptr.get(), m_text.get(), &sourceRect, &destRect, -getRotation(), &p, flip);
+    SDL_RenderCopyEx(sptr.get(), m_text.get(), &sourceRect, &destRect, getRotation(), &p, flip);
+}
+
+void Sprite::doDrawOutline(std::shared_ptr<jt::RenderTargetLayer> const sptr) const
+{
+    SDL_Rect const sourceRect = getSourceRect();
+    auto const flip = jt::getFlipFromScale(m_scale);
+    SDL_Point const p { static_cast<int>(getOrigin().x * m_scale.x),
+        static_cast<int>(getOrigin().y * m_scale.y) };
+    setSDLColor(getOutlineColor());
+    SDL_SetRenderDrawBlendMode(sptr.get(), SDL_BLENDMODE_BLEND);
+    for (auto const& outlineOffset : getOutlineOffsets()) {
+        SDL_Rect const destRect = getDestRect(outlineOffset);
+
+        SDL_RenderCopyEx(sptr.get(), m_text.get(), &sourceRect, &destRect, getRotation(), &p, flip);
+    }
 }
 
 void Sprite::doDrawFlash(std::shared_ptr<jt::RenderTargetLayer> const sptr) const
@@ -138,7 +156,7 @@ void Sprite::doDrawFlash(std::shared_ptr<jt::RenderTargetLayer> const sptr) cons
         m_textFlash.get(), getFlashColor().r, getFlashColor().g, getFlashColor().b);
     SDL_SetTextureAlphaMod(m_textFlash.get(), getFlashColor().a);
     SDL_RenderCopyEx(
-        sptr.get(), m_textFlash.get(), &sourceRect, &destRect, -getRotation(), &p, flip);
+        sptr.get(), m_textFlash.get(), &sourceRect, &destRect, getRotation(), &p, flip);
 }
 
 void Sprite::doRotate(float /*rot*/) { }

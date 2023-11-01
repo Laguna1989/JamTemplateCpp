@@ -3,12 +3,20 @@
 #include <math_helper.hpp>
 #include <vector_lib.hpp>
 
+jt::Line::Line()
+    : Line { jt::Vector2f { 0.0f, 0.0f } }
+{
+}
+
 jt::Line::Line(jt::Vector2f lineVector)
     : m_lineVector { std::move(lineVector) }
     , m_color { jt::colors::White }
-
 {
 }
+
+void jt::Line::setLineVector(jt::Vector2f const& lineVector) { m_lineVector = lineVector; }
+
+jt::Vector2f jt::Line::getLineVector() const { return m_lineVector; }
 
 void jt::Line::doUpdate(float /*elapsed*/) { }
 
@@ -52,6 +60,22 @@ void jt::Line::doDrawShadow(std::shared_ptr<jt::RenderTargetLayer> const sptr) c
     line[0] = sf::Vertex { toLib(startPosition), toLib(getShadowColor()) };
     line[1] = sf::Vertex { toLib(endPosition), toLib(getShadowColor()) };
     sptr->draw(line);
+}
+
+void jt::Line::doDrawOutline(std::shared_ptr<jt::RenderTargetLayer> const sptr) const
+{
+    auto const startPosition
+        = getPosition() + getShakeOffset() + getOffset() + getCamOffset() + getShadowOffset();
+    auto const endPosition = startPosition
+        + jt::Vector2f { m_lineVector.x * m_scale.x, m_lineVector.y * m_scale.y }
+        + getShadowOffset();
+
+    for (auto const outlineOffset : getOutlineOffsets()) {
+        sf::VertexArray line { sf::Lines, 2 };
+        line[0] = sf::Vertex { toLib(startPosition + outlineOffset), toLib(getOutlineColor()) };
+        line[1] = sf::Vertex { toLib(endPosition + outlineOffset), toLib(getOutlineColor()) };
+        sptr->draw(line);
+    }
 }
 
 void jt::Line::doRotate(float d) { m_lineVector = jt::MathHelper::rotateBy(m_lineVector, d); }

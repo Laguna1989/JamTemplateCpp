@@ -37,6 +37,10 @@ public:
     void doDrawFlash(std::shared_ptr<jt::RenderTargetLayer> sptr) const override;
     void doDrawShadow(std::shared_ptr<jt::RenderTargetLayer> sptr) const override;
 
+private:
+    void doDrawOutline(std::shared_ptr<jt::RenderTargetLayer> const sptr) const override;
+
+public:
     void doUpdate(float elapsed) override;
 
     void setColor(jt::Color const& col) override;

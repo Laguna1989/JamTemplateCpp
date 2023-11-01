@@ -53,12 +53,17 @@ public:
     MOCK_METHOD(jt::Vector2f, getShadowOffset, (), (const, override));
     MOCK_METHOD(void, setShadow, (jt::Color const&, jt::Vector2f const&), (override));
 
+    MOCK_METHOD(bool, getOutlineActive, (), (const, override));
+    MOCK_METHOD(void, setOutline, (jt::Color const&, int), (override));
+    MOCK_METHOD(jt::Color, getOutlineColor, (), (const, override));
+    MOCK_METHOD(int, getOutlineWidth, (), (const, override));
+
     MOCK_METHOD(void, setIgnoreCamMovement, (bool), (override));
     MOCK_METHOD(bool, getIgnoreCamMovement, (), (const, override));
 
     MOCK_METHOD(void, setScreenSizeHint, (jt::Vector2f const& hint), (override));
     MOCK_METHOD(jt::Vector2f, getScreenSizeHint, (), (const, override));
-    
+
     MOCK_METHOD(void, setBlendMode, (jt::BlendMode), (override));
     MOCK_METHOD(jt::BlendMode, getBlendMode, (), (const, override));
 

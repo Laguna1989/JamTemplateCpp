@@ -9,7 +9,10 @@ jt::RenderWindow::RenderWindow(unsigned int width, unsigned int height, std::str
         = std::make_shared<sf::RenderWindow>(sf::VideoMode(width, height), title, sf::Style::Close);
     m_window->setVerticalSyncEnabled(true);
 
-    ImGui::SFML::Init(*m_window.get());
+    auto const returnValue = ImGui::SFML::Init(*m_window.get());
+    if (!returnValue) {
+        throw std::invalid_argument { "SFML ImGui initialization failed." };
+    }
 }
 
 jt::RenderWindow::~RenderWindow()

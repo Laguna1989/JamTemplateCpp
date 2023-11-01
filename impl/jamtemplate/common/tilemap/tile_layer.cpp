@@ -68,9 +68,17 @@ void jt::tilemap::TileLayer::doDrawFlash(
     std::shared_ptr<jt::RenderTargetLayer> const /*sptr*/) const
 {
 }
+
 void jt::tilemap::TileLayer::doDrawShadow(
     std::shared_ptr<jt::RenderTargetLayer> const /*sptr*/) const
 {
+    // Nothing to do
+}
+
+void jt::tilemap::TileLayer::doDrawOutline(
+    std::shared_ptr<jt::RenderTargetLayer> const /*sptr*/) const
+{
+    // Nothing to do
 }
 
 void jt::tilemap::TileLayer::doUpdate(float /*elapsed*/) { }
@@ -82,9 +90,11 @@ void jt::tilemap::TileLayer::setColor(jt::Color const& col)
     }
     m_color = col;
 }
+
 jt::Color jt::tilemap::TileLayer::getColor() const { return m_color; }
 
 void jt::tilemap::TileLayer::setPosition(jt::Vector2f const& pos) { m_position = pos; }
+
 jt::Vector2f jt::tilemap::TileLayer::getPosition() const { return m_position; }
 
 jt::Rectf jt::tilemap::TileLayer::getGlobalBounds() const
@@ -92,6 +102,7 @@ jt::Rectf jt::tilemap::TileLayer::getGlobalBounds() const
     return jt::Rectf { getPosition().x, getPosition().y, std::numeric_limits<float>::max(),
         std::numeric_limits<float>::max() };
 }
+
 jt::Rectf jt::tilemap::TileLayer::getLocalBounds() const
 {
     return jt::Rectf { getPosition().x, getPosition().y, std::numeric_limits<float>::max(),
@@ -99,6 +110,7 @@ jt::Rectf jt::tilemap::TileLayer::getLocalBounds() const
 }
 
 void jt::tilemap::TileLayer::setScale(jt::Vector2f const& scale) { m_scale = scale; }
+
 jt::Vector2f jt::tilemap::TileLayer::getScale() const { return m_scale; }
 
 void jt::tilemap::TileLayer::setOriginInternal(jt::Vector2f const& origin)
@@ -114,6 +126,7 @@ void jt::tilemap::TileLayer::doRotate(float rot)
         ts->setRotation(rot);
     }
 }
+
 void jt::tilemap::TileLayer::setColorFunction(
     std::function<jt::Color(jt::Vector2f const&)> colorFunc)
 {
