@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1698788949413,
+  "lastUpdate": 1698825815733,
   "repoUrl": "https://github.com/Laguna1989/JamTemplateCpp",
   "entries": {
     "Benchmark": [
@@ -13464,6 +13464,84 @@ window.BENCHMARK_DATA = {
             "value": 3.3455737894736117,
             "unit": "ms/iter",
             "extra": "iterations: 209\ncpu: 3.345466985645931 ms\nthreads: 1"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "laguna.ws@gmail.com",
+            "name": "Laguna1989",
+            "username": "Laguna1989"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "9242fa4b5f4b9020b52b2f30558862edb4ec2ecd",
+          "message": "Merge pull request #298 from Laguna1989/feature/DrawableOutlines\n\nAdd Outline functionality to all Drawables. Fix Rotation orientation",
+          "timestamp": "2023-11-01T08:59:19+01:00",
+          "tree_id": "e27d601bcf5e5e3e174a8d6ef79d2f6c6cb3595e",
+          "url": "https://github.com/Laguna1989/JamTemplateCpp/commit/9242fa4b5f4b9020b52b2f30558862edb4ec2ecd"
+        },
+        "date": 1698825814469,
+        "tool": "googlecpp",
+        "benches": [
+          {
+            "name": "BM_UpdateDrawablePositions",
+            "value": 4.870438617449539,
+            "unit": "ms/iter",
+            "extra": "iterations: 149\ncpu: 4.869438926174497 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GetAllCommands",
+            "value": 0.44157184255588555,
+            "unit": "ms/iter",
+            "extra": "iterations: 1518\ncpu: 0.44148247694334647 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_LoggerLogWithoutTarget",
+            "value": 0.4276189582308776,
+            "unit": "ms/iter",
+            "extra": "iterations: 1628\ncpu: 0.4275448402948403 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_LoggerLogWithCoutTargetSetToOff",
+            "value": 0.43292905021698247,
+            "unit": "ms/iter",
+            "extra": "iterations: 1613\ncpu: 0.4318654060756353 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_UpdateObjectGroup",
+            "value": 0.05968123911748117,
+            "unit": "ms/iter",
+            "extra": "iterations: 11739\ncpu: 0.0596704404123009 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_UpdateSpatialObjectGrid",
+            "value": 0.3899229545202437,
+            "unit": "ms/iter",
+            "extra": "iterations: 1803\ncpu: 0.3898293399889076 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_StartGame",
+            "value": 0.0044235407204483235,
+            "unit": "ms/iter",
+            "extra": "iterations: 158790\ncpu: 0.00442270483027898 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_RefineTilemapCollisions",
+            "value": 0.22256007192870525,
+            "unit": "ms/iter",
+            "extra": "iterations: 3142\ncpu: 0.22250585614258428 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GamestateWithTweeningShapes",
+            "value": 4.273310280487616,
+            "unit": "ms/iter",
+            "extra": "iterations: 164\ncpu: 4.2727274390243934 ms\nthreads: 1"
           }
         ]
       }
