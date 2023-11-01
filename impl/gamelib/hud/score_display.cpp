@@ -12,5 +12,6 @@ void ScoreDisplay::notify(int value)
 {
     if (value >= 0) {
         m_scoreText->setText(m_textPrefix + std::to_string(value) + m_textPostfix);
+        m_scoreText->update(0.0f);
     }
 }
