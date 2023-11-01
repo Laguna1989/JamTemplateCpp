@@ -1,3 +1,4 @@
+#include <color/color.hpp>
 #include <color/color_factory.hpp>
 #include <color/color_modifications.hpp>
 #include <gtest/gtest.h>
@@ -99,12 +100,30 @@ TEST(ColorModificationTest, DarkenRedResultsInDarkerRed)
     ASSERT_EQ(darkenedColor, expectedColor);
 }
 
-TEST(ColorModificationTest, LightenDarkerBlueResultsInBlue)
+TEST(ColorModificationTest, LightenADarkBlueResultsInBlue)
 {
     auto const initialColor = jt::ColorFactory::fromHSV(240.0f, 100.0f, 50.0f);
     auto const lightenedColor = jt::ColorModifications::lighten(initialColor, 50.0f);
-    // Due to rounding errors in hsv2rgb the resulting color is not "true" blue
+    // Due to floating point rounding errors in hsv2rgb the resulting color is not "true" blue
     auto const expectedColor = jt::ColorFactory::fromRGB(0, 0, 254);
 
     ASSERT_EQ(lightenedColor, expectedColor);
+}
+
+TEST(ColorModificationTest, Complement)
+{
+    std::vector<std::pair<jt::Color, jt::Color>> testData {
+        std::make_pair(jt::colors::White, jt::colors::Black),
+        std::make_pair(jt::colors::Red, jt::colors::Cyan),
+        std::make_pair(jt::colors::Green, jt::colors::Magenta),
+        std::make_pair(jt::colors::Blue, jt::colors::Yellow),
+    };
+
+    for (auto const& kvp : testData) {
+        auto const initialColor = kvp.first;
+        auto const expectedColor = kvp.second;
+        auto const calculatedComplement = jt::ColorModifications::complement(initialColor);
+
+        ASSERT_EQ(calculatedComplement, expectedColor);
+    }
 }

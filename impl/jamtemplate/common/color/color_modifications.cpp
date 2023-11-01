@@ -55,3 +55,15 @@ jt::Color jt::ColorModifications::lighten(jt::Color const& color, float value)
 {
     return darken(color, -value);
 }
+
+jt::Color jt::ColorModifications::complement(jt::Color const& color)
+{
+    return jt::Color {
+        // clang-format off
+        static_cast<std::uint8_t>(255u - color.r),
+        static_cast<std::uint8_t>(255u - color.g),
+        static_cast<std::uint8_t>(255u - color.b),
+        color.a
+        // clang-format on
+    };
+}
