@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1698830842544,
+  "lastUpdate": 1698851305022,
   "repoUrl": "https://github.com/Laguna1989/JamTemplateCpp",
   "entries": {
     "Benchmark": [
@@ -13698,6 +13698,84 @@ window.BENCHMARK_DATA = {
             "value": 4.531871259259128,
             "unit": "ms/iter",
             "extra": "iterations: 162\ncpu: 4.530748765432098 ms\nthreads: 1"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "laguna.ws@gmail.com",
+            "name": "Laguna1989",
+            "username": "Laguna1989"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "7b61cd988a3603145de31ebd9252b63a5ccd312c",
+          "message": "Merge pull request #300 from Laguna1989/feature/AdjustScreenSizeAndZoom\n\nAdjust Default Window Size and Zoom",
+          "timestamp": "2023-11-01T16:05:40+01:00",
+          "tree_id": "2d502d545335fd5890ed8a6e4367782bb2c26d3b",
+          "url": "https://github.com/Laguna1989/JamTemplateCpp/commit/7b61cd988a3603145de31ebd9252b63a5ccd312c"
+        },
+        "date": 1698851303729,
+        "tool": "googlecpp",
+        "benches": [
+          {
+            "name": "BM_UpdateDrawablePositions",
+            "value": 6.581218946428586,
+            "unit": "ms/iter",
+            "extra": "iterations: 112\ncpu: 6.556775892857144 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GetAllCommands",
+            "value": 0.40602360517242553,
+            "unit": "ms/iter",
+            "extra": "iterations: 1740\ncpu: 0.40529247126436785 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_LoggerLogWithoutTarget",
+            "value": 0.4316881436464223,
+            "unit": "ms/iter",
+            "extra": "iterations: 1629\ncpu: 0.43159073050951496 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_LoggerLogWithCoutTargetSetToOff",
+            "value": 0.4336489462299033,
+            "unit": "ms/iter",
+            "extra": "iterations: 1618\ncpu: 0.4314163164400496 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_UpdateObjectGroup",
+            "value": 0.05964610596081087,
+            "unit": "ms/iter",
+            "extra": "iterations: 12146\ncpu: 0.05963767495471763 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_UpdateSpatialObjectGrid",
+            "value": 0.41145630648899584,
+            "unit": "ms/iter",
+            "extra": "iterations: 1726\ncpu: 0.41006251448435704 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_StartGame",
+            "value": 0.004566911476321899,
+            "unit": "ms/iter",
+            "extra": "iterations: 154614\ncpu: 0.004558890527377859 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_RefineTilemapCollisions",
+            "value": 0.24762698236513955,
+            "unit": "ms/iter",
+            "extra": "iterations: 2892\ncpu: 0.2475859958506222 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GamestateWithTweeningShapes",
+            "value": 4.382206304093514,
+            "unit": "ms/iter",
+            "extra": "iterations: 171\ncpu: 4.381660818713451 ms\nthreads: 1"
           }
         ]
       }
