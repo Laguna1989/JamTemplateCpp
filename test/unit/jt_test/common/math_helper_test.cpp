@@ -247,6 +247,7 @@ TEST(ClampVectorTest, upperX)
     ASSERT_EQ(upper, out.x);
     ASSERT_EQ(0.5f, out.y);
 }
+
 TEST(ClampVectorTest, upperY)
 {
     jt::Vector2f const in { 0.5f, 9999.9f };
@@ -369,4 +370,26 @@ TEST(CheckIsIn, OutsideY)
     jt::Rectf const rect { 1.0f, 1.0f, 1.0f, 1.0f };
     jt::Vector2f const point { 1.5f, 5.5f };
     ASSERT_FALSE(jt::MathHelper::checkIsIn(rect, point));
+}
+
+TEST(CastToInteger, CorrectlyCastsDown)
+{
+    std::vector<std::pair<float, float>> const testData {
+        // clang-format off
+        std::make_pair(0.0f, 0.0f),
+        std::make_pair(100.0f, 100.0f),
+        std::make_pair(0.9f, 0.0f),
+        std::make_pair(0.1f, 0.0f),
+        std::make_pair(-0.1f, -0.0f),
+        std::make_pair(1000.1f, 1000.0f),
+        // clang-format on
+    };
+
+    for (auto const& kvp : testData) {
+        auto const castedVector
+            = jt::MathHelper::castToInteger(jt::Vector2f { kvp.first, kvp.first });
+        auto const expectedResult = jt::Vector2f { kvp.second, kvp.second };
+        ASSERT_NEAR(castedVector.x, expectedResult.x, 0.0001f);
+        ASSERT_NEAR(castedVector.y, expectedResult.y, 0.0001f);
+    }
 }

@@ -59,25 +59,23 @@ void jt::GfxImpl::clear() { m_target->clearPixels(); }
 
 void jt::GfxImpl::display()
 {
-    m_target->forall([this](auto t) {
-        if (t == nullptr) {
-            throw std::invalid_argument {
-                "GfXImpl::display called with nullptr jt::RenderTargetLayer"
-            };
-        }
-        drawOneZLayer(*t);
-    });
+    m_target->forall([this](auto& layer) { drawOneZLayer(layer); });
     m_window.display();
 }
 
-void jt::GfxImpl::drawOneZLayer(jt::RenderTargetLayer& rt)
+void jt::GfxImpl::drawOneZLayer(std::shared_ptr<jt::RenderTargetLayer>& layer)
 {
-    // convert renderTarget to sprite and draw that.
-    auto spriteForDrawing = std::make_unique<Sprite>();
-    spriteForDrawing->fromTexture(rt.getTexture());
+    if (layer == nullptr) {
+        throw std::invalid_argument {
+            "GfXImpl::display called with nullptr jt::RenderTargetLayer"
+        };
+    }
+    // convert renderTarget to sprite and draw that
+    auto spriteForDrawing = std::make_unique<jt::Sprite>();
+    spriteForDrawing->fromTexture(layer->getTexture());
     auto const shakeOffset = m_camera.getShakeOffset();
     spriteForDrawing->setPosition(shakeOffset);
-    // Note: RenderTexture has a bug and is displayed upside down.
+    // Note: RenderTexture has a bug and is displayed upside down
     horizontalFlip(spriteForDrawing, m_camera.getZoom(), m_window.getSize().y);
     m_window.draw(spriteForDrawing);
 }

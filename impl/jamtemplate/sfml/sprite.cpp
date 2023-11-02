@@ -1,5 +1,6 @@
 ﻿#include "sprite.hpp"
 #include <color_lib.hpp>
+#include <math_helper.hpp>
 #include <rect_lib.hpp>
 #include <vector_lib.hpp>
 
@@ -65,8 +66,8 @@ void jt::Sprite::cleanImage()
 
 void jt::Sprite::doUpdate(float /*elapsed*/)
 {
-    auto const screenPosition
-        = getPosition() + getShakeOffset() + getOffset() + getCompleteCamOffset();
+    auto const screenPosition = jt::MathHelper::castToInteger(
+        getPosition() + getShakeOffset() + getOffset() + getCompleteCamOffset());
     m_sprite.setPosition(screenPosition.x, screenPosition.y);
     m_flashSprite.setPosition(screenPosition.x, screenPosition.y);
     m_flashSprite.setColor(toLib(getFlashColor()));
@@ -78,7 +79,7 @@ void jt::Sprite::doDrawShadow(std::shared_ptr<jt::RenderTargetLayer> const sptr)
         jt::Vector2f const oldPos = fromLib(m_sprite.getPosition());
         auto const oldCol = fromLib(m_sprite.getColor());
 
-        m_sprite.setPosition(toLib(oldPos + getShadowOffset()));
+        m_sprite.setPosition(toLib(jt::MathHelper::castToInteger(oldPos + getShadowOffset())));
         m_sprite.setColor(toLib(getShadowColor()));
         sptr->draw(m_sprite);
 
@@ -95,7 +96,7 @@ void jt::Sprite::doDrawOutline(std::shared_ptr<jt::RenderTargetLayer> const sptr
     m_sprite.setColor(toLib(getOutlineColor()));
 
     for (auto const outlineOffset : getOutlineOffsets()) {
-        m_sprite.setPosition(toLib(oldPos + outlineOffset));
+        m_sprite.setPosition(toLib(jt::MathHelper::castToInteger(oldPos + outlineOffset)));
         sptr->draw(m_sprite);
     }
 

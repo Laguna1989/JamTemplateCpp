@@ -9,7 +9,7 @@ class RenderTarget : public RenderTargetInterface {
 public:
     std::shared_ptr<jt::RenderTargetLayer> get(int z) override;
 
-    void forall(std::function<void(std::shared_ptr<jt::RenderTargetLayer>)> func);
+    void forall(std::function<void(std::shared_ptr<jt::RenderTargetLayer>&)> func);
     void add(int z, std::shared_ptr<jt::RenderTargetLayer> target);
     void clearPixels();
 

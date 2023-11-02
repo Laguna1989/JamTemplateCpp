@@ -10,11 +10,8 @@ void jt::Star::setPosition(jt::Vector2f const& screenSizeHint)
     if (!m_shape) {
         throw std::logic_error { "Cannot set star position before create has been called." };
     }
-    auto p = jt::Random::getRandomPointIn(
-        jt::Rectf { 0.0f, 0.0f, screenSizeHint.x, screenSizeHint.y });
-
-    p.x = static_cast<float>(static_cast<int>(p.x));
-    p.y = static_cast<float>(static_cast<int>(p.y));
+    auto const p = jt::MathHelper::castToInteger(
+        jt::Random::getRandomPointIn(jt::Rectf { 0.0f, 0.0f, screenSizeHint.x, screenSizeHint.y }));
 
     m_shape->setPosition(p);
     m_shape->setScreenSizeHint(screenSizeHint);
@@ -89,6 +86,7 @@ void jt::Star::doDraw() const
     m_glow->draw(getGame()->gfx().target());
     m_shape->draw(getGame()->gfx().target());
 }
+
 void jt::Star::setCamMovementFactor(float factor)
 {
     m_shape->setCamMovementFactor(factor);

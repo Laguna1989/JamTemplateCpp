@@ -1,5 +1,6 @@
 ﻿#include "shape.hpp"
 #include <color_lib.hpp>
+#include <math_helper.hpp>
 #include <rect_lib.hpp>
 #include <vector_lib.hpp>
 
@@ -63,6 +64,51 @@ void jt::Shape::setOriginInternal(jt::Vector2f const& origin)
     }
 }
 
+void jt::Shape::doUpdate(float /*elapsed*/)
+{
+    if (!m_shape) {
+        return;
+    }
+
+    auto const floatPos = getPosition() + getShakeOffset() + getOffset() + getCompleteCamOffset();
+
+    auto const screenPosition = jt::MathHelper::castToInteger(floatPos);
+    m_shape->setPosition(screenPosition.x, screenPosition.y);
+    m_flashShape->setPosition(screenPosition.x, screenPosition.y);
+    m_flashShape->setFillColor(toLib(getFlashColor()));
+}
+
+void jt::Shape::doDrawShadow(std::shared_ptr<jt::RenderTargetLayer> const sptr) const
+{
+    if (sptr) {
+        jt::Vector2f const oldPos = fromLib(m_shape->getPosition());
+        auto const oldCol = fromLib(m_shape->getFillColor());
+
+        m_shape->setPosition(toLib(jt::MathHelper::castToInteger(oldPos + getShadowOffset())));
+        m_shape->setFillColor(toLib(getShadowColor()));
+        sptr->draw(*m_shape);
+
+        m_shape->setPosition(toLib(oldPos));
+        m_shape->setFillColor(toLib(oldCol));
+    }
+}
+
+void jt::Shape::doDrawOutline(std::shared_ptr<jt::RenderTargetLayer> const sptr) const
+{
+    jt::Vector2f const oldPos = fromLib(m_shape->getPosition());
+    jt::Color const oldCol = fromLib(m_shape->getFillColor());
+
+    m_shape->setFillColor(toLib(getOutlineColor()));
+
+    for (auto const outlineOffset : getOutlineOffsets()) {
+        m_shape->setPosition(toLib(jt::MathHelper::castToInteger(oldPos + outlineOffset)));
+        sptr->draw(*m_shape);
+    }
+
+    m_shape->setPosition(toLib(oldPos));
+    m_shape->setFillColor(toLib(oldCol));
+}
+
 void jt::Shape::doDraw(std::shared_ptr<jt::RenderTargetLayer> const sptr) const
 {
     sf::RenderStates states { getSfBlendMode() };
@@ -76,52 +122,10 @@ void jt::Shape::doDrawFlash(std::shared_ptr<jt::RenderTargetLayer> const sptr) c
     }
 }
 
-void jt::Shape::doDrawShadow(std::shared_ptr<jt::RenderTargetLayer> const sptr) const
-{
-    if (sptr) {
-        jt::Vector2f const oldPos = fromLib(m_shape->getPosition());
-        auto const oldCol = fromLib(m_shape->getFillColor());
-
-        m_shape->setPosition(toLib(oldPos + getShadowOffset()));
-        m_shape->setFillColor(toLib(getShadowColor()));
-        sptr->draw(*m_shape);
-
-        m_shape->setPosition(toLib(oldPos));
-        m_shape->setFillColor(toLib(oldCol));
-    }
-}
-
-void jt::Shape::doUpdate(float /*elapsed*/)
-{
-    if (m_shape) {
-        auto const screenPosition
-            = getPosition() + getShakeOffset() + getOffset() + getCompleteCamOffset();
-        m_shape->setPosition(screenPosition.x, screenPosition.y);
-        m_flashShape->setPosition(screenPosition.x, screenPosition.y);
-        m_flashShape->setFillColor(toLib(getFlashColor()));
-    }
-}
-
 void jt::Shape::doRotate(float rot)
 {
     if (m_shape) {
         m_shape->setRotation(rot);
         m_flashShape->setRotation(rot);
     }
-}
-
-void jt::Shape::doDrawOutline(std::shared_ptr<jt::RenderTargetLayer> const sptr) const
-{
-    jt::Vector2f const oldPos = fromLib(m_shape->getPosition());
-    jt::Color const oldCol = fromLib(m_shape->getFillColor());
-
-    m_shape->setFillColor(toLib(getOutlineColor()));
-
-    for (auto const outlineOffset : getOutlineOffsets()) {
-        m_shape->setPosition(toLib(oldPos + outlineOffset));
-        sptr->draw(*m_shape);
-    }
-
-    m_shape->setPosition(toLib(oldPos));
-    m_shape->setFillColor(toLib(oldCol));
 }
