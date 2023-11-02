@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1698851305022,
+  "lastUpdate": 1698915306027,
   "repoUrl": "https://github.com/Laguna1989/JamTemplateCpp",
   "entries": {
     "Benchmark": [
@@ -13776,6 +13776,84 @@ window.BENCHMARK_DATA = {
             "value": 4.382206304093514,
             "unit": "ms/iter",
             "extra": "iterations: 171\ncpu: 4.381660818713451 ms\nthreads: 1"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "laguna.ws@gmail.com",
+            "name": "Laguna1989",
+            "username": "Laguna1989"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "8b83929c569b094b59e1f9c8e5b705b4124bc98c",
+          "message": "Merge pull request #302 from Laguna1989/fix/RenameRenderTargetLayer\n\nFix/rename render target layer",
+          "timestamp": "2023-11-02T09:50:28+01:00",
+          "tree_id": "d17c7f2060b129722798d77312197ce39d7e62f5",
+          "url": "https://github.com/Laguna1989/JamTemplateCpp/commit/8b83929c569b094b59e1f9c8e5b705b4124bc98c"
+        },
+        "date": 1698915304578,
+        "tool": "googlecpp",
+        "benches": [
+          {
+            "name": "BM_UpdateDrawablePositions",
+            "value": 8.258748146067518,
+            "unit": "ms/iter",
+            "extra": "iterations: 89\ncpu: 8.243579775280898 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GetAllCommands",
+            "value": 0.4146763479498688,
+            "unit": "ms/iter",
+            "extra": "iterations: 1756\ncpu: 0.4117471526195901 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_LoggerLogWithoutTarget",
+            "value": 0.4396246912413373,
+            "unit": "ms/iter",
+            "extra": "iterations: 1587\ncpu: 0.43957441713925643 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_LoggerLogWithCoutTargetSetToOff",
+            "value": 0.4587505453972253,
+            "unit": "ms/iter",
+            "extra": "iterations: 1586\ncpu: 0.4587217528373265 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_UpdateObjectGroup",
+            "value": 0.061375118164502106,
+            "unit": "ms/iter",
+            "extra": "iterations: 11027\ncpu: 0.06136548471932532 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_UpdateSpatialObjectGrid",
+            "value": 0.44440674099723354,
+            "unit": "ms/iter",
+            "extra": "iterations: 1444\ncpu: 0.44434722991689724 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_StartGame",
+            "value": 0.004785711228311701,
+            "unit": "ms/iter",
+            "extra": "iterations: 143913\ncpu: 0.004782132955327172 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_RefineTilemapCollisions",
+            "value": 0.20345259422361847,
+            "unit": "ms/iter",
+            "extra": "iterations: 3497\ncpu: 0.2034236488418643 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GamestateWithTweeningShapes",
+            "value": 4.658035806451813,
+            "unit": "ms/iter",
+            "extra": "iterations: 155\ncpu: 4.657538064516127 ms\nthreads: 1"
           }
         ]
       }
