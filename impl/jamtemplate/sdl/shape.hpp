@@ -3,7 +3,7 @@
 
 #include <drawable_impl_sdl.hpp>
 #include <rect.hpp>
-#include <render_target.hpp>
+#include <render_target_layer.hpp>
 #include <sdl_2_include.hpp>
 #include <texture_manager_interface.hpp>
 #include <vector.hpp>

@@ -2,7 +2,7 @@
 #define JAMTEMPLATE_LINE_HPP
 
 #include <drawable_impl_sdl.hpp>
-#include <render_target.hpp>
+#include <render_target_layer.hpp>
 #include <vector.hpp>
 
 namespace jt {

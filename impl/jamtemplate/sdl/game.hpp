@@ -4,7 +4,7 @@
 #include <game_base.hpp>
 #include <graphics/render_window_interface.hpp>
 #include <rect.hpp>
-#include <render_target.hpp>
+#include <render_target_layer.hpp>
 #include <chrono>
 #include <memory>
 #include <string>

@@ -9,7 +9,7 @@
 #include <graphics/render_window_interface.hpp>
 #include <input/input_manager_interface.hpp>
 #include <log/logger_interface.hpp>
-#include <render_target.hpp>
+#include <render_target_layer.hpp>
 #include <state_manager/state_manager_interface.hpp>
 #include <memory>
 
@@ -52,9 +52,9 @@ public:
     virtual ~GameInterface() = default;
 
     // no copy, no move. Avoid slicing.
-    GameInterface(const GameInterface&) = delete;
+    GameInterface(GameInterface const&) = delete;
     GameInterface(GameInterface&&) = delete;
-    GameInterface& operator=(const GameInterface&) = delete;
+    GameInterface& operator=(GameInterface const&) = delete;
     GameInterface& operator=(GameInterface&&) = delete;
 
 protected:

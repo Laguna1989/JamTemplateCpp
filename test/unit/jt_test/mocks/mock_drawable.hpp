@@ -2,7 +2,7 @@
 #define JAMTEMPLATE_UNITTEST_MOCKDRAWABLE_HPP
 
 #include <graphics/drawable_interface.hpp>
-#include <render_target.hpp>
+#include <render_target_layer.hpp>
 #include <gmock/gmock.h>
 #include <memory>
 

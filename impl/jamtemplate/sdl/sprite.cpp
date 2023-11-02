@@ -1,6 +1,5 @@
 ﻿#include "sprite.hpp"
 #include <math_helper.hpp>
-#include <render_target.hpp>
 #include <sdl_helper.hpp>
 #include <SDL_image.h>
 #include <iostream>

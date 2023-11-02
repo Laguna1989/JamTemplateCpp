@@ -1,9 +1,9 @@
 ﻿#ifndef JAMTEMPLATE_TEXTUREMANAGER_HPP
 #define JAMTEMPLATE_TEXTUREMANAGER_HPP
 
-#include <render_target.hpp>
-#include <texture_manager_interface.hpp>
+#include <render_target_layer.hpp>
 #include <sdl_2_include.hpp>
+#include <texture_manager_interface.hpp>
 #include <map>
 #include <memory>
 #include <string>
@@ -25,6 +25,7 @@ public:
 private:
     std::map<std::string, std::shared_ptr<SDL_Texture>> m_textures;
     std::weak_ptr<jt::RenderTargetLayer> m_renderer;
+
     bool containsTexture(std::string const& str) { return (m_textures.count(str) != 0); }
 };
 
