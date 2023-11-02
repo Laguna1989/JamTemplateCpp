@@ -6,6 +6,7 @@ class RenderwindowSFMLTestFixture
     : public ::testing::TestWithParam<std::shared_ptr<RenderWindowFactoryInterface>> {
 protected:
     std::shared_ptr<jt::RenderWindowInterface> m_window;
+
     void SetUp() override { m_window = GetParam()->createRenderWindow(100, 200, "test"); }
 };
 

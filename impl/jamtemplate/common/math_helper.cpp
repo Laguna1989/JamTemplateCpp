@@ -77,3 +77,9 @@ bool jt::MathHelper::checkIsIn(jt::Rectf const& rect, jt::Vector2f const& point)
     bool const overlapsY = point.y > rect.top && point.y < rect.top + rect.height;
     return (overlapsX && overlapsY);
 }
+
+jt::Vector2f jt::MathHelper::castToInteger(jt::Vector2f const& input)
+{
+    return jt::Vector2f { static_cast<float>(static_cast<int>(input.x)),
+        static_cast<float>(static_cast<int>(input.y)) };
+}

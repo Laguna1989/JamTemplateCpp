@@ -3,7 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 #include <drawable_impl_sfml.hpp>
-#include <render_target.hpp>
+#include <render_target_layer.hpp>
 #include <texture_manager_interface.hpp>
 #include <memory>
 

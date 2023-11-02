@@ -2,7 +2,7 @@
 #define JAMTEMPLATE_DRAWABLE_HELPER_HPP
 
 #include <color/color.hpp>
-#include <render_target.hpp>
+#include <render_target_layer.hpp>
 #include <sprite.hpp>
 #include <vector.hpp>
 #include <memory>

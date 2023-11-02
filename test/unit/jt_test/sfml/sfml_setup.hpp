@@ -2,7 +2,7 @@
 #define JAMTEMPLATE_SFML_SETUP_HPP
 
 #include <graphics/render_target_interface.hpp>
-#include <render_target.hpp>
+#include <render_target_layer.hpp>
 #include <texture_manager_interface.hpp>
 #include <memory>
 

@@ -80,10 +80,13 @@ public:
         auto const Radius1 = (Obj1Size.x + Obj1Size.y) / 4.0f;
         auto const Radius2 = (Obj2Size.x + Obj2Size.y) / 4.0f;
 
-        auto const distance = getCenter(obj1) - getCenter(obj2);
+        auto const center1 = getCenter(obj1);
+        auto const center2 = getCenter(obj2);
+        auto const distance = center1 - center2;
 
-        return (
-            jt::MathHelper::lengthSquared(distance) < ((Radius1 + Radius2) * (Radius1 + Radius2)));
+        auto const thresholdR = (Radius1 + Radius2) * (Radius1 + Radius2);
+        auto const lengthSquared = jt::MathHelper::lengthSquared(distance);
+        return (lengthSquared < thresholdR);
     }
 
 private:

@@ -16,7 +16,7 @@ std::shared_ptr<jt::Shape> makeShape(
     s->setPosition(jt::Vector2f { px, py });
     // note: by default the top left corner of the shape is the origin. This needs to be corrected
     // here, so the center of the shape is used.
-    s->setOffset(jt::Vector2f { -sx / 2.0f, -sy / 2.0f });
+    s->setOffset(jt::OffsetMode::CENTER);
     s->update(0.0f);
     return s;
 }
@@ -42,11 +42,14 @@ TEST_P(CollisionCircleNoOverlapPositionParametrizedTestFixture, ShapePtrNoOverla
 
 INSTANTIATE_TEST_SUITE_P(CollisionCircleNoOverlapPositionParametrizedTest,
     CollisionCircleNoOverlapPositionParametrizedTestFixture,
-    ::testing::Values(
-        std::make_pair(makeShapePtr(1.0f, 1.0f, 0.0f, 0.0f), makeShapePtr(1.0f, 1.0f, 1.0f, 1.0f)),
-        std::make_pair(makeShapePtr(1.0f, 1.0f, 1.0f, 1.0f), makeShapePtr(1.0f, 1.0f, 0.0f, 0.0f)),
-        std::make_pair(makeShapePtr(1.0f, 1.0f, 0.0f, 0.0f), makeShapePtr(1.0f, 1.0f, 1.0f, 0.0f)),
-        std::make_pair(makeShapePtr(1.0f, 1.0f, 0.0f, 0.0f), makeShapePtr(1.0f, 1.0f, 0.0f, 1.0f)),
+    ::testing::Values(std::make_pair(makeShapePtr(10.0f, 10.0f, 0.0f, 0.0f),
+                          makeShapePtr(10.0f, 10.0f, 10.0f, 10.0f)),
+        std::make_pair(
+            makeShapePtr(10.0f, 10.0f, 10.0f, 10.0f), makeShapePtr(10.0f, 10.0f, 0.0f, 0.0f)),
+        std::make_pair(
+            makeShapePtr(10.0f, 10.0f, 0.0f, 0.0f), makeShapePtr(10.0f, 10.0f, 10.0f, 0.0f)),
+        std::make_pair(
+            makeShapePtr(10.0f, 10.0f, 0.0f, 0.0f), makeShapePtr(10.0f, 10.0f, 0.0f, 10.0f)),
         std::make_pair(
             makeShapePtr(99.0f, 99.0f, 0.0f, 0.0f), makeShapePtr(20.0f, 20.0f, 100.0f, 100.0f)),
         std::make_pair(

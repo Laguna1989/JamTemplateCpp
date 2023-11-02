@@ -1,7 +1,7 @@
 #ifndef JAMTEMPLATE_TEXTURE_MANAGER_INTERFACE_HPP
 #define JAMTEMPLATE_TEXTURE_MANAGER_INTERFACE_HPP
 
-#include <render_target.hpp>
+#include <render_target_layer.hpp>
 #include <sdl_2_include.hpp>
 #include <cstddef>
 #include <memory>

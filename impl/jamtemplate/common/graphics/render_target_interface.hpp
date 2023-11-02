@@ -1,7 +1,7 @@
 #ifndef JAMTEMPLATE_RENDER_TARGET_INTERFACE_HPP
 #define JAMTEMPLATE_RENDER_TARGET_INTERFACE_HPP
 
-#include <render_target.hpp>
+#include <render_target_layer.hpp>
 #include <functional>
 #include <map>
 #include <memory>
@@ -18,9 +18,9 @@ public:
     virtual ~RenderTargetInterface() = default;
 
     // no copy, no move. Avoid slicing.
-    RenderTargetInterface(const RenderTargetInterface&) = delete;
+    RenderTargetInterface(RenderTargetInterface const&) = delete;
     RenderTargetInterface(RenderTargetInterface&&) = delete;
-    RenderTargetInterface& operator=(const RenderTargetInterface&) = delete;
+    RenderTargetInterface& operator=(RenderTargetInterface const&) = delete;
     RenderTargetInterface& operator=(RenderTargetInterface&&) = delete;
 
 protected:

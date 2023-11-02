@@ -156,6 +156,11 @@ float dot(Vector2f const& a, Vector2f const& b);
 /// \return true if point is in rect, false otherwise
 bool checkIsIn(jt::Rectf const& rect, jt::Vector2f const& point);
 
+/// Cast a jt::Vector2f to it's integer values. This is needed e.g. for drawing pixel-perfect.
+/// \param input input vector
+/// \return cast to integer position
+jt::Vector2f castToInteger(jt::Vector2f const& input);
+
 } // namespace MathHelper
 } // namespace jt
 

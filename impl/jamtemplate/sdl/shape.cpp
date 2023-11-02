@@ -1,10 +1,8 @@
 ﻿#include "shape.hpp"
 #include <rect.hpp>
-#include <render_target.hpp>
 #include <sdl_2_include.hpp>
 #include <sdl_helper.hpp>
 #include <vector.hpp>
-#include <iostream>
 #include <memory>
 #include <string>
 

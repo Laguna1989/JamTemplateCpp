@@ -1,5 +1,6 @@
 ﻿#include "text.hpp"
 #include <color_lib.hpp>
+#include <math_helper.hpp>
 #include <rect_lib.hpp>
 #include <vector_lib.hpp>
 #include <iostream>
@@ -76,14 +77,12 @@ void jt::Text::doUpdate(float /*elapsed*/)
         alignOffset.x = -m_text->getGlobalBounds().width;
     }
 
-    jt::Vector2f const position
-        = m_position + getShakeOffset() + alignOffset + getCompleteCamOffset();
+    auto const position = jt::MathHelper::castToInteger(
+        m_position + getShakeOffset() + alignOffset + getCompleteCamOffset());
     // casting to int and back to float avoids blurry text when rendered on non-integer positions
-    jt::Vector2f const pos = jt::Vector2f { static_cast<float>(static_cast<int>(position.x)),
-        static_cast<float>(static_cast<int>(position.y)) };
 
-    m_text->setPosition(toLib(pos));
-    m_flashText->setPosition(toLib(pos));
+    m_text->setPosition(toLib(position));
+    m_flashText->setPosition(toLib(position));
     m_flashText->setScale(m_text->getScale());
 }
 
@@ -94,10 +93,7 @@ void jt::Text::doDrawShadow(std::shared_ptr<jt::RenderTargetLayer> const sptr) c
 
     auto const position = oldPos + getShadowOffset();
 
-    jt::Vector2f const pos = jt::Vector2f { static_cast<float>(static_cast<int>(position.x)),
-        static_cast<float>(static_cast<int>(position.y)) };
-
-    m_text->setPosition(toLib(pos));
+    m_text->setPosition(toLib(jt::MathHelper::castToInteger(position)));
     m_text->setFillColor(toLib(getShadowColor()));
     sptr->draw(*m_text);
 
@@ -112,15 +108,9 @@ void jt::Text::doDrawOutline(std::shared_ptr<jt::RenderTargetLayer> const sptr) 
 
     m_text->setFillColor(toLib(getOutlineColor()));
 
-    auto const maxWidth = getOutlineWidth();
-    for (auto currentWidth = 1; currentWidth != maxWidth + 1; ++currentWidth) {
-        for (auto i = -currentWidth; i != currentWidth + 1; ++i) {
-            for (auto j = -currentWidth; j != currentWidth + 1; ++j) {
-                m_text->setPosition(
-                    toLib(oldPos + jt::Vector2f { static_cast<float>(i), static_cast<float>(j) }));
-                sptr->draw(*m_text);
-            }
-        }
+    for (auto const outlineOffset : getOutlineOffsets()) {
+        m_text->setPosition(toLib(jt::MathHelper::castToInteger(oldPos + outlineOffset)));
+        sptr->draw(*m_text);
     }
 
     m_text->setPosition(toLib(oldPos));

@@ -2,7 +2,7 @@
 #define JAMTEMPLATE_SPRITEFUNCTIONS_HPP
 
 #include <color/color.hpp>
-#include <render_target.hpp>
+#include <render_target_layer.hpp>
 #include <sdl_2_include.hpp>
 #include <memory>
 

@@ -61,23 +61,28 @@ void jt::LoggingRenderWindow::setMouseCursorVisible(bool visible)
     m_logger.info("setMouseCursorVisible" + std::to_string(visible), { "jt", "RenderWindow" });
     m_decoratee.setMouseCursorVisible(visible);
 }
+
 bool jt::LoggingRenderWindow::getMouseCursorVisible() const
 {
     m_logger.info("getMouseCursorVisible", { "jt", "RenderWindow" });
     return m_decoratee.getMouseCursorVisible();
 }
+
 void jt::LoggingRenderWindow::updateGui(float elapsed)
 {
     m_logger.verbose("updateGui", { "jt", "RenderWindow" });
     m_decoratee.updateGui(elapsed);
 }
+
 void jt::LoggingRenderWindow::startRenderGui()
 {
     m_logger.verbose("startRenderGui", { "jt", "RenderWindow" });
     m_decoratee.startRenderGui();
 }
+
 bool jt::LoggingRenderWindow::shouldProcessKeyboard()
 {
     return m_decoratee.shouldProcessKeyboard();
 }
+
 bool jt::LoggingRenderWindow::shouldProcessMouse() { return m_decoratee.shouldProcessMouse(); }

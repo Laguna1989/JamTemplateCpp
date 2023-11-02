@@ -32,7 +32,7 @@ private:
     std::shared_ptr<jt::RenderTarget> m_target { nullptr };
     std::optional<jt::TextureManagerImpl> m_textureManager;
     std::shared_ptr<sf::View> m_view { nullptr };
-    void drawOneZLayer(jt::RenderTargetLayer& rt);
+    void drawOneZLayer(std::shared_ptr<jt::RenderTargetLayer>& layer);
 };
 
 } // namespace jt

@@ -139,6 +139,7 @@ bool RenderWindow::shouldProcessKeyboard()
     }
     return !ImGui::GetIO().WantCaptureKeyboard;
 }
+
 bool RenderWindow::shouldProcessMouse()
 {
     if (!m_renderTargetCreated) {

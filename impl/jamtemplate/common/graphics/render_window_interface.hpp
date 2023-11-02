@@ -1,7 +1,7 @@
 ﻿#ifndef JAMTEMPLATE_RENDERWINDOW_INTERFACE_HPP
 #define JAMTEMPLATE_RENDERWINDOW_INTERFACE_HPP
 
-#include <render_target.hpp>
+#include <render_target_layer.hpp>
 #include <sprite.hpp>
 #include <vector.hpp>
 #include <memory>
@@ -64,9 +64,9 @@ public:
     virtual ~RenderWindowInterface() = default;
 
     // no copy, no move. Avoid slicing.
-    RenderWindowInterface(const RenderWindowInterface&) = delete;
+    RenderWindowInterface(RenderWindowInterface const&) = delete;
     RenderWindowInterface(RenderWindowInterface&&) = delete;
-    RenderWindowInterface& operator=(const RenderWindowInterface&) = delete;
+    RenderWindowInterface& operator=(RenderWindowInterface const&) = delete;
     RenderWindowInterface& operator=(RenderWindowInterface&&) = delete;
 
 protected:

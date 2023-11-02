@@ -2,7 +2,7 @@
 #define JAMTEMPLATE_FLASH_INTERFACE_HPP
 
 #include <color/color.hpp>
-#include <render_target.hpp>
+#include <render_target_layer.hpp>
 #include <memory>
 
 namespace jt {
@@ -23,7 +23,9 @@ public:
 
 private:
     virtual void doDrawFlash(std::shared_ptr<jt::RenderTargetLayer> sptr) const = 0;
+
     virtual void doFlashImpl(float /*t*/, jt::Color /*col = jt::colors::White*/) { }
+
     float m_flashTimer { -1.0f };
     float m_maxFlashTimer { -1.0f };
 

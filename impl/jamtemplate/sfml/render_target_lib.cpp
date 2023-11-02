@@ -1,6 +1,6 @@
 #include "render_target_lib.hpp"
 
-void jt::RenderTarget::forall(std::function<void(std::shared_ptr<jt::RenderTargetLayer>)> func)
+void jt::RenderTarget::forall(std::function<void(std::shared_ptr<jt::RenderTargetLayer>&)> func)
 {
     for (auto& kvp : m_targets) {
         func(kvp.second);

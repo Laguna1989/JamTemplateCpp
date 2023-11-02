@@ -3,7 +3,7 @@
 
 #include <graphics/drawable_impl.hpp>
 #include <pathfinder/node_interface.hpp>
-#include <render_target.hpp>
+#include <render_target_layer.hpp>
 #include <sprite.hpp>
 #include <texture_manager_interface.hpp>
 #include <tilemap/info_rect.hpp>
