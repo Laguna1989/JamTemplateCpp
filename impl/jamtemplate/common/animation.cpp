@@ -4,6 +4,7 @@
 #include <nlohmann.hpp>
 #include <sprite.hpp>
 #include <strutils.hpp>
+#include <system_helper.hpp>
 #include <texture_manager_interface.hpp>
 #include <fstream>
 #include <iostream>
@@ -186,7 +187,7 @@ bool jt::Animation::hasAnimation(std::string const& animationName) const
     return (m_frames.count(animationName) != 0);
 }
 
-std::vector<std::string> jt::Animation::getAllAvailableAnimationsNames() const
+std::vector<std::string> jt::Animation::getAllAvailableAnimationNames() const
 {
     std::vector<std::string> names;
     names.resize(m_frames.size());
@@ -194,6 +195,16 @@ std::vector<std::string> jt::Animation::getAllAvailableAnimationsNames() const
         [](auto kvp) -> std::string { return kvp.first; });
 
     return names;
+}
+
+std::string jt::Animation::getRandomAnimationName() const
+{
+    if (m_frames.empty()) {
+        throw std::invalid_argument {
+            "can not get random animation name if no animation has been added"
+        };
+    }
+    return jt::SystemHelper::select_randomly(m_frames.cbegin(), m_frames.cend())->first;
 }
 
 void jt::Animation::play(std::string const& animationName, size_t startFrameIndex, bool restart)
@@ -333,7 +344,7 @@ void jt::Animation::doUpdate(float elapsed)
         m_frameTime -= m_time[m_currentAnimName][m_currentIdx];
         m_currentIdx++;
         if (m_currentIdx >= m_frames.at(m_currentAnimName).size()) {
-            if (getIsLooping()) {
+            if (getCurrentAnimationIsLooping()) {
                 m_currentIdx = 0;
             } else {
                 m_currentIdx = m_frames.at(m_currentAnimName).size() - 1;
@@ -370,7 +381,23 @@ float jt::Animation::getCurrentAnimationSingleFrameTime() const
 
 float jt::Animation::getCurrentAnimTotalTime() const
 {
-    return getCurrentAnimationSingleFrameTime() * getNumberOfFramesInCurrentAnimation();
+    float sum = 0.0f;
+    for (auto frameTime : m_time.at(m_currentAnimName)) {
+        sum += frameTime;
+    }
+    return sum;
+}
+
+float jt::Animation::getAnimTotalTimeFor(std::string const& animName)
+{
+    if (!hasAnimation(animName)) {
+        throw std::invalid_argument { "no animation with name " + animName };
+    }
+    float sum = 0.0f;
+    for (auto frameTime : m_time.at(animName)) {
+        sum += frameTime;
+    }
+    return sum;
 }
 
 std::size_t jt::Animation::getNumberOfFramesInCurrentAnimation() const
@@ -380,12 +407,20 @@ std::size_t jt::Animation::getNumberOfFramesInCurrentAnimation() const
 
 std::string jt::Animation::getCurrentAnimationName() const { return m_currentAnimName; }
 
-bool jt::Animation::getIsLooping() const
+bool jt::Animation::getCurrentAnimationIsLooping() const
 {
     if (!hasAnimation(m_currentAnimName)) {
         return true;
     }
     return m_isLooping.at(m_currentAnimName);
+}
+
+bool jt::Animation::getIsLoopingFor(std::string const& animName) const
+{
+    if (!hasAnimation(animName)) {
+        throw std::invalid_argument { "no animation with name " + animName };
+    }
+    return m_isLooping.at(animName);
 }
 
 void jt::Animation::setLooping(std::string const& animName, bool isLooping)
@@ -394,6 +429,13 @@ void jt::Animation::setLooping(std::string const& animName, bool isLooping)
         throw std::invalid_argument { "invalid animation name: " + animName };
     }
     m_isLooping[animName] = isLooping;
+}
+
+void jt::Animation::setLoopingAll(bool isLooping)
+{
+    for (auto& l : m_isLooping) {
+        l.second = isLooping;
+    }
 }
 
 std::size_t jt::Animation::getCurrentAnimationFrameIndex() const { return m_currentIdx; }

@@ -12,6 +12,8 @@ public:
     void setColor(jt::Color const& col);
     void setCamMovementFactor(float factor);
 
+    void setZ(int zLayer);
+
 private:
     std::shared_ptr<jt::Shape> m_shape;
     std::shared_ptr<jt::Sprite> m_glow;

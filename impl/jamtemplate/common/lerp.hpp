@@ -1,7 +1,7 @@
 ﻿#ifndef JAMTEMPLATE_LERP_HPP
 #define JAMTEMPLATE_LERP_HPP
 
-#include <linterp.hpp>
+#include <cassert>
 #include <cmath>
 
 namespace jt {
@@ -13,7 +13,7 @@ static T cosine(T const& a, T const& b, T const& t)
 {
     assert(t >= 0 && t <= 1);
     float tRemapCosine = (1.0f - static_cast<float>(cos(t * 3.1415926f))) * 0.5f;
-    return linear(a, b, tRemapCosine);
+    return std::lerp(a, b, tRemapCosine);
 }
 
 template <typename T>
@@ -21,7 +21,7 @@ static T cubic(T const& a, T const& b, T const& t)
 {
     assert(t >= 0 && t <= 1);
     float cub = t * t * t;
-    return linear(a, b, cub);
+    return std::lerp(a, b, cub);
 }
 
 template <typename T>
@@ -29,7 +29,7 @@ static T cubicInvers(T const& a, T const& b, T const& t)
 {
     assert(t >= 0 && t <= 1);
     float cub = (1 - t) * (1 - t) * (1 - t);
-    return linear(a, b, cub);
+    return std::lerp(a, b, cub);
 }
 
 template <typename T>

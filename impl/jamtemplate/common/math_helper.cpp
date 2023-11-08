@@ -18,6 +18,12 @@ float jt::MathHelper::distanceBetween(jt::Vector2f const& a, jt::Vector2f const&
     return length(dir);
 }
 
+float jt::MathHelper::distanceBetweenSquared(jt::Vector2f const& a, jt::Vector2f const& b)
+{
+    auto const dir = b - a;
+    return lengthSquared(dir);
+}
+
 void jt::MathHelper::normalizeMe(jt::Vector2f& v, float lowerBound)
 {
     float l = jt::MathHelper::length(v);

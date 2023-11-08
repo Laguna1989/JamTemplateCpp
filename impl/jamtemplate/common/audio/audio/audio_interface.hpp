@@ -95,9 +95,9 @@ public:
     virtual ~AudioInterface() = default;
 
     // no copy, no move
-    AudioInterface(const AudioInterface&) = delete;
+    AudioInterface(AudioInterface const&) = delete;
     AudioInterface(AudioInterface&&) = delete;
-    AudioInterface& operator=(const AudioInterface&) = delete;
+    AudioInterface& operator=(AudioInterface const&) = delete;
     AudioInterface& operator=(AudioInterface&&) = delete;
 
 protected:

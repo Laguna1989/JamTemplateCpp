@@ -1,5 +1,4 @@
 #include "ease_from_points.hpp"
-#include <ease/linear.hpp>
 #include <algorithm>
 #include <stdexcept>
 

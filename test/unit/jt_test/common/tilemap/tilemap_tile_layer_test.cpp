@@ -71,15 +71,13 @@ TEST_F(TilemapTileLayerTest, GetGetOriginReturnsDefaultConstructedVector)
 
 TEST_F(TilemapTileLayerTest, GetGlobalBoundsReturnsDefaultConstructedRect)
 {
-    jt::Rectf const expectedRect { 0.0f, 0.0f, std::numeric_limits<float>::max(),
-        std::numeric_limits<float>::max() };
+    jt::Rectf const expectedRect { 0.0f, 0.0f, 1600.0f, 1600.0f };
     ASSERT_EQ(tileLayer->getGlobalBounds(), expectedRect);
 }
 
 TEST_F(TilemapTileLayerTest, GetLocalBoundsReturnsDefaultConstructedRect)
 {
-    jt::Rectf const expectedRect { 0.0f, 0.0f, std::numeric_limits<float>::max(),
-        std::numeric_limits<float>::max() };
+    jt::Rectf const expectedRect { 0.0f, 0.0f, 1600.0f, 1600.0f };
     ASSERT_EQ(tileLayer->getLocalBounds(), expectedRect);
 }
 

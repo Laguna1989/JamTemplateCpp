@@ -23,28 +23,32 @@ public:
 
     virtual ~Box2DObject();
 
-    /// Get the position
-    /// \return the position
+    /// Get position
+    /// \return position
     jt::Vector2f getPosition() const;
 
-    /// Set the position (overwrite box2d simulation)
-    /// \param position the new position
+    /// Set position (overwrite box2d simulation)
+    /// \param position new position
     void setPosition(jt::Vector2f const& position);
 
-    /// Get the velocity
-    /// \return the velocity
+    /// Get velocity
+    /// \return velocity
     jt::Vector2f getVelocity() const;
 
-    /// Set the velocity (overwrite box2d simulation)
-    /// \param v the new velocity
+    /// Set velocity (overwrite box2d simulation)
+    /// \param v new velocity
     void setVelocity(jt::Vector2f const& v);
 
-    /// Add the velocity (overwirte box2d simulation)
-    /// \param v the velocity to be added
+    /// Add velocity (overwrite box2d simulation)
+    /// \param v velocity to be added
     void addVelocity(jt::Vector2f const& v);
 
-    /// Get the rotation in degree
-    /// \return the rotation in degree
+    /// Add Force to center
+    /// \param f force
+    void addForceToCenter(Vector2f const& f);
+
+    /// Get rotation in degree
+    /// \return rotation in degree
     float getRotation() const;
 
     /// Get the low level Box2d body pointer

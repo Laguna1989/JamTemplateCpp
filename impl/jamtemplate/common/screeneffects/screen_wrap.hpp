@@ -6,7 +6,7 @@
 
 namespace jt {
 
-/// wrap drawbel on screen.
+/// wrap drawable on screen.
 /// \param drawable
 void wrapOnScreen(jt::DrawableInterface& drawable, float margin = 10.0f);
 

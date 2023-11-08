@@ -44,6 +44,7 @@ void jt::WindParticles::doUpdate(float const elapsed)
         s->update(elapsed);
     }
 }
+
 void jt::WindParticles::doDraw() const
 {
     if (!m_enabled) {
@@ -55,3 +56,10 @@ void jt::WindParticles::doDraw() const
 }
 
 void jt::WindParticles::setEnabled(bool enabled) { m_enabled = enabled; }
+
+void jt::WindParticles::setZ(int zLayer)
+{
+    for (auto const& s : m_shapes) {
+        s->setZ(zLayer);
+    }
+}

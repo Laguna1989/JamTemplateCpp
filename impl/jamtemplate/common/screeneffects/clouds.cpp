@@ -82,3 +82,10 @@ void jt::Clouds::doDraw() const
 }
 
 void jt::Clouds::setEnabled(bool enabled) { m_enabled = enabled; }
+
+void jt::Clouds::setZ(int zLayer)
+{
+    m_layer1->setZ(zLayer);
+    m_layer2->setZ(zLayer);
+    m_layer3->setZ(zLayer);
+}

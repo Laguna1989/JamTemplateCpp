@@ -18,6 +18,8 @@ public:
 
     void setColor(jt::Color const& col);
 
+    void setZ(int zLayer);
+
 private:
     bool m_enabled { true };
     mutable std::shared_ptr<jt::Shape> m_shape;
