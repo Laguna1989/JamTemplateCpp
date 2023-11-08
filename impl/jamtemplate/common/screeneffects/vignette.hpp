@@ -4,6 +4,7 @@
 #include <color/color.hpp>
 #include <game_object.hpp>
 #include <vector.hpp>
+
 namespace jt {
 
 class Sprite;
@@ -14,6 +15,7 @@ public:
     void setEnabled(bool enabled);
 
     void setColor(jt::Color const& col);
+    void setZ(int zLayer);
 
 private:
     void doCreate() override;

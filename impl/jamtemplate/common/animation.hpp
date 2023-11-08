@@ -70,8 +70,15 @@ public:
     bool hasAnimation(std::string const& animationName) const;
 
     /// Get all animation names
-    /// \return the vector of the animation names
-    std::vector<std::string> getAllAvailableAnimationsNames() const;
+    /// \return vector of the animation names
+    std::vector<std::string> getAllAvailableAnimationNames() const;
+
+    /// Get a random animation name
+    ///
+    /// Will raise an exception if no animations have been added.
+    ///
+    /// \return random animation name
+    std::string getRandomAnimationName() const;
 
     /// Start playing an animation from the pool
     ///
@@ -81,15 +88,30 @@ public:
     /// continue if already playing
     void play(std::string const& animationName, size_t startFrameIndex = 0, bool restart = false);
 
-    /// Set animation to looping
-    /// true by default.
+    /// Set animation looping
+    /// By default an animations is looping (true).
     /// If an animation is not looping, it will remain at the last frame of the animation.
     /// \param isLooping value
     void setLooping(std::string const& animName, bool isLooping);
 
-    /// Get looping
+    /// Set all animations looping
+    /// By default an animations is looping (true).
+    /// If an animation is not looping, it will remain at the last frame of the animation.
+    /// \param isLooping
+    void setLoopingAll(bool isLooping);
+
+    /// Get looping value for currently playing animation
+    ///
+    /// Returns false if no animation is playing
+    ///
     /// \return true if animation is looping, false otherwise
-    bool getIsLooping() const;
+    bool getCurrentAnimationIsLooping() const;
+
+    /// Get looping value for a specific animation
+    /// Raises an exception if no animation with animName found
+    /// \param animName the animation to check
+    /// \return
+    bool getIsLoopingFor(std::string const& animName) const;
 
     void setColor(jt::Color const& col) override;
     jt::Color getColor() const override;
@@ -112,32 +134,42 @@ public:
 
     /// Get the frame time for one single frame in the current animation
     ///
-    /// \return the time set in add for the currently playing animation
+    /// \return time set in add for the currently playing animation
     /// will raise an exception if no valid animation is playing
     float getCurrentAnimationSingleFrameTime() const;
 
     /// Get the total time of the current animation
     ///
-    /// \return the time for the complete animation to play
+    /// \return time for the complete animation to play
     float getCurrentAnimTotalTime() const;
+
+    /// Get the total time of the animation with name animName
+    ///
+    /// Raises an exception if animName has not been added
+    ///
+    /// \param animName the name of the animation
+    /// \return time for the complete animation to play
+    float getAnimTotalTimeFor(std::string const& animName);
 
     /// Get the number of frames in this animation
     ///
-    /// \return the number of frames in this animation
+    /// \return number of frames in this animation
     std::size_t getNumberOfFramesInCurrentAnimation() const;
 
     /// Get the name of the current animation
     ///
-    /// \return the name of the currently playing animation
+    /// \return name of the currently playing animation
     std::string getCurrentAnimationName() const;
 
     std::size_t getCurrentAnimationFrameIndex() const;
 
     /// Set the animation speed
-    /// \param factor the factor. Normal value is 1.0, can be in range from -inf to inf.
+    /// \param factor the animation speed factor. Normal value is 1.0, can be in range from -inf to
+    /// inf.
     void setAnimationSpeedFactor(float factor);
+
     /// Get the animation speed
-    /// \return the factor. Normal value is 1.0, can be in range from -inf to inf.
+    /// \return animation speed factor. Normal value is 1.0, can be in range from -inf to inf.
     float getAnimationSpeedFactor() const;
 
 private:

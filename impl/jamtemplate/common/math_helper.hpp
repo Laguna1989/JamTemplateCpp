@@ -42,7 +42,17 @@ float lengthSquared(jt::Vector2f const& v);
 /// \return length
 float length(jt::Vector2f const& v);
 
+/// CalculateDistanceBetween the two points
+/// \param a position a
+/// \param b position b
+/// \return distance betwen a and b
 float distanceBetween(jt::Vector2f const& a, jt::Vector2f const& b);
+
+///  Squared Distance between
+/// \param a position a
+/// \param b position b
+/// \return squared distance betwen a and b
+float distanceBetweenSquared(jt::Vector2f const& a, jt::Vector2f const& b);
 
 /// In-place normalize a vector
 /// \param v vector to be normalized

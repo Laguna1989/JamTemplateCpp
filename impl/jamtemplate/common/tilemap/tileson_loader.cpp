@@ -64,17 +64,26 @@ std::vector<jt::tilemap::TileInfo> loadTiles(
     std::string const& layerName, std::shared_ptr<tson::Map> map)
 {
     std::vector<jt::tilemap::TileInfo> tiles;
+
+    bool foundLayer { false };
+
     for (auto& layer : map->getLayers()) {
         // skip all non-tile layers
         if (layer.getType() != tson::LayerType::TileLayer) {
             continue;
         }
         if (layer.getName() == layerName) {
+            foundLayer = true;
             for (auto& [_, tile] : layer.getTileObjects()) {
                 tiles.emplace_back(parseSingleTile(tile));
             }
         }
     }
+
+    if (!foundLayer) {
+        std::cerr << "Warning: no tileset layer found with name : " << layerName << std::endl;
+    }
+
     return tiles;
 }
 
@@ -138,7 +147,7 @@ jt::tilemap::TilesonLoader::loadNodesFromLayer(std::string const& layerName)
             auto node = std::make_shared<jt::pathfinder::Node>();
             node->setPosition(
                 jt::Vector2u { static_cast<unsigned int>(posx), static_cast<unsigned int>(posy) });
-            
+
             node->setBlocked(isBlocked);
             nodes.push_back(node);
         }

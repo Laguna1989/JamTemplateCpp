@@ -1,5 +1,5 @@
 ﻿#include <lerp.hpp>
-#include <functional>
+#include <linterp.hpp>
 #include <gtest/gtest.h>
 #include <tuple>
 
@@ -41,8 +41,7 @@ TEST_F(LerpTestF, bounce)
     ASSERT_EQ(expected, f(input, 0.0f, 1.0f));
 }
 
-class LerpBounceValuesTestFixture : public ::testing::TestWithParam<std::pair<float, float>> {
-};
+class LerpBounceValuesTestFixture : public ::testing::TestWithParam<std::pair<float, float>> { };
 
 TEST_P(LerpBounceValuesTestFixture, ReturnsExpectedValue)
 {

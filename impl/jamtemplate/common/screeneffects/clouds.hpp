@@ -15,6 +15,8 @@ public:
 
     void setEnabled(bool enabled);
 
+    void setZ(int zLayer);
+
 private:
     mutable std::shared_ptr<jt::Sprite> m_layer1;
     mutable std::shared_ptr<jt::Sprite> m_layer2;

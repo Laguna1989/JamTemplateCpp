@@ -92,3 +92,9 @@ void jt::Star::setCamMovementFactor(float factor)
     m_shape->setCamMovementFactor(factor);
     m_glow->setCamMovementFactor(factor);
 }
+
+void jt::Star::setZ(int zLayer)
+{
+    m_shape->setZ(zLayer);
+    m_glow->setZ(zLayer);
+}

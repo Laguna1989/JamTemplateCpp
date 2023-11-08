@@ -15,7 +15,6 @@ jt::Bar::Bar(
 {
     m_shapeFull->makeRect(jt::Vector2f { m_width, m_height }, textureManager);
     m_shapeFull->setColor(jt::colors::Gray);
-    m_shapeFull->setIgnoreCamMovement(true);
 
     if (m_horizontal) {
         auto const progressHeightFactor = 0.9f;
@@ -27,7 +26,6 @@ jt::Bar::Bar(
         m_shapeProgress->setPosition(jt::Vector2f { 0 + 1, m_height });
     }
     m_shapeProgress->setColor(jt::colors::White);
-    m_shapeProgress->setIgnoreCamMovement(true);
 }
 
 void jt::Bar::setFrontColor(jt::Color const& col) { m_shapeProgress->setColor(col); }

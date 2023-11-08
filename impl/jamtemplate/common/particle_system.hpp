@@ -50,6 +50,15 @@ public:
         }
     };
 
+    /// Execute a function for each particle
+    /// \param fun function to execute for each particle
+    void forEach(std::function<void(std::shared_ptr<T>&)> const& fun)
+    {
+        for (auto& p : m_particles) {
+            fun(p);
+        }
+    }
+
 private:
     ResetCallbackType m_resetCallback {};
     mutable jt::CircularBuffer<std::shared_ptr<T>, N> m_particles;

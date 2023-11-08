@@ -13,6 +13,8 @@ public:
 
     void setEnabled(bool enabled);
 
+    void setZ(int zLayer);
+
 private:
     void doCreate() override;
     void doUpdate(float const elapsed) override;

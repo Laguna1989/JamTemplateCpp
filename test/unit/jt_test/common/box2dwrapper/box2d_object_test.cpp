@@ -49,7 +49,7 @@ TEST_F(Box2dObjectTest, DestroyWithDeletedWorld)
     EXPECT_NO_THROW(obj.reset());
 }
 
-class Box2dObjectWorldImplTest : public ::testing::Test {
+class Box2dObjectWithWorldTest : public ::testing::Test {
 public:
     std::shared_ptr<jt::Box2DWorldInterface> m_world;
 
@@ -66,7 +66,7 @@ public:
     }
 };
 
-TEST_F(Box2dObjectWorldImplTest, GetPositionReturnsSetPosition)
+TEST_F(Box2dObjectWithWorldTest, GetPositionReturnsSetPosition)
 {
     auto obj = getBox2DObject();
     jt::Vector2f const newPosition { 2.0f, 17.0f };
@@ -74,7 +74,7 @@ TEST_F(Box2dObjectWorldImplTest, GetPositionReturnsSetPosition)
     ASSERT_EQ(obj.getPosition(), newPosition);
 }
 
-TEST_F(Box2dObjectWorldImplTest, GetVelocityReturnsSetVelocity)
+TEST_F(Box2dObjectWithWorldTest, GetVelocityReturnsSetVelocity)
 {
     auto obj = getBox2DObject();
     jt::Vector2f const newVelocity { 3.0f, 13.0f };
@@ -82,7 +82,7 @@ TEST_F(Box2dObjectWorldImplTest, GetVelocityReturnsSetVelocity)
     ASSERT_EQ(obj.getVelocity(), newVelocity);
 }
 
-TEST_F(Box2dObjectWorldImplTest, GetVelocityReturnsAddedVelocity)
+TEST_F(Box2dObjectWithWorldTest, GetVelocityReturnsAddedVelocity)
 {
     auto obj = getBox2DObject();
     jt::Vector2f const newVelocity { 3.0f, 13.0f };
@@ -90,10 +90,19 @@ TEST_F(Box2dObjectWorldImplTest, GetVelocityReturnsAddedVelocity)
     ASSERT_EQ(obj.getVelocity(), newVelocity);
 }
 
-TEST_F(Box2dObjectWorldImplTest, GetRotationReturnsValue)
+TEST_F(Box2dObjectWithWorldTest, GetRotationReturnsValue)
 {
     auto obj = getBox2DObject();
     auto const newRotation = jt::MathHelper::deg2rad(50.0f);
     obj.getB2Body()->SetTransform(b2Vec2_zero, newRotation);
     ASSERT_FLOAT_EQ(obj.getRotation(), 50.0f);
+}
+
+TEST_F(Box2dObjectWithWorldTest, AddForceToCenter)
+{
+    auto obj = getBox2DObject();
+    ASSERT_EQ(obj.getB2Body()->GetLinearVelocity().x, 0.0f);
+    obj.addForceToCenter(jt::Vector2f { 100.0f, 0.0f });
+    m_world->step(0.01f, 10, 10);
+    ASSERT_NE(obj.getB2Body()->GetLinearVelocity().x, 0.0f);
 }

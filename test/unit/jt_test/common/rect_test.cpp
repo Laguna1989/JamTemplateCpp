@@ -1,6 +1,36 @@
 ﻿#include <rect.hpp>
 #include <gtest/gtest.h>
 
+TEST(Rectf, IsDefaultConstructible)
+{
+    ASSERT_TRUE(std::is_default_constructible<jt::Rectf>::value);
+}
+
+TEST(Rectf, IsConstructibleWithCorrectNumberOfArguments)
+{
+    auto const constructibleWithFourFloats
+        = std::is_constructible<jt::Rectf, float, float, float, float>::value;
+    ASSERT_TRUE(constructibleWithFourFloats);
+
+    auto const constructibleWithTwoFloats = std::is_constructible<jt::Rectf, float, float>::value;
+    ASSERT_FALSE(constructibleWithTwoFloats);
+}
+
+TEST(Recti, IsDefaultConstructible)
+{
+    ASSERT_TRUE(std::is_default_constructible<jt::Recti>::value);
+}
+
+TEST(Recti, IsConstructibleWithCorrectNumberOfArguments)
+{
+    auto const constructibleWithFourInts
+        = std::is_constructible<jt::Recti, int, int, int, int>::value;
+    ASSERT_TRUE(constructibleWithFourInts);
+
+    auto const constructibleWithTwoInts = std::is_constructible<jt::Recti, int, int>::value;
+    ASSERT_FALSE(constructibleWithTwoInts);
+}
+
 TEST(RectEQ, Equal)
 {
     jt::Rectf const initial { 5.0f, -1.245f, 44.1f, 2.2f };

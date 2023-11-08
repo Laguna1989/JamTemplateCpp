@@ -14,6 +14,7 @@ void jt::ScanLines::doCreate()
     m_shape = jt::dh::createShapeRect(m_shapeSize, jt::Color { 0, 0, 0, 40 }, textureManager());
     m_shape->setIgnoreCamMovement(true);
 }
+
 void jt::ScanLines::doDraw() const
 {
     if (m_enabled) {
@@ -24,5 +25,9 @@ void jt::ScanLines::doDraw() const
         }
     }
 }
+
 void jt::ScanLines::setEnabled(bool enable) { m_enabled = enable; }
+
 void jt::ScanLines::setColor(jt::Color const& col) { m_shape->setColor(col); }
+
+void jt::ScanLines::setZ(int zLayer) { m_shape->setZ(zLayer); }

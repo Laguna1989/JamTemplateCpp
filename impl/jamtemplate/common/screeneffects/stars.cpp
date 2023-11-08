@@ -40,10 +40,19 @@ void jt::Stars::doDraw() const
         star->draw();
     }
 }
+
 void jt::Stars::setEnabled(bool enable) { m_enabled = enable; }
+
 void jt::Stars::setCamMovementFactor(float factor)
 {
     for (auto& star : m_stars) {
         star->setCamMovementFactor(factor);
+    }
+}
+
+void jt::Stars::setZ(int zLayer)
+{
+    for (auto& star : m_stars) {
+        star->setZ(zLayer);
     }
 }

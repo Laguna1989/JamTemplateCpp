@@ -15,6 +15,7 @@ public:
     Stars(std::size_t count, jt::Color const& col, jt::Vector2f const& screenSizeHint);
     void setEnabled(bool enable);
     void setCamMovementFactor(float factor);
+    void setZ(int zLayer);
 
 private:
     void doCreate() override;
@@ -23,7 +24,7 @@ private:
 
     jt::Color m_color;
     jt::Vector2f m_screenSizeHint;
-    
+
     bool m_enabled { true };
 
     std::vector<std::unique_ptr<Star>> m_stars;

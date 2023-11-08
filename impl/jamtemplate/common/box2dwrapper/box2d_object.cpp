@@ -39,6 +39,11 @@ void jt::Box2DObject::addVelocity(jt::Vector2f const& v)
     m_body->SetLinearVelocity(Conversion::vec(oldV + v));
 }
 
+void jt::Box2DObject::addForceToCenter(jt::Vector2f const& f)
+{
+    m_body->ApplyForceToCenter(Conversion::vec(f), true);
+}
+
 float jt::Box2DObject::getRotation() const { return jt::MathHelper::rad2deg(m_body->GetAngle()); }
 
 b2Body* jt::Box2DObject::getB2Body() { return m_body; }
