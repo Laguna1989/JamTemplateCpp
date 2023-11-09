@@ -30,8 +30,7 @@ CPMAddPackage(
 )
 CPMAddPackage(
         NAME openalpp
-        GITHUB_REPOSITORY Laguna1989/OpenALpp
-        GIT_TAG v0.2.2
+        URL https://github.com/Laguna1989/OpenALpp/archive/refs/tags/v0.2.2.zip
         OPTIONS
         "OALPP_ENABLE_UNIT_TESTS OFF"
         "OALPP_ENABLE_INTEGRATION_TESTS OFF"
