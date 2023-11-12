@@ -4,22 +4,41 @@
 #include <animation.hpp>
 #include <game_object.hpp>
 
-// TODO add to demo
+namespace jt {
+
+/// \brief A mario clouds screen effect
 class MarioClouds : public jt::GameObject {
 public:
-    MarioClouds(jt::Vector2f const& mapSize, jt::Vector2f const& margin);
+    /// \brief Constructor for mario clouds screen effect
+    MarioClouds(
+        std::size_t numberOfClouds, jt::Vector2f const& mapSize, jt::Vector2f const& margin);
 
+    /// \brief set te scale of the clouds
+    void setScale(jt::Vector2f const& scale);
+
+    /// \brief set the offset of the shadow
+    void setShadowOffset(jt::Vector2f const& offset);
+
+    /// \brief set the z layer of the mario clouds
     void setZ(int zLayer);
+
+    /// \brief set the effect enabled or disabled
+    void setEnabled(bool enable);
 
 private:
     void doCreate() override;
     void doUpdate(float const elapsed) override;
     void doDraw() const override;
 
-    jt::Vector2f m_mapSize;
-    jt::Vector2f m_margin;
+    std::size_t m_numberOfClouds { 0 };
+    jt::Vector2f m_mapSize { 0.0f, 0.0f };
+    jt::Vector2f m_margin { 0.0f, 0.0f };
+
+    bool m_enabled { true };
 
     std::vector<std::shared_ptr<jt::Animation>> m_clouds;
 };
+
+} // namespace jt
 
 #endif // FRUITLOVINMONKEYPIRATES_MARIO_CLOUDS_HPP

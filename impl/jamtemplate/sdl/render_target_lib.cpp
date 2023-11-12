@@ -27,10 +27,14 @@ void jt::RenderTarget::clearPixels()
         SDL_SetRenderTarget(m_renderer.get(), kvp.second.get());
         if (first) {
             SDL_SetTextureAlphaMod(kvp.second.get(), 255);
+            // SDL does not like drawing to a complete transparent background, so the lowest z layer
+            // needs to be filled with alpha = 255.
             SDL_SetRenderDrawColor(m_renderer.get(), 0, 0, 0, 255);
             SDL_RenderClear(m_renderer.get());
             first = false;
         } else {
+            // The "upper" z layers need to be cleared transparently (alpha = 0) otherwise the
+            // layers below are not visible.
             SDL_SetRenderDrawColor(m_renderer.get(), 0, 0, 0, 0);
             SDL_RenderClear(m_renderer.get());
         }

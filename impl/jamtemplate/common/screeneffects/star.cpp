@@ -44,20 +44,36 @@ void jt::Star::doCreate()
     m_shape->makeCircle(static_cast<float>(size), getGame()->gfx().textureManager());
     m_shape->setCamMovementFactor(0.5f);
 
-    int glowSize = jt::Random::getInt(12, 40);
-    m_glow
-        = std::make_shared<jt::Sprite>("#g#" + std::to_string(glowSize) + "#100", textureManager());
+    m_glowSize = jt::Random::getInt(12, 40);
+    m_glow = std::make_shared<jt::Sprite>(
+        "#g#" + std::to_string(m_glowSize) + "#100", textureManager());
 
     m_rand1 = jt::Random::getFloat(0.2f, 0.5f);
     m_rand2 = jt::Random::getFloat(0.0f, 1.5f);
     m_rand3 = jt::Random::getFloat(0.5f, 1.0f);
 
     m_starAlphaMax = static_cast<std::uint8_t>(jt::Random::getInt(30, 100));
+
+    auto const sizeGlow
+        = jt::Vector2f { m_glow->getLocalBounds().width, m_glow->getLocalBounds().height };
+    auto const sizeStar
+        = jt::Vector2f { m_shape->getLocalBounds().width, m_shape->getLocalBounds().height };
+    m_glowOffset = 0.5f * (sizeGlow - sizeStar);
 }
 
 void jt::Star::doUpdate(float const elapsed)
 {
-    //    std::cout << m_shape->isVisible() << " " << m_shape->getScreenPosition().x << std::endl;
+    updateStarBrightness();
+
+    jt::wrapOnScreen(*m_shape.get(), m_glowSize);
+    m_glow->setPosition(m_shape->getPosition() - m_glowOffset);
+
+    m_shape->update(elapsed);
+    m_glow->update(elapsed);
+}
+
+void jt::Star::updateStarBrightness()
+{
     float const t = getAge() * m_rand1 + m_rand2;
     float const a = sin(t) * sin(t);
     std::uint8_t const alpha = static_cast<std::uint8_t>(a * 255.0f * m_rand3);
@@ -67,18 +83,6 @@ void jt::Star::doUpdate(float const elapsed)
     m_shape->setColor(col);
     col.a = jt::MathHelper::clamp(col.a, std::uint8_t { 20u }, m_starAlphaMax);
     m_glow->setColor(col);
-
-    jt::wrapOnScreen(*m_shape.get(), 0.0f);
-
-    auto const sg
-        = jt::Vector2f { m_glow->getLocalBounds().width, m_glow->getLocalBounds().height };
-    auto const ss
-        = jt::Vector2f { m_shape->getLocalBounds().width, m_shape->getLocalBounds().height };
-    m_glow->setPosition({ m_shape->getPosition().x - sg.x / 2 + ss.x / 2,
-        m_shape->getPosition().y - sg.y / 2 + ss.x / 2 });
-
-    m_shape->update(elapsed);
-    m_glow->update(elapsed);
 }
 
 void jt::Star::doDraw() const
