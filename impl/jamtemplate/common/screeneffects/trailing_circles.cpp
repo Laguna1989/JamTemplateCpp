@@ -39,18 +39,37 @@ void jt::TrailingCircles::doUpdate(float const elapsed)
     m_tweens->update(elapsed);
     m_particles->update(elapsed);
 
-    m_timer += elapsed;
-    if (m_timerMax > 0) {
-        if (m_timer >= m_timerMax) {
-            m_timer = 0.0f;
-            m_particles->fire(1, m_pos);
+    if (m_maxDistance < 0.0f) {
+        m_timer += elapsed;
+        if (m_timerMax > 0) {
+            if (m_timer >= m_timerMax) {
+                m_timer = 0.0f;
+                m_particles->fire(1, m_pos);
+            }
         }
     }
 }
 
-void jt::TrailingCircles::doDraw() const { m_particles->draw(); }
+void jt::TrailingCircles::doDraw() const
+{
+    if (!m_enabled) {
+        return;
+    }
+    m_particles->draw();
+}
 
-void jt::TrailingCircles::setPosition(jt::Vector2f const& pos) { m_pos = pos; }
+void jt::TrailingCircles::setPosition(jt::Vector2f const& pos)
+{
+    if (m_maxDistance > 0) {
+        auto const dist = m_pos - pos;
+        m_summedUpDistance += jt::MathHelper::length(m_pos - pos);
+        if (m_summedUpDistance >= m_maxDistance) {
+            m_summedUpDistance = 0.0f;
+            m_particles->fire(1, pos);
+        }
+    }
+    m_pos = pos;
+}
 
 void jt::TrailingCircles::setTimerMax(float max) { m_timerMax = max; }
 
@@ -59,4 +78,11 @@ void jt::TrailingCircles::setMaxAlpha(std::uint8_t maxAlpha) { m_maxAlpha = maxA
 void jt::TrailingCircles::setZ(int zLayer)
 {
     m_particles->forEach([zLayer](auto& anim) { anim->setZ(zLayer); });
+}
+
+void jt::TrailingCircles::setEnabled(bool enable) { m_enabled = enable; }
+
+void jt::TrailingCircles::setMaxDistanceToSpawnCircle(float maxDistance)
+{
+    m_maxDistance = maxDistance;
 }

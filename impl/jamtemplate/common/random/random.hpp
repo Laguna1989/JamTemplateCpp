@@ -49,15 +49,20 @@ public:
     static jt::Vector2f getRandomPointIn(jt::Rectf const& rect);
 
     /// Get Random point in rect
-    /// \param size the size of the rect to contain the point. Offset of rect is (0, 0)
+    /// \param size size of the rect to contain the point. Offset of rect is (0, 0)
     /// \return random point in rect
     static jt::Vector2f getRandomPointIn(jt::Vector2f const& size);
 
     /// Get Random point in circle with radius. Note: Points in the center are more likely to be
-    /// picked tha points further out.
-    /// \param radius the radius
+    /// picked the points further out.
+    /// \param radius radius
     /// \return random point in radius range
     static jt::Vector2f getRandomPointInCircle(float radius);
+
+    /// Get Random point on circle with radius
+    /// \param radius radius in pixel
+    /// \return random point on circle
+    static jt::Vector2f getRandomPointOnCircle(float radius);
 
     /// Set the seed of the rng
     /// \param s seed value

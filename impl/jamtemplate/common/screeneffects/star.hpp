@@ -22,10 +22,13 @@ private:
     float m_rand1 { 0.0f };
     float m_rand2 { 0.0f };
     float m_rand3 { 0.0f };
+    jt::Vector2f m_glowOffset { 0.0f, 0.0f };
+    int m_glowSize { 0 };
 
     void doCreate() override;
     void doUpdate(float const elapsed) override;
     void doDraw() const override;
+    void updateStarBrightness();
 };
 
 } // namespace jt

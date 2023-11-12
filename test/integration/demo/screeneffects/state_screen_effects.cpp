@@ -23,6 +23,10 @@ void StateScreenEffects::onCreate()
     m_bubbleSmoke = std::make_shared<jt::BubbleSmoke>();
     add(m_bubbleSmoke);
 
+    m_dropFruits
+        = std::make_shared<jt::ParticleSystemDropItems>("assets/fruits.aseprite", 32.0f, 0.7f);
+    add(m_dropFruits);
+
     m_vignette = std::make_shared<jt::Vignette>(jt::Vector2f { 400.0f, 300.0f });
     add(m_vignette);
 
@@ -35,6 +39,17 @@ void StateScreenEffects::onCreate()
 
     m_clouds = std::make_shared<jt::Clouds>(jt::Vector2f { -9.0f, 5.0f });
     add(m_clouds);
+
+    m_marioClouds = std::make_shared<jt::MarioClouds>(
+        40u, m_tileLayers.front()->getMapSizeInPixel(), jt::Vector2f { 128.0f, 128.0f });
+    add(m_marioClouds);
+    m_marioClouds->setScale({ 2.0f, 2.0f });
+    m_marioClouds->setShadowOffset({ 36.0f, 28.0f });
+
+    m_trailingCircles = std::make_shared<jt::TrailingCircles>();
+    m_trailingCircles->setMaxDistanceToSpawnCircle(10.0f);
+    add(m_trailingCircles);
+
     setAutoDraw(false);
 }
 
@@ -50,9 +65,25 @@ void StateScreenEffects::onUpdate(float elapsed)
         getGame()->stateManager().switchState(std::make_shared<StateSelect>());
     }
 
+    scroll(elapsed);
+
+    m_clouds->setEnabled(m_drawClouds);
+
+    m_marioClouds->setEnabled(m_drawMarioClouds);
+
+    m_vignette->setEnabled(m_drawVignette);
+
+    m_scanLines->setEnabled(m_drawScanLines);
+
+    m_stars->setEnabled(m_drawStars);
     m_stars->setCamMovementFactor(m_starsMovementFactor);
 
-    scroll(elapsed);
+    m_wind->setEnabled(m_drawWind);
+    m_wind->m_windSpeed = m_windStrength;
+
+    m_trailingCircles->setPosition(getGame()->input().mouse()->getMousePositionWorld());
+    m_trailingCircles->setEnabled(m_drawTrailingCircles);
+    m_trailingCircles->update(elapsed);
 }
 
 void StateScreenEffects::scroll(float elapsed)
@@ -69,13 +100,6 @@ void StateScreenEffects::scroll(float elapsed)
     } else if (keyboard->pressed(jt::KeyCode::S)) {
         getGame()->gfx().camera().move(jt::Vector2f { 0.0f, scrollspeed * elapsed });
     }
-
-    m_clouds->setEnabled(m_drawClouds);
-    m_vignette->setEnabled(m_drawVignette);
-    m_scanLines->setEnabled(m_drawScanLines);
-    m_stars->setEnabled(m_drawStars);
-    m_wind->setEnabled(m_drawWind);
-    m_wind->m_windSpeed = m_windStrength;
 }
 
 void StateScreenEffects::onDraw() const
@@ -88,8 +112,11 @@ void StateScreenEffects::onDraw() const
     }
 
     m_bubbleSmoke->draw();
+    m_dropFruits->draw();
     m_wind->draw();
+    m_trailingCircles->draw();
     m_clouds->draw();
+    m_marioClouds->draw();
     m_vignette->draw();
     m_scanLines->draw();
 
@@ -103,6 +130,7 @@ void StateScreenEffects::drawGui() const
     ImGui::SliderFloat("stars parallax", &m_starsMovementFactor, 0.0f, 1.5f, "%.1f");
     ImGui::Checkbox("level", &m_drawLevel);
     ImGui::Checkbox("clouds", &m_drawClouds);
+    ImGui::Checkbox("mario clouds", &m_drawMarioClouds);
     ImGui::Checkbox("vignette", &m_drawVignette);
     ImGui::Checkbox("scan lines", &m_drawScanLines);
     ImGui::Checkbox("wind", &m_drawWind);
@@ -110,6 +138,12 @@ void StateScreenEffects::drawGui() const
     if (ImGui::Button("bubbles")) {
         m_bubbleSmoke->fire(jt::Vector2f { 400.0f, 300.0f });
     }
+
+    if (ImGui::Button("fruits")) {
+        m_dropFruits->fire(5, jt::Vector2f { 400.0f, 300.0f });
+    }
+
+    ImGui::Checkbox("trailing circles", &m_drawTrailingCircles);
 
     ImGui::End();
 }

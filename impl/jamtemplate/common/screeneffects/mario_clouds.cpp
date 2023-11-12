@@ -3,17 +3,35 @@
 #include <screeneffects/screen_wrap.hpp>
 #include <system_helper.hpp>
 
-MarioClouds::MarioClouds(jt::Vector2f const& mapSize, jt::Vector2f const& margin)
+jt::MarioClouds::MarioClouds(
+    std::size_t numberOfClouds, jt::Vector2f const& mapSize, jt::Vector2f const& margin)
+    : m_numberOfClouds { numberOfClouds }
+    , m_mapSize { mapSize }
+    , m_margin { margin }
 {
-    m_mapSize = mapSize;
-    m_margin = margin;
 }
 
-void MarioClouds::doCreate()
+void jt::MarioClouds::setEnabled(bool enable) { m_enabled = enable; }
+
+void jt::MarioClouds::setScale(jt::Vector2f const& scale)
 {
-    for (auto i = 0; i != 75; ++i) {
+    for (auto& c : m_clouds) {
+        c->setScale(scale);
+    }
+}
+
+void jt::MarioClouds::setShadowOffset(jt::Vector2f const& offset)
+{
+    for (auto& c : m_clouds) {
+        c->setShadow(jt::Color { 10, 10, 10, 30 }, offset);
+    }
+}
+
+void jt::MarioClouds::doCreate()
+{
+    for (auto i = 0u; i != m_numberOfClouds; ++i) {
         auto anim = std::make_shared<jt::Animation>();
-        anim->loadFromAseprite("assets/wolken.aseprite", textureManager());
+        anim->loadFromAseprite("assets/marioclouds.aseprite", textureManager());
         anim->play(anim->getRandomAnimationName());
         anim->setBlendMode(jt::BlendMode::ADD);
         anim->setColor(jt::Color { 255, 255, 255, 200 });
@@ -26,9 +44,11 @@ void MarioClouds::doCreate()
     }
 }
 
-void MarioClouds::doUpdate(float const elapsed)
+void jt::MarioClouds::doUpdate(float const elapsed)
 {
-
+    if (!m_enabled) {
+        return;
+    }
     jt::Vector2f const velocity { 5, 0 };
     for (auto& c : m_clouds) {
 
@@ -44,14 +64,17 @@ void MarioClouds::doUpdate(float const elapsed)
     }
 }
 
-void MarioClouds::doDraw() const
+void jt::MarioClouds::doDraw() const
 {
+    if (!m_enabled) {
+        return;
+    }
     for (auto& c : m_clouds) {
         c->draw(renderTarget());
     }
 }
 
-void MarioClouds::setZ(int zLayer)
+void jt::MarioClouds::setZ(int zLayer)
 {
     for (auto& c : m_clouds) {
         c->setZ(zLayer);

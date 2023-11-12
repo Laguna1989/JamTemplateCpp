@@ -9,16 +9,19 @@
 #include <tweens/tween_base.hpp>
 
 namespace jt {
-
+/// A smoke screen effect
 class BubbleSmoke : public jt::GameObject {
 public:
+    /// Fire the bubble smoke at a given position
+    /// \param pos position to fire at
     void fire(jt::Vector2f const& pos);
-    void addTween(std::shared_ptr<jt::TweenInterface> tween);
 
 private:
     void doCreate() override;
     void doUpdate(float const elapsed) override;
     void doDraw() const override;
+
+    void addTween(std::shared_ptr<jt::TweenInterface> tween);
 
     std::shared_ptr<jt::ParticleSystem<jt::Shape, 100>> m_particles { nullptr };
     jt::TweenCollection m_tweens;

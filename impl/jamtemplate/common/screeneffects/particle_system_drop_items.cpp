@@ -4,13 +4,15 @@
 #include <tweens/tween_alpha.hpp>
 #include <tweens/tween_position.hpp>
 
-ParticleSystemDropItems::ParticleSystemDropItems(std::string const& aseFileName, float radius)
+jt::ParticleSystemDropItems::ParticleSystemDropItems(
+    std::string const& aseFileName, float radius, float time)
     : m_aseFileName { aseFileName }
     , m_radius { radius }
+    , m_time { time }
 {
 }
 
-void ParticleSystemDropItems::doCreate()
+void jt::ParticleSystemDropItems::doCreate()
 {
     m_tweens = std::make_shared<jt::TweenCollection>();
 
@@ -25,13 +27,13 @@ void ParticleSystemDropItems::doCreate()
             return a;
         },
         [this](auto& a, auto pos) {
-            auto const tweenTime = 0.7f;
+            auto const tweenTime = m_time;
             a->setPosition(pos);
             a->setColor(jt::colors::White);
             a->update(0.0f);
 
             std::shared_ptr<jt::Tween> twp1 = jt::TweenPosition::create(
-                a, tweenTime / 2.0f, pos, pos + jt::Random::getRandomPointInCircle(m_radius));
+                a, tweenTime / 2.0f, pos, pos + jt::Random::getRandomPointOnCircle(m_radius));
             twp1->addCompleteCallback([this, tweenTime, &a]() { a->flicker(tweenTime / 2.0f); });
             m_tweens->add(twp1);
 
@@ -44,16 +46,16 @@ void ParticleSystemDropItems::doCreate()
     m_particles->create();
 }
 
-void ParticleSystemDropItems::doUpdate(float const elapsed)
+void jt::ParticleSystemDropItems::doUpdate(float const elapsed)
 {
     m_tweens->update(elapsed);
 
     m_particles->update(elapsed);
 }
 
-void ParticleSystemDropItems::doDraw() const { m_particles->draw(); }
+void jt::ParticleSystemDropItems::doDraw() const { m_particles->draw(); }
 
-void ParticleSystemDropItems::fire(int number, jt::Vector2f const& pos)
+void jt::ParticleSystemDropItems::fire(int number, jt::Vector2f const& pos)
 {
     m_particles->fire(number, pos);
 }

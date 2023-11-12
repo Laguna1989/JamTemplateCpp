@@ -10,11 +10,22 @@
 
 namespace jt {
 
+/// \brief A starfield screen effect
 class Stars : public jt::GameObject {
 public:
+    /// \brief Create a starfield effect
+    /// \param count Number of stars
+    /// \param col Color of the stars
+    /// \param screenSizeHint Hint for the size of the screen
     Stars(std::size_t count, jt::Color const& col, jt::Vector2f const& screenSizeHint);
+
+    /// \brief set the starfield enabled or disabled
     void setEnabled(bool enable);
+
+    /// \brief set the movement factor of the starfield
     void setCamMovementFactor(float factor);
+
+    /// \brief set the z layer of the starfield
     void setZ(int zLayer);
 
 private:

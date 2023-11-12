@@ -56,6 +56,12 @@ jt::Vector2f jt::Random::getRandomPointInCircle(float radius)
     return jt::VectorFactory::fromPolar(range, angle);
 }
 
+jt::Vector2f jt::Random::getRandomPointOnCircle(float radius)
+{
+    float const angle = getFloat(0, 360.0f);
+    return jt::VectorFactory::fromPolar(radius, angle);
+}
+
 void jt::Random::setSeed(unsigned int s) { m_engine.seed(s); }
 
 void jt::Random::useTimeAsRandomSeed() { setSeed(static_cast<unsigned int>(time(nullptr))); }
