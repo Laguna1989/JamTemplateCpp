@@ -78,8 +78,11 @@ void jt::Animation::loadFromJson(
     m_frames.clear();
     m_time.clear();
 
-    if (!strutil::ends_with(jsonFileName, ".json")) {
-        throw std::invalid_argument { "not a json file" };
+    if (!jsonFileName.ends_with(".json")) {
+        throw std::invalid_argument { "file '" + jsonFileName + "' is not a json file" };
+    }
+    if (!jt::SystemHelper::checkForValidFile(jsonFileName)) {
+        throw std::invalid_argument { "file '" + jsonFileName + "' is not a regular file" };
     }
 
     auto const filePathWithoutExtension = jsonFileName.substr(0, jsonFileName.length() - 5);

@@ -1,11 +1,12 @@
 #include "sound_with_effect.hpp"
 
-jt::SoundWithEffect::SoundWithEffect(
-    std::string const& fileName, oalpp::effects::MonoEffectInterface& effect)
-    : m_drySoundData { fileName }
-    , m_drySound { m_drySoundData }
-    , m_wetSoundData { m_drySoundData, effect }
-    , m_wetSound { m_wetSoundData }
+jt::SoundWithEffect::SoundWithEffect(std::string const& fileName,
+    jt::SoundBufferManagerInterface& soundBufferManager,
+    oalpp::effects::MonoEffectInterface& effect)
+    : m_drySoundData { soundBufferManager.get(fileName) }
+    , m_drySound { *m_drySoundData }
+    , m_wetSoundData { soundBufferManager.get(fileName, "wet", effect) }
+    , m_wetSound { *m_wetSoundData }
 {
 }
 
@@ -63,4 +64,4 @@ float jt::SoundWithEffect::getDuration() const { return m_drySound.getLengthInSe
 
 float jt::SoundWithEffect::getPosition() const { return m_drySound.getCurrentOffsetInSeconds(); }
 
-int jt::SoundWithEffect::getSampleRate() const { return m_drySoundData.getSampleRate(); }
+int jt::SoundWithEffect::getSampleRate() const { return m_drySoundData->getSampleRate(); }

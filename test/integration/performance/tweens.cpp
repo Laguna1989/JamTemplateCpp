@@ -19,6 +19,7 @@
 class StateTweenPerformanceTest : public jt::GameState {
 private:
     std::vector<std::shared_ptr<jt::Shape>> m_shapes;
+
     void onCreate() override
     {
         std::size_t const number_of_objects = 20u;
@@ -28,7 +29,9 @@ private:
             m_shapes.push_back(shape);
         }
     }
+
     void onEnter() override { }
+
     void onUpdate(float elapsed) override
     {
         for (auto s : m_shapes) {
@@ -57,7 +60,7 @@ static void BM_GamestateWithTweeningShapes(benchmark::State& state)
     for (auto _ : state) {
         jt::null_objects::GfxNull gfx;
         jt::InputManagerNull input;
-        jt::AudioNull audio;
+        jt::null_objects::AudioNull audio;
 
         jt::StateManager stateManager { std::make_shared<StateTweenPerformanceTest>() };
         jt::null_objects::LoggerNull logger;

@@ -1,8 +1,8 @@
 ﻿#include <audio/sound/sound.hpp>
+#include <audio/sound_buffer_manager/sound_buffer_manager.hpp>
 #include <audio/sound_groups/group_volume_manager.hpp>
 #include <oalpp/sound_context.hpp>
 #include <gtest/gtest.h>
-#include <memory>
 #include <thread>
 #include <type_traits>
 
@@ -14,10 +14,12 @@ private:
 
 protected:
     std::unique_ptr<Sound> m_sound;
+    jt::SoundBufferManager m_soundBufferManager;
 
     SoundTestWithLoadedSound()
     {
-        m_sound = std::make_unique<Sound>("assets/test/unit/jt_test/test.ogg");
+        m_sound
+            = std::make_unique<Sound>("assets/test/unit/jt_test/test.ogg", m_soundBufferManager);
         m_sound->setLoop(false);
         m_sound->setVolume(1.0f);
         m_sound->stop();
@@ -87,6 +89,12 @@ TEST_F(SoundTestWithLoadedSound, SetPitchAboveOne)
     float const newPitch = 5.0f;
     m_sound->setPitch(newPitch);
     EXPECT_FLOAT_EQ(m_sound->getPitch(), newPitch);
+}
+
+TEST_F(SoundTestWithLoadedSound, SetPitchBelowZero)
+{
+    float const newPitch = -0.1f;
+    ASSERT_THROW(m_sound->setPitch(newPitch), std::invalid_argument);
 }
 
 TEST_F(SoundTestWithLoadedSound, StopDoesNothingWhenNotPlaying)

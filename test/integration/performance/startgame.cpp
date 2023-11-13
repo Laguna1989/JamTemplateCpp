@@ -18,13 +18,17 @@
 class StateEmpty : public jt::GameState {
 private:
     std::shared_ptr<jt::Shape> m_shape;
+
     void onCreate() override
     {
         m_shape = std::make_shared<jt::Shape>();
         m_shape->makeRect({ 20.0f, 20.0f }, textureManager());
     }
+
     void onEnter() override { }
+
     void onUpdate(float elapsed) override { m_shape->update(elapsed); }
+
     void onDraw() const override { m_shape->draw(renderTarget()); }
 
 public:
@@ -37,7 +41,7 @@ static void BM_StartGame(benchmark::State& state)
         jt::null_objects::GfxNull gfx;
         jt::StateManager stateManager { std::make_shared<StateEmpty>() };
         jt::InputManagerNull input;
-        jt::AudioNull audio;
+        jt::null_objects::AudioNull audio;
 
         jt::null_objects::LoggerNull logger;
         jt::ActionCommandManager actionCommandManager { logger };

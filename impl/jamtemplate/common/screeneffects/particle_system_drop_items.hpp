@@ -31,7 +31,7 @@ private:
     float m_radius { 0.0f };
     float m_time { 1.0f };
 
-    std::shared_ptr<jt::ParticleSystem<jt::Animation, 12>> m_particles { nullptr };
+    std::shared_ptr<jt::ParticleSystem<jt::Animation, 12u>> m_particles { nullptr };
     std::shared_ptr<jt::TweenCollection> m_tweens { nullptr };
 };
 

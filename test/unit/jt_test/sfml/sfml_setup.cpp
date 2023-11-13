@@ -16,7 +16,7 @@ std::shared_ptr<jt::RenderTargetInterface> getRenderTargetContainer()
 
 jt::TextureManagerInterface& getTextureManager()
 {
-    // the sfml texture manager does not need a rendertarget. Passing nullptr is fine here.
+    // the sfml texture manager does not need a render target. Passing nullptr is fine here.
     static jt::TextureManagerImpl tm { nullptr };
     tm.reset();
     return tm;

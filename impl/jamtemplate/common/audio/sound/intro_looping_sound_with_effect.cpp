@@ -1,9 +1,12 @@
 #include "intro_looping_sound_with_effect.hpp"
 
 jt::IntroLoopingSoundWithEffect::IntroLoopingSoundWithEffect(std::string const& introFileName,
-    std::string const& loopingFileName, oalpp::effects::MonoEffectInterface& effect)
-    : m_introSound { std::make_unique<jt::SoundWithEffect>(introFileName, effect) }
-    , m_loopingSound { std::make_unique<jt::SoundWithEffect>(loopingFileName, effect) }
+    std::string const& loopingFileName, jt::SoundBufferManagerInterface& soundBufferManager,
+    oalpp::effects::MonoEffectInterface& effect)
+    : m_introSound { std::make_unique<jt::SoundWithEffect>(
+        introFileName, soundBufferManager, effect) }
+    , m_loopingSound { std::make_unique<jt::SoundWithEffect>(
+          loopingFileName, soundBufferManager, effect) }
 {
     m_loopingSound->setLoop(true);
 }

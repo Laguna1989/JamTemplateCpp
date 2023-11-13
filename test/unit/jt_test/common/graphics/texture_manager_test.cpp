@@ -1,4 +1,5 @@
 ﻿#include <backend_setup.hpp>
+#include <preload_helper.hpp>
 #include <texture_manager_impl.hpp>
 #include <gtest/gtest.h>
 #include <stdexcept>
@@ -133,4 +134,14 @@ TEST_F(TextureManagerTest, GetNumberOfTexturesIsZeroAfterReset)
     EXPECT_NO_THROW(m_manager.get("assets/test/unit/jt_test/coin.png"));
     EXPECT_NO_THROW(m_manager.reset());
     ASSERT_EQ(m_manager.getNumberOfTextures(), 0u);
+}
+
+TEST_F(TextureManagerTest, Preload)
+{
+    jt::PreloadHelper::preloadAllFrom(
+        m_manager, "assets/test/unit/jt_test/pngs_for_preload", ".png", true);
+    // Note: There are three pngs in the folder, but because of the automatically created flash
+    // image, the count is 2x the number of pngs.
+    ASSERT_EQ(m_manager.getNumberOfTextures(), 6);
+    EXPECT_NO_THROW(m_manager.reset());
 }

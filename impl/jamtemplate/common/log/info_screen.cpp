@@ -9,14 +9,17 @@ jt::InfoScreen::InfoScreen()
 }
 
 void jt::InfoScreen::doCreate() { }
+
 void jt::InfoScreen::doUpdate(float const elapsed)
 {
+    m_numberOfUpdatesInThisFrame++;
 #ifdef JT_ENABLE_DEBUG
     if (getGame()->input().keyboard()->justPressed(jt::KeyCode::End)) {
         m_showInfo = !m_showInfo;
     }
 
     m_frameTimes.put(elapsed);
+
     auto const pushIndex = m_frameTimes.getTail();
     for (auto index = pushIndex; index != pushIndex + m_frameTimes.capacity(); ++index) {
         m_frameTimesVector[index - pushIndex] = m_frameTimes[index];
@@ -30,8 +33,12 @@ void jt::InfoScreen::doUpdate(float const elapsed)
     }
 #endif
 }
+
 void jt::InfoScreen::doDraw() const
 {
+    m_numberOfUpdatesInLastFrame.put(m_numberOfUpdatesInThisFrame);
+    m_numberOfUpdatesInThisFrame = 0;
+
     if (!m_showInfo) {
         return;
     }
@@ -45,6 +52,10 @@ void jt::InfoScreen::doDraw() const
 
         ImGui::PlotLines("Frame Time [s]", m_frameTimesVector.data(),
             static_cast<int>(m_frameTimesVector.size()), 0, nullptr, 0, FLT_MAX, ImVec2 { 0, 100 });
+
+        ImGui::PlotLines("Updates per Frame", m_numberOfUpdatesInLastFrame.data(),
+            static_cast<int>(m_numberOfUpdatesInLastFrame.capacity()), 0, nullptr, 0, FLT_MAX,
+            ImVec2 { 0, 100 });
     }
     if (!ImGui::CollapsingHeader("GameStates")) {
         auto const states = getGame()->stateManager().getStoredStateIdentifiers();
@@ -84,6 +95,10 @@ void jt::InfoScreen::doDraw() const
 
         ImGui::Text("%s", createdSoundsText.c_str());
         ImGui::Text("%s", aliveSoundsText.c_str());
+
+        std::string const soundBuffersString = "# Sound Buffers: "
+            + std::to_string(getGame()->audio().getSoundBufferManager().getNumberOfBuffers());
+        ImGui::Text("%s", soundBuffersString.c_str());
     }
     ImGui::End();
 }

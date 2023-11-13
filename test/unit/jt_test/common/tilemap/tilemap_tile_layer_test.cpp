@@ -84,6 +84,6 @@ TEST_F(TilemapTileLayerTest, GetLocalBoundsReturnsDefaultConstructedRect)
 TEST(TilemapLoaderTileson, ParseInvalidFile)
 {
     auto tilemapManager = std::make_shared<jt::TilemapCache>();
-    auto func = [tilemapManager]() { tilemapManager->getMap("invalidFile.__123"); };
+    auto func = [tilemapManager]() { tilemapManager->get("invalidFile.__123"); };
     ASSERT_THROW(func(), std::invalid_argument);
 }

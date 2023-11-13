@@ -13,13 +13,13 @@ public:
     virtual ~ControlCommandInterface() = default;
 
     // no copy, no move. Avoid slicing.
-    ControlCommandInterface(const ControlCommandInterface&) = delete;
+    ControlCommandInterface(ControlCommandInterface const&) = delete;
     ControlCommandInterface(ControlCommandInterface&&) = delete;
-    ControlCommandInterface& operator=(const ControlCommandInterface&) = delete;
+    ControlCommandInterface& operator=(ControlCommandInterface const&) = delete;
     ControlCommandInterface& operator=(ControlCommandInterface&&) = delete;
 
 protected:
-    // default default constructor can only be called from derived classes
+    // default constructor can only be called from derived classes
     ControlCommandInterface() = default;
 };
 

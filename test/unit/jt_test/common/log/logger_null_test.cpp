@@ -33,5 +33,5 @@ TEST(LoggerNullTest, AddValidLogTargetDoesNothing)
 TEST(LoggerNullTest, SetLogLevelDoesNothing)
 {
     jt::null_objects::LoggerNull logger;
-    ASSERT_NO_THROW(logger.setLogLevel(jt::LogLevel::LogLevelFatal));
+    ASSERT_NO_THROW(logger.setLogLevel(jt::LogLevel::Fatal));
 }

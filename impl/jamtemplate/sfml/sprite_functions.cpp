@@ -3,6 +3,7 @@
 #include <math_helper.hpp>
 #include <random/random.hpp>
 #include <cmath>
+#include <numbers>
 
 sf::Image jt::SpriteFunctions::makeButtonImage(unsigned int w, unsigned int h)
 {
@@ -95,8 +96,8 @@ sf::Image jt::SpriteFunctions::makeRing(unsigned int w)
     img.create(w + 1, w + 1, toLib(jt::colors::Transparent));
 
     for (auto a = 0.0f; a <= 90.0f; a += minAngle) {
-        float const xo = sin(a * 3.14152f / 180.0f) * r;
-        float const yo = cos(a * 3.14152f / 180.0f) * r;
+        float const xo = sin(a * std::numbers::pi / 180.0f) * r;
+        float const yo = cos(a * std::numbers::pi / 180.0f) * r;
         img.setPixel(static_cast<unsigned int>(r + xo), static_cast<unsigned int>(r + yo),
             toLib(jt::Color { 255, 255, 255, 255 }));
         img.setPixel(static_cast<unsigned int>(r + xo), static_cast<unsigned int>(r - yo),

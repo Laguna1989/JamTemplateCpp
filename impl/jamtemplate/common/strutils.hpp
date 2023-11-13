@@ -276,7 +276,8 @@ static inline bool replace_all(
  * @param suffix - searched suffix in str.
  * @return True if suffix was found, false otherwise.
  */
-static inline bool ends_with(std::string const& str, std::string const& suffix)
+[[deprecated("Use std::string::ends_with instead")]] static inline bool ends_with(
+    std::string const& str, std::string const& suffix)
 {
     auto const pos = str.rfind(suffix);
 
@@ -289,7 +290,8 @@ static inline bool ends_with(std::string const& str, std::string const& suffix)
  * @param suffix - searched character in str.
  * @return True if ends with character, false otherwise.
  */
-static inline bool ends_with(std::string const& str, char const suffix)
+[[deprecated("Use std::string::ends_with instead")]] static inline bool ends_with(
+    std::string const& str, char const suffix)
 {
     return (str.size() > 0) && (*(str.end() - 1) == suffix);
 }
@@ -300,7 +302,8 @@ static inline bool ends_with(std::string const& str, char const suffix)
  * @param prefix - searched prefix in str.
  * @return True if prefix was found, false otherwise.
  */
-static inline bool starts_with(std::string const& str, std::string const& prefix)
+[[deprecated("Use std::string::starts_with instead")]] static inline bool starts_with(
+    std::string const& str, std::string const& prefix)
 {
     return str.find(prefix) == 0;
 }
@@ -311,7 +314,8 @@ static inline bool starts_with(std::string const& str, std::string const& prefix
  * @param prefix - searched character in str.
  * @return True if starts with character, false otherwise.
  */
-static inline bool starts_with(std::string const& str, char const prefix)
+[[deprecated("Use std::string::starts_with instead")]] static inline bool starts_with(
+    std::string const& str, char const prefix)
 {
     return (str.size() > 0) && (str[0] == prefix);
 }
@@ -333,7 +337,7 @@ static inline std::vector<std::string> split(std::string const& str, char const 
     }
 
     // Match semantics of split(str,str)
-    if (str.size() == 0 || ends_with(str, delim)) {
+    if (str.size() == 0 || str.ends_with(delim)) {
         tokens.push_back("");
     }
 

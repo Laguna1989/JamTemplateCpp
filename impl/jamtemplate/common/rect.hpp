@@ -12,6 +12,8 @@ struct Rectf {
     float top { 0.0f };
     float width { 0.0f };
     float height { 0.0f };
+    bool operator==(Rectf const& other) const = default;
+    bool operator!=(Rectf const& other) const = default;
 };
 
 struct Recti {
@@ -22,13 +24,9 @@ struct Recti {
     int top { 0 };
     int width { 0 };
     int height { 0 };
+    bool operator==(Recti const& other) const = default;
+    bool operator!=(Recti const& other) const = default;
 };
-
-bool operator==(jt::Rectf const& a, jt::Rectf const& b);
-bool operator!=(jt::Rectf const& a, jt::Rectf const& b);
-
-bool operator==(jt::Recti const& a, jt::Recti const& b);
-bool operator!=(jt::Recti const& a, jt::Recti const& b);
 
 std::ostream& operator<<(std::ostream& os, Rectf const& rect);
 } // namespace jt

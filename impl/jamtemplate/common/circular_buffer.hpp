@@ -15,11 +15,15 @@ namespace detail {
 template <std::size_t size, typename = void>
 class IndexWrapper { };
 
+// Wraparound would normally be done via modulo (a % size), but this is slow. If the size of the
+// IndexWrapper is a power of two, wrapping can be expressed as a & (size -1).
 template <std::size_t size>
 class IndexWrapper<size, typename std::enable_if<jt::MathHelper::isPowerOfTwo(size)>::type> {
 public:
     static_assert(size != 0, "Error: Cannot create IndexWrapper with capacity 0");
-    std::size_t wrap(const std::size_t index) const { return index & m_mask; }
+
+    std::size_t wrap(std::size_t const index) const { return index & m_mask; }
+
     std::size_t getSize() const { return size; }
 
 private:
@@ -38,7 +42,9 @@ template <std::size_t size>
 class IndexWrapper<size, typename std::enable_if<!jt::MathHelper::isPowerOfTwo(size)>::type> {
 public:
     static_assert(size != 0, "Error: Cannot create IndexWrapper with capacity 0");
-    std::size_t wrap(const std::size_t index) const { return index % size; }
+
+    std::size_t wrap(std::size_t const index) const { return index % size; }
+
     std::size_t getSize() const { return size; }
 };
 
@@ -146,6 +152,8 @@ public:
         }
         return m_data[indexToRead];
     }
+
+    auto data() const { return m_data.data(); }
 
 private:
     detail::IndexWrapper<N> m_wrapper;

@@ -9,8 +9,9 @@ jt::LoggingSound::LoggingSound(
     checkAndLogInvalidSampleRate();
 }
 
-jt::LoggingSound::LoggingSound(std::string const& fileName, jt::LoggerInterface& logger)
-    : m_decoratee { std::make_shared<jt::Sound>(fileName) }
+jt::LoggingSound::LoggingSound(std::string const& fileName,
+    jt::SoundBufferManagerInterface& soundBufferManager, jt::LoggerInterface& logger)
+    : m_decoratee { std::make_shared<jt::Sound>(fileName, soundBufferManager) }
     , m_logger { logger }
 {
     checkAndLogInvalidSampleRate();
