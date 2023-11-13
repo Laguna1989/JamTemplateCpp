@@ -3,14 +3,19 @@
 #include <audio/sound/sound.hpp>
 #include <audio/sound/sound_group.hpp>
 #include <audio/sound/sound_with_effect.hpp>
+#include <audio/sound_buffer_manager/sound_buffer_manager.hpp>
 #include <random/random.hpp>
-#include <algorithm>
 
-jt::AudioImpl::AudioImpl(std::unique_ptr<SoundFadeManagerInterface> soundFadeManager)
+jt::AudioImpl::AudioImpl(std::unique_ptr<SoundFadeManagerInterface> soundFadeManager,
+    std::unique_ptr<SoundBufferManagerInterface> soundBufferManager)
     : m_fades { std::move(soundFadeManager) }
+    , m_soundBufferManager { std::move(soundBufferManager) }
 {
     if (!m_fades) {
         m_fades = std::make_unique<SoundFadeManager>();
+    }
+    if (!m_soundBufferManager) {
+        m_soundBufferManager = std::make_unique<jt::SoundBufferManager>();
     }
 }
 
@@ -39,7 +44,7 @@ void jt::AudioImpl::cleanUpUnusedSounds()
 
 std::shared_ptr<jt::SoundInterface> jt::AudioImpl::addTemporarySound(std::string const& fileName)
 {
-    auto const sound = std::make_shared<jt::Sound>(fileName);
+    auto const sound = std::make_shared<jt::Sound>(fileName, getSoundBufferManager());
     sound->setVolumeProvider(m_volumeGroups);
     m_temporarySounds.push_back(sound);
     return sound;
@@ -76,7 +81,7 @@ std::shared_ptr<jt::SoundInterface> jt::AudioImpl::soundPool(
 std::shared_ptr<jt::SoundInterface> jt::AudioImpl::addPermanentSound(
     std::string const& identifier, std::string const& fileName)
 {
-    auto const sound = std::make_shared<jt::Sound>(fileName);
+    auto const sound = std::make_shared<jt::Sound>(fileName, getSoundBufferManager());
     sound->setVolumeProvider(m_volumeGroups);
     m_permanentSounds[identifier] = sound;
     return sound;
@@ -85,7 +90,8 @@ std::shared_ptr<jt::SoundInterface> jt::AudioImpl::addPermanentSound(
 std::shared_ptr<jt::SoundInterface> jt::AudioImpl::addPermanentSound(std::string const& identifier,
     std::string const& fileName, oalpp::effects::MonoEffectInterface& effect)
 {
-    auto const sound = std::make_shared<jt::SoundWithEffect>(fileName, effect);
+    auto const sound
+        = std::make_shared<jt::SoundWithEffect>(fileName, getSoundBufferManager(), effect);
     sound->setVolumeProvider(m_volumeGroups);
     m_permanentSounds[identifier] = sound;
     return sound;
@@ -95,8 +101,8 @@ std::shared_ptr<jt::SoundInterface> jt::AudioImpl::addPermanentSound(std::string
     std::string const& introFileName, std::string const& loopingFileName,
     oalpp::effects::MonoEffectInterface& effect)
 {
-    auto const sound
-        = std::make_shared<jt::IntroLoopingSoundWithEffect>(introFileName, loopingFileName, effect);
+    auto const sound = std::make_shared<jt::IntroLoopingSoundWithEffect>(
+        introFileName, loopingFileName, getSoundBufferManager(), effect);
     sound->setVolumeProvider(m_volumeGroups);
     m_permanentSounds[identifier] = sound;
     return sound;
@@ -114,3 +120,8 @@ std::shared_ptr<jt::SoundInterface> jt::AudioImpl::addTemporarySoundGroup(
 jt::SoundFadeManagerInterface& jt::AudioImpl::fades() { return *m_fades; }
 
 jt::GroupVolumeSetterInterface& jt::AudioImpl::groups() { return m_volumeGroups; }
+
+jt::SoundBufferManagerInterface& jt::AudioImpl::getSoundBufferManager()
+{
+    return *m_soundBufferManager;
+}

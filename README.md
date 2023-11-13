@@ -85,6 +85,8 @@ The options can be set to ON or OFF via the cmake commandline or cmake-gui:
 * `JT_ENABLE_AUDIO_TESTS` - Some of the tests rely on a working audio setup, which seemingly cannot be faked easily.
   This switch disables those specific tests, in case no audio is available on the respective machine.
 * `JT_ENABLE_CLANG_TIDY` - Enable clang tidy checker
+* `JT_ENABLE_LTO_OPTIMIZATION` - Enable Link time optimization. This gives higher runtime performance for the cost of
+  increased build and link times.
 
 e.g. calling `cmake ../ -DJT_ENABLE_UNITTESTS=ON -DENABLE_DEMOS=ON`
 

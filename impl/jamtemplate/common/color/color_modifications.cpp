@@ -2,11 +2,12 @@
 #include "math_helper.hpp"
 #include <color/color_conversions.hpp>
 #include <cmath>
+#include <concepts>
 
 namespace {
 
-template <typename T>
-jt::Color conversionHelper(jt::Color const& initialColor, T const& innerFunc)
+jt::Color conversionHelper(
+    jt::Color const& initialColor, std::invocable<float, float, float> auto const& innerFunc)
 {
     auto const [h, s, v]
         = jt::ColorConversions::rgb2hsv(initialColor.r, initialColor.g, initialColor.b);

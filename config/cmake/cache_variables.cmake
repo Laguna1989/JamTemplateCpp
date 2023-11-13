@@ -5,6 +5,7 @@ set(JT_ENABLE_WEB OFF CACHE BOOL "enable web build using SDL and em++")
 set(JT_ENABLE_AUDIO_TESTS ON CACHE BOOL "enable unittests that require a display")
 set(JT_ENABLE_CLANG_TIDY OFF CACHE BOOL "enable clang tidy checks")
 set(JT_ENABLE_DEBUG ON CACHE BOOL "enable debug options")
+set(JT_ENABLE_LTO_OPTIMIZATION OFF CACHE BOOL "enable final optimization (LTO)")
 
 # if JT_ENABLE_WEB is ON, it is required to use SDL
 if (JT_ENABLE_WEB)

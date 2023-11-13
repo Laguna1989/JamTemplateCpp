@@ -16,13 +16,13 @@ public:
     virtual ~TweenInterface() = default;
 
     // no copy, no move. Avoid slicing.
-    TweenInterface(const TweenInterface&) = delete;
+    TweenInterface(TweenInterface const&) = delete;
     TweenInterface(TweenInterface&&) = delete;
-    TweenInterface& operator=(const TweenInterface&) = delete;
+    TweenInterface& operator=(TweenInterface const&) = delete;
     TweenInterface& operator=(TweenInterface&&) = delete;
 
 protected:
-    // default default constructor can only be called from derived classes
+    // default constructor can only be called from derived classes
     TweenInterface() = default;
 };
 } // namespace jt

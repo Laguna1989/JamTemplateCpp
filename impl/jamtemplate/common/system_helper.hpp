@@ -119,6 +119,8 @@ Iter select_randomly(Iter start, Iter end)
     return select_randomly(start, end, gen);
 }
 
+bool checkForValidFile(std::string const& filename);
+
 } // namespace SystemHelper
 } // namespace jt
 #endif

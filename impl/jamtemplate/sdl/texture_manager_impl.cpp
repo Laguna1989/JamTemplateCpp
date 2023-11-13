@@ -233,13 +233,13 @@ std::shared_ptr<SDL_Texture> loadTextureFromDisk(
     if (renderTarget == nullptr) {
         throw std::logic_error { "rendertarget is null in loadTextureFromDisk" };
     }
-    auto t = std::shared_ptr<SDL_Texture>(IMG_LoadTexture(renderTarget.get(), str.c_str()),
+    auto texture = std::shared_ptr<SDL_Texture>(IMG_LoadTexture(renderTarget.get(), str.c_str()),
         [](SDL_Texture* t) { SDL_DestroyTexture(t); });
 
-    if (t == nullptr) {
+    if (texture == nullptr) {
         throw std::invalid_argument { "invalid filename, cannot load texture from '" + str + "'" };
     }
-    return t;
+    return texture;
 }
 } // namespace
 
@@ -254,7 +254,8 @@ std::shared_ptr<SDL_Texture> TextureManagerImpl::get(std::string const& str)
         std::cout << "TextureManager get: string must not be empty" << std::endl;
         throw std::invalid_argument { "TextureManager get: string must not be empty" };
     }
-    if (m_renderer.expired()) {
+    auto renderer = m_renderer.lock();
+    if (!renderer) {
         std::cout << "renderer not available for TextureManager::get()" << std::endl;
         throw std::logic_error { "renderer not available for TextureManager::get()" };
     }
@@ -265,14 +266,14 @@ std::shared_ptr<SDL_Texture> TextureManagerImpl::get(std::string const& str)
     }
 
     // Check if special ase parsing is required
-    if (strutil::ends_with(str, ".aseprite")) {
-        m_textures[str] = createImageFromAse(str, m_renderer.lock());
-        m_textures[getFlashName(str)] = createFlashImage(str, m_renderer.lock());
+    if (strutil::contains(str, ".aseprite")) {
+        m_textures[str] = createImageFromAse(str, renderer);
+        m_textures[getFlashName(str)] = createFlashImage(str, renderer);
         return m_textures[str];
     }
 
     // normal filenames do not start with a '#'
-    if (!strutil::starts_with(str, '#')) {
+    if (!str.starts_with('#')) {
         m_textures[str] = loadTextureFromDisk(str, m_renderer.lock());
         // create Flash Image
         m_textures[getFlashName(str)] = createFlashImage(str, m_renderer.lock());
@@ -281,19 +282,19 @@ std::shared_ptr<SDL_Texture> TextureManagerImpl::get(std::string const& str)
 
     auto ssv = strutil::split(str.substr(1u), '#');
     if (ssv.at(0) == "b") {
-        m_textures[str] = createButtonImage(ssv, m_renderer.lock());
+        m_textures[str] = createButtonImage(ssv, renderer);
     } else if (ssv.at(0) == "f") {
-        m_textures[str] = createBlankImage(ssv, m_renderer.lock());
+        m_textures[str] = createBlankImage(ssv, renderer);
     } else if (ssv.at(0) == "g") {
-        m_textures[str] = createGlowImage(ssv, m_renderer.lock());
+        m_textures[str] = createGlowImage(ssv, renderer);
     } else if (ssv.at(0) == "v") {
-        m_textures[str] = createVignetteImage(ssv, m_renderer.lock());
+        m_textures[str] = createVignetteImage(ssv, renderer);
     } else if (ssv.at(0) == "x") {
-        m_textures[str] = createRectImage(ssv, m_renderer.lock());
+        m_textures[str] = createRectImage(ssv, renderer);
     } else if (ssv.at(0) == "c") {
-        m_textures[str] = createCircleImage(ssv, m_renderer.lock());
+        m_textures[str] = createCircleImage(ssv, renderer);
     } else if (ssv.at(0) == "r") {
-        m_textures[str] = createRingImage(ssv, m_renderer.lock());
+        m_textures[str] = createRingImage(ssv, renderer);
     } else {
         throw std::invalid_argument("ERROR: cannot get texture with name " + str);
     }

@@ -14,9 +14,8 @@ namespace detail {
 struct CellIndex {
     int x { 0 };
     int y { 0 };
+    bool operator==(CellIndex const& other) const = default;
 };
-
-bool operator==(CellIndex const& a, CellIndex const& b) { return a.x == b.x && a.y == b.y; }
 
 bool operator!=(CellIndex const& a, CellIndex const& b) { return !(a == b); }
 

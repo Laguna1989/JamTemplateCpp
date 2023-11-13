@@ -61,7 +61,6 @@ void jt::TrailingCircles::doDraw() const
 void jt::TrailingCircles::setPosition(jt::Vector2f const& pos)
 {
     if (m_maxDistance > 0) {
-        auto const dist = m_pos - pos;
         m_summedUpDistance += jt::MathHelper::length(m_pos - pos);
         if (m_summedUpDistance >= m_maxDistance) {
             m_summedUpDistance = 0.0f;

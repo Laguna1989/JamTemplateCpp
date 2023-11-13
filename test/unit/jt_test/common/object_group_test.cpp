@@ -14,11 +14,17 @@ protected:
 };
 
 TEST_F(ObjectGroupInitialTest, IsEmptyReturnsTrue) { ASSERT_EQ(g.size(), 0); }
+
 TEST_F(ObjectGroupInitialTest, BeginEqualsEnd) { ASSERT_EQ(g.begin(), g.end()); }
+
 TEST_F(ObjectGroupInitialTest, GlobalBeginEqualsBegin) { ASSERT_EQ(jt::begin(g), g.begin()); }
+
 TEST_F(ObjectGroupInitialTest, GlobalEndEqualsEnd) { ASSERT_EQ(jt::end(g), g.end()); }
+
 TEST_F(ObjectGroupInitialTest, CBeginEqualsCEnd) { ASSERT_EQ(g.cbegin(), g.cend()); }
+
 TEST_F(ObjectGroupInitialTest, AgeIsZero) { ASSERT_EQ(g.getAge(), 0.0f); }
+
 TEST_F(ObjectGroupInitialTest, IsAlive) { ASSERT_TRUE(g.isAlive()); }
 
 #ifndef JT_ENABLE_WEB
@@ -29,6 +35,7 @@ class ObjectGroupTestWithGame : public ::testing::Test {
 public:
     std::shared_ptr<jt::GameInterface> game;
     Group g;
+
     void SetUp() override
     {
         game = std::make_shared<MockGame>();
@@ -100,7 +107,8 @@ TEST_F(ObjectGroupTestWithGame, RangedBaseForLoopIsPossibleForObjectGroup)
 
     std::size_t count { 0 };
 
-    for (auto const wptr : g) {
+    for (auto const& wptr : g) {
+        (void)wptr;
         count++;
     }
 

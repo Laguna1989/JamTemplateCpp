@@ -28,13 +28,13 @@ public:
     virtual ~InputGetInterface() = default;
 
     // no copy, no move. Avoid slicing.
-    InputGetInterface(const InputGetInterface&) = delete;
+    InputGetInterface(InputGetInterface const&) = delete;
     InputGetInterface(InputGetInterface&&) = delete;
-    InputGetInterface& operator=(const InputGetInterface&) = delete;
+    InputGetInterface& operator=(InputGetInterface const&) = delete;
     InputGetInterface& operator=(InputGetInterface&&) = delete;
 
 protected:
-    // default default constructor can only be called from derived classes
+    // default constructor can only be called from derived classes
     InputGetInterface() = default;
 };
 

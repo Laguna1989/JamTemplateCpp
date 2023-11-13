@@ -1,8 +1,10 @@
 #include "log_history.hpp"
 
 std::vector<jt::LogEntry> const& jt::LogHistory::getHistory() { return m_history; }
+
 void jt::LogHistory::clear() { m_history.clear(); }
-void jt::LogHistory::addEntry(jt::LogEntry const& entry)
+
+void jt::LogHistory::doLog(jt::LogEntry const& entry)
 {
     m_history.push_back(entry);
 

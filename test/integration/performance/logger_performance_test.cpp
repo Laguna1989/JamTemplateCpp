@@ -23,7 +23,7 @@ static void BM_LoggerLogWithCoutTargetSetToOff(benchmark::State& state)
     for (auto _ : state) {
         jt::Logger logger;
         auto target = std::make_shared<jt::LogTargetOstream>();
-        target->setLogLevel(jt::LogLevel::LogLevelOff);
+        target->setLogLevel(jt::LogLevel::Off);
         logger.addLogTarget(target);
 
         for (auto i = 0u; i != 200u; ++i) {

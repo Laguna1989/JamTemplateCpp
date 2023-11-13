@@ -57,10 +57,11 @@ public:
             .WillByDefault(::testing::Invoke(
                 [this]() -> std::shared_ptr<jt::KeyboardInterface> { return m_keyboard; }));
     }
+
     MOCK_METHOD(std::shared_ptr<jt::MouseInterface>, mouse, (), (override));
     MOCK_METHOD(std::shared_ptr<jt::KeyboardInterface>, keyboard, (), (override));
 
-    MOCK_METHOD(void, update, (bool, bool, const jt::MousePosition&, float), (override));
+    MOCK_METHOD(void, update, (bool, bool, jt::MousePosition const&, float), (override));
     MOCK_METHOD(void, reset, (), (override));
     MOCK_METHOD(std::shared_ptr<jt::GamepadInterface>, gamepad, (int), (override));
     MOCK_METHOD(size_t, getNumberOfGamepads, (), (const, override));

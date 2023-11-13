@@ -24,7 +24,7 @@ public:
     jt::TextureManagerImpl textureManager { nullptr };
     ::testing::NiceMock<MockGfx> gfx;
     jt::ActionCommandManager actionCommandManager { logger };
-    jt::AudioNull audio;
+    jt::null_objects::AudioNull audio;
 
     std::shared_ptr<MockState> state { nullptr };
     ::testing::NiceMock<MockInput> input;

@@ -46,13 +46,13 @@ public:
     virtual ~GamepadInterface() = default;
 
     // no copy, no move. Avoid slicing.
-    GamepadInterface(const GamepadInterface&) = delete;
+    GamepadInterface(GamepadInterface const&) = delete;
     GamepadInterface(GamepadInterface&&) = delete;
-    GamepadInterface& operator=(const GamepadInterface&) = delete;
+    GamepadInterface& operator=(GamepadInterface const&) = delete;
     GamepadInterface& operator=(GamepadInterface&&) = delete;
 
 protected:
-    // default default constructor can only be called from derived classes
+    // default constructor can only be called from derived classes
     GamepadInterface() = default;
 };
 

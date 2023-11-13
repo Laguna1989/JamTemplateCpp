@@ -49,13 +49,13 @@ public:
     virtual ~NodeInterface() = default;
 
     // no copy, no move. Avoid slicing.
-    NodeInterface(const NodeInterface&) = delete;
+    NodeInterface(NodeInterface const&) = delete;
     NodeInterface(NodeInterface&&) = delete;
-    NodeInterface& operator=(const NodeInterface&) = delete;
+    NodeInterface& operator=(NodeInterface const&) = delete;
     NodeInterface& operator=(NodeInterface&&) = delete;
 
 protected:
-    // default default constructor can only be called from derived classes
+    // default constructor can only be called from derived classes
     NodeInterface() = default;
 };
 

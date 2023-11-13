@@ -12,10 +12,13 @@ public:
 private:
     mutable bool m_showInfo { false };
 
-    jt::CircularBuffer<float, 200> m_frameTimes;
+    jt::CircularBuffer<float, 200u> m_frameTimes;
     std::vector<float> m_frameTimesVector;
 
-    jt::CircularBuffer<float, 800> m_GameObjectAliveCount;
+    mutable std::uint16_t m_numberOfUpdatesInThisFrame { 0 };
+    mutable jt::CircularBuffer<float, 200u> m_numberOfUpdatesInLastFrame;
+
+    jt::CircularBuffer<float, 800u> m_GameObjectAliveCount;
     std::vector<float> m_GameObjectAliveCountVector;
 
     virtual void doCreate();

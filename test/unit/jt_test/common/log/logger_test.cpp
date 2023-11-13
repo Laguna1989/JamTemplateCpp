@@ -1,5 +1,6 @@
 #include <log/logger.hpp>
 #include <log/logger_null.hpp>
+#include <mocks/mock_history.hpp>
 #include <mocks/mock_log_target.hpp>
 #include <gtest/gtest.h>
 
@@ -63,17 +64,17 @@ TYPED_TEST(LoggerTypedTestFixture, VerboseDoesNotRaiseException)
     ASSERT_NO_THROW(logger.verbose(""));
 }
 
-TEST(LoggerTest, LogToMockTarget)
+TYPED_TEST(LoggerTypedTestFixture, SetLogLevelDoesNotRaiseException)
+{
+    TypeParam logger;
+    ASSERT_NO_THROW(logger.setLogLevel(jt::LogLevel::Info));
+}
+
+TEST(LoggerTest, LogToMockTargetForwardsToTarget)
 {
     jt::Logger logger {};
     auto target = std::make_shared<MockLogTarget>();
     logger.addLogTarget(target);
     EXPECT_CALL(*target, log(::testing::_));
     logger.fatal("", {});
-}
-
-TYPED_TEST(LoggerTypedTestFixture, SetLogLevelDoesNotRaiseException)
-{
-    TypeParam logger;
-    ASSERT_NO_THROW(logger.setLogLevel(jt::LogLevel::LogLevelInfo));
 }
