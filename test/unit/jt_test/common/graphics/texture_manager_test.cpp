@@ -148,6 +148,4 @@ TEST_F(TextureManagerTest, Preload)
     //    m_manager.get("assets/test/unit/jt_test/pngs_for_preload/pilz_small.png");
     //    m_manager.get("assets/test/unit/jt_test/pngs_for_preload/tileset.png");
     ASSERT_EQ(m_manager.getNumberOfTextures(), 6);
-
-    m_manager.reset();
 }

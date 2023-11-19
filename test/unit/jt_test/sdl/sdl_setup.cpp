@@ -11,7 +11,7 @@ SDLSetup::SDLSetup()
         [](SDL_Window* w) { SDL_DestroyWindow(w); });
     m_renderTarget = std::shared_ptr<SDL_Renderer>(
         SDL_CreateRenderer(window.get(), -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_TARGETTEXTURE),
-        [](SDL_Renderer* r) { SDL_DestroyRenderer(r); });
+        [](SDL_Renderer* r) { /*SDL_DestroyRenderer(r);*/ });
     if (!m_renderTarget) {
         throw std::logic_error { "failed to create renderer." };
     }
