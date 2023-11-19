@@ -8,10 +8,6 @@ namespace jt {
 
 class LogHistoryInterface {
 public:
-    /// Add a log entry to the history
-    /// \param entry the entry to be added
-    virtual void addEntry(jt::LogEntry const& entry) = 0;
-
     /// Get the history of log entries
     /// \return the vector of LogEntries
     virtual std::vector<jt::LogEntry> const& getHistory() = 0;

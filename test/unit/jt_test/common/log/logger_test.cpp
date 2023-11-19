@@ -78,19 +78,3 @@ TEST(LoggerTest, LogToMockTargetForwardsToTarget)
     EXPECT_CALL(*target, log(::testing::_));
     logger.fatal("", {});
 }
-
-TEST(LoggerTest, LogWithMockHistoryForwardsToHistory)
-{
-    auto history = std::make_shared<MockHistory>();
-    jt::Logger logger { history };
-    EXPECT_CALL(*history, addEntry(::testing::_));
-    logger.fatal("", {});
-}
-
-TEST(LoggerTest, LogWithExpiredMockHistoryDoesNotThrow)
-{
-    auto history = std::make_shared<MockHistory>();
-    jt::Logger logger { history };
-    history.reset();
-    ASSERT_NO_THROW(logger.fatal("", {}));
-}

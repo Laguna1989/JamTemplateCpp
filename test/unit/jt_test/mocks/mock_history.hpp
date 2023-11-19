@@ -6,7 +6,6 @@
 
 class MockHistory : public jt::LogHistoryInterface {
 public:
-    MOCK_METHOD(void, addEntry, (jt::LogEntry const&), (override));
     MOCK_METHOD(std::vector<jt::LogEntry> const&, getHistory, (), (override));
     MOCK_METHOD(void, clear, (), (override));
 };

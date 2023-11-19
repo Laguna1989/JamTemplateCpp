@@ -15,6 +15,7 @@
 #include <input/keyboard/keyboard_input.hpp>
 #include <input/mouse/mouse_input.hpp>
 #include <log/default_logging.hpp>
+#include <log/log_history.hpp>
 #include <log/logger.hpp>
 #include <logging_camera.hpp>
 #include <random/random.hpp>
@@ -32,14 +33,16 @@ void gameloop()
     }
 }
 
-int main(int argc, char* argv[])
+int main(int /*argc*/, char* /*argv*/[])
 {
     jt::Random::useTimeAsRandomSeed();
 
-    jt::CacheImpl cache {};
+    auto logHistory = std::make_shared<jt::LogHistory>();
+    jt::CacheImpl cache { nullptr, logHistory };
 
-    jt::Logger logger { cache.getLogHistory() };
+    jt::Logger logger {};
     jt::createDefaultLogTargets(logger);
+    logger.addLogTarget(logHistory);
 
     auto const mouse = std::make_shared<jt::MouseInput>();
     auto const keyboard = std::make_shared<jt::KeyboardInput>();

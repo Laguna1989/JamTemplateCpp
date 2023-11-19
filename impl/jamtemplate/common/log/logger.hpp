@@ -11,9 +11,6 @@ class LogTargetInterface;
 
 class Logger : public jt::LoggerInterface {
 public:
-    Logger(
-        std::weak_ptr<jt::LogHistoryInterface> history = std::weak_ptr<jt::LogHistoryInterface> {});
-
     void action(std::string const& string) override;
     void fatal(std::string const& string, std::vector<std::string> const& tags = {}) override;
     void error(std::string const& string, std::vector<std::string> const& tags = {}) override;
@@ -27,11 +24,9 @@ public:
 
 private:
     std::vector<std::shared_ptr<jt::LogTargetInterface>> m_logTargets;
-    std::weak_ptr<jt::LogHistoryInterface> m_history;
 
     void addLogEntry(LogEntry entry);
     LogLevel m_logLevel { LogLevel::Verbose };
-    void addLogEntryToHistory(LogEntry const& entry) const;
 };
 } // namespace jt
 

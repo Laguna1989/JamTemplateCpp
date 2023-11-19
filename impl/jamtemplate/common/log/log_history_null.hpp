@@ -8,7 +8,6 @@ namespace null_objects {
 
 class LogHistoryNull : public jt::LogHistoryInterface {
 public:
-    void addEntry(LogEntry const& entry) override;
     std::vector<jt::LogEntry> const& getHistory() override;
     void clear() override;
 
