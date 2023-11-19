@@ -3,7 +3,9 @@
 
 #include <oalpp/effects/mono_effect_interface.hpp>
 #include <oalpp/sound_data/sound_data_interface.hpp>
+#include <cstddef>
 #include <memory>
+#include <string>
 
 namespace jt {
 

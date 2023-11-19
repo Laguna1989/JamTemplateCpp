@@ -142,5 +142,12 @@ TEST_F(TextureManagerTest, Preload)
         m_manager, "assets/test/unit/jt_test/pngs_for_preload", ".png", true);
     // Note: There are three pngs in the folder, but because of the automatically created flash
     // image, the count is 2x the number of pngs.
+
+    //    m_manager.get("assets/test/unit/jt_test/pngs_for_preload/coin.png");
+    //
+    //    m_manager.get("assets/test/unit/jt_test/pngs_for_preload/pilz_small.png");
+    //    m_manager.get("assets/test/unit/jt_test/pngs_for_preload/tileset.png");
     ASSERT_EQ(m_manager.getNumberOfTextures(), 6);
+
+    m_manager.reset();
 }
