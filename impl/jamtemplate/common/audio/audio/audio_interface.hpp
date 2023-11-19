@@ -5,6 +5,7 @@
 #include <audio/sound/sound.hpp>
 #include <audio/sound/sound_interface.hpp>
 #include <audio/sound/sound_with_effect.hpp>
+#include <audio/sound_buffer_manager/sound_buffer_manager_interface.hpp>
 #include <audio/sound_groups/group_volume_setter_interface.hpp>
 #include <oalpp/sound_context/sound_context_interface.hpp>
 #include <functional>
@@ -91,6 +92,10 @@ public:
     /// Get the GroupVolumes
     /// \return the GroupVolumeSetter
     virtual jt::GroupVolumeSetterInterface& groups() = 0;
+
+    /// Get SoundBufferManager
+    /// \return the SoundBufferManager
+    virtual SoundBufferManagerInterface& getSoundBufferManager() = 0;
 
     virtual ~AudioInterface() = default;
 

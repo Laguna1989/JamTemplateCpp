@@ -64,13 +64,13 @@ public:
     virtual ~StateManagerInterface() = default;
 
     // no copy, no move. Avoid slicing.
-    StateManagerInterface(const StateManagerInterface&) = delete;
+    StateManagerInterface(StateManagerInterface const&) = delete;
     StateManagerInterface(StateManagerInterface&&) = delete;
-    StateManagerInterface& operator=(const StateManagerInterface&) = delete;
+    StateManagerInterface& operator=(StateManagerInterface const&) = delete;
     StateManagerInterface& operator=(StateManagerInterface&&) = delete;
 
 protected:
-    // default default constructor can only be called from derived classes
+    // default constructor can only be called from derived classes
     StateManagerInterface() = default;
 };
 

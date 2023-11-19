@@ -1,5 +1,4 @@
 #include "group_volume_manager.hpp"
-#include <algorithm>
 
 float jt::GroupVolumeManager::getVolume(std::string const& groupName) const
 {
@@ -17,6 +16,7 @@ void jt::GroupVolumeManager::setGroupVolume(std::string const& groupName, float 
 {
     m_volumeGroups[groupName] = volume;
 }
+
 std::vector<std::string> jt::GroupVolumeManager::getAllGroupNames() const
 {
     std::vector<std::string> groupNames;

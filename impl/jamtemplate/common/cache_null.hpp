@@ -16,7 +16,7 @@ public:
     std::shared_ptr<jt::LogHistoryInterface> getLogHistory() override;
 
 private:
-    std::unique_ptr<jt::TilemapCacheNull> m_cache { nullptr };
+    std::unique_ptr<jt::TilemapCacheNull> m_tilemapCache { nullptr };
     std::shared_ptr<jt::null_objects::LogHistoryNull> m_history;
 };
 } // namespace jt

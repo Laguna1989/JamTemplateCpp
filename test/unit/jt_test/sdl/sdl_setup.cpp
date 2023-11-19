@@ -1,7 +1,7 @@
 #include "sdl_setup.hpp"
 #include <render_target_lib.hpp>
-#include <texture_manager_impl.hpp>
 #include <sdl_2_include.hpp>
+#include <texture_manager_impl.hpp>
 #include <iostream>
 
 SDLSetup::SDLSetup()

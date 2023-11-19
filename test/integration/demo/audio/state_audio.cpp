@@ -1,11 +1,17 @@
 #include "state_audio.hpp"
 #include <audio/sound/sound_group.hpp>
 #include <game_interface.hpp>
+#include <preload_helper.hpp>
 #include <state_select.hpp>
 #include <imgui.h>
 
 void StateAudio::onCreate()
 {
+    jt::PreloadHelper::preloadAllFrom(
+        getGame()->audio().getSoundBufferManager(), "assets/test/integration/demo", ".mp3");
+    jt::PreloadHelper::preloadAllFrom(
+        getGame()->audio().getSoundBufferManager(), "assets/test/integration/demo", ".ogg");
+
     // check if music was already created m_sound = getGame()->audio().getPermanentSound("music");
     if (m_sound == nullptr) {
         // create new music
@@ -36,6 +42,7 @@ void StateAudio::onCreate()
     m_loopingSound = getGame()->audio().addTemporarySound("assets/test/integration/demo/test.ogg");
     m_loopingSound->setLoop(true);
 }
+
 void StateAudio::onEnter() { }
 
 void StateAudio::onUpdate(float /*elapsed*/)
@@ -113,4 +120,5 @@ void StateAudio::onDraw() const
     }
     ImGui::End();
 }
+
 std::string StateAudio::getName() const { return "State Demo Audio"; }

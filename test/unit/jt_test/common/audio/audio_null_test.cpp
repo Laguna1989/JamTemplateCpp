@@ -3,32 +3,32 @@
 
 TEST(AudioNullTest, getContext)
 {
-    jt::AudioNull audio;
+    jt::null_objects::AudioNull audio;
     ASSERT_NO_THROW(audio.getContext());
 }
 
 TEST(AudioNullTest, GetPermanentSoundReturnsNoNullptr)
 {
-    jt::AudioNull audio;
+    jt::null_objects::AudioNull audio;
     ASSERT_NE(audio.getPermanentSound("bla"), nullptr);
 }
 
 TEST(AudioNullTest, AddTemporarySoundReturnsNoNullptr)
 {
-    jt::AudioNull audio;
+    jt::null_objects::AudioNull audio;
     ASSERT_NE(audio.addTemporarySound("bla"), nullptr);
 }
 
 TEST(AudioNullTest, AddTemporarySoundGroupReturnsNoNullptr)
 {
-    jt::AudioNull audio;
+    jt::null_objects::AudioNull audio;
 
     ASSERT_NE(audio.addTemporarySoundGroup({ nullptr, nullptr }), nullptr);
 }
 
 TEST(AudioNullTest, AddPermanentSoundReturnsNoNullptr)
 {
-    jt::AudioNull audio;
+    jt::null_objects::AudioNull audio;
     ASSERT_NE(audio.addPermanentSound("bla", "bla"), nullptr);
 }
 
@@ -39,38 +39,44 @@ public:
 
 TEST(AudioNullTest, AddPermanentSoundWithEffectReturnsNoNullptr)
 {
-    jt::AudioNull audio;
+    jt::null_objects::AudioNull audio;
     FakeEffect effect;
     ASSERT_NE(audio.addPermanentSound("bla", "bla", effect), nullptr);
 }
 
 TEST(AudioNullTest, AddPermanentSoundWithLoopingEffectReturnsNoNullptr)
 {
-    jt::AudioNull audio;
+    jt::null_objects::AudioNull audio;
     FakeEffect effect;
     ASSERT_NE(audio.addPermanentSound("bla0", "bla1", "bla2", effect), nullptr);
 }
 
 TEST(AudioNullTest, SoundPoolReturnsNoNullptr)
 {
-    jt::AudioNull audio;
+    jt::null_objects::AudioNull audio;
     ASSERT_NE(audio.soundPool("bla", "blubb", 4), nullptr);
 }
 
 TEST(AudioNullTest, RemovePermanentSoundDoesNotThrow)
 {
-    jt::AudioNull audio;
+    jt::null_objects::AudioNull audio;
     ASSERT_NO_THROW(audio.removePermanentSound("abcd"));
 }
 
-TEST(AudioNullTest, Fades)
+TEST(AudioNullTest, FadesDoesNotThrow)
 {
-    jt::AudioNull audio;
+    jt::null_objects::AudioNull audio;
     ASSERT_NO_THROW(audio.fades());
 }
 
-TEST(AudioNullTest, groups)
+TEST(AudioNullTest, groupsDoesNotThrow)
 {
-    jt::AudioNull audio;
+    jt::null_objects::AudioNull audio;
     ASSERT_NO_THROW(audio.groups());
+}
+
+TEST(AudioNullTest, soundBufferManagerDoesNotThrow)
+{
+    jt::null_objects::AudioNull audio;
+    ASSERT_NO_THROW(audio.getSoundBufferManager());
 }

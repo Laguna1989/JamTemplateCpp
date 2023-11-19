@@ -23,13 +23,13 @@ public:
     virtual ~LogHistoryInterface() = default;
 
     // no copy, no move. Avoid slicing.
-    LogHistoryInterface(const LogHistoryInterface&) = delete;
+    LogHistoryInterface(LogHistoryInterface const&) = delete;
     LogHistoryInterface(LogHistoryInterface&&) = delete;
-    LogHistoryInterface& operator=(const LogHistoryInterface&) = delete;
+    LogHistoryInterface& operator=(LogHistoryInterface const&) = delete;
     LogHistoryInterface& operator=(LogHistoryInterface&&) = delete;
 
 protected:
-    // default default constructor can only be called from derived classes
+    // default constructor can only be called from derived classes
     LogHistoryInterface() = default;
 };
 } // namespace jt

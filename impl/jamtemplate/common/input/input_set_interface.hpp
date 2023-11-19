@@ -19,13 +19,13 @@ public:
     virtual ~InputSetInterface() = default;
 
     // no copy, no move. Avoid slicing.
-    InputSetInterface(const InputSetInterface&) = delete;
+    InputSetInterface(InputSetInterface const&) = delete;
     InputSetInterface(InputSetInterface&&) = delete;
-    InputSetInterface& operator=(const InputSetInterface&) = delete;
+    InputSetInterface& operator=(InputSetInterface const&) = delete;
     InputSetInterface& operator=(InputSetInterface&&) = delete;
 
 protected:
-    // default default constructor can only be called from derived classes
+    // default constructor can only be called from derived classes
     InputSetInterface() = default;
 };
 

@@ -9,6 +9,7 @@ jt::InfoScreen::InfoScreen()
 }
 
 void jt::InfoScreen::doCreate() { }
+
 void jt::InfoScreen::doUpdate(float const elapsed)
 {
 #ifdef JT_ENABLE_DEBUG
@@ -30,6 +31,7 @@ void jt::InfoScreen::doUpdate(float const elapsed)
     }
 #endif
 }
+
 void jt::InfoScreen::doDraw() const
 {
     if (!m_showInfo) {
@@ -84,6 +86,10 @@ void jt::InfoScreen::doDraw() const
 
         ImGui::Text("%s", createdSoundsText.c_str());
         ImGui::Text("%s", aliveSoundsText.c_str());
+
+        std::string const soundBuffersString = "# Sound Buffers: "
+            + std::to_string(getGame()->audio().getSoundBufferManager().getNumberOfBuffers());
+        ImGui::Text("%s", soundBuffersString.c_str());
     }
     ImGui::End();
 }

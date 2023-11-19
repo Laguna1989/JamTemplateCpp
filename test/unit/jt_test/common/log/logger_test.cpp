@@ -1,5 +1,6 @@
 #include <log/logger.hpp>
 #include <log/logger_null.hpp>
+#include <mocks/mock_history.hpp>
 #include <mocks/mock_log_target.hpp>
 #include <gtest/gtest.h>
 
@@ -63,7 +64,13 @@ TYPED_TEST(LoggerTypedTestFixture, VerboseDoesNotRaiseException)
     ASSERT_NO_THROW(logger.verbose(""));
 }
 
-TEST(LoggerTest, LogToMockTarget)
+TYPED_TEST(LoggerTypedTestFixture, SetLogLevelDoesNotRaiseException)
+{
+    TypeParam logger;
+    ASSERT_NO_THROW(logger.setLogLevel(jt::LogLevel::Info));
+}
+
+TEST(LoggerTest, LogToMockTargetForwardsToTarget)
 {
     jt::Logger logger {};
     auto target = std::make_shared<MockLogTarget>();
@@ -72,8 +79,18 @@ TEST(LoggerTest, LogToMockTarget)
     logger.fatal("", {});
 }
 
-TYPED_TEST(LoggerTypedTestFixture, SetLogLevelDoesNotRaiseException)
+TEST(LoggerTest, LogWithMockHistoryForwardsToHistory)
 {
-    TypeParam logger;
-    ASSERT_NO_THROW(logger.setLogLevel(jt::LogLevel::LogLevelInfo));
+    auto history = std::make_shared<MockHistory>();
+    jt::Logger logger { history };
+    EXPECT_CALL(*history, addEntry(::testing::_));
+    logger.fatal("", {});
+}
+
+TEST(LoggerTest, LogWithExpiredMockHistoryDoesNotThrow)
+{
+    auto history = std::make_shared<MockHistory>();
+    jt::Logger logger { history };
+    history.reset();
+    ASSERT_NO_THROW(logger.fatal("", {}));
 }

@@ -1,7 +1,8 @@
 #ifndef JAMTEMPLATE_SOUND_WITH_EFFECT_HPP
 #define JAMTEMPLATE_SOUND_WITH_EFFECT_HPP
 
-#include "sound_base.hpp"
+#include <audio/sound/sound_base.hpp>
+#include <audio/sound_buffer_manager/sound_buffer_manager_interface.hpp>
 #include <oalpp/sound.hpp>
 #include <oalpp/sound_data.hpp>
 
@@ -9,7 +10,9 @@ namespace jt {
 
 class SoundWithEffect : public SoundBase {
 public:
-    SoundWithEffect(std::string const& fileName, oalpp::effects::MonoEffectInterface& effect);
+    SoundWithEffect(std::string const& fileName,
+        jt::SoundBufferManagerInterface& soundBufferManager,
+        oalpp::effects::MonoEffectInterface& effect);
     void update() override;
 
     float getFinalVolume() const override;
@@ -32,10 +35,10 @@ public:
     int getSampleRate() const override;
 
 private:
-    oalpp::SoundData m_drySoundData;
+    std::shared_ptr<oalpp::SoundDataInterface> m_drySoundData;
     oalpp::Sound m_drySound;
 
-    oalpp::SoundDataWithEffect m_wetSoundData;
+    std::shared_ptr<oalpp::SoundDataInterface> m_wetSoundData;
     oalpp::Sound m_wetSound;
 };
 

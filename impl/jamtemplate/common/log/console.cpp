@@ -130,17 +130,17 @@ void jt::Console::renderOneLogEntry(jt::LogEntry const& entry) const
 
     std::string levelText = "";
 
-    if (entry.level == LogLevel::LogLevelWarning) {
+    if (entry.level == LogLevel::Warning) {
         color = ImVec4 { 1.0f, 1.0f, 0.0f, 1.0f };
         levelText = "[warn]";
-    } else if (entry.level == LogLevel::LogLevelAction) {
+    } else if (entry.level == LogLevel::Action) {
         color = ImVec4 { 0.8f, 0.8f, 0.2f, 1.0f };
         levelText = "# ";
         tagText = "";
-    } else if (entry.level == LogLevel::LogLevelFatal) {
+    } else if (entry.level == LogLevel::Fatal) {
         color = ImVec4 { 1.0f, 0.0f, 0.0f, 1.0f };
         levelText = "[fatal]";
-    } else if (entry.level == LogLevel::LogLevelError) {
+    } else if (entry.level == LogLevel::Error) {
         color = ImVec4 { 1.0f, 0.5f, 0.5f, 1.0f };
         levelText = "[error]";
     }

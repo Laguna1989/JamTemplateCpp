@@ -32,7 +32,7 @@ void gameloop()
     }
 }
 
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
     jt::Random::useTimeAsRandomSeed();
 
@@ -54,7 +54,7 @@ int main(int argc, char *argv[])
     jt::LoggingCamera loggingCamera { camera, logger };
     jt::GfxImpl gfx { loggingRenderWindow, loggingCamera };
 
-    jt::SoundFadeManager fades;
+    jt::SoundFadeManager fades {};
     jt::AudioImpl audio { std::make_unique<jt::LoggingSoundFadeManager>(fades, logger) };
     jt::LoggingAudio loggingAudio { audio, logger };
 

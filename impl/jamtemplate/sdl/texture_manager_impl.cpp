@@ -265,14 +265,14 @@ std::shared_ptr<SDL_Texture> TextureManagerImpl::get(std::string const& str)
     }
 
     // Check if special ase parsing is required
-    if (strutil::ends_with(str, ".aseprite")) {
+    if (strutil::contains(str, ".aseprite")) {
         m_textures[str] = createImageFromAse(str, m_renderer.lock());
         m_textures[getFlashName(str)] = createFlashImage(str, m_renderer.lock());
         return m_textures[str];
     }
 
     // normal filenames do not start with a '#'
-    if (!strutil::starts_with(str, '#')) {
+    if (!str.starts_with('#')) {
         m_textures[str] = loadTextureFromDisk(str, m_renderer.lock());
         // create Flash Image
         m_textures[getFlashName(str)] = createFlashImage(str, m_renderer.lock());

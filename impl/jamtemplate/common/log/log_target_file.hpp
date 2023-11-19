@@ -2,21 +2,21 @@
 #define JAMTEMPLATE_LOG_TARGET_FILE_HPP
 
 #include <log/log_level.hpp>
-#include <log/log_target_interface.hpp>
+#include <log/log_target_base.hpp>
 #include <fstream>
 
 namespace jt {
 struct LogEntry;
 
-class LogTargetFile : public LogTargetInterface {
+class LogTargetFile : public LogTargetBase {
 public:
     LogTargetFile();
-    void log(LogEntry const& entry) override;
-    void setLogLevel(LogLevel level) override;
+
+private:
+    void doLog(LogEntry const& entry) override;
 
 private:
     std::ofstream m_file;
-    LogLevel m_logLevel { LogLevel::LogLevelVerbose };
 };
 
 } // namespace jt

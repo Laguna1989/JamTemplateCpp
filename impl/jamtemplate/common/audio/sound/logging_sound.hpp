@@ -2,6 +2,7 @@
 #define JAMTEMPLATE_LOGGING_SOUND_HPP
 
 #include <audio/sound/sound_interface.hpp>
+#include <audio/sound_buffer_manager/sound_buffer_manager_interface.hpp>
 #include <log/logger_interface.hpp>
 
 namespace jt {
@@ -11,7 +12,8 @@ public:
     LoggingSound(std::shared_ptr<SoundInterface> decoratee, LoggerInterface& logger);
 
     /// Constructor for convenience for creating a normal sound
-    LoggingSound(std::string const& fileName, LoggerInterface& logger);
+    LoggingSound(std::string const& fileName, jt::SoundBufferManagerInterface& soundBufferManager,
+        LoggerInterface& logger);
 
     void update() override;
     bool isPlaying() const override;
