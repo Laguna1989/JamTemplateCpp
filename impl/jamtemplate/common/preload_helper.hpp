@@ -26,7 +26,7 @@ void preloadAllFrom(HasGet auto& cache, std::string const& folder, std::string c
     }
 
     auto const fun = [&](auto f) {
-        std::string const path = f.path();
+        std::string const path = f.path().string();
         if (path.ends_with(extension)) {
             cache.get(path);
         }
