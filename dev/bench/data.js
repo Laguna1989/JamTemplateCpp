@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1699827013156,
+  "lastUpdate": 1700769255144,
   "repoUrl": "https://github.com/Laguna1989/JamTemplateCpp",
   "entries": {
     "Benchmark": [
@@ -14088,6 +14088,84 @@ window.BENCHMARK_DATA = {
             "value": 3.538804681818218,
             "unit": "ms/iter",
             "extra": "iterations: 198\ncpu: 3.538463131313132 ms\nthreads: 1"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "laguna.ws@gmail.com",
+            "name": "Laguna1989",
+            "username": "Laguna1989"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "e64cddc7514736313d3fea9665ea2521ec57b083",
+          "message": "Merge pull request #306 from Laguna1989/feature/usecpp20_new\n\nAdd SoundBufferManager",
+          "timestamp": "2023-11-23T20:49:45+01:00",
+          "tree_id": "edcf26e010ae953e5da93b6ddbde9f5d46027ea2",
+          "url": "https://github.com/Laguna1989/JamTemplateCpp/commit/e64cddc7514736313d3fea9665ea2521ec57b083"
+        },
+        "date": 1700769254575,
+        "tool": "googlecpp",
+        "benches": [
+          {
+            "name": "BM_UpdateDrawablePositions",
+            "value": 3.2868751243522567,
+            "unit": "ms/iter",
+            "extra": "iterations: 193\ncpu: 3.2867067357512956 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GetAllCommands",
+            "value": 0.27422697266244106,
+            "unit": "ms/iter",
+            "extra": "iterations: 2524\ncpu: 0.2742193343898573 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_LoggerLogWithoutTarget",
+            "value": 0.28447265870443844,
+            "unit": "ms/iter",
+            "extra": "iterations: 2470\ncpu: 0.28446481781376526 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_LoggerLogWithCoutTargetSetToOff",
+            "value": 0.28759507875305873,
+            "unit": "ms/iter",
+            "extra": "iterations: 2438\ncpu: 0.28757895816242807 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_UpdateObjectGroup",
+            "value": 0.016700972389413926,
+            "unit": "ms/iter",
+            "extra": "iterations: 41868\ncpu: 0.016700709372312987 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_UpdateSpatialObjectGrid",
+            "value": 0.2708352789534436,
+            "unit": "ms/iter",
+            "extra": "iterations: 2599\ncpu: 0.2708236629472872 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_StartGame",
+            "value": 0.003114195508104905,
+            "unit": "ms/iter",
+            "extra": "iterations: 224983\ncpu: 0.0031140966206335587 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_RefineTilemapCollisions",
+            "value": 0.13938463936724355,
+            "unit": "ms/iter",
+            "extra": "iterations: 4994\ncpu: 0.13938147777332802 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GamestateWithTweeningShapes",
+            "value": 2.0795452485208643,
+            "unit": "ms/iter",
+            "extra": "iterations: 338\ncpu: 2.0795177514792926 ms\nthreads: 1"
           }
         ]
       }
