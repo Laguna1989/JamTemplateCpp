@@ -108,10 +108,13 @@ TEST(VectorNoralize, NormalizeOfZeroVector)
     ASSERT_EQ(v0.y, 0.0f);
 }
 
-TEST(Rad2DegConversion, Inverse)
+TEST(Rad2DegConversion, Rad2DegAndDegToRadCancelEachOther)
 {
-    float const v { 0.25f };
-    ASSERT_NEAR(v, rad2deg(deg2rad(v)), 0.0001f);
+    std::vector<float> const values { 0.25f, 1.0f, 2.0f, 5.0f, 10.0f, 20.0f, 45.0f, 90.0f, 180.0f,
+        360.0f };
+    for (auto const& v : values) {
+        ASSERT_NEAR(v, rad2deg(deg2rad(v)), 0.0001f);
+    }
 }
 
 class RotateByTestFixture : public ::testing::TestWithParam<jt::Vector2f> { };
@@ -286,6 +289,23 @@ TEST(FloatToString, StringWithLengthZero)
     float const f { 1.23456f };
     ASSERT_EQ(floatToStringWithXDecimalDigits(f, 0), "1");
 }
+
+TEST(IsPowerOfTwo, ReturnsTrueForPowersOfTwo)
+{
+    for (auto v : { 1u, 2u, 4u, 8u, 16u, 32u, 64u, 128u, 256u, 512u }) {
+        ASSERT_TRUE(isPowerOfTwo(v));
+    }
+}
+
+TEST(IsPowerOfTwo, ReturnsFalseForNonPowersOfTwo)
+{
+    for (auto v : { 3u, 5u, 13u, 31u, 33u, 42u, 65u, 120u, 1337u }) {
+        std::cout << v << std::endl;
+        ASSERT_FALSE(isPowerOfTwo(v));
+    }
+}
+
+TEST(IsPowerOfTwo, ReturnsFalseForZero) { ASSERT_FALSE(isPowerOfTwo(0u)); }
 
 TEST(AngleOf, Horizontal)
 {

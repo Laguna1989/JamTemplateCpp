@@ -19,15 +19,16 @@ public:
     virtual ~CacheInterface() = default;
 
     // no copy, no move. Avoid slicing.
-    CacheInterface(const CacheInterface&) = delete;
+    CacheInterface(CacheInterface const&) = delete;
     CacheInterface(CacheInterface&&) = delete;
-    CacheInterface& operator=(const CacheInterface&) = delete;
+    CacheInterface& operator=(CacheInterface const&) = delete;
     CacheInterface& operator=(CacheInterface&&) = delete;
 
 protected:
-    // default default constructor can only be called from derived classes
+    // default constructor can only be called from derived classes
     CacheInterface() = default;
 };
+
 } // namespace jt
 
 #endif // JAMTEMPLATE_CACHE_INTERFACE_HPP

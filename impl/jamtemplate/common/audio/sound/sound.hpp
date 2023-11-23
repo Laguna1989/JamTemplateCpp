@@ -2,6 +2,7 @@
 #define JAMTEMPLATE_SOUND_HPP
 
 #include <audio/sound/sound_base.hpp>
+#include <audio/sound_buffer_manager/sound_buffer_manager_interface.hpp>
 #include <counted_object.hpp>
 #include <oalpp/sound.hpp>
 #include <oalpp/sound_data.hpp>
@@ -11,7 +12,7 @@ namespace jt {
 
 class Sound : public SoundBase, public CountedObj<Sound> {
 public:
-    explicit Sound(std::string const& fileName);
+    Sound(std::string const& fileName, SoundBufferManagerInterface& soundManager);
 
     void update() override;
 
@@ -36,7 +37,7 @@ public:
     int getSampleRate() const override;
 
 private:
-    oalpp::SoundData m_buffer;
+    std::shared_ptr<oalpp::SoundDataInterface> m_buffer;
     oalpp::Sound m_sound;
     std::string m_fileName;
 };

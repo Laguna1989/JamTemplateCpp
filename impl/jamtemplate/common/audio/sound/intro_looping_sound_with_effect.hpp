@@ -3,6 +3,7 @@
 
 #include <audio/sound/sound_base.hpp>
 #include <audio/sound/sound_with_effect.hpp>
+#include <audio/sound_buffer_manager/sound_buffer_manager_interface.hpp>
 #include <oalpp/effects/mono_effect_interface.hpp>
 #include <oalpp/sound.hpp>
 #include <oalpp/sound_data/sound_data.hpp>
@@ -14,7 +15,8 @@ namespace jt {
 class IntroLoopingSoundWithEffect : public SoundBase {
 public:
     IntroLoopingSoundWithEffect(std::string const& introFileName,
-        std::string const& loopingFileName, oalpp::effects::MonoEffectInterface& effect);
+        std::string const& loopingFileName, jt::SoundBufferManagerInterface& soundBufferManager,
+        oalpp::effects::MonoEffectInterface& effect);
     void update() override;
 
     float getFinalVolume() const override;

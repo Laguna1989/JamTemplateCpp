@@ -47,13 +47,13 @@ public:
     virtual ~GfxInterface() = default;
 
     // no copy, no move. Avoid slicing.
-    GfxInterface(const GfxInterface&) = delete;
+    GfxInterface(GfxInterface const&) = delete;
     GfxInterface(GfxInterface&&) = delete;
-    GfxInterface& operator=(const GfxInterface&) = delete;
+    GfxInterface& operator=(GfxInterface const&) = delete;
     GfxInterface& operator=(GfxInterface&&) = delete;
 
 protected:
-    // default default constructor can only be called from derived classes
+    // default constructor can only be called from derived classes
     GfxInterface() = default;
 };
 

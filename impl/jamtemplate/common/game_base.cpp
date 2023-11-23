@@ -52,6 +52,7 @@ void jt::GameBase::runOneFrame()
         } while (m_lag >= m_timePerUpdate);
         draw();
     }
+
     m_age += elapsedSeconds;
 }
 
@@ -79,6 +80,8 @@ jt::ActionCommandManagerInterface& jt::GameBase::actionCommandManager()
     return m_actionCommandManager;
 }
 
+jt::CacheInterface& jt::GameBase::cache() { return m_cache; }
+
 void jt::GameBase::doUpdate(float const elapsed)
 {
     m_logger.verbose("update game, elapsed=" + std::to_string(elapsed), { "jt" });
@@ -103,5 +106,3 @@ void jt::GameBase::doDraw() const
     m_stateManager.draw(gfx().target());
     gfx().display();
 }
-
-jt::CacheInterface& jt::GameBase::cache() { return m_cache; }

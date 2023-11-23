@@ -4,6 +4,8 @@
 #include <audio/sound_groups/group_volume_getter_interface.hpp>
 #include <audio/sound_groups/group_volume_setter_interface.hpp>
 #include <map>
+#include <string>
+#include <vector>
 
 namespace jt {
 

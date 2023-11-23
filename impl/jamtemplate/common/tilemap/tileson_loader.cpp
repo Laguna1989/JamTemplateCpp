@@ -99,7 +99,7 @@ jt::tilemap::TilesonLoader::TilesonLoader(
 std::vector<jt::tilemap::InfoRect> jt::tilemap::TilesonLoader::loadObjectsFromLayer(
     std::string const& layerName)
 {
-    auto map = m_tilemapCache.getMap(m_fileName);
+    auto map = m_tilemapCache.get(m_fileName);
 
     std::vector<InfoRect> objects;
 
@@ -121,7 +121,7 @@ std::vector<jt::tilemap::InfoRect> jt::tilemap::TilesonLoader::loadObjectsFromLa
 std::vector<std::shared_ptr<jt::pathfinder::NodeInterface>>
 jt::tilemap::TilesonLoader::loadNodesFromLayer(std::string const& layerName)
 {
-    auto map = m_tilemapCache.getMap(m_fileName);
+    auto map = m_tilemapCache.get(m_fileName);
 
     std::vector<std::shared_ptr<jt::pathfinder::NodeInterface>> nodes;
 
@@ -159,7 +159,7 @@ std::vector<std::shared_ptr<jt::tilemap::TileNode>>
 jt::tilemap::TilesonLoader::loadTileNodesFromLayer(std::string const& layerName,
     jt::TextureManagerInterface& textureManager, bool dismissBlockedTiles)
 {
-    auto map = m_tilemapCache.getMap(m_fileName);
+    auto map = m_tilemapCache.get(m_fileName);
 
     std::vector<std::shared_ptr<TileNode>> nodeTiles;
 
@@ -192,7 +192,7 @@ std::tuple<std::vector<jt::tilemap::TileInfo>, std::vector<std::shared_ptr<jt::S
 jt::tilemap::TilesonLoader::loadTilesFromLayer(std::string const& layerName,
     jt::TextureManagerInterface& textureManager, std::string const& tilesetPathPrefix)
 {
-    auto const map = m_tilemapCache.getMap(m_fileName);
+    auto const map = m_tilemapCache.get(m_fileName);
 
     return std::tuple<std::vector<TileInfo>, std::vector<std::shared_ptr<jt::Sprite>>>(
         loadTiles(layerName, map), loadTileSetSprites(map, textureManager, tilesetPathPrefix));
@@ -202,7 +202,7 @@ jt::TilemapCollisions jt::tilemap::TilesonLoader::loadCollisionsFromLayer(
     std::string const& layerName)
 {
     TilemapCollisions collisions;
-    auto map = m_tilemapCache.getMap(m_fileName);
+    auto map = m_tilemapCache.get(m_fileName);
     for (auto& layer : map->getLayers()) {
         // skip all non-tile layers
         if (layer.getType() != tson::LayerType::TileLayer) {
@@ -232,7 +232,7 @@ jt::TilemapCollisions jt::tilemap::TilesonLoader::loadCollisionsFromLayer(
 
 jt::Vector2u jt::tilemap::TilesonLoader::getMapSizeInTiles() const
 {
-    auto map = m_tilemapCache.getMap(m_fileName);
+    auto map = m_tilemapCache.get(m_fileName);
     auto const size = map->getSize();
     return jt::Vector2u { static_cast<unsigned int>(size.x), static_cast<unsigned int>(size.y) };
 }

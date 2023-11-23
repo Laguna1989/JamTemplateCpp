@@ -8,7 +8,7 @@ namespace jt {
 class TilemapCacheNull : public jt::TilemapCacheInterface {
 public:
     TilemapCacheNull();
-    std::shared_ptr<tson::Map> getMap(std::string const& fileName) const override;
+    std::shared_ptr<tson::Map> get(std::string const& fileName) const override;
 
 private:
     std::shared_ptr<tson::Map> m_map;

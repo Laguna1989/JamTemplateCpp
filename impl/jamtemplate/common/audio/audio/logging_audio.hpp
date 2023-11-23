@@ -35,6 +35,8 @@ public:
     SoundFadeManagerInterface& fades() override;
     GroupVolumeSetterInterface& groups() override;
 
+    SoundBufferManagerInterface& getSoundBufferManager() override;
+
 private:
     AudioInterface& m_decoratee;
     LoggerInterface& m_logger;

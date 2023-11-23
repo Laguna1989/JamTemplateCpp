@@ -5,9 +5,9 @@
 void jt::createDefaultLogTargets(jt::LoggerInterface& logger)
 {
     auto targetCout = std::make_shared<jt::LogTargetOstream>();
-    targetCout->setLogLevel(LogLevel::LogLevelInfo);
+    targetCout->setLogLevel(LogLevel::Info);
 
     logger.addLogTarget(targetCout);
     logger.addLogTarget(std::make_shared<jt::LogTargetFile>());
-    logger.setLogLevel(LogLevel::LogLevelDebug);
+    logger.setLogLevel(LogLevel::Debug);
 }

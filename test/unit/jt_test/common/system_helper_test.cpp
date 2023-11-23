@@ -49,7 +49,7 @@ TEST(EraseIf, FromEmptyVector)
     EXPECT_EQ(numbers, expected);
 }
 
-TEST(RemoveIntersectionTest, EmptyAResultsInEmptyVector)
+TEST(RemoveIntersection, EmptyAResultsInEmptyVector)
 {
     std::vector<int> a {};
     std::vector<int> const b { 1, 2, 3 };
@@ -59,7 +59,7 @@ TEST(RemoveIntersectionTest, EmptyAResultsInEmptyVector)
     ASSERT_TRUE(a.empty());
 }
 
-TEST(RemoveIntersectionTest, SameVectorsResultsInEmptyVector)
+TEST(RemoveIntersection, SameVectorsResultsInEmptyVector)
 {
     std::vector<int> a { 1, 2, 3 };
     std::vector<int> const b { 1, 2, 3 };
@@ -69,7 +69,7 @@ TEST(RemoveIntersectionTest, SameVectorsResultsInEmptyVector)
     ASSERT_TRUE(a.empty());
 }
 
-TEST(RemoveIntersectionTest, CompletelyDifferentVectorsDoesNotModifyA)
+TEST(RemoveIntersection, CompletelyDifferentVectorsDoesNotModifyA)
 {
     std::vector<int> a { 1, 2, 3 };
     std::vector<int> const expected { a.cbegin(), a.cend() };
@@ -80,7 +80,7 @@ TEST(RemoveIntersectionTest, CompletelyDifferentVectorsDoesNotModifyA)
     ASSERT_EQ(a, expected);
 }
 
-TEST(RemoveIntersectionTest, PartialIntersectionIsRemoved)
+TEST(RemoveIntersection, PartialIntersectionIsRemoved)
 {
     std::vector<int> a { 1, 2, 3, 4 };
     std::vector<int> const b { 1, 3, 5 };
@@ -91,7 +91,7 @@ TEST(RemoveIntersectionTest, PartialIntersectionIsRemoved)
     ASSERT_EQ(a, expected);
 }
 
-TEST(RemoveIntersectionTest, DuplicateEntriesAreNotRemovedByDefault)
+TEST(RemoveIntersection, DuplicateEntriesAreNotRemovedByDefault)
 {
     std::vector<int> a { 1, 2, 2, 3, 4 };
     std::vector<int> const b {};
@@ -102,7 +102,7 @@ TEST(RemoveIntersectionTest, DuplicateEntriesAreNotRemovedByDefault)
     ASSERT_EQ(a, expected);
 }
 
-TEST(RemoveIntersectionTest, AllDuplicateEntriesAreRemovedIfInB)
+TEST(RemoveIntersection, AllDuplicateEntriesAreRemovedIfInB)
 {
     std::vector<int> a { 1, 2, 2, 3, 4 };
     std::vector<int> const b { 2 };
@@ -111,4 +111,16 @@ TEST(RemoveIntersectionTest, AllDuplicateEntriesAreRemovedIfInB)
     jt::SystemHelper::remove_intersection(a, b);
 
     ASSERT_EQ(a, expected);
+}
+
+TEST(CheckForValidFile, ReturnsTrueForValidFile)
+{
+    auto const path = "assets/runvs_logo.png";
+    ASSERT_TRUE(jt::SystemHelper::checkForValidFile(path));
+}
+
+TEST(CheckForValidFile, ReturnsFalseForInvalidFile)
+{
+    auto const path = "assets/__non_existing_file.blarz";
+    ASSERT_FALSE(jt::SystemHelper::checkForValidFile(path));
 }

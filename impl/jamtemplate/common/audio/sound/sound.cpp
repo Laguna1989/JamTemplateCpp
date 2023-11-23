@@ -1,9 +1,9 @@
 ﻿#include "sound.hpp"
 #include <stdexcept>
 
-jt::Sound::Sound(std::string const& fileName)
-    : m_buffer { fileName }
-    , m_sound { m_buffer }
+jt::Sound::Sound(std::string const& fileName, SoundBufferManagerInterface& soundManager)
+    : m_buffer { soundManager.get(fileName) }
+    , m_sound { *m_buffer }
     , m_fileName { fileName }
 {
 }
@@ -45,4 +45,4 @@ void jt::Sound::setPitch(float pitch)
 
 float jt::Sound::getPitch() const { return m_sound.getPitch(); }
 
-int jt::Sound::getSampleRate() const { return m_buffer.getSampleRate(); }
+int jt::Sound::getSampleRate() const { return m_buffer->getSampleRate(); }

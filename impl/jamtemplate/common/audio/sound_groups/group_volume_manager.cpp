@@ -17,6 +17,7 @@ void jt::GroupVolumeManager::setGroupVolume(std::string const& groupName, float 
 {
     m_volumeGroups[groupName] = volume;
 }
+
 std::vector<std::string> jt::GroupVolumeManager::getAllGroupNames() const
 {
     std::vector<std::string> groupNames;

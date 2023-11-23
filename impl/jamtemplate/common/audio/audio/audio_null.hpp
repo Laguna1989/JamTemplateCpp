@@ -3,6 +3,7 @@
 
 #include <audio/audio/audio_interface.hpp>
 #include <audio/fades/sound_fade_manager.hpp>
+#include <audio/sound_buffer_manager/sound_buffer_manager_null.hpp>
 #include <audio/sound_groups/group_volume_manager.hpp>
 
 namespace jt {
@@ -10,8 +11,6 @@ namespace jt {
 namespace null_objects {
 
 class SoundContextNull : public oalpp::SoundContextInterface { };
-
-} // namespace null_objects
 
 class AudioNull : public AudioInterface {
 public:
@@ -40,13 +39,19 @@ public:
 
     SoundFadeManagerInterface& fades() override;
     GroupVolumeSetterInterface& groups() override;
+    SoundBufferManagerInterface& getSoundBufferManager() override;
 
 private:
     null_objects::SoundContextNull m_context;
 
+    jt::null_objects::SoundBufferManagerNull m_nullManager;
+
     std::unique_ptr<SoundFadeManagerInterface> m_fades { std::make_unique<SoundFadeManager>() };
     GroupVolumeManager m_groups;
 };
+
+} // namespace null_objects
+
 } // namespace jt
 
 #endif // JAMTEMPLATE_AUDIO_NULL_HPP

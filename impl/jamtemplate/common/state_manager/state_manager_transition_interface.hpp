@@ -30,13 +30,13 @@ public:
     virtual ~StateManagerTransitionInterface() = default;
 
     // no copy, no move. Avoid slicing.
-    StateManagerTransitionInterface(const StateManagerTransitionInterface&) = delete;
+    StateManagerTransitionInterface(StateManagerTransitionInterface const&) = delete;
     StateManagerTransitionInterface(StateManagerTransitionInterface&&) = delete;
-    StateManagerTransitionInterface& operator=(const StateManagerTransitionInterface&) = delete;
+    StateManagerTransitionInterface& operator=(StateManagerTransitionInterface const&) = delete;
     StateManagerTransitionInterface& operator=(StateManagerTransitionInterface&&) = delete;
 
 protected:
-    // default default constructor can only be called from derived classes
+    // default constructor can only be called from derived classes
     StateManagerTransitionInterface() = default;
 };
 

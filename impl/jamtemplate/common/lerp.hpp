@@ -3,6 +3,7 @@
 
 #include <cassert>
 #include <cmath>
+#include <numbers>
 
 namespace jt {
 
@@ -12,7 +13,7 @@ template <typename T>
 static T cosine(T const& a, T const& b, T const& t)
 {
     assert(t >= 0 && t <= 1);
-    float tRemapCosine = (1.0f - static_cast<float>(cos(t * 3.1415926f))) * 0.5f;
+    float tRemapCosine = (1.0f - static_cast<float>(cos(t * std::numbers::pi))) * 0.5f;
     return std::lerp(a, b, tRemapCosine);
 }
 

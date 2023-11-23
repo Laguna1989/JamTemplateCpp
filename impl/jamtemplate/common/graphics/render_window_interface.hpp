@@ -70,7 +70,7 @@ public:
     RenderWindowInterface& operator=(RenderWindowInterface&&) = delete;
 
 protected:
-    // default default constructor can only be called from derived classes
+    // default constructor can only be called from derived classes
     RenderWindowInterface() = default;
 };
 } // namespace jt

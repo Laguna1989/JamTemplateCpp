@@ -16,7 +16,7 @@ void jt::ParticleSystemDropItems::doCreate()
 {
     m_tweens = std::make_shared<jt::TweenCollection>();
 
-    m_particles = jt::ParticleSystem<jt::Animation, 12>::createPS(
+    m_particles = jt::ParticleSystem<jt::Animation, 12u>::createPS(
         [this]() {
             auto a = std::make_shared<jt::Animation>();
             a->loadFromAseprite(m_aseFileName, textureManager());

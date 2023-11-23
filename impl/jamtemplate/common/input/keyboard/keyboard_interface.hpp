@@ -70,13 +70,13 @@ public:
     virtual ~KeyboardInterface() = default;
 
     // no copy, no move. Avoid slicing.
-    KeyboardInterface(const KeyboardInterface&) = delete;
+    KeyboardInterface(KeyboardInterface const&) = delete;
     KeyboardInterface(KeyboardInterface&&) = delete;
-    KeyboardInterface& operator=(const KeyboardInterface&) = delete;
+    KeyboardInterface& operator=(KeyboardInterface const&) = delete;
     KeyboardInterface& operator=(KeyboardInterface&&) = delete;
 
 protected:
-    // default default constructor can only be called from derived classes
+    // default constructor can only be called from derived classes
     KeyboardInterface() = default;
 };
 

@@ -5,10 +5,11 @@
 #include <game_object.hpp>
 #include <functional>
 #include <memory>
+#include <cstddef>
 
 namespace jt {
 
-template <class T, size_t N>
+template <class T, std::size_t N>
 class ParticleSystem : public GameObject {
 public:
     using ResetCallbackType

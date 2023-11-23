@@ -10,16 +10,38 @@ TEST(LogTargetOstreamTest, LogsExpectedString)
     jt::LogTargetOstream target { ss };
 
     auto const logMessage = "abcd";
-    target.log(jt::LogEntry { logMessage, "time", jt::LogLevel::LogLevelAction, {} });
+    target.log(jt::LogEntry { logMessage, "time", jt::LogLevel::Action, {} });
 
     auto const expectedLogEntry = logMessage + std::string("\n");
     ASSERT_EQ(ss.str(), expectedLogEntry);
 }
 
-TEST(LogTargetOstreamTest, SetLevelSetsLevel)
+TEST(LogTargetOstreamTest, LogNothingIfLevelIsNotMet)
 {
     std::stringstream ss;
     jt::LogTargetOstream target { ss };
 
-    ASSERT_NO_THROW(target.setLogLevel(jt::LogLevel::LogLevelFatal));
+    auto const logMessage = "abcd";
+    target.setLogLevel(jt::LogLevel::Off);
+    target.log(jt::LogEntry { logMessage, "time", jt::LogLevel::Verbose, {} });
+
+    auto const expectedLogEntry = logMessage + std::string("\n");
+    ASSERT_TRUE(ss.str().empty());
+}
+
+TEST(LogTargetOstreamTest, GetDefaultLogLevel)
+{
+    std::stringstream ss;
+    jt::LogTargetOstream target { ss };
+
+    ASSERT_EQ(target.getLogLevel(), jt::LogLevel::Verbose);
+}
+
+TEST(LogTargetOstreamTest, GetLogLevelAfterSet)
+{
+    std::stringstream ss;
+    jt::LogTargetOstream target { ss };
+
+    target.setLogLevel(jt::LogLevel::Fatal);
+    ASSERT_EQ(target.getLogLevel(), jt::LogLevel::Fatal);
 }

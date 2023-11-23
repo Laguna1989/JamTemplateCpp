@@ -21,13 +21,13 @@ public:
     virtual ~SoundFadeManagerInterface() = default;
 
     // no copy, no move. Avoid slicing.
-    SoundFadeManagerInterface(const SoundFadeManagerInterface&) = delete;
+    SoundFadeManagerInterface(SoundFadeManagerInterface const&) = delete;
     SoundFadeManagerInterface(SoundFadeManagerInterface&&) = delete;
-    SoundFadeManagerInterface& operator=(const SoundFadeManagerInterface&) = delete;
+    SoundFadeManagerInterface& operator=(SoundFadeManagerInterface const&) = delete;
     SoundFadeManagerInterface& operator=(SoundFadeManagerInterface&&) = delete;
 
 protected:
-    // default default constructor can only be called from derived classes
+    // default constructor can only be called from derived classes
     SoundFadeManagerInterface() = default;
 };
 

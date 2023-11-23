@@ -21,13 +21,13 @@ public:
     virtual ~LogTargetInterface() = default;
 
     // no copy, no move. Avoid slicing.
-    LogTargetInterface(const LogTargetInterface&) = delete;
+    LogTargetInterface(LogTargetInterface const&) = delete;
     LogTargetInterface(LogTargetInterface&&) = delete;
-    LogTargetInterface& operator=(const LogTargetInterface&) = delete;
+    LogTargetInterface& operator=(LogTargetInterface const&) = delete;
     LogTargetInterface& operator=(LogTargetInterface&&) = delete;
 
 protected:
-    // default default constructor can only be called from derived classes
+    // default constructor can only be called from derived classes
     LogTargetInterface() = default;
 };
 } // namespace jt

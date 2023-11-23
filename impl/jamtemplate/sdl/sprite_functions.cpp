@@ -3,6 +3,7 @@
 #include <random/random.hpp>
 #include <sdl_helper.hpp>
 #include <cmath>
+#include <numbers>
 
 namespace jt {
 
@@ -190,8 +191,8 @@ std::shared_ptr<SDL_Texture> makeRing(
 
     SDL_FillRect(image.get(), nullptr, SDL_MapRGBA(image->format, 255, 255, 255, 0));
     for (auto a = 0.0f; a <= 90.0f; a += minAngle) {
-        float const xo = sin(a * 3.14152f / 180.0f) * r;
-        float const yo = cos(a * 3.14152f / 180.0f) * r;
+        float const xo = sin(a * std::numbers::pi / 180.0f) * r;
+        float const yo = cos(a * std::numbers::pi / 180.0f) * r;
 
         jt::setPixel(image.get(), static_cast<unsigned int>(r + xo),
             static_cast<unsigned int>(r + yo), SDL_MapRGBA(image->format, 255, 255, 255, 255));

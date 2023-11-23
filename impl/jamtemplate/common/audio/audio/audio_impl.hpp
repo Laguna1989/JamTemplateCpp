@@ -9,9 +9,11 @@
 #include <vector>
 
 namespace jt {
+
 class AudioImpl : public AudioInterface {
 public:
-    AudioImpl(std::unique_ptr<SoundFadeManagerInterface> soundFadeManager = nullptr);
+    AudioImpl(std::unique_ptr<SoundFadeManagerInterface> soundFadeManager = nullptr,
+        std::unique_ptr<SoundBufferManagerInterface> soundBufferManager = nullptr);
     ~AudioImpl();
 
     void update(float elapsed) override;
@@ -41,6 +43,8 @@ public:
 
     GroupVolumeSetterInterface& groups() override;
 
+    SoundBufferManagerInterface& getSoundBufferManager() override;
+
 private:
     oalpp::SoundContext m_context;
 
@@ -48,6 +52,8 @@ private:
     std::map<std::string, std::shared_ptr<jt::SoundInterface>> m_permanentSounds {};
 
     std::unique_ptr<SoundFadeManagerInterface> m_fades;
+
+    std::unique_ptr<SoundBufferManagerInterface> m_soundBufferManager;
 
     GroupVolumeManager m_volumeGroups;
 

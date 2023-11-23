@@ -2,51 +2,51 @@
 #include <audio/sound/sound_group.hpp>
 #include <audio/sound/sound_null.hpp>
 
-void jt::AudioNull::update(float /*elapsed*/) { }
+void jt::null_objects::AudioNull::update(float /*elapsed*/) { }
 
-oalpp::SoundContextInterface& jt::AudioNull::getContext() { return m_context; }
+oalpp::SoundContextInterface& jt::null_objects::AudioNull::getContext() { return m_context; }
 
-std::shared_ptr<jt::SoundInterface> jt::AudioNull::soundPool(
+std::shared_ptr<jt::SoundInterface> jt::null_objects::AudioNull::soundPool(
     std::string const& /*baseIdentifier*/, std::string const& /*fileName*/, std::size_t /*count*/)
 {
     return std::make_shared<SoundNull>();
 }
 
-std::shared_ptr<jt::SoundInterface> jt::AudioNull::getPermanentSound(
+std::shared_ptr<jt::SoundInterface> jt::null_objects::AudioNull::getPermanentSound(
     std::string const& /*identifier*/)
 {
     return std::make_shared<SoundNull>();
 }
 
-void jt::AudioNull::removePermanentSound(std::string const& /*identifier*/) { }
+void jt::null_objects::AudioNull::removePermanentSound(std::string const& /*identifier*/) { }
 
-std::shared_ptr<jt::SoundInterface> jt::AudioNull::addTemporarySound(
+std::shared_ptr<jt::SoundInterface> jt::null_objects::AudioNull::addTemporarySound(
     std::string const& /*fileName*/)
 {
     return std::make_shared<jt::SoundNull>();
 }
 
-std::shared_ptr<jt::SoundInterface> jt::AudioNull::addPermanentSound(
+std::shared_ptr<jt::SoundInterface> jt::null_objects::AudioNull::addPermanentSound(
     std::string const& /*identifier*/, std::string const& /*fileName*/)
 {
     return std::make_shared<jt::SoundNull>();
 }
 
-std::shared_ptr<jt::SoundInterface> jt::AudioNull::addPermanentSound(
+std::shared_ptr<jt::SoundInterface> jt::null_objects::AudioNull::addPermanentSound(
     std::string const& /*identifier*/, std::string const& /*fileName*/,
     oalpp::effects::MonoEffectInterface& /*effect*/)
 {
     return std::make_shared<jt::SoundNull>();
 }
 
-std::shared_ptr<jt::SoundInterface> jt::AudioNull::addPermanentSound(
+std::shared_ptr<jt::SoundInterface> jt::null_objects::AudioNull::addPermanentSound(
     std::string const& /*identifier*/, std::string const& /*introFileName*/,
     std::string const& /*loopingFileName*/, oalpp::effects::MonoEffectInterface& /*effect*/)
 {
     return std::make_shared<jt::SoundNull>();
 }
 
-std::shared_ptr<jt::SoundInterface> jt::AudioNull::addTemporarySoundGroup(
+std::shared_ptr<jt::SoundInterface> jt::null_objects::AudioNull::addTemporarySoundGroup(
     std::vector<std::shared_ptr<jt::SoundInterface>> const& sounds)
 {
     auto group = std::make_shared<jt::SoundGroup>();
@@ -58,5 +58,12 @@ std::shared_ptr<jt::SoundInterface> jt::AudioNull::addTemporarySoundGroup(
 
     return group;
 }
-jt::SoundFadeManagerInterface& jt::AudioNull::fades() { return *m_fades; }
-jt::GroupVolumeSetterInterface& jt::AudioNull::groups() { return m_groups; }
+
+jt::SoundFadeManagerInterface& jt::null_objects::AudioNull::fades() { return *m_fades; }
+
+jt::GroupVolumeSetterInterface& jt::null_objects::AudioNull::groups() { return m_groups; }
+
+jt::SoundBufferManagerInterface& jt::null_objects::AudioNull::getSoundBufferManager()
+{
+    return m_nullManager;
+}

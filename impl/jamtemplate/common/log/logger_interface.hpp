@@ -58,13 +58,13 @@ public:
     virtual ~LoggerInterface() = default;
 
     // no copy, no move. Avoid slicing.
-    LoggerInterface(const LoggerInterface&) = delete;
+    LoggerInterface(LoggerInterface const&) = delete;
     LoggerInterface(LoggerInterface&&) = delete;
-    LoggerInterface& operator=(const LoggerInterface&) = delete;
+    LoggerInterface& operator=(LoggerInterface const&) = delete;
     LoggerInterface& operator=(LoggerInterface&&) = delete;
 
 protected:
-    // default default constructor can only be called from derived classes
+    // default constructor can only be called from derived classes
     LoggerInterface() = default;
 };
 } // namespace jt

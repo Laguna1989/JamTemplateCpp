@@ -4,15 +4,15 @@
 TEST(TilemapCacheNullTest, GetMapReturnsNoNullptr)
 {
     jt::TilemapCacheNull cache;
-    ASSERT_NE(cache.getMap("abcd"), nullptr);
+    ASSERT_NE(cache.get("abcd"), nullptr);
 }
 
 TEST(TilemapCacheNullTest, GetMapReturnsAlwaysTheSamePointer)
 {
     jt::TilemapCacheNull cache;
 
-    auto const p1 = cache.getMap("abcd");
-    auto const p2 = cache.getMap("xyz1");
+    auto const p1 = cache.get("abcd");
+    auto const p2 = cache.get("xyz1");
 
     ASSERT_EQ(p1, p2);
 }

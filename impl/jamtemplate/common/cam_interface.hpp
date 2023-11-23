@@ -49,13 +49,13 @@ public:
     virtual ~CamInterface() = default;
 
     // no copy, no move. Avoid slicing.
-    CamInterface(const CamInterface&) = delete;
+    CamInterface(CamInterface const&) = delete;
     CamInterface(CamInterface&&) = delete;
-    CamInterface& operator=(const CamInterface&) = delete;
+    CamInterface& operator=(CamInterface const&) = delete;
     CamInterface& operator=(CamInterface&&) = delete;
 
 protected:
-    // default default constructor can only be called from derived classes
+    // default constructor can only be called from derived classes
     CamInterface() = default;
 };
 } // namespace jt

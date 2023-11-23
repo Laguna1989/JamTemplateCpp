@@ -58,6 +58,7 @@ std::shared_ptr<jt::SoundInterface> jt::LoggingAudio::addPermanentSound(
     return std::make_shared<jt::LoggingSound>(
         m_decoratee.addPermanentSound(identifier, fileName, effect), m_logger);
 }
+
 std::shared_ptr<jt::SoundInterface> jt::LoggingAudio::addPermanentSound(
     std::string const& identifier, std::string const& introFileName,
     std::string const& loopingFileName, oalpp::effects::MonoEffectInterface& effect)
@@ -86,4 +87,10 @@ jt::GroupVolumeSetterInterface& jt::LoggingAudio::groups()
 {
     m_logger.verbose("groups", { "jt", "audio", "sound groups" });
     return m_decoratee.groups();
+}
+
+jt::SoundBufferManagerInterface& jt::LoggingAudio::getSoundBufferManager()
+{
+    m_logger.verbose("sound buffer manager", { "jt", "audio", "sound buffer" });
+    return m_decoratee.getSoundBufferManager();
 }

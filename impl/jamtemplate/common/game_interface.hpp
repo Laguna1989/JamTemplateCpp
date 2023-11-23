@@ -58,7 +58,7 @@ public:
     GameInterface& operator=(GameInterface&&) = delete;
 
 protected:
-    // default default constructor can only be called from derived classes
+    // default constructor can only be called from derived classes
     GameInterface() = default;
     virtual std::weak_ptr<GameInterface> getPtr() = 0;
 };

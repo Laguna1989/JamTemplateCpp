@@ -184,7 +184,7 @@ sf::Texture& jt::TextureManagerImpl::get(std::string const& str)
     }
 
     // normal filenames do not start with a '#'
-    if (!strutil::starts_with(str, '#')) {
+    if (!str.starts_with('#')) {
         m_textures[str] = loadTextureFromDisk(str);
         m_textures[getFlashName(str)].loadFromImage(
             createFlashImage(m_textures[str].copyToImage()));

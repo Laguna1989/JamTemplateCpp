@@ -7,12 +7,7 @@ jt::LogTargetOstream::LogTargetOstream(std::ostream& stream)
 {
 }
 
-void jt::LogTargetOstream::log(jt::LogEntry const& entry)
+void jt::LogTargetOstream::doLog(jt::LogEntry const& entry)
 {
-    if (entry.level > m_logLevel) {
-        return;
-    }
     m_stream << entry.message << std::endl;
 }
-
-void jt::LogTargetOstream::setLogLevel(LogLevel level) { m_logLevel = level; }
