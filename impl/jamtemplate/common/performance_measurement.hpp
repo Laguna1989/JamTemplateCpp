@@ -2,7 +2,6 @@
 #define JAMTEMPLATE_PERFORMANCE_MEASUREMENT_HPP
 
 #include <chrono>
-#include <cxxabi.h>
 #include <functional>
 
 namespace jt {
