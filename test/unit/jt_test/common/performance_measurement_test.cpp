@@ -1,5 +1,6 @@
 #include <performance_measurement.hpp>
 #include <gtest/gtest.h>
+#include <thread>
 
 namespace {
 
