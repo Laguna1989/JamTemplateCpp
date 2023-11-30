@@ -70,7 +70,7 @@ public:
 
     /// Set skipframes
     /// \param framesToSkip the amount of frames to skip
-    void setSkipFrames(int framesToSkip = 1);
+    void setSkipTicks(int framesToSkip = 1);
 
     /// Get skipframes
     /// \return the amount of frames to skip
@@ -102,13 +102,20 @@ public:
     void setAgePercentConversion(AgePercentConversionFunctionType func);
 
 private:
-    int m_skipFrames { 0 };
-    float m_totalTime;
+    int m_skipTicks { 0 };
+    float m_totalTime {0.0f };
+
+    AgePercentConversionFunctionType m_agePercentConversion { nullptr };
     float m_age { 0.0f };
+    float m_agePercent { 0.0f };
     float m_startDelayInSeconds { 0.0f };
+
+    std::weak_ptr<DrawableInterface> m_obj;
+
     bool m_alive { true };
     bool m_repeat { false };
-    std::weak_ptr<DrawableInterface> m_obj;
+
+    std::vector<OnCompleteCallbackType> m_completeCallbacks {};
 
     /// Function that does the actual tweening. Needs to be overwritten by derived classes
     /// \param sptr the object to tween
@@ -116,10 +123,6 @@ private:
     /// progression.
     virtual void doUpdateObject(
         std::shared_ptr<DrawableInterface> const& sptr, float agePercent) const;
-
-    AgePercentConversionFunctionType m_agePercentConversion { nullptr };
-
-    std::vector<OnCompleteCallbackType> m_completeCallbacks {};
 
     void doUpdate(float /*elapsed*/);
 

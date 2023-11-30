@@ -56,7 +56,7 @@ void jt::Animation::add(std::string const& fileName, std::string const& animName
         throw std::invalid_argument { "different sizes for frametimes and frame indices" };
     }
 
-    if (m_frames.count(animName) != 0) {
+    if (m_frames.contains(animName)) {
         std::cout << "Warning: Overwriting old animation with name: " << animName << std::endl;
     }
 
@@ -334,7 +334,6 @@ void jt::Animation::doFlashImpl(float t, jt::Color col)
 
 void jt::Animation::doUpdate(float elapsed)
 {
-    // check if valid
     if (!m_isValid) {
         std::cout << "Warning: Update Animation with invalid animName: '" + m_currentAnimName
                 + "'\n";
@@ -343,15 +342,18 @@ void jt::Animation::doUpdate(float elapsed)
 
     // proceed time
     m_frameTime += elapsed * m_animationplaybackSpeed;
+
+    // increase index
     while (m_frameTime >= m_time[m_currentAnimName][m_currentIdx]) {
         m_frameTime -= m_time[m_currentAnimName][m_currentIdx];
         m_currentIdx++;
-        if (m_currentIdx >= m_frames.at(m_currentAnimName).size()) {
-            if (getCurrentAnimationIsLooping()) {
-                m_currentIdx = 0;
-            } else {
-                m_currentIdx = m_frames.at(m_currentAnimName).size() - 1;
-            }
+    }
+    // wrap index or fix index at last frame
+    if (m_currentIdx >= m_frames.at(m_currentAnimName).size()) {
+        if (getCurrentAnimationIsLooping()) {
+            m_currentIdx = 0;
+        } else {
+            m_currentIdx = m_frames.at(m_currentAnimName).size() - 1;
         }
     }
 

@@ -9,7 +9,7 @@ void jt::ShadowImpl::doSetShadow(jt::Color const& col, jt::Vector2f const& offse
 
 void jt::ShadowImpl::drawShadow(std::shared_ptr<jt::RenderTargetLayer> const sptr) const
 {
-    if (!sptr) {
+    if (!sptr) [[unlikely]] {
         return;
     }
     if (m_shadowActive) {

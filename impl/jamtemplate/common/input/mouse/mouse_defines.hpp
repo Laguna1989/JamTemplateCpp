@@ -1,7 +1,8 @@
 #ifndef JAMTEMPLATE_MOUSE_DEFINES_HPP
 #define JAMTEMPLATE_MOUSE_DEFINES_HPP
 
-#include <vector>
+#include <array>
+#include <cstdint>
 
 namespace jt {
 struct MousePosition {
@@ -19,7 +20,10 @@ enum class MouseButtonCode {
     ButtonCount ///< Keep last -- the total number of mouse button
 };
 
-std::vector<jt::MouseButtonCode> getAllMouseButtons();
+constexpr inline std::uint8_t MouseButtonCodeSize
+    = static_cast<std::uint8_t>(MouseButtonCode::ButtonCount);
+
+std::array<jt::MouseButtonCode, MouseButtonCodeSize> getAllMouseButtons();
 
 } // namespace jt
 

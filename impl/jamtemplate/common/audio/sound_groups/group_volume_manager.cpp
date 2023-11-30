@@ -6,7 +6,7 @@ float jt::GroupVolumeManager::getVolume(std::string const& groupName) const
     if (groupName == "") {
         return 1.0f;
     }
-    if (m_volumeGroups.count(groupName) == 0) {
+    if (!m_volumeGroups.contains(groupName))  {
         m_volumeGroups[groupName] = 1.0f;
     }
 

@@ -4,9 +4,8 @@
 jt::MouseInput::MouseInput(MouseButtonCheckFunction checkFunction)
     : m_checkFunction { std::move(checkFunction) }
 {
-    auto const allButtons = jt::getAllMouseButtons();
     // note: do not call the virtual reset() function here, as this is the constructor
-    for (auto const b : allButtons) {
+    for (auto const b : jt::getAllMouseButtons()) {
         m_mousePressed[b] = false;
         m_mouseReleased[b] = false;
         m_mouseJustPressed[b] = false;
@@ -44,8 +43,11 @@ jt::Vector2f jt::MouseInput::getMousePositionScreen()
 }
 
 bool jt::MouseInput::pressed(jt::MouseButtonCode b) { return m_mousePressed[b]; }
+
 bool jt::MouseInput::released(jt::MouseButtonCode b) { return m_mouseReleased[b]; }
+
 bool jt::MouseInput::justPressed(jt::MouseButtonCode b) { return m_mouseJustPressed[b]; }
+
 bool jt::MouseInput::justReleased(jt::MouseButtonCode b) { return m_mouseJustReleased[b]; }
 
 void jt::MouseInput::reset()

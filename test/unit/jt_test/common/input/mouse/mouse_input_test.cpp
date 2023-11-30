@@ -36,7 +36,7 @@ TEST(MouseInput, AllButtonsAlwaysPressed)
 {
     jt::MouseInput mouseInput { [](auto /*b*/) { return true; } };
     mouseInput.updateButtons();
-    for (auto const b : jt::getAllMouseButtons()) {
+    for (auto const& b : jt::getAllMouseButtons()) {
         EXPECT_TRUE(mouseInput.pressed(b));
         EXPECT_FALSE(mouseInput.released(b));
     }
@@ -46,7 +46,7 @@ TEST(MouseInput, AllButtonsAlwaysReleased)
 {
     jt::MouseInput mouseInput { [](auto /*b*/) { return false; } };
     mouseInput.updateButtons();
-    for (auto const b : jt::getAllMouseButtons()) {
+    for (auto const& b : jt::getAllMouseButtons()) {
         EXPECT_FALSE(mouseInput.pressed(b));
         EXPECT_TRUE(mouseInput.released(b));
     }
@@ -57,12 +57,12 @@ TEST(MouseInput, AllButtonsJustPressed)
     jt::MouseInput mouseInput { [](auto /*b*/) { return true; } };
     mouseInput.reset();
     mouseInput.updateButtons();
-    for (auto const b : jt::getAllMouseButtons()) {
+    for (auto const& b : jt::getAllMouseButtons()) {
         EXPECT_TRUE(mouseInput.justPressed(b));
         EXPECT_FALSE(mouseInput.justReleased(b));
     }
     mouseInput.updateButtons();
-    for (auto const b : jt::getAllMouseButtons()) {
+    for (auto const& b : jt::getAllMouseButtons()) {
         EXPECT_FALSE(mouseInput.justPressed(b));
         EXPECT_FALSE(mouseInput.justReleased(b));
     }
@@ -80,12 +80,12 @@ TEST(MouseInput, AllButtonsJustReleased)
     mouseInput.reset();
     mouseInput.updateButtons();
     call_count++;
-    for (auto const b : jt::getAllMouseButtons()) {
+    for (auto const& b : jt::getAllMouseButtons()) {
         ASSERT_TRUE(mouseInput.justPressed(b));
         ASSERT_FALSE(mouseInput.justReleased(b));
     }
     mouseInput.updateButtons();
-    for (auto const b : jt::getAllMouseButtons()) {
+    for (auto const& b : jt::getAllMouseButtons()) {
         EXPECT_FALSE(mouseInput.justPressed(b));
         EXPECT_TRUE(mouseInput.justReleased(b));
     }

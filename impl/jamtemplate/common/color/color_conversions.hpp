@@ -26,8 +26,7 @@ struct ColorConversions {
     /// Convert hex string to rgb
     /// \param hexString starts with or without '#', two chars for r,g,b each in this order,
     /// ##FFFFFF \return rgb tuple, each [0-255]
-    static std::tuple<std::uint8_t, std::uint8_t, std::uint8_t> hex2rgb(
-        std::string const& hexString);
+    static std::tuple<std::uint8_t, std::uint8_t, std::uint8_t> hex2rgb(std::string_view hexString);
 };
 
 } // namespace jt

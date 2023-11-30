@@ -49,12 +49,14 @@ public:
 
 private:
     mutable sf::Sprite m_sprite;
-    sf::Sprite m_flashSprite;
+    mutable sf::Sprite m_flashSprite;
     // optimization for getColorAtPixel
     mutable sf::Image m_image;
     mutable bool m_imageStored { false };
 
-    jt::Vector2f m_position { 0, 0 };
+    jt::Vector2f m_position { 0.0f, 0.0f };
+
+    sf::Vector2f m_lastScreenPosition { 0.0f, 0.0f };
 
     void doUpdate(float /*elapsed*/) override;
 

@@ -25,7 +25,7 @@ if (JT_ENABLE_LTO_OPTIMIZATION)
     if (MSVC)
         set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /GL /LTCG")
     else ()
-        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -flto=auto -fwhole-program -g0")
+        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -flto=auto -fwhole-program -g0 -march=native -mtune=native")
     endif ()
 
     if (NOT CMAKE_BUILD_TYPE STREQUAL "Release")

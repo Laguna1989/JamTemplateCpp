@@ -19,14 +19,15 @@ jt::InputManager::InputManager(std::shared_ptr<jt::MouseInterface> mouse,
 }
 
 std::shared_ptr<jt::MouseInterface> jt::InputManager::mouse() { return m_mouse; }
+
 std::shared_ptr<jt::KeyboardInterface> jt::InputManager::keyboard() { return m_keyboard; }
 
 void jt::InputManager::reset()
 {
-    if (m_mouse) {
+    if (m_mouse) [[likely]] {
         m_mouse->reset();
     }
-    if (m_keyboard) {
+    if (m_keyboard) [[likely]] {
         m_keyboard->reset();
     }
     for (auto& gp : m_gamepads) {
@@ -37,11 +38,11 @@ void jt::InputManager::reset()
 void jt::InputManager::update(
     bool /*shouldProcessKeys*/, bool /*shouldProcessMouse*/, MousePosition const& mp, float elapsed)
 {
-    if (m_mouse) {
+    if (m_mouse) [[likely]] {
         m_mouse->updateMousePosition(mp);
         m_mouse->updateButtons();
     }
-    if (m_keyboard) {
+    if (m_keyboard) [[likely]] {
         m_keyboard->updateKeys();
         m_keyboard->updateCommands(elapsed);
     }

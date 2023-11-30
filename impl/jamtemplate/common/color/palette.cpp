@@ -6,8 +6,8 @@ jt::Palette::Palette(std::vector<jt::Color> const& colors)
 {
 }
 
-std::size_t jt::Palette::size() const { return m_colors.size(); }
+std::size_t jt::Palette::size() const noexcept { return m_colors.size(); }
 
-bool jt::Palette::empty() const { return m_colors.empty(); }
+bool jt::Palette::empty() const noexcept { return m_colors.empty(); }
 
-jt::Color const& jt::Palette::getColor(std::size_t idx) const { return m_colors.at(idx); }
+jt::Color const& jt::Palette::getColor(std::size_t const idx) const { return m_colors.at(idx); }

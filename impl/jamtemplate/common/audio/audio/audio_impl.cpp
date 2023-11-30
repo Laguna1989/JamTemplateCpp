@@ -54,7 +54,7 @@ oalpp::SoundContextInterface& jt::AudioImpl::getContext() { return m_context; }
 
 std::shared_ptr<jt::SoundInterface> jt::AudioImpl::getPermanentSound(std::string const& identifier)
 {
-    if (m_permanentSounds.count(identifier) == 0) {
+    if (!m_permanentSounds.contains(identifier)) {
         return nullptr;
     }
     return m_permanentSounds[identifier];

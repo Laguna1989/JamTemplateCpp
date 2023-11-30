@@ -85,13 +85,13 @@ std::shared_ptr<SDL_Texture> makeGlowImage(
             auto const dx = i - c;
             auto const dy = j - c;
 
-            auto const sqr = std::sqrt(dx * dx + dy * dy);
-            auto const sqrNorm = 1.0f - MathHelper::clamp(sqr / s * 2.0f, 0.0f, 1.0f);
+            auto const sqr = jt::MathHelper::qsqrt(dx * dx + dy * dy);
+            auto const sqrNorm = 1.0f - std::clamp(sqr / s * 2.0f, 0.0f, 1.0f);
             float const v = std::pow(sqrNorm, 2.0f) * static_cast<float>(max);
 
-            auto const max = std::numeric_limits<std::uint8_t>::max();
+            constexpr auto maxUint8 = std::numeric_limits<std::uint8_t>::max();
             jt::setPixel(image.get(), i, j,
-                SDL_MapRGBA(image->format, max, max, max, static_cast<uint8_t>(v)));
+                SDL_MapRGBA(image->format, maxUint8, maxUint8, maxUint8, static_cast<uint8_t>(v)));
         }
     }
     SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "0");
@@ -115,8 +115,8 @@ std::shared_ptr<SDL_Texture> makeVignetteImage(
         for (auto j = 0u; j != h; ++j) {
             auto const dx = i - cx;
             auto const dy = j - cy;
-            auto const sqr = std::sqrt(dx * dx + dy * dy);
-            auto const sqrNorm = MathHelper::clamp(sqr / (cx + cy) / 1.5f * 2.0f, 0.0f, 1.0f);
+            auto const sqr = jt::MathHelper::qsqrt(dx * dx + dy * dy);
+            auto const sqrNorm = std::clamp(sqr / (cx + cy) / 1.5f * 2.0f, 0.0f, 1.0f);
             auto const v
                 = static_cast<uint8_t>(std::pow(sqrNorm, 3.5f) * 245 + jt::Random::getInt(0, 10));
             jt::setPixel(image.get(), i, j, SDL_MapRGBA(image->format, 0u, 0u, 0u, v));
@@ -163,7 +163,7 @@ std::shared_ptr<SDL_Texture> makeCircle(
             auto const dx = i - c;
             auto const dy = j - c;
 
-            auto const sqr = std::sqrt(dx * dx + dy * dy);
+            auto const sqr = jt::MathHelper::qsqrt(dx * dx + dy * dy);
 
             float const v = (sqr < r) ? 255 : 0;
 

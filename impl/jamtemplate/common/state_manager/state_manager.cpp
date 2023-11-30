@@ -14,7 +14,7 @@ std::shared_ptr<jt::GameState> jt::StateManager::getCurrentState() { return m_cu
 
 void jt::StateManager::switchState(std::shared_ptr<jt::GameState> newState)
 {
-    if (newState == nullptr) {
+    if (newState == nullptr) [[unlikely]] {
         throw std::invalid_argument { "cannot switch to nullptr state!" };
     }
     m_nextState = newState;
@@ -24,7 +24,7 @@ void jt::StateManager::switchState(std::shared_ptr<jt::GameState> newState)
 
 void jt::StateManager::switchToStoredState(std::string const& identifier)
 {
-    if (m_storedStates.count(identifier) == 0) {
+    if (!m_storedStates.contains(identifier)) {
         throw std::invalid_argument { "no state stored with identifier: " + identifier };
     }
 
@@ -92,7 +92,7 @@ void jt::StateManager::storeCurrentState(std::string const& identifier)
 
 std::shared_ptr<jt::GameState> jt::StateManager::getStoredState(std::string const& identifier)
 {
-    if (m_storedStates.count(identifier) == 0) {
+    if (!m_storedStates.contains(identifier)) {
         return nullptr;
     }
     return m_storedStates[identifier];

@@ -23,7 +23,6 @@ void jt::GameBase::runOneFrame()
     m_actionCommandManager.update();
 
     auto const now = std::chrono::steady_clock::now();
-
     float const elapsedSeconds
         = std::chrono::duration_cast<std::chrono::microseconds>(now - m_timeLast).count() / 1000.0f
         / 1000.0f;
@@ -43,7 +42,7 @@ void jt::GameBase::runOneFrame()
 
             numberOfUpdateOperations++;
             if (numberOfUpdateOperations >= m_maxNumberOfUpdateIterations) {
-                logger().warning("number of update operations exceeds maximum of "
+                m_logger.warning("number of update operations exceeds maximum of "
                         + std::to_string(m_maxNumberOfUpdateIterations),
                     { "jt", "gameloop" });
                 m_lag = 0.0f;
@@ -84,17 +83,17 @@ jt::CacheInterface& jt::GameBase::cache() { return m_cache; }
 
 void jt::GameBase::doUpdate(float const elapsed)
 {
-    m_logger.verbose("update game, elapsed=" + std::to_string(elapsed), { "jt" });
+    m_logger.verbose("update game", { "jt" });
     m_stateManager.update(getPtr(), elapsed);
     m_audio.update(elapsed);
     gfx().update(elapsed);
 
-    jt::Vector2f const mpf = gfx().window().getMousePosition() / gfx().camera().getZoom();
+    jt::Vector2f const mousePosition = gfx().window().getMousePosition() / gfx().camera().getZoom();
 
     m_inputManager.update(gfx().window().shouldProcessKeyboard(),
         gfx().window().shouldProcessMouse(),
-        MousePosition { mpf.x + gfx().camera().getCamOffset().x,
-            mpf.y + gfx().camera().getCamOffset().y, mpf.x, mpf.y },
+        MousePosition { mousePosition.x + gfx().camera().getCamOffset().x,
+            mousePosition.y + gfx().camera().getCamOffset().y, mousePosition.x, mousePosition.y },
         elapsed);
 }
 

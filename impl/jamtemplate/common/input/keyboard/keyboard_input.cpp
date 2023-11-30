@@ -27,8 +27,11 @@ void jt::KeyboardInput::updateKeys()
 }
 
 bool jt::KeyboardInput::pressed(jt::KeyCode k) { return m_pressed[k]; }
+
 bool jt::KeyboardInput::released(jt::KeyCode k) { return m_released[k]; }
+
 bool jt::KeyboardInput::justPressed(jt::KeyCode k) { return m_justPressed[k]; }
+
 bool jt::KeyboardInput::justReleased(jt::KeyCode k) { return m_justReleased[k]; }
 
 void jt::KeyboardInput::reset()

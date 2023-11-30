@@ -4,6 +4,7 @@
 #include <sprite_functions.hpp>
 #include <strutils.hpp>
 #include <SDL_image.h>
+#include <array>
 #include <iostream>
 #include <limits>
 #include <stdexcept>
@@ -60,11 +61,8 @@ std::shared_ptr<SDL_Texture> createImageFromAse(
 }
 
 std::shared_ptr<SDL_Texture> createButtonImage(
-    std::vector<std::string> const& ssv, std::shared_ptr<jt::RenderTargetLayer> renderTarget)
+    std::array<std::string, 3> const& ssv, std::shared_ptr<jt::RenderTargetLayer> renderTarget)
 {
-    if (ssv.size() != 3) {
-        throw std::invalid_argument { "create button image: vector does not contain 3 elements." };
-    }
     std::size_t count { 0 };
     std::int64_t const w = std::stol(ssv.at(1), &count);
     if (count != ssv.at(1).size()) {
@@ -82,11 +80,8 @@ std::shared_ptr<SDL_Texture> createButtonImage(
 }
 
 std::shared_ptr<SDL_Texture> createBlankImage(
-    std::vector<std::string> const& ssv, std::shared_ptr<jt::RenderTargetLayer> renderTarget)
+    std::array<std::string, 3> const& ssv, std::shared_ptr<jt::RenderTargetLayer> renderTarget)
 {
-    if (ssv.size() != 3) {
-        throw std::invalid_argument { "create blank image: vector does not contain 2 elements." };
-    }
     std::size_t count { 0 };
     std::int64_t const w = std::stol(ssv.at(1), &count);
     if (count != ssv.at(1).size()) {
@@ -105,11 +100,8 @@ std::shared_ptr<SDL_Texture> createBlankImage(
 }
 
 std::shared_ptr<SDL_Texture> createGlowImage(
-    std::vector<std::string> const& ssv, std::shared_ptr<jt::RenderTargetLayer> renderTarget)
+    std::array<std::string, 3> const& ssv, std::shared_ptr<jt::RenderTargetLayer> renderTarget)
 {
-    if (ssv.size() != 3) {
-        throw std::invalid_argument { "create glow image: vector does not contain 2 elements." };
-    }
     std::size_t count { 0 };
     auto const glow_size = std::stol(ssv.at(1), &count);
     if (count != ssv.at(1).size() || glow_size <= std::numeric_limits<uint8_t>::min()) {
@@ -126,7 +118,7 @@ std::shared_ptr<SDL_Texture> createGlowImage(
 }
 
 std::shared_ptr<SDL_Texture> createVignetteImage(
-    std::vector<std::string> const& ssv, std::shared_ptr<jt::RenderTargetLayer> renderTarget)
+    std::array<std::string, 3> const& ssv, std::shared_ptr<jt::RenderTargetLayer> renderTarget)
 {
     if (ssv.size() != 3) {
         throw std::invalid_argument {
@@ -147,11 +139,8 @@ std::shared_ptr<SDL_Texture> createVignetteImage(
 }
 
 std::shared_ptr<SDL_Texture> createRectImage(
-    std::vector<std::string> const& ssv, std::shared_ptr<jt::RenderTargetLayer> renderTarget)
+    std::array<std::string, 3> const& ssv, std::shared_ptr<jt::RenderTargetLayer> renderTarget)
 {
-    if (ssv.size() != 3) {
-        throw std::invalid_argument { "create rect image: vector does not contain 2 elements." };
-    }
     std::size_t count { 0 };
     auto const w = std::stol(ssv.at(1), &count);
     if (count != ssv.at(1).size() || w <= 0) {
@@ -166,7 +155,7 @@ std::shared_ptr<SDL_Texture> createRectImage(
 }
 
 std::shared_ptr<SDL_Texture> createCircleImage(
-    std::vector<std::string> const& ssv, std::shared_ptr<jt::RenderTargetLayer> renderTarget)
+    std::array<std::string, 2> const& ssv, std::shared_ptr<jt::RenderTargetLayer> renderTarget)
 {
     if (ssv.size() != 2) {
         throw std::invalid_argument { "create circle image: vector does not contain 1 elements." };
@@ -180,7 +169,7 @@ std::shared_ptr<SDL_Texture> createCircleImage(
 }
 
 std::shared_ptr<SDL_Texture> createRingImage(
-    std::vector<std::string> const& ssv, std::shared_ptr<jt::RenderTargetLayer> renderTarget)
+    std::array<std::string, 2> const& ssv, std::shared_ptr<jt::RenderTargetLayer> renderTarget)
 {
     if (ssv.size() != 2) {
         throw std::invalid_argument { "create ring image: vector does not contain 1 elements." };
@@ -280,20 +269,26 @@ std::shared_ptr<SDL_Texture> TextureManagerImpl::get(std::string const& str)
         return m_textures[str];
     }
 
-    auto ssv = strutil::split(str.substr(1u), '#');
-    if (ssv.at(0) == "b") {
+    if (str.at(1) == 'b') {
+        auto ssv = strutil::split<3>(str.substr(1u), '#');
         m_textures[str] = createButtonImage(ssv, renderer);
-    } else if (ssv.at(0) == "f") {
+    } else if (str.at(1) == 'f') {
+        auto ssv = strutil::split<3>(str.substr(1u), '#');
         m_textures[str] = createBlankImage(ssv, renderer);
-    } else if (ssv.at(0) == "g") {
+    } else if (str.at(1) == 'g') {
+        auto ssv = strutil::split<3>(str.substr(1u), '#');
         m_textures[str] = createGlowImage(ssv, renderer);
-    } else if (ssv.at(0) == "v") {
+    } else if (str.at(1) == 'v') {
+        auto ssv = strutil::split<3>(str.substr(1u), '#');
         m_textures[str] = createVignetteImage(ssv, renderer);
-    } else if (ssv.at(0) == "x") {
+    } else if (str.at(1) == 'x') {
+        auto ssv = strutil::split<3>(str.substr(1u), '#');
         m_textures[str] = createRectImage(ssv, renderer);
-    } else if (ssv.at(0) == "c") {
+    } else if (str.at(1) == 'c') {
+        auto ssv = strutil::split<2>(str.substr(1u), '#');
         m_textures[str] = createCircleImage(ssv, renderer);
-    } else if (ssv.at(0) == "r") {
+    } else if (str.at(1) == 'r') {
+        auto ssv = strutil::split<2>(str.substr(1u), '#');
         m_textures[str] = createRingImage(ssv, renderer);
     } else {
         throw std::invalid_argument("ERROR: cannot get texture with name " + str);

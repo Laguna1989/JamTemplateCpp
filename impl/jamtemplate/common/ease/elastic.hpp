@@ -5,9 +5,9 @@ namespace jt {
 namespace ease {
 namespace elastic {
 
-float easeIn(float t, float b, float c, float d);
-float easeOut(float t, float b, float c, float d);
-float easeInOut(float t, float b, float c, float d);
+float easeIn(float t, float b, float c, float d) noexcept;
+float easeOut(float t, float b, float c, float d) noexcept;
+float easeInOut(float t, float b, float c, float d) noexcept;
 
 } // namespace elastic
 } // namespace ease

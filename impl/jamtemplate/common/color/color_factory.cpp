@@ -1,17 +1,19 @@
 #include "color_factory.hpp"
 #include <color/color_conversions.hpp>
 
-jt::Color jt::ColorFactory::fromRGB(std::uint8_t r, std::uint8_t g, std::uint8_t b)
+jt::Color jt::ColorFactory::fromRGB(
+    std::uint8_t const r, std::uint8_t const g, std::uint8_t const b)
 {
     return jt::ColorFactory::fromRGBA(r, g, b, 255);
 }
 
-jt::Color jt::ColorFactory::fromRGBA(std::uint8_t r, std::uint8_t g, std::uint8_t b, std::uint8_t a)
+jt::Color jt::ColorFactory::fromRGBA(
+    std::uint8_t const r, std::uint8_t const g, std::uint8_t const b, std::uint8_t const a)
 {
     return jt::Color { r, g, b, a };
 }
 
-jt::Color jt::ColorFactory::fromHSV(float h, float s, float v)
+jt::Color jt::ColorFactory::fromHSV(float const h, float const s, float const v)
 {
     return jt::ColorFactory::fromHSVA(h, s, v, 255);
 }

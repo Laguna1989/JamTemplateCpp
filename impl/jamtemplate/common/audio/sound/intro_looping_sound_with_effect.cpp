@@ -4,7 +4,7 @@ jt::IntroLoopingSoundWithEffect::IntroLoopingSoundWithEffect(std::string const& 
     std::string const& loopingFileName, jt::SoundBufferManagerInterface& soundBufferManager,
     oalpp::effects::MonoEffectInterface& effect)
     : m_introSound { std::make_unique<jt::SoundWithEffect>(
-        introFileName, soundBufferManager, effect) }
+          introFileName, soundBufferManager, effect) }
     , m_loopingSound { std::make_unique<jt::SoundWithEffect>(
           loopingFileName, soundBufferManager, effect) }
 {

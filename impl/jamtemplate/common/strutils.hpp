@@ -65,13 +65,12 @@ static inline T parse_string(std::string const& str)
  * @param str - std::string that needs to be converted.
  * @return Lower case input std::string.
  */
-static inline std::string to_lower(std::string const& str)
+static inline std::string to_lower(std::string_view const str)
 {
-    auto result = str;
-    std::transform(
-        result.begin(), result.end(), result.begin(), [](unsigned char c) -> unsigned char {
-            return static_cast<unsigned char>(std::tolower(c));
-        });
+    std::string result { str };
+    std::ranges::transform(result, result.begin(), [](unsigned char c) -> unsigned char {
+        return static_cast<unsigned char>(std::tolower(c));
+    });
 
     return result;
 }
@@ -81,13 +80,12 @@ static inline std::string to_lower(std::string const& str)
  * @param str - std::string that needs to be converted.
  * @return Upper case input std::string.
  */
-static inline std::string to_upper(std::string const& str)
+static inline std::string to_upper(std::string_view const str)
 {
-    auto result = str;
-    std::transform(
-        result.begin(), result.end(), result.begin(), [](unsigned char c) -> unsigned char {
-            return static_cast<unsigned char>(std::toupper(c));
-        });
+    std::string result { str };
+    std::ranges::transform(result, result.begin(), [](unsigned char c) -> unsigned char {
+        return static_cast<unsigned char>(std::toupper(c));
+    });
 
     return result;
 }
@@ -98,7 +96,7 @@ static inline std::string to_upper(std::string const& str)
  * @param substring - searched substring.
  * @return True if substring was found in str, false otherwise.
  */
-static inline bool contains(std::string const& str, std::string const& substring)
+static inline bool contains(std::string_view const str, std::string_view const substring)
 {
     return str.find(substring) != std::string::npos;
 }
@@ -109,7 +107,7 @@ static inline bool contains(std::string const& str, std::string const& substring
  * @param character - searched character.
  * @return True if character was found in str, false otherwise.
  */
-static inline bool contains(std::string const& str, char const character)
+static inline bool contains(std::string_view const str, char const character)
 {
     return contains(str, std::string(1, character));
 }
@@ -120,7 +118,7 @@ static inline bool contains(std::string const& str, char const character)
  * @param str2 - std::string to compare
  * @return True if str1 and str2 are equal, false otherwise.
  */
-static inline bool compare_ignore_case(std::string const& str1, std::string const& str2)
+static inline bool compare_ignore_case(std::string_view const str1, std::string_view const str2)
 {
     return to_lower(str1) == to_lower(str2);
 }
@@ -133,8 +131,7 @@ static inline bool compare_ignore_case(std::string const& str1, std::string cons
  */
 static inline void trim_left(std::string& str)
 {
-    str.erase(str.begin(),
-        std::find_if(str.begin(), str.end(), [](int ch) { return !std::isspace(ch); }));
+    str.erase(str.begin(), std::ranges::find_if(str, [](int ch) { return !std::isspace(ch); }));
 }
 
 /**
@@ -211,9 +208,9 @@ static inline std::string trim_copy(std::string str)
  * @return True if replacement was successfull, false otherwise.
  */
 static inline bool replace_first(
-    std::string& str, std::string const& target, std::string const& replecament)
+    std::string& str, std::string_view const target, std::string_view const replecament)
 {
-    size_t start_pos = str.find(target);
+    auto const start_pos = str.find(target);
     if (start_pos == std::string::npos) {
         return false;
     }
@@ -232,9 +229,9 @@ static inline bool replace_first(
  * @return True if replacement was successfull, false otherwise.
  */
 static inline bool replace_last(
-    std::string& str, std::string const& target, std::string const& replecament)
+    std::string& str, std::string_view const target, std::string_view const replecament)
 {
-    size_t start_pos = str.rfind(target);
+    auto const start_pos = str.rfind(target);
     if (start_pos == std::string::npos) {
         return false;
     }
@@ -253,13 +250,13 @@ static inline bool replace_last(
  * @return True if replacement was successfull, false otherwise.
  */
 static inline bool replace_all(
-    std::string& str, std::string const& target, std::string const& replecament)
+    std::string& str, std::string_view const target, std::string_view const replecament)
 {
     if (target.empty()) {
         return false;
     }
 
-    size_t start_pos = 0;
+    std::size_t start_pos = 0u;
     bool const found_substring = str.find(target, start_pos) != std::string::npos;
 
     while ((start_pos = str.find(target, start_pos)) != std::string::npos) {
@@ -271,67 +268,17 @@ static inline bool replace_all(
 }
 
 /**
- * @brief Checks if std::string str ends with specified suffix.
- * @param str - input std::string that will be checked.
- * @param suffix - searched suffix in str.
- * @return True if suffix was found, false otherwise.
- */
-[[deprecated("Use std::string::ends_with instead")]] static inline bool ends_with(
-    std::string const& str, std::string const& suffix)
-{
-    auto const pos = str.rfind(suffix);
-
-    return (pos != std::string::npos) && (pos == (str.length() - suffix.length()));
-}
-
-/**
- * @brief Checks if std::string str ends with specified character.
- * @param str - input std::string that will be checked.
- * @param suffix - searched character in str.
- * @return True if ends with character, false otherwise.
- */
-[[deprecated("Use std::string::ends_with instead")]] static inline bool ends_with(
-    std::string const& str, char const suffix)
-{
-    return (str.size() > 0) && (*(str.end() - 1) == suffix);
-}
-
-/**
- * @brief Checks if std::string str starts with specified prefix.
- * @param str - input std::string that will be checked.
- * @param prefix - searched prefix in str.
- * @return True if prefix was found, false otherwise.
- */
-[[deprecated("Use std::string::starts_with instead")]] static inline bool starts_with(
-    std::string const& str, std::string const& prefix)
-{
-    return str.find(prefix) == 0;
-}
-
-/**
- * @brief Checks if std::string str starts with specified character.
- * @param str - input std::string that will be checked.
- * @param prefix - searched character in str.
- * @return True if starts with character, false otherwise.
- */
-[[deprecated("Use std::string::starts_with instead")]] static inline bool starts_with(
-    std::string const& str, char const prefix)
-{
-    return (str.size() > 0) && (str[0] == prefix);
-}
-
-/**
  * @brief Splits input std::string str according to input delim.
  * @param str - std::string that will be splitted.
  * @param delim - the delimiter.
  * @return std::vector<std::string> that contains all splitted tokens.
  */
-static inline std::vector<std::string> split(std::string const& str, char const delim)
+static inline std::vector<std::string> split(std::string_view const str, char const delim)
 {
     std::vector<std::string> tokens;
-    std::stringstream ss(str);
+    std::stringstream ss { std::string { str }, std::ios_base::in };
 
-    std::string token;
+    std::string token {};
     while (std::getline(ss, token, delim)) {
         tokens.push_back(token);
     }
@@ -344,6 +291,31 @@ static inline std::vector<std::string> split(std::string const& str, char const 
     return tokens;
 }
 
+/// Splits input std::string str according to input delim.
+/// \tparam N number of tokens
+/// \param str std::string that will be splitted.
+/// \param delim delimiter
+/// \return std::array<std::string, N> that contains all splitted tokens.
+template <std::size_t N>
+static inline std::array<std::string, N> split(std::string_view const str, char const delim)
+{
+    std::array<std::string, N> tokens;
+    std::stringstream ss { std::string { str }, std::ios_base::in };
+
+    std::string token;
+    auto index = 0u;
+    while (std::getline(ss, token, delim)) {
+        if (index >= N) {
+            throw std::invalid_argument { "strutil::split Array size '" + std::to_string(N)
+                + "' does not match number of Tokens '" + std::to_string(index) + "'" };
+        }
+        tokens.at(index) = token;
+        index++;
+    }
+
+    return tokens;
+}
+
 /**
  * @brief Splits input std::string str according to input std::string delim.
  *        Taken from: https://stackoverflow.com/a/46931770/1892346.
@@ -351,10 +323,13 @@ static inline std::vector<std::string> split(std::string const& str, char const 
  * @param delim - the delimiter.
  * @return std::vector<std::string> that contains all splitted tokens.
  */
-static inline std::vector<std::string> split(std::string const& str, std::string const& delim)
+static inline std::vector<std::string> split(
+    std::string_view const str, std::string_view const delim)
 {
-    size_t pos_start = 0, pos_end, delim_len = delim.length();
-    std::string token;
+    std::size_t pos_start { 0u };
+    std::size_t pos_end { 0u };
+    std::size_t const delim_len { delim.length() };
+    std::string token {};
     std::vector<std::string> tokens;
 
     while ((pos_end = str.find(delim, pos_start)) != std::string::npos) {
@@ -363,7 +338,7 @@ static inline std::vector<std::string> split(std::string const& str, std::string
         tokens.push_back(token);
     }
 
-    tokens.push_back(str.substr(pos_start));
+    tokens.push_back(std::string { str.substr(pos_start) });
     return tokens;
 }
 
@@ -373,7 +348,8 @@ static inline std::vector<std::string> split(std::string const& str, std::string
  * @param delims - the set of delimiter characters.
  * @return vector of resulting tokens.
  */
-static inline std::vector<std::string> split_any(std::string const& str, std::string const& delims)
+static inline std::vector<std::string> split_any(
+    std::string_view const str, std::string_view const delims)
 {
     std::string token;
     std::vector<std::string> tokens;
@@ -387,7 +363,7 @@ static inline std::vector<std::string> split_any(std::string const& str, std::st
         }
     }
 
-    tokens.push_back(str.substr(pos_start));
+    tokens.push_back(std::string { str.substr(pos_start) });
     return tokens;
 }
 
@@ -400,7 +376,7 @@ static inline std::vector<std::string> split_any(std::string const& str, std::st
  * @return std::string with joined elements of vector tokens with delimiter delim.
  */
 template <typename T>
-static inline std::string join(std::vector<T> const& tokens, std::string const& delim)
+static inline std::string join(std::vector<T> const& tokens, std::string_view const delim)
 {
     std::ostringstream result;
     for (auto it = tokens.begin(); it != tokens.end(); ++it) {
@@ -415,34 +391,14 @@ static inline std::string join(std::vector<T> const& tokens, std::string const& 
 }
 
 /**
- * @brief Inplace removal of all empty strings in a vector<string>
- * @param tokens - vector of strings.
- */
-static inline void drop_empty(std::vector<std::string>& tokens)
-{
-    std::erase_if(tokens, [](std::string const& s) { return s.size() == 0; });
-}
-
-/**
- * @brief Inplace removal of all empty strings in a vector<string>
- * @param tokens - vector of strings.
- * @return vector of non-empty tokens.
- */
-static inline std::vector<std::string> drop_empty_copy(std::vector<std::string> tokens)
-{
-    drop_empty(tokens);
-    return tokens;
-}
-
-/**
  * @brief Creates new std::string with repeated n times substring str.
  * @param str - substring that needs to be repeated.
  * @param n - number of iterations.
  * @return std::string with repeated substring str.
  */
-static inline std::string repeat(std::string const& str, unsigned n)
+static inline std::string repeat(std::string_view const str, unsigned n)
 {
-    std::string result;
+    std::string result {};
 
     for (unsigned i = 0; i < n; ++i) {
         result += str;

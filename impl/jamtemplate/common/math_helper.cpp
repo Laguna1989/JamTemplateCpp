@@ -6,6 +6,11 @@
 
 float jt::MathHelper::lengthSquared(jt::Vector2f const& v) { return v.x * v.x + v.y * v.y; }
 
+float jt::MathHelper::qlength(jt::Vector2f const& v)
+{
+    return jt::MathHelper::qsqrt(jt::MathHelper::lengthSquared(v));
+}
+
 float jt::MathHelper::length(jt::Vector2f const& v)
 {
     return std::sqrt(jt::MathHelper::lengthSquared(v));

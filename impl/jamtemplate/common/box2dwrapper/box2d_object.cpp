@@ -5,9 +5,13 @@
 
 jt::Box2DObject::Box2DObject(std::shared_ptr<jt::Box2DWorldInterface> world, b2BodyDef const* def)
 {
+    if (!world) [[unlikely]] {
+        throw std::invalid_argument { "cannot create object for nullptr world" };
+    }
     setB2Body(world->createBody(def));
     m_world = world;
 }
+
 jt::Box2DObject::~Box2DObject()
 {
     if (m_world.expired()) {

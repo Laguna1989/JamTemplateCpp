@@ -53,6 +53,7 @@ TemperatureManager::TemperatureManager(
         }
     }
 }
+
 void TemperatureManager::createNodeConnections()
 {
     for (auto& t : m_tempNodes) {
@@ -79,6 +80,7 @@ void TemperatureManager::doCreate()
     m_shape = std::make_shared<jt::Shape>();
     m_shape->makeRect(jt::Vector2f { 24.0f, 24.0f }, textureManager());
 }
+
 void TemperatureManager::doUpdate(float const elapsed)
 {
     if (getGame()->input().keyboard()->justPressed(jt::KeyCode::V)) {
@@ -124,10 +126,10 @@ void TemperatureManager::doDraw() const
     for (auto const& n : m_tempNodes) {
 
         m_shape->setPosition(n->getPosition());
-        auto const maxTempDisplayValue = 25.0f;
+        constexpr auto maxTempDisplayValue = 25.0f;
         // between 0 and 1
-        float const t = jt::MathHelper::clamp(
-                            n->getCurrentTemperature(), -maxTempDisplayValue, maxTempDisplayValue)
+        float const t
+            = std::clamp(n->getCurrentTemperature(), -maxTempDisplayValue, maxTempDisplayValue)
                 / (2 * maxTempDisplayValue)
             + 0.5f;
 
@@ -151,6 +153,7 @@ std::shared_ptr<TemperatureNode> TemperatureManager::getNodeAt(jt::Vector2u cons
     }
     return nullptr;
 }
+
 std::weak_ptr<TemperatureControllerInterface> TemperatureManager::getControllerByName(
     std::string const& name)
 {

@@ -17,6 +17,7 @@ void StateParticles::onCreate()
     createParticlesFire();
     createSparkParticles();
 }
+
 void StateParticles::createSparkParticles()
 {
     auto rng = std::default_random_engine {};
@@ -65,21 +66,21 @@ void StateParticles::createParticlesFire()
             s->setScale(jt::Vector2f { 0.5f, 0.5f });
 
             jt::TweenAlpha::Sptr twaIn = jt::TweenAlpha::create(s, 0.1f, 0, 255);
-            twaIn->setSkipFrames(1);
+            twaIn->setSkipTicks(1);
             add(twaIn);
 
             jt::TweenAlpha::Sptr twaOut = jt::TweenAlpha::create(s, totalTime - 0.25f, 255, 0);
-            twaOut->setSkipFrames(1);
+            twaOut->setSkipTicks(1);
             twaOut->setStartDelay(0.25f);
             twaOut->setAgePercentConversion([](float t) {
-                t = jt::MathHelper::clamp(t, 0.0f, 1.0f);
+                t = std::clamp(t, 0.0f, 1.0f);
                 return 0.9f * jt::Lerp::cubic(0.0f, 1.0f, t) + 0.1f * t;
             });
             add(twaOut);
 
             auto tws = jt::TweenScale::create(
                 s, totalTime - 0.1f, jt::Vector2f { 0.5f, 0.5f }, jt::Vector2f { 1.0f, 1.0f });
-            tws->setSkipFrames(1);
+            tws->setSkipTicks(1);
             tws->setStartDelay(0.1f);
             add(tws);
 
@@ -87,9 +88,9 @@ void StateParticles::createParticlesFire()
                 = startPosition + jt::Random::getRandomPointIn(jt::Rectf { -30, -150, 60, 40 });
             jt::TweenPosition::Sptr twp
                 = jt::TweenPosition::create(s, totalTime, startPosition, endPosition);
-            twp->setSkipFrames(1);
+            twp->setSkipTicks(1);
             twp->setAgePercentConversion([](float t) {
-                t = jt::MathHelper::clamp(t, 0.0f, 1.0f);
+                t = std::clamp(t, 0.0f, 1.0f);
                 return 0.5f * jt::Lerp::cubic(0.0f, 1.0f, t) + 0.5f * t;
             });
             add(twp);
@@ -100,18 +101,19 @@ void StateParticles::createParticlesFire()
             float const fraction = jt::Random::getFloat(0.6f, 0.7f);
             jt::TweenColor::Sptr twc1 = jt::TweenColor::create(
                 s, totalTime * fraction, jt::ColorFactory::fromHSV(45, 80, 100), intermediateColor);
-            twc1->setSkipFrames(1);
+            twc1->setSkipTicks(1);
             twc1->addCompleteCallback(
                 [this, totalTime, fraction, s, intermediateColor, finalColor]() {
                     jt::TweenColor::Sptr twc2 = jt::TweenColor::create(
                         s, totalTime * (1.0f - fraction), intermediateColor, finalColor);
-                    twc2->setSkipFrames(1);
+                    twc2->setSkipTicks(1);
                     add(twc2);
                 });
             add(twc1);
         });
     add(m_particlesFire);
 }
+
 void StateParticles::createParticlesGlitter()
 {
     m_particlesGlitter = jt::ParticleSystem<jt::Shape, numberOfParticles>::createPS(
@@ -125,16 +127,17 @@ void StateParticles::createParticlesGlitter()
             s->setPosition(jt::Random::getRandomPointIn(jt::Rectf { 0, 0, 100, 300 }));
 
             auto twa = jt::TweenAlpha::create(s, 0.5, 255, 0);
-            twa->setSkipFrames(1);
+            twa->setSkipTicks(1);
             add(twa);
 
             auto tws = jt::TweenScale::create(
                 s, 0.5, jt::Vector2f { 1.0f, 1.0f }, jt::Vector2f { 2.0f, 2.0f });
-            tws->setSkipFrames(1);
+            tws->setSkipTicks(1);
             add(tws);
         });
     add(m_particlesGlitter);
 }
+
 void StateParticles::onUpdate(float elapsed)
 {
     m_particlesGlitter->fire(toFire);
@@ -154,5 +157,7 @@ void StateParticles::onUpdate(float elapsed)
                   << " " << toFire << " " << avg << std::endl;
     }
 }
+
 void StateParticles::onDraw() const { }
+
 std::string StateParticles::getName() const { return "Particles"; }

@@ -41,11 +41,8 @@ sf::Image createImageFromAse(std::string const& filename)
     return sfImgage;
 }
 
-sf::Image createButtonImage(std::vector<std::string> const& ssv)
+sf::Image createButtonImage(std::array<std::string, 3> const& ssv)
 {
-    if (ssv.size() != 3) {
-        throw std::invalid_argument { "create button image: vector does not contain 3 elements." };
-    }
     std::size_t count { 0 };
     std::int64_t w = std::stol(ssv.at(1), &count);
     if (count != ssv.at(1).size()) {
@@ -63,11 +60,8 @@ sf::Image createButtonImage(std::vector<std::string> const& ssv)
         static_cast<unsigned int>(w), static_cast<unsigned int>(h));
 }
 
-sf::Image createBlankImage(std::vector<std::string> const& ssv)
+sf::Image createBlankImage(std::array<std::string, 3> const& ssv)
 {
-    if (ssv.size() != 3) {
-        throw std::invalid_argument { "create blank image: vector does not contain 3 elements." };
-    }
     std::size_t count { 0 };
     std::int64_t w = std::stol(ssv.at(1), &count);
     if (count != ssv.at(1).size()) {
@@ -85,11 +79,8 @@ sf::Image createBlankImage(std::vector<std::string> const& ssv)
         static_cast<unsigned int>(w), static_cast<unsigned int>(h));
 }
 
-sf::Image createGlowImage(std::vector<std::string> const& ssv)
+sf::Image createGlowImage(std::array<std::string, 3> const& ssv)
 {
-    if (ssv.size() != 3) {
-        throw std::invalid_argument { "create glow image: vector does not contain 2 elements." };
-    }
     std::size_t count { 0 };
     auto const s = std::stol(ssv.at(1), &count);
     if (count != ssv.at(1).size() || s <= 0) {
@@ -102,13 +93,8 @@ sf::Image createGlowImage(std::vector<std::string> const& ssv)
     return jt::SpriteFunctions::makeGlowImage(static_cast<float>(s), static_cast<uint8_t>(max));
 }
 
-sf::Image createVignetteImage(std::vector<std::string> const& ssv)
+sf::Image createVignetteImage(std::array<std::string, 3> const& ssv)
 {
-    if (ssv.size() != 3) {
-        throw std::invalid_argument {
-            "create vignette image: vector does not contain 2 elements."
-        };
-    }
     std::size_t count { 0 };
     auto w = std::stol(ssv.at(1), &count);
     if (count != ssv.at(1).size() || w <= 0) {
@@ -121,11 +107,8 @@ sf::Image createVignetteImage(std::vector<std::string> const& ssv)
     return jt::SpriteFunctions::makeVignetteImage(w, h);
 }
 
-sf::Image createRingImage(std::vector<std::string> const& ssv)
+sf::Image createRingImage(std::array<std::string, 2> const& ssv)
 {
-    if (ssv.size() != 2) {
-        throw std::invalid_argument { "create ring image: vector does not contain 1 elements." };
-    }
     std::size_t count { 0 };
     auto const ringImageSize = std::stol(ssv.at(1), &count);
     if (count != ssv.at(1).size() || ringImageSize <= 0) {
@@ -192,16 +175,20 @@ sf::Texture& jt::TextureManagerImpl::get(std::string const& str)
     }
 
     // special type of images
-    auto ssv = strutil::split(str.substr(1), '#');
-    if (ssv.at(0) == "b") {
+    if (str.at(1) == 'b') {
+        auto const ssv = strutil::split<3>(str.substr(1), '#');
         m_textures[str].loadFromImage(createButtonImage(ssv));
-    } else if (ssv.at(0) == "f") {
+    } else if (str.at(1) == 'f') {
+        auto const ssv = strutil::split<3>(str.substr(1), '#');
         m_textures[str].loadFromImage(createBlankImage(ssv));
-    } else if (ssv.at(0) == "g") {
+    } else if (str.at(1) == 'g') {
+        auto const ssv = strutil::split<3>(str.substr(1), '#');
         m_textures[str].loadFromImage(createGlowImage(ssv));
-    } else if (ssv.at(0) == "v") {
+    } else if (str.at(1) == 'v') {
+        auto const ssv = strutil::split<3>(str.substr(1), '#');
         m_textures[str].loadFromImage(createVignetteImage(ssv));
-    } else if (ssv.at(0) == "r") {
+    } else if (str.at(1) == 'r') {
+        auto const ssv = strutil::split<2>(str.substr(1), '#');
         m_textures[str].loadFromImage(createRingImage(ssv));
     } else {
         throw std::invalid_argument("ERROR: cannot get texture with name " + str);

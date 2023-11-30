@@ -81,7 +81,7 @@ void jt::Star::updateStarBrightness()
     auto col = m_shape->getColor();
     col.a = alpha;
     m_shape->setColor(col);
-    col.a = jt::MathHelper::clamp(col.a, std::uint8_t { 20u }, m_starAlphaMax);
+    col.a = std::clamp(col.a, std::uint8_t { 20u }, m_starAlphaMax);
     m_glow->setColor(col);
 }
 

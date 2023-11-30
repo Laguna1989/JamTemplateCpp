@@ -1,8 +1,8 @@
 #include "box2d_joint.hpp"
 
-jt::Box2DJoint::Box2DJoint(std::shared_ptr<Box2DWorldInterface> world, const b2JointDef* def)
+jt::Box2DJoint::Box2DJoint(std::shared_ptr<Box2DWorldInterface> world, b2JointDef const* def)
 {
-    if (!world) {
+    if (!world) [[unlikely]] {
         throw std::invalid_argument { "cannot create joint for nullptr world" };
     }
     m_world = world;
@@ -19,4 +19,5 @@ void jt::Box2DJoint::doDestroy()
 }
 
 void jt::Box2DJoint::setB2Joint(b2Joint* joint) { m_joint = joint; }
+
 b2Joint* jt::Box2DJoint::getB2Joint() const { return m_joint; }

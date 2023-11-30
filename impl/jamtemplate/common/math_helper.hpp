@@ -4,6 +4,7 @@
 #include <rect.hpp>
 #include <vector.hpp>
 #include <assert.h>
+#include <bit>
 #include <string>
 #include <utility>
 #include <vector>
@@ -31,11 +32,31 @@ std::vector<T> numbersBetween(T a, T b)
     return values;
 }
 
+constexpr float qrsqrt(float y)
+{
+    constexpr auto threeHalfes = 1.5f;
+    auto x2 = y * 0.5f;
+
+    auto i = std::bit_cast<int>(y);
+    i = 0x5f3759df - (i >> 1);
+    y = std::bit_cast<float>(i);
+
+    y = y * (threeHalfes - (x2 * y * y));
+    return y;
+}
+
+constexpr float qsqrt(float y) { return y * qrsqrt(y); }
+
 /// Calculate the squared length of a vector
 ///
 /// This function is significantly faster than length, as it does not need to calculate the
 /// squareroot \param v vector to calculate squared length of \return squared length
 float lengthSquared(jt::Vector2f const& v);
+
+/// Calculate the length of a vector (quick but fast version)
+/// \param v vector to calculate length of
+/// \return length
+float qlength(jt::Vector2f const& v);
 
 /// Calculate the length of a vector
 /// \param v vector to calculate length of
@@ -87,16 +108,10 @@ float angleOf(jt::Vector2f const& in);
 /// \param max maximal
 /// \return the clamped value
 template <typename T>
-T clamp(T const& value, T const& min, T const& max)
+[[deprecated("Use std::clamp instead")]] T clamp(T const& value, T const& min, T const& max)
 {
     assert(min < max);
-    if (value < min) {
-        return min;
-    }
-    if (value > max) {
-        return max;
-    }
-    return value;
+    return std::clamp(value, min, max);
 }
 
 /// specialization of clamp for a jt::Vector2f type

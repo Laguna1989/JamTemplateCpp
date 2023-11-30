@@ -121,12 +121,14 @@ void StateRope::onDraw() const
     for (auto const& r : m_rope_elements) {
 
         auto const p = r->position;
-        auto const size = static_cast<float>(2.0f * static_cast<float>(std::sqrt(r->mass)));
-        auto s = jt::dh::createShapeRect(
+        auto const size
+            = static_cast<float>(2.0f * static_cast<float>(jt::MathHelper::qsqrt(r->mass)));
+        auto const s = jt::dh::createShapeRect(
             jt::Vector2f { size, size }, jt::colors::White, textureManager());
         s->setPosition(p);
         s->update(0.1f);
         s->draw(renderTarget());
     }
 }
+
 std::string StateRope::getName() const { return "Rope"; }

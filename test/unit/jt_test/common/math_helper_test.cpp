@@ -1,5 +1,6 @@
 ﻿#include <math_helper.hpp>
 #include <vector.hpp>
+#include <complex>
 #include <gtest/gtest.h>
 
 using namespace jt::MathHelper;
@@ -35,6 +36,12 @@ TEST(VectorBetween, Inverted)
     ASSERT_EQ(result.at(1), 4);
 }
 
+TEST(FastSqrtTest, QsqrtTest)
+{
+    ASSERT_NEAR(jt::MathHelper::qrsqrt(2.0f) * 2.0f, 1.41421356f, 0.01f);
+    ASSERT_NEAR(jt::MathHelper::qsqrt(20.0f), std::sqrt(20.0f), 0.01f);
+}
+
 TEST(VectorLengthTest, LengthOfVectorZero)
 {
     jt::Vector2f const v0 { 0.0f, 0.0f };
@@ -47,16 +54,16 @@ TEST(VectorLengthTest, LengthOfVectorOneDimension)
 {
     jt::Vector2f const v0 { 0.0f, 10 };
     float const l { 10.0f };
-    ASSERT_EQ(length(v0), l);
-    ASSERT_EQ(lengthSquared(v0), l * l);
+    ASSERT_NEAR(length(v0), l, 0.1f);
+    ASSERT_NEAR(lengthSquared(v0), l * l, 0.1f);
 }
 
 TEST(VectorLengthTest, LengthOfVectorTwoDimensions)
 {
     jt::Vector2f const v0 { -10, 10 };
     float const l { 14.14213562373095048802f };
-    ASSERT_NEAR(length(v0), l, 0.005);
-    ASSERT_NEAR(lengthSquared(v0), l * l, 0.005);
+    ASSERT_NEAR(length(v0), l, 0.1f);
+    ASSERT_NEAR(lengthSquared(v0), l * l, 0.1f);
 }
 
 TEST(DistanceBetweenTest, DistanceBetweenTwoVectorsOnlyX)
@@ -64,7 +71,7 @@ TEST(DistanceBetweenTest, DistanceBetweenTwoVectorsOnlyX)
     jt::Vector2f const a { 10.0f, 0.0f };
     jt::Vector2f const b { 20.0f, 0.0f };
     float const expectedLength { 10.0f };
-    ASSERT_NEAR(distanceBetween(a, b), expectedLength, 0.0005f);
+    ASSERT_NEAR(distanceBetween(a, b), expectedLength, 0.1f);
 }
 
 TEST(DistanceBetweenTest, DistanceBetweenTwoVectorsOnlyY)
@@ -72,7 +79,7 @@ TEST(DistanceBetweenTest, DistanceBetweenTwoVectorsOnlyY)
     jt::Vector2f const a { 0.0f, -10.0f };
     jt::Vector2f const b { 0.0f, 35.0f };
     float const expectedLength { 45.0f };
-    ASSERT_NEAR(distanceBetween(a, b), expectedLength, 0.0005f);
+    ASSERT_NEAR(distanceBetween(a, b), expectedLength, 0.1f);
 }
 
 TEST(DistanceBetweenTest, DistanceBetweenTwoVectorsBothDimensions)

@@ -113,22 +113,20 @@ void StateMenu::createTweens()
 
 void StateMenu::createInstructionTweenColor1()
 {
-    auto tc = jt::TweenColor::create(
+    auto const tc = jt::TweenColor::create(
         m_textStart, 0.5f, GP::PaletteFontFront(), GP::PalleteFrontHighlight());
     tc->addCompleteCallback([this]() { createInstructionTweenColor2(); });
-    tc->setAgePercentConversion([](float age) {
-        return jt::Lerp::cubic(0.0f, 1.0f, jt::MathHelper::clamp(age, 0.0f, 1.0f));
-    });
+    tc->setAgePercentConversion(
+        [](float age) { return jt::Lerp::cubic(0.0f, 1.0f, std::clamp(age, 0.0f, 1.0f)); });
     add(tc);
 }
 
 void StateMenu::createInstructionTweenColor2()
 {
-    auto tc = jt::TweenColor::create(
+    auto const tc = jt::TweenColor::create(
         m_textStart, 0.45f, GP::PalleteFrontHighlight(), GP::PaletteFontFront());
-    tc->setAgePercentConversion([](float age) {
-        return jt::Lerp::cubic(0.0f, 1.0f, jt::MathHelper::clamp(age, 0.0f, 1.0f));
-    });
+    tc->setAgePercentConversion(
+        [](float age) { return jt::Lerp::cubic(0.0f, 1.0f, std::clamp(age, 0.0f, 1.0f)); });
     tc->setStartDelay(0.2f);
     tc->addCompleteCallback([this]() { createInstructionTweenColor1(); });
     add(tc);
@@ -139,9 +137,9 @@ void StateMenu::createTweenExplanation()
     auto const start = m_textStart->getPosition() + jt::Vector2f { -1000, 0 };
     auto const end = m_textStart->getPosition();
 
-    auto tween = jt::TweenPosition::create(m_textStart, 0.5f, start, end);
+    auto const tween = jt::TweenPosition::create(m_textStart, 0.5f, start, end);
     tween->setStartDelay(0.3f);
-    tween->setSkipFrames();
+    tween->setSkipTicks();
 
     tween->addCompleteCallback([this]() { createInstructionTweenColor1(); });
     add(tween);
@@ -149,36 +147,37 @@ void StateMenu::createTweenExplanation()
 
 void StateMenu::createTweenTitleAlpha()
 {
-    auto tween = jt::TweenAlpha::create(m_textTitle, 0.55f, 0, 255);
+    auto const tween = jt::TweenAlpha::create(m_textTitle, 0.55f, 0, 255);
     tween->setStartDelay(0.2f);
-    tween->setSkipFrames();
+    tween->setSkipTicks();
     add(tween);
 }
 
 void StateMenu::createTweenOverlayAlpha()
 {
-    auto tween = jt::TweenAlpha::create(m_overlay, 0.5f, std::uint8_t { 255 }, std::uint8_t { 0 });
-    tween->setSkipFrames();
+    auto const tween
+        = jt::TweenAlpha::create(m_overlay, 0.5f, std::uint8_t { 255 }, std::uint8_t { 0 });
+    tween->setSkipTicks();
     add(tween);
 }
 
 void StateMenu::createTweenCreditsPosition()
 {
-    auto creditsPositionStart = m_textCredits->getPosition() + jt::Vector2f { 0, 150 };
-    auto creditsPositionEnd = m_textCredits->getPosition();
+    auto const creditsPositionStart = m_textCredits->getPosition() + jt::Vector2f { 0, 150 };
+    auto const creditsPositionEnd = m_textCredits->getPosition();
 
-    auto tweenCredits
+    auto const tweenCredits
         = jt::TweenPosition::create(m_textCredits, 0.75f, creditsPositionStart, creditsPositionEnd);
     tweenCredits->setStartDelay(0.8f);
-    tweenCredits->setSkipFrames();
+    tweenCredits->setSkipTicks();
     add(tweenCredits);
 
-    auto versionPositionStart = m_textVersion->getPosition() + jt::Vector2f { 0, 150 };
-    auto versionPositionEnd = m_textVersion->getPosition();
-    auto tweenVersion
+    auto const versionPositionStart = m_textVersion->getPosition() + jt::Vector2f { 0, 150 };
+    auto const versionPositionEnd = m_textVersion->getPosition();
+    auto const tweenVersion
         = jt::TweenPosition::create(m_textVersion, 0.75f, versionPositionStart, versionPositionEnd);
     tweenVersion->setStartDelay(0.8f);
-    tweenVersion->setSkipFrames();
+    tweenVersion->setSkipTicks();
     add(tweenVersion);
 }
 
@@ -204,7 +203,7 @@ void StateMenu::checkForTransitionToStateGame()
 {
     auto const keysToTriggerTransition = { jt::KeyCode::Space, jt::KeyCode::Enter };
 
-    if (std::any_of(keysToTriggerTransition.begin(), keysToTriggerTransition.end(),
+    if (std::ranges::any_of(keysToTriggerTransition,
             [this](auto const k) { return getGame()->input().keyboard()->justPressed(k); })) {
         startTransitionToStateGame();
     }

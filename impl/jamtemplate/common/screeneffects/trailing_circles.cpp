@@ -16,7 +16,7 @@ void jt::TrailingCircles::doCreate()
             return a;
         },
         [this](auto& a, auto pos) {
-            auto const alpha = jt::MathHelper::clamp(
+            auto const alpha = std::clamp(
                 static_cast<std::uint8_t>(jt::Random::getFloat(0.7f, 1.3f) * m_maxAlpha),
                 std::uint8_t { 0u }, std::uint8_t { 255u });
             jt::Color startColor { 255u, 255u, 255u, alpha };

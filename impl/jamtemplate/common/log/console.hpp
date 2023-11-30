@@ -15,11 +15,11 @@ class Console : public jt::GameObject {
 public:
     Console();
 
-    int inputUserCallback(ImGuiInputTextCallbackData* data);
+    int inputUserCallback(ImGuiInputTextCallbackData* data) const;
 
 private:
     std::shared_ptr<jt::LogHistoryInterface> m_history;
-    
+
     mutable bool m_showConsole { false };
     mutable bool m_focus { false };
     mutable int m_historyPos { -1 };

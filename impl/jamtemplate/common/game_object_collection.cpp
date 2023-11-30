@@ -42,10 +42,9 @@ void jt::GameObjectCollection::cleanUpObjects()
 
 void jt::GameObjectCollection::addNewObjects()
 {
-    while (!m_objectsToAdd.empty()) {
-        m_objects.emplace_back(std::move(m_objectsToAdd.back()));
-        m_objectsToAdd.pop_back();
-    }
+    m_objects.insert(m_objects.end(), std::move_iterator(m_objectsToAdd.begin()),
+        std::move_iterator(m_objectsToAdd.end()));
+    m_objectsToAdd.clear();
 }
 
 std::size_t jt::GameObjectCollection::size() const

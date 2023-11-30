@@ -66,11 +66,9 @@ void jt::Sprite::cleanImage()
 
 void jt::Sprite::doUpdate(float /*elapsed*/)
 {
-    auto const screenPosition = jt::MathHelper::castToInteger(
-        getPosition() + getShakeOffset() + getOffset() + getCompleteCamOffset());
-    m_sprite.setPosition(toLib(screenPosition));
-    m_flashSprite.setPosition(toLib(screenPosition));
-    m_flashSprite.setColor(toLib(getFlashColor()));
+    m_lastScreenPosition = toLib(jt::MathHelper::castToInteger(
+        getPosition() + getShakeOffset() + getOffset() + getCompleteCamOffset()));
+    m_sprite.setPosition(m_lastScreenPosition);
 }
 
 void jt::Sprite::doDrawShadow(std::shared_ptr<jt::RenderTargetLayer> const sptr) const
@@ -117,6 +115,8 @@ void jt::Sprite::doDraw(std::shared_ptr<jt::RenderTargetLayer> const sptr) const
 void jt::Sprite::doDrawFlash(std::shared_ptr<jt::RenderTargetLayer> const sptr) const
 {
     if (sptr) {
+        m_flashSprite.setPosition(m_lastScreenPosition);
+        m_flashSprite.setColor(toLib(getFlashColor()));
         sptr->draw(m_flashSprite);
     }
 }

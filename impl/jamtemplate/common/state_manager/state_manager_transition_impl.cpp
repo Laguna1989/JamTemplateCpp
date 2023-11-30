@@ -50,8 +50,8 @@ void jt::StateManagerTransitionImpl::draw(std::shared_ptr<jt::RenderTargetInterf
 
 float jt::StateManagerTransitionImpl::getRatio() const
 {
-    float ratio { m_timer / m_timerMax };
-    return jt::MathHelper::clamp(ratio, 0.0f, 1.0f);
+    float const ratio { m_timer / m_timerMax };
+    return std::clamp(ratio, 0.0f, 1.0f);
 }
 
 bool jt::StateManagerTransitionImpl::isInFirstHalf() const { return m_firstHalf; }

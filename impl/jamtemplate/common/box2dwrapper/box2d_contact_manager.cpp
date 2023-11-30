@@ -18,23 +18,25 @@ void jt::Box2DContactManager::unregisterCallback(std::string const& callbackIden
 void jt::Box2DContactManager::BeginContact(b2Contact* contact)
 {
     for (auto const& kvp : m_callbacks) {
-        if (kvp.second) {
+        if (kvp.second) [[likely]] {
             if (kvp.second->getEnabled()) {
                 kvp.second->onBeginContact(contact);
             }
         }
     }
 }
+
 void jt::Box2DContactManager::EndContact(b2Contact* contact)
 {
     for (auto const& kvp : m_callbacks) {
-        if (kvp.second) {
+        if (kvp.second) [[likely]] {
             if (kvp.second->getEnabled()) {
                 kvp.second->onEndContact(contact);
             }
         }
     }
 }
+
 std::vector<std::string> jt::Box2DContactManager::getAllCallbackIdentifiers() const
 {
     std::vector<std::string> identifiers;

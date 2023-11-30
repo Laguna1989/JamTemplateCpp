@@ -9,7 +9,7 @@ jt::ActionCommandManager::ActionCommandManager(jt::LoggerInterface& logger)
 
 void jt::ActionCommandManager::executeCommand(std::string const& fullCommandString)
 {
-    if (fullCommandString.empty()) {
+    if (fullCommandString.empty())  {
         return;
     }
 
@@ -66,6 +66,7 @@ std::shared_ptr<bool> jt::ActionCommandManager::registerTemporaryCommand(
     m_logger.info("registered command '" + trimmedCommand + "'");
     return sharedState;
 }
+
 void jt::ActionCommandManager::update() { removeUnusedCommands(); }
 
 std::vector<std::string> jt::ActionCommandManager::getAllCommands()

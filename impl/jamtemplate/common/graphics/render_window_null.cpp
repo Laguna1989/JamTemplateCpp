@@ -29,8 +29,8 @@ void jt::null_objects::RenderWindowNull::display() { }
 
 jt::Vector2f jt::null_objects::RenderWindowNull::getMousePosition()
 {
-    auto const magic_mouse_position = 20.0f;
-    return jt::Vector2f { magic_mouse_position, magic_mouse_position };
+    constexpr auto magicMousePosition = 20.0f;
+    return jt::Vector2f { magicMousePosition, magicMousePosition };
 }
 
 void jt::null_objects::RenderWindowNull::setMouseCursorVisible(bool visible)

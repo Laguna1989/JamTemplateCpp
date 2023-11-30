@@ -17,14 +17,14 @@ struct CellIndex {
     bool operator==(CellIndex const& other) const = default;
 };
 
-bool operator!=(CellIndex const& a, CellIndex const& b) { return !(a == b); }
+inline bool operator!=(CellIndex const& a, CellIndex const& b) { return !(a == b); }
 
-CellIndex operator+(CellIndex const& a, CellIndex const& b)
+inline CellIndex operator+(CellIndex const& a, CellIndex const& b)
 {
     return CellIndex { a.x + b.x, a.y + b.y };
 }
 
-bool operator<(CellIndex const& a, CellIndex const& b)
+inline bool operator<(CellIndex const& a, CellIndex const& b)
 {
     if (a.x == b.x) {
         return a.y < b.y;
@@ -62,7 +62,7 @@ public:
         for (auto const& offset : offsets) {
             auto const currentIndex = cellIndex + offset;
 
-            if (m_cells.count(currentIndex) == 0) {
+            if (!m_cells.contains(currentIndex)) {
                 continue;
             }
 

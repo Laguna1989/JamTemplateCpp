@@ -21,11 +21,12 @@ void jt::Tween::finish()
 
 void jt::Tween::update(float elapsed)
 {
-    if (m_skipFrames > 0) {
-        m_skipFrames--;
+    if (m_skipTicks > 0) {
+        m_skipTicks--;
         return;
     }
     m_age += elapsed;
+    m_agePercent = (m_age - m_startDelayInSeconds) / m_totalTime;
     doUpdate(elapsed);
 }
 
@@ -45,9 +46,9 @@ void jt::Tween::addCompleteCallback(jt::Tween::OnCompleteCallbackType cb)
     m_completeCallbacks.push_back(cb);
 }
 
-void jt::Tween::setSkipFrames(int framesToSkip) { m_skipFrames = framesToSkip; }
+void jt::Tween::setSkipTicks(int framesToSkip) { m_skipTicks = framesToSkip; }
 
-int jt::Tween::getSkipFrames() const { return m_skipFrames; }
+int jt::Tween::getSkipFrames() const { return m_skipTicks; }
 
 void jt::Tween::setRepeat(bool repeat) { m_repeat = repeat; }
 
@@ -55,7 +56,7 @@ bool jt::Tween::getRepeat() const { return m_repeat; }
 
 float jt::Tween::getAge() const { return m_age - m_startDelayInSeconds; }
 
-float jt::Tween::getAgePercent() const { return getAge() / m_totalTime; }
+float jt::Tween::getAgePercent() const { return m_agePercent; }
 
 float jt::Tween::getConvertedAgePercent(float agePercent) const
 {
@@ -75,11 +76,12 @@ void jt::Tween::doUpdate(float)
     if (getAgePercent() >= 1.0f) {
         finish();
     }
-    if (m_obj.expired()) {
+    auto obj = m_obj.lock();
+    if (!obj) [[unlikely]] {
         finish();
         return;
     }
-    doUpdateObject(m_obj.lock(), getConvertedAgePercent(getAgePercent()));
+    doUpdateObject(obj, getConvertedAgePercent(getAgePercent()));
 }
 
 void jt::Tween::handleCompleteCallbacks()

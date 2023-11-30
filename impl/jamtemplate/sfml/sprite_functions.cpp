@@ -59,9 +59,8 @@ sf::Image jt::SpriteFunctions::makeGlowImage(float r, std::uint8_t max)
             auto const dx = i - c;
             auto const dy = j - c;
 
-            auto const sqr = std::sqrt(dx * dx + dy * dy);
-            auto const sqrNorm
-                = 1.0f - MathHelper::clamp(sqr / static_cast<float>(s) * 2.0f, 0.0f, 1.0f);
+            auto const sqr = jt::MathHelper::qsqrt(dx * dx + dy * dy);
+            auto const sqrNorm = 1.0f - std::clamp(sqr / static_cast<float>(s) * 2.0f, 0.0f, 1.0f);
             float const v = std::pow(sqrNorm, 2.0f) * static_cast<float>(max);
             img.setPixel(i, j, toLib(jt::Color { 255, 255, 255, static_cast<uint8_t>(v) }));
         }
@@ -79,8 +78,8 @@ sf::Image jt::SpriteFunctions::makeVignetteImage(unsigned int w, unsigned int h)
         for (auto j = 0u; j != h; ++j) {
             auto const dx = static_cast<float>(i) - cx;
             auto const dy = static_cast<float>(j) - cy;
-            auto const sqr = std::sqrt(dx * dx + dy * dy);
-            auto const sqrNorm = MathHelper::clamp(sqr / (cx + cy) / 1.5f * 2.0f, 0.0f, 1.0f);
+            auto const sqr = jt::MathHelper::qsqrt(dx * dx + dy * dy);
+            auto const sqrNorm = std::clamp(sqr / (cx + cy) / 1.5f * 2.0f, 0.0f, 1.0f);
             float const v = std::pow(sqrNorm, 3.5f) * 245 + jt::Random::getInt(0, 10);
             img.setPixel(i, j, toLib(jt::Color { 0, 0, 0, static_cast<uint8_t>(v) }));
         }
