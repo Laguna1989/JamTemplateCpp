@@ -7,9 +7,9 @@
 
 sf::Image jt::SpriteFunctions::makeButtonImage(unsigned int w, unsigned int h)
 {
-    jt::Color emptyColor { 0, 0, 0 };
-    jt::Color borderColor { 255, 255, 255 };
-    jt::Color overBGColor { 150, 150, 150 };
+    constexpr jt::Color emptyColor { 0, 0, 0 };
+    constexpr jt::Color borderColor { 255, 255, 255 };
+    constexpr jt::Color overBGColor { 150, 150, 150 };
 
     sf::Image img {};
     img.create(3 * w, h, toLib(emptyColor));

@@ -58,7 +58,7 @@ jt::Color jt::Sprite::getColorAtPixel(jt::Vector2u pixelPos) const
     return jt::Color { fromLib(m_image.getPixel(pixelPos.x, pixelPos.y)) };
 }
 
-void jt::Sprite::cleanImage()
+void jt::Sprite::cleanImage() noexcept
 {
     m_imageStored = false;
     m_image = sf::Image {};
@@ -73,21 +73,26 @@ void jt::Sprite::doUpdate(float /*elapsed*/)
 
 void jt::Sprite::doDrawShadow(std::shared_ptr<jt::RenderTargetLayer> const sptr) const
 {
-    if (sptr) {
-        jt::Vector2f const oldPos = fromLib(m_sprite.getPosition());
-        auto const oldCol = fromLib(m_sprite.getColor());
-
-        m_sprite.setPosition(toLib(jt::MathHelper::castToInteger(oldPos + getShadowOffset())));
-        m_sprite.setColor(toLib(getShadowColor()));
-        sptr->draw(m_sprite);
-
-        m_sprite.setPosition(toLib(oldPos));
-        m_sprite.setColor(toLib(oldCol));
+    if (!sptr) [[unlikely]] {
+        return;
     }
+    jt::Vector2f const oldPos = fromLib(m_sprite.getPosition());
+    auto const oldCol = fromLib(m_sprite.getColor());
+
+    m_sprite.setPosition(toLib(jt::MathHelper::castToInteger(oldPos + getShadowOffset())));
+    m_sprite.setColor(toLib(getShadowColor()));
+    sptr->draw(m_sprite);
+
+    m_sprite.setPosition(toLib(oldPos));
+    m_sprite.setColor(toLib(oldCol));
 }
 
 void jt::Sprite::doDrawOutline(std::shared_ptr<jt::RenderTargetLayer> const sptr) const
 {
+    if (!sptr) [[unlikely]] {
+        return;
+    }
+
     jt::Vector2f const oldPos = fromLib(m_sprite.getPosition());
     jt::Color const oldCol = fromLib(m_sprite.getColor());
 
@@ -106,19 +111,23 @@ void jt::Sprite::doDrawOutline(std::shared_ptr<jt::RenderTargetLayer> const sptr
 
 void jt::Sprite::doDraw(std::shared_ptr<jt::RenderTargetLayer> const sptr) const
 {
-    if (sptr) {
-        sf::RenderStates states { getSfBlendMode() };
-        sptr->draw(m_sprite, states);
+    if (!sptr) [[unlikely]] {
+        return;
     }
+
+    sf::RenderStates const states { getSfBlendMode() };
+    sptr->draw(m_sprite, states);
 }
 
 void jt::Sprite::doDrawFlash(std::shared_ptr<jt::RenderTargetLayer> const sptr) const
 {
-    if (sptr) {
-        m_flashSprite.setPosition(m_lastScreenPosition);
-        m_flashSprite.setColor(toLib(getFlashColor()));
-        sptr->draw(m_flashSprite);
+    if (!sptr) [[unlikely]] {
+        return;
     }
+
+    m_flashSprite.setPosition(m_lastScreenPosition);
+    m_flashSprite.setColor(toLib(getFlashColor()));
+    sptr->draw(m_flashSprite);
 }
 
 void jt::Sprite::doRotate(float rot)

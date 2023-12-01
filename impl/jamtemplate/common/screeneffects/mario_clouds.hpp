@@ -6,23 +6,23 @@
 
 namespace jt {
 
-/// \brief A mario clouds screen effect
+///  A mario clouds screen effect
 class MarioClouds : public jt::GameObject {
 public:
-    /// \brief Constructor for mario clouds screen effect
+    ///  Constructor for mario clouds screen effect
     MarioClouds(
         std::size_t numberOfClouds, jt::Vector2f const& mapSize, jt::Vector2f const& margin);
 
-    /// \brief set te scale of the clouds
+    ///  set te scale of the clouds
     void setScale(jt::Vector2f const& scale);
 
-    /// \brief set the offset of the shadow
+    ///  set the offset of the shadow
     void setShadowOffset(jt::Vector2f const& offset);
 
-    /// \brief set the z layer of the mario clouds
+    ///  set the z layer of the mario clouds
     void setZ(int zLayer);
 
-    /// \brief set the effect enabled or disabled
+    ///  set the effect enabled or disabled
     void setEnabled(bool enable);
 
 private:

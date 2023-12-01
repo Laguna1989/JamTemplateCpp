@@ -18,13 +18,11 @@ void horizontalFlip(std::unique_ptr<jt::Sprite> const& spr, float zoom, float wi
 jt::GfxImpl::GfxImpl(RenderWindowInterface& window, CamInterface& cam)
     : m_window { window }
     , m_camera { cam }
-    , m_viewHalfSize { 0.0f, 0.0f }
     , m_target {}
     , m_textureManager { nullptr }
-    , m_view { nullptr }
 {
     m_target = std::make_shared<jt::RenderTarget>();
-    createZLayer(0);
+    GfxImpl::createZLayer(0);
     auto const scaledWidth = static_cast<unsigned int>(m_window.getSize().x / m_camera.getZoom());
     auto const scaledHeight = static_cast<unsigned int>(m_window.getSize().y / m_camera.getZoom());
 
@@ -63,7 +61,7 @@ void jt::GfxImpl::display()
     m_window.display();
 }
 
-void jt::GfxImpl::drawOneZLayer(std::shared_ptr<jt::RenderTargetLayer>& layer)
+void jt::GfxImpl::drawOneZLayer(std::shared_ptr<jt::RenderTargetLayer> const& layer)
 {
     if (layer == nullptr) [[unlikely]] {
         throw std::invalid_argument {

@@ -207,9 +207,9 @@ std::string jt::TextureManagerImpl::getFlashName(std::string const& str)
     return str + "___flash__";
 }
 
-std::size_t jt::TextureManagerImpl::getNumberOfTextures() { return m_textures.size(); }
+std::size_t jt::TextureManagerImpl::getNumberOfTextures() noexcept { return m_textures.size(); }
 
-bool jt::TextureManagerImpl::containsTexture(std::string const& str)
+bool jt::TextureManagerImpl::containsTexture(std::string const& str) const
 {
-    return (m_textures.count(str) != 0);
+    return (m_textures.contains(str));
 }

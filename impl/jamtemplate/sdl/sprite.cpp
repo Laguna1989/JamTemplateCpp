@@ -36,7 +36,7 @@ Sprite::Sprite(
     m_textFlash = textureManager.get(textureManager.getFlashName(fileName));
 }
 
-void Sprite::fromTexture(std::shared_ptr<SDL_Texture> txt)
+void Sprite::fromTexture(std::shared_ptr<SDL_Texture> const& txt)
 {
     m_text = txt;
     m_textFlash = txt;
@@ -100,12 +100,16 @@ jt::Color Sprite::getColorAtPixel(jt::Vector2u pixelPos) const
     return jt::Color { r, g, b, a };
 }
 
-void Sprite::cleanImage() { m_image = nullptr; }
+void Sprite::cleanImage() noexcept { m_image = nullptr; }
 
 void Sprite::doUpdate(float /*elapsed*/) { }
 
 void Sprite::doDraw(std::shared_ptr<jt::RenderTargetLayer> const sptr) const
 {
+    if (!sptr) [[unlikely]] {
+        return;
+    }
+
     SDL_Rect const sourceRect = getSourceRect();
     SDL_Rect const destRect = getDestRect();
     auto const flip = jt::getFlipFromScale(m_scale);
@@ -118,6 +122,10 @@ void Sprite::doDraw(std::shared_ptr<jt::RenderTargetLayer> const sptr) const
 
 void Sprite::doDrawShadow(std::shared_ptr<jt::RenderTargetLayer> const sptr) const
 {
+    if (!sptr) [[unlikely]] {
+        return;
+    }
+
     SDL_Rect const sourceRect = getSourceRect();
     SDL_Rect const destRect = getDestRect(getShadowOffset());
     auto const flip = jt::getFlipFromScale(m_scale);
@@ -130,6 +138,10 @@ void Sprite::doDrawShadow(std::shared_ptr<jt::RenderTargetLayer> const sptr) con
 
 void Sprite::doDrawOutline(std::shared_ptr<jt::RenderTargetLayer> const sptr) const
 {
+    if (!sptr) [[unlikely]] {
+        return;
+    }
+
     SDL_Rect const sourceRect = getSourceRect();
     auto const flip = jt::getFlipFromScale(m_scale);
     SDL_Point const p { static_cast<int>(getOrigin().x * m_scale.x),
@@ -145,6 +157,10 @@ void Sprite::doDrawOutline(std::shared_ptr<jt::RenderTargetLayer> const sptr) co
 
 void Sprite::doDrawFlash(std::shared_ptr<jt::RenderTargetLayer> const sptr) const
 {
+    if (!sptr) [[unlikely]] {
+        return;
+    }
+
     SDL_Rect const sourceRect = getSourceRect();
     SDL_Rect const destRect = getDestRect();
     auto const flip = jt::getFlipFromScale(m_scale);
@@ -158,7 +174,7 @@ void Sprite::doDrawFlash(std::shared_ptr<jt::RenderTargetLayer> const sptr) cons
         sptr.get(), m_textFlash.get(), &sourceRect, &destRect, getRotation(), &p, flip);
 }
 
-void Sprite::doRotate(float /*rot*/) { }
+void Sprite::doRotate(float /*rot*/) noexcept { }
 
 SDL_Rect Sprite::getDestRect(jt::Vector2f const& positionOffset) const
 {

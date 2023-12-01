@@ -7,11 +7,11 @@
 namespace jt {
 class DrawableImplSdl : public jt::DrawableImpl {
 public:
-    SDL_BlendMode getSDLBlendMode() const;
+    SDL_BlendMode getSDLBlendMode() const noexcept;
 
-    void setOriginInternal(jt::Vector2f const& origin) override;
+    void setOriginInternal(jt::Vector2f const& origin) noexcept override;
 
-    jt::Vector2f getCompleteCamOffset() const;
+    jt::Vector2f getCompleteCamOffset() const noexcept;
 
 protected:
     jt::Vector2f m_offsetFromOrigin { 0.0f, 0.0f };

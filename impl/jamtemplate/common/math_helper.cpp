@@ -1,7 +1,6 @@
 ﻿#include "math_helper.hpp"
-#include <cmath>
+
 #include <iomanip>
-#include <numbers>
 #include <sstream>
 
 float jt::MathHelper::lengthSquared(jt::Vector2f const& v) { return v.x * v.x + v.y * v.y; }
@@ -40,28 +39,6 @@ void jt::MathHelper::normalizeMe(jt::Vector2f& v, float lowerBound)
     }
 }
 
-float jt::MathHelper::rad2deg(float aInRadiant)
-{
-    auto const half_circle = 180.0f;
-    return static_cast<float>(aInRadiant * half_circle * std::numbers::inv_pi);
-}
-
-float jt::MathHelper::deg2rad(float aInDegree)
-{
-    auto const half_circle = 180.0f;
-    return static_cast<float>(aInDegree / half_circle * std::numbers::pi);
-}
-
-jt::Vector2f jt::MathHelper::rotateBy(jt::Vector2f const& in, float aInDegree)
-{
-    float const x = static_cast<float>(cos(deg2rad(aInDegree))) * in.x
-        - static_cast<float>(sin(deg2rad(aInDegree))) * in.y;
-    float const y = static_cast<float>(sin(deg2rad(aInDegree))) * in.x
-        + static_cast<float>(cos(deg2rad(aInDegree))) * in.y;
-
-    return jt::Vector2f { x, y };
-}
-
 std::string jt::MathHelper::floatToStringWithXDecimalDigits(
     float const number, unsigned int number_of_decimal_digits)
 {
@@ -71,7 +48,7 @@ std::string jt::MathHelper::floatToStringWithXDecimalDigits(
     return stream.str();
 }
 
-float jt::MathHelper::angleOf(jt::Vector2f const& in)
+float jt::MathHelper::angleOf(jt::Vector2f const& in) noexcept
 {
     return rad2deg(static_cast<float>(atan2(-in.y, in.x)));
 }

@@ -15,7 +15,7 @@ std::pair<SDL_GameControllerAxis, SDL_GameControllerAxis> toLib(jt::GamepadAxisC
     return std::make_pair(SDL_CONTROLLER_AXIS_LEFTX, SDL_CONTROLLER_AXIS_LEFTY);
 }
 
-SDL_GameControllerButton toLib(jt::GamepadButtonCode b)
+SDL_GameControllerButton toLib(jt::GamepadButtonCode b) noexcept
 {
     switch (b) {
     case jt::GamepadButtonCode::GBA:
@@ -54,8 +54,9 @@ SDL_GameControllerButton toLib(jt::GamepadButtonCode b)
         return static_cast<SDL_GameControllerButton>(jt::GamepadButtonCode::GBU7);
     case jt::GamepadButtonCode::GBU8:
         return static_cast<SDL_GameControllerButton>(jt::GamepadButtonCode::GBU8);
+    default:
+        return static_cast<SDL_GameControllerButton>(jt::GamepadButtonCode::GBU8);
     }
-    return static_cast<SDL_GameControllerButton>(jt::GamepadButtonCode::GBA);
 }
 
 std::shared_ptr<SDL_GameController> createGamepad(int gamepadId)
@@ -74,7 +75,7 @@ std::shared_ptr<SDL_GameController> getGamepad(int gamepadId)
 {
     static std::map<int, std::shared_ptr<SDL_GameController>> gamepads;
 
-    if (gamepads.count(gamepadId) == 0 || gamepads.at(gamepadId) == nullptr) {
+    if (!gamepads.contains(gamepadId) || gamepads.at(gamepadId) == nullptr) {
         gamepads[gamepadId] = createGamepad(gamepadId);
     }
     return gamepads[gamepadId];
@@ -84,22 +85,21 @@ std::shared_ptr<SDL_GameController> getGamepad(int gamepadId)
 
 jt::Vector2f jt::libAxisValue(int gamepadId, jt::GamepadAxisCode a)
 {
-    auto currentGamepad = getGamepad(gamepadId).get();
+    auto const currentGamepad = getGamepad(gamepadId).get();
 
     if (!SDL_GameControllerGetAttached(currentGamepad)) {
         return jt::Vector2f { 0.0f, 0.0f };
     }
 
-    auto const libaxis = toLib(a);
+    auto const [xAxis, yAxis] = toLib(a);
 
-    float x = SDL_GameControllerGetAxis(currentGamepad, libaxis.first) / 32767.0f * 100.0f;
-    float y = SDL_GameControllerGetAxis(currentGamepad, libaxis.second) / 32767.0f * 100.0f;
-    return jt::Vector2f { x, y };
+    return jt::Vector2f { (SDL_GameControllerGetAxis(currentGamepad, xAxis) / 32767.0f * 100.0f),
+        (SDL_GameControllerGetAxis(currentGamepad, yAxis) / 32767.0f * 100.0f) };
 }
 
 bool jt::libGPButtonValue(int gamepadId, jt::GamepadButtonCode b)
 {
-    auto currentGamepad = getGamepad(gamepadId).get();
+    auto const currentGamepad = getGamepad(gamepadId).get();
 
     if (!SDL_GameControllerGetAttached(currentGamepad)) {
         return false;

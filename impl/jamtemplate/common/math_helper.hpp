@@ -5,6 +5,8 @@
 #include <vector.hpp>
 #include <assert.h>
 #include <bit>
+#include <cmath>
+#include <numbers>
 #include <string>
 #include <utility>
 #include <vector>
@@ -81,25 +83,41 @@ float distanceBetweenSquared(jt::Vector2f const& a, jt::Vector2f const& b);
 void normalizeMe(jt::Vector2f& v, float lowerBound = 0);
 
 /// conversion from radiant to degree
-/// \param aInRadiant angle in radiant
+/// \param alphaInRadiant angle in radiant
 /// \return angle in degree
-float rad2deg(float aInRadiant);
+constexpr float rad2deg(float alphaInRadiant) noexcept
+{
+    constexpr auto half_circle = 180.0f;
+    return static_cast<float>(alphaInRadiant * half_circle * std::numbers::inv_pi);
+}
 
 /// conversion from degree to radiant
-/// \param aInDegree angle in degree
+/// \param alphaInDegree angle in degree
 /// \return angle in radiant
-float deg2rad(float aInDegree);
+constexpr float deg2rad(float alphaInDegree) noexcept
+{
+    constexpr auto half_circle = 180.0f;
+    return static_cast<float>(alphaInDegree / half_circle * std::numbers::pi);
+}
 
 /// Rotate a vector by a given angle (counter-clockwise)
 /// \param in input vector
 /// \param aInDegree angle in degree
 /// \return rotated output vector
-jt::Vector2f rotateBy(jt::Vector2f const& in, float aInDegree);
+constexpr jt::Vector2f rotateBy(jt::Vector2f const& in, float aInDegree) noexcept
+{
+    float const x = static_cast<float>(cos(deg2rad(aInDegree))) * in.x
+        - static_cast<float>(sin(deg2rad(aInDegree))) * in.y;
+    float const y = static_cast<float>(sin(deg2rad(aInDegree))) * in.x
+        + static_cast<float>(cos(deg2rad(aInDegree))) * in.y;
+
+    return jt::Vector2f { x, y };
+}
 
 /// angle in degree between argument vector and the x axis
 /// \param in input vector
 /// \return angle in degree between in an x axis
-float angleOf(jt::Vector2f const& in);
+float angleOf(jt::Vector2f const& in) noexcept;
 
 /// clamp a value to a range [min, max]
 /// \tparam T type

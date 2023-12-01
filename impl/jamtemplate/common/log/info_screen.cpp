@@ -10,7 +10,7 @@ jt::InfoScreen::InfoScreen()
 #endif
 }
 
-void jt::InfoScreen::doUpdate(float const /*elapsed*/)
+void jt::InfoScreen::doUpdate(float const elapsed)
 {
 #ifdef JT_ENABLE_DEBUG
     m_numberOfUpdatesInThisFrame++;

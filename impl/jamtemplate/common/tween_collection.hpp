@@ -17,7 +17,7 @@ public:
     /// clear all tweens
     void clear();
 
-    /// \brief update all tweens in the collecion. This will also remove all tweens that are no
+    ///  update all tweens in the collecion. This will also remove all tweens that are no
     /// longer alive
     /// \param elapsed elapsed time in seconds
     void update(float const elapsed);

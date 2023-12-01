@@ -3,6 +3,7 @@
 #include <math_helper.hpp>
 #include <shape.hpp>
 #include <state_select.hpp>
+#include <algorithm>
 
 void State3DNoise::onCreate() { }
 

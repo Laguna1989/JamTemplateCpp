@@ -16,30 +16,44 @@ public:
 
     using Sptr = std::shared_ptr<Text>;
 
-    virtual ~Text();
+    ~Text() override;
 
+    /// load Font
+    /// \param fontFileName filename to the font (ttf)
+    /// \param characterSize size in characters
+    /// \param rendertarget_wptr the rendertarget (unused for sfml, but needed for sdl
+    /// compatibility)
     void loadFont(std::string const& fontFileName, unsigned int characterSize,
         std::weak_ptr<jt::RenderTargetLayer> wptr);
 
+    /// set the text
+    /// \param text the text to be displayed
     void setText(std::string const& text);
+
+    /// get the text
+    /// \return the text
     std::string getText() const;
 
-    void setPosition(jt::Vector2f const& pos) override;
+    /// set the text alignment
+    /// \param ta the text alignment
+    void setTextAlign(TextAlign ta);
 
-    jt::Vector2f getPosition() const override;
+    /// get the text alignment
+    /// \return the text alignment
+    TextAlign getTextAlign() const;
 
-    void setColor(jt::Color const& col) override;
-    jt::Color getColor() const override;
+    void setPosition(jt::Vector2f const& pos) noexcept override;
+    jt::Vector2f getPosition() const noexcept override;
+
+    void setColor(jt::Color const& col) noexcept override;
+    jt::Color getColor() const noexcept override;
 
     jt::Rectf getGlobalBounds() const override;
     jt::Rectf getLocalBounds() const override;
 
-    virtual void setScale(jt::Vector2f const& scale) override;
+    void setScale(jt::Vector2f const& scale) override;
 
-    virtual jt::Vector2f getScale() const override;
-
-    void setTextAlign(TextAlign ta);
-    TextAlign getTextAlign() const;
+    jt::Vector2f getScale() const noexcept override;
 
 private:
     TTF_Font* m_font { nullptr };
@@ -71,14 +85,12 @@ private:
     void doDraw(std::shared_ptr<jt::RenderTargetLayer> const sptr) const override;
     void doDrawFlash(std::shared_ptr<jt::RenderTargetLayer> const sptr) const override;
 
-    void doRotate(float /*rot*/) override;
+    void doRotate(float /*rot*/) noexcept override;
 
     void recreateTextTexture(std::shared_ptr<jt::RenderTargetLayer> const sptr);
     std::shared_ptr<jt::RenderTargetLayer> getRenderTarget();
     void setSDLColor(jt::Color const& col) const;
     SDL_Rect getDestRect(jt::Vector2f const& positionOffset = jt::Vector2f { 0.0f, 0.0f }) const;
-
-    int getUpscaleFactor() const { return 1; };
 
     void calculateTextTextureSize(
         std::shared_ptr<jt::RenderTargetLayer> const sptr, std::vector<std::string> const& ssv);

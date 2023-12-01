@@ -17,7 +17,7 @@ GfxImpl::GfxImpl(RenderWindowInterface& window, CamInterface& cam)
     m_srcRect = jt::Recti { 0, 0, scaledWidth, scaledHeight };
     m_destRect = jt::Recti { 0, 0, static_cast<int>(width), static_cast<int>(height) };
 
-    createZLayer(0);
+    GfxImpl::createZLayer(0);
 
     m_textureManager = TextureManagerImpl { m_target->get(0) };
 }
@@ -62,7 +62,7 @@ void GfxImpl::display()
 void GfxImpl::createZLayer(int z)
 {
     SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "0");
-    auto texture = std::shared_ptr<SDL_Texture>(
+    auto const texture = std::shared_ptr<SDL_Texture>(
         SDL_CreateTexture(m_target->m_renderer.get(), SDL_PIXELFORMAT_RGBA8888,
             SDL_TEXTUREACCESS_TARGET, static_cast<int>(m_srcRect.width),
             static_cast<int>(m_srcRect.height)),

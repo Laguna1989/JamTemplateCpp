@@ -21,8 +21,11 @@ public:
     Sprite(std::string const& fileName, jt::Recti const& rect,
         jt::TextureManagerInterface& textureManager);
 
-    // DO NOT CALL THIS FROM GAME CODE!
-    void fromTexture(sf::Texture const& text);
+    // WARNING: This function is slow, because it needs to copy
+    // graphics memory to ram first.
+    jt::Color getColorAtPixel(jt::Vector2u pixelPos) const;
+
+    void cleanImage() noexcept;
 
     void setPosition(jt::Vector2f const& pos) override;
     jt::Vector2f getPosition() const override;
@@ -36,14 +39,11 @@ public:
     void setScale(jt::Vector2f const& scale) override;
     jt::Vector2f getScale() const override;
 
-    // WARNING: This function is slow, because it needs to copy
-    // graphics memory to ram first.
-    jt::Color getColorAtPixel(jt::Vector2u pixelPos) const;
-
-    void cleanImage();
+    // DO NOT CALL THIS FROM GAME CODE!
+    void fromTexture(sf::Texture const& text);
 
     // DO NOT CALL THIS FROM GAME CODE!
-    sf::Sprite getSFSprite() { return m_sprite; }
+    sf::Sprite getSFSprite() const { return m_sprite; }
 
     void setOriginInternal(jt::Vector2f const& origin) override;
 

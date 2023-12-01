@@ -16,7 +16,7 @@ std::shared_ptr<jt::RenderTargetLayer> jt::null_objects::RenderWindowNull::creat
     return nullptr;
 }
 
-jt::Vector2f jt::null_objects::RenderWindowNull::getSize() const { return m_size; }
+jt::Vector2f jt::null_objects::RenderWindowNull::getSize() const noexcept { return m_size; }
 
 void jt::null_objects::RenderWindowNull::draw(std::unique_ptr<jt::Sprite>& ptr)
 {

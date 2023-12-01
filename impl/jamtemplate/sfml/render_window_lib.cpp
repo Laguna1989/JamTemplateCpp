@@ -13,6 +13,9 @@ jt::RenderWindow::RenderWindow(unsigned int width, unsigned int height, std::str
     if (!returnValue) {
         throw std::invalid_argument { "SFML ImGui initialization failed." };
     }
+
+    m_size = jt::Vector2f { static_cast<float>(m_window->getSize().x),
+        static_cast<float>(m_window->getSize().y) };
 }
 
 jt::RenderWindow::~RenderWindow()
@@ -40,15 +43,11 @@ void jt::RenderWindow::checkForClose()
     }
 }
 
-jt::Vector2f jt::RenderWindow::getSize() const
-{
-    return jt::Vector2f { static_cast<float>(m_window->getSize().x),
-        static_cast<float>(m_window->getSize().y) };
-}
+jt::Vector2f jt::RenderWindow::getSize() const noexcept { return m_size; }
 
 void jt::RenderWindow::draw(std::unique_ptr<jt::Sprite>& spr)
 {
-    if (!spr) {
+    if (!spr) [[unlikely]] {
         throw std::invalid_argument { "Cannot draw nullptr sprite" };
     }
     m_window->draw(spr->getSFSprite());
@@ -67,8 +66,9 @@ void jt::RenderWindow::display()
 
 jt::Vector2f jt::RenderWindow::getMousePosition()
 {
-    auto const mpi = sf::Mouse::getPosition(*m_window);
-    return jt::Vector2f { static_cast<float>(mpi.x), static_cast<float>(mpi.y) };
+    auto const mousePositionInt = sf::Mouse::getPosition(*m_window);
+    return jt::Vector2f { static_cast<float>(mousePositionInt.x),
+        static_cast<float>(mousePositionInt.y) };
 }
 
 void jt::RenderWindow::setMouseCursorVisible(bool visible)
@@ -77,7 +77,7 @@ void jt::RenderWindow::setMouseCursorVisible(bool visible)
     m_isMouseCursorVisible = visible;
 }
 
-bool jt::RenderWindow::getMouseCursorVisible(void) const { return m_isMouseCursorVisible; }
+bool jt::RenderWindow::getMouseCursorVisible() const noexcept { return m_isMouseCursorVisible; }
 
 void jt::RenderWindow::updateGui(float elapsed)
 {

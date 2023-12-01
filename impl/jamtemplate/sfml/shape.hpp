@@ -16,8 +16,15 @@ class Shape : public DrawableImplSFML {
 public:
     using Sptr = std::shared_ptr<Shape>;
 
-    void makeRect(jt::Vector2f size, TextureManagerInterface&);
-    void makeCircle(float radius, TextureManagerInterface&);
+    /// make rectangle shape with size
+    /// \param size the size in pixel
+    /// \param tm texture manager
+    void makeRect(jt::Vector2f size, TextureManagerInterface& tm);
+
+    /// make circle shape with radius
+    /// \param radius the radius in pixel
+    /// /// \param tm texture manager
+    void makeCircle(float radius, TextureManagerInterface& tm);
 
     void setColor(jt::Color const& col) override;
     jt::Color getColor() const override;

@@ -26,7 +26,7 @@ jt::Vector2f jt::Shape::getPosition() const { return m_position; }
 
 jt::Rectf jt::Shape::getGlobalBounds() const
 {
-    if (!m_shape) {
+    if (!m_shape) [[unlikely]] {
         return jt::Rectf { 0.0f, 0.0f, 0.0f, 0.0f };
     }
     return fromLib(m_shape->getGlobalBounds());
@@ -34,7 +34,7 @@ jt::Rectf jt::Shape::getGlobalBounds() const
 
 jt::Rectf jt::Shape::getLocalBounds() const
 {
-    if (!m_shape) {
+    if (!m_shape) [[unlikely]] {
         return jt::Rectf { 0.0f, 0.0f, 0.0f, 0.0f };
     }
     return fromLib(m_shape->getLocalBounds());
@@ -42,7 +42,7 @@ jt::Rectf jt::Shape::getLocalBounds() const
 
 void jt::Shape::setScale(jt::Vector2f const& scale)
 {
-    if (m_shape) {
+    if (m_shape) [[likely]] {
         m_shape->setScale(scale.x, scale.y);
         m_flashShape->setScale(scale.x, scale.y);
     }
@@ -50,7 +50,7 @@ void jt::Shape::setScale(jt::Vector2f const& scale)
 
 jt::Vector2f jt::Shape::getScale() const
 {
-    if (!m_shape) {
+    if (!m_shape) [[unlikely]] {
         return jt::Vector2f { 1.0f, 1.0f };
     }
     return fromLib(m_shape->getScale());
@@ -58,7 +58,7 @@ jt::Vector2f jt::Shape::getScale() const
 
 void jt::Shape::setOriginInternal(jt::Vector2f const& origin)
 {
-    if (m_shape) {
+    if (m_shape) [[likely]] {
         m_shape->setOrigin(origin.x, origin.y);
         m_flashShape->setOrigin(origin.x, origin.y);
     }
@@ -66,7 +66,7 @@ void jt::Shape::setOriginInternal(jt::Vector2f const& origin)
 
 void jt::Shape::doUpdate(float /*elapsed*/)
 {
-    if (!m_shape) {
+    if (!m_shape) [[unlikely]] {
         return;
     }
 
@@ -80,21 +80,33 @@ void jt::Shape::doUpdate(float /*elapsed*/)
 
 void jt::Shape::doDrawShadow(std::shared_ptr<jt::RenderTargetLayer> const sptr) const
 {
-    if (sptr) {
-        jt::Vector2f const oldPos = fromLib(m_shape->getPosition());
-        auto const oldCol = fromLib(m_shape->getFillColor());
-
-        m_shape->setPosition(toLib(jt::MathHelper::castToInteger(oldPos + getShadowOffset())));
-        m_shape->setFillColor(toLib(getShadowColor()));
-        sptr->draw(*m_shape);
-
-        m_shape->setPosition(toLib(oldPos));
-        m_shape->setFillColor(toLib(oldCol));
+    if (!m_shape) [[unlikely]] {
+        return;
     }
+    if (!sptr) [[unlikely]] {
+        return;
+    }
+
+    jt::Vector2f const oldPos = fromLib(m_shape->getPosition());
+    auto const oldCol = fromLib(m_shape->getFillColor());
+
+    m_shape->setPosition(toLib(jt::MathHelper::castToInteger(oldPos + getShadowOffset())));
+    m_shape->setFillColor(toLib(getShadowColor()));
+    sptr->draw(*m_shape);
+
+    m_shape->setPosition(toLib(oldPos));
+    m_shape->setFillColor(toLib(oldCol));
 }
 
 void jt::Shape::doDrawOutline(std::shared_ptr<jt::RenderTargetLayer> const sptr) const
 {
+    if (!m_shape) [[unlikely]] {
+        return;
+    }
+    if (!sptr) [[unlikely]] {
+        return;
+    }
+
     jt::Vector2f const oldPos = fromLib(m_shape->getPosition());
     jt::Color const oldCol = fromLib(m_shape->getFillColor());
 
@@ -111,21 +123,35 @@ void jt::Shape::doDrawOutline(std::shared_ptr<jt::RenderTargetLayer> const sptr)
 
 void jt::Shape::doDraw(std::shared_ptr<jt::RenderTargetLayer> const sptr) const
 {
-    sf::RenderStates states { getSfBlendMode() };
+    if (!m_shape) [[unlikely]] {
+        return;
+    }
+    if (!sptr) [[unlikely]] {
+        return;
+    }
+
+    sf::RenderStates const states { getSfBlendMode() };
     sptr->draw(*m_shape, states);
 }
 
 void jt::Shape::doDrawFlash(std::shared_ptr<jt::RenderTargetLayer> const sptr) const
 {
-    if (sptr) {
-        sptr->draw(*m_flashShape);
+    if (!m_shape) [[unlikely]] {
+        return;
     }
+    if (!sptr) [[unlikely]] {
+        return;
+    }
+
+    sptr->draw(*m_flashShape);
 }
 
 void jt::Shape::doRotate(float rot)
 {
-    if (m_shape) {
-        m_shape->setRotation(rot);
-        m_flashShape->setRotation(rot);
+    if (!m_shape) [[unlikely]] {
+        return;
     }
+
+    m_shape->setRotation(rot);
+    m_flashShape->setRotation(rot);
 }

@@ -14,11 +14,11 @@ std::shared_ptr<SDL_Texture> makeButtonImage(std::shared_ptr<jt::RenderTargetLay
 {
     auto const wAsInt = static_cast<int>(w);
     auto const hAsInt = static_cast<int>(h);
-    std::shared_ptr<SDL_Surface> image
+    auto const image
         = std::shared_ptr<SDL_Surface>(SDL_CreateRGBSurface(0, wAsInt * 3, hAsInt, 32, 0, 0, 0, 0),
             [](SDL_Surface* s) { SDL_FreeSurface(s); });
 
-    auto const max = std::numeric_limits<std::uint8_t>::max();
+    constexpr auto max = std::numeric_limits<std::uint8_t>::max();
     auto const mid = SDL_MapRGBA(image->format, midColor.r, midColor.g, midColor.b, max);
     auto const dark = SDL_MapRGBA(image->format, darkColor.r, darkColor.g, darkColor.b, max);
     auto const bright

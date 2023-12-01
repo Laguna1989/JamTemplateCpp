@@ -1,5 +1,5 @@
-﻿#ifndef JAMTEMPLATE_RECT_HPP_12345
-#define JAMTEMPLATE_RECT_HPP_12345
+﻿#ifndef JAMTEMPLATE_RECT_HPP_INCLUDE_GUARD
+#define JAMTEMPLATE_RECT_HPP_INCLUDE_GUARD
 
 #include <iosfwd>
 
@@ -29,5 +29,7 @@ struct Recti {
 };
 
 std::ostream& operator<<(std::ostream& os, Rectf const& rect);
+
 } // namespace jt
+
 #endif

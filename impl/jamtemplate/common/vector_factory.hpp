@@ -7,7 +7,7 @@ namespace jt {
 struct VectorFactory {
     /// Create a zero vector
     /// \return Vector with (0, 0)
-    static jt::Vector2f zero();
+    static constexpr jt::Vector2f zero() noexcept { return jt::Vector2f(); }
 
     /// Create a cartesian vector
     /// \param x x coordinate

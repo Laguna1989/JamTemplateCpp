@@ -12,27 +12,26 @@ std::pair<sf::Joystick::Axis, sf::Joystick::Axis> toLib(jt::GamepadAxisCode axis
     return std::make_pair(sf::Joystick::Axis::X, sf::Joystick::Axis::Y);
 }
 
-int toLib(jt::GamepadButtonCode b) { return static_cast<int>(b); }
+int toLib(jt::GamepadButtonCode b) noexcept { return static_cast<int>(b); }
 
 } // namespace
 
 jt::Vector2f jt::libAxisValue(int gamepadId, jt::GamepadAxisCode a)
 {
-    auto const libaxis = toLib(a);
+    auto const [xAxis, yAxis] = toLib(a);
 
     if (!sf::Joystick::isConnected(gamepadId)) {
         return jt::Vector2f { 0.0f, 0.0f };
     }
 
-    float x { 0.0f };
-    if (sf::Joystick::hasAxis(gamepadId, libaxis.first)) {
-        x = sf::Joystick::getAxisPosition(gamepadId, libaxis.first);
+    jt::Vector2f axis {};
+    if (sf::Joystick::hasAxis(gamepadId, xAxis)) {
+        axis.x = sf::Joystick::getAxisPosition(gamepadId, xAxis);
     }
-    float y { 0.0f };
-    if (sf::Joystick::hasAxis(gamepadId, libaxis.second)) {
-        y = sf::Joystick::getAxisPosition(gamepadId, libaxis.second);
+    if (sf::Joystick::hasAxis(gamepadId, yAxis)) {
+        axis.y = sf::Joystick::getAxisPosition(gamepadId, yAxis);
     }
-    return jt::Vector2f { x, y };
+    return axis;
 }
 
 bool jt::libGPButtonValue(int gamepadId, jt::GamepadButtonCode b)
