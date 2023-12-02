@@ -35,10 +35,17 @@ std::vector<T> numbersBetween(T a, T b)
     return values;
 }
 
+#ifdef __clang__
+
+// clang does not support std::bitcast yet
+constexpr float qrsqrt(float y) { return sqrt(x); }
+
+#else
+
 constexpr float qrsqrt(float y)
 {
     constexpr auto threeHalfes = 1.5f;
-    auto x2 = y * 0.5f;
+    auto const x2 = y * 0.5f;
 
     auto i = std::bit_cast<int>(y);
     i = 0x5f3759df - (i >> 1);
@@ -47,6 +54,8 @@ constexpr float qrsqrt(float y)
     y = y * (threeHalfes - (x2 * y * y));
     return y;
 }
+
+#endif
 
 constexpr float qsqrt(float y) { return y * qrsqrt(y); }
 
