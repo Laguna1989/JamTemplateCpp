@@ -5,7 +5,8 @@
 jt::EaseFromPoints::EaseFromPoints(std::deque<jt::Vector2f> const& vec)
     : m_points { vec }
 {
-    std::ranges::sort(m_points, [](auto const& a, auto const& b) { return a.x < b.x; });
+    std::sort(
+        m_points.begin(), m_points.end(), [](auto const& a, auto const& b) { return a.x < b.x; });
     if (m_points.empty()) {
         throw std::invalid_argument { "EaseFromPoints with no points." };
     }
