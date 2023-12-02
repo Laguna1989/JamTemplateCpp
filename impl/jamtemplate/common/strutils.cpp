@@ -3,9 +3,10 @@
 std::string strutil::to_lower(std::string_view const str)
 {
     std::string result { str };
-    std::ranges::transform(result, result.begin(), [](unsigned char c) -> unsigned char {
-        return static_cast<unsigned char>(std::tolower(c));
-    });
+    std::transform(
+        result.begin(), result.end(), result.begin(), [](unsigned char c) -> unsigned char {
+            return static_cast<unsigned char>(std::tolower(c));
+        });
 
     return result;
 }
@@ -37,7 +38,8 @@ bool strutil::compare_ignore_case(std::string_view const str1, std::string_view 
 
 void strutil::trim_left(std::string& str)
 {
-    str.erase(str.begin(), std::ranges::find_if(str, [](int ch) { return !std::isspace(ch); }));
+    str.erase(str.begin(),
+        std::find_if(str.begin(), str.end(), [](int ch) { return !std::isspace(ch); }));
 }
 
 void strutil::trim_right(std::string& str)
