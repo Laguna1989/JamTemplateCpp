@@ -1,7 +1,7 @@
 #include "node_layer.hpp"
 #include <pathfinder/node.hpp>
-#include <utility>
 #include <algorithm>
+#include <utility>
 
 jt::tilemap::NodeLayer::NodeLayer(std::vector<std::shared_ptr<jt::tilemap::TileNode>> nodeTiles)
     : m_nodeTiles { std::move(nodeTiles) }
@@ -40,10 +40,11 @@ void jt::tilemap::NodeLayer::createNodeConnections()
 std::shared_ptr<jt::tilemap::TileNode> jt::tilemap::NodeLayer::getTileAt(jt::Vector2u const& pos)
 {
     if (!m_lookupHelper.contains(pos)) {
-        auto const it = std::ranges::find_if(std::as_const(m_nodeTiles), [&pos](auto const& tile) {
-            auto nodeTilePos = tile->getNode()->getTilePosition();
-            return nodeTilePos.x == pos.x && nodeTilePos.y == pos.y;
-        });
+        auto const it
+            = std::find_if(m_nodeTiles.begin(), m_nodeTiles.end(), [&pos](auto const& tile) {
+                  auto nodeTilePos = tile->getNode()->getTilePosition();
+                  return nodeTilePos.x == pos.x && nodeTilePos.y == pos.y;
+              });
         if (it == m_nodeTiles.end()) {
             return nullptr;
         }
