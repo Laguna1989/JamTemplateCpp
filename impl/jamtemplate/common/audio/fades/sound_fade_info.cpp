@@ -1,5 +1,5 @@
 #include "sound_fade_info.hpp"
-#include <math_helper.hpp>
+#include <algorithm>
 
 jt::SoundFadeInfo::SoundFadeInfo(std::weak_ptr<jt::SoundInterface> const& sound, float duration,
     float startVolume, float endVolume)

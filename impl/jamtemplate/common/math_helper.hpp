@@ -38,7 +38,7 @@ std::vector<T> numbersBetween(T a, T b)
 #ifdef __clang__
 
 // clang does not support std::bitcast yet
-constexpr float qrsqrt(float y) { return sqrt(x); }
+constexpr float qrsqrt(float x) { return sqrt(x); }
 
 #else
 
