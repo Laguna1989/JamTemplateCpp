@@ -203,7 +203,7 @@ void StateMenu::checkForTransitionToStateGame()
 {
     auto const keysToTriggerTransition = { jt::KeyCode::Space, jt::KeyCode::Enter };
 
-    if (std::ranges::any_of(keysToTriggerTransition,
+    if (std::any_of(std::begin(keysToTriggerTransition),std::end(keysToTriggerTransition) ,
             [this](auto const k) { return getGame()->input().keyboard()->justPressed(k); })) {
         startTransitionToStateGame();
     }

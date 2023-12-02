@@ -4,7 +4,6 @@
 #include <shape.hpp>
 #include <state_select.hpp>
 #include <algorithm>
-#include <algorithm>
 
 void State3DNoise::onCreate() { }
 
@@ -36,7 +35,7 @@ void State3DNoise::onDraw() const
         }
     }
 
-    auto const max = *std::ranges::max_element(randomNumbers);
+    auto const max = *std::max_element(randomNumbers.cbegin(), randomNumbers.cend());
 
     for (auto i = 0; i != 100; ++i) {
         for (auto j = 0; j != 100; ++j) {
