@@ -7,7 +7,7 @@ void jt::SoundBase::setVolume(float newVolume) { m_volume = newVolume; }
 
 void jt::SoundBase::setBlend(float blend)
 {
-    if (blend < 0.0f || blend > 1.0f) {
+    if (blend < 0.0f || blend > 1.0f) [[unlikely]] {
         throw std::invalid_argument { "Blend has to be between [0, 1]." };
     }
     m_blend = 1.0f - blend;

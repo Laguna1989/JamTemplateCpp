@@ -2,9 +2,10 @@
 #include <action_commands/action_command_manager.hpp>
 #include <action_commands/basic_action_commands.hpp>
 #include <audio/audio/audio_impl.hpp>
+#include <audio/audio/audio_null.hpp>
 #include <audio/audio/logging_audio.hpp>
 #include <audio/fades/logging_sound_fade_manager.hpp>
-#include <cache_impl.hpp>
+#include <cache/cache_impl.hpp>
 #include <camera.hpp>
 #include <game.hpp>
 #include <game_properties.hpp>
@@ -61,7 +62,8 @@ int main(int /*argc*/, char* /*argv*/[])
     jt::InputManager input { mouse, keyboard, { gamepad0 } };
 
     jt::SoundFadeManager fades;
-    jt::AudioImpl audio { std::make_unique<jt::LoggingSoundFadeManager>(fades, logger) };
+    //    jt::AudioImpl audio { std::make_unique<jt::LoggingSoundFadeManager>(fades, logger) };
+    jt::null_objects::AudioNull audio {};
     jt::LoggingAudio loggingAudio { audio, logger };
 
     jt::StateManager stateManager { std::make_shared<StateIntro>() };

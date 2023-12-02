@@ -37,7 +37,7 @@ TEST(MouseInputNullTest, PositionScreenReturnsDefault)
 TEST(MouseInputNullTest, PressedReturnsFalse)
 {
     jt::MouseInputNull mouse;
-    for (auto& b : jt::getAllMouseButtons()) {
+    for (auto const& b : jt::getAllMouseButtons()) {
         ASSERT_FALSE(mouse.pressed(b));
     }
 }
@@ -45,7 +45,7 @@ TEST(MouseInputNullTest, PressedReturnsFalse)
 TEST(MouseInputNullTest, JustPressedReturnsFalse)
 {
     jt::MouseInputNull mouse;
-    for (auto& b : jt::getAllMouseButtons()) {
+    for (auto const& b : jt::getAllMouseButtons()) {
         ASSERT_FALSE(mouse.justPressed(b));
     }
 }
@@ -53,7 +53,7 @@ TEST(MouseInputNullTest, JustPressedReturnsFalse)
 TEST(MouseInputNullTest, ReleasedReturnsFalse)
 {
     jt::MouseInputNull mouse;
-    for (auto& b : jt::getAllMouseButtons()) {
+    for (auto const& b : jt::getAllMouseButtons()) {
         ASSERT_FALSE(mouse.released(b));
     }
 }
@@ -61,7 +61,7 @@ TEST(MouseInputNullTest, ReleasedReturnsFalse)
 TEST(MouseInputNullTest, JustReleasedReturnsFalse)
 {
     jt::MouseInputNull mouse;
-    for (auto& b : jt::getAllMouseButtons()) {
+    for (auto const& b : jt::getAllMouseButtons()) {
         ASSERT_FALSE(mouse.justReleased(b));
     }
 }

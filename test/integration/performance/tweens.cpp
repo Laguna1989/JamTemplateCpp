@@ -1,6 +1,6 @@
 #include <action_commands/action_command_manager.hpp>
 #include <audio/audio/audio_null.hpp>
-#include <cache_null.hpp>
+#include <cache/cache_null.hpp>
 #include <camera.hpp>
 #include <game.hpp>
 #include <game_state.hpp>
@@ -38,8 +38,8 @@ private:
             s->update(elapsed);
         }
 
-        auto shape = *jt::SystemHelper::select_randomly(m_shapes.cbegin(), m_shapes.cend());
-        auto tw = jt::TweenColor::create(shape, 1.0f, jt::colors::Red, jt::colors::White);
+        auto const shape = jt::SystemHelper::select_randomly(m_shapes);
+        auto const tw = jt::TweenColor::create(shape, 1.0f, jt::colors::Red, jt::colors::White);
         add(tw);
     }
 

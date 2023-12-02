@@ -33,3 +33,24 @@ TEST(SplitStringTest, TestValidTwoSplit)
     EXPECT_EQ(ssv.at(1), "abc");
     EXPECT_EQ(ssv.at(2), "#bla");
 }
+
+TEST(ContainsTest, FromStringLiterals)
+{
+    ASSERT_TRUE(strutil::contains("abcd", "bc"));
+    ASSERT_FALSE(strutil::contains("abcd", "xy"));
+}
+
+TEST(ContainsTest, FromStdStrings)
+{
+    ASSERT_TRUE(strutil::contains(std::string { "abcd" }, std::string { "bc" }));
+    ASSERT_FALSE(strutil::contains(std::string { "abcd" }, std::string { "xy" }));
+}
+
+TEST(ContainsTest, Mixed)
+{
+    ASSERT_TRUE(strutil::contains(std::string { "abcd" }, "bc"));
+    ASSERT_FALSE(strutil::contains(std::string { "abcd" }, "xy"));
+
+    ASSERT_TRUE(strutil::contains("abcd", std::string { "bc" }));
+    ASSERT_FALSE(strutil::contains("abcd", std::string { "xy" }));
+}

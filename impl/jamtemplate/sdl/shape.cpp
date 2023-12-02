@@ -53,6 +53,10 @@ jt::Vector2f Shape::getScale() const { return m_scale; }
 
 void Shape::doDraw(std::shared_ptr<jt::RenderTargetLayer> const sptr) const
 {
+    if (!sptr) [[unlikely]] {
+        return;
+    }
+
     SDL_Rect const destRect = getDestRect();
     auto const flip = jt::getFlipFromScale(m_scale);
     SDL_Point const p { static_cast<int>(getOrigin().x * m_scale.x),
@@ -64,6 +68,10 @@ void Shape::doDraw(std::shared_ptr<jt::RenderTargetLayer> const sptr) const
 
 void Shape::doDrawFlash(std::shared_ptr<jt::RenderTargetLayer> const sptr) const
 {
+    if (!sptr) [[unlikely]] {
+        return;
+    }
+
     SDL_Rect const destRect = getDestRect();
     auto const flip = jt::getFlipFromScale(m_scale);
     SDL_Point const p { static_cast<int>(getOrigin().x * m_scale.x),
@@ -75,6 +83,10 @@ void Shape::doDrawFlash(std::shared_ptr<jt::RenderTargetLayer> const sptr) const
 
 void Shape::doDrawShadow(std::shared_ptr<jt::RenderTargetLayer> const sptr) const
 {
+    if (!sptr) [[unlikely]] {
+        return;
+    }
+
     SDL_Rect const destRect = getDestRect(getShadowOffset());
     auto const flip = jt::getFlipFromScale(m_scale);
     SDL_Point const p { static_cast<int>(getOrigin().x * m_scale.x),
@@ -86,6 +98,10 @@ void Shape::doDrawShadow(std::shared_ptr<jt::RenderTargetLayer> const sptr) cons
 
 void Shape::doDrawOutline(std::shared_ptr<jt::RenderTargetLayer> const sptr) const
 {
+    if (!sptr) [[unlikely]] {
+        return;
+    }
+
     setSDLColor(getOutlineColor());
     auto const flip = jt::getFlipFromScale(m_scale);
     SDL_Point const p { static_cast<int>(getOrigin().x * m_scale.x),
@@ -98,9 +114,9 @@ void Shape::doDrawOutline(std::shared_ptr<jt::RenderTargetLayer> const sptr) con
     }
 }
 
-void Shape::doUpdate(float /*elapsed*/) { }
+void Shape::doUpdate(float /*elapsed*/) noexcept { }
 
-void Shape::doRotate(float /*rot*/) { }
+void Shape::doRotate(float /*rot*/) noexcept { }
 
 SDL_Rect Shape::getDestRect(jt::Vector2f const& positionOffset) const
 {

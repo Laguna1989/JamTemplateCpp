@@ -3,15 +3,20 @@
 #include <stdexcept>
 
 std::tuple<std::uint8_t, std::uint8_t, std::uint8_t> jt::ColorConversions::hsv2rgb(
-    float h, float s, float v)
+    float const h, float s, float v)
 {
+    // TODO range checks for input vars
     s /= 100.0f;
     v /= 100.0f;
     v *= 255.0f;
 
-    float hh, p, q, t, ff;
-    long i;
-    std::tuple<std::uint8_t, std::uint8_t, std::uint8_t> out;
+    float hh { 0.0f };
+    float p { 0.0f };
+    float q { 0.0f };
+    float t { 0.0f };
+    float ff { 0.0f };
+    long i { 0u };
+    std::tuple<std::uint8_t, std::uint8_t, std::uint8_t> out {};
 
     if (s <= 0.0f) {
         std::get<0>(out) = static_cast<std::uint8_t>(v);
@@ -23,7 +28,7 @@ std::tuple<std::uint8_t, std::uint8_t, std::uint8_t> jt::ColorConversions::hsv2r
     if (hh >= 360.0f)
         hh = 0.0f;
     hh /= 60.0f;
-    i = (long)hh;
+    i = static_cast<long>(hh);
     ff = hh - i;
     p = v * (1.0f - s);
     q = v * (1.0f - (s * ff));
@@ -72,7 +77,8 @@ std::tuple<std::uint8_t, std::uint8_t, std::uint8_t> jt::ColorConversions::hsv2r
 }
 
 namespace {
-std::uint8_t hexStringToUint8(std::string const& input)
+
+std::uint8_t hexStringToUint8(std::string_view input)
 {
     std::stringstream ss;
     ss << std::hex << input;
@@ -84,7 +90,7 @@ std::uint8_t hexStringToUint8(std::string const& input)
 } // namespace
 
 std::tuple<std::uint8_t, std::uint8_t, std::uint8_t> jt::ColorConversions::hex2rgb(
-    std::string const& hexString)
+    std::string_view hexString)
 {
     if (hexString.empty()) {
         throw std::invalid_argument { "cannot create color from empty hex string" };
@@ -94,7 +100,8 @@ std::tuple<std::uint8_t, std::uint8_t, std::uint8_t> jt::ColorConversions::hex2r
         tempString = hexString.substr(1);
     }
     if (tempString.size() != 6) {
-        throw std::invalid_argument { "invalid color hex string '" + tempString + "'" };
+        throw std::invalid_argument { "invalid color hex string '" + std::string { hexString }
+            + "'" };
     }
     auto const rString = tempString.substr(0, 2);
     auto const gString = tempString.substr(2, 2);
@@ -103,11 +110,14 @@ std::tuple<std::uint8_t, std::uint8_t, std::uint8_t> jt::ColorConversions::hex2r
     return std::make_tuple(
         hexStringToUint8(rString), hexStringToUint8(gString), hexStringToUint8(bString));
 }
+
 std::tuple<float, float, float> jt::ColorConversions::rgb2hsv(
     std::uint8_t r, std::uint8_t g, std::uint8_t b)
 {
     std::tuple<float, float, float> out;
-    float min, max, delta;
+    float min { 0.0f };
+    float max { 0.0f };
+    float delta { 0.0f };
 
     min = r < g ? r : g;
     min = min < b ? min : b;

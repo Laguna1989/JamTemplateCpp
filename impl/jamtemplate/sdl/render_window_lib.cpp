@@ -54,11 +54,11 @@ void RenderWindow::checkForClose()
     }
 }
 
-jt::Vector2f RenderWindow::getSize() const { return m_size; }
+jt::Vector2f RenderWindow::getSize() const noexcept { return m_size; }
 
 void RenderWindow::draw(std::unique_ptr<jt::Sprite>& spr)
 {
-    if (!spr) {
+    if (!spr) [[unlikely]] {
         throw std::invalid_argument { "cannot draw nullptr sprite" };
     }
     std::cerr << "RenderWindow::draw() not supported by SDL Renderwindow. Use the Rendertarget "
@@ -67,7 +67,7 @@ void RenderWindow::draw(std::unique_ptr<jt::Sprite>& spr)
 
 void RenderWindow::display()
 {
-    if (!m_renderTargetCreated) {
+    if (!m_renderTargetCreated) [[unlikely]] {
         return;
     }
     if (m_renderGui) {
@@ -102,7 +102,7 @@ bool RenderWindow::getMouseCursorVisible() const { return m_isMouseCursorVisible
 
 void RenderWindow::updateGui(float elapsed)
 {
-    if (!m_renderTargetCreated) {
+    if (!m_renderTargetCreated) [[unlikely]] {
         return;
     }
 #if JT_ENABLE_WEB
@@ -125,7 +125,7 @@ void RenderWindow::updateGui(float elapsed)
 
 void RenderWindow::startRenderGui()
 {
-    if (!m_renderTargetCreated) {
+    if (!m_renderTargetCreated) [[unlikely]] {
         return;
     }
     ImGui::NewFrame();
@@ -134,7 +134,7 @@ void RenderWindow::startRenderGui()
 
 bool RenderWindow::shouldProcessKeyboard()
 {
-    if (!m_renderTargetCreated) {
+    if (!m_renderTargetCreated) [[unlikely]] {
         return true;
     }
     return !ImGui::GetIO().WantCaptureKeyboard;
@@ -142,7 +142,7 @@ bool RenderWindow::shouldProcessKeyboard()
 
 bool RenderWindow::shouldProcessMouse()
 {
-    if (!m_renderTargetCreated) {
+    if (!m_renderTargetCreated) [[unlikely]] {
         return true;
     }
     return !ImGui::GetIO().WantCaptureMouse;

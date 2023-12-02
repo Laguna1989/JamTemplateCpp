@@ -19,11 +19,11 @@ public:
 
     /// Get the number of colors in the palette.
     /// \return the number of colors
-    std::size_t size() const;
+    std::size_t size() const noexcept;
 
     /// Check if the palette contains any colors.
     /// \return true if empty, falso otherwise
-    bool empty() const;
+    bool empty() const noexcept;
 
     /// Get a color from the palette. Will raise an exception if index is out of bounds.
     /// \param idx the index of the color

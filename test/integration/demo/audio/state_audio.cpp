@@ -65,7 +65,7 @@ void StateAudio::onDraw() const
     ImGui::Text("Volume Groups");
     auto const groupNames = getGame()->audio().groups().getAllGroupNames();
     for (auto const& n : groupNames) {
-        if (m_volumes.count(n) == 0) {
+        if (!m_volumes.contains(n)) {
             m_volumes[n] = 1.0f;
         }
         auto const str = "volume '" + n + "'";

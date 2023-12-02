@@ -19,7 +19,8 @@ jt::GameState::~GameState()
 }
 
 void jt::GameState::start() { m_started = true; }
-bool jt::GameState::hasBeenInitialized() const { return m_started; }
+
+bool jt::GameState::hasBeenInitialized() const noexcept { return m_started; }
 
 void jt::GameState::add(std::shared_ptr<jt::GameObject> gameObject)
 {
@@ -30,13 +31,16 @@ void jt::GameState::add(std::shared_ptr<jt::GameObject> gameObject)
 
 void jt::GameState::add(std::shared_ptr<TweenInterface> tween) { m_tweens->add(tween); }
 
-size_t jt::GameState::getNumberOfObjects() const { return m_objects->size(); }
+size_t jt::GameState::getNumberOfObjects() const noexcept { return m_objects->size(); }
 
 void jt::GameState::enter() { doEnter(); }
 
 void jt::GameState::doCreate() { internalCreate(); }
+
 void jt::GameState::doUpdate(float const elapsed) { internalUpdate(elapsed); }
+
 void jt::GameState::doDraw() const { internalDraw(); };
+
 void jt::GameState::doEnter() { internalEnter(); }
 
 void jt::GameState::internalCreate()
@@ -67,6 +71,7 @@ void jt::GameState::internalUpdate(float elapsed)
         updateTweens(elapsed);
     }
 }
+
 void jt::GameState::checkForMuteUnmute()
 {
     if (getGame()->input().keyboard()->justPressed(KeyCode::M)) {
@@ -101,17 +106,20 @@ void jt::GameState::updateTweens(float elapsed)
 
 void jt::GameState::drawObjects() const { m_objects->draw(); }
 
-void jt::GameState::setAutoUpdateObjects(bool performAutoUpdate)
+void jt::GameState::setAutoUpdateObjects(bool performAutoUpdate) noexcept
 {
     m_doAutoUpdateObjects = performAutoUpdate;
 }
-bool jt::GameState::getAutoUpdateObjects() const { return m_doAutoUpdateObjects; }
 
-void jt::GameState::setAutoUpdateTweens(bool performAutoUpdate)
+bool jt::GameState::getAutoUpdateObjects() const noexcept { return m_doAutoUpdateObjects; }
+
+void jt::GameState::setAutoUpdateTweens(bool performAutoUpdate) noexcept
 {
     m_doAutoUpdateTweens = performAutoUpdate;
 }
-bool jt::GameState::getAutoUpdateTweens() const { return m_doAutoUpdateTweens; }
 
-void jt::GameState::setAutoDraw(bool performAudoDraw) { m_doAutoDraw = performAudoDraw; }
-bool jt::GameState::getAutoDraw() const { return m_doAutoDraw; }
+bool jt::GameState::getAutoUpdateTweens() const noexcept { return m_doAutoUpdateTweens; }
+
+void jt::GameState::setAutoDraw(bool performAudoDraw) noexcept { m_doAutoDraw = performAudoDraw; }
+
+bool jt::GameState::getAutoDraw() const noexcept { return m_doAutoDraw; }

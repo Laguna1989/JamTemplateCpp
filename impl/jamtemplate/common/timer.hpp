@@ -15,22 +15,22 @@ public:
     /// \param r number of repetitions (-1 means infinite)
     Timer(float timeInSeconds, CallbackType cb, int r = -1);
 
-    /// Timer is not copy-able and move-able
+    /// Timer is move-able and not copy-able
     Timer(Timer const&) = delete;
     Timer(Timer&&) = default;
 
-    /// Timer is not copy-assign-able and move-assign-able
+    /// Timer is move-assign-able and not copy-assign-able
     Timer operator=(Timer const&) = delete;
     Timer& operator=(Timer&&) = default;
 
-    float getTotalTime() const override;
+    float getTotalTime() const noexcept override;
     void updateTimer(float elapsed) override;
-    void setTotalTime(float totalTime) override;
+    void setTotalTime(float totalTime) noexcept override;
     void setCallback(CallbackType cb) override;
 
-    float getCurrentTime() const override;
+    float getCurrentTime() const noexcept override;
 
-    float getRemainingTime() override;
+    float getRemainingTime() const noexcept override;
 
     void cancel() override;
 

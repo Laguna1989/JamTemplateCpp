@@ -34,11 +34,12 @@ void jt::ParticleSystemDropItems::doCreate()
 
             std::shared_ptr<jt::Tween> twp1 = jt::TweenPosition::create(
                 a, tweenTime / 2.0f, pos, pos + jt::Random::getRandomPointOnCircle(m_radius));
-            twp1->addCompleteCallback([this, tweenTime, &a]() { a->flicker(tweenTime / 2.0f); });
+            twp1->addCompleteCallback([tweenTime, &a]() { a->flicker(tweenTime / 2.0f); });
             m_tweens->add(twp1);
 
-            auto const fadeOutDuration = 0.05f;
-            std::shared_ptr<jt::Tween> twa = jt::TweenAlpha::create(a, fadeOutDuration, 255u, 0u);
+            constexpr auto fadeOutDuration = 0.05f;
+            std::shared_ptr<jt::Tween> const twa
+                = jt::TweenAlpha::create(a, fadeOutDuration, 255u, 0u);
             twa->setStartDelay(tweenTime - fadeOutDuration);
             m_tweens->add(twa);
         });

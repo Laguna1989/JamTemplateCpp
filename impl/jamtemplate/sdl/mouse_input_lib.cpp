@@ -5,7 +5,8 @@
 namespace jt {
 
 namespace {
-std::uint8_t toLib(jt::MouseButtonCode key)
+
+std::uint8_t toLib(jt::MouseButtonCode key) noexcept
 {
     switch (key) {
     case MouseButtonCode::MBLeft:
@@ -29,7 +30,7 @@ bool libKeyValue(jt::MouseButtonCode b)
     int y { 0 };
     auto const mouseState = SDL_GetMouseState(&x, &y);
 
-    return ((mouseState & SDL_BUTTON(toLib(b))) != 0u);
+    return (mouseState & SDL_BUTTON(toLib(b))) != 0u;
 }
 
 } // namespace jt

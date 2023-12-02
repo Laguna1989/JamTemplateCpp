@@ -5,7 +5,7 @@
 
 namespace jt {
 
-// Actual Game class for SFML
+// Game class for SFML
 class Game final : public jt::GameBase {
 public:
     using Sptr = std::shared_ptr<Game>;

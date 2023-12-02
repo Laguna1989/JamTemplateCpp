@@ -19,19 +19,19 @@ public:
     /// \param title title of the window
     RenderWindow(unsigned int width, unsigned int height, std::string const& title);
 
-    // no copy, only move
+    // no copy, no move
     RenderWindow(RenderWindow const&) = delete;
-    RenderWindow(RenderWindow&&) = default;
+    RenderWindow(RenderWindow&&) = delete;
     RenderWindow& operator=(RenderWindow const&) = delete;
-    RenderWindow& operator=(RenderWindow&&) = default;
-    ~RenderWindow();
+    RenderWindow& operator=(RenderWindow&&) = delete;
+    ~RenderWindow() override;
 
     std::shared_ptr<jt::RenderTargetLayer> createRenderTarget() override;
 
     bool isOpen() const override;
     void checkForClose() override;
 
-    jt::Vector2f getSize() const override;
+    jt::Vector2f getSize() const noexcept override;
 
     void draw(std::unique_ptr<jt::Sprite>&) override;
     void startRenderGui() override;
@@ -40,7 +40,7 @@ public:
 
     jt::Vector2f getMousePosition() override;
     void setMouseCursorVisible(bool visible) override;
-    bool getMouseCursorVisible(void) const override;
+    bool getMouseCursorVisible() const noexcept override;
 
     bool shouldProcessKeyboard() override;
     bool shouldProcessMouse() override;
@@ -51,6 +51,8 @@ private:
     bool m_renderGui { false };
 
     bool m_hasBeenUpdatedAlready { false };
+
+    jt::Vector2f m_size { 0.0f, 0.0f };
 };
 } // namespace jt
 

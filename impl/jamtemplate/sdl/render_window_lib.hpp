@@ -10,18 +10,18 @@ namespace jt {
 class RenderWindow : public RenderWindowInterface {
 public:
     RenderWindow(unsigned int width, unsigned int height, std::string const& title);
-    virtual std::shared_ptr<jt::RenderTargetLayer> createRenderTarget() override;
+    std::shared_ptr<jt::RenderTargetLayer> createRenderTarget() override;
 
-    virtual bool isOpen() const override;
-    virtual void checkForClose() override;
+    bool isOpen() const override;
+    void checkForClose() override;
 
-    virtual jt::Vector2f getSize() const override;
+    jt::Vector2f getSize() const noexcept override;
 
-    virtual void draw(std::unique_ptr<jt::Sprite>&) override;
+    void draw(std::unique_ptr<jt::Sprite>&) override;
 
-    virtual void display() override;
+    void display() override;
 
-    virtual jt::Vector2f getMousePosition() override;
+    jt::Vector2f getMousePosition() override;
 
     void setMouseCursorVisible(bool visible) override;
     bool getMouseCursorVisible() const override;

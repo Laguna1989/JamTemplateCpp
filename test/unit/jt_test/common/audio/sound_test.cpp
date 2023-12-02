@@ -186,7 +186,7 @@ TEST_F(SoundTestWithLoadedSound, GetPositionAfterPlay)
 TEST_F(SoundTestWithLoadedSound, GetDurationReturnsExpectedValue)
 {
     auto const d = m_sound->getDuration();
-    float const expected { 0.262721002f };
+    constexpr float expected { 0.262721002f };
     EXPECT_FLOAT_EQ(d, expected);
 }
 

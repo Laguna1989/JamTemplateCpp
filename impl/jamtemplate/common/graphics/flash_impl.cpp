@@ -2,7 +2,7 @@
 
 void jt::FlashImpl::drawFlash(std::shared_ptr<jt::RenderTargetLayer> sptr) const
 {
-    if (sptr) {
+    if (sptr) [[likely]] {
         if (m_flashTimer >= 0) {
             doDrawFlash(sptr);
         }
@@ -19,6 +19,7 @@ void jt::FlashImpl::doFlash(float t, jt::Color col)
 }
 
 void jt::FlashImpl::doSetFlashColor(jt::Color const& col) { m_flashColor = col; }
+
 jt::Color jt::FlashImpl::doGetFlashColor() const { return m_flashColor; }
 
 void jt::FlashImpl::updateFlash(float elapsed)

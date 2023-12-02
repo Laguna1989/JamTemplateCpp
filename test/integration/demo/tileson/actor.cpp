@@ -27,7 +27,7 @@ void Actor::walkAlongPath(float const elapsed)
     }
 
     float factor = m_walkTimerCurrent / m_walkTimerMax;
-    factor = jt::MathHelper::clamp(factor, 0.0f, 1.0f);
+    factor = std::clamp(factor, 0.0f, 1.0f);
 
     auto const oldTilePos = m_path.begin()->lock()->getTilePosition();
     jt::Vector2f const oldPos = jt::Vector2f { oldTilePos.x * 32.0f, oldTilePos.y * 32.0f };
@@ -56,6 +56,7 @@ void Actor::setPosition(jt::Vector2u const& posInTiles)
 {
     m_sprite->setPosition(jt::Vector2f { posInTiles.x * 32.0f, posInTiles.y * 32.0f });
 }
+
 jt::Vector2f Actor::getPosition() const { return m_sprite->getPosition(); }
 
 void Actor::setPath(std::vector<std::shared_ptr<jt::pathfinder::NodeInterface>> const& path)

@@ -13,11 +13,11 @@ public:
     sf::Texture& get(std::string const& str) override;
     void reset() override;
     std::string getFlashName(std::string const& str) override;
-    std::size_t getNumberOfTextures() override;
+    std::size_t getNumberOfTextures() noexcept override;
 
 private:
     std::map<std::string, sf::Texture> m_textures;
-    bool containsTexture(std::string const& str);
+    bool containsTexture(std::string const& str) const;
 };
 } // namespace jt
 

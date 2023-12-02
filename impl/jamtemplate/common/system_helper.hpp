@@ -5,6 +5,7 @@
 #include <iterator>
 #include <memory>
 #include <random>
+#include <stdexcept>
 #include <unordered_set>
 
 namespace jt {
@@ -15,7 +16,7 @@ namespace SystemHelper {
 /// \param weak the weack pointer to check
 /// \return true if uninitialized, false otherwise
 template <typename T>
-bool is_uninitialized_weak_ptr(std::weak_ptr<T> const& weak)
+bool is_uninitialized_weak_ptr(std::weak_ptr<T> const& weak) noexcept
 {
     using wt = std::weak_ptr<T>;
     return !weak.owner_before(wt {}) && !wt {}.owner_before(weak);
@@ -27,7 +28,8 @@ bool is_uninitialized_weak_ptr(std::weak_ptr<T> const& weak)
 /// \param items the container
 /// \param predicate the check function. If it returns true for an object, it will be removed
 template <typename ContainerT, typename PredicateT>
-void erase_if(ContainerT& items, PredicateT const& predicate)
+[[deprecated("use std::erase_if instead")]] void erase_if(
+    ContainerT& items, PredicateT const& predicate)
 {
     for (auto it = items.begin(); it != items.end();) {
         if (predicate(*it))
@@ -100,6 +102,9 @@ std::vector<std::weak_ptr<T>> to_weak_pointers(std::vector<std::shared_ptr<T>> c
 template <typename Iter, typename RandomGenerator>
 Iter select_randomly(Iter start, Iter end, RandomGenerator& g)
 {
+    if (start == end) {
+        throw std::invalid_argument { "cannot pick randomly from empty container" };
+    }
     std::uniform_int_distribution<std::size_t> dis(
         0u, static_cast<std::size_t>(std::distance(start, end)) - 1u);
     std::advance(start, dis(g));
@@ -117,6 +122,19 @@ Iter select_randomly(Iter start, Iter end)
     static std::random_device rd;
     static std::mt19937 gen(rd());
     return select_randomly(start, end, gen);
+}
+
+/// Select randomly from container
+/// \tparam ContainerT Container type
+/// \param container the container to pick from
+/// \return one random element
+template <typename ContainerT>
+typename ContainerT::value_type select_randomly(ContainerT const& container)
+{
+    if (container.empty()) [[unlikely]] {
+        throw std::invalid_argument { "cannot pick randomly from empty container" };
+    }
+    return *select_randomly(std::cbegin(container), std::cend(container));
 }
 
 bool checkForValidFile(std::string const& filename);

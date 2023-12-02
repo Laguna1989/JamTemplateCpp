@@ -1,7 +1,7 @@
 #ifndef JAMTEMPLATE_CACHE_IMPL_HPP
 #define JAMTEMPLATE_CACHE_IMPL_HPP
 
-#include <cache_interface.hpp>
+#include <cache/cache_interface.hpp>
 
 namespace jt {
 class CacheImpl : public jt::CacheInterface {

@@ -2,12 +2,7 @@
 #define JAMTEMPLATE_GAME_HPP
 
 #include <game_base.hpp>
-#include <graphics/render_window_interface.hpp>
-#include <rect.hpp>
-#include <render_target_layer.hpp>
-#include <chrono>
 #include <memory>
-#include <string>
 
 namespace jt {
 

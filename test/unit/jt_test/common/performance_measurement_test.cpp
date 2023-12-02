@@ -4,12 +4,12 @@
 
 namespace {
 
-std::function<double(double, double)> myAdd = [](double a, double b) {
+std::function myAdd = [](double a, double b) {
     std::this_thread::sleep_for(std::chrono::milliseconds { 100 });
     return a + b;
 };
 
-std::function<void(std::string const&)> myPrinter = [](std::string const& str) {
+std::function myPrinter = [](std::string const& str) {
     std::this_thread::sleep_for(std::chrono::milliseconds { 100 });
     std::cout << str << std::endl;
 };
@@ -37,7 +37,7 @@ TEST(PerformanceMeasurementGeneric, MeasuresAtLeastTheDurationOfSleepForOneInvoc
 {
     auto const measure = jt::makeMeasureTimeGeneric(myAdd);
 
-    measure(2.0, 3.0);
+    (void)measure(2.0, 3.0);
     ASSERT_GE(measure.getElapsedTimeInSeconds(), 0.1f);
 }
 
@@ -45,8 +45,8 @@ TEST(PerformanceMeasurementGeneric, MeasuresAtLeastTheDurationOfSleepForTwoInvoc
 {
     auto const measure = jt::makeMeasureTimeGeneric(myAdd);
 
-    measure(2.0, 3.0);
-    measure(5.0, 3.0);
+    (void)measure(2.0, 3.0);
+    (void)measure(5.0, 3.0);
     ASSERT_GE(measure.getElapsedTimeInSeconds(), 0.2f);
 }
 
@@ -54,9 +54,9 @@ TEST(PerformanceMeasurementGeneric, ResetSetsTimerToZero)
 {
     auto measure = jt::makeMeasureTimeGeneric(myAdd);
 
-    measure(2.0, 3.0);
+    (void)measure(2.0, 3.0);
     ASSERT_NE(measure.getElapsedTimeInSeconds(), 0.0f);
-    measure.resetTimer();
+    (void)measure.resetTimer();
     ASSERT_EQ(measure.getElapsedTimeInSeconds(), 0.0f);
 }
 
@@ -64,11 +64,11 @@ TEST(PerformanceMeasurementGeneric, MeasuresAtLeastTheDurationOfSleepForTwoInvoc
 {
     auto measure = jt::makeMeasureTimeGeneric(myAdd);
 
-    measure(2.0, 3.0);
-    measure.getElapsedTimeInSeconds();
-    measure.resetTimer();
+    (void)measure(2.0, 3.0);
+    (void)measure.getElapsedTimeInSeconds();
+    (void)measure.resetTimer();
 
-    measure(5.0, 3.0);
+    (void)measure(5.0, 3.0);
     ASSERT_GE(measure.getElapsedTimeInSeconds(), 0.1f);
 }
 

@@ -2,7 +2,12 @@
 #include <SFML/Window/Mouse.hpp>
 
 namespace {
-sf::Mouse::Button toLib(jt::MouseButtonCode key) { return static_cast<sf::Mouse::Button>(key); }
+
+sf::Mouse::Button toLib(jt::MouseButtonCode key) noexcept
+{
+    return static_cast<sf::Mouse::Button>(key);
+}
+
 } // namespace
 
 bool jt::libKeyValue(jt::MouseButtonCode b)

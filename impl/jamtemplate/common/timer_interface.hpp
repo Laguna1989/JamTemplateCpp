@@ -20,7 +20,7 @@ public:
 
     /// Get the time Left until the Timer expires and triggers the callback
     /// \return the time left in seconds
-    virtual float getRemainingTime() = 0;
+    virtual float getRemainingTime() const = 0;
 
     /// Cancel the timer. The callback will not be invoked.
     virtual void cancel() = 0;

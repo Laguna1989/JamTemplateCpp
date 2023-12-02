@@ -3,7 +3,7 @@
 
 #include <action_commands/action_command_manager.hpp>
 #include <audio/audio/audio_null.hpp>
-#include <cache_null.hpp>
+#include <cache/cache_null.hpp>
 #include <game.hpp>
 #include <mocks/mock_camera.hpp>
 #include <mocks/mock_gfx.hpp>

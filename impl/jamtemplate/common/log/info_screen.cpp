@@ -4,16 +4,16 @@
 
 jt::InfoScreen::InfoScreen()
 {
+#ifdef JT_ENABLE_DEBUG
     m_frameTimesVector.resize(m_frameTimes.capacity());
     m_GameObjectAliveCountVector.resize(m_GameObjectAliveCount.capacity());
+#endif
 }
-
-void jt::InfoScreen::doCreate() { }
 
 void jt::InfoScreen::doUpdate(float const elapsed)
 {
-    m_numberOfUpdatesInThisFrame++;
 #ifdef JT_ENABLE_DEBUG
+    m_numberOfUpdatesInThisFrame++;
     if (getGame()->input().keyboard()->justPressed(jt::KeyCode::End)) {
         m_showInfo = !m_showInfo;
     }
@@ -36,6 +36,7 @@ void jt::InfoScreen::doUpdate(float const elapsed)
 
 void jt::InfoScreen::doDraw() const
 {
+#ifdef JT_ENABLE_DEBUG
     m_numberOfUpdatesInLastFrame.put(m_numberOfUpdatesInThisFrame);
     m_numberOfUpdatesInThisFrame = 0;
 
@@ -101,4 +102,5 @@ void jt::InfoScreen::doDraw() const
         ImGui::Text("%s", soundBuffersString.c_str());
     }
     ImGui::End();
+#endif
 }

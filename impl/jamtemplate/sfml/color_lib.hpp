@@ -6,8 +6,8 @@
 
 namespace jt {
 
-sf::Color toLib(jt::Color const& col);
-jt::Color fromLib(sf::Color const& col);
+sf::Color toLib(jt::Color const& col) noexcept;
+jt::Color fromLib(sf::Color const& col) noexcept;
 
 } // namespace jt
 

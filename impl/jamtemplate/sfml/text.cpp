@@ -88,6 +88,10 @@ void jt::Text::doUpdate(float /*elapsed*/)
 
 void jt::Text::doDrawShadow(std::shared_ptr<jt::RenderTargetLayer> const sptr) const
 {
+    if (!sptr) [[unlikely]] {
+        return;
+    }
+
     jt::Vector2f const oldPos = fromLib(m_text->getPosition());
     auto const oldCol = fromLib(m_text->getFillColor());
 
@@ -103,6 +107,10 @@ void jt::Text::doDrawShadow(std::shared_ptr<jt::RenderTargetLayer> const sptr) c
 
 void jt::Text::doDrawOutline(std::shared_ptr<jt::RenderTargetLayer> const sptr) const
 {
+    if (!sptr) [[unlikely]] {
+        return;
+    }
+
     jt::Vector2f const oldPos = fromLib(m_text->getPosition());
     jt::Color const oldCol = fromLib(m_text->getFillColor());
 
@@ -119,12 +127,20 @@ void jt::Text::doDrawOutline(std::shared_ptr<jt::RenderTargetLayer> const sptr) 
 
 void jt::Text::doDraw(std::shared_ptr<jt::RenderTargetLayer> const sptr) const
 {
+    if (!sptr) [[unlikely]] {
+        return;
+    }
+
     sf::RenderStates states { getSfBlendMode() };
     sptr->draw(*m_text, states);
 }
 
 void jt::Text::doDrawFlash(std::shared_ptr<jt::RenderTargetLayer> const sptr) const
 {
+    if (!sptr) [[unlikely]] {
+        return;
+    }
+
     sptr->draw(*m_flashText);
 }
 

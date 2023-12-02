@@ -28,11 +28,11 @@ void jt::Timer::invokeCallback()
     }
 }
 
-float jt::Timer::getTotalTime() const { return m_totalTime; }
+float jt::Timer::getTotalTime() const noexcept { return m_totalTime; }
 
-float jt::Timer::getCurrentTime() const { return m_currentTime; }
+float jt::Timer::getCurrentTime() const noexcept { return m_currentTime; }
 
-float jt::Timer::getRemainingTime() { return m_totalTime - m_currentTime; }
+float jt::Timer::getRemainingTime() const noexcept { return m_totalTime - m_currentTime; }
 
 void jt::Timer::cancel()
 {
@@ -66,7 +66,7 @@ void jt::Timer::updateTimer(float elapsed)
     }
 }
 
-void jt::Timer::setTotalTime(float totalTime) { m_totalTime = totalTime; }
+void jt::Timer::setTotalTime(float totalTime) noexcept { m_totalTime = totalTime; }
 
 void jt::Timer::setCallback(jt::TimerInterface::CallbackType cb)
 {

@@ -45,7 +45,7 @@ std::vector<std::string> jt::ActionCommandManager::getArguments(
 
 void jt::ActionCommandManager::removeUnusedCommands()
 {
-    jt::SystemHelper::erase_if(m_registeredCommands, [this](auto const& kvp) {
+    std::erase_if(m_registeredCommands, [this](auto const& kvp) {
         auto shared_state = std::get<0>(kvp.second);
         if (shared_state.expired()) {
             m_logger.info("remove command '" + kvp.first + "'");
@@ -66,6 +66,7 @@ std::shared_ptr<bool> jt::ActionCommandManager::registerTemporaryCommand(
     m_logger.info("registered command '" + trimmedCommand + "'");
     return sharedState;
 }
+
 void jt::ActionCommandManager::update() { removeUnusedCommands(); }
 
 std::vector<std::string> jt::ActionCommandManager::getAllCommands()

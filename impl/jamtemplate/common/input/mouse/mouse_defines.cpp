@@ -1,11 +1,10 @@
 #include "mouse_defines.hpp"
 #include <cstdint>
 
-std::vector<jt::MouseButtonCode> jt::getAllMouseButtons()
+std::array<jt::MouseButtonCode, jt::MouseButtonCodeSize> jt::getAllMouseButtons()
 {
-    auto const maxValue = static_cast<std::uint32_t>(jt::MouseButtonCode::ButtonCount);
-    std::vector<jt::MouseButtonCode> values(maxValue, jt::MouseButtonCode::MBLeft);
-    for (std::uint32_t i = 0u; i != maxValue; ++i) {
+    std::array<jt::MouseButtonCode, static_cast<std::size_t>(MouseButtonCode::ButtonCount)> values;
+    for (std::uint32_t i = 0u; i != jt::MouseButtonCodeSize; ++i) {
         values.at(i) = static_cast<jt::MouseButtonCode>(i);
     }
     return values;

@@ -1,4 +1,5 @@
 #include "gfx_impl.hpp"
+#include <math_helper.hpp>
 #include <rect_lib.hpp>
 #include <sprite.hpp>
 #include <vector_lib.hpp>
@@ -21,13 +22,14 @@ jt::GfxImpl::GfxImpl(RenderWindowInterface& window, CamInterface& cam)
     , m_textureManager { nullptr }
 {
     m_target = std::make_shared<jt::RenderTarget>();
-    createZLayer(0);
+    GfxImpl::createZLayer(0);
     auto const scaledWidth = static_cast<unsigned int>(m_window.getSize().x / m_camera.getZoom());
     auto const scaledHeight = static_cast<unsigned int>(m_window.getSize().y / m_camera.getZoom());
 
     m_view = std::make_shared<sf::View>(toLib(
         jt::Rectf { 0, 0, static_cast<float>(scaledWidth), static_cast<float>(scaledHeight) }));
     m_view->setViewport(toLib(jt::Rectf { 0, 0, 1, 1 }));
+    m_viewHalfSize = fromLib(m_view->getSize() * 0.5f);
 }
 
 jt::RenderWindowInterface& jt::GfxImpl::window() { return m_window; }
@@ -44,15 +46,11 @@ void jt::GfxImpl::update(float elapsed)
 {
     m_camera.update(elapsed);
 
-    // cast to int and back to float to avoid rounding issues with subpixel positions
-    int const camOffsetix { static_cast<int>(m_camera.getCamOffset().x + m_view->getSize().x / 2) };
-    int const camOffsetiy { static_cast<int>(m_camera.getCamOffset().y + m_view->getSize().y / 2) };
-
     m_target->forall([this](auto t) { t->setView(*m_view); });
     m_view->setCenter(
-        toLib(jt::Vector2f { static_cast<float>(camOffsetix), static_cast<float>(camOffsetiy) }));
+        toLib(jt::MathHelper::castToInteger(m_camera.getCamOffset() + m_viewHalfSize)));
 
-    DrawableImpl::setCamOffset(-1.0f * fromLib(m_view->getCenter() - m_view->getSize() / 2.0f));
+    DrawableImpl::setCamOffset(m_viewHalfSize - fromLib(m_view->getCenter()));
 }
 
 void jt::GfxImpl::clear() { m_target->clearPixels(); }
@@ -63,9 +61,9 @@ void jt::GfxImpl::display()
     m_window.display();
 }
 
-void jt::GfxImpl::drawOneZLayer(std::shared_ptr<jt::RenderTargetLayer>& layer)
+void jt::GfxImpl::drawOneZLayer(std::shared_ptr<jt::RenderTargetLayer> const& layer)
 {
-    if (layer == nullptr) {
+    if (layer == nullptr) [[unlikely]] {
         throw std::invalid_argument {
             "GfXImpl::display called with nullptr jt::RenderTargetLayer"
         };
@@ -82,7 +80,7 @@ void jt::GfxImpl::drawOneZLayer(std::shared_ptr<jt::RenderTargetLayer>& layer)
 
 void jt::GfxImpl::createZLayer(int z)
 {
-    auto target = m_window.createRenderTarget();
+    auto const target = m_window.createRenderTarget();
 
     auto const scaledWidth = static_cast<unsigned int>(m_window.getSize().x / m_camera.getZoom());
     auto const scaledHeight = static_cast<unsigned int>(m_window.getSize().y / m_camera.getZoom());

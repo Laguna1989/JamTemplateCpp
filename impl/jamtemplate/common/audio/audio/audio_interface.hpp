@@ -16,7 +16,7 @@ namespace jt {
 
 class AudioInterface {
 public:
-    /// Update sounds in the the audio interface
+    /// Update sounds in the audio interface
     virtual void update(float elapsed) = 0;
 
     /// Add a temporary sound that will be removed once the shared pointer count is zero

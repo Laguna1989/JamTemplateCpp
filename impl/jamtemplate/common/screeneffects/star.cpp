@@ -3,7 +3,7 @@
 #include <game_interface.hpp>
 #include <random/random.hpp>
 #include <screeneffects/screen_wrap.hpp>
-#include <iostream>
+#include <algorithm>
 
 void jt::Star::setPosition(jt::Vector2f const& screenSizeHint)
 {
@@ -81,7 +81,7 @@ void jt::Star::updateStarBrightness()
     auto col = m_shape->getColor();
     col.a = alpha;
     m_shape->setColor(col);
-    col.a = jt::MathHelper::clamp(col.a, std::uint8_t { 20u }, m_starAlphaMax);
+    col.a = std::clamp(col.a, std::uint8_t { 20u }, m_starAlphaMax);
     m_glow->setColor(col);
 }
 

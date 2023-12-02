@@ -25,13 +25,13 @@ public:
 
     /// Get line Vector from start to end of the line
     /// \return line vector
-    jt::Vector2f getLineVector() const;
+    jt::Vector2f getLineVector() const noexcept;
 
     void setColor(jt::Color const& col) override;
     jt::Color getColor() const override;
 
-    void setPosition(jt::Vector2f const& pos) override;
-    jt::Vector2f getPosition() const override;
+    void setPosition(jt::Vector2f const& pos) noexcept override;
+    jt::Vector2f getPosition() const noexcept override;
 
     jt::Rectf getGlobalBounds() const override;
     jt::Rectf getLocalBounds() const override;
@@ -49,8 +49,8 @@ private:
     void doDrawFlash(std::shared_ptr<jt::RenderTargetLayer> const sptr) const override;
     void doDrawShadow(std::shared_ptr<jt::RenderTargetLayer> const sptr) const override;
     void doDrawOutline(std::shared_ptr<jt::RenderTargetLayer> const sptr) const override;
-    void doUpdate(float elapsed) override;
-    void doRotate(float d) override;
+    void doUpdate(float elapsed) noexcept override;
+    void doRotate(float d) noexcept override;
 };
 
 } // namespace jt

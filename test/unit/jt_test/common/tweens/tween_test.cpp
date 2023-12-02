@@ -119,7 +119,7 @@ TEST_F(TweenBaseTest, SkipFrames)
     tb t(m_obj, 1.0f);
     int const skipFrames = 2;
 
-    t.setSkipFrames(skipFrames);
+    t.setSkipTicks(skipFrames);
     EXPECT_EQ(t.getSkipFrames(), skipFrames);
 
     // expect first two calls to update to do nothing (regardless of update time)

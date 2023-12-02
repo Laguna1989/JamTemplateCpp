@@ -120,7 +120,7 @@ void jt::Console::renderOneLogEntry(jt::LogEntry const& entry) const
 
     std::string tagText = "";
     if (m_drawTag) {
-        for (auto& t : entry.tags) {
+        for (auto const& t : entry.tags) {
             tagText += "<" + t + ">";
         }
         if (!entry.tags.empty()) {
@@ -163,10 +163,9 @@ void jt::Console::renderOneLogEntry(jt::LogEntry const& entry) const
     ImGui::PopStyleColor();
 }
 
-int jt::Console::inputUserCallback(ImGuiInputTextCallbackData* data)
+int jt::Console::inputUserCallback(ImGuiInputTextCallbackData* data) const
 {
-    switch (data->EventFlag) {
-    case ImGuiInputTextFlags_CallbackHistory: {
+    if (data->EventFlag == ImGuiInputTextFlags_CallbackHistory) {
         // Example of HISTORY
         int const prev_history_pos = m_historyPos;
         if (data->EventKey == ImGuiKey_UpArrow) {
@@ -183,11 +182,11 @@ int jt::Console::inputUserCallback(ImGuiInputTextCallbackData* data)
         // A better implementation would preserve the data on the current input line along with
         // cursor position.
         if (prev_history_pos != m_historyPos) {
-            std::string history_str = (m_historyPos >= 0) ? History[m_historyPos] : "";
+            std::string const history_str = (m_historyPos >= 0) ? History[m_historyPos] : "";
             data->DeleteChars(0, data->BufTextLen);
             data->InsertChars(0, history_str.c_str());
         }
     }
-    }
+
     return 0;
 }

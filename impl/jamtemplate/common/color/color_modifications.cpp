@@ -2,6 +2,7 @@
 #include "math_helper.hpp"
 #include <color/color_conversions.hpp>
 #include <cmath>
+#include <algorithm>
 #include <concepts>
 
 namespace {
@@ -24,7 +25,7 @@ jt::Color jt::ColorModifications::desaturate(
 {
     return conversionHelper(initialColor, [&desaturationAmount](auto h, auto s, auto v) {
         s -= desaturationAmount;
-        s = jt::MathHelper::clamp(s, 0.0f, 100.0f);
+        s = std::clamp(s, 0.0f, 100.0f);
         return std::make_tuple(h, s, v);
     });
 }
@@ -47,7 +48,7 @@ jt::Color jt::ColorModifications::darken(jt::Color const& initialColor, float va
 {
     return conversionHelper(initialColor, [&value](auto h, auto s, auto v) {
         v -= value;
-        v = jt::MathHelper::clamp(v, 0.0f, 100.0f);
+        v = std::clamp(v, 0.0f, 100.0f);
         return std::make_tuple(h, s, v);
     });
 }

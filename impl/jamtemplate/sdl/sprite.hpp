@@ -23,7 +23,14 @@ public:
         jt::TextureManagerInterface& textureManager);
 
     // DO NOT CALL THIS FROM GAME CODE!
-    void fromTexture(std::shared_ptr<SDL_Texture> txt);
+    void fromTexture(std::shared_ptr<SDL_Texture> const& txt);
+
+    // WARNING: This function is slow, because it needs to copy
+    // graphics memory to ram first.
+    jt::Color getColorAtPixel(jt::Vector2u pixelPos) const;
+
+    void cleanImage() noexcept;
+
 
     void setPosition(jt::Vector2f const& pos) override;
     jt::Vector2f getPosition() const override;
@@ -36,12 +43,6 @@ public:
 
     virtual void setScale(jt::Vector2f const& scale) override;
     virtual jt::Vector2f getScale() const override;
-
-    // WARNING: This function is slow, because it needs to copy
-    // graphics memory to ram first.
-    jt::Color getColorAtPixel(jt::Vector2u pixelPos) const;
-
-    void cleanImage();
 
 private:
     mutable std::shared_ptr<SDL_Texture> m_text;
@@ -61,7 +62,7 @@ private:
     void doDrawShadow(std::shared_ptr<jt::RenderTargetLayer> const sptr) const override;
     void doDraw(std::shared_ptr<jt::RenderTargetLayer> const sptr) const override;
     void doDrawFlash(std::shared_ptr<jt::RenderTargetLayer> const sptr) const override;
-    void doRotate(float /*rot*/) override;
+    void doRotate(float /*rot*/) noexcept override;
 
     SDL_Rect getDestRect(jt::Vector2f const& positionOffset = jt::Vector2f { 0.0f, 0.0f }) const;
     SDL_Rect getSourceRect() const;

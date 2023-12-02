@@ -46,7 +46,8 @@ Palette PaletteBuilder::create() const { return Palette { m_colors }; }
 PaletteBuilder& PaletteBuilder::addColorsFromGPL(std::string const& gplFileContent)
 {
     auto const newColors = parseGPLImpl(gplFileContent);
-    m_colors.insert(m_colors.end(), newColors.cbegin(), newColors.cend());
+    m_colors.insert(
+        m_colors.end(), std::move_iterator(newColors.begin()), std::move_iterator(newColors.end()));
     return *this;
 }
 
@@ -59,7 +60,8 @@ PaletteBuilder& PaletteBuilder::addGradientH(
         auto const h = hmin + step * delta;
         colors.emplace_back(jt::ColorFactory::fromHSV(h, s, v));
     }
-    m_colors.insert(m_colors.end(), colors.cbegin(), colors.cend());
+    m_colors.insert(
+        m_colors.end(), std::move_iterator(colors.begin()), std::move_iterator(colors.end()));
     return *this;
 }
 
@@ -72,7 +74,8 @@ PaletteBuilder& PaletteBuilder::addGradientS(
         auto const s = smin + step * delta;
         colors.emplace_back(jt::ColorFactory::fromHSV(h, s, v));
     }
-    m_colors.insert(m_colors.end(), colors.cbegin(), colors.cend());
+    m_colors.insert(
+        m_colors.end(), std::move_iterator(colors.begin()), std::move_iterator(colors.end()));
     return *this;
 }
 
@@ -86,7 +89,8 @@ PaletteBuilder& PaletteBuilder::addGradientV(
         colors.emplace_back(jt::ColorFactory::fromHSV(h, s, v));
     }
 
-    m_colors.insert(m_colors.end(), colors.cbegin(), colors.cend());
+    m_colors.insert(
+        m_colors.end(), std::move_iterator(colors.begin()), std::move_iterator(colors.end()));
     return *this;
 }
 
@@ -109,7 +113,8 @@ PaletteBuilder& PaletteBuilder::addColorsFromPicture(Sprite& sprite)
     colorsFromSprite.erase(
         SystemHelper::remove_duplicates(colorsFromSprite.begin(), colorsFromSprite.end()),
         colorsFromSprite.end());
-    m_colors.insert(m_colors.end(), colorsFromSprite.cbegin(), colorsFromSprite.cend());
+    m_colors.insert(m_colors.end(), std::move_iterator(colorsFromSprite.begin()),
+        std::move_iterator(colorsFromSprite.end()));
     return *this;
 }
 
@@ -143,7 +148,7 @@ PaletteBuilder& PaletteBuilder::applyToPalette(
     for (auto& c : m_colors) {
         c = function(c);
     }
-    
+
     return *this;
 }
 

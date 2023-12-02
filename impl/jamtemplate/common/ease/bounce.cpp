@@ -4,9 +4,12 @@ namespace jt {
 namespace ease {
 namespace bounce {
 
-float easeIn(float t, float b, float c, float d) { return c - easeOut(d - t, 0, c, d) + b; }
+float easeIn(float t, float b, float c, float d) noexcept
+{
+    return c - easeOut(d - t, 0, c, d) + b;
+}
 
-float easeOut(float t, float b, float c, float d)
+float easeOut(float t, float b, float c, float d) noexcept
 {
     if ((t /= d) < (1 / 2.75f)) {
         return c * (7.5625f * t * t) + b;
@@ -22,7 +25,7 @@ float easeOut(float t, float b, float c, float d)
     }
 }
 
-float easeInOut(float t, float b, float c, float d)
+float easeInOut(float t, float b, float c, float d) noexcept
 {
     if (t < d / 2)
         return easeIn(t * 2, 0, c, d) * .5f + b;

@@ -18,7 +18,7 @@ class GameInterface;
 class GameObject : public jt::GameObjectInterface, public CountedObj<GameObject> {
 public:
     /// Destructor
-    virtual ~GameObject() = default;
+    ~GameObject() override = default;
 
     /// Create the GameObject. It is expected that SetGameInstance was called before.
     ///
@@ -72,7 +72,7 @@ public:
 
     /// Get the name of the Object. Should be overwritten by the derived class
     /// \return the name of the GameObject.
-    virtual std::string getName() const override;
+    std::string getName() const override;
 
     /// Get the number of alive gameobjects.
     std::size_t getNumberOfAliveGameObjects() const;

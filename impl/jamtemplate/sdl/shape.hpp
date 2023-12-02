@@ -41,8 +41,8 @@ private:
     void doDraw(std::shared_ptr<jt::RenderTargetLayer> const sptr) const override;
     void doDrawFlash(std::shared_ptr<jt::RenderTargetLayer> const sptr) const override;
 
-    void doUpdate(float /*elapsed*/) override;
-    void doRotate(float /*rot*/) override;
+    void doUpdate(float /*elapsed*/) noexcept override;
+    void doRotate(float /*rot*/) noexcept override;
 
     SDL_Rect getDestRect(jt::Vector2f const& positionOffset = jt::Vector2f { 0, 0 }) const;
 

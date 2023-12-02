@@ -37,7 +37,7 @@ float jt::Sound::getPosition() const { return m_sound.getCurrentOffsetInSeconds(
 
 void jt::Sound::setPitch(float pitch)
 {
-    if (pitch <= 0.0f) {
+    if (pitch <= 0.0f) [[unlikely]] {
         throw std::invalid_argument { "Pitch has to be greater than 0." };
     }
     m_sound.setPitch(pitch);

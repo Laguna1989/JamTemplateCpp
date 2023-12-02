@@ -12,18 +12,17 @@ public:
 private:
     mutable bool m_showInfo { false };
 
-    jt::CircularBuffer<float, 200u> m_frameTimes;
+    jt::CircularBuffer<float, 256u> m_frameTimes;
     std::vector<float> m_frameTimesVector;
 
     mutable std::uint16_t m_numberOfUpdatesInThisFrame { 0 };
-    mutable jt::CircularBuffer<float, 200u> m_numberOfUpdatesInLastFrame;
+    mutable jt::CircularBuffer<float, 256u> m_numberOfUpdatesInLastFrame;
 
-    jt::CircularBuffer<float, 800u> m_GameObjectAliveCount;
+    jt::CircularBuffer<float, 1024u> m_GameObjectAliveCount;
     std::vector<float> m_GameObjectAliveCountVector;
 
-    virtual void doCreate();
-    virtual void doUpdate(float const /*elapsed*/);
-    virtual void doDraw() const;
+    void doUpdate(float const /*elapsed*/) override;
+    void doDraw() const override;
 };
 } // namespace jt
 

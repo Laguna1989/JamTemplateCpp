@@ -12,7 +12,7 @@ namespace jt {
 
 class TextureManagerImpl : public jt::TextureManagerInterface {
 public:
-    TextureManagerImpl(std::shared_ptr<jt::RenderTargetLayer> renderer);
+    explicit TextureManagerImpl(std::shared_ptr<jt::RenderTargetLayer> renderer);
     std::shared_ptr<SDL_Texture> get(std::string const& str) override;
 
     // reset all stored images
@@ -20,7 +20,7 @@ public:
 
     std::string getFlashName(std::string const& str) override;
 
-    std::size_t getNumberOfTextures() override;
+    std::size_t getNumberOfTextures() noexcept override;
 
 private:
     std::map<std::string, std::shared_ptr<SDL_Texture>> m_textures;

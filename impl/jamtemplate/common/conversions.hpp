@@ -11,22 +11,22 @@ namespace Conversion {
 /// Convert box2d vector to jt vector
 /// \param v the box2d vector
 /// \return the jt vector
-jt::Vector2f vec(b2Vec2 const& v);
+jt::Vector2f vec(b2Vec2 const& v) noexcept;
 
 /// Convert jt vector to box2d vector
 /// \param v the jt vector
 /// \return the box2d vector
-b2Vec2 vec(jt::Vector2f const& v);
+b2Vec2 vec(jt::Vector2f const& v) noexcept;
 
 /// convert tson vector to jt vector
 /// \param v the tson vector
 /// \return the jt vector
-jt::Vector2f vec(tson::Vector2f const& v);
+jt::Vector2f vec(tson::Vector2f const& v) noexcept;
 
 /// convert jt vector to tson vector
 /// \param v the jt vector
 /// \return the tson vector
-jt::Vector2f vec(tson::Vector2i const& v);
+jt::Vector2f vec(tson::Vector2i const& v) noexcept;
 
 } // namespace Conversion
 } // namespace jt

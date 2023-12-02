@@ -40,16 +40,20 @@ void jt::Logger::info(std::string const& string, std::vector<std::string> const&
 
 void jt::Logger::debug(std::string const& string, std::vector<std::string> const& tags)
 {
+#ifdef JT_ENABLE_DEBUG
     if (m_logLevel >= LogLevel::Debug) {
         addLogEntry(LogEntry { string, "", LogLevel::Debug, tags });
     }
+#endif
 }
 
 void jt::Logger::verbose(std::string const& string, std::vector<std::string> const& tags)
 {
+#ifdef JT_ENABLE_DEBUG
     if (m_logLevel >= LogLevel::Verbose) {
         addLogEntry(LogEntry { string, "", LogLevel::Verbose, tags });
     }
+#endif
 }
 
 void jt::Logger::addLogTarget(std::shared_ptr<jt::LogTargetInterface> target)

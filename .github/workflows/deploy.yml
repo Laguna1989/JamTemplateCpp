@@ -75,6 +75,7 @@ jobs:
           cmake -G Ninja \
           -B ${{github.workspace}}/build \
           -DJT_ENABLE_UNITTESTS=OFF \
+          -DJT_ENABLE_DEBUG=OFF \
           -DCMAKE_BUILD_TYPE=Release \
           -DJT_ENABLE_DEMOS=OFF \
           -DJT_ENABLE_LTO_OPTIMIZATION=ON \
@@ -125,6 +126,7 @@ jobs:
           emcmake cmake \
           -B ${{github.workspace}}/build \
           -DCMAKE_BUILD_TYPE=Release \
+          -DJT_ENABLE_DEBUG=OFF \
           -DJT_ENABLE_LTO_OPTIMIZATION=ON \
           -DJT_ENABLE_DEMOS=OFF \
           -DJT_ENABLE_UNITTESTS=OFF \
@@ -189,6 +191,7 @@ jobs:
         run: |
           cmake \
           -DJT_ENABLE_DEMOS=OFF \
+          -DJT_ENABLE_DEBUG=OFF \
           -DJT_ENABLE_UNITTESTS=OFF \
           -DCMAKE_BUILD_TYPE=Release \
           -B ${{github.workspace}}/build .

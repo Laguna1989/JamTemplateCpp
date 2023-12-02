@@ -9,26 +9,26 @@ namespace jt {
 
 class KeyboardInterface {
 public:
-    /// Update the the Keyboard State
+    /// Update the Keyboard State
     virtual void updateKeys() = 0;
 
     /// Check if a key is pressed
-    /// \param k the key
+    /// \param k key
     /// \return true if pressed, false otherwise
     virtual bool pressed(jt::KeyCode k) = 0;
 
     /// Check if a key is released
-    /// \param k the key
+    /// \param k key
     /// \return true if released, false otherwise
     virtual bool released(jt::KeyCode k) = 0;
 
     /// Check if a key is just pressed
-    /// \param k the key
+    /// \param k key
     /// \return true if just pressed, false otherwise
     virtual bool justPressed(jt::KeyCode k) = 0;
 
     /// Check if a key is just released
-    /// \param k the key
+    /// \param k key
     /// \return true if just released, false otherwise
     virtual bool justReleased(jt::KeyCode k) = 0;
 
