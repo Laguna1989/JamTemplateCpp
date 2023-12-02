@@ -343,9 +343,10 @@ void jt::Animation::doUpdate(float elapsed)
     // proceed time
     m_frameTime += elapsed * m_animationplaybackSpeed;
 
+    auto const frame_time = m_time[m_currentAnimName][m_currentIdx];
     // increase index
-    while (m_frameTime >= m_time[m_currentAnimName][m_currentIdx]) {
-        m_frameTime -= m_time[m_currentAnimName][m_currentIdx];
+    while (m_frameTime >= frame_time) {
+        m_frameTime -= frame_time;
         m_currentIdx++;
     }
     // wrap index or fix index at last frame
