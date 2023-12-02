@@ -7,6 +7,7 @@
 #include <bit>
 #include <cmath>
 #include <numbers>
+#include <numeric>
 #include <string>
 #include <utility>
 #include <vector>
@@ -65,10 +66,7 @@ float qlength(jt::Vector2f const& v);
 /// Calculate the length of a vector
 /// \param v vector to calculate length of
 /// \return length
-constexpr float length(jt::Vector2f const& v)
-{
-    return std::sqrt(jt::MathHelper::lengthSquared(v));
-}
+float length(jt::Vector2f const& v);
 
 /// CalculateDistanceBetween the two points
 /// \param a position a
@@ -109,15 +107,7 @@ constexpr float deg2rad(float alphaInDegree) noexcept
 /// \param in input vector
 /// \param aInDegree angle in degree
 /// \return rotated output vector
-constexpr jt::Vector2f rotateBy(jt::Vector2f const& in, float aInDegree) noexcept
-{
-    float const x = static_cast<float>(cos(deg2rad(aInDegree))) * in.x
-        - static_cast<float>(sin(deg2rad(aInDegree))) * in.y;
-    float const y = static_cast<float>(sin(deg2rad(aInDegree))) * in.x
-        + static_cast<float>(cos(deg2rad(aInDegree))) * in.y;
-
-    return jt::Vector2f { x, y };
-}
+jt::Vector2f rotateBy(jt::Vector2f const& in, float aInDegree) noexcept;
 
 /// angle in degree between argument vector and the x axis
 /// \param in input vector

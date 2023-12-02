@@ -1,6 +1,7 @@
 #include "node_layer.hpp"
 #include <pathfinder/node.hpp>
 #include <utility>
+#include <algorithm>
 
 jt::tilemap::NodeLayer::NodeLayer(std::vector<std::shared_ptr<jt::tilemap::TileNode>> nodeTiles)
     : m_nodeTiles { std::move(nodeTiles) }

@@ -3,6 +3,7 @@
 #include <color_lib.hpp>
 #include <sprite_functions.hpp>
 #include <strutils.hpp>
+#include <array>
 #include <stdexcept>
 
 namespace {
