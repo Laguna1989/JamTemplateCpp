@@ -7,7 +7,7 @@
 #include <input/input_manager.hpp>
 #include <lerp.hpp>
 #include <log/license_info.hpp>
-#include <math_helper.hpp>
+#include <algorithm>
 #include <screeneffects/vignette.hpp>
 #include <state_game.hpp>
 #include <state_manager/state_manager_transition_fade_to_black.hpp>

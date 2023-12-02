@@ -5,6 +5,7 @@
 #include <math_helper.hpp>
 #include <strutils.hpp>
 #include <iostream>
+#include <algorithm>
 
 TemperatureManager::TemperatureManager(
     std::vector<std::shared_ptr<jt::pathfinder::NodeInterface>> nodes,

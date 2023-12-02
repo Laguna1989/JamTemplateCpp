@@ -3,7 +3,7 @@
 #include <game_interface.hpp>
 #include <random/random.hpp>
 #include <screeneffects/screen_wrap.hpp>
-#include <iostream>
+#include <algorithm>
 
 void jt::Star::setPosition(jt::Vector2f const& screenSizeHint)
 {

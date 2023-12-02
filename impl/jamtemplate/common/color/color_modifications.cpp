@@ -2,6 +2,7 @@
 #include "math_helper.hpp"
 #include <color/color_conversions.hpp>
 #include <cmath>
+#include <algorithm>
 #include <concepts>
 
 namespace {

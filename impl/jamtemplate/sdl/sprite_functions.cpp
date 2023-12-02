@@ -4,6 +4,7 @@
 #include <sdl_helper.hpp>
 #include <cmath>
 #include <numbers>
+#include <algorithm>
 
 namespace jt {
 

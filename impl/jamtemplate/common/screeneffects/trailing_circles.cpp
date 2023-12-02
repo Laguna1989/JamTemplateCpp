@@ -1,6 +1,7 @@
 #include "trailing_circles.hpp"
 #include <random/random.hpp>
 #include <tweens/tween_alpha.hpp>
+#include <algorithm>
 
 void jt::TrailingCircles::doCreate()
 {

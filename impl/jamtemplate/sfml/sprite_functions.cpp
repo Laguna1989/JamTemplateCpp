@@ -2,6 +2,7 @@
 #include <color_lib.hpp>
 #include <math_helper.hpp>
 #include <random/random.hpp>
+#include <algorithm>
 #include <cmath>
 #include <numbers>
 

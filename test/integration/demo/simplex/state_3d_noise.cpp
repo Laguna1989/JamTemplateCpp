@@ -4,6 +4,7 @@
 #include <shape.hpp>
 #include <state_select.hpp>
 #include <algorithm>
+#include <algorithm>
 
 void State3DNoise::onCreate() { }
 
