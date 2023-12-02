@@ -10,18 +10,18 @@ public:
     /// Constructor
     explicit Camera(float zoom = 1.0f);
 
-    jt::Vector2f getCamOffset() override;
-    void setCamOffset(jt::Vector2f const& ofs) override;
-    void move(jt::Vector2f const& v) override;
+    jt::Vector2f getCamOffset() noexcept override;
+    void setCamOffset(jt::Vector2f const& ofs) noexcept override;
+    void move(jt::Vector2f const& v) noexcept override;
 
-    float getZoom() const override;
-    void setZoom(float zoom) override;
+    float getZoom() const noexcept override;
+    void setZoom(float zoom) noexcept override;
 
-    void shake(float t, float strength, float shakeInterval = 0.005f) override;
+    void shake(float t, float strength, float shakeInterval = 0.005f) noexcept override;
 
-    jt::Vector2f getShakeOffset() override;
+    jt::Vector2f getShakeOffset() const noexcept override;
 
-    void reset() override;
+    void reset() noexcept override;
 
     void update(float elapsed) override;
 
@@ -43,7 +43,6 @@ private:
 
     virtual void updateShake(float elapsed);
     virtual void resetShake();
-    void setDefaultRandomFunction();
 };
 } // namespace jt
 

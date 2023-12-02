@@ -1,7 +1,7 @@
 #include "game_object_collection.hpp"
 #include <algorithm>
 
-void jt::GameObjectCollection::clear()
+void jt::GameObjectCollection::clear() noexcept
 {
     m_objects.clear();
     m_objectsToAdd.clear();
@@ -47,7 +47,7 @@ void jt::GameObjectCollection::addNewObjects()
     m_objectsToAdd.clear();
 }
 
-std::size_t jt::GameObjectCollection::size() const
+std::size_t jt::GameObjectCollection::size() const noexcept
 {
     return m_objectsToAdd.size() + m_objects.size();
 }

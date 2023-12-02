@@ -124,3 +124,26 @@ TEST(CheckForValidFile, ReturnsFalseForInvalidFile)
     auto const path = "assets/__non_existing_file.blarz";
     ASSERT_FALSE(jt::SystemHelper::checkForValidFile(path));
 }
+
+TEST(SelectRandomlyIterators, RaisesExceptionIfStartIsEnd)
+{
+    std::vector const numbers { 1, 2, 3, 4 };
+    ASSERT_THROW(jt::SystemHelper::select_randomly(numbers.cbegin(), numbers.cbegin()),
+        std::invalid_argument);
+}
+
+TEST(SelectRandomlyContainer, RaisesExceptionOnEmptyContainer)
+{
+    std::vector<int> const numbers {};
+    ASSERT_THROW(jt::SystemHelper::select_randomly(numbers), std::invalid_argument);
+}
+
+TEST(SelectRandomlyContainer, PicksRandomElement)
+{
+    std::vector const numbers { 1, 2, 3, 4 };
+    for (auto i = 0u; i != 100u; ++i) {
+        auto number = jt::SystemHelper::select_randomly(numbers);
+        ASSERT_GE(number, numbers.front());
+        ASSERT_LE(number, numbers.back());
+    };
+}

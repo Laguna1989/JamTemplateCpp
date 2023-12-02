@@ -13,7 +13,7 @@ InventoryList::InventoryList(std::weak_ptr<ItemRepository> repo)
 
 void InventoryList::addItem(std::string const& refId)
 {
-    if (m_inventory.count(refId) == 0) {
+    if (!m_inventory.contains(refId)) {
         m_inventory[refId] = 0;
     }
     m_inventory[refId]++;
@@ -91,7 +91,7 @@ void InventoryList::removeItemToDrop()
     if (m_itemToDrop == "") {
         return;
     }
-    if (m_inventory.count(m_itemToDrop) == 0) {
+    if (!m_inventory.contains(m_itemToDrop)) {
         return;
     }
     if (m_inventory[m_itemToDrop] == 0) {

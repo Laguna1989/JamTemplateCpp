@@ -15,7 +15,7 @@ public:
     void add(std::shared_ptr<jt::TweenInterface> tween);
 
     /// clear all tweens
-    void clear();
+    void clear() noexcept;
 
     ///  update all tweens in the collecion. This will also remove all tweens that are no
     /// longer alive
@@ -24,7 +24,7 @@ public:
 
     /// size of the collecion
     /// \return number of tweens in the collection
-    std::size_t size() const;
+    std::size_t size() const noexcept;
 
 private:
     /// all tweens running in this collection

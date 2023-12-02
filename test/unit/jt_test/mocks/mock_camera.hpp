@@ -12,7 +12,7 @@ public:
     MOCK_METHOD(float, getZoom, (), (const, override));
     MOCK_METHOD(void, setZoom, (float), (override));
     MOCK_METHOD(void, shake, (float, float, float), (override));
-    MOCK_METHOD(jt::Vector2f, getShakeOffset, (), (override));
+    MOCK_METHOD(jt::Vector2f, getShakeOffset, (), (const, override));
     MOCK_METHOD(void, update, (float), (override));
     MOCK_METHOD(void, reset, (), (override));
 };

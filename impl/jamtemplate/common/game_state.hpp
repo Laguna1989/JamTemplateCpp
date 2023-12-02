@@ -20,7 +20,7 @@ public:
     GameState();
 
     /// Destructor
-    virtual ~GameState();
+    ~GameState() override;
 
     /// Add a GameObject to the GameState
     ///
@@ -36,42 +36,42 @@ public:
 
     /// Get the number of GameObjects in the State
     /// \return the number of gameobjects
-    std::size_t getNumberOfObjects() const;
+    std::size_t getNumberOfObjects() const noexcept;
 
     /// Enter the GameState
     void enter();
 
     /// Check if the State has been initialized
     /// \return true if initialized, false otherwise
-    bool hasBeenInitialized() const;
+    bool hasBeenInitialized() const noexcept;
 
     /// Set auto update of Objects
     /// note: if the user sets autoupdate to false,
     /// he has to take care to do the respective calls himself
     /// \param performAutoUpdate
-    void setAutoUpdateObjects(bool performAutoUpdate);
+    void setAutoUpdateObjects(bool performAutoUpdate) noexcept;
 
     /// Get auto update of Objects
     /// \return
-    bool getAutoUpdateObjects() const;
+    bool getAutoUpdateObjects() const noexcept;
 
     /// Set auto update of Tweens
     /// note: if the user sets autoupdate to false,
     /// he has to take care to do the respective calls himself
     /// \param performAutoUpdate
-    void setAutoUpdateTweens(bool performAutoUpdate);
+    void setAutoUpdateTweens(bool performAutoUpdate) noexcept;
 
     /// Get auto updates of tweens
     /// \return
-    bool getAutoUpdateTweens() const;
+    bool getAutoUpdateTweens() const noexcept;
 
     /// Set auto draw of Objects
     /// \param performAudoDraw
-    void setAutoDraw(bool performAudoDraw);
+    void setAutoDraw(bool performAudoDraw) noexcept;
 
     /// Get auto draw of Objects
     /// \return
-    bool getAutoDraw() const;
+    bool getAutoDraw() const noexcept;
 
 protected:
     void updateObjects(float elapsed);

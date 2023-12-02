@@ -53,9 +53,9 @@ void Level::loadMovingPlatforms(jt::tilemap::TilesonLoader& loader)
     auto const platform_infos = loader.loadObjectsFromLayer("platforms");
     std::map<std::string, std::pair<jt::Vector2f, float>> allPositionsInLevel;
     for (auto const& p : platform_infos) {
-        if (p.properties.strings.count("type") == 0) {
+        if (!p.properties.strings.contains("type")) {
             float waitTime = 0.0f;
-            if (p.properties.floats.count("wait")) {
+            if (p.properties.floats.contains("wait")) {
                 waitTime = p.properties.floats.at("wait");
             }
             allPositionsInLevel[p.name] = std::make_pair(p.position, waitTime);
@@ -67,7 +67,7 @@ void Level::loadMovingPlatforms(jt::tilemap::TilesonLoader& loader)
             auto const positionsString = p.properties.strings.at("positions");
             auto const individualPositionStrings = strutil::split(positionsString, ",");
             for (auto const& ps : individualPositionStrings) {
-                if (allPositionsInLevel.count(ps) == 0) {
+                if (!allPositionsInLevel.contains(ps)) {
                     getGame()->logger().warning("position not found in level: " + ps, { "level" });
                 }
                 currentPlatformPositions.push_back(allPositionsInLevel[ps]);
@@ -110,7 +110,7 @@ void Level::loadLevelSize(jt::tilemap::TilesonLoader const& loader)
 
 void Level::loadLevelKillboxes(jt::tilemap::TilesonLoader& loader)
 {
-    auto killboxInfos = loader.loadObjectsFromLayer("killboxes");
+    auto const killboxInfos = loader.loadObjectsFromLayer("killboxes");
     for (auto const& i : killboxInfos) {
         std::string name { i.name };
         std::string type { "" };

@@ -18,11 +18,12 @@ public:
     using Sptr = std::shared_ptr<Button>;
 
     /// Constructor, creates a button with the given size
-    /// \param size the size of the button in pixel
+    /// \param size size of the button in pixel
+    /// \param textureManager texture manager
     Button(Vector2u const& size, jt::TextureManagerInterface& textureManager);
-    ~Button();
+    ~Button() override;
 
-    Button(const Button& b) = delete;
+    Button(Button const& b) = delete;
     Button(Button&& b) = default;
 
     /// Set the drawable (e.g. the icon or text of the button)
@@ -50,11 +51,11 @@ public:
 
     /// Set the visibility of the button (invisible buttons can not be clicked)
     /// \param isVisible
-    void setVisible(bool isVisible);
+    void setVisible(bool isVisible) noexcept;
 
     /// Get the visibility
     /// \return true if visible, false otherwise
-    bool getVisible() const;
+    bool getVisible() const noexcept;
 
     /// Set the button active status (inactive buttons are drawn but can not be clicked)
     /// \param isActive
@@ -66,10 +67,10 @@ public:
 
     /// Set the position of the Button
     /// \param newPosition
-    void setPosition(jt::Vector2f const& newPosition);
+    void setPosition(jt::Vector2f const& newPosition) noexcept;
 
     /// Get the position of the Button
-    jt::Vector2f getPosition(void) const;
+    jt::Vector2f getPosition(void) const noexcept;
 
     std::shared_ptr<jt::DrawableInterface> getBackground();
 

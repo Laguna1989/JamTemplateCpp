@@ -21,15 +21,15 @@ public:
 
     ObjectGroup() = default;
 
-    auto begin() { return m_data.begin(); }
+    auto begin() noexcept { return m_data.begin(); }
 
-    auto end() { return m_data.end(); }
+    auto end() noexcept { return m_data.end(); }
 
-    auto cbegin() const { return m_data.cbegin(); }
+    auto cbegin() const noexcept { return m_data.cbegin(); }
 
-    auto cend() const { return m_data.cend(); }
+    auto cend() const noexcept { return m_data.cend(); }
 
-    auto size() const { return m_data.size(); }
+    auto size() const noexcept { return m_data.size(); }
 
     auto at(std::size_t idx) { return m_data.at(idx); }
 
@@ -50,13 +50,13 @@ private:
 };
 
 template <typename T>
-auto begin(ObjectGroup<T>& obj)
+auto begin(ObjectGroup<T>& obj) noexcept
 {
     return obj.begin();
 }
 
 template <typename T>
-auto end(ObjectGroup<T>& obj)
+auto end(ObjectGroup<T>& obj) noexcept
 {
     return obj.end();
 }

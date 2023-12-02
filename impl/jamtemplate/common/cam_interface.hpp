@@ -37,7 +37,7 @@ public:
 
     /// Get the shakeOffset of the camera
     /// \return the current shake offset
-    virtual jt::Vector2f getShakeOffset() = 0;
+    virtual jt::Vector2f getShakeOffset() const = 0;
 
     /// Update the camera
     /// \param elapsed the elapsed time

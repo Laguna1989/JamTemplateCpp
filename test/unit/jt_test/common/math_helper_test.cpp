@@ -201,29 +201,6 @@ TEST(RotateByTestFixture, MinusNinetyDegree)
     ASSERT_NEAR(initial3.y, rotated4.y, 0.001f);
 }
 
-TEST(ClampTest, inside)
-{
-    float const in { 0.5f };
-    float const out = clamp(in, 0.0f, 1.0f);
-    ASSERT_EQ(in, out);
-}
-
-TEST(ClampTest, lower)
-{
-    float const in { -0.5f };
-    float const lower { 0.0f };
-    float const out = clamp(in, lower, 1.0f);
-    ASSERT_EQ(lower, out);
-}
-
-TEST(ClampTest, upper)
-{
-    float const in { 2.5f };
-    float const upper { 2.2f };
-    float const out = clamp(in, 0.0f, upper);
-    ASSERT_EQ(upper, out);
-}
-
 TEST(ClampVectorTest, inside)
 {
     jt::Vector2f const in { 0.5f, 0.5f };

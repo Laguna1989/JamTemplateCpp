@@ -22,9 +22,9 @@ class IndexWrapper<size, typename std::enable_if<jt::MathHelper::isPowerOfTwo(si
 public:
     static_assert(size != 0, "Error: Cannot create IndexWrapper with capacity 0");
 
-    std::size_t wrap(std::size_t const index) const { return index & m_mask; }
+    std::size_t wrap(std::size_t const index) const noexcept { return index & m_mask; }
 
-    std::size_t getSize() const { return size; }
+    std::size_t getSize() const noexcept { return size; }
 
 private:
     size_t m_mask { size - 1 };
@@ -43,9 +43,9 @@ class IndexWrapper<size, typename std::enable_if<!jt::MathHelper::isPowerOfTwo(s
 public:
     static_assert(size != 0, "Error: Cannot create IndexWrapper with capacity 0");
 
-    std::size_t wrap(std::size_t const index) const { return index % size; }
+    std::size_t wrap(std::size_t const index) const noexcept { return index % size; }
 
-    std::size_t getSize() const { return size; }
+    std::size_t getSize() const noexcept { return size; }
 };
 
 } // namespace detail
@@ -81,31 +81,31 @@ public:
 
     /// Begin iterator
     /// \return begin iterator
-    IteratorT begin() { return m_data.begin(); }
+    IteratorT begin() noexcept { return m_data.begin(); }
 
     /// End iterator
     /// \return
-    IteratorT end() { return m_data.end(); }
+    IteratorT end() noexcept { return m_data.end(); }
 
     /// Begin iterator
     /// \return begin iterator
-    ConstIteratorT begin() const { return m_data.cbegin(); }
+    ConstIteratorT begin() const noexcept { return m_data.cbegin(); }
 
     /// End iterator
     /// \return
-    ConstIteratorT end() const { return m_data.cend(); }
+    ConstIteratorT end() const noexcept { return m_data.cend(); }
 
     /// Const begin iterator
     /// \return const begin iterator
-    ConstIteratorT cbegin() const { return m_data.cbegin(); }
+    ConstIteratorT cbegin() const noexcept { return m_data.cbegin(); }
 
     /// Const end iterator
     /// \return const end iterator
-    ConstIteratorT cend() const { return m_data.cend(); }
+    ConstIteratorT cend() const noexcept { return m_data.cend(); }
 
     /// Capacity of the circular buffer. Size of the underlying array.
     /// \return the total capacity
-    std::size_t capacity() const { return m_data.size(); }
+    std::size_t capacity() const noexcept { return m_data.size(); }
 
     /// Size of valid elements in the buffer
     /// \return the current size
@@ -113,11 +113,11 @@ public:
 
     /// Position of the head
     /// \return the head position
-    std::size_t getHead() const { return m_wrapper.wrap(m_head); }
+    std::size_t getHead() const noexcept { return m_wrapper.wrap(m_head); }
 
     /// Position of the tail
     /// \return the tail position
-    std::size_t getTail() const { return m_wrapper.wrap(m_tail); }
+    std::size_t getTail() const noexcept { return m_wrapper.wrap(m_tail); }
 
     /// Put a new value into the circular buffer (possibly overwriting old values)
     /// \param value the new values
@@ -153,7 +153,7 @@ public:
         return m_data[indexToRead];
     }
 
-    auto data() const { return m_data.data(); }
+    auto data() const noexcept { return m_data.data(); }
 
 private:
     detail::IndexWrapper<N> m_wrapper;

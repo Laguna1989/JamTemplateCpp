@@ -38,8 +38,8 @@ void jt::tilemap::NodeLayer::createNodeConnections()
 
 std::shared_ptr<jt::tilemap::TileNode> jt::tilemap::NodeLayer::getTileAt(jt::Vector2u const& pos)
 {
-    if (m_lookupHelper.count(pos) == 0) {
-        auto it = std::find_if(m_nodeTiles.cbegin(), m_nodeTiles.cend(), [&pos](auto const& tile) {
+    if (!m_lookupHelper.contains(pos)) {
+        auto const it = std::ranges::find_if(std::as_const(m_nodeTiles), [&pos](auto const& tile) {
             auto nodeTilePos = tile->getNode()->getTilePosition();
             return nodeTilePos.x == pos.x && nodeTilePos.y == pos.y;
         });

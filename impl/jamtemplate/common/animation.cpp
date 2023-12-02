@@ -187,7 +187,7 @@ void jt::Animation::loadFromAseprite(
 
 bool jt::Animation::hasAnimation(std::string const& animationName) const
 {
-    return (m_frames.count(animationName) != 0);
+    return (m_frames.contains(animationName));
 }
 
 std::vector<std::string> jt::Animation::getAllAvailableAnimationNames() const
@@ -207,7 +207,7 @@ std::string jt::Animation::getRandomAnimationName() const
             "can not get random animation name if no animation has been added"
         };
     }
-    return jt::SystemHelper::select_randomly(m_frames.cbegin(), m_frames.cend())->first;
+    return jt::SystemHelper::select_randomly(m_frames).first;
 }
 
 void jt::Animation::play(std::string const& animationName, size_t startFrameIndex, bool restart)
@@ -448,7 +448,7 @@ std::size_t jt::Animation::getCurrentAnimationFrameIndex() const { return m_curr
 void jt::Animation::setFrameTimes(
     std::string const& animationName, std::vector<float> const& frameTimes)
 {
-    if (m_frames.count(animationName) == 0) {
+    if (!m_frames.contains(animationName)) {
         throw std::invalid_argument { "cannot set frame times for invalid animation: "
             + animationName };
     }

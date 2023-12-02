@@ -14,23 +14,16 @@ namespace detail {
 struct CellIndex {
     int x { 0 };
     int y { 0 };
-    bool operator==(CellIndex const& other) const = default;
+    constexpr bool operator==(CellIndex const& other) const = default;
+    constexpr bool operator!=(CellIndex const& other) const = default;
 };
 
-inline bool operator!=(CellIndex const& a, CellIndex const& b) { return !(a == b); }
-
-inline CellIndex operator+(CellIndex const& a, CellIndex const& b)
+constexpr CellIndex operator+(CellIndex const& a, CellIndex const& b)
 {
     return CellIndex { a.x + b.x, a.y + b.y };
 }
 
-inline bool operator<(CellIndex const& a, CellIndex const& b)
-{
-    if (a.x == b.x) {
-        return a.y < b.y;
-    }
-    return a.x < b.x;
-}
+bool operator<(CellIndex const& a, CellIndex const& b);
 
 } // namespace detail
 
@@ -38,7 +31,7 @@ inline bool operator<(CellIndex const& a, CellIndex const& b)
 template <typename T, int cellSize>
 class SpatialObjectGrid : public jt::GameObject {
 public:
-    bool empty() const { return m_allObjects.empty(); };
+    bool empty() const noexcept { return m_allObjects.empty(); };
 
     void push_back(std::weak_ptr<T> obj)
     {
@@ -47,7 +40,7 @@ public:
         auto const lockedObject = obj.lock();
         auto const cellIndex = getCellIndex(lockedObject->getPosition());
 
-        if (m_cells.count(cellIndex) == 0) {
+        if (!m_cells.contains(cellIndex)) {
             m_cells[cellIndex] = std::vector<std::weak_ptr<T>> {};
         }
 

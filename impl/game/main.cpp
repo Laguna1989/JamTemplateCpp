@@ -5,7 +5,7 @@
 #include <audio/audio/audio_null.hpp>
 #include <audio/audio/logging_audio.hpp>
 #include <audio/fades/logging_sound_fade_manager.hpp>
-#include <cache_impl.hpp>
+#include <cache/cache_impl.hpp>
 #include <camera.hpp>
 #include <game.hpp>
 #include <game_properties.hpp>

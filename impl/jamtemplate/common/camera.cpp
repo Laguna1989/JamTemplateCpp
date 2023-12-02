@@ -4,27 +4,30 @@
 
 jt::Camera::Camera(float zoom)
 {
-    setZoom(zoom);
+    Camera::setZoom(zoom);
     m_randomFunc = [](float max) { return Random::getFloat(-max, max); };
 };
 
-jt::Vector2f jt::Camera::getCamOffset() { return m_CamOffset; }
-void jt::Camera::setCamOffset(jt::Vector2f const& ofs) { m_CamOffset = ofs; }
-void jt::Camera::move(jt::Vector2f const& v) { m_CamOffset = m_CamOffset + v; }
+jt::Vector2f jt::Camera::getCamOffset() noexcept { return m_CamOffset; }
 
-float jt::Camera::getZoom() const { return m_zoom; }
-void jt::Camera::setZoom(float zoom) { m_zoom = zoom; }
+void jt::Camera::setCamOffset(jt::Vector2f const& ofs) noexcept { m_CamOffset = ofs; }
 
-void jt::Camera::shake(float t, float strength, float shakeInterval)
+void jt::Camera::move(jt::Vector2f const& v) noexcept { m_CamOffset = m_CamOffset + v; }
+
+float jt::Camera::getZoom() const noexcept { return m_zoom; }
+
+void jt::Camera::setZoom(float zoom) noexcept { m_zoom = zoom; }
+
+void jt::Camera::shake(float t, float strength, float shakeInterval) noexcept
 {
     m_shakeTimer = t;
     m_shakeStrength = strength;
     m_shakeInterval = m_shakeIntervalMax = shakeInterval;
 }
 
-jt::Vector2f jt::Camera::getShakeOffset() { return m_shakeOffset; }
+jt::Vector2f jt::Camera::getShakeOffset() const noexcept { return m_shakeOffset; }
 
-void jt::Camera::reset()
+void jt::Camera::reset() noexcept
 {
     m_CamOffset = jt::Vector2f { 0.0f, 0.0f };
     resetShake();

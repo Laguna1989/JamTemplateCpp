@@ -15,7 +15,7 @@ public:
     void setZoom(float zoom) override;
     void shake(float shakeDurationInSeconds, float maxShakeOffsetInPixel,
         float shakeIntervalInSeconds) override;
-    jt::Vector2f getShakeOffset() override;
+    jt::Vector2f getShakeOffset() const override;
     void update(float elapsed) override;
     void reset() override;
 

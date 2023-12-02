@@ -3,13 +3,10 @@
 
 #include <action_commands/action_command_manager_interface.hpp>
 #include <audio/audio/audio_interface.hpp>
-#include <cache_interface.hpp>
-#include <cam_interface.hpp>
+#include <cache/cache_interface.hpp>
 #include <graphics/gfx_interface.hpp>
-#include <graphics/render_window_interface.hpp>
 #include <input/input_manager_interface.hpp>
 #include <log/logger_interface.hpp>
-#include <render_target_layer.hpp>
 #include <state_manager/state_manager_interface.hpp>
 #include <memory>
 

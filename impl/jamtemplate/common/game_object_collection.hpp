@@ -9,7 +9,7 @@ namespace jt {
 class GameObjectCollection {
 public:
     /// clear all GameObjects
-    void clear();
+    void clear() noexcept;
 
     /// Add a new GameObject
     /// \param object the object to add
@@ -24,7 +24,7 @@ public:
 
     /// Get the number of stored GameObjects
     /// \return the number of stored GameObjects
-    std::size_t size() const;
+    std::size_t size() const noexcept;
 
 private:
     /// all objects in the state

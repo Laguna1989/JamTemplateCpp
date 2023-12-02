@@ -9,7 +9,7 @@ jt::ActionCommandManager::ActionCommandManager(jt::LoggerInterface& logger)
 
 void jt::ActionCommandManager::executeCommand(std::string const& fullCommandString)
 {
-    if (fullCommandString.empty())  {
+    if (fullCommandString.empty()) {
         return;
     }
 
@@ -45,7 +45,7 @@ std::vector<std::string> jt::ActionCommandManager::getArguments(
 
 void jt::ActionCommandManager::removeUnusedCommands()
 {
-    jt::SystemHelper::erase_if(m_registeredCommands, [this](auto const& kvp) {
+    std::erase_if(m_registeredCommands, [this](auto const& kvp) {
         auto shared_state = std::get<0>(kvp.second);
         if (shared_state.expired()) {
             m_logger.info("remove command '" + kvp.first + "'");

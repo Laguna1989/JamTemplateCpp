@@ -3,9 +3,9 @@
 
 #include <circular_buffer.hpp>
 #include <game_object.hpp>
+#include <cstddef>
 #include <functional>
 #include <memory>
-#include <cstddef>
 
 namespace jt {
 
@@ -34,8 +34,6 @@ public:
     template <typename InitCallbackT>
     ParticleSystem(InitCallbackT const& init, ResetCallbackType const reset)
         : m_resetCallback { reset }
-        , m_particles {}
-        , m_currentIndex { 0 }
     {
         std::generate(m_particles.begin(), m_particles.end(), init);
     };
@@ -62,8 +60,7 @@ public:
 
 private:
     ResetCallbackType m_resetCallback {};
-    mutable jt::CircularBuffer<std::shared_ptr<T>, N> m_particles;
-
+    mutable jt::CircularBuffer<std::shared_ptr<T>, N> m_particles {};
     std::size_t m_currentIndex { 0u };
 
     void doUpdate(float const elapsed) override

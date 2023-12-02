@@ -45,7 +45,7 @@ void jt::LoggingCamera::shake(
     m_decoratee.shake(shakeDurationInSeconds, maxShakeOffsetInPixel, shakeIntervalInSeconds);
 }
 
-jt::Vector2f jt::LoggingCamera::getShakeOffset()
+jt::Vector2f jt::LoggingCamera::getShakeOffset() const
 {
     m_logger.verbose("getShakeOffset", { "jt", "camera" });
     return m_decoratee.getShakeOffset();

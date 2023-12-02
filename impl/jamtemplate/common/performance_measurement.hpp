@@ -5,12 +5,14 @@
 #include <functional>
 
 namespace jt {
+
 /// Helper function to measure time since a time point.
 /// \param since start time
 /// \return the duration in seconds since the passed value
 float getDurationInSecondsSince(std::chrono::time_point<std::chrono::system_clock> const& since);
 
-/// Generic Template to allow for partial specialization
+/// Generic Template to allow for partial specialization. Specialization is needed for void return
+/// type.
 template <typename>
 struct MeasureTimeGeneric;
 
@@ -36,17 +38,17 @@ struct MeasureTimeGeneric<R(Args...)> {
     R operator()(Args... args) const
     {
         auto const start = std::chrono::system_clock::now();
-        R result = m_func(args...);
+        R const result = m_func(args...);
         m_elapsedTimeInSeconds += getDurationInSecondsSince(start);
         return result;
     }
 
     /// Get the accumulated elapsed time of all function calls
     /// \return elapsed time in seconds
-    float getElapsedTimeInSeconds() const { return m_elapsedTimeInSeconds; }
+    float getElapsedTimeInSeconds() const noexcept { return m_elapsedTimeInSeconds; }
 
     /// reset the timer
-    void resetTimer() { m_elapsedTimeInSeconds = 0.0f; }
+    void resetTimer() noexcept { m_elapsedTimeInSeconds = 0.0f; }
 
 private:
     std::function<R(Args...)> m_func;
@@ -81,11 +83,11 @@ struct MeasureTimeGeneric<void(Args...)> {
 
     /// Get the accumulated elapsed time of all function calls
     /// \return elapsed time in seconds
-    float getElapsedTimeInSeconds() const { return m_elapsedTimeInSeconds; }
+    float getElapsedTimeInSeconds() const noexcept { return m_elapsedTimeInSeconds; }
 
     /// reset the timer
 
-    void resetTimer() { m_elapsedTimeInSeconds = 0.0f; }
+    void resetTimer() noexcept { m_elapsedTimeInSeconds = 0.0f; }
 
 private:
     std::function<void(Args...)> m_func;
@@ -94,10 +96,10 @@ private:
 
 /// Helper function to create a generic TimeMeasurement object
 ///
-/// Note: This is just for convenience. Class template arguments are mandatory, function template
-/// are not. This allows to omit the template arguments when constructing the MeasureTimeGeneric
-/// object.
-/// Note: This needs to be called with std::function type, a plain lambda will not work.
+/// Note: This function is just here for convenience. Class template arguments are mandatory,
+/// function template arguments are not. This allows to omit the template arguments when
+/// constructing the MeasureTimeGeneric object. Note: This needs to be called with std::function
+/// type, a plain lambda will not work.
 ///
 /// \tparam R return value type of the function to be measured
 /// \tparam Args arguments type of the function to be measured

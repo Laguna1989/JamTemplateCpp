@@ -52,18 +52,23 @@ constexpr float qsqrt(float y) { return y * qrsqrt(y); }
 /// Calculate the squared length of a vector
 ///
 /// This function is significantly faster than length, as it does not need to calculate the
-/// squareroot \param v vector to calculate squared length of \return squared length
-float lengthSquared(jt::Vector2f const& v);
+/// squareroot
+///
+/// \param v vector to calculate squared length of \return squared length
+constexpr float lengthSquared(jt::Vector2f const& v) noexcept { return v.x * v.x + v.y * v.y; }
 
-/// Calculate the length of a vector (quick but fast version)
+/// Calculate the length of a vector (quick version that uses an approximation)
 /// \param v vector to calculate length of
-/// \return length
+/// \return length (approximation, usually correct to ~ 0.1)
 float qlength(jt::Vector2f const& v);
 
 /// Calculate the length of a vector
 /// \param v vector to calculate length of
 /// \return length
-float length(jt::Vector2f const& v);
+constexpr float length(jt::Vector2f const& v)
+{
+    return std::sqrt(jt::MathHelper::lengthSquared(v));
+}
 
 /// CalculateDistanceBetween the two points
 /// \param a position a
@@ -117,19 +122,9 @@ constexpr jt::Vector2f rotateBy(jt::Vector2f const& in, float aInDegree) noexcep
 /// angle in degree between argument vector and the x axis
 /// \param in input vector
 /// \return angle in degree between in an x axis
-float angleOf(jt::Vector2f const& in) noexcept;
-
-/// clamp a value to a range [min, max]
-/// \tparam T type
-/// \param value the value
-/// \param min minimal value
-/// \param max maximal
-/// \return the clamped value
-template <typename T>
-[[deprecated("Use std::clamp instead")]] T clamp(T const& value, T const& min, T const& max)
+constexpr float angleOf(jt::Vector2f const& in) noexcept
 {
-    assert(min < max);
-    return std::clamp(value, min, max);
+    return rad2deg(static_cast<float>(atan2(-in.y, in.x)));
 }
 
 /// specialization of clamp for a jt::Vector2f type
@@ -138,7 +133,8 @@ template <typename T>
 /// \param max maximal
 /// \return the clamped value
 template <typename T = jt::Vector2f>
-jt::Vector2f clamp(jt::Vector2f const& value, jt::Vector2f const& min, jt::Vector2f const& max)
+jt::Vector2f clamp(
+    jt::Vector2f const& value, jt::Vector2f const& min, jt::Vector2f const& max) noexcept
 {
     assert(min.x < max.x);
     assert(min.y < max.y);
@@ -172,7 +168,7 @@ std::string floatToStringWithXDecimalDigits(
 /// \param val
 /// \return
 template <typename T>
-int sgn(T val)
+constexpr int sgn(T val) noexcept
 {
     return (T(0) < val) - (val < T(0));
 }
@@ -182,27 +178,39 @@ int sgn(T val)
 /// \param v value
 /// \return true if v is a power of two, false otherwise
 template <typename T>
-constexpr bool isPowerOfTwo(T v)
+constexpr bool isPowerOfTwo(T v) noexcept
 {
     return v && ((v & (v - 1)) == 0);
 }
 
 /// Dot product between two vectors
-/// \param a first vector
-/// \param b second vector
+/// \param lhs first vector
+/// \param rhs second vector
 /// \return dot product between two vectors
-float dot(Vector2f const& a, Vector2f const& b);
+constexpr float dot(Vector2f const& lhs, Vector2f const& rhs) noexcept
+{
+    return lhs.x * rhs.x + lhs.y * rhs.y;
+}
 
 /// Check if a rect contains a point
 /// \param rect rectangle
 /// \param point point
 /// \return true if point is in rect, false otherwise
-bool checkIsIn(jt::Rectf const& rect, jt::Vector2f const& point);
+constexpr bool checkIsIn(jt::Rectf const& rect, jt::Vector2f const& point) noexcept
+{
+    bool const overlapsX = point.x > rect.left && point.x < rect.left + rect.width;
+    bool const overlapsY = point.y > rect.top && point.y < rect.top + rect.height;
+    return (overlapsX && overlapsY);
+}
 
 /// Cast a jt::Vector2f to it's integer values. This is needed e.g. for drawing pixel-perfect.
 /// \param input input vector
 /// \return cast to integer position
-jt::Vector2f castToInteger(jt::Vector2f const& input);
+constexpr jt::Vector2f castToInteger(jt::Vector2f const& input) noexcept
+{
+    return jt::Vector2f { static_cast<float>(static_cast<int>(input.x)),
+        static_cast<float>(static_cast<int>(input.y)) };
+}
 
 } // namespace MathHelper
 } // namespace jt
