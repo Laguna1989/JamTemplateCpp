@@ -5,6 +5,7 @@
 #include <iterator>
 #include <memory>
 #include <random>
+#include <stdexcept>
 #include <unordered_set>
 
 namespace jt {
@@ -101,7 +102,7 @@ std::vector<std::weak_ptr<T>> to_weak_pointers(std::vector<std::shared_ptr<T>> c
 template <typename Iter, typename RandomGenerator>
 Iter select_randomly(Iter start, Iter end, RandomGenerator& g)
 {
-    if (start == end) [[unlikely]] {
+    if (start == end) {
         throw std::invalid_argument { "cannot pick randomly from empty container" };
     }
     std::uniform_int_distribution<std::size_t> dis(

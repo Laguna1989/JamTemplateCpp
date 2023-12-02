@@ -14,9 +14,10 @@ std::string strutil::to_lower(std::string_view const str)
 std::string strutil::to_upper(std::string_view const str)
 {
     std::string result { str };
-    std::ranges::transform(result, result.begin(), [](unsigned char c) -> unsigned char {
-        return static_cast<unsigned char>(std::toupper(c));
-    });
+    std::transform(
+        result.begin(), result.end(), result.begin(), [](unsigned char c) -> unsigned char {
+            return static_cast<unsigned char>(std::tolower(c));
+        });
 
     return result;
 }
