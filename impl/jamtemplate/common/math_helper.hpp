@@ -41,7 +41,7 @@ std::vector<T> numbersBetween(T a, T b)
 // clang does not support std::bitcast yet
 constexpr float qrsqrt(float x)
 {
-    if (y < 0) {
+    if (x < 0) {
         throw std::invalid_argument { "argument of qrsqrt must be non-negative" };
     }
     return 1.0f / sqrt(x);
