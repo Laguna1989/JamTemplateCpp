@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1701531662397,
+  "lastUpdate": 1702382986690,
   "repoUrl": "https://github.com/Laguna1989/JamTemplateCpp",
   "entries": {
     "Benchmark": [
@@ -14244,6 +14244,84 @@ window.BENCHMARK_DATA = {
             "value": 1.8334197813334565,
             "unit": "ms/iter",
             "extra": "iterations: 375\ncpu: 1.8333552000000022 ms\nthreads: 1"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "laguna.ws@gmail.com",
+            "name": "Laguna1989",
+            "username": "Laguna1989"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "f97b03e711735092772cd1bd50aa7a10d6181db3",
+          "message": "Merge pull request #308 from Laguna1989/feature/qsqrt_check\n\nAdd check for qsqrt and update checkout action to v4",
+          "timestamp": "2023-12-12T13:04:38+01:00",
+          "tree_id": "cc631aff3ae924b40083509696115c36df399172",
+          "url": "https://github.com/Laguna1989/JamTemplateCpp/commit/f97b03e711735092772cd1bd50aa7a10d6181db3"
+        },
+        "date": 1702382986046,
+        "tool": "googlecpp",
+        "benches": [
+          {
+            "name": "BM_UpdateDrawablePositions",
+            "value": 1.753023734491372,
+            "unit": "ms/iter",
+            "extra": "iterations: 403\ncpu: 1.753028535980149 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GetAllCommands",
+            "value": 0.2693946886066252,
+            "unit": "ms/iter",
+            "extra": "iterations: 2598\ncpu: 0.26938668206312555 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_LoggerLogWithoutTarget",
+            "value": 0.2004783090596442,
+            "unit": "ms/iter",
+            "extra": "iterations: 3488\ncpu: 0.2004717316513762 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_LoggerLogWithCoutTargetSetToOff",
+            "value": 0.20384152639253342,
+            "unit": "ms/iter",
+            "extra": "iterations: 3429\ncpu: 0.2038346456692913 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_UpdateObjectGroup",
+            "value": 0.01602719626615562,
+            "unit": "ms/iter",
+            "extra": "iterations: 43869\ncpu: 0.016026627003122934 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_UpdateSpatialObjectGrid",
+            "value": 0.27821038709677376,
+            "unit": "ms/iter",
+            "extra": "iterations: 2542\ncpu: 0.27819417781274597 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_StartGame",
+            "value": 0.0025014246847923746,
+            "unit": "ms/iter",
+            "extra": "iterations: 279419\ncpu: 0.002501337417999492 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_RefineTilemapCollisions",
+            "value": 0.10864352521929511,
+            "unit": "ms/iter",
+            "extra": "iterations: 6384\ncpu: 0.10864006892230578 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GamestateWithTweeningShapes",
+            "value": 1.9237333195592854,
+            "unit": "ms/iter",
+            "extra": "iterations: 363\ncpu: 1.9237258953168048 ms\nthreads: 1"
           }
         ]
       }
