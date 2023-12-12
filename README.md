@@ -11,6 +11,9 @@ web (webassembly) games. Internally it uses [SFML](https://www.sfml-dev.org/), [
 
 Some games created with this JamTemplate are
 
+* [Fruit Lovin Monkey Pirates](https://runvs.io/Games/fruitlovinmonkeypirates) (Action Sailing Game, Native & Web,
+  FrankenGameJam
+    2023)
 * [Medibellum](https://runvs.io/Games/medibellum) (Multiplayer Autobattler Game, Native, Kajam-13 2023)
 * [Mines of Gloria](https://runvs.io/Games/minesofgloria) (Incremental Clicker Game, Native & Web, ClickerJam Spring
     2023)

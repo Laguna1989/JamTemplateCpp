@@ -39,7 +39,7 @@ jobs:
           libfreetype-dev \
           libflac-dev
 
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - uses: seanmiddleditch/gha-setup-ninja@master
 
       - name: ccache

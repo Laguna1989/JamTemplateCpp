@@ -76,7 +76,7 @@ void StateRope::calculateRopeForces()
         auto r2 = m_rope_elements.at(idx2);
 
         auto springVector = r1->position - r2->position;
-        float r = jt::MathHelper::length(springVector);
+        float r = jt::MathHelper::qlength(springVector);
 
         if (r == 0) {
             continue;

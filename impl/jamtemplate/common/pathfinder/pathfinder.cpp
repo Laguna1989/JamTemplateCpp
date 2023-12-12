@@ -14,7 +14,7 @@ float calculateDistance(NodeT const& node1, jt::Vector2u const& position2)
 
     auto diff = jt::Vector2f { static_cast<float>(position2.x) - thisPosition.x,
         static_cast<float>(position2.y) - thisPosition.y };
-    return jt::MathHelper::length(diff);
+    return jt::MathHelper::qlength(diff);
 }
 
 NodeT findClosestNodeTo(std::vector<std::weak_ptr<jt::pathfinder::NodeInterface>>& toCheck,
