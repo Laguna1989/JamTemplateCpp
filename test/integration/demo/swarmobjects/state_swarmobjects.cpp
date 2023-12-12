@@ -53,7 +53,7 @@ void StateSwarmObjects::updateOneSwarmObject(const size_t& firstSwarmObjectIndex
     auto v1 = o1->getVelocity();
     auto const mousePos = getGame()->input().mouse()->getMousePositionWorld();
     auto dist = mousePos - p1;
-    auto distLength = jt::MathHelper::length(dist);
+    auto distLength = jt::MathHelper::qlength(dist);
     jt::MathHelper::normalizeMe(dist);
 
     auto const vortexForce = jt::MathHelper::rotateBy(dist, 90);
@@ -71,7 +71,7 @@ void StateSwarmObjects::updateOneSwarmObject(const size_t& firstSwarmObjectIndex
         auto v2 = o2->getVelocity();
 
         auto springVector = p2 - p1;
-        auto const r = jt::MathHelper::length(springVector);
+        auto const r = jt::MathHelper::qlength(springVector);
         if (r > 100) {
             continue;
         }

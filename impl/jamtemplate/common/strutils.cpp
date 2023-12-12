@@ -16,7 +16,7 @@ std::string strutil::to_upper(std::string_view const str)
     std::string result { str };
     std::transform(
         result.begin(), result.end(), result.begin(), [](unsigned char c) -> unsigned char {
-            return static_cast<unsigned char>(std::tolower(c));
+            return static_cast<unsigned char>(std::toupper(c));
         });
 
     return result;

@@ -38,7 +38,7 @@ void MovingPlatform::doCreate()
     jt::MathHelper::normalizeMe(diff);
     m_currentVelocity = diff * m_velocity;
 
-    m_timeTilNextPlatform = jt::MathHelper::length(totalDiff) / m_velocity;
+    m_timeTilNextPlatform = jt::MathHelper::qlength(totalDiff) / m_velocity;
     m_physicsObject->setPosition(p1);
     //    m_physicsObject->setVelocity(m_currentVelocity);
 
@@ -66,7 +66,7 @@ bool MovingPlatform::moveFromTo(
     jt::MathHelper::normalizeMe(diff);
     m_currentVelocity = diff * m_velocity;
 
-    m_timeTilNextPlatform = jt::MathHelper::length(totalDiff) / m_velocity;
+    m_timeTilNextPlatform = jt::MathHelper::qlength(totalDiff) / m_velocity;
     m_physicsObject->setPosition(p1);
 
     m_physicsObject->setVelocity(m_currentVelocity);

@@ -32,7 +32,7 @@ jobs:
           libfreetype-dev \
           libudev-dev
 
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - uses: seanmiddleditch/gha-setup-ninja@master
 
       - name: ccache
@@ -82,7 +82,7 @@ jobs:
           libsdl2-ttf-dev \
           libsdl2-image-dev
 
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - uses: seanmiddleditch/gha-setup-ninja@master
 
       - name: ccache
@@ -116,7 +116,7 @@ jobs:
         with:
           cmake-version: '3.26.x'
 
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
       - name: CMake
         run: cmake -B ${{github.workspace}}/build -DJT_ENABLE_AUDIO_TESTS=OFF .
@@ -137,7 +137,7 @@ jobs:
         with:
           cmake-version: '3.26.x'
 
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
       - name: CMake
         run: cmake -B ${{github.workspace}}/build -DJT_ENABLE_AUDIO_TESTS=OFF -DUSE_SFML=OFF .
@@ -170,7 +170,7 @@ jobs:
         with:
           version: 3.1.46
 
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
       - name: ccache
         uses: hendrikmuhs/ccache-action@v1.2
@@ -203,7 +203,7 @@ jobs:
         run: |
           brew install cmake ninja
 
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
       - name: ccache
         uses: hendrikmuhs/ccache-action@v1

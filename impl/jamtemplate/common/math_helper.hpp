@@ -8,6 +8,7 @@
 #include <cmath>
 #include <numbers>
 #include <numeric>
+#include <stdexcept>
 #include <string>
 #include <utility>
 #include <vector>
@@ -38,12 +39,21 @@ std::vector<T> numbersBetween(T a, T b)
 #ifdef __clang__
 
 // clang does not support std::bitcast yet
-constexpr float qrsqrt(float x) { return sqrt(x); }
+constexpr float qrsqrt(float x)
+{
+    if (y < 0) {
+        throw std::invalid_argument { "argument of qrsqrt must be non-negative" };
+    }
+    return 1.0f / sqrt(value);
+}
 
 #else
 
 constexpr float qrsqrt(float y)
 {
+    if (y < 0) {
+        throw std::invalid_argument { "argument of qrsqrt must be non-negative" };
+    }
     constexpr auto threeHalfes = 1.5f;
     auto const x2 = y * 0.5f;
 

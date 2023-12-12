@@ -62,7 +62,7 @@ void jt::TrailingCircles::doDraw() const
 void jt::TrailingCircles::setPosition(jt::Vector2f const& pos)
 {
     if (m_maxDistance > 0) {
-        m_summedUpDistance += jt::MathHelper::length(m_pos - pos);
+        m_summedUpDistance += jt::MathHelper::qlength(m_pos - pos);
         if (m_summedUpDistance >= m_maxDistance) {
             m_summedUpDistance = 0.0f;
             m_particles->fire(1, pos);
