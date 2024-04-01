@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1711964646340,
+  "lastUpdate": 1711964923943,
   "repoUrl": "https://github.com/Laguna1989/JamTemplateCpp",
   "entries": {
     "Benchmark": [
@@ -14556,6 +14556,84 @@ window.BENCHMARK_DATA = {
             "value": 1.8548531777187225,
             "unit": "ms/iter",
             "extra": "iterations: 377\ncpu: 1.8548269681697604 ms\nthreads: 1"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "laguna.ws@gmail.com",
+            "name": "Laguna1989",
+            "username": "Laguna1989"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "a51c72e96a4d2f7e0bc226c9b2f3b37298aeea5f",
+          "message": "Merge pull request #312 from Laguna1989/dependabot/github_actions/thedoctor0/zip-release-0.7.6\n\nBump thedoctor0/zip-release from 0.6.2 to 0.7.6",
+          "timestamp": "2024-04-01T11:46:45+02:00",
+          "tree_id": "20e2ea4d48f29609b1fb8dd193179a566d80ce3d",
+          "url": "https://github.com/Laguna1989/JamTemplateCpp/commit/a51c72e96a4d2f7e0bc226c9b2f3b37298aeea5f"
+        },
+        "date": 1711964922715,
+        "tool": "googlecpp",
+        "benches": [
+          {
+            "name": "BM_UpdateDrawablePositions",
+            "value": 1.6457303669064658,
+            "unit": "ms/iter",
+            "extra": "iterations: 417\ncpu: 1.6455959400479614 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GetAllCommands",
+            "value": 0.26240815554722136,
+            "unit": "ms/iter",
+            "extra": "iterations: 2668\ncpu: 0.2623960584707645 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_LoggerLogWithoutTarget",
+            "value": 0.20289830704462916,
+            "unit": "ms/iter",
+            "extra": "iterations: 3563\ncpu: 0.20289529469548137 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_LoggerLogWithCoutTargetSetToOff",
+            "value": 0.19782147540983447,
+            "unit": "ms/iter",
+            "extra": "iterations: 3538\ncpu: 0.19781972215941215 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_UpdateObjectGroup",
+            "value": 0.016140552105299875,
+            "unit": "ms/iter",
+            "extra": "iterations: 43153\ncpu: 0.01614027608740993 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_UpdateSpatialObjectGrid",
+            "value": 0.2795773178416651,
+            "unit": "ms/iter",
+            "extra": "iterations: 2539\ncpu: 0.2795585029539192 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_StartGame",
+            "value": 0.0024461039035771574,
+            "unit": "ms/iter",
+            "extra": "iterations: 286737\ncpu: 0.0024460376337898477 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_RefineTilemapCollisions",
+            "value": 0.10351656703621416,
+            "unit": "ms/iter",
+            "extra": "iterations: 6765\ncpu: 0.1035092586844051 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GamestateWithTweeningShapes",
+            "value": 1.8509503042327962,
+            "unit": "ms/iter",
+            "extra": "iterations: 378\ncpu: 1.8508304206349209 ms\nthreads: 1"
           }
         ]
       }
