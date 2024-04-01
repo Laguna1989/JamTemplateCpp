@@ -44,7 +44,7 @@ jobs:
           filename: 'release_win_${{github.ref_name}}.zip'
 
       - name: Release
-        uses: softprops/action-gh-release@v0.1.13
+        uses: softprops/action-gh-release@v2.0.4
         with:
           files: ${{github.workspace}}\release\release_win_${{github.ref_name}}.zip
 
@@ -96,7 +96,7 @@ jobs:
           tar -czvf ${{github.workspace}}/release/release_linux_${{github.ref_name}}.tar.gz ${RELEASE_NAME}_linux
 
       - name: Release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2.0.4
         with:
           files: ${{github.workspace}}/release/release_linux_${{github.ref_name}}.tar.gz
 
@@ -163,7 +163,7 @@ jobs:
           filename: 'release_web_${{github.ref_name}}.zip'
 
       - name: Release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2.0.4
         with:
           files: ${{github.workspace}}/release/release_web/release_web_${{github.ref_name}}.zip
 
@@ -210,6 +210,6 @@ jobs:
           tar -czvf ${{github.workspace}}/release/release_mac_${{github.ref_name}}.tar.gz ${RELEASE_NAME}_mac
 
       - name: Release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2.0.4
         with:
           files: ${{github.workspace}}/release/release_mac_${{github.ref_name}}.tar.gz
