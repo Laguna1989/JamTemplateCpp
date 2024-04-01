@@ -7,7 +7,6 @@
 #include <oalpp/effects/mono_effect_interface.hpp>
 #include <oalpp/sound.hpp>
 #include <oalpp/sound_data/sound_data.hpp>
-#include <oalpp/sound_data/sound_data_with_effect.hpp>
 #include <memory>
 #include <string>
 
