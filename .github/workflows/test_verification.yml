@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Set up cmake
-        uses: jwlawson/actions-setup-cmake@v1.11
+        uses: jwlawson/actions-setup-cmake@v2.0
         with:
           cmake-version: '3.26.x'
 
@@ -65,7 +65,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Set up cmake
-        uses: jwlawson/actions-setup-cmake@v1.11
+        uses: jwlawson/actions-setup-cmake@v2.0
         with:
           cmake-version: '3.26.x'
 
@@ -112,7 +112,7 @@ jobs:
     runs-on: windows-2019
     steps:
       - name: Set up cmake
-        uses: jwlawson/actions-setup-cmake@v1.11
+        uses: jwlawson/actions-setup-cmake@v2.0
         with:
           cmake-version: '3.26.x'
 
@@ -133,7 +133,7 @@ jobs:
     runs-on: windows-2019
     steps:
       - name: Set up cmake
-        uses: jwlawson/actions-setup-cmake@v1.11
+        uses: jwlawson/actions-setup-cmake@v2.0
         with:
           cmake-version: '3.26.x'
 
@@ -155,7 +155,7 @@ jobs:
       EMCC_CCACHE: 1
     steps:
       - name: Set up cmake
-        uses: jwlawson/actions-setup-cmake@v1.12
+        uses: jwlawson/actions-setup-cmake@v2.0
         with:
           cmake-version: '3.26.x'
 
@@ -195,7 +195,7 @@ jobs:
     runs-on: macos-latest
     steps:
       - name: Set up cmake
-        uses: jwlawson/actions-setup-cmake@v1.11
+        uses: jwlawson/actions-setup-cmake@v2.0
         with:
           cmake-version: '3.26.x'
 
