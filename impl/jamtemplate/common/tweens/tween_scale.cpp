@@ -20,9 +20,9 @@ void jt::TweenScale::doUpdateObject(
 {
     auto scale = sptr->getScale();
 
-    scale.x = Lerp::linear(
+    scale.x = std::lerp(
         static_cast<float>(m_initialValue.x), static_cast<float>(m_finalValue.x), agePercent);
-    scale.y = Lerp::linear(
+    scale.y = std::lerp(
         static_cast<float>(m_initialValue.y), static_cast<float>(m_finalValue.y), agePercent);
 
     sptr->setScale(scale);
