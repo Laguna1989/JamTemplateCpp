@@ -24,13 +24,13 @@ CPMAddPackage(
 CPMAddPackage(
         NAME aselib
         GITHUB_REPOSITORY Laguna1989/aselib
-        GIT_TAG v0.2.0
+        GIT_TAG v0.3.0
         OPTIONS
         "ASE_LIB_ENABLE_UNIT_TESTS OFF"
 )
 CPMAddPackage(
         NAME openalpp
-        URL https://github.com/Laguna1989/OpenALpp/archive/refs/tags/v0.2.2.zip
+        URL https://github.com/Laguna1989/OpenALpp/archive/refs/tags/v0.3.0.zip
         OPTIONS
         "OALPP_ENABLE_UNIT_TESTS OFF"
         "OALPP_ENABLE_INTEGRATION_TESTS OFF"
