@@ -21,6 +21,7 @@
 #include <tileson/state_tileson.hpp>
 #include <transitions/state_transitions.hpp>
 #include <tween/state_tween.hpp>
+#include <water/state_water.hpp>
 
 void StateSelect::onCreate()
 {
@@ -45,12 +46,15 @@ void StateSelect::onCreate()
     AddButton<StateTilemapEffects>("Tile Effects");
     AddButton<StateOffsetOrigin>("offset origin");
     AddButton<StateStoreGamestate>("store state");
+    AddButton<StateWater>("water");
 
     add(std::make_shared<jt::LicenseInfo>());
 }
+
 void StateSelect::onEnter() { }
 
 void StateSelect::onUpdate(float /*elapsed*/) { }
 
 void StateSelect::onDraw() const { }
+
 std::string StateSelect::getName() const { return "State Demo Select"; }
