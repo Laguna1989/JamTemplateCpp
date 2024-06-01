@@ -10,7 +10,7 @@ namespace inputhelper {
 template <typename CheckFuncArg, typename KeyTypeJT>
 void updateValues(std::map<KeyTypeJT, bool>& pressed, std::map<KeyTypeJT, bool>& released,
     std::map<KeyTypeJT, bool>& justPressed, std::map<KeyTypeJT, bool>& justReleased,
-    CheckFuncArg check)
+    CheckFuncArg const& check)
 {
     for (auto const& kvp : pressed) {
         auto const key = kvp.first;

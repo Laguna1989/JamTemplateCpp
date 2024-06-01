@@ -1,15 +1,18 @@
 #ifndef JAMTEMPLATE_PERFORMANCE_MEASUREMENT_HPP
 #define JAMTEMPLATE_PERFORMANCE_MEASUREMENT_HPP
 
+#include <nlohmann.hpp>
 #include <chrono>
 #include <functional>
+#include <string>
+#include <thread>
 
 namespace jt {
 
 /// Helper function to measure time since a time point.
 /// \param since start time
 /// \return the duration in seconds since the passed value
-float getDurationInSecondsSince(std::chrono::time_point<std::chrono::system_clock> const& since);
+float getDurationInSecondsSince(std::chrono::time_point<std::chrono::steady_clock> const& since);
 
 /// Generic Template to allow for partial specialization. Specialization is needed for void return
 /// type.
@@ -37,7 +40,7 @@ struct MeasureTimeGeneric<R(Args...)> {
     /// \return the return value of the function to be measured
     R operator()(Args... args) const
     {
-        auto const start = std::chrono::system_clock::now();
+        auto const start = std::chrono::steady_clock::now();
         R const result = m_func(args...);
         m_elapsedTimeInSeconds += getDurationInSecondsSince(start);
         return result;
@@ -76,7 +79,7 @@ struct MeasureTimeGeneric<void(Args...)> {
     /// \return the return value of the function to be measured
     void operator()(Args... args) const
     {
-        auto const start = std::chrono::system_clock::now();
+        auto const start = std::chrono::steady_clock::now();
         m_func(args...);
         m_elapsedTimeInSeconds += getDurationInSecondsSince(start);
     }
@@ -110,6 +113,28 @@ auto makeMeasureTimeGeneric(std::function<R(Args...)> const& func)
 {
     return MeasureTimeGeneric<R(Args...)> { func };
 }
+
+struct TimeMeasureObject {
+    explicit TimeMeasureObject(std::string const& str);
+    ~TimeMeasureObject();
+
+private:
+    std::chrono::time_point<std::chrono::steady_clock> m_start;
+    std::string m_name;
+};
+
+struct TimeMeasureObjectData {
+    std::string name;
+    std::chrono::time_point<std::chrono::steady_clock> start;
+    std::chrono::time_point<std::chrono::steady_clock> end;
+    std::thread::id threadId;
+};
+
+void to_json(nlohmann::json& j, TimeMeasureObjectData const& data);
+
+std::string getTracingJson(std::vector<TimeMeasureObjectData> const& data);
+
+std::vector<TimeMeasureObjectData> getMeasurementData();
 
 } // namespace jt
 

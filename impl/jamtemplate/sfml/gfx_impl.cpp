@@ -1,4 +1,5 @@
 #include "gfx_impl.hpp"
+#include "performance_measurement.hpp"
 #include <math_helper.hpp>
 #include <rect_lib.hpp>
 #include <sprite.hpp>
@@ -44,6 +45,7 @@ void jt::GfxImpl::reset() { m_camera.reset(); }
 
 void jt::GfxImpl::update(float elapsed)
 {
+    TimeMeasureObject obj { "jt::GfxImpl::update" };
     m_camera.update(elapsed);
 
     m_target->forall([this](auto t) { t->setView(*m_view); });

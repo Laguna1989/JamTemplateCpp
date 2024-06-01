@@ -1,4 +1,5 @@
 ﻿#include "render_window_lib.hpp"
+#include "performance_measurement.hpp"
 #include <sprite.hpp>
 #include <imgui-SFML.h>
 #include <imgui.h>
@@ -47,6 +48,7 @@ jt::Vector2f jt::RenderWindow::getSize() const noexcept { return m_size; }
 
 void jt::RenderWindow::draw(std::unique_ptr<jt::Sprite>& spr)
 {
+    TimeMeasureObject obj { "jt::RenderWindow::draw" };
     if (!spr) [[unlikely]] {
         throw std::invalid_argument { "Cannot draw nullptr sprite" };
     }
@@ -55,6 +57,7 @@ void jt::RenderWindow::draw(std::unique_ptr<jt::Sprite>& spr)
 
 void jt::RenderWindow::display()
 {
+    TimeMeasureObject obj { "jt::RenderWindow::display" };
     if (m_renderGui) {
         m_hasBeenUpdatedAlready = false;
         ImGui::SFML::Render(*m_window.get());
