@@ -1,4 +1,5 @@
 #include "keyboard_input_selected_keys.hpp"
+#include "performance_measurement.hpp"
 #include <input/control_commands/control_command_null.hpp>
 #include <input/input_helper.hpp>
 
@@ -23,6 +24,7 @@ void jt::KeyboardInputSelectedKeys::listenForKey(jt::KeyCode k)
 
 void jt::KeyboardInputSelectedKeys::updateKeys()
 {
+    TimeMeasureObject obj { "jt::KeyboardInputSelectedKeys::updateKeys" };
     jt::inputhelper::updateValues(m_pressed, m_released, m_justPressed, m_justReleased,
         [this](auto k) { return m_checkFunc(k); });
 }

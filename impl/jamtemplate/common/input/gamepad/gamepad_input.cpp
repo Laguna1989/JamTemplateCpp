@@ -1,10 +1,10 @@
 #include "gamepad_input.hpp"
+#include "performance_measurement.hpp"
 #include <input/input_helper.hpp>
 
 jt::GamepadInput::GamepadInput(int gamepadId, AxisFunc axisFunc, ButtonCheckFunction buttonFunc)
     : m_axisFunc { axisFunc }
 {
-
     if (m_axisFunc == nullptr) {
         m_axisFunc = [gamepadId](auto k) { return libAxisValue(gamepadId, k); };
     }
@@ -23,11 +23,13 @@ jt::GamepadInput::GamepadInput(int gamepadId, AxisFunc axisFunc, ButtonCheckFunc
 
 void jt::GamepadInput::update()
 {
+    TimeMeasureObject obj { "jt::GamepadInput::update" };
     jt::inputhelper::updateValues(m_pressed, m_released, m_justPressed, m_justReleased,
         [this](auto k) { return m_buttonFunc(k); });
 }
 
 jt::Vector2f jt::GamepadInput::getAxisRaw(jt::GamepadAxisCode axis) { return m_axisFunc(axis); }
+
 jt::Vector2f jt::GamepadInput::getAxis(jt::GamepadAxisCode axis)
 {
     auto v = getAxisRaw(axis);
@@ -43,6 +45,9 @@ jt::Vector2f jt::GamepadInput::getAxis(jt::GamepadAxisCode axis)
 void jt::GamepadInput::reset() { }
 
 bool jt::GamepadInput::pressed(GamepadButtonCode b) { return m_pressed[b]; }
+
 bool jt::GamepadInput::released(GamepadButtonCode b) { return m_released[b]; }
+
 bool jt::GamepadInput::justPressed(GamepadButtonCode b) { return m_justPressed[b]; }
+
 bool jt::GamepadInput::justReleased(GamepadButtonCode b) { return m_justReleased[b]; }

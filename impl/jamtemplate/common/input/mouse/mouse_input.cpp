@@ -1,4 +1,5 @@
 ﻿#include "mouse_input.hpp"
+#include "performance_measurement.hpp"
 #include <input/input_helper.hpp>
 
 jt::MouseInput::MouseInput(MouseButtonCheckFunction checkFunction)
@@ -19,6 +20,7 @@ jt::MouseInput::MouseInput(MouseButtonCheckFunction checkFunction)
 
 void jt::MouseInput::updateMousePosition(jt::MousePosition const& mp)
 {
+    TimeMeasureObject obj { "jt::MouseInput::updateMousePosition" };
     m_mouseWorldX = mp.window_x;
     m_mouseWorldY = mp.window_y;
 
@@ -28,6 +30,7 @@ void jt::MouseInput::updateMousePosition(jt::MousePosition const& mp)
 
 void jt::MouseInput::updateButtons()
 {
+    TimeMeasureObject obj { "jt::MouseInput::updateButtons" };
     jt::inputhelper::updateValues(m_mousePressed, m_mouseReleased, m_mouseJustPressed,
         m_mouseJustReleased, [this](auto b) { return m_checkFunction(b); });
 }
