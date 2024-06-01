@@ -1,4 +1,5 @@
 ﻿#include "game_base.hpp"
+#include "performance_measurement.hpp"
 #include <build_info.hpp>
 #include <string>
 
@@ -19,6 +20,7 @@ jt::GameBase::GameBase(jt::GfxInterface& gfx, jt::InputManagerInterface& input,
 
 void jt::GameBase::runOneFrame()
 {
+    TimeMeasureObject obj { "jt::GameBase::runOneFrame" };
     m_logger.verbose("runOneFrame", { "jt" });
     m_actionCommandManager.update();
 
@@ -81,10 +83,26 @@ jt::ActionCommandManagerInterface& jt::GameBase::actionCommandManager()
 
 jt::CacheInterface& jt::GameBase::cache() { return m_cache; }
 
+std::string getTimeString()
+{
+    auto t = std::time(nullptr);
+    auto tm = *std::localtime(&t);
+    std::stringstream ss;
+    ss << std::put_time(&tm, "%Y-%m-%d_%H-%M-%S");
+    return ss.str();
+}
+
 void jt::GameBase::doUpdate(float const elapsed)
 {
+    TimeMeasureObject obj { "jt::GameBase::doUpdate" };
     m_logger.verbose("update game", { "jt" });
+    if (m_inputManager.keyboard()->justPressed(jt::KeyCode::F10)) {
+        std::cout << "write file\n";
+        std::ofstream ofs { "tracing" + getTimeString() + ".json" };
+        ofs << jt::getTracingJson(jt::getMeasurementData());
+    }
     m_stateManager.update(getPtr(), elapsed);
+
     m_audio.update(elapsed);
     gfx().update(elapsed);
 
@@ -99,6 +117,7 @@ void jt::GameBase::doUpdate(float const elapsed)
 
 void jt::GameBase::doDraw() const
 {
+    TimeMeasureObject obj { "jt::GameBase::doDraw" };
     m_logger.verbose("draw game", { "jt" });
     gfx().window().startRenderGui();
     gfx().clear();

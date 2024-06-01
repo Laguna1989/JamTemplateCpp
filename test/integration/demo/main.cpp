@@ -63,22 +63,10 @@ int main(int /*argc*/, char* /*argv*/[])
     keyboard->listenForKey(jt::KeyCode::C);
     keyboard->listenForKey(jt::KeyCode::V);
     keyboard->listenForKey(jt::KeyCode::I);
-
-    keyboard->listenForKey(jt::KeyCode::Num0);
-    keyboard->listenForKey(jt::KeyCode::Num1);
-    keyboard->listenForKey(jt::KeyCode::Num2);
-    keyboard->listenForKey(jt::KeyCode::Num3);
-    keyboard->listenForKey(jt::KeyCode::Num4);
-    keyboard->listenForKey(jt::KeyCode::Num5);
-    keyboard->listenForKey(jt::KeyCode::Num6);
-    keyboard->listenForKey(jt::KeyCode::Num7);
-    keyboard->listenForKey(jt::KeyCode::Num8);
-    keyboard->listenForKey(jt::KeyCode::Num9);
-
-    keyboard->listenForKey(jt::KeyCode::F1);
+    
+    keyboard->listenForKey(jt::KeyCode::F10);
     keyboard->listenForKey(jt::KeyCode::Escape);
     keyboard->listenForKey(jt::KeyCode::Space);
-    keyboard->listenForKey(jt::KeyCode::LShift);
 
     auto const gamepad0 = std::make_shared<jt::GamepadInput>(0);
     auto const gamepad1 = std::make_shared<jt::GamepadInput>(1);

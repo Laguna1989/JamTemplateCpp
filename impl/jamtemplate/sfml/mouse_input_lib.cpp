@@ -12,6 +12,6 @@ sf::Mouse::Button toLib(jt::MouseButtonCode key) noexcept
 
 bool jt::libKeyValue(jt::MouseButtonCode b)
 {
-    auto const libkey = toLib(b);
-    return sf::Mouse::isButtonPressed(libkey);
+    auto const libKey = toLib(b);
+    return sf::Mouse::isButtonPressed(libKey);
 }

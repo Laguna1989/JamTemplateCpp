@@ -1,6 +1,7 @@
 ﻿#include "input_manager.hpp"
 #include "input/keyboard/keyboard_input_null.hpp"
 #include "input/mouse/mouse_input_null.hpp"
+#include "performance_measurement.hpp"
 #include <input/gamepad/gamepad_input_null.hpp>
 
 jt::InputManager::InputManager(std::shared_ptr<jt::MouseInterface> mouse,
@@ -38,6 +39,7 @@ void jt::InputManager::reset()
 void jt::InputManager::update(
     bool /*shouldProcessKeys*/, bool /*shouldProcessMouse*/, MousePosition const& mp, float elapsed)
 {
+    TimeMeasureObject obj { "jt::InputManager::update" };
     if (m_mouse) [[likely]] {
         m_mouse->updateMousePosition(mp);
         m_mouse->updateButtons();
