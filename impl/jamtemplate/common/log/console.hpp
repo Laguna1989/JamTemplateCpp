@@ -30,6 +30,7 @@ private:
     mutable bool m_drawLevel { true };
     mutable bool m_drawTag { true };
     mutable bool m_drawTime { false };
+    mutable bool m_drawSource { false };
 
     void doCreate() override;
     void doUpdate(float const /*elapsed*/) override;

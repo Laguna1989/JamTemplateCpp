@@ -43,6 +43,8 @@ void jt::Console::doDraw() const
         ImGui::Checkbox("Level", &m_drawLevel);
         ImGui::SameLine();
         ImGui::Checkbox("Tags", &m_drawTag);
+        ImGui::SameLine();
+        ImGui::Checkbox("Source", &m_drawSource);
 
         // Display contents in a scrolling region
         ImGui::TextColored(ImVec4(1, 1, 0, 1), "");
@@ -148,7 +150,11 @@ void jt::Console::renderOneLogEntry(jt::LogEntry const& entry) const
         levelText = "";
     }
 
-    std::string text = timeText + levelText + tagText + entry.message;
+    std::string sourceText;
+    if (m_drawSource)
+        sourceText = std::string { entry.source.file_name() } + ":"
+            + std::to_string(entry.source.line()) + " [" + entry.source.function_name() + "]";
+    std::string text = timeText + levelText + tagText + entry.message + sourceText;
 
     std::string filterString = m_inputBufferFilter.data();
     strutil::trim(filterString);
