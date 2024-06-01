@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1712305550741,
+  "lastUpdate": 1717222026272,
   "repoUrl": "https://github.com/Laguna1989/JamTemplateCpp",
   "entries": {
     "Benchmark": [
@@ -14868,6 +14868,84 @@ window.BENCHMARK_DATA = {
             "value": 1.8494359419524953,
             "unit": "ms/iter",
             "extra": "iterations: 379\ncpu: 1.8493863693931374 ms\nthreads: 1"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "laguna.ws@gmail.com",
+            "name": "Laguna1989",
+            "username": "Laguna1989"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "af4ec91d7f75c282e0460b8a68374d56fff42053",
+          "message": "Merge pull request #316 from Laguna1989/feature/TimeMeasurement\n\nAdd time measurement feature",
+          "timestamp": "2024-06-01T08:02:00+02:00",
+          "tree_id": "6d1c42e64ceea0f215f3013c9109ca0be1d05860",
+          "url": "https://github.com/Laguna1989/JamTemplateCpp/commit/af4ec91d7f75c282e0460b8a68374d56fff42053"
+        },
+        "date": 1717222024881,
+        "tool": "googlecpp",
+        "benches": [
+          {
+            "name": "BM_UpdateDrawablePositions",
+            "value": 1.7818841675256942,
+            "unit": "ms/iter",
+            "extra": "iterations: 388\ncpu: 1.78178312371134 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GetAllCommands",
+            "value": 0.2703122273073993,
+            "unit": "ms/iter",
+            "extra": "iterations: 2622\ncpu: 0.27029182532417995 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_LoggerLogWithoutTarget",
+            "value": 0.22090887184343472,
+            "unit": "ms/iter",
+            "extra": "iterations: 3168\ncpu: 0.22089381376262623 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_LoggerLogWithCoutTargetSetToOff",
+            "value": 0.22416070083279357,
+            "unit": "ms/iter",
+            "extra": "iterations: 3122\ncpu: 0.22414745836002573 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_UpdateObjectGroup",
+            "value": 0.016115549985016686,
+            "unit": "ms/iter",
+            "extra": "iterations: 43383\ncpu: 0.016114573012470337 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_UpdateSpatialObjectGrid",
+            "value": 0.2759729309941426,
+            "unit": "ms/iter",
+            "extra": "iterations: 2565\ncpu: 0.2759453259259261 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_StartGame",
+            "value": 0.002941550194876568,
+            "unit": "ms/iter",
+            "extra": "iterations: 237843\ncpu: 0.002941340779421719 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_RefineTilemapCollisions",
+            "value": 0.10244006348973451,
+            "unit": "ms/iter",
+            "extra": "iterations: 6820\ncpu: 0.10242837243401763 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GamestateWithTweeningShapes",
+            "value": 2.162626140186908,
+            "unit": "ms/iter",
+            "extra": "iterations: 321\ncpu: 2.1624212585669764 ms\nthreads: 1"
           }
         ]
       }
