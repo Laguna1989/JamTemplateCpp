@@ -43,6 +43,18 @@ target_link_libraries(JamTemplateLib
         Box2D
 )
 
+if (${JT_AUDIO_BACKEND} STREQUAL "OpenALpp")
+    message(STATUS "linking openalpp")
+    target_link_libraries(JamTemplateLib
+            OpenALpp_Lib
+    )
+elseif (${JT_AUDIO_BACKEND} STREQUAL "fmod")
+    message(STATUS "linking fmod")
+    jt_link_fmod(JamTemplateLib)
+else ()
+    message(WARNING "linking no audio backend")
+endif ()
+
 if (USE_SFML)
     target_include_directories(JamTemplateLib PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/sfml)
     target_include_directories(JamTemplateLib SYSTEM PUBLIC ${SFML_DIR_ROOT}/include)

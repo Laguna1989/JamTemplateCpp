@@ -79,6 +79,13 @@ else ()
     setup_sdl()
 endif ()
 
+#####################################################
+# setup FMod
+#####################################################
+if (${JT_AUDIO_BACKEND} STREQUAL "fmod")
+    jt_setup_fmod()
+endif ()
+
 add_subdirectory(impl)
 add_subdirectory(test)
 

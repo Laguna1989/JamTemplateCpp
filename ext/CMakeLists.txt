@@ -28,15 +28,17 @@ CPMAddPackage(
         OPTIONS
         "ASE_LIB_ENABLE_UNIT_TESTS OFF"
 )
-CPMAddPackage(
-        NAME openalpp
-        URL https://github.com/Laguna1989/OpenALpp/archive/refs/tags/v0.3.0.zip
-        OPTIONS
-        "OALPP_ENABLE_UNIT_TESTS OFF"
-        "OALPP_ENABLE_INTEGRATION_TESTS OFF"
-        "OALPP_ENABLE_APPROVAL_TESTS OFF"
-        "OALPP_STATIC_LIBRARY ON"
-)
+if (${JT_AUDIO_BACKEND} STREQUAL "OpenALpp")
+    CPMAddPackage(
+            NAME openalpp
+            URL https://github.com/Laguna1989/OpenALpp/archive/refs/tags/v0.3.0.zip
+            OPTIONS
+            "OALPP_ENABLE_UNIT_TESTS OFF"
+            "OALPP_ENABLE_INTEGRATION_TESTS OFF"
+            "OALPP_ENABLE_APPROVAL_TESTS OFF"
+            "OALPP_STATIC_LIBRARY ON"
+    )
+endif ()
 CPMAddPackage(
         NAME tileson
         GITHUB_REPOSITORY SSBMTonberry/tileson
