@@ -3,7 +3,6 @@
 
 #include <box2dwrapper/box2d_world_interface.hpp>
 #include <game_state.hpp>
-#include <player/player.hpp>
 #include <memory>
 #include <vector>
 
@@ -25,8 +24,7 @@ private:
     std::shared_ptr<jt::Vignette> m_vignette;
     std::shared_ptr<Hud> m_hud;
     std::shared_ptr<jt::Box2DWorldInterface> m_world { nullptr };
-    std::shared_ptr<Player> m_player { nullptr };
-
+    
     bool m_running { true };
     bool m_hasEnded { false };
 

@@ -3,8 +3,6 @@
 #include <action_commands/basic_action_commands.hpp>
 #include <audio/audio/audio_impl.hpp>
 #include <audio/audio/audio_null.hpp>
-#include <audio/audio/logging_audio.hpp>
-#include <audio/fades/logging_sound_fade_manager.hpp>
 #include <cache/cache_impl.hpp>
 #include <camera.hpp>
 #include <game.hpp>
@@ -61,10 +59,7 @@ int main(int /*argc*/, char* /*argv*/[])
     auto const gamepad0 = std::make_shared<jt::GamepadInput>(0);
     jt::InputManager input { mouse, keyboard, { gamepad0 } };
 
-    jt::SoundFadeManager fades;
-    //    jt::AudioImpl audio { std::make_unique<jt::LoggingSoundFadeManager>(fades, logger) };
-    jt::null_objects::AudioNull audio {};
-    jt::LoggingAudio loggingAudio { audio, logger };
+    jt::AudioImpl audio {};
 
     jt::StateManager stateManager { std::make_shared<StateIntro>() };
     jt::LoggingStateManager loggingStateManager { stateManager, logger };
@@ -72,7 +67,7 @@ int main(int /*argc*/, char* /*argv*/[])
     jt::ActionCommandManager actionCommandManager(logger);
 
     game = std::make_shared<jt::Game>(
-        gfx, input, loggingAudio, loggingStateManager, logger, actionCommandManager, cache);
+        gfx, input, audio, loggingStateManager, logger, actionCommandManager, cache);
 
     addBasicActionCommands(game);
     game->startGame(gameloop);

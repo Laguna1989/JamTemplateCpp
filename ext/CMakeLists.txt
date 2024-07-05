@@ -21,6 +21,7 @@ CPMAddPackage(
         "API_ENABLE_UNIT_TESTS OFF"
         "API_ENABLE_PERFORMANCE_TESTS OFF"
 )
+
 CPMAddPackage(
         NAME aselib
         GITHUB_REPOSITORY Laguna1989/aselib
@@ -28,15 +29,7 @@ CPMAddPackage(
         OPTIONS
         "ASE_LIB_ENABLE_UNIT_TESTS OFF"
 )
-CPMAddPackage(
-        NAME openalpp
-        URL https://github.com/Laguna1989/OpenALpp/archive/refs/tags/v0.3.0.zip
-        OPTIONS
-        "OALPP_ENABLE_UNIT_TESTS OFF"
-        "OALPP_ENABLE_INTEGRATION_TESTS OFF"
-        "OALPP_ENABLE_APPROVAL_TESTS OFF"
-        "OALPP_STATIC_LIBRARY ON"
-)
+
 CPMAddPackage(
         NAME tileson
         GITHUB_REPOSITORY SSBMTonberry/tileson
@@ -44,8 +37,10 @@ CPMAddPackage(
         OPTIONS
         "BUILD_TESTS OFF"
 )
+
 add_subdirectory(imgui)
 add_subdirectory(box2d)
+
 if (USE_SFML)
     add_subdirectory(sfml)
     add_subdirectory(imgui-sfml)

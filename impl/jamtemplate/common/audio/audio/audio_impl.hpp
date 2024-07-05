@@ -2,62 +2,34 @@
 #define JAMTEMPLATE_AUDIO_IMPL_HPP
 
 #include <audio/audio/audio_interface.hpp>
-#include <audio/fades/sound_fade_manager.hpp>
-#include <audio/sound_groups/group_volume_manager.hpp>
-#include <oalpp/sound_context.hpp>
+#include <fmod.hpp>
+#include <fmod_studio.hpp>
 #include <map>
 #include <vector>
 
 namespace jt {
 
+void checkResult(FMOD_RESULT result);
+
 class AudioImpl : public AudioInterface {
 public:
-    AudioImpl(std::unique_ptr<SoundFadeManagerInterface> soundFadeManager = nullptr,
-        std::unique_ptr<SoundBufferManagerInterface> soundBufferManager = nullptr);
+    // TODO think about DIing FMOD context?
+    AudioImpl();
     ~AudioImpl();
 
     void update(float elapsed) override;
 
-    std::shared_ptr<jt::SoundInterface> addTemporarySound(std::string const& fileName) override;
-    std::shared_ptr<jt::SoundInterface> addTemporarySoundGroup(
-        std::vector<std::shared_ptr<jt::SoundInterface>> const& sounds) override;
+    std::shared_ptr<jt::SoundInterface> addTemporarySound(std::string const& eventPath) override;
 
     std::shared_ptr<jt::SoundInterface> addPermanentSound(
-        std::string const& identifier, std::string const& fileName) override;
-    std::shared_ptr<jt::SoundInterface> addPermanentSound(std::string const& identifier,
-        std::string const& fileName, oalpp::effects::MonoEffectInterface& effect) override;
-    std::shared_ptr<jt::SoundInterface> addPermanentSound(std::string const& identifier,
-        std::string const& introFileName, std::string const& loopingFileName,
-        oalpp::effects::MonoEffectInterface& effect) override;
-
-    std::shared_ptr<jt::SoundInterface> soundPool(
-        std::string const& baseIdentifier, std::string const& fileName, std::size_t count) override;
+        std::string const& identifier, std::string const& eventPath) override;
 
     std::shared_ptr<jt::SoundInterface> getPermanentSound(std::string const& identifier) override;
 
-    void removePermanentSound(std::string const& identifier) override;
-
-    oalpp::SoundContextInterface& getContext() override;
-
-    SoundFadeManagerInterface& fades() override;
-
-    GroupVolumeSetterInterface& groups() override;
-
-    SoundBufferManagerInterface& getSoundBufferManager() override;
-
 private:
-    oalpp::SoundContext m_context;
+    FMOD::Studio::System* m_studioSystem { nullptr };
 
-    std::vector<std::weak_ptr<jt::SoundInterface>> m_temporarySounds {};
-    std::map<std::string, std::shared_ptr<jt::SoundInterface>> m_permanentSounds {};
-
-    std::unique_ptr<SoundFadeManagerInterface> m_fades;
-
-    std::unique_ptr<SoundBufferManagerInterface> m_soundBufferManager;
-
-    GroupVolumeManager m_volumeGroups;
-
-    void cleanUpUnusedSounds();
+    std::map<std::string, FMOD::Studio::EventInstance*> permanentSounds;
 };
 } // namespace jt
 

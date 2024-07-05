@@ -37,17 +37,18 @@ FetchContent_GetProperties(openalpp)
 FetchContent_GetProperties(aselib)
 target_include_directories(JamTemplateLib SYSTEM PUBLIC ${tileson_SOURCE_DIR}/extras/)
 target_include_directories(JamTemplateLib SYSTEM PUBLIC ${CMAKE_SOURCE_DIR}/ext/better_enums)
-target_link_libraries(JamTemplateLib
+target_link_libraries(JamTemplateLib PUBLIC
         aselib
-        OpenALpp_Lib
         Box2D
 )
+
+jt_link_fmod(JamTemplateLib)
 
 if (USE_SFML)
     target_include_directories(JamTemplateLib PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/sfml)
     target_include_directories(JamTemplateLib SYSTEM PUBLIC ${SFML_DIR_ROOT}/include)
 
-    target_link_libraries(JamTemplateLib
+    target_link_libraries(JamTemplateLib PUBLIC
             sfml-system
             sfml-window
             sfml-graphics
@@ -55,7 +56,7 @@ if (USE_SFML)
     )
 
 else ()
-    target_link_libraries(JamTemplateLib
+    target_link_libraries(JamTemplateLib PUBLIC
             imgui-sdl
     )
 
@@ -63,13 +64,13 @@ else ()
     if (NOT JT_ENABLE_WEB)
         include_directories(JamTemplateLib ${SDL2_INCLUDE_DIRS})
         if (WIN32)
-            target_link_libraries(JamTemplateLib
+            target_link_libraries(JamTemplateLib PUBLIC
                     SDL2::SDL2
                     SDL2_image::SDL2_image
                     SDL2_ttf::SDL2_ttf
             )
         else ()
-            target_link_libraries(JamTemplateLib
+            target_link_libraries(JamTemplateLib PUBLIC
                     ${SDL2_LIBRARIES}
                     PkgConfig::SDL2_Image
                     PkgConfig::SDL2_TTF

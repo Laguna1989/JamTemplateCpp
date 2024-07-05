@@ -1,48 +1,85 @@
 ﻿#include "sound.hpp"
-#include <stdexcept>
+#include "audio/audio/audio_impl.hpp"
+#include <iostream>
 
-jt::Sound::Sound(std::string const& fileName, SoundBufferManagerInterface& soundManager)
-    : m_buffer { soundManager.get(fileName) }
-    , m_sound { *m_buffer }
-    , m_fileName { fileName }
+jt::Sound::Sound(FMOD::Studio::EventInstance* instance)
+    : m_instance { instance }
 {
+    checkValid();
 }
 
-void jt::Sound::update()
+bool jt::Sound::isPlaying() const
 {
-    m_sound.setVolume(getFinalVolume());
-    m_sound.update();
+    if (!checkValid())
+        return false;
+
+    FMOD_STUDIO_PLAYBACK_STATE state;
+    jt::checkResult(m_instance->getPlaybackState(&state));
+
+    return state == FMOD_STUDIO_PLAYBACK_PLAYING || FMOD_STUDIO_PLAYBACK_STARTING;
 }
 
-float jt::Sound::getFinalVolume() const
+void jt::Sound::play()
 {
-    return m_blend * m_volume * getVolumeFromVolumeProvider();
+    if (!checkValid())
+        return;
+
+    jt::checkResult(m_instance->start());
+
+    release();
 }
 
-bool jt::Sound::isPlaying() const { return m_sound.isPlaying(); }
-
-void jt::Sound::play() { m_sound.play(); }
-
-void jt::Sound::stop() { m_sound.stop(); }
-
-void jt::Sound::pause() { m_sound.pause(); }
-
-void jt::Sound::setLoop(bool doLoop) { m_sound.setIsLooping(doLoop); }
-
-bool jt::Sound::getLoop(void) { return m_sound.getIsLooping(); }
-
-float jt::Sound::getDuration() const { return m_sound.getLengthInSeconds(); }
-
-float jt::Sound::getPosition() const { return m_sound.getCurrentOffsetInSeconds(); }
-
-void jt::Sound::setPitch(float pitch)
+void jt::Sound::stop()
 {
-    if (pitch <= 0.0f) [[unlikely]] {
-        throw std::invalid_argument { "Pitch has to be greater than 0." };
+    if (!checkValid())
+        return;
+
+    jt::checkResult(m_instance->stop(FMOD_STUDIO_STOP_ALLOWFADEOUT));
+}
+
+void jt::Sound::pause()
+{
+    if (checkValid())
+        m_instance->setPaused(true);
+}
+
+float jt::Sound::getVolume() const
+{
+    if (!checkValid())
+        return 0.0f;
+
+    float volume { 0.0f };
+    float finalVolume { 0.0f };
+    jt::checkResult(m_instance->getVolume(&volume, &finalVolume));
+
+    return volume;
+}
+
+void jt::Sound::setVolume(float newVolume)
+{
+    if (!checkValid())
+        return;
+
+    jt::checkResult(m_instance->setVolume(newVolume));
+}
+
+bool jt::Sound::checkValid() const
+{
+    if (m_instance == nullptr) {
+        std::cerr << "created sound with nullptr";
+        return false;
     }
-    m_sound.setPitch(pitch);
+    if (!m_instance->isValid()) {
+        std::cerr << "Sound with invalid instance";
+        return false;
+    }
+
+    return true;
 }
 
-float jt::Sound::getPitch() const { return m_sound.getPitch(); }
-
-int jt::Sound::getSampleRate() const { return m_buffer->getSampleRate(); }
+void jt::Sound::release()
+{
+    if (!checkValid())
+        return;
+    checkResult(m_instance->release());
+}

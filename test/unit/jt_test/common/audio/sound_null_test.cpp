@@ -1,12 +1,5 @@
 #include <audio/sound/sound_null.hpp>
-#include <audio/sound_groups/group_volume_manager.hpp>
 #include <gtest/gtest.h>
-
-TEST(SoundNullTest, UpdateDoesNotThrowException)
-{
-    jt::SoundNull snd;
-    ASSERT_NO_THROW(snd.update());
-}
 
 TEST(SoundNullTest, isPlayingReturnsFalse)
 {
@@ -42,80 +35,4 @@ TEST(SoundNullTest, GetVolumeReturnsZero)
 {
     jt::SoundNull snd;
     ASSERT_EQ(snd.getVolume(), 0.0f);
-}
-
-TEST(SoundNullTest, GetFinalVolumeReturnsZero)
-{
-    jt::SoundNull snd;
-    ASSERT_EQ(snd.getFinalVolume(), 0.0f);
-}
-
-TEST(SoundNullTest, SetLoopDoesNotThrowException)
-{
-    jt::SoundNull snd;
-    ASSERT_NO_THROW(snd.setLoop(true));
-    ASSERT_NO_THROW(snd.setLoop(false));
-}
-
-TEST(SoundNullTest, GetLoopReturnsFalse)
-{
-    jt::SoundNull snd;
-    ASSERT_FALSE(snd.getLoop());
-}
-
-TEST(SoundNullTest, GetDurationReturns0)
-{
-    jt::SoundNull snd;
-    ASSERT_EQ(snd.getDuration(), 0.0f);
-}
-
-TEST(SoundNullTest, GetPositionReturns0)
-{
-    jt::SoundNull snd;
-    ASSERT_EQ(snd.getPosition(), 0.0f);
-}
-
-TEST(SoundNullTest, GetBlendReturns0)
-{
-    jt::SoundNull snd;
-    ASSERT_EQ(snd.getBlend(), 0.0f);
-}
-
-TEST(SoundNullTest, SetBlendDoesNotThrow)
-{
-    jt::SoundNull snd;
-    ASSERT_NO_THROW(snd.setBlend(0.0f));
-}
-
-TEST(SoundNullTest, GetSampleRateReturns44100)
-{
-    jt::SoundNull snd;
-    ASSERT_EQ(snd.getSampleRate(), 44100);
-}
-
-TEST(SoundNullTest, GetPitchReturns0)
-{
-    jt::SoundNull snd;
-    ASSERT_EQ(snd.getPitch(), 1.0f);
-}
-
-TEST(SoundNullTest, SetPitchDoesNotThrow)
-{
-    jt::SoundNull snd;
-    ASSERT_NO_THROW(snd.setPitch(0.0f));
-    ASSERT_NO_THROW(snd.setPitch(1.0f));
-    ASSERT_NO_THROW(snd.setPitch(2.0f));
-}
-
-TEST(SoundNullTest, setVolumeProviderDoesNotThrow)
-{
-    jt::SoundNull snd;
-    jt::GroupVolumeManager vm;
-    ASSERT_NO_THROW(snd.setVolumeProvider(vm));
-}
-
-TEST(SoundNullTest, setVolumeGroupDoesNotThrow)
-{
-    jt::SoundNull snd;
-    ASSERT_NO_THROW(snd.setVolumeGroup("abcd"));
 }

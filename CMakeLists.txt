@@ -2,6 +2,13 @@ cmake_minimum_required(VERSION 3.26)
 set(PROJECTNAME "JamTemplate")
 project(${PROJECTNAME})
 
+### Enable CCache
+#####################################################
+find_program(CCACHE_FOUND ccache)
+if (CCACHE_FOUND)
+    set_property(GLOBAL PROPERTY RULE_LAUNCH_COMPILE ccache)
+endif ()
+
 ## Helper Functions
 #####################################################
 include(config/cmake/helpers.cmake)
@@ -78,6 +85,12 @@ if (USE_SFML)
 else ()
     setup_sdl()
 endif ()
+
+#####################################################
+# setup FMod
+#####################################################
+jt_setup_fmod()
+
 
 add_subdirectory(impl)
 add_subdirectory(test)

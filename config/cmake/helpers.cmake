@@ -89,3 +89,52 @@ function (setup_sdl)
     endif()
     # on non-windows it is expected that sdl is available on the system
 endfunction()
+
+function(jt_setup_fmod)
+    if(MSVC)
+        ## Windows
+
+    elseif (EMSCRIPTEN)
+        ## Web
+
+        add_link_options("SHELL:-s EXPORTED_RUNTIME_METHODS=['cwrap','setValue','getValue']")
+
+        set(FMOD_DIR "${CMAKE_SOURCE_DIR}/ext/fmod/html5" CACHE INTERNAL "fmod directory")
+    else()
+        ## Linux
+        set(FMOD_DIR "${CMAKE_SOURCE_DIR}/ext/fmod/linux" CACHE INTERNAL "fmod directory")
+    endif()
+endfunction()
+
+function(jt_link_fmod TGT)
+    message(STATUS "FMOD_DIR: ${FMOD_DIR}")
+    if(MSVC)
+        target_link_libraries(${TGT} PUBLIC fmod_vc)
+        target_link_libraries(${TGT} PUBLIC fmodstudio_vc)
+    elseif (EMSCRIPTEN)
+        add_link_options("SHELL:-s EXPORTED_RUNTIME_METHODS=['cwrap','setValue','getValue']")
+
+        target_include_directories(${TGT} PUBLIC ${FMOD_DIR}/api/core/inc)
+        target_include_directories(${TGT} PUBLIC ${FMOD_DIR}/api/studio/inc)
+
+        target_link_libraries(${TGT} PUBLIC ${FMOD_DIR}/api/core/lib/upstream/w32/fmod_wasm.a)
+        target_link_libraries(${TGT} PUBLIC ${FMOD_DIR}/api/studio/lib/upstream/w32/fmodstudio_wasm.a)
+    else()
+        ## Linux
+
+        add_custom_command(TARGET ${TGT} PRE_BUILD
+                COMMAND ${CMAKE_COMMAND} -E copy
+                ${FMOD_DIR}/api/core/lib/x86_64/libfmod.* ${CMAKE_CURRENT_BINARY_DIR}/)
+
+        target_include_directories(${TGT} PUBLIC ${FMOD_DIR}/api/core/inc)
+        target_include_directories(${TGT} PUBLIC ${FMOD_DIR}/api/studio/inc)
+
+        target_link_directories(${TGT} PUBLIC ${FMOD_DIR}/api/core/lib/x86_64)
+        target_link_directories(${TGT} PUBLIC ${FMOD_DIR}/api/studio/lib/x86_64)
+
+        target_link_libraries(${TGT} PUBLIC ${FMOD_DIR}/api/core/lib/x86_64/libfmod.so)
+        target_link_libraries(${TGT} PUBLIC ${FMOD_DIR}/api/studio/lib/x86_64/libfmodstudio.so)
+
+    endif()
+
+endfunction()
