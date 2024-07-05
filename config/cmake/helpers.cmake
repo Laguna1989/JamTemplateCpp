@@ -97,7 +97,9 @@ function(jt_setup_fmod)
     elseif (EMSCRIPTEN)
         ## Web
 
-        set(FMOD_DIR "${CMAKE_SOURCE_DIR}/ext/fmod_html5" CACHE INTERNAL "fmod directory")
+        add_link_options("SHELL:-s EXPORTED_RUNTIME_METHODS=['cwrap','setValue','getValue']")
+
+        set(FMOD_DIR "${CMAKE_SOURCE_DIR}/ext/fmod/html5" CACHE INTERNAL "fmod directory")
     else()
         ## Linux
         set(FMOD_DIR "${CMAKE_SOURCE_DIR}/ext/fmod/linux" CACHE INTERNAL "fmod directory")
@@ -115,8 +117,8 @@ function(jt_link_fmod TGT)
         target_include_directories(${TGT} PUBLIC ${FMOD_DIR}/api/core/inc)
         target_include_directories(${TGT} PUBLIC ${FMOD_DIR}/api/studio/inc)
 
-        target_link_libraries(${TGT} ${FMOD_DIR}/api/core/lib/upstream/w32/fmod_wasm.a)
-        target_link_libraries(${TGT} ${FMOD_DIR}/api/studio/lib/upstream/w32/fmodstudio_wasm.a)
+        target_link_libraries(${TGT} PUBLIC ${FMOD_DIR}/api/core/lib/upstream/w32/fmod_wasm.a)
+        target_link_libraries(${TGT} PUBLIC ${FMOD_DIR}/api/studio/lib/upstream/w32/fmodstudio_wasm.a)
     else()
         ## Linux
 
