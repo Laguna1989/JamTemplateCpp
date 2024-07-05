@@ -2,31 +2,81 @@
 #include "performance_measurement.hpp"
 #include <audio/sound/sound.hpp>
 #include <random/random.hpp>
+#include "fmod_errors.h"
+#include <sstream>
 
-jt::AudioImpl::AudioImpl() = default;
-
-jt::AudioImpl::~AudioImpl() { }
-
-void jt::AudioImpl::update(float elapsed)
+namespace {
+void checkResult(FMOD_RESULT result)
 {
-    // TODO(Simon)
+    if (result == FMOD_OK) {
+        return;
+    }
+
+    std::ostringstream oss;
+    oss << "FMod Failed: (" << result << ") - " << FMOD_ErrorString(result);
+    throw std::logic_error { oss.str() };
+}
+} // namespace
+
+jt::AudioImpl::AudioImpl()
+{
+    checkResult(FMOD::Studio::System::create(&m_studioSystem));
+    checkResult(
+        m_studioSystem->initialize(2, FMOD_STUDIO_INIT_LIVEUPDATE, FMOD_INIT_NORMAL, nullptr));
+
+    FMOD::Studio::Bank* stringBank;
+    checkResult(m_studioSystem->loadBankFile(
+        "assets/Master.strings.bank", FMOD_STUDIO_LOAD_BANK_NORMAL, &stringBank));
+
+    FMOD::Studio::Bank* masterBank;
+    checkResult(m_studioSystem->loadBankFile(
+        "assets/Master.bank", FMOD_STUDIO_LOAD_BANK_NORMAL, &masterBank));
+
+    if (m_studioSystem == nullptr)
+        throw std::logic_error { "FMOD studio system was not properly instantiated" };
 }
 
-std::shared_ptr<jt::SoundInterface> jt::AudioImpl::addTemporarySound(std::string const& fileName)
+jt::AudioImpl::~AudioImpl()
 {
-    // TODO(Simon)
-    return nullptr;
+    // Do not use logger here anymore
+    if (m_studioSystem)
+        m_studioSystem->release();
+    m_studioSystem = nullptr;
+}
+
+void jt::AudioImpl::update(float /*elapsed*/) { m_studioSystem->update(); }
+
+std::shared_ptr<jt::SoundInterface> jt::AudioImpl::addTemporarySound(std::string const& eventPath)
+{
+    FMOD::Studio::EventDescription* eventDescription;
+    m_studioSystem->getEvent(eventPath.c_str(), &eventDescription);
+
+    FMOD::Studio::EventInstance* eventInstance;
+    eventDescription->createInstance(&eventInstance);
+
+    eventInstance->start();
+    return std::make_shared<jt::Sound>(eventInstance);
 }
 
 std::shared_ptr<jt::SoundInterface> jt::AudioImpl::addPermanentSound(
-    std::string const& identifier, std::string const& fileName)
+    std::string const& identifier, std::string const& eventPath)
 {
-    // TODO(Simon)
-    return std::shared_ptr<jt::SoundInterface>();
+
+    FMOD::Studio::EventDescription* eventDescription;
+    m_studioSystem->getEvent(eventPath.c_str(), &eventDescription);
+
+    FMOD::Studio::EventInstance* eventInstance;
+    eventDescription->createInstance(&eventInstance);
+
+    eventInstance->start();
+    permanentSounds[identifier] = eventInstance;
+    return std::make_shared<jt::Sound>(eventInstance);
 }
 
 std::shared_ptr<jt::SoundInterface> jt::AudioImpl::getPermanentSound(std::string const& identifier)
 {
-    // TODO(Simon)
-    return std::shared_ptr<jt::SoundInterface>();
+    if (permanentSounds.contains(identifier))
+        return std::make_shared<jt::Sound>(permanentSounds[identifier]);
+
+    return nullptr;
 }

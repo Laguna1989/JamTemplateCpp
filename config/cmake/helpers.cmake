@@ -118,13 +118,21 @@ function(jt_link_fmod TGT)
         target_link_libraries(${TGT} ${FMOD_DIR}/api/core/lib/upstream/w32/fmod_wasm.a)
         target_link_libraries(${TGT} ${FMOD_DIR}/api/studio/lib/upstream/w32/fmodstudio_wasm.a)
     else()
-
         ## Linux
+
+        add_custom_command(TARGET ${TGT} PRE_BUILD
+                COMMAND ${CMAKE_COMMAND} -E copy
+                ${FMOD_DIR}/api/core/lib/x86_64/libfmod.* ${CMAKE_CURRENT_BINARY_DIR}/)
+
+        target_include_directories(${TGT} PUBLIC ${FMOD_DIR}/api/core/inc)
+        target_include_directories(${TGT} PUBLIC ${FMOD_DIR}/api/studio/inc)
+
         target_link_directories(${TGT} PUBLIC ${FMOD_DIR}/api/core/lib/x86_64)
         target_link_directories(${TGT} PUBLIC ${FMOD_DIR}/api/studio/lib/x86_64)
 
         target_link_libraries(${TGT} PUBLIC ${FMOD_DIR}/api/core/lib/x86_64/libfmod.so)
         target_link_libraries(${TGT} PUBLIC ${FMOD_DIR}/api/studio/lib/x86_64/libfmodstudio.so)
+
     endif()
 
 endfunction()

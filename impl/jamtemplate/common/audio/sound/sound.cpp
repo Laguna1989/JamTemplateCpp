@@ -1,9 +1,11 @@
 ﻿#include "sound.hpp"
+#include <iostream>
 #include <stdexcept>
 
-jt::Sound::Sound(std::string const& fileName)
-    : m_fileName { fileName }
+jt::Sound::Sound(FMOD::Studio::EventInstance* instance)
+    : m_instance { instance }
 {
+    checkValid();
 }
 
 bool jt::Sound::isPlaying() const
@@ -14,15 +16,52 @@ bool jt::Sound::isPlaying() const
 
 void jt::Sound::play()
 {
-    // TODO(Simon)
+    if (checkValid())
+        m_instance->start();
 }
 
 void jt::Sound::stop()
 {
-    // TODO(Simon)
+    if (checkValid())
+        m_instance->stop(FMOD_STUDIO_STOP_ALLOWFADEOUT);
 }
 
 void jt::Sound::pause()
 {
-    // TODO(Simon)
+    if (checkValid())
+        m_instance->setPaused(true);
+}
+
+float jt::Sound::getVolume() const
+{
+    if (!checkValid())
+        return 0.0f;
+
+    float volume { 0.0f };
+    float finalVolume { 0.0f };
+    m_instance->getVolume(&volume, &finalVolume);
+
+    return volume;
+}
+
+void jt::Sound::setVolume(float newVolume)
+{
+    if (!checkValid())
+        return;
+
+    m_instance->setVolume(newVolume);
+}
+
+bool jt::Sound::checkValid() const
+{
+    if (m_instance == nullptr) {
+        std::cerr << "created sound with nullptr";
+        return false;
+    }
+    if (!m_instance->isValid()) {
+        std::cerr << "Sound with invalid instance";
+        return false;
+    }
+
+    return true;
 }

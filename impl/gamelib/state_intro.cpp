@@ -13,7 +13,7 @@ void StateIntro::onCreate()
     //    m_sprite->setOffset(jt::OffsetMode::CENTER);
     m_sprite->setScale(jt::Vector2f { 0.5f, 0.5f });
 
-    m_jingle = getGame()->audio().addTemporarySound("assets/intro.mp3");
+    m_jingle = getGame()->audio().addTemporarySound("event:/intro");
 }
 
 void StateIntro::onEnter()
