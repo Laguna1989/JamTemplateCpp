@@ -9,6 +9,8 @@
 
 namespace jt {
 
+void checkResult(FMOD_RESULT result);
+
 class AudioImpl : public AudioInterface {
 public:
     // TODO think about DIing FMOD context?

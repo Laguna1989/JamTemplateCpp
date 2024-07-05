@@ -5,8 +5,7 @@
 #include "fmod_errors.h"
 #include <sstream>
 
-namespace {
-void checkResult(FMOD_RESULT result)
+void jt::checkResult(FMOD_RESULT result)
 {
     if (result == FMOD_OK) {
         return;
@@ -16,7 +15,6 @@ void checkResult(FMOD_RESULT result)
     oss << "FMod Failed: (" << result << ") - " << FMOD_ErrorString(result);
     throw std::logic_error { oss.str() };
 }
-} // namespace
 
 jt::AudioImpl::AudioImpl()
 {

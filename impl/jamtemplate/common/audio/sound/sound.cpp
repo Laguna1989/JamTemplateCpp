@@ -1,6 +1,6 @@
 ﻿#include "sound.hpp"
+#include "audio/audio/audio_impl.hpp"
 #include <iostream>
-#include <stdexcept>
 
 jt::Sound::Sound(FMOD::Studio::EventInstance* instance)
     : m_instance { instance }
@@ -10,20 +10,29 @@ jt::Sound::Sound(FMOD::Studio::EventInstance* instance)
 
 bool jt::Sound::isPlaying() const
 {
-    // TODO(Simon)
-    return false;
+    if (!checkValid())
+        return false;
+
+    FMOD_STUDIO_PLAYBACK_STATE state;
+    jt::checkResult(m_instance->getPlaybackState(&state));
+
+    return state == FMOD_STUDIO_PLAYBACK_PLAYING;
 }
 
 void jt::Sound::play()
 {
-    if (checkValid())
-        m_instance->start();
+    if (!checkValid())
+        return;
+
+    jt::checkResult(m_instance->start());
 }
 
 void jt::Sound::stop()
 {
-    if (checkValid())
-        m_instance->stop(FMOD_STUDIO_STOP_ALLOWFADEOUT);
+    if (!checkValid())
+        return;
+
+    jt::checkResult(m_instance->stop(FMOD_STUDIO_STOP_ALLOWFADEOUT));
 }
 
 void jt::Sound::pause()
@@ -39,7 +48,7 @@ float jt::Sound::getVolume() const
 
     float volume { 0.0f };
     float finalVolume { 0.0f };
-    m_instance->getVolume(&volume, &finalVolume);
+    jt::checkResult(m_instance->getVolume(&volume, &finalVolume));
 
     return volume;
 }
@@ -49,7 +58,7 @@ void jt::Sound::setVolume(float newVolume)
     if (!checkValid())
         return;
 
-    m_instance->setVolume(newVolume);
+    jt::checkResult(m_instance->setVolume(newVolume));
 }
 
 bool jt::Sound::checkValid() const
