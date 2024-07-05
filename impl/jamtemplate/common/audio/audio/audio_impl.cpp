@@ -1,9 +1,19 @@
 #include "audio_impl.hpp"
-#include "performance_measurement.hpp"
 #include <audio/sound/sound.hpp>
 #include <random/random.hpp>
 #include "fmod_errors.h"
 #include <sstream>
+
+namespace {
+FMOD_STUDIO_INITFLAGS getStudioInitFlags()
+{
+#if JT_ENABLE_WEB
+    return FMOD_STUDIO_INIT_SYNCHRONOUS_UPDATE;
+#else
+    return FMOD_STUDIO_INIT_LIVEUPDATE;
+#endif
+}
+} // namespace
 
 void jt::checkResult(FMOD_RESULT result)
 {
@@ -19,8 +29,7 @@ void jt::checkResult(FMOD_RESULT result)
 jt::AudioImpl::AudioImpl()
 {
     checkResult(FMOD::Studio::System::create(&m_studioSystem));
-    checkResult(
-        m_studioSystem->initialize(2, FMOD_STUDIO_INIT_LIVEUPDATE, FMOD_INIT_NORMAL, nullptr));
+    checkResult(m_studioSystem->initialize(128, getStudioInitFlags(), FMOD_INIT_NORMAL, nullptr));
 
     FMOD::Studio::Bank* stringBank;
     checkResult(m_studioSystem->loadBankFile(
