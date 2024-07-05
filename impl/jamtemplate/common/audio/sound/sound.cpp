@@ -16,7 +16,7 @@ bool jt::Sound::isPlaying() const
     FMOD_STUDIO_PLAYBACK_STATE state;
     jt::checkResult(m_instance->getPlaybackState(&state));
 
-    return state == FMOD_STUDIO_PLAYBACK_PLAYING;
+    return state == FMOD_STUDIO_PLAYBACK_PLAYING || FMOD_STUDIO_PLAYBACK_STARTING;
 }
 
 void jt::Sound::play()
