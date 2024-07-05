@@ -1,4 +1,5 @@
-﻿#include <audio/sound/sound.hpp>
+﻿#include <audio/audio/audio_impl.hpp>
+#include <audio/sound/sound.hpp>
 #include <gtest/gtest.h>
 #include <thread>
 #include <type_traits>
@@ -8,11 +9,13 @@ using jt::Sound;
 class SoundTestWithLoadedSound : public ::testing::Test {
 private:
 protected:
-    std::unique_ptr<Sound> m_sound;
+    std::shared_ptr<jt::SoundInterface> m_sound;
+
+    jt::AudioImpl audio;
 
     SoundTestWithLoadedSound()
     {
-        m_sound = std::make_unique<Sound>("assets/test/unit/jt_test/test.ogg");
+        m_sound = audio.addPermanentSound("test sound", "event:/test/unit/jt_test/test");
         m_sound->setVolume(1.0f);
         m_sound->stop();
     }
@@ -90,8 +93,11 @@ TEST_F(SoundTestWithLoadedSound, PauseTwice)
 TEST_F(SoundTestWithLoadedSound, SetVolumeWhilePlaying)
 {
     EXPECT_NO_THROW(m_sound->play());
-    ASSERT_TRUE(m_sound->isPlaying());
+    audio.update(0.0f);
     EXPECT_NO_THROW(m_sound->setVolume(0.5f));
+    audio.update(0.0f);
     EXPECT_NO_THROW(m_sound->setVolume(0.75f));
+    audio.update(0.0f);
     EXPECT_NO_THROW(m_sound->setVolume(0.2f));
+    audio.update(0.0f);
 }

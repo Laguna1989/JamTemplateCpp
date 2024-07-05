@@ -59,10 +59,12 @@ std::shared_ptr<jt::SoundInterface> jt::AudioImpl::addTemporarySound(std::string
 std::shared_ptr<jt::SoundInterface> jt::AudioImpl::addPermanentSound(
     std::string const& identifier, std::string const& eventPath)
 {
-
     FMOD::Studio::EventDescription* eventDescription;
-    m_studioSystem->getEvent(eventPath.c_str(), &eventDescription);
+    checkResult(m_studioSystem->getEvent(eventPath.c_str(), &eventDescription));
 
+    if (eventDescription == nullptr) {
+        return nullptr;
+    }
     FMOD::Studio::EventInstance* eventInstance;
     eventDescription->createInstance(&eventInstance);
 
