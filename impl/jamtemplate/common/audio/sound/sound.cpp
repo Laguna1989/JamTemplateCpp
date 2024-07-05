@@ -25,6 +25,8 @@ void jt::Sound::play()
         return;
 
     jt::checkResult(m_instance->start());
+
+    release();
 }
 
 void jt::Sound::stop()
@@ -73,4 +75,11 @@ bool jt::Sound::checkValid() const
     }
 
     return true;
+}
+
+void jt::Sound::release()
+{
+    if (!checkValid())
+        return;
+    checkResult(m_instance->release());
 }

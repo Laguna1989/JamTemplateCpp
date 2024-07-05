@@ -18,6 +18,7 @@ public:
     void play() override;
     void stop() override;
     void pause() override;
+    void release() override;
 
     float getVolume() const override;
     void setVolume(float newVolume) override;

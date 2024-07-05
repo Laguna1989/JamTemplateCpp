@@ -16,6 +16,9 @@ public:
     /// Pause the sound (consecutive play will continue where the sound was stopped)
     virtual void pause() = 0;
 
+    // clean the sound resource
+    virtual void release() { };
+
     /// Get Volume
     /// This is the currently stored volume that was set. It does not take SoundGroups into account.
     /// \return volume in range 0.0 to 1.0
