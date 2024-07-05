@@ -8,7 +8,8 @@
 
 class StateIntro : public jt::GameState {
 private:
-    std::shared_ptr<jt::Sprite> m_sprite;
+    std::shared_ptr<jt::Sprite> m_runvsLogo;
+    std::shared_ptr<jt::Sprite> m_fmodLogo;
     std::shared_ptr<jt::SoundInterface> m_jingle;
 
     void onCreate() override;
