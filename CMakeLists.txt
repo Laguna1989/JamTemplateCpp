@@ -82,9 +82,8 @@ endif ()
 #####################################################
 # setup FMod
 #####################################################
-if (${JT_AUDIO_BACKEND} STREQUAL "fmod")
-    jt_setup_fmod()
-endif ()
+jt_setup_fmod()
+
 
 add_subdirectory(impl)
 add_subdirectory(test)

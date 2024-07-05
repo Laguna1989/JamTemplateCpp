@@ -1,34 +1,13 @@
 #include "sound_base.hpp"
 #include <stdexcept>
 
-float jt::SoundBase::getVolume() const { return m_volume; }
-
-void jt::SoundBase::setVolume(float newVolume) { m_volume = newVolume; }
-
-void jt::SoundBase::setBlend(float blend)
+float jt::SoundBase::getVolume() const
 {
-    if (blend < 0.0f || blend > 1.0f) [[unlikely]] {
-        throw std::invalid_argument { "Blend has to be between [0, 1]." };
-    }
-    m_blend = 1.0f - blend;
+    // TODO(Simon)
+    return 0.0f;
 }
 
-float jt::SoundBase::getBlend() const { return 1.0f - m_blend; }
-
-void jt::SoundBase::setVolumeProvider(jt::GroupVolumeGetterInterface& provider)
+void jt::SoundBase::setVolume(float newVolume)
 {
-    m_volumeProvider = &provider;
-}
-
-float jt::SoundBase::getVolumeFromVolumeProvider() const
-{
-    if (m_volumeProvider == nullptr) {
-        return 1.0f;
-    }
-    return m_volumeProvider->getVolume(m_volumeGroup) * m_volumeProvider->getVolume("master");
-}
-
-void jt::SoundBase::setVolumeGroup(std::string const& volumeGroupName)
-{
-    m_volumeGroup = volumeGroupName;
+    // TODO(Simon)
 }
