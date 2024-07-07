@@ -9,19 +9,13 @@
 
 class MockLogger : public jt::LoggerInterface {
 public:
-    MOCK_METHOD(void, fatal,
-        (std::string const&, std::vector<std::string> const&, std::source_location), (override));
-    MOCK_METHOD(void, error,
-        (std::string const&, std::vector<std::string> const&, std::source_location), (override));
-    MOCK_METHOD(void, warning,
-        (std::string const&, std::vector<std::string> const&, std::source_location), (override));
-    MOCK_METHOD(void, info,
-        (std::string const&, std::vector<std::string> const&, std::source_location), (override));
-    MOCK_METHOD(void, debug,
-        (std::string const&, std::vector<std::string> const&, std::source_location), (override));
-    MOCK_METHOD(void, verbose,
-        (std::string const&, std::vector<std::string> const&, std::source_location), (override));
-    MOCK_METHOD(void, action, (std::string const&, std::source_location), (override));
+    MOCK_METHOD(void, fatal, (std::string const&, std::vector<std::string> const&), (override));
+    MOCK_METHOD(void, error, (std::string const&, std::vector<std::string> const&), (override));
+    MOCK_METHOD(void, warning, (std::string const&, std::vector<std::string> const&), (override));
+    MOCK_METHOD(void, info, (std::string const&, std::vector<std::string> const&), (override));
+    MOCK_METHOD(void, debug, (std::string const&, std::vector<std::string> const&), (override));
+    MOCK_METHOD(void, verbose, (std::string const&, std::vector<std::string> const&), (override));
+    MOCK_METHOD(void, action, (std::string const&), (override));
     MOCK_METHOD(void, addLogTarget, (std::shared_ptr<jt::LogTargetInterface>), (override));
     MOCK_METHOD(void, setLogLevel, (jt::LogLevel), (override));
 };
