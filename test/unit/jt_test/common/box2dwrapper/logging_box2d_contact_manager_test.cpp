@@ -14,7 +14,7 @@ TEST(LoggingBox2DContactManagerTest, ConstructorWithNullptrThrowsException)
 TEST(LoggingBox2DContactManagerTest, ConstructorWithNullptrLogsFatal)
 {
     MockLogger logger;
-    EXPECT_CALL(logger, fatal(::testing::_, ::testing::_, ::testing::_));
+    EXPECT_CALL(logger, fatal(::testing::_, ::testing::_));
     auto const func = [&logger]() { jt::LoggingBox2DContactManager { nullptr, logger }; };
     ASSERT_THROW(func(), std::invalid_argument);
 }
@@ -34,7 +34,7 @@ TEST(LoggingBox2DContactManagerTest, ConstructorLogsInfo)
 {
     MockLogger logger;
     auto decoratee = std::make_shared<MockBox2DContactManager>();
-    EXPECT_CALL(logger, info(::testing::_, ::testing::_, ::testing::_));
+    EXPECT_CALL(logger, info(::testing::_, ::testing::_));
     jt::LoggingBox2DContactManager { decoratee, logger };
 }
 
@@ -44,7 +44,7 @@ TEST(LoggingBox2DContactManagerTest, SizeLogsVerbose)
     auto decoratee = std::make_shared<MockBox2DContactManager>();
     auto contactManager = jt::LoggingBox2DContactManager { decoratee, logger };
     EXPECT_CALL(*decoratee, size());
-    EXPECT_CALL(logger, verbose(::testing::_, ::testing::_, ::testing::_));
+    EXPECT_CALL(logger, verbose(::testing::_, ::testing::_));
     contactManager.size();
 }
 
@@ -54,7 +54,7 @@ TEST(LoggingBox2DContactManagerTest, RegisterCallbackLogsInfo)
     auto decoratee = std::make_shared<MockBox2DContactManager>();
     auto contactManager = jt::LoggingBox2DContactManager { decoratee, logger };
     EXPECT_CALL(*decoratee, registerCallback("abcd", ::testing::_));
-    EXPECT_CALL(logger, info(::testing::_, ::testing::_, ::testing::_));
+    EXPECT_CALL(logger, info(::testing::_, ::testing::_));
     contactManager.registerCallback("abcd", nullptr);
 }
 
@@ -64,7 +64,7 @@ TEST(LoggingBox2DContactManagerTest, UnregisterCallbackLogsInfo)
     auto decoratee = std::make_shared<MockBox2DContactManager>();
     auto contactManager = jt::LoggingBox2DContactManager { decoratee, logger };
     EXPECT_CALL(*decoratee, unregisterCallback(::testing::_));
-    EXPECT_CALL(logger, info(::testing::_, ::testing::_, ::testing::_));
+    EXPECT_CALL(logger, info(::testing::_, ::testing::_));
     contactManager.unregisterCallback("abcd");
 }
 
@@ -74,7 +74,7 @@ TEST(LoggingBox2DContactManagerTest, GetAllCallbackIdentifiersLogsVerbose)
     auto decoratee = std::make_shared<MockBox2DContactManager>();
     auto contactManager = jt::LoggingBox2DContactManager { decoratee, logger };
     EXPECT_CALL(*decoratee, getAllCallbackIdentifiers());
-    EXPECT_CALL(logger, verbose(::testing::_, ::testing::_, ::testing::_));
+    EXPECT_CALL(logger, verbose(::testing::_, ::testing::_));
     contactManager.getAllCallbackIdentifiers();
 }
 
@@ -84,7 +84,7 @@ TEST(LoggingBox2DContactManagerTest, BeginContactLogsDebug)
     auto decoratee = std::make_shared<MockBox2DContactManager>();
     auto contactManager = jt::LoggingBox2DContactManager { decoratee, logger };
     EXPECT_CALL(*decoratee, BeginContact(::testing::_));
-    EXPECT_CALL(logger, debug(::testing::_, ::testing::_, ::testing::_));
+    EXPECT_CALL(logger, debug(::testing::_, ::testing::_));
     contactManager.BeginContact(nullptr);
 }
 
@@ -94,6 +94,6 @@ TEST(LoggingBox2DContactManagerTest, EndContactLogsDebug)
     auto decoratee = std::make_shared<MockBox2DContactManager>();
     auto contactManager = jt::LoggingBox2DContactManager { decoratee, logger };
     EXPECT_CALL(*decoratee, EndContact(::testing::_));
-    EXPECT_CALL(logger, debug(::testing::_, ::testing::_, ::testing::_));
+    EXPECT_CALL(logger, debug(::testing::_, ::testing::_));
     contactManager.EndContact(nullptr);
 }

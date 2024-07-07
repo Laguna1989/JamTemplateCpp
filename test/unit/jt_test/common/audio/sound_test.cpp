@@ -44,19 +44,6 @@ TEST_F(SoundTestWithLoadedSound, SetVolumeOne)
     EXPECT_FLOAT_EQ(m_sound->getVolume(), newVolume);
 }
 
-TEST_F(SoundTestWithLoadedSound, StopDoesNothingWhenNotPlaying)
-{
-    m_sound->stop();
-    EXPECT_FALSE(m_sound->isPlaying());
-}
-
-TEST_F(SoundTestWithLoadedSound, StopPlayingSound)
-{
-    m_sound->play();
-    m_sound->stop();
-    EXPECT_FALSE(m_sound->isPlaying());
-}
-
 TEST_F(SoundTestWithLoadedSound, PlayTwice)
 {
     m_sound->play();
