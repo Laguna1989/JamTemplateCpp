@@ -395,3 +395,10 @@ cmake-build-*
 
 doc/doxygen/html
 doc/doxygen/latex
+
+### Mac-Kram ###
+.DS_Store
+
+### fmod stuff ###
+assets_ext/fmod_studio_project/jt_fmod_studio/.cache
+assets_ext/fmod_studio_project/jt_fmod_studio/.unsaved
