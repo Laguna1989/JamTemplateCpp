@@ -12,19 +12,13 @@ class LogTargetInterface;
 class Logger : public jt::LoggerInterface {
 public:
     void action(
-        std::string const& string, std::source_location = std::source_location::current()) override;
-    void fatal(std::string const& string, std::vector<std::string> const& tags = {},
-        std::source_location = std::source_location::current()) override;
-    void error(std::string const& string, std::vector<std::string> const& tags = {},
-        std::source_location = std::source_location::current()) override;
-    void warning(std::string const& string, std::vector<std::string> const& tags = {},
-        std::source_location = std::source_location::current()) override;
-    void info(std::string const& string, std::vector<std::string> const& tags = {},
-        std::source_location = std::source_location::current()) override;
-    void debug(std::string const& string, std::vector<std::string> const& tags = {},
-        std::source_location = std::source_location::current()) override;
-    void verbose(std::string const& string, std::vector<std::string> const& tags = {},
-        std::source_location = std::source_location::current()) override;
+        std::string const& string) override;
+    void fatal(std::string const& string, std::vector<std::string> const& tags = {}) override;
+    void error(std::string const& string, std::vector<std::string> const& tags = {}) override;
+    void warning(std::string const& string, std::vector<std::string> const& tags = {}) override;
+    void info(std::string const& string, std::vector<std::string> const& tags = {}) override;
+    void debug(std::string const& string, std::vector<std::string> const& tags = {}) override;
+    void verbose(std::string const& string, std::vector<std::string> const& tags = {}) override;
 
     void addLogTarget(std::shared_ptr<LogTargetInterface> target) override;
     void setLogLevel(LogLevel level) override;

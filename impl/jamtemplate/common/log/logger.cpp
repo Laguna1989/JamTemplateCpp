@@ -5,59 +5,59 @@
 #include <sstream>
 #include <stdexcept>
 
-void jt::Logger::action(std::string const& string, std::source_location source)
+void jt::Logger::action(std::string const& string)
 {
-    addLogEntry(LogEntry { string, "", LogLevel::Action, {}, source });
+    addLogEntry(LogEntry { string, "", LogLevel::Action, {}});
 }
 
 void jt::Logger::fatal(
-    std::string const& string, std::vector<std::string> const& tags, std::source_location source)
+    std::string const& string, std::vector<std::string> const& tags)
 {
     if (m_logLevel >= LogLevel::Fatal) {
-        addLogEntry(LogEntry { string, "", LogLevel::Fatal, tags, source });
+        addLogEntry(LogEntry { string, "", LogLevel::Fatal, tags});
     }
 }
 
 void jt::Logger::error(
-    std::string const& string, std::vector<std::string> const& tags, std::source_location source)
+    std::string const& string, std::vector<std::string> const& tags)
 {
     if (m_logLevel >= LogLevel::Error) {
-        addLogEntry(LogEntry { string, "", LogLevel::Error, tags, source });
+        addLogEntry(LogEntry { string, "", LogLevel::Error, tags});
     }
 }
 
 void jt::Logger::warning(
-    std::string const& string, std::vector<std::string> const& tags, std::source_location source)
+    std::string const& string, std::vector<std::string> const& tags)
 {
     if (m_logLevel >= LogLevel::Warning) {
-        addLogEntry(LogEntry { string, "", LogLevel::Warning, tags, source });
+        addLogEntry(LogEntry { string, "", LogLevel::Warning, tags});
     }
 }
 
 void jt::Logger::info(
-    std::string const& string, std::vector<std::string> const& tags, std::source_location source)
+    std::string const& string, std::vector<std::string> const& tags)
 {
     if (m_logLevel >= LogLevel::Info) {
-        addLogEntry(LogEntry { string, "", LogLevel::Info, tags, source });
+        addLogEntry(LogEntry { string, "", LogLevel::Info, tags});
     }
 }
 
 void jt::Logger::debug(
-    std::string const& string, std::vector<std::string> const& tags, std::source_location source)
+    std::string const& string, std::vector<std::string> const& tags)
 {
 #ifdef JT_ENABLE_DEBUG
     if (m_logLevel >= LogLevel::Debug) {
-        addLogEntry(LogEntry { string, "", LogLevel::Debug, tags, source });
+        addLogEntry(LogEntry { string, "", LogLevel::Debug, tags});
     }
 #endif
 }
 
 void jt::Logger::verbose(
-    std::string const& string, std::vector<std::string> const& tags, std::source_location source)
+    std::string const& string, std::vector<std::string> const& tags)
 {
 #ifdef JT_ENABLE_DEBUG
     if (m_logLevel >= LogLevel::Verbose) {
-        addLogEntry(LogEntry { string, "", LogLevel::Verbose, tags, source });
+        addLogEntry(LogEntry { string, "", LogLevel::Verbose, tags});
     }
 #endif
 }

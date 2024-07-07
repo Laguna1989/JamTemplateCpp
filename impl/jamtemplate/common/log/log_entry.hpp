@@ -2,7 +2,6 @@
 #define JAMTEMPLATE_LOG_ENTRY_HPP
 
 #include <log/log_level.hpp>
-#include <source_location>
 #include <string>
 #include <vector>
 
@@ -14,7 +13,6 @@ struct LogEntry {
     std::string time { "" };
     LogLevel level { LogLevel::Off };
     std::vector<std::string> tags {};
-    std::source_location source {};
 };
 
 } // namespace jt

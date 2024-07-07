@@ -3,7 +3,6 @@
 
 #include <log/log_level.hpp>
 #include <memory>
-#include <source_location>
 #include <string>
 #include <vector>
 
@@ -16,50 +15,44 @@ public:
     /// Log a fatal message
     /// \param string the log message
     /// \param tags the message tags
-    virtual void fatal(std::string const& string, std::vector<std::string> const& tags = {},
-        std::source_location = std::source_location::current())
+    virtual void fatal(std::string const& string, std::vector<std::string> const& tags = {})
         = 0;
 
     /// Log a error message
     /// \param string the log message
     /// \param tags the message tags
-    virtual void error(std::string const& string, std::vector<std::string> const& tags = {},
-        std::source_location = std::source_location::current())
+    virtual void error(std::string const& string, std::vector<std::string> const& tags = {})
         = 0;
 
     /// Log a warning message
     /// \param string the log message
     /// \param tags the message tags
-    virtual void warning(std::string const& string, std::vector<std::string> const& tags = {},
-        std::source_location = std::source_location::current())
+    virtual void warning(std::string const& string, std::vector<std::string> const& tags = {})
         = 0;
 
     /// Log a info message
     /// \param string the log message
     /// \param tags the message tags
-    virtual void info(std::string const& string, std::vector<std::string> const& tags = {},
-        std::source_location = std::source_location::current())
+    virtual void info(std::string const& string, std::vector<std::string> const& tags = {})
         = 0;
 
     /// Log a debug message
     /// \param string the log message
     /// \param tags the message tags
-    virtual void debug(std::string const& string, std::vector<std::string> const& tags = {},
-        std::source_location = std::source_location::current())
+    virtual void debug(std::string const& string, std::vector<std::string> const& tags = {})
         = 0;
 
     /// Log a verbose message
     /// \param string the log message
     /// \param tags the message tags
-    virtual void verbose(std::string const& string, std::vector<std::string> const& tags = {},
-        std::source_location = std::source_location::current())
+    virtual void verbose(std::string const& string, std::vector<std::string> const& tags = {})
         = 0;
 
     /// Log a action message (from the console
     /// \param string the log message
     /// \param tags the message tags
     virtual void action(
-        std::string const& string, std::source_location = std::source_location::current())
+        std::string const& string)
         = 0;
 
     /// Add a log target to the logger
