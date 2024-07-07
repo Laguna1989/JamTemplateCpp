@@ -93,6 +93,9 @@ endfunction()
 function(jt_setup_fmod)
     if(MSVC)
         ## Windows
+    elseif (APPLE)
+        ## Mac
+        set(FMOD_DIR "${CMAKE_SOURCE_DIR}/ext/fmod/mac" CACHE INTERNAL "fmod directory")
 
     elseif (EMSCRIPTEN)
         ## Web
@@ -109,8 +112,35 @@ endfunction()
 function(jt_link_fmod TGT)
     message(STATUS "FMOD_DIR: ${FMOD_DIR}")
     if(MSVC)
+
+        target_include_directories(${TGT} PUBLIC ${FMOD_DIR}/api/core/inc)
+        target_include_directories(${TGT} PUBLIC ${FMOD_DIR}/api/studio/inc)
+
+        target_link_directories(${TGT} PUBLIC ${FMOD_DIR}/api/core/lib/x64)
+        target_link_directories(${TGT} PUBLIC ${FMOD_DIR}/api/studio/lib/x64)
+
         target_link_libraries(${TGT} PUBLIC fmod_vc)
         target_link_libraries(${TGT} PUBLIC fmodstudio_vc)
+        
+    elseif (APPLE)
+
+        target_include_directories(${TGT} PUBLIC ${FMOD_DIR}/api/core/inc)
+        target_include_directories(${TGT} PUBLIC ${FMOD_DIR}/api/studio/inc)
+
+        target_link_directories(${TGT} PUBLIC ${FMOD_DIR}/api/core/lib)
+        target_link_directories(${TGT} PUBLIC ${FMOD_DIR}/api/studio/lib)
+
+        target_link_libraries(${TGT} PUBLIC ${FMOD_DIR}/api/core/lib/libfmod.dylib)
+        target_link_libraries(${TGT} PUBLIC ${FMOD_DIR}/api/studio/lib/libfmodstudio.dylib)
+
+        add_custom_command(TARGET ${TGT} PRE_BUILD
+            COMMAND ${CMAKE_COMMAND} -E copy
+            ${FMOD_DIR}/api/core/lib/libfmod.dylib ${CMAKE_CURRENT_BINARY_DIR}/)
+
+        add_custom_command(TARGET ${TGT} PRE_BUILD
+            COMMAND ${CMAKE_COMMAND} -E copy
+            ${FMOD_DIR}/api/studio/lib/libfmodstudio.dylib ${CMAKE_CURRENT_BINARY_DIR}/)
+
     elseif (EMSCRIPTEN)
         add_link_options("SHELL:-s EXPORTED_RUNTIME_METHODS=['cwrap','setValue','getValue']")
 

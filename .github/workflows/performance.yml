@@ -62,7 +62,7 @@ jobs:
 
       - name: Execute Performance Test
         working-directory: ${{github.workspace}}/test/integration/performance
-        run: xvfb-run ./jt_performance --benchmark_format=json --benchmark_out=benchmark_result.json
+        run: export LD_LIBRARY_PATH=${{github.workspace}}/test/integration/performance && xvfb-run ./jt_performance --benchmark_format=json --benchmark_out=benchmark_result.json
 
       - name: Store benchmark result
         uses: benchmark-action/github-action-benchmark@v1

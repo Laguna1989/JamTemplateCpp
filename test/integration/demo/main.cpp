@@ -2,9 +2,6 @@
 #include <action_commands/basic_action_commands.hpp>
 #include <audio/audio/audio_impl.hpp>
 #include <audio/audio/audio_null.hpp>
-#include <audio/audio/logging_audio.hpp>
-#include <audio/fades/logging_sound_fade_manager.hpp>
-#include <audio/fades/sound_fade_manager.hpp>
 #include <cache/cache_impl.hpp>
 #include <camera.hpp>
 #include <game.hpp>
@@ -77,10 +74,10 @@ int main(int /*argc*/, char* /*argv*/[])
 
     keyboard->listenForKey(jt::KeyCode::F10);
     keyboard->listenForKey(jt::KeyCode::F1);
-  
+
     keyboard->listenForKey(jt::KeyCode::Home);
     keyboard->listenForKey(jt::KeyCode::End);
-    
+
     keyboard->listenForKey(jt::KeyCode::Escape);
     keyboard->listenForKey(jt::KeyCode::Space);
 
@@ -95,10 +92,8 @@ int main(int /*argc*/, char* /*argv*/[])
     jt::LoggingCamera loggingCamera { camera, logger };
     jt::GfxImpl gfx { loggingRenderWindow, loggingCamera };
 
-    jt::SoundFadeManager fades {};
-    // jt::AudioImpl audio { std::make_unique<jt::LoggingSoundFadeManager>(fades, logger) };
-    jt::null_objects::AudioNull audio {};
-    jt::LoggingAudio loggingAudio { audio, logger };
+    jt::AudioImpl audio {};
+    //    jt::null_objects::AudioNull audio {};
 
     jt::StateManager stateManager { std::make_shared<StateSelect>() };
     jt::LoggingStateManager loggingStateManager { stateManager, logger };
@@ -106,7 +101,7 @@ int main(int /*argc*/, char* /*argv*/[])
     jt::ActionCommandManager actionCommandManager { logger };
 
     game = std::make_shared<jt::Game>(
-        gfx, input, loggingAudio, loggingStateManager, logger, actionCommandManager, cache);
+        gfx, input, audio, loggingStateManager, logger, actionCommandManager, cache);
     addBasicActionCommands(game);
 
     game->startGame(gameloop);

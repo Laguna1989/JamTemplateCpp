@@ -11,9 +11,11 @@ web (webassembly) games. Internally it uses [SFML](https://www.sfml-dev.org/), [
 
 Some games created with this JamTemplate are
 
-* [Fruit Lovin Monkey Pirates](https://runvs.io/Games/fruitlovinmonkeypirates) (Action Sailing Game, Native & Web, FrankenGameJam 2023)
+* [Fruit Lovin Monkey Pirates](https://runvs.io/Games/fruitlovinmonkeypirates) (Action Sailing Game, Native & Web,
+  FrankenGameJam 2023)
 * [Medibellum](https://runvs.io/Games/medibellum) (Multiplayer Autobattler Game, Native, Kajam-13 2023)
-* [Mines of Gloria](https://runvs.io/Games/minesofgloria) (Incremental Clicker Game, Native & Web, ClickerJam Spring 2023)
+* [Mines of Gloria](https://runvs.io/Games/minesofgloria) (Incremental Clicker Game, Native & Web, ClickerJam Spring
+  2023)
 * [Tworld](https://runvs.io/Games/tworld) (Jump and Run, Native & Web, FrankenGameJam 2022)
 * [Funky Trip](https://runvs.io/Games/funkytrip) (Top Down ARPG, Native & Web, Alakajam 14 2022)
 * [Gemga](https://runvs.io/Games/gemga) (Puzzler, Native & Web, FrankenGameJam 2021)
@@ -122,3 +124,12 @@ Please check the performance benchmark [report](https://laguna1989.github.io/Jam
   from [this website](https://lospec.com/palette-list) (
   save as gpl and paste file content)
 * Change `impl/gamelib/game_properties.hpp` settings as needed (window size, jam, author and date)
+
+# Starting on Linux
+
+FMod cannot be linked statically in the indie tier. Thus you need to provide the so while loading. Linux does not look
+in the local path by default. To fix this, you can add the following variable when starting the exe
+
+```
+LD_LIBRARY_PATH=<path_to_build_dir>impl/game
+```

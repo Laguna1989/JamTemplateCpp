@@ -56,10 +56,10 @@ jobs:
       - name: StartJack
         run: jackd -d dummy &
 
-# constantly giving errors about x11 display failed in ci
-#      - name: Test
-#        run: xvfb-run ./jt_tests
-#        working-directory: ${{github.workspace}}/build/test/unit/jt_test
+  # constantly giving errors about x11 display failed in ci
+  #      - name: Test
+  #        run: xvfb-run ./jt_tests
+  #        working-directory: ${{github.workspace}}/build/test/unit/jt_test
 
   LinuxSDL:
     runs-on: ubuntu-latest
@@ -105,7 +105,7 @@ jobs:
         run: ninja
 
       - name: Test
-        run: xvfb-run ./jt_tests
+        run: export LD_LIBRARY_PATH=${{github.workspace}}/build/test/unit/jt_test && xvfb-run ./jt_tests
         working-directory: ${{github.workspace}}/build/test/unit/jt_test
 
   WindowsSFML:
