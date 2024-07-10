@@ -16,7 +16,7 @@ bool jt::Sound::isPlaying() const
     FMOD_STUDIO_PLAYBACK_STATE state;
     jt::checkResult(m_instance->getPlaybackState(&state));
 
-    return state == FMOD_STUDIO_PLAYBACK_PLAYING || FMOD_STUDIO_PLAYBACK_STARTING;
+    return state == FMOD_STUDIO_PLAYBACK_PLAYING || state == FMOD_STUDIO_PLAYBACK_STARTING;
 }
 
 void jt::Sound::play()
@@ -66,11 +66,11 @@ void jt::Sound::setVolume(float newVolume)
 bool jt::Sound::checkValid() const
 {
     if (m_instance == nullptr) {
-        std::cerr << "created sound with nullptr";
+        std::cerr << "created sound with nullptr" << std::endl;
         return false;
     }
     if (!m_instance->isValid()) {
-        std::cerr << "Sound with invalid instance";
+        std::cerr << "Sound with invalid instance" << std::endl;
         return false;
     }
 

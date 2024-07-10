@@ -34,6 +34,16 @@ public:
     /// \return Shared pointer to the permanent sound (can be nullptr)
     virtual std::shared_ptr<SoundInterface> getPermanentSound(std::string const& identifier) = 0;
 
+    /// Set the volume of a group/bus
+    /// \param groupPath the path of the group
+    /// \param newVolume the new volume, should be in range [0,1]
+    virtual void setGroupVolume(std::string const& groupPath, float newVolume) = 0;
+
+    /// Get the volume of a group/bus
+    /// \param groupPath the path of the group
+    /// \return current volume of the group, in range [0,1]
+    virtual float getGroupVolume(std::string const& groupPath) = 0;
+
     virtual ~AudioInterface() = default;
 
     // no copy, no move

@@ -16,6 +16,9 @@ public:
         std::string const& identifier, std::string const& fileName) override;
 
     std::shared_ptr<jt::SoundInterface> getPermanentSound(std::string const& identifier) override;
+
+    void setGroupVolume(std::string const& groupPath, float newVolume) override;
+    float getGroupVolume(std::string const& groupPath) override;
 };
 
 } // namespace null_objects

@@ -93,6 +93,7 @@ endfunction()
 function(jt_setup_fmod)
     if(MSVC)
         ## Windows
+        set(FMOD_DIR "${CMAKE_SOURCE_DIR}/ext/fmod/win" CACHE INTERNAL "fmod directory")
     elseif (APPLE)
         ## Mac
         set(FMOD_DIR "${CMAKE_SOURCE_DIR}/ext/fmod/mac" CACHE INTERNAL "fmod directory")
@@ -122,6 +123,14 @@ function(jt_link_fmod TGT)
         target_link_libraries(${TGT} PUBLIC fmod_vc)
         target_link_libraries(${TGT} PUBLIC fmodstudio_vc)
         
+        add_custom_command(TARGET ${TGT} PRE_BUILD
+                COMMAND ${CMAKE_COMMAND} -E copy
+                ${FMOD_DIR}/lib/fmod.dll ${CMAKE_CURRENT_BINARY_DIR}/)
+
+        add_custom_command(TARGET ${TGT} PRE_BUILD
+                COMMAND ${CMAKE_COMMAND} -E copy
+                ${FMOD_DIR}/lib/fmodstudio.dll ${CMAKE_CURRENT_BINARY_DIR}/)
+
     elseif (APPLE)
 
         target_include_directories(${TGT} PUBLIC ${FMOD_DIR}/api/core/inc)
