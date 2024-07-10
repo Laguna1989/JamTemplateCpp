@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1720357882936,
+  "lastUpdate": 1720619555749,
   "repoUrl": "https://github.com/Laguna1989/JamTemplateCpp",
   "entries": {
     "Benchmark": [
@@ -15492,6 +15492,84 @@ window.BENCHMARK_DATA = {
             "value": 2.0607110176470655,
             "unit": "ms/iter",
             "extra": "iterations: 340\ncpu: 2.060610938235291 ms\nthreads: 1"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "laguna.ws@gmail.com",
+            "name": "Simon Weis",
+            "username": "Laguna1989"
+          },
+          "committer": {
+            "email": "laguna.ws@gmail.com",
+            "name": "Simon Weis",
+            "username": "Laguna1989"
+          },
+          "distinct": true,
+          "id": "d067f0e8da899c9d28d337466801d323e4140179",
+          "message": "Use new mute/unmute mechanic",
+          "timestamp": "2024-07-10T15:50:05+02:00",
+          "tree_id": "979740f858f52cd780ae622480468c90a6553ae5",
+          "url": "https://github.com/Laguna1989/JamTemplateCpp/commit/d067f0e8da899c9d28d337466801d323e4140179"
+        },
+        "date": 1720619554928,
+        "tool": "googlecpp",
+        "benches": [
+          {
+            "name": "BM_UpdateDrawablePositions",
+            "value": 1.7908712685421528,
+            "unit": "ms/iter",
+            "extra": "iterations: 391\ncpu: 1.7902235754475702 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GetAllCommands",
+            "value": 0.27791446444179646,
+            "unit": "ms/iter",
+            "extra": "iterations: 2517\ncpu: 0.2779116297179182 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_LoggerLogWithoutTarget",
+            "value": 0.22621707751938094,
+            "unit": "ms/iter",
+            "extra": "iterations: 3096\ncpu: 0.22620567571059427 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_LoggerLogWithCoutTargetSetToOff",
+            "value": 0.2506827155368304,
+            "unit": "ms/iter",
+            "extra": "iterations: 3083\ncpu: 0.2506633717158612 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_UpdateObjectGroup",
+            "value": 0.016615305253902507,
+            "unit": "ms/iter",
+            "extra": "iterations: 42083\ncpu: 0.01661340607846399 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_UpdateSpatialObjectGrid",
+            "value": 0.2784134821428638,
+            "unit": "ms/iter",
+            "extra": "iterations: 2520\ncpu: 0.2783924079365082 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_StartGame",
+            "value": 0.0028876254067723966,
+            "unit": "ms/iter",
+            "extra": "iterations: 239999\ncpu: 0.0028873275263646947 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_RefineTilemapCollisions",
+            "value": 0.11176020400870014,
+            "unit": "ms/iter",
+            "extra": "iterations: 6436\ncpu: 0.11175854164077074 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GamestateWithTweeningShapes",
+            "value": 2.06822596460172,
+            "unit": "ms/iter",
+            "extra": "iterations: 339\ncpu: 2.067612616519177 ms\nthreads: 1"
           }
         ]
       }
