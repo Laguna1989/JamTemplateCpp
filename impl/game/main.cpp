@@ -19,9 +19,9 @@
 #include <log/logger.hpp>
 #include <logging_camera.hpp>
 #include <random/random.hpp>
-#include <state_intro.hpp>
 #include <state_manager/logging_state_manager.hpp>
 #include <state_manager/state_manager.hpp>
+#include <state_start_with_button.hpp>
 #include <memory>
 
 std::shared_ptr<jt::GameBase> game;
@@ -61,7 +61,7 @@ int main(int /*argc*/, char* /*argv*/[])
 
     jt::AudioImpl audio {};
 
-    jt::StateManager stateManager { std::make_shared<StateIntro>() };
+    jt::StateManager stateManager { std::make_shared<StateStartWithButton>() };
     jt::LoggingStateManager loggingStateManager { stateManager, logger };
 
     jt::ActionCommandManager actionCommandManager(logger);
