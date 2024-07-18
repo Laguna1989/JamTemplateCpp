@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1720719175049,
+  "lastUpdate": 1721280224799,
   "repoUrl": "https://github.com/Laguna1989/JamTemplateCpp",
   "entries": {
     "Benchmark": [
@@ -15648,6 +15648,84 @@ window.BENCHMARK_DATA = {
             "value": 2.0727820234604644,
             "unit": "ms/iter",
             "extra": "iterations: 341\ncpu: 2.0726316891495578 ms\nthreads: 1"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "laguna.ws@gmail.com",
+            "name": "Laguna1989",
+            "username": "Laguna1989"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "0899feb2aec5e048cf2ba8beec1b3a851d894de8",
+          "message": "Merge pull request #322 from Laguna1989/dependabot/github_actions/softprops/action-gh-release-2.0.7\n\nBump softprops/action-gh-release from 2.0.6 to 2.0.7",
+          "timestamp": "2024-07-18T07:21:41+02:00",
+          "tree_id": "528f9d6f4fe2712aa427fb9640e89b3c65abf716",
+          "url": "https://github.com/Laguna1989/JamTemplateCpp/commit/0899feb2aec5e048cf2ba8beec1b3a851d894de8"
+        },
+        "date": 1721280224220,
+        "tool": "googlecpp",
+        "benches": [
+          {
+            "name": "BM_UpdateDrawablePositions",
+            "value": 1.7517986147960207,
+            "unit": "ms/iter",
+            "extra": "iterations: 392\ncpu: 1.7517200153061225 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GetAllCommands",
+            "value": 0.27077398987540546,
+            "unit": "ms/iter",
+            "extra": "iterations: 2568\ncpu: 0.2707595642523365 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_LoggerLogWithoutTarget",
+            "value": 0.23016989523808984,
+            "unit": "ms/iter",
+            "extra": "iterations: 3045\ncpu: 0.23016298719211836 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_LoggerLogWithCoutTargetSetToOff",
+            "value": 0.2245701223506605,
+            "unit": "ms/iter",
+            "extra": "iterations: 3114\ncpu: 0.22456222157996159 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_UpdateObjectGroup",
+            "value": 0.016839849931564708,
+            "unit": "ms/iter",
+            "extra": "iterations: 43107\ncpu: 0.016838933259099444 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_UpdateSpatialObjectGrid",
+            "value": 0.27593476477451195,
+            "unit": "ms/iter",
+            "extra": "iterations: 2572\ncpu: 0.2759300715396578 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_StartGame",
+            "value": 0.0029679756902188156,
+            "unit": "ms/iter",
+            "extra": "iterations: 235831\ncpu: 0.0029678493243042703 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_RefineTilemapCollisions",
+            "value": 0.1077001221091582,
+            "unit": "ms/iter",
+            "extra": "iterations: 6486\ncpu: 0.10769828230033912 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GamestateWithTweeningShapes",
+            "value": 2.070868156156141,
+            "unit": "ms/iter",
+            "extra": "iterations: 333\ncpu: 2.0707141621621625 ms\nthreads: 1"
           }
         ]
       }
