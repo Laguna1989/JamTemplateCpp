@@ -2,6 +2,7 @@
 #define JAMTEMPLATE_SPRITEFUNCTIONS_HPP
 
 #include <SFML/Graphics.hpp>
+#include <cstdint>
 
 namespace jt {
 namespace SpriteFunctions {

@@ -1,5 +1,5 @@
 ﻿#include "math_helper.hpp"
-
+#include <cstdint>
 #include <iomanip>
 #include <sstream>
 

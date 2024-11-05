@@ -2,6 +2,8 @@
 #include "performance_measurement.hpp"
 #include <input/control_commands/control_command_null.hpp>
 #include <input/input_helper.hpp>
+#include <tracy/Tracy.hpp>
+
 #include <utility>
 
 jt::KeyboardInput::KeyboardInput(KeyboardKeyCheckFunction checkFunc)
@@ -23,7 +25,7 @@ jt::KeyboardInput::KeyboardInput(KeyboardKeyCheckFunction checkFunc)
 
 void jt::KeyboardInput::updateKeys()
 {
-    TimeMeasureObject obj { "jt::KeyboardInput::updateKeys" };
+    ZoneScopedN( "jt::KeyboardInput::updateKeys" );
     jt::inputhelper::updateValues(m_pressed, m_released, m_justPressed, m_justReleased,
         [this](auto k) { return m_checkFunc(k); });
 }

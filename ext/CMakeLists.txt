@@ -23,6 +23,14 @@ CPMAddPackage(
 )
 
 CPMAddPackage(
+        NAME tracy
+        GITHUB_REPOSITORY wolfpld/tracy
+        GIT_TAG v0.11.1
+        GIT_SHALLOW TRUE
+        GIT_PROGRESS TRUE
+)
+
+CPMAddPackage(
         NAME aselib
         GITHUB_REPOSITORY Laguna1989/aselib
         GIT_TAG v0.3.1
@@ -53,14 +61,14 @@ else ()
     add_subdirectory(imgui-sdl)
 endif ()
 
-if(JT_ENABLE_UNITTESTS)
-CPMAddPackage(
-        NAME googletest
-        GITHUB_REPOSITORY google/googletest
-        GIT_TAG v1.14.0
-        VERSION 1.14.0
-        OPTIONS "INSTALL_GTEST OFF" "gtest_force_shared_crt"
-)
-endif()
+if (JT_ENABLE_UNITTESTS)
+    CPMAddPackage(
+            NAME googletest
+            GITHUB_REPOSITORY google/googletest
+            GIT_TAG v1.14.0
+            VERSION 1.14.0
+            OPTIONS "INSTALL_GTEST OFF" "gtest_force_shared_crt"
+    )
+endif ()
 
 message(STATUS "Fetching external libraries done")

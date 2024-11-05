@@ -28,6 +28,7 @@ if (JT_ENABLE_CLANG_TIDY)
     set(CMAKE_CXX_CLANG_TIDY "clang-tidy")
 endif ()
 
+add_definitions(-DTRACY_ENABLE)
 
 if (JT_ENABLE_LTO_OPTIMIZATION)
     if (MSVC)
