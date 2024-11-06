@@ -2,6 +2,7 @@
 #include "performance_measurement.hpp"
 #include <game_interface.hpp>
 #include <state_manager/state_manager_transition_none.hpp>
+#include <tracy/Tracy.hpp>
 #include <stdexcept>
 
 jt::StateManager::StateManager(std::shared_ptr<jt::GameState> initialState)
@@ -51,7 +52,7 @@ void jt::StateManager::doSwitchState(std::weak_ptr<jt::GameInterface> gameInstan
 
 void jt::StateManager::update(std::weak_ptr<jt::GameInterface> gameInstance, float elapsed)
 {
-    TimeMeasureObject obj { "jt::StateManager::update" };
+    ZoneScopedN("jt::StateManager::update");
     getTransition()->update(elapsed);
     if (m_nextState != nullptr) {
         if (getTransition()->triggerStateChange()) {
@@ -81,7 +82,7 @@ std::shared_ptr<jt::StateManagerTransitionInterface> jt::StateManager::getTransi
 
 void jt::StateManager::draw(std::shared_ptr<jt::RenderTargetInterface> rt)
 {
-    TimeMeasureObject obj { "jt::StateManager::draw" };
+    ZoneScopedN("jt::StateManager::draw");
     getCurrentState()->draw();
     if (getTransition()->isInProgress()) {
         getTransition()->draw(rt);

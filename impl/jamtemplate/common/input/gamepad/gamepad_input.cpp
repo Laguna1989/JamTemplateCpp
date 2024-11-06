@@ -1,6 +1,7 @@
 #include "gamepad_input.hpp"
 #include "performance_measurement.hpp"
 #include <input/input_helper.hpp>
+#include <tracy/Tracy.hpp>
 
 jt::GamepadInput::GamepadInput(int gamepadId, AxisFunc axisFunc, ButtonCheckFunction buttonFunc)
     : m_axisFunc { axisFunc }
@@ -23,7 +24,7 @@ jt::GamepadInput::GamepadInput(int gamepadId, AxisFunc axisFunc, ButtonCheckFunc
 
 void jt::GamepadInput::update()
 {
-    TimeMeasureObject obj { "jt::GamepadInput::update" };
+    ZoneScopedN("jt::GamepadInput::update");
     jt::inputhelper::updateValues(m_pressed, m_released, m_justPressed, m_justReleased,
         [this](auto k) { return m_buttonFunc(k); });
 }

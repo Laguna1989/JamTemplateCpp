@@ -35,11 +35,14 @@ target_include_directories(JamTemplateLib SYSTEM PUBLIC ${tileson_SOURCE_DIR}/in
 FetchContent_GetProperties(tileson)
 FetchContent_GetProperties(openalpp)
 FetchContent_GetProperties(aselib)
+FetchContent_GetProperties(tracy)
 target_include_directories(JamTemplateLib SYSTEM PUBLIC ${tileson_SOURCE_DIR}/extras/)
+
 target_include_directories(JamTemplateLib SYSTEM PUBLIC ${CMAKE_SOURCE_DIR}/ext/better_enums)
 target_link_libraries(JamTemplateLib PUBLIC
         aselib
         Box2D
+        TracyClient
 )
 
 jt_link_fmod(JamTemplateLib)

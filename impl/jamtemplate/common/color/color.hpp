@@ -1,6 +1,7 @@
 ﻿#ifndef JAMTEMPLATE_COLOR_HPP
 #define JAMTEMPLATE_COLOR_HPP
 
+#include <cstdint>
 #include <iosfwd>
 #include <string>
 

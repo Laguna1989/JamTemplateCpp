@@ -113,29 +113,6 @@ auto makeMeasureTimeGeneric(std::function<R(Args...)> const& func)
 {
     return MeasureTimeGeneric<R(Args...)> { func };
 }
-
-struct TimeMeasureObject {
-    explicit TimeMeasureObject(std::string const& str);
-    ~TimeMeasureObject();
-
-private:
-    std::chrono::time_point<std::chrono::steady_clock> m_start;
-    std::string m_name;
-};
-
-struct TimeMeasureObjectData {
-    std::string name;
-    std::chrono::time_point<std::chrono::steady_clock> start;
-    std::chrono::time_point<std::chrono::steady_clock> end;
-    std::thread::id threadId;
-};
-
-void to_json(nlohmann::json& j, TimeMeasureObjectData const& data);
-
-std::string getTracingJson(std::vector<TimeMeasureObjectData> const& data);
-
-std::vector<TimeMeasureObjectData> getMeasurementData();
-
 } // namespace jt
 
 #endif // JAMTEMPLATE_PERFORMANCE_MEASUREMENT_HPP

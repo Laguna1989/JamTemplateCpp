@@ -4,6 +4,7 @@
 #include <sprite_functions.hpp>
 #include <strutils.hpp>
 #include <SDL_image.h>
+#include <tracy/Tracy.hpp>
 #include <array>
 #include <iostream>
 #include <limits>
@@ -239,6 +240,7 @@ TextureManagerImpl::TextureManagerImpl(std::shared_ptr<jt::RenderTargetLayer> re
 
 std::shared_ptr<SDL_Texture> TextureManagerImpl::get(std::string const& str)
 {
+    ZoneScopedNC("jt::TextureManagerImpl::get", tracy::Color::Crimson);
     if (str.empty()) {
         std::cout << "TextureManager get: string must not be empty" << std::endl;
         throw std::invalid_argument { "TextureManager get: string must not be empty" };
@@ -251,6 +253,7 @@ std::shared_ptr<SDL_Texture> TextureManagerImpl::get(std::string const& str)
 
     // check if texture is already stored in texture manager
     if (containsTexture(str)) {
+        ZoneColor(tracy::Color::AntiqueWhite2);
         return m_textures[str];
     }
 

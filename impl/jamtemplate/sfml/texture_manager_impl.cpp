@@ -3,6 +3,7 @@
 #include <color_lib.hpp>
 #include <sprite_functions.hpp>
 #include <strutils.hpp>
+#include <tracy/Tracy.hpp>
 #include <array>
 #include <stdexcept>
 
@@ -150,12 +151,14 @@ jt::TextureManagerImpl::TextureManagerImpl(std::shared_ptr<jt::RenderTargetLayer
 
 sf::Texture& jt::TextureManagerImpl::get(std::string const& str)
 {
+    ZoneScopedNC("jt::TextureManagerImpl::get", tracy::Color::Crimson);
     if (str.empty()) {
         throw std::invalid_argument { "TextureManager get: string must not be empty" };
     }
 
     // check if texture is already stored in texture manager
     if (containsTexture(str)) {
+        ZoneColor(tracy::Color::AntiqueWhite2);
         return m_textures[str];
     }
 

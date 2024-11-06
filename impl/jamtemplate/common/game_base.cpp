@@ -1,6 +1,8 @@
 ﻿#include "game_base.hpp"
 #include "performance_measurement.hpp"
 #include <build_info.hpp>
+#include <tracy/Tracy.hpp>
+
 #include <string>
 
 jt::GameBase::GameBase(jt::GfxInterface& gfx, jt::InputManagerInterface& input,
@@ -20,7 +22,7 @@ jt::GameBase::GameBase(jt::GfxInterface& gfx, jt::InputManagerInterface& input,
 
 void jt::GameBase::runOneFrame()
 {
-    TimeMeasureObject obj { "jt::GameBase::runOneFrame" };
+    ZoneScopedN("jt::GameBase::runOneFrame");
     m_logger.verbose("runOneFrame", { "jt" });
     m_actionCommandManager.update();
 
@@ -55,6 +57,7 @@ void jt::GameBase::runOneFrame()
     }
 
     m_age += elapsedSeconds;
+    FrameMark;
 }
 
 std::weak_ptr<jt::GameInterface> jt::GameBase::getPtr() { return shared_from_this(); }
@@ -94,15 +97,11 @@ std::string getTimeString()
 
 void jt::GameBase::doUpdate(float const elapsed)
 {
-    TimeMeasureObject obj { "jt::GameBase::doUpdate" };
+    ZoneScopedN("jt::GameBase::doUpdate");
     m_logger.verbose("update game", { "jt" });
-    if (m_inputManager.keyboard()->justPressed(jt::KeyCode::F10)) {
-        std::cout << "write file\n";
-        std::ofstream ofs { "tracing" + getTimeString() + ".json" };
-        ofs << jt::getTracingJson(jt::getMeasurementData());
-    }
     m_stateManager.update(getPtr(), elapsed);
-
+    TracyPlot("GameObjects Alive", static_cast<std::int64_t>(getNumberOfAliveGameObjects()));
+    TracyPlot("GameObjects Created", static_cast<std::int64_t>(getNumberOfCreatedGameObjects()));
     m_audio.update(elapsed);
     gfx().update(elapsed);
 
@@ -117,7 +116,7 @@ void jt::GameBase::doUpdate(float const elapsed)
 
 void jt::GameBase::doDraw() const
 {
-    TimeMeasureObject obj { "jt::GameBase::doDraw" };
+    ZoneScopedN("jt::GameBase::doDraw");
     m_logger.verbose("draw game", { "jt" });
     gfx().window().startRenderGui();
     gfx().clear();

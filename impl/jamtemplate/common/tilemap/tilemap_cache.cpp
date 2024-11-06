@@ -1,8 +1,10 @@
 #include "tilemap_cache.hpp"
+#include <tracy/Tracy.hpp>
 #include <iostream>
 
 std::shared_ptr<tson::Map> jt::TilemapCache::get(std::string const& fileName) const
 {
+    ZoneScopedN("jt::TilemapCache::get");
     if (!m_maps.contains(fileName)) {
         tson::Tileson parser;
 

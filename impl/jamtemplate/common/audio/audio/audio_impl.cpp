@@ -1,7 +1,8 @@
 #include "audio_impl.hpp"
 #include <audio/sound/sound.hpp>
 #include <random/random.hpp>
-#include "fmod_errors.h"
+#include <tracy/Tracy.hpp>
+#include <fmod_errors.h>
 #include <sstream>
 
 namespace {
@@ -28,6 +29,7 @@ void jt::checkResult(FMOD_RESULT result)
 
 jt::AudioImpl::AudioImpl()
 {
+    ZoneScopedN("jt::AudioImpl::AudioImpl");
     checkResult(FMOD::Studio::System::create(&m_studioSystem));
     checkResult(m_studioSystem->initialize(128, getStudioInitFlags(), FMOD_INIT_NORMAL, nullptr));
 
@@ -102,7 +104,6 @@ void jt::AudioImpl::setGroupVolume(std::string const& groupPath, float newVolume
 
 float jt::AudioImpl::getGroupVolume(std::string const& groupPath)
 {
-
     FMOD::Studio::Bus* bus { nullptr };
     checkResult(m_studioSystem->getBus(groupPath.c_str(), &bus));
     if (bus == nullptr) {
