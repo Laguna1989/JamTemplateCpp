@@ -100,7 +100,8 @@ void jt::GameBase::doUpdate(float const elapsed)
     ZoneScopedN("jt::GameBase::doUpdate");
     m_logger.verbose("update game", { "jt" });
     m_stateManager.update(getPtr(), elapsed);
-
+    TracyPlot("GameObjects Alive", static_cast<std::int64_t>(getNumberOfAliveGameObjects()));
+    TracyPlot("GameObjects Created", static_cast<std::int64_t>(getNumberOfCreatedGameObjects()));
     m_audio.update(elapsed);
     gfx().update(elapsed);
 

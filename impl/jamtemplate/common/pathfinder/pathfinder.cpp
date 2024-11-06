@@ -1,5 +1,6 @@
 #include "pathfinder.hpp"
 #include <math_helper.hpp>
+#include <tracy/Tracy.hpp>
 #include <iostream>
 #include <limits>
 #include <stdexcept>
@@ -133,6 +134,7 @@ NodeT findNeighbourWithSmallestValue(NodeT const& current)
 
 std::vector<NodeT> jt::pathfinder::calculatePath(NodeT const& start, NodeT const& end)
 {
+    ZoneScopedN("jt::pathfinder::calculatePath");
     if (start == end) {
         return std::vector<NodeT> {};
     }
