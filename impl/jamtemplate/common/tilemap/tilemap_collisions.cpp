@@ -1,6 +1,7 @@
 #include "tilemap_collisions.hpp"
 #include <algorithm>
 #include <cassert>
+#include <limits>
 
 namespace {
 int getEntry(std::vector<int> const& vec, int x, int y, int width)
@@ -29,29 +30,27 @@ void jt::TilemapCollisions::refineColliders(float size)
     if (m_rects.empty()) {
         return;
     }
-    int const xmin
-        = static_cast<int>(std::min_element(m_rects.cbegin(), m_rects.cend(),
-                               [](auto const& r1, auto const& r2) { return r1.left < r2.left; })
-                               ->left
-            / size);
 
-    int const ymin
-        = static_cast<int>(std::min_element(m_rects.cbegin(), m_rects.cend(),
-                               [](auto const& r1, auto const& r2) { return r1.top < r2.top; })
-                               ->top
-            / size);
+    int xmin = std::numeric_limits<int>::max();
+    int ymin = std::numeric_limits<int>::max();
+    int xmax = std::numeric_limits<int>::min();
+    int ymax = std::numeric_limits<int>::min();
+    for (auto const& r : m_rects) {
+        if (r.left < xmin)
+            xmin = r.left;
+        if (r.left > xmax)
+            xmax = r.left;
 
-    int const xmax
-        = static_cast<int>(std::max_element(m_rects.cbegin(), m_rects.cend(),
-                               [](auto const& r1, auto const& r2) { return r1.left < r2.left; })
-                               ->left
-            / size);
+        if (r.top < ymin)
+            ymin = r.top;
+        if (r.top > ymax)
+            ymax = r.top;
+    }
 
-    int const ymax
-        = static_cast<int>(std::max_element(m_rects.cbegin(), m_rects.cend(),
-                               [](auto const& r1, auto const& r2) { return r1.top < r2.top; })
-                               ->top
-            / size);
+    xmin = xmin / size;
+    ymin = ymin / size;
+    xmax = xmax / size;
+    ymax = ymax / size;
 
     std::vector<int> lookup;
     lookup.resize(static_cast<std::size_t>(xmax + 1) * (ymax + 1));
