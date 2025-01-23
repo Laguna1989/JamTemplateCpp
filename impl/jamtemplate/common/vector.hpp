@@ -39,6 +39,7 @@ constexpr jt::Vector2f operator-(jt::Vector2f const& a, jt::Vector2f const& b) n
 
 jt::Vector2f& operator+=(jt::Vector2f& lhs, jt::Vector2f const& rhs) noexcept;
 jt::Vector2f& operator-=(jt::Vector2f& lhs, jt::Vector2f const& rhs) noexcept;
+jt::Vector2f& operator*=(jt::Vector2f& lhs, float const& rhs) noexcept;
 
 constexpr jt::Vector2f operator*(float const f, jt::Vector2f const& v) noexcept
 {

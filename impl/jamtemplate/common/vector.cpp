@@ -15,6 +15,13 @@ jt::Vector2f& jt::operator-=(jt::Vector2f& lhs, jt::Vector2f const& rhs) noexcep
     return lhs;
 }
 
+jt::Vector2f& jt::operator*=(jt::Vector2f& lhs, float const& rhs) noexcept
+{
+    lhs.x *= rhs;
+    lhs.y *= rhs;
+    return lhs;
+}
+
 std::ostream& jt::operator<<(std::ostream& os, jt::Vector2f const& vec)
 {
     return os << "(" << vec.x << ", " << vec.y << ")";

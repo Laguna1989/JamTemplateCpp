@@ -216,6 +216,9 @@ jt::TilemapCollisions jt::tilemap::TilesonLoader::loadCollisionsFromLayer(
             if (!blockedProperty) {
                 continue;
             }
+            if (!blockedProperty->getValue<bool>()) {
+                continue;
+            }
 
             auto posx = std::get<0>(pos);
             auto posy = std::get<1>(pos);
