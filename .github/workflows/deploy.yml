@@ -11,7 +11,7 @@ permissions:
 
 jobs:
   WindowsSFML:
-    runs-on: windows-2019
+    runs-on: windows-2022
     steps:
       - name: Set up cmake
         uses: jwlawson/actions-setup-cmake@v2.0
