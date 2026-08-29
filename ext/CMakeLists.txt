@@ -42,6 +42,7 @@ CPMAddPackage(
         NAME tileson
         GITHUB_REPOSITORY SSBMTonberry/tileson
         GIT_TAG v1.4.0
+        PATCH_COMMAND ${CMAKE_COMMAND} -DTILESON_INCLUDE_DIR=<SOURCE_DIR>/include -P ${CMAKE_CURRENT_LIST_DIR}/../config/cmake/patch_tileson.cmake
         OPTIONS
         "BUILD_TESTS OFF"
 )

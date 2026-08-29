@@ -5,8 +5,8 @@
 
 ## About
 
-This is the JamTemplate for kickstarting your gamejam entry. It will compile C++20 code for native (Win, Linux) and
-web (webassembly) games. Internally it uses [SFML](https://www.sfml-dev.org/), [SDL](https://www.libsdl.org/) and
+This is the JamTemplate for kickstarting your gamejam entry. It will compile C++20 code for native (Win, Linux) and web
+(webassembly) games. Internally it uses [SFML](https://www.sfml-dev.org/), [SDL](https://www.libsdl.org/) and
 [OpenALpp](https://github.com/Laguna1989/OpenALpp).
 
 Some games created with this JamTemplate are
@@ -15,7 +15,7 @@ Some games created with this JamTemplate are
   FrankenGameJam 2023)
 * [Medibellum](https://runvs.io/Games/medibellum) (Multiplayer Autobattler Game, Native, Kajam-13 2023)
 * [Mines of Gloria](https://runvs.io/Games/minesofgloria) (Incremental Clicker Game, Native & Web, ClickerJam Spring
-  2023)
+    2023)
 * [Tworld](https://runvs.io/Games/tworld) (Jump and Run, Native & Web, FrankenGameJam 2022)
 * [Funky Trip](https://runvs.io/Games/funkytrip) (Top Down ARPG, Native & Web, Alakajam 14 2022)
 * [Gemga](https://runvs.io/Games/gemga) (Puzzler, Native & Web, FrankenGameJam 2021)
@@ -41,6 +41,12 @@ and more at [my game portfolio](https://runvs.io/Games).
 
 1. open project folder in clion
 
+#### prerequisites
+
+```
+sudo apt-get install -y libudev-dev xorg-dev libopenal-dev libfreetype-dev jackd x11-xserver-utils
+```
+
 ### Building for Web
 
 I run it with [WSL2](https://docs.microsoft.com/de-de/windows/wsl/compare-versions), but every system capable of
@@ -62,13 +68,13 @@ Setup
 ### Mac
 
 For mac os you have to install cmake and sfml via homebrew: `brew install cmake sfml`
-If you use another package manager or want to install the dependencies yourself, you have to modify the paths
-in `CMakeLists.txt`.
+If you use another package manager or want to install the dependencies yourself, you have to modify the paths in
+`CMakeLists.txt`.
 
 ## Deployment
 
-Automatic creation of the files is automated via github actions. If a release is created with semantic versioning (
-e.g. `v1.2.3`), a deployment build is triggered, which builds the game executable for windows, linux, mac and web and
+Automatic creation of the files is automated via github actions. If a release is created with semantic versioning (e.g.
+`v1.2.3`), a deployment build is triggered, which builds the game executable for windows, linux, mac and web and
 attaches the zipped files to the release once the build is finished. The archives can directly be uploaded
 on [itch](itch.io), [gamejolt](https://gamejolt.com/) or any other website.
 
@@ -121,13 +127,12 @@ Please check the performance benchmark [report](https://laguna1989.github.io/Jam
 * Change js filename in `index.html`
 * Set most cmake variables to `OFF` in `config/cmake/cache_variables.cmake`
 * Import a new palette into `impl/gamelib/game_properties.cpp`, e.g.
-  from [this website](https://lospec.com/palette-list) (
-  save as gpl and paste file content)
+  from [this website](https://lospec.com/palette-list) (save as gpl and paste file content)
 * Change `impl/gamelib/game_properties.hpp` settings as needed (window size, jam, author and date)
 
 # Starting on Linux
 
-FMod cannot be linked statically in the indie tier. Thus you need to provide the so while loading. Linux does not look
+FMod cannot be linked statically in the indie tier. Thus, you need to provide the so while loading. Linux does not look
 in the local path by default. To fix this, you can add the following variable when starting the exe
 
 ```
