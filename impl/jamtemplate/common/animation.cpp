@@ -306,11 +306,11 @@ void jt::Animation::setShadowActive(bool active)
     }
 }
 
-void jt::Animation::doDrawShadow(std::shared_ptr<jt::RenderTargetLayer> const /*sptr*/) const { }
+void jt::Animation::doDrawShadow(std::shared_ptr<jt::RenderTargetLayer> const& /*sptr*/) const { }
 
-void jt::Animation::doDrawOutline(std::shared_ptr<jt::RenderTargetLayer> const /*sptr*/) const { }
+void jt::Animation::doDrawOutline(std::shared_ptr<jt::RenderTargetLayer> const& /*sptr*/) const { }
 
-void jt::Animation::doDraw(std::shared_ptr<jt::RenderTargetLayer> const sptr) const
+void jt::Animation::doDraw(std::shared_ptr<jt::RenderTargetLayer> const& sptr) const
 {
     if (!m_isValid) {
         std::cerr << "Warning: Drawing Animation with invalid animName: '" + m_currentAnimName
@@ -321,7 +321,7 @@ void jt::Animation::doDraw(std::shared_ptr<jt::RenderTargetLayer> const sptr) co
     m_frames.at(m_currentAnimName).at(m_currentIdx)->draw(sptr);
 }
 
-void jt::Animation::doDrawFlash(std::shared_ptr<jt::RenderTargetLayer> const /*sptr*/) const { }
+void jt::Animation::doDrawFlash(std::shared_ptr<jt::RenderTargetLayer> const& /*sptr*/) const { }
 
 void jt::Animation::doFlashImpl(float t, jt::Color col)
 {

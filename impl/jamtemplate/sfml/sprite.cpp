@@ -71,7 +71,7 @@ void jt::Sprite::doUpdate(float /*elapsed*/)
     m_sprite.setPosition(m_lastScreenPosition);
 }
 
-void jt::Sprite::doDrawShadow(std::shared_ptr<jt::RenderTargetLayer> const sptr) const
+void jt::Sprite::doDrawShadow(std::shared_ptr<jt::RenderTargetLayer> const& sptr) const
 {
     if (!sptr) [[unlikely]] {
         return;
@@ -87,7 +87,7 @@ void jt::Sprite::doDrawShadow(std::shared_ptr<jt::RenderTargetLayer> const sptr)
     m_sprite.setColor(toLib(oldCol));
 }
 
-void jt::Sprite::doDrawOutline(std::shared_ptr<jt::RenderTargetLayer> const sptr) const
+void jt::Sprite::doDrawOutline(std::shared_ptr<jt::RenderTargetLayer> const& sptr) const
 {
     if (!sptr) [[unlikely]] {
         return;
@@ -109,7 +109,7 @@ void jt::Sprite::doDrawOutline(std::shared_ptr<jt::RenderTargetLayer> const sptr
     m_sprite.setColor(toLib(oldCol));
 }
 
-void jt::Sprite::doDraw(std::shared_ptr<jt::RenderTargetLayer> const sptr) const
+void jt::Sprite::doDraw(std::shared_ptr<jt::RenderTargetLayer> const& sptr) const
 {
     if (!sptr) [[unlikely]] {
         return;
@@ -119,7 +119,7 @@ void jt::Sprite::doDraw(std::shared_ptr<jt::RenderTargetLayer> const sptr) const
     sptr->draw(m_sprite, states);
 }
 
-void jt::Sprite::doDrawFlash(std::shared_ptr<jt::RenderTargetLayer> const sptr) const
+void jt::Sprite::doDrawFlash(std::shared_ptr<jt::RenderTargetLayer> const& sptr) const
 {
     if (!sptr) [[unlikely]] {
         return;

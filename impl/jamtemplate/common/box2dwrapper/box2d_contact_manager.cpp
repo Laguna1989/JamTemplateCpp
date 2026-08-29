@@ -7,7 +7,7 @@ std::size_t jt::Box2DContactManager::size() const { return m_callbacks.size(); }
 void jt::Box2DContactManager::registerCallback(
     std::string const& callbackIdentifier, std::shared_ptr<Box2DContactCallbackInterface> callback)
 {
-    m_callbacks[callbackIdentifier] = callback;
+    m_callbacks[callbackIdentifier] = std::move(callback);
 }
 
 void jt::Box2DContactManager::unregisterCallback(std::string const& callbackIdentifier)

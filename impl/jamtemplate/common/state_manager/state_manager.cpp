@@ -7,7 +7,7 @@
 
 jt::StateManager::StateManager(std::shared_ptr<jt::GameState> initialState)
     : m_currentState { nullptr }
-    , m_nextState { initialState }
+    , m_nextState { std::move(initialState) }
 {
     m_transition = std::make_shared<jt::StateManagerTransitionNone>();
 }
@@ -19,7 +19,7 @@ void jt::StateManager::switchState(std::shared_ptr<jt::GameState> newState)
     if (newState == nullptr) [[unlikely]] {
         throw std::invalid_argument { "cannot switch to nullptr state!" };
     }
-    m_nextState = newState;
+    m_nextState = std::move(newState);
     getTransition()->start();
     getTransition()->update(0.00f);
 }
@@ -68,7 +68,7 @@ std::shared_ptr<jt::GameState> jt::StateManager::getNextState() { return m_nextS
 void jt::StateManager::setTransition(
     std::shared_ptr<jt::StateManagerTransitionInterface> transition)
 {
-    m_transition = transition;
+    m_transition = std::move(transition);
 }
 
 std::shared_ptr<jt::StateManagerTransitionInterface> jt::StateManager::getTransition()

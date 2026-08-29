@@ -77,7 +77,7 @@ void Text::doUpdate(float /*elapsed*/)
     // Nothing to do here
 }
 
-void Text::doDrawShadow(std::shared_ptr<jt::RenderTargetLayer> const sptr) const
+void Text::doDrawShadow(std::shared_ptr<jt::RenderTargetLayer> const& sptr) const
 {
     if (!sptr) [[unlikely]] {
         return;
@@ -92,7 +92,7 @@ void Text::doDrawShadow(std::shared_ptr<jt::RenderTargetLayer> const sptr) const
     SDL_RenderCopyEx(sptr.get(), m_textTexture.get(), nullptr, &destRect, getRotation(), &p, flip);
 }
 
-void Text::doDrawOutline(std::shared_ptr<jt::RenderTargetLayer> const sptr) const
+void Text::doDrawOutline(std::shared_ptr<jt::RenderTargetLayer> const& sptr) const
 {
     if (!sptr) [[unlikely]] {
         return;
@@ -112,7 +112,7 @@ void Text::doDrawOutline(std::shared_ptr<jt::RenderTargetLayer> const sptr) cons
     }
 }
 
-void Text::doDraw(std::shared_ptr<jt::RenderTargetLayer> const sptr) const
+void Text::doDraw(std::shared_ptr<jt::RenderTargetLayer> const& sptr) const
 {
     if (!sptr) [[unlikely]] {
         return;
@@ -125,7 +125,7 @@ void Text::doDraw(std::shared_ptr<jt::RenderTargetLayer> const sptr) const
         jt::getFlipFromScale(m_scale));
 }
 
-void Text::doDrawFlash(std::shared_ptr<jt::RenderTargetLayer> const sptr) const
+void Text::doDrawFlash(std::shared_ptr<jt::RenderTargetLayer> const& sptr) const
 {
     if (!sptr) [[unlikely]] {
         return;
@@ -143,7 +143,7 @@ void Text::doRotate(float /*rot*/) noexcept
     // Nothing to do here
 }
 
-void Text::renderOneLineOfText(std::shared_ptr<jt::RenderTargetLayer> const sptr, std::string text,
+void Text::renderOneLineOfText(std::shared_ptr<jt::RenderTargetLayer> const& sptr, std::string text,
     std::size_t i, std::size_t lineCount) const
 {
     // render text on full white, so coloring can be done afterwards
@@ -178,7 +178,7 @@ void Text::renderOneLineOfText(std::shared_ptr<jt::RenderTargetLayer> const sptr
 }
 
 jt::Vector2u Text::getSizeForLine(
-    std::shared_ptr<jt::RenderTargetLayer> const sptr, std::string const& text) const
+    std::shared_ptr<jt::RenderTargetLayer> const& sptr, std::string const& text) const
 {
     SDL_Color const col { 255u, 255u, 255u, 255u };
     SDL_Surface* textSurface = TTF_RenderText_Solid(m_font, text.c_str(), col);
@@ -194,7 +194,7 @@ jt::Vector2u Text::getSizeForLine(
     return jt::Vector2u { static_cast<unsigned int>(w), static_cast<unsigned int>(h) };
 }
 
-void Text::recreateTextTexture(std::shared_ptr<jt::RenderTargetLayer> const sptr)
+void Text::recreateTextTexture(std::shared_ptr<jt::RenderTargetLayer> const& sptr)
 {
     if (!m_font) {
         std::cout << "no font loaded\n";
@@ -272,7 +272,7 @@ SDL_Rect Text::getDestRect(jt::Vector2f const& positionOffset) const
 }
 
 void Text::calculateTextTextureSize(
-    std::shared_ptr<jt::RenderTargetLayer> const sptr, std::vector<std::string> const& ssv)
+    std::shared_ptr<jt::RenderTargetLayer> const& sptr, std::vector<std::string> const& ssv)
 {
     unsigned int maxLineLengthInPixel { 0u };
     std::size_t maxLineLengthInChars { 0u };

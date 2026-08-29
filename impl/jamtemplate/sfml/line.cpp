@@ -20,7 +20,7 @@ jt::Vector2f jt::Line::getLineVector() const noexcept { return m_lineVector; }
 
 void jt::Line::doUpdate(float /*elapsed*/) noexcept { }
 
-void jt::Line::doDraw(std::shared_ptr<jt::RenderTargetLayer> const sptr) const
+void jt::Line::doDraw(std::shared_ptr<jt::RenderTargetLayer> const& sptr) const
 {
     if (!sptr) [[unlikely]] {
         return;
@@ -38,7 +38,7 @@ void jt::Line::doDraw(std::shared_ptr<jt::RenderTargetLayer> const sptr) const
     sptr->draw(line, states);
 }
 
-void jt::Line::doDrawFlash(std::shared_ptr<jt::RenderTargetLayer> const sptr) const
+void jt::Line::doDrawFlash(std::shared_ptr<jt::RenderTargetLayer> const& sptr) const
 {
     if (!sptr) [[unlikely]] {
         return;
@@ -56,7 +56,7 @@ void jt::Line::doDrawFlash(std::shared_ptr<jt::RenderTargetLayer> const sptr) co
     sptr->draw(line);
 }
 
-void jt::Line::doDrawShadow(std::shared_ptr<jt::RenderTargetLayer> const sptr) const
+void jt::Line::doDrawShadow(std::shared_ptr<jt::RenderTargetLayer> const& sptr) const
 {
     if (!sptr) [[unlikely]] {
         return;
@@ -74,7 +74,7 @@ void jt::Line::doDrawShadow(std::shared_ptr<jt::RenderTargetLayer> const sptr) c
     sptr->draw(line);
 }
 
-void jt::Line::doDrawOutline(std::shared_ptr<jt::RenderTargetLayer> const sptr) const
+void jt::Line::doDrawOutline(std::shared_ptr<jt::RenderTargetLayer> const& sptr) const
 {
     if (!sptr) [[unlikely]] {
         return;

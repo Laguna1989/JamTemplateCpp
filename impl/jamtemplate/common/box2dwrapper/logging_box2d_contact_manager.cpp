@@ -3,7 +3,7 @@
 
 jt::LoggingBox2DContactManager::LoggingBox2DContactManager(
     std::shared_ptr<jt::Box2DContactManagerInterface> decoratee, jt::LoggerInterface& logger)
-    : m_decoratee { decoratee }
+    : m_decoratee { std::move(decoratee) }
     , m_logger { logger }
 {
     if (m_decoratee == nullptr) {
@@ -30,7 +30,7 @@ void jt::LoggingBox2DContactManager::registerCallback(std::string const& callbac
 {
     m_logger.info(
         "Box2DContactManager register '" + callbackIdentifier + "' callback", { "jt", "box2d" });
-    m_decoratee->registerCallback(callbackIdentifier, callback);
+    m_decoratee->registerCallback(callbackIdentifier, std::move(callback));
 }
 
 void jt::LoggingBox2DContactManager::unregisterCallback(std::string const& callbackIdentifier)

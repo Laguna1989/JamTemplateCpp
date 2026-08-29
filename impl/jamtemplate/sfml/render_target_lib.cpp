@@ -8,11 +8,14 @@ void jt::RenderTarget::forall(
     }
 }
 
-std::shared_ptr<jt::RenderTargetLayer> jt::RenderTarget::get(int z) { return m_targets[z]; }
+std::shared_ptr<jt::RenderTargetLayer> const& jt::RenderTarget::get(int z)
+{
+    return m_targets[z];
+}
 
 void jt::RenderTarget::add(int z, std::shared_ptr<jt::RenderTargetLayer> target)
 {
-    m_targets[z] = target;
+    m_targets[z] = std::move(target);
 }
 
 void jt::RenderTarget::clearPixels() const

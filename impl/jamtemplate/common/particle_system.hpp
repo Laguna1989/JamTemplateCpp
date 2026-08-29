@@ -72,8 +72,9 @@ private:
 
     void doDraw() const override
     {
+        auto const target = renderTarget();
         for (auto const& p : m_particles) {
-            p->draw(renderTarget());
+            p->draw(target);
         }
     }
 };

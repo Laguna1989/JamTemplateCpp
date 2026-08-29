@@ -67,8 +67,9 @@ void jt::MarioCloudsHorizontal::doDraw() const
     if (!m_enabled) {
         return;
     }
+    auto const target = renderTarget();
     for (auto& c : m_clouds) {
-        c->draw(renderTarget());
+        c->draw(target);
     }
 }
 
