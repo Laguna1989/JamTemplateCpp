@@ -111,7 +111,7 @@ jobs:
           cmake-version: '3.26.x'
 
       - name: Set up gcc
-        uses: egor-tensin/setup-gcc@v1
+        uses: egor-tensin/setup-gcc@v2
         with:
           version: 11
           platform: x64
