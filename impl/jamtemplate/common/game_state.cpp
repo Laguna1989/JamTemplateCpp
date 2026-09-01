@@ -26,10 +26,13 @@ void jt::GameState::add(std::shared_ptr<jt::GameObject> gameObject)
 {
     gameObject->setGameInstance(getGame());
     gameObject->create();
-    m_objects->add(gameObject);
+    m_objects->add(std::move(gameObject));
 }
 
-void jt::GameState::add(std::shared_ptr<TweenInterface> tween) { m_tweens->add(tween); }
+void jt::GameState::add(std::shared_ptr<TweenInterface> tween)
+{
+    m_tweens->add(std::move(tween));
+}
 
 size_t jt::GameState::getNumberOfObjects() const noexcept { return m_objects->size(); }
 

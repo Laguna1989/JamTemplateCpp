@@ -9,7 +9,7 @@ void jt::GameObjectCollection::clear() noexcept
 
 void jt::GameObjectCollection::add(std::shared_ptr<jt::GameObjectInterface> object)
 {
-    m_objectsToAdd.push_back(object);
+    m_objectsToAdd.push_back(std::move(object));
 }
 
 void jt::GameObjectCollection::update(float elapsed)
@@ -31,7 +31,7 @@ void jt::GameObjectCollection::draw() const
 
 void jt::GameObjectCollection::cleanUpObjects()
 {
-    std::erase_if(m_objects, [](auto go) {
+    std::erase_if(m_objects, [](auto const& go) {
         bool const isDead = !go->isAlive();
         if (isDead) {
             go->destroy();

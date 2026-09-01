@@ -35,7 +35,7 @@ jt::Button::~Button()
 
 void jt::Button::setDrawable(std::shared_ptr<jt::DrawableInterface> drawable)
 {
-    m_drawable = drawable;
+    m_drawable = std::move(drawable);
 }
 
 void jt::Button::addCallback(std::function<void(void)> const& callback)

@@ -49,7 +49,7 @@ void jt::GfxImpl::update(float elapsed)
     ZoneScopedN("jt::GfxImpl::update");
     m_camera.update(elapsed);
 
-    m_target->forall([this](auto t) { t->setView(*m_view); });
+    m_target->forall([this](auto& t) { t->setView(*m_view); });
     m_view->setCenter(
         toLib(jt::MathHelper::castToInteger(m_camera.getCamOffset() + m_viewHalfSize)));
 

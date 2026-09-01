@@ -12,13 +12,13 @@ void jt::DrawableImpl::draw(std::shared_ptr<jt::RenderTargetInterface> targetCon
     if (!targetContainer) [[unlikely]] {
         return;
     }
-    auto const sptr = targetContainer->get(m_z);
+    auto const& sptr = targetContainer->get(m_z);
     if (sptr) [[likely]] {
         draw(sptr);
     }
 }
 
-void jt::DrawableImpl::draw(std::shared_ptr<RenderTargetLayer> sptr) const
+void jt::DrawableImpl::draw(std::shared_ptr<RenderTargetLayer> const& sptr) const
 {
     if (isVisible()) {
         if (allowDrawFromFlicker()) {

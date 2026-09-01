@@ -45,10 +45,10 @@ private:
     jt::Vector2f m_position;
     jt::Vector2f m_scale { 1.0f, 1.0f };
 
-    void doDraw(std::shared_ptr<jt::RenderTargetLayer> const sptr) const override;
-    void doDrawFlash(std::shared_ptr<jt::RenderTargetLayer> const sptr) const override;
-    void doDrawShadow(std::shared_ptr<jt::RenderTargetLayer> const sptr) const override;
-    void doDrawOutline(std::shared_ptr<jt::RenderTargetLayer> const sptr) const override;
+    void doDraw(std::shared_ptr<jt::RenderTargetLayer> const& sptr) const override;
+    void doDrawFlash(std::shared_ptr<jt::RenderTargetLayer> const& sptr) const override;
+    void doDrawShadow(std::shared_ptr<jt::RenderTargetLayer> const& sptr) const override;
+    void doDrawOutline(std::shared_ptr<jt::RenderTargetLayer> const& sptr) const override;
     void doUpdate(float elapsed) noexcept override;
     void doRotate(float d) noexcept override;
 };

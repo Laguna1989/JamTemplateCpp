@@ -7,7 +7,7 @@ namespace jt {
 
 class RenderTarget : public RenderTargetInterface {
 public:
-    std::shared_ptr<jt::RenderTargetLayer> get(int z) override;
+    std::shared_ptr<jt::RenderTargetLayer> const& get(int z) override;
 
     void forall(std::function<void(std::shared_ptr<jt::RenderTargetLayer>&)> const& func);
     void add(int z, std::shared_ptr<jt::RenderTargetLayer> target);

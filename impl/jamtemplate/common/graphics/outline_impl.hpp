@@ -13,7 +13,7 @@ class OutlineImpl {
 public:
     void doSetOutline(jt::Color const& col, int width);
 
-    void drawOutline(std::shared_ptr<jt::RenderTargetLayer> const sptr) const;
+    void drawOutline(std::shared_ptr<jt::RenderTargetLayer> const& sptr) const;
 
     jt::Color doGetOutlineColor() const;
     int doGetOutlineWidth() const;
@@ -27,7 +27,7 @@ private:
 
     std::vector<jt::Vector2f> m_outlineOffsets {};
 
-    virtual void doDrawOutline(std::shared_ptr<jt::RenderTargetLayer> const sptr) const = 0;
+    virtual void doDrawOutline(std::shared_ptr<jt::RenderTargetLayer> const& sptr) const = 0;
 };
 
 } // namespace jt

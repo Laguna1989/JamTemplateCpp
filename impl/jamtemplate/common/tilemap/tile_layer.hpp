@@ -32,17 +32,17 @@ public:
         std::tuple<std::vector<TileInfo> const&, std::vector<std::shared_ptr<jt::Sprite>>> const&
             mapInfo);
 
-    void doDraw(std::shared_ptr<jt::RenderTargetLayer> sptr) const override;
+    void doDraw(std::shared_ptr<jt::RenderTargetLayer> const& sptr) const override;
 
-    void doDrawFlash(std::shared_ptr<jt::RenderTargetLayer> sptr) const override;
-    void doDrawShadow(std::shared_ptr<jt::RenderTargetLayer> sptr) const override;
+    void doDrawFlash(std::shared_ptr<jt::RenderTargetLayer> const& sptr) const override;
+    void doDrawShadow(std::shared_ptr<jt::RenderTargetLayer> const& sptr) const override;
 
     /// Get map size in pixel
     //// \returns map size in pixel
     jt::Vector2f getMapSizeInPixel() const;
 
 private:
-    void doDrawOutline(std::shared_ptr<jt::RenderTargetLayer> const sptr) const override;
+    void doDrawOutline(std::shared_ptr<jt::RenderTargetLayer> const& sptr) const override;
 
 public:
     void doUpdate(float elapsed) override;

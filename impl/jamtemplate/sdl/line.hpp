@@ -44,10 +44,10 @@ private:
 
     jt::Vector2f m_origin;
 
-    void doDraw(std::shared_ptr<jt::RenderTargetLayer> const sptr) const override;
-    void doDrawFlash(std::shared_ptr<jt::RenderTargetLayer> const sptr) const override;
-    void doDrawShadow(std::shared_ptr<jt::RenderTargetLayer> const sptr) const override;
-    void doDrawOutline(std::shared_ptr<jt::RenderTargetLayer> const sptr) const override;
+    void doDraw(std::shared_ptr<jt::RenderTargetLayer> const& sptr) const override;
+    void doDrawFlash(std::shared_ptr<jt::RenderTargetLayer> const& sptr) const override;
+    void doDrawShadow(std::shared_ptr<jt::RenderTargetLayer> const& sptr) const override;
+    void doDrawOutline(std::shared_ptr<jt::RenderTargetLayer> const& sptr) const override;
     void doUpdate(float elapsed) noexcept override;
     void doRotate(float d) noexcept override;
 };
