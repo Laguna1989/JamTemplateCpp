@@ -73,7 +73,7 @@ public:
     }
 
     template <class U, class V>
-    static bool CircleTest(std::shared_ptr<U> obj1, std::shared_ptr<V> obj2)
+    static bool CircleTest(std::shared_ptr<U> const& obj1, std::shared_ptr<V> const& obj2)
     {
         auto const Obj1Size = getSize(obj1);
         auto const Obj2Size = getSize(obj2);
@@ -91,15 +91,16 @@ public:
 
 private:
     template <class U>
-    static jt::Vector2f getSize(U const& Object)
+    static jt::Vector2f getSize(U const& obj)
     {
-        return jt::Vector2f { Object.getGlobalBounds().width, Object.getGlobalBounds().height };
+        auto const AABB = obj.getGlobalBounds();
+        return jt::Vector2f { AABB.width, AABB.height };
     }
 
     template <class U>
-    static jt::Vector2f getSize(std::shared_ptr<U> obj)
+    static jt::Vector2f getSize(std::shared_ptr<U> const& obj)
     {
-        return jt::Vector2f { obj->getGlobalBounds().width, obj->getGlobalBounds().height };
+        return getSize(*obj);
     }
 
     template <class U>
@@ -110,10 +111,9 @@ private:
     }
 
     template <class U>
-    static jt::Vector2f getCenter(std::shared_ptr<U> obj)
+    static jt::Vector2f getCenter(std::shared_ptr<U> const& obj)
     {
-        auto const AABB = obj->getGlobalBounds();
-        return jt::Vector2f { AABB.left + AABB.width / 2.f, AABB.top + AABB.height / 2.f };
+        return getCenter(*obj);
     }
 };
 } // namespace jt
