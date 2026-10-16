@@ -10,7 +10,7 @@ namespace jt {
 class RenderTarget : public RenderTargetInterface {
 public:
     explicit RenderTarget(std::shared_ptr<jt::RenderTargetLayer> renderer = nullptr);
-    std::shared_ptr<jt::RenderTargetLayer> get(int z) override;
+    std::shared_ptr<jt::RenderTargetLayer> const& get(int z) override;
 
     void add(int z, std::shared_ptr<SDL_Texture> texture);
 

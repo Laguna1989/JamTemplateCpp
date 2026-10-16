@@ -41,6 +41,10 @@ std::shared_ptr<jt::Text> createText(std::shared_ptr<jt::RenderTargetInterface> 
     std::string const& text, unsigned int fontSize, jt::Color const& col = jt::colors::White,
     std::string const& font_path = "assets/font.ttf");
 
+std::shared_ptr<jt::Text> createText(jt::RenderTargetInterface& renderTarget,
+    std::string const& text, unsigned int fontSize, jt::Color const& col = jt::colors::White,
+    std::string const& font_path = "assets/font.ttf");
+
 /// Create a vignette sprite
 /// \param size the size of the vignette
 /// \return shared pointer to sprite

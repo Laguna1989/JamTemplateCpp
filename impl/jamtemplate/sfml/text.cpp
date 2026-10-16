@@ -86,7 +86,7 @@ void jt::Text::doUpdate(float /*elapsed*/)
     m_flashText->setScale(m_text->getScale());
 }
 
-void jt::Text::doDrawShadow(std::shared_ptr<jt::RenderTargetLayer> const sptr) const
+void jt::Text::doDrawShadow(std::shared_ptr<jt::RenderTargetLayer> const& sptr) const
 {
     if (!sptr) [[unlikely]] {
         return;
@@ -105,7 +105,7 @@ void jt::Text::doDrawShadow(std::shared_ptr<jt::RenderTargetLayer> const sptr) c
     m_text->setFillColor(toLib(oldCol));
 }
 
-void jt::Text::doDrawOutline(std::shared_ptr<jt::RenderTargetLayer> const sptr) const
+void jt::Text::doDrawOutline(std::shared_ptr<jt::RenderTargetLayer> const& sptr) const
 {
     if (!sptr) [[unlikely]] {
         return;
@@ -125,7 +125,7 @@ void jt::Text::doDrawOutline(std::shared_ptr<jt::RenderTargetLayer> const sptr) 
     m_text->setFillColor(toLib(oldCol));
 }
 
-void jt::Text::doDraw(std::shared_ptr<jt::RenderTargetLayer> const sptr) const
+void jt::Text::doDraw(std::shared_ptr<jt::RenderTargetLayer> const& sptr) const
 {
     if (!sptr) [[unlikely]] {
         return;
@@ -135,7 +135,7 @@ void jt::Text::doDraw(std::shared_ptr<jt::RenderTargetLayer> const sptr) const
     sptr->draw(*m_text, states);
 }
 
-void jt::Text::doDrawFlash(std::shared_ptr<jt::RenderTargetLayer> const sptr) const
+void jt::Text::doDrawFlash(std::shared_ptr<jt::RenderTargetLayer> const& sptr) const
 {
     if (!sptr) [[unlikely]] {
         return;

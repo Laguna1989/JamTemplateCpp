@@ -104,7 +104,7 @@ void Sprite::cleanImage() noexcept { m_image = nullptr; }
 
 void Sprite::doUpdate(float /*elapsed*/) { }
 
-void Sprite::doDraw(std::shared_ptr<jt::RenderTargetLayer> const sptr) const
+void Sprite::doDraw(std::shared_ptr<jt::RenderTargetLayer> const& sptr) const
 {
     if (!sptr) [[unlikely]] {
         return;
@@ -120,7 +120,7 @@ void Sprite::doDraw(std::shared_ptr<jt::RenderTargetLayer> const sptr) const
     SDL_RenderCopyEx(sptr.get(), m_text.get(), &sourceRect, &destRect, getRotation(), &p, flip);
 }
 
-void Sprite::doDrawShadow(std::shared_ptr<jt::RenderTargetLayer> const sptr) const
+void Sprite::doDrawShadow(std::shared_ptr<jt::RenderTargetLayer> const& sptr) const
 {
     if (!sptr) [[unlikely]] {
         return;
@@ -136,7 +136,7 @@ void Sprite::doDrawShadow(std::shared_ptr<jt::RenderTargetLayer> const sptr) con
     SDL_RenderCopyEx(sptr.get(), m_text.get(), &sourceRect, &destRect, getRotation(), &p, flip);
 }
 
-void Sprite::doDrawOutline(std::shared_ptr<jt::RenderTargetLayer> const sptr) const
+void Sprite::doDrawOutline(std::shared_ptr<jt::RenderTargetLayer> const& sptr) const
 {
     if (!sptr) [[unlikely]] {
         return;
@@ -155,7 +155,7 @@ void Sprite::doDrawOutline(std::shared_ptr<jt::RenderTargetLayer> const sptr) co
     }
 }
 
-void Sprite::doDrawFlash(std::shared_ptr<jt::RenderTargetLayer> const sptr) const
+void Sprite::doDrawFlash(std::shared_ptr<jt::RenderTargetLayer> const& sptr) const
 {
     if (!sptr) [[unlikely]] {
         return;

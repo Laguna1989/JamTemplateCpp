@@ -18,7 +18,7 @@ void jt::OutlineImpl::doSetOutline(Color const& col, int width)
     }
 }
 
-void jt::OutlineImpl::drawOutline(std::shared_ptr<jt::RenderTargetLayer> const sptr) const
+void jt::OutlineImpl::drawOutline(std::shared_ptr<jt::RenderTargetLayer> const& sptr) const
 {
     if (!sptr) [[unlikely]] {
         return;

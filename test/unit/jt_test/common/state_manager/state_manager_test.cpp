@@ -111,7 +111,7 @@ public:
     MOCK_METHOD(bool, isInProgress, (), (override));
     MOCK_METHOD(bool, triggerStateChange, (), (override));
     MOCK_METHOD(void, update, (float elapsed), (override));
-    MOCK_METHOD(void, draw, (std::shared_ptr<jt::RenderTargetInterface>), (override));
+    MOCK_METHOD(void, draw, (jt::RenderTargetInterface&), (override));
 };
 
 TEST(StateManagerTest, UpdateAndDrawWithTransition)
@@ -127,7 +127,7 @@ TEST(StateManagerTest, UpdateAndDrawWithTransition)
     EXPECT_CALL(*transition, update(::testing::_));
     EXPECT_CALL(*transition, triggerStateChange).WillOnce(::testing::Return(true));
     EXPECT_CALL(*transition, isInProgress).WillOnce(::testing::Return(true));
-    EXPECT_CALL(*transition, draw(::testing::_));
+    EXPECT_CALL(*transition, draw(::testing::Ref(game->m_gfx.m_renderTargetStub)));
     stateManager.update(game, 0.1f);
     ASSERT_NO_THROW(stateManager.draw(game->gfx().target()));
 }

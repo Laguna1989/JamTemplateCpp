@@ -16,7 +16,7 @@ public:
     GfxNull();
     RenderWindowInterface& window() override;
     CamInterface& camera() override;
-    std::shared_ptr<jt::RenderTargetInterface> target() override;
+    jt::RenderTargetInterface& target() override;
     TextureManagerInterface& textureManager() override;
 
     void reset() override;

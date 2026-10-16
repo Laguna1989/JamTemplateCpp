@@ -81,11 +81,11 @@ private:
 
     float const m_progressYOffsetFraction { 0.1f };
 
-    virtual void doDraw(std::shared_ptr<jt::RenderTargetLayer> const sptr) const override;
-    virtual void doDrawFlash(std::shared_ptr<jt::RenderTargetLayer> const sptr) const override;
-    virtual void doDrawShadow(std::shared_ptr<jt::RenderTargetLayer> const sptr) const override;
+    virtual void doDraw(std::shared_ptr<jt::RenderTargetLayer> const& sptr) const override;
+    virtual void doDrawFlash(std::shared_ptr<jt::RenderTargetLayer> const& sptr) const override;
+    virtual void doDrawShadow(std::shared_ptr<jt::RenderTargetLayer> const& sptr) const override;
 
-    void doDrawOutline(std::shared_ptr<jt::RenderTargetLayer> const sptr) const override;
+    void doDrawOutline(std::shared_ptr<jt::RenderTargetLayer> const& sptr) const override;
 
     // overwrite this method:
     // things to take care of:

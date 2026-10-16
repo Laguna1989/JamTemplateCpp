@@ -78,7 +78,7 @@ void jt::Shape::doUpdate(float /*elapsed*/)
     m_flashShape->setFillColor(toLib(getFlashColor()));
 }
 
-void jt::Shape::doDrawShadow(std::shared_ptr<jt::RenderTargetLayer> const sptr) const
+void jt::Shape::doDrawShadow(std::shared_ptr<jt::RenderTargetLayer> const& sptr) const
 {
     if (!m_shape) [[unlikely]] {
         return;
@@ -98,7 +98,7 @@ void jt::Shape::doDrawShadow(std::shared_ptr<jt::RenderTargetLayer> const sptr) 
     m_shape->setFillColor(toLib(oldCol));
 }
 
-void jt::Shape::doDrawOutline(std::shared_ptr<jt::RenderTargetLayer> const sptr) const
+void jt::Shape::doDrawOutline(std::shared_ptr<jt::RenderTargetLayer> const& sptr) const
 {
     if (!m_shape) [[unlikely]] {
         return;
@@ -121,7 +121,7 @@ void jt::Shape::doDrawOutline(std::shared_ptr<jt::RenderTargetLayer> const sptr)
     m_shape->setFillColor(toLib(oldCol));
 }
 
-void jt::Shape::doDraw(std::shared_ptr<jt::RenderTargetLayer> const sptr) const
+void jt::Shape::doDraw(std::shared_ptr<jt::RenderTargetLayer> const& sptr) const
 {
     if (!m_shape) [[unlikely]] {
         return;
@@ -134,7 +134,7 @@ void jt::Shape::doDraw(std::shared_ptr<jt::RenderTargetLayer> const sptr) const
     sptr->draw(*m_shape, states);
 }
 
-void jt::Shape::doDrawFlash(std::shared_ptr<jt::RenderTargetLayer> const sptr) const
+void jt::Shape::doDrawFlash(std::shared_ptr<jt::RenderTargetLayer> const& sptr) const
 {
     if (!m_shape) [[unlikely]] {
         return;

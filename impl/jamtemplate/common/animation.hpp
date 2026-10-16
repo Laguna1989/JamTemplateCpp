@@ -191,10 +191,10 @@ private:
 
     float m_animationplaybackSpeed { 1.0f };
 
-    void doDrawShadow(std::shared_ptr<jt::RenderTargetLayer> const sptr) const override;
-    void doDrawOutline(std::shared_ptr<jt::RenderTargetLayer> const sptr) const override;
-    void doDraw(std::shared_ptr<jt::RenderTargetLayer> const sptr) const override;
-    void doDrawFlash(std::shared_ptr<jt::RenderTargetLayer> const /*sptr*/) const override;
+    void doDrawShadow(std::shared_ptr<jt::RenderTargetLayer> const& sptr) const override;
+    void doDrawOutline(std::shared_ptr<jt::RenderTargetLayer> const& sptr) const override;
+    void doDraw(std::shared_ptr<jt::RenderTargetLayer> const& sptr) const override;
+    void doDrawFlash(std::shared_ptr<jt::RenderTargetLayer> const& /*sptr*/) const override;
 
     void doFlashImpl(float t, jt::Color col = jt::colors::White) override;
 

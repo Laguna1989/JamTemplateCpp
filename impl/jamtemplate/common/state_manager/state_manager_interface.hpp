@@ -57,8 +57,8 @@ public:
     virtual void update(std::weak_ptr<GameInterface> gameInstance, float elapsed) = 0;
 
     /// Draw the state
-    /// \param rt
-    virtual void draw(std::shared_ptr<jt::RenderTargetInterface> rt) = 0;
+    /// \param rt the render target
+    virtual void draw(jt::RenderTargetInterface& rt) = 0;
 
     /// Destructor
     virtual ~StateManagerInterface() = default;

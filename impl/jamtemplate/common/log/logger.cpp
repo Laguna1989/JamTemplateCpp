@@ -68,7 +68,7 @@ void jt::Logger::addLogTarget(std::shared_ptr<jt::LogTargetInterface> target)
         error("cannot add nullptr log target", { "jt" });
         return;
     }
-    m_logTargets.push_back(target);
+    m_logTargets.push_back(std::move(target));
 }
 
 void jt::Logger::addLogEntry(jt::LogEntry entry)

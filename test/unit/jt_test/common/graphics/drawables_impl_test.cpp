@@ -1,5 +1,6 @@
 ﻿#include "drawables_impl_test.hpp"
 #include <backend_setup.hpp>
+#include <mocks/render_target_stub.hpp>
 #include <texture_manager_impl.hpp>
 #include <gtest/gtest.h>
 #include <memory>
@@ -173,21 +174,26 @@ TEST_P(DrawableImplTestFixture, GetScaleAfterSetScale)
     ASSERT_EQ(drawable->getScale(), expected);
 }
 
-TEST_P(DrawableImplTestFixture, DrawWithoutUpdate) { drawable->draw(getRenderTargetContainer()); }
+TEST_P(DrawableImplTestFixture, DrawWithoutUpdate) { drawable->draw(*getRenderTargetContainer()); }
 
-TEST_P(DrawableImplTestFixture, DrawWithNullptr) { drawable->draw(nullptr); }
+TEST_P(DrawableImplTestFixture, DrawWithoutLayer)
+{
+    RenderTargetStub renderTarget;
+    drawable->update(0.1f);
+    drawable->draw(renderTarget);
+}
 
 TEST_P(DrawableImplTestFixture, Draw)
 {
     drawable->update(0.1f);
-    drawable->draw(getRenderTargetContainer());
+    drawable->draw(*getRenderTargetContainer());
 }
 
 TEST_P(DrawableImplTestFixture, DrawWithCamOffset)
 {
     jt::DrawableImpl::setCamOffset(jt::Vector2f { -100.0f, -100.0f });
     drawable->update(0.1f);
-    drawable->draw(getRenderTargetContainer());
+    drawable->draw(*getRenderTargetContainer());
     jt::DrawableImpl::setCamOffset(jt::Vector2f { 0.0f, 0.0f });
 }
 
@@ -195,14 +201,14 @@ TEST_P(DrawableImplTestFixture, DrawWithShadow)
 {
     drawable->setShadow(jt::colors::Green, jt::Vector2f { 4, 4 });
     drawable->update(0.1f);
-    drawable->draw(getRenderTargetContainer());
+    drawable->draw(*getRenderTargetContainer());
 }
 
 TEST_P(DrawableImplTestFixture, DrawWithOutline)
 {
     drawable->setOutline(jt::colors::Green, 4);
     drawable->update(0.1f);
-    drawable->draw(getRenderTargetContainer());
+    drawable->draw(*getRenderTargetContainer());
 }
 
 TEST_P(DrawableImplTestFixture, GetColorAfterSetColor)
@@ -220,7 +226,7 @@ TEST_P(DrawableImplTestFixture, DrawWithSetColor)
 {
     drawable->setColor(jt::colors::Red);
     drawable->update(0.1f);
-    drawable->draw(getRenderTargetContainer());
+    drawable->draw(*getRenderTargetContainer());
 }
 
 TEST_P(DrawableImplTestFixture, DrawWithFlash)
@@ -228,9 +234,9 @@ TEST_P(DrawableImplTestFixture, DrawWithFlash)
     drawable->flash(5.0f);
     drawable->update(0.1f);
     auto renderTarget = getRenderTargetContainer();
-    drawable->draw(renderTarget);
+    drawable->draw(*renderTarget);
     drawable->update(5.0f);
-    drawable->draw(renderTarget);
+    drawable->draw(*renderTarget);
 }
 
 TEST_P(DrawableImplTestFixture, DrawWithFlicker)
@@ -238,9 +244,9 @@ TEST_P(DrawableImplTestFixture, DrawWithFlicker)
     drawable->flicker(1.0f, 0.11f);
     drawable->update(0.1f);
     auto renderTarget = getRenderTargetContainer();
-    drawable->draw(renderTarget);
+    drawable->draw(*renderTarget);
     drawable->update(1.0f);
-    drawable->draw(renderTarget);
+    drawable->draw(*renderTarget);
 }
 
 TEST_P(DrawableImplTestFixture, DrawWithShake)
@@ -248,9 +254,9 @@ TEST_P(DrawableImplTestFixture, DrawWithShake)
     drawable->shake(5.0f, 0.02f);
     drawable->update(0.1f);
     auto renderTarget = getRenderTargetContainer();
-    drawable->draw(renderTarget);
+    drawable->draw(*renderTarget);
     drawable->update(5.0f);
-    drawable->draw(renderTarget);
+    drawable->draw(*renderTarget);
 }
 
 TEST_P(DrawableImplTestFixture, DrawScaled)
@@ -258,7 +264,7 @@ TEST_P(DrawableImplTestFixture, DrawScaled)
     drawable->setScale(jt::Vector2f { 2.0f, 2.0f });
     drawable->update(0.1f);
     jt::DrawableImpl::setCamOffset(jt::Vector2f { 100.0f, 100.0f });
-    drawable->draw(getRenderTargetContainer());
+    drawable->draw(*getRenderTargetContainer());
     jt::DrawableImpl::setCamOffset(jt::Vector2f { 0.0f, 0.0f });
 }
 
@@ -279,7 +285,7 @@ TEST_P(DrawableImplTestFixture, DrawRotated)
     drawable->setRotation(22.5f);
     drawable->update(0.1f);
     jt::DrawableImpl::setCamOffset(jt::Vector2f { 100.0f, 100.0f });
-    drawable->draw(getRenderTargetContainer());
+    drawable->draw(*getRenderTargetContainer());
     jt::DrawableImpl::setCamOffset(jt::Vector2f { 0.0f, 0.0f });
 }
 
@@ -300,7 +306,7 @@ TEST_P(DrawableImplTestFixture, UpdateAndDrawWithFlash)
 
     ASSERT_EQ(drawable->getFlashColor(), jt::colors::Red);
     drawable->update(0.25f);
-    drawable->draw(getRenderTargetContainer());
+    drawable->draw(*getRenderTargetContainer());
 }
 
 TEST_P(DrawableImplTestFixture, GetShadowActiveIsFalseByDefault)
@@ -379,7 +385,7 @@ TEST_P(DrawableImplTestFixture, DrawWithBlendModeMul)
     auto const expectedBlendMode = jt::BlendMode::MUL;
     drawable->setBlendMode(expectedBlendMode);
     drawable->update(0.0f);
-    drawable->draw(getRenderTargetContainer());
+    drawable->draw(*getRenderTargetContainer());
 }
 
 TEST_P(DrawableImplTestFixture, DrawWithBlendModeAdd)
@@ -387,7 +393,7 @@ TEST_P(DrawableImplTestFixture, DrawWithBlendModeAdd)
     auto const expectedBlendMode = jt::BlendMode::ADD;
     drawable->setBlendMode(expectedBlendMode);
     drawable->update(0.0f);
-    drawable->draw(getRenderTargetContainer());
+    drawable->draw(*getRenderTargetContainer());
 }
 
 TEST_P(DrawableImplTestFixture, DrawWithBlendModeAlpha)
@@ -395,7 +401,7 @@ TEST_P(DrawableImplTestFixture, DrawWithBlendModeAlpha)
     auto const expectedBlendMode = jt::BlendMode::ALPHA;
     drawable->setBlendMode(expectedBlendMode);
     drawable->update(0.0f);
-    drawable->draw(getRenderTargetContainer());
+    drawable->draw(*getRenderTargetContainer());
 }
 
 TEST_P(DrawableImplTestFixture, InitialOffsetModeIsManual)

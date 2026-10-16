@@ -6,7 +6,7 @@
 jt::Box2DWorldImpl::Box2DWorldImpl(
     jt::Vector2f const& gravity, std::shared_ptr<jt::Box2DContactManagerInterface> contactManager)
     : m_world { std::make_unique<b2World>(jt::Conversion::vec(gravity)) }
-    , m_newContactManager { contactManager }
+    , m_newContactManager { std::move(contactManager) }
 {
     if (m_newContactManager == nullptr) {
         m_newContactManager = std::make_shared<jt::Box2DContactManager>();

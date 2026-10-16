@@ -4,7 +4,7 @@
 
 using ::testing::NiceMock;
 
-TEST_F(GameTest, InitialValues) { ASSERT_EQ(g->gfx().target(), nullptr); }
+TEST_F(GameTest, InitialValues) { ASSERT_EQ(&g->gfx().target(), &gfx.m_renderTargetStub); }
 
 TEST_F(GameTest, DrawWithNoState) { ASSERT_NO_THROW(g->draw()); }
 

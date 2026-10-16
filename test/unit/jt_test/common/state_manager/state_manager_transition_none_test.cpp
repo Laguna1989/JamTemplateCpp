@@ -1,3 +1,4 @@
+#include <mocks/render_target_stub.hpp>
 #include <state_manager/state_manager_transition_none.hpp>
 #include <gtest/gtest.h>
 
@@ -10,5 +11,6 @@ TEST(StateManagerTransitionNoneTest, IsInProgressReturnsFalse)
 TEST(StateManagerTransitionNoneTest, DrawDoesNotThrow)
 {
     jt::StateManagerTransitionNone transition;
-    ASSERT_NO_THROW(transition.draw(nullptr));
+    RenderTargetStub renderTarget;
+    ASSERT_NO_THROW(transition.draw(renderTarget));
 }

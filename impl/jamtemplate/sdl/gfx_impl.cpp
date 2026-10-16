@@ -26,7 +26,7 @@ RenderWindowInterface& GfxImpl::window() { return m_window; }
 
 CamInterface& GfxImpl::camera() { return m_camera; }
 
-std::shared_ptr<jt::RenderTargetInterface> GfxImpl::target() { return m_target; }
+jt::RenderTargetInterface& GfxImpl::target() { return *m_target; }
 
 TextureManagerInterface& GfxImpl::textureManager() { return m_textureManager.value(); }
 

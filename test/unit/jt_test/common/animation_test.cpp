@@ -1,6 +1,7 @@
 ﻿#include "animation.hpp"
 #include "backend_setup.hpp"
 #include "texture_manager_impl.hpp"
+#include "mocks/render_target_stub.hpp"
 #include "gtest/gtest.h"
 #include <stdexcept>
 #include <type_traits>
@@ -80,7 +81,8 @@ TEST_F(AnimationTestFixture, UpdateWithoutPlayDoesNotRaiseException)
 TEST_F(AnimationTestFixture, DrawWithoutPlayDoesNotRaiseException)
 {
     jt::Animation a {};
-    ASSERT_NO_THROW(a.draw(std::shared_ptr<jt::RenderTargetInterface> { nullptr }));
+    RenderTargetStub renderTarget;
+    ASSERT_NO_THROW(a.draw(renderTarget));
 }
 
 TEST_F(AnimationTestFixture, AddWithEmptyFrameTimesRaisesException)
@@ -294,7 +296,8 @@ TEST_F(AnimationPlayingTest, AnimationCanBeFlashed)
 {
     a.flash(1.0f);
     a.update(0.1f);
-    a.draw(std::shared_ptr<jt::RenderTargetInterface> { nullptr });
+    RenderTargetStub renderTarget;
+    a.draw(renderTarget);
 }
 
 TEST_F(AnimationPlayingTest, AnimationStartsAtFrameZero)

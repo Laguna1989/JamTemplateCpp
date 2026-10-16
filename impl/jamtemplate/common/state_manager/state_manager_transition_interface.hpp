@@ -24,7 +24,7 @@ public:
 
     /// Draw the transition
     /// \param rt the render target
-    virtual void draw(std::shared_ptr<jt::RenderTargetInterface> rt) = 0;
+    virtual void draw(jt::RenderTargetInterface& rt) = 0;
 
     /// Destructor
     virtual ~StateManagerTransitionInterface() = default;

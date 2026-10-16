@@ -35,7 +35,7 @@ jt::Button::~Button()
 
 void jt::Button::setDrawable(std::shared_ptr<jt::DrawableInterface> drawable)
 {
-    m_drawable = drawable;
+    m_drawable = std::move(drawable);
 }
 
 void jt::Button::addCallback(std::function<void(void)> const& callback)
@@ -73,13 +73,14 @@ void jt::Button::doDraw() const
         return;
     }
 
-    m_background->draw(getGame()->gfx().target());
+    auto& rt = renderTarget();
+    m_background->draw(rt);
     if (m_drawable) {
-        m_drawable->draw(getGame()->gfx().target());
+        m_drawable->draw(rt);
     }
 
     if (!m_isActive) {
-        m_disabledOverlay->draw(getGame()->gfx().target());
+        m_disabledOverlay->draw(rt);
     }
 }
 

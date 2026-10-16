@@ -1,6 +1,6 @@
 #include "flash_impl.hpp"
 
-void jt::FlashImpl::drawFlash(std::shared_ptr<jt::RenderTargetLayer> sptr) const
+void jt::FlashImpl::drawFlash(std::shared_ptr<jt::RenderTargetLayer> const& sptr) const
 {
     if (sptr) [[likely]] {
         if (m_flashTimer >= 0) {

@@ -61,11 +61,11 @@ bool jt::GameObject::isAlive() const { return m_alive; }
 
 void jt::GameObject::destroy() { doDestroy(); }
 
-void jt::GameObject::doUpdate(float const /*elapsed*/) {};
-void jt::GameObject::doDraw() const {};
-void jt::GameObject::doCreate() {};
-void jt::GameObject::doKill() {};
-void jt::GameObject::doDestroy() {};
+void jt::GameObject::doUpdate(float const /*elapsed*/) { };
+void jt::GameObject::doDraw() const { };
+void jt::GameObject::doCreate() { };
+void jt::GameObject::doKill() { };
+void jt::GameObject::doDestroy() { };
 
 void jt::GameObject::storeActionCommand(std::shared_ptr<void> commandCallback)
 {
@@ -73,7 +73,9 @@ void jt::GameObject::storeActionCommand(std::shared_ptr<void> commandCallback)
 }
 
 std::string jt::GameObject::getName() const { return ""; }
+
 std::size_t jt::GameObject::getNumberOfAliveGameObjects() const { return aliveObjects(); }
+
 std::size_t jt::GameObject::getNumberOfCreatedGameObjects() const { return createdObjects(); }
 
 jt::TextureManagerInterface& jt::GameObject::textureManager() const
@@ -81,14 +83,16 @@ jt::TextureManagerInterface& jt::GameObject::textureManager() const
     return getGame()->gfx().textureManager();
 }
 
-std::shared_ptr<jt::RenderTargetInterface> jt::GameObject::renderTarget() const
+jt::RenderTargetInterface& jt::GameObject::renderTarget() const
 {
     return getGame()->gfx().target();
 }
+
 std::shared_ptr<jt::KeyboardInterface> jt::GameObject::keyboard() const
 {
     return getGame()->input().keyboard();
 }
+
 std::shared_ptr<jt::MouseInterface> jt::GameObject::mouse() const
 {
     return getGame()->input().mouse();

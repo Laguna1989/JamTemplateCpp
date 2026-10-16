@@ -52,8 +52,9 @@ void jt::Waves::doUpdate(float const elapsed)
 
 void jt::Waves::doDraw() const
 {
+    auto& target = renderTarget();
     for (auto const& a : m_animations) {
-        a->draw(renderTarget());
+        a->draw(target);
     }
 }
 

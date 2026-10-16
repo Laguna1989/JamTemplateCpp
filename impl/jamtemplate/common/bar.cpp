@@ -58,15 +58,15 @@ float jt::Bar::getMaxValue() const { return m_valueMax; }
 
 float jt::Bar::getValueFraction() const { return m_valueCurrent / m_valueMax; }
 
-void jt::Bar::doDraw(std::shared_ptr<jt::RenderTargetLayer> const sptr) const
+void jt::Bar::doDraw(std::shared_ptr<jt::RenderTargetLayer> const& sptr) const
 {
     m_shapeFull->draw(sptr);
     m_shapeProgress->draw(sptr);
 }
 
-void jt::Bar::doDrawFlash(std::shared_ptr<jt::RenderTargetLayer> const /*sptr*/) const { }
+void jt::Bar::doDrawFlash(std::shared_ptr<jt::RenderTargetLayer> const& /*sptr*/) const { }
 
-void jt::Bar::doDrawShadow(std::shared_ptr<jt::RenderTargetLayer> const sptr) const
+void jt::Bar::doDrawShadow(std::shared_ptr<jt::RenderTargetLayer> const& sptr) const
 {
     jt::Vector2f const oldPos = m_shapeFull->getPosition();
     jt::Color const oldCol = m_shapeFull->getColor();
@@ -80,7 +80,7 @@ void jt::Bar::doDrawShadow(std::shared_ptr<jt::RenderTargetLayer> const sptr) co
     m_shapeFull->setColor(oldCol);
 }
 
-void jt::Bar::doDrawOutline(std::shared_ptr<jt::RenderTargetLayer> const sptr) const
+void jt::Bar::doDrawOutline(std::shared_ptr<jt::RenderTargetLayer> const& sptr) const
 {
     jt::Vector2f const oldPos = m_shapeFull->getPosition();
     jt::Color const oldCol = m_shapeFull->getColor();

@@ -2,20 +2,23 @@
 #include <stdexcept>
 
 jt::RenderTarget::RenderTarget(std::shared_ptr<jt::RenderTargetLayer> renderer)
-    : m_renderer { renderer }
+    : m_renderer { std::move(renderer) }
 {
     if (!m_renderer) {
         throw std::invalid_argument { "RenderTarget created with nullptr argument" };
     }
 }
 
-std::shared_ptr<jt::RenderTargetLayer> jt::RenderTarget::get(int z)
+std::shared_ptr<jt::RenderTargetLayer> const& jt::RenderTarget::get(int z)
 {
     SDL_SetRenderTarget(m_renderer.get(), m_textures[z].get());
     return m_renderer;
 }
 
-void jt::RenderTarget::add(int z, std::shared_ptr<SDL_Texture> texture) { m_textures[z] = texture; }
+void jt::RenderTarget::add(int z, std::shared_ptr<SDL_Texture> texture)
+{
+    m_textures[z] = std::move(texture);
+}
 
 void jt::RenderTarget::clearPixels()
 {

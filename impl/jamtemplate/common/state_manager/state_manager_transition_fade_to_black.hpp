@@ -17,7 +17,7 @@ private:
 
     void doUpdate(float elapsed) override;
     void doStart() override;
-    void doDraw(std::shared_ptr<jt::RenderTargetInterface> rt) override;
+    void doDraw(jt::RenderTargetInterface& rt) override;
 };
 
 } // namespace jt

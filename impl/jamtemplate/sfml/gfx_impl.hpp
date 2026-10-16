@@ -16,7 +16,7 @@ public:
     RenderWindowInterface& window() override;
     CamInterface& camera() override;
 
-    std::shared_ptr<jt::RenderTargetInterface> target() override;
+    jt::RenderTargetInterface& target() override;
     TextureManagerInterface& textureManager() override;
 
     void reset() override;
@@ -31,7 +31,7 @@ private:
     CamInterface& m_camera;
     jt::Vector2f m_viewHalfSize { 0.0f, 0.0f };
     std::shared_ptr<jt::RenderTarget> m_target { nullptr };
-    std::optional<jt::TextureManagerImpl> m_textureManager {};
+    std::optional<jt::TextureManagerImpl> m_textureManager { };
     std::shared_ptr<sf::View> m_view { nullptr };
 
     void drawOneZLayer(std::shared_ptr<jt::RenderTargetLayer> const& layer);
