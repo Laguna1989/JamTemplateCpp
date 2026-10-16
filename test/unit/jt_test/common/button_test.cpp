@@ -147,7 +147,7 @@ TEST_F(ButtonTest, DrawInactiveButton)
     b->setActive(false);
     b->setGameInstance(game);
     b->update(0.1f);
-    EXPECT_CALL(game->m_gfx, target()).Times(2);
+    EXPECT_CALL(game->m_gfx, target()).Times(1);
     b->draw();
 }
 
@@ -161,11 +161,12 @@ TEST_F(ButtonTest, CustomDrawable)
 
     auto d = std::make_shared<::testing::NiceMock<MockDrawable>>();
     b->setDrawable(d);
-    std::shared_ptr<jt::RenderTargetInterface> renderTarget { nullptr };
-    EXPECT_CALL(game->m_gfx, target()).Times(2);
+    EXPECT_CALL(game->m_gfx, target()).Times(1);
     EXPECT_CALL(*d, update(0.1f));
     b->update(0.1f);
-    EXPECT_CALL(*d, draw(renderTarget));
+    EXPECT_CALL(*d,
+        draw(::testing::Matcher<jt::RenderTargetInterface&>(
+            ::testing::Ref(game->m_gfx.m_renderTargetStub))));
     b->draw();
     SUCCEED();
 }

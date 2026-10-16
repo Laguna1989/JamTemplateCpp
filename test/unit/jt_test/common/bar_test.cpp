@@ -1,5 +1,6 @@
 ﻿#include <backend_setup.hpp>
 #include <bar.hpp>
+#include <mocks/render_target_stub.hpp>
 #include <texture_manager_impl.hpp>
 #include <gtest/gtest.h>
 #include <stdexcept>
@@ -90,7 +91,8 @@ TEST(BarTest, VerticalBar)
 {
     jt::Bar b { 5.0f, 100.0f, false, getTextureManager() };
     b.update(0.1f);
-    b.draw(std::shared_ptr<jt::RenderTargetInterface> { nullptr });
+    RenderTargetStub renderTarget;
+    b.draw(renderTarget);
 
     SUCCEED();
 }

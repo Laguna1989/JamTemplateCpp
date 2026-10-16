@@ -30,7 +30,8 @@ public:
     /// Destructor
     virtual ~DrawableImpl() = default;
 
-    void draw(std::shared_ptr<jt::RenderTargetInterface> targetContainer) const override;
+
+    void draw(jt::RenderTargetInterface& targetContainer) const override;
 
     void draw(std::shared_ptr<jt::RenderTargetLayer> const& targets) const;
 

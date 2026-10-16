@@ -80,7 +80,7 @@ std::shared_ptr<jt::StateManagerTransitionInterface> jt::StateManager::getTransi
     return (m_transition == nullptr) ? defaultTransition : m_transition;
 }
 
-void jt::StateManager::draw(std::shared_ptr<jt::RenderTargetInterface> rt)
+void jt::StateManager::draw(jt::RenderTargetInterface& rt)
 {
     ZoneScopedN("jt::StateManager::draw");
     getCurrentState()->draw();

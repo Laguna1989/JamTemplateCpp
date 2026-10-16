@@ -73,13 +73,14 @@ void jt::Button::doDraw() const
         return;
     }
 
-    m_background->draw(getGame()->gfx().target());
+    auto& rt = renderTarget();
+    m_background->draw(rt);
     if (m_drawable) {
-        m_drawable->draw(getGame()->gfx().target());
+        m_drawable->draw(rt);
     }
 
     if (!m_isActive) {
-        m_disabledOverlay->draw(getGame()->gfx().target());
+        m_disabledOverlay->draw(rt);
     }
 }
 

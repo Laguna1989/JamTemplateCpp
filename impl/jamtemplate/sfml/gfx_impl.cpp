@@ -20,7 +20,7 @@ void horizontalFlip(std::unique_ptr<jt::Sprite> const& spr, float zoom, float wi
 jt::GfxImpl::GfxImpl(RenderWindowInterface& window, CamInterface& cam)
     : m_window { window }
     , m_camera { cam }
-    , m_target {}
+    , m_target { }
     , m_textureManager { nullptr }
 {
     m_target = std::make_shared<jt::RenderTarget>();
@@ -38,7 +38,7 @@ jt::RenderWindowInterface& jt::GfxImpl::window() { return m_window; }
 
 jt::CamInterface& jt::GfxImpl::camera() { return m_camera; }
 
-std::shared_ptr<jt::RenderTargetInterface> jt::GfxImpl::target() { return m_target; }
+jt::RenderTargetInterface& jt::GfxImpl::target() { return *m_target; }
 
 jt::TextureManagerInterface& jt::GfxImpl::textureManager() { return m_textureManager.value(); }
 

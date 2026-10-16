@@ -36,12 +36,12 @@ TEST(GfxImplTest, CameraReturnsCorrectCamera)
     ASSERT_EQ(&gfx.camera(), &cam);
 }
 
-TEST(GfxImplTest, TargetReturnsNoNullptr)
+TEST(GfxImplTest, TargetHasDefaultLayer)
 {
     jt::RenderWindow window { 800, 600, "jt_tests" };
     jt::Camera cam { 1.0f };
     jt::GfxImpl gfx { window, cam };
-    ASSERT_NE(gfx.target(), nullptr);
+    ASSERT_NE(gfx.target().get(0), nullptr);
 }
 
 TEST(GfxImplTest, UpdateCallUpdateOnCamera)

@@ -115,7 +115,7 @@ TEST(GameObjectTest, RenderTargetCallsGfxTarget)
 {
     auto const g = std::make_shared<MockGame>();
     EXPECT_CALL(*g, gfx());
-    EXPECT_CALL(g->m_gfx, target()).WillRepeatedly(::testing::Return(nullptr));
+    EXPECT_CALL(g->m_gfx, target());
     GameObject go {};
     go.setGameInstance(g);
 

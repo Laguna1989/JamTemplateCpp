@@ -19,8 +19,8 @@ public:
     virtual CamInterface& camera() = 0;
 
     /// Get the render target
-    /// \return the render target
-    virtual std::shared_ptr<jt::RenderTargetInterface> target() = 0;
+    /// \return the render target, valid for the lifetime of the gfx
+    virtual RenderTargetInterface& target() = 0;
 
     /// Get the texture manager
     /// \return the texture manager

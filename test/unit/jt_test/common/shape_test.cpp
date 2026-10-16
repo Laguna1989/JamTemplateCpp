@@ -1,4 +1,5 @@
 ﻿#include <backend_setup.hpp>
+#include <mocks/render_target_stub.hpp>
 #include <shape.hpp>
 #include <texture_manager_impl.hpp>
 #include <gtest/gtest.h>
@@ -118,10 +119,11 @@ TEST_F(ShapeTestFixture, Update)
     SUCCEED();
 }
 
-TEST_F(ShapeTestFixture, DrawNullptr)
+TEST_F(ShapeTestFixture, DrawWithoutLayer)
 {
     s.update(0.0f);
-    s.draw(std::shared_ptr<jt::RenderTargetInterface> { nullptr });
+    RenderTargetStub renderTarget;
+    s.draw(renderTarget);
     SUCCEED();
 }
 

@@ -9,15 +9,22 @@ jt::null_objects::GfxNull::GfxNull()
 }
 
 jt::RenderWindowInterface& jt::null_objects::GfxNull::window() { return m_window; }
+
 jt::CamInterface& jt::null_objects::GfxNull::camera() { return m_camera; }
-std::shared_ptr<jt::RenderTargetInterface> jt::null_objects::GfxNull::target() { return m_target; }
+
+jt::RenderTargetInterface& jt::null_objects::GfxNull::target() { return *m_target; }
+
 jt::TextureManagerInterface& jt::null_objects::GfxNull::textureManager()
 {
     return m_textureManager.value();
 }
+
 void jt::null_objects::GfxNull::reset() { m_camera.reset(); }
-void jt::null_objects::GfxNull::update(float elapsed) { m_camera.update(elapsed); }
+
+void jt::null_objects::GfxNull::update(float const elapsed) { m_camera.update(elapsed); }
+
 void jt::null_objects::GfxNull::clear() { }
+
 void jt::null_objects::GfxNull::display() { }
 
 void jt::null_objects::GfxNull::createZLayer(int /*z*/) { }

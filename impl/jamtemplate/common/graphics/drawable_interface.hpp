@@ -19,8 +19,8 @@ public:
     using Sptr = std::shared_ptr<DrawableInterface>;
 
     /// Draw the drawable on the passed render target
-    /// \param renderTarget shared pointer to the rendertarget the drawable should be drawn on
-    virtual void draw(std::shared_ptr<jt::RenderTargetInterface> renderTarget) const = 0;
+    /// \param renderTarget the rendertarget the drawable should be drawn on
+    virtual void draw(jt::RenderTargetInterface& renderTarget) const = 0;
 
     /// Flash the drawable
     /// \param timeInSeconds duration of the flash

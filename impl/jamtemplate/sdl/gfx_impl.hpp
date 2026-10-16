@@ -7,8 +7,8 @@
 #include <graphics/render_window_interface.hpp>
 #include <render_target_layer_lib.hpp>
 #include <render_target_lib.hpp>
-#include <texture_manager_impl.hpp>
 #include <sdl_2_include.hpp>
+#include <texture_manager_impl.hpp>
 #include <optional>
 
 namespace jt {
@@ -18,7 +18,7 @@ public:
     GfxImpl(RenderWindowInterface& window, CamInterface& cam);
     RenderWindowInterface& window() override;
     CamInterface& camera() override;
-    std::shared_ptr<jt::RenderTargetInterface> target() override;
+    jt::RenderTargetInterface& target() override;
     TextureManagerInterface& textureManager() override;
     void reset() override;
     void update(float elapsed) override;

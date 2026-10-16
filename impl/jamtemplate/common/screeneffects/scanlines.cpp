@@ -18,7 +18,7 @@ void jt::ScanLines::doCreate()
 void jt::ScanLines::doDraw() const
 {
     if (m_enabled) {
-        auto const target = renderTarget();
+        auto& target = renderTarget();
         for (auto i = 0u; i != m_shapeCount; ++i) {
             m_shape->setPosition(jt::Vector2f { 0.0f, i * 2 * m_shapeSize.y });
             m_shape->update(0.1f);

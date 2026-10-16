@@ -81,7 +81,7 @@ public:
 
     // Helper functions for fast access of commonly used objects.
     TextureManagerInterface& textureManager() const;
-    std::shared_ptr<jt::RenderTargetInterface> renderTarget() const;
+    RenderTargetInterface& renderTarget() const;
     std::shared_ptr<jt::KeyboardInterface> keyboard() const;
     std::shared_ptr<jt::MouseInterface> mouse() const;
 

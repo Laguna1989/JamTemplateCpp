@@ -1,4 +1,5 @@
 ﻿#include <backend_setup.hpp>
+#include <mocks/render_target_stub.hpp>
 #include <texture_manager_impl.hpp>
 #include <tilemap/tile_layer.hpp>
 #include <tilemap/tilemap_cache.hpp>
@@ -33,14 +34,16 @@ TEST_F(TilemapTileLayerTest, DefaultPosition)
 TEST_F(TilemapTileLayerTest, UpdateAndDraw)
 {
     tileLayer->update(0.1f);
-    tileLayer->draw(std::shared_ptr<jt::RenderTargetInterface> { nullptr });
+    RenderTargetStub renderTarget;
+    tileLayer->draw(renderTarget);
 }
 
 TEST_F(TilemapTileLayerTest, DrawWithScreensizeHint)
 {
     tileLayer->setScreenSizeHint(jt::Vector2f { 400.0f, 300.0f });
     tileLayer->update(0.1f);
-    tileLayer->draw(std::shared_ptr<jt::RenderTargetInterface> { nullptr });
+    RenderTargetStub renderTarget;
+    tileLayer->draw(renderTarget);
 }
 
 TEST_F(TilemapTileLayerTest, UpdateAndDrawWithScreensizeHintWithColorFunction)

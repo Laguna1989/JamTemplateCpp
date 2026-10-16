@@ -50,7 +50,7 @@ void jt::WindParticles::doDraw() const
     if (!m_enabled) {
         return;
     }
-    auto const target = renderTarget();
+    auto& target = renderTarget();
     for (auto const& s : m_shapes) {
         s->draw(target);
     }

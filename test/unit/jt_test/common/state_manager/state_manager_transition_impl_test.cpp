@@ -1,3 +1,4 @@
+#include <mocks/render_target_stub.hpp>
 #include <state_manager/state_manager_transition_impl.hpp>
 #include <gtest/gtest.h>
 
@@ -14,7 +15,7 @@ public:
 private:
     void doUpdate(float /*elapsed*/) override { m_updateCalled = true; }
     void doStart() override { }
-    void doDraw(std::shared_ptr<jt::RenderTargetInterface> /*rt*/) override { m_drawCalled = true; }
+    void doDraw(jt::RenderTargetInterface& /*rt*/) override { m_drawCalled = true; }
 };
 
 TEST(StateManagerTransitionImplTest, IsInProgressReturnsFalseByDefault)
@@ -39,7 +40,8 @@ TEST(StateManagerTransitionImplTest, TriggerStateChangeReturnsFalseByDefault)
 TEST(StateManagerTransitionImplTest, DrawIsNotCalledWhenNotStarted)
 {
     StateManagerTransitionStub transition;
-    transition.draw(nullptr);
+    RenderTargetStub renderTarget;
+    transition.draw(renderTarget);
     ASSERT_FALSE(transition.m_drawCalled);
 }
 
@@ -47,7 +49,8 @@ TEST(StateManagerTransitionImplTest, DrawIsCalledWhenStarted)
 {
     StateManagerTransitionStub transition;
     transition.start();
-    transition.draw(nullptr);
+    RenderTargetStub renderTarget;
+    transition.draw(renderTarget);
     ASSERT_TRUE(transition.m_drawCalled);
 }
 
