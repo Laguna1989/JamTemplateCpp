@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1788036268700,
+  "lastUpdate": 1792123125166,
   "repoUrl": "https://github.com/Laguna1989/JamTemplateCpp",
   "entries": {
     "Benchmark": [
@@ -16662,6 +16662,84 @@ window.BENCHMARK_DATA = {
             "value": 2.000960671428597,
             "unit": "ms/iter",
             "extra": "iterations: 350\ncpu: 2.000768534285715 ms\nthreads: 1"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "laguna.ws@gmail.com",
+            "name": "Simon Weis",
+            "username": "Laguna1989"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "69acd0764b96961185dd86e93d4e8e705b216454",
+          "message": "Merge pull request #345 from Laguna1989/fix/aselib-zlib-macos\n\nBump aselib to v0.3.2 to fix the macOS CI build",
+          "timestamp": "2026-10-16T05:54:24+02:00",
+          "tree_id": "b892fb9382eb7a36d66db569d0625b754ce8681f",
+          "url": "https://github.com/Laguna1989/JamTemplateCpp/commit/69acd0764b96961185dd86e93d4e8e705b216454"
+        },
+        "date": 1792123124291,
+        "tool": "googlecpp",
+        "benches": [
+          {
+            "name": "BM_UpdateDrawablePositions",
+            "value": 1.7478343186275136,
+            "unit": "ms/iter",
+            "extra": "iterations: 408\ncpu: 1.7476093112745104 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GetAllCommands",
+            "value": 0.2828801564223766,
+            "unit": "ms/iter",
+            "extra": "iterations: 2538\ncpu: 0.2828560748620962 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_LoggerLogWithoutTarget",
+            "value": 0.19087086492374783,
+            "unit": "ms/iter",
+            "extra": "iterations: 3672\ncpu: 0.19086166094771237 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_LoggerLogWithCoutTargetSetToOff",
+            "value": 0.18908593187937695,
+            "unit": "ms/iter",
+            "extra": "iterations: 3714\ncpu: 0.1890571424340334 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_UpdateObjectGroup",
+            "value": 0.01818743821460501,
+            "unit": "ms/iter",
+            "extra": "iterations: 39095\ncpu: 0.018185593196060883 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_UpdateSpatialObjectGrid",
+            "value": 0.29352854699407616,
+            "unit": "ms/iter",
+            "extra": "iterations: 2362\ncpu: 0.2935035842506351 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_StartGame",
+            "value": 0.0024664151508472115,
+            "unit": "ms/iter",
+            "extra": "iterations: 285819\ncpu: 0.0024662298517593275 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_RefineTilemapCollisions",
+            "value": 0.11139633979817092,
+            "unit": "ms/iter",
+            "extra": "iterations: 6342\ncpu: 0.11135463513087349 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GamestateWithTweeningShapes",
+            "value": 2.068358665662724,
+            "unit": "ms/iter",
+            "extra": "iterations: 332\ncpu: 2.0681431987951795 ms\nthreads: 1"
           }
         ]
       }
