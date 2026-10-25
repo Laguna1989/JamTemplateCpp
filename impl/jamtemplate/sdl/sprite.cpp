@@ -58,8 +58,9 @@ jt::Color Sprite::getColor() const { return m_color; }
 
 jt::Rectf Sprite::getGlobalBounds() const
 {
-    return jt::Rectf { m_position.x, m_position.y, static_cast<float>(m_sourceRect.width),
-        static_cast<float>(m_sourceRect.height) };
+    auto const pos = m_position + getOffset() + m_offsetFromOrigin;
+    return jt::Rectf { pos.x, pos.y, static_cast<float>(m_sourceRect.width) * fabs(m_scale.x),
+        static_cast<float>(m_sourceRect.height) * fabs(m_scale.y) };
 }
 
 jt::Rectf Sprite::getLocalBounds() const

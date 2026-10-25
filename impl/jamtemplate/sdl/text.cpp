@@ -43,8 +43,8 @@ jt::Color Text::getColor() const noexcept { return m_color; }
 
 jt::Rectf Text::getGlobalBounds() const
 {
-    return jt::Rectf { m_position.x, m_position.y,
-        static_cast<float>(m_textTextureSizeX) * m_scale.x,
+    auto const pos = m_position + getOffset() + getAlignOffset() + m_offsetFromOrigin;
+    return jt::Rectf { pos.x, pos.y, static_cast<float>(m_textTextureSizeX) * m_scale.x,
         static_cast<float>(m_textTextureSizeY) * m_scale.y };
 }
 
@@ -247,7 +247,7 @@ void Text::setSDLColor(jt::Color const& col) const
     SDL_SetTextureAlphaMod(m_textTexture.get(), col.a);
 }
 
-SDL_Rect Text::getDestRect(jt::Vector2f const& positionOffset) const
+jt::Vector2f Text::getAlignOffset() const
 {
     jt::Vector2f alignOffset { 0, 0 };
     if (m_textAlign == TextAlign::CENTER) {
@@ -256,9 +256,13 @@ SDL_Rect Text::getDestRect(jt::Vector2f const& positionOffset) const
     if (m_textAlign == TextAlign::RIGHT) {
         alignOffset.x = -static_cast<float>(m_textTextureSizeX) * m_scale.x;
     }
+    return alignOffset;
+}
 
-    jt::Vector2f pos = m_position + getShakeOffset() + getOffset() + getCamOffset() + alignOffset
-        + positionOffset + m_offsetFromOrigin;
+SDL_Rect Text::getDestRect(jt::Vector2f const& positionOffset) const
+{
+    jt::Vector2f pos = m_position + getShakeOffset() + getOffset() + getCamOffset()
+        + getAlignOffset() + positionOffset + m_offsetFromOrigin;
 
     SDL_Rect destRect; // create a rect
     destRect.x = static_cast<int>(pos.x); // controls the rect's x coordinate

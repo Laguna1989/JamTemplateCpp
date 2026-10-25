@@ -90,6 +90,7 @@ private:
     void recreateTextTexture(std::shared_ptr<jt::RenderTargetLayer> const& sptr);
     std::shared_ptr<jt::RenderTargetLayer> getRenderTarget();
     void setSDLColor(jt::Color const& col) const;
+    jt::Vector2f getAlignOffset() const;
     SDL_Rect getDestRect(jt::Vector2f const& positionOffset = jt::Vector2f { 0.0f, 0.0f }) const;
 
     void calculateTextTextureSize(

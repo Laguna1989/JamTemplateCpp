@@ -78,7 +78,7 @@ void jt::Text::doUpdate(float /*elapsed*/)
     }
 
     auto const position = jt::MathHelper::castToInteger(
-        m_position + getShakeOffset() + alignOffset + getCompleteCamOffset());
+        m_position + getShakeOffset() + getOffset() + alignOffset + getCompleteCamOffset());
     // casting to int and back to float avoids blurry text when rendered on non-integer positions
 
     m_text->setPosition(toLib(position));
