@@ -1,5 +1,6 @@
 #include "state_inventory.hpp"
 #include <box2dwrapper/box2d_world_impl.hpp>
+#include <camera_helpers.hpp>
 #include <game_interface.hpp>
 #include <inventory/character/character_controller_player.hpp>
 #include <inventory/character/character_controller_walk.hpp>
@@ -10,47 +11,6 @@
 #include <system_helper.hpp>
 #include <tilemap/tileson_loader.hpp>
 #include <Box2D/Box2D.h>
-
-namespace {
-void camFollowObject(jt::CamInterface& cam, jt::Vector2f const& windowSize,
-    std::shared_ptr<jt::Box2DObject> obj, float elapsed)
-{
-    auto const objPos = obj->getPosition();
-    auto const camPos = cam.getCamOffset();
-    auto const dif = objPos - camPos;
-
-    float const margin = 100.0f;
-    float const moveSpeed = 90.0f;
-    jt::Vector2f const screenSize = windowSize / cam.getZoom();
-    if (dif.x < margin) {
-        cam.move(jt::Vector2f { -moveSpeed, 0.0f } * elapsed);
-        if (dif.x < margin * 0.5f) {
-            cam.move(jt::Vector2f { -moveSpeed, 0.0f } * elapsed);
-        }
-    }
-
-    if (dif.x > screenSize.x - margin) {
-        cam.move(jt::Vector2f { moveSpeed, 0.0f } * elapsed);
-        if (dif.x > screenSize.x - margin * 0.5f) {
-            cam.move(jt::Vector2f { moveSpeed, 0.0f } * elapsed);
-        }
-    }
-
-    if (dif.y < margin) {
-        cam.move(jt::Vector2f { 0.0f, -moveSpeed } * elapsed);
-        if (dif.y < margin * 0.5f) {
-            cam.move(jt::Vector2f { 0.0f, -moveSpeed } * elapsed);
-        }
-    }
-
-    if (dif.y > screenSize.y - margin) {
-        cam.move(jt::Vector2f { 0.0f, moveSpeed } * elapsed);
-        if (dif.y > screenSize.y - margin * 0.5f) {
-            cam.move(jt::Vector2f { 0.0f, moveSpeed } * elapsed);
-        }
-    }
-}
-} // namespace
 
 void StateInventory::onCreate()
 {
@@ -188,8 +148,9 @@ void StateInventory::onUpdate(float elapsed)
 
     m_world->step(elapsed, 20, 20);
 
-    camFollowObject(getGame()->gfx().camera(), getGame()->gfx().window().getSize(),
-        m_player->getBox2DObject(), elapsed);
+    auto& cam = getGame()->gfx().camera();
+    jt::CameraHelpers::followWithMargin(cam, m_player->getBox2DObject()->getPosition(),
+        getGame()->gfx().window().getSize() / cam.getZoom(), elapsed);
 
     handleCharacterTemperature();
     pickupItems();
