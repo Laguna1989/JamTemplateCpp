@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1792137208869,
+  "lastUpdate": 1792929938501,
   "repoUrl": "https://github.com/Laguna1989/JamTemplateCpp",
   "entries": {
     "Benchmark": [
@@ -16818,6 +16818,84 @@ window.BENCHMARK_DATA = {
             "value": 2.250358484076468,
             "unit": "ms/iter",
             "extra": "iterations: 314\ncpu: 2.2494699171974535 ms\nthreads: 1"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "laguna.ws@gmail.com",
+            "name": "Simon Weis",
+            "username": "Laguna1989"
+          },
+          "committer": {
+            "email": "laguna.ws@gmail.com",
+            "name": "Simon Weis",
+            "username": "Laguna1989"
+          },
+          "distinct": true,
+          "id": "5e8a02f9c8fdbb46b4f8298595efa7d4a05d1727",
+          "message": "Fix globalbounds on sdl and sfml text offset being ignored",
+          "timestamp": "2026-10-25T13:00:33+01:00",
+          "tree_id": "cdc142c74ad561fd24056cfa482dda0e7dbd179e",
+          "url": "https://github.com/Laguna1989/JamTemplateCpp/commit/5e8a02f9c8fdbb46b4f8298595efa7d4a05d1727"
+        },
+        "date": 1792929937139,
+        "tool": "googlecpp",
+        "benches": [
+          {
+            "name": "BM_UpdateDrawablePositions",
+            "value": 1.7360062466124644,
+            "unit": "ms/iter",
+            "extra": "iterations: 369\ncpu: 1.735755140921409 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GetAllCommands",
+            "value": 0.2800000979838783,
+            "unit": "ms/iter",
+            "extra": "iterations: 2480\ncpu: 0.27998451935483876 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_LoggerLogWithoutTarget",
+            "value": 0.1996223901882601,
+            "unit": "ms/iter",
+            "extra": "iterations: 3506\ncpu: 0.1996002732458642 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_LoggerLogWithCoutTargetSetToOff",
+            "value": 0.2026528125000056,
+            "unit": "ms/iter",
+            "extra": "iterations: 3472\ncpu: 0.20263160858294924 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_UpdateObjectGroup",
+            "value": 0.01599408222020227,
+            "unit": "ms/iter",
+            "extra": "iterations: 42897\ncpu: 0.015992237802177314 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_UpdateSpatialObjectGrid",
+            "value": 0.2806278300870296,
+            "unit": "ms/iter",
+            "extra": "iterations: 2413\ncpu: 0.2806043236634897 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_StartGame",
+            "value": 0.0025354004897195745,
+            "unit": "ms/iter",
+            "extra": "iterations: 277710\ncpu: 0.0025351526664506153 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_RefineTilemapCollisions",
+            "value": 0.126129577633006,
+            "unit": "ms/iter",
+            "extra": "iterations: 5526\ncpu: 0.12612392562432148 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GamestateWithTweeningShapes",
+            "value": 2.015534648571377,
+            "unit": "ms/iter",
+            "extra": "iterations: 350\ncpu: 2.0154914514285722 ms\nthreads: 1"
           }
         ]
       }
