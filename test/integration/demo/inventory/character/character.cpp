@@ -1,7 +1,7 @@
 #include "character.hpp"
 #include <game_interface.hpp>
 #include <inventory/inventory_calculator.hpp>
-#include <Box2D/Box2D.h>
+#include <box2d/box2d.h>
 
 Character::Character(std::shared_ptr<jt::Box2DWorldInterface> world,
     std::weak_ptr<ItemRepository> repo, std::unique_ptr<CharacterControllerInterface>&& controller,
@@ -19,20 +19,19 @@ Character::Character(std::shared_ptr<jt::Box2DWorldInterface> world,
         m_charsheet = std::make_shared<CharacterSheetBase>(repo);
     }
 
-    b2BodyDef bodyDef;
-    bodyDef.fixedRotation = true;
+    auto bodyDef = b2DefaultBodyDef();
+    bodyDef.motionLocks.angularZ = true;
     bodyDef.type = b2_dynamicBody;
-    bodyDef.position.Set(pos.x, pos.y);
-    m_physicsObject = std::make_shared<jt::Box2DObject>(world, &bodyDef);
+    bodyDef.position = b2Vec2 { pos.x, pos.y };
+    m_physicsObject = std::make_shared<jt::Box2DObject>(world, bodyDef);
 }
 
 void Character::doCreate()
 {
-    b2FixtureDef fixtureDef;
-    b2PolygonShape boxCollider {};
-    boxCollider.SetAsBox(8, 11);
-    fixtureDef.shape = &boxCollider;
-    m_physicsObject->getB2Body()->CreateFixture(&fixtureDef);
+    auto shapeDef = b2DefaultShapeDef();
+    shapeDef.material.friction = 0.2f;
+    auto const boxCollider = b2MakeBox(8.0f, 11.0f);
+    b2CreatePolygonShape(m_physicsObject->getBodyId(), &shapeDef, &boxCollider);
 
     m_animation = std::make_shared<jt::Animation>();
     m_animation->add("assets/test/integration/demo/chars.png", "idle", jt::Vector2u { 24, 24 },
@@ -132,7 +131,7 @@ void Character::die()
 {
     m_animation->setRotation(90.0f);
     m_animation->setColor(jt::Color { 100, 100, 100 });
-    m_physicsObject->getB2Body()->SetActive(false);
+    m_physicsObject->setEnabled(false);
 }
 
 bool Character::isDead() const { return m_health <= 0; }

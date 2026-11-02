@@ -8,8 +8,7 @@ using namespace jt::Conversion;
 
 using tt = std::pair<float, float>;
 
-class ConversionsTestFixture : public ::testing::TestWithParam<tt> {
-};
+class ConversionsTestFixture : public ::testing::TestWithParam<tt> { };
 
 using nl = std::numeric_limits<float>;
 
@@ -28,7 +27,10 @@ TEST_P(ConversionsTestFixture, JTVectorToB2Vec)
 {
     b2Vec2 const expected { GetParam().first, GetParam().second };
     jt::Vector2f const input { GetParam().first, GetParam().second };
-    ASSERT_EQ(vec(input), expected);
+    auto const [x, y] = vec(input);
+    // b2Vec2 is a plain C struct without operator==
+    ASSERT_EQ(x, expected.x);
+    ASSERT_EQ(y, expected.y);
 }
 
 TEST_P(ConversionsTestFixture, TsonVecfToJTVector)

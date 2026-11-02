@@ -41,7 +41,7 @@ void StateGame::createPlayer() { }
 void StateGame::onUpdate(float const elapsed)
 {
     if (m_running) {
-        m_world->step(elapsed, GP::PhysicVelocityIterations(), GP::PhysicPositionIterations());
+        m_world->step(elapsed, GP::PhysicSubSteps());
         // update game logic here
         if (getGame()->input().keyboard()->justPressed(jt::KeyCode::A)) {
             m_scoreP1++;

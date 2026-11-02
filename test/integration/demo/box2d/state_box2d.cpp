@@ -1,8 +1,8 @@
 ﻿#include "state_box2d.hpp"
 #include <box2d/platform_player.hpp>
-#include <box2dwrapper/box2d_contact_manager.hpp>
+#include <box2d/collision_categories.hpp>
+#include <box2dwrapper/box2d_helpers.hpp>
 #include <box2dwrapper/box2d_world_impl.hpp>
-#include <box2dwrapper/logging_box2d_contact_manager.hpp>
 #include <input/input_manager.hpp>
 #include <random/random.hpp>
 #include <state_select.hpp>
@@ -14,22 +14,11 @@ StatePlatformer::StatePlatformer(std::string const& levelName) { m_levelName = l
 
 void StatePlatformer::onCreate()
 {
-    auto contactManager = std::make_shared<jt::Box2DContactManager>();
-    auto loggingContactManager
-        = std::make_shared<jt::LoggingBox2DContactManager>(contactManager, getGame()->logger());
-    m_world = std::make_shared<jt::Box2DWorldImpl>(
-        jt::Vector2f { 0.0f, 400.0f }, loggingContactManager);
+    m_world = std::make_shared<jt::Box2DWorldImpl>(jt::Vector2f { 0.0f, 400.0f });
 
     loadLevel();
 
     CreatePlayer();
-    auto playerGroundContactListener = std::make_shared<ContactCallbackPlayerGround>();
-    playerGroundContactListener->setPlayer(m_player);
-    m_world->getContactManager().registerCallback("player_ground", playerGroundContactListener);
-
-    auto playerEnemyContactListener = std::make_shared<ContactCallbackPlayerEnemy>();
-    playerEnemyContactListener->setPlayer(m_player);
-    m_world->getContactManager().registerCallback("player_enemy", playerEnemyContactListener);
 
     m_vignette = std::make_shared<jt::Vignette>(jt::Vector2f { 400.0f, 300.0f });
     add(m_vignette);
@@ -46,9 +35,9 @@ void StatePlatformer::loadLevel()
 void StatePlatformer::onUpdate(float const elapsed)
 {
     if (!m_ending && !getGame()->stateManager().getTransition()->isInProgress()) {
-        std::int32_t const velocityIterations = 20;
-        std::int32_t const positionIterations = 20;
-        m_world->step(elapsed, velocityIterations, positionIterations);
+        int const subStepCount = 4;
+        m_world->step(elapsed, subStepCount);
+        checkPlayerEnemyContacts();
 
         if (!m_player->isAlive()) {
             endGame();
@@ -86,6 +75,19 @@ void StatePlatformer::onUpdate(float const elapsed)
     if (getGame()->input().keyboard()->justPressed(jt::KeyCode::F6)) {
         getGame()->stateManager().switchState(
             std::make_shared<StatePlatformer>("platformer_0_6.json"));
+    }
+}
+
+void StatePlatformer::checkPlayerEnemyContacts()
+{
+    auto const events = m_world->getContactEvents();
+    for (int i = 0; i != events.beginCount; ++i) {
+        auto const& event = events.beginEvents[i];
+        if (jt::Box2DHelpers::isCategoryPair(
+                event.shapeIdA, event.shapeIdB, eCategoryPlayer, eCategoryEnemy)) {
+            m_player->kill();
+            return;
+        }
     }
 }
 

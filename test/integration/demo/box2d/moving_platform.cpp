@@ -1,6 +1,7 @@
 #include "moving_platform.hpp"
+#include <box2d/collision_categories.hpp>
 #include <math_helper.hpp>
-#include <Box2D/Box2D.h>
+#include <box2d/box2d.h>
 #include <iostream>
 
 MovingPlatform::MovingPlatform(std::shared_ptr<jt::Box2DWorldInterface> world,
@@ -12,22 +13,23 @@ MovingPlatform::MovingPlatform(std::shared_ptr<jt::Box2DWorldInterface> world,
     m_velocity = velocity;
     m_timeOffset = timeoffset;
 
-    b2BodyDef bodyDef;
-    bodyDef.fixedRotation = true;
+    auto bodyDef = b2DefaultBodyDef();
+    bodyDef.motionLocks.angularZ = true;
     bodyDef.type = b2_kinematicBody;
-    m_physicsObject = std::make_shared<jt::Box2DObject>(world, &bodyDef);
+    m_physicsObject = std::make_shared<jt::Box2DObject>(world, bodyDef);
 }
 
 void MovingPlatform::doCreate()
 {
-    b2FixtureDef fixtureDef;
-    fixtureDef.density = 1.0f;
-    fixtureDef.friction = 0.5f;
-    b2PolygonShape collider {};
-    collider.SetAsBox(m_platformSize.x / 2.0f, m_platformSize.y / 2.0f,
-        b2Vec2(m_platformSize.x / 2.0f, m_platformSize.y / 2.0f), 0);
-    fixtureDef.shape = &collider;
-    m_physicsObject->getB2Body()->CreateFixture(&fixtureDef);
+    auto shapeDef = b2DefaultShapeDef();
+    shapeDef.density = 1.0f;
+    shapeDef.material.friction = 0.5f;
+    shapeDef.filter.categoryBits = eCategoryGround;
+    // allows the player foot sensor to detect the platform
+    shapeDef.enableSensorEvents = true;
+    auto const collider = b2MakeOffsetBox(m_platformSize.x / 2.0f, m_platformSize.y / 2.0f,
+        b2Vec2 { m_platformSize.x / 2.0f, m_platformSize.y / 2.0f }, b2Rot_identity);
+    b2CreatePolygonShape(m_physicsObject->getBodyId(), &shapeDef, &collider);
 
     auto const p1 = m_positions[m_currentIndex].first;
 

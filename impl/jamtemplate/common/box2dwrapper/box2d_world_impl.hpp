@@ -1,37 +1,43 @@
 #ifndef JAMTEMPLATE_BOX2D_WORLD_IMPL_HPP
 #define JAMTEMPLATE_BOX2D_WORLD_IMPL_HPP
 
-#include <box2dwrapper/box2d_contact_manager_interface.hpp>
 #include <box2dwrapper/box2d_world_interface.hpp>
 #include <vector.hpp>
-#include <Box2D/Dynamics/b2World.h>
-#include <memory>
 
 namespace jt {
 
-/// Implementation of the Box2DWorldInterface
+/// Implementation of the Box2DWorldInterface. Owns the box2d world.
 class Box2DWorldImpl : public Box2DWorldInterface {
 public:
-    Box2DWorldImpl(jt::Vector2f const& gravity,
-        std::shared_ptr<jt::Box2DContactManagerInterface> contactManager = nullptr);
+    /// Create a world with default settings and the given gravity
+    /// \param gravity gravity vector
+    explicit Box2DWorldImpl(jt::Vector2f const& gravity);
 
-    b2Body* createBody(const b2BodyDef* definition) override;
+    /// Create a world with full control over all settings
+    /// \param worldDef the world definition. Start from b2DefaultWorldDef().
+    explicit Box2DWorldImpl(b2WorldDef const& worldDef);
 
-    void destroyBody(b2Body* body) override;
+    ~Box2DWorldImpl() override;
 
-    b2Joint* createJoint(const b2JointDef* definition) override;
+    b2BodyId createBody(b2BodyDef const& definition) override;
 
-    void destroyJoint(b2Joint* joint) override;
+    void destroyBody(b2BodyId body) override;
 
-    Box2DContactCallbackRegistryInterface& getContactManager() override;
+    b2JointId createJoint(Box2DJointDef const& definition) override;
 
-    void step(float elapsed, int velocityIterations, int positionIterations) override;
+    void destroyJoint(b2JointId joint) override;
+
+    void step(float elapsed, int subStepCount) override;
+
+    b2ContactEvents getContactEvents() const override;
+
+    b2SensorEvents getSensorEvents() const override;
+
+    b2WorldId getWorldId() const override;
 
 private:
-    std::unique_ptr<b2World> m_world { nullptr };
-    std::shared_ptr<jt::Box2DContactManagerInterface> m_newContactManager { nullptr };
+    b2WorldId m_worldId { b2_nullWorldId };
 };
 
 } // namespace jt
-// namespace jt
 #endif // JAMTEMPLATE_BOX2D_WORLD_IMPL_HPP

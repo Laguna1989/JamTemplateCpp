@@ -1,8 +1,6 @@
 ﻿#ifndef DEMO_STATE_PLATFORMER_HPP
 #define DEMO_STATE_PLATFORMER_HPP
 
-#include <box2d/contact_callback_player_enemy.hpp>
-#include <box2d/contact_callback_player_ground.hpp>
 #include <box2d/level.hpp>
 #include <box2d/platform_player.hpp>
 #include <box2dwrapper/box2d_object.hpp>
@@ -41,6 +39,7 @@ private:
     void CreatePlayer();
     void loadLevel();
     void handleCameraScrolling(float const elapsed);
+    void checkPlayerEnemyContacts();
     void endGame();
     void createPlayerWalkParticles();
     void createPlayerJumpParticleSystem();

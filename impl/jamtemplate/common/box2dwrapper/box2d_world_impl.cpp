@@ -1,40 +1,103 @@
-#include "box2dwrapper/box2d_world_impl.hpp"
-#include <box2dwrapper/box2d_contact_manager.hpp>
+#include "box2d_world_impl.hpp"
 #include <conversions.hpp>
-#include <Box2D/Box2D.h>
 
-jt::Box2DWorldImpl::Box2DWorldImpl(
-    jt::Vector2f const& gravity, std::shared_ptr<jt::Box2DContactManagerInterface> contactManager)
-    : m_world { std::make_unique<b2World>(jt::Conversion::vec(gravity)) }
-    , m_newContactManager { std::move(contactManager) }
+namespace {
+
+b2JointId createJointFromDef(b2WorldId const world, b2DistanceJointDef const& def)
 {
-    if (m_newContactManager == nullptr) {
-        m_newContactManager = std::make_shared<jt::Box2DContactManager>();
+    return b2CreateDistanceJoint(world, &def);
+}
+
+b2JointId createJointFromDef(b2WorldId const world, b2FilterJointDef const& def)
+{
+    return b2CreateFilterJoint(world, &def);
+}
+
+b2JointId createJointFromDef(b2WorldId const world, b2MotorJointDef const& def)
+{
+    return b2CreateMotorJoint(world, &def);
+}
+
+b2JointId createJointFromDef(b2WorldId const world, b2PrismaticJointDef const& def)
+{
+    return b2CreatePrismaticJoint(world, &def);
+}
+
+b2JointId createJointFromDef(b2WorldId const world, b2RevoluteJointDef const& def)
+{
+    return b2CreateRevoluteJoint(world, &def);
+}
+
+b2JointId createJointFromDef(b2WorldId const world, b2WeldJointDef const& def)
+{
+    return b2CreateWeldJoint(world, &def);
+}
+
+b2JointId createJointFromDef(b2WorldId const world, b2WheelJointDef const& def)
+{
+    return b2CreateWheelJoint(world, &def);
+}
+
+b2WorldDef makeWorldDef(jt::Vector2f const& gravity)
+{
+    auto worldDef = b2DefaultWorldDef();
+    worldDef.gravity = jt::Conversion::vec(gravity);
+    return worldDef;
+}
+
+} // namespace
+
+jt::Box2DWorldImpl::Box2DWorldImpl(jt::Vector2f const& gravity)
+    : Box2DWorldImpl { makeWorldDef(gravity) }
+{
+}
+
+jt::Box2DWorldImpl::Box2DWorldImpl(b2WorldDef const& worldDef)
+    : m_worldId { b2CreateWorld(&worldDef) }
+{
+}
+
+jt::Box2DWorldImpl::~Box2DWorldImpl() { b2DestroyWorld(m_worldId); }
+
+b2BodyId jt::Box2DWorldImpl::createBody(b2BodyDef const& definition)
+{
+    return b2CreateBody(m_worldId, &definition);
+}
+
+void jt::Box2DWorldImpl::destroyBody(b2BodyId const body)
+{
+    if (b2Body_IsValid(body)) {
+        b2DestroyBody(body);
     }
-
-    m_world->SetContactListener(m_newContactManager.get());
 }
 
-b2Body* jt::Box2DWorldImpl::createBody(b2BodyDef const* definition)
+b2JointId jt::Box2DWorldImpl::createJoint(Box2DJointDef const& definition)
 {
-    return m_world->CreateBody(definition);
+    return std::visit(
+        [this](auto const& def) { return createJointFromDef(m_worldId, def); }, definition);
 }
 
-void jt::Box2DWorldImpl::destroyBody(b2Body* body) { m_world->DestroyBody(body); }
-
-b2Joint* jt::Box2DWorldImpl::createJoint(b2JointDef const* definition)
+void jt::Box2DWorldImpl::destroyJoint(b2JointId joint)
 {
-    return m_world->CreateJoint(definition);
+    // joints are destroyed implicitly together with their bodies
+    if (b2Joint_IsValid(joint)) {
+        b2DestroyJoint(joint);
+    }
 }
 
-void jt::Box2DWorldImpl::destroyJoint(b2Joint* joint) { m_world->DestroyJoint(joint); }
-
-void jt::Box2DWorldImpl::step(float elapsed, int velocityIterations, int positionIterations)
+void jt::Box2DWorldImpl::step(float const elapsed, int const subStepCount)
 {
-    m_world->Step(elapsed, velocityIterations, positionIterations);
+    b2World_Step(m_worldId, elapsed, subStepCount);
 }
 
-jt::Box2DContactCallbackRegistryInterface& jt::Box2DWorldImpl::getContactManager()
+b2ContactEvents jt::Box2DWorldImpl::getContactEvents() const
 {
-    return *m_newContactManager;
+    return b2World_GetContactEvents(m_worldId);
 }
+
+b2SensorEvents jt::Box2DWorldImpl::getSensorEvents() const
+{
+    return b2World_GetSensorEvents(m_worldId);
+}
+
+b2WorldId jt::Box2DWorldImpl::getWorldId() const { return m_worldId; }

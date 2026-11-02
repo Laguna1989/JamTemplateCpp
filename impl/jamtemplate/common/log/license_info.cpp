@@ -91,7 +91,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 constexpr auto box2dLicenseText = R"(This sofware uses Box2D, licensed under MIT license.
 MIT License
 
-Copyright (c) 2019 Erin Catto
+Copyright (c) 2022 Erin Catto
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

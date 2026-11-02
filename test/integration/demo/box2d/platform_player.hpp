@@ -6,7 +6,6 @@
 #include <game_object.hpp>
 #include <particle_system.hpp>
 #include <shape.hpp>
-#include <Box2D/Box2D.h>
 #include <memory>
 
 class Player : public jt::GameObject {
@@ -17,9 +16,6 @@ public:
     ~Player() = default;
 
     std::shared_ptr<jt::Animation> getAnimation();
-    b2Body* getB2Body();
-
-    void setTouchesGround(bool touchingGround);
 
     jt::Vector2f getPosOnScreen() const;
     void setPosition(jt::Vector2f const& pos);
@@ -33,6 +29,7 @@ public:
 private:
     std::shared_ptr<jt::Animation> m_animation;
     std::shared_ptr<jt::Box2DObject> m_physicsObject;
+    b2ShapeId m_footSensor { b2_nullShapeId };
     float m_walkParticlesTimer = 0.0f;
     std::weak_ptr<jt::ParticleSystem<jt::Shape, 50>> m_walkParticles;
     std::weak_ptr<jt::ParticleSystem<jt::Shape, 50>> m_postJumpParticles;
@@ -50,13 +47,14 @@ private:
     float m_wantsToJumpTimer { 0.0f };
 
     bool canJump() const;
+    void setTouchesGround(bool touchingGround);
     void doCreate() override;
     void doUpdate(float const elapsed) override;
     void doDraw() const override;
 
     void handleMovement(float const elapsed);
     void updateAnimation(float elapsed);
-    void clampPositionToLevelSize(jt::Vector2f& currentPosition) const;
+    void clampPositionToLevelSize();
     bool m_horizontalMovement { false };
 };
 

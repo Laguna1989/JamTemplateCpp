@@ -1,6 +1,6 @@
 #include "bee.hpp"
-#include <box2d/user_data_entries.hpp>
-#include <Box2D/Box2D.h>
+#include <box2d/collision_categories.hpp>
+#include <box2d/box2d.h>
 #include <stdexcept>
 
 Bee::Bee(std::shared_ptr<jt::Box2DWorldInterface> world, jt::Vector2f const& position,
@@ -13,23 +13,21 @@ Bee::Bee(std::shared_ptr<jt::Box2DWorldInterface> world, jt::Vector2f const& pos
 
     m_movement = movement;
 
-    b2BodyDef bodyDef;
-    bodyDef.fixedRotation = true;
+    auto bodyDef = b2DefaultBodyDef();
+    bodyDef.motionLocks.angularZ = true;
     bodyDef.type = b2_kinematicBody;
-    m_physicsObject = std::make_shared<jt::Box2DObject>(world, &bodyDef);
+    m_physicsObject = std::make_shared<jt::Box2DObject>(world, bodyDef);
 }
 
 void Bee::doCreate()
 {
-    b2FixtureDef fixtureDef;
-    fixtureDef.density = 1.0f;
-    b2CircleShape circleCollider {};
-    circleCollider.m_radius = 3.5f;
-    circleCollider.m_p.Set(3.5f, 3.5f);
-    fixtureDef.shape = &circleCollider;
-    auto collider = m_physicsObject->getB2Body()->CreateFixture(&fixtureDef);
+    auto shapeDef = b2DefaultShapeDef();
+    shapeDef.density = 1.0f;
+    shapeDef.material.friction = 0.2f;
+    shapeDef.filter.categoryBits = eCategoryEnemy;
+    b2Circle const circleCollider { b2Vec2 { 3.5f, 3.5f }, 3.5f };
+    b2CreateCircleShape(m_physicsObject->getBodyId(), &shapeDef, &circleCollider);
     m_physicsObject->setPosition(m_position);
-    collider->SetUserData((void*)g_userDataEnemyID);
 
     m_anim = std::make_shared<jt::Animation>();
     m_anim->add("assets/test/integration/demo/bee.png", "right", jt::Vector2u { 8u, 8u }, { 0, 1 },

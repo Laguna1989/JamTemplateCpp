@@ -1,15 +1,15 @@
 #include "platform_player.hpp"
-#include <box2d/user_data_entries.hpp>
+#include <box2d/collision_categories.hpp>
 #include <game_interface.hpp>
 #include <math_helper.hpp>
 
 Player::Player(std::shared_ptr<jt::Box2DWorldInterface> world)
 {
-    b2BodyDef bodyDef;
-    bodyDef.fixedRotation = true;
+    auto bodyDef = b2DefaultBodyDef();
+    bodyDef.motionLocks.angularZ = true;
     bodyDef.type = b2_dynamicBody;
 
-    m_physicsObject = std::make_shared<jt::Box2DObject>(world, &bodyDef);
+    m_physicsObject = std::make_shared<jt::Box2DObject>(world, bodyDef);
 }
 
 void Player::doCreate()
@@ -20,30 +20,35 @@ void Player::doCreate()
     m_animation->play("right");
     m_animation->setOffset(jt::OffsetMode::CENTER);
 
-    b2FixtureDef fixtureDef;
-    fixtureDef.density = 1.0f;
-    fixtureDef.friction = 0.5f;
-    b2CircleShape circleCollider {};
-    circleCollider.m_radius = 4.0f;
-    fixtureDef.shape = &circleCollider;
-    auto playerCollider = m_physicsObject->getB2Body()->CreateFixture(&fixtureDef);
-    playerCollider->SetUserData((void*)g_userDataPlayerID);
+    auto const bodyId = m_physicsObject->getBodyId();
 
-    fixtureDef.isSensor = true;
-    b2PolygonShape polygonShape;
-    polygonShape.SetAsBox(3.0f, 0.2f, b2Vec2(0, 4), 0);
-    fixtureDef.shape = &polygonShape;
-    auto footSensorFixture = m_physicsObject->getB2Body()->CreateFixture(&fixtureDef);
-    footSensorFixture->SetUserData((void*)g_userDataPlayerFeetID);
+    auto colliderDef = b2DefaultShapeDef();
+    colliderDef.density = 1.0f;
+    colliderDef.material.friction = 0.5f;
+    // contact events are needed to detect collisions with enemies
+    colliderDef.enableContactEvents = true;
+    colliderDef.filter.categoryBits = eCategoryPlayer;
+    b2Circle const circleCollider { b2Vec2 { 0.0f, 0.0f }, 4.0f };
+    b2CreateCircleShape(bodyId, &colliderDef, &circleCollider);
+
+    auto footSensorDef = b2DefaultShapeDef();
+    footSensorDef.density = 1.0f;
+    footSensorDef.isSensor = true;
+    footSensorDef.enableSensorEvents = true;
+    footSensorDef.filter.categoryBits = eCategoryPlayer;
+    auto const footSensorBox = b2MakeOffsetBox(3.0f, 0.2f, b2Vec2 { 0.0f, 4.0f }, b2Rot_identity);
+    m_footSensor = b2CreatePolygonShape(bodyId, &footSensorDef, &footSensorBox);
 }
 
 std::shared_ptr<jt::Animation> Player::getAnimation() { return m_animation; }
 
 void Player::doUpdate(float const elapsed)
 {
-    auto currentPosition = m_physicsObject->getPosition();
-    clampPositionToLevelSize(currentPosition);
-    m_physicsObject->setPosition(currentPosition);
+    // the foot sensor overlaps are updated at the end of every world step
+    setTouchesGround(b2Shape_GetSensorCapacity(m_footSensor) > 0);
+
+    clampPositionToLevelSize();
+    auto const currentPosition = m_physicsObject->getPosition();
     m_animation->setPosition(currentPosition);
     updateAnimation(elapsed);
     handleMovement(elapsed);
@@ -65,14 +70,18 @@ void Player::doUpdate(float const elapsed)
     m_wantsToJumpTimer -= elapsed;
 }
 
-void Player::clampPositionToLevelSize(jt::Vector2f& currentPosition) const
+void Player::clampPositionToLevelSize()
 {
-    if (currentPosition.x < 4) {
-        currentPosition.x = 4;
+    auto position = m_physicsObject->getPosition();
+    if (position.x < 4) {
+        position.x = 4;
+    } else if (position.x > m_levelSizeInTiles.x - 4) {
+        position.x = m_levelSizeInTiles.x - 4;
+    } else {
+        // only teleport the body if needed
+        return;
     }
-    if (currentPosition.x > m_levelSizeInTiles.x - 4) {
-        currentPosition.x = m_levelSizeInTiles.x - 4;
-    }
+    m_physicsObject->setPosition(position);
 }
 
 void Player::updateAnimation(float elapsed)
@@ -115,8 +124,6 @@ void Player::handleMovement(float const elapsed)
     auto const jumpDeadTime = 0.3f;
     auto const preLandJumpTimeFrame = 0.1f;
 
-    auto b2b = getB2Body();
-
     m_horizontalMovement = false;
 
     auto v = m_physicsObject->getVelocity();
@@ -124,7 +131,7 @@ void Player::handleMovement(float const elapsed)
         if (v.x < 0) {
             v.x *= 0.9f;
         }
-        b2b->ApplyForceToCenter(b2Vec2 { horizontalAcceleration, 0 }, true);
+        m_physicsObject->addForceToCenter(jt::Vector2f { horizontalAcceleration, 0.0f });
         m_horizontalMovement = true;
     }
 
@@ -132,7 +139,7 @@ void Player::handleMovement(float const elapsed)
         if (v.x > 0) {
             v.x *= 0.9f;
         }
-        b2b->ApplyForceToCenter(b2Vec2 { -horizontalAcceleration, 0 }, true);
+        m_physicsObject->addForceToCenter(jt::Vector2f { -horizontalAcceleration, 0.0f });
         m_horizontalMovement = true;
     }
 
@@ -152,7 +159,7 @@ void Player::handleMovement(float const elapsed)
 
     if (getGame()->input().keyboard()->pressed(jt::KeyCode::W)) {
         if (v.y < 0) {
-            b2b->ApplyForceToCenter(b2Vec2 { 0, jumpVerticalAcceleration }, true);
+            m_physicsObject->addForceToCenter(jt::Vector2f { 0.0f, jumpVerticalAcceleration });
         }
     }
 
@@ -183,8 +190,6 @@ void Player::handleMovement(float const elapsed)
 
     m_physicsObject->setVelocity(v);
 }
-b2Body* Player::getB2Body() { return m_physicsObject->getB2Body(); }
-
 void Player::doDraw() const { m_animation->draw(renderTarget()); }
 
 void Player::setTouchesGround(bool touchingGround)

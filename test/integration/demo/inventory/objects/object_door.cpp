@@ -5,21 +5,19 @@ ObjectDoor::ObjectDoor(
     std::weak_ptr<TemperatureNode> node, std::shared_ptr<jt::Box2DWorldInterface> world)
     : m_tempNode { node }
 {
-    b2BodyDef bodyDef;
-    bodyDef.fixedRotation = true;
+    auto bodyDef = b2DefaultBodyDef();
     bodyDef.type = b2_staticBody;
     auto const pos = m_tempNode.lock()->getPosition();
-    bodyDef.position.Set(pos.x + 12, pos.y + 12);
-    m_physicsObject = std::make_shared<jt::Box2DObject>(world, &bodyDef);
+    bodyDef.position = b2Vec2 { pos.x + 12, pos.y + 12 };
+    m_physicsObject = std::make_shared<jt::Box2DObject>(world, bodyDef);
 }
 
 void ObjectDoor::doCreate()
 {
-    b2FixtureDef fixtureDef;
-    b2PolygonShape boxCollider {};
-    boxCollider.SetAsBox(12, 12);
-    fixtureDef.shape = &boxCollider;
-    m_physicsObject->getB2Body()->CreateFixture(&fixtureDef);
+    auto shapeDef = b2DefaultShapeDef();
+    shapeDef.material.friction = 0.2f;
+    auto const boxCollider = b2MakeBox(12.0f, 12.0f);
+    b2CreatePolygonShape(m_physicsObject->getBodyId(), &shapeDef, &boxCollider);
 
     m_anim = std::make_shared<jt::Animation>();
     m_anim->add("assets/test/integration/demo/door.png", "open", jt::Vector2u { 24, 24 }, { 0u },
@@ -47,7 +45,7 @@ void ObjectDoor::doDraw() const { m_anim->draw(renderTarget()); }
 void ObjectDoor::toggleDoor()
 {
     m_closed = !m_closed;
-    m_physicsObject->getB2Body()->SetActive(m_closed);
+    m_physicsObject->setEnabled(m_closed);
     // TODO modify pathfinding
 }
 bool ObjectDoor::getIsOpen() const { return !m_closed; }

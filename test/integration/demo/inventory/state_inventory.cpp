@@ -10,7 +10,7 @@
 #include <strutils.hpp>
 #include <system_helper.hpp>
 #include <tilemap/tileson_loader.hpp>
-#include <Box2D/Box2D.h>
+#include <box2d/box2d.h>
 
 void StateInventory::onCreate()
 {
@@ -146,7 +146,7 @@ void StateInventory::onUpdate(float elapsed)
         getGame()->stateManager().switchState(std::make_shared<StateSelect>());
     }
 
-    m_world->step(elapsed, 20, 20);
+    m_world->step(elapsed, 4);
 
     auto& cam = getGame()->gfx().camera();
     jt::CameraHelpers::followWithMargin(cam, m_player->getBox2DObject()->getPosition(),

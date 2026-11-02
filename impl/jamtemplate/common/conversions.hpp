@@ -2,7 +2,7 @@
 #define JAMTEMPLATE_CONVERSIONS_HPP
 
 #include <vector.hpp>
-#include <Box2D/Box2D.h>
+#include <box2d/math_types.h>
 #include <tileson.h>
 
 namespace jt {

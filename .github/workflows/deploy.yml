@@ -137,7 +137,7 @@ jobs:
 
       - name: BuildFirst
         working-directory: ${{github.workspace}}/build
-        run: emmake make Box2D
+        run: emmake make box2d
 
       - name: BuildAll
         working-directory: ${{github.workspace}}/build

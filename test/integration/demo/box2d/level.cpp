@@ -1,11 +1,12 @@
 #include "level.hpp"
+#include <box2d/collision_categories.hpp>
 #include <box2d/enemy_movement_horizontal.hpp>
 #include <box2d/enemy_movement_vertical.hpp>
 #include <game_interface.hpp>
 #include <math_helper.hpp>
 #include <strutils.hpp>
 #include <tilemap/tileson_loader.hpp>
-#include <Box2D/Box2D.h>
+#include <box2d/box2d.h>
 
 Level::Level(std::string const& fileName, std::weak_ptr<jt::Box2DWorldInterface> world)
 {
@@ -131,18 +132,19 @@ void Level::loadLevelCollisions(jt::tilemap::TilesonLoader& loader)
 
     tileCollisions.refineColliders(8);
     for (auto const& r : tileCollisions.getRects()) {
-        b2BodyDef bodyDef;
-        bodyDef.fixedRotation = true;
+        auto bodyDef = b2DefaultBodyDef();
         bodyDef.type = b2_staticBody;
-        bodyDef.position.Set(r.left + r.width / 2.0f, r.top + r.height / 2.0f);
+        bodyDef.position = b2Vec2 { r.left + r.width / 2.0f, r.top + r.height / 2.0f };
 
-        b2FixtureDef fixtureDef;
-        b2PolygonShape boxCollider {};
-        boxCollider.SetAsBox(r.width / 2.0f, r.height / 2.0f);
-        fixtureDef.shape = &boxCollider;
+        auto shapeDef = b2DefaultShapeDef();
+        shapeDef.material.friction = 0.2f;
+        shapeDef.filter.categoryBits = eCategoryGround;
+        // allows the player foot sensor to detect the ground
+        shapeDef.enableSensorEvents = true;
+        auto const boxCollider = b2MakeBox(r.width / 2.0f, r.height / 2.0f);
 
-        auto collider = std::make_shared<jt::Box2DObject>(m_world.lock(), &bodyDef);
-        collider->getB2Body()->CreateFixture(&fixtureDef);
+        auto collider = std::make_shared<jt::Box2DObject>(m_world.lock(), bodyDef);
+        b2CreatePolygonShape(collider->getBodyId(), &shapeDef, &boxCollider);
 
         m_colliders.push_back(collider);
     }

@@ -41,7 +41,7 @@ target_include_directories(JamTemplateLib SYSTEM PUBLIC ${tileson_SOURCE_DIR}/ex
 target_include_directories(JamTemplateLib SYSTEM PUBLIC ${CMAKE_SOURCE_DIR}/ext/better_enums)
 target_link_libraries(JamTemplateLib PUBLIC
         aselib
-        Box2D
+        box2d::box2d
         TracyClient
 )
 
