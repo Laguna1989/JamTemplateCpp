@@ -47,8 +47,7 @@ public:
         state = std::make_shared<::testing::NiceMock<MockState>>();
         ON_CALL(stateManager, getCurrentState).WillByDefault(::testing::Return(state));
         ON_CALL(stateManager, update)
-            .WillByDefault(
-                ::testing::Invoke([this](auto /*ptr*/, auto elapsed) { state->update(elapsed); }));
+            .WillByDefault([this](auto /*ptr*/, auto elapsed) { state->update(elapsed); });
         g = std::make_shared<jt::Game>(
             gfx, input, audio, stateManager, logger, actionCommandManager, m_cache);
         state->setGameInstance(g);

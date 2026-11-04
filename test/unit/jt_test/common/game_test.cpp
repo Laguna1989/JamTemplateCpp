@@ -75,9 +75,9 @@ TEST_F(GameTest, GetMusicPlayer)
 TEST_F(GameTest, GameRunWithStateThrowingStdException)
 {
     g->update(0.01f);
-    EXPECT_CALL(*state, onUpdate(::testing::_)).WillOnce(::testing::Invoke([](auto /*elapsed*/) {
+    EXPECT_CALL(*state, onUpdate(::testing::_)).WillOnce([](auto /*elapsed*/) {
         throw std::invalid_argument { "deliberately raise exception." };
-    }));
+    });
     g->stateManager().switchState(state);
     ASSERT_THROW(g->runOneFrame(), std::invalid_argument);
 }
@@ -86,9 +86,9 @@ TEST_F(GameTest, GameRunWithStateThrowingIntException)
 {
     g->update(0.01f);
 
-    ON_CALL(*state, onUpdate(::testing::_)).WillByDefault(::testing::Invoke([](auto /*elapsed*/) {
+    ON_CALL(*state, onUpdate(::testing::_)).WillByDefault([](auto /*elapsed*/) {
         throw int { 5 };
-    }));
+    });
     g->stateManager().switchState(state);
     ASSERT_THROW(g->runOneFrame(), int);
 }

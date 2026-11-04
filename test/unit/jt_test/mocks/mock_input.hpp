@@ -51,11 +51,11 @@ public:
         m_keyboard = std::make_shared<jt::KeyboardInputNull>();
         m_mouse = std::make_shared<jt::MouseInputNull>();
         ON_CALL(*this, mouse())
-            .WillByDefault(::testing::Invoke(
-                [this]() -> std::shared_ptr<jt::MouseInterface> { return m_mouse; }));
+            .WillByDefault(
+                [this]() -> std::shared_ptr<jt::MouseInterface> { return m_mouse; });
         ON_CALL(*this, keyboard())
-            .WillByDefault(::testing::Invoke(
-                [this]() -> std::shared_ptr<jt::KeyboardInterface> { return m_keyboard; }));
+            .WillByDefault(
+                [this]() -> std::shared_ptr<jt::KeyboardInterface> { return m_keyboard; });
     }
 
     MOCK_METHOD(std::shared_ptr<jt::MouseInterface>, mouse, (), (override));
