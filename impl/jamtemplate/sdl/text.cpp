@@ -220,9 +220,9 @@ void Text::recreateTextTexture(std::shared_ptr<jt::RenderTargetLayer> const& spt
 
     SDL_SetTextureBlendMode(m_textTexture.get(), SDL_BLENDMODE_BLEND);
     SDL_SetRenderTarget(sptr.get(), m_textTexture.get());
-    // fill m_textTexture with transparent color, before rendering any text.
+    // Clear m_textTexture to transparent before rendering any text.
     SDL_SetRenderDrawColor(sptr.get(), 0, 0, 0, 0);
-    SDL_RenderFillRect(sptr.get(), nullptr);
+    SDL_RenderClear(sptr.get());
 
     // draw text line by line
     for (std::size_t i = 0; i != ssv.size(); ++i) {
