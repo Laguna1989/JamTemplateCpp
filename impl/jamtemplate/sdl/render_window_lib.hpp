@@ -10,6 +10,13 @@ namespace jt {
 class RenderWindow : public RenderWindowInterface {
 public:
     RenderWindow(unsigned int width, unsigned int height, std::string const& title);
+    ~RenderWindow() override;
+
+    RenderWindow(RenderWindow const&) = delete;
+    RenderWindow(RenderWindow&&) = delete;
+    RenderWindow& operator=(RenderWindow const&) = delete;
+    RenderWindow& operator=(RenderWindow&&) = delete;
+
     std::shared_ptr<jt::RenderTargetLayer> createRenderTarget() override;
 
     bool isOpen() const override;
@@ -33,7 +40,12 @@ public:
     bool shouldProcessMouse() override;
 
 private:
+    void shutdownGui();
+
     std::shared_ptr<SDL_Window> m_window;
+    // Kept alive by the window so the imgui renderer backend can be shut down before the renderer
+    // is destroyed. Declared after m_window so it is destroyed before the window.
+    std::shared_ptr<SDL_Renderer> m_renderer;
     jt::Vector2f m_size;
     bool m_isMouseCursorVisible { true };
     bool m_isOpen { true };

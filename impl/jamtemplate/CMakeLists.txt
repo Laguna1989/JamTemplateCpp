@@ -60,7 +60,7 @@ if (USE_SFML)
 
 else ()
     target_link_libraries(JamTemplateLib PUBLIC
-            imgui-sdl
+            imgui-backend-sdl2
     )
 
     target_include_directories(JamTemplateLib PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/sdl)

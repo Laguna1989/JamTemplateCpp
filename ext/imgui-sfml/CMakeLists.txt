@@ -2,7 +2,7 @@ message(STATUS "Fetching imgui-sfml")
 FetchContent_Declare(
         imgui-sfml
         GIT_REPOSITORY https://github.com/eliasdaler/imgui-sfml.git
-        GIT_TAG v2.6
+        GIT_TAG 64e09feda29266572799e5ded66eac5cb0a749aa # head of 2.6.x branch (SFML 2 support)
 )
 
 set(SFML_DIR ${SFML_DIR_ROOT})

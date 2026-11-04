@@ -47,11 +47,11 @@ CPMAddPackage(
         "BUILD_TESTS OFF"
 )
 
-add_subdirectory(imgui)
 add_subdirectory(box2d)
 
 if (USE_SFML)
     add_subdirectory(sfml)
+    add_subdirectory(imgui)
     add_subdirectory(imgui-sfml)
 else ()
     if (WIN32)
@@ -59,7 +59,7 @@ else ()
         add_subdirectory(sdl2_image)
         add_subdirectory(sdl2_ttf)
     endif ()
-    add_subdirectory(imgui-sdl)
+    add_subdirectory(imgui)
 endif ()
 
 if (JT_ENABLE_UNITTESTS)

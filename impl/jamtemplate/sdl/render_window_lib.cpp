@@ -1,8 +1,8 @@
 ﻿#include "render_window_lib.hpp"
 #include <sdl_2_include.hpp>
 #include <imgui.h>
-#include <imgui_impl_sdl.h>
-#include <imgui_sdl.h>
+#include <imgui_impl_sdl2.h>
+#include <imgui_impl_sdlrenderer2.h>
 #include <iostream>
 
 namespace jt {
@@ -30,11 +30,31 @@ std::shared_ptr<jt::RenderTargetLayer> RenderWindow::createRenderTarget()
         throw std::logic_error { "failed to create renderer." };
     }
     SDL_SetRenderDrawBlendMode(renderTarget.get(), SDL_BLENDMODE_BLEND);
+
+    if (m_renderTargetCreated) {
+        shutdownGui();
+    }
+    m_renderer = renderTarget;
     ImGui::CreateContext();
-    ImGuiSDL::Initialize(
-        renderTarget.get(), static_cast<int>(m_size.x), static_cast<int>(m_size.y));
+    ImGui_ImplSDL2_InitForSDLRenderer(m_window.get(), m_renderer.get());
+    ImGui_ImplSDLRenderer2_Init(m_renderer.get());
     m_renderTargetCreated = true;
     return renderTarget;
+}
+
+RenderWindow::~RenderWindow()
+{
+    if (m_renderTargetCreated) {
+        shutdownGui();
+    }
+}
+
+void RenderWindow::shutdownGui()
+{
+    ImGui_ImplSDLRenderer2_Shutdown();
+    ImGui_ImplSDL2_Shutdown();
+    ImGui::DestroyContext();
+    m_renderTargetCreated = false;
 }
 
 bool RenderWindow::isOpen() const { return m_isOpen; }
@@ -43,9 +63,9 @@ void RenderWindow::checkForClose()
 {
     SDL_Event event;
     while (SDL_PollEvent(&event)) {
-#if JT_ENABLE_WEB
-        ImGui_ImplSDL2_ProcessEvent(&event);
-#endif
+        if (m_renderTargetCreated) {
+            ImGui_ImplSDL2_ProcessEvent(&event);
+        }
         switch (event.type) {
         case SDL_QUIT:
             m_isOpen = false;
@@ -72,7 +92,7 @@ void RenderWindow::display()
     }
     if (m_renderGui) {
         ImGui::Render();
-        ImGuiSDL::Render(ImGui::GetDrawData());
+        ImGui_ImplSDLRenderer2_RenderDrawData(ImGui::GetDrawData(), m_renderer.get());
     }
     m_renderGui = false;
 }
@@ -105,22 +125,12 @@ void RenderWindow::updateGui(float elapsed)
     if (!m_renderTargetCreated) [[unlikely]] {
         return;
     }
-#if JT_ENABLE_WEB
-    // actually we do not care about the initialization of the backend. However InitForMetal does
-    // not do anything more than initializing the keymap, which is exactly what we want here.
-    ImGui_ImplSDL2_InitForMetal(m_window.get());
-#endif
-
-    ImGuiIO& io = ImGui::GetIO();
-    io.DeltaTime = elapsed;
-    int mx { 0 };
-    int my { 0 };
-    auto const mouseState = SDL_GetMouseState(&mx, &my);
-    io.MousePos = ImVec2(static_cast<float>(mx), static_cast<float>(my));
-    io.MouseDown[0] = mouseState & SDL_BUTTON(SDL_BUTTON_LEFT);
-    io.MouseDown[1] = mouseState & SDL_BUTTON(SDL_BUTTON_RIGHT);
-
-    io.MouseWheel = 0.0f;
+    // The backends feed display size, mouse and keyboard state from the processed SDL events.
+    ImGui_ImplSDLRenderer2_NewFrame();
+    ImGui_ImplSDL2_NewFrame();
+    if (elapsed > 0.0f) {
+        ImGui::GetIO().DeltaTime = elapsed;
+    }
 }
 
 void RenderWindow::startRenderGui()
