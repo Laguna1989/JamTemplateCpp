@@ -2,6 +2,7 @@
 
 #include <log/logger_interface.hpp>
 #include <state_manager/state_manager_interface.hpp>
+
 namespace jt {
 class LoggingStateManager : public StateManagerInterface {
 public:

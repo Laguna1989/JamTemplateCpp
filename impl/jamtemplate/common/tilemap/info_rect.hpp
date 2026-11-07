@@ -21,7 +21,7 @@ struct InfoRect {
     float rotation { 0.0f };
     std::string type { "" };
     std::string name { "" };
-    InfoRectProperties properties {};
+    InfoRectProperties properties { };
 };
 
 } // namespace tilemap

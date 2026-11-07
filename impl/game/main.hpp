@@ -2,7 +2,7 @@
 
 // win32 is also defined in 64bit builds
 #if defined WIN32 && !defined(JT_ENABLE_DEBUG) // release mode
-#include <windows.h> 
+#include <windows.h>
 
 void hideConsoleInRelease()
 {

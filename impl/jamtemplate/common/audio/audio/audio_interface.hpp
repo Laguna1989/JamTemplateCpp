@@ -25,8 +25,7 @@ public:
     /// \param identifier identifier for this sound
     /// \param fileName filename of the sound to load
     virtual std::shared_ptr<jt::SoundInterface> addPermanentSound(
-        std::string const& identifier, std::string const& fileName)
-        = 0;
+        std::string const& identifier, std::string const& fileName) = 0;
 
     /// Get a permanent sound
     /// \param identifier the identifier

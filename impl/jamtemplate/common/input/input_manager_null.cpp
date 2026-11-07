@@ -20,6 +20,7 @@ void jt::InputManagerNull::update(bool /*shouldProcessKeys*/, bool /*shouldProce
     MousePosition const& /*mp*/, float /*elapsed*/)
 {
 }
+
 void jt::InputManagerNull::reset() { }
 
 size_t jt::InputManagerNull::getNumberOfGamepads() const { return 0; }

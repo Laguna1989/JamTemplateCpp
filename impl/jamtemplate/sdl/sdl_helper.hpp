@@ -1,7 +1,7 @@
 #pragma once
 
-#include <vector.hpp>
 #include <sdl_2_include.hpp>
+#include <vector.hpp>
 #include <cstddef>
 
 namespace jt {

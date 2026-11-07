@@ -38,29 +38,25 @@ public:
     /// \param key key to be pressed
     /// \param command command to be executed on key press
     virtual void setCommandJustPressed(
-        std::vector<KeyCode> const& key, std::shared_ptr<jt::ControlCommandInterface> command)
-        = 0;
+        std::vector<KeyCode> const& key, std::shared_ptr<jt::ControlCommandInterface> command) = 0;
 
     /// Set a control command when a key was pressed
     /// \param key key to be pressed
     /// \param command command to be executed on key press
     virtual void setCommandPressed(
-        std::vector<KeyCode> const& key, std::shared_ptr<jt::ControlCommandInterface> command)
-        = 0;
+        std::vector<KeyCode> const& key, std::shared_ptr<jt::ControlCommandInterface> command) = 0;
 
     /// Set a control command when a key was released
     /// \param key key to be pressed
     /// \param command command to be executed on key release
     virtual void setCommandReleased(
-        std::vector<KeyCode> const& key, std::shared_ptr<jt::ControlCommandInterface> command)
-        = 0;
+        std::vector<KeyCode> const& key, std::shared_ptr<jt::ControlCommandInterface> command) = 0;
 
     /// Set a control command when a key was just released
     /// \param key key to be pressed
     /// \param command command to be executed on key release
     virtual void setCommandJustReleased(
-        std::vector<KeyCode> const& key, std::shared_ptr<jt::ControlCommandInterface> command)
-        = 0;
+        std::vector<KeyCode> const& key, std::shared_ptr<jt::ControlCommandInterface> command) = 0;
 
     /// Update commands
     /// \param elapsed

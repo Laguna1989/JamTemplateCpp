@@ -1,6 +1,7 @@
 #pragma once
 
 #include <input/keyboard/keyboard_interface.hpp>
+
 namespace jt {
 
 class KeyboardInputNull : public KeyboardInterface {

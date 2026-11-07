@@ -18,11 +18,11 @@ private:
     void doUpdate(float const elapsed) override;
     void doDraw() const override;
 
-    std::vector<std::shared_ptr<jt::Animation>> m_animations {};
+    std::vector<std::shared_ptr<jt::Animation>> m_animations { };
 
     std::string m_filename;
-    jt::Rectf m_size {};
-    std::vector<jt::Rectf> m_exclude {};
+    jt::Rectf m_size { };
+    std::vector<jt::Rectf> m_exclude { };
     int m_count { 0 };
 };
 

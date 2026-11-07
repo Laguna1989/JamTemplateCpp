@@ -40,7 +40,7 @@ public:
     }
 
 private:
-    std::vector<std::weak_ptr<T>> m_data {};
+    std::vector<std::weak_ptr<T>> m_data { };
 
     void doUpdate(float const /*elapsed*/) override
     {

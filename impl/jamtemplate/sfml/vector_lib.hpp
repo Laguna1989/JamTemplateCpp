@@ -1,7 +1,7 @@
 ﻿#pragma once
 
-#include <vector.hpp>
 #include <SFML/System/Vector2.hpp>
+#include <vector.hpp>
 
 namespace jt {
 

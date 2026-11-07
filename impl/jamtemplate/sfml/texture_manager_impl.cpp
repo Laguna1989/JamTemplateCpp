@@ -27,7 +27,7 @@ sf::Image createImageFromAse(std::string const& filename)
             aselib::makeImageFromAse(aseData, !ignore_transparent));
     }
 
-    sf::Image sfImgage {};
+    sf::Image sfImgage { };
     jt::Color emptyColor { 0, 0, 0, 0 };
     auto const w = aseImage->m_width;
     auto const h = aseImage->m_height;
@@ -136,7 +136,7 @@ sf::Image createFlashImage(sf::Image const& in)
 
 sf::Texture loadTextureFromDisk(std::string const& str)
 {
-    sf::Texture t {};
+    sf::Texture t { };
     if (!t.loadFromFile(str)) {
         throw std::invalid_argument { "invalid filename, cannot load texture from '" + str + "'" };
     }

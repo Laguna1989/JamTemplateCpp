@@ -102,7 +102,7 @@ public:
 
 private:
     int m_skipTicks { 0 };
-    float m_totalTime {0.0f };
+    float m_totalTime { 0.0f };
 
     AgePercentConversionFunctionType m_agePercentConversion { nullptr };
     float m_age { 0.0f };
@@ -114,7 +114,7 @@ private:
     bool m_alive { true };
     bool m_repeat { false };
 
-    std::vector<OnCompleteCallbackType> m_completeCallbacks {};
+    std::vector<OnCompleteCallbackType> m_completeCallbacks { };
 
     /// Function that does the actual tweening. Needs to be overwritten by derived classes
     /// \param sptr the object to tween

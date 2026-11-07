@@ -8,7 +8,9 @@ jt::pathfinder::Node::getNeighbours() const
 }
 
 void jt::pathfinder::Node::visit() { m_visited = true; }
+
 void jt::pathfinder::Node::unvisit() { m_visited = false; }
+
 bool jt::pathfinder::Node::wasVisited() const { return m_visited; }
 
 jt::Vector2u const& jt::pathfinder::Node::getTilePosition() const { return m_position; }
@@ -33,4 +35,5 @@ float jt::pathfinder::Node::getValue() const { return m_value; }
 void jt::pathfinder::Node::setValue(float value) { m_value = value; }
 
 bool jt::pathfinder::Node::getBlocked() const { return m_isBlocked; }
+
 void jt::pathfinder::Node::setBlocked(bool blocked) { m_isBlocked = blocked; }

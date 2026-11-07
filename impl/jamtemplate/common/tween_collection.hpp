@@ -27,7 +27,7 @@ public:
 
 private:
     /// all tweens running in this collection
-    std::vector<std::shared_ptr<jt::TweenInterface>> m_tweens {};
+    std::vector<std::shared_ptr<jt::TweenInterface>> m_tweens { };
 
     /// This second vector is used as a level of indirection, because tweens might be added or
     /// removed while iterating over the vector. This would invalidat iterators, which
@@ -36,7 +36,7 @@ private:
     /// The idea is to not modify original vector directly when a Tween is added,
     /// but to place them in this vector first and add them to the original vector,
     /// once it is safe to do so.
-    std::vector<std::shared_ptr<TweenInterface>> m_tweensToAdd {};
+    std::vector<std::shared_ptr<TweenInterface>> m_tweensToAdd { };
 };
 
 } // namespace jt

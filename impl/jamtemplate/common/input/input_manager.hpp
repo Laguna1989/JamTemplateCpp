@@ -9,7 +9,7 @@ class InputManager : public InputManagerInterface {
 public:
     explicit InputManager(std::shared_ptr<jt::MouseInterface> mouse = nullptr,
         std::shared_ptr<jt::KeyboardInterface> keyboard = nullptr,
-        std::vector<std::shared_ptr<jt::GamepadInterface>> const& gamepads = {});
+        std::vector<std::shared_ptr<jt::GamepadInterface>> const& gamepads = { });
     virtual ~InputManager() = default;
 
     void update(bool shouldProcessKeys, bool shouldProcessMouse, MousePosition const& mp,
@@ -24,7 +24,7 @@ public:
 private:
     std::shared_ptr<MouseInterface> m_mouse { nullptr };
     std::shared_ptr<KeyboardInterface> m_keyboard { nullptr };
-    std::vector<std::shared_ptr<GamepadInterface>> m_gamepads {};
+    std::vector<std::shared_ptr<GamepadInterface>> m_gamepads { };
 };
 
 } // namespace jt

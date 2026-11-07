@@ -15,7 +15,7 @@ std::vector<jt::Color> parseGPLImpl(std::string const& gplFileConent)
     // ignore first line
     std::getline(ss, line);
 
-    std::vector<jt::Color> colors {};
+    std::vector<jt::Color> colors { };
     while (std::getline(ss, line)) {
         if (line.empty()) {
             continue;

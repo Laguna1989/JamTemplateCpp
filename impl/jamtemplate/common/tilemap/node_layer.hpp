@@ -32,7 +32,7 @@ private:
     void createNodeConnections();
 
     struct Vec2UHasher {
-        std::size_t operator()(const jt::Vector2u& k) const
+        std::size_t operator()(jt::Vector2u const& k) const
         {
             using std::hash;
             using std::size_t;

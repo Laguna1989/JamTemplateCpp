@@ -28,10 +28,10 @@ private:
     AxisFunc m_axisFunc;
     ButtonCheckFunction m_buttonFunc;
 
-    std::map<jt::GamepadButtonCode, bool> m_pressed {};
-    std::map<jt::GamepadButtonCode, bool> m_released {};
-    std::map<jt::GamepadButtonCode, bool> m_justPressed {};
-    std::map<jt::GamepadButtonCode, bool> m_justReleased {};
+    std::map<jt::GamepadButtonCode, bool> m_pressed { };
+    std::map<jt::GamepadButtonCode, bool> m_released { };
+    std::map<jt::GamepadButtonCode, bool> m_justPressed { };
+    std::map<jt::GamepadButtonCode, bool> m_justReleased { };
 
     float m_axisDeadZone { 13.0f };
 };

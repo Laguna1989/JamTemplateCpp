@@ -31,8 +31,7 @@ public:
     /// \param maxShakeOffsetInPixel how strong the shake will be
     /// \param shakeIntervalInSeconds how often a new shake offset will be selected
     virtual void shake(float shakeDurationInSeconds, float maxShakeOffsetInPixel,
-        float shakeIntervalInSeconds = 0.005f)
-        = 0;
+        float shakeIntervalInSeconds = 0.005f) = 0;
 
     /// Get the shakeOffset of the camera
     /// \return the current shake offset

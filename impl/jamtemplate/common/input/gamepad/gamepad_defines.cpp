@@ -9,6 +9,7 @@ std::vector<jt::GamepadAxisCode> jt::getAllAxis()
     }
     return values;
 }
+
 std::vector<jt::GamepadButtonCode> jt::getAllGamepadButtons()
 {
     std::vector<GamepadButtonCode> values(GamepadButtonCode::_size(), jt::GamepadButtonCode::GBA);

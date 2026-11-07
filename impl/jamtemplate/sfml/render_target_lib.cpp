@@ -8,10 +8,7 @@ void jt::RenderTarget::forall(
     }
 }
 
-std::shared_ptr<jt::RenderTargetLayer> const& jt::RenderTarget::get(int z)
-{
-    return m_targets[z];
-}
+std::shared_ptr<jt::RenderTargetLayer> const& jt::RenderTarget::get(int z) { return m_targets[z]; }
 
 void jt::RenderTarget::add(int z, std::shared_ptr<jt::RenderTargetLayer> target)
 {

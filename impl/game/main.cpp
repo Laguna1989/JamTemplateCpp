@@ -42,7 +42,7 @@ int main(int /*argc*/, char* /*argv*/[])
     auto logHistory = std::make_shared<jt::LogHistory>();
     jt::CacheImpl cache { nullptr, logHistory };
 
-    jt::Logger logger {};
+    jt::Logger logger { };
     jt::createDefaultLogTargets(logger);
     logger.addLogTarget(logHistory);
 
@@ -59,7 +59,7 @@ int main(int /*argc*/, char* /*argv*/[])
     auto const gamepad0 = std::make_shared<jt::GamepadInput>(0);
     jt::InputManager input { mouse, keyboard, { gamepad0 } };
 
-    jt::AudioImpl audio {};
+    jt::AudioImpl audio { };
 
     jt::StateManager stateManager { std::make_shared<StateStartWithButton>() };
     jt::LoggingStateManager loggingStateManager { stateManager, logger };

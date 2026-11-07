@@ -46,6 +46,7 @@ void jt::BubbleSmoke::doUpdate(float const elapsed)
         m_particles->fire(1, m_smokePos);
     }
 }
+
 void jt::BubbleSmoke::doDraw() const { m_particles->draw(); }
 
 void jt::BubbleSmoke::fire(jt::Vector2f const& pos)

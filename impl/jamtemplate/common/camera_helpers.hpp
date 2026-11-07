@@ -23,8 +23,8 @@ void centerOn(CamInterface& cam, jt::Vector2f const& target, jt::Vector2f const&
 /// \param elapsed the elapsed time in seconds
 /// \param margin distance (in world coordinates) from the screen edges at which scrolling starts
 /// \param moveSpeed scroll speed in world coordinates per second
-void followWithMargin(CamInterface& cam, jt::Vector2f const& target,
-    jt::Vector2f const& screenSize, float elapsed, float margin = 100.0f, float moveSpeed = 90.0f);
+void followWithMargin(CamInterface& cam, jt::Vector2f const& target, jt::Vector2f const& screenSize,
+    float elapsed, float margin = 100.0f, float moveSpeed = 90.0f);
 
 /// Clamp the camera so that the visible area stays within bounds. If bounds are smaller than
 /// the screen on an axis, the bounds are centered on that axis.

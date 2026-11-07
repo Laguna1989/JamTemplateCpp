@@ -11,7 +11,7 @@ struct LogEntry {
     std::string message { "" };
     std::string time { "" };
     LogLevel level { LogLevel::Off };
-    std::vector<std::string> tags {};
+    std::vector<std::string> tags { };
 };
 
 } // namespace jt

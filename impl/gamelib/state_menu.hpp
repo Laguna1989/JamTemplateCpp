@@ -53,7 +53,7 @@ private:
     void createTweenExplanation();
 
     void onUpdate(float const elapsed) override;
-    void updateDrawables(const float& elapsed);
+    void updateDrawables(float const& elapsed);
     void checkForTransitionToStateGame();
     void startTransitionToStateGame();
 

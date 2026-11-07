@@ -26,7 +26,7 @@ private:
     void doUpdate(float const elapsed) override;
     void doDraw() const override;
 
-    std::string m_aseFileName {};
+    std::string m_aseFileName { };
     float m_radius { 0.0f };
     float m_time { 1.0f };
 

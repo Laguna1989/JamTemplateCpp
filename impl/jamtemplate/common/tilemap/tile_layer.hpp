@@ -65,10 +65,10 @@ public:
     void setColorFunction(std::function<jt::Color(jt::Vector2f const&)>);
 
 private:
-    mutable std::vector<std::shared_ptr<jt::Sprite>> m_tileSetSprites {};
+    mutable std::vector<std::shared_ptr<jt::Sprite>> m_tileSetSprites { };
     std::function<jt::Color(jt::Vector2f const&)> m_colorFunction { nullptr };
 
-    std::vector<TileInfo> m_tiles {};
+    std::vector<TileInfo> m_tiles { };
 
     jt::Vector2f m_position { 0.0f, 0.0f };
     jt::Vector2f m_scale { 1.0f, 1.0f };

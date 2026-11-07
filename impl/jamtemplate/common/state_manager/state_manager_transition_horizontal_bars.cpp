@@ -13,7 +13,9 @@ jt::StateManagerTransitionHorizontalBars::StateManagerTransitionHorizontalBars(
 }
 
 void jt::StateManagerTransitionHorizontalBars::doUpdate(float /*elapsed*/) { }
+
 void jt::StateManagerTransitionHorizontalBars::doStart() { }
+
 void jt::StateManagerTransitionHorizontalBars::doDraw(jt::RenderTargetInterface& rt)
 {
     for (auto i = 0; i != m_numberOfShapes; ++i) {

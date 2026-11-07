@@ -121,7 +121,7 @@ std::vector<std::string> strutil::split(std::string_view const str, char const d
     std::vector<std::string> tokens;
     std::stringstream ss { std::string { str }, std::ios_base::in };
 
-    std::string token {};
+    std::string token { };
     while (std::getline(ss, token, delim)) {
         tokens.push_back(token);
     }
@@ -139,7 +139,7 @@ std::vector<std::string> strutil::split(std::string_view const str, std::string_
     std::size_t pos_start { 0u };
     std::size_t pos_end { 0u };
     std::size_t const delim_len { delim.length() };
-    std::string token {};
+    std::string token { };
     std::vector<std::string> tokens;
 
     while ((pos_end = str.find(delim, pos_start)) != std::string::npos) {
@@ -173,7 +173,7 @@ std::vector<std::string> strutil::split_any(
 
 std::string strutil::repeat(std::string_view const str, unsigned n)
 {
-    std::string result {};
+    std::string result { };
 
     for (unsigned i = 0; i < n; ++i) {
         result += str;

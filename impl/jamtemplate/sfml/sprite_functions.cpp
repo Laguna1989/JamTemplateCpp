@@ -12,7 +12,7 @@ sf::Image jt::SpriteFunctions::makeButtonImage(unsigned int w, unsigned int h)
     constexpr jt::Color borderColor { 255, 255, 255 };
     constexpr jt::Color overBGColor { 150, 150, 150 };
 
-    sf::Image img {};
+    sf::Image img { };
     img.create(3 * w, h, toLib(emptyColor));
 
     for (unsigned int i = w; i != 3 * w; ++i) {
@@ -42,7 +42,7 @@ sf::Image jt::SpriteFunctions::makeButtonImage(unsigned int w, unsigned int h)
 
 sf::Image jt::SpriteFunctions::makeBlankImage(unsigned int w, unsigned int h)
 {
-    sf::Image img {};
+    sf::Image img { };
     img.create(w, h, sf::Color::White);
     return img;
 }
@@ -50,7 +50,7 @@ sf::Image jt::SpriteFunctions::makeBlankImage(unsigned int w, unsigned int h)
 sf::Image jt::SpriteFunctions::makeGlowImage(float r, std::uint8_t max)
 {
     auto const s = static_cast<unsigned int>(r + 0.5f * 2);
-    sf::Image img {};
+    sf::Image img { };
     img.create(s, s, toLib(jt::colors::Transparent));
 
     float const c = r / 2;
@@ -71,7 +71,7 @@ sf::Image jt::SpriteFunctions::makeGlowImage(float r, std::uint8_t max)
 
 sf::Image jt::SpriteFunctions::makeVignetteImage(unsigned int w, unsigned int h)
 {
-    sf::Image img {};
+    sf::Image img { };
     auto const cx = static_cast<float>(w) / 2.0f;
     auto const cy = static_cast<float>(h) / 2.0f;
     img.create(w, h, toLib(jt::colors::Transparent));
@@ -90,7 +90,7 @@ sf::Image jt::SpriteFunctions::makeVignetteImage(unsigned int w, unsigned int h)
 
 sf::Image jt::SpriteFunctions::makeRing(unsigned int w)
 {
-    sf::Image img {};
+    sf::Image img { };
     float const r = w / 2.0f;
     float const minAngle = acos(1 - 1 / r);
     img.create(w + 1, w + 1, toLib(jt::colors::Transparent));

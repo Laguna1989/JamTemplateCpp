@@ -31,11 +31,11 @@ public:
 
 private:
     MouseButtonCheckFunction m_checkFunction;
-    std::map<jt::MouseButtonCode, bool> m_mousePressed {};
-    std::map<jt::MouseButtonCode, bool> m_mouseJustPressed {};
+    std::map<jt::MouseButtonCode, bool> m_mousePressed { };
+    std::map<jt::MouseButtonCode, bool> m_mouseJustPressed { };
 
-    std::map<jt::MouseButtonCode, bool> m_mouseReleased {};
-    std::map<jt::MouseButtonCode, bool> m_mouseJustReleased {};
+    std::map<jt::MouseButtonCode, bool> m_mouseReleased { };
+    std::map<jt::MouseButtonCode, bool> m_mouseJustReleased { };
 
     float m_mouseWorldX { 0.0f };
     float m_mouseWorldY { 0.0f };

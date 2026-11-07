@@ -24,7 +24,7 @@ jt::Vector2f jt::libAxisValue(int gamepadId, jt::GamepadAxisCode a)
         return jt::Vector2f { 0.0f, 0.0f };
     }
 
-    jt::Vector2f axis {};
+    jt::Vector2f axis { };
     if (sf::Joystick::hasAxis(gamepadId, xAxis)) {
         axis.x = sf::Joystick::getAxisPosition(gamepadId, xAxis);
     }

@@ -22,10 +22,10 @@ public:
     float eval(float const x, float const y) const;
 
 private:
-    const float m_stretch2d;
-    const float m_squish2d;
+    float const m_stretch2d;
+    float const m_squish2d;
 
-    const float m_norm2d;
+    float const m_norm2d;
 
     std::default_random_engine m_engine;
     std::uniform_int_distribution<std::int64_t> distr;

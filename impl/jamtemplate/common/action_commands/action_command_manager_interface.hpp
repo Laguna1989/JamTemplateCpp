@@ -19,8 +19,7 @@ public:
     /// \return shared pointer to keep the commandName alive. If the user destroys the shared
     /// pointer, the commandName is automatically unregistered
     virtual std::shared_ptr<bool> registerTemporaryCommand(
-        std::string const& commandName, ActionCommandCallbackType callback)
-        = 0;
+        std::string const& commandName, ActionCommandCallbackType callback) = 0;
 
     /// Get a list of all registered commands
     /// \return a vector of all currently registered commands
@@ -32,9 +31,9 @@ public:
     virtual ~ActionCommandManagerInterface() = default;
 
     // no copy, no move. Avoid slicing.
-    ActionCommandManagerInterface(const ActionCommandManagerInterface&) = delete;
+    ActionCommandManagerInterface(ActionCommandManagerInterface const&) = delete;
     ActionCommandManagerInterface(ActionCommandManagerInterface&&) = delete;
-    ActionCommandManagerInterface& operator=(const ActionCommandManagerInterface&) = delete;
+    ActionCommandManagerInterface& operator=(ActionCommandManagerInterface const&) = delete;
     ActionCommandManagerInterface& operator=(ActionCommandManagerInterface&&) = delete;
 
 protected:

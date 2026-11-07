@@ -145,7 +145,7 @@ public:
         m_head++;
         if (m_size == 0) {
             m_tail++;
-            return T {};
+            return T { };
         } else {
             m_size--;
         }
@@ -156,7 +156,7 @@ public:
 
 private:
     detail::IndexWrapper<N> m_wrapper;
-    ArrayT m_data {};
+    ArrayT m_data { };
 
     std::size_t m_head { 0u };
     std::size_t m_tail { 0u };

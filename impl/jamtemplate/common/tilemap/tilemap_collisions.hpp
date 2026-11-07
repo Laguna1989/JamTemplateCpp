@@ -14,7 +14,7 @@ public:
     void refineColliders(float size);
 
 private:
-    std::vector<jt::Rectf> m_rects {};
+    std::vector<jt::Rectf> m_rects { };
 };
 
 } // namespace jt

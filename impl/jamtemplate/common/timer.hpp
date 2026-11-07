@@ -39,7 +39,7 @@ private:
     float m_totalTime { 0.0f };
     float m_currentTime { 0.0f };
 
-    CallbackType m_callback {};
+    CallbackType m_callback { };
     int m_repeat { 1 };
 
     virtual void doUpdate(float const /*elapsed*/) override;

@@ -72,7 +72,7 @@ public:
         std::function<jt::Color(jt::Color const&)> const& function);
 
 private:
-    std::vector<Color> m_colors {};
+    std::vector<Color> m_colors { };
 };
 
 } // namespace jt

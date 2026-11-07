@@ -18,7 +18,7 @@ template <typename T>
 bool is_uninitialized_weak_ptr(std::weak_ptr<T> const& weak) noexcept
 {
     using wt = std::weak_ptr<T>;
-    return !weak.owner_before(wt {}) && !wt {}.owner_before(weak);
+    return !weak.owner_before(wt { }) && !wt { }.owner_before(weak);
 }
 
 /// Erase helper for container access
@@ -83,7 +83,7 @@ ForwardIterator remove_duplicates(ForwardIterator first, ForwardIterator last)
 template <typename T>
 std::vector<std::weak_ptr<T>> to_weak_pointers(std::vector<std::shared_ptr<T>> const& pointers)
 {
-    std::vector<std::weak_ptr<T>> weakPointers {};
+    std::vector<std::weak_ptr<T>> weakPointers { };
     weakPointers.resize(pointers.size());
     for (auto i = 0u; i != pointers.size(); ++i) {
         weakPointers[i] = pointers[i];

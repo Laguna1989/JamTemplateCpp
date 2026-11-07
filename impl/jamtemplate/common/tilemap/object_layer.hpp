@@ -23,7 +23,7 @@ public:
     std::vector<InfoRect> getObjects();
 
 private:
-    std::vector<InfoRect> m_objects {};
+    std::vector<InfoRect> m_objects { };
 };
 
 } // namespace tilemap

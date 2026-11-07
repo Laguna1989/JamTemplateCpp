@@ -32,4 +32,5 @@ jt::Palette GP::getPalette()
 }
 
 int GP::PhysicSubSteps() { return 4; }
+
 jt::Vector2f GP::PlayerSize() { return jt::Vector2f { 16.0f, 16.0f }; }

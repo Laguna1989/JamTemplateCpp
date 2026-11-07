@@ -61,7 +61,7 @@ jt::Color jt::Sprite::getColorAtPixel(jt::Vector2u pixelPos) const
 void jt::Sprite::cleanImage() noexcept
 {
     m_imageStored = false;
-    m_image = sf::Image {};
+    m_image = sf::Image { };
 }
 
 void jt::Sprite::doUpdate(float /*elapsed*/)

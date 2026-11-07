@@ -8,7 +8,6 @@
 namespace jt {
 class TextureManagerInterface {
 public:
-
     /// get texture for string
     /// \param str texture identifier
     /// \return shared pointer to SDL_Texture

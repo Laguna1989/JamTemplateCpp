@@ -158,7 +158,7 @@ void Text::renderOneLineOfText(std::shared_ptr<jt::RenderTargetLayer> const& spt
     SDL_QueryTexture(
         textTexture, nullptr, nullptr, &w, &h); // get the width and height of the texture
 
-    jt::Vector2f alignOffset {};
+    jt::Vector2f alignOffset { };
     if (lineCount != 0 && m_textAlign == TextAlign::CENTER) {
         alignOffset.x
             = static_cast<float>(m_textTextureSizeX) / 2.0f - static_cast<float>(w) / 2.0f;

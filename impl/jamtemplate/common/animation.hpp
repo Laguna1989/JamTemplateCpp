@@ -172,8 +172,8 @@ public:
     float getAnimationSpeedFactor() const;
 
 private:
-    mutable AnimationMapType m_frames {};
-    std::map<std::string, std::vector<float>> m_time {};
+    mutable AnimationMapType m_frames { };
+    std::map<std::string, std::vector<float>> m_time { };
 
     bool m_isValid { false };
 
@@ -186,7 +186,7 @@ private:
 
     float m_frameTime { 0.0f };
 
-    std::map<std::string, bool> m_isLooping {};
+    std::map<std::string, bool> m_isLooping { };
 
     float m_animationplaybackSpeed { 1.0f };
 

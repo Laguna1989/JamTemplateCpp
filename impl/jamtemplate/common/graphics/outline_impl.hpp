@@ -24,7 +24,7 @@ private:
     int m_outlineWidthInPixel { 0 };
     jt::Color m_outlineColor { jt::colors::Black };
 
-    std::vector<jt::Vector2f> m_outlineOffsets {};
+    std::vector<jt::Vector2f> m_outlineOffsets { };
 
     virtual void doDrawOutline(std::shared_ptr<jt::RenderTargetLayer> const& sptr) const = 0;
 };

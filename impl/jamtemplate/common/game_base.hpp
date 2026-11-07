@@ -59,7 +59,7 @@ protected:
 
     CacheInterface& m_cache;
 
-    std::chrono::steady_clock::time_point m_timeLast {};
+    std::chrono::steady_clock::time_point m_timeLast { };
 
     float m_lag { 0.0f };
     float m_timePerUpdate { 0.005f };

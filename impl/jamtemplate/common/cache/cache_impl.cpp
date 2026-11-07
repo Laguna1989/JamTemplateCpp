@@ -16,4 +16,5 @@ jt::CacheImpl::CacheImpl(std::unique_ptr<jt::TilemapCacheInterface> tilemapCache
 }
 
 jt::TilemapCacheInterface& jt::CacheImpl::getTilemapCache() { return *m_tilemapCache; }
+
 std::shared_ptr<jt::LogHistoryInterface> jt::CacheImpl::getLogHistory() { return m_logHistory; }

@@ -40,7 +40,7 @@ public:
         auto const cellIndex = getCellIndex(lockedObject->getPosition());
 
         if (!m_cells.contains(cellIndex)) {
-            m_cells[cellIndex] = std::vector<std::weak_ptr<T>> {};
+            m_cells[cellIndex] = std::vector<std::weak_ptr<T>> { };
         }
 
         m_cells.at(cellIndex).push_back(obj);
@@ -49,7 +49,7 @@ public:
     std::vector<std::weak_ptr<T>> getObjectsAround(jt::Vector2f position, float distance) const
     {
         auto const cellIndex = getCellIndex(position);
-        std::vector<std::weak_ptr<T>> objects {};
+        std::vector<std::weak_ptr<T>> objects { };
         auto const offsets = getOffsets(distance);
         for (auto const& offset : offsets) {
             auto const currentIndex = cellIndex + offset;
@@ -70,8 +70,8 @@ public:
         std::unordered_set<std::shared_ptr<T>> objectsToReplace;
 
         for (auto& kvp : m_cells) {
-            std::vector<std::shared_ptr<T>> currentObjects {};
-            std::vector<std::shared_ptr<T>> objectsToRemove {};
+            std::vector<std::shared_ptr<T>> currentObjects { };
+            std::vector<std::shared_ptr<T>> objectsToRemove { };
 
             for (auto& object : kvp.second) {
                 auto const lockedObject = object.lock();

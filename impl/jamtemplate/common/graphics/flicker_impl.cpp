@@ -1,5 +1,6 @@
 
 #include "flicker_impl.hpp"
+
 void jt::FlickerImpl::updateFlicker(float elapsed)
 {
     m_flickerTimer -= elapsed;
@@ -11,6 +12,7 @@ void jt::FlickerImpl::updateFlicker(float elapsed)
         }
     }
 }
+
 bool jt::FlickerImpl::allowDrawFromFlicker() const
 {
     if (m_flickerTimer <= 0) {

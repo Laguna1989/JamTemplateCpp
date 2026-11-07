@@ -23,10 +23,10 @@ public:
     float eval(float x, float y, float z) const;
 
 private:
-    const float m_stretch3d;
-    const float m_squish3d;
+    float const m_stretch3d;
+    float const m_squish3d;
 
-    const float m_norm3d;
+    float const m_norm3d;
 
     std::default_random_engine m_engine;
     std::uniform_int_distribution<std::int64_t> distr;

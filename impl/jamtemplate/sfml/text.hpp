@@ -20,7 +20,8 @@ public:
     /// load Font
     /// \param fontFileName filename to the font (ttf)
     /// \param characterSize size in characters
-    /// \param rendertarget_wptr the rendertarget (unused for sfml, but needed for sdl compatibility)
+    /// \param rendertarget_wptr the rendertarget (unused for sfml, but needed for sdl
+    /// compatibility)
     void loadFont(std::string const& fontFileName, unsigned int characterSize,
         std::weak_ptr<jt::RenderTargetLayer> rendertarget_wptr /*unused*/);
 
@@ -55,6 +56,7 @@ public:
     jt::Vector2f getScale() const override;
 
     void setOriginInternal(jt::Vector2f const& origin) override;
+
 private:
     mutable std::shared_ptr<sf::Text> m_text;
     std::shared_ptr<sf::Text> m_flashText;

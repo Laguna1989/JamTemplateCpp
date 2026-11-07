@@ -16,7 +16,7 @@ std::tuple<std::uint8_t, std::uint8_t, std::uint8_t> jt::ColorConversions::hsv2r
     float t { 0.0f };
     float ff { 0.0f };
     long i { 0u };
-    std::tuple<std::uint8_t, std::uint8_t, std::uint8_t> out {};
+    std::tuple<std::uint8_t, std::uint8_t, std::uint8_t> out { };
 
     if (s <= 0.0f) {
         std::get<0>(out) = static_cast<std::uint8_t>(v);

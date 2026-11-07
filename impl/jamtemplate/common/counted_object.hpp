@@ -8,6 +8,7 @@ class CountedObj {
 
 public:
     static size_t aliveObjects() { return m_aliveObjects; }
+
     static size_t createdObjects() { return m_createdObjects; }
 
 private:

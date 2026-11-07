@@ -12,6 +12,7 @@ std::shared_ptr<jt::GameState> jt::LoggingStateManager::getCurrentState()
     m_logger.verbose("getCurrentState", { "jt", "StateManager" });
     return m_decoratee.getCurrentState();
 }
+
 void jt::LoggingStateManager::setTransition(
     std::shared_ptr<jt::StateManagerTransitionInterface> transition)
 {
@@ -28,6 +29,7 @@ void jt::LoggingStateManager::switchState(std::shared_ptr<jt::GameState> newStat
     m_logger.info("Switch GameState to new state: " + stateName, { "jt", "StateManager" });
     m_decoratee.switchState(newState);
 }
+
 void jt::LoggingStateManager::switchToStoredState(std::string const& identifier)
 {
     m_logger.info("Switch GameState to stored state: " + identifier, { "jt", "StateManager" });
@@ -52,27 +54,32 @@ void jt::LoggingStateManager::draw(jt::RenderTargetInterface& rt)
     m_logger.verbose("draw", { "jt", "StateManager" });
     m_decoratee.draw(rt);
 }
+
 std::shared_ptr<jt::StateManagerTransitionInterface> jt::LoggingStateManager::getTransition()
 {
     m_logger.verbose("getTransition", { "jt", "StateManager" });
     return m_decoratee.getTransition();
 }
+
 void jt::LoggingStateManager::storeCurrentState(std::string const& identifier)
 {
     m_logger.debug("store gamestate '" + identifier + "'", { "jt", "StateManager" });
     m_decoratee.storeCurrentState(identifier);
 }
+
 std::shared_ptr<jt::GameState> jt::LoggingStateManager::getStoredState(
     std::string const& identifier)
 {
     m_logger.debug("retrieve gamestate '" + identifier + "'", { "jt", "StateManager" });
     return m_decoratee.getStoredState(identifier);
 }
+
 void jt::LoggingStateManager::clearStoredState(std::string const& identifier)
 {
     m_logger.debug("clear gamestate '" + identifier + "'", { "jt", "StateManager" });
     m_decoratee.clearStoredState(identifier);
 }
+
 std::vector<std::string> jt::LoggingStateManager::getStoredStateIdentifiers() const
 {
     return m_decoratee.getStoredStateIdentifiers();

@@ -60,7 +60,7 @@ void jt::Animation::add(std::string const& fileName, std::string const& animName
         std::cout << "Warning: Overwriting old animation with name: " << animName << std::endl;
     }
 
-    m_frames[animName] = std::vector<jt::Sprite::Sptr> {};
+    m_frames[animName] = std::vector<jt::Sprite::Sptr> { };
 
     for (auto const idx : frameIndices) {
         jt::Recti const rect { static_cast<int>(idx * imageSize.x), 0,

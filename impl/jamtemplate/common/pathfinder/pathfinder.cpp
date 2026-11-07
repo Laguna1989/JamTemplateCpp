@@ -136,10 +136,10 @@ std::vector<NodeT> jt::pathfinder::calculatePath(NodeT const& start, NodeT const
 {
     ZoneScopedN("jt::pathfinder::calculatePath");
     if (start == end) {
-        return std::vector<NodeT> {};
+        return std::vector<NodeT> { };
     }
     if (!calculateNodeValuesFromEndToStart(start, end)) {
-        return std::vector<NodeT> {};
+        return std::vector<NodeT> { };
     }
     auto current = start;
     std::vector<NodeT> nodes;

@@ -30,7 +30,6 @@ public:
 
     void cleanImage() noexcept;
 
-
     void setPosition(jt::Vector2f const& pos) override;
     jt::Vector2f getPosition() const override;
 

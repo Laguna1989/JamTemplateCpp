@@ -38,7 +38,7 @@ std::vector<std::string> jt::ActionCommandManager::getArguments(
     std::vector<std::string> const& args) const
 {
     if (args.size() <= 1) {
-        return {};
+        return { };
     }
     return std::vector<std::string> { args.cbegin() + 1, args.cend() };
 }
@@ -71,7 +71,7 @@ void jt::ActionCommandManager::update() { removeUnusedCommands(); }
 
 std::vector<std::string> jt::ActionCommandManager::getAllCommands()
 {
-    std::vector<std::string> commands {};
+    std::vector<std::string> commands { };
     commands.resize(m_registeredCommands.size());
     for (auto& tpl : m_registeredCommands) {
         commands.push_back(tpl.first);

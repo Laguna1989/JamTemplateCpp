@@ -35,7 +35,7 @@ bool jt::RenderWindow::isOpen() const { return m_window->isOpen(); }
 
 void jt::RenderWindow::checkForClose()
 {
-    sf::Event event {};
+    sf::Event event { };
 
     while (m_window->pollEvent(event)) {
         ImGui::SFML::ProcessEvent(event);

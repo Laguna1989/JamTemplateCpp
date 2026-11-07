@@ -18,6 +18,7 @@ void jt::ShakeImpl::updateShake(float elapsed)
         m_shakeOffset.y = 0;
     }
 }
+
 void jt::ShakeImpl::doShake(float t, float strength, float shakeInterval)
 {
     m_shakeTimer = t;
@@ -25,4 +26,5 @@ void jt::ShakeImpl::doShake(float t, float strength, float shakeInterval)
     m_shakeStrength = strength;
     m_shakeInterval = m_shakeIntervalMax = shakeInterval;
 }
+
 jt::Vector2f jt::ShakeImpl::doGetShakeOffset() const { return m_shakeOffset; }

@@ -31,8 +31,7 @@ public:
     /// \param maxShakeOffsetInPixel how strong the shake will be
     /// \param shakeInterval how often a new shake offset will be selected
     virtual void shake(
-        float timeInSeconds, float maxShakeOffsetInPixel, float shakeInterval = 0.05f)
-        = 0;
+        float timeInSeconds, float maxShakeOffsetInPixel, float shakeInterval = 0.05f) = 0;
 
     /// Flicker the drawable (toggle drawing on/off)
     /// \param duration how long the flicker will take

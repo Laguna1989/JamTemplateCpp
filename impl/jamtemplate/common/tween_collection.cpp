@@ -29,4 +29,7 @@ void jt::TweenCollection::update(float const elapsed)
     };
 }
 
-std::size_t jt::TweenCollection::size() const noexcept { return m_tweens.size() + m_tweensToAdd.size(); }
+std::size_t jt::TweenCollection::size() const noexcept
+{
+    return m_tweens.size() + m_tweensToAdd.size();
+}

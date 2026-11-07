@@ -1,7 +1,7 @@
 ﻿#pragma once
 
-#include <color/color.hpp>
 #include <SFML/Graphics/Color.hpp>
+#include <color/color.hpp>
 
 namespace jt {
 

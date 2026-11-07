@@ -39,11 +39,11 @@ public:
 
 private:
     KeyboardKeyCheckFunction m_checkFunc;
-    std::map<jt::KeyCode, bool> m_pressed {};
-    std::map<jt::KeyCode, bool> m_released {};
+    std::map<jt::KeyCode, bool> m_pressed { };
+    std::map<jt::KeyCode, bool> m_released { };
 
-    std::map<jt::KeyCode, bool> m_justPressed {};
-    std::map<jt::KeyCode, bool> m_justReleased {};
+    std::map<jt::KeyCode, bool> m_justPressed { };
+    std::map<jt::KeyCode, bool> m_justReleased { };
 
     std::map<jt::KeyCode, std::shared_ptr<jt::ControlCommandInterface>> m_commandsPressed;
     std::map<jt::KeyCode, std::shared_ptr<jt::ControlCommandInterface>> m_commandsReleased;
