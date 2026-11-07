@@ -51,6 +51,8 @@ int main(int /*argc*/, char* /*argv*/[])
     keyboard->listenForKey(jt::KeyCode::A);
     keyboard->listenForKey(jt::KeyCode::S);
     keyboard->listenForKey(jt::KeyCode::D);
+    keyboard->listenForKey(jt::KeyCode::Q);
+    keyboard->listenForKey(jt::KeyCode::E);
 
     keyboard->listenForKey(jt::KeyCode::Left);
     keyboard->listenForKey(jt::KeyCode::Right);

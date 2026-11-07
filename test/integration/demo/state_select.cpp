@@ -3,6 +3,11 @@
 #include "palette/state_palette.hpp"
 #include <audio/state_audio.hpp>
 #include <box2d/state_box2d.hpp>
+#include <collision/scene_box2d_queries.hpp>
+#include <collision/scene_circle_test.hpp>
+#include <collision/scene_spatial_grid.hpp>
+#include <collision/scene_tilemap_collisions.hpp>
+#include <collision/state_collision.hpp>
 #include <easing/state_easing.hpp>
 #include <explosion/state_explosion.hpp>
 #include <gamepad/state_gamepad.hpp>
@@ -45,6 +50,10 @@ void StateSelect::onCreate()
     AddButton<StateTilemapEffects>("Tile Effects");
     AddButton<StateOffsetOrigin>("offset origin");
     AddButton<StateStoreGamestate>("store state");
+    AddButton<StateCollision<SceneCircleTest>>("Circle Test");
+    AddButton<StateCollision<SceneSpatialGrid>>("Spatial Grid");
+    AddButton<StateCollision<SceneTilemapCollisions>>("Tile Collide");
+    AddButton<StateCollision<SceneBox2DQueries>>("Box2D Query");
 
     add(std::make_shared<jt::LicenseInfo>());
 }
