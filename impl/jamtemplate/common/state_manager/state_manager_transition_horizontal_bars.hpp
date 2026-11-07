@@ -1,5 +1,4 @@
-#ifndef JAMTEMPLATE_STATE_MANAGER_TRANSITION_HORIZONTAL_BARS_HPP
-#define JAMTEMPLATE_STATE_MANAGER_TRANSITION_HORIZONTAL_BARS_HPP
+#pragma once
 
 #include <shape.hpp>
 #include <state_manager/state_manager_transition_impl.hpp>
@@ -24,5 +23,3 @@ private:
 };
 
 } // namespace jt
-
-#endif // JAMTEMPLATE_STATE_MANAGER_TRANSITION_HORIZONTAL_BARS_HPP

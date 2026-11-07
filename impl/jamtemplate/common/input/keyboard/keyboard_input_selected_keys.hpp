@@ -1,5 +1,4 @@
-#ifndef JAMTEMPLATE_KEYBOARD_INPUT_SELECTED_KEYS_HPP
-#define JAMTEMPLATE_KEYBOARD_INPUT_SELECTED_KEYS_HPP
+#pragma once
 
 #include <input/keyboard/keyboard_interface.hpp>
 #include <keyboard_input_lib.hpp>
@@ -54,5 +53,3 @@ private:
 };
 
 } // namespace jt
-
-#endif // JAMTEMPLATE_KEYBOARD_INPUT_SELECTED_KEYS_HPP

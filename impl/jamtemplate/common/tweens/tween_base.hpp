@@ -1,5 +1,4 @@
-﻿#ifndef JAMTEMPLATE_TWEENBASE_HPP
-#define JAMTEMPLATE_TWEENBASE_HPP
+﻿#pragma once
 
 #include <graphics/drawable_interface.hpp>
 #include <tweens/tween_interface.hpp>
@@ -130,5 +129,3 @@ private:
 };
 
 } // namespace jt
-
-#endif

@@ -1,5 +1,4 @@
-#ifndef JAMTEMPLATE_BUBBLE_SMOKE_HPP
-#define JAMTEMPLATE_BUBBLE_SMOKE_HPP
+#pragma once
 
 #include "ease/ease_from_points.hpp"
 #include <game_object.hpp>
@@ -32,5 +31,3 @@ private:
 };
 
 } // namespace jt
-
-#endif // JAMTEMPLATE_BUBBLE_SMOKE_HPP

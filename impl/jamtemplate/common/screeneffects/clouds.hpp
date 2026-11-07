@@ -1,5 +1,4 @@
-#ifndef JAMTEMPLATE_CLOUDS_HPP
-#define JAMTEMPLATE_CLOUDS_HPP
+#pragma once
 
 #include <game_object.hpp>
 #include <vector.hpp>
@@ -39,5 +38,3 @@ private:
 };
 
 } // namespace jt
-
-#endif // JAMTEMPLATE_CLOUDS_HPP

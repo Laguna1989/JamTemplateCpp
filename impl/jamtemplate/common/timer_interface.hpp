@@ -1,5 +1,4 @@
-#ifndef JAMTEMPLATE_TIMER_INTERFACE_HPP
-#define JAMTEMPLATE_TIMER_INTERFACE_HPP
+#pragma once
 
 #include <functional>
 
@@ -41,4 +40,3 @@ public:
     virtual void setCallback(CallbackType cb) = 0;
 };
 } // namespace jt
-#endif // JAMTEMPLATE_TIMER_INTERFACE_HPP

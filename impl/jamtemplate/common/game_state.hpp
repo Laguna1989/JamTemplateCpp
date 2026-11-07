@@ -1,5 +1,4 @@
-﻿#ifndef JAMTEMPLATE_GAMESTATE_HPP
-#define JAMTEMPLATE_GAMESTATE_HPP
+﻿#pragma once
 
 #include <game_object.hpp>
 #include <game_object_interface.hpp>
@@ -110,4 +109,3 @@ private:
 };
 
 } // namespace jt
-#endif

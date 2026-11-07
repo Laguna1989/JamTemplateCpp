@@ -1,5 +1,4 @@
-﻿#ifndef JAMTEMPLATE_VECTOR_LIB_HPP
-#define JAMTEMPLATE_VECTOR_LIB_HPP
+﻿#pragma once
 
 #include <vector.hpp>
 #include <SFML/System/Vector2.hpp>
@@ -13,5 +12,3 @@ sf::Vector2u toLib(jt::Vector2u const& vec) noexcept;
 jt::Vector2u fromLib(sf::Vector2u const& vec) noexcept;
 
 } // namespace jt
-
-#endif

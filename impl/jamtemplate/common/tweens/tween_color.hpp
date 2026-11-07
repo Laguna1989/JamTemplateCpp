@@ -1,5 +1,4 @@
-﻿#ifndef JAMTEMPLATE_TWEENCOLOR_HPP
-#define JAMTEMPLATE_TWEENCOLOR_HPP
+﻿#pragma once
 
 #include <color/color.hpp>
 #include <tweens/tween_base.hpp>
@@ -24,5 +23,3 @@ private:
 };
 
 } // namespace jt
-
-#endif

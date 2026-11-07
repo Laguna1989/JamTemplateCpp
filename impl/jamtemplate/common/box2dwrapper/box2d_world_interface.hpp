@@ -1,5 +1,4 @@
-﻿#ifndef JAMTEMPLATE_BOX2DWRAPPER_HPP
-#define JAMTEMPLATE_BOX2DWRAPPER_HPP
+﻿#pragma once
 
 #include <box2d/box2d.h>
 #include <variant>
@@ -63,5 +62,3 @@ protected:
     Box2DWorldInterface() = default;
 };
 } // namespace jt
-
-#endif

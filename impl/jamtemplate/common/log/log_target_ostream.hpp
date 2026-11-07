@@ -1,5 +1,4 @@
-#ifndef JAMTEMPLATE_LOG_TARGET_OSTREAM_HPP
-#define JAMTEMPLATE_LOG_TARGET_OSTREAM_HPP
+#pragma once
 
 #include <log/log_level.hpp>
 #include <log/log_target_base.hpp>
@@ -20,5 +19,3 @@ private:
     std::ostream& m_stream;
 };
 } // namespace jt
-
-#endif // JAMTEMPLATE_LOG_TARGET_OSTREAM_HPP

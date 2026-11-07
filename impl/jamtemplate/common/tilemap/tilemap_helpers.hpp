@@ -1,5 +1,4 @@
-#ifndef JAMTEMPLATE_TILEMAP_HELPERS_HPP
-#define JAMTEMPLATE_TILEMAP_HELPERS_HPP
+#pragma once
 
 #include <graphics/drawable_interface.hpp>
 #include <texture_manager_interface.hpp>
@@ -13,5 +12,3 @@ std::shared_ptr<jt::DrawableInterface> createShapeFrom(
 
 }
 } // namespace jt
-
-#endif // JAMTEMPLATE_TILEMAP_HELPERS_HPP

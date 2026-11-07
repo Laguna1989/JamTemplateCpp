@@ -1,5 +1,4 @@
-#ifndef JAMTEMPLATE_BOUNCE_HPP
-#define JAMTEMPLATE_BOUNCE_HPP
+#pragma once
 
 namespace jt {
 namespace ease {
@@ -12,5 +11,3 @@ float easeInOut(float t, float b, float c, float d) noexcept;
 } // namespace bounce
 } // namespace ease
 } // namespace jt
-
-#endif // JAMTEMPLATE_BOUNCE_HPP

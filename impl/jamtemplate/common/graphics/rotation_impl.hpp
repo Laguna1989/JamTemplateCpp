@@ -1,5 +1,4 @@
-#ifndef GURAD_JAMTEMPLATE_ROTATION_IMPL_HPP
-#define GURAD_JAMTEMPLATE_ROTATION_IMPL_HPP
+#pragma once
 
 namespace jt {
 
@@ -15,4 +14,3 @@ private:
 };
 
 } // namespace jt
-#endif // GURAD_JAMTEMPLATE_ROTATION_IMPL_HPP

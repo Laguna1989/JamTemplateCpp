@@ -1,5 +1,4 @@
-#ifndef JAMTEMPLATE_TEXTURE_MANAGER_INTERFACE_HPP
-#define JAMTEMPLATE_TEXTURE_MANAGER_INTERFACE_HPP
+#pragma once
 
 #include <render_target_layer.hpp>
 #include <cstddef>
@@ -32,5 +31,3 @@ public:
     virtual ~TextureManagerInterface() = default;
 };
 } // namespace jt
-
-#endif // JAMTEMPLATE_TEXTURE_MANAGER_INTERFACE_HPP

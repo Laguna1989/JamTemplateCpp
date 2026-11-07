@@ -1,5 +1,4 @@
-﻿#ifndef JAMTEMPLATE_TEXT_HPP
-#define JAMTEMPLATE_TEXT_HPP
+﻿#pragma once
 
 #include <SFML/Graphics.hpp>
 #include <drawable_impl_sfml.hpp>
@@ -74,5 +73,3 @@ private:
     void doRotate(float rot) override;
 };
 } // namespace jt
-
-#endif

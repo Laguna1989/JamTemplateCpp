@@ -1,5 +1,4 @@
-﻿#ifndef JAMTEMPLATE_TEXTUREMANAGER_HPP
-#define JAMTEMPLATE_TEXTUREMANAGER_HPP
+﻿#pragma once
 
 #include <render_target_layer.hpp>
 #include <sdl_2_include.hpp>
@@ -30,5 +29,3 @@ private:
 };
 
 } // namespace jt
-
-#endif

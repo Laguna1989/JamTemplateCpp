@@ -1,5 +1,4 @@
-﻿#ifndef JAMTEMPLATE_LERP_HPP
-#define JAMTEMPLATE_LERP_HPP
+﻿#pragma once
 
 #include <cassert>
 #include <cmath>
@@ -58,5 +57,3 @@ static T bounceInvers(T const& a, T const& b, T t)
 
 } // namespace Lerp
 } // namespace jt
-
-#endif

@@ -1,5 +1,4 @@
-#ifndef JAMTEMPLATE_LOG_HISTORY_NULL_HPP
-#define JAMTEMPLATE_LOG_HISTORY_NULL_HPP
+#pragma once
 
 #include <log/log_history_interface.hpp>
 
@@ -18,5 +17,3 @@ private:
 } // namespace null_objects
 
 } // namespace jt
-
-#endif // JAMTEMPLATE_LOG_HISTORY_NULL_HPP

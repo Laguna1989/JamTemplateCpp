@@ -1,5 +1,4 @@
-#ifndef JAMTEMPLATE_KEYBOARD_INTERFACE_HPP
-#define JAMTEMPLATE_KEYBOARD_INTERFACE_HPP
+#pragma once
 
 #include <input/control_commands/control_command_interface.hpp>
 #include <input/keyboard/keyboard_defines.hpp>
@@ -81,5 +80,3 @@ protected:
 };
 
 } // namespace jt
-
-#endif // JAMTEMPLATE_KEYBOARD_INTERFACE_HPP

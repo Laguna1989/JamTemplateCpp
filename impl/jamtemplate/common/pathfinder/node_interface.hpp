@@ -1,5 +1,4 @@
-#ifndef JAMTEMPLATE_NODE_INTERFACE_HPP
-#define JAMTEMPLATE_NODE_INTERFACE_HPP
+#pragma once
 
 #include <vector.hpp>
 #include <memory>
@@ -61,4 +60,3 @@ protected:
 
 } // namespace pathfinder
 } // namespace jt
-#endif // JAMTEMPLATE_NODE_INTERFACE_HPP

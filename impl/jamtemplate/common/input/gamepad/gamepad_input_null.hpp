@@ -1,5 +1,4 @@
-#ifndef JAMTEMPLATE_GAMEPAD_INPUT_NULL_HPP
-#define JAMTEMPLATE_GAMEPAD_INPUT_NULL_HPP
+#pragma once
 
 #include <input/gamepad/gamepad_interface.hpp>
 
@@ -18,5 +17,3 @@ public:
 };
 
 } // namespace jt
-
-#endif // JAMTEMPLATE_GAMEPAD_INPUT_NULL_HPP

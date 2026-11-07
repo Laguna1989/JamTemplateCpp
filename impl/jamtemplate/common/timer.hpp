@@ -1,5 +1,4 @@
-﻿#ifndef JAMTEMPLATE_TIMER_HPP
-#define JAMTEMPLATE_TIMER_HPP
+﻿#pragma once
 
 #include <game_object.hpp>
 #include <timer_interface.hpp>
@@ -47,4 +46,3 @@ private:
     void invokeCallback();
 };
 } // namespace jt
-#endif

@@ -1,6 +1,4 @@
-
-#ifndef JAMTEMPLATE_TILENODE_HPP
-#define JAMTEMPLATE_TILENODE_HPP
+#pragma once
 
 #include <graphics/drawable_interface.hpp>
 #include <pathfinder/node_interface.hpp>
@@ -29,5 +27,3 @@ private:
 
 } // namespace tilemap
 } // namespace jt
-
-#endif // JAMTEMPLATE_TILENODE_HPP

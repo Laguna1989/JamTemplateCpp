@@ -1,5 +1,4 @@
-#ifndef JAMTEMPLATE_INPUT_GET_INTERFACE_HPP
-#define JAMTEMPLATE_INPUT_GET_INTERFACE_HPP
+#pragma once
 
 #include <input/gamepad/gamepad_interface.hpp>
 #include <input/keyboard/keyboard_interface.hpp>
@@ -39,5 +38,3 @@ protected:
 };
 
 } // namespace jt
-
-#endif // JAMTEMPLATE_INPUT_GET_INTERFACE_HPP

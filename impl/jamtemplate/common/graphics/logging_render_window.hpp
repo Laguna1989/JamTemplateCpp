@@ -1,5 +1,4 @@
-#ifndef JAMTEMPLATE_LOGGING_RENDER_WINDOW_HPP
-#define JAMTEMPLATE_LOGGING_RENDER_WINDOW_HPP
+#pragma once
 
 #include <graphics/render_window_interface.hpp>
 #include <log/logger_interface.hpp>
@@ -28,5 +27,3 @@ private:
     LoggerInterface& m_logger;
 };
 } // namespace jt
-
-#endif // JAMTEMPLATE_LOGGING_RENDER_WINDOW_HPP

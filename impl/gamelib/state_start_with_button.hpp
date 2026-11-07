@@ -1,5 +1,4 @@
-#ifndef JAMTEMPLATE_STATE_START_WITH_BUTTON_HPP
-#define JAMTEMPLATE_STATE_START_WITH_BUTTON_HPP
+#pragma once
 
 #include <button.hpp>
 #include <game_state.hpp>
@@ -13,5 +12,3 @@ class StateStartWithButton : public jt::GameState {
 
     std::shared_ptr<jt::Button> m_button;
 };
-
-#endif // JAMTEMPLATE_STATE_START_WITH_BUTTON_HPP

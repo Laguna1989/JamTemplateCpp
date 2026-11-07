@@ -1,5 +1,4 @@
-﻿#ifndef JAMTEMPLATE_PARTICLE_SYSTEM_HPP
-#define JAMTEMPLATE_PARTICLE_SYSTEM_HPP
+﻿#pragma once
 
 #include <circular_buffer.hpp>
 #include <game_object.hpp>
@@ -80,5 +79,3 @@ private:
 };
 
 } // namespace jt
-
-#endif // JAMTEMPLATE_PARTICLE_SYSTEM_HPP

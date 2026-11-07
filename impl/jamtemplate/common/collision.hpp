@@ -33,8 +33,7 @@ it freely, subject to the following restrictions:
  * Created on 30 January 2009, 11:02
  */
 
-#ifndef COLLISION_H
-#define COLLISION_H
+#pragma once
 
 #include <math_helper.hpp>
 #include <rect.hpp>
@@ -117,5 +116,3 @@ private:
     }
 };
 } // namespace jt
-
-#endif /* COLLISION_H */

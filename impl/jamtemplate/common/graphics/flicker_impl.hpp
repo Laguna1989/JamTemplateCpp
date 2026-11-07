@@ -1,5 +1,4 @@
-#ifndef JAMTEMPLATE_FLICKER_IMPL_HPP
-#define JAMTEMPLATE_FLICKER_IMPL_HPP
+#pragma once
 
 namespace jt {
 
@@ -18,5 +17,3 @@ private:
 };
 
 } // namespace jt
-
-#endif // JAMTEMPLATE_FLICKER_IMPL_HPP

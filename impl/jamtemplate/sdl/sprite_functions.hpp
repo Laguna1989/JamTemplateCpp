@@ -1,5 +1,4 @@
-﻿#ifndef JAMTEMPLATE_SPRITEFUNCTIONS_HPP
-#define JAMTEMPLATE_SPRITEFUNCTIONS_HPP
+﻿#pragma once
 
 #include <color/color.hpp>
 #include <render_target_layer.hpp>
@@ -35,5 +34,3 @@ std::shared_ptr<SDL_Texture> makeRing(
 } // namespace SpriteFunctions
 
 } // namespace jt
-
-#endif

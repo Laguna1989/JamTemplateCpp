@@ -1,5 +1,4 @@
-﻿#ifndef JAMTEMPLATE_RECT_LIB_HPP
-#define JAMTEMPLATE_RECT_LIB_HPP
+﻿#pragma once
 
 #include <SFML/Graphics/Rect.hpp>
 #include <rect.hpp>
@@ -13,5 +12,3 @@ sf::IntRect toLib(jt::Recti const& rect) noexcept;
 jt::Recti fromLib(sf::IntRect const& rect) noexcept;
 
 } // namespace jt
-
-#endif

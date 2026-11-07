@@ -1,5 +1,4 @@
-﻿#ifndef JAMTEMPLATE_CONVERSIONS_HPP
-#define JAMTEMPLATE_CONVERSIONS_HPP
+﻿#pragma once
 
 #include <vector.hpp>
 #include <box2d/math_types.h>
@@ -30,5 +29,3 @@ jt::Vector2f vec(tson::Vector2i const& v) noexcept;
 
 } // namespace Conversion
 } // namespace jt
-
-#endif // !JAMTEMPLATE_CONVERSIONS_HPP

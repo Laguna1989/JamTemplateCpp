@@ -1,5 +1,4 @@
-#ifndef JAMTEMPLATE_CACHE_IMPL_HPP
-#define JAMTEMPLATE_CACHE_IMPL_HPP
+#pragma once
 
 #include <cache/cache_interface.hpp>
 
@@ -18,4 +17,3 @@ private:
 };
 
 } // namespace jt
-#endif // JAMTEMPLATE_CACHE_IMPL_HPP

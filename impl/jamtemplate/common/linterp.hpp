@@ -1,5 +1,4 @@
-#ifndef JAMTEMPLATE_LINTERP_HPP
-#define JAMTEMPLATE_LINTERP_HPP
+#pragma once
 
 #include <assert.h>
 #include <cmath>
@@ -32,5 +31,3 @@ template <typename T>
 
 } // namespace Lerp
 } // namespace jt
-
-#endif // JAMTEMPLATE_LINTERP_HPP

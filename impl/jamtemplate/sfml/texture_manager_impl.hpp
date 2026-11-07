@@ -1,5 +1,4 @@
-#ifndef JAMTEMPLATE_TEXTURE_MANAGER_IMPL_HPP
-#define JAMTEMPLATE_TEXTURE_MANAGER_IMPL_HPP
+#pragma once
 
 #include <SFML/Graphics.hpp>
 #include <texture_manager_interface.hpp>
@@ -20,5 +19,3 @@ private:
     bool containsTexture(std::string const& str) const;
 };
 } // namespace jt
-
-#endif // JAMTEMPLATE_TEXTURE_MANAGER_IMPL_HPP

@@ -1,5 +1,4 @@
-#ifndef JAMTEMPLATE_EASE_CIRC
-#define JAMTEMPLATE_EASE_CIRC
+#pragma once
 
 namespace jt {
 namespace ease {
@@ -12,5 +11,3 @@ float easeInOut(float t, float b, float c, float d);
 } // namespace circ
 } // namespace ease
 } // namespace jt
-
-#endif

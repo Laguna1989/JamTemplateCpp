@@ -1,5 +1,4 @@
-#ifndef JAMTEMPLATE_SDL_2_INCLUDE_HPP
-#define JAMTEMPLATE_SDL_2_INCLUDE_HPP
+#pragma once
 
 #if JT_ENABLE_WEB
 #include <SDL2/SDL.h>
@@ -8,5 +7,3 @@
 #include "SDL.h"
 #include "SDL_ttf.h"
 #endif
-
-#endif // JAMTEMPLATE_SDL_2_INCLUDE_HPP

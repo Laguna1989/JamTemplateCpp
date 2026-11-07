@@ -1,5 +1,4 @@
-﻿#ifndef JAMTEMPLATE_VECTOR_HPP_INCLUDE_GUARD
-#define JAMTEMPLATE_VECTOR_HPP_INCLUDE_GUARD
+﻿#pragma once
 
 #include <iosfwd>
 
@@ -97,5 +96,3 @@ jt::Vector2u& operator-=(jt::Vector2u& lhs, jt::Vector2u const& other);
 std::ostream& operator<<(std::ostream& os, Vector2u const& vec);
 
 } // namespace jt
-
-#endif

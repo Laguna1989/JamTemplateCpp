@@ -1,5 +1,4 @@
-#ifndef JAMTEMPLATE_WAVES_HPP
-#define JAMTEMPLATE_WAVES_HPP
+#pragma once
 
 #include <animation.hpp>
 #include <game_object.hpp>
@@ -28,5 +27,3 @@ private:
 };
 
 } // namespace jt
-
-#endif // JAMTEMPLATE_WAVES_HPP

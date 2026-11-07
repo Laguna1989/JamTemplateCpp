@@ -1,5 +1,4 @@
-#ifndef JAMTEMPLATE_OBJECTLAYER_HPP
-#define JAMTEMPLATE_OBJECTLAYER_HPP
+#pragma once
 
 #include <tilemap/info_rect.hpp>
 #include <map>
@@ -29,5 +28,3 @@ private:
 
 } // namespace tilemap
 } // namespace jt
-
-#endif // JAMTEMPLATE_OBJECTLAYER_HPP

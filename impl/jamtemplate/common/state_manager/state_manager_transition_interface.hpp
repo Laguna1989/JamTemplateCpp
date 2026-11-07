@@ -1,5 +1,4 @@
-#ifndef JAMTEMPLATE_STATE_MANAGER_TRANSITION_INTERFACE_HPP
-#define JAMTEMPLATE_STATE_MANAGER_TRANSITION_INTERFACE_HPP
+#pragma once
 
 #include <graphics/render_target_interface.hpp>
 #include <memory>
@@ -41,5 +40,3 @@ protected:
 };
 
 } // namespace jt
-
-#endif // JAMTEMPLATE_STATE_MANAGER_TRANSITION_INTERFACE_HPP

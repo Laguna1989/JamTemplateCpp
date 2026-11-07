@@ -1,5 +1,4 @@
-#ifndef JAMTEMPLATE_NODELAYER_HPP
-#define JAMTEMPLATE_NODELAYER_HPP
+#pragma once
 
 #include <texture_manager_interface.hpp>
 #include <tilemap/tile_node.hpp>
@@ -48,4 +47,3 @@ private:
 
 } // namespace tilemap
 } // namespace jt
-#endif // JAMTEMPLATE_NODELAYER_HPP

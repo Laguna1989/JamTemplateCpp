@@ -1,5 +1,4 @@
-﻿#ifndef JAMTEMPLATE_MATHHELPER_HPP
-#define JAMTEMPLATE_MATHHELPER_HPP
+﻿#pragma once
 
 #include <rect.hpp>
 #include <vector.hpp>
@@ -223,5 +222,3 @@ constexpr jt::Vector2f castToInteger(jt::Vector2f const& input) noexcept
 
 } // namespace MathHelper
 } // namespace jt
-
-#endif

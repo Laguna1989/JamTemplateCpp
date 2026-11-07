@@ -1,5 +1,4 @@
-#ifndef JAMTEMPLATE_VECTOR_FACTORY_HPP
-#define JAMTEMPLATE_VECTOR_FACTORY_HPP
+#pragma once
 
 #include <vector.hpp>
 
@@ -23,4 +22,3 @@ struct VectorFactory {
 };
 
 } // namespace jt
-#endif // JAMTEMPLATE_VECTOR_FACTORY_HPP

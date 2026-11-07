@@ -1,5 +1,4 @@
-#ifndef JAMTEMPLATE_FLASH_INTERFACE_HPP
-#define JAMTEMPLATE_FLASH_INTERFACE_HPP
+#pragma once
 
 #include <color/color.hpp>
 #include <render_target_layer.hpp>
@@ -33,5 +32,3 @@ private:
 };
 
 } // namespace jt
-
-#endif // JAMTEMPLATE_FLASH_INTERFACE_HPP

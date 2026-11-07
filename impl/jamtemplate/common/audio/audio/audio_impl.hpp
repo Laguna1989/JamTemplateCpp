@@ -1,5 +1,4 @@
-#ifndef JAMTEMPLATE_AUDIO_IMPL_HPP
-#define JAMTEMPLATE_AUDIO_IMPL_HPP
+#pragma once
 
 #include <audio/audio/audio_interface.hpp>
 #include <fmod.hpp>
@@ -35,5 +34,3 @@ private:
     std::map<std::string, FMOD::Studio::EventInstance*> permanentSounds;
 };
 } // namespace jt
-
-#endif // JAMTEMPLATE_AUDIO_IMPL_HPP

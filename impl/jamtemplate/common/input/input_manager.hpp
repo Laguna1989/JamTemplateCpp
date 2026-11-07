@@ -1,5 +1,4 @@
-﻿#ifndef JAMTEMPLATE_INPUTMANAGER_HPP
-#define JAMTEMPLATE_INPUTMANAGER_HPP
+﻿#pragma once
 
 #include <input/input_manager_interface.hpp>
 #include <memory>
@@ -29,5 +28,3 @@ private:
 };
 
 } // namespace jt
-
-#endif

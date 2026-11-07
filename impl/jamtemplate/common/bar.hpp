@@ -1,5 +1,4 @@
-﻿#ifndef JAMTEMPLATE_BAR_HPP
-#define JAMTEMPLATE_BAR_HPP
+﻿#pragma once
 
 #include <graphics/drawable_impl.hpp>
 #include <memory>
@@ -95,5 +94,3 @@ private:
 };
 
 } // namespace jt
-
-#endif

@@ -1,5 +1,4 @@
-﻿#ifndef JAMTEMPLATE_TWEENPOSITION_HPP
-#define JAMTEMPLATE_TWEENPOSITION_HPP
+﻿#pragma once
 
 #include <tweens/tween_base.hpp>
 #include <vector.hpp>
@@ -24,5 +23,3 @@ private:
 };
 
 } // namespace jt
-
-#endif

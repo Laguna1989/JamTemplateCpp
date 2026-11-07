@@ -1,5 +1,4 @@
-﻿#ifndef JAMTEMPLATE_RANDOM_HPP
-#define JAMTEMPLATE_RANDOM_HPP
+﻿#pragma once
 
 #include <color/color.hpp>
 #include <rect.hpp>
@@ -76,4 +75,3 @@ private:
 };
 
 } // namespace jt
-#endif

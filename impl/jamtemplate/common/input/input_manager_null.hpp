@@ -1,5 +1,4 @@
-#ifndef JAMTEMPLATE_INPUT_MANAGER_NULL_HPP
-#define JAMTEMPLATE_INPUT_MANAGER_NULL_HPP
+#pragma once
 
 #include <input/input_manager_interface.hpp>
 
@@ -22,4 +21,3 @@ private:
     std::shared_ptr<GamepadInterface> m_gamepad { nullptr };
 };
 } // namespace jt
-#endif // JAMTEMPLATE_INPUT_MANAGER_NULL_HPP

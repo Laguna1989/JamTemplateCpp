@@ -1,5 +1,4 @@
-#ifndef JAMTEMPLATE_GAMEPAD_DEFINES_HPP
-#define JAMTEMPLATE_GAMEPAD_DEFINES_HPP
+#pragma once
 
 #include <enum.h>
 #include <enum_macros.h>
@@ -17,5 +16,3 @@ std::vector<jt::GamepadAxisCode> getAllAxis();
 std::vector<jt::GamepadButtonCode> getAllGamepadButtons();
 
 } // namespace jt
-
-#endif // JAMTEMPLATE_GAMEPAD_DEFINES_HPP

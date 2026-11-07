@@ -1,5 +1,4 @@
-#ifndef JAMTEMPLATE_COLOR_FACTORY_HPP
-#define JAMTEMPLATE_COLOR_FACTORY_HPP
+#pragma once
 
 #include <color/color.hpp>
 
@@ -44,5 +43,3 @@ struct ColorFactory {
 };
 
 } // namespace jt
-
-#endif // JAMTEMPLATE_COLOR_FACTORY_HPP

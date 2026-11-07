@@ -1,5 +1,4 @@
-#ifndef JAMTEMPLATE_LOG_HISTORY_HPP
-#define JAMTEMPLATE_LOG_HISTORY_HPP
+#pragma once
 
 #include <log/log_history_interface.hpp>
 #include <log/log_target_base.hpp>
@@ -19,4 +18,3 @@ private:
     void doLog(LogEntry const& entry) override;
 };
 } // namespace jt
-#endif // JAMTEMPLATE_LOG_HISTORY_HPP

@@ -1,5 +1,4 @@
-﻿#ifndef JAMTEMPLATE_CAMERA_HPP
-#define JAMTEMPLATE_CAMERA_HPP
+﻿#pragma once
 
 #include <cam_interface.hpp>
 #include <functional>
@@ -45,5 +44,3 @@ private:
     virtual void resetShake();
 };
 } // namespace jt
-
-#endif

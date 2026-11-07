@@ -1,5 +1,4 @@
-#ifndef JAMTEMPLATE_TILESON_LOADER_HPP
-#define JAMTEMPLATE_TILESON_LOADER_HPP
+#pragma once
 
 #include <shape.hpp>
 #include <sprite.hpp>
@@ -68,5 +67,3 @@ private:
 
 } // namespace tilemap
 } // namespace jt
-
-#endif // JAMTEMPLATE_TILESON_LOADER_HPP

@@ -1,6 +1,4 @@
-
-#ifndef JAMTEMPLATE_DRAWABLE_IMPL_SDL_HPP
-#define JAMTEMPLATE_DRAWABLE_IMPL_SDL_HPP
+#pragma once
 
 #include <graphics/drawable_impl.hpp>
 
@@ -19,5 +17,3 @@ protected:
 };
 
 } // namespace jt
-
-#endif // JAMTEMPLATE_DRAWABLE_IMPL_SDL_HPP

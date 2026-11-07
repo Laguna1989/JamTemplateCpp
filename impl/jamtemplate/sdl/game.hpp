@@ -1,5 +1,4 @@
-﻿#ifndef JAMTEMPLATE_GAME_HPP
-#define JAMTEMPLATE_GAME_HPP
+﻿#pragma once
 
 #include <game_base.hpp>
 #include <memory>
@@ -18,4 +17,3 @@ public:
 };
 
 } // namespace jt
-#endif

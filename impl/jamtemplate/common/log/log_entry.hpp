@@ -1,5 +1,4 @@
-#ifndef JAMTEMPLATE_LOG_ENTRY_HPP
-#define JAMTEMPLATE_LOG_ENTRY_HPP
+#pragma once
 
 #include <log/log_level.hpp>
 #include <string>
@@ -16,5 +15,3 @@ struct LogEntry {
 };
 
 } // namespace jt
-
-#endif // JAMTEMPLATE_LOG_ENTRY_HPP

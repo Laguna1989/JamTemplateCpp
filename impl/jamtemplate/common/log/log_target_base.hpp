@@ -1,5 +1,4 @@
-#ifndef JAMTEMPLATE_LOG_TARGET_BASE_HPP
-#define JAMTEMPLATE_LOG_TARGET_BASE_HPP
+#pragma once
 
 #include <log/log_target_interface.hpp>
 
@@ -21,5 +20,3 @@ private:
 };
 
 } // namespace jt
-
-#endif // JAMTEMPLATE_LOG_TARGET_BASE_HPP

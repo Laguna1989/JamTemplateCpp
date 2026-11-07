@@ -1,5 +1,4 @@
-﻿#ifndef JAMTEMPLATE_INPUTMANAGERINTERFACE_HPP
-#define JAMTEMPLATE_INPUTMANAGERINTERFACE_HPP
+﻿#pragma once
 
 #include <input/input_get_interface.hpp>
 #include <input/input_set_interface.hpp>
@@ -10,4 +9,3 @@ namespace jt {
 class InputManagerInterface : public InputSetInterface, public InputGetInterface { };
 
 } // namespace jt
-#endif

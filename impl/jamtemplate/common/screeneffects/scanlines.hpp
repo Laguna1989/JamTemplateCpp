@@ -1,5 +1,4 @@
-#ifndef JAMTEMPLATE_SCANLINES_HPP
-#define JAMTEMPLATE_SCANLINES_HPP
+#pragma once
 
 #include <color/color.hpp>
 #include <game_object.hpp>
@@ -31,5 +30,3 @@ private:
 };
 
 } // namespace jt
-
-#endif // JAMTEMPLATE_SCANLINES_HPP

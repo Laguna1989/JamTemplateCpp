@@ -1,5 +1,4 @@
-﻿#ifndef GAME_GAMEPROPERTIES_HPP
-#define GAME_GAMEPROPERTIES_HPP
+﻿#pragma once
 
 #include <color/color.hpp>
 #include <color/palette.hpp>
@@ -44,5 +43,3 @@ public:
     static int PhysicSubSteps();
     static jt::Vector2f PlayerSize();
 };
-
-#endif

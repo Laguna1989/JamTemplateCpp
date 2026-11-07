@@ -1,5 +1,4 @@
-﻿#ifndef JAMTEMPLATE_TWEENROTATION_HPP
-#define JAMTEMPLATE_TWEENROTATION_HPP
+﻿#pragma once
 
 #include <tweens/tween_base.hpp>
 
@@ -22,5 +21,3 @@ private:
         std::shared_ptr<DrawableInterface> const& sptr, float agePercent) const override;
 };
 } // namespace jt
-
-#endif

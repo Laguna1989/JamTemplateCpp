@@ -1,5 +1,4 @@
-#ifndef JAMTEMPLATE_LOG_INTERFACE_HPP
-#define JAMTEMPLATE_LOG_INTERFACE_HPP
+#pragma once
 
 #include <log/log_level.hpp>
 #include <memory>
@@ -76,5 +75,3 @@ protected:
     LoggerInterface() = default;
 };
 } // namespace jt
-
-#endif // JAMTEMPLATE_LOG_INTERFACE_HPP

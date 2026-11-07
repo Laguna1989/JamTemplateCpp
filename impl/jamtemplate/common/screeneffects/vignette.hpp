@@ -1,5 +1,4 @@
-#ifndef JAMTEMPLATE_VIGNETTE_HPP
-#define JAMTEMPLATE_VIGNETTE_HPP
+#pragma once
 
 #include <color/color.hpp>
 #include <game_object.hpp>
@@ -27,4 +26,3 @@ private:
     jt::Vector2f m_size;
 };
 } // namespace jt
-#endif // JAMTEMPLATE_VIGNETTE_HPP

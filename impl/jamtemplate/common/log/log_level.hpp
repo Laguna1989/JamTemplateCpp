@@ -1,5 +1,4 @@
-#ifndef JAMTEMPLATE_LOG_LEVEL_HPP
-#define JAMTEMPLATE_LOG_LEVEL_HPP
+#pragma once
 
 namespace jt {
 
@@ -17,5 +16,3 @@ enum class LogLevel {
 };
 
 } // namespace jt
-
-#endif // JAMTEMPLATE_LOG_LEVEL_HPP

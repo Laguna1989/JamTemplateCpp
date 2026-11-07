@@ -1,5 +1,4 @@
-#ifndef JAMTEMPLATE_MOUSE_DEFINES_HPP
-#define JAMTEMPLATE_MOUSE_DEFINES_HPP
+#pragma once
 
 #include <array>
 #include <cstdint>
@@ -26,5 +25,3 @@ constexpr inline std::uint8_t MouseButtonCodeSize
 std::array<jt::MouseButtonCode, MouseButtonCodeSize> getAllMouseButtons();
 
 } // namespace jt
-
-#endif // JAMTEMPLATE_MOUSE_DEFINES_HPP

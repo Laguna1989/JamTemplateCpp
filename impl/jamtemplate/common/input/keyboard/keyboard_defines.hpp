@@ -1,5 +1,4 @@
-﻿#ifndef JAMTEMPLATE_KEYBOARD_DEFINES_HPP
-#define JAMTEMPLATE_KEYBOARD_DEFINES_HPP
+﻿#pragma once
 
 #include <enum.h>
 #include <enum_macros.h>
@@ -113,5 +112,3 @@ BETTER_ENUM(KeyCode, int,
 std::vector<jt::KeyCode> getAllKeys();
 
 } // namespace jt
-
-#endif // JAMTEMPLATE_KEYBOARD_DEFINES_HPP

@@ -1,5 +1,4 @@
-#ifndef INC_JAMTEMPLATE_WIND_PARTICLES_HPP
-#define INC_JAMTEMPLATE_WIND_PARTICLES_HPP
+#pragma once
 
 #include "game_object.hpp"
 #include "shape.hpp"
@@ -29,5 +28,3 @@ private:
 };
 
 } // namespace jt
-
-#endif // INC_JAMTEMPLATE_WIND_PARTICLES_HPP

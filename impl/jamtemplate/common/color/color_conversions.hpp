@@ -1,5 +1,4 @@
-#ifndef JAMTEMPLATE_COLOR_CONVERSIONS_HPP
-#define JAMTEMPLATE_COLOR_CONVERSIONS_HPP
+#pragma once
 
 #include <color/color.hpp>
 #include <cstdint>
@@ -30,4 +29,3 @@ struct ColorConversions {
 };
 
 } // namespace jt
-#endif // JAMTEMPLATE_COLOR_CONVERSIONS_HPP

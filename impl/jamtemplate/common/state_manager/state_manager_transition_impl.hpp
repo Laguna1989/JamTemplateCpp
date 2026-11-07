@@ -1,5 +1,4 @@
-#ifndef JAMTEMPLATE_STATE_MANAGER_TRANSITION_IMPL_HPP
-#define JAMTEMPLATE_STATE_MANAGER_TRANSITION_IMPL_HPP
+#pragma once
 
 #include <state_manager/state_manager_interface.hpp>
 
@@ -34,5 +33,3 @@ private:
 };
 
 } // namespace jt
-
-#endif // JAMTEMPLATE_STATE_MANAGER_TRANSITION_IMPL_HPP

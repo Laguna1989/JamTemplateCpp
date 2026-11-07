@@ -1,5 +1,4 @@
-﻿#ifndef JAMTEMPLATE_SHAPE_HPP
-#define JAMTEMPLATE_SHAPE_HPP
+﻿#pragma once
 
 #include <drawable_impl_sdl.hpp>
 #include <rect.hpp>
@@ -49,5 +48,3 @@ private:
     void setSDLColor(jt::Color const& col) const;
 };
 } // namespace jt
-
-#endif

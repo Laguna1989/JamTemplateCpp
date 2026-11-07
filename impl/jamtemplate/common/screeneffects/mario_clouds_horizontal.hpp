@@ -1,5 +1,4 @@
-#ifndef FRUITLOVINMONKEYPIRATES_MARIO_CLOUDS_HORIZONTAL_HPP
-#define FRUITLOVINMONKEYPIRATES_MARIO_CLOUDS_HORIZONTAL_HPP
+#pragma once
 
 #include <animation.hpp>
 #include <game_object.hpp>
@@ -40,5 +39,3 @@ private:
 };
 
 } // namespace jt
-
-#endif // FRUITLOVINMONKEYPIRATES_MARIO_CLOUDS_HORIZONTAL_HPP

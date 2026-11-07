@@ -1,5 +1,4 @@
-﻿#ifndef JAMTEMPLATE_SPRITE_HPP
-#define JAMTEMPLATE_SPRITE_HPP
+﻿#pragma once
 
 #include <SFML/Graphics.hpp>
 #include <color/color.hpp>
@@ -68,5 +67,3 @@ private:
 };
 
 } // namespace jt
-
-#endif

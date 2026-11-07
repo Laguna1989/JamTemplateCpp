@@ -1,5 +1,4 @@
-#ifndef JAMTEMPLATE_CONTROL_COMMAND_COMPOSITE_HPP
-#define JAMTEMPLATE_CONTROL_COMMAND_COMPOSITE_HPP
+#pragma once
 
 #include <input/control_commands/control_command_interface.hpp>
 #include <memory>
@@ -20,5 +19,3 @@ private:
 };
 
 } // namespace jt
-
-#endif // JAMTEMPLATE_CONTROL_COMMAND_COMPOSITE_HPP

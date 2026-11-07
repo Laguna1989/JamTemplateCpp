@@ -1,5 +1,4 @@
-#ifndef JAMTEMPLATE_LOGGER_NULL_HPP
-#define JAMTEMPLATE_LOGGER_NULL_HPP
+#pragma once
 
 #include <log/logger_interface.hpp>
 
@@ -24,5 +23,3 @@ public:
 };
 } // namespace null_objects
 } // namespace jt
-
-#endif // JAMTEMPLATE_LOGGER_NULL_HPP

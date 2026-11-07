@@ -1,5 +1,4 @@
-#ifndef JAMTEMPLATE_LINE_HPP
-#define JAMTEMPLATE_LINE_HPP
+#pragma once
 
 #include <SFML/Graphics.hpp>
 #include <drawable_impl_sfml.hpp>
@@ -54,5 +53,3 @@ private:
 };
 
 } // namespace jt
-
-#endif // JAMTEMPLATE_LINE_HPP

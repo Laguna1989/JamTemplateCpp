@@ -1,5 +1,4 @@
-#ifndef JAMTEMPLATE_LOGGING_STATE_MANAGER_HPP
-#define JAMTEMPLATE_LOGGING_STATE_MANAGER_HPP
+#pragma once
 
 #include <log/logger_interface.hpp>
 #include <state_manager/state_manager_interface.hpp>
@@ -29,5 +28,3 @@ private:
 };
 
 } // namespace jt
-
-#endif // JAMTEMPLATE_LOGGING_STATE_MANAGER_HPP

@@ -1,5 +1,4 @@
-﻿#ifndef JAMTEMPLATE_DRAWABLEIMPL_HPP
-#define JAMTEMPLATE_DRAWABLEIMPL_HPP
+﻿#pragma once
 
 #include <graphics/drawable_interface.hpp>
 #include <graphics/flash_impl.hpp>
@@ -133,5 +132,3 @@ private:
 };
 
 } // namespace jt
-
-#endif // JAMTEMPLATE_DRAWABLEIMPL_HPP

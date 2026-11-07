@@ -1,5 +1,4 @@
-#ifndef JAMTEMPLATE_COLOR_MODIFICATIONS_HPP
-#define JAMTEMPLATE_COLOR_MODIFICATIONS_HPP
+#pragma once
 
 #include <color/color.hpp>
 
@@ -42,5 +41,3 @@ struct ColorModifications {
 };
 
 } // namespace jt
-
-#endif // JAMTEMPLATE_COLOR_MODIFICATIONS_HPP

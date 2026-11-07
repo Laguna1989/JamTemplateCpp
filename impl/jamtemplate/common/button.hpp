@@ -1,5 +1,4 @@
-﻿#ifndef JAMTEMPLATE_BUTTON_HPP
-#define JAMTEMPLATE_BUTTON_HPP
+﻿#pragma once
 
 #include <game_object.hpp>
 #include <vector.hpp>
@@ -91,5 +90,3 @@ private:
     void doUpdate(float elapsed) override;
 };
 } // namespace jt
-
-#endif

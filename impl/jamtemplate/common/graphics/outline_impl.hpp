@@ -1,5 +1,4 @@
-#ifndef JAMTEMPLATE_OUTLINE_IMPL_HPP
-#define JAMTEMPLATE_OUTLINE_IMPL_HPP
+#pragma once
 
 #include <color/color.hpp>
 #include <render_target_layer.hpp>
@@ -31,5 +30,3 @@ private:
 };
 
 } // namespace jt
-
-#endif // JAMTEMPLATE_OUTLINE_IMPL_HPP

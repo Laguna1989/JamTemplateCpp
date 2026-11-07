@@ -1,5 +1,4 @@
-#ifndef JAMTEMPLATE_TWEEN_INTERFACE_HPP
-#define JAMTEMPLATE_TWEEN_INTERFACE_HPP
+#pragma once
 
 namespace jt {
 class TweenInterface {
@@ -26,5 +25,3 @@ protected:
     TweenInterface() = default;
 };
 } // namespace jt
-
-#endif // JAMTEMPLATE_TWEEN_INTERFACE_HPP

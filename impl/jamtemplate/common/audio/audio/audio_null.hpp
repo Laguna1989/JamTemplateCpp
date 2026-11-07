@@ -1,5 +1,4 @@
-#ifndef JAMTEMPLATE_AUDIO_NULL_HPP
-#define JAMTEMPLATE_AUDIO_NULL_HPP
+#pragma once
 
 #include <audio/audio/audio_interface.hpp>
 
@@ -24,5 +23,3 @@ public:
 } // namespace null_objects
 
 } // namespace jt
-
-#endif // JAMTEMPLATE_AUDIO_NULL_HPP

@@ -1,5 +1,4 @@
-#ifndef JAMTEMPLATE_GFX_INTERFACE_HPP
-#define JAMTEMPLATE_GFX_INTERFACE_HPP
+#pragma once
 
 #include <cam_interface.hpp>
 #include <graphics/render_target_interface.hpp>
@@ -58,5 +57,3 @@ protected:
 };
 
 } // namespace jt
-
-#endif // JAMTEMPLATE_GFX_INTERFACE_HPP

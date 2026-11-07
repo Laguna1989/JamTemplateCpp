@@ -1,5 +1,4 @@
-#ifndef JAMTEMPLATE_CONSOLE_HPP
-#define JAMTEMPLATE_CONSOLE_HPP
+#pragma once
 
 #include <game_object.hpp>
 #include <log/log_entry.hpp>
@@ -45,5 +44,3 @@ private:
 };
 
 } // namespace jt
-
-#endif // JAMTEMPLATE_CONSOLE_HPP

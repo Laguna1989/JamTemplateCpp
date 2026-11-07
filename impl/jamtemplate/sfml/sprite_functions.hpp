@@ -1,5 +1,4 @@
-﻿#ifndef JAMTEMPLATE_SPRITEFUNCTIONS_HPP
-#define JAMTEMPLATE_SPRITEFUNCTIONS_HPP
+﻿#pragma once
 
 #include <SFML/Graphics.hpp>
 #include <cstdint>
@@ -20,5 +19,3 @@ sf::Image makeRing(unsigned int w);
 } // namespace SpriteFunctions
 
 } // namespace jt
-
-#endif

@@ -1,5 +1,4 @@
-#ifndef JAMTEMPLATE_ACTION_COMMAND_MANAGER_HPP
-#define JAMTEMPLATE_ACTION_COMMAND_MANAGER_HPP
+#pragma once
 
 #include <action_commands/action_command_manager_interface.hpp>
 #include <log/logger_interface.hpp>
@@ -24,5 +23,3 @@ private:
     std::vector<std::string> getArguments(std::vector<std::string> const& args) const;
 };
 } // namespace jt
-
-#endif // JAMTEMPLATE_ACTION_COMMAND_MANAGER_HPP

@@ -1,5 +1,4 @@
-#ifndef JAMTEMPLATE_CACHE_INTERFACE_HPP
-#define JAMTEMPLATE_CACHE_INTERFACE_HPP
+#pragma once
 
 #include <log/log_history_interface.hpp>
 #include <tilemap/tilemap_cache_interface.hpp>
@@ -30,5 +29,3 @@ protected:
 };
 
 } // namespace jt
-
-#endif // JAMTEMPLATE_CACHE_INTERFACE_HPP

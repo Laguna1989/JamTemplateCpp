@@ -1,5 +1,4 @@
-#ifndef JAMTEMPLATE_GIT_VERSION_HPP
-#define JAMTEMPLATE_GIT_VERSION_HPP
+#pragma once
 
 #include <string>
 
@@ -13,5 +12,3 @@ public:
 };
 
 } // namespace jt
-
-#endif // JAMTEMPLATE_GIT_VERSION_HPP

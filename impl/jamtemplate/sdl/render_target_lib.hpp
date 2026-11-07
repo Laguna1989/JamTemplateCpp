@@ -1,5 +1,4 @@
-#ifndef JAMTEMPLATE_RENDER_TARGET_LIB_HPP
-#define JAMTEMPLATE_RENDER_TARGET_LIB_HPP
+#pragma once
 
 #include <graphics/render_target_interface.hpp>
 #include <sdl_2_include.hpp>
@@ -21,5 +20,3 @@ public:
     std::map<int, std::shared_ptr<SDL_Texture>> m_textures;
 };
 } // namespace jt
-
-#endif // JAMTEMPLATE_RENDER_TARGET_LIB_HPP

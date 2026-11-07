@@ -1,5 +1,4 @@
-﻿#ifndef JAMTEMPLATE_COLOR_HPP
-#define JAMTEMPLATE_COLOR_HPP
+﻿#pragma once
 
 #include <cstdint>
 #include <iosfwd>
@@ -39,5 +38,3 @@ constexpr inline jt::Color Transparent { 0, 0, 0, 0 }; ///< Transparent (black) 
 } // namespace colors
 
 } // namespace jt
-
-#endif

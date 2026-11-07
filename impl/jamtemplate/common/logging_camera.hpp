@@ -1,5 +1,4 @@
-#ifndef JAMTEMPLATE_LOGGING_CAMERA_HPP
-#define JAMTEMPLATE_LOGGING_CAMERA_HPP
+#pragma once
 
 #include <cam_interface.hpp>
 #include <log/logger_interface.hpp>
@@ -24,4 +23,3 @@ private:
     LoggerInterface& m_logger;
 };
 } // namespace jt
-#endif // JAMTEMPLATE_LOGGING_CAMERA_HPP

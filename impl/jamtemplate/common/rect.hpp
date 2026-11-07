@@ -1,5 +1,4 @@
-﻿#ifndef JAMTEMPLATE_RECT_HPP_INCLUDE_GUARD
-#define JAMTEMPLATE_RECT_HPP_INCLUDE_GUARD
+﻿#pragma once
 
 #include <iosfwd>
 
@@ -61,5 +60,3 @@ std::ostream& operator<<(std::ostream& os, Rectf const& rect);
 std::ostream& operator<<(std::ostream& os, Recti const& rect);
 
 } // namespace jt
-
-#endif

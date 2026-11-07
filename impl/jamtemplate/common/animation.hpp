@@ -1,5 +1,4 @@
-﻿#ifndef JAMTEMPLATE_ANIMATION_HPP
-#define JAMTEMPLATE_ANIMATION_HPP
+﻿#pragma once
 
 #include <graphics/drawable_impl.hpp>
 #include <map>
@@ -204,5 +203,3 @@ private:
 };
 
 } // namespace jt
-
-#endif

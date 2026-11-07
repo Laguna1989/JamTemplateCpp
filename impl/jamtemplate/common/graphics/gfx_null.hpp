@@ -1,5 +1,4 @@
-#ifndef JAMTEMPLATE_GFX_NULL_HPP
-#define JAMTEMPLATE_GFX_NULL_HPP
+#pragma once
 
 #include <camera.hpp>
 #include <graphics/gfx_interface.hpp>
@@ -35,5 +34,3 @@ private:
 
 } // namespace null_objects
 } // namespace jt
-
-#endif // JAMTEMPLATE_GFX_NULL_HPP

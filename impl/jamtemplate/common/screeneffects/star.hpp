@@ -1,5 +1,4 @@
-#ifndef INC_1HGJ379_STAR_HPP
-#define INC_1HGJ379_STAR_HPP
+#pragma once
 
 #include "sprite.hpp"
 #include <game_object.hpp>
@@ -32,5 +31,3 @@ private:
 };
 
 } // namespace jt
-
-#endif // INC_1HGJ379_STAR_HPP

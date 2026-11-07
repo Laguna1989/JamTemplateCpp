@@ -1,5 +1,4 @@
-#ifndef JAMTEMPLATE_LOG_HPP
-#define JAMTEMPLATE_LOG_HPP
+#pragma once
 
 #include <log/log_entry.hpp>
 #include <log/logger_interface.hpp>
@@ -30,5 +29,3 @@ private:
     LogLevel m_logLevel { LogLevel::Verbose };
 };
 } // namespace jt
-
-#endif // JAMTEMPLATE_LOG_HPP

@@ -1,5 +1,4 @@
-#ifndef JAMTEMPLATE_TILE_HPP
-#define JAMTEMPLATE_TILE_HPP
+#pragma once
 
 #include <vector.hpp>
 
@@ -15,5 +14,3 @@ struct TileInfo {
 } // namespace tilemap
 
 } // namespace jt
-
-#endif // JAMTEMPLATE_TILE_HPP

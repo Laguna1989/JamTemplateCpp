@@ -1,5 +1,4 @@
-﻿#ifndef JAMTEMPLATE_CAMINTERFACE_HPP
-#define JAMTEMPLATE_CAMINTERFACE_HPP
+﻿#pragma once
 
 #include <vector.hpp>
 
@@ -59,4 +58,3 @@ protected:
     CamInterface() = default;
 };
 } // namespace jt
-#endif

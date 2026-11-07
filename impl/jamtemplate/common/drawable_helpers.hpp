@@ -1,5 +1,4 @@
-﻿#ifndef JAMTEMPLATE_DRAWABLE_HELPER_HPP
-#define JAMTEMPLATE_DRAWABLE_HELPER_HPP
+﻿#pragma once
 
 #include <color/color.hpp>
 #include <render_target_layer.hpp>
@@ -54,5 +53,3 @@ std::shared_ptr<jt::Sprite> createVignette(
 } // namespace dh
 
 } // namespace jt
-
-#endif

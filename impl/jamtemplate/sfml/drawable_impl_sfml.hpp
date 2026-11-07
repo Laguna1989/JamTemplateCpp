@@ -1,5 +1,4 @@
-#ifndef JAMTEMPLATE_DRAWABLE_IMPL_SFML_HPP
-#define JAMTEMPLATE_DRAWABLE_IMPL_SFML_HPP
+#pragma once
 
 #include <SFML/Graphics.hpp>
 #include <graphics/drawable_impl.hpp>
@@ -18,5 +17,3 @@ protected:
 };
 
 } // namespace jt
-
-#endif // JAMTEMPLATE_DRAWABLE_IMPL_SFML_HPP

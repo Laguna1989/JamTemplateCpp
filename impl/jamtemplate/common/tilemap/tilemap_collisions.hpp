@@ -1,5 +1,4 @@
-#ifndef JAMTEMPLATE_TILEMAP_COLLISIONS_HPP
-#define JAMTEMPLATE_TILEMAP_COLLISIONS_HPP
+#pragma once
 
 #include <rect.hpp>
 #include <vector>
@@ -19,5 +18,3 @@ private:
 };
 
 } // namespace jt
-
-#endif // JAMTEMPLATE_TILEMAP_COLLISIONS_HPP

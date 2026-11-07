@@ -1,5 +1,4 @@
-#ifndef JAMTEMPLATE_SOUNDINTERFACE_HPP
-#define JAMTEMPLATE_SOUNDINTERFACE_HPP
+#pragma once
 
 namespace jt {
 
@@ -41,5 +40,3 @@ protected:
     SoundInterface() = default;
 };
 } // namespace jt
-
-#endif // JAMTEMPLATE_SOUNDINTERFACE_HPP

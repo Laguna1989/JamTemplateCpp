@@ -1,5 +1,4 @@
-﻿#ifndef JAMTEMPLATE_RENDERWINDOW_LIB_HPP
-#define JAMTEMPLATE_RENDERWINDOW_LIB_HPP
+﻿#pragma once
 
 #include <SFML/Graphics.hpp>
 #include <graphics/render_window_interface.hpp>
@@ -55,5 +54,3 @@ private:
     jt::Vector2f m_size { 0.0f, 0.0f };
 };
 } // namespace jt
-
-#endif

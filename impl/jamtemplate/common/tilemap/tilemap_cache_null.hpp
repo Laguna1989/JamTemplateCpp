@@ -1,5 +1,4 @@
-#ifndef JAMTEMPLATE_TILEMAP_CACHE_NULL_HPP
-#define JAMTEMPLATE_TILEMAP_CACHE_NULL_HPP
+#pragma once
 
 #include <tilemap/tilemap_cache_interface.hpp>
 
@@ -15,5 +14,3 @@ private:
 };
 
 } // namespace jt
-
-#endif // JAMTEMPLATE_TILEMAP_CACHE_NULL_HPP

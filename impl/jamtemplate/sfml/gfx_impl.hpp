@@ -1,5 +1,4 @@
-#ifndef JAMTEMPLATE_GFX_IMPL_HPP
-#define JAMTEMPLATE_GFX_IMPL_HPP
+#pragma once
 
 #include <camera.hpp>
 #include <graphics/gfx_interface.hpp>
@@ -38,5 +37,3 @@ private:
 };
 
 } // namespace jt
-
-#endif // JAMTEMPLATE_GFX_IMPL_HPP

@@ -1,5 +1,4 @@
-#ifndef JAMTEMPLATE_TILEMAP_CACHE_HPP
-#define JAMTEMPLATE_TILEMAP_CACHE_HPP
+#pragma once
 
 #include <tilemap/tilemap_cache_interface.hpp>
 
@@ -13,5 +12,3 @@ private:
     mutable std::map<std::string, std::shared_ptr<tson::Map>> m_maps;
 };
 } // namespace jt
-
-#endif // JAMTEMPLATE_TILEMAP_CACHE_HPP

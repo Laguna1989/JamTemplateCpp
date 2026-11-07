@@ -1,5 +1,4 @@
-#ifndef JAMTEMPLATE_INPUT_SET_INTERFACE_HPP
-#define JAMTEMPLATE_INPUT_SET_INTERFACE_HPP
+#pragma once
 
 #include <input/mouse/mouse_interface.hpp>
 
@@ -30,5 +29,3 @@ protected:
 };
 
 } // namespace jt
-
-#endif // JAMTEMPLATE_INPUT_SET_INTERFACE_HPP

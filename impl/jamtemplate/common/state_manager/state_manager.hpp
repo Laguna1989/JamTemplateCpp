@@ -1,5 +1,4 @@
-#ifndef JAMTEMPLATE_STATE_MANAGER_HPP
-#define JAMTEMPLATE_STATE_MANAGER_HPP
+#pragma once
 
 #include <game_state.hpp>
 #include <state_manager/state_manager_interface.hpp>
@@ -43,5 +42,3 @@ private:
     void doSwitchState(std::weak_ptr<GameInterface> gameInstance);
 };
 } // namespace jt
-
-#endif // JAMTEMPLATE_STATE_MANAGER_HPP

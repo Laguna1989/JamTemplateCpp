@@ -1,6 +1,3 @@
-﻿#ifndef JAMTEMPLATE_RENDERWINDOW_HPP
-#define JAMTEMPLATE_RENDERWINDOW_HPP
+﻿#pragma once
 
 #include <render_window_lib.hpp>
-
-#endif

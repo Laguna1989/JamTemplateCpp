@@ -1,5 +1,4 @@
-﻿#ifndef JAMTEMPLATE_RECT_HPP
-#define JAMTEMPLATE_RECT_HPP
+﻿#pragma once
 
 #include <vector.hpp>
 #include <map>
@@ -27,4 +26,3 @@ struct InfoRect {
 
 } // namespace tilemap
 } // namespace jt
-#endif

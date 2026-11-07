@@ -1,5 +1,4 @@
-#ifndef JAMTEMPLATE_STARS_HPP
-#define JAMTEMPLATE_STARS_HPP
+#pragma once
 
 #include <color/color.hpp>
 #include <game_object.hpp>
@@ -41,5 +40,3 @@ private:
     std::vector<std::unique_ptr<Star>> m_stars;
 };
 } // namespace jt
-
-#endif // JAMTEMPLATE_STARS_HPP

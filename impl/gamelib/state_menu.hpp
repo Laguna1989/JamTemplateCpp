@@ -1,5 +1,4 @@
-﻿#ifndef GAME_STATE_MENU_HPP
-#define GAME_STATE_MENU_HPP
+﻿#pragma once
 
 #include <game_state.hpp>
 
@@ -61,5 +60,3 @@ private:
     void onDraw() const override;
     void createTextExplanation();
 };
-
-#endif

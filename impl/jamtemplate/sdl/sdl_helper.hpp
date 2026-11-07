@@ -1,5 +1,4 @@
-#ifndef JAMTEMPLATE_SDLHELPER_HPP
-#define JAMTEMPLATE_SDLHELPER_HPP
+#pragma once
 
 #include <vector.hpp>
 #include <sdl_2_include.hpp>
@@ -14,5 +13,3 @@ void setPixel(SDL_Surface* surface, int x, int y, uint32_t pixel);
 uint32_t getPixel(SDL_Surface* surface, int x, int y);
 
 } // namespace jt
-
-#endif // JAMTEMPLATE_SDLHELPER_HPP

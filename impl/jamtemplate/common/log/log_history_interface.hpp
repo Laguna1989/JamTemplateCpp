@@ -1,5 +1,4 @@
-#ifndef JAMTEMPLATE_LOG_HISTORY_INTERFACE_HPP
-#define JAMTEMPLATE_LOG_HISTORY_INTERFACE_HPP
+#pragma once
 
 #include <log/log_entry.hpp>
 #include <vector>
@@ -29,5 +28,3 @@ protected:
     LogHistoryInterface() = default;
 };
 } // namespace jt
-
-#endif // JAMTEMPLATE_LOG_HISTORY_INTERFACE_HPP

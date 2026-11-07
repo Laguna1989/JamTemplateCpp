@@ -1,5 +1,4 @@
-#ifndef JAMTEMPLATE_BOX2D_HELPERS_HPP
-#define JAMTEMPLATE_BOX2D_HELPERS_HPP
+#pragma once
 
 #include <box2d/box2d.h>
 #include <cstdint>
@@ -19,5 +18,3 @@ bool isCategoryPair(b2ShapeId shape1, b2ShapeId shape2, std::uint64_t a, std::ui
 } // namespace Box2DHelpers
 
 } // namespace jt
-
-#endif // JAMTEMPLATE_BOX2D_HELPERS_HPP

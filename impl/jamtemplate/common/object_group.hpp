@@ -1,5 +1,4 @@
-﻿#ifndef JAMTEMPLATE_OBJECTGROUP_HPP
-#define JAMTEMPLATE_OBJECTGROUP_HPP
+﻿#pragma once
 
 #include <game_object.hpp>
 #include <algorithm>
@@ -62,4 +61,3 @@ auto end(ObjectGroup<T>& obj) noexcept
 }
 
 } // namespace jt
-#endif

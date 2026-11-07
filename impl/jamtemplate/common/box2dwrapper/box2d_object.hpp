@@ -1,5 +1,4 @@
-﻿#ifndef JAMTEMPLATE_BOX2DOBJECT_HPP
-#define JAMTEMPLATE_BOX2DOBJECT_HPP
+﻿#pragma once
 
 #include <box2dwrapper/box2d_world_interface.hpp>
 #include <vector.hpp>
@@ -70,4 +69,3 @@ private:
 };
 
 } // namespace jt
-#endif

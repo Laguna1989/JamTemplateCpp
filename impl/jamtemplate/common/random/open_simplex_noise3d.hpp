@@ -6,8 +6,7 @@
   see https://github.com/deerel/OpenSimplexNoise
 */
 
-#ifndef JAMTEMPLATE_RANDOM_OPEN_SIMPLEX_NOISE3D
-#define JAMTEMPLATE_RANDOM_OPEN_SIMPLEX_NOISE3D
+#pragma once
 
 #include <array>
 #include <cstdint>
@@ -38,5 +37,3 @@ private:
     float extrapolate(int xsb, int ysb, int zsb, float dx, float dy, float dz) const;
 };
 } // namespace jt
-
-#endif

@@ -1,5 +1,4 @@
-#ifndef JAMTEMPLATE_GAME_OBJECT_COLLECTION_HPP
-#define JAMTEMPLATE_GAME_OBJECT_COLLECTION_HPP
+#pragma once
 
 #include <game_object_interface.hpp>
 #include <memory>
@@ -43,5 +42,3 @@ private:
 };
 
 } // namespace jt
-
-#endif // JAMTEMPLATE_GAME_OBJECT_COLLECTION_HPP

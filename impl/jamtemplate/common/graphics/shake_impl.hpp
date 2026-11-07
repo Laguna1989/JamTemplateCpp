@@ -1,5 +1,4 @@
-#ifndef JAMTEMPLATE_SHAKE_IMPL_HPP
-#define JAMTEMPLATE_SHAKE_IMPL_HPP
+#pragma once
 
 #include <vector.hpp>
 
@@ -21,5 +20,3 @@ private:
 };
 
 } // namespace jt
-
-#endif // JAMTEMPLATE_SHAKE_IMPL_HPP

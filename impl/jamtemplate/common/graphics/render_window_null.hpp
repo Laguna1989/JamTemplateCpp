@@ -1,5 +1,4 @@
-#ifndef JAMTEMPLATE_RENDER_WINDOW_NULL_HPP
-#define JAMTEMPLATE_RENDER_WINDOW_NULL_HPP
+#pragma once
 
 #include <graphics/render_window_interface.hpp>
 
@@ -31,5 +30,3 @@ private:
 };
 } // namespace null_objects
 } // namespace jt
-
-#endif // JAMTEMPLATE_RENDER_WINDOW_NULL_HPP

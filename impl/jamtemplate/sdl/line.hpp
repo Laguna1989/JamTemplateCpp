@@ -1,5 +1,4 @@
-#ifndef JAMTEMPLATE_LINE_HPP
-#define JAMTEMPLATE_LINE_HPP
+#pragma once
 
 #include <drawable_impl_sdl.hpp>
 #include <render_target_layer.hpp>
@@ -53,5 +52,3 @@ private:
 };
 
 } // namespace jt
-
-#endif // JAMTEMPLATE_LINE_HPP

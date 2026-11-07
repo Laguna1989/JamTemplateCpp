@@ -1,5 +1,4 @@
-#ifndef JAMTEMPLATE_COUNTED_OBJECT_HPP
-#define JAMTEMPLATE_COUNTED_OBJECT_HPP
+#pragma once
 
 #include <cstddef>
 
@@ -35,5 +34,3 @@ template <typename T>
 std::size_t CountedObj<T>::m_createdObjects { 0 };
 
 } // namespace jt
-
-#endif // JAMTEMPLATE_COUNTED_OBJECT_HPP

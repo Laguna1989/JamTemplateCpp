@@ -1,5 +1,4 @@
-#ifndef JAMTEMPLATE_GAME_OBJECT_INTERFACE_HPP
-#define JAMTEMPLATE_GAME_OBJECT_INTERFACE_HPP
+#pragma once
 
 #include <string>
 
@@ -20,5 +19,3 @@ public:
 };
 
 } // namespace jt
-
-#endif // JAMTEMPLATE_GAME_OBJECT_INTERFACE_HPP

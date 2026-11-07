@@ -1,5 +1,4 @@
-#ifndef JAMTEMPLATE_CAMERA_HELPERS_HPP
-#define JAMTEMPLATE_CAMERA_HELPERS_HPP
+#pragma once
 
 #include <cam_interface.hpp>
 #include <rect.hpp>
@@ -37,5 +36,3 @@ void clampToBounds(CamInterface& cam, jt::Rectf const& bounds, jt::Vector2f cons
 } // namespace CameraHelpers
 
 } // namespace jt
-
-#endif // JAMTEMPLATE_CAMERA_HELPERS_HPP

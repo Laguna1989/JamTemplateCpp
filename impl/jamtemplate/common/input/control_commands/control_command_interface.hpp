@@ -1,5 +1,4 @@
-#ifndef JAMTEMPLATE_CONTROL_COMMAND_INTERFACE_HPP
-#define JAMTEMPLATE_CONTROL_COMMAND_INTERFACE_HPP
+#pragma once
 
 namespace jt {
 class ControlCommandInterface {
@@ -24,4 +23,3 @@ protected:
 };
 
 } // namespace jt
-#endif // JAMTEMPLATE_CONTROL_COMMAND_INTERFACE_HPP

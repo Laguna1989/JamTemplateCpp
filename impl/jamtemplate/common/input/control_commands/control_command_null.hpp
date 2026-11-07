@@ -1,5 +1,4 @@
-#ifndef JAMTEMPLATE_CONTROL_COMMAND_NULL_HPP
-#define JAMTEMPLATE_CONTROL_COMMAND_NULL_HPP
+#pragma once
 
 #include <input/control_commands/control_command_interface.hpp>
 
@@ -11,4 +10,3 @@ public:
     void reset() override;
 };
 } // namespace jt
-#endif // JAMTEMPLATE_CONTROL_COMMAND_NULL_HPP

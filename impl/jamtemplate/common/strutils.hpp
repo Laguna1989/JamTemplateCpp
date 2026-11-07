@@ -16,8 +16,7 @@
 ******************************************************************************
 */
 
-#ifndef JAMTEMPLATE_STRUTILS_HPP
-#define JAMTEMPLATE_STRUTILS_HPP
+#pragma once
 
 #include <algorithm>
 #include <cctype>
@@ -280,5 +279,3 @@ std::string repeat(char c, unsigned n);
 bool matches(std::string const& str, std::regex const& regex);
 
 } // namespace strutil
-
-#endif

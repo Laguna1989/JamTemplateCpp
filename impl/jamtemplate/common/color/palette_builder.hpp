@@ -1,6 +1,4 @@
-
-#ifndef JAMTEMPLATE_PALETTE_BUILDER_HPP
-#define JAMTEMPLATE_PALETTE_BUILDER_HPP
+#pragma once
 
 #include <color/palette.hpp>
 #include <sprite.hpp>
@@ -78,5 +76,3 @@ private:
 };
 
 } // namespace jt
-
-#endif // JAMTEMPLATE_PALETTE_BUILDER_HPP

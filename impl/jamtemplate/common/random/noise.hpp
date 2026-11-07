@@ -1,5 +1,4 @@
-﻿#ifndef JAMTEMPLATE_NOISE_HPP
-#define JAMTEMPLATE_NOISE_HPP
+﻿#pragma once
 
 #include <lerp.hpp>
 #include <random/random.hpp>
@@ -75,4 +74,3 @@ private:
 
 } // namespace Noise
 } // namespace jt
-#endif

@@ -1,5 +1,4 @@
-#ifndef JAMTEMPLATE_BOX2DJOINT_HPP
-#define JAMTEMPLATE_BOX2DJOINT_HPP
+#pragma once
 
 #include <box2dwrapper/box2d_world_interface.hpp>
 #include <game_object.hpp>
@@ -32,5 +31,3 @@ private:
 };
 
 } // namespace jt
-
-#endif

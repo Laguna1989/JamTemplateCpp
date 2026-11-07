@@ -1,5 +1,4 @@
-#ifndef JAMTEMPLATE_PRELOAD_HELPER_HPP
-#define JAMTEMPLATE_PRELOAD_HELPER_HPP
+#pragma once
 
 #include <filesystem>
 #include <string>
@@ -45,5 +44,3 @@ void preloadAllFrom(HasGet auto& cache, std::string const& folder, std::string c
 
 } // namespace PreloadHelper
 } // namespace jt
-
-#endif // JAMTEMPLATE_PRELOAD_HELPER_HPP

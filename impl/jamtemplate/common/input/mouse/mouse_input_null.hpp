@@ -1,5 +1,4 @@
-#ifndef JAMTEMPLATE_MOUSE_INPUT_NULL_HPP
-#define JAMTEMPLATE_MOUSE_INPUT_NULL_HPP
+#pragma once
 
 #include <input/mouse/mouse_interface.hpp>
 
@@ -19,5 +18,3 @@ public:
 };
 
 } // namespace jt
-
-#endif // JAMTEMPLATE_MOUSE_INPUT_NULL_HPP

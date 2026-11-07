@@ -1,5 +1,4 @@
-#ifndef JAMTEMPLATE_TRAILING_CIRCLES_HPP
-#define JAMTEMPLATE_TRAILING_CIRCLES_HPP
+#pragma once
 
 #include <animation.hpp>
 #include <game_object.hpp>
@@ -53,5 +52,3 @@ private:
     float m_summedUpDistance { 0.0f };
 };
 } // namespace jt
-
-#endif // JAMTEMPLATE_TRAILING_CIRCLES_HPP

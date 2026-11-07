@@ -1,5 +1,4 @@
-#ifndef JAMTEMPLATE_STATE_MANAGER_TRANSITION_FADE_TO_BLACK_HPP
-#define JAMTEMPLATE_STATE_MANAGER_TRANSITION_FADE_TO_BLACK_HPP
+#pragma once
 
 #include <shape.hpp>
 #include <state_manager/state_manager_transition_impl.hpp>
@@ -21,5 +20,3 @@ private:
 };
 
 } // namespace jt
-
-#endif // JAMTEMPLATE_STATE_MANAGER_TRANSITION_FADE_TO_BLACK_HPP

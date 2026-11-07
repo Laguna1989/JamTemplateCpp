@@ -1,5 +1,4 @@
-﻿#ifndef JAMTEMPLATE_INPUTHELPER_HPP
-#define JAMTEMPLATE_INPUTHELPER_HPP
+﻿#pragma once
 
 #include <map>
 
@@ -28,5 +27,3 @@ void updateValues(std::map<KeyTypeJT, bool>& pressed, std::map<KeyTypeJT, bool>&
 }
 } // namespace inputhelper
 } // namespace jt
-
-#endif // !JAMTEMPLATE_INPUTHELPER_HPP

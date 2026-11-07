@@ -1,5 +1,4 @@
-﻿#ifndef JAMTEMPLATE_KEYBOARDINPUT_HPP
-#define JAMTEMPLATE_KEYBOARDINPUT_HPP
+﻿#pragma once
 
 #include <input/control_commands/control_command_interface.hpp>
 #include <input/input_manager_interface.hpp>
@@ -53,5 +52,3 @@ private:
 };
 
 } // namespace jt
-
-#endif

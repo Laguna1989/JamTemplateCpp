@@ -1,5 +1,4 @@
-#ifndef JAMTEMPLATE_EASE_FROM_POINTS_HPP
-#define JAMTEMPLATE_EASE_FROM_POINTS_HPP
+#pragma once
 
 #include <vector.hpp>
 #include <deque>
@@ -14,5 +13,3 @@ private:
     std::deque<jt::Vector2f> m_points;
 };
 } // namespace jt
-
-#endif // JAMTEMPLATE_EASE_FROM_POINTS_HPP

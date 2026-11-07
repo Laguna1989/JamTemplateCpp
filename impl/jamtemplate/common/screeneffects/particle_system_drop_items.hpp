@@ -1,5 +1,4 @@
-#ifndef JAMTEMAPLTE_PARTICLE_SYSTEM_DROP_ITEMS
-#define JAMTEMAPLTE_PARTICLE_SYSTEM_DROP_ITEMS
+#pragma once
 
 #include <animation.hpp>
 #include <game_object.hpp>
@@ -36,5 +35,3 @@ private:
 };
 
 } // namespace jt
-
-#endif // JAMTEMAPLTE_PARTICLE_SYSTEM_DROP_ITEMS

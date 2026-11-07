@@ -1,5 +1,4 @@
-#ifndef JAMTEMPLATE_DEFAULT_LOGGING_HPP
-#define JAMTEMPLATE_DEFAULT_LOGGING_HPP
+#pragma once
 
 #include <log/logger_interface.hpp>
 
@@ -10,5 +9,3 @@ namespace jt {
 void createDefaultLogTargets(LoggerInterface& logger);
 
 } // namespace jt
-
-#endif // JAMTEMPLATE_DEFAULT_LOGGING_HPP

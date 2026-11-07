@@ -1,5 +1,4 @@
-﻿#ifndef JAMTEMPLATE_SOUND_HPP
-#define JAMTEMPLATE_SOUND_HPP
+﻿#pragma once
 
 #include <audio/sound/sound_interface.hpp>
 #include <counted_object.hpp>
@@ -30,4 +29,3 @@ private:
 };
 
 } // namespace jt
-#endif // JAMTEMPLATE_SOUND_HPP

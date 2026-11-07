@@ -1,5 +1,4 @@
-﻿#ifndef JAMTEMPLATE_TEXT_HPP
-#define JAMTEMPLATE_TEXT_HPP
+﻿#pragma once
 
 #include <drawable_impl_sdl.hpp>
 #include <render_target_layer.hpp>
@@ -97,5 +96,3 @@ private:
         std::shared_ptr<jt::RenderTargetLayer> const& sptr, std::vector<std::string> const& ssv);
 };
 } // namespace jt
-
-#endif

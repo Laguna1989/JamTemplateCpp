@@ -1,5 +1,4 @@
-﻿#ifndef JAMTEMPLATE_RENDERWINDOW_INTERFACE_HPP
-#define JAMTEMPLATE_RENDERWINDOW_INTERFACE_HPP
+﻿#pragma once
 
 #include <render_target_layer.hpp>
 #include <sprite.hpp>
@@ -74,4 +73,3 @@ protected:
     RenderWindowInterface() = default;
 };
 } // namespace jt
-#endif

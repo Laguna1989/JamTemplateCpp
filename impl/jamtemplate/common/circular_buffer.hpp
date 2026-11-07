@@ -1,5 +1,4 @@
-﻿#ifndef JAMTEMPLATE_CIRCULAR_BUFFER_HPP
-#define JAMTEMPLATE_CIRCULAR_BUFFER_HPP
+﻿#pragma once
 
 #include <math_helper.hpp>
 #include <algorithm>
@@ -189,4 +188,3 @@ auto cend(CircularBuffer<T, N> const& obj)
 }
 
 } // namespace jt
-#endif

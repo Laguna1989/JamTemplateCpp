@@ -1,5 +1,4 @@
-#ifndef JAMTEMPLATE_SOUND_NULL_HPP
-#define JAMTEMPLATE_SOUND_NULL_HPP
+#pragma once
 
 #include <audio/sound/sound_interface.hpp>
 
@@ -16,5 +15,3 @@ public:
     void setVolume(float newVolume) override;
 };
 } // namespace jt
-
-#endif // JAMTEMPLATE_SOUND_NULL_HPP

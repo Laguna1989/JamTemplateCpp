@@ -1,5 +1,4 @@
-#ifndef JAMTEMPLATE_LOG_TARGET_INTERFACE_HPP
-#define JAMTEMPLATE_LOG_TARGET_INTERFACE_HPP
+#pragma once
 
 #include <log/log_level.hpp>
 
@@ -31,5 +30,3 @@ protected:
     LogTargetInterface() = default;
 };
 } // namespace jt
-
-#endif // JAMTEMPLATE_LOG_TARGET_INTERFACE_HPP

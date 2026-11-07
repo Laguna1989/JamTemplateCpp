@@ -1,5 +1,4 @@
-#ifndef JAMTEMPLATE_RENDER_TARGET_INTERFACE_HPP
-#define JAMTEMPLATE_RENDER_TARGET_INTERFACE_HPP
+#pragma once
 
 #include <render_target_layer.hpp>
 #include <functional>
@@ -28,5 +27,3 @@ protected:
     RenderTargetInterface() = default;
 };
 } // namespace jt
-
-#endif // JAMTEMPLATE_RENDER_TARGET_INTERFACE_HPP

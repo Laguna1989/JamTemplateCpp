@@ -1,5 +1,4 @@
-#ifndef JAMTEMPLATE_TWEEN_COLLECTION_HPP
-#define JAMTEMPLATE_TWEEN_COLLECTION_HPP
+#pragma once
 
 #include <tweens/tween_interface.hpp>
 #include <memory>
@@ -41,4 +40,3 @@ private:
 };
 
 } // namespace jt
-#endif // JAMTEMPLATE_TWEEN_COLLECTION_HPP

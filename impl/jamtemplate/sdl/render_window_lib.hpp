@@ -1,5 +1,4 @@
-﻿#ifndef JAMTEMPLATE_RENDERWINDOW_LIB_HPP
-#define JAMTEMPLATE_RENDERWINDOW_LIB_HPP
+﻿#pragma once
 
 #include <graphics/render_window_interface.hpp>
 #include <sdl_2_include.hpp>
@@ -54,5 +53,3 @@ private:
     bool m_renderTargetCreated { false };
 };
 } // namespace jt
-
-#endif // JAMTEMPLATE_RENDERWINDOW_LIB_HPP

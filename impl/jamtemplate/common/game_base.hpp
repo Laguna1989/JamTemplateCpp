@@ -1,5 +1,4 @@
-﻿#ifndef JAMTEMPLATE_GAMEBASE_HPP
-#define JAMTEMPLATE_GAMEBASE_HPP
+﻿#pragma once
 
 #include <game_interface.hpp>
 #include <game_object.hpp>
@@ -68,5 +67,3 @@ protected:
 };
 
 } // namespace jt
-
-#endif

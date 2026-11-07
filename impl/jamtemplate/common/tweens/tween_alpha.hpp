@@ -1,5 +1,4 @@
-﻿#ifndef JAMTEMPLATE_TWEENALPHA_HPP
-#define JAMTEMPLATE_TWEENALPHA_HPP
+﻿#pragma once
 
 #include <tweens/tween_base.hpp>
 #include <cstdint>
@@ -24,5 +23,3 @@ private:
 };
 
 } // namespace jt
-
-#endif

@@ -1,5 +1,4 @@
-﻿#ifndef JAMTEMPLATE_DRAWABLEINTERFACE_HPP
-#define JAMTEMPLATE_DRAWABLEINTERFACE_HPP
+﻿#pragma once
 
 #include <color/color.hpp>
 #include <graphics/render_target_interface.hpp>
@@ -247,5 +246,3 @@ protected:
     DrawableInterface() = default;
 };
 } // namespace jt
-
-#endif

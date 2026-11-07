@@ -1,5 +1,4 @@
-﻿#ifndef JAMTEMPLATE_SYSTEMHELPER_HPP
-#define JAMTEMPLATE_SYSTEMHELPER_HPP
+﻿#pragma once
 
 #include <algorithm>
 #include <iterator>
@@ -141,4 +140,3 @@ bool checkForValidFile(std::string const& filename);
 
 } // namespace SystemHelper
 } // namespace jt
-#endif

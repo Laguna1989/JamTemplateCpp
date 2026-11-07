@@ -1,5 +1,4 @@
-#ifndef JAMTEMPLATE_ACTION_COMMAND_MANAGER_INTERFACE_HPP
-#define JAMTEMPLATE_ACTION_COMMAND_MANAGER_INTERFACE_HPP
+#pragma once
 
 #include <functional>
 #include <memory>
@@ -43,5 +42,3 @@ protected:
     ActionCommandManagerInterface() = default;
 };
 } // namespace jt
-
-#endif // JAMTEMPLATE_ACTION_COMMAND_MANAGER_INTERFACE_HPP

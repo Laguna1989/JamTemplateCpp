@@ -1,5 +1,4 @@
-﻿#ifndef JAMTEMPLATE_GAMEINTERFACE_HPP
-#define JAMTEMPLATE_GAMEINTERFACE_HPP
+﻿#pragma once
 
 #include <action_commands/action_command_manager_interface.hpp>
 #include <audio/audio/audio_interface.hpp>
@@ -61,5 +60,3 @@ protected:
 };
 
 } // namespace jt
-
-#endif

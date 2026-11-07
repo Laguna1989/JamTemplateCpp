@@ -1,5 +1,4 @@
-#ifndef JAMTEMPLATE_PERFORMANCE_MEASUREMENT_HPP
-#define JAMTEMPLATE_PERFORMANCE_MEASUREMENT_HPP
+#pragma once
 
 #include <nlohmann.hpp>
 #include <chrono>
@@ -114,5 +113,3 @@ auto makeMeasureTimeGeneric(std::function<R(Args...)> const& func)
     return MeasureTimeGeneric<R(Args...)> { func };
 }
 } // namespace jt
-
-#endif // JAMTEMPLATE_PERFORMANCE_MEASUREMENT_HPP

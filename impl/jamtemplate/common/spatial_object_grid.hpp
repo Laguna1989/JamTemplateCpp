@@ -1,5 +1,4 @@
-#ifndef JAMTEMPLATE_SPATIAL_OBJECT_GRID_HPP
-#define JAMTEMPLATE_SPATIAL_OBJECT_GRID_HPP
+#pragma once
 
 #include <game_object.hpp>
 #include <system_helper.hpp>
@@ -128,5 +127,3 @@ private:
 };
 
 } // namespace jt
-
-#endif // JAMTEMPLATE_SPATIAL_OBJECT_GRID_HPP

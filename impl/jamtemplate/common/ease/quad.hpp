@@ -1,5 +1,4 @@
-#ifndef JAMTEMPLATE_EASE_QUAD_HPP
-#define JAMTEMPLATE_EASE_QUAD_HPP
+#pragma once
 
 namespace jt {
 namespace ease {
@@ -12,5 +11,3 @@ float easeInOut(float t, float b, float c, float d);
 } // namespace quad
 } // namespace ease
 } // namespace jt
-
-#endif // JAMTEMPLATE_EASE_QUAD_HPP

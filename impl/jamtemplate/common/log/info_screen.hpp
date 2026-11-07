@@ -1,5 +1,4 @@
-#ifndef JAMTEMPLATE_INFO_SCREEN_HPP
-#define JAMTEMPLATE_INFO_SCREEN_HPP
+#pragma once
 
 #include <circular_buffer.hpp>
 #include <game_object.hpp>
@@ -25,5 +24,3 @@ private:
     void doDraw() const override;
 };
 } // namespace jt
-
-#endif // JAMTEMPLATE_INFO_SCREEN_HPP

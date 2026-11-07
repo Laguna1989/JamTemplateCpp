@@ -1,5 +1,4 @@
-﻿#ifndef GAME_HUD_HPP
-#define GAME_HUD_HPP
+﻿#pragma once
 
 #include <game_object.hpp>
 #include <hud/observer_interface.hpp>
@@ -26,5 +25,3 @@ private:
 
     void doDraw() const override;
 };
-
-#endif

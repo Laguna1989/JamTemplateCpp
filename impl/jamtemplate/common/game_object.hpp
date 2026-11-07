@@ -1,5 +1,4 @@
-﻿#ifndef JAMTEMPLATE_GAMEOBJECT_HPP
-#define JAMTEMPLATE_GAMEOBJECT_HPP
+﻿#pragma once
 
 #include <counted_object.hpp>
 #include <game_object_interface.hpp>
@@ -108,4 +107,3 @@ private:
 };
 
 } // namespace jt
-#endif

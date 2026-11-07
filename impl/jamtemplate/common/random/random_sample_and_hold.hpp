@@ -1,5 +1,4 @@
-﻿#ifndef JAMTEMPLATE_RANDOM_SAMPLEANDHOLD_HPP
-#define JAMTEMPLATE_RANDOM_SAMPLEANDHOLD_HPP
+﻿#pragma once
 
 namespace jt {
 
@@ -29,4 +28,3 @@ private:
 };
 
 } // namespace jt
-#endif

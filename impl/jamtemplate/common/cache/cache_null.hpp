@@ -1,5 +1,4 @@
-#ifndef JAMTEMPLATE_CACHE_NULL_HPP
-#define JAMTEMPLATE_CACHE_NULL_HPP
+#pragma once
 
 #include <cache/cache_interface.hpp>
 #include <log/log_history_null.hpp>
@@ -20,4 +19,3 @@ private:
     std::shared_ptr<jt::null_objects::LogHistoryNull> m_history { nullptr };
 };
 } // namespace jt
-#endif // JAMTEMPLATE_CACHE_NULL_HPP
