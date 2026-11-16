@@ -78,8 +78,7 @@ private:
     void renderOneLineOfText(std::shared_ptr<jt::RenderTargetLayer> const& sptr, std::string text,
         std::size_t i, std::size_t lineCount) const;
 
-    jt::Vector2u getSizeForLine(
-        std::shared_ptr<jt::RenderTargetLayer> const& sptr, std::string const& text) const;
+    jt::Vector2u getSizeForLine(std::string const& text) const;
 
     void doDrawShadow(std::shared_ptr<jt::RenderTargetLayer> const& sptr) const override;
     void doDrawOutline(std::shared_ptr<jt::RenderTargetLayer> const& sptr) const override;
@@ -94,7 +93,6 @@ private:
     jt::Vector2f getAlignOffset() const;
     SDL_Rect getDestRect(jt::Vector2f const& positionOffset = jt::Vector2f { 0.0f, 0.0f }) const;
 
-    void calculateTextTextureSize(
-        std::shared_ptr<jt::RenderTargetLayer> const& sptr, std::vector<std::string> const& ssv);
+    void calculateTextTextureSize(std::vector<std::string> const& ssv);
 };
 } // namespace jt

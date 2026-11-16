@@ -3,9 +3,11 @@
 #include <shape.hpp>
 #include <text.hpp>
 #include <gtest/gtest.h>
+#include <algorithm>
 #include <cstdint>
 #include <limits>
 #include <memory>
+#include <string>
 #include <vector>
 
 namespace {
@@ -22,9 +24,8 @@ struct PixelBounds {
     bool isEmpty() const { return minX > maxX; }
 };
 
-// Renders the drawable into an offscreen texture and returns the bounding box of all pixels that
-// were touched.
-PixelBounds renderAndGetPixelBounds(jt::DrawableImpl& drawable)
+// Renders the drawable into a transparent offscreen texture and returns its RGBA8888 pixels.
+std::vector<std::uint32_t> renderToPixels(jt::DrawableImpl& drawable)
 {
     auto const renderer = getRenderTarget();
     std::shared_ptr<SDL_Texture> const target { SDL_CreateTexture(renderer.get(),
@@ -45,11 +46,22 @@ PixelBounds renderAndGetPixelBounds(jt::DrawableImpl& drawable)
     SDL_RenderReadPixels(renderer.get(), nullptr, SDL_PIXELFORMAT_RGBA8888, pixels.data(),
         targetWidth * static_cast<int>(sizeof(std::uint32_t)));
     SDL_SetRenderTarget(renderer.get(), oldTarget);
+    return pixels;
+}
+
+std::uint32_t alphaOf(std::uint32_t const pixel) { return pixel & 0xFFu; }
+
+std::uint32_t redOf(std::uint32_t const pixel) { return (pixel >> 24u) & 0xFFu; }
+
+// Renders the drawable and returns the bounding box of all pixels that were touched.
+PixelBounds renderAndGetPixelBounds(jt::DrawableImpl& drawable)
+{
+    auto const pixels = renderToPixels(drawable);
 
     PixelBounds bounds;
     for (int y = 0; y != targetHeight; ++y) {
         for (int x = 0; x != targetWidth; ++x) {
-            auto const alpha = pixels.at(static_cast<std::size_t>(y * targetWidth + x)) & 0xFFu;
+            auto const alpha = alphaOf(pixels.at(static_cast<std::size_t>(y * targetWidth + x)));
             if (alpha == 0u) {
                 continue;
             }
@@ -60,6 +72,16 @@ PixelBounds renderAndGetPixelBounds(jt::DrawableImpl& drawable)
         }
     }
     return bounds;
+}
+
+std::shared_ptr<jt::Text> createLeftAlignedText(std::string const& content)
+{
+    auto text = std::make_shared<jt::Text>();
+    text->loadFont("assets/font.ttf", 12, getRenderTarget());
+    text->setTextAlign(jt::Text::TextAlign::LEFT);
+    text->setText(content);
+    text->setPosition(jt::Vector2f { 4.0f, 4.0f });
+    return text;
 }
 
 std::shared_ptr<jt::Shape> createCenteredRect()
@@ -133,6 +155,45 @@ TEST_F(SdlRenderTest, ScaledTextRotatesAroundItsOrigin)
     EXPECT_NEAR(rotated.maxX, 2 * static_cast<int>(pivot.x) - unrotated.minX, tolerance);
     EXPECT_NEAR(rotated.minY, 2 * static_cast<int>(pivot.y) - unrotated.maxY, tolerance);
     EXPECT_NEAR(rotated.maxY, 2 * static_cast<int>(pivot.y) - unrotated.minY, tolerance);
+}
+
+TEST_F(SdlRenderTest, TextIsRenderedWithSmoothEdges)
+{
+    auto const text = createLeftAlignedText("bounds");
+
+    auto const pixels = renderToPixels(*text);
+
+    auto const partiallyTransparent = std::count_if(pixels.cbegin(), pixels.cend(),
+        [](auto const p) { return alphaOf(p) != 0u && alphaOf(p) != 255u; });
+    EXPECT_GT(partiallyTransparent, 0);
+}
+
+TEST_F(SdlRenderTest, SmoothTextEdgesAreNotDarkened)
+{
+    // White text drawn onto a transparent black target ends up with red == alpha. If the alpha
+    // were applied twice (once when building the text texture, once when drawing it), the
+    // edges would be darker: red == alpha * alpha / 255.
+    auto const text = createLeftAlignedText("bounds");
+
+    auto const pixels = renderToPixels(*text);
+
+    auto const tolerance = 2;
+    for (auto const p : pixels) {
+        if (alphaOf(p) == 0u) {
+            continue;
+        }
+        EXPECT_NEAR(static_cast<int>(redOf(p)), static_cast<int>(alphaOf(p)), tolerance);
+    }
+}
+
+TEST_F(SdlRenderTest, TextIsDecodedAsUtf8)
+{
+    // three two-byte characters must be narrower than four one-byte characters. Decoded as
+    // Latin-1, "äää" would be six glyphs.
+    auto const umlauts = createLeftAlignedText("\xC3\xA4\xC3\xA4\xC3\xA4");
+    auto const ascii = createLeftAlignedText("aaaa");
+
+    EXPECT_LT(umlauts->getGlobalBounds().width, ascii->getGlobalBounds().width);
 }
 
 struct LineScaleCase {

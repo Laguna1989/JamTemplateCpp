@@ -1,6 +1,7 @@
 ﻿#include "text.hpp"
 #include <sdl_helper.hpp>
 #include <strutils.hpp>
+#include <algorithm>
 #include <cmath>
 #include <iostream>
 #include <stdexcept>
@@ -156,10 +157,17 @@ void Text::renderOneLineOfText(std::shared_ptr<jt::RenderTargetLayer> const& spt
 {
     // render text on full white, so coloring can be done afterwards
     SDL_Color const col { 255u, 255u, 255u, 255u };
-    SDL_Surface* textSurface = TTF_RenderText_Solid(m_font, text.c_str(), col);
+    SDL_Surface* textSurface = TTF_RenderUTF8_Blended(m_font, text.c_str(), col);
+    if (textSurface == nullptr) {
+        // e.g. an empty line, which has zero width
+        return;
+    }
     SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "0");
     SDL_Texture* textTexture = SDL_CreateTextureFromSurface(
         sptr.get(), textSurface); // now you can convert it into a texture
+    // Copy the anti-aliased pixels including their alpha into the (transparent) text texture.
+    // Blending here would apply the alpha twice and darken the edges.
+    SDL_SetTextureBlendMode(textTexture, SDL_BLENDMODE_NONE);
 
     int w { 0 };
     int h { 0 };
@@ -185,20 +193,11 @@ void Text::renderOneLineOfText(std::shared_ptr<jt::RenderTargetLayer> const& spt
     SDL_DestroyTexture(textTexture);
 }
 
-jt::Vector2u Text::getSizeForLine(
-    std::shared_ptr<jt::RenderTargetLayer> const& sptr, std::string const& text) const
+jt::Vector2u Text::getSizeForLine(std::string const& text) const
 {
-    SDL_Color const col { 255u, 255u, 255u, 255u };
-    SDL_Surface* textSurface = TTF_RenderText_Solid(m_font, text.c_str(), col);
-    SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "0");
-    SDL_Texture* textTexture = SDL_CreateTextureFromSurface(
-        sptr.get(), textSurface); // now you can convert it into a texture
     int w { 0 };
     int h { 0 };
-    SDL_QueryTexture(
-        textTexture, nullptr, nullptr, &w, &h); // get the width and height of the texture
-    SDL_FreeSurface(textSurface);
-    SDL_DestroyTexture(textTexture);
+    TTF_SizeUTF8(m_font, text.c_str(), &w, &h);
     return jt::Vector2u { static_cast<unsigned int>(w), static_cast<unsigned int>(h) };
 }
 
@@ -217,7 +216,7 @@ void Text::recreateTextTexture(std::shared_ptr<jt::RenderTargetLayer> const& spt
         return;
     }
     auto const ssv = strutil::split(m_text, '\n');
-    calculateTextTextureSize(sptr, ssv);
+    calculateTextTextureSize(ssv);
     // the offset from origin depends on the texture size
     setOriginInternal(m_origin);
 
@@ -284,16 +283,13 @@ SDL_Rect Text::getDestRect(jt::Vector2f const& positionOffset) const
     return destRect;
 }
 
-void Text::calculateTextTextureSize(
-    std::shared_ptr<jt::RenderTargetLayer> const& sptr, std::vector<std::string> const& ssv)
+void Text::calculateTextTextureSize(std::vector<std::string> const& ssv)
 {
+    // character count is no indicator for the width (proportional fonts, multi-byte UTF-8), so
+    // every line is measured.
     unsigned int maxLineLengthInPixel { 0u };
-    std::size_t maxLineLengthInChars { 0u };
     for (auto const& l : ssv) {
-        if (l.size() > maxLineLengthInChars) {
-            maxLineLengthInPixel = getSizeForLine(sptr, l).x;
-            maxLineLengthInChars = l.size();
-        }
+        maxLineLengthInPixel = std::max(maxLineLengthInPixel, getSizeForLine(l).x);
     }
 
     m_textTextureSizeX = static_cast<int>(maxLineLengthInPixel);

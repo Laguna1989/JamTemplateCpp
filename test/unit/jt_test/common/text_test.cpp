@@ -195,3 +195,20 @@ TEST(TextTest, TextAlignAfterSetLeft)
     t->update(0.1f);
     ASSERT_EQ(t->getTextAlign(), jt::Text::TextAlign::LEFT);
 }
+
+TEST(TextTest, WidthIsDeterminedByWidestLineInPixels)
+{
+    // the first line has more characters, but the second line is wider in pixels
+    auto const singleLine = getText();
+    singleLine->setTextAlign(jt::Text::TextAlign::LEFT);
+    singleLine->setText("WWWW");
+    singleLine->update(0.0f);
+
+    auto const multiLine = getText();
+    multiLine->setTextAlign(jt::Text::TextAlign::LEFT);
+    multiLine->setText("..........\nWWWW");
+    multiLine->update(0.0f);
+
+    auto const tolerance = 1.0f;
+    EXPECT_GE(multiLine->getGlobalBounds().width, singleLine->getGlobalBounds().width - tolerance);
+}
