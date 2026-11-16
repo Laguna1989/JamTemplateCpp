@@ -5,6 +5,7 @@
 #include <gtest/gtest.h>
 #include <algorithm>
 #include <cstdint>
+#include <iostream>
 #include <limits>
 #include <memory>
 #include <string>
@@ -24,9 +25,81 @@ struct PixelBounds {
     bool isEmpty() const { return minX > maxX; }
 };
 
+std::uint32_t alphaOf(std::uint32_t const pixel) { return pixel & 0xFFu; }
+
+std::uint32_t redOf(std::uint32_t const pixel) { return (pixel >> 24u) & 0xFFu; }
+
+// Collected for every render of the current test and printed if the test fails, so failures on
+// machines without a debugger (e.g. CI) can be analyzed.
+std::string renderDiagnostics;
+
+std::string describeRenderer(SDL_Renderer* const renderer)
+{
+    SDL_RendererInfo info {};
+    SDL_GetRendererInfo(renderer, &info);
+    std::string description = std::string { "video driver: " }
+        + (SDL_GetCurrentVideoDriver() ? SDL_GetCurrentVideoDriver() : "none")
+        + ", render driver: " + (info.name ? info.name : "none");
+
+    if (SDL_GL_GetCurrentContext() != nullptr) {
+        using GlGetString = unsigned char const* (*)(unsigned int);
+        auto const glGetStringFunction
+            = reinterpret_cast<GlGetString>(SDL_GL_GetProcAddress("glGetString"));
+        if (glGetStringFunction != nullptr) {
+            constexpr unsigned int glRenderer { 0x1F01u };
+            constexpr unsigned int glVersion { 0x1F02u };
+            auto const* const rendererName = glGetStringFunction(glRenderer);
+            auto const* const version = glGetStringFunction(glVersion);
+            description += std::string { ", GL renderer: " }
+                + (rendererName ? reinterpret_cast<char const*>(rendererName) : "unknown")
+                + ", GL version: "
+                + (version ? reinterpret_cast<char const*>(version) : "unknown");
+        }
+    }
+    return description;
+}
+
+// ASCII art of all touched pixels: '#' opaque, '+' partially transparent, '.' transparent.
+std::string describePixels(std::vector<std::uint32_t> const& pixels)
+{
+    int minX { targetWidth };
+    int minY { targetHeight };
+    int maxX { -1 };
+    int maxY { -1 };
+    for (int y = 0; y != targetHeight; ++y) {
+        for (int x = 0; x != targetWidth; ++x) {
+            if (alphaOf(pixels.at(static_cast<std::size_t>(y * targetWidth + x))) != 0u) {
+                minX = std::min(minX, x);
+                minY = std::min(minY, y);
+                maxX = std::max(maxX, x);
+                maxY = std::max(maxY, y);
+            }
+        }
+    }
+    if (maxX < 0) {
+        return "no pixels touched\n";
+    }
+    minX = std::max(0, minX - 1);
+    minY = std::max(0, minY - 1);
+    maxX = std::min(targetWidth - 1, maxX + 1);
+    maxY = std::min(targetHeight - 1, maxY + 1);
+
+    std::string description = "pixels starting at (" + std::to_string(minX) + ", "
+        + std::to_string(minY) + "):\n";
+    for (int y = minY; y <= maxY; ++y) {
+        for (int x = minX; x <= maxX; ++x) {
+            auto const alpha = alphaOf(pixels.at(static_cast<std::size_t>(y * targetWidth + x)));
+            description += alpha == 0u ? '.' : (alpha == 255u ? '#' : '+');
+        }
+        description += '\n';
+    }
+    return description;
+}
+
 // Renders the drawable into a transparent offscreen texture and returns its RGBA8888 pixels.
 std::vector<std::uint32_t> renderToPixels(jt::DrawableImpl& drawable)
 {
+    SDL_ClearError();
     auto const renderer = getRenderTarget();
     std::shared_ptr<SDL_Texture> const target { SDL_CreateTexture(renderer.get(),
                                                     SDL_PIXELFORMAT_RGBA8888,
@@ -45,13 +118,13 @@ std::vector<std::uint32_t> renderToPixels(jt::DrawableImpl& drawable)
     std::vector<std::uint32_t> pixels(static_cast<std::size_t>(targetWidth * targetHeight));
     SDL_RenderReadPixels(renderer.get(), nullptr, SDL_PIXELFORMAT_RGBA8888, pixels.data(),
         targetWidth * static_cast<int>(sizeof(std::uint32_t)));
+
+    renderDiagnostics += describeRenderer(renderer.get()) + "\nSDL error: " + SDL_GetError() + "\n"
+        + describePixels(pixels);
+
     SDL_SetRenderTarget(renderer.get(), oldTarget);
     return pixels;
 }
-
-std::uint32_t alphaOf(std::uint32_t const pixel) { return pixel & 0xFFu; }
-
-std::uint32_t redOf(std::uint32_t const pixel) { return (pixel >> 24u) & 0xFFu; }
 
 // Renders the drawable and returns the bounding box of all pixels that were touched.
 PixelBounds renderAndGetPixelBounds(jt::DrawableImpl& drawable)
@@ -97,7 +170,18 @@ std::shared_ptr<jt::Shape> createCenteredRect()
 
 class SdlRenderTest : public ::testing::Test {
 protected:
-    void SetUp() override { jt::DrawableImpl::setCamOffset(jt::Vector2f { 0.0f, 0.0f }); }
+    void SetUp() override
+    {
+        jt::DrawableImpl::setCamOffset(jt::Vector2f { 0.0f, 0.0f });
+        renderDiagnostics.clear();
+    }
+
+    void TearDown() override
+    {
+        if (HasFailure()) {
+            std::cout << renderDiagnostics;
+        }
+    }
 };
 
 TEST_F(SdlRenderTest, FlippedShapeIsMirroredAroundItsOrigin)
@@ -202,10 +286,8 @@ struct LineScaleCase {
     int expectedMaxX;
 };
 
-class SdlLineRenderTest : public ::testing::TestWithParam<LineScaleCase> {
-protected:
-    void SetUp() override { jt::DrawableImpl::setCamOffset(jt::Vector2f { 0.0f, 0.0f }); }
-};
+class SdlLineRenderTest : public SdlRenderTest,
+                          public ::testing::WithParamInterface<LineScaleCase> { };
 
 INSTANTIATE_TEST_SUITE_P(SdlLineRenderTest, SdlLineRenderTest,
     ::testing::Values(LineScaleCase { 1.0f, 10, 14 }, LineScaleCase { 2.0f, 10, 18 },
