@@ -77,10 +77,19 @@ jobs:
 
       - name: Set up SDL and jack
         run: |
+          # The amd64v3 build of libsdl2 2.32.10 is miscompiled by GCC 15.2
+          # (https://gcc.gnu.org/PR124802), which breaks SDL_RenderCopyEx with flip or rotation.
+          # Disable architecture variants so the baseline amd64 build is installed.
+          echo '#clear APT::Architecture-Variants;' | sudo tee /etc/apt/apt.conf.d/99zz-baseline-amd64
+          sudo apt-get update
           sudo apt-get install -y \
           libsdl2-dev \
           libsdl2-ttf-dev \
-          libsdl2-image-dev
+          libsdl2-image-dev | tee "$RUNNER_TEMP/apt-sdl.log"
+          if grep -q 'amd64v3 libsdl2' "$RUNNER_TEMP/apt-sdl.log"; then
+            echo "::error::amd64v3 build of libsdl2 was installed"
+            exit 1
+          fi
 
       - uses: actions/checkout@v4
       - uses: seanmiddleditch/gha-setup-ninja@master
