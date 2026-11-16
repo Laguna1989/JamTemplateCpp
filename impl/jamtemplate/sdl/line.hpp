@@ -43,6 +43,8 @@ private:
 
     jt::Vector2f m_origin;
 
+    jt::Vector2f getScaledLineVector() const noexcept;
+
     void doDraw(std::shared_ptr<jt::RenderTargetLayer> const& sptr) const override;
     void doDrawFlash(std::shared_ptr<jt::RenderTargetLayer> const& sptr) const override;
     void doDrawShadow(std::shared_ptr<jt::RenderTargetLayer> const& sptr) const override;

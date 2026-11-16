@@ -1,6 +1,7 @@
 ﻿#include "text.hpp"
 #include <sdl_helper.hpp>
 #include <strutils.hpp>
+#include <cmath>
 #include <iostream>
 #include <stdexcept>
 
@@ -44,14 +45,14 @@ jt::Color Text::getColor() const noexcept { return m_color; }
 jt::Rectf Text::getGlobalBounds() const
 {
     auto const pos = m_position + getOffset() + getAlignOffset() + m_offsetFromOrigin;
-    return jt::Rectf { pos.x, pos.y, static_cast<float>(m_textTextureSizeX) * m_scale.x,
-        static_cast<float>(m_textTextureSizeY) * m_scale.y };
+    return jt::Rectf { pos.x, pos.y, static_cast<float>(m_textTextureSizeX) * std::fabs(m_scale.x),
+        static_cast<float>(m_textTextureSizeY) * std::fabs(m_scale.y) };
 }
 
 jt::Rectf Text::getLocalBounds() const
 {
-    return jt::Rectf { 0, 0, static_cast<float>(m_textTextureSizeX) * m_scale.x,
-        static_cast<float>(m_textTextureSizeY) * m_scale.y };
+    return jt::Rectf { 0.0f, 0.0f, static_cast<float>(m_textTextureSizeX),
+        static_cast<float>(m_textTextureSizeY) };
 }
 
 void Text::setScale(jt::Vector2f const& scale)
@@ -61,6 +62,13 @@ void Text::setScale(jt::Vector2f const& scale)
 }
 
 jt::Vector2f Text::getScale() const noexcept { return m_scale; }
+
+void Text::setOriginInternal(jt::Vector2f const& origin) noexcept
+{
+    updateOffsetFromOrigin(origin,
+        jt::Vector2f {
+            static_cast<float>(m_textTextureSizeX), static_cast<float>(m_textTextureSizeY) });
+}
 
 void Text::setTextAlign(Text::TextAlign ta)
 {
@@ -83,7 +91,7 @@ void Text::doDrawShadow(std::shared_ptr<jt::RenderTargetLayer> const& sptr) cons
         return;
     }
     auto const destRect = getDestRect(getShadowOffset());
-    SDL_Point const p { static_cast<int>(getOrigin().x), static_cast<int>(getOrigin().y) };
+    SDL_Point const p = getRotationPivot();
 
     auto const flip = jt::getFlipFromScale(m_scale);
     auto col = getShadowColor();
@@ -97,7 +105,7 @@ void Text::doDrawOutline(std::shared_ptr<jt::RenderTargetLayer> const& sptr) con
     if (!sptr) [[unlikely]] {
         return;
     }
-    SDL_Point const p { static_cast<int>(getOrigin().x), static_cast<int>(getOrigin().y) };
+    SDL_Point const p = getRotationPivot();
 
     auto const flip = jt::getFlipFromScale(m_scale);
     auto col = getOutlineColor();
@@ -118,7 +126,7 @@ void Text::doDraw(std::shared_ptr<jt::RenderTargetLayer> const& sptr) const
         return;
     }
     auto const destRect = getDestRect();
-    SDL_Point const p { static_cast<int>(getOrigin().x), static_cast<int>(getOrigin().y) };
+    SDL_Point const p = getRotationPivot();
 
     setSDLColor(getColor());
     SDL_RenderCopyEx(sptr.get(), m_textTexture.get(), nullptr, &destRect, getRotation(), &p,
@@ -131,7 +139,7 @@ void Text::doDrawFlash(std::shared_ptr<jt::RenderTargetLayer> const& sptr) const
         return;
     }
     auto const destRect = getDestRect();
-    SDL_Point const p { static_cast<int>(getOrigin().x), static_cast<int>(getOrigin().y) };
+    SDL_Point const p = getRotationPivot();
 
     setSDLColor(getFlashColor());
     SDL_RenderCopyEx(sptr.get(), m_textTexture.get(), nullptr, &destRect, getRotation(), &p,
@@ -210,6 +218,8 @@ void Text::recreateTextTexture(std::shared_ptr<jt::RenderTargetLayer> const& spt
     }
     auto const ssv = strutil::split(m_text, '\n');
     calculateTextTextureSize(sptr, ssv);
+    // the offset from origin depends on the texture size
+    setOriginInternal(m_origin);
 
     auto* oldT = SDL_GetRenderTarget(sptr.get());
     SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "0");
@@ -251,10 +261,10 @@ jt::Vector2f Text::getAlignOffset() const
 {
     jt::Vector2f alignOffset { 0, 0 };
     if (m_textAlign == TextAlign::CENTER) {
-        alignOffset.x = -static_cast<float>(m_textTextureSizeX) / 2.0f * m_scale.x;
+        alignOffset.x = -static_cast<float>(m_textTextureSizeX) / 2.0f * std::fabs(m_scale.x);
     }
     if (m_textAlign == TextAlign::RIGHT) {
-        alignOffset.x = -static_cast<float>(m_textTextureSizeX) * m_scale.x;
+        alignOffset.x = -static_cast<float>(m_textTextureSizeX) * std::fabs(m_scale.x);
     }
     return alignOffset;
 }
@@ -267,10 +277,9 @@ SDL_Rect Text::getDestRect(jt::Vector2f const& positionOffset) const
     SDL_Rect destRect; // create a rect
     destRect.x = static_cast<int>(pos.x); // controls the rect's x coordinate
     destRect.y = static_cast<int>(pos.y); // controls the rect's y coordinte
-    destRect.w = static_cast<int>(
-        static_cast<float>(m_textTextureSizeX) * m_scale.x); // controls the width of the rect
-    destRect.h = static_cast<int>(
-        static_cast<float>(m_textTextureSizeY) * m_scale.y); // controls the height of the rect
+    // flipping is done via SDL_RendererFlip, so the size is always positive
+    destRect.w = static_cast<int>(static_cast<float>(m_textTextureSizeX) * std::fabs(m_scale.x));
+    destRect.h = static_cast<int>(static_cast<float>(m_textTextureSizeY) * std::fabs(m_scale.y));
 
     return destRect;
 }

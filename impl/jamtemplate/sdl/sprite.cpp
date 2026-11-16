@@ -46,6 +46,7 @@ void Sprite::fromTexture(std::shared_ptr<SDL_Texture> const& txt)
     SDL_QueryTexture(
         m_text.get(), nullptr, nullptr, &w, &h); // get the width and height of the texture
     m_sourceRect = jt::Recti { 0, 0, w, h };
+    setOriginInternal(m_origin);
 }
 
 void Sprite::setPosition(jt::Vector2f const& pos) { m_position = pos; }
@@ -76,6 +77,13 @@ void Sprite::setScale(jt::Vector2f const& scale)
 }
 
 jt::Vector2f Sprite::getScale() const { return m_scale; }
+
+void Sprite::setOriginInternal(jt::Vector2f const& origin) noexcept
+{
+    updateOffsetFromOrigin(origin,
+        jt::Vector2f { static_cast<float>(m_sourceRect.width),
+            static_cast<float>(m_sourceRect.height) });
+}
 
 jt::Color Sprite::getColorAtPixel(jt::Vector2u pixelPos) const
 {
@@ -114,8 +122,7 @@ void Sprite::doDraw(std::shared_ptr<jt::RenderTargetLayer> const& sptr) const
     SDL_Rect const sourceRect = getSourceRect();
     SDL_Rect const destRect = getDestRect();
     auto const flip = jt::getFlipFromScale(m_scale);
-    SDL_Point const p { static_cast<int>(getOrigin().x * m_scale.x),
-        static_cast<int>(getOrigin().y * m_scale.y) };
+    SDL_Point const p = getRotationPivot();
     SDL_SetRenderDrawBlendMode(sptr.get(), SDL_BLENDMODE_BLEND);
     setSDLColor(m_color);
     SDL_RenderCopyEx(sptr.get(), m_text.get(), &sourceRect, &destRect, getRotation(), &p, flip);
@@ -130,8 +137,7 @@ void Sprite::doDrawShadow(std::shared_ptr<jt::RenderTargetLayer> const& sptr) co
     SDL_Rect const sourceRect = getSourceRect();
     SDL_Rect const destRect = getDestRect(getShadowOffset());
     auto const flip = jt::getFlipFromScale(m_scale);
-    SDL_Point const p { static_cast<int>(getOrigin().x * m_scale.x),
-        static_cast<int>(getOrigin().y * m_scale.y) };
+    SDL_Point const p = getRotationPivot();
     SDL_SetRenderDrawBlendMode(sptr.get(), SDL_BLENDMODE_BLEND);
     setSDLColor(getShadowColor());
     SDL_RenderCopyEx(sptr.get(), m_text.get(), &sourceRect, &destRect, getRotation(), &p, flip);
@@ -145,8 +151,7 @@ void Sprite::doDrawOutline(std::shared_ptr<jt::RenderTargetLayer> const& sptr) c
 
     SDL_Rect const sourceRect = getSourceRect();
     auto const flip = jt::getFlipFromScale(m_scale);
-    SDL_Point const p { static_cast<int>(getOrigin().x * m_scale.x),
-        static_cast<int>(getOrigin().y * m_scale.y) };
+    SDL_Point const p = getRotationPivot();
     setSDLColor(getOutlineColor());
     SDL_SetRenderDrawBlendMode(sptr.get(), SDL_BLENDMODE_BLEND);
     for (auto const& outlineOffset : getOutlineOffsets()) {
@@ -165,8 +170,7 @@ void Sprite::doDrawFlash(std::shared_ptr<jt::RenderTargetLayer> const& sptr) con
     SDL_Rect const sourceRect = getSourceRect();
     SDL_Rect const destRect = getDestRect();
     auto const flip = jt::getFlipFromScale(m_scale);
-    SDL_Point const p { static_cast<int>(getOrigin().x * m_scale.x),
-        static_cast<int>(getOrigin().y * m_scale.y) };
+    SDL_Point const p = getRotationPivot();
     SDL_SetRenderDrawBlendMode(sptr.get(), SDL_BLENDMODE_BLEND);
     SDL_SetTextureColorMod(
         m_textFlash.get(), getFlashColor().r, getFlashColor().g, getFlashColor().b);

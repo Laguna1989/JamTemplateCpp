@@ -2,6 +2,8 @@
 #include <shape.hpp>
 #include <sprite.hpp>
 #include <text.hpp>
+#include <algorithm>
+#include <cmath>
 #include <gtest/gtest.h>
 #include <memory>
 #include <ostream>
@@ -13,10 +15,11 @@ class BoundsDrawableFactoryInterface {
 public:
     virtual ~BoundsDrawableFactoryInterface() = default;
     virtual std::shared_ptr<jt::DrawableInterface> createDrawable(
-        jt::TextureManagerInterface& textureManager)
-        = 0;
+        jt::TextureManagerInterface& textureManager) = 0;
+
     // text positions are cast to integer after applying the alignment offset
     virtual float tolerance() const { return 0.001f; }
+
     virtual std::string name() const = 0;
 };
 
@@ -26,6 +29,7 @@ public:
     {
         return std::make_shared<jt::Sprite>("assets/test/unit/jt_test/coin.png", tm);
     }
+
     std::string name() const override { return "Sprite"; }
 };
 
@@ -37,6 +41,7 @@ public:
         s->makeRect(jt::Vector2f { 16, 24 }, tm);
         return s;
     }
+
     std::string name() const override { return "Shape"; }
 };
 
@@ -95,11 +100,10 @@ protected:
 };
 
 INSTANTIATE_TEST_SUITE_P(DrawableGlobalBoundsTest, DrawableGlobalBoundsTestFixture,
-    ::testing::Combine(
-        ::testing::Values(std::make_shared<BoundsSpriteFactory>(),
-            std::make_shared<BoundsShapeFactory>(),
-            std::make_shared<BoundsTextFactory>(jt::Text::TextAlign::LEFT),
-            std::make_shared<BoundsTextFactory>(jt::Text::TextAlign::CENTER)),
+    ::testing::Combine(::testing::Values(std::make_shared<BoundsSpriteFactory>(),
+                           std::make_shared<BoundsShapeFactory>(),
+                           std::make_shared<BoundsTextFactory>(jt::Text::TextAlign::LEFT),
+                           std::make_shared<BoundsTextFactory>(jt::Text::TextAlign::CENTER)),
         ::testing::Values(
             // clang-format off
             BoundsCase { { 10.0f, 20.0f }, { 1.0f, 1.0f }, { 0.0f, 0.0f }, { 0.0f, 0.0f } },
@@ -107,12 +111,40 @@ INSTANTIATE_TEST_SUITE_P(DrawableGlobalBoundsTest, DrawableGlobalBoundsTestFixtu
             BoundsCase { { 10.0f, 20.0f }, { 1.0f, 1.0f }, { 4.0f, 6.0f }, { 0.0f, 0.0f } },
             BoundsCase { { 10.0f, 20.0f }, { 2.0f, 3.0f }, { 4.0f, 6.0f }, { 0.0f, 0.0f } },
             BoundsCase { { 10.0f, 20.0f }, { 1.0f, 1.0f }, { 0.0f, 0.0f }, { 5.0f, -7.0f } },
-            BoundsCase { { 10.0f, 20.0f }, { 2.0f, 3.0f }, { 4.0f, 6.0f }, { 5.0f, -7.0f } }
-            // clang-format on
+            BoundsCase { { 10.0f, 20.0f }, { 2.0f, 3.0f }, { 4.0f, 6.0f }, { 5.0f, -7.0f } } // clang-format on
             )),
     [](auto const& info) {
         return std::get<0>(info.param)->name() + "_" + std::to_string(info.index);
     });
+
+INSTANTIATE_TEST_SUITE_P(DrawableGlobalBoundsFlippedTest, DrawableGlobalBoundsTestFixture,
+    ::testing::Combine(::testing::Values(std::make_shared<BoundsSpriteFactory>(),
+                           std::make_shared<BoundsShapeFactory>(),
+                           std::make_shared<BoundsTextFactory>(jt::Text::TextAlign::LEFT)),
+        ::testing::Values(
+            // clang-format off
+            BoundsCase { { 10.0f, 20.0f }, { -1.0f, 1.0f }, { 0.0f, 0.0f }, { 0.0f, 0.0f } },
+            BoundsCase { { 10.0f, 20.0f }, { 1.0f, -1.0f }, { 0.0f, 0.0f }, { 0.0f, 0.0f } },
+            BoundsCase { { 10.0f, 20.0f }, { -1.0f, 1.0f }, { 4.0f, 6.0f }, { 0.0f, 0.0f } },
+            BoundsCase { { 10.0f, 20.0f }, { 1.0f, -1.0f }, { 4.0f, 6.0f }, { 0.0f, 0.0f } },
+            BoundsCase { { 10.0f, 20.0f }, { -2.0f, -3.0f }, { 4.0f, 6.0f }, { 0.0f, 0.0f } },
+            BoundsCase { { 10.0f, 20.0f }, { -2.0f, 3.0f }, { 4.0f, 6.0f }, { 5.0f, -7.0f } } // clang-format on
+            )),
+    [](auto const& info) {
+        return std::get<0>(info.param)->name() + "_" + std::to_string(info.index);
+    });
+
+namespace {
+
+float transformedStart(float const position, float const offset, float const scale,
+    float const start, float const length, float const origin)
+{
+    auto const a = scale * (start - origin);
+    auto const b = scale * (start + length - origin);
+    return position + offset + std::min(a, b);
+}
+
+} // namespace
 
 TEST_P(DrawableGlobalBoundsTestFixture, GlobalBoundsMatchTransform)
 {
@@ -133,11 +165,65 @@ TEST_P(DrawableGlobalBoundsTestFixture, GlobalBoundsMatchTransform)
     auto const bounds = drawable->getGlobalBounds();
     auto const tolerance = factory->tolerance();
     EXPECT_NEAR(bounds.left,
-        c.position.x + c.offset.x + c.scale.x * (unscaled.left - c.origin.x), tolerance);
-    EXPECT_NEAR(
-        bounds.top, c.position.y + c.offset.y + c.scale.y * (unscaled.top - c.origin.y), tolerance);
-    EXPECT_NEAR(bounds.width, unscaled.width * c.scale.x, tolerance);
-    EXPECT_NEAR(bounds.height, unscaled.height * c.scale.y, tolerance);
+        transformedStart(
+            c.position.x, c.offset.x, c.scale.x, unscaled.left, unscaled.width, c.origin.x),
+        tolerance);
+    EXPECT_NEAR(bounds.top,
+        transformedStart(
+            c.position.y, c.offset.y, c.scale.y, unscaled.top, unscaled.height, c.origin.y),
+        tolerance);
+    EXPECT_NEAR(bounds.width, unscaled.width * std::abs(c.scale.x), tolerance);
+    EXPECT_NEAR(bounds.height, unscaled.height * std::abs(c.scale.y), tolerance);
+}
+
+class DrawableLocalBoundsTestFixture
+    : public ::testing::TestWithParam<
+          std::tuple<std::shared_ptr<BoundsDrawableFactoryInterface>, jt::Vector2f>> {
+protected:
+    jt::TextureManagerInterface& tm { getTextureManager() };
+};
+
+INSTANTIATE_TEST_SUITE_P(DrawableLocalBoundsTest, DrawableLocalBoundsTestFixture,
+    ::testing::Combine(::testing::Values(std::make_shared<BoundsSpriteFactory>(),
+                           std::make_shared<BoundsShapeFactory>(),
+                           std::make_shared<BoundsTextFactory>(jt::Text::TextAlign::LEFT),
+                           std::make_shared<BoundsTextFactory>(jt::Text::TextAlign::CENTER)),
+        ::testing::Values(jt::Vector2f { 2.0f, 3.0f }, jt::Vector2f { -1.0f, 1.0f },
+            jt::Vector2f { -2.0f, -3.0f })),
+    [](auto const& info) {
+        return std::get<0>(info.param)->name() + "_" + std::to_string(info.index);
+    });
+
+TEST_P(DrawableLocalBoundsTestFixture, LocalBoundsDoNotDependOnScale)
+{
+    auto const& [factory, scale] = GetParam();
+    auto const drawable = factory->createDrawable(tm);
+    drawable->setPosition(jt::Vector2f { 10.0f, 20.0f });
+    drawable->update(0.0f);
+    auto const unscaled = drawable->getLocalBounds();
+
+    drawable->setScale(scale);
+    drawable->update(0.0f);
+    auto const scaled = drawable->getLocalBounds();
+
+    EXPECT_FLOAT_EQ(scaled.left, unscaled.left);
+    EXPECT_FLOAT_EQ(scaled.top, unscaled.top);
+    EXPECT_FLOAT_EQ(scaled.width, unscaled.width);
+    EXPECT_FLOAT_EQ(scaled.height, unscaled.height);
+}
+
+TEST_P(DrawableLocalBoundsTestFixture, CenterOriginSetAfterScaleIsHalfOfUnscaledSize)
+{
+    auto const& [factory, scale] = GetParam();
+    auto const drawable = factory->createDrawable(tm);
+    drawable->update(0.0f);
+    auto const unscaled = drawable->getLocalBounds();
+
+    drawable->setScale(scale);
+    drawable->setOrigin(jt::OriginMode::CENTER);
+
+    EXPECT_FLOAT_EQ(drawable->getOrigin().x, 0.5f * unscaled.width);
+    EXPECT_FLOAT_EQ(drawable->getOrigin().y, 0.5f * unscaled.height);
 }
 
 TEST(DrawableGlobalBoundsTest, CenteredTextIsCenteredAroundPosition)
@@ -151,6 +237,6 @@ TEST(DrawableGlobalBoundsTest, CenteredTextIsCenteredAroundPosition)
     auto const bounds = drawable->getGlobalBounds();
     // sfml glyph bounds do not start exactly at the text position
     auto const glyphBearingTolerance = 1.0f;
-    EXPECT_NEAR(bounds.left + bounds.width / 2.0f, position.x,
-        factory.tolerance() + glyphBearingTolerance);
+    EXPECT_NEAR(
+        bounds.left + bounds.width / 2.0f, position.x, factory.tolerance() + glyphBearingTolerance);
 }

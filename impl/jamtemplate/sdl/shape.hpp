@@ -28,6 +28,8 @@ public:
     void setScale(jt::Vector2f const& scale) override;
     jt::Vector2f getScale() const override;
 
+    void setOriginInternal(jt::Vector2f const& origin) noexcept override;
+
 private:
     mutable std::shared_ptr<SDL_Texture> m_text;
 

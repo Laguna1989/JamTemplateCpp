@@ -54,6 +54,8 @@ public:
 
     jt::Vector2f getScale() const noexcept override;
 
+    void setOriginInternal(jt::Vector2f const& origin) noexcept override;
+
 private:
     TTF_Font* m_font { nullptr };
     std::string m_text { "" };

@@ -12,6 +12,11 @@ public:
     jt::Vector2f getCompleteCamOffset() const noexcept;
 
 protected:
+    void updateOffsetFromOrigin(
+        jt::Vector2f const& origin, jt::Vector2f const& unscaledSize) noexcept;
+
+    SDL_Point getRotationPivot() const noexcept;
+
     jt::Vector2f m_offsetFromOrigin { 0.0f, 0.0f };
     jt::Vector2f m_scale { 1.0f, 1.0f };
 };

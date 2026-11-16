@@ -17,6 +17,11 @@ void jt::Line::setLineVector(jt::Vector2f const& lineVector) noexcept { m_lineVe
 
 jt::Vector2f jt::Line::getLineVector() const noexcept { return m_lineVector; }
 
+jt::Vector2f jt::Line::getScaledLineVector() const noexcept
+{
+    return jt::Vector2f { m_lineVector.x * m_scale.x, m_lineVector.y * m_scale.y };
+}
+
 void jt::Line::doUpdate(float /*elapsed*/) noexcept { }
 
 void jt::Line::doDraw(std::shared_ptr<jt::RenderTargetLayer> const& sptr) const
@@ -26,7 +31,7 @@ void jt::Line::doDraw(std::shared_ptr<jt::RenderTargetLayer> const& sptr) const
     }
 
     auto const startPosition = getPosition() + getShakeOffset() + getOffset() + getCamOffset();
-    auto const endPosition = startPosition + m_lineVector;
+    auto const endPosition = startPosition + getScaledLineVector();
 
     SDL_SetRenderDrawColor(sptr.get(), m_color.r, m_color.g, m_color.b, m_color.a);
     SDL_RenderDrawLine(sptr.get(), static_cast<int>(startPosition.x),
@@ -41,7 +46,7 @@ void jt::Line::doDrawFlash(std::shared_ptr<jt::RenderTargetLayer> const& sptr) c
     }
 
     auto const startPosition = getPosition() + getShakeOffset() + getOffset() + getCamOffset();
-    auto const endPosition = startPosition + m_lineVector;
+    auto const endPosition = startPosition + getScaledLineVector();
 
     auto const flashColor = getFlashColor();
     SDL_SetRenderDrawColor(sptr.get(), flashColor.r, flashColor.g, flashColor.b, flashColor.a);
@@ -58,7 +63,7 @@ void jt::Line::doDrawShadow(std::shared_ptr<jt::RenderTargetLayer> const& sptr) 
 
     auto const startPosition
         = getPosition() + getShakeOffset() + getOffset() + getCamOffset() + getShadowOffset();
-    auto const endPosition = startPosition + m_lineVector + getShadowOffset();
+    auto const endPosition = startPosition + getScaledLineVector() + getShadowOffset();
 
     SDL_SetRenderDrawColor(
         sptr.get(), getShadowColor().r, getShadowColor().g, getShadowColor().b, getShadowColor().a);
@@ -78,9 +83,7 @@ void jt::Line::doDrawOutline(std::shared_ptr<jt::RenderTargetLayer> const& sptr)
 
     auto const startPosition
         = getPosition() + getShakeOffset() + getOffset() + getCamOffset() + getShadowOffset();
-    auto const endPosition = startPosition
-        + jt::Vector2f { m_lineVector.x * m_scale.x, m_lineVector.y * m_scale.y }
-        + getShadowOffset();
+    auto const endPosition = startPosition + getScaledLineVector() + getShadowOffset();
 
     SDL_SetRenderDrawColor(sptr.get(), getOutlineColor().r, getOutlineColor().g,
         getOutlineColor().b, getOutlineColor().a);

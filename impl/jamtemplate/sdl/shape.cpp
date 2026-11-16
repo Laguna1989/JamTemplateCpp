@@ -12,6 +12,7 @@ void Shape::makeRect(jt::Vector2f size, jt::TextureManagerInterface& textureMana
     m_text = textureManager.get("#x#" + std::to_string(static_cast<int>(size.x)) + "#"
         + std::to_string(static_cast<int>(size.y)));
     m_sourceRect = jt::Recti { 0u, 0u, static_cast<int>(size.x), static_cast<int>(size.y) };
+    setOriginInternal(m_origin);
 }
 
 void Shape::makeCircle(float radius, jt::TextureManagerInterface& textureManager)
@@ -19,6 +20,7 @@ void Shape::makeCircle(float radius, jt::TextureManagerInterface& textureManager
     m_text = textureManager.get("#c#" + std::to_string(static_cast<int>(radius)));
     m_sourceRect
         = jt::Recti { 0u, 0u, static_cast<int>(radius * 2.0f), static_cast<int>(radius * 2.0f) };
+    setOriginInternal(m_origin);
 }
 
 void Shape::setColor(jt::Color const& col) { m_color = col; }
@@ -38,9 +40,8 @@ jt::Rectf Shape::getGlobalBounds() const
 
 jt::Rectf Shape::getLocalBounds() const
 {
-    return jt::Rectf { m_position.x, m_position.y,
-        static_cast<float>(m_sourceRect.width) * m_scale.x,
-        static_cast<float>(m_sourceRect.height) * m_scale.y };
+    return jt::Rectf { 0.0f, 0.0f, static_cast<float>(m_sourceRect.width),
+        static_cast<float>(m_sourceRect.height) };
 }
 
 void Shape::setScale(jt::Vector2f const& scale)
@@ -51,6 +52,13 @@ void Shape::setScale(jt::Vector2f const& scale)
 
 jt::Vector2f Shape::getScale() const { return m_scale; }
 
+void Shape::setOriginInternal(jt::Vector2f const& origin) noexcept
+{
+    updateOffsetFromOrigin(origin,
+        jt::Vector2f { static_cast<float>(m_sourceRect.width),
+            static_cast<float>(m_sourceRect.height) });
+}
+
 void Shape::doDraw(std::shared_ptr<jt::RenderTargetLayer> const& sptr) const
 {
     if (!sptr) [[unlikely]] {
@@ -59,8 +67,7 @@ void Shape::doDraw(std::shared_ptr<jt::RenderTargetLayer> const& sptr) const
 
     SDL_Rect const destRect = getDestRect();
     auto const flip = jt::getFlipFromScale(m_scale);
-    SDL_Point const p { static_cast<int>(getOrigin().x * m_scale.x),
-        static_cast<int>(getOrigin().y * m_scale.y) };
+    SDL_Point const p = getRotationPivot();
     SDL_SetRenderDrawBlendMode(sptr.get(), getSDLBlendMode());
     setSDLColor(m_color);
     SDL_RenderCopyEx(sptr.get(), m_text.get(), nullptr, &destRect, getRotation(), &p, flip);
@@ -74,8 +81,7 @@ void Shape::doDrawFlash(std::shared_ptr<jt::RenderTargetLayer> const& sptr) cons
 
     SDL_Rect const destRect = getDestRect();
     auto const flip = jt::getFlipFromScale(m_scale);
-    SDL_Point const p { static_cast<int>(getOrigin().x * m_scale.x),
-        static_cast<int>(getOrigin().y * m_scale.y) };
+    SDL_Point const p = getRotationPivot();
     SDL_SetRenderDrawBlendMode(sptr.get(), SDL_BLENDMODE_BLEND);
     setSDLColor(getFlashColor());
     SDL_RenderCopyEx(sptr.get(), m_text.get(), nullptr, &destRect, getRotation(), &p, flip);
@@ -89,8 +95,7 @@ void Shape::doDrawShadow(std::shared_ptr<jt::RenderTargetLayer> const& sptr) con
 
     SDL_Rect const destRect = getDestRect(getShadowOffset());
     auto const flip = jt::getFlipFromScale(m_scale);
-    SDL_Point const p { static_cast<int>(getOrigin().x * m_scale.x),
-        static_cast<int>(getOrigin().y * m_scale.y) };
+    SDL_Point const p = getRotationPivot();
     SDL_SetRenderDrawBlendMode(sptr.get(), SDL_BLENDMODE_BLEND);
     setSDLColor(getShadowColor());
     SDL_RenderCopyEx(sptr.get(), m_text.get(), nullptr, &destRect, getRotation(), &p, flip);
@@ -104,8 +109,7 @@ void Shape::doDrawOutline(std::shared_ptr<jt::RenderTargetLayer> const& sptr) co
 
     setSDLColor(getOutlineColor());
     auto const flip = jt::getFlipFromScale(m_scale);
-    SDL_Point const p { static_cast<int>(getOrigin().x * m_scale.x),
-        static_cast<int>(getOrigin().y * m_scale.y) };
+    SDL_Point const p = getRotationPivot();
     SDL_SetRenderDrawBlendMode(sptr.get(), SDL_BLENDMODE_BLEND);
 
     for (auto const& outlineOffset : getOutlineOffsets()) {
