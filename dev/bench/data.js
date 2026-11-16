@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1794813718461,
+  "lastUpdate": 1794837509535,
   "repoUrl": "https://github.com/Laguna1989/JamTemplateCpp",
   "entries": {
     "Benchmark": [
@@ -17442,6 +17442,84 @@ window.BENCHMARK_DATA = {
             "value": 1.5189814742489365,
             "unit": "ms/iter",
             "extra": "iterations: 466\ncpu: 1.5188604184549352 ms\nthreads: 1"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "laguna.ws@gmail.com",
+            "name": "Simon Weis",
+            "username": "Laguna1989"
+          },
+          "committer": {
+            "email": "laguna.ws@gmail.com",
+            "name": "Simon Weis",
+            "username": "Laguna1989"
+          },
+          "distinct": false,
+          "id": "739e32680c60aeafb65afbbf10fa4a503a2483de",
+          "message": "ci: install baseline amd64 sdl2 in LinuxSDL job\n\nThe amd64v3 build of libsdl2 2.32.10 is miscompiled by GCC 15.2\n(https://gcc.gnu.org/PR124802): SDL_RenderCopyEx with flip or rotation\nproduces wrong vertices.",
+          "timestamp": "2026-11-16T14:27:01+01:00",
+          "tree_id": "8bada4927a127aaff9e0990001212b471e6e5cc4",
+          "url": "https://github.com/Laguna1989/JamTemplateCpp/commit/739e32680c60aeafb65afbbf10fa4a503a2483de"
+        },
+        "date": 1794837508660,
+        "tool": "googlecpp",
+        "benches": [
+          {
+            "name": "BM_UpdateDrawablePositions",
+            "value": 1.2488040698529426,
+            "unit": "ms/iter",
+            "extra": "iterations: 544\ncpu: 1.2486297389705885 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GetAllCommands",
+            "value": 0.2180050992658774,
+            "unit": "ms/iter",
+            "extra": "iterations: 3133\ncpu: 0.21798642802425797 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_LoggerLogWithoutTarget",
+            "value": 0.1474054366434677,
+            "unit": "ms/iter",
+            "extra": "iterations: 4743\ncpu: 0.1473875958254269 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_LoggerLogWithCoutTargetSetToOff",
+            "value": 0.14527677280230897,
+            "unit": "ms/iter",
+            "extra": "iterations: 4846\ncpu: 0.14526176619892692 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_UpdateObjectGroup",
+            "value": 0.013590611199165985,
+            "unit": "ms/iter",
+            "extra": "iterations: 51736\ncpu: 0.013589230883717333 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_UpdateSpatialObjectGrid",
+            "value": 0.22112950077519408,
+            "unit": "ms/iter",
+            "extra": "iterations: 3225\ncpu: 0.22111425705426369 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_StartGame",
+            "value": 0.0018249506229604717,
+            "unit": "ms/iter",
+            "extra": "iterations: 382769\ncpu: 0.0018247721471697036 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_RefineTilemapCollisions",
+            "value": 0.08038391711629408,
+            "unit": "ms/iter",
+            "extra": "iterations: 8711\ncpu: 0.0803740782918149 ms\nthreads: 1"
+          },
+          {
+            "name": "BM_GamestateWithTweeningShapes",
+            "value": 1.493286747881361,
+            "unit": "ms/iter",
+            "extra": "iterations: 472\ncpu: 1.4931616822033906 ms\nthreads: 1"
           }
         ]
       }
